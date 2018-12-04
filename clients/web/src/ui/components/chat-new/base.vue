@@ -50,11 +50,12 @@
         flex-wrap: nowrap;
         justify-content: space-between;
         color: #fff;
+        position: relative;
     }
     .chat-shortcuts{
         flex: 0 0 60px;
         background: #1C2032;
-        padding: 10px;
+        padding: 0 10px 10px;
         display: flex;
         flex-direction: column;
     }
@@ -69,6 +70,7 @@
         padding: 15px;
         background: #3D3E5D;
         width: 100%;
+        position: relative;
     }
     .chat-main__content{
         height: calc( 100% - 52px );
@@ -87,24 +89,6 @@
         .chat-status{
             font-size: 13px;
             opacity: .8;
-        }
-    }
-    .chat__channel-list{
-        ul{
-            padding: 0;
-            margin: 15px 0;
-            li{
-                list-style: none;
-                padding: 2px 10px;
-                margin: 2px -15px;
-                border-left: 2px solid transparent;
-                &.active,
-                &:hover{
-                    border-color: #5D75F7;
-                    cursor: pointer;
-                    background: rgba(255, 255, 255, .05);
-                }
-            }
         }
     }
 </style>

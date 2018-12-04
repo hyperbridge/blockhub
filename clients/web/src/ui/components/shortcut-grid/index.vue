@@ -254,7 +254,7 @@ export default {
 .c-grid-container {
     display: block;
     position: relative;
-    width: 60px;
+    width: 50px;
     // overflow-x: visible;
     // overflow-y: auto;
     /* padding-right: 800px; margin-right: -800px; pointer-events: none; Pretty hacky way around the overflow bug */

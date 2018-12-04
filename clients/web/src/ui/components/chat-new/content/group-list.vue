@@ -57,4 +57,22 @@
             line-height: 16px;
         }
     }
+    .chat__channel-list{
+        ul{
+            padding: 0;
+            margin: 15px 0;
+            li{
+                list-style: none;
+                padding: 2px 10px;
+                margin: 2px -15px;
+                border-left: 2px solid transparent;
+                &.active,
+                &:hover{
+                    border-color: #5D75F7;
+                    cursor: pointer;
+                    background: rgba(255, 255, 255, .05);
+                }
+            }
+        }
+    }
 </style>

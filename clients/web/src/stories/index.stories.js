@@ -5249,6 +5249,7 @@ storiesOf('Chat', module)
             'c-chat-user': (resolve) => require(['@/ui/components/chat-new/user'], resolve),
             'c-chat-group-welcome': (resolve) => require(['@/ui/components/chat-new/content/welcome'], resolve),
             'c-chat-group-sidebar': (resolve) => require(['@/ui/components/chat-new/content/group-list'], resolve),
+            'c-chat-group-new': (resolve) => require(['@/ui/components/chat-new/content/new-group'], resolve),
         },
         data(){
             return{
@@ -5372,7 +5373,7 @@ storiesOf('Chat', module)
             }
         },
         template: `<div class="row p-3 m-0 flex-wrap" style="width: 1100px;">
-                    <div class="col-12">
+                    <div class="col-12" hidden>
                         <h3 class="text-white">Group chat "Welcome block"</h3>
                         <c-chat-base style="height: 700px" :shortcuts="shortcuts">
                             <template slot="sidebar">
@@ -5389,7 +5390,7 @@ storiesOf('Chat', module)
                         </c-chat-base>
                         <hr />
                     </div>
-                    <div class="col-12">
+                    <div class="col-12" hidden>
                         <h3 class="text-white">Group chat with messages</h3>
                         <c-chat-base style="height: 700px" :shortcuts="shortcuts">
                             <template slot="sidebar">
@@ -5405,12 +5406,18 @@ storiesOf('Chat', module)
                             </c-chat-group>
                         </c-chat-base>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12" hidden>
                         <h3 class="text-white">Private messages</h3>
                         <c-chat-base style="height: 700px" :shortcuts="shortcuts">
                             <c-chat-private>
                                 <c-chat-message v-for="msg in messages" :text="msg.text" :user="users[msg.user]" />
                             </c-chat-private>
+                        </c-chat-base>
+                    </div>
+                    <div class="col-12">
+                        <h3 class="text-white">New group(create/join)</h3>
+                        <c-chat-base style="height: 700px" :shortcuts="shortcuts">
+                            <c-chat-group-new />
                         </c-chat-base>
                     </div>
                 </div>`
