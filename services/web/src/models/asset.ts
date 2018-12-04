@@ -1,19 +1,20 @@
-import { Model, RelationMappings } from 'objection'
-import Node from './node'
-import Profile from './profile'
 
-export default class Message extends Model {
-    id!: number
-    key!: String
-    value!: String
+import { Model, RelationMappings } from 'objection'
+import License from './license'
+import Offer from './offer'
+import Node from './node'
+
+export default class Asset extends Model {
+    id!: Number
     createdAt!: String
     updatedAt!: String
+    key!: String
+    value!: String
+    meta!: Object
     parentId!: Number
 
-    profileId!: Number
-
     static get tableName() {
-        return 'messages'
+        return 'assets'
     }
 
     static get jsonSchema() {
@@ -35,24 +36,35 @@ export default class Message extends Model {
                 relation: Model.HasOneRelation,
                 modelClass: Node,
                 join: {
-                    from: 'messages.parentId',
+                    from: 'assets.parentId',
                     to: 'nodes.id'
                 }
             },
-            profile: {
+            license: {
                 relation: Model.HasOneRelation,
-                modelClass: Profile,
+                modelClass: License,
                 join: {
-                    from: 'messages.profileId',
-                    to: 'profiles.id'
+                    from: 'assets.licenseId',
+                    to: 'assets.id'
                 }
             },
-            replyTo: {
-                relation: Model.HasOneRelation,
-                modelClass: Message,
+            offers: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Offer,
+                filter: {
+                    key: 'offers'
+                },
+                beforeInsert(model) {
+                    model.key = 'offers'
+                },
                 join: {
-                    from: 'messages.replyToId',
-                    to: 'messages.id'
+                    from: 'offers.id',
+                    to: 'communities.id',
+                    through: {
+                        from: 'nodes.fromOfferId',
+                        to: 'nodes.toCommunityId',
+                        extra: ['key']
+                    }
                 }
             },
         }

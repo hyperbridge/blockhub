@@ -1,19 +1,23 @@
 import { Model, RelationMappings } from 'objection'
-import Node from './node'
 import Profile from './profile'
+import Message from './message'
+import Node from './node'
 
-export default class Message extends Model {
-    id!: number
-    key!: String
-    value!: String
+export default class File extends Model {
+    id!: Number
     createdAt!: String
     updatedAt!: String
+    key!: String // [image, document, other]
+    value!: String
+    meta!: String
     parentId!: Number
 
-    profileId!: Number
+    storageType!: String
+    accessType!: String
+    link!: String
 
     static get tableName() {
-        return 'messages'
+        return 'files'
     }
 
     static get jsonSchema() {
@@ -35,7 +39,7 @@ export default class Message extends Model {
                 relation: Model.HasOneRelation,
                 modelClass: Node,
                 join: {
-                    from: 'messages.parentId',
+                    from: 'files.parentId',
                     to: 'nodes.id'
                 }
             },
@@ -43,7 +47,7 @@ export default class Message extends Model {
                 relation: Model.HasOneRelation,
                 modelClass: Profile,
                 join: {
-                    from: 'messages.profileId',
+                    from: 'files.profileId',
                     to: 'profiles.id'
                 }
             },
@@ -51,7 +55,7 @@ export default class Message extends Model {
                 relation: Model.HasOneRelation,
                 modelClass: Message,
                 join: {
-                    from: 'messages.replyToId',
+                    from: 'files.replyToId',
                     to: 'messages.id'
                 }
             },

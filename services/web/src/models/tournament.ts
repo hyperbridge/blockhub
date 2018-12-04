@@ -1,19 +1,17 @@
 import { Model, RelationMappings } from 'objection'
 import Node from './node'
-import Profile from './profile'
 
-export default class Message extends Model {
-    id!: number
-    key!: String
-    value!: String
+export default class Tournament extends Model {
+    id!: Number
     createdAt!: String
     updatedAt!: String
+    key!: String
+    value!: String
+    meta!: Object
     parentId!: Number
 
-    profileId!: Number
-
     static get tableName() {
-        return 'messages'
+        return 'tournaments'
     }
 
     static get jsonSchema() {
@@ -35,24 +33,8 @@ export default class Message extends Model {
                 relation: Model.HasOneRelation,
                 modelClass: Node,
                 join: {
-                    from: 'messages.parentId',
+                    from: 'tournaments.parentId',
                     to: 'nodes.id'
-                }
-            },
-            profile: {
-                relation: Model.HasOneRelation,
-                modelClass: Profile,
-                join: {
-                    from: 'messages.profileId',
-                    to: 'profiles.id'
-                }
-            },
-            replyTo: {
-                relation: Model.HasOneRelation,
-                modelClass: Message,
-                join: {
-                    from: 'messages.replyToId',
-                    to: 'messages.id'
                 }
             },
         }

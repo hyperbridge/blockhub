@@ -1,27 +1,30 @@
+// has one asset or ??
 import { Model, RelationMappings } from 'objection'
-import Node from './node'
 import Profile from './profile'
+import Node from './node'
 
-export default class Message extends Model {
+export default class Offer extends Model {
     id!: number
     key!: String
     value!: String
+    meta!: String
     createdAt!: String
     updatedAt!: String
     parentId!: Number
 
-    profileId!: Number
-
     static get tableName() {
-        return 'messages'
+        return 'offers'
     }
 
     static get jsonSchema() {
         return {
             type: 'object',
-            required: [],
+            required: ['accountId'],
+
             properties: {
-                id: { type: 'integer' }
+                id: { type: 'integer' },
+                accountId: { type: 'integer' },
+                address: { type: 'string' }
             },
             options: {
                 timestamps: true
@@ -35,7 +38,7 @@ export default class Message extends Model {
                 relation: Model.HasOneRelation,
                 modelClass: Node,
                 join: {
-                    from: 'messages.parentId',
+                    from: 'offers.parentId',
                     to: 'nodes.id'
                 }
             },
@@ -43,16 +46,8 @@ export default class Message extends Model {
                 relation: Model.HasOneRelation,
                 modelClass: Profile,
                 join: {
-                    from: 'messages.profileId',
+                    from: 'offers.assetId',
                     to: 'profiles.id'
-                }
-            },
-            replyTo: {
-                relation: Model.HasOneRelation,
-                modelClass: Message,
-                join: {
-                    from: 'messages.replyToId',
-                    to: 'messages.id'
                 }
             },
         }

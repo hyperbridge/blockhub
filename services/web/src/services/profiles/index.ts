@@ -33,3 +33,18 @@ export default function(app) {
     app.service('/profiles').hooks(hooks)
     app.service('/profiles/:id/convert').hooks(hooks)
 }
+
+// add to base:
+// page
+// numberPage
+// excludedTags
+// matchAllTags
+// requiredFlags
+// searchText
+// omittedFlags
+// returnVoteData
+// returnChildren
+// returnMetadata
+// totalOnly
+// daysOld
+// includeRecentlyUpdatedOnly

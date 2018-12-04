@@ -1,32 +1,60 @@
-import { Model } from 'objection'
-import ProjectMember from './project-member'
+import { Model, RelationMappings } from 'objection'
+//import ProjectMember from './project-member'
 import Profile from './profile'
+import Community from './community'
+import Bounty from './bounty'
+import Product from './product'
+import Idea from './idea'
+import Tag from './tag'
 
 export default class Project extends Model {
+    id!: Number
+    createdAt!: String
+    updatedAt!: String
+    key!: String
+    value!: String
+    meta!: Object
+    parentId!: Number
+
     name!: string
     members!: Array<Profile>
     isProposal!: Boolean
+    systemTags!: Array<Tag>
+    developerTags!: Array<Tag>
 
     static get tableName() {
         return 'projects'
     }
 
-    static get relationMappings() {
+    static get jsonSchema() {
         return {
-            members: {
-                relation: Model.ManyToManyRelation,
-                modelClass: Profile,
-                join: {
-                    from: 'projects.id',
-                    through: {
-                        from: 'project_members.projectId',
-                        to: 'project_members.profileId',
-                        modelClass: ProjectMember,
-                        extra: ['isAdmin']
-                    },
-                    to: 'profiles.id'
-                }
+            type: 'object',
+            required: [],
+            properties: {
+                id: { type: 'integer' }
             },
+            options: {
+                timestamps: true
+            }
+        }
+    }
+
+    static get relationMappings(): RelationMappings {
+        return {
+            // members: {
+            //     relation: Model.ManyToManyRelation,
+            //     modelClass: Profile,
+            //     join: {
+            //         from: 'projects.id',
+            //         through: {
+            //             from: 'project_members.projectId',
+            //             to: 'project_members.profileId',
+            //             modelClass: ProjectMember,
+            //             extra: ['isAdmin']
+            //         },
+            //         to: 'profiles.id'
+            //     }
+            // },
             subprojects: {
                 relation: Model.HasManyRelation,
                 modelClass: Project,
@@ -35,28 +63,64 @@ export default class Project extends Model {
                     to: 'projects.parentId'
                 }
             },
+            bounties: {
+                relation: Model.HasManyRelation,
+                modelClass: Bounty,
+                join: {
+                    from: 'projects.id',
+                    to: 'bounties.parentId'
+                    // join view through where parentType == 'project' 
+                    // https://www.tutorialspoint.com/postgresql/postgresql_views.htm
+                }
+            },
+            community: {
+                relation: Model.HasOneRelation,
+                modelClass: Community,
+                join: {
+                    from: 'project.communityId',
+                    to: 'community.id'
+                }
+            },
+            idea: {
+                relation: Model.HasOneRelation,
+                modelClass: Idea,
+                join: {
+                    from: 'project.ideaId',
+                    to: 'idea.id'
+                }
+            },
+            product: {
+                relation: Model.HasOneRelation,
+                modelClass: Product,
+                join: {
+                    from: 'project.productId',
+                    to: 'product.id'
+                }
+            }
         }
+    }
+
+    $beforeInsert() {
+        this.createdAt = this.updatedAt = new Date().toISOString()
+    }
+
+    $beforeUpdate() {
+        this.updatedAt = new Date().toISOString()
     }
 }
 
+// score
+// has one rating
+// has many pledges -> node (parentId = this, parentType = project, nextId = profile.id, nextType = profile)
+// has many contributors -> node (parentId = this, parentType = project, nextId = profile.id, nextType = profile)
+// has many moderators -> node (parentId = this, parentType = project, nextId = profile.id, nextType = profile)
 
         // "id": 1,
         // "name": "Gym With Tim",
-        // "systemTags": [],
         // "images": {
         //     "preview": []
         // },
         // "author": "0x0",
-        // "developerTags": [
-        //     "lifestyle",
-        //     "vr",
-        //     "gym"
-        // ],
-        // "meta": {
-        //     "revision": 0,
-        //     "created": 1531430916082,
-        //     "version": 0
-        // },
         // "content": "<h2>An adventure of a lifetime...</h2>\n<p>Any new features or tools which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.</p><p>Our store is hosted on Shopify Inc. They provide us with the online e-commerce platform that allows us to sell our products and services to you.</p> IMAGE LIST",
         // "likes": 1000,
         // "comments": [],

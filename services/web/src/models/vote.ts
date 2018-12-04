@@ -1,19 +1,18 @@
 import { Model, RelationMappings } from 'objection'
-import Node from './node'
 import Profile from './profile'
+import Node from './node'
 
-export default class Message extends Model {
-    id!: number
-    key!: String
-    value!: String
+export default class Vote extends Model {
+    id!: Number
     createdAt!: String
     updatedAt!: String
+    key!: String
+    value!: String // value = 1 or -1 or emoji
+    meta!: Object
     parentId!: Number
 
-    profileId!: Number
-
     static get tableName() {
-        return 'messages'
+        return 'votes'
     }
 
     static get jsonSchema() {
@@ -35,7 +34,7 @@ export default class Message extends Model {
                 relation: Model.HasOneRelation,
                 modelClass: Node,
                 join: {
-                    from: 'messages.parentId',
+                    from: 'votes.parentId',
                     to: 'nodes.id'
                 }
             },
@@ -43,16 +42,8 @@ export default class Message extends Model {
                 relation: Model.HasOneRelation,
                 modelClass: Profile,
                 join: {
-                    from: 'messages.profileId',
+                    from: 'votes.profileId',
                     to: 'profiles.id'
-                }
-            },
-            replyTo: {
-                relation: Model.HasOneRelation,
-                modelClass: Message,
-                join: {
-                    from: 'messages.replyToId',
-                    to: 'messages.id'
                 }
             },
         }

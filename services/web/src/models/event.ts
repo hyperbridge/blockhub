@@ -1,19 +1,19 @@
 import { Model, RelationMappings } from 'objection'
 import Node from './node'
-import Profile from './profile'
 
-export default class Message extends Model {
-    id!: number
-    key!: String
-    value!: String
+export default class Event extends Model {
+    id!: Number
     createdAt!: String
     updatedAt!: String
+    meta!: Object // { message: "Earned 10 reputation points for being awesome" }
     parentId!: Number
+    key!: String // PROFILE_REPUTATION
+    value!: Number // -10, 10, etc.
 
-    profileId!: Number
+    property!: String
 
     static get tableName() {
-        return 'messages'
+        return 'events'
     }
 
     static get jsonSchema() {
@@ -35,24 +35,8 @@ export default class Message extends Model {
                 relation: Model.HasOneRelation,
                 modelClass: Node,
                 join: {
-                    from: 'messages.parentId',
+                    from: 'events.parentId',
                     to: 'nodes.id'
-                }
-            },
-            profile: {
-                relation: Model.HasOneRelation,
-                modelClass: Profile,
-                join: {
-                    from: 'messages.profileId',
-                    to: 'profiles.id'
-                }
-            },
-            replyTo: {
-                relation: Model.HasOneRelation,
-                modelClass: Message,
-                join: {
-                    from: 'messages.replyToId',
-                    to: 'messages.id'
                 }
             },
         }

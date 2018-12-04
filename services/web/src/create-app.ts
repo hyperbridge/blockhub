@@ -6,7 +6,7 @@ import Knex = require('knex')
 import SwaggerParser = require('swagger-parser')
 import swaggerRoutes = require('swagger-routes-express')
 import api from './api'
-import { Model } from 'objection'
+import { Model, RelationMappings } from 'objection'
 import config = require('../config')
 import feathers = require('@feathersjs/feathers')
 import express = require('@feathersjs/express')
