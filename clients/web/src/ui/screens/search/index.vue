@@ -12,7 +12,7 @@
                         placeholder="Search for games"
                         aria-placeholder="Search for games"
                     />
-                    <c-button
+                    <!-- <c-button
                         class="col-12"
                         status="success"
                         size="lg"
@@ -22,12 +22,7 @@
                         aria-expanded="false"
                         aria-controls="collapseFilters"
                         @click="expandFilters = !expandFilters"
-                    >Filters</c-button>
-                    <c-button
-                        class="col-12"
-                        @click="clearFilters()"
-                        status="info"
-                    >Clear filters</c-button>
+                    >Filters</c-button> -->
                 </div>
                 <transition name="slide-in-top">
                     <div
@@ -138,7 +133,7 @@
             <div class="col-12">
                 <transition name="slide-in-top">
                     <div class="active-filters" v-if="filtersActive">
-                        <h3>Active filters</h3>
+                        <!-- <h3>Active filters</h3> -->
                         <div class="active-filters__content">
                             <c-option-tag
                                 v-if="phrase.length"
@@ -237,6 +232,11 @@
                                     @delete="os.selected = false"
                                     isChildren
                                 />
+                            </c-option-tag>
+                            <c-option-tag
+                                title="Clear All"
+                                @delete="clearFilters()"
+                            >
                             </c-option-tag>
                         </div>
                     </div>
@@ -523,8 +523,9 @@
         flex: 1;
         min-width: 180px;
         padding: 10px;
+        padding-left: 0;
         border-radius: 4px;
-        background: rgba(255,255,255,.03);
+        //background: rgba(255,255,255,.03);
         // max-width: 50%;
     }
 

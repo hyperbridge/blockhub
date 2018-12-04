@@ -31,7 +31,7 @@
             position: fixed;
             bottom: 0;
             z-index: 1;
-            left: 60px;
+            left: 70px;
             width: 230px;
         }
     }

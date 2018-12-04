@@ -1072,6 +1072,7 @@
             height: 100%;
             top: 0;
             padding-top: 100px;
+            padding-right: 20px;
             background: rgba(48, 47, 76, 1);
             background: linear-gradient(to right, rgba(0, 0, 0, 0.2) 88%, rgba(0, 0, 0, 0.2) 91%, rgba(0, 0, 0, 0) 100%);
             /*box-shadow: inset 0 0 3px #000;*/
@@ -1213,7 +1214,7 @@
     @media (max-width: 1400px) {
         .page-aside,
         .page-sidepanel{
-            width: 200px!important;
+            width: 220px!important;
         }
         .page-aside .navigation{
             padding-left: 15px;
