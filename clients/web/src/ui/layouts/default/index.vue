@@ -50,6 +50,7 @@
             <div class="page-aside invert left-sidebar" style="max-width: 250px" id="page-aside" v-if="showLeftPanel">
                 <!--<transition name="slideLeft" v-if="initialized">-->
                 <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
+                    <slot name="left-sidebar"></slot>
                     <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}-navigation`" ref="scroll_sidebar_content" :title="navigationTitle"></component>
                 </div>
                 <c-load-more @click="scrollSidebarDown" :fixed="true" v-if="scrollMoreDirection == 'down'">
@@ -304,6 +305,8 @@
         <!--<transition name="slideDown">-->
             <c-profile-chooser v-if="profileChooser && signedIn" />
         <!--</transition>-->
+
+        <!-- <search /> Discover the next best thing... -->
     </div>
     <!-- //END PAGE WRAPPER -->
 </template>

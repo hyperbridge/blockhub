@@ -1,26 +1,35 @@
 <template>
     <c-layout>
-        <div class="row">
-            <div class="col-12">
-                <c-block title="Search" class="searching-box">
-                    <div class="search__main">
-                        <c-input-searcher
-                            v-model="phrase"
-                            placeholder="Search for games"
-                            aria-placeholder="Search for games"
-                        />
-                        <c-button
-                            status="success"
-                            size="lg"
-                            icon="sliders-h"
-                            data-toggle="collapse"
-                            data-target="#expand-filters"
-                            aria-expanded="false"
-                            aria-controls="collapseFilters"
-                            @click="expandFilters = !expandFilters"
-                        >Filters</c-button>
-                    </div>
-                    <transition name="slide-in-top">
+        <template slot="left-sidebar">
+            <div class="navigation container" id="navigation-default">
+                <h3>
+                    SEARCH
+                </h3>
+                <div class="search__main row">
+                    <c-input-searcher
+                        class="col-12"
+                        v-model="phrase"
+                        placeholder="Search for games"
+                        aria-placeholder="Search for games"
+                    />
+                    <c-button
+                        class="col-12"
+                        status="success"
+                        size="lg"
+                        icon="sliders-h"
+                        data-toggle="collapse"
+                        data-target="#expand-filters"
+                        aria-expanded="false"
+                        aria-controls="collapseFilters"
+                        @click="expandFilters = !expandFilters"
+                    >Filters</c-button>
+                    <c-button
+                        class="col-12"
+                        @click="clearFilters()"
+                        status="info"
+                    >Clear filters</c-button>
+                </div>
+                <transition name="slide-in-top">
                     <div
                         v-if="expandFilters"
                         class="search-filters__container"
@@ -121,8 +130,12 @@
                             </c-checkbox>
                         </div>
                     </div>
-                    </transition>
-                </c-block>
+                </transition>
+            </div>
+        </template>
+
+        <div class="row">
+            <div class="col-12">
                 <transition name="slide-in-top">
                     <div class="active-filters" v-if="filtersActive">
                         <h3>Active filters</h3>
@@ -228,16 +241,12 @@
                         </div>
                     </div>
                 </transition>
-                <h3>Results</h3>
+                <!-- <h3>Results</h3> -->
                 <div class="results__container">
                     <div class="results">
                         <c-spinner v-if="isTyping"/>
                         <div v-else-if="!resultsFiltered.length">
-                            <p>No results were found for provided filters</p>
-                            <c-button
-                                @click="clearFilters()"
-                                status="info"
-                            >Clear filters</c-button>
+                            <p>No results were found</p>
                             <c-button @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>
                         </div>
                         <c-content-navigation
@@ -298,7 +307,7 @@
                     min: 0,
                     max: 0
                 },
-                expandFilters: false,
+                expandFilters: true,
                 timeout2: 0,
                 communitySize: 0,
                 activeUsers: 0,
@@ -511,7 +520,6 @@
         justify-content: space-between;
     }
     .filter-box {
-        margin: 10px;
         flex: 1;
         min-width: 180px;
         padding: 10px;
