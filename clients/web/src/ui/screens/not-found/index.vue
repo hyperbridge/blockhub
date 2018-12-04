@@ -6,7 +6,7 @@
                 <h1><strong>GG.</strong> You broke it.</h1>
                 <h3>That page wasn't found or there's an error in the spacetime continuum. <br />Either way, you better start sprinting home.</h3>
                 <br /><br />
-                <c-button class="c-btn-xl" status="gradient-info" href="#/">Go Home</c-button>
+                <c-button class="c-btn-xl" status="gradient-info" @click="goHome">Go Home</c-button>
             </div>
         </div>
         <!-- <div class="not-found__404" /> -->
@@ -17,6 +17,11 @@
 <script>
 export default {
     components: {
+    },
+    methods: {
+        goHome() {
+            window.location.href = '/'
+        }
     }
 }
 </script>
