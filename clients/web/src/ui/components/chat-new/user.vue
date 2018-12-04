@@ -7,12 +7,13 @@
         <div class="user-info">
             <strong>
                 {{ name }}
+                <i class="fas fa-crown margin-left-5" style="color: #FADC72" v-if="isAdmin"></i>
             </strong>
             <span>{{ game }}</span>
         </div>
         <div class="user-action">
-            <i class="fas fa-volume-up"></i>
-            <i class="fas fa-microphone"></i>
+            <i class="fas" :class=" volume ? 'fa-volume-up' : 'fa-volume-off'" @click="toggleVolume"></i>
+            <i class="fas" :class=" microphone ? 'fa-microphone' : 'fa-microphone-slash'" @click="toggleMicrophone"></i>
         </div>
     </div>
 </template>
@@ -23,7 +24,25 @@
             avatar: String,
             name: String,
             status: String,
-            game: String
+            game: String,
+            isAdmin:{
+                type: Boolean,
+                default: false
+            }
+        },
+        data(){
+            return{
+                volume: true,
+                microphone: true
+            }
+        },
+        methods:{
+            toggleVolume(){
+                this.volume = !this.volume
+            },
+            toggleMicrophone(){
+                this.microphone = !this.microphone
+            }
         }
     }
 </script>
@@ -75,11 +94,13 @@
     }
     .user-action{
         margin-left: auto;
-        font-size: 18px;
+        font-size: 14px;
         i{
-            margin-right: 5px;
+            margin-right: 2px;
             color: #4c7be5;
             cursor: pointer;
+            width: 18px;
+            text-align: center;
             &:last-child{
                 margin-right: 0;
             }

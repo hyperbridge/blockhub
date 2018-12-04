@@ -5244,8 +5244,10 @@ storiesOf('Chat', module)
         components: {
             'c-chat-base': (resolve) => require(['@/ui/components/chat-new/base'], resolve),
             'c-chat-group': (resolve) => require(['@/ui/components/chat-new/content/group'], resolve),
+            'c-chat-private': (resolve) => require(['@/ui/components/chat-new/content/private'], resolve),
             'c-chat-message': (resolve) => require(['@/ui/components/chat-new/message'], resolve),
             'c-chat-user': (resolve) => require(['@/ui/components/chat-new/user'], resolve),
+            'c-chat-group-welcome': (resolve) => require(['@/ui/components/chat-new/content/welcome'], resolve),
         },
         data(){
             return{
@@ -5255,35 +5257,40 @@ storiesOf('Chat', module)
                         avatar: 'http://sharethingz.com/wp-content/uploads/2014/08/avatar.png',
                         name: 'Gregory Smith',
                         game: 'Dota II',
-                        status: 'offline'
+                        status: 'offline',
+                        admin: false
                     },
                     {
                         id: 2,
                         avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE0I_Z85x-UDnEncEgx0myKWxgAirSMenb4VN2TepCnropn4Hl',
                         name: 'Louis Burns',
                         game: 'WarCraft',
-                        status: 'busy'
+                        status: 'busy',
+                        admin: false
                     },
                     {
                         id: 3,
                         avatar: 'http://geedmo.com/codecanyon/bskins/plan/assets/img/avatar.png',
                         name: 'Thomas Harris',
                         game: 'Heroes',
-                        status: 'online'
+                        status: 'online',
+                        admin: true
                     },
                     {
                         id: 4,
                         avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6yM6JujrHFOvFH9NvuV2lWnyXECBr1SWeF-I0tMdYmK942MXr',
                         name: 'Terri Kopp',
                         game: 'Dota II',
-                        status: 'online'
+                        status: 'online',
+                        admin: false
                     },
                     {
                         id: 5,
                         avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPk-mHx8SMUl0FBrnGMm49fksyHtj9yPPodc6JbrdubpbSqKxU',
                         name: 'Mildred Floyd',
                         game: 'CS GO',
-                        status: 'online'
+                        status: 'online',
+                        admin: false
                     }
                 ],
                 messages:[
@@ -5323,21 +5330,83 @@ storiesOf('Chat', module)
                         user: 1,
                         text: 'Aliquam maximus convallis dui ut facilisis.'
                     }
+                ],
+                shortcuts:[
+                    {
+                        "r": null,
+                        "g": null,
+                        "b": null,
+                        "image": "/static/img/icons/store.png",
+                        "link": "#/",
+                        "text": "Go to store",
+                        "sort": 2,
+                        "removable": false
+                    },
+                    {
+                        "icon": "fa fa-plus",
+                        "eventKey": "application/activateModal",
+                        "eventValue": "shortcutCreator",
+                        "text": "Create",
+                        "sort": -1,
+                        "removable": false
+                    }
                 ]
             }
         },
-        template: `<div class="row p-3 m-0 flex-wrap" style="width: 1100px; height: 700px">
-                        <c-chat-base>
+        computed:{
+            userList(){
+                let arr = [],
+                    list = this.users;
+                list.forEach( (el) => {
+                    if (el.admin) {
+                        el.order = 0;
+                        arr.push(el);
+                    }
+                    else {
+                        el.order = 1;
+                        arr.push(el);
+                    }
+                })
+                return arr.sort()
+            }
+        },
+        template: `<div class="row p-3 m-0 flex-wrap" style="width: 1100px;">
+                    <div class="col-12">
+                        <h3 class="text-white">Group chat "Welcome block"</h3>
+                        <c-chat-base style="height: 700px" :shortcuts="shortcuts">
+                            <c-chat-group>
+                                <template slot="messages">
+                                    <c-chat-group-welcome />
+                                </template>
+                                <template slot="users">
+                                    <c-chat-user v-for="user in userList" :isAdmin="user.admin" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>
+                                </template>
+                            </c-chat-group>
+                        </c-chat-base>
+                        <hr />
+                    </div>
+                    <div class="col-12">
+                        <h3 class="text-white">Group chat with messages</h3>
+                        <c-chat-base style="height: 700px" :shortcuts="shortcuts">
                             <c-chat-group>
                                 <template slot="messages">
                                     <c-chat-message v-for="msg in messages" :text="msg.text" :user="users[msg.user]" />
                                 </template>
                                 <template slot="users">
-                                    <c-chat-user v-for="user in users" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>
+                                    <c-chat-user v-for="user in users" :isAdmin="user.admin" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>
                                 </template>
                             </c-chat-group>
                         </c-chat-base>
-                    </div>`
+                    </div>
+                    <div class="col-12">
+                        <h3 class="text-white">Private messages</h3>
+                        <c-chat-base style="height: 700px" :shortcuts="shortcuts">
+                            <c-chat-private>
+                                <c-chat-message v-for="msg in messages" :text="msg.text" :user="users[msg.user]" />
+                            </c-chat-private>
+                        </c-chat-base>
+                    </div>
+                </div>`
     }))
 
 

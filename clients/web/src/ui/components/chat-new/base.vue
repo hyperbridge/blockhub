@@ -63,12 +63,18 @@
 
 <script>
     export default {
+        props:{
+            shortcuts: [ Array, Object ]
+        },
         components:{
             'c-shortcut-sidebar': (resolve) => require(['@/ui/components/shortcut-sidebar'], resolve)
         },
         data(){
             return{
-                showShortcuts: true
+                showShortcuts: true,
+                shortcuts:[
+
+                ]
             }
         }
     }
@@ -118,6 +124,7 @@
     .chat-main{
         padding: 15px;
         background: #3D3E5D;
+        width: 100%;
     }
     .chat-main__content{
         height: calc( 100% - 52px );

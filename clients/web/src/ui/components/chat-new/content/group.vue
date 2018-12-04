@@ -4,7 +4,7 @@
             <div class="msgs-list">
                 <slot name="messages" />
             </div>
-            <c-answer-field />
+            <c-chat-answer-field />
         </div>
         <div class="chat__user-list">
             <slot name="users" />
@@ -19,7 +19,7 @@
         },
         components:{
             'c-chat-user': (resolve) => require(['@/ui/components/chat-new/user'], resolve),
-            'c-answer-field': (resolve) => require(['@/ui/components/chat-new/answer-field/field'], resolve)
+            'c-chat-answer-field': (resolve) => require(['@/ui/components/chat-new/answer-field/field'], resolve)
         }
     }
 </script>
@@ -42,7 +42,7 @@
     .msgs-list{
         overflow-y: auto;
         overflow-x: hidden;
-        margin-bottom: 15px;
+        height: 100%;
     }
     .chat__user-list{
         width: 250px;
