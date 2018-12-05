@@ -14,9 +14,6 @@
 
 <script>
     export default {
-        props:{
-
-        },
         components:{
             'c-chat-user': (resolve) => require(['@/ui/components/chat-new/user'], resolve),
             'c-chat-answer-field': (resolve) => require(['@/ui/components/chat-new/answer-field/field'], resolve)
