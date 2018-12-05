@@ -1,9 +1,6 @@
 <template>
     <div class="chat__user-item">
-        <div class="user-avatar">
-            <img :src="avatar" />
-            <span class="user-status" :class="['status-' + status]"></span>
-        </div>
+        <c-chat-user-avatar :name="name" :status="status" :avatar="avatar"  />
         <div class="user-info">
             <strong>
                 {{ name }}
@@ -34,6 +31,9 @@
                 default: false
             }
         },
+        components:{
+            'c-chat-user-avatar': (resolve) => require(['@/ui/components/chat-new/user-avatar'], resolve),
+        },
         data(){
             return{
                 volume: true,
@@ -56,32 +56,6 @@
         display: flex;
         align-items: center;
         margin-bottom: 15px;
-    }
-    .user-avatar{
-        width: 40px;
-        position: relative;
-        img{
-            width: 100%;
-            border-radius: 100%;
-        }
-    }
-    .user-status{
-        position: absolute;
-        width: 14px;
-        height: 14px;
-        border-radius: 100%;
-        right: -2px;
-        bottom: -2px;
-        border: 3px solid #3d3d5e;
-        &.status-online{
-            background: #43C981;
-        }
-        &.status-offline{
-            background: #999;
-        }
-        &.status-busy{
-            background: #F75D5D;
-        }
     }
     .user-info{
         padding-left: 10px;
