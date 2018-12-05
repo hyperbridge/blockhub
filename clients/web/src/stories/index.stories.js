@@ -5250,7 +5250,7 @@ storiesOf('Chat', module)
             'c-chat-group-welcome': (resolve) => require(['@/ui/components/chat-new/content/welcome'], resolve),
             'c-chat-group-sidebar': (resolve) => require(['@/ui/components/chat-new/content/group-list'], resolve),
             'c-chat-group-new': (resolve) => require(['@/ui/components/chat-new/content/new-group'], resolve),
-            'c-chat-friends-list': (resolve) => require(['@/ui/components/chat-new/friends-list'], resolve),
+            'c-chat-friends-list': (resolve) => require(['@/ui/components/chat-new/friends-list/index'], resolve),
         },
         data(){
             return{

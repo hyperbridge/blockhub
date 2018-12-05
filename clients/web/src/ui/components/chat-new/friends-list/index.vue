@@ -22,18 +22,8 @@
                 <c-search v-model="query" placeholder="Search" class="px-0" />
             </div>
             <div class="chat-friends-list__list">
-                <div class="friends-list">
-                    <div class="friends-list__btn">
-                        <i class="fas fa-angle-right mr-2"></i>
-                        Favorites
-                        <span class="ml-2">
-                            0/0
-                        </span>
-                    </div>
-                    <div class="friends-list__list">
-                        <c-chat-user v-for="user in users" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>
-                    </div>
-                </div>
+                <c-chat-friends-list :list="users" title="Favorites" />
+                <c-chat-friends-list :list="users" title="All" />
             </div>
         </div>
     </div>
@@ -44,11 +34,52 @@
         components: {
             'c-search': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
             'c-chat-user': (resolve) => require(['@/ui/components/chat-new/user'], resolve),
+            'c-chat-friends-list': (resolve) => require(['@/ui/components/chat-new/friends-list/list'], resolve),
         },
         data(){
             return{
                 query: '',
                 users:[
+                    {
+                        id: 1,
+                        avatar: 'http://sharethingz.com/wp-content/uploads/2014/08/avatar.png',
+                        name: 'Gregory Smith',
+                        game: 'Dota II',
+                        status: 'offline',
+                        admin: false
+                    },
+                    {
+                        id: 2,
+                        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE0I_Z85x-UDnEncEgx0myKWxgAirSMenb4VN2TepCnropn4Hl',
+                        name: 'Louis Burns',
+                        game: 'WarCraft',
+                        status: 'busy',
+                        admin: false
+                    },
+                    {
+                        id: 3,
+                        avatar: 'http://geedmo.com/codecanyon/bskins/plan/assets/img/avatar.png',
+                        name: 'Thomas Harris',
+                        game: 'Heroes',
+                        status: 'online',
+                        admin: true
+                    },
+                    {
+                        id: 4,
+                        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6yM6JujrHFOvFH9NvuV2lWnyXECBr1SWeF-I0tMdYmK942MXr',
+                        name: 'Terri Kopp',
+                        game: 'Dota II',
+                        status: 'online',
+                        admin: false
+                    },
+                    {
+                        id: 5,
+                        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPk-mHx8SMUl0FBrnGMm49fksyHtj9yPPodc6JbrdubpbSqKxU',
+                        name: 'Mildred Floyd',
+                        game: 'CS GO',
+                        status: 'online',
+                        admin: false
+                    },
                     {
                         id: 1,
                         avatar: 'http://sharethingz.com/wp-content/uploads/2014/08/avatar.png',
@@ -180,28 +211,5 @@
         padding: 10px;
         height: 400px;
         background: rgba(0, 0, 0, .2);
-    }
-    .friends-list{
-        margin-bottom: 5px;
-    }
-    .friends-list__btn{
-        display: flex;
-        align-items: center;
-        color: #fff;
-        font-size: 14px;
-        padding: 3px 5px;
-        border: 1px solid transparent;
-        &:hover{
-            border-color: rgba(255, 255, 255, .1);
-            background: rgba(255, 255, 255, .05);
-            cursor: pointer;
-        }
-    }
-    .friends-list__list{
-        height: 100%;
-        overflow-y: auto;
-        overflow-x: hidden;
-        color: #fff;
-        padding: 10px;
     }
 </style>
