@@ -63,7 +63,7 @@ export default class Order extends Model {
                     key: 'items'
                 },
                 beforeInsert(model) {
-                    model.key = 'items'
+                    (model as Node).key = 'items'
                 },
             },
         }

@@ -1,5 +1,6 @@
 import { Model, RelationMappings } from 'objection'
 import Profile from './profile'
+import Rating from './rating'
 import Node from './node'
 
 export default class Suggestion extends Model {
@@ -10,6 +11,8 @@ export default class Suggestion extends Model {
     value!: String
     meta!: Object
     parentId!: Number
+
+    rating!: Rating
 
     static get tableName() {
         return 'suggestions'
@@ -44,6 +47,14 @@ export default class Suggestion extends Model {
                 join: {
                     from: 'suggestions.profileId',
                     to: 'nodes.id'
+                }
+            },
+            rating: {
+                relation: Model.HasOneRelation,
+                modelClass: Rating,
+                join: {
+                    from: 'suggestions.ratingId',
+                    to: 'ratings.id'
                 }
             },
         }

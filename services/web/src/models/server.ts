@@ -1,5 +1,7 @@
 import { Model, RelationMappings } from 'objection'
 import Node from './node'
+import Product from './product'
+import Tag from './tag'
 
 export default class Server extends Model {
     id!: Number
@@ -9,6 +11,14 @@ export default class Server extends Model {
     value!: String
     meta!: Object
     parentId!: Number
+    score!: Number
+
+    product!: Product
+    productId!: Number
+
+    address!: String
+    port!: Number
+    totalConnected!: Number
 
     static get tableName() {
         return 'servers'
@@ -37,6 +47,25 @@ export default class Server extends Model {
                     to: 'nodes.id'
                 }
             },
+            tags: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Tag,
+                join: {
+                    from: 'servers.id',
+                    to: 'tags.id',
+                    through: {
+                        from: 'nodes.fromServerId',
+                        to: 'nodes.toTagId',
+                        extra: ['key']
+                    }
+                },
+                filter: {
+                    key: 'tags'
+                },
+                beforeInsert(model) {
+                    (model as Node).key = 'tags'
+                }
+            },
         }
     }
 
@@ -49,10 +78,7 @@ export default class Server extends Model {
     }
 }
 
-// address
-// port
 // has many profiles
 // has many tags
 // has many events
 // score
-// totalConnected (reported)

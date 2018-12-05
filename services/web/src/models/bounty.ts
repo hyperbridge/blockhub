@@ -45,7 +45,7 @@ export default class Bounty extends Model {
                     key: 'hunters'
                 },
                 beforeInsert(model) {
-                    model.key = 'hunters'
+                    (model as Node).key = 'hunters'
                 },
                 join: {
                     from: 'hunters.id',

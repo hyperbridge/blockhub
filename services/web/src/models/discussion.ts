@@ -1,8 +1,9 @@
 import { Model, RelationMappings } from 'objection'
 import Profile from './profile'
 import Message from './message'
-import Event from './events'
+import Event from './event'
 import Node from './node'
+import Rating from './rating'
 
 export default class Discussion extends Model {
     id!: Number
@@ -48,6 +49,14 @@ export default class Discussion extends Model {
                     to: 'messages.id'
                 }
             },
+            rating: {
+                relation: Model.HasOneRelation,
+                modelClass: Rating,
+                join: {
+                    from: 'products.ratingId',
+                    to: 'ratings.id'
+                }
+            },
             members: {
                 relation: Model.ManyToManyRelation,
                 modelClass: Profile,
@@ -55,7 +64,7 @@ export default class Discussion extends Model {
                     key: 'members'
                 },
                 beforeInsert(model) {
-                    model.key = 'members'
+                    (model as Node).key = 'members'
                 },
                 join: {
                     from: 'members.id',
@@ -74,7 +83,7 @@ export default class Discussion extends Model {
                     key: 'messages'
                 },
                 beforeInsert(model) {
-                    model.key = 'messages'
+                    (model as Node).key = 'messages'
                 },
                 join: {
                     from: 'messages.id',
@@ -93,7 +102,7 @@ export default class Discussion extends Model {
                     key: 'events'
                 },
                 beforeInsert(model) {
-                    model.key = 'events'
+                    (model as Node).key = 'events'
                 },
                 join: {
                     from: 'events.id',

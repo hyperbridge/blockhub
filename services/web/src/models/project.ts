@@ -6,6 +6,9 @@ import Bounty from './bounty'
 import Product from './product'
 import Idea from './idea'
 import Tag from './tag'
+import Rating from './rating'
+import Node from './node'
+import Event from './event'
 
 export default class Project extends Model {
     id!: Number
@@ -15,10 +18,17 @@ export default class Project extends Model {
     value!: String
     meta!: Object
     parentId!: Number
+    score!: Number
+
+    owner!: Profile
+    ownerId!: Number
+
+    rating!: Rating
 
     name!: string
     members!: Array<Profile>
     isProposal!: Boolean
+
     systemTags!: Array<Tag>
     developerTags!: Array<Tag>
 
@@ -96,7 +106,113 @@ export default class Project extends Model {
                     from: 'project.productId',
                     to: 'product.id'
                 }
-            }
+            },
+            rating: {
+                relation: Model.HasOneRelation,
+                modelClass: Rating,
+                join: {
+                    from: 'products.ratingId',
+                    to: 'ratings.id'
+                }
+            },
+            events: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Event,
+                join: {
+                    from: 'projects.id',
+                    to: 'events.id',
+                    through: {
+                        from: 'nodes.fromProjectId',
+                        to: 'nodes.toEventId',
+                        extra: ['key']
+                    }
+                },
+                filter: {
+                    key: 'events'
+                },
+                beforeInsert(model) {
+                    (model as Node).key = 'events'
+                }
+            },
+            pledges: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Profile,
+                join: {
+                    from: 'projects.id',
+                    to: 'profiles.id',
+                    through: {
+                        from: 'nodes.fromProjectId',
+                        to: 'nodes.toProfileId',
+                        extra: ['key']
+                    }
+                },
+                filter: {
+                    key: 'pledges'
+                },
+                beforeInsert(model) {
+                    (model as Node).key = 'pledges'
+                }
+            },
+            contributors: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Profile,
+                join: {
+                    from: 'projects.id',
+                    to: 'profiles.id',
+                    through: {
+                        from: 'nodes.fromProjectId',
+                        to: 'nodes.toProfileId',
+                        extra: ['key']
+                    }
+                },
+                filter: {
+                    key: 'contributors'
+                },
+                beforeInsert(model) {
+                    (model as Node).key = 'contributors'
+                }
+            },
+            moderators: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Profile,
+                join: {
+                    from: 'projects.id',
+                    to: 'profiles.id',
+                    through: {
+                        from: 'nodes.fromProjectId',
+                        to: 'nodes.toProfileId',
+                        extra: ['key']
+                    }
+                },
+                filter: {
+                    key: 'moderators'
+                },
+                beforeInsert(model) {
+                    (model as Node).key = 'moderators'
+                }
+            },
+            tags: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Tag,
+                join: {
+                    from: 'products.id',
+                    to: 'tags.id',
+                    through: {
+                        from: 'nodes.fromProductId',
+                        to: 'nodes.toTagId',
+                        extra: ['key']
+                    }
+                },
+                filter: {
+                    key: 'tags'
+                },
+                beforeInsert(model) {
+                    (model as Node).key = 'tags'
+                }
+            },
+            // has many pledges -> node (parentId = this, parentType = project, nextId = profile.id, nextType = profile)
+            // has many contributors -> node (parentId = this, parentType = project, nextId = profile.id, nextType = profile)
+            // has many moderators -> node (parentId = this, parentType = project, nextId = profile.id, nextType = profile)
         }
     }
 
@@ -108,12 +224,6 @@ export default class Project extends Model {
         this.updatedAt = new Date().toISOString()
     }
 }
-
-// score
-// has one rating
-// has many pledges -> node (parentId = this, parentType = project, nextId = profile.id, nextType = profile)
-// has many contributors -> node (parentId = this, parentType = project, nextId = profile.id, nextType = profile)
-// has many moderators -> node (parentId = this, parentType = project, nextId = profile.id, nextType = profile)
 
         // "id": 1,
         // "name": "Gym With Tim",

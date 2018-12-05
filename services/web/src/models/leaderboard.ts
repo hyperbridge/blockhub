@@ -24,6 +24,7 @@ export default class Leaderboard extends Model {
     value!: String
     meta!: Object
     parentId!: Number
+    score!: Number
 
     product!: Product
     productId!: Number
@@ -76,13 +77,12 @@ export default class Leaderboard extends Model {
                         extra: ['key']
                     }
                 },
-                // filter: query => query.
                 filter: {
                     key: 'players'
-                    // qb => qb.orderByRaw('coalesce(title, id)') //query => query.where('page:tagable_entity_tag.object_data:type', 'Page')
+                    // query => query.orderByRaw('coalesce(title, id)') //query => query.where('page:tagable_entity_tag.object_data:type', 'Page')
                 },
                 beforeInsert(model) {
-                    (<NodeModel>model).key = 'players'
+                    (model as NodeModel).key = 'players'
                 }
             },
         }
@@ -96,13 +96,3 @@ export default class Leaderboard extends Model {
         this.updatedAt = new Date().toISOString()
     }
 }
-
-// objection/index.d.ts
-// export interface RelationMapping {
-//     relation: Relation;
-//     modelClass: ModelClass<any> | string;
-//     join: RelationJoin;
-//     modify?: (queryBuilder: QueryBuilder<any>) => QueryBuilder<any>;
-//     filter?: ((queryBuilder: QueryBuilder<any>) => QueryBuilder<any>) | string | object;
-//     beforeInsert?: (model: Model, context: QueryContext) => Promise<void> | void;
-// }

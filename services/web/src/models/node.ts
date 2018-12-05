@@ -158,11 +158,6 @@ export default class NodeModel extends Model {
 // updatedAt: { type: Date, default: Date.now },
 // replies: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 
-// has many upvoters profile
-// has many downvoters profile
-// upvoteTotal
-// downvoteTotal
-// scoreTotal - based on upvote/downvote reputation
 
 // product reviews =  has many meta join fromProduct = product.id where type = 'review'
 
@@ -173,3 +168,14 @@ export default class NodeModel extends Model {
 //         return this.product
 
 // event.parent.to().name
+
+
+// objection/index.d.ts
+// export interface RelationMapping {
+//     relation: Relation;
+//     modelClass: ModelClass<any> | string;
+//     join: RelationJoin;
+//     modify?: (queryBuilder: QueryBuilder<any>) => QueryBuilder<any>;
+//     filter?: ((queryBuilder: QueryBuilder<any>) => QueryBuilder<any>) | string | object;
+//     beforeInsert?: (model: Model, context: QueryContext) => Promise<void> | void;
+// }

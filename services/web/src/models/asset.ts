@@ -12,6 +12,7 @@ export default class Asset extends Model {
     value!: String
     meta!: Object
     parentId!: Number
+    score!: Number
 
     static get tableName() {
         return 'assets'
@@ -55,7 +56,7 @@ export default class Asset extends Model {
                     key: 'offers'
                 },
                 beforeInsert(model) {
-                    model.key = 'offers'
+                    (model as Node).key = 'offers'
                 },
                 join: {
                     from: 'offers.id',

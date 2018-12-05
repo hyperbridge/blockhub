@@ -1,4 +1,5 @@
 import { Model, RelationMappings } from 'objection'
+import Rating from './rating'
 import Node from './node'
 
 export default class Realm extends Model {
@@ -35,6 +36,14 @@ export default class Realm extends Model {
                 join: {
                     from: 'realms.parentId',
                     to: 'nodes.id'
+                }
+            },
+            rating: {
+                relation: Model.HasOneRelation,
+                modelClass: Rating,
+                join: {
+                    from: 'products.ratingId',
+                    to: 'ratings.id'
                 }
             },
         }

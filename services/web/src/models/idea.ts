@@ -1,8 +1,5 @@
-// has many applications -> node
-// has many backers
-
-import { Model } from 'objection'
-import Node from './node'
+import { Model, RelationMappings } from 'objection'
+import NodeModel from './node'
 import Rating from './rating'
 import Profile from './profile'
 
@@ -16,6 +13,7 @@ export default class Idea extends Model {
     parentId!: Number
 
     profileId!: Number
+    type!: String // [battlepass, app, game, etc.]
 
     static get tableName() {
         return 'ideas'
@@ -34,11 +32,11 @@ export default class Idea extends Model {
         }
     }
 
-    static get relationMappings() {
+    static get relationMappings(): RelationMappings {
         return {
             parent: {
                 relation: Model.HasOneRelation,
-                modelClass: Node,
+                modelClass: NodeModel,
                 join: {
                     from: 'ideas.parentId',
                     to: 'nodes.id'
@@ -51,7 +49,7 @@ export default class Idea extends Model {
                     key: 'backers'
                 },
                 beforeInsert(model) {
-                    model.key = 'backers'
+                    (model as NodeModel).key = 'backers'
                 },
                 join: {
                     from: 'ideas.id',
@@ -70,7 +68,7 @@ export default class Idea extends Model {
                     key: 'applications'
                 },
                 beforeInsert(model) {
-                    model.key = 'applications'
+                    (model as NodeModel).key = 'applications'
                 },
                 join: {
                     from: 'ideas.id',

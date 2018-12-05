@@ -1,5 +1,6 @@
 import { Model, RelationMappings } from 'objection'
 import Node from './node'
+import Vote from './vote'
 
 export default class Rating extends Model {
     id!: Number
@@ -9,6 +10,13 @@ export default class Rating extends Model {
     value!: String
     meta!: Object
     parentId!: Number
+
+    votes!: Array<Vote>
+
+    score!: Number // based on upvote/downvote profile reputation
+    average!: Number
+    upvoteTotal!: Number // has many upvoters votes -> profile where value = 1
+    downvoteTOtal!: Number // has many downvoters votes -> profile where value = -1
 
     static get tableName() {
         return 'ratings'
@@ -48,7 +56,3 @@ export default class Rating extends Model {
         this.updatedAt = new Date().toISOString()
     }
 }
-
-// has many votes
-// average
-// 

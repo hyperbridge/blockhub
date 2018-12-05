@@ -1,19 +1,18 @@
 import { Model, RelationMappings } from 'objection'
+import Profile from './profile'
 import Node from './node'
 
-export default class Tag extends Model {
+export default class Collection extends Model {
     id!: Number
     createdAt!: String
     updatedAt!: String
     key!: String
     value!: String
-    meta!: Object
+    meta!: Object // prize
     parentId!: Number
 
-    locked!: Boolean
-
     static get tableName() {
-        return 'tags'
+        return 'collections'
     }
 
     static get jsonSchema() {
@@ -35,7 +34,7 @@ export default class Tag extends Model {
                 relation: Model.HasOneRelation,
                 modelClass: Node,
                 join: {
-                    from: 'tags.parentId',
+                    from: 'collections.parentId',
                     to: 'nodes.id'
                 }
             },

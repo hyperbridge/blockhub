@@ -8,6 +8,7 @@ import Project from './project'
 import Discussion from './discussion'
 import Server from './server'
 import File from './file'
+import Node from './node'
 
 type Language = Object
 type SystemRequirement = Object
@@ -19,8 +20,12 @@ export default class Product extends Model {
     updatedAt!: String
     key!: String
     value!: String
-    meta!: Object // score
+    meta!: Object
     parentId!: Number
+    score!: Number
+
+    owner!: Profile
+    ownerId!: Number
 
     rating!: Rating
     ratingId!: Number
@@ -133,7 +138,7 @@ export default class Product extends Model {
                     key: 'updates'
                 },
                 beforeInsert(model) {
-                    model.key = 'updates'
+                    (model as Node).key = 'updates'
                 }
             },
             // orders: {
@@ -171,10 +176,10 @@ export default class Product extends Model {
                     key: 'files'
                 },
                 beforeInsert(model) {
-                    model.key = 'files'
+                    (model as Node).key = 'files'
                 }
             },
-            developerTags: {
+            tags: {
                 relation: Model.ManyToManyRelation,
                 modelClass: Tag,
                 join: {
@@ -187,29 +192,10 @@ export default class Product extends Model {
                     }
                 },
                 filter: {
-                    key: 'developerTags'
+                    key: 'tags'
                 },
                 beforeInsert(model) {
-                    model.key = 'developerTags'
-                }
-            },
-            systemTags: {
-                relation: Model.ManyToManyRelation,
-                modelClass: Tag,
-                join: {
-                    from: 'products.id',
-                    to: 'tags.id',
-                    through: {
-                        from: 'nodes.fromProductId',
-                        to: 'nodes.toTagId',
-                        extra: ['key']
-                    }
-                },
-                filter: {
-                    key: 'systemTags'
-                },
-                beforeInsert(model) {
-                    model.key = 'systemTags'
+                    (model as Node).key = 'tags'
                 }
             }
         }

@@ -1,5 +1,7 @@
 import { Model, RelationMappings } from 'objection'
 import Node from './node'
+import Rating from './rating';
+import Profile from './profile';
 
 export default class Review extends Model {
     id!: Number
@@ -9,6 +11,13 @@ export default class Review extends Model {
     value!: String
     meta!: Object
     parentId!: Number
+
+    rating!: Rating
+
+    owner!: Profile
+    ownerId!: Number
+
+    
 
     static get tableName() {
         return 'reviews'
@@ -48,11 +57,3 @@ export default class Review extends Model {
         this.updatedAt = new Date().toISOString()
     }
 }
-
-// text
-// has one rating
-// ownerId profile
-// target targetId targetType
-// has many upvoters votes -> profile where value = 1
-// has many downvoters votes -> profile where value = -1
-// meta upvoteTotal downvoteTotal

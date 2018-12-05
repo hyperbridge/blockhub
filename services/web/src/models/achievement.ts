@@ -48,7 +48,3 @@ export default class Achievement extends Model {
         this.updatedAt = new Date().toISOString()
     }
 }
-
-// key
-// name
-// ownerId is product or ??

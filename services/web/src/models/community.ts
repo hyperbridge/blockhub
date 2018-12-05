@@ -47,7 +47,7 @@ export default class Community extends Model {
                     key: 'discussions'
                 },
                 beforeInsert(model) {
-                    model.key = 'discussions'
+                    (model as Node).key = 'discussions'
                 },
                 join: {
                     from: 'discussions.id',
@@ -66,7 +66,7 @@ export default class Community extends Model {
                     key: 'subscribers'
                 },
                 beforeInsert(model) {
-                    model.key = 'subscribers'
+                    (model as Node).key = 'subscribers'
                 },
                 join: {
                     from: 'profiles.id',
@@ -85,7 +85,7 @@ export default class Community extends Model {
                     key: 'events'
                 },
                 beforeInsert(model) {
-                    model.key = 'events'
+                    (model as Node).key = 'events'
                 },
                 join: {
                     from: 'events.id',

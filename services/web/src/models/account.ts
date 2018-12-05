@@ -59,5 +59,3 @@ export default class Account extends Model {
         this.updatedAt = new Date().toISOString()
     }
 }
-
-// 
