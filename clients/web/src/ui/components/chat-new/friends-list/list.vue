@@ -1,6 +1,6 @@
 <template>
     <div class="friends-list">
-        <div class="friends-list__btn" @click="toggleList">
+        <div class="friends-list__btn" :class="{ 'active' : open }" @click="toggleList">
             <i class="fas mr-2" :class="[ open ? 'fa-angle-down' : 'fa-angle-right' ]"></i>
             {{ title }}
             <span class="ml-2">
@@ -40,6 +40,7 @@
         margin-bottom: 5px;
         display: flex;
         flex-direction: column;
+        min-height: 28px;
     }
     .friends-list__btn{
         display: flex;
@@ -49,14 +50,15 @@
         padding: 3px 5px;
         border: 1px solid transparent;
         height: 28px;
-        &:hover{
+        &:hover,
+        &.active{
             border-color: rgba(255, 255, 255, .1);
             background: rgba(255, 255, 255, .05);
             cursor: pointer;
         }
     }
     .friends-list__list{
-        height: 100%;
+        height: calc( 100% - 30px );
         overflow-y: auto;
         overflow-x: hidden;
         color: #fff;
