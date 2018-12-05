@@ -40,7 +40,9 @@
         margin-bottom: 5px;
         display: flex;
         flex-direction: column;
-        min-height: 28px;
+        min-height: 33px;
+        max-height: 100%;
+        flex-grow: 0;
     }
     .friends-list__btn{
         display: flex;
@@ -49,7 +51,9 @@
         font-size: 14px;
         padding: 3px 5px;
         border: 1px solid transparent;
-        height: 28px;
+        flex-basis: 28px;
+        flex-grow: 0;
+        flex-shrink: 0;
         &:hover,
         &.active{
             border-color: rgba(255, 255, 255, .1);

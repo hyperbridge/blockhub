@@ -25,6 +25,11 @@
                 <c-chat-friends-list :list="users" title="Favorites" />
                 <c-chat-friends-list :list="users" title="All" />
             </div>
+            <div class="chat-friends-suggestion">
+                <i class="fas fa-user-plus"></i>
+                Suggested friends
+                <i class="fas fa-angle-down"></i>
+            </div>
         </div>
     </div>
 </template>
@@ -211,5 +216,22 @@
         padding: 10px;
         height: 400px;
         background: rgba(0, 0, 0, .2);
+    }
+    .chat-friends-suggestion{
+        padding: 5px 10px;
+        display: flex;
+        align-items: center;
+        color: #fff;
+        background: #3d3d5e;
+        font-size: 14px;
+        i{
+            &:first-child{
+                margin-right: 8px;
+                color: #4c7be5;
+            }
+            &:last-child{
+                margin-left: auto;
+            }
+        }
     }
 </style>
