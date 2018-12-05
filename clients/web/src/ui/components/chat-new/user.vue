@@ -11,7 +11,7 @@
             </strong>
             <span>{{ game }}</span>
         </div>
-        <div class="user-action">
+        <div class="user-action" v-if="action">
             <i class="fas" :class=" volume ? 'fa-volume-up' : 'fa-volume-off'" @click="toggleVolume"></i>
             <i class="fas" :class=" microphone ? 'fa-microphone' : 'fa-microphone-slash'" @click="toggleMicrophone"></i>
         </div>
@@ -26,6 +26,10 @@
             status: String,
             game: String,
             isAdmin:{
+                type: Boolean,
+                default: false
+            },
+            action:{
                 type: Boolean,
                 default: false
             }
