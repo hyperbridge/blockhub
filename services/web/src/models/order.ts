@@ -55,15 +55,15 @@ export default class Order extends Model {
                     through: {
                         from: 'nodes.fromOrderId',
                         to: 'nodes.id',
-                        extra: ['key']
+                        extra: ['relationKey']
                     },
                     to: 'nodes.id'
                 },
                 filter: {
-                    key: 'items'
+                    relationKey: 'items'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'items'
+                    (model as Node).relationKey = 'items'
                 },
             },
         }

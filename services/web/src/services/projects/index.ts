@@ -13,7 +13,14 @@ export default function(app) {
             default: 10,
             max: 25,
             ...paginate
-        }
+        },
+        allowedEager: 'tags',
+        allowedUpsert: 'tags'
+        // namedEagerFilters: {
+        //     all: function (builder) {
+        //         builder.where('done', false)
+        //     }
+        // },
     }
 
     app.use('/projects', createService(options))

@@ -265,6 +265,17 @@
                 this.$store.dispatch('application/updateState')
             }
         },
+        created() {
+            this.$store.dispatch('profiles/find', {
+                query: {
+                    accountId: this.$store.state.auth.user.id,
+                    $sort: {
+                        createdAt: -1
+                    },
+                    $limit: 25
+                }
+            })
+        },
         computed: {
             profiles() {
                 return this.$store.getters['profiles/list']

@@ -1,5 +1,5 @@
 import { Model, RelationMappings } from 'objection'
-import NodeModel from './node'
+import Node from './node'
 import Rating from './rating'
 import Profile from './profile'
 
@@ -38,7 +38,7 @@ export default class Idea extends Model {
         return {
             parent: {
                 relation: Model.HasOneRelation,
-                modelClass: NodeModel,
+                modelClass: Node,
                 join: {
                     from: 'ideas.parentId',
                     to: 'nodes.id'
@@ -56,10 +56,10 @@ export default class Idea extends Model {
                 relation: Model.ManyToManyRelation,
                 modelClass: Profile,
                 filter: {
-                    key: 'backers'
+                    relationKey: 'backers'
                 },
                 beforeInsert(model) {
-                    (model as NodeModel).key = 'backers'
+                    (model as Node).relationKey = 'backers'
                 },
                 join: {
                     from: 'ideas.id',
@@ -67,7 +67,7 @@ export default class Idea extends Model {
                     through: {
                         from: 'nodes.fromIdeaId',
                         to: 'nodes.toProfileId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 }
             },
@@ -75,10 +75,10 @@ export default class Idea extends Model {
                 relation: Model.ManyToManyRelation,
                 modelClass: Profile,
                 filter: {
-                    key: 'applications'
+                    relationKey: 'applications'
                 },
                 beforeInsert(model) {
-                    (model as NodeModel).key = 'applications'
+                    (model as Node).relationKey = 'applications'
                 },
                 join: {
                     from: 'ideas.id',
@@ -86,7 +86,7 @@ export default class Idea extends Model {
                     through: {
                         from: 'nodes.fromIdeaId',
                         to: 'nodes.toProfileId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 }
             },

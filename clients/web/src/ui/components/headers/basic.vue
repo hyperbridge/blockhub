@@ -452,6 +452,11 @@ export default {
 
         &.edit-btn {
             margin-top: -38px !important;
+            margin-right: 30px;
+
+            img {
+                pointer-events: none;
+            }
         }
     }
 

@@ -45,6 +45,14 @@ export default class Rating extends Model {
                     to: 'nodes.id'
                 }
             },
+            votes: {
+                relation: Model.HasManyRelation,
+                modelClass: Vote,
+                join: {
+                    from: 'ratings.id',
+                    to: 'votes.ratingId'
+                }
+            },
         }
     }
 

@@ -54,10 +54,10 @@ export default class Asset extends Model {
                 relation: Model.ManyToManyRelation,
                 modelClass: Offer,
                 filter: {
-                    key: 'offers'
+                    relationKey: 'offers'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'offers'
+                    (model as Node).relationKey = 'offers'
                 },
                 join: {
                     from: 'offers.id',
@@ -65,7 +65,7 @@ export default class Asset extends Model {
                     through: {
                         from: 'nodes.fromOfferId',
                         to: 'nodes.toCommunityId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 }
             },

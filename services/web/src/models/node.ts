@@ -4,7 +4,7 @@ import Profile from './profile'
 
 // Based on https://github.com/Vincit/objection.js/issues/19
 // Exclusive ARC https://hashrocket.com/blog/posts/modeling-polymorphic-associations-in-a-relational-database#exclusive-belongs-to-aka-exclusive-arc-
-export default class NodeModel extends Model {
+export default class Node extends Model {
     id!: Number
     createdAt!: String
     updatedAt!: String
@@ -12,6 +12,8 @@ export default class NodeModel extends Model {
     value!: String
     meta!: Object
     parentId!: Number
+
+    relationKey!: String
 
     fromAccount!: Account
     fromAccountId!: Number
@@ -105,7 +107,7 @@ export default class NodeModel extends Model {
             required: [],
             properties: {
                 id: { type: 'integer' },
-                key: { type: 'string' }
+                relationKey: { type: 'string' }
             },
             options: {
                 timestamps: true

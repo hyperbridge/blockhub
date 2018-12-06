@@ -77,14 +77,14 @@ export default class Profile extends Model {
                     through: {
                         from: 'nodes.fromProfileId',
                         to: 'nodes.toLicenseId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'licenses'
+                    relationKey: 'licenses'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'licenses'
+                    (model as Node).relationKey = 'licenses'
                 }
             },
             orders: {
@@ -96,14 +96,14 @@ export default class Profile extends Model {
                     through: {
                         from: 'nodes.fromProfileId',
                         to: 'nodes.toOrderId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'orders'
+                    relationKey: 'orders'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'orders'
+                    (model as Node).relationKey = 'orders'
                 }
             },
             messages: {
@@ -115,14 +115,14 @@ export default class Profile extends Model {
                     through: {
                         from: 'nodes.fromProfileId',
                         to: 'nodes.toMessageId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'messages'
+                    relationKey: 'messages'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'messages'
+                    (model as Node).relationKey = 'messages'
                 }
             },
             assets: {
@@ -134,14 +134,14 @@ export default class Profile extends Model {
                     through: {
                         from: 'nodes.fromProfileId',
                         to: 'nodes.toAssetId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'assets'
+                    relationKey: 'assets'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'assets'
+                    (model as Node).relationKey = 'assets'
                 }
             },
             offers: {
@@ -153,14 +153,14 @@ export default class Profile extends Model {
                     through: {
                         from: 'nodes.fromProfileId',
                         to: 'nodes.toOfferId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'offers'
+                    relationKey: 'offers'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'offers'
+                    (model as Node).relationKey = 'offers'
                 }
             },
             pledges: {
@@ -172,14 +172,14 @@ export default class Profile extends Model {
                     through: {
                         from: 'nodes.toProfileId',
                         to: 'nodes.fromProjectId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'pledges'
+                    relationKey: 'pledges'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'pledges'
+                    (model as Node).relationKey = 'pledges'
                 }
             },
             realms: {
@@ -191,14 +191,14 @@ export default class Profile extends Model {
                     through: {
                         from: 'nodes.fromProfileId',
                         to: 'nodes.toRealmId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'realms'
+                    relationKey: 'realms'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'realms'
+                    (model as Node).relationKey = 'realms'
                 }
             },
             events: {
@@ -210,14 +210,14 @@ export default class Profile extends Model {
                     through: {
                         from: 'nodes.fromProfileId',
                         to: 'nodes.toEventId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'events'
+                    relationKey: 'events'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'events'
+                    (model as Node).relationKey = 'events'
                 }
             },
             badges: {
@@ -229,14 +229,14 @@ export default class Profile extends Model {
                     through: {
                         from: 'nodes.fromProfileId',
                         to: 'nodes.toBadgeId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'badges'
+                    relationKey: 'badges'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'badges'
+                    (model as Node).relationKey = 'badges'
                 }
             },
             collections: {
@@ -248,14 +248,14 @@ export default class Profile extends Model {
                     through: {
                         from: 'nodes.fromProfileId',
                         to: 'nodes.toCollectionId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'collections'
+                    relationKey: 'collections'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'collections'
+                    (model as Node).relationKey = 'collections'
                 }
             },
             wishlists: {
@@ -266,10 +266,10 @@ export default class Profile extends Model {
                     to: 'nodes.id'
                 },
                 filter: {
-                    key: 'wishlists'
+                    relationKey: 'wishlists'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'wishlists'
+                    (model as Node).relationKey = 'wishlists'
                 }
             },
 

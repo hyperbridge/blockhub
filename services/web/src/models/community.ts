@@ -44,10 +44,10 @@ export default class Community extends Model {
                 relation: Model.ManyToManyRelation,
                 modelClass: Discussion,
                 filter: {
-                    key: 'discussions'
+                    relationKey: 'discussions'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'discussions'
+                    (model as Node).relationKey = 'discussions'
                 },
                 join: {
                     from: 'discussions.id',
@@ -55,7 +55,7 @@ export default class Community extends Model {
                     through: {
                         from: 'nodes.fromDiscussionId',
                         to: 'nodes.toCommunityId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 }
             },
@@ -63,10 +63,10 @@ export default class Community extends Model {
                 relation: Model.ManyToManyRelation,
                 modelClass: Profile,
                 filter: {
-                    key: 'subscribers'
+                    relationKey: 'subscribers'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'subscribers'
+                    (model as Node).relationKey = 'subscribers'
                 },
                 join: {
                     from: 'profiles.id',
@@ -74,7 +74,7 @@ export default class Community extends Model {
                     through: {
                         from: 'nodes.fromProfileId',
                         to: 'nodes.toCommunityId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 }
             },
@@ -82,10 +82,10 @@ export default class Community extends Model {
                 relation: Model.ManyToManyRelation,
                 modelClass: Event,
                 filter: {
-                    key: 'events'
+                    relationKey: 'events'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'events'
+                    (model as Node).relationKey = 'events'
                 },
                 join: {
                     from: 'events.id',
@@ -93,7 +93,7 @@ export default class Community extends Model {
                     through: {
                         from: 'nodes.fromEventId',
                         to: 'nodes.toCommunityId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 }
             },

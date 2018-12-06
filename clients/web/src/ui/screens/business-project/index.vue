@@ -33,7 +33,7 @@
                     <label>About</label>
                 </label>
                 <div class="col-sm-9">
-                    <c-html-editor height="200" :model.sync="project.about" />
+                    <c-html-editor height="200" :model.sync="project.value" />
 
                     <span class="form-text"></span>
                 </div>
@@ -45,7 +45,16 @@
                     <label>Tags</label>
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" placeholder="">
+                    <multiselect v-model="project.tags"
+                                tag-placeholder="Add this as new tag"
+                                placeholder="Search or add a tag"
+                                label="value"
+                                track-by="key"
+                                :options="tagOptions"
+                                :multiple="true"
+                                :taggable="true"
+                                @tag="addTag">
+                    </multiselect>
                     <span class="form-text"></span>
                 </div>
             </div>
@@ -231,13 +240,16 @@
 </template>
 
 <script>
+    import 'vue-multiselect/dist/vue-multiselect.min.css'
+
     export default {
         props: {
             id: [String, Number]
         },
         components: {
             'c-html-editor': (resolve) => require(['@/ui/components/html-editor'], resolve),
-            'c-json-editor': (resolve) => require(['@/ui/components/json-editor'], resolve)
+            'c-json-editor': (resolve) => require(['@/ui/components/json-editor'], resolve),
+            'multiselect': (resolve) => require(['vue-multiselect'], resolve),
         },
         data() {
             const project = this.id === 'new' ? this.$store.state.funding.defaultProject : this.$store.getters['projects/get'](this.id)
@@ -246,7 +258,8 @@
                 loadingState: true,
                 notice: "",
                 advanced: false,
-                project: project
+                project: project,
+                tagOptions: []
             }
         },
         computed: {
@@ -264,12 +277,22 @@
 
                 this.$store.dispatch('projects/find', {
                     query: {
-                        id: Number(this.id)
+                        id: Number(this.id),
+                        $eager: 'tags',
                     }
                 })
             }
         },
         methods: {
+            addTag (newTag) {
+                const tag = {
+                    key: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000)),
+                    value: newTag
+                }
+
+                this.tagOptions.push(tag)
+                this.project.tags.push(tag)
+            },
             viewPage() {
 
             },
@@ -277,7 +300,8 @@
                 this.advanced = !this.advanced
             },
             create() {
-                //    ownerId: this.$store.state.application.account.activeProfile.id
+                this.project.ownerId = this.$store.state.application.account.activeProfile.id
+
                 this.$store.dispatch('projects/create', this.project).then((projectResult) => {
                     this.project.id = projectResult.id
                     this.notice = "Congratulations, your project has been created!"
@@ -358,7 +382,7 @@
                 // }
 
                 // const cmd = {
-                //     code: run.toString(),
+                //     key: run.toString(),
                 //     params: {
                 //         profile: this.$store.state.application.account.activeProfile,
                 //         project: this.project
@@ -378,7 +402,11 @@
 
             },
             save() {
-                this.$store.dispatch('projects/update', [this.project.id, this.project]).then(() => {
+                this.$store.dispatch('projects/update', [this.project.id, this.project, {
+                    query: {
+                        $eager: 'tags'
+                    }
+                }]).then(() => {
                     this.notice = "Project has been saved."
                     //this.project.id = projectResult.id
                     //this.successfulCreationMessage = "Congratulations, your project has been created!"

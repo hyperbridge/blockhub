@@ -131,14 +131,14 @@ export default class Product extends Model {
                     through: {
                         from: 'nodes.fromProductId',
                         to: 'nodes.toDiscussionId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'updates'
+                    relationKey: 'updates'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'updates'
+                    (model as Node).relationKey = 'updates'
                 }
             },
             // orders: {
@@ -150,11 +150,11 @@ export default class Product extends Model {
             //         through: {
             //             from: 'nodes.fromProductId',
             //             to: 'nodes.toOrderId',
-            //             extra: ['key']
+            //             extra: ['relationKey']
             //         }
             //     },
             //     filter: {
-            //         key: 'orders'
+            //         relationKey: 'orders'
             //     },
             //     beforeInsert(model) {
             //         model.key = 'orders'
@@ -169,14 +169,14 @@ export default class Product extends Model {
                     through: {
                         from: 'nodes.fromProductId',
                         to: 'nodes.toFileId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'files'
+                    relationKey: 'files'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'files'
+                    (model as Node).relationKey = 'files'
                 }
             },
             tags: {
@@ -188,14 +188,14 @@ export default class Product extends Model {
                     through: {
                         from: 'nodes.fromProductId',
                         to: 'nodes.toTagId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'tags'
+                    relationKey: 'tags'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'tags'
+                    (model as Node).relationKey = 'tags'
                 }
             }
         }

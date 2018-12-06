@@ -56,14 +56,14 @@ export default class Server extends Model {
                     through: {
                         from: 'nodes.fromServerId',
                         to: 'nodes.toTagId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'tags'
+                    relationKey: 'tags'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'tags'
+                    (model as Node).relationKey = 'tags'
                 }
             },
         }

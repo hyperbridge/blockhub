@@ -42,10 +42,10 @@ export default class Bounty extends Model {
                 relation: Model.ManyToManyRelation,
                 modelClass: Profile,
                 filter: {
-                    key: 'hunters'
+                    relationKey: 'hunters'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'hunters'
+                    (model as Node).relationKey = 'hunters'
                 },
                 join: {
                     from: 'hunters.id',
@@ -53,7 +53,7 @@ export default class Bounty extends Model {
                     through: {
                         from: 'nodes.fromProfileId',
                         to: 'nodes.toCommunityId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 }
             },

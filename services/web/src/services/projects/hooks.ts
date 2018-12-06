@@ -38,12 +38,6 @@ const create = function(options = {}) {
 
         console.log('Project creation request: ', data)
 
-        // // Throw an error if we didn't get a text
-        // if (!data.name) {
-        //     throw new Error('A project must have a name')
-        // }
-
-        // The authenticated account
         const account = context.params.user
 
         if (!account.id) {
@@ -56,23 +50,18 @@ const create = function(options = {}) {
             throw new Error('Project must be owned by a profile of authenticated account')
         }
 
-        // The actual project text
-        const { name, description, about, meta } = context.data
+        const { name, description, value, meta } = context.data
 
         // Override the original data (so that people can't submit additional stuff)
         context.data = {
             name,
             description,
-            about,
+            value,
             meta,
             //meta: context.data,
-            // Set the account id
-            ownerId: profile.id,
-            // Add the current date
-            createdAt: new Date()
+            ownerId: profile.id
         }
 
-        // Best practise, hooks should always return the context
         return context
     }
 }

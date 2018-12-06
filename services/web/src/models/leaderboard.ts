@@ -1,7 +1,7 @@
 import { Model, RelationMappings } from 'objection'
 import Profile from './profile'
 import Product from './product'
-import NodeModel from './node'
+import Node from './node'
 
 
 // export interface RelationMappings {
@@ -50,7 +50,7 @@ export default class Leaderboard extends Model {
         return {
             parent: {
                 relation: Model.HasOneRelation,
-                modelClass: NodeModel,
+                modelClass: Node,
                 join: {
                     from: 'leaderboards.parentId',
                     to: 'nodes.id'
@@ -58,7 +58,7 @@ export default class Leaderboard extends Model {
             },
             product: {
                 relation: Model.HasOneRelation,
-                modelClass: NodeModel,
+                modelClass: Node,
                 join: {
                     from: 'leaderboards.productId',
                     to: 'products.id'
@@ -73,7 +73,7 @@ export default class Leaderboard extends Model {
                     through: {
                         from: 'nodes.fromLeaderboardId',
                         to: 'nodes.toProfileId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
@@ -81,7 +81,7 @@ export default class Leaderboard extends Model {
                     // query => query.orderByRaw('coalesce(title, id)') //query => query.where('page:tagable_entity_tag.object_data:type', 'Page')
                 },
                 beforeInsert(model) {
-                    (model as NodeModel).key = 'players'
+                    (model as Node).key = 'players'
                 }
             },
         }

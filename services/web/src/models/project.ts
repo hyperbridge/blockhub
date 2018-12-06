@@ -65,53 +65,53 @@ export default class Project extends Model {
             //         to: 'profiles.id'
             //     }
             // },
-            subprojects: {
-                relation: Model.HasManyRelation,
-                modelClass: Project,
-                join: {
-                    from: 'projects.id',
-                    to: 'projects.parentId'
-                }
-            },
-            bounties: {
-                relation: Model.HasManyRelation,
-                modelClass: Bounty,
-                join: {
-                    from: 'projects.id',
-                    to: 'bounties.parentId'
-                    // join view through where parentType == 'project' 
-                    // https://www.tutorialspoint.com/postgresql/postgresql_views.htm
-                }
-            },
+            // subprojects: {
+            //     relation: Model.HasManyRelation,
+            //     modelClass: Project,
+            //     join: {
+            //         from: 'projects.id',
+            //         to: 'projects.parentId'
+            //     }
+            // },
+            // bounties: {
+            //     relation: Model.HasManyRelation,
+            //     modelClass: Bounty,
+            //     join: {
+            //         from: 'projects.id',
+            //         to: 'bounties.parentId'
+            //         // join view through where parentType == 'project' 
+            //         // https://www.tutorialspoint.com/postgresql/postgresql_views.htm
+            //     }
+            // },
             community: {
                 relation: Model.HasOneRelation,
                 modelClass: Community,
                 join: {
-                    from: 'project.communityId',
-                    to: 'community.id'
+                    from: 'projects.communityId',
+                    to: 'communities.id'
                 }
             },
             idea: {
                 relation: Model.HasOneRelation,
                 modelClass: Idea,
                 join: {
-                    from: 'project.ideaId',
-                    to: 'idea.id'
+                    from: 'projects.ideaId',
+                    to: 'ideas.id'
                 }
             },
             product: {
                 relation: Model.HasOneRelation,
                 modelClass: Product,
                 join: {
-                    from: 'project.productId',
-                    to: 'product.id'
+                    from: 'projects.productId',
+                    to: 'products.id'
                 }
             },
             rating: {
                 relation: Model.HasOneRelation,
                 modelClass: Rating,
                 join: {
-                    from: 'products.ratingId',
+                    from: 'projects.ratingId',
                     to: 'ratings.id'
                 }
             },
@@ -124,14 +124,14 @@ export default class Project extends Model {
                     through: {
                         from: 'nodes.fromProjectId',
                         to: 'nodes.toEventId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'events'
+                    relationKey: 'events'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'events'
+                    (model as Node).relationKey = 'events'
                 }
             },
             pledges: {
@@ -143,14 +143,14 @@ export default class Project extends Model {
                     through: {
                         from: 'nodes.fromProjectId',
                         to: 'nodes.toProfileId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'pledges'
+                    relationKey: 'pledges'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'pledges'
+                    (model as Node).relationKey = 'pledges'
                 }
             },
             contributors: {
@@ -162,14 +162,14 @@ export default class Project extends Model {
                     through: {
                         from: 'nodes.fromProjectId',
                         to: 'nodes.toProfileId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'contributors'
+                    relationKey: 'contributors'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'contributors'
+                    (model as Node).relationKey = 'contributors'
                 }
             },
             moderators: {
@@ -181,33 +181,34 @@ export default class Project extends Model {
                     through: {
                         from: 'nodes.fromProjectId',
                         to: 'nodes.toProfileId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'moderators'
+                    relationKey: 'moderators'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'moderators'
+                    (model as Node).relationKey = 'moderators'
                 }
             },
             tags: {
                 relation: Model.ManyToManyRelation,
                 modelClass: Tag,
                 join: {
-                    from: 'products.id',
+                    from: 'projects.id',
                     to: 'tags.id',
                     through: {
-                        from: 'nodes.fromProductId',
+                        from: 'nodes.fromProjectId',
                         to: 'nodes.toTagId',
-                        extra: ['key']
+                        extra: ['relationKey']
                     }
                 },
                 filter: {
-                    key: 'tags'
+                    relationKey: 'tags'
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'tags'
+                    console.log(model);
+                    (model as Node).relationKey = 'tags'
                 }
             },
             // has many pledges -> node (parentId = this, parentType = project, nextId = profile.id, nextType = profile)

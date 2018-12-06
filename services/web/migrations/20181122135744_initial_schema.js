@@ -54,6 +54,18 @@ exports.up = knex => {
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
             table.json('meta')
         })
+        .createTable('communities', table => {
+            table.increments('id').primary()
+            table.timestamp('createdAt')
+            table.timestamp('updatedAt')
+            table.string('key', 100)
+            table.text('value')
+            table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
+            table.json('meta')
+
+            table.string('name', 100)
+            table.string('description', 500)
+        })
         .createTable('assets', table => {
             table.increments('id').primary()
             table.timestamp('createdAt')
@@ -95,6 +107,35 @@ exports.up = knex => {
                 .inTable('profiles')
                 .onDelete('CASCADE')
         })
+        .createTable('ratings', table => {
+            table.increments('id').primary()
+            table.timestamp('createdAt')
+            table.timestamp('updatedAt')
+            table.string('key', 100)
+            table.text('value')
+            table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
+            table.json('meta')
+        })
+        .createTable('ideas', table => {
+            table.increments('id').primary()
+            table.timestamp('createdAt')
+            table.timestamp('updatedAt')
+            table.string('key', 100)
+            table.text('value')
+            table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
+            table.json('meta')
+
+            table.string('type', 100)
+        })
+        .createTable('reviews', table => {
+            table.increments('id').primary()
+            table.timestamp('createdAt')
+            table.timestamp('updatedAt')
+            table.string('key', 100)
+            table.text('value')
+            table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
+            table.json('meta')
+        })
         .createTable('projects', table => {
             table.increments('id').primary()
             table.timestamp('createdAt')
@@ -111,13 +152,43 @@ exports.up = knex => {
                 .unsigned()
                 .references('id')
                 .inTable('profiles')
-                .onDelete('CASCADE')
+                .onDelete('SET NULL')
             table
                 .integer('parentId')
                 .unsigned()
                 .references('id')
                 .inTable('projects')
-                .onDelete('CASCADE')
+                .onDelete('SET NULL')
+            table
+                .integer('realmId')
+                .unsigned()
+                .references('id')
+                .inTable('realms')
+                .onDelete('SET NULL')
+            table
+                .integer('communityId')
+                .unsigned()
+                .references('id')
+                .inTable('communities')
+                .onDelete('SET NULL')
+            table
+                .integer('productId')
+                .unsigned()
+                .references('id')
+                .inTable('products')
+                .onDelete('SET NULL')
+            table
+                .integer('ratingId')
+                .unsigned()
+                .references('id')
+                .inTable('ratings')
+                .onDelete('SET NULL')
+            table
+                .integer('ratingId')
+                .unsigned()
+                .references('id')
+                .inTable('ratings')
+                .onDelete('SET NULL')
         })
         .createTable('badges', table => {
             table.increments('id').primary()
@@ -158,18 +229,6 @@ exports.up = knex => {
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
             table.json('meta')
         })
-        .createTable('communities', table => {
-            table.increments('id').primary()
-            table.timestamp('createdAt')
-            table.timestamp('updatedAt')
-            table.string('key', 100)
-            table.text('value')
-            table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
-
-            table.string('name', 100)
-            table.string('description', 500)
-        })
         .createTable('discussions', table => {
             table.increments('id').primary()
             table.timestamp('createdAt')
@@ -199,17 +258,6 @@ exports.up = knex => {
 
             table.string('storageType', 100)
             table.string('accessType', 100)
-        })
-        .createTable('ideas', table => {
-            table.increments('id').primary()
-            table.timestamp('createdAt')
-            table.timestamp('updatedAt')
-            table.string('key', 100)
-            table.text('value')
-            table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
-
-            table.string('type', 100)
         })
         .createTable('leaderboards', table => {
             table.increments('id').primary()
@@ -285,15 +333,6 @@ exports.up = knex => {
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
             table.json('meta')
         })
-        .createTable('ratings', table => {
-            table.increments('id').primary()
-            table.timestamp('createdAt')
-            table.timestamp('updatedAt')
-            table.string('key', 100)
-            table.text('value')
-            table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
-        })
         .createTable('realms', table => {
             table.increments('id').primary()
             table.timestamp('createdAt')
@@ -305,15 +344,6 @@ exports.up = knex => {
 
             table.string('name', 100)
             table.string('description', 500)
-        })
-        .createTable('reviews', table => {
-            table.increments('id').primary()
-            table.timestamp('createdAt')
-            table.timestamp('updatedAt')
-            table.string('key', 100)
-            table.text('value')
-            table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
         })
         .createTable('servers', table => {
             table.increments('id').primary()
@@ -359,6 +389,13 @@ exports.up = knex => {
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
             table.json('meta')
+
+            table
+                .integer('ratingId')
+                .unsigned()
+                .references('id')
+                .inTable('ratings')
+                .onDelete('CASCADE')
         })
         .createTable('nodes', table => {
             table.increments('id').primary()
@@ -369,6 +406,7 @@ exports.up = knex => {
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
             table.json('meta')
 
+            table.string('relationKey', 100)
             table
                 .integer('fromAccountId')
                 .unsigned()
@@ -421,13 +459,25 @@ exports.up = knex => {
                 .integer('fromMessageId')
                 .unsigned()
                 .references('id')
-                .inTable('products')
+                .inTable('messages')
                 .onDelete('CASCADE')
             table
                 .integer('toMessageId')
                 .unsigned()
                 .references('id')
                 .inTable('messages')
+                .onDelete('CASCADE')
+            table
+                .integer('fromTagId')
+                .unsigned()
+                .references('id')
+                .inTable('products')
+                .onDelete('CASCADE')
+            table
+                .integer('toTagId')
+                .unsigned()
+                .references('id')
+                .inTable('tags')
                 .onDelete('CASCADE')
         })
 
