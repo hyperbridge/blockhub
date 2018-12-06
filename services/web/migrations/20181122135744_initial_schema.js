@@ -301,20 +301,6 @@ exports.up = knex => {
                 .inTable('messages')
                 .onDelete('SET NULL')
         })
-        // .raw(`
-        //     alter table "nodes"
-        //     add constraint "exactly_one" check(
-        //         (
-        //             "fromAccountId" is not null 
-        //             and "toAccountId" is null
-        //         )
-        //         or
-        //         (
-        //             "fromAchievementId" is null 
-        //             and "toAchievementId" is not null
-        //         )
-        //     )
-        // `)
         .createTable('offers', table => {
             table.increments('id').primary()
             table.timestamp('createdAt')
@@ -480,7 +466,44 @@ exports.up = knex => {
                 .inTable('tags')
                 .onDelete('CASCADE')
         })
+        .raw(`
+            CREATE FUNCTION count_not_nulls(variadic p_array anyarray)
+                RETURNS BIGINT AS
+                $$
+                    SELECT count(x) FROM unnest($1) AS x
+                $$ LANGUAGE SQL IMMUTABLE;
 
+            alter table "nodes"
+                add constraint "from_is_set" check(count_not_nulls(
+                    "fromProjectId",
+                    "fromAccountId",
+                    "fromProfileId",
+                    "fromTagId"
+                ) = 1);
+                
+            alter table "nodes"
+                add constraint "to_is_set" check(count_not_nulls(
+                    "toProjectId",
+                    "toAccountId",
+                    "toProfileId",
+                    "toTagId"
+                ) = 1);
+        `)
+
+        // .raw(`
+        //     alter table "nodes"
+        //     add constraint "exactly_one" check(
+        //         (
+        //             "fromAccountId" is not null 
+        //             and "toAccountId" is null
+        //         )
+        //         or
+        //         (
+        //             "fromAchievementId" is null 
+        //             and "toAchievementId" is not null
+        //         )
+        //     )
+        // `)
         // .createTable('project_members', table => {
         //     table.increments('id').primary()
         //     table
