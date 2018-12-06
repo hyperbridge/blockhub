@@ -1,6 +1,6 @@
 <template>
     <div class="row" v-if="project">
-        <div class="col-12">
+        <div class="col-12 mb-4" v-if="project.id">
             <c-button :href="`#/project/${project.id}`" target="_blank" status="info" icon="open">
                 View Page
             </c-button>

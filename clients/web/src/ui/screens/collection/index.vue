@@ -77,8 +77,8 @@
                                     </div>
                                 </div>
                                 <div class="d-inline-flex">
-                                    <c-heading-bar-fields name="Rarity" icon="fas fa-trophy" @click_up=""  @click_down="" />
-                                    <c-heading-bar-fields name="Value" icon="fas fa-dollar" @click_up=""  @click_down="" />
+                                    <c-heading-bar-fields name="Rarity" icon="fas fa-trophy" />
+                                    <c-heading-bar-fields name="Value" icon="fas fa-dollar" />
                                 </div>
                             </div>
                             <c-assets-grid :list="getAssets" />
