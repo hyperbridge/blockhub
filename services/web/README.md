@@ -29,3 +29,14 @@ For deployment, set the same variables in the environment.
 ## Routes
 
 Refer to [SwaggerHub](https://app.swaggerhub.com/apis/hyperbri/blockhub-web-service/1.0.0) or the [api.yml](api.yml) file.
+
+
+  _createQuery(params = {}) {
+    let trx = params.transaction ? params.transaction.trx : null;
+    let q = this.Model.query(trx).onBuildKnex(knexQueryBuilder => {
+      knexQueryBuilder.on('query', queryData => {
+        console.log(queryData)
+      })
+    })
+    return q;
+  }

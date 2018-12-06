@@ -32,12 +32,12 @@
                         <div class="filter-box">
                             <h4>
                                 Specials:
-                                <span v-show="selectedSpecials.length">
-                                    ({{ selectedSpecials.length }})
+                                <span v-show="selectedTags.length">
+                                    ({{ selectedTags.length }})
                                 </span>
                             </h4>
                             <c-checkbox
-                                v-for="(tag, index) in systemTags"
+                                v-for="(tag, index) in tags"
                                 :key="index"
                                 :id="`specials-${tag.value}`"
                                 v-model="tag.selected"
@@ -155,12 +155,12 @@
                                 />
                             </c-option-tag>
                             <c-option-tag
-                                v-if="selectedSpecials.length"
+                                v-if="selectedTags.length"
                                 title="SPECIALS:"
-                                @delete="selectedSpecials.forEach(tag => tag.selected = false)"
+                                @delete="selectedTags.forEach(tag => tag.selected = false)"
                             >
                                 <c-option-tag
-                                    v-for="(tag, index) in selectedSpecials"
+                                    v-for="(tag, index) in selectedTags"
                                     :key="index"
                                     :text="tag.value | replaceLoDash | upperFirstChar"
                                     @delete="tag.selected = false"
@@ -246,8 +246,9 @@
                     <div class="results">
                         <c-spinner v-if="isTyping"/>
                         <div v-else-if="!resultsFiltered.length">
-                            <p>No results were found</p>
-                            <c-button @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>
+                            <c-loading />
+                            <!-- <p>No results were found</p>
+                            <c-button @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button> -->
                         </div>
                         <c-content-navigation
                             v-else
@@ -255,14 +256,25 @@
                             :setItemsLimit="12"
                             :setItemsPerPage="12"
                         >
-                            <c-game-grid
+                            <c-project-card
+                                class="p-2 col-3"
+                                :image="project.meta.images.mediumTile" 
+                                :description="project.description" 
+                                :funds="project.meta.funds" 
+                                :parentName="project.product && project.product.name" 
+                                :parentDeveloper="project.product && project.product.developer" 
+                                :parentImage="project.product && project.product.meta.images.mediumTile"
+                                :id="project.id"
+                                v-for="(project, index) in resultsFiltered" :key="index"
+                            />
+                            <!-- <c-game-grid
                                 slot-scope="{ items }"
                                 :itemInRow="2"
                                 :showRating="false"
                                 :items="items"
                                 itemBg="transparent"
                                 showTime
-                            />
+                            /> -->
                         </c-content-navigation>
                     </div>
                 </div>
@@ -280,6 +292,7 @@
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
             'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
             'c-game-grid': (resolve) => require(['@/ui/components/game-grid/with-description'], resolve),
+            'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
             'c-spinner': (resolve) => require(['@/ui/components/spinner'], resolve),
             'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve),
             'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
@@ -289,7 +302,7 @@
         mixins: [debouncer],
         data() {
             return {
-                systemTags: [
+                tags: [
                     { value: "featured", selected: false },
                     { value: "new", selected: false },
                     { value: "sale", selected: false },
@@ -322,22 +335,31 @@
             search() {
                 this.debounce(() => {
                     if (!this.isTyping) this.isTyping = true
+
                     if (this.filtersActive) {
                         this.debounce(() => {
                             this.isTyping = false
-                            this.results = [...this.getProductsQuery(this.query)]
+
+                            BlockHub.feathersClient.service(`/search`).find(
+                                {
+                                    query: this.query
+                                }
+                            ).then((res) => {
+                                this.results = res.projects.data //[...this.getProductsQuery(this.query)]
+                            })
                         }, 250, 'timeout2')
                     } else {
                         this.isTyping = false
                         this.results = this.products
                     }
+
                     this.$router.replace({ name: 'Search', query: this.urlQuery })
                 }, 500)
             },
             clearFilters() {
                 const {
                     phrase,
-                    selectedSpecials,
+                    selectedTags,
                     selectedGenres,
                     selectedLanguages,
                     price,
@@ -345,8 +367,9 @@
                     activeUsers,
                     selectedPlatforms
                 } = this
+
                 if (phrase.length) this.phrase = ''
-                if (selectedSpecials.length) this.selectedSpecials.forEach(tag => tag.selected = false)
+                if (selectedTags.length) this.selectedTags.forEach(tag => tag.selected = false)
                 if (selectedGenres.length) this.selectedGenres.forEach(tag => tag.selected = false)
                 if (selectedLanguages.length) this.selectedLanguages.forEach(lang => lang.selected = false)
                 if (price.min || price.max) { this.price.min = 0; this.price.max = 0; };
@@ -362,17 +385,19 @@
                 languages: 'marketplace/productsLanguages'
             }),
             query() {
-                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price, communitySize, activeUsers } = this
+                const { phrase, selectedTags, selectedGenres, selectedLanguages, price, communitySize, activeUsers } = this
                 const query = {}
+
                 if (phrase.length) query['name'] = { '$eq': phrase }
-                if (selectedSpecials.length) query['systemTags'] = { '$contains': selectedSpecials.map(tag => tag.value) }
-                if (selectedGenres.length) query['developerTags'] = { '$contains': selectedGenres.map(tag => tag.name) }
+                if (selectedTags.length) query['tags'] = { '$contains': selectedTags.map(tag => tag.value) }
+                if (selectedGenres.length) query['genres'] = { '$contains': selectedGenres.map(tag => tag.name) }
                 // if (selectedLanguages.length) query['languageSupport'] = {
                 //     '$contains': { name: selectedLanguages.map(lang => lang.name) }
                 // }
                 if (price.min || price.max) query['price'] = { '$between': [price.min, price.max | 300] }
                 if (communitySize) query['communitySize'] = { '$between': [communitySize, 999999999] }
                 if (activeUsers) query['activeUsers'] = { '$between': [activeUsers, 999999999] }
+
                 return query
             },
             resultsFiltered() {
@@ -395,8 +420,8 @@
             selectedGenres() {
                 return this.selectableTags.filter(tag => tag.selected)
             },
-            selectedSpecials() {
-                return this.systemTags.filter(tag => tag.selected)
+            selectedTags() {
+                return this.tags.filter(tag => tag.selected)
             },
             selectedLanguages() {
                 return this.selectableLanguages.filter(lang => lang.selected)
@@ -413,7 +438,7 @@
             filtersActive() {
                 return !!(this.selectedGenres.length ||
                     this.phrase.length ||
-                    this.selectedSpecials.length ||
+                    this.selectedTags.length ||
                     this.price.max || this.price.min ||
                     this.selectedLanguages.length ||
                     this.communitySize || this.activeUsers ||
@@ -423,7 +448,7 @@
                 const urlQuery = {}
                 const {
                     phrase,
-                    selectedSpecials,
+                    selectedTags,
                     selectedGenres,
                     selectedLanguages,
                     price,
@@ -435,12 +460,13 @@
                 if (phrase.length) urlQuery.name = phrase
                 if (price.min) urlQuery.priceMin = price.min
                 if (price.max) urlQuery.priceMax = price.max
-                if (selectedSpecials.length) urlQuery.specials = selectedSpecials.map(tag => tag.value)
+                if (selectedTags.length) urlQuery.specials = selectedTags.map(tag => tag.value)
                 if (selectedGenres.length) urlQuery.tags = selectedGenres.map(tag => tag.name)
                 if (selectedLanguages.length) urlQuery.langs = this.selectedLanguagesNames
                 if (communitySize) urlQuery.communitySize = communitySize
                 if (activeUsers) urlQuery.activeUsers = activeUsers
                 if (selectedPlatforms.length) urlQuery.platforms = this.selectedPlatformsNames
+                
                 return urlQuery
             }
         },
@@ -483,7 +509,7 @@
                 })
 
                 if (specials) {
-                    this.systemTags.forEach(tag => {
+                    this.tags.forEach(tag => {
                         if (specials.includes(tag.value)) tag.selected = true
                     })
                 }

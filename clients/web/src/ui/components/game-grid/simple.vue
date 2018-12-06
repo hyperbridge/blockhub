@@ -8,10 +8,10 @@
         >
             <div class="product-grid__item">
                 <div class="card-body padding-0">
-                    <a :href="`#/product/${item.id}`"><c-img class="card-img-top" :src="item.images.mediumTile" /></a>
+                    <a :href="`#/product/${item.id}`"><c-img class="card-img-top" :src="item.meta.images.mediumTile" /></a>
                     <h4><a :href="`#/product/${item.id}`">{{ item.name }}</a></h4>
                     <p class="card-text" hidden>{{ item.shortDescription }} </p>
-                    <c-tags :tags="item.developerTags"></c-tags>
+                    <c-tags :tags="item.tags.map(t => t.value)"></c-tags>
                 </div>
             </div>
         </div>

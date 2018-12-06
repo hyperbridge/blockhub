@@ -1,9 +1,10 @@
 <template>
     <c-layout navigationKey="project" :showRightPanel="false" :breadcrumbLinks="breadcrumbLinks" class="project-single-page">
         <div class="row" v-if="!project">
-            <div class="col-12">
+            <!-- <div class="col-12">
                 Project not found
-            </div>
+            </div> -->
+            <c-loading :enabled="!project" />
         </div>
         <div class="row" v-if="project">
             <div class="col-12">
