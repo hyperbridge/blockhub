@@ -23,7 +23,7 @@
             </div>
             <div class="col-12" v-if="curatorMode">
                 <c-block title="Congratulations" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                    Your profile is all setup. You are Curator #{{ chosenProfile.developerId }}
+                    Your profile is all setup.
 
                     <br /><br />
 

@@ -35,8 +35,6 @@ const getOS = () => {
 }
 
 const updateState = (savedData, updatedState = {}) => {
-    //let developerProfile = DB.application.config.data[0].account && DB.application.config.data[0].account.profiles.find(profile => profile.developerId !== undefined)
-
     rawData = {
         ...rawData,
         ...savedData,
@@ -49,7 +47,7 @@ const updateState = (savedData, updatedState = {}) => {
         initialized: BlockHub.initialized,
         account: DB.application.config.data[0].account || {},
         darklaunchFlags: DB.application.config.data[0].darklaunchFlags || [],
-        developerMode: savedData.developerMode != null ? savedData.developerMode : DB.application.config.data[0].account && DB.application.config.data[0].account.activeProfile && !!DB.application.config.data[0].account.activeProfile.developerId,
+        developerMode: savedData.developerMode != null ? savedData.developerMode : DB.application.config.data[0].account && DB.application.config.data[0].account.activeProfile && DB.application.config.data[0].account.activeProfile.role === 'developer',
         environmentMode: savedData.environmentMode != null ? savedData.environmentMode : BlockHub.GetMode(),
         externalState: savedData.externalState != null ? savedData.externalState : {},
         ...updatedState

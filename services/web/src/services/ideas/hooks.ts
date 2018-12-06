@@ -1,6 +1,6 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 
-const beforeCreate = function (options = {}) {
+const beforeCreate = function(options = {}) {
     return async context => {
         context.data.accountId = context.params.user.id
 
@@ -8,7 +8,7 @@ const beforeCreate = function (options = {}) {
     }
 }
 
-const beforeUpdate = function (options = {}) {
+const beforeUpdate = function(options = {}) {
     return async context => {
         const item = await context.app.service('/profiles').get(context.id)
 
@@ -21,7 +21,7 @@ const beforeUpdate = function (options = {}) {
     }
 }
 
-const afterUpdate = function (options = {}) {
+const afterUpdate = function(options = {}) {
     return async context => {
         context.result = {
             name: context.data.name,
@@ -32,7 +32,7 @@ const afterUpdate = function (options = {}) {
     }
 }
 
-const accessGate = function (options = {}) {
+const accessGate = function(options = {}) {
     return async context => {
         //console.log(context)
         const { app, method, result, params } = context

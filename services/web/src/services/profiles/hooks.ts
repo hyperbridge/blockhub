@@ -45,6 +45,7 @@ const { allowNull, wildcardsInLike } = require('../../hooks')
 
 const beforeCreate = function(options = {}) {
     return async context => {
+        console.log('[service=profiles, hook=beforeCreate]')
         context.data.accountId = context.params.user.id
 
         return context
@@ -54,6 +55,7 @@ const beforeCreate = function(options = {}) {
 
 const beforeUpdate = function(options = {}) {
     return async context => {
+        console.log('[service=profiles, hook=beforeUpdate]')
         const item = await context.app.service('/profiles').get(context.id)
 
         context.data = {
@@ -67,9 +69,11 @@ const beforeUpdate = function(options = {}) {
 
 const afterUpdate = function(options = {}) {
     return async context => {
+        console.log('[service=profiles, hook=afterUpdate]')
         context.result = {
             name: context.data.name,
-            avatar: context.data.avatar
+            avatar: context.data.avatar,
+            role: context.data.role
         }
 
         return context
@@ -78,6 +82,7 @@ const afterUpdate = function(options = {}) {
 
 const accessGate = function(options = {}) {
     return async context => {
+        console.log('[service=profiles, hook=accessGate]')
         //console.log(context)
         const { app, method, result, params } = context
         const items = method === 'find' ? result.data : [result]
@@ -88,7 +93,6 @@ const accessGate = function(options = {}) {
         }
 
         await Promise.all(items.map(async item => {
-            console.log(item.accountId, account.id)
             if (method === 'create') {
             }
             else if (method === 'update') {

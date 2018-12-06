@@ -17,7 +17,7 @@ export default class Review extends Model {
     owner!: Profile
     ownerId!: Number
 
-    
+
 
     static get tableName() {
         return 'reviews'

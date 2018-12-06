@@ -421,7 +421,10 @@ const router = new Router({
         {
             path: '/developer/apply',
             name: 'Developer Application',
-            component: (resolve) => require(['@/ui/screens/developer-application'], resolve)
+            component: (resolve) => require(['@/ui/screens/developer-application'], resolve),
+            meta: {
+                permission: 'signedIn'
+            }
         },
         {
             path: '/developer/new-product',

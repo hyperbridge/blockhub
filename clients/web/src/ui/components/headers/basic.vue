@@ -110,7 +110,7 @@
                             </button>
                         </li>
                         <li>
-                            <c-quick-launch class="quick-launch" />
+                            <c-quick-launch class="quick-launch" style="margin-top: -7px;" />
                         </li>
                         <li v-if="signedIn" class="token">
                             <a href="#/token">

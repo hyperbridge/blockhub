@@ -53,7 +53,7 @@ export default class Profile extends Model {
             properties: {
                 id: { type: 'integer' },
                 accountId: { type: 'integer' },
-                address: { type: 'string' }
+                address: { type: ['string', 'null'] }
             },
             options: {
                 timestamps: true
@@ -165,7 +165,7 @@ export default class Profile extends Model {
             },
             pledges: {
                 relation: Model.ManyToManyRelation,
-                modelClass: Profile,
+                modelClass: Project,
                 join: {
                     from: 'profiles.id',
                     to: 'projects.id',

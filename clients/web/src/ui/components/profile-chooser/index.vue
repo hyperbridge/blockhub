@@ -98,7 +98,7 @@
                     ['application/account', { activeProfile: profile }]
                 )
 
-                this.$store.state.application.developerMode = !!profile.developerId
+                this.$store.state.application.developerMode = profile.role === 'developer'
             }
         }
     }

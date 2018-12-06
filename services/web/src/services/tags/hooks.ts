@@ -1,17 +1,17 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 
-const fillTag = function (tag) {
+const fillTag = function(tag) {
     return tag
 }
 
-const fillOne = function (options = {}) {
+const fillOne = function(options = {}) {
     return async context => {
         context.data = fillTag(context.data)
         return context
     }
 }
 
-const fillAll = function (options = {}) {
+const fillAll = function(options = {}) {
     return async context => {
         context.result.data = context.result.data.map((tag) => {
             return fillTag(tag)
@@ -21,7 +21,7 @@ const fillAll = function (options = {}) {
     }
 }
 
-const create = function (options = {}) {
+const create = function(options = {}) {
     return async context => {
         const { app, data } = context
 
@@ -53,7 +53,7 @@ const create = function (options = {}) {
 }
 
 
-const validatePermission = function (options = {}) {
+const validatePermission = function(options = {}) {
     return async context => {
         const { app, data } = context
 

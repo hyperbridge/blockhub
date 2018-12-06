@@ -20,13 +20,13 @@ export default function(app) {
 
     app.use('/profiles/:id/convert', {
         async update(id, data, params) {
-            const { role } = data
+            console.log('[service=/profiles/:id/convert, action=update]')
 
-            const result = await app.service('/profiles').get(id)
+            await Model.query()
+                .where({ id })
+                .update(data)
 
-            result.name = role
-
-            return result
+            return data
         }
     })
 

@@ -30,7 +30,7 @@
             </div>
             <div class="col-12" v-if="developerMode">
                 <c-block title="Congratulations" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                    Your profile is all setup. You are Developer #{{ chosenProfile.developerId }}
+                    Your profile is all setup.
 
                     <br /><br />
 
@@ -65,17 +65,10 @@
                     {
                         role: 'developer'
                     }
-                ).then(function() {
-                    
+                ).then((profile) => {
+                    this.$store.state.application.account.activeProfile.role = profile.role
                 })
             },
-        },
-        watch: {
-            '$store.state.application.account.activeProfile.role'(newVal) {
-                if (newVal === 'developer') {
-                    this.$store.state.application.developerMode = true
-                }
-            }
         }
     }
 </script>

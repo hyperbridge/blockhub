@@ -185,7 +185,7 @@
         methods: {
             setDefault(profile) {
                 this.$store.state.application.account.activeProfile = profile
-                //this.$store.state.application.developerMode = !!profile.developerId
+                this.$store.state.application.developerMode = profile.role === 'developer'
                 // if (this.defaultProfile) this.defaultProfile.default = false
                 // profile.default = true
 
@@ -264,17 +264,6 @@
                 //this.$store.state.application.account.profiles = this.profiles
                 this.$store.dispatch('application/updateState')
             }
-        },
-        created() {
-            this.$store.dispatch('profiles/find', {
-                query: {
-                    accountId: this.$store.state.auth.user.id,
-                    $sort: {
-                        createdAt: -1
-                    },
-                    $limit: 25
-                }
-            })
         },
         computed: {
             profiles() {

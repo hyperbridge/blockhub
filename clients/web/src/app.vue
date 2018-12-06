@@ -379,7 +379,15 @@
 
                 this.$store.state.application.activeModal = false
 
-                this.renderCondition = this.$route.meta.renderCondition || (this.$route.meta.permission === 'signedIn' ? 'user' : 'initialized')
+                if (this.$route.meta.renderCondition) {
+                    this.renderCondition = this.$route.meta.renderCondition
+                } else if (this.$route.meta.permission === 'signedIn') {
+                    this.renderCondition = 'user'
+                } else if (this.$route.meta.permission === 'developerMode') {
+                    this.renderCondition = 'user'
+                } else {
+                    this.renderCondition = 'initialized'
+                }
 
                 this.updateEditorMode()
                 this.ensureDesktopWelcome(to)
@@ -387,27 +395,20 @@
             '$store.state.auth.user'(newVal) {
                 if (this.$store.state.application.signedIn && newVal === undefined) {
                     this.$store.state.application.signedIn = false
-                    //this.$router.replace({ name: 'Home' })
                 } else {
                     this.$store.state.application.signedIn = true
-                    //this.$router.replace({ name: 'Home' })
 
                     this.$store.state.application.account = {
                         ...this.$store.state.application.account,
                         ...this.$store.state.auth.user
                     }
-
-                    // this.profiles.find(profile => this.$store.state.application.account.activeProfile ? profile.id == this.$store.state.application.account.activeProfile.id : null)
-                    if (!this.$store.state.application.account.activeProfile.id) {
-                        this.$store.state.application.account.activeProfile = this.$store.getters['accounts/current'].profiles[0]
-                    }
                 }
             },
-            '$store.state.profiles.ids'(newVal) {
-                if (!this.$store.state.application.account.activeProfile.id) {
-                    this.$store.state.application.account.activeProfile = this.$store.getters['profiles/list'][0]
+            '$store.state.application.account.activeProfile.role'(newVal) {
+                if (newVal === 'developer') {
+                    this.$store.state.application.developerMode = true
                 }
-            },
+            }
         }
     }
 </script>

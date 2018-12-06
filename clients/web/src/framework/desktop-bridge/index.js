@@ -151,7 +151,7 @@ export const setAccountRequest = async (data) => {
 
         DB.application.config.data[0].account.activeProfile = data.account.profiles.find(i => i.id === data.account.activeProfile.id)
 
-        DB.application.config.data[0].developerMode = !!DB.application.config.data[0].account.activeProfile.developerId
+        DB.application.config.data[0].developerMode = DB.application.config.data[0].account.activeProfile.role === 'developer'
 
         DB.save()
 

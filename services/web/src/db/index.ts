@@ -170,7 +170,7 @@ export const getAccount = async ({ id, email, fieldKey }): Promise<Account | und
 
     if (!result) { return Promise.resolve(result) }
 
-    result.isActive = result.isActive || !!result.passwordHash
+    result.status = result.status || (!!result.passwordHash ? 'active' : 'disabled')
 
     return Promise.resolve(result)
 }

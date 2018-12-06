@@ -87,10 +87,10 @@ export default {
             position: absolute;
             border-radius: 4px;
             left: 0;
-            top: 1px;
+            top: 3px;
             width: 100%;
             background: #464759;
-            height: 7px;
+            height: 5px;
             z-index: 2;
         }
     }
@@ -107,12 +107,12 @@ export default {
     }
     .range-slider__button {
         position: absolute;
-        width: 20px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
         background-color: #fff;
         border-radius: 10px;
         transform: translateX(-5px);
-        top: -4.5px;
+        top: -2.5px;
         z-index: 4;
     }
 
