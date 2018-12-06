@@ -11,6 +11,9 @@
                     <c-button status="opacity-info" size="xs">
                         Add
                     </c-button>
+                    <c-button status="plain" size="xs">
+                        <i class="fas fa-times"></i>
+                    </c-button>
                 </div>
             </c-chat-user>
         </div>
