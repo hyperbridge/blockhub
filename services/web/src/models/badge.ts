@@ -10,6 +10,7 @@ export default class Badge extends Model {
     value!: String
     meta!: Object
     parentId!: Number
+    status!: String
 
     name!: String
 

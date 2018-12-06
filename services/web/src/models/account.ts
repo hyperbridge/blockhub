@@ -9,6 +9,7 @@ export default class Account extends Model {
     value!: String
     meta!: Object
     parentId!: Number
+    status!:String
 
     email!: String
     firstName!: String

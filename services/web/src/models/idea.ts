@@ -12,7 +12,9 @@ export default class Idea extends Model {
     updatedAt!: String
     parentId!: Number
 
-    profileId!: Number
+    ownerId!: Number
+    owner!: Profile
+
     type!: String // [battlepass, app, game, etc.]
 
     static get tableName() {
@@ -40,6 +42,14 @@ export default class Idea extends Model {
                 join: {
                     from: 'ideas.parentId',
                     to: 'nodes.id'
+                }
+            },
+            owner: {
+                relation: Model.HasOneRelation,
+                modelClass: Profile,
+                join: {
+                    from: 'ideas.ownerId',
+                    to: 'profiles.id'
                 }
             },
             backers: {

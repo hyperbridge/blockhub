@@ -3,16 +3,14 @@ const populateProfile = require('../../hooks/populate-profile')
 
 const create = function(options = {}) {
     return async context => {
-        const { data } = context
-
         // // Throw an error if we didn't get a text
-        // if (!data.text) {
-        //     throw new Error('A message must have a text')
-        // }
+        if (!context.data.value) {
+            throw new Error('A message must have value')
+        }
 
         const profile = context.params.profile
 
-        const text = context.data.text
+        const value = context.data.value
             // Messages can't be longer than 400 characters
             .substring(0, 400)
 
@@ -20,16 +18,11 @@ const create = function(options = {}) {
             throw new Error('A message must have a profile')
         }
 
-        // Override the original data (so that people can't submit additional stuff)
         context.data = {
-            text,
-            // Set the profile id
-            profileId: profile.id,
-            // Add the current date
-            createdAt: new Date()
+            value,
+            ownerId: profile.id
         }
 
-        // Best practise, hooks should always return the context
         return context
     }
 }

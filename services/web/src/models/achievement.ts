@@ -9,6 +9,7 @@ export default class Achievement extends Model {
     value!: String
     meta!: Object
     parentId!: Number
+    status!: String
 
     static get tableName() {
         return 'achievements'

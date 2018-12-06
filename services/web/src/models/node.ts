@@ -15,9 +15,12 @@ export default class NodeModel extends Model {
 
     fromAccount!: Account
     fromAccountId!: Number
+    toAccount!: Account
     toAccountId!: Number
 
+    fromProfile!: Profile
     fromProfileId!: Number
+    toProfile!: Profile
     toProfileId!: Number
 
     fromBadgeId!: Number
@@ -112,19 +115,35 @@ export default class NodeModel extends Model {
 
     static get relationMappings(): RelationMappings {
         return {
-            profile: {
+            fromProfile: {
                 relation: Model.HasOneRelation,
                 modelClass: Profile,
                 join: {
-                    from: 'nodes.profileId',
+                    from: 'nodes.fromProfileId',
                     to: 'profiles.id'
                 }
             },
-            account: {
+            toProfile: {
+                relation: Model.HasOneRelation,
+                modelClass: Profile,
+                join: {
+                    from: 'nodes.toProfileId',
+                    to: 'profiles.id'
+                }
+            },
+            fromAccount: {
                 relation: Model.HasOneRelation,
                 modelClass: Account,
                 join: {
-                    from: 'nodes.accountId',
+                    from: 'nodes.fromAccountId',
+                    to: 'accounts.id'
+                }
+            },
+            toAccount: {
+                relation: Model.HasOneRelation,
+                modelClass: Account,
+                join: {
+                    from: 'nodes.toAccountId',
                     to: 'accounts.id'
                 }
             },
@@ -133,11 +152,15 @@ export default class NodeModel extends Model {
 
     from() {
         if (this.fromAccountId) return this.fromAccount
+        if (this.fromProfileId) return this.fromProfile
 
         throw new Error("No FROM relation")
     }
 
     to() {
+        if (this.toAccountId) return this.toAccount
+        if (this.toProfileId) return this.toProfile
+
         throw new Error("No TO relation")
     }
 

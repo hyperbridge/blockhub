@@ -48,21 +48,20 @@ export default class Leaderboard extends Model {
 
     static get relationMappings(): RelationMappings {
         return {
-            // has many profiles
-            product: {
-                relation: Model.HasOneRelation,
-                modelClass: NodeModel,
-                join: {
-                    from: 'leaderboards.productId',
-                    to: 'products.id'
-                }
-            },
             parent: {
                 relation: Model.HasOneRelation,
                 modelClass: NodeModel,
                 join: {
                     from: 'leaderboards.parentId',
                     to: 'nodes.id'
+                }
+            },
+            product: {
+                relation: Model.HasOneRelation,
+                modelClass: NodeModel,
+                join: {
+                    from: 'leaderboards.productId',
+                    to: 'products.id'
                 }
             },
             players: {

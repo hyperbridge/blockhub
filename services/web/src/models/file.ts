@@ -12,9 +12,8 @@ export default class File extends Model {
     meta!: String
     parentId!: Number
 
-    storageType!: String
+    storageType!: String // s3, github, etc.
     accessType!: String
-    link!: String
 
     static get tableName() {
         return 'files'
@@ -43,20 +42,12 @@ export default class File extends Model {
                     to: 'nodes.id'
                 }
             },
-            profile: {
+            owner: {
                 relation: Model.HasOneRelation,
                 modelClass: Profile,
                 join: {
-                    from: 'files.profileId',
+                    from: 'files.ownerId',
                     to: 'profiles.id'
-                }
-            },
-            replyTo: {
-                relation: Model.HasOneRelation,
-                modelClass: Message,
-                join: {
-                    from: 'files.replyToId',
-                    to: 'messages.id'
                 }
             },
         }

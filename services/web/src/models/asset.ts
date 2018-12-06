@@ -13,6 +13,7 @@ export default class Asset extends Model {
     meta!: Object
     parentId!: Number
     score!: Number
+    status!: String
 
     static get tableName() {
         return 'assets'

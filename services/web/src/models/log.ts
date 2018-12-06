@@ -33,7 +33,7 @@ export default class Log extends Model {
                 relation: Model.HasOneRelation,
                 modelClass: Node,
                 join: {
-                    from: 'licenses.parentId',
+                    from: 'logs.parentId',
                     to: 'nodes.id'
                 }
             },

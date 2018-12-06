@@ -32,6 +32,7 @@ export default function(app) {
 
     app.service('/profiles').hooks(hooks)
     app.service('/profiles/:id/convert').hooks(hooks)
+    //app.service('/profiles/:id/tags').hooks(hooks)
 }
 
 // add to base:

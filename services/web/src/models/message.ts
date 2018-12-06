@@ -10,7 +10,7 @@ export default class Message extends Model {
     updatedAt!: String
     parentId!: Number
 
-    profileId!: Number
+    ownerId!: Number
 
     static get tableName() {
         return 'messages'
@@ -39,11 +39,11 @@ export default class Message extends Model {
                     to: 'nodes.id'
                 }
             },
-            profile: {
+            owner: {
                 relation: Model.HasOneRelation,
                 modelClass: Profile,
                 join: {
-                    from: 'messages.profileId',
+                    from: 'messages.ownerId',
                     to: 'profiles.id'
                 }
             },
