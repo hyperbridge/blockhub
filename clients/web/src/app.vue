@@ -414,10 +414,21 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     #app {
         -webkit-user-select: none;
+        
+        #content {
+            -webkit-user-select: text;
+
+            img {
+                -webkit-user-select: none;
+            }
+        }
     }
+</style>
+
+<style lang="scss" scoped>
 
     .fixed-panel {
         width: 350px;
