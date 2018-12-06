@@ -486,24 +486,6 @@
             window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'
         },
         updated() {
-            $('#tag-editor').select2()
-                .on('select2:select', (e) => {
-                    let data = e.params.data
-
-                    if (!this.project.developerTags.includes(data.text)) {
-                        this.project.developerTags.push(data.text)
-                    }
-
-                    Vue.set(this.project, 'developerTags', this.project.developerTags)
-                })
-                .on('select2:unselect', (e) => {
-                    let data = e.params.data
-
-                    this.project.developerTags = this.project.developerTags.filter(e => e !== data.text)
-
-                    Vue.set(this.project, 'developerTags', this.project.developerTags)
-                })
-
             $('#summernote').summernote({
                 placeholder: 'Type in your text',
                 tabsize: 2,

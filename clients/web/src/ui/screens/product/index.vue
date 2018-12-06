@@ -559,24 +559,6 @@
             },
         },
         updated() {
-            // $('#tag-editor').select2()
-            //     .on('select2:select', (e) => {
-            //         let data = e.params.data
-            //
-            //         if (!this.product.developerTags.includes(data.text)) {
-            //             this.product.developerTags.push(data.text)
-            //         }
-            //
-            //         Vue.set(this.product, 'developerTags', this.product.developerTags)
-            //     })
-            //     .on('select2:unselect', (e) => {
-            //         let data = e.params.data
-            //
-            //         this.product.developerTags = this.product.developerTags.filter(e => e !== data.text)
-            //
-            //         Vue.set(this.product, 'developerTags', this.product.developerTags)
-            //     })
-
             $('#summernote').summernote({
                 placeholder: 'Type in your text',
                 tabsize: 2,
