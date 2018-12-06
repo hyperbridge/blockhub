@@ -252,21 +252,26 @@
                         </div>
                         <c-content-navigation
                             v-else
+                            class="row"
                             :items="resultsFiltered"
                             :setItemsLimit="12"
                             :setItemsPerPage="12"
                         >
-                            <c-project-card
+                            <div
                                 class="p-2 col-3"
-                                :image="project.meta.images.mediumTile" 
-                                :description="project.description" 
-                                :funds="project.meta.funds" 
-                                :parentName="project.product && project.product.name" 
-                                :parentDeveloper="project.product && project.product.developer" 
-                                :parentImage="project.product && project.product.meta.images.mediumTile"
-                                :id="project.id"
-                                v-for="(project, index) in resultsFiltered" :key="index"
-                            />
+                                v-for="(project, index) in resultsFiltered" 
+                                :key="index"
+                            >
+                                <c-project-card
+                                    :image="project.meta.images && project.meta.images.mediumTile" 
+                                    :description="project.description" 
+                                    :funds="project.meta.funds" 
+                                    :parentName="project.product && project.product.name" 
+                                    :parentDeveloper="project.product && project.product.developer" 
+                                    :parentImage="project.product && project.product.meta.images.mediumTile"
+                                    :id="project.id"
+                                />
+                            </div>
                             <!-- <c-game-grid
                                 slot-scope="{ items }"
                                 :itemInRow="2"
@@ -274,7 +279,8 @@
                                 :items="items"
                                 itemBg="transparent"
                                 showTime
-                            /> -->
+                            >
+                            </c-game-grid> -->
                         </c-content-navigation>
                     </div>
                 </div>

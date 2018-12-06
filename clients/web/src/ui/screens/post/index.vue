@@ -42,7 +42,7 @@
     export default {
         props: ['projectID', 'postID'],
         components: {
-            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-badges': (resolve) => require(['@/ui/components/project/badges'], resolve)
         },
         data(){

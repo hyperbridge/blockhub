@@ -261,7 +261,7 @@ export default {
             return this.$store.state.application.account
         },
         activeProfile() {
-            return this.$store.state.application.account.activeProfile
+            return this.$store.state.application.activeProfile
         },
         isLocked() {
             return this.$store.state.application.locked
@@ -279,7 +279,7 @@ export default {
             return this.$store.state.application.developerMode
         },
         signedIn() {
-            return this.$store.state.application.signedIn
+            return this.$store.state.application.signedIn && this.$store.state.auth.user
         },
         desktopMode() {
             return this.$store.state.application.desktopMode

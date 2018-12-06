@@ -256,7 +256,7 @@
             profile() {
                 const { products } = this.$store.state.marketplace
                 const { projects } = this.$store.state.funding
-                const profile = this.$store.state.application.account.activeProfile
+                const profile = this.$store.state.application.activeProfile
                 return {
                     ...profile,
                     productWishlist: Object.keys(profile.productWishlist || []).map(id => products[id]),

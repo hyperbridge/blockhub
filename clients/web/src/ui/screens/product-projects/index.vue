@@ -49,7 +49,7 @@
 export default {
     props: ['product'],
     components: {
-        'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+        'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
         'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve)
     },
     computed: {

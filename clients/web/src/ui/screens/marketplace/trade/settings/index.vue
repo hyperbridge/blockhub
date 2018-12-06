@@ -54,7 +54,7 @@
                 return this.$store.getters['application/account'];
             },
             profile() {
-                return this.account.activeProfile;
+                return this.activeProfile;
             },
             tradeURL() {
                 const { tradeURLId } = this.account;

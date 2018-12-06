@@ -64,11 +64,9 @@
         computed: {
         },
         watch: {
-            '$store.state.application.signedIn'(newVal) {
-                if (newVal === true) {
-                    this.$router.push({ path: '/' })
-                    this.$store.commit('application/activateModal', null)
-                }
+            '$store.state.auth.user'(newVal) {
+                //this.$router.push({ path: '/' })
+                this.$store.commit('application/activateModal', null)
             }
         },
         methods: {

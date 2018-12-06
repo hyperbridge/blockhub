@@ -16,7 +16,7 @@
                 <div v-if="!developerMode" style="text-align: center">
                     <c-user-card
                         class="col-3 margin-auto"
-                        :user="$store.state.application.account.activeProfile"
+                        :user="$store.state.application.activeProfile"
                         :previewMode="true"
                         :class="{ 'default': true }"
                     />
@@ -58,7 +58,7 @@
         },
         methods: {
             convertProfile() {
-                const profileId = this.$store.state.application.account.activeProfile.id
+                const profileId = this.$store.state.application.activeProfile.id
 
                 BlockHub.feathersClient.service(`/profiles/:id/convert`).update(
                     profileId,
@@ -66,7 +66,7 @@
                         role: 'developer'
                     }
                 ).then((profile) => {
-                    this.$store.state.application.account.activeProfile.role = profile.role
+                    this.$store.state.application.activeProfile.role = profile.role
                 })
             },
         }

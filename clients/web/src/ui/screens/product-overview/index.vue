@@ -198,7 +198,7 @@
                 return this.$refs.streamsSlider.swiper
             },
             wishlist() {
-                return this.$store.state.application.account.activeProfile && this.$store.state.application.account.activeProfile.productWishlist || {}
+                return this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.productWishlist || {}
             },
             streams() {
                 return this.product.streams

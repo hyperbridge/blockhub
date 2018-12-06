@@ -83,7 +83,7 @@
                 return this.$store.getters['assets/assets']
             },
             profile() {
-                return this.$store.state.application.account.activeProfile
+                return this.$store.state.application.activeProfile
             }
         },
         created() {

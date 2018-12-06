@@ -123,7 +123,7 @@
                     .filter(([id, offer]) => offer.asset.id == this.assetId);
             },
             profile() {
-                return this.$store.state.application.account.activeProfile
+                return this.$store.state.application.activeProfile
             }
         }
     }

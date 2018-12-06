@@ -219,7 +219,7 @@
                                 eth: this.address,
                                 email: this.email,
                                 secret: this.account.secret_answer_2,
-                                profile: this.account.activeProfile && this.account.activeProfile.address
+                                profile: this.activeProfile && this.activeProfile.address
                             },
                             timestamp: (new Date).toISOString()
                         }

@@ -44,7 +44,7 @@
         },
         data() {
             let developerProfile = this.$store.state.application.account.profiles.find(profile => profile.curatorId !== undefined)
-            let chosenProfile = this.$store.state.application.account.profiles.find(profile => profile.id == this.$store.state.application.account.activeProfile.id)
+            let chosenProfile = this.$store.state.application.account.profiles.find(profile => profile.id == this.$store.state.application.activeProfile.id)
 
             if (!chosenProfile && this.$store.state.application.account.profiles.length) {
                 chosenProfile = this.$store.state.application.account.profiles[0]

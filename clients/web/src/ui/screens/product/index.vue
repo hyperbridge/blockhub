@@ -49,7 +49,7 @@
                                     <!--</select>-->
                                 </div>
                             </div>
-                            <c-tags-list :tags="product.developerTags" v-if="!editing"></c-tags-list>
+                            <c-tags :tags="product.developerTags" v-if="!editing"></c-tags>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
@@ -292,7 +292,7 @@
             'c-product-community': (resolve) => require(['@/ui/screens/product-community'], resolve),
             'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic.vue'], resolve),
             'c-topic-item': (resolve) => require(['@/ui/components/help/topic-item'], resolve),
-            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
             Multiselect
@@ -422,7 +422,7 @@
                 if (this.id === 'new') {
                     this.product.type = 'game'
 
-                    Brdge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.account.activeProfile, product: this.product }).then((data) => {
+                    Brdge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.activeProfile, product: this.product }).then((data) => {
                         const product = DB.marketplace.products.insert(data)
                         DB.save()
 

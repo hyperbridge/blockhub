@@ -300,7 +300,7 @@
                 this.advanced = !this.advanced
             },
             create() {
-                this.project.ownerId = this.$store.state.application.account.activeProfile.id
+                this.project.ownerId = this.$store.state.application.activeProfile.id
 
                 this.$store.dispatch('projects/create', this.project).then((projectResult) => {
                     this.project.id = projectResult.id
@@ -384,7 +384,7 @@
                 // const cmd = {
                 //     key: run.toString(),
                 //     params: {
-                //         profile: this.$store.state.application.account.activeProfile,
+                //         profile: this.$store.state.application.activeProfile,
                 //         project: this.project
                 //     }
                 // }

@@ -79,7 +79,7 @@ const community = {
             { dispatch, rootGetters: { ['application/account']: account }},
             [name, itemId]
         ) {
-            const profile = account.activeProfile
+            const profile = activeProfile
             const prop = [name + '_wishlist']
             const wishlist = { ...profile[prop] }
 

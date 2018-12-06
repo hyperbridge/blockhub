@@ -371,13 +371,14 @@
             this.ensureDesktopWelcome()
         },
         created() {
+            this.$store.state.application.signedIn = false
         },
         watch: {
             '$route'(to, from) {
                 $('body').removeClass('show-sidebar')
                 $('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-bars')
 
-                this.$store.state.application.activeModal = false
+                this.$store.state.application.activeModal = null
 
                 if (this.$route.meta.renderCondition) {
                     this.renderCondition = this.$route.meta.renderCondition
@@ -404,7 +405,7 @@
                     }
                 }
             },
-            '$store.state.application.account.activeProfile.role'(newVal) {
+            '$store.state.application.activeProfile.role'(newVal) {
                 if (newVal === 'developer') {
                     this.$store.state.application.developerMode = true
                 }

@@ -39,34 +39,34 @@
                         <div class="editor-container">
                             <div class="editor" v-if="editing">
                                 <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                        @click="activateElement('developerTags')"
-                                        v-if="!activeElement['developerTags']" style="margin-bottom: 20px">Change
+                                        @click="activateElement('tags')"
+                                        v-if="!activeElement['tags']" style="margin-bottom: 20px">Change
                                     Tags <span class="fa fa-edit"></span></button>
                                 <div class="form-control-element tag-editor form-control-element--right"
-                                        v-if="activeElement['developerTags']">
+                                        v-if="activeElement['tags']">
                                     <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
                                         <!--<option v-for="(tag, index) in authorTagOptions" :key="index"-->
-                                                <!--:selected="project.developerTags.includes(tag)">{{ tag }}-->
+                                                <!--:selected="project.tags.includes(tag)">{{ tag }}-->
                                         <!--</option>-->
                                     <!--</select>-->
 
-                                    <multiselect v-model="project.developerTags"
+                                    <multiselect v-model="project.tags"
                                                     class="dark-mode"
                                                     :multiple="true"
                                                     :taggable="true"
                                                     :options="authorTagOptions">
-
                                     </multiselect>
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary"
                                         style="">
                                             <span class="fa fa-check"
-                                                    @click="deactivateElement('developerTags')"></span>
+                                                    @click="deactivateElement('tags')"></span>
                                     </div>
                                 </div>
                             </div>
-                            <c-tags-list :tags="project.developerTags"
-                                            v-if="!editing || !activeElement['developerTags']"></c-tags-list>
+
+                            <c-tags :tags="project.tags.map(t => t.value)"
+                                            v-if="!editing || !activeElement['tags']"></c-tags>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
@@ -320,7 +320,7 @@
             }
         },
         components: {
-            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-badges': (resolve) => require(['@/ui/components/project/badges'], resolve),
             'c-rating-block': (resolve) => require(['@/ui/components/rating-block'], resolve),
             'c-project-overview': (resolve) => require(['@/ui/screens/project-overview'], resolve),
@@ -340,7 +340,7 @@
                     name: false,
                     backgroundImage: false,
                     storeImage: false,
-                    developerTags: false,
+                    tags: false,
                     description: false,
                     content: false
                 },
@@ -476,7 +476,8 @@
             if (this.id !== 'new') {
                 this.$store.dispatch('projects/find', {
                     query: {
-                        id: Number(this.id)
+                        id: Number(this.id),
+                        $eager: 'tags'
                     }
                 })
             }

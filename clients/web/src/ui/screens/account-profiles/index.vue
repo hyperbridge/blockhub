@@ -184,7 +184,7 @@
         },
         methods: {
             setDefault(profile) {
-                this.$store.state.application.account.activeProfile = profile
+                this.$store.state.application.activeProfile = profile
                 this.$store.state.application.developerMode = profile.role === 'developer'
                 // if (this.defaultProfile) this.defaultProfile.default = false
                 // profile.default = true
@@ -281,7 +281,7 @@
                 return this.$store.getters['profiles/list']
             },
             defaultProfile() {
-                return this.$store.state.application.account.activeProfile
+                return this.$store.state.application.activeProfile
             },
             profileClone() {
                 return this.editedProfile ? { ...this.editedProfile } : {}

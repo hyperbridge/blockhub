@@ -168,7 +168,7 @@
         },
         computed: {
             activeProfile() {
-                return this.$store.state.application.account && this.$store.state.application.account.activeProfile
+                return this.$store.state.application.account && this.$store.state.application.activeProfile
             },
         },
         methods: {

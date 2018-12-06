@@ -16,7 +16,7 @@
     export default {
         props: ['product'],
         components: {
-            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-assets-grid': (resolve) => require(['@/ui/components/assets-grid'], resolve),
             'c-assets-list-item': (resolve) => require(['@/ui/components/assets-list-item'], resolve)
         }

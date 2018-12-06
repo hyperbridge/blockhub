@@ -148,7 +148,7 @@
         components: {
             'c-game-plan': (resolve) => require(['@/ui/components/game-plans/plan'], resolve),
             'c-screen-gallery': (resolve) => require(['@/ui/components/screen-gallery/gallery'], resolve),
-            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-rating-block': (resolve) => require(['@/ui/components/rating-block'], resolve),
             'c-frequently-traded-assets': (resolve) => require(['@/ui/components/frequently-traded-assets'], resolve),
             'c-community-spotlight': (resolve) => require(['@/ui/components/community-spotlight'], resolve),
@@ -187,7 +187,7 @@
         },
         computed: {
             wishlist() {
-                return this.$store.state.application.account.activeProfile && this.$store.state.application.account.activeProfile.productWishlist || {};
+                return this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.productWishlist || {};
             }
         }
     }

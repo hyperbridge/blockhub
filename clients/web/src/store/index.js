@@ -213,7 +213,7 @@ window.BlockHub.importSeedData = () => {
     if (!DB.application.config.data[0].account.address) {
         DB.application.config.data[0].account.wallets = seed.wallets
         DB.application.config.data[0].account.profiles = seed.profiles
-        DB.application.config.data[0].account.activeProfile = {
+        DB.application.config.data[0].activeProfile = {
             id: seed.profiles[0].id
         }
     }
@@ -242,7 +242,7 @@ window.BlockHub.resetSeedData = () => {
     if (!DB.application.config.data[0].account.address) {
         DB.application.config.data[0].account.wallets = []
         DB.application.config.data[0].account.profiles = []
-        DB.application.config.data[0].account.activeProfile = { id: null }
+        DB.application.config.data[0].activeProfile = { id: null }
     }
 
     DB.application.config.data[0].account.notifications = []

@@ -499,7 +499,7 @@
                 return this.$store.state.application.connection.internet && this.$store.state.application.connection.datasource
             },
             chosenProfile() {
-                return this.$store.state.application.account.profiles.find(profile => profile.id == this.$store.state.application.account.activeProfile.id)
+                return this.$store.state.application.account.profiles.find(profile => profile.id == this.$store.state.application.activeProfile.id)
             },
             shortcuts() {
                 return this.$store.state.application.shortcuts
@@ -514,7 +514,7 @@
                 return this.$store.state.application.signedIn
             },
             activeProfile() {
-                return this.$store.state.application.account && this.$store.state.application.account.activeProfile
+                return this.$store.state.application.account && this.$store.state.application.activeProfile
             },
             activeNotification() {
                 return this.$store.state.application.activeNotification || {}

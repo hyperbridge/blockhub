@@ -99,6 +99,7 @@
 
 <style lang="scss" scoped>
     .content-navigation-wrapper {
+        width: 100%;
         margin: 15px 0;
         display: flex;
         justify-content: center;

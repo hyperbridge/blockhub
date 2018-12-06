@@ -230,7 +230,7 @@
                     .filter(([id, prosp]) => prosp.user.id == this.profileId);
             },
             profile() {
-                return this.$store.state.application.account.activeProfile
+                return this.$store.state.application.activeProfile
             }
         },
         watch: {

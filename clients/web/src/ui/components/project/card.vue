@@ -14,9 +14,9 @@
             <div class="description">{{ description }}</div>
         </a>
         <c-money-info label="Obtained Funds"
-            :percent="goal_progress"
-            :amount="funds.obtained"
-            :goal="funds.goal"
+            :percent="goalProgress"
+            :amount="funds ? funds.obtained : 0"
+            :goal="funds ? funds.goal : 0"
         />
         <div class="item-action">
             <c-button status="info" :href="`#/project/${id}`" iconHide>Check it out</c-button>
@@ -27,7 +27,6 @@
 
 <script>
 export default {
-    name: 'c-project-card',
     components: {
         'c-money-info': (resolve) => require(['@/ui/components/money-info'], resolve),
     },
@@ -47,13 +46,16 @@ export default {
         }
     },
     computed: {
-        goal_progress() {
-            const { obtained, goal } = this.funds;
-            return Math.round(obtained / goal * 100);
+        goalProgress() {
+            if (!this.funds) return 0
+
+            const { obtained, goal } = this.funds
+
+            return Math.round(obtained / goal * 100)
         }
     },
     filters: {
-        currency_sign(cur_name) {
+        currencySign(cur_name) {
             switch(cur_name) {
                 case 'EUR':
                     return '€'

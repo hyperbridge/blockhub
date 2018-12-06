@@ -632,6 +632,22 @@
                 "native": "繁體中文"
             }
         ],
+        "activeProfile": {
+            "id": null,
+            "name": null,
+            "role": "user",
+            "developerId": null,
+            "badges": [],
+            "assets": [],
+            "licenses": [],
+            "products": [],
+            "messages": [],
+            "address": null,
+            "passphrase": null,
+            "privateKey": null,
+            "productWishlist": {},
+            "productFavorites": {}
+        },
         "account": {
             "address": null,
             "verificationTimestamp": null,
@@ -644,22 +660,6 @@
             "email": null,
             "currency": {},
             "language": {},
-            "activeProfile": {
-                "id": null,
-                "name": null,
-                "role": "user",
-                "developerId": null,
-                "badges": [],
-                "assets": [],
-                "licenses": [],
-                "products": [],
-                "messages": [],
-                "address": null,
-                "passphrase": null,
-                "privateKey": null,
-                "productWishlist": {},
-                "productFavorites": {}
-            },
             "notifications": [],
             "wallets": [],
             "profiles": [],

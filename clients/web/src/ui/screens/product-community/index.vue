@@ -34,7 +34,7 @@
     export default {
         props: ['product'],
         components: {
-            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-item': (resolve) => require(['@/ui/components/community/post-item'], resolve),
             'c-post-comment': (resolve) => require(['@/ui/components/community/comment'], resolve)
         },

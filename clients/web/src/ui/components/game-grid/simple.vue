@@ -7,7 +7,10 @@
              :style="{ width: 'calc(100% / ' + itemInRow + ')'}"
         >
             <div class="product-grid__item">
-                <div class="card-body padding-0">
+                <div v-if="$slots.block">
+                    <slot name="block" />
+                </div>
+                <div class="card-body padding-0" v-else>
                     <a :href="`#/product/${item.id}`"><c-img class="card-img-top" :src="item.meta.images.mediumTile" /></a>
                     <h4><a :href="`#/product/${item.id}`">{{ item.name }}</a></h4>
                     <p class="card-text" hidden>{{ item.shortDescription }} </p>

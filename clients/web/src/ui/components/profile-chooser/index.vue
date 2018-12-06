@@ -85,7 +85,7 @@
                 return this.$store.state.application.account.profiles
             },
             activeProfile() {
-                return this.$store.state.application.account.activeProfile
+                return this.$store.state.application.activeProfile
             }
         },
         methods: {

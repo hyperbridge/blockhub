@@ -43,7 +43,7 @@
         },
         computed: {
             profile() {
-                return this.$store.state.application.account.activeProfile
+                return this.$store.state.application.activeProfile
             }
         }
     }
