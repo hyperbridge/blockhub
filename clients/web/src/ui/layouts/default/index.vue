@@ -87,16 +87,16 @@
             </div>
 
 
-            <c-welcome-popup :activated="welcome_modal_active" @close="closePopup" ref="welcome_modal_active"></c-welcome-popup>
-            <c-download-popup :activated="download_modal_active" @close="closePopup" ref="download_modal_active"></c-download-popup>
-            <c-unlock-popup :activated="unlock_modal_active" @close="closePopup" ref="unlock_modal_active"></c-unlock-popup>
-            <c-send-funds-popup :activated="send_funds_modal_active" @close="closePopup" ref="send_funds_modal_active"></c-send-funds-popup>
-            <c-purchase-popup :activated="purchase_modal_active" @close="closePopup" ref="purchase_modal_active"></c-purchase-popup>
-            <c-claim-popup :activated="claim_modal_active" @close="closePopup" ref="claim_modal_active"></c-claim-popup>
-            <c-login-popup :activated="login_modal_active" @close="closePopup" ref="login_modal_active"></c-login-popup>
-            <c-register-popup :activated="register_modal_active" @close="closePopup" ref="register_modal_active"></c-register-popup>
-            <c-privacy-popup :activated="$store.state.application.activeModal === 'privacy'" @close="$store.state.application.activeModal = null"></c-privacy-popup>
-            <c-terms-popup :activated="$store.state.application.activeModal === 'terms'" @close="$store.state.application.activeModal = null"></c-terms-popup>
+            <c-welcome-popup :activated="$store.state.application.activeModal === 'welcome'" @close="$store.state.application.activeModal = null" />
+            <c-download-popup :activated="$store.state.application.activeModal === 'download'" @close="$store.state.application.activeModal = null" />
+            <c-unlock-popup :activated="$store.state.application.activeModal === 'unlock'" @close="$store.state.application.activeModal = null" />
+            <c-send-funds-popup :activated="$store.state.application.activeModal === 'send-funds'" @close="$store.state.application.activeModal = null" />
+            <c-purchase-popup :activated="$store.state.application.activeModal === 'purchase'" @close="$store.state.application.activeModal = null" />
+            <c-claim-popup :activated="$store.state.application.activeModal === 'claim'" @close="$store.state.application.activeModal = null" />
+            <c-login-popup :activated="$store.state.application.activeModal === 'login'" @close="$store.state.application.activeModal = null" />
+            <c-register-popup :activated="$store.state.application.activeModal === 'register'" @close="$store.state.application.activeModal = null" />
+            <c-privacy-popup :activated="$store.state.application.activeModal === 'privacy'" @close="$store.state.application.activeModal = null" />
+            <c-terms-popup :activated="$store.state.application.activeModal === 'terms'" @close="$store.state.application.activeModal = null" />
 
             <c-basic-popup
                 :activated="$store.state.application.editorMode === 'editing' && !$store.state.application.account.settings.client['hideEditorWelcomeModal/' + $router.currentRoute.fullPath]"
@@ -306,7 +306,7 @@
             <c-profile-chooser v-if="profileChooser && signedIn" />
         <!--</transition>-->
 
-        <c-quick-launch class="quick-launch" />
+        
         <!-- <search /> Discover the next best thing... -->
     </div>
     <!-- //END PAGE WRAPPER -->
@@ -388,7 +388,6 @@
             'c-clock': (resolve) => require(['@/ui/components/clock/index.vue'], resolve),
             'c-status-dot': (resolve) => require(['@/ui/components/status-dot/index.vue'], resolve),
             'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
-            'c-quick-launch': (resolve) => require(['@/ui/components/quick-launch'], resolve),
             'c-cookie-policy': (resolve) => require(['@/ui/components/cookie-policy'], resolve),
             'c-shortcut-sidebar': (resolve) => require(['@/ui/components/shortcut-sidebar'], resolve),
             'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more.vue'], resolve),
@@ -508,30 +507,6 @@
             connectionStatus() {
                 return this.$store.state.application.connection.status
             },
-            unlock_modal_active() {
-                return this.$store.state.application.activeModal === 'unlock'
-            },
-            send_funds_modal_active() {
-                return this.$store.state.application.activeModal === 'send-funds'
-            },
-            login_modal_active() {
-                return this.$store.state.application.activeModal === 'login'
-            },
-            register_modal_active() {
-                return this.$store.state.application.activeModal === 'register'
-            },
-            purchase_modal_active() {
-                return this.$store.state.application.activeModal === 'purchase'
-            },
-            claim_modal_active() {
-                return this.$store.state.application.activeModal === 'claim'
-            },
-            download_modal_active() {
-                return this.$store.state.application.activeModal === 'download'
-            },
-            welcome_modal_active() {
-                return this.$store.state.application.activeModal === 'welcome'
-            },
             desktopMode() {
                 return this.$store.state.application.desktopMode
             },
@@ -606,9 +581,6 @@
 
                 this.$store.commit('application/activateModal', null)
             },
-            closePopup() {
-                this.$store.state.application.activeModal = null
-            },
             scrollSidebarDown() {
                 $('#scroll_sidebar').animate({scrollTop: '+=100', duration: '150'});
                 this.checkScrollButton()
@@ -669,7 +641,9 @@
             this.$nextTick(() => {
                 this.loadingState = false
 
-                document.getElementById('startup-loader').style.display = 'none'
+                if (document.getElementById('startup-loader')) {
+                    document.getElementById('startup-loader').style.display = 'none'
+                }
 
                 // check sidebar button
                 $(this.$refs.scroll_sidebar).scroll(() => {
@@ -730,7 +704,7 @@
             '$route'() {
                 this.updateBreadcrumbLinks()
             },
-            '$store.state.application.initialized'() {debugger
+            '$store.state.application.initialized'() {
             },
             profileChooser() {
                 if (this.signedIn)

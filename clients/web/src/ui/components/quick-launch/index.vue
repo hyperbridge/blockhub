@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="c-quick-launch">
         <c-searcher
                 @input="search"
                 @keyup.enter.native="goToSearchPage()"
@@ -85,18 +85,20 @@
     }
 </script>
 
-<style>
-    .c-input {
-        background: transparent  !important;
-        border: 0 none !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 1) !important;
-        border-radius: 0 !important;
-        color: #fff !important;
-    }
-    .input-searcher__icon {
-        color: rgba(255, 255, 255, 1) !important;
-    }
-    .results__content {
-        color: #fff !important;
+<style lang="scss">
+    .c-quick-launch {
+        .c-input {
+            background: transparent  !important;
+            border: 0 none !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 1) !important;
+            border-radius: 0 !important;
+            color: #fff !important;
+        }
+        .input-searcher__icon {
+            color: rgba(255, 255, 255, 1) !important;
+        }
+        .results__content {
+            color: #fff !important;
+        }
     }
 </style>

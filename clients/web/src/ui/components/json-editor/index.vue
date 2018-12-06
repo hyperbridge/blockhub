@@ -23,7 +23,7 @@ export default {
 
     watch: {
         'parsedData': {
-            handler(newValue, oldValue) {
+            handler(newVal, oldVal) {
                 this.$emit('input', this.makeJson(this.parsedData))
             },
             deep: true

@@ -40,7 +40,7 @@
                     }
                 }
             },
-            '$store.state.auth.accessToken'() {
+            '$store.state.auth.accessToken'(newVal) {
                 if (newVal) {
                     this.authenticate()
                 }
