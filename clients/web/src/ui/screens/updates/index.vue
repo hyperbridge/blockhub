@@ -10,7 +10,7 @@
                         </ul>
                     </p>
                     <div class="row">
-                        <div class="col-md-6 col-sm-12" v-for="(update, index) in updates" :key="index">
+                        <div class="col-md-6 col-sm-12" v-for="(update, index) in this.$store.state.application.updates" :key="index">
                             <c-expand-block 
                                 :title="update.title" 
                                 :description="update.description" 
@@ -68,7 +68,7 @@ export default {
                         staticRenderFns: el.staticRenderFns
                     }).$mount()
 
-                    this.updates.push({
+                    this.$store.state.application.updates.push({
                         version: entry.gsx$version.$t,
                         title: entry.gsx$title.$t,
                         description: entry.gsx$description.$t,
