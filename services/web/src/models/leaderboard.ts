@@ -77,11 +77,11 @@ export default class Leaderboard extends Model {
                     }
                 },
                 filter: {
-                    key: 'players'
+                    relationKey: 'players'
                     // query => query.orderByRaw('coalesce(title, id)') //query => query.where('page:tagable_entity_tag.object_data:type', 'Page')
                 },
                 beforeInsert(model) {
-                    (model as Node).key = 'players'
+                    (model as Node).relationKey = 'players'
                 }
             },
         }

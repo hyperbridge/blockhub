@@ -23,7 +23,6 @@ export default class Profile extends Model {
     meta!: Object
     parentId!: Number
 
-    isActive!: Boolean
     accountId!: Number
     role!: String // [user, developer, curator]
     reputation!: Number // based on events

@@ -1,5 +1,6 @@
 import { Model, RelationMappings } from 'objection'
 import Rating from './rating'
+import Profile from './profile'
 import Node from './node'
 
 export default class Realm extends Model {
@@ -10,6 +11,9 @@ export default class Realm extends Model {
     value!: String
     meta!: Object
     parentId!: Number
+
+    ownerId!: Number
+    owner!: Profile
 
     static get tableName() {
         return 'realms'

@@ -1,4 +1,4 @@
-import Model from '../../models/server'
+import Model from '../../models/realm'
 import createService = require('feathers-objection')
 import hooks = require('./hooks')
 
@@ -15,13 +15,9 @@ export default function(app) {
         }
     }
 
-    app.use('/servers', createService(options))
+    app.use('/realms', createService(options))
 
-    const service = app.service('/servers')
+    const service = app.service('/realms')
 
     service.hooks(hooks)
 }
-
-// app.GetServersAtAddress(addressOrIp).done(function(result) {
-//     console.log(result);
-// });

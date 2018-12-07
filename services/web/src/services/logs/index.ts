@@ -1,4 +1,4 @@
-import Model from '../../models/server'
+import Model from '../../models/log'
 import createService = require('feathers-objection')
 import hooks = require('./hooks')
 
@@ -6,6 +6,7 @@ export default function(app) {
     const paginate = app.get('paginate')
 
     const options = {
+        name: 'logs',
         model: Model,
         id: 'id',
         paginate: {
@@ -15,13 +16,9 @@ export default function(app) {
         }
     }
 
-    app.use('/servers', createService(options))
+    app.use('/logs', createService(options))
 
-    const service = app.service('/servers')
+    const service = app.service('/logs')
 
     service.hooks(hooks)
 }
-
-// app.GetServersAtAddress(addressOrIp).done(function(result) {
-//     console.log(result);
-// });
