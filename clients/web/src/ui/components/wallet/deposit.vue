@@ -59,13 +59,12 @@
 </template>
 
 <script>
-    import Multiselect from 'vue-multiselect'
     import 'vue-multiselect/dist/vue-multiselect.min.css'
 
     export default {
         components: {
             'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve),
-            'c-multiselect': Multiselect
+            'multiselect': (resolve) => require(['vue-multiselect'], resolve),
         },
         data() {
             return {

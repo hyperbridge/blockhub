@@ -126,6 +126,12 @@ exports.up = knex => {
             table.json('meta')
 
             table.string('type', 100)
+            table
+                .integer('ownerId')
+                .unsigned()
+                .references('id')
+                .inTable('profiles')
+                .onDelete('SET NULL')
         })
         .createTable('reviews', table => {
             table.increments('id').primary()

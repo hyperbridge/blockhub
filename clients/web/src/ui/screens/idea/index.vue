@@ -1,12 +1,12 @@
 <template>
-    <c-layout navigationKey="project" :showRightPanel="false" :breadcrumbLinks="breadcrumbLinks" class="project-single-page">
-        <div class="row" v-if="!project">
+    <c-layout navigationKey="idea" :showRightPanel="false" :breadcrumbLinks="breadcrumbLinks" class="idea-single-page">
+        <div class="row" v-if="!idea">
             <!-- <div class="col-12">
                 Project not found
             </div> -->
-            <c-loading :enabled="!project" />
+            <c-loading :enabled="!idea" />
         </div>
-        <div class="row" v-if="project">
+        <div class="row" v-if="idea">
             <div class="col-12">
 
                 <div class="errors" v-if="errors.length">
@@ -22,19 +22,19 @@
                             <div class="editor" v-if="editing">
                                 <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
                                         @click="activateElement('name')" v-if="!activeElement['name']">Change
-                                    Project Name <span class="fa fa-edit"></span></button>
+                                    Idea Name <span class="fa fa-edit"></span></button>
 
                                 <div class="form-control-element form-control-element--right"
                                         v-if="activeElement['name']">
                                     <input ref="name" name="name" type="text" class="form-control"
-                                            placeholder="Project name..." v-model="project.name"/>
+                                            placeholder="Idea name..." v-model="idea.name"/>
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary">
                                         <span class="fa fa-check" @click="deactivateElement('name')"></span>
                                     </div>
                                 </div>
                             </div>
-                            <h1 class="title margin-top-10 margin-bottom-15">{{ project.name }}</h1>
+                            <h1 class="title margin-top-10 margin-bottom-15">{{ idea.name }}</h1>
                         </div>
                         <div class="editor-container">
                             <div class="editor" v-if="editing">
@@ -45,16 +45,16 @@
                                 <div class="form-control-element tag-editor form-control-element--right"
                                         v-if="activeElement['tags']">
                                     <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
-                                        <!--<option v-for="(tag, index) in authorTagOptions" :key="index"-->
-                                                <!--:selected="project.tags.includes(tag)">{{ tag }}-->
+                                        <!--<option v-for="(tag, index) in tagOptions" :key="index"-->
+                                                <!--:selected="idea.tags.includes(tag)">{{ tag }}-->
                                         <!--</option>-->
                                     <!--</select>-->
 
-                                    <multiselect v-model="project.tags"
+                                    <multiselect v-model="idea.tags"
                                                     class="dark-mode"
                                                     :multiple="true"
                                                     :taggable="true"
-                                                    :options="authorTagOptions">
+                                                    :options="tagOptions">
                                     </multiselect>
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary"
@@ -65,12 +65,12 @@
                                 </div>
                             </div>
 
-                            <c-tags :tags="project.tags.map(t => t.value)"
+                            <c-tags :tags="idea.tags.map(t => t.value)"
                                             v-if="!editing || !activeElement['tags']"></c-tags>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
-                        <c-badges :icons="project.meta.badges || []" />
+                        <c-badges :icons="idea.meta.badges || []" />
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="editor text-right" v-if="editing" style="margin-bottom: 30px">
@@ -83,7 +83,7 @@
                                 <div class="form-control-element form-control-element--right">
                                     <input ref="backgroundImage" name="backgroundImage" type="text"
                                             class="form-control" placeholder="Background image URL..."
-                                            v-model="project.images.header"/>
+                                            v-model="idea.images.header"/>
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary">
                                             <span class="fa fa-check"
@@ -96,14 +96,14 @@
                         <div class="editor text-right" v-if="editing">
                             <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
                                     @click="activateElement('storeImage')"
-                                    v-if="!activeElement['storeImage']">Change Project Image <span
+                                    v-if="!activeElement['storeImage']">Change Idea Image <span
                                 class="fa fa-edit"></span></button>
 
                             <div class="" v-if="activeElement['storeImage']">
                                 <div class="form-control-element form-control-element--right">
                                     <input ref="storeImage" name="storeImage" type="text" class="form-control"
                                             placeholder="Background image URL..."
-                                            v-model="project.images.header" />
+                                            v-model="idea.images.header" />
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary">
                                             <span class="fa fa-check"
@@ -115,40 +115,22 @@
                         </div>
                     </div>
                 </div>
-                <c-button status="dark" class="w-100 d-flex d-md-none justify-content-center my-4" size="lg" data-toggle="collapse" data-target="#project_nav" aria-expanded="false" aria-controls="project_nav">
+                <c-button status="dark" class="w-100 d-flex d-md-none justify-content-center my-4" size="lg" data-toggle="collapse" data-target="#idea_nav" aria-expanded="false" aria-controls="idea_nav">
                     Menu
                 </c-button>
-                <div class="collapse show project_nav" id="project_nav">
+                <div class="collapse show idea_nav" id="idea_nav">
                     <ul class="nav nav-tabs margin-bottom-40 justify-content-between">
                         <li class="nav-item" @click="section='overview'">
-                            <router-link :to="`/project/${project.id}`" class="nav-link" :class="{ 'active': section === 'overview' }">
+                            <router-link :to="`/idea/${idea.id}`" class="nav-link" :class="{ 'active': section === 'overview' }">
                                 Overview
                             </router-link>
                         </li>
                         <li class="nav-item" @click="section='community'" v-darklaunch="'COMMUNITY'">
-                            <router-link :to="`/project/${project.id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">
+                            <router-link :to="`/idea/${idea.id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">
                                 Community
                                 <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
                                     0
                                 </c-updates-count>
-                            </router-link>
-                        </li>
-                        <li class="nav-item" @click="section='bounties'">
-                            <router-link :to="`/project/${project.id}/bounties`" class="nav-link" :class="{ 'active': section === 'bounties' }">
-                                Bounties
-                            </router-link>
-                        </li>
-                        <li class="nav-item" @click="section='updates'">
-                            <router-link :to="`/project/${project.id}/updates`" class="nav-link" :class="{ 'active': section === 'updates' }">
-                                Updates
-                                <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
-                                    0
-                                </c-updates-count>
-                            </router-link>
-                        </li>
-                        <li class="nav-item" @click="section='milestones'">
-                            <router-link :to="`/project/${project.id}/milestones`" class="nav-link" :class="{ 'active': section === 'milestones' }">
-                                Milestones
                             </router-link>
                         </li>
                         <li class="nav-item" v-if="editing">
@@ -160,132 +142,6 @@
                 <div class="row" id="configure" v-if="section === 'configure'" :editing="editing">
                     <c-block title="Campaign">
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="switch switch-sm col-sm-3">
-                                        <label>Minimum Contribution Goal</label>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="Example: 0">
-                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="switch switch-sm col-sm-3">
-                                        <label>Maximum Contribution Goal</label>
-                                    </label>
-                                    <div class="col-sm-9">
-
-                                        <input type="text" class="form-control" placeholder="Example: 1000">
-                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label>Support Email</label>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <input type="email" class="form-control" placeholder="Example: example@domain.com">
-                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label>Twitter Username</label>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">@</span>
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="Example: @example">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label>Share Text</label>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="Example: Join our crowdfund on BlockHub today!">
-                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-
-                                <div class="form-group row">
-                                    <label class="switch switch-sm col-sm-1">
-                                        <input type="checkbox" name="switch_8" checked="" value="0">
-                                        <span></span>
-                                    </label>
-                                    <div class="col-sm-11">
-                                        <label>Overflow</label>
-                                        <span class="form-text">Projects with Overflow enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="switch switch-sm col-sm-1">
-                                        <input type="checkbox" name="switch_8" checked="" value="0">
-                                        <span></span>
-                                    </label>
-                                    <div class="col-sm-11">
-                                        <label>Timeline</label>
-                                        <span class="form-text">Projects with Timeline enabled will have a current timeline with associated milestones.</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="switch switch-sm col-sm-1">
-                                        <input type="checkbox" name="switch_8" checked="" value="0">
-                                        <span></span>
-                                    </label>
-                                    <div class="col-sm-11">
-                                        <label>Refunds</label>
-                                        <span class="form-text">Projects with Refunds enabled will allow contributors to get partial or full refund if the project is deemed not successful (by community vote).</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="switch switch-sm col-sm-1">
-                                        <input type="checkbox" name="switch_8" checked="" value="0">
-                                        <span></span>
-                                    </label>
-                                    <div class="col-sm-11">
-                                        <label>Curation</label>
-                                        <span class="form-text">Projects with Curation enabled will allow the community to curate the project and earn reputation for their actions.</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="switch switch-sm col-sm-1">
-                                    </label>
-                                    <div class="col-sm-11">
-                                        <input type="text" id="ise_default" name="ise_default" value="">
-                                        <label>Contribution Period</label>
-                                        <span class="form-text">Projects with Curation Enabled will allow the community to curate the project and earn reputation for their actions.</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="switch switch-sm col-sm-1">
-                                        <input type="checkbox" name="switch_8" checked="" value="0">
-                                        <span></span>
-                                    </label>
-                                    <div class="col-sm-11">
-                                        <label>No Contribution Period</label>
-                                        <span class="form-text">Projects with No Contribution Period will be open for contribution until the project is completed, allowing for contributions during the project.</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row" v-darklaunch="'GOVERNANCE'">
-                            <div class="col-12">
-                                Choose your governance system
-                            </div>
-                            <div class="col-4">
-                                <i class="fas first-order" />
-                            </div>
-                        </div>
                     </c-block>
                 </div>
 
@@ -293,13 +149,8 @@
 
             <div class="col-12" id="overview">
                 <transition name="page" mode="out-in">
-                    <c-project-overview :project="project" v-if="section === 'overview'" :editing="editing" />
-                    <c-project-community :project="project" v-if="section === 'community'" :editing="editing" />
-                    <c-project-bounties :project="project" v-if="section === 'bounties'" :editing="editing" />
-                    <c-project-contributors :project="project" v-if="section === 'contributors'" :editing="editing" />
-                    <c-project-discussion :project="project" v-if="section === 'discussion'" :editing="editing" />
-                    <c-project-milestones :project="project" v-if="section === 'milestones'" :editing="editing" />
-                    <c-project-updates :project="project" v-if="section === 'updates'" :editing="editing" />
+                    <c-idea-overview :idea="idea" v-if="section === 'overview'" :editing="editing" />
+                    <c-idea-community :idea="idea" v-if="section === 'community'" :editing="editing" />
                 </transition>
             </div>
         </div>
@@ -307,7 +158,6 @@
 </template>
 
 <script>
-
     import 'vue-multiselect/dist/vue-multiselect.min.css'
 
     export default {
@@ -320,16 +170,11 @@
         },
         components: {
             'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
-            'c-badges': (resolve) => require(['@/ui/components/project/badges'], resolve),
+            'c-badges': (resolve) => require(['@/ui/components/idea/badges'], resolve),
             'c-rating-block': (resolve) => require(['@/ui/components/rating-block'], resolve),
-            'c-project-overview': (resolve) => require(['@/ui/screens/project-overview'], resolve),
-            'c-project-milestones': (resolve) => require(['@/ui/screens/project-milestones'], resolve),
-            'c-project-discussion': (resolve) => require(['@/ui/screens/project-discussion'], resolve),
-            'c-project-contributors': (resolve) => require(['@/ui/screens/project-contributors'], resolve),
-            'c-project-community': (resolve) => require(['@/ui/screens/project-community'], resolve),
-            'c-project-bounties': (resolve) => require(['@/ui/screens/project-bounties'], resolve),
-            'c-project-updates': (resolve) => require(['@/ui/screens/project-updates'], resolve),
-            'c-updates-count': (resolve) => require(['@/ui/components/project/updates-count'], resolve),
+            'c-idea-overview': (resolve) => require(['@/ui/screens/idea-overview'], resolve),
+            'c-idea-community': (resolve) => require(['@/ui/screens/idea-community'], resolve),
+            'c-updates-count': (resolve) => require(['@/ui/components/idea/updates-count'], resolve),
             'multiselect': (resolve) => require(['vue-multiselect'], resolve),
         },
         data() {
@@ -343,12 +188,12 @@
                     description: false,
                     content: false
                 },
-                authorTagOptions: [
+                tagOptions: [
                     'game',
                     'mod',
+                    'item',
                     'other'
-                ],
-                crowdfundingProps: ['spent', 'locked', 'overflow']
+                ]
             }
         },
         methods: {
@@ -382,22 +227,22 @@
 
                     // API: CREATE PROJECT
                 } else {
-                    this.$store.dispatch('funding/updateProject', this.project)
+                    this.$store.dispatch('funding/updateIdea', this.idea)
                     this.$store.dispatch('application/setEditorMode', 'publishing')
                 }
             },
             checkForm() {
                 this.errors = []
 
-                if (this.project.name && this.project.description) {
+                if (this.idea.name && this.idea.description) {
                     return true
                 }
 
-                if (!this.project.name) {
-                    this.errors.push('Project name required.')
+                if (!this.idea.name) {
+                    this.errors.push('Idea name required.')
                 }
-                if (!this.project.description) {
-                    this.errors.push('Project description required.')
+                if (!this.idea.description) {
+                    this.errors.push('Idea description required.')
                 }
             },
             updateSection() {
@@ -407,31 +252,31 @@
             },
         },
         computed: {
-            project() {
-                let project = null
+            idea() {
+                let idea = null
 
                 if (this.id === 'new') {
-                    project = this.$store.state.funding.defaultProject
+                    idea = this.$store.state.funding.defaultProject
 
                     this.$store.state.application.developerMode = true
                     this.$store.dispatch('application/setEditorMode', 'editing')
                 }
 
-                if (!project) {
-                    project = this.$store.getters['projects/get'](this.id)
+                if (!idea) {
+                    idea = this.$store.getters['ideas/get'](this.id)
                 }
 
-                if (project && project.images && project.images.header) {
-                    window.document.getElementById('header-bg').style['background-image'] = 'url(' + project.images.header + ')'
+                if (idea && idea.images && idea.images.header) {
+                    window.document.getElementById('header-bg').style['background-image'] = 'url(' + idea.images.header + ')'
                 }
 
-                if (project && !project.community) {
-                    project.community = {
+                if (idea && !idea.community) {
+                    idea.community = {
                         discussions: []
                     }
                 }
 
-                return project
+                return idea
             },
             editing() {
                 if (!this.$store.state.application.editorMode) {
@@ -445,7 +290,7 @@
             breadcrumbLinks() {
                 const links = [
                     { to: { path: '/' }, title: 'Store' },
-                    { to: { path: '/project/' + (this.project ? this.project.id : 0) }, title: (this.project ? this.project.name : 'Loading') }
+                    { to: { path: '/idea/' + (this.idea ? this.idea.id : 0) }, title: (this.idea ? this.idea.name : 'Loading') }
                 ]
 
                 if (this.section === 'community') {
@@ -473,7 +318,7 @@
         },
         created() {
             if (this.id !== 'new') {
-                this.$store.dispatch('projects/find', {
+                this.$store.dispatch('ideas/find', {
                     query: {
                         id: Number(this.id),
                         $eager: 'tags'
@@ -493,7 +338,7 @@
                 height: 300,
                 callbacks: {
                     onBlur: () => {
-                        Vue.set(this.project, 'content', $('#summernote').summernote('code'))
+                        Vue.set(this.idea, 'content', $('#summernote').summernote('code'))
                     }
                 }
             })
@@ -622,7 +467,7 @@
         opacity: 0.3;
     }
     @media (min-width: 768px){
-        .project_nav{
+        .idea_nav{
             display: block!important;
         }
     }
@@ -631,7 +476,7 @@
             justify-content: center;
             margin-bottom: 5px;
         }
-        .project_nav{
+        .idea_nav{
             ul{
                 flex-direction: column;
                 li{

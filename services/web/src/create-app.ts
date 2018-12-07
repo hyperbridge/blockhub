@@ -24,6 +24,7 @@ import local = require('@feathersjs/authentication-local')
 import jwt = require('@feathersjs/authentication-jwt')
 import socketio = require('@feathersjs/socketio')
 import session = require('express-session')
+
 const KnexSessionStore = require('connect-session-knex')(session)
 
 const knexfile = require('./knexfile')

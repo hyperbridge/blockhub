@@ -39,11 +39,11 @@
                                                  class="dark-mode"
                                                  :multiple="true"
                                                  :taggable="true"
-                                                 :options="developerTagOptions">
+                                                 :options="tagOptions">
 
                                     </multiselect>
                                     <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
-                                        <!--<option v-for="(tag, index) in developerTagOptions" :key="index"-->
+                                        <!--<option v-for="(tag, index) in tagOptions" :key="index"-->
                                                 <!--:selected="product.developerTags.includes(tag)">{{ tag }}-->
                                         <!--</option>-->
                                     <!--</select>-->
@@ -263,11 +263,10 @@
 
 <script>
     import Vue from 'vue'
-    import * as Brdge from '@/framework/desktop-bridge'
+    import * as Bridge from '@/framework/desktop-bridge'
     import * as DB from '@/db'
 
-    import Multiselect from 'vue-multiselect'
-    import 'vue-multiselect/dist/vue-multiselect.min.css';
+    import 'vue-multiselect/dist/vue-multiselect.min.css'
 
     const groupBy = function (xs, key) {
         return xs.reduce(function (rv, x) {
@@ -295,7 +294,7 @@
             'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
-            Multiselect
+            'multiselect': (resolve) => require(['vue-multiselect'], resolve),
         },
         data() {
             return {
@@ -304,7 +303,7 @@
                     backgroundImage: false,
                     tags: false
                 },
-                developerTagOptions: [
+                tagOptions: [
                     'rpg',
                     'adventure',
                     'racing',
@@ -318,7 +317,7 @@
         },
         computed: {
             marketplace() {
-                return this.$store.state.marketplace;
+                return this.$store.state.marketplace
             },
             product() {
                 return this.id === 'new' ? this.marketplace.defaultProduct : DB.marketplace.products.findOne({ 'id': Number(this.id) })
@@ -362,7 +361,7 @@
             }
         },
         mounted() {
-            const { product } = this;
+            const { product } = this
 
             if (this.id === 'new') {
                 this.$store.dispatch('application/setEditorMode', 'editing')
@@ -422,7 +421,7 @@
                 if (this.id === 'new') {
                     this.product.type = 'game'
 
-                    Brdge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.activeProfile, product: this.product }).then((data) => {
+                    Bridge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.activeProfile, product: this.product }).then((data) => {
                         const product = DB.marketplace.products.insert(data)
                         DB.save()
 
@@ -449,10 +448,11 @@
                 this.$store.state.marketplace.firstProduct = false
                 this.$store.commit('application/updateClientSettings', 'hide_product_intro_modal', true)
             },
-            // showImporter() {
-            //     this.importing = true
-            // },
             startImport() {
+                if (!this.$store.state.application.desktopMode) {
+                    return BlockHub.Notification.error('Desktop app required', 'Error')
+                }
+
                 const onWindowLoad = `function onWindowLoad(requestId) {
                     const script = document.createElement('script');
                     script.src = 'https://code.jquery.com/jquery-2.2.4.min.js';
@@ -532,7 +532,7 @@
                     document.body.appendChild(script);
                 }`
 
-                Brdge.sendCommand('fetchPageDataRequest', {
+                Bridge.sendCommand('fetchPageDataRequest', {
                     url: this.$refs.importUrl.value,
                     script: onWindowLoad
                 }).then((data) => {
@@ -581,7 +581,7 @@
 
                     this.$store.dispatch('application/setEditorMode', 'viewing')
                 } else if (newMode === 'removing') {
-                    Brdge.sendCommand('removeProduct', {
+                    Bridge.sendCommand('removeProduct', {
                         id: this.product.id
                     }).then((data) => {
                         if (data.error) {

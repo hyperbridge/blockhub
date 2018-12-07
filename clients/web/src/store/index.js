@@ -227,6 +227,7 @@ window.BlockHub.importSeedData = () => {
     DB.marketplace.config.data[0].collections = seed.collections
     DB.marketplace.config.data[0].gameSeries = seed.gameSeries
     DB.marketplace.config.data[0].bounties = seed.bounties
+    DB.marketplace.config.data[0].ideas = seed.ideas
 
     DB.marketplace.assets.data = seed.assets
     DB.marketplace.products.data = seed.products
@@ -255,6 +256,7 @@ window.BlockHub.resetSeedData = () => {
     DB.marketplace.config.data[0].collections = []
     DB.marketplace.config.data[0].gameSeries = []
     DB.marketplace.config.data[0].bounties = []
+    DB.marketplace.config.data[0].ideas = []
 
     DB.marketplace.products.data = []
     DB.marketplace.assets.data = []

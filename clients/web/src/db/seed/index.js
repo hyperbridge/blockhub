@@ -10,5 +10,6 @@ export default {
     profiles: require('./profiles.json'),
     updates: require('./updates.json'),
     wallets: require('./wallets.json'),
-    gameSeries: require('./game-series.json')
+    gameSeries: require('./game-series.json'),
+    ideas: require('./ideas.json'),
 }

@@ -20,6 +20,7 @@ const updateState = (savedData, updatedState = {}) => {
         curatorReviews: DB.marketplace.config.data[0].curatorReviews,
         posts: DB.marketplace.config.data[0].posts,
         gameSeries: DB.marketplace.config.data[0].gameSeries,
+        ideas: DB.marketplace.config.data[0].ideas,
         frontpageProduct: DB.marketplace ? DB.marketplace.products.findOne({ 'systemTags': { '$contains': ['frontpage'] } }) : {},
         newProducts: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['new'] } }) : [],
         featuredProducts: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['featured'] } }) : [],

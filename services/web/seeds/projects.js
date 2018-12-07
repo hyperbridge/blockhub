@@ -1,14 +1,14 @@
+const Objection = require('objection')
+const Project = require('../build/src/models/project').default
 const projects = require('./data/projects')
-const Profile = require('../build/src/models/profile').default
 
 exports.seed = function(knex) {
-    Profile
-        .query()
-        .upsertGraph({
-            id: 2,
-            value: 'Test',
+    Objection.Model.knex(knex)
 
-        });
+    return Project
+        .query()
+        .upsertGraph(projects)
+
     // // Deletes ALL existing entries
     // return knex('projects')
     //     .del()

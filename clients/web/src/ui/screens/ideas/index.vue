@@ -12,7 +12,7 @@
                     <p>Maybe you just have an awesome idea, or want to inspire your favourite dev studio to continue a series (*cough* half-life).</p>
                 </div>
                 <br />
-                <p v-if="$store.state.application.developerMode"><c-button class="c-btn-lg outline-white" href="#/business/project/new">Get Started</c-button></p>
+                <p v-if="$store.state.application.developerMode"><c-button class="c-btn-lg outline-white" href="#/business/idea/new">Get Started</c-button></p>
                 <p v-if="!$store.state.application.developerMode"><c-button class="c-btn-lg outline-white" href="#/developer/apply">Get Started</c-button></p>
                 <!-- <p v-if="!$store.state.application.desktopMode"><c-button class="c-btn-lg outline-white" @click="$store.commit('application/activateModal', 'welcome')">Get Started</c-button></p> -->
             </div>
@@ -27,17 +27,17 @@
                 name="Browse All Ideas"
             />
             <div class="row">
-                <c-loading :enabled="!projects.length" />
-                <c-project-card
+                <c-loading :enabled="!ideas.length" />
+                <c-idea-card
                     class="p-2 col-3"
-                    :image="project.meta.images.mediumTile" 
-                    :description="project.description" 
-                    :funds="project.meta.funds" 
-                    :parentName="project.product && project.product.name" 
-                    :parentDeveloper="project.product && project.product.developer" 
-                    :parentImage="project.product && project.product.meta.images.mediumTile"
-                    :id="project.id"
-                    v-for="(project, index) in projects" :key="index"
+                    :image="idea.meta.images.mediumTile" 
+                    :description="idea.description" 
+                    :funds="idea.meta.funds" 
+                    :parentName="idea.product && idea.product.name" 
+                    :parentDeveloper="idea.product && idea.product.developer" 
+                    :parentImage="idea.product && idea.product.meta.images.mediumTile"
+                    :id="idea.id"
+                    v-for="(idea, index) in ideas" :key="index"
                 />
             </div>
         </c-block>
@@ -47,10 +47,10 @@
 <script>
 export default {
     components: {
-        'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
+        'c-idea-card': (resolve) => require(['@/ui/components/idea/card'], resolve),
     },
     created() {
-        this.$store.dispatch('projects/find', {
+        this.$store.dispatch('ideas/find', {
             query: {
                 $sort: {
                     createdAt: -1
@@ -60,8 +60,8 @@ export default {
         })
     },
     computed: {
-        projects() {
-            return this.$store.getters['projects/list'] // Object.values(this.$store.state.funding.projects)//this.$store.getters['projects/list']
+        ideas() {
+            return this.$store.getters['ideas/list'] // Object.values(this.$store.state.funding.ideas)//this.$store.getters['ideas/list']
                 //.filter(trx => trx.you.id == this.profileId);
         },
         list() {
@@ -81,7 +81,7 @@ export default {
                             },
                         }
                     },
-                    projects: this.$store.state.funding.trendingProjects || []
+                    ideas: this.$store.state.funding.trendingProjects || []
                 }
             })
 
@@ -99,7 +99,7 @@ export default {
                             },
                         }
                     },
-                    projects: this.$store.state.funding.trendingProjects || []
+                    ideas: this.$store.state.funding.trendingProjects || []
                 }
             })
 
@@ -117,7 +117,7 @@ export default {
                             },
                         }
                     },
-                    projects: this.$store.state.funding.top_game_ideas || []
+                    ideas: this.$store.state.funding.top_game_ideas || []
                 }
             })
 
@@ -135,7 +135,7 @@ export default {
                             },
                         }
                     },
-                    projects: this.$store.state.funding.top_content_suggestions || []
+                    ideas: this.$store.state.funding.top_content_suggestions || []
                 }
             })
 
@@ -153,7 +153,7 @@ export default {
                             },
                         }
                     },
-                    projects: this.$store.state.funding.top_item_suggestions || []
+                    ideas: this.$store.state.funding.top_item_suggestions || []
                 }
             })
 
