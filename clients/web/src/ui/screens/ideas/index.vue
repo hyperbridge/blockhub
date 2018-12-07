@@ -6,7 +6,7 @@
                     <i class="fas fa-times"></i>
                 </c-button>
 
-                <h2>Crowdfund Games</h2>
+                <h2>Submit Idea</h2>
                 <div style="text-align: left">
                     <p>Are you looking to crowdfund that game you've been working hard on? We're here to help.</p>
                     <p>Maybe you just have an awesome idea, or want to inspire your favourite dev studio to continue a series (*cough* half-life).</p>
@@ -24,7 +24,7 @@
             <c-heading-bar
                 slot="title"
                 class="mb-0"
-                name="Browse All Projects"
+                name="Browse All Ideas"
             />
             <div class="row">
                 <c-loading :enabled="!projects.length" />
@@ -70,7 +70,7 @@ export default {
             result.push({
                 type: 'trendingProjects_row',
                 data: {
-                    title: 'Trending Crowdfunds',
+                    title: 'Trending Ideas',
                     options: {
                         slidesPerView: 3,
                         spaceBetween: 15,
@@ -88,7 +88,7 @@ export default {
             result.push({
                 type: 'trendingProjects_row',
                 data: {
-                    title: 'Most Popular Projects',
+                    title: 'Most Popular Ideas',
                     options: {
                         slidesPerView: 3,
                         spaceBetween: 15,
@@ -99,15 +99,32 @@ export default {
                             },
                         }
                     },
-                    projects: this.$store.state.funding.most_popular_games || []
+                    projects: this.$store.state.funding.trendingProjects || []
                 }
             })
-
 
             result.push({
                 type: 'trendingProjects_row',
                 data: {
-                    title: 'Top Content Proposals',
+                    title: 'Top Game Ideas',
+                    options: {
+                        slidesPerView: 3,
+                        spaceBetween: 15,
+                        breakpoints: {
+                            768: {
+                                slidesPerView: 1,
+                                spaceBetween: 0
+                            },
+                        }
+                    },
+                    projects: this.$store.state.funding.top_game_ideas || []
+                }
+            })
+
+            result.push({
+                type: 'trendingProjects_row',
+                data: {
+                    title: 'Top Content Ideas',
                     options: {
                         slidesPerView: 3,
                         spaceBetween: 15,
@@ -125,7 +142,7 @@ export default {
             result.push({
                 type: 'trendingProjects_row',
                 data: {
-                    title: 'Top Item Proposals',
+                    title: 'Top Item Ideas',
                     options: {
                         slidesPerView: 3,
                         spaceBetween: 15,

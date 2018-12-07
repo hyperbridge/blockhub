@@ -542,6 +542,24 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/republic-district'], resolve)
         },
         {
+            path: '/ideas',
+            name: 'Ideas',
+            component: (resolve) => require(['@/ui/screens/ideas'], resolve),
+            breadcrumb: [
+                { title: 'Home' },
+                { title: 'Ideas' }
+            ]
+        },
+        {
+            path: '/games',
+            name: 'Games',
+            component: (resolve) => require(['@/ui/screens/games'], resolve),
+            breadcrumb: [
+                { title: 'Home' },
+                { title: 'Games' }
+            ]
+        },
+        {
             path: '/projects',
             name: 'Crowdfunds',
             component: (resolve) => require(['@/ui/screens/projects'], resolve),

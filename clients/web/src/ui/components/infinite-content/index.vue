@@ -2,28 +2,34 @@
     <div>
         <template v-for="(item, index) in sliced" v-if="sliced">
             <transition-group name="slideUp" :key="index">
-                <div class="row justify-content-center frontpage-product" v-if="item.type === 'frontpageProduct'" :key="`level-1-${index}`">
-                    <div class="col-12 col-lg-6 frontpage-product__slider" v-if="item.data.images">
-                        <c-img :src="item.data.images.mediumTile" :data-link="`#/product/${item.data.id}`" />
-                    </div>
-                    <div class="col-12 col-lg-6 frontpage-product__info">
-                        <h2><a :href="`#/product/${item.data.id}`">{{ item.data.name }}</a></h2>
-                        <p>{{ item.data.shortDescription }}</p>
-                        <c-tags :tags="item.data.developerTags"></c-tags>
-                        <div class="frontpage-product__footer">
-                            <div class="price-list" v-if="item.data.price">
-                                <div class="price oldPrice" v-if="item.data.oldPrice">
-                                    {{ item.data.oldPrice | convertCurrency }}
-                                    <!--<span>usd</span>-->
+                <div class="row justify-content-center" v-if="item.type === 'frontpageProduct'" :key="`level-1-${index}`">
+                    <div class="col-12">
+                        <div class="frontpage-product">
+                            <div class="row">
+                                <div class="col-12 col-lg-6 frontpage-product__slider" v-if="item.data.images">
+                                    <c-img :src="item.data.images.mediumTile" :data-link="`#/product/${item.data.id}`" />
                                 </div>
-                                <div class="price">
-                                    {{ item.data.price | convertCurrency }}
-                                    <!--<span>usd</span>-->
+                                <div class="col-12 col-lg-6 frontpage-product__info">
+                                    <h2><a :href="`#/product/${item.data.id}`">{{ item.data.name }}</a></h2>
+                                    <p>{{ item.data.shortDescription }}</p>
+                                    <c-tags :tags="item.data.developerTags"></c-tags>
+                                    <div class="frontpage-product__footer">
+                                        <div class="price-list" v-if="item.data.price">
+                                            <div class="price oldPrice" v-if="item.data.oldPrice">
+                                                {{ item.data.oldPrice | convertCurrency }}
+                                                <!--<span>usd</span>-->
+                                            </div>
+                                            <div class="price">
+                                                {{ item.data.price | convertCurrency }}
+                                                <!--<span>usd</span>-->
+                                            </div>
+                                        </div>
+                                        <c-button status="success" v-if="item.data.price">
+                                            Proceed to Purchase
+                                        </c-button>
+                                    </div>
                                 </div>
                             </div>
-                            <c-button status="success" v-if="item.data.price">
-                                Proceed to Purchase
-                            </c-button>
                         </div>
                     </div>
                 </div>
@@ -139,7 +145,7 @@
                                 slot="title"
                                 class="mb-0"
                                 :name="item.data.title"
-                                showArrows
+                                :showArrows="item.data.projects.length > 4"
                                 showActions
                                 @prevClick="swiperProjects.slidePrev()"
                                 @nextClick="swiperProjects.slideNext()"
@@ -164,29 +170,29 @@
                 </div>
 
                 <div v-if="item.type === 'realms_row'" :key="`level-1-${index}`">
-                        <c-swiper :options="item.data.options" class="padding-10">
+                    <c-swiper :options="item.data.options" class="padding-10">
+                        <c-slide v-for="(realm, index) in item.data.realms" :key="index">
+                            <c-collection-item :item="realm" />
+                        </c-slide>
+                    </c-swiper>
+
+                    <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                        <c-heading-bar
+                            slot="title"
+                            class="mb-0"
+                            :name="item.data.title"
+                            :showArrows="true"
+                            :showActions="true"
+                            @prevClick="swiperRealms.slidePrev()"
+                            @nextClick="swiperRealms.slideNext()"
+                        />
+                        <c-swiper :options="item.data.options" :ref="swiper">
                             <c-slide v-for="(realm, index) in item.data.realms" :key="index">
-                                <c-collection-item :item="realm" />
+                                <c-button :href="`#/realm/${realm.id}`">{{ realm.name }}</c-button>
                             </c-slide>
                         </c-swiper>
-
-                        <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                            <c-heading-bar
-                                slot="title"
-                                class="mb-0"
-                                :name="item.data.title"
-                                :showArrows="true"
-                                :showActions="true"
-                                @prevClick="swiperRealms.slidePrev()"
-                                @nextClick="swiperRealms.slideNext()"
-                            />
-                            <c-swiper :options="item.data.options" :ref="swiper">
-                                <c-slide v-for="(realm, index) in item.data.realms" :key="index">
-                                    <c-button :href="`#/realm/${realm.id}`">{{ realm.name }}</c-button>
-                                </c-slide>
-                            </c-swiper>
-                            <p v-if="!item.data.realms.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
-                        </c-block>
+                        <p v-if="!item.data.realms.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
+                    </c-block>
                 </div>
 
                 <div class="row margin-bottom-30" v-if="item.type === 'gameSeries'" :key="`level-1-${index}`">
@@ -482,9 +488,13 @@ export default {
 
     .frontpage-product{
         margin-bottom: 30px;
+        background: rgba(0, 0, 0, 0.13);
+        border-radius: 5px;
+        width: 100%;
     }
     .frontpage-product__slider{
         img{
+            margin: 10px;
             width: 100%;
             height: 250px;
             object-fit: cover;
@@ -494,7 +504,7 @@ export default {
         h2{
             font-size: 26px;
             font-weight: bold;
-            margin: 0;
+            margin: 10px 0;
 
             a {
                 color: #fff;

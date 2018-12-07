@@ -170,7 +170,7 @@
                 <div class="h4" slot="header">Feedback/Report</div>
                 <template slot="body">
                     <p>
-                        Our goal are BlockHub is to be hyper-focused on our community needs. That's why we've created this handy way for you to give us feedback or report issues. Simply hold ALT and click somewhere. It will send us the location of what you're looking at. Report a problem or suggest something at the click of a button! So, what's up?
+                        Our goal at BlockHub is to be hyper-focused on the community. That's why we've created this handy way for you to give us feedback or report issues. Simply hold ALT and click somewhere. It will send us the location of what you're looking at. Report a problem or suggest something at the click of a button! So, what's up?
                     </p>
                     <br />
                     <div class="form-group">
