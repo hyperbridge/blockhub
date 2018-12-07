@@ -149,6 +149,10 @@ const store = new Vuex.Store({
         service('profiles'),
         service('messages'),
         service('projects'),
+        service('ideas'),
+        service('products'),
+        service('search'),
+        service('tags'),
 
         auth({
             userService: 'accounts'

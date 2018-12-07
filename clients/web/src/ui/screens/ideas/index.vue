@@ -30,12 +30,9 @@
                 <c-loading :enabled="!ideas.length" />
                 <c-idea-card
                     class="p-2 col-3"
-                    :image="idea.meta.images.mediumTile" 
                     :description="idea.description" 
-                    :funds="idea.meta.funds" 
                     :parentName="idea.product && idea.product.name" 
                     :parentDeveloper="idea.product && idea.product.developer" 
-                    :parentImage="idea.product && idea.product.meta.images.mediumTile"
                     :id="idea.id"
                     v-for="(idea, index) in ideas" :key="index"
                 />
@@ -61,8 +58,7 @@ export default {
     },
     computed: {
         ideas() {
-            return this.$store.getters['ideas/list'] // Object.values(this.$store.state.funding.ideas)//this.$store.getters['ideas/list']
-                //.filter(trx => trx.you.id == this.profileId);
+            return this.$store.getters['ideas/list']
         },
         list() {
             const result = []
