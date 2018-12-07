@@ -30,12 +30,12 @@
                 <c-loading :enabled="!projects.length" />
                 <c-project-card
                     class="p-2 col-3"
-                    :image="project.meta.images.mediumTile" 
                     :description="project.description" 
-                    :funds="project.meta.funds" 
+                    :image="project.meta && project.meta.images.mediumTile" 
+                    :funds="project.meta && project.meta.funds" 
                     :parentName="project.product && project.product.name" 
-                    :parentDeveloper="project.product && project.product.developer" 
-                    :parentImage="project.product && project.product.meta.images.mediumTile"
+                    :parentDeveloper="project.product && project.product.owner" 
+                    :parentImage="project.product && project.product.meta && project.product.meta.images.mediumTile"
                     :id="project.id"
                     v-for="(project, index) in projects" :key="index"
                 />

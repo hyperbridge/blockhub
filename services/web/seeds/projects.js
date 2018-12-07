@@ -3,10 +3,8 @@ const Project = require('../build/src/models/project').default
 const projects = require('./data/projects')
 
 exports.seed = function(knex) {
-    Objection.Model.knex(knex)
-
     return Project
-        .query()
+        .query(knex)
         .upsertGraph(projects)
 
     // // Deletes ALL existing entries

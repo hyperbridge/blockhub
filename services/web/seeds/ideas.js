@@ -3,9 +3,7 @@ const Idea = require('../build/src/models/idea').default
 const ideas = require('./data/ideas')
 
 exports.seed = function (knex) {
-    Objection.Model.knex(knex)
-
     return Idea
-        .query()
+        .query(knex)
         .upsertGraph(ideas)
 }

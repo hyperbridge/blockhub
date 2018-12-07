@@ -8,7 +8,7 @@
 
                 <h2>Submit Idea</h2>
                 <div style="text-align: left">
-                    <p>Are you looking to crowdfund that game you've been working hard on? We're here to help.</p>
+                    <p>Are you looking to suggest ideas for your favorite game? We're here to help.</p>
                     <p>Maybe you just have an awesome idea, or want to inspire your favourite dev studio to continue a series (*cough* half-life).</p>
                 </div>
                 <br />
@@ -44,7 +44,7 @@
 <script>
 export default {
     components: {
-        'c-idea-card': (resolve) => require(['@/ui/components/idea/card'], resolve),
+        'c-idea-card': (resolve) => require(['@/ui/components/idea-card'], resolve),
     },
     created() {
         this.$store.dispatch('ideas/find', {

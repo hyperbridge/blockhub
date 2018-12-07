@@ -7,20 +7,20 @@
                 slot="title"
                 class="mb-0"
                 name="Browse All Games"
-                :showArrows="projects.length > 4"
+                :showArrows="games.length > 4"
             />
             <div class="row">
-                <c-loading :enabled="!projects.length" />
-                <c-project-card
+                <c-loading :enabled="!games.length" />
+                <c-game-card
                     class="p-2 col-3"
-                    :image="project.meta.images.mediumTile" 
-                    :description="project.description" 
-                    :funds="project.meta.funds" 
-                    :parentName="project.product && project.product.name" 
-                    :parentDeveloper="project.product && project.product.developer" 
-                    :parentImage="project.product && project.product.meta.images.mediumTile"
-                    :id="project.id"
-                    v-for="(project, index) in projects" :key="index"
+                    :image="game.meta.images.mediumTile" 
+                    :description="game.description" 
+                    :funds="game.meta.funds" 
+                    :parentName="game.product && game.product.name" 
+                    :parentDeveloper="game.product && game.product.developer" 
+                    :parentImage="game.product && game.product.meta.images.mediumTile"
+                    :id="game.id"
+                    v-for="(game, index) in games" :key="index"
                 />
             </div>
         </c-block>
@@ -30,10 +30,10 @@
 <script>
 export default {
     components: {
-        'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
+        'c-game-card': (resolve) => require(['@/ui/components/game-card'], resolve),
     },
     created() {
-        this.$store.dispatch('projects/find', {
+        this.$store.dispatch('products/find', {
             query: {
                 $sort: {
                     createdAt: -1
@@ -43,8 +43,8 @@ export default {
         })
     },
     computed: {
-        projects() {
-            return this.$store.getters['projects/list'] // Object.values(this.$store.state.funding.projects)//this.$store.getters['projects/list']
+        games() {
+            return this.$store.getters['products/list'] // Object.values(this.$store.state.funding.projects)//this.$store.getters['projects/list']
                 //.filter(trx => trx.you.id == this.profileId);
         },
         list() {
