@@ -635,7 +635,23 @@
         },
         created() {
             window.addEventListener('resize', this.handleResize())
-            this.handleResize()
+            this.handleResize();
+            BlockHub.Notification.warning('body here', 'Warning title here', {
+                timeout: 500000000,
+                pauseOnHover: true
+            })
+            BlockHub.Notification.error('body here', 'title here', {
+                timeout: 500000000,
+                pauseOnHover: true
+            })
+            BlockHub.Notification.success('body here', 'title here', {
+                timeout: 500000000,
+                pauseOnHover: true
+            })
+            BlockHub.Notification.info('body here', 'title here', {
+                timeout: 500000000,
+                pauseOnHover: true
+            })
         },
         mounted() {
             this.updateBreadcrumbLinks()
@@ -1229,5 +1245,83 @@
         user-select: none;
         outline: none;
         box-shadow: none;
+    }
+    .snotify{
+        width: 350px!important;
+        .snotifyToast{
+            border-radius: 5px;
+            position: relative;
+            font-size: 14px;
+            &:after{
+                content: "";
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                font-size: 16px;
+                background: url("../../../../static/img/snotifi-act.png") no-repeat right top;
+                width: 100px;
+                height: 20px;
+                background-size: 100% auto;
+            }
+            .snotifyToast__inner{
+                display: flex;
+                padding: 5px 10px 5px 70px;
+                min-height: 68px;
+                .snotify-icon{
+                    right: unset;
+                    left: 10px;
+                }
+            }
+            &.snotifyToast{
+                background-color: rgba(28, 32, 50, .8);
+                border: 1px solid rgba(255, 255, 255, .2);
+            }
+            &.snotify-warning{
+                color: #f4d76f;
+                border-color: rgba(250, 216, 93, .4);
+                .snotifyToast__title,
+                .snotifyToast__body{
+                    color: #f4d76f;
+                }
+                .snotify-icon--warning{
+                    background-image: url("../../../../static/img/snotify-warning-icon.png");
+                    background-size: 100% auto;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+            }
+            &.snotify-info{
+                color: #0c79e3;
+                border-color: rgba(12, 121, 227, .4);
+                .snotifyToast__title,
+                .snotifyToast__body{
+                    color: #0c79e3;
+                }
+            }
+            &.snotify-error{
+                color: #DC3628;
+                border-color: rgba(220, 54, 40, .4);
+                .snotifyToast__title,
+                .snotifyToast__body{
+                    color: #DC3628;
+                }
+            }
+            &.snotify-success{
+                color: #3b9542;
+                border-color: rgba(59, 149, 66, .4);
+                .snotifyToast__title,
+                .snotifyToast__body{
+                    color: #3b9542;
+                }
+            }
+        }
+        .snotifyToast__progressBar{
+            display: none;
+        }
+        .snotifyToast__title{
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
     }
 </style>
