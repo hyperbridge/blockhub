@@ -7,10 +7,16 @@
                 <i class="fas fa-crown margin-left-5" style="color: #FADC72" v-if="isAdmin"></i>
             </strong>
             <span>{{ game }}</span>
+            <span v-if="!game && $slots['sub-info']">
+                <slot name="sub-info" />
+            </span>
         </div>
         <div class="user-action" v-if="action">
             <i class="fas" :class=" volume ? 'fa-volume-up' : 'fa-volume-off'" @click="toggleVolume"></i>
             <i class="fas" :class=" microphone ? 'fa-microphone' : 'fa-microphone-slash'" @click="toggleMicrophone"></i>
+        </div>
+        <div class="user-custom-action" style="margin-left: auto;" v-if="$slots.default && !action">
+            <slot />
         </div>
     </div>
 </template>
@@ -29,7 +35,7 @@
             action:{
                 type: Boolean,
                 default: false
-            }
+            },
         },
         components:{
             'c-chat-user-avatar': (resolve) => require(['@/ui/components/chat-new/user-avatar'], resolve),

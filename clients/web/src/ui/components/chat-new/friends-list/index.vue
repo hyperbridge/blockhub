@@ -25,11 +25,7 @@
                 <c-chat-friends-list :list="users" title="Favorites" />
                 <c-chat-friends-list :list="users" title="All" />
             </div>
-            <div class="chat-friends-suggestion">
-                <i class="fas fa-user-plus"></i>
-                Suggested friends
-                <i class="fas fa-angle-down"></i>
-            </div>
+            <c-chat-suggestion-list :list="users" />
         </div>
     </div>
 </template>
@@ -40,6 +36,7 @@
             'c-search': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
             'c-chat-user': (resolve) => require(['@/ui/components/chat-new/user'], resolve),
             'c-chat-friends-list': (resolve) => require(['@/ui/components/chat-new/friends-list/list'], resolve),
+            'c-chat-suggestion-list': (resolve) => require(['@/ui/components/chat-new/friends-list/suggestion-list'], resolve),
         },
         data(){
             return{
@@ -163,6 +160,9 @@
         align-items: center;
         padding: 5px 10px;
         border-bottom: 1px solid rgba(255, 255, 255, .1);
+        flex-basis: 48px;
+        flex-grow: 0;
+        flex-shrink: 0;
     }
 
     .user-avatar{
@@ -215,23 +215,11 @@
         flex-direction: column;
         padding: 10px;
         height: 400px;
-        background: rgba(0, 0, 0, .2);
     }
-    .chat-friends-suggestion{
-        padding: 5px 10px;
+    .chat-friends-list__body{
         display: flex;
-        align-items: center;
-        color: #fff;
-        background: #3d3d5e;
-        font-size: 14px;
-        i{
-            &:first-child{
-                margin-right: 8px;
-                color: #4c7be5;
-            }
-            &:last-child{
-                margin-left: auto;
-            }
-        }
+        flex-direction: column;
+        height: 480px;
+        background: #2a2944;
     }
 </style>

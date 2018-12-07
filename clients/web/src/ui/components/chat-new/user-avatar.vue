@@ -12,7 +12,7 @@
             </div>
         </div>
         <img :src="avatar" />
-        <span class="user-status" :class="['status-' + status]"></span>
+        <span class="user-status" :class="['status-' + status]" v-if="status"></span>
     </div>
 </template>
 
