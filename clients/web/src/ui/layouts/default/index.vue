@@ -376,6 +376,7 @@
             'c-asset-navigation': (resolve) => require(['@/ui/components/navigation/asset'], resolve),
             'c-product-navigation': (resolve) => require(['@/ui/components/navigation/product'], resolve),
             'c-project-navigation': (resolve) => require(['@/ui/components/navigation/project'], resolve),
+            'c-idea-navigation': (resolve) => require(['@/ui/components/navigation/idea'], resolve),
             'c-welcome-popup': (resolve) => require(['@/ui/components/welcome-popup/index.vue'], resolve),
             'c-download-popup': (resolve) => require(['@/ui/components/download-popup/index.vue'], resolve),
             'c-unlock-popup': (resolve) => require(['@/ui/components/unlock-popup/index.vue'], resolve),

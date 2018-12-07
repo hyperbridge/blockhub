@@ -82,7 +82,7 @@ export default {
                             },
                         }
                     },
-                    projects: this.$store.state.funding.top_game_ideas || []
+                    projects: this.$store.state.funding.topGameIdeas || []
                 }
             })
 
@@ -100,7 +100,7 @@ export default {
                             },
                         }
                     },
-                    projects: this.$store.state.funding.top_item_suggestions || []
+                    projects: this.$store.state.funding.topItemIdeas || []
                 }
             })
 

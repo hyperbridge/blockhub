@@ -10,12 +10,12 @@ const beforeCreate = function(options = {}) {
 
 const beforeUpdate = function(options = {}) {
     return async context => {
-        const item = await context.app.service('/profiles').get(context.id)
+        // const item = await context.app.service('/ideas').get(context.id)
 
-        context.data = {
-            ...item,
-            ...context.data
-        }
+        // context.data = {
+        //     ...item,
+        //     ...context.data
+        // }
 
         return context
     }
@@ -44,14 +44,13 @@ const accessGate = function(options = {}) {
         }
 
         await Promise.all(items.map(async item => {
-            console.log(item.accountId, account.id)
             if (method === 'create') {
             }
             else if (method === 'update') {
             }
 
             if (!item) {
-                throw new Error('Profile not found')
+                throw new Error('Idea not found')
             }
 
             if (item.accountId !== account.id) {

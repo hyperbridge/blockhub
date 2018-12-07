@@ -170,11 +170,11 @@
         },
         components: {
             'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
-            'c-badges': (resolve) => require(['@/ui/components/idea/badges'], resolve),
+            'c-badges': (resolve) => require(['@/ui/components/project/badges'], resolve),
             'c-rating-block': (resolve) => require(['@/ui/components/rating-block'], resolve),
             'c-idea-overview': (resolve) => require(['@/ui/screens/idea-overview'], resolve),
             'c-idea-community': (resolve) => require(['@/ui/screens/idea-community'], resolve),
-            'c-updates-count': (resolve) => require(['@/ui/components/idea/updates-count'], resolve),
+            'c-updates-count': (resolve) => require(['@/ui/components/project/updates-count'], resolve),
             'multiselect': (resolve) => require(['vue-multiselect'], resolve),
         },
         data() {

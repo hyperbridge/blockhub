@@ -16,9 +16,9 @@ const updateState = (savedData, updatedState = {}) => {
         ...updatedState,
         projects: DB.funding ? DB.funding.projects.find({ 'status': { '$eq': 'approved' } }) : [],
         trendingProjects: DB.funding ? DB.funding.projects.find({ 'systemTags': { '$contains': ['trending'] }, 'status': { '$eq': 'approved' } }) : [],
-        top_game_ideas: DB.funding ? DB.funding.projects.find({ 'systemTags': { '$contains': ['top', 'game'] } }) : [],
-        top_content_suggestions: DB.funding ? DB.funding.projects.find({ 'systemTags': { '$contains': ['top', 'content', 'suggestion'] } }) : [],
-        top_item_suggestions: DB.funding ? DB.funding.projects.find({ 'systemTags': { '$contains': ['top', 'item', 'suggestion'] } }) : [],
+        topGameIdeas: DB.funding ? DB.funding.projects.find({ 'systemTags': { '$contains': ['top', 'game'] } }) : [],
+        topContentIdeas: DB.funding ? DB.funding.projects.find({ 'systemTags': { '$contains': ['top', 'content', 'suggestion'] } }) : [],
+        topItemIdeas: DB.funding ? DB.funding.projects.find({ 'systemTags': { '$contains': ['top', 'item', 'suggestion'] } }) : [],
         most_popular_games: DB.funding ? DB.funding.projects.find({ 'systemTags': { '$contains': ['popular', 'game'] } }) : []
     }
 

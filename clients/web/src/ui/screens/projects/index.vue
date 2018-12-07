@@ -118,7 +118,7 @@ export default {
                             },
                         }
                     },
-                    projects: this.$store.state.funding.top_content_suggestions || []
+                    projects: this.$store.state.funding.topContentIdeas || []
                 }
             })
 
@@ -136,7 +136,7 @@ export default {
                             },
                         }
                     },
-                    projects: this.$store.state.funding.top_item_suggestions || []
+                    projects: this.$store.state.funding.topItemIdeas || []
                 }
             })
 

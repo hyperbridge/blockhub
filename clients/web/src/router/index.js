@@ -551,6 +551,15 @@ const router = new Router({
             ]
         },
         {
+            path: '/idea/:id',
+            name: 'Idea',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/idea'], resolve),
+            meta: {
+                section: 'overview'
+            }
+        },
+        {
             path: '/games',
             name: 'Games',
             component: (resolve) => require(['@/ui/screens/games'], resolve),
