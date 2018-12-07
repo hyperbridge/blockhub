@@ -204,6 +204,7 @@
 <script>
     import axios from 'axios'
     import Vue from 'vue'
+    import * as DB from '@/db'
 
     export default {
         props: ['data'],
@@ -403,6 +404,10 @@
                         ...this.$store.state.application.account,
                         ...this.$store.state.auth.user
                     }
+
+                    BlockHub.feathersClient.service(`/application/state`).find().then((res) => {
+                        this.$store.commit('application/updateState', res)
+                    })
                 }
             },
             '$store.state.application.activeProfile.role'(newVal) {

@@ -19,7 +19,7 @@
                                         style="box-shadow: none" v-if="$store.state.application.desktopMode">
                                 <i class="fa fa-star"/>
                             </c-button>
-                            <c-button status="plain" icon-hide v-if="navigationKey === 'store'" @click="showSlide('top_lists')"
+                            <c-button status="plain" icon-hide v-if="navigationKey === 'store'" @click="showSlide('topLists')"
                                         style="box-shadow: none">
                                 <i class="fa fa-trophy"/>
                             </c-button>
@@ -55,7 +55,7 @@
                                         style="box-shadow: none" v-if="$store.state.application.desktopMode">
                                 <i class="fa fa-star"/>
                             </c-button>
-                            <c-button status="plain" v-if="navigationKey === 'store'" icon-hide @click="showSlide('top_lists')"
+                            <c-button status="plain" v-if="navigationKey === 'store'" icon-hide @click="showSlide('topLists')"
                                         style="box-shadow: none">
                                 <i class="fa fa-trophy"/>
                             </c-button>
@@ -89,7 +89,7 @@
                                         v-if="$store.state.application.desktopMode">
                                 <i class="fa fa-star"/>
                             </c-button>
-                            <c-button status="plain" v-if="navigationKey === 'store'" icon-hide @click="showSlide('top_lists')"
+                            <c-button status="plain" v-if="navigationKey === 'store'" icon-hide @click="showSlide('topLists')"
                                         style="box-shadow: none">
                                 <i class="fa fa-trophy"/>
                             </c-button>
@@ -135,7 +135,7 @@
                                         style="box-shadow: none" v-if="$store.state.application.desktopMode">
                                 <i class="fa fa-star"/>
                             </c-button>
-                            <c-button status="plain" icon-hide @click="showSlide('top_lists')" class="active">
+                            <c-button status="plain" icon-hide @click="showSlide('topLists')" class="active">
                                 <i class="fa fa-trophy"/>
                             </c-button>
                         </div>
@@ -238,20 +238,20 @@
             showSlide(sl) {
                 switch (sl) {
                     case 'notification':
-                        this.swiper.slideTo(0, 1000, false);
-                        break;
+                        this.swiper.slideTo(0, 1000, false)
+                        break
                     case 'messages':
-                        this.$el.classList.add("active");
-                        this.swiper.slideTo(1, 1000, false);
-                        break;
+                        this.$el.classList.add("active")
+                        this.swiper.slideTo(1, 1000, false)
+                        break
                     case 'updates':
-                        this.$el.classList.add("active");
-                        this.swiper.slideTo(2, 1000, false);
-                        break;
-                    case 'top_lists':
-                        this.$el.classList.add("active");
-                        this.swiper.slideTo(3, 1000, false);
-                        break;
+                        this.$el.classList.add("active")
+                        this.swiper.slideTo(2, 1000, false)
+                        break
+                    case 'topLists':
+                        this.$el.classList.add("active")
+                        this.swiper.slideTo(3, 1000, false)
+                        break
                 }
 
             },

@@ -3,7 +3,7 @@
         <div class="col-12">
             <c-block title="Top 20 Items" :noGutter="true" :onlyContentBg="true" :bgGradient="true" showActions>
                 <template slot="additional-action">
-                    <span class="margin-right-15">Sort by:</span>
+                    <span class="margin-right-15" hidden>Sort by:</span>
                     <c-heading-bar-fields
                         v-for="(opt, index) in sortOptions"
                         :key="index"
@@ -59,7 +59,6 @@
                 </div>
                 <transition name="slide-in-top">
                     <div v-if="filtersActive">
-                        Active filters:
                         <div class="flex-center-wrap">
                             <c-option-tag
                                 v-if="phrase"

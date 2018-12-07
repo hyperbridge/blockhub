@@ -13,7 +13,7 @@
                 :showActions="true"
             >
                 <template slot="additional-action">
-                    <span class="sort-title">Sort by:</span>
+                    <span class="sort-title" hidden>Sort by:</span>
                     <c-heading-bar-fields
                         v-for="(opt, index) in sortOptions"
                         :key="index"
@@ -46,7 +46,6 @@
             </div>
             <transition name="slide-in">
                 <div v-if="filtersActive" class="active-filters">
-                    Active filters:
                     <div class="active-filters__content">
                         <c-option-tag
                             v-if="phrase.length"

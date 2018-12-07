@@ -27,6 +27,7 @@ import votes from './votes'
 import ideas from './ideas'
 import tags from './tags'
 import search from './search'
+import application from './application'
 
 export default {
     accounts,
@@ -56,5 +57,7 @@ export default {
     projects,
     ideas,
     tags,
-    search
+    votes,
+    search,
+    application
 }
