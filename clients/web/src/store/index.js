@@ -6,6 +6,7 @@ import feathersClient from '../api/feathers-client'
 import router from '../router'
 import * as DB from '../db'
 import * as ChaosMonkey from '../framework/chaos-monkey'
+import * as ReputationEngine from '../framework/reputation-engine'
 import * as Bridge from '../framework/desktop-bridge'
 import * as funding from '../modules/funding'
 import * as news from '../modules/news'
@@ -203,6 +204,7 @@ const store = new Vuex.Store({
 
 window.BlockHub.Bridge = Bridge
 window.BlockHub.ChaosMonkey = ChaosMonkey
+window.BlockHub.ReputationEngine = ReputationEngine
 window.BlockHub.store = store
 window.BlockHub.router = router // doesnt work?
 window.BlockHub.DB = DB
@@ -497,6 +499,7 @@ export let initializer = () => {
             // TODO: is this a race condition?
             //TODO: PeerService.init()
 
+            ReputationEngine.init(store, router)
             Bridge.init(store, router)
 
             store.dispatch('database/init')

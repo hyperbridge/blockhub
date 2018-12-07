@@ -315,7 +315,7 @@
             saveSettings() {
                 BlockHub.saveDatabase()
 
-                BlockHub.Notifications.info('', 'Settings saved', {
+                BlockHub.Notification.info('', 'Settings saved', {
                     timeout: 2000,
                     pauseOnHover: true
                 })

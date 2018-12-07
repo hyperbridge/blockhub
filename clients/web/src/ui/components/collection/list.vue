@@ -56,7 +56,7 @@
     .collection-list{
         padding: 10px;
         border-radius: 5px;
-        background: rgba(255, 255, 255, .2);
+        background: rgba(255, 255, 255, .1);
         position: relative;
         backdrop-filter: blur(2px);
     }

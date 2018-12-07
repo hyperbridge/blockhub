@@ -259,7 +259,7 @@ export const runCommand = async (cmd, meta = {}) => {
         } else if (cmd.key === 'systemError') {
             console.warn('[Bridge] Received system error from desktop', cmd.data)
 
-            BlockHub.Notifications.error(cmd.data, 'System Error', {
+            BlockHub.Notification.error(cmd.data, 'System Error', {
                 timeout: 5000,
                 pauseOnHover: true
             })

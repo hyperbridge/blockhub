@@ -636,7 +636,7 @@
             "id": null,
             "name": null,
             "role": "user",
-            "developerId": null,
+            "reputation": 0,
             "badges": [],
             "assets": [],
             "licenses": [],
@@ -646,7 +646,8 @@
             "passphrase": null,
             "privateKey": null,
             "productWishlist": {},
-            "productFavorites": {}
+            "productFavorites": {},
+            "events": []
         },
         "account": {
             "address": null,

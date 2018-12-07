@@ -34,7 +34,7 @@ Vue.use(VueDraggable)
 
 Vue.use(Snotify, {
     toast: {
-        position: SnotifyPosition.leftBottom
+        position: SnotifyPosition.rightTop
     }
 })
 
@@ -70,7 +70,7 @@ const notifyError = debounce(function (message) {
 
     if (message.indexOf('TypeError') !== -1) {
         if (store.state.application.account.settings.client.system_warnings) {
-            BlockHub.Notifications.error(message, 'UI Error', {
+            BlockHub.Notification.error(message, 'UI Error', {
                 timeout: 5000,
                 pauseOnHover: true
             })
@@ -134,5 +134,5 @@ initializer().then(() => {
         //     })
     })
 
-    BlockHub.Notifications = BlockHub.Vue.$snotify
+    BlockHub.Notification = BlockHub.Vue.$snotify
 })
