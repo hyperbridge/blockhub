@@ -1,7 +1,11 @@
 [
     {
         "status": "active",
+        "email": "eric@muyser.com",
         "firstName": "First name",
-        "lastName": "Last name"
+        "lastName": "Last name",
+        "address": null,
+        "avatar": "https://s.gravatar.com/avatar/40901655a5f67296d89a7d3b069b373a?s=60",
+        "meta": {}
     }
 ]
