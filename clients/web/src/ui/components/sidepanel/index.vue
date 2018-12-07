@@ -27,8 +27,11 @@
 
                         <div class="navigation">
                             <div v-if="$store.state.application.account.notifications.length > 0">
-                                <c-notification v-for="(notif, index) in $store.state.application.account.notifications" @showPopup="$store.commit('application/showNotification', notif)"
-                                                :key="index" :notification="notif" />
+                                <c-notification v-for="(notif, index) in $store.state.application.account.notifications" 
+                                                :notification="notif"
+                                                @showPopup="$store.commit('application/showNotification', notif)"
+                                                @close="$store.state.application.account.notifications.splice(index, 1)"
+                                                :key="`${notif.title}index`" />
                             </div>
                             <div v-else>All clear. Good work!</div>
                         </div>

@@ -44,7 +44,8 @@
         },
         methods: {
             actionOnClose() {
-                this.show = false;
+                this.show = false
+                setTimeout(() => this.$emit('close'), 250)
             },
         },
         computed: {
@@ -74,9 +75,8 @@
         overflow: hidden;
         height: auto;
         display: inline-block;
-        transition: all 500ms ease-in-out;
+        transition: all 200ms ease-in-out;
         color: #fff;
-        text-shadow: 0 3px 3px rgba(0, 0, 0, .5);
         .title {
             width: 100%;
             display: inline-block;
