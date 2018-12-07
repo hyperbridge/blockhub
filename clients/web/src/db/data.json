@@ -854,6 +854,27 @@
         "gameSeries": [],
         "collections": [],
         "curatorReviews": [],
+        "defaultIdea": {
+            "name": "My Idea",
+            "value": "<p>Describe your idea</p>",
+            "tags": [],
+            "meta": {
+                "revision": 0,
+                "created": 1531430916082,
+                "version": 0,
+                "images": {},
+                "tags": [
+                    "game"
+                ],
+                "supportEmail": "",
+                "twitterUsername": "",
+                "shareText": "",
+                "comments": [],
+                "contributors": [],
+                "moderators": [],
+                "community": {}
+            }
+        },
         "defaultProduct": {
             "name": "My Product Name",
             "images": {

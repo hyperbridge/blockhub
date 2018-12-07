@@ -302,8 +302,8 @@
             create() {
                 this.project.ownerId = this.$store.state.application.activeProfile.id
 
-                this.$store.dispatch('projects/create', this.project).then((projectResult) => {
-                    this.project.id = projectResult.id
+                this.$store.dispatch('projects/create', this.project).then((res) => {
+                    this.project.id = res.id
                     this.notice = "Congratulations, your project has been created!"
 
                     this.$router.push('/business/project/' + this.project.id)

@@ -13,6 +13,10 @@ export default class Community extends Model {
     meta!: Object
     parentId!: Number
 
+    currentActiveUsers!: Number
+    monthlyActiveUsers!: Number
+    dailyActiveUsers!: Number
+
     static get tableName() {
         return 'communities'
     }

@@ -53,8 +53,8 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p>What's your developer profile address?</p>
-                                <div class="form-group">
+                                <p v-decentralized-mode>What's your developer profile address?</p>
+                                <div class="form-group" v-decentralized-mode>
                                     <label class="sr-only">Developer Profile Address</label>
                                     <input type="text" class="form-control" placeholder="Developer Profile Address"
                                             name="developerProfileAddress" v-model="developerProfileAddress">
@@ -197,8 +197,7 @@
                     && this.contactName
                     && this.contactNumber
                     && this.contactEmail
-                    && this.companyWebsite
-                    && this.developerProfileAddress) {
+                    && this.companyWebsite) {
                         const bodyFormData = new FormData()
 
                         bodyFormData.set('entry.524169597', this.companyName)

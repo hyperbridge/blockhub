@@ -65,6 +65,9 @@ exports.up = knex => {
 
             table.string('name', 100)
             table.string('description', 500)
+            table.integer('currentActiveUsers').unsigned()
+            table.integer('dailyActiveUsers').unsigned()
+            table.integer('monthlyActiveUsers').unsigned()
         })
         .createTable('assets', table => {
             table.increments('id').primary()

@@ -52,8 +52,10 @@
 
                                     <multiselect v-model="idea.tags"
                                                     class="dark-mode"
+                                                    label="value"
+                                                    track-by="key"
                                                     :multiple="true"
-                                                    :taggable="true"
+                                                    :taggable="false"
                                                     :options="tagOptions">
                                     </multiselect>
                                     <div
@@ -115,18 +117,18 @@
                         </div>
                     </div>
                 </div>
-                <c-button status="dark" class="w-100 d-flex d-md-none justify-content-center my-4" size="lg" data-toggle="collapse" data-target="#idea_nav" aria-expanded="false" aria-controls="idea_nav">
+                <c-button status="dark" class="w-100 d-flex d-md-none justify-content-center my-4" size="lg" data-toggle="collapse" data-target="#c-nav" aria-expanded="false" aria-controls="c-nav">
                     Menu
                 </c-button>
-                <div class="collapse show idea_nav" id="idea_nav">
-                    <ul class="nav nav-tabs margin-bottom-40 justify-content-between">
+                <div class="collapse show c-nav" id="c-nav">
+                    <ul class="nav nav-tabs justify-content-between">
                         <li class="nav-item" @click="section='overview'">
-                            <router-link :to="`/idea/${idea.id}`" class="nav-link" :class="{ 'active': section === 'overview' }">
+                            <router-link :to="`/idea/${idea.id || 'new'}`" class="nav-link" :class="{ 'active': section === 'overview' }">
                                 Overview
                             </router-link>
                         </li>
                         <li class="nav-item" @click="section='community'" v-darklaunch="'COMMUNITY'">
-                            <router-link :to="`/idea/${idea.id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">
+                            <router-link :to="`/idea/${idea.id || 'new'}/community`" class="nav-link" :class="{ 'active': section === 'community' }">
                                 Community
                                 <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
                                     0
@@ -140,14 +142,16 @@
                 </div>
 
                 <div class="row" id="configure" v-if="section === 'configure'" :editing="editing">
-                    <c-block title="Campaign">
-
-                    </c-block>
+                    <div class="col-12">
+                        <c-block title="Campaign">
+                            test
+                        </c-block>
+                    </div>
                 </div>
 
             </div>
 
-            <div class="col-12" id="overview">
+            <div class="col-12 margin-top-40 " id="overview">
                 <transition name="page" mode="out-in">
                     <c-idea-overview :idea="idea" v-if="section === 'overview'" :editing="editing" />
                     <c-idea-community :idea="idea" v-if="section === 'community'" :editing="editing" />
@@ -158,6 +162,7 @@
 </template>
 
 <script>
+    import Vue from 'vue'
     import 'vue-multiselect/dist/vue-multiselect.min.css'
 
     export default {
@@ -180,6 +185,7 @@
         data() {
             return {
                 errors: [],
+                notice: '',
                 activeElement: {
                     name: false,
                     backgroundImage: false,
@@ -189,10 +195,10 @@
                     content: false
                 },
                 tagOptions: [
-                    'game',
-                    'mod',
-                    'item',
-                    'other'
+                    { key: 'game', value: 'Game' },
+                    { key: 'mod', value: 'Mod' },
+                    { key: 'item', value: 'Item' },
+                    { key: 'other', value: 'Other' }
                 ]
             }
         },
@@ -225,10 +231,24 @@
                 if (this.id === 'new') {
                     this.$store.dispatch('application/setEditorMode', 'publishing')
 
-                    // API: CREATE PROJECT
+                    this.idea.ownerId = this.$store.state.application.activeProfile.id
+
+                    this.$store.dispatch('ideas/create', this.idea).then((res) => {
+                        this.idea.id = res.id
+                        this.notice = "Congratulations, your idea has been created!"
+
+                        this.$router.push('/idea/' + this.idea.id)
+                    })
                 } else {
-                    this.$store.dispatch('funding/updateIdea', this.idea)
                     this.$store.dispatch('application/setEditorMode', 'publishing')
+                    
+                    this.$store.dispatch('ideas/update', [this.idea.id, this.idea, {
+                        query: {
+                            $eager: 'tags'
+                        }
+                    }]).then(() => {
+                        this.notice = "Idea has been saved."
+                    })
                 }
             },
             checkForm() {
@@ -256,7 +276,7 @@
                 let idea = null
 
                 if (this.id === 'new') {
-                    idea = this.$store.state.funding.defaultProject
+                    idea = this.$store.state.marketplace.defaultIdea
 
                     this.$store.state.application.developerMode = true
                     this.$store.dispatch('application/setEditorMode', 'editing')
@@ -338,7 +358,7 @@
                 height: 300,
                 callbacks: {
                     onBlur: () => {
-                        Vue.set(this.idea, 'content', $('#summernote').summernote('code'))
+                        Vue.set(this.idea, 'value', $('#summernote').summernote('code'))
                     }
                 }
             })
@@ -467,7 +487,7 @@
         opacity: 0.3;
     }
     @media (min-width: 768px){
-        .idea_nav{
+        .c-nav{
             display: block!important;
         }
     }
@@ -476,7 +496,7 @@
             justify-content: center;
             margin-bottom: 5px;
         }
-        .idea_nav{
+        .c-nav{
             ul{
                 flex-direction: column;
                 li{

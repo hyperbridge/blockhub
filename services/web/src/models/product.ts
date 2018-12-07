@@ -14,13 +14,41 @@ type Language = Object
 type SystemRequirement = Object
 type ProductPlan = Object
 
+type ProductMeta = {
+    name: String
+    members: Array<Profile>
+    isProposal: Boolean
+    price: Number
+    oldPrice: Number
+    images: Object
+    video: String
+    genre: String
+    releaseDate: String
+    developer: String
+    publisher: String
+    developerTags: Array<String>
+    languageSupport: Array<Language>
+    systemRequirements: Array<SystemRequirement>
+    systemTags: Array<Tag>
+    type: String
+    downloads: Number
+    plans: Array<ProductPlan>
+    frequentlyTradedAssets: Array<Asset>
+    saleBox: Object
+    assets: Array<Asset>
+    community: Object
+    nameUrl: String
+    steamId: Number
+    author: String
+}
+
 export default class Product extends Model {
     id!: Number
     createdAt!: String
     updatedAt!: String
     key!: String
     value!: String
-    meta!: Object
+    meta!: ProductMeta
     parentId!: Number
     score!: Number
 
@@ -36,31 +64,6 @@ export default class Product extends Model {
     project!: Project
     projectId!: Number
 
-    name!: String
-    members: Array<Profile> = []
-    isProposal: Boolean = false
-    price!: Number
-    oldPrice!: Number
-    images!: Object
-    video!: String
-    genre!: String
-    releaseDate!: String
-    developer!: String
-    publisher!: String
-    developerTags!: Array<String>
-    languageSupport!: Array<Language>
-    systemRequirements!: Array<SystemRequirement>
-    systemTags!: Array<Tag>
-    type!: String
-    downloads!: Number
-    plans!: Array<ProductPlan>
-    frequentlyTradedAssets!: Array<Asset>
-    saleBox!: Object
-    assets!: Array<Asset>
-    community!: Object
-    nameUrl!: String
-    steamId!: Number
-    author!: String
 
     static get tableName() {
         return 'products'

@@ -55,7 +55,7 @@
             <c-button iconHide @click="showInstaller = !showInstaller" hidden>Open installer</c-button>
 
             <c-rating-block class="margin-bottom-20" :items="product.rating"
-                            :parent_url="`#/product/${product.id}`" v-darklaunch="'RATINGS'" />
+                            :parentUrl="`#/product/${product.id}`" v-darklaunch="'RATINGS'" />
 
             <c-frequently-traded-assets class="margin-bottom-20" :items="product.frequentlyTradedAssets"
                                         :assetsUrl="`#/product/${product.id}/assets`" v-darklaunch="'ASSETS'" />
@@ -228,6 +228,7 @@
                     if (el.recent)
                         arr.push(el)
                 })
+
                 return arr
             },
         }

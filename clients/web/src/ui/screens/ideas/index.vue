@@ -8,13 +8,11 @@
 
                 <h2>Submit Idea</h2>
                 <div style="text-align: left">
-                    <p>Are you looking to suggest ideas for your favorite game? We're here to help.</p>
+                    <p>Looking to suggest ideas for your favorite game? We're here to help.</p>
                     <p>Maybe you just have an awesome idea, or want to inspire your favourite dev studio to continue a series (*cough* half-life).</p>
                 </div>
                 <br />
-                <p v-if="$store.state.application.developerMode"><c-button class="c-btn-lg outline-white" href="#/business/idea/new">Get Started</c-button></p>
-                <p v-if="!$store.state.application.developerMode"><c-button class="c-btn-lg outline-white" href="#/developer/apply">Get Started</c-button></p>
-                <!-- <p v-if="!$store.state.application.desktopMode"><c-button class="c-btn-lg outline-white" @click="$store.commit('application/activateModal', 'welcome')">Get Started</c-button></p> -->
+                <p><c-button class="c-btn-lg outline-white" href="#/idea/new">Get Started</c-button></p>
             </div>
         </div>
 
