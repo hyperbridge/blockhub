@@ -5415,6 +5415,15 @@ storiesOf('Chat', module)
                 </div>`
     }))
 
+storiesOf('Games list', module)
+    .add('base', () => ({
+        components:{
+            'c-game-tab': (resolve) => require(['@/ui/components/games-list/index'], resolve),
+        },
+        template: `<div class="row p-3 m-0 flex-wrap" style="width: 900px">
+                    <c-game-tab />
+                </div>`
+    }))
 
 
 /*
