@@ -38,7 +38,7 @@
 
                 <div class="row margin-bottom-30" v-if="item.type === 'featured_product_gallery'">
                     <div class="col-12">
-                        <c-main-banner class="margin-bottom-30" :slides="item.data.slides" v-if="item.data.slides"/>
+                        <c-banner class="margin-bottom-30" :slides="item.data.slides" v-if="item.data.slides"/>
 
                         <c-block class="margin-bottom-30" :title="item.data.title" :noGutter="true" :onlyContentBg="true" :bgGradient="true" v-else>
                             <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
@@ -58,19 +58,19 @@
 
                 <div class="row align-items-stretch" v-if="item.type === 'banners'">
                     <div class="col-12 col-md-5 col-lg-4 margin-bottom-30">
-                        <c-banner :imgSrc="'/static/img/banners/banner-1.png'" link="#/battlepass/1">
+                        <c-simple-banner :imgSrc="'/static/img/banners/banner-1.png'" link="#/battlepass/1">
                             <h4 class="text-yellow">summer block</h4>
                             <h3>Championship</h3>
                             <p>You won't believe the prize!</p>
-                        </c-banner>
+                        </c-simple-banner>
                     </div>
                     <div class="col-12 col-md-7 col-lg-8 margin-bottom-30">
-                        <c-banner :imgSrc="'/static/img/banners/banner-2.png'" link="#/curators">
+                        <c-simple-banner :imgSrc="'/static/img/banners/banner-2.png'" link="#/curators">
                             <div class="align-items-start">
                                 <h3 class="text-yellow margin-bottom-5">top<br>curators</h3>
                                 <h4 class="text-capitalize">What are they<br>playing?</h4>
                             </div>
-                        </c-banner>
+                        </c-simple-banner>
                     </div>
                 </div>
 
@@ -98,7 +98,7 @@
 
                 <div class="row margin-bottom-50 margin-top-20 align-items-stretch" v-if="item.type === 'banners'">
                     <div :class="banner.class" v-for="(banner, index) in item.data.banners" :key="index">
-                        <c-banner :imgSrc="banner.image" :link="banner.link" v-if="item.type == 3">
+                        <c-simple-banner :imgSrc="banner.image" :link="banner.link" v-if="item.type == 3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h3 class="text-yellow">{{ banner.title }}</h3>
@@ -108,11 +108,11 @@
                                     <c-button status="info" iconHide size="lg">{{ banner.buttonText }}</c-button>
                                 </div>
                             </div>
-                        </c-banner>
-                        <c-banner :imgSrc="banner.imagee" :link="banner.link" v-if="item.type == 4">
+                        </c-simple-banner>
+                        <c-simple-banner :imgSrc="banner.imagee" :link="banner.link" v-if="item.type == 4">
                             <h3 class="text-yellow margin-bottom-5">{{ banner.title }}</h3>
                             <p>{{ banner.subtitle }}</p>
-                        </c-banner>
+                        </c-simple-banner>
                     </div>
                 </div>
 
@@ -309,12 +309,12 @@ export default {
         'c-news-list-navigation': (resolve) => require(['@/ui/components/news-list/navigation'], resolve),
         'c-news-list-articles': (resolve) => require(['@/ui/components/news-list/articles'], resolve),
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),
-        'c-banner': (resolve) => require(['@/ui/components/banner/simple'], resolve),
+        'c-simple-banner': (resolve) => require(['@/ui/components/banner/simple'], resolve),
         'c-games-explorer': (resolve) => require(['@/ui/components/store/games-explorer'], resolve),
         'c-assets-explorer': (resolve) => require(['@/ui/components/store/assets-explorer'], resolve),
         'c-assets-list': (resolve) => require(['@/ui/components/assets-list-item'], resolve),
         'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve),
-        'c-main-banner': (resolve) => require(['@/ui/components/banner'], resolve),
+        'c-banner': (resolve) => require(['@/ui/components/banner'], resolve),
         'c-swiper': swiper,
         'c-slide': swiperSlide,
         'c-game-series': (resolve) => require(['@/ui/components/game-series'], resolve),

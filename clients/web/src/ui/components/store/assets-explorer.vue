@@ -49,7 +49,7 @@
                     >
                         <c-button
                             tag="div"
-                            status="info"
+                            status="lightpurple"
                             iconHide
                             v-if="assets.length"
                         >

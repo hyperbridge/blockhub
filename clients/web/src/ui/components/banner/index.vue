@@ -16,7 +16,7 @@
                         <div class="slider-dots" ref="sliderDots" v-if="slides.length > 1">
                             <div class="main-banner-swiper-pagination swiper-pagination" slot="pagination"></div>
                         </div>
-                        <c-button status="success" size="md" iconHide :href="`#/product/${slide.id}`">
+                        <c-button status="lightpurple" size="md" iconHide :href="`#/product/${slide.id}`">
                             {{ slide.buttonText }}
                         </c-button>
                     </div>
@@ -28,7 +28,6 @@
 
 <script>
     import 'swiper/dist/css/swiper.css'
-
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
     export default {
@@ -36,13 +35,13 @@
         props: {
             slides: Array
         },
-        components:{
+        components: {
             'c-button': (resolve) => require(['@/ui/components/buttons'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide,
         },
-        data(){
-            return{
+        data() {
+            return {
                 sliderOptions: {
                     slidesPerView: 1,
                     spaceBetween: 15,
@@ -54,35 +53,35 @@
             }
         },
         methods:{
-            bannerImg(image){
-                return{
+            bannerImg(image) {
+                return {
                     'background-image': 'url(' + image.src + ')',
                     'background-position' : image.position
                 }
             },
-            logoPosition(logo){
-                switch(logo.position){
+            logoPosition(logo) {
+                switch (logo.position) {
                     // Top position
                     case 'left top':
-                        return 'margin: 0 auto auto 0';
+                        return 'margin: 0 auto auto 0'
                     case 'center top':
-                        return 'margin: 0 auto';
+                        return 'margin: 0 auto'
                     case 'right top':
-                        return 'margin: 0 0 auto auto';
+                        return 'margin: 0 0 auto auto'
                     // Center position
                     case 'left center':
-                        return 'margin: auto auto auto 0';
+                        return 'margin: auto auto auto 0'
                     case 'center center':
-                        return 'margin: auto';
+                        return 'margin: auto'
                     case 'right center':
                         return 'margin: auto 0 auto auto'
                     // Bottom position
                     case 'left bottom':
-                        return 'margin: auto auto 0 0';
+                        return 'margin: auto auto 0 0'
                     case 'center bottom':
-                        return 'margin: auto auto 0';
+                        return 'margin: auto auto 0'
                     case 'right bottom':
-                        return 'margin: auto 0 0 auto';
+                        return 'margin: auto 0 0 auto'
                 }
 
             }

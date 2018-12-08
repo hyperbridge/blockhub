@@ -68,7 +68,23 @@
             <c-language-support :languages="product.languageSupport" />
         </div>
         <div class="col-12">
-            <c-block :title="`TWITCH STREAMS - ${product.name}`"
+            <c-block :title="`Updates`"
+                     :noGutter="true"
+                     :bgGradient="true"
+                     :onlyContentBg="true"
+                     :showArrows="true"
+                     :showBackground="true"
+                     ref="streamsSlider"
+                     @prevClick="streamsSlider.slidePrev()"
+                     @nextClick="streamsSlider.slideNext()"
+                     class="margin-top-30 margin-bottom-20">
+                <div class="h5">
+                    Updates were not found.
+                </div>
+            </c-block>
+        </div>
+        <div class="col-12">
+            <c-block :title="`Streams`"
                      :noGutter="true"
                      :bgGradient="true"
                      :onlyContentBg="true"
@@ -97,13 +113,32 @@
             </c-block>
         </div>
         <div class="col-12">
-            <div class="row">
-                <div class="col-12">
-                    <c-heading-bar name="Reviews" :showArrows="true" :showBackground="false"/>
+            <c-block :title="`World Records`"
+                     :noGutter="true"
+                     :bgGradient="true"
+                     :onlyContentBg="true"
+                     :showArrows="true"
+                     :showBackground="true"
+                     ref="streamsSlider"
+                     @prevClick="streamsSlider.slidePrev()"
+                     @nextClick="streamsSlider.slideNext()"
+                     class="margin-top-30 margin-bottom-20">
+                <div class="h5">
+                    World records were not found.
                 </div>
-                <div class="col-12 h5" v-if="!helpfulReviews.length && !recentReviews.length">
-                    No reviews found.
-                </div>
+            </c-block>
+        </div>
+        <div class="col-12">
+            <c-block :title="`Reviews`"
+                     :noGutter="true"
+                     :bgGradient="true"
+                     :onlyContentBg="true"
+                     :showArrows="true"
+                     :showBackground="true"
+                     ref="streamsSlider"
+                     @prevClick="streamsSlider.slidePrev()"
+                     @nextClick="streamsSlider.slideNext()"
+                     class="margin-top-30 margin-bottom-20">
                 <div class="col-md-6 col-12" v-if="helpfulReviews.length">
                     <h3 class="margin-vertical-20">Most helpful</h3>
                     <c-review
@@ -112,7 +147,7 @@
                         :review="review"
                     />
                 </div>
-                <div class="col-md-6 col-12" v-if="recentReviews.length">
+                <div class="col-md-6 col-12" v-else-if="recentReviews.length">
                     <h3 class="margin-vertical-20">Most recent</h3>
                     <c-review
                         v-for="(review, index) in recentReviews"
@@ -120,7 +155,10 @@
                         :review="review"
                     />
                 </div>
-            </div>
+                <div class="h5" v-else>
+                    No reviews yet. Be the first?
+                </div>
+            </c-block>
         </div>
         <c-modal
             v-if="showInstaller"

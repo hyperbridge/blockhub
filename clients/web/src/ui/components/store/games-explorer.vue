@@ -42,7 +42,7 @@
                         v-model="phrase"
                     />
                 </div>
-                <c-button status="lightpurple" iconHide doubled>All New Releases</c-button>
+                <c-button status="lightpurple" iconHide>All New Releases</c-button>
             </div>
             <transition name="slide-in">
                 <div v-if="filtersActive" class="active-filters">
