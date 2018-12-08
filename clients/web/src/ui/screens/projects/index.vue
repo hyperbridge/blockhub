@@ -68,7 +68,7 @@ export default {
             const result = []
 
             result.push({
-                type: 'trendingProjects_row',
+                type: 'trendingProjectsRow',
                 data: {
                     title: 'Trending Crowdfunds',
                     options: {
@@ -86,7 +86,7 @@ export default {
             })
 
             result.push({
-                type: 'trendingProjects_row',
+                type: 'trendingProjectsRow',
                 data: {
                     title: 'Most Popular Projects',
                     options: {
@@ -105,7 +105,7 @@ export default {
 
 
             result.push({
-                type: 'trendingProjects_row',
+                type: 'trendingProjectsRow',
                 data: {
                     title: 'Top Content Proposals',
                     options: {
@@ -123,7 +123,7 @@ export default {
             })
 
             result.push({
-                type: 'trendingProjects_row',
+                type: 'trendingProjectsRow',
                 data: {
                     title: 'Top Item Proposals',
                     options: {

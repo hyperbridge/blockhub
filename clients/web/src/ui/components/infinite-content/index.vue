@@ -36,9 +36,9 @@
                     </div>
                 </div>
 
-                <div class="row margin-bottom-30" v-if="item.type === 'featured_product_gallery'">
+                <div class="row margin-bottom-30" v-if="item.type === 'featuredProductGallery'">
                     <div class="col-12">
-                        <c-banner class="margin-bottom-30" :slides="item.data.slides" v-if="item.data.slides"/>
+                        <c-banner class="margin-bottom-30" :slides="item.data.slides" v-if="item.data.slides" />
 
                         <c-block class="margin-bottom-30" :title="item.data.title" :noGutter="true" :onlyContentBg="true" :bgGradient="true" v-else>
                             <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
@@ -74,8 +74,8 @@
                     </div>
                 </div>
 
-                <c-games-explorer v-if="item.type === 'games_explorer'" />
-                <c-assets-explorer v-if="item.type === 'asset_grid'" :assets="assets" />
+                <c-games-explorer v-if="item.type === 'gamesExplorer'" />
+                <c-assets-explorer v-if="item.type === 'assetGrid'" :assets="assets" />
 
                 <div class="row margin-bottom-30" v-if="item.type === 'productNews'">
                     <div class="col-12">
@@ -132,7 +132,7 @@
                             />
                             <c-swiper :options="item.data.options" ref="swiper">
                                 <c-slide v-for="(review, index) in item.data.reviews" :key="index">
-                                    <c-curator-review  :review="review" />
+                                    <c-curator-review :review="review" />
                                 </c-slide>
                             </c-swiper>
                             <p v-if="!item.data.reviews.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
@@ -140,7 +140,7 @@
                     </div>
                 </div>
 
-                <div class="row margin-bottom-30" v-if="item.type === 'trendingProjects_row'">
+                <div class="row margin-bottom-30" v-if="item.type === 'trendingProjectsRow'">
                     <div class="col-12">
                         <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                             <c-heading-bar
@@ -206,18 +206,18 @@
                     </div>
                 </div>
 
-                <div class="row margin-bottom-30" v-if="item.type === 'collections_list'">
+                <div class="row margin-bottom-30" v-if="item.type === 'collectionsList'">
                     <div class="col-12">
                         <c-collection-list
                             title="Get Started"
                             description="Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain."
-                            :collections="item.data.collections_list"
+                            :collections="item.data.collectionsList"
                         />
                     </div>
                 </div>
 
 
-                <div class="row margin-bottom-30" v-if="item.type === 'new_releases_grid'">
+                <div class="row margin-bottom-30" v-if="item.type === 'newReleasesGrid'">
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
                         <c-block title="New Releases" :noGutter="true" :bgGradient="true" :onlyContentBg="true" showActions>
                             <template slot="additional-action">
@@ -238,7 +238,7 @@
                     </div>
                 </div>
 
-                <div class="row margin-bottom-30" v-if="item.type === 'top_items_grid'">
+                <div class="row margin-bottom-30" v-if="item.type === 'topItemsGrid'">
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
                         <c-block title="Top 20 Items" :noGutter="true" :bgGradient="true" :onlyContentBg="true" showActions>
                             <template slot="additional-action">

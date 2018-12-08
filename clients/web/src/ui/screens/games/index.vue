@@ -51,7 +51,7 @@ export default {
             const result = []
 
             result.push({
-                type: 'trendingProjects_row',
+                type: 'trendingProjectsRow',
                 data: {
                     title: 'Trending Games',
                     options: {
@@ -69,7 +69,7 @@ export default {
             })
 
             result.push({
-                type: 'trendingProjects_row',
+                type: 'trendingProjectsRow',
                 data: {
                     title: 'Top Games',
                     options: {
@@ -87,7 +87,7 @@ export default {
             })
 
             result.push({
-                type: 'trendingProjects_row',
+                type: 'trendingProjectsRow',
                 data: {
                     title: 'Top Independent Games',
                     options: {

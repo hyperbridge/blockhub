@@ -89,7 +89,7 @@ export default {
             
             if (this.$store.state.marketplace.featuredProducts.length ) {
                 result.push({
-                    type: 'featured_product_gallery',
+                    type: 'featuredProductGallery',
                     data: {
                         title: 'Featured',
                         ref: 'featuredProductGallerySlider',
@@ -144,9 +144,9 @@ export default {
             }
 
             result.push({
-                type: 'collections_list',
+                type: 'collectionsList',
                 data: {
-                    collections_list: Array.isArray(this.$store.state.marketplace.collections) ? this.$store.state.marketplace.collections : Object.values(this.$store.state.marketplace.collections),
+                    collectionsList: Array.isArray(this.$store.state.marketplace.collections) ? this.$store.state.marketplace.collections : Object.values(this.$store.state.marketplace.collections),
                     ref: 'collectionsSlider',
                     swiper: this.$refs.collectionsSlider && this.$refs.collectionsSlider.swiper,
                 }
@@ -187,7 +187,7 @@ export default {
             })
 
             result.push({
-                type: 'games_explorer',
+                type: 'gamesExplorer',
                 data: {}
             })
 
@@ -201,7 +201,7 @@ export default {
             })
 
             result.push({
-                type: 'asset_grid',
+                type: 'assetGrid',
                 data: {
                     assets: this.assets
                 }
@@ -260,7 +260,7 @@ export default {
             })
 
             result.push({
-                type: 'trendingProjects_row',
+                type: 'trendingProjectsRow',
                 data: {
                     title: 'Trending Crowdfunds',
                     options: {

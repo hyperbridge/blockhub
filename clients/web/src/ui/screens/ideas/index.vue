@@ -62,7 +62,7 @@ export default {
             const result = []
 
             result.push({
-                type: 'trendingProjects_row',
+                type: 'trendingProjectsRow',
                 data: {
                     title: 'Trending Ideas',
                     options: {
@@ -80,7 +80,7 @@ export default {
             })
 
             result.push({
-                type: 'trendingProjects_row',
+                type: 'trendingProjectsRow',
                 data: {
                     title: 'Most Popular Ideas',
                     options: {
@@ -98,7 +98,7 @@ export default {
             })
 
             result.push({
-                type: 'trendingProjects_row',
+                type: 'trendingProjectsRow',
                 data: {
                     title: 'Top Game Ideas',
                     options: {
@@ -116,7 +116,7 @@ export default {
             })
 
             result.push({
-                type: 'trendingProjects_row',
+                type: 'trendingProjectsRow',
                 data: {
                     title: 'Top Content Ideas',
                     options: {
@@ -134,7 +134,7 @@ export default {
             })
 
             result.push({
-                type: 'trendingProjects_row',
+                type: 'trendingProjectsRow',
                 data: {
                     title: 'Top Item Ideas',
                     options: {

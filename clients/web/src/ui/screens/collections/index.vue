@@ -13,9 +13,9 @@ export default {
             const result = []
 
             result.push({
-                type: 'collections_list',
+                type: 'collectionsList',
                 data: {
-                    collections_list: this.$store.state.marketplace.collections,
+                    collectionsList: this.$store.state.marketplace.collections,
                     ref: 'collectionsSlider',
                     swiper: this.$refs.collectionsSlider && this.$refs.collectionsSlider.swiper,
                     options: {
