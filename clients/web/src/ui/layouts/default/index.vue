@@ -636,22 +636,22 @@
         created() {
             window.addEventListener('resize', this.handleResize())
             this.handleResize();
-            BlockHub.Notification.warning('body here', 'Warning title here', {
-                timeout: 500000000,
-                pauseOnHover: true
-            })
-            BlockHub.Notification.error('body here', 'title here', {
-                timeout: 500000000,
-                pauseOnHover: true
-            })
-            BlockHub.Notification.success('body here', 'title here', {
-                timeout: 500000000,
-                pauseOnHover: true
-            })
-            BlockHub.Notification.info('body here', 'title here', {
-                timeout: 500000000,
-                pauseOnHover: true
-            })
+            // BlockHub.Notification.warning('body here', 'Warning title here', {
+            //     timeout: 500000000,
+            //     pauseOnHover: true
+            // })
+            // BlockHub.Notification.error('body here', 'title here', {
+            //     timeout: 500000000,
+            //     pauseOnHover: true
+            // })
+            // BlockHub.Notification.success('body here', 'title here', {
+            //     timeout: 500000000,
+            //     pauseOnHover: true
+            // })
+            // BlockHub.Notification.info('body here', 'title here', {
+            //     timeout: 500000000,
+            //     pauseOnHover: true
+            // })
         },
         mounted() {
             this.updateBreadcrumbLinks()
