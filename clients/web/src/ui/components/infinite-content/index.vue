@@ -262,8 +262,10 @@
         </template>
 
         <transition name="fade-slow">
-            <div class="" v-if="end">
-                <h3></h3>
+            <div class="row" v-if="end">
+                <div class="col-12">
+                    <c-recommendation-block />
+                </div>
             </div>
             <div class="no-updates" v-if="!sliced">
                 <h3>
@@ -322,6 +324,7 @@ export default {
         'c-game-includes-list': (resolve) => require(['@/ui/components/game-series/game-includes-list'], resolve),
         'c-collection-list': (resolve) => require(['@/ui/components/collection/list'], resolve),
         'c-collection-item': (resolve) => require(['@/ui/components/collection/item'], resolve),
+        'c-recommendation-block': (resolve) => require(['@/ui/components/infinite-content/recommendation-block'], resolve),
     },
     data() {
         return {
