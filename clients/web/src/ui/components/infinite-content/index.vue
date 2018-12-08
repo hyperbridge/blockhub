@@ -1,7 +1,8 @@
 <template>
     <div>
         <template v-for="(item, index) in sliced" v-if="sliced">
-            <transition-group name="slideUp" :key="index">
+            <transition-group name="slideUp" :key="index" tag="div">
+
                 <div class="row justify-content-center" v-if="item.type === 'frontpageProduct'" :key="`level-1-${index}`">
                     <div class="col-12">
                         <div class="frontpage-product">
@@ -73,6 +74,7 @@
                 </div>
 
                 <c-games-explorer v-if="item.type === 'games_explorer'" :key="`level-1-${index}`" />
+
                 <c-assets-explorer v-if="item.type === 'asset_grid'" :key="`level-1-${index}`" :assets="assets"/>
 
                 <div class="row margin-bottom-30" v-if="item.type === 'productNews'" :key="`level-1-${index}`">
@@ -256,12 +258,15 @@
                     </div>
                 </div>
 
+
             </transition-group>
         </template>
 
         <transition name="fade-slow">
-            <div class="" v-if="end">
-                <h3></h3>
+            <div class="row" v-if="end">
+                <div class="col-12">
+                    <c-recommendation-block />
+                </div>
             </div>
             <div class="no-updates" v-if="!sliced">
                 <h3>
@@ -320,6 +325,7 @@ export default {
         'c-game-includes-list': (resolve) => require(['@/ui/components/game-series/game-includes-list'], resolve),
         'c-collection-list': (resolve) => require(['@/ui/components/collection/list'], resolve),
         'c-collection-item': (resolve) => require(['@/ui/components/collection/item'], resolve),
+        'c-recommendation-block': (resolve) => require(['@/ui/components/infinite-content/recommendation-block'], resolve),
     },
     data() {
         return {
