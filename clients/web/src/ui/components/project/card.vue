@@ -1,5 +1,5 @@
 <template>
-    <div class="project-card__item" :class="customClass">
+    <div class="project-card__item" :class="customClass" @mouseover="hovering = true" @mouseout="hovering = false">
         <div class="head" v-if="parentName">
             <div class="img" v-if="parentImage">
                 <c-img :src="parentImage" />
@@ -22,6 +22,8 @@
             <c-button status="info" :href="`#/project/${id}`" iconHide>Check it out</c-button>
             <c-button status="success" href="#/project/1" iconHide hidden>Donate Funds</c-button>
         </div>
+
+        <c-simple-vote :rating="project.rating" v-if="hovering" />
     </div>
 </template>
 
@@ -43,6 +45,11 @@ export default {
         id: Number,
         customClass: {
             type: String,
+        }
+    },
+    data() {
+        return {
+            hovering: false
         }
     },
     computed: {

@@ -11,7 +11,7 @@
         />
 
         <c-swiper :options="sliderOptions" ref="pr_slider">
-            <c-slide v-for="product in products" :key="product.id">
+            <c-slide v-for="(product, index) in products" :key="index">
                 <c-product-card-dynamic class="m-0" :product="product" v-if="dynamic" />
                 <c-product-card class="m-0" :product="product" v-else />
             </c-slide>

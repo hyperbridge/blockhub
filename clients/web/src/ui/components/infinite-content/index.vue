@@ -1,10 +1,12 @@
 <template>
     <div>
         <template v-for="(item, index) in sliced" v-if="sliced">
-            <transition-group name="slideUp" :key="index">
-                <div class="row justify-content-center" v-if="item.type === 'frontpageProduct'" :key="`level-1-${index}`">
+            <transition-group name="slideUp" :key="`level-1-${index}`">
+                <div @mouseover="activeElementIndex = index" :key="`level-2-${index}`">
+                <div class="row justify-content-center" v-if="item.type === 'frontpageProduct'">
                     <div class="col-12">
                         <div class="frontpage-product">
+                            <c-simple-vote :rating="item.rating" v-if="activeElementIndex === index" />
                             <div class="row">
                                 <div class="col-12 col-lg-6 frontpage-product__slider" v-if="item.data.images">
                                     <c-img :src="item.data.images.mediumTile" :data-link="`#/product/${item.data.id}`" />
@@ -34,7 +36,7 @@
                     </div>
                 </div>
 
-                <div class="row margin-bottom-30" v-if="item.type === 'featured_product_gallery'" :key="`level-1-${index}`">
+                <div class="row margin-bottom-30" v-if="item.type === 'featured_product_gallery'">
                     <div class="col-12">
                         <c-main-banner class="margin-bottom-30" :slides="item.data.slides" v-if="item.data.slides"/>
 
@@ -44,7 +46,7 @@
                     </div>
                 </div>
 
-                <div class="row" v-if="item.type === 'product_slider'" :key="`level-1-${index}`">
+                <div class="row" v-if="item.type === 'product_slider'">
                     <div class="col-12">
                         <c-product-slider :products="item.data.products" :title="item.data.title" :maxPerView="item.data.slidesPerView" v-if="item.data.products.length" />
 
@@ -54,7 +56,7 @@
                     </div>
                 </div>
 
-                <div class="row align-items-stretch" v-if="item.type === 'banners'" :key="`level-1-${index}`">
+                <div class="row align-items-stretch" v-if="item.type === 'banners'">
                     <div class="col-12 col-md-5 col-lg-4 margin-bottom-30">
                         <c-banner :imgSrc="'/static/img/banners/banner-1.png'" link="#/battlepass/1">
                             <h4 class="text-yellow">summer block</h4>
@@ -72,10 +74,10 @@
                     </div>
                 </div>
 
-                <c-games-explorer v-if="item.type === 'games_explorer'" :key="`level-1-${index}`" />
-                <c-assets-explorer v-if="item.type === 'asset_grid'" :key="`level-1-${index}`" :assets="assets"/>
+                <c-games-explorer v-if="item.type === 'games_explorer'" />
+                <c-assets-explorer v-if="item.type === 'asset_grid'" :assets="assets" />
 
-                <div class="row margin-bottom-30" v-if="item.type === 'productNews'" :key="`level-1-${index}`">
+                <div class="row margin-bottom-30" v-if="item.type === 'productNews'">
                     <div class="col-12">
 
                         <div class="home-tabs">
@@ -94,7 +96,7 @@
                     </div>
                 </div>
 
-                <div class="row margin-bottom-50 margin-top-20 align-items-stretch" v-if="item.type === 'banners'" :key="index">
+                <div class="row margin-bottom-50 margin-top-20 align-items-stretch" v-if="item.type === 'banners'">
                     <div :class="banner.class" v-for="(banner, index) in item.data.banners" :key="index">
                         <c-banner :imgSrc="banner.image" :link="banner.link" v-if="item.type == 3">
                             <div class="d-flex justify-content-between align-items-center">
@@ -114,7 +116,7 @@
                     </div>
                 </div>
 
-                <div class="row margin-bottom-30" v-if="item.type === 'curatorReviews'" :key="`level-1-${index}`">
+                <div class="row margin-bottom-30" v-if="item.type === 'curatorReviews'">
                     <div class="col-12">
                         <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                             <c-heading-bar
@@ -138,7 +140,7 @@
                     </div>
                 </div>
 
-                <div class="row margin-bottom-30" v-if="item.type === 'trendingProjects_row'" :key="`level-1-${index}`">
+                <div class="row margin-bottom-30" v-if="item.type === 'trendingProjects_row'">
                     <div class="col-12">
                         <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                             <c-heading-bar
@@ -169,7 +171,7 @@
                     </div>
                 </div>
 
-                <div v-if="item.type === 'realms_row'" :key="`level-1-${index}`">
+                <div v-if="item.type === 'realms_row'">
                     <c-swiper :options="item.data.options" class="padding-10">
                         <c-slide v-for="(realm, index) in item.data.realms" :key="index">
                             <c-collection-item :item="realm" />
@@ -195,7 +197,7 @@
                     </c-block>
                 </div>
 
-                <div class="row margin-bottom-30" v-if="item.type === 'gameSeries'" :key="`level-1-${index}`">
+                <div class="row margin-bottom-30" v-if="item.type === 'gameSeries'">
                     <div class="col-12">
                         <c-game-series v-for="(game, index) in item.data.list" :key="index">
                             <c-game-description :game="game" />
@@ -204,7 +206,7 @@
                     </div>
                 </div>
 
-                <div class="row margin-bottom-30" v-if="item.type === 'collections_list'" :key="`level-1-${index}`">
+                <div class="row margin-bottom-30" v-if="item.type === 'collections_list'">
                     <div class="col-12">
                         <c-collection-list
                             title="Get Started"
@@ -215,7 +217,7 @@
                 </div>
 
 
-                <div class="row margin-bottom-30" v-if="item.type === 'new_releases_grid'" :key="`level-1-${index}`">
+                <div class="row margin-bottom-30" v-if="item.type === 'new_releases_grid'">
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
                         <c-block title="New Releases" :noGutter="true" :bgGradient="true" :onlyContentBg="true" showActions>
                             <template slot="additional-action">
@@ -236,7 +238,7 @@
                     </div>
                 </div>
 
-                <div class="row margin-bottom-30" v-if="item.type === 'top_items_grid'" :key="`level-1-${index}`">
+                <div class="row margin-bottom-30" v-if="item.type === 'top_items_grid'">
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
                         <c-block title="Top 20 Items" :noGutter="true" :bgGradient="true" :onlyContentBg="true" showActions>
                             <template slot="additional-action">
@@ -255,7 +257,7 @@
                         </c-block>
                     </div>
                 </div>
-
+                </div>
             </transition-group>
         </template>
 
@@ -323,6 +325,7 @@ export default {
     },
     data() {
         return {
+            activeElementIndex: null,
             show   : false, // display content after API request
             offset : 1,     // items to display after scroll
             display: 3,     // initial items
@@ -491,6 +494,7 @@ export default {
         background: rgba(0, 0, 0, 0.13);
         border-radius: 5px;
         width: 100%;
+        position: relative;
     }
     .frontpage-product__slider{
         img{
