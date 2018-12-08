@@ -170,6 +170,7 @@
         &.c-btn-xs {
             padding: 0px 5px;
             font-size: 12px;
+            line-height: 22px;
         }
         &.c-btn-sm {
             padding: 1px 5px;
