@@ -34,7 +34,8 @@ Vue.use(VueDraggable)
 
 Vue.use(Snotify, {
     toast: {
-        position: SnotifyPosition.rightTop
+        position: SnotifyPosition.rightTop,
+        titleMaxLength: 24
     }
 })
 

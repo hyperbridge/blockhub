@@ -1247,7 +1247,7 @@
         box-shadow: none;
     }
     .snotify{
-        width: 350px!important;
+        width: 360px!important;
         .snotifyToast{
             border-radius: 5px;
             position: relative;
@@ -1257,30 +1257,33 @@
             &:after{
                 content: "";
                 position: absolute;
-                top: 8px;
-                right: 8px;
-                font-size: 16px;
+                top: 13px;
+                right: 13px;
                 background: url("../../../../static/img/snotifi-act.png") no-repeat right top;
                 width: 100px;
-                height: 20px;
+                height: 16px;
                 background-size: 100% auto;
             }
             .snotifyToast__inner{
                 display: flex;
-                padding: 5px 10px 5px 65px;
-                min-height: 60px;
-                font-size: 13px;
+                padding: 13px 13px 15px 63px;
+                min-height: 50px;
+                font-size: 12px;
                 .snotify-icon{
                     right: unset;
-                    left: 10px;
+                    left: 13px;
                 }
             }
-            .snotifyToast__title,
+            .snotifyToast__title{
+                font-size: 14px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
             .snotifyToast__body{
-                color: #f4d76f;
+                line-height: 14px;
             }
             &.snotifyToast{
-                background-color: rgba(28, 32, 50, .75);
+                background-color: rgba(28, 32, 50, .8);
                 border: 1px solid #535358;
             }
             &.snotify-warning{
@@ -1299,10 +1302,11 @@
         .snotifyToast__progressBar{
             display: none;
         }
-        .snotifyToast__title{
-            font-size: 14px;
-            font-weight: bold;
-            text-transform: uppercase;
+        &.snotify-leftTop,
+        &.snotify-centerTop,
+        &.snotify-rightTop {
+            top: 70px;
         }
     }
+
 </style>
