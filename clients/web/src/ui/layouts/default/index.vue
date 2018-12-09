@@ -636,22 +636,22 @@
         created() {
             window.addEventListener('resize', this.handleResize())
             this.handleResize();
-            // BlockHub.Notification.warning('body here', 'Warning title here', {
-            //     timeout: 500000000,
-            //     pauseOnHover: true
-            // })
-            // BlockHub.Notification.error('body here', 'title here', {
-            //     timeout: 500000000,
-            //     pauseOnHover: true
-            // })
-            // BlockHub.Notification.success('body here', 'title here', {
-            //     timeout: 500000000,
-            //     pauseOnHover: true
-            // })
-            // BlockHub.Notification.info('body here', 'title here', {
-            //     timeout: 500000000,
-            //     pauseOnHover: true
-            // })
+            BlockHub.Notification.warning('body here', 'Warning title here', {
+                timeout: 500000000,
+                pauseOnHover: true
+            })
+            BlockHub.Notification.error('body here', 'title here', {
+                timeout: 500000000,
+                pauseOnHover: true
+            })
+            BlockHub.Notification.success('body here', 'title here', {
+                timeout: 500000000,
+                pauseOnHover: true
+            })
+            BlockHub.Notification.info('body here', 'title here', {
+                timeout: 500000000,
+                pauseOnHover: true
+            })
         },
         mounted() {
             this.updateBreadcrumbLinks()
@@ -1252,6 +1252,8 @@
             border-radius: 5px;
             position: relative;
             font-size: 14px;
+            color: #f4d76f;
+            border-color: rgba(250, 216, 93, .4);
             &:after{
                 content: "";
                 position: absolute;
@@ -1265,24 +1267,23 @@
             }
             .snotifyToast__inner{
                 display: flex;
-                padding: 5px 10px 5px 70px;
-                min-height: 68px;
+                padding: 5px 10px 5px 65px;
+                min-height: 60px;
+                font-size: 13px;
                 .snotify-icon{
                     right: unset;
                     left: 10px;
                 }
             }
+            .snotifyToast__title,
+            .snotifyToast__body{
+                color: #f4d76f;
+            }
             &.snotifyToast{
-                background-color: rgba(28, 32, 50, .8);
-                border: 1px solid rgba(255, 255, 255, .2);
+                background-color: rgba(28, 32, 50, .75);
+                border: 1px solid #535358;
             }
             &.snotify-warning{
-                color: #f4d76f;
-                border-color: rgba(250, 216, 93, .4);
-                .snotifyToast__title,
-                .snotifyToast__body{
-                    color: #f4d76f;
-                }
                 .snotify-icon--warning{
                     background-image: url("../../../../static/img/snotify-warning-icon.png");
                     background-size: 100% auto;
@@ -1290,36 +1291,16 @@
                     background-repeat: no-repeat;
                 }
             }
-            &.snotify-info{
-                color: #0c79e3;
-                border-color: rgba(12, 121, 227, .4);
-                .snotifyToast__title,
-                .snotifyToast__body{
-                    color: #0c79e3;
-                }
-            }
-            &.snotify-error{
-                color: #DC3628;
-                border-color: rgba(220, 54, 40, .4);
-                .snotifyToast__title,
-                .snotifyToast__body{
-                    color: #DC3628;
-                }
-            }
-            &.snotify-success{
-                color: #3b9542;
-                border-color: rgba(59, 149, 66, .4);
-                .snotifyToast__title,
-                .snotifyToast__body{
-                    color: #3b9542;
-                }
+            .snotify-icon{
+                height: 40px;
+                width: 40px;
             }
         }
         .snotifyToast__progressBar{
             display: none;
         }
         .snotifyToast__title{
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
             text-transform: uppercase;
         }
