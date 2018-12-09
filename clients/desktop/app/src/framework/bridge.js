@@ -249,7 +249,7 @@ export const createFundingProject = async ({ title, description, about }) => {
         await projectRegistrationContract.createProject(
             project.title,
             project.description,
-            project.about,
+            project.value,
             project.minContributionGoal,
             project.maxContributionGoal,
             project.contributionPeriod,

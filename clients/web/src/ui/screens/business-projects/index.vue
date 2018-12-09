@@ -147,7 +147,7 @@
                                     <div class="user user--bordered">
                                         <img src="http://via.placeholder.com/128x128">
                                         <div class="user__name">
-                                            <strong>{{ project.developerId }}</strong>
+                                            <strong>{{ project.owner.name }}</strong>
                                         </div>
                                     </div>
                                 </td>
@@ -165,10 +165,10 @@
                                     </div>
                                 </td>
                                 <td>
-                                    {{ project.funds.obtained }}
+                                    {{ project.meta.funds.obtained }}
                                 </td>
                                 <td>
-                                    {{ project.funds.goal }}
+                                    {{ project.meta.funds.goal }}
                                 </td>
                                 <td>
                                     <button class="btn btn-outline-success btn-block btn-sm">{{ project.status }}</button>
@@ -190,13 +190,23 @@
     export default {
         components: {
         },
-        data(){
-            return{
+        data() {
+            return {
                 loadingState: true,
             }
         },
         computed: {
-            projects() { return this.$store.state.funding.projects }
+            projects() { return this.$store.getters['projects/list'] }
+        },
+        created() {
+            this.$store.dispatch('projects/find', {
+                query: {
+                    $sort: {
+                        createdAt: -1
+                    },
+                    $limit: 25
+                }
+            })
         },
         mounted() {
             this.$nextTick(() => {

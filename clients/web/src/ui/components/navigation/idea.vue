@@ -22,23 +22,23 @@
         <c-curator-panel>
             <c-curator-info title="Curator panel" v-darklaunch="'CURATORS'">
                 <div v-if="!editing">
-                    <p>1023 people have
+                    <p>{{ curators.total }} people have
                         curated this idea.</p>
                     <ul>
                         <li>
-                            <strong>492</strong>
+                            <strong>{{ curators.approved }}</strong>
                             Approved with 0 changes
                         </li>
                         <li>
-                            <strong>132</strong>
+                            <strong>{{ curators.approvedWithRequest }}</strong>
                             Approved with at least 1 change requested
                         </li>
                         <li>
-                            <strong>32</strong>
+                            <strong>{{ curators.disapprovedWithRequest }}</strong>
                             Disapproved with requests
                         </li>
                         <li>
-                            <strong>23</strong>
+                            <strong>{{ curators.disapproved }}</strong>
                             Disapproved with 0 changes
                         </li>
                     </ul>
@@ -55,6 +55,7 @@
 
 <script>
     export default {
+        props: ['id'],
         components: {
             'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
@@ -67,14 +68,14 @@
             return {
                 links: {
                     idea: [
-                        { to: { path: '/idea/1' }, title: 'Idea Page', icon: 'fas fa-gamepad' }
+                        { to: { path: `/idea/${this.id}` }, title: 'Idea Page', icon: 'fas fa-gamepad' }
                     ],
                     bounties: [
-                        { to: { path: '/idea/1/bounties' }, title: 'My Submissions', icon: 'fa fa-trophy' }
+                        { to: { path: `/idea/${this.id}/bounties` }, title: 'My Submissions', icon: 'fa fa-trophy' }
                     ],
                     discussions: [
-                        { to: { path: '/idea/1/community/new' }, title: 'New Post', icon: 'fa fa-comment' },
-                        { to: { path: '/idea/1/community/top' }, title: 'Top Posts', icon: 'fa fa-star' }
+                        { to: { path: `/idea/${this.id}/community/new` }, title: 'New Post', icon: 'fa fa-comment' },
+                        { to: { path: `/idea/${this.id}/community/top` }, title: 'Top Posts', icon: 'fa fa-star' }
                     ],
                     help: [
                         { to: { path: '/help/1/article/building-communities' }, title: 'Building Communities' },
@@ -88,6 +89,15 @@
         computed: {
             editing() {
                 return this.$store.state.application.editorMode === 'editing'
+            },
+            curators() {
+                return {
+                    total: 0,
+                    approved: 0,
+                    approvedWithRequest: 0,
+                    disapproved: 0,
+                    disapprovedWithRequest: 0
+                }
             }
         }
     }

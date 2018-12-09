@@ -1,7 +1,8 @@
 <template>
     <div class="row mx-0">
         <div class="col-12 col-lg-7 col-xl-8">
-            <c-screen-gallery :items="project.images.preview" v-if="project.images && project.images.preview"/>
+            <c-screen-gallery :items="project.images.preview" v-if="project.images && project.images.preview" />
+
             <div class="editor-container">
                 <div class="editor" v-if="editing">
                     <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
@@ -13,22 +14,21 @@
                          v-if="activeElement['description']">
                         <input ref="description" name="name" type="text" class="form-control"
                                placeholder="Project description..." v-model="project.description"/>
-                        <div
-                            class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                            <span class="fa fa-check"
-                                                  @click="deactivateElement('description')"></span>
+                        <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                            <span class="fa fa-check"
+                                    @click="deactivateElement('description')"></span>
                         </div>
                     </div>
                 </div>
                 <p class="project__description">{{ project.description }}</p>
             </div>
 
-            <div class="main-content" v-html="project.about" v-if="!editing">
-                {{ project.about }}
+            <div class="main-content" v-html="project.value" v-if="!editing">
+                {{ project.value }}
             </div>
 
             <div class="content-editor" v-if="editing">
-                <div id="summernote" v-html="project.about">{{ project.about }}</div>
+                <div id="summernote" v-html="project.value">{{ project.value }}</div>
             </div>
         </div>
         <div class="col-12 col-lg-5 col-xl-4">
@@ -187,7 +187,7 @@
         },
         computed: {
             wishlist() {
-                return this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.productWishlist || {};
+                return this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.productWishlist || {}
             }
         }
     }

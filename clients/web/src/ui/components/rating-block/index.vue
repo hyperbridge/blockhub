@@ -5,10 +5,10 @@
                 <li v-for="(item, index) in items" :key="index">
                     <div class="rating-block__info">
                         <span class="rating-block__name">{{ item.name }}</span>
-                        <span class="rating-block__number">{{ item.number }}</span>
+                        <span class="rating-block__number">{{ item.value }}</span>
                     </div>
                     <c-rating-stars
-                        :number="item.number"
+                        :number="item.value"
                         class="rating-block__stars"
                     />
                 </li>
@@ -44,14 +44,11 @@ export default {
     components: {
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-rating-stars': (resolve) => require(['../rating-stars'], resolve)
-    },
-    computed:{
     }
 }
 </script>
 
 <style lang="scss" scoped>
-
     .rating-block__list {
         padding: 0;
         li {

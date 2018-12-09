@@ -46,6 +46,7 @@ const updateState = (savedData, updatedState = {}) => {
         operatingSystem: savedData.operatingSystem != null ? savedData.operatingSystem : getOS(),
         initialized: BlockHub.initialized,
         account: DB.application.config.data[0].account || {},
+        activeProfile: DB.application.config.data[0].activeProfile || {},
         darklaunchFlags: DB.application.config.data[0].darklaunchFlags || [],
         developerMode: savedData.developerMode != null ? savedData.developerMode : DB.application.config.data[0].account && DB.application.config.data[0].activeProfile && DB.application.config.data[0].activeProfile.role === 'developer',
         environmentMode: savedData.environmentMode != null ? savedData.environmentMode : BlockHub.GetMode(),
@@ -406,7 +407,7 @@ export const mutations = {
     },
     convertCurator(state, payload) {
         Bridge.sendCommand('createCuratorRequest', payload.profile).then((data) => {
-            payload.profile.curatorId = data
+            payload.profile.role = 'curator'
             state.curatorMode = true
 
             // TODO: just redirect here?

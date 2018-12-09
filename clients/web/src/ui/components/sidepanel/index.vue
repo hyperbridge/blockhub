@@ -218,7 +218,7 @@
                 return this.$refs.mySwiper.swiper
             },
             activeProfile() {
-                return this.$store.state.application.account && this.$store.state.application.activeProfile
+                return this.$store.state.application.activeProfile
             },
             messages() {
                 return this.activeProfile && this.activeProfile.messages

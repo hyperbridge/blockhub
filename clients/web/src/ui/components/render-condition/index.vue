@@ -55,8 +55,8 @@
             },
             '$store.state.profiles.ids'(newVal) {
                 if (newVal) {
-                    this.$store.state.application.activeProfile = this.$store.state.profiles.keyedById[this.$store.state.application.activeProfile ? this.$store.state.application.activeProfile.id : 1]
-                    this.$store.state.application.developerMode = this.$store.state.application.activeProfile.role === 'developer'
+                    this.$store.state.application.activeProfile = this.$store.state.profiles.keyedById[this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.id || 1]
+                    this.$store.state.application.developerMode = this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.role === 'developer'
                     this.satisfied = true
                 }
             }

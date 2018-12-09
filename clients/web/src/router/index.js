@@ -439,6 +439,20 @@ const router = new Router({
             }
         },
         {
+            path: '/product/new',
+            name: 'Product',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/product'], resolve),
+            props: {
+                id: 'new'
+            },
+            meta: {
+                section: 'overview',
+                auth: true,
+                permission: 'signedIn'
+            }
+        },
+        {
             path: '/product/:id',
             name: 'Product',
             props: true,
@@ -527,6 +541,11 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/asset-overview'], resolve)
         },
         {
+            path: '/browser',
+            name: 'Browser',
+            component: (resolve) => require(['@/ui/screens/browser'], resolve)
+        },
+        {
             path: '/republic',
             name: 'Republic',
             component: (resolve) => require(['@/ui/screens/republic'], resolve)
@@ -549,6 +568,20 @@ const router = new Router({
                 { title: 'Home' },
                 { title: 'Ideas' }
             ]
+        },
+        {
+            path: '/idea/new',
+            name: 'Idea',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/idea'], resolve),
+            props: {
+                id: 'new'
+            },
+            meta: {
+                section: 'overview',
+                auth: true,
+                permission: 'signedIn'
+            }
         },
         {
             path: '/idea/:id',
@@ -576,6 +609,20 @@ const router = new Router({
                 { title: 'Home' },
                 { title: 'Crowdfunds' }
             ]
+        },
+        {
+            path: '/project/new',
+            name: 'Project',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/project'], resolve),
+            props: {
+                id: 'new'
+            },
+            meta: {
+                section: 'overview',
+                auth: true,
+                permission: 'signedIn'
+            }
         },
         {
             path: '/project/:id',

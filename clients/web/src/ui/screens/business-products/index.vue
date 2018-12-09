@@ -139,14 +139,13 @@
                                 </label>
                             </td>
                             <td>{{ product.id }}</td>
-                            <td><a :href="`#/business/product/${product.id}`" class="text-secondary text-bold">{{
-                                product.name }}</a></td>
+                            <td><a :href="`#/business/product/${product.id}`" class="text-secondary text-bold">{{ product.name }}</a></td>
                             <td>{{ product.meta.created }}</td>
                             <td>
                                 <div class="user user--bordered">
                                     <img src="http://via.placeholder.com/128x128">
                                     <div class="user__name">
-                                        <strong>{{ product.developerId }}</strong>
+                                        <strong>{{ product.owner.name }}</strong>
                                     </div>
                                 </div>
                             </td>
@@ -201,12 +200,17 @@
             }
         },
         computed: {
-            products() {
-                return this.$store.state.marketplace.products
-            }
+            products() { return this.$store.getters['products/list'] }
         },
         created() {
-            console.log('products', this.$store.state.marketplace)
+            this.$store.dispatch('products/find', {
+                query: {
+                    $sort: {
+                        createdAt: -1
+                    },
+                    $limit: 25
+                }
+            })
         }
     }
 </script>

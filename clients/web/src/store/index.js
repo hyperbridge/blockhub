@@ -121,8 +121,8 @@ if (decentralizedMode) {
                     })
                 },
                 convert() {
-                    Bridge.sendCommand('createDeveloperRequest', this.chosenProfile).then((data) => {
-                        this.chosenProfile.meta.contractDeveloperId = data
+                    Bridge.sendCommand('createDeveloperRequest', this.activeProfile).then((data) => {
+                        this.activeProfile.meta.contractDeveloperId = data
                         this.$store.state.application.developerMode = true
 
                         // TODO: just redirect here?

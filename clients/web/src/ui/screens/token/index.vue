@@ -219,14 +219,14 @@
                                         <c-user-card
                                             :user="profile"
                                             :previewMode="true"
-                                            :class="{ 'default': chosenProfile && profile.id == chosenProfile.id }"
+                                            :class="{ 'default': activeProfile && profile.id == activeProfile.id }"
                                         />
                                         <div class="profile__action">
                                             <c-button
                                                 status="info"
                                                 icon="check"
                                                 @click="chooseProfile(profile)"
-                                                v-if="!chosenProfile || profile.id != chosenProfile.id"
+                                                v-if="!activeProfile || profile.id != activeProfile.id"
                                             >Choose</c-button>
                                         </div>
                                     </div>
@@ -543,16 +543,12 @@ export default {
         setInterval(checkEthereumConnection, 2000)
 
 
-        let chosenProfile = this.$store.state.application.account.profiles.find(profile => profile.id == this.$store.state.application.activeProfile.id)
-
-        if (!chosenProfile && this.$store.state.application.account.profiles.length) {
-            chosenProfile = this.$store.state.application.account.profiles[0]
-        }
+        let activeProfile = this.$store.state.application.activeProfile
 
         const result = {
             account: this.$store.state.application.account,
             profiles: this.$store.state.application.account.profiles,
-            chosenProfile: chosenProfile,
+            activeProfile: activeProfile,
             purchaseETH: null,
             purchaseHBX: null,
             ETH2USD: 220,
@@ -563,7 +559,7 @@ export default {
             residentAgreement: false,
             ethereumUnlocked: this.$store.state.application.desktopMode,
             ethereumConnected: this.$store.state.application.desktopMode,
-            purchaseAddress: chosenProfile ? chosenProfile.address : null,
+            purchaseAddress: activeProfile ? activeProfile.address : null,
             override: false,
             assets: [
                 {
@@ -673,7 +669,7 @@ export default {
             this.override = true
         },
         chooseProfile(profile) {
-            this.chosenProfile = profile
+            this.activeProfile = profile
             this.purchaseAddress = profile.address
         },
         closePurchasePopup() {

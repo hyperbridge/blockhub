@@ -3,6 +3,7 @@ import Profile from './profile'
 import Asset from './asset'
 import Rating from './rating'
 import Tag from './tag'
+import Community from './community'
 import Idea from './idea'
 import Project from './project'
 import Discussion from './discussion'
@@ -91,6 +92,14 @@ export default class Product extends Model {
                 join: {
                     from: 'products.ratingId',
                     to: 'ratings.id'
+                }
+            },
+            community: {
+                relation: Model.HasOneRelation,
+                modelClass: Community,
+                join: {
+                    from: 'products.communityId',
+                    to: 'communities.id'
                 }
             },
             idea: {

@@ -856,7 +856,8 @@
         "curatorReviews": [],
         "defaultIdea": {
             "name": "My Idea",
-            "value": "<p>Describe your idea</p>",
+            "value": "<p>Idea about</p>",
+            "description": "Idea description",
             "tags": [],
             "meta": {
                 "revision": 0,

@@ -190,7 +190,7 @@
             >
                 <div class="h4" slot="header">Propose Idea</div>
                 <template slot="body">
-                    <div v-if="chosenProfile && chosenProfile.curatorId">
+                    <div v-if="activeProfile && activeProfile.role === 'curator'">
                         <p>Great, you're a curator. <c-button class="underline" href="#/project/new">Click here to continue</c-button>.</p>
                     </div>
                     <div v-else>
@@ -203,7 +203,7 @@
                         </p>
                         <c-user-card
                             class="col-8 margin-auto"
-                            :user="chosenProfile"
+                            :user="activeProfile"
                             :previewMode="true"
                             :class="{ 'default': true }"
                         />
@@ -212,7 +212,7 @@
 
                         <br /><br />
 
-                        <c-button class="c-btn-lg outline-white margin-top-20" @click="$store.commit('application/convertCurator', { profile: chosenProfile })">Convert to Curator</c-button>
+                        <c-button class="c-btn-lg outline-white margin-top-20" @click="$store.commit('application/convertCurator', { profile: activeProfile })">Convert to Curator</c-button>
                     </div>
                 </template>
                 <p slot="footer">
@@ -499,8 +499,8 @@
             isConnected() {
                 return this.$store.state.application.connection.internet && this.$store.state.application.connection.datasource
             },
-            chosenProfile() {
-                return this.$store.state.application.account.profiles.find(profile => profile.id == this.$store.state.application.activeProfile.id)
+            activeProfile() {
+                return this.$store.state.application.activeProfile
             },
             shortcuts() {
                 return this.$store.state.application.shortcuts
@@ -513,9 +513,6 @@
             },
             signedIn() {
                 return this.$store.state.application.signedIn
-            },
-            activeProfile() {
-                return this.$store.state.application.account && this.$store.state.application.activeProfile
             },
             activeNotification() {
                 return this.$store.state.application.activeNotification || {}

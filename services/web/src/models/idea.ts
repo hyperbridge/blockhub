@@ -2,6 +2,7 @@ import { Model, RelationMappings } from 'objection'
 import Node from './node'
 import Rating from './rating'
 import Profile from './profile'
+import Community from './community'
 
 export default class Idea extends Model {
     id!: Number
@@ -50,6 +51,14 @@ export default class Idea extends Model {
                 join: {
                     from: 'ideas.ownerId',
                     to: 'profiles.id'
+                }
+            },
+            community: {
+                relation: Model.HasOneRelation,
+                modelClass: Community,
+                join: {
+                    from: 'ideas.communityId',
+                    to: 'communities.id'
                 }
             },
             backers: {

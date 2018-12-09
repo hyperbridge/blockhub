@@ -274,7 +274,6 @@
         },
         created() {
             if (this.id !== 'new') {
-
                 this.$store.dispatch('projects/find', {
                     query: {
                         id: Number(this.id),

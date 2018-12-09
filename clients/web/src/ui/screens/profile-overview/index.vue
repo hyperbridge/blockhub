@@ -231,9 +231,7 @@
         },
         computed: {
             signedIn() { return this.$store.state.application.signedIn },
-            profile() {
-                return this.$store.state.application.activeProfile
-            }
+            profile() { return this.$store.state.application.activeProfile }
         },
         methods: {
             showSendPopup() {
@@ -241,7 +239,7 @@
             }
         },
         created() {
-            $(".rating_readonly").raty({readOnly: true});
+            $('.rating_readonly').raty({ readOnly: true })
         }
     }
 </script>

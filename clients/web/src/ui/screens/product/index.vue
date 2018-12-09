@@ -549,7 +549,7 @@
                     this.product.name = data.title
                     this.product.releaseDate = data.releaseDate
                     this.product.description = data.description
-                    this.product.content = data.about
+                    this.product.content = data.value
                     this.product.genre = ''
                     this.product.developer = data.developers && data.developers[0]
                     this.product.publisher = data.publishers && data.publishers[0]

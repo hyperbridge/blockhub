@@ -93,6 +93,18 @@ exports.up = knex => {
                 .inTable('licenses')
                 .onDelete('SET NULL')
         })
+        .createTable('realms', table => {
+            table.increments('id').primary()
+            table.timestamp('createdAt')
+            table.timestamp('updatedAt')
+            table.string('key', 100)
+            table.text('value')
+            table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
+            table.json('meta')
+
+            table.string('name', 100)
+            table.string('description', 500)
+        })
         .createTable('products', table => {
             table.increments('id').primary()
             table.timestamp('createdAt')
@@ -109,6 +121,12 @@ exports.up = knex => {
                 .references('id')
                 .inTable('profiles')
                 .onDelete('CASCADE')
+            table
+                .integer('communityId')
+                .unsigned()
+                .references('id')
+                .inTable('communities')
+                .onDelete('SET NULL')
         })
         .createTable('ratings', table => {
             table.increments('id').primary()
@@ -134,6 +152,12 @@ exports.up = knex => {
                 .unsigned()
                 .references('id')
                 .inTable('profiles')
+                .onDelete('SET NULL')
+            table
+                .integer('communityId')
+                .unsigned()
+                .references('id')
+                .inTable('communities')
                 .onDelete('SET NULL')
         })
         .createTable('reviews', table => {
@@ -185,12 +209,6 @@ exports.up = knex => {
                 .unsigned()
                 .references('id')
                 .inTable('products')
-                .onDelete('SET NULL')
-            table
-                .integer('ratingId')
-                .unsigned()
-                .references('id')
-                .inTable('ratings')
                 .onDelete('SET NULL')
             table
                 .integer('ratingId')
@@ -328,18 +346,6 @@ exports.up = knex => {
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
             table.json('meta')
         })
-        .createTable('realms', table => {
-            table.increments('id').primary()
-            table.timestamp('createdAt')
-            table.timestamp('updatedAt')
-            table.string('key', 100)
-            table.text('value')
-            table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
-
-            table.string('name', 100)
-            table.string('description', 500)
-        })
         .createTable('servers', table => {
             table.increments('id').primary()
             table.timestamp('createdAt')
@@ -466,7 +472,7 @@ exports.up = knex => {
                 .integer('fromTagId')
                 .unsigned()
                 .references('id')
-                .inTable('products')
+                .inTable('tags')
                 .onDelete('CASCADE')
             table
                 .integer('toTagId')

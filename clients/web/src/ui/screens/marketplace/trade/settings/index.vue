@@ -41,7 +41,7 @@
 </template>
 
 <script>
-    import { debouncer } from '@/mixins';
+    import { debouncer } from '@/mixins'
 
     export default {
         data: () => ({ val: 'm', timeout: null, add: 0 }),
@@ -51,17 +51,17 @@
         },
         computed: {
             account() {
-                return this.$store.getters['application/account'];
+                return this.$store.getters['application/account']
             },
             profile() {
-                return this.activeProfile;
+                return this.activeProfile
             },
             tradeURL() {
-                const { tradeURLId } = this.account;
-                const { id } = this.profile;
-                return `${window.location.origin}#/tradeoffer/new/?partner=${id}&id=${tradeURLId}`;
+                const { tradeURLId } = this.account
+                const { id } = this.profile
+                return `${window.location.origin}#/tradeoffer/new/?partner=${id}&id=${tradeURLId}`
             },
-            assets() { return this.$store.state.assets.assets; }
+            assets() { return this.$store.state.assets.assets }
         },
         methods: {
             storeTest() {
@@ -72,20 +72,20 @@
                         id: 30,
                         name: 'New asset'
                     }
-                });
+                })
             },
             copyTradeURL() {
                 navigator.clipboard.writeText(this.tradeURL)
                     .then(() => this.$snotify.info('TradeURL has been copied'))
-                    .catch(err => this.$snotify.warning('TradeURL could not be copied'));
+                    .catch(err => this.$snotify.warning('TradeURL could not be copied'))
             },
             updateVal(e) {
                 console.log(e)
-                return;
-                clearTimeout(this.timeout);
+                return
+                clearTimeout(this.timeout)
                 this.timeout = setTimeout(() => {
-                    this.val = e.target.value;
-                }, 300);
+                    this.val = e.target.value
+                }, 300)
             }
         }
     }

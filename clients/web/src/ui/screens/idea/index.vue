@@ -1,12 +1,12 @@
 <template>
     <c-layout navigationKey="idea" :showRightPanel="false" :breadcrumbLinks="breadcrumbLinks" class="idea-single-page">
-        <div class="row" v-if="!idea">
+        <div class="row" v-if="!idea && id !== 'new'">
             <!-- <div class="col-12">
-                Project not found
+                Idea not found
             </div> -->
-            <c-loading :enabled="!idea" />
+            <c-loading :enabled="true" />
         </div>
-        <div class="row" v-if="idea">
+        <div class="row" v-if="idea || id === 'new'">
             <div class="col-12">
 
                 <div class="errors" v-if="errors.length">
@@ -85,7 +85,7 @@
                                 <div class="form-control-element form-control-element--right">
                                     <input ref="backgroundImage" name="backgroundImage" type="text"
                                             class="form-control" placeholder="Background image URL..."
-                                            v-model="idea.images.header"/>
+                                            v-model="idea.meta.images.header"/>
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary">
                                             <span class="fa fa-check"
@@ -105,7 +105,7 @@
                                 <div class="form-control-element form-control-element--right">
                                     <input ref="storeImage" name="storeImage" type="text" class="form-control"
                                             placeholder="Background image URL..."
-                                            v-model="idea.images.header" />
+                                            v-model="idea.meta.images.header" />
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary">
                                             <span class="fa fa-check"
@@ -153,8 +153,8 @@
 
             <div class="col-12 margin-top-40 " id="overview">
                 <transition name="page" mode="out-in">
-                    <c-idea-overview :idea="idea" v-if="section === 'overview'" :editing="editing" />
-                    <c-idea-community :idea="idea" v-if="section === 'community'" :editing="editing" />
+                    <c-idea-overview :idea="idea" v-if="section === 'overview'" :editing="editing" :activeElement="activeElement" @activateElement="activateElement" @deactivateElement="deactivateElement" />
+                    <c-idea-community :idea="idea" v-if="section === 'community'" :editing="editing" :activeElement="activeElement" />
                 </transition>
             </div>
         </div>
@@ -244,7 +244,7 @@
                     
                     this.$store.dispatch('ideas/update', [this.idea.id, this.idea, {
                         query: {
-                            $eager: 'tags'
+                            $eager: ['tags', 'community']
                         }
                     }]).then(() => {
                         this.notice = "Idea has been saved."
@@ -283,18 +283,26 @@
                 }
 
                 if (!idea) {
-                    idea = this.$store.getters['ideas/get'](this.id)
+                    idea = this.$store.getters['ideas/get'](this.id, {
+                        query: {
+                            $eager: ['tags', 'community']
+                        }
+                    })
                 }
 
-                if (idea && idea.images && idea.images.header) {
-                    window.document.getElementById('header-bg').style['background-image'] = 'url(' + idea.images.header + ')'
+                if (idea && idea.meta && idea.meta.images && idea.meta.images.header) {
+                    window.document.getElementById('header-bg').style['background-image'] = 'url(' + idea.meta.images.header + ')'
                 }
 
-                if (idea && !idea.community) {
-                    idea.community = {
-                        discussions: []
-                    }
+                if (idea && !idea.meta) {
+                    idea.meta = {}
                 }
+
+                // if (idea && !idea.community) {
+                //     idea.community = {
+                //         discussions: []
+                //     }
+                // }
 
                 return idea
             },
@@ -315,12 +323,8 @@
 
                 if (this.section === 'community') {
                     links.push({ to: { path: '' }, title: 'Community' })
-                } else if (this.section === 'bounties') {
-                    links.push({ to: { path: '' }, title: 'Bounties' })
                 } else if (this.section === 'updates') {
                     links.push({ to: { path: '' }, title: 'Updates' })
-                } else if (this.section === 'milestones') {
-                    links.push({ to: { path: '' }, title: 'Milestones' })
                 }
 
                 return links
@@ -341,7 +345,7 @@
                 this.$store.dispatch('ideas/find', {
                     query: {
                         id: Number(this.id),
-                        $eager: 'tags'
+                        $eager: ['tags', 'community']
                     }
                 })
             }
@@ -362,10 +366,6 @@
                     }
                 }
             })
-
-            // $('#ise_default').ionRangeSlider({
-            //     from: 15
-            // })
         }
     }
 </script>

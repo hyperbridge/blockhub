@@ -166,7 +166,7 @@
             return {
                 errors: [],
                 profiles: { ...account.profiles },
-                chosenProfile: null,
+                activeProfile: null,
                 manual_override: false,
                 been1hour: been1hour,
                 document_type: '',
@@ -187,8 +187,8 @@
                 this.manual_override = true
             },
             chooseProfile(profile) {
-                if (this.chosenProfile) this.chosenProfile.chosen = false;
-                profile.chosen = true;
+                if (this.activeProfile) this.activeProfile.chosen = false
+                profile.chosen = true
             },
             verifyProfile() {
                 // send a contract call

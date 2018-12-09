@@ -6,9 +6,9 @@
             </div>
             <div class="col-12 col-md-6 col-lg-4 my_profile">
                 <c-user-card
-                    v-if="defaultProfile"
-                    :user="defaultProfile"
-                    @updateProfile="(prop, val) => defaultProfile[prop] = val"
+                    v-if="activeProfile"
+                    :user="activeProfile"
+                    @updateProfile="(prop, val) => activeProfile[prop] = val"
                     :previewMode="true"
                 />
                 <p v-else-if="!profiles.length">
@@ -18,21 +18,21 @@
                     You don't have a default profile.
                 </p>
             </div>
-            <div class="col-12 col-md-6 col-lg-4" v-if="defaultProfile" hidden>
+            <div class="col-12 col-md-6 col-lg-4" v-if="activeProfile" hidden>
                 <div class="verification-blk text-center">
                     <h3 class="text-white">Verify Your Profile</h3>
-                    <div class="status" v-if="defaultProfile.isVerified">
+                    <div class="status" v-if="activeProfile.isVerified">
                         <i class="fas fa-check"></i>
                         Verified
                     </div>
-                    <div class="status" v-else-if="defaultProfile.isVerifying">
+                    <div class="status" v-else-if="activeProfile.isVerifying">
                         <i class="fas fa-hourglass"></i>
                         Verifying
                     </div>
                     <c-button status="outline-success" class="mt-3" href="#/account/verification" v-else>
                         Click here to verify
                     </c-button>
-                    <div class="date" v-if="defaultProfile.isVerified">
+                    <div class="date" v-if="activeProfile.isVerified">
                         Valid up to $7,500 USD
                     </div>
                 </div>
@@ -81,7 +81,7 @@
             <div class="profile-picker" v-if="filteredProfiles.length">
                 <div
                     class="profile-picker__profile"
-                    :class="{ 'edit': profile.edit, 'default-type': profile.id == (defaultProfile && defaultProfile.id) }"
+                    :class="{ 'edit': profile.edit, 'default-type': profile.id == (activeProfile && activeProfile.id) }"
                     v-for="profile in filteredProfiles"
                     :key="profile.id"
                 >
@@ -90,7 +90,7 @@
                         :previewMode="!profile.edit"
                         :removing="profile.removing"
                         class="margin-bottom-30"
-                        :class="{ 'default': profile.id == (defaultProfile && defaultProfile.id) }"
+                        :class="{ 'default': profile.id == (activeProfile && activeProfile.id) }"
                         v-bind.sync="profileClone"
                     />
                     <div class="profile__action">
@@ -98,7 +98,7 @@
                             status="info"
                             icon="check"
                             @click="setDefault(profile)"
-                            v-if="!profile.edit && profile.id != (defaultProfile && defaultProfile.id)"
+                            v-if="!profile.edit && profile.id != (activeProfile && activeProfile.id)"
                         >Set default</c-button>
                         <c-button
                             status="share"
@@ -186,7 +186,7 @@
             setDefault(profile) {
                 this.$store.state.application.activeProfile = profile
                 this.$store.state.application.developerMode = profile.role === 'developer'
-                // if (this.defaultProfile) this.defaultProfile.default = false
+                // if (this.activeProfile) this.activeProfile.default = false
                 // profile.default = true
 
                 this.saveProfiles()
@@ -280,7 +280,7 @@
             profiles() {
                 return this.$store.getters['profiles/list']
             },
-            defaultProfile() {
+            activeProfile() {
                 return this.$store.state.application.activeProfile
             },
             profileClone() {

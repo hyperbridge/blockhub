@@ -9,7 +9,7 @@
                 <div v-if="!curatorMode" style="text-align: center">
                     <c-user-card
                         class="col-3 margin-auto"
-                        :user="chosenProfile"
+                        :user="activeProfile"
                         :previewMode="true"
                         :class="{ 'default': true }"
                     />
@@ -43,30 +43,30 @@
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         },
         data() {
-            let developerProfile = this.$store.state.application.account.profiles.find(profile => profile.curatorId !== undefined)
-            let chosenProfile = this.$store.state.application.account.profiles.find(profile => profile.id == this.$store.state.application.activeProfile.id)
+            let curatorProfile = this.$store.state.application.account.profiles.find(profile => profile.role !== 'curator')
+            let activeProfile = this.$store.state.application.account.profiles.find(profile => profile.id == this.$store.state.application.activeProfile.id)
 
-            if (!chosenProfile && this.$store.state.application.account.profiles.length) {
-                chosenProfile = this.$store.state.application.account.profiles[0]
+            if (!activeProfile && this.$store.state.application.account.profiles.length) {
+                activeProfile = this.$store.state.application.account.profiles[0]
             }
 
             return {
                 profiles: this.$store.state.application.account.profiles,
-                chosenProfile: chosenProfile,
-                developerProfile: developerProfile,
+                activeProfile: activeProfile,
+                curatorProfile: curatorProfile,
                 errors: []
             }
         },
         methods: {
             convertProfile() {
-                Bridge.sendCommand('createCuratorRequest', this.chosenProfile).then((data) => {
-                    this.chosenProfile.curatorId = data
-                    this.developerProfile = this.chosenProfile
+                Bridge.sendCommand('createCuratorRequest', this.activeProfile).then((data) => {
+                    this.activeProfile.role = 'curator'
+                    this.curatorProfile = this.activeProfile
                     this.$store.state.application.curatorMode = true
                 })
             },
             chooseProfile(profile) {
-                this.chosenProfile = profile
+                this.activeProfile = profile
             },
         }
     }

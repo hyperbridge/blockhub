@@ -35,7 +35,7 @@ const populate = function(options = {}) {
     }
 }
 
-
+// TODO lower case in before
 export const before = {
     all: [],
     find: [authenticate('jwt'), allowNull(), wildcardsInLike()],

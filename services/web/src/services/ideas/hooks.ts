@@ -2,8 +2,6 @@ const { authenticate } = require('@feathersjs/authentication').hooks
 
 const beforeCreate = function(options = {}) {
     return async context => {
-        context.data.accountId = context.params.user.id
-
         return context
     }
 }
@@ -24,8 +22,7 @@ const beforeUpdate = function(options = {}) {
 const afterUpdate = function(options = {}) {
     return async context => {
         context.result = {
-            name: context.data.name,
-            avatar: context.data.avatar
+            id: context.data.id
         }
 
         return context
