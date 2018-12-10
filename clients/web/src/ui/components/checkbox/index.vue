@@ -62,23 +62,25 @@
                 &:before {
                     content: '';
                     display: block;
-                    width: 15px;
-                    height: 15px;
-                    border: 1px solid #fff;
+                    width: 17px;
+                    height: 17px;
+                    border: 1px solid rgba(255, 255, 255, .2);
+                    background: rgba(0, 0, 0, .3);
                     position: absolute;
+                    border-radius: 2px;
                     left: 0;
-                    top: 3px;
+                    top: 2px;
                     -webkit-transition: all .12s, border-color .08s;
                     transition: all .12s, border-color .08s;
                 }
                 &:after {
                     content: '';
                     display: block;
-                    width: 7px;
-                    height: 7px;
                     position: absolute;
-                    left: 4px;
-                    top: 7px;
+                    width: 11px;
+                    height: 11px;
+                    left: 3px;
+                    top: 5px;
                     -webkit-transition: all .12s, border-color .08s;
                     transition: all .12s, border-color .08s;
                 }
@@ -93,14 +95,14 @@
             &:checked + label{
                 &:before {
                     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d639e4+0,23aee0+100 */
-                    background: rgb(214,57,228); /* Old browsers */
-                    background: -moz-linear-gradient(top, rgba(214,57,228,1) 0%, rgba(35,174,224,1) 100%); /* FF3.6-15 */
-                    background: -webkit-linear-gradient(top, rgba(214,57,228,1) 0%,rgba(35,174,224,1) 100%); /* Chrome10-25,Safari5.1-6 */
-                    background: linear-gradient(to bottom, rgba(214,57,228,1) 0%,rgba(35,174,224,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d639e4', endColorstr='#23aee0',GradientType=0 ); /* IE6-9 */
+                    /*background: rgb(214,57,228); !* Old browsers *!*/
+                    /*background: -moz-linear-gradient(top, rgba(214,57,228,1) 0%, rgba(35,174,224,1) 100%); !* FF3.6-15 *!*/
+                    /*background: -webkit-linear-gradient(top, rgba(214,57,228,1) 0%,rgba(35,174,224,1) 100%); !* Chrome10-25,Safari5.1-6 *!*/
+                    /*background: linear-gradient(to bottom, rgba(214,57,228,1) 0%,rgba(35,174,224,1) 100%); !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
                 }
                 &:after {
-                    background: #fff;
+                    background: url("../../../assets/SVG/checked.svg") center no-repeat;
+                    background-size: cover;
                 }
             }
         }
