@@ -1,5 +1,5 @@
 <template>
-    <span class="c-text-label" :class="['label-type-' + type]" :style="{ 'background-color': color, 'color' : fontColor }">
+    <span class="c-text-label" :class="['label-type-' + type]" :style="{ 'background-color': bgColor, 'color' : fontColor }">
         <slot />
     </span>
 </template>
@@ -22,8 +22,6 @@
     .c-text-label{
         padding: 0.20em 0.5em;
         border-radius: 3px;
-        color: #fff;
-
         $labelColor: (
             info: (#5D75F7, #fff),
             success: (#5EA72B, #fff),

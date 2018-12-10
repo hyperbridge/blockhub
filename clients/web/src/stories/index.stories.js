@@ -5437,6 +5437,7 @@ storiesOf('Text label', module)
                     <c-text-label type="success">Success</c-text-label>
                     <c-text-label type="danger">Danger</c-text-label>
                     <c-text-label type="warning">Warning</c-text-label>
+                    <c-text-label bgColor="#684BA5">Custom</c-text-label>
                     <hr />
                     <div class="h3 mb-3">Example</div>
                     <p><c-text-label>Lorem</c-text-label> ipsum dolor sit amet, consectetur adipiscing elit.</p>
