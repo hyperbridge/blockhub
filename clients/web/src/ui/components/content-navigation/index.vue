@@ -1,24 +1,32 @@
 <template>
     <div>
-        <slot :items="visibleItems"/>
-        <div class="content-navigation-wrapper" v-show="visibleItems.length">
-            <c-pagination
-                v-if="paginationMode"
-                v-bind="$attrs"
-                :activePage="activePage + 1"
-                :pages="pagination.pages"
-                @pageChange="activePage = $event - 1"
-            >
-                <slot name="left-content" slot="left-content"/>
-                <slot name="right-content" slot="right-content"/>
-            </c-pagination>
-            <c-load-more
-                v-else
-                v-bind="$attrs"
-                @click="loadMore()"
-            >
-               {{ itemsLeft ? 'Load More +' + itemsLeft : 'Show Less' }}
-            </c-load-more>
+        <div v-if="loading">
+            <c-spinner />
+        </div>
+        <div v-else>
+            <div v-if="!visibleItems.length">
+                <p>No results</p>
+            </div>
+            <slot :items="visibleItems"/>
+            <div class="content-navigation-wrapper" v-show="visibleItems.length">
+                <c-pagination
+                    v-if="paginationMode"
+                    v-bind="$attrs"
+                    :activePage="activePage + 1"
+                    :pages="pagination.pages"
+                    @pageChange="activePage = $event - 1"
+                >
+                    <slot name="left-content" slot="left-content"/>
+                    <slot name="right-content" slot="right-content"/>
+                </c-pagination>
+                <c-load-more
+                    v-else
+                    v-bind="$attrs"
+                    @click="loadMore()"
+                >
+                {{ itemsLeft ? 'Load More +' + itemsLeft : 'Show Less' }}
+                </c-load-more>
+            </div>
         </div>
     </div>
 </template>
@@ -28,6 +36,7 @@
         name: 'content-navigation',
         inheritAttrs: false,
         props: {
+            loading: Boolean,
             items: {
                 type: Array,
                 default: () => []
@@ -44,6 +53,7 @@
         },
         components: {
             'c-pagination': (resolve) => require(['@/ui/components/pagination'], resolve),
+            'c-spinner': (resolve) => require(['@/ui/components/spinner'], resolve),
             'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more'], resolve)
         },
         data() {

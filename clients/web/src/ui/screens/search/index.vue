@@ -244,15 +244,9 @@
                 <!-- <h3>Results</h3> -->
                 <div class="results__container">
                     <div class="results">
-                        <c-spinner v-if="isTyping"/>
-                        <div v-else-if="!resultsFiltered.length">
-                            <c-loading />
-                            <!-- <p>No results were found</p>
-                            <c-button @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button> -->
-                        </div>
                         <c-content-navigation
-                            v-else
                             class="row"
+                            :loading="loading"
                             :items="resultsFiltered"
                             :setItemsLimit="12"
                             :setItemsPerPage="12"
@@ -299,7 +293,6 @@
             'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
             'c-game-grid': (resolve) => require(['@/ui/components/game-grid/with-description'], resolve),
             'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
-            'c-spinner': (resolve) => require(['@/ui/components/spinner'], resolve),
             'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve),
             'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
             'c-list': (resolve) => require(['@/ui/components/list'], resolve),
@@ -319,7 +312,7 @@
                 ],
                 phrase: '',
                 results: [],
-                isTyping: false,
+                loading: false,
                 selectableTags: [],
                 selectableLanguages: [],
                 price: {
@@ -340,22 +333,23 @@
         methods: {
             search() {
                 this.debounce(() => {
-                    if (!this.isTyping) this.isTyping = true
+                    if (!this.loading) this.loading = true
+                    
+                    this.loading = true
 
                     if (this.filtersActive) {
                         this.debounce(() => {
-                            this.isTyping = false
-
                             BlockHub.feathersClient.service(`/search`).find(
                                 {
                                     query: this.query
                                 }
                             ).then((res) => {
                                 this.results = res.projects.data //[...this.getProductsQuery(this.query)]
+                                this.loading = false
                             })
                         }, 250, 'timeout2')
                     } else {
-                        this.isTyping = false
+                        this.loading = false
                         this.results = this.products
                     }
 
@@ -481,7 +475,7 @@
                 this.results = this.products
             } else {
 
-                this.isTyping = true
+                this.loading = true
                 const {
                     tags,
                     langs,
