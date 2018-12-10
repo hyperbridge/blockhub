@@ -10,7 +10,6 @@
 
 -------------------------------------------------------------------*/
 
-
 .card {
     border-radius: 5px;
     margin-bottom: 15px;
@@ -107,8 +106,6 @@ a.btn-outline-white {
         height: 4px;
     }
 }
-
-
 
 .page-aside .navigation, .page-sidepanel .navigation {
     padding: 10px 10px 10px 30px;
@@ -217,9 +214,9 @@ body::-webkit-scrollbar {
 }
 
 .page-heading .breadcrumb {
-//    background: none !important;
-//    border: 0 none !important;
-//    padding: 0;
+    //    background: none !important;
+    //    border: 0 none !important;
+    //    padding: 0;
     font-size: 14px;
 }
 
@@ -228,7 +225,7 @@ body::-webkit-scrollbar {
     font-size: 14px;
 }
 
-.page-heading .breadcrumb .breadcrumb-item+.breadcrumb-item:before {
+.page-heading .breadcrumb .breadcrumb-item + .breadcrumb-item:before {
     content: "\f105";
     font-family: "Font Awesome 5 Free";
     font-size: 14px;
@@ -239,9 +236,170 @@ body::-webkit-scrollbar {
 }
 
 *:focus, *:active, *.active, *:focus:active {
-  outline: none;
+    outline: none;
 }
 
 // .swiper-container {
 //     overflow: visible;
 // }
+
+.multiselect.dark-mode {
+    color: #ffffff;
+    input {
+        background: transparent;
+        border: unset;
+    }
+    .multiselect__tags {
+        border: 1px solid #1b1c2a;
+        background: #1b1c2a;
+        .multiselect__tag {
+            background: #fbdd6a;
+            color: #1b1c2a;
+            .multiselect__tag-icon,
+            .multiselect__tag-icon:focus,
+            .multiselect__tag-icon:hover {
+                background: #fbdd6a;
+                &:after {
+                    color: #1b1c2a;
+                }
+            }
+        }
+    }
+    .multiselect__content-wrapper {
+        border: 1px solid #1b1c2a;
+        background: #1b1c2a;
+    }
+    .multiselect__option--selected {
+        background: #fbdd6a;
+        &:after {
+            color: #28293e;
+        }
+        &.multiselect__option--highlight {
+            background: #dfc45e;
+            color: #1b1c2a;
+            cursor: pointer;
+        }
+    }
+}
+#app {
+    -webkit-user-select: none;
+
+    #content {
+        -webkit-user-select: text;
+
+        img {
+            -webkit-user-select: none;
+        }
+    }
+}
+
+.fixed-panel {
+    width: 350px;
+    right: -350px;
+    overflow-y: auto;
+    min-height: 100%;
+    backdrop-filter: blur(10px);
+}
+
+.preview-panel {
+    a {
+        margin: 5px 0;
+    }
+}
+
+.developer_banner {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9d972+0,f7bf77+100 */
+    background: #f9d972; /* Old browsers */
+    background: -moz-linear-gradient(left, #f9d972 0%, #f7bf77 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #f9d972 0%, #f7bf77 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #f9d972 0%, #f7bf77 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9d972', endColorstr='#f7bf77', GradientType=1); /* IE6-9 */
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: center;
+    color: #3D3E5D;
+    font-size: 14px;
+    margin: 25px 0;
+    overflow: hidden;
+    flex-direction: column;
+    width: 100%;
+    .img {
+        margin-right: 15px;
+        img {
+            height: 80px;
+            width: auto;
+        }
+    }
+    h3 {
+        font-size: 21px;
+        padding: 0;
+        margin: 0 0 3px;
+        color: #3D3E5D;
+    }
+    .btn {
+        text-transform: uppercase;
+        font-weight: bold;
+        border-radius: 3px;
+        border: none;
+        margin-right: 10px;
+        &.btn-default {
+            background: #3D3E5D;
+            color: #fff;
+            &:hover {
+                background: #50527b;
+            }
+        }
+    }
+}
+
+.dev_blk {
+    display: inline-block;
+    float: left;
+    width: auto;
+    max-width: 50%;
+    margin-top: 20px;
+    pointer-events: none;
+    margin-right: 35px;
+    &.active {
+        pointer-events: unset;
+        opacity: 1;
+    }
+    h5 {
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+        i {
+            margin-right: 5px;
+        }
+    }
+    ul {
+        padding: 0;
+        margin: 5px 0 10px 0;
+        display: inline-block;
+        li {
+            list-style: none;
+            display: block;
+            width: 100%;
+            a {
+                color: #fff;
+                text-decoration: none;
+                i {
+                    color: #A2A3BE;
+                    margin-right: 3px;
+                    width: 18px;
+                }
+            }
+        }
+    }
+}
+.disable-animations {
+    *, *::before, *::after {
+        transition: none !important;
+        transform: none !important;
+        animation: none !important;
+    }
+}
+.fixed-panel{
+    max-width: 90%;
+}
