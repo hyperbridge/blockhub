@@ -62,14 +62,14 @@
                 &:before {
                     content: '';
                     display: block;
-                    width: 17px;
-                    height: 17px;
+                    width: 19px;
+                    height: 19px;
                     border: 1px solid rgba(255, 255, 255, .2);
                     background: rgba(0, 0, 0, .3);
                     position: absolute;
                     border-radius: 2px;
                     left: 0;
-                    top: 2px;
+                    top: 0;
                     -webkit-transition: all .12s, border-color .08s;
                     transition: all .12s, border-color .08s;
                 }
@@ -77,10 +77,10 @@
                     content: '';
                     display: block;
                     position: absolute;
-                    width: 11px;
-                    height: 11px;
+                    width: 13px;
+                    height: 13px;
                     left: 3px;
-                    top: 5px;
+                    top: 3px;
                     -webkit-transition: all .12s, border-color .08s;
                     transition: all .12s, border-color .08s;
                 }
