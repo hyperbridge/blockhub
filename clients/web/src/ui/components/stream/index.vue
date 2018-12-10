@@ -55,8 +55,11 @@
 <style lang="scss" scoped>
     .stream-item{
         width: 100%;
+        transition: all 200ms ease-in-out;
         &:hover{
-            background: rgba(255, 255, 255, .1);
+            &.stream-item-bg{
+                background: rgba(255, 255, 255, .2);
+            }
             .stream-item__img{
                 border-color: #71bce8;
             }
@@ -68,15 +71,16 @@
         color: #fff;
         border-radius: 5px;
         &.stream-item-bg{
-            background: rgba(0, 0, 0, .2);
-            border: 1px solid rgba(0, 0, 0, .2);
+            background: rgba(0, 0, 0, .1);
+            border: 1px solid rgba(0, 0, 0, .1);
             padding: 10px;
         }
     }
     .stream-item__img{
         position: relative;
         width: 100%;
-        border: 5px solid rgba(255, 255, 255, .1);
+        /*border: 5px solid rgba(255, 255, 255, .1);*/
+        transition: all 200ms ease-in-out;
         img{
             width: 100%;
             height: 200px;
@@ -112,6 +116,9 @@
         background: -webkit-linear-gradient(top, rgba(94,187,241,1) 0%,rgba(22,165,241,1) 100%); /* Chrome10-25,Safari5.1-6 */
         background: linear-gradient(to bottom, rgba(94,187,241,1) 0%,rgba(22,165,241,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5ebbf1', endColorstr='#16a5f1',GradientType=0 ); /* IE6-9 */
+        &:hover{
+            transform: scale(1.2);
+        }
     }
     .stream-item__info{
         display: flex;
