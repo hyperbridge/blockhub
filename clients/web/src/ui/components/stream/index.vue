@@ -1,5 +1,5 @@
 <template>
-    <div class="stream-item">
+    <div class="stream-item" :class="{'stream-item-bg': background}">
         <div class="stream-item__wrapper">
             <div class="stream-item__img">
                 <c-img :src="streamImg" />
@@ -41,6 +41,10 @@
             streamViews: {
                 type: [ String, Number ],
                 default: 0
+            },
+            background:{
+                type: Boolean,
+                default: false
             }
         }
     }
@@ -53,11 +57,13 @@
     .stream-item__wrapper{
         display: flex;
         flex-direction: column;
-        padding: 10px;
         color: #fff;
-        background: rgba(0, 0, 0, .2);
-        border: 1px solid rgba(0, 0, 0, .2);
         border-radius: 5px;
+        &.stream-item-bg{
+            background: rgba(0, 0, 0, .2);
+            border: 1px solid rgba(0, 0, 0, .2);
+            padding: 10px;
+        }
     }
     .stream-item__img{
         position: relative;
