@@ -144,7 +144,7 @@
             }
         }
         &.preview-mode {
-            background: #1d2031;
+            background: rgba(0, 0, 0, 0.3); /* was 1d2031 */
             .user-data__icon {
                 background: #c94343;
                 &.verified {
@@ -235,9 +235,9 @@
         box-sizing: border-box;
         font-size: 60px;
         text-align: center;
-        background: #1f202f;
+        background: transparent;
         border-radius: 50%;
-        border: 1px solid #1c1c2a;
+        border: 0 none;
         margin-right: 15px;
         img {
             object-fit: cover;

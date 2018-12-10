@@ -1,5 +1,5 @@
 <template>
-    <div class="profile-chooser">
+    <div class="profile-chooser" :class="{ 'profile-chooser--dark-mode': darkMode, 'profile-chooser--light-mode': !darkMode }">
         <div class="profile-chooser__overlay" @click="closeProfileChooser">
         </div>
         <div class="profile-chooser__wrapper">
@@ -30,8 +30,8 @@
                             </div>
                         </c-slide>
                     </c-swiper>
-                    <div class="swiper-button-prev" slot="button-prev"></div>
-                    <div class="swiper-button-next" slot="button-next"></div>
+                    <div class="swiper-button-prev" slot="button-prev" v-if="profiles.length > 3"></div>
+                    <div class="swiper-button-next" slot="button-next" v-if="profiles.length > 3"></div>
                 </div>
                 <c-heading-bar
                     slot="title"
@@ -54,6 +54,12 @@
     import 'swiper/dist/css/swiper.css'
 
     export default {
+        props: {
+            darkMode: {
+                type: Boolean,
+                default: true
+            }
+        },
         components: {
             'c-swiper': swiper,
             'c-slide': swiperSlide,
@@ -105,6 +111,9 @@
 </script>
 
 <style lang="scss" scoped>
+    .profile-chooser {
+    }
+
     .profile-chooser__overlay{
         position: fixed;
         top: 0;
@@ -114,17 +123,26 @@
         z-index: 99;
         background: rgba(0, 0, 0, 0.2);
     }
+
     .profile-chooser__wrapper{
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        background: #30314c;
         z-index: 130;
         display: flex;
         justify-content: center;
         padding: 20px 30px;
+
+        .profile-chooser--light-mode & {
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .profile-chooser--dark-mode & {
+            background: #30314c;
+        }
     }
+
     .profile-chooser__content{
         width: 100%;
         .profile-slider{
@@ -148,20 +166,25 @@
             }
         }
     }
+
     .profile-chooser__actions {
         height: 50px;
         padding: 20px 0;
     }
+
     .profile-chooser__back-button {
         float: left;
     }
+
     .profile-chooser__ok-button {
         float: right;
     }
+
     .user-card__container-link{
         text-decoration: none;
         color: #fff;
     }
+
     .swiper-button-prev, .swiper-button-next {
         filter: brightness(10) grayscale(1);
     }

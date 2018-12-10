@@ -11,8 +11,11 @@
                 <div class="h2 ml-4 mb-0 pl-4 text-uppercase border-left">
                     Business Manager
                 </div>
-                <div class="mb-0 float-right h5" style="margin-left: auto">
-                    {{ activeProfile.name }}
+                <div class="page-top-bar__profile mb-0 float-right h5" style="margin-left: auto" @click="$store.commit('application/showProfileChooser', true)">
+                    <div class="page-top-bar__profile-avatar">
+                        <c-img src="https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png" />
+                    </div>
+                    <div class="page-top-bar__profile-name">{{ activeProfile.name }}</div>
                 </div>
             </div>
         </transition>
@@ -56,7 +59,7 @@
                         <slot />
                     </div>
                 </div>
-            </div>
+            </div>darkMode
         </transition>
         <!---->
 
@@ -69,6 +72,8 @@
             </div>
         </transition>
         <!---->
+
+        <c-profile-chooser v-if="$store.state.application.profileChooser && $store.state.application.signedIn" :darkMode="false" />
     </div>
 </template>
 
@@ -91,6 +96,7 @@
         },
         components: {
             SidebarMenu,
+            'c-profile-chooser': (resolve) => require(['@/ui/components/profile-chooser'], resolve),
             'c-page-heading': (resolve) => require(['@/ui/components/business/page-heading'], resolve),
         },
         data() {
@@ -253,6 +259,8 @@
 
     .v-sidebar-menu.light-v{
         padding-top: 70px;
+        padding-left: 10px;
+        padding-right: 10px;
         background-color: #fff!important;
         border-right: 1px solid rgba(0, 0, 0, 0.1);
         z-index: 20;
@@ -260,6 +268,9 @@
             color: #323c47!important;
         }
         .vsm-item{
+            border-radius: 5px;
+            overflow: hidden;
+            
             .vsm-link{
                 padding: 5px 10px;
                 .vsm-icon{
@@ -475,5 +486,26 @@
         background: #fff;
         padding: 15px 0;
         border: 1px solid #ebebeb;
+    }
+
+    .page-top-bar__profile {
+        cursor: pointer;
+    }
+
+    .page-top-bar__profile-name {
+        display: inline-block;
+        margin-right: 10px;
+        color: #888;
+    }
+
+    .page-top-bar__profile-avatar {
+        display: inline-block;
+        width: 50px;
+        position: relative;
+        padding: 10px;
+        img {
+            width: 100%;
+            border-radius: 100%;
+        }
     }
 </style>

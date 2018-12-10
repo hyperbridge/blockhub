@@ -33,31 +33,32 @@
             setTimeout(this.initialize.bind(this), 3000) // TODO: remove arbitrary delay
         },
         watch: {
-            '$store.state.auth.user'(newVal) {
-                if (newVal) {
-                    if (this.type === 'user') {
-                        this.$store.dispatch('profiles/find', {
-                            query: {
-                                accountId: this.$store.state.auth.user.id,
-                                $sort: {
-                                    createdAt: -1
-                                },
-                                $limit: 25
-                            }
-                        })
-                    }
-                }
-            },
             '$store.state.auth.accessToken'(newVal) {
                 if (newVal) {
                     this.authenticate()
+                }
+            },
+            '$store.state.auth.user'(newVal) {
+                if (newVal) {
+                    this.$store.dispatch('profiles/find', {
+                        query: {
+                            accountId: this.$store.state.auth.user.id,
+                            $sort: {
+                                createdAt: -1
+                            },
+                            $limit: 25
+                        }
+                    })
                 }
             },
             '$store.state.profiles.ids'(newVal) {
                 if (newVal) {
                     this.$store.state.application.activeProfile = this.$store.state.profiles.keyedById[this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.id || 1]
                     this.$store.state.application.developerMode = this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.role === 'developer'
-                    this.satisfied = true
+                    
+                    if (this.type === 'user') {
+                        this.satisfied = true
+                    }
                 }
             }
         },
