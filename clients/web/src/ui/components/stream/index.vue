@@ -3,15 +3,17 @@
         <div class="stream-item__wrapper">
             <div class="stream-item__img">
                 <c-img :src="streamImg" />
-                <a :href="streamSrc" class="stream-item__run-btn">
-                    <i class="fas fa-play-circle"></i>
-                </a>
+                <div class="stream-item__run-container">
+                    <a :href="streamSrc" class="stream-item__run-btn">
+                        <i class="fas fa-play"></i>
+                    </a>
+                </div>
             </div>
             <div class="stream-item__info">
                 <div>
                     <c-img :src="streamAvatar" />
                 </div>
-                <div>
+                <div class="w-100">
                     <div class="h6 p-0 m-0 font-weight-bold user-name">
                         {{ streamName }}
                     </div>
@@ -21,10 +23,10 @@
                         </a>
                     </div>
                 </div>
-                <div class="stream-item__viewers">
-                    <i class="fas fa-eye"></i>
-                    {{ streamViews }}
-                </div>
+                <!--<div class="stream-item__viewers">-->
+                    <!--<i class="fas fa-eye"></i>-->
+                    <!--{{ streamViews }}-->
+                <!--</div>-->
             </div>
         </div>
     </div>
@@ -53,6 +55,12 @@
 <style lang="scss" scoped>
     .stream-item{
         width: 100%;
+        &:hover{
+            background: rgba(255, 255, 255, .1);
+            .stream-item__img{
+                border-color: #71bce8;
+            }
+        }
     }
     .stream-item__wrapper{
         display: flex;
@@ -68,6 +76,7 @@
     .stream-item__img{
         position: relative;
         width: 100%;
+        border: 5px solid rgba(255, 255, 255, .1);
         img{
             width: 100%;
             height: 200px;
@@ -78,23 +87,39 @@
             padding-top: 100%;
         }
     }
-    .stream-item__run-btn{
+    .stream-item__run-container{
         position: absolute;
         top: 10px;
         right: 10px;
+        bottom: 10px;
+        left: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .stream-item__run-btn{
         color: #fff;
-        font-size: 3rem;
+        font-size: 18px;
         transition: all .25s ease;
-        &:hover{
-            transform: scale(1.3);
-        }
+        height: 32px;
+        width: 50px;
+        text-align: center;
+        line-height: 32px;
+        border-radius: 3px;
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#5ebbf1+0,16a5f1+100 */
+        background: rgb(94,187,241); /* Old browsers */
+        background: -moz-linear-gradient(top, rgba(94,187,241,1) 0%, rgba(22,165,241,1) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, rgba(94,187,241,1) 0%,rgba(22,165,241,1) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, rgba(94,187,241,1) 0%,rgba(22,165,241,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5ebbf1', endColorstr='#16a5f1',GradientType=0 ); /* IE6-9 */
     }
     .stream-item__info{
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
-        margin-top: 15px;
         position: relative;
+        padding: 10px 10px 10px 10px;
+        overflow: hidden;
         img{
             width: 40px;
             height: 40px;
@@ -106,10 +131,16 @@
             color: #fff!important;
             opacity: .7;
         }
+        .product-name{
+            text-overflow: ellipsis;
+            overflow: hidden;
+            width: 100%;
+            white-space: nowrap;
+        }
         .stream-item__viewers{
             position: absolute;
-            right: 0;
-            bottom: 0;
+            right: 10px;
+            bottom: 12px;
             color: #fff;
             font-size: 12px;
             opacity: .4;
