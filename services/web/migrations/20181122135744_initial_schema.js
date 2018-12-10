@@ -44,6 +44,8 @@ exports.up = knex => {
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
             table.json('meta')
+
+            table.string('name', 100)
         })
         .createTable('achievements', table => {
             table.increments('id').primary()
@@ -53,6 +55,8 @@ exports.up = knex => {
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
             table.json('meta')
+
+            table.string('name', 100)
         })
         .createTable('communities', table => {
             table.increments('id').primary()
@@ -64,7 +68,6 @@ exports.up = knex => {
             table.json('meta')
 
             table.string('name', 100)
-            table.string('description', 500)
             table.integer('currentActiveUsers').unsigned()
             table.integer('dailyActiveUsers').unsigned()
             table.integer('monthlyActiveUsers').unsigned()
@@ -103,7 +106,6 @@ exports.up = knex => {
             table.json('meta')
 
             table.string('name', 100)
-            table.string('description', 500)
         })
         .createTable('products', table => {
             table.increments('id').primary()
@@ -146,6 +148,7 @@ exports.up = knex => {
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
             table.json('meta')
 
+            table.string('name', 100)
             table.string('type', 100)
             table
                 .integer('ownerId')
@@ -168,6 +171,8 @@ exports.up = knex => {
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
             table.json('meta')
+
+            table.string('name', 100)
         })
         .createTable('projects', table => {
             table.increments('id').primary()
@@ -179,7 +184,6 @@ exports.up = knex => {
             table.json('meta')
 
             table.string('name', 100)
-            table.string('description', 500)
             table
                 .integer('ownerId')
                 .unsigned()
@@ -245,7 +249,6 @@ exports.up = knex => {
             table.json('meta')
 
             table.string('name', 100)
-            table.string('description', 500)
         })
         .createTable('collections', table => {
             table.increments('id').primary()
@@ -255,6 +258,8 @@ exports.up = knex => {
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
             table.json('meta')
+
+            table.string('name', 100)
         })
         .createTable('discussions', table => {
             table.increments('id').primary()
@@ -264,6 +269,8 @@ exports.up = knex => {
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
             table.json('meta')
+
+            table.string('name', 100)
         })
         .createTable('events', table => {
             table.increments('id').primary()
@@ -285,6 +292,8 @@ exports.up = knex => {
 
             table.string('storageType', 100)
             table.string('accessType', 100)
+
+            table.string('name', 100)
         })
         .createTable('leaderboards', table => {
             table.increments('id').primary()
@@ -294,7 +303,8 @@ exports.up = knex => {
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
             table.json('meta')
-            
+
+            table.string('name', 100)
             table
                 .integer('productId')
                 .unsigned()
@@ -363,6 +373,8 @@ exports.up = knex => {
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
             table.json('meta')
+
+            table.string('name', 100)
         })
         .createTable('tags', table => {
             table.increments('id').primary()
@@ -381,6 +393,8 @@ exports.up = knex => {
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
             table.json('meta')
+
+            table.string('name', 100)
         })
         .createTable('votes', table => {
             table.increments('id').primary()
@@ -431,6 +445,18 @@ exports.up = knex => {
                 .unsigned()
                 .references('id')
                 .inTable('profiles')
+                .onDelete('CASCADE')
+            table
+                .integer('fromIdeaId')
+                .unsigned()
+                .references('id')
+                .inTable('ideas')
+                .onDelete('CASCADE')
+            table
+                .integer('toIdeaId')
+                .unsigned()
+                .references('id')
+                .inTable('ideas')
                 .onDelete('CASCADE')
             table
                 .integer('fromProjectId')
@@ -490,17 +516,21 @@ exports.up = knex => {
 
             alter table "nodes"
                 add constraint "from_is_set" check(count_not_nulls(
-                    "fromProjectId",
                     "fromAccountId",
                     "fromProfileId",
+                    "fromIdeaId",
+                    "fromProjectId",
+                    "fromProductId",
                     "fromTagId"
                 ) = 1);
                 
             alter table "nodes"
                 add constraint "to_is_set" check(count_not_nulls(
-                    "toProjectId",
                     "toAccountId",
                     "toProfileId",
+                    "toIdeaId",
+                    "toProjectId",
+                    "toProductId",
                     "toTagId"
                 ) = 1);
         `)
@@ -634,6 +664,21 @@ exports.down = knex => {
         .dropTableIfExists('tags')
         .dropTableIfExists('tournaments')
         .dropTableIfExists('votes')
+        // table.dropIndex ALTER TABLE 'x' DROP CONSTRAINT IF EXISTS 'x_y_foreign' 
+    // knex.schema.table('me', function (t) {
+    //     t.dropForeign('other_id');
+    //     t.dropColumn('other_id');
+    // });
+//     return knex.schema.raw(`
+//     ALTER TABLE "car"
+//     DROP CONSTRAINT "car_fuel_type_check",
+//     ADD CONSTRAINT "car_fuel_type_check" 
+//     CHECK (fuel_type IN ('HYBRID', 'ELECTRIC', 'PETROL', 'DIESEL'))
+//   `);
+    // return knex.schema
+    //     .alterTable('images', (table) => {
+    //         table.string('checksum').nullable().alter();
+    //     });
         //.dropTableIfExists('profile_friends')
         // .dropTableIfExists('project_pledges')
         // .dropTableIfExists('project_members')

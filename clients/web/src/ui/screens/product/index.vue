@@ -544,7 +544,7 @@
 
                     this.product.type = 'game'
                     //this.product.rating.overall = 0
-                    this.product.systemTags = ['imported']
+                    this.product.tags = [{key: 'imported', value: 'Imported'}]
                     this.product.developerTags = data.tags
                     this.product.name = data.title
                     this.product.releaseDate = data.releaseDate

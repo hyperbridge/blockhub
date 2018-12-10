@@ -1,6 +1,9 @@
 import { Model, RelationMappings } from 'objection'
 import Account from './account'
 import Profile from './profile'
+import Idea from './idea'
+import Project from './project'
+import Product from './product'
 
 // Based on https://github.com/Vincit/objection.js/issues/19
 // Exclusive ARC https://hashrocket.com/blog/posts/modeling-polymorphic-associations-in-a-relational-database#exclusive-belongs-to-aka-exclusive-arc-
@@ -147,6 +150,54 @@ export default class Node extends Model {
                 join: {
                     from: 'nodes.toAccountId',
                     to: 'accounts.id'
+                }
+            },
+            fromIdea: {
+                relation: Model.HasOneRelation,
+                modelClass: Idea,
+                join: {
+                    from: 'nodes.fromIdeaId',
+                    to: 'profiles.id'
+                }
+            },
+            toIdea: {
+                relation: Model.HasOneRelation,
+                modelClass: Idea,
+                join: {
+                    from: 'nodes.toIdeaId',
+                    to: 'profiles.id'
+                }
+            },
+            fromProject: {
+                relation: Model.HasOneRelation,
+                modelClass: Project,
+                join: {
+                    from: 'nodes.fromProjectId',
+                    to: 'profiles.id'
+                }
+            },
+            toProject: {
+                relation: Model.HasOneRelation,
+                modelClass: Project,
+                join: {
+                    from: 'nodes.toProjectId',
+                    to: 'profiles.id'
+                }
+            },
+            fromProduct: {
+                relation: Model.HasOneRelation,
+                modelClass: Product,
+                join: {
+                    from: 'nodes.fromProductId',
+                    to: 'profiles.id'
+                }
+            },
+            toProduct: {
+                relation: Model.HasOneRelation,
+                modelClass: Product,
+                join: {
+                    from: 'nodes.toProductId',
+                    to: 'profiles.id'
                 }
             },
         }

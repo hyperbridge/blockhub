@@ -2648,8 +2648,11 @@ storiesOf('News List', module)
                         "id": 1,
                         "targetType": "product",
                         "targetId": 1,
-                        "systemTags": [
-                            "news"
+                        "tags": [
+                            {
+                                "key": "news",
+                                "value": "News"
+                            }
                         ],
                         "heading": "New class and event coming next week!",
                         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
@@ -2660,8 +2663,11 @@ storiesOf('News List', module)
                         "id": 2,
                         "targetType": "product",
                         "targetId": 1,
-                        "systemTags": [
-                            "news"
+                        "tags": [
+                            {
+                                "key": "news",
+                                "value": "News"
+                            }
                         ],
                         "heading": "New class and event coming next week!",
                         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
@@ -2672,8 +2678,11 @@ storiesOf('News List', module)
                         "id": 3,
                         "targetType": "product",
                         "targetId": 2,
-                        "systemTags": [
-                            "news"
+                        "tags": [
+                            {
+                                "key": "news",
+                                "value": "News"
+                            }
                         ],
                         "heading": "New class and event coming next week!",
                         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
@@ -2684,8 +2693,11 @@ storiesOf('News List', module)
                         "id": 4,
                         "targetType": "product",
                         "targetId": 3,
-                        "systemTags": [
-                            "news"
+                        "tags": [
+                            {
+                                "key": "news",
+                                "value": "News"
+                            }
                         ],
                         "heading": "New class and event coming next week!",
                         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
@@ -2716,8 +2728,11 @@ storiesOf('News List', module)
                     "id": 1,
                     "targetType": "product",
                     "targetId": 1,
-                    "systemTags": [
-                        "news"
+                    "tags": [
+                        {
+                            "key": "news",
+                            "value": "News"
+                        }
                     ],
                     "heading": "New class and event coming next week!",
                     "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",

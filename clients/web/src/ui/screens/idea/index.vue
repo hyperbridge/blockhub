@@ -67,7 +67,7 @@
                                 </div>
                             </div>
 
-                            <c-tags :tags="idea.tags.map(t => t.value)"
+                            <c-tags :tags="idea.tags ? idea.tags.map(t => t.value) : []"
                                             v-if="!editing || !activeElement['tags']"></c-tags>
                         </div>
                     </div>
@@ -237,31 +237,37 @@
                         this.idea.id = res.id
                         this.notice = "Congratulations, your idea has been created!"
 
+                        this.$store.dispatch('application/setEditorMode', 'viewing')
+                        
                         this.$router.push('/idea/' + this.idea.id)
                     })
                 } else {
                     this.$store.dispatch('application/setEditorMode', 'publishing')
+
+                    this.idea.ownerId = this.$store.state.application.activeProfile.id
                     
                     this.$store.dispatch('ideas/update', [this.idea.id, this.idea, {
                         query: {
-                            $eager: ['tags', 'community']
+                            $eager: '[tags, community]'
                         }
                     }]).then(() => {
                         this.notice = "Idea has been saved."
+                        
+                        this.$store.dispatch('application/setEditorMode', 'viewing')
                     })
                 }
             },
             checkForm() {
                 this.errors = []
 
-                if (this.idea.name && this.idea.description) {
+                if (this.idea.name && this.idea.meta.description) {
                     return true
                 }
 
                 if (!this.idea.name) {
                     this.errors.push('Idea name required.')
                 }
-                if (!this.idea.description) {
+                if (!this.idea.meta.description) {
                     this.errors.push('Idea description required.')
                 }
             },
@@ -282,12 +288,8 @@
                     this.$store.dispatch('application/setEditorMode', 'editing')
                 }
 
-                if (!idea) {
-                    idea = this.$store.getters['ideas/get'](this.id, {
-                        query: {
-                            $eager: ['tags', 'community']
-                        }
-                    })
+                if (!idea && this.$store.state.ideas.keyedById && this.$store.state.ideas.keyedById[this.id]) {
+                    idea = this.$store.state.ideas.keyedById[this.id]
                 }
 
                 if (idea && idea.meta && idea.meta.images && idea.meta.images.header) {
@@ -345,7 +347,7 @@
                 this.$store.dispatch('ideas/find', {
                     query: {
                         id: Number(this.id),
-                        $eager: ['tags', 'community']
+                        $eager: '[tags, community]'
                     }
                 })
             }

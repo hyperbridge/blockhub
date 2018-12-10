@@ -7,14 +7,22 @@
             "revision": 0,
             "created": 1531430916082,
             "version": 0,
-            "systemTags": [],
             "images": {
                 "preview": []
             },
-            "developerTags": [
-                "lifestyle",
-                "vr",
-                "gym"
+            "tags": [
+                {
+                    "key": "lifestyle",
+                    "value": "Lifestyle"
+                },
+                {
+                    "key": "vr",
+                    "value": "VR"
+                },
+                {
+                    "key": "gym",
+                    "value": "Gym"
+                }
             ],
             "likes": 1000,
             "comments": [],

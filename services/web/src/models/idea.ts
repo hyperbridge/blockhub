@@ -3,6 +3,7 @@ import Node from './node'
 import Rating from './rating'
 import Profile from './profile'
 import Community from './community'
+import Tag from './tag'
 
 export default class Idea extends Model {
     id!: Number
@@ -17,6 +18,7 @@ export default class Idea extends Model {
     owner!: Profile
 
     type!: String // [battlepass, app, game, etc.]
+    tags!: Array<Tag>
 
     static get tableName() {
         return 'ideas'
@@ -105,6 +107,26 @@ export default class Idea extends Model {
                 join: {
                     from: 'ideas.parentId',
                     to: 'ratings.id'
+                }
+            },
+            tags: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Tag,
+                join: {
+                    from: 'ideas.id',
+                    to: 'tags.id',
+                    through: {
+                        from: 'nodes.fromIdeaId',
+                        to: 'nodes.toTagId',
+                        extra: ['relationKey']
+                    }
+                },
+                filter: {
+                    relationKey: 'tags'
+                },
+                beforeInsert(model) {
+                    console.log(model);
+                    (model as Node).relationKey = 'tags'
                 }
             },
         }

@@ -242,7 +242,7 @@ const assets = {
         assetsTags: (state, { assetsArray }) => assetsArray
             .reduce((tags, asset) => [
                 ...tags,
-                ...asset.systemTags.filter(tag =>
+                ...asset.tags.filter(tag =>
                     !tags.includes(tag)
                  )
             ], []),

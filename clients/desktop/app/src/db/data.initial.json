@@ -845,7 +845,7 @@
     {
       "default_project": {
         "name": "My Project Name",
-        "systemTags": [],
+        "tags": [],
         "images": {},
         "author": "0x0",
         "author_tags": [ "game" ],
@@ -923,9 +923,8 @@
           "downloads": 20,
           "price": 0,
           "oldPrice": 0,
-          "systemTags": [ "game", "new" ],
+          "tags": [ {"key": "game", "value": "Game" }, {"key": "new", "value": "New" } ],
           "author": "0x0",
-          "developerTags": [ "adventure" ],
           "plans": [
             { "title": "Play Now", "link": "#3" },
             { "title": "3 Month Subscription", "price": "12.95", "link": "" },
@@ -998,9 +997,17 @@
         },
         "type": "game",
         "downloads": 20,
-        "systemTags": [ "game", "new" ],
+        "tags": [
+          {
+            "key": "game",
+            "value": "Game"
+          },
+          {
+            "key": "new",
+            "value": "New"
+          }
+        ],
         "author": "0x0",
-        "author_tags": [ "adventure" ],
         "plans": [
           { "title": "Play Now", "link": "#3" },
           { "title": "3 Month Subscription", "price": "12.95", "link": "" },
