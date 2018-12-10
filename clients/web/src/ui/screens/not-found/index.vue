@@ -39,8 +39,7 @@ export default {
         filter: invert(1);
     }
     .app-header {
-        rotate: -20deg !important;
-        transform: translateX(-80px) translateY(-450px) !important;
+        transform: rotate(-20deg) translateX(-80px) translateY(-450px) !important;
         overflow: hidden;
 
         &:before {
