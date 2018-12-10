@@ -994,6 +994,31 @@ storiesOf('Buttons', module)
             <c-button status="support" size="lg">support</c-button>
         `)
     }))
+    .add('second type', () => ({
+        components: {'c-button': Buttons},
+        methods: {
+            testFunction: function () {
+                console.log('BOOOOOOOOOOOM!')
+            }
+        },
+        template: injectButtonTemplate(`
+            <c-button status="second-info">info</c-button>
+            <c-button status="second-info" size="md">info</c-button>
+            <c-button status="second-info" size="lg">info</c-button>
+            <hr />
+            <c-button status="second-success">success</c-button>
+            <c-button status="second-success" size="md">success</c-button>
+            <c-button status="second-success" size="lg">success</c-button>
+            <hr />
+            <c-button status="second-warning">danger</c-button>
+            <c-button status="second-warning" size="md">danger</c-button>
+            <c-button status="second-warning" size="lg">danger</c-button>
+            <hr />
+            <c-button status="second-danger">danger</c-button>
+            <c-button status="second-danger" size="md">danger</c-button>
+            <c-button status="second-danger" size="lg">danger</c-button>
+        `)
+    }))
     .add('outline', () => ({
         components: {'c-button': Buttons},
         methods: {
