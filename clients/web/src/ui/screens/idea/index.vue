@@ -221,6 +221,15 @@
                         this.$refs[key].focus()
                 }, 10)
             },
+            remove() {
+                this.$store.dispatch('ideas/remove', this.idea.id).then((res) => {
+                    this.notice = "Idea has been removed."
+
+                    this.$store.dispatch('application/setEditorMode', 'viewing')
+                    
+                    this.$router.push('/ideas')
+                })
+            },
             save() {
                 if (!this.checkForm()) {
                     this.$store.dispatch('application/setEditorMode', 'editing')
@@ -252,7 +261,7 @@
                         }
                     }]).then(() => {
                         this.notice = "Idea has been saved."
-                        
+
                         this.$store.dispatch('application/setEditorMode', 'viewing')
                     })
                 }
@@ -339,6 +348,9 @@
             editing() {
                 if (this.$store.state.application.editorMode === 'publishing') {
                     this.save()
+                }
+                else if (this.$store.state.application.editorMode === 'removing') {
+                    this.remove()
                 }
             },
         },
