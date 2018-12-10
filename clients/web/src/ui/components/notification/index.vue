@@ -77,6 +77,7 @@
         display: inline-block;
         transition: all 200ms ease-in-out;
         color: #fff;
+
         .title {
             width: 100%;
             display: inline-block;
@@ -87,6 +88,8 @@
             font-size: 13px;
             font-weight: bold;
             border-bottom: 2px solid #fff;
+            cursor: pointer;
+            
             h5 {
                 padding: 0;
                 margin: 0;

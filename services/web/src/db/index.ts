@@ -127,7 +127,7 @@ export const updateToken = async (req: UpdateTokenRequest) => {
 //             email,
 //             firstName,
 //             lastName,
-//             passwordHash
+//             password
 //         })
 
 //     return Promise.resolve(account)
@@ -170,7 +170,7 @@ export const getAccount = async ({ id, email, fieldKey }): Promise<Account | und
 
     if (!result) { return Promise.resolve(result) }
 
-    result.status = result.status || (!!result.passwordHash ? 'active' : 'disabled')
+    result.status = result.status || (!!result.password ? 'active' : 'disabled')
 
     return Promise.resolve(result)
 }

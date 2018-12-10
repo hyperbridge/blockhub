@@ -14,7 +14,7 @@
                             Legendary Edition
                         </div>
                     </div>
-                    <c-button status="opacity-info" icon="play" class="margin-top-15" size="lg">
+                    <c-button status="info" icon="play" class="margin-top-15" size="xl">
                         Play Now
                     </c-button>
                 </div>

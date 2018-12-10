@@ -14,7 +14,7 @@ export default class Account extends Model {
     email!: String
     firstName!: String
     lastName!: String
-    passwordHash!: String
+    password!: String
     avatar!: String
     //isActive!: boolean
 
@@ -25,13 +25,13 @@ export default class Account extends Model {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['email', 'firstName', 'lastName', 'passwordHash'],
+            required: ['email', 'password'],
             properties: {
                 id: { type: 'integer' },
                 email: { type: 'string' },
                 firstName: { type: 'string' },
                 lastName: { type: 'string' },
-                passwordHash: { type: 'string' }
+                password: { type: 'string' }
             },
             options: {
                 timestamps: true

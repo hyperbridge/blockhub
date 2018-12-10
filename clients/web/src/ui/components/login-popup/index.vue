@@ -5,35 +5,40 @@
         v-if="activated"
     >
         <div class="" slot="modal_body" style="width: 100%">
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label>E-mail</label>
-                        <input type="text" class="form-control" placeholder="E-mail"
-                                name="email" v-model="email">
+            <c-loading :enabled="loading" />
+            
+            <div v-if="!loading">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label>E-mail</label>
+                            <input type="text" class="form-control" placeholder="E-mail"
+                                    name="email" v-model="email">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" class="form-control" placeholder="Password"
-                                name="password" v-model="password">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" placeholder="Password"
+                                    name="password" v-model="password">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <p class="errors" v-if="errors.length">
-                <br />
-                <strong>Please correct the following error(s):</strong>
-                <ul>
-                    <li v-for="error in errors" :key="error">{{ error }}</li>
-                </ul>
-            </p>
+                <p class="errors" v-if="errors.length">
+                    <br />
+                    <strong>Please correct the following error(s):</strong>
+                    <ul>
+                        <li v-for="error in errors" :key="error">{{ error }}</li>
+                    </ul>
+                </p>
+            </div>
         </div>
-        <div slot="modal_footer" class="text-right w-100">
-            <a href="#" @click="$store.commit('application/activateModal', 'register')" style="float: left; margin-right: 20px">Don't have an account? Sign Up</a>
+
+        <div slot="modal_footer" class="text-right w-100" v-if="!loading">
+            <c-button status="plain" @click="$store.commit('application/activateModal', 'register')" style="float: left; margin-right: 20px">Don't have an account? Sign Up</c-button>
             <c-button size="md" @click="next()">Continue</c-button>
         </div>
     </c-custom-modal>
@@ -58,7 +63,8 @@
             return {
                 errors: [],
                 email: null,
-                password: null
+                password: null,
+                loading: false
             }
         },
         computed: {
@@ -75,6 +81,8 @@
                 this.errors = []
                 this.$store.commit('auth/clearAuthenticateError')
 
+                this.loading = true
+
                 if (email
                 && password) {
                     this.$store.dispatch('auth/authenticate', { strategy: 'local', email, password })
@@ -87,6 +95,8 @@
                                 ? 'Incorrect email or password.'
                                 : 'An error prevented login.'
                             this.errors = [error.message]
+
+                            this.loading = false
                         })
                     
                     return

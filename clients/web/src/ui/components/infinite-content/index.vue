@@ -261,7 +261,7 @@
             </transition-group>
         </template>
 
-        <transition name="fade-slow">
+        <transition name="fade-slow" v-if="showSignIn">
             <div class="row" v-if="end">
                 <div class="col-12">
                     <c-recommendation-block />
@@ -287,7 +287,8 @@ export default {
         list: {
             type: Array,
             required: true
-        }
+        },
+        showSignIn: Boolean
     },
     components: {
         'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),

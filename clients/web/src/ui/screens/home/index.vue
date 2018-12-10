@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <c-infinite-content :list="list" />
+            <c-infinite-content :list="list" :showSignIn="true" />
 
             <c-custom-modal title="BlockHub Preview" v-if="showWelcomeModal" @close="closeModal">
                 <div class="help-modal__content" slot="modal_body" style="max-width: 500px">
