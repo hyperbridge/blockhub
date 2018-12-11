@@ -115,6 +115,7 @@
         text-decoration: none;
         cursor: pointer;
         font-weight: bold;
+        justify-content: center;
         /*text-shadow: 0 0 2px rgba(0, 0, 0, 0.1);*/
         transition: all 200ms ease-in-out;
         span{
@@ -305,6 +306,32 @@
                 border: 1px solid nth($colorSet, 1);
                 &:not([disabled]):hover {
                     background: nth($colorSet, 1);
+                    color: nth($colorSet, 3);
+                }
+            }
+            &[disabled], &.disabled {
+                background: #bfbfbf !important;
+            }
+        }
+
+        $secondColor: (
+            second-info: (#0e86ca, #00aeff, #fff),
+            second-success: (#189f2d, #1bb934, #fff),
+            second-danger: (#d8a324, #ffc02a, #000),
+            second-warning: (#c00f26, #e1112c, #fff),
+        );
+
+        @each $status, $colorSet in $secondColor {
+            &.#{$status} {
+                background: nth($colorSet, 1);
+                color: nth($colorSet, 3);
+                border: 1px solid nth($colorSet, 2);
+                border-radius: 2px;
+                padding: 10px 50px;
+                font-size: 18px;
+                font-weight: 400;
+                &:not([disabled]):hover {
+                    background: nth($colorSet, 2);
                     color: nth($colorSet, 3);
                 }
             }

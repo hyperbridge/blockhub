@@ -1,5 +1,5 @@
 <template>
-    <div class="review">
+    <div class="review" :class="{ 'background-review': background, 'p-0': !background, 'margin-bottom-40': !background}">
         <div class="review__header">
             <c-img :src="review.author.img" class="review__author-img"/>
             <div class="review__author">
@@ -59,6 +59,10 @@ export default {
         review: {
             type: Object,
             required: true
+        },
+        background: {
+            type: Boolean,
+            default: false
         }
     },
     components: {
@@ -94,10 +98,12 @@ export default {
     padding: 15px;
     box-sizing: border-box;
     border-radius: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.13);
     color: #dfdfe9;
     margin-bottom: 20px;
-    background-color: rgba(0, 0, 0, 0.13);
+    &.background-review{
+        background-color: rgba(0, 0, 0, 0.13);
+        border: 1px solid rgba(255, 255, 255, 0.13);
+    }
     &__header {
         display: flex;
         align-items: center;

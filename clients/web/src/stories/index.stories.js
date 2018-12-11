@@ -994,6 +994,31 @@ storiesOf('Buttons', module)
             <c-button status="support" size="lg">support</c-button>
         `)
     }))
+    .add('second type', () => ({
+        components: {'c-button': Buttons},
+        methods: {
+            testFunction: function () {
+                console.log('BOOOOOOOOOOOM!')
+            }
+        },
+        template: injectButtonTemplate(`
+            <c-button status="second-info">info</c-button>
+            <c-button status="second-info" size="md">info</c-button>
+            <c-button status="second-info" size="lg">info</c-button>
+            <hr />
+            <c-button status="second-success">success</c-button>
+            <c-button status="second-success" size="md">success</c-button>
+            <c-button status="second-success" size="lg">success</c-button>
+            <hr />
+            <c-button status="second-warning">danger</c-button>
+            <c-button status="second-warning" size="md">danger</c-button>
+            <c-button status="second-warning" size="lg">danger</c-button>
+            <hr />
+            <c-button status="second-danger">danger</c-button>
+            <c-button status="second-danger" size="md">danger</c-button>
+            <c-button status="second-danger" size="lg">danger</c-button>
+        `)
+    }))
     .add('outline', () => ({
         components: {'c-button': Buttons},
         methods: {
@@ -5440,7 +5465,26 @@ storiesOf('Games list', module)
                 </div>`
     }))
 
-
+storiesOf('Text label', module)
+    .add('default', () => ({
+        components:{
+            'c-text-label': (resolve) => require(['@/ui/components/text-label'], resolve),
+        },
+        template: `<div class="p-3 m-0 text-white" style="width: 900px">
+                    <c-text-label>Default</c-text-label>
+                    <c-text-label type="white">White</c-text-label>
+                    <c-text-label type="info">Info</c-text-label>
+                    <c-text-label type="success">Success</c-text-label>
+                    <c-text-label type="danger">Danger</c-text-label>
+                    <c-text-label type="warning">Warning</c-text-label>
+                    <c-text-label bgColor="#684BA5">Custom</c-text-label>
+                    <hr />
+                    <div class="h3 mb-3">Example</div>
+                    <p><c-text-label>Lorem</c-text-label> ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p>Lorem ipsum <c-text-label type="success">dolor sit</c-text-label>, consectetur adipiscing elit.</p>
+                    <p>Nulla euismod lorem a vehicula <c-text-label type="info">condimentum</c-text-label>.</p>
+                </div>`
+    }))
 /*
      Dynamic import - test version
 
