@@ -24,8 +24,14 @@
 
                 <hr v-if="developerMode" v-darklaunch="'REALMS'" />
 
-                <h5 v-if="developerMode">Your Products</h5>
-                <a v-if="developerMode" href="#/product/1">
+                <h5 v-if="developerMode && products.length">Your Products</h5>
+
+                <a v-if="developerMode" :href="`#/product/${product.id}`" v-for="(product, index) in products" :key="index">
+                    <span class="icon icon-letter-circle">{{ product.name.slice(0, 1) }}</span>
+                    <span class="text">{{ product.name }}</span>
+                </a>
+
+                <!-- <a v-if="developerMode" href="#/product/1">
                     <span class="icon icon-letter-circle">B</span>
                     <span class="text">BlockHub</span>
                 </a>
@@ -36,11 +42,11 @@
                 <a v-if="developerMode" href="#/product/1">
                     <span class="icon icon-letter-circle">R</span>
                     <span class="text">Republic</span>
-                </a>
+                </a> -->
 
-                <a v-if="developerMode" href="#/profile/1/products">See More...</a>
+                <a v-if="developerMode && products.length > 3" href="#/business/products">See More...</a>
 
-                <hr v-if="developerMode" />
+                <hr v-if="developerMode && products.length" />
 
                 <h5 v-if="developerMode"><i class="fas fa-code" /> Developer</h5>
 
@@ -243,7 +249,8 @@
             signedIn() { return this.$store.state.application.signedIn },
             simulatorMode() { return this.$store.state.application.simulatorMode },
             operatingSystem() { return this.$store.state.application.operatingSystem },
-            environmentMode() { return this.$store.state.application.environmentMode }
+            environmentMode() { return this.$store.state.application.environmentMode },
+            products() { return [] }
         },
         methods: {
             ensureDesktopWelcome(to) {

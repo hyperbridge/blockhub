@@ -297,23 +297,25 @@
                     this.$store.dispatch('application/setEditorMode', 'editing')
                 }
 
-                if (!idea && this.$store.state.ideas.keyedById && this.$store.state.ideas.keyedById[this.id]) {
-                    idea = this.$store.state.ideas.keyedById[this.id]
+                if (!idea) {
+                    idea = this.$store.getters['ideas/get'](this.id)
                 }
 
-                if (idea && idea.meta && idea.meta.images && idea.meta.images.header) {
-                    window.document.getElementById('header-bg').style['background-image'] = 'url(' + idea.meta.images.header + ')'
+                // if (!idea && this.$store.state.ideas.keyedById && this.$store.state.ideas.keyedById[this.id]) {
+                //     idea = this.$store.state.ideas.keyedById[this.id]
+                // }
+
+                if (!idea) {
+                    return
                 }
 
-                if (idea && !idea.meta) {
+                if (!idea.meta) {
                     idea.meta = {}
                 }
 
-                // if (idea && !idea.community) {
-                //     idea.community = {
-                //         discussions: []
-                //     }
-                // }
+                if (idea.meta.images && idea.meta.images.header) {
+                    window.document.getElementById('header-bg').style['background-image'] = 'url(' + idea.meta.images.header + ')'
+                }
 
                 return idea
             },
@@ -327,6 +329,10 @@
                 return this.$store.state.application.editorMode === 'editing'
             },
             breadcrumbLinks() {
+                if (!this.idea) {
+                    return []
+                }
+
                 const links = [
                     { to: { path: '/' }, title: 'Store' },
                     { to: { path: '/idea/' + (this.idea ? this.idea.id : 0) }, title: (this.idea ? this.idea.name : 'Loading') }

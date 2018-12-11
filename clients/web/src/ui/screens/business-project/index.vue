@@ -493,5 +493,8 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.note-editor.note-frame .note-editing-area .note-editable {
+    background: #30314d !important;
+}
 </style>

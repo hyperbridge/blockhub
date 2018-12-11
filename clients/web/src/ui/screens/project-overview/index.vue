@@ -23,9 +23,11 @@
                 <p class="project__description">{{ project.description }}</p>
             </div>
 
-            <div class="main-content" v-html="project.value" v-if="!editing">
-                {{ project.value }}
-            </div>
+            <c-block title="Contents" class="margin-bottom-30" :noPadding="true" :noGutter="true" :bgGradient="true" :onlyContentBg="true" v-if="!editing">
+                <div class="main-content" v-html="project.value">
+                        {{ project.value }}
+                </div>
+            </c-block>
 
             <div class="content-editor" v-if="editing">
                 <div id="summernote" v-html="project.value">{{ project.value }}</div>
@@ -314,7 +316,6 @@
         margin-top: 15px;
         padding: 15px;
         border-radius: 5px;
-        border: 1px solid rgba(255, 255, 255, 0.07);
         overflow: hidden;
         color: #C6C6D6;
         font-size: 14px;

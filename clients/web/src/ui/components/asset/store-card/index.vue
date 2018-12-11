@@ -1,12 +1,12 @@
 <template>
-    <div class="store-card" :class="'store-card--' + asset.systemTags[0]">
-        <div class="store-card__badges" v-if="asset.systemTags.length">
+    <div class="store-card" :class="'store-card--' + asset.tags[0]">
+        <div class="store-card__badges" v-if="asset.tags.length">
             <c-badge-card
-                v-for="(tag, index) in asset.systemTags"
+                v-for="(tag, index) in asset.tags"
                 class="store-card__single-badge"
                 :key="index"
-                :title="tag | space"
-                :tag="tag"
+                :title="tag.value | space"
+                :tag="tag.value"
             />
         </div>
         <c-img :src="asset.image" class="store-card__image"/>

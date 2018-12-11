@@ -30,7 +30,7 @@
                     })
             }
 
-            setTimeout(this.initialize.bind(this), 3000) // TODO: remove arbitrary delay
+            //setTimeout(this.initialize.bind(this), 3000) // TODO: remove arbitrary delay
         },
         watch: {
             '$store.state.auth.accessToken'(newVal) {
@@ -71,6 +71,8 @@
                 if (this.type === 'authenticated') {
                     this.satisfied = true
                 }
+
+                this.initialize()
             },
             initialize() {
                 if (this.initialized) {
