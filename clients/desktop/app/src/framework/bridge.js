@@ -1344,7 +1344,7 @@ export const runCommand = async (cmd, meta = {}) => {
                 }
 
                 // Initialize local data
-                const products = await getAllProducts()
+                //const products = await getAllProducts()
 
                 //this.profiles = await getAllprofiles()
                 //this.projects = await getAllProjects()

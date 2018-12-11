@@ -13,7 +13,9 @@
                     <c-collection-item :item="collection" />
                 </c-slide>
             </c-swiper>
-            <p v-if="!collections.length" style="padding: 20px; text-align: center;">No collections yet.</p>
+            <p v-if="!collections.length" style="padding: 20px; text-align: center;">
+                No collections yet. <c-button status="plain" href="#">Create one</c-button>?
+            </p>
         </div>
     </div>
 </template>

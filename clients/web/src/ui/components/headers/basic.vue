@@ -109,7 +109,7 @@
                                 <p><span class="fa fa-edit"></span>Edit</p>
                             </button>
                         </li>
-                        <li>
+                        <li v-if="!isLocked">
                             <c-quick-launch class="quick-launch" style="margin-top: -7px;" />
                         </li>
                         <li v-if="signedIn" class="token">
