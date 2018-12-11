@@ -105,14 +105,14 @@ export const promptPasswordRequest = async (data) => {
 
         }
 
-        local.router.push('/unlock')
-
         local.store.commit('application/updateState', {
             locked: true,
             signedIn: false
         })
 
-        local.store.commit('application/activateModal', 'unlock')
+        local.router.push('/unlock')
+
+        //local.store.commit('application/activateModal', 'unlock')
 
         local.unlockResolve = resolve
     })
@@ -120,9 +120,8 @@ export const promptPasswordRequest = async (data) => {
 
 export const setAccountRequest = async (data) => {
     return new Promise(async (resolve) => {
-
         if (data.account.address) {
-            local.store.commit('application/activateModal', null)
+            //local.store.commit('application/activateModal', null)
 
             // We were locked
             if (DB.application.config.data[0].locked) {
@@ -130,17 +129,15 @@ export const setAccountRequest = async (data) => {
             }
 
             local.store.commit('application/updateState', {
-                locked: false,
-                signedIn: true
+                locked: false
             })
         } else {
-            local.store.commit('application/activateModal', null)
+            //local.store.commit('application/activateModal', null)
 
             local.router.push('/welcome')
             
             local.store.commit('application/updateState', {
-                locked: true,
-                signedIn: false
+                locked: true
             })
         }
 

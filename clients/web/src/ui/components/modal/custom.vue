@@ -44,7 +44,7 @@
         z-index: 99;
         width: 100vw;
         height: 100vh;
-        background: rgba(33, 33, 51, 0.9);
+        background: rgba(33, 33, 51, 0.6);
         animation: opacity .5s ease;
         display: flex;
         align-items: center;

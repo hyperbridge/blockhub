@@ -16,26 +16,14 @@
             }
         },
         created() {
-            if (this.$store.state.auth.accessToken) {
-                this.authenticate()
-            } else {
-                this.$store.dispatch('auth/authenticate')
-                    .then(() => {
-                        this.authenticate()
-                    })
-                    .catch(error => {
-                        if (error.message.includes('Could not find stored JWT')) {
-                            this.authenticate()
-                            return
-                        }
-                        
-                        console.error(error)
-                    })
-            }
+            this.authenticate()
 
             //setTimeout(this.initialize.bind(this), 3000) // TODO: remove arbitrary delay
         },
         watch: {
+            'type'() {
+                this.authenticate()
+            },
             '$store.state.auth.accessToken'(newVal) {
                 if (newVal) {
                     this.authenticate()
@@ -71,14 +59,37 @@
         },
         methods: {
             authenticate() {
-                if (this.type === 'authenticated') {
-                    this.satisfied = true
+                if (this.$store.state.auth.accessToken) {
+                    if (this.type === 'authenticated') {
+                        this.satisfied = true
+                    }
+                } else {
+                    this.$store.dispatch('auth/authenticate')
+                        .then(() => {
+                            if (this.type === 'authenticated') {
+                                this.satisfied = true
+                            }
+                        })
+                        .catch(error => {
+                            if (error.message.includes('Could not find stored JWT')) {
+                                if (this.type === 'authenticated') {
+                                    this.satisfied = true
+                                }
+                                return
+                            }
+                            
+                            console.error(error)
+                        })
                 }
 
                 this.initialize()
             },
             initialize() {
                 if (this.initialized) {
+                    if (this.type === 'initialized') {
+                        this.satisfied = true
+                    }
+
                     return
                 }
 
