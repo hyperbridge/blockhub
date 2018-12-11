@@ -92,7 +92,7 @@
       "category": "Entertainment"
     },
     "appx": {
-      "profileName": "Blockhub",
+      "identityName": "Blockhub",
       "publisher": "CN=Hyperbridge Technology Inc, O=Hyperbridge Technology Inc, L=Talinn, S=Talinn, C=EE",
       "publisherDisplayName": "Hyperbridge Technology Inc",
       "backgroundColor": "#34262A"

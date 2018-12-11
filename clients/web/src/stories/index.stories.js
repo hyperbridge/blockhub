@@ -2993,7 +2993,7 @@ storiesOf('User Card', module)
             <div class="col-4">
                 <c-user-card
                     :user="user"
-                    @updateprofile="(prop, val) => user[prop] = val"
+                    @updateProfile="(prop, val) => user[prop] = val"
                 />
             </div>
             <div class="col-4">
