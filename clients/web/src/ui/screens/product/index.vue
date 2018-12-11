@@ -366,6 +366,8 @@
                 if (product.meta.promotions) {
                     this.promotionSections = groupBy(product.meta.promotions, 'section');
                 }
+
+                return product
             },
             editorMode() {
                 return this.$store.state.application.editorMode
