@@ -262,14 +262,14 @@
         </template>
 
         <transition name="fade-slow" v-if="showSignIn">
-            <div class="row" v-if="end">
+            <div class="row" v-if="end && !$store.state.application.signedIn">
                 <div class="col-12">
                     <c-recommendation-block />
                 </div>
             </div>
             <div class="no-updates" v-if="!sliced">
                 <h3>
-                    There is no content yet.
+                    There is no more content.
                 </h3>
             </div>
         </transition>
