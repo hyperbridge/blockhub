@@ -149,9 +149,9 @@ export const setAccountRequest = async (data) => {
             ...data.account
         }
 
-        DB.application.config.data[0].activeProfile = data.account.profiles.find(i => i.id === data.activeProfile.id)
+        // DB.application.config.data[0].activeProfile = data.account.profiles.find(i => i.id === data.activeProfile.id)
 
-        DB.application.config.data[0].developerMode = DB.application.config.data[0].activeProfile.role === 'developer'
+        // DB.application.config.data[0].developerMode = DB.application.config.data[0].activeProfile.role === 'developer'
 
         DB.save()
 
@@ -260,7 +260,7 @@ export const runCommand = async (cmd, meta = {}) => {
             console.warn('[Bridge] Received system error from desktop', cmd.data)
 
             BlockHub.Notification.error(cmd.data, 'System Error', {
-                timeout: 5000,
+                timeout: 0,
                 pauseOnHover: true
             })
 
@@ -275,7 +275,7 @@ export const runCommand = async (cmd, meta = {}) => {
         } else {
             console.warn('[Bridge] Unhandled command:', cmd)
 
-            return reject()
+            return // reject()
         }
 
         return resolve(await sendCommand('response', null, meta.client, cmd.requestId))

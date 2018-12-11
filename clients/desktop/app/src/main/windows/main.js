@@ -204,8 +204,8 @@ export const initMenu = () => {
                         click() { navigate('/stash') }
                     },
                     {
-                        label: 'Identities',
-                        click() { navigate('/account/identities') }
+                        label: 'profiles',
+                        click() { navigate('/account/profiles') }
                     },
                     {
                         label: 'Settings',

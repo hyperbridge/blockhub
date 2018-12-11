@@ -24,9 +24,12 @@
                         this.authenticate()
                     })
                     .catch(error => {
-                        if (error && !error.message.includes('Could not find stored JWT')) {
-                            console.error(error)
+                        if (error.message.includes('Could not find stored JWT')) {
+                            this.authenticate()
+                            return
                         }
+                        
+                        console.error(error)
                     })
             }
 

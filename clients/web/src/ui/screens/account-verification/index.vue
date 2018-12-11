@@ -218,7 +218,7 @@
                             additionalData: {
                                 eth: this.address,
                                 email: this.email,
-                                secret: this.account.secret_answer_2,
+                                secret: this.account.secretAnswer2,
                                 profile: this.activeProfile && this.activeProfile.address
                             },
                             timestamp: (new Date).toISOString()

@@ -269,7 +269,7 @@
             }
           },
           "userFromAddress": null,
-          "user_to_address": null
+          "userToAddress": null
         },
         "ropsten": {
           "packages": {
@@ -527,7 +527,7 @@
             }
           },
           "userFromAddress": null,
-          "user_to_address": null
+          "userToAddress": null
         },
         "local": {
           "packages": {
@@ -817,7 +817,7 @@
             }
           },
           "userFromAddress": "0x14b47c274e2127aa5a1fe0ef9f65e3924349824c",
-          "user_to_address": null
+          "userToAddress": null
         }
       },
       "currentEthereumNetwork": "local",

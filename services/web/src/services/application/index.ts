@@ -61,7 +61,7 @@ export default function(app) {
                     "version": "0.1.0",
                     "title": "BlockHub v0.1.0",
                     "description": "Harder, Better, Faster, Stronger",
-                    "content": "<ul><li><blockquote>You can now sign up for an account</blockquote> <p></p></li> <li><blockquote>You are now notified when we change things, isn't that great?</blockquote> <ul><li>Add notification system</li> <li>User is prompted to relaunch when version changes</li></ul></li> <li><blockquote>Persist changes &amp; sync with Ethereum + peer network</blockquote></li> <li><blockquote>Check for offline status</blockquote></li> <li><blockquote>Load account, identities &amp; wallets via Ethereum</blockquote></li></ul>"
+                    "content": "<ul><li><blockquote>You can now sign up for an account</blockquote> <p></p></li> <li><blockquote>You are now notified when we change things, isn't that great?</blockquote> <ul><li>Add notification system</li> <li>User is prompted to relaunch when version changes</li></ul></li> <li><blockquote>Persist changes &amp; sync with Ethereum + peer network</blockquote></li> <li><blockquote>Check for offline status</blockquote></li> <li><blockquote>Load account, profiles &amp; wallets via Ethereum</blockquote></li></ul>"
                 },
                 {
                     "version": "0.0.1",

@@ -22,7 +22,7 @@
                                             <p>{{ secretQuestion1 }}</p>
                                             <div class="input-group mb-4">
                                                 <input type="text" class="form-control" placeholder="Secret Answer"
-                                                        name="secret_answer_1" v-model="secret_answer_1">
+                                                        name="secretAnswer1" v-model="secretAnswer1">
                                             </div>
                                         </div>
                                     </div>
@@ -98,7 +98,7 @@
             recoverPassword() {
                 Bridge.sendCommand('recoverPasswordRequest', {
                     secretQuestion1: this.secretQuestion1,
-                    secret_answer_1: this.secret_answer_1,
+                    secretAnswer1: this.secretAnswer1,
                     birthday: moment(this.birthday).format('DD-MM-YYYY'),
                 }).then((data) => {
                     if (data.error) {
@@ -140,7 +140,7 @@
             return {
                 recovery: false,
                 password: null,
-                secret_answer_1: null,
+                secretAnswer1: null,
                 birthday: null,
                 recoveryError: null
             }
