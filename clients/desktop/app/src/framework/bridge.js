@@ -79,13 +79,15 @@ export const promptPasswordRequest = async (data = {}) => {
             try {
                 let passphrase = null
                 if (local.account.encryptPassphrase) {
+                    console.log('Attempting to decrypt passphrase with password: ' + res.password)
+
                     passphrase = decrypt(local.account.passphrase, res.password)
                 } else {
                     passphrase = local.account.passphrase
                 }
 
                 if (!passphrase) {
-                    throw new Error()
+                    throw new Error('Password was incorrect')
                 }
 
                 local.passphrase = passphrase
@@ -93,7 +95,7 @@ export const promptPasswordRequest = async (data = {}) => {
             } catch (e) {
                 console.log(e)
 
-                data = { error: { message: 'Password was incorrect', code: 1 } }
+                data = { ...data, error: { message: 'Password was incorrect', code: 1 } }
             }
         }
 
@@ -154,6 +156,47 @@ export const removeprofileRequest = (profile) => {
     })
 }
 
+export const transferTokens = ({ destinationAddress, amount, walletIndex }) => {
+    return new Promise(async (resolve, reject) => {
+        const web3 = local.wallet.web3
+        const originWallet = await Wallet.create(local.passphrase, walletIndex)
+        const originAddress = originWallet.address
+
+        console.log("Attempting transfer. From: " + originAddress + ". To " + destinationAddress + ". Amount: " + amount)
+
+        const token = TokenAPI.api.ethereum.state.contracts.Token.deployed
+        const eternalStorage = TokenAPI.api.ethereum.state.contracts.EternalStorage.deployed
+        const hbxToken = TokenAPI.api.ethereum.state.contracts.TokenDelegate.deployed
+        const tokenLib = TokenAPI.api.ethereum.state.contracts.TokenLib.deployed
+
+        const originalProvider = TokenAPI.api.ethereum.state.provider
+
+        TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originWallet.provider)
+        TokenAPI.api.ethereum.state.contracts.Token.contract.provider = originWallet.provider
+        TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originWallet.provider)
+
+        let tokenDelegateHolder = await TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.at(hbxToken.address)
+        let originWalletHolder = await TokenAPI.api.ethereum.state.contracts.Token.contract.at(token.address)
+        originWalletHolder = { ...tokenDelegateHolder, ...originWalletHolder }
+
+        const decimals = web3._extend.utils.toBigNumber(18)
+        const destinationAmount = web3._extend.utils.toBigNumber(amount).times(web3._extend.utils.toBigNumber(10).pow(decimals))
+
+        originWalletHolder.transfer(destinationAddress, destinationAmount, {
+            from: originWallet.address,
+            gasPrice: 2e9
+        }).then(() => {
+            console.log("Transfer complete. Destination: " + destinationAddress)
+        })
+
+        TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originalProvider)
+        TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originalProvider)
+        
+        console.log("Transfer started. Destination: " + destinationAddress)
+
+        resolve()
+    })
+}
 
 
 export const getProtocolByName = (name) => {
@@ -540,15 +583,22 @@ export const initProtocol = async ({ protocolName }) => {
             config.userFromAddress,
             config.userToAddress
         )
+        // protocol.api.ethereum.init({
+        //     provider: local.wallet.provider,
+        //     fromAddress: config.userFromAddress,
+        //     toAddress: config.userToAddress,
+        //     gas: 6500000,
+        //     gasPrice: 10e9
+        // })
 
         for (let contractName in protocol.api.ethereum.state.contracts) {
-            console.log('Hooking up protocol contract: ' + protocolName + ' - ' + contractName)
-
             if (!config.contracts[contractName]) {
                 config.contracts[contractName] = {}
             }
 
             const contract = config.contracts[contractName]
+
+            console.log('Hooking up protocol contract: ' + protocolName + ' - ' + contractName + ' to ' + contract.address)
 
             if (protocol.api.ethereum.state.contracts[contractName].links) {
                 config.contracts[contractName].links = protocol.api.ethereum.state.contracts[contractName].links
@@ -561,6 +611,8 @@ export const initProtocol = async ({ protocolName }) => {
             if (contract.address) {
                 await setContractAddress({ protocolName, contractName, address: contract.address })
                     .catch(() => {
+                        console.log('Unable to set contract address: ' + protocolName + ' ' + contractName)
+
                         config.contracts[contractName].address = null
                         config.contracts[contractName].createdAt = null
                     })
@@ -771,9 +823,10 @@ export const setAccountRequest = async () => {
     return new Promise(async (resolve) => {
         let account = local.account
 
+        console.log('acc2222', account.privateKey)
         if (account.privateKey && local.password) {
             const decryptedPrivateKey = decrypt(account.privateKey, local.password)
-            console.log('private key', decryptedPrivateKey)
+            console.log('acc55555', decryptedPrivateKey)
             account = {
                 address: account.address,
                 secretQuestion1: account.secretQuestion1,
@@ -1136,10 +1189,12 @@ export const recoverPasswordRequest = async ({ secretQuestion1, secretAnswer1, b
         let password = null
 
         try {
+            console.log("Attempting to decrypt password with: " + secretAnswer1 + birthday)
+            
             password = decrypt(local.account.password, secretAnswer1 + birthday)
 
             if (!password) {
-                throw new Error()
+                throw new Error('Could not decrypt password')
             }
         } catch (e) {
             console.log(e)
@@ -1302,6 +1357,7 @@ export const runCommand = async (cmd, meta = {}) => {
                 // Check for account file and load it
                 try {
                     const userDataPath = electron.app.getPath('userData')
+                    console.log("Attempting to load account from " + path.join(userDataPath, 'account.json'))
                     const accountData = await readFile(path.join(userDataPath, 'account.json'))
 
                     local.account = JSON.parse(accountData)
@@ -1309,6 +1365,7 @@ export const runCommand = async (cmd, meta = {}) => {
                     console.log(e)
                 }
 
+                console.log(local.account.passphrase, local.account.encryptPassphrase, !local.password)
                 // Prompt password request if account exists but hasn't been unlocked
                 if (local.account.passphrase) {
                     if (local.account.encryptPassphrase && !local.password) {
@@ -1449,6 +1506,9 @@ export const runCommand = async (cmd, meta = {}) => {
         } else if (cmd.key === 'writeToClipboard') {
             resultData = await writeToClipboard(cmd.data)
             resultKey = 'writeToClipboardResponse'
+        } else if (cmd.key === 'transferTokens') {
+            resultData = await transferTokens(cmd.data)
+            resultKey = 'transferTokensResponse'
         } else if (cmd.key === 'eval') {
             // Don't allow eval in production
             if (!config.IS_PRODUCTION) {

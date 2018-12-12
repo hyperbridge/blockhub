@@ -96,9 +96,11 @@
                 this.$store.dispatch('application/unlockAccount', { password: this.$refs.password })
             },
             recoverPassword() {
+                this.recoveryError = null
+
                 Bridge.sendCommand('recoverPasswordRequest', {
                     secretQuestion1: this.secretQuestion1,
-                    secretAnswer1: this.secretAnswer1,
+                    secretAnswer1: this.secretAnswer1.toLowerCase(),
                     birthday: moment(this.birthday).format('DD-MM-YYYY'),
                 }).then((data) => {
                     if (data.error) {
@@ -149,6 +151,10 @@
             Bridge.on('promptPasswordRequest', (data) => {
                 if (data.error) {
                     $(this.$refs.submit.$el).addClass('wrong')
+
+                    setTimeout(() => {
+                        $(this.$refs.submit.$el).removeClass('wrong')
+                    }, 350)
                 }
             })
         }
@@ -178,10 +184,12 @@
             background: #303049;
         }
         .c-btn {
+            border: 2px solid transparent;
+
             &.wrong {
                 position: relative;
                 left: 0;
-                border: 2px solid #ed1c24;
+                border-color: #ed1c24;
                 animation: wrong-log 0.3s;
             }
         }

@@ -776,6 +776,27 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/chest'], resolve)
         },
         {
+            path: '/admin',
+            name: 'Admin',
+            component: (resolve) => require(['@/ui/screens/business'], resolve),
+            meta: {
+                area: 'business',
+            },
+            children: [
+                {
+                    path: '',
+                    name: 'Admin',
+                    component: (resolve) => require(['@/ui/screens/admin-home'], resolve),
+                    meta: {
+                        title: 'Admin',
+                        breadcrumb: [
+                            { path: '/admin', title: 'Dashboard' },
+                        ]
+                    }
+                }
+            ]
+        },
+        {
             path: '/business',
             name: 'Business',
             component: (resolve) => require(['@/ui/screens/business'], resolve),

@@ -72,7 +72,7 @@
         watch: {
             '$store.state.auth.user'(newVal) {
                 //this.$router.push({ path: '/' })
-                this.$store.commit('application/activateModal', null)
+                //this.$store.commit('application/activateModal', null)
             }
         },
         methods: {

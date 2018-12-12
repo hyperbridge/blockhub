@@ -119,10 +119,10 @@
                                                     <label class="sr-only">Secret Question #1</label>
                                                     <select id="secretQuestion1" name="secretQuestion1" class="form-control" v-model="account.secretQuestion1">
                                                         <option value="" selected>Choose Secret Question</option>
-                                                        <option value="lastName_first_kissed">What is the first name of the person you first kissed?</option>
-                                                        <option value="firstName_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
+                                                        <option value="last_name_first_kissed">What is the first name of the person you first kissed?</option>
+                                                        <option value="first_name_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
                                                         <option value="favorite_high_school_teacher">What is the last name of your favorite teacher in high school?</option>
-                                                        <option value="lastName_teacher_failing_grade">What is the last name of the teacher who gave you your first failing grade?</option>
+                                                        <option value="last_name_teacher_failing_grade">What is the last name of the teacher who gave you your first failing grade?</option>
                                                         <option value="wedding_reception">What is the name of the plac eyour wedding reception was held?</option>
                                                         <option value="city_sibling_live">In what city or town does your nearest sibling live?</option>
                                                     </select>
@@ -133,10 +133,10 @@
                                                     <label class="sr-only">Secret Question #2</label>
                                                     <select id="secretQuestion2" name="secretQuestion2" class="form-control" v-model="account.secretQuestion2">
                                                         <option value="" selected>Choose Secret Question</option>
-                                                        <option value="lastName_first_kissed">What is the first name of the person you first kissed?</option>
-                                                        <option value="firstName_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
+                                                        <option value="last_name_first_kissed">What is the first name of the person you first kissed?</option>
+                                                        <option value="first_name_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
                                                         <option value="favorite_high_school_teacher">What is the last name of your favorite teacher in high school?</option>
-                                                        <option value="lastName_teacher_failing_grade">What is the last name of the teacher who gave you your first failing grade?</option>
+                                                        <option value="last_name_teacher_failing_grade">What is the last name of the teacher who gave you your first failing grade?</option>
                                                         <option value="wedding_reception">What is the name of the plac eyour wedding reception was held?</option>
                                                         <option value="city_sibling_live">In what city or town does your nearest sibling live?</option>
                                                     </select>
@@ -300,8 +300,8 @@ export default {
                 // email: 'eric@muyser.com',
                 // password: '1234',
                 // repeat_password: '1234',
-                // secretQuestion1: 'firstName_favorite_aunt_uncle',
-                // secretQuestion2: 'firstName_favorite_aunt_uncle',
+                // secretQuestion1: 'first_name_favorite_aunt_uncle',
+                // secretQuestion2: 'first_name_favorite_aunt_uncle',
                 // secretAnswer1: 'larry',
                 // secretAnswer2: 'larry',
                 // agreement: true,
@@ -387,9 +387,9 @@ export default {
                             passphrase: passphraseOriginal,
                             encryptPassphrase: this.account.encryptPassphrase,
                             secretQuestion1: this.account.secretQuestion1,
-                            secretAnswer1: this.account.secretAnswer1,
+                            secretAnswer1: this.account.secretAnswer1.toLowerCase(),
                             secretQuestion2: this.account.secretQuestion2,
-                            secretAnswer2: this.account.secretAnswer2
+                            secretAnswer2: this.account.secretAnswer2.toLowerCase()
                         }).then((res) => {
                             this.finishedStep = 2;
                             this.currentStep = 3;
