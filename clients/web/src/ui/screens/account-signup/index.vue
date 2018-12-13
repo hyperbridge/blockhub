@@ -1,6 +1,6 @@
 <template>
     <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false" :showShortcuts="false">
-        <!-- <div class="content login-container" id="content">
+        <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
                     <p class="errors" v-if="errors.length">
@@ -155,14 +155,14 @@
                                                 <div class="form-group">
                                                     <label class="sr-only">Answer #1</label>
                                                     <input type="text" class="form-control" placeholder="Secret Answer #1"
-                                                            name="secret_answer_1" v-model="account.secret_answer_1">
+                                                            name="secretAnswer1" v-model="account.secretAnswer1">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Answer #2</label>
                                                     <input type="text" class="form-control" placeholder="Secret Answer #2"
-                                                            name="secret_answer_2" v-model="account.secret_answer_2">
+                                                            name="secretAnswer2" v-model="account.secretAnswer2">
                                                 </div>
                                             </div>
                                         </div>
@@ -204,7 +204,7 @@
                                         v-if="false && verifiedPassphrase"
                                     />
                                     <c-switch
-                                        v-model="account.encrypt_passphrase"
+                                        v-model="account.encryptPassphrase"
                                         label="I want to encrypt my passphrase with my password"
                                         label_position="right"
                                         v-if="false && verifiedPassphrase"
@@ -236,7 +236,7 @@
                     </form>
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <c-popup title="Terms" :activated="terms" @close="terms = false" width="800">
             <div class="scroll_block">
@@ -290,8 +290,8 @@ export default {
                 repeat_password: '',
                 secretQuestion1: '',
                 secretQuestion2: '',
-                secret_answer_1: '',
-                secret_answer_2: '',
+                secretAnswer1: '',
+                secretAnswer2: '',
                 agreement: false,
 
                 // firstName: 'Eric',
@@ -302,14 +302,14 @@ export default {
                 // repeat_password: '1234',
                 // secretQuestion1: 'firstName_favorite_aunt_uncle',
                 // secretQuestion2: 'firstName_favorite_aunt_uncle',
-                // secret_answer_1: 'larry',
-                // secret_answer_2: 'larry',
+                // secretAnswer1: 'larry',
+                // secretAnswer2: 'larry',
                 // agreement: true,
 
                 newsletter: true,
                 passphrase: null,
                 repeat_passphrase: null,
-                encrypt_passphrase: true,
+                encryptPassphrase: true,
                 profile: {
                     name: '',
                     img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
@@ -367,9 +367,9 @@ export default {
                 const passphraseVerification = this.repeatPassphrase.join(' ')
 
                 if (this.account.secretQuestion1
-                    && this.account.secret_answer_1
+                    && this.account.secretAnswer1
                     && this.account.secretQuestion2
-                    && this.account.secret_answer_2
+                    && this.account.secretAnswer2
                     && this.account.password
                     && this.account.repeat_password
                     && this.account.password === this.account.repeat_password
@@ -385,11 +385,11 @@ export default {
                             birthday: moment(this.account.birthday).format('DD-MM-YYYY'),
                             password: this.account.password,
                             passphrase: passphraseOriginal,
-                            encrypt_passphrase: this.account.encrypt_passphrase,
+                            encryptPassphrase: this.account.encryptPassphrase,
                             secretQuestion1: this.account.secretQuestion1,
-                            secret_answer_1: this.account.secret_answer_1,
+                            secretAnswer1: this.account.secretAnswer1,
                             secretQuestion2: this.account.secretQuestion2,
-                            secret_answer_2: this.account.secret_answer_2
+                            secretAnswer2: this.account.secretAnswer2
                         }).then((res) => {
                             this.finishedStep = 2;
                             this.currentStep = 3;
@@ -413,13 +413,13 @@ export default {
                     if (!this.account.secretQuestion1) {
                         this.errors.push('Secret Question 1 required.')
                     }
-                    if (!this.account.secret_answer_1) {
+                    if (!this.account.secretAnswer1) {
                         this.errors.push('Secret Answer 1 required.')
                     }
                     if (!this.account.secretQuestion2) {
                         this.errors.push('Secret Question 2 required.')
                     }
-                    if (!this.account.secret_answer_2) {
+                    if (!this.account.secretAnswer2) {
                         this.errors.push('Secret Answer 2 required.')
                     }
                     if (!this.agreeStoredPassphrase) {

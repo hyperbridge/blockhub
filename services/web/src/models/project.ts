@@ -29,8 +29,7 @@ export default class Project extends Model {
     members!: Array<Profile>
     isProposal!: Boolean
 
-    systemTags!: Array<Tag>
-    developerTags!: Array<Tag>
+    tags!: Array<Tag>
 
     static get tableName() {
         return 'projects'

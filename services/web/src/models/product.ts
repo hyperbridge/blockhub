@@ -30,7 +30,7 @@ type ProductMeta = {
     developerTags: Array<String>
     languageSupport: Array<Language>
     systemRequirements: Array<SystemRequirement>
-    systemTags: Array<Tag>
+    tags: Array<Tag>
     type: String
     downloads: Number
     plans: Array<ProductPlan>

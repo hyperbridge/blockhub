@@ -320,7 +320,54 @@
                 return this.$store.state.marketplace
             },
             product() {
-                return this.id === 'new' ? this.marketplace.defaultProduct : DB.marketplace.products.findOne({ 'id': Number(this.id) })
+                let product = null
+
+                if (this.id === 'new') {
+                    product = { ...this.$store.state.marketplace.defaultProduct }
+
+                    this.$store.state.application.developerMode = true
+                    this.$store.dispatch('application/setEditorMode', 'editing')
+                }
+
+                if (!product) {
+                    product = this.$store.getters['products/get'](this.id)
+                }
+
+                if (!product) {
+                    product = DB.marketplace.products.findOne({ 'id': Number(this.id) })
+                }
+
+                if (!product) {
+                    return
+                }
+                
+
+                if (!product.community) {
+                    product.community = {
+                        discussions: []
+                    }
+                }
+
+                if (!product.tags) {
+                    product.tags = []
+                }
+
+                if (!product.meta) {
+                    product.meta = {}
+                }
+
+                if (product.meta.images && product.meta.images.preview && product.meta.images.preview.length) {
+                    const header = window.document.getElementById('header-bg');
+                    const randomImage = Math.floor(Math.random() * product.meta.images.preview.length);
+                    header.style['background-image'] = 'url(' + product.meta.images.preview[randomImage] + ')';
+                    header.style['background-size'] = 'cover';
+                }
+
+                if (product.meta.promotions) {
+                    this.promotionSections = groupBy(product.meta.promotions, 'section');
+                }
+
+                return product
             },
             editorMode() {
                 return this.$store.state.application.editorMode
@@ -344,6 +391,10 @@
                 return this.$store.state.marketplace.firstProduct
             },
             breadcrumbLinks() {
+                if (!this.product) {
+                    return []
+                }
+
                 const links = [
                     { to: { path: '/' }, title: 'Store' },
                     { to: { path: '/product/' + this.id }, title: this.product.name }
@@ -361,31 +412,8 @@
             }
         },
         mounted() {
-            const { product } = this
-
             if (this.id === 'new') {
                 this.$store.dispatch('application/setEditorMode', 'editing')
-            }
-
-            if (!product.community) {
-                product.community = {
-                    discussions: []
-                }
-            }
-
-            if (!product.developerTags) {
-                product.developerTags = []
-            }
-
-            if (product.promotions) {
-                this.promotionSections = groupBy(product.promotions, 'section');
-            }
-
-            if (product && product.images.preview && product.images.preview.length) {
-                const header = window.document.getElementById('header-bg');
-                const randomImage = Math.floor(Math.random() * product.images.preview.length);
-                header.style['background-image'] = 'url(' + product.images.preview[randomImage] + ')';
-                header.style['background-size'] = 'cover';
             }
         },
         created() {
@@ -544,7 +572,7 @@
 
                     this.product.type = 'game'
                     //this.product.rating.overall = 0
-                    this.product.systemTags = ['imported']
+                    this.product.tags = [{key: 'imported', value: 'Imported'}]
                     this.product.developerTags = data.tags
                     this.product.name = data.title
                     this.product.releaseDate = data.releaseDate

@@ -8,12 +8,24 @@ const beforeCreate = function(options = {}) {
 
 const beforeUpdate = function(options = {}) {
     return async context => {
-        // const item = await context.app.service('/ideas').get(context.id)
+        console.log('[service=ideas, hook=beforeCreate]')
 
-        // context.data = {
-        //     ...item,
-        //     ...context.data
-        // }
+        let found = false
+
+        for (let i in context.params.user.profiles) {
+            const profile = context.params.user.profiles[i]
+
+            if (context.data.ownerId === profile.id) {
+                found = true
+                break
+            }
+        }
+
+        if (!found) {
+            throw new Error('You dont have access to do that')
+        }
+
+        context.data.ownerId = context.params.ownerId
 
         return context
     }
@@ -22,7 +34,8 @@ const beforeUpdate = function(options = {}) {
 const afterUpdate = function(options = {}) {
     return async context => {
         context.result = {
-            id: context.data.id
+            ...context.result,
+            ...context.data // why not send the whole thing?
         }
 
         return context
@@ -49,10 +62,6 @@ const accessGate = function(options = {}) {
             if (!item) {
                 throw new Error('Idea not found')
             }
-
-            if (item.accountId !== account.id) {
-                throw new Error('You dont have access to do that')
-            }
         }))
 
         return context
@@ -73,7 +82,7 @@ export const after = {
     all: [],
     find: [],
     get: [],
-    create: [accessGate()],
+    create: [accessGate(), afterUpdate()],
     update: [accessGate(), afterUpdate()],
     patch: [accessGate()],
     remove: [accessGate()]

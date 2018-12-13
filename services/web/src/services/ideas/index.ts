@@ -13,8 +13,8 @@ export default function(app) {
             max: 25,
             ...paginate
         },
-        allowedEager: ['tags', 'community'],
-        allowedUpsert: ['tags', 'community']
+        allowedEager: '[tags, community]',
+        allowedUpsert: '[tags, community]'
     }
 
     app.use('/ideas', createService(options))

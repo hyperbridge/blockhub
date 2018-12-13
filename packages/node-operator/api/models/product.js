@@ -15,7 +15,7 @@ const productSchema = Schema({
   developerTags: { type: Array, required: true },
   languageSupport: { type: Array, required: true },
   systemRequirements: { type: Array, required: true },
-  systemTags: Array,
+  tags: Array,
   type: String,
   downloads: Number,
   plans: Array,

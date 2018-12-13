@@ -566,7 +566,7 @@ export default {
                         current: 0.055
                     },
                     image: '/static/img/icons/hbx-token.png',
-                    systemTags: [],
+                    tags: [],
                     css: 'store-card--epic'
                 },
                 {
@@ -577,7 +577,7 @@ export default {
                         current: 0.0
                     },
                     image: '/static/img/icons/voyager-badge.png',
-                    systemTags: [],
+                    tags: [],
                     css: 'store-card--special'
                 },
                 {
@@ -588,7 +588,7 @@ export default {
                         current: 0.0
                     },
                     image: '/static/img/icons/master-sword.png',
-                    systemTags: [],
+                    tags: [],
                     css: 'store-card--trending'
                 }
             ],

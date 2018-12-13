@@ -307,7 +307,7 @@
 </template>
 
 <script>
-
+    import * as DB from '@/db'
     import 'vue-multiselect/dist/vue-multiselect.min.css'
 
     export default {
@@ -411,7 +411,7 @@
                 let project = null
 
                 if (this.id === 'new') {
-                    project = this.$store.state.funding.defaultProject
+                    project = { ...this.$store.state.funding.defaultProject }
 
                     this.$store.state.application.developerMode = true
                     this.$store.dispatch('application/setEditorMode', 'editing')
@@ -421,11 +421,19 @@
                     project = this.$store.getters['projects/get'](this.id)
                 }
 
-                if (project && project.images && project.images.header) {
+                if (!project) {
+                    project = DB.funding.projects.findOne({ 'id': Number(this.id) })
+                }
+
+                if (!project) {
+                    return
+                }
+
+                if (project.images && project.images.header) {
                     window.document.getElementById('header-bg').style['background-image'] = 'url(' + project.images.header + ')'
                 }
 
-                if (project && !project.community) {
+                if (!project.community) {
                     project.community = {
                         discussions: []
                     }
@@ -443,6 +451,10 @@
                 return this.$store.state.application.editorMode === 'editing'
             },
             breadcrumbLinks() {
+                if (!this.project) {
+                    return []
+                }
+
                 const links = [
                     { to: { path: '/' }, title: 'Store' },
                     { to: { path: '/project/' + (this.project ? this.project.id : 0) }, title: (this.project ? this.project.name : 'Loading') }

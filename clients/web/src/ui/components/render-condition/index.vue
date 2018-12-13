@@ -16,23 +16,14 @@
             }
         },
         created() {
-            if (this.$store.state.auth.accessToken) {
-                this.authenticate()
-            } else {
-                this.$store.dispatch('auth/authenticate')
-                    .then(() => {
-                        this.authenticate()
-                    })
-                    .catch(error => {
-                        if (error && !error.message.includes('Could not find stored JWT')) {
-                            console.error(error)
-                        }
-                    })
-            }
+            this.authenticate()
 
-            setTimeout(this.initialize.bind(this), 3000) // TODO: remove arbitrary delay
+            //setTimeout(this.initialize.bind(this), 3000) // TODO: remove arbitrary delay
         },
         watch: {
+            'type'() {
+                this.authenticate()
+            },
             '$store.state.auth.accessToken'(newVal) {
                 if (newVal) {
                     this.authenticate()
@@ -55,6 +46,8 @@
                 if (newVal) {
                     this.$store.state.application.activeProfile = this.$store.state.profiles.keyedById[this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.id || 1]
                     this.$store.state.application.developerMode = this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.role === 'developer'
+                    this.$store.state.application.editorMode = 'viewing'
+                    this.$store.state.application.signedIn = true
                     
                     if (this.type === 'user') {
                         this.satisfied = true
@@ -66,12 +59,37 @@
         },
         methods: {
             authenticate() {
-                if (this.type === 'authenticated') {
-                    this.satisfied = true
+                if (this.$store.state.auth.accessToken) {
+                    if (this.type === 'authenticated') {
+                        this.satisfied = true
+                    }
+                } else {
+                    this.$store.dispatch('auth/authenticate')
+                        .then(() => {
+                            if (this.type === 'authenticated') {
+                                this.satisfied = true
+                            }
+                        })
+                        .catch(error => {
+                            if (error.message.includes('Could not find stored JWT')) {
+                                if (this.type === 'authenticated') {
+                                    this.satisfied = true
+                                }
+                                return
+                            }
+                            
+                            console.error(error)
+                        })
                 }
+
+                this.initialize()
             },
             initialize() {
                 if (this.initialized) {
+                    if (this.type === 'initialized') {
+                        this.satisfied = true
+                    }
+
                     return
                 }
 

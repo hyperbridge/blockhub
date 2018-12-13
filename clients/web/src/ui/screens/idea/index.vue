@@ -67,7 +67,7 @@
                                 </div>
                             </div>
 
-                            <c-tags :tags="idea.tags.map(t => t.value)"
+                            <c-tags :tags="idea.tags ? idea.tags.map(t => t.value) : []"
                                             v-if="!editing || !activeElement['tags']"></c-tags>
                         </div>
                     </div>
@@ -221,6 +221,15 @@
                         this.$refs[key].focus()
                 }, 10)
             },
+            remove() {
+                this.$store.dispatch('ideas/remove', this.idea.id).then((res) => {
+                    this.notice = "Idea has been removed."
+
+                    this.$store.dispatch('application/setEditorMode', 'viewing')
+                    
+                    this.$router.push('/ideas')
+                })
+            },
             save() {
                 if (!this.checkForm()) {
                     this.$store.dispatch('application/setEditorMode', 'editing')
@@ -237,31 +246,37 @@
                         this.idea.id = res.id
                         this.notice = "Congratulations, your idea has been created!"
 
+                        this.$store.dispatch('application/setEditorMode', 'viewing')
+                        
                         this.$router.push('/idea/' + this.idea.id)
                     })
                 } else {
                     this.$store.dispatch('application/setEditorMode', 'publishing')
+
+                    this.idea.ownerId = this.$store.state.application.activeProfile.id
                     
                     this.$store.dispatch('ideas/update', [this.idea.id, this.idea, {
                         query: {
-                            $eager: ['tags', 'community']
+                            $eager: '[tags, community]'
                         }
                     }]).then(() => {
                         this.notice = "Idea has been saved."
+
+                        this.$store.dispatch('application/setEditorMode', 'viewing')
                     })
                 }
             },
             checkForm() {
                 this.errors = []
 
-                if (this.idea.name && this.idea.description) {
+                if (this.idea.name && this.idea.meta.description) {
                     return true
                 }
 
                 if (!this.idea.name) {
                     this.errors.push('Idea name required.')
                 }
-                if (!this.idea.description) {
+                if (!this.idea.meta.description) {
                     this.errors.push('Idea description required.')
                 }
             },
@@ -283,26 +298,24 @@
                 }
 
                 if (!idea) {
-                    idea = this.$store.getters['ideas/get'](this.id, {
-                        query: {
-                            $eager: ['tags', 'community']
-                        }
-                    })
+                    idea = this.$store.getters['ideas/get'](this.id)
                 }
 
-                if (idea && idea.meta && idea.meta.images && idea.meta.images.header) {
-                    window.document.getElementById('header-bg').style['background-image'] = 'url(' + idea.meta.images.header + ')'
+                // if (!idea && this.$store.state.ideas.keyedById && this.$store.state.ideas.keyedById[this.id]) {
+                //     idea = this.$store.state.ideas.keyedById[this.id]
+                // }
+
+                if (!idea) {
+                    return
                 }
 
-                if (idea && !idea.meta) {
+                if (!idea.meta) {
                     idea.meta = {}
                 }
 
-                // if (idea && !idea.community) {
-                //     idea.community = {
-                //         discussions: []
-                //     }
-                // }
+                if (idea.meta.images && idea.meta.images.header) {
+                    window.document.getElementById('header-bg').style['background-image'] = 'url(' + idea.meta.images.header + ')'
+                }
 
                 return idea
             },
@@ -316,6 +329,10 @@
                 return this.$store.state.application.editorMode === 'editing'
             },
             breadcrumbLinks() {
+                if (!this.idea) {
+                    return []
+                }
+
                 const links = [
                     { to: { path: '/' }, title: 'Store' },
                     { to: { path: '/idea/' + (this.idea ? this.idea.id : 0) }, title: (this.idea ? this.idea.name : 'Loading') }
@@ -338,6 +355,9 @@
                 if (this.$store.state.application.editorMode === 'publishing') {
                     this.save()
                 }
+                else if (this.$store.state.application.editorMode === 'removing') {
+                    this.remove()
+                }
             },
         },
         created() {
@@ -345,7 +365,7 @@
                 this.$store.dispatch('ideas/find', {
                     query: {
                         id: Number(this.id),
-                        $eager: ['tags', 'community']
+                        $eager: '[tags, community]'
                     }
                 })
             }

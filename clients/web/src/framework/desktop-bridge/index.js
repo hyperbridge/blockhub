@@ -105,14 +105,14 @@ export const promptPasswordRequest = async (data) => {
 
         }
 
-        local.router.push('/unlock')
-
         local.store.commit('application/updateState', {
             locked: true,
             signedIn: false
         })
 
-        local.store.commit('application/activateModal', 'unlock')
+        local.router.push('/unlock')
+
+        //local.store.commit('application/activateModal', 'unlock')
 
         local.unlockResolve = resolve
     })
@@ -120,9 +120,8 @@ export const promptPasswordRequest = async (data) => {
 
 export const setAccountRequest = async (data) => {
     return new Promise(async (resolve) => {
-
         if (data.account.address) {
-            local.store.commit('application/activateModal', null)
+            //local.store.commit('application/activateModal', null)
 
             // We were locked
             if (DB.application.config.data[0].locked) {
@@ -130,17 +129,15 @@ export const setAccountRequest = async (data) => {
             }
 
             local.store.commit('application/updateState', {
-                locked: false,
-                signedIn: true
+                locked: false
             })
         } else {
-            local.store.commit('application/activateModal', null)
+            //local.store.commit('application/activateModal', null)
 
             local.router.push('/welcome')
             
             local.store.commit('application/updateState', {
-                locked: true,
-                signedIn: false
+                locked: true
             })
         }
 
@@ -149,9 +146,9 @@ export const setAccountRequest = async (data) => {
             ...data.account
         }
 
-        DB.application.config.data[0].activeProfile = data.account.profiles.find(i => i.id === data.activeProfile.id)
+        // DB.application.config.data[0].activeProfile = data.account.profiles.find(i => i.id === data.activeProfile.id)
 
-        DB.application.config.data[0].developerMode = DB.application.config.data[0].activeProfile.role === 'developer'
+        // DB.application.config.data[0].developerMode = DB.application.config.data[0].activeProfile.role === 'developer'
 
         DB.save()
 
@@ -260,7 +257,7 @@ export const runCommand = async (cmd, meta = {}) => {
             console.warn('[Bridge] Received system error from desktop', cmd.data)
 
             BlockHub.Notification.error(cmd.data, 'System Error', {
-                timeout: 5000,
+                timeout: 0,
                 pauseOnHover: true
             })
 
@@ -275,7 +272,7 @@ export const runCommand = async (cmd, meta = {}) => {
         } else {
             console.warn('[Bridge] Unhandled command:', cmd)
 
-            return reject()
+            return // reject()
         }
 
         return resolve(await sendCommand('response', null, meta.client, cmd.requestId))

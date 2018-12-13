@@ -10,15 +10,15 @@
 
                     <div class="form-control-element form-control-element--right"
                          v-if="activeElement['description']">
-                        <input ref="description" name="name" type="text" class="form-control"
-                               placeholder="Idea description..." v-model="idea.description"/>
+                        <input ref="description" name="description" type="text" class="form-control"
+                               placeholder="Idea description..." v-model="idea.meta.description" />
                         <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
                                 <span class="fa fa-check"
                                         @click="$emit('deactivateElement', 'description')"></span>
                         </div>
                     </div>
                 </div>
-                <p class="idea__description">{{ idea.description }}</p>
+                <p class="idea__description">{{ idea.meta.description }}</p>
             </div>
             
             <div class="main-content" v-html="idea.value" v-if="!editing">
