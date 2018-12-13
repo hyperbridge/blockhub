@@ -48,7 +48,6 @@
 <script>
     export default {
         components: {
-            'c-business-layout': (resolve) => require(['@/ui/layouts/business'], resolve),
             'c-buttons-group': (resolve) => require(['@/ui/components/buttons/group'], resolve),
             'c-release-tag-item': (resolve) => require(['@/ui/components/business/release-history/tag-item'], resolve),
             'c-release-list-item': (resolve) => require(['@/ui/components/business/release-history/list-item'], resolve),
@@ -86,22 +85,22 @@
                         id: "23413",
                         date: '2018-08-09T18:31:42+03:30',
                         latest_release: true,
-                        version: '0.7.1',
+                        version: '0.2.1',
                         author: 'Josh Doel',
                         text: 'In this update:<ul><li>Token purchase flow</li><li>Copy to address works</li><li>Account recovery</li></ul>',
                         files: [
                             {
-                                name: 'BlockHub-0.7.1-mac.zip',
+                                name: 'BlockHub-0.2.1-mac.zip',
                                 src: '#',
                                 size: 234214324
                             },
                             {
-                                name: 'BlockHub-0.7.1-Win86.zip',
+                                name: 'BlockHub-0.2.1-Win86.zip',
                                 src: '#',
                                 size: 2342324324
                             },
                             {
-                                name: 'BlockHub-0.7.1-Linux.zip',
+                                name: 'BlockHub-0.2.1-Linux.zip',
                                 src: '#',
                                 size: 942324324
                             }

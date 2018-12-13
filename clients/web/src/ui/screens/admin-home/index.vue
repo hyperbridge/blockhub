@@ -46,6 +46,7 @@
                      
                 } else if (action === 'transferTokens') {
                     const lines = body1.split('\n')
+                    const batch = []
 
                     for (let line of lines) {
                         let destinationAddress = null
@@ -53,20 +54,26 @@
 
                         if (this.$refs.amount.value) {
                             destinationAddress = line
-                            amount = this.$refs.amount.value
+                            amount = Number(this.$refs.amount.value)
                         } else {
                             destinationAddress = line.split('\t')[0]
-                            amount = line.split('\t')[1]
+                            amount = Number(line.split('\t')[1])
                         }
 
-                        await Bridge.sendCommand('transferTokens', {
-                            destinationAddress,
-                            amount,
-                            walletIndex
-                        }).then(() => {
-                            console.log('Done')
-                        })
+                        if (amount) {
+                            batch.push({
+                                destinationAddress,
+                                amount
+                            })
+                        }
                     }
+
+                    await Bridge.sendCommand('transferTokenBatch', {
+                        batch,
+                        walletIndex
+                    }).then(() => {
+                        console.log('Done')
+                    })
                 }
             }
         }
