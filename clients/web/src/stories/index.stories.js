@@ -5493,7 +5493,7 @@ storiesOf('Option Block', module)
             'c-option-block': (resolve) => require(['@/ui/components/option-block'], resolve),
         },
         template: `<div class="p-3 m-0 text-white" style="width: 400px">
-                        <c-option-block />
+                        <c-option-block shadow />
                     </div>`
     }))
 
