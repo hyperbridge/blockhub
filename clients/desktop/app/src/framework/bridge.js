@@ -156,6 +156,62 @@ export const removeprofileRequest = (profile) => {
     })
 }
 
+export const transferTokenBatch = ({ batch, walletIndex }) => {
+    return new Promise(async (resolve, reject) => {
+        const web3 = local.wallet.web3
+        const originWallet = await Wallet.create(local.passphrase, walletIndex)
+        const originAddress = originWallet.address
+
+        for (let i = 0, l = batch.length; i < l; ++i) {
+            const destinationAddress = batch[i].destinationAddress
+            const amount = batch[i].amount
+
+            console.log("Attempting transfer. From: " + originAddress + " To " + destinationAddress + " Amount: " + amount)
+
+            const token = TokenAPI.api.ethereum.state.contracts.Token.deployed
+            const eternalStorage = TokenAPI.api.ethereum.state.contracts.EternalStorage.deployed
+            const hbxToken = TokenAPI.api.ethereum.state.contracts.TokenDelegate.deployed
+            const tokenLib = TokenAPI.api.ethereum.state.contracts.TokenLib.deployed
+
+            const originalProvider = TokenAPI.api.ethereum.state.provider
+
+            TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originWallet.provider)
+            TokenAPI.api.ethereum.state.contracts.Token.contract.provider = originWallet.provider
+            TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originWallet.provider)
+
+            let tokenDelegateHolder = await TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.at(hbxToken.address)
+            let originWalletHolder = await TokenAPI.api.ethereum.state.contracts.Token.contract.at(token.address)
+            originWalletHolder = { ...tokenDelegateHolder, ...originWalletHolder }
+
+            const decimals = web3._extend.utils.toBigNumber(18)
+            const destinationAmount = web3._extend.utils.toBigNumber(amount).times(web3._extend.utils.toBigNumber(10).pow(decimals))
+
+            await originWalletHolder.transfer(destinationAddress, destinationAmount, {
+                from: originWallet.address,
+                gasPrice: 8e9
+            }).then(() => {
+                console.log("Transfer complete. Destination: " + destinationAddress)
+            }).catch((e) => {
+                console.log("Error occurred during transfer: ", e)
+                
+                //i-- // retry
+            })
+
+            // Wait 1 minute
+            await new Promise(resolve => setTimeout(() => resolve(), 1 * 60 * 1000))
+
+            //await web3.eth.getTransactionCountPromise(originAddress)
+
+            //TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originalProvider)
+            //TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originalProvider)
+
+            console.log("Transfer started. Destination: " + destinationAddress)
+        }
+
+        resolve()
+    })
+}
+
 export const transferTokens = ({ destinationAddress, amount, walletIndex }) => {
     return new Promise(async (resolve, reject) => {
         const web3 = local.wallet.web3
@@ -182,15 +238,17 @@ export const transferTokens = ({ destinationAddress, amount, walletIndex }) => {
         const decimals = web3._extend.utils.toBigNumber(18)
         const destinationAmount = web3._extend.utils.toBigNumber(amount).times(web3._extend.utils.toBigNumber(10).pow(decimals))
 
-        originWalletHolder.transfer(destinationAddress, destinationAmount, {
+        await originWalletHolder.transfer(destinationAddress, destinationAmount, {
             from: originWallet.address,
-            gasPrice: 2e9
+            gasPrice: 6e9
         }).then(() => {
             console.log("Transfer complete. Destination: " + destinationAddress)
         })
 
-        TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originalProvider)
-        TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originalProvider)
+        await web3.eth.getTransactionCountPromise(originAddress)
+
+        //TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originalProvider)
+        //TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originalProvider)
         
         console.log("Transfer started. Destination: " + destinationAddress)
 
@@ -583,6 +641,7 @@ export const initProtocol = async ({ protocolName }) => {
             config.userFromAddress,
             config.userToAddress
         )
+        // TODO: new api
         // protocol.api.ethereum.init({
         //     provider: local.wallet.provider,
         //     fromAddress: config.userFromAddress,
@@ -1509,6 +1568,9 @@ export const runCommand = async (cmd, meta = {}) => {
         } else if (cmd.key === 'transferTokens') {
             resultData = await transferTokens(cmd.data)
             resultKey = 'transferTokensResponse'
+        } else if (cmd.key === 'transferTokenBatch') {
+            resultData = await transferTokenBatch(cmd.data)
+            resultKey = 'transferTokenBatchResponse'
         } else if (cmd.key === 'eval') {
             // Don't allow eval in production
             if (!config.IS_PRODUCTION) {
