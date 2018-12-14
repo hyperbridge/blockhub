@@ -252,7 +252,7 @@
                             :setItemsPerPage="12"
                         >
                             <div
-                                class="p-2 col-3"
+                                class="p-2 col-12 col-md-6 col-lg-4 col-xl-3"
                                 v-for="(project, index) in resultsFiltered" 
                                 :key="index"
                             >
@@ -264,6 +264,7 @@
                                     :parentDeveloper="project.product && project.product.developer" 
                                     :parentImage="project.product && project.product.meta.images.mediumTile"
                                     :id="project.id"
+                                    class="p-0"
                                 />
                             </div>
                             <!-- <c-game-grid
