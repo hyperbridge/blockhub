@@ -633,6 +633,7 @@
         created() {
             window.addEventListener('resize', this.handleResize())
             this.handleResize();
+            this.checkScrollButton();
         },
         mounted() {
             this.updateBreadcrumbLinks()

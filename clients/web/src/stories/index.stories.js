@@ -5492,8 +5492,40 @@ storiesOf('Option Block', module)
         components:{
             'c-option-block': (resolve) => require(['@/ui/components/option-block'], resolve),
         },
+        data(){
+            return{
+                list: [
+                    {
+                        id: '23423',
+                        name: 'Digital Deluxe Edition',
+                        price: '99.99',
+                        image: 'https://bnetproduct-a.akamaihd.net//faa/1f29ed14601b9f480e4e37d75770b23a-upsell-bfa-dd.jpg',
+                    },
+                    {
+                        id: '134',
+                        name: 'Standard Edition',
+                        price: '32.99',
+                        image: 'https://bnetproduct-a.akamaihd.net//ffb/d843fb3f8393a4976d4c4beaceb1ca06-prod-thumb.jpg',
+                    },
+                    {
+                        id: '3564',
+                        name: 'Demo Edition',
+                        price: '19.99',
+                    }
+                ]
+            }
+        },
         template: `<div class="p-3 m-0 text-white" style="width: 400px">
-                        <c-option-block shadow />
+                        <c-option-block shadow 
+                        image="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"
+                        title="World of Warcraft®: Battle for Azeroth" 
+                        subtitle="Massively Multiplayer RPG"
+                        notification="Pre-Purchase now!"
+                        :list="list"
+                        @buy=""
+                        @gift=""
+                        @addToWishlist=""
+                         />
                     </div>`
     }))
 

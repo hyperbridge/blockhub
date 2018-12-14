@@ -243,7 +243,7 @@
                 </transition>
                 <!-- <h3>Results</h3> -->
                 <div class="results__container">
-                    <div class="results">
+                    <!--<div class="results">-->
                         <c-content-navigation
                             class="row"
                             :loading="loading"
@@ -278,7 +278,7 @@
                         </c-content-navigation>
                     </div>
                 </div>
-            </div>
+            <!--</div>-->
         </div>
     </c-layout>
 </template>
