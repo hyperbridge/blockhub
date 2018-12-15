@@ -532,7 +532,8 @@
             }
         },
         updated() {
-            this.userSubmittedConnectionMessage = this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))]
+            this.userSubmittedConnectionMessage = this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))];
+            this.checkScrollButton();
         },
         methods: {
             onSwipeLeft() {
