@@ -5,9 +5,9 @@
                 <h3>
                     SEARCH
                 </h3>
-                <div class="search__main row">
+                <div class="search__main">
                     <c-input-searcher
-                        class="col-12"
+                        class="w-100"
                         v-model="phrase"
                         placeholder="Search for games"
                         aria-placeholder="Search for games"
@@ -534,10 +534,6 @@
     .search__main {
         display: flex;
         align-items: center;
-        .input-searcher {
-            margin-right: 30px;
-            width: 300px;
-        }
         margin-bottom: 40px;
     }
 
