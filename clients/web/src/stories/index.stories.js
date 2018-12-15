@@ -2185,6 +2185,7 @@ storiesOf('Assets List', module)
 
 
 import Block from '../ui/components/block'
+import simpleBlock from '../ui/components/block/simple'
 
 storiesOf('Block', module)
     .add('default', () => ({
@@ -2201,6 +2202,22 @@ storiesOf('Block', module)
                 ut fringilla turpis dictum sit amet. Praesent quis lacus
                 ac tellus vehicula commodo sit amet sit amet ex.</p>
             </c-block>
+         </div>
+        `
+    }))
+    .add('simple', () => ({
+        components: {
+            'c-simple-block': simpleBlock
+        },
+        template: `
+         <div class="row m-0 p-3">
+            <div class="col-4">
+                 <c-simple-block image="https://bnetcmsus-a.akamaihd.net/cms/blog_thumbnail/od/ODPQGI4NN71N1544053040567.jpg" imgHeight="200px" hovered>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Suspendisse vel arcu sit amet erat vestibulum volutpat.
+                    Ut volutpat enim vel augue luctus luctus</p>
+                </c-simple-block>
+            </div>
          </div>
         `
     }))
