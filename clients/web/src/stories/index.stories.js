@@ -2084,7 +2084,10 @@ storiesOf('Switch', module)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-switch :checked=true />
+             <c-switch :checked=true label="Label text" class="mr-5"/>
+             <c-switch :checked=true customLabel>
+                Custom label 
+            </c-switch>
          </div>
         `
     }))
