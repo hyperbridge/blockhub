@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="loading">
+        <div class="col-12 text-center" v-if="loading">
             <c-spinner />
         </div>
         <template v-else>
