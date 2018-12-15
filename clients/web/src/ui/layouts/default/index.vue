@@ -1075,7 +1075,7 @@
     .left-sidebar__content{
         overflow-y: scroll;
         overflow-x: hidden;
-        height: calc(100% - 40px);
+        height: calc(100% - 55px);
     }
     .col-lg-6{
         @media (max-width: 1500px){
