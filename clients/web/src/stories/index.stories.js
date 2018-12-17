@@ -5485,6 +5485,18 @@ storiesOf('Text label', module)
                     <p>Nulla euismod lorem a vehicula <c-text-label type="info">condimentum</c-text-label>.</p>
                 </div>`
     }))
+
+
+storiesOf('Option Block', module)
+    .add('default', () => ({
+        components:{
+            'c-option-block': (resolve) => require(['@/ui/components/option-block'], resolve),
+        },
+        template: `<div class="p-3 m-0 text-white" style="width: 400px">
+                        <c-option-block shadow />
+                    </div>`
+    }))
+
 /*
      Dynamic import - test version
 
