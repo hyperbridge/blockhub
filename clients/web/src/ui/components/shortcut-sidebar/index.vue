@@ -6,8 +6,8 @@
             :draggable="true"
             :sortable="true"
             :items="items"
-            :cellWidth="60"
-            :cellHeight="60"
+            :cellWidth="50"
+            :cellHeight="65"
             :gridWidth="200"
             @change="change"
             @remove="remove"
@@ -25,6 +25,7 @@
                     :eventValue="props.item.eventValue"
                     :icon="props.item.icon"
                     :removable="props.item.removable"
+                    :percent="props.item.percent"
                     @remove="props.remove()" />
             </template>
         </c-grid>

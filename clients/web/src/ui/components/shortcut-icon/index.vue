@@ -1,5 +1,5 @@
 <template>
-    <div class="shortcut-icon" :class="{'icon-active' : active}" :style="style">
+    <div class="shortcut-icon" :class="{'icon-active' : active }" :style="style">
         <i v-if="withButton && !icon && removable"
            class="icon-delete-btn fa fa-times"
            @mousedown="remove"/>
@@ -9,7 +9,7 @@
                    :class="icon"/>
             </a>
         </slot>
-        <c-progress-bar :percentages="74" style="height: 3px; min-height: 3px; margin-top: 5px" v-if="percent" />
+        <c-progress-bar :percentages="74" style="height: 3px; min-height: 3px; margin-top: 7px" v-if="percent" />
     </div>
 </template>
 
