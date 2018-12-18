@@ -1,5 +1,6 @@
 <template>
   <div ref="self"
+       class="grid-item"
        :class="className"
        :style="style"
        @mousedown="mousedown"

@@ -6,6 +6,7 @@
             :draggable="true"
             :sortable="true"
             :items="items"
+            :fixedItems="fixedItems"
             :cellWidth="50"
             :cellHeight="65"
             :gridWidth="200"
@@ -16,17 +17,18 @@
         >
             <template slot="cell" scope="props">
                 <c-icon :color="props.item"
-                    :index="props.index"
-                    :with-button="true"
-                    :link="props.item.link"
-                    :image="props.item.image"
-                    :text="props.item.text"
-                    :eventKey="props.item.eventKey"
-                    :eventValue="props.item.eventValue"
-                    :icon="props.item.icon"
-                    :removable="props.item.removable"
-                    :percent="props.item.percent"
-                    @remove="props.remove()" />
+                        :index="props.index"
+                        :with-button="true"
+                        :link="props.item.link"
+                        :image="props.item.image"
+                        :text="props.item.text"
+                        :eventKey="props.item.eventKey"
+                        :eventValue="props.item.eventValue"
+                        :icon="props.item.icon"
+                        :removable="props.item.removable"
+                        :percent="props.item.percent"
+                        :active="props.item.active"
+                        @remove="props.remove()" />
             </template>
         </c-grid>
     </div>
@@ -59,7 +61,39 @@
         data () {
             //let colors = generateRGBColors(5)
             return {
-                selected: null
+                selected: null,
+                fixedItems: [
+                    {
+                        "r": null,
+                        "g": null,
+                        "b": null,
+                        "image": "/static/img/icons/slack.png",
+                        "link": "#/",
+                        "text": "Go to Slack",
+                        "sort": 1,
+                        "removable": false
+                    },
+                    {
+                        "r": null,
+                        "g": null,
+                        "b": null,
+                        "image": "/static/img/icons/steam.png",
+                        "link": "#/",
+                        "text": "Go to Steam",
+                        "sort": 2,
+                        "removable": false
+                    },
+                    {
+                        "r": null,
+                        "g": null,
+                        "b": null,
+                        "image": "/static/img/icons/twitch.png",
+                        "link": "#/",
+                        "text": "Go to Twitch",
+                        "sort": 3,
+                        "removable": false
+                    }
+                ]
             }
         },
         methods: {
@@ -98,5 +132,8 @@
         margin-bottom: 10px;
         border-radius: 10px;
         box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.07);
+    }
+    .fixed-shortcuts{
+        margin-top: auto;
     }
 </style>
