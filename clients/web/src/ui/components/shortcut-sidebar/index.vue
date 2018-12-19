@@ -67,9 +67,9 @@
                         "r": null,
                         "g": null,
                         "b": null,
-                        "image": "/static/img/icons/slack.png",
+                        "image": "/static/img/icons/discord.png",
                         "link": "#/",
-                        "text": "Go to Slack",
+                        "text": "Go to Discord",
                         "sort": 1,
                         "removable": false
                     },
@@ -90,7 +90,27 @@
                         "image": "/static/img/icons/twitch.png",
                         "link": "#/",
                         "text": "Go to Twitch",
-                        "sort": 3,
+                        "sort": 4,
+                        "removable": false
+                    },
+                    {
+                        "r": null,
+                        "g": null,
+                        "b": null,
+                        "image": "/static/img/icons/instagram.png",
+                        "link": "#/",
+                        "text": "Go to Instagram",
+                        "sort": 5,
+                        "removable": false
+                    },
+                    {
+                        "r": null,
+                        "g": null,
+                        "b": null,
+                        "image": "/static/img/icons/youtube.png",
+                        "link": "#/",
+                        "text": "Go to Youtube",
+                        "sort": 6,
                         "removable": false
                     }
                 ]

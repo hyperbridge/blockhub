@@ -1,5 +1,5 @@
 <template>
-    <div class="shortcut-icon" :class="{'icon-active' : active }" :style="style">
+    <div class="shortcut-icon" :class="{'icon-active' : active }" :style="style" @mouseover=" show = true" @mouseleave=" show = false">
         <i v-if="withButton && !icon && removable"
            class="icon-delete-btn fa fa-times"
            @mousedown="remove"/>
@@ -10,6 +10,11 @@
             </a>
         </slot>
         <c-progress-bar :percentages="74" style="height: 3px; min-height: 3px; margin-top: 7px" v-if="percent" />
+        <transition name="fade" v-if="text && show">
+            <div class="shortcut-icon__title">
+                {{ text }}
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -70,6 +75,11 @@
                 default: false
             },
             percent: [ String, Number ]
+        },
+        data(){
+            return{
+                show: false
+            }
         },
         components: {
             'c-tooltip': (resolve) => require(['@/ui/components/tooltips/universal'], resolve),
@@ -187,5 +197,29 @@
         animation-duration: 0.07s;
         animation-iteration-count: infinite;
         animation-direction: alternate;
+    }
+    .shortcut-icon__title{
+        background: rgba(0, 0, 0, .8);
+        padding: 0px 10px;
+        border-radius: 3px;
+        color: #fff;
+        font-size: 14px;
+        position: absolute;
+        left: calc( 100% + 10px );
+        top: calc( 50% - 16px );
+        display: block;
+        white-space: nowrap;
+        line-height: 32px;
+        &:before{
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 8px 10px 8px 0;
+            border-color: transparent rgba(0, 0, 0, .8) transparent transparent;
+            position: absolute;
+            top: 8px;
+            left: -10px;
+            content: "";
+        }
     }
 </style>

@@ -43,7 +43,7 @@
                         :removable="item.removable"
                         :percent="item.percent"
                         :active="item.active"
-                        class="margin-bottom-10"
+                        class="margin-bottom-10 border-none"
                         @remove="remove()"/>
             </div>
         </div>
@@ -286,6 +286,9 @@
     }
     .c-grid__bottom{
         padding-bottom: 40px;
+        .border-none{
+            border: none;
+        }
     }
 
     .c-grid-container {
