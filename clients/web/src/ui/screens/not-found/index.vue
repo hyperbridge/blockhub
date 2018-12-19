@@ -18,6 +18,12 @@
 export default {
     components: {
     },
+    created() {
+        $('body').addClass('screen--not-found')
+    },
+    beforeDestroy() {
+        $('body').removeClass('screen--not-found')
+    },
     methods: {
         goHome() {
             window.location.href = '/'
@@ -28,39 +34,42 @@ export default {
 
 
 <style lang="scss">
-    .not-found__404 {
-        position: fixed;
-        top: 30px;
-        left: 30px;
-        background: url(/static/img/404.png) no-repeat 0 0;
-        z-index: 120;
-        width: 400px;
-        height: 200px;
-        filter: invert(1);
-    }
-    .app-header {
-        transform: rotate(-20deg) translateX(-80px) translateY(-450px) !important;
-        overflow: hidden;
+    body.screen--not-found {
+        .app-header {
+            transform: rotate(-20deg) translateX(-80px) translateY(-450px) !important;
+            overflow: hidden;
 
-        &:before {
-            position: absolute;
-            top: 0;
-            left: 0;
-            content: " ";
-            z-index: 120;
-            background: url("/static/img/cracked-glass.png") no-repeat 0% 30%;
-            width: 1000px;
-            height: 1000px;
-            background-size: contain;
-            /*filter: drop-shadow(0 0 0px #fff);*/
-            opacity: 0.5;
+            &:before {
+                position: absolute;
+                top: 0;
+                left: 0;
+                content: " ";
+                z-index: 120;
+                background: url("/static/img/cracked-glass.png") no-repeat 0% 30%;
+                width: 1000px;
+                height: 1000px;
+                background-size: contain;
+                /*filter: drop-shadow(0 0 0px #fff);*/
+                opacity: 0.5;
+            }
+        }
+        .app-header__top-bar {
+            height: 600px !important;
+            max-height: 600px !important;
+        }
+        .quick-launch {
+            display: none;
         }
     }
-    .app-header__top-bar {
-        height: 600px !important;
-        max-height: 600px !important;
-    }
-    .quick-launch {
-        display: none;
-    }
+    // .not-found__404 {
+    //     position: fixed;
+    //     top: 30px;
+    //     left: 30px;
+    //     background: url(/static/img/404.png) no-repeat 0 0;
+    //     z-index: 120;
+    //     width: 400px;
+    //     height: 200px;
+    //     filter: invert(1);
+    // }
+    
 </style>
