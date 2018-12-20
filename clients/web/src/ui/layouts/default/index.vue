@@ -841,8 +841,8 @@
 
     .status-dot {
         position: fixed;
-        bottom: 20px;
-        left: 20px;
+        bottom: 5px;
+        left: 25px;
         z-index: 120;
     }
 
@@ -1092,6 +1092,7 @@
         padding: 10px;
         z-index: 99;
         background: rgba(0, 0, 0, 0.5);
+        bottom: 0;
         /*box-shadow: inset 0 0 3px #000;*/
     }
 

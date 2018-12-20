@@ -134,7 +134,7 @@
             },
             containerStyle() {
                 return {
-                    height: window.innerHeight - 50 + 'px'
+                    height: window.innerHeight - 60 + 'px'
                 }
             },
 
@@ -283,11 +283,19 @@
 
     .c-grid__top {
         margin-top: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        &::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0) !important;
+            border: 0 none !important;
+            display: none;
+        }
+
     }
     .c-grid__bottom{
-        padding-bottom: 40px;
+        /*padding-bottom: 40px;*/
         .border-none{
-            border: none;
+            border-color: transparent;
         }
     }
 

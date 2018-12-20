@@ -15,6 +15,7 @@
                 {{ text }}
             </div>
         </transition>
+        <div class="shortcut-icon__ntf"></div>
     </div>
 </template>
 
@@ -221,5 +222,15 @@
             left: -10px;
             content: "";
         }
+    }
+    .shortcut-icon__ntf{
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-radius: 100%;
+        background: #999;
+        position: absolute;
+        bottom: 4px;
+        right: 4px;
     }
 </style>
