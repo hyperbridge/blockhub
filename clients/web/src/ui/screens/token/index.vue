@@ -146,7 +146,7 @@
                 <p hidden>Tokens can be purchased in the BlockHub desktop client or using the MetaMask web wallet. Come back to this page within BlockHub, or when you've installed MetaMask.</p>
 
                 <br /><br />
-                <c-button class="c-btn-lg " href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" @click="gaStep(1)">Install MetaMask to Purchase Tokens</c-button>
+                <c-button class="c-button--lg " href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" @click="gaStep(1)">Install MetaMask to Purchase Tokens</c-button>
                 <br /><br />
                 <c-button status="underline" size="sm" @click="showContractAddress">Click here if you just want the contract address</c-button>
                 <br /><br />
@@ -167,7 +167,7 @@
 
                 <br />
                 <br />
-                <c-button class="c-btn-lg " @click="unlockWallet">Unlock Wallet</c-button>
+                <c-button class="c-button--lg " @click="unlockWallet">Unlock Wallet</c-button>
                 <br /><br />
                 <c-button status="underline" size="sm" @click="showContractAddress">Click here if you just want the contract address</c-button>
                 <br /><br />
@@ -258,7 +258,7 @@
                 <div class="col-8 offset-2" v-if="ethereumConnected && ethereumUnlocked && desktopMode && (!account.isVerified && !account.isVerifying) && !override" style="text-align: center">
                     <h2 style="text-align: center" hidden>Oops, you haven't verified your account yet. <br />You'll need to do this to purchase.</h2>
                     <br />
-                    <c-button class="c-btn-lg" href="#/account/verification" style="margin: 0 auto" @click="gaStep(6)">Verify Account</c-button>
+                    <c-button class="c-button--lg" href="#/account/verification" style="margin: 0 auto" @click="gaStep(6)">Verify Account</c-button>
                     <br /><br />
                     <c-button status="underline" size="sm" @click="manualOverride">Click here if you're pretty sure you've verified</c-button>
                     <br /><br />
@@ -855,7 +855,7 @@ ol.lst-kix_list_7-0{list-style-type:none}.lst-kix_list_14-1>li:before{content:""
         left: 0;
         right: 0;
         height: 26px;
-        .c-btn {
+        .c-button {
             margin: 0 5px;
         }
     }

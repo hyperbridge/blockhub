@@ -180,7 +180,7 @@
                                     <c-button class="plain" @click="showPassphrase()" v-if="verifyingPassphrase"> </c-button> 
                                     <br /><br />
 
-                                    <c-button class="c-btn-lg" @click="startVerification()">Got it</c-button>
+                                    <c-button class="c-button--lg" @click="startVerification()">Got it</c-button>
                                 </div>
                                 <div class="tab-card" v-if="verifyingPassphrase" hidden>
                                     <p>We've generated a passphrase for you. You can change it, but it's not recommended. This is used to access, create &amp; change your data. If you ever need to recover it, you can use your password. If you forget your password, you can use your secret question AND your birthday. We do this to protect you against hackers, however don't lose them, otherwise it will be impossible to recover the account.</p>
@@ -194,7 +194,7 @@
                                     <c-button class="plain" @click="showPassphrase()" v-if="verifyingPassphrase">Show Passphrase Again</c-button> 
                                     <br /><br />
 
-                                    <c-button class="c-btn-lg" @click="confirmVerification()" v-if="verifyingPassphrase">Verify Now</c-button>
+                                    <c-button class="c-button--lg" @click="confirmVerification()" v-if="verifyingPassphrase">Verify Now</c-button>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center margin-top-20" slot="footer" v-if="verifiedPassphrase">
                                     <c-switch
@@ -226,7 +226,7 @@
 
                                         <br />
                                         <c-button
-                                            class="c-btn-lg outline-green"
+                                            class="c-button--lg outline-green"
                                             @click="checkForm()"
                                         >Continue to BlockHub</c-button>
                                     </div>

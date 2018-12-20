@@ -25,7 +25,7 @@
 
                     <br /><br />
 
-                    <c-button class="c-btn-lg outline-white margin-top-20" @click="convertProfile">Convert to Developer</c-button>
+                    <c-button class="c-button--lg outline-white margin-top-20" @click="convertProfile">Convert to Developer</c-button>
                 </div>
             </div>
             <div class="col-12" v-if="developerMode">
@@ -124,7 +124,7 @@
         bottom: -20px;
         width: 100%;
         height: 26px;
-        .c-btn {
+        .c-button {
             margin: 0 5px;
         }
     }

@@ -3,10 +3,11 @@
         :is="tag"
         :href="href"
         :target="target"
-        class="c-btn"
+        class="c-button"
         :class="[
-            status, 'c-btn-' + size ,
+            status, 'c-button--' + size ,
             { 'swap-direction': swapDirection },
+            { 'centered': centered },
             { 'doubled': doubled },
             { 'no-shadow' : !shadow}
         ]"
@@ -56,6 +57,10 @@
             swapOrder: Boolean,
             swapDirection: Boolean,
             doubled: Boolean,
+            centered: {
+                type: Boolean,
+                default: false
+            },
             size: {
                 type: String,
                 default: 'sm'
@@ -103,7 +108,7 @@
         /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$first', endColorstr='$second', GradientType=0); */ /* IE6-9 */
     }
 
-    .c-btn {
+    .c-button {
         display: inline-flex;
         position: relative;
         align-items: center;
@@ -168,27 +173,30 @@
                 margin-top: 3px;
             }
         }
-        &.c-btn-xs {
+        &.centered {
+            text-align: center;
+        }
+        &.c-button--xs {
             padding: 0px 5px;
             font-size: 12px;
             line-height: 22px;
         }
-        &.c-btn-sm {
+        &.c-button--sm {
             padding: 1px 5px;
             font-size: 13px;
         }
-        &.c-btn-md {
+        &.c-button--md {
             padding: 3px 10px;
             font-size: 16px;
         }
-        &.c-btn-lg {
+        &.c-button--lg {
             padding: 5px 13px;
             font-size: 18px;
             i {
                 margin-right: 10px;
             }
         }
-        &.c-btn-xl {
+        &.c-button--xl {
             padding: 0px 15px;
             line-height: 40px;
             font-size: 18px;
@@ -327,8 +335,6 @@
                 color: nth($colorSet, 3);
                 border: 1px solid nth($colorSet, 2);
                 border-radius: 2px;
-                padding: 10px 50px;
-                font-size: 18px;
                 font-weight: 400;
                 text-shadow: 1px 1px 1px #000;
                 &:not([disabled]):hover {

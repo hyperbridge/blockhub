@@ -130,7 +130,7 @@
             border-bottom: 0;
             padding-bottom: 0;
         }
-        .c-btn{
+        .c-button{
             margin-top: 15px;
         }
     }

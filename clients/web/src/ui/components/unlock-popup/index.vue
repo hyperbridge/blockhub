@@ -11,7 +11,7 @@
                                 <label class="sr-only">Password</label>
                                 <input type="password" name="password" ref="password" placeholder="Password" class="form-control" @keyup.enter="unlock()" v-focus />
                                 <br />
-                                <c-button ref="submit" class="c-btn-lg" @click="unlock()">Unlock</c-button>
+                                <c-button ref="submit" class="c-button--lg" @click="unlock()">Unlock</c-button>
                                 <br />
                                 <p class="margin-top-20"><span style="color: #aaa">Can't remember?</span> <c-button class="plain" @click="recovery = true">Recover your account</c-button></p>
                                 <div class="row recovery-box" v-if="recovery">
@@ -183,7 +183,7 @@
             box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
             background: #303049;
         }
-        .c-btn {
+        .c-button {
             border: 2px solid transparent;
 
             &.wrong {

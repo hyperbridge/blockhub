@@ -1,5 +1,5 @@
 <template>
-    <span class="c-btn-arrows">
+    <span class="c-button-arrows">
         <c-icon
             name="caret-up"
             :class="[
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .c-btn-arrows {
+    .c-button-arrows {
         text-align: center;
         display: flex;
         flex-direction: column;

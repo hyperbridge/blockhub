@@ -61,7 +61,7 @@
             max-width: calc( 100% - 115px );
             display: inline-block;
         }
-        .c-btn {
+        .c-button {
             min-width: 90px;
             height: 24px;
         }

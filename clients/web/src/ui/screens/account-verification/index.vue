@@ -119,7 +119,7 @@
                                         <br />
                                         
                                         <c-button
-                                            class="c-btn-lg"
+                                            class="c-button--lg"
                                             @click="verifyAccount()"
                                         >Start Verification</c-button>
                                     </div>
@@ -127,7 +127,7 @@
                                         <p>Great. We've told Veriff you're coming!</p>
 
                                         <c-button
-                                            class="c-btn-lg"
+                                            class="c-button--lg"
                                             :href="verificationLink"
                                             v-if="verificationLink"
                                         >Continue to Veriff</c-button>
@@ -351,7 +351,7 @@
         bottom: -20px;
         width: 100%;
         height: 26px;
-        .c-btn {
+        .c-button {
             margin: 0 5px;
         }
     }

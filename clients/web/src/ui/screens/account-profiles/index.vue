@@ -501,7 +501,7 @@
         bottom: 18px;
         width: 100%;
         height: 26px;
-        .c-btn {
+        .c-button {
             margin: 0 5px;
         }
     }

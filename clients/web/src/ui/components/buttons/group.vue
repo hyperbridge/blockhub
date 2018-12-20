@@ -13,7 +13,7 @@
     .c-buttons-group{
         display: inline-flex;
         align-items: stretch;
-        .c-btn{
+        .c-button{
             border-radius: 0;
             &:first-child{
                 border-radius: 5px 0 0 5px;

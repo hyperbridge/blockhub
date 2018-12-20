@@ -44,14 +44,14 @@
                 Play Now
             </c-button>
 
-            <c-btn-fav
+            <c-button-fav
                 @click="$emit('addToWishlist')"
                 target="Wishlist"
                 :active="inWishlist"
                 class="mt-3"
             />
 
-            <c-btn-fav
+            <c-button-fav
                 @click="$emit('addToShortcut')"
                 target="Shortcuts"
                 :active="inShortcut"
@@ -115,7 +115,7 @@
             onClickPurchase: Function
         },
         components: {
-            'c-btn-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve)
+            'c-button-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve)
         }
     }
 </script>
@@ -178,7 +178,7 @@
         display: inline-flex;
         flex-direction: column;
         padding: 0;
-        .c-btn{
+        .c-button{
             width: auto;
             margin: 0 auto 15px 0;
             align-self: flex-start;

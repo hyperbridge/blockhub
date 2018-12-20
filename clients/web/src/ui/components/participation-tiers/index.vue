@@ -64,7 +64,7 @@
         display: inline-flex;
         flex-direction: column;
     }
-    .c-btn{
+    .c-button{
         margin-right: auto;
     }
 </style>

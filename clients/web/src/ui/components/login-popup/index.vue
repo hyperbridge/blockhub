@@ -15,10 +15,10 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <c-button status="second-info" class="mb-3" style="display: block">
+                        <c-button status="second-info" size="xl" centered class="mb-3" style="display: block">
                             Sign in with Google
                         </c-button>
-                        <c-button status="second-danger" class="mb-3" style="display: block">
+                        <c-button status="second-danger" size="xl" centered class="mb-3" style="display: block">
                             Sign in with Facebook
                         </c-button>
                     </div>

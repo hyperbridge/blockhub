@@ -40,7 +40,7 @@
             margin: 0 auto 15px;
             display: block;
         }
-        .c-btn{
+        .c-button{
             margin: 20px auto auto;
         }
     }

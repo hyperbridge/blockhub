@@ -256,7 +256,7 @@
     .buttons-container{
         flex-direction: column;
         display: flex;
-        .c-btn{
+        .c-button{
             margin: 10px auto;
         }
     }
