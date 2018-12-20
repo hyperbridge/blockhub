@@ -317,7 +317,7 @@
         $secondColor: (
             second-info: (#0e86ca, #00aeff, #fff),
             second-success: (#189f2d, #1bb934, #fff),
-            second-danger: (#d8a324, #ffc02a, #000),
+            second-danger: (#d29314, #e8bd1a, #fff),
             second-warning: (#c00f26, #e1112c, #fff),
         );
 
@@ -330,6 +330,7 @@
                 padding: 10px 50px;
                 font-size: 18px;
                 font-weight: 400;
+                text-shadow: 1px 1px 1px #000;
                 &:not([disabled]):hover {
                     background: nth($colorSet, 2);
                     color: nth($colorSet, 3);

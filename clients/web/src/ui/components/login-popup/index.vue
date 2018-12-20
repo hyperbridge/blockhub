@@ -9,6 +9,26 @@
             
             <div v-if="!loading">
                 <div class="row">
+                    <div class="col-12" style="text-align: center">
+                        <h2>Sign in to BlockHub</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <c-button status="second-info" class="mb-3" style="display: block">
+                            Sign in with Google
+                        </c-button>
+                        <c-button status="second-danger" class="mb-3" style="display: block">
+                            Sign in with Facebook
+                        </c-button>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <c-heading-bar-color colorCode="#fff" textAlign="center">or sign in with email</c-heading-bar-color>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col">
                         <div class="form-group">
                             <label>E-mail</label>
@@ -39,7 +59,7 @@
 
         <div slot="modal_footer" class="text-right w-100" v-if="!loading">
             <c-button status="plain" @click="$store.commit('application/activateModal', 'register')" style="float: left; margin-right: 20px">Don't have an account? Sign Up</c-button>
-            <c-button size="md" @click="next()">Continue</c-button>
+            <c-button size="md" @click="next()">Sign In</c-button>
         </div>
     </c-custom-modal>
 </template>
@@ -56,6 +76,7 @@
             'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
             'c-tabs': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve),
             'c-tab': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve),
+            'c-heading-bar-color': (resolve) => require(['@/ui/components/heading-bar/simple-colored'], resolve),
             'c-terms-block': (resolve) => require(['@/ui/components/terms-block'], resolve),
             'c-privacy-block': (resolve) => require(['@/ui/components/privacy-block'], resolve)
         },
