@@ -716,6 +716,9 @@
 </script>
 
 <style>
+    #fixed_panel {
+        display: block;
+    }
 
     .header-bg__layer-2 {
         position: fixed;

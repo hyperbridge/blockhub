@@ -115,8 +115,7 @@
         padding: 0px 8px;
         line-height: 24px;
         border-style: none;
-        border-radius: 5px;
-        box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
+        border-radius: 2px;
         text-decoration: none;
         cursor: pointer;
         font-weight: bold;

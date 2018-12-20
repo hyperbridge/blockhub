@@ -13,17 +13,17 @@
                         <h2>Sign in to BlockHub</h2>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" v-darklaunch="`SOCIAL_SIGNIN`">
                     <div class="col-12">
                         <c-button status="second-info" size="xl" centered class="mb-3" style="display: block">
-                            Sign in with Google
+                            Sign in with Twitter
                         </c-button>
-                        <c-button status="second-danger" size="xl" centered class="mb-3" style="display: block">
+                        <c-button status="second-info" size="xl" centered class="mb-3" style="display: block">
                             Sign in with Facebook
                         </c-button>
                     </div>
                 </div>
-                <div class="row mb-3">
+                <div class="row mb-3" v-darklaunch="`SOCIAL_SIGNIN`">
                     <div class="col-12">
                         <c-heading-bar-color colorCode="#fff" textAlign="center">or sign in with email</c-heading-bar-color>
                     </div>

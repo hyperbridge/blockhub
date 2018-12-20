@@ -1,4 +1,5 @@
 <template>
+    <c-business-layout>
         <div class="row">
 
             <div class="col-md-12" v-if="successfulCreationMessage">
@@ -6,7 +7,7 @@
                 <br /><br />
             </div>
             <div class="col-md-6">
-                <div class="form-group row align-items-center">
+                <div class="form-group row align-items-center" v-if="product.id">
                     <label class="col-sm-3">
                         <label>Change Status</label>
                     </label>
@@ -98,22 +99,24 @@
 
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-12 text-right" v-if="product.id">
-                        <c-button status="success" @click.prevent="save" icon="save">
-                            Save
-                        </c-button>
-                    </div>
-                    <div class="col-12 text-right" v-if="!product.id">
-                        <c-button status="success" @click.prevent="create" icon="plus">
-                            Create
-                        </c-button>
-                    </div>
-                </div>
             </div>
         </div>
 
+        <template slot="menu">
+            <div class="row">
+                <div class="col-12 text-right" v-if="product.id">
+                    <c-button status="success" @click.prevent="save" icon="save">
+                        Save
+                    </c-button>
+                </div>
+                <div class="col-12 text-right" v-if="!product.id">
+                    <c-button status="success" size="md" @click.prevent="create" icon="plus">
+                        Create
+                    </c-button>
+                </div>
+            </div>
+        </template>
+    </c-business-layout>
 </template>
 
 <script>
