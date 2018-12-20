@@ -56,7 +56,7 @@
 
                             <br /><br />
                             
-                            <c-button class="c-btn-lg " @click="unlockWallet">Unlock Wallet</c-button>
+                            <c-button class="c-button--lg " @click="unlockWallet">Unlock Wallet</c-button>
                         </div>
                         
                         <div class="col-12 margin-top-30 margin-bottom-30" v-if="useMetamask && ethereumConnected && ethereumUnlocked" style="text-align: center; width: 100%; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
@@ -74,7 +74,7 @@
                         </p>
                         
                         <div class="margin-top-30" style="text-align: center">
-                            <c-button status="success" class="c-btn-lg justify-content-center" iconHide size="xl" @click="proceed" :class="{'disabled': !canContinue }">
+                            <c-button status="success" class="c-button--lg justify-content-center" iconHide size="xl" @click="proceed" :class="{'disabled': !canContinue }">
                                 Continue
                             </c-button>
                         </div>

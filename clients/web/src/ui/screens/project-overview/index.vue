@@ -44,7 +44,7 @@
                         <span>Configure Campaign</span>
                     </a>
                     <h2 class="title">Crowdfunding campaign</h2>
-                    <c-btn-fav
+                    <c-button-fav
                         target="wishlist"
                         :active="!!wishlist[project.id]"
                         @click="$store.dispatch(
@@ -160,7 +160,7 @@
             'c-contribute-pledge': (resolve) => require(['@/ui/components/contribute/pledge.vue'], resolve),
             'c-badges': (resolve) => require(['@/ui/components/project/badges'], resolve),
             'c-decentralization-meter': (resolve) => require(['@/ui/components/decentralization-meter'], resolve),
-            'c-btn-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve),
+            'c-button-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve),
         },
         data() {
             return {

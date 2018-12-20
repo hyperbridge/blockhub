@@ -93,9 +93,9 @@ export const initApp = () => {
         if (process.platform == 'win32') {
             // Keep only command line / deep linked arguments
             deeplinkUri = commandLine.slice(1)
+            log("[BlockHub] app.makeSingleInstance # " + deepLinkUri)
         }
 
-        log("[BlockHub] app.makeSingleInstance # " + deepLinkUri)
 
         // Someone tried to run a second instance, we should focus our window.
         if (Windows.main) {

@@ -246,7 +246,7 @@
                         </div>
                     </div>
 
-                    <c-button class="c-btn-lg outline-white margin-top-20 margin-auto" @click="startImport">GO</c-button>
+                    <c-button class="c-button--lg outline-white margin-top-20 margin-auto" @click="startImport">GO</c-button>
                 </div>
                 <br />
                 <div class="padding-40 loading-process" style="position: relative" v-if="importing">

@@ -90,21 +90,21 @@ const withTimeout = (millis, promise, originalReject) => {
 export const getCurrentAccount = async (web3) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const currentAccounts = await withTimeout(5000, web3.eth.getAccountsPromise(), () => {
-                console.log('Could not connect to Ethereum network')
-                return reject('Could not connect to Ethereum network')
-            })
-
-            resolve({
-                address: currentAccounts[0],
-                privateKey: web3.currentProvider.wallets[currentAccounts[0].toLowerCase()]._privKey.toString('hex')
-            })
-            // web3.eth.getAccounts((err, currentAccounts) => {
-            //     resolve({
-            //         address: currentAccounts[0],
-            //         privateKey: web3.currentProvider.wallets[currentAccounts[0].toLowerCase()]._privKey.toString('hex')
-            //     })
+            // const currentAccounts = await withTimeout(5000, web3.eth.getAccountsPromise(), () => {
+            //     console.log('Could not connect to Ethereum network')
+            //     return reject('Could not connect to Ethereum network')
             // })
+
+            // resolve({
+            //     address: currentAccounts[0],
+            //     privateKey: web3.currentProvider.wallets[currentAccounts[0].toLowerCase()]._privKey.toString('hex')
+            // })
+            web3.eth.getAccounts((err, currentAccounts) => {
+                resolve({
+                    address: currentAccounts[0],
+                    privateKey: web3.currentProvider.wallets[currentAccounts[0].toLowerCase()]._privKey.toString('hex')
+                })
+            })
         } catch(e) {
             console.log(e)
         }

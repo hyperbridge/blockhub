@@ -212,7 +212,7 @@
 
                         <br /><br />
 
-                        <c-button class="c-btn-lg outline-white margin-top-20" @click="$store.commit('application/convertCurator', { profile: activeProfile })">Convert to Curator</c-button>
+                        <c-button class="c-button--lg outline-white margin-top-20" @click="$store.commit('application/convertCurator', { profile: activeProfile })">Convert to Curator</c-button>
                     </div>
                 </template>
                 <p slot="footer">
@@ -800,7 +800,7 @@
     .slide-chooser {
         margin-bottom: 50px;
 
-        .c-btn {
+        .c-button {
             background: transparent;
             opacity: 0.5;
             color: #fff;

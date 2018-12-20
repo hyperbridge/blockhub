@@ -206,7 +206,7 @@
             text-align: center;
             display: inline-block;
         }
-        .c-btn{
+        .c-button{
             float: right;
             width: 90px;
         }

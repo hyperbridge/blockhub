@@ -111,7 +111,7 @@
         position: relative;
         z-index: 999;
         display: inline-flex;
-        .c-btn{
+        .c-button{
             line-height: 26px;
             i{
                 transition: all 200ms ease-in-out;

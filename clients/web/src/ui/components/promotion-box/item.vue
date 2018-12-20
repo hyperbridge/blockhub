@@ -84,7 +84,7 @@ export default {
         color: #fff;
         width: calc(80% - 40px);
     }
-    .c-btn {
+    .c-button {
         font-size: 16px;
         padding: 8px 13px !important;
         text-transform: uppercase;

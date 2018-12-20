@@ -172,17 +172,17 @@
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
-                    <h2>Developer Area</h2>
+                    <h2>Business Manager</h2>
                     <ul>
-                        <li><a href="#/developer">Developer Area</a></li>
+                        <li><a href="#/business">Business Manager</a></li>
                         <li><a href="#/business/product/new">Developer > New Product</a></li>
                         <li><a href="#/business/asset/new">Developer > New Digital Asset</a></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
-                    <h2>Business Manager</h2>
+                    <h2>Admin</h2>
                     <ul>
-                        <li><a href="#/business">Business Manager</a></li>
+                        <li><a href="#/admin">Admin</a></li>
                     </ul>
                 </div>
             </div>

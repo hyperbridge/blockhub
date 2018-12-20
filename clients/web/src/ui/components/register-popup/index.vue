@@ -126,7 +126,7 @@
         watch: {
             '$store.state.application.signedIn'(newVal) {
                 if (newVal === true) {
-                    this.$router.push({ path: '/' })
+                    //this.$router.push({ path: '/' })
                 }
             }
         },

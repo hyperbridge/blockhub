@@ -67,10 +67,10 @@
                     </div>
                 </div>
                 <div class="game-installer__footer">
-                    <a href="#" class="c-btn btn-cancel">
+                    <a href="#" class="c-button btn-cancel">
                         Cancel
                     </a>
-                    <a href="#" class="c-btn btn-download">
+                    <a href="#" class="c-button btn-download">
                         <i class="fas fa-download"></i> Install
                     </a>
                 </div>
@@ -244,7 +244,7 @@
         border-top: 1px solid rgba(255, 255, 255, .1);
         justify-content: space-between;
         align-items: center;
-        .c-btn{
+        .c-button{
             padding: 2px 20px;
             border-radius: 3px;
             color: #fff;

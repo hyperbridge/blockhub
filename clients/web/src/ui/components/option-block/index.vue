@@ -34,7 +34,7 @@
                 <c-button status="opacity-info" @click="$emit('gift')" class="my-2" size="xl" style="border-radius: 2px">
                     Gift
                 </c-button>
-                <c-btn-fav
+                <c-button-fav
                     @click="$emit('addToWishlist')"
                     target="Wishlist"
                     :active="inWishlist"
@@ -70,7 +70,7 @@
             }
         },
         components: {
-            'c-btn-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve),
+            'c-button-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve),
             'c-option-list-item': (resolve) => require(['@/ui/components/option-block/list-item'], resolve)
         },
         methods:{

@@ -4,7 +4,7 @@ import store from '../store'
 
 Vue.use(Router)
 
-const appVersion = '0.7.1'
+const appVersion = '0.8.0'
 
 const router = new Router({
     //mode: 'history',
@@ -774,6 +774,27 @@ const router = new Router({
             path: '/chest',
             name: 'Chest',
             component: (resolve) => require(['@/ui/screens/chest'], resolve)
+        },
+        {
+            path: '/admin',
+            name: 'Admin',
+            component: (resolve) => require(['@/ui/screens/business'], resolve),
+            meta: {
+                area: 'business',
+            },
+            children: [
+                {
+                    path: '',
+                    name: 'Admin',
+                    component: (resolve) => require(['@/ui/screens/admin-home'], resolve),
+                    meta: {
+                        title: 'Admin',
+                        breadcrumb: [
+                            { path: '/admin', title: 'Dashboard' },
+                        ]
+                    }
+                }
+            ]
         },
         {
             path: '/business',

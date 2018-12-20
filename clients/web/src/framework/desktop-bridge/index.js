@@ -271,8 +271,6 @@ export const runCommand = async (cmd, meta = {}) => {
             local.router.push(cmd.data)
         } else {
             console.warn('[Bridge] Unhandled command:', cmd)
-
-            return // reject()
         }
 
         return resolve(await sendCommand('response', null, meta.client, cmd.requestId))

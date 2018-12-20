@@ -40,8 +40,8 @@
                     :showBackground="false"
                 />
                 <div class="profile-chooser__actions">
-                    <c-button class="profile-chooser__back-button c-btn-lg outline-white" @click="closeProfileChooser">Back</c-button>
-                    <c-button class="profile-chooser__ok-button c-btn-lg outline-white" @click="closeProfileChooser">OK</c-button>
+                    <c-button class="profile-chooser__back-button c-button--lg outline-white" @click="closeProfileChooser">Back</c-button>
+                    <c-button class="profile-chooser__ok-button c-button--lg outline-white" @click="closeProfileChooser">OK</c-button>
                 </div>
             </div>
         </div>

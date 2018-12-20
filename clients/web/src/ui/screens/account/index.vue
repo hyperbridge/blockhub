@@ -164,7 +164,7 @@
                                         :rating="product.rating.overall"
                                         :developer="product.developer"
                                     />
-                                    <c-btn-fav
+                                    <c-button-fav
                                         @click="$store.dispatch(
                                             'community/updateWishlist',
                                             ['product', product.id]
@@ -194,7 +194,7 @@
                                         :image="project.images[0]"
                                         :funds="project.funds"
                                     />
-                                    <c-btn-fav
+                                    <c-button-fav
                                         target="wishlist"
                                         :active="true"
                                         @click="$store.dispatch(
@@ -226,7 +226,7 @@
             'c-tabs': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve),
             'c-tab': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve),
             'c-game-includes-item': (resolve) => require(['@/ui/components/game-series/game-includes-item'], resolve),
-            'c-btn-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve),
+            'c-button-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve),
             'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
         },
         data() {
