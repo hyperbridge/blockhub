@@ -33,6 +33,7 @@
                 <c-icon v-for="(item, index) in fixedItems"
                         :color="item"
                         :key="index"
+                        :index="index"
                         :withButton="true"
                         :link="item.link"
                         :image="item.image"

@@ -1,5 +1,5 @@
 <template>
-    <div class="shortcut-icon" :class="{'icon-active' : active }" :style="style" @mouseover=" show = true" @mouseleave=" show = false">
+    <div class="shortcut-icon" :class="{ 'icon-active' : active }" :style="style" @mouseover="show = true" @mouseleave="show = false">
         <i v-if="withButton && !icon && removable"
            class="icon-delete-btn fa fa-times"
            @mousedown="remove"/>

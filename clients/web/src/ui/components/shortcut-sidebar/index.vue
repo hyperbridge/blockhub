@@ -21,6 +21,7 @@
                         :withButton="true"
                         :image="props.item.image"
                         :text="props.item.text"
+                        :link="props.item.link"
                         :eventKey="props.item.eventKey"
                         :eventValue="props.item.eventValue"
                         :icon="props.item.icon"
