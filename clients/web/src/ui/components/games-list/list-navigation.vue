@@ -1,7 +1,10 @@
 <template>
     <div class="games-navigation">
         <ul>
-            <li v-for="item in list" @click="$emit('click', item.id)" :key="`ListItem${item.id}`">
+            <li v-for="item in list"
+                :class="{ 'active' : activeId == item.id }"
+                @click="chooseGame(item.id)"
+                :key="`ListItem${item.id}`">
                 {{ item.name }}
             </li>
         </ul>
@@ -11,7 +14,13 @@
 <script>
     export default {
         props:{
-            list: [ Array, Object ]
+            list: [ Array, Object ],
+            activeId: [ String, Number ]
+        },
+        methods:{
+            chooseGame(id){
+                this.$emit('choose', id)
+            }
         }
     }
 </script>
@@ -30,12 +39,25 @@
                 color: #fff;
                 font-size: 16px;
                 border-left: 3px solid transparent;
+                overflow: hidden;
+                position: relative;
+                &:after{
+                    position: absolute;
+                    top: 0;
+                    right: -3px;
+                    bottom: 0;
+                    box-shadow: 0 0 6px rgba(0, 0, 0, .8);
+                    width: 3px;
+                }
                 &:hover,
                 &.active{
                     border-color: #595877;
                     background: rgba(255, 255, 255, .05);
                     color: #fff;
                     cursor: pointer;
+                    &:after{
+                        content: "";
+                    }
                 }
             }
         }

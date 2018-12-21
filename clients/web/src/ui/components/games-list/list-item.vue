@@ -1,0 +1,240 @@
+<template>
+    <div class="games-list">
+        <div class="games-list__item" :style="`background-image:url('${game.image}')`">
+            <div class="games-list__item-wrapper">
+                <div class="games-list__item-link">
+                    <i class="fas fa-external-link-alt"></i>
+                </div>
+                <div class="games-list__item-head">
+                    <div>
+                        <div class="h2 display-4 games-list__title">
+                            {{ game.name }}
+                        </div>
+                        <div class="h5 games-list__sub-title">
+                            {{ game.sub_name }}
+                        </div>
+                    </div>
+                    <c-button status="second-info" icon="play" class="margin-top-15" size="xl">
+                        Play Now
+                    </c-button>
+                </div>
+                <div class="games-list__item-body">
+                    <div class="game-achievements margin-bottom-60">
+                        <div class="game-achievements__ttl">
+                            <i class="fas fa-trophy"></i>
+                            <span class="ttl">Achievements</span>
+                            <span>you earned recently</span>
+                        </div>
+                        <div class="game-achievements__list">
+                            <div class="game-achievements__list-item">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="game-achievements__list-item">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="game-achievements__list-item">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="game-achievements__list-item">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="game-achievements__list-item">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="game-achievements__list-item">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="game-achievements__list-item">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="game-achievements__list-item">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-downloadable-list">
+                        <div class="game-downloadable-list__ttl">
+                            <i class="fas fa-plus-circle"></i>
+                            <span class="ttl">Downloadable Content</span>
+                            <span>for this game</span>
+                        </div>
+                        <div class="game-downloadable-list__list">
+                            <div class="game-downloadable-list__list-item" v-for="item in game.download_content" v-if="game.download_content">
+                                <div>
+                                    {{ item.name }}
+                                </div>
+                                <div class="item-action">
+                                        <span>
+                                            $ {{ item.price }}
+                                        </span>
+                                    <c-button status="opacity-success" size="xs" v-if=" item.price == 'free' || 'Free'">
+                                        Install
+                                    </c-button>
+                                    <c-button status="opacity-success" size="xs" v-else>
+                                        Buy
+                                    </c-button>
+                                </div>
+                            </div>
+                            <div v-else>
+                                Nothing to show!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        props:{
+            game: Object
+        }
+    }
+</script>
+
+<style lang="scss" scoped>
+    .games-list{
+        display: flex;
+        width: 100%;
+    }
+    .games-list__item{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        position: relative;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: top center;
+        border: 3px solid #484760;
+        overflow: hidden;
+    }
+    .games-list__item-wrapper{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        padding: 40px 35px 35px;
+        background: rgba(61, 62, 93, .85);
+    }
+    .games-list__item-link{
+        color: #fff;
+        opacity: .5;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 16px;
+        &:hover{
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
+    .games-list__item-head{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: flex-start;
+        color: #fff;
+        margin-bottom: 30px;
+    }
+    .games-list__sub-title{
+        color: #636377;
+    }
+    .game-achievements{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 30px 0;
+    }
+    .game-achievements__ttl{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        font-size: 14px;
+        color: #636377;
+        .ttl{
+            color: #0f85ca;
+            margin: 0 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 15px;
+        }
+    }
+    .game-achievements__list{
+        display: flex;
+        width: 100%;
+        margin-top: 20px;
+    }
+    .game-achievements__list-item{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, .1);
+        border: 1px solid rgba(255, 255, 255, .3);
+        border-radius: 5px;
+        margin-right: 10px;
+        font-size: 20px;
+        opacity: .5;
+        .fa-trophy{
+            color: #fff;
+            opacity: .3;
+        }
+        &:hover{
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
+
+    .game-downloadable-list{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 30px 0 0;
+    }
+    .game-downloadable-list__ttl{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        font-size: 14px;
+        color: #636377;
+        .ttl{
+            color: #0f85ca;
+            margin: 0 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 15px;
+        }
+    }
+    .game-downloadable-list__list{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 20px;
+    }
+    .game-downloadable-list__list-item{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
+        color: #fff;
+        font-size: 14px;
+        .item-action{
+            background: rgba(0, 0, 0, .3);
+            padding: 4px 5px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 125px;
+            span{
+                text-align: center;
+                width: 70%;
+            }
+        }
+    }
+</style>

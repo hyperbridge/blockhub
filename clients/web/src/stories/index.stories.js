@@ -5478,38 +5478,72 @@ storiesOf('Chat', module)
 storiesOf('Games list', module)
     .add('base', () => ({
         components:{
-            'c-game-tab': (resolve) => require(['@/ui/components/games-list/index'], resolve),
-            'c-games-navigation': (resolve) => require(['@/ui/components/games-list/list-navigation'], resolve)
+            'c-game-list': (resolve) => require(['@/ui/components/games-list/index'], resolve)
         },
         data(){
             return{
-                list:[
+                games:[
                     {
                         id: '1',
                         name: 'Game Of Thor',
+                        sub_name: 'Legendary Edition',
+                        image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
+                        download_content:[
+                            {
+                                name: 'DragonBore',
+                                price: '3.99'
+                            },
+                            {
+                                name: 'Hearthfire',
+                                price: '6.99'
+                            },
+                            {
+                                name: 'Hight Resultation Texture Pack',
+                                price: '13.99'
+                            },
+                            {
+                                name: 'Dawnguard',
+                                price: '13.99'
+                            }
+                        ]
                     },
                     {
                         id: '2',
                         name: 'CS GO: Advanced',
+                        sub_name: 'Gold Edition',
+                        image: 'https://img3.akspic.ru/image/43286-monohromnyj-monoxromnyj_rejim-videoigra-voennosluzhashhie-protivogaz-1920x1080.jpg',
+                        download_content:[
+                            {
+                                name: 'M16-2',
+                                price: '0.99'
+                            },
+                            {
+                                name: 'AK-74',
+                                price: '3.99'
+                            },
+                            {
+                                name: 'GOLD AWP',
+                                price: '193.99'
+                            }
+                        ]
                     },
                     {
                         id: '3',
                         name: 'DOTA II',
+                        sub_name: '',
+                        image: 'https://i.pinimg.com/originals/66/36/5e/66365e390b9edf68991820fd11da9c0b.jpg'
                     },
                     {
                         id: '4',
                         name: 'Assassins Creed',
+                        sub_name: '',
+                        image: 'https://i.pinimg.com/originals/ce/51/f6/ce51f6e88f1a81dfb5d5621f7ac56762.jpg'
                     }
                 ]
             }
         },
         template: `<div class="row p-3 m-0 flex-wrap" style="width: 1000px">
-                    <div class="col-3 p-0">
-                        <c-games-navigation :list="list" />
-                    </div>
-                    <div class="col-9 p-0">
-                        <c-game-tab />
-                    </div>
+                    <c-game-list :games="games" />
                 </div>`
     }))
 
