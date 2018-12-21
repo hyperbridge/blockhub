@@ -123,4 +123,18 @@
         max-height: 60vh;
         /*margin: 20px 0;*/
     }
+    .c-basic-popup__footer{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 30px;
+        .c-button{
+            &.color-red{
+                color: #F75D5D;
+                &:hover{
+                    color: #cb4d4d;
+                }
+            }
+        }
+    }
 </style>

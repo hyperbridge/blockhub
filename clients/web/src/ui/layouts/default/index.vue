@@ -289,6 +289,78 @@
             </c-basic-popup>
 
 
+            <c-basic-popup
+                :activated="$store.state.application.activeModal === 'withdraw'"
+                @close="$store.state.application.activeModal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">Withdraw</div>
+                <template slot="body">
+                    <div>
+                        <p>Current Profile: {{ activeProfile.name }}</p>
+                        <p style="text-align: center">{{ activeProfile.address }}</p>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <select class="form-control actionWithSelected" tabindex="-1" aria-hidden="true" v-model="withdrawRequest.type">
+                                        <option></option>
+                                        <option value="ETH">ETH</option>
+                                        <option value="HBX">HBX</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Amount</label>
+                                    <input type="text" class="form-control" placeholder="Amount" v-model="withdrawRequest.amount">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" placeholder="Address" v-model="withdrawRequest.address">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <p slot="footer">
+                    <c-button status="plain" class="color-red">
+                        Cancel
+                    </c-button>
+                    <c-button status="second-info" class="ml-3">
+                        Submit
+                    </c-button>
+                </p>
+            </c-basic-popup>
+
+
+            <c-basic-popup
+                :activated="$store.state.application.activeModal === 'deposit'"
+                @close="$store.state.application.activeModal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">Deposit</div>
+                <template slot="body">
+                    <div>
+                        xxxxxxx
+                    </div>
+                </template>
+                <p slot="footer">
+                    <c-button status="plain" class="color-red">
+                        Cancel
+                    </c-button>
+                    <c-button status="second-info" class="ml-3">
+                        Done
+                    </c-button>
+                </p>
+            </c-basic-popup>
 
             <c-cookie-policy v-if="!desktopMode" />
 
@@ -415,6 +487,11 @@
                 reportCoords: null,
                 breadcrumbLinksData: this.breadcrumbLinks,
                 shortcutItems: [],
+                withdrawRequest: {
+                    type: 'ETH',
+                    amount: 0,
+                    address: null
+                },
                 dragOptions: {
                     dropzoneSelector: '.does-not-exist',
                     draggableSelector: 'a',
@@ -536,6 +613,23 @@
             this.checkScrollButton();
         },
         methods: {
+            deposit() {
+
+            },
+            withdraw() {
+                const type = 'ETH'
+                const destinationAddress = this.$refs.destinationAddress.value
+                const amount = Number(this.$refs.amount.value)
+
+                Bridge.sendCommand('transferToken', {
+                    type,
+                    destinationAddress,
+                    amount,
+                    walletIndex
+                }).then(() => {
+                    console.log('Done')
+                })
+            },
             onSwipeLeft() {
                 this.showRightPanel = true
             },

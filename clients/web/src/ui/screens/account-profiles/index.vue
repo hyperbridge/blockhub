@@ -5,12 +5,25 @@
                 <c-heading-bar name="My Profile" :showArrows="false" :showBackground="false"/>
             </div>
             <div class="col-12 col-md-6 col-lg-4 my_profile">
-                <c-user-card
-                    v-if="activeProfile"
-                    :user="activeProfile"
-                    @updateProfile="(prop, val) => activeProfile[prop] = val"
-                    :previewMode="true"
-                />
+                <div 
+                    v-if="activeProfile">
+                    <c-user-card
+                        :user="activeProfile"
+                        @updateProfile="(prop, val) => activeProfile[prop] = val"
+                        :previewMode="true"
+                    />
+                    <br />
+                    <c-button
+                        status="info"
+                        icon="download"
+                        @click="$store.commit('application/activateModal', 'deposit')"
+                    >Deposit</c-button>
+                    <c-button
+                        status="info"
+                        icon="upload"
+                        @click="$store.commit('application/activateModal', 'withdraw')"
+                    >Withdraw</c-button>
+                </div>
                 <p v-else-if="!profiles.length">
                     You don't have any profiles yet.
                 </p>
@@ -40,11 +53,6 @@
         </div>
         <div class="row">
             <div class="col-12 mb-4">
-                <c-button
-                    status="info"
-                    icon="user-plus"
-                    @click="createProfile"
-                > New Profile</c-button>
             </div>
 
             <div class="col-12">
@@ -66,6 +74,13 @@
                             placeholder="Search"
                             v-model="filterPhrase"
                         />
+                    </div>
+                    <div class="additional-action margin-left-10" slot="additional-action">
+                        <c-button
+                            status="outline-white"
+                            icon="user-plus"
+                            @click="createProfile"
+                        >New Profile</c-button>
                     </div>
                 </c-heading-bar>
             </div>
