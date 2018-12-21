@@ -80,7 +80,9 @@
         </div>
 
         <div class="col-12">
-            <div class="h5" @click="toggleAdvanced">
+            <c-heading-bar-color class="mt-4 mb-4" colorCode="#444" textAlign="center">Advanced Options</c-heading-bar-color>
+
+            <div @click="toggleAdvanced">
                 <i class="mr-2 fas" :class="advanced ? 'fa-angle-up' : 'fa-angle-down'"></i>
                 {{ advanced ? 'Hide' : 'Show' }} Advanced
             </div>
@@ -91,7 +93,6 @@
         </div>
 
         <div class="col-md-6" v-if="advanced">
-
             <div class="form-group row">
                 <div class="col-sm-3">
                     <label>Support Email</label>
@@ -124,6 +125,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-6" v-if="advanced">
             <div class="form-group row">
                 <div class="col-sm-1">
@@ -200,6 +202,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-12" v-if="advanced">
             <div class="form-group row" style="text-align: center">
                 <br />
@@ -209,6 +212,7 @@
                 <c-json-editor :objData="project" v-model="project" style="margin: 0 auto"></c-json-editor>
             </div>
         </div>
+
         <div class="col-12" hidden>
             <div class="row" v-darklaunch="'GOVERNANCE'">
                 <div class="col-12">
@@ -217,6 +221,28 @@
                 <div class="col-4">
                     <i class="fas first-order" />
                 </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <c-heading-bar-color class="mt-4 mb-4" colorCode="#444" textAlign="center">Blockchain Options</c-heading-bar-color>
+
+            <div v-if="blockchain">
+                <p>Project found. ID: {{ blockchain.id }}</p>
+
+                <c-button status="outline-info" @click="updateBlockchain">
+                    Update
+                </c-button>
+            </div>
+
+            <div v-if="!blockchain">
+                <strong>Project not found within Funding Protocol.</strong>
+                <c-button status="outline-info" size="sm" @click="syncBlockchain">
+                    Sync
+                </c-button> 
+                <c-button status="outline-info" size="sm" @click="createBlockchain">
+                    Deploy
+                </c-button>
             </div>
         </div>
 
@@ -259,6 +285,7 @@
                 notice: "",
                 advanced: false,
                 project: project,
+                blockchain: false,
                 tagOptions: []
             }
         },
@@ -283,6 +310,178 @@
             }
         },
         methods: {
+            syncBlockchain() {
+
+            },
+            createBlockchain() {
+                const run = function(
+                    local, 
+                    DB,
+                    Bridge,
+                    FundingAPI, 
+                    MarketplaceAPI, 
+                    TokenAPI, 
+                    ReserveAPI, 
+                    BABEL_PROMISE,
+                    BABEL_GENERATOR,
+                    BABEL_REGENERATOR,
+                    params
+                ) {
+                    const { project, profile } = params
+                    
+                    return new Promise(async (resolve, reject) => {
+                        const projectRegistrationContract = FundingAPI.api.ethereum.state.contracts.ProjectRegistration.deployed
+
+                        let created = false
+
+                        const watcher = projectRegistrationContract.ProjectCreated().watch((err, res) => {
+                            if (created) return
+
+                            created = true
+
+                            if (err) {
+                                console.warn('[BlockHub][Marketplace] Error', err)
+
+                                return reject(err)
+                            }
+
+                            project.$loki = undefined
+                            project.id = res.args.projectId.toNumber()
+
+                            try {
+                                DB.funding.projects.insert(project)
+                                console.log('after', project.id)
+                            } catch (e) {
+                                try {
+                                    DB.funding.projects.update(project)
+                                } catch (e) {
+                                    reject(e)
+                                }
+                            }
+
+                            DB.save()
+
+                            Bridge.sendCommand('updateState', {
+                                module: 'funding',
+                                state: {
+                                    projects: DB.funding.projects.data
+                                }
+                            })
+
+                            console.log('Project created')
+
+                            resolve(project)
+                        })
+
+                        await projectRegistrationContract.createProject(
+                            project.name,
+                            project.description,
+                            project.content,
+                            { from: profile.address }
+                        )
+
+                        watcher.stopWatching(() => {
+                            // Must be async or tries to launch nasty process
+                        })
+                    })
+                }
+
+                const cmd = {
+                    key: run.toString(),
+                    params: {
+                        profile: this.$store.state.application.activeProfile,
+                        project: this.project
+                    }
+                }
+
+                BlockHub.Bridge.sendCommand('eval', cmd).then((projectResult) => {
+                    if (projectResult.id) {
+                        this.project.id = projectResult.id
+                        this.successfulCreationMessage = "Congratulations, your project has been created!"
+
+                        this.funding.projects[this.project.id] = this.project
+
+                        this.$router.push('/business/project/' + this.project.id)
+                    }
+                })
+            },
+            updateBlockchain() {
+                const run = function(
+                    local, 
+                    DB,
+                    Bridge,
+                    FundingAPI, 
+                    MarketplaceAPI, 
+                    TokenAPI, 
+                    ReserveAPI, 
+                    BABEL_PROMISE,
+                    BABEL_GENERATOR,
+                    BABEL_REGENERATOR,
+                    params
+                ) {
+                    return new Promise(async () => {
+                        const project = {
+                            title: 'test',
+                            description: 'test',
+                            about: 'test',
+                            minContributionGoal: 1000,
+                            maxContributionGoal: 10000,
+                            contributionPeriod: 4,
+                            noRefunds: false,
+                            noTimeline: true,
+                        }
+
+                        const projectRegistrationContract = FundingAPI.api.ethereum.state.contracts.ProjectRegistration.deployed
+
+                        let resProjectId = null
+                        const getProjectId = new Promise((res) => {
+                            resProjectId = res
+                        })
+
+                        const watcher = projectRegistrationContract.ProjectCreated().watch((err, res) => {
+                            if (err) {
+                                console.warn('[BlockHub][Funding] Error', err)
+
+                                return reject(err)
+                            }
+
+                            project.$loki = undefined
+                            project.id = res.args.projectId.toNumber()
+
+                            try {
+                                DB.funding.projects.insert(project)
+                            } catch (e) {
+                                try {
+                                    DB.funding.projects.update(project)
+                                } catch (e) {
+                                    reject(e)
+                                }
+                            }
+
+                            resProjectId(project.id)
+                        })
+
+                        await projectRegistrationContract.createProject(
+                            project.title,
+                            project.description,
+                            project.about,
+                        )
+
+                        watcher.stopWatching()
+
+                        const projectId = await getProjectId
+
+                        await projectRegistrationContract.setProjectContributionGoals(projectId, project.minContributionGoal, project.maxContributionGoal, project.contributionPeriod, { from: developerAccount });
+                        await projectRegistrationContract.setProjectTerms(projectId, project.noRefunds, project.noTimeline, { from: developerAccount });
+
+                        const remoteProject = await projectRegistrationContract.getProject(projectId);
+
+                        console.log(remoteProject)
+                    })
+                }
+
+                BlockHub.Bridge.sendCommand('eval', run.toString())
+            },
             addTag (newTag) {
                 const tag = {
                     key: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000)),
@@ -308,97 +507,6 @@
                     this.$router.push('/business/project/' + this.project.id)
                 })
 
-                // const run = function(
-                //     local, 
-                //     DB,
-                //     Bridge,
-                //     FundingAPI, 
-                //     MarketplaceAPI, 
-                //     TokenAPI, 
-                //     ReserveAPI, 
-                //     BABEL_PROMISE,
-                //     BABEL_GENERATOR,
-                //     BABEL_REGENERATOR,
-                //     params
-                // ) {
-                //     const { project, profile } = params
-                    
-                //     return new Promise(async (resolve, reject) => {
-                //         const projectRegistrationContract = FundingAPI.api.ethereum.state.contracts.ProjectRegistration.deployed
-
-                //         let created = false
-
-                //         const watcher = projectRegistrationContract.ProjectCreated().watch((err, res) => {
-                //             if (created) return
-
-                //             created = true
-
-                //             if (err) {
-                //                 console.warn('[BlockHub][Marketplace] Error', err)
-
-                //                 return reject(err)
-                //             }
-
-                //             project.$loki = undefined
-                //             project.id = res.args.projectId.toNumber()
-
-                //             try {
-                //                 DB.funding.projects.insert(project)
-                //                 console.log('after', project.id)
-                //             } catch (e) {
-                //                 try {
-                //                     DB.funding.projects.update(project)
-                //                 } catch (e) {
-                //                     reject(e)
-                //                 }
-                //             }
-
-                //             DB.save()
-
-                //             Bridge.sendCommand('updateState', {
-                //                 module: 'funding',
-                //                 state: {
-                //                     projects: DB.funding.projects.data
-                //                 }
-                //             })
-
-                //             console.log('Project created')
-
-                //             resolve(project)
-                //         })
-
-                //         await projectRegistrationContract.createProject(
-                //             project.name,
-                //             project.description,
-                //             project.content,
-                //             { from: profile.address }
-                //         )
-
-                //         watcher.stopWatching(() => {
-                //             // Must be async or tries to launch nasty process
-                //         })
-                //     })
-                // }
-
-                // const cmd = {
-                //     key: run.toString(),
-                //     params: {
-                //         profile: this.$store.state.application.activeProfile,
-                //         project: this.project
-                //     }
-                // }
-
-                // BlockHub.Bridge.sendCommand('eval', cmd).then((projectResult) => {
-                //     if (projectResult.id) {
-                //         this.project.id = projectResult.id
-                //         this.successfulCreationMessage = "Congratulations, your project has been created!"
-
-                //         this.funding.projects[this.project.id] = this.project
-
-                //         this.$router.push('/business/project/' + this.project.id)
-                //     }
-                // })
-
             },
             save() {
                 this.$store.dispatch('projects/update', [this.project.id, this.project, {
@@ -412,82 +520,6 @@
 
                     //this.$router.push('/business/project/' + this.project.id)
                 })
-
-                // const run = function(
-                //     local, 
-                //     DB,
-                //     Bridge,
-                //     FundingAPI, 
-                //     MarketplaceAPI, 
-                //     TokenAPI, 
-                //     ReserveAPI, 
-                //     BABEL_PROMISE,
-                //     BABEL_GENERATOR,
-                //     BABEL_REGENERATOR,
-                //     params
-                // ) {
-                //     return new Promise(async () => {
-                //         const project = {
-                //             title: 'test',
-                //             description: 'test',
-                //             about: 'test',
-                //             minContributionGoal: 1000,
-                //             maxContributionGoal: 10000,
-                //             contributionPeriod: 4,
-                //             noRefunds: false,
-                //             noTimeline: true,
-                //         }
-
-                //         const projectRegistrationContract = FundingAPI.api.ethereum.state.contracts.ProjectRegistration.deployed
-
-                //         let resProjectId = null
-                //         const getProjectId = new Promise((res) => {
-                //             resProjectId = res
-                //         })
-
-                //         const watcher = projectRegistrationContract.ProjectCreated().watch((err, res) => {
-                //             if (err) {
-                //                 console.warn('[BlockHub][Funding] Error', err)
-
-                //                 return reject(err)
-                //             }
-
-                //             project.$loki = undefined
-                //             project.id = res.args.projectId.toNumber()
-
-                //             try {
-                //                 DB.funding.projects.insert(project)
-                //             } catch (e) {
-                //                 try {
-                //                     DB.funding.projects.update(project)
-                //                 } catch (e) {
-                //                     reject(e)
-                //                 }
-                //             }
-
-                //             resProjectId(project.id)
-                //         })
-
-                //         await projectRegistrationContract.createProject(
-                //             project.title,
-                //             project.description,
-                //             project.about,
-                //         )
-
-                //         watcher.stopWatching()
-
-                //         const projectId = await getProjectId
-
-                //         await projectRegistrationContract.setProjectContributionGoals(projectId, project.minContributionGoal, project.maxContributionGoal, project.contributionPeriod, { from: developerAccount });
-                //         await projectRegistrationContract.setProjectTerms(projectId, project.noRefunds, project.noTimeline, { from: developerAccount });
-
-                //         const remoteProject = await projectRegistrationContract.getProject(projectId);
-
-                //         console.log(remoteProject)
-                //     })
-                // }
-
-                // BlockHub.Bridge.sendCommand('eval', run.toString())
             }
         },
     }
