@@ -18,14 +18,14 @@
             <template slot="cell" scope="props">
                 <c-icon :color="props.item"
                         :index="props.index"
-                        :with-button="true"
-                        :link="props.item.link"
+                        :withButton="true"
                         :image="props.item.image"
                         :text="props.item.text"
                         :eventKey="props.item.eventKey"
                         :eventValue="props.item.eventValue"
                         :icon="props.item.icon"
                         :removable="props.item.removable"
+                        :unread="props.item.unread"
                         :percent="props.item.percent"
                         :active="props.item.active"
                         @remove="props.remove()" />
@@ -67,9 +67,11 @@
                         "r": null,
                         "g": null,
                         "b": null,
-                        "image": "/static/img/icons/discord.png",
-                        "link": "#/",
-                        "text": "Go to Discord",
+                        "image": "/static/img/icons/twitch.png",
+                        "eventKey": "application/activateModal",
+                        "eventValue": "coming-soon",
+                        "unread": false,
+                        "text": "Go to Twitch",
                         "sort": 1,
                         "removable": false
                     },
@@ -77,9 +79,11 @@
                         "r": null,
                         "g": null,
                         "b": null,
-                        "image": "/static/img/icons/steam.png",
-                        "link": "#/",
-                        "text": "Go to Steam",
+                        "image": "/static/img/icons/discord.png",
+                        "eventKey": "application/activateModal",
+                        "eventValue": "coming-soon",
+                        "unread": false,
+                        "text": "Go to Discord",
                         "sort": 2,
                         "removable": false
                     },
@@ -87,10 +91,12 @@
                         "r": null,
                         "g": null,
                         "b": null,
-                        "image": "/static/img/icons/twitch.png",
-                        "link": "#/",
-                        "text": "Go to Twitch",
-                        "sort": 4,
+                        "image": "/static/img/icons/steam.png",
+                        "eventKey": "application/activateModal",
+                        "eventValue": "coming-soon",
+                        "unread": false,
+                        "text": "Go to Steam",
+                        "sort": 3,
                         "removable": false
                     },
                     {
@@ -98,7 +104,9 @@
                         "g": null,
                         "b": null,
                         "image": "/static/img/icons/instagram.png",
-                        "link": "#/",
+                        "eventKey": "application/activateModal",
+                        "eventValue": "coming-soon",
+                        "unread": false,
                         "text": "Go to Instagram",
                         "sort": 5,
                         "removable": false
@@ -108,7 +116,9 @@
                         "g": null,
                         "b": null,
                         "image": "/static/img/icons/youtube.png",
-                        "link": "#/",
+                        "eventKey": "application/activateModal",
+                        "eventValue": "coming-soon",
+                        "unread": false,
                         "text": "Go to Youtube",
                         "sort": 6,
                         "removable": false

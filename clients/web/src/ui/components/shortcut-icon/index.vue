@@ -15,7 +15,7 @@
                 {{ text }}
             </div>
         </transition>
-        <div class="shortcut-icon__ntf"></div>
+        <div class="shortcut-icon__new" v-if="unread"></div>
     </div>
 </template>
 
@@ -60,6 +60,10 @@
             removable: {
                 type: Boolean,
                 default: true
+            },
+            unread: {
+                type: Boolean,
+                default: false
             },
             color: {
                 type: Object,
@@ -223,7 +227,7 @@
             content: "";
         }
     }
-    .shortcut-icon__ntf{
+    .shortcut-icon__new{
         display: block;
         width: 8px;
         height: 8px;

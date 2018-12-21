@@ -7,6 +7,7 @@
         :class="[
             status, 'c-button--' + size ,
             { 'swap-direction': swapDirection },
+            { 'full': full },
             { 'centered': centered },
             { 'doubled': doubled },
             { 'no-shadow' : !shadow}
@@ -57,6 +58,10 @@
             swapOrder: Boolean,
             swapDirection: Boolean,
             doubled: Boolean,
+            full: {
+                type: Boolean,
+                default: false
+            },
             centered: {
                 type: Boolean,
                 default: false
@@ -124,6 +129,10 @@
         transition: all 200ms ease-in-out;
         span{
             white-space: nowrap;
+        }
+        &.full {
+            display: block;
+            width: 100%;
         }
         &.plain {
             box-shadow: unset;
