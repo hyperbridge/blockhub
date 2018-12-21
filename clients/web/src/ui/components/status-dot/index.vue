@@ -12,12 +12,11 @@
 
 <style lang="scss">
     .status-dot {
-        padding: 5px;
         cursor: pointer;
 
         .status-dot__icon {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 10px;
         }
 

@@ -82,9 +82,9 @@
             </transition>
             <!-- //END SIDEPANEL -->
 
-            <div class="status-bar" hidden>
+            <!-- <div class="status-bar" hidden>
                 {{ connectionStatus.message }}
-            </div>
+            </div> -->
 
 
             <c-welcome-popup :activated="$store.state.application.activeModal === 'welcome'" @close="$store.state.application.activeModal = null" />
@@ -366,7 +366,10 @@
 
             <c-clock v-if="desktopMode" />
 
-            <c-status-dot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" @click="$store.commit('application/activateModal', 'connection-status')" />
+            <div class="status-bar" @click="$store.commit('application/activateModal', 'connection-status')">
+                <c-status-dot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" /> 
+                Good
+            </div>
 
             <div class="version" v-if="desktopMode">v{{ $store.state.application.version }}</div>
         </div>
@@ -918,17 +921,6 @@
         }
     }
 
-    .status-bar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 10px;
-        background: #48171D;
-        border-top: 2px solid #48171D;
-        color: #fff;
-    }
-
     .clock {
         position: fixed;
         bottom: 20px;
@@ -936,11 +928,33 @@
         z-index: -1;
     }
 
-    .status-dot {
+    .status-bar {
+        display: flex;
+        justify-content: center;
         position: fixed;
-        bottom: 5px;
-        left: 25px;
+        bottom: 0;
+        left: 0;
+        width: 70px;
+        padding: 0 0 6px 0;
+        color: #fff;
         z-index: 120;
+        cursor: pointer;
+        // background: #191919;
+        // border-top: 2px solid #353535;
+
+        &.bad {
+            background: #48171D;
+            border-top: 2px solid #48171D;
+        }
+
+        &.expanded {
+            width: 100%;
+        }
+
+        .status-dot {
+            display: inline-block;
+            padding: 6px;
+        }
     }
 
     .quick-launch {
