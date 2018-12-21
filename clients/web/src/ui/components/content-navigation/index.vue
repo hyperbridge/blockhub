@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div v-if="loading">
+        <div class="col-12 text-center" v-if="loading">
             <c-spinner />
         </div>
-        <div v-else>
+        <template v-else>
             <div v-if="!visibleItems.length">
                 <p>No results</p>
             </div>
@@ -27,7 +27,7 @@
                 {{ itemsLeft ? 'Load More +' + itemsLeft : 'Show Less' }}
                 </c-load-more>
             </div>
-        </div>
+        </template>
     </div>
 </template>
 

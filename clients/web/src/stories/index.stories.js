@@ -2084,7 +2084,10 @@ storiesOf('Switch', module)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-switch :checked=true />
+             <c-switch :checked=true label="Label text" class="mr-5"/>
+             <c-switch :checked=true customLabel>
+                Custom label 
+            </c-switch>
          </div>
         `
     }))
@@ -2182,6 +2185,7 @@ storiesOf('Assets List', module)
 
 
 import Block from '../ui/components/block'
+import simpleBlock from '../ui/components/block/simple'
 
 storiesOf('Block', module)
     .add('default', () => ({
@@ -2198,6 +2202,22 @@ storiesOf('Block', module)
                 ut fringilla turpis dictum sit amet. Praesent quis lacus
                 ac tellus vehicula commodo sit amet sit amet ex.</p>
             </c-block>
+         </div>
+        `
+    }))
+    .add('simple', () => ({
+        components: {
+            'c-simple-block': simpleBlock
+        },
+        template: `
+         <div class="row m-0 p-3">
+            <div class="col-4">
+                 <c-simple-block image="https://bnetcmsus-a.akamaihd.net/cms/blog_thumbnail/od/ODPQGI4NN71N1544053040567.jpg" imgHeight="200px" hovered>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Suspendisse vel arcu sit amet erat vestibulum volutpat.
+                    Ut volutpat enim vel augue luctus luctus</p>
+                </c-simple-block>
+            </div>
          </div>
         `
     }))
@@ -5492,8 +5512,40 @@ storiesOf('Option Block', module)
         components:{
             'c-option-block': (resolve) => require(['@/ui/components/option-block'], resolve),
         },
+        data(){
+            return{
+                list: [
+                    {
+                        id: '23423',
+                        name: 'Digital Deluxe Edition',
+                        price: '99.99',
+                        image: 'https://bnetproduct-a.akamaihd.net//faa/1f29ed14601b9f480e4e37d75770b23a-upsell-bfa-dd.jpg',
+                    },
+                    {
+                        id: '134',
+                        name: 'Standard Edition',
+                        price: '32.99',
+                        image: 'https://bnetproduct-a.akamaihd.net//ffb/d843fb3f8393a4976d4c4beaceb1ca06-prod-thumb.jpg',
+                    },
+                    {
+                        id: '3564',
+                        name: 'Demo Edition',
+                        price: '19.99',
+                    }
+                ]
+            }
+        },
         template: `<div class="p-3 m-0 text-white" style="width: 400px">
-                        <c-option-block shadow />
+                        <c-option-block shadow 
+                        image="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"
+                        title="World of Warcraft®: Battle for Azeroth" 
+                        subtitle="Massively Multiplayer RPG"
+                        notification="Pre-Purchase now!"
+                        :list="list"
+                        @buy=""
+                        @gift=""
+                        @addToWishlist=""
+                         />
                     </div>`
     }))
 

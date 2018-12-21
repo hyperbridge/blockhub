@@ -532,7 +532,8 @@
             }
         },
         updated() {
-            this.userSubmittedConnectionMessage = this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))]
+            this.userSubmittedConnectionMessage = this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))];
+            this.checkScrollButton();
         },
         methods: {
             onSwipeLeft() {
@@ -633,6 +634,7 @@
         created() {
             window.addEventListener('resize', this.handleResize())
             this.handleResize();
+            this.checkScrollButton();
         },
         mounted() {
             this.updateBreadcrumbLinks()
@@ -842,8 +844,8 @@
 
     .status-dot {
         position: fixed;
-        bottom: 20px;
-        left: 20px;
+        bottom: 5px;
+        left: 25px;
         z-index: 120;
     }
 
@@ -1076,7 +1078,7 @@
     .left-sidebar__content{
         overflow-y: scroll;
         overflow-x: hidden;
-        height: calc(100% - 40px);
+        height: calc(100% - 55px);
     }
     .col-lg-6{
         @media (max-width: 1500px){
@@ -1093,6 +1095,7 @@
         padding: 10px;
         z-index: 99;
         background: rgba(0, 0, 0, 0.5);
+        bottom: 0;
         /*box-shadow: inset 0 0 3px #000;*/
     }
 

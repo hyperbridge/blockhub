@@ -1,9 +1,9 @@
 <template>
     <div class="switch-container">
-        <p v-if="!customLabel && label_position == 'left'" style="padding-right: 10px" :style="{ fontSize: label_size }">{{ label }}</p>
-        <p v-else-if="customLabel && label_position == 'left'" style="padding-right: 10px" :style="{ fontSize: label_size }">
-            <slot name="label"/>
-        </p>
+        <div class="label" v-if="!customLabel && label_position == 'left'" style="padding-right: 10px" :style="{ fontSize: label_size }">{{ label }}</div>
+        <div class="label" v-else-if="customLabel && label_position == 'left'" style="padding-right: 10px" :style="{ fontSize: label_size }">
+            <slot />
+        </div>
         <label class="switch my-0" :class="`switch-${size}`">
             <input
                 :id="id"
@@ -14,22 +14,20 @@
             />
             <span></span>
         </label>
-        <span
+        <div class="label"
             v-if="!customLabel && label_position == 'right'"
             style="padding-left: 10px"
             :style="{ fontSize: label_size }"
         >
-            <label :for="id" class="mb-0">
-                {{ label }}
-            </label>
-        </span>
-        <p
+            {{ label }}
+        </div>
+        <div class="label"
             v-else-if="customLabel && label_position == 'right'"
             style="padding-left: 10px"
             :style="{ fontSize: label_size }"
         >
-            <slot name="label"/>
-        </p>
+            <slot />
+        </div>
     </div>
 </template>
 
@@ -79,10 +77,26 @@
         display: inline-flex;
         width: auto;
         align-items: center;
-        /*color: #fff;*/
+        color: #fff;
         p {
             margin-bottom: 0;
             padding-bottom: 0;
+        }
+        .switch{
+            &.switch-sm{
+                height: 18px;
+                line-height: 18px;
+                span{
+                    height: 18px;
+                    &:after{
+                        width: 14px;
+                        height: 14px;
+                    }
+                }
+                input:checked + span:after{
+                    left: 17px;
+                }
+            }
         }
     }
 </style>

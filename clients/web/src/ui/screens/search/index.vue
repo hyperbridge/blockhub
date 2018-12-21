@@ -5,9 +5,9 @@
                 <h3>
                     SEARCH
                 </h3>
-                <div class="search__main row">
+                <div class="search__main">
                     <c-input-searcher
-                        class="col-12"
+                        class="w-100"
                         v-model="phrase"
                         placeholder="Search for games"
                         aria-placeholder="Search for games"
@@ -243,7 +243,7 @@
                 </transition>
                 <!-- <h3>Results</h3> -->
                 <div class="results__container">
-                    <div class="results">
+                    <!--<div class="results">-->
                         <c-content-navigation
                             class="row"
                             :loading="loading"
@@ -252,7 +252,7 @@
                             :setItemsPerPage="12"
                         >
                             <div
-                                class="p-2 col-3"
+                                class="p-2 col-12 col-md-6 col-lg-4 col-xl-3"
                                 v-for="(project, index) in resultsFiltered" 
                                 :key="index"
                             >
@@ -264,6 +264,7 @@
                                     :parentDeveloper="project.product && project.product.developer" 
                                     :parentImage="project.product && project.product.meta.images.mediumTile"
                                     :id="project.id"
+                                    class="p-0"
                                 />
                             </div>
                             <!-- <c-game-grid
@@ -278,7 +279,7 @@
                         </c-content-navigation>
                     </div>
                 </div>
-            </div>
+            <!--</div>-->
         </div>
     </c-layout>
 </template>
@@ -533,10 +534,6 @@
     .search__main {
         display: flex;
         align-items: center;
-        .input-searcher {
-            margin-right: 30px;
-            width: 300px;
-        }
         margin-bottom: 40px;
     }
 

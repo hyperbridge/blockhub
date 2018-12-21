@@ -79,7 +79,7 @@
                                         label_position="right"
                                         :customLabel="true"
                                     >
-                                        <template slot="label">
+                                        <template>
                                             I agree to the
                                             <c-button status="plain" @click="terms = true">terms</c-button> and
                                             <c-button status="plain" @click="privacy_policy = true">privacy policy</c-button>

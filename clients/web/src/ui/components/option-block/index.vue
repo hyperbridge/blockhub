@@ -2,19 +2,19 @@
     <div class="option-block" :class="{'box-shadow' : shadow }">
         <div class="option-block__head">
             <div class="option-block__head-logo">
-                <img src="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"/>
+                <img :src="image"/>
             </div>
             <div class="option-block__head-info">
                 <div class="h3">
-                    World of Warcraft®: Battle for Azeroth
+                    {{ title }}
                 </div>
                 <div>
-                    Massively Multiplayer RPG
+                    {{ subtitle }}
                 </div>
             </div>
         </div>
-        <div class="option-block__notification">
-            Pre-Purchase Now!
+        <div class="option-block__notification" :style="{'background-color' : ntfColor }">
+            {{ notification }}
         </div>
         <div class="option-block__body">
             <div class="option-block__list">
@@ -28,10 +28,10 @@
                 </c-option-list-item>
             </div>
             <div class="option-block__action-list">
-                <c-button status="second-info" class="my-2">
+                <c-button status="second-info" class="my-2" @click="$emit('buy')">
                     Buy now
                 </c-button>
-                <c-button status="opacity-info" class="my-2" size="xl" style="border-radius: 2px">
+                <c-button status="opacity-info" @click="$emit('gift')" class="my-2" size="xl" style="border-radius: 2px">
                     Gift
                 </c-button>
                 <c-button-fav
@@ -49,6 +49,12 @@
     export default {
         name: 'option-block',
         props:{
+            image: String,
+            title: String,
+            subtitle: String,
+            notification: String,
+            list: [ Array, Object ],
+            ntfColor: String,
             inWishlist: {
                 type: Boolean,
                 default: false
@@ -60,25 +66,6 @@
         },
         data(){
             return{
-                list: [
-                    {
-                        id: '23423',
-                        name: 'Digital Deluxe Edition',
-                        price: '99.99',
-                        image: 'https://bnetproduct-a.akamaihd.net//faa/1f29ed14601b9f480e4e37d75770b23a-upsell-bfa-dd.jpg',
-                    },
-                    {
-                        id: '134',
-                        name: 'Standard Edition',
-                        price: '32.99',
-                        image: 'https://bnetproduct-a.akamaihd.net//ffb/d843fb3f8393a4976d4c4beaceb1ca06-prod-thumb.jpg',
-                    },
-                    {
-                        id: '3564',
-                        name: 'Demo Edition',
-                        price: '19.99',
-                    }
-                ],
                 selectedId: ''
             }
         },

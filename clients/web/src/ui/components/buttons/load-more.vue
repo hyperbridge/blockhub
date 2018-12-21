@@ -34,6 +34,9 @@
             left: 70px;
             width: 230px;
         }
+        &:hover{
+            text-decoration: none;
+        }
     }
 
     .load-more__text {
@@ -61,6 +64,7 @@
         }
         &:hover {
             cursor: pointer;
+            text-decoration: none;
             &:before {
                 transform: translateX(-25px);
             }
