@@ -63,6 +63,9 @@
             .stream-item__img{
                 border-color: #71bce8;
             }
+            .stream-item__run-btn {
+                transform: scale(1.2);
+            }
         }
     }
     .stream-item__wrapper{
@@ -81,6 +84,8 @@
         width: 100%;
         /*border: 5px solid rgba(255, 255, 255, .1);*/
         transition: all 200ms ease-in-out;
+        border: 3px solid #000;
+        border-radius: 3px;
         img{
             width: 100%;
             height: 200px;
@@ -117,7 +122,6 @@
         background: linear-gradient(to bottom, rgba(94,187,241,1) 0%,rgba(22,165,241,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5ebbf1', endColorstr='#16a5f1',GradientType=0 ); /* IE6-9 */
         &:hover{
-            transform: scale(1.2);
         }
     }
     .stream-item__info{
