@@ -14,7 +14,7 @@
                             Legendary Edition
                         </div>
                     </div>
-                    <c-button status="info" icon="play" class="margin-top-15" size="xl">
+                    <c-button status="second-info" icon="play" class="margin-top-15" size="xl">
                         Play Now
                     </c-button>
                 </div>
@@ -172,7 +172,7 @@
         font-size: 14px;
         color: #636377;
         .ttl{
-            color: #096bb0;
+            color: #0f85ca;
             margin: 0 10px;
             text-transform: uppercase;
             font-weight: bold;
@@ -190,14 +190,19 @@
         justify-content: center;
         width: 60px;
         height: 60px;
-        background: rgba(255, 255, 255, .05);
-        border: 1px solid rgba(255, 255, 255, .2);
+        background: rgba(255, 255, 255, .1);
+        border: 1px solid rgba(255, 255, 255, .3);
         border-radius: 5px;
         margin-right: 10px;
         font-size: 20px;
+        opacity: .5;
         .fa-trophy{
             color: #fff;
-            opacity: .2;
+            opacity: .3;
+        }
+        &:hover{
+            opacity: 1;
+            cursor: pointer;
         }
     }
 
@@ -214,7 +219,7 @@
         font-size: 14px;
         color: #636377;
         .ttl{
-            color: #096bb0;
+            color: #0f85ca;
             margin: 0 10px;
             text-transform: uppercase;
             font-weight: bold;
@@ -232,7 +237,7 @@
         width: 100%;
         align-items: center;
         justify-content: space-between;
-        padding: 6px 0 6px 15px;
+        padding: 5px 0;
         border-bottom: 1px solid rgba(255, 255, 255, .1);
         color: #fff;
         font-size: 14px;
