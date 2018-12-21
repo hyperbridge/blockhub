@@ -16,7 +16,7 @@ const setCookie = (variable, value, expires_seconds) => {
   document.cookie = variable + '=' + value + '; expires=' + d.toGMTString() + ';';
 }
 
-setCookie('WEB_SERVICE_URL', 'http://localhost:9001')
+//setCookie('WEB_SERVICE_URL', 'http://localhost:9001')
 
 const socket = io(getCookie('WEB_SERVICE_URL') || 'https://api.blockhub.gg', { transports: ['websocket'] }) // https://api.blockhub.gg // http://localhost:9001
 

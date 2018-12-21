@@ -59,7 +59,7 @@
                         <slot />
                     </div>
                 </div>
-                <div class="content__bottom-menu">
+                <div class="content__bottom-menu" v-if="$slots['menu']">
                     <slot name="menu"></slot>
                 </div>
             </div>
@@ -146,10 +146,6 @@
                                 ]
                             }
                         ]
-                    },
-                    {
-                        header: true,
-                        title: 'Setting',
                     }
                 ]
             }
