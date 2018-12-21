@@ -63,7 +63,7 @@
             <c-community-spotlight class="margin-bottom-20" :discussions="product.community.discussions"
                                     :communityUrl="`#/product/${product.id}/community`" v-darklaunch="'COMMUNITY'" />
 
-            <c-block :title="`Official Networks`"
+            <c-block :title="`Official`"
                      :noGutter="true"
                      :bgGradient="true"
                      :onlyContentBg="true"

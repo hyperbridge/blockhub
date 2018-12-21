@@ -128,6 +128,11 @@
         }
         .list-item__link {
             border-bottom: 2px solid transparent;
+            color: rgba(255, 255, 255, 0.65);
+            &:hover {
+                text-decoration: none;
+                color: rgba(255, 255, 255, 0.9);
+            }
             &.active {
                 border-color: rgb(94, 96, 155);
             }
