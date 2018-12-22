@@ -28,11 +28,12 @@
         width: 100%;
 
         &.fixed {
-            position: fixed;
+            position: absolute;
             bottom: 0;
             z-index: 1;
-            left: 70px;
-            width: 230px;
+            left: 0px;
+            right: 0px;
+            width: auto;
         }
         &:hover{
             text-decoration: none;
