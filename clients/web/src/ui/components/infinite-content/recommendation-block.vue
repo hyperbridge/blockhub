@@ -50,9 +50,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        p{
+        p, a{
             margin: 0;
             padding: 0;
+            font-size: 16px !important;
         }
     }
 </style>

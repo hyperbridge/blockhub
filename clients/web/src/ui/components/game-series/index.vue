@@ -10,8 +10,8 @@
 <script>
     export default {
         name: 'game-stories',
-        props:{
-            bgGradient:{
+        props: {
+            bgGradient: {
                 type: Boolean,
                 default: false
             }

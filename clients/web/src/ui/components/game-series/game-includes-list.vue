@@ -26,9 +26,9 @@
 <script>
     export default {
         name: 'game-includes-list',
-        props:['list', 'showNumber'],
-        data(){
-            return{
+        props: ['list', 'showNumber'],
+        data() {
+            return {
                 hiddenItems: '',
                 limit: this.showNumber,
                 showMore: true
@@ -39,27 +39,27 @@
             'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more'], resolve),
         },
         methods:{
-            hiddenCount(){
-                return this.list.length - this.showNumber;
+            hiddenCount() {
+                return this.list.length - this.showNumber
             },
-            showAll(){
-                this.limit = this.list.length;
-                this.limitedList(this.limit);
-                this.showMore = false;
+            showAll() {
+                this.limit = this.list.length
+                this.limitedList(this.limit)
+                this.showMore = false
             },
-            hideAll(){
-                this.limit = this.showNumber;
-                this.limitedList(this.limit);
-                this.showMore = true;
+            hideAll() {
+                this.limit = this.showNumber
+                this.limitedList(this.limit)
+                this.showMore = true
             },
             limitedList(limit) {
                 let list = this.products,
-                    newList = [];
-                    list.forEach( function (item, i){
+                    newList = []
+                    list.forEach(function (item, i){
                         if (i <= limit-1) {
-                            newList.push(item);
+                            newList.push(item)
                         }
-                    });
+                    })
 
                 return newList
             }
