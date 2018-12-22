@@ -85,15 +85,18 @@
         right: 0;
     }
     .results__content {
-        background-color: #24253B;
-        border-radius: 4px;
+        background-color: #30314c;
+        border-radius: 0;
         position: absolute;
         z-index: 5;
-        top: 5px;
+        top: 0;
         width: 100%;
         animation: rotate-in .3s ease;
         max-height: 180px;
         overflow-y: auto;
+        &:hover {
+            border-radius: 0;
+        }
     }
     .results__text {
         padding: 8px;
