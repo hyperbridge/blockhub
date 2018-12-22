@@ -23,10 +23,10 @@
                         </a>
                     </div>
                 </div>
-                <!--<div class="stream-item__viewers">-->
-                    <!--<i class="fas fa-eye"></i>-->
-                    <!--{{ streamViews }}-->
-                <!--</div>-->
+                <div class="stream-item__viewers">
+                    <i class="fas fa-eye"></i>
+                    {{ streamViews }}
+                </div>
             </div>
         </div>
     </div>
@@ -117,12 +117,7 @@
         border-radius: 3px;
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#5ebbf1+0,16a5f1+100 */
         background: rgb(94,187,241); /* Old browsers */
-        background: -moz-linear-gradient(top, rgba(94,187,241,1) 0%, rgba(22,165,241,1) 100%); /* FF3.6-15 */
-        background: -webkit-linear-gradient(top, rgba(94,187,241,1) 0%,rgba(22,165,241,1) 100%); /* Chrome10-25,Safari5.1-6 */
         background: linear-gradient(to bottom, rgba(94,187,241,1) 0%,rgba(22,165,241,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5ebbf1', endColorstr='#16a5f1',GradientType=0 ); /* IE6-9 */
-        &:hover{
-        }
     }
     .stream-item__info{
         display: flex;
@@ -150,8 +145,8 @@
         }
         .stream-item__viewers{
             position: absolute;
-            right: 10px;
-            bottom: 12px;
+            right: 5px;
+            top: 8px;
             color: #fff;
             font-size: 12px;
             opacity: .4;

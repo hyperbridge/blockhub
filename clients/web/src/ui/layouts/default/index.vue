@@ -348,7 +348,10 @@
             >
                 <div class="h4" slot="header">Deposit</div>
                 <template slot="body">
-                    <div>
+                    <div v-if="!activeProfile.address">
+                        <p>No deposit address found for this profile. You'll need to generate one within the desktop app.</p>
+                    </div>
+                    <div v-if="activeProfile.address">
                         <h3>Deposit Address: {{ activeProfile.address }}</h3>
                         <br />
                         <div style="text-align: center;">

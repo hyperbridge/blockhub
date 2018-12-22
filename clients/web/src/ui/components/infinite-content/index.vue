@@ -263,7 +263,7 @@
 
         <transition name="fade-slow" v-if="showSignIn">
             <div class="row" v-if="end && !$store.state.application.signedIn">
-                <div class="col-12">
+                <div class="col-12 mb-4 mt-4">
                     <c-recommendation-block />
                 </div>
             </div>

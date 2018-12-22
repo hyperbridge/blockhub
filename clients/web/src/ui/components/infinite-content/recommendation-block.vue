@@ -5,10 +5,10 @@
         </div>
         <div class="recommendation-block__body">
             <p>Sign in to view personalized recommendations</p>
-            <c-button status="outline-info" class="my-2">
+            <c-button status="second-info" class="mb-4 mt-2" size="lg">
                 Sign In
             </c-button>
-            <p>or <c-button status="plain">sign up</c-button> and jon BlockHub for free</p>
+            <p>or <c-button status="underline">sign up</c-button> and join BlockHub for free</p>
         </div>
     </div>
 </template>
