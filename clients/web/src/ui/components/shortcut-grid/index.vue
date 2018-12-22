@@ -1,5 +1,5 @@
 <template>
-    <div class="c-grid-container" :style="containerStyle">
+    <div class="c-grid-container" :style="containerStyle" v-on:resize="getWindowHeight">
         <div class="c-grid__wrapper">
             <div class="c-grid__top position-relative" :class="{'margin-bottom-30' : hasNew}">
                 <div class="c-grid" :style="gridStyle">
@@ -112,6 +112,7 @@
         data() {
             return {
                 list: [],
+                windowHeight: null,
             }
         },
         watch: {
@@ -128,46 +129,12 @@
                 immediate: true
             }
         },
-        computed: {
-            gridResponsiveWidth() {
-                return 80;
-            },
 
-            gridHeight() {
-                return Math.ceil(this.items.length / this.rowCount) *
-                    this.cellHeight
-            },
-
-            gridStyle() {
-                return {
-                    height: this.gridHeight + 'px'
-                }
-            },
-            containerStyle() {
-                return {
-                    height: window.innerHeight - 60 + 'px'
-                    // height: document.getElementsByClassName('page-shortcuts').clientHeight - 60 + 'px'
-                }
-            },
-
-            rowCount() {
-                return Math.floor(this.gridResponsiveWidth / this.cellWidth)
-            },
-
-            rowShift() {
-                if (this.center) {
-                    let contentWidth = this.items.length * this.cellWidth
-                    let rowShift = contentWidth < this.gridResponsiveWidth
-                        ? (this.gridResponsiveWidth - contentWidth) / 2
-                        : (this.gridResponsiveWidth % this.cellWidth) / 2
-
-                    return Math.floor(rowShift)
-                }
-
-                return 0
-            }
-        },
         methods: {
+            getWindowHeight(event) {
+                this.windowHeight = window.innerHeight;
+                // console.log(this.windowHeight)
+            },
             /* Returns merged event object */
             wrapEvent(other = {}) {
                 return {
@@ -276,7 +243,49 @@
                     this.$emit('sort', this.wrapEvent())
                 }
             }
-        }
+        },
+        created() {
+            window.addEventListener('resize', this.getWindowHeight);
+        },
+        computed: {
+            gridResponsiveWidth() {
+                return 80;
+            },
+
+            gridHeight() {
+                return Math.ceil(this.items.length / this.rowCount) *
+                    this.cellHeight
+            },
+
+            gridStyle() {
+                return {
+                    height: this.gridHeight + 'px'
+                }
+            },
+            containerStyle() {
+                this.getWindowHeight();
+                return {
+                    height: this.windowHeight - 60 + 'px'
+                }
+            },
+
+            rowCount() {
+                return Math.floor(this.gridResponsiveWidth / this.cellWidth)
+            },
+
+            rowShift() {
+                if (this.center) {
+                    let contentWidth = this.items.length * this.cellWidth
+                    let rowShift = contentWidth < this.gridResponsiveWidth
+                        ? (this.gridResponsiveWidth - contentWidth) / 2
+                        : (this.gridResponsiveWidth % this.cellWidth) / 2
+
+                    return Math.floor(rowShift)
+                }
+
+                return 0
+            }
+        },
     }
 </script>
 
