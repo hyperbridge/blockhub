@@ -242,43 +242,43 @@
                     </div>
                 </transition>
                 <!-- <h3>Results</h3> -->
-                <div class="results__container">
+                <!-- <div class="results__container"> -->
                     <!--<div class="results">-->
-                        <c-content-navigation
-                            class="row"
-                            :loading="loading"
-                            :items="resultsFiltered"
-                            :setItemsLimit="12"
-                            :setItemsPerPage="12"
-                        >
-                            <div
-                                class="p-2 col-12 col-md-6 col-lg-4 col-xl-3"
-                                v-for="(project, index) in resultsFiltered" 
-                                :key="index"
-                            >
-                                <c-project-card
-                                    :image="project.meta.images && project.meta.images.mediumTile" 
-                                    :description="project.description" 
-                                    :funds="project.meta.funds" 
-                                    :parentName="project.product && project.product.name" 
-                                    :parentDeveloper="project.product && project.product.developer" 
-                                    :parentImage="project.product && project.product.meta.images.mediumTile"
-                                    :id="project.id"
-                                    class="p-0"
-                                />
-                            </div>
-                            <!-- <c-game-grid
-                                slot-scope="{ items }"
-                                :itemInRow="2"
-                                :showRating="false"
-                                :items="items"
-                                itemBg="transparent"
-                                showTime
-                            >
-                            </c-game-grid> -->
-                        </c-content-navigation>
+                <c-content-navigation
+                    class=" results__container row"
+                    :loading="loading"
+                    :items="resultsFiltered"
+                    :setItemsLimit="12"
+                    :setItemsPerPage="12"
+                >
+                    <div
+                        class="p-2 col-12 col-md-6 col-lg-4 col-xl-3"
+                        v-for="(project, index) in resultsFiltered" 
+                        :key="index"
+                    >
+                        <c-project-card
+                            :image="project.meta.images && project.meta.images.mediumTile" 
+                            :description="project.description" 
+                            :funds="project.meta.funds" 
+                            :parentName="project.product && project.product.name" 
+                            :parentDeveloper="project.product && project.product.developer" 
+                            :parentImage="project.product && project.product.meta.images.mediumTile"
+                            :id="project.id"
+                            class="p-0"
+                        />
                     </div>
-                </div>
+                    <!-- <c-game-grid
+                        slot-scope="{ items }"
+                        :itemInRow="2"
+                        :showRating="false"
+                        :items="items"
+                        itemBg="transparent"
+                        showTime
+                    >
+                    </c-game-grid> -->
+                </c-content-navigation>
+            </div>
+                <!-- </div> -->
             <!--</div>-->
         </div>
     </c-layout>

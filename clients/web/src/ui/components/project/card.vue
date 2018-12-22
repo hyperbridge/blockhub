@@ -23,7 +23,7 @@
             <c-button status="success" href="#/project/1" iconHide hidden>Donate Funds</c-button>
         </div>
 
-        <c-simple-vote :rating="project.rating" v-if="hovering" />
+        <c-simple-vote :rating="rating" v-if="hovering" />
     </div>
 </template>
 
@@ -35,6 +35,7 @@ export default {
     props: {
         image: String,
         description: String,
+        rating: Object,
         funds: {
             obtained: Number,
             goal: Number

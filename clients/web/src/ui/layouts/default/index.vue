@@ -349,7 +349,20 @@
                 <div class="h4" slot="header">Deposit</div>
                 <template slot="body">
                     <div>
-                        xxxxxxx
+                        <h3>Deposit Address: {{ activeProfile.address }}</h3>
+                        <br />
+                        <div style="text-align: center;">
+                            <c-qr-code style="display: inline-block; background: #fff;" :config="{
+                                value: activeProfile.address,
+                                imagePath: 'http://localhost:8000/static/img/logo-only.png',
+                                filter: 'threshold',
+                                size: 400,
+                            }" />
+                        </div>
+                        <br /><br />
+                        <p>You can send Ethereum or Hyperbridge Tokens to this address and they will become available by this profile</p>
+                        <p>For a guide on where to purchase Ethereum, please see <a href="#">this link</a>.</p>
+                        <p>If you're using an external wallet, such as Jaxx, please see their documentation.</p>
                     </div>
                 </template>
                 <p slot="footer">
@@ -465,6 +478,7 @@
             'c-status-dot': (resolve) => require(['@/ui/components/status-dot/index.vue'], resolve),
             'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
             'c-cookie-policy': (resolve) => require(['@/ui/components/cookie-policy'], resolve),
+            'c-qr-code': (resolve) => require(['@/ui/components/qr-code'], resolve),
             'c-shortcut-sidebar': (resolve) => require(['@/ui/components/shortcut-sidebar'], resolve),
             'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more.vue'], resolve),
             'c-swiper': swiper,

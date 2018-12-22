@@ -125,7 +125,7 @@ storiesOf('Notifications', module)
                 notif: {
                     type: 'info',
                     title: 'Info message',
-                    text: 'Something is changed in our policy, please view this notification.Click to view full',
+                    text: 'This is a test',
                     actionOnClose: false,
                     actionOnTextClick: true
                 },
@@ -133,7 +133,7 @@ storiesOf('Notifications', module)
                     {
                         type: 'info',
                         title: 'Info message',
-                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        text: 'This is a test',
                         showCloseBtn: true,
                         actionOnClose: false,
                         actionOnTextClick: true
@@ -141,7 +141,7 @@ storiesOf('Notifications', module)
                     {
                         type: 'warning',
                         title: 'Warning message',
-                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        text: 'This is a test',
                         showCloseBtn: false,
                         actionOnClose: '',
                         actionOnTextClick: ''
@@ -149,7 +149,7 @@ storiesOf('Notifications', module)
                     {
                         type: 'danger',
                         title: 'Danger message',
-                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        text: 'This is a test',
                         showCloseBtn: true,
                         actionOnClose: '',
                         actionOnTextClick: ''
@@ -157,7 +157,7 @@ storiesOf('Notifications', module)
                     {
                         type: 'success',
                         title: 'Success message',
-                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        text: 'This is a test',
                         showCloseBtn: true,
                         actionOnClose: '',
                         actionOnTextClick: ''
@@ -165,7 +165,7 @@ storiesOf('Notifications', module)
                     {
                         type: '',
                         title: 'Other message',
-                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        text: 'This is a test',
                         showCloseBtn: true,
                         actionOnClose: '',
                         actionOnTextClick: ''
@@ -193,7 +193,7 @@ storiesOf('Notifications', module)
                 notif: {
                     type: 'info',
                     title: 'Info message',
-                    text: 'Something is changed in our policy, please view this notification.Click to view full',
+                    text: 'This is a test',
                     actionOnClose: false,
                     actionOnTextClick: true
                 },
@@ -201,7 +201,7 @@ storiesOf('Notifications', module)
                     {
                         type: 'info',
                         title: 'Info message',
-                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        text: 'This is a test',
                         showCloseBtn: true,
                         actionOnClose: false,
                         actionOnTextClick: true
@@ -209,7 +209,7 @@ storiesOf('Notifications', module)
                     {
                         type: 'warning',
                         title: 'Warning message',
-                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        text: 'This is a test',
                         showCloseBtn: false,
                         actionOnClose: '',
                         actionOnTextClick: ''
@@ -217,7 +217,7 @@ storiesOf('Notifications', module)
                     {
                         type: 'danger',
                         title: 'Danger message',
-                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        text: 'This is a test',
                         showCloseBtn: true,
                         actionOnClose: '',
                         actionOnTextClick: ''
@@ -225,14 +225,14 @@ storiesOf('Notifications', module)
                     {
                         type: 'success',
                         title: 'Success message',
-                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        text: 'This is a test',
                         showCloseBtn: true,
                         actionOnClose: '',
                         actionOnTextClick: ''
                     },
                     {
                         title: 'Other message',
-                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        text: 'This is a test',
                         showCloseBtn: true,
                         actionOnClose: '',
                         actionOnTextClick: ''

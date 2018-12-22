@@ -45,7 +45,7 @@
         methods: {
             actionOnClose() {
                 this.show = false
-                setTimeout(() => this.$emit('close'), 250)
+                setTimeout(() => this.$emit('close'), 150)
             },
         },
         computed: {
@@ -75,7 +75,7 @@
         overflow: hidden;
         height: auto;
         display: inline-block;
-        transition: all 200ms ease-in-out;
+        transition: all 100ms ease-in-out;
         color: #fff;
 
         .title {
@@ -117,9 +117,7 @@
                 top: 4px;
                 right: 0;
                 font-size: 16px;
-                -webkit-transition: 0.3s ease-out;
-                -moz-transition:  0.3s ease-out;
-                transition:  0.3s ease-out;
+                transition: 0.1s ease-out;
                 i {
                     margin: 0;
                     color: #fff !important;
@@ -159,7 +157,7 @@
         -webkit-animation-duration:1s;
         animation-duration:1s;
         -webkit-animation-fill-mode:both;
-        animation-fill-mode:both
+        animation-fill-mode: both;
     }
 
     .bounceOutRight {

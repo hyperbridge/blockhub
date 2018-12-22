@@ -33,8 +33,7 @@
         max-height: 160px;
         list-style-type: none;
         overflow-y: auto;
-        background: rgba(36, 37, 59, .8);
-        background: #27283D;
+        background: rgba(0, 0, 0, 0.3);
         border-radius: 4px;
     }
     /deep/ .item__link {

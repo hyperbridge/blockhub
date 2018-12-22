@@ -79,7 +79,7 @@
             <div class="action">
                 <router-link
                     :to="{ name: 'Search', query }"
-                    class="btn btn-filter"
+                    class="search"
                 >
                     Search
                 </router-link>
@@ -88,7 +88,7 @@
                         name: 'Search',
                         query: { showFilters: true }
                     }"
-                    class="btn btn-link"
+                    class="more-filters"
                 >
                     More filters ...
                 </router-link>
@@ -252,11 +252,15 @@
                 text-transform: uppercase;
                 font-weight: bold;
                 color: #fff;
-                padding: 4px 10px;
-                &.btn-filter{
+                &.search{
                     background: #5D75F7;
                     color: #fff;
                     border-radius: 3px;
+                    padding: 8px 14px;
+                }
+                &.more-filters{
+                    display:block;
+                    margin-top: 12px;
                 }
                 &:first-child{
                     margin-right: 15px;
