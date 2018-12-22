@@ -1,7 +1,7 @@
 <template>
     <div class="c-grid-container" :style="containerStyle">
         <div class="c-grid__wrapper">
-            <div class="c-grid__top position-relative">
+            <div class="c-grid__top position-relative" :class="{'margin-bottom-30' : hasNew}">
                 <div class="c-grid" :style="gridStyle">
                     <GridItem v-for="v in list"
                               :key="v.index"
@@ -29,7 +29,12 @@
                     </GridItem>
                 </div>
             </div>
+            <div class="c-grid__has-new" v-if="hasNew">
+                new <i class="fas fa-long-arrow-alt-down"></i>
+            </div>
             <div class="c-grid__bottom position-relative">
+                <div class="c-grid__bottom-divider">
+                </div>
                 <c-icon v-for="(item, index) in fixedItems"
                         :color="item"
                         :key="index"
@@ -99,10 +104,14 @@
                 type: Boolean,
                 default: false
             },
+            hasNew: {
+                type: Boolean,
+                default: false
+            }
         },
         data() {
             return {
-                list: []
+                list: [],
             }
         },
         watch: {
@@ -137,6 +146,7 @@
             containerStyle() {
                 return {
                     height: window.innerHeight - 60 + 'px'
+                    // height: document.getElementsByClassName('page-shortcuts').clientHeight - 60 + 'px'
                 }
             },
 
@@ -287,6 +297,8 @@
         margin-top: 0;
         overflow-y: auto;
         overflow-x: hidden;
+        width: 60px;
+        margin-bottom: 10px;
         &::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0) !important;
             border: 0 none !important;
@@ -294,11 +306,38 @@
         }
 
     }
+    .c-grid__has-new{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        line-height: 25px;
+        height: 25px;
+        width: 100%;
+        padding: 0 5px;
+        border-radius: 5px;
+        font-size: 13px;
+        color: #fff;
+        font-weight: bold;
+        text-transform: uppercase;
+        background: rgba(239, 73, 69, .8);
+        margin-top: -40px;
+        z-index: 3;
+    }
     .c-grid__bottom{
         /*padding-bottom: 40px;*/
+        margin-top: auto;
         .border-none{
             border-color: transparent;
         }
+    }
+
+    .c-grid__bottom-divider{
+        width: 70%;
+        height: 4px;
+        margin: 15px auto;
+        position: relative;
+        display: block;
+        background: rgba(255, 255, 255, .2);
     }
 
     .c-grid-container {

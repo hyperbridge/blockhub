@@ -5479,9 +5479,37 @@ storiesOf('Games list', module)
     .add('base', () => ({
         components:{
             'c-game-tab': (resolve) => require(['@/ui/components/games-list/index'], resolve),
+            'c-games-navigation': (resolve) => require(['@/ui/components/games-list/list-navigation'], resolve)
         },
-        template: `<div class="row p-3 m-0 flex-wrap" style="width: 900px">
-                    <c-game-tab />
+        data(){
+            return{
+                list:[
+                    {
+                        id: '1',
+                        name: 'Game Of Thor',
+                    },
+                    {
+                        id: '2',
+                        name: 'CS GO: Advanced',
+                    },
+                    {
+                        id: '3',
+                        name: 'DOTA II',
+                    },
+                    {
+                        id: '4',
+                        name: 'Assassins Creed',
+                    }
+                ]
+            }
+        },
+        template: `<div class="row p-3 m-0 flex-wrap" style="width: 1000px">
+                    <div class="col-3 p-0">
+                        <c-games-navigation :list="list" />
+                    </div>
+                    <div class="col-9 p-0">
+                        <c-game-tab />
+                    </div>
                 </div>`
     }))
 
