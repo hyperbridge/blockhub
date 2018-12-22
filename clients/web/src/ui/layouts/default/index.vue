@@ -384,7 +384,7 @@
 
             <div class="status-bar" @click="$store.commit('application/activateModal', 'connection-status')">
                 <c-status-dot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" /> 
-                Good
+                OK
             </div>
 
             <div class="version" v-if="desktopMode">v{{ $store.state.application.version }}</div>
