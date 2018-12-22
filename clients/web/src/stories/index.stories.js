@@ -5421,53 +5421,53 @@ storiesOf('Chat', module)
             }
         },
         template: `<div class="row p-3 m-0 flex-wrap" style="width: 1100px;">
-                    <!--<div class="col-12" hidden>-->
-                        <!--<h3 class="text-white">Group chat "Welcome block"</h3>-->
-                        <!--<c-chat-base style="height: 700px" :shortcuts="shortcuts">-->
-                            <!--<template slot="sidebar">-->
-                                <!--<c-chat-group-sidebar />-->
-                            <!--</template>-->
-                            <!--<c-chat-group>-->
-                                <!--<template slot="messages">-->
-                                    <!--<c-chat-group-welcome />-->
-                                <!--</template>-->
-                                <!--<template slot="users">-->
-                                    <!--<c-chat-user v-for="user in userList" :isAdmin="user.admin" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>-->
-                                <!--</template>-->
-                            <!--</c-chat-group>-->
-                        <!--</c-chat-base>-->
-                        <!--<hr />-->
-                    <!--</div>-->
-                    <!--<div class="col-12" hidden>-->
-                        <!--<h3 class="text-white">Group chat with messages</h3>-->
-                        <!--<c-chat-base style="height: 700px" :shortcuts="shortcuts">-->
-                            <!--<template slot="sidebar">-->
-                                <!--<c-chat-group-sidebar />-->
-                            <!--</template>-->
-                            <!--<c-chat-group>-->
-                                <!--<template slot="messages">-->
-                                    <!--<c-chat-message v-for="msg in messages" :text="msg.text" :user="users[msg.user]" />-->
-                                <!--</template>-->
-                                <!--<template slot="users">-->
-                                    <!--<c-chat-user v-for="user in users" :isAdmin="user.admin" :action="true" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>-->
-                                <!--</template>-->
-                            <!--</c-chat-group>-->
-                        <!--</c-chat-base>-->
-                    <!--</div>-->
-                    <!--<div class="col-12" hidden>-->
-                        <!--<h3 class="text-white">Private messages</h3>-->
-                        <!--<c-chat-base style="height: 700px" :shortcuts="shortcuts">-->
-                            <!--<c-chat-private>-->
-                                <!--<c-chat-message v-for="msg in messages" :text="msg.text" :user="users[msg.user]" />-->
-                            <!--</c-chat-private>-->
-                        <!--</c-chat-base>-->
-                    <!--</div>-->
-                    <!--<div class="col-12" hidden>-->
-                        <!--<h3 class="text-white">New group(create/join)</h3>-->
-                        <!--<c-chat-base style="height: 700px" :shortcuts="shortcuts">-->
-                            <!--<c-chat-group-new />-->
-                        <!--</c-chat-base>-->
-                    <!--</div>-->
+                    <div class="col-12" >
+                        <h3 class="text-white">Group chat "Welcome block"</h3>
+                        <c-chat-base style="height: 700px" :shortcuts="shortcuts">
+                            <template slot="sidebar">
+                                <c-chat-group-sidebar />
+                            </template>
+                            <c-chat-group>
+                                <template slot="messages">
+                                    <c-chat-group-welcome />
+                                </template>
+                                <template slot="users">
+                                    <c-chat-user v-for="user in userList" :isAdmin="user.admin" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>
+                                </template>
+                            </c-chat-group>
+                        </c-chat-base>
+                        <hr />
+                    </div>
+                    <div class="col-12" >
+                        <h3 class="text-white">Group chat with messages</h3>
+                        <c-chat-base style="height: 700px" :shortcuts="shortcuts">
+                            <template slot="sidebar">
+                                <c-chat-group-sidebar />
+                            </template>
+                            <c-chat-group>
+                                <template slot="messages">
+                                    <c-chat-message v-for="msg in messages" :text="msg.text" :user="users[msg.user]" />
+                                </template>
+                                <template slot="users">
+                                    <c-chat-user v-for="user in users" :isAdmin="user.admin" :action="true" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>
+                                </template>
+                            </c-chat-group>
+                        </c-chat-base>
+                    </div>
+                    <div class="col-12" >
+                        <h3 class="text-white">Private messages</h3>
+                        <c-chat-base style="height: 700px" :shortcuts="shortcuts">
+                            <c-chat-private>
+                                <c-chat-message v-for="msg in messages" :text="msg.text" :user="users[msg.user]" />
+                            </c-chat-private>
+                        </c-chat-base>
+                    </div>
+                    <div class="col-12" >
+                        <h3 class="text-white">New group(create/join)</h3>
+                        <c-chat-base style="height: 700px" :shortcuts="shortcuts">
+                            <c-chat-group-new />
+                        </c-chat-base>
+                    </div>
                     <div class="col-12">
                         <h3 class="text-white">Friends list</h3>
                         <c-chat-friends-list />
