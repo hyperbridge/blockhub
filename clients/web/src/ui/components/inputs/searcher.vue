@@ -44,7 +44,7 @@
         display: flex;
         align-items: center;
         .c-input {
-            background: #222235;
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 3px;
             padding: 0 10px;
             height: 33px;

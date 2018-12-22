@@ -52,9 +52,9 @@ export default {
 .c-simple-vote {
     position: absolute;
     top: 0px;
-    right: -60px;
+    right: -45px;
     z-index: 1;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 1);
     border-radius: 5px;
     font-size: 20px;
     text-align: center;

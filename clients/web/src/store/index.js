@@ -539,7 +539,7 @@ export let initializer = () => {
 
             if (store.state.application.environmentMode === 'preview'
                 || store.state.application.environmentMode === 'beta'
-                /*|| store.state.application.environmentMode === 'production'*/) {
+                || store.state.application.environmentMode === 'production') {
                 BlockHub.importSeedData()
             }
 

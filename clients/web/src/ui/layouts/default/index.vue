@@ -84,9 +84,9 @@
             </transition>
             <!-- //END SIDEPANEL -->
 
-            <div class="status-bar" hidden>
+            <!-- <div class="status-bar" hidden>
                 {{ connectionStatus.message }}
-            </div>
+            </div> -->
 
 
             <c-welcome-popup :activated="$store.state.application.activeModal === 'welcome'" @close="$store.state.application.activeModal = null" />
@@ -291,12 +291,100 @@
             </c-basic-popup>
 
 
+            <c-basic-popup
+                :activated="$store.state.application.activeModal === 'withdraw'"
+                @close="$store.state.application.activeModal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">Withdraw</div>
+                <template slot="body">
+                    <div>
+                        <p>Current Profile: {{ activeProfile.name }}</p>
+                        <p style="text-align: center">{{ activeProfile.address }}</p>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <select class="form-control actionWithSelected" tabindex="-1" aria-hidden="true" v-model="withdrawRequest.type">
+                                        <option></option>
+                                        <option value="ETH">ETH</option>
+                                        <option value="HBX">HBX</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Amount</label>
+                                    <input type="text" class="form-control" placeholder="Amount" v-model="withdrawRequest.amount">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" placeholder="Address" v-model="withdrawRequest.address">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <p slot="footer">
+                    <c-button status="plain" class="color-red">
+                        Cancel
+                    </c-button>
+                    <c-button status="second-info" class="ml-3">
+                        Submit
+                    </c-button>
+                </p>
+            </c-basic-popup>
+
+
+            <c-basic-popup
+                :activated="$store.state.application.activeModal === 'deposit'"
+                @close="$store.state.application.activeModal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">Deposit</div>
+                <template slot="body">
+                    <div>
+                        <h3>Deposit Address: {{ activeProfile.address }}</h3>
+                        <br />
+                        <div style="text-align: center;">
+                            <c-qr-code style="display: inline-block; background: #fff;" :config="{
+                                value: activeProfile.address,
+                                imagePath: 'http://localhost:8000/static/img/logo-only.png',
+                                filter: 'threshold',
+                                size: 400,
+                            }" />
+                        </div>
+                        <br /><br />
+                        <p>You can send Ethereum or Hyperbridge Tokens to this address and they will become available by this profile</p>
+                        <p>For a guide on where to purchase Ethereum, please see <a href="#">this link</a>.</p>
+                        <p>If you're using an external wallet, such as Jaxx, please see their documentation.</p>
+                    </div>
+                </template>
+                <p slot="footer">
+                    <c-button status="plain" class="color-red">
+                        Cancel
+                    </c-button>
+                    <c-button status="second-info" class="ml-3">
+                        Done
+                    </c-button>
+                </p>
+            </c-basic-popup>
 
             <c-cookie-policy v-if="!desktopMode" />
 
             <c-clock v-if="desktopMode" />
 
-            <c-status-dot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" @click="$store.commit('application/activateModal', 'connection-status')" />
+            <div class="status-bar" @click="$store.commit('application/activateModal', 'connection-status')">
+                <c-status-dot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" /> 
+                Good
+            </div>
 
             <div class="version" v-if="desktopMode">v{{ $store.state.application.version }}</div>
         </div>
@@ -392,6 +480,7 @@
             'c-status-dot': (resolve) => require(['@/ui/components/status-dot/index.vue'], resolve),
             'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
             'c-cookie-policy': (resolve) => require(['@/ui/components/cookie-policy'], resolve),
+            'c-qr-code': (resolve) => require(['@/ui/components/qr-code'], resolve),
             'c-shortcut-sidebar': (resolve) => require(['@/ui/components/shortcut-sidebar'], resolve),
             'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more.vue'], resolve),
             'c-swiper': swiper,
@@ -417,6 +506,11 @@
                 reportCoords: null,
                 breadcrumbLinksData: this.breadcrumbLinks,
                 shortcutItems: [],
+                withdrawRequest: {
+                    type: 'ETH',
+                    amount: 0,
+                    address: null
+                },
                 dragOptions: {
                     dropzoneSelector: '.does-not-exist',
                     draggableSelector: 'a',
@@ -538,6 +632,23 @@
             this.checkScrollButton();
         },
         methods: {
+            deposit() {
+
+            },
+            withdraw() {
+                const type = 'ETH'
+                const destinationAddress = this.$refs.destinationAddress.value
+                const amount = Number(this.$refs.amount.value)
+
+                Bridge.sendCommand('transferToken', {
+                    type,
+                    destinationAddress,
+                    amount,
+                    walletIndex
+                }).then(() => {
+                    console.log('Done')
+                })
+            },
             onSwipeLeft() {
                 this.showRightPanel = true
             },
@@ -720,6 +831,9 @@
 </script>
 
 <style>
+    #fixed_panel {
+        display: block;
+    }
 
     .header-bg__layer-2 {
         position: fixed;
@@ -823,17 +937,6 @@
         }
     }
 
-    .status-bar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 10px;
-        background: #48171D;
-        border-top: 2px solid #48171D;
-        color: #fff;
-    }
-
     .clock {
         position: fixed;
         bottom: 20px;
@@ -841,11 +944,33 @@
         z-index: -1;
     }
 
-    .status-dot {
+    .status-bar {
+        display: flex;
+        justify-content: center;
         position: fixed;
-        bottom: 5px;
-        left: 25px;
+        bottom: 0;
+        left: 0;
+        width: 70px;
+        padding: 0 0 6px 0;
+        color: #fff;
         z-index: 120;
+        cursor: pointer;
+        // background: #191919;
+        // border-top: 2px solid #353535;
+
+        &.bad {
+            background: #48171D;
+            border-top: 2px solid #48171D;
+        }
+
+        &.expanded {
+            width: 100%;
+        }
+
+        .status-dot {
+            display: inline-block;
+            padding: 6px;
+        }
     }
 
     .quick-launch {

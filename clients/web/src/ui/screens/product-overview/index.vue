@@ -63,6 +63,20 @@
             <c-community-spotlight class="margin-bottom-20" :discussions="product.community.discussions"
                                     :communityUrl="`#/product/${product.id}/community`" v-darklaunch="'COMMUNITY'" />
 
+            <c-block :title="`Official`"
+                     :noGutter="true"
+                     :bgGradient="true"
+                     :onlyContentBg="true"
+                     :showBackground="true"
+                     class="margin-top-30 margin-bottom-20">
+                <div>
+                    <c-button class="mb-1 text-align-center" status="dark" size="md" full @click="$store.commit('application/activateModal', 'coming-soon')">Open in Discord</c-button>
+                    <c-button class="mb-1 text-align-center" status="dark" size="md" full @click="$store.commit('application/activateModal', 'coming-soon')">Open in Twitch</c-button>
+                    <c-button class="mb-1 text-align-center" status="dark" size="md" full @click="$store.commit('application/activateModal', 'coming-soon')">Open in YouTube</c-button>
+                    <c-button class="mb-1 text-align-center" status="dark" size="md" full @click="$store.commit('application/activateModal', 'coming-soon')">Open in Steam</c-button>
+                </div>
+            </c-block>
+
             <c-system-requirements class="margin-bottom-20" :requirements="product.systemRequirements" />
 
             <c-language-support :languages="product.languageSupport" />

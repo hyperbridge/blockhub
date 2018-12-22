@@ -78,8 +78,6 @@
         max-height: 250px;
         list-style-type: none;
         overflow-y: auto;
-        background: rgba(36, 37, 59, .8);
-        background: #27283D;
         background: rgba(39, 40, 61, .8);
         border-radius: 4px;
         padding: 0;

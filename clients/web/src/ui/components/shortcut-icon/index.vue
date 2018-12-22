@@ -1,5 +1,5 @@
 <template>
-    <div class="shortcut-icon" :class="{'icon-active' : active }" :style="style" @mouseover=" show = true" @mouseleave=" show = false">
+    <div class="shortcut-icon" :class="{ 'icon-active' : active }" :style="style" @mouseover="show = true" @mouseleave="show = false">
         <i v-if="withButton && !icon && removable"
            class="icon-delete-btn fa fa-times"
            @mousedown="remove"/>
@@ -15,7 +15,7 @@
                 {{ text }}
             </div>
         </transition>
-        <div class="shortcut-icon__ntf"></div>
+        <div class="shortcut-icon__new" v-if="unread"></div>
     </div>
 </template>
 
@@ -60,6 +60,10 @@
             removable: {
                 type: Boolean,
                 default: true
+            },
+            unread: {
+                type: Boolean,
+                default: false
             },
             color: {
                 type: Object,
@@ -223,7 +227,7 @@
             content: "";
         }
     }
-    .shortcut-icon__ntf{
+    .shortcut-icon__new{
         display: block;
         width: 8px;
         height: 8px;

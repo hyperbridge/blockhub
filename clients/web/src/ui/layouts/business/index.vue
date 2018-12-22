@@ -59,7 +59,10 @@
                         <slot />
                     </div>
                 </div>
-            </div>darkMode
+                <div class="content__bottom-menu" v-if="$slots['menu']">
+                    <slot name="menu"></slot>
+                </div>
+            </div>
         </transition>
         <!---->
 
@@ -143,10 +146,6 @@
                                 ]
                             }
                         ]
-                    },
-                    {
-                        header: true,
-                        title: 'Setting',
                     }
                 ]
             }
@@ -229,7 +228,7 @@
 <style lang="scss">
     body{
         &.light{
-            background: #f7f6f7!important;
+            background: #fff!important;
             font-size: 16px;
             line-height: 26px;
             #header-bg,
@@ -261,9 +260,12 @@
         padding-top: 70px;
         padding-left: 10px;
         padding-right: 10px;
-        background-color: #fff!important;
+        background-color: #f3f3f3!important;
         border-right: 1px solid rgba(0, 0, 0, 0.1);
         z-index: 20;
+        &.vsm-collapsed {
+            padding-left: 0;
+        }
         .vsm-header{
             color: #323c47!important;
         }
@@ -320,14 +322,19 @@
             background: #f2f2f2!important;
         }
         .collapse-btn{
-            background: rgba(0, 0, 0, .03)!important;
+            background: rgba(0, 0, 0, .04)!important;
             color: #323c47!important;
+            border-top: 1px solid rgba(0, 0, 0, 0.07);
             &:focus{
                 user-select: none!important;
                 box-shadow: none!important;
                 outline: none;
             }
         }
+    }
+
+    #fixed_panel {
+        display: none;
     }
 </style>
 
@@ -373,7 +380,6 @@
         background: #fff;
         color: #c3c3d6;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        box-shadow: 0 0 10px rgba(0, 0, 0, .4), 0 0 10px rgba(0, 0, 0, .4);
         .logo-holder{
             height: 50px;
             width: auto;
@@ -416,17 +422,15 @@
     }
     .content{
         width: 100%;
-        padding-top: 60px;
-        border-left: 1px solid rgba(0, 0, 0, 0.1);
-        border-right: 1px solid rgba(0, 0, 0, 0.1);
+        margin-top: 60px;
         transition: all 200ms ease-in-out;
         position: relative;
         /*z-index: 10;*/
         &.left-sidebar{
-            padding: 60px 0 0 250px;
+            margin: 60px 0 0 250px;
         }
         &.left-sidebar.right-sidebar{
-            padding: 60px 250px 0;
+            margin: 60px 250px 0;
         }
         &.invert{
             background: $dark_color_1;
@@ -446,7 +450,7 @@
             }
         }
         &.is-minimized{
-            padding-left: 50px;
+            margin-left: 50px;
         }
     }
     .left-sidebar__option{
@@ -485,7 +489,16 @@
         margin: 15px;
         background: #fff;
         padding: 15px 0;
-        border: 1px solid #ebebeb;
+    }
+    .content__bottom-menu {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        padding: 10px;
+        background: #f7f7f7;
+        border-top: 1px solid rgba(0, 0, 0, 0.07);
     }
 
     .page-top-bar__profile {

@@ -797,6 +797,20 @@ const router = new Router({
             ]
         },
         {
+            path: '/business/product/:id',
+            name: 'Product',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/business-product'], resolve),
+            meta: {
+                title: 'Product',
+                breadcrumb: [
+                    { to: '/business', title: 'Dashboard' },
+                    { to: '/business/products', title: 'Products' },
+                    { title: 'Product' }
+                ]
+            }
+        },
+        {
             path: '/business',
             name: 'Business',
             component: (resolve) => require(['@/ui/screens/business'], resolve),
@@ -824,20 +838,6 @@ const router = new Router({
                         breadcrumb: [
                             { path: '/business', title: 'Dashboard' },
                             { title: 'All Products' }
-                        ]
-                    }
-                },
-                {
-                    path: 'product/:id',
-                    name: 'Product',
-                    props: true,
-                    component: (resolve) => require(['@/ui/screens/business-product'], resolve),
-                    meta: {
-                        title: 'Product',
-                        breadcrumb: [
-                            { to: '/business', title: 'Dashboard' },
-                            { to: '/business/products', title: 'Products' },
-                            { title: 'Product' }
                         ]
                     }
                 },

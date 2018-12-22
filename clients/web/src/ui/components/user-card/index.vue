@@ -1,8 +1,8 @@
 <template>
-    <div class="profile-block" :class="{ 'preview-mode': previewMode }">
+    <div class="user-data" :class="{ 'preview-mode': previewMode }">
         <c-loading :enabled="removing" />
         
-        <div class="profile-block__user-data" v-if="!removing">
+        <div class="user-data__container" v-if="!removing">
             <div
                 v-if="previewMode"
                 class="user-data__icon"
@@ -35,7 +35,6 @@
                 <input
                     type="text"
                     class="form-control margin-bottom-5"
-                    name="profile_name"
                     placeholder="Profile name"
                     :value="user.name"
                     @input="$emit('update:name', $event.target.value)"
@@ -49,7 +48,7 @@
             </div>
         </div>
 
-        <div class="profile-block__unknown-blk" v-darklaunch="'BADGES'">
+        <div class="user-data__unknown-blk" v-darklaunch="'BADGES'">
             <button v-for="index in 4" :key="index" class="btn">
                 <i class="fas fa-plus"></i>
             </button>
@@ -63,19 +62,22 @@
             </div>
         </div>
 
-        <div class="walletNumber" hidden>
+        <div class="user-data__public-address" v-if="previewMode && user.address">
             <input
                 type="text"
                 class="form-control"
-                name="walletNumber"
+                name="user-data__public-address"
                 placeholder="Public address"
                 :value="user.address"
                 @input="$emit('update:wallet', $event.target.value)"
                 readonly="readonly"
             />
-            <button v-darklaunch="'BADGES'" @click="copyToClipboard(user.address)">
+            <button @click="copyToClipboard(user.address)">
                 <i :class="`fas fa-${previewMode ? 'copy' : 'redo-alt'}`"></i>
             </button>
+        </div>
+        <div v-if="previewMode && !user.address">
+            <c-button status="dark" size="small" @click="generateAddress">Generate Address</c-button>
         </div>
     </div>
 </template>
@@ -103,6 +105,14 @@
             removing: Boolean
         },
         methods: {
+            generateAddress() {
+                if (!this.$store.state.application.desktopMode) {
+                    this.$store.commit('application/activateModal', 'welcome')
+                    return
+                }
+
+                BlockHub.Bridge.sendCommand('generateAddress', value)
+            },
             copyToClipboard(value) {
                 BlockHub.Bridge.sendCommand('writeToClipboard', value)
 
@@ -113,7 +123,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .profile-block {
+    .user-data {
         padding: 10px;
         background-color: #303046;
         border-radius: 5px;
@@ -122,7 +132,7 @@
         min-height: 100px;
         position: relative;
         color: #fff;
-        .walletNumber {
+        .user-data__public-address {
             display: flex;
             justify-content: space-between;
             .form-control {
@@ -151,7 +161,7 @@
                     background: #43C981;
                 }
             }
-            .profile-block__unknown-blk {
+            .user-data__unknown-blk {
                 a {
                     border-color: #404354;
                     color: #404354;
@@ -205,13 +215,13 @@
             }
         }
     }
-    .profile-block__text {
+    .user-data__text {
         border: none;
         box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
         background: #303049;
         color: rgba(255, 255, 255, .5);
     }
-    .profile-block__user-data {
+    .user-data__container {
         display: flex;
         align-items: center;
         margin-bottom: 5px;
@@ -252,7 +262,7 @@
         align-items: center;
         justify-content: center;
     }
-    .profile-block__unknown-blk {
+    .user-data__unknown-blk {
         display: flex;
         align-items: center;
         margin: 20px 0;
