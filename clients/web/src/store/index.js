@@ -26,7 +26,7 @@ Vue.use(Vuex)
 if (!window.BlockHub)
     window.BlockHub = {}
 
-BlockHub.feathersClient = feathersClient
+BlockHub.WebClient = feathersClient
 
 // Initial settings
 // Disable peer relaying by default (until we're somewhat stable)
@@ -226,25 +226,25 @@ const store = new Vuex.Store({
         assets,
         community
     }
-});
+})
 
 window.BlockHub.Bridge = Bridge
 window.BlockHub.ChaosMonkey = ChaosMonkey
 window.BlockHub.ReputationEngine = ReputationEngine
+window.BlockHub.DB = DB
 window.BlockHub.store = store
 window.BlockHub.router = router // doesnt work?
-window.BlockHub.DB = DB
 window.BlockHub.seed = seed
 
 window.BlockHub.importSeedData = () => {
     // We dont want to mess with the important signed in account data
-    if (!DB.application.config.data[0].account.address) {
-        DB.application.config.data[0].account.wallets = seed.wallets
-        DB.application.config.data[0].account.profiles = seed.profiles
-        DB.application.config.data[0].activeProfile = {
-            id: seed.profiles[0].id
-        }
-    }
+    // if (!DB.application.config.data[0].account.address) {
+    //     DB.application.config.data[0].account.wallets = seed.wallets
+    //     DB.application.config.data[0].account.profiles = seed.profiles
+    //     DB.application.config.data[0].activeProfile = {
+    //         id: seed.profiles[0].id
+    //     }
+    // }
 
     DB.application.config.data[0].account.notifications = seed.notifications
     DB.application.config.data[0].updates = seed.updates
@@ -268,11 +268,11 @@ window.BlockHub.importSeedData = () => {
 
 window.BlockHub.resetSeedData = () => {
     // We dont want to mess with the important signed in account data
-    if (!DB.application.config.data[0].account.address) {
-        DB.application.config.data[0].account.wallets = []
-        DB.application.config.data[0].account.profiles = []
-        DB.application.config.data[0].activeProfile = { id: null }
-    }
+    // if (!DB.application.config.data[0].account.address) {
+    //     DB.application.config.data[0].account.wallets = []
+    //     DB.application.config.data[0].account.profiles = []
+    //     DB.application.config.data[0].activeProfile = { id: null }
+    // }
 
     DB.application.config.data[0].account.notifications = []
     DB.marketplace.config.data[0].updates = []

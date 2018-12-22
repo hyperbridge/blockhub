@@ -45,6 +45,7 @@
                         :text="item.text"
                         :eventKey="item.eventKey"
                         :eventValue="item.eventValue"
+                        :textColor="item.textColor"
                         :icon="item.icon"
                         :unread="item.unread"
                         :removable="item.removable"

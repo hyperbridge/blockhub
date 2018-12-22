@@ -412,7 +412,7 @@
                         ...this.$store.state.auth.user
                     }
 
-                    BlockHub.feathersClient.service(`/application/state`).find().then((res) => {
+                    BlockHub.WebClient.service(`/application/state`).find().then((res) => {
                         this.$store.commit('application/updateState', res)
                     })
                 }

@@ -245,7 +245,7 @@
                 <!-- <div class="results__container"> -->
                     <!--<div class="results">-->
                 <c-content-navigation
-                    class=" results__container row"
+                    class="results__container row"
                     :loading="loading"
                     :items="resultsFiltered"
                     :setItemsLimit="12"
@@ -340,12 +340,15 @@
 
                     if (this.filtersActive) {
                         this.debounce(() => {
-                            BlockHub.feathersClient.service(`/search`).find(
+                            BlockHub.WebClient.service(`/search`).find(
                                 {
                                     query: this.query
                                 }
                             ).then((res) => {
                                 this.results = res.projects.data //[...this.getProductsQuery(this.query)]
+                                this.loading = false
+                            }).catch((e) => {
+                                this.results = []
                                 this.loading = false
                             })
                         }, 250, 'timeout2')
@@ -373,7 +376,7 @@
                 if (selectedTags.length) this.selectedTags.forEach(tag => tag.selected = false)
                 if (selectedGenres.length) this.selectedGenres.forEach(tag => tag.selected = false)
                 if (selectedLanguages.length) this.selectedLanguages.forEach(lang => lang.selected = false)
-                if (price.min || price.max) { this.price.min = 0; this.price.max = 0; };
+                if (price.min || price.max) { this.price.min = 0; this.price.max = 0; }
                 if (communitySize || activeUsers) { this.communitySize = 0; this.activeUsers = 0; }
                 if (selectedPlatforms.length) this.selectedPlatforms.forEach(platform => platform.selected = false)
             }

@@ -24,6 +24,7 @@
                         :link="props.item.link"
                         :eventKey="props.item.eventKey"
                         :eventValue="props.item.eventValue"
+                        :textColor="props.item.textColor"
                         :icon="props.item.icon"
                         :removable="props.item.removable"
                         :unread="props.item.unread"

@@ -44,9 +44,9 @@
         "currentEthereumNetwork": "local",
         "shortcuts": [
             {
-                "r": null,
-                "g": null,
-                "b": null,
+                "r": 255,
+                "g": 255,
+                "b": 255,
                 "image": "/static/img/icons/grid.png",
                 "link": "#/",
                 "text": "Open Grid",
@@ -54,9 +54,9 @@
                 "removable": false
             },
             {
-                "r": null,
-                "g": null,
-                "b": null,
+                "r": 255,
+                "g": 255,
+                "b": 255,
                 "image": "/static/img/icons/store.png",
                 "link": "#/",
                 "text": "Go to store",
@@ -64,71 +64,11 @@
                 "removable": false
             },
             {
+                "r": 255,
+                "g": 255,
+                "b": 255,
                 "icon": "fa fa-plus",
-                "eventKey": "application/activateModal",
-                "eventValue": "shortcutCreator",
-                "text": "Create",
-                "sort": -1,
-                "removable": false
-            },
-            {
-                "r": null,
-                "g": null,
-                "b": null,
-                "image": "/static/img/icons/grid.png",
-                "link": "#/",
-                "text": "Open Grid",
-                "sort": 1,
-                "removable": false
-            },
-            {
-                "r": null,
-                "g": null,
-                "b": null,
-                "image": "/static/img/icons/store.png",
-                "link": "#/",
-                "text": "Go to store",
-                "sort": 2,
-                "removable": false
-            },
-            {
-                "icon": "fa fa-plus",
-                "eventKey": "application/activateModal",
-                "eventValue": "shortcutCreator",
-                "text": "Create",
-                "sort": -1,
-                "removable": false
-            },
-            {
-                "icon": "fa fa-plus",
-                "eventKey": "application/activateModal",
-                "eventValue": "shortcutCreator",
-                "text": "Create",
-                "sort": -1,
-                "removable": false
-            },
-            {
-                "r": null,
-                "g": null,
-                "b": null,
-                "image": "/static/img/icons/grid.png",
-                "link": "#/",
-                "text": "Open Grid",
-                "sort": 1,
-                "removable": false
-            },
-            {
-                "r": null,
-                "g": null,
-                "b": null,
-                "image": "/static/img/icons/store.png",
-                "link": "#/",
-                "text": "Go to store",
-                "sort": 2,
-                "removable": false
-            },
-            {
-                "icon": "fa fa-plus",
+                "textColor": "#43434d",
                 "eventKey": "application/activateModal",
                 "eventValue": "shortcutCreator",
                 "text": "Create",
