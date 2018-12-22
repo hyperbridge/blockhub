@@ -1202,7 +1202,7 @@
     .left-sidebar__content{
         overflow-y: scroll;
         overflow-x: hidden;
-        height: calc(100% - 55px);
+        height: calc(100% - 60px);
     }
     .col-lg-6{
         @media (max-width: 1500px){
@@ -1341,8 +1341,8 @@
             margin: 0 auto;
         }
         .load-more.fixed{
-            width: 180px!important;
-            margin: 10px!important;
+            /*width: 180px!important;*/
+            /*margin: 10px!important;*/
             span{
                 font-size: 14px!important;
             }

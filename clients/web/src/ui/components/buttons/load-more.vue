@@ -23,7 +23,7 @@
         display: block;
         text-align: center;
         overflow: hidden;
-        margin: 10px 20px;
+        margin: 10px 0px;
         user-select: none;
         width: 100%;
 
@@ -31,8 +31,8 @@
             position: absolute;
             bottom: 0;
             z-index: 1;
-            left: 0px;
-            right: 0px;
+            left: 20px;
+            right: 30px;
             width: auto;
         }
         &:hover{
@@ -67,10 +67,10 @@
             cursor: pointer;
             text-decoration: none;
             &:before {
-                transform: translateX(-25px);
+                transform: translateX(-15px);
             }
             &:after {
-                transform: translateX(25px);
+                transform: translateX(15px);
             }
         }
     }
