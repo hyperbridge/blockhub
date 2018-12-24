@@ -1,7 +1,7 @@
 <template>
-    <div class="c-grid-container" :style="containerStyle" v-on:resize="getWindowHeight">
+    <div class="c-grid-container" v-on:resize="getWindowHeight">
         <div class="c-grid__wrapper">
-            <div class="c-grid__top position-relative" :class="{'margin-bottom-30' : hasNew}">
+            <div class="c-grid__top position-relative" :class="{'margin-bottom-30' : hasNew}" ref="gridTop">
                 <div class="c-grid" :style="gridStyle">
                     <GridItem v-for="v in list"
                               :key="v.index"
@@ -32,7 +32,7 @@
             <div class="c-grid__has-new" v-if="hasNew">
                 new <i class="fas fa-long-arrow-alt-down"></i>
             </div>
-            <div class="c-grid__bottom position-relative">
+            <div class="c-grid__bottom position-relative" :class="['h-' + fixedIconHeight]" ref="gridFixed">
                 <div class="c-grid__bottom-divider">
                 </div>
                 <c-icon v-for="(item, index) in fixedItems"
@@ -113,6 +113,7 @@
             return {
                 list: [],
                 windowHeight: null,
+                fixedIconHeight: null
             }
         },
         watch: {
@@ -134,6 +135,9 @@
             getWindowHeight(event) {
                 this.windowHeight = window.innerHeight;
                 // console.log(this.windowHeight)
+            },
+            matchHeight () {
+                this.fixedIconHeight = this.$refs.gridFixed.clientHeight
             },
             /* Returns merged event object */
             wrapEvent(other = {}) {
@@ -247,6 +251,9 @@
         created() {
             window.addEventListener('resize', this.getWindowHeight);
         },
+        mounted () {
+            this.matchHeight()
+        },
         computed: {
             gridResponsiveWidth() {
                 return 80;
@@ -265,7 +272,7 @@
             containerStyle() {
                 this.getWindowHeight();
                 return {
-                    height: this.windowHeight - 60 + 'px'
+                    height: this.windowHeight - 80 + 'px'
                 }
             },
 
@@ -350,13 +357,18 @@
     }
 
     .c-grid-container {
-        display: block;
-        position: relative;
-        width: 50px;
+        /*display: block;*/
+        /*position: relative;*/
+        /*width: 50px;*/
         // overflow-x: visible;
         // overflow-y: auto;
         /* padding-right: 800px; margin-right: -800px; pointer-events: none; Pretty hacky way around the overflow bug */
-
+        display: block;
+        position: absolute;
+        width: 50px;
+        /* height: 100%; */
+        bottom: 10px;
+        top: 10px;
         &::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0) !important;
             border: 0 none !important;
