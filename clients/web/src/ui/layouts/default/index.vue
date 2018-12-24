@@ -1223,6 +1223,8 @@
         z-index: 99;
         background: rgba(0, 0, 0, 0.5);
         bottom: 0;
+        height: 100%;
+        padding-bottom: 50px;
         /*box-shadow: inset 0 0 3px #000;*/
     }
 

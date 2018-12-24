@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="height: 100%;">
         <a class="shortcut-sidebar__grid" href="#" @click.prevent="showGrid" hidden></a>
         <c-grid
             :center="false"

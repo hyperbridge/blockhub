@@ -146,7 +146,7 @@
             },
             containerStyle() {
                 return {
-                    height: window.innerHeight - 60 + 'px'
+                    height: '100%'
                     // height: document.getElementsByClassName('page-shortcuts').clientHeight - 60 + 'px'
                 }
             },
