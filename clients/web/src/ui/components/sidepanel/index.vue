@@ -143,7 +143,7 @@
                         <div class="navigation">
                             <ul>
                                 <li class="title">TOP 5</li>
-                                <li v-for="(product, index) in $store.state.marketplace.top5" :key="index">
+                                <li v-for="(product, index) in $store.state.marketplace.top5" :key="index" v-if="index < 5">
                                     <a :href="`#/product/${product.id}`">
                                         <span class="text">{{ product.name }}</span>
                                     </a>
@@ -310,7 +310,7 @@
     }
 
     .navigation {
-        margin-bottom: 50px;
+        margin-bottom: 30px;
     }
 
     .navigation .text {
