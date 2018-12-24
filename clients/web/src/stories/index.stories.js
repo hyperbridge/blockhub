@@ -5505,6 +5505,50 @@ storiesOf('Games list', module)
                                 name: 'Dawnguard',
                                 price: '13.99'
                             }
+                        ],
+                        achievements: [
+                            {
+                                icon: '',
+                                href: ''
+                            },
+                            {
+                                icon: '',
+                                href: ''
+                            },
+                            {
+                                icon: '',
+                                href: ''
+                            },
+                            {
+                                icon: '',
+                                href: ''
+                            }
+                        ],
+                        friends:[
+                            {
+                                link: '#',
+                                avatar: 'http://kharkov.city/wp-content/uploads/2015/09/cubegirl-avatar_400x4001.jpg'
+                            },
+                            {
+                                link: '#',
+                                avatar: 'http://www.auto-sib.com/upload/main/2e6/2e667dbfe5de0eda8c1f98777b2a2db8.png'
+                            },
+                            {
+                                link: '#',
+                                avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUCwHqPE2M4z3HsyeQsaOoWtuxjX92a2vVi5p7N9Qm72IM8Dh'
+                            }
+                        ],
+                        news:[
+                            {
+                                title: 'Morbi at ligula placerat',
+                                text: 'Morbi at ligula placerat, vestibulum tortor ac, sollicitudin massa. In in risus vulputate, posuere libero ac, egestas justo. Ut non mattis nulla. Suspendisse acmaximus metus. Nulla auctor laoreet quam, in congue nulla.',
+                                link: '#'
+                            },
+                            {
+                                title: 'Sed lobortis lacinia ante a bibendum.',
+                                text: 'Ut gravida vestibulum nunc, sit amet malesuada nisi egestas eu. Integer felis eros, venenatis vel augue sit amet, cursus laoreet eros. Nam fringilla euismod feugiat.',
+                                link: '#'
+                            }
                         ]
                     },
                     {
