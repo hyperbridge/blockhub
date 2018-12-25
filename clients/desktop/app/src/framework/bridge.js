@@ -212,45 +212,50 @@ export const transferTokenBatch = ({ batch, walletIndex }) => {
     })
 }
 
-export const transferTokens = ({ destinationAddress, amount, walletIndex }) => {
+export const transferTokens = ({ type, fromAddress, toAddress, amount }) => {
     return new Promise(async (resolve, reject) => {
+        const walletIndex = local.account.profiles.find((profile) => fromAddress.toLowerCase() === profile.address.toLowerCase()).id
         const web3 = local.wallet.web3
         const originWallet = await Wallet.create(local.passphrase, walletIndex)
         const originAddress = originWallet.address
 
-        console.log("Attempting transfer. From: " + originAddress + ". To " + destinationAddress + ". Amount: " + amount)
+        console.log("Attempting transfer. From: " + originAddress + ". To " + toAddress + ". Amount: " + amount + " Type: " + type)
 
-        const token = TokenAPI.api.ethereum.state.contracts.Token.deployed
-        const eternalStorage = TokenAPI.api.ethereum.state.contracts.EternalStorage.deployed
-        const hbxToken = TokenAPI.api.ethereum.state.contracts.TokenDelegate.deployed
-        const tokenLib = TokenAPI.api.ethereum.state.contracts.TokenLib.deployed
+        if (type === 'HBX') {
+            const token = TokenAPI.api.ethereum.state.contracts.Token.deployed
+            const eternalStorage = TokenAPI.api.ethereum.state.contracts.EternalStorage.deployed
+            const hbxToken = TokenAPI.api.ethereum.state.contracts.TokenDelegate.deployed
+            const tokenLib = TokenAPI.api.ethereum.state.contracts.TokenLib.deployed
 
-        const originalProvider = TokenAPI.api.ethereum.state.provider
+            const originalProvider = TokenAPI.api.ethereum.state.provider
 
-        TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originWallet.provider)
-        TokenAPI.api.ethereum.state.contracts.Token.contract.provider = originWallet.provider
-        TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originWallet.provider)
+            TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originWallet.provider)
+            TokenAPI.api.ethereum.state.contracts.Token.contract.provider = originWallet.provider
+            TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originWallet.provider)
 
-        let tokenDelegateHolder = await TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.at(hbxToken.address)
-        let originWalletHolder = await TokenAPI.api.ethereum.state.contracts.Token.contract.at(token.address)
-        originWalletHolder = { ...tokenDelegateHolder, ...originWalletHolder }
+            let tokenDelegateHolder = await TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.at(hbxToken.address)
+            let originWalletHolder = await TokenAPI.api.ethereum.state.contracts.Token.contract.at(token.address)
+            originWalletHolder = { ...tokenDelegateHolder, ...originWalletHolder }
 
-        const decimals = web3._extend.utils.toBigNumber(18)
-        const destinationAmount = web3._extend.utils.toBigNumber(amount).times(web3._extend.utils.toBigNumber(10).pow(decimals))
+            const decimals = web3._extend.utils.toBigNumber(18)
+            const destinationAmount = web3._extend.utils.toBigNumber(amount).times(web3._extend.utils.toBigNumber(10).pow(decimals))
 
-        await originWalletHolder.transfer(destinationAddress, destinationAmount, {
-            from: originWallet.address,
-            gasPrice: 6e9
-        }).then(() => {
-            console.log("Transfer complete. Destination: " + destinationAddress)
-        })
+            await originWalletHolder.transfer(toAddress, destinationAmount, {
+                from: originWallet.address,
+                gasPrice: 6e9
+            }).then(() => {
+                console.log("Transfer complete. Destination: " + toAddress)
+            })
 
-        await web3.eth.getTransactionCountPromise(originAddress)
+            await web3.eth.getTransactionCountPromise(originAddress)
+        } else if (type === 'ETH') {
+            
+        }
 
         //TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originalProvider)
         //TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originalProvider)
         
-        console.log("Transfer started. Destination: " + destinationAddress)
+        console.log("Transfer started. Destination: " + toAddress)
 
         resolve()
     })

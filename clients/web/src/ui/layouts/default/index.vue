@@ -298,8 +298,11 @@
             >
                 <div class="h4" slot="header">Withdraw</div>
                 <template slot="body">
-                    <div>
-                        <p>Current Profile: {{ activeProfile.name }}</p>
+                    <div v-if="!activeProfile.address">
+                        <p>No address found for this profile. You'll need to generate one within the desktop app.</p>
+                    </div>
+                    <div v-if="activeProfile.address">
+                        <p hidden>Current Profile: {{ activeProfile.name }}</p>
                         <p style="text-align: center">{{ activeProfile.address }}</p>
 
                         <div class="row">
@@ -326,18 +329,21 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <input type="text" class="form-control" placeholder="Address" v-model="withdrawRequest.address">
+                                    <input type="text" class="form-control" placeholder="Address" v-model="withdrawRequest.toAddress">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </template>
                 <p slot="footer">
-                    <c-button status="plain" class="color-red">
+                    <c-button status="plain" class="color-red" @click="$store.state.application.activeModal = null">
                         Cancel
                     </c-button>
-                    <c-button status="second-info" class="ml-3">
-                        Submit
+                    <c-button status="second-info" class="ml-3" @click="$store.state.application.activeModal = null" v-if="!activeProfile.address">
+                        OK
+                    </c-button>
+                    <c-button status="second-info" class="ml-3" @click="withdraw" v-if="activeProfile.address">
+                        Send
                     </c-button>
                 </p>
             </c-basic-popup>
@@ -351,7 +357,7 @@
                 <div class="h4" slot="header">Deposit</div>
                 <template slot="body">
                     <div v-if="!activeProfile.address">
-                        <p>No deposit address found for this profile. You'll need to generate one within the desktop app.</p>
+                        <p>No address found for this profile. You'll need to generate one within the desktop app.</p>
                     </div>
                     <div v-if="activeProfile.address">
                         <h3>Deposit Address: {{ activeProfile.address }}</h3>
@@ -371,11 +377,11 @@
                     </div>
                 </template>
                 <p slot="footer">
-                    <c-button status="plain" class="color-red">
+                    <c-button status="plain" class="color-red" @click="$store.state.application.activeModal = null">
                         Cancel
                     </c-button>
-                    <c-button status="second-info" class="ml-3">
-                        Done
+                    <c-button status="second-info" class="ml-3" @click="$store.state.application.activeModal = null">
+                        OK
                     </c-button>
                 </p>
             </c-basic-popup>
@@ -639,15 +645,16 @@
 
             },
             withdraw() {
-                const type = 'ETH'
-                const destinationAddress = this.$refs.destinationAddress.value
-                const amount = Number(this.$refs.amount.value)
+                let fromAddress = this.$store.state.application.activeProfile.address
+                let { type, toAddress, amount } = this.withdrawRequest
 
-                Bridge.sendCommand('transferToken', {
+                amount = Number(amount)
+
+                Bridge.sendCommand('transferTokens', {
                     type,
-                    destinationAddress,
-                    amount,
-                    walletIndex
+                    fromAddress,
+                    toAddress,
+                    amount
                 }).then(() => {
                     console.log('Done')
                 })

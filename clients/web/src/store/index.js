@@ -237,6 +237,7 @@ window.BlockHub.router = router // doesnt work?
 window.BlockHub.seed = seed
 
 window.BlockHub.importSeedData = () => {
+    console.log('[BlockHub] Import seed data')
     // We dont want to mess with the important signed in account data
     // if (!DB.application.config.data[0].account.address) {
     //     DB.application.config.data[0].account.wallets = seed.wallets
@@ -537,10 +538,14 @@ export let initializer = () => {
 
             BlockHub.environmentMode = store.state.application.environmentMode
 
+            console.log('Environment mode: ' + store.state.application.environmentMode)
+
             if (store.state.application.environmentMode === 'preview'
                 || store.state.application.environmentMode === 'beta'
                 || store.state.application.environmentMode === 'production') {
-                BlockHub.importSeedData()
+                setTimeout(() => {
+                    BlockHub.importSeedData()
+                }, 1000)
             }
 
             if (store.state.application.environmentMode === 'preview') {
