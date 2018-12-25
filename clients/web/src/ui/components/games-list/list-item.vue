@@ -18,50 +18,58 @@
                         Play Now
                     </c-button>
                 </div>
+                <div class="game-info">
+                    <div>
+                        354 Hours
+                    </div>
+                    <div>
+                        Last Played today
+                    </div>
+                </div>
                 <div class="games-list__item-body">
-                    <div class="game-achievements margin-bottom-60">
+                    <div class="game-friends-playing margin-bottom-40">
+                        <div class="game-friends-playing__ttl">
+                            <i class="fas fa-users"></i>
+                            <span class="ttl">Friends Playing</span>
+                            <span>this game</span>
+                        </div>
+                        <div class="game-friends-playing__list">
+                            <template v-for="user in game.friends">
+                                <a :href="user.link">
+                                    <img :src="user.avatar"/>
+                                </a>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="game-achievements margin-bottom-40">
                         <div class="game-achievements__ttl">
                             <i class="fas fa-trophy"></i>
                             <span class="ttl">Achievements</span>
                             <span>you earned recently</span>
                         </div>
                         <div class="game-achievements__list">
-                            <div class="game-achievements__list-item">
+                            <a v-for="(item, index) in game.achievements" v-if="game.achievements" :href="item.href"
+                               class="game-achievements__list-item" :key="`achievements${index}`">
                                 <i class="fas fa-trophy"></i>
-                            </div>
-                            <div class="game-achievements__list-item">
-                                <i class="fas fa-trophy"></i>
-                            </div>
-                            <div class="game-achievements__list-item">
-                                <i class="fas fa-trophy"></i>
-                            </div>
-                            <div class="game-achievements__list-item">
-                                <i class="fas fa-trophy"></i>
-                            </div>
-                            <div class="game-achievements__list-item">
-                                <i class="fas fa-trophy"></i>
-                            </div>
-                            <div class="game-achievements__list-item">
-                                <i class="fas fa-trophy"></i>
-                            </div>
-                            <div class="game-achievements__list-item">
-                                <i class="fas fa-trophy"></i>
-                            </div>
-                            <div class="game-achievements__list-item">
-                                <i class="fas fa-trophy"></i>
-                            </div>
+                            </a>
+                            <p v-else>
+                                Nothing to show
+                            </p>
                         </div>
                     </div>
-                    <div class="game-downloadable-list">
+                    <div class="game-downloadable-list  margin-bottom-40">
                         <div class="game-downloadable-list__ttl">
                             <i class="fas fa-plus-circle"></i>
                             <span class="ttl">Downloadable Content</span>
                             <span>for this game</span>
                         </div>
                         <div class="game-downloadable-list__list">
-                            <div class="game-downloadable-list__list-item" v-for="item in game.download_content" v-if="game.download_content">
+                            <div class="game-downloadable-list__list-item" v-for="item in game.download_content"
+                                 v-if="game.download_content">
                                 <div>
-                                    {{ item.name }}
+                                    <c-button status="plain">
+                                        {{ item.name }}
+                                    </c-button>
                                 </div>
                                 <div class="item-action">
                                         <span>
@@ -80,6 +88,29 @@
                             </div>
                         </div>
                     </div>
+                    <div class="game-news">
+                        <div class="game-news__ttl">
+                            <i class="fas fa-rss"></i>
+                            <span class="ttl">News</span>
+                            <span>about this game</span>
+                        </div>
+                        <div class="game-news__list">
+                            <ul>
+                                <li v-for="item in game.news">
+                                    <h3 class="text-white mb-2 font-weight-bold">
+                                        {{ item.title }}
+                                    </h3>
+                                    <p>
+                                        {{ item.text }}
+                                    </p>
+                                    <c-button status="plain" :href="item.link" class="pl-0">
+                                        <i class="fas fa-external-link-alt margin-right-5"></i>
+                                        Read More
+                                    </c-button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,18 +119,19 @@
 
 <script>
     export default {
-        props:{
+        props: {
             game: Object
         }
     }
 </script>
 
 <style lang="scss" scoped>
-    .games-list{
+    .games-list {
         display: flex;
         width: 100%;
     }
-    .games-list__item{
+
+    .games-list__item {
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -110,7 +142,8 @@
         border: 3px solid #484760;
         overflow: hidden;
     }
-    .games-list__item-wrapper{
+
+    .games-list__item-wrapper {
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -118,19 +151,21 @@
         padding: 40px 35px 35px;
         background: rgba(61, 62, 93, .85);
     }
-    .games-list__item-link{
+
+    .games-list__item-link {
         color: #fff;
         opacity: .5;
         position: absolute;
         top: 15px;
         right: 15px;
         font-size: 16px;
-        &:hover{
+        &:hover {
             opacity: 1;
             cursor: pointer;
         }
     }
-    .games-list__item-head{
+
+    .games-list__item-head {
         display: flex;
         width: 100%;
         justify-content: space-between;
@@ -138,22 +173,42 @@
         color: #fff;
         margin-bottom: 30px;
     }
-    .games-list__sub-title{
-        color: #636377;
+
+    .game-info{
+        display: flex;
+        margin: 20px 0 30px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #4d4d65;
+        div{
+            padding: 3px 10px;
+            border-radius: 3px;
+            border: 1px solid rgba(255, 255, 255, .5);
+            color: #fff;
+            opacity: .3;
+            margin-right: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 13px;
+        }
     }
-    .game-achievements{
+
+    .games-list__sub-title {
+        color: #b1b1bf;
+    }
+
+    .game-achievements {
         display: flex;
         flex-direction: column;
         width: 100%;
-        margin: 30px 0;
     }
-    .game-achievements__ttl{
+
+    .game-achievements__ttl {
         display: flex;
         width: 100%;
         align-items: center;
         font-size: 14px;
-        color: #636377;
-        .ttl{
+        color: #b1b1bf;
+        .ttl {
             color: #0f85ca;
             margin: 0 10px;
             text-transform: uppercase;
@@ -161,12 +216,14 @@
             font-size: 15px;
         }
     }
-    .game-achievements__list{
+
+    .game-achievements__list {
         display: flex;
         width: 100%;
         margin-top: 20px;
     }
-    .game-achievements__list-item{
+
+    .game-achievements__list-item {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -178,29 +235,30 @@
         margin-right: 10px;
         font-size: 20px;
         opacity: .5;
-        .fa-trophy{
+        .fa-trophy {
             color: #fff;
             opacity: .3;
         }
-        &:hover{
+        &:hover {
             opacity: 1;
             cursor: pointer;
+            text-decoration: none;
         }
     }
 
-    .game-downloadable-list{
+    .game-downloadable-list {
         display: flex;
         flex-direction: column;
         width: 100%;
-        margin: 30px 0 0;
     }
-    .game-downloadable-list__ttl{
+
+    .game-downloadable-list__ttl {
         display: flex;
         width: 100%;
         align-items: center;
         font-size: 14px;
-        color: #636377;
-        .ttl{
+        color: #b1b1bf;
+        .ttl {
             color: #0f85ca;
             margin: 0 10px;
             text-transform: uppercase;
@@ -208,13 +266,15 @@
             font-size: 15px;
         }
     }
-    .game-downloadable-list__list{
+
+    .game-downloadable-list__list {
         display: flex;
         flex-direction: column;
         width: 100%;
         margin-top: 20px;
     }
-    .game-downloadable-list__list-item{
+
+    .game-downloadable-list__list-item {
         display: flex;
         width: 100%;
         align-items: center;
@@ -223,7 +283,7 @@
         border-bottom: 1px solid rgba(255, 255, 255, .1);
         color: #fff;
         font-size: 14px;
-        .item-action{
+        .item-action {
             background: rgba(0, 0, 0, .3);
             padding: 4px 5px;
             border-radius: 5px;
@@ -231,9 +291,106 @@
             align-items: center;
             justify-content: space-between;
             width: 125px;
-            span{
+            span {
                 text-align: center;
                 width: 70%;
+            }
+        }
+    }
+
+    .game-friends-playing {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .game-friends-playing__ttl {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        font-size: 14px;
+        color: #b1b1bf;
+        .ttl {
+            color: #0f85ca;
+            margin: 0 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 15px;
+        }
+    }
+
+    .game-friends-playing__list {
+        display: flex;
+        margin-top: 20px;
+        a {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 100%;
+            overflow: hidden;
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .3);
+            position: relative;
+            &:before {
+                content: "+";
+                width: 100%;
+                display: block;
+                line-height: 38px;
+                text-align: center;
+                font-size: 22px;
+                color: #fff;
+                opacity: .2;
+                z-index: 2;
+                position: absolute;
+            }
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: relative;
+                z-index: 3;
+            }
+        }
+    }
+
+    .game-news {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .game-news__ttl {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        font-size: 14px;
+        color: #b1b1bf;
+        .ttl {
+            color: #0f85ca;
+            margin: 0 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 15px;
+        }
+    }
+    .game-news__list{
+        margin-top: 20px;
+        ul{
+            padding: 0;
+            margin: 0;
+            li{
+                list-style: none;
+                color: #fff;
+                margin-bottom: 25px;
+                p{
+                    opacity: .8;
+                }
+                &:last-child{
+                    margin-bottom: 0;
+                }
+                .c-button.plain{
+                    color: #0f85ca;
+                }
             }
         }
     }

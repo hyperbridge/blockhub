@@ -1,5 +1,5 @@
 <template>
-    <div class="c-grid-container" :style="containerStyle">
+    <div class="c-grid-container" v-on:resize="getWindowHeight">
         <div class="c-grid__wrapper">
             <div class="c-grid__top position-relative" :class="{'margin-bottom-30' : hasNew}">
                 <div class="c-grid" :style="gridStyle">
@@ -32,7 +32,7 @@
             <div class="c-grid__has-new" v-if="hasNew">
                 new <i class="fas fa-long-arrow-alt-down"></i>
             </div>
-            <div class="c-grid__bottom position-relative">
+            <div class="c-grid__bottom position-relative" :class="['h-' + fixedIconHeight]" ref="gridFixed">
                 <div class="c-grid__bottom-divider">
                 </div>
                 <c-icon v-for="(item, index) in fixedItems"
@@ -113,6 +113,8 @@
         data() {
             return {
                 list: [],
+                windowHeight: null,
+                fixedIconHeight: null
             }
         },
         watch: {
@@ -129,46 +131,15 @@
                 immediate: true
             }
         },
-        computed: {
-            gridResponsiveWidth() {
-                return 80;
-            },
 
-            gridHeight() {
-                return Math.ceil(this.items.length / this.rowCount) *
-                    this.cellHeight
-            },
-
-            gridStyle() {
-                return {
-                    height: this.gridHeight + 'px'
-                }
-            },
-            containerStyle() {
-                return {
-                    height: '100%'
-                    // height: document.getElementsByClassName('page-shortcuts').clientHeight - 60 + 'px'
-                }
-            },
-
-            rowCount() {
-                return Math.floor(this.gridResponsiveWidth / this.cellWidth)
-            },
-
-            rowShift() {
-                if (this.center) {
-                    let contentWidth = this.items.length * this.cellWidth
-                    let rowShift = contentWidth < this.gridResponsiveWidth
-                        ? (this.gridResponsiveWidth - contentWidth) / 2
-                        : (this.gridResponsiveWidth % this.cellWidth) / 2
-
-                    return Math.floor(rowShift)
-                }
-
-                return 0
-            }
-        },
         methods: {
+            getWindowHeight(event) {
+                this.windowHeight = window.innerHeight;
+                // console.log(this.windowHeight)
+            },
+            matchHeight () {
+                this.fixedIconHeight = this.$refs.gridFixed.clientHeight
+            },
             /* Returns merged event object */
             wrapEvent(other = {}) {
                 return {
@@ -277,7 +248,46 @@
                     this.$emit('sort', this.wrapEvent())
                 }
             }
-        }
+        },
+        created() {
+            window.addEventListener('resize', this.getWindowHeight);
+        },
+        mounted () {
+            this.matchHeight()
+        },
+        computed: {
+            gridResponsiveWidth() {
+                return 80;
+            },
+
+            gridHeight() {
+                return Math.ceil(this.items.length / this.rowCount) *
+                    this.cellHeight
+            },
+
+            gridStyle() {
+                return {
+                    height: this.gridHeight + 'px'
+                }
+            },
+
+            rowCount() {
+                return Math.floor(this.gridResponsiveWidth / this.cellWidth)
+            },
+
+            rowShift() {
+                if (this.center) {
+                    let contentWidth = this.items.length * this.cellWidth
+                    let rowShift = contentWidth < this.gridResponsiveWidth
+                        ? (this.gridResponsiveWidth - contentWidth) / 2
+                        : (this.gridResponsiveWidth % this.cellWidth) / 2
+
+                    return Math.floor(rowShift)
+                }
+
+                return 0
+            }
+        },
     }
 </script>
 
@@ -345,10 +355,7 @@
         display: block;
         position: relative;
         width: 50px;
-        // overflow-x: visible;
-        // overflow-y: auto;
-        /* padding-right: 800px; margin-right: -800px; pointer-events: none; Pretty hacky way around the overflow bug */
-
+        height: 100%;
         &::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0) !important;
             border: 0 none !important;
