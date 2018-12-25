@@ -119,7 +119,7 @@
             },
             click() {
                 if (this.eventKey) {
-                    this.$store.dispatch(this.eventKey, this.eventValue)
+                    this.$store.commit(this.eventKey, this.eventValue)
                 }
             }
         }
