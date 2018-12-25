@@ -236,6 +236,22 @@ window.BlockHub.store = store
 window.BlockHub.router = router // doesnt work?
 window.BlockHub.seed = seed
 
+window.BlockHub.importStarterData = () => {
+    console.log('[BlockHub] Import starter data')
+
+    DB.marketplace.config.data[0].realms = seed.realms
+    DB.marketplace.assets.data = seed.assets
+    DB.marketplace.config.data[0].collections = seed.collections
+    DB.marketplace.config.data[0].gameSeries = seed.gameSeries
+    DB.marketplace.products.data = seed.products
+    DB.marketplace.config.data[0].ideas = seed.ideas
+    DB.funding.projects.data = seed.projects
+
+    store.dispatch('marketplace/updateState')
+    store.dispatch('funding/updateState')
+    store.dispatch('application/updateState')
+}
+
 window.BlockHub.importSeedData = () => {
     console.log('[BlockHub] Import seed data')
     // We dont want to mess with the important signed in account data
@@ -544,7 +560,7 @@ export let initializer = () => {
                 || store.state.application.environmentMode === 'beta'
                 || store.state.application.environmentMode === 'production') {
                 setTimeout(() => {
-                    BlockHub.importSeedData()
+                    BlockHub.importStarterData()
                 }, 1000)
             }
 
