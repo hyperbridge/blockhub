@@ -324,7 +324,7 @@
 
                 if (this.id === 'new') {
                     product = { ...this.$store.state.marketplace.defaultProduct }
-
+debugger
                     this.$store.state.application.developerMode = true
                     this.$store.dispatch('application/setEditorMode', 'editing')
                 }
@@ -412,7 +412,7 @@
             }
         },
         mounted() {
-            if (this.id === 'new') {
+            if (this.id === 'new') {debugger
                 this.$store.dispatch('application/setEditorMode', 'editing')
             }
         },

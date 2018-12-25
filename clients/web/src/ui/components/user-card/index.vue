@@ -111,7 +111,21 @@
                     return
                 }
 
-                BlockHub.Bridge.sendCommand('generateAddress', value)
+                if (!this.$store.state.application.activeProfile.meta) {
+                    this.$store.state.application.activeProfile.meta = {}
+                }
+
+                if (!this.$store.state.application.activeProfile.meta.walletIndex) {
+                    this.$store.state.application.activeProfile.meta.walletIndex = this.$store.state.application.account.profiles.find((profile) => profile.id === this.$store.state.application.activeProfile.id)
+                }
+
+                const index = this.$store.state.application.activeProfile.meta.walletIndex
+
+                BlockHub.Bridge.sendCommand('generateAddress', { index }).then((res) => {
+                    this.$store.state.application.activeProfile.address = res.address
+
+                    this.$snotify.success('Address generated')
+                })
             },
             copyToClipboard(value) {
                 BlockHub.Bridge.sendCommand('writeToClipboard', value)

@@ -66,7 +66,7 @@ export const encrypt = (data, key) => {
 }
 
 export const promptPasswordRequest = async (data = {}) => {
-    return new Promise(async (resolve) => {
+    return new Promise(async (resolve, reject) => {
         const mainScreen = electron.screen.getPrimaryDisplay()
         Windows.main.window.setSize(500, 800)
         Windows.main.window.center()
@@ -87,7 +87,8 @@ export const promptPasswordRequest = async (data = {}) => {
                 }
 
                 if (!passphrase) {
-                    throw new Error('Password was incorrect')
+                    console.log('Password was incorrect')
+                    continue
                 }
 
                 local.passphrase = passphrase
@@ -110,7 +111,7 @@ export const promptPasswordRequest = async (data = {}) => {
     })
 }
 
-export const createprofileRequest = (profile) => {
+export const createProfileRequest = (profile) => {
     return new Promise(async (resolve, reject) => {
         const id = (local.account.profileIndex || 10) +1
         const profile = await Wallet.create(local.passphrase, id)
@@ -131,23 +132,23 @@ export const createprofileRequest = (profile) => {
     })
 }
 
-export const saveprofileRequest = (profile) => {
+export const saveProfileRequest = (profile) => {
     return new Promise(async (resolve, reject) => {
-        const origprofile = local.account.profiles.find(i => i.id === profile.id)
+        const origProfile = local.account.profiles.find(i => i.id === profile.id)
 
-        origprofile.name = profile.name
+        origProfile.name = profile.name
 
         await saveAccountFile()
 
-        resolve(origprofile)
+        resolve(origProfile)
     })
 }
 
-export const removeprofileRequest = (profile) => {
+export const removeProfileRequest = (profile) => {
     return new Promise(async (resolve, reject) => {
-        const origprofile = local.account.profiles.find(i => i.id === profile.id)
+        const origProfile = local.account.profiles.find(i => i.id === profile.id)
 
-        const index = local.account.profiles.indexOf(origprofile)
+        const index = local.account.profiles.indexOf(origProfile)
         local.account.profiles.splice(index, 1)
 
         await saveAccountFile()
@@ -931,7 +932,8 @@ export const setAccountRequest = async () => {
             }
         }
 
-        await sendCommand('setAccountRequest', { account })
+        // TODO: this isnt account anymore necessarily
+        //await sendCommand('setAccountRequest', { account })
 
         resolve()
     })
@@ -1100,9 +1102,10 @@ export const deleteAccountRequest = async (data) => {
                     birthday: null,
                 }
 
-                await sendCommand('setAccountRequest', {
-                    account: local.account
-                })
+                // TODO: this isnt the account necessary, anymore
+                // await sendCommand('setAccountRequest', {
+                //     account: local.account
+                // })
             }
         })
     })
@@ -1244,6 +1247,15 @@ export const setEnvironmentMode = async (environmentMode) => {
         }
 
         resolve()
+    })
+}
+
+export const generateAddress = async ({ index }) => {
+    return new Promise(async (resolve) => {
+        const wallet = await Wallet.create(local.passphrase, index)
+        const address = wallet.address
+
+        resolve({ address })
     })
 }
 
@@ -1537,15 +1549,15 @@ export const runCommand = async (cmd, meta = {}) => {
         } else if (cmd.key === 'sendTransactionRequest') {
             resultData = await sendTransactionRequest(cmd.data)
             resultKey = 'sendTransactionResponse'
-        } else if (cmd.key === 'createprofileRequest') {
-            resultData = await createprofileRequest(cmd.data)
-            resultKey = 'createprofileResponse'
-        } else if (cmd.key === 'saveprofileRequest') {
-            resultData = await saveprofileRequest(cmd.data)
-            resultKey = 'saveprofileResponse'
-        } else if (cmd.key === 'removeprofileRequest') {
-            resultData = await removeprofileRequest(cmd.data)
-            resultKey = 'removeprofileResponse'
+        } else if (cmd.key === 'createProfileRequest') {
+            resultData = await createProfileRequest(cmd.data)
+            resultKey = 'createProfileResponse'
+        } else if (cmd.key === 'saveProfileRequest') {
+            resultData = await saveProfileRequest(cmd.data)
+            resultKey = 'saveProfileResponse'
+        } else if (cmd.key === 'removeProfileRequest') {
+            resultData = await removeProfileRequest(cmd.data)
+            resultKey = 'removeProfileResponse'
         } else if (cmd.key === 'createMarketplaceProductRequest') {
             resultData = await createMarketplaceProductRequest(cmd.data)
             resultKey = 'createMarketplaceProductResponse'
@@ -1576,6 +1588,9 @@ export const runCommand = async (cmd, meta = {}) => {
         } else if (cmd.key === 'transferTokenBatch') {
             resultData = await transferTokenBatch(cmd.data)
             resultKey = 'transferTokenBatchResponse'
+        } else if (cmd.key === 'generateAddress') {
+            resultData = await generateAddress(cmd.data)
+            resultKey = 'generateAddressResponse'
         } else if (cmd.key === 'eval') {
             // Don't allow eval in production
             if (!config.IS_PRODUCTION) {

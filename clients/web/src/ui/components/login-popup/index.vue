@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <label>Password</label>
                             <input type="password" class="form-control" placeholder="Password"
-                                    name="password" v-model="password">
+                                    name="password" v-model="password" @keyup.enter="next()">
                         </div>
                     </div>
                 </div>
