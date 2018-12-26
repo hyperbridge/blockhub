@@ -640,7 +640,7 @@
         },
         updated() {
             this.userSubmittedConnectionMessage = this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))];
-            this.checkScrollButton();
+            this.checkScrollButton()
         },
         methods: {
             deposit() {
@@ -716,14 +716,15 @@
                 this.checkScrollButton()
             },
             checkScrollButton() {
+                //console.log('Checking scroll')
                 try {
                     if ($('#scroll_sidebar').children().height() > $('#scroll_sidebar').height()) {
                         // Change the scroll direction when it hits the last 10px of the sidebar
                         if(($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight()) >= ($('#scroll_sidebar')[0].scrollHeight - 10)) {
-                            this.scrollMoreDirection = 'up';
+                            this.scrollMoreDirection = 'up'
                         }
                         else {
-                            this.scrollMoreDirection = 'down';
+                            this.scrollMoreDirection = 'down'
                         }
                     } else {
                         this.scrollMoreDirection = null
@@ -749,7 +750,7 @@
                 }
             },
             handleResize(event) {
-                if ( document.documentElement.clientWidth < 768 ){
+                if (document.documentElement.clientWidth < 768) {
                     this.mobileMode = true
                 } else {
                     this.mobileMode = false
@@ -760,8 +761,9 @@
         },
         created() {
             window.addEventListener('resize', this.handleResize())
-            this.handleResize();
-            this.checkScrollButton();
+            this.handleResize()
+            this.checkScrollButton()
+            
         },
         mounted() {
             this.updateBreadcrumbLinks()
@@ -778,9 +780,14 @@
                         this.checkScrollButton()
                     }, 250)
                 })
-                // setInterval(() => {
+                //this.checkScrollButton()
+
+                // setTimeout(() => {
                 //     this.checkScrollButton()
-                // }, 500)
+                // }, 1000)
+                setInterval(() => {
+                    this.checkScrollButton()
+                }, 500)
             })
 
             // setTimeout(() => {
@@ -1241,18 +1248,18 @@
 
     .page {
         
-        &:before {
-            content: '';
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 246px;
-            height: 100px;
-            z-index: 1;
-            background: linear-gradient(to top, rgba(48, 49, 77, 1) 60%, rgba(48, 49, 77, 0) 100%);
-            transform: rotate(0deg);
-            pointer-events: none;
-        }
+        // &:before {
+        //     content: '';
+        //     position: fixed;
+        //     bottom: 0;
+        //     left: 0;
+        //     width: 246px;
+        //     height: 100px;
+        //     z-index: 1;
+        //     background: linear-gradient(to top, rgba(48, 49, 77, 1) 60%, rgba(48, 49, 77, 0) 100%);
+        //     transform: rotate(0deg);
+        //     pointer-events: none;
+        // }
 
         &:after {
             content: '';
