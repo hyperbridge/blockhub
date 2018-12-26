@@ -19,9 +19,11 @@ const config = require('../config')
 const local = {
     provider: null,
     requests: {},
+    activeProfile: null,
     account: {
         wallet: null
     },
+    profiles: [],
     passphrase: null,
     password: null,
     events: {},
@@ -116,7 +118,7 @@ export const createProfileRequest = (profile) => {
         const id = (local.account.profileIndex || 10) +1
         const profile = await Wallet.create(local.passphrase, id)
 
-        local.account.profiles.push({
+        local.profiles.push({
             id,
             address: profile.address
         })
@@ -134,7 +136,7 @@ export const createProfileRequest = (profile) => {
 
 export const saveProfileRequest = (profile) => {
     return new Promise(async (resolve, reject) => {
-        const origProfile = local.account.profiles.find(i => i.id === profile.id)
+        const origProfile = local.profiles.find(i => i.id === profile.id)
 
         origProfile.name = profile.name
 
@@ -146,10 +148,10 @@ export const saveProfileRequest = (profile) => {
 
 export const removeProfileRequest = (profile) => {
     return new Promise(async (resolve, reject) => {
-        const origProfile = local.account.profiles.find(i => i.id === profile.id)
+        const origProfile = local.profiles.find(i => i.id === profile.id)
 
-        const index = local.account.profiles.indexOf(origProfile)
-        local.account.profiles.splice(index, 1)
+        const index = local.profiles.indexOf(origProfile)
+        local.profiles.splice(index, 1)
 
         await saveAccountFile()
 
@@ -215,7 +217,7 @@ export const transferTokenBatch = ({ batch, walletIndex }) => {
 
 export const transferTokens = ({ type, fromAddress, toAddress, amount }) => {
     return new Promise(async (resolve, reject) => {
-        const walletIndex = local.account.profiles.find((profile) => fromAddress.toLowerCase() === profile.address.toLowerCase()).id
+        const walletIndex = local.profiles.find((profile) => fromAddress.toLowerCase() === profile.address.toLowerCase()).id
         const web3 = local.wallet.web3
         const originWallet = await Wallet.create(local.passphrase, walletIndex)
         const originAddress = originWallet.address
@@ -470,7 +472,7 @@ export const createCuratorRequest = async (profile) => {
         const web3 = local.wallet.web3
         const developerContract = MarketplaceAPI.api.ethereum.state.contracts.Developer.deployed
 
-        profile = local.account.profiles.filter(i => i.id === profile.id)[0]
+        profile = local.profiles.filter(i => i.id === profile.id)[0]
 
         let watcher = developerContract.DeveloperCreated().watch(function (error, result) {
             if (!error) {
@@ -529,7 +531,7 @@ export const registerUsernameRequest = async (profile) => {
         const web3 = local.wallet.web3
         const developerContract = DomainAPI.api.ethereum.state.contracts.DomainManager.deployed
 
-        profile = local.account.profiles.filter(i => i.id === profile.id)[0]
+        profile = local.profiles.filter(i => i.id === profile.id)[0]
 
         let watcher = developerContract.DeveloperCreated().watch(function (error, result) {
             if (!error) {
@@ -553,7 +555,7 @@ export const createDeveloperRequest = async (profile) => {
         const web3 = local.wallet.web3
         const developerContract = MarketplaceAPI.api.ethereum.state.contracts.Developer.deployed
 
-        profile = local.account.profiles.filter(i => i.id === profile.id)[0]
+        profile = local.profiles.filter(i => i.id === profile.id)[0]
 
         let watcher = developerContract.DeveloperCreated().watch(function (error, result) {
             if (!error) {
@@ -883,15 +885,24 @@ export const deployContract = async ({ protocolName, contractName, oldContractAd
     })
 }
 
+export const updateState = async (data) => {
+    return new Promise(async (resolve) => {
+        for (let key in data.state) {
+            DB[data.module].config.data[0][key] = data.state[key]
+        }
+
+        DB.save()
+    })
+}
+
 
 export const setAccountRequest = async () => {
     return new Promise(async (resolve) => {
         let account = local.account
 
-        console.log('acc2222', account.privateKey)
         if (account.privateKey && local.password) {
             const decryptedPrivateKey = decrypt(account.privateKey, local.password)
-            console.log('acc55555', decryptedPrivateKey)
+
             account = {
                 address: account.address,
                 secretQuestion1: account.secretQuestion1,
@@ -905,13 +916,13 @@ export const setAccountRequest = async () => {
                 firstName: decrypt(account.firstName, decryptedPrivateKey),
                 lastName: decrypt(account.lastName, decryptedPrivateKey),
                 birthday: decrypt(account.birthday, decryptedPrivateKey),
-                activeProfile: account.activeProfile,
-                profiles: account.profiles.map(profile => ({
-                    id: profile.id,
-                    name: profile.name,
-                    address: profile.address,
-                    developerId: profile.developerId
-                }))
+                //activeProfile: account.activeProfile,
+                // profiles: profiles.map(profile => ({
+                //     id: profile.id,
+                //     name: profile.name,
+                //     address: profile.address,
+                //     developerId: profile.developerId
+                // }))
             }
         } else {
             account = {
@@ -927,8 +938,8 @@ export const setAccountRequest = async () => {
                 firstName: null,
                 lastName: null,
                 birthday: null,
-                activeProfile: { id: null },
-                profiles: []
+                //activeProfile: { id: null },
+                //profiles: []
             }
         }
 
@@ -1169,9 +1180,9 @@ Are you sure you want to send?`
         electron.dialog.showMessageBox(Windows.main.window, options, async (res) => {
             if (res === 0) {
                 console.log(fromAddress.toLowerCase())
-                console.log(local.account.profiles)
+                console.log(local.profiles)
                 
-                const walletIndex = local.account.profiles.find((profile) => fromAddress.toLowerCase() === profile.address.toLowerCase()).id
+                const walletIndex = local.profiles.find((profile) => fromAddress.toLowerCase() === profile.address.toLowerCase()).id
 
                 const wallet = await Wallet.create(local.passphrase, walletIndex)
                 const web3 = wallet.web3
@@ -1310,19 +1321,21 @@ export const handleCreateAccountRequest = async ({ email, password, birthday, fi
             lastName: encrypt(lastName, wallet.privateKey),
             birthday: encrypt(birthday, wallet.privateKey),
             versonCreated: config.APP_VERSION,
-            profileIndex: 10,
-            activeProfile: {
-                id: 10
-            },
-            profiles: [
-                {
-                    id: 10,
-                    name: 'Default',
-                    address: profile.address,
-                    privateKey: encrypt(profile.privateKey, password),
-                }
-            ]
+            profileIndex: 10
         }
+
+        local.activeProfile = {
+            id: 10
+        }
+        
+        local.profiles = [
+            {
+                id: 10,
+                name: 'Default',
+                address: profile.address,
+                privateKey: encrypt(profile.privateKey, password),
+            }
+        ]
 
         await saveAccountFile()
 
@@ -1339,16 +1352,16 @@ export const handleCreateAccountRequest = async ({ email, password, birthday, fi
                 birthday: birthday,
                 secretQuestion1: secretQuestion1,
                 secretQuestion2: secretQuestion2,
-                activeProfile: {
-                    id: 10
-                },
-                profiles: [
-                    {
-                        id: 10,
-                        name: 'Default',
-                        address: profile.address
-                    }
-                ]
+                // activeProfile: {
+                //     id: 10
+                // },
+                // profiles: [
+                //     {
+                //         id: 10,
+                //         name: 'Default',
+                //         address: profile.address
+                //     }
+                // ]
             }
         })
     })
@@ -1522,6 +1535,9 @@ export const runCommand = async (cmd, meta = {}) => {
         } else if (cmd.key === 'deployContract') {
             resultData = await deployContract(cmd.data)
             resultKey = 'deployContractResponse'
+        } else if (cmd.key === 'updateState') {
+            resultData = await updateState(cmd.data)
+            resultKey = 'updateStateResponse'
         } else if (cmd.key === 'createFundingProject') {
             resultData = await createFundingProject(cmd.data)
             resultKey = 'createFundingProjectResponse'

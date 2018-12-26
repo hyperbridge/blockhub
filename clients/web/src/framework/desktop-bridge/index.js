@@ -99,6 +99,10 @@ export const resolvePromptPasswordRequest = async (password) => {
     })
 }
 
+export const updateState = async (data) => {
+    return await sendCommand('updateState', data)
+}
+
 export const promptPasswordRequest = async (data) => {
     return new Promise(async (resolve) => {
         if (data.error) {

@@ -276,7 +276,7 @@
                 })
             },
             saveProfiles() {
-                //this.$store.state.application.account.profiles = this.profiles
+                //Object.values(this.$store.state.profiles.keyedById) = this.profiles
                 this.$store.dispatch('application/updateState')
             }
         },
@@ -319,7 +319,7 @@
                 }
             },
             '$store.state.profiles.list'(newVal, oldVal) {
-                this.$store.state.application.account.profiles = this.$store.state.profiles.list
+                //Object.values(this.$store.state.profiles.keyedById) = this.$store.state.profiles.list
             }
         },
     }

@@ -77,7 +77,7 @@
             </button>
         </div>
         <div v-if="previewMode && !user.address">
-            <c-button status="dark" size="small" @click="generateAddress">Generate Address</c-button>
+            <c-button status="dark" size="small" @click="generateAddress(user.id)">Generate Address</c-button>
         </div>
     </div>
 </template>
@@ -105,24 +105,26 @@
             removing: Boolean
         },
         methods: {
-            generateAddress() {
+            generateAddress(profileId) {
                 if (!this.$store.state.application.desktopMode) {
                     this.$store.commit('application/activateModal', 'welcome')
                     return
                 }
 
-                if (!this.$store.state.application.activeProfile.meta) {
-                    this.$store.state.application.activeProfile.meta = {}
+                const chosenProfile = this.$store.state.profiles.keyedById[profileId]
+
+                if (!chosenProfile.meta) {
+                    chosenProfile.meta = {}
                 }
 
-                if (!this.$store.state.application.activeProfile.meta.walletIndex) {
-                    this.$store.state.application.activeProfile.meta.walletIndex = this.$store.state.application.account.profiles.find((profile) => profile.id === this.$store.state.application.activeProfile.id)
+                if (!chosenProfile.meta.walletIndex) {
+                    chosenProfile.meta.walletIndex = Object.values(this.$store.state.profiles.keyedById).indexOf(chosenProfile)
                 }
 
-                const index = this.$store.state.application.activeProfile.meta.walletIndex
+                const index = chosenProfile.meta.walletIndex
 
                 BlockHub.Bridge.sendCommand('generateAddress', { index }).then((res) => {
-                    this.$store.state.application.activeProfile.address = res.address
+                    chosenProfile.address = res.address
 
                     this.$snotify.success('Address generated')
                 })

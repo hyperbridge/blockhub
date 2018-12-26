@@ -88,7 +88,7 @@
         },
         computed: {
             profiles() {
-                return this.$store.state.application.account.profiles
+                return Object.values(this.$store.state.profiles.keyedById)
             },
             activeProfile() {
                 return this.$store.state.application.activeProfile

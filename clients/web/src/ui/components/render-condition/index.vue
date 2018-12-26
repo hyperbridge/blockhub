@@ -52,6 +52,14 @@
                     if (this.type === 'user') {
                         this.satisfied = true
                     }
+
+                    BlockHub.Bridge.updateState({
+                        module: 'application', 
+                        state: {
+                            activeProfile: this.$store.state.application.activeProfile,
+                            profiles: Object.values(this.$store.state.profiles.keyedById)
+                        }
+                    }).then(() => {})
                 }
             }
         },
