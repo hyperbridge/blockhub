@@ -46,10 +46,10 @@
                                                         <span class="badge badge-warning" v-if="!darklaunch.enabled">Disabled</span>
                                                     </td>
                                                     <td>
-                                                        {{ darklaunch.description }}
+                                                        {{ darklaunch.description || '' }}
                                                     </td>
                                                     <td>
-                                                        {{ darklaunch.type }}
+                                                        {{ darklaunch.type || '' }}
                                                     </td>
                                                     <td>
                                                         <button class="btn btn-light btn-sm" @click.prevent="toggleDarklaunch(darklaunch.code)">Toggle</button>
@@ -71,7 +71,6 @@
 
 export default {
     components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
     },
     data() {
         return {
@@ -98,7 +97,18 @@ export default {
     },
     methods: {
         toggleDarklaunch(darklaunchCode) {
-            const darklaunch = this.$store.state.application.account.darklaunchFlags.find(darklaunch => darklaunch.code === darklaunchCode)
+            let darklaunch = this.$store.state.application.account.darklaunchFlags.find(darklaunch => darklaunch.code === darklaunchCode)
+
+            if (!darklaunch) {
+                darklaunch = {
+                    code: darklaunchCode,
+                    enabled: false,
+                    description: undefined,
+                    type: undefined
+                }
+
+                this.$store.state.application.account.darklaunchFlags.push(darklaunch)
+            }
 
             if (darklaunch.enabled) {
                 this.$store.dispatch('application/disableDarklaunch', darklaunch.code)

@@ -524,9 +524,9 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/community-discussion'], resolve)
         },
         {
-            path: '/community/chat',
+            path: '/chat',
             name: 'Chat',
-            component: (resolve) => require(['@/ui/screens/community-chat'], resolve)
+            component: (resolve) => require(['@/ui/screens/chat'], resolve)
         },
         {
             path: '/assets',

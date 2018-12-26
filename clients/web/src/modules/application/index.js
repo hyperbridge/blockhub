@@ -224,9 +224,11 @@ export const actions = {
     },
     enableDarklaunch(store, payload) {
         store.commit('enableDarklaunch', payload)
+        store.dispatch('updateState')
     },
     disableDarklaunch(store, payload) {
         store.commit('disableDarklaunch', payload)
+        store.dispatch('updateState')
     },
     deployContract(store, { protocolName, contractName, oldContractAddress }) {
         return new Promise((resolve, reject) => {

@@ -79,6 +79,12 @@
                                 <span class="text">Store</span>
                             </a>
                         </li>
+                        <li v-if="signedIn" v-darklaunch="'CHAT'">
+                            <a href="#/chat">
+                                <span class="icon fa fa-comments"></span>
+                                <span class="text">Chat</span>
+                            </a>
+                        </li>
                         <li v-if="signedIn" v-darklaunch="'CHEST'">
                             <a href="#/chest">
                                 <span class="icon fa fa-box-open"></span>
