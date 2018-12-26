@@ -1,71 +1,78 @@
 <template>
-    <div class="game-library__item" :class="{'is-active': active}">
-        <div class="item-img loading--w-spinner">
-            <c-img :src="game.images.mediumTile"/>
-            <div class="loader-block" v-if="isLoading">
-                <div class="loading-spinner">
+    <div class="game-library__item"
+         :class="{'is-active': active}"
+         :style="{'background-image' : 'url(' + game.images.mediumTile + ')' }"
+         @mouseover=" hovered=true "
+         @mouseleave=" hovered=false ">
+        <c-loading-bar-circle v-if="isLoading" />
+        <div class="game-library__item-info">
+            <div class="item-name">
+                {{ game.name }}
+            </div>
+            <div class="item-action"
+                 :class="{'active' : hovered }"
+                 @click=" showButtons = !showButtons ">
+                <div class="w-100 p-2">
+                    <span class="has-new">
+                        <i class="fas fa-cog"></i>
+                    </span>
+                    <span>
+                        <i class="fas fa-camera"></i>
+                    </span>
+                    <span>
+                        <i class="fas fa-star"></i>
+                    </span>
+                    <span>
+                        <i class="fas fa-play"></i>
+                    </span>
                 </div>
-            </div>
-        </div>
-        <div class="item-name">
-            {{ game.name }}
-        </div>
-        <div class="item-action">
-            <div>
-                <span class="has-new">
-                    <i class="fas fa-cog"></i>
-                </span>
-                <span>
-                    <i class="fas fa-camera"></i>
-                </span>
-                <span>
-                    <i class="fas fa-star"></i>
-                </span>
-                <span>
-                    <i class="fas fa-play"></i>
-                </span>
-            </div>
-            <div style="height: 20px; width: 20px;margin-right: -5px">
-                <c-dropdown :class="{'no-right-border' : shareList}" @click="activeMenu">
-                    <ul class="item-dropdown">
-                        <li>
-                            <a href="#3">
-                                <i class="fas fa-list-alt"></i>
-                                Add to Collection
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#3">
-                                <i class="fas fa-shopping-basket"></i>
-                                Market page
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#3">
-                                <i class="fas fa-th"></i>
-                                Inventory
-                            </a>
-                        </li>
-                        <hr>
-                        <li @click="toggleList">
-                            <i class="fas fa-share"></i>
-                            Share
-                            <c-share-list class="in-dropdown" :onlineList="online" :favoritesList="favorites" :show="shareList" />
-                        </li>
-                        <li>
-                            <a href="#3">
-                                <i class="fas fa-link"></i>
-                                Copy Link
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#3">
-                                <i class="fab fa-facebook"></i>
-                                Share on Facebook
-                            </a>
-                        </li>
-                    </ul>
-                </c-dropdown>
+                <!--Dropdown menu-->
+                <div hidden style="height: 20px; width: 20px;margin-right: -5px">
+                    <c-dropdown :class="{'no-right-border' : shareList}" @click="activeMenu">
+                        <ul class="item-dropdown">
+                            <li>
+                                <a href="#3">
+                                    <i class="fas fa-list-alt"></i>
+                                    Add to Collection
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#3">
+                                    <i class="fas fa-shopping-basket"></i>
+                                    Market page
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#3">
+                                    <i class="fas fa-th"></i>
+                                    Inventory
+                                </a>
+                            </li>
+                            <hr>
+                            <li @click="toggleList">
+                                <i class="fas fa-share"></i>
+                                Share
+                                <c-share-list class="in-dropdown" :onlineList="online" :favoritesList="favorites" :show="shareList" />
+                            </li>
+                            <li>
+                                <a href="#3">
+                                    <i class="fas fa-link"></i>
+                                    Copy Link
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#3">
+                                    <i class="fab fa-facebook"></i>
+                                    Share on Facebook
+                                </a>
+                            </li>
+                        </ul>
+                    </c-dropdown>
+                </div>
+
+                <div class="item-action__buttons" v-if="$slots.default && showButtons">
+                    <slot />
+                </div>
             </div>
         </div>
     </div>
@@ -74,16 +81,19 @@
 <script>
     export default {
         name: 'game-library-item',
-        props: ['game', 'isLoading', 'online','favorites' ],
+        props: ['game', 'isLoading', 'online', 'favorites' ],
         data(){
             return{
                 shareList: false,
-                active: false
+                active: false,
+                hovered: false,
+                showButtons: false
             }
         },
         components: {
             'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve),
-            'c-share-list': (resolve) => require(['@/ui/components/share/type-1'], resolve)
+            'c-share-list': (resolve) => require(['@/ui/components/share/type-1'], resolve),
+            'c-loading-bar-circle': (resolve) => require(['@/ui/components/loading-bar/circle'], resolve)
         },
         methods:{
             toggleList(){
@@ -111,14 +121,16 @@
     }
     .game-library__item {
         width: 100%;
-        height: 100%;
+        height: 30rem;
         border-radius: 5px;
-        background: #1C2032;
         position: relative;
         display: flex;
         flex-direction: column;
+        justify-content: flex-end;
         transition: transform .3s ease;
         z-index: 15;
+        background-size: cover;
+        background-position: center;
         &:hover{
             cursor: pointer;
             will-change: transform;
@@ -130,45 +142,32 @@
         &.is-active{
             z-index: 21;
         }
-        .item-img{
-            position: relative;
-            img {
-                width: 100%;
-                height: 12rem;
-                object-fit: cover;
-                border-radius: 5px 5px 0 0;
-            }
-            .loader-block{
-                background: rgba(28, 32, 50, .7);
-                color: #1C2032;
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                display: flex;
-                .loading-spinner{
-                    margin: auto;
-                    position: relative;
-                    zoom: 4;
-                    &:before{
-                        border-color: #fff;
-                        border-right-color: transparent;
-                    }
-                }
-            }
-        }
+    }
+    .item-action__buttons{
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        background: #262b44;
+        width: 100%;
+        transition: height .3s ease;
+    }
+    .game-library__item-info{
+        position: relative;
+        z-index: 10;
         .item-name {
-            padding: 5px 10px;
+            padding: 7px 10px;
             font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background: rgba(0, 0, 0, .4);
         }
         .item-action {
-            background: rgba(255, 255, 255, .02);
-            padding: 5px 10px 5px 10px;
             margin-top: auto;
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
+            background: #1C2032;
             span {
                 margin: 0 10px 0 4px;
                 color: #C6C6D6;
@@ -188,6 +187,13 @@
                     color: #fff;
                     cursor: pointer;
                 }
+            }
+            height: 0;
+            overflow: hidden;
+            transition: all .3s ease;
+            &.active{
+                height: auto;
+                min-height: 35px;
             }
         }
     }

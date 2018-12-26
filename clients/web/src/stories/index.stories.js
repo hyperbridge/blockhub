@@ -5655,6 +5655,40 @@ storiesOf('Option Block', module)
                     </div>`
     }))
 
+
+storiesOf('Games Library', module)
+    .add('default', () => ({
+        components:{
+            'c-game-library-card': (resolve) => require(['@/ui/components/game-library/card-item.vue'], resolve),
+        },
+        data(){
+            return{
+                game:{
+                    images:{
+                        mediumTile: 'https://kor.ill.in.ua/m/610x385/1848785.jpg'
+                    },
+                    name: 'Dota 2',
+                }
+            }
+        },
+        template: `
+                <div class="row p-5" style="width: 1000px">
+                    <div class="col-4">
+                        <c-game-library-card :game="game">
+                            <c-button status="opacity-success" class="mb-2">
+                                Share
+                            </c-button>
+                            <c-button status="opacity-info" class="mb-2">
+                                Share
+                            </c-button>
+                            <c-button status="default" class="mb-2">
+                                Share
+                            </c-button>
+                        </c-game-library-card>
+                    </div>
+                </div>
+        `
+    }))
 /*
      Dynamic import - test version
 
