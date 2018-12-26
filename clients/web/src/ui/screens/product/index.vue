@@ -181,7 +181,7 @@
                 </div>
             </div>
         </div>
-        <c-custom-modal title="Help Center" v-if="firstProduct && editing && !$store.state.application.account.settings.client.hide_product_intro_modal" @close="closeModal">
+        <c-custom-modal title="Help Center" v-if="firstProduct && editing && !$store.state.application.account.settings.client.hide_product_intro_modal && false" @close="closeModal">
             <div class="help-modal__content" slot="modal_body" style="max-width: 500px">
                 <h4 class="h2 mb-3">Creating your first product?</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -254,7 +254,7 @@
                 </div>
             </template>
             <p slot="footer" class="margin-top-20">
-                Need help? <c-button status="plain" href="#/help">Check the Help Center</c-button>
+                <c-button status="dark" href="#/help">Need help? Check the Help Center</c-button>
             </p>
         </c-basic-popup>
 
@@ -324,7 +324,7 @@
 
                 if (this.id === 'new') {
                     product = { ...this.$store.state.marketplace.defaultProduct }
-
+debugger
                     this.$store.state.application.developerMode = true
                     this.$store.dispatch('application/setEditorMode', 'editing')
                 }
@@ -412,7 +412,7 @@
             }
         },
         mounted() {
-            if (this.id === 'new') {
+            if (this.id === 'new') {debugger
                 this.$store.dispatch('application/setEditorMode', 'editing')
             }
         },

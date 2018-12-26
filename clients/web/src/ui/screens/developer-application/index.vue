@@ -60,7 +60,7 @@
             convertProfile() {
                 const profileId = this.$store.state.application.activeProfile.id
 
-                BlockHub.feathersClient.service(`/profiles/:id/convert`).update(
+                BlockHub.WebClient.service(`/profiles/:id/convert`).update(
                     profileId,
                     {
                         role: 'developer'

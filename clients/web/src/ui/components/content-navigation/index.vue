@@ -4,10 +4,10 @@
             <c-spinner />
         </div>
         <template v-else>
-            <div v-if="!visibleItems.length">
-                <p>No results</p>
+            <div class="col-12 text-center" v-if="!visibleItems.length">
+                <h3>No results</h3>
             </div>
-            <slot :items="visibleItems"/>
+            <slot :items="visibleItems" />
             <div class="content-navigation-wrapper" v-show="visibleItems.length">
                 <c-pagination
                     v-if="paginationMode"

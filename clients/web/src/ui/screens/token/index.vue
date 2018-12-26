@@ -543,7 +543,7 @@ export default {
 
         const result = {
             account: this.$store.state.application.account,
-            profiles: this.$store.state.application.account.profiles,
+            profiles: Object.values(this.$store.state.profiles.keyedById),
             activeProfile: activeProfile,
             purchaseETH: null,
             purchaseHBX: null,

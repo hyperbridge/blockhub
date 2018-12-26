@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="height: 100%;">
         <a class="shortcut-sidebar__grid" href="#" @click.prevent="showGrid" hidden></a>
         <c-grid
             :center="false"
@@ -24,6 +24,7 @@
                         :link="props.item.link"
                         :eventKey="props.item.eventKey"
                         :eventValue="props.item.eventValue"
+                        :textColor="props.item.textColor"
                         :icon="props.item.icon"
                         :removable="props.item.removable"
                         :unread="props.item.unread"

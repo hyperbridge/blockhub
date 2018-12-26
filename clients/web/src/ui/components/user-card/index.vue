@@ -77,7 +77,7 @@
             </button>
         </div>
         <div v-if="previewMode && !user.address">
-            <c-button status="dark" size="small" @click="generateAddress">Generate Address</c-button>
+            <c-button status="dark" size="small" @click="generateAddress(user.id)">Generate Address</c-button>
         </div>
     </div>
 </template>
@@ -105,13 +105,29 @@
             removing: Boolean
         },
         methods: {
-            generateAddress() {
+            generateAddress(profileId) {
                 if (!this.$store.state.application.desktopMode) {
                     this.$store.commit('application/activateModal', 'welcome')
                     return
                 }
 
-                BlockHub.Bridge.sendCommand('generateAddress', value)
+                const chosenProfile = this.$store.state.profiles.keyedById[profileId]
+
+                if (!chosenProfile.meta) {
+                    chosenProfile.meta = {}
+                }
+
+                if (!chosenProfile.meta.walletIndex) {
+                    chosenProfile.meta.walletIndex = Object.values(this.$store.state.profiles.keyedById).indexOf(chosenProfile)
+                }
+
+                const index = chosenProfile.meta.walletIndex
+
+                BlockHub.Bridge.sendCommand('generateAddress', { index }).then((res) => {
+                    chosenProfile.address = res.address
+
+                    this.$snotify.success('Address generated')
+                })
             },
             copyToClipboard(value) {
                 BlockHub.Bridge.sendCommand('writeToClipboard', value)

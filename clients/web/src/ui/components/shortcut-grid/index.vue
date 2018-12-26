@@ -1,7 +1,7 @@
 <template>
     <div class="c-grid-container" v-on:resize="getWindowHeight">
         <div class="c-grid__wrapper">
-            <div class="c-grid__top position-relative" :class="{'margin-bottom-30' : hasNew}" ref="gridTop">
+            <div class="c-grid__top position-relative" :class="{'margin-bottom-30' : hasNew}">
                 <div class="c-grid" :style="gridStyle">
                     <GridItem v-for="v in list"
                               :key="v.index"
@@ -45,6 +45,7 @@
                         :text="item.text"
                         :eventKey="item.eventKey"
                         :eventValue="item.eventValue"
+                        :textColor="item.textColor"
                         :icon="item.icon"
                         :unread="item.unread"
                         :removable="item.removable"
@@ -269,12 +270,6 @@
                     height: this.gridHeight + 'px'
                 }
             },
-            containerStyle() {
-                this.getWindowHeight();
-                return {
-                    height: this.windowHeight - 80 + 'px'
-                }
-            },
 
             rowCount() {
                 return Math.floor(this.gridResponsiveWidth / this.cellWidth)
@@ -357,18 +352,10 @@
     }
 
     .c-grid-container {
-        /*display: block;*/
-        /*position: relative;*/
-        /*width: 50px;*/
-        // overflow-x: visible;
-        // overflow-y: auto;
-        /* padding-right: 800px; margin-right: -800px; pointer-events: none; Pretty hacky way around the overflow bug */
         display: block;
-        position: absolute;
+        position: relative;
         width: 50px;
-        /* height: 100%; */
-        bottom: 10px;
-        top: 10px;
+        height: 100%;
         &::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0) !important;
             border: 0 none !important;

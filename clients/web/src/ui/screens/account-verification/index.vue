@@ -165,7 +165,7 @@
 
             return {
                 errors: [],
-                profiles: { ...account.profiles },
+                profiles: { ...Object.values(this.$store.state.profiles.keyedById) },
                 activeProfile: null,
                 manual_override: false,
                 been1hour: been1hour,

@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="app-header__shadow"></div>
-            <a class="app-header__bar-center" :href="isLocked ? '#' : '#/'">
+            <a class="app-header__bar-center" :href="isLocked ? '#' : '#/'" @click="$route.push({ path: '/' })">
                 <c-loading-logo :isLoading="isLoader" />
             </a>
             <div class="app-header__bar-right">
@@ -109,7 +109,7 @@
                                 <p><span class="fa fa-edit"></span>Edit</p>
                             </button>
                         </li>
-                        <li v-if="!isLocked">
+                        <li v-if="!isLocked" hidden>
                             <c-quick-launch class="quick-launch" style="margin-top: -7px;" />
                         </li>
                         <li v-if="signedIn" class="token">

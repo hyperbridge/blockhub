@@ -16,7 +16,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" hidden>
                 <div class="col-12 mb-4" v-if="!$store.state.application.desktopMode">
                     <c-welcome-box />
                 </div>
@@ -70,7 +70,7 @@ export default {
     },
     data() {
         return {
-            showWelcomeModal: ['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode) && !this.$store.state.application.account.settings.client.hideWelcomeModal,
+            showWelcomeModal: false //['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode) && !this.$store.state.application.account.settings.client.hideWelcomeModal,
         }
     },
     computed: {

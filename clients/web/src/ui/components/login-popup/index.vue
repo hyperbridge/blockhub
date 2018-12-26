@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <label>Password</label>
                             <input type="password" class="form-control" placeholder="Password"
-                                    name="password" v-model="password">
+                                    name="password" v-model="password" @keyup.enter="next()">
                         </div>
                     </div>
                 </div>
@@ -107,6 +107,10 @@
                 if (email
                 && password) {
                     this.$store.dispatch('auth/authenticate', { strategy: 'local', email, password })
+                        .then((res) => {
+                            this.$store.commit('application/activateModal', null)
+                            this.loading = false
+                        })
                         // Just use the returned error instead of mapping it from the store.
                         .catch(error => {
                             // Convert the error to a plain object and add a message.

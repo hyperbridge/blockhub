@@ -8,7 +8,7 @@
             :links="links.gameOverview"
         />
 
-        <c-button @click="$store.commit('application/activateModal', 'import-product')" v-if="$store.state.application.editorMode === 'editing'">Import from third-party</c-button>
+        <c-button status="second-info" size="lg" class="mb-4" @click="$store.commit('application/activateModal', 'import-product')" v-if="$store.state.application.editorMode === 'editing'">Import from Network</c-button>
 
         <c-join-community v-if="!$store.state.application.desktopMode" />
 
@@ -38,7 +38,7 @@
                         Disapproved with 0 changes
                     </li>
                 </ul>
-                <c-button class="underline" @click="showClaimPopup">Created this game?</c-button>
+                <c-button status="underline" @click="showClaimPopup">Created this game?</c-button>
             </c-curator-info>
         </c-curator-panel>
 

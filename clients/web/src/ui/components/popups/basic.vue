@@ -53,10 +53,6 @@
         bottom: 0;
         z-index: 99;
         background: rgba(0, 0, 0, 0.7);
-        @media (max-width: 768px) {
-            max-width: 80%!important;
-            max-height: 70vh;
-        }
     }
 
     .c-basic-popup__close {
@@ -137,4 +133,5 @@
             }
         }
     }
+
 </style>

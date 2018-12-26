@@ -9,7 +9,7 @@
             <p class="alert alert-info">{{ notice }}</p>
             <br /><br />
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="form-group row">
                 <label class="switch switch-sm col-sm-3">
                     <label>Title</label>
@@ -28,23 +28,13 @@
                     <span class="form-text"></span>
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="switch switch-sm col-sm-3">
-                    <label>About</label>
-                </label>
-                <div class="col-sm-9">
-                    <c-html-editor height="200" :model.sync="project.value" />
-
-                    <span class="form-text"></span>
-                </div>
-            </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="form-group row">
-                <label class="switch switch-sm col-sm-3">
+                <label class="switch switch-sm col-sm-4">
                     <label>Tags</label>
                 </label>
-                <div class="col-sm-9">
+                <div class="col-sm-8">
                     <multiselect v-model="project.tags"
                                 tag-placeholder="Add this as new tag"
                                 placeholder="Search or add a tag"
@@ -59,19 +49,19 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="switch switch-sm col-sm-3">
+                <label class="switch switch-sm col-sm-4">
                     <label>Minimum Contribution Goal</label>
                 </label>
-                <div class="col-sm-9">
+                <div class="col-sm-8">
                     <input type="text" class="form-control" placeholder="Example: 0" v-model="project.meta.funds.goal">
                     <span class="form-text"></span>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="switch switch-sm col-sm-3">
+                <label class="switch switch-sm col-sm-4">
                     <label>Maximum Contribution Goal</label>
                 </label>
-                <div class="col-sm-9">
+                <div class="col-sm-8">
 
                     <input type="text" class="form-control" placeholder="Example: 1000" v-model="project.meta.funds.cap">
                     <span class="form-text"></span>
@@ -80,7 +70,13 @@
         </div>
 
         <div class="col-12">
-            <c-heading-bar-color class="mt-4 mb-4" colorCode="#444" textAlign="center">Advanced Options</c-heading-bar-color>
+            <c-html-editor height="200" :model.sync="project.value" />
+
+            <span class="form-text"></span>
+        </div>
+
+        <div class="col-12">
+            <c-heading-bar-color class="mt-4 mb-4" colorCode="#444" textAlign="center" hidden>Advanced Options</c-heading-bar-color>
 
             <div @click="toggleAdvanced">
                 <i class="mr-2 fas" :class="advanced ? 'fa-angle-up' : 'fa-angle-down'"></i>
@@ -528,5 +524,6 @@
 <style lang="scss">
 .note-editor.note-frame .note-editing-area .note-editable {
     background: #30314d !important;
+    color: #fff;
 }
 </style>

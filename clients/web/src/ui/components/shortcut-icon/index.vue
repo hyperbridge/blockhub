@@ -53,6 +53,10 @@
                 type: String,
                 default: null
             },
+            textColor: {
+                type: String,
+                default: null
+            },
             withButton: {
                 type: Boolean,
                 default: false
@@ -105,7 +109,7 @@
                     return {
                         'background-color': background,
                         //'box-shadow': `0px 6px 20px ${shadow}`,
-                        'color': this.brightness > 180 ? '#777' : '#f3f3f3'
+                        'color': this.textColor ? this.textColor : (this.brightness > 180 ? '#777' : 'rgba(255, 255, 255, 0.4)'),
                     }
                 }
                 return null
@@ -161,10 +165,10 @@
             width: 100%;
             height: 100%;
             display: block;
+            color: inherit;
 
             i {
                 font-size: 18px;
-                color: rgba(255, 255, 255, 0.4);
             }
         }
         img {

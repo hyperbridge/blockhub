@@ -66,7 +66,7 @@
                                     <h4>Profiles</h4>
                                     <div class="stat">
                                         <div>
-                                            {{ account.profiles.length }} owned by your account
+                                            {{ profileCount }} owned by your account
                                         </div>
                                     </div>
                                     <p>
@@ -248,7 +248,7 @@
         },
         computed: {
             profileCount() {
-                return Object.keys(this.$store.state.application.profiles).length
+                return Object.values(this.$store.state.profiles.keyedById).length
             },
             account() {
                 return this.$store.state.application.account

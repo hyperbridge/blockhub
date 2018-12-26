@@ -1,14 +1,14 @@
 <template>
     <div class="game-includes__item">
-        <router-link :to="{ name: 'Product', params: { id }}">
-            <c-img :src="image"/>
+        <router-link :to="`#/product/${id}`">
+            <c-img :src="image" />
         </router-link>
-        <router-link :to="{ name: 'Product', params: { id }}">
+        <router-link :to="`#/product/${id}`">
             <h4>{{ name }}</h4>
         </router-link>
         <p>{{ developer }}</p>
         <div class="rating-stars">
-            <c-rating :number="rating"/>
+            <c-rating :number="rating" />
         </div>
     </div>
 </template>
@@ -30,26 +30,26 @@
 </script>
 
 <style lang="scss" scoped>
-    .game-includes__item{
+    .game-includes__item {
         display: flex;
         flex-direction: column;
         max-width: 350px;
         color: #fff;
         width: 100%;
         min-width: 140px;
-        img{
+        img {
             width: 100%;
             height: auto;
             margin-bottom: 10px;
             border-radius: 3px;
         }
-        h4{
+        h4 {
             color: #fff;
             font-size: 18px;
             margin: 0 0 3px;
             font-weight: bold;
         }
-        .rating-stars{
+        .rating-stars {
             margin-top: auto;
         }
     }

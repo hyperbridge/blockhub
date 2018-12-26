@@ -1,6 +1,6 @@
 <template>
     <div class="logo-loader">
-        <img src="/static/img/blockhub-logotype-color.png" draggable="false" />
+        <img src="/static/img/blockhub-logotype-color.png" draggable="false"  @click="$route.push({ path: '/' })"/>
     </div>
 </template>
 
@@ -28,10 +28,6 @@
         svg{
             width: 100%;
             .fadeIn{
-                -webkit-animation: fadeIn 2s infinite linear;
-                -moz-animation: fadeIn 2s infinite linear;
-                -o-animation: fadeIn 2s infinite linear;
-                -ms-animation: fadeIn 2s infinite linear;
                 animation: fadeIn 2s infinite linear;
             }
         }

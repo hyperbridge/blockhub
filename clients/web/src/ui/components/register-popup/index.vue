@@ -33,14 +33,14 @@
                         <div class="form-group">
                             <label>Password</label>
                             <input type="password" class="form-control" placeholder="Password"
-                                    name="password" v-model="password">
+                                    name="password" v-model="password" @keyup.enter="next()">
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label>Repeat Password</label>
                             <input type="password" class="form-control" placeholder="Repeat Password"
-                                    name="repeatPassword" v-model="repeatPassword">
+                                    name="repeatPassword" v-model="repeatPassword" @keyup.enter="next()">
                         </div>
                     </div>
                 </div>

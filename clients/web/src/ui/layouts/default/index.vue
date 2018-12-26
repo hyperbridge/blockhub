@@ -134,7 +134,7 @@
                     </p>
                 </template>
                 <p slot="footer">
-                    Need help? <c-button status="plain" href="#/help">Check the Help Center</c-button>
+                    <c-button status="dark" href="#/help">Need help? Check the Help Center</c-button>
                 </p>
             </c-basic-popup>
 
@@ -232,7 +232,7 @@
                     </div>
                 </template>
                 <p slot="footer">
-                    Need help? <c-button status="plain" href="#/help">Check the Help Center</c-button>
+                    <c-button status="dark" href="#/help">Need help? Check the Help Center</c-button>
                 </p>
             </c-basic-popup>
 
@@ -312,8 +312,11 @@
             >
                 <div class="h4" slot="header">Withdraw</div>
                 <template slot="body">
-                    <div>
-                        <p>Current Profile: {{ activeProfile.name }}</p>
+                    <div v-if="!activeProfile.address">
+                        <p>No address found for this profile. You'll need to generate one within the desktop app.</p>
+                    </div>
+                    <div v-if="activeProfile.address">
+                        <p hidden>Current Profile: {{ activeProfile.name }}</p>
                         <p style="text-align: center">{{ activeProfile.address }}</p>
 
                         <div class="row">
@@ -340,18 +343,21 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <input type="text" class="form-control" placeholder="Address" v-model="withdrawRequest.address">
+                                    <input type="text" class="form-control" placeholder="Address" v-model="withdrawRequest.toAddress">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </template>
                 <p slot="footer">
-                    <c-button status="plain" class="color-red">
+                    <c-button status="plain" class="color-red" @click="$store.state.application.activeModal = null">
                         Cancel
                     </c-button>
-                    <c-button status="second-info" class="ml-3">
-                        Submit
+                    <c-button status="second-info" class="ml-3" @click="$store.state.application.activeModal = null" v-if="!activeProfile.address">
+                        OK
+                    </c-button>
+                    <c-button status="second-info" class="ml-3" @click="withdraw" v-if="activeProfile.address">
+                        Send
                     </c-button>
                 </p>
             </c-basic-popup>
@@ -364,7 +370,10 @@
             >
                 <div class="h4" slot="header">Deposit</div>
                 <template slot="body">
-                    <div>
+                    <div v-if="!activeProfile.address">
+                        <p>No address found for this profile. You'll need to generate one within the desktop app.</p>
+                    </div>
+                    <div v-if="activeProfile.address">
                         <h3>Deposit Address: {{ activeProfile.address }}</h3>
                         <br />
                         <div style="text-align: center;">
@@ -382,11 +391,11 @@
                     </div>
                 </template>
                 <p slot="footer">
-                    <c-button status="plain" class="color-red">
+                    <c-button status="plain" class="color-red" @click="$store.state.application.activeModal = null">
                         Cancel
                     </c-button>
-                    <c-button status="second-info" class="ml-3">
-                        Done
+                    <c-button status="second-info" class="ml-3" @click="$store.state.application.activeModal = null">
+                        OK
                     </c-button>
                 </p>
             </c-basic-popup>
@@ -397,7 +406,7 @@
 
             <div class="status-bar" @click="$store.commit('application/activateModal', 'connection-status')">
                 <c-status-dot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" /> 
-                Good
+                OK
             </div>
 
             <div class="version" v-if="desktopMode">v{{ $store.state.application.version }}</div>
@@ -671,15 +680,16 @@
 
             },
             withdraw() {
-                const type = 'ETH'
-                const destinationAddress = this.$refs.destinationAddress.value
-                const amount = Number(this.$refs.amount.value)
+                let fromAddress = this.$store.state.application.activeProfile.address
+                let { type, toAddress, amount } = this.withdrawRequest
 
-                Bridge.sendCommand('transferToken', {
+                amount = Number(amount)
+
+                Bridge.sendCommand('transferTokens', {
                     type,
-                    destinationAddress,
-                    amount,
-                    walletIndex
+                    fromAddress,
+                    toAddress,
+                    amount
                 }).then(() => {
                     console.log('Done')
                 })
@@ -1255,6 +1265,8 @@
         z-index: 99;
         background: rgba(0, 0, 0, 0.5);
         bottom: 0;
+        height: 100%;
+        padding-bottom: 50px;
         /*box-shadow: inset 0 0 3px #000;*/
     }
 

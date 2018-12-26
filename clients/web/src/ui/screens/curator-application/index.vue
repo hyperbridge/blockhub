@@ -43,15 +43,15 @@
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         },
         data() {
-            let curatorProfile = this.$store.state.application.account.profiles.find(profile => profile.role !== 'curator')
-            let activeProfile = this.$store.state.application.account.profiles.find(profile => profile.id == this.$store.state.application.activeProfile.id)
+            let curatorProfile = Object.values(this.$store.state.profiles.keyedById).find(profile => profile.role !== 'curator')
+            let activeProfile = Object.values(this.$store.state.profiles.keyedById).find(profile => profile.id == this.$store.state.application.activeProfile.id)
 
-            if (!activeProfile && this.$store.state.application.account.profiles.length) {
-                activeProfile = this.$store.state.application.account.profiles[0]
+            if (!activeProfile && Object.values(this.$store.state.profiles.keyedById).length) {
+                activeProfile = Object.values(this.$store.state.profiles.keyedById)[0]
             }
 
             return {
-                profiles: this.$store.state.application.account.profiles,
+                profiles: Object.values(this.$store.state.profiles.keyedById),
                 activeProfile: activeProfile,
                 curatorProfile: curatorProfile,
                 errors: []
