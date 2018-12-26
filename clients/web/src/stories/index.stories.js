@@ -5676,13 +5676,13 @@ storiesOf('Games Library', module)
                     <div class="col-4">
                         <c-game-library-card :game="game">
                             <c-button status="opacity-success" class="mb-2">
-                                Share
+                                Continue 
                             </c-button>
                             <c-button status="opacity-info" class="mb-2">
-                                Share
+                                Load
                             </c-button>
                             <c-button status="default" class="mb-2">
-                                Share
+                                Options
                             </c-button>
                         </c-game-library-card>
                     </div>

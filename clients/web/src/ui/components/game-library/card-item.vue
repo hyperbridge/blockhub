@@ -3,16 +3,16 @@
          :class="{'is-active': active}"
          :style="{'background-image' : 'url(' + game.images.mediumTile + ')' }"
          @mouseover=" hovered=true "
-         @mouseleave=" hovered=false ">
+         @mouseleave=" hovered=false;">
         <c-loading-bar-circle v-if="isLoading" />
-        <div class="game-library__item-info">
+        <div class="game-library__item-info"
+             @mouseleave="showButtons = !showButtons">
             <div class="item-name">
                 {{ game.name }}
             </div>
             <div class="item-action"
-                 :class="{'active' : hovered }"
-                 @click=" showButtons = !showButtons ">
-                <div class="w-100 p-2">
+                 :class="{'active' : hovered }">
+                <div class="item-action__icons">
                     <span class="has-new">
                         <i class="fas fa-cog"></i>
                     </span>
@@ -26,6 +26,11 @@
                         <i class="fas fa-play"></i>
                     </span>
                 </div>
+
+                <c-button status="plain">
+                    <i class="fas" :class="showButtons ? 'fa-chevron-up' : 'fa-chevron-down' " @click=" showButtons = !showButtons " ></i>
+                </c-button>
+
                 <!--Dropdown menu-->
                 <div hidden style="height: 20px; width: 20px;margin-right: -5px">
                     <c-dropdown :class="{'no-right-border' : shareList}" @click="activeMenu">
@@ -69,11 +74,12 @@
                         </ul>
                     </c-dropdown>
                 </div>
-
-                <div class="item-action__buttons" v-if="$slots.default && showButtons">
-                    <slot />
-                </div>
             </div>
+
+            <div class="item-action__buttons w-100" v-if="$slots.default && showButtons">
+                <slot />
+            </div>
+
         </div>
     </div>
 </template>
@@ -131,13 +137,15 @@
         z-index: 15;
         background-size: cover;
         background-position: center;
+        overflow: hidden;
         &:hover{
             cursor: pointer;
             will-change: transform;
             transform: perspective(300px) rotateX(0deg) rotateY(0deg) scale(1.03);
-            box-shadow: 0 0 35px rgba(0, 0, 0, .2);
-            transition: transform 200ms cubic-bezier(0.34, 1.01, 0.8, 0.24);
+            box-shadow: 0 0 35px #0e86ca;
+            transition: transform 200ms ease;
             z-index: 20;
+            /*border: 2px solid #0e86ca;*/
         }
         &.is-active{
             z-index: 21;
@@ -192,8 +200,7 @@
             overflow: hidden;
             transition: all .3s ease;
             &.active{
-                height: auto;
-                min-height: 35px;
+                height: 35px;
             }
         }
     }
