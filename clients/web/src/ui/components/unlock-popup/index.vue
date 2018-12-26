@@ -93,7 +93,7 @@
             unlock() {
                 $(this.$refs.submit.$el).removeClass('wrong')
 
-                this.$store.dispatch('application/unlockAccount', { password: this.$refs.password })
+                Bridge.resolvePromptPasswordRequest(this.$refs.password.value)
             },
             recoverPassword() {
                 this.recoveryError = null

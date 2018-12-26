@@ -145,16 +145,16 @@ export const setAccountRequest = async (data) => {
             })
         }
 
-        DB.application.config.data[0].account = {
-            ...DB.application.config.data[0].account,
-            ...data.account
-        }
+        // DB.application.config.data[0].account = {
+        //     ...DB.application.config.data[0].account,
+        //     ...data.account
+        // }
 
         // DB.application.config.data[0].activeProfile = data.account.profiles.find(i => i.id === data.activeProfile.id)
 
         // DB.application.config.data[0].developerMode = DB.application.config.data[0].activeProfile.role === 'developer'
 
-        DB.save()
+        //DB.save()
 
         resolve()
     })

@@ -298,10 +298,11 @@
             >
                 <div class="h4" slot="header">Withdraw</div>
                 <template slot="body">
-                    <div v-if="!activeProfile.address">
+                    <c-loading :enabled="withdrawRequest.processing" />
+                    <div v-if="!withdrawRequest.processing && !activeProfile.address">
                         <p>No address found for this profile. You'll need to generate one within the desktop app.</p>
                     </div>
-                    <div v-if="activeProfile.address">
+                    <div v-if="!withdrawRequest.processing && activeProfile.address">
                         <p hidden>Current Profile: {{ activeProfile.name }}</p>
                         <p style="text-align: center">{{ activeProfile.address }}</p>
 
@@ -335,7 +336,7 @@
                         </div>
                     </div>
                 </template>
-                <p slot="footer">
+                <p slot="footer" v-if="!withdrawRequest.processing">
                     <c-button status="plain" class="color-red" @click="$store.state.application.activeModal = null">
                         Cancel
                     </c-button>
@@ -518,7 +519,8 @@
                 withdrawRequest: {
                     type: 'ETH',
                     amount: 0,
-                    address: null
+                    address: null,
+                    processing: false
                 },
                 dragOptions: {
                     dropzoneSelector: '.does-not-exist',
@@ -650,13 +652,15 @@
 
                 amount = Number(amount)
 
-                Bridge.sendCommand('transferTokens', {
+                this.withdrawRequest.processing = true
+
+                BlockHub.Bridge.sendCommand('transferTokens', {
                     type,
                     fromAddress,
                     toAddress,
                     amount
                 }).then(() => {
-                    console.log('Done')
+                    this.withdrawRequest.processing = false
                 })
             },
             onSwipeLeft() {

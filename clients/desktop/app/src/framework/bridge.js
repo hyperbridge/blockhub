@@ -19,11 +19,9 @@ const config = require('../config')
 const local = {
     provider: null,
     requests: {},
-    activeProfile: null,
     account: {
         wallet: null
     },
-    profiles: [],
     passphrase: null,
     password: null,
     events: {},
@@ -118,7 +116,7 @@ export const createProfileRequest = (profile) => {
         const id = (local.account.profileIndex || 10) +1
         const profile = await Wallet.create(local.passphrase, id)
 
-        local.profiles.push({
+        DB.application.config.data[0].profiles.push({
             id,
             address: profile.address
         })
@@ -136,7 +134,7 @@ export const createProfileRequest = (profile) => {
 
 export const saveProfileRequest = (profile) => {
     return new Promise(async (resolve, reject) => {
-        const origProfile = local.profiles.find(i => i.id === profile.id)
+        const origProfile = DB.application.config.data[0].profiles.find(i => i.id === profile.id)
 
         origProfile.name = profile.name
 
@@ -148,10 +146,10 @@ export const saveProfileRequest = (profile) => {
 
 export const removeProfileRequest = (profile) => {
     return new Promise(async (resolve, reject) => {
-        const origProfile = local.profiles.find(i => i.id === profile.id)
+        const origProfile = DB.application.config.data[0].profiles.find(i => i.id === profile.id)
 
-        const index = local.profiles.indexOf(origProfile)
-        local.profiles.splice(index, 1)
+        const index = DB.application.config.data[0].profiles.indexOf(origProfile)
+        DB.application.config.data[0].profiles.splice(index, 1)
 
         await saveAccountFile()
 
@@ -217,7 +215,7 @@ export const transferTokenBatch = ({ batch, walletIndex }) => {
 
 export const transferTokens = ({ type, fromAddress, toAddress, amount }) => {
     return new Promise(async (resolve, reject) => {
-        const walletIndex = local.profiles.find((profile) => fromAddress.toLowerCase() === profile.address.toLowerCase()).id
+        const walletIndex = DB.application.config.data[0].profiles.find((profile) => fromAddress.toLowerCase() === profile.address.toLowerCase()).id
         const web3 = local.wallet.web3
         const originWallet = await Wallet.create(local.passphrase, walletIndex)
         const originAddress = originWallet.address
@@ -472,7 +470,7 @@ export const createCuratorRequest = async (profile) => {
         const web3 = local.wallet.web3
         const developerContract = MarketplaceAPI.api.ethereum.state.contracts.Developer.deployed
 
-        profile = local.profiles.filter(i => i.id === profile.id)[0]
+        profile = DB.application.config.data[0].profiles.filter(i => i.id === profile.id)[0]
 
         let watcher = developerContract.DeveloperCreated().watch(function (error, result) {
             if (!error) {
@@ -531,7 +529,7 @@ export const registerUsernameRequest = async (profile) => {
         const web3 = local.wallet.web3
         const developerContract = DomainAPI.api.ethereum.state.contracts.DomainManager.deployed
 
-        profile = local.profiles.filter(i => i.id === profile.id)[0]
+        profile = DB.application.config.data[0].profiles.filter(i => i.id === profile.id)[0]
 
         let watcher = developerContract.DeveloperCreated().watch(function (error, result) {
             if (!error) {
@@ -555,7 +553,7 @@ export const createDeveloperRequest = async (profile) => {
         const web3 = local.wallet.web3
         const developerContract = MarketplaceAPI.api.ethereum.state.contracts.Developer.deployed
 
-        profile = local.profiles.filter(i => i.id === profile.id)[0]
+        profile = DB.application.config.data[0].profiles.filter(i => i.id === profile.id)[0]
 
         let watcher = developerContract.DeveloperCreated().watch(function (error, result) {
             if (!error) {
@@ -944,7 +942,7 @@ export const setAccountRequest = async () => {
         }
 
         // TODO: this isnt account anymore necessarily
-        //await sendCommand('setAccountRequest', { account })
+        await sendCommand('setAccountRequest', { account })
 
         resolve()
     })
@@ -1114,9 +1112,9 @@ export const deleteAccountRequest = async (data) => {
                 }
 
                 // TODO: this isnt the account necessary, anymore
-                // await sendCommand('setAccountRequest', {
-                //     account: local.account
-                // })
+                await sendCommand('setAccountRequest', {
+                    account: local.account
+                })
             }
         })
     })
@@ -1180,9 +1178,9 @@ Are you sure you want to send?`
         electron.dialog.showMessageBox(Windows.main.window, options, async (res) => {
             if (res === 0) {
                 console.log(fromAddress.toLowerCase())
-                console.log(local.profiles)
+                console.log(DB.application.config.data[0].profiles)
                 
-                const walletIndex = local.profiles.find((profile) => fromAddress.toLowerCase() === profile.address.toLowerCase()).id
+                const walletIndex = DB.application.config.data[0].profiles.find((profile) => fromAddress.toLowerCase() === profile.address.toLowerCase()).id
 
                 const wallet = await Wallet.create(local.passphrase, walletIndex)
                 const web3 = wallet.web3
@@ -1323,12 +1321,8 @@ export const handleCreateAccountRequest = async ({ email, password, birthday, fi
             versonCreated: config.APP_VERSION,
             profileIndex: 10
         }
-
-        local.activeProfile = {
-            id: 10
-        }
         
-        local.profiles = [
+        DB.application.config.data[0].profiles = [
             {
                 id: 10,
                 name: 'Default',

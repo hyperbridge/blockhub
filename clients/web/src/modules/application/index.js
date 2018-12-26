@@ -146,16 +146,16 @@ export const actions = {
             store.commit('activateModal', 'editor-welcome')
         }
     },
-    unlockAccount(store, payload) {
-        Bridge.resolvePromptPasswordRequest(payload.password.value)
+    // unlockAccount(store, payload) {
+    //     Bridge.resolvePromptPasswordRequest(payload.password.value)
 
-        // Bridge.sendCommand('getAccountRequest', data).then((res) => {
-        //     store.state.account.address = res.account.address
+    //     // Bridge.sendCommand('getAccountRequest', data).then((res) => {
+    //     //     store.state.account.address = res.account.address
 
-        //     store.state.password_required = true
-        //     //store.state.signedIn = true
-        // })
-    },
+    //     //     store.state.password_required = true
+    //     //     //store.state.signedIn = true
+    //     // })
+    // },
     initEthereum(store, payload) {
         // Bridge.initProtocol({ protocolName: 'application' }).then((config) => {
         //     store.state.ethereum[store.state.currentEthereumNetwork] = config

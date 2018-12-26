@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="app-header__shadow"></div>
-            <a class="app-header__bar-center" :href="isLocked ? '#' : '#/'" @click="$route.push({ path: '/' })">
+            <a class="app-header__bar-center" :href="isLocked ? '#' : '#/'" @click="$router.push({ path: '/' })">
                 <c-loading-logo :isLoading="isLoader" />
             </a>
             <div class="app-header__bar-right">
