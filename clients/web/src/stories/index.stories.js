@@ -3032,13 +3032,13 @@ storiesOf('Gallery', module)
         data() {
             return {
                 items: [
-                    'https://steamcdn-a.akamaihd.net//apps/292030/ss_64eb760f9a2b67f6731a71cce3a8fb684b9af267.1920x1080.jpg?t=1529405012',
-                    'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_eda99e7f705a113d04ab2a7a36068f3e7b343d17.1920x1080.jpg?t=1529405012',
-                    'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_d5b80eb63c12a6484f26796f3e34410651bba068.1920x1080.jpg?t=1529405012',
+                    'https://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2018/03/15/105067468-Screen-Shot-2018-03-15-at-8.46.23-AM.1910x1000.jpg',
+                    'https://cdn.igromania.ru/mnt/news/7/e/0/5/c/6/74193/4703e6101b90868b_848x477.jpg',
+                    'https://cdn.gamerant.com/wp-content/uploads/Fortnite-Battle-Royale-more-players-GTA-Online.jpg.optimal.jpg',
                 ]
             }
         },
-        template: `<screen-gallery :items="items" class="col-6"/>`
+        template: `<screen-gallery :items="items" class="col-9"/>`
     }))
 
 
