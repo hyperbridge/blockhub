@@ -7,7 +7,7 @@ servers:
 - url: http://localhost:9001/api/v1
 - url: /api/v1
 info:
-  version: 0.8.0
+  version: 0.8.1
   title: BlockHub Web Service API
   description: BlockHub Web Service API
   contact:
@@ -921,7 +921,7 @@ components:
             '$ref': '#/components/schemas/Scope'
     User:
       description: Main item in the system. Typically would be used to represent a
-        person in BlockHub. User can have multiple Projects and
+        person in window.BlockHub. User can have multiple Projects and
         Credentials
       properties:
         username:

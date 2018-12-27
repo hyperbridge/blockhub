@@ -30,15 +30,25 @@ export const init = () => {
     const databaseInitialize = () => {
     }
 
-    const idbAdapter = (new Loki()).getIndexedAdapter()
+    if (typeof indexedDB !== 'undefined') {
+        const idbAdapter = (new Loki()).getIndexedAdapter()
 
-    loki = window.loki = new Loki('main.db', {
-        adapter: new idbAdapter('main.db'),
-        autoload: false,
-        //autoloadCallback: databaseInitialize,
-        autosave: true,
-        autosaveInterval: 4000
-    })
+        loki = window.loki = new Loki('main.db', {
+            adapter: new idbAdapter('main.db'),
+            autoload: false,
+            //autoloadCallback: databaseInitialize,
+            autosave: true,
+            autosaveInterval: 4000
+        })
+    } else {
+        console.log('ZZZ')
+        loki = window.loki = new Loki(null, {
+            env: 'BROWSER',
+            autoload: false,
+            autosave: false,
+            autosaveInterval: 4000
+        })
+    }
 
     window.closeLokiDatabase = function() {
         loki.close()
@@ -47,12 +57,12 @@ export const init = () => {
     loadDefault()
 
     loki.loadDatabase({}, (result) => {
-        console.log('[BlockHub] Database loaded from IndexedDB')
+        console.log('[BlockHub] Database loaded')
 
         let configFound = loki.getCollection('applicationConfig')
 
         // If not desktop mode, then wipe and reload (fresh data)
-        if (!window.isElectron && BlockHub.GetMode() !== 'local' && configFound) {
+        if (!window.isElectron && window.BlockHub.GetMode() !== 'local' && configFound) {
             console.log('[BlockHub] Production config detected. Clearing database.')
 
             if (window.closeLokiDatabase) {
@@ -129,7 +139,7 @@ export const init = () => {
 
         initialized = true
 
-        initCallback()
+        initCallback && initCallback()
     })
 }
 
@@ -210,5 +220,3 @@ export const toObject = () => {
     return {
     }
 }
-
-init()

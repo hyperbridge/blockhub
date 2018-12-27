@@ -2,8 +2,8 @@
     <transition-group tag="div" class="games-list" ref="gameList" name="games-list">
         <div
             class="games-list__item"
-            v-for="(item, index) in items"
-            :key="index"
+            v-for="(item) in items"
+            :key="item.id"
             :class="{ 'hovered' : hovered }"
             :style="{ width: itemWidth, background: itemBg }"
             v-if="items && items.length"

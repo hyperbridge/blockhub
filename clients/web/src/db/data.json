@@ -23,7 +23,7 @@
             }
         },
         "activeBrand": "thor",
-        "version": "0.8.0",
+        "version": "0.8.1",
         "initialized": false,
         "adminMode": false,
         "environmentMode": null,

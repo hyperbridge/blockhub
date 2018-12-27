@@ -181,7 +181,7 @@
                     }
                 }
 
-                BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
+                window.BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
                     if (productResult.id) {
                         this.successfulCreationMessage = "Product ownership has been changed"
                     }
@@ -225,7 +225,7 @@
                     }
                 }
 
-                BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
+                window.BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
                     if (productResult.id) {
                         this.successfulCreationMessage = "Product status has been updated"
                     }
@@ -313,7 +313,7 @@
                     }
                 }
 
-                BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
+                window.BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
                     if (productResult.id) {
                         this.product.id = productResult.id
                         this.successfulCreationMessage = "Congratulations, your product has been created!"
@@ -365,7 +365,7 @@
                     }
                 }
 
-                BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
+                window.BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
                     if (productResult.id) {
                         this.successfulCreationMessage = "Product has been saved"
                     }

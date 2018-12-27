@@ -110,7 +110,15 @@ export default {
                 "id": 5,
                 "name": "JordoBrooks"
             }
-        }
+        },
+        {
+            "id": 13,
+            "message": "More DOTS more DOTS more DOTS, okay stop DOTS",
+            "user": {
+                "id": 1,
+                "name": "fr0stbyte"
+            }
+        },
     ],
     "updates": [],
     "currencies": [

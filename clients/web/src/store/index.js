@@ -23,11 +23,6 @@ import seed from '../db/seed'
 Vue.use(Vuex)
 
 
-if (!window.BlockHub)
-    window.BlockHub = {}
-
-BlockHub.WebClient = feathersClient
-
 // Initial settings
 // Disable peer relaying by default (until we're somewhat stable)
 // Disable chaos monkey by default (until we're somewhat stable)
@@ -514,26 +509,6 @@ const monitorSimulatorMode = () => {
 // }
 
 
-BlockHub.GetMode = () => {
-    const hostname = window.location.hostname
-    let hash = document.location.hash.replace('#/', '')
-
-    if (hash.slice(0, 5) === 'mode=') {
-        return hash.replace('mode=', '')
-    }
-
-    if (hostname === 'blockhub.gg' || hostname === 'gamedelta.net') {
-        return 'production'
-    } else if (hostname === 'staging.blockhub.gg' || hostname === 'staging.gamedelta.net') {
-        return 'staging'
-    } else if (hostname === 'beta.blockhub.gg' || hostname === 'beta.gamedelta.net') {
-        return 'beta'
-    } else if (hostname === 'preview.blockhub.gg' || hostname === 'preview.gamedelta.net') {
-        return 'preview'
-    } else {
-        return 'local'
-    }
-}
 
 export let initializer = () => {
     return new Promise((resolve, reject) => {
@@ -552,7 +527,7 @@ export let initializer = () => {
             store.dispatch('marketplace/init')
             store.dispatch('funding/init')
 
-            BlockHub.environmentMode = store.state.application.environmentMode
+            window.BlockHub.environmentMode = store.state.application.environmentMode
 
             console.log('Environment mode: ' + store.state.application.environmentMode)
 
@@ -560,7 +535,7 @@ export let initializer = () => {
                 || store.state.application.environmentMode === 'beta'
                 || store.state.application.environmentMode === 'production') {
                 setTimeout(() => {
-                    BlockHub.importStarterData()
+                    window.BlockHub.importStarterData()
                 }, 1000)
             }
 

@@ -5,9 +5,9 @@
         </div>
         <transition-group name="list" tag="div" class="game-includes__list">
             <div class="game-includes__item-container"
-                 v-for="(item, index) of limitedList(limit)"
+                 v-for="(item) of limitedList(limit)"
                  :style="{ width: 'calc(100% / ' + showNumber + ')'}"
-                 :key="index" >
+                 :key="item.id" >
                 <c-includes-item :id="item.id" :name="item.name" :developer="item.developer" :rating="item.rating.overall" :image="item.images.mediumTile" />
             </div>
         </transition-group>

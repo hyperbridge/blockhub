@@ -340,7 +340,7 @@
 
                     if (this.filtersActive) {
                         this.debounce(() => {
-                            BlockHub.WebClient.service(`/search`).find(
+                            window.BlockHub.WebClient.service(`/search`).find(
                                 {
                                     query: this.query
                                 }

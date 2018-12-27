@@ -54,7 +54,7 @@ export default {
     },
     computed: {
         projects() {
-            return BlockHub.DB.funding.projects.find({ 'targetId': { '$eq': this.product.id } }) || []
+            return window.BlockHub.DB.funding.projects.find({ 'targetId': { '$eq': this.product.id } }) || []
         }
     }
 }

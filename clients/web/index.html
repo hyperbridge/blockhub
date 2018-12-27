@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8"/>
 
-    <title>BlockHub</title>
+    <title>{{ title }}</title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
@@ -16,6 +16,10 @@
 
     <meta name="description" content="BlockHub is a next-generation decentralized digital distribution platform"/>
     <meta name="keywords" content="blockhub, hyperbridge, blockchain, cryptocurrency, game, indie, developer"/>
+
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
 
     <meta property="og:title" content="BlockHub"/>
     <meta property="og:type" content="website"/>
@@ -697,5 +701,7 @@ setStatusMessage()
 <!-- //END THIS PAGE SCRIPTS ONLY -->
 
 <script>if (window.module) module = window.module;</script>
+
+<!--vue-ssr-outlet-->
 </body>
 </html>

@@ -71,7 +71,7 @@
         },
         computed: {
             className() {
-                let {animate, dragging} = this
+                let { animate, dragging } = this
 
                 return [
                     'c-grid-item-wrapper',
@@ -122,7 +122,6 @@
                 this.mouseMoveStartY = e.pageY
 
                 this.animate = false
-                this.dragging = true
 
                 document.addEventListener('mousemove', this.documentMouseMove)
                 document.addEventListener('touchmove', this.documentMouseMove)
@@ -158,6 +157,8 @@
                     gridY,
                     gridPosition
                 }
+
+                this.dragging = true
 
                 this.$emit('drag', $event)
             },

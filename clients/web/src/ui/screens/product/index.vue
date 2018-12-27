@@ -478,7 +478,7 @@ debugger
             },
             startImport() {
                 if (!this.$store.state.application.desktopMode) {
-                    return BlockHub.Notification.error('Desktop app required', 'Error')
+                    return window.BlockHub.Notification.error('Desktop app required', 'Error')
                 }
 
                 const onWindowLoad = `function onWindowLoad(requestId) {

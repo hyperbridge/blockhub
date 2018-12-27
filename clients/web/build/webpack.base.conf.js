@@ -14,7 +14,7 @@ module.exports = {
   mode: 'development',
   devtool: 'source-map',
   entry: {
-    app: helpers.root('/src/main.js')
+    app: helpers.root('/src/entry-client.js')
   },
   output: {
     path: config.build.assetsRoot,

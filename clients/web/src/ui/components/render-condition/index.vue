@@ -53,7 +53,7 @@
                         this.satisfied = true
                     }
 
-                    BlockHub.Bridge.updateState({
+                    window.BlockHub.Bridge.updateState({
                         module: 'application', 
                         state: {
                             activeProfile: this.$store.state.application.activeProfile,
@@ -101,7 +101,7 @@
                     return
                 }
 
-                this.initialized = BlockHub.initialized = true
+                this.initialized = window.BlockHub.initialized = true
 
                 this.$store.commit('updateSingle', ['application/initialized', true])
 

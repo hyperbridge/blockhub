@@ -390,7 +390,7 @@
                     }
                 }
 
-                BlockHub.Bridge.sendCommand('eval', cmd).then((projectResult) => {
+                window.BlockHub.Bridge.sendCommand('eval', cmd).then((projectResult) => {
                     if (projectResult.id) {
                         this.project.id = projectResult.id
                         this.successfulCreationMessage = "Congratulations, your project has been created!"
@@ -476,7 +476,7 @@
                     })
                 }
 
-                BlockHub.Bridge.sendCommand('eval', run.toString())
+                window.BlockHub.Bridge.sendCommand('eval', run.toString())
             },
             addTag (newTag) {
                 const tag = {

@@ -4,9 +4,11 @@ import store from '../store'
 
 Vue.use(Router)
 
-const appVersion = '0.8.0'
+const appVersion = '0.8.1'
 
 const router = new Router({
+    mode: 'history',
+    fallback: false,
     //mode: 'history',
     scrollBehavior: (to, from, savedPosition) => {
         if (

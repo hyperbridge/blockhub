@@ -243,7 +243,7 @@ export const runCommand = async (cmd, meta = {}) => {
 
         //     // Import seed data for now
         //     if (local.store.state.application.mode === 'production') {
-        //         //BlockHub.importSeedData()
+        //         //window.BlockHub.importSeedData()
 
         //         // local.store.state.application.desktopMode = true
         //         // local.store.state.application.signedIn = true
@@ -260,7 +260,7 @@ export const runCommand = async (cmd, meta = {}) => {
         } else if (cmd.key === 'systemError') {
             console.warn('[Bridge] Received system error from desktop', cmd.data)
 
-            BlockHub.Notification.error(cmd.data, 'System Error', {
+            window.BlockHub.Notification.error(cmd.data, 'System Error', {
                 timeout: 0,
                 pauseOnHover: true
             })

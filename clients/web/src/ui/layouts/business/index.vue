@@ -185,7 +185,7 @@
                     return
                 }
 
-                this.$store.state.application.initialized = BlockHub.initialized = true
+                this.$store.state.application.initialized = window.BlockHub.initialized = true
 
                 document.getElementById('startup-loader').style.display = 'none'
             }

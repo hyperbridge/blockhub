@@ -123,14 +123,14 @@
 
                 const index = chosenProfile.meta.walletIndex
 
-                BlockHub.Bridge.sendCommand('generateAddress', { index }).then((res) => {
+                window.BlockHub.Bridge.sendCommand('generateAddress', { index }).then((res) => {
                     chosenProfile.address = res.address
 
                     this.$snotify.success('Address generated')
                 })
             },
             copyToClipboard(value) {
-                BlockHub.Bridge.sendCommand('writeToClipboard', value)
+                window.BlockHub.Bridge.sendCommand('writeToClipboard', value)
 
                 this.$snotify.success('Address copied to clipboard')
             }

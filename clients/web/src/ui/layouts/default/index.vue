@@ -654,7 +654,7 @@
 
                 this.withdrawRequest.processing = true
 
-                BlockHub.Bridge.sendCommand('transferTokens', {
+                window.BlockHub.Bridge.sendCommand('transferTokens', {
                     type,
                     fromAddress,
                     toAddress,

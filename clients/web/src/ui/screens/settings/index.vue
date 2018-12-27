@@ -741,7 +741,7 @@ export default {
         setOpenStartup(value) {
             this.updateClientSettings('open_startup', value)
 
-            BlockHub.Bridge.sendCommand('setOpenStartup', value)
+            window.BlockHub.Bridge.sendCommand('setOpenStartup', value)
         },
         async requestNotifPerm() {
             const permission = await Notification.requestPermission()

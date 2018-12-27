@@ -43,7 +43,7 @@ export const recalculateReputation = () => {
 }
 
 export const notify = (notice) => {
-    BlockHub.Notification && BlockHub.Notification.info(notice.body, notice.title, {
+    window.BlockHub.Notification && window.BlockHub.Notification.info(notice.body, notice.title, {
         timeout: 5000,
         pauseOnHover: true
     })
