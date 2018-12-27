@@ -15,9 +15,9 @@ import * as application from '../modules/application'
 import * as database from '../modules/database'
 import * as cache from '../modules/cache'
 import { saveDB } from './plugins'
-import assets from '@/modules/assets'
-import community from '@/modules/community'
-import rootStore from '@/modules/root'
+import assets from '../modules/assets'
+import community from '../modules/community'
+import rootStore from '../modules/root'
 import seed from '../db/seed'
 
 Vue.use(Vuex)

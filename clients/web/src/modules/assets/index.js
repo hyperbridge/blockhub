@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import moment from 'moment'
-import { extract, getId, mergeId, normalize } from '@/store/utils'
+import { extract, getId, mergeId, normalize } from '../../store/utils'
 
-import transactionsData from '@/db/seed/asset-transactions.json'
-import usersData from '@/db/seed/users.json'
-import assetsData from '@/db/seed/assets.json'
-import collectionsData from '@/db/seed/collections.json'
-import productsData from '@/db/seed/products.json'
+import transactionsData from '../../db/seed/asset-transactions.json'
+import usersData from '../../db/seed/users.json'
+import assetsData from '../../db/seed/assets.json'
+import collectionsData from '../../db/seed/collections.json'
+import productsData from '../../db/seed/products.json'
 
 
 const transactions = normalize(transactionsData, (trx, i) => ({

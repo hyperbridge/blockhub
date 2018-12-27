@@ -1,35 +1,39 @@
 {
+  "ignore": [
+    "node_modules"
+  ],
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
-        "modules": false,
         "targets": {
-          "browsers": [
-            "> 1%",
-            "last 2 versions",
-            "not ie <= 8"
-          ]
+          "node": "current"
         }
       }
-    ],
-    "stage-2",
-    "vue"
+    ]
   ],
   "plugins": [
-    "transform-runtime",
-    "transform-es2015-template-literals",
-    "transform-es3-member-expression-literals"
-  ],
-  "env": {
-    "test": {
-      "presets": [
-        "env",
-        "stage-2"
-      ],
-      "plugins": [
-        "istanbul"
-      ]
-    }
-  }
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-logical-assignment-operators",
+    "@babel/plugin-transform-async-to-generator",
+    [
+      "@babel/plugin-proposal-optional-chaining",
+      {
+        "loose": false
+      }
+    ],
+    [
+      "@babel/plugin-proposal-pipeline-operator",
+      {
+        "proposal": "minimal"
+      }
+    ],
+    [
+      "@babel/plugin-proposal-nullish-coalescing-operator",
+      {
+        "loose": false
+      }
+    ]
+  ]
 }

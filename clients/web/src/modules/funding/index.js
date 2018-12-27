@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import { normalize } from 'normalizr'
 import schema from './schema'
-import * as DB from '@/db'
-import * as Bridge from '@/framework/desktop-bridge'
+import * as DB from '../../db'
+import * as Bridge from '../../framework/desktop-bridge'
 
 
 let rawData = {}

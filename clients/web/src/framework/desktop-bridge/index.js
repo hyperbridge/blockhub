@@ -1,4 +1,4 @@
-import * as DB from '@/db'
+import * as DB from '../../db'
 
 export let config = {
 }

@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import { normalize } from 'normalizr'
-import * as DB from '@/db'
-import * as Bridge from '@/framework/desktop-bridge'
-import schema from './schema'
 import axios from 'axios'
 import FormData from 'form-data'
-import { extract, getId } from '@/store/utils'
+import * as DB from '../../db'
+import * as Bridge from '../../framework/desktop-bridge'
+import schema from './schema'
+import { extract, getId } from '../../store/utils'
 
 let rawData = {}
 

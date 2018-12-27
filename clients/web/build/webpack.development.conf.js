@@ -12,7 +12,7 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin')
 const VueLoader = require('vue-loader')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
-const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
+//const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -44,6 +44,6 @@ module.exports = merge(baseWebpackConfig, {
                 './service-worker-dev.js'), 'utf-8')}</script>`
         }),
         new FriendlyErrorsPlugin(),
-        new VueSSRClientPlugin()
+        //new VueSSRClientPlugin()
     ]
 })

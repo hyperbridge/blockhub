@@ -1,10 +1,10 @@
 import moment from 'moment'
 
-import messagesData from '@/db/seed/messages.json'
-import usersData from '@/db/seed/users.json'
-import profilesData from '@/db/seed/profiles.json'
+import messagesData from '../../db/seed/messages.json'
+import usersData from '../../db/seed/users.json'
+import profilesData from '../../db/seed/profiles.json'
 
-import { extract, skip, getId, mergeId, normalize } from '@/store/utils'
+import { extract, skip, getId, mergeId, normalize } from '../../store/utils'
 
 
 export default {

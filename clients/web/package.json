@@ -21,6 +21,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@babel/preset-stage-0": "^7.0.0",
     "@feathersjs/authentication-client": "1.0.8",
     "@feathersjs/feathers": "3.2.3",
     "@feathersjs/socketio-client": "1.1.5",
@@ -34,6 +35,7 @@
     "jest": "23.6.0",
     "jest-serializer-vue": "2.0.2",
     "node-sass": "4.9.3",
+    "nodemon": "^1.18.9",
     "qartjs": "1.1.2",
     "ts-loader": "4.4.1",
     "vue": "2.5.21",
@@ -51,7 +53,7 @@
     "vue-numerals": "0.0.2",
     "vue-plugin-load-script": "1.2.0",
     "vue-router": "3.0.1",
-    "vue-server-renderer": "2.5.21",
+    "vue-router-sitemap": "0.0.4",
     "vue-sidebar-menu": "2.1.0",
     "vue-snotify": "3.2.1",
     "vue-upload-component": "2.8.15",
@@ -61,6 +63,19 @@
     "vuex-router-sync": "5.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.5",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-async-to-generator": "^7.1.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/preset-stage-1": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "@storybook/addon-actions": "4.0.0-alpha.16",
     "@storybook/addon-knobs": "4.0.0-alpha.16",
     "@storybook/addon-links": "4.0.0-alpha.16",
@@ -77,18 +92,6 @@
     "@vue/test-utils": "1.0.0-beta.25",
     "autoprefixer": "7.1.5",
     "awesome-typescript-loader": "5.0.0",
-    "babel-core": "6.26.0",
-    "babel-eslint": "8.0.1",
-    "babel-loader": "7.1.2",
-    "babel-plugin-istanbul": "4.1.5",
-    "babel-plugin-require-context-hook": "1.0.0",
-    "babel-plugin-transform-es2015-template-literals": "6.22.0",
-    "babel-plugin-transform-es3-member-expression-literals": "6.22.0",
-    "babel-plugin-transform-runtime": "6.23.0",
-    "babel-preset-env": "1.6.0",
-    "babel-preset-stage-2": "6.24.1",
-    "babel-preset-vue": "2.0.2",
-    "babel-register": "6.26.0",
     "bootstrap-vue": "2.0.0-rc.11",
     "chai": "4.1.2",
     "chalk": "2.1.0",
@@ -200,24 +203,5 @@
       "<rootDir>/test/",
       "<rootDir>/node_modules/"
     ]
-  },
-  "babel": {
-    "env": {
-      "test": {
-        "presets": [
-          [
-            "env",
-            {
-              "targets": {
-                "node": "current"
-              }
-            }
-          ]
-        ],
-        "plugins": [
-          "require-context-hook"
-        ]
-      }
-    }
   }
 }

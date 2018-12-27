@@ -1,5 +1,5 @@
 import { normalize } from 'normalizr'
-import * as DB from '@/db'
+import * as DB from '../../db'
 
 let rawData = {
     initialized: true

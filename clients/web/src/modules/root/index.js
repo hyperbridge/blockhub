@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import { getId, mergeId, normalize } from '@/store/utils'
-import { findRelation, decompose, findRelationPaths } from '@/store/modules-relation'
+import { getId, mergeId, normalize } from '../../store/utils'
+import { findRelation, decompose, findRelationPaths } from '../../store/modules-relation'
 
 /* Create and populate action/mutation needed (asset/offers) */
 
