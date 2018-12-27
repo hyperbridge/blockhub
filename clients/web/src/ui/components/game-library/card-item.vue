@@ -76,8 +76,19 @@
                 </div>
             </div>
 
-            <div class="item-action__buttons w-100" v-if="$slots.default && showButtons">
-                <slot />
+            <div class="item-action__buttons w-100" :class="{'active' : showButtons }">
+                <div @click="$emit('continue')">
+                    Continue
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div @click="$emit('load')">
+                    Load
+                    <i class="fas fa-reply"></i>
+                </div>
+                <div @click="$emit('options')">
+                    Options
+                    <i class="fas fa-cog"></i>
+                </div>
             </div>
 
         </div>
@@ -105,10 +116,6 @@
             toggleList(){
                 this.shareList = !this.shareList;
             },
-            activeMenu(){
-                console.log(this.active)
-                this.active = !this.active
-            }
         },
         watch:{
             active(){
@@ -152,12 +159,39 @@
         }
     }
     .item-action__buttons{
-        padding: 10px;
         display: flex;
         flex-direction: column;
         background: #262b44;
         width: 100%;
         transition: height .3s ease;
+        height: 0;
+        &.active{
+            height: 140px;
+            padding: 10px;
+        }
+        div{
+            padding: 7px;
+            border: 1px solid rgba(255, 255, 255, .2);
+            margin-bottom: 10px;
+            border-radius: 3px;
+            color: #d7daec;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all .3s ease;
+            i{
+                font-size: 16px;
+                width: 20px;
+                text-align: center;
+            }
+            &:hover{
+                background: rgba(255, 255, 255, .1);
+            }
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
     }
     .game-library__item-info{
         position: relative;

@@ -5664,6 +5664,7 @@ storiesOf('Games Library', module)
         data(){
             return{
                 game:{
+                    id: '2',
                     images:{
                         mediumTile: 'https://kor.ill.in.ua/m/610x385/1848785.jpg'
                     },
@@ -5674,17 +5675,7 @@ storiesOf('Games Library', module)
         template: `
                 <div class="row p-5" style="width: 1000px">
                     <div class="col-4">
-                        <c-game-library-card :game="game">
-                            <c-button status="opacity-success" class="mb-2">
-                                Continue 
-                            </c-button>
-                            <c-button status="opacity-info" class="mb-2">
-                                Load
-                            </c-button>
-                            <c-button status="default" class="mb-2">
-                                Options
-                            </c-button>
-                        </c-game-library-card>
+                        <c-game-library-card :game="game" />
                     </div>
                 </div>
         `
