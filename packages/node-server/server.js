@@ -17,22 +17,48 @@ const serverInfo =
 const app = express()
 if (typeof window === 'undefined') {
     global.document = {
-        createElement: function() {
-            return {}
+        createElement() {
+            return {
+                getAttribute() {
+                    return ''
+                }
+            }
+        },
+        getElementsByTagName() {
+            return {
+                getAttribute() {
+                    return ''
+                }
+            }
+        },
+        querySelector() {
+            return {
+                getAttribute() {
+                    return ''
+                }
+            }
         }
     }
 
-    global.window = {}
+    global.addEventListener = function() {
+    }
 
-    global.window.navigator = {
+    global.navigator = {
+        language: 'en',
         userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) BlockHub/0.8.0 Chrome/61.0.3163.100 Electron/2.0.14 Safari/537.36"
     }
 
-    if (!window.BlockHub)
-        window.BlockHub = {}
+    global.history = {
+        replaceState() {
 
-    window.BlockHub.GetMode = () => {
-        const hostname = window.location.hostname
+        }
+    }
+
+    if (!global.BlockHub)
+        global.BlockHub = {}
+
+    global.BlockHub.GetMode = () => {
+        const hostname = global.location.hostname
         let hash = document.location.hash.replace('#/', '')
 
         if (hash.slice(0, 5) === 'mode=') {
@@ -52,12 +78,14 @@ if (typeof window === 'undefined') {
         }
     }
 
-    window.location = global.document.location = {
+    global.location = global.document.location = {
       hostname: 'blockhub.gg',
       hash: '#'
     }
 
     global.fs = require('fs')
+
+    global.window = global
 }
 function createRenderer (bundle, options) {
     // https://github.com/vuejs/vue/blob/dev/packages/vue-server-renderer/README.md#why-use-bundlerenderer

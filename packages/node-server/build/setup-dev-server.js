@@ -5,7 +5,7 @@ const webpack = require('webpack')
 const chokidar = require('chokidar')
 const clientConfig = require('../../../clients/web/build/webpack.development.conf')
 const serverConfig = require('../../../clients/web/build/webpack.production.conf')
-
+console.log(clientConfig)
 const readFile = (fs, file) => {
     try {
         return fs.readFileSync(path.join(clientConfig.output.path, file), 'utf-8')
@@ -38,34 +38,34 @@ module.exports = function setupDevServer (app, templatePath, cb) {
     })
 
     // modify client config to work with hot middleware
-    clientConfig.entry.app = ['webpack-hot-middleware/client', clientConfig.entry.app]
-    clientConfig.output.filename = '[name].js'
-    clientConfig.plugins.push(
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoEmitOnErrorsPlugin()
-    )
+    //clientConfig.entry.app = ['webpack-hot-middleware/client', clientConfig.entry.app]
+    //clientConfig.output.filename = '[name].js'
+    // clientConfig.plugins.push(
+    //     new webpack.HotModuleReplacementPlugin(),
+    //     new webpack.NoEmitOnErrorsPlugin()
+    // )
 
     // dev middleware
     const clientCompiler = webpack(clientConfig)
-    const devMiddleware = require('webpack-dev-middleware')(clientCompiler, {
-        publicPath: clientConfig.output.publicPath,
-        noInfo: true
-    })
-    app.use(devMiddleware)
+    // const devMiddleware = require('webpack-dev-middleware')(clientCompiler, {
+    //     publicPath: clientConfig.output.publicPath,
+    //     noInfo: true
+    // })
+    // app.use(devMiddleware)
     clientCompiler.plugin('done', stats => {
         stats = stats.toJson()
         stats.errors.forEach(err => console.error(err))
         stats.warnings.forEach(err => console.warn(err))
         if (stats.errors.length) return
-        clientManifest = JSON.parse(readFile(
-            devMiddleware.fileSystem,
-            'vue-ssr-client-manifest.json'
-        ))
+        // clientManifest = JSON.parse(readFile(
+        //     devMiddleware.fileSystem,
+        //     'vue-ssr-client-manifest.json'
+        // ))
         update()
     })
 
     // hot middleware
-    app.use(require('webpack-hot-middleware')(clientCompiler, { heartbeat: 5000 }))
+    //app.use(require('webpack-hot-middleware')(clientCompiler, { heartbeat: 5000 }))
 
     // watch and update server renderer
     const serverCompiler = webpack(serverConfig)
