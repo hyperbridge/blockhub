@@ -12,7 +12,7 @@
                                     <c-img :src="item.data.images.mediumTile" :data-link="`#/product/${item.data.id}`" />
                                 </div>
                                 <div class="col-12 col-lg-6 frontpage-product__info">
-                                    <h2><a :href="`#/product/${item.data.id}`">{{ item.data.name }}</a></h2>
+                                    <h2><router-link :to="`/product/${item.data.id}`">{{ item.data.name }}</router-link></h2>
                                     <p>{{ item.data.shortDescription }}</p>
                                     <c-tags :tags="item.data.developerTags"></c-tags>
                                     <div class="frontpage-product__footer">

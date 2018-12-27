@@ -19,9 +19,9 @@
                     </a>
                 </div>
                 <div v-if="!desktopMode">
-                    <a class="app-header__bar-left-link" href="#/">
+                    <router-link class="app-header__bar-left-link" to="/">
                         <span class="fa fa-home"></span>
-                    </a>
+                    </router-link>
                     <a class="app-header__bar-left-link hide-on-mobile" @click="$router.go(-1)">
                         <span class="fa fa-arrow-left"></span>
                     </a>
@@ -31,9 +31,9 @@
                 </div>
             </div>
             <div class="app-header__shadow"></div>
-            <a class="app-header__bar-center" :href="isLocked ? '#' : '#/'" @click="$router.push({ path: '/' })">
+            <router-link class="app-header__bar-center" :to="isLocked ? '#' : '/'">
                 <c-loading-logo :isLoading="isLoader" />
-            </a>
+            </router-link>
             <div class="app-header__bar-right">
                 <div v-if="desktopMode && operatingSystem === 'windows'" class="windows-icons margin-right-5">
                     <a class="minimize" href="#" @click.prevent="minimizeWindow"></a>
