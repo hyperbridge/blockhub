@@ -6,13 +6,13 @@
          @mouseleave=" hovered=false;">
         <c-loading-bar-circle v-if="isLoading" />
         <div class="game-library__item-info"
-             @mouseleave="showButtons = !showButtons">
+             @mouseleave="showButtons = false">
             <div class="item-name">
                 {{ game.name }}
             </div>
             <div class="item-action"
                  :class="{'active' : hovered }">
-                <div class="item-action__icons">
+                <div class="item-action__icons px-2">
                     <span class="has-new">
                         <i class="fas fa-cog"></i>
                     </span>
@@ -142,7 +142,7 @@
             cursor: pointer;
             will-change: transform;
             transform: perspective(300px) rotateX(0deg) rotateY(0deg) scale(1.03);
-            box-shadow: 0 0 35px #0e86ca;
+            box-shadow: 0 0 15px #0e86ca;
             transition: transform 200ms ease;
             z-index: 20;
             /*border: 2px solid #0e86ca;*/
