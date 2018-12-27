@@ -1,4 +1,4 @@
-import { createApp } from '../../../clients/web/src/main'
+import { createApp } from '../../../clients/web/src/app'
 
 const isDev = process.env.NODE_ENV !== 'production'
 

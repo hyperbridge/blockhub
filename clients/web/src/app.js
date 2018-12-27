@@ -5,6 +5,7 @@ import Vue from 'vue'
 import moment from 'moment'
 import Snotify, { SnotifyPosition } from 'vue-snotify'
 import { Picker, Emoji } from 'emoji-mart-vue'
+import { sync } from 'vuex-router-sync'
 import VueCurrencyFilter from 'vue-currency-filter'
 import VueNumerals from 'vue-numerals'
 import VueI18n from 'vue-i18n'
@@ -130,6 +131,10 @@ export function createApp() {
                 window.navigator.language.split('-')
             ) || 'en'
 
+            // sync the router with the vuex store.
+            // this registers `store.state.route`
+            sync(store, router)
+            
             /* eslint-disable no-new */
             const app = window.BlockHub.Vue = new Vue({
                 //el: '#app',
