@@ -101,6 +101,20 @@
             <c-terms-popup :activated="$store.state.application.activeModal === 'terms'" @close="$store.state.application.activeModal = null" />
 
             <c-basic-popup
+                :activated="$store.state.application.activeModal === 'shortcutCreator'"
+                @close="$store.state.application.activeModal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">Connect</div>
+                <template slot="body">
+                    <c-social-connect v-for="(social, index) in socials" :social="social" :class=" index + 1 == socials.length ? 'margin-bottom-0' : 'margin-bottom-20'" />
+                </template>
+                <p slot="footer">
+                    Need help? <c-button status="plain" href="#/help">Check the Help Center</c-button>
+                </p>
+            </c-basic-popup>
+
+            <c-basic-popup
                 :activated="$store.state.application.editorMode === 'editing' && !$store.state.application.account.settings.client['hideEditorWelcomeModal/' + $router.currentRoute.fullPath]"
                 @close="$store.commit('application/updateClientSettings', 'hideEditorWelcomeModal/' + $router.currentRoute.fullPath, true)"
                 style="text-align: left;"
@@ -496,6 +510,7 @@
             'c-swiper': swiper,
             'c-slide': swiperSlide,
             'c-profile-chooser': (resolve) => require(['@/ui/components/profile-chooser'], resolve),
+            'c-social-connect': (resolve) => require(['@/ui/components/social-connect'], resolve)
         },
         data() {
             const self = this
@@ -596,7 +611,27 @@
 
                         event.stop()
                     }
-                }
+                },
+                socials: [
+                    {
+                        name: 'Facebook',
+                        description: 'Click to connect this social',
+                        icon: '../../../../static/img/icons/facebook.svg',
+                        connected: true
+                    },
+                    {
+                        name: 'Twitter',
+                        description: 'Click to connect this social',
+                        icon: '../../../../static/img/icons/twitter.svg',
+                        connected: false
+                    },
+                    {
+                        name: 'Twich',
+                        description: 'Click to connect this social',
+                        icon: '../../../../static/img/icons/twich.png',
+                        connected: true
+                    }
+                ]
             }
         },
         computed: {

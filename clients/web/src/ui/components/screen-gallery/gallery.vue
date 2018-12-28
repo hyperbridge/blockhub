@@ -15,6 +15,17 @@
                 <source :src="video_url" type="video/mp4">
             </video>
             <div v-show="run_slideshow" class="screen-gallery__progress-bar"></div>
+            <div class="screen-gallery__overlay">
+                <div class="h3">
+                    Title
+                </div>
+                <div class="h5">
+                    Sub title
+                </div>
+                <div>
+                    some text
+                </div>
+            </div>
         </div>
         <ul class="screen-gallery__thumb-nav" ref="thumb-nav">
             <li
@@ -194,7 +205,7 @@ export default {
             color: #fff;
         }
         img {
-            height: 245px;
+            height: 30rem;
             transition: opacity .3s ease .1s;
         }
         .screen-gallery__progress-bar {
@@ -216,7 +227,7 @@ export default {
     }
     .screen-gallery__thumb-nav{
         flex: 2;
-        max-height: 245px;
+        max-height: 30rem;
         padding: 0 10px;
         margin: 0;
         overflow-y: auto;
@@ -225,12 +236,13 @@ export default {
             list-style-type: none;
             background: rgba(0, 0, 0, 0.3);
             &:not(:last-child) {
-                margin-bottom: 10px;
+                margin-bottom: 1rem;
             }
-            height: 75px;
+            height: 9.25rem;
+            overflow: hidden;
             img {
                 border-radius: 6px;
-                height: 75px;
+                height: 10rem;
             }
         }
     }
@@ -266,6 +278,23 @@ export default {
         100% {
             width: 100%;
             opacity: 0;
+        }
+    }
+    .screen-gallery__overlay{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        color: #fff;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 30px;
+        min-height: 50%;
+        background: -webkit-linear-gradient(bottom, rgba(0,0,0,0.9) 0%,rgba(0,0,0,0) 100%);
+        .h3,
+        .h5{
+            font-weight: bold;
         }
     }
 </style>
