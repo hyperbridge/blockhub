@@ -55,7 +55,7 @@ const VueRouterSitemap = require('vue-router-sitemap').default
 const path = require('path')
 const router = require('./router').default
 
-const staticSitemap = path.resolve('./', 'sitemap.xml')
+const staticSitemap = path.resolve('./dist', 'sitemap.xml')
 const filterConfig = {
     isValid: false,
     rules: [
@@ -65,3 +65,5 @@ const filterConfig = {
 }
 
 new VueRouterSitemap(router).filterPaths(filterConfig).build('https://blockhub.gg').save(staticSitemap)
+
+process.exit()

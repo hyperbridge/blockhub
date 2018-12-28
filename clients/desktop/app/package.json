@@ -60,5 +60,24 @@
         "buble": "^0.19.6",
         "electron": "^2.0.13"
     },
-    "optionalDependencies": {}
+    "optionalDependencies": {},
+    "babel": {
+        "env": {
+            "test": {
+                "presets": [
+                    [
+                        "env",
+                        {
+                            "targets": {
+                                "node": "current"
+                            }
+                        }
+                    ]
+                ],
+                "plugins": [
+                    "require-context-hook"
+                ]
+            }
+        }
+    }
 }

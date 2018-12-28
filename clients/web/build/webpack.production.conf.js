@@ -15,7 +15,7 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const VueLoader = require('vue-loader')
 const loadMinified = require('./load-minified')
-const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
+//const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
 
 const env = (
     process.env.NODE_ENV === 'test'
@@ -151,7 +151,7 @@ const webpackConfig = merge(baseWebpackConfig, {
             minify: true,
             stripPrefix: 'dist/'
         }),
-        new VueSSRServerPlugin()
+        //new VueSSRServerPlugin()
     ]
 })
 
