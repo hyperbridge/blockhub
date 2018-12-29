@@ -23,14 +23,14 @@
             </c-button>
             <div class="heading-bar__nav" v-if="showArrows">
                 <a
-                    href="#3"
+                    href="#"
                     class="nav-prev"
                     @click.prevent="$emit('prevClick')"
                 >
                    <c-icon name="arrow-left"/>
                 </a>
                 <a
-                    href="#3"
+                    href="#"
                     class="nav-next"
                     @click.prevent="$emit('nextClick')"
                 >

@@ -4,14 +4,14 @@
         <div class="position-relative w-100" style="margin-top: -10px; zoom: 0.9;">
             <div class="app-header__bar-left">
                 <div v-if="desktopMode && operatingSystem === 'mac'" class="mac-icons">
-                    <a class="close_w" href="#" @click.prevent="closeWindow"></a>
-                    <a class="minimize" href="#" @click.prevent="minimizeWindow"></a>
-                    <a class="maximize" href="#" @click.prevent="maximizeWindow"></a>
+                    <c-button status="none" class="close_w" @click.prevent="closeWindow"></c-button>
+                    <c-button status="none" class="minimize" @click.prevent="minimizeWindow"></c-button>
+                    <c-button status="none" class="maximize" @click.prevent="maximizeWindow"></c-button>
                 </div>
                 <div v-if="desktopMode && operatingSystem === 'linux'" class="linux-icons">
-                    <a class="close_w" href="#" @click.prevent="closeWindow"></a>
-                    <a class="minimize" href="#" @click.prevent="minimizeWindow"></a>
-                    <a class="maximize" href="#" @click.prevent="maximizeWindow"></a>
+                    <c-button status="none" class="close_w" @click.prevent="closeWindow"></c-button>
+                    <c-button status="none" class="minimize" @click.prevent="minimizeWindow"></c-button>
+                    <c-button status="none" class="maximize" @click.prevent="maximizeWindow"></c-button>
                 </div>
                 <div v-if="desktopMode && operatingSystem === 'windows'">
                     <a class="app-header__bar-left-link margin-right-0 margin-left-10" href="javascript:;" data-action="fixedpanel-toggle" v-if="!isLocked">
@@ -20,14 +20,14 @@
                 </div>
                 <div v-if="!desktopMode">
                     <router-link class="app-header__bar-left-link" to="/">
-                        <span class="fa fa-home"></span>
+                        <span class="fa fa-home" style="color: #000"></span>
                     </router-link>
-                    <a class="app-header__bar-left-link hide-on-mobile" @click="$router.go(-1)">
-                        <span class="fa fa-arrow-left"></span>
-                    </a>
-                    <a class="app-header__bar-left-link hide-on-mobile" @click="$router.go(+1)">
-                        <span class="fa fa-arrow-right"></span>
-                    </a>
+                    <c-button status="none" class="app-header__bar-left-link hide-on-mobile" @click="$router.go(-1)">
+                        <span class="fa fa-arrow-left" style="color: #000"></span>
+                    </c-button>
+                    <c-button status="none" class="app-header__bar-left-link hide-on-mobile" @click="$router.go(+1)">
+                        <span class="fa fa-arrow-right" style="color: #000"></span>
+                    </c-button>
                 </div>
             </div>
             <div class="app-header__shadow"></div>
@@ -36,14 +36,14 @@
             </router-link>
             <div class="app-header__bar-right">
                 <div v-if="desktopMode && operatingSystem === 'windows'" class="windows-icons margin-right-5">
-                    <a class="minimize" href="#" @click.prevent="minimizeWindow"></a>
-                    <a class="maximize" href="#" @click.prevent="maximizeWindow"></a>
-                    <a class="close_w" href="#" @click.prevent="closeWindow"></a>
+                    <c-button status="none" class="minimize" @click.prevent="minimizeWindow"></c-button>
+                    <c-button status="none" class="maximize" @click.prevent="maximizeWindow"></c-button>
+                    <c-button status="none" class="close_w" @click.prevent="closeWindow"></c-button>
                 </div>
                 <div v-else>
-                    <a class="app-header__bar-left-link" href="javascript:;" data-action="fixedpanel-toggle" v-if="!isLocked">
-                        <span class="fas fa-bars"></span>
-                    </a>
+                    <c-button status="none" class="app-header__bar-left-link" data-action="fixedpanel-toggle" v-if="!isLocked">
+                        <span class="fas fa-bars" style="color: #000"></span>
+                    </c-button>
                 </div>
             </div>
             <div class="app-header__options" v-if="signedIn && developerMode">
@@ -64,45 +64,45 @@
                     <button class="btn btn-light btn--icon" data-action="horizontal-show"><span class="fa fa-bars"></span> Toggle navigation</button>
                     <ul>
                         <li class="app-header__create-account-btn" v-if="desktopMode && !signedIn && !isLocked">
-                            <a href="#/account/signup" class="">
+                            <c-button status="none" to="/account/signup" class="">
                                 <span class="text">CREATE ACCOUNT</span> <span class="fa fa-user-plus"></span>
-                            </a>
+                            </c-button>
                         </li>
                         <li class="app-header__download-btn" v-if="!desktopMode">
-                            <a href="#/download" class="">
+                            <c-button status="none" to="/download" class="">
                                 <span class="text">DOWNLOAD</span> <span class="fa fa-download"></span>
-                            </a>
+                            </c-button>
                         </li>
                         <li v-if="signedIn">
-                            <a href="#/">
+                            <c-button status="none" to="/">
                                 <span class="icon fa fa-shopping-cart"></span>
                                 <span class="text">Store</span>
-                            </a>
+                            </c-button>
                         </li>
                         <li v-if="signedIn" v-darklaunch="'CHAT'">
-                            <a href="#/chat">
+                            <c-button status="none" to="/chat">
                                 <span class="icon fa fa-comments"></span>
                                 <span class="text">Chat</span>
-                            </a>
+                            </c-button>
                         </li>
                         <li v-if="signedIn" v-darklaunch="'CHEST'">
-                            <a href="#/chest">
+                            <c-button status="none" to="/chest">
                                 <span class="icon fa fa-box-open"></span>
                                 <span class="text">Chest</span>
-                            </a>
+                            </c-button>
                         </li>
                         <li v-if="signedIn">
-                            <a href="#/streams" v-darklaunch="'STREAMS'">
+                            <c-button status="none" to="/streams" v-darklaunch="'STREAMS'">
                                 <span class="icon fa fa-eye"></span>
                                 <span class="text">Streams</span>
                                  <!-- podcast  global hand-holding-heart -->
-                            </a>
+                            </c-button>
                         </li>
                         <li v-if="signedIn" v-darklaunch="'COMMUNITY'">
-                            <a href="#/community">
+                            <c-button status="none" to="/community">
                                 <span class="icon fa fa-globe-americas"></span>
                                 <span class="text">Community</span>
-                            </a>
+                            </c-button>
                         </li>
                     </ul>
                 </nav>
@@ -119,12 +119,12 @@
                             <c-quick-launch class="quick-launch" style="margin-top: -7px;" />
                         </li>
                         <li v-if="signedIn" class="token">
-                            <a href="#/token">
+                            <c-button status="none" to="/token">
                                 <span class="token__count">
                                     0 <span class="icon fa fa-coins"></span>
                                 </span>
                                 <span class="text">Tokens</span>
-                            </a>
+                            </c-button>
                         </li>
                         <li v-if="signedIn">
                             <c-dropdown class="ml-4 account-menu" style="z-index: 12">
@@ -136,69 +136,69 @@
                                 </template>
                                 <ul class="item-dropdown">
                                     <li>
-                                        <a href="#/account">
+                                        <c-button status="none" to="/account">
                                             <i class="fas fa-user"></i>
                                             Account Info
-                                        </a>
+                                        </c-button>
                                     </li>
                                     <li v-darklaunch="'WALLETS'">
-                                        <a href="#/account/wallets">
+                                        <c-button status="none" to="/account/wallets">
                                             <i class="fas fa-credit-card"></i>
                                             My Wallets
-                                        </a>
+                                        </c-button>
                                     </li>
                                     <li v-if="activeProfile">
-                                        <a :href="`#/profile/${activeProfile.id}`">
+                                        <c-button status="none" :to="`/profile/${activeProfile.id}`">
                                             <i class="fas fa-user"></i>
                                             View Public Profile
-                                        </a>
+                                        </c-button>
                                     </li>
                                     <li v-if="signedIn && activeProfile" v-darklaunch="'CONTACTS'">
-                                        <a :href="`#/profile/${activeProfile.id}/contacts`">
+                                        <c-button status="none" :to="`/profile/${activeProfile.id}/contacts`">
                                             <i class="fas fa-users"></i>
                                             Contacts
-                                        </a>
+                                        </c-button>
                                     </li>
                                     <li>
-                                        <router-link to="/account/profiles">
+                                        <c-button status="none" to="/account/profiles">
                                             <i class="fas fa-users-cog"></i>
                                             Profile Manager
-                                        </router-link>
+                                        </c-button>
                                     </li>
                                     <li>
-                                        <a @click="$store.commit('application/showProfileChooser', true)">
+                                        <c-button status="none" @click="$store.commit('application/showProfileChooser', true)">
                                             <i class="fas fa-user-edit"></i>
                                             Switch Profile
-                                        </a>
+                                        </c-button>
                                     </li>
                                     <li>
-                                        <a href="#/account/signout">
+                                        <c-button status="none" to="/account/signout">
                                             <i class="fa fa-sign-out-alt"></i>
                                             Sign Out
-                                        </a>
+                                        </c-button>
                                     </li>
                                     <hr>
                                     <li v-darklaunch="'CHAT'">
-                                        <a href="#/settings/chat">
+                                        <c-button status="none" to="/settings/chat">
                                             <i class="fas fa-comments"></i>
                                             Chat Settings
-                                        </a>
+                                        </c-button>
                                     </li>
                                     <li>
-                                        <a href="#/help">
+                                        <c-button status="none" to="/help">
                                             <i class="fas fa-info-circle"></i>
                                             FAQ
-                                        </a>
+                                        </c-button>
                                     </li>
                                 </ul>
 
                             </c-dropdown>
                         </li>
                         <li v-if="!signedIn && !isLocked">
-                            <a href="#" @click="$store.commit('application/activateModal', 'login')">
+                            <c-button status="none" @click="$store.commit('application/activateModal', 'login')">
                                 <span class="icon fa fa-sign-out-alt"></span>
                                 <span class="text">Sign In</span>
-                            </a>
+                            </c-button>
                         </li>
                         <li v-if="!isLocked && languages" class="ml-3" v-darklaunch="'LANGUAGES'">
                             <c-language-dropdown :currentLanguage="currentLanguage" :languages="languages" @change="selectLanguages" />
@@ -207,10 +207,10 @@
                             <c-currency-dropdown :currentCurrency="currentCurrency" :currencies="currencies" @change="selectCurrency" />
                         </li>
                         <li v-if="!isLocked">
-                            <a href="#/help">
+                            <c-button status="none" to="/help">
                                 <span class="icon fa fa-question-circle"></span>
                                 <span class="text">Help</span>
-                            </a>
+                            </c-button>
                         </li>
                     </ul>
                 </nav>

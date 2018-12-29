@@ -117,7 +117,7 @@
                         v-for="(item, index) in socials" />
                 </template>
                 <p slot="footer">
-                    Need help? <c-button status="plain" href="#/help">Check the Help Center</c-button>
+                    <c-button status="dark" to="/help">Need help? Check the Help Center</c-button>
                 </p>
             </c-basic-popup>
 
@@ -933,7 +933,7 @@
 </script>
 
 <style>
-    #fixed_panel {
+    #fixed-panel {
         display: block;
     }
 

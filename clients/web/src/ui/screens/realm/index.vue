@@ -39,16 +39,16 @@
             <div class="col-12">
                 <ul class="nav">
                     <li class="nav-item active">
-                        <a href="#3" class="nav-link">Home</a>
+                        <a href="#" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#3" class="nav-link">News</a>
+                        <a href="#" class="nav-link">News</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#3" class="nav-link">Community</a>
+                        <a href="#" class="nav-link">Community</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#3" class="nav-link">Games</a>
+                        <a href="#" class="nav-link">Games</a>
                     </li>
                 </ul>
             </div>
@@ -72,7 +72,7 @@
                             <c-img :src="realm.images.follow" />
                         </div>
                         <div class="text">
-                            <a href="#3" class="btn btn-sm btn-info">Follow Us</a>
+                            <a href="#" class="btn btn-sm btn-info">Follow Us</a>
                             <h4>Get the news first!</h4>
                         </div>
                     </div>

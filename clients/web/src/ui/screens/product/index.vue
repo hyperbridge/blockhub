@@ -181,6 +181,8 @@
                 </div>
             </div>
         </div>
+
+        
         <c-custom-modal title="Help Center" v-if="firstProduct && editing && !$store.state.application.settings.client.hide_product_intro_modal && false" @close="closeModal">
             <div class="help-modal__content" slot="modal_body" style="max-width: 500px">
                 <h4 class="h2 mb-3">Creating your first product?</h4>
@@ -188,7 +190,7 @@
                     Etiam elementum ac ligula nec viverra. Nunc molestie augue a erat ultrices fermentum.</p>
                 <p>Curabitur non bibendum erat. Praesent nec vestibulum odio, vel euismod enim. Sed at tincidunt risus.
                     Mauris ac facilisis metus. Proin venenatis neque posuere urna sagittis ultricies.</p>
-                <p><a href="#/help" target="_blank">Learn more about creating products</a></p>
+                <p><c-button to="/help" target="_blank">Learn more about creating products</c-button></p>
             </div>
             <div slot="modal_footer" class="text-right w-100">
                 <c-button size="md" @click="closeModal">Got it</c-button>
@@ -254,7 +256,7 @@
                 </div>
             </template>
             <p slot="footer" class="margin-top-20">
-                <c-button status="dark" href="#/help">Need help? Check the Help Center</c-button>
+                <c-button status="dark" to="/help">Need help? Check the Help Center</c-button>
             </p>
         </c-basic-popup>
 

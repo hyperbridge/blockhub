@@ -4,7 +4,7 @@
             <div class="post-date">
                 {{ dateFormat(item.date) }}
             </div>
-            <a href="#3">
+            <a href="#">
                 <h3>{{ item.title }}</h3>
             </a>
             <p class="mb-4">{{ item.text | stringLength }}</p>

@@ -247,7 +247,7 @@
                             </div>
                             <input type="text" class="form-control" ref="input" placeholder="Public Ethereum address...." v-model="purchaseAddress" />
                         </div>
-                        <p hidden>Haven't verified yet? You'll need to do that! <c-button class="" href="#/account/verification" style="margin: 0 auto" @click="gaStep(5)">Verify Account</c-button></p>
+                        <p hidden>Haven't verified yet? You'll need to do that! <c-button class="" to="/account/verification" style="margin: 0 auto" @click="gaStep(5)">Verify Account</c-button></p>
                     </c-block>
                 </div>
 
@@ -258,7 +258,7 @@
                 <div class="col-8 offset-2" v-if="ethereumConnected && ethereumUnlocked && desktopMode && (!account.isVerified && !account.isVerifying) && !override" style="text-align: center">
                     <h2 style="text-align: center" hidden>Oops, you haven't verified your account yet. <br />You'll need to do this to purchase.</h2>
                     <br />
-                    <c-button class="c-button--lg" href="#/account/verification" style="margin: 0 auto" @click="gaStep(6)">Verify Account</c-button>
+                    <c-button class="c-button--lg" to="/account/verification" style="margin: 0 auto" @click="gaStep(6)">Verify Account</c-button>
                     <br /><br />
                     <c-button status="underline" size="sm" @click="manualOverride">Click here if you're pretty sure you've verified</c-button>
                     <br /><br />
@@ -462,7 +462,7 @@
                                         <br />
                                         <template v-if="tokenContractAddress">Payment Address: <a :href="`https://etherscan.io/address/${tokenContractAddress}`" @click="gaStep(21)"><strong>{{ tokenContractAddress }}</strong></a></template>
                                         <br />
-                                        <template v-if="!tokenContractAddress" class="alert alert-warning">No contract address. Check your <a href="#/settings/protocol">Protocol Settings</a></template>
+                                        <template v-if="!tokenContractAddress" class="alert alert-warning">No contract address. Check your <c-button href="/settings/protocol">Protocol Settings</c-button></template>
                                     </p>
                                 </div>
 

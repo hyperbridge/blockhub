@@ -19,12 +19,17 @@ const rootStore = {
                 [id]: data
             }
         },
-        update(rootState, [path, id, data]) {
+        update(rootState, [path, value]) {
             const [module, target] = path.split('/')
 
-            rootState[module][target][id] = {
-                ...rootState[module][target][id],
-                ...data
+            rootState[module][target] = value
+        },
+        updateObject(rootState, [path, key, value]) {
+            const [module, target] = path.split('/')
+
+            rootState[module][target][key] = {
+                ...rootState[module][target][key],
+                ...value
             }
         },
         updateSingle(rootState, [path, data]) {
@@ -80,7 +85,7 @@ const rootStore = {
         update({ commit }, [path, id, data]) {
             const [module, target] = path.split('/')
             // await axios.patch(`/${target}/${id}`, data)
-            commit('update', [path, id, data])
+            commit('updateObject', [path, id, data])
         },
         delete({ commit }, [path, id]) {
             const [module, target] = path.split('/')
@@ -101,7 +106,7 @@ const rootStore = {
                 [prop]: [...state[module][target][targetId][prop], itemId]
             }
 
-            commit('update', [`${module}/${target}`, targetId, data])
+            commit('updateObject', [`${module}/${target}`, targetId, data])
         },
         deleteWeakRel(
             { commit, dispatch, state },
@@ -112,7 +117,7 @@ const rootStore = {
             const data = {
                 [prop]: state[module][target][targetId][prop].filter(id => id != itemId)
             }
-            commit('update', [`${module}/${target}`, targetId, data])
+            commit('updateObject', [`${module}/${target}`, targetId, data])
         },
 
 
@@ -134,7 +139,7 @@ const rootStore = {
             const targetData = {
                 [prop]: [...state[module][target][targetId][prop], newId]
             }
-            commit('update', [`${module}/${target}`, targetId, targetData])
+            commit('updateObject', [`${module}/${target}`, targetId, targetData])
             return newId
         },
         deleteRelation(
@@ -147,7 +152,7 @@ const rootStore = {
             const targetData = {
                 [prop]: state[module][target][targetId][prop].filter(propId => propId != id)
             }
-            commit('update', [`${module}/${target}`, targetId, targetData])
+            commit('updateObject', [`${module}/${target}`, targetId, targetData])
             dispatch('delete', [`${propModule}/${prop}`, id])
         },
 

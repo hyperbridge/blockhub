@@ -9,7 +9,7 @@
                                 <p>BlockHub has launched and the token sale is now live!</p>
                             </div>
                             <div class="banner-action">
-                                <c-button tag="div" tatus="info" iconHide size="lg" href="#/token">JOIN NOW</c-button>
+                                <c-button tag="div" tatus="info" iconHide size="lg" to="/token">JOIN NOW</c-button>
                             </div>
                         </div>
                     </c-banner>
@@ -33,7 +33,7 @@
                     <p>To make things simple, hold ALT and click anywhere to send us feedback/bug reports!<p>
                     <p>Thanks for visiting and joining us on the journey to a decentralized future.</p>
                     <p hidden>We're a platform built by the community, for the community.</p>
-                    <p hidden><a href="#/help" target="_blank">Check out the BlockHub crowdfund</a></p>
+                    <p hidden><c-button to="/help" target="_blank">Check out the BlockHub crowdfund</c-button></p>
                 </div>
                 <div slot="modal_footer" class="text-right w-100">
                     <c-button size="md" @click="closeModal">Got it</c-button>

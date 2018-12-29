@@ -3,7 +3,7 @@
         <div class="assets-import__contact" v-if="step1">
             <h3>Import contacts</h3>
             <p class="mb-0">Now let's match the columns in your uploaded file to your MailChimp list.</p>
-            <p><a href="#3">See an example of the import field match process</a></p>
+            <p><a href="#">See an example of the import field match process</a></p>
             <c-notification-inline type="info" size="md" class="my-4">
                 A simple primary alert—check it out!
             </c-notification-inline>
@@ -37,8 +37,8 @@
                                 </select>
                             </div>
                             <div class="form-group m-0">
-                                <a href="#3" class="btn btn-sm btn-success">Save</a>
-                                <a href="#3" class="btn btn-sm btn-link mr-2">Skip</a>
+                                <a href="#" class="btn btn-sm btn-success">Save</a>
+                                <a href="#" class="btn btn-sm btn-link mr-2">Skip</a>
                             </div>
                         </div>
                         <ul class="list">

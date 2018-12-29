@@ -19,8 +19,8 @@
             :goal="funds ? funds.goal : 0"
         />
         <div class="item-action">
-            <c-button status="info" :href="`#/project/${id}`" iconHide>Check it out</c-button>
-            <c-button status="success" href="#/project/1" iconHide hidden>Donate Funds</c-button>
+            <c-button status="info" :to="`/project/${id}`" iconHide>Check it out</c-button>
+            <c-button status="success" :to="`/project/${id}`" iconHide hidden>Donate Funds</c-button>
         </div>
 
         <c-simple-vote :rating="rating" v-if="hovering" />

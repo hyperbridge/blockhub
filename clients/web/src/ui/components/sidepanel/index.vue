@@ -144,14 +144,14 @@
                             <ul>
                                 <li class="title">TOP 5</li>
                                 <li v-for="(product, index) in $store.state.marketplace.top5" :key="index" v-if="index < 5">
-                                    <a :href="`#/product/${product.id}`">
+                                    <c-button :to="`#/product/${product.id}`">
                                         <span class="text">{{ product.name }}</span>
-                                    </a>
+                                    </c-button>
                                 </li>
                                 <li class="more">
-                                    <a href="#/search">
+                                    <c-button to="/search">
                                         <span class="text">MORE...</span>
-                                    </a>
+                                    </c-button>
                                 </li>
                             </ul>
                         </div>
@@ -159,14 +159,14 @@
                             <ul>
                                 <li class="title">TOP FREE</li>
                                 <li v-for="(product, index) in $store.state.marketplace.topFree.slice(0, 5)" :key="index">
-                                    <a :href="`#/product/${product.id}`">
+                                    <c-button :to="`/product/${product.id}`">
                                         <span class="text">{{ product.name }}</span>
-                                    </a>
+                                    </c-button>
                                 </li>
                                 <li class="more">
-                                    <a href="#/search">
+                                    <c-button to="/search">
                                         <span class="text">MORE...</span>
-                                    </a>
+                                    </c-button>
                                 </li>
                             </ul>
                         </div>
@@ -186,7 +186,7 @@
             </div>
             <div slot="body" v-html="currentUpdate.content" />
             <small slot="footer">
-                Missed an update? <c-button status="plain" href="#/updates">Check our previous updates here.</c-button>
+                Missed an update? <c-button status="plain" to="/updates">Check our previous updates here.</c-button>
             </small>
         </c-basic-popup>
     </div>

@@ -13,8 +13,8 @@
                     We use cookies to make interactions with our websites and services easy and meaningful,
                     to better understand how they are used and to tailor advertising.</p>
                 <p>
-                    You can <c-button status="plain" href="#3">read more</c-button>
-                    and <c-button status="plain" href="#4">make you cookies choices here</c-button>.
+                    You can <c-button status="plain" href="#">read more</c-button>
+                    and <c-button status="plain" href="#">make you cookies choices here</c-button>.
                 </p>
                 <p>
                     By continuing to use this site you are giving

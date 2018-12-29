@@ -764,7 +764,7 @@
                         {
                             "name": "[GUIDE] Short Title",
                             "count": "381",
-                            "link": "#3"
+                            "link": "#"
                         },
                         {
                             "name": "Just Title",
@@ -924,7 +924,7 @@
                 "plans": [
                     {
                         "title": "Play Now",
-                        "link": "#3"
+                        "link": "#"
                     },
                     {
                         "title": "3 Month Subscription",

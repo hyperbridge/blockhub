@@ -4041,7 +4041,7 @@ exports[`Storyshots Assets Importer default 1`] = `
          
         <p>
           <a
-            href="#3"
+            href="#"
           >
             See an example of the import field match process
           </a>
@@ -4098,14 +4098,14 @@ exports[`Storyshots Assets Importer default 1`] = `
                 >
                   <a
                     class="btn btn-sm btn-danger mx-1"
-                    href="#3"
+                    href="#"
                   >
                     Edit
                   </a>
                    
                   <a
                     class="btn btn-sm btn-info mx-1"
-                    href="#3"
+                    href="#"
                   >
                     Skip
                   </a>
@@ -4153,14 +4153,14 @@ exports[`Storyshots Assets Importer default 1`] = `
                 >
                   <a
                     class="btn btn-sm btn-success"
-                    href="#3"
+                    href="#"
                   >
                     Save
                   </a>
                    
                   <a
                     class="btn btn-sm btn-link mr-2"
-                    href="#3"
+                    href="#"
                   >
                     Skip
                   </a>
@@ -4217,14 +4217,14 @@ exports[`Storyshots Assets Importer default 1`] = `
                 >
                   <a
                     class="btn btn-sm btn-danger mx-1"
-                    href="#3"
+                    href="#"
                   >
                     Edit
                   </a>
                    
                   <a
                     class="btn btn-sm btn-info mx-1"
-                    href="#3"
+                    href="#"
                   >
                     Skip
                   </a>
@@ -4281,14 +4281,14 @@ exports[`Storyshots Assets Importer default 1`] = `
                 >
                   <a
                     class="btn btn-sm btn-danger mx-1"
-                    href="#3"
+                    href="#"
                   >
                     Edit
                   </a>
                    
                   <a
                     class="btn btn-sm btn-info mx-1"
-                    href="#3"
+                    href="#"
                   >
                     Skip
                   </a>
@@ -5234,7 +5234,7 @@ exports[`Storyshots Block Title with arrows 1`] = `
         >
           <a
             class="nav-prev"
-            href="#3"
+            href="#"
           >
             <i
               class="fas fa-arrow-left"
@@ -5243,7 +5243,7 @@ exports[`Storyshots Block Title with arrows 1`] = `
            
           <a
             class="nav-next"
-            href="#3"
+            href="#"
           >
             <i
               class="fas fa-arrow-right"
@@ -5389,20 +5389,20 @@ exports[`Storyshots Block Title with tabs 1`] = `
         class="heading-bar__tabs"
       >
         <a
-          href="#3"
+          href="#"
         >
           First tab
         </a>
          
         <a
           class="active"
-          href="#3"
+          href="#"
         >
           Second tab
         </a>
          
         <a
-          href="#3"
+          href="#"
         >
           Third tab
         </a>
@@ -6258,7 +6258,7 @@ exports[`Storyshots Community Spotlight default 1`] = `
             
         <a
           class="title-icon"
-          href="#3"
+          href="#"
         >
           <i
             class="fas fa-comments"
@@ -6366,19 +6366,19 @@ exports[`Storyshots Dropdown default 1`] = `
       class="dropdown-menu"
     >
       <a
-        href="#3"
+        href="#"
       >
         RPG
       </a>
        
       <a
-        href="#3"
+        href="#"
       >
         ACTION
       </a>
        
       <a
-        href="#3"
+        href="#"
       >
         Cars
       </a>
@@ -6655,7 +6655,7 @@ exports[`Storyshots Game Plans default 1`] = `
         class="c-button success c-button--sm"
         data-target="#purchase-modal"
         data-toggle="modal"
-        href="#3"
+        href="#"
       >
         <i
           class="icon fas fa-check"
@@ -6683,7 +6683,7 @@ exports[`Storyshots Game Plans default 1`] = `
         class="c-button success c-button--sm"
         data-target="#purchase-modal"
         data-toggle="modal"
-        href="#4"
+        href="#"
       >
         <i
           class="icon fas fa-shopping-bag"
@@ -6711,7 +6711,7 @@ exports[`Storyshots Game Plans default 1`] = `
         class="c-button success c-button--sm"
         data-target="#purchase-modal"
         data-toggle="modal"
-        href="#4"
+        href="#"
       >
         <i
           class="icon fas fa-shopping-bag"
@@ -14035,7 +14035,7 @@ exports[`Storyshots Modal custom 1`] = `
           >
             <a
               class="btn btn-sm btn-success"
-              href="#3"
+              href="#"
             >
               Some Link
             </a>
@@ -14833,7 +14833,7 @@ exports[`Storyshots Pagination Debouncer 1`] = `
           class=""
         >
           <a
-            href="#3"
+            href="#"
           >
             3
           </a>
@@ -14842,7 +14842,7 @@ exports[`Storyshots Pagination Debouncer 1`] = `
           class=""
         >
           <a
-            href="#4"
+            href="#"
           >
             4
           </a>
@@ -14887,7 +14887,7 @@ exports[`Storyshots Pagination Debouncer 1`] = `
         <li>
           <a
             class="next"
-            href="#3"
+            href="#"
           >
             <i
               class="fas fa-angle-right"
@@ -14898,7 +14898,7 @@ exports[`Storyshots Pagination Debouncer 1`] = `
         <li>
           <a
             class="last"
-            href="#3"
+            href="#"
           >
             <i
               class="fas fa-angle-double-right"
@@ -14974,7 +14974,7 @@ exports[`Storyshots Pagination Limited to 5 pages 1`] = `
           class=""
         >
           <a
-            href="#3"
+            href="#"
           >
             3
           </a>
@@ -14983,7 +14983,7 @@ exports[`Storyshots Pagination Limited to 5 pages 1`] = `
           class=""
         >
           <a
-            href="#4"
+            href="#"
           >
             4
           </a>
@@ -15001,7 +15001,7 @@ exports[`Storyshots Pagination Limited to 5 pages 1`] = `
         <li>
           <a
             class="next"
-            href="#3"
+            href="#"
           >
             <i
               class="fas fa-angle-right"
@@ -15012,7 +15012,7 @@ exports[`Storyshots Pagination Limited to 5 pages 1`] = `
         <li>
           <a
             class="last"
-            href="#3"
+            href="#"
           >
             <i
               class="fas fa-angle-double-right"
@@ -15088,7 +15088,7 @@ exports[`Storyshots Pagination default 1`] = `
           class=""
         >
           <a
-            href="#3"
+            href="#"
           >
             3
           </a>
@@ -15097,7 +15097,7 @@ exports[`Storyshots Pagination default 1`] = `
           class=""
         >
           <a
-            href="#4"
+            href="#"
           >
             4
           </a>
@@ -15142,7 +15142,7 @@ exports[`Storyshots Pagination default 1`] = `
         <li>
           <a
             class="next"
-            href="#3"
+            href="#"
           >
             <i
               class="fas fa-angle-right"
@@ -15153,7 +15153,7 @@ exports[`Storyshots Pagination default 1`] = `
         <li>
           <a
             class="last"
-            href="#3"
+            href="#"
           >
             <i
               class="fas fa-angle-double-right"
@@ -15549,7 +15549,7 @@ exports[`Storyshots Product Community post 1`] = `
       >
         <a
           class="btn btn-sm btn-icon"
-          href="#3"
+          href="#"
         >
           <i
             class="fas fa-thumbs-down"
@@ -15558,7 +15558,7 @@ exports[`Storyshots Product Community post 1`] = `
          
         <a
           class="btn btn-sm btn-info"
-          href="#3"
+          href="#"
         >
           
                 Reply
@@ -15590,7 +15590,7 @@ exports[`Storyshots Product Community reply 1`] = `
     >
       <a
         class="btn btn-sm btn-info"
-        href="#3"
+        href="#"
       >
         
                 Reply
@@ -16999,7 +16999,7 @@ exports[`Storyshots Sidebar Menu Main title 1`] = `
           class="sidebar-menu__item"
         >
           <a
-            href="#3"
+            href="#"
             target="_self"
           >
             <!---->
@@ -17012,7 +17012,7 @@ exports[`Storyshots Sidebar Menu Main title 1`] = `
           class="sidebar-menu__item"
         >
           <a
-            href="#3"
+            href="#"
             target="_blank"
           >
             <!---->
@@ -17025,7 +17025,7 @@ exports[`Storyshots Sidebar Menu Main title 1`] = `
           class="sidebar-menu__item"
         >
           <a
-            href="#3"
+            href="#"
             target="_self"
           >
             <i
@@ -17096,7 +17096,7 @@ exports[`Storyshots Sidebar Menu Sub title 1`] = `
           class="sidebar-menu__item"
         >
           <a
-            href="#3"
+            href="#"
             target="_self"
           >
             <!---->
@@ -17109,7 +17109,7 @@ exports[`Storyshots Sidebar Menu Sub title 1`] = `
           class="sidebar-menu__item"
         >
           <a
-            href="#3"
+            href="#"
             target="_blank"
           >
             <!---->
@@ -17122,7 +17122,7 @@ exports[`Storyshots Sidebar Menu Sub title 1`] = `
           class="sidebar-menu__item"
         >
           <a
-            href="#3"
+            href="#"
             target="_self"
           >
             <i
@@ -17557,7 +17557,7 @@ exports[`Storyshots Tabs default 1`] = `
           >
             <a
               class="btn btn-sm btn-success float-right"
-              href="#3"
+              href="#"
             >
               Button
             </a>
@@ -17635,7 +17635,7 @@ exports[`Storyshots Tabs type-2 1`] = `
           >
             <a
               class="btn btn-sm btn-success float-right"
-              href="#3"
+              href="#"
             >
               Button
             </a>

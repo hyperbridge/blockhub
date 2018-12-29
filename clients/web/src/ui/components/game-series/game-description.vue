@@ -20,7 +20,7 @@
                     <small>Expires {{ expires_date }}</small>
                 </div>
                 <div>
-                    <a href="#3" class="btn-price">
+                    <a href="#" class="btn-price">
                         <span class="price">{{ game.price | convertCurrency}}</span>
                         <span class="name">BUY NOW</span>
                     </a>

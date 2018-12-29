@@ -25,8 +25,8 @@
                                         <a class="dropdown-item" href="#">Something else here</a>
                                     </div>
                                 </div>
-                                <a href="#3" class="btn btn-sm btn-danger text-uppercase font-weight-bold">clear <i class="fas fa-times"></i></a>
-                                <a href="#3" class="btn btn-sm btn-info text-uppercase font-weight-bold">more filters</a>
+                                <a href="#" class="btn btn-sm btn-danger text-uppercase font-weight-bold">clear <i class="fas fa-times"></i></a>
+                                <a href="#" class="btn btn-sm btn-info text-uppercase font-weight-bold">more filters</a>
                             </div>
                             <div class="filter-line__sorting">
                                 Sort by:
@@ -41,10 +41,10 @@
                                         <a class="dropdown-item" href="#">Something else here</a>
                                     </div>
                                 </div>
-                                <a href="#3" class="btn btn-link">
+                                <a href="#" class="btn btn-link">
                                     <i class="fas fa-sort-numeric-up"></i>
                                 </a>
-                                <a href="#3" class="btn btn-link">
+                                <a href="#" class="btn btn-link">
                                     <i class="fas fa-sort-amount-up"></i>
                                 </a>
                             </div>
@@ -122,7 +122,7 @@
                                 <div class="wallet-item__info" v-if="!search_blk">
                                     <div class="wallet-item__head" v-if="set_new_wallets_step_1">
                                         <div class="wallet-item__name">
-                                            <a href="#3" class="btn btn-sm wallet-item__toggle-search" @click="showCurrencyList">
+                                            <a href="#" class="btn btn-sm wallet-item__toggle-search" @click="showCurrencyList">
                                                 <i class="fas fa-angle-down"></i>
                                             </a>
                                             {{ new_wallets.name }}

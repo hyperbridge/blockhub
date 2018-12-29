@@ -105,7 +105,7 @@
 
                         </div>
                         <div class="col-6 col-lg-2 d-none d-md-block">
-                            <c-button href="#/business/project/new" status="dark" icon="plus" size="mg" class="w-100 justify-content-center h-100">
+                            <c-button to="/business/project/new" status="dark" icon="plus" size="mg" class="w-100 justify-content-center h-100">
                                 New Crowdfund
                             </c-button>
                         </div>

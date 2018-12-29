@@ -5,72 +5,72 @@
                 <div class="col-12 col-md-4">
                     <h2>General</h2>
                     <ul>
-                        <li><a href="#/download">Download</a></li>
-                        <li><a href="#/news">News</a></li>
-                        <li><a href="#/help">Help</a></li>
-                        <li><a href="#/search">Search</a></li>
-                        <li><a href="#/support">Support</a></li>
-                        <li><a href="#/updates">Updates</a></li>
-                        <li><a href="#/welcome">Welcome</a></li>
-                        <li><a href="#/redeem">Redeem</a></li>
-                        <li><a href="#/token">Token</a></li>
-                        <li><a href="#/go/do-something">Go [do-something]</a></li>
-                        <li><a href="#/privacy">Privacy Policy</a></li>
-                        <li><a href="#/terms">Terms &amp; Conditions</a></li>
-                        <li><a href="#/unlock">Unlock</a></li>
-                        <li><a href="#/monitor">Monitor</a></li>
-                        <li><a href="#/chat">Chat</a></li>
-                        <li><a href="#/verification-assistant">Verification Assistant</a></li>
-                        <li><a href="#/not-found">Not Found</a></li>
-                        <li><a href="#/unknown">Unknown</a></li>
+                        <li><c-button status="none" to="/download">Download</c-button></li>
+                        <li><c-button status="none" to="/news">News</c-button></li>
+                        <li><c-button status="none" to="/help">Help</c-button></li>
+                        <li><c-button status="none" to="/search">Search</c-button></li>
+                        <li><c-button status="none" to="/support">Support</c-button></li>
+                        <li><c-button status="none" to="/updates">Updates</c-button></li>
+                        <li><c-button status="none" to="/welcome">Welcome</c-button></li>
+                        <li><c-button status="none" to="/redeem">Redeem</c-button></li>
+                        <li><c-button status="none" to="/token">Token</c-button></li>
+                        <li><c-button status="none" to="/go/do-something">Go [do-something]</c-button></li>
+                        <li><c-button status="none" to="/privacy">Privacy Policy</c-button></li>
+                        <li><c-button status="none" to="/terms">Terms &amp; Conditions</c-button></li>
+                        <li><c-button status="none" to="/unlock">Unlock</c-button></li>
+                        <li><c-button status="none" to="/monitor">Monitor</c-button></li>
+                        <li><c-button status="none" to="/chat">Chat</c-button></li>
+                        <li><c-button status="none" to="/verification-assistant">Verification Assistant</c-button></li>
+                        <li><c-button status="none" to="/not-found">Not Found</c-button></li>
+                        <li><c-button status="none" to="/unknown">Unknown</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
                     <h2>Account</h2>
                     <ul>
-                        <li><a href="#/account">Account</a></li>
-                        <li><a href="#/account/signup">Account > Sign Up</a></li>
-                        <li><a href="#/account/signin">Account > Sign In</a></li>
-                        <li><a href="#/account/backup">Account > Backup</a></li>
-                        <li><a href="#/account/wallets">Account > Wallets</a></li>
-                        <li><a href="#/account/new-wallet">Account > New Wallet</a></li>
-                        <li><a href="#/account/profiles">Account > Profiles</a></li>
-                        <li><a href="#/account/new-profile">Account > New Profile</a></li>
-                        <li><a href="#/account/verification">Account > Verification</a></li>
-                        <li><a href="#/account/verification/callback">Account > Verification Callback</a></li>
+                        <li><c-button status="none" to="/account">Account</c-button></li>
+                        <li><c-button status="none" to="/account/signup">Account > Sign Up</c-button></li>
+                        <li><c-button status="none" to="/account/signin">Account > Sign In</c-button></li>
+                        <li><c-button status="none" to="/account/backup">Account > Backup</c-button></li>
+                        <li><c-button status="none" to="/account/wallets">Account > Wallets</c-button></li>
+                        <li><c-button status="none" to="/account/new-wallet">Account > New Wallet</c-button></li>
+                        <li><c-button status="none" to="/account/profiles">Account > Profiles</c-button></li>
+                        <li><c-button status="none" to="/account/new-profile">Account > New Profile</c-button></li>
+                        <li><c-button status="none" to="/account/verification">Account > Verification</c-button></li>
+                        <li><c-button status="none" to="/account/verification/callback">Account > Verification Callback</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
                     <h2>Settings</h2>
                     <ul>
-                        <li><router-link to="/settings">Settings</router-link></li>
-                        <li><a href="#/settings/profile">Settings > Profile</a></li>
-                        <li><a href="#/settings/protocol">Settings > Protocol</a></li>
-                        <li><a href="#/settings/darklaunch">Settings > Darklaunch</a></li>
-                        <li><a href="#/settings/activity">Settings > Activity</a></li>
-                        <li><a href="#/settings/debug">Settings > Debug</a></li>
-                        <li><a href="#/settings/game-scanner">Settings > Game Scanner</a></li>
-                        <li><a href="#/settings/extensions">Settings > Extensions</a></li>
+                        <li><c-button status="none" to="/settings">Settings</c-button></li>
+                        <li><c-button status="none" to="/settings/profile">Settings > Profile</c-button></li>
+                        <li><c-button status="none" to="/settings/protocol">Settings > Protocol</c-button></li>
+                        <li><c-button status="none" to="/settings/darklaunch">Settings > Darklaunch</c-button></li>
+                        <li><c-button status="none" to="/settings/activity">Settings > Activity</c-button></li>
+                        <li><c-button status="none" to="/settings/debug">Settings > Debug</c-button></li>
+                        <li><c-button status="none" to="/settings/game-scanner">Settings > Game Scanner</c-button></li>
+                        <li><c-button status="none" to="/settings/extensions">Settings > Extensions</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
                     <h2>Wallets</h2>
                     <ul>
-                        <li><a href="#/wallet/1">Wallet #1</a></li>
-                        <li><a href="#/wallet/1/transactions">Wallet #1 > Transactions</a></li>
-                        <li><a href="#/wallet/1/tokens">Wallet #1 > Tokens</a></li>
-                        <li><a href="#/wallet/1/send">Wallet #1 > Send</a></li>
-                        <li><a href="#/wallet/1/receive">Wallet #1 > Receive</a></li>
+                        <li><c-button status="none" to="/wallet/1">Wallet #1</c-button></li>
+                        <li><c-button status="none" to="/wallet/1/transactions">Wallet #1 > Transactions</c-button></li>
+                        <li><c-button status="none" to="/wallet/1/tokens">Wallet #1 > Tokens</c-button></li>
+                        <li><c-button status="none" to="/wallet/1/send">Wallet #1 > Send</c-button></li>
+                        <li><c-button status="none" to="/wallet/1/receive">Wallet #1 > Receive</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
                     <h2>Profiles</h2>
                     <ul>
-                        <li><a href="#/profile/1">Profile #1</a></li>
-                        <li><a href="#/profile/1/assets">Profile #1 > Digital Assets</a></li>
-                        <li><a href="#/profile/1/contacts">Profile #1 > Contacts</a></li>
-                        <li><a href="#/profile/1/projects">Profile #1 > Projects</a></li>
-                        <li><a href="#/profile/1/bounties">Profile #1 > Bounties</a></li>
+                        <li><c-button status="none" to="/profile/1">Profile #1</c-button></li>
+                        <li><c-button status="none" to="/profile/1/assets">Profile #1 > Digital Assets</c-button></li>
+                        <li><c-button status="none" to="/profile/1/contacts">Profile #1 > Contacts</c-button></li>
+                        <li><c-button status="none" to="/profile/1/projects">Profile #1 > Projects</c-button></li>
+                        <li><c-button status="none" to="/profile/1/bounties">Profile #1 > Bounties</c-button></li>
                     </ul>
                 </div>
             </div>
@@ -78,39 +78,39 @@
                 <div class="col-12 col-md-4">
                     <h2>Store</h2>
                     <ul>
-                        <li><a href="#/store">Store</a></li>
-                        <li><a href="#/store/cart">Store Cart</a></li>
-                        <li><a href="#/store/checkout">Store Checkout</a></li>
-                        <li><a href="#/store/invoices">Store Invoices</a></li>
-                        <li><a href="#/store/invoice/1">Store Invoice #1</a></li>
+                        <li><c-button status="none" to="/store">Store</c-button></li>
+                        <li><c-button status="none" to="/store/cart">Store Cart</c-button></li>
+                        <li><c-button status="none" to="/store/checkout">Store Checkout</c-button></li>
+                        <li><c-button status="none" to="/store/invoices">Store Invoices</c-button></li>
+                        <li><c-button status="none" to="/store/invoice/1">Store Invoice #1</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
                     <h2>Realms</h2>
                     <ul>
-                        <li><a href="#/realms">Realms</a></li>
-                        <li><a href="#/realm/1">Realm #1</a></li>
+                        <li><c-button status="none" to="/realms">Realms</c-button></li>
+                        <li><c-button status="none" to="/realm/1">Realm #1</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
                     <h2>Products</h2>
                     <ul>
-                        <li><a href="#/product/1">Product #1</a></li>
-                        <li><a href="#/product/1/community">Product #1 > Community</a></li>
-                        <li><a href="#/product/1/projects">Product #1 > Projects</a></li>
-                        <li><a href="#/product/1/assets">Product #1 > Assets</a></li>
+                        <li><c-button status="none" to="/product/1">Product #1</c-button></li>
+                        <li><c-button status="none" to="/product/1/community">Product #1 > Community</c-button></li>
+                        <li><c-button status="none" to="/product/1/projects">Product #1 > Projects</c-button></li>
+                        <li><c-button status="none" to="/product/1/assets">Product #1 > Assets</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
                     <h2>Projects</h2>
                     <ul>
-                        <li><a href="#/projects">Projects</a></li>
-                        <li><a href="#/project/1">Project #1</a></li>
-                        <li><a href="#/project/1/bounties">Project #1 > Bounties</a></li>
-                        <li><a href="#/project/1/community">Project #1 > Community</a></li>
-                        <li><a href="#/project/1/contributers">Project #1 > Contributers</a></li>
-                        <li><a href="#/project/1/milestones">Project #1 > Milestones</a></li>
-                        <li><a href="#/project/1/updates">Project #1 > Updates</a></li>
+                        <li><c-button status="none" to="/projects">Projects</c-button></li>
+                        <li><c-button status="none" to="/project/1">Project #1</c-button></li>
+                        <li><c-button status="none" to="/project/1/bounties">Project #1 > Bounties</c-button></li>
+                        <li><c-button status="none" to="/project/1/community">Project #1 > Community</c-button></li>
+                        <li><c-button status="none" to="/project/1/contributers">Project #1 > Contributers</c-button></li>
+                        <li><c-button status="none" to="/project/1/milestones">Project #1 > Milestones</c-button></li>
+                        <li><c-button status="none" to="/project/1/updates">Project #1 > Updates</c-button></li>
                     </ul>
                 </div>
             </div>
@@ -118,32 +118,32 @@
                 <div class="col-12 col-md-4">
                     <h2>Community</h2>
                     <ul>
-                        <li><a href="#/community">Community</a></li>
-                        <li><a href="#/community/forum/1">Community > Forum #1</a></li>
-                        <li><a href="#/community/discussion/1">Community > Discussion #1</a></li>
+                        <li><c-button status="none" to="/community">Community</c-button></li>
+                        <li><c-button status="none" to="/community/forum/1">Community > Forum #1</c-button></li>
+                        <li><c-button status="none" to="/community/discussion/1">Community > Discussion #1</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
                     <h2>Curators</h2>
                     <ul>
-                        <li><a href="#/curators">Curators</a></li>
-                        <li><a href="#/curator/1">Curator #1</a></li>
-                        <li><a href="#/curator/application">Curator Application</a></li>
-                        <li><a href="#/meta">Meta</a></li>
-                        <li><a href="#/meta/presets">Meta > Presets</a></li>
+                        <li><c-button status="none" to="/curators">Curators</c-button></li>
+                        <li><c-button status="none" to="/curator/1">Curator #1</c-button></li>
+                        <li><c-button status="none" to="/curator/application">Curator Application</c-button></li>
+                        <li><c-button status="none" to="/meta">Meta</c-button></li>
+                        <li><c-button status="none" to="/meta/presets">Meta > Presets</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
                     <h2>Collections</h2>
                     <ul>
-                        <li><a href="#/collections">Collections</a></li>
-                        <li><a href="#/collection/1">Collection #1</a></li>
+                        <li><c-button status="none" to="/collections">Collections</c-button></li>
+                        <li><c-button status="none" to="/collection/1">Collection #1</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
                     <h2>Streams</h2>
                     <ul>
-                        <li><a href="#/streams">Streams</a></li>
+                        <li><c-button status="none" to="/streams">Streams</c-button></li>
                     </ul>
                 </div>
             </div>
@@ -151,38 +151,38 @@
                 <div class="col-12 col-md-4">
                     <h2>Marketplace</h2>
                     <ul>
-                        <li><a href="#/marketplace">Marketplace</a></li>
-                        <li><a href="#/marketplace/inventory">Marketplace Inventory</a></li>
-                        <li><a href="#/marketplace/trade">Marketplace Trade</a></li>
-                        <li><a href="#/marketplace/trade/507f191e810c19729de860ea">Marketplace Trade ID 507f191e810c19729de860ea</a></li>
+                        <li><c-button status="none" to="/marketplace">Marketplace</c-button></li>
+                        <li><c-button status="none" to="/marketplace/inventory">Marketplace Inventory</c-button></li>
+                        <li><c-button status="none" to="/marketplace/trade">Marketplace Trade</c-button></li>
+                        <li><c-button status="none" to="/marketplace/trade/507f191e810c19729de860ea">Marketplace Trade ID 507f191e810c19729de860ea</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
                     <h2>Digital Assets</h2>
                     <ul>
-                        <li><a href="#/assets">Digital Assets</a></li>
-                        <li><a href="#/asset/1">Digital Asset #1</a></li>
+                        <li><c-button status="none" to="/assets">Digital Assets</c-button></li>
+                        <li><c-button status="none" to="/asset/1">Digital Asset #1</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
                     <h2>Stash</h2>
                     <ul>
-                        <li><a href="#/stash">Stash</a></li>
-                        <li><a href="#/chest">Chest</a></li>
+                        <li><c-button status="none" to="/stash">Stash</c-button></li>
+                        <li><c-button status="none" to="/chest">Chest</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
                     <h2>Business Manager</h2>
                     <ul>
-                        <li><a href="#/business">Business Manager</a></li>
-                        <li><a href="#/business/product/new">Developer > New Product</a></li>
-                        <li><a href="#/business/asset/new">Developer > New Digital Asset</a></li>
+                        <li><c-button status="none" to="/business">Business Manager</c-button></li>
+                        <li><c-button status="none" to="/business/product/new">Developer > New Product</c-button></li>
+                        <li><c-button status="none" to="/business/asset/new">Developer > New Digital Asset</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
                     <h2>Admin</h2>
                     <ul>
-                        <li><a href="#/admin">Admin</a></li>
+                        <li><c-button status="none" to="/admin">Admin</c-button></li>
                     </ul>
                 </div>
             </div>

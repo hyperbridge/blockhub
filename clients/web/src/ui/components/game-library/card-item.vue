@@ -36,19 +36,19 @@
                     <c-dropdown :class="{'no-right-border' : shareList}" @click="activeMenu">
                         <ul class="item-dropdown">
                             <li>
-                                <a href="#3">
+                                <a href="#">
                                     <i class="fas fa-list-alt"></i>
                                     Add to Collection
                                 </a>
                             </li>
                             <li>
-                                <a href="#3">
+                                <a href="#">
                                     <i class="fas fa-shopping-basket"></i>
                                     Market page
                                 </a>
                             </li>
                             <li>
-                                <a href="#3">
+                                <a href="#">
                                     <i class="fas fa-th"></i>
                                     Inventory
                                 </a>
@@ -60,13 +60,13 @@
                                 <c-share-list class="in-dropdown" :onlineList="online" :favoritesList="favorites" :show="shareList" />
                             </li>
                             <li>
-                                <a href="#3">
+                                <a href="#">
                                     <i class="fas fa-link"></i>
                                     Copy Link
                                 </a>
                             </li>
                             <li>
-                                <a href="#3">
+                                <a href="#">
                                     <i class="fab fa-facebook"></i>
                                     Share on Facebook
                                 </a>

@@ -7,7 +7,7 @@
                         <a class="nav-link" :href="`#/account/wallets`">Overview</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#3">Transactions</a>
+                        <a class="nav-link active" href="#">Transactions</a>
                     </li>
                 </ul>
                 <div class="filter-line margin-bottom-50">
@@ -27,8 +27,8 @@
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </div>
-                        <a href="#3" class="btn btn-sm btn-danger">clear <i class="fas fa-times"></i></a>
-                        <a href="#3" class="btn btn-sm btn-info">more filters</a>
+                        <a href="#" class="btn btn-sm btn-danger">clear <i class="fas fa-times"></i></a>
+                        <a href="#" class="btn btn-sm btn-info">more filters</a>
                     </div>
                     <div class="filter-line__sorting">
                         Sort by:
@@ -43,10 +43,10 @@
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </div>
-                        <a href="#3" class="btn btn-link">
+                        <a href="#" class="btn btn-link">
                             <i class="fas fa-sort-numeric-up"></i>
                         </a>
-                        <a href="#3" class="btn btn-link">
+                        <a href="#" class="btn btn-link">
                             <i class="fas fa-sort-amount-up"></i>
                         </a>
                     </div>

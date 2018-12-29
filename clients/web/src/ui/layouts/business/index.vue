@@ -4,10 +4,10 @@
 
         <transition name="slideDown">
             <div class="page-top-bar draggable" :class="{'invert' : darkMode}">
-                <a class="logo-holder undraggable" href="#/">
+                <c-button status="none" class="logo-holder undraggable" to="/">
                     <c-img src="/static/img/logo-white.svg" alt="Logo" v-if="darkMode" />
                     <c-img src="/static/img/logo.svg" alt="Logo" style="height: 90%; margin-top: 2%" v-else />
-                </a>
+                </c-button>
                 <div class="h2 ml-4 mb-0 pl-4 text-uppercase border-left">
                     Business Manager
                 </div>
@@ -331,10 +331,6 @@
                 outline: none;
             }
         }
-    }
-
-    #fixed_panel {
-        display: none;
     }
 </style>
 

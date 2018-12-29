@@ -67,10 +67,10 @@
                     <div class="col-12 col-lg-6 margin-top-15 margin-bottom-15">
                         <c-block title="Attributes" class="h-100" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                                 <template slot="additional-action">
-                                    <a href="#3" class="font-weight-bold text-uppercase text-white">
+                                    <a href="#" class="font-weight-bold text-uppercase text-white">
                                         Game View
                                     </a>
-                                    <a href="#3" class="font-weight-bold text-uppercase text-white ml-4">
+                                    <a href="#" class="font-weight-bold text-uppercase text-white ml-4">
                                         Chart
                                     </a>
                                 </template>
@@ -103,10 +103,10 @@
                     <div class="col-12 col-lg-6 margin-top-15 margin-bottom-15">
                         <c-block title="Sales" class="h-100" noGutter onlyContentBg bgGradient showActions>
                                 <template slot="additional-action">
-                                    <a href="#3" class="font-weight-bold text-uppercase text-white">
+                                    <a href="#" class="font-weight-bold text-uppercase text-white">
                                         History
                                     </a>
-                                    <a href="#3" class="font-weight-bold text-uppercase text-white ml-4">
+                                    <a href="#" class="font-weight-bold text-uppercase text-white ml-4">
                                         Chart
                                     </a>
                                 </template>
@@ -145,7 +145,7 @@
                                             <span class="price">
                                                 $ {{ item.price.current }}
                                             </span>
-                                            <a href="#3" class="btn btn-success float-right" v-if="item.price.current">
+                                            <a href="#" class="btn btn-success float-right" v-if="item.price.current">
                                                 <c-icon name="cart-plus"/>
                                                 Proceed to Purchase
                                             </a>
@@ -157,10 +157,10 @@
                                 </template>
                                 <template slot="right-content" class="text-right">
                                     <strong>319</strong> On the list
-                                    <a href="#3" class="text-white mx-2">
+                                    <a href="#" class="text-white mx-2">
                                         <i class="fas fa-reply"></i>
                                     </a>
-                                    <a href="#3" class="text-white">
+                                    <a href="#" class="text-white">
                                         <i class="fas fa-bookmark"></i>
                                     </a>
                                 </template>

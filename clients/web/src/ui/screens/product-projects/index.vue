@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div>
-                    <c-button status="info" iconHide href="#/project/new" v-if="$store.state.application.developerMode">Propose Idea</c-button>
+                    <c-button status="info" iconHide to="/project/new" v-if="$store.state.application.developerMode">Propose Idea</c-button>
                     <c-button status="info" iconHide @click="$store.commit('application/activateModal', 'propose-idea')" v-if="!$store.state.application.developerMode">Propose Idea</c-button>
                 </div>
             </div>

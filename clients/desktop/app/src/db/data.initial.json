@@ -856,7 +856,7 @@
         "moderators": [],
         "community": {
           "discussions": [
-            { "name": "[GUIDE] Short Title", "count": "381", "link": "#3" },
+            { "name": "[GUIDE] Short Title", "count": "381", "link": "#" },
             { "name": "Just Title", "count": "31", "link": "#4" },
             { "name": "Just Some a Little bit long Title", "count": "1701", "link": "#5" }
           ]
@@ -926,7 +926,7 @@
           "tags": [ {"key": "game", "value": "Game" }, {"key": "new", "value": "New" } ],
           "author": "0x0",
           "plans": [
-            { "title": "Play Now", "link": "#3" },
+            { "title": "Play Now", "link": "#" },
             { "title": "3 Month Subscription", "price": "12.95", "link": "" },
             { "title": "1 Year Subscription", "price": "120.95", "link": "" }
           ],
@@ -1009,7 +1009,7 @@
         ],
         "author": "0x0",
         "plans": [
-          { "title": "Play Now", "link": "#3" },
+          { "title": "Play Now", "link": "#" },
           { "title": "3 Month Subscription", "price": "12.95", "link": "" },
           { "title": "1 Year Subscription", "price": "120.95", "link": "" }
         ],

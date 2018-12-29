@@ -27,7 +27,7 @@
 
                     <br /><br />
 
-                    <c-button href="#/meta">Go to dashboard</c-button>
+                    <c-button to="/meta">Go to dashboard</c-button>
                 </c-block>
             </div>
         </div>

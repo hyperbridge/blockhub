@@ -220,7 +220,7 @@ export const transferTokens = ({ type, fromAddress, toAddress, amount }) => {
         const originWallet = await Wallet.create(local.passphrase, walletIndex)
         const originAddress = originWallet.address
 
-        console.log("Attempting transfer. From: " + originAddress + ". To " + toAddress + ". Amount: " + amount + " Type: " + type)
+        console.log("Transferring tokens. Type: " + type + ". From: " + originAddress + ". To " + toAddress + ". Amount: " + amount + " Type: " + type)
 
         if (type === 'HBX') {
             const token = TokenAPI.api.ethereum.state.contracts.Token.deployed

@@ -241,7 +241,7 @@ export default class Project extends Model {
         //         {
         //             "name": "[GUIDE] Short Title",
         //             "count": "381",
-        //             "link": "#3"
+        //             "link": "#"
         //         },
         //         {
         //             "name": "Just Title",

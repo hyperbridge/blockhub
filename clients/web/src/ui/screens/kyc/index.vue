@@ -8,7 +8,7 @@
 
                         <div v-if="!desktopMode">
                             <div class="text-center alert alert-info" style="font-weight: bold; font-size: 11px;">
-                                <p> BlockHub, the first platform powered by Hyperbridge protocols has been released. <c-button href="#/download" class="outline-white">Download it now</c-button></p>
+                                <p> BlockHub, the first platform powered by Hyperbridge protocols has been released. <c-button to="/download" class="outline-white">Download it now</c-button></p>
                             </div>
                         </div>
                     </c-block>

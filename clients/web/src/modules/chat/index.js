@@ -52,7 +52,7 @@ export default {
         update({ commit }, payload) {
             const { id, target, data } = payload
             // await axios.patch(`/${target}/${id}`, data)
-            commit('update', payload)
+            commit('updateObject', payload)
         },
         delete({ commit }, payload) {
             const { id, target = 'messages' } = payload

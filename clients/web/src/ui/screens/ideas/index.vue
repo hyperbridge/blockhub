@@ -12,7 +12,7 @@
                     <p>Maybe you just have an awesome idea, or want to inspire your favourite dev studio to continue a series (*cough* half-life).</p>
                 </div>
                 <br />
-                <p><c-button class="c-button--lg outline-white" href="#/idea/new">Get Started</c-button></p>
+                <p><c-button class="c-button--lg outline-white" to="/idea/new">Get Started</c-button></p>
             </div>
         </div>
 

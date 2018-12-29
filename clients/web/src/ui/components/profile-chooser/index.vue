@@ -100,8 +100,8 @@
             },
             setDefault(profile) {
                 this.$store.commit(
-                    'updateSingle',
-                    ['application/account', { activeProfile: profile }]
+                    'update',
+                    ['application/activeProfile', profile]
                 )
 
                 this.$store.state.application.developerMode = profile.role === 'developer'
@@ -183,6 +183,7 @@
     .user-card__container-link{
         text-decoration: none;
         color: #fff;
+        cursor: pointer;
     }
 
     .swiper-button-prev, .swiper-button-next {

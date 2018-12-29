@@ -121,8 +121,8 @@
                                     <input type="text" class="form-control" />
                                 </div>
                                 <div class="form-group">
-                                    <a href="#3" class="btn btn-sm btn-link">clear</a>
-                                    <a href="#3" class="btn btn-sm btn-link">More Filters</a>
+                                    <a href="#" class="btn btn-sm btn-link">clear</a>
+                                    <a href="#" class="btn btn-sm btn-link">More Filters</a>
                                 </div>
                             </div>
                             <c-assets-grid :list="28"></c-assets-grid>

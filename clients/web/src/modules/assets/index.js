@@ -136,7 +136,7 @@ const assets = {
         update({ commit }, payload) {
             const { prop, target = prop || 'messages', data, id } = payload
             // await axios.post(`/${target}/${id}`, data)
-            commit('update', payload)
+            commit('updateObject', payload)
         },
         createFilter({ commit }, payload) {
             const id = getId()
@@ -156,7 +156,7 @@ const assets = {
                 messages: state.trxs[trxId].messages.filter(msgId => msgId !== id)
             }
             console.log(data)
-            commit('update', { id: trxId, target: 'trxs', data })
+            commit('updateObject', { id: trxId, target: 'trxs', data })
             dispatch('community/delete', { id }, { root: true })
         },
         evolveNavigator({ commit }, payload) {

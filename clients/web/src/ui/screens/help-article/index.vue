@@ -7,7 +7,7 @@
                 </div>
             </div>
             <div v-if="!article">
-                Oh no, that post wasn't found! Would you <a href="#/post/create">like to create it</a>?
+                Oh no, that post wasn't found! Would you <c-button to="/post/create" status="underline">like to create it</c-button>?
             </div>
     </c-layout>
 </template>

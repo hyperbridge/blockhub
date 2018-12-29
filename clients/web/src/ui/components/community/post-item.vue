@@ -35,7 +35,7 @@
                 <c-img :src="post.content.img"/>
             </div>
             <div class="community-item__action text-right">
-                <a href="#3" class="btn btn-sm btn-icon" v-if="!reply">
+                <a href="#" class="btn btn-sm btn-icon" v-if="!reply">
                     <i class="fas fa-thumbs-down"></i>
                 </a>
                 <c-reply :class="{'w-100' : reply}"

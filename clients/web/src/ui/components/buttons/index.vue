@@ -3,14 +3,13 @@
         :is="tag"
         :href="href"
         :target="target"
-        class="c-button"
         :class="[
-            status, 'c-button--' + size ,
+            'c-button', 'c-button--' + size, status, 
             { 'swap-direction': swapDirection },
             { 'full': full },
             { 'centered': centered },
             { 'doubled': doubled },
-            { 'no-shadow' : !shadow}
+            { 'no-shadow' : !shadow }
         ]"
         style="font-size: 14px"
         :style="{ 'font-size': fontSize + 'px' }"
@@ -25,12 +24,10 @@
                 swapOrder ? 'swap-order' : ''
             ]"
         ></i>
-        <router-link v-if="to">
+        <router-link tag="span" :to="to" v-if="to">
             <slot />
         </router-link>
-        <span v-if="!to">
-            <slot/>
-        </span>
+        <slot v-if="!to" />
     </component>
 </template>
 
@@ -143,6 +140,8 @@
         transition: all 200ms ease-in-out;
         span{
             white-space: nowrap;
+            width: 100%;
+            height: 100%;
         }
         &.full {
             display: block;
@@ -247,8 +246,15 @@
             }
         }
 
+        &.none {
+            font-weight: normal;
+            justify-content: left;
+        }
+
+        /* background color, text color, hover background color, hover text color */
         $statusColors: (
             default: (#fff, #3D3E5D, #3D3E5D, #A2A3BE),
+            none: (transparent, #fff, transparent, #fff),
             success: (#5EA72B, #fff, #559727, #30304B),
             support: (#43C981, #fff, #3db876, #30304B),
             info: (#5D75F7, #fff, #5165d5, #30304B),

@@ -354,7 +354,7 @@ storiesOf('Rating', module)
         template: `
         <div class="row p-5">
             <div class="col-8">
-                <c-rating-block :items="items" fullReviewsLink="#3" rateGameLink="#4" />
+                <c-rating-block :items="items" fullReviewsLink="#" rateGameLink="#4" />
             </div>
         </div>
         `
@@ -643,7 +643,7 @@ storiesOf('Tabs', module)
                     <c-tab name="Tab 1" :selected="true" showFooter="true">
                         <p>This is first tab with footer content</p>
                          <template slot="footer">
-                            <a href="#3" class="btn btn-sm btn-success float-right">Button</a>
+                            <a href="#" class="btn btn-sm btn-success float-right">Button</a>
                         </template>
                     </c-tab>
                      <c-tab name="Tab 2">
@@ -671,7 +671,7 @@ storiesOf('Tabs', module)
                     <c-tab name="Tab 1" :selected="true" :transparentBg="true" :showFooter="true">
                         <p>This is first tab with footer content</p>
                          <template slot="footer">
-                            <a href="#3" class="btn btn-sm btn-success float-right">Button</a>
+                            <a href="#" class="btn btn-sm btn-success float-right">Button</a>
                         </template>
                     </c-tab>
                     <c-tab name="Tab 2" :transparentBg="true">
@@ -1281,7 +1281,7 @@ storiesOf('Tooltips', module)
                     <c-tooltips name="Click Me(Custom content)!" type="click" position="left" :lightStyle='true'>
                         <p class="p-0">Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.</p>
                         <p class="p-0 m-0">Lipsum generator.</p>
-                        <a href="#3" class="btn btn-sm btn-danger mt-2">Some link</a>
+                        <a href="#" class="btn btn-sm btn-danger mt-2">Some link</a>
                     <c-tooltips/>
                 </div>
                 <div class="col-6 text-center">
@@ -2296,7 +2296,7 @@ storiesOf('Modal', module)
                     <p>Aliquam nec blandit mi. Integer sed neque urna.</p>
                 </template>
                 <template slot="modal_footer">
-                    <a href="#3" class="btn btn-sm btn-success">Some Link</a>
+                    <a href="#" class="btn btn-sm btn-success">Some Link</a>
                 </template>
             </c-custom-modal>
          </div>
@@ -2317,9 +2317,9 @@ storiesOf('Dropdown', module)
         template: `
          <div class="row m-0 p-3">
             <c-dropdown id="test" name="Filter by Genre" :showBg="true">
-                <a href="#3">RPG</a>
-                <a href="#3">ACTION</a>
-                <a href="#3">Cars</a>
+                <a href="#">RPG</a>
+                <a href="#">ACTION</a>
+                <a href="#">Cars</a>
             </c-dropdown>
          </div>
         `
@@ -2502,7 +2502,7 @@ storiesOf('Game Plans', module)
                 plans: [
                     {
                         "title": "Play Now",
-                        "link": "#3"
+                        "link": "#"
                     },
                     {
                         "title": "3 Month Subscription",
@@ -2657,9 +2657,9 @@ storiesOf('Block Title', module)
         template: injectHBarTemp(`
             <c-heading-bar>
                 <template slot="heading-tabs">
-                    <a href="#3">First tab</a>
-                    <a href="#3" class="active">Second tab</a>
-                    <a href="#3">Third tab</a>
+                    <a href="#">First tab</a>
+                    <a href="#" class="active">Second tab</a>
+                    <a href="#">Third tab</a>
                 </template>
             </c-heading-bar>
         `)

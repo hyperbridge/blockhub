@@ -102,7 +102,7 @@
 
                 </div>
                 <div class="col-6 col-lg-2 d-none d-md-block">
-                    <c-button href="#/business/product/new" status="dark" icon="plus" size="mg"
+                    <c-button to="/business/product/new" status="dark" icon="plus" size="mg"
                                 class="w-100 justify-content-center h-100">
                         New Product
                     </c-button>

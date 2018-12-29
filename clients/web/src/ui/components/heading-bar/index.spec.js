@@ -48,7 +48,7 @@ describe('heading-bar', () => {
         const wrapper = shallowMount(Component, {
             propsData: props,
             // slots: {
-            //     'heading-tabs': '<a href="#3">First tab</a><a href="#3" class="active">Second tab</a><a href="#3">Third tab</a>',
+            //     'heading-tabs': '<a href="#">First tab</a><a href="#" class="active">Second tab</a><a href="#">Third tab</a>',
             // }
         })
 

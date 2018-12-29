@@ -3,103 +3,103 @@
         <c-render-condition :type="renderCondition">
             <router-view></router-view>
         </c-render-condition>
-        <div class="fixed-panel invert" id="fixed_panel">
+        <div class="fixed-panel invert" id="fixed-panel">
             <div class="fixed-panel__content scroll">
                 <h5 v-if="developerMode" v-darklaunch="'REALMS'">Your Realms</h5>
 
-                <a href="#/realm/1" v-if="developerMode" v-darklaunch="'REALMS'">
+                <c-button status="none" to="/realm/1" v-if="developerMode" v-darklaunch="'REALMS'">
                     <span class="icon icon-letter-circle">C</span>
                     <span class="text">Continuum</span>
-                </a>
-                <a href="#/realm/1" v-if="developerMode" v-darklaunch="'REALMS'">
+                </c-button>
+                <c-button status="none" to="/realm/1" v-if="developerMode" v-darklaunch="'REALMS'">
                     <span class="icon icon-letter-circle">H</span>
                     <span class="text">Hyperbridge</span>
-                </a>
-                <a href="#/realm/1" v-if="developerMode" v-darklaunch="'REALMS'">
+                </c-button>
+                <c-button status="none" to="/realm/1" v-if="developerMode" v-darklaunch="'REALMS'">
                     <span class="icon icon-letter-circle">R</span>
                     <span class="text">Ready Block One</span>
-                </a>
+                </c-button>
 
-                <a href="#/profile/1/realms" v-if="developerMode" v-darklaunch="'REALMS'">See More...</a>
+                <c-button status="none" to="/profile/1/realms" v-if="developerMode" v-darklaunch="'REALMS'">See More...</c-button>
 
                 <hr v-if="developerMode" v-darklaunch="'REALMS'" />
 
                 <h5 v-if="developerMode && products.length">Your Products</h5>
 
-                <a v-if="developerMode" :href="`#/product/${product.id}`" v-for="(product, index) in products" :key="index">
+                <c-button status="none" v-if="developerMode" :href="`#/product/${product.id}`" v-for="(product, index) in products" :key="index">
                     <span class="icon icon-letter-circle">{{ product.name.slice(0, 1) }}</span>
                     <span class="text">{{ product.name }}</span>
-                </a>
+                </c-button>
 
-                <!-- <a v-if="developerMode" href="#/product/1">
+                <!-- <c-button status="none" v-if="developerMode" to="/product/1">
                     <span class="icon icon-letter-circle">B</span>
                     <span class="text">BlockHub</span>
-                </a>
-                <a v-if="developerMode" href="#/product/1">
+                </c-button>
+                <c-button status="none" v-if="developerMode" to="/product/1">
                     <span class="icon icon-letter-circle">D</span>
                     <span class="text">Dataforce</span>
-                </a>
-                <a v-if="developerMode" href="#/product/1">
+                </c-button>
+                <c-button status="none" v-if="developerMode" to="/product/1">
                     <span class="icon icon-letter-circle">R</span>
                     <span class="text">Republic</span>
-                </a> -->
+                </c-button> -->
 
-                <a v-if="developerMode && products.length > 3" href="#/business/products">See More...</a>
+                <c-button status="none" v-if="developerMode && products.length > 3" to="/business/products">See More...</c-button>
 
                 <hr v-if="developerMode && products.length" />
 
                 <h5 v-if="developerMode"><i class="fas fa-code" /> Developer</h5>
 
-                <a href="#/developer" v-if="developerMode">
+                <c-button status="none" to="/developer" v-if="developerMode">
                     <span class="icon fas fa-list-alt"></span>
                     <span class="text">My Content</span>
-                </a>
-                <a href="#/business/developer/payment" v-if="developerMode">
+                </c-button>
+                <c-button status="none" to="/business/developer/payment" v-if="developerMode">
                     <span class="icon fas fa-info-circle"></span>
                     <span class="text">Payment Settings</span>
-                </a>
-                <a href="#/business/realm/new" v-if="developerMode" v-darklaunch="'REALMS'">
+                </c-button>
+                <c-button status="none" to="/business/realm/new" v-if="developerMode" v-darklaunch="'REALMS'">
                     <span class="icon fa fa-plus"></span>
                     <span class="text">New Realm</span>
-                </a>
-                <a href="#/business/product/new" v-if="developerMode">
+                </c-button>
+                <c-button status="none" to="/business/product/new" v-if="developerMode">
                     <span class="icon fa fa-plus"></span>
                     <span class="text">New Game</span>
-                </a>
-                <a href="#/business/project/new" v-if="developerMode">
+                </c-button>
+                <c-button status="none" to="/business/project/new" v-if="developerMode">
                     <span class="icon fa fa-plus"></span>
                     <span class="text">New Crowdfund</span>
-                </a>
+                </c-button>
 
                 <hr v-if="developerMode" />
 
-                <a v-if="signedIn" href="#/account">
+                <c-button status="none" v-if="signedIn" to="/account">
                     <span class="icon fa fa-user"></span>
                     <span class="text">Account</span>
-                </a>
-                <a v-if="signedIn" href="#/account/profiles">
+                </c-button>
+                <c-button status="none" v-if="signedIn" to="/account/profiles">
                     <span class="icon fa fa-id-card"></span>
                     <span class="text">Profiles</span>
-                </a>
-                <a v-if="signedIn" href="#/account/wallets" v-darklaunch="'WALLETS'">
+                </c-button>
+                <c-button status="none" v-if="signedIn" to="/account/wallets" v-darklaunch="'WALLETS'">
                     <span class="icon fa fa-credit-card"></span>
                     <span class="text">Wallets</span>
-                </a>
+                </c-button>
 
                 <hr v-if="signedIn" />
 
-                <a v-if="signedIn" href="#/profile/1">
+                <c-button status="none" v-if="signedIn" to="/profile/1">
                     <span class="icon fa fa-user"></span>
                     <span class="text">Current Profile</span>
-                </a>
-                <a v-if="signedIn" href="#/settings/activity">
+                </c-button>
+                <c-button status="none" v-if="signedIn" to="/settings/activity">
                     <span class="icon fa fa-list-alt"></span>
                     <span class="text">Activity Log</span>
-                </a>
-                <a v-if="signedIn" href="#/profile/1/contacts" v-darklaunch="'CONTACTS'">
+                </c-button>
+                <c-button status="none" v-if="signedIn" to="/profile/1/contacts" v-darklaunch="'CONTACTS'">
                     <span class="icon fa fa-users"></span>
                     <span class="text">Contacts</span>
-                </a>
+                </c-button>
 
                 <hr v-if="signedIn" />
 
@@ -108,15 +108,15 @@
                     <span class="text">Settings</span>
                 </router-link>
 
-                <a href="#/sitemap">
+                <c-button status="none" to="/sitemap">
                     <span class="icon fa fa-list-alt"></span>
                     <span class="text">Sitemap</span>
-                </a>
+                </c-button>
 
-                <a v-if="signedIn" href="#/account/signout">
+                <c-button status="none" v-if="signedIn" to="/account/signout">
                     <span class="icon fa fa-sign-out-alt"></span>
                     <span class="text">Sign Out</span>
-                </a>
+                </c-button>
 
                 <!--Global Bottom banner-->
                 <div class="developer_banner" v-if="!developerMode">
@@ -127,8 +127,8 @@
                     <div class="text">
                         <h3>Are you a developer?</h3>
                         <p>Start developing for blockchain with BlockHub SDK</p>
-                        <c-button status="info" href="#/developer/apply" iconHide>Start Developing</c-button>
-                        <c-button status="dark" href="#/help/0/article/developer-program" iconHide>Learn More</c-button>
+                        <c-button status="info" to="/developer/apply" iconHide>Start Developing</c-button>
+                        <c-button status="dark" to="/help/0/article/developer-program" iconHide>Learn More</c-button>
                     </div>
                 </div>
                 <div class="d-flex justify-content-start">
@@ -136,16 +136,16 @@
                         <h5><i class="fas fa-code"></i>Become Developer</h5>
                         <ul>
                             <li>
-                                <a href="#/developer/apply">
+                                <c-button status="none" to="/developer/apply">
                                     <i class="fas fa-list-alt"></i>
                                     Apply Now
-                                </a>
+                                </c-button>
                             </li>
                             <li>
-                                <a href="#/developer/faq">
+                                <c-button status="none" to="/developer/faq">
                                     <i class="fas fa-info-circle"></i>
                                     Developer FAQ
-                                </a>
+                                </c-button>
                             </li>
                         </ul>
                     </div>
@@ -220,7 +220,7 @@
         },
         updated() {
             $('body').off('click').on('click', "[data-action='fixedpanel-toggle']", (e) => {
-                let panel = $('#fixed_panel')
+                let panel = $('#fixed-panel')
                 let backdrop = $('#backdrop')
                 let btn = $('#sidebar_toggle_btn span')
 

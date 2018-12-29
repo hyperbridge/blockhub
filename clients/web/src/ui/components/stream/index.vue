@@ -18,7 +18,7 @@
                         {{ streamName }}
                     </div>
                     <div class="m-0 p-0 text-muted product-name">
-                        <a href="#3" class="text-muted">
+                        <a href="#" class="text-muted">
                             {{ streamGame }}
                         </a>
                     </div>
