@@ -1,13 +1,13 @@
 <template>
     <div class="image-overlay">
         <div class="image-overlay__title" v-if="title">
-            Title
+            {{ title }}
         </div>
         <div class="image-overlay__subtitle" v-if="subtitle">
-            Sub title
+            {{ subtitle }}
         </div>
         <div class="image-overlay__text" v-if="text">
-            some text
+            {{ text }}
         </div>
     </div>
 </template>
@@ -31,7 +31,7 @@
         padding: 20px;
         min-height: 70%;
         background: -webkit-linear-gradient(bottom, rgba(28, 32, 50, 1) 0%, rgba(28, 32, 50, 0.75) 40%, rgba(28, 32, 50, 0) 100%);
-        z-index: 3;
+        z-index: 20;
     }
     .image-overlay__title{
         font-weight: bolder;

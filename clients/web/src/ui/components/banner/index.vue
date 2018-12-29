@@ -7,6 +7,10 @@
                     <div class="main-banner__content--logo" :class="[ slide.logo['size'] ? 'logo-size-' + slide.logo['size'] : 'logo-size-md', slide.logo['position'] ]" :style="logoPosition(slide.logo)">
                         <c-img :src="slide.logo.src" :alt="slide.title" />
                     </div>
+                    <c-image-overlay :title="slide.overlay.title"
+                                     :subtitle="slide.overlay.subtitle"
+                                     :text="slide.overlay.text"
+                                     v-if="slide.overlay" />
                 </div>
                 <div class="main-banner__footer">
                     <h4>
@@ -37,6 +41,7 @@
         },
         components: {
             'c-button': (resolve) => require(['@/ui/components/buttons'], resolve),
+            'c-image-overlay': (resolve) => require(['@/ui/components/image-overlay'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide,
         },

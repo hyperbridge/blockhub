@@ -3682,7 +3682,12 @@ storiesOf('Banner', module)
                             size: ''
                         },
                         title: 'Some title',
-                        buttonText: 'Details'
+                        buttonText: 'Details',
+                        overlay: {
+                            title: 'Cras suscipit dapibus metus quis egestas.',
+                            subtitle: 'Morbi non cursus magna. Integer magna urna, facilisis sed tincidunt eu',
+                            text: 'Sed accumsan vel lacus eu cursus. Nunc suscipit, tellus sit amet laoreet ornare, ligula purus consectetur nisi, sed sagittis velit lectus in turpis. Vestibulum sollicitudin faucibus mollis. Aliquam tempus fermentum nulla, at congue magna tristique ut. Proin non turpis erat.'
+                        }
                     }
                 ],
             }
