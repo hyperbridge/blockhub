@@ -79,7 +79,7 @@
                 "icon": "fa fa-plus",
                 "textColor": "#43434d",
                 "eventKey": "application/activateModal",
-                "eventValue": "shortcutCreator",
+                "eventValue": "create-shortcut",
                 "text": "Create",
                 "sort": -1,
                 "removable": false

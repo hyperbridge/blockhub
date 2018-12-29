@@ -25,7 +25,10 @@
                 swapOrder ? 'swap-order' : ''
             ]"
         ></i>
-        <span>
+        <router-link v-if="to">
+            <slot />
+        </router-link>
+        <span v-if="!to">
             <slot/>
         </span>
     </component>
@@ -40,6 +43,10 @@
             tag: {
                 type: String,
                 default: 'a',
+            },
+            to: {
+                type: String,
+                default: '',
             },
             href: {
                 type: String,
@@ -94,13 +101,16 @@
                 sound.play()
             },
             click() {
-                if (!this.$store.state.application.settings.client.sounds || !this.$store.state.application.settings.client.ui_interaction_sounds) return
+                this.$store.dispatch('application/setEditorMode', 'viewing')
+                //this.$store.commit('application/activateModal', null)
 
-                const sound = new Howl({
-                    src: ['/static/sounds/ask.mp3']
-                })
+                if (this.$store.state.application.settings.client.sounds && this.$store.state.application.settings.client.ui_interaction_sounds) {
+                    const sound = new Howl({
+                        src: ['/static/sounds/ask.mp3']
+                    })
 
-                sound.play()
+                    sound.play()
+                }
 
                 this.$emit('click')
             }

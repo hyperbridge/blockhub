@@ -101,13 +101,20 @@
             <c-terms-popup :activated="$store.state.application.activeModal === 'terms'" @close="$store.state.application.activeModal = null" />
 
             <c-basic-popup
-                :activated="$store.state.application.activeModal === 'shortcutCreator'"
+                :activated="$store.state.application.activeModal === 'connect-network'"
                 @close="$store.state.application.activeModal = null"
                 style="text-align: left;"
             >
                 <div class="h4" slot="header">Connect</div>
                 <template slot="body">
-                    <c-social-connect v-for="(social, index) in socials" :social="social" :class=" index + 1 == socials.length ? 'margin-bottom-0' : 'margin-bottom-20'" />
+                    <c-social-connect 
+                        :class="index + 1 == socials.length ? 'margin-bottom-0' : 'margin-bottom-20'"
+                        :key="index"
+                        :icon="item.icon"
+                        :name="item.name"
+                        :description="item.description"
+                        :connected="item.connected"
+                        v-for="(item, index) in socials" />
                 </template>
                 <p slot="footer">
                     Need help? <c-button status="plain" href="#/help">Check the Help Center</c-button>
@@ -122,7 +129,7 @@
                 <div class="h4" slot="header">Welcome to the editor</div>
                 <template slot="body">
                     <p v-if="!voteCasted">
-                        The goal of BlockHub is everything is editable and curatable through community vote. Like a super-charged Wikipedia-style entertainment platform. But we aren't quite there yet! So for now, you can cast votes the old school way.
+                        The goal of BlockHub is everything is editable and curatable through community vote. Like a super-charged Wikipedia-infused entertainment platform. But we aren't quite there yet! So for now, you can cast votes old school.
                     </p>
                     <p v-if="!voteCasted">
                         Want this to be the next section we make editable? 
@@ -134,7 +141,34 @@
                     </p>
                 </template>
                 <p slot="footer">
-                    <c-button status="dark" href="#/help">Need help? Check the Help Center</c-button>
+                    <c-button status="dark" to="/help">Need help? Check the Help Center</c-button>
+                </p>
+            </c-basic-popup>
+
+
+            <c-basic-popup
+                :activated="$store.state.application.activeModal === 'create-shortcut'"
+                @close="$store.state.application.activeModal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">Oh, another creation?</div>
+                <template slot="body">
+                    <div class="row">
+                        <a class="col-md-6">
+                            Create Realm
+                        </a>
+                        <a class="col-md-6">
+                            Create Idea
+                        </a>
+                        <a class="col-md-6">
+                            Create Crowdfund
+                        </a>
+                        <a class="col-md-6">
+                            Create Game
+                        </a>
+                    </div>
+                </template>
+                <p slot="footer">
                 </p>
             </c-basic-popup>
 
@@ -615,21 +649,33 @@
                 socials: [
                     {
                         name: 'Facebook',
-                        description: 'Click to connect this social',
+                        description: 'Shares achievements to your news feed.',
                         icon: '../../../../static/img/icons/facebook.svg',
-                        connected: true
+                        connected: false
                     },
                     {
                         name: 'Twitter',
-                        description: 'Click to connect this social',
+                        description: 'Shares achievements to your Twitter feed.',
                         icon: '../../../../static/img/icons/twitter.svg',
                         connected: false
                     },
                     {
-                        name: 'Twich',
-                        description: 'Click to connect this social',
-                        icon: '../../../../static/img/icons/twich.png',
-                        connected: true
+                        name: 'Twitch',
+                        description: 'Lets you contribute to streamers.',
+                        icon: '../../../../static/img/icons/twitch-large.png',
+                        connected: false
+                    },
+                    {
+                        name: 'Discord',
+                        description: 'Lets you connect to your Discord voice/chat channels.',
+                        icon: '../../../../static/img/icons/discord.png',
+                        connected: false
+                    },
+                    {
+                        name: 'Steam',
+                        description: 'Lets you connect to your Steam account.',
+                        icon: '../../../../static/img/icons/steam.png',
+                        connected: false
                     }
                 ]
             }

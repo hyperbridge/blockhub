@@ -142,9 +142,9 @@ export const actions = {
     setEditorMode(store, payload) {
         store.commit('setEditorMode', payload)
 
-        if (!store.state.settings.client.hideEditorWelcomeModal) {
-            store.commit('activateModal', 'editor-welcome')
-        }
+        // if (!store.state.settings.client.hideEditorWelcomeModal) {
+        //     store.commit('activateModal', 'editor-welcome')
+        // }
     },
     // unlockAccount(store, payload) {
     //     Bridge.resolvePromptPasswordRequest(payload.password.value)

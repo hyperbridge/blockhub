@@ -1,21 +1,21 @@
 <template>
     <div class="social-connect__item">
         <div class="social-connect__item-icon">
-            <img :src="social.icon" />
+            <img :src="icon" />
         </div>
         <div class="social-connect__item-text">
             <div class="h5 font-weight-bold mb-0 pb-0">
-                {{ social.name }}
+                {{ name }}
             </div>
-            <div v-if="social.description">
-                {{ social.description }}
+            <div v-if="description">
+                {{ description }}
             </div>
         </div>
         <div class="social-connect__item-action">
-            <c-button status="second-warning" v-if="!social.connected">
+            <c-button status="second-warning" v-if="connected" @click="disconnect">
                 Disconnect
             </c-button>
-            <c-button status="second-info" v-else>
+            <c-button status="second-info" @click="connect">
                 Connect
             </c-button>
         </div>
@@ -24,7 +24,15 @@
 
 <script>
     export default {
-        props: ['social']
+        props: ['icon', 'name', 'description', 'connected'],
+        methods: {
+            connect() {
+                this.$store.commit('application/activateModal', 'coming-soon')
+            },
+            disconnect() {
+                this.$store.commit('application/activateModal', 'coming-soon')
+            }
+        }
     }
 </script>
 
