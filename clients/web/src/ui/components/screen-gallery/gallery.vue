@@ -15,17 +15,7 @@
                 <source :src="video_url" type="video/mp4">
             </video>
             <div v-show="run_slideshow" class="screen-gallery__progress-bar"></div>
-            <div class="screen-gallery__overlay">
-                <div class="h3">
-                    Title
-                </div>
-                <div class="h5">
-                    Sub title
-                </div>
-                <div>
-                    some text
-                </div>
-            </div>
+            <c-image-overlay v-if="items[active_item]['overlay']" />
         </div>
         <ul class="screen-gallery__thumb-nav" ref="thumb-nav">
             <li
@@ -78,7 +68,8 @@ export default {
     },
     components: {
         'c-modal': (resolve) => require(['@/ui/components/modal'], resolve),
-        'c-images-explorer': (resolve) => require(['@/ui/components/images-explorer'], resolve)
+        'c-images-explorer': (resolve) => require(['@/ui/components/images-explorer'], resolve),
+        'c-image-overlay': (resolve) => require(['@/ui/components/image-overlay'], resolve)
     },
     data() {
         return {
@@ -278,23 +269,6 @@ export default {
         100% {
             width: 100%;
             opacity: 0;
-        }
-    }
-    .screen-gallery__overlay{
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        color: #fff;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 30px;
-        min-height: 50%;
-        background: -webkit-linear-gradient(bottom, rgba(0,0,0,0.9) 0%,rgba(0,0,0,0) 100%);
-        .h3,
-        .h5{
-            font-weight: bold;
         }
     }
 </style>
