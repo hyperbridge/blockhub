@@ -124,6 +124,14 @@ const router = new Router({
             }
         },
         {
+            path: '/plans',
+            name: 'Plans',
+            component: (resolve) => require(['@/ui/screens/plans'], resolve),
+            meta: {
+                breadcrumb: false
+            }
+        },
+        {
             path: '/redeem',
             name: 'Redeem',
             component: (resolve) => require(['@/ui/screens/redeem'], resolve)

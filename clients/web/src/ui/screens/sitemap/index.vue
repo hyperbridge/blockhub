@@ -12,6 +12,7 @@
                         <li><c-button status="none" to="/support">Support</c-button></li>
                         <li><c-button status="none" to="/updates">Updates</c-button></li>
                         <li><c-button status="none" to="/welcome">Welcome</c-button></li>
+                        <li><c-button status="none" to="/plans">Plans</c-button></li>
                         <li><c-button status="none" to="/redeem">Redeem</c-button></li>
                         <li><c-button status="none" to="/token">Token</c-button></li>
                         <li><c-button status="none" to="/go/do-something">Go [do-something]</c-button></li>

@@ -29,7 +29,7 @@
             top: 0px;
             width: 20px;
             height: 20px;
-            animation: rotate 500ms infinite linear;
+            animation: rotate 500ms infinite linear !important;
             &:before{
                 position: absolute;
                 left: 3px;

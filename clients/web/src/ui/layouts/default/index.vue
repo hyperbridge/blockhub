@@ -155,9 +155,6 @@
                 <template slot="body">
                     <div class="row">
                         <a class="col-md-6">
-                            Create Realm
-                        </a>
-                        <a class="col-md-6">
                             Create Idea
                         </a>
                         <a class="col-md-6">
@@ -165,6 +162,9 @@
                         </a>
                         <a class="col-md-6">
                             Create Game
+                        </a>
+                        <a class="col-md-6">
+                            Create Realm
                         </a>
                     </div>
                 </template>

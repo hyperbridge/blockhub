@@ -220,11 +220,7 @@
         },
         updated() {
             $('body').off('click').on('click', "[data-action='fixedpanel-toggle']", (e) => {
-                let panel = $('#fixed-panel')
-                let backdrop = $('#backdrop')
-                let btn = $('#sidebar_toggle_btn span')
-
-                //this.$snotify.info("Test", "Sidebar toggled", {})
+                let btn = $('#sidebar-toggle-btn span')
 
                 if ($('body').hasClass('show-sidebar')) {
                     $('body').removeClass('show-sidebar')

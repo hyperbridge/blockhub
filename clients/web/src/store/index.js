@@ -335,9 +335,13 @@ window.BlockHub.saveDatabase = () => {
 
 
 const initSubscribers = () => {
+    store.subscribeAction((action, state) => {
+        console.info('[BlockHub] Store Action: ' + action.type, action.payload, state)
+    })
+
     store.subscribe((mutation, state) => {
         if (mutation.type !== 'application/setInternetConnection') {
-            console.info('[BlockHub] Mutation: ' + mutation.type, mutation.payload, state)
+            console.info('[BlockHub] Store Mutation: ' + mutation.type, mutation.payload, state)
         }
 
         if (mutation.type === 'database/initialized') {
