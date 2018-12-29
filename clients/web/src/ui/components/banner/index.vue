@@ -16,7 +16,7 @@
                         <div class="slider-dots" ref="sliderDots" v-if="slides.length > 1">
                             <div class="main-banner-swiper-pagination swiper-pagination" slot="pagination"></div>
                         </div>
-                        <c-button status="lightpurple" size="md" iconHide :href="`#/product/${slide.id}`">
+                        <c-button status="lightpurple" size="md" iconHide :to="`/product/${slide.id}`">
                             {{ slide.buttonText }}
                         </c-button>
                     </div>

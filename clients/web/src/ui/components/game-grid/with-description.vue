@@ -32,11 +32,11 @@
                             <span class="ml-4" style="color: #499fd3">Pre Release</span>
                         </template>
                     </div>
-                    <a  :href="`#/product/${item.id}`"
+                    <c-button status="none" :to="`/product/${item.id}`"
                         :title="item.name + ' - product page'"
                     >
                         <h4>{{ item.name }}</h4>
-                    </a>
+                    </c-button>
                     <div class="crowdfund-tag" v-if="item.crowdfund">
                         Crowdfund Campaign
                     </div>

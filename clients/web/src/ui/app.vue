@@ -26,7 +26,7 @@
 
                 <h5 v-if="developerMode && products.length">Your Products</h5>
 
-                <c-button status="none" v-if="developerMode" :href="`#/product/${product.id}`" v-for="(product, index) in products" :key="index">
+                <c-button status="none" v-if="developerMode" :to="`/product/${product.id}`" v-for="(product, index) in products" :key="index">
                     <span class="icon icon-letter-circle">{{ product.name.slice(0, 1) }}</span>
                     <span class="text">{{ product.name }}</span>
                 </c-button>

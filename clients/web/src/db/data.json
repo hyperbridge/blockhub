@@ -43,8 +43,8 @@
         "activeNotification": null,
         "settings": {
             "client": {
-                "animations": true,
-                "autoplay": true,
+                "animations": false,
+                "autoplay": false,
                 "pagination": true,
                 "hideWelcomeModal": false,
                 "cookiePolicyAccepted": false

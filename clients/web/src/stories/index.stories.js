@@ -2819,7 +2819,7 @@ storiesOf('Pagination', module)
         },
         template: `
             <div class="row m-0 p-5">
-                <c-pagination :pages="15" :pages_show="5"/>
+                <c-pagination :pages="15" :pagesShow="5"/>
             </div>
         `
     }))

@@ -1,7 +1,7 @@
 <template>
-    <a class="assets-list__item"
+    <c-button status="none" class="assets-list__item"
        :class="{ 'transparent-bg' : isTransparent }"
-       :href="`#/asset/${item.id}`"
+       :to="`/asset/${item.id}`"
     >
         <div class="thumb">
             <c-img
@@ -19,7 +19,7 @@
                 </span>
             </slot>
         </div>
-    </a>
+    </c-button>
 </template>
 
 <script>

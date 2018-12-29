@@ -26,7 +26,7 @@
                 </li>
 
                 <li
-                    v-for="page in visible_pages"
+                    v-for="page in visiblePages"
                     :key="page"
                     :class="{ 'active': page === activePage }"
                 >
@@ -75,7 +75,7 @@
                 type: Number,
                 default: 1
             },
-            pages_show: {
+            pagesShow: {
                 type: Number,
                 default: 8
             },
@@ -102,19 +102,19 @@
             }
         },
         computed: {
-            visible_pages() {
-                const { activePage, pages, base_pages, pages_show } = this;
-                const mid_val = Math.round(pages_show / 2);
+            visiblePages() {
+                const { activePage, pages, base_pages, pagesShow } = this;
+                const mid_val = Math.round(pagesShow / 2);
                 const numbers = [];
 
-                if (activePage > mid_val && pages > pages_show) {
-                    let cur_page = activePage + mid_val >= pages ? pages - pages_show : activePage - mid_val;
-                    for (let i = 0; i < pages_show; i++) {
+                if (activePage > mid_val && pages > pagesShow) {
+                    let cur_page = activePage + mid_val >= pages ? pages - pagesShow : activePage - mid_val;
+                    for (let i = 0; i < pagesShow; i++) {
                         cur_page++;
                         numbers.push(cur_page);
                     }
                 } else {
-                    const max_number = pages < pages_show ? pages : pages_show;
+                    const max_number = pages < pagesShow ? pages : pagesShow;
                     for (let i = 0; i < max_number; i++) {
                         numbers.push(i + 1);
                     }

@@ -12,13 +12,13 @@
                 <i class="fas" :class="{ 'fa-check': user.verified, 'fa-times': !user.verified }"></i>
             </div>
             <div class="user-data__avatar" v-if="previewMode">
-                <a
-                    :href="`#/profiles/${user.id}`"
+                <c-button
+                    :to="`/profiles/${user.id}`"
                     class="user-data__avatar-upload-btn"
                 >
                     <c-img v-if="user.img" :src="user.img" />
                     <c-img v-else src="../../../../static/img/user.png"/>
-                </a>
+                </c-button>
             </div>
             <div class="user-data__avatar" v-if="!previewMode">
                 <a

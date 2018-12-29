@@ -14,7 +14,7 @@
             <div class="description">{{ description }}</div>
         </c-button>
         <div class="item-action">
-            <c-button status="info" :href="`#/game/${id}`" iconHide>Check it out</c-button>
+            <c-button status="info" :to="`/game/${id}`" iconHide>Check it out</c-button>
         </div>
     </div>
 </template>

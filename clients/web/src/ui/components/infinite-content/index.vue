@@ -190,7 +190,7 @@
                         />
                         <c-swiper :options="item.data.options" :ref="swiper">
                             <c-slide v-for="(realm, index) in item.data.realms" :key="index">
-                                <c-button :href="`#/realm/${realm.id}`">{{ realm.name }}</c-button>
+                                <c-button :to="`/realm/${realm.id}`">{{ realm.name }}</c-button>
                             </c-slide>
                         </c-swiper>
                         <p v-if="!item.data.realms.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
