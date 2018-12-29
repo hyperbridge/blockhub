@@ -134,7 +134,7 @@
 
         methods: {
             getWindowHeight(event) {
-                this.windowHeight = window.innerHeight;
+                this.windowHeight = window.innerHeight
                 // console.log(this.windowHeight)
             },
             matchHeight () {

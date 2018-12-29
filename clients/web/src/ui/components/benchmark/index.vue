@@ -44,83 +44,85 @@
         },
         methods: {
             benchmark() {
-                this.running = true;
-                this.finished = false;
-                this.fpsVals = [];
+                this.running = true
+                this.finished = false
+                this.fpsVals = []
 
-                const times = [];
-                let fps = 0;
-                let loop = 0;
+                const times = []
+                let fps = 0
+                let loop = 0
 
                 const refreshLoop = () => {
                     window.requestAnimationFrame(() => {
-                        loop++;
-                        const now = performance.now();
+                        loop++
+                        const now = performance.now()
                         while (times.length > 0 && times[0] <= now - 1000) {
-                            times.shift();
+                            times.shift()
                         }
-                        times.push(now);
-                        fps = times.length;
-                        this.fps = fps;
+                        times.push(now)
+                        fps = times.length
+                        this.fps = fps
 
-                        if (loop > 60) this.fpsVals.push(fps);
+                        if (loop > 60) this.fpsVals.push(fps)
 
                         if (loop > 500) {
-                            this.running = false;
-                            this.finished = true;
-                            this.getResults();
+                            this.running = false
+                            this.finished = true
+                            this.getResults()
                         } else {
-                            refreshLoop();
+                            refreshLoop()
                         }
-                    });
+                    })
                 }
 
-                refreshLoop();
+                refreshLoop()
             },
             getResults() {
-                const avgFps = Math.round((this.fpsVals.reduce((sum, fps) => sum += fps, 0)) / this.fpsVals.length);
-                let grade = 'good';
+                const avgFps = Math.round((this.fpsVals.reduce((sum, fps) => sum += fps, 0)) / this.fpsVals.length)
+                let grade = 'good'
                 if (avgFps < 50 && avgFps > 30) {
-                    grade = 'avg';
+                    grade = 'avg'
                 } else if (avgFps < 30) {
-                    grade = 'bad';
+                    grade = 'bad'
                 }
-                this.results.avgFps = avgFps;
-                this.results.grade = grade;
+                this.results.avgFps = avgFps
+                this.results.grade = grade
                 this.results.text = grade == 'good'
                     ? 'There is no need to lower your settings'
                     : 'You should consider lowering your settings (preferably by auto-update option)'
+
+                this.autoUpdateSettings()
             },
-            updateSettings(prop) {
-                this.$store.commit('updateClientSettings', prop);
+            updateSettings(key, value) {
+                this.$store.commit('application/updateClientSettings', { key, value })
             },
             autoUpdateSettings() {
                 if (!this.finished || this.running) {
-                    this.btnMsg = 'YOU NEED TO START A BENCHMARK FIRST';
-                    setTimeout(() => this.btnMsg = 'UPDATE SETTINGS AUTOMATICALLY', 2000);
+                    this.btnMsg = 'YOU NEED TO START A BENCHMARK FIRST'
+                    setTimeout(() => this.btnMsg = 'UPDATE SETTINGS AUTOMATICALLY', 2000)
                 } else {
-                    const { grade } = this.results;
-                    const { settings } = this;
+                    const { grade } = this.results
+                    const { settings } = this
 
-                    const perfProps = ['autoplay', 'animations'];
+                    const perfProps = ['autoplay', 'animations']
                     const enableAll = boolean => perfProps.forEach(prop => {
-                        if (settings[prop] != boolean) this.updateSettings(prop);
-                    });
+                        this.updateSettings(prop, boolean)
+                    })
 
-                    if (grade == 'good') {
-                        enableAll(true);
-                    } else if (grade == 'avg') {
-                        if (!settings.autoplay) this.updateSettings('autoplay');
-                        if (settings.animations) this.updateSettings('animations');
+                    if (grade === 'good') {
+                        enableAll(true)
+                    } else if (grade === 'avg') {
+                        if (settings.client.autoplay) this.updateSettings('autoplay', false)
+                        if (settings.client.animations) this.updateSettings('animations', false)
                     } else {
-                        enableAll(false);
+                        enableAll(false)
                     }
 
                     this.$snotify.success('Settings were successfully updated', 'Settings updated', {
                         timeout: 2500,
                         pauseOnHover: true
-                    });
-                    this.$notify({ title: 'Saved', body: 'Settings were saved successfully' });
+                    })
+                    //this.$notify({ title: 'Saved', body: 'Settings were saved successfully' })
                 }
             },
         }

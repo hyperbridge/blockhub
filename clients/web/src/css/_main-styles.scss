@@ -396,7 +396,7 @@ body::-webkit-scrollbar {
 .disable-animations {
     *, *::before, *::after {
         transition: none !important;
-        transform: none !important;
+        /*transform: none !important;*/
         animation: none !important;
     }
 }

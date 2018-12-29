@@ -160,10 +160,10 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#/account/profiles">
+                                        <router-link to="/account/profiles">
                                             <i class="fas fa-users-cog"></i>
                                             Profile Manager
-                                        </a>
+                                        </router-link>
                                     </li>
                                     <li>
                                         <a @click="$store.commit('application/showProfileChooser', true)">

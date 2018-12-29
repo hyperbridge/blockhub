@@ -142,7 +142,7 @@ export const actions = {
     setEditorMode(store, payload) {
         store.commit('setEditorMode', payload)
 
-        if (!store.state.account.settings.client.hideEditorWelcomeModal) {
+        if (!store.state.settings.client.hideEditorWelcomeModal) {
             store.commit('activateModal', 'editor-welcome')
         }
     },
@@ -415,12 +415,12 @@ export const mutations = {
             // TODO: just redirect here?
         })
     },
-    updateClientSettings (state, property, value) {
-        value = value || !state.account.settings.client[property]
+    updateClientSettings (state, { key, value }) {
+        value = value || !state.settings.client[key]
 
-        Vue.set(state.account.settings.client, property, value)
+        Vue.set(state.settings.client, key, value)
 
-        state.account.settings.client[property] = value
+        state.settings.client[key] = value
 
         DB.application.config.update(state)
         DB.save()

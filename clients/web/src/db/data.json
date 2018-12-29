@@ -41,6 +41,15 @@
         "editorMode": "viewing",
         "activeModal": null,
         "activeNotification": null,
+        "settings": {
+            "client": {
+                "animations": true,
+                "autoplay": true,
+                "pagination": true,
+                "hideWelcomeModal": false,
+                "cookiePolicyAccepted": false
+            }
+        },
         "currentEthereumNetwork": "local",
         "shortcuts": [
             {
@@ -669,15 +678,6 @@
             "wallets": [],
             "profiles": [],
             "idts": [],
-            "settings": {
-                "client": {
-                    "animations": true,
-                    "autoplay": true,
-                    "pagination": true,
-                    "hideWelcomeModal": false,
-                    "cookiePolicyAccepted": false
-                }
-            },
             "darklaunchFlags": [
             ],
             "projectWishlist": { "1": true },

@@ -9,7 +9,7 @@ import {withViewport} from '@storybook/addon-viewport'
 import {withKnobs, text, boolean, number, object} from '@storybook/addon-knobs/vue'
 
 import '../css/styles.scss'
-import '@/main'
+import '@/entry-client'
 import '@/filters'
 import '@/directives'
 import '@/components'

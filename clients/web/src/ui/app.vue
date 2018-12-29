@@ -103,10 +103,10 @@
 
                 <hr v-if="signedIn" />
 
-                <a v-if="signedIn" href="#/settings">
+                <router-link v-if="signedIn" to="/settings">
                     <span class="icon fa fa-cog"></span>
                     <span class="text">Settings</span>
-                </a>
+                </router-link>
 
                 <a href="#/sitemap">
                     <span class="icon fa fa-list-alt"></span>
@@ -244,7 +244,7 @@
             }
         },
         computed: {
-            disableAnimations() { return this.$store.state.application.account.settings.client.animations },
+            disableAnimations() { return this.$store.state.application.settings.client.animations },
             developerMode() { return this.$store.state.application.developerMode },
             desktopMode() { return this.$store.state.application.desktopMode },
             signedIn() { return this.$store.state.application.signedIn },
@@ -381,7 +381,7 @@
         },
         created() {
             this.$store.state.application.signedIn = false
-            
+
             if (this.$route.meta.renderCondition) {
                 this.renderCondition = this.$route.meta.renderCondition
             } else if (this.$route.meta.permission === 'signedIn') {

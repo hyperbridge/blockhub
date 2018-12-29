@@ -70,7 +70,7 @@ export default {
     },
     data() {
         return {
-            showWelcomeModal: false //['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode) && !this.$store.state.application.account.settings.client.hideWelcomeModal,
+            showWelcomeModal: false //['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode) && !this.$store.state.application.settings.client.hideWelcomeModal,
         }
     },
     computed: {
@@ -297,7 +297,7 @@ export default {
     methods: {
         closeModal() {
             this.showWelcomeModal = false
-            this.$store.commit('application/updateClientSettings', 'hideWelcomeModal', true)
+            this.$store.commit('application/updateClientSettings', { key: 'hideWelcomeModal', value: true })
         }
     },
     mounted() {

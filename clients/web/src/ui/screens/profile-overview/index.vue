@@ -13,9 +13,9 @@
                     <c-button status="danger" v-darklaunch="'REPORTING'">Report</c-button>
                 </div>
             </div>
-            <div class="col-12" v-if="!signedIn && !$store.state.application.account.settings.client.hide_profile_signup">
+            <div class="col-12" v-if="!signedIn && !$store.state.application.settings.client.hide_profile_signup">
                 <div class="profile__user-notify">
-                    <c-button class="btn-close" @click="$store.commit('application/updateClientSettings', 'hide_profile_signup', true)">
+                    <c-button class="btn-close" @click="$store.commit('application/updateClientSettings', { key: 'hide_profile_signup', value: true })">
                         <i class="fas fa-times"></i>
                     </c-button>
                     <h3>Create your BlockHub Profile</h3>

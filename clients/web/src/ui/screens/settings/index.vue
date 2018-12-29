@@ -65,6 +65,34 @@
                 </div>
             </div>
         </c-block>
+        <c-block class="margin-bottom-30" title="Sound Settings" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="settings_item">
+                        <c-switch
+                            @change="updateClientSettings('sounds')"
+                            :checked="settings.client.sounds"
+                        />
+                        <div class="text">
+                            <h4>Sounds</h4>
+                            <p>Turn on if you want to enable sounds</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="settings_item">
+                        <c-switch
+                            @change="updateClientSettings('ui_interaction_sounds')"
+                            :checked="settings.client.ui_interaction_sounds"
+                        />
+                        <div class="text">
+                            <h4>UI interaction sounds</h4>
+                            <p>Turn on if you want to enable UI interaction sounds</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c-block>
         <c-block class="margin-bottom-30" title="Performance Settings" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-6">
@@ -732,8 +760,8 @@ export default {
     },
     methods: {
         ...mapMutations(['updateClientSettings']),
-        updateClientSettings(prop) {
-            this.$store.commit('application/updateClientSettings', prop)
+        updateClientSettings(key) {
+            this.$store.commit('application/updateClientSettings', { key })
         },
         clearDatabase() {
             window.resetSettings()
@@ -753,7 +781,7 @@ export default {
     },
     computed: {
         settings() {
-            return this.$store.state.application.account.settings
+            return this.$store.state.application.settings
         }
     }
 }

@@ -28,7 +28,7 @@
                 </c-option-list-item>
             </div>
             <div class="option-block__action-list">
-                <c-button status="second-info" class="my-2" @click="$emit('buy')">
+                <c-button status="second-info" size="xl" class="my-2" @click="$emit('buy')">
                     Buy now
                 </c-button>
                 <c-button status="opacity-info" @click="$emit('gift')" class="my-2" size="xl" style="border-radius: 2px">

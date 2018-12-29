@@ -74,7 +74,7 @@
         },
         computed: {
             paginationMode() {
-                return this.$store.state.application.account.settings.client.pagination;
+                return this.$store.state.application.settings.client.pagination;
             },
             pagination() {
                 const startPage = this.activePage * this.itemsPerPage;

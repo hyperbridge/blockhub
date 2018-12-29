@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations } from 'vuex'
 export default {
     name: 'cookie-policy',
     components:{
@@ -47,19 +47,19 @@ export default {
     methods: {
         ...mapMutations(['updateClientSettings']),
         updateClientSettings() {
-            this.$store.commit('application/updateClientSettings', 'cookiePolicyAccepted');
-            this.show = false;
+            this.$store.commit('application/updateClientSettings', { key: 'cookiePolicyAccepted' })
+            this.show = false
         },
         showPopup(){
-            this.show = true;
+            this.show = true
         },
         closePopup(){
-            this.show = false;
+            this.show = false
         }
     },
     computed: {
         settings() {
-            return this.$store.state.application.account.settings;
+            return this.$store.state.application.settings
         }
     }
 }

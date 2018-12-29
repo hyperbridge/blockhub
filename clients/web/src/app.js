@@ -73,13 +73,13 @@ const notifyError = debounce(function (message) {
     if (!message) return
 
     if (message.indexOf('Error') !== -1) {
-        if (store.state.application.account.settings.client.system_warnings) {
+        if (store.state.application.settings.client.system_warnings) {
             window.BlockHub.Bridge.sendCommand('error', { message: message.slice(0, 250) })
         }
     }
 
     if (message.indexOf('TypeError') !== -1) {
-        if (store.state.application.account.settings.client.system_warnings) {
+        if (store.state.application.settings.client.system_warnings) {
             window.BlockHub.Notification.error(message, 'UI Error', {
                 timeout: 5000,
                 pauseOnHover: true

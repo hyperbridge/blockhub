@@ -74,7 +74,7 @@
         },
         computed: {
             autoplay() {
-                return this.$store.state.application.account.settings.client.autoplay;
+                return this.$store.state.application.settings.client.autoplay;
             }
         }
     }

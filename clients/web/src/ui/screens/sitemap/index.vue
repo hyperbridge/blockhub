@@ -43,7 +43,7 @@
                 <div class="col-12 col-md-4">
                     <h2>Settings</h2>
                     <ul>
-                        <li><a href="#/settings">Settings</a></li>
+                        <li><router-link to="/settings">Settings</router-link></li>
                         <li><a href="#/settings/profile">Settings > Profile</a></li>
                         <li><a href="#/settings/protocol">Settings > Protocol</a></li>
                         <li><a href="#/settings/darklaunch">Settings > Darklaunch</a></li>

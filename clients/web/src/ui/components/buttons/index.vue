@@ -85,6 +85,8 @@
         },
         methods: {
             mouseover() {
+                if (!this.$store.state.application.settings.client.sounds || !this.$store.state.application.settings.client.ui_interaction_sounds) return
+
                 const sound = new Howl({
                     src: ['/static/sounds/information.mp3']
                 })
@@ -92,6 +94,8 @@
                 sound.play()
             },
             click() {
+                if (!this.$store.state.application.settings.client.sounds || !this.$store.state.application.settings.client.ui_interaction_sounds) return
+
                 const sound = new Howl({
                     src: ['/static/sounds/ask.mp3']
                 })
