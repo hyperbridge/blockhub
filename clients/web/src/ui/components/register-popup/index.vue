@@ -123,15 +123,6 @@
                 privacy: null
             }
         },
-        watch: {
-            '$store.state.application.signedIn'(newVal) {
-                if (newVal === true) {
-                    //this.$router.push({ path: '/' })
-                }
-            }
-        },
-        computed: {
-        },
         methods: {
             next() {
                 const { email, password } = this
@@ -144,7 +135,12 @@
                 && password) {
                     // Automatically log the user in after successful signup.
                     this.$store.dispatch('accounts/create', { email, password })
-                        .then(response => this.$store.dispatch('auth/authenticate', { strategy: 'local', email, password }))
+                        .then((res) => {
+                            this.$store.dispatch('auth/authenticate', { strategy: 'local', email, password })
+                            this.$store.commit('application/activateModal', null)
+                            this.loading = false
+                        })
+                        //.then(response => this.$store.dispatch('auth/authenticate', { strategy: 'local', email, password }))
                         // Just use the returned error instead of mapping it from the store.
                         .catch(error => {
                             // Convert the error to a plain object and add a message.

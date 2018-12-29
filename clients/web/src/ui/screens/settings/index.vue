@@ -30,18 +30,6 @@
                 <div class="col-12 col-md-6 col-lg-6">
                     <div class="settings_item">
                         <c-switch
-                            :checked="settings.client.ethereum_connection"
-                            @change="updateClientSettings('ethereum_connection')"
-                        />
-                        <div class="text">
-                            <h4>Ethereum connection</h4>
-                            <p>Turn on if you want the application to enable Ethereum connection</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-6">
-                    <div class="settings_item">
-                        <c-switch
                             :checked="settings.client.pagination"
                             @change="updateClientSettings('pagination')"
                         />
@@ -88,6 +76,34 @@
                         <div class="text">
                             <h4>UI interaction sounds</h4>
                             <p>Turn on if you want to enable UI interaction sounds</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c-block>
+        <c-block class="margin-bottom-30" title="Decentralization Settings" :noGutter="true" :onlyContentBg="true" :bgGradient="true" v-decentralized-mode>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="settings_item">
+                        <c-switch
+                            :checked="settings.client.ethereum_connection"
+                            @change="updateClientSettings('ethereum_connection')"
+                        />
+                        <div class="text">
+                            <h4>Ethereum connection</h4>
+                            <p>Turn on if you want the application to enable Ethereum connection</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="settings_item">
+                        <c-switch
+                            :checked="settings.client.ethereum_connection"
+                            @change="updateClientSettings('ethereum_connection')"
+                        />
+                        <div class="text">
+                            <h4>Node opeator (P2P)</h4>
+                            <p>Turn on if you want to enable node operator (P2P)</p>
                         </div>
                     </div>
                 </div>

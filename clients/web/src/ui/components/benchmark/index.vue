@@ -18,7 +18,12 @@
             <p v-else>Run this benchmark to check your performance</p>
         </div>
         <div>
-            <c-button @click="autoUpdateSettings" status="success">{{ btnMsg }}</c-button>
+            <c-button @click="toggleAutoUpdateSettings" status="success" v-if="settings.client.auto_update_settings">
+                SETTINGS UPDATED AUTOMATICALLY
+            </c-button>
+            <c-button @click="toggleAutoUpdateSettings" status="warning" v-if="!settings.client.auto_update_settings">
+                SETTINGS NOT UPDATED AUTOMATICALLY
+            </c-button>
         </div>
     </div>
 </template>
@@ -96,34 +101,35 @@
             updateSettings(key, value) {
                 this.$store.commit('application/updateClientSettings', { key, value })
             },
+            toggleAutoUpdateSettings() {
+                this.updateSettings('auto_update_settings')
+            },
             autoUpdateSettings() {
-                if (!this.finished || this.running) {
-                    this.btnMsg = 'YOU NEED TO START A BENCHMARK FIRST'
-                    setTimeout(() => this.btnMsg = 'UPDATE SETTINGS AUTOMATICALLY', 2000)
+                const { settings } = this
+                
+                if (!settings.client.auto_update_settings) return
+                if (!this.finished || this.running) return
+
+                const { grade } = this.results
+
+                const perfProps = ['autoplay', 'animations']
+                const enableAll = boolean => perfProps.forEach(prop => {
+                    this.updateSettings(prop, boolean)
+                })
+
+                if (grade === 'good') {
+                    enableAll(true)
+                } else if (grade === 'avg') {
+                    if (settings.client.autoplay) this.updateSettings('autoplay', false)
+                    if (settings.client.animations) this.updateSettings('animations', false)
                 } else {
-                    const { grade } = this.results
-                    const { settings } = this
-
-                    const perfProps = ['autoplay', 'animations']
-                    const enableAll = boolean => perfProps.forEach(prop => {
-                        this.updateSettings(prop, boolean)
-                    })
-
-                    if (grade === 'good') {
-                        enableAll(true)
-                    } else if (grade === 'avg') {
-                        if (settings.client.autoplay) this.updateSettings('autoplay', false)
-                        if (settings.client.animations) this.updateSettings('animations', false)
-                    } else {
-                        enableAll(false)
-                    }
-
-                    this.$snotify.success('Settings were successfully updated', 'Settings updated', {
-                        timeout: 2500,
-                        pauseOnHover: true
-                    })
-                    //this.$notify({ title: 'Saved', body: 'Settings were saved successfully' })
+                    enableAll(false)
                 }
+
+                this.$snotify.success('Settings were successfully updated', 'Settings updated', {
+                    timeout: 2500,
+                    pauseOnHover: true
+                })
             },
         }
     }

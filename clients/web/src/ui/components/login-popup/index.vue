@@ -88,14 +88,6 @@
                 loading: false
             }
         },
-        computed: {
-        },
-        watch: {
-            '$store.state.auth.user'(newVal) {
-                //this.$router.push({ path: '/' })
-                //this.$store.commit('application/activateModal', null)
-            }
-        },
         methods: {
             next() {
                 const { email, password } = this
