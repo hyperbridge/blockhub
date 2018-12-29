@@ -139,7 +139,7 @@
                                 </label>
                             </td>
                             <td>{{ product.id }}</td>
-                            <td><a :href="`#/business/product/${product.id}`" class="text-secondary text-bold">{{ product.name }}</a></td>
+                            <td><c-button status="none" :to="`/business/product/${product.id}`" class="text-secondary text-bold">{{ product.name }}</c-button></td>
                             <td>{{ product.meta.created }}</td>
                             <td>
                                 <div class="user user--bordered">

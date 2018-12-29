@@ -11,8 +11,8 @@
                     <slot name="block" />
                 </div>
                 <div class="card-body padding-0" v-else>
-                    <a :href="`#/product/${item.id}`"><c-img class="card-img-top" :src="item.meta.images.mediumTile" /></a>
-                    <h4><a :href="`#/product/${item.id}`">{{ item.name }}</a></h4>
+                    <c-button status="none" :to="`/product/${item.id}`"><c-img class="card-img-top" :src="item.meta.images.mediumTile" /></c-button>
+                    <h4><c-button status="none" :to="`/product/${item.id}`">{{ item.name }}</c-button></h4>
                     <p class="card-text" hidden>{{ item.shortDescription }} </p>
                     <c-tags :tags="item.tags.map(t => t.value)"></c-tags>
                 </div>

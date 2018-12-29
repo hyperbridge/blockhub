@@ -6,12 +6,12 @@
             </div>
             <c-swiper :options="sliderOptions" class="custom-dots-top carousel-full-height">
                 <c-slide v-for="(img, index) in game.images" :key="index">
-                    <a :href="`#/product/${game.id}`"><c-img :src="img" /></a>
+                    <c-button status="none" :to="`/product/${game.id}`"><c-img :src="img" /></c-button>
                 </c-slide>
             </c-swiper>
         </div>
         <div class="game-description__info">
-            <h3><a :href="`#/product/${game.id}`">{{ game.title }}</a></h3>
+            <h3><c-button status="none" :to="`/product/${game.id}`">{{ game.title }}</c-button></h3>
             <p>{{ game.description }}</p>
             <c-tags :tags="game.tags || []"></c-tags>
             <div class="game-description__info--bottom" v-if="game.price">

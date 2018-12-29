@@ -6,9 +6,9 @@
             </div>
             <ul class="traded-assets__list">
                 <li class="traded-assets__item" v-for="(item, index) in items" :key="index">
-                    <a :href="`#/asset/${item.id}`">
+                    <c-button status="none" :to="`/asset/${item.id}`">
                         <c-img :src="item.image_data" />
-                    </a>
+                    </c-button>
                 </li>
             </ul>
             <c-button status="outline-white" :href="assetsUrl">

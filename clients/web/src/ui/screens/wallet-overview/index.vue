@@ -8,7 +8,7 @@
                 {{ wallet.name }}
                 {{ wallet.id }}
                 <br />
-                <a :href="`#/wallet/${wallet.id}/transactions`">Transactions</a>
+                <c-button status="none" :to="`/wallet/${wallet.id}/transactions`">Transactions</c-button>
             </div>
         </div>
     </c-layout>

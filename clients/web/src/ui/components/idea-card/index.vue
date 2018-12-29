@@ -9,10 +9,10 @@
                 <p v-if="parentDeveloper">{{ parentDeveloper }}</p>
             </div>
         </div>
-        <a :href="`#/idea/${id}`">
+        <c-button status="none" :to="`/idea/${id}`">
             <c-img :src="image"/>
             <div class="description">{{ description }}</div>
-        </a>
+        </c-button>
         <div class="item-action">
             <c-button status="info" :href="`#/idea/${id}`" iconHide>Check it out</c-button>
         </div>

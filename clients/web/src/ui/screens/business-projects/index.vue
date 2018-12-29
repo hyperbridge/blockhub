@@ -141,7 +141,7 @@
                                     </label>
                                 </td>
                                 <td>{{ project.id }}</td>
-                                <td><a :href="`#/business/project/${project.id}`" class="text-secondary text-bold">{{ project.name }}</a></td>
+                                <td><c-button status="none" :to="`/business/project/${project.id}`" class="text-secondary text-bold">{{ project.name }}</c-button></td>
                                 <td>{{ project.meta.created }}</td>
                                 <td>
                                     <div class="user user--bordered">

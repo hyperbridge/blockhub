@@ -12,9 +12,9 @@
                 <div v-if="item.price && showPrice" class="price" :class="['price-position-' + pricePosition]">
                     <strong>{{ item.price | convertCurrency }}</strong>
                 </div>
-                <a :href="`#/product/${item.id}`">
+                <c-button status="none" :to="`/product/${item.id}`">
                     <c-img :src="item.images.mediumTile" />
-                </a>
+                </c-button>
                 <div class="crowdfund-icon" v-if="item.crowdfund">
                     <i class="fas fa-hand-holding-usd"></i>
                 </div>
