@@ -2,9 +2,6 @@ import Web3 from 'web3'
 import HDWalletProvider from 'truffle-hdwallet-provider'
 import contract from 'truffle-contract'
 import Bluebird from 'bluebird'
-import * as DB from '../db'
-
-
 
 export const ethereum = {
     infura: {
@@ -13,7 +10,7 @@ export const ethereum = {
     activeNetwork: 'local',
     networks: {
         local: {
-            provider: function (passphrase, index) {
+            provider: function(passphrase, index) {
                 return new HDWalletProvider(
                     passphrase,
                     'http://localhost:8545',
@@ -28,7 +25,7 @@ export const ethereum = {
             network_id: '*'
         },
         kovan: {
-            provider: function (passphrase, index) {
+            provider: function(passphrase, index) {
                 return new HDWalletProvider(
                     passphrase,
                     'https://kovan.infura.io/' + ethereum.infura.accessToken,
@@ -40,7 +37,7 @@ export const ethereum = {
             gasPrice: 10e9
         },
         rinkeby: {
-            provider: function (passphrase, index) {
+            provider: function(passphrase, index) {
                 return new HDWalletProvider(
                     passphrase,
                     'https://rinkeby.infura.io/' + ethereum.infura.accessToken,
@@ -52,7 +49,7 @@ export const ethereum = {
             gasPrice: 10e9
         },
         mainnet: {
-            provider: function (passphrase, index) {
+            provider: function(passphrase, index) {
                 return new HDWalletProvider(
                     passphrase,
                     'https://mainnet.infura.io/' + ethereum.infura.accessToken,
@@ -64,7 +61,7 @@ export const ethereum = {
             gasPrice: 10e9
         },
         ropsten: {
-            provider: function (passphrase, index) {
+            provider: function(passphrase, index) {
                 return new HDWalletProvider(
                     passphrase,
                     'https://ropsten.infura.io/' + ethereum.infura.accessToken,
@@ -105,7 +102,7 @@ export const getCurrentAccount = async (web3) => {
                     privateKey: web3.currentProvider.wallets[currentAccounts[0].toLowerCase()]._privKey.toString('hex')
                 })
             })
-        } catch(e) {
+        } catch (e) {
             console.log(e)
         }
     })
@@ -120,7 +117,7 @@ Bluebird.config({
     cancellation: true,
     // Enable monitoring
     monitoring: true
-});
+})
 
 export const create = async (passphrase, index = 0) => {
     console.log('[BlockHub] Initializing wallet...')
@@ -131,7 +128,7 @@ export const create = async (passphrase, index = 0) => {
     Bluebird.promisifyAll(web3.eth, { suffix: 'Promise' })
 
     return new Promise(async (resolve, reject) => {
-        const account = await getCurrentAccount(web3, index)
+        const account = await getCurrentAccount(web3)
 
         resolve({
             web3,

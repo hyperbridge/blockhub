@@ -1,0 +1,15 @@
+20 error Error: Command failed: git remote update
+20 error remote: !	No such app as pure-refuge-47308.
+20 error fatal: repository 'https://git.heroku.com/pure-refuge-47308.git/' not found
+20 error error: Could not fetch heroku
+20 error
+20 error Fetching origin
+20 error Fetching heroku
+20 error
+20 error     at makeError (/Users/ericmuyser/.nvm/versions/node/v8.11.1/lib/node_modules/lerna/node_modules/execa/index.js:174:9)
+20 error     at Function.module.exports.sync (/Users/ericmuyser/.nvm/versions/node/v8.11.1/lib/node_modules/lerna/node_modules/execa/index.js:338:15)
+20 error     at Object.execSync (/Users/ericmuyser/.nvm/versions/node/v8.11.1/lib/node_modules/lerna/node_modules/@lerna/child-process/index.js:22:16)
+20 error     at updateRemote (/Users/ericmuyser/.nvm/versions/node/v8.11.1/lib/node_modules/lerna/node_modules/@lerna/version/lib/is-behind-upstream.js:26:16)
+20 error     at isBehindUpstream (/Users/ericmuyser/.nvm/versions/node/v8.11.1/lib/node_modules/lerna/node_modules/@lerna/version/lib/is-behind-upstream.js:11:3)
+20 error     at VersionCommand.initialize (/Users/ericmuyser/.nvm/versions/node/v8.11.1/lib/node_modules/lerna/node_modules/@lerna/version/index.js:120:7)
+20 error     at Promise.resolve.then (/Users/ericmuyser/.nvm/versions/node/v8.11.1/lib/node_modules/lerna/node_modules/@lerna/command/index.js:266:24)
