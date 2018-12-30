@@ -21,8 +21,8 @@
 
 <script>
     export default {
-        props:{
-            position:{
+        props: {
+            position: {
                 type: String,
                 default: 'left'
             }
@@ -32,22 +32,27 @@
                 show: false
             }
         },
-        methods:{
+        methods: {
             toggleMenu() {
-                this.show = !this.show;
+                this.show = !this.show
+
+                if (this.show) this.$emit('show')
+                if (!this.show) this.$emit('hide')
             },
             closeMenu() {
-                this.show = false;
+                this.show = false
+
+                this.$emit('hide')
             }
         },
-        computed:{
-            dropdownPosition(){
+        computed: {
+            dropdownPosition() {
                 console.log('run switch', this.position)
                 switch (this.position) {
                     case 'left':
-                        return 'dropdown-menu-left';
+                        return 'dropdown-menu-left'
                     case 'right':
-                        return 'dropdown-menu-right';
+                        return 'dropdown-menu-right'
                 }
             }
         }

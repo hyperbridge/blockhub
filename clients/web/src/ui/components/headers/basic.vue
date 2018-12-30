@@ -130,7 +130,7 @@
                             </c-button>
                         </li>
                         <li v-if="signedIn">
-                            <c-dropdown class="ml-4 account-menu" style="z-index: 12">
+                            <c-dropdown class="ml-4 account-menu" style="z-index: 12" @show="onShowMenu" @hide="onHideMenu">
                                 <template slot="title">
                                     <div class="__title">
                                         <i class="fa fa-user"></i>
@@ -234,7 +234,6 @@ export default {
     },
     data() {
         return {
-            showMenu: false
         }
     },
     computed: {
@@ -313,13 +312,16 @@ export default {
         clickExit() {
             this.$store.dispatch('application/setEditorMode', 'viewing')
         },
+        onShowMenu() {
+            $('.snotify').hide()
+        },
+        onHideMenu() {
+            $('.snotify').show()
+        },
         signOut() {
             this.$store.dispatch('application/signOut')
 
             this.isLoading = true
-        },
-        toggleMenu() {
-            this.showMenu = !this.showMenu
         },
         closeWindow() {
             const { BrowserWindow } = window.specialRequire('electron').remote
