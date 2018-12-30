@@ -398,6 +398,8 @@ body::-webkit-scrollbar {
         transition: none !important;
         /*transform: none !important;*/
         animation: none !important;
+    }
+    .snotifyToast {
         opacity: 1 !important;
     }
 }
