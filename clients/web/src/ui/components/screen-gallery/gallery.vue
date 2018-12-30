@@ -8,14 +8,18 @@
             <c-icon name="expand" v-show="!run_slideshow && !play_video"/>
             <c-img
                 v-if="!play_video"
-                :src="items[active_item]"
+                :src="items[active_item].overlay ? items[active_item].src : items[active_item]"
                 @click="show_modal = true"
             />
             <video v-else-if="play_video" controls autoplay muted>
                 <source :src="video_url" type="video/mp4">
             </video>
             <div v-show="run_slideshow" class="screen-gallery__progress-bar"></div>
-            <c-image-overlay v-if="items[active_item]['overlay']" />
+
+            <c-image-overlay v-if="items[active_item]['overlay']"
+                             :title="items[active_item]['overlay'].title"
+                             :subtitle="items[active_item]['overlay'].subtitle"
+                             :text="items[active_item]['overlay'].text" />
         </div>
         <ul class="screen-gallery__thumb-nav" ref="thumb-nav">
             <li
@@ -31,12 +35,12 @@
                 <c-icon name="play"/>
             </li>
             <li
-                v-for="(url, index) in items"
+                v-for="(item, index) in items"
                 :key="index"
                 :ref="`thumb-${index}`"
             >
                 <c-img
-                    :src="url"
+                    :src="item.overlay ? item.src : item"
                     :class="{ 'inactive-item': index !== active_item || play_video }"
                     @click="changeActiveItem(index)"
                 />
@@ -194,6 +198,7 @@ export default {
             transition: opacity .3s ease .1s, transform .3s ease .1s;
             transform: scale(0);
             color: #fff;
+            z-index: 21;
         }
         img {
             height: 30rem;
@@ -207,6 +212,18 @@ export default {
             bottom: 0;
         }
         &:hover {
+            &:before{
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                display: block;
+                background: rgba(0, 0, 0, .4);
+                z-index: 20;
+                cursor: pointer;
+            }
             .fas {
                 opacity: 1;
                 transform: scale(1);

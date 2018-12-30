@@ -3032,6 +3032,14 @@ storiesOf('Gallery', module)
         data() {
             return {
                 items: [
+                    {
+                        src: 'https://cdn.vox-cdn.com/thumbor/-9ezNi6jWxByZiYsLDfoAILAJC4=/0x38:1920x1043/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/12648875/HowFortniteWonSite.png',
+                        overlay:{
+                            title: 'How Fortnite became the biggest game of 2018',
+                            subtitle: 'It comes down to three big things',
+                            text: 'Fortnite has achieved monumental success, the rare game to crossover into mainstream pop culture. Fortnite is referenced by musicians, imitated by athletes and reported on by news outlets. How did it achieve such broad recognition when so few games do?'
+                        }
+                    },
                     'https://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2018/03/15/105067468-Screen-Shot-2018-03-15-at-8.46.23-AM.1910x1000.jpg',
                     'https://cdn.igromania.ru/mnt/news/7/e/0/5/c/6/74193/4703e6101b90868b_848x477.jpg',
                     'https://cdn.gamerant.com/wp-content/uploads/Fortnite-Battle-Royale-more-players-GTA-Online.jpg.optimal.jpg',
@@ -3682,7 +3690,12 @@ storiesOf('Banner', module)
                             size: ''
                         },
                         title: 'Some title',
-                        buttonText: 'Details'
+                        buttonText: 'Details',
+                        overlay: {
+                            title: 'Cras suscipit dapibus metus quis egestas.',
+                            subtitle: 'Morbi non cursus magna. Integer magna urna, facilisis sed tincidunt eu',
+                            text: 'Sed accumsan vel lacus eu cursus. Nunc suscipit, tellus sit amet laoreet ornare, ligula purus consectetur nisi, sed sagittis velit lectus in turpis. Vestibulum sollicitudin faucibus mollis. Aliquam tempus fermentum nulla, at congue magna tristique ut. Proin non turpis erat.'
+                        }
                     }
                 ],
             }
