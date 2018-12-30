@@ -1,5 +1,7 @@
-import * as Wallet2 from './wallet'
+import * as Wallet from './wallet'
+import CryptoJS from 'crypto-js'
 
-export const Wallet = Wallet2
-
-export const Test = 1
+export default {
+    Wallet,
+    CryptoJS
+}

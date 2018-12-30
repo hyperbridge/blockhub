@@ -13,6 +13,7 @@
             </div>
             <div class="user-data__avatar" v-if="previewMode">
                 <c-button
+                    status="none"
                     :to="`/profiles/${user.id}`"
                     class="user-data__avatar-upload-btn"
                 >
@@ -127,6 +128,8 @@
                     chosenProfile.address = res.address
 
                     this.$snotify.success('Address generated')
+
+                    this.$store.commit('application/updateState')
                 })
             },
             copyToClipboard(value) {

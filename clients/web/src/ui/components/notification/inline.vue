@@ -31,22 +31,22 @@
         },
         methods: {
             actionOnClose() {
-                this.show = false;
+                this.show = false
             }
         },
         computed: {
             notif_icon() {
                 switch (this.type) {
                     case 'info':
-                        return 'info';
+                        return 'info'
                     case 'success':
-                        return 'check-circle';
+                        return 'check-circle'
                     case 'warning':
-                        return 'exclamation-triangle';
+                        return 'exclamation-triangle'
                     case 'danger':
-                        return 'times-circle';
+                        return 'times-circle'
                     default:
-                        return 'cog';
+                        return 'cog'
                 }
             }
         }

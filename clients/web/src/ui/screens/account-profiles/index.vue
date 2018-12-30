@@ -311,8 +311,6 @@
             }
         },
         watch: {
-            '$store.state.application.initialized'() {
-            },
             '$store.state.profiles.isCreatePending'(newVal, oldVal) {
                 if (newVal === false) {
                     this.editProfile(this.profiles.find(p => p.id === this.$store.state.profiles.currentId))

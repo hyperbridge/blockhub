@@ -41,6 +41,7 @@
         "editorMode": "viewing",
         "activeModal": null,
         "activeNotification": null,
+        "tokenCount": 0,
         "settings": {
             "client": {
                 "animations": false,

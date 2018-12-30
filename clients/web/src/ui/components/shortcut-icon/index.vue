@@ -4,9 +4,8 @@
            class="icon-delete-btn fa fa-times"
            @mousedown="remove"/>
         <slot>
-            <c-button status="none" :href="href" :to="to" :style="{ 'background-image': image ? 'url(' + image + ')' : 'none' }" @click="click">
-                <i v-if="icon"
-                   :class="icon"/>
+            <c-button status="none" :href="href" :to="to" :style="{ 'background-image': image ? 'url(' + image + ')' : 'none', 'color': 'inherit', 'justify-content': 'center' }" @click="click">
+                <i v-if="icon" :class="icon" />
             </c-button>
         </slot>
         <c-progress-bar :percentages="74" style="height: 3px; min-height: 3px; margin-top: 7px" v-if="percent" />
@@ -36,6 +35,10 @@
             href: {
                 type: String,
                 default: '#'
+            },
+            to: {
+                type: String,
+                default: ''
             },
             icon: {
                 type: String,

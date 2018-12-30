@@ -120,8 +120,11 @@
                         </li>
                         <li v-if="signedIn" class="token">
                             <c-button status="none" to="/token">
-                                <span class="token__count">
-                                    0 <span class="icon fa fa-coins"></span>
+                                <span class="token__count token__count--loading" v-if="tokenCount === null">
+                                    <c-loading :enabled="true" />
+                                </span>
+                                <span class="token__count" v-if="tokenCount !== null">
+                                    {{ tokenCount }} <span class="icon fa fa-coins"></span>
                                 </span>
                                 <span class="text">Tokens</span>
                             </c-button>
@@ -231,12 +234,15 @@ export default {
     },
     data() {
         return {
-            showMenu: false,
+            showMenu: false
         }
     },
     computed: {
         languages() {
             return this.$store.state.application.languages
+        },
+        tokenCount() {
+            return this.$store.state.application.tokenCount !== null ? this.$store.state.application.tokenCount.toLocaleString() : null
         },
         currentLanguage() {
             // Try to set based on browser language
@@ -768,6 +774,15 @@ export default {
             margin-left: 3px;
             font-weight: bold;
             vertical-align: super;
+        }
+
+        .token__count {
+            height: 24px;
+            min-width: 40px;
+
+            &.token__count--loading {
+                padding-top: 4px;
+            }
         }
 
         &:hover .token__count {

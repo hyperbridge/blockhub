@@ -890,7 +890,7 @@
                 symbolSpacing: true
             })
 
-            window.onmousemove = function (e) {
+            window.onmousemove = function (e) { // TODO replace?
                 if (e.altKey) {
                     document.body.style.cursor = 'crosshair'
                 } else {
@@ -900,7 +900,7 @@
 
             $(document).on('click', (e) => {
                 if (e.altKey) {
-                    e.preventDefault();
+                    e.preventDefault()
 
                     this.reportCoords = {
                         x: e.clientX,
@@ -909,17 +909,15 @@
 
                     this.$store.state.application.activeModal = 'report'
 
-                    return false;
+                    return false
                 }
 
-                return true;
-            });
+                return true
+            })
         },
         watch: {
             '$route'() {
                 this.updateBreadcrumbLinks()
-            },
-            '$store.state.application.initialized'() {
             },
             profileChooser() {
                 if (this.signedIn)
@@ -927,6 +925,18 @@
                         this.bluredBg = true
                     else
                         this.bluredBg = false
+            },
+            '$store.state.application.activeProfile'() {
+                if (!this.$store.state.application.activeProfile.address) return
+
+                this.$store.state.application.tokenCount = null
+
+                window.BlockHub.Bridge.sendCommand('getTokenBalance', {
+                    type: 'HBX',
+                    address: this.$store.state.application.activeProfile.address
+                }).then((res) => {
+                    this.$store.state.application.tokenCount = res.balance
+                })
             }
         }
     }

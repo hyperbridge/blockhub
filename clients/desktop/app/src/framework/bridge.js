@@ -286,7 +286,7 @@ export const setContractAddress = async ({ protocolName, contractName, address }
         protocol.api.ethereum
             .setContractAddress(contractName, address)
             .catch(() => {
-                reject('Unable to deploy contract')
+                reject('Unable to set contract')
             })
             .then(() => {
                 resolve()
@@ -1291,6 +1291,42 @@ export const recoverPasswordRequest = async ({ secretQuestion1, secretAnswer1, b
     })
 }
 
+export const getTokenBalance = async ({ address, type }) => {
+    return new Promise(async (resolve) => {
+        const web3 = local.wallet.web3
+        const originWallet = await Wallet.create(local.passphrase, 1)
+        const originAddress = originWallet.address
+
+        if (type === 'HBX') {
+            const token = TokenAPI.api.ethereum.state.contracts.Token.deployed
+            const hbxToken = TokenAPI.api.ethereum.state.contracts.TokenDelegate.deployed
+            const tokenLib = TokenAPI.api.ethereum.state.contracts.TokenLib.deployed
+
+            const originalProvider = TokenAPI.api.ethereum.state.provider
+
+            TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originWallet.provider)
+            TokenAPI.api.ethereum.state.contracts.Token.contract.provider = originWallet.provider
+            TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originWallet.provider)
+
+            let tokenDelegateHolder = await TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.at(hbxToken.address)
+            let originWalletHolder = await TokenAPI.api.ethereum.state.contracts.Token.contract.at(token.address)
+            originWalletHolder = { ...tokenDelegateHolder, ...originWalletHolder }
+
+            const balance = await originWalletHolder.balanceOf(address, {
+                from: originWallet.address,
+                gasPrice: 6e9
+            })
+
+            const baseNumber = web3._extend.utils.toBigNumber(10).pow(18)
+
+            resolve ({
+                balance: (balance.dividedBy(baseNumber)).toNumber()
+            })
+        } else if (type === 'ETH') {
+
+        }
+    })
+}
 
 export const writeToClipboard = async (data) => {
     return new Promise(async (resolve) => {
@@ -1562,6 +1598,9 @@ export const runCommand = async (cmd, meta = {}) => {
         } else if (cmd.key === 'createProfileRequest') {
             resultData = await createProfileRequest(cmd.data)
             resultKey = 'createProfileResponse'
+        } else if (cmd.key === 'getTokenBalance') {
+            resultData = await getTokenBalance(cmd.data)
+            resultKey = 'getTokenBalanceResponse'
         } else if (cmd.key === 'saveProfileRequest') {
             resultData = await saveProfileRequest(cmd.data)
             resultKey = 'saveProfileResponse'
