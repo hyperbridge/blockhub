@@ -14851,7 +14851,7 @@ exports[`Storyshots Pagination Debouncer 1`] = `
           class=""
         >
           <a
-            href="#5"
+            href="#"
           >
             5
           </a>
@@ -14860,7 +14860,7 @@ exports[`Storyshots Pagination Debouncer 1`] = `
           class=""
         >
           <a
-            href="#6"
+            href="#"
           >
             6
           </a>
@@ -14869,7 +14869,7 @@ exports[`Storyshots Pagination Debouncer 1`] = `
           class=""
         >
           <a
-            href="#7"
+            href="#"
           >
             7
           </a>
@@ -14878,7 +14878,7 @@ exports[`Storyshots Pagination Debouncer 1`] = `
           class=""
         >
           <a
-            href="#8"
+            href="#"
           >
             8
           </a>
@@ -14992,7 +14992,7 @@ exports[`Storyshots Pagination Limited to 5 pages 1`] = `
           class=""
         >
           <a
-            href="#5"
+            href="#"
           >
             5
           </a>
@@ -15106,7 +15106,7 @@ exports[`Storyshots Pagination default 1`] = `
           class=""
         >
           <a
-            href="#5"
+            href="#"
           >
             5
           </a>
@@ -15115,7 +15115,7 @@ exports[`Storyshots Pagination default 1`] = `
           class=""
         >
           <a
-            href="#6"
+            href="#"
           >
             6
           </a>
@@ -15124,7 +15124,7 @@ exports[`Storyshots Pagination default 1`] = `
           class=""
         >
           <a
-            href="#7"
+            href="#"
           >
             7
           </a>
@@ -15133,7 +15133,7 @@ exports[`Storyshots Pagination default 1`] = `
           class=""
         >
           <a
-            href="#8"
+            href="#"
           >
             8
           </a>

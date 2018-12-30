@@ -30,6 +30,18 @@ export default function(app) {
         }
     })
 
+    app.use('/accounts/:id/checkTokens', {
+        async update(id, data, params) {
+            const { role } = data
+
+            // const result = await app.service('/accounts').get(id)
+
+            // result.name = role
+
+            // return result
+        }
+    })
+
     const service = app.service('accounts')
 
     service.hooks(hooks)

@@ -354,7 +354,7 @@ storiesOf('Rating', module)
         template: `
         <div class="row p-5">
             <div class="col-8">
-                <c-rating-block :items="items" fullReviewsLink="#" rateGameLink="#4" />
+                <c-rating-block :items="items" fullReviewsLink="#" rateGameLink="#" />
             </div>
         </div>
         `
@@ -5400,7 +5400,7 @@ storiesOf('Chat', module)
                         "g": null,
                         "b": null,
                         "image": "/static/img/icons/store.png",
-                        "link": "#/",
+                        "to": "/",
                         "text": "Go to store",
                         "sort": 2,
                         "removable": false

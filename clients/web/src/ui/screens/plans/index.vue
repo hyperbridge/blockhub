@@ -6,8 +6,8 @@
                 <c-option-block shadow 
                     image="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"
                     title="Gamer" 
-                    subtitle="Massively Multiplayer RPG"
-                    notification="Pre-Purchase now!"
+                    subtitle=""
+                    notification="Free"
                     :list="list"
                 />
             </div>
@@ -15,8 +15,8 @@
                 <c-option-block shadow 
                     image="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"
                     title="Indie" 
-                    subtitle="Massively Multiplayer RPG"
-                    notification="Pre-Purchase now!"
+                    subtitle=""
+                    notification="Free"
                     :list="list"
                 />
             </div>
@@ -24,8 +24,8 @@
                 <c-option-block shadow 
                     image="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"
                     title="Studio" 
-                    subtitle="Massively Multiplayer RPG"
-                    notification="Pre-Purchase now!"
+                    subtitle=""
+                    notification="$10"
                     :list="list"
                 />
             </div>

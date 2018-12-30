@@ -57,7 +57,7 @@
                 "g": 255,
                 "b": 255,
                 "image": "/static/img/icons/grid.png",
-                "link": "#/",
+                "href": "#/",
                 "text": "Open Grid",
                 "sort": 1,
                 "removable": false
@@ -67,7 +67,7 @@
                 "g": 255,
                 "b": 255,
                 "image": "/static/img/icons/store.png",
-                "link": "#/",
+                "to": "/",
                 "text": "Go to store",
                 "sort": 2,
                 "removable": false
@@ -769,12 +769,12 @@
                         {
                             "name": "Just Title",
                             "count": "31",
-                            "link": "#4"
+                            "link": "#"
                         },
                         {
                             "name": "Just Some a Little bit long Title",
                             "count": "1701",
-                            "link": "#5"
+                            "link": "#"
                         }
                     ]
                 },

@@ -4,10 +4,10 @@
            class="icon-delete-btn fa fa-times"
            @mousedown="remove"/>
         <slot>
-            <a :href="link" :style="{ 'background-image': image ? 'url(' + image + ')' : 'none' }" @click="click">
+            <c-button status="none" :href="href" :to="to" :style="{ 'background-image': image ? 'url(' + image + ')' : 'none' }" @click="click">
                 <i v-if="icon"
                    :class="icon"/>
-            </a>
+            </c-button>
         </slot>
         <c-progress-bar :percentages="74" style="height: 3px; min-height: 3px; margin-top: 7px" v-if="percent" />
         <transition name="fade" v-if="text && show">
@@ -33,7 +33,7 @@
                 type: String,
                 default: null
             },
-            link: {
+            href: {
                 type: String,
                 default: '#'
             },
