@@ -840,6 +840,17 @@ const router = new Router({
                     }
                 },
                 {
+                    path: 'land',
+                    name: 'Business Land',
+                    component: (resolve) => require(['@/ui/screens/business-land'], resolve),
+                    meta: {
+                        title: 'Business',
+                        breadcrumb: [
+                            { path: '/business/land', title: 'Business Land' },
+                        ]
+                    }
+                },
+                {
                     path: 'products',
                     name: 'All Products',
                     component: (resolve) => require(['@/ui/screens/business-products'], resolve),
