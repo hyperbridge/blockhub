@@ -249,12 +249,12 @@
         &.none {
             font-weight: normal;
             justify-content: left;
+            color: #fff;
         }
 
         /* background color, text color, hover background color, hover text color */
         $statusColors: (
             default: (#fff, #3D3E5D, #3D3E5D, #A2A3BE),
-            none: (transparent, #fff, transparent, #fff),
             success: (#5EA72B, #fff, #559727, #30304B),
             support: (#43C981, #fff, #3db876, #30304B),
             info: (#5D75F7, #fff, #5165d5, #30304B),
