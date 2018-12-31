@@ -63,21 +63,21 @@
             </div>
         </div>
 
-        <div class="user-data__public-address" v-if="previewMode && user.key">
+        <div class="user-data__public-address" v-if="previewMode && user.address">
             <input
                 type="text"
                 class="form-control"
                 name="user-data__public-address"
                 placeholder="Public address"
-                :value="user.key"
+                :value="user.address"
                 @input="$emit('update:wallet', $event.target.value)"
                 readonly="readonly"
             />
-            <button @click="copyToClipboard(user.key)">
+            <button @click="copyToClipboard(user.address)">
                 <i :class="`fas fa-${previewMode ? 'copy' : 'redo-alt'}`"></i>
             </button>
         </div>
-        <div v-if="previewMode && !user.key">
+        <div v-if="previewMode && !user.address">
             <c-button status="dark" size="small" @click="generateAddress(user.id)">Generate Address</c-button>
         </div>
     </div>
@@ -128,15 +128,15 @@
                     this.$store.dispatch('profiles/update', [
                         chosenProfile.id, 
                         {
-                            key: res.address
+                            address: res.address
                         }, 
                         {
                             query: {}
                         }
                     ]).then((profile) => {
-                        chosenProfile.key = res.address
+                        chosenProfile.address = res.address
 
-                        this.$snotify.success('', 'Address generated')
+                        this.$snotify.success('', 'Address generated', { timeout: 3000 })
 
                         this.$store.commit('application/updateState')
                     })

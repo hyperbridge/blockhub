@@ -307,7 +307,7 @@ body::-webkit-scrollbar {
     }
 }
 
-.developer_banner {
+.developer-banner {
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9d972+0,f7bf77+100 */
     background: #f9d972; /* Old browsers */
     background: -moz-linear-gradient(left, #f9d972 0%, #f7bf77 100%); /* FF3.6-15 */
@@ -353,7 +353,7 @@ body::-webkit-scrollbar {
     }
 }
 
-.dev_blk {
+.dev-block {
     display: inline-block;
     float: left;
     width: auto;
@@ -394,15 +394,12 @@ body::-webkit-scrollbar {
     }
 }
 .disable-animations {
-    *, *::before, *::after {
+    *:not(.snotifyToast), *::before, *::after {
         transition: none !important;
         /*transform: none !important;*/
         animation: none !important;
     }
-    .snotifyToast {
-        opacity: 1 !important;
-    }
 }
-.fixed-panel{
+.fixed-panel {
     max-width: 90%;
 }
