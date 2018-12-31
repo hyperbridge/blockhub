@@ -30,8 +30,21 @@ export default function(app) {
         }
     })
 
+    app.use('/profiles/:id/setAddress', {
+        async update(id, data, params) {
+            console.log('[service=/profiles/:id/setAddress, action=update]')
+
+            await Model.query()
+                .where({ id })
+                .update(data)
+
+            return data
+        }
+    })
+
     app.service('/profiles').hooks(hooks)
     app.service('/profiles/:id/convert').hooks(hooks)
+    app.service('/profiles/:id/setAddress').hooks(hooks)
     //app.service('/profiles/:id/tags').hooks(hooks)
 }
 

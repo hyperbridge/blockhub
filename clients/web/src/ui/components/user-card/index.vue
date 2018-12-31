@@ -125,11 +125,21 @@
                 const index = chosenProfile.meta.walletIndex
 
                 window.BlockHub.Bridge.sendCommand('generateAddress', { index }).then((res) => {
-                    chosenProfile.address = res.address
+                    this.$store.dispatch('profiles/update', [
+                        chosenProfile.id, 
+                        {
+                            address: res.address
+                        }, 
+                        {
+                            query: {}
+                        }
+                    ]).then((profile) => {
+                        chosenProfile.address = res.address
 
-                    this.$snotify.success('Address generated')
+                        this.$snotify.success('', 'Address generated', { timeout: 3000 })
 
-                    this.$store.commit('application/updateState')
+                        this.$store.commit('application/updateState')
+                    })
                 })
             },
             copyToClipboard(value) {

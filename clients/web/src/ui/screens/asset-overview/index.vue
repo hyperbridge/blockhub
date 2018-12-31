@@ -246,8 +246,6 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-            'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
             'c-heading-bar-fields' : (resolve) => require(['@/ui/components/heading-bar/additional-action'], resolve),
             'c-pagination': (resolve) => require(['@/ui/components/pagination/index'], resolve),
@@ -267,21 +265,21 @@
             }
         },
         methods: {
-            numberFormat(value){
+            numberFormat(value) {
                 return Math.log(value) / Math.log(10)
             },
-            closePopup(){
+            closePopup() {
                 this.show_popup = false
                 this.tmpItem = {}
             },
-            openPopup(obj){
+            openPopup(obj) {
                 this.tmpItem = obj
                 this.show_popup = true
             }
         },
         computed: {
             asset() {
-                return this.$store.getters['assets/assets'][this.id];
+                return this.$store.getters['assets/assets'][this.id]
             }
         }
     }
