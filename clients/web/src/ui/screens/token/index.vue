@@ -210,10 +210,9 @@
                     <c-block title="Payment" class="margin-bottom-30">
                         <div class="profile-picker">
                             <c-swiper :options="profileOptions">
-                                <c-slide v-for="profile in profiles">
+                                <c-slide v-for="profile in profiles" :key="profile.id">
                                     <div
                                         class="profile-picker__profile w-100 m-0 padding-15 pb-0"
-                                        :key="profile.id"
                                         v-if="profiles && profiles.length"
                                     >
                                         <c-user-card

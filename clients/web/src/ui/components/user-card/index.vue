@@ -63,21 +63,21 @@
             </div>
         </div>
 
-        <div class="user-data__public-address" v-if="previewMode && user.address">
+        <div class="user-data__public-address" v-if="previewMode && user.key">
             <input
                 type="text"
                 class="form-control"
                 name="user-data__public-address"
                 placeholder="Public address"
-                :value="user.address"
+                :value="user.key"
                 @input="$emit('update:wallet', $event.target.value)"
                 readonly="readonly"
             />
-            <button @click="copyToClipboard(user.address)">
+            <button @click="copyToClipboard(user.key)">
                 <i :class="`fas fa-${previewMode ? 'copy' : 'redo-alt'}`"></i>
             </button>
         </div>
-        <div v-if="previewMode && !user.address">
+        <div v-if="previewMode && !user.key">
             <c-button status="dark" size="small" @click="generateAddress(user.id)">Generate Address</c-button>
         </div>
     </div>
@@ -125,11 +125,21 @@
                 const index = chosenProfile.meta.walletIndex
 
                 window.BlockHub.Bridge.sendCommand('generateAddress', { index }).then((res) => {
-                    chosenProfile.address = res.address
+                    this.$store.dispatch('profiles/update', [
+                        chosenProfile.id, 
+                        {
+                            key: res.address
+                        }, 
+                        {
+                            query: {}
+                        }
+                    ]).then((profile) => {
+                        chosenProfile.key = res.address
 
-                    this.$snotify.success('Address generated')
+                        this.$snotify.success('', 'Address generated')
 
-                    this.$store.commit('application/updateState')
+                        this.$store.commit('application/updateState')
+                    })
                 })
             },
             copyToClipboard(value) {

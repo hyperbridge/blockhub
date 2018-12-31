@@ -927,13 +927,13 @@
                         this.bluredBg = false
             },
             '$store.state.application.activeProfile'() {
-                if (!this.$store.state.application.activeProfile.address) return
+                if (!this.$store.state.application.activeProfile.key) return
 
                 this.$store.state.application.tokenCount = null
 
                 window.BlockHub.Bridge.sendCommand('getTokenBalance', {
                     type: 'HBX',
-                    address: this.$store.state.application.activeProfile.address
+                    address: this.$store.state.application.activeProfile.key
                 }).then((res) => {
                     this.$store.state.application.tokenCount = res.balance
                 })
@@ -1494,6 +1494,7 @@
                 padding: 13px 13px 15px 63px;
                 min-height: 50px;
                 font-size: 12px;
+                min-height: 65px;
                 .snotify-icon{
                     right: unset;
                     left: 13px;

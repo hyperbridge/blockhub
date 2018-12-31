@@ -137,8 +137,6 @@ body::-webkit-scrollbar {
     z-index: 12;
     background: #1C2032;
     border: 0 none;
-    border-left: 1px solid rgba(255, 255, 255, 0.07);
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 
     .fixed-panel__content {
         display: flex;
@@ -172,6 +170,8 @@ body::-webkit-scrollbar {
 
     body.show-sidebar & {
         right: 0px;
+        border-left: 1px solid rgba(255, 255, 255, 0.07);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     }
 }
 
