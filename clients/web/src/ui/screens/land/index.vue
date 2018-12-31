@@ -87,15 +87,42 @@
                                     Nullam ultricies
                                 </div>
                                 <p class="text-center">
-                                    Nunc nec diam nibh. Cras id est vehicula, tempus eros vitae, sodales tellus. In euismod sem
+                                    Nunc nec diam nibh. Cras id est vehicula, tempus eros vitae, sodales tellus. In
+                                    euismod sem
                                     tempor, sagittis purus vitae, rutrum arcu. Morbi placerat imperdiet ultricies. In
-                                    sollicitudin, arcu in auctor molestie, nisl ante finibus leo, ac sollicitudin quam sem eget
-                                    sapien. Nunc quis aliquet mi. Maecenas nec tristique sapien. Maecenas lobortis mi id libero
-                                    rutrum accumsan. Vestibulum dapibus urna non eleifend efficitur. Etiam eleifend velit at
-                                    mauris aliquam congue. Aliquam fringilla, nisi gravida iaculis tincidunt, felis lacus
-                                    molestie lacus, eget placerat massa massa ac urna. Curabitur nec varius erat, id scelerisque
-                                    nibh.
+                                    sollicitudin, arcu in auctor molestie, nisl ante finibus leo, ac sollicitudin quam
+                                    sem eget
+                                    sapien. Nunc quis aliquet mi. Maecenas nec tristique sapien.
                                 </p>
+                            </div>
+                            <div class="col-12">
+                                <c-tabs-universal
+                                    style="color: #333;"
+                                    :tab_names="['Custom tab One', 'Second', 'Im third tab']"
+                                >
+                                    <c-tab-universal :tab_id="1">
+                                        <div class="h4">
+                                            2008: The Year It All Began
+                                        </div>
+                                        August 2008
+                                        Neil Kin, Vladimir Oksman and Charles Bry apply for an encryption patent
+                                        application. Not only did they deny any connection to Satoshi Nakamoto, the
+                                        alleged mastermind behind Bitcoin, but they also registered the site Bitcoin.org
+                                        in the same month itself, buying the domain name anonymously over
+                                        anonymousspeech.com
+                                    </c-tab-universal>
+                                    <c-tab-universal :tab_id="2">
+
+                                        <div class="h4">
+                                            October 2008
+                                        </div>
+                                        Despite Kin, Oksman and Bry trying to sabotage Bitcoin, Nakamoto went ahead to
+                                        release his white paper which depicted his idea for a purely peer-to peer
+                                        version of electronic cash. He provided the basic fundamental solution to the
+                                        problem of virtual money being copied, giving electronic cash like Bitcoin the
+                                        indispensable foundation to grow legitimately.
+                                    </c-tab-universal>
+                                </c-tabs-universal>
                             </div>
                         </div>
                     </div>
@@ -114,6 +141,8 @@
             'c-light': (resolve) => require(['@/ui/layouts/light'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide,
+            'c-tabs-universal': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve),
+            'c-tab-universal': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve)
         },
         data() {
             return {
