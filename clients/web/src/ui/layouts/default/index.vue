@@ -149,23 +149,24 @@
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'create-shortcut'"
                 @close="$store.state.application.activeModal = null"
+                class="container"
                 style="text-align: left;"
             >
                 <div class="h4" slot="header">Oh, another creation?</div>
                 <template slot="body">
                     <div class="row">
-                        <a class="col-md-6">
+                        <c-button status="none" class="col-md-6 create-shortcut__block" @click="$store.commit('application/activateModal', 'coming-soon')">
                             Create Idea
-                        </a>
-                        <a class="col-md-6">
+                        </c-button>
+                        <c-button status="none" class="col-md-6 create-shortcut__block" @click="$store.commit('application/activateModal', 'coming-soon')">
                             Create Crowdfund
-                        </a>
-                        <a class="col-md-6">
+                        </c-button>
+                        <c-button status="none" class="col-md-6 create-shortcut__block" @click="$store.commit('application/activateModal', 'coming-soon')">
                             Create Game
-                        </a>
-                        <a class="col-md-6">
+                        </c-button>
+                        <c-button status="none" class="col-md-6 create-shortcut__block" @click="$store.commit('application/activateModal', 'coming-soon')">
                             Create Realm
-                        </a>
+                        </c-button>
                     </div>
                 </template>
                 <p slot="footer">
@@ -1365,6 +1366,12 @@
             pointer-events: none;
         }
 
+    }
+
+    .create-shortcut__block {
+        height: 200px;
+        text-align: center;
+        
     }
 
     .content {

@@ -4,14 +4,14 @@
         <div class="position-relative w-100" style="margin-top: -10px; zoom: 0.9;">
             <div class="app-header__bar-left">
                 <div v-if="desktopMode && operatingSystem === 'mac'" class="mac-icons">
-                    <c-button status="none" class="close_w" @click.prevent="closeWindow"></c-button>
-                    <c-button status="none" class="minimize" @click.prevent="minimizeWindow"></c-button>
-                    <c-button status="none" class="maximize" @click.prevent="maximizeWindow"></c-button>
+                    <c-button status="none" class="close_w" @click="closeWindow"></c-button>
+                    <c-button status="none" class="minimize" @click="minimizeWindow"></c-button>
+                    <c-button status="none" class="maximize" @click="maximizeWindow"></c-button>
                 </div>
                 <div v-if="desktopMode && operatingSystem === 'linux'" class="linux-icons">
-                    <c-button status="none" class="close_w" @click.prevent="closeWindow"></c-button>
-                    <c-button status="none" class="minimize" @click.prevent="minimizeWindow"></c-button>
-                    <c-button status="none" class="maximize" @click.prevent="maximizeWindow"></c-button>
+                    <c-button status="none" class="close_w" @click="closeWindow"></c-button>
+                    <c-button status="none" class="minimize" @click="minimizeWindow"></c-button>
+                    <c-button status="none" class="maximize" @click="maximizeWindow"></c-button>
                 </div>
                 <div v-if="desktopMode && operatingSystem === 'windows'">
                     <a class="app-header__bar-left-link margin-right-0 margin-left-10" href="javascript:;" data-action="fixedpanel-toggle" v-if="!isLocked">
@@ -241,6 +241,7 @@ export default {
             return this.$store.state.application.languages
         },
         tokenCount() {
+            if (this.$store.state.application.tokenCount === undefined) this.$store.state.application.tokenCount = 0
             return this.$store.state.application.tokenCount !== null ? this.$store.state.application.tokenCount.toLocaleString() : null
         },
         currentLanguage() {
@@ -329,6 +330,11 @@ export default {
             browserWindow.close()
         },
         maximizeWindow() {
+            // window.BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
+            //     if (productResult.id) {
+            //         this.successfulCreationMessage = "Product ownership has been changed"
+            //     }
+            // })
             const { BrowserWindow } = window.specialRequire('electron').remote
 
             let browserWindow = BrowserWindow.getFocusedWindow()

@@ -1,5 +1,5 @@
 <template>
-    <c-popup :activated="activated" type="custom" ref="modal" title="Sending Funds" width="650"  @close="$emit('close')">
+    <c-popup :activated="activated" type="custom" ref="modal" title="" width="650"  @close="$emit('close')">
         <div class="send-funds-modal" slot="custom_content">
             <c-tabs>
                 <c-tab name="Agreement" :selected="agreement" :showFooter="true">
@@ -16,10 +16,10 @@
                             <c-switch size="sm" :value="true" label="I agree with the terms" />
                         </div>
                         <div>
-                            <c-button status="outline-danger" @click="" class="mx-1">
+                            <c-button status="outline-white" @click="" class="mx-1">
                                 Cancel
                             </c-button>
-                            <c-button status="outline-success" @click="toggleSteps" class="mx-1" icon="arrow-right">
+                            <c-button status="outline-white" @click="toggleSteps" class="mx-1" icon="arrow-right">
                                 Next
                             </c-button>
                         </div>

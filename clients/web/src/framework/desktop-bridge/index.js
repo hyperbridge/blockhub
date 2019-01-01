@@ -206,6 +206,8 @@ export const runCommand = async (cmd, meta = {}) => {
     return new Promise(async (resolve, reject) => {
         emit(cmd.key, cmd.data ? cmd.data : undefined)
 
+        let res = null
+
         if (cmd.responseId) {
             if (local.requests[cmd.responseId]) {
                 console.log('[Bridge] Running response callback', cmd.responseId)
@@ -225,18 +227,22 @@ export const runCommand = async (cmd, meta = {}) => {
                 sendCommand('heartbeat', 1)
             }, 1000)
         } else if (cmd.key === 'promptPasswordRequest') {
-            const res = await promptPasswordRequest(cmd.data)
+            res = await promptPasswordRequest(cmd.data)
 
-            return resolve(await sendCommand('promptPasswordResponse', res, meta.client, cmd.requestId))
+            // sendCommand('promptPasswordResponse', res, meta.client, cmd.requestId)
+
+            // return resolve()
         } else if (cmd.key === 'setProtocolConfig') {
             const { currentNetwork, protocolName, config } = cmd.data
         
             local.store.state.application.ethereum[currentNetwork].packages[protocolName] = config
             local.store.dispatch('application/updateState')
         } else if (cmd.key === 'setAccountRequest') {
-            const res = await setAccountRequest(cmd.data)
+            res = await setAccountRequest(cmd.data)
 
-            return resolve(await sendCommand('setAccountRequestResponse', res, meta.client, cmd.requestId))
+            // sendCommand('setAccountRequestResponse', res, meta.client, cmd.requestId)
+
+            // return resolve()
         } 
         // else if (cmd.key === 'setMode') {
         //     local.store.state.application.mode = cmd.data
@@ -277,7 +283,9 @@ export const runCommand = async (cmd, meta = {}) => {
             console.warn('[Bridge] Unhandled command:', cmd)
         }
 
-        return resolve(await sendCommand('response', null, meta.client, cmd.requestId))
+        sendCommand('response', res, meta.client, cmd.requestId)
+
+        resolve()
     })
 }
 

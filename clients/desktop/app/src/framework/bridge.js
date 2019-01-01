@@ -17,6 +17,7 @@ import * as Windows from '../main/windows'
 const config = require('../config')
 
 const local = {
+    commandQueue: [],
     provider: null,
     requests: {},
     account: {
@@ -288,19 +289,25 @@ export const setContractAddress = async ({ protocolName, contractName, address }
             .catch(() => {
                 reject('Unable to set contract')
             })
-            .then(() => {
+            .then(async () => {
+                // update saved contract address
+                // 0x05b3dc72dbda198bc8434993c4feb0f20c179a58
+                const state = DB.application.config.data[0]
+                const currentNetwork = state.currentEthereumNetwork
+
+                const config = state.ethereum[currentNetwork].packages[protocolName]
+                config.contracts[contractName].address = address
+
+                DB.save()
+
+                await sendCommand('setProtocolConfig', {
+                    currentNetwork,
+                    protocolName,
+                    config
+                })
+
                 resolve()
             })
-
-        // update saved contract address
-        // 0x05b3dc72dbda198bc8434993c4feb0f20c179a58
-        const state = DB.application.config.data[0]
-        const currentNetwork = state.currentEthereumNetwork
-
-        const config = state.ethereum[currentNetwork].packages[protocolName]
-        config.contracts[contractName].address = address
-
-        DB.save()
     })
 }
 
@@ -890,6 +897,8 @@ export const updateState = async (data) => {
         }
 
         DB.save()
+
+        return resolve()
     })
 }
 
@@ -1292,7 +1301,15 @@ export const recoverPasswordRequest = async ({ secretQuestion1, secretAnswer1, b
 }
 
 export const getTokenBalance = async ({ address, type }) => {
-    return new Promise(async (resolve) => {
+    return new Promise(async (resolve, reject) => {
+        if (!local.wallet 
+            || !local.wallet.web3
+        ) return reject('Wallet not initialized')
+
+        if (!TokenAPI.api.ethereum.state.contracts.Token.contract 
+            || !TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract
+        ) return reject('Contracts not initialized')
+
         const web3 = local.wallet.web3
         const originWallet = await Wallet.create(local.passphrase, 1)
         const originAddress = originWallet.address
@@ -1599,7 +1616,7 @@ export const runCommand = async (cmd, meta = {}) => {
             resultData = await createProfileRequest(cmd.data)
             resultKey = 'createProfileResponse'
         } else if (cmd.key === 'getTokenBalance') {
-            resultData = await getTokenBalance(cmd.data)
+            resultData = await getTokenBalance(cmd.data).catch(reject)
             resultKey = 'getTokenBalanceResponse'
         } else if (cmd.key === 'saveProfileRequest') {
             resultData = await saveProfileRequest(cmd.data)
@@ -1852,8 +1869,18 @@ export const runCommand = async (cmd, meta = {}) => {
 
         emit(cmd.key, cmd.data ? cmd.data : undefined)
 
-        return resolve(await sendCommand(resultKey, resultData, meta.client, responseId))
+        sendCommand(resultKey, resultData, meta.client, responseId)
+
+        return resolve()
     })
+}
+
+export const queueCommand = (cmd) => {
+    if (cmd.responseId) {
+        runCommand(cmd).then(() => {})
+    } else {
+        local.commandQueue.push(cmd)
+    }
 }
 
 export const initHeartbeat = () => {
@@ -1862,6 +1889,12 @@ export const initHeartbeat = () => {
 
         local.bridge.send('heartbeat', 1)
     })
+}
+
+export const isCommandRunnable = (cmd) => {
+    if (cmd.key === 'getTokenBalance') {
+        return !!local.wallet && !!local.wallet.web3
+    }
 }
 
 // Check local db for stored account
@@ -1878,4 +1911,47 @@ export const init = async (bridge) => {
     console.log('[DesktopBridge] Initializing')
 
     local.bridge = bridge
+
+    let currentCommandIndex = 0
+
+    const commandRunner = async () => {
+        //console.log('Command runner. Queue: ' + local.commandQueue.length + '. Index: ' + currentCommandIndex)
+
+        // Take a break at the end of queue
+        if (currentCommandIndex === local.commandQueue.length) {
+            currentCommandIndex = 0
+
+            //console.log('[BlockHub] Command runner taking a break with ' + local.commandQueue.length + ' commands in queue')
+
+            return setTimeout(commandRunner, 100)
+        }
+
+        const cmd = local.commandQueue[currentCommandIndex]
+
+        try {
+            await runCommand(cmd)
+                .catch(() => {
+                    console.log('Command fail: ' + cmd.key)
+
+                    currentCommandIndex++
+
+                    commandRunner()
+                })
+                .then(() => {
+                    console.log('Command success: ' + cmd.key)
+
+                    local.commandQueue.splice(currentCommandIndex, 1)
+
+                    commandRunner()
+                })
+        } catch(e) {
+            console.log(e)
+
+            currentCommandIndex++
+
+            commandRunner()
+        }
+    }
+
+    commandRunner()
 }

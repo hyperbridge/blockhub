@@ -55,7 +55,7 @@
             <c-button iconHide @click="showInstaller = !showInstaller" hidden>Open installer</c-button>
 
             <c-rating-block class="margin-bottom-20" :items="product.rating"
-                            :parentUrl="`#/product/${product.id}`" v-darklaunch="'RATINGS'" />
+                            :parentUrl="`#/product/${product.id}`" v-darklaunch="'RATINGS'" @goto="scrollToReviews" />
 
             <c-frequently-traded-assets class="margin-bottom-20" :items="product.frequentlyTradedAssets"
                                         :assetsUrl="`#/product/${product.id}/assets`" v-darklaunch="'ASSETS'" />
@@ -142,7 +142,7 @@
                 </div>
             </c-block>
         </div>
-        <div class="col-12">
+        <div class="col-12" ref="reviews">
             <c-block :title="`Reviews`"
                      :noGutter="true"
                      :bgGradient="true"
@@ -243,9 +243,12 @@
                 } else {
                     return false
                 }
+            },
+            scrollToReviews() {
+                this.$refs.reviews.scrollIntoView()
             }
         },
-        computed:{
+        computed: {
             streamsSlider() {
                 return this.$refs.streamsSlider.swiper
             },

@@ -10,9 +10,9 @@ export default {
     },
     watch: {
         '$store.state.application.signedIn'(newVal) {
-            if (newVal === true) {
-                this.$router.push({ path: '/' })
-            }
+            // if (newVal === true) {
+            //     this.$router.push({ path: '/' })
+            // }
         }
     }
 }

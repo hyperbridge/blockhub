@@ -251,16 +251,16 @@
         },
         methods: {
             ensureDesktopWelcome(to) {
-                if (this.$store.state.application.desktopMode
-                && !this.$store.state.application.signedIn
-                && (!to ? true : (
-                    to.path !== '/account/signup'
-                    && to.path !== '/account/signin'
-                    && to.path !== '/welcome'
-                    && to.path !== '/unlock'
-                ))) {
-                    this.$router.push({ path: '/welcome' })
-                }
+                // if (this.$store.state.application.desktopMode
+                // && !this.$store.state.application.signedIn
+                // && (!to ? true : (
+                //     to.path !== '/account/signup'
+                //     && to.path !== '/account/signin'
+                //     && to.path !== '/welcome'
+                //     && to.path !== '/unlock'
+                // ))) {
+                //     this.$router.push({ path: '/welcome' })
+                // }
             },
             updateEditorMode() {
                 // this.$store.state.application.editorMode = 'viewing'
