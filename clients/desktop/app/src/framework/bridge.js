@@ -300,12 +300,6 @@ export const setContractAddress = async ({ protocolName, contractName, address }
 
                 DB.save()
 
-                await sendCommand('setProtocolConfig', {
-                    currentNetwork,
-                    protocolName,
-                    config
-                })
-
                 resolve()
             })
     })
@@ -685,11 +679,8 @@ export const initProtocol = async ({ protocolName }) => {
                     .catch(() => {
                         console.log('Unable to set contract address: ' + protocolName + ' ' + contractName)
 
-                        config.contracts[contractName].address = null
-                        config.contracts[contractName].createdAt = null
-                    })
-                    .then(() => {
-
+                        // config.contracts[contractName].address = null
+                        // config.contracts[contractName].createdAt = null
                     })
             } else {
                 config.contracts[contractName].createdAt = null
@@ -1225,7 +1216,7 @@ Are you sure you want to send?`
 }
 
 export const setEnvironmentMode = async (environmentMode) => {
-    return new Promise(async (resolve) => {
+    return new Promise(async (resolve, reject) => {
         config.IS_PRODUCTION = environmentMode === 'production'
 
         DB.application.config.data[0].environmentMode = environmentMode
@@ -1254,14 +1245,14 @@ export const setEnvironmentMode = async (environmentMode) => {
                 environmentMode: environmentMode,
                 currentEthereumNetwork: networkOptions[environmentMode]
             }
-        })
+        }).catch(reject)
 
         // Tell web protocol config data
         if (local.wallet) {
-            await sendCommand('setProtocolConfig', await initProtocol({ protocolName: 'token' }))
-            await sendCommand('setProtocolConfig', await initProtocol({ protocolName: 'reserve' }))
-            await sendCommand('setProtocolConfig', await initProtocol({ protocolName: 'funding' }))
-            await sendCommand('setProtocolConfig', await initProtocol({ protocolName: 'marketplace' }))
+            await sendCommand('setProtocolConfig', await initProtocol({ protocolName: 'token' })).catch(reject)
+            await sendCommand('setProtocolConfig', await initProtocol({ protocolName: 'reserve' })).catch(reject)
+            await sendCommand('setProtocolConfig', await initProtocol({ protocolName: 'funding' })).catch(reject)
+            await sendCommand('setProtocolConfig', await initProtocol({ protocolName: 'marketplace' })).catch(reject)
         }
 
         resolve()
@@ -1480,398 +1471,420 @@ export const runCommand = async (cmd, meta = {}) => {
         let resultData = null
         let responseId = cmd.requestId
 
-        if (cmd.key === 'init') {
-            console.log('[BlockHub] Web initialized', cmd.data) // msg from web page
+        try {
+            if (cmd.key === 'init') {
+                console.log('[BlockHub] Web initialized', cmd.data) // msg from web page
 
-            if (cmd.data == '1') {
-                await setEnvironmentMode(config.IS_PRODUCTION ? 'production' : DB.application.config.data[0].environmentMode)
+                if (cmd.data == '1') {
+                    await setEnvironmentMode(config.IS_PRODUCTION ? 'production' : DB.application.config.data[0].environmentMode).catch(reject)
 
-                // const mode = config.IS_PRODUCTION ? 'production' : 'local'
+                    // const mode = config.IS_PRODUCTION ? 'production' : 'local'
 
-                // sendCommand('setMode', mode)
+                    // sendCommand('setMode', mode)
 
-                // Check for account file and load it
-                try {
-                    const userDataPath = electron.app.getPath('userData')
-                    console.log("Attempting to load account from " + path.join(userDataPath, 'account.json'))
-                    const accountData = await readFile(path.join(userDataPath, 'account.json'))
+                    // Check for account file and load it
+                    try {
+                        const userDataPath = electron.app.getPath('userData')
+                        console.log("Attempting to load account from " + path.join(userDataPath, 'account.json'))
+                        const accountData = await readFile(path.join(userDataPath, 'account.json'))
 
-                    local.account = JSON.parse(accountData)
-                } catch (e) {
-                    console.log(e)
-                }
+                        local.account = JSON.parse(accountData)
+                    } catch (e) {
+                        console.log(e)
+                    }
 
-                console.log(local.account.passphrase, local.account.encryptPassphrase, !local.password)
-                // Prompt password request if account exists but hasn't been unlocked
-                if (local.account.passphrase) {
-                    if (local.account.encryptPassphrase && !local.password) {
-                        // Desktop asks to prompt password
-                        await promptPasswordRequest({ secretQuestion1: local.account.secretQuestion1 })
-                    } else {
-                        // Passphrase was already decrypted and not already set (incase reloading page)
-                        if (!local.passphrase) {
-                            local.passphrase = local.account.passphrase
+                    console.log(local.account.passphrase, local.account.encryptPassphrase, !local.password)
+                    // Prompt password request if account exists but hasn't been unlocked
+                    if (local.account.passphrase) {
+                        if (local.account.encryptPassphrase && !local.password) {
+                            // Desktop asks to prompt password
+                            await promptPasswordRequest({ secretQuestion1: local.account.secretQuestion1 }).catch(reject)
+                        } else {
+                            // Passphrase was already decrypted and not already set (incase reloading page)
+                            if (!local.passphrase) {
+                                local.passphrase = local.account.passphrase
+                            }
                         }
+
+                        // Tell web all non-sensitive account info
+                        await setAccountRequest().catch(reject)
+
+                        // TODO: set a different API endpoint 
+                        // TODO: hydrate?
+                        // sendCommand('updateState', {
+                        //     module: 'marketplace',
+                        //     state: {
+                        //         products: DB.marketplace.products.data
+                        //     }
+                        // })
+
+                        // Tell web protocol config data
+                        await sendCommand('setProtocolConfig', await initProtocol({ protocolName: 'token' })).catch(reject)
+                        await sendCommand('setProtocolConfig', await initProtocol({ protocolName: 'reserve' })).catch(reject)
+                        await sendCommand('setProtocolConfig', await initProtocol({ protocolName: 'funding' })).catch(reject)
+                        await sendCommand('setProtocolConfig', await initProtocol({ protocolName: 'marketplace' })).catch(reject)
+                    } else {
+                        // Tell web to reset account
+                        await setAccountRequest().catch(reject)
                     }
 
-                    // Tell web all non-sensitive account info
-                    await setAccountRequest()
+                    // Initialize local data
+                    //const products = await getAllProducts()
 
-                    // TODO: set a different API endpoint 
-                    // TODO: hydrate?
-                    // sendCommand('updateState', {
-                    //     module: 'marketplace',
-                    //     state: {
-                    //         products: DB.marketplace.products.data
-                    //     }
-                    // })
+                    //this.profiles = await getAllprofiles()
+                    //this.projects = await getAllProjects()
 
-                    // Tell web protocol config data
-                    await sendCommand('setProtocolConfig', await initProtocol({ protocolName: 'token' }))
-                    await sendCommand('setProtocolConfig', await initProtocol({ protocolName: 'reserve' }))
-                    await sendCommand('setProtocolConfig', await initProtocol({ protocolName: 'funding' }))
-                    await sendCommand('setProtocolConfig', await initProtocol({ protocolName: 'marketplace' }))
+
+                    // If exists, prompt web to require password
+                    // Web sends back response (requirePasswordResponse)
+                    // Decrypt the passphrase and use to set web3 provider
+                    // Desktop sends back all non-sensitive account info
+                    // Check the wallet exists in the accounts contract
+                    // If not, prompt to add it
+                    // If no ETH, let them know they need it
+                    // Sync any changes from smart contract
+                    // If doesn't exist, prompt web to create account
+
+
+                    // console.log('[BlockHub] Setting up heartbeat')
+
+                    // setInterval(() => {
+                    //     sendCommand('heartbeat', 1) // send to web page
+                    // }, 2000)
                 } else {
-                    // Tell web to reset account
-                    await setAccountRequest()
+                    console.error('[BlockHub] Error initializing web', cmd.data)
+                }
+            } else if (cmd.key === 'ping') {
+                console.log('[BlockHub] Ping from web', cmd.data)
+
+                sendCommand('pong', 'ok')
+            } else if (cmd.key === 'resize') {
+                //Windows.main.window.webContents.setZoomFactor(cmd.data.width / 1980)
+                //Windows.main.window.setSize(cmd.data.width, cmd.data.height)
+                //Windows.main.window.center()
+            } else if (cmd.key === 'createAccountRequest') {
+                resultData = await handleCreateAccountRequest(cmd.data).catch(reject)
+                resultKey = 'createAccountResponse'
+            } else if (cmd.key === 'getAccountRequest') {
+                resultData = await handleGetAccountRequest(cmd.data).catch(reject)
+                resultKey = 'getAccountResponse'
+            } else if (cmd.key === 'setContractAddress') {
+                resultData = await setContractAddress(cmd.data).catch(reject)
+
+                // const protocolName = cmd.data.protocolName
+                // const state = DB.application.config.data[0]
+                // const currentNetwork = state.currentEthereumNetwork
+
+                // const config = state.ethereum[currentNetwork].packages[protocolName]
+
+                // await sendCommand('setProtocolConfig', {
+                //     currentNetwork,
+                //     protocolName,
+                //     config
+                // }).catch(reject)
+
+                resultKey = 'setContractAddressResponse'
+            } else if (cmd.key === 'deployContract') {
+                resultData = await deployContract(cmd.data).catch(reject)
+                resultKey = 'deployContractResponse'
+            } else if (cmd.key === 'updateState') {
+                resultData = await updateState(cmd.data).catch(reject)
+                resultKey = 'updateStateResponse'
+            } else if (cmd.key === 'createFundingProject') {
+                resultData = await createFundingProject(cmd.data).catch(reject)
+                resultKey = 'createFundingProjectResponse'
+            } else if (cmd.key === 'updateAccountRequest') {
+                resultData = await updateAccountRequest(cmd.data).catch(reject)
+                resultKey = 'updateAccountRequestResponse'
+            } else if (cmd.key === 'initProtocol') {
+                resultData = await initProtocol(cmd.data).catch(reject)
+                resultKey = 'initProtocolResponse'
+            } else if (cmd.key === 'importAccountFileRequest') {
+                resultData = await importAccountFileRequest(cmd.data).catch(reject)
+                resultKey = 'importAccountFileResponse'
+            } else if (cmd.key === 'exportAccountFileRequest') {
+                resultData = await exportAccountFileRequest(cmd.data).catch(reject)
+                resultKey = 'exportAccountFileResponse'
+            } else if (cmd.key === 'deleteAccountRequest') {
+                resultData = await deleteAccountRequest(cmd.data).catch(reject)
+                resultKey = 'deleteAccountFesponse'
+            } else if (cmd.key === 'getPassphraseRequest') {
+                resultData = await getPassphraseRequest(cmd.data).catch(reject)
+                resultKey = 'getPassphraseResponse'
+            } else if (cmd.key === 'createTransactionRequest') {
+                resultData = await createTransactionRequest(cmd.data).catch(reject)
+                resultKey = 'createTransactionResponse'
+            } else if (cmd.key === 'sendTransactionRequest') {
+                resultData = await sendTransactionRequest(cmd.data).catch(reject)
+                resultKey = 'sendTransactionResponse'
+            } else if (cmd.key === 'createProfileRequest') {
+                resultData = await createProfileRequest(cmd.data).catch(reject)
+                resultKey = 'createProfileResponse'
+            } else if (cmd.key === 'getTokenBalance') {
+                resultData = await getTokenBalance(cmd.data).catch(reject)
+                resultKey = 'getTokenBalanceResponse'
+            } else if (cmd.key === 'saveProfileRequest') {
+                resultData = await saveProfileRequest(cmd.data).catch(reject)
+                resultKey = 'saveProfileResponse'
+            } else if (cmd.key === 'removeProfileRequest') {
+                resultData = await removeProfileRequest(cmd.data).catch(reject)
+                resultKey = 'removeProfileResponse'
+            } else if (cmd.key === 'createMarketplaceProductRequest') {
+                resultData = await createMarketplaceProductRequest(cmd.data).catch(reject)
+                resultKey = 'createMarketplaceProductResponse'
+            } else if (cmd.key === 'createFundingProjectRequest') {
+                resultData = await createFundingProject(cmd.data).catch(reject)
+                resultKey = 'createFundingProjectResponse'
+            } else if (cmd.key === 'createDeveloperRequest') {
+                resultData = await createDeveloperRequest(cmd.data).catch(reject)
+                resultKey = 'createDeveloperResponse'
+            } else if (cmd.key === 'createCuratorRequest') {
+                resultData = await createCuratorRequest(cmd.data).catch(reject)
+                resultKey = 'createCuratorResponse'
+            } else if (cmd.key === 'recoverPasswordRequest') {
+                resultData = await recoverPasswordRequest(cmd.data).catch(reject)
+                resultKey = 'recoverPasswordResponse'
+            } else if (cmd.key === 'registerUsernameRequest') {
+                resultData = await registerUsernameRequest(cmd.data).catch(reject)
+                resultKey = 'registerUsernameResponse'
+            } else if (cmd.key === 'setEnvironmentMode') {
+                resultData = await setEnvironmentMode(cmd.data).catch(reject)
+                resultKey = 'setEnvironmentModeResponse'
+            } else if (cmd.key === 'writeToClipboard') {
+                resultData = await writeToClipboard(cmd.data).catch(reject)
+                resultKey = 'writeToClipboardResponse'
+            } else if (cmd.key === 'transferTokens') {
+                resultData = await transferTokens(cmd.data).catch(reject)
+                resultKey = 'transferTokensResponse'
+            } else if (cmd.key === 'transferTokenBatch') {
+                resultData = await transferTokenBatch(cmd.data).catch(reject)
+                resultKey = 'transferTokenBatchResponse'
+            } else if (cmd.key === 'generateAddress') {
+                resultData = await generateAddress(cmd.data).catch(reject)
+                resultKey = 'generateAddressResponse'
+            } else if (cmd.key === 'eval') {
+                // Don't allow eval in production
+                if (!config.IS_PRODUCTION) {
+                    const BABEL_PROMISE = {
+                        a: require("@babel/runtime-corejs2/core-js/promise")
+                    }
+
+                    const BABEL_GENERATOR = function () {
+                        return require('@babel/runtime-corejs2/helpers/asyncToGenerator')
+                    }
+
+                    const BABEL_REGENERATOR = {
+                        a: require('@babel/runtime-corejs2/regenerator')
+                    }
+
+                    let evalCode = cmd.data.code
+
+                    evalCode = evalCode.replace(/babel_runtime_core_js_promise__WEBPACK_IMPORTED_MODULE_.___default/g, 'BABEL_PROMISE')
+                    evalCode = evalCode.replace(/babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_.___default/g, 'BABEL_GENERATOR')
+                    evalCode = evalCode.replace(/babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_.___default/g, 'BABEL_REGENERATOR')
+
+                    resultData = await Function('return (' + evalCode + ')')()(
+                        local,
+                        DB,
+                        exports,
+                        FundingAPI, 
+                        MarketplaceAPI, 
+                        TokenAPI, 
+                        ReserveAPI, 
+                        BABEL_PROMISE, 
+                        BABEL_GENERATOR,
+                        BABEL_REGENERATOR,
+                        cmd.data.params
+                    ).then((e) => { console.log(e); }, reject)
+                } else {
+                    resultData = {}
                 }
 
-                // Initialize local data
-                //const products = await getAllProducts()
+                resultKey = 'evalResponse'
+            } else if (cmd.key === 'timmy') {
+                const web3 = local.wallet.web3
+                const capBob = web3._extend.utils.toBigNumber(web3._extend.utils.toWei(45000 / 210.39, 'ether'))
+                const bob = '0x40D68278b83F13d0310DA1560ecCF18d6Aa11c9e'
 
-                //this.profiles = await getAllprofiles()
-                //this.projects = await getAllProjects()
+                await ReserveAPI.api.ethereum.state.contracts.TokenSale.deployed.setGroupCap([bob], capBob).catch(reject)
+            } else if (cmd.key === 'setOpenStartup') {
+                electron.app.setLoginItemSettings({
+                    openAtLogin: cmd.data
+                })
 
-
-                // If exists, prompt web to require password
-                // Web sends back response (requirePasswordResponse)
-                // Decrypt the passphrase and use to set web3 provider
-                // Desktop sends back all non-sensitive account info
-                // Check the wallet exists in the accounts contract
-                // If not, prompt to add it
-                // If no ETH, let them know they need it
-                // Sync any changes from smart contract
-                // If doesn't exist, prompt web to create account
-
-
-                // console.log('[BlockHub] Setting up heartbeat')
-
-                // setInterval(() => {
-                //     sendCommand('heartbeat', 1) // send to web page
-                // }, 2000)
-            } else {
-                console.error('[BlockHub] Error initializing web', cmd.data)
-            }
-        } else if (cmd.key === 'ping') {
-            console.log('[BlockHub] Ping from web', cmd.data)
-
-            sendCommand('pong', 'ok')
-        } else if (cmd.key === 'resize') {
-            //Windows.main.window.webContents.setZoomFactor(cmd.data.width / 1980)
-            //Windows.main.window.setSize(cmd.data.width, cmd.data.height)
-            //Windows.main.window.center()
-        } else if (cmd.key === 'createAccountRequest') {
-            resultData = await handleCreateAccountRequest(cmd.data)
-            resultKey = 'createAccountResponse'
-        } else if (cmd.key === 'getAccountRequest') {
-            resultData = await handleGetAccountRequest(cmd.data)
-            resultKey = 'getAccountResponse'
-        } else if (cmd.key === 'setContractAddress') {
-            resultData = await setContractAddress(cmd.data)
-            resultKey = 'setContractAddressResponse'
-        } else if (cmd.key === 'deployContract') {
-            resultData = await deployContract(cmd.data)
-            resultKey = 'deployContractResponse'
-        } else if (cmd.key === 'updateState') {
-            resultData = await updateState(cmd.data)
-            resultKey = 'updateStateResponse'
-        } else if (cmd.key === 'createFundingProject') {
-            resultData = await createFundingProject(cmd.data)
-            resultKey = 'createFundingProjectResponse'
-        } else if (cmd.key === 'updateAccountRequest') {
-            resultData = await updateAccountRequest(cmd.data)
-            resultKey = 'updateAccountRequestResponse'
-        } else if (cmd.key === 'initProtocol') {
-            resultData = await initProtocol(cmd.data)
-            resultKey = 'initProtocolResponse'
-        } else if (cmd.key === 'importAccountFileRequest') {
-            resultData = await importAccountFileRequest(cmd.data)
-            resultKey = 'importAccountFileResponse'
-        } else if (cmd.key === 'exportAccountFileRequest') {
-            resultData = await exportAccountFileRequest(cmd.data)
-            resultKey = 'exportAccountFileResponse'
-        } else if (cmd.key === 'deleteAccountRequest') {
-            resultData = await deleteAccountRequest(cmd.data)
-            resultKey = 'deleteAccountFesponse'
-        } else if (cmd.key === 'getPassphraseRequest') {
-            resultData = await getPassphraseRequest(cmd.data)
-            resultKey = 'getPassphraseResponse'
-        } else if (cmd.key === 'createTransactionRequest') {
-            resultData = await createTransactionRequest(cmd.data)
-            resultKey = 'createTransactionResponse'
-        } else if (cmd.key === 'sendTransactionRequest') {
-            resultData = await sendTransactionRequest(cmd.data)
-            resultKey = 'sendTransactionResponse'
-        } else if (cmd.key === 'createProfileRequest') {
-            resultData = await createProfileRequest(cmd.data)
-            resultKey = 'createProfileResponse'
-        } else if (cmd.key === 'getTokenBalance') {
-            resultData = await getTokenBalance(cmd.data).catch(reject)
-            resultKey = 'getTokenBalanceResponse'
-        } else if (cmd.key === 'saveProfileRequest') {
-            resultData = await saveProfileRequest(cmd.data)
-            resultKey = 'saveProfileResponse'
-        } else if (cmd.key === 'removeProfileRequest') {
-            resultData = await removeProfileRequest(cmd.data)
-            resultKey = 'removeProfileResponse'
-        } else if (cmd.key === 'createMarketplaceProductRequest') {
-            resultData = await createMarketplaceProductRequest(cmd.data)
-            resultKey = 'createMarketplaceProductResponse'
-        } else if (cmd.key === 'createFundingProjectRequest') {
-            resultData = await createFundingProject(cmd.data)
-            resultKey = 'createFundingProjectResponse'
-        } else if (cmd.key === 'createDeveloperRequest') {
-            resultData = await createDeveloperRequest(cmd.data)
-            resultKey = 'createDeveloperResponse'
-        } else if (cmd.key === 'createCuratorRequest') {
-            resultData = await createCuratorRequest(cmd.data)
-            resultKey = 'createCuratorResponse'
-        } else if (cmd.key === 'recoverPasswordRequest') {
-            resultData = await recoverPasswordRequest(cmd.data)
-            resultKey = 'recoverPasswordResponse'
-        } else if (cmd.key === 'registerUsernameRequest') {
-            resultData = await registerUsernameRequest(cmd.data)
-            resultKey = 'registerUsernameResponse'
-        } else if (cmd.key === 'setEnvironmentMode') {
-            resultData = await setEnvironmentMode(cmd.data)
-            resultKey = 'setEnvironmentModeResponse'
-        } else if (cmd.key === 'writeToClipboard') {
-            resultData = await writeToClipboard(cmd.data)
-            resultKey = 'writeToClipboardResponse'
-        } else if (cmd.key === 'transferTokens') {
-            resultData = await transferTokens(cmd.data)
-            resultKey = 'transferTokensResponse'
-        } else if (cmd.key === 'transferTokenBatch') {
-            resultData = await transferTokenBatch(cmd.data)
-            resultKey = 'transferTokenBatchResponse'
-        } else if (cmd.key === 'generateAddress') {
-            resultData = await generateAddress(cmd.data)
-            resultKey = 'generateAddressResponse'
-        } else if (cmd.key === 'eval') {
-            // Don't allow eval in production
-            if (!config.IS_PRODUCTION) {
-                const BABEL_PROMISE = {
-                    a: require("@babel/runtime-corejs2/core-js/promise")
-                }
-
-                const BABEL_GENERATOR = function () {
-                    return require('@babel/runtime-corejs2/helpers/asyncToGenerator')
-                }
-
-                const BABEL_REGENERATOR = {
-                    a: require('@babel/runtime-corejs2/regenerator')
-                }
-
-                let evalCode = cmd.data.code
-
-                evalCode = evalCode.replace(/babel_runtime_core_js_promise__WEBPACK_IMPORTED_MODULE_.___default/g, 'BABEL_PROMISE')
-                evalCode = evalCode.replace(/babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_.___default/g, 'BABEL_GENERATOR')
-                evalCode = evalCode.replace(/babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_.___default/g, 'BABEL_REGENERATOR')
-
-                resultData = await Function('return (' + evalCode + ')')()(
-                    local,
-                    DB,
-                    exports,
-                    FundingAPI, 
-                    MarketplaceAPI, 
-                    TokenAPI, 
-                    ReserveAPI, 
-                    BABEL_PROMISE, 
-                    BABEL_GENERATOR,
-                    BABEL_REGENERATOR,
-                    cmd.data.params
-                )
-            } else {
                 resultData = {}
-            }
+                resultKey = 'setOpenStartupResponse'
+            } else if (cmd.key === 'error') {
+                console.log('[BlockHub] Web Error: ', cmd.data)
 
-            resultKey = 'evalResponse'
-        } else if (cmd.key === 'timmy') {
-            const web3 = local.wallet.web3
-            const capBob = web3._extend.utils.toBigNumber(web3._extend.utils.toWei(45000 / 210.39, 'ether'))
-            const bob = '0x40D68278b83F13d0310DA1560ecCF18d6Aa11c9e'
-            await ReserveAPI.api.ethereum.state.contracts.TokenSale.deployed.setGroupCap([bob], capBob);
-        } else if (cmd.key === 'setOpenStartup') {
-            electron.app.setLoginItemSettings({
-                openAtLogin: cmd.data
-            })
+                resultData = {}
+                resultKey = 'errorResponse'
+            } else if (cmd.key === 'fetchPageDataRequest') {
+                const { url, script } = cmd.data
 
-            resultData = {}
-            resultKey = 'setOpenStartupResponse'
-        } else if (cmd.key === 'error') {
-            console.log('[BlockHub] Web Error: ', cmd.data)
-
-            resultData = {}
-            resultKey = 'errorResponse'
-        } else if (cmd.key === 'fetchPageDataRequest') {
-            const { url, script } = cmd.data
-
-            const requestedWindow = new electron.BrowserWindow({
-                width: 330,
-                height: 330,
-                resizable: false,
-                frame: false,
-                show: false,
-                backgroundColor: '#30314c',
-                webPreferences: {
-                    preload: path.join(__dirname, '../main/preload.js'),
-                    experimentalFeatures: false,
-                    nodeIntegration: false,
-                    nodeIntegrationInWorker: false,
-                    webSecurity: false
-                }
-            })
-
-            requestedWindow.webContents.session.webRequest.onBeforeSendHeaders({ urls: [] }, (details, callback) => {
-                details.requestHeaders['Connection'] = 'keep-alive'
-                details.requestHeaders['Pragma'] = 'no-cache'
-                details.requestHeaders['Cache-Control'] = 'no-cache'
-                details.requestHeaders['Upgrade-Insecure-Requests'] = '1'
-                details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
-                details.requestHeaders['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
-                details.requestHeaders['Accept-Encoding'] = 'gzip, deflate, br'
-                details.requestHeaders['Accept-Language'] = 'en-US,en;q=0.9'
-                details.requestHeaders['Origin'] = 'https://blockhub.gg'
-                details.requestHeaders['Referer'] = 'https://blockhub.gg'
-                // No Cookie?
-
-                callback({ cancel: false, requestHeaders: details.requestHeaders })
-            })
-
-            const onHeadersReceived = (d, c) => {
-                if (d.responseHeaders['x-frame-options'])
-                    delete d.responseHeaders['x-frame-options']
-                if (d.responseHeaders['Content-Security-Policy'])
-                    delete d.responseHeaders['Content-Security-Policy']
-
-                c({ cancel: false, responseHeaders: d.responseHeaders })
-            }
-
-            requestedWindow.webContents.session.webRequest.onHeadersReceived({ urls: [] }, onHeadersReceived)
-
-            requestedWindow.webContents.once('did-finish-load', () => {console.log("FINISHED LOAD");
-                requestedWindow.webContents.executeJavaScript(`(${script})("${cmd.requestId}");`)
-            })
-
-            requestedWindow.webContents.loadURL(url)
-
-            //requestedWindow.webContents.openDevTools({ mode: "detach" })
-
-            local.requests[cmd.requestId] = {
-                resolve: async (data) => {
-                    requestedWindow.close()
-
-                    return resolve(await sendCommand('fetchPageDataResponse', data, meta.client, cmd.requestId))
-                },
-                reject
-            }
-
-            return // Return unresolved, let the injected script resolve
-        } else if (cmd.key === 'resolveCallback') {
-            local.requests[cmd.responseId].resolve(cmd.data)
-        } else if (cmd.key === 'showContextMenuRequest') {
-            const electron = require('electron')
-            const Menu = electron.Menu
-
-            const template = [
-                {
-                    label: 'Back',
-                    click() {
-                        Windows.main.window.webContents.goBack()
-                    }
-                },
-                {
-                    label: 'Forward',
-                    click() {
-                        Windows.main.window.webContents.goForward()
-                    }
-                },
-                {
-                    label: 'Reload',
-                    click() {
-                        Windows.main.window.webContents.reloadIgnoringCache()
-                    }
-                },
-                {
-                    type: 'separator'
-                },
-                {
-                    label: 'Undo',
-                    role: 'undo'
-                },
-                {
-                    label: 'Redo',
-                    role: 'redo'
-                },
-                {
-                    type: 'separator'
-                },
-                {
-                    label: 'Cut',
-                    role: 'cut'
-                },
-                {
-                    label: 'Copy',
-                    role: 'copy'
-                },
-                {
-                    label: 'Paste',
-                    role: 'paste'
-                },
-                {
-                    type: 'separator'
-                },
-                {
-                    label: 'Select all',
-                    role: 'selectall'
-                }
-            ]
-
-            if (!config.IS_PRODUCTION) {
-                template.push({
-                    type: 'separator'
-                })
-
-                template.push({
-                    label: 'Inspect',
-                    click() {
-                        Windows.main.window.inspectElement(cmd.data.x, cmd.data.y)
+                const requestedWindow = new electron.BrowserWindow({
+                    width: 330,
+                    height: 330,
+                    resizable: false,
+                    frame: false,
+                    show: false,
+                    backgroundColor: '#30314c',
+                    webPreferences: {
+                        preload: path.join(__dirname, '../main/preload.js'),
+                        experimentalFeatures: false,
+                        nodeIntegration: false,
+                        nodeIntegrationInWorker: false,
+                        webSecurity: false
                     }
                 })
+
+                requestedWindow.webContents.session.webRequest.onBeforeSendHeaders({ urls: [] }, (details, callback) => {
+                    details.requestHeaders['Connection'] = 'keep-alive'
+                    details.requestHeaders['Pragma'] = 'no-cache'
+                    details.requestHeaders['Cache-Control'] = 'no-cache'
+                    details.requestHeaders['Upgrade-Insecure-Requests'] = '1'
+                    details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
+                    details.requestHeaders['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+                    details.requestHeaders['Accept-Encoding'] = 'gzip, deflate, br'
+                    details.requestHeaders['Accept-Language'] = 'en-US,en;q=0.9'
+                    details.requestHeaders['Origin'] = 'https://blockhub.gg'
+                    details.requestHeaders['Referer'] = 'https://blockhub.gg'
+                    // No Cookie?
+
+                    callback({ cancel: false, requestHeaders: details.requestHeaders })
+                })
+
+                const onHeadersReceived = (d, c) => {
+                    if (d.responseHeaders['x-frame-options'])
+                        delete d.responseHeaders['x-frame-options']
+                    if (d.responseHeaders['Content-Security-Policy'])
+                        delete d.responseHeaders['Content-Security-Policy']
+
+                    c({ cancel: false, responseHeaders: d.responseHeaders })
+                }
+
+                requestedWindow.webContents.session.webRequest.onHeadersReceived({ urls: [] }, onHeadersReceived)
+
+                requestedWindow.webContents.once('did-finish-load', () => {console.log("FINISHED LOAD");
+                    requestedWindow.webContents.executeJavaScript(`(${script})("${cmd.requestId}");`)
+                })
+
+                requestedWindow.webContents.loadURL(url)
+
+                //requestedWindow.webContents.openDevTools({ mode: "detach" })
+
+                local.requests[cmd.requestId] = {
+                    resolve: async (data) => {
+                        requestedWindow.close()
+
+                        await sendCommand('fetchPageDataResponse', data, meta.client, cmd.requestId)
+
+                        resolve()
+                    },
+                    reject
+                }
+
+                return // Return unresolved, let the injected script resolve
+            } else if (cmd.key === 'resolveCallback') {
+                local.requests[cmd.responseId].resolve(cmd.data)
+            } else if (cmd.key === 'showContextMenuRequest') {
+                const electron = require('electron')
+                const Menu = electron.Menu
+
+                const template = [
+                    {
+                        label: 'Back',
+                        click() {
+                            Windows.main.window.webContents.goBack()
+                        }
+                    },
+                    {
+                        label: 'Forward',
+                        click() {
+                            Windows.main.window.webContents.goForward()
+                        }
+                    },
+                    {
+                        label: 'Reload',
+                        click() {
+                            Windows.main.window.webContents.reloadIgnoringCache()
+                        }
+                    },
+                    {
+                        type: 'separator'
+                    },
+                    {
+                        label: 'Undo',
+                        role: 'undo'
+                    },
+                    {
+                        label: 'Redo',
+                        role: 'redo'
+                    },
+                    {
+                        type: 'separator'
+                    },
+                    {
+                        label: 'Cut',
+                        role: 'cut'
+                    },
+                    {
+                        label: 'Copy',
+                        role: 'copy'
+                    },
+                    {
+                        label: 'Paste',
+                        role: 'paste'
+                    },
+                    {
+                        type: 'separator'
+                    },
+                    {
+                        label: 'Select all',
+                        role: 'selectall'
+                    }
+                ]
+
+                if (!config.IS_PRODUCTION) {
+                    template.push({
+                        type: 'separator'
+                    })
+
+                    template.push({
+                        label: 'Inspect',
+                        click() {
+                            Windows.main.window.inspectElement(cmd.data.x, cmd.data.y)
+                        }
+                    })
+                }
+
+                const menu = Menu.buildFromTemplate(template)
+
+                menu.popup(Windows.main.window)
+            } else if (cmd.key === 'setPasswordRequest') {
+                local.password = cmd.data.password
+
+                // TODO: validate
+                resultData = {
+                    success: 1
+                }
+                resultKey = 'setPasswordResponse'
+            } else {
+                console.log('[DesktopBridge] Unhandled command:', cmd)
+
+                return reject()
             }
 
-            const menu = Menu.buildFromTemplate(template)
+            emit(cmd.key, cmd.data ? cmd.data : undefined)
 
-            menu.popup(Windows.main.window)
-        } else if (cmd.key === 'setPasswordRequest') {
-            local.password = cmd.data.password
+            sendCommand(resultKey, resultData, meta.client, responseId)
 
-            // TODO: validate
-            resultData = {
-                success: 1
-            }
-            resultKey = 'setPasswordResponse'
-        } else {
-            console.log('[DesktopBridge] Unhandled command:', cmd)
+            resolve()
+        } catch(e) {
+            console.log('Encountered error running command: ', e)
 
-            return reject()
+            reject()
         }
-
-        emit(cmd.key, cmd.data ? cmd.data : undefined)
-
-        sendCommand(resultKey, resultData, meta.client, responseId)
-
-        return resolve()
     })
 }
 
@@ -1943,13 +1956,12 @@ export const init = async (bridge) => {
 
                     commandRunner()
                 })
-                .then(() => {
-                    console.log('Command success: ' + cmd.key)
 
-                    local.commandQueue.splice(currentCommandIndex, 1)
+            console.log('Command success: ' + cmd.key)
 
-                    commandRunner()
-                })
+            local.commandQueue.splice(currentCommandIndex, 1)
+
+            commandRunner()
         } catch(e) {
             console.log(e)
 

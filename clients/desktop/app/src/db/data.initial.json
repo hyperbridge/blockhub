@@ -1,7 +1,7 @@
 {
   "application": [
     {
-      "environmentMode": "local",
+      "environmentMode": "production",
       "signedIn": false,
       "loading": false,
       "connection": {
@@ -820,7 +820,7 @@
           "userToAddress": null
         }
       },
-      "currentEthereumNetwork": "local",
+      "currentEthereumNetwork": "mainnet",
       "userSubmittedConnectionMessages": [
         {
           "id": "1",

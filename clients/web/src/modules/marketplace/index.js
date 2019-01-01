@@ -251,6 +251,9 @@ export const mutations = {
                 return new Promise(async (resolve, reject) => {
                     const productRegistrationContract = MarketplaceAPI.api.ethereum.state.contracts.ProductRegistration.deployed
 
+                    if (!productRegistrationContract)
+                        return reject('Contract not setup')
+
                     let created = false
 
                     const watcher = productRegistrationContract.ProductCreated().watch((err, res) => {
