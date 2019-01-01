@@ -157,6 +157,35 @@ export const actions = {
     //         success()
     //     })
     // },
+    submitProductForReviewRequest(store, payload) {
+        // payload = name, version, category, files, checksum, permissions
+
+        MarketplaceProtocol.Ethereum.Models.Marketplace.submitAppForReview(payload).then((res) => {
+            const product = DB.marketplace.products.findOne({ 'name': product.name })
+            product.id = res[0]
+            // TODO: assign rest of props
+
+            store.commit('submitProductForReviewResponse', product)
+        })
+    }
+}
+
+export const mutations = {
+    updateState(state, payload) {
+        for (let x in payload) {
+            Vue.set(state, x, payload[x])
+        }
+
+        for (let product of Object.values(state.products)) {
+            DB.updateCollection(DB.marketplace.products, product)
+        }
+        
+        DB.marketplace.config.update(state)
+        DB.save()
+    },
+    update(state, { prop = 'products', id, data }) {
+        state[prop][id] = { ...state[prop][id], ...data }
+    },
     syncProductBlockchain(store, payload) {
         if (payload.meta.blockchainId) {
             const run = function (
@@ -192,7 +221,7 @@ export const actions = {
             const cmd = {
                 code: run.toString(),
                 params: {
-                    profile: this.$store.state.application.activeProfile,
+                    profile: BlockHub.store.state.application.activeProfile,
                     product: this.product
                 }
             }
@@ -279,51 +308,23 @@ export const actions = {
             const cmd = {
                 code: run.toString(),
                 params: {
-                    profile: this.$store.state.application.activeProfile,
-                    product: this.product
+                    profile: BlockHub.store.state.application.activeProfile,
+                    product: payload
                 }
             }
 
             window.BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
                 if (productResult.id) {
-                    this.product.meta.blockchainId = productResult.id
+                    //payload.meta.blockchainId = productResult.id
                     //this.successfulCreationMessage = "Congratulations, your product has been synced!"
 
-                    this.marketplace.products[this.product.id] = this.product
+                    //store.state.products[this.product.id] = payload
+                    BlockHub.store.state.products.keyedById[payload.id].meta.blockchainId = productResult.id
 
-                    this.$router.push('/business/product/' + this.product.id)
+                    //BlockHub.router.push('/business/product/' + this.product.id)
                 }
             })
         }
     },
-    submitProductForReviewRequest(store, payload) {
-        // payload = name, version, category, files, checksum, permissions
-
-        MarketplaceProtocol.Ethereum.Models.Marketplace.submitAppForReview(payload).then((res) => {
-            const product = DB.marketplace.products.findOne({ 'name': product.name })
-            product.id = res[0]
-            // TODO: assign rest of props
-
-            store.commit('submitProductForReviewResponse', product)
-        })
-    }
-}
-
-export const mutations = {
-    updateState(state, payload) {
-        for (let x in payload) {
-            Vue.set(state, x, payload[x])
-        }
-
-        for (let product of Object.values(state.products)) {
-            DB.updateCollection(DB.marketplace.products, product)
-        }
-        
-        DB.marketplace.config.update(state)
-        DB.save()
-    },
-    update(state, { prop = 'products', id, data }) {
-        state[prop][id] = { ...state[prop][id], ...data }
-    }
 }
 
