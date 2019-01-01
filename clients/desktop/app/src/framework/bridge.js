@@ -1928,6 +1928,12 @@ export const init = async (bridge) => {
 
         const cmd = local.commandQueue[currentCommandIndex]
 
+        if (!cmd) {
+            local.commandQueue.splice(currentCommandIndex, 1)
+
+            return setTimeout(commandRunner, 100)
+        }
+
         try {
             await runCommand(cmd)
                 .catch(() => {
@@ -1949,7 +1955,7 @@ export const init = async (bridge) => {
 
             currentCommandIndex++
 
-            commandRunner()
+            return setTimeout(commandRunner, 100)
         }
     }
 
