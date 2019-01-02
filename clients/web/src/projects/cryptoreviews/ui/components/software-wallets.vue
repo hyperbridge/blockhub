@@ -16,7 +16,7 @@
                             <div class="clients-blog mtb-15">
                                 <div class="media pall-20" style="{ height: '220px' }">
                                     <a :href="item.link"><img class="client-img" :src="item.thumbnail" alt="" /></a>
-                                    <div class="media-body">
+                                    <div class="media-body" v-html="item.content">
                                         <h4 class="mt-0 tw-5"><a :href="item.link">{{ item.title }}</a></h4>
                                         {{ item.content }}
                                     </div>
