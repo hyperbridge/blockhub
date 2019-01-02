@@ -199,6 +199,31 @@
 
 
         <c-basic-popup
+            :activated="$store.state.application.activeModal === 'sync-blockchain'"
+            @close="$store.commit('application/activateModal', null)"
+        >
+            <div class="h4" slot="header" style="text-align: left">Sync Blockchain</div>
+            <template slot="body">
+                <div v-if="syncStep === 1">
+                    <h3 class="margin-auto"><strong>Status:</strong> unsynced </h3>
+                    Contract Address: 0xasdadas<br />
+
+                    <c-button class="c-button--lg outline-white margin-top-20 margin-auto" @click="startSync">Start</c-button>
+                </div>
+                <div v-if="syncStep === 2">
+                   
+                </div>
+                <br />
+                <div class="padding-40 loading-process" style="position: relative" v-if="syncing">
+                    <div class="loading loading--w-spinner"><div><div class="loading-spinner"></div></div></div>
+                </div>
+            </template>
+            <p slot="footer" class="margin-top-20">
+                <c-button status="dark" to="/help">Need help? Check the Help Center</c-button>
+            </p>
+        </c-basic-popup>
+
+        <c-basic-popup
             :activated="$store.state.application.activeModal === 'import-product'"
             @close="$store.commit('application/activateModal', null)"
         >
@@ -311,6 +336,8 @@
                     'racing',
                     'action'
                 ],
+                syncing: false,
+                syncStep: 1,
                 importing: false,
                 importStep: 1,
                 savedState: false,
@@ -326,7 +353,7 @@
 
                 if (this.id === 'new') {
                     product = { ...this.$store.state.marketplace.defaultProduct }
-debugger
+
                     this.$store.state.application.developerMode = true
                     this.$store.dispatch('application/setEditorMode', 'editing')
                 }
@@ -447,29 +474,76 @@ debugger
                         this.$refs[key].focus()
                 }, 10)
             },
+            create() {
+                this.project.ownerId = this.$store.state.application.activeProfile.id
+
+                this.$store.dispatch('projects/create', this.project).then((res) => {
+                    this.project.id = res.id
+                    this.notice = "Congratulations, your project has been created!"
+
+                    this.$router.push('/business/project/' + this.project.id)
+                })
+            },
             save() {
                 if (this.id === 'new') {
                     this.product.type = 'game'
+                    this.product.ownerId = this.$store.state.application.activeProfile.id
 
-                    Bridge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.activeProfile, product: this.product }).then((data) => {
-                        const product = DB.marketplace.products.insert(data)
-                        DB.save()
+                    this.$store.dispatch('products/create', this.product).then((res) => {
+                        this.product.id = res.id
+                        this.notice = "Congratulations, your product has been created!"
 
-                        Vue.set(this.$store.state.marketplace.products, product.id, product)
+                        this.$router.push('/business/project/' + this.project.id)
+                    })
+
+                    // Bridge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.activeProfile, product: this.product }).then((data) => {
+                    //     const product = DB.marketplace.products.insert(data)
+                    //     DB.save()
+
+                    //     Vue.set(this.$store.state.marketplace.products, product.id, product)
+
+                    //     this.savedState = true
+                    // })
+                } else {
+                    this.$store.dispatch('products/update', [this.product.id, this.product, {
+                        query: {
+                            $eager: 'tags'
+                        }
+                    }]).then(() => {
+                        //this.notice = "Product has been saved."
+                        //this.product.id = productResult.id
+                        //this.successfulCreationMessage = "Congratulations, your project has been created!"
+
+                        //this.$router.push('/business/project/' + this.project.id)
 
                         this.savedState = true
                     })
-                } else {
-                    const product = this.product
-
-                    Vue.set(this.$store.state.marketplace.products, product.id, product)
-
-                    DB.marketplace.products.update(product)
-                    DB.save()
-
-                    this.savedState = true
                 }
             },
+            // save() {
+            //     if (this.id === 'new') {
+            //         this.product.type = 'game'
+
+            //         Bridge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.activeProfile, product: this.product }).then((data) => {
+            //             const product = DB.marketplace.products.insert(data)
+            //             DB.save()
+
+            //             Vue.set(this.$store.state.marketplace.products, product.id, product)
+
+            //             this.savedState = true
+            //         })
+            //     } else {
+            //         const product = this.product
+
+            //         this.$store.commit('marketplace/updateProduct', product)
+            //         Vue.set(this.$store.state.marketplace.products, product.id, product)
+
+            //         DB.marketplace.products.update(product)
+            //         DB.save()
+
+            //         this.savedState = true
+            //     }
+            // },
             unsaved() {
                 if (this.savedState === false && this.$store.state.application.editorMode === 'editing')
                     return true
@@ -477,6 +551,9 @@ debugger
             closeModal() {
                 this.$store.state.marketplace.firstProduct = false
                 this.$store.commit('application/updateClientSettings', { key: 'hide_product_intro_modal', value: true })
+            },
+            startSync() {
+                this.$store.commit('marketplace/syncProductBlockchain', this.product)
             },
             startImport() {
                 if (!this.$store.state.application.desktopMode) {

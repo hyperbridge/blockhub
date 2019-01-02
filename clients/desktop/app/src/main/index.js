@@ -206,11 +206,10 @@ export const initIPC = () => {
 
         const cmd = JSON.parse(msg)
 
-        DesktopBridge.runCommand(cmd).then(() => {})
+        DesktopBridge.queueCommand(cmd)
     })
 
 }
-
 
 export const init = () => {
     initProcess()

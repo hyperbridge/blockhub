@@ -62,10 +62,6 @@
                 background: rgba(0, 0, 0, .2);
                 border-radius: 100%;
                 box-shadow: 0 0 20px rgba(0, 0, 0, .9);
-                -webkit-filter: blur(2px);
-                -moz-filter: blur(2px);
-                -o-filter: blur(2px);
-                -ms-filter: blur(2px);
                 filter: blur(2px);
             }
         }

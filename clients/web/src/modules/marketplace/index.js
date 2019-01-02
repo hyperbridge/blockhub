@@ -133,30 +133,30 @@ export const actions = {
     viewProduct(id) {
         console.log('viewProduct', id)
     },
-    updateProduct(store, payload) {
-        const success = () => {
-            const product = DB.marketplace.products.findOne({ 'id': id })
+    // updateProduct(store, payload) {
+    //     const success = () => {
+    //         const product = DB.marketplace.products.findOne({ 'id': id })
 
-            Object.assign(product, payload)
+    //         Object.assign(product, payload)
 
-            DB.marketplace.products.update(product)
-            DB.save()
+    //         DB.marketplace.products.update(product)
+    //         DB.save()
 
-            store.commit('updateProduct', { id, data: product })
-        }
+    //         store.commit('updateProduct', { id, data: product })
+    //     }
 
-        MarketplaceProtocol.Ethereum.Models.Marketplace.updateProduct({
-            id: payload.id,
-            name: payload.name,
-            version: '2',
-            category: '1',
-            files: '1',
-            checksum: '1',
-            permissions: '1'
-        }).then((res) => {
-            success()
-        })
-    },
+    //     MarketplaceProtocol.Ethereum.Models.Marketplace.updateProduct({
+    //         id: payload.id,
+    //         name: payload.name,
+    //         version: '2',
+    //         category: '1',
+    //         files: '1',
+    //         checksum: '1',
+    //         permissions: '1'
+    //     }).then((res) => {
+    //         success()
+    //     })
+    // },
     submitProductForReviewRequest(store, payload) {
         // payload = name, version, category, files, checksum, permissions
 
@@ -185,6 +185,149 @@ export const mutations = {
     },
     update(state, { prop = 'products', id, data }) {
         state[prop][id] = { ...state[prop][id], ...data }
-    }
+    },
+    syncProductBlockchain(store, payload) {
+        if (payload.meta.blockchainId) {
+            const run = function (
+                local,
+                DB,
+                Bridge,
+                FundingAPI,
+                MarketplaceAPI,
+                TokenAPI,
+                ReserveAPI,
+                BABEL_PROMISE,
+                BABEL_GENERATOR,
+                BABEL_REGENERATOR,
+                params
+            ) {
+                const { product, profile } = params
+
+                return new Promise(async (resolve, reject) => {
+                    const productRegistrationContract = MarketplaceAPI.api.ethereum.state.contracts.ProductRegistration.deployed
+
+                    await productRegistrationContract.editProductInfo(
+                        product.id,
+                        product.name,
+                        product.type,
+                        product.content,
+                        { from: profile.address }
+                    )
+
+                    resolve(product)
+                })
+            }
+
+            const cmd = {
+                code: run.toString(),
+                params: {
+                    profile: BlockHub.store.state.application.activeProfile,
+                    product: this.product
+                }
+            }
+
+            window.BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
+                if (productResult.id) {
+                    //this.successfulCreationMessage = "Product has been saved"
+                }
+            })
+
+        } else {
+            const run = function (
+                local,
+                DB,
+                Bridge,
+                FundingAPI,
+                MarketplaceAPI,
+                TokenAPI,
+                ReserveAPI,
+                BABEL_PROMISE,
+                BABEL_GENERATOR,
+                BABEL_REGENERATOR,
+                params
+            ) {
+                const { product, profile } = params
+
+                return new Promise(async (resolve, reject) => {
+                    const productRegistrationContract = MarketplaceAPI.api.ethereum.state.contracts.ProductRegistration.deployed
+
+                    if (!productRegistrationContract)
+                        return reject('Contract not setup')
+
+                    let created = false
+
+                    const watcher = productRegistrationContract.ProductCreated().watch((err, res) => {
+                        if (created) return
+
+                        created = true
+
+                        if (err) {
+                            console.warn('[BlockHub][Marketplace] Error', err)
+
+                            return reject(err)
+                        }
+
+                        product.$loki = undefined
+                        product.id = res.args.productId.toNumber()
+
+                        try {
+                            DB.marketplace.products.insert(product)
+                            console.log('after', product.id)
+                        } catch (e) {
+                            try {
+                                DB.marketplace.products.update(product)
+                            } catch (e) {
+                                reject(e)
+                            }
+                        }
+
+                        DB.save()
+
+                        Bridge.sendCommand('updateState', {
+                            module: 'marketplace',
+                            state: {
+                                products: DB.marketplace.products.data
+                            }
+                        })
+
+                        console.log('Product created')
+
+                        resolve(product)
+                    })
+
+                    await productRegistrationContract.createProduct(
+                        product.name,
+                        product.type,
+                        product.content,
+                        { from: profile.address }
+                    )
+
+                    watcher.stopWatching(() => {
+                        // Must be async or tries to launch nasty process
+                    })
+                })
+            }
+
+            const cmd = {
+                code: run.toString(),
+                params: {
+                    profile: BlockHub.store.state.application.activeProfile,
+                    product: payload
+                }
+            }
+
+            window.BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
+                if (productResult.id) {
+                    //payload.meta.blockchainId = productResult.id
+                    //this.successfulCreationMessage = "Congratulations, your product has been synced!"
+
+                    //store.state.products[this.product.id] = payload
+                    BlockHub.store.state.products.keyedById[payload.id].meta.blockchainId = productResult.id
+
+                    //BlockHub.router.push('/business/product/' + this.product.id)
+                }
+            })
+        }
+    },
 }
 

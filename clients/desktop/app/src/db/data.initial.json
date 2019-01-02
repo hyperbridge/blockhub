@@ -1,7 +1,7 @@
 {
   "application": [
     {
-      "environmentMode": "local",
+      "environmentMode": "production",
       "signedIn": false,
       "loading": false,
       "connection": {
@@ -35,7 +35,7 @@
                   "name": "Token",
                   "link": "https://github.com/hyperbridge/protocol/blob/master/packages/token/smart-contracts/ethereum/contracts/Token.sol",
                   "createdAt": 1541862092379,
-                  "address": "0x2be42c6d0c022a49258256cb2d46aeb7b1bb994d"
+                  "address": "0x306496F5af58B04fC93985059c894Ec549e2f6b8"
                 },
                 "TokenDelegate": {
                   "links": [ { "name": "TokenLib", "address": null } ],
@@ -820,7 +820,7 @@
           "userToAddress": null
         }
       },
-      "currentEthereumNetwork": "local",
+      "currentEthereumNetwork": "mainnet",
       "userSubmittedConnectionMessages": [
         {
           "id": "1",

@@ -15,7 +15,7 @@ const getData = () => {
 
 let data = getData()
 let initialData = require('./data.initial.json')
-
+console.log(data.application[0].ethereum.mainnet.packages.token.contracts, initialData.application[0].ethereum.mainnet.packages.token.contracts)
 let loki = null
 let initCallback = null
 let initialized = false

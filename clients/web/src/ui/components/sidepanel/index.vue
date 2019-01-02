@@ -144,12 +144,12 @@
                             <ul>
                                 <li class="title">TOP 5</li>
                                 <li v-for="(product, index) in $store.state.marketplace.top5" :key="index" v-if="index < 5">
-                                    <c-button :to="`#/product/${product.id}`">
+                                    <c-button status="none" :to="`#/product/${product.id}`">
                                         <span class="text">{{ product.name }}</span>
                                     </c-button>
                                 </li>
                                 <li class="more">
-                                    <c-button to="/search">
+                                    <c-button status="none" to="/search">
                                         <span class="text">MORE...</span>
                                     </c-button>
                                 </li>
@@ -159,12 +159,12 @@
                             <ul>
                                 <li class="title">TOP FREE</li>
                                 <li v-for="(product, index) in $store.state.marketplace.topFree.slice(0, 5)" :key="index">
-                                    <c-button :to="`/product/${product.id}`">
+                                    <c-button status="none" :to="`/product/${product.id}`">
                                         <span class="text">{{ product.name }}</span>
                                     </c-button>
                                 </li>
                                 <li class="more">
-                                    <c-button to="/search">
+                                    <c-button status="none" to="/search">
                                         <span class="text">MORE...</span>
                                     </c-button>
                                 </li>

@@ -128,19 +128,38 @@
             'c-business-layout': (resolve) => require(['@/ui/layouts/business'], resolve)
         },
         data() {
+            const product = this.id === 'new' ? this.$store.state.marketplace.defaultProduct : this.$store.getters['products/get'](this.id)
+
             return {
                 loadingState: true,
+                notice: "",
+                advanced: false,
+                project: project,
+                blockchain: false,
+                tagOptions: [],
                 creating: this.id === 'new',
                 successfulCreationMessage: false
             }
         },
         computed: {
-            marketplace() {
-                return this.$store.state.marketplace
+            originalProduct() {
+                return this.id === 'new' ? this.$store.state.marketplace.defaultProduct : this.$store.getters['products/get'](this.id)
             },
-            product() {
-                return this.id === 'new' ? this.marketplace.defaultProduct : this.marketplace.products.find(p => p.id == this.id)
-            },
+        },
+        watch: {
+            originalProduct() {
+                this.product = { ...this.product, ...this.originalProduct }
+            }
+        },
+        created() {
+            if (this.id !== 'new') {
+                this.$store.dispatch('products/find', {
+                    query: {
+                        id: Number(this.id),
+                        $eager: 'tags',
+                    }
+                })
+            }
         },
         methods: {
             transferOwnership() {
@@ -232,145 +251,28 @@
                 })
             },
             create() {
+                this.product.ownerId = this.$store.state.application.activeProfile.id
 
-                const run = function(
-                    local, 
-                    DB,
-                    Bridge,
-                    FundingAPI, 
-                    MarketplaceAPI, 
-                    TokenAPI, 
-                    ReserveAPI, 
-                    BABEL_PROMISE,
-                    BABEL_GENERATOR,
-                    BABEL_REGENERATOR,
-                    params
-                ) {
-                    const { product, profile } = params
-                    
-                    return new Promise(async (resolve, reject) => {
-                        const productRegistrationContract = MarketplaceAPI.api.ethereum.state.contracts.ProductRegistration.deployed
+                this.$store.dispatch('products/create', this.product).then((res) => {
+                    this.product.id = res.id
+                    this.notice = "Congratulations, your product has been created!"
 
-                        let created = false
-
-                        const watcher = productRegistrationContract.ProductCreated().watch((err, res) => {
-                            if (created) return
-
-                            created = true
-
-                            if (err) {
-                                console.warn('[BlockHub][Marketplace] Error', err)
-
-                                return reject(err)
-                            }
-
-                            product.$loki = undefined
-                            product.id = res.args.productId.toNumber()
-
-                            try {
-                                DB.marketplace.products.insert(product)
-                                console.log('after', product.id)
-                            } catch (e) {
-                                try {
-                                    DB.marketplace.products.update(product)
-                                } catch (e) {
-                                    reject(e)
-                                }
-                            }
-
-                            DB.save()
-
-                            Bridge.sendCommand('updateState', {
-                                module: 'marketplace',
-                                state: {
-                                    products: DB.marketplace.products.data
-                                }
-                            })
-
-                            console.log('Product created')
-
-                            resolve(product)
-                        })
-
-                        await productRegistrationContract.createProduct(
-                            product.name,
-                            product.type,
-                            product.content,
-                            { from: profile.address }
-                        )
-
-                        watcher.stopWatching(() => {
-                            // Must be async or tries to launch nasty process
-                        })
-                    })
-                }
-
-                const cmd = {
-                    code: run.toString(),
-                    params: {
-                        profile: this.$store.state.application.activeProfile,
-                        product: this.product
-                    }
-                }
-
-                window.BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
-                    if (productResult.id) {
-                        this.product.id = productResult.id
-                        this.successfulCreationMessage = "Congratulations, your product has been created!"
-
-                        this.marketplace.products[this.product.id] = this.product
-
-                        this.$router.push('/business/product/' + this.product.id)
-                    }
+                    this.$router.push('/business/product/' + this.product.id)
                 })
 
             },
             save() {
-                
-                const run = function(
-                    local, 
-                    DB, 
-                    Bridge,
-                    FundingAPI, 
-                    MarketplaceAPI, 
-                    TokenAPI, 
-                    ReserveAPI, 
-                    BABEL_PROMISE,
-                    BABEL_GENERATOR,
-                    BABEL_REGENERATOR,
-                    params
-                ) {
-                    const { product, profile } = params
-                    
-                    return new Promise(async (resolve, reject) => {
-                        const productRegistrationContract = MarketplaceAPI.api.ethereum.state.contracts.ProductRegistration.deployed
-
-                        await productRegistrationContract.editProductInfo(
-                            product.id,
-                            product.name,
-                            product.type,
-                            product.content,
-                            { from: profile.address }
-                        )
-
-                        resolve(product)
-                    })
-                }
-
-                const cmd = {
-                    code: run.toString(),
-                    params: {
-                        profile: this.$store.state.application.activeProfile,
-                        product: this.product
+                this.$store.dispatch('products/update', [this.product.id, this.product, {
+                    query: {
+                        $eager: 'tags'
                     }
-                }
+                }]).then(() => {
+                    this.notice = "Product has been saved."
+                    //this.product.id = productResult.id
+                    //this.successfulCreationMessage = "Congratulations, your product has been created!"
 
-                window.BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
-                    if (productResult.id) {
-                        this.successfulCreationMessage = "Product has been saved"
-                    }
+                    //this.$router.push('/business/product/' + this.product.id)
                 })
-
             }
         },
         mounted() {
