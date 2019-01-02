@@ -40,8 +40,6 @@
 </template>
 
 <script>
-    import 'swiper/dist/css/swiper.css'
-    import {swiper, swiperSlide} from 'vue-awesome-swiper'
     import bitcoinData from '../../data/token/bitcoin'
     import * as DB from '@/db'
     import allData from '../../data'
@@ -79,8 +77,6 @@
             'c-software-wallets': (resolve) => require(['@/projects/cryptoreviews/ui/components/software-wallets'], resolve),
             'c-hardware-wallets': (resolve) => require(['@/projects/cryptoreviews/ui/components/hardware-wallets'], resolve),
             'c-faq': (resolve) => require(['@/projects/cryptoreviews/ui/components/faq'], resolve),
-            'c-swiper': swiper,
-            'c-slide': swiperSlide,
         },
         data() {
             const data = allData(DB)
@@ -120,18 +116,7 @@
             const viewData = bitcoinData(DB)
 
             return {
-                data: viewData,
-                showIcon: true,
-                sliderOptions: {
-                    slidesPerView: 4,
-                    spaceBetween: 15,
-                    breakpoints: {
-                        768: {
-                            slidesPerView: 2,
-                            spaceBetween: 0
-                        },
-                    }
-                }
+                data: viewData
             }
         }
     }

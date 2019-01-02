@@ -14,7 +14,7 @@ export default (DB) => ([
     {
         title: "Bittrex",
         rank: "2",
-        thumbnail: "/static/projects/cryptoreviews/img/exchanges/bittrex.svg",
+        thumbnail: "/static/projects/cryptoreviews/img/exchanges/bittrex.jpeg",
         link: "https://readyblock.one/go/bittrex",
         age: "2014",
         hacks: "0",
@@ -27,7 +27,7 @@ export default (DB) => ([
         title: "Gemini",
         rank: "3",
         link: "https://readyblock.one/go/gemini",
-        thumbnail: "/static/projects/cryptoreviews/img/exchanges/gemini.svg",
+        thumbnail: "/static/projects/cryptoreviews/img/exchanges/gemini.png",
         age: "2016",
         hacks: "0",
         safety: "10/10",
