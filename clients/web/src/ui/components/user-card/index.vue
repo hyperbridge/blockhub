@@ -77,7 +77,7 @@
                 <i :class="`fas fa-${previewMode ? 'copy' : 'redo-alt'}`"></i>
             </button>
         </div>
-        <div v-if="previewMode && !user.address">
+        <div v-if="previewMode">
             <c-button status="dark" size="small" @click="generateAddress(user.id)">Generate Address</c-button>
         </div>
     </div>
@@ -138,7 +138,25 @@
 
                         this.$snotify.success('', 'Address generated', { timeout: 3000 })
 
+                        // Update local
                         this.$store.commit('application/updateState')
+
+                        // Update server
+                        this.$store.dispatch('profiles/update', [
+                            chosenProfile.id, 
+                            {
+                                address: chosenProfile.address,
+                                meta: chosenProfile.meta
+                            }
+                        ])
+
+                        // Update desktop
+                        window.BlockHub.Bridge.updateState({
+                            module: 'application', 
+                            state: {
+                                profiles: Object.values(this.$store.state.profiles.keyedById)
+                            }
+                        }).then(() => {})
                     })
                 })
             },

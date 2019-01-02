@@ -18,6 +18,7 @@ const config = require('../config')
 
 const local = {
     commandQueue: [],
+    currentCommandIndex: 0,
     provider: null,
     requests: {},
     account: {
@@ -112,63 +113,63 @@ export const promptPasswordRequest = async (data = {}) => {
     })
 }
 
-export const createProfileRequest = (profile) => {
-    return new Promise(async (resolve, reject) => {
-        const id = (local.account.profileIndex || 10) +1
-        const profile = await Wallet.create(local.passphrase, id)
+// export const createProfileRequest = (profile) => {
+//     return new Promise(async (resolve, reject) => {
+//         const id = (local.account.profileIndex || 10) +1
+//         const profile = await Wallet.create(local.passphrase, id)
 
-        DB.application.config.data[0].profiles.push({
-            id,
-            address: profile.address
-        })
+//         DB.application.config.data[0].profiles.push({
+//             id,
+//             address: profile.address
+//         })
 
-        local.account.profileIndex = id
+//         local.account.profileIndex = id
 
-        await saveAccountFile()
+//         await saveAccountFile()
 
-        resolve({
-            id: id,
-            address: profile.address
-        })
-    })
-}
+//         resolve({
+//             id: id,
+//             address: profile.address
+//         })
+//     })
+//}
 
-export const saveProfileRequest = (profile) => {
-    return new Promise(async (resolve, reject) => {
-        const origProfile = DB.application.config.data[0].profiles.find(i => i.id === profile.id)
+// export const saveProfileRequest = (profile) => {
+//     return new Promise(async (resolve, reject) => {
+//         const origProfile = DB.application.config.data[0].profiles.find(i => i.id === profile.id)
 
-        origProfile.name = profile.name
+//         origProfile.name = profile.name
 
-        await saveAccountFile()
+//         await saveAccountFile()
 
-        resolve(origProfile)
-    })
-}
+//         resolve(origProfile)
+//     })
+// }
 
-export const removeProfileRequest = (profile) => {
-    return new Promise(async (resolve, reject) => {
-        const origProfile = DB.application.config.data[0].profiles.find(i => i.id === profile.id)
+// export const removeProfileRequest = (profile) => {
+//     return new Promise(async (resolve, reject) => {
+//         const origProfile = DB.application.config.data[0].profiles.find(i => i.id === profile.id)
 
-        const index = DB.application.config.data[0].profiles.indexOf(origProfile)
-        DB.application.config.data[0].profiles.splice(index, 1)
+//         const index = DB.application.config.data[0].profiles.indexOf(origProfile)
+//         DB.application.config.data[0].profiles.splice(index, 1)
 
-        await saveAccountFile()
+//         await saveAccountFile()
 
-        resolve()
-    })
-}
+//         resolve()
+//     })
+// }
 
 export const transferTokenBatch = ({ batch, walletIndex }) => {
     return new Promise(async (resolve, reject) => {
         const web3 = local.wallet.web3
-        const originWallet = await Wallet.create(local.passphrase, walletIndex)
-        const originAddress = originWallet.address
+        const fromWallet = await Wallet.create(local.passphrase, walletIndex)
+        const fromAddress = fromWallet.address
 
         for (let i = 0, l = batch.length; i < l; ++i) {
-            const destinationAddress = batch[i].destinationAddress
+            const toAddress = batch[i].destinationAddress
             const amount = batch[i].amount
 
-            console.log("Attempting transfer. From: " + originAddress + " To " + destinationAddress + " Amount: " + amount)
+            console.log("Attempting transfer. From: " + fromAddress + " To " + toAddress + " Amount: " + amount)
 
             const token = TokenAPI.api.ethereum.state.contracts.Token.deployed
             const eternalStorage = TokenAPI.api.ethereum.state.contracts.EternalStorage.deployed
@@ -177,22 +178,22 @@ export const transferTokenBatch = ({ batch, walletIndex }) => {
 
             const originalProvider = TokenAPI.api.ethereum.state.provider
 
-            TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originWallet.provider)
-            TokenAPI.api.ethereum.state.contracts.Token.contract.provider = originWallet.provider
-            TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originWallet.provider)
+            TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(fromWallet.provider)
+            TokenAPI.api.ethereum.state.contracts.Token.contract.provider = fromWallet.provider
+            TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(fromWallet.provider)
 
             let tokenDelegateHolder = await TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.at(hbxToken.address)
-            let originWalletHolder = await TokenAPI.api.ethereum.state.contracts.Token.contract.at(token.address)
-            originWalletHolder = { ...tokenDelegateHolder, ...originWalletHolder }
+            let fromWalletHolder = await TokenAPI.api.ethereum.state.contracts.Token.contract.at(token.address)
+            fromWalletHolder = { ...tokenDelegateHolder, ...fromWalletHolder }
 
             const decimals = web3._extend.utils.toBigNumber(18)
-            const destinationAmount = web3._extend.utils.toBigNumber(amount).times(web3._extend.utils.toBigNumber(10).pow(decimals))
+            const toAmount = web3._extend.utils.toBigNumber(amount).times(web3._extend.utils.toBigNumber(10).pow(decimals))
 
-            await originWalletHolder.transfer(destinationAddress, destinationAmount, {
-                from: originWallet.address,
+            await fromWalletHolder.transfer(toAddress, toAmount, {
+                from: fromWallet.address,
                 gasPrice: 8e9
             }).then(() => {
-                console.log("Transfer complete. Destination: " + destinationAddress)
+                console.log("Transfer complete. Destination: " + toAddress)
             }).catch((e) => {
                 console.log("Error occurred during transfer: ", e)
                 
@@ -218,10 +219,13 @@ export const transferTokens = ({ type, fromAddress, toAddress, amount }) => {
     return new Promise(async (resolve, reject) => {
         const walletIndex = DB.application.config.data[0].profiles.find((profile) => fromAddress.toLowerCase() === profile.address.toLowerCase()).id
         const web3 = local.wallet.web3
-        const originWallet = await Wallet.create(local.passphrase, walletIndex)
-        const originAddress = originWallet.address
+        const fromWallet = await Wallet.create(local.passphrase, walletIndex)
+        
+        if (fromWallet.address !== fromAddress) {
+            return reject("Wallet didn't match")
+        }
 
-        console.log("Transferring tokens. Type: " + type + ". From: " + originAddress + ". To " + toAddress + ". Amount: " + amount + " Type: " + type)
+        console.log("Transferring tokens. Type: " + type + ". From: " + fromAddress + ". To " + toAddress + ". Amount: " + amount + ". Type: " + type)
 
         if (type === 'HBX') {
             const token = TokenAPI.api.ethereum.state.contracts.Token.deployed
@@ -231,25 +235,27 @@ export const transferTokens = ({ type, fromAddress, toAddress, amount }) => {
 
             const originalProvider = TokenAPI.api.ethereum.state.provider
 
-            TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originWallet.provider)
-            TokenAPI.api.ethereum.state.contracts.Token.contract.provider = originWallet.provider
-            TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originWallet.provider)
+            TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(fromWallet.provider)
+            TokenAPI.api.ethereum.state.contracts.Token.contract.provider = fromWallet.provider
+            TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(fromWallet.provider)
 
             let tokenDelegateHolder = await TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.at(hbxToken.address)
-            let originWalletHolder = await TokenAPI.api.ethereum.state.contracts.Token.contract.at(token.address)
-            originWalletHolder = { ...tokenDelegateHolder, ...originWalletHolder }
+            let fromWalletHolder = await TokenAPI.api.ethereum.state.contracts.Token.contract.at(token.address)
+            fromWalletHolder = { ...tokenDelegateHolder, ...fromWalletHolder }
 
-            const decimals = web3._extend.utils.toBigNumber(18)
-            const destinationAmount = web3._extend.utils.toBigNumber(amount).times(web3._extend.utils.toBigNumber(10).pow(decimals))
+            const decimals = 18
+            const toAmount = web3._extend.utils.toBigNumber(amount).times(web3._extend.utils.toBigNumber(10).pow(decimals))
 
-            await originWalletHolder.transfer(toAddress, destinationAmount, {
-                from: originWallet.address,
-                gasPrice: 6e9
+            await fromWalletHolder.transfer(toAddress, toAmount, {
+                from: fromWallet.address,
+                gasPrice: 8e9
             }).then(() => {
                 console.log("Transfer complete. Destination: " + toAddress)
+            }).catch((e) => {
+                console.log("Error occurred during transfer: ", e)
             })
 
-            await web3.eth.getTransactionCountPromise(originAddress)
+            await web3.eth.getTransactionCountPromise(fromAddress)
         } else if (type === 'ETH') {
             
         }
@@ -1910,6 +1916,75 @@ export const isCommandRunnable = (cmd) => {
     }
 }
 
+export const commandRunner = async () => {
+    //console.log('Command runner. Queue: ' + local.commandQueue.length + '. Index: ' + local.currentCommandIndex)
+
+    // Take a break at the end of queue
+    if (local.currentCommandIndex === local.commandQueue.length) {
+        local.currentCommandIndex = 0
+
+        //console.log('[BlockHub] Command runner taking a break with ' + local.commandQueue.length + ' commands in queue')
+
+        return setTimeout(commandRunner, 100)
+    }
+
+    const cmd = local.commandQueue[local.currentCommandIndex]
+
+    if (!cmd) {
+        local.commandQueue.splice(local.currentCommandIndex, 1)
+
+        return setTimeout(commandRunner, 100)
+    }
+
+    try {
+        let skipped = false
+
+        let timeout = setTimeout(() => {
+            console.log('Command taking too long. Moving on.')
+
+            skipped = true
+
+            local.commandQueue.splice(local.currentCommandIndex, 1)
+
+            setTimeout(commandRunner, 100)
+        }, 5000)
+
+        await runCommand(cmd)
+            .catch(() => {
+                console.log('Command fail: ' + cmd.key)
+
+                if (skipped) return
+
+                local.currentCommandIndex++
+
+                commandRunner()
+            })
+
+        clearTimeout(timeout)
+
+        if (skipped) return
+
+        console.log('Command success: ' + cmd.key)
+
+        local.commandQueue.splice(local.currentCommandIndex, 1)
+
+        commandRunner()
+    } catch (e) {
+        console.log(e)
+
+        local.currentCommandIndex++
+
+        return setTimeout(commandRunner, 100)
+    }
+}
+
+export const clearLastCommand = () => {
+    local.commandQueue.splice(local.currentCommandIndex, 1)
+
+    setTimeout(commandRunner, 100)
+}
+
+
 // Check local db for stored account
 // If exists, prompt web to require password
 // Web sends back response (requirePasswordResponse)
@@ -1925,51 +2000,6 @@ export const init = async (bridge) => {
 
     local.bridge = bridge
 
-    let currentCommandIndex = 0
-
-    const commandRunner = async () => {
-        //console.log('Command runner. Queue: ' + local.commandQueue.length + '. Index: ' + currentCommandIndex)
-
-        // Take a break at the end of queue
-        if (currentCommandIndex === local.commandQueue.length) {
-            currentCommandIndex = 0
-
-            //console.log('[BlockHub] Command runner taking a break with ' + local.commandQueue.length + ' commands in queue')
-
-            return setTimeout(commandRunner, 100)
-        }
-
-        const cmd = local.commandQueue[currentCommandIndex]
-
-        if (!cmd) {
-            local.commandQueue.splice(currentCommandIndex, 1)
-
-            return setTimeout(commandRunner, 100)
-        }
-
-        try {
-            await runCommand(cmd)
-                .catch(() => {
-                    console.log('Command fail: ' + cmd.key)
-
-                    currentCommandIndex++
-
-                    commandRunner()
-                })
-
-            console.log('Command success: ' + cmd.key)
-
-            local.commandQueue.splice(currentCommandIndex, 1)
-
-            commandRunner()
-        } catch(e) {
-            console.log(e)
-
-            currentCommandIndex++
-
-            return setTimeout(commandRunner, 100)
-        }
-    }
 
     commandRunner()
 }
