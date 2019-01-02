@@ -1,7 +1,7 @@
 export default (DB) => ({
     name: "Bitcoin",
     header: {
-        logo: "/Apps/Site/Projects/cryptoreviews/Assets/Other/images/logos/bitcoin.png"
+        logo: "/static/projects/cryptoreviews/img/logos/bitcoin.png"
     },
     intro: {
         stats: {

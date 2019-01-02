@@ -1,42 +1,44 @@
 <template>
-    <c-default-layout>
-        <div class="col-12">
-            <div class="section section--main">
-                <c-intro :name="data.name" :stats="data.intro.stats" :showIcon="true" />
-                <c-network-slider :items="data.network.items" />
-                <!-- <div class="network-slider">
-                    <div class="row">
-                        <div class="col-12 col-lg-3">
-                            <img src="https://via.placeholder.com/240x60" class="img-fluid"/>
-                        </div>
-                        <div class="col-12 col-lg-9">
-                            <c-swiper :options="sliderOptions">
-                                <c-slide v-for="i in 12" class="text-center">
-                                    <img src="https://via.placeholder.com/100x60" class="img-fluid"/>
-                                </c-slide>
-                            </c-swiper>
-                        </div>
+    <c-layout>
+        <c-header :logo="data.header" />
+
+        <div class="section section--main">
+            <c-intro :name="data.name" :stats="data.intro.stats" :showIcon="true" />
+            <c-network-slider :items="data.network.items" />
+            <!-- <div class="network-slider">
+                <div class="row">
+                    <div class="col-12 col-lg-3">
+                        <img src="https://via.placeholder.com/240x60" class="img-fluid"/>
                     </div>
-                </div> -->
-            </div>
-            
-            <c-history :content="data.history.content" :timeline="data.history.timeline" />
-
-            <img border="0" src="http://partners.etoro.com/B10521_A73660_TGet.aspx" />
-
-            <c-quick-links :social="data.quickLinks.social" :forums="data.quickLinks.forums" :other="data.quickLinks.other" />
-            <c-notifications :content="data.notifications.content" :alerts="data.notifications.alerts" :warnings="data.notifications.warnings" />
-            <c-compare :content="data.compare.content" :items="data.compare.items" />
-            <c-media :content="data.media.content" :items="data.media.items" />
-            <c-education :content="data.education.content" :books="data.education.books" />
-            <c-exchanges :content="data.exchanges.content" :items="data.exchanges.items" :spotlight="data.exchanges.spotlight" />
-            <c-etoro-block />
-            <c-market />
-            <c-software-wallets :content="data.softwareWallets.content" :items="data.softwareWallets.items" />
-            <c-hardware-wallets :content="data.hardwareWallets.content" :items="data.hardwareWallets.items" />
-            <c-faq :content="data.faq.content" :items="data.faq.items" />
+                    <div class="col-12 col-lg-9">
+                        <c-swiper :options="sliderOptions">
+                            <c-slide v-for="i in 12" class="text-center">
+                                <img src="https://via.placeholder.com/100x60" class="img-fluid"/>
+                            </c-slide>
+                        </c-swiper>
+                    </div>
+                </div>
+            </div> -->
         </div>
-    </c-default-layout>
+        
+        <c-history :content="data.history.content" :timeline="data.history.timeline" />
+
+        <img border="0" src="http://partners.etoro.com/B10521_A73660_TGet.aspx" />
+
+        <c-quick-links :social="data.quickLinks.social" :forums="data.quickLinks.forums" :other="data.quickLinks.other" />
+        <c-notifications :content="data.notifications.content" :alerts="data.notifications.alerts" :warnings="data.notifications.warnings" />
+        <c-compare :content="data.compare.content" :items="data.compare.items" />
+        <c-media :content="data.media.content" :items="data.media.items" />
+        <c-education :content="data.education.content" :books="data.education.books" />
+        <c-exchanges :content="data.exchanges.content" :items="data.exchanges.items" :spotlight="data.exchanges.spotlight" />
+        <c-etoro-block />
+        <c-market />
+        <c-software-wallets :content="data.softwareWallets.content" :items="data.softwareWallets.items" />
+        <c-hardware-wallets :content="data.hardwareWallets.content" :items="data.hardwareWallets.items" />
+        <c-faq :content="data.faq.content" :items="data.faq.items" />
+
+        <c-footer />
+    </c-layout>
 </template>
 
 <script>
@@ -62,7 +64,9 @@
 
     export default {
         components: {
-            'c-default-layout': (resolve) => require(['@/projects/cryptoreviews/ui/layouts/token/' + tokenName + '/index.vue'], resolve),
+            'c-layout': (resolve) => require(['@/projects/cryptoreviews/ui/layouts/token/' + tokenName + '/index.vue'], resolve),
+            'c-header': (resolve) => require(['@/projects/cryptoreviews/ui/components/header'], resolve),
+            'c-footer': (resolve) => require(['@/projects/cryptoreviews/ui/components/footer'], resolve),
             'c-intro': (resolve) => require(['@/projects/cryptoreviews/ui/components/intro'], resolve),
             'c-network-slider': (resolve) => require(['@/projects/cryptoreviews/ui/components/network-slider'], resolve),
             'c-history': (resolve) => require(['@/projects/cryptoreviews/ui/components/history'], resolve),
@@ -122,7 +126,7 @@
     }
 </script>
 
-<style>
+<style lang="scss">
     body {
         font-family: 'sofia-pro', sans-serif;
         font-weight: normal;
@@ -136,9 +140,9 @@
     #left-bg, #right-bg, #header-bg {
         display: none;
     }
-</style>
 
-<style lang="scss" scoped>
+
+
     .section {
         position: relative;
         width: 100%;
@@ -148,8 +152,7 @@
         border-radius: 4px;
         margin-bottom: 20px;
         background: #fff;
-        h1,
-        .h1 {
+        h1 {
             font-size: 5.2em;
             font-weight: 600;
         }
@@ -198,4 +201,7 @@
     .heading-title .title:before, .heading-left .title:before {
         background: #f9b707;
     }
+</style>
+
+<style lang="scss" scoped>
 </style>
