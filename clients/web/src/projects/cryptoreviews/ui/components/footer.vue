@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-5">
-                    <a class="logo mt-0 mb-20" href="https://readyblock.one"><img class="img-fluid" src="/Apps/Site/Projects/cryptoreviews/Assets/Other/images/rbo-logo-with-title-inverted.png" alt="" /> </a>
+                    <a class="logo mt-0 mb-20" href="https://readyblock.one"><img class="img-fluid" src="/static/projects/cryptoreviews/img/rbo-logo-with-title-inverted.png" alt="" /> </a>
                     <p class="font-white">The world is changing. Are you ready?</p>
                 </div>
                 <div class="col-sm-7">

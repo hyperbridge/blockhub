@@ -7,7 +7,7 @@
                         <div class="logo">
                             <a href="/"><img class="img-fluid" :src="props.logo" alt="" /></a>
                             <br />
-                            <div class="header-org">By <a href="https://readyblock.one"><img class="price-main-img" src="/Apps/Site/Projects/cryptoreviews/Assets/Other/images/rbo-logo-with-title.png" alt="" /></a></div>
+                            <div class="header-org">By <a href="https://readyblock.one"><img class="price-main-img" src="/static/projects/cryptoreviews/img/rbo-logo-with-title.png" alt="" /></a></div>
                         </div>
                         <nav>
                             <a id="resp-menu" class="responsive-menu" href="/"><i class="fa fa-reorder"></i> Menu</a>

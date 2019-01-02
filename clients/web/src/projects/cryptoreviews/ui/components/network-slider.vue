@@ -2,7 +2,7 @@
     <div class="network-slider">
         <div class="price-title">
             <h6>
-                <img class="price-main-img" src="https://bitcoin-btc.review/Apps/Site/Projects/cryptoreviews/Assets/Other/images/rbo-logo-with-title.png" alt=""><br>
+                <img class="price-main-img" src="/static/projects/cryptoreviews/img/rbo-logo-with-title.png" alt=""><br>
                 <div class="price-main-title">Review Network</div>
             </h6>
         </div>
@@ -22,7 +22,7 @@
                             <div class="owl-item cloned" style="width: 170px; margin-right: 30px;">
                                 <div class="item">
                                 <a class="media" href="https://readyblock.one/review/btc">
-                                    <img class="mr-2" src="https://bitcoin-btc.review/Apps/Site/Core/Assets/Tokens/btc.png" style="width:40px">
+                                    <img class="mr-2" src="/static/projects/cryptoreviews/img/tokens/btc.png" style="width:40px">
                                     <div class="media-body">
                                         <span class="font-white ">
                                             <small>

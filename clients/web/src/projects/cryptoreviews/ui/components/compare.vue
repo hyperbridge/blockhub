@@ -15,7 +15,7 @@
                     <div class="owl-carousel popup-gallery" data-nav-dots="true" data-nav-arrow="true" data-items="3" data-sm-items="3" data-lg-items="3" data-md-items="3" data-autoplay="false">
                         <div class="item" v-for="(item, index) in items" :key="index">
                             <div class="pricing">
-                                <span class="icon"><img :src="'/Apps/Site/Core/Assets/Tokens/' + item.symbol + '.png'" :style="{ width: '50px', marginTop: '-4px' }" /></span>
+                                <span class="icon"><img :src="'/static/projects/cryptoreviews/img/tokens/' + item.symbol + '.png'" :style="{ width: '50px', marginTop: '-4px' }" /></span>
                                 <div class="pricing-header">
                                     <h3 class="title">{{ item.symbol.toUpperCase() }}</h3>
                                     <span class="price-value">{{ item.name }}</span>
