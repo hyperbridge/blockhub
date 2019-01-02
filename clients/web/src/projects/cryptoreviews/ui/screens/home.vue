@@ -50,30 +50,33 @@
                                     <span class="text-orange" style="font-weight: inherit;">{{ data.name }}?</span>
                                 </h1>
                                 <div class="d-flex flex-column align-items-start">
-                                    <c-button href="#" size="lg" class="mb-4 mr-auto">
-                                        Sed eget felis ut magna
+                                    <c-button to="#/history" size="lg" class="mb-4 mr-auto">
+                                        <strong>History:</strong> how it all began
                                     </c-button>
-                                    <c-button href="#" size="lg" class="mb-4 mr-auto">
-                                        Donec porttitor magna in felis
+                                    <c-button href="#/quick" size="lg" class="mb-4 mr-auto">
+                                        <strong>Quick Links:</strong> find things quickly
                                     </c-button>
-                                    <c-button href="#" size="lg" class="mb-4 mr-auto">
-                                        Morbi malesuada
+                                    <c-button href="#/exchanges" size="lg" class="mb-4 mr-auto">
+                                        <strong>Exchanges:</strong> where to buy and sell
                                     </c-button>
-                                    <c-button href="#" size="lg" class="mb-4 mr-auto">
-                                        Phasellus ut ante eu mi laoreet eleifend
+                                    <c-button href="#/wallets" size="lg" class="mb-4 mr-auto">
+                                        <strong>Wallets:</strong> how to hold it
                                     </c-button>
-                                    <c-button href="#" size="lg" class="mb-4 mr-auto">
-                                        Maecenas dui turpis, imperdiet a consequat
+                                    <c-button href="#/media" size="lg" class="mb-4 mr-auto">
+                                        <strong>Media &amp; Education Centre:</strong> learn more through videos, books, etc.
+                                    </c-button>
+                                    <c-button href="#/faq" size="lg" class="mb-4 mr-auto">
+                                        <strong>FAQ:</strong> frequently asked questions
                                     </c-button>
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-12">
                                 <div class="coin-stats">
-                                    <div class="coin-stats__icon">
+                                    <div class="coin-stats__icon" v-if="showIcon">
                                         <img src="../../../../../static/img/icons/token-icon.png"/>
                                     </div>
                                     <div class="h2 font-weight-bold">
-                                        CoinName
+                                        {{ data.name }}
                                     </div>
                                     Stats
                                     <ul>
@@ -82,28 +85,28 @@
                                             <strong>
                                                 Released:
                                             </strong>
-                                            2015
+                                            {{ data.highlight.stats.released }}
                                         </li>
                                         <li>
                                             <i class="fas fa-info-circle"></i>
                                             <strong>
                                                 Ledger:
                                             </strong>
-                                            blockchain
+                                            {{ data.highlight.stats.ledger }}
                                         </li>
                                         <li>
                                             <i class="fas fa-info-circle"></i>
                                             <strong>
                                                 Architecture:
                                             </strong>
-                                            bitcoin
+                                            {{ data.highlight.stats.architecture }}
                                         </li>
                                         <li>
                                             <i class="fas fa-info-circle"></i>
                                             <strong>
                                                 Type:
                                             </strong>
-                                            currency
+                                            {{ data.highlight.stats.type }}
                                         </li>
                                     </ul>
                                 </div>
@@ -180,16 +183,9 @@
                     <div class="row justify-content-center">
                         <div class="col-12 col-lg-8">
                             <div class="heading-title mb-0">
-                                <h3 class="title tw-5 mb-20"><a href="#history">Nullam ultricies</a></h3>
-                                <p class="mb-30 text-center">
-                                    Nunc nec diam nibh. Cras id est vehicula, tempus eros vitae, sodales tellus. In euismod sem
-                                    tempor, sagittis purus vitae, rutrum arcu. Morbi placerat imperdiet ultricies. In
-                                    sollicitudin, arcu in auctor molestie, nisl ante finibus leo, ac sollicitudin quam sem eget
-                                    sapien. Nunc quis aliquet mi. Maecenas nec tristique sapien. Maecenas lobortis mi id libero
-                                    rutrum accumsan. Vestibulum dapibus urna non eleifend efficitur. Etiam eleifend velit at
-                                    mauris aliquam congue. Aliquam fringilla, nisi gravida iaculis tincidunt, felis lacus
-                                    molestie lacus, eget placerat massa massa ac urna. Curabitur nec varius erat, id scelerisque
-                                    nibh.
+                                <h3 class="title tw-5 mb-20"><a href="#history">History</a></h3>
+                                <p class="mb-30 text-center" v-html="data.history.content">
+                                    {{ data.history.content }}
                                 </p>
                             </div>
                         </div>
@@ -356,6 +352,7 @@
             
             return {
                 data: bitcoinData(DB),
+                showIcon: true,
                 sliderOptions: {
                     slidesPerView: 4,
                     spaceBetween: 15,
@@ -418,6 +415,14 @@
     .about {
         margin: 13% 0;
         padding: 0 20px;
+
+        .c-button {
+            font-weight: normal;
+
+            strong {
+                margin-right: 10px;
+            }
+        }
     }
 
     .coin-stats {
