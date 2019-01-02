@@ -1,36 +1,35 @@
 <template>
     <div class="game-library__item"
          :class="{'is-active': active}"
-         :style="{'background-image' : 'url(' + game.images.mediumTile + ')' }"
+         :style="{'background-image' : 'url(' + image + ')' }"
          @mouseover=" hovered=true "
          @mouseleave=" hovered=false;">
         <c-loading-bar-circle v-if="isLoading" />
         <div class="game-library__item-info"
              @mouseleave="showButtons = false">
             <div class="item-name">
-                {{ game.name }}
+                {{ name }}
             </div>
             <div class="item-action"
                  :class="{'active' : hovered }">
                 <div class="item-action__icons px-2">
-                    <span class="has-new">
+                    <c-button status="plain">
                         <i class="fas fa-cog"></i>
-                    </span>
-                    <span>
+                    </c-button>
+                    <c-button status="plain">
                         <i class="fas fa-camera"></i>
-                    </span>
-                    <span>
+                    </c-button>
+                    <c-button status="plain">
                         <i class="fas fa-star"></i>
-                    </span>
-                    <span>
+                    </c-button>
+                    <c-button status="plain">
                         <i class="fas fa-play"></i>
-                    </span>
+                    </c-button>
                 </div>
 
                 <c-button status="plain">
                     <i class="fas" :class="showButtons ? 'fa-chevron-up' : 'fa-chevron-down' " @click=" showButtons = !showButtons " ></i>
                 </c-button>
-
                 <!--Dropdown menu-->
                 <div hidden style="height: 20px; width: 20px;margin-right: -5px">
                     <c-dropdown :class="{'no-right-border' : shareList}" @click="activeMenu">
@@ -98,7 +97,7 @@
 <script>
     export default {
         name: 'game-library-item',
-        props: ['game', 'isLoading', 'online', 'favorites' ],
+        props: ['name', 'image', 'isLoading', 'online', 'favorites' ],
         data(){
             return{
                 shareList: false,
@@ -148,7 +147,7 @@
         &:hover{
             cursor: pointer;
             will-change: transform;
-            transform: perspective(300px) rotateX(0deg) rotateY(0deg) scale(1.03);
+            transform: perspective(300px) rotateX(0deg) rotateY(0deg) scale(1.01);
             box-shadow: 0 0 15px #0e86ca;
             transition: transform 200ms ease;
             z-index: 20;
@@ -171,7 +170,7 @@
         }
         div{
             padding: 7px;
-            border: 1px solid rgba(255, 255, 255, .2);
+            border: 1px solid rgba(255, 255, 255, .05);
             margin-bottom: 10px;
             border-radius: 3px;
             color: #d7daec;
@@ -210,26 +209,6 @@
             justify-content: space-between;
             align-items: center;
             background: #1C2032;
-            span {
-                margin: 0 10px 0 4px;
-                color: #C6C6D6;
-                font-size: 14px;
-                position: relative;
-                &.has-new{
-                    &:after{
-                        content: "";
-                        position: absolute;
-                        width: 5px;
-                        height: 5px;
-                        border-radius: 5px;
-                        background: #F75D5D;
-                    }
-                }
-                &:hover {
-                    color: #fff;
-                    cursor: pointer;
-                }
-            }
             height: 0;
             overflow: hidden;
             transition: all .3s ease;

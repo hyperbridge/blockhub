@@ -5688,7 +5688,7 @@ storiesOf('Games Library', module)
         template: `
                 <div class="row p-5" style="width: 1000px">
                     <div class="col-4">
-                        <c-game-library-card :game="game" />
+                        <c-game-library-card :name="game.name" :image="game.images.mediumTile" />
                     </div>
                 </div>
         `
