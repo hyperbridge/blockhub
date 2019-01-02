@@ -920,6 +920,11 @@ const router = new Router({
             ]
         },
         {
+            path: '/land',
+            name: 'Land',
+            component: (resolve) => require(['@/ui/screens/land'], resolve)
+        },
+        {
             path: '/marketplace',
             component: (resolve) => require(['@/ui/screens/marketplace'], resolve),
             children: [
