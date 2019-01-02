@@ -742,7 +742,7 @@
                     toAddress,
                     amount
                 }).then(() => {
-                    this.withdrawRequest.processing = false
+                    this.withdrawRequest = {...this.withdrawRequest, processing: false}
                 })
             },
             onSwipeLeft() {

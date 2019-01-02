@@ -160,7 +160,7 @@ export const promptPasswordRequest = async (data = {}) => {
 //     })
 // }
 
-export const transferTokenBatch = ({ batch, walletIndex }) => {
+export const transferTokenBatch = async ({ batch, walletIndex }) => {
     return new Promise(async (resolve, reject) => {
         const web3 = local.wallet.web3
         const fromWallet = await Wallet.create(local.passphrase, walletIndex)
@@ -216,7 +216,7 @@ export const transferTokenBatch = ({ batch, walletIndex }) => {
     })
 }
 
-export const transferTokens = ({ type, fromAddress, toAddress, amount }) => {
+export const transferTokens = async ({ type, fromAddress, toAddress, amount }) => {
     return new Promise(async (resolve, reject) => {
         const walletIndex = DB.application.config.data[0].profiles.find((profile) => fromAddress.toLowerCase() === profile.address.toLowerCase()).meta.walletIndex
         const web3 = local.wallet.web3
