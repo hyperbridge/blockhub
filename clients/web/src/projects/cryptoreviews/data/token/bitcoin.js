@@ -3,7 +3,7 @@ export default (DB) => ({
     header: {
         logo: "/Apps/Site/Projects/cryptoreviews/Assets/Other/images/logos/bitcoin.png"
     },
-    highlight: {
+    intro: {
         stats: {
             released: "2009",
             ledger: "blockchain",
@@ -11,7 +11,7 @@ export default (DB) => ({
             type: "currency"
         }
     },
-    tokens: {
+    network: {
         items: DB.tokens.find({
             'symbol': { '$in': ['btc', 'eth', 'xrp', 'bch', 'ltc'] }
         })
