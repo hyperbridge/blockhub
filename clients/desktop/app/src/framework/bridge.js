@@ -19,6 +19,7 @@ const config = require('../config')
 const local = {
     commandQueue: [],
     currentCommandIndex: 0,
+    commandTimeout: null,
     provider: null,
     requests: {},
     account: {
@@ -217,7 +218,7 @@ export const transferTokenBatch = ({ batch, walletIndex }) => {
 
 export const transferTokens = ({ type, fromAddress, toAddress, amount }) => {
     return new Promise(async (resolve, reject) => {
-        const walletIndex = DB.application.config.data[0].profiles.find((profile) => fromAddress.toLowerCase() === profile.address.toLowerCase()).id
+        const walletIndex = DB.application.config.data[0].profiles.find((profile) => fromAddress.toLowerCase() === profile.address.toLowerCase()).meta.walletIndex
         const web3 = local.wallet.web3
         const fromWallet = await Wallet.create(local.passphrase, walletIndex)
         
@@ -1916,7 +1917,7 @@ export const isCommandRunnable = (cmd) => {
     }
 }
 
-export const commandRunner = async () => {
+export const commandRunner = () => {
     //console.log('Command runner. Queue: ' + local.commandQueue.length + '. Index: ' + local.currentCommandIndex)
 
     // Take a break at the end of queue
@@ -1939,19 +1940,21 @@ export const commandRunner = async () => {
     try {
         let skipped = false
 
-        let timeout = setTimeout(() => {
+        local.commandTimeout = setTimeout(() => {
             console.log('Command taking too long. Moving on.')
 
             skipped = true
 
             local.commandQueue.splice(local.currentCommandIndex, 1)
 
-            setTimeout(commandRunner, 100)
-        }, 5000)
+            commandRunner()
+        }, 10 * 1000)
 
-        await runCommand(cmd)
+        runCommand(cmd)
             .catch(() => {
                 console.log('Command fail: ' + cmd.key)
+
+                clearTimeout(local.commandTimeout)
 
                 if (skipped) return
 
@@ -1959,22 +1962,23 @@ export const commandRunner = async () => {
 
                 commandRunner()
             })
+            .then(() => {
+                console.log('Command success: ' + cmd.key)
 
-        clearTimeout(timeout)
+                clearTimeout(local.commandTimeout)
 
-        if (skipped) return
+                if (skipped) return
 
-        console.log('Command success: ' + cmd.key)
+                local.commandQueue.splice(local.currentCommandIndex, 1)
 
-        local.commandQueue.splice(local.currentCommandIndex, 1)
-
-        commandRunner()
+                commandRunner()
+            })
     } catch (e) {
         console.log(e)
 
         local.currentCommandIndex++
 
-        return setTimeout(commandRunner, 100)
+        commandRunner()
     }
 }
 
