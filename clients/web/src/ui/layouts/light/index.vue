@@ -1,6 +1,9 @@
 <template>
-    <div class="main-block">
-        <slot />
+    <div class="layout">
+        <div class="layout__topdisplay"></div>
+        <div class="layout__content">
+            <slot />
+        </div>
     </div>
 </template>
 
@@ -25,11 +28,25 @@
 </script>
 
 <style lang="scss" scoped>
-    .main-block{
-        background: url("https://bitcoin-btc.review/Apps/Site/Projects/cryptoreviews/Assets/Other/images/banner-header.png") top center no-repeat #e0e6ea;
-        background-size: 100% auto;
+    .layout {
         padding: 180px 30px 50px;
         margin: -30px;
         min-height: 100vh;
+    }
+
+    .layout__topdisplay {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        display: inline-block;
+        width: 100vw;
+        height: 1000px;
+        background: url("https://bitcoin-btc.review/Apps/Site/Projects/cryptoreviews/Assets/Other/images/banner-header.png") top center no-repeat #e0e6ea;
+        background-size: contain;
+    }
+
+    .layout__content {
+        max-width: 1200px;
+        margin: 0 auto;
     }
 </style>
