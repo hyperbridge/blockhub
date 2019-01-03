@@ -77,7 +77,7 @@
                 <i :class="`fas fa-${previewMode ? 'copy' : 'redo-alt'}`"></i>
             </button>
         </div>
-        <div v-if="previewMode">
+        <div v-if="previewMode && !user.address">
             <c-button status="dark" size="small" @click="generateAddress(user.id)">Generate Address</c-button>
         </div>
     </div>

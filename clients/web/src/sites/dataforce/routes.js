@@ -2,7 +2,7 @@ export default [
     {
         path: '/',
         name: 'Home',
-        component: (resolve) => require(['@/projects/cryptoreviews/ui/screens/home'], resolve)
+        component: (resolve) => require(['@/ui/screens/home'], resolve)
     },
     {
         path: "*",

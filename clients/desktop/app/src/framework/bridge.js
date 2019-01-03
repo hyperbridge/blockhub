@@ -209,7 +209,7 @@ export const transferTokenBatch = async ({ batch, walletIndex }) => {
             //TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originalProvider)
             //TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originalProvider)
 
-            console.log("Transfer started. Destination: " + destinationAddress)
+            console.log("Transfer started. Destination: " + toAddress)
         }
 
         resolve()
@@ -1918,7 +1918,7 @@ export const isCommandRunnable = (cmd) => {
 }
 
 export const commandRunner = () => {
-    //console.log('Command runner. Queue: ' + local.commandQueue.length + '. Index: ' + local.currentCommandIndex)
+    console.log('Command runner. Queue: ' + local.commandQueue.length + '. Index: ' + local.currentCommandIndex)
 
     // Take a break at the end of queue
     if (local.currentCommandIndex === local.commandQueue.length) {
@@ -1926,7 +1926,7 @@ export const commandRunner = () => {
 
         //console.log('[BlockHub] Command runner taking a break with ' + local.commandQueue.length + ' commands in queue')
 
-        return setTimeout(commandRunner, 100)
+        return setTimeout(commandRunner, 1000)
     }
 
     const cmd = local.commandQueue[local.currentCommandIndex]
@@ -1934,7 +1934,7 @@ export const commandRunner = () => {
     if (!cmd) {
         local.commandQueue.splice(local.currentCommandIndex, 1)
 
-        return setTimeout(commandRunner, 100)
+        return setTimeout(commandRunner, 1000)
     }
 
     try {
@@ -1945,10 +1945,10 @@ export const commandRunner = () => {
 
             skipped = true
 
-            local.commandQueue.splice(local.currentCommandIndex, 1)
-
             commandRunner()
         }, 10 * 1000)
+
+        local.commandQueue.splice(local.currentCommandIndex, 1)
 
         runCommand(cmd)
             .catch(() => {
@@ -1958,9 +1958,11 @@ export const commandRunner = () => {
 
                 if (skipped) return
 
-                local.currentCommandIndex++
+                queueCommand(cmd)
 
-                commandRunner()
+                setTimeout(commandRunner, 1000)
+
+                return Promise.reject()
             })
             .then(() => {
                 console.log('Command success: ' + cmd.key)
@@ -1968,8 +1970,6 @@ export const commandRunner = () => {
                 clearTimeout(local.commandTimeout)
 
                 if (skipped) return
-
-                local.commandQueue.splice(local.currentCommandIndex, 1)
 
                 commandRunner()
             })
