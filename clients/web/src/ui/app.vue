@@ -1,8 +1,10 @@
 <template>
     <div id="app" :class="{ 'disable-animations': !disableAnimations }">
+
         <c-render-condition :type="renderCondition">
             <router-view></router-view>
         </c-render-condition>
+
         <div class="fixed-panel invert" id="fixed-panel">
             <div class="fixed-panel__content scroll">
                 <h5 v-if="developerMode" v-darklaunch="'REALMS'">Your Realms</h5>
@@ -73,17 +75,14 @@
 
                 <hr v-if="developerMode" />
 
-                <c-button status="none" v-if="signedIn" to="/account">
-                    <span class="icon fa fa-user"></span>
-                    <span class="text">Account</span>
+                <c-button status="plain" tag="button" to="/account" class="text-left" size="md" icon="user" v-if="signedIn">
+                    Account
                 </c-button>
-                <c-button status="none" v-if="signedIn" to="/account/profiles">
-                    <span class="icon fa fa-id-card"></span>
-                    <span class="text">Profiles</span>
+                <c-button status="plain" tag="button" to="/account/profiles" class="text-left" size="md" icon="id-card" v-if="signedIn">
+                    Profiles
                 </c-button>
-                <c-button status="none" v-if="signedIn" to="/account/wallets" v-darklaunch="'WALLETS'">
-                    <span class="icon fa fa-credit-card"></span>
-                    <span class="text">Wallets</span>
+                <c-button status="plain" tag="button" to="/account/wallets" class="text-left" size="md" icon="credit-card" v-if="signedIn" v-darklaunch="'WALLETS'">
+                    Wallets
                 </c-button>
 
                 <hr v-if="signedIn" />
@@ -131,6 +130,7 @@
                         <c-button status="dark" to="/help/0/article/developer-program" iconHide>Learn More</c-button>
                     </div>
                 </div>
+
                 <div class="d-flex justify-content-start">
                     <div class="dev-block become_dev active" v-if="!developerMode">
                         <h5><i class="fas fa-code"></i>Become Developer</h5>
@@ -216,7 +216,8 @@
         name: 'app',
         props: ['data'],
         components: {
-            'c-render-condition': (resolve) => require(['@/ui/components/render-condition'], resolve)
+            'c-render-condition': (resolve) => require(['@/ui/components/render-condition'], resolve),
+            'c-sidebar-menu-link': (resolve) => require(['@/ui/components/sidebar-menu/menu_item'], resolve)
         },
         updated() {
             $('body').off('click').on('click', "[data-action='fixedpanel-toggle']", (e) => {
