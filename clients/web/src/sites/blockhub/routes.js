@@ -1020,6 +1020,11 @@ export default [
         component: (resolve) => require(['@/ui/screens/tests'], resolve)
     },
     {
+        path: '/purchase-receipt',
+        name: 'Purchase Receipt',
+        component: (resolve) => require(['@/ui/screens/purchase-receipt'], resolve)
+    },
+    {
         path: '/download/desktop/mac',
         beforeEnter(to, from, next) {
             window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/BlockHub-${appVersion}.dmg`
