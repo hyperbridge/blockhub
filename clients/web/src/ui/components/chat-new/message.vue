@@ -28,6 +28,11 @@
         },
         components:{
             'c-emoji': (resolve) => require(['@/ui/components/emoji'], resolve),
+        },
+        computed: {
+            timeAgo() {
+                // return this.time.fromNow();
+            }
         }
     }
 </script>
@@ -62,6 +67,7 @@
         span {
             opacity: .6;
             margin-left: 10px;
+            font-size: 12px;
         }
     }
 </style>
