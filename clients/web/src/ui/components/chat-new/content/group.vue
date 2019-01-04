@@ -4,7 +4,7 @@
             <div class="msgs-list">
                 <slot name="messages" />
             </div>
-            <c-chat-answer-field />
+            <c-chat-answer-field :user="currentUser" />
         </div>
         <div class="chat__user-list">
             <slot name="users" />
@@ -14,6 +14,9 @@
 
 <script>
     export default {
+        props:{
+            currentUser: Object
+        },
         components:{
             'c-chat-user': (resolve) => require(['@/ui/components/chat-new/user'], resolve),
             'c-chat-answer-field': (resolve) => require(['@/ui/components/chat-new/answer-field/field'], resolve)

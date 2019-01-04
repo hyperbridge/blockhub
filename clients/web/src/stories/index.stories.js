@@ -5457,8 +5457,9 @@ storiesOf('Chat', module)
                             <template slot="sidebar">
                                 <c-chat-group-sidebar />
                             </template>
-                            <c-chat-group>
+                            <c-chat-group :currentUser="users[2]">
                                 <template slot="messages">
+                                {{ users[2] }}
                                     <c-chat-message v-for="msg in messages" :text="msg.text" :user="users[msg.user]" />
                                 </template>
                                 <template slot="users">
