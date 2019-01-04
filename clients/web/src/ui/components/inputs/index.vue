@@ -37,5 +37,6 @@
         user-select: none;
         box-shadow: none;
         outline: none;
+        width: 100%;
     }
 </style>

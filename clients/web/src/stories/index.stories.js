@@ -5719,6 +5719,32 @@ storiesOf('Quick Launch', module)
                 </div>
         `
     }))
+
+
+storiesOf('Giphy', module)
+    .add('default', () => ({
+        components:{
+            'c-giphy': (resolve) => require(['@/ui/components/giphy'], resolve),
+        },
+        data(){
+            return{
+                game:{
+                    id: '2',
+                    images:{
+                        mediumTile: 'https://kor.ill.in.ua/m/610x385/1848785.jpg'
+                    },
+                    name: 'Dota 2',
+                }
+            }
+        },
+        template: `
+                <div class="row p-5" style="width: 400px">
+                    <div class="col-12">
+                        <c-giphy class="w-100" />
+                    </div>
+                </div>
+        `
+    }))
 /*
      Dynamic import - test version
 
