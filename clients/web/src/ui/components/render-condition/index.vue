@@ -6,7 +6,12 @@
 
 <script>
     export default {
-        props: ['type'],
+        props: {
+            type: {
+                type: String,
+                validator: (val) => ['initialized', 'authenticated', 'user'].includes(val)
+            }
+        },
         components: {
         },
         data() {

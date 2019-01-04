@@ -592,6 +592,9 @@ export default [
         path: '/projects',
         name: 'Crowdfunds',
         component: (resolve) => require(['@/ui/screens/projects'], resolve),
+        meta: {
+            renderCondition: 'authenticated'
+        },
         breadcrumb: [
             { title: 'Home' },
             { title: 'Crowdfunds' }

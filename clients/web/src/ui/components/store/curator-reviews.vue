@@ -1,7 +1,7 @@
 <template>
     <div class="curator-reviews-wrapper">
         <c-swiper v-if="reviews.length" :options="sliderOptions">
-            <c-slide v-for="(review, index) in reviews" :key="index">
+            <c-slide v-for="(review, index) in reviews" :key="index" ref="slider">
                 <c-curator-review :review="review" />
             </c-slide>
         </c-swiper>
@@ -26,13 +26,13 @@
                 type: Array,
                 require: true
             },
-            maxPerView:{
+            maxPerView: {
                 type: Number,
                 default: 3
             }
         },
-        data(){
-            return{
+        data() {
+            return {
                 sliderOptions: {
                     slidesPerView: this.maxPerView,
                     spaceBetween: 15,
@@ -48,9 +48,9 @@
                 }
             },
         },
-        computed:{
-            pr_slider() {
-                return this.$refs.pr_slider.swiper;
+        computed: {
+            slider() {
+                return this.$refs.slider.swiper;
             },
         }
     }

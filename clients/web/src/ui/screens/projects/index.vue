@@ -27,7 +27,8 @@
                 name="Browse All Projects"
             />
             <div class="row">
-                <c-loading :enabled="!projects.length" />
+                <c-loading :enabled="loading" />
+                <p v-if="!projects.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
                 <c-project-card
                     class="p-2 col-3"
                     :description="project.description" 
@@ -38,6 +39,7 @@
                     :parentImage="project.product && project.product.meta && project.product.meta.images.mediumTile"
                     :id="project.id"
                     v-for="(project, index) in projects" :key="index"
+                    v-if="projects.length"
                 />
             </div>
         </c-block>
@@ -49,6 +51,11 @@ export default {
     components: {
         'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
     },
+    data() {
+        return {
+            loading: true
+        }
+    },
     created() {
         this.$store.dispatch('projects/find', {
             query: {
@@ -57,12 +64,13 @@ export default {
                 },
                 $limit: 25
             }
+        }).then(() => {
+            this.loading = false
         })
     },
     computed: {
         projects() {
-            return this.$store.getters['projects/list'] // Object.values(this.$store.state.funding.projects)//this.$store.getters['projects/list']
-                //.filter(trx => trx.you.id == this.profileId);
+            return this.$store.getters['projects/list']
         },
         list() {
             const result = []

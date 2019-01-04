@@ -6,11 +6,11 @@
             :name="title"
             :showArrows="showArrowsState(products, maxPerView)"
             :showBackground="true"
-            @prevClick="pr_slider.slidePrev()"
-            @nextClick="pr_slider.slideNext()"
+            @prevClick="slider.slidePrev()"
+            @nextClick="slider.slideNext()"
         />
 
-        <c-swiper :options="sliderOptions" ref="pr_slider">
+        <c-swiper :options="sliderOptions" ref="slider">
             <c-slide v-for="(product, index) in products" :key="index">
                 <c-product-card-dynamic class="m-0" :product="product" v-if="dynamic" />
                 <c-product-card class="m-0" :product="product" v-else />
@@ -22,13 +22,11 @@
 
 <script>
 import 'swiper/dist/css/swiper.css'
-
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 export default {
     name: 'product-slider',
     components:{
-        'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-product-card': (resolve) => require(['@/ui/components/store/product-card'], resolve),
         'c-product-card-dynamic': (resolve) => require(['@/ui/components/store/product-card-dynamic'], resolve),
         'c-swiper': swiper,
@@ -41,13 +39,13 @@ export default {
             type: Number,
             default: 3
         },
-        dynamic:{
+        dynamic: {
             type: Boolean,
             default: true
         }
     },
-    data(){
-        return{
+    data() {
+        return {
             sliderOptions: {
                 slidesPerView: this.maxPerView,
                 spaceBetween: 15,
@@ -60,7 +58,7 @@ export default {
             },
         }
     },
-    methods:{
+    methods: {
         showArrowsState(el, count) {
             if ( el.length > count) {
                 return true
@@ -69,30 +67,30 @@ export default {
             }
         },
     },
-    computed:{
-        pr_slider() {
-            return this.$refs.pr_slider.swiper;
+    computed: {
+        slider() {
+            return this.$refs.slider.swiper
         },
     }
 }
 </script>
 
 <style lang="scss" scoped>
-    .block__content{
+    .block__content {
         padding: 0;
     }
-    .swiper-container{
+    .swiper-container {
         padding: 20px 15px;
         margin: -15px;
     }
-    .swiper-slide{
+    .swiper-slide {
         height: auto;
     }
-    .product-grid__item{
+    .product-grid__item {
         height: 100%;
     }
     @media (max-width: 768px) {
-        .swiper-container{
+        .swiper-container {
             margin: 0;
             padding: 0;
         }
