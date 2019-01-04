@@ -5728,19 +5728,22 @@ storiesOf('Giphy', module)
         },
         data(){
             return{
-                game:{
-                    id: '2',
-                    images:{
-                        mediumTile: 'https://kor.ill.in.ua/m/610x385/1848785.jpg'
-                    },
-                    name: 'Dota 2',
-                }
+                gif: ''
+            }
+        },
+        methods:{
+            setGif(value){
+                this.gif = value
             }
         },
         template: `
                 <div class="row p-5" style="width: 400px">
                     <div class="col-12">
-                        <c-giphy class="w-100" />
+                        <img :src="gif" />
+                        <hr />
+                    </div>
+                    <div class="col-12">
+                        <c-giphy class="w-100" @choose="setGif" />
                     </div>
                 </div>
         `
