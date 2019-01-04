@@ -180,7 +180,8 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-right: 5px;
+            margin-right: 8px;
+            min-width: 20px;
             width: auto;
             height: auto;
         }
