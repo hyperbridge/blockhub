@@ -5475,6 +5475,7 @@ storiesOf('Chat', module)
                                 </template>
                             </c-chat-group>
                         </c-chat-base>
+                        <hr />
                     </div>
                     <div class="col-12" >
                         <h3 class="text-white">Private messages</h3>
@@ -5483,6 +5484,7 @@ storiesOf('Chat', module)
                                 <c-chat-message v-for="msg in messages" :text="msg.text" :time="msg.time" :user="users[msg.user]" />
                             </c-chat-private>
                         </c-chat-base>
+                        <hr />
                     </div>
                     <div class="col-12" >
                         <h3 class="text-white">New group(create/join)</h3>
@@ -5493,6 +5495,7 @@ storiesOf('Chat', module)
                     <div class="col-12">
                         <h3 class="text-white">Friends list</h3>
                         <c-chat-friends-list />
+                        <hr />
                     </div>
                 </div>`
     }))
