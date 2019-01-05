@@ -1,8 +1,24 @@
 <template>
-    <div class="scrollable-content__wrapper--scroll">
+    <div class="scrollable-content__wrapper--scroll" ref="scrollList">
         <slot />
     </div>
 </template>
+
+<script>
+    export default {
+        methods: {
+            _scrollDown() {
+                this.$refs.scrollList.scrollTop = this.$refs.scrollList.scrollHeight
+            }
+        },
+        mounted () {
+            this._scrollDown()
+        },
+        updated () {
+            this.$nextTick(this._scrollDown())
+        }
+    }
+</script>
 
 <style lang="scss" scoped>
 
