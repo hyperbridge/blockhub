@@ -44,6 +44,9 @@
         align-items: flex-start;
         color: #fff;
         margin: 0 0 20px 0;
+        &:last-child{
+            margin-bottom: 0;
+        }
     }
     .chat-message__avatar {
         width: 40px;
