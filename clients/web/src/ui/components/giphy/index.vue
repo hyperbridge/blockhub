@@ -8,7 +8,7 @@
         </div>
         <div class="c-giphy__list" v-if="gifs.length">
             <div class="c-giphy__list-scroll">
-                <img v-for="gif in gifs" :src="gif" :key="gif.id">
+                <img v-for="gif in gifs" :src="gif" :key="gif.id" @click="choseGif(gif)">
             </div>
         </div>
     </div>
@@ -51,6 +51,9 @@
                 this.gifs = json.data.map(gif => gif.id).map(gifId => {
                     return `https://media.giphy.com/media/${gifId}/giphy.gif`;
                 });
+            },
+            choseGif(gif){
+                this.$emit('choose', gif)
             }
         }
     }
@@ -81,6 +84,9 @@
             margin-bottom: 5px;
             &:last-child{
                 margin-bottom: 0;
+            }
+            &:hover{
+                cursor: pointer;
             }
         }
     }
