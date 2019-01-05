@@ -1,26 +1,80 @@
 <template>
-    <div class="scrollable-content__wrapper--scroll" ref="scrollList">
-        <slot />
+    <div class="scrollable-content">
+        <div class="scrollable-content__wrapper--scroll" ref="scrollList">
+            <slot />
+        </div>
+        <transition name="fade">
+            <div class="scrollable-content__scroll-btn" @click="_scrollDown" v-if="scrollBottom">
+                <i class="fas fa-angle-down"></i> Most Recent Messages
+            </div>
+        </transition>
     </div>
 </template>
 
 <script>
     export default {
+        data(){
+            return{
+                scrollBottom: false
+            }
+        },
         methods: {
             _scrollDown() {
                 this.$refs.scrollList.scrollTop = this.$refs.scrollList.scrollHeight
-            }
+            },
+            checkScrollButton() {
+                if ( this.$refs.scrollList.scrollHeight - this.$refs.scrollList.clientHeight > this.$refs.scrollList.scrollTop ){
+                    this.scrollBottom = true
+                } else {
+                    this.scrollBottom = false
+                }
+            },
         },
         mounted () {
-            this._scrollDown()
+            this._scrollDown();
+            $(this.$refs.scrollList).scroll(() => {
+                this.checkScrollButton()
+            })
         },
         updated () {
-            this.$nextTick(this._scrollDown())
+            this.$nextTick(() => {
+                this._scrollDown()
+            })
         }
     }
 </script>
 
 <style lang="scss" scoped>
+
+    .scrollable-content{
+        height: 100%;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .scrollable-content__scroll-btn{
+        position: absolute;
+        bottom: 0px;
+        right: 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: 12px;
+        padding: 1px 5px;
+        border-radius: 3px;
+        background: #00aeff;
+        display: flex;
+        align-items: center;
+        opacity: .9;
+        i{
+            margin-right: 5px;
+            font-size: 16px;
+        }
+        &:hover{
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
 
     .scrollable-content__wrapper--scroll{
         height: 100%;
@@ -60,16 +114,16 @@
         border: none;
     }
     .scrollable-content__wrapper--scroll::-webkit-scrollbar-thumb:hover {
-        background-color: #676461;
+        background-color: #00aeff;
     }
     .scrollable-content__wrapper--scroll::-webkit-scrollbar-button {
-        background-color: #575552;
+        background-color: #00aeff;
         border-radius: 2px;
         background-position: center;
         background-repeat: no-repeat;
     }
     .scrollable-content__wrapper--scroll::-webkit-scrollbar-button:hover {
-        background-color: #676461;
+        background-color: #00aeff;
     }
     .scrollable-content__wrapper--scroll::-webkit-scrollbar-button:vertical:decrement {
         background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAFCAYAAACXU8ZrAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAD9JREFUeNpi+P//PwMyTk6I+48uxssabfis4//7+PqDaWRxJnQFIICukAldAQwgK2QEuQFdATLYsnkjA0CAAQCJHDCKKVQLaAAAAABJRU5ErkJggg==);
