@@ -43,7 +43,7 @@
         width: 100%;
         align-items: flex-start;
         color: #fff;
-        padding: 10px 0;
+        margin: 0 0 20px 0;
     }
     .chat-message__avatar {
         width: 40px;
