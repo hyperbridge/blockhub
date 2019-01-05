@@ -8,25 +8,38 @@ const appVersion = '0.8.1'
 
 
 const sites = {
-    'default': { routes: require('../projects/blockhub/routes').default },
-    'localhost': { routes: require('../projects/blockhub/routes').default },
-    'blockhub.gg': { routes: require('../projects/blockhub/routes').default },
-    'thor.gg': { routes: require('../projects/thor/routes').default },
-    'readyblock.one': { routes: require('../projects/readyblockone/routes').default },
-    'in5mins.com': { routes: require('../projects/in5mins/routes').default },
-    'crypto.in5mins.com': { routes: require('../projects/in5mins/routes').default },
-    'adult.in5mins.com': { routes: require('../projects/in5mins/routes').default },
-    'gaming.in5mins.com': { routes: require('../projects/in5mins/routes').default },
-    'health.in5mins.com': { routes: require('../projects/in5mins/routes').default },
-    'shopping.in5mins.com': { routes: require('../projects/in5mins/routes').default },
-    'tech.in5mins.com': { routes: require('../projects/in5mins/routes').default },
-    'bitcoin-btc.review': { routes: require('../projects/cryptoreviews/routes').default },
-    'ethereum-eth.review': { routes: require('../projects/cryptoreviews/routes').default },
-    'ripple-xrp.review': { routes: require('../projects/cryptoreviews/routes').default },
-    'litecoin-ltc.review': { routes: require('../projects/cryptoreviews/routes').default },
-    'aelf-elf.review': { routes: require('../projects/cryptoreviews/routes').default },
-    'aion-token.review': { routes: require('../projects/cryptoreviews/routes').default }
+    'default': { routes: require('../sites/blockhub/routes').default },
+    'localhost': { routes: require('../sites/blockhub/routes').default },
+    'blockhub.gg': { routes: require('../sites/blockhub/routes').default }, // rebrand game platform
+    'thor.gg': { routes: require('../sites/thor/routes').default }, // rebrand game platform
+    'gamedelta.net': { routes: require('../sites/thor/routes').default }, // rebrand game platform
+    'realmofdiablo.com': { routes: require('../sites/realmofdiablo/routes').default }, // defaults to realm screen with Diablo realm - game series landing
+    'skyward.gg': { routes: require('../sites/skyward/routes').default }, // defaults to realm screen with Skyward realm - game studio landing
+    'hackatron.rocks': { routes: require('../sites/hackatron/routes').default }, // defaults to play screen for Hackatron game - game landing
+    'gamemask.io': { routes: require('../sites/gamemask/routes').default }, // defaults to token wallet functionality
+    'gethbx.com': { routes: require('../sites/gethbx/routes').default }, // defaults to airdrop claim screen
+    'hyperbridge.xyz': { routes: require('../sites/hyperbridge/routes').default }, // defaults to profile screen with profile ID
+    'dataforce.io': { routes: require('../sites/dataforce/routes').default }, // defaults to data network info
+    'readyblock.one': { routes: require('../sites/readyblockone/routes').default }, // other
+    'in5mins.com': { routes: require('../sites/in5mins/routes').default }, // other
+    'crypto.in5mins.com': { routes: require('../sites/in5mins/routes').default }, // other
+    'gaming.in5mins.com': { routes: require('../sites/in5mins/routes').default }, // other
+    'health.in5mins.com': { routes: require('../sites/in5mins/routes').default }, // other
+    'shopping.in5mins.com': { routes: require('../sites/in5mins/routes').default }, // other
+    'tech.in5mins.com': { routes: require('../sites/in5mins/routes').default }, // other
+    'bitcoin-btc.review': { routes: require('../sites/cryptoreviews/routes').default }, // other
+    'ethereum-eth.review': { routes: require('../sites/cryptoreviews/routes').default }, // other
+    'ripple-xrp.review': { routes: require('../sites/cryptoreviews/routes').default }, // other
+    'litecoin-ltc.review': { routes: require('../sites/cryptoreviews/routes').default }, // other
+    'aelf-elf.review': { routes: require('../sites/cryptoreviews/routes').default }, // other
+    'aion-token.review': { routes: require('../sites/cryptoreviews/routes').default }, // other
+    'coding.coach': { routes: require('../sites/codingcoach/routes').default }, // other
+    'yorana.global': { routes: require('../sites/yorana/routes').default }, // other
+    'tokentaku.com': { routes: require('../sites/tokentaku/routes').default }, // other
+    'brickbrotherhood.com': { routes: require('../sites/brickbrotherhood/routes').default }, // other
+    // TODO: if not found, render realm screen and assume its in realm DB with a host
 }
+
 
 const getRoutes = (uri) => {
     // Sanitize the host

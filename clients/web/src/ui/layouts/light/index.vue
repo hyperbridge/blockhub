@@ -41,7 +41,6 @@
         display: inline-block;
         width: 100vw;
         height: 1000px;
-        background: url("https://bitcoin-btc.review/Apps/Site/Projects/cryptoreviews/Assets/Other/images/banner-header.png") top center no-repeat #e0e6ea;
         background-size: contain;
     }
 

@@ -3,7 +3,7 @@
         <div class="row justify-content-center margin-bottom-50">
             <div class="col-12 col-md-4 col-lg-3">
                 <c-topic-item
-                    :link="`#/community/forums`"
+                    :to="`/community/forums`"
                     size="lg"
                     icon="users"
                     class="padding-10">
@@ -12,7 +12,7 @@
             </div>
             <div class="col-12 col-md-4 col-lg-3">
                 <c-topic-item
-                    :link="`#/projects`"
+                    :to="`/projects`"
                     icon="hand-holding-heart"
                     size="lg"
                     class="padding-10">

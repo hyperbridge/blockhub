@@ -6,11 +6,11 @@
             :name="title"
             :showArrows="showArrowsState(products, maxPerView)"
             :showBackground="true"
-            @prevClick="pr_slider.slidePrev()"
-            @nextClick="pr_slider.slideNext()"
+            @prevClick="slider.slidePrev()"
+            @nextClick="slider.slideNext()"
         />
 
-        <c-swiper :options="sliderOptions" ref="pr_slider">
+        <c-swiper :options="sliderOptions" ref="slider">
             <slot />
         </c-swiper>
     </c-block>
@@ -23,7 +23,7 @@
 
     export default {
         name: 'product-slider',
-        components:{
+        components: {
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide,
@@ -45,18 +45,18 @@
                 },
             }
         },
-        methods:{
+        methods: {
             showArrowsState(el, count) {
-                if ( el.length > count) {
+                if (el.length > count) {
                     return true
                 } else {
                     return false
                 }
             },
         },
-        computed:{
-            pr_slider() {
-                return this.$refs.pr_slider.swiper;
+        computed: {
+            slider() {
+                return this.$refs.slider.swiper;
             },
         }
     }

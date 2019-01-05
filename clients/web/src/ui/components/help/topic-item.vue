@@ -1,22 +1,22 @@
 <template>
     <div class="topic-list-item" :class="['block-size-' + size]">
-        <a :href="link">
+        <c-button status="none" :href="link" :to="to">
             <i :class="['fas fa-' + icon ]"></i>
             <slot />
-        </a>
+        </c-button>
     </div>
 </template>
 
 <script>
     export default {
         name: 'topic-list-item',
-        props:['link', 'icon', 'size']
+        props: ['link', 'to', 'icon', 'size']
     }
 </script>
 
 <style lang="scss" scoped>
     .topic-list-item{
-        a{
+        .c-button {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -40,7 +40,7 @@
             }
         }
         &.block-size-lg{
-            a{
+            .c-button{
                 font-size: 18px;
                 i{
                     font-size: 32px;

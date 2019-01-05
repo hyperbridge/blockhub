@@ -29,6 +29,7 @@ export const onException = (err) => {
         return
     }
 
+    DesktopBridge.clearLastCommand()
     DesktopBridge.sendCommand('systemError', err.toString().slice(0, 150))
 }
 
