@@ -5733,6 +5733,25 @@ storiesOf('Quick Launch', module)
     }))
 
 
+storiesOf('Global Search', module)
+    .add('default', () => ({
+        components:{
+            'c-global-search': (resolve) => require(['@/ui/components/global-search'], resolve),
+        },
+        data(){
+            return{
+            }
+        },
+        template: `
+                <div class="row p-5" style="width: 1000px">
+                    <div class="col-7">
+                        <c-global-search />
+                    </div>
+                </div>
+        `
+    }))
+
+
 storiesOf('Giphy', module)
     .add('default', () => ({
         components:{
