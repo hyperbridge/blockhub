@@ -87,7 +87,7 @@
 
 <style lang="scss">
     .c-quick-launch {
-        background: rgba(0, 0, 0, .2);
+        /*background: rgba(0, 0, 0, .2);*/
         .c-input {
             background: transparent  !important;
             border: 0 none !important;
