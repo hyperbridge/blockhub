@@ -250,23 +250,35 @@ export const transferTokens = async ({ type, fromAddress, toAddress, amount }) =
             await fromWalletHolder.transfer(toAddress, toAmount, {
                 from: fromWallet.address,
                 gasPrice: 8e9
-            }).then(() => {
-                console.log("Transfer complete. Destination: " + toAddress)
             }).catch((e) => {
                 console.log("Error occurred during transfer: ", e)
-            })
 
-            await web3.eth.getTransactionCountPromise(fromAddress)
+                return reject("Error occurred during transfer: " + e)
+            })
         } else if (type === 'ETH') {
-            
+            const toAmount = web3._extend.utils.toWei(amount, "ether") 
+
+            await fromWallet.web3.eth.sendTransactionPromise({
+                from: fromAddress,
+                to: toAddress,
+                value: toAmount,
+                //gasPrice: web3._extend.utils.toWei('8', 'gwei')
+            }).catch((e) => {
+                console.log("Error occurred during transfer: ", e)
+
+                return reject("Error occurred during transfer: " + e)
+            })
         }
+
+        console.log("Transfer complete. Destination: " + toAddress)
+
+        await web3.eth.getTransactionCountPromise(fromAddress)
+
+        resolve()
 
         //TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originalProvider)
         //TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originalProvider)
         
-        console.log("Transfer started. Destination: " + toAddress)
-
-        resolve()
     })
 }
 
