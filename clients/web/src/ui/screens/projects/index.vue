@@ -27,8 +27,8 @@
                 name="Browse All Projects"
             />
             <div class="row">
-                <c-loading :enabled="loading" />
-                <p v-if="!projects.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
+                <c-loading :enabled="loading" size="lg" />
+                <p v-if="!loading && !projects.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
                 <c-project-card
                     class="p-2 col-3"
                     :description="project.description" 

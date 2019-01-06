@@ -1,10 +1,10 @@
 <template>
-    <c-layout navigationKey="project" :showRightPanel="false" :breadcrumbLinks="breadcrumbLinks" class="project-single-page">
+    <c-layout navigationKey="project" :showLeftPanel="false" :showRightPanel="false" :breadcrumbLinks="breadcrumbLinks" class="project-single-page">
         <div class="row" v-if="!project">
             <!-- <div class="col-12">
                 Project not found
             </div> -->
-            <c-loading :enabled="!project" />
+            <c-loading :enabled="!project" size="lg" />
         </div>
         <div class="row" v-if="project">
             <div class="col-12">
@@ -119,7 +119,7 @@
                     Menu
                 </c-button>
                 <div class="collapse show project_nav" id="project_nav">
-                    <ul class="nav nav-tabs margin-bottom-40 justify-content-between">
+                    <ul class="nav nav-tabs margin-bottom-40">
                         <li class="nav-item" @click="section='overview'">
                             <router-link :to="`/project/${project.id}`" class="nav-link" :class="{ 'active': section === 'overview' }">
                                 Overview
@@ -133,7 +133,7 @@
                                 </c-updates-count>
                             </router-link>
                         </li>
-                        <li class="nav-item" @click="section='bounties'">
+                        <li class="nav-item" @click="section='bounties'" v-if="project.bounties">
                             <router-link :to="`/project/${project.id}/bounties`" class="nav-link" :class="{ 'active': section === 'bounties' }">
                                 Bounties
                             </router-link>
@@ -652,9 +652,14 @@
             }
         }
     }
-    .nav-tabs{
-        a{
+    .nav-tabs {
+        justify-content: flex-start;
+
+        a {
             min-height: 45px;
         }
+    }
+    .nav-tabs .nav-item {
+        margin-right: 40px;
     }
 </style>

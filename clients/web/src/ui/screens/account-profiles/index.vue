@@ -91,7 +91,7 @@
                 name="item"
                 :duration="100"
             > -->
-            <c-loading :enabled="!filteredProfiles.length" key="loading" />
+            <c-loading :enabled="!filteredProfiles.length" key="loading" size="lg" />
             
             <div class="profile-picker" v-if="filteredProfiles.length">
                 <div

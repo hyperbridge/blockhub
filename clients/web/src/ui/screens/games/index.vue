@@ -10,7 +10,8 @@
                 :showArrows="games.length > 4"
             />
             <div class="row">
-                <c-loading :enabled="!games.length" />
+                <c-loading :enabled="loading" size="lg" />
+                <p v-if="!loading && !games.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
                 <c-game-card
                     class="p-2 col-3"
                     :image="game.meta.images.mediumTile" 
@@ -32,6 +33,11 @@ export default {
     components: {
         'c-game-card': (resolve) => require(['@/ui/components/game-card'], resolve),
     },
+    data() {
+        return {
+            loading: true
+        }
+    },
     created() {
         this.$store.dispatch('products/find', {
             query: {
@@ -40,6 +46,8 @@ export default {
                 },
                 $limit: 25
             }
+        }).then(() => {
+            this.loading = false
         })
     },
     computed: {

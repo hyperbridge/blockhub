@@ -149,7 +149,6 @@
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'create-shortcut'"
                 @close="$store.state.application.activeModal = null"
-                class="container"
                 style="text-align: left;"
             >
                 <div class="h4" slot="header">Oh, another creation?</div>
@@ -347,7 +346,7 @@
             >
                 <div class="h4" slot="header">Withdraw</div>
                 <template slot="body">
-                    <c-loading :enabled="withdrawRequest.processing" />
+                    <c-loading :enabled="withdrawRequest.processing" size="lg" />
                     <div v-if="!withdrawRequest.processing && !activeProfile.address">
                         <p>No address found for this profile. You'll need to generate one within the desktop app.</p>
                     </div>

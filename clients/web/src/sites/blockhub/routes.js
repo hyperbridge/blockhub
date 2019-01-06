@@ -815,7 +815,7 @@ export default [
                 meta: {
                     title: 'Business',
                     breadcrumb: [
-                        { path: '/business', title: 'Dashboard' },
+                        { to: '/business', title: 'Dashboard' },
                     ]
                 }
             },
@@ -826,7 +826,7 @@ export default [
                 meta: {
                     title: 'All Products',
                     breadcrumb: [
-                        { path: '/business', title: 'Dashboard' },
+                        { to: '/business', title: 'Dashboard' },
                         { title: 'All Products' }
                     ]
                 }
@@ -838,7 +838,7 @@ export default [
                 meta: {
                     title: 'All Crowdfunds',
                     breadcrumb: [
-                        { path: '/business', title: 'Dashboard' },
+                        { to: '/business', title: 'Dashboard' },
                         { title: 'All Crowdfunds' }
                     ]
                 }

@@ -147,7 +147,7 @@
                                     <div class="user user--bordered">
                                         <img src="http://via.placeholder.com/128x128">
                                         <div class="user__name">
-                                            <strong>{{ project.owner.name }}</strong>
+                                            <strong>{{ project.owner ? project.owner.name : 'Unknown' }}</strong>
                                         </div>
                                     </div>
                                 </td>
@@ -174,7 +174,7 @@
                                     <button class="btn btn-outline-success btn-block btn-sm">{{ project.status }}</button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-secondary btn-icon btn-sm"><i class="fa fa-pencil" /></button>
+                                    <c-button status="dark" class="btn btn-secondary btn-icon" size="sm" :to="`/business/project/${project.id}`" style="color: #fff"><i class="fas fa-pencil-alt" /></c-button>
                                 </td>
                             </tr>
                             </tbody>

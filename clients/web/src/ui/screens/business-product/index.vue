@@ -36,8 +36,12 @@
                         <label>Type</label>
                     </label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" placeholder="" v-model="product.type">
-                        <span class="form-text"></span>
+                        <select class="form-control actionWithSelected" tabindex="-1" aria-hidden="true" v-model="product.type">
+                            <option></option>
+                            <option value="game">Game</option>
+                            <option value="app">App</option>
+                            <option value="tool">Tool</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row align-items-center">
@@ -105,12 +109,12 @@
         <template slot="menu">
             <div class="row">
                 <div class="col-12 text-right" v-if="product.id">
-                    <c-button status="success" @click.prevent="save" icon="save">
+                    <c-button status="success" @click="save" icon="save">
                         Save
                     </c-button>
                 </div>
                 <div class="col-12 text-right" v-if="!product.id">
-                    <c-button status="success" size="md" @click.prevent="create" icon="plus">
+                    <c-button status="success" size="md" @click="create" icon="plus">
                         Create
                     </c-button>
                 </div>
@@ -131,10 +135,10 @@
             const product = this.id === 'new' ? this.$store.state.marketplace.defaultProduct : this.$store.getters['products/get'](this.id)
 
             return {
+                product: product,
                 loadingState: true,
                 notice: "",
                 advanced: false,
-                project: project,
                 blockchain: false,
                 tagOptions: [],
                 creating: this.id === 'new',

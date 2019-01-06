@@ -40,11 +40,11 @@
 
                     <h5><i class="fas fa-code" /> Developer</h5>
 
-                    <c-button status="none" to="/developer">
+                    <c-button status="none" to="/business">
                         <span class="icon fas fa-list-alt"></span>
                         <span class="text">My Content</span>
                     </c-button>
-                    <c-button status="none" to="/business/developer/payment">
+                    <c-button status="none" to="/business/developer/payment" v-darklaunch="'PAYMENTS'">
                         <span class="icon fas fa-info-circle"></span>
                         <span class="text">Payment Settings</span>
                     </c-button>

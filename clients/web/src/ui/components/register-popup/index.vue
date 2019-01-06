@@ -5,7 +5,7 @@
         v-if="activated"
     >
         <div class="" slot="modal_body" style="width: 100%">
-            <c-loading :enabled="loading" />
+            <c-loading :enabled="loading" size="lg" />
             
             <div v-if="!loading">
                 <p hidden>

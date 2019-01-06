@@ -23,7 +23,7 @@
             <c-button status="success" :to="`/project/${id}`" iconHide hidden>Donate Funds</c-button>
         </div>
 
-        <c-simple-vote :rating="rating" v-if="hovering" />
+        <c-simple-vote :rating="rating" v-if="hovering" v-darklaunch="'RATINGS'" />
     </div>
 </template>
 

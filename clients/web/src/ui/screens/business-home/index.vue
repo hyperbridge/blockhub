@@ -5,21 +5,44 @@
                 <div class="row">
                     <div class="col-12 col-lg-3">
                         <div class="widget">
-                            <div class="widget__icon_layer widget__icon_layer--right">
-                                <span class="li-window"></span>
-                            </div>
-                            <div class="widget__container">
-                                <div class="widget__line">
-                                    <div class="widget__icon">
-                                        <span class="li-window"></span>
+                            <c-button to="/business/products" status="none" style="display: block">
+                                <div class="widget__icon_layer widget__icon_layer--right">
+                                    <span class="li-window"></span>
+                                </div>
+                                <div class="widget__container">
+                                    <div class="widget__line">
+                                        <div class="widget__icon">
+                                            <span class="li-window"></span>
+                                        </div>
+                                        <div class="widget__title">Products</div>
+                                        <div class="widget__subtitle"></div>
                                     </div>
-                                    <div class="widget__title">Products</div>
-                                    <div class="widget__subtitle"></div>
+                                    <div class="widget__box widget__box--left">
+                                        <div class="widget__informer">{{ products.length }} games</div>
+                                    </div>
                                 </div>
-                                <div class="widget__box widget__box--left">
-                                    <div class="widget__informer">5 products</div>
+                            </c-button>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <div class="widget">
+                            <c-button to="/business/projects" status="none" style="display: block">
+                                <div class="widget__icon_layer widget__icon_layer--right">
+                                    <span class="li-window"></span>
                                 </div>
-                            </div>
+                                <div class="widget__container">
+                                    <div class="widget__line">
+                                        <div class="widget__icon">
+                                            <span class="li-window"></span>
+                                        </div>
+                                        <div class="widget__title">Projects</div>
+                                        <div class="widget__subtitle"></div>
+                                    </div>
+                                    <div class="widget__box widget__box--left">
+                                        <div class="widget__informer">{{ projects.length }} crowdfunds</div>
+                                    </div>
+                                </div>
+                            </c-button>
                         </div>
                     </div>
                     <div class="col-12 col-lg-3" hidden>
@@ -473,10 +496,32 @@
         components: {
             'c-business-layout': (resolve) => require(['@/ui/layouts/business'], resolve)
         },
-        data(){
-            return{
+        data() {
+            return {
                 loadingState: true,
             }
+        },
+        computed: {
+            projects() { return this.$store.getters['projects/list'] },
+            products() { return this.$store.getters['products/list'] }
+        },
+        created() {
+            this.$store.dispatch('projects/find', {
+                query: {
+                    $sort: {
+                        createdAt: -1
+                    },
+                    $limit: 25
+                }
+            })
+            this.$store.dispatch('products/find', {
+                query: {
+                    $sort: {
+                        createdAt: -1
+                    },
+                    $limit: 25
+                }
+            })
         },
         mounted() {
             this.$nextTick(() => {

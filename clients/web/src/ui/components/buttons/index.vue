@@ -116,12 +116,9 @@
 </script>
 
 <style lang="scss" scoped>
-    @mixin gradient( $first, $second ) {
+    @mixin gradient($first, $second) {
         background-image: $first !important; /* Old browsers */
-        background-image: -moz-linear-gradient(to left top, $first 0%, $second 100%) !important; /* FF3.6-15 */
-        background-image: -webkit-linear-gradient(to left top, $first 0%, $second 100%) !important; /* Chrome10-25,Safari5.1-6 */
         background-image: linear-gradient(to left top, $first 0%, $second 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$first', endColorstr='$second', GradientType=0); */ /* IE6-9 */
     }
 
     .c-button {
@@ -180,8 +177,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-right: 8px;
-            min-width: 20px;
+            margin-right: 5px;
             width: auto;
             height: auto;
         }
@@ -250,7 +246,9 @@
         &.none {
             font-weight: normal;
             justify-content: left;
-            color: #fff;
+            color: inherit;
+            font-size: inherit;
+            line-height: inherit;
         }
 
         /* background color, text color, hover background color, hover text color */

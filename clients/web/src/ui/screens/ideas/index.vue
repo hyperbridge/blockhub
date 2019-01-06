@@ -25,7 +25,7 @@
                 name="Browse All Ideas"
             />
             <div class="row">
-                <c-loading :enabled="!ideas.length" />
+                <c-loading :enabled="!ideas.length" size="lg" />
                 <c-idea-card
                     class="p-2 col-3"
                     :description="idea.description" 

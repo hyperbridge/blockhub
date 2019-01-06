@@ -4,7 +4,7 @@
             <!-- <div class="col-12">
                 Idea not found
             </div> -->
-            <c-loading :enabled="true" />
+            <c-loading :enabled="true" size="lg" />
         </div>
         <div class="row" v-if="idea || id === 'new'">
             <div class="col-12">
