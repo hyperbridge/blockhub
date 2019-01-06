@@ -1,10 +1,10 @@
 <template>
     <div class="group-content">
         <div class="group-content__msgs">
-            <div class="msgs-list">
+            <c-scrollable-content>
                 <slot name="messages" />
-            </div>
-            <c-chat-answer-field />
+            </c-scrollable-content>
+            <c-chat-answer-field :user="currentUser" />
         </div>
         <div class="chat__user-list">
             <slot name="users" />
@@ -14,9 +14,13 @@
 
 <script>
     export default {
+        props:{
+            currentUser: Object
+        },
         components:{
             'c-chat-user': (resolve) => require(['@/ui/components/chat-new/user'], resolve),
-            'c-chat-answer-field': (resolve) => require(['@/ui/components/chat-new/answer-field/field'], resolve)
+            'c-chat-answer-field': (resolve) => require(['@/ui/components/chat-new/answer-field/field'], resolve),
+            'c-scrollable-content': (resolve) => require(['@/ui/components/chat-new/content/scrollable-content'], resolve)
         }
     }
 </script>
@@ -31,15 +35,10 @@
     .group-content__msgs{
         height: 100%;
         width: calc( 100% - 250px );
-        padding: 10px 15px 0 0;
+        padding: 10px 5px 0 0;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-    }
-    .msgs-list{
-        overflow-y: auto;
-        overflow-x: hidden;
-        height: 100%;
     }
     .chat__user-list{
         width: 250px;

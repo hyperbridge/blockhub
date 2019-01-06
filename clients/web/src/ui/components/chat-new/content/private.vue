@@ -1,8 +1,8 @@
 <template>
     <div class="private-content">
-        <div class="msgs-list">
+        <c-scrollable-content>
             <slot />
-        </div>
+        </c-scrollable-content>
         <c-chat-answer-field />
     </div>
 </template>
@@ -10,7 +10,8 @@
 <script>
     export default {
         components:{
-            'c-chat-answer-field': (resolve) => require(['@/ui/components/chat-new/answer-field/field'], resolve)
+            'c-chat-answer-field': (resolve) => require(['@/ui/components/chat-new/answer-field/field'], resolve),
+            'c-scrollable-content': (resolve) => require(['@/ui/components/chat-new/content/scrollable-content'], resolve)
         }
     }
 </script>
@@ -22,10 +23,5 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-    }
-    .msgs-list{
-        overflow-y: auto;
-        overflow-x: hidden;
-        height: 100%;
     }
 </style>

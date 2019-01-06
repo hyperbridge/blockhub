@@ -28,6 +28,11 @@
         },
         components:{
             'c-emoji': (resolve) => require(['@/ui/components/emoji'], resolve),
+        },
+        computed: {
+            timeAgo() {
+                // return this.time.fromNow();
+            }
         }
     }
 </script>
@@ -38,7 +43,10 @@
         width: 100%;
         align-items: flex-start;
         color: #fff;
-        padding: 10px 0;
+        margin: 0 0 20px 0;
+        &:last-child{
+            margin-bottom: 0;
+        }
     }
     .chat-message__avatar {
         width: 40px;
@@ -62,6 +70,7 @@
         span {
             opacity: .6;
             margin-left: 10px;
+            font-size: 12px;
         }
     }
 </style>

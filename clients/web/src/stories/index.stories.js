@@ -5372,39 +5372,48 @@ storiesOf('Chat', module)
                 messages:[
                     {
                         user: 2,
-                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit ullamcorper enim varius sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,'
+                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit ullamcorper enim varius sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,',
+                        time: '28 July, 2018'
                     },
                     {
                         user: 3,
-                        text: 'Duis sit amet nisl efficitur, rutrum arcu ac, bibendum ligula. Mauris viverra pellentesque massa sed congue. Nunc dictum gravida lobortis.'
+                        text: 'Duis sit amet nisl efficitur, rutrum arcu ac, bibendum ligula. Mauris viverra pellentesque massa sed congue. Nunc dictum gravida lobortis.',
+                        time: '28 July, 2018'
                     },
                     {
                         user: 1,
-                        text: 'Aliquam maximus convallis dui ut facilisis.'
+                        text: 'Aliquam maximus convallis dui ut facilisis.',
+                        time: '28 July, 2018'
                     },
                     {
                         user: 2,
-                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit ullamcorper enim varius sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,'
+                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit ullamcorper enim varius sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,',
+                        time: '28 July, 2018'
                     },
                     {
                         user: 3,
-                        text: 'Duis sit amet nisl efficitur, rutrum arcu ac, bibendum ligula. Mauris viverra pellentesque massa sed congue. Nunc dictum gravida lobortis.'
+                        text: 'Duis sit amet nisl efficitur, rutrum arcu ac, bibendum ligula. Mauris viverra pellentesque massa sed congue. Nunc dictum gravida lobortis.',
+                        time: '28 July, 2018'
                     },
                     {
                         user: 1,
-                        text: 'Aliquam maximus convallis dui ut facilisis.'
+                        text: 'Aliquam maximus convallis dui ut facilisis.',
+                        time: '28 July, 2018'
                     },
                     {
                         user: 2,
-                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit ullamcorper enim varius sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,'
+                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit ullamcorper enim varius sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,',
+                        time: '28 July, 2018'
                     },
                     {
                         user: 3,
-                        text: 'Duis sit amet nisl efficitur, rutrum arcu ac, bibendum ligula. Mauris viverra pellentesque massa sed congue. Nunc dictum gravida lobortis.'
+                        text: 'Duis sit amet nisl efficitur, rutrum arcu ac, bibendum ligula. Mauris viverra pellentesque massa sed congue. Nunc dictum gravida lobortis.',
+                        time: '28 July, 2018'
                     },
                     {
                         user: 1,
-                        text: 'Aliquam maximus convallis dui ut facilisis.'
+                        text: 'Aliquam maximus convallis dui ut facilisis.',
+                        time: '28 July, 2018'
                     }
                 ],
                 shortcuts:[
@@ -5457,23 +5466,25 @@ storiesOf('Chat', module)
                             <template slot="sidebar">
                                 <c-chat-group-sidebar />
                             </template>
-                            <c-chat-group>
+                            <c-chat-group :currentUser="users[2]">
                                 <template slot="messages">
-                                    <c-chat-message v-for="msg in messages" :text="msg.text" :user="users[msg.user]" />
+                                    <c-chat-message v-for="msg in messages" :text="msg.text" :time="msg.time" :user="users[msg.user]" />
                                 </template>
                                 <template slot="users">
                                     <c-chat-user v-for="user in users" :isAdmin="user.admin" :action="true" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>
                                 </template>
                             </c-chat-group>
                         </c-chat-base>
+                        <hr />
                     </div>
                     <div class="col-12" >
                         <h3 class="text-white">Private messages</h3>
                         <c-chat-base style="height: 700px" :shortcuts="shortcuts">
                             <c-chat-private>
-                                <c-chat-message v-for="msg in messages" :text="msg.text" :user="users[msg.user]" />
+                                <c-chat-message v-for="msg in messages" :text="msg.text" :time="msg.time" :user="users[msg.user]" />
                             </c-chat-private>
                         </c-chat-base>
+                        <hr />
                     </div>
                     <div class="col-12" >
                         <h3 class="text-white">New group(create/join)</h3>
@@ -5484,6 +5495,7 @@ storiesOf('Chat', module)
                     <div class="col-12">
                         <h3 class="text-white">Friends list</h3>
                         <c-chat-friends-list />
+                        <hr />
                     </div>
                 </div>`
     }))

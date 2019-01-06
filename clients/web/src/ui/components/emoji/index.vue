@@ -113,6 +113,8 @@
         display: inline-flex;
         .c-button{
             line-height: 26px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, .6);
             i{
                 transition: all 200ms ease-in-out;
                 &.rotate-icon{
