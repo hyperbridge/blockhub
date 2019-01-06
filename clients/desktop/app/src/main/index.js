@@ -99,12 +99,12 @@ export const initApp = () => {
 
 
         // Someone tried to run a second instance, we should focus our window.
-        if (Windows.main) {
-            if(Windows.main.isMinimized()) {
-                Windows.main.restore()
+        if (Windows.main.window) {
+            if(Windows.main.window.isMinimized()) {
+                Windows.main.window.restore()
             }
 
-            Windows.main.focus()
+            Windows.main.window.focus()
         }
     })
 
@@ -121,7 +121,7 @@ export const initApp = () => {
 
     app.on('activate', function () {
         if (Windows.main && config.IS_PRODUCTION) {
-            Windows.main.show()
+            Windows.main.window.show()
         }
 
         if (process.platform === 'darwin') {
