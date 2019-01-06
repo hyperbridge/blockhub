@@ -38,7 +38,7 @@
                 <div class="h6 font-weight-bold text-uppercase mb-3">
                     Pledge amount
                 </div>
-                <c-contribute-form v-model="toBePaid" :defaultValue="pledge.minPrice" :active="true" @click="$emit('click')" />
+                <c-contribute-form v-model="toBePaid" :defaultValue="pledge.minPrice" :currency="currency" :active="true" @click="$emit('click')" />
             </div>
         </transition>
     </div>
@@ -50,25 +50,25 @@
 
     export default {
         name: 'pledge',
-        props: ['pledge'],
-        components:{
+        props: ['pledge', 'currency'],
+        components: {
             'c-contribute-form': ContributeForm
         },
-        data(){
-            return{
+        data() {
+            return {
                 form: false,
                 showToggle: false,
                 toBePaid: ''
             }
         },
-        methods:{
+        methods: {
             showFrom() {
                 this.form = true;
                 this.showToggle = false;
             }
         },
-        computed:{
-            date(){
+        computed: {
+            date() {
                 return moment(this.pledge.deliveryDate).format('DD MMMM, YYYY')
             }
         }

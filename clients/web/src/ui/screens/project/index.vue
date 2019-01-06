@@ -291,7 +291,7 @@
 
             </div>
 
-            <div class="col-12" id="overview">
+            <div id="overview">
                 <transition name="page" mode="out-in">
                     <c-project-overview :project="project" v-if="section === 'overview'" :editing="editing" />
                     <c-project-community :project="project" v-if="section === 'community'" :editing="editing" />

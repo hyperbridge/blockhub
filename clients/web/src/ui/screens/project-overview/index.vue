@@ -3,6 +3,21 @@
         <div class="col-12 col-lg-7 col-xl-8">
             <c-screen-gallery :items="project.images.preview" v-if="project.images && project.images.preview" />
 
+            <div class="action" hidden>Currently crowdfunding</div>
+
+            <c-block title="Participation Tiers" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+                <c-participation-tier v-for="(item, index) in participationTiers" 
+                    :key="index"
+                    :id="item.id" 
+                    :price="item.price" 
+                    :sold="item.sold" 
+                    :left="item.left" 
+                    :title="item.title" 
+                    :tag="item.tag"
+                    :inList="(index < participationTiers.length-1) ? true : false"
+                />
+            </c-block>
+
             <div class="editor-container">
                 <div class="editor" v-if="editing">
                     <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
@@ -23,9 +38,9 @@
                 <p class="project__description">{{ project.description }}</p>
             </div>
 
-            <c-block title="Contents" class="margin-bottom-30" :noPadding="true" :noGutter="true" :bgGradient="true" :onlyContentBg="true" v-if="!editing">
+            <c-block title="About Game" class="margin-bottom-30" :noPadding="true" :noGutter="true" :bgGradient="true" :onlyContentBg="true" v-if="!editing">
                 <div class="main-content" v-html="project.value">
-                        {{ project.value }}
+                    {{ project.value }}
                 </div>
             </c-block>
 
@@ -135,7 +150,7 @@
                 <c-contribute-form @click="showContributeModal" />
             </c-block>
 
-            <c-contribute-pledge @click="showContributeModal" v-for="(pledge, index) in project.pledges" :key="index" :pledge="pledge" />
+            <c-contribute-pledge @click="showContributeModal" v-for="(pledge, index) in project.pledges" :key="index" :pledge="pledge" :currency="project.meta.currency" />
 
             <c-decentralization-meter v-decentralized-mode />
         </div>
@@ -154,6 +169,7 @@
             'c-rating-block': (resolve) => require(['@/ui/components/rating-block'], resolve),
             'c-frequently-traded-assets': (resolve) => require(['@/ui/components/frequently-traded-assets'], resolve),
             'c-community-spotlight': (resolve) => require(['@/ui/components/community-spotlight'], resolve),
+            'c-participation-tier': (resolve) => require(['@/ui/components/participation-tier'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
             'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar'], resolve),
             'c-contribute-form': (resolve) => require(['@/ui/components/contribute/form.vue'], resolve),
@@ -163,7 +179,7 @@
             'c-button-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve),
         },
         data() {
-            return {
+            let data = {
                 errors: [],
                 activeElement: {
                     name: false,
@@ -180,6 +196,39 @@
                 ],
                 crowdfundingProps: ['spent', 'locked', 'overflow']
             }
+
+            if (this.$store.state.application.environmentMode !== 'production') {
+                data = {...data, ...{
+                    participationTiers: [
+                        {
+                            id: 1,
+                            price: '29',
+                            sold: '222',
+                            left: '9',
+                            tag: 'Combo',
+                            title: 'Game Standard Edition'
+                        },
+                        {
+                            id: 2,
+                            price: '219',
+                            sold: '32',
+                            left: '1',
+                            tag: 'Combo',
+                            title: 'Game Standard Edition'
+                        },
+                        {
+                            id: 3,
+                            price: '9',
+                            sold: '981',
+                            left: '1',
+                            tag: 'Combo',
+                            title: 'Game Standard Edition'
+                        }
+                    ]
+                }}
+            }
+
+            return data
         },
         methods:{
             showContributeModal() {
@@ -313,7 +362,6 @@
     }
 
     .main-content {
-        margin-top: 15px;
         padding: 15px;
         border-radius: 5px;
         overflow: hidden;

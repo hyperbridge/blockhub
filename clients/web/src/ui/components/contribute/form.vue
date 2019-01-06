@@ -17,28 +17,29 @@
 <script>
     export default {
         name: 'contribute-form',
-        props:{
-            active:{
+        props: {
+            active: {
                 type: Boolean,
                 default: false
             },
             value: '',
-            defaultValue: Number
+            defaultValue: Number,
+            current: String
         },
-        data(){
-            return{
+        data() {
+            return {
                 activeForm : false,
                 error: false,
                 mutableValue: this.value
             }
         },
-        created(){
+        created() {
             this.activeForm = this.active
             if ( this.defaultValue )
                 this.mutableValue = this.defaultValue
         },
         methods: {
-            changeData(){
+            changeData() {
                 this.$emit('input', this.$refs.input.value)
                 if ( Number(this.$refs.input.value) < Number(this.defaultValue) )
                     this.error = true
@@ -46,8 +47,8 @@
                     this.error = false
             }
         },
-        watch:{
-            mutableValue(val){
+        watch: {
+            mutableValue(val) {
                 this.$emit('input', val);
                 if ( Number(this.$refs.input.value) < Number(this.defaultValue) )
                     this.error = true

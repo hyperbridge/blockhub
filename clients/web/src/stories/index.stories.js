@@ -4167,7 +4167,7 @@ storiesOf('Purchase Option', module)
         `
     }))
 
-import ParticipationTier from '@/ui/components/participation-tiers'
+import ParticipationTier from '@/ui/components/participation-tier'
 
 storiesOf('Participation Tiers', module)
     .add('default', () => ({

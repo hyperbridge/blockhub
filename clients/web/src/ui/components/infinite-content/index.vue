@@ -6,7 +6,7 @@
                 <div class="row justify-content-center" v-if="item.type === 'frontpageProduct'">
                     <div class="col-12">
                         <div class="frontpage-product">
-                            <c-simple-vote :rating="item.rating" v-if="activeElementIndex === index" />
+                            <c-simple-vote :rating="item.rating" v-if="activeElementIndex === index" v-darklaunch="'RATINGS'" />
                             <div class="row">
                                 <div class="col-12 col-lg-6 frontpage-product__slider" v-if="item.data.images">
                                     <c-img :src="item.data.images.mediumTile" :data-link="`#/product/${item.data.id}`" />
