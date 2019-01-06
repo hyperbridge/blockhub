@@ -125,12 +125,12 @@
 </script>
 
 <style lang="scss" scoped>
-    .games-list{
+    .games-list {
         display: flex;
         flex-direction: column;
-        .game-library__item{
+        .game-library__item {
             background: rgba(0, 0, 0, .25);
-            &:nth-child(even){
+            &:nth-child(even) {
                 background: rgba(0, 0, 0, .15);
             }
             &:first-child{

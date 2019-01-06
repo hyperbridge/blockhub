@@ -10,25 +10,25 @@
             <div class="bounties-header__stat">
                 <c-icon-block icon="users" class="ml-5">
                     <div class="h6 p-0 m-0 text-white font-weight-bold">
-                        81
+                        {{ contributors }}
                     </div>
                     Contributors
                 </c-icon-block>
                 <c-icon-block icon="arrow-right" class="ml-5">
                     <div class="h6 p-0 m-0 text-white font-weight-bold">
-                        81
+                        {{ submissions }}
                     </div>
                     Submissions
                 </c-icon-block>
             </div>
             <div class="bounties-header__action">
-                <c-button status="dark" iconHide size="lg" fontSize="14" class="text-uppercase with-label">
-                                <span class="btn-label">
-                                    <i class="fas fa-lock"></i>
-                                </span>
+                <c-button :to="`/business/projects/${project.id}`" status="dark" iconHide size="lg" fontSize="14" class="text-uppercase with-label">
+                    <span class="btn-label">
+                        <i class="fas fa-lock"></i>
+                    </span>
                     Management
                 </c-button>
-                <c-button status="info" iconHide size="lg" fontSize="14" class="text-uppercase ml-3">
+                <c-button :to="`/profile/${$store.state.application.activeProfile.id}/bounties`" status="info" iconHide size="lg" fontSize="14" class="text-uppercase ml-3">
                     My bounties
                 </c-button>
             </div>
@@ -75,35 +75,47 @@
 </template>
 
 <script>
-
     export default {
         props: ['project', 'editing'],
-        data: function () {
-            return{
-                "bounties": [
-                    {
-                        "title": "Find a bug, behind the word mountains, far from the countries Vokalia and Consonantia, there live.",
-                        "submited": "2851",
-                        "approved": "408",
-                        "prize": "30000",
-                        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu nulla sed urna malesuada ornare nec ac risus. Nam vehicula mauris ac augue finibus finibus non et erat. Integer malesuada rutrum elit non hendrerit. Nam volutpat scelerisque magna, in lacinia nulla consectetur eget. Nunc feugiat egestas arcu id lobortis. Proin rhoncus viverra mi, ac bibendum ligula molestie eget. Vivamus a tempor ligula.",
-                        "explainText": "",
-                        "fileSrc": ""
-
-                    },
-                    {
-                        "title": "Find a bug, behind the word mountains, far from the countries Vokalia and Consonantia, there live.",
-                        "submited": "2851",
-                        "approved": "408",
-                        "prize": "30000",
-                        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu nulla sed urna malesuada ornare nec ac risus. Nam vehicula mauris ac augue finibus finibus non et erat. Integer malesuada rutrum elit non hendrerit. Nam volutpat scelerisque magna, in lacinia nulla consectetur eget. Nunc feugiat egestas arcu id lobortis. Proin rhoncus viverra mi, ac bibendum ligula molestie eget. Vivamus a tempor ligula.",
-                        "explainText": "",
-                        "fileSrc": ""
-
-                    }
-                ],
-                showDownload: false
+        data() {
+            let data = {
+                contributors: 0,
+                submissions: 0,
+                bounties: [],
+                showDownload: false,
+                bounties: []
             }
+
+            if (this.$store.state.application.environmentMode !== 'production') {
+                data = {...data, ...{
+                    contributors: 81,
+                    submissions: 81,
+                    bounties: [
+                        {
+                            "title": "Find a bug, behind the word mountains, far from the countries Vokalia and Consonantia, there live.",
+                            "submited": "2851",
+                            "approved": "408",
+                            "prize": "30000",
+                            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu nulla sed urna malesuada ornare nec ac risus. Nam vehicula mauris ac augue finibus finibus non et erat. Integer malesuada rutrum elit non hendrerit. Nam volutpat scelerisque magna, in lacinia nulla consectetur eget. Nunc feugiat egestas arcu id lobortis. Proin rhoncus viverra mi, ac bibendum ligula molestie eget. Vivamus a tempor ligula.",
+                            "explainText": "",
+                            "fileSrc": ""
+
+                        },
+                        {
+                            "title": "Find a bug, behind the word mountains, far from the countries Vokalia and Consonantia, there live.",
+                            "submited": "2851",
+                            "approved": "408",
+                            "prize": "30000",
+                            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu nulla sed urna malesuada ornare nec ac risus. Nam vehicula mauris ac augue finibus finibus non et erat. Integer malesuada rutrum elit non hendrerit. Nam volutpat scelerisque magna, in lacinia nulla consectetur eget. Nunc feugiat egestas arcu id lobortis. Proin rhoncus viverra mi, ac bibendum ligula molestie eget. Vivamus a tempor ligula.",
+                            "explainText": "",
+                            "fileSrc": ""
+
+                        }
+                    ]
+                }}
+            }
+
+            return data
         },
         components: {
             'c-icon-block': (resolve) => require(['@/ui/components/block/with-icon'], resolve)

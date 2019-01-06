@@ -1,14 +1,13 @@
 <template>
     <div class="row">
-    <div class="col-12" v-if="!project.milestones">
-
-            <div class="posts-timeline__end no-updates">
+        <div class="col-12" v-if="!project.milestones">
+            <div class="no-updates">
                 <h3>
                     There is no milestones defined.
                 </h3>
             </div>
-    </div>
-    <div class="col-12" v-if="project.milestones">
+        </div>
+        <div class="col-12" v-if="project.milestones">
             <div class="milestones-header margin-bottom-20">
                 <div class="milestones-header__info">
                     <div class="h3 text-white font-weight-bold mb-0">
@@ -43,7 +42,7 @@
                     </c-icon-block>
                 </div>
             </div>
-            <div class="timeline-blk position-relative">
+            <div class="timeline-block position-relative">
                 <div class="progress main_timeline" style="height: 15px;">
                     <c-progress-bar :percentages="project.milestones.overallProgress"/>
                 </div>
@@ -140,7 +139,7 @@
         width: 65%;
         justify-content: space-between;
     }
-    .timeline-blk {
+    .timeline-block {
         margin-bottom: 50px;
         @media (max-width: 767px) {
             display: none;

@@ -66,7 +66,7 @@
                             </div>
 
                             <c-tags :tags="project.tags.map(t => t.value)"
-                                            v-if="!editing || !activeElement['tags']"></c-tags>
+                                            v-if="project.tags && (!editing || !activeElement['tags'])" />
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
