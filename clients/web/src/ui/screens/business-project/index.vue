@@ -35,7 +35,7 @@
                     <label>Tags</label>
                 </label>
                 <div class="col-sm-8">
-                    <multiselect v-model="project.tags"
+                    <c-multiselect v-model="project.tags"
                                 tag-placeholder="Add this as new tag"
                                 placeholder="Search or add a tag"
                                 label="value"
@@ -44,7 +44,7 @@
                                 :multiple="true"
                                 :taggable="true"
                                 @tag="addTag">
-                    </multiselect>
+                    </c-multiselect>
                     <span class="form-text"></span>
                 </div>
             </div>
@@ -271,7 +271,7 @@
         components: {
             'c-html-editor': (resolve) => require(['@/ui/components/html-editor'], resolve),
             'c-json-editor': (resolve) => require(['@/ui/components/json-editor'], resolve),
-            'multiselect': (resolve) => require(['vue-multiselect'], resolve),
+            'c-multiselect': (resolve) => require(['vue-multiselect'], resolve),
         },
         data() {
             const project = this.id === 'new' ? this.$store.state.funding.defaultProject : this.$store.getters['projects/get'](this.id)

@@ -35,13 +35,13 @@
                         <div class="editor-container">
                             <div class="" v-if="editing">
                                 <div class="form-group tag-editor">
-                                    <multiselect v-model="product.developerTags"
+                                    <c-multiselect v-model="product.developerTags"
                                                  class="dark-mode"
                                                  :multiple="true"
                                                  :taggable="true"
                                                  :options="tagOptions">
 
-                                    </multiselect>
+                                    </c-multiselect>
                                     <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
                                         <!--<option v-for="(tag, index) in tagOptions" :key="index"-->
                                                 <!--:selected="product.developerTags.includes(tag)">{{ tag }}-->
@@ -321,7 +321,7 @@
             'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
-            'multiselect': (resolve) => require(['vue-multiselect'], resolve),
+            'c-multiselect': (resolve) => require(['vue-multiselect'], resolve),
         },
         data() {
             return {

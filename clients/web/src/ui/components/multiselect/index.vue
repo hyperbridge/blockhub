@@ -1,7 +1,7 @@
 <template>
-    <multiselect v-bind="object">
+    <c-multiselect v-bind="object">
 
-    </multiselect>
+    </c-multiselect>
 </template>
 
 <script>
@@ -12,7 +12,7 @@
         props: {
         },
         components: {
-            'multiselect': Multiselect,
+            'c-multiselect': Multiselect,
         },
     }
 </script>

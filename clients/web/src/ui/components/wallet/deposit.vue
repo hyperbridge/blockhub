@@ -64,7 +64,7 @@
     export default {
         components: {
             'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve),
-            'multiselect': (resolve) => require(['vue-multiselect'], resolve),
+            'c-multiselect': (resolve) => require(['vue-multiselect'], resolve),
         },
         data() {
             return {

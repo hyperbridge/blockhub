@@ -50,12 +50,12 @@
                                         <!--</option>-->
                                     <!--</select>-->
 
-                                    <multiselect v-model="project.tags"
+                                    <c-multiselect v-model="project.tags"
                                                     class="dark-mode"
                                                     :multiple="true"
                                                     :taggable="true"
                                                     :options="authorTagOptions">
-                                    </multiselect>
+                                    </c-multiselect>
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary"
                                         style="">
@@ -330,7 +330,7 @@
             'c-project-bounties': (resolve) => require(['@/ui/screens/project-bounties'], resolve),
             'c-project-updates': (resolve) => require(['@/ui/screens/project-updates'], resolve),
             'c-updates-count': (resolve) => require(['@/ui/components/project/updates-count'], resolve),
-            'multiselect': (resolve) => require(['vue-multiselect'], resolve),
+            'c-multiselect': (resolve) => require(['vue-multiselect'], resolve),
         },
         data() {
             return {

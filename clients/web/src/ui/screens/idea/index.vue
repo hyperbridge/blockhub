@@ -50,14 +50,14 @@
                                         <!--</option>-->
                                     <!--</select>-->
 
-                                    <multiselect v-model="idea.tags"
+                                    <c-multiselect v-model="idea.tags"
                                                     class="dark-mode"
                                                     label="value"
                                                     track-by="key"
                                                     :multiple="true"
                                                     :taggable="false"
                                                     :options="tagOptions">
-                                    </multiselect>
+                                    </c-multiselect>
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary"
                                         style="">
@@ -180,7 +180,7 @@
             'c-idea-overview': (resolve) => require(['@/ui/screens/idea-overview'], resolve),
             'c-idea-community': (resolve) => require(['@/ui/screens/idea-community'], resolve),
             'c-updates-count': (resolve) => require(['@/ui/components/project/updates-count'], resolve),
-            'multiselect': (resolve) => require(['vue-multiselect'], resolve),
+            'c-multiselect': (resolve) => require(['vue-multiselect'], resolve),
         },
         data() {
             return {
