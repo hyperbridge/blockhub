@@ -26,6 +26,7 @@ const env = (
 
 const webpackConfig = merge(baseWebpackConfig, {
     mode: process.env.NODE_ENV,
+    stats: "detailed", //  "none" | "errors-only" | "minimal" | "normal" | "detailed" | "verbose"
     optimization: {
         splitChunks: {
             chunks: 'async',
@@ -67,7 +68,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     module: {
         rules: utils.styleLoaders({
             sourceMap: config.build.productionSourceMap,
-            extract: false
+            extract: true
         })
     },
     devtool: config.build.productionSourceMap ? '#source-map' : false,
@@ -81,6 +82,10 @@ const webpackConfig = merge(baseWebpackConfig, {
         new webpack.DefinePlugin({
             'process.env': JSON.stringify('production')
         }),
+        new webpack.optimize.ModuleConcatenationPlugin(),
+        // new ExtractTextPlugin({
+        //     filename: 'common.[chunkhash].css'
+        // })
         // extract css into its own file
         new ExtractTextPlugin({
             filename: utils.assetsPath('css/[name].[md5:contenthash:hex:20].css'),

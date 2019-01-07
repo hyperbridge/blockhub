@@ -14,7 +14,7 @@
                 </c-slide>
             </c-swiper>
             <p v-if="!collections.length" style="padding: 20px; text-align: center;">
-                No collections yet. <c-button status="plain" href="#">Create one</c-button>?
+                No collections yet. <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Create one</c-button>?
             </p>
         </div>
     </div>
