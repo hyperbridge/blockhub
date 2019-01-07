@@ -64,7 +64,7 @@
 
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/sites/cryptoreviews/ui/layouts/token/' + tokenName + '/index.vue'], resolve),
+            'c-layout': (resolve) => require(['@/sites/cryptoreviews/ui/layouts/token/bitcoin'], resolve),
             'c-header': (resolve) => require(['@/sites/cryptoreviews/ui/components/header'], resolve),
             'c-footer': (resolve) => require(['@/sites/cryptoreviews/ui/components/footer'], resolve),
             'c-intro': (resolve) => require(['@/sites/cryptoreviews/ui/components/intro'], resolve),

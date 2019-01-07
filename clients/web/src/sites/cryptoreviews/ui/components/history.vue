@@ -33,7 +33,7 @@
                                     <br><br>
                                     <h3>2009: The Rise of Mining</h3>
                                     <br>
-                                    <p><strong>January 2009</strong><br>The initial mining of Bitcoins began with the first block â€˜Genesisâ€™ being launched. Later in the month, the first transaction took place between Satoshi and Hal Finney who is a developer and a cryptographic artist.</p>
+                                    <p><strong>January 2009</strong><br>The initial mining of Bitcoins began with the first block ˜Genesis™ being launched. Later in the month, the first transaction took place between Satoshi and Hal Finney who is a developer and a cryptographic artist.</p>
                                     <br>
                                     <p><strong>October 2009</strong><br>BTC received its traditional equivalent of currencies. The New Liberty Standard established the value as 1$ = 1309 BTC. The equation took into consideration the cost of electricity that was required to run the computer that was used to create the bitcoins in the first place.</p>
                                 </div>
@@ -44,7 +44,7 @@
                                 <div class="col-12">
                                     <h3>2010: The Chaos Theory</h3>
                                     <br>
-                                    <p><strong>May 2010</strong><br>Laslo Hanyecz, a programmer from Florida sent 10,000 Bitcoins to a volunteer in England who spent about 25$ to order Hanycez a pizza from Papa Johnâ€™s. One of the most major milestones in the history of Bitcoin, that pizza is valued at 1,961,034 pounds today.</p>
+                                    <p><strong>May 2010</strong><br>Laslo Hanyecz, a programmer from Florida sent 10,000 Bitcoins to a volunteer in England who spent about 25$ to order Hanycez a pizza from Papa John™s. One of the most major milestones in the history of Bitcoin, that pizza is valued at 1,961,034 pounds today.</p>
                                     <br>
                                     <p><strong>August 2010</strong><br>A vulnerability in how the system verifies the value of Bitcoin is discovered and the organization gets hacked out of 184 Billion Bitcoins. The value of the currency that had risen to $1 in June, drops through the floor.</p>
                                     <br>
@@ -65,11 +65,11 @@
                                     <br><br>
                                     <p><strong>June 2013</strong><br>After BTC market capitalization reached an all-time high of $1bn, Bitcoin Forum Founder Allinvain reports having 25,000 BTC stolen from his digital wallet. This marked the first major BTC theft, with a dollar equivalent of $375,000 being stolen at that time.</p>
                                     <br>
-                                    <p><strong>August 2013</strong><br>Federal Judge Mazzant backed Bitcoin by saying â€œIt is clear that Bitcoin can be used as money to purchase goods and servicesâ€ in a case against Trendon Shavers, the so-called â€˜Bernie Madoffâ€™ of Bitcoin.</p>
+                                    <p><strong>August 2013</strong><br>Federal Judge Mazzant backed Bitcoin by saying It is clear that Bitcoin can be used as money to purchase goods and services in a case against Trendon Shavers, the so-called ˜Bernie Madoff™ of Bitcoin.</p>
                                     <br>
                                     <p><strong>November 2013</strong><br>With the US Senate holding its first hearing on the digital currency, the price of BTC escalated to 700$ along with Bitcoin receiving the blessing of Ben Bernanke, the chairman of the Federal Reserve.</p>
                                     <br>
-                                    <p><strong>December 2013</strong><br>Peopleâ€™s Bank of China derides the usage of Bitcoin as currency be saying it has no â€˜real meaningâ€™ and should not be given the same status as of fiat cash, and subsequently bars Chinese financial institutions from handling BTC transactions.</p>
+                                    <p><strong>December 2013</strong><br>People™s Bank of China derides the usage of Bitcoin as currency be saying it has no ˜real meaning™ and should not be given the same status as of fiat cash, and subsequently bars Chinese financial institutions from handling BTC transactions.</p>
                                 </div>
                             </div>
                         </div>
@@ -78,9 +78,9 @@
                                 <div class="col-12">
                                     <h3>2014: Increments in Storage</h3>
                                     <br>
-                                    <p><strong>June 2014</strong><br>Bitcoin can no longer be considered as a â€œCurrency for Criminalsâ€ with the US Govt auctioning off more than 29,000 bitcoins seized from The Silk Road. The use of Bitcoin often means that the identity of the user can be established.</p>
+                                    <p><strong>June 2014</strong><br>Bitcoin can no longer be considered as a Currency for Criminals with the US Govt auctioning off more than 29,000 bitcoins seized from The Silk Road. The use of Bitcoin often means that the identity of the user can be established.</p>
                                     <br>
-                                    <p><strong>August 2014</strong><br>George Osborne, the Chancellor of Exchequer, along with HM Treasury established their positive outlook on the BTC with a purchase of 20 pounds worth of Bitcoin and announced HM Treasuryâ€™s Call for Information on digital currencies. This offered digital currency businesses the chance to draw attention to the risks, benefits and give them the chance to potentially influence future Government policy.</p>
+                                    <p><strong>August 2014</strong><br>George Osborne, the Chancellor of Exchequer, along with HM Treasury established their positive outlook on the BTC with a purchase of 20 pounds worth of Bitcoin and announced HM Treasury™s Call for Information on digital currencies. This offered digital currency businesses the chance to draw attention to the risks, benefits and give them the chance to potentially influence future Government policy.</p>
                                     <br>
                                     <p><strong>December 2014</strong><br>Technology powerhouse Microsoft began accepting Bitcoins as payment. They could be used to buy games and videos on the X-Box, add apps and services to Windows phones or to buy Microsoft software.</p>
                                     <br><br>
@@ -99,7 +99,7 @@
                                     <br><br>
                                     <h3>The birth of Bitcoin Cash</h3>
                                     <br>
-                                    <p>August 1 saw the birth of a brand-new cryptocurrency: â€œBitcoin Cash,â€ sometimes referred to as â€œBcashâ€ and using the currency tickers â€œBCHâ€ or â€œBCC.â€</p>
+                                    <p>August 1 saw the birth of a brand-new cryptocurrency: Bitcoin Cash, sometimes referred to as Bcash and using the currency tickers BCH or BCC.</p>
                                     <br>
                                     <p>Bitcoin Cash, initially defined by the Bitcoin ABC software implementation, was set to fork on August 1 at 12:20 p.m. UTC. Though, because of how Bitcoin nodes measure time, the actual fork happened a little bit later.</p>
                                 </div>
