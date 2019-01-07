@@ -5779,6 +5779,65 @@ storiesOf('Giphy', module)
                 </div>
         `
     }))
+
+
+storiesOf('Table', module)
+    .add('default', () => ({
+        components: {
+            'c-table-simple': (resolve) => require(['@/ui/components/table-simple'], resolve),
+        },
+        data(){
+            return{
+                fields:[
+                    {
+                        label: 'First TH',
+                        key: 'first'
+                    },
+                    {
+                        label: 'Second TH',
+                        key: 'second'
+                    },
+                    {
+                        label: 'Third TH',
+                        key: 'third'
+                    },
+                    {
+                        label: 'Last TH',
+                        key: 'last'
+                    }
+                ],
+                rows: [
+                    {
+                        first: '1',
+                        second: '2',
+                        third: '3',
+                        last: '4',
+                    },
+                    {
+                        first: '1',
+                        third: '3',
+                        second: '2',
+                        last: '4',
+                    },
+                    {
+                        first: '1',
+                        last: '4',
+                        third: '3',
+                        second: '2',
+                    }
+                ]
+            }
+        },
+        template: `
+                <div class="row p-5" style="width: 800px">
+                    <c-table-simple :fields="fields" :rows="rows" />
+                </div>
+        `
+    }))
+
+
+
+
 /*
      Dynamic import - test version
 
