@@ -15,11 +15,11 @@
         props:{
             stripped:{
                 type: Boolean,
-                default: true
+                default: false
             },
             bordered:{
                 type: Boolean,
-                default: true
+                default: false
             },
             size:{
                 type: String,
