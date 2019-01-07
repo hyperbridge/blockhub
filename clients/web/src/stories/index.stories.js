@@ -5830,7 +5830,22 @@ storiesOf('Table', module)
         },
         template: `
                 <div class="row p-5" style="width: 800px">
-                    <c-table-simple :fields="fields" :rows="rows" />
+                    <c-table-simple>
+                        <thead>
+                            <tr>
+                                <th v-for="field in fields">
+                                    {{ field.label }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="row in rows">
+                                <td v-for="field in row">
+                                    {{ field }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </c-table-simple>
                 </div>
         `
     }))
