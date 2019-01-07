@@ -4484,15 +4484,25 @@ storiesOf('Game Installer Modal', module)
 
 
 import Emoji from '@/ui/components/emoji'
+import EmojiSingle from '@/ui/components/emoji/single'
 
 storiesOf('Emoji', module)
-    .add('default', () => ({
+    .add('picker', () => ({
         components: {
             'c-emoji': Emoji
         },
         template: `
         <div class="p-5">
             <c-emoji />
+        </div>`
+    }))
+    .add('single', () => ({
+        components: {
+            'c-emoji-single': EmojiSingle
+        },
+        template: `
+        <div class="p-5">
+            <c-emoji-single count="99" />
         </div>`
     }))
 
