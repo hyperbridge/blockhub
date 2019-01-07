@@ -17,10 +17,10 @@
         <div class="row align-items-center">
             <div class="col-12">
                 <c-block title="Purchase List" :bgColor="false" noGutter bgGradient onlyContentBg noPadding>
-                    <div class="table padding-bottom-20 padding-top-15">
-                        <table class="table table-sm table-striped">
+                    <div class="padding-bottom-30 padding-top-15">
+                        <c-table-simple stripped>
                             <thead>
-                                <tr>
+                                <tr class="text-uppercase">
                                     <th>
                                         Content
                                     </th>
@@ -144,89 +144,91 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </c-table-simple>
                     </div>
                 </c-block>
             </div>
             <div class="col-12">
                 <c-block title="Totals" :bgColor="false" noGutter bgGradient onlyContentBg noPadding>
-                    <div class="table padding-bottom-5 padding-top-15">
-                        <table class="table table-striped">
-                            <tr>
-                                <td>
-                                    <strong>
-                                        Subtotal
-                                    </strong>
-                                </td>
-                                <td class="text-right">
-                                    ETH 29.05
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>
-                                        After discount
-                                    </strong>
-                                </td>
-                                <td class="text-right">
-                                    ETH 29.05
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>
-                                        Total
-                                    </strong>
-                                </td>
-                                <td class="text-right">
-                                    ETH 29.05
-                                </td>
-                            </tr>
-                        </table>
+                    <div class="padding-bottom-30 padding-top-15">
+                        <c-table-simple stripped>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <strong>
+                                            Subtotal
+                                        </strong>
+                                    </td>
+                                    <td class="text-right">
+                                        ETH 29.05
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>
+                                            After discount
+                                        </strong>
+                                    </td>
+                                    <td class="text-right">
+                                        ETH 29.05
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>
+                                            Total
+                                        </strong>
+                                    </td>
+                                    <td class="text-right">
+                                        ETH 29.05
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </c-table-simple>
                     </div>
                 </c-block>
             </div>
             <div class="col-12">
                 <c-block title="Recipients" :bgColor="false" noGutter bgGradient onlyContentBg noPadding>
-                    <div class="table padding-bottom-5 padding-top-15">
-                        <table class="table table-striped">
+                    <div class="padding-bottom-30 padding-top-15">
+                        <c-table-simple stripped>
                             <thead>
-                                <tr>
-                                    <th>
-                                        Amount
-                                    </th>
-                                    <th>
-                                        Paid To
-                                    </th>
-                                </tr>
+                            <tr class="text-uppercase">
+                                <th>
+                                    Amount
+                                </th>
+                                <th>
+                                    Paid To
+                                </th>
+                            </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        ETH 23.66
-                                    </td>
-                                    <td>
-                                        Hyperbridge Technology Inc
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        ETH 193.63
-                                    </td>
-                                    <td>
-                                        Blizzard Technology Inc
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        ETH 3.04
-                                    </td>
-                                    <td>
-                                        TAX(GST)
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>
+                                    ETH 23.66
+                                </td>
+                                <td>
+                                    Hyperbridge Technology Inc
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    ETH 193.63
+                                </td>
+                                <td>
+                                    Blizzard Technology Inc
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    ETH 3.04
+                                </td>
+                                <td>
+                                    TAX(GST)
+                                </td>
+                            </tr>
                             </tbody>
-                        </table>
+                        </c-table-simple>
                     </div>
                 </c-block>
             </div>
@@ -238,6 +240,7 @@
     export default {
         props: [],
         components: {
+            'c-table-simple': (resolve) => require(['@/ui/components/table-simple'], resolve),
         },
     }
 </script>
