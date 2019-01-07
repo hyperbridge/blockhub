@@ -98,7 +98,6 @@
     }
     .trade-offer__bar {
         display: flex;
-        // align-items: center;
         justify-content: space-between;
         margin: 10px 0;
         padding: 4px 15px;

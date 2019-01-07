@@ -105,9 +105,10 @@ export default {
         border: 1px solid rgba(255,255,255,.8);
         box-shadow: 0 5px 25px -5px rgba(255,255,255,.3);
 
-        // Colors
-        // #1abc9c #e056fd #2ecc71 #9b59b6 #D6A2E8 #7d5fff #c56cf0 #18dcff #808e9b #706fd3
-        //  #9b59b6 #D6A2E8    #c56cf0  #808e9b #706fd3
+        /* Colors
+         #1abc9c #e056fd #2ecc71 #9b59b6 #D6A2E8 #7d5fff #c56cf0 #18dcff #808e9b #706fd3
+          #9b59b6 #D6A2E8    #c56cf0  #808e9b #706fd3
+        */
 
         $tags: (
             topSeller: #9980FA,

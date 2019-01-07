@@ -123,23 +123,16 @@
     }
 
     /deep/.carousel-3d__item {
-        // position: absolute !important;
-        // transition: transform .2s ease;
         &.left {
-            // transform: translateX(-50%);
         }
         &.right {
-            // transform: translateX(50%);
         }
         &--main {
-            // transform:
         }
         &--1 {
-            // animation: fade-in .2s ease;
             transform: scale(.9);
         }
         &--2 {
-            // animation: fade-in .2s ease;
             transform: scale(.8);
         }
         @keyframes fade-in {

@@ -271,7 +271,6 @@
         }
     }
     .form-calendar__text, .form-calendar__text:focus {
-        // border: none !important;
         background-color: #303049 !important;
     }
 </style>

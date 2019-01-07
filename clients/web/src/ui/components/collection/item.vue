@@ -69,21 +69,9 @@
         background-color: rgba(0, 0, 0, .2);
         background-repeat: no-repeat;
         background-size: cover;
-        -webkit-transition: all 200ms ease-in;
-        -webkit-transform: scale(1);
-        -ms-transition: all 200ms ease-in;
-        -ms-transform: scale(1);
-        -moz-transition: all 200ms ease-in;
-        -moz-transform: scale(1);
         transition: all 200ms ease-in;
         transform: scale(1);
         &:hover {
-            -webkit-transition: all 200ms ease-in;
-            -webkit-transform: scale(1.05);
-            -ms-transition: all 200ms ease-in;
-            -ms-transform: scale(1.05);
-            -moz-transition: all 200ms ease-in;
-            -moz-transform: scale(1.05);
             transition: all 200ms ease-in;
             transform: scale(1.05);
             z-index: 20;

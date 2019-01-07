@@ -54,9 +54,7 @@
         td, th {
             padding: 5px;
         }
-        // td:last-child {
-        //     width: 25%;
-        // }
+
         tr:nth-child(odd) td {
             background: rgba(255,255,255,.01);
         }

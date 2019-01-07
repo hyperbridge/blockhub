@@ -551,8 +551,6 @@
         padding: 10px;
         padding-left: 0;
         border-radius: 4px;
-        //background: rgba(255,255,255,.03);
-        // max-width: 50%;
     }
 
     .searching-box {

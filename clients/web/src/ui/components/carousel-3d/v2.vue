@@ -88,7 +88,6 @@ export default {
         h1 {
             margin: 10px;
         }
-        // width: 400px;
     }
     .carousel-3d-transition {
         &-enter-active, &-leave-active {

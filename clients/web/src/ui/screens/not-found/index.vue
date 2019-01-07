@@ -61,15 +61,5 @@ export default {
             display: none;
         }
     }
-    // .not-found__404 {
-    //     position: fixed;
-    //     top: 30px;
-    //     left: 30px;
-    //     background: url(/static/img/404.png) no-repeat 0 0;
-    //     z-index: 120;
-    //     width: 400px;
-    //     height: 200px;
-    //     filter: invert(1);
-    // }
     
 </style>

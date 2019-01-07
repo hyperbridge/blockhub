@@ -36,7 +36,6 @@
     .badge-card__text {
         display: block;
         background-color: $border-color;
-        // color: #f8dfac;
         color: #fff;
         font-size: 10px;
         padding: 3px 1px;
@@ -50,7 +49,6 @@
         writing-mode: vertical-rl;
         text-transform: uppercase;
         position: relative;
-        // z-index: 5;
         &:after {
             position: absolute;
             content: "";

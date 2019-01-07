@@ -86,7 +86,6 @@
 
     .chat-message__content {
         display: block;
-        // width: 100%;
         max-width: calc(55%);
         min-width: 30%;
         border-radius: 10px;

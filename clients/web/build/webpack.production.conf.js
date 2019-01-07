@@ -67,7 +67,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     module: {
         rules: utils.styleLoaders({
             sourceMap: config.build.productionSourceMap,
-            extract: true
+            extract: false
         })
     },
     devtool: config.build.productionSourceMap ? '#source-map' : false,
@@ -89,9 +89,11 @@ const webpackConfig = merge(baseWebpackConfig, {
         // Compress extracted CSS. We are using this plugin so that possible
         // duplicated CSS from different components can be deduped.
         new OptimizeCSSPlugin({
-            cssProcessorOptions: {
-                safe: true
-            }
+            cssProcessor: require('cssnano'),
+            cssProcessorPluginOptions: {
+                preset: ['default', { discardComments: { removeAll: true } }],
+            },
+            canPrint: true
         }),
         new VueLoader.VueLoaderPlugin(),
         // generate dist index.vue with correct asset hash for caching.

@@ -564,8 +564,6 @@
                 .progress-bar {
                     width: 100%;
                     height: 0;
-                    -webkit-transition: height 0.6s ease;
-                    -o-transition: height 0.6s ease;
                     transition: height 0.6s ease;
                 }
             }

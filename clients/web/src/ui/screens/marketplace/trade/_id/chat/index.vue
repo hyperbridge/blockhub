@@ -155,7 +155,6 @@
         justify-content: space-around;
     }
     .chat-form__input {
-        // background: transparent;
         background: #fff;
         color: #000;
         width: 80%;

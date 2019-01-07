@@ -87,37 +87,39 @@
 
             clean()
 
-            DB.tokens = DB.instance().addCollection('tokens')
-            DB.tokens.insert(data.tokens)
+            const database = {}
 
-            DB.books = DB.instance().addCollection('books')
-            DB.books.insert(data.books)
+            database.tokens = DB.instance().addCollection('tokens')
+            database.tokens.insert(data.tokens)
 
-            DB.sites = DB.instance().addCollection('sites')
-            DB.sites.insert(data.sites)
+            database.books = DB.instance().addCollection('books')
+            database.books.insert(data.books)
 
-            DB.courses = DB.instance().addCollection('courses')
-            DB.courses.insert(data.courses)
+            database.sites = DB.instance().addCollection('sites')
+            database.sites.insert(data.sites)
 
-            DB.exchanges = DB.instance().addCollection('exchanges')
-            DB.exchanges.insert(data.exchanges)
+            database.courses = DB.instance().addCollection('courses')
+            database.courses.insert(data.courses)
 
-            DB.faq = DB.instance().addCollection('faq')
-            DB.faq.insert(data.faq)
+            database.exchanges = DB.instance().addCollection('exchanges')
+            database.exchanges.insert(data.exchanges)
 
-            DB.hardwareWallets = DB.instance().addCollection('hardwareWallets')
-            DB.hardwareWallets.insert(data.hardwareWallets)
+            database.faq = DB.instance().addCollection('faq')
+            database.faq.insert(data.faq)
 
-            DB.softwareWallets = DB.instance().addCollection('softwareWallets')
-            DB.softwareWallets.insert(data.softwareWallets)
+            database.hardwareWallets = DB.instance().addCollection('hardwareWallets')
+            database.hardwareWallets.insert(data.hardwareWallets)
 
-            DB.videos = DB.instance().addCollection('videos')
-            DB.videos.insert(data.videos)
+            database.softwareWallets = DB.instance().addCollection('softwareWallets')
+            database.softwareWallets.insert(data.softwareWallets)
 
-            DB.notifications = DB.instance().addCollection('notifications')
-            DB.notifications.insert(data.notifications)
+            database.videos = DB.instance().addCollection('videos')
+            database.videos.insert(data.videos)
 
-            const viewData = bitcoinData(DB)
+            database.notifications = DB.instance().addCollection('notifications')
+            database.notifications.insert(data.notifications)
+
+            const viewData = bitcoinData(database)
 
             return {
                 data: viewData
@@ -197,7 +199,6 @@
     }
 
 
-    // Colors
     .heading-title .title:before, .heading-left .title:before {
         background: #f9b707;
     }

@@ -67,9 +67,7 @@
         border-radius: 6px;
         outline: none;
         margin-bottom: 30px;
-        // box-shadow: inset 0 0 20px -4px rgb(96, 155, 252);
         font-size: 16px;
-        // font-weight: 500;
     }
 </style>
 
