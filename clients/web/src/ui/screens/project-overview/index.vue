@@ -153,6 +153,31 @@
             <c-contribute-pledge @click="showContributeModal" v-for="(pledge, index) in project.pledges" :key="index" :pledge="pledge" :currency="project.meta.currency" />
 
             <c-decentralization-meter v-decentralized-mode />
+
+            <c-basic-popup
+                :activated="$store.state.application.activeModal === 'contribute'"
+                @close="$store.commit('application/activateModal', null)"
+            >
+                <div class="h4" slot="header" style="text-align: left">Contribute</div>
+                <template slot="body">
+                    <div v-if="syncStep === 1">
+                        <h3 class="margin-auto"><strong>Status:</strong> unsynced </h3>
+                        Contract Address: 0xasdadas<br />
+
+                        <c-button class="c-button--lg outline-white margin-top-20 margin-auto" @click="startSync">Start</c-button>
+                    </div>
+                    <div v-if="syncStep === 2">
+                    
+                    </div>
+                    <br />
+                    <div class="padding-40 loading-process" style="position: relative" v-if="syncing">
+                        <div class="loading loading--w-spinner"><div><div class="loading-spinner"></div></div></div>
+                    </div>
+                </template>
+                <p slot="footer" class="margin-top-20">
+                    <c-button status="dark" to="/help">Need help? Check the Help Center</c-button>
+                </p>
+            </c-basic-popup>
         </div>
     </div>
 </template>
@@ -232,7 +257,8 @@
         },
         methods:{
             showContributeModal() {
-                this.$store.commit('application/showProfileChooser', true)
+                this.$store.commit('application/activateModal', 'contribute')
+                //this.$store.commit('application/showProfileChooser', true)
                 //this.$store.dispatch('application/activateModal', 'send-funds')
             }
         },

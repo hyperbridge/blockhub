@@ -41,6 +41,18 @@ Vue.directive('darklaunch', {
 })
 
 
+Vue.directive('centralized-mode', {
+    bind(el, binding, vnode, oldVnode) {
+        const { value } = binding
+
+        el.hidden = true
+
+        if (!store.state.application.decentralizedMode) {
+            el.hidden = false
+        }
+    }
+})
+
 Vue.directive('decentralized-mode', {
     bind(el, binding, vnode, oldVnode) {
         const { value } = binding
