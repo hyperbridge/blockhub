@@ -1671,7 +1671,15 @@ storiesOf('Popups', module)
         components: {
             'c-basic-popup': BasicPopup,
             'c-dotted-list': List,
-            'c-heading-bar-color': BlockHeadersColor
+            'c-heading-bar-color': BlockHeadersColor,
+            'c-emoji-single': EmojiSingle
+        },
+        data(){
+            return{
+                pensive: 0,
+                smile: 0,
+                neutral_face: 0
+            }
         },
         template: `
         <div class="row p-5">
@@ -1712,9 +1720,17 @@ storiesOf('Popups', module)
                             dui volutpat varius quis eget elit.
                         </p>
                     </template>
-                    <small slot="footer">
-                        Missed an Updates? <c-button status="plain">Check out our previous change log.</c-button>
-                    </small>
+                    <template slot="footer">
+                        <div class="d-flex align-items-center justify-content-center pt-2 pb-4 w-100">
+                            <c-emoji-single emoji="pensive" class="mx-1" :count="pensive" @click="pensive += 1" />
+                            <c-emoji-single emoji="neutral_face" class="mx-2" :count="neutral_face" @click="neutral_face += 1" />
+                            <c-emoji-single emoji="smile" class="mx-1" :count="smile" @click="smile += 1" />
+                        </div>
+                        <c-input placeholder="Send us your feadback" bgColor="rgba( 255, 255, 255, .1)" />
+                        <small class="w-100 text-center" hidden>
+                            Missed an Updates? <c-button status="plain">Check out our previous change log.</c-button>
+                        </small>
+                    </template>
                 </c-basic-popup>
             </div>
         </div>
