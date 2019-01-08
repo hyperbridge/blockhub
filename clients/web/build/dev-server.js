@@ -12,7 +12,7 @@ const path = require('path')
 const express = require('express')
 const webpack = require('webpack')
 const proxyMiddleware = require('http-proxy-middleware')
-const webpackConfig = process.env.NODE_ENV === 'testing'
+const webpackConfig = process.env.NODE_ENV === 'production'
     ? require('./webpack.production.conf')
     : require('./webpack.development.conf')
 
