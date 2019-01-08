@@ -43,13 +43,33 @@ export default class Realm extends Model {
                 }
             },
             rating: {
-                relation: Model.HasOneRelation,
+                relation: Model.ManyToManyRelation,
                 modelClass: Rating,
                 join: {
-                    from: 'products.ratingId',
-                    to: 'ratings.id'
+                    from: 'realms.id',
+                    to: 'ratings.id',
+                    through: {
+                        from: 'nodes.fromRealmId',
+                        to: 'nodes.toRatingId',
+                        extra: ['relationKey']
+                    }
+                },
+                filter: {
+                    relationKey: 'rating'
+                },
+                beforeInsert(model) {
+                    console.log(model);
+                    (model as Node).relationKey = 'rating'
                 }
             },
+            // rating: {
+            //     relation: Model.HasOneRelation,
+            //     modelClass: Rating,
+            //     join: {
+            //         from: 'realms.ratingId',
+            //         to: 'ratings.id'
+            //     }
+            // },
         }
     }
 
