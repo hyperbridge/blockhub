@@ -113,8 +113,8 @@ const accessGate = function(options = {}) {
 
 export const before = {
     all: [],
-    find: [authenticate('jwt')],
-    get: [authenticate('jwt')],
+    find: [],
+    get: [],
     create: [authenticate('jwt'), beforeCreate()],
     update: [authenticate('jwt'), beforeUpdate()],
     patch: [authenticate('jwt')],

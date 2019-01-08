@@ -78,24 +78,26 @@
                     }
                 } else {
                     this.$store.dispatch('auth/authenticate')
-                        .then(() => {
-                            if (this.type === 'authenticated') {
-                                this.satisfied = true
-                            }
-                        })
                         .catch(error => {
                             if (error.message.includes('Could not find stored JWT')) {
-                                if (this.type === 'authenticated') {
-                                    this.satisfied = true
-                                }
+                                // if (this.type === 'authenticated') {
+                                //     this.satisfied = true
+                                // }
                                 return
                             }
                             
                             console.error(error)
+
+                            return error
+                        })
+                        .then(() => {
+                            if (this.type === 'authenticated') {
+                                this.satisfied = true
+                            }
+
+                            this.initialize()
                         })
                 }
-
-                this.initialize()
             },
             initialize() {
                 if (this.initialized) {

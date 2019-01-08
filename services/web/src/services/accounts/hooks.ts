@@ -39,7 +39,7 @@ const populate = function(options = {}) {
 export const before = {
     all: [],
     find: [authenticate('jwt'), allowNull(), wildcardsInLike()],
-    get: [authenticate('jwt')],
+    get: [],
     create: [hashPassword(), gravatar()],
     update: [hashPassword(), authenticate('jwt')],
     patch: [hashPassword(), authenticate('jwt')],
