@@ -1,9 +1,9 @@
 <template>
     <div class="game-includes__item">
-        <router-link :to="`#/product/${id}`">
+        <router-link :to="`/product/${id}`">
             <c-img :src="image" />
         </router-link>
-        <router-link :to="`#/product/${id}`">
+        <router-link :to="`/product/${id}`">
             <h4>{{ name }}</h4>
         </router-link>
         <p>{{ developer }}</p>

@@ -184,13 +184,13 @@ const assets = {
 
     },
     getters: {
-        assets: ({ assets, products }, { collections: col }, { marketplace: { collections }}) =>
-            normalize(assets, asset => ({
-                offersList: asset.offersList.map(id => assets[id]),
-                inventoryList: asset.inventoryList.map(id => assets[id]),
-                collections: asset.collections.map(id => collections[id]),
-                product: extract(products[asset.product], ['images', 'price'])
-            })),
+        assets: ({ assets, products }, { collections: col }, { marketplace: { collections }}) => [],
+            // normalize(assets, asset => ({
+            //     offersList: asset.offersList.map(id => assets[id]),
+            //     inventoryList: asset.inventoryList.map(id => assets[id]),
+            //     collections: asset.collections.map(id => collections[id]),
+            //     product: extract(products[asset.product], ['images', 'price'])
+            // })),
         /* Old normalization
         assets: ({ assets, products }, { collections: col }, { marketplace: { collections }}) => Object.values(assets)
             .reduce((populated, asset) => ({
@@ -255,10 +255,10 @@ const assets = {
             ], []),
         assetsByName: (state, { assetsArray }) => name => assetsArray
             .filter(asset => asset.name.toLowerCase().includes(name.toLowerCase())),
-        collections: ({ assets, collections }) =>
-            normalize(collections, col => ({
-                assets: col.assets.map(id => assets[id])
-            })),
+        collections: ({ assets, collections }) => [],
+            // normalize(collections, col => ({
+            //     assets: col.assets.map(id => assets[id])
+            // })),
         collectionsArray: (state, { collections }) => Object.values(collections),
         snipers: ({ snipers, assets }) => Object.values(snipers)
             .reduce((populated, sniper) => ({

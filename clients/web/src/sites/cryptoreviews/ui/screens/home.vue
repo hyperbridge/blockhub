@@ -128,7 +128,7 @@
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     body {
         font-family: 'sofia-pro', sans-serif;
         font-weight: normal;
