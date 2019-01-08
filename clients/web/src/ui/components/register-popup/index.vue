@@ -4,7 +4,7 @@
         @close="$store.state.application.activeModal = null"
         v-if="activated"
     >
-        <div class="" slot="modal_body" style="width: 100%">
+        <div class="" slot="modalBody" style="width: 100%">
             <c-loading :enabled="loading" size="lg" />
             
             <div v-if="!loading">
@@ -70,7 +70,7 @@
             </div>
         </div>
 
-        <div slot="modal_footer" class="text-right w-100" v-if="!loading">
+        <div slot="modalFooter" class="text-right w-100" v-if="!loading">
             <c-button status="plain" @click="$store.commit('application/activateModal', 'login')" style="float: left">Already registered? Sign In</c-button>
             <c-button size="md" @click="next()">Continue</c-button>
         </div>
@@ -78,7 +78,7 @@
         <c-terms-popup title="Terms" :activated="terms" @close="terms = false" width="800">
             <div class="h4" slot="header">Terms and Conditions for BlockHub</div>
             <div slot="body">
-                <div class="terms_block">
+                <div class="termsBlock">
                     <c-terms-block />
                 </div>
             </div>
@@ -87,7 +87,7 @@
         <c-terms-popup title="Privacy" :activated="privacy" @close="privacy = false" width="800">
             <div class="h4" slot="header">Privacy Policy for BlockHub</div>
             <div slot="body">
-                <div class="terms_block">
+                <div class="termsBlock">
                     <c-privacy-block />
                 </div>
             </div>

@@ -25,7 +25,7 @@
             <c-infinite-content :list="list" :showSignIn="true" />
 
             <c-custom-modal title="BlockHub Preview" v-if="showWelcomeModal" @close="closeModal">
-                <div class="help-modal__content" slot="modal_body" style="max-width: 500px">
+                <div class="help-modal__content" slot="modalBody" style="max-width: 500px">
                     <h4 class="h2 mb-3">Welcome</h4>
                     <p>Welcome to the the BlockHub Preview Build. All features are enabled, with or without bugs. Gotta catch 'em all! 🐛</p>
                     <p>These features are still in active development, and may not functional properly and may not make it into production.</p>
@@ -35,7 +35,7 @@
                     <p hidden>We're a platform built by the community, for the community.</p>
                     <p hidden><c-button to="/help" target="_blank">Check out the BlockHub crowdfund</c-button></p>
                 </div>
-                <div slot="modal_footer" class="text-right w-100">
+                <div slot="modalFooter" class="text-right w-100">
                     <c-button size="md" @click="closeModal">Got it</c-button>
                 </div>
             </c-custom-modal>

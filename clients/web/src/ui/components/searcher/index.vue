@@ -31,7 +31,7 @@
 </template>
 
 <script>
-    import { debouncer } from '@/mixins';
+    import { debouncer } from '@/mixins'
 
     export default {
         name: 'c-searcher',
@@ -45,7 +45,7 @@
                 type: String,
                 default: 'md',
                 validator(val) {
-                    return ['md', 'lg'].includes(val);
+                    return ['md', 'lg'].includes(val)
                 }
             },
             resultsCount: Number,
@@ -63,13 +63,13 @@
         },
         methods: {
             search(phrase) {
-                this.phrase = phrase;
-                if (!this.isTyping) this.isTyping = true;
+                this.phrase = phrase
+                if (!this.isTyping) this.isTyping = true
 
                 this.debounce(() => {
-                    this.isTyping = false;
-                    this.$emit('input', phrase);
-                }, this.delay);
+                    this.isTyping = false
+                    this.$emit('input', phrase)
+                }, this.delay)
             }
         }
     }

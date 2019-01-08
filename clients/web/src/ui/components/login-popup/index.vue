@@ -4,7 +4,7 @@
         @close="$store.state.application.activeModal = null"
         v-if="activated"
     >
-        <div class="" slot="modal_body" style="width: 100%">
+        <div class="" slot="modalBody" style="width: 100%">
             <c-loading :enabled="loading" size="lg" />
             
             <div v-if="!loading">
@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <div slot="modal_footer" class="text-right w-100" v-if="!loading">
+        <div slot="modalFooter" class="text-right w-100" v-if="!loading">
             <c-button status="plain" @click="$store.commit('application/activateModal', 'register')" style="float: left; margin-right: 20px">Don't have an account? Sign Up</c-button>
             <c-button size="md" @click="next()">Sign In</c-button>
         </div>

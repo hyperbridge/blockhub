@@ -187,7 +187,7 @@
 
         
         <c-custom-modal title="Help Center" v-if="firstProduct && editing && !$store.state.application.settings.client.hide_product_intro_modal && false" @close="closeModal">
-            <div class="help-modal__content" slot="modal_body" style="max-width: 500px">
+            <div class="help-modal__content" slot="modalBody" style="max-width: 500px">
                 <h4 class="h2 mb-3">Creating your first product?</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Etiam elementum ac ligula nec viverra. Nunc molestie augue a erat ultrices fermentum.</p>
@@ -195,7 +195,7 @@
                     Mauris ac facilisis metus. Proin venenatis neque posuere urna sagittis ultricies.</p>
                 <p><c-button to="/help" target="_blank">Learn more about creating products</c-button></p>
             </div>
-            <div slot="modal_footer" class="text-right w-100">
+            <div slot="modalFooter" class="text-right w-100">
                 <c-button size="md" @click="closeModal">Got it</c-button>
             </div>
         </c-custom-modal>
@@ -319,7 +319,7 @@
             'c-product-projects': (resolve) => require(['@/ui/screens/product-projects'], resolve),
             'c-product-assets': (resolve) => require(['@/ui/screens/product-assets'], resolve),
             'c-product-community': (resolve) => require(['@/ui/screens/product-community'], resolve),
-            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic.vue'], resolve),
+            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic'], resolve),
             'c-topic-item': (resolve) => require(['@/ui/components/help/topic-item'], resolve),
             'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),

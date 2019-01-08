@@ -1,7 +1,7 @@
 <template>
     <c-popup :activated="activated" type="custom" ref="modal" width="850" @close="$emit('close')">
-        <div slot="custom_close" hidden></div>
-        <div class="welcome-modal" slot="custom_content">
+        <div slot="customClose" hidden></div>
+        <div class="welcome-modal" slot="customContent">
             <c-tabs>
                 <c-tab name="Welcome" :selected="true" :showFooter="true">
                     <div>

@@ -1,6 +1,6 @@
 <template>
     <c-popup :activated="activated" :width="showComments ? '1000' : '800'" @close="closeModal">
-        <div class="video-popup" slot="custom_content">
+        <div class="video-popup" slot="customContent">
             <div class="video-popup__video-container">
                 <c-loading-bar-circle v-if="showLoader" />
                 <youtube :video-id="youtube" :player-vars="playerVars" :fitParent="true" height="450" width="800" :resize="true" v-if="youtube" @ready="isReady"></youtube>

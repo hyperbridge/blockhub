@@ -354,7 +354,7 @@ export const SendingFunds = {
                 <c-button @click="showModalHandler" status="warning" c_class="ml-1">Show Sending Funds Modal</c-button>
 
                 <c-send-funds :activated="modalActive" @close="modalActive">
-                    <template slot="agreement_text">
+                    <template slot="agreementText">
                         <h1>Terms and Conditions for <span class="highlight preview_company_name">BlockHub</span>
                             </h1>
 

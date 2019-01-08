@@ -164,7 +164,7 @@
                         <h3 class="margin-auto"><strong>Status:</strong> unsynced </h3>
                         Contract Address: 0xasdadas<br />
 
-                        <c-button class="c-button--lg outline-white margin-top-20 margin-auto" @click="startSync">Start</c-button>
+                        <c-button class="c-button--lg outline-white margin-top-20 margin-auto" @click="startContribution">Start</c-button>
                     </div>
                     <div v-if="syncStep === 2">
                     
@@ -194,11 +194,12 @@
             'c-rating-block': (resolve) => require(['@/ui/components/rating-block'], resolve),
             'c-frequently-traded-assets': (resolve) => require(['@/ui/components/frequently-traded-assets'], resolve),
             'c-community-spotlight': (resolve) => require(['@/ui/components/community-spotlight'], resolve),
+            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic'], resolve),
             'c-participation-tier': (resolve) => require(['@/ui/components/participation-tier'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
             'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar'], resolve),
-            'c-contribute-form': (resolve) => require(['@/ui/components/contribute/form.vue'], resolve),
-            'c-contribute-pledge': (resolve) => require(['@/ui/components/contribute/pledge.vue'], resolve),
+            'c-contribute-form': (resolve) => require(['@/ui/components/contribute/form'], resolve),
+            'c-contribute-pledge': (resolve) => require(['@/ui/components/contribute/pledge'], resolve),
             'c-badges': (resolve) => require(['@/ui/components/project/badges'], resolve),
             'c-decentralization-meter': (resolve) => require(['@/ui/components/decentralization-meter'], resolve),
             'c-button-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve),
@@ -206,6 +207,8 @@
         data() {
             let data = {
                 errors: [],
+                syncing: false,
+                syncStep: 1,
                 activeElement: {
                     name: false,
                     backgroundImage: false,
@@ -255,12 +258,15 @@
 
             return data
         },
-        methods:{
+        methods: {
             showContributeModal() {
                 this.$store.commit('application/activateModal', 'contribute')
                 //this.$store.commit('application/showProfileChooser', true)
                 //this.$store.dispatch('application/activateModal', 'send-funds')
-            }
+            },
+            startContribution() {
+                this.$store.commit('marketplace/contributeProjectBlockchain', this.product)
+            },
         },
         computed: {
             wishlist() {

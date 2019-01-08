@@ -2,7 +2,7 @@
     <c-terms-popup title="Terms" :activated="activated" @close="$emit('close')" width="800">
         <div class="h4" slot="header">Terms of Service Agreement</div>
         <div slot="body">
-            <div class="terms_block">
+            <div class="termsBlock">
                 <c-terms-block />
             </div>
         </div>

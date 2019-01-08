@@ -1,7 +1,7 @@
 <template>
     <c-popup :activated="activated" type="custom" ref="modal" width="550" @close="$emit('close')">
-        <div slot="custom_close" hidden></div>
-        <div class="c-popup__content" slot="custom_content">
+        <div slot="customClose" hidden></div>
+        <div class="c-popup__content" slot="customContent">
             <c-tabs
                 :setActiveTab="currentStep"
                 @click="changeTab($event)"

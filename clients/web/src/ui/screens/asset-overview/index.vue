@@ -235,7 +235,7 @@
                 </div>
             </div>
         <c-popup :activated="show_popup" @close="closePopup" :width="550">
-            <c-asset-popup :asset="tmpItem" slot="custom_content" />
+            <c-asset-popup :asset="tmpItem" slot="customContent" />
         </c-popup>
     </c-layout>
 </template>

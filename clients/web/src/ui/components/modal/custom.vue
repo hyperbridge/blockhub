@@ -1,7 +1,7 @@
 <template>
     <div class="modal-light" @click.self="$emit('close')">
         <div class="modal-light__content">
-            <div :class="modal_class">
+            <div :class="modalClass">
                 <div class="custom-modal-header">
                     <div class="name">
                         {{ title }}
@@ -14,12 +14,12 @@
                 </div>
                 <div class="modal-body padding-0">
                     <div class="custom-modal-body">
-                        <slot name="modal_body">
+                        <slot name="modalBody">
 
                         </slot>
                     </div>
                     <div class="modal-action d-flex w-100 justify-content-between align-items-center flex-nowrap">
-                        <slot name="modal_footer">
+                        <slot name="modalFooter">
 
                         </slot>
                     </div>
@@ -32,7 +32,7 @@
 <script>
     export default {
         name: 'modal',
-        props: ['id', 'title', 'modal_class']
+        props: ['id', 'title', 'modalClass']
     }
 </script>
 

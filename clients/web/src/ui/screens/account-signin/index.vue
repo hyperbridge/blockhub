@@ -196,7 +196,7 @@
                     box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
                     background: #303049;
                 }
-                .terms_block {
+                .termsBlock {
                     background: #303049;
                     box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
                     padding: 15px;

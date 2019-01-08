@@ -1,17 +1,17 @@
 <template>
     <c-popup :activated="activated" type="custom" ref="modal" title="" width="650" @close="$emit('close')">
-        <div class="c-popup__close" @click="$emit('close')" slot="custom_close">
+        <div class="c-popup__close" @click="$emit('close')" slot="customClose">
             <i class="fas fa-times"></i>
         </div>
-        <div class="purchase-modal" slot="custom_content">
+        <div class="purchase-modal" slot="customContent">
             <c-tabs>
                 <c-tab name="Agreement" :selected="agreement" :showFooter="true">
                     <div>
                         <div class="d-flex justify-content-between align-items-center">
                             <h4>Purchase Agreement</h4>
                         </div>
-                        <div class="terms_block">
-                            <slot name="agreement_text">
+                        <div class="termsBlock">
+                            <slot name="agreementText">
                                 <h1>Terms and Conditions for <span class="highlight preview_company_name">BlockHub</span></h1>
 
                                 <h2>Introduction</h2>
@@ -187,7 +187,7 @@
                     </div>
                 </c-tab>
                 <c-tab name="Sending" :selected="sending" :showFooter="true">
-                    <div class="sending-blk">
+                    <div class="sending-block">
                         <div class="clmn-1">
                             <div class="grid">
                                 <div class="grid-item">
@@ -352,7 +352,7 @@
             color: #C6C6D6;
             margin-bottom: 40px;
         }
-        .terms_block {
+        .termsBlock {
             background: #46466a;
             color: #C6C6D6;
             box-shadow: 0 0 3px rgba(0, 0, 0, .5) inset;
@@ -367,7 +367,7 @@
             }
         }
 
-        .sending-blk{
+        .sending-block{
             display: flex;
             justify-content: space-between;
             align-items: flex-end;

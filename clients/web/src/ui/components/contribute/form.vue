@@ -24,7 +24,7 @@
             },
             value: '',
             defaultValue: Number,
-            current: String
+            currency: String
         },
         data() {
             return {

@@ -178,13 +178,13 @@
                 @close="$store.state.application.activeModal = null"
                 style="text-align: left;"
             >
-                <div class="h4" slot="header">Coming Soon</div>
+                <div class="h4" slot="header">Coming Soon!</div>
                 <template slot="body">
                     <p>
                         Stealth mode engage! <br />
                         &nbsp; &nbsp; &lt;explosion&gt; &nbsp; <br />
                         &nbsp; &nbsp; &nbsp; &nbsp; Dang, didn't work.<br /><br />
-                        Okay, you caught us. So, we're still working on this feature, but we'll have it out as quick as a mage getting pwned by a warrior in a melee battle!
+                        Okay, you caught us, we're still working on this feature, but we'll have it out as quick as a mage getting pwned by a warrior in a melee battle!
                         <br /><br />
                     </p>
                     <p>We believe in transparency and community-driven development, so why don't you check out the <a href="https://preview.blockhub.gg">Preview Build</a> and let us know what you think!<p>

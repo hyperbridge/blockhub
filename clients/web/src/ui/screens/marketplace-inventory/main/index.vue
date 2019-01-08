@@ -34,7 +34,7 @@
             />
         </div>
         <c-modal title="Sell assets" v-if="openModal" @close="openModal = false">
-            <form slot="modal_body">
+            <form slot="modalBody">
                 <div class="sell-assets__assets-wrapper">
                     <div
                         v-for="(asset, index) in selectedAssets"

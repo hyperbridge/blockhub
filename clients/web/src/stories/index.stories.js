@@ -1731,7 +1731,7 @@ storiesOf('Popups', module)
                 <c-terms-popup :activated="true" width="600">
                     <div class="h4" slot="header">BlockHub Developer License Agreement</div>
                     <div slot="body">
-                        <div class="terms_block">
+                        <div class="termsBlock">
 
                             <h1>Terms and Conditions for <span class="highlight preview_company_name">BlockHub</span>
                             </h1>
@@ -2291,11 +2291,11 @@ storiesOf('Modal', module)
                 </button>
             </div>
             <c-custom-modal id="exampleModal" title="Some modal title">
-                <template slot="modal_body">
+                <template slot="modalBody">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id rhoncus turpis.</p>
                     <p>Aliquam nec blandit mi. Integer sed neque urna.</p>
                 </template>
-                <template slot="modal_footer">
+                <template slot="modalFooter">
                     <a href="#" class="btn btn-sm btn-success">Some Link</a>
                 </template>
             </c-custom-modal>

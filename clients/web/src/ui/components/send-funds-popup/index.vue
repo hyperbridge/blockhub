@@ -1,14 +1,14 @@
 <template>
     <c-popup :activated="activated" type="custom" ref="modal" title="" width="650"  @close="$emit('close')">
-        <div class="send-funds-modal" slot="custom_content">
+        <div class="send-funds-modal" slot="customContent">
             <c-tabs>
                 <c-tab name="Agreement" :selected="agreement" :showFooter="true">
                     <div>
                         <div class="d-flex justify-content-between align-items-center">
                             <h4>Crowdfunding Campaign Agreement</h4>
                         </div>
-                        <div class="terms_block">
-                            <slot name="agreement_text"></slot>
+                        <div class="termsBlock">
+                            <slot name="agreementText"></slot>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between align-items-center" slot="footer">
@@ -26,7 +26,7 @@
                     </div>
                 </c-tab>
                 <c-tab name="Sending" :selected="sending" :showFooter="true">
-                    <div class="sending-blk">
+                    <div class="sending-block">
                         <div class="clmn-1">
                             <div class="grid">
                                 <div class="grid-item">
@@ -152,11 +152,11 @@
 </template>
 
 <script>
-    import Tabs from '../tab/tabs.vue'
-    import Tab from '../tab/tab.vue'
-    import Switch from '../switch/index'
-    import Buttons from '../buttons/index.vue'
-    import PopUp from '../popups/index'
+    import Tabs from '../tab/tabs'
+    import Tab from '../tab/tab'
+    import Switch from '../switch'
+    import Buttons from '../buttons'
+    import PopUp from '../popups'
 
     export default {
         props: ['activated'],
@@ -174,9 +174,9 @@
             }
         },
         methods: {
-            toggleSteps () {
-                this.agreement = false;
-                this.sending = false;
+            toggleSteps() {
+                this.agreement = false
+                this.sending = false
                 console.log('toggle step', this.agreement, this.sending)
             }
         }
@@ -196,7 +196,7 @@
             color: #C6C6D6;
             margin-bottom: 40px;
         }
-        .terms_block {
+        .termsBlock {
             background: #46466a;
             color: #C6C6D6;
             box-shadow: 0 0 3px rgba(0, 0, 0, .5) inset;
@@ -210,7 +210,7 @@
             }
         }
 
-        .sending-blk{
+        .sending-block{
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
