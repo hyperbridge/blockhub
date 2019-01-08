@@ -32,20 +32,22 @@ const devMiddleware = require('webpack-dev-middleware')(compiler, {
     quiet: true
 })
 
-const hotMiddleware = require('webpack-hot-middleware')(compiler, {
-    log: false
-})
-// force page reload when html-webpack-plugin template changes
-compiler.plugin('compilation', function (compilation) {
-    compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-        hotMiddleware.publish({ action: 'reload' })
-        cb && cb()
+if (process.env.NODE_ENV !== 'production') {
+    const hotMiddleware = require('webpack-hot-middleware')(compiler, {
+        log: false
     })
-})
+    // force page reload when html-webpack-plugin template changes
+    compiler.plugin('compilation', function (compilation) {
+        compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
+            hotMiddleware.publish({ action: 'reload' })
+            cb && cb()
+        })
+    })
 
-// enable hot-reload and state-preserving
-// compilation error display
-app.use(hotMiddleware)
+    // enable hot-reload and state-preserving
+    // compilation error display
+    app.use(hotMiddleware)
+}
 
 // proxy api requests
 Object.keys(proxyTable).forEach(function (context) {
@@ -77,7 +79,7 @@ console.log('> Starting dev server...')
 devMiddleware.waitUntilValid(() => {
     console.log('> Listening at ' + uri + '\n')
     // when env is testing, don't need open it
-    if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
+    if (autoOpenBrowser && process.env.NODE_ENV !== 'production') {
         opn(uri)
     }
     _resolve()

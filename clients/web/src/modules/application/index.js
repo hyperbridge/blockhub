@@ -184,7 +184,7 @@ export const actions = {
         // TODO
         // Ethereum.init().then(success, failure).catch(failure)
     },
-    checkInternetConnection(store, payload) {
+    checkInternetConnection(store, payload) {return; // stop DDOSing
         //console.log('[BlockHub] Connection status: ' + JSON.stringify(store.state.connection))
 
         if (!navigator.onLine) {

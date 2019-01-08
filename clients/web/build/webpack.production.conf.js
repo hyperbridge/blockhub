@@ -12,6 +12,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const VueLoader = require('vue-loader')
 const loadMinified = require('./load-minified')
@@ -65,6 +66,9 @@ const webpackConfig = merge(baseWebpackConfig, {
             })
         ]
     },
+    chainWebpack: (config) => {
+        config.plugins.delete('prefetch')
+    },
     module: {
         rules: utils.styleLoaders({
             sourceMap: config.build.productionSourceMap,
@@ -105,7 +109,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         // you can customize output by editing /index.vue
         // see https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
-            filename: process.env.NODE_ENV === 'testing'
+            filename: process.env.NODE_ENV === 'production'
                 ? config.build.templateFile
                 : config.build.index,
             template: config.build.templateFile,
@@ -158,6 +162,7 @@ const webpackConfig = merge(baseWebpackConfig, {
             minify: true,
             stripPrefix: 'dist/'
         }),
+        new CompressionPlugin()
         //new VueSSRServerPlugin()
     ]
 })
