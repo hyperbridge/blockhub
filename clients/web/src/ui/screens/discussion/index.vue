@@ -88,10 +88,7 @@
         align-items: center;
         color: #fff;
         background: rgb(44, 45, 71); /* Old browsers */
-        background: -moz-linear-gradient(top, rgba(44, 45, 71, 1) 0%, rgb(51, 51, 78) 50%, rgba(44, 45, 71, 1) 100%); /* FF3.6-15 */
-        background: -webkit-linear-gradient(top, rgba(44, 45, 71, 1) 0%, rgb(51, 51, 78) 50%, rgba(44, 45, 71, 1) 100%); /* Chrome10-25,Safari5.1-6 */
         background: linear-gradient(to bottom, rgba(44, 45, 71, 1) 0%, rgb(51, 51, 78) 50%, rgba(44, 45, 71, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2c2d47', endColorstr='#2c2d47', GradientType=0); /* IE6-9 */
         border-bottom: 1px solid #1f1f32;
         &:hover {
             background: #33334E;

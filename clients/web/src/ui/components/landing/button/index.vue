@@ -43,10 +43,7 @@
 <style lang="scss" scoped>
     @mixin gradient( $first, $second ) {
         background: $first; /* Old browsers */
-        background: -moz-linear-gradient(top, $first 0%, $second 100%); /* FF3.6-15 */
-        background: -webkit-linear-gradient(top, $first 0%, $second 100%); /* Chrome10-25,Safari5.1-6 */
         background: linear-gradient(to bottom, $first 0%, $second 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$first', endColorstr='$second', GradientType=0); /* IE6-9 */
     }
 
     .c-landing-btn {

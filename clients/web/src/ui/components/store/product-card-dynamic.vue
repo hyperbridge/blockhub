@@ -10,7 +10,7 @@
             </div>
             <c-button status="none" :to="`/product/${product.id}`" class="card-img-top">
                 <transition name="fade">
-                    <c-img v-if="!display_preview" class="card-img-top" :src="product.images.mediumTile"/>
+                    <c-img v-if="!displayPreview" class="card-img-top" :src="product.images.mediumTile"/>
                     <template v-else>
                         <video v-if="product.video && autoplay" class="card-img-top" width="100%" autoplay>
                             <source :src="product.video" type="video/mp4">
@@ -18,7 +18,7 @@
                         <transition-group tag="div" name="slide-left" v-else>
                             <c-img
                                 v-for="(image, index) in product.images.preview"
-                                v-if="index === current_image"
+                                v-if="index === currentImage"
                                 :key="image"
                                 :src="product.images.preview[index]"
                                 class="card-img-top"
@@ -51,9 +51,9 @@
         mixins: [debouncer],
         data() {
             return {
-                display_preview: false,
+                displayPreview: false,
                 interval: null,
-                current_image: 0
+                currentImage: 0
             }
         },
         methods: {
@@ -61,14 +61,14 @@
                 clearTimeout(this.timeout);
                 this.debounce(() => {
                     if (!status) clearInterval(this.interval);
-                    if (status && !this.display_preview && (!this.product.video || !this.autoplay)) this.slider();
-                    this.display_preview = status;
+                    if (status && !this.displayPreview && (!this.product.video || !this.autoplay)) this.slider();
+                    this.displayPreview = status;
                 }, status ? 250 : 0);
             },
             slider() {
                 this.interval = setInterval(() => {
-                    const { current_image, product: { images }} = this;
-                    this.current_image = current_image === images.preview.length - 1 ? 0 : current_image + 1;
+                    const { currentImage, product: { images }} = this;
+                    this.currentImage = currentImage === images.preview.length - 1 ? 0 : currentImage + 1;
                 }, 1600);
             }
         },

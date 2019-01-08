@@ -95,7 +95,7 @@ export default {
                         ref: 'featuredProductGallerySlider',
                         swiper: this.$refs.featuredProductGallerySlider && this.$refs.featuredProductGallerySlider.swiper,
                         products: this.$store.state.marketplace.featuredProducts,
-                        slides:[
+                        slides: [
                             {
                                 image:  {
                                     src:  this.$store.state.marketplace.featuredProducts[0].images.preview[0],
@@ -153,11 +153,11 @@ export default {
             })
 
             result.push({
-                type: 'product_slider',
+                type: 'productSlider',
                 data: {
                     title: 'New Releases',
                     slidesPerView: 3,
-                    products: this.$store.state.marketplace.newProducts
+                    products: this.$store.state.marketplace.newProducts.slice(0, 12)
                 }
             })
 
@@ -192,7 +192,7 @@ export default {
             })
 
             result.push({
-                type: 'product_slider',
+                type: 'productSlider',
                 data: {
                     title: 'Summer Sale',
                     slidesPerView: 3,

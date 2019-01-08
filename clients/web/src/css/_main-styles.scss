@@ -310,10 +310,7 @@ body::-webkit-scrollbar {
 .developer-banner {
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9d972+0,f7bf77+100 */
     background: #f9d972; /* Old browsers */
-    background: -moz-linear-gradient(left, #f9d972 0%, #f7bf77 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, #f9d972 0%, #f7bf77 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to right, #f9d972 0%, #f7bf77 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9d972', endColorstr='#f7bf77', GradientType=1); /* IE6-9 */
     display: flex;
     padding: 20px;
     justify-content: space-between;

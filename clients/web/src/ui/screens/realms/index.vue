@@ -11,7 +11,7 @@ export default {
             const result = []
 
             result.push({
-                type: 'realms_row',
+                type: 'realmsRow',
                 data: {
                     title: 'Realms',
                     ref: 'realms_sl',

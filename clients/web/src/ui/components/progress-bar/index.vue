@@ -65,10 +65,7 @@ export default {
     .progress-bar {
         border-radius: 10px;
         background: #2abaf3;
-        background: -moz-linear-gradient(left, #2abaf3 0%, #63ec48 100%);
-        background: -webkit-linear-gradient(left, #2abaf3 0%, #63ec48 100%);
         background: linear-gradient(to right, #2abaf3 0%, #63ec48 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2abaf3', endColorstr='#63ec48', GradientType=1);
         font-size: 13px;
         text-shadow: 0px 0px 4px #000;
         box-shadow: 0 0 3px 3px rgba(1,1,1,.05);

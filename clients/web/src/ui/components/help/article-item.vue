@@ -1,15 +1,15 @@
 <template>
     <div class="article-list-item">
-        <a :href="link">
+        <c-button status="none" :to="to" :href="link">
             <slot />
-        </a>
+        </c-button>
     </div>
 </template>
 
 <script>
     export default {
         name: 'article-list-item',
-        props:['link']
+        props: ['to', 'link']
     }
 </script>
 
@@ -18,12 +18,12 @@
         padding: 0;
         margin-bottom: 15px;
         display: block;
-        a{
+        .c-button{
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: #fff;
-            padding: 5px 15px 5px 40px;
+            padding: 10px 15px 10px 40px;;
             border-radius: 5px;
             box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
             line-height: 30px;

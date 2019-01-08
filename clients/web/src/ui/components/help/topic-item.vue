@@ -20,7 +20,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 15px;
+            padding: 10px 5px;
             text-align: center;
             color: #fff;
             font-weight: bold;

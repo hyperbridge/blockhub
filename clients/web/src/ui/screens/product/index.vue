@@ -2,12 +2,15 @@
     <c-layout navigationKey="product" :showRightPanel="false" navigationTitle="GAME OVERVIEW"
               :breadcrumbLinks="breadcrumbLinks" :showBreadcrumbs="!editing" class="product-single-page">
 
-        <div class="row" v-if="!product">
+        <c-loading :enabled="loading" size="lg" v-if="!product && loading" />
+
+        <div class="row" v-else-if="!product">
             <div class="col-12">
                 Product not found
             </div>
         </div>
-        <div class="row" v-if="product">
+
+        <div class="row" v-else>
             <div class="col-12 col-md-12">
                 <div class="row">
                     <div class="col-12 col-md-8">
@@ -336,6 +339,7 @@
                     'racing',
                     'action'
                 ],
+                loading: true,
                 syncing: false,
                 syncStep: 1,
                 importing: false,
@@ -449,6 +453,16 @@
             window.onbeforeunload = this.unsaved
 
             this.updateSection()
+
+            if (this.id !== 'new') {
+                this.$store.dispatch('products/find', {
+                    query: {
+                        id: this.id
+                    }
+                }).then(() => {
+                    this.loading = false
+                })
+            }
         },
         beforeDestroy() {
             window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'

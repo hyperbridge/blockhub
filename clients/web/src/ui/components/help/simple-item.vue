@@ -1,23 +1,23 @@
 <template>
     <div class="simple-list-item">
-        <a :href="link">
+        <c-button status="none" :to="to" :href="link">
             <slot />
-        </a>
+        </c-button>
     </div>
 </template>
 
 <script>
     export default {
         name: 'simple-list-item',
-        props:['link']
+        props: ['to', 'link']
     }
 </script>
 
 <style lang="scss" scoped>
-    .simple-list-item{
+    .simple-list-item {
         padding: 5px 0;
         width: 100%;
-        a{
+        a {
             color: #fff;
         }
     }

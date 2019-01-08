@@ -266,7 +266,7 @@
                     </div>
                 </template>
                 <p slot="footer">
-                    <c-button status="dark" href="#/help">Need help? Check the Help Center</c-button>
+                    <c-button status="dark" to="/help">Need help? Check the Help Center</c-button>
                 </p>
             </c-basic-popup>
 

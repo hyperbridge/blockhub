@@ -46,13 +46,23 @@
                     </div>
                 </div>
 
-                <div class="row" v-if="item.type === 'product_slider'">
+                <div class="row" v-if="item.type === 'productSlider'">
                     <div class="col-12">
-                        <c-product-slider :products="item.data.products" :title="item.data.title" :maxPerView="item.data.slidesPerView" v-if="item.data.products.length" />
+                        <c-product-slider :dynamic="false" :products="item.data.products" :title="item.data.title" :maxPerView="item.data.slidesPerView" v-if="item.data.products.length" />
 
                         <c-block class="margin-bottom-30" :title="item.data.title" :noGutter="true" :onlyContentBg="true" :bgGradient="true" v-else>
                             <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
                         </c-block>
+                    </div>
+                </div>
+
+                <div class="row margin-bottom-30" v-if="item.type === 'collectionsList'">
+                    <div class="col-12">
+                        <c-collection-list
+                            title="Get Started"
+                            description="Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain."
+                            :collections="item.data.collectionsList"
+                        />
                     </div>
                 </div>
 
@@ -71,28 +81,6 @@
                                 <h4 class="text-capitalize">What are they<br>playing?</h4>
                             </div>
                         </c-simple-banner>
-                    </div>
-                </div>
-
-                <c-games-explorer v-if="item.type === 'gamesExplorer'" />
-                <c-assets-explorer v-if="item.type === 'assetGrid'" :assets="assets" />
-
-                <div class="row margin-bottom-30" v-if="item.type === 'productNews'">
-                    <div class="col-12">
-
-                        <div class="home-tabs">
-                            <c-news-list-navigation
-                                :list="item.data.headings"
-                            />
-                            <div class="tab-content">
-                                <c-news-list-articles
-                                    v-for="(list, index) in item.data.lists"
-                                    :key="index"
-                                    :articles="list"
-                                    :index="index"
-                                />
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -115,6 +103,27 @@
                         </c-simple-banner>
                     </div>
                 </div>
+
+
+                <div class="row margin-bottom-30" v-if="item.type === 'productNews'">
+                    <div class="col-12">
+
+                        <div class="home-tabs">
+                            <c-news-list-navigation
+                                :list="item.data.headings"
+                            />
+                            <div class="tab-content">
+                                <c-news-list-articles
+                                    v-for="(list, index) in item.data.lists"
+                                    :key="index"
+                                    :articles="list"
+                                    :index="index"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <div class="row margin-bottom-30" v-if="item.type === 'curatorReviews'">
                     <div class="col-12">
@@ -139,6 +148,13 @@
                         </c-block>
                     </div>
                 </div>
+
+
+                <c-games-explorer v-if="item.type === 'gamesExplorer'" />
+
+
+                <c-assets-explorer v-if="item.type === 'assetGrid'" :assets="assets" />
+
 
                 <div class="row margin-bottom-30" v-if="item.type === 'trendingProjectsRow'">
                     <div class="col-12">
@@ -171,7 +187,8 @@
                     </div>
                 </div>
 
-                <div v-if="item.type === 'realms_row'">
+
+                <div v-if="item.type === 'realmsRow'">
                     <c-swiper :options="item.data.options" class="padding-10">
                         <c-slide v-for="(realm, index) in item.data.realms" :key="index">
                             <c-collection-item :item="realm" />
@@ -197,22 +214,13 @@
                     </c-block>
                 </div>
 
+
                 <div class="row margin-bottom-30" v-if="item.type === 'gameSeries'">
                     <div class="col-12">
                         <c-game-series v-for="(game, index) in item.data.list" :key="index">
                             <c-game-description :game="game" />
                             <c-game-includes-list :list="game.products" :showNumber="item.data.showNumber" />
                         </c-game-series>
-                    </div>
-                </div>
-
-                <div class="row margin-bottom-30" v-if="item.type === 'collectionsList'">
-                    <div class="col-12">
-                        <c-collection-list
-                            title="Get Started"
-                            description="Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain."
-                            :collections="item.data.collectionsList"
-                        />
                     </div>
                 </div>
 
@@ -237,6 +245,7 @@
                         </c-block>
                     </div>
                 </div>
+
 
                 <div class="row margin-bottom-30" v-if="item.type === 'topItemsGrid'">
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
@@ -333,7 +342,7 @@ export default {
             show   : false, // display content after API request
             offset : 1,     // items to display after scroll
             display: 3,     // initial items
-            trigger: 50,   // how far from the bottom to trigger infinite scroll
+            trigger: 300,   // how far from the bottom to trigger infinite scroll
             end    : false, // no more updates,
             curatorsIndex: 0
         }
@@ -435,10 +444,7 @@ export default {
                 bottom: 0;
                 width: 15%;
                 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#30314c+1,30314c+100&1+24,0+100 */
-                background: -moz-linear-gradient(left, rgba(48,49,76,1) 1%, rgba(48,49,76,1) 24%, rgba(48,49,76,0) 100%); /* FF3.6-15 */
-                background: -webkit-linear-gradient(left, rgba(48,49,76,1) 1%,rgba(48,49,76,1) 24%,rgba(48,49,76,0) 100%); /* Chrome10-25,Safari5.1-6 */
                 background: linear-gradient(to right, rgba(48,49,76,1) 1%,rgba(48,49,76,1) 24%,rgba(48,49,76,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#30314c', endColorstr='#0030314c',GradientType=1 ); /* IE6-9 */
                 &:before{
                     content: "\f104";
                     font-family: 'Font Awesome 5 Free';
@@ -464,10 +470,7 @@ export default {
                 bottom: 0;
                 width: 15%;
                 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#30314c+1,30314c+100&1+24,0+100 */
-                background: -moz-linear-gradient(left, rgba(48,49,76,0) 1%, rgba(48,49,76,1) 76%, rgba(48,49,76,1) 100%); /* FF3.6-15 */
-                background: -webkit-linear-gradient(left, rgba(48,49,76,0) 1%, rgba(48,49,76,1) 76%, rgba(48,49,76,1) 100%); /* Chrome10-25,Safari5.1-6 */
                 background: linear-gradient(to right, rgba(48,49,76,0) 1%, rgba(48,49,76,1) 76%, rgba(48,49,76,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0030314c', endColorstr='#30314c',GradientType=1 ); /* IE6-9 */
                 &:before{
                     content: "\f105";
                     font-family: 'Font Awesome 5 Free';
@@ -586,10 +589,7 @@ export default {
         padding: 15px;
         &.block-gradient{
             /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+88,000000+100&0.65+91,0+100 */
-            background: -moz-linear-gradient(top, rgba(0,0,0,0.2) 88%, rgba(0,0,0,0.2) 91%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
-            background: -webkit-linear-gradient(top, rgba(0,0,0,0.2) 88%,rgba(0,0,0,0.2) 91%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
             background: linear-gradient(to bottom, rgba(0,0,0,0.2) 88%,rgba(0,0,0,0.2) 91%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
         }
     }
 

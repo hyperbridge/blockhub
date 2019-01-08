@@ -102,16 +102,16 @@
                 Help
             </li>
             <li>
-                <a href="#/help/1/article/purchasing-with-cryptocurrency">Purchasing with Cryptocurrency</a>
-                <a href="#/help/1/article/content-availability-by-country">Content Availability by Country</a>
-                <a href="#/help/1/article/becoming-a-community-curator">Becoming a Community Curator</a>
-                <a href="#/help/1/article/18-plus-games-and-verification">18+ Games and Verification</a>
-                <a href="#/help/1/article/recporting-misleading-content">Reporting Misleading Content</a>
+                <c-button status="none" to="/help/1/article/purchasing-with-cryptocurrency">Purchasing with Cryptocurrency</c-button>
+                <c-button status="none" to="/help/1/article/content-availability-by-country">Content Availability by Country</c-button>
+                <c-button status="none" to="/help/1/article/becoming-a-community-curator">Becoming a Community Curator</c-button>
+                <c-button status="none" to="/help/1/article/18-plus-games-and-verification">18+ Games and Verification</c-button>
+                <c-button status="none" to="/help/1/article/recporting-misleading-content">Reporting Misleading Content</c-button>
             </li>
             <li>
-                <a href="#/help/1" class="btn btn-link">
+                <c-button status="none" to="/help/1" class="btn btn-link">
                     More...
-                </a>
+                </c-button>
             </li>
         </ul>
     </div>

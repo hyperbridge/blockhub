@@ -58,15 +58,11 @@
 <style lang="scss" scoped>
     @mixin gradient ($direction, $start_color, $end_color){
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#5ea72b+0,7db9e8+98&1+0,0+76 */
-        background: -moz-linear-gradient($direction, $start_color 0%, $end_color 100%); /* FF3.6-15 */
-        background: -webkit-linear-gradient($direction, $start_color 0%,$end_color 100%); /* Chrome10-25,Safari5.1-6 */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5ea72b', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 */
+        background: linear-gradient($direction, $start_color 0%,$end_color 100%); /* Chrome10-25,Safari5.1-6 */
     }
     @mixin gradient_center ($start_color, $center_color ,$end_color){
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2989d8+50,5ea72b+50,5ea72b+50&0+0,1+45,1+53,0+100 */
-        background: -moz-linear-gradient(left, $start_color 0%, $center_color 50%, $end_color 100%); /* FF3.6-15 */
-        background: -webkit-linear-gradient(left, $start_color 0%, $center_color 50%, $end_color 100%); /* Chrome10-25,Safari5.1-6 */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$start_color', endColorstr='$center_color',GradientType=1 ); /* IE6-9 */
+        background: linear-gradient(left, $start_color 0%, $center_color 50%, $end_color 100%); /* Chrome10-25,Safari5.1-6 */
     }
 
     .landing__block-title-gradient{
