@@ -11,7 +11,7 @@
                     </c-button>
                 </li>
             </ul>
-            <c-button status="outline-white" :href="assetsUrl">
+            <c-button status="outline-white" :to="assetsPath">
                 Go To Assets
             </c-button>
         </div>
@@ -26,7 +26,7 @@ export default {
     name: 'frequently-traded-assets',
     props: {
         items: Array,
-        assetsUrl: String
+        assetsPath: String
     },
     components: {
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),

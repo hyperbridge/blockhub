@@ -58,7 +58,7 @@
                 "g": 255,
                 "b": 255,
                 "image": "/static/img/icons/grid.png",
-                "href": "#/",
+                "href": "/",
                 "text": "Open Grid",
                 "sort": 1,
                 "removable": false

@@ -16,15 +16,15 @@
                     Some actions are not safe within a browser, so we built BlockHub it's own fortress, a safer environment for you to do much more!
                 </p>
                 <div class="action d-flex align-items-center">
-                    <a :href="defaultDownload.link"
+                    <c-button status="none" :to="defaultDownload.to"
                        class="btn btn-outline-success"
                        @click="startDownload(defaultDownload)"
                        v-if="!downloading">
                         <strong>Download Now</strong>
                         <small>for {{ defaultDownload.text }}</small>
-                    </a>
+                    </c-button>
                     <div v-if="downloading">
-                        Downloading now. <a :href="downloading.link">Click here</a><br> if it doesn't start in 10 seconds.
+                        Downloading now. <c-button status="none" :to="downloading.to">Click here</c-button><br> if it doesn't start in 10 seconds.
                     </div>
                     <div class="download_info" @click="showAllPlatforms">
                         <h6>Using another OS?</h6>
@@ -37,12 +37,12 @@
             </div>
             <div class="other_options" v-if="showAll">
                 <div v-for="(item, index) in downloads" :key="index">
-                    <a :href="item.link"
+                    <c-button status="none" :to="item.to"
                        class="btn"
                        v-for="(item, index) in item" :key="index">
                         <strong>{{ item.text }}</strong>
                         <small>{{ item.subtext }}</small>
-                    </a>
+                    </c-button>
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
         },
         data() {
             return {
-                user_agent: '',
+                userAgent: '',
                 showAll: false,
                 downloading: null,
                 defaultDownload: null,
@@ -71,41 +71,41 @@
                         default: {
                             text: 'MacOS',
                             subtext: '64-bit',
-                            link: '#/download/desktop/mac'
+                            to: '/download/desktop/mac'
                         }
                     },
                     'windows': {
                         default: {
                             text: 'Windows',
                             subtext: '64-bit',
-                            link: '#/download/desktop/windows'
+                            to: '/download/desktop/windows'
                         },
                         generic32: {
                             text: 'Windows',
                             subtext: '32-bit',
-                            link: '#/download/desktop/windows-32bit'
+                            to: '/download/desktop/windows-32bit'
                         },
                     },
                     'linux': {
                         default: {
                             text: 'Linux',
                             subtext: '64-bit',
-                            link: '#/download/desktop/linux'
+                            to: '/download/desktop/linux'
                         },
                         generic32: {
                             text: 'Linux',
                             subtext: '32-bit',
-                            link: '#/download/desktop/linux-32bit'
+                            to: '/download/desktop/linux-32bit'
                         },
                         debian64: {
                             text: 'Linux',
                             subtext: '64-bit Debian',
-                            link: '#/download/desktop/linux-64bit-debian'
+                            to: '/download/desktop/linux-64bit-debian'
                         },
                         debian32: {
                             text: 'Linux',
                             subtext: '32-bit Debian',
-                            link: '#/download/desktop/linux-32bit-debian'
+                            to: '/download/desktop/linux-32bit-debian'
                         }
                     }
                 }
@@ -124,18 +124,18 @@
                     os = null;
 
                 if (macosPlatforms.indexOf(platform) !== -1) {
-                    this.user_agent = 'macos';
+                    this.userAgent = 'macos';
                 } else if (iosPlatforms.indexOf(platform) !== -1) {
-                    this.user_agent = 'ios';
+                    this.userAgent = 'ios';
                 } else if (windowsPlatforms.indexOf(platform) !== -1) {
-                    this.user_agent = 'windows';
+                    this.userAgent = 'windows';
                 } else if (/Android/.test(userAgent)) {
-                    this.user_agent = 'android';
+                    this.userAgent = 'android';
                 } else if (!os && /Linux/.test(platform)) {
-                    this.user_agent = 'linux';
+                    this.userAgent = 'linux';
                 }
 
-                this.defaultDownload = this.downloads[this.user_agent].default
+                this.defaultDownload = this.downloads[this.userAgent].default
             },
             showAllPlatforms(){
                 this.showAll = !this.showAll;

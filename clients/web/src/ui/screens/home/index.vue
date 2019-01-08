@@ -2,7 +2,7 @@
     <c-layout navigationKey="store">
             <div class="row" hidden>
                 <div class="col-12 mb-4">
-                    <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="#/token">
+                    <c-banner :imgSrc="'/static/img/banners/banner-3.png'" to="/token">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h3 class="text-yellow">Launch Sale</h3>
@@ -172,7 +172,7 @@ export default {
                             title: 'Item Marketplace',
                             subtitle: 'All-in-one spot for games assets',
                             buttonText: 'GAME ON',
-                            link: '#/marketplace'
+                            to: '/marketplace'
                         },
                         {
                             type: 4,
@@ -180,7 +180,7 @@ export default {
                             image: '/static/img/banners/banner-4.png',
                             title: 'Top Collections',
                             subtitle: 'Our community has curated the best ones for you',
-                            link: '#/collections'
+                            to: '/collections'
                         },
                     ]
                 }

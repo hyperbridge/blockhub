@@ -7,7 +7,7 @@
                             <div class="row">
                                 <div class="topics-list col-3">
                                     <c-topic-item
-                                        link="#/business/product/new"
+                                        to="/business/product/new"
                                         icon="fas fa-window-restore"
                                         class="padding-10">
                                         New Product

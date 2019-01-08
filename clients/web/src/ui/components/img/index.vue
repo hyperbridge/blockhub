@@ -16,17 +16,17 @@ export default {
             attrs: {
                 src: this.dynamicSrc
             }
-        });
+        })
     },
     computed: {
         dynamicSrc() {
-            return !this.src || this.error ? (this.loaded ? this.blank : this.loader) : this.src;
+            return !this.src || this.error ? (this.loaded ? this.blank : this.loader) : this.src
         },
         listeners() {
             return {
                 ...this.$listeners,
                 error: () => {
-                    if (!this.error) this.error = true;
+                    if (!this.error) this.error = true
                 },
                 load: () => this.loaded = true
             }

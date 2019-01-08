@@ -31,7 +31,7 @@
         </div>
         <div class="col-12 col-lg-4 col-xl-4" v-if="idea.rating">
             <c-rating-block class="margin-bottom-20" :items="[{ name: 'General', value: idea.rating.value }]"
-                            :parentUrl="`#/idea/${idea.id}`" v-darklaunch="'RATINGS'" />
+                            :parentPath="`/idea/${idea.id}`" v-darklaunch="'RATINGS'" />
         </div>
     </div>
 </template>

@@ -4,8 +4,6 @@ import store from '../store'
 
 Vue.use(Router)
 
-const appVersion = '0.8.1'
-
 
 const sites = {
     'default': { routes: require('../sites/blockhub/routes').default },

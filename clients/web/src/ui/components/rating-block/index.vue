@@ -13,10 +13,10 @@
                     />
                 </li>
             </ul>
-            <c-button status="outline-white" :href="fullReviewsLink" v-if="fullReviewsLink">
+            <c-button status="outline-white" :to="fullReviewsPath" v-if="fullReviewsPath">
                 See Full Reviews
             </c-button>
-            <c-button status="outline-white" :href="rateGameLink" v-if="rateGameLink">
+            <c-button status="outline-white" :to="rateGamePath" v-if="rateGamePath">
                 Rate this game
             </c-button>
         </div>
@@ -34,10 +34,10 @@ export default {
         items: {
             type: [Array, Object]
         },
-        fullReviewsLink: {
+        fullReviewsPath: {
             type: String
         },
-        rateGameLink: {
+        rateGamePath: {
             type: String
         }
     },

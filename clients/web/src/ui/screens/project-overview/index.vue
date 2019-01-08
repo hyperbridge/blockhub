@@ -142,7 +142,7 @@
             </div>
 
             <c-community-spotlight :discussions="project.community.discussions"
-                                   :community_url="`#/project/${project.id}`" :editing="editing"
+                                   :communityPath="`/project/${project.id}`" :editing="editing"
                                    :activeElement="activeElement['milestones']"
                                    class="margin-bottom-30" />
 

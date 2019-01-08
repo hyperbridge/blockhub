@@ -17,7 +17,7 @@
 
                     <p class="loader-block__message">{{ userSubmittedConnectionMessage.message }}</p>
                     <p class="loader-block__user">Submitted by <a
-                        :href="`#/profile/${userSubmittedConnectionMessage.user.id}`">@{{ userSubmittedConnectionMessage.user.name }}</a></p>
+                        :href="`/profile/${userSubmittedConnectionMessage.user.id}`">@{{ userSubmittedConnectionMessage.user.name }}</a></p>
 
                     <h1 class="loader-block__status-code" v-if="connectionStatus.code">ERROR {{ connectionStatus.code }}</h1>
 
@@ -241,7 +241,7 @@
                 <div class="h4" slot="header">Propose Idea</div>
                 <template slot="body">
                     <div v-if="activeProfile && activeProfile.role === 'curator'">
-                        <p>Great, you're a curator. <c-button class="underline" href="#/project/new">Click here to continue</c-button>.</p>
+                        <p>Great, you're a curator. <c-button class="underline" href="/project/new">Click here to continue</c-button>.</p>
                     </div>
                     <div v-else>
                         <p>

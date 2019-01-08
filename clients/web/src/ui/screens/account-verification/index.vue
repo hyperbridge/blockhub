@@ -208,7 +208,7 @@
                     const data = {
                         verification: {
                             features: [ 'selfid' ],
-                            callback: 'https://blockhub.gg#/account/verification/callback',
+                            callback: 'https://blockhub.gg/account/verification/callback',
                             person: {
                                 firstName: this.firstName,
                                 lastName: this.lastName,

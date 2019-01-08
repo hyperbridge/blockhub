@@ -51,7 +51,7 @@
                         </div>
                         <div class="wallets-list">
                             <div class="wallet-item" v-for="(wallet, index) in wallets" :key="index">
-                                <a class="wallet-item__info" :href='`#/wallet/${wallet.id}`'>
+                                <c-button status="none" class="wallet-item__info" :to='`/wallet/${wallet.id}`'>
                                     <div class="wallet-item__head">
                                         <div class="wallet-item__name" :class="{ preferred: wallet.preferredSwitcher }">
                                             <i class="fab fa-bitcoin"></i>
@@ -90,7 +90,7 @@
                                             <i class="fas fa-copy"></i>
                                         </div>
                                     </div>
-                                </a>
+                                </c-button>
                                 <div class="wallet-item__footer">
                                     <div class="wallet-item__preferredSwitcher">
                                         <label class="switch switch-sm">

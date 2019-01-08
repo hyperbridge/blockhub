@@ -66,7 +66,7 @@
                             </div>
                         </c-block>
 
-                        <c-banner :imgSrc="'/static/img/banners/banner-1.png'" link="#/home">
+                        <c-banner :imgSrc="'/static/img/banners/banner-1.png'" to="/">
                             <div class="align-items-start" style="margin-top: auto">
                                 <h3 class="text-white h1 font-weight-bold p-0 m-0">Very Fiery Contest</h3>
                                 <p class="text-capitalize h3 my-3">What are they playing?</p>

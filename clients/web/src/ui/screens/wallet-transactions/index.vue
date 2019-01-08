@@ -4,10 +4,10 @@
             <div class="col-12">
                 <ul class="nav nav-tabs margin-bottom-10">
                     <li class="nav-item">
-                        <a class="nav-link" :href="`#/account/wallets`">Overview</a>
+                        <c-button status="none" class="nav-link" to="/account/wallets">Overview</c-button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Transactions</a>
+                        <c-button status="none" class="nav-link active" to="/account/transactions">Transactions</c-button>
                     </li>
                 </ul>
                 <div class="filter-line margin-bottom-50">

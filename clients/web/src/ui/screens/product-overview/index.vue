@@ -34,34 +34,34 @@
         </div>
         <div class="col-12 col-lg-4 col-xl-4">
             <c-purchase-block
+                class="margin-bottom-15"
                 :isUnavailable="!currentRelease"
                 :price="product.price"
                 :tags="['New']"
                 :onClickPurchase="showPurchaseModal"
-                class="margin-bottom-15"
                 :inWishlist="!!wishlist[product.id]"
                 :inShortcut="$store.state.application.shortcuts.find(s => s.id == ('product' + product.id))"
                 :releaseDate="product.releaseDate"
-                :playLink="currentRelease && currentRelease.play_link"
+                :playLink="currentRelease && currentRelease.playLink"
                 @addToWishlist="$store.dispatch(
                     'community/updateWishlist',
                     ['product', product.id]
                 )"
                 @addToShortcut="$store.commit(
                     'application/updateShortcut',
-                    { id: 'product' + product.id, type: 'product', text: product.name, link: '#/product/' + product.id, image: product.images.mediumTile }
+                    { id: 'product' + product.id, type: 'product', text: product.name, to: '/product/' + product.id, image: product.images.mediumTile }
                 )"
             />
             <c-button iconHide @click="showInstaller = !showInstaller" hidden>Open installer</c-button>
 
             <c-rating-block class="margin-bottom-20" :items="product.rating"
-                            :parentUrl="`#/product/${product.id}`" v-darklaunch="'RATINGS'" @goto="scrollToReviews" />
+                            :parentPath="`/product/${product.id}`" v-darklaunch="'RATINGS'" @goto="scrollToReviews" />
 
             <c-frequently-traded-assets class="margin-bottom-20" :items="product.frequentlyTradedAssets"
-                                        :assetsUrl="`#/product/${product.id}/assets`" v-darklaunch="'ASSETS'" />
+                                        :assetsPath="`/product/${product.id}/assets`" v-darklaunch="'ASSETS'" />
 
             <c-community-spotlight class="margin-bottom-20" :discussions="product.community.discussions"
-                                    :communityUrl="`#/product/${product.id}/community`" v-darklaunch="'COMMUNITY'" />
+                                    :communityPath="`/product/${product.id}/community`" v-darklaunch="'COMMUNITY'" />
 
             <c-block :title="`Official`"
                      :noGutter="true"

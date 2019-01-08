@@ -59,7 +59,7 @@
             tradeURL() {
                 const { tradeURLId } = this.account
                 const { id } = this.profile
-                return `${window.location.origin}#/tradeoffer/new/?partner=${id}&id=${tradeURLId}`
+                return `${window.location.origin}/tradeoffer/new/?partner=${id}&id=${tradeURLId}`
             },
             assets() { return this.$store.state.assets.assets }
         },

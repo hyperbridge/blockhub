@@ -1,10 +1,10 @@
 <template>
     <div class="banner" :style="{ 'background-image' : 'url(' + imgSrc + ')' }">
-        <a :href="link" class="block-link" v-if="link">
+        <c-button status="none" :to="to" :href="link" class="block-link">
             <div class="banner__text">
                 <slot />
             </div>
-        </a>
+        </c-button>
     </div>
 </template>
 
@@ -13,7 +13,8 @@
         name: 'simple-banner',
         props: {
             imgSrc: String,
-            link: String
+            link: String,
+            to: String
         }
     }
 </script>
@@ -45,7 +46,7 @@
         text-decoration: none;
         display: flex;
         height: 100%;
-        padding: 25px;
+        padding: 25px !important;
     }
     .banner__text{
         display: flex;

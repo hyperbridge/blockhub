@@ -9,7 +9,7 @@
                             <c-simple-vote :rating="item.rating" v-if="activeElementIndex === index" v-darklaunch="'RATINGS'" />
                             <div class="row">
                                 <div class="col-12 col-lg-6 frontpage-product__slider" v-if="item.data.images">
-                                    <c-img :src="item.data.images.mediumTile" :data-link="`#/product/${item.data.id}`" />
+                                    <c-img :src="item.data.images.mediumTile" :data-link="`/product/${item.data.id}`" />
                                 </div>
                                 <div class="col-12 col-lg-6 frontpage-product__info">
                                     <h2><router-link :to="`/product/${item.data.id}`">{{ item.data.name }}</router-link></h2>
@@ -68,14 +68,14 @@
 
                 <div class="row align-items-stretch" v-if="item.type === 'banners'">
                     <div class="col-12 col-md-5 col-lg-4 margin-bottom-30">
-                        <c-simple-banner :imgSrc="'/static/img/banners/banner-1.png'" link="#/battlepass/1">
+                        <c-simple-banner :imgSrc="'/static/img/banners/banner-1.png'" to="/battlepass/1">
                             <h4 class="text-yellow">summer block</h4>
                             <h3>Championship</h3>
                             <p>You won't believe the prize!</p>
                         </c-simple-banner>
                     </div>
                     <div class="col-12 col-md-7 col-lg-8 margin-bottom-30">
-                        <c-simple-banner :imgSrc="'/static/img/banners/banner-2.png'" link="#/curators">
+                        <c-simple-banner :imgSrc="'/static/img/banners/banner-2.png'" to="/curators">
                             <div class="align-items-start">
                                 <h3 class="text-yellow margin-bottom-5">top<br>curators</h3>
                                 <h4 class="text-capitalize">What are they<br>playing?</h4>

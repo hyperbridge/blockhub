@@ -1,10 +1,10 @@
 <template>
     <c-block title="Community Spotlight" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
         <template slot="heading-bar">
-            <a :href="communityUrl" class="title-icon text-white">
+            <c-button status="none" :to="communityPath" class="title-icon text-white">
                 <i class="fas fa-comments" v-if="!activateElement"></i>
                 <i class="fas fa-cog" v-else></i>
-            </a>
+            </c-button>
         </template>
         <div class="w-100" v-if="discussions.length > 0">
             <div class="editor-container editor-container--style-2" v-if="editing">
@@ -20,7 +20,7 @@
                     </a>
                 </li>
             </ul>
-            <c-button status="outline-white" :href="communityUrl" hide_icon>
+            <c-button status="outline-white" :to="communityPath" hide_icon>
                 Go To Community
             </c-button>
         </div>
@@ -36,7 +36,7 @@ export default {
     name: 'community-spotlight',
     props: {
         discussions: Array,
-        communityUrl: String,
+        communityPath: String,
         editing: Boolean,
         activateElement: Boolean
     },

@@ -144,7 +144,7 @@
                             <ul>
                                 <li class="title">TOP 5</li>
                                 <li v-for="(product, index) in $store.state.marketplace.top5" :key="index" v-if="index < 5">
-                                    <c-button status="none" :to="`#/product/${product.id}`">
+                                    <c-button status="none" :to="`/product/${product.id}`">
                                         <span class="text">{{ product.name }}</span>
                                     </c-button>
                                 </li>
