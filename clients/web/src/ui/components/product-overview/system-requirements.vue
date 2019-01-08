@@ -3,7 +3,7 @@
         <template slot="heading-bar">
             <i class="fas fa-laptop title-icon"></i>
         </template>
-        <c-tabs-universal :tabNames="['Mac', 'Win', 'Linux']">
+        <c-tabs-universal :tabNames="['Mac', 'Win', 'Linux']" :setActiveTab="activeTab">
             <c-tab-universal
                 v-for="(os, index) in ['Mac', 'Win', 'Linux']"
                 :tab_id="index + 1"
@@ -41,24 +41,32 @@ export default {
             required: true
         }
     },
+    data() {
+        let activeTab = this.platform('Win') || this.platform('Mac') || this.platform('Linux')
+
+        activeTab = activeTab ? activeTab.os : 'win'
+
+        return {
+            activeTab: activeTab === 'mac' ? 1 : (activeTab === 'win' ? 2 : 3)
+        }
+    },
     components: {
-        'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-tab-universal': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve),
         'c-tabs-universal': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve)
     },
-    methods:{
-        platform(val){
-            return this.requirements.find( (obj) => {
-                if ( obj['os'] === val.toLowerCase())
+    methods: {
+        platform(val) {
+            return this.requirements.find((obj) => {
+                if (obj['os'] === val.toLowerCase())
                     return obj
                 else
-                    return false;
-            });
+                    return false
+            })
         }
     },
     filters: {
         reqProp(val) {
-            return val.replace(/[\s_]+/g, ' ').toUpperCase();
+            return val.replace(/[\s_]+/g, ' ').toUpperCase()
         }
     },
 }

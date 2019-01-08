@@ -11,7 +11,7 @@
                     </p>
                     <form action="/" method="post">
                         <c-tabs
-                            :active_tab_prop="currentStep"
+                            :activeTabProp="currentStep"
                             :lockedStep="finishedStep"
                             @click="changeTab($event)"
                             tabText="Step"

@@ -734,20 +734,20 @@ storiesOf('Tabs', module)
         },
         data() {
             return {
-                active_tab: 1
+                activeTab: 1
             }
         },
         template: `
             <div class="padding-50">
                 <c-tabs-universal
                     style="color: #fff;"
-                    :active_tab_prop="active_tab"
+                    :activeTabProp="activeTab"
                 >
                     <template slot="nav">
-                        <button @click="active_tab = 1">Tab 1</button>
-                        <button @click="active_tab = 2">Tab 2</button>
-                        <button @click="active_tab = 3">Tab 3</button>
-                        <button @click="active_tab = 4">Tab 4</button>
+                        <button @click="activeTab = 1">Tab 1</button>
+                        <button @click="activeTab = 2">Tab 2</button>
+                        <button @click="activeTab = 3">Tab 3</button>
+                        <button @click="activeTab = 4">Tab 4</button>
                     </template>
                     <c-tab-universal :tab_id="1">
                         First tab
@@ -772,19 +772,19 @@ storiesOf('Tabs', module)
         data() {
             return {
                 locked_step: 1,
-                locked_tab: 1
+                lockedTab: 1
             }
         },
         methods: {
             changeLockedTab() {
-                this.locked_tab = Math.floor(Math.random() * 3);
+                this.lockedTab = Math.floor(Math.random() * 3);
             }
         },
         template: `
             <div class="padding-50">
                 <c-tabs-universal
                     style="color: #fff;"
-                    :locked_tab="locked_tab"
+                    :lockedTab="lockedTab"
                 >
                     <c-tab-universal :tab_id="0">
                         First tab

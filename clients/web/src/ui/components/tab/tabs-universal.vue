@@ -10,10 +10,10 @@
                         :class="'layer' + tab.id"
                     >
                         <a
-                            :aria-selected="active_tab == tab.id"
+                            :aria-selected="activeTab == tab.id"
                             class="list-item__link"
                             :class="{
-                                'active': active_tab == tab.id,
+                                'active': activeTab == tab.id,
                                 'locked': isTabLocked(tab.id),
                             }"
                             @click.prevent="tabClick(tab.id)"
@@ -34,25 +34,25 @@
             tabNames: Array,
             setActiveTab: [Number, String],
             tabText: String,
-            active_tab_prop: [Number, String],
+            activeTabProp: [Number, String],
             lockedStep: Number,
-            locked_tab: Number,
+            lockedTab: Number,
             styled: Boolean,
             disableMenu: Boolean
         },
         data() {
             return {
                 tabs: [],
-                active_tab_data: 1
+                activeTab_data: 1
             }
         },
         methods: {
             isTabLocked(index) {
-                const { lockedStep, locked_tab } = this;
-                return (locked_tab != null && locked_tab == index) || (lockedStep != null && !(index < lockedStep));
+                const { lockedStep, lockedTab } = this;
+                return (lockedTab != null && lockedTab == index) || (lockedStep != null && !(index < lockedStep));
             },
             tabClick(index) {
-                this.active_tab_data = index;
+                this.activeTab_data = index;
                 this.$emit('click', index);
             }
         },
@@ -65,12 +65,12 @@
                         id: index + 1
                       }));
             },
-            active_tab() {
-                const { setActiveTab, active_tab_prop, active_tab_data } = this;
+            activeTab() {
+                const { setActiveTab, activeTabProp, activeTab_data } = this;
                 return setActiveTab == null
-                    ? active_tab_prop == null
-                        ? active_tab_data
-                        : active_tab_prop
+                    ? activeTabProp == null
+                        ? activeTab_data
+                        : activeTabProp
                     : setActiveTab;
             },
             activeStyle() {
@@ -79,9 +79,9 @@
         },
         provide() {
             const tab_data = {};
-            Object.defineProperty(tab_data, 'active_tab', {
+            Object.defineProperty(tab_data, 'activeTab', {
                 enumerable: true,
-                get: () => this.active_tab
+                get: () => this.activeTab
             });
             return { tab_data }
         },

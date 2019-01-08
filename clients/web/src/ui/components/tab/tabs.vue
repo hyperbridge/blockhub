@@ -39,7 +39,7 @@
             }
         },
         created() {
-            this.tabs = this.$children;
+            this.tabs = this.$children
         },
         methods: {
             selectTab(tabName, tabIndex) {
@@ -47,14 +47,14 @@
 
                     if (tabIndex + 1 <= this.currentStep) {
                         this.tabs.forEach((tab, i) => {
-                            tab.isActive = tabIndex == i;
-                        });
+                            tab.isActive = tabIndex == i
+                        })
                     }
 
                 } else {
                     this.tabs.forEach(tab => {
-                        tab.isActive = (tab.name == tabName);
-                    });
+                        tab.isActive = (tab.name == tabName)
+                    })
                 }
             }
         }

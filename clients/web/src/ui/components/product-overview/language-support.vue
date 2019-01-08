@@ -63,44 +63,40 @@
                 langList: []
             }
         },
-        created(){
-            let lang = this.$store.state.application.account.language,
-                arr = this.languages;
-            this.userLang = lang.name.toLowerCase();
-            arr.forEach( (el) => {
+        created() {
+            let lang = (this.$store.state.application.account && this.$store.state.application.account.meta ? this.$store.state.application.account.meta.language : {name: "English"}),
+                arr = this.languages
+            
+            this.userLang = lang.name.toLowerCase()
+            arr.forEach((el) => {
                 if (el.name) {
-                    if ( this.userLang.includes(el.name.toLowerCase()) ){
-                        el.order = 0;
-                        el.show = 'default';
-                        this.langList.push(el);
+                    if (this.userLang.includes(el.name.toLowerCase())) {
+                        el.order = 0
+                        el.show = 'default'
+                        this.langList.push(el)
                     } else {
-                        el.order = 1;
+                        el.order = 1
                         this.langList.push(el)
                     }
                 }
                 else {
                     if (el.name === 'English') {
-                        el.order = 0;
-                        el.show = 'default';
+                        el.order = 0
+                        el.show = 'default'
                     }
                     this.langList.push(el)
                 }
             })
         },
-        methods:{
-            toggleLang(){
-                this.show = !this.show;
+        methods: {
+            toggleLang() {
+                this.show = !this.show
             }
         },
-        computed:{
-            orderLang(){
-                return this.langList.sort( (a, b) => {
-                    return a.order - b.order;
-                })
+        computed: {
+            orderLang() {
+                return this.langList.sort((a, b) => a.order - b.order)
             }
-        },
-        components: {
-            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         }
     }
 </script>

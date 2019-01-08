@@ -25,7 +25,7 @@
                                         </li>
                                     </ul>
                                 </nav>
-                                <c-tabs :active_tab_prop="activeTab" disableMenu>
+                                <c-tabs :activeTabProp="activeTab" disableMenu>
                                     <c-tab
                                         v-for="(offers, offersKey, index) in offers"
                                         :key="offersKey"

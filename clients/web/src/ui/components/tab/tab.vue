@@ -33,15 +33,15 @@
         data() {
             return {
                 isActive: false
-            };
+            }
         },
         computed: {
             href() {
-                return '#' + this.name.toLowerCase().replace(/ /g, '-');
+                return '#' + this.name.toLowerCase().replace(/ /g, '-')
             }
         },
         mounted() {
-            this.isActive = this.selected;
+            this.isActive = this.selected
         }
     }
 </script>
