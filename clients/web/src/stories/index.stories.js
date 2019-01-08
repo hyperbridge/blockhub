@@ -1671,7 +1671,15 @@ storiesOf('Popups', module)
         components: {
             'c-basic-popup': BasicPopup,
             'c-dotted-list': List,
-            'c-heading-bar-color': BlockHeadersColor
+            'c-heading-bar-color': BlockHeadersColor,
+            'c-emoji-single': EmojiSingle
+        },
+        data(){
+            return{
+                pensive: 0,
+                smile: 0,
+                neutral_face: 0
+            }
         },
         template: `
         <div class="row p-5">
@@ -1712,9 +1720,17 @@ storiesOf('Popups', module)
                             dui volutpat varius quis eget elit.
                         </p>
                     </template>
-                    <small slot="footer">
-                        Missed an Updates? <c-button status="plain">Check out our previous change log.</c-button>
-                    </small>
+                    <template slot="footer">
+                        <div class="d-flex align-items-center justify-content-center pt-2 pb-4 w-100">
+                            <c-emoji-single emoji="pensive" class="mx-1" :count="pensive" @click="pensive += 1" />
+                            <c-emoji-single emoji="neutral_face" class="mx-2" :count="neutral_face" @click="neutral_face += 1" />
+                            <c-emoji-single emoji="smile" class="mx-1" :count="smile" @click="smile += 1" />
+                        </div>
+                        <c-input placeholder="Send us your feadback" bgColor="rgba( 255, 255, 255, .1)" />
+                        <small class="w-100 text-center" hidden>
+                            Missed an Updates? <c-button status="plain">Check out our previous change log.</c-button>
+                        </small>
+                    </template>
                 </c-basic-popup>
             </div>
         </div>
@@ -4484,15 +4500,25 @@ storiesOf('Game Installer Modal', module)
 
 
 import Emoji from '@/ui/components/emoji'
+import EmojiSingle from '@/ui/components/emoji/single'
 
 storiesOf('Emoji', module)
-    .add('default', () => ({
+    .add('picker', () => ({
         components: {
             'c-emoji': Emoji
         },
         template: `
         <div class="p-5">
             <c-emoji />
+        </div>`
+    }))
+    .add('single', () => ({
+        components: {
+            'c-emoji-single': EmojiSingle
+        },
+        template: `
+        <div class="p-5">
+            <c-emoji-single count="99" />
         </div>`
     }))
 
@@ -5779,6 +5805,80 @@ storiesOf('Giphy', module)
                 </div>
         `
     }))
+
+
+storiesOf('Table', module)
+    .add('default', () => ({
+        components: {
+            'c-table-simple': (resolve) => require(['@/ui/components/table-simple'], resolve),
+        },
+        data(){
+            return{
+                fields:[
+                    {
+                        label: 'First TH',
+                        key: 'first'
+                    },
+                    {
+                        label: 'Second TH',
+                        key: 'second'
+                    },
+                    {
+                        label: 'Third TH',
+                        key: 'third'
+                    },
+                    {
+                        label: 'Last TH',
+                        key: 'last'
+                    }
+                ],
+                rows: [
+                    {
+                        first: '1',
+                        second: '2',
+                        third: '3',
+                        last: '4',
+                    },
+                    {
+                        first: '1',
+                        third: '3',
+                        second: '2',
+                        last: '4',
+                    },
+                    {
+                        first: '1',
+                        last: '4',
+                        third: '3',
+                        second: '2',
+                    }
+                ]
+            }
+        },
+        template: `
+                <div class="row p-5" style="width: 800px">
+                    <c-table-simple>
+                        <thead>
+                            <tr>
+                                <th v-for="field in fields">
+                                    {{ field.label }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="row in rows">
+                                <td v-for="field in row">
+                                    {{ field }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </c-table-simple>
+                </div>
+        `
+    }))
+
+
+
+
 /*
      Dynamic import - test version
 

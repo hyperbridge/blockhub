@@ -124,6 +124,7 @@
         justify-content: flex-end;
         align-items: center;
         margin-top: 30px;
+        flex-wrap: wrap;
         .c-button{
             &.color-red{
                 color: #F75D5D;

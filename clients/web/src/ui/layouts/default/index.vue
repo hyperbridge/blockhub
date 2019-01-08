@@ -145,7 +145,7 @@
                 </p>
             </c-basic-popup>
 
-
+            <!--create-shortcut popup-->
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'create-shortcut'"
                 @close="$store.state.application.activeModal = null"
@@ -172,7 +172,7 @@
                 </p>
             </c-basic-popup>
 
-
+            <!--coming-soon popup-->
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'coming-soon'"
                 @close="$store.state.application.activeModal = null"
@@ -194,7 +194,7 @@
                 </p>
             </c-basic-popup>
 
-
+            <!--token-contract popup-->
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'token-contract'"
                 @close="$store.state.application.activeModal = null"
@@ -211,7 +211,7 @@
                 </p>
             </c-basic-popup>
 
-
+            <!--report popup-->
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'report'"
                 @close="$store.state.application.activeModal = null"
@@ -233,7 +233,7 @@
                 </p>
             </c-basic-popup>
 
-
+            <!--propose-idea popup-->
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'propose-idea'"
                 @close="$store.commit('application/activateModal', null)"
@@ -270,7 +270,7 @@
                 </p>
             </c-basic-popup>
 
-
+            <!--notification popup-->
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'notification'"
                 @close="$store.state.application.activeModal = null"
@@ -284,7 +284,7 @@
                 </p>
             </c-basic-popup>
 
-
+            <!--addition-details popup-->
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'addition-details'"
                 @close="$store.state.application.activeModal = null"
@@ -304,7 +304,7 @@
                 </p>
             </c-basic-popup>
 
-
+            <!--connection-status popup-->
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'connection-status'"
                 @close="$store.state.application.activeModal = null"
@@ -338,7 +338,7 @@
                 </p>
             </c-basic-popup>
 
-
+            <!--withdraw popup-->
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'withdraw'"
                 @close="$store.state.application.activeModal = null"
@@ -397,7 +397,7 @@
                 </p>
             </c-basic-popup>
 
-
+            <!--deposit popup-->
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'deposit'"
                 @close="$store.state.application.activeModal = null"
