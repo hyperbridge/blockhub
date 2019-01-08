@@ -8,7 +8,7 @@
             <div>
                 Discover the best games before they're mainstream.
             </div>
-            <c-button status="outline-white" to="/download">
+            <c-button status="outline-white" @click="$store.commit('application/activateModal', 'register')">
                 Sign Up
             </c-button>
         </div>
