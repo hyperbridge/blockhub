@@ -299,31 +299,31 @@ export default [
     },
     {
         path: '/profile/:id/contacts',
-        name: 'Profile Contacts',
+        name: 'Contacts',
         props: true,
         component: (resolve) => require(['@/ui/screens/profile-contacts'], resolve)
     },
     {
         path: '/profile/:id/projects',
-        name: 'Profile Projects',
+        name: 'Crowdfunds',
         props: true,
         component: (resolve) => require(['@/ui/screens/profile-projects'], resolve)
     },
     {
         path: '/profile/:id/licenses',
-        name: 'Profile licenses',
+        name: 'Licenses',
         props: true,
         component: (resolve) => require(['@/ui/screens/profile-licenses'], resolve)
     },
     {
         path: '/profile/:id/assets',
-        name: 'Profile Assets',
+        name: 'Assets',
         props: true,
         component: (resolve) => require(['@/ui/screens/profile-assets'], resolve)
     },
     {
         path: '/profile/:id/collections',
-        name: 'Profile Collections',
+        name: 'Collections',
         props: true,
         component: (resolve) => require(['@/ui/screens/profile-collection'], resolve)
     },
@@ -463,7 +463,7 @@ export default [
     },
     {
         path: '/product/:id/projects',
-        name: 'Product Projects',
+        name: 'Product Crowdfunds',
         props: true,
         component: (resolve) => require(['@/ui/screens/product'], resolve),
         meta: {
@@ -606,7 +606,7 @@ export default [
     },
     {
         path: '/project/new',
-        name: 'Project',
+        name: 'Crowdfund',
         props: true,
         component: (resolve) => require(['@/ui/screens/project'], resolve),
         props: {
@@ -620,7 +620,7 @@ export default [
     },
     {
         path: '/project/:id',
-        name: 'Project',
+        name: 'Crowdfund',
         props: true,
         component: (resolve) => require(['@/ui/screens/project'], resolve),
         meta: {
@@ -629,7 +629,7 @@ export default [
     },
     {
         path: '/project/:id/bounties',
-        name: 'Project Bounties',
+        name: 'Crowdfund Bounties',
         props: true,
         component: (resolve) => require(['@/ui/screens/project'], resolve),
         meta: {
@@ -638,19 +638,19 @@ export default [
     },
     {
         path: '/project/:id/contributors',
-        name: 'Project Contributors',
+        name: 'Crowdfund Contributors',
         props: true,
         component: (resolve) => require(['@/ui/screens/project-contributors'], resolve)
     },
     {
         path: '/project/:id/discussion',
-        name: 'Project Discussion',
+        name: 'Crowdfund Discussion',
         props: true,
         component: (resolve) => require(['@/ui/screens/project-discussion'], resolve)
     },
     {
         path: '/project/:id/milestones',
-        name: 'Project Milestones',
+        name: 'Crowdfund Milestones',
         props: true,
         component: (resolve) => require(['@/ui/screens/project'], resolve),
         meta: {
@@ -659,7 +659,7 @@ export default [
     },
     {
         path: '/project/:id/updates',
-        name: 'Project Updates',
+        name: 'Crowdfund Updates',
         props: true,
         component: (resolve) => require(['@/ui/screens/project'], resolve),
         meta: {
@@ -668,13 +668,13 @@ export default [
     },
     {
         path: '/project/:projectID/updates/:postID',
-        name: 'Project Updates Post',
+        name: 'Crowdfund Updates Post',
         props: true,
         component: (resolve) => require(['@/ui/screens/project-updates/post'], resolve)
     },
     {
         path: '/project/:id/community',
-        name: 'Project Community',
+        name: 'Crowdfund Community',
         props: true,
         component: (resolve) => require(['@/ui/screens/project'], resolve),
         meta: {
