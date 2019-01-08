@@ -66,9 +66,6 @@ const webpackConfig = merge(baseWebpackConfig, {
             })
         ]
     },
-    chainWebpack: (config) => {
-        config.plugins.delete('prefetch')
-    },
     module: {
         rules: utils.styleLoaders({
             sourceMap: config.build.productionSourceMap,
