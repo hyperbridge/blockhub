@@ -54,7 +54,7 @@
         "morgan": "^1.9.1",
         "mysql": "^2.16.0",
         "nodemon": "^1.18.7",
-        "objection": "^1.4.0",
+        "objection": "^1.5.0-rc.4",
         "pg": "^7.7.1",
         "swagger-express-validator": "^0.1.1",
         "swagger-parser": "^6.0.2",
