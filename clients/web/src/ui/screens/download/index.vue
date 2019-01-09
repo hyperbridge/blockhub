@@ -33,33 +33,39 @@
                             Also available for
                             <c-button status="plain" class="p-0">Windows</c-button>
                             and as a
-                            <c-button status="plain" class="p-0">mobile app</c-button>
+                            <c-button status="plain" class="p-0">mobile app</c-button><br />
                             <c-button status="plain" class="p-0">Looking for Classic Games?</c-button>
                         </center>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-7">
+            <div class="col-12 col-lg-7 pr-0">
                 <div class="download-pane__content Client-headerContent right">
-                    <div class="download-pane__video-wrapper">
-                        <video autoplay="" loop="" muted="" preload="" webkit-playsinline="true"
-                               class="video-wrapper_video-element">
-                            <source
-                                src="https://d9me64que7cqs.cloudfront.net/video/desktop/en-us/launcher-890x564-w2500-cb49d18de0226fe14593e8bcf4fab2c3f5e6e778a40870eb88dd6474848758864e506e3971e6bd74f3b9432f4698ba28ef4709f836c9aa302af1f07017f0b48c.webm"
-                                type="video/webm">
-                            <source
-                                src="https://d9me64que7cqs.cloudfront.net/video/desktop/en-us/launcher-890x564-w2500-5ce6324dcfc1c68b4b6c12378f294e6d054c83b3d7abcc0c50c9b83c2e109868d55bcf29584b4cc969961c4554d01bda70b362c59c78325d9eddbc368cbe791c.mp4"
-                                type="video/mp4">
-                        </video>
+                    <div class="download-pane__slider-wrapper">
+                        <c-swiper>
+                            <c-slide class="sl-item">
+                                <img src="https://d9me64que7cqs.cloudfront.net/images/desktop/en-us/column01-phoenix-w2500-1e1f5af92ef1c70347bb35048f4481064f484cd25da063754b42a23c5457dba6a27781d6dcd419070ee68c655ff3f90b55fd737951647c118a01afeed8734d9a.png">
+                            </c-slide>
+                            <c-slide class="sl-item">
+                                <img src="https://d9me64que7cqs.cloudfront.net/images/desktop/en-us/column01-phoenix-w375-53a61c85c376f3cf9ecc26e7cf82de20a53e4b628b66fada9c4a3ddffef47ef0e868cc976e2ef7b70abeb0fb85511b197ada16bc72c5d080338ad712aa9c19b3.png" class="Client-poster hide-xs">
+                            </c-slide>
+                        </c-swiper>
+                        <!--<video autoplay="" loop="" muted="" preload="" webkit-playsinline="true"-->
+                               <!--class="video-wrapper_video-element">-->
+                            <!--<source-->
+                                <!--src="https://d9me64que7cqs.cloudfront.net/video/desktop/en-us/launcher-890x564-w2500-cb49d18de0226fe14593e8bcf4fab2c3f5e6e778a40870eb88dd6474848758864e506e3971e6bd74f3b9432f4698ba28ef4709f836c9aa302af1f07017f0b48c.webm"-->
+                                <!--type="video/webm">-->
+                            <!--<source-->
+                                <!--src="https://d9me64que7cqs.cloudfront.net/video/desktop/en-us/launcher-890x564-w2500-5ce6324dcfc1c68b4b6c12378f294e6d054c83b3d7abcc0c50c9b83c2e109868d55bcf29584b4cc969961c4554d01bda70b362c59c78325d9eddbc368cbe791c.mp4"-->
+                                <!--type="video/mp4">-->
+                        <!--</video>-->
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="row download-pane block-2 py-5 justify-content-end align-items-stretch position-relative">
-            <img
-                src="https://d9me64que7cqs.cloudfront.net/images/desktop/column02-games-w1600-d1fe4a320e8f105b7bee286d401637bc6bf1567163b97ab91e4d31a0c69c39800ed2c02e1ae06a254d1d7573cb622a76749bb3870388f804f0bad66770488e79.png"
-                class="download-pane__img-overlay">
+            <div class="download-pane__img-overlay"></div>
             <div class="col-12 mb-5">
                 <center class="h1 font-weight-light text-dark">
                     Your games in one place
@@ -173,6 +179,65 @@
             </div>
         </div>
 
+        <div class="row download-pane block-4 py-5 justify-content-end align-items-stretch position-relative">
+            <div class="col-12 mb-5">
+                <center class="h1 font-weight-light text-white">
+                    Shop for digital games and goodies
+                </center>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="text-dark pr-4">
+                    <div class="block-icon text-white">
+                        <div class="block-icon__icon">
+                            <i class="fas fa-thumbs-up"></i>
+                        </div>
+                        <div class="block-icon__text">
+                            <div class="h3 pt-0">The best place to get digital Blizzard games</div>
+                            <p>Purchase new games and expansions directly from the app. You’re only a few clicks away from your next adventure.</p>
+                        </div>
+                    </div>
+                    <div class="block-divider"></div>
+                    <div class="block-icon text-white">
+                        <div class="block-icon__icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="block-icon__text">
+                            <div class="h3">Buy in-game items quickly and easily</div>
+                            <p>The Battle.net Shop is also where you’ll find in-game items such as loot boxes, pets, mounts, and more.</p>
+                        </div>
+                    </div>
+                    <div class="block-divider"></div>
+                    <div class="block-icon pb-5 text-white">
+                        <div class="block-icon__icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div class="block-icon__text">
+                            <div class="h3">Exchange digital gifts with friends</div>
+                            <p>Send and receive digital games and in-game items right from the Battle.net app.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row download-pane block-5 justify-content-end align-items-stretch position-relative">
+            <div class="col-12 text-center text-dark">
+                <div class="h4">
+                    Download the Blizzard Battle.net Desktop App. It’s your gateway to all things Blizzard.
+                </div>
+                <c-button status="second-info mt-5 mb-4" size="xl">
+                    DOWNLOAD FOR PC
+                </c-button>
+                <center>
+                    Also available for
+                    <c-button status="plain" class="text-dark p-0">Windows</c-button>
+                    and as a
+                    <c-button status="plain" class="text-dark p-0">mobile app</c-button><br />
+                    <c-button status="plain" class="text-dark p-0">Looking for Classic Games?</c-button>
+                </center>
+            </div>
+        </div>
+
 
         <div class="row" hidden>
             <div class="col-12 mb-4">
@@ -255,7 +320,7 @@
     .block-1 {
         overflow: hidden;
         background: #022259 url('https://d9me64que7cqs.cloudfront.net/images/desktop/column01-bg-w1600-dd4ef07d84650af933053e58afbe33a1b272fb5fdd778eec98cea4dfcfa013e85037978285cb5d64891b50ad78d1fabebccce862abd2ea1fa66d4eaea76ef433.jpg') no-repeat center bottom;
-        padding: 70px;
+        padding: 70px 0 70px 70px;
     }
 
     .block-2 {
@@ -269,6 +334,18 @@
         background: #0c2955 url('https://d9me64que7cqs.cloudfront.net/images/desktop/column03-bg-w1600-629a3ff07ff12c56a1ca06c4e0c81153beb13efd5454a69580de68c9f2873d31353207cf8a36bf40f53aaed00d8bc492f3818a7320dfdea72c465f4b1a387185.jpg') no-repeat center bottom;
         background-size: auto;
         padding: 70px;
+    }
+
+    .block-4 {
+        background: #141804 url('https://d9me64que7cqs.cloudfront.net/images/desktop/column04-bg-w1200-9b883f7019bdf8fbe30a9deeacafcd9e5d5cc769a4103263d4a7efa44db341aa48fec6e78f1a21adc818053935fbf847291e2603bf26fc491568a7effcaccaa2.jpg') no-repeat center top;
+        background-size: 100%;
+        padding: 70px;
+    }
+
+    .block-5{
+        padding: 100px 0;
+        min-height: 300px;
+        background-image: url('https://d9me64que7cqs.cloudfront.net/images/common/background-inverse-ice-782a4077912d3cddcc133be4c0f39120d8ed7b20e6bba2acbd09f16cc3b679e4c6be556956db5c6514c85ef7422d8586519c116906f9c19ad76a32beb5e84f7d.jpg');
     }
 
     .download-pane__video-wrapper {
@@ -304,13 +381,14 @@
 
     .download-pane__img-overlay {
         position: absolute;
+        top: -50px;
         bottom: 0;
+        left: 0;
         right: 55%;
         display: block;
-        height: 110%;
-        width: 45%;
-        object-fit: cover;
-        object-position: right;
+        background: url("https://d9me64que7cqs.cloudfront.net/images/desktop/column02-games-w1600-d1fe4a320e8f105b7bee286d401637bc6bf1567163b97ab91e4d31a0c69c39800ed2c02e1ae06a254d1d7573cb622a76749bb3870388f804f0bad66770488e79.png");
+        background-position: top right;
+        background-size: auto 100%;
     }
 
     .block-icon {
