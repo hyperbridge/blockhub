@@ -237,7 +237,13 @@
         },
         mounted() {
             window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/download-bg.png)'
-        }
+        },
+        created() {
+            $('body').addClass('screen--download')
+        },
+        beforeDestroy() {
+            $('body').removeClass('screen--download')
+        },
     }
 </script>
 
@@ -249,17 +255,20 @@
     .block-1 {
         overflow: hidden;
         background: #022259 url('https://d9me64que7cqs.cloudfront.net/images/desktop/column01-bg-w1600-dd4ef07d84650af933053e58afbe33a1b272fb5fdd778eec98cea4dfcfa013e85037978285cb5d64891b50ad78d1fabebccce862abd2ea1fa66d4eaea76ef433.jpg') no-repeat center bottom;
+        padding: 70px;
     }
 
     .block-2 {
         background: #beaa91 url('https://d9me64que7cqs.cloudfront.net/images/desktop/column02-bg-w1600-6b76ac3ea15ba89804e10127713c6910f992b43d548f8f1051e913798a204d01c69553a157dfe71b324f1c16252f6d9225121aeb7049c38781c72b01c8e3452c.jpg') no-repeat center bottom;
         background-size: auto;
+        padding: 70px;
     }
 
     .block-3 {
         overflow: hidden;
         background: #0c2955 url('https://d9me64que7cqs.cloudfront.net/images/desktop/column03-bg-w1600-629a3ff07ff12c56a1ca06c4e0c81153beb13efd5454a69580de68c9f2873d31353207cf8a36bf40f53aaed00d8bc492f3818a7320dfdea72c465f4b1a387185.jpg') no-repeat center bottom;
         background-size: auto;
+        padding: 70px;
     }
 
     .download-pane__video-wrapper {
@@ -344,9 +353,10 @@
     }
 </style>
 
-<style>
-
-    #page-content, #content > .container-fluid {
-        padding: 0 !important;
+<style lang="scss">
+    body.screen--download {
+        .page__content > .content, #page-content, #content, #content > .container-fluid {
+            padding: 0 !important;
+        }
     }
 </style>
