@@ -711,7 +711,10 @@ export default [
     {
         path: '/download',
         name: 'Download',
-        component: (resolve) => require(['@/ui/screens/download'], resolve)
+        component: (resolve) => require(['@/ui/screens/download'], resolve),
+        meta: {
+            breadcrumb: false
+        }
     },
     {
         path: '/realms',

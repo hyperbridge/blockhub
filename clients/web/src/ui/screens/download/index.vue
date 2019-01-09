@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="store">
+    <c-layout navigationKey="store" :showLeftPanel="false" :showRightPanel="false">
 
         <div class="row download-pane block-1 align-items-center pb-5 justify-content-between">
             <div class="col-12 col-lg-5">
@@ -341,5 +341,12 @@
             object-fit: cover;
             object-position: left;
         }
+    }
+</style>
+
+<style>
+
+    #page-content, #content > .container-fluid {
+        padding: 0 !important;
     }
 </style>

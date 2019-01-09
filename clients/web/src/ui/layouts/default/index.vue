@@ -959,17 +959,16 @@
     [v-cloak] {
         display: none;
     }
-    .make-it-blur{
+    .make-it-blur {
         filter: blur(5px);
 
     }
-    .content{
-        padding: 20px;
-        padding-left: 90px;
+    .content {
+        padding: 20px 0 20px 0;
         z-index: 2;
-        .container-fluid{
-            padding: 0!important;
-        }
+    }
+    .content > * {
+        padding: 20px 90px !important;
     }
     .version {
         position: fixed;
