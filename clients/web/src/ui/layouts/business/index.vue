@@ -9,7 +9,7 @@
                     <c-img src="/static/img/logo.svg" alt="Logo" style="height: 90%; margin-top: 2%" v-else />
                 </c-button>
                 <div class="h2 ml-4 mb-0 pl-4 text-uppercase border-left">
-                    <c-button status="none" to="/business">Business Manager</c-button>
+                    Business Manager
                 </div>
                 <div class="page-top-bar__profile mb-0 float-right h5" style="margin-left: auto" @click="$store.commit('application/showProfileChooser', true)">
                     <div class="page-top-bar__profile-avatar">

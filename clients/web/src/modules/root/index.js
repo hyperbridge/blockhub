@@ -27,10 +27,10 @@ const rootStore = {
         updateObject(rootState, [path, key, value]) {
             const [module, target] = path.split('/')
 
-            rootState[module][target][key] = {
+            Vue.set(rootState[module][target], key, {
                 ...rootState[module][target][key],
                 ...value
-            }
+            })
         },
         updateSingle(rootState, [path, data]) {
             const [module, target] = path.split('/')

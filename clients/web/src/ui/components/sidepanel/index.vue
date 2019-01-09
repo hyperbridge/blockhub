@@ -1,7 +1,7 @@
 <template>
     <div class="page-sidepanel invert text-right" id="page-sidepanel">
         <div class="page-sidepanel__content">
-            <c-swiper ref="mySwiper">
+            <c-swiper ref="slider">
                 <c-slide v-if="$store.state.application.signedIn">
                     <div class="item">
                         <h3>NOTIFICATION</h3>
@@ -174,7 +174,10 @@
                 </c-slide>
             </c-swiper>
         </div>
+        
         <div class="page-sidepanel__button page-sidepanel__button--lower" data-action="sidepanel-hide"><div></div></div>
+
+
         <c-basic-popup :activated="showModal" class="text-left" @close="hideUpdateModal">
             <div class="d-flex flex-column" slot="header">
                 <div class="h4 m-0 p-0">
@@ -215,7 +218,7 @@
         },
         computed: {
             swiper() {
-                return this.$refs.mySwiper.swiper
+                return this.$refs.slider.swiper
             },
             activeProfile() {
                 return this.$store.state.application.activeProfile
@@ -255,11 +258,11 @@
                 }
 
             },
-            showUpdateModal(update){
+            showUpdateModal(update) {
                 this.currentUpdate = update
                 this.showModal = true
             },
-            hideUpdateModal(){
+            hideUpdateModal() {
                 this.showModal = false
                 this.currentUpdate = []
             }

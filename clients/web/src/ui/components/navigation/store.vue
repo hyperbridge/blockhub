@@ -2,15 +2,15 @@
     <div class="navigation" id="navigation-default">
 
         <c-sidebar-menu title="STORE" sub_title="General" mClass="margin-bottom-20">
-            <c-sidebar-menu-link :to="{ name: 'Home' }">Home</c-sidebar-menu-link>
-            <c-sidebar-menu-link :to="{ name: 'Community' }" v-darklaunch="'COMMUNITY'">Community</c-sidebar-menu-link>
-            <c-sidebar-menu-link :to="{ name: 'Ideas' }">Browse Ideas</c-sidebar-menu-link>
-            <c-sidebar-menu-link :to="{ name: 'Crowdfunds' }">Browse Crowdfunds</c-sidebar-menu-link>
-            <c-sidebar-menu-link :to="{ name: 'Games' }">Browse Games</c-sidebar-menu-link>
-            <c-sidebar-menu-link :to="{ name: 'Realms' }" v-darklaunch="'REALMS'">Browse Realms</c-sidebar-menu-link>
-            <c-sidebar-menu-link :to="{ name: 'Curators' }" v-darklaunch="'CURATORS'">Browse Curators</c-sidebar-menu-link>
-            <c-sidebar-menu-link :to="{ name: 'Collections' }" v-darklaunch="'COLLECTIONS'">Browse Collections</c-sidebar-menu-link>
-            <c-sidebar-menu-link :to="{ name: 'Marketplace' }" v-darklaunch="'MARKETPLACE'">Browse Items</c-sidebar-menu-link>
+            <c-sidebar-menu-link to="/">Home</c-sidebar-menu-link>
+            <c-sidebar-menu-link to="/community" v-darklaunch="'COMMUNITY'">Community</c-sidebar-menu-link>
+            <c-sidebar-menu-link to="/ideas">Browse Ideas</c-sidebar-menu-link>
+            <c-sidebar-menu-link to="/projects">Browse Crowdfunds</c-sidebar-menu-link>
+            <c-sidebar-menu-link to="/games">Browse Games</c-sidebar-menu-link>
+            <c-sidebar-menu-link to="/realms" v-darklaunch="'REALMS'">Browse Realms</c-sidebar-menu-link>
+            <c-sidebar-menu-link to="/curators" v-darklaunch="'CURATORS'">Browse Curators</c-sidebar-menu-link>
+            <c-sidebar-menu-link to="/collections" v-darklaunch="'COLLECTIONS'">Browse Collections</c-sidebar-menu-link>
+            <c-sidebar-menu-link to="/marketplace" v-darklaunch="'MARKETPLACE'">Browse Items</c-sidebar-menu-link>
         </c-sidebar-menu>
 
         <c-sidebar-menu sub_title="Browse By Genre" sub_icon="fas fa-gamepad" mClass="margin-bottom-20">

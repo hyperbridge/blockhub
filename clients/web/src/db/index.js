@@ -129,10 +129,8 @@ export const init = () => {
 
             application.config.ensureId()
             application.config.ensureAllIndexes(true)
-
             marketplace.config.ensureId()
             marketplace.config.ensureAllIndexes(true)
-
             funding.config.ensureId()
             funding.config.ensureAllIndexes(true)
         }

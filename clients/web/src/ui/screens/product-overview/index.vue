@@ -253,7 +253,13 @@
                 return this.$refs.streamsSlider.swiper
             },
             wishlist() {
-                return this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.productWishlist || {}
+                if (!this.$store.state.community.profiles[this.$store.state.application.activeProfile.id]) {
+                    this.$store.state.community.profiles[this.$store.state.application.activeProfile.id] = {
+                        productWishlist: {}
+                    }
+                }
+
+                return this.$store.state.community.profiles[this.$store.state.application.activeProfile.id].productWishlist
             },
             streams() {
                 return this.product.streams

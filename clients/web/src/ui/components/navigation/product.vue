@@ -9,7 +9,7 @@
         />
 
         <c-button status="second-info" size="lg" class="mb-4" @click="$store.commit('application/activateModal', 'sync-blockchain')" v-if="$store.state.application.editorMode === 'editing'">Sync Blockchain</c-button>
-        <c-button status="second-info" size="lg" class="mb-4" @click="$store.commit('application/activateModal', 'import-product')" v-if="$store.state.application.editorMode === 'editing'">Import from Network</c-button>
+        <c-button status="second-info" size="lg" class="mb-4" @click="$store.commit('application/activateModal', 'import-product')" v-if="$store.state.application.editorMode === 'editing'">Import</c-button>
 
         <c-join-community v-if="!$store.state.application.desktopMode" />
 

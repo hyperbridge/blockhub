@@ -25,6 +25,10 @@ const community = {
         offersSeller: {}
     },
     mutations: {
+        saveState(state) {
+            // DB.root.config.update(state)
+            // DB.save()
+        },
         create(state, { target = 'messages', id, data }) {
             state[target] = {
                 ...state[target],
@@ -32,7 +36,8 @@ const community = {
             }
         },
         update(state, { target = 'messages', id, data }) {
-            state[target][id] = { ...state[target][id], ...data }
+            Vue.set(state[target], id, { ...state[target][id], ...data })
+            //state[target][id] = { ...state[target][id], ...data }
         },
         delete(state, { target = 'messages', id }) {
             const { [id]: deleted, ...rest } = state[target]
@@ -76,12 +81,18 @@ const community = {
             return id
         },
         updateWishlist(
-            { dispatch, rootGetters: { ['application/account']: account }},
+            { state, dispatch, rootGetters: { ['application/account']: account }},
             [name, itemId]
         ) {
-            const profile = this.$store.state.application.activeProfile // TODO: fix
-            const prop = [name + '_wishlist']
-            const wishlist = { ...profile[prop] }
+            if (!state.profiles[BlockHub.store.state.application.activeProfile.id]) {
+                state.profiles[BlockHub.store.state.application.activeProfile.id] = {
+                    id: BlockHub.store.state.application.activeProfile.id
+                }
+            }
+
+            const profile = state.profiles[BlockHub.store.state.application.activeProfile.id] // TODO: fix
+            const prop = name + 'Wishlist'
+            const wishlist = profile[prop] ? { ...profile[prop] } : {}
 
             if (wishlist[itemId]) delete wishlist[itemId]
             else wishlist[itemId] = true
