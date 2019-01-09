@@ -180,15 +180,18 @@
             >
                 <div class="h4" slot="header">Coming Soon!</div>
                 <template slot="body">
-                    <p>
-                        Stealth mode engage! <br />
-                        &nbsp; &nbsp; &lt;explosion&gt; &nbsp; <br />
-                        &nbsp; &nbsp; &nbsp; &nbsp; Dang, didn't work.<br /><br />
-                        Okay, you caught us, we're still working on this feature, but we'll have it out as quick as a mage getting pwned by a warrior in a melee battle!
-                        <br /><br />
-                    </p>
-                    <p>We believe in transparency and community-driven development, so why don't you check out the <a href="https://preview.blockhub.gg">Preview Build</a> and let us know what you think!<p>
-                    <p>To make things simple, hold ALT and click anywhere to send us feedback/bug reports!</p>
+                    <div class="row">
+                        <p class="col-6">
+                            Stealth mode engage! <br />
+                            &nbsp; &nbsp; &lt;explosion&gt; &nbsp; <br />
+                            &nbsp; &nbsp; &nbsp; &nbsp; Dang, didn't work.<br /><br />
+                            Okay, you caught us, we're still working on this feature, but we'll have it out as quick as a mage getting pwned by a warrior in a melee battle!
+                            <br /><br />
+                        </p>
+                        <div class="col-6" style=""><img src="/static/img/hh/Asset 3.svg" /></div>
+                        <p class="col-12 margin-top-20">We believe in transparency and community-driven development, so why don't you check out the <a href="https://preview.blockhub.gg">Preview Build</a> and let us know what you think!<p>
+                        <p class="col-12 margin-bottom-20">To make things simple, hold ALT and click anywhere to send us feedback/bug reports!</p>
+                    </div>
                 </template>
                 <p slot="footer">
                 </p>
