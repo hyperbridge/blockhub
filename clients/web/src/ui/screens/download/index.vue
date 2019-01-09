@@ -185,7 +185,7 @@
                     Shop for digital games and goodies
                 </center>
             </div>
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-6 col-xl-5">
                 <div class="text-dark pr-4">
                     <div class="block-icon text-white">
                         <div class="block-icon__icon">
@@ -196,7 +196,7 @@
                             <p>Purchase new games and expansions directly from the app. You’re only a few clicks away from your next adventure.</p>
                         </div>
                     </div>
-                    <div class="block-divider"></div>
+                    <div class="block-divider white-divider"></div>
                     <div class="block-icon text-white">
                         <div class="block-icon__icon">
                             <i class="fas fa-check"></i>
@@ -206,7 +206,7 @@
                             <p>The Battle.net Shop is also where you’ll find in-game items such as loot boxes, pets, mounts, and more.</p>
                         </div>
                     </div>
-                    <div class="block-divider"></div>
+                    <div class="block-divider white-divider"></div>
                     <div class="block-icon pb-5 text-white">
                         <div class="block-icon__icon">
                             <i class="fas fa-gift"></i>
@@ -333,7 +333,7 @@
         overflow: hidden;
         background: #0c2955 url('https://d9me64que7cqs.cloudfront.net/images/desktop/column03-bg-w1600-629a3ff07ff12c56a1ca06c4e0c81153beb13efd5454a69580de68c9f2873d31353207cf8a36bf40f53aaed00d8bc492f3818a7320dfdea72c465f4b1a387185.jpg') no-repeat center bottom;
         background-size: auto;
-        padding: 70px;
+        padding: 70px 0 70px 70px;
     }
 
     .block-4 {
