@@ -800,6 +800,7 @@ export default [
         component: (resolve) => require(['@/ui/screens/business-product'], resolve),
         meta: {
             title: 'Product',
+            permission: 'signedIn',
             breadcrumb: [
                 { to: '/business', title: 'Dashboard' },
                 { to: '/business/products', title: 'Products' },
@@ -821,6 +822,7 @@ export default [
                 component: (resolve) => require(['@/ui/screens/business-home'], resolve),
                 meta: {
                     title: 'Business',
+                    permission: 'signedIn',
                     breadcrumb: [
                         { to: '/business', title: 'Dashboard' },
                     ]
@@ -832,6 +834,7 @@ export default [
                 component: (resolve) => require(['@/ui/screens/business-products'], resolve),
                 meta: {
                     title: 'All Products',
+                    permission: 'signedIn',
                     breadcrumb: [
                         { to: '/business', title: 'Dashboard' },
                         { title: 'All Products' }
@@ -844,6 +847,7 @@ export default [
                 component: (resolve) => require(['@/ui/screens/business-projects'], resolve),
                 meta: {
                     title: 'All Crowdfunds',
+                    permission: 'signedIn',
                     breadcrumb: [
                         { to: '/business', title: 'Dashboard' },
                         { title: 'All Crowdfunds' }
@@ -872,6 +876,7 @@ export default [
                 component: (resolve) => require(['@/ui/screens/business-release-history'], resolve),
                 meta: {
                     title: 'Release History',
+                    permission: 'signedIn',
                     breadcrumb: [
                         { to: '/business', title: 'Dashboard' },
                         { title: 'Release History' }
@@ -885,6 +890,7 @@ export default [
                 component: (resolve) => require(['@/ui/screens/business-new-release'], resolve),
                 meta: {
                     title: 'Add New Release',
+                    permission: 'signedIn',
                     breadcrumb: [
                         { to: '/business', title: 'Dashboard' },
                         { title: 'Add New Release' }
@@ -898,6 +904,7 @@ export default [
                 component: (resolve) => require(['@/ui/screens/business-release-page'], resolve),
                 meta: {
                     title: 'Release Page',
+                    permission: 'signedIn',
                     breadcrumb: [
                         { to: '/release-page', title: 'Dashboard' },
                         { title: 'Release page' }

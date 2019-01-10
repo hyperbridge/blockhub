@@ -79,7 +79,7 @@
         created(){
             console.log('this', this)
             console.log('root', this.$root)
-            this.$root.page_title = this.release.version;
+            this.$root.pageTitle = this.release.version;
         }
     }
 </script>

@@ -145,7 +145,7 @@
                                 <div class="user user--bordered">
                                     <img src="http://via.placeholder.com/128x128">
                                     <div class="user__name">
-                                        <strong>{{ product.owner.name }}</strong>
+                                        <strong>{{ product.owner ? product.owner.name : '' }}</strong>
                                     </div>
                                 </div>
                             </td>

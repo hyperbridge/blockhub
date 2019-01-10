@@ -1,85 +1,107 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
+const populateProfile = require('../../hooks/populate-profile')
 
-const beforeCreate = function(options = {}) {
+const composeItem = function(product) {
+    // product.images = {
+    //     "mediumTile": "https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"
+    // }
+
+    // product.funds = {
+    //     "currency": "USD",
+    //     "obtained": 0,
+    //     "goal": 0
+    // }
+
+    return product
+}
+
+const fillOne = function(options = {}) {
     return async context => {
-        context.data.accountId = context.params.user.id
+        context.data = composeItem(context.data)
+        return context
+    }
+}
+
+const fillAll = function(options = {}) {
+    return async context => {
+        context.result.data = context.result.data.map((product) => {
+            return composeItem(product)
+        })
 
         return context
     }
 }
 
-const beforeUpdate = function(options = {}) {
+const create = function(options = {}) {
     return async context => {
-        // const item = await context.app.service('/ideas').get(context.id)
+        const { app, data } = context
 
-        // context.data = {
-        //     ...item,
-        //     ...context.data
-        // }
+        console.log('Product creation request: ', data)
 
-        return context
-    }
-}
-
-const afterUpdate = function(options = {}) {
-    return async context => {
-        context.result = {
-            name: context.data.name,
-            avatar: context.data.avatar
-        }
-
-        return context
-    }
-}
-
-const accessGate = function(options = {}) {
-    return async context => {
-        //console.log(context)
-        const { app, method, result, params } = context
-        const items = method === 'find' ? result.data : [result]
-        let account = params.user
+        const account = context.params.user
 
         if (!account.id) {
-            throw new Error('You dont have access to do that')
+            throw new Error('A product must have a account')
         }
 
-        await Promise.all(items.map(async item => {
-            if (method === 'create') {
-            }
-            else if (method === 'update') {
-            }
+        const profile = await app.service('profiles').get(data.ownerId)
 
-            if (!item) {
-                throw new Error('Idea not found')
-            }
+        if (profile.accountId !== account.id) {
+            throw new Error('Product must be owned by a profile of authenticated account')
+        }
 
-            if (item.accountId !== account.id) {
-                throw new Error('You dont have access to do that')
-            }
-        }))
+        const { name, description, value, meta } = context.data
+
+        // Override the original data (so that people can't submit additional stuff)
+        context.data = {
+            name,
+            description,
+            value,
+            meta,
+            //meta: context.data,
+            ownerId: profile.id
+        }
+
+        return context
+    }
+}
+
+
+const validatePermission = function(options = {}) {
+    return async context => {
+        const { app, data } = context
+
+        const account = context.params.user
+
+        const product = await app.service('products').get(data.id)
+        const profile = await app.service('profiles').get(product.ownerId)
+
+        if (profile.accountId !== account.id) {
+            throw new Error('Product must be owned by a profile of authenticated account')
+        }
 
         return context
     }
 }
 
 export const before = {
-    all: [],
+    all: [authenticate('jwt')],
     find: [],
     get: [],
-    create: [authenticate('jwt'), beforeCreate()],
-    update: [authenticate('jwt'), beforeUpdate()],
-    patch: [authenticate('jwt')],
-    remove: [authenticate('jwt')]
+    create: [create()],
+    update: [validatePermission()],
+    patch: [validatePermission()],
+    remove: [validatePermission()]
 }
 
 export const after = {
-    all: [],
-    find: [],
-    get: [],
-    create: [accessGate()],
-    update: [accessGate(), afterUpdate()],
-    patch: [accessGate()],
-    remove: [accessGate()]
+    all: [populateProfile({ columnName: 'ownerId' })],
+    find: [fillAll()],
+    get: [fillOne()],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
 }
 
 export const error = {

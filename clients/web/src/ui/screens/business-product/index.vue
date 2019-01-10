@@ -104,6 +104,28 @@
                     </div>
                 </div>
             </div>
+                
+            <div class="col-12">
+                <c-heading-bar-color class="mt-4 mb-4" colorCode="#444" textAlign="center" hidden>Advanced Options</c-heading-bar-color>
+
+                <div @click="toggleAdvanced">
+                    <i class="mr-2 fas" :class="advanced ? 'fa-angle-up' : 'fa-angle-down'"></i>
+                    {{ advanced ? 'Hide' : 'Show' }} Advanced
+                </div>
+            </div>
+            
+            <div class="col-md-12" v-if="advanced">
+                <div class="form-group row" style="text-align: center">
+                    <br />
+                    <h3 style="width: 100%">Raw Data Editor</h3>
+                    <br /><br />
+                    <textarea :value="JSON.stringify(product)" @input="updateProductRaw($event.target.value)" rows="10" cols="50"></textarea>
+                    <br /><br />
+                    <span class="form-text"></span>
+                    <c-json-editor :objData="product" v-model="product" style="margin: 0 auto"></c-json-editor>
+                </div>
+            </div>
+
         </div>
 
         <template slot="menu">
@@ -124,15 +146,24 @@
 </template>
 
 <script>
+    import 'vue-multiselect/dist/vue-multiselect.min.css'
+
     export default {
         props: {
             id: [String, Number]
         },
         components: {
-            'c-business-layout': (resolve) => require(['@/ui/layouts/business'], resolve)
+            'c-business-layout': (resolve) => require(['@/ui/layouts/business'], resolve),
+            'c-html-editor': (resolve) => require(['@/ui/components/html-editor'], resolve),
+            'c-json-editor': (resolve) => require(['@/ui/components/json-editor'], resolve),
+            'c-multiselect': (resolve) => require(['vue-multiselect'], resolve),
         },
         data() {
-            const product = this.id === 'new' ? this.$store.state.marketplace.defaultProduct : this.$store.getters['products/get'](this.id)
+            let product = this.id === 'new' ? this.$store.state.marketplace.defaultProduct : this.$store.getters['products/get'](this.id)
+
+            if (!product) {
+                product = this.$store.state.marketplace.defaultProduct
+            }
 
             return {
                 product: product,
@@ -166,6 +197,12 @@
             }
         },
         methods: {
+            updateProductRaw(product) {
+                this.product = JSON.parse(product)
+            },
+            toggleAdvanced() {
+                this.advanced = !this.advanced
+            },
             transferOwnership() {
 
                 const run = function(
@@ -288,5 +325,9 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.note-editor.note-frame .note-editing-area .note-editable {
+    background: #30314d !important;
+    color: #fff;
+}
 </style>

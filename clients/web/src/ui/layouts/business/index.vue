@@ -34,7 +34,7 @@
                     <div class="page-heading__container">
                         <div>
                             <h3 class="page-heading__title p-0 m-0">
-                                {{ page_title }}
+                                {{ pageTitle }}
                             </h3>
                         </div>
                         <div>
@@ -108,7 +108,7 @@
                 darkMode: false,
                 minimized: false,
                 breadcrumbLinksData: [],
-                page_title: '',
+                pageTitle: '',
                 menu: [
                     {
                         title: 'Marketplace',
@@ -152,24 +152,24 @@
         },
         created() {
             this.updateBreadcrumbLinks()
-            this.page_title = this.$route.meta.title || 'Dashboard'
-            this.$store.dispatch('auth/authenticate')
-                .then(() => {
-                    if (this.$store.state.auth.accessToken) {
-                        this.initialize()
-                    }
-                })
-                .catch(error => {
-                    this.initialize()
+            this.pageTitle = this.$route.meta.title || 'Dashboard'
+            // this.$store.dispatch('auth/authenticate')
+            //     .then(() => {
+            //         if (this.$store.state.auth.accessToken) {
+            //             this.initialize()
+            //         }
+            //     })
+            //     .catch(error => {
+            //         this.initialize()
 
-                    if (error) {
-                        if (!error.message.includes('Could not find stored JWT')) {
-                            console.error(error)
-                        }
-                        return
-                    }
+            //         if (error) {
+            //             if (!error.message.includes('Could not find stored JWT')) {
+            //                 console.error(error)
+            //             }
+            //             return
+            //         }
 
-                })
+            //     })
         },
         computed: {
             activeProfile() {
@@ -180,15 +180,15 @@
             updateBreadcrumbLinks() {
                 this.breadcrumbLinksData = this.$route.meta.breadcrumb
             },
-            initialize() {
-                if (this.initialized) {
-                    return
-                }
+            // initialize() {
+            //     if (this.initialized) {
+            //         return
+            //     }
 
-                this.$store.state.application.initialized = window.BlockHub.initialized = true
+            //     this.$store.state.application.initialized = window.BlockHub.initialized = true
 
-                document.getElementById('startup-loader').style.display = 'none'
-            }
+            //     document.getElementById('startup-loader').style.display = 'none'
+            // }
         },
         mounted() {
             this.$nextTick(() => {
@@ -205,10 +205,9 @@
         watch: {
             '$route'(to, from) {
                 this.updateBreadcrumbLinks()
-                this.page_title = to.meta.title || 'Dashboard'
+                this.pageTitle = to.meta.title || 'Dashboard'
             },
             '$store.state.auth.accessToken'() {
-                this.initialize()
             }
         }
     }

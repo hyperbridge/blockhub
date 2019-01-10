@@ -5,19 +5,23 @@
 
 <script>
 export default {
-    props: {'objData': {required: true}},
-
-    components: {
-            'c-json-view': (resolve) => require(['@/ui/components/json-editor/json-view'], resolve)
+    props: {
+        objData: {
+            required: true
+        }
     },
 
-    data: function () {
+    components: {
+        'c-json-view': (resolve) => require(['@/ui/components/json-editor/json-view'], resolve)
+    },
+
+    data() {
         return {
             'parsedData': [],
         }
     },
 
-    created: function () {
+    created() {
         this.parsedData = this.jsonParse(this.objData)
     },
 
@@ -31,7 +35,7 @@ export default {
     },
 
     methods: {
-        jsonParse: function (jsonStr) {
+        jsonParse(jsonStr) {
 
             let parseJson = (json) => {
                 let result = [];
@@ -101,7 +105,7 @@ export default {
             return parseBody(jsonStr)
         },
 
-        getType: function (obj) {
+        getType(obj) {
             if(obj === null) {
                 return 'null';
             }
@@ -119,7 +123,7 @@ export default {
             }
         },
 
-        makeJson: function (dataArr) {
+        makeJson(dataArr) {
 
             let revertWithObj = function (data) {
                 let r = {};
@@ -137,7 +141,8 @@ export default {
                         val = el.remark
                     }
 
-                    r[key] = val
+                    if (key !== undefined)
+                        r[key] = val
                 }
                 return r
             };
