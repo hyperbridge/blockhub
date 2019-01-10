@@ -91,12 +91,23 @@
                 left: 0;
                 right: 0;
                 overflow: hidden;
+                &:before{
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    z-index: 2;
+                    background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .2) 49%, rgba(0, 0, 0, 0) 100%);
+                }
                 &:after{
                     content: "";
                     position: absolute;
                     top: 0;
                     bottom: 0;
                     width: 20%;
+                    z-index: 3;
                     background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .2) 49%, rgba(255, 255, 255, 0) 100%);
                     transition: all 0.3s ease;
                     animation: pulse 1.5s ease-out infinite;
