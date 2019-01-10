@@ -3540,6 +3540,7 @@ storiesOf('Game Series', module)
 
 
 import ProgressBar from '@/ui/components/progress-bar';
+import ProgressBarFancy from '@/ui/components/progress-bar/fancy';
 
 storiesOf('Progress Bar', module)
     .add('default', () => ({
@@ -3589,7 +3590,21 @@ storiesOf('Progress Bar', module)
             </div>
         `
     }))
-
+    .add('fancy', () => ({
+        components: {
+            'c-progress-bar-fancy': ProgressBarFancy
+        },
+        data(){
+            return{
+                percent: 90
+            }
+        },
+        template: `<div class="position-relative p-4" style="width: 500px; height: 100px">
+                        <c-input v-model="percent" type="number" />
+                            <hr />
+                        <c-progress-bar-fancy :percent="percent" />
+                    </div>`
+    }))
 
 import ProjectMilestone from '@/ui/components/project/milestone';
 
