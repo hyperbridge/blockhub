@@ -38,13 +38,7 @@
     $green: #00b217;
 
     @mixin innerColor( $color: $red ) {
-        background: linear-gradient(to right , lighten($color, 5%) 0%, darken($color, 5%) 30%, darken($color, 5%) 70%, lighten($color, 5%) 100%);
-        border-color: lighten( $color, 20% );
-        box-shadow:
-            0 0 0.6em lighten( $color, 10% ) inset,
-            0 0 0.4em lighten( $color, 5% ) inset,
-            0 0 0.5em transparentize( $color, 0.5),
-            0 0 0.1em transparentize( lighten( $color, 50% ), 0.5);
+        background: $color;
     }
 
     .c-fancy-progress {
@@ -78,9 +72,8 @@
             left: 0px;
             width: 0%;
             height: 100%;
-            border: 1px solid;
             border-radius: 2px 0 0 2px;
-            transition: all 0.3s ease;
+            transition: all 1s ease;
             @include innerColor($red);
             &--orange {
                 @include innerColor($orange);
