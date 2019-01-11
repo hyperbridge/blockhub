@@ -204,7 +204,7 @@
                 <br />
                 <h3 style="width: 100%">Raw Data Editor</h3>
                 <br /><br />
-                <textarea :value="project" @input="updateProjectRaw($event.target.value)" rows="10" cols="50"></textarea>
+                <textarea :value="JSON.stringify(project)" @input="updateProjectRaw($event.target.value)" rows="10" cols="50"></textarea>
                 <br /><br />
                 <span class="form-text"></span>
                 <c-json-editor :objData="project" v-model="project" style="margin: 0 auto"></c-json-editor>
