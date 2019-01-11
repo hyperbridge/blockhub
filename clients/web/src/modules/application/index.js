@@ -85,12 +85,12 @@ export const getters = {
             result.push('developerMode')
         }
 
-        if (state.verified_account) {
-            result.push('verified_account')
+        if (state.verifiedAccount) {
+            result.push('verifiedAccount')
         }
 
-        if (state.hyperbridge_account) {
-            result.push('hyperbridge_account')
+        if (state.hyperbridgeAccount) {
+            result.push('hyperbridgeAccount')
         }
 
         return result

@@ -331,8 +331,6 @@
             }
         },
         mounted() {
-        },
-        created() {
             this.$store.dispatch('realms/find', {
                 query: {
                     $sort: {
@@ -352,6 +350,8 @@
                 }
             }).then(() => {
             })
+        },
+        created() {
         },
         watch: {
         }

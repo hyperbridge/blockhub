@@ -44,6 +44,10 @@ const create = function(options = {}) {
             throw new Error('A product must have a account')
         }
 
+        if (data.ownerId) {
+            throw new Error('Owner must be set')
+        }
+
         const profile = await app.service('profiles').get(data.ownerId)
 
         if (profile.accountId !== account.id) {

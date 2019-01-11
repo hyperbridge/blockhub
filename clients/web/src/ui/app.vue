@@ -2,9 +2,9 @@
     <div id="app" :class="{ 'disable-animations': !disableAnimations }">
         <c-render-condition :type="renderCondition">
             <router-view></router-view>
-        </c-render-condition>
 
-        <c-drawer />
+            <c-drawer />
+        </c-render-condition>
 
         <vue-snotify></vue-snotify>
     </div>
@@ -97,15 +97,17 @@
         created() {
             this.$store.state.application.signedIn = false
 
-            if (this.$route.meta.renderCondition) {
-                this.renderCondition = this.$route.meta.renderCondition
-            } else if (this.$route.meta.permission === 'signedIn') {
-                this.renderCondition = 'user'
-            } else if (this.$route.meta.permission === 'developerMode') {
-                this.renderCondition = 'user'
-            } else {
-                this.renderCondition = 'initialized'
-            }
+            this.$nextTick(() => {
+                if (this.$route.meta.renderCondition) {
+                    this.renderCondition = this.$route.meta.renderCondition
+                } else if (this.$route.meta.permission === 'signedIn') {
+                    this.renderCondition = 'user'
+                } else if (this.$route.meta.permission === 'developerMode') {
+                    this.renderCondition = 'user'
+                } else {
+                    this.renderCondition = 'initialized'
+                }
+            })
         },
         watch: {
             '$route'(to, from) {

@@ -114,10 +114,10 @@ router.beforeEach((to, from, next) => {
         return
     }
 
-    if (!Auth.accessGate(to.meta.permission)) {
-        next('/')
-        throw new Error("Oops! You don't seem to have access to that page.")
-    }
+    // if (!Auth.accessGate(to.meta.permission)) {
+    //     next('/')
+    //     throw new Error("Oops! You don't seem to have access to that page.")
+    // }
 
     next()
 })

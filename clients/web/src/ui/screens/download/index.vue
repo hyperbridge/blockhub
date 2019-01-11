@@ -5,11 +5,11 @@
             <div class="col-12 col-lg-5">
                 <div class="download-pane__content Client-headerContent left pl-4">
                     <h1 class="Heading Heading--pageTitle Client-headerHeading">
-                        <div>Blizzard Battle.net</div>
+                        <div>BlockHub</div>
                         <div>Desktop App</div>
                     </h1>
                     <div class="download-pane__feature-group">
-                        <div class="download-pane__fg-subtitle mb-4">Your gateway to all things Blizzard</div>
+                        <div class="download-pane__fg-subtitle mb-4">Your gateway to all things BlockHub</div>
                         <ul class="list-unstyled">
                             <li>
                                 <i class="fas fa-th mr-2"></i>
@@ -32,9 +32,9 @@
                         <center>
                             Also available for
                             <c-button status="plain" class="p-0">Windows</c-button>
-                            and as a
+                            <!-- and as a
                             <c-button status="plain" class="p-0">mobile app</c-button><br />
-                            <c-button status="plain" class="p-0">Looking for Classic Games?</c-button>
+                            <c-button status="plain" class="p-0">Looking for Classic Games?</c-button> -->
                         </center>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="block-icon__text">
                             <div class="h3 font-weight-light pt-0">Play your games</div>
-                            <p>Your Blizzard games are easily accessible so you can
+                            <p>Your BlockHub games are easily accessible so you can
                                 quickly jump in and start playing. When you’re not playing, the app automatically
                                 updates each game to the latest version.</p>
                         </div>
@@ -92,7 +92,7 @@
                         <div class="block-icon__text">
                             <div class="h3 font-weight-light">Discover new adventures</div>
                             <p>Curious about a game you don’t have installed? Give it a
-                                try right from its game tab. Most Blizzard games are free to try!</p>
+                                try right from its game tab. Most BlockHub games are free to try!</p>
                         </div>
                     </div>
                     <div class="block-divider"></div>
@@ -102,9 +102,9 @@
                         </div>
                         <div class="block-icon__text">
                             <div class="h3 font-weight-light">Stay up to date with the latest news</div>
-                            <p>The Battle.net app also has curated news about Blizzard
+                            <p>The BlockHub app also has curated news about BlockHub
                                 games, events, merchandise, and more – so you never miss out on what’s new at
-                                Blizzard.</p>
+                                BlockHub.</p>
                         </div>
                     </div>
                 </div>
@@ -125,8 +125,7 @@
                         </div>
                         <div class="block-icon__text">
                             <div class="h3 pt-0">Customize your profile</div>
-                            <p>Your profile is a snapshot of your activity and interests, even outside Blizzard games.
-                                Choose an avatar to put a public face on your BattleTag.</p>
+                            <p>Your profile is a snapshot of your activity and interests, even outside BlockHub games.</p>
                         </div>
                     </div>
                     <div class="block-divider white-divider"></div>
@@ -148,8 +147,8 @@
                         </div>
                         <div class="block-icon__text">
                             <div class="h3 pt-0">Chat with friends</div>
-                            <p>Your Blizzard friends are just a click away whether you’re in a game or just have the app
-                                open. You can also chat on the go with the Battle.net mobile app.</p>
+                            <p>Your BlockHub friends are just a click away whether you’re in a game or just have the app
+                                open. You can also chat on the go with the BlockHub mobile app.</p>
                         </div>
                     </div>
                     <div class="block-divider white-divider"></div>
@@ -192,7 +191,7 @@
                             <i class="fas fa-thumbs-up"></i>
                         </div>
                         <div class="block-icon__text">
-                            <div class="h3 pt-0">The best place to get digital Blizzard games</div>
+                            <div class="h3 pt-0">The best place to get digital BlockHub games</div>
                             <p>Purchase new games and expansions directly from the app. You’re only a few clicks away from your next adventure.</p>
                         </div>
                     </div>
@@ -203,7 +202,7 @@
                         </div>
                         <div class="block-icon__text">
                             <div class="h3">Buy in-game items quickly and easily</div>
-                            <p>The Battle.net Shop is also where you’ll find in-game items such as loot boxes, pets, mounts, and more.</p>
+                            <p>The BlockHub Shop is also where you’ll find in-game items such as loot boxes, pets, mounts, and more.</p>
                         </div>
                     </div>
                     <div class="block-divider white-divider"></div>
@@ -213,7 +212,7 @@
                         </div>
                         <div class="block-icon__text">
                             <div class="h3">Exchange digital gifts with friends</div>
-                            <p>Send and receive digital games and in-game items right from the Battle.net app.</p>
+                            <p>Send and receive digital games and in-game items right from the BlockHub app.</p>
                         </div>
                     </div>
                 </div>
@@ -223,7 +222,7 @@
         <div class="row download-pane block-5 justify-content-end align-items-stretch position-relative">
             <div class="col-12 text-center text-dark">
                 <div class="h4">
-                    Download the Blizzard Battle.net Desktop App. It’s your gateway to all things Blizzard.
+                    Download the BlockHub Desktop App. It’s your gateway to all things gaming.
                 </div>
                 <c-button status="second-info mt-5 mb-4" size="xl">
                     DOWNLOAD FOR PC
@@ -231,9 +230,9 @@
                 <center>
                     Also available for
                     <c-button status="plain" class="text-dark p-0">Windows</c-button>
-                    and as a
-                    <c-button status="plain" class="text-dark p-0">mobile app</c-button><br />
-                    <c-button status="plain" class="text-dark p-0">Looking for Classic Games?</c-button>
+                    <!-- and as a
+                    <c-button status="plain" class="text-dark p-0">mobile app</c-button><br /> 
+                    <c-button status="plain" class="text-dark p-0">Looking for Classic Games?</c-button>-->
                 </center>
             </div>
         </div>

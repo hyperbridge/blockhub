@@ -292,6 +292,7 @@
                 })
             },
             create() {
+                this.product.type = 'game'
                 this.product.ownerId = this.$store.state.application.activeProfile.id
 
                 this.$store.dispatch('products/create', this.product).then((res) => {
@@ -303,6 +304,9 @@
 
             },
             save() {
+                this.product.type = 'game'
+                this.product.ownerId = this.$store.state.application.activeProfile.id
+                
                 this.$store.dispatch('products/update', [this.product.id, this.product, {
                     query: {
                         $eager: 'tags'
