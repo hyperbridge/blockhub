@@ -1,5 +1,54 @@
 <template>
-    <c-layout navigationKey="store" :showLeftPanel="false" :showRightPanel="false">
+    <c-layout navigationKey="store">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <c-download-block />
+            </div>
+            <div class="col-12 col-md-4 margin-bottom-10">
+                <div class="card invert py-3">
+                    <div class="card-body text-center">
+                        <h4 class="text-uppercase">
+                            Inter-Game Trading
+                        </h4>
+                        <p>
+                            Trade your FPS skins
+                            for the best sword in
+                            your favorite MMORPG
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 margin-bottom-10">
+                <div class="card invert py-3">
+                    <div class="card-body text-center">
+                        <h4 class="text-uppercase">
+                            Empower Creators
+                        </h4>
+                        <p>
+                            Know a nice game project?<br>
+                            Help the develpment get crowdfunded
+                            on BlockHub
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 margin-bottom-10">
+                <div class="card invert py-3">
+                    <div class="card-body text-center">
+                        <h4 class="text-uppercase">
+                            New Economies
+                        </h4>
+                        <p>
+                            Participate in new
+                            microeconomies using
+                            blockchain technology
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </c-layout>
+    <!-- <c-layout navigationKey="store" :showLeftPanel="false" :showRightPanel="false">
 
         <div class="row download-pane block-1 align-items-center pb-5 justify-content-between">
             <div class="col-12 col-lg-5">
@@ -32,9 +81,6 @@
                         <center>
                             Also available for
                             <c-button status="plain" class="p-0">Windows</c-button>
-                            <!-- and as a
-                            <c-button status="plain" class="p-0">mobile app</c-button><br />
-                            <c-button status="plain" class="p-0">Looking for Classic Games?</c-button> -->
                         </center>
                     </div>
                 </div>
@@ -50,15 +96,6 @@
                                 <img src="https://d9me64que7cqs.cloudfront.net/images/desktop/en-us/column01-phoenix-w375-53a61c85c376f3cf9ecc26e7cf82de20a53e4b628b66fada9c4a3ddffef47ef0e868cc976e2ef7b70abeb0fb85511b197ada16bc72c5d080338ad712aa9c19b3.png" class="Client-poster hide-xs">
                             </c-slide>
                         </c-swiper>
-                        <!--<video autoplay="" loop="" muted="" preload="" webkit-playsinline="true"-->
-                               <!--class="video-wrapper_video-element">-->
-                            <!--<source-->
-                                <!--src="https://d9me64que7cqs.cloudfront.net/video/desktop/en-us/launcher-890x564-w2500-cb49d18de0226fe14593e8bcf4fab2c3f5e6e778a40870eb88dd6474848758864e506e3971e6bd74f3b9432f4698ba28ef4709f836c9aa302af1f07017f0b48c.webm"-->
-                                <!--type="video/webm">-->
-                            <!--<source-->
-                                <!--src="https://d9me64que7cqs.cloudfront.net/video/desktop/en-us/launcher-890x564-w2500-5ce6324dcfc1c68b4b6c12378f294e6d054c83b3d7abcc0c50c9b83c2e109868d55bcf29584b4cc969961c4554d01bda70b362c59c78325d9eddbc368cbe791c.mp4"-->
-                                <!--type="video/mp4">-->
-                        <!--</video>-->
                     </div>
                 </div>
             </div>
@@ -230,9 +267,6 @@
                 <center>
                     Also available for
                     <c-button status="plain" class="text-dark p-0">Windows</c-button>
-                    <!-- and as a
-                    <c-button status="plain" class="text-dark p-0">mobile app</c-button><br /> 
-                    <c-button status="plain" class="text-dark p-0">Looking for Classic Games?</c-button>-->
                 </center>
             </div>
         </div>
@@ -285,7 +319,7 @@
                 </div>
             </div>
         </div>
-    </c-layout>
+    </c-layout> -->
 </template>
 
 <script>
