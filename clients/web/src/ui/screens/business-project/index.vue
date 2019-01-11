@@ -309,7 +309,7 @@
         },
         methods: {
             updateProjectRaw(project) {
-                this.project = project
+                this.project = JSON.parse(project)
             },
             syncBlockchain() {
 
@@ -510,6 +510,8 @@
 
             },
             save() {
+                this.project.ownerId = this.$store.state.application.activeProfile.id
+                
                 this.$store.dispatch('projects/update', [this.project.id, this.project, {
                     query: {
                         $eager: 'tags'
