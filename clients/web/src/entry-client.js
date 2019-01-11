@@ -61,7 +61,8 @@ createApp().then(({ app, router, store }) => {
     })
 
     // service worker
-    if ('https:' === location.protocol && navigator.serviceWorker) {
-        navigator.serviceWorker.register('/service-worker.js')
-    }
+    // disable for now
+    // if ('https:' === location.protocol && navigator.serviceWorker) {
+    //     navigator.serviceWorker.register('/service-worker.js')
+    // }
 })
