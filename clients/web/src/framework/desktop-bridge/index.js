@@ -247,16 +247,16 @@ export const runCommand = async (cmd, meta = {}) => {
         // else if (cmd.key === 'setMode') {
         //     local.store.state.application.mode = cmd.data
 
-            // Import seed data for now
-            if (local.store.state.application.mode === 'production') {
-                window.BlockHub.importSeedData()
+        //     // Import seed data for now
+        //     if (local.store.state.application.mode === 'production') {
+        //         //window.BlockHub.importSeedData()
 
-                // local.store.state.application.desktopMode = true
-                // local.store.state.application.signedIn = true
-            }
-            // store.state.application.locked = true
-            // store.state.application.signedIn = false
-        } 
+        //         // local.store.state.application.desktopMode = true
+        //         // local.store.state.application.signedIn = true
+        //     }
+        //     // store.state.application.locked = true
+        //     // store.state.application.signedIn = false
+        // } 
         else if (cmd.key === 'updateReady') {
             console.log(cmd.data)
 
