@@ -24,12 +24,12 @@
                 />
             </div>
 
-            <div class="main-content" v-html="product.value" v-if="!editing">
-                {{ product.value }}
+            <div class="main-content" v-html="product.meta.content" v-if="!editing">
+                {{ product.meta.content }}
             </div>
 
             <div class="content-editor" v-if="editing">
-                <div id="summernote" v-html="product.value">{{ product.value }}</div>
+                <div id="summernote" v-html="product.meta.content">{{ product.meta.content }}</div>
             </div>
         </div>
         <div class="col-12 col-lg-4 col-xl-4">
