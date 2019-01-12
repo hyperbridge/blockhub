@@ -218,6 +218,12 @@
                 profile.edit = false
                 this.editedProfile = null
             },
+            getRandomName() {
+                const firstNames = ['Aiden', 'Jackson', 'Mason', 'Liam', 'Jacob', 'Jayden', 'Ethan', 'Noah', 'Lucas', 'Logan', 'Caleb', 'Caden', 'Jack', 'Ryan', 'Connor', 'Michael', 'Elijah', 'Brayden', 'Benjamin', 'Nicholas', 'Alexander', 'William', 'Matthew', 'James', 'Landon', 'Nathan', 'Dylan', 'Evan', 'Luke', 'Andrew', 'Gabriel', 'Gavin', 'Joshua', 'Owen', 'Daniel', 'Carter', 'Tyler', 'Cameron', 'Christian', 'Wyatt', 'Henry', 'Eli', 'Joseph', 'Max', 'Isaac', 'Samuel', 'Anthony', 'Grayson', 'Zachary', 'David', 'Christopher', 'John', 'Isaiah', 'Levi', 'Jonathan', 'Oliver', 'Chase', 'Cooper', 'Tristan', 'Colton', 'Austin', 'Colin', 'Charlie', 'Dominic', 'Parker', 'Hunter', 'Thomas', 'Alex', 'Ian', 'Jordan', 'Cole', 'Julian', 'Aaron', 'Carson', 'Miles', 'Blake', 'Brody', 'Adam', 'Sebastian', 'Adrian', 'Nolan', 'Sean', 'Riley', 'Bentley', 'Xavier', 'Hayden', 'Jeremiah', 'Jason', 'Jake', 'Asher', 'Micah', 'Jace', 'Brandon', 'Josiah', 'Hudson', 'Nathaniel', 'Bryson', 'Ryder', 'Justin', 'Bryce', 'Sophia', 'Emma', 'Isabella', 'Olivia', 'Ava', 'Lily', 'Chloe', 'Madison', 'Emily', 'Abigail', 'Addison', 'Mia', 'Madelyn', 'Ella', 'Hailey', 'Kaylee', 'Avery', 'Kaitlyn', 'Riley', 'Aubrey', 'Brooklyn', 'Peyton', 'Layla', 'Hannah', 'Charlotte', 'Bella', 'Natalie', 'Sarah', 'Grace', 'Amelia', 'Kylie', 'Arianna', 'Anna', 'Elizabeth', 'Sophie', 'Claire', 'Lila', 'Aaliyah', 'Gabriella', 'Elise', 'Lillian', 'Samantha', 'Makayla', 'Audrey', 'Alyssa', 'Ellie', 'Alexis', 'Isabelle', 'Savannah', 'Evelyn', 'Leah', 'Keira', 'Allison', 'Maya', 'Lucy', 'Sydney', 'Taylor', 'Molly', 'Lauren', 'Harper', 'Scarlett', 'Brianna', 'Victoria', 'Liliana', 'Aria', 'Kayla', 'Annabelle', 'Gianna', 'Kennedy', 'Stella', 'Reagan', 'Julia', 'Bailey', 'Alexandra', 'Jordyn', 'Nora', 'Carolin', 'Mackenzie', 'Jasmine', 'Jocelyn', 'Kendall', 'Morgan', 'Nevaeh', 'Maria', 'Eva', 'Juliana', 'Abby', 'Alexa', 'Summer', 'Brooke', 'Penelope', 'Violet', 'Kate', 'Hadley', 'Ashlyn', 'Sadie', 'Paige', 'Katherine', 'Sienna', 'Piper', 'Eric']
+                const titleNames = ['the Death Dealer', 'the Forsaken', 'the Lustful', 'the Machine', 'the Striker', 'the Constructed', 'the Firey', 'the Cold', 'the Destroyer', 'the Slayer', 'the Impaler', 'the Sword', 'the Sly', 'the Mad', 'the Swift', 'the Morbid', 'the Insane', 'the Furious', 'the Bloody', 'the Brutal', 'the Vicious', 'the Bitter', 'the Gruesome', 'the Curious', 'the Invoker', 'the Master', 'the Righteous', 'the Devoted']
+
+                return firstNames[Math.floor(Math.random() * firstNames.length)] + ' ' + titleNames[Math.floor(Math.random() * titleNames.length)]
+            },
             saveProfile(profile) {
                 for (let key in profile) {
                     profile[key] = this.profileClone[key]
@@ -270,7 +276,7 @@
                 const { newProfile } = this
 
                 this.$store.dispatch('profiles/create', {
-                    name: newProfile.name,
+                    name: this.getRandomName(),
                     avatar: newProfile.img,
                     address: newProfile.wallet
                 })
@@ -281,15 +287,15 @@
             }
         },
         created() {
-            this.$store.dispatch('profiles/find', {
-                query: {
-                    accountId: this.$store.state.auth.user.id,
-                    $sort: {
-                        createdAt: -1
-                    },
-                    $limit: 25
-                }
-            })
+            // this.$store.dispatch('profiles/find', {
+            //     query: {
+            //         accountId: this.$store.state.auth.user.id,
+            //         $sort: {
+            //             createdAt: -1
+            //         },
+            //         $limit: 25
+            //     }
+            // })
         },
         computed: {
             profiles() {

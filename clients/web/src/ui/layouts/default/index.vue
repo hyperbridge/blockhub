@@ -2,7 +2,7 @@
     <!-- PAGE WRAPPER -->
     <div class="page page--w-header page--w-container" :class="{'page__with-left-sidebar': showLeftPanel, 'page__with-right-sidebar': showRightPanel }">
         <!-- PAGE HEADER -->
-        <transition name="slideDown" v-if="initialized">
+        <transition name="slideDown">
             <c-header :isLoader="loadingState" v-if="!slimMode" />
             <c-slim-header :isLoader="loadingState" v-if="slimMode" :title="headerText" />
         </transition>
@@ -42,7 +42,7 @@
 
 
 
-            <div class="page-shortcuts invert" v-if="initialized && showShortcuts">
+            <div class="page-shortcuts invert" v-if="showShortcuts">
                 <c-shortcut-sidebar :items="shortcuts" />
             </div>
 
@@ -74,12 +74,12 @@
             <div class="content" :class="{'w-100': !showRightPanel && !showLeftPanel}" id="content">
                 <c-breadcrumb :links="breadcrumbLinksData" ref="breadcrumb" v-if="showBreadcrumbs" />
                 <div class="container-fluid">
-                    <slot v-if="initialized" />
+                    <slot />
                 </div>
             </div>
 
             <!-- SIDEPANEL -->
-            <transition name="slideRight" style="max-width: 250px" v-if="initialized && showRightPanel">
+            <transition name="slideRight" style="max-width: 250px" v-if="showRightPanel">
                 <c-sidepanel class="right-sidebar" :navigationKey="navigationKey" />
             </transition>
             <!-- //END SIDEPANEL -->
@@ -684,9 +684,6 @@
             }
         },
         computed: {
-            initialized() {
-                return this.$store.state.application.initialized
-            },
             isConnected() {
                 return this.$store.state.application.connection.internet && this.$store.state.application.connection.datasource
             },
