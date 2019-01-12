@@ -26,7 +26,7 @@ const env = (
 
 
 const webpackConfig = merge(baseWebpackConfig, {
-    mode: process.env.NODE_ENV,
+    mode: 'production',
     stats: "detailed", //  "none" | "errors-only" | "minimal" | "normal" | "detailed" | "verbose"
     optimization: {
         splitChunks: {
