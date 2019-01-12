@@ -209,6 +209,7 @@
                 errors: [],
                 syncing: false,
                 syncStep: 1,
+                participationTiers: this.project.meta.participationTiers,
                 activeElement: {
                     name: false,
                     backgroundImage: false,
@@ -225,7 +226,7 @@
                 crowdfundingProps: ['spent', 'locked', 'overflow']
             }
 
-            if (this.$store.state.application.environmentMode !== 'production') {
+            if (this.$store.state.application.environmentMode !== 'production' && !data.participationTiers) {
                 data = {...data, ...{
                     participationTiers: [
                         {

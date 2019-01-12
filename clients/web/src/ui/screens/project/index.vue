@@ -477,6 +477,9 @@
             '$route'() {
                 this.updateSection()
             },
+            '$store.state.projects.list'() {
+                this.project = this.$store.getters['projects/get'](this.id)
+            },
             editing() {
                 if (this.$store.state.application.editorMode === 'publishing') {
                     this.save()
@@ -484,6 +487,9 @@
             },
         },
         created() {
+            this.updateSection()
+        },
+        mounted() {
             if (this.id !== 'new') {
                 this.$store.dispatch('projects/find', {
                     query: {
@@ -493,7 +499,6 @@
                 })
             }
 
-            this.updateSection()
         },
         beforeDestroy() {
             window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'
