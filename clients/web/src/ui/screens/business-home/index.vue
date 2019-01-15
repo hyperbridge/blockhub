@@ -506,6 +506,8 @@
             products() { return this.$store.getters['products/list'] }
         },
         created() {
+        },
+        mounted() {
             this.$store.dispatch('projects/find', {
                 query: {
                     $sort: {
@@ -522,8 +524,7 @@
                     $limit: 25
                 }
             })
-        },
-        mounted() {
+            
             this.$nextTick(() => {
                 this.loadingState = false
                 document.getElementById('startup-loader').style.display = 'none'

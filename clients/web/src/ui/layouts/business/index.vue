@@ -193,6 +193,7 @@
         mounted() {
             this.$nextTick(() => {
                 this.loadingState = false
+
             })
 
             document.body.classList.add('light')

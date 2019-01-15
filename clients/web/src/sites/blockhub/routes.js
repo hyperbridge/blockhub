@@ -814,6 +814,7 @@ export default [
         component: (resolve) => require(['@/ui/screens/business'], resolve),
         meta: {
             area: 'business',
+            permission: 'signedIn',
         },
         children: [
             {

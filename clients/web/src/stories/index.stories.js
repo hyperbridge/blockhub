@@ -3869,7 +3869,7 @@ storiesOf('Product Overview', module)
                         "memory": "3 GB (Win XP), 4GB (Win Vista/Win 7)",
                         "graphics": "GeForce 260 (1 GB) or Radeon HD 4850 (1 GB). Resolution 1440x900.",
                         "directx": "DirectX 9.29 has to be installed.",
-                        "hard_drive": "25GB",
+                        "hardDrive": "25GB",
                         "sound": ""
                     },
                     {
@@ -3878,7 +3878,7 @@ storiesOf('Product Overview', module)
                         "processor": "Quad Core Intel",
                         "memory": "8 GB RAM",
                         "graphics": "GeForce GTX 675MX 1GB (on 1920x1080, medium), Radeon HD 6970M 1 GB (on 1920x1080, medium), Intel integrated graphics chipsets are not supported",
-                        "hard_drive": "25 GB HD space"
+                        "hardDrive": "25 GB HD space"
                     },
                     {
                         "os": "linux",
@@ -3886,7 +3886,7 @@ storiesOf('Product Overview', module)
                         "processor": "Quad Core Intel",
                         "memory": "4 GB RAM",
                         "graphics": "GeForce GT 640 1GB (1440x900, medium)",
-                        "hard_drive": "25 GB HD space"
+                        "hardDrive": "25 GB HD space"
                     }
                 ]
             }

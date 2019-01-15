@@ -115,9 +115,9 @@
                     "memory": "2 GB for Windows XP and 2GB for Vista / Windows 7",
                     "graphics": "1 GB, DirectX 9.0c",
                     "directx": "9.0c",
-                    "hard_drive": "8 GB",
+                    "hardDrive": "8 GB",
                     "sound": "DirectX 9.0c compatible",
-                    "special_info": "ATI® RADEON® HD 6000 Series"
+                    "specialInfo": "ATI® RADEON® HD 6000 Series"
                 }
             ],
             "systemTags": [
@@ -575,7 +575,7 @@
                     "memory": "1024 MB (XP) / 2048 MB (VISTA/7)",
                     "graphics": "256 MB 100% DIRECTX 9 AND SHADERS 3.0 COMPATIBLE.  ATI RADEON X1600 XT/INTEL HD/NVIDIA GEFORCE 6600 GT OR HIGHER",
                     "directx": "9",
-                    "hard_drive": "10 GB",
+                    "hardDrive": "10 GB",
                     "sound": "DIRECTX 9 COMPATIBLE",
                     "internet": "INTERNET CONNECTION REQUIRED FOR ONLINE GAMING AND GAME ACTIVATION"
                 }
@@ -918,7 +918,7 @@
                     "memory": "1024 MB (XP)/2048 MB (VISTA/7)",
                     "graphics": "256 MB 100% DIRECTX 9 AND SHADERS 3.0 COMPATIBLE.  ATI RADEON X1800 GTO/NVIDIA GEFORCE 7600 GT OR HIGHER",
                     "directx": "9",
-                    "hard_drive": "10 GB",
+                    "hardDrive": "10 GB",
                     "sound": "DIRECTX 9 COMPATIBLE",
                     "other": "INTERNET CONNECTION REQUIRED FOR ONLINE GAMING AND GAME ACTIVATION"
                 },
@@ -928,7 +928,7 @@
                     "processor": "INTEL CORE 2 DUO 2.4 GHZ",
                     "memory": "2048 MB",
                     "graphics": "256 MB ATI RADEON HD 4670/NVIDIA GEFORCE GT120/320M OR HIGHER",
-                    "hard_drive": "10 GB",
+                    "hardDrive": "10 GB",
                     "other": "INTERNET CONNECTION REQUIRED FOR ONLINE GAMING"
                 },
                 {
@@ -937,7 +937,7 @@
                     "processor": "AMD/INTEL DUAL-CORE 2.5 GHZ",
                     "memory": "2048 MB",
                     "graphics": "256 MB SHADERS 3.0 COMPATIBLE.  ATI RADEON X1800 GTO/NVIDIA GEFORCE 7600 GT/INTEL HD 3000 OR HIGHER",
-                    "hard_drive": "10 GB",
+                    "hardDrive": "10 GB",
                     "sound": "SOUND CARD",
                     "other": "INTERNET CONNECTION REQUIRED FOR ONLINE GAMING"
                 }
@@ -1067,7 +1067,7 @@
                     "memory": "4 GB RAM",
                     "graphics": "GeForce GTX 250, GeForce GTX 260, GeForce GTX 280",
                     "directx": "DirectX 9.0c or higher",
-                    "hard_drive": "10 GB + 600 MB virtual memory",
+                    "hardDrive": "10 GB + 600 MB virtual memory",
                     "sound": "DirectX 8.1 compatible sound card"
                 }
             ],
@@ -1463,7 +1463,7 @@
             "systemRequirements": [
                 {
                     "os": "win",
-                    "special_info": "Requires a 64-bit processor and operating system",
+                    "specialInfo": "Requires a 64-bit processor and operating system",
                     "system": "OS 64-bit Windows 7 or 64-bit Windows 8 (8.1) or Windows 10",
                     "processor": "Intel CPU Core i7 3770 3,4 GHz, AMD CPU AMD FX-8350 4 GHz",
                     "memory": "16 GB RAM",
@@ -1765,7 +1765,7 @@
                     "memory": "1GB or higher",
                     "graphics": "DX9c compatible GPU",
                     "directx": "DX9c",
-                    "hard_drive": "4GB",
+                    "hardDrive": "4GB",
                     "sound": "any OS compatible"
                 }
             ],
@@ -2092,7 +2092,7 @@
                     "system": "Windows XP",
                     "processor": "2Ghz or Higher",
                     "memory": "1 Gb",
-                    "hard_drive": "400 mb",
+                    "hardDrive": "400 mb",
                     "sound": "Windows compatible sound card"
                 }
             ],
@@ -2416,7 +2416,7 @@
                 "memory": "2GB",
                 "graphics": "Shader 3.0 or better 256MB NVIDIA® GeForce® 8600GT / ATI Radeon® X1950Pro or better",
                 "directx": "DirectX® 9.0c",
-                "hard_drive": "12GB*",
+                "hardDrive": "12GB*",
                 "sound": "DirectX® 9.0c-compatible"
             }
         ],
@@ -2536,7 +2536,7 @@
                 "memory": "2 GB RAM",
                 "graphics": "3D Compatible NVIDIA GeForce 480/570 Series GPU, NVIDIA 3D Vision Kit",
                 "directx": "",
-                "hard_drive": "10GB of free hard drive space",
+                "hardDrive": "10GB of free hard drive space",
                 "sound": "",
                 "other": "3D Vision-Ready Display"
             }
@@ -2682,7 +2682,7 @@
                 "graphics": "512Mb AMD 5650, 512Mb Nvidia 650M, Intel HD4000* (See Notes for more details)",
                 "storage": "8GB",
                 "additional_notes": "The game is supported on the following Macs. To check your Mac model and when it was released, select About This Mac from the Apple menu on your menu bar.",
-                "special_info": "*    All MacBooks released since Early 2016"
+                "specialInfo": "*    All MacBooks released since Early 2016"
             }
         ],
         "systemTags": [
@@ -2837,7 +2837,7 @@
                 "memory": "3 GB (Win XP), 4GB (Win Vista/Win 7)",
                 "graphics": "GeForce 260 (1 GB) or Radeon HD 4850 (1 GB). Resolution 1440x900.",
                 "directx": "DirectX 9.29 has to be installed.",
-                "hard_drive": "25GB",
+                "hardDrive": "25GB",
                 "sound": ""
             },
             {
@@ -2846,7 +2846,7 @@
                 "processor": "Quad Core Intel",
                 "memory": "8 GB RAM",
                 "graphics": "GeForce GTX 675MX 1GB (on 1920x1080, medium), Radeon HD 6970M 1 GB (on 1920x1080, medium), Intel integrated graphics chipsets are not supported",
-                "hard_drive": "25 GB HD space"
+                "hardDrive": "25 GB HD space"
             },
             {
                 "os": "linux",
@@ -2854,7 +2854,7 @@
                 "processor": "Quad Core Intel",
                 "memory": "4 GB RAM",
                 "graphics": "GeForce GT 640 1GB (1440x900, medium)",
-                "hard_drive": "25 GB HD space"
+                "hardDrive": "25 GB HD space"
             }
         ],
         "systemTags": [
@@ -3101,7 +3101,7 @@
                 "memory": "2GB",
                 "graphics": "512 MB NVIDIA GeForce 8400 / ATI Radeon HD 4650 or higher",
                 "directx": "9.0c",
-                "hard_drive": "At least 1.8 GB of Space",
+                "hardDrive": "At least 1.8 GB of Space",
                 "sound": "DirectX 9.0c compatible",
                 "other": "Internet connection required"
             }
@@ -3241,7 +3241,7 @@
                 "memory": "4GB System RAM or more",
                 "graphics": "1GB Video RAM GPU w/ Shader Model 4.0 support.  NVIDIA® GeForce® GTX 400 series or better.  ATI Radeon™ HD5000 series or better",
                 "directx": "DirectX® 11",
-                "hard_drive": "10 GB",
+                "hardDrive": "10 GB",
                 "sound": "100% DirectX® 9.0C compliant sound card or equivalent onboard sound",
                 "co-op_play": "NVIDIA® GeForce® 8800 cards require 640MB of Video RAM.  ATI Radeon™ HD3800 cards require 1GB of Video RAM"
             },
@@ -3392,9 +3392,9 @@
                 "memory": "2 GB for Windows XP and 2GB for Vista / Windows 7",
                 "graphics": "1 GB, DirectX 9.0c",
                 "directx": "9.0c",
-                "hard_drive": "8 GB",
+                "hardDrive": "8 GB",
                 "sound": "DirectX 9.0c compatible",
-                "special_info": "ATI® RADEON® HD 6000 Series"
+                "specialInfo": "ATI® RADEON® HD 6000 Series"
             }
         ],
         "systemTags": [
@@ -3497,9 +3497,9 @@
                 "memory": "2 GB for Windows XP and 2GB for Vista / Windows 7",
                 "graphics": "1 GB, DirectX 9.0c",
                 "directx": "9.0c",
-                "hard_drive": "8 GB",
+                "hardDrive": "8 GB",
                 "sound": "DirectX 9.0c compatible",
-                "special_info": "ATI® RADEON® HD 6000 Series"
+                "specialInfo": "ATI® RADEON® HD 6000 Series"
             }
         ],
         "systemTags": [

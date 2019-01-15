@@ -21,19 +21,28 @@
             }
         },
         created() {
-            this.authenticate()
-
-            //setTimeout(this.initialize.bind(this), 3000) // TODO: remove arbitrary delay
         },
         watch: {
-            'type'() {
-                this.authenticate()
-            },
-            '$store.state.auth.accessToken'(newVal) {
-                if (newVal) {
-                    this.authenticate()
+            'type': {
+                immediate: true,
+                handler(newVal, oldVal) {
+                    if (newVal === 'authenticated') {
+                        this.authenticate()
+                    } else if (newVal === 'initialized') {
+                        this.initialize()
+                    } else if (newVal === 'user') {
+                        this.authenticate()
+                    }
                 }
             },
+            'satisfied'() {
+                document.getElementById('startup-loader').style.display = 'none'
+            },
+            // '$store.state.auth.accessToken'(newVal) {
+            //     if (newVal) {
+            //         this.authenticate()
+            //     }
+            // },
             '$store.state.auth.user'(newVal) {
                 if (newVal) {
                     this.$store.dispatch('profiles/find', {
@@ -94,8 +103,6 @@
                             if (this.type === 'authenticated') {
                                 this.satisfied = true
                             }
-
-                            this.initialize()
                         })
                 }
             },
