@@ -1,9 +1,9 @@
 <template>
     <div
         class="dropdown dropmenu_container"
-        :class="[ dropPosition ? 'drop' + dropPosition : '' ]"
+        :class="[ dropPosition ? 'drop' + dropPosition : '', isActive ? 'show' : '' ]"
     >
-        <div class="rw-btn rw-btn--card" data-toggle="dropdown" aria-expanded="false">
+        <div class="rw-btn rw-btn--card" @click=" isActive = !isActive ">
             <div></div>
         </div>
         <div class="dropdown-menu">
@@ -27,6 +27,11 @@ export default {
         menuItems: {
             type: Array,
             default: () => ['Save', 'Share', 'Report']
+        }
+    },
+    data(){
+        return{
+            isActive: false
         }
     },
     filters: {
@@ -77,6 +82,9 @@ export default {
                         background: #fff;
                     }
                 }
+            }
+            .dropdown-menu{
+                display: block;
             }
         }
         .dropdown-menu {
