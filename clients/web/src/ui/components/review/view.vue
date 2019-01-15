@@ -44,7 +44,9 @@
             </c-button>
         </div>
         <div class="view-review__comment">
-            <div class="" v-if="comment"></div>
+            <div class="w-100" v-if="comments">
+                <c-comment v-for="comment in comments" :canReply="false" :comment="comment"/>
+            </div>
             <div class="view-review__comment-close" v-else>
                 Comments are disabled for this review.
             </div>
@@ -58,6 +60,43 @@
             isRecommend: {
                 type: Boolean,
                 default: false
+            }
+        },
+        components:{
+            'c-comment' : (resolve) => require(['@/ui/components/community/comment'], resolve),
+        },
+        data(){
+            return{
+                comments: [
+                    {
+                        text: 'Lorem ipsum dolor si',
+                        author:{
+                            name: 'Satoshi',
+                            img: 'https://banner2.kisspng.com/20180403/qtw/kisspng-computer-icons-avatar-woman-user-avatar-5ac3a1dfb11ca9.9792609515227703997255.jpg'
+                        }
+                    },
+                    {
+                        text: 'Fusce imperdiet massa sit amet odio blandit aliquam.',
+                        author:{
+                            name: 'Hakato',
+                            img: 'https://www.exclutips.com/wp-content/uploads/2015/08/wordpress-custom-user-avatar.png'
+                        }
+                    },
+                    {
+                        text: 'Morbi dignissim mauris vitae turpis efficitur, in dapibus neque consectetur. Etiam sit amet consectetur ex.',
+                        author:{
+                            name: 'Daniel',
+                            img: 'http://paquitosoftware.com/content/images/2015/07/gravatar.jpeg'
+                        }
+                    },
+                    {
+                        text: 'Mauris in enim vitae dolor porttitor maximus',
+                        author:{
+                            name: 'Monik',
+                            img: 'https://relayfm.s3.amazonaws.com/uploads/user/avatar/103/user_avatar_tiffanyarment_artwork.png'
+                        }
+                    }
+                ]
             }
         }
     }
