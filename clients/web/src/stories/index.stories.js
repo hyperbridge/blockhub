@@ -3665,6 +3665,7 @@ storiesOf('Community Spotlight', module)
     }))
 
 import ProductReview from '@/ui/components/review';
+import ProductReviewForm from '@/ui/components/review/create';
 
 storiesOf('Product Review', module)
     .add('default', () => ({
@@ -3699,7 +3700,12 @@ storiesOf('Product Review', module)
             </div>
         `
     }))
-
+    .add('form', () => ({
+        components:{
+            'c-review-form' : ProductReviewForm
+        },
+        template: `<div class="p-4" style="width: 1000px;"><c-review-form /></div>`
+    }))
 import Banner from '@/ui/components/banner'
 
 storiesOf('Banner', module)
