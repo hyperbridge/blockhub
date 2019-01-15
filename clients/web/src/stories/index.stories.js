@@ -3706,6 +3706,14 @@ storiesOf('Product Review', module)
         },
         template: `<div class="p-4" style="width: 1000px;"><c-review-form /></div>`
     }))
+    .add('view review', () => ({
+        components: {
+            'c-view-review': (resolve) => require(['@/ui/components/review/view'], resolve),
+        },
+        template: `<div class='p-5' style="width: 1000px"><c-view-review /></div>`
+    }))
+
+
 import Banner from '@/ui/components/banner'
 
 storiesOf('Banner', module)
