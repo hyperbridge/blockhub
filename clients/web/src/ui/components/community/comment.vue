@@ -1,13 +1,13 @@
 <template>
     <div>
         <div class="community-item__comment" :class="{ 'is-reply': reply }">
-            <c-button-arrows size="xl" colored>
+            <c-button-arrows size="xl" colored v-if="comment.rate">
                 <span :class="{
                     'up': comment.rate > 400,
                     'down': comment.rate < 0
                 }">{{ comment.rate }}</span>
             </c-button-arrows>
-            <div class="comment-container">
+            <div class="comment-container" :class="{ 'w-100' : !comment.rate }">
                 <c-dropdown-menu
                     dropPosition="right"
                     style="right: 5px; top: 10px;"
@@ -29,6 +29,7 @@
         </div>
 
         <c-reply
+            v-if="canReply"
             @replyMode="reply = $event"
         />
 
@@ -44,6 +45,10 @@
             comment: {
                 type: Object,
                 required: true
+            },
+            canReply:{
+                type: Boolean,
+                default: true
             }
         },
         components: {
@@ -82,7 +87,7 @@
         .comment-content{
             padding: 15px 20px;
             display: flex;
-            justify-content: space-between;
+            /*justify-content: space-between;*/
             @media (max-width: 767px) {
                 flex-direction: column;
             }
