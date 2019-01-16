@@ -5906,6 +5906,21 @@ storiesOf('Table', module)
     }))
 
 
+storiesOf('Text Formatting', module)
+    .add('default', () => ({
+        components:{
+            'c-text-formatting': (resolve) => require(['@/ui/components/text-formatting'], resolve),
+            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic.vue'], resolve),
+        },
+        template: `<div class="p-4" style="width: 600px">
+                    <c-basic-popup :activated="true">
+                        <template slot="body">
+                            <c-text-formatting />
+                        </template>
+                    </c-basic-popup>
+                </div>`
+    }))
+
 
 
 /*
