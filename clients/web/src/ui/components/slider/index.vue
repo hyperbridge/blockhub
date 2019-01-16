@@ -8,6 +8,7 @@
             :showBackground="true"
             @prevClick="slider.slidePrev()"
             @nextClick="slider.slideNext()"
+            v-if="products"
         />
 
         <c-swiper :options="sliderOptions" ref="slider">
@@ -32,13 +33,13 @@
             products: Array,
             title: String,
             maxPerView: Number,
-            dynamic:{
+            dynamic: {
                 type: Boolean,
                 default: true
             }
         },
-        data(){
-            return{
+        data() {
+            return {
                 sliderOptions: {
                     slidesPerView: this.maxPerView,
                     spaceBetween: 15,

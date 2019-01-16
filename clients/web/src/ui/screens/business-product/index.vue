@@ -1,5 +1,5 @@
 <template>
-    <c-business-layout>
+    <c-layout>
         <div class="row">
 
             <div class="col-md-12" v-if="successfulCreationMessage">
@@ -142,7 +142,7 @@
                 </div>
             </div>
         </template>
-    </c-business-layout>
+    </c-layout>
 </template>
 
 <script>
@@ -153,7 +153,7 @@
             id: [String, Number]
         },
         components: {
-            'c-business-layout': (resolve) => require(['@/ui/layouts/business'], resolve),
+            'c-layout': (resolve) => require(['@/ui/layouts/business'], resolve),
             'c-html-editor': (resolve) => require(['@/ui/components/html-editor'], resolve),
             'c-json-editor': (resolve) => require(['@/ui/components/json-editor'], resolve),
             'c-multiselect': (resolve) => require(['vue-multiselect'], resolve),

@@ -7,7 +7,7 @@
             <!--</div>-->
         <!--</div>-->
         <div class="col-12">
-            <c-assets-grid :list="product.assets" />
+            <c-assets-grid :list="product.meta.assets" />
         </div>
     </div>
 </template>

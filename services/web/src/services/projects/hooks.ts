@@ -85,13 +85,13 @@ const validatePermission = function(options = {}) {
 }
 
 export const before = {
-    all: [authenticate('jwt')],
+    all: [],
     find: [],
     get: [],
-    create: [create()],
-    update: [validatePermission()],
-    patch: [validatePermission()],
-    remove: [validatePermission()]
+    create: [authenticate('jwt'), create()],
+    update: [authenticate('jwt'), validatePermission()],
+    patch: [authenticate('jwt'), validatePermission()],
+    remove: [authenticate('jwt'), validatePermission()]
 }
 
 export const after = {

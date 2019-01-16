@@ -211,20 +211,6 @@
             'c-sidebar-menu-link': (resolve) => require(['@/ui/components/sidebar-menu/menu_item'], resolve)
         },
         updated() {
-            $('body').off('click').on('click', "[data-action='fixedpanel-toggle']", (e) => {
-                let btn = $('#sidebar-toggle-btn span')
-
-                if ($('body').hasClass('show-sidebar')) {
-                    $('body').removeClass('show-sidebar')
-                    $(btn).removeClass('fa-times').addClass('fa-cog')
-                    $('.snotify').show()
-                }
-                else {
-                    $('body').addClass('show-sidebar')
-                    $(btn).removeClass('fa-cog').addClass('fa-times')
-                    $('.snotify').hide()
-                }
-            })
         },
         data() {
             return {
@@ -352,6 +338,20 @@
             })
         },
         created() {
+            $('body').off('click').on('click', "[data-action='fixedpanel-toggle']", (e) => {
+                let btn = $('#sidebar-toggle-btn span')
+
+                if ($('body').hasClass('show-sidebar')) {
+                    $('body').removeClass('show-sidebar')
+                    $(btn).removeClass('fa-times').addClass('fa-cog')
+                    $('.snotify').show()
+                }
+                else {
+                    $('body').addClass('show-sidebar')
+                    $(btn).removeClass('fa-cog').addClass('fa-times')
+                    $('.snotify').hide()
+                }
+            })
         },
         watch: {
         }

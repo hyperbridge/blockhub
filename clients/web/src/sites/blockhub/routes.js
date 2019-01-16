@@ -809,6 +809,21 @@ export default [
         }
     },
     {
+        path: '/business/project/:id',
+        name: 'Crowdfund',
+        props: true,
+        component: (resolve) => require(['@/ui/screens/business-project'], resolve),
+        meta: {
+            title: 'Crowdfund',
+            permission: 'signedIn',
+            breadcrumb: [
+                { to: '/business', title: 'Dashboard' },
+                { to: '/business/projects', title: 'Crowdfunds' },
+                { title: 'Crowdfund' }
+            ]
+        }
+    },
+    {
         path: '/business',
         name: 'Business',
         component: (resolve) => require(['@/ui/screens/business'], resolve),
@@ -852,21 +867,6 @@ export default [
                     breadcrumb: [
                         { to: '/business', title: 'Dashboard' },
                         { title: 'All Crowdfunds' }
-                    ]
-                }
-            },
-            {
-                path: 'project/:id',
-                name: 'Crowdfund',
-                props: true,
-                component: (resolve) => require(['@/ui/screens/business-project'], resolve),
-                meta: {
-                    title: 'Crowdfund',
-                    permission: 'signedIn',
-                    breadcrumb: [
-                        { to: '/business', title: 'Dashboard' },
-                        { to: '/business/projects', title: 'Crowdfunds' },
-                        { title: 'Crowdfund' }
                     ]
                 }
             },

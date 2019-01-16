@@ -41,11 +41,11 @@ const create = function(options = {}) {
         const account = context.params.user
 
         if (!account.id) {
-            throw new Error('A product must have a account')
+            throw new Error('Account required')
         }
 
         if (data.ownerId) {
-            throw new Error('Owner must be set')
+            throw new Error('Owner required')
         }
 
         const profile = await app.service('profiles').get(data.ownerId)
@@ -89,13 +89,13 @@ const validatePermission = function(options = {}) {
 }
 
 export const before = {
-    all: [authenticate('jwt')],
+    all: [],
     find: [],
     get: [],
-    create: [create()],
-    update: [validatePermission()],
-    patch: [validatePermission()],
-    remove: [validatePermission()]
+    create: [authenticate('jwt'), create()],
+    update: [authenticate('jwt'), validatePermission()],
+    patch: [authenticate('jwt'), validatePermission()],
+    remove: [authenticate('jwt'), validatePermission()]
 }
 
 export const after = {

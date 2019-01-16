@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-12 col-lg-8 col-xl-8">
             <c-screen-gallery
-                :items="[product.images.mediumTile, ...product.images.preview]"
-                :video_url="product.video"
+                :items="[product.meta.images.mediumTile, ...product.meta.images.preview]"
+                :video_url="product.meta.video"
             />
 
             <div v-for="(promotions, section) in promotionSections" :key="section" v-if="promotionSections">
@@ -11,37 +11,37 @@
                 <c-promotion-box
                     :title="promotion.title"
                     :price="promotion.price"
-                    v-if="product.promotions"
+                    v-if="product.meta.promotions"
                     v-for="(promotion, index) in promotions" :key="index"
                 />
             </div>
 
             <div class="overflow-hidden">
                 <c-game-plan
-                    v-for="(plan, index) in product.plans"
+                    v-for="(plan, index) in product.meta.plans"
                     :key="index"
                     :plan="plan"
                 />
             </div>
 
-            <div class="main-content" v-html="product.content" v-if="!editing">
-                {{ product.content }}
+            <div class="main-content" v-html="product.meta.content" v-if="!editing">
+                {{ product.meta.content }}
             </div>
 
             <div class="content-editor" v-if="editing">
-                <div id="summernote" v-html="product.content">{{ product.content }}</div>
+                <div id="summernote" v-html="product.meta.content">{{ product.meta.content }}</div>
             </div>
         </div>
         <div class="col-12 col-lg-4 col-xl-4">
             <c-purchase-block
                 class="margin-bottom-15"
                 :isUnavailable="!currentRelease"
-                :price="product.price"
+                :price="product.meta.price"
                 :tags="['New']"
                 :onClickPurchase="showPurchaseModal"
                 :inWishlist="!!wishlist[product.id]"
                 :inShortcut="$store.state.application.shortcuts.find(s => s.id == ('product' + product.id))"
-                :releaseDate="product.releaseDate"
+                :releaseDate="product.meta.releaseDate"
                 :playLink="currentRelease && currentRelease.playLink"
                 @addToWishlist="$store.dispatch(
                     'community/updateWishlist',
@@ -49,18 +49,18 @@
                 )"
                 @addToShortcut="$store.commit(
                     'application/updateShortcut',
-                    { id: 'product' + product.id, type: 'product', text: product.name, to: '/product/' + product.id, image: product.images.mediumTile }
+                    { id: 'product' + product.id, type: 'product', text: product.name, to: '/product/' + product.id, image: product.meta.images.mediumTile }
                 )"
             />
             <c-button iconHide @click="showInstaller = !showInstaller" hidden>Open installer</c-button>
 
-            <c-rating-block class="margin-bottom-20" :items="product.rating"
+            <c-rating-block class="margin-bottom-20" :items="product.meta.rating"
                             :parentPath="`/product/${product.id}`" v-darklaunch="'RATINGS'" @goto="scrollToReviews" />
 
-            <c-frequently-traded-assets class="margin-bottom-20" :items="product.frequentlyTradedAssets"
+            <c-frequently-traded-assets class="margin-bottom-20" :items="product.meta.frequentlyTradedAssets"
                                         :assetsPath="`/product/${product.id}/assets`" v-darklaunch="'ASSETS'" />
 
-            <c-community-spotlight class="margin-bottom-20" :discussions="product.community.discussions"
+            <c-community-spotlight class="margin-bottom-20" :discussions="product.meta.community.discussions"
                                     :communityPath="`/product/${product.id}/community`" v-darklaunch="'COMMUNITY'" />
 
             <c-block :title="`Official`"
@@ -77,9 +77,9 @@
                 </div>
             </c-block>
 
-            <c-system-requirements class="margin-bottom-20" :requirements="product.systemRequirements" />
+            <c-system-requirements class="margin-bottom-20" :requirements="product.meta.systemRequirements" />
 
-            <c-language-support :languages="product.languageSupport" />
+            <c-language-support :languages="product.meta.languageSupport" />
         </div>
         <div class="col-12">
             <c-block :title="`Updates`"
@@ -139,6 +139,22 @@
                      class="margin-top-30 margin-bottom-20">
                 <div class="h5">
                     World records were not found.
+                </div>
+            </c-block>
+        </div>
+        <div class="col-12" v-darklaunch="'TOURNAMENTS'">
+            <c-block :title="`Upcoming tournaments`"
+                     :noGutter="true"
+                     :bgGradient="true"
+                     :onlyContentBg="true"
+                     :showArrows="true"
+                     :showBackground="true"
+                     ref="streamsSlider"
+                     @prevClick="streamsSlider.slidePrev()"
+                     @nextClick="streamsSlider.slideNext()"
+                     class="margin-top-30 margin-bottom-20">
+                <div class="h5">
+                    Tournaments not found.
                 </div>
             </c-block>
         </div>
@@ -262,13 +278,13 @@
                 return this.$store.state.community.profiles[this.$store.state.application.activeProfile.id].productWishlist
             },
             streams() {
-                return this.product.streams
+                return this.product.meta.streams
             },
             reviews() {
-                return this.product.reviews
+                return this.product.meta.reviews
             },
             currentRelease() {
-                return this.product.releases && this.product.releases.find(p => this.product.currentVersion === p.version)
+                return this.product.meta.releases && this.product.meta.releases.find(p => this.product.meta.currentVersion === p.version)
             },
             helpfulReviews() {
                 if (!this.reviews) return []

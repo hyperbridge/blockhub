@@ -8,7 +8,7 @@
                  v-for="(item) of limitedList(limit)"
                  :style="{ width: 'calc(100% / ' + showNumber + ')'}"
                  :key="item.id" >
-                <c-includes-item :id="item.id" :name="item.name" :developer="item.developer" :rating="item.rating.overall" :image="item.images.mediumTile" />
+                <c-includes-item :id="item.id" :name="item.name" :developer="item.developer" :rating="item.rating ? item.rating.overall : 0" :image="item.meta ? item.meta.images.mediumTile : null" />
             </div>
         </transition-group>
         <!--Show buttons-->

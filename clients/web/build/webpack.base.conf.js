@@ -11,7 +11,6 @@ function resolve (dir) {
 }
 
 module.exports = {
-    mode: 'development',
     devtool: 'source-map',
     entry: {
         app: helpers.root('/src/entry-client.js')

@@ -8,9 +8,10 @@
             :showBackground="true"
             @prevClick="slider.slidePrev()"
             @nextClick="slider.slideNext()"
+            v-if="products"
         />
 
-        <c-swiper :options="sliderOptions" ref="slider">
+        <c-swiper :options="sliderOptions" ref="slider" v-if="products">
             <c-slide v-for="(product, index) in products" :key="index">
                 <c-product-card-dynamic class="m-0" :product="product" v-if="dynamic" />
                 <c-product-card class="m-0" :product="product" v-else />
@@ -26,7 +27,7 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 export default {
     name: 'product-slider',
-    components:{
+    components: {
         'c-product-card': (resolve) => require(['@/ui/components/store/product-card'], resolve),
         'c-product-card-dynamic': (resolve) => require(['@/ui/components/store/product-card-dynamic'], resolve),
         'c-swiper': swiper,

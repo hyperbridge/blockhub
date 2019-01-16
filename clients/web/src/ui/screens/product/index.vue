@@ -43,7 +43,6 @@
                                                  :multiple="true"
                                                  :taggable="true"
                                                  :options="tagOptions">
-
                                     </c-multiselect>
                                     <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
                                         <!--<option v-for="(tag, index) in tagOptions" :key="index"-->
@@ -373,20 +372,24 @@
                 if (!product) {
                     return
                 }
-                
-
-                if (!product.community) {
-                    product.community = {
-                        discussions: []
-                    }
-                }
 
                 if (!product.tags) {
                     product.tags = []
                 }
 
+                if (!product.developerTags) {
+                    product.developerTags = []
+                }
+
                 if (!product.meta) {
                     product.meta = {}
+                }
+                
+
+                if (!product.meta.community) {
+                    product.meta.community = {
+                        discussions: []
+                    }
                 }
 
                 if (product.meta.images && product.meta.images.preview && product.meta.images.preview.length) {
@@ -663,17 +666,18 @@
 
                     console.log('Import response: ', data)
 
-                    this.product.type = 'game'
-                    //this.product.rating.overall = 0
-                    this.product.tags = [{key: 'imported', value: 'Imported'}]
-                    this.product.developerTags = data.tags
                     this.product.name = data.title
-                    this.product.releaseDate = data.releaseDate
-                    this.product.description = data.description
-                    this.product.content = data.value
-                    this.product.genre = ''
-                    this.product.developer = data.developers && data.developers[0]
-                    this.product.publisher = data.publishers && data.publishers[0]
+                    this.product.value = data.value
+                    this.product.tags = [{key: 'imported', value: 'Imported'}]
+                    this.product.meta = {}
+                    this.product.meta.type = 'game'
+                    //this.product.meta.rating.overall = 0
+                    this.product.meta.developerTags = data.tags
+                    this.product.meta.releaseDate = data.releaseDate
+                    this.product.meta.description = data.description
+                    this.product.meta.genre = ''
+                    this.product.meta.developer = data.developers && data.developers[0]
+                    this.product.meta.publisher = data.publishers && data.publishers[0]
 
                     this.$store.commit('application/activateModal', null)
                 })
