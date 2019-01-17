@@ -49,6 +49,9 @@
                 {{ show_more ? 'HIDE REVIEW' : 'READ MORE...' }}
             </a>
         </div>
+        <!--<c-basic-popup :activated="show_more" @close=" show_more = !show_more " width="800">-->
+            <!--<c-post :post="post"/>-->
+        <!--</c-basic-popup>-->
     </div>
 </template>
 
@@ -67,7 +70,9 @@ export default {
     },
     components: {
         'c-rating-stars': (resolve) => require(['@/ui/components/rating-stars'], resolve),
-        'c-author': (resolve) => require(['@/ui/components/author'], resolve)
+        'c-author': (resolve) => require(['@/ui/components/author'], resolve),
+        'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic'], resolve),
+        'c-post' : (resolve) => require(['@/ui/components/community/post-item'], resolve)
     },
     data() {
         return {
