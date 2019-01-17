@@ -186,7 +186,12 @@
                     />
                 </div>
                 <div class="h5" v-else>
-                    No reviews yet. Be the first?
+                    <template v-if="!reviewForm">
+                        No reviews yet. <c-button status="plain" size="md" @click="reviewForm=true" class="p-0">Be the first?</c-button>
+                    </template>
+                    <template v-if="reviewForm">
+                        <c-review-form @cancel="reviewForm=!reviewForm" />
+                    </template>
                 </div>
             </c-block>
         </div>
@@ -227,6 +232,7 @@
             'c-game-installer': (resolve) => require(['@/ui/components/game-installer'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide,
+            'c-review-form': (resolve) => require(['@/ui/components/review/create'], resolve),
         },
         data() {
             return {
@@ -246,7 +252,8 @@
                     }
                 },
                 streamersList: 8,
-                showInstaller: false
+                showInstaller: false,
+                reviewForm: false
             }
         },
         methods: {
