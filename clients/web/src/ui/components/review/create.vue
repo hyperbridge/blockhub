@@ -42,7 +42,7 @@
                     </c-checkbox>
                 </div>
                 <div class="ml-auto">
-                    <c-button status="plain">
+                    <c-button status="plain" @click=" textFormatting = true ">
                         Formatting Help
                     </c-button>
                 </div>
@@ -59,11 +59,21 @@
                         No
                     </c-button>
                 </div>
-                <c-button status="second-success" size="md">
-                    Post review
-                </c-button>
+                <div>
+                    <c-button status="second-warning" size="md" class="mr-3" @click="$emit('cancel')">
+                        Cancel
+                    </c-button>
+                    <c-button status="second-success" size="md">
+                        Post review
+                    </c-button>
+                </div>
             </div>
         </div>
+        <c-basic-popup :activated="textFormatting" @close=" textFormatting = false ">
+            <template slot="body">
+                <c-text-formatting />
+            </template>
+        </c-basic-popup>
     </div>
 </template>
 
@@ -71,15 +81,22 @@
     export default {
         components: {
             'c-checkbox': (resolve) => require(['@/ui/components/checkbox'], resolve),
+            'c-text-formatting': (resolve) => require(['@/ui/components/text-formatting'], resolve),
+            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic.vue'], resolve),
         },
+        data(){
+            return{
+                textFormatting: false
+            }
+        }
     }
 </script>
 
 <style lang="scss" scoped>
     .create-review {
-        padding: 20px;
-        border-radius: 5px;
-        background: rgba(0, 0, 0, .2);
+        /*padding: 20px;*/
+        /*border-radius: 5px;*/
+        /*background: rgba(0, 0, 0, .2);*/
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
