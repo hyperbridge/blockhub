@@ -5932,7 +5932,13 @@ storiesOf('Text Formatting', module)
     }))
 
 
-
+storiesOf('Activity block', module)
+    .add('default', () => ({
+        components:{
+            'c-activity-block': (resolve) => require(['@/ui/components/activity block'], resolve),
+        },
+        template: `<div style="width: 1000px;" class="m-4"><c-activity-block /></div>`
+    }))
 /*
      Dynamic import - test version
 
