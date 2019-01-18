@@ -1048,6 +1048,11 @@ export default [
         component: (resolve) => require(['@/ui/screens/achievements'], resolve)
     },
     {
+        path: '/features',
+        name: 'Features',
+        component: (resolve) => require(['@/ui/screens/features'], resolve)
+    },
+    {
         path: '/download/desktop/mac',
         beforeEnter(to, from, next) {
             window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/BlockHub-${appVersion}.dmg`
