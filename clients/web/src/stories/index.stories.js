@@ -1920,7 +1920,17 @@ storiesOf('Popups', module)
         
         `
     }))
-
+    .add('play', () => ({
+        components:{
+            'c-play-popup' : (resolve) => require(['@/ui/components/popups/play'], resolve)
+        },
+        data(){
+            return{
+                activated: false
+            }
+        },
+        template: `<div class="p-4"><c-button @click=" activated = true ">Play Now</c-button> <c-play-popup :activated="activated" @close=" activated = !activated " /></div>`
+    }))
 
 import RangeSlider from '../ui/components/range-slider/pure'
 
