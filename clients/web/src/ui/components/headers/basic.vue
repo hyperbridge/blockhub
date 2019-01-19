@@ -79,6 +79,37 @@
                                 <span class="text">Store</span>
                             </c-button>
                         </li>
+                        <li v-if="signedIn">
+                            <c-dropdown class="ml-4 mt-2 account-menu" style="z-index: 12" @show="onShowMenu" @hide="onHideMenu">
+                                <template slot="title">
+                                    <div class="__title">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                    </div>
+                                </template>
+                                <ul class="item-dropdown">
+                                    <li>
+                                        <c-button status="none">
+                                            About
+                                        </c-button>
+                                    </li>
+                                    <li>
+                                        <c-button status="none">
+                                            Ad Choices
+                                        </c-button>
+                                    </li>
+                                    <li>
+                                        <c-button status="none">
+                                            Advertisers
+                                        </c-button>
+                                    </li>
+                                    <li>
+                                        <c-button status="none">
+                                            Blog
+                                        </c-button>
+                                    </li>
+                                </ul>
+                            </c-dropdown>
+                        </li>
                         <li v-if="signedIn" v-darklaunch="'CHAT'">
                             <c-button status="none" to="/chat">
                                 <span class="icon fa fa-comments"></span>
@@ -119,7 +150,7 @@
                             <c-quick-launch class="quick-launch" style="margin-top: -7px;" />
                         </li>
                         <li v-if="signedIn" class="token">
-                            <c-button status="none" to="/token">
+                            <c-button status="none" class="mt-1" to="/token">
                                 <span class="token__count token__count--loading" v-if="tokenCount === null">
                                     <c-loading :enabled="true" />
                                 </span>
@@ -130,7 +161,7 @@
                             </c-button>
                         </li>
                         <li v-if="signedIn">
-                            <c-dropdown class="ml-4 account-menu" style="z-index: 12" @show="onShowMenu" @hide="onHideMenu">
+                            <c-dropdown class="ml-4 account-menu mt-1" style="z-index: 12" @show="onShowMenu" @hide="onHideMenu">
                                 <template slot="title">
                                     <div class="__title">
                                         <i class="fa fa-user"></i>
@@ -291,7 +322,8 @@ export default {
             return this.$store.state.application.developerMode
         },
         signedIn() {
-            return this.$store.state.application.signedIn && !!this.$store.state.auth.user
+            // return this.$store.state.application.signedIn && !!this.$store.state.auth.user
+            return this.$store.state.application.signedIn
         },
         desktopMode() {
             return this.$store.state.application.desktopMode
