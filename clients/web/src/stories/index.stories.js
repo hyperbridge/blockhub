@@ -5935,7 +5935,7 @@ storiesOf('Text Formatting', module)
 storiesOf('Activity block', module)
     .add('default', () => ({
         components:{
-            'c-activity-block': (resolve) => require(['@/ui/components/activity block'], resolve),
+            'c-activity-block': (resolve) => require(['@/ui/components/activity-block'], resolve),
         },
         template: `<div style="width: 1000px;" class="p-5">
                     <c-activity-block @play="" @install="" @help="" labelIcon="list" :percent="37" earnedAchievements="31" totalAchievements="193">
@@ -5951,6 +5951,57 @@ storiesOf('Activity block', module)
                     </c-activity-block>
                 </div>`
     }))
+
+
+storiesOf('Metro', module)
+    .add('metro-tile', () => ({
+        components:{
+            'c-metro-tile': (resolve) => require(['@/ui/components/metro/metro-tile'], resolve),
+        },
+        data(){
+            return{
+                item:   {
+                    width: 200,
+                    height: 100,
+                    rotateX: 0,
+                    faceStyle: {
+                        'background-color': '#1E90FF'
+                    }
+                },
+            }
+        },
+        template: `
+            <div class="m-4">
+                <c-metro-tile
+                :width="item.width"
+                :height="item.height"
+                :length="item.length"
+                :rotateX="item.rotateX"
+                :faceStyle="item.faceStyle"
+                :frontStyle="item.frontStyle"
+                :topStyle="item.topStyle"
+                :backStyle="item.backStyle"
+                :bottomStyle="item.bottomStyle"
+                :perspective="item.perspective"
+                >
+                    <div slot="front">
+                    <img style="width: 100%" src="https://pro2-bar-s3-cdn-cf6.myportfolio.com/aef6db7219cb0151312ad21e43df7de4/a9684046-9d7d-440f-84fd-1317a35e8bbf_rw_1920.png?h=b8c8b84a6da69037797abaed63f42099" />
+                        <div class="tile-label">
+                          Microsoft Edge
+                        </div>
+                    </div>
+                </c-metro-tile>
+            </div>`
+    }))
+    .add('metro-item', () => ({
+        components: {
+            'c-metro-item': (resolve) => require(['@/ui/components/metro/metro-item'], resolve),
+        },
+        template: '<div class="m-4"></div>'
+    }))
+
+
+
 /*
      Dynamic import - test version
 
