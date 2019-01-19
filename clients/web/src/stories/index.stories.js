@@ -5937,7 +5937,19 @@ storiesOf('Activity block', module)
         components:{
             'c-activity-block': (resolve) => require(['@/ui/components/activity block'], resolve),
         },
-        template: `<div style="width: 1000px;" class="p-5"><c-activity-block /></div>`
+        template: `<div style="width: 1000px;" class="p-5">
+                    <c-activity-block @play="" @install="" @help="" labelIcon="list" :percent="37" earnedAchievements="31" totalAchievements="193">
+                        <template slot="label">
+                            In Library
+                        </template>
+                        <template slot="title">
+                            StarBreak is already in your Steam library ( Purchased 31 May, 2018 )
+                        </template>
+                        <template slot="description">
+                            0.1 hrs last two weeks / 0.1 hrs on record
+                        </template>
+                    </c-activity-block>
+                </div>`
     }))
 /*
      Dynamic import - test version

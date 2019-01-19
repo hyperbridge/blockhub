@@ -2,25 +2,71 @@
     <div class="activity-block">
         <div class="activity-block__head">
             <span>
-                <i class="fas fa-book-reader"></i> In Library
+                <i class="fas " :class="[ 'fa-' + labelIcon]"></i>
+                <slot name="label" />
             </span>
-            StartBreak is in your steam library ( Purchased 31 Dec, 2018 )
+            <slot name="title" />
         </div>
-        <div class="activity-block__body">
+        <div class="activity-block__body align-items-center">
             <div>
-                <c-button status="second-info" size="md" class="mr-3">
+                <c-button status="second-info" size="md" class="mr-3" @click="$emit('install')">
                     Install Steam
                 </c-button>
-                <c-button status="second-info" size="md" class="mr-3">
+                <c-button status="second-info" size="md" class="mr-3" @click="$emit('play')">
                     Play Now
                 </c-button>
-                <c-button status="second-info" size="md" class="mr-3">
+                <c-button status="second-info" size="md" class="mr-3" @click="$emit('help')">
                     Get Help
                 </c-button>
+            </div>
+            <div class="d-flex flex-column text-center">
+                <div style="font-size: 14px;line-height: 15px;opacity: .6">
+                    <slot name="description" />
+                </div>
+                <div class="d-flex justify-content-between">
+                    <c-button status="plain" size="sm" class="p-0" style="min-height: 20px; line-height: 14px">
+                        View your stats
+                    </c-button>
+                    <c-button status="plain" size="sm" class="p-0" style="min-height: 20px; line-height: 14px">
+                        View global stats
+                    </c-button>
+                </div>
+            </div>
+            <div style="width: 240px" class="d-flex flex-column ml-auto">
+                <div class="mb-1">
+                    {{ earnedAchievements }} of {{ totalAchievements }}({{getPercent}}%) achievements earned:
+                </div>
+                <c-progress-bar :percentages="getPercent" />
             </div>
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+        props: {
+            labelIcon: String,
+            totalAchievements: {
+                type: [ String, Number ],
+                default: 1
+            },
+            earnedAchievements: {
+                type: [ String, Number ],
+                default: 0
+            }
+        },
+        components:{
+            'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar/'], resolve),
+        },
+        computed:{
+            getPercent(){
+                let percent;
+                percent = Math.round( ( Number(this.earnedAchievements) * 100 ) / Number(this.totalAchievements) );
+                return percent >= 100 ? '100' : percent
+            }
+        }
+    }
+</script>
 
 <style lang="scss" scoped>
     .activity-block{
@@ -58,5 +104,6 @@
         background: linear-gradient(45deg, rgba(61,62,93,1) 0%, rgba(76,75,114,1) 100%);
         display: flex;
         align-items: center;
+        color: #fff;
     }
 </style>
