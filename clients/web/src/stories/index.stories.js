@@ -5937,7 +5937,7 @@ storiesOf('Activity block', module)
         components:{
             'c-activity-block': (resolve) => require(['@/ui/components/activity block'], resolve),
         },
-        template: `<div style="width: 1000px;" class="m-4"><c-activity-block /></div>`
+        template: `<div style="width: 1000px;" class="p-5"><c-activity-block /></div>`
     }))
 /*
      Dynamic import - test version
