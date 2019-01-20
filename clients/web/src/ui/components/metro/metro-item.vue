@@ -42,7 +42,7 @@
     .metro-item{
         display: flex;
         flex-direction: column;
-        border: 1px solid rgba(255, 255, 255, .3);
+        border: 1px solid rgba(255, 255, 255, .2);
         box-sizing: border-box;
         position: relative;
         height: 100%;

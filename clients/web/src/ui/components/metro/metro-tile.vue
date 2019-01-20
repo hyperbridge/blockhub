@@ -1,22 +1,22 @@
 <template>
     <div class="text-white" :style="sceneStyle" @mousemove="onMouseMove($event)" @mousedown="onMouseDown($event)" @mouseup="onMouseUp($event)" @mouseleave="onMouseLeave" ref="scene">
         <div :style="boxContainerStyle" class="metro-item__container">
-            <div :style="frontFaceStyle">
+            <div :style="frontFaceStyle" class="p-3">
                 <slot name="front"></slot>
             </div>
-            <div :style="backFaceStyle">
+            <div :style="backFaceStyle" class="p-3">
                 <slot name="back"></slot>
             </div>
-            <div :style="topFaceStyle">
+            <div :style="topFaceStyle" class="p-3">
                 <slot name="top"></slot>
             </div>
-            <div :style="bottomFaceStyle">
+            <div :style="bottomFaceStyle" class="p-3">
                 <slot name="bottom"></slot>
             </div>
-            <div :style="rightFaceStyle">
+            <div :style="rightFaceStyle" class="p-3">
                 <slot name="right"></slot>
             </div>
-            <div :style="leftFaceStyle">
+            <div :style="leftFaceStyle" class="p-3">
                 <slot name="left"></slot>
             </div>
         </div>
