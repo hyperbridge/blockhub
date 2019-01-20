@@ -5997,9 +5997,92 @@ storiesOf('Metro', module)
         components: {
             'c-metro-item': (resolve) => require(['@/ui/components/metro/metro-item'], resolve),
         },
-        template: '<div class="m-4"></div>'
+        data(){
+            return{
+                image: 'https://cdn.images.dailystar.co.uk/dynamic/184/photos/532000/620x/Days-Gone-PS4-Release-Date-gameplay-trailers-E3-2018-news-updates-for-new-zombie-games-677269.jpg'
+            }
+        },
+        template: `<div class="m-4">
+                    <c-metro-item :image="image">
+                        <div class="h4 font-weight-bold">
+                            Aenean blandit augue non est
+                        </div>
+                        <div>
+                            Vestibulum mi neque, commodo et blandit id, auctor at metus. Quisque varius ut nisi a tincidunt. 
+                            Maecenas nibh sem, malesuada et cursus nec, sollicitudin accumsan sapien.
+                        </div>
+                    </c-metro-item>
+                    <hr />
+                    <c-metro-item :image="image" :fullImage="true">
+                        <div class="h4 font-weight-bold">
+                            Aenean blandit augue non est
+                        </div>
+                        <div>
+                            Vestibulum mi neque, commodo et blandit id, auctor at metus. Quisque varius ut nisi a tincidunt. 
+                            Maecenas nibh sem, malesuada et cursus nec, sollicitudin accumsan sapien.
+                        </div>
+                    </c-metro-item>
+                    <hr />
+                    <c-metro-item :image="image" :fullImage="true" :shadow="true">
+                        <div class="h4 font-weight-bold">
+                            Aenean blandit augue non est
+                        </div>
+                        <div>
+                            Vestibulum mi neque, commodo et blandit id, auctor at metus. Quisque varius ut nisi a tincidunt. 
+                            Maecenas nibh sem, malesuada et cursus nec, sollicitudin accumsan sapien.
+                        </div>
+                    </c-metro-item>
+</div>`
     }))
-
+    .add('metro grid', () => ({
+        components: {
+            'c-metro-grid': (resolve) => require(['@/ui/components/metro/grid'], resolve),
+            'c-metro-item': (resolve) => require(['@/ui/components/metro/metro-item'], resolve),
+        },
+        data(){
+            return{
+                items: [
+                    {
+                        image: 'https://cdn.images.dailystar.co.uk/dynamic/184/photos/532000/620x/Days-Gone-PS4-Release-Date-gameplay-trailers-E3-2018-news-updates-for-new-zombie-games-677269.jpg',
+                        title: 'Nam euismod tincidunt sapien',
+                        text: 'Sed id accumsan diam, ac elementum nulla. Nullam dictum, diam at interdum ullamcorper, nisl arcu ornare felis, bibendum porttitor urna elit at ligula. Nulla eget orci fringilla, eleifend nisi id, consectetur urna.'
+                    },
+                    {
+                        image: 'https://cdn.images.dailystar.co.uk/dynamic/184/photos/532000/620x/Days-Gone-PS4-Release-Date-gameplay-trailers-E3-2018-news-updates-for-new-zombie-games-677269.jpg',
+                        title: 'Nunc tempor purus eget tellus tincidunt, sed eleifend ligula tempor',
+                        text: 'Dibendum porttitor urna elit at ligula. Nulla eget orci fringilla, eleifend nisi id, consectetur urna.'
+                    },
+                    {
+                        image: 'https://cdn.images.dailystar.co.uk/dynamic/184/photos/532000/620x/Days-Gone-PS4-Release-Date-gameplay-trailers-E3-2018-news-updates-for-new-zombie-games-677269.jpg',
+                        title: 'Cras varius est at dolor porttitor',
+                        text: 'lobortis velit laoreet nec. Integer mollis dolor mattis ligula consequat faucibus. Praesent suscipit, risus at elementum blandit, lacus risus interdum risus, non elementum elit turpis id nibh'
+                    },
+                    {
+                        image: 'https://cdn.images.dailystar.co.uk/dynamic/184/photos/532000/620x/Days-Gone-PS4-Release-Date-gameplay-trailers-E3-2018-news-updates-for-new-zombie-games-677269.jpg',
+                        title: 'Sed purus risus, ornare pretium pretium',
+                        text: 'Nam sit amet egestas tellus. Nunc tempor purus eget tellus tincidunt, sed eleifend ligula tempor. Vivamus vestibulum consequat tempor.'
+                    },
+                    {
+                        image: 'https://cdn.images.dailystar.co.uk/dynamic/184/photos/532000/620x/Days-Gone-PS4-Release-Date-gameplay-trailers-E3-2018-news-updates-for-new-zombie-games-677269.jpg',
+                        title: 'Donec malesuada egestas justo in',
+                        text: 'Integer ac hendrerit sapien. Vestibulum euismod neque bibendum rutrum sollicitudin. Mauris ligula neque, finibus id magna ac, lobortis dapibus augue.'
+                    }
+                ]
+            }
+        },
+        template: `<div class="m-4" style="width: 1200px;">
+                    <c-metro-grid>
+                        <c-metro-item v-for="item in items" :image="item.image" :width=" 1200/4 ">
+                            <div class="h4 font-weight-bold">
+                                {{ item.title }}
+                            </div>
+                            <div>
+                                {{ item.text }}
+                            </div>
+                        </c-metro-item>
+                    </c-metro-grid>
+                </div>`
+    }))
 
 
 /*
