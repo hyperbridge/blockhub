@@ -1,7 +1,7 @@
 <script>
     export default {
         name: 'c-input',
-        props: ['value', 'bgColor', 'textColor'],
+        props: ['value', 'bgColor', 'textColor', 'error'],
         render(h) {
             return h('input', {
                 staticClass: 'c-input',
@@ -15,7 +15,8 @@
                 },
                 style:{
                     'background' : this.bgColor,
-                    'color' : this.textColor
+                    'color' : this.textColor,
+                    'border': this.error ? '1px solid red' : '1px solid transparent'
                 }
             });
         },
