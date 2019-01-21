@@ -5960,37 +5960,189 @@ storiesOf('Metro', module)
         },
         data(){
             return{
-                item:   {
-                    width: 200,
-                    height: 100,
-                    rotateX: 0,
-                    faceStyle: {
-                        'background-color': '#1E90FF'
+                BASE_LEN : 65,
+                MARGIN : 3,
+                items: [
+                    {
+                        i: "0",
+                        width: 250,
+                        height: 80,
+                        rotateX: 0,
+                        faceStyle: {
+                            'background-color': '#1E90FF'
+                        }
+                    },
+                    {
+                        i: "1",
+                        width: 250,
+                        height: 80,
+                        rotateX: 0,
+                        faceStyle: {
+                            'background-color': '#228b22'
+                        }
+                    },
+                    {
+                        i: "2",
+                        width: 250,
+                        height: 80,
+                        rotateX: 0,
+                        faceStyle: {
+                            'background-color': '#ff4500'
+                        }
+                    },
+                    {
+                        i: "3",
+                        width: 125,
+                        height: 80,
+                        rotateX: 0,
+                        faceStyle: {
+                            'background-color': '#9400d3'
+                        }
+                    },
+                    {
+                        i: "4",
+                        width: 125,
+                        height: 80,
+                        rotateX: 0,
+                        faceStyle: {
+                            'background-color': '#ffa07a'
+                        }
+                    },
+                    {
+                        i: "5",
+                        width: 125,
+                        height: 80,
+                        rotateX: 0,
+                        faceStyle: {
+                            'background-color': '#1E90FF'
+                        }
+                    },
+                    {
+                        i: "6",
+                        width: 125,
+                        height: 80,
+                        rotateX: 0,
+                        faceStyle: {
+                            'background-color': '#1E90FF'
+                        }
+                    },
+                    {
+                        i: "7",
+                        width: 250,
+                        height: 80,
+                        rotateX: 0,
+                        faceStyle: {
+                            'background-color': '#1E90FF'
+                        }
                     }
-                },
+                ],
             }
         },
         template: `
-            <div class="m-4">
-                <c-metro-tile
-                :width="item.width"
-                :height="item.height"
-                :length="item.length"
-                :rotateX="item.rotateX"
-                :faceStyle="item.faceStyle"
-                :frontStyle="item.frontStyle"
-                :topStyle="item.topStyle"
-                :backStyle="item.backStyle"
-                :bottomStyle="item.bottomStyle"
-                :perspective="item.perspective"
-                >
-                    <div slot="front">
-                    <img style="width: 100%" src="https://pro2-bar-s3-cdn-cf6.myportfolio.com/aef6db7219cb0151312ad21e43df7de4/a9684046-9d7d-440f-84fd-1317a35e8bbf_rw_1920.png?h=b8c8b84a6da69037797abaed63f42099" />
-                        <div class="tile-label">
-                          Microsoft Edge
+            <div class="m-4 d-flex flex-wrap" style="width: 1000px">
+                <div v-for="item in items"
+                    class="p-1">
+                    <c-metro-tile
+                    :width="item.width"
+                    :height="item.height"
+                    :length="item.length"
+                    :rotateX="item.rotateX"
+                    :faceStyle="item.faceStyle">
+                    <!-- custom face for each tile in left layout-->
+                      <template v-if="item.i === '0'">
+                        <div slot="front">
+                            <div class="tile-label">
+                              Microsoft Edge
+                            </div>
                         </div>
-                    </div>
-                </c-metro-tile>
+                      </template>
+                      <template v-else-if="item.i === '1'">
+                        <div slot="front">
+                            <div class="tile-label">
+                              Xbox
+                            </div>
+                        </div>
+                      </template>
+                      <template v-else-if="item.i === '2'">
+                        <div slot="front">
+                            <div class="tile-label">
+                              My Office
+                            </div>
+                        </div>
+                      </template>
+                      <template v-else-if="item.i === '3'">
+                        <div slot="front">
+                            <div class="tile-label">
+                              OneNote
+                            </div>
+                        </div>
+                      </template>
+                      <template v-else-if="item.i === '4'">
+                        <div slot="front">
+                            <div class="tile-label">
+                              PowerPoint
+                            </div>
+                        </div>
+                      </template>
+                      <template v-else-if="item.i === '5'">
+                        <div slot="front">
+                            <div class="tile-label">
+                              Cortana
+                            </div>
+                        </div>
+                      </template>
+                      <template v-else-if="item.i === '6'">
+                        <div slot="front">
+                            <div class="calendar">
+                              <div class="calendar-week-day">
+                                Monday
+                              </div>
+                              <div class="calendar-month-day">
+                                21
+                              </div>
+                            </div>
+                        </div>
+                      </template>
+                      <template v-else-if="item.i === '7'">
+                        <div slot="front">
+                            <div class="tile-label">
+                              Microsoft Store
+                            </div>
+                            <img src="https://user-images.githubusercontent.com/6414178/45696034-3fd14280-bb95-11e8-8c45-cd2020fabefc.png" class="store-cover-img" />
+                            <div class="store-title">
+                              Cyberpunk 2077
+                            </div>
+                            <div class="store-subtitle">
+                                Free&#8314;
+                            </div>
+                        </div>
+                        <div slot="top">
+                            <div class="tile-label">
+                              Microsoft Store
+                            </div>
+                            <img src="https://user-images.githubusercontent.com/6414178/45696084-56779980-bb95-11e8-87ac-817bf448cd4f.png" class="store-cover-img" />
+                            <div class="store-title">
+                              Half-Life 3: Episode 1
+                            </div>
+                            <div class="store-subtitle">
+                                Free&#8314;
+                            </div>
+                        </div>
+                        <div slot="bottom">
+                            <div class="tile-label">
+                              Microsoft Store
+                            </div>
+                            <img src="https://user-images.githubusercontent.com/6414178/45696072-4eb7f500-bb95-11e8-8e7c-ccb0099e5161.png" class="store-cover-img" />
+                            <div class="store-title">
+                              Grand Theft Auto VI
+                            </div>
+                            <div class="store-subtitle">
+                                Free&#8314;
+                            </div>
+                        </div>
+                      </template>
+                    </c-metro-tile>    
+                </div>
             </div>`
     }))
     .add('metro-item', () => ({
@@ -6032,7 +6184,7 @@ storiesOf('Metro', module)
                             Maecenas nibh sem, malesuada et cursus nec, sollicitudin accumsan sapien.
                         </div>
                     </c-metro-item>
-</div>`
+                </div>`
     }))
     .add('metro grid', () => ({
         components: {
