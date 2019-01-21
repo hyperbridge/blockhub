@@ -6237,6 +6237,40 @@ storiesOf('Metro', module)
     }))
 
 
+storiesOf('Security check', module)
+    .add('default', () => ({
+        components:{
+            'c-security-check' : (resolve) => require(['@/ui/components/security-check'], resolve),
+        },
+        data(){
+            return{
+                code: false,
+                err: false
+            }
+        },
+        methods: {
+            sendCode(val){
+                console.log(val)
+                this.code = true
+
+            },
+            checkCode(code){
+                if ( code != 123456 ) {
+                    this.err = true
+                } else {
+                    this.err = false
+                }
+            }
+        },
+        template: `<div style="width: 300px" class="m-4">
+                        <strong class="text-white">Correct code - 123456</strong>
+                        <hr />
+                        <c-security-check @sendCode="sendCode" @codeSubmit="checkCode" :codeIsSend="code" :wrongCode="err" />
+                    </div>`
+
+
+    }))
+
 /*
      Dynamic import - test version
 
