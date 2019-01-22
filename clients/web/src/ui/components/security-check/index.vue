@@ -4,9 +4,6 @@
             <p>
                 Please help us keep this account secure
                 with a quick security check.
-                <c-button status="plain" class="p-0" @click="$emit('reset')">
-                    Reset Code
-                </c-button>
             </p>
             <div class="invert">
                 <div class="form-group">
@@ -59,6 +56,14 @@
                 <c-button status="opacity-info" @click="$emit('codeCancel')" class="mt-3">
                     Cancel
                 </c-button>
+                <div class="d-flex justify-content-between mt-3">
+                    <c-button status="plain" size="sm" class="p-0" @click="$emit('reset')">
+                        Can't login?
+                    </c-button>
+                    <c-button status="plain" size="sm" class="p-0" @click="$emit('login')">
+                        Reset Code
+                    </c-button>
+                </div>
             </template>
         </div>
     </c-block>
