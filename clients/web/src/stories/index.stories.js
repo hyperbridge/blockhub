@@ -5815,6 +5815,22 @@ storiesOf('Global Search', module)
                 </div>
         `
     }))
+    .add('header bar', () => ({
+        components:{
+            'c-bar-search': (resolve) => require(['@/ui/components/global-search/second'], resolve),
+        },
+        data(){
+            return{
+            }
+        },
+        template: `
+                <div class="row m-4" style="width: 350px">
+                    <div class="col-12">
+                        <c-bar-search />
+                    </div>
+                </div>
+        `
+    }))
 
 
 storiesOf('Giphy', module)
