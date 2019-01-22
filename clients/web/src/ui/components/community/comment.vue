@@ -31,6 +31,7 @@
         <c-reply
             v-if="canReply"
             @replyMode="reply = $event"
+            class="margin-bottom-10"
         />
 
     </div>
@@ -71,7 +72,7 @@
     justify-content: space-between;
     align-items: self-start;
     padding: 0 10px;
-    margin: 30px 0 10px;
+    margin: 10px 0;
     transition: background-color .3s ease;
     color: #fff;
     .comment-container {
