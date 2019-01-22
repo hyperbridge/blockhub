@@ -45,7 +45,7 @@
         </div>
         <div class="view-review__comment">
             <div class="w-100" v-if="comments">
-                <c-comment v-for="comment in comments" :canReply="false" :comment="comment"/>
+                <c-comment v-for="comment in comments" :canReply="false" :comment="comment" class="px-0"/>
             </div>
             <div class="view-review__comment-close" v-else>
                 Comments are disabled for this review.

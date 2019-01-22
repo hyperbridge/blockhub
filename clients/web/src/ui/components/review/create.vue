@@ -21,9 +21,9 @@
                     <label class="mb-0">
                         Visibility
                     </label>
-                    <select class="form-control form-control-sm">
-                        <option>Yes</option>
-                        <option>No</option>
+                    <select class="form-control form-control-sm" v-model="reviewVisibility" @change="onVisibility">
+                        <option value="public">Public</option>
+                        <option value="friends-only">Friends Only</option>
                     </select>
                 </div>
                 <div class="invert mr-5">
@@ -79,6 +79,9 @@
 
 <script>
     export default {
+        props:{
+
+        },
         components: {
             'c-checkbox': (resolve) => require(['@/ui/components/checkbox'], resolve),
             'c-text-formatting': (resolve) => require(['@/ui/components/text-formatting'], resolve),
@@ -86,7 +89,13 @@
         },
         data(){
             return{
-                textFormatting: false
+                textFormatting: false,
+                reviewVisibility: 'public'
+            }
+        },
+        methods:{
+            onVisibility(){
+                this.$emit('visibility', this.reviewVisibility)
             }
         }
     }
