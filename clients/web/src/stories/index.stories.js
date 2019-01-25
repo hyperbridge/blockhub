@@ -5821,6 +5821,7 @@ storiesOf('Global Search', module)
         },
         data(){
             return{
+
             }
         },
         template: `
