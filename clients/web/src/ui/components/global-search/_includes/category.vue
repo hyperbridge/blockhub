@@ -1,6 +1,6 @@
 <template>
     <div class="search-category">
-        <div class="search-category__head" @click=" showDetails = true ">
+        <div class="search-category__head" @click="chosenCategory()">
             <div>
                 {{ category.name }}
             </div>
@@ -30,7 +30,7 @@
         <transition name="fade">
             <div class="category-full" v-if="showDetails">
                 <div class="search-category__head">
-                    <c-button status="plain" size="sm" class="p-0 mr-3" @click=" showDetails = false ">
+                    <c-button status="plain" size="sm" class="p-0 mr-3" @click="closeCategory">
                         <i class="fas fa-angle-left"></i>
                     </c-button>
                     <div>
@@ -64,6 +64,16 @@
         data(){
             return{
                 showDetails: false
+            }
+        },
+        methods:{
+            chosenCategory(){
+                this.showDetails = true;
+                this.$emit('categorySelect', this.category)
+            },
+            closeCategory(){
+                this.showDetails = false;
+                this.$emit('categoryClose')
             }
         }
     }

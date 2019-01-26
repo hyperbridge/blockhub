@@ -16,7 +16,7 @@
                 style:{
                     'background' : this.bgColor,
                     'color' : this.textColor,
-                    'border': this.error ? '1px solid red' : '1px solid transparent'
+                    'border': this.error ? '1px solid red' : ''
                 }
             });
         },
