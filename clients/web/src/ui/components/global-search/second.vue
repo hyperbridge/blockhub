@@ -2,9 +2,10 @@
     <div class="searcher-bar">
         <div class="searcher-bar__input">
             <c-input v-model="searchQuery"  :class="{ 'search-active': searchQuery }" placeholder="Type to search" @input="startSearch" />
-            <div class="searcher-bar__input-button" :class="{ 'searcher-bar__input-button-has-category' : currentCat }" v-if="searchQuery" @click="cleanQuery">
-                <i :class="`fas fa-${currentCat.icon}`" style="font-size: 18px;margin-right: 10px" v-if="currentCat"></i>
-                <i class="fas fa-times"></i>
+            <div class="searcher-bar__input-button" :class="{ 'searcher-bar__input-button-has-category' : currentCat }" @click="cleanQuery">
+                <i :class="`fas fa-${currentCat.icon}`" style="font-size: 20px;margin-right: 14px;color: #fff" v-if="currentCat"></i>
+                <i class="fas fa-times" v-if="searchQuery" @click="cleanQuery"></i>
+                <i class="fas fa-search" @click="startSearch" v-else></i>
             </div>
         </div>
         <transition name="slide-in">
@@ -144,7 +145,7 @@
     .searcher-bar__input{
         position: relative;
         input{
-            padding-right: 40px;
+            padding-right: 35px;
             &.search-active{
                 border: 1px solid #0194ef;
             }
@@ -152,21 +153,21 @@
     }
     .searcher-bar__input-button{
         position: absolute;
-        padding: 0 5px;
-        right: 5px;
-        top: 5px;
-        bottom: 5px;
+        padding: 0 5px 0 5px;
+        right: 3px;
+        top: 3px;
+        bottom: 3px;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 14px;
         border-radius: 3px;
-        color: rgba( 255, 255, 255, .7);
+        color: rgba(255, 255, 255, .6);
+        &:hover{
+            cursor: pointer;
+        }
         &.searcher-bar__input-button-has-category{
             background: #0194ef;
-            span{
-                margin-right: 10px;
-            }
         }
     }
     .searcher-bar__results{
