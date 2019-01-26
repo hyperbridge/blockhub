@@ -29,13 +29,16 @@
         <!--Full list block-->
         <transition name="fade">
             <div class="category-full" v-if="showDetails">
-                <div class="search-category__head">
+                <div class="search-category__head" :class="{'mb-0' : $slots.filters }">
                     <c-button status="plain" size="sm" class="p-0 mr-3" @click="closeCategory">
                         <i class="fas fa-angle-left"></i>
                     </c-button>
                     <div>
                         {{ category.name }}
                     </div>
+                </div>
+                <div class="search-category__filters" v-if="$slots.filters">
+                    <slot name="filters" />
                 </div>
                 <div class="search-item" v-for="(item, index) in category.items">
                     <div class="search-item__img" v-if="item.image">
@@ -103,6 +106,16 @@
             border-radius: 3px;
             margin-left: 10px;
         }
+    }
+    .search-category__filters{
+        display: flex;
+        background: rgba(255, 255, 255, .05);
+        padding: 7px;
+        align-items: center;
+        text-transform: uppercase;
+        font-size: 13px;
+        margin: 0 0 5px 0;
+        border-top: 1px solid rgba(255, 255, 255, .1);
     }
     .search-category__body{
         display: flex;

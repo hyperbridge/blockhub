@@ -20,7 +20,23 @@
                             Top results
                         </div>
                         <div class="searcher-bar__results-list-wrapper">
-                            <c-search-category v-for="item in results" :category="item" @categorySelect="categoryIcon" @categoryClose=" currentCat = null " />
+                            <c-search-category v-for="item in results" :category="item" @categorySelect="categoryIcon" @categoryClose=" currentCat = null ">
+                                <template slot="filters" v-if="item.name.toLowerCase() == 'videos' ">
+                                    <div class="invert">
+                                        <select class="form-control form-control-sm">
+                                            <option>
+                                                All videos
+                                            </option>
+                                            <option>
+                                                Game Play
+                                            </option>
+                                            <option>
+                                               Game trailer
+                                            </option>
+                                        </select>
+                                    </div>
+                                </template>
+                            </c-search-category>
                         </div>
                     </div>
                 </transition>
@@ -173,9 +189,9 @@
     .searcher-bar__results-list-wrapper{
         /*display: flex;*/
         /*flex-direction: column;*/
-        /*max-height: 300px;*/
-        /*overflow-x: hidden;*/
-        /*overflow-y: auto;*/
+        max-height: 400px;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
     .searcher-bar__results-list{
         display: flex;
