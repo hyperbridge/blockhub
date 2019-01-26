@@ -722,6 +722,11 @@ export default [
         component: (resolve) => require(['@/ui/screens/realms'], resolve)
     },
     {
+        path: '/footer',
+        name: 'Footer',
+        component: (resolve) => require(['@/ui/screens/footer'], resolve)
+    },
+    {
         path: '/realm/:id',
         name: 'Realm',
         props: true,
