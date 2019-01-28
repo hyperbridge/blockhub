@@ -9,7 +9,10 @@
         <!-- //END PAGE HEADER -->
 
         <!-- PAGE CONTENT WRAPPER -->
-        <div class="page__content page__content-invert invert" :class="{'make-it-blur': bluredBg}" id="page-content" 
+        <div class="page__content page__content-invert invert"
+             id="page-content"
+             :class="{'make-it-blur': bluredBg}"
+             :style=" `background: url(${bgImage}) top center no-repeat;background-size: cover;`"
             v-drag-and-drop:options="dragOptions">
             <!-- <div class="loader-block" v-if="!isConnected">
                 <div class="loader-block__container">
@@ -43,7 +46,7 @@
 
 
             <div class="page-shortcuts invert" v-if="showShortcuts">
-                <c-shortcut-sidebar :items="shortcuts" />
+                <c-shortcut-sidebar :items="customShortcuts ? customShortcuts : shortcuts" />
             </div>
 
             <!-- PAGE ASIDE PANEL -->
@@ -507,7 +510,9 @@
             breadcrumbLinks: {
                 type: Array,
                 default: () => ([])
-            }
+            },
+            bgImage: String,
+            customShortcuts: [ Array, Object ]
         },
         mixins: [debouncer],
         components: {
