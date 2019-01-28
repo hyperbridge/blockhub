@@ -778,6 +778,11 @@ export default [
         component: (resolve) => require(['@/ui/screens/chest'], resolve)
     },
     {
+        path: '/launcher',
+        name: 'Launcher',
+        component: (resolve) => require(['@/ui/screens/launcher'], resolve)
+    },
+    {
         path: '/admin',
         name: 'Admin',
         component: (resolve) => require(['@/ui/screens/business'], resolve),
