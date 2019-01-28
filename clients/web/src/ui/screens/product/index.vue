@@ -241,7 +241,7 @@
                                 size="lg"
                                 icon="users"
                                 class="padding-10">
-                                Steam
+                                BlockHub
                             </c-topic-item>
                         </div>
                         <div class="col-12 col-md-4 col-lg-3">

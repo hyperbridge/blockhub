@@ -3900,7 +3900,7 @@ storiesOf('Product Overview', module)
                     },
                     {
                         "os": "linux",
-                        "system": "Ubuntu 14.04, Linux Mint 17, Steam OS",
+                        "system": "Ubuntu 14.04, Linux Mint 17, BlockHub OS",
                         "processor": "Quad Core Intel",
                         "memory": "4 GB RAM",
                         "graphics": "GeForce GT 640 1GB (1440x900, medium)",
@@ -5960,7 +5960,7 @@ storiesOf('Activity block', module)
                             In Library
                         </template>
                         <template slot="title">
-                            StarBreak is already in your Steam library ( Purchased 31 May, 2018 )
+                            StarBreak is already in your BlockHub library ( Purchased 31 May, 2018 )
                         </template>
                         <template slot="description">
                             0.1 hrs last two weeks / 0.1 hrs on record

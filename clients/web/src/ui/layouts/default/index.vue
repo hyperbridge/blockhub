@@ -675,8 +675,8 @@
                         connected: false
                     },
                     {
-                        name: 'Steam',
-                        description: 'Lets you connect to your Steam account.',
+                        name: 'BlockHub',
+                        description: 'Lets you connect to your BlockHub account.',
                         icon: '../../../../static/img/icons/steam.png',
                         connected: false
                     }

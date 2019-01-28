@@ -9,13 +9,13 @@
 
         <template slot="body">
             <p>
-                You need to have the Steam desktop application installed before ypu can install and launch <strong>{{ gameName }}</strong>.
-                Do you have Steam installed on this computer?
+                You need to have the BlockHub desktop application installed before ypu can install and launch <strong>{{ gameName }}</strong>.
+                Do you have BlockHub installed on this computer?
             </p>
             <div class="d-flex mt-3 justify-content-between align-items-center">
                 <a class="action" href="#" @click="$emit('play')">
                     <div class="h5 font-weight-bold p-0 m-0">
-                        Yes, Steam is installed
+                        Yes, BlockHub is installed
                     </div>
                     <div>
                         Play this game now
@@ -24,10 +24,10 @@
 
                 <a class="action" href="https://store.steampowered.com/about/" target="_blank">
                     <div class="h5 font-weight-bold p-0 m-0">
-                        No, I need Steam
+                        No, I need BlockHub
                     </div>
                     <div>
-                        Read about and download Steam
+                        Read about and download BlockHub
                     </div>
                 </a>
             </div>
@@ -35,10 +35,10 @@
 
         <template slot="footer">
             <div class="d-flex align-items-center justify-content-between border-top pt-4">
-                <img src="../../../../static/img/icons/steam-square-icon.png" alt="Steam" width="45" style="opacity: .5" class="mr-4"/>
+                <img src="../../../../static/img/icons/steam-square-icon.png" alt="BlockHub" width="45" style="opacity: .5" class="mr-4"/>
                 <div>
-                    Steam is premier desktop gaming platform. It's free to join and ease to use.
-                    <c-button status="plain" href="https://store.steampowered.com/about/" class="p-0">Learn more about Steam</c-button>
+                    BlockHub is premier desktop gaming platform. It's free to join and ease to use.
+                    <c-button status="plain" href="https://store.steampowered.com/about/" class="p-0">Learn more about BlockHub</c-button>
                 </div>
             </div>
         </template>

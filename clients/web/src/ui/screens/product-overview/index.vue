@@ -4,6 +4,7 @@
             <c-screen-gallery
                 :items="[product.meta.images.mediumTile, ...product.meta.images.preview]"
                 :video_url="product.meta.video"
+                v-if="product.meta.images"
             />
 
             <div v-for="(promotions, section) in promotionSections" :key="section" v-if="promotionSections">
@@ -73,7 +74,7 @@
                     <c-button class="mb-1 text-align-center" status="dark" size="md" full @click="$store.commit('application/activateModal', 'coming-soon')">Open in Discord</c-button>
                     <c-button class="mb-1 text-align-center" status="dark" size="md" full @click="$store.commit('application/activateModal', 'coming-soon')">Open in Twitch</c-button>
                     <c-button class="mb-1 text-align-center" status="dark" size="md" full @click="$store.commit('application/activateModal', 'coming-soon')">Open in YouTube</c-button>
-                    <c-button class="mb-1 text-align-center" status="dark" size="md" full @click="$store.commit('application/activateModal', 'coming-soon')">Open in Steam</c-button>
+                    <c-button class="mb-1 text-align-center" status="dark" size="md" full @click="$store.commit('application/activateModal', 'coming-soon')">Open in BlockHub</c-button>
                 </div>
             </c-block>
 
