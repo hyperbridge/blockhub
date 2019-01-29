@@ -6241,7 +6241,7 @@ storiesOf('Metro', module)
         },
         template: `<div class="m-4" style="width: 1200px;">
                     <c-metro-grid>
-                        <c-metro-item v-for="item in items" :image="item.image" :width=" 1200/4 ">
+                        <c-metro-item v-for="item in items" :image="item.image" width="300px ">
                             <div class="h4 font-weight-bold">
                                 {{ item.title }}
                             </div>
