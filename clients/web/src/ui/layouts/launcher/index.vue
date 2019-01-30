@@ -2,7 +2,127 @@
     <div class="launcher" :style=" `background-image: url(${bgImage})`">
         <div class="launcher__overlay" :style="`opacity: ${overlayOpacity}; background-color: ${overlayColor}`" v-if="overlay"></div>
         <div class="launcher__top-bar">
+            <router-link class="app-header__bar-center margin-right-50" :to="isLocked ? '#' : '/'">
+                <c-loading-logo :isLoading="isLoader" />
+            </router-link>
+            <nav class="launcher__top-bar-left">
+                <ul>
+                    <li class="app-header__create-account-btn" v-if="desktopMode && !signedIn && !isLocked">
+                        <router-link to="/account/signup" class="">
+                            CREATE ACCOUNT
+                        </router-link>
+                    </li>
+                    <li class="app-header__download-btn" v-if="!desktopMode">
+                        <router-link to="/download" class="">
+                            DOWNLOAD
+                        </router-link>
+                    </li>
+                    <li v-if="signedIn">
+                        <router-link to="/">
+                            Store
+                        </router-link>
+                    </li>
+                </ul>
+            </nav>
             <slot name="header" />
+            <div class="launcher__top-bar-right ml-auto">
+                <nav>
+                    <ul>
+                        <li v-if="!isLocked" hidden>
+                            <c-quick-launch class="quick-launch" style="margin-top: -7px;" />
+                        </li>
+                        <li v-if="signedIn" class="token">
+                            <router-link class="mt-1" to="/token">
+                                <span class="token__count token__count--loading" v-if="tokenCount === null">
+                                    <c-loading :enabled="true" />
+                                </span>
+                                <span class="token__count" v-if="tokenCount !== null">
+                                    {{ tokenCount }} <span class="icon fa fa-coins"></span>
+                                </span>
+                                <span class="text">Tokens</span>
+                            </router-link>
+                        </li>
+                        <li v-if="signedIn">
+                            <c-dropdown class="ml-4 account-menu mt-1" style="z-index: 12" @show="onShowMenu" @hide="onHideMenu">
+                                <template slot="title">
+                                    <div class="__title">
+                                        <i class="fa fa-user"></i>
+                                        {{ activeProfile && activeProfile.name }}
+                                    </div>
+                                </template>
+                                <ul class="item-dropdown">
+                                    <li>
+                                        <c-button status="none" to="/account">
+                                            <i class="fas fa-user"></i>
+                                            Account Info
+                                        </c-button>
+                                    </li>
+                                    <li v-darklaunch="'WALLETS'">
+                                        <c-button status="none" to="/account/wallets">
+                                            <i class="fas fa-credit-card"></i>
+                                            My Wallets
+                                        </c-button>
+                                    </li>
+                                    <li v-if="activeProfile">
+                                        <c-button status="none" :to="`/profile/${activeProfile.id}`">
+                                            <i class="fas fa-user"></i>
+                                            View Public Profile
+                                        </c-button>
+                                    </li>
+                                    <li v-if="signedIn && activeProfile" v-darklaunch="'CONTACTS'">
+                                        <c-button status="none" :to="`/profile/${activeProfile.id}/contacts`">
+                                            <i class="fas fa-users"></i>
+                                            Contacts
+                                        </c-button>
+                                    </li>
+                                    <li>
+                                        <c-button status="none" to="/account/profiles">
+                                            <i class="fas fa-users-cog"></i>
+                                            Profile Manager
+                                        </c-button>
+                                    </li>
+                                    <li>
+                                        <c-button status="none" @click="$store.commit('application/showProfileChooser', true)">
+                                            <i class="fas fa-user-edit"></i>
+                                            Switch Profile
+                                        </c-button>
+                                    </li>
+                                    <li>
+                                        <c-button status="none" to="/account/signout">
+                                            <i class="fa fa-sign-out-alt"></i>
+                                            Sign Out
+                                        </c-button>
+                                    </li>
+                                    <hr>
+                                    <li v-darklaunch="'CHAT'">
+                                        <c-button status="none" to="/settings/chat">
+                                            <i class="fas fa-comments"></i>
+                                            Chat Settings
+                                        </c-button>
+                                    </li>
+                                    <li>
+                                        <c-button status="none" to="/help">
+                                            <i class="fas fa-info-circle"></i>
+                                            FAQ
+                                        </c-button>
+                                    </li>
+                                </ul>
+
+                            </c-dropdown>
+                        </li>
+                        <li v-if="!signedIn && !isLocked">
+                            <router-link @click="$store.commit('application/activateModal', 'login')">
+                                Sign In
+                            </router-link>
+                        </li>
+                        <li v-if="!isLocked">
+                            <router-link to="/help">
+                                Help
+                            </router-link>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
         <div class="game-shortcuts">
             <div class="game-shortcuts__wrapper">
@@ -18,6 +138,7 @@
 </template>
 
 <script>
+
     export default {
         props: {
             bgImage: String,
@@ -33,6 +154,11 @@
                 type: String,
                 default: '#000'
             }
+        },
+        components:{
+            'c-loading-logo': (resolve) => require(['@/ui/components/loading-bar/logo-loader'], resolve),
+            'c-quick-launch': (resolve) => require(['@/ui/components/quick-launch'], resolve),
+            'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve),
         },
         data(){
             return{
@@ -75,7 +201,37 @@
                     }
                 ],
             }
-        }
+        },
+        computed:{
+            isLocked() {
+                return this.$store.state.application.locked
+            },
+            isLoading() {
+                return this.$store.state.application.loading
+            },
+            isViewing() {
+                return this.$store.state.application.editorMode === 'viewing'
+            },
+            editorMode() {
+                return this.$store.state.application.editorMode
+            },
+            developerMode() {
+                return this.$store.state.application.developerMode
+            },
+            signedIn() {
+                // return this.$store.state.application.signedIn && !!this.$store.state.auth.user
+                return this.$store.state.application.signedIn
+            },
+            desktopMode() {
+                return this.$store.state.application.desktopMode
+            },
+            operatingSystem() {
+                return this.$store.state.application.operatingSystem
+            }
+        },
+        mounted() {
+            document.getElementById('startup-loader').style.display = 'none'
+        },
     }
 </script>
 
@@ -87,7 +243,7 @@
         min-height: 100vh;
         width: 100%;
         padding-left: 100px;
-        padding-top: 80px;
+        padding-top: 60px;
         background-size: cover;
         background: fixed no-repeat top center;
     }
@@ -106,27 +262,53 @@
         top: 0;
         left: 0;
         right: 0;
-        height: 80px;
+        height: 60px;
         display: flex;
         align-items: center;
         background: rgba(255, 255, 255, .4);
-        border-bottom: 1px solid rgba( 255, 255, 255, .5);
+        border-bottom: 1px solid rgba( 255, 255, 255, .6);
         padding: 10px;
+    }
+    .launcher__top-bar-left,
+    .launcher__top-bar-right{
+        display: flex;
+        ul{
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            li{
+                list-style: none;
+                margin: 0 10px;
+                a{
+                    text-transform: uppercase;
+                    font-size: 20px;
+                    font-weight: 500;
+                    color: #fff;
+                    opacity: .7;
+                    text-shadow: 0 0 10px rgba(0, 0, 0, .7);
+                    &:hover{
+                        opacity: 1;
+                        text-shadow: 0 0 10px #fff;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
     }
     .game-shortcuts{
         position: fixed;
-        top: 80px;
+        top: 60px;
         bottom: 0;
         left: 0;
         /*padding: 5px;*/
-        width: 100px;
         background: rgba(0, 0, 0, .7);
         border-right: 1px solid rgba(0, 0, 0, .9);
-        overflow-y: auto;
-        overflow-x: hidden;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        overflow-x: hidden;
+        overflow-y: auto;
         z-index: 10;
         &::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0) !important;
@@ -136,15 +318,15 @@
         }
     }
     .game-shortcuts__wrapper{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 5px;
-        width: 100%;
+        /*display: flex;*/
+        /*flex-direction: column;*/
+        /*justify-content: space-between;*/
+        /*padding: 5px;*/
+        /*width: 100px;*/
     }
     .game-shortcuts__item{
-        width: 90px;
-        min-height: 90px;
+        width: 80px;
+        min-height: 80px;
         display: flex;
         align-items: center;
         justify-content: center;
