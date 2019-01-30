@@ -1,10 +1,10 @@
 <template>
     <div class="browser-ui">
         <div class="browser-ui__nav mr-2">
-            <c-button status="plain" class="p-0 mr-2">
+            <c-button status="plain" class="p-0 mr-2" @click="back">
                 <i class="fas fa-arrow-left"></i>
             </c-button>
-            <c-button status="plain" class="p-0 ml-2">
+            <c-button status="plain" class="p-0 ml-2" @click="forward">
                 <i class="fas fa-arrow-right"></i>
             </c-button>
         </div>
@@ -22,15 +22,22 @@
                 <p>Vivamus vel eleifend erat, at posuere eros. Suspendisse pharetra elementum sollicitudin. Sed tempus
                     odio mi, at consequat ante laoreet quis.</p>
                 <hr />
-                <c-button status="plain" icon="cookie-bite">
-                    Cookies
+                <c-button status="plain" icon="cookie-bite" class="text-dark">
+                    <span class="ml-3">
+                        Cookies
+                    </span>
+                </c-button>
+                <c-button status="plain" icon="cookie-bite" class="text-dark">
+                    <span class="ml-3">
+                        Settings
+                    </span>
                 </c-button>
             </c-dropdown>
 
-            <c-input v-model="searchQuery"/>
+            <c-input v-model="searchQuery" ref="searchInput" @focus="$event.target.select()"/>
 
-            <c-button status="plain" class="p-0 ml-3 text-dark">
-                <i class="far fa-star"></i>
+            <c-button status="plain" class="p-0 ml-3">
+                <i class="fas fa-cog"></i>
             </c-button>
         </div>
     </div>
@@ -44,6 +51,18 @@
         data() {
             return {
                 searchQuery: document.location.href
+            }
+        },
+        methods: {
+            selectQuery(){
+                // this.$refs.searchInput.select()
+                console.log(this.$refs.searchInput)
+            },
+            back(){
+                window.history.back();
+            },
+            forward(){
+                window.history.forward();
             }
         }
     }
