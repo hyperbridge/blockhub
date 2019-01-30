@@ -1,50 +1,100 @@
 <template>
     <div class="browser-ui">
-        <div class="browser-ui__nav mr-3">
-            <c-button status="plain" class="p-0">
+        <div class="browser-ui__nav mr-2">
+            <c-button status="plain" class="p-0 mr-2">
                 <i class="fas fa-arrow-left"></i>
             </c-button>
-            <c-button status="plain" class="p-0">
+            <c-button status="plain" class="p-0 ml-2">
                 <i class="fas fa-arrow-right"></i>
             </c-button>
         </div>
         <div class="browser-ui__search-bar">
-            <c-button status="plain" class="p-0 mr-3">
-                <i class="fas fa-arrow-right"></i>
+
+            <c-dropdown class="browser-ui__lock-dropdown">
+                <template slot="title">
+                    <span class="lock-dropdown__icon">
+                    <i class="fa fa-lock"></i>
+                    </span>
+                </template>
+                <div class="text-success h4 mb-3">
+                    Your connection is secure
+                </div>
+                <p>Vivamus vel eleifend erat, at posuere eros. Suspendisse pharetra elementum sollicitudin. Sed tempus
+                    odio mi, at consequat ante laoreet quis.</p>
+                <hr />
+                <c-button status="plain" icon="cookie-bite">
+                    Cookies
+                </c-button>
+            </c-dropdown>
+
+            <c-input v-model="searchQuery"/>
+
+            <c-button status="plain" class="p-0 ml-3 text-dark">
+                <i class="far fa-star"></i>
             </c-button>
-            <c-input v-model="searchQuery" />
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        data(){
-            return{
-                searchQuery: 'some text'
+        components: {
+            'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve),
+        },
+        data() {
+            return {
+                searchQuery: document.location.href
             }
         }
     }
 </script>
 
 <style lang="scss" scoped>
-    .browser-ui{
+    .browser-ui {
         display: flex;
         width: 100%;
         padding: 5px;
         align-items: center;
         flex-wrap: nowrap;
     }
-    .browser-ui__search-bar{
+
+    .browser-ui__nav {
         display: flex;
+    }
+
+    .browser-ui__search-bar {
+        display: flex;
+        align-items: center;
         border-radius: 25px;
         background: rgba(0, 0, 0, .2);
-        padding: 3px 8px;
+        padding: 0 8px;
         width: 100%;
-        input{
+        input {
             background: transparent;
             border: unset;
             padding: 0;
+            text-overflow: ellipsis;
+        }
+    }
+
+    .browser-ui__lock-dropdown {
+        margin: 0 10px 0 5px;
+        padding-right: 10px;
+        border-right: 1px solid rgba(255, 255, 255, .1);
+        .lock-dropdown__icon {
+            font-size: 12px;
+            cursor: pointer;
+            opacity: .6;
+            &:hover {
+                opacity: 1;
+            }
+        }
+        ul {
+            padding: 0;
+            margin: 0;
+            li {
+                list-style: none;
+            }
         }
     }
 </style>
