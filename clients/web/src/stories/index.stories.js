@@ -6288,6 +6288,16 @@ storiesOf('Security check', module)
 
     }))
 
+
+storiesOf('Browser UI', module)
+    .add('default', () => ({
+        components: {
+            'c-browser-ui' : (resolve) => require(['@/ui/components/browser-ui'], resolve),
+        },
+        template: `<div style="width: 600px" class="m-4"><c-browser-ui /></div>`
+    }))
+
+
 /*
      Dynamic import - test version
 
