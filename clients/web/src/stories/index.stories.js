@@ -1931,6 +1931,13 @@ storiesOf('Popups', module)
         },
         template: `<div class="p-4"><c-button @click=" activated = true ">Play Now</c-button> <c-play-popup :activated="activated" @close=" activated = !activated " /></div>`
     }))
+    .add('Add to Collection', () =>({
+        components:{
+            'c-collection-add': (resolve) => require(['@/ui/components/popups/collection-add'], resolve),
+        },
+        template: `<div class="m-4"><c-collection-add /></div>`
+    }))
+
 
 import RangeSlider from '../ui/components/range-slider/pure'
 
