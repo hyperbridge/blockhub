@@ -1,5 +1,5 @@
 <template>
-    <div class="metro-item__wrapper" :style="{ 'padding' : gutter + 'px', 'width' : width + 'px' }">
+    <div class="metro-item__wrapper" :style="{ 'padding' : gutter + 'px', 'width' : width }">
         <div class="metro-item" :class="{ 'metro-item--full-img' : fullImage, 'metro-item--shadow' : shadow }">
             <div class="metro-item__image">
                 <img :src="image"/>
@@ -16,8 +16,8 @@
         props:{
             image: String,
             width:{
-                type: [ String, Number ],
-                default: 400
+                type: String,
+                default: '400px'
             },
             gutter:{
                 type: [ String, Number ],
@@ -74,12 +74,20 @@
         height: 100%;
     }
     .metro-item--full-img{
+        .metro-item__image{
+            height: 100%;
+            img{
+                max-height: unset;
+                height: 100%;
+            }
+        }
         .metro-item__description{
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
             background: rgba(0, 0, 0, .4);
+            height: auto;
         }
     }
 </style>
