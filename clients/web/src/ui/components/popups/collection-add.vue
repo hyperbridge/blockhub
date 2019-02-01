@@ -1,6 +1,6 @@
 <template>
     <div class="add-to-collection">
-        <c-button :status="buttonType">
+        <c-button :status="buttonType" @click=" activated = true ">
             Add to Collection
         </c-button>
         <c-basic-popup :activated="activated" @close="$emit('close')">
@@ -30,7 +30,6 @@
                     </div>
                     <div>
                         <c-input bgColor="rgba(255, 255, 255, .07)" v-model="searchQuery" placeholder="Filter Collections" />
-                        {{ searchQuery }}
                     </div>
                 </div>
                 <div class="create-collection d-flex">
@@ -50,13 +49,17 @@
                     </template>
                 </div>
                 <div class="add-to-collection__list mt-3">
-                    <!--{{ filteredList }}-->
-                    <c-checkbox-group v-if="collections">
-                        <c-checkbox v-for="(collection, idx) in filteredList" :id="`collection_${idx}`" class="my-3" :class="{ 'mt-0' : idx == 1 }">
-                            {{ collection.name }}
-                        </c-checkbox>
-                    </c-checkbox-group>
-                    <div class="h5" v-if="!collections">
+                    <template v-if="collections">
+                        <c-checkbox-group v-if="filteredList.length">
+                            <c-checkbox v-for="(collection, idx) in filteredList" :id="`collection_${idx}`" class="my-3" :class="{ 'mt-0' : idx == 1 }">
+                                {{ collection.name }}
+                            </c-checkbox>
+                        </c-checkbox-group>
+                        <div class="h6 mt-3" v-else>
+                            No collections were found.
+                        </div>
+                    </template>
+                    <div class="h5" v-else>
                         You don't have collection yet.
                     </div>
                 </div>
@@ -74,10 +77,6 @@
                 type: String,
                 default: 'second-info'
             },
-            activated: {
-                type: Boolean,
-                default: true
-            },
             image: String,
             name: String,
             description: String,
@@ -92,7 +91,8 @@
             return{
                 searchQuery: '',
                 collectionName: '',
-                createForm: false
+                createForm: false,
+                activated: false
             }
         },
         computed: {
@@ -101,7 +101,7 @@
                     return this.collections.filter(collection => {
                         return collection.name.toLowerCase().includes(this.searchQuery.toLowerCase())
                     })
-                } else if (this.collections) {
+                } else {
                     return this.collections
                 }
             }

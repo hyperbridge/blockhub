@@ -1933,7 +1933,7 @@ storiesOf('Popups', module)
     }))
     .add('Add to Collection', () =>({
         components:{
-            'c-collection-add': (resolve) => require(['@/ui/components/popups/collection-add'], resolve),
+            'c-popup-collection-add': (resolve) => require(['@/ui/components/popups/collection-add'], resolve),
         },
         data(){
             return{
@@ -1960,7 +1960,7 @@ storiesOf('Popups', module)
                 description: 'Cras in dui eget nulla vulputate finibus sed id ligula.',
             }
         },
-        template: `<div class="m-4"><c-collection-add  :collections="collections" :image="image" :name="name" :description="description" /></div>`
+        template: `<div class="m-4"><c-popup-collection-add  :collections="collections" :image="image" :name="name" :description="description" /></div>`
     }))
 
 
