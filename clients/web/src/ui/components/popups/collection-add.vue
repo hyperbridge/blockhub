@@ -3,7 +3,7 @@
         <c-button :status="buttonType" @click=" activated = true ">
             Add to Collection
         </c-button>
-        <c-basic-popup :activated="activated" @close="$emit('close')">
+        <c-basic-popup :activated="activated" @close="activated = false">
 
             <template slot="body">
                 <div class="item-info">
