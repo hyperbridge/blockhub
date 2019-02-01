@@ -2,7 +2,7 @@
     export default {
         name: 'input-searcher',
         inheritAttrs: false,
-        props: ['value'],
+        props: ['value', 'bgColor', 'textColor'],
         render(h) {
             return h('div', {
                 staticClass: 'input-searcher'
@@ -13,6 +13,10 @@
                     attrs: this.$attrs,
                     domProps: {
                         value: this.value
+                    },
+                    style:{
+                        'background' : this.bgColor,
+                        'color' : this.textColor
                     }
                 }),
                 h('c-icon', {
@@ -44,24 +48,29 @@
         display: flex;
         align-items: center;
         .c-input {
-            background: rgba(0, 0, 0, 0.3);
+            background: #222235;
             border-radius: 3px;
-            padding: 0 10px;
+            padding: 0 25px 0 10px;
             height: 33px;
-
-            padding-right: 25px;
             width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: unset;
             color: #fff;
             &:focus{
                 outline: none;
                 box-shadow: none;
             }
+            &::placeholder{
+                color: rgba(255, 255, 255, .7);
+            }
         }
         .input-searcher__icon {
             position: absolute;
             right: 0px;
-            top: calc(50% - 11px);
+            top: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 7px 9px;
             cursor: pointer;
         }
