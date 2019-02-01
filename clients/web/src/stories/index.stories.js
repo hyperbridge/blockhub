@@ -1935,7 +1935,32 @@ storiesOf('Popups', module)
         components:{
             'c-collection-add': (resolve) => require(['@/ui/components/popups/collection-add'], resolve),
         },
-        template: `<div class="m-4"><c-collection-add /></div>`
+        data(){
+            return{
+                collections: [
+                    {
+                        name: 'My Top 100',
+                        id: 22
+                    },
+                    {
+                        name: 'Nintendo TOP',
+                        id: 22
+                    },
+                    {
+                        name: 'Game for PS4',
+                        id: 22
+                    },
+                    {
+                        name: 'Something other',
+                        id: 22
+                    }
+                ],
+                image: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
+                name: 'Magic Plate Armor',
+                description: 'Cras in dui eget nulla vulputate finibus sed id ligula.',
+            }
+        },
+        template: `<div class="m-4"><c-collection-add  :collections="collections" :image="image" :name="name" :description="description" /></div>`
     }))
 
 

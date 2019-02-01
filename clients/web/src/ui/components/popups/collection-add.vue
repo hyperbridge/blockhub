@@ -11,9 +11,12 @@
                         <img :src="image" />
                     </div>
                     <div class="item-info__description">
-                        <div class="h3 font-weight-bold m-0 p-0">
+                        <div class="h4 font-weight-bold mb-2 p-0">
                             {{ name }}
                         </div>
+                        <p class="p-0 m-0" style="opacity: .7">
+                            {{ description }}
+                        </p>
                     </div>
                 </div>
                 <div>
@@ -26,34 +29,36 @@
                         Choose collection
                     </div>
                     <div>
-                        <c-input-searcher bgColor="rgba(255, 255, 255, .07)" v-model="searchQuery" placeholder="Filter Collections" />
+                        <c-input bgColor="rgba(255, 255, 255, .07)" v-model="searchQuery" placeholder="Filter Collections" />
+                        {{ searchQuery }}
                     </div>
                 </div>
-                <div class="add-to-collection__list">
-                    <div class="create-collection d-flex">
-                        <template v-if="createForm">
-                            <c-input bgColor="rgba(255, 255, 255, .07)" v-model="collectionName" placeholder="Collection name" />
-                            <c-button status="second-warning" size="sm" class="mx-2" @click=" createForm = false ">
-                                Cancel
-                            </c-button>
-                            <c-button status="second-success" size="sm">
-                                Add
-                            </c-button>
-                        </template>
-                        <template v-if="!createForm">
-                            <c-button status="second-info" icon="plus" size="sm" class="ml-auto" @click=" createForm = true ">
-                                Create New
-                            </c-button>
-                        </template>
-                    </div>
-                    <c-checkbox-group class="mt-2">
-                        <c-checkbox v-for="i in 5" :id="`collection_${i}`" class="my-3">
-                            This is Collection {{ i }}
+                <div class="create-collection d-flex">
+                    <template v-if="createForm">
+                        <c-button status="second-success" size="sm" class="mx-2">
+                            Add
+                        </c-button>
+                        <c-input bgColor="rgba(255, 255, 255, .07)" v-model="collectionName" placeholder="Collection name" />
+                        <c-button status="second-warning" size="sm" @click=" createForm = false ">
+                            Cancel
+                        </c-button>
+                    </template>
+                    <template v-if="!createForm">
+                        <c-button status="second-info" icon="plus" size="sm" @click=" createForm = true ">
+                            Create New
+                        </c-button>
+                    </template>
+                </div>
+                <div class="add-to-collection__list mt-3">
+                    <!--{{ filteredList }}-->
+                    <c-checkbox-group v-if="collections">
+                        <c-checkbox v-for="(collection, idx) in filteredList" :id="`collection_${idx}`" class="my-3" :class="{ 'mt-0' : idx == 1 }">
+                            {{ collection.name }}
                         </c-checkbox>
                     </c-checkbox-group>
-                    <c-button status="second-success" size="sm" class="ml-auto mt-3" @click=" createForm = true ">
-                        Add to collection
-                    </c-button>
+                    <div class="h5" v-if="!collections">
+                        You don't have collection yet.
+                    </div>
                 </div>
             </template>
 
@@ -73,7 +78,10 @@
                 type: Boolean,
                 default: true
             },
-            image: String
+            image: String,
+            name: String,
+            description: String,
+            collections: Array
         },
         components: {
             'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic'], resolve),
@@ -85,6 +93,17 @@
                 searchQuery: '',
                 collectionName: '',
                 createForm: false
+            }
+        },
+        computed: {
+            filteredList() {
+                if (this.collections && this.searchQuery) {
+                    return this.collections.filter(collection => {
+                        return collection.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+                    })
+                } else if (this.collections) {
+                    return this.collections
+                }
             }
         }
     }
@@ -103,14 +122,26 @@
         justify-content: space-between;
     }
     .item-info__image{
-        width: 120px;
-        height: 120px;
+        width: 80px;
+        height: 80px;
         object-fit: cover;
         border-radius: 3px;
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        img{
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
     }
     .item-info__description{
-        width: calc( 100% - 120px );
+        width: calc( 100% - 80px );
         padding-left: 20px;
+    }
+    .add-to-collection__list{
+        max-height: 250px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 </style>
