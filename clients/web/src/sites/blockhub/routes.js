@@ -781,6 +781,11 @@ export default [
         path: '/launcher',
         name: 'Launcher',
         component: (resolve) => require(['@/ui/screens/launcher'], resolve)
+    },,
+    {
+        path: '/quick-import',
+        name: 'Quick import',
+        component: (resolve) => require(['@/ui/screens/quick-import'], resolve)
     },
     {
         path: '/admin',
