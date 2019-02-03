@@ -6329,6 +6329,20 @@ storiesOf('Browser UI', module)
         template: `<div style="width: 600px" class="m-4"><c-browser-ui /></div>`
     }))
 
+storiesOf('Settings', module)
+    .add('default', () => ({
+        components:{
+            'c-settings' : (resolve) => require(['@/ui/components/settings'], resolve),
+        },
+        template: `<div class="m-4" style="width: 1000px;">
+                        <c-settings />
+                    </div>`
+    }))
+
+
+
+
+
 
 /*
      Dynamic import - test version
