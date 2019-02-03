@@ -80,7 +80,7 @@
                             </c-button>
                         </li>
                         <li v-if="signedIn">
-                            <c-dropdown class="ml-4 mt-2 account-menu" style="z-index: 12" @show="onShowMenu" @hide="onHideMenu">
+                            <c-dropdown class="ml-4 account-menu" style="z-index: 12" @show="onShowMenu" @hide="onHideMenu">
                                 <template slot="title">
                                     <div class="__title">
                                         <i class="fas fa-ellipsis-h"></i>
@@ -776,7 +776,8 @@ export default {
 
         ul {
             padding: 0;
-            display: inline;
+            display: flex;
+            align-items: center;
             list-style: none;
         }
 
@@ -996,9 +997,10 @@ export default {
         a {
             position: relative;
             float: left;
-            width: 15px;
-            height: 15px;
+            width: 18px;
+            height: 18px;
             margin: 0 2px;
+            min-height: 15px;
             &:hover {
                 &:after {
                     border-color: $color_2;
