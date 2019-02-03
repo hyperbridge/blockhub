@@ -27,11 +27,16 @@
                     </div>
                 </c-block>
             </div>
+            
+            <!--Second step on Quick import-->
             <div class="col-12" v-if="signedIn && quickImport">
                 <c-block title="Quick import" bgGradient noGutter onlyContentBg>
-                    <p class="mb-3">
+                    <p class="mb-2">
                         Automatically analyze from code host for easy initial result.
                     </p>
+                    <c-button status="plain" icon="arrow-left" class="mb-3" @click=" quickImport=false ">
+                        Go Back
+                    </c-button>
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-4 mb-4" v-for="service in services">
                             <c-icon-block :icon="service.icon" iconType="fab" size="md" class="icon-block-border w-100">
@@ -40,7 +45,7 @@
                                 </div>
                             </c-icon-block>
                         </div>
-                        <div class="col-12 mb-4">
+                        <div class="col-12 mb-4" hidden>
                             <div class="file-drag-zone" id="drag-zone" @drop="dropHandler(event)" @dragover="dragOverHandler(event)">
                                 Drag zone
                             </div>
@@ -71,6 +76,18 @@
                 quickImport: false,
                 integrateLocally: false,
                 services: [
+                    {
+                        name: 'GitHub',
+                        icon: 'github'
+                    },
+                    {
+                        name: 'BitBucket',
+                        icon: 'bitbucket'
+                    },
+                    {
+                        name: 'GitKraken',
+                        icon: 'gitkraken'
+                    },
                     {
                         name: 'GitHub',
                         icon: 'github'
