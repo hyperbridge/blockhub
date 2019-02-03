@@ -27,7 +27,7 @@
                     </div>
                 </c-block>
             </div>
-            
+
             <!--Second step on Quick import-->
             <div class="col-12" v-if="signedIn && quickImport">
                 <c-block title="Quick import" bgGradient noGutter onlyContentBg>

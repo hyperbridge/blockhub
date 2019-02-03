@@ -65,6 +65,7 @@
                 </template>
 
                 <template v-if="signedIn">
+
                     <c-button status="plain" tag="button" to="/account" class="text-left" size="md" icon="user">
                         Account
                     </c-button>
@@ -77,37 +78,31 @@
 
                     <hr />
 
-                    <c-button status="none" to="/profile/1">
-                        <span class="icon fa fa-user"></span>
-                        <span class="text">Current Profile</span>
+                    <c-button status="plain" tag="button" to="/profile/1" class="text-left" size="md" icon="user">
+                        Current Profile
                     </c-button>
-                    <c-button status="none" to="/settings/activity">
-                        <span class="icon fa fa-list-alt"></span>
-                        <span class="text">Activity Log</span>
+                    <c-button status="plain" tag="button" to="/settings/activity" class="text-left" size="md" icon="list-alt">
+                        Activity Log
                     </c-button>
-                    <c-button status="none" to="/profile/1/contacts" v-darklaunch="'CONTACTS'">
-                        <span class="icon fa fa-users"></span>
-                        <span class="text">Contacts</span>
+                    <c-button status="plain" tag="button" to="/profile/1/contacts" class="text-left" size="md" icon="users" v-darklaunch="'CONTACTS'">
+                        Contacts
                     </c-button>
 
                     <hr />
 
-                    <router-link to="/settings">
-                        <span class="icon fa fa-cog"></span>
-                        <span class="text">Settings</span>
-                    </router-link>
+                    <c-button status="plain" to="/settings" class="text-left" size="md" tag="button" icon="cog">
+                        Settings
+                    </c-button>
 
-                    <c-button status="none" to="/account/signout">
-                        <span class="icon fa fa-sign-out-alt"></span>
-                        <span class="text">Sign Out</span>
+                    <c-button status="plain" tag="button" to="/account/signout" class="text-left" size="md" icon="sign-out-alt">
+                        Sign Out
                     </c-button>
 
                     <hr />
                 </template>
 
-                <c-button status="none" to="/sitemap">
-                    <span class="icon fa fa-list-alt"></span>
-                    <span class="text">Sitemap</span>
+                <c-button status="plain" to="/sitemap" tag="button" class="text-left" size="md" icon="list-alt">
+                    Sitemap
                 </c-button>
 
                 <!--Global Bottom banner-->
@@ -208,7 +203,8 @@
         props: [],
         components: {
             'c-render-condition': (resolve) => require(['@/ui/components/render-condition'], resolve),
-            'c-sidebar-menu-link': (resolve) => require(['@/ui/components/sidebar-menu/menu_item'], resolve)
+            'c-sidebar-menu-link': (resolve) => require(['@/ui/components/sidebar-menu/menu_item'], resolve),
+            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu'], resolve)
         },
         updated() {
         },
