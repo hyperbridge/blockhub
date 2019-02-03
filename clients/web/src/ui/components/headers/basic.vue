@@ -1000,7 +1000,7 @@ export default {
             width: 18px;
             height: 18px;
             margin: 0 2px;
-            min-height: 15px;
+            min-height: 15px!important;
             &:hover {
                 &:after {
                     border-color: $color_2;
