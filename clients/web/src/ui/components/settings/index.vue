@@ -180,7 +180,7 @@
                                 <i class="fas fa-check-circle"></i>
                             </div>
                             <div>
-                                <h3 class="p-0 m-0">World of Warcraft</h3>
+                                <h3 class="p-0 m-0 text-white">World of Warcraft</h3>
                                 <span>Last played 6 hours ago</span>
                             </div>
                         </div>
@@ -189,7 +189,7 @@
                                 <i class="fas fa-check-circle"></i>
                             </div>
                             <div>
-                                <h3 class="p-0 m-0">Might & Magic: Heroes VI</h3>
+                                <h3 class="p-0 m-0 text-white">Might & Magic: Heroes VI</h3>
                                 <span>Last played 2 days ago</span>
                             </div>
                         </div>
