@@ -32,9 +32,20 @@
                     <p class="mb-3">
                         Automatically analyze from code host for easy initial result.
                     </p>
-                    <c-icon-block icon="gem" size="md">
-                        Aliquam erat volutpat
-                    </c-icon-block>
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-4 mb-4" v-for="service in services">
+                            <c-icon-block :icon="service.icon" iconType="fab" size="md" class="icon-block-border w-100">
+                                <div class="h4 p-0">
+                                    {{ service.name }}
+                                </div>
+                            </c-icon-block>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="file-drag-zone" id="drag-zone" @drop="dropHandler(event)" @dragover="dragOverHandler(event)">
+                                Drag zone
+                            </div>
+                        </div>
+                    </div>
                 </c-block>
             </div>
             <div class="col-12" v-if="!signedIn && quickImport">
@@ -58,21 +69,81 @@
         data(){
             return{
                 quickImport: false,
-                integrateLocally: false
+                integrateLocally: false,
+                services: [
+                    {
+                        name: 'GitHub',
+                        icon: 'github'
+                    },
+                    {
+                        name: 'BitBucket',
+                        icon: 'bitbucket'
+                    },
+                    {
+                        name: 'GitKraken',
+                        icon: 'gitkraken'
+                    }
+                ]
             }
         },
         computed: {
             signedIn() {
                 return this.$store.state.application.signedIn
             },
+        },
+        methods: {
+            dropHandler(ev) {
+                console.log('File(s) dropped');
+
+                // Prevent default behavior (Prevent file from being opened)
+                ev.preventDefault();
+
+                if (ev.dataTransfer.items) {
+                    // Use DataTransferItemList interface to access the file(s)
+                    for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+                        // If dropped items aren't files, reject them
+                        if (ev.dataTransfer.items[i].kind === 'file') {
+                            var file = ev.dataTransfer.items[i].getAsFile();
+                            console.log('... file[' + i + '].name = ' + file.name);
+                        }
+                    }
+                } else {
+                    // Use DataTransfer interface to access the file(s)
+                    for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+                        console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
+                    }
+                }
+            },
+            dragOverHandler(ev) {
+                console.log('File(s) in drop zone');
+                ev.preventDefault();
+            }
         }
     }
 </script>
 
 <style lang="scss" scoped>
-    .block-icon__icon{
-        border: 1px solid rgba( 255, 255, 255, .2);
+    .icon-block-border{
+        border: 1px solid rgba( 255, 255, 255, .15);
+        border-top: 4px solid rgba( 255, 255, 255, .3);
         padding: 15px;
+        border-radius: 5px;
+        transition: all 200ms ease-in-out;
+        &:hover{
+            background: rgba(1,148,239,.4);
+            border-color: #0194ef;
+            cursor: pointer;
+        }
+    }
+    .file-drag-zone{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        border: 1px dashed rgba( 255, 255, 255, .15 );
+        padding: 30px;
+        text-align: center;
+        color: rgba( 255, 255, 255, .4 );
         border-radius: 5px;
     }
 </style>
