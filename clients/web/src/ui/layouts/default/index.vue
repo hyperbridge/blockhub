@@ -441,6 +441,20 @@
                 </p>
             </c-basic-popup>
 
+
+
+            <!--connection-status popup-->
+            <c-basic-popup
+                width="1000"
+                :activated="$store.state.application.activeModal === 'settings'"
+                @close="$store.state.application.activeModal = null"
+            >
+
+                <template slot="body">
+                    <c-settings />
+                </template>
+            </c-basic-popup>
+
             <c-cookie-policy v-if="!desktopMode" />
 
             <c-clock v-if="desktopMode" />
@@ -552,6 +566,7 @@
             'c-swiper': swiper,
             'c-slide': swiperSlide,
             'c-profile-chooser': (resolve) => require(['@/ui/components/profile-chooser'], resolve),
+            'c-settings' : (resolve) => require(['@/ui/components/settings'], resolve),
             'c-social-connect': (resolve) => require(['@/ui/components/social-connect'], resolve)
         },
         data() {

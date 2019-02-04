@@ -1,7 +1,7 @@
 <template>
     <div class="settings__wrapper">
         <div class="settings-nav">
-            <div v-for="item in navList" :class="{ 'current-block' : item.block_id == currentBlock }" @click="setBlock(item.block_id)">
+            <div v-for="item in navList" :class="{ 'current-block' : item.block_id == currentBlock }" v-if="item.show" @click="setBlock(item.block_id)">
                 {{ item.name }}
             </div>
         </div>
@@ -150,12 +150,12 @@
                 </c-block>
                 <c-block class="margin-bottom-30" key="block_5" v-if=" currentBlock == 'advanced' " title="Advanced" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                     <div class="row">
-                        <div class="col-12 d-flex justify-content-between align-items-center">
-                            <div>
+                        <div class="col-12 d-flex flex-column">
+                            <div class="w-100">
                                 Advanced settings can be managed here. These are primarily for @BlockHub developers.
                                 <br /><strong>Warning:</strong> Only use these if you know what you're doing.
                             </div>
-                            <div>
+                            <div class="w-100 mt-3">
                                 <c-button @click="clearDatabase" status="warning">DELETE DATABASE</c-button>
                             </div>
                         </div>
@@ -209,7 +209,7 @@
                         </option>
                     </select>
                     <hr>
-                    <h3>Secondary Languages</h3>
+                    <h3 class="text-white">Secondary Languages</h3>
                     <p>
                         Additionally, show me content only available on this languages:
                     </p>
@@ -245,35 +245,43 @@
                 navList: [
                     {
                         block_id: 'client',
-                        name: 'Client Settings'
+                        name: 'Client Settings',
+                        show: true
                     },
                     {
                         block_id: 'sound',
-                        name: 'Sound Settings'
+                        name: 'Sound Settings',
+                        show: true
                     },
                     {
                         block_id: 'decentralization',
-                        name: 'Decentralization Settings'
+                        name: 'Decentralization Settings',
+                        show: true
                     },
                     {
                         block_id: 'performance',
-                        name: 'Performance Settings'
+                        name: 'Performance Settings',
+                        show: true
                     },
                     {
                         block_id: 'advanced',
-                        name: 'Advanced'
+                        name: 'Advanced',
+                        show: true
                     },
                     {
                         block_id: 'game-activity',
-                        name: 'Game Activity'
+                        name: 'Game Activity',
+                        show: true
                     },
                     {
                         block_id: 'added-games',
-                        name: 'Added games'
+                        name: 'Added games',
+                        show: true
                     },
                     {
                         block_id: 'language',
-                        name: 'Language Preferences'
+                        name: 'Language Preferences',
+                        show: true
                     },
                 ],
                 systemPermissions: false,
@@ -855,9 +863,10 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
+        min-height: 500px;
     }
     .settings-nav{
-        width: 250px;
+        width: 200px;
         display: flex;
         flex-direction: column;
         padding-right: 20px;
@@ -866,7 +875,7 @@
             padding: 10px 0;
             color: #fff;
             opacity: .5;
-            font-size: 16px;
+            font-size: 14px;
             &:hover{
                 cursor: pointer;
                 opacity: 1;
@@ -877,7 +886,7 @@
         }
     }
     .settings__block-container{
-        width: calc( 100% - 270px );
+        width: calc( 100% - 220px );
     }
 
     .settings_item{
