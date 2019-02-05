@@ -6339,6 +6339,15 @@ storiesOf('Settings', module)
                     </div>`
     }))
 
+storiesOf('Add friends', module)
+    .add('default', () => ({
+        components: {
+            'c-add-friends': (resolve) => require(['@/ui/components/add-friends'], resolve),
+        },
+        template: `<div class="m-4" style="width: 400px;">
+                        <c-add-friends />
+                    </div>`
+    }))
 
 
 
