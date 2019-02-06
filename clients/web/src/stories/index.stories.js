@@ -6385,6 +6385,13 @@ storiesOf('Add friends', module)
     }))
 
 
+storiesOf('Draggble video', module)
+    .add('default', () => ({
+        components: {
+            'c-draggable-video' : (resolve) => require(['@/ui/components/draggable-video'], resolve),
+        },
+        template: `<div><c-draggable-video /></div>`
+    }))
 
 
 
