@@ -6345,7 +6345,7 @@ storiesOf('Add friends', module)
             'c-add-friends': (resolve) => require(['@/ui/components/add-friends'], resolve),
         },
         template: `<div class="m-4" style="width: 400px;">
-                        <c-add-friends />
+                        <c-add-friends :permission="true" :connected="true" />
                     </div>`
     }))
 
