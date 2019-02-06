@@ -6344,8 +6344,43 @@ storiesOf('Add friends', module)
         components: {
             'c-add-friends': (resolve) => require(['@/ui/components/add-friends'], resolve),
         },
+        data(){
+            return{
+                userFriends: [
+                    {
+                        avatar: 'https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg',
+                        firstname: 'Brandan',
+                        lastname: 'Hayes'
+                    },
+                    {
+                        avatar: 'http://www.parajurist.md/assets/site/images/parajurist/1.jpg',
+                        firstname: 'Fredrica',
+                        lastname: 'James'
+                    },
+                    {
+                        avatar: 'https://vcabestellen.nl/images/avatar7.png',
+                        firstname: 'Denis',
+                        lastname: 'Stephens'
+                    },
+                    {
+                        avatar: 'https://cdn1.flamp.ru/b00b20ee57b46bdd889f56d8345de1ce.png',
+                        firstname: 'Michelle',
+                        lastname: 'Reed'
+                    },
+                ],
+                permission: false,
+                connected: false,
+            }
+        },
         template: `<div class="m-4" style="width: 400px;">
-                        <c-add-friends :permission="true" :connected="true" />
+                        <c-button class="mx-3" @click=" permission = !permission ">
+                            Toggle permission
+                        </c-button>
+                        <c-button class="mx-3" @click=" connected = !connected ">
+                            Toggle connected
+                        </c-button>
+                        <hr />
+                        <c-add-friends :permission="permission" :connected="connected" :userFriends="userFriends" />
                     </div>`
     }))
 

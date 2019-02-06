@@ -102,34 +102,31 @@
                     <g>
                     </g>
                     </svg>
-                    <div class="h5 text-white text-left ml-3 mb-0 pb-0">
+                    <div class="text-white text-left ml-3 mb-0 pb-0">
                         Your are connected as <strong>{{ currentUser }}</strong>.
                     </div>
                 </div>
                 <div class="add-friends__list">
                     <ul>
-                        <li class="d-flex align-items-center" v-for="user in userFriends" v-if="userFriends">
+                        <li class="d-flex align-items-center" v-for="user in userFriends">
                             <img :src="user.avatar"/>
-                            <div class="h5 ml-4 mb-0 pb-0">
+                            <div class="h5 ml-3 mb-0 pb-0">
                                 {{ user.firstname }} {{ user.lastname }}
                             </div>
-                            <c-button status="second-info" size="sm">
+                            <c-button status="second-info" size="sm" class="py-0 ml-auto">
                                 Invite
                             </c-button>
-                        </li>
-                        <li v-else>
-                            You don't have friends here :(
                         </li>
                     </ul>
                 </div>
             </template>
             <template v-else-if="!connected && permission">
-                <div class="h5 text-white text-center m-0 p-0 w-100">
+                <div class="h5 text-white text-center m-0 p-0 mt-4 w-100">
                     Your are not connected to this social.
                 </div>
-                <div class="text-center">
+                <div class="text-center my-4">
                     <c-button status="second-info" size="md">
-                        Settings
+                        Connect social
                     </c-button>
                 </div>
             </template>
@@ -216,10 +213,26 @@
         border-top: 1px solid rgba( 255, 255, 255, .2);
         max-height: 300px;
         color: #fff;
-        img{
-            height: 25px;
-            width: 25px;
-            border-radius: 100%;
+        ul{
+            padding: 0;
+            margin: 0;
+            li{
+                font-size: 14px;
+                padding: 8px;
+                margin: 0 -8px;
+                img{
+                    height: 25px;
+                    width: 25px;
+                    border-radius: 100%;
+                }
+                .c-button{
+                    min-height: 18px;
+                    line-height: 18px;
+                }
+                &:hover{
+                    background: rgba( 255, 255, 255, .05);
+                }
+            }
         }
     }
 </style>
