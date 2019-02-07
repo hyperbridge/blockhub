@@ -1,42 +1,111 @@
 <template>
-    <div class="video-container"
-         :style="[
-            { 'width' : width + 'px' },
-            { 'height' : height + 'px' },
-            { 'left' : left + 'px' },
-            { 'bottom' : bottom + 'px' },
-         ]">
-
-    </div>
+    <c-drag :w="width" :h="height" :x="20" :y="20" :lock-aspect-ratio="true">
+        <div class="video-container">
+            <div class="video-container__wrapper">
+                <div class="video-container__video" ref="video">
+                    <video>
+                        <source src="https://static.videezy.com/system/resources/previews/000/004/944/original/Magical_Tree_4K_Living_Background.mp4" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+                <div class="video-control">
+                    <c-button status="none" class="video-control__btn video-control__btn--expand">
+                        <i class="fas fa-expand"></i>
+                    </c-button>
+                    <c-button status="none" class="video-control__btn video-control__btn--play">
+                        <i class="fas fa-play"></i>
+                    </c-button>
+                    <c-button status="none" class="video-control__btn video-control__btn--times">
+                        <i class="fas fa-times"></i>
+                    </c-button>
+                </div>
+            </div>
+        </div>
+    </c-drag>
 </template>
 
 <script>
     const defVal = 40;
 
+
     export default {
-        props:{
+        props: {
             isActive: {
                 type: Boolean,
                 default: true
             }
         },
-        data(){
-            return{
+        components: {
+            'c-drag': (resolve) => require(['@/ui/components/draggable'], resolve)
+        },
+        data() {
+            return {
                 width: defVal * 6,
                 height: defVal * 4,
-                left: 20,
-                bottom: 20
             }
         },
+        methods: {},
+        mounted(){
+            console.log('-------- All refs', this.$refs)
+            console.log('-------- Video ref', this.$refs.video)
+        }
     }
+
 </script>
 
 <style lang="scss" scoped>
-    .video-container{
-        position: fixed;
-        background: rgba( 0, 0, 0, .4 );
-        border-radius: 10px;
+    .video-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+    }
+    .video-container__wrapper {
+        background: rgba(0, 0, 0, .4);
+        border-radius: 5px;
         overflow: hidden;
         z-index: 999999999999999999999999;
+        position: relative;
+        display: flex;
+        width: 100%;
+    }
+    .video-container__video{
+        display: flex;
+        width: 100%;
+        height: 100%;
+        video{
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .video-control {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 10;
+        font-size: 2rem;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .video-control__btn {
+        margin: 0 10px;
+        opacity: .7;
+        &:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
+
+    .video-control__btn--times {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        opacity: .5;
+        margin: 0;
     }
 </style>

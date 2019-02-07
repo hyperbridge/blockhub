@@ -42,7 +42,7 @@ store.dispatch('funding/init')
 console.log('BlockHub initialized.')
 
 
-addDecorator(withViewport('desktop'))
+// addDecorator(withViewport('desktop'))
 addDecorator(StoryRouter())
 
 
