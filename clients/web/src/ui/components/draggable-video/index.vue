@@ -1,10 +1,10 @@
 <template>
-    <c-drag :w="width" :h="height" :x="20" :y="20" :lock-aspect-ratio="true">
+    <c-drag :w="width" :h="height" :x="20" :y="20" :resizable="false">
         <div class="video-container">
             <div class="video-container__wrapper">
-                <div class="video-container__video" ref="video">
-                    <video>
-                        <source src="https://static.videezy.com/system/resources/previews/000/004/944/original/Magical_Tree_4K_Living_Background.mp4" type="video/mp4">
+                <div class="video-container__video">
+                    <video ref="video" @timeupdate="getCurrentTime" @loadeddata="setCurrentTime">
+                        <source src="https://www.w3schools.com/tags/mov_bbb.mp4" type="video/mp4">
                         Your browser does not support HTML5 video.
                     </video>
                 </div>
@@ -12,8 +12,11 @@
                     <c-button status="none" class="video-control__btn video-control__btn--expand">
                         <i class="fas fa-expand"></i>
                     </c-button>
-                    <c-button status="none" class="video-control__btn video-control__btn--play">
+                    <c-button status="none" class="video-control__btn video-control__btn--play" @click="play" v-if="!isPlaying">
                         <i class="fas fa-play"></i>
+                    </c-button>
+                    <c-button status="none" class="video-control__btn video-control__btn--play" @click="pause" v-if="isPlaying">
+                        <i class="fas fa-pause"></i>
                     </c-button>
                     <c-button status="none" class="video-control__btn video-control__btn--times">
                         <i class="fas fa-times"></i>
@@ -25,32 +28,46 @@
 </template>
 
 <script>
-    const defVal = 40;
-
-
     export default {
         props: {
             isActive: {
                 type: Boolean,
                 default: true
-            }
+            },
+            videoUrl: String,
+            setTime: Number
         },
         components: {
             'c-drag': (resolve) => require(['@/ui/components/draggable'], resolve)
         },
         data() {
             return {
-                width: defVal * 6,
-                height: defVal * 4,
+                width: 285,
+                height: 160,
+                isPlaying: false
             }
         },
-        methods: {},
-        mounted(){
-            console.log('-------- All refs', this.$refs)
-            console.log('-------- Video ref', this.$refs.video)
+        methods: {
+            destroy() {
+                console.log('destroy')
+                this.$destroy();
+            },
+            play(){
+                this.$refs.video.play();
+                this.isPlaying = true;
+            },
+            pause(){
+                this.$refs.video.pause();
+                this.isPlaying = false;
+            },
+            getCurrentTime(){
+                console.log(this.$refs.video.currentTime)
+            },
+            setCurrentTime(){
+                return this.setTime ? this.setTime : 0
+            }
         }
     }
-
 </script>
 
 <style lang="scss" scoped>
@@ -58,6 +75,7 @@
         width: 100%;
         height: 100%;
         display: flex;
+        cursor: move;
     }
     .video-container__wrapper {
         background: rgba(0, 0, 0, .4);
@@ -90,11 +108,16 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        opacity: 0;
+        &:hover{
+            opacity: 1;
+        }
     }
 
     .video-control__btn {
         margin: 0 10px;
         opacity: .7;
+        text-shadow: 0 0 3px #000;
         &:hover {
             opacity: 1;
             cursor: pointer;

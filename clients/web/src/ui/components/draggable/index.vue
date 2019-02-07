@@ -739,7 +739,7 @@
         width: 10px;
         height: 10px;
         background: #EEE;
-        border: 1px solid #333;
+        /*border: 1px solid #333;*/
     }
     .handle-tl {
         top: -10px;
