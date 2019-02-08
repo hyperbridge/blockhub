@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-        <c-drag :w="width" :h="height" :x="20" :y="20" :resizable="false" v-if="active">
+        <c-drag :w="width" :h="height" :x="20" :y="20" :resizable="false" v-if="active" :z="99999999">
             <div class="video-container">
                 <div class="video-container__wrapper">
                     <div class="video-container__video">
@@ -10,7 +10,7 @@
                         </video>
                     </div>
                     <div class="video-control">
-                        <c-button status="none" class="video-control__btn video-control__btn--expand">
+                        <c-button status="none" class="video-control__btn video-control__btn--expand" @click="fullscreen" v-if="isPlaying">
                             <i class="fas fa-expand"></i>
                         </c-button>
                         <c-button status="none" class="video-control__btn video-control__btn--play" @click="play" v-if="!isPlaying">
@@ -45,6 +45,7 @@
                 width: 285,
                 height: 160,
                 isPlaying: false,
+                fullscreen: false
             }
         },
         methods: {
@@ -59,6 +60,9 @@
             pause(){
                 this.$refs.video.pause();
                 this.isPlaying = false;
+            },
+            fullscreen(){
+                this.$refs.video.requestFullscreen()
             },
             setCurrentTime(){
                 this.$refs.video.currentTime = this.isVideo.currentTime
