@@ -1066,6 +1066,11 @@ export default [
         path: '/features',
         name: 'Features',
         component: (resolve) => require(['@/ui/screens/features'], resolve)
+    },,
+    {
+        path: '/videos',
+        name: 'Test Screen for video',
+        component: (resolve) => require(['@/ui/screens/video'], resolve)
     },
     {
         path: '/download/desktop/mac',

@@ -4,8 +4,8 @@
             <div class="video-container">
                 <div class="video-container__wrapper">
                     <div class="video-container__video">
-                        <video ref="video" @timeupdate="getCurrentTime" @loadeddata="setCurrentTime">
-                            <source :src="videoUrl" type="video/mp4">
+                        <video ref="video" @timeupdate="" @loadeddata="setCurrentTime" @playing=" isPlaying = true " autoplay>
+                            <source :src="isVideo.src" type="video/mp4">
                             Your browser does not support HTML5 video.
                         </video>
                     </div>
@@ -36,8 +36,6 @@
                 type: Boolean,
                 default: true
             },
-            videoUrl: String,
-            setTime: Number
         },
         components: {
             'c-drag': (resolve) => require(['@/ui/components/draggable'], resolve)
@@ -46,13 +44,13 @@
             return {
                 width: 285,
                 height: 160,
-                isPlaying: false
+                isPlaying: false,
             }
         },
         methods: {
             destroy() {
-                console.log('destroy')
-                this.$emit('close')
+                this.$emit('close');
+                this.isVideo.showPopup = false
             },
             play(){
                 this.$refs.video.play();
@@ -62,11 +60,18 @@
                 this.$refs.video.pause();
                 this.isPlaying = false;
             },
-            getCurrentTime(){
-                console.log(this.$refs.video.currentTime)
-            },
             setCurrentTime(){
-                return this.setTime ? this.setTime : 0
+                this.$refs.video.currentTime = this.isVideo.currentTime
+            }
+        },
+        computed: {
+            isVideo(){
+                return this.$store.state.application.video
+            },
+        },
+        created(){
+            if ( !this.isVideo.src ){
+                this.isVideo.showPopup = false
             }
         }
     }
