@@ -1,7 +1,16 @@
 <template>
-    <video :controls="controls" :width="width" :height="height" :autoplay="autoplay" :poster="poster" :preload="preload">
-        <template v-for="item in video">
-            <source :src="item.src" :type="['video/' + item.format ]">
+    <video :controls="controls"
+           :width="width"
+           :height="height"
+           :autoplay="autoplay"
+           :poster="poster"
+           :preload="preload"
+           @play="onPlay"
+           @timeupdate="onTimeUpdate"
+           @ended="onStop"
+            ref="video">
+        <template>
+            <source :src="src" type="video/mp4">
         </template>
         Your browser does not support the video tag.
     </video>
@@ -11,11 +20,7 @@
     export default {
         name: 'video',
         props: {
-            video: [Array, Object],
-            controls: {
-                type: Boolean,
-                default: true
-            },
+            src: String,
             width: [String, Number],
             height: [String, Number],
             autoplay: {
@@ -27,10 +32,52 @@
                 default: false
             },
             poster: String,
+            controls: {
+                type: Boolean,
+                default: false
+            }
 
         },
         created(){
             this.$emit('ready')
+        },
+        data(){
+            return{
+                isPlayed: false
+            }
+        },
+        methods:{
+            onPlay(){
+                console.log('play')
+                this.isVideo.src = this.src;
+                this.isPlayed = true;
+            },
+            onTimeUpdate(){
+                this.isVideo.currentTime = this.$refs.video.currentTime;
+            },
+            onPause(){
+                console.log('pause')
+            },
+            onStop(){
+                console.log('stop')
+                this.isVideo.src = '';
+                this.isVideo.currentTime = 0;
+            }
+        },
+        computed: {
+            isVideo(){
+                return this.$store.state.application.video
+            },
+            getCurrentTime(){
+                return this.$refs.video.currentTime
+            },
+        },
+        beforeDestroy(){
+            if (this.isPlayed){
+                this.isVideo.showPopup = true
+            } else {
+                this.isVideo.showPopup = false
+            }
         }
     }
 </script>
