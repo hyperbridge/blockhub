@@ -731,7 +731,7 @@
         touch-action: none;
         position: absolute;
         box-sizing: border-box;
-        border: 1px dashed black;
+        /*border: 1px dashed black;*/
     }
     .handle {
         box-sizing: border-box;

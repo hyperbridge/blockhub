@@ -1,36 +1,38 @@
 <template>
-    <c-drag :w="width" :h="height" :x="20" :y="20" :resizable="false">
-        <div class="video-container">
-            <div class="video-container__wrapper">
-                <div class="video-container__video">
-                    <video ref="video" @timeupdate="getCurrentTime" @loadeddata="setCurrentTime">
-                        <source src="https://www.w3schools.com/tags/mov_bbb.mp4" type="video/mp4">
-                        Your browser does not support HTML5 video.
-                    </video>
-                </div>
-                <div class="video-control">
-                    <c-button status="none" class="video-control__btn video-control__btn--expand">
-                        <i class="fas fa-expand"></i>
-                    </c-button>
-                    <c-button status="none" class="video-control__btn video-control__btn--play" @click="play" v-if="!isPlaying">
-                        <i class="fas fa-play"></i>
-                    </c-button>
-                    <c-button status="none" class="video-control__btn video-control__btn--play" @click="pause" v-if="isPlaying">
-                        <i class="fas fa-pause"></i>
-                    </c-button>
-                    <c-button status="none" class="video-control__btn video-control__btn--times">
-                        <i class="fas fa-times"></i>
-                    </c-button>
+    <transition name="fade">
+        <c-drag :w="width" :h="height" :x="20" :y="20" :resizable="false" v-if="active">
+            <div class="video-container">
+                <div class="video-container__wrapper">
+                    <div class="video-container__video">
+                        <video ref="video" @timeupdate="getCurrentTime" @loadeddata="setCurrentTime">
+                            <source :src="videoUrl" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
+                    </div>
+                    <div class="video-control">
+                        <c-button status="none" class="video-control__btn video-control__btn--expand">
+                            <i class="fas fa-expand"></i>
+                        </c-button>
+                        <c-button status="none" class="video-control__btn video-control__btn--play" @click="play" v-if="!isPlaying">
+                            <i class="fas fa-play"></i>
+                        </c-button>
+                        <c-button status="none" class="video-control__btn video-control__btn--play" @click="pause" v-if="isPlaying">
+                            <i class="fas fa-pause"></i>
+                        </c-button>
+                        <c-button status="none" class="video-control__btn video-control__btn--times" @click="destroy">
+                            <i class="fas fa-times"></i>
+                        </c-button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </c-drag>
+        </c-drag>
+    </transition>
 </template>
 
 <script>
     export default {
         props: {
-            isActive: {
+            active: {
                 type: Boolean,
                 default: true
             },
@@ -50,7 +52,7 @@
         methods: {
             destroy() {
                 console.log('destroy')
-                this.$destroy();
+                this.$emit('close')
             },
             play(){
                 this.$refs.video.play();
@@ -117,7 +119,7 @@
     .video-control__btn {
         margin: 0 10px;
         opacity: .7;
-        text-shadow: 0 0 3px #000;
+        text-shadow: 0 0 5px #000, 0 0 5px #000;
         &:hover {
             opacity: 1;
             cursor: pointer;

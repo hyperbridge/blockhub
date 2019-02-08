@@ -718,7 +718,12 @@
                 "description": "",
                 "type": "boolean"
             }
-        ]
+        ],
+        "video": {
+            "url": "https://www.w3schools.com/tags/mov_bbb.mp4",
+            "currentTime": 0,
+            "showPopup": false
+        }
     },
     "funding": {
         "currentEthereumNetwork": "local",
