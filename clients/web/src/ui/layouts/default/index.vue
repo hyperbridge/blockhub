@@ -474,6 +474,11 @@
             <c-profile-chooser v-if="profileChooser && signedIn" />
         <!--</transition>-->
 
+
+        <!--Draggable video block -->
+        <c-draggable-video :active="video.showPopup" :videoUrl="video.url" :setTime="video.currentTime" @close=" video.showPopup = false " />
+        <!--end draggable video block -->
+
         
         <!-- <search /> Discover the next best thing... -->
     </div>
@@ -567,7 +572,8 @@
             'c-slide': swiperSlide,
             'c-profile-chooser': (resolve) => require(['@/ui/components/profile-chooser'], resolve),
             'c-settings' : (resolve) => require(['@/ui/components/settings'], resolve),
-            'c-social-connect': (resolve) => require(['@/ui/components/social-connect'], resolve)
+            'c-social-connect': (resolve) => require(['@/ui/components/social-connect'], resolve),
+            'c-draggable-video' : (resolve) => require(['@/ui/components/draggable-video'], resolve)
         },
         data() {
             const self = this
@@ -737,6 +743,9 @@
             },
             profileChooser() {
                 return this.$store.state.application.profileChooser
+            },
+            video(){
+                return this.$store.state.application.video
             }
         },
         updated() {
