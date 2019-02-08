@@ -542,7 +542,7 @@
         computed: {
             style () {
                 return {
-                    position: 'absolute',
+                    position: 'fixed',
                     top: this.top + 'px',
                     left: this.left + 'px',
                     width: this.width + 'px',
