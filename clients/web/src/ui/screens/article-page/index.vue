@@ -91,6 +91,120 @@
                 </div>
             </div>
             <!--End Page Content-->
+            <!--Also in this day-->
+            <div class="row also-in-day">
+                <div class="col-12">
+                    <div class="h1 my-5 p-0">
+                        Also, in this day!
+                    </div>
+                </div>
+                <!--Also in this day list-->
+                <!--Also in this day list item-->
+                <div class="col-12">
+                    <ul class="tags-line">
+                        <li>
+                            <c-button status="plain">
+                                ART
+                            </c-button>
+                        </li>
+                        <li>
+                            <c-button status="plain">
+                                Literature
+                            </c-button>
+                        </li>
+                        <li>
+                            <c-button status="plain">
+                                History
+                            </c-button>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="col-12">
+                    <div class="also-in-day__item">
+                        <div class="h2 mt-2 mb-3">
+                            Vivamus vitae nisl leo.
+                        </div>
+                        <p>
+                            Praesent efficitur nisl nec tellus tincidunt tristique. Nam non metus ac orci feugiat
+                            volutpat
+                            in in lacus. Integer malesuada tristique tortor id mollis. Fusce feugiat mi id lacus aliquam
+                            molestie. Ut tempus posuere libero, sit amet tincidunt nisl ultrices sit amet. Maecenas
+                            mattis
+                            mauris in dui porttitor vulputate efficitur eget nunc. Pellentesque sit amet justo mi.
+                            Vivamus
+                            ultrices eget magna non volutpat. Class aptent taciti sociosqu ad litora torquent per
+                            conubia
+                            nostra, per inceptos himenaeos. Phasellus quis orci interdum, volutpat est eu, placerat
+                            erat.
+                        </p>
+                        <div class="w-100 text-right">
+                            <c-button status="second-info" size="sm">
+                                Read more
+                            </c-button>
+                        </div>
+                    </div>
+                </div>
+                <!--Also in this day list item-->
+                <div class="col-12">
+                    <ul class="tags-line">
+                        <li>
+                            <c-button status="plain">
+                                ART
+                            </c-button>
+                        </li>
+                        <li>
+                            <c-button status="plain">
+                                Literature
+                            </c-button>
+                        </li>
+                        <li>
+                            <c-button status="plain">
+                                History
+                            </c-button>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="col-12">
+                    <div class="also-in-day__item">
+                        <div class="h2 mt-2 mb-3">
+                            Nunc in condimentum felis, in dignissim ipsum.
+                        </div>
+                        <p>
+                            Curabitur semper lacus nisi, sit amet venenatis nisl efficitur malesuada. Donec ac dui
+                            velit. Mauris sagittis volutpat dui sed suscipit. Cras faucibus lacinia semper. Vivamus
+                            felis metus, dignissim quis hendrerit ut, rutrum vitae ligula. Etiam euismod felis at
+                            egestas fringilla. Integer facilisis, nisi eget dignissim suscipit, velit turpis fermentum
+                            tellus, quis vestibulum nibh felis sit amet elit. Vivamus a rhoncus purus. Donec et dictum
+                            quam. Suspendisse potenti. Orci varius natoque penatibus et magnis dis parturient montes,
+                            nascetur ridiculus mus.
+                        </p>
+                        <div class="w-100 text-right">
+                            <c-button status="second-info" size="sm">
+                                Read more
+                            </c-button>
+                        </div>
+                    </div>
+                </div>
+                <!--End List-->
+            </div>
+            <!--Citation Information-->
+            <div class="row citation-information">
+                <div class="col-12">
+                    <div class="h1 my-5 p-0">
+                        Citation Information
+                    </div>
+                    <template v-for="(item, index) in citation">
+                        <div class="h4" :class=" index == 0 ? '' : 'mt-4'">
+                            {{ item.title }}
+                        </div>
+                        <div>
+                            {{ item.text }}
+                        </div>
+                    </template>
+                </div>
+            </div>
         </div>
     </c-layout>
 </template>
@@ -102,7 +216,29 @@
         },
         data() {
             return {
-                date: '2019-02-04T22:07:00.000Z'
+                date: '2019-02-04T22:07:00.000Z',
+                citation: [
+                    {
+                        title: 'Article Title',
+                        text: 'Great Tokyo Fire continues to blaze'
+                    },
+                    {
+                        title: 'Author',
+                        text: 'History.com Editors'
+                    },
+                    {
+                        title: 'Website Name',
+                        text: 'HISTORY'
+                    },
+                    {
+                        title: 'URL',
+                        text: 'https://www.history.com/this-day-in-history/great-tokyo-fire-continues-to-blaze'
+                    },
+                    {
+                        title: 'Access Date',
+                        text: 'February 10, 2019'
+                    },
+                ]
             }
         },
     }
@@ -178,6 +314,41 @@
                         opacity: 1;
                         text-decoration: none;
                     }
+                }
+            }
+        }
+    }
+
+    .also-in-day__item {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .tags-line {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0;
+        li {
+            list-style: none;
+            &:after {
+                content: ",";
+            }
+            a {
+                padding-right: 2px !important;
+            }
+            &:first-child {
+                a {
+                    padding-left: 0 !important;
+                }
+            }
+            &:last-child {
+                &:after {
+                    display: none;
                 }
             }
         }

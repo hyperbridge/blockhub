@@ -202,7 +202,8 @@
         &.c-button--sm {
             padding: 1px 5px;
             font-size: 13px;
-            min-height: 28px;
+            min-height: 20px;
+            line-height: 20px;
         }
         &.c-button--md {
             padding: 3px 10px;
