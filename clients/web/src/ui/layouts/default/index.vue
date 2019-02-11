@@ -11,7 +11,7 @@
         <!-- PAGE CONTENT WRAPPER -->
         <div class="page__content page__content-invert invert"
              id="page-content"
-             :class="{'make-it-blur': bluredBg}"
+             :class="{'make-it-blur': bluredBg, 'with-shortcuts': showShortcuts}"
              :style=" `background: url(${bgImage}) top center no-repeat;background-size: cover;`"
             v-drag-and-drop:options="dragOptions">
             <!-- <div class="loader-block" v-if="!isConnected">
@@ -76,14 +76,14 @@
 
             <div class="content" :class="{'w-100': !showRightPanel && !showLeftPanel}" id="content">
                 <c-breadcrumb :links="breadcrumbLinksData" ref="breadcrumb" v-if="showBreadcrumbs" />
-                <div class="container-fluid">
+                <div class="container-fluid" style="padding-top: 0!important;">
                     <slot />
                 </div>
             </div>
 
             <!-- SIDEPANEL -->
             <transition name="slideRight" style="max-width: 250px" v-if="showRightPanel">
-                <c-sidepanel class="right-sidebar" :navigationKey="navigationKey" />
+                <c-sidepanel class="right-sidebar" style="max-width: 250px" :navigationKey="navigationKey" />
             </transition>
             <!-- //END SIDEPANEL -->
 
@@ -997,7 +997,7 @@
         z-index: 2;
     }
     .content > * {
-        padding: 20px 90px !important;
+        padding: 20px 30px !important;
     }
     .version {
         position: fixed;
@@ -1302,8 +1302,11 @@
     .page .page__content {
         padding-top: 100px;
         position: relative;
-        .page-aside {
-            margin-left: 70px;
+        &.with-shortcuts {
+            padding-left: 70px;
+            .page-aside {
+                left: 70px;
+            }
         }
 
         .page-aside,
