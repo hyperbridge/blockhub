@@ -985,6 +985,9 @@
 </style>
 
 <style lang="scss" scoped>
+    .page{
+        min-height: unset; // Test
+    }
     [v-cloak] {
         display: none;
     }
