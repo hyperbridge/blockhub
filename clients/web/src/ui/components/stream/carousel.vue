@@ -6,7 +6,7 @@
             :name="title"
             :showActions="showArrowsState(streams, maxPerView)"
             :showArrows="showArrowsState(streams, maxPerView)"
-            :showBackground="true"
+            :showBackground="showBackground"
             @prevClick="slider.slidePrev()"
             @nextClick="slider.slideNext()"
         />
@@ -17,8 +17,9 @@
                     :streamName="stream.userName"
                     :streamAvatar="stream.userAvatar"
                     :streamImg="stream.previews"
-                    :streamSrc="stream.src"
+                    :streamLink="stream.src"
                     :streamViews="stream.views"
+                    :streamId="stream.id"
                 />
             </c-slide>
         </c-swiper>
@@ -43,7 +44,8 @@
             maxPerView: {
                 type: Number,
                 default: 3
-            }
+            },
+            showBackground: Boolean
         },
         data() {
             return {
