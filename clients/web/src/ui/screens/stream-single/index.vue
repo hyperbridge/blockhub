@@ -1,39 +1,42 @@
 <template>
-    <c-layout navigationKey="store" :showBreadcrumbs="false">
+    <c-layout navigationKey="store" :showBreadcrumbs="false" :showRightPanel="false">
         <div class="single-stream">
-            <div class="row single-stream__nav">
-                <div class="col-12">
-                    <c-button status="dark" class="w-100 d-flex d-md-none justify-content-center my-4" size="lg" data-toggle="collapse" data-target="#product_nav" aria-expanded="false" aria-controls="product_nav">
-                        Menu
-                    </c-button>
-                    <div class="collapse show product_nav" id="product_nav">
-                        <ul class="nav nav-tabs margin-bottom-30 justify-content-between">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Videos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Clips</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Followers</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Events</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Followers</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Following</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
             <div class="single-stream__wrapper">
                 <div class="row">
-                    <div class="col-12 col-lg-9">
-                        <c-video src="https://www.w3schools.com/tags/mov_bbb.mp4" width="100%" :controls="true" />
+                    <div class="col-12 col-lg-9 position-relative">
+                        <div class="single-stream__nav">
+                            <c-button status="dark" class="w-100 d-flex d-md-none justify-content-center my-4" size="lg" data-toggle="collapse" data-target="#product_nav" aria-expanded="false" aria-controls="product_nav">
+                                Menu
+                            </c-button>
+                            <div class="collapse show product_nav" id="product_nav">
+                                <ul class="nav nav-tabs margin-bottom-30 justify-content-between">
+                                    <li class="nav-item active">
+                                        <a class="nav-link active" href="#">Online</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Videos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Clips</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Followers</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Events</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Followers</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Following</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <template v-if="section == 'online'">
+                            <c-video src="https://www.w3schools.com/tags/mov_bbb.mp4" width="100%" :controls="true" />
+                        </template>
                     </div>
                     <div class="col-12 col-lg-3 pl-0">
                         <c-chat :messages="messages" />
@@ -52,6 +55,7 @@
         },
         data(){
             return{
+                section: 'online',
                 messages: [
                     {
                         "id": 1,
@@ -120,16 +124,6 @@
 </script>
 
 <style lang="scss" scoped>
-    .single-stream{
-        position: relative;
-        padding-top: 80px;
-    }
-    .single-stream__nav{
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-    }
     .single-stream__wrapper{
         max-height: calc( 100vh - 200px );
         overflow-y: auto;
