@@ -1,17 +1,17 @@
 <template>
-    <c-block class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+    <c-block class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true" v-if="streams">
         <c-heading-bar
             slot="title"
             class="mb-0"
             :name="title"
+            :showActions="showArrowsState(streams, maxPerView)"
             :showArrows="showArrowsState(streams, maxPerView)"
             :showBackground="true"
             @prevClick="slider.slidePrev()"
             @nextClick="slider.slideNext()"
-            v-if="streams"
         />
 
-        <c-swiper :options="sliderOptions" ref="slider" v-if="streams">
+        <c-swiper :options="sliderOptions" ref="slider">
             <c-slide v-for="(stream, index) in streams" :key="index">
                 <c-stream-item
                     :streamName="stream.userName"
@@ -43,10 +43,6 @@
             maxPerView: {
                 type: Number,
                 default: 3
-            },
-            dynamic: {
-                type: Boolean,
-                default: true
             }
         },
         data() {

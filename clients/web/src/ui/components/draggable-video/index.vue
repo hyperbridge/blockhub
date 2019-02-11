@@ -44,8 +44,7 @@
             return {
                 width: 285,
                 height: 160,
-                isPlaying: false,
-                fullscreen: false
+                isPlaying: false
             }
         },
         methods: {
