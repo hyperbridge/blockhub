@@ -170,46 +170,56 @@ export const transferTokenBatch = async ({ batch, walletIndex }) => {
             const toAddress = batch[i].destinationAddress
             const amount = batch[i].amount
 
-            console.log("Attempting transfer. From: " + fromAddress + " To " + toAddress + " Amount: " + amount)
-
-            const token = TokenAPI.api.ethereum.state.contracts.Token.deployed
-            const eternalStorage = TokenAPI.api.ethereum.state.contracts.EternalStorage.deployed
-            const hbxToken = TokenAPI.api.ethereum.state.contracts.TokenDelegate.deployed
-            const tokenLib = TokenAPI.api.ethereum.state.contracts.TokenLib.deployed
-
-            const originalProvider = TokenAPI.api.ethereum.state.provider
-
-            TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(fromWallet.provider)
-            TokenAPI.api.ethereum.state.contracts.Token.contract.provider = fromWallet.provider
-            TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(fromWallet.provider)
-
-            let tokenDelegateHolder = await TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.at(hbxToken.address)
-            let fromWalletHolder = await TokenAPI.api.ethereum.state.contracts.Token.contract.at(token.address)
-            fromWalletHolder = { ...tokenDelegateHolder, ...fromWalletHolder }
-
-            const decimals = web3._extend.utils.toBigNumber(18)
-            const toAmount = web3._extend.utils.toBigNumber(amount).times(web3._extend.utils.toBigNumber(10).pow(decimals))
-
-            await fromWalletHolder.transfer(toAddress, toAmount, {
-                from: fromWallet.address,
-                gasPrice: 8e9
-            }).then(() => {
-                console.log("Transfer complete. Destination: " + toAddress)
-            }).catch((e) => {
-                console.log("Error occurred during transfer: ", e)
-                
-                //i-- // retry
+            await transferTokens({
+                type: 'HBX',
+                fromAddress,
+                toAddress,
+                amount
             })
 
             // Wait 1 minute
             await new Promise(resolve => setTimeout(() => resolve(), 1 * 60 * 1000))
 
-            //await web3.eth.getTransactionCountPromise(originAddress)
+            // console.log("Attempting transfer. From: " + fromAddress + " To " + toAddress + " Amount: " + amount)
 
-            //TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originalProvider)
-            //TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originalProvider)
+            // const token = TokenAPI.api.ethereum.state.contracts.Token.deployed
+            // const eternalStorage = TokenAPI.api.ethereum.state.contracts.EternalStorage.deployed
+            // const hbxToken = TokenAPI.api.ethereum.state.contracts.TokenDelegate.deployed
+            // const tokenLib = TokenAPI.api.ethereum.state.contracts.TokenLib.deployed
 
-            console.log("Transfer started. Destination: " + toAddress)
+            // const originalProvider = TokenAPI.api.ethereum.state.provider
+
+            // TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(fromWallet.provider)
+            // TokenAPI.api.ethereum.state.contracts.Token.contract.provider = fromWallet.provider
+            // TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(fromWallet.provider)
+
+            // let tokenDelegateHolder = await TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.at(hbxToken.address)
+            // let fromWalletHolder = await TokenAPI.api.ethereum.state.contracts.Token.contract.at(token.address)
+            // fromWalletHolder = { ...tokenDelegateHolder, ...fromWalletHolder }
+
+            // const decimals = web3._extend.utils.toBigNumber(18)
+            // const toAmount = web3._extend.utils.toBigNumber(amount).times(web3._extend.utils.toBigNumber(10).pow(decimals))
+
+            // await fromWalletHolder.transfer(toAddress, toAmount, {
+            //     from: fromWallet.address,
+            //     gasPrice: 8e9
+            // }).then(() => {
+            //     console.log("Transfer complete. Destination: " + toAddress)
+            // }).catch((e) => {
+            //     console.log("Error occurred during transfer: ", e)
+                
+            //     //i-- // retry
+            // })
+
+            // // Wait 1 minute
+            // await new Promise(resolve => setTimeout(() => resolve(), 1 * 60 * 1000))
+
+            // //await web3.eth.getTransactionCountPromise(originAddress)
+
+            // //TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originalProvider)
+            // //TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originalProvider)
+
+            // console.log("Transfer started. Destination: " + toAddress)
         }
 
         resolve()
