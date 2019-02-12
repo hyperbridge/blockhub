@@ -11,7 +11,7 @@
         <!-- PAGE CONTENT WRAPPER -->
         <div class="page__content page__content-invert invert"
              id="page-content"
-             :class="{'make-it-blur': bluredBg}"
+             :class="{'make-it-blur': bluredBg, 'with-shortcuts': showShortcuts}"
              :style=" `background: url(${bgImage}) top center no-repeat;background-size: cover;`"
             v-drag-and-drop:options="dragOptions">
             <!-- <div class="loader-block" v-if="!isConnected">
@@ -76,14 +76,14 @@
 
             <div class="content" :class="{'w-100': !showRightPanel && !showLeftPanel}" id="content">
                 <c-breadcrumb :links="breadcrumbLinksData" ref="breadcrumb" v-if="showBreadcrumbs" />
-                <div class="container-fluid">
+                <div class="container-fluid" style="padding-top: 0!important;">
                     <slot />
                 </div>
             </div>
 
             <!-- SIDEPANEL -->
             <transition name="slideRight" style="max-width: 250px" v-if="showRightPanel">
-                <c-sidepanel class="right-sidebar" :navigationKey="navigationKey" />
+                <c-sidepanel class="right-sidebar" style="max-width: 250px" :navigationKey="navigationKey" />
             </transition>
             <!-- //END SIDEPANEL -->
 
@@ -441,6 +441,20 @@
                 </p>
             </c-basic-popup>
 
+
+
+            <!--connection-status popup-->
+            <c-basic-popup
+                width="1000"
+                :activated="$store.state.application.activeModal === 'settings'"
+                @close="$store.state.application.activeModal = null"
+            >
+
+                <template slot="body">
+                    <c-settings />
+                </template>
+            </c-basic-popup>
+
             <c-cookie-policy v-if="!desktopMode" />
 
             <c-clock v-if="desktopMode" />
@@ -459,6 +473,11 @@
         <!--<transition name="slideDown">-->
             <c-profile-chooser v-if="profileChooser && signedIn" />
         <!--</transition>-->
+
+
+        <!--Draggable video block -->
+        <c-draggable-video :active="video.showPopup" :videoUrl="video.url" :setTime="video.currentTime" @close=" video.showPopup = false " />
+        <!--end draggable video block -->
 
         
         <!-- <search /> Discover the next best thing... -->
@@ -552,7 +571,9 @@
             'c-swiper': swiper,
             'c-slide': swiperSlide,
             'c-profile-chooser': (resolve) => require(['@/ui/components/profile-chooser'], resolve),
-            'c-social-connect': (resolve) => require(['@/ui/components/social-connect'], resolve)
+            'c-settings' : (resolve) => require(['@/ui/components/settings'], resolve),
+            'c-social-connect': (resolve) => require(['@/ui/components/social-connect'], resolve),
+            'c-draggable-video' : (resolve) => require(['@/ui/components/draggable-video'], resolve)
         },
         data() {
             const self = this
@@ -722,6 +743,9 @@
             },
             profileChooser() {
                 return this.$store.state.application.profileChooser
+            },
+            video(){
+                return this.$store.state.application.video
             }
         },
         updated() {
@@ -961,6 +985,9 @@
 </style>
 
 <style lang="scss" scoped>
+    .page{
+        min-height: unset; // Test
+    }
     [v-cloak] {
         display: none;
     }
@@ -973,7 +1000,7 @@
         z-index: 2;
     }
     .content > * {
-        padding: 20px 90px !important;
+        padding: 20px 30px !important;
     }
     .version {
         position: fixed;
@@ -1278,8 +1305,11 @@
     .page .page__content {
         padding-top: 100px;
         position: relative;
-        .page-aside {
-            margin-left: 70px;
+        &.with-shortcuts {
+            padding-left: 70px;
+            .page-aside {
+                left: 70px;
+            }
         }
 
         .page-aside,

@@ -117,7 +117,7 @@
                             :streamName="stream.userName"
                             :streamAvatar="stream.userAvatar"
                             :streamImg="stream.previews"
-                            :streamSrc="stream.src"
+                            :streamLink="stream.src"
                             :streamViews="stream.views"
                         />
                     </c-slide>

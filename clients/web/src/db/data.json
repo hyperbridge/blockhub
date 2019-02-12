@@ -718,7 +718,12 @@
                 "description": "",
                 "type": "boolean"
             }
-        ]
+        ],
+        "video": {
+            "src": "",
+            "currentTime": 0,
+            "showPopup": false
+        }
     },
     "funding": {
         "currentEthereumNetwork": "local",

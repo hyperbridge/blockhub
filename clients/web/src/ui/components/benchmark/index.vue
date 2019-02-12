@@ -1,23 +1,28 @@
 <template>
-    <div>
-        <div>
+    <div class="d-flex flex-column pb-4">
+        <div class="h4 font-weight-bold mt-2 mb-0 text-left w-100">
+            Performance Test
+        </div>
+        <div class="w-100">
+            <div class="d-flex align-items-center">
+                <div class="benchmark__status mr-4">STATUS: {{ running ? 'Running' : finished ? 'Finished' : 'Waiting to start' }}</div>
+                <div class="mr-4" v-if="running">FPS: {{ fps }}</div>
+                <div class="mr-4" v-else-if="finished">
+                    Average fps: <strong class="benchmark__fps" :class="results.grade">{{ results.avgFps }}</strong><br>
+                    {{ results.text }}
+                </div>
+                <div v-else>Run this benchmark to check your performance</div>
+            </div>
+        </div>
+        <div class="w-100 mt-3">
             <c-button
                 @click="benchmark"
+                class="mr-4"
                 :class="{ 'avoid-clicks': running }"
-                iconHide
+                icon="play"
             >
-                {{ finished ? 'Try again' : running ? 'Running...' : 'Run Performance Test' }}
+                {{ finished ? 'Try again' : running ? 'Running...' : 'Run Test' }}
             </c-button>
-            <p class="benchmark__status">STATUS: {{ running ? 'Running' : finished ? 'Finished' : 'Waiting to start' }}</p>
-
-            <p v-if="running">FPS: {{ fps }}</p>
-            <p v-else-if="finished">
-                Average fps: <strong class="benchmark__fps" :class="results.grade">{{ results.avgFps }}</strong><br>
-                {{ results.text }}
-            </p>
-            <p v-else>Run this benchmark to check your performance</p>
-        </div>
-        <div>
             <c-button @click="toggleAutoUpdateSettings" status="success" v-if="settings.client.auto_update_settings">
                 SETTINGS UPDATED AUTOMATICALLY
             </c-button>

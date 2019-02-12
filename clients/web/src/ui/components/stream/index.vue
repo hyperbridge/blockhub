@@ -4,9 +4,9 @@
             <div class="stream-item__img">
                 <c-img :src="streamImg" />
                 <div class="stream-item__run-container">
-                    <a :href="streamSrc" class="stream-item__run-btn">
+                    <router-link :to="streamLink + '/' + streamId" class="stream-item__run-btn">
                         <i class="fas fa-play"></i>
-                    </a>
+                    </router-link>
                 </div>
             </div>
             <div class="stream-item__info">
@@ -39,7 +39,8 @@
             streamName: String,
             streamAvatar: String,
             streamImg: String,
-            streamSrc: String,
+            streamLink: String,
+            streamId: String,
             streamViews: {
                 type: [ String, Number ],
                 default: 0

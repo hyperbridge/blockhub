@@ -42,7 +42,7 @@ store.dispatch('funding/init')
 console.log('BlockHub initialized.')
 
 
-addDecorator(withViewport('desktop'))
+// addDecorator(withViewport('desktop'))
 addDecorator(StoryRouter())
 
 
@@ -1931,6 +1931,38 @@ storiesOf('Popups', module)
         },
         template: `<div class="p-4"><c-button @click=" activated = true ">Play Now</c-button> <c-play-popup :activated="activated" @close=" activated = !activated " /></div>`
     }))
+    .add('Add to Collection', () =>({
+        components:{
+            'c-popup-collection-add': (resolve) => require(['@/ui/components/popups/collection-add'], resolve),
+        },
+        data(){
+            return{
+                collections: [
+                    {
+                        name: 'My Top 100',
+                        id: 22
+                    },
+                    {
+                        name: 'Nintendo TOP',
+                        id: 22
+                    },
+                    {
+                        name: 'Game for PS4',
+                        id: 22
+                    },
+                    {
+                        name: 'Something other',
+                        id: 22
+                    }
+                ],
+                image: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
+                name: 'Magic Plate Armor',
+                description: 'Cras in dui eget nulla vulputate finibus sed id ligula.',
+            }
+        },
+        template: `<div class="m-4"><c-popup-collection-add  :collections="collections" :image="image" :name="name" :description="description" /></div>`
+    }))
+
 
 import RangeSlider from '../ui/components/range-slider/pure'
 
@@ -6287,6 +6319,81 @@ storiesOf('Security check', module)
 
 
     }))
+
+
+storiesOf('Browser UI', module)
+    .add('default', () => ({
+        components: {
+            'c-browser-ui' : (resolve) => require(['@/ui/components/browser-ui'], resolve),
+        },
+        template: `<div style="width: 600px" class="m-4"><c-browser-ui /></div>`
+    }))
+
+storiesOf('Settings', module)
+    .add('default', () => ({
+        components:{
+            'c-settings' : (resolve) => require(['@/ui/components/settings'], resolve),
+        },
+        template: `<div class="m-4" style="width: 1000px;">
+                        <c-settings />
+                    </div>`
+    }))
+
+storiesOf('Add friends', module)
+    .add('default', () => ({
+        components: {
+            'c-add-friends': (resolve) => require(['@/ui/components/add-friends'], resolve),
+        },
+        data(){
+            return{
+                userFriends: [
+                    {
+                        avatar: 'https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg',
+                        firstname: 'Brandan',
+                        lastname: 'Hayes'
+                    },
+                    {
+                        avatar: 'http://www.parajurist.md/assets/site/images/parajurist/1.jpg',
+                        firstname: 'Fredrica',
+                        lastname: 'James'
+                    },
+                    {
+                        avatar: 'https://vcabestellen.nl/images/avatar7.png',
+                        firstname: 'Denis',
+                        lastname: 'Stephens'
+                    },
+                    {
+                        avatar: 'https://cdn1.flamp.ru/b00b20ee57b46bdd889f56d8345de1ce.png',
+                        firstname: 'Michelle',
+                        lastname: 'Reed'
+                    },
+                ],
+                permission: false,
+                connected: false,
+            }
+        },
+        template: `<div class="m-4" style="width: 400px;">
+                        <c-button class="mx-3" @click=" permission = !permission ">
+                            Toggle permission
+                        </c-button>
+                        <c-button class="mx-3" @click=" connected = !connected ">
+                            Toggle connected
+                        </c-button>
+                        <hr />
+                        <c-add-friends :permission="permission" :connected="connected" :userFriends="userFriends" />
+                    </div>`
+    }))
+
+
+storiesOf('Draggble video', module)
+    .add('default', () => ({
+        components: {
+            'c-draggable-video' : (resolve) => require(['@/ui/components/draggable-video'], resolve),
+        },
+        template: `<div><c-draggable-video /></div>`
+    }))
+
+
 
 /*
      Dynamic import - test version

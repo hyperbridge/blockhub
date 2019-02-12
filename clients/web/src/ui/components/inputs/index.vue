@@ -43,5 +43,8 @@
         box-shadow: none;
         outline: none;
         width: 100%;
+        &::placeholder{
+            color: rgba(255, 255, 255, .5);
+        }
     }
 </style>

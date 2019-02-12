@@ -93,7 +93,7 @@ export default {
         color: #fff;
         border-bottom: 5px solid #fff;
         padding: 0 5px 0 0;
-        margin: 0;
+        margin: 0 0 -1px 0;
         display: inline-block;
         font-size: 21px;
         line-height: 36px;
@@ -103,12 +103,12 @@ export default {
         &:after{
             content: "";
             position: absolute;
-            bottom: -6px;
-            right: -5px;
+            bottom: -10px;
+            right: -10px;
             height: 5px;
-            border: 3px solid transparent;
-            border-bottom: 3px solid #fff;
-            border-left: 3px solid #fff;
+            border: 5px solid transparent;
+            border-bottom: 5px solid #fff;
+            border-left: 5px solid #fff;
         }
 
         &.heading-bar__name--with-bg{

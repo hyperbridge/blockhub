@@ -40,6 +40,12 @@ export default [
         path: '/streams',
         name: 'Streams',
         component: (resolve) => require(['@/ui/screens/streams'], resolve)
+    },,
+    {
+        path: '/stream/:id',
+        name: 'Stream',
+        props: true,
+        component: (resolve) => require(['@/ui/screens/stream-single'], resolve)
     },
     {
         path: '/stash',
@@ -781,6 +787,11 @@ export default [
         path: '/launcher',
         name: 'Launcher',
         component: (resolve) => require(['@/ui/screens/launcher'], resolve)
+    },,
+    {
+        path: '/quick-import',
+        name: 'Quick import',
+        component: (resolve) => require(['@/ui/screens/quick-import'], resolve)
     },
     {
         path: '/admin',
@@ -1061,6 +1072,16 @@ export default [
         path: '/features',
         name: 'Features',
         component: (resolve) => require(['@/ui/screens/features'], resolve)
+    },
+    {
+        path: '/videos',
+        name: 'Test Screen for video',
+        component: (resolve) => require(['@/ui/screens/video'], resolve)
+    },
+    {
+        path: '/article-page',
+        name: 'Single Article Page',
+        component: (resolve) => require(['@/ui/screens/article-page'], resolve)
     },
     {
         path: '/download/desktop/mac',
