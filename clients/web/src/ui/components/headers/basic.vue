@@ -503,7 +503,7 @@ export default {
         }
 
         &.edit-btn {
-            margin-top: -38px !important;
+            margin-top: -8px !important;
             margin-right: 30px;
 
             img {
@@ -795,6 +795,10 @@ export default {
     .app-header__nav-right {
         float: right;
         margin: 0 90px 0 0;
+        
+        ul {
+            height: 32px;
+        }
     }
 
     .app-header__nav-item {
