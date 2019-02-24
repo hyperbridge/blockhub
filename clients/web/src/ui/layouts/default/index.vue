@@ -157,18 +157,42 @@
                 <div class="h4" slot="header">Oh, another creation?</div>
                 <template slot="body">
                     <div class="row">
-                        <c-button status="none" class="col-md-6 create-shortcut__block" @click="$store.commit('application/activateModal', 'coming-soon')">
-                            Create Idea
-                        </c-button>
-                        <c-button status="none" class="col-md-6 create-shortcut__block" @click="$store.commit('application/activateModal', 'coming-soon')">
-                            Create Crowdfund
-                        </c-button>
-                        <c-button status="none" class="col-md-6 create-shortcut__block" @click="$store.commit('application/activateModal', 'coming-soon')">
-                            Create Game
-                        </c-button>
-                        <c-button status="none" class="col-md-6 create-shortcut__block" @click="$store.commit('application/activateModal', 'coming-soon')">
-                            Create Realm
-                        </c-button>
+                        <div class="col-6">
+                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/idea/create">
+                                <c-icon
+                                    name="plus-circle"
+                                    style="padding: 30px;font-size: 50px;"
+                                />
+                                <div style="display: block">Create Idea</div>
+                            </c-button>
+                        </div>
+                        <div class="col-6">
+                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/project/create">
+                                <c-icon
+                                    name="plus-circle"
+                                    style="padding: 30px;font-size: 50px;"
+                                />
+                                <div style="display: block">Create Crowdfund</div>
+                            </c-button>
+                        </div>
+                        <div class="col-6">
+                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/product/create">
+                                <c-icon
+                                    name="plus-circle"
+                                    style="padding: 30px;font-size: 50px;"
+                                />
+                                <div style="display: block">Create Game</div>
+                            </c-button>
+                        </div>
+                        <div class="col-6">
+                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/realm/create">
+                                <c-icon
+                                    name="plus-circle"
+                                    style="padding: 30px;font-size: 50px;"
+                                />
+                                <div style="display: block">Create Realm</div>
+                            </c-button>
+                        </div>
                     </div>
                 </template>
                 <p slot="footer">
