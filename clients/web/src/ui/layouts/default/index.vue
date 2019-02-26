@@ -102,6 +102,7 @@
             <c-register-popup :activated="$store.state.application.activeModal === 'register'" @close="$store.state.application.activeModal = null" />
             <c-privacy-popup :activated="$store.state.application.activeModal === 'privacy'" @close="$store.state.application.activeModal = null" />
             <c-terms-popup :activated="$store.state.application.activeModal === 'terms'" @close="$store.state.application.activeModal = null" />
+            <c-mission-control-popup :activated="$store.state.application.activeModal === 'mission-control'" @close="$store.state.application.activeModal = null" />
 
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'connect-network'"
@@ -584,6 +585,7 @@
             'c-register-popup': (resolve) => require(['@/ui/components/register-popup/index.vue'], resolve),
             'c-send-funds-popup': (resolve) => require(['@/ui/components/send-funds-popup/index.vue'], resolve),
             'c-purchase-popup': (resolve) => require(['@/ui/components/purchase-popup/index.vue'], resolve),
+            'c-mission-control-popup': (resolve) => require(['@/ui/components/mission-control-popup/index.vue'], resolve),
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
             'c-clock': (resolve) => require(['@/ui/components/clock/index.vue'], resolve),
             'c-status-dot': (resolve) => require(['@/ui/components/status-dot/index.vue'], resolve),
@@ -984,12 +986,20 @@
 
                 this.$store.state.application.tokenCount = null
 
-                window.BlockHub.Bridge.sendCommand('getTokenBalance', {
+                BlockHub.API.service('account/tokenBalance').find({
                     type: 'HBX',
                     address: this.$store.state.application.activeProfile.key
                 }).then((res) => {
                     this.$store.state.application.tokenCount = res.balance
                 })
+
+                
+                // window.BlockHub.Bridge.sendCommand('getTokenBalance', {
+                //     type: 'HBX',
+                //     address: this.$store.state.application.activeProfile.key
+                // }).then((res) => {
+                //     this.$store.state.application.tokenCount = res.balance
+                // })
             }
         }
     }

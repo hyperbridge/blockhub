@@ -58,7 +58,9 @@
                 "g": 255,
                 "b": 255,
                 "image": "/static/img/icons/grid.png",
-                "href": "/",
+                "textColor": "#43434d",
+                "eventKey": "application/activateModal",
+                "eventValue": "mission-control",
                 "text": "Open Grid",
                 "sort": 1,
                 "removable": false
