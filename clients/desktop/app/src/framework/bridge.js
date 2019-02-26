@@ -1434,11 +1434,28 @@ export const handleCreateAccountRequest = async ({ email, password, birthday, fi
     })
 }
 
+export const handleServiceRequest = async ({ service, type, params }) => {
+    return new Promise(async (resolve) => {
+        if (service === 'account/tokenBalance') {
+            if (type === 'find') {
+                return await getTokenBalance(...params)
+            }
+        }
+
+        // Fall back on external web service
+        feathersClient.service(service)[type](...params)
+    })
+}
+
 export const ID = () => {
     // Math.random should be unique because of its seeding algorithm.
     // Convert it to base 36 (numbers + letters), and grab the first 9 characters
     // after the decimal.
     return '_' + Math.random().toString(36).substr(2, 9);
+}
+
+export const isConnected = () => {
+    return !!local.bridge
 }
 
 export const sendCommand = async (key, data = {}, peer = null, responseId = null) => {
@@ -1451,7 +1468,7 @@ export const sendCommand = async (key, data = {}, peer = null, responseId = null
 
     console.log('[DesktopBridge] Sending command', cmd)
 
-    if (!local.bridge) {
+    if (!isConnected()) {
         console.warn('[DesktopBridge] Not connected to bridge. This shouldnt happen.')
     }
 
@@ -1591,6 +1608,9 @@ export const runCommand = async (cmd, meta = {}) => {
                 //Windows.main.window.webContents.setZoomFactor(cmd.data.width / 1980)
                 //Windows.main.window.setSize(cmd.data.width, cmd.data.height)
                 //Windows.main.window.center()
+            } else if (cmd.key === 'service') {
+                resultData = await handleServiceRequest(cmd.data).catch(reject)
+                resultKey = 'serviceResponse'
             } else if (cmd.key === 'createAccountRequest') {
                 resultData = await handleCreateAccountRequest(cmd.data).catch(reject)
                 resultKey = 'createAccountResponse'
