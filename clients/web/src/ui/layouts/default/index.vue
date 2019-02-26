@@ -725,8 +725,8 @@
                         connected: false
                     },
                     {
-                        name: 'BlockHub',
-                        description: 'Lets you connect to your BlockHub account.',
+                        name: 'Steam',
+                        description: 'Lets you connect to your Steam account.',
                         icon: '../../../../static/img/icons/steam.png',
                         connected: false
                     }
@@ -1379,10 +1379,10 @@
 
     .page-shortcuts {
         position: fixed;
-        top: 30px;
+        top: 0px;
         left: 0;
         width: 70px;
-        padding: 10px;
+        padding: 40px 10px 10px;
         z-index: 99;
         background: rgba(0, 0, 0, 0.5);
         bottom: 0;

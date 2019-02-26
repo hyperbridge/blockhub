@@ -9,6 +9,11 @@ export default [
         component: (resolve) => require(['@/ui/screens/home'], resolve)
     },
     {
+        path: '/company',
+        name: 'About Company',
+        component: (resolve) => require(['@/ui/screens/about'], resolve)
+    },
+    {
         path: '/unlock',
         name: 'Unlock',
         component: (resolve) => require(['@/ui/screens/unlock'], resolve),
@@ -409,10 +414,9 @@ export default [
     },
     {
         path: '/developer',
-        name: 'Developer Area',
+        name: 'Developer Program',
         component: (resolve) => require(['@/ui/screens/developer'], resolve),
         meta: {
-            auth: true
         }
     },
     {

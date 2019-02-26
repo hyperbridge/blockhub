@@ -79,7 +79,7 @@
                                 <span class="text">Store</span>
                             </c-button>
                         </li>
-                        <li v-if="signedIn">
+                        <li>
                             <c-dropdown class="ml-4 account-menu" style="z-index: 12" @show="onShowMenu" @hide="onHideMenu">
                                 <template slot="title">
                                     <div class="__title">
@@ -88,23 +88,18 @@
                                 </template>
                                 <ul class="item-dropdown">
                                     <li>
-                                        <c-button status="none">
+                                        <c-button status="none" to="/company">
                                             About
                                         </c-button>
                                     </li>
                                     <li>
-                                        <c-button status="none">
-                                            Ad Choices
+                                        <c-button status="none" to="/news">
+                                            News
                                         </c-button>
                                     </li>
                                     <li>
-                                        <c-button status="none">
-                                            Advertisers
-                                        </c-button>
-                                    </li>
-                                    <li>
-                                        <c-button status="none">
-                                            Blog
+                                        <c-button status="none" to="/updates">
+                                            Updates
                                         </c-button>
                                     </li>
                                 </ul>

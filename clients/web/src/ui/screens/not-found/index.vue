@@ -4,7 +4,7 @@
             <div class="col-12" style="text-align: center">
                 <br /><br /><br /><br /><br /><br /><br /><br /><br />
                 <h1><strong>GG.</strong> You broke it.</h1>
-                <h3>That page wasn't found or there's an error in the spacetime continuum. <br />Either way, you better start sprinting.</h3>
+                <h3>That page wasn't found or there's an error in the spacetime continuum. <br />Either way, you better get home quick.</h3>
                 <br /><br />
                 <c-button class="c-button--xl" status="gradient-info" @click="goHome">Go Home</c-button>
             </div>
@@ -26,6 +26,7 @@ export default {
     },
     methods: {
         goHome() {
+            // Dont use route, reload because there might be an error
             window.location.href = '/'
         }
     }
