@@ -1,4 +1,3 @@
-
 import morgan = require('morgan')
 import bodyParser = require('body-parser')
 import helmet = require('helmet')
@@ -24,6 +23,8 @@ import local = require('@feathersjs/authentication-local')
 import jwt = require('@feathersjs/authentication-jwt')
 import socketio = require('@feathersjs/socketio')
 import session = require('express-session')
+
+require('dotenv').config()
 
 const KnexSessionStore = require('connect-session-knex')(session)
 
