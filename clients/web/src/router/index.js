@@ -32,7 +32,7 @@ const sites = {
     'aelf-elf.review': { routes: require('../sites/cryptoreviews/routes').default }, // other
     'aion-token.review': { routes: require('../sites/cryptoreviews/routes').default }, // other
     'coding.coach': { routes: require('../sites/codingcoach/routes').default }, // other
-    'yorana.global': { routes: require('../sites/yorana/routes').default }, // other
+    'yoranna.com': { routes: require('../sites/yoranna/routes').default }, // other
     'tokentaku.com': { routes: require('../sites/tokentaku/routes').default }, // other
     'brickbrotherhood.com': { routes: require('../sites/brickbrotherhood/routes').default }, // other
     // TODO: if not found, render realm screen and assume its in realm DB with a host
