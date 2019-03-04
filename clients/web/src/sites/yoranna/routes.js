@@ -2,7 +2,7 @@ export default [
     {
         path: '/',
         name: 'Home',
-        component: (resolve) => require(['@/ui/screens/home'], resolve)
+        component: (resolve) => require(['@/sites/yoranna/ui/screens/home'], resolve)
     },
     {
         path: "*",
