@@ -986,9 +986,11 @@
 
                 this.$store.state.application.tokenCount = null
 
-                BlockHub.API.service('account/tokenBalance').find({
-                    type: 'HBX',
-                    address: this.$store.state.application.activeProfile.key
+                BlockHub.API.service('profiles/balance').find({
+                    query: {
+                        type: 'HBX',
+                        address: this.$store.state.application.activeProfile.key
+                    }
                 }).then((res) => {
                     this.$store.state.application.tokenCount = res.balance
                 })

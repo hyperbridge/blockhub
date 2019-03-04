@@ -42,6 +42,22 @@ export default function(app) {
         }
     })
 
+    app.use('/profiles/balance', {
+        async find(params) {
+            console.log('[service=/profiles/balance, action=find]')
+
+            const profiles = await app.service('/profiles').find({
+                query: {
+                    key: params.query.address
+                }
+            })
+
+            return {
+                balance: profiles.length && profiles[0].meta.tokenBalance || 0
+            }
+        }
+    })
+
     app.service('/profiles').hooks(hooks)
     app.service('/profiles/:id/convert').hooks(hooks)
     app.service('/profiles/:id/setAddress').hooks(hooks)

@@ -1320,7 +1320,7 @@ export const recoverPasswordRequest = async ({ secretQuestion1, secretAnswer1, b
     })
 }
 
-export const getTokenBalance = async ({ address, type }) => {
+export const getTokenBalance = async ({ query: { address, type } }) => {
     return new Promise(async (resolve, reject) => {
         if (!local.wallet 
             || !local.wallet.web3
@@ -1436,7 +1436,7 @@ export const handleCreateAccountRequest = async ({ email, password, birthday, fi
 
 export const handleServiceRequest = async ({ service, type, params }) => {
     return new Promise(async (resolve) => {
-        if (service === 'account/tokenBalance') {
+        if (service === 'profiles/balance') {
             if (type === 'find') {
                 return await getTokenBalance(...params)
             }
