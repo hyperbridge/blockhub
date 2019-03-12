@@ -382,7 +382,7 @@
                                     data: fetcher()
                                 };
 
-                                window.desktopBridge.send('command', JSON.stringify(cmd));
+                                window.ipcRenderer.send('command', JSON.stringify(cmd));
                             }
                             catch (e) {
                                 const cmd = {
@@ -394,7 +394,7 @@
                                     }
                                 };
 
-                                window.desktopBridge.send('command', JSON.stringify(cmd));
+                                window.ipcRenderer.send('command', JSON.stringify(cmd));
                             }
                         }
 
