@@ -5,7 +5,7 @@
   "license": "SEE LICENSE IN LICENSE.md",
   "scripts": {
     "dev": "node build/dev-server.js",
-    "start": "node build/dev-server.js",
+    "start": "node build/prod-server.js",
     "mem": "node --max_old_space_size=4092 build/dev-server.js",
     "generate-sitemap": "node src/generate-sitemap.js",
     "build": "node build/build.js",
