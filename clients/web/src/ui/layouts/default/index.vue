@@ -501,7 +501,7 @@
 
 
         <!--Draggable video block -->
-        <c-draggable-video :active="video.showPopup" :videoUrl="video.url" :setTime="video.currentTime" @close=" video.showPopup = false " />
+        <c-draggable-video :active="video.showPopup" :videoUrl="video.url" :setTime="video.currentTime" @close=" video.showPopup = false" v-if="video" />
         <!--end draggable video block -->
 
         
