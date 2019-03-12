@@ -215,7 +215,7 @@
                             Stealth mode engage! <br />
                             &nbsp; &nbsp; &lt;explosion&gt; &nbsp; <br />
                             &nbsp; &nbsp; &nbsp; &nbsp; Dang, didn't work.<br /><br />
-                            Okay, you caught us, we're still working on this feature, but we'll have it out as quick as a mage getting pwned by a warrior in a melee battle!
+                            You caught us, we're still working on this feature, but we'll rush as finish it like a warrior in battle!
                             <br /><br />
                         </p>
                         <div class="col-6" style=""><img src="/static/img/hh/Asset 3.svg" /></div>
