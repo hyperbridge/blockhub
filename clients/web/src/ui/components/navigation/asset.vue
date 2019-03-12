@@ -6,9 +6,9 @@
             :links="links.assetManager"
         />
         <c-sidebar-menu
-            sub_title="Help"
+            subTitle="Help"
             mClass="margin-bottom-20"
-            sub_icon="fas fa-question-circle"
+            subIcon="fas fa-question-circle"
             :links="links.help"
         />
     </div>
@@ -18,7 +18,7 @@
     export default {
         components: {
             'c-sidebar-menu-link': (resolve) => require(['@/ui/components/sidebar-menu/menu_item'], resolve),
-            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve),
+            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve)
         },
         data() {

@@ -1,18 +1,18 @@
 <template>
     <div class="navigation" id="navigation-default" v-if="signedIn">
         <c-sidebar-menu title="ACCOUNT" :links="links.account" />
-        <c-sidebar-menu sub_title="Wallets" :links="links.wallets" v-darklaunch="'WALLETS'" />
-        <c-sidebar-menu sub_title="Profiles" :links="links.profiles" />
-        <c-sidebar-menu sub_title="Developer" :links="links.developer" />
-        <c-sidebar-menu sub_title="Help" :links="links.help" />
-        <c-sidebar-menu sub_title="Legal" :links="links.legal" />
+        <c-sidebar-menu subTitle="Wallets" :links="links.wallets" v-darklaunch="'WALLETS'" />
+        <c-sidebar-menu subTitle="Profiles" :links="links.profiles" />
+        <c-sidebar-menu subTitle="Developer" :links="links.developer" />
+        <c-sidebar-menu subTitle="Help" :links="links.help" />
+        <c-sidebar-menu subTitle="Legal" :links="links.legal" />
     </div>
 </template>
 
 <script>
     export default {
         components: {
-            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve)
+            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu'], resolve)
         },
         computed: {
             signedIn() { return this.$store.state.application.signedIn },

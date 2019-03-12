@@ -1,7 +1,7 @@
 <template>
     <div class="navigation" id="navigation-default">
 
-        <c-sidebar-menu title="STORE" sub_title="General" mClass="margin-bottom-20">
+        <c-sidebar-menu title="STORE" subTitle="General" mClass="margin-bottom-20">
             <c-sidebar-menu-link to="/">Home</c-sidebar-menu-link>
             <c-sidebar-menu-link to="/community" v-darklaunch="'COMMUNITY'">Community</c-sidebar-menu-link>
             <c-sidebar-menu-link to="/ideas">Browse Ideas</c-sidebar-menu-link>
@@ -13,7 +13,7 @@
             <c-sidebar-menu-link to="/marketplace" v-darklaunch="'MARKETPLACE'">Browse Items</c-sidebar-menu-link>
         </c-sidebar-menu>
 
-        <c-sidebar-menu sub_title="Browse By Genre" sub_icon="fas fa-gamepad" mClass="margin-bottom-20">
+        <c-sidebar-menu subTitle="Browse By Genre" subIcon="fas fa-gamepad" mClass="margin-bottom-20">
             <c-sidebar-menu-link
                 v-for="param in ['Action', 'Adventure', 'RPG', 'Co-op', 'Multiplayer', 'Sports']"
                 :key="param"
@@ -124,7 +124,7 @@
     export default {
         components: {
             'c-sidebar-menu-link': (resolve) => require(['@/ui/components/sidebar-menu/menu_item'], resolve),
-            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve),
+            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
             'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
             'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),

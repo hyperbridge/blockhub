@@ -176,8 +176,12 @@
                     <h2>Business Manager</h2>
                     <ul>
                         <li><c-button status="none" to="/business">Business Manager</c-button></li>
-                        <li><c-button status="none" to="/business/product/new">Developer > New Product</c-button></li>
-                        <li><c-button status="none" to="/business/asset/new">Developer > New Digital Asset</c-button></li>
+                        <li><c-button status="none" to="/business/projects">Business > All Crowdfunds</c-button></li>
+                        <li><c-button status="none" to="/business/project/new">Business > New Crowdfund</c-button></li>
+                        <li><c-button status="none" to="/business/products">Business > All Products</c-button></li>
+                        <li><c-button status="none" to="/business/product/new">Business > New Product</c-button></li>
+                        <li><c-button status="none" to="/business/assets">Business > All Assets</c-button></li>
+                        <li><c-button status="none" to="/business/asset/new">Business > New Digital Asset</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">

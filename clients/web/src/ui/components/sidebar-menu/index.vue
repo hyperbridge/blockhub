@@ -4,9 +4,9 @@
             <i :class="icon" v-if="icon"></i>
             {{ title }}
         </h3>
-        <h5 v-if="sub_title" class="sidebar-menu__subtitle">
-            <i :class="sub_icon" v-if="sub_icon"></i>
-            {{ sub_title }}
+        <h5 v-if="subTitle" class="sidebar-menu__subtitle">
+            <i :class="subIcon" v-if="subIcon"></i>
+            {{ subTitle }}
         </h5>
         <ul class="sidebar-menu__list">
             <slot>
@@ -29,9 +29,9 @@
     export default {
         props: {
             icon: String,
-            sub_icon: String,
+            subIcon: String,
             title: String,
-            sub_title: String,
+            subTitle: String,
             mClass: String,
             links: Array
         },

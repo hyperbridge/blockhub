@@ -108,6 +108,14 @@ export default [
         component: (resolve) => require(['@/ui/screens/news'], resolve)
     },
     {
+        path: '/denied',
+        name: 'Denied',
+        component: (resolve) => require(['@/ui/screens/denied'], resolve),
+        meta: {
+            breadcrumb: false
+        }
+    },
+    {
         path: '/token',
         name: 'Token',
         component: (resolve) => require(['@/ui/screens/token'], resolve),
@@ -845,6 +853,21 @@ export default [
                 { to: '/business', title: 'Dashboard' },
                 { to: '/business/projects', title: 'Crowdfunds' },
                 { title: 'Crowdfund' }
+            ]
+        }
+    },
+    {
+        path: '/business/asset/:id',
+        name: 'Asset',
+        props: true,
+        component: (resolve) => require(['@/ui/screens/business-asset'], resolve),
+        meta: {
+            title: 'Asset',
+            permission: 'signedIn',
+            breadcrumb: [
+                { to: '/business', title: 'Dashboard' },
+                { to: '/business/assets', title: 'Assets' },
+                { title: 'Asset' }
             ]
         }
     },

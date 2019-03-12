@@ -2,20 +2,20 @@
     <div class="navigation" id="navigation-default">
         <c-sidebar-menu
             title="HELP"
-            sub_title="General"
+            subTitle="General"
             mClass="margin-bottom-20"
             :links="links.general"
         />
         <c-sidebar-menu
-            sub_title="Sections"
+            subTitle="Sections"
             mClass="margin-bottom-20"
-            sub_icon="fas fa-question-circle"
+            subIcon="fas fa-question-circle"
             :links="links.sections"
         />
         <c-sidebar-menu
-            sub_title="Trending articles"
+            subTitle="Trending articles"
             mClass="margin-bottom-20"
-            sub_icon="fas fa-question-circle"
+            subIcon="fas fa-question-circle"
             :links="links.trendingArticles"
         />
     </div>
@@ -24,7 +24,7 @@
 <script>
     export default {
         components: {
-            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve),
+            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve)
         },
         data() {

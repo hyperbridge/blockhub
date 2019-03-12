@@ -9,14 +9,14 @@
                     </div>
                     <slot name="customClose" v-else></slot>
                     <div class="c-popup__content" v-if="!this.$slots.customContent">
-                        <div class="c-popup__content-header" :class="[ 'c-popup-type-' + type ]" v-if="sub_title">
+                        <div class="c-popup__content-header" :class="[ 'c-popup-type-' + type ]" v-if="subTitle">
                             <div class="popup-icon">
                                 <i class="fas fa-exclamation-triangle" v-if=" type == ['warning', 'danger'] "></i>
                                 <i class="fas fa-check" v-if=" type == 'success' "></i>
                                 <i class="fas fa-info-circle" v-else></i>
                             </div>
-                            <div class="sub_title">
-                                {{ sub_title }}
+                            <div class="subTitle">
+                                {{ subTitle }}
                             </div>
                         </div>
                         <div class="c-popup__content-body">
@@ -46,7 +46,7 @@
             title: {
                 type: String
             },
-            sub_title: {
+            subTitle: {
                 type: String
             },
             activated: {
@@ -165,7 +165,7 @@
             width: 45px;
             font-size: 40px;
         }
-        .sub_title {
+        .subTitle {
             width: calc(100% - 55px);
             font-size: 18px;
             font-weight: bold;

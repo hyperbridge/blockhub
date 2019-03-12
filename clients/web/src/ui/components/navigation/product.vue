@@ -2,8 +2,8 @@
     <div class="navigation" id="navigation-default">
         <c-sidebar-menu
             :title="title"
-            sub_title="Help"
-            sub_icon="fas fa-question-circle"
+            subTitle="Help"
+            subIcon="fas fa-question-circle"
             mClass="margin-bottom-20"
             :links="links.gameOverview"
         />
@@ -56,7 +56,7 @@
             }
         },
         components: {
-            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve),
+            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
             'c-claim': (resolve) => require(['@/ui/components/curator-panel/claim.vue'], resolve),
             'c-curator-panel': (resolve) => require(['@/ui/components/curator-panel'], resolve),

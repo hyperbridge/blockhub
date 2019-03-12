@@ -7,28 +7,28 @@
                 </c-button>
             </div>
             <div class="col-12 col-lg-2">
-                <c-sidebar-menu sub_title="Tools" mClass="margin-bottom-20">
+                <c-sidebar-menu subTitle="Tools" mClass="margin-bottom-20">
                     <c-sidebar-menu-link to="/">Bridge</c-sidebar-menu-link>
                     <c-sidebar-menu-link to="/">Mixer</c-sidebar-menu-link>
                     <c-sidebar-menu-link to="/">Suite</c-sidebar-menu-link>
                 </c-sidebar-menu>
             </div>
             <div class="col-12 col-lg-2">
-                <c-sidebar-menu sub_title="Company" mClass="margin-bottom-20">
+                <c-sidebar-menu subTitle="Company" mClass="margin-bottom-20">
                     <c-sidebar-menu-link to="/">Press</c-sidebar-menu-link>
                     <c-sidebar-menu-link to="/">Jobs</c-sidebar-menu-link>
                     <c-sidebar-menu-link to="/">Pricing</c-sidebar-menu-link>
                 </c-sidebar-menu>
             </div>
             <div class="col-12 col-lg-2">
-                <c-sidebar-menu sub_title="Inspiration & Learning" mClass="margin-bottom-20">
+                <c-sidebar-menu subTitle="Inspiration & Learning" mClass="margin-bottom-20">
                     <c-sidebar-menu-link to="/">Blog</c-sidebar-menu-link>
                     <c-sidebar-menu-link to="/">Gallery</c-sidebar-menu-link>
                     <c-sidebar-menu-link to="/">Tutorials</c-sidebar-menu-link>
                 </c-sidebar-menu>
             </div>
             <div class="col-12 col-lg-2">
-                <c-sidebar-menu sub_title="Community & Support" mClass="margin-bottom-20">
+                <c-sidebar-menu subTitle="Community & Support" mClass="margin-bottom-20">
                     <c-sidebar-menu-link to="/">Artist Community</c-sidebar-menu-link>
                     <c-sidebar-menu-link to="/">Get Help</c-sidebar-menu-link>
                     <c-sidebar-menu-link to="/">FAQ</c-sidebar-menu-link>
@@ -96,7 +96,7 @@
     export default {
         components:{
             'c-sidebar-menu-link': (resolve) => require(['@/ui/components/sidebar-menu/menu_item'], resolve),
-            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve),
+            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu'], resolve),
             'c-social-link': (resolve) => require(['@/ui/components/buttons/social-icon'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide,

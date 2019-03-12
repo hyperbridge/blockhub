@@ -2,17 +2,17 @@
     <div class="navigation" id="navigation-default">
         <c-sidebar-menu
             title="MY WALLETS"
-            sub_title="Wallet"
+            subTitle="Wallet"
             mClass="margin-bottom-20"
             :links="links.myWallets"
         />
         <c-sidebar-menu
-            sub_title="Transactions"
+            subTitle="Transactions"
             mClass="margin-bottom-20"
             :links="links.transactions"
         />
         <c-sidebar-menu
-            sub_title="Help"
+            subTitle="Help"
             :links="links.help"
         />
     </div>
@@ -21,7 +21,7 @@
 <script>
     export default {
         components: {
-            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve),
+            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve)
         },
         data() {
