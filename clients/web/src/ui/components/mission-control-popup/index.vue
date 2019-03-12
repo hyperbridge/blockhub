@@ -5,7 +5,7 @@
             <div class="c-grid-container">
                 <div class="c-grid__wrapper">
                     <div class="c-grid__top position-relative">
-                        <div class="c-grid" :style="gridStyle">
+                        <div class="c-grid">
                             <c-icon v-for="(item, index) in items"
                                 :color="item"
                                 :key="index"
@@ -36,30 +36,13 @@
 </template>
 
 <script>
-    import {windowSize} from '@/mixins'
-    import GridItem from '@/ui/components/shortcut-grid-item'
-
     export default {
-        mixins: [windowSize],
         components: {
-            GridItem,
             'c-icon': (resolve) => require(['@/ui/components/shortcut-icon'], resolve),
             'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic'], resolve),
         },
         props: {
             activated: Boolean,
-            gridWidth: {
-                type: Number,
-                default: -1
-            },
-            cellWidth: {
-                type: Number,
-                default: 80,
-            },
-            cellHeight: {
-                type: Number,
-                default: 80
-            }
         },
         data() {
             return {
@@ -126,28 +109,9 @@
                     }
                 ],
                 fixedItems: [],
-                windowHeight: null,
-                fixedIconHeight: null
             }
-        },
-        watch: {
-        },
-
-        methods: {
-        },
-        created() {
-        },
-        mounted () {
         },
         computed: {
-            gridResponsiveWidth() {
-                return 80;
-            },
-
-
-            rowCount() {
-                return 2
-            }
         },
     }
 </script>
