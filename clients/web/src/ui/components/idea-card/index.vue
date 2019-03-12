@@ -5,8 +5,10 @@
                 <c-img :src="parentImage" />
             </div>
             <div class="text">
-                <h4>{{ parentName }}</h4>
-                <p v-if="parentDeveloper">{{ parentDeveloper }}</p>
+                <c-button status="none" :to="`/idea/${id}`">
+                    <h4>{{ parentName }}</h4>
+                    <p v-if="parentDeveloper">{{ parentDeveloper }}</p>
+                </c-button>
             </div>
         </div>
         <c-button status="none" :to="`/idea/${id}`">

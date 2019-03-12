@@ -125,9 +125,11 @@
                 </p>
             </c-basic-popup>
 
+            <!-- use below $router.currentRoute.fullPath -->
+
             <c-basic-popup
-                :activated="$store.state.application.editorMode === 'editing' && !$store.state.application.settings.client['hideEditorWelcomeModal/' + $router.currentRoute.fullPath]"
-                @close="$store.commit('application/updateClientSettings', { key: 'hideEditorWelcomeModal/' + $router.currentRoute.fullPath, value: true })"
+                :activated="$store.state.application.editorMode === 'editing' && !$store.state.application.settings.client['hideEditorWelcomeModal']"
+                @close="$store.commit('application/updateClientSettings', { key: 'hideEditorWelcomeModal', value: true })"
                 style="text-align: left;"
             >
                 <div class="h4" slot="header">Welcome to the editor</div>

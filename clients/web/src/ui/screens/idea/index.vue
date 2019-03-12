@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="idea" :showRightPanel="false" :breadcrumbLinks="breadcrumbLinks" class="idea-single-page">
+    <c-layout navigationKey="idea" :showRightPanel="false" :breadcrumbLinks="breadcrumbLinks">
         <div class="row" v-if="!idea && id !== 'new'">
             <!-- <div class="col-12">
                 Idea not found
@@ -143,8 +143,8 @@
 
                 <div class="row" id="configure" v-if="section === 'configure'" :editing="editing">
                     <div class="col-12">
-                        <c-block title="Campaign">
-                            test
+                        <c-block title="Settings">
+                            No settings yet
                         </c-block>
                     </div>
                 </div>
@@ -237,10 +237,15 @@
                     return
                 }
 
+                if (!this.$store.state.application.signedIn) {
+                    return this.$store.commit('application/activateModal', 'login')
+                }
+
                 if (this.id === 'new') {
                     this.$store.dispatch('application/setEditorMode', 'publishing')
 
                     this.idea.ownerId = this.$store.state.application.activeProfile.id
+                    this.idea.meta.owner = this.$store.state.application.activeProfile
 
                     this.$store.dispatch('ideas/create', this.idea).then((res) => {
                         this.idea.id = res.id
@@ -254,6 +259,7 @@
                     this.$store.dispatch('application/setEditorMode', 'publishing')
 
                     this.idea.ownerId = this.$store.state.application.activeProfile.id
+                    this.idea.meta.owner = this.$store.state.application.activeProfile
                     
                     this.$store.dispatch('ideas/update', [this.idea.id, this.idea, {
                         query: {
@@ -291,7 +297,7 @@
                 let idea = null
 
                 if (this.id === 'new') {
-                    idea = this.$store.state.marketplace.defaultIdea
+                    idea = { ...this.$store.state.marketplace.defaultIdea }
 
                     this.$store.state.application.developerMode = true
                     this.$store.dispatch('application/setEditorMode', 'editing')

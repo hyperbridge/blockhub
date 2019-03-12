@@ -108,7 +108,7 @@ router.beforeEach((to, from, next) => {
         store.state.application.signedIn = false
 
         next({
-            name: 'Sign In',
+            path: '/account/signin',
             query: { redirect: to.fullPath }
         })
         return

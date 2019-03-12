@@ -102,6 +102,10 @@
                         .then((res) => {
                             this.$store.commit('application/activateModal', null)
                             this.loading = false
+
+                            if (this.$route.query.redirect) {
+                                this.$router.push(this.$route.query.redirect)
+                            }
                         })
                         // Just use the returned error instead of mapping it from the store.
                         .catch(error => {
