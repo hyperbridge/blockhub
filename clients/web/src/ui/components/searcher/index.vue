@@ -16,7 +16,7 @@
             <div class="results__content">
                 <p v-if="isTyping" class="results__text">Searching...</p>
                 <p v-else-if="resultsCount != null && !resultsCount" class="results__text">
-                    Nothing could be found. Want to <c-button status="plain" doubled @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?
+                    Nothing could be found. Want to <c-button status="plain"  @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?
                 </p>
                 <ul v-else class="results__list">
                     <slot name="list">

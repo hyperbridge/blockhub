@@ -835,7 +835,7 @@ export default {
                 animation: badgeGlimmer ease-out infinite;
                 animation-fill-mode: forwards;
                 animation-duration: 1s;
-                animation-delay: .2s
+                animation-delay: .2s;
             }
         }
     }

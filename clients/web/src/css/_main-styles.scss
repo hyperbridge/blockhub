@@ -391,7 +391,7 @@ body::-webkit-scrollbar {
     }
 }
 .disable-animations {
-    *:not(.snotifyToast, .lds-ellipsis div), *::before, *::after {
+    *:not(.snotifyToast, .lds-ellipsis div), *:not(.token__count)::before, *::before, *::after {
         transition: none !important;
         /*transform: none !important;*/
         animation: none !important;

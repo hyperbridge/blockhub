@@ -161,7 +161,7 @@
                 <template slot="body">
                     <div class="row">
                         <div class="col-6">
-                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/idea/create">
+                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/idea/new">
                                 <c-icon
                                     name="plus-circle"
                                     style="padding: 30px;font-size: 50px;"
@@ -170,7 +170,7 @@
                             </c-button>
                         </div>
                         <div class="col-6">
-                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/project/create">
+                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/project/new">
                                 <c-icon
                                     name="plus-circle"
                                     style="padding: 30px;font-size: 50px;"
@@ -179,7 +179,7 @@
                             </c-button>
                         </div>
                         <div class="col-6">
-                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/product/create">
+                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/product/new">
                                 <c-icon
                                     name="plus-circle"
                                     style="padding: 30px;font-size: 50px;"
@@ -188,7 +188,7 @@
                             </c-button>
                         </div>
                         <div class="col-6">
-                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/realm/create">
+                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/realm/new">
                                 <c-icon
                                     name="plus-circle"
                                     style="padding: 30px;font-size: 50px;"

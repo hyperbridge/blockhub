@@ -35,19 +35,19 @@
                                 Trust
                                 <i class="fas fa-hand-holding-heart"></i>
                             </div>
-                            <c-button-arrows/>
+                            <c-button-arrows />
                         </div>
                         <div class="additional-action" slot="additional-action">
                             <div class="text">
                                 Rating
                                 <i class="fas fa-trophy"></i>
                             </div>
-                            <c-button-arrows/>
+                            <c-button-arrows />
                         </div>
                     </c-heading-bar>
                     <div class="badges__list">
                         <div
-                            v-for="index in 4"
+                            v-for="(badge, index) in badges"
                             class="badges__item"
                             :key="index"
                         >
@@ -64,7 +64,10 @@
             <div class="col-12 margin-top-40">
                 <div class="featured-assets">
                     <c-heading-bar name="Featured Assets" :showArrows="false" :showBackground="false" />
+
                     <c-featured-assets />
+
+                    <c-content-navigation />
                 </div>
             </div>
             <div class="col-12 margin-top-40">
@@ -119,7 +122,7 @@
                     </c-heading-bar>
                     <div class="games-list__grid">
                         <div
-                            v-for="index in 6"
+                            v-for="(game, index) in games"
                             :key="index"
                             class="games-list__grid-item"
                         >
@@ -131,7 +134,7 @@
                                 <p>{{ game.developer }}</p>
                                 <div class="time">
                                     <i class="fas fa-clock"></i>
-                                    {{ Math.round(game.minutes_played / 60) }}h played
+                                    {{ Math.round(game.minutesPlayed / 60) }}h played
                                 </div>
                             </div>
                         </div>
@@ -178,7 +181,7 @@
                     </c-heading-bar>
                     <div class="badges__list">
                         <div
-                            v-for="index in 4"
+                            v-for="(badge, index) in badges"
                             class="badges__item"
                             :key="index"
                         >
@@ -194,8 +197,7 @@
             </div>
             <div class="col-12 col-md-4">
                 <div class="basic-info">
-                    <c-heading-bar name="Basic Information" :showArrows="false" :showBackground="false">
-                    </c-heading-bar>
+                    <c-heading-bar name="Basic Information" :showArrows="false" :showBackground="false"></c-heading-bar>
                 </div>
             </div>
         </div>
@@ -216,17 +218,19 @@
         },
         data() {
             return {
-                badge: {
-                    img: 'https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108',
-                    title: 'Protector of the Reign',
-                    product: 'Product name'
-                },
-                game: {
-                    img: 'http://via.placeholder.com/350x150',
-                    title: 'Tibia MMORPG',
-                    developer: 'CipSoft Entertainment GmbH',
-                    minutes_played: 8931
-                }
+                badges: [],
+                games: []
+                // badge: {
+                //     img: 'https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108',
+                //     title: 'Protector of the Reign',
+                //     product: 'Product name'
+                // },
+                // game: {
+                //     img: 'http://via.placeholder.com/350x150',
+                //     title: 'Tibia MMORPG',
+                //     developer: 'CipSoft Entertainment GmbH',
+                //     minutesPlayed: 8931
+                // }
             }
         },
         computed: {
@@ -239,7 +243,7 @@
             }
         },
         created() {
-            $('.rating_readonly').raty({ readOnly: true })
+            //$('.rating_readonly').raty({ readOnly: true })
         }
     }
 </script>

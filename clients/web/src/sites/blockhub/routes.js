@@ -311,7 +311,7 @@ export default [
         path: '/profile/:id',
         name: 'Profile',
         props: true,
-        component: (resolve) => require(['@/ui/screens/profile-overview'], resolve),
+        component: (resolve) => require(['@/ui/screens/profile'], resolve),
         meta: {
             breadcrumb: false
         }
@@ -868,6 +868,21 @@ export default [
                 { to: '/business', title: 'Dashboard' },
                 { to: '/business/assets', title: 'Assets' },
                 { title: 'Asset' }
+            ]
+        }
+    },
+    {
+        path: '/business/idea/:id',
+        name: 'Idea',
+        props: true,
+        component: (resolve) => require(['@/ui/screens/business-idea'], resolve),
+        meta: {
+            title: 'Idea',
+            permission: 'signedIn',
+            breadcrumb: [
+                { to: '/business', title: 'Dashboard' },
+                { to: '/business/ideas', title: 'Ideas' },
+                { title: 'Idea' }
             ]
         }
     },

@@ -28,8 +28,9 @@
                 <c-idea-card
                     class="p-2 col-3"
                     :description="idea.description" 
-                    :parentName="idea.name" 
-                    :parentDeveloper="idea.meta.owner && idea.meta.owner.name" 
+                    :parentName="idea.name"
+                    :parentDeveloperId="idea.meta.owner && idea.meta.owner.id" 
+                    :parentDeveloperName="idea.meta.owner && idea.meta.owner.name" 
                     :id="idea.id"
                     v-for="(idea, index) in ideas" :key="index"
                 />
