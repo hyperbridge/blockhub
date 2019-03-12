@@ -1,5 +1,5 @@
 <template>
-    <div class="navigation" id="navigation-default">
+    <div class="navigation">
 
         <c-sidebar-menu title="STORE" subTitle="General" mClass="margin-bottom-20">
             <c-sidebar-menu-link to="/">Home</c-sidebar-menu-link>

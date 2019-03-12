@@ -1,5 +1,5 @@
 <template>
-    <div class="navigation" id="navigation-default" v-if="signedIn">
+    <div class="navigation" v-if="signedIn">
         <c-sidebar-menu title="ACCOUNT" :links="links.account" />
         <c-sidebar-menu subTitle="Wallets" :links="links.wallets" v-darklaunch="'WALLETS'" />
         <c-sidebar-menu subTitle="Profiles" :links="links.profiles" />

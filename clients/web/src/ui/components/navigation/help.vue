@@ -1,5 +1,5 @@
 <template>
-    <div class="navigation" id="navigation-default">
+    <div class="navigation">
         <c-sidebar-menu
             title="HELP"
             subTitle="General"

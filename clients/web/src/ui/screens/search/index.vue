@@ -1,7 +1,7 @@
 <template>
     <c-layout>
         <template slot="left-sidebar">
-            <div class="navigation container" id="navigation-default">
+            <div class="navigation container">
                 <h3>
                     SEARCH
                 </h3>
