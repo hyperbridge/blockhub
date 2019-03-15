@@ -1,6 +1,11 @@
 {
   "name": "blockhub",
   "private": true,
+  "scripts": {
+    "web-client": "cd clients && cd web && npm start",
+    "web-service": "cd services && cd web && npm start",
+    "desktop-client": "cd clients && cd desktop/app && npm run dev"
+  },
   "devDependencies": {
     "lerna": "^3.8.0"
   }
