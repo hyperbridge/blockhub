@@ -39,7 +39,7 @@
                         </template>
                     </div>
                     <div class="col-12 col-lg-3 pl-0">
-                        <c-chat :messages="messages" />
+                        <c-chat-answer :showAttachment="false" />
                     </div>
                 </div>
             </div>
@@ -51,7 +51,8 @@
     export default {
         components: {
             'c-video': (resolve) => require(['@/ui/components/video'], resolve),
-            'c-chat': (resolve) => require(['@/ui/components/chat/chat'], resolve)
+            'c-chat': (resolve) => require(['@/ui/components/chat/chat'], resolve),
+            'c-chat-answer': (resolve) => require(['@/ui/components/chat-new/answer-field/field'], resolve),
         },
         data(){
             return{

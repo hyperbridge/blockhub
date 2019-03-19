@@ -40,7 +40,7 @@ export default [
         path: '/streams',
         name: 'Streams',
         component: (resolve) => require(['@/ui/screens/streams'], resolve)
-    },,
+    },
     {
         path: '/stream/:id',
         name: 'Stream',

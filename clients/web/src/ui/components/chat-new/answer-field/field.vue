@@ -20,10 +20,10 @@
             >
             </div>
             <div class="c-user-input--buttons">
-                <c-button status="plain" @click="$emit('attachment')">
+                <c-button status="plain" @click="$emit('attachment')" v-if="showAttachment">
                     <i class="fas fa-paperclip"></i>
                 </c-button>
-                <c-button status="plain" @click="$emit('emoji')">
+                <c-button status="plain" @click="$emit('emoji')" v-if="showEmoji">
                     <i class="far fa-smile"></i>
                 </c-button>
                 <c-button status="plain" @click="$emit('send')">
@@ -65,6 +65,14 @@
             typing:{
                 type: Boolean,
                 default: false
+            },
+            showAttachment:{
+                type: Boolean,
+                default: true
+            },
+            showEmoji:{
+                type: Boolean,
+                default: true
             },
             user: Object
         },
