@@ -12,6 +12,7 @@ export default class Community extends Model {
     value!: String
     meta!: Object
     parentId!: Number
+    ownerId!: Number
 
     currentActiveUsers!: Number
     monthlyActiveUsers!: Number
@@ -36,12 +37,23 @@ export default class Community extends Model {
 
     static get relationMappings(): RelationMappings {
         return {
-            parent: {
-                relation: Model.HasOneRelation,
-                modelClass: Node,
+            owner: {
+                relation: Model.HasOneThroughRelation,
+                modelClass: Profile,
+                filter: {
+                    relationKey: 'owner'
+                },
+                beforeInsert(model) {
+                    (model as Node).relationKey = 'owner'
+                },
                 join: {
-                    from: 'communities.parentId',
-                    to: 'nodes.id'
+                    from: 'communities.id',
+                    to: 'profiles.id',
+                    through: {
+                        from: 'nodes.fromCommunityId',
+                        to: 'nodes.toProfileId',
+                        extra: ['relationKey']
+                    }
                 }
             },
             discussions: {

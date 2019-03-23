@@ -1,12 +1,43 @@
 <template>
     <c-layout navigationKey="store">
-        <c-infinite-content :list="list" />
+        <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+            <c-heading-bar
+                slot="title"
+                class="mb-0"
+                name="Browse All Realms"
+            />
+            <div class="row">
+                <c-loading :enabled="!realms.length" size="lg" />
+                <c-metro-grid class="w-100" v-if="realms.length">
+                    <c-metro-item v-for="(realm, index) in realms" :image="realm.meta.images.logo" width="25%" :fullImage=" index == 1 ? true : false">
+                        <c-button class="h4 font-weight-bold" :to="`/realm/${realm.id}`">
+                            {{ realm.name }}
+                        </c-button>
+                        <div>
+                            {{ realm.name }}
+                        </div>
+                    </c-metro-item>
+                </c-metro-grid>
+            </div>
+        </c-block>
     </c-layout>
 </template>
 
 <script>
 export default {
+    components: {
+        'c-metro-grid': (resolve) => require(['@/ui/components/metro/grid'], resolve),
+        'c-metro-item': (resolve) => require(['@/ui/components/metro/metro-item'], resolve),
+    },
+    data() {
+        return {
+            loading: true
+        }
+    },
     computed: {
+        realms() {
+            return this.$store.getters['realms/list']
+        },
         list() {
             const result = []
 
@@ -30,6 +61,19 @@ export default {
 
             return result
         }
+    },
+    created() {
+        this.$store.dispatch('realms/find', {
+            query: {
+                $sort: {
+                    createdAt: -1
+                },
+                $limit: 25
+            }
+        }).then(() => {
+            this.loading = false
+        })
+       //this.$store.commit('application/activateModal', 'coming-soon')
     }
 }
 </script>

@@ -12,7 +12,14 @@ export default function(app) {
             default: 10,
             max: 25,
             ...paginate
-        }
+        },
+        upsertGraphOptions: {
+            relate: true
+        },
+        createUseUpsertGraph: true,
+        allowedInsert: '[owner]',
+        allowedEager: '[owner]',
+        allowedUpsert: '[owner]'
     }
 
     app.use('/communities', createService(options))

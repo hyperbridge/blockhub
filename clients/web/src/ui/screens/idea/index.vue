@@ -247,7 +247,11 @@
                     this.idea.ownerId = this.$store.state.application.activeProfile.id
                     this.idea.meta.owner = this.$store.state.application.activeProfile
 
-                    this.$store.dispatch('ideas/create', this.idea).then((res) => {
+                    this.$store.dispatch('ideas/create', [this.idea, {
+                        query: {
+                            $eager: '[owner, tags, community, rating]'
+                        }
+                    }]).then((res) => {
                         this.idea.id = res.id
                         this.notice = "Congratulations, your idea has been created!"
 
@@ -263,7 +267,7 @@
                     
                     this.$store.dispatch('ideas/update', [this.idea.id, this.idea, {
                         query: {
-                            $eager: '[tags, community]'
+                            $eager: '[tags, community, rating]'
                         }
                     }]).then(() => {
                         this.notice = "Idea has been saved."
@@ -371,7 +375,7 @@
                 this.$store.dispatch('ideas/find', {
                     query: {
                         id: Number(this.id),
-                        $eager: '[tags, community]'
+                        $eager: '[tags, community, rating]'
                     }
                 })
             }

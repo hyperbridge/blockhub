@@ -12,10 +12,13 @@ export default class Idea extends Model {
     meta!: Object
     createdAt!: String
     updatedAt!: String
-    parentId!: Number
 
     ownerId!: Number
     owner!: Profile
+    communityId!: Number
+    community!: Community
+    ratingId!: Number
+    rating!: Rating
 
     type!: String // [battlepass, app, game, etc.]
     tags!: Array<Tag>
@@ -39,20 +42,23 @@ export default class Idea extends Model {
 
     static get relationMappings(): RelationMappings {
         return {
-            parent: {
-                relation: Model.HasOneRelation,
-                modelClass: Node,
-                join: {
-                    from: 'ideas.parentId',
-                    to: 'nodes.id'
-                }
-            },
             owner: {
-                relation: Model.HasOneRelation,
+                relation: Model.HasOneThroughRelation,
                 modelClass: Profile,
+                filter: {
+                    relationKey: 'owner'
+                },
+                beforeInsert(model) {
+                    (model as Node).relationKey = 'owner'
+                },
                 join: {
-                    from: 'ideas.ownerId',
-                    to: 'profiles.id'
+                    from: 'ideas.id',
+                    to: 'profiles.id',
+                    through: {
+                        from: 'nodes.fromIdeaId',
+                        to: 'nodes.toProfileId',
+                        extra: ['relationKey']
+                    }
                 }
             },
             community: {
@@ -105,7 +111,7 @@ export default class Idea extends Model {
                 relation: Model.HasOneRelation,
                 modelClass: Rating,
                 join: {
-                    from: 'ideas.parentId',
+                    from: 'ideas.ratingId',
                     to: 'ratings.id'
                 }
             },
@@ -125,7 +131,6 @@ export default class Idea extends Model {
                     relationKey: 'tags'
                 },
                 beforeInsert(model) {
-                    console.log(model);
                     (model as Node).relationKey = 'tags'
                 }
             },

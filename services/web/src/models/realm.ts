@@ -34,6 +34,25 @@ export default class Realm extends Model {
 
     static get relationMappings(): RelationMappings {
         return {
+            owner: {
+                relation: Model.HasOneThroughRelation,
+                modelClass: Profile,
+                filter: {
+                    relationKey: 'owner'
+                },
+                beforeInsert(model) {
+                    (model as Node).relationKey = 'owner'
+                },
+                join: {
+                    from: 'realms.id',
+                    to: 'profiles.id',
+                    through: {
+                        from: 'nodes.fromRealmId',
+                        to: 'nodes.toProfileId',
+                        extra: ['relationKey']
+                    }
+                }
+            },
             parent: {
                 relation: Model.HasOneRelation,
                 modelClass: Node,

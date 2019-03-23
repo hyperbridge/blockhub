@@ -40,6 +40,8 @@ export default class Profile extends Model {
     collections!: Array<Collection>
     wishlists!: Array<Node>
 
+    static idColumn = 'id'
+
     static get tableName() {
         return 'profiles'
     }

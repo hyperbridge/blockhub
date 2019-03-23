@@ -90,7 +90,31 @@
                     <h2>Realms</h2>
                     <ul>
                         <li><c-button status="none" to="/realms">Realms</c-button></li>
+                        <li><c-button status="none" to="/realm/new">New Realm</c-button></li>
                         <li><c-button status="none" to="/realm/1">Realm #1</c-button></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-4">
+                    <h2>Ideas</h2>
+                    <ul>
+                        <li><c-button status="none" to="/idea/new">New Idea</c-button></li>
+                        <li><c-button status="none" to="/idea/1">Idea #1</c-button></li>
+                        <li><c-button status="none" to="/idea/1/community">Idea #1 > Community</c-button></li>
+                        <li><c-button status="none" to="/idea/1/projects">Idea #1 > Projects</c-button></li>
+                        <li><c-button status="none" to="/idea/1/assets">Idea #1 > Assets</c-button></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-4">
+                    <h2>Projects</h2>
+                    <ul>
+                        <li><c-button status="none" to="/projects">Projects</c-button></li>
+                        <li><c-button status="none" to="/project/new">New Project</c-button></li>
+                        <li><c-button status="none" to="/project/1">Project #1</c-button></li>
+                        <li><c-button status="none" to="/project/1/bounties">Project #1 > Bounties</c-button></li>
+                        <li><c-button status="none" to="/project/1/community">Project #1 > Community</c-button></li>
+                        <li><c-button status="none" to="/project/1/contributers">Project #1 > Contributers</c-button></li>
+                        <li><c-button status="none" to="/project/1/milestones">Project #1 > Milestones</c-button></li>
+                        <li><c-button status="none" to="/project/1/updates">Project #1 > Updates</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">
@@ -102,26 +126,16 @@
                         <li><c-button status="none" to="/product/1/assets">Product #1 > Assets</c-button></li>
                     </ul>
                 </div>
-                <div class="col-12 col-md-4">
-                    <h2>Projects</h2>
-                    <ul>
-                        <li><c-button status="none" to="/projects">Projects</c-button></li>
-                        <li><c-button status="none" to="/project/1">Project #1</c-button></li>
-                        <li><c-button status="none" to="/project/1/bounties">Project #1 > Bounties</c-button></li>
-                        <li><c-button status="none" to="/project/1/community">Project #1 > Community</c-button></li>
-                        <li><c-button status="none" to="/project/1/contributers">Project #1 > Contributers</c-button></li>
-                        <li><c-button status="none" to="/project/1/milestones">Project #1 > Milestones</c-button></li>
-                        <li><c-button status="none" to="/project/1/updates">Project #1 > Updates</c-button></li>
-                    </ul>
-                </div>
             </div>
             <div class="row">
                 <div class="col-12 col-md-4">
                     <h2>Community</h2>
                     <ul>
-                        <li><c-button status="none" to="/community">Community</c-button></li>
-                        <li><c-button status="none" to="/community/forum/1">Community > Forum #1</c-button></li>
-                        <li><c-button status="none" to="/community/discussion/1">Community > Discussion #1</c-button></li>
+                        <li><c-button status="none" to="/communities">Communities</c-button></li>
+                        <li><c-button status="none" to="/community/new">New Community</c-button></li>
+                        <li><c-button status="none" to="/community/1">Community #1</c-button></li>
+                        <li><c-button status="none" to="/communit/forum/1">Community #1 > Forum #1</c-button></li>
+                        <li><c-button status="none" to="/community/discussion/1">Community #1 > Discussion #1</c-button></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">

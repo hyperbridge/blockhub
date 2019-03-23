@@ -161,7 +161,7 @@
                 <template slot="body">
                     <div class="row">
                         <div class="col-6">
-                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/idea/new">
+                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/idea/new">
                                 <c-icon
                                     name="plus-circle"
                                     style="padding: 30px;font-size: 50px;"

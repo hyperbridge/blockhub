@@ -2,127 +2,140 @@
     {
         "id": 1,
         "name": "BlockHub",
-        "theme": {
-            "backgroundColor": "#3F2797",
-            "header": {
-                "backgroundSize": "cover"
-            }
-        },
-        "images": {
-            "background": "/static/img/realms/1/bg.png",
-            "logo": "/static/img/realms/1/logo.png",
-            "news": "/static/img/realms/1/news.png",
-            "follow": "/static/img/realms/1/follow.png"
-        },
-        "nav": {
-            "items": [
-                {
-                    "title": "Home"
-                },
-                {
-                    "title": "News"
-                },
-                {
-                    "title": "Community"
-                },
-                {
-                    "title": "Crowdfunds"
+        "meta": {
+            "revision": 0,
+            "created": 1531430916082,
+            "version": 0,
+            "description": "Realm description",
+            "tags": [
+                "studio"
+            ],
+            "theme": {
+                "backgroundColor": "#3F2797",
+                "header": {
+                    "backgroundSize": "cover"
                 }
-            ]
-        },
-        "widgets": [
-            {
-                "code": "news",
-                "data": [
+            },
+            "images": {
+                "background": "/static/img/realms/1/bg.png",
+                "logo": "/static/img/realms/1/logo.png",
+                "news": "/static/img/realms/1/news.png",
+                "follow": "/static/img/realms/1/follow.png"
+            },
+            "nav": {
+                "items": [
                     {
-                        "title": "something"
+                        "title": "Home"
+                    },
+                    {
+                        "title": "News"
+                    },
+                    {
+                        "title": "Community"
+                    },
+                    {
+                        "title": "Crowdfunds"
                     }
                 ]
-            }
-        ]
+            },
+            "widgets": [
+                {
+                    "code": "news",
+                    "data": [
+                        {
+                            "title": "something"
+                        }
+                    ]
+                }
+            ]
+        }
     },
     {
         "id": 2,
         "name": "Hyperbridge",
-        "theme": {
-            "backgroundColor": "#0086FF",
-            "header": {
-                "backgroundSize": "contain"
-            }
-        },
-        "images": {
-            "background": "/static/img/realms/2/bg.png",
-            "logo": "/static/img/realms/2/logo.png",
-            "news": "/static/img/realms/2/news.png",
-            "follow": "/static/img/realms/2/follow.png"
-        },
-        "nav": {
-            "items": [
-                {
-                    "title": "Home"
-                },
-                {
-                    "title": "News"
-                },
-                {
-                    "title": "Community"
-                },
-                {
-                    "title": "Crowdfunds"
+        "meta": {
+            "theme": {
+                "backgroundColor": "#0086FF",
+                "header": {
+                    "backgroundSize": "contain"
                 }
-            ]
-        },
-        "widgets": [
-            {
-                "code": "news",
-                "data": [
+            },
+            "images": {
+                "background": "/static/img/realms/2/bg.png",
+                "logo": "/static/img/realms/2/logo.png",
+                "news": "/static/img/realms/2/news.png",
+                "follow": "/static/img/realms/2/follow.png"
+            },
+            "nav": {
+                "items": [
                     {
-                        "title": "something"
+                        "title": "Home"
+                    },
+                    {
+                        "title": "News"
+                    },
+                    {
+                        "title": "Community"
+                    },
+                    {
+                        "title": "Crowdfunds"
                     }
                 ]
-            }
-        ]
+            },
+            "widgets": [
+                {
+                    "code": "news",
+                    "data": [
+                        {
+                            "title": "something"
+                        }
+                    ]
+                }
+            ]
+        }
     },
     {
         "id": 3,
         "name": "Blizzard",
-        "theme": {
-            "backgroundColor": "#2878C0",
-            "header": {
-                "backgroundSize": "contain"
-            }
-        },
-        "images": {
-            "background": "/static/img/realms/3/bg.png",
-            "logo": "/static/img/realms/3/logo.png",
-            "news": "/static/img/realms/3/news.png",
-            "follow": "/static/img/realms/3/follow.png"
-        },
-        "nav": {
-            "items": [
-                {
-                    "title": "Home"
-                },
-                {
-                    "title": "News"
-                },
-                {
-                    "title": "Community"
-                },
-                {
-                    "title": "Crowdfunds"
+        "meta": {
+            "theme": {
+                "backgroundColor": "#2878C0",
+                "header": {
+                    "backgroundSize": "contain"
                 }
-            ]
-        },
-        "widgets": [
-            {
-                "code": "news",
-                "data": [
+            },
+            "images": {
+                "background": "/static/img/realms/3/bg.png",
+                "logo": "/static/img/realms/3/logo.png",
+                "news": "/static/img/realms/3/news.png",
+                "follow": "/static/img/realms/3/follow.png"
+            },
+            "nav": {
+                "items": [
                     {
-                        "title": "something"
+                        "title": "Home"
+                    },
+                    {
+                        "title": "News"
+                    },
+                    {
+                        "title": "Community"
+                    },
+                    {
+                        "title": "Crowdfunds"
                     }
                 ]
-            }
-        ]
+            },
+            "widgets": [
+                {
+                    "code": "news",
+                    "data": [
+                        {
+                            "title": "something"
+                        }
+                    ]
+                }
+            ]
+        }
     }
 ]

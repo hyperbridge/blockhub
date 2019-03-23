@@ -320,7 +320,6 @@
                     },
                     $limit: 25
                 }
-            }).then(() => {
             })
 
             this.$store.dispatch('products/find', {
@@ -330,7 +329,6 @@
                     },
                     $limit: 25
                 }
-            }).then(() => {
             })
         },
         created() {

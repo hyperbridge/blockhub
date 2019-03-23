@@ -4,7 +4,8 @@
   "scripts": {
     "web-client": "cd clients && cd web && npm start",
     "web-service": "cd services && cd web && npm start",
-    "desktop-client": "cd clients && cd desktop/app && npm run dev"
+    "desktop-client": "cd clients && cd desktop/app && npm run dev",
+    "styleguide": "cd clients && cd web && npm run styleguide"
   },
   "devDependencies": {
     "lerna": "^3.8.0"

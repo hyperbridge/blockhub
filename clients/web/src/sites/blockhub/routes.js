@@ -615,7 +615,6 @@ export default [
         name: 'Crowdfunds',
         component: (resolve) => require(['@/ui/screens/projects'], resolve),
         meta: {
-            renderCondition: 'authenticated'
         },
         breadcrumb: [
             { title: 'Home' },
@@ -825,6 +824,21 @@ export default [
                 }
             }
         ]
+    },
+    {
+        path: '/business/realm/:id',
+        name: 'Realm',
+        props: true,
+        component: (resolve) => require(['@/ui/screens/business-realm'], resolve),
+        meta: {
+            title: 'Realm',
+            permission: 'signedIn',
+            breadcrumb: [
+                { to: '/business', title: 'Dashboard' },
+                { to: '/business/realms', title: 'Realms' },
+                { title: 'Realm' }
+            ]
+        }
     },
     {
         path: '/business/product/:id',
