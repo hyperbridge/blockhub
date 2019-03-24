@@ -473,6 +473,52 @@
                 :activated="$store.state.application.activeModal === 'add-collection'"
                 :collections="collections" />
 
+
+            <!--create article popup-->
+            <c-basic-popup
+                :activated="$store.state.application.activeModal === 'create-article'"
+                @close="$store.state.application.activeModal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">Create Article</div>
+                <template slot="body">
+                    <div >
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Slug</label>
+                                    <input type="text" class="form-control" placeholder="Slug" v-model="createArticleRequest.key">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input type="text" class="form-control" placeholder="Title" v-model="createArticleRequest.name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Text</label>
+                                    <textarea class="form-control" v-model="createArticleRequest.value"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <p slot="footer">
+                    <c-button status="plain" class="color-red" @click="$store.state.application.activeModal = null">
+                        Cancel
+                    </c-button>
+                    <c-button status="second-info" class="ml-3" @click="createArticle(createArticleRequest)">
+                        OK
+                    </c-button>
+                </p>
+            </c-basic-popup>
+
             <!--new discussion popup-->
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'new-discussion'"
@@ -504,8 +550,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label>Body</label>
-                                    <textarea class="form-control" v-model="newDiscussionRequest.body"></textarea>
+                                    <label>Text</label>
+                                    <textarea class="form-control" v-model="newDiscussionRequest.value"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -683,7 +729,13 @@
                 newDiscussionRequest: {
                     communityId: null,
                     name: '',
-                    body: ''
+                    value: ''
+                },
+                createArticleRequest: {
+                    communityId: 1,
+                    key: '',
+                    name: '',
+                    value: ''
                 },
                 dragOptions: {
                     dropzoneSelector: '.does-not-exist',
@@ -835,7 +887,7 @@
             profileChooser() {
                 return this.$store.state.application.profileChooser
             },
-            video(){
+            video() {
                 return this.$store.state.application.video
             }
         },
@@ -844,6 +896,15 @@
             this.checkScrollButton()
         },
         methods: {
+            createArticle(request) {
+                request.ownerId = this.$store.state.application.activeProfile.id
+
+                this.$store.dispatch('discussions/create', request).then((res) => {
+                    this.$router.push('/help/' + res.id + '/article/' + request.key)
+                })
+
+                this.$store.state.application.activeModal = null
+            },
             submitNewDiscussion(request) {
                 request.ownerId = this.$store.state.application.activeProfile.id
 debugger

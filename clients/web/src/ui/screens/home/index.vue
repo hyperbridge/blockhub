@@ -298,15 +298,9 @@ export default {
         closeModal() {
             this.showWelcomeModal = false
             this.$store.commit('application/updateClientSettings', { key: 'hideWelcomeModal', value: true })
-        },
-        regenerateList() {
-            
         }
     },
     watch: {
-        // '$store.state.collections.data'() {
-        //     regenerateList()
-        // }
     },
     mounted() {
         updateLandingImage.call(this)

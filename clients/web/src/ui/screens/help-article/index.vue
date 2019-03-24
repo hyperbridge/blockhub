@@ -1,14 +1,14 @@
 <template>
     <c-layout navigationKey="help">
-            <div class="container-fluid" v-if="article">
-                <h2>{{ article.title }}</h2>
-                <div class="article-content">
-                    <div v-html="article.text" />
-                </div>
+        <div v-if="article">
+            <h2>{{ article.title }}</h2>
+            <div class="article-content">
+                <div v-html="article.value" />
             </div>
-            <div v-if="!article">
-                Oh no, that post wasn't found! Would you <c-button to="/post/create" status="underline">like to create it</c-button>?
-            </div>
+        </div>
+        <div v-if="!article">
+            Oh no, that article wasn't found! Would you <c-button status="underline" @click="$store.commit('application/activateModal', 'create-article')">like to create it</c-button>?
+        </div>
     </c-layout>
 </template>
 
@@ -19,24 +19,19 @@
             'c-article-item': (resolve) => require(['@/ui/components/help/article-item'], resolve),
             'c-topic-item': (resolve) => require(['@/ui/components/help/topic-item'], resolve),
             'c-list-item': (resolve) => require(['@/ui/components/help/simple-item'], resolve),
-            'c-card': (resolve) => require(['@/ui/components/help/help-card.vue'], resolve),
+            'c-card': (resolve) => require(['@/ui/components/help/help-card'], resolve),
         },
         computed: {
-            article: function () {
-                let result,
-                    data,
-                    key = 'slug';
-
-                data = this.$store.state.marketplace.help.articles
-
-                for (let i = 0; i < data.length; i++) {
-                    if (data[i][key].includes(this.slug)) {
-                        result = data[i]
-                    }
+            article() {
+                return this.$store.getters['discussions/get'](this.id)
+            },
+        },
+        mounted() {
+            this.$store.dispatch('discussions/find', {
+                query: {
+                    id: Number(this.id)
                 }
-
-                return result;
-            }
+            })
         }
     }
 </script>

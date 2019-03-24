@@ -46,12 +46,13 @@ const create = function (options = {}) {
             throw new Error('Discussion must be owned by a profile of authenticated account')
         }
 
-        const { name, value, meta } = context.data
+        const { key, name, value, meta } = context.data
 
         console.log(owner)
 
         // Override the original data (so that people can't submit additional stuff)
         context.data = {
+            key,
             name,
             value,
             meta,

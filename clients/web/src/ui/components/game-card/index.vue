@@ -9,12 +9,12 @@
                 <p v-if="parentDeveloper">{{ parentDeveloper }}</p>
             </div>
         </div>
-        <c-button status="none" :to="`/game/${id}`">
+        <c-button status="none" :to="`/product/${id}`">
             <c-img :src="image" />
             <div class="description">{{ description }}</div>
         </c-button>
         <div class="item-action">
-            <c-button status="info" :to="`/game/${id}`" iconHide>Check it out</c-button>
+            <c-button status="info" :to="`/product/${id}`" iconHide>Check it out</c-button>
         </div>
     </div>
 </template>

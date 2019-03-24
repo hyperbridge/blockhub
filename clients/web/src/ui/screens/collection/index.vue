@@ -114,6 +114,13 @@
             timeAgo() {
                 return moment(this.collection.updates).fromNow()
             }
+        },
+        mounted() {
+            this.$store.dispatch('collections/find', {
+                query: {
+                    id: Number(this.id)
+                }
+            })
         }
     }
 </script>
