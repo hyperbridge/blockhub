@@ -60,7 +60,7 @@
                     <div class="col-12">
                         <c-collection-list
                             title="Get Started"
-                            description="Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain."
+                            :description="$t('new-collection')"
                             :collections="item.data.collectionsList"
                         />
                     </div>

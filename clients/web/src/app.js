@@ -11,6 +11,7 @@ import VueNumerals from 'vue-numerals'
 import VueI18n from 'vue-i18n'
 import VueDraggable from 'vue-draggable'
 import Popover from 'vue-js-popover'
+import vuexI18n from 'vuex-i18n'
 
 import './globals'
 import store, { initializer } from './store'
@@ -41,6 +42,7 @@ Vue.use(Popover)
 
 Vue.use(VueDraggable)
 
+
 Vue.use(Snotify, {
     toast: {
         position: SnotifyPosition.rightTop,
@@ -49,8 +51,10 @@ Vue.use(Snotify, {
 })
 
 Vue.use(VueNumerals)
+
 Vue.component('picker', Picker)
 Vue.component('emoji', Emoji)
+
 Vue.use(VueCurrencyFilter,
     {
         symbol : '$',
@@ -61,6 +65,46 @@ Vue.use(VueCurrencyFilter,
         symbolSpacing: true
     })
 
+const translations = {
+    global: {
+        en: {
+            "content": "This is some {type} content",
+            "test": "wooooo",
+        }
+    },
+    'blockhub.gg': {
+        en: {
+            "new-collection": "Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain.",
+        }
+    },
+    'thor.gg': {
+        en: {
+            "new-collection": "Start building your collection today, share it and save it!",
+        }
+    }
+}
+
+Vue.use(vuexI18n.plugin, store, {
+    moduleName: 'i18n',
+    onTranslationNotFound(locale, key) {
+        return translations.global[key]
+    }
+})
+
+
+const initTranslations = () => {
+    Vue.i18n.add('en', translations.global)
+
+    const host = window.location.hostname.replace('www.', '').replace('.local', '').split(':')[0]
+
+    if (translations[host]) {
+        Vue.i18n.add('en', translations[host].en)
+    }
+
+    Vue.i18n.set('en')
+}
+
+initTranslations()
 
 const data = {
     user: 'something'
