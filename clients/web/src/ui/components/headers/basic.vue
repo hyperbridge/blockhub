@@ -784,11 +784,19 @@ export default {
 
     .app-header__nav-left {
         float: left;
+        max-width: calc(50% - 100px);
+        height: 20px;
         margin: 0 0 0 100px;
+
+        ul {
+            height: 20px;
+        }
     }
 
     .app-header__nav-right {
         float: right;
+        max-width: calc(50% - 90px);
+        height: 32px;
         margin: 0 90px 0 0;
         
         ul {
