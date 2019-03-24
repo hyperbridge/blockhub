@@ -146,7 +146,7 @@ export default {
             result.push({
                 type: 'collectionsList',
                 data: {
-                    collectionsList: Array.isArray(this.$store.state.marketplace.collections) ? this.$store.state.marketplace.collections : Object.values(this.$store.state.marketplace.collections),
+                    collectionsList: this.$store.getters['collections/list'],
                     ref: 'collectionsSlider',
                     swiper: this.$refs.collectionsSlider && this.$refs.collectionsSlider.swiper,
                 }
@@ -298,13 +298,30 @@ export default {
         closeModal() {
             this.showWelcomeModal = false
             this.$store.commit('application/updateClientSettings', { key: 'hideWelcomeModal', value: true })
+        },
+        regenerateList() {
+            
         }
+    },
+    watch: {
+        // '$store.state.collections.data'() {
+        //     regenerateList()
+        // }
     },
     mounted() {
         updateLandingImage.call(this)
     },
     created() {
         updateLandingImage.call(this)
+
+        this.$store.dispatch('collections/find', {
+            query: {
+                $sort: {
+                    createdAt: -1
+                },
+                $limit: 25
+            }
+        })
     },
     beforeDestroy() {
         window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'

@@ -10,11 +10,16 @@
         <div class="collection-list__container">
             <c-swiper :options="options" class="padding-10" v-if="collections.length">
                 <c-slide v-for="(collection, index) in collections" :key="index">
-                    <c-collection-item :item="collection" />
+                    <c-collection-item
+                        :id="collection.id"
+                        :name="collection.name"
+                        :author="collection.meta.author"
+                        :background="collection.meta.background"
+                        :assets="collection.meta.assets" />
                 </c-slide>
             </c-swiper>
             <p v-if="!collections.length" style="padding: 20px; text-align: center;">
-                No collections yet. <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Create one</c-button>?
+                No collections yet. <c-button status="plain" @click="$store.commit('application/activateModal', 'add-collection')">Create one</c-button>?
             </p>
         </div>
     </div>
@@ -22,19 +27,18 @@
 
 <script>
     import 'swiper/dist/css/swiper.css'
-
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
     export default {
         name: 'collection-list',
-        props:['title', 'description', 'collections'],
-        components:{
+        props: ['title', 'description', 'collections'],
+        components: {
             'c-swiper': swiper,
             'c-slide': swiperSlide,
             'c-collection-item': (resolve) => require(['@/ui/components/collection/item'], resolve),
         },
-        data(){
-            return{
+        data() {
+            return {
                 options: {
                     slidesPerView: 3,
                     spaceBetween: 10,

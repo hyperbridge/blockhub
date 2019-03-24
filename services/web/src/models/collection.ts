@@ -8,7 +8,7 @@ export default class Collection extends Model {
     updatedAt!: String
     key!: String
     value!: String
-    meta!: Object // prize
+    meta!: Object
     parentId!: Number
 
     static get tableName() {
@@ -30,6 +30,25 @@ export default class Collection extends Model {
 
     static get relationMappings(): RelationMappings {
         return {
+            owner: {
+                relation: Model.HasOneThroughRelation,
+                modelClass: Profile,
+                filter: {
+                    relationKey: 'owner'
+                },
+                beforeInsert(model) {
+                    (model as Node).relationKey = 'owner'
+                },
+                join: {
+                    from: 'collections.id',
+                    to: 'profiles.id',
+                    through: {
+                        from: 'nodes.fromCollectionId',
+                        to: 'nodes.toProfileId',
+                        extra: ['relationKey']
+                    }
+                }
+            },
             parent: {
                 relation: Model.HasOneRelation,
                 modelClass: Node,

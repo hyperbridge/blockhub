@@ -1,6 +1,6 @@
 <template>
     <c-layout>
-        <div class="container-fluid">
+        <div class="row">
             <h2>Your Chest</h2>
             <p>Here you'll find all your games, items, etc.</p>
             <div class="row margin-top-50">

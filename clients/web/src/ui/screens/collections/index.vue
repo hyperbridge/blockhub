@@ -1,8 +1,6 @@
 <template>
     <c-layout navigationKey="store">
-            <div class="container-fluid">
-                <c-infinite-content :list="list" />
-            </div>
+        <c-infinite-content :list="list" />
     </c-layout>
 </template>
 
@@ -15,7 +13,7 @@ export default {
             result.push({
                 type: 'collectionsList',
                 data: {
-                    collectionsList: this.$store.state.marketplace.collections,
+                    collectionsList: this.$store.getters['collections/list'],
                     ref: 'collectionsSlider',
                     swiper: this.$refs.collectionsSlider && this.$refs.collectionsSlider.swiper,
                     options: {

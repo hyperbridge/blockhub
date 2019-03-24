@@ -1,18 +1,18 @@
 <template>
-    <div class="collection-item" v-bind:style="{ 'background-image': 'url(' + item.background + ')' }">
+    <div class="collection-item" v-bind:style="{ 'background-image': 'url(' + image + ')' }">
         <div class="collection-item__items-container">
             <router-link v-for="(asset, index) in getAsset" :to="{ name: 'Asset', params: { id: asset.id } }" :key="index" v-if="index < 4">
                 <c-img :src="asset.image" />
             </router-link>
         </div>
         <div class="collection-item__info">
-            <router-link :to="{ name: 'Collection', params: { id: item.id } }">
-                <h4>{{ item.name }}</h4>
+            <router-link :to="{ name: 'Collection', params: { id: id } }">
+                <h4>{{ name }}</h4>
             </router-link>
-            <h6>by {{ item.author }}</h6>
+            <h6>by {{ author }}</h6>
             <div class="count">
                 <i class="fas fa-box"></i>
-                {{ item.assets.length }} {{ item.assets.length | count_label }}
+                {{ assets.length }} {{ assets.length | countLabel }}
             </div>
         </div>
     </div>
@@ -20,36 +20,47 @@
 
 <script>
  export default {
-     name: 'c-collection-item',
-     props:['item'],
-     data(){
-         return{
-             label: ''
-         }
-     },
-     computed:{
-         getAsset(){
-             let ids = this.item.assets,
-                 list = this.$store.state.marketplace.assets || {},
-                 arr = [];
-             if (ids)
-                 ids.forEach( (id, i) => {
-                     if (list[id])
-                         arr.push(list[id])
-                 });
-                return arr;
-         }
-     },
-     filters: {
-         count_label(label) {
-             switch(label) {
-                 case label = 1:
-                     return 'Item'
-                 default:
-                     return 'Items'
-             }
-         }
-     }
+    name: 'c-collection-item',
+    props: {
+        id: Number,
+        name: String,
+        author: String,
+        assets: Array,
+        background: String
+    },
+    data() {
+        return {
+            label: ''
+        }
+    },
+    computed: {
+        getAsset() {
+            let ids = this.assets,
+                list = this.$store.state.marketplace.assets || {},
+                arr = []
+                
+            if (ids)
+                ids.forEach((id, i) => {
+                    if (list[id])
+                        arr.push(list[id])
+                })
+            
+            return arr
+        },
+        image() {
+            return this.background || "/static/img/collection-bg-1.jpeg"
+        }
+    },
+    filters: {
+        countLabel(label) {
+            switch (label) {
+                case label = 1:
+                    return 'Item'
+                default:
+                    return 'Items'
+            }
+        }
+    }
  }
 </script>
 

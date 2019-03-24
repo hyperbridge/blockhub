@@ -469,6 +469,10 @@
             </c-basic-popup>
 
 
+            <c-popup-collection-add
+                :activated="$store.state.application.activeModal === 'add-collection'"
+                :collections="collections" />
+
             <!--new discussion popup-->
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'new-discussion'"
@@ -635,6 +639,7 @@
             'c-send-funds-popup': (resolve) => require(['@/ui/components/send-funds-popup/index.vue'], resolve),
             'c-purchase-popup': (resolve) => require(['@/ui/components/purchase-popup/index.vue'], resolve),
             'c-mission-control-popup': (resolve) => require(['@/ui/components/mission-control-popup/index.vue'], resolve),
+            'c-popup-collection-add': (resolve) => require(['@/ui/components/popups/collection-add'], resolve),
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
             'c-clock': (resolve) => require(['@/ui/components/clock/index.vue'], resolve),
             'c-status-dot': (resolve) => require(['@/ui/components/status-dot/index.vue'], resolve),
@@ -792,6 +797,9 @@
         computed: {
             communities() {
                 return this.$store.getters['communities/list']
+            },
+            collections() {
+                return this.$store.getters['collections/list']
             },
             isConnected() {
                 return this.$store.state.application.connection.internet && this.$store.state.application.connection.datasource
@@ -960,8 +968,6 @@ debugger
                 } else {
                     this.mobileMode = false
                 }
-                    // this.showRightPanel = false;
-                    // this.showLeftPanel = false;
             }
         },
         created() {
@@ -976,8 +982,15 @@ debugger
                     },
                     $limit: 25
                 }
-            }).then(() => {
-                this.loading = false
+            })
+
+            this.$store.dispatch('collections/find', {
+                query: {
+                    $sort: {
+                        createdAt: -1
+                    },
+                    $limit: 25
+                }
             })
         },
         mounted() {
