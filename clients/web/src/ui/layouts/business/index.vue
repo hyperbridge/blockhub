@@ -491,12 +491,12 @@
         padding: 15px 0;
     }
     .content__bottom-menu {
-        position: absolute;
+        position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;
         height: 50px;
-        padding: 10px;
+        padding: 6px 10px;
         background: #f7f7f7;
         border-top: 1px solid rgba(0, 0, 0, 0.07);
     }

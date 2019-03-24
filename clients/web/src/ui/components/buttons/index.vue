@@ -123,6 +123,7 @@
 
     .c-button {
         display: inline-flex;
+        vertical-align: top;
         position: relative;
         align-items: center;
         padding: 0px 8px;

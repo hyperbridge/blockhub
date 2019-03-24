@@ -1,11 +1,11 @@
 <template>
     <div class="row">
         <div class="col-12" v-if="!project.milestones">
-            <div class="no-updates">
+            <c-block >
                 <h3>
                     There is no milestones defined.
                 </h3>
-            </div>
+            </c-block>
         </div>
         <div class="col-12" v-if="project.milestones">
             <div class="milestones-header margin-bottom-20">

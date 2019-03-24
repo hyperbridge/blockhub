@@ -144,7 +144,8 @@
             <c-community-spotlight :discussions="project.community.discussions"
                                    :communityPath="`/project/${project.id}`" :editing="editing"
                                    :activeElement="activeElement['milestones']"
-                                   class="margin-bottom-30" />
+                                   class="margin-bottom-30" 
+                                   v-darklaunch="`COMMUNITY`" />
 
             <c-block title="Contribute" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                 <c-contribute-form @click="showContributeModal" />

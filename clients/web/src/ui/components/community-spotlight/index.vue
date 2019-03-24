@@ -24,7 +24,7 @@
                 Go To Community
             </c-button>
         </div>
-        <div class="w-100" v-else>
+        <div class="w-100" v-if="discussions.length === 0">
             <h4>No highlighted community activity yet.</h4>
         </div>
     </c-block>

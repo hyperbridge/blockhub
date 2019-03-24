@@ -126,19 +126,20 @@
                 </div>
             </div>
             
-            <c-button status="second-info" size="lg" class="mb-4" @click="$store.commit('application/activateModal', 'import-product')">Import</c-button>
-
+            <div class="col-md-12 margin-top-20">
+                <c-button status="second-info" size="lg" class="mb-4" @click="$store.commit('application/activateModal', 'import-product')">Import</c-button>
+            </div>
         </div>
 
         <template slot="menu">
             <div class="row">
                 <div class="col-12 text-right" v-if="product.id">
-                    <c-button status="success" @click="save" icon="save">
+                    <c-button status="success" size="lg" @click="save" icon="save">
                         Save
                     </c-button>
                 </div>
                 <div class="col-12 text-right" v-if="!product.id">
-                    <c-button status="success" size="md" @click="create" icon="plus">
+                    <c-button status="success" size="lg" @click="create" icon="plus">
                         Create
                     </c-button>
                 </div>

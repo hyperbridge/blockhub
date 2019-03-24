@@ -55,14 +55,21 @@
             />
             <c-button iconHide @click="showInstaller = !showInstaller" hidden>Open installer</c-button>
 
-            <c-rating-block class="margin-bottom-20" :items="product.meta.rating"
-                            :parentPath="`/product/${product.id}`" v-darklaunch="'RATINGS'" @goto="scrollToReviews" />
+            <c-rating-block class="margin-bottom-20" 
+                            :items="product.meta.rating"
+                            :parentPath="`/product/${product.id}`"
+                            v-darklaunch="'RATINGS'"
+                            @goto="scrollToReviews" />
 
-            <c-frequently-traded-assets class="margin-bottom-20" :items="product.meta.frequentlyTradedAssets"
-                                        :assetsPath="`/product/${product.id}/assets`" v-darklaunch="'ASSETS'" />
+            <c-frequently-traded-assets class="margin-bottom-20" 
+                            :items="product.meta.frequentlyTradedAssets"
+                            :assetsPath="`/product/${product.id}/assets`" 
+                            v-darklaunch="'ASSETS'" />
 
-            <c-community-spotlight class="margin-bottom-20" :discussions="product.meta.community.discussions"
-                                    :communityPath="`/product/${product.id}/community`" v-darklaunch="'COMMUNITY'" />
+            <c-community-spotlight class="margin-bottom-20"
+                            :discussions="product.meta.community.discussions"
+                            :communityPath="`/product/${product.id}/community`"
+                            v-darklaunch="'COMMUNITY'" />
 
             <c-block :title="`Official`"
                      :noGutter="true"

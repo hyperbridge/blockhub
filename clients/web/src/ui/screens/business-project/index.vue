@@ -1,11 +1,11 @@
 <template>
     <c-layout>
-        <div class="row">
+        <div class="row margin-bottom-40" v-if="project">
             <div class="col-md-12" v-if="notice">
                 <p class="alert alert-info">{{ notice }}</p>
                 <br /><br />
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <div class="form-group row">
                     <label class="switch switch-sm col-sm-3">
                         <label>Title</label>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <div class="form-group row">
                     <label class="switch switch-sm col-sm-4">
                         <label>Tags</label>
@@ -71,7 +71,7 @@
                 <span class="form-text"></span>
             </div>
 
-            <div class="col-12">
+            <div class="col-12 margin-top-10">
                 <c-heading-bar-color class="mt-4 mb-4" colorCode="#444" textAlign="center" hidden>Advanced Options</c-heading-bar-color>
 
                 <div @click="toggleAdvanced">
@@ -200,7 +200,7 @@
                     <br />
                     <h3 style="width: 100%">Raw Data Editor</h3>
                     <br /><br />
-                    <textarea :value="JSON.stringify(project)" @input="updateProjectRaw($event.target.value)" rows="10" cols="50"></textarea>
+                    <textarea :value="projectJson" @input="updateProjectRaw($event.target.value)" rows="10" cols="50"></textarea>
                     <br /><br />
                     <span class="form-text"></span>
                     <c-json-editor :objData="project" v-model="project" style="margin: 0 auto"></c-json-editor>
@@ -244,15 +244,15 @@
         <template slot="menu">
             <div class="row">
                 <div class="col-12 text-right" v-if="project.id">
-                    <c-button status="info" :href="`/project/${project.id}`" target="_blank" icon="open">
+                    <c-button status="info" size="lg" :href="`/project/${project.id}`" target="_blank" icon="eye">
                         View Page
                     </c-button>
-                    <c-button status="success" @click="save" icon="save">
+                    <c-button status="success" size="lg" @click="save" icon="save">
                         Save
                     </c-button>
                 </div>
                 <div class="col-12 text-right" v-if="!project.id">
-                    <c-button status="success" size="md" @click="create" icon="plus">
+                    <c-button status="success" size="lg" @click="create" icon="plus">
                         Create
                     </c-button>
                 </div>
@@ -262,6 +262,7 @@
 </template>
 
 <script>
+    import beautify from 'json-beautify'
     import 'vue-multiselect/dist/vue-multiselect.min.css'
 
     export default {
@@ -275,29 +276,26 @@
             'c-multiselect': (resolve) => require(['vue-multiselect'], resolve),
         },
         data() {
-            let project = this.id === 'new' ? this.$store.state.funding.defaultProject : this.$store.getters['projects/get'](this.id)
-
-            if (!project) {
-                project = this.$store.state.funding.defaultProject
-            }
-
             return {
                 loadingState: true,
                 notice: "",
+                project: this.id === 'new' ? this.$store.state.funding.defaultProject : this.$store.getters['projects/get'](this.id),
                 advanced: false,
-                project: project,
                 blockchain: false,
                 tagOptions: []
             }
         },
         computed: {
-            originalProject() {
-                return this.id === 'new' ? this.$store.state.funding.defaultProject : this.$store.getters['projects/get'](this.id)
+            savedProject() {
+                return this.$store.getters['projects/get'](this.id)
+            },
+            projectJson() {
+                return beautify(this.project, null, 2, 100)
             }
         },
         watch: {
-            originalProject() {
-                this.project = { ...this.project, ...this.originalProject }
+            savedProject() {
+                this.project = { ...this.project, ...this.savedProject }
             }
         },
         created() {
@@ -521,6 +519,8 @@
                     }
                 }]).then(() => {
                     this.notice = "Project has been saved."
+
+                    window.scrollTo(0, 0)
                     //this.project.id = projectResult.id
                     //this.successfulCreationMessage = "Congratulations, your project has been created!"
 

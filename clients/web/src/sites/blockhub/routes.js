@@ -901,6 +901,32 @@ export default [
         }
     },
     {
+        path: '/business/products',
+        name: 'Products',
+        component: (resolve) => require(['@/ui/screens/business-products'], resolve),
+        meta: {
+            title: 'Products',
+            permission: 'signedIn',
+            breadcrumb: [
+                { to: '/business', title: 'Dashboard' },
+                { title: 'Products' }
+            ]
+        }
+    },
+    {
+        path: '/business/projects',
+        name: 'Crowdfunds',
+        component: (resolve) => require(['@/ui/screens/business-projects'], resolve),
+        meta: {
+            title: 'Crowdfunds',
+            permission: 'signedIn',
+            breadcrumb: [
+                { to: '/business', title: 'Dashboard' },
+                { title: 'Crowdfunds' }
+            ]
+        }
+    },
+    {
         path: '/business',
         name: 'Business',
         component: (resolve) => require(['@/ui/screens/business'], resolve),
@@ -918,32 +944,6 @@ export default [
                     permission: 'signedIn',
                     breadcrumb: [
                         { to: '/business', title: 'Dashboard' },
-                    ]
-                }
-            },
-            {
-                path: 'products',
-                name: 'All Products',
-                component: (resolve) => require(['@/ui/screens/business-products'], resolve),
-                meta: {
-                    title: 'All Products',
-                    permission: 'signedIn',
-                    breadcrumb: [
-                        { to: '/business', title: 'Dashboard' },
-                        { title: 'All Products' }
-                    ]
-                }
-            },
-            {
-                path: 'projects',
-                name: 'All Crowdfunds',
-                component: (resolve) => require(['@/ui/screens/business-projects'], resolve),
-                meta: {
-                    title: 'All Crowdfunds',
-                    permission: 'signedIn',
-                    breadcrumb: [
-                        { to: '/business', title: 'Dashboard' },
-                        { title: 'All Crowdfunds' }
                     ]
                 }
             },

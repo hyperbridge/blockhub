@@ -18,7 +18,7 @@
                                         <div class="widget__subtitle"></div>
                                     </div>
                                     <div class="widget__box widget__box--left">
-                                        <div class="widget__informer">{{ products.length }} games</div>
+                                        <div class="widget__informer">{{ products.length }} active</div>
                                     </div>
                                 </div>
                             </c-button>
@@ -35,11 +35,11 @@
                                         <div class="widget__icon">
                                             <span class="li-window"></span>
                                         </div>
-                                        <div class="widget__title">Projects</div>
+                                        <div class="widget__title">Crowdfunds</div>
                                         <div class="widget__subtitle"></div>
                                     </div>
                                     <div class="widget__box widget__box--left">
-                                        <div class="widget__informer">{{ projects.length }} crowdfunds</div>
+                                        <div class="widget__informer">{{ projects.length }} active</div>
                                     </div>
                                 </div>
                             </c-button>

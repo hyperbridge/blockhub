@@ -50,10 +50,12 @@ const getRoutes = (uri) => {
 }
 
 const getRouterMode = (host) => {
-    if (host === 'blockhub.gg')
-        return 'history'
+    if (host.indexOf('staging') !== -1
+    || host.indexOf('preview') !== -1
+    || host.indexOf('beta') !== -1)
+        return 'hash'
 
-    return 'hash'
+    return 'history'
 }
 
 const router = new Router({

@@ -10,11 +10,11 @@
             <div class="posts-timeline__end" v-if="end">
                 <h3>End of updates</h3>
             </div>
-            <div class="posts-timeline__end no-updates" v-if="!items">
+            <c-block v-if="!items">
                 <h3>
                     There is no updates yet.
                 </h3>
-            </div>
+            </c-block>
         </transition>
     </div>
 </template>
