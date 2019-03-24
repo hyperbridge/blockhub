@@ -12,9 +12,9 @@
                     <p><strong>BlockHub Community</strong> allows you to engage with other gamers and the game developers for an enhanced community-driven gaming experience. You can ask questions on technical issues, post your feedback on the gameplay, and suggest improvements to the game. </p>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <c-block title="Links & Resources" :noGutter="true" :onlyContentBg="true">
+                    <c-block title="Links &amp; Resources" :noGutter="true" :onlyContentBg="true">
                         <div class="d-flex flex-column">
-                            <c-search class="mb-2"/>
+                            <c-search class="mb-2" />
                             <c-button status="plain" class="my-1">
                                 <i class="fas fa-info-circle"></i> View Discussion Guidelines
                             </c-button>
@@ -24,7 +24,7 @@
                             <c-button status="plain" class="my-1">
                                 <i class="fas fa-question-circle"></i> FAQ
                             </c-button>
-                            <c-button status="success" icon="plus" class="margin-top-20" style="margin-right: auto">
+                            <c-button status="success" icon="plus" class="margin-top-20" style="margin-right: auto" @click="$store.commit('application/activateModal', 'new-discussion')">
                                 New discussion
                             </c-button>
                         </div>
@@ -36,11 +36,11 @@
                     slot="title"
                     class="mb-0"
                     :headingTabs="[
-                { title: 'General', category: 'general_forum' },
-                { title: 'Game Forums', category: 'game_forums_forum' },
-                { title: 'Support', category: 'support_forum' }
-            ]"
-                    @changeTab="category = $event;"
+                        { title: 'General', category: 'general_forum' },
+                        { title: 'Game Forums', category: 'game_forums_forum' },
+                        { title: 'Support', category: 'support_forum' }
+                    ]"
+                    @changeTab="category = $event"
                 >
                 </c-heading-bar>
 
@@ -64,13 +64,13 @@
 </template>
 
 <script>
-    import moment from 'moment';
+    import moment from 'moment'
 
     export default {
         components: {
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
-            'c-search': (resolve) => require(['@/ui/components/searcher'], resolve),
-            'c-community-forum': (resolve) => require(['@/ui/components/community/forum-item.vue'], resolve)
+            'c-community-forum': (resolve) => require(['@/ui/components/community/forum-item.vue'], resolve),
+            'c-search': (resolve) => require(['@/ui/components/searcher'], resolve)
         },
         data() {
             return {

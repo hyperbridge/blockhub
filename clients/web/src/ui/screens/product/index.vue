@@ -448,7 +448,7 @@
             }
         },
         mounted() {
-            if (this.id === 'new') {debugger
+            if (this.id === 'new') {
                 this.$store.dispatch('application/setEditorMode', 'editing')
             }
         },

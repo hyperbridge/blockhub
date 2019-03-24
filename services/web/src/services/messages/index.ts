@@ -6,9 +6,9 @@ export default function(app) {
     const paginate = app.get('paginate')
 
     const options = {
-        name: 'messages',
         model: Model,
         id: 'id',
+        name: 'messages', 
         paginate: {
             default: 10,
             max: 25,

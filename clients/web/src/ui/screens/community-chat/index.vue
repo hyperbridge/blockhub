@@ -5,20 +5,16 @@
 </template>
 
 <script>
-import Chat from '@/ui/components/chat/chat'
-
 export default {
     components: {
-        'c-chat': Chat
+        'c-chat': (resolve) => require(['@/ui/components/chat/chat'], resolve),
     },
     computed: {
         messages() {
             return this.$store.getters['messages/list']
                 //.filter(trx => trx.you.id == this.profileId);
         }
-    },
-    data: () => ({
-    })
+    }
 }
 </script>
 

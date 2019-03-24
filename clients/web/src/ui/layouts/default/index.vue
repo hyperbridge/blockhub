@@ -469,8 +469,55 @@
             </c-basic-popup>
 
 
+            <!--new discussion popup-->
+            <c-basic-popup
+                :activated="$store.state.application.activeModal === 'new-discussion'"
+                @close="$store.state.application.activeModal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">New Discussion</div>
+                <template slot="body">
+                    <div >
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Community</label>
+                                    <select class="form-control actionWithSelected" tabindex="-1" aria-hidden="true" v-model="newDiscussionRequest.communityId">
+                                        <option></option>
+                                        <option :value="community.id" v-for="(community, index) in communities" :key="index">{{ community.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input type="text" class="form-control" placeholder="Title" v-model="newDiscussionRequest.name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Body</label>
+                                    <textarea class="form-control" v-model="newDiscussionRequest.body"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <p slot="footer">
+                    <c-button status="plain" class="color-red" @click="$store.state.application.activeModal = null">
+                        Cancel
+                    </c-button>
+                    <c-button status="second-info" class="ml-3" @click="submitNewDiscussion(newDiscussionRequest)">
+                        OK
+                    </c-button>
+                </p>
+            </c-basic-popup>
 
-            <!--connection-status popup-->
+            <!--settings popup-->
             <c-basic-popup
                 width="1000"
                 :activated="$store.state.application.activeModal === 'settings'"
@@ -628,6 +675,11 @@
                     address: null,
                     processing: false
                 },
+                newDiscussionRequest: {
+                    communityId: null,
+                    name: '',
+                    body: ''
+                },
                 dragOptions: {
                     dropzoneSelector: '.does-not-exist',
                     draggableSelector: 'a',
@@ -738,6 +790,9 @@
             }
         },
         computed: {
+            communities() {
+                return this.$store.getters['communities/list']
+            },
             isConnected() {
                 return this.$store.state.application.connection.internet && this.$store.state.application.connection.datasource
             },
@@ -781,6 +836,18 @@
             this.checkScrollButton()
         },
         methods: {
+            submitNewDiscussion(request) {
+                request.ownerId = this.$store.state.application.activeProfile.id
+debugger
+                this.$store.dispatch('discussions/create', request).then((res) => {
+                    request.id = res.id
+                    //this.notice = "Congratulations, your discussion has been created!"
+
+                    this.$router.push('/community/discussion/' + request.id)
+                })
+
+                this.$store.state.application.activeModal = null
+            },
             deposit() {
 
             },
@@ -815,18 +882,18 @@
                 if (this.reportCoords) {
                     const getPathTo = (element) => {
                         if (element.tagName == 'HTML')
-                            return '/html[1]';
+                            return '/html[1]'
                         if (element===document.body)
-                            return '/html[1]/body[1]';
+                            return '/html[1]/body[1]'
 
-                        var ix= 0;
-                        var siblings= element.parentNode.childNodes;
-                        for (var i= 0; i<siblings.length; i++) {
-                            var sibling= siblings[i];
+                        let ix = 0
+                        let siblings = element.parentNode.childNodes
+                        for (let i= 0; i<siblings.length; i++) {
+                            let sibling= siblings[i]
                             if (sibling===element)
-                                return getPathTo(element.parentNode)+'/'+element.tagName.toLowerCase()+'['+(ix+1)+']';
+                                return getPathTo(element.parentNode)+'/'+element.tagName.toLowerCase()+'['+(ix+1)+']'
                             if (sibling.nodeType===1 && sibling.tagName===element.tagName)
-                                ix++;
+                                ix++
                         }
                     }
 
@@ -902,6 +969,16 @@
             this.handleResize()
             this.checkScrollButton()
             
+            this.$store.dispatch('communities/find', {
+                query: {
+                    $sort: {
+                        createdAt: -1
+                    },
+                    $limit: 25
+                }
+            }).then(() => {
+                this.loading = false
+            })
         },
         mounted() {
             this.updateBreadcrumbLinks()

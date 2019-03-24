@@ -79,6 +79,31 @@
                                 <span class="text">Store</span>
                             </c-button>
                         </li>
+                        <li v-if="signedIn" v-darklaunch="'CHAT'">
+                            <c-button status="none" to="/chat">
+                                <span class="icon fa fa-comments"></span>
+                                <span class="text">Chat</span>
+                            </c-button>
+                        </li>
+                        <li v-if="signedIn" v-darklaunch="'CHEST'">
+                            <c-button status="none" to="/chest">
+                                <span class="icon fa fa-box-open"></span>
+                                <span class="text">Chest</span>
+                            </c-button>
+                        </li>
+                        <li v-if="signedIn">
+                            <c-button status="none" to="/streams" v-darklaunch="'STREAMS'">
+                                <span class="icon fa fa-eye"></span>
+                                <span class="text">Streams</span>
+                                 <!-- podcast  global hand-holding-heart -->
+                            </c-button>
+                        </li>
+                        <li v-if="signedIn" v-darklaunch="'COMMUNITY'">
+                            <c-button status="none" to="/community">
+                                <span class="icon fa fa-globe-americas"></span>
+                                <span class="text">Community</span>
+                            </c-button>
+                        </li>
                         <li>
                             <c-dropdown class="ml-4 account-menu" style="z-index: 12" @show="onShowMenu" @hide="onHideMenu">
                                 <template slot="title">
@@ -104,31 +129,6 @@
                                     </li>
                                 </ul>
                             </c-dropdown>
-                        </li>
-                        <li v-if="signedIn" v-darklaunch="'CHAT'">
-                            <c-button status="none" to="/chat">
-                                <span class="icon fa fa-comments"></span>
-                                <span class="text">Chat</span>
-                            </c-button>
-                        </li>
-                        <li v-if="signedIn" v-darklaunch="'CHEST'">
-                            <c-button status="none" to="/chest">
-                                <span class="icon fa fa-box-open"></span>
-                                <span class="text">Chest</span>
-                            </c-button>
-                        </li>
-                        <li v-if="signedIn">
-                            <c-button status="none" to="/streams" v-darklaunch="'STREAMS'">
-                                <span class="icon fa fa-eye"></span>
-                                <span class="text">Streams</span>
-                                 <!-- podcast  global hand-holding-heart -->
-                            </c-button>
-                        </li>
-                        <li v-if="signedIn" v-darklaunch="'COMMUNITY'">
-                            <c-button status="none" to="/community">
-                                <span class="icon fa fa-globe-americas"></span>
-                                <span class="text">Community</span>
-                            </c-button>
                         </li>
                     </ul>
                 </nav>
