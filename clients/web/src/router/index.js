@@ -49,8 +49,15 @@ const getRoutes = (uri) => {
     return config.routes
 }
 
+const getRouterMode = (host) => {
+    if (host === 'blockhub.gg')
+        return 'history'
+
+    return 'hash'
+}
+
 const router = new Router({
-    mode: 'history',
+    mode: getRouterMode(window.location.hostname),
     fallback: false,
     //mode: 'history',
     scrollBehavior: (to, from, savedPosition) => {
