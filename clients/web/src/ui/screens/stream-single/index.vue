@@ -45,14 +45,13 @@
                             </div>
                         </div>
                         <div class="messages-list">
-                            <div class="messages-list__item" v-for="msg in messages">
-                                <span class="messages-list__item-author" :style="{'color': msg.color ? msg.color : 'blue'}">
-                                    {{ msg.author }}
-                                </span>
-                                <span class="messages-list__item-msg">
-                                    {{ msg.content }}
-                                </span>
-                            </div>
+                            <c-scrollable-content>
+                                <c-message-small v-for="msg in messages"
+                                                 :author="msg.author"
+                                                 :color="msg.color"
+                                                 :content="msg.content"
+                                />
+                            </c-scrollable-content>
                         </div>
                         <c-chat-answer class="mt-auto" :showAttachment="false"/>
                     </div>
@@ -68,6 +67,8 @@
             'c-video': (resolve) => require(['@/ui/components/video'], resolve),
             'c-chat': (resolve) => require(['@/ui/components/chat/chat'], resolve),
             'c-chat-answer': (resolve) => require(['@/ui/components/chat-new/answer-field/field'], resolve),
+            'c-message-small': (resolve) => require(['@/ui/components/chat-new/message-small'], resolve),
+            'c-scrollable-content': (resolve) => require(['@/ui/components/chat-new/content/scrollable-content'], resolve)
         },
         data(){
             return{
@@ -211,18 +212,6 @@
     }
     .messages-list{
         height: 400px;
-        display: flex;
-        flex-direction: column;
-        overflow-y: auto;
         margin-top: 10px;
-    }
-    .messages-list__item{
-        margin-bottom: 5px;
-    }
-    .messages-list__item-author{
-        font-weight: bold;
-    }
-    .messages-list__item-msg{
-        opacity: .9;
     }
 </style>
