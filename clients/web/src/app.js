@@ -69,17 +69,17 @@ const translations = {
     global: {
         en: {
             "content": "This is some {type} content",
-            "test": "wooooo",
+            "Start building your collection today, share it and save it!": "Start building your collection today, share it and save it!",
+            "Get Started": "Get Started"
         }
     },
     'blockhub.gg': {
         en: {
-            "new-collection": "Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain.",
+            "Start building your collection today, share it and save it!": "Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain.",
         }
     },
     'thor.gg': {
         en: {
-            "new-collection": "Start building your collection today, share it and save it!",
         }
     }
 }

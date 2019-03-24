@@ -59,8 +59,8 @@
                 <div class="row margin-bottom-30" v-if="item.type === 'collectionsList'">
                     <div class="col-12">
                         <c-collection-list
-                            title="Get Started"
-                            :description="$t('new-collection')"
+                            :title="`Get Started` | translate"
+                            :description="`Start building your collection today, share it and save it!` | translate"
                             :collections="item.data.collectionsList"
                         />
                     </div>
