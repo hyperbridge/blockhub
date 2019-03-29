@@ -6393,7 +6393,24 @@ storiesOf('Draggble video', module)
         template: `<div><c-draggable-video /></div>`
     }))
 
-
+storiesOf('Video', module)
+    .add('default', () => ({
+        components:{
+            'c-video': (resolve) => require(['@/ui/components/c-video'], resolve)
+        },
+        data(){
+            return{
+                youtube: '-QEdXZWMe-M',
+                twitch: ''
+            }
+        },
+        template: `<div class="p-4">
+            <c-video :youtube="youtube" />
+            <hr />
+            <!--<c-video :twitch="twitch" />-->
+            <hr />
+            </div>`
+    }))
 
 /*
      Dynamic import - test version
