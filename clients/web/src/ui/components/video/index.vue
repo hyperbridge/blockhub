@@ -1,19 +1,21 @@
 <template>
-    <video :controls="controls"
-           :width="width"
-           :height="height"
-           :autoplay="autoplay"
-           :poster="poster"
-           :preload="preload"
-           @play="onPlay"
-           @timeupdate="onTimeUpdate"
-           @ended="onStop"
-            ref="video">
-        <template>
-            <source :src="src" type="video/mp4">
-        </template>
-        Your browser does not support the video tag.
-    </video>
+    <div>
+        <video :controls="controls"
+               :width="width"
+               :height="height"
+               :autoplay="autoplay"
+               :poster="poster"
+               :preload="preload"
+               @play="onPlay"
+               @timeupdate="onTimeUpdate"
+               @ended="onStop"
+               ref="video">
+            <template>
+                <source :src="src" type="video/mp4">
+            </template>
+            Your browser does not support the video tag.
+        </video>
+    </div>
 </template>
 
 <script>

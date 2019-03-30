@@ -6401,14 +6401,31 @@ storiesOf('Video', module)
         data(){
             return{
                 youtube: '-QEdXZWMe-M',
-                twitch: ''
+                twitch: 'inflameswemust',
+                src: 'https://static.videezy.com/system/resources/previews/000/004/944/original/Magical_Tree_4K_Living_Background.mp4',
             }
         },
         template: `<div class="p-4">
-            <c-video :youtube="youtube" />
-            <hr />
-            <!--<c-video :twitch="twitch" />-->
-            <hr />
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="h3 text-white">
+                                Youtube video
+                            </div>
+                            <c-video :youtube="youtube" height="300" />
+                        </div>
+                        <div class="col-4">
+                            <div class="h3 text-white">
+                                Twitch video
+                            </div>
+                            <c-video :twitch="twitch" height="300" />
+                        </div>
+                        <div class="col-4">
+                            <div class="h3 text-white">
+                                Local video
+                            </div>
+                            <c-video :src="src" height="300" />
+                        </div>
+                    </div>
             </div>`
     }))
 
