@@ -1084,6 +1084,11 @@ export default [
         component: (resolve) => require(['@/ui/screens/article-page'], resolve)
     },
     {
+        path: '/payment',
+        name: 'Payment',
+        component: (resolve) => require(['@/ui/screens/payment'], resolve)
+    },
+    {
         path: '/download/desktop/mac',
         beforeEnter(to, from, next) {
             window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/BlockHub-${appVersion}.dmg`
