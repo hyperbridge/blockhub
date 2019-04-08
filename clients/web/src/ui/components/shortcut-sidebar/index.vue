@@ -98,7 +98,7 @@
                         "eventKey": "application/activateModal",
                         "eventValue": "connect-network",
                         "unread": false,
-                        "text": "Go to Steam",
+                        "text": "Go to BlockHub",
                         "sort": 3,
                         "removable": false
                     },

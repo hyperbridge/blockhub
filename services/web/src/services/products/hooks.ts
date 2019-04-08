@@ -1,7 +1,7 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 const populateProfile = require('../../hooks/populate-profile')
 
-const composeItem = function(product) {
+const fillProduct = async function(product) {
     // product.images = {
     //     "mediumTile": "https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"
     // }
@@ -17,16 +17,16 @@ const composeItem = function(product) {
 
 const fillOne = function(options = {}) {
     return async context => {
-        context.data = composeItem(context.data)
+        context.data = fillProduct(context.data)
         return context
     }
 }
 
 const fillAll = function(options = {}) {
     return async context => {
-        context.result.data = context.result.data.map((product) => {
-            return composeItem(product)
-        })
+        context.result.data = await Promise.all(context.result.data.map((product) => {
+            return fillProduct(product)
+        }))
 
         return context
     }

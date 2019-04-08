@@ -8,6 +8,7 @@ import * as DB from '../db'
 import * as ChaosMonkey from '../framework/chaos-monkey'
 import * as ReputationEngine from '../framework/reputation-engine'
 import * as Bridge from '../framework/desktop-bridge'
+import * as API from '../framework/api'
 import * as funding from '../modules/funding'
 import * as news from '../modules/news'
 import * as marketplace from '../modules/marketplace'
@@ -223,6 +224,7 @@ const store = new Vuex.Store({
     }
 })
 
+window.BlockHub.API = API
 window.BlockHub.Bridge = Bridge
 window.BlockHub.ChaosMonkey = ChaosMonkey
 window.BlockHub.ReputationEngine = ReputationEngine

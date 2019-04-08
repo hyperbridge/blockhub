@@ -241,7 +241,7 @@
                                 size="lg"
                                 icon="users"
                                 class="padding-10">
-                                Steam
+                                BlockHub
                             </c-topic-item>
                         </div>
                         <div class="col-12 col-md-4 col-lg-3">
@@ -448,7 +448,7 @@
             }
         },
         mounted() {
-            if (this.id === 'new') {debugger
+            if (this.id === 'new') {
                 this.$store.dispatch('application/setEditorMode', 'editing')
             }
         },
@@ -634,7 +634,7 @@
                                     data: fetcher()
                                 };
 
-                                window.desktopBridge.send('command', JSON.stringify(cmd));
+                                window.ipcRenderer.send('command', JSON.stringify(cmd));
                             }
                             catch (e) {
                                 const cmd = {
@@ -646,7 +646,7 @@
                                     }
                                 };
 
-                                window.desktopBridge.send('command', JSON.stringify(cmd));
+                                window.ipcRenderer.send('command', JSON.stringify(cmd));
                             }
                         }
 

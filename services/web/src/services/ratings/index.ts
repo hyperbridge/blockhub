@@ -12,7 +12,9 @@ export default function(app) {
             default: 10,
             max: 25,
             ...paginate
-        }
+        },
+        allowedEager: '[owner]',
+        allowedUpsert: '[owner]'
     }
 
     app.use('/ratings', createService(options))

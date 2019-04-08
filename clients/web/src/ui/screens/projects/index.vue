@@ -18,8 +18,6 @@
             </div>
         </div>
 
-        <c-infinite-content :list="list" />
-
         <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
             <c-heading-bar
                 slot="title"
@@ -43,6 +41,8 @@
                 />
             </div>
         </c-block>
+        
+        <c-infinite-content :list="list" />
     </c-layout>
 </template>
 

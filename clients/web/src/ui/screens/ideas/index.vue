@@ -6,17 +6,16 @@
                     <i class="fas fa-times"></i>
                 </c-button>
 
-                <h2>Submit Idea</h2>
+                <h2>Create Idea</h2>
                 <div style="text-align: left">
-                    <p>Looking to suggest ideas for your favorite game? We're here to help.</p>
-                    <p>Maybe you just have an awesome idea, or want to inspire your favourite dev studio to continue a series (*cough* half-life).</p>
+                    <p>Got ideas for your favorite game? We're here to help.</p>
+                    <p>Want to inspire your favourite dev studio to continue a series? Let's do it.</p>
+                    <p>Maybe some day we'll get a Half-life 3 or HL2 Episode 3.</p>
                 </div>
                 <br />
                 <p><c-button class="c-button--lg outline-white" to="/idea/new">Get Started</c-button></p>
             </div>
         </div>
-
-        <c-infinite-content :list="list" />
 
         <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
             <c-heading-bar
@@ -29,13 +28,16 @@
                 <c-idea-card
                     class="p-2 col-3"
                     :description="idea.description" 
-                    :parentName="idea.product && idea.product.name" 
-                    :parentDeveloper="idea.product && idea.product.developer" 
+                    :parentName="idea.name"
+                    :parentDeveloperId="idea.meta.owner && idea.meta.owner.id" 
+                    :parentDeveloperName="idea.meta.owner && idea.meta.owner.name" 
                     :id="idea.id"
                     v-for="(idea, index) in ideas" :key="index"
                 />
             </div>
         </c-block>
+
+        <c-infinite-content :list="list" />
     </c-layout>
 </template>
 

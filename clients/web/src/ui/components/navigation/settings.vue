@@ -1,8 +1,8 @@
 <template>
-    <div class="navigation" id="navigation-default">
+    <div class="navigation">
         <c-sidebar-menu
             title="SETTINGS"
-            sub_title="General"
+            subTitle="General"
             :links="links.settings"
         />
     </div>
@@ -11,7 +11,7 @@
 <script>
     export default {
         components: {
-            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve),
+            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve)
         },
         data() {

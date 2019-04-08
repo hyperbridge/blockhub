@@ -114,7 +114,7 @@
                     <div class="text">
                         <h3>Are you a developer?</h3>
                         <p>Start developing for blockchain with BlockHub SDK</p>
-                        <c-button status="info" to="/developer/apply" iconHide>Start Developing</c-button>
+                        <c-button status="info" to="/developer#apply" iconHide>Start Developing</c-button>
                         <c-button status="dark" to="/help/0/article/developer-program" iconHide>Learn More</c-button>
                     </div>
                 </div>
@@ -124,13 +124,13 @@
                         <h5><i class="fas fa-code"></i>Become Developer</h5>
                         <ul>
                             <li>
-                                <c-button status="none" to="/developer/apply">
+                                <c-button status="none" to="/developer#apply">
                                     <i class="fas fa-list-alt"></i>
                                     Apply Now
                                 </c-button>
                             </li>
                             <li>
-                                <c-button status="none" to="/developer/faq">
+                                <c-button status="none" to="/developer#faq">
                                     <i class="fas fa-info-circle"></i>
                                     Developer FAQ
                                 </c-button>
@@ -320,7 +320,6 @@
                     },
                     $limit: 25
                 }
-            }).then(() => {
             })
 
             this.$store.dispatch('products/find', {
@@ -330,7 +329,6 @@
                     },
                     $limit: 25
                 }
-            }).then(() => {
             })
         },
         created() {

@@ -1,6 +1,7 @@
 import { Model, RelationMappings } from 'objection'
 import Node from './node'
 import Vote from './vote'
+import Profile from './profile'
 
 export default class Rating extends Model {
     id!: Number
@@ -10,6 +11,7 @@ export default class Rating extends Model {
     value!: String
     meta!: Object
     parentId!: Number
+    ownerId!: Number
 
     votes!: Array<Vote>
 
@@ -37,12 +39,31 @@ export default class Rating extends Model {
 
     static get relationMappings(): RelationMappings {
         return {
-            parent: {
+            owner: {
                 relation: Model.HasOneRelation,
-                modelClass: Node,
+                modelClass: Profile,
                 join: {
-                    from: 'ratings.parentId',
-                    to: 'nodes.id'
+                    from: 'ratings.ownerId',
+                    to: 'profiles.id'
+                }
+            },
+            parent: {
+                relation: Model.HasOneThroughRelation,
+                modelClass: Profile,
+                filter: {
+                    relationKey: 'parent'
+                },
+                beforeInsert(model) {
+                    (model as Node).relationKey = 'parent'
+                },
+                join: {
+                    from: 'ratings.id',
+                    to: 'profiles.id',
+                    through: {
+                        from: 'nodes.fromIdeaId',
+                        to: 'nodes.toProfileId',
+                        extra: ['relationKey']
+                    }
                 }
             },
             votes: {

@@ -253,6 +253,10 @@
                     height: 4px;
                 }
             }
+            .c-basic-popup__content {
+                background: #fff;
+                color: #000 !important;
+            }
         }
     }
 

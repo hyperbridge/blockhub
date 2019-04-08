@@ -125,6 +125,8 @@
                     <c-json-editor :objData="product" v-model="product" style="margin: 0 auto"></c-json-editor>
                 </div>
             </div>
+            
+            <c-button status="second-info" size="lg" class="mb-4" @click="$store.commit('application/activateModal', 'import-product')">Import</c-button>
 
         </div>
 
@@ -142,6 +144,68 @@
                 </div>
             </div>
         </template>
+
+        <c-basic-popup
+            :activated="$store.state.application.activeModal === 'import-product'"
+            @close="$store.commit('application/activateModal', null)"
+        >
+            <div class="h4" slot="header" style="text-align: left">Import Product</div>
+            <template slot="body">
+                <div v-if="importStep === 1">
+                    <h3 class="margin-auto">Choose source: </h3>
+                    <br />
+                    <div class="row justify-content-center margin-bottom-50">
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <c-topic-item
+                                @click="nextImportStep"
+                                size="lg"
+                                icon="users"
+                                class="padding-10">
+                                BlockHub
+                            </c-topic-item>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <c-topic-item
+                                @click="nextImportStep"
+                                icon="users"
+                                size="lg"
+                                class="padding-10">
+                                GOG
+                            </c-topic-item>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <c-topic-item
+                                @click="nextImportStep"
+                                icon="users"
+                                size="lg"
+                                class="padding-10">
+                                Itch
+                            </c-topic-item>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+                <div v-if="importStep === 2">
+                    <h3 class="margin-auto">Enter URL: </h3>
+                    <br />
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <input class="form-control" ref="importUrl" type="text" value="https://store.steampowered.com/app/441830/I_am_Setsuna/" />
+                            <span class="form-text">Example: https://store.steampowered.com/app/441830/I_am_Setsuna/</span>
+                        </div>
+                    </div>
+
+                    <c-button class="c-button--lg outline-white margin-top-20 margin-auto" @click="startImport">GO</c-button>
+                </div>
+                <br />
+                <div class="padding-40 loading-process" style="position: relative" v-if="importing">
+                    <div class="loading loading--w-spinner"><div><div class="loading-spinner"></div></div></div>
+                </div>
+            </template>
+            <p slot="footer" class="margin-top-20">
+                <c-button status="dark" to="/help">Need help? Check the Help Center</c-button>
+            </p>
+        </c-basic-popup>
     </c-layout>
 </template>
 
@@ -156,6 +220,7 @@
             'c-layout': (resolve) => require(['@/ui/layouts/business'], resolve),
             'c-html-editor': (resolve) => require(['@/ui/components/html-editor'], resolve),
             'c-json-editor': (resolve) => require(['@/ui/components/json-editor'], resolve),
+            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic'], resolve),
             'c-multiselect': (resolve) => require(['vue-multiselect'], resolve),
         },
         data() {
@@ -168,6 +233,7 @@
             return {
                 product: product,
                 loadingState: true,
+                importStep: 1,
                 notice: "",
                 advanced: false,
                 blockchain: false,
@@ -197,6 +263,13 @@
             }
         },
         methods: {
+            nextImportStep() {
+                if (this.importStep === 1) {
+                    this.importStep = 2
+                } else if (this.importStep === 2) {
+
+                }
+            },
             updateProductRaw(product) {
                 this.product = JSON.parse(product)
             },
@@ -245,6 +318,116 @@
                     if (productResult.id) {
                         this.successfulCreationMessage = "Product ownership has been changed"
                     }
+                })
+            },
+            startImport() {
+                if (!this.$store.state.application.desktopMode) {
+                    return window.BlockHub.Notification.error('Desktop app required', 'Error')
+                }
+
+                const onWindowLoad = `function onWindowLoad(requestId) {
+                    const script = document.createElement('script');
+                    script.src = 'https://code.jquery.com/jquery-2.2.4.min.js';
+                    script.type = 'text/javascript';
+
+                    script.onload = script.onreadystatechange = function () {
+                        const monitor = function() {
+                            try {
+                                if (!$('.game_area_description').length) return setTimeout(monitor, 500);
+
+                                const fetchers = {
+                                    steam: () => {
+                                        return {
+                                            title: $('.apphub_AppName').text().trim(),
+                                            description: $('.game_description_snippet').text().trim(),
+                                            about: $('#game_area_description').html().trim(),
+                                            developers: Object.values($('#developers_list a').map((i, el) => $(el).text().trim()).get()),
+                                            publishers: Object.values($('#developers_list').parent().next().find('a').map((i, el) => $(el).text().trim()).get()),
+                                            tags: Object.values($('.popular_tags a').map((i, el) => $(el).text().trim()).get()),
+                                            releaseDate: $('.releaseDate .date').text().trim(),
+                                            images: {
+                                                preview: Object.values($('.highlight_strip_item.highlight_strip_screenshot').map((i, el) => $(el).find('img').attr('src')).get())
+                                            },
+                                            videos: Object.values($('.highlight_strip_item.highlight_strip_movie').map((i, el) => ({
+                                                preview: $(el).find('img').attr('src'),
+                                                url: 'https://cdn.hyperbridge.org/blockhub/videos/products/doom-20087/trailer.mp4'
+                                            })).get())
+                                        }
+                                    },
+                                    gog: () => {
+
+                                    },
+                                    itch: () => {
+
+                                    }
+                                };
+
+                                let fetcherType = null;
+
+                                if (window.location.hostname.indexOf('steampowered.com'))
+                                    fetcherType = 'steam';
+                                else if (window.location.hostname.indexOf('gog.com'))
+                                    fetcherType = 'gog';
+                                else if (window.location.hostname.indexOf('itch.io'))
+                                    fetcherType = 'itch';
+                                else {
+                                    // fail
+                                }
+
+                                const fetcher = fetchers[fetcherType];
+
+                                const cmd = {
+                                    key: 'resolveCallback',
+                                    responseId: requestId,
+                                    data: fetcher()
+                                };
+
+                                window.ipcRenderer.send('command', JSON.stringify(cmd));
+                            }
+                            catch (e) {
+                                const cmd = {
+                                    key: 'resolveCallback',
+                                    responseId: requestId,
+                                    data: {
+                                        error: true,
+                                        message: 'Error in script: ' + e
+                                    }
+                                };
+
+                                window.ipcRenderer.send('command', JSON.stringify(cmd));
+                            }
+                        }
+
+                        monitor();
+                    };
+
+                    document.body.appendChild(script);
+                }`
+
+                Bridge.sendCommand('fetchPageDataRequest', {
+                    url: this.$refs.importUrl.value,
+                    script: onWindowLoad
+                }).then((data) => {
+                    if (data.error) {
+                        return console.log(data.message)
+                    }
+
+                    console.log('Import response: ', data)
+
+                    this.product.name = data.title
+                    this.product.value = data.value
+                    this.product.tags = [{key: 'imported', value: 'Imported'}]
+                    this.product.meta = {}
+                    this.product.meta.type = 'game'
+                    //this.product.meta.rating.overall = 0
+                    this.product.meta.developerTags = data.tags
+                    this.product.meta.releaseDate = data.releaseDate
+                    this.product.meta.description = data.description
+                    this.product.meta.genre = ''
+                    this.product.meta.developer = data.developers && data.developers[0]
+                    this.product.meta.publisher = data.publishers && data.publishers[0]
+
+                    this.$store.commit('application/activateModal', null)
                 })
             },
             updateStatus() {

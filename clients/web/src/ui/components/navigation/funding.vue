@@ -1,8 +1,8 @@
 <template>
-    <div class="navigation" id="navigation-default">
+    <div class="navigation">
         <c-sidebar-menu
             title="CROWD FUNDING"
-            sub_title="General"
+            subTitle="General"
             mClass="margin-bottom-20"
             :links="links.general"
         />
@@ -12,7 +12,7 @@
 <script>
 export default {
     components: {
-        'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve),
+        'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu'], resolve),
         'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve)
     },
     data() {

@@ -327,7 +327,7 @@
         <c-popup :activated="purchasePopup.show"
             width="800"
             :type="purchasePopup.type"
-            :sub_title="purchasePopup.text"
+            :subTitle="purchasePopup.text"
             @close="closePurchasePopup"
             v-if="purchasePopup && purchasePopup.show"
             ref="purchasePopup"

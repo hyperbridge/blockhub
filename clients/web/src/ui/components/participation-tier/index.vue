@@ -18,7 +18,7 @@
             <div class="h5 font-weight-bold mb-1-0 p-0">
                 {{ title }}
             </div>
-            <c-button status="success" icon="hand-holding-usd">
+            <c-button status="success" icon="hand-holding-usd" @click="purchase">
                 Participate
             </c-button>
         </div>
@@ -37,6 +37,11 @@
             inList: {
                 type: Boolean,
                 default: false
+            }
+        },
+        methods: {
+            purchase() {
+                this.$store.commit('application/activateModal', 'project-participate')
             }
         }
     }

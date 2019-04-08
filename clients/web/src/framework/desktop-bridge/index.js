@@ -338,7 +338,7 @@ export const initContextMenuHandler = () => {
 export const init = (store, router) => {
     local.store = store
     local.router = router
-    local.bridge = window.desktopBridge
+    local.bridge = window.ipcRenderer
 
     if (!isConnected()) {
         console.log('[Bridge] Not initializing. Reason: not connected to desktop app')

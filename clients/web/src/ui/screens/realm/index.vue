@@ -3,7 +3,7 @@
         <div class="row realm_page_header margin-bottom-30">
             <div class="col-10 col-md-3">
                 <div class="logo">
-                    <c-img class="img-fluid" :src="realm.images.logo" />
+                    <c-img class="img-fluid" :src="realm.meta.images.logo" />
                 </div>
             </div>
             <div class="col-12 col-md-3 mb-4 mb-md-0">
@@ -58,7 +58,7 @@
                 <div class="banner-line margin-bottom-30">
                     <div class="banner-md">
                         <div class="img">
-                            <c-img :src="realm.images.news" />
+                            <c-img :src="realm.meta.images.news" />
                         </div>
                         <div class="text">
                             <h4>Announcing: The Boomsday Project</h4>
@@ -69,7 +69,7 @@
                     </div>
                     <div class="banner-sm">
                         <div class="img">
-                            <c-img :src="realm.images.follow" />
+                            <c-img :src="realm.meta.images.follow" />
                         </div>
                         <div class="text">
                             <a href="#" class="btn btn-sm btn-info">Follow Us</a>
@@ -117,14 +117,14 @@
 </template>
 
 <script>
-function hexToRgb(hex) {
-    var bigint = parseInt(hex, 16);
-    var r = (bigint >> 16) & 255;
-    var g = (bigint >> 8) & 255;
-    var b = bigint & 255;
+    function hexToRgb(hex) {
+        var bigint = parseInt(hex, 16);
+        var r = (bigint >> 16) & 255;
+        var g = (bigint >> 8) & 255;
+        var b = bigint & 255;
 
-    return r + "," + g + "," + b;
-}
+        return r + "," + g + "," + b;
+    }
 
     export default {
         props: ['id'],
@@ -146,8 +146,26 @@ function hexToRgb(hex) {
         },
         computed: {
             realm() {
-                return this.$store.state.marketplace.realms.find(realm => realm.id == this.id)
-            }
+                let realm = null
+
+                if (!realm) {
+                    realm = this.$store.getters['realms/get'](this.id)
+                }
+
+                if (!realm) {
+                    realm = DB.marketplace.realms.findOne({ 'id': Number(this.id) })
+                }
+
+                if (!realm) {
+                    return
+                }
+
+                // if (realm.images && realm.images.header) {
+                //     window.document.getElementById('header-bg').style['background-image'] = 'url(' + realm.images.header + ')'
+                // }
+
+                return realm
+            },
         },
         mounted() {
             this.$nextTick(() => {
@@ -156,13 +174,12 @@ function hexToRgb(hex) {
                 this.css.headerBgLayer1 = $('.header-bg__layer-1')[0].style
                 this.css.headerBgLayer2 = $('.header-bg__layer-2')[0].style
 
-                document.body.style.backgroundColor = this.realm.theme.backgroundColor
-                $('#header-bg').css({ 'background-image': `url(${this.realm.images.background})`, 'background-size': this.realm.theme.header.backgroundSize || 'cover' })
-                $('.header-bg__layer-1').css({ 'background': `linear-gradient(to bottom, rgba(${hexToRgb(this.realm.theme.backgroundColor.slice(1))}, 0.34) 0%, rgba(${hexToRgb(this.realm.theme.backgroundColor.slice(1))}, 1) 100%)` })
+                document.body.style.backgroundColor = this.realm.meta.theme.backgroundColor
+                $('#header-bg').css({ 'background-image': `url(${this.realm.meta.images.background})`, 'background-size': this.realm.meta.theme.header.backgroundSize || 'cover' })
+                $('.header-bg__layer-1').css({ 'background': `linear-gradient(to bottom, rgba(${hexToRgb(this.realm.meta.theme.backgroundColor.slice(1))}, 0.34) 0%, rgba(${hexToRgb(this.realm.meta.theme.backgroundColor.slice(1))}, 1) 100%)` })
                 $('.header-bg__layer-2').css({ 'position': 'fixed', 'background': 'rgba(255, 255, 255, 0.2)', 'height': '48px' })
                 $('.app-header__shadow').hide()
                 $('#page-aside').hide()
-
             })
         },
         beforeDestroy() {
@@ -175,7 +192,7 @@ function hexToRgb(hex) {
             $('#page-aside').show()
         },
         created() {
-            this.$store.commit('application/activateModal', 'coming-soon')
+            //this.$store.commit('application/activateModal', 'coming-soon')
         }
     }
 </script>

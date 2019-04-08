@@ -79,37 +79,6 @@
                                 <span class="text">Store</span>
                             </c-button>
                         </li>
-                        <li v-if="signedIn">
-                            <c-dropdown class="ml-4 account-menu" style="z-index: 12" @show="onShowMenu" @hide="onHideMenu">
-                                <template slot="title">
-                                    <div class="__title">
-                                        <i class="fas fa-ellipsis-h"></i>
-                                    </div>
-                                </template>
-                                <ul class="item-dropdown">
-                                    <li>
-                                        <c-button status="none">
-                                            About
-                                        </c-button>
-                                    </li>
-                                    <li>
-                                        <c-button status="none">
-                                            Ad Choices
-                                        </c-button>
-                                    </li>
-                                    <li>
-                                        <c-button status="none">
-                                            Advertisers
-                                        </c-button>
-                                    </li>
-                                    <li>
-                                        <c-button status="none">
-                                            Blog
-                                        </c-button>
-                                    </li>
-                                </ul>
-                            </c-dropdown>
-                        </li>
                         <li v-if="signedIn" v-darklaunch="'CHAT'">
                             <c-button status="none" to="/chat">
                                 <span class="icon fa fa-comments"></span>
@@ -134,6 +103,32 @@
                                 <span class="icon fa fa-globe-americas"></span>
                                 <span class="text">Community</span>
                             </c-button>
+                        </li>
+                        <li>
+                            <c-dropdown class="ml-4 account-menu" style="z-index: 12" @show="onShowMenu" @hide="onHideMenu">
+                                <template slot="title">
+                                    <div class="__title">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                    </div>
+                                </template>
+                                <ul class="item-dropdown">
+                                    <li>
+                                        <c-button status="none" to="/company">
+                                            About
+                                        </c-button>
+                                    </li>
+                                    <li>
+                                        <c-button status="none" to="/news">
+                                            News
+                                        </c-button>
+                                    </li>
+                                    <li>
+                                        <c-button status="none" to="/updates">
+                                            Updates
+                                        </c-button>
+                                    </li>
+                                </ul>
+                            </c-dropdown>
                         </li>
                     </ul>
                 </nav>
@@ -503,7 +498,7 @@ export default {
         }
 
         &.edit-btn {
-            margin-top: -38px !important;
+            margin-top: -8px !important;
             margin-right: 30px;
 
             img {
@@ -795,6 +790,10 @@ export default {
     .app-header__nav-right {
         float: right;
         margin: 0 90px 0 0;
+        
+        ul {
+            height: 32px;
+        }
     }
 
     .app-header__nav-item {
@@ -836,7 +835,7 @@ export default {
                 animation: badgeGlimmer ease-out infinite;
                 animation-fill-mode: forwards;
                 animation-duration: 1s;
-                animation-delay: .2s
+                animation-delay: .2s;
             }
         }
     }

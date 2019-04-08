@@ -92,10 +92,15 @@
                                 // if (this.type === 'authenticated') {
                                 //     this.satisfied = true
                                 // }
+                                
+                                // redirect to access denied screen
+                                this.$router.push('/denied')
+                                
                                 return
                             }
                             
                             console.error(error)
+
 
                             return error
                         })

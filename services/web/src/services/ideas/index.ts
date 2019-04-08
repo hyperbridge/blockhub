@@ -13,8 +13,14 @@ export default function(app) {
             max: 25,
             ...paginate
         },
-        allowedEager: '[tags, community]',
-        allowedUpsert: '[tags, community]'
+        upsertGraphOptions: {
+            relate: true
+            // insertMissing: true
+        },
+        createUseUpsertGraph: true,
+        allowedInsert: '[owner.^, tags.^, community.[owner], rating.^]',
+        allowedEager: '[owner.^, tags.^, community.[owner], rating.^]',
+        allowedUpsert: '[owner.^, tags.^, community.[owner], rating.^]'
     }
 
     app.use('/ideas', createService(options))

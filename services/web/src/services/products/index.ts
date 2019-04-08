@@ -6,9 +6,9 @@ export default function(app) {
     const paginate = app.get('paginate')
 
     const options = {
-        name: 'products',
         model: Model,
         id: 'id',
+        name: 'products',
         paginate: {
             default: 10,
             max: 25,

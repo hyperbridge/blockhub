@@ -92,7 +92,7 @@
                 })
             }
         },
-        created() {
+        mounted() {
             this.$store.commit('application/activateModal', 'login')
         }
     }

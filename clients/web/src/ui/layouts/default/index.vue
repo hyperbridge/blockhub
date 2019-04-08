@@ -102,6 +102,7 @@
             <c-register-popup :activated="$store.state.application.activeModal === 'register'" @close="$store.state.application.activeModal = null" />
             <c-privacy-popup :activated="$store.state.application.activeModal === 'privacy'" @close="$store.state.application.activeModal = null" />
             <c-terms-popup :activated="$store.state.application.activeModal === 'terms'" @close="$store.state.application.activeModal = null" />
+            <c-mission-control-popup :activated="$store.state.application.activeModal === 'mission-control'" @close="$store.state.application.activeModal = null" />
 
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'connect-network'"
@@ -124,9 +125,11 @@
                 </p>
             </c-basic-popup>
 
+            <!-- use below $router.currentRoute.fullPath -->
+
             <c-basic-popup
-                :activated="$store.state.application.editorMode === 'editing' && !$store.state.application.settings.client['hideEditorWelcomeModal/' + $router.currentRoute.fullPath]"
-                @close="$store.commit('application/updateClientSettings', { key: 'hideEditorWelcomeModal/' + $router.currentRoute.fullPath, value: true })"
+                :activated="$store.state.application.editorMode === 'editing' && !$store.state.application.settings.client['hideEditorWelcomeModal']"
+                @close="$store.commit('application/updateClientSettings', { key: 'hideEditorWelcomeModal', value: true })"
                 style="text-align: left;"
             >
                 <div class="h4" slot="header">Welcome to the editor</div>
@@ -157,18 +160,42 @@
                 <div class="h4" slot="header">Oh, another creation?</div>
                 <template slot="body">
                     <div class="row">
-                        <c-button status="none" class="col-md-6 create-shortcut__block" @click="$store.commit('application/activateModal', 'coming-soon')">
-                            Create Idea
-                        </c-button>
-                        <c-button status="none" class="col-md-6 create-shortcut__block" @click="$store.commit('application/activateModal', 'coming-soon')">
-                            Create Crowdfund
-                        </c-button>
-                        <c-button status="none" class="col-md-6 create-shortcut__block" @click="$store.commit('application/activateModal', 'coming-soon')">
-                            Create Game
-                        </c-button>
-                        <c-button status="none" class="col-md-6 create-shortcut__block" @click="$store.commit('application/activateModal', 'coming-soon')">
-                            Create Realm
-                        </c-button>
+                        <div class="col-6">
+                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/idea/new">
+                                <c-icon
+                                    name="plus-circle"
+                                    style="padding: 30px;font-size: 50px;"
+                                />
+                                <div style="display: block">Create Idea</div>
+                            </c-button>
+                        </div>
+                        <div class="col-6">
+                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/project/new">
+                                <c-icon
+                                    name="plus-circle"
+                                    style="padding: 30px;font-size: 50px;"
+                                />
+                                <div style="display: block">Create Crowdfund</div>
+                            </c-button>
+                        </div>
+                        <div class="col-6">
+                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/product/new">
+                                <c-icon
+                                    name="plus-circle"
+                                    style="padding: 30px;font-size: 50px;"
+                                />
+                                <div style="display: block">Create Game</div>
+                            </c-button>
+                        </div>
+                        <div class="col-6">
+                            <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/realm/new">
+                                <c-icon
+                                    name="plus-circle"
+                                    style="padding: 30px;font-size: 50px;"
+                                />
+                                <div style="display: block">Create Realm</div>
+                            </c-button>
+                        </div>
                     </div>
                 </template>
                 <p slot="footer">
@@ -188,7 +215,7 @@
                             Stealth mode engage! <br />
                             &nbsp; &nbsp; &lt;explosion&gt; &nbsp; <br />
                             &nbsp; &nbsp; &nbsp; &nbsp; Dang, didn't work.<br /><br />
-                            Okay, you caught us, we're still working on this feature, but we'll have it out as quick as a mage getting pwned by a warrior in a melee battle!
+                            You caught us, we're still working on this feature, but we'll rush as finish it like a warrior in battle!
                             <br /><br />
                         </p>
                         <div class="col-6" style=""><img src="/static/img/hh/Asset 3.svg" /></div>
@@ -442,8 +469,55 @@
             </c-basic-popup>
 
 
+            <!--new discussion popup-->
+            <c-basic-popup
+                :activated="$store.state.application.activeModal === 'new-discussion'"
+                @close="$store.state.application.activeModal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">New Discussion</div>
+                <template slot="body">
+                    <div >
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Community</label>
+                                    <select class="form-control actionWithSelected" tabindex="-1" aria-hidden="true" v-model="newDiscussionRequest.communityId">
+                                        <option></option>
+                                        <option :value="community.id" v-for="(community, index) in communities" :key="index">{{ community.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input type="text" class="form-control" placeholder="Title" v-model="newDiscussionRequest.name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Body</label>
+                                    <textarea class="form-control" v-model="newDiscussionRequest.body"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <p slot="footer">
+                    <c-button status="plain" class="color-red" @click="$store.state.application.activeModal = null">
+                        Cancel
+                    </c-button>
+                    <c-button status="second-info" class="ml-3" @click="submitNewDiscussion(newDiscussionRequest)">
+                        OK
+                    </c-button>
+                </p>
+            </c-basic-popup>
 
-            <!--connection-status popup-->
+            <!--settings popup-->
             <c-basic-popup
                 width="1000"
                 :activated="$store.state.application.activeModal === 'settings'"
@@ -476,7 +550,7 @@
 
 
         <!--Draggable video block -->
-        <c-draggable-video :active="video.showPopup" :videoUrl="video.url" :setTime="video.currentTime" @close=" video.showPopup = false " />
+        <c-draggable-video :active="video.showPopup" :videoUrl="video.url" :setTime="video.currentTime" @close=" video.showPopup = false" v-if="video" />
         <!--end draggable video block -->
 
         
@@ -560,6 +634,7 @@
             'c-register-popup': (resolve) => require(['@/ui/components/register-popup/index.vue'], resolve),
             'c-send-funds-popup': (resolve) => require(['@/ui/components/send-funds-popup/index.vue'], resolve),
             'c-purchase-popup': (resolve) => require(['@/ui/components/purchase-popup/index.vue'], resolve),
+            'c-mission-control-popup': (resolve) => require(['@/ui/components/mission-control-popup/index.vue'], resolve),
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
             'c-clock': (resolve) => require(['@/ui/components/clock/index.vue'], resolve),
             'c-status-dot': (resolve) => require(['@/ui/components/status-dot/index.vue'], resolve),
@@ -599,6 +674,11 @@
                     amount: 0,
                     address: null,
                     processing: false
+                },
+                newDiscussionRequest: {
+                    communityId: null,
+                    name: '',
+                    body: ''
                 },
                 dragOptions: {
                     dropzoneSelector: '.does-not-exist',
@@ -710,6 +790,9 @@
             }
         },
         computed: {
+            communities() {
+                return this.$store.getters['communities/list']
+            },
             isConnected() {
                 return this.$store.state.application.connection.internet && this.$store.state.application.connection.datasource
             },
@@ -753,6 +836,18 @@
             this.checkScrollButton()
         },
         methods: {
+            submitNewDiscussion(request) {
+                request.ownerId = this.$store.state.application.activeProfile.id
+debugger
+                this.$store.dispatch('discussions/create', request).then((res) => {
+                    request.id = res.id
+                    //this.notice = "Congratulations, your discussion has been created!"
+
+                    this.$router.push('/community/discussion/' + request.id)
+                })
+
+                this.$store.state.application.activeModal = null
+            },
             deposit() {
 
             },
@@ -787,18 +882,18 @@
                 if (this.reportCoords) {
                     const getPathTo = (element) => {
                         if (element.tagName == 'HTML')
-                            return '/html[1]';
+                            return '/html[1]'
                         if (element===document.body)
-                            return '/html[1]/body[1]';
+                            return '/html[1]/body[1]'
 
-                        var ix= 0;
-                        var siblings= element.parentNode.childNodes;
-                        for (var i= 0; i<siblings.length; i++) {
-                            var sibling= siblings[i];
+                        let ix = 0
+                        let siblings = element.parentNode.childNodes
+                        for (let i= 0; i<siblings.length; i++) {
+                            let sibling= siblings[i]
                             if (sibling===element)
-                                return getPathTo(element.parentNode)+'/'+element.tagName.toLowerCase()+'['+(ix+1)+']';
+                                return getPathTo(element.parentNode)+'/'+element.tagName.toLowerCase()+'['+(ix+1)+']'
                             if (sibling.nodeType===1 && sibling.tagName===element.tagName)
-                                ix++;
+                                ix++
                         }
                     }
 
@@ -874,6 +969,16 @@
             this.handleResize()
             this.checkScrollButton()
             
+            this.$store.dispatch('communities/find', {
+                query: {
+                    $sort: {
+                        createdAt: -1
+                    },
+                    $limit: 25
+                }
+            }).then(() => {
+                this.loading = false
+            })
         },
         mounted() {
             this.updateBreadcrumbLinks()
@@ -960,12 +1065,22 @@
 
                 this.$store.state.application.tokenCount = null
 
-                window.BlockHub.Bridge.sendCommand('getTokenBalance', {
-                    type: 'HBX',
-                    address: this.$store.state.application.activeProfile.key
+                BlockHub.API.service('profiles/balance').find({
+                    query: {
+                        type: 'HBX',
+                        address: this.$store.state.application.activeProfile.key
+                    }
                 }).then((res) => {
                     this.$store.state.application.tokenCount = res.balance
                 })
+
+                
+                // window.BlockHub.Bridge.sendCommand('getTokenBalance', {
+                //     type: 'HBX',
+                //     address: this.$store.state.application.activeProfile.key
+                // }).then((res) => {
+                //     this.$store.state.application.tokenCount = res.balance
+                // })
             }
         }
     }
@@ -1355,10 +1470,10 @@
 
     .page-shortcuts {
         position: fixed;
-        top: 30px;
+        top: 0px;
         left: 0;
         width: 70px;
-        padding: 10px;
+        padding: 40px 10px 10px;
         z-index: 99;
         background: rgba(0, 0, 0, 0.5);
         bottom: 0;

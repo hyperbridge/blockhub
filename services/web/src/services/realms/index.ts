@@ -12,7 +12,15 @@ export default function(app) {
             default: 10,
             max: 25,
             ...paginate
-        }
+        },
+        upsertGraphOptions: {
+            relate: true
+            // insertMissing: true
+        },
+        createUseUpsertGraph: true,
+        allowedInsert: '[owner.^, tags.^]',
+        allowedEager: '[owner.^, tags.^]',
+        allowedUpsert: '[owner.^, tags.^]'
     }
 
     app.use('/realms', createService(options))

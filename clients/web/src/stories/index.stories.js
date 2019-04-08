@@ -924,7 +924,7 @@ storiesOf('Sidebar Menu', module)
         },
         template: `<div class="row m-0">
                 <div class="col-3 p-4">
-                    <c-sidebar-menu sub_title="This sub title" sub_icon="fas fa-info-circle" :links="links" />
+                    <c-sidebar-menu subTitle="This sub title" subIcon="fas fa-info-circle" :links="links" />
                 </div>
             </div>`
     }))
@@ -1515,7 +1515,7 @@ storiesOf('Popups', module)
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is dafault popup</h3>
                 <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" @close="close" ref="modal" title="Default" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                <c-popup :activated="modalActive" @close="close" ref="modal" title="Default" subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
                 Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
@@ -1550,7 +1550,7 @@ storiesOf('Popups', module)
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is warning popup</h3>
                 <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" @close="close" ref="modal" title="Warning" type="warning" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                <c-popup :activated="modalActive" @close="close" ref="modal" title="Warning" type="warning" subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
                 Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
@@ -1585,7 +1585,7 @@ storiesOf('Popups', module)
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is danger popup</h3>
                 <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" @close="close" ref="modal" title="Danger" type="danger" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                <c-popup :activated="modalActive" @close="close" ref="modal" title="Danger" type="danger" subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
                 Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
@@ -1620,7 +1620,7 @@ storiesOf('Popups', module)
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is info popup</h3>
                 <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" @close="close" ref="modal" title="Info" type="info" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                <c-popup :activated="modalActive" @close="close" ref="modal" title="Info" type="info" subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
                 Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
@@ -1655,7 +1655,7 @@ storiesOf('Popups', module)
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is success popup</h3>
                 <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" @close="close" ref="modal" type="success" title="Success" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                <c-popup :activated="modalActive" @close="close" ref="modal" type="success" title="Success" subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
                         text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
                     <template slot="footer">
                         <div class="text-right w-100">
@@ -2186,12 +2186,12 @@ storiesOf('Assets List', module)
                     {
                         img: 'https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de',
                         title: 'Magic Plate Armor',
-                        sub_title: 'Tibia MMORPG'
+                        subTitle: 'Tibia MMORPG'
                     },
                     {
                         img: 'https://vignette.wikia.nocookie.net/angrybirds-fiction/images/8/8b/Toons_assets_chuck_01.png/revision/latest?cb=20150120103056&path-prefix=ru',
                         title: 'Magic Chuck',
-                        sub_title: 'Angry Birds'
+                        subTitle: 'Angry Birds'
                     }
                 ]
             })
@@ -3932,7 +3932,7 @@ storiesOf('Product Overview', module)
                     },
                     {
                         "os": "linux",
-                        "system": "Ubuntu 14.04, Linux Mint 17, Steam OS",
+                        "system": "Ubuntu 14.04, Linux Mint 17, BlockHub OS",
                         "processor": "Quad Core Intel",
                         "memory": "4 GB RAM",
                         "graphics": "GeForce GT 640 1GB (1440x900, medium)",
@@ -5992,7 +5992,7 @@ storiesOf('Activity block', module)
                             In Library
                         </template>
                         <template slot="title">
-                            StarBreak is already in your Steam library ( Purchased 31 May, 2018 )
+                            StarBreak is already in your BlockHub library ( Purchased 31 May, 2018 )
                         </template>
                         <template slot="description">
                             0.1 hrs last two weeks / 0.1 hrs on record

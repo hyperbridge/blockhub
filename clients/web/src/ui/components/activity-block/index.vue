@@ -10,7 +10,7 @@
         <div class="activity-block__body align-items-center">
             <div>
                 <c-button status="second-info" size="md" class="mr-3" @click="$emit('install')">
-                    Install Steam
+                    Install BlockHub
                 </c-button>
                 <c-button status="second-info" size="md" class="mr-3" @click="$emit('play')">
                     Play Now

@@ -33,8 +33,7 @@
                 new <i class="fas fa-long-arrow-alt-down"></i>
             </div>
             <div class="c-grid__bottom position-relative" :class="['h-' + fixedIconHeight]" ref="gridFixed">
-                <div class="c-grid__bottom-divider">
-                </div>
+                <div class="c-grid__bottom-divider"></div>
                 <c-icon v-for="(item, index) in fixedItems"
                         :color="item"
                         :key="index"
@@ -53,7 +52,7 @@
                         :percent="item.percent"
                         :active="item.active"
                         class="margin-bottom-10 border-none"
-                        @remove="remove()"/>
+                        @remove="remove()" />
             </div>
         </div>
     </div>
@@ -292,7 +291,7 @@
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .c-grid {
         margin-top: 10px;
         position: relative;

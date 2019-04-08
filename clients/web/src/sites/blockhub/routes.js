@@ -9,6 +9,11 @@ export default [
         component: (resolve) => require(['@/ui/screens/home'], resolve)
     },
     {
+        path: '/company',
+        name: 'About Company',
+        component: (resolve) => require(['@/ui/screens/about'], resolve)
+    },
+    {
         path: '/unlock',
         name: 'Unlock',
         component: (resolve) => require(['@/ui/screens/unlock'], resolve),
@@ -101,6 +106,14 @@ export default [
         path: '/news',
         name: 'News',
         component: (resolve) => require(['@/ui/screens/news'], resolve)
+    },
+    {
+        path: '/denied',
+        name: 'Denied',
+        component: (resolve) => require(['@/ui/screens/denied'], resolve),
+        meta: {
+            breadcrumb: false
+        }
     },
     {
         path: '/token',
@@ -298,7 +311,7 @@ export default [
         path: '/profile/:id',
         name: 'Profile',
         props: true,
-        component: (resolve) => require(['@/ui/screens/profile-overview'], resolve),
+        component: (resolve) => require(['@/ui/screens/profile'], resolve),
         meta: {
             breadcrumb: false
         }
@@ -409,10 +422,9 @@ export default [
     },
     {
         path: '/developer',
-        name: 'Developer Area',
+        name: 'Developer Program',
         component: (resolve) => require(['@/ui/screens/developer'], resolve),
         meta: {
-            auth: true
         }
     },
     {
@@ -603,7 +615,6 @@ export default [
         name: 'Crowdfunds',
         component: (resolve) => require(['@/ui/screens/projects'], resolve),
         meta: {
-            renderCondition: 'authenticated'
         },
         breadcrumb: [
             { title: 'Home' },
@@ -815,6 +826,21 @@ export default [
         ]
     },
     {
+        path: '/business/realm/:id',
+        name: 'Realm',
+        props: true,
+        component: (resolve) => require(['@/ui/screens/business-realm'], resolve),
+        meta: {
+            title: 'Realm',
+            permission: 'signedIn',
+            breadcrumb: [
+                { to: '/business', title: 'Dashboard' },
+                { to: '/business/realms', title: 'Realms' },
+                { title: 'Realm' }
+            ]
+        }
+    },
+    {
         path: '/business/product/:id',
         name: 'Product',
         props: true,
@@ -841,6 +867,36 @@ export default [
                 { to: '/business', title: 'Dashboard' },
                 { to: '/business/projects', title: 'Crowdfunds' },
                 { title: 'Crowdfund' }
+            ]
+        }
+    },
+    {
+        path: '/business/asset/:id',
+        name: 'Asset',
+        props: true,
+        component: (resolve) => require(['@/ui/screens/business-asset'], resolve),
+        meta: {
+            title: 'Asset',
+            permission: 'signedIn',
+            breadcrumb: [
+                { to: '/business', title: 'Dashboard' },
+                { to: '/business/assets', title: 'Assets' },
+                { title: 'Asset' }
+            ]
+        }
+    },
+    {
+        path: '/business/idea/:id',
+        name: 'Idea',
+        props: true,
+        component: (resolve) => require(['@/ui/screens/business-idea'], resolve),
+        meta: {
+            title: 'Idea',
+            permission: 'signedIn',
+            breadcrumb: [
+                { to: '/business', title: 'Dashboard' },
+                { to: '/business/ideas', title: 'Ideas' },
+                { title: 'Idea' }
             ]
         }
     },

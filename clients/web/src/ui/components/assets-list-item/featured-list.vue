@@ -10,7 +10,7 @@
                     <c-img :src="item.img" />
                 </div>
                 <h3>{{ item.title }}</h3>
-                <p>{{ item.sub_title }}</p>
+                <p>{{ item.subTitle }}</p>
             </div>
         </div>
     </div>

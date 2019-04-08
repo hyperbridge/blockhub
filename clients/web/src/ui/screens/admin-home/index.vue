@@ -56,8 +56,8 @@
                             destinationAddress = line
                             amount = Number(this.$refs.amount.value)
                         } else {
-                            destinationAddress = line.split('\t')[0]
-                            amount = Number(line.split('\t')[1])
+                            destinationAddress = line.split(' ')[0]
+                            amount = Number(line.split(' ')[1])
                         }
 
                         if (amount) {

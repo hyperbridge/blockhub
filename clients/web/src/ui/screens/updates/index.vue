@@ -10,6 +10,7 @@
                         </ul>
                     </p>
                     <div class="row">
+                        <c-loading :enabled="!this.$store.state.application.updates.length" size="lg" />
                         <div class="col-md-6 col-sm-12" v-for="(update, index) in this.$store.state.application.updates" :key="index">
                             <c-expand-block 
                                 :title="update.title" 

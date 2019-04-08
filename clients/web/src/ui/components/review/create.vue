@@ -85,7 +85,7 @@
         components: {
             'c-checkbox': (resolve) => require(['@/ui/components/checkbox'], resolve),
             'c-text-formatting': (resolve) => require(['@/ui/components/text-formatting'], resolve),
-            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic.vue'], resolve),
+            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic'], resolve),
         },
         data(){
             return{

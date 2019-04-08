@@ -1,14 +1,16 @@
 <template>
-    <div>todo</div>
+    <c-layout>
+        Coming soon
+    </c-layout>
 </template>
 
 <script>
 export default {
-  components: {
-  },
-  data: () => ({
-    wallets: []
-  })
+    components: {
+    },
+    data: () => ({
+        wallets: []
+    })
 }
 </script>
 

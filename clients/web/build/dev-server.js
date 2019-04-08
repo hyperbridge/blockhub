@@ -3,18 +3,16 @@
 require('./check-versions')()
 
 const config = require('../config')
-if (!process.env.NODE_ENV) {
-    process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
-}
+// if (!process.env.NODE_ENV) {
+//     process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
+// }
 
 const opn = require('opn')
 const path = require('path')
 const express = require('express')
 const webpack = require('webpack')
 const proxyMiddleware = require('http-proxy-middleware')
-const webpackConfig = process.env.NODE_ENV === 'production'
-    ? require('./webpack.production.conf')
-    : require('./webpack.development.conf')
+const webpackConfig = require('./webpack.development.conf')
 
 // default port where dev server listens for incoming traffic
 const port = process.env.PORT || config.dev.port
@@ -32,22 +30,20 @@ const devMiddleware = require('webpack-dev-middleware')(compiler, {
     quiet: true
 })
 
-if (process.env.NODE_ENV !== 'production') {
-    const hotMiddleware = require('webpack-hot-middleware')(compiler, {
-        log: false
+const hotMiddleware = require('webpack-hot-middleware')(compiler, {
+    log: false
+})
+// force page reload when html-webpack-plugin template changes
+compiler.plugin('compilation', function (compilation) {
+    compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
+        hotMiddleware.publish({ action: 'reload' })
+        cb && cb()
     })
-    // force page reload when html-webpack-plugin template changes
-    compiler.plugin('compilation', function (compilation) {
-        compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-            hotMiddleware.publish({ action: 'reload' })
-            cb && cb()
-        })
-    })
+})
 
-    // enable hot-reload and state-preserving
-    // compilation error display
-    app.use(hotMiddleware)
-}
+// enable hot-reload and state-preserving
+// compilation error display
+app.use(hotMiddleware)
 
 // proxy api requests
 Object.keys(proxyTable).forEach(function (context) {
@@ -79,7 +75,7 @@ console.log('> Starting dev server...')
 devMiddleware.waitUntilValid(() => {
     console.log('> Listening at ' + uri + '\n')
     // when env is testing, don't need open it
-    if (autoOpenBrowser && process.env.NODE_ENV !== 'production') {
+    if (autoOpenBrowser) {
         opn(uri)
     }
     _resolve()

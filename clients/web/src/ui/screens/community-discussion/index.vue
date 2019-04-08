@@ -4,7 +4,7 @@
             <div class="col-12">
                 <div class="community-wrapper">
 
-                    <c-item :post="post"/>
+                    <c-item :post="post" />
 
                     <c-post-comment
                         v-for="(comment, index) in post.content.comments"
@@ -25,20 +25,19 @@
 </template>
 
 <script>
-    import moment from 'moment';
+    import moment from 'moment'
 
     export default {
         components: {
             'c-item': (resolve) => require(['@/ui/components/community/post-item'], resolve),
             'c-post-comment': (resolve) => require(['@/ui/components/community/comment'], resolve),
-            'c-search': (resolve) => require(['@/ui/components/searcher'], resolve)
         },
         data() {
             const authors = [
                 { name: 'Nakatochi', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png' },
                 { name: 'Nakatochi', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL' },
                 { name: 'SatoshiSan', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL' },
-            ];
+            ]
             const dates = [
                 '2018-07-24T04:09:00.000Z',
                 '2017-07-24T04:09:00.000Z',
@@ -46,7 +45,7 @@
                 '2018-08-14T04:09:00.000Z',
                 '2018-04-14T04:09:00.000Z',
                 '2018-04-17T04:09:00.000Z',
-            ];
+            ]
             const placeholderText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non maximus tellus, eu lacinia justo. Cras semper vestibulum est. Donec a massa vitae nibh consectetur efficitur non in erat. Morbi id dapibus tortor. Praesent sit amet vulputate leo, eu posuere neque. In id ante scelerisque, commodo nisi non, eleifend mauris. Pellentesque massa elit, semper non libero nec, interdum aliquet dolor.';
 
             return {
@@ -81,24 +80,24 @@
 <style lang="scss" scoped>
     .community-list {
         border-radius: 5px;
-        .c-input{
+        .c-input {
             padding: 8px;
         }
-        .community-item{
+        .community-item {
             border-radius: 0;
             border-bottom: 0;
             transition: transform 400ms ease-in-out;
-            &:first-child{
+            &:first-child {
                 border-radius: 5px 5px 0 0;
             }
-            &:last-child{
+            &:last-child {
                 border-bottom: 1px solid rgba(112, 112, 112, .2);
                 border-radius: 0 0 5px 5px;
             }
-            &:nth-child(even){
+            &:nth-child(even) {
                 background: rgba(0, 0, 0, .26);
             }
-            &:hover{
+            &:hover {
                 background: rgba(0, 0, 0, .25);
                 transform: scale(1.02);
             }
