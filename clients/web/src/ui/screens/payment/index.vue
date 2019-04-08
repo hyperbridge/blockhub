@@ -1,7 +1,7 @@
 <template>
     <c-layout>
         <div class="row">
-            <div class="col-12 col-md-8">
+            <div class="col-12">
                 <c-block title="Payment method">
                     <div class="form-group">
                         <label>
@@ -12,8 +12,8 @@
                                        label="label"
                                        :options="paymentSystems">
                         </c-multiselect>
-                        <div class="row">
-                            <div class="col-12 h5 margin-top-10 margin-bottom-10">
+                        <div class="row align-items-stretch">
+                            <div class="col-12 h5 margin-top-15 margin-bottom-20">
                                 Payment Information
                             </div>
                             <div class="col-12 col-lg-6 card-container">
@@ -31,13 +31,13 @@
                             </g>
                             <path class="darkcolor" d="M750,431V193.2c-217.6-57.5-556.4-13.5-750,24.9V431c0,22.1,17.9,40,40,40h670C732.1,471,750,453.1,750,431z" />
                         </g>
-                        <text transform="matrix(1 0 0 1 60.106 295.0121)" id="svgnumber" class="st2 st3 st4">0123 4567 8910 1112</text>
-                        <text transform="matrix(1 0 0 1 54.1064 428.1723)" id="svgname" class="st2 st5 st6">JOHN DOE</text>
+                        <text transform="matrix(1 0 0 1 60.106 295.0121)" id="svgnumber" class="st2 st3 st4">{{ card.cardNumber }}</text>
+                        <text transform="matrix(1 0 0 1 54.1064 428.1723)" id="svgname" class="st2 st5 st6">{{ card.cardHolder }}</text>
                         <text transform="matrix(1 0 0 1 54.1074 389.8793)" class="st7 st5 st8">cardholder name</text>
                         <text transform="matrix(1 0 0 1 479.7754 388.8793)" class="st7 st5 st8">expiration</text>
                         <text transform="matrix(1 0 0 1 65.1054 241.5)" class="st7 st5 st8">card number</text>
                         <g>
-                            <text transform="matrix(1 0 0 1 574.4219 433.8095)" id="svgexpire" class="st2 st5 st9">01/23</text>
+                            <text transform="matrix(1 0 0 1 574.4219 433.8095)" id="svgexpire" class="st2 st5 st9">{{ card.expiration }}</text>
                             <text transform="matrix(1 0 0 1 479.3848 417.0097)" class="st2 st10 st11">VALID</text>
                             <text transform="matrix(1 0 0 1 479.3848 435.6762)" class="st2 st10 st11">THRU</text>
                             <polygon class="st2" points="554.5,421 540.4,414.2 540.4,427.9 		" />
@@ -101,7 +101,7 @@
                             <rect x="42.9" y="224.5" class="st4" width="664.1" height="10.5" />
                             <path class="st5" d="M701.1,184.6H618h-8h-10v64.5h10h8h83.1c3.3,0,6-2.7,6-6v-52.5C707.1,187.3,704.4,184.6,701.1,184.6z" />
                         </g>
-                        <text transform="matrix(1 0 0 1 621.999 227.2734)" id="svgsecurity" class="st6 st7">985</text>
+                        <text transform="matrix(1 0 0 1 621.999 227.2734)" id="svgsecurity" class="st6 st7">{{ card.expiration }}</text>
                         <g class="st8">
                             <text transform="matrix(1 0 0 1 518.083 280.0879)" class="st9 st6 st10">security code</text>
                         </g>
@@ -114,30 +114,29 @@
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6 form-container">
-                                <div class="field-container">
-                                    <label for="name">Name</label>
-                                    <input id="name" maxlength="20" type="text">
+                                <div class="field-container margin-top-5">
+                                    <label>Name</label>
+                                    <!--<input id="name" maxlength="20" type="text">-->
+                                    <c-input v-model="card.cardHolder" maxlength="20" />
                                 </div>
                                 <div class="field-container">
-                                    <label for="cardnumber">Card Number</label>
-                                    <input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric">
+                                    <label>Card Number</label>
+                                    <!--<input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric">-->
+                                    <c-input v-model="card.cardNumber" pattern="[0-9]*" maxlength="16" inputmode="numeric"/>
                                 </div>
-                                <div class="field-container">
-                                    <label for="expirationdate">Expiration (mm/yy)</label>
-                                    <input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">
+                                <div class="field-container half-width">
+                                    <label>Expiration (mm/yy)</label>
+                                    <!--<input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">-->
+                                    <c-input v-model="card.expiration" v-mask="'99/99'" pattern="[0-9]*" inputmode="numeric"/>
                                 </div>
-                                <div class="field-container">
-                                    <label for="securitycode">Security Code</label>
-                                    <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
+                                <div class="field-container half-width">
+                                    <label>Security Code</label>
+                                    <!--<input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">-->
+                                    <c-input v-model="card.securityCode" pattern="[0-9]*" inputmode="numeric"/>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </c-block>
-            </div>
-            <div class="col-12 col-md-4">
-                <c-block title="Payment methods">
-                    Choose Methods
                 </c-block>
             </div>
         </div>
@@ -167,9 +166,26 @@
                         label: 'Bank USA',
                         key: 'bank-usa'
                     },
-                ]
+                ],
+                card:{
+                    cardHolder: '',
+                    cardNumber: '',
+                    expiration: '',
+                    securityCode: ''
+                }
             }
         },
+        methods: {
+            flippCard(){
+                document.querySelector('.creditcard').addEventListener('click', function () {
+                    if (this.classList.contains('flipped')) {
+                        this.classList.remove('flipped');
+                    } else {
+                        this.classList.add('flipped');
+                    }
+                })
+            }
+        }
     }
 </script>
 
@@ -196,7 +212,7 @@
         .creditcard svg#cardback {
             width: 100%;
             box-shadow: 1px 5px 6px 0px rgba(0, 0, 0, .3);
-            border-radius: 10px;
+            border-radius: 20px;
         }
 
         #generatecard{
@@ -350,7 +366,7 @@
 
         .creditcard .front,
         .creditcard .back {
-            /*position: absolute;*/
+            position: absolute;
             width: 100%;
             max-width: 400px;
             -webkit-backface-visibility: hidden;
@@ -370,7 +386,14 @@
         }
     }
 
+    .form-container{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
     .field-container{
+        margin-bottom: 5px;
+        width: 100%;
         label{
             font-size: 12px;
             width: 100%;
@@ -378,6 +401,14 @@
         input{
             width: 100%;
             border-radius: 5px;
+            border: 1px solid #1b1c2a;
+            background: #1b1c2a;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 10px;
+        }
+        &.half-width{
+            width: calc( 50% - 15px );
         }
     }
 </style>
