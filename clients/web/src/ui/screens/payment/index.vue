@@ -17,7 +17,7 @@
                                 Payment Information
                             </div>
                             <div class="col-12 col-lg-6 card-container">
-                                <div class="creditcard">
+                                <div class="creditcard" id="card">
                                     <div class="front">
                                         <svg version="1.1" id="cardfront" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px" viewBox="0 0 750 471" style="enable-background:new 0 0 750 471;" xml:space="preserve">
@@ -31,7 +31,9 @@
                             </g>
                             <path class="darkcolor" d="M750,431V193.2c-217.6-57.5-556.4-13.5-750,24.9V431c0,22.1,17.9,40,40,40h670C732.1,471,750,453.1,750,431z" />
                         </g>
-                        <text transform="matrix(1 0 0 1 60.106 295.0121)" id="svgnumber" class="st2 st3 st4">{{ card.cardNumber }}</text>
+                        <text transform="matrix(1 0 0 1 60.106 295.0121)" id="svgnumber" class="st2 st3 st4">
+                            {{ card.cardNumber }}
+                        </text>
                         <text transform="matrix(1 0 0 1 54.1064 428.1723)" id="svgname" class="st2 st5 st6">{{ card.cardHolder }}</text>
                         <text transform="matrix(1 0 0 1 54.1074 389.8793)" class="st7 st5 st8">cardholder name</text>
                         <text transform="matrix(1 0 0 1 479.7754 388.8793)" class="st7 st5 st8">expiration</text>
@@ -101,13 +103,13 @@
                             <rect x="42.9" y="224.5" class="st4" width="664.1" height="10.5" />
                             <path class="st5" d="M701.1,184.6H618h-8h-10v64.5h10h8h83.1c3.3,0,6-2.7,6-6v-52.5C707.1,187.3,704.4,184.6,701.1,184.6z" />
                         </g>
-                        <text transform="matrix(1 0 0 1 621.999 227.2734)" id="svgsecurity" class="st6 st7">{{ card.expiration }}</text>
+                        <text transform="matrix(1 0 0 1 621.999 227.2734)" id="svgsecurity" class="st6 st7">{{ card.securityCode }}</text>
                         <g class="st8">
                             <text transform="matrix(1 0 0 1 518.083 280.0879)" class="st9 st6 st10">security code</text>
                         </g>
                         <rect x="58.1" y="378.6" class="st11" width="375.5" height="13.5" />
                         <rect x="58.1" y="405.6" class="st11" width="421.7" height="13.5" />
-                        <text transform="matrix(1 0 0 1 59.5073 228.6099)" id="svgnameback" class="st12 st13">John Doe</text>
+                        <text transform="matrix(1 0 0 1 59.5073 228.6099)" id="svgnameback" class="st12 st13">{{ card.cardHolder }}</text>
                     </g>
                 </svg>
                                     </div>
@@ -117,22 +119,22 @@
                                 <div class="field-container margin-top-5">
                                     <label>Name</label>
                                     <!--<input id="name" maxlength="20" type="text">-->
-                                    <c-input v-model="card.cardHolder" maxlength="20" />
+                                    <c-input v-model="card.cardHolder" @focus="flippCard('show-front')" maxlength="20" />
                                 </div>
                                 <div class="field-container">
                                     <label>Card Number</label>
                                     <!--<input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric">-->
-                                    <c-input v-model="card.cardNumber" pattern="[0-9]*" maxlength="16" inputmode="numeric"/>
+                                    <c-input v-model="card.cardNumber" @focus="flippCard('show-front')" v-mask="'9999 9999 9999 9999'" pattern="[0-9]*" maxlength="20" inputmode="numeric"/>
                                 </div>
                                 <div class="field-container half-width">
                                     <label>Expiration (mm/yy)</label>
                                     <!--<input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">-->
-                                    <c-input v-model="card.expiration" v-mask="'99/99'" pattern="[0-9]*" inputmode="numeric"/>
+                                    <c-input v-model="card.expiration" @focus="flippCard('show-front')" v-mask="'99/99'" pattern="[0-9]*" inputmode="numeric"/>
                                 </div>
                                 <div class="field-container half-width">
                                     <label>Security Code</label>
                                     <!--<input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">-->
-                                    <c-input v-model="card.securityCode" pattern="[0-9]*" inputmode="numeric"/>
+                                    <c-input v-model="card.securityCode" @focus="flippCard" v-mask="'999'" pattern="[0-9]*" inputmode="numeric"/>
                                 </div>
                             </div>
                         </div>
@@ -176,14 +178,13 @@
             }
         },
         methods: {
-            flippCard(){
-                document.querySelector('.creditcard').addEventListener('click', function () {
-                    if (this.classList.contains('flipped')) {
-                        this.classList.remove('flipped');
-                    } else {
-                        this.classList.add('flipped');
-                    }
-                })
+            flippCard(type){
+                const card = document.getElementById('card');
+                if ( type === 'show-front'){
+                    card.classList.remove('flipped');
+                } else {
+                    card.classList.add('flipped');
+                }
             }
         }
     }
@@ -355,6 +356,9 @@
         .creditcard {
             width: 100%;
             max-width: 400px;
+            display: inline-flex;
+            /*position: relative;*/
+            height: 100%;
             -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
             transition: -webkit-transform 0.6s;
@@ -367,8 +371,10 @@
         .creditcard .front,
         .creditcard .back {
             position: absolute;
-            width: 100%;
-            max-width: 400px;
+            /*width: 100%;*/
+            /*max-width: 400px;*/
+            left: 0;
+            right: 0;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             -webkit-font-smoothing: antialiased;
