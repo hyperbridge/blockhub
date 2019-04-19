@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-12">
                 <c-block title="Payment method">
-                    <div class="form-group">
+                    <div class="form-group margin-bottom-30">
                         <label>
                             Choose payment system
                         </label>
@@ -12,14 +12,17 @@
                                        label="label"
                                        :options="paymentSystems">
                         </c-multiselect>
-                        <div class="row align-items-stretch">
-                            <div class="col-12 h5 margin-top-15 margin-bottom-20">
-                                Payment Information
-                            </div>
-                            <div class="col-12 col-lg-6 card-container">
-                                <div class="creditcard" id="card">
-                                    <div class="front">
-                                        <svg version="1.1" id="cardfront" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    </div>
+                    <c-tabs>
+                        <c-tab name="Payment information" :selected="true">
+                            <div class="row align-items-stretch">
+                                <div class="col-12 h5 margin-top-10 margin-bottom-20">
+                                    Payment Information
+                                </div>
+                                <div class="col-12 col-lg-6 card-container">
+                                    <div class="creditcard" id="card">
+                                        <div class="front">
+                                            <svg version="1.1" id="cardfront" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px" viewBox="0 0 750 471" style="enable-background:new 0 0 750 471;" xml:space="preserve">
                     <g id="Front">
                         <g id="CardBackground">
@@ -81,9 +84,9 @@
                     <g id="Back">
                     </g>
                 </svg>
-                                    </div>
-                                    <div class="back">
-                                        <svg version="1.1" id="cardback" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        </div>
+                                        <div class="back">
+                                            <svg version="1.1" id="cardback" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px" viewBox="0 0 750 471" style="enable-background:new 0 0 750 471;" xml:space="preserve">
                     <g id="Front">
                         <line class="st0" x1="35.3" y1="10.4" x2="36.7" y2="11" />
@@ -112,33 +115,120 @@
                         <text transform="matrix(1 0 0 1 59.5073 228.6099)" id="svgnameback" class="st12 st13">{{ card.cardHolder }}</text>
                     </g>
                 </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 form-container margin-bottom-5">
+                                    <div class="field-container margin-bottom-10">
+                                        <label>Name</label>
+                                        <!--<input id="name" maxlength="20" type="text">-->
+                                        <c-input v-model="card.cardHolder" @focus="flippCard('show-front')" maxlength="20" />
+                                    </div>
+                                    <div class="field-container margin-bottom-10">
+                                        <label>Card Number</label>
+                                        <!--<input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric">-->
+                                        <c-input v-model="card.cardNumber" @focus="flippCard('show-front')" v-mask="'9999 9999 9999 9999'" pattern="[0-9]*" maxlength="20" inputmode="numeric"/>
+                                    </div>
+                                    <div class="field-container half-width">
+                                        <label>Expiration (mm/yy)</label>
+                                        <!--<input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">-->
+                                        <c-input v-model="card.expiration" @focus="flippCard('show-front')" v-mask="'99/99'" pattern="[0-9]*" inputmode="numeric"/>
+                                    </div>
+                                    <div class="field-container half-width">
+                                        <label>Security Code</label>
+                                        <!--<input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">-->
+                                        <c-input v-model="card.securityCode" @focus="flippCard" v-mask="'999'" pattern="[0-9]*" inputmode="numeric"/>
+                                    </div>
+                                    <div class="w-100 margin-top-10 text-right">
+                                        <c-button status="second-success">
+                                            Save
+                                        </c-button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-6 form-container">
-                                <div class="field-container margin-top-5">
-                                    <label>Name</label>
-                                    <!--<input id="name" maxlength="20" type="text">-->
-                                    <c-input v-model="card.cardHolder" @focus="flippCard('show-front')" maxlength="20" />
+                        </c-tab>
+                        <c-tab name="Billing information">
+                            <div class="row align-items-stretch">
+                                <div class="col-12 h5 margin-top-15 margin-bottom-20">
+                                    Billing Information
                                 </div>
-                                <div class="field-container">
-                                    <label>Card Number</label>
-                                    <!--<input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric">-->
-                                    <c-input v-model="card.cardNumber" @focus="flippCard('show-front')" v-mask="'9999 9999 9999 9999'" pattern="[0-9]*" maxlength="20" inputmode="numeric"/>
+                                <div class="col-12 col-lg-3">
+                                    <div class="field-container margin-bottom-10">
+                                        <label>
+                                            First name
+                                        </label>
+                                        <c-input v-model="billingInfo.first_name" placeholder="First name"/>
+                                    </div>
                                 </div>
-                                <div class="field-container half-width">
-                                    <label>Expiration (mm/yy)</label>
-                                    <!--<input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">-->
-                                    <c-input v-model="card.expiration" @focus="flippCard('show-front')" v-mask="'99/99'" pattern="[0-9]*" inputmode="numeric"/>
+                                <div class="col-12 col-lg-3">
+                                    <div class="field-container margin-bottom-10">
+                                        <label>
+                                            Last name
+                                        </label>
+                                        <c-input v-model="billingInfo.last_name" placeholder="Last name"/>
+                                    </div>
                                 </div>
-                                <div class="field-container half-width">
-                                    <label>Security Code</label>
-                                    <!--<input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">-->
-                                    <c-input v-model="card.securityCode" @focus="flippCard" v-mask="'999'" pattern="[0-9]*" inputmode="numeric"/>
+                                <div class="col-12 col-lg-6">
+                                    <div class="field-container margin-bottom-10">
+                                        <label>
+                                            City
+                                        </label>
+                                        <c-input v-model="billingInfo.city" placeholder="City"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="field-container margin-bottom-10">
+                                        <label>
+                                            Billing address
+                                        </label>
+                                        <c-input v-model="billingInfo.billing_address" placeholder="Billing address"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="field-container margin-bottom-10">
+                                        <label>
+                                            ZIP or postal code
+                                        </label>
+                                        <c-input v-model="billingInfo.postal_code" placeholder="ZIP or postal code"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="field-container margin-bottom-10">
+                                        <label>
+                                            Billing address, line 2
+                                        </label>
+                                        <c-input v-model="billingInfo.billing_address_line_2" placeholder="Billing address, line 2"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6"></div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="field-container margin-bottom-10">
+                                        <label>
+                                            Country
+                                        </label>
+                                        <c-multiselect v-model="billingInfo.country"
+                                                       class="dark-mode"
+                                                       label="label"
+                                                       :options="countries">
+                                        </c-multiselect>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="field-container margin-bottom-10">
+                                        <label>
+                                            Phone number
+                                        </label>
+                                        <c-input v-model="billingInfo.phone_number" placeholder="Phone number"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-right">
+                                    <c-button status="second-success">
+                                        Save
+                                    </c-button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </c-tab>
+                    </c-tabs>
                 </c-block>
             </div>
         </div>
@@ -151,6 +241,9 @@
     export default {
         components: {
             'c-multiselect': (resolve) => require(['vue-multiselect'], resolve),
+            'c-input': (resolve) => require(['@/ui/components/inputs'], resolve),
+            'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
+            'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
         },
         data() {
             return {
@@ -169,11 +262,35 @@
                         key: 'bank-usa'
                     },
                 ],
+                countries: [
+                    {
+                        label: 'USA',
+                        key: 'usa'
+                    },
+                    {
+                        label: 'Germany',
+                        key: 'germany'
+                    },
+                    {
+                        label: 'China',
+                        key: 'china'
+                    },
+                ],
                 card:{
                     cardHolder: '',
                     cardNumber: '',
                     expiration: '',
                     securityCode: ''
+                },
+                billingInfo: {
+                    first_name: '',
+                    last_name: '',
+                    city: '',
+                    billing_address: '',
+                    billing_address_line_2: '',
+                    postal_code: '',
+                    phone_number: '',
+                    country: '',
                 }
             }
         },
@@ -233,7 +350,7 @@
             transition: fill .5s;
         }
         .lightcolor{
-            fill: #3d3d59;
+            fill: #2c2c46;
         }
         .darkcolor{
             fill: #1a1c29;
