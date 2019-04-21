@@ -268,6 +268,7 @@ body::-webkit-scrollbar {
     .multiselect__content-wrapper {
         border: 1px solid #1b1c2a;
         background: #1b1c2a;
+        z-index: 100;
     }
     .multiselect__option--selected {
         background: #fbdd6a;
@@ -279,6 +280,9 @@ body::-webkit-scrollbar {
             color: #1b1c2a;
             cursor: pointer;
         }
+    }
+    .multiselect__single{
+        background: transparent!important;
     }
 }
 #app {
