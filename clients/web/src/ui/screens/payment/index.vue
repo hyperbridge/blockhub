@@ -3,21 +3,23 @@
         <div class="row">
             <div class="col-12">
                 <c-block title="Payment method">
-                    <div class="form-group margin-bottom-30">
-                        <label>
-                            Choose payment system
-                        </label>
-                        <c-multiselect v-model="paymentSystem"
-                                       class="dark-mode"
-                                       label="label"
-                                       :options="paymentSystems">
-                        </c-multiselect>
-                    </div>
                     <c-tabs>
                         <c-tab name="Payment information" :selected="true">
                             <div class="row align-items-stretch">
                                 <div class="col-12 h5 margin-top-10 margin-bottom-20">
                                     Payment Information
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group margin-bottom-20">
+                                        <label>
+                                            Choose payment system
+                                        </label>
+                                        <c-multiselect v-model="paymentSystem"
+                                                       class="dark-mode"
+                                                       label="label"
+                                                       :options="paymentSystems">
+                                        </c-multiselect>
+                                    </div>
                                 </div>
                                 <div class="col-12 col-lg-6 card-container">
                                     <div class="creditcard" id="card">
