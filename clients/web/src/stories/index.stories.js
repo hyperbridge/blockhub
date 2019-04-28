@@ -6429,6 +6429,55 @@ storiesOf('Video', module)
             </div>`
     }))
 
+
+storiesOf('Pricing table', module)
+    .add('v1', () => ({
+        components: {
+            'c-pricing-table' : (resolve) => require(['@/ui/components/pricing-table/v1'], resolve),
+        },
+        data(){
+            return{
+                items: [
+                    {
+                        title: 'Premium',
+                        description: 'This is really a good deal!',
+                        price: '29',
+                        highline: false,
+                        specs: [
+                            'Some great feature',
+                            'Another coll feature',
+                            'SAnd more ...',
+                        ]
+                    },
+                    {
+                        title: 'Premium',
+                        description: 'This is really a good deal!',
+                        price: '59',
+                        highline: true,
+                        specs: [
+                            'Some great feature',
+                            'Another coll feature',
+                            'SAnd more ...',
+                        ]
+                    },
+                    {
+                        title: 'Premium',
+                        description: 'This is really a good deal!',
+                        price: '39',
+                        highline: false,
+                        specs: [
+                            'Some great feature',
+                            'Another coll feature',
+                            'SAnd more ...',
+                        ]
+                    }
+                ]
+            }
+        },
+        template: `<div><c-pricing-table :items="items" /></div>`
+    }))
+
+
 /*
      Dynamic import - test version
 
