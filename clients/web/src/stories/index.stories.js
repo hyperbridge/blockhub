@@ -6476,6 +6476,51 @@ storiesOf('Pricing table', module)
         },
         template: `<div><c-pricing-table :items="items" /></div>`
     }))
+    .add('v2', () => ({
+        components: {
+            'c-pricing-table' : (resolve) => require(['@/ui/components/pricing-table/v2'], resolve),
+        },
+        data(){
+            return{
+                items: [
+                    {
+                        title: 'Premium',
+                        description: 'This is really a good deal!',
+                        price: '29',
+                        highline: false,
+                        specs: [
+                            'Some great feature',
+                            'Another coll feature',
+                            'And more ...',
+                        ]
+                    },
+                    {
+                        title: 'Plus',
+                        description: 'This is really a good deal!',
+                        price: '59',
+                        highline: true,
+                        specs: [
+                            'Some great feature',
+                            'Another coll feature',
+                            'And more ...',
+                        ]
+                    },
+                    {
+                        title: 'Basic',
+                        description: 'This is really a good deal!',
+                        price: '39',
+                        highline: false,
+                        specs: [
+                            'Some great feature',
+                            'Another coll feature',
+                            'And more ...',
+                        ]
+                    }
+                ]
+            }
+        },
+        template: `<div><c-pricing-table :items="items" /></div>`
+    }))
 
 
 /*
