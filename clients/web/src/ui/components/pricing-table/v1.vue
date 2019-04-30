@@ -22,6 +22,11 @@
                         </li>
                     </ul>
                 </div>
+                <div class="c-pricing-table__item-action margin-bottom-20 margin-top-10">
+                    <c-button status="second-success">
+                        Sign Up
+                    </c-button>
+                </div>
             </div>
         </div>
     </div>
@@ -75,5 +80,13 @@
         transform: scale(1.2);
         box-shadow: 0 0 10px #000;
         z-index: 4;
+    }
+    .c-pricing-table__item-spec{
+        ul{
+            li{
+                list-style: none;
+                padding: 5px 0;
+            }
+        }
     }
 </style>

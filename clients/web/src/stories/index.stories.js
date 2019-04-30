@@ -6446,29 +6446,29 @@ storiesOf('Pricing table', module)
                         specs: [
                             'Some great feature',
                             'Another coll feature',
-                            'SAnd more ...',
+                            'And more ...',
                         ]
                     },
                     {
-                        title: 'Premium',
+                        title: 'Plus',
                         description: 'This is really a good deal!',
                         price: '59',
                         highline: true,
                         specs: [
                             'Some great feature',
                             'Another coll feature',
-                            'SAnd more ...',
+                            'And more ...',
                         ]
                     },
                     {
-                        title: 'Premium',
+                        title: 'Basic',
                         description: 'This is really a good deal!',
                         price: '39',
                         highline: false,
                         specs: [
                             'Some great feature',
                             'Another coll feature',
-                            'SAnd more ...',
+                            'And more ...',
                         ]
                     }
                 ]
