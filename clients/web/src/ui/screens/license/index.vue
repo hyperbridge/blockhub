@@ -95,7 +95,6 @@
         </div>
     </c-layout>
 </template>
-
 <script>
     export default {}
 </script>

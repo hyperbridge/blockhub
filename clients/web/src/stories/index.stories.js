@@ -6522,6 +6522,14 @@ storiesOf('Pricing table', module)
         template: `<div><c-pricing-table :items="items" /></div>`
     }))
 
+storiesOf('Pro mode', module)
+    .add('notice 1', () => ({
+        components: {
+            'c-pro-mode-n1' : (resolve) => require(['@/ui/components/pro-mode/notice1.vue'], resolve),
+        },
+        template: `<div class="p-4"><c-pro-mode-n1 name="Eron" /></div>`
+    }))
+
 
 /*
      Dynamic import - test version
