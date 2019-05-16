@@ -49,7 +49,6 @@
     "node-sass": "^4.9.3",
     "nuxt": "^2.4.0",
     "qartjs": "^1.1.2",
-    "ts-loader": "^4.4.1",
     "vue": "^2.5.2",
     "vue-3d-model": "^1.0.2",
     "vue-awesome-swiper": "^3.1.3",
@@ -83,27 +82,8 @@
     "@storybook/addon-viewport": "^4.0.0-alpha.16",
     "@storybook/addons": "^4.0.0-alpha.16",
     "@storybook/vue": "^4.0.0-alpha.16",
-    "@types/core-js": "^2.5.0",
-    "@types/mocha": "^5.2.2",
-    "@types/node": "^10.3.3",
-    "@types/sinon": "^5.0.1",
-    "@types/webpack-env": "^1.13.6",
     "@vue/test-utils": "^1.0.0-beta.25",
     "autoprefixer": "^7.1.5",
-    "awesome-typescript-loader": "^5.0.0",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^8.0.1",
-    "babel-jest": "^24.1.0",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-istanbul": "^4.1.5",
-    "babel-plugin-require-context-hook": "^1.0.0",
-    "babel-plugin-transform-es2015-template-literals": "^6.22.0",
-    "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-stage-2": "^6.24.1",
-    "babel-preset-vue": "^2.0.2",
-    "babel-register": "^6.26.0",
     "bootstrap-vue": "^2.0.0-rc.11",
     "chai": "^4.1.2",
     "chalk": "^2.1.0",
@@ -167,8 +147,6 @@
     "storybook-vue-router": "^1.0.1",
     "sw-precache-webpack-plugin": "*",
     "terser-webpack-plugin": "^1.1.0",
-    "tsconfig-paths-webpack-plugin": "^3.2.0",
-    "typescript": "^2.9.2",
     "url-loader": "^0.6.2",
     "vue-jest": "^3.0.3",
     "vue-loader": "^15.2.4",
@@ -221,24 +199,5 @@
       "<rootDir>/test/",
       "<rootDir>/node_modules/"
     ]
-  },
-  "babel": {
-    "env": {
-      "test": {
-        "presets": [
-          [
-            "env",
-            {
-              "targets": {
-                "node": "current"
-              }
-            }
-          ]
-        ],
-        "plugins": [
-          "require-context-hook"
-        ]
-      }
-    }
   }
 }
