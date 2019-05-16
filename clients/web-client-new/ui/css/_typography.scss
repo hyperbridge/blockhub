@@ -1,0 +1,166 @@
+/*------------------------------------------------------------------
+
+    [Typography]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+
+-------------------------------------------------------------------*/
+
+html{
+    box-sizing: border-box;
+}
+
+html,body{    
+    margin: 0px;
+    padding: 0px;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: $font-family;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    line-height: $line-height;
+    color: $color;
+    background: #30314c;
+}
+
+body{
+    width: 100%;
+}
+
+h1,h2,h3,h4,h5,h6{
+    margin-top: 0px;
+    margin-bottom: 16px;
+    padding: 0px;
+    font-weight: 500;
+    color: $color-heading;
+    
+    span{
+        font-weight: 300;
+    }
+}
+
+h1{
+    font-size: 24px;
+    margin-bottom: 24px;
+}
+h2{
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+h3{
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+h4{
+    font-size: 15px;
+    margin-bottom: 10px;
+    line-height: $line-height;
+}
+h5{
+    font-size: 13px;
+    margin-bottom: 10px;
+    line-height: $line-height;
+}
+h6{
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+a{
+    color: $color-link;
+    
+    &:hover{
+        color: $color-link-hover;
+    }
+}
+
+p{
+    margin-bottom: 10px;
+    
+    &.caption{
+        font-size: $font-size-secondary;
+        line-height: 20px;
+        font-weight: 400;
+        margin-bottom: 0px;
+        color: $color-secondary;
+        text-transform: uppercase;
+    }
+    
+    &.subtitle{
+        margin-top: -10px;
+        color: $color-secondary;
+    }
+    
+    &:last-child{
+        margin-bottom: 0px;
+    }
+}
+
+.caption{
+    font-size: $font-size-secondary;
+    line-height: 20px;
+    font-weight: 400;
+    margin-bottom: 0px;
+    color: $color-secondary;
+    text-transform: uppercase;
+}
+
+pre{
+    margin: 0px 0px 10px;
+    background: rgba(0,0,0,0.05);
+    padding: 5px 10px;
+}
+
+.blockquote{
+    font-size: $font-size + 2;
+    margin-bottom: 20px;
+    
+    .blockquote-footer{
+        font-size: $font-size;
+        font-weight: 300;
+    }
+}
+
+.lead{
+    font-size: $font-size + 2;
+    font-weight: 400;
+}
+
+ul{
+    padding-left: 15px;
+    
+    li{
+        line-height: $line-height;
+    }
+    
+    > ul{
+        padding-left: 30px;
+    }
+}
+
+small{
+    font-size: $font-size - 2;
+}
+
+.styled-list{
+    list-style: none;
+    padding: 0px;
+    
+    > li{
+        line-height: $line-height;
+        padding-bottom: 10px;
+        margin-top: 10px;
+        border-bottom: 1px dashed rgba(0,0,0,0.1);
+        
+        > a{
+            color: $color-heading;
+        }
+        
+        &:last-child{
+            border-bottom: 0px;
+        }
+    }
+}

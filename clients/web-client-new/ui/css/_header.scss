@@ -1,0 +1,176 @@
+/*------------------------------------------------------------------
+
+    [Header styles]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+    
+    
+    [Table of contents]
+    
+    1. Page header
+    2. Page header title
+    3. Page header search
+    
+-------------------------------------------------------------------*/
+
+
+/*-----
+    [Page header]
+
+    Universal head container
+
+    + Page header       / .page__header
+        - Logo holder   / .logo-holder 
+        - Box           / .box - liquid container(width goes to 0%);
+        - Container     / .container - liquid container(width goes to 100%);
+    
+    Page header title   / .page-header-title
+    Page header search  / .page-header-search
+-----*/
+.page__header{
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 auto;
+    
+    /*-----
+        [Logo holder]
+    -----*/
+    > .logo-holder{
+        flex: 0 0 auto;
+        width: $logo-width;
+    }
+    
+    
+    /*-----
+        [Box]
+    -----*/
+    > .box{
+        flex: 0 0 auto;
+        padding: 10px 0px 9px;
+        
+        .btn,.user{
+            float: left;
+            margin-left: 10px;
+        }
+        
+        &:last-child{
+            padding-right: 10px;
+        }
+    }
+    
+    
+    /*-----
+        [Container]
+    -----*/
+    > .box-fluid{
+        flex: 1;
+        padding: 0px;
+    }
+    
+}
+
+/*-----
+    [Page header title]
+-----*/
+.page-header-title{
+    line-height: $line-height;
+    font-size: $font-size + 2;
+    margin: 12px 0px 1px;
+    padding: 0px;
+}
+
+
+/*-----
+    [Page header search]
+-----*/
+.page-header-search{
+    position: relative;
+    
+    .form-control{
+        padding-left: 40px;        
+        width: 250px;
+        @if $animation != 0 {
+            @include transition(all $animation ease-in-out);
+        }                                            
+    }
+    
+    &__icon{
+        position: absolute;                
+        left: 0px;
+        top: 0px;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        line-height: 39px;
+        
+        &:after{
+            content: " ";
+            position: absolute;
+            width: 11px;
+            height: 11px;
+            left: 14px;
+            top: 13px;
+            border: 2px solid $color;
+            border-radius: 50%;
+            @if $animation != 0 {
+                @include transition(all $animation ease-in-out);
+            }
+        
+        }
+        &:before{
+            content: " ";
+            position: absolute;
+            width: 5px;
+            height: 2px;
+            background: $color;
+            left: 22px;
+            top: 23px;
+            transform: rotate(45deg);
+            @if $animation != 0 {
+                @include transition(all $animation ease-in-out);
+            }
+        }
+    }
+    
+    &--focus{
+        .page-header-search__icon{
+            cursor: pointer;
+
+            &:after{
+                border: 0px;
+                height: 2px;
+                background: $color;
+                border-radius: 0px;
+                transform: rotate(-45deg);
+                top: 19px;
+                left: 16px;
+            }
+            
+            &:before{
+                width: 11px;
+                top: 19px;
+                left: 16px;
+            }
+        }
+    }
+}
+
+
+/*-----
+    [Media for page header]
+-----*/
+@include media-breakpoint-down(md) {
+    .page-header-search{                
+        .form-control{
+            width: 40px;
+            padding-right: 0px;
+        }
+        &--focus{
+            .form-control{
+                width: 150px;
+            }
+        }
+    }
+}

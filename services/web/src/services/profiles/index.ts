@@ -53,7 +53,7 @@ export default function(app) {
             })
 
             return {
-                balance: profiles.length && profiles[0].meta.tokenBalance || 0
+                balance: (profiles.length && profiles[0].meta.tokenBalance) || 0
             }
         }
     })

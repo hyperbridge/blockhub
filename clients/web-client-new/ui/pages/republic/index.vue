@@ -1,0 +1,35 @@
+<template>
+    <c-layout>
+        <div class="row">
+            <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                <c-card class="text-center">
+                    <h4 class="h2">The Republic</h4>
+                    <i class="fas fa-wolf-pack-battalion" />
+                </c-card>
+            </div>
+        </div>
+    </c-layout>
+</template>
+
+<script>
+    export default {
+        props: ['id'],
+        components: {
+            'c-article-item': (resolve) => require(['@/components/help/article-item'], resolve),
+            'c-topic-item': (resolve) => require(['@/components/help/topic-item'], resolve),
+            'c-list-item': (resolve) => require(['@/components/help/simple-item'], resolve),
+            'c-card': (resolve) => require(['@/components/help/help-card.vue'], resolve),
+        },
+        methods: {
+        },
+        computed: {
+
+        },
+        created() {
+            this.$store.commit('application/activateModal', 'coming-soon')
+        }
+    }
+</script>
+
+<style lang="scss" scoped>
+</style>

@@ -1,0 +1,328 @@
+/*------------------------------------------------------------------
+
+    [Help classes]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+
+-------------------------------------------------------------------*/
+
+.text-primary{
+    color: $primary-background !important;
+}
+
+.text-secondary{
+    color: $secondary-background !important;
+}
+.text-success{
+    color: $success-background !important;
+}
+.text-info{
+    color: $info-background !important;
+}
+
+.text-sm{
+    font-size: $font-size - 2 !important;
+}
+.text-lg{
+    font-size: $font-size + 1 !important;
+}
+.text-xlg{
+    font-size: $font-size * 2 !important;
+    line-height: $line-height * 2 !important;
+}
+.text-bold{
+    font-weight: 500;
+}
+
+.text-muted{
+    color: $color-secondary;
+}
+
+.margin-auto { margin: 0 auto; }
+.margin-0{margin: 0px !important;}
+.margin-top-0{margin-top: 0px !important;}
+.margin-top-5{margin-top: 5px !important;}
+.margin-top-10{margin-top: 10px !important;}
+.margin-top-15{margin-top: 15px !important;}
+.margin-top-20{margin-top: 20px !important;}
+.margin-top-30{margin-top: 30px !important;}
+.margin-top-40{margin-top: 40px !important;}
+.margin-top-50{margin-top: 50px !important;}
+.margin-top-60{margin-top: 60px !important;}
+.margin-top-70{margin-top: 70px !important;}
+.margin-top-80{margin-top: 80px !important;}
+.margin-top-90{margin-top: 90px !important;}
+.margin-top-100{margin-top: 100px !important;}
+.margin-top-minus-one{margin-top: -1px !important;}
+
+.margin-bottom-0{margin-bottom: 0px !important;}
+.margin-bottom-5{margin-bottom: 5px !important;}
+.margin-bottom-10{margin-bottom: 10px !important;}
+.margin-bottom-15{margin-bottom: 15px !important;}
+.margin-bottom-20{margin-bottom: 20px !important;}
+.margin-bottom-30{margin-bottom: 30px !important;}
+.margin-bottom-40{margin-bottom: 40px !important;}
+.margin-bottom-50{margin-bottom: 50px !important;}
+.margin-bottom-60{margin-bottom: 60px !important;}
+.margin-bottom-70{margin-bottom: 70px !important;}
+.margin-bottom-80{margin-bottom: 80px !important;}
+.margin-bottom-90{margin-bottom: 90px !important;}
+.margin-bottom-100{margin-bottom: 100px !important;}
+
+.margin-left-0{margin-left: 0px !important;}
+.margin-left-5{margin-left: 5px !important;}
+.margin-left-10{margin-left: 10px !important;}
+.margin-left-15{margin-left: 15px !important;}
+.margin-left-20{margin-left: 20px !important;}
+.margin-left-30{margin-left: 30px !important;}
+.margin-left-40{margin-left: 40px !important;}
+.margin-left-50{margin-left: 50px !important;}
+
+.margin-right-0{margin-right: 0px !important;}
+.margin-right-5{margin-right: 5px !important;}
+.margin-right-10{margin-right: 10px !important;}
+.margin-right-15{margin-right: 15px !important;}
+.margin-right-20{margin-right: 20px !important;}
+.margin-right-30{margin-right: 30px !important;}
+.margin-right-40{margin-right: 40px !important;}
+.margin-right-50{margin-right: 50px !important;}
+
+.margin-vertical-5{margin: 5px 0 !important;}
+.margin-vertical-10{margin: 10px 0 !important;}
+.margin-vertical-15{margin: 15px 0 !important;}
+.margin-vertical-20{margin: 20px 0 !important;}
+.margin-vertical-30{margin: 30px 0 !important;}
+.margin-vertical-40{margin: 40px 0 !important;}
+.margin-vertical-50{margin: 50px 0 !important;}
+
+.margin-horizontal-5{margin: 0 5px !important;}
+.margin-horizontal-10{margin: 0 10px !important;}
+.margin-horizontal-15{margin: 0 15px !important;}
+.margin-horizontal-20{margin: 0 20px !important;}
+.margin-horizontal-30{margin: 0 30px !important;}
+.margin-horizontal-40{margin: 0 40px !important;}
+.margin-horizontal-50{margin: 0 50px !important;}
+
+.padding-0{padding: 0px !important;}
+.padding-5{padding: 5px !important;}
+.padding-10{padding: 10px !important;}
+.padding-15{padding: 15px !important;}
+.padding-20{padding: 20px !important;}
+.padding-30{padding: 30px !important;}
+.padding-40{padding: 40px !important;}
+.padding-50{padding: 50px !important;}
+
+.padding-left-0{padding-left: 0px !important;}
+.padding-left-5{padding-left: 5px !important;}
+.padding-left-10{padding-left: 10px !important;}
+.padding-left-15{padding-left: 15px !important;}
+.padding-left-20{padding-left: 20px !important;}
+.padding-left-30{padding-left: 30px !important;}
+.padding-left-40{padding-left: 40px !important;}
+.padding-left-50{padding-left: 50px !important;}
+
+.padding-right-0{padding-right: 0px !important;}
+.padding-right-5{padding-right: 5px !important;}
+.padding-right-10{padding-right: 10px !important;}
+.padding-right-15{padding-right: 15px !important;}
+.padding-right-20{padding-right: 20px !important;}
+.padding-right-30{padding-right: 30px !important;}
+.padding-right-40{padding-right: 40px !important;}
+.padding-right-50{padding-right: 50px !important;}
+
+.padding-top-0{padding-top: 0px !important;}
+.padding-top-5{padding-top: 5px !important;}
+.padding-top-10{padding-top: 10px !important;}
+.padding-top-15{padding-top: 15px !important;}
+.padding-top-20{padding-top: 20px !important;}
+.padding-top-30{padding-top: 30px !important;}
+.padding-top-40{padding-top: 40px !important;}
+.padding-top-50{padding-top: 50px !important;}
+
+.padding-bottom-0{padding-bottom: 0px !important;}
+.padding-bottom-5{padding-bottom: 5px !important;}
+.padding-bottom-10{padding-bottom: 10px !important;}
+.padding-bottom-15{padding-bottom: 15px !important;}
+.padding-bottom-20{padding-bottom: 20px !important;}
+.padding-bottom-30{padding-bottom: 30px !important;}
+.padding-bottom-40{padding-bottom: 40px !important;}
+.padding-bottom-50{padding-bottom: 50px !important;}
+
+.overflow-x-hidden{
+    overflow-x: hidden;
+}
+.overflow-x-scroll{
+    overflow-x: scroll;
+}
+.overflow-y-hidden{
+    overflow-y: hidden;
+}
+.overflow-hidden{
+    overflow: hidden;
+}
+
+// bootstrap color backgrounds
+
+.bg-primary{
+    background-color: $primary-background !important;
+    color: $primary-color;
+}
+.bg-secondary{
+    background-color: $secondary-background !important;
+    color: $secondary-color;
+}
+.bg-success{
+    background-color: $success-background !important;
+    color: $success-color;
+}
+.bg-info{
+    background-color: $info-background !important;
+    color: $info-color;
+}
+.bg-warning{
+    background-color: $warning-background !important;
+    color: $warning-color;
+}
+.bg-danger{
+    background-color: $danger-background !important;
+    color: $danger-color;
+}
+.bg-higlight{
+    background-color: rgba(0,0,0,0.05) !important;
+}
+
+// backgrounds
+.bg-solid-pink{
+    background: #ff3d9f !important;
+}
+
+
+// backgrounds/gradients
+.bg-gradient-1{
+//    @include linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%);
+    background: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%) !important;
+}
+.bg-gradient-2{
+    background: linear-gradient(to right, #108dc7, #ef8e38) !important;
+}
+.bg-gradient-3{
+    background: linear-gradient(to top, #88d3ce 0%, #6e45e2 100%) !important;
+}
+.bg-gradient-4{
+    background: linear-gradient(to right, #7b920a, #add100) !important;
+}
+.bg-gradient-5{
+    background: linear-gradient(to right, #6a9113, #141517) !important;
+}
+.bg-gradient-6{
+    background: linear-gradient(to top, #f43b47 0%, #453a94 100%) !important;
+}
+.bg-gradient-7{
+    background: linear-gradient(to top, #ff0844 0%, #ffb199 100%) !important;
+}
+.bg-gradient-8{
+    background: linear-gradient(to top, #f77062 0%, #fe5196 100%) !important;
+}
+.bg-gradient-9{
+    background: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%) !important;
+}
+.bg-gradient-10{
+    background: linear-gradient(45deg, #874da2 0%, #c43a30 100%) !important;
+}
+
+.bg-gradient-11{
+    background: linear-gradient(to right, #8e5c95 0%, #ff9297 100%) !important;
+}
+.bg-gradient-12{
+    background: linear-gradient(to right, #fd75ba 0%, #ff9297 100%) !important;
+}
+.bg-gradient-13{
+    background: linear-gradient(to right, #fc584a 0%, #f74072 100%) !important;
+}
+.bg-gradient-14{
+    background: linear-gradient(to right, #433c89 0%, #b63263 100%) !important;
+}
+.bg-gradient-15{
+    background: linear-gradient(to right, #5c74ff 0%, #bb7aff 100%) !important;
+}
+
+// bg 'story'
+.bg-story-1{
+    background: linear-gradient(to right, #0f0c29 0%, #C02425 100%) !important;
+}
+.bg-story-2{
+    background: linear-gradient(to right, #C02425 0%, #F11712 100%) !important;
+}
+.bg-story-3{
+    background: linear-gradient(to right, #F11712 0%, #C02425 100%) !important;
+}
+.bg-story-4{
+    background: linear-gradient(to right, #C02425 0%, #0f0c29 100%) !important;
+}
+
+.avoid-clicks {
+    pointer-events: none;
+}
+
+.clear-btn {
+    border-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+}
+
+.flex-center-wrap {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.flex-center-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-center-around {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.icon--active {
+    text-shadow: 0 0 5px rgba(255,255,255, .7);
+}
+.icon--inactive:not(:hover) {
+    opacity: .7;
+}
+
+.reset-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.negative {
+    color: rgb(255, 118, 118);
+}
+
+.positive {
+    color: #41ba5d;
+}
+
+.half-width {
+    width: 50%;
+}
+.full-width {
+    width: 100%;
+}
+
+.text-align-center {
+    text-align: center;
+}

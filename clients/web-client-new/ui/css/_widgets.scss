@@ -1,0 +1,389 @@
+/*------------------------------------------------------------------
+
+    [Widgets]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+    
+
+    [Table of contents]
+    
+    1. Widget
+    2. Informer
+
+-------------------------------------------------------------------*/
+
+
+/*-----
+    [Widget]
+    
+    Basic template widget
+    
+    + .widget                       - wrapper
+        & .widget--items-middle     - [modify] middle position for all elements
+        & .widget--box              - [modify] box widget mode
+        & .widget--button           - [modify] button widget mode
+
+        + .widget__icon_layer       - container for background icon
+            & .widget__icon_layer--middle   - middle icon position
+            & .widget__icon_layer--right    - right icon position
+
+        + .widget__container        - content container
+        + .widget__line             - line container
+        + .widget__icon             - widget icon
+        + .widget__title            - widget title
+        + .widget__subtitle         - widget subtitle
+        + .widget__box              - basically container
+            & .widget__box--top     - [modify] top position
+            & .widget__box--left    - [modify] left position
+
+        + .widget__informer         - widget informer box
+-----*/
+.widget{
+    display: block;
+    background: $base-skin-background;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: $border-radius;        
+    color: $color;
+    position: relative;
+    @include clearfix();
+    
+    /*-----
+        [.widget__icon_layer]
+    -----*/
+    &__icon_layer{
+        width: 100%;
+        text-align: left;
+        padding: 10px;
+        
+        span{
+            line-height: 80px;
+            font-size: 80px;            
+            color: rgba($color,0.05);
+        }
+        &--middle{
+            text-align: center;
+        }
+        &--right{
+            text-align: right;
+        }
+    }
+    
+    /*-----
+        [.widget__icon_container]
+    -----*/
+    &__container{
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        padding: 10px;        
+    }
+    
+    /*-----
+        [.widget__line]
+    -----*/
+    &__line{
+        float: left;
+        width: 100%;
+        @include clearfix();
+    }
+    
+    /*-----
+        [.widget__icon]
+    -----*/
+    &__icon{
+        float: left;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        line-height: 40px;
+        color: $color-heading;
+        
+        span{
+            line-height: 40px;
+            
+            &[class^="li-"]{
+                font-size: 40px;
+            }
+        }
+    }
+    
+    /*-----
+        [.widget__title]
+    -----*/
+    &__title{
+        padding-left: 50px;
+        line-height: $line-height;
+        font-weight: 700;
+        color: $color-heading;
+    }
+    
+    /*-----
+        [.widget__subtitle]
+    -----*/
+    &__subtitle{
+        padding-left: 50px;
+        line-height: $line-height;
+        font-weight: 400;
+        color: $color-secondary;
+    }
+    
+    /*-----
+        [.widget__box]
+    -----*/
+    &__box{
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        
+        &--top{
+            bottom: auto;
+            top: 10px;
+        }
+        
+        &--left{
+            right: auto;
+            left: 10px;
+        }
+    }
+    
+    /*-----
+        [.widget__informer]
+    -----*/
+    &__informer{
+        line-height: $line-height;
+        font-weight: 400;
+        border-radius: $border-radius;
+        padding: 5px 10px;
+        background: rgba(0,0,0,0.05);                
+    }
+    
+    /*-----
+        [.widget--items-middle]
+    -----*/
+    &--items-middle{
+        .widget__container{
+            padding: 30px 10px;
+        }
+        .widget__box{
+            bottom: auto;
+            top: 35px;
+        }
+    }  
+    
+    /*-----
+        [.widget--box]
+    -----*/
+    &--box{
+        .widget__container{
+            position: relative;
+            left: auto;          
+            top: auto;
+            @include clearfix();
+            
+            .widget__icon{                
+                width: 100%;
+                height: auto;
+                text-align: center;                
+                margin: 10px 0px;
+                
+                span{
+                    display: block;
+                }
+            }
+            .widget__title,
+            .widget__subtitle{
+                padding: 0px;
+                float: left;
+                width: 100%;
+                text-align: center;
+            }
+        }
+    }
+    
+    /*-----
+        [.widget--button]
+    -----*/
+    &--button{
+        border: 1px dashed $color-secondary;
+        background: transparent;
+        @if $animation != 0 {
+            @include transition(all $animation ease-in-out);
+        }
+        
+        .widget__icon{
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -20px 0px 0px -20px;
+            color: $color-secondary;
+            @if $animation != 0 {
+                @include transition(color $animation ease-in-out);
+            }
+        }
+        
+        &:hover{
+            background: $base-skin-background;
+            border: 1px dashed $color;
+            
+            .widget__icon{
+                color: $color;
+            }
+        }
+    }
+}
+
+/*-----
+    [Media for widget]
+-----*/
+@include media-breakpoint-down(md) {
+    .widget{
+        margin-bottom: 10px;
+    }
+}
+
+/*-----
+    [Support widget in bootstrap card]
+-----*/
+.card{
+    > .widget{
+        .widget__title{
+            font-size: $font-size + 1;
+        }
+        .widget__container{
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .widget__box{
+            right: 20px;
+            
+            &.widget__box--left{
+                right: auto;
+                left: 20px;
+            }
+        }
+        
+        &:first-child{
+            border-radius: $border-radius $border-radius 0px 0px;
+        }
+        &:not(:first-child){
+            border-radius: 0px;
+        }
+        &:last-child{
+            border-radius: 0px 0px $border-radius $border-radius;
+        }
+    }
+}
+
+
+
+/*-----
+    [Informer]
+    
+    Basic template informer
+    
+    + .informer                     - wrapper
+        & .informer--icon           - [modify] informer with icon
+        & .informer--icon-right     - [modify] right icon position
+
+        + .informer__wrapper        - content wrapper
+        + .informer__num            - container for number/info
+        + .informer__title          - informer title
+        + .informer__icon           - informer icon
+-----*/
+.informer{
+    display: block;
+    background: $base-skin-background;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: $border-radius;
+    color: $color;
+    position: relative;
+    height: 100%;
+    @include clearfix();
+    
+    /*-----
+        [.informer__wrapper content wrapper]
+    -----*/
+    &__wrapper{
+        float: left;
+        width: 100%;
+        text-align: center;
+    }
+    
+    /*-----
+        [.informer__num  container for number/info]
+    -----*/
+    &__num{
+        float: left;
+        width: 100%;
+        padding: 15px 10px 0px;
+        /* font-family: 'Oswald', sans-serif; */
+        font-size: 26px;
+        line-height: 30px;
+        font-weight: 700;
+        color: $color-heading;
+    }
+    
+    /*-----
+        [.informer__title informer title]
+    -----*/
+    &__title{
+        float: left;
+        width: 100%;
+        padding: 0px 10px 15px;
+        font-size: $font-size;
+        color: $color-secondary;
+        font-weight: 400;
+    }
+    
+    /*-----
+        [.informer__icon informer icon]
+    -----*/
+    &__icon{
+        position: absolute;
+        left: 0px;
+        top: 50%;
+        margin-top: -35px;
+        width: 70px;        
+        height: 70px;    
+        text-align: center;
+        color: $color-heading;
+        
+        span{
+            &[class^="li-"]{
+                display: block;
+                line-height: 70px;
+                font-size: 40px;
+            }
+        }
+    }
+    
+    /*-----
+        [.informer--icon informer with icon]
+    -----*/
+    &--icon{
+        .informer__wrapper{
+            padding-left: 70px;
+            text-align: left;            
+        }
+    }
+    
+    /*-----
+        [.informer--icon-right right icon position]
+    -----*/
+    &--icon-right{
+        .informer__wrapper{
+            padding-left: 10px;
+            padding-right: 70px;                        
+        }
+        .informer__icon{
+            left: auto;
+            right: 0px;
+        }
+    }
+}

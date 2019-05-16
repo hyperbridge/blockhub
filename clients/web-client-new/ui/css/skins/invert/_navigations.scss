@@ -1,0 +1,251 @@
+/*------------------------------------------------------------------
+
+    [Navigations]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+
+-------------------------------------------------------------------*/
+
+.invert{
+    .navigation{
+        
+        .icon{                    
+            color: $invert-navigation-icon-color;
+        }
+        
+        ul{
+            > li{
+                > a.no-icon{                    
+                    &:after{
+                        background: $invert-navigation-icon-color;
+                    }
+                }
+                
+                &.active{
+                    > a.no-icon{
+                        &:after{
+                            background: $invert-navigation-icon-color-active;                            
+                        }
+                    }
+                }
+            }
+        }
+        
+        > ul{
+            > li{
+                &.title{
+                    color: #fff;
+                    font-size: 14px;
+                    font-weight: bold;
+
+                    > a {
+                        color: #fff;
+                        font-size: 14px;
+                        font-weight: bold;
+                    }
+                }
+
+                &.more{
+                    > a {
+                        color: #fff;
+                        font-size: 12px;
+                        font-weight: bold;
+                    }
+                }
+
+                > a{
+                    background: $invert-navigation-background;
+                    color: $invert-navigation-color;
+
+                    &:hover{                        
+                        background: $invert-navigation-background-hover;
+                        color: $invert-navigation-color-hover;
+                    }
+                }
+                
+                &.active{
+                    > a{                    
+                        background: $invert-navigation-background-active;
+                        color: $invert-navigation-color-active;                    
+                        
+                        .icon{
+                            color: $invert-navigation-icon-color-active;
+                        }
+                    }
+                }
+                &.open{
+                    > a{
+                        background: $invert-navigation-background-hover;
+                        color: $invert-navigation-color;
+                    }
+                }
+                
+                ul{                    
+
+                    > li{
+                        > a{
+                            background: opacify($invert-navigation-background, 0.05);
+                            color: $invert-navigation-color;                            
+
+                            &:hover{
+                                color: $invert-navigation-color-hover;
+                                background: opacify($invert-navigation-background-hover, 0.02);
+                            }
+                        }
+                        
+                        &.active{
+                            > a{
+                                background: opacify($invert-navigation-background-active, 0.02);
+                            }
+                        }
+                        
+                        &.open{
+                            > a{
+                                background: opacify($invert-navigation-background-active, 0.02);
+                            }
+                        }
+                        
+                        > ul{                                                        
+                            > li{                                
+                                > a{
+                                    background: opacify($invert-navigation-background, 0.15);                                                                                                          
+                                    
+                                    &:hover{
+                                        background: opacify($invert-navigation-background, 0.2);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }    
+    }
+    
+    &.navigation--minimized,&.page-aside--minimized{
+        .navigation{
+            > ul{
+                > li{
+                    &:hover{
+                        > a{
+                            background: $invert-navigation-background-hover;
+                            color: $invert-navigation-color-hover;
+                        }
+                    }
+                    
+                    ul{
+                        > li{
+                            background: $invert-base-skin-background;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // vertical navigation
+    .horizontal-navigation{
+        > ul{            
+            .icon{                
+                color: $invert-navigation-icon-color;               
+            }
+
+            > li{                
+                > a{                    
+                    color: $invert-navigation-color;
+                    background: $invert-navigation-background;                                        
+
+                    &:hover{
+                        color: $invert-navigation-color-hover;
+                        background: $invert-navigation-background-hover;
+                    }
+                }                        
+
+                ul{                    
+                    border: 1px solid $invert-border-color;                    
+
+                    > li{
+                        background: $invert-base-skin-background;
+                        
+                        > a{                            
+                            color: $invert-navigation-color;
+                            background: opacify($invert-navigation-background, 0.05);
+                            border-color: $invert-border-color;
+                            color: $invert-navigation-color;                            
+
+                            &:hover{
+                                background: opacify($invert-navigation-background-hover,0.02);
+                                color: $invert-navigation-color-hover;                                
+                            }                                                       
+                        }
+                    }
+                }
+                
+            }
+
+            li{
+                background: $invert-container-background;
+                
+                > a.no-icon{                    
+                    &:after{                        
+                        background: $invert-navigation-icon-color;                        
+                    }
+                }
+                &.active{
+                    > a.no-icon{
+                        &:after{
+                            background: $invert-navigation-icon-color-active;
+                        }
+                    }
+                }
+
+                &:hover{
+                    > a{
+                        color: $invert-navigation-color-hover;
+                        background: $invert-navigation-background-hover;
+                    }                    
+                }
+            }
+        }
+    }        
+    // end vertical navigation
+    
+    .file-tree{
+        ul{            
+            > li{                
+                > a{                    
+                    color: $invert-color-link;                                                                               
+                    &:hover{
+                        color: $invert-color-link-hover;
+                    }
+                }               
+
+                &:after{                    
+                    border-top: 1px dotted $invert-border-color;                    
+                }
+
+                &.folder{
+                    &:before{                        
+                        border-color: transparent transparent transparent $invert-color;
+                    }
+                }            
+
+                &.open{
+                    &.folder{
+                        &:before{                                                
+                            border-color: $invert-color transparent transparent transparent;                                       
+                        }
+                    }
+                }
+            }
+
+            &:after{                
+                border-right: 1px dotted $invert-border-color;
+            }        
+        }
+    }
+    
+}
+// end 

@@ -1,0 +1,1 @@
+import summernote from "bs4-summernote";

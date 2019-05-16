@@ -1,0 +1,154 @@
+/*------------------------------------------------------------------
+
+    [Animations]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+
+-------------------------------------------------------------------*/
+
+@keyframes showRightPanel {
+    0% {width: 0px;}
+    50%{width: $sidepanel-width;}
+    100%{width: $sidepanel-width;}
+}
+@keyframes hideSidepanel {
+    0% {width: $sidepanel-width;}
+    50%{width: $sidepanel-width;}
+    100%{width: 0px;}
+}
+
+@keyframes showAside {
+    0% {width: 0px;}
+    50%{width: $aside-width;}
+    100%{width: $aside-width;}
+}
+@keyframes hideAside {
+    0% {width: $aside-width;}
+    50%{width: $aside-width;}
+    100%{width: 0px;}
+}
+
+@keyframes showChildrenContent {
+    0% {opacity: 0;}
+    50%{opacity: 0;}
+    100%{opacity: 1;}
+}
+@keyframes hideChildrenContent {
+    0% {opacity: 1;}
+    50%{opacity: 0;}
+    100%{opacity: 0;}
+}
+
+@keyframes rotate {
+    0% {transform: rotate(0deg);}
+    100%{transform: rotate(359deg);}
+}
+
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    80% {opacity: 0;}
+    100% {opacity: 0;}
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes shadowPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0,0,0,0);
+    }
+    20% {
+        box-shadow: 0 0 0 0 rgba(0,0,0,0.4);
+    }
+    60% {
+        box-shadow: 0 0 0 10px rgba(0,0,0,0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0,0,0,0);
+    }
+}
+
+@keyframes pageLoaderDefault {
+    0%{
+        box-shadow: 0px 0px 200px 10px rgba($base-skin-color, 0.3);
+    }
+    50%{
+        box-shadow: 0px 0px 200px 10px rgba($base-skin-color, 1);
+    }
+    100%{
+        box-shadow: 0px 0px 200px 10px rgba($base-skin-color, 0.3);
+    }
+}
+@keyframes pageLoaderPrimary {
+    0%{
+        box-shadow: 0px 0px 200px 10px rgba($primary-background, 0.3);
+    }
+    50%{
+        box-shadow: 0px 0px 200px 10px rgba($primary-background, 1);
+    }
+    100%{
+        box-shadow: 0px 0px 200px 10px rgba($primary-background, 0.3);
+    }
+}
+
+@keyframes show-in {
+    0% {
+        transform: translateY(10%);
+        opacity: 0;
+    }
+    60% {
+        transform: translateY(-5%);
+        opacity: 1;
+    }
+    80% {
+        transform: translate(3%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.keepAttentionTo{
+    animation: shadowPulse 1s;
+}
+.spinMe{
+    animation: rotate 1s infinite;
+}
+
+.slide-in-enter-active, .slide-in-leave-active {
+    transition: opacity .2s ease, transform .2s ease;
+}
+.slide-in-leave-to, .slide-in-enter {
+    opacity: 0;
+    transform: translateY(10%);
+}
+
+.slide-in-top-enter-active {
+    transition: transform .25s ease, opacity .25s ease;
+}
+.slide-in-top-enter, .slide-in-top-leave-to {
+    opacity: 0;
+    transform: translateY(-10%);
+}
+
+
+.page {
+    &-enter-active {
+        transition: opacity .6s, transform .6s ease;
+    }
+    &-leave-active {
+        transition: opacity .3s, transform .3s ease;
+    }
+    &-enter, &-leave-to {
+        opacity: 0;
+        transform: translateY(5vh);
+    }
+    &-leave-active {
+        position: absolute;
+        width: calc(100% - 30px);
+    }
+}

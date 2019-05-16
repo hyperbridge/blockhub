@@ -1,0 +1,159 @@
+/*------------------------------------------------------------------
+
+    [Features]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+
+-------------------------------------------------------------------*/
+
+// Divider
+.invert{
+    .divider{    
+        background: darken($invert-border-color,10%);    
+
+        &:after,&:before{        
+            background: $invert-base-skin-background;
+            border: 1px solid darken($invert-border-color,10%);
+        }    
+    }
+    .divider-text{
+        border-top-color: darken($invert-border-color,10%);
+        border-bottom-color: darken($invert-border-color,10%);
+        color: $invert-color;
+    }
+    .loading{
+        color: $invert-color;
+        background: rgba(0,0,0,0.3);
+        
+        &.loading--w-spinner{
+            > div{
+                .loading-spinner{
+                    &:before{
+                        border-color: $invert-color;
+                        border-right-color: transparent;
+                    }                    
+                }                
+            }
+        }
+    }
+}
+// end divider
+
+// card
+.credit-card{
+    &.invert{
+        border: 0px;
+        background: #3d3e5d;
+        
+        .credit-card__number{
+            color: $invert-color-heading;
+        }
+    }
+}
+// end card
+
+// list faq
+
+.invert{
+    .list-faq{
+        .list-faq-item{            
+            background: $invert-base-skin-background;            
+
+            .list-faq-item-title{               
+                &:after{                    
+                    color: $invert-color;
+                }
+            }           
+
+            &:hover{
+                background: darken($invert-base-skin-background,2%);
+            }
+            
+        }
+    }
+}
+
+// informative progress
+.invert{
+    .rw-informative-progress{        
+        > .bar{            
+            background: rgba(0,0,0,0.1);
+
+            &--primary{
+                background: rgba($primary-background,0.3);
+            }
+            &--secondary{
+                background: rgba(0,0,0,0.1);
+            }
+            &--success{
+                background: rgba($success-background,0.3);
+            }
+            &--info{
+                background: rgba($info-background,0.3);
+            }
+            &--warning{
+                background: rgba($warning-background,0.3);
+            }
+            &--danger{
+                background: rgba($danger-background,0.3);
+            }
+        }
+        > .text{
+            color: $invert-color;            
+        }       
+    }
+}
+// end informative progress
+
+// timeline
+.invert{
+    .timeline{
+        &__item{
+            > .user{
+                > img{
+                    background: $invert-base-skin-background;
+                }
+            }
+
+            > .dot{
+                &:after{
+                    background: $invert-base-skin-background;
+                }      
+                
+                &.dot-primary:after{background: $primary-background;}
+                &.dot-info:after{background: $info-background;}
+                &.dot-success:after{background: $success-background;}
+                &.dot-warning:after{background: $warning-background;}
+                &.dot-danger:after{background: $danger-background;}
+            }
+
+            > .content{
+                background: $invert-base-skin-background;
+
+                .title{                                    
+                    color: $invert-color;
+                }                
+                strong{                
+                    color: $invert-color-heading;
+                }
+            }            
+        }
+
+        &__more{
+
+
+            > a{
+                background: $invert-base-skin-background;            
+                color: $invert-color;            
+
+                &:hover{
+                    color: $invert-color-heading;
+                    background: #F5F5F5; // ???
+                }
+            }
+        }
+
+    }
+}

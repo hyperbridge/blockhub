@@ -1,0 +1,47 @@
+<template>
+    <c-popup :activated="activated" type="custom" ref="modal" width="550" @close="$emit('close')">
+        <div slot="customClose" hidden></div>
+        <div class="download-modal" slot="customContent">
+            <c-tabs>
+                <c-tab name="Download" :selected="true" :showFooter="true">
+                    <div>
+                        <c-download-block :showPreview="false" />
+                    </div>
+                    <div slot="footer" class="d-flex align-items-center justify-content-end">
+                        <div>
+                            <c-button @click="$emit('close')">Close</c-button>
+                        </div>
+                    </div>
+                </c-tab>
+            </c-tabs>
+        </div>
+    </c-popup>
+</template>
+
+<script>
+    export default {
+        props: ['activated'],
+        components: {
+            'c-popup': (resolve) => require(['@/components/popups'], resolve),
+            'c-tabs': (resolve) => require(['@/components/tab/tabs'], resolve),
+            'c-tab': (resolve) => require(['@/components/tab/tab'], resolve),
+            'c-download-block': (resolve) => require(['@/components/download-block'], resolve),
+        },
+        data() {
+            return {
+            }
+        },
+        methods: {
+            download() {
+                this.$store.dispatch('application/downloadAccount', { password: this.$refs.password })
+            }
+        }
+    }
+</script>
+
+<style lang="scss" scoped>
+    .c-popup__content {
+        background: transparent;
+        color: #fff;
+    }
+</style>
