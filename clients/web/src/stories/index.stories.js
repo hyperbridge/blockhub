@@ -6523,11 +6523,35 @@ storiesOf('Pricing table', module)
     }))
 
 storiesOf('Pro mode', module)
+    .add('button', () => ({
+        components:{
+            'c-pro-mode-button' : (resolve) => require(['@/ui/components/pro-mode/button.vue'], resolve),
+        },
+        template: `<div class="p-4">
+                        <c-pro-mode-button icon="gem">
+                            Go Pro
+                        </c-pro-mode-button>
+                    </div>`
+    }))
     .add('notice 1', () => ({
         components: {
             'c-pro-mode-n1' : (resolve) => require(['@/ui/components/pro-mode/notice1.vue'], resolve),
         },
-        template: `<div class="p-4"><c-pro-mode-n1 name="Eron" /></div>`
+        template: `<div class="p-4">
+                        <c-pro-mode-n1>
+                            Hey Eron, you're on a Basic account. Unlock more space and sharing controls!
+                        </c-pro-mode-n1>
+                    </div>`
+    }))
+    .add('notice 2', () => ({
+        components: {
+            'c-pro-mode-n2' : (resolve) => require(['@/ui/components/pro-mode/notice2.vue'], resolve),
+        },
+        template: `<div class="p-4">
+                        <c-pro-mode-n2>
+                            Hey Eron, you're on a Basic account. Unlock more space and sharing controls!
+                        </c-pro-mode-n2>
+                    </div>`
     }))
 
 
