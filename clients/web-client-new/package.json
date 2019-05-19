@@ -62,10 +62,13 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.1.5",
+    "babel-eslint": "^10.0.1",
     "chalk": "^2.1.0",
     "cross-env": "^5.2.0",
     "cross-spawn": "^5.1.0",
-    "eslint": "^4.9.0",
+    "eslint": "^5.16.0",
+    "eslint-config-aqua": "^5.0.0",
+    "eslint-plugin-vue": "^5.2.2",
     "liferaft": "^1.0.0",
     "lokijs": "^1.5.5",
     "node-sass": "^4.11.0",
@@ -76,5 +79,17 @@
   },
   "engines": {
     "node": ">8.11.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "aqua/vue",
+      "aqua/node"
+    ],
+    "rules": {
+      "vue/attribute-hyphenation": 0,
+      "quote-props": 0,
+      "indent": ["error", 4],
+      "semi": ["error", "never"]
+    }
   }
 }

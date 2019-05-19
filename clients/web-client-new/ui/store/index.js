@@ -1,4 +1,3 @@
-
 import feathersClient, { browserClient } from '../api/feathers-client'
 import feathersVuex, { initAuth } from 'feathers-vuex'
 import url from 'url'
@@ -34,20 +33,16 @@ const CheckDevConfig = () => {
         return ''
     }
 
-    let hash = document.location.hash.replace('#/', '')
-
+    const hash = document.location.hash.replace('#/', '')
     if (hash.slice(0, 5) !== 'conf=') return false
 
-    let conf = hash.replace('conf=', '')
-
+    const conf = hash.replace('conf=', '')
     if (conf === 'relayOn') {
-        //PeerService.config.RELAY = true
+        // PeerService.config.RELAY = true
     }
-
     if (conf === 'relayOff') {
-        //PeerService.config.RELAY = false
+        // PeerService.config.RELAY = false
     }
-
     if (conf === 'chaosForced') {
         ChaosMonkey.config.FORCED = true
     }
@@ -57,14 +52,11 @@ const CheckDevConfig = () => {
 
 CheckDevConfig()
 
-
 let service = null
 let auth = null
 
 const IsDecentralizedMode = () => {
-    if (!process.browser) {
-        return
-    }
+    if (!process.browser) return
 
     // Decentralized mode if we're not on GameDelta
     return window.location.hostname.toLowerCase().indexOf('gamedelta') !== -1
@@ -79,28 +71,19 @@ const decentralizedMode = IsDecentralizedMode()
 //     }
 // })
 
+export let plugins = []
+export const state = () => ({})
+export const mutations = {}
 
-
-export let plugins = [
-]
-
-
-export const state = () => ({
-})
-
-export const mutations = {
-}
-
-
-const initSubscribers = (store) => {
-    return
+const initSubscribers = store => {
+    return /* eslint-disable no-unreachable */
     store.subscribeAction((action, state) => {
-        console.info('[BlockHub] Store Action: ' + action.type, action.payload, state)
+        console.info(`[BlockHub] Store Action: ${action.type}`, action.payload, state)
     })
 
     store.subscribe((mutation, state) => {
         if (mutation.type !== 'application/setInternetConnection') {
-            console.info('[BlockHub] Store Mutation: ' + mutation.type, mutation.payload, state)
+            console.info(`[BlockHub] Store Mutation: ${mutation.type}`, mutation.payload, state)
         }
 
         if (mutation.type === 'database/initialized') {
@@ -141,32 +124,28 @@ const initSubscribers = (store) => {
             store.dispatch('marketplace/updateState')
             store.dispatch('funding/updateState')
             store.dispatch('application/updateState')
-
         }
     })
 }
 
 if (decentralizedMode) {
-    service = (module) => {
+    service = module => { // eslint-disable-line arrow-body-style
         return {
             'profiles': {
                 create() {
-                    Bridge.sendCommand('createProfileRequest', newProfile).then((profile) => {
+                    Bridge.sendCommand('createProfileRequest', newProfile).then(profile => {
                         newProfile.id = profile.id
                         newProfile.address = profile.address
 
-                        if (!newProfile.name)
-                            newProfile.name = 'Default'
-
+                        if (!newProfile.name) newProfile.name = 'Default'
                         this.profiles.push({ ...newProfile, edit: true })
-
                         this.editedProfile = newProfile
 
                         this.saveProfiles()
                     })
                 },
                 save() {
-                    Bridge.sendCommand('saveProfileRequest', profile).then((profile) => {
+                    Bridge.sendCommand('saveProfileRequest', profile).then(profile => {
                         this.saveProfiles()
                     })
                 },
@@ -181,7 +160,7 @@ if (decentralizedMode) {
                     })
                 },
                 convert() {
-                    Bridge.sendCommand('createDeveloperRequest', this.activeProfile).then((data) => {
+                    Bridge.sendCommand('createDeveloperRequest', this.activeProfile).then(data => {
                         this.activeProfile.meta.contractDeveloperId = data
                         this.$store.state.application.developerMode = true
 
@@ -193,7 +172,7 @@ if (decentralizedMode) {
     }
 
     auth = () => {
-        console.log("TODO")
+        console.log('TODO')
     }
 } else if (process.browser) {
     const feathers = feathersVuex(browserClient, { idField: 'id', enableEvents: false })
@@ -246,7 +225,7 @@ export const actions = {
             DB.setInitCallback(() => {
                 console.log('DB init callback')
                 // TODO: is this a race condition?
-                //TODO: PeerService.init()
+                // TODO: PeerService.init()
 
                 ReputationEngine.init(store)
                 Bridge.init(store)
@@ -256,13 +235,13 @@ export const actions = {
                 store.dispatch('marketplace/init')
                 store.dispatch('funding/init')
 
-                //window.BlockHub.environmentMode = store.state.application.environmentMode
+                // window.BlockHub.environmentMode = store.state.application.environmentMode
 
-                console.log('Environment mode: ' + store.state.application.environmentMode)
+                console.log(`Environment mode: ${store.state.application.environmentMode}`)
 
-                if (store.state.application.environmentMode === 'preview'
-                    || store.state.application.environmentMode === 'beta'
-                    || store.state.application.environmentMode === 'production') {
+                if (store.state.application.environmentMode === 'preview' ||
+                    store.state.application.environmentMode === 'beta' ||
+                    store.state.application.environmentMode === 'production') {
                     setTimeout(() => {
                         window.BlockHub.importStarterData()
                     }, 1000)
@@ -276,7 +255,7 @@ export const actions = {
                     store.state.application.darklaunchOverride = true
 
                     // ENABLE SIMULATOR MODE
-                    //store.state.application.simulatorMode = true
+                    // store.state.application.simulatorMode = true
                 }
 
                 try { // TODO: we dont need this do we?
@@ -288,8 +267,8 @@ export const actions = {
                 }
 
                 initSubscribers(store)
-                //monitorSimulatorMode()
-                //monitorPathState()
+                // monitorSimulatorMode()
+                // monitorPathState()
 
                 console.log('BlockHub initialized.')
 
@@ -306,7 +285,7 @@ export const actions = {
         })
 
         init.then(() => {})
-        const origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg'
+        const origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg' // eslint-disable-line no-negated-condition
         console.log(origin)
         const storage = {
             getItem() { },
@@ -359,15 +338,9 @@ export const actions = {
             moduleName: 'auth',
             cookieName: 'feathers-jwt'
         })
-            .then(() => {
-                return dispatch('auth/authenticate', { accessToken: store.state.auth.accessToken, strategy: 'jwt' })
-            })
-            .then(() => {
-                return dispatch('accounts/find', {})
-            })
-            .then(() => {
-                return init
-            })
+            .then(() => dispatch('auth/authenticate', { accessToken: store.state.auth.accessToken, strategy: 'jwt' }))
+            .then(() => dispatch('accounts/find', {}))
+            .then(() => init)
             .catch(_ => { })
-    },
+    }
 }
