@@ -23,6 +23,7 @@
     "@feathersjs/feathers": "^3.2.3",
     "@feathersjs/socketio-client": "^1.1.5",
     "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/pwa": "^3.0.0-beta.16",
     "@veriff/js-sdk": "^0.3.4",
     "bootstrap": "^4.3.1",
     "bs4-summernote": "^0.8.10",
@@ -64,16 +65,16 @@
     "chalk": "^2.1.0",
     "cross-env": "^5.2.0",
     "cross-spawn": "^5.1.0",
-    "css-loader": "^0.28.7",
-    "cssnano": "^4.1.0",
+    "node-sass": "^4.11.0",
+    "postcss-css-variables": "^0.11.0",
+    "postcss-nested": "^3.0.0",
+    "sass-loader": "^7.1.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb-base": "^11.1.3",
     "liferaft": "^1.0.0",
     "lokijs": "^1.5.5",
     "moment": "^2.22.2",
-    "node-sass": "^4.9.3",
-    "peerjs": "^0.3.14",
-    "sass-loader": "^7.0.3"
+    "peerjs": "^0.3.14"
   },
   "engines": {
     "node": ">8.11.1"

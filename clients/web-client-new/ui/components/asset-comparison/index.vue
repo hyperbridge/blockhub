@@ -85,7 +85,7 @@
             }
         },
         components: {
-            'c-asset-preview': (resolve) => require(['@/components/asset-preview'], resolve),
+            'c-asset-preview': () => import('~/components/asset-preview').then(m => m.default || m),
         },
         methods: {
             colorClass: num => num >= 100 ? 'positive' : 'negative'

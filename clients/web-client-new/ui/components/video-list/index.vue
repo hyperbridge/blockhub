@@ -43,8 +43,8 @@
             comments: [ Object, Array ]
         },
         components:{
-            'c-video-popup': (resolve) => require(['@/components/video-popup'], resolve),
-            'c-author': (resolve) => require(['@/components/author'], resolve),
+            'c-video-popup': () => import('~/components/video-popup').then(m => m.default || m),
+            'c-author': () => import('~/components/author').then(m => m.default || m),
         },
         data(){
             return{

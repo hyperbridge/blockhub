@@ -32,7 +32,7 @@
             currencies: Array
         },
         components: {
-            'c-crypto-icon' : (resolve) => require(['@/components/icon/crypto'], resolve),
+            'c-crypto-icon' : () => import('~/components/icon/crypto').then(m => m.default || m),
         },
         data(){
             return{

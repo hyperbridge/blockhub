@@ -55,13 +55,13 @@
 <script>
     export default {
         components: {
-            'c-dropdown': (resolve) => require(['@/components/dropdown-menu/type-2'], resolve),
-            'c-input-searcher': (resolve) => require(['@/components/inputs/searcher'], resolve),
-            'c-dropdown-menu': (resolve) => require(['@/components/dropdown-menu/type-3'], resolve),
-            'c-list': (resolve) => require(['@/components/list'], resolve),
-            'c-user-head': (resolve) => require(['@/components/user/header'], resolve),
-            'c-game-card': (resolve) => require(['@/components/game-library/card-item'], resolve),
-            'c-game-list': (resolve) => require(['@/components/game-library/list-item'], resolve)
+            'c-dropdown': () => import('~/components/dropdown-menu/type-2').then(m => m.default || m),
+            'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
+            'c-dropdown-menu': () => import('~/components/dropdown-menu/type-3').then(m => m.default || m),
+            'c-list': () => import('~/components/list').then(m => m.default || m),
+            'c-user-head': () => import('~/components/user/header').then(m => m.default || m),
+            'c-game-card': () => import('~/components/game-library/card-item').then(m => m.default || m),
+            'c-game-list': () => import('~/components/game-library/list-item').then(m => m.default || m)
         },
         data(){
             return{

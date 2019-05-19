@@ -42,7 +42,7 @@ export default {
         }
     },
     components: {
-        'c-block': (resolve) => require(['@/components/block'], resolve),
+        'c-block': () => import('~/components/block').then(m => m.default || m),
         'c-rating-stars': (resolve) => require(['../rating-stars'], resolve)
     }
 }

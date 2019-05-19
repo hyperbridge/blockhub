@@ -47,7 +47,7 @@
         data: () => ({ val: 'm', timeout: null, add: 0 }),
         mixins: [debouncer],
         components: {
-            'c-test': (resolve) => require(['@/components/test'], resolve),
+            'c-test': () => import('~/components/test').then(m => m.default || m),
         },
         computed: {
             account() {

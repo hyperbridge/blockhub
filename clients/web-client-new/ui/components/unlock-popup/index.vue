@@ -84,10 +84,10 @@
     export default {
         props: ['activated'],
         components: {
-            'c-popup': (resolve) => require(['@/components/popups'], resolve),
+            'c-popup': () => import('~/components/popups').then(m => m.default || m),
             'c-datepicker': (resolve) => require(['vuejs-datepicker'], resolve),
-            'c-tabs': (resolve) => require(['@/components/tab/tabs'], resolve),
-            'c-tab': (resolve) => require(['@/components/tab/tab'], resolve),
+            'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m),
+            'c-tab': () => import('~/components/tab/tab').then(m => m.default || m),
         },
         methods: {
             unlock() {

@@ -48,9 +48,9 @@
 <script>
     export default {
         components: {
-            'c-buttons-group': (resolve) => require(['@/components/buttons/group'], resolve),
-            'c-release-tag-item': (resolve) => require(['@/components/business/release-history/tag-item'], resolve),
-            'c-release-list-item': (resolve) => require(['@/components/business/release-history/list-item'], resolve),
+            'c-buttons-group': () => import('~/components/buttons/group').then(m => m.default || m),
+            'c-release-tag-item': () => import('~/components/business/release-history/tag-item').then(m => m.default || m),
+            'c-release-list-item': () => import('~/components/business/release-history/list-item').then(m => m.default || m),
         },
         data() {
             return {

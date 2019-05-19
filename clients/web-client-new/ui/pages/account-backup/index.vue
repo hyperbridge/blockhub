@@ -24,7 +24,7 @@
 
     export default {
         components: {
-            'c-topic-item': (resolve) => require(['@/components/help/topic-item'], resolve),
+            'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m),
         },
         methods: {
             exportAccountFile() {

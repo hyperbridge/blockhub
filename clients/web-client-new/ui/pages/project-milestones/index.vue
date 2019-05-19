@@ -87,9 +87,9 @@
     export default {
         props: ['project', 'editing'],
         components: {
-            'c-milestone': (resolve) => require(['@/components/project/milestone'], resolve),
-            'c-icon-block': (resolve) => require(['@/components/block/with-icon'], resolve),
-            'c-progress-bar': (resolve) => require(['@/components/progress-bar'], resolve)
+            'c-milestone': () => import('~/components/project/milestone').then(m => m.default || m),
+            'c-icon-block': () => import('~/components/block/with-icon').then(m => m.default || m),
+            'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m)
         },
         computed: {
             milestones() {

@@ -57,7 +57,7 @@
             }
         },
         components: {
-            'c-heading-bar': (resolve) => require(['@/components/heading-bar'], resolve)
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m)
         }
     }
 </script>

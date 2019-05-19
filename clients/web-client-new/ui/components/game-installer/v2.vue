@@ -77,8 +77,8 @@
             product: Object
         },
         components: {
-            'c-dropdown': (resolve) => require(['@/components/dropdown-menu/type-3'], resolve),
-            'c-list': (resolve) => require(['@/components/list'], resolve),
+            'c-dropdown': () => import('~/components/dropdown-menu/type-3').then(m => m.default || m),
+            'c-list': () => import('~/components/list').then(m => m.default || m),
         },
         data() {
             return {

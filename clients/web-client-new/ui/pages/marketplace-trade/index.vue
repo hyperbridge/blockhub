@@ -52,11 +52,11 @@
 <script>
     export default {
         components: {
-            'c-block': (resolve) => require(['@/components/block'], resolve),
-            'c-tabs': (resolve) => require(['@/components/tab/tabs-universal'], resolve),
-            'c-tab': (resolve) => require(['@/components/tab/tab-universal'], resolve),
-            'c-trade-offer': (resolve) => require(['@/components/trade-offer'], resolve),
-            'c-tag-count': (resolve) => require(['@/components/tags/count'], resolve),
+            'c-block': () => import('~/components/block').then(m => m.default || m),
+            'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
+            'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
+            'c-trade-offer': () => import('~/components/trade-offer').then(m => m.default || m),
+            'c-tag-count': () => import('~/components/tags/count').then(m => m.default || m),
         },
         data() {
             return {

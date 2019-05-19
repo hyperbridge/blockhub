@@ -31,7 +31,7 @@
             }
         },
         components: {
-            'c-message-bar': (resolve) => require(['@/components/message-bar'], resolve)
+            'c-message-bar': () => import('~/components/message-bar').then(m => m.default || m)
         }
     }
 </script>

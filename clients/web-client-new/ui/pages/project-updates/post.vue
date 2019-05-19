@@ -40,10 +40,10 @@
     export default {
         props: ['projectID', 'postID'],
         components: {
-            'c-layout': (resolve) => require(['@/layouts/default'], resolve),
-            'c-block': (resolve) => require(['@/components/block'], resolve),
-            'c-tags': (resolve) => require(['@/components/tags'], resolve),
-            'c-badges': (resolve) => require(['@/components/project/badges'], resolve)
+            'c-layout': () => import('~/layouts/default').then(m => m.default || m),
+            'c-block': () => import('~/components/block').then(m => m.default || m),
+            'c-tags': () => import('~/components/tags').then(m => m.default || m),
+            'c-badges': () => import('~/components/project/badges').then(m => m.default || m)
         },
         data(){
             return{

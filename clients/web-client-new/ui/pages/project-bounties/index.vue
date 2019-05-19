@@ -118,7 +118,7 @@
             return data
         },
         components: {
-            'c-icon-block': (resolve) => require(['@/components/block/with-icon'], resolve)
+            'c-icon-block': () => import('~/components/block/with-icon').then(m => m.default || m)
         },
     }
 </script>

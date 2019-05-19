@@ -40,8 +40,8 @@
             slides: Array
         },
         components: {
-            'c-button': (resolve) => require(['@/components/buttons'], resolve),
-            'c-image-overlay': (resolve) => require(['@/components/image-overlay'], resolve),
+            'c-button': () => import('~/components/buttons').then(m => m.default || m),
+            'c-image-overlay': () => import('~/components/image-overlay').then(m => m.default || m),
             
           },
         data() {

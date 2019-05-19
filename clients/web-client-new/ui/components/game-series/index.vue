@@ -17,9 +17,9 @@
             }
         },
         components: {
-            'c-heading-bar': (resolve) => require(['@/components/heading-bar'], resolve),
-            'c-game-includes-list': (resolve) => require(['@/components/game-series/game-includes-item'], resolve),
-            'c-game-description': (resolve) => require(['@/components/game-series/game-description'], resolve)
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+            'c-game-includes-list': () => import('~/components/game-series/game-includes-item').then(m => m.default || m),
+            'c-game-description': () => import('~/components/game-series/game-description').then(m => m.default || m)
         },
     }
 </script>

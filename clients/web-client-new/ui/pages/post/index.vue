@@ -40,8 +40,8 @@
     export default {
         props: ['projectID', 'postID'],
         components: {
-            'c-tags': (resolve) => require(['@/components/tags'], resolve),
-            'c-badges': (resolve) => require(['@/components/project/badges'], resolve)
+            'c-tags': () => import('~/components/tags').then(m => m.default || m),
+            'c-badges': () => import('~/components/project/badges').then(m => m.default || m)
         },
         data(){
             return{

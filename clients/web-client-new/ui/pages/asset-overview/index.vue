@@ -246,13 +246,13 @@
     export default {
         props: ['id'],
         components: {
-            'c-heading-bar': (resolve) => require(['@/components/heading-bar'], resolve),
-            'c-heading-bar-fields' : (resolve) => require(['@/components/heading-bar/additional-action'], resolve),
-            'c-pagination': (resolve) => require(['@/components/pagination/index'], resolve),
-            'c-collection-item': (resolve) => require(['@/components/collection/item'], resolve),
-            'c-popup': (resolve) => require(['@/components/popups'], resolve),
-            'c-asset-popup': (resolve) => require(['@/components/asset-overview-popup'], resolve),
-            'c-content-navigation': (resolve) => require(['@/components/content-navigation'], resolve),
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+            'c-heading-bar-fields' : () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
+            'c-pagination': () => import('~/components/pagination/index').then(m => m.default || m),
+            'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m),
+            'c-popup': () => import('~/components/popups').then(m => m.default || m),
+            'c-asset-popup': () => import('~/components/asset-overview-popup').then(m => m.default || m),
+            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
             'c-model-obj': ModelObj
         },
         data() {

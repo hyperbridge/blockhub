@@ -208,13 +208,13 @@
     export default {
         props: ['id'],
         components: {
-            'c-heading-bar': (resolve) => require(['@/components/heading-bar'], resolve),
-            'c-content-navigation': (resolve) => require(['@/components/content-navigation'], resolve),
-            'c-assets-grid': (resolve) => require(['@/components/assets-grid'], resolve),
-            'c-featured-assets': (resolve) => require(['@/components/assets-list-item/featured-list'], resolve),
-            'c-user-card': (resolve) => require(['@/components/user-card'], resolve),
-            'c-button-arrows': (resolve) => require(['@/components/buttons/arrows'], resolve),
-            'c-user-head': (resolve) => require(['@/components/user/header'], resolve)
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+            'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m),
+            'c-featured-assets': () => import('~/components/assets-list-item/featured-list').then(m => m.default || m),
+            'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
+            'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m),
+            'c-user-head': () => import('~/components/user/header').then(m => m.default || m)
         },
         data() {
             return {

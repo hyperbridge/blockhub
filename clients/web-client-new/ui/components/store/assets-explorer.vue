@@ -187,15 +187,15 @@
             }
         },
         components: {
-            'c-content-navigation': (resolve) => require(['@/components/content-navigation'], resolve),
-            'c-block': (resolve) => require(['@/components/block'], resolve),
-            'c-heading-bar-fields' : (resolve) => require(['@/components/heading-bar/additional-action'], resolve),
-            'c-dropdown': (resolve) => require(['@/components/dropdown-menu/type-2'], resolve),
-            'c-input-searcher': (resolve) => require(['@/components/inputs/searcher'], resolve),
-            'c-assets-list': (resolve) => require(['@/components/assets-list-item'], resolve),
-            'c-dropdown-menu': (resolve) => require(['@/components/dropdown-menu/type-3'], resolve),
-            'c-list': (resolve) => require(['@/components/list'], resolve),
-            'c-option-tag': (resolve) => require(['@/components/option-tag'], resolve)
+            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+            'c-block': () => import('~/components/block').then(m => m.default || m),
+            'c-heading-bar-fields' : () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
+            'c-dropdown': () => import('~/components/dropdown-menu/type-2').then(m => m.default || m),
+            'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
+            'c-assets-list': () => import('~/components/assets-list-item').then(m => m.default || m),
+            'c-dropdown-menu': () => import('~/components/dropdown-menu/type-3').then(m => m.default || m),
+            'c-list': () => import('~/components/list').then(m => m.default || m),
+            'c-option-tag': () => import('~/components/option-tag').then(m => m.default || m)
         },
         data() {
             return {

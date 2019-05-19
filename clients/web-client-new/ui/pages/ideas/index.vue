@@ -44,7 +44,7 @@
 <script>
 export default {
     components: {
-        'c-idea-card': (resolve) => require(['@/components/idea-card'], resolve),
+        'c-idea-card': () => import('~/components/idea-card').then(m => m.default || m),
     },
     created() {
         this.$store.dispatch('ideas/find', {

@@ -79,9 +79,9 @@
             collections: Array
         },
         components: {
-            'c-basic-popup': (resolve) => require(['@/components/popups/basic'], resolve),
-            'c-checkbox-group': (resolve) => require(['@/components/checkbox/group'], resolve),
-            'c-checkbox': (resolve) => require(['@/components/checkbox'], resolve),
+            'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
+            'c-checkbox-group': () => import('~/components/checkbox/group').then(m => m.default || m),
+            'c-checkbox': () => import('~/components/checkbox').then(m => m.default || m),
         },
         data() {
             return {

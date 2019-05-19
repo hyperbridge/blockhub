@@ -53,13 +53,13 @@
 <script>
 export default {
     components: {
-        'c-asset-preview': (resolve) => require(['@/components/asset/preview-basic'], resolve),
-        'c-asset-list': (resolve) => require(['@/components/asset/list'], resolve),
-        'c-content-navigation': (resolve) => require(['@/components/content-navigation'], resolve),
-        'c-block': (resolve) => require(['@/components/block/index'], resolve),
-        'c-asset-store-card': (resolve) => require(['@/components/asset/store-card'], resolve),
-        'c-carousel-3d': (resolve) => require(['@/components/carousel-3d'], resolve),
-        'carousel-3d-v2': (resolve) => require(['@/components/carousel-3d/v2'], resolve),
+        'c-asset-preview': () => import('~/components/asset/preview-basic').then(m => m.default || m),
+        'c-asset-list': () => import('~/components/asset/list').then(m => m.default || m),
+        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+        'c-block': () => import('~/components/block/index').then(m => m.default || m),
+        'c-asset-store-card': () => import('~/components/asset/store-card').then(m => m.default || m),
+        'c-carousel-3d': () => import('~/components/carousel-3d').then(m => m.default || m),
+        'carousel-3d-v2': () => import('~/components/carousel-3d/v2').then(m => m.default || m),
     },
     data() {
         return {

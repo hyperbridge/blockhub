@@ -52,9 +52,9 @@
             setLimits: Number
         },
         components: {
-            'c-pagination': (resolve) => require(['@/components/pagination'], resolve),
-            'c-spinner': (resolve) => require(['@/components/spinner'], resolve),
-            'c-load-more': (resolve) => require(['@/components/buttons/load-more'], resolve)
+            'c-pagination': () => import('~/components/pagination').then(m => m.default || m),
+            'c-spinner': () => import('~/components/spinner').then(m => m.default || m),
+            'c-load-more': () => import('~/components/buttons/load-more').then(m => m.default || m)
         },
         data() {
             return {

@@ -43,8 +43,8 @@
     export default {
         props:{},
         components:{
-            'c-input': (resolve) => require(['@/components/inputs'], resolve),
-            'c-loading-bar-circle': (resolve) => require(['@/components/loading-bar/circle'], resolve),
+            'c-input': () => import('~/components/inputs').then(m => m.default || m),
+            'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m),
         },
         data(){
             return{

@@ -175,11 +175,11 @@
 <script>
     export default {
         components: {
-            'c-heading-bar': (resolve) => require(['@/components/heading-bar'], resolve),
-            'c-user-card': (resolve) => require(['@/components/user-card'], resolve),
-            'c-button-arrows': (resolve) => require(['@/components/buttons/arrows'], resolve),
-            'c-modal-light': (resolve) => require(['@/components/modal-light'], resolve),
-            'c-input-searcher': (resolve) => require(['@/components/inputs/searcher'], resolve)
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+            'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
+            'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m),
+            'c-modal-light': () => import('~/components/modal-light').then(m => m.default || m),
+            'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m)
         },
         data() {
             return {

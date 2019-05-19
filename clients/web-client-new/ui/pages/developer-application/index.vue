@@ -44,7 +44,7 @@
 <script>
     export default {
         components: {
-            'c-user-card': (resolve) => require(['@/components/user-card'], resolve),
+            'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         },
         data() {
             return {

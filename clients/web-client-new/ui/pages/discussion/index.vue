@@ -28,8 +28,8 @@
 
     export default {
         components: {
-            'c-heading-bar': (resolve) => require(['@/components/heading-bar'], resolve),
-            'c-community-item': (resolve) => require(['@/components/pagination'], resolve)
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+            'c-community-item': () => import('~/components/pagination').then(m => m.default || m)
         },
         data() {
             return {

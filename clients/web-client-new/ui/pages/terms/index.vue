@@ -11,7 +11,7 @@
 <script>
 export default {
     components: {
-        'c-terms-block': (resolve) => require(['@/components/terms-block'], resolve)
+        'c-terms-block': () => import('~/components/terms-block').then(m => m.default || m)
     },
 }
 </script>

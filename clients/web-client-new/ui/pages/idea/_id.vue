@@ -174,12 +174,12 @@
             }
         },
         components: {
-            'c-tags': (resolve) => require(['@/components/tags'], resolve),
-            'c-badges': (resolve) => require(['@/components/project/badges'], resolve),
-            'c-rating-block': (resolve) => require(['@/components/rating-block'], resolve),
-            'c-idea-overview': (resolve) => require(['@/pages/idea-overview'], resolve),
-            'c-idea-community': (resolve) => require(['@/pages/idea-community'], resolve),
-            'c-updates-count': (resolve) => require(['@/components/project/updates-count'], resolve),
+            'c-tags': () => import('~/components/tags').then(m => m.default || m),
+            'c-badges': () => import('~/components/project/badges').then(m => m.default || m),
+            'c-rating-block': () => import('~/components/rating-block').then(m => m.default || m),
+            'c-idea-overview': () => import('~/pages/idea-overview').then(m => m.default || m),
+            'c-idea-community': () => import('~/pages/idea-community').then(m => m.default || m),
+            'c-updates-count': () => import('~/components/project/updates-count').then(m => m.default || m),
             'c-multiselect': (resolve) => require(['vue-multiselect'], resolve),
         },
         data() {

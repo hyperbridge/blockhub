@@ -63,7 +63,7 @@
             }
         },
         components:{
-            'c-comment' : (resolve) => require(['@/components/community/comment'], resolve),
+            'c-comment' : () => import('~/components/community/comment').then(m => m.default || m),
         },
         data(){
             return{

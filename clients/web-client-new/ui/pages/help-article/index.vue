@@ -16,10 +16,10 @@
     export default {
         props: ['id', 'slug'],
         components: {
-            'c-article-item': (resolve) => require(['@/components/help/article-item'], resolve),
-            'c-topic-item': (resolve) => require(['@/components/help/topic-item'], resolve),
-            'c-list-item': (resolve) => require(['@/components/help/simple-item'], resolve),
-            'c-card': (resolve) => require(['@/components/help/help-card'], resolve),
+            'c-article-item': () => import('~/components/help/article-item').then(m => m.default || m),
+            'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m),
+            'c-list-item': () => import('~/components/help/simple-item').then(m => m.default || m),
+            'c-card': () => import('~/components/help/help-card').then(m => m.default || m),
         },
         computed: {
             article() {

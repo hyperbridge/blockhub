@@ -24,9 +24,9 @@
 <script>
     export default {
         components: {
-            'c-block': (resolve) => require(['@/components/block'], resolve),
-            'c-asset-comparison': (resolve) => require(['@/components/asset-comparison'], resolve),
-            'c-assets-grid-inventory': (resolve) => require(['@/components/assets-grid-inventory'], resolve),
+            'c-block': () => import('~/components/block').then(m => m.default || m),
+            'c-asset-comparison': () => import('~/components/asset-comparison').then(m => m.default || m),
+            'c-assets-grid-inventory': () => import('~/components/assets-grid-inventory').then(m => m.default || m),
         },
         data() {
             return {

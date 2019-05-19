@@ -50,9 +50,9 @@ export default {
         }
     },
     components: {
-        'c-author': (resolve) => require(['@/components/author'], resolve),
-        'c-rating-stars': (resolve) => require(['@/components/rating-stars'], resolve),
-        'c-button': (resolve) => require(['@/components/buttons/wide'], resolve),
+        'c-author': () => import('~/components/author').then(m => m.default || m),
+        'c-rating-stars': () => import('~/components/rating-stars').then(m => m.default || m),
+        'c-button': () => import('~/components/buttons/wide').then(m => m.default || m),
     },
     data() {
         return {

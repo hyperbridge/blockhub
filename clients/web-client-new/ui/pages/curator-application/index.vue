@@ -40,7 +40,7 @@
 
     export default {
         components: {
-            'c-user-card': (resolve) => require(['@/components/user-card'], resolve),
+            'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         },
         data() {
             let curatorProfile = Object.values(this.$store.state.profiles.keyedById).find(profile => profile.role !== 'curator')

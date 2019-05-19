@@ -26,8 +26,8 @@
 <script>
 export default {
     components: {
-        'c-metro-grid': (resolve) => require(['@/components/metro/grid'], resolve),
-        'c-metro-item': (resolve) => require(['@/components/metro/metro-item'], resolve),
+        'c-metro-grid': () => import('~/components/metro/grid').then(m => m.default || m),
+        'c-metro-item': () => import('~/components/metro/metro-item').then(m => m.default || m),
     },
     data() {
         return {

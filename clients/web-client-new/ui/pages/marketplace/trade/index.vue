@@ -15,8 +15,8 @@
     export default {
         props: ['profileId'],
         components: {
-            'c-block-menu': (resolve) => require(['@/components/block/menu'], resolve),
-            'c-spinner': (resolve) => require(['@/components/spinner'], resolve),
+            'c-block-menu': () => import('~/components/block/menu').then(m => m.default || m),
+            'c-spinner': () => import('~/components/spinner').then(m => m.default || m),
         },
         data() {
             return {

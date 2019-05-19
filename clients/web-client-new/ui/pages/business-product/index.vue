@@ -218,10 +218,10 @@
             id: [String, Number]
         },
         components: {
-            'c-layout': (resolve) => require(['@/layouts/business'], resolve),
-            'c-html-editor': (resolve) => require(['@/components/html-editor'], resolve),
-            'c-json-editor': (resolve) => require(['@/components/json-editor'], resolve),
-            'c-basic-popup': (resolve) => require(['@/components/popups/basic'], resolve),
+            'c-layout': () => import('~/layouts/business').then(m => m.default || m),
+            'c-html-editor': () => import('~/components/html-editor').then(m => m.default || m),
+            'c-json-editor': () => import('~/components/json-editor').then(m => m.default || m),
+            'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
             'c-multiselect': (resolve) => require(['vue-multiselect'], resolve),
         },
         data() {

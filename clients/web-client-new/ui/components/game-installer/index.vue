@@ -98,8 +98,8 @@
             filesList: Array
         },
         components:{
-            'c-basic-popup': (resolve) => require(['@/components/popups/basic'], resolve),
-            'c-dropdown': (resolve) => require(['@/components/dropdown-menu/type-2'], resolve),
+            'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
+            'c-dropdown': () => import('~/components/dropdown-menu/type-2').then(m => m.default || m),
         },
         data(){
             return{

@@ -23,7 +23,7 @@ export default {
         index: Number
     },
     components:{
-        'c-news-article': (resolve) => require(['@/components/news-list/article'], resolve)
+        'c-news-article': () => import('~/components/news-list/article').then(m => m.default || m)
     }
 }
 </script>

@@ -7,7 +7,7 @@
 <script>
     export default {
         components:{
-            'c-input': (resolve) => require(['@/components/inputs'], resolve)
+            'c-input': () => import('~/components/inputs').then(m => m.default || m)
         }
     }
 </script>

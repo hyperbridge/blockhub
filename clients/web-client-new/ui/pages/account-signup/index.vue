@@ -261,12 +261,12 @@ import moment from 'moment'
 export default {
     components: {
         'c-datepicker': (resolve) => require(['vuejs-datepicker'], resolve),
-        'c-user-card': (resolve) => require(['@/components/user-card'], resolve),
-        'c-privacy-block': (resolve) => require(['@/components/privacy-block'], resolve),
-        'c-terms-block': (resolve) => require(['@/components/terms-block'], resolve),
-        'c-popup': (resolve) => require(['@/components/popups'], resolve),
-        'c-tabs': (resolve) => require(['@/components/tab/tabs-universal'], resolve),
-        'c-tab': (resolve) => require(['@/components/tab/tab-universal'], resolve),
+        'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
+        'c-privacy-block': () => import('~/components/privacy-block').then(m => m.default || m),
+        'c-terms-block': () => import('~/components/terms-block').then(m => m.default || m),
+        'c-popup': () => import('~/components/popups').then(m => m.default || m),
+        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
+        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
     },
     data() {
         return {

@@ -107,9 +107,9 @@
 
     export default {
         components:{
-            'c-input': (resolve) => require(['@/components/inputs'], resolve),
-            'c-loading-bar-circle': (resolve) => require(['@/components/loading-bar/circle'], resolve),
-            'c-search-category': (resolve) => require(['@/components/global-search/_includes/category'], resolve),
+            'c-input': () => import('~/components/inputs').then(m => m.default || m),
+            'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m),
+            'c-search-category': () => import('~/components/global-search/_includes/category').then(m => m.default || m),
         },
         data(){
             return{

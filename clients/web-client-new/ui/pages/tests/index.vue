@@ -18,7 +18,7 @@
 <script>
     export default {
         components: {
-            'c-installer-progress': (resolve) => require(['@/components/progress-bar/installer'], resolve),
+            'c-installer-progress': () => import('~/components/progress-bar/installer').then(m => m.default || m),
         },
         data() {
             return {

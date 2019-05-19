@@ -18,7 +18,7 @@
 
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/sites/yoranna/ui/layouts/default'], resolve),
+            'c-layout': () => import('~/sites/yoranna/ui/layouts/default').then(m => m.default || m),
         },
         data() {
             return {

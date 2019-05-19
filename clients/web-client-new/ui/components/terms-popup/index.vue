@@ -13,8 +13,8 @@
 export default {
     props: ['activated'],
     components: {
-        'c-terms-popup': (resolve) => require(['@/components/popups/terms'], resolve),
-        'c-terms-block': (resolve) => require(['@/components/terms-block'], resolve)
+        'c-terms-popup': () => import('~/components/popups/terms').then(m => m.default || m),
+        'c-terms-block': () => import('~/components/terms-block').then(m => m.default || m)
     },
 }
 </script>

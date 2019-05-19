@@ -115,10 +115,10 @@
     export default {
         props: ['id', 'profileId'],
         components: {
-            'c-block': (resolve) => require(['@/components/block/index'], resolve),
-            'c-asset-list-item': (resolve) => require(['@/components/asset/list/list-item'], resolve),
-            'c-asset-preview-basic': (resolve) => require(['@/components/asset/preview-basic'], resolve),
-            'c-content-navigation': (resolve) => require(['@/components/content-navigation'], resolve),
+            'c-block': () => import('~/components/block/index').then(m => m.default || m),
+            'c-asset-list-item': () => import('~/components/asset/list/list-item').then(m => m.default || m),
+            'c-asset-preview-basic': () => import('~/components/asset/preview-basic').then(m => m.default || m),
+            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
         },
         data() {
             return {

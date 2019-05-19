@@ -25,7 +25,7 @@
             link: String
         },
         components:{
-            'c-landing-block-title' : (resolve) => require(['@/components/landing/block-title/simple'], resolve)
+            'c-landing-block-title' : () => import('~/components/landing/block-title/simple').then(m => m.default || m)
         }
 
     }

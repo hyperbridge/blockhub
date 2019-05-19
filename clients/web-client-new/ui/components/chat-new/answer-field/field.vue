@@ -69,7 +69,7 @@
             user: Object
         },
         components: {
-            'c-chat-user-avatar': (resolve) => require(['@/components/chat-new/user-avatar'], resolve),
+            'c-chat-user-avatar': () => import('~/components/chat-new/user-avatar').then(m => m.default || m),
         },
         data () {
             return {

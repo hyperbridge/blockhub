@@ -23,7 +23,7 @@
 export default {
     props: ['asset'],
     components: {
-        'c-badge-card': (resolve) => require(['@/components/badge-card'], resolve),
+        'c-badge-card': () => import('~/components/badge-card').then(m => m.default || m),
     }
 }
 </script>

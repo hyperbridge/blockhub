@@ -139,14 +139,14 @@
     export default {
         props: ['profileId'],
         components: {
-            'c-block': (resolve) => require(['@/components/block/index'], resolve),
-            'c-range-slider': (resolve) => require(['@/components/range-slider/pure'], resolve),
-            'c-asset-preview': (resolve) => require(['@/components/asset/preview-basic'], resolve),
-            'c-asset-preview-price': (resolve) => require(['@/components/asset-preview'], resolve),
-            'c-asset-grid': (resolve) => require(['@/components/assets-grid-inventory'], resolve),
-            'c-content-navigation': (resolve) => require(['@/components/content-navigation'], resolve),
-            'c-tab': (resolve) => require(['@/components/tab/tab-universal'], resolve),
-            'c-tabs': (resolve) => require(['@/components/tab/tabs-universal'], resolve),
+            'c-block': () => import('~/components/block/index').then(m => m.default || m),
+            'c-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m),
+            'c-asset-preview': () => import('~/components/asset/preview-basic').then(m => m.default || m),
+            'c-asset-preview-price': () => import('~/components/asset-preview').then(m => m.default || m),
+            'c-asset-grid': () => import('~/components/assets-grid-inventory').then(m => m.default || m),
+            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+            'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
+            'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
             'c-datepicker': (resolve) => require(['vuejs-datepicker'], resolve),
         },
         data() {

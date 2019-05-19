@@ -38,9 +38,9 @@
 
     export default {
         components: {
-            'c-heading-bar': (resolve) => require(['@/components/heading-bar'], resolve),
-            'c-community-item': (resolve) => require(['@/components/community/post-item'], resolve),
-            'c-search': (resolve) => require(['@/components/searcher'], resolve)
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+            'c-community-item': () => import('~/components/community/post-item').then(m => m.default || m),
+            'c-search': () => import('~/components/searcher').then(m => m.default || m)
         },
         data() {
             return {

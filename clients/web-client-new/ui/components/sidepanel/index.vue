@@ -208,11 +208,11 @@
             navigationKey: String
         },
         components: {
-            'c-notification': (resolve) => require(['@/components/notification/index.vue'], resolve),
-            'c-message': (resolve) => require(['@/components/message'], resolve),
-            'c-basic-popup': (resolve) => require(['@/components/popups/basic'], resolve),
-            'c-dotted-list': (resolve) => require(['@/components/list/dots'], resolve),
-            'c-heading-bar-color': (resolve) => require(['@/components/heading-bar/simple-colored'], resolve)
+            'c-notification': () => import('~/components/notification/index.vue').then(m => m.default || m),
+            'c-message': () => import('~/components/message').then(m => m.default || m),
+            'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
+            'c-dotted-list': () => import('~/components/list/dots').then(m => m.default || m),
+            'c-heading-bar-color': () => import('~/components/heading-bar/simple-colored').then(m => m.default || m)
         },
         computed: {
             swiper() {

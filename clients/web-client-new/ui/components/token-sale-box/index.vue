@@ -121,7 +121,7 @@
     export default {
         name: 'token-sale',
         components:{
-            'c-progress-bar': (resolve) => require(['@/components/progress-bar'], resolve),
+            'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m),
         },
         props:{
             hardCap: [ Number, String ],

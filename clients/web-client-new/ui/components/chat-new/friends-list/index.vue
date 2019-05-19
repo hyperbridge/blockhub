@@ -33,10 +33,10 @@
 <script>
     export default {
         components: {
-            'c-search': (resolve) => require(['@/components/inputs/searcher'], resolve),
-            'c-chat-user': (resolve) => require(['@/components/chat-new/user'], resolve),
-            'c-chat-friends-list': (resolve) => require(['@/components/chat-new/friends-list/list'], resolve),
-            'c-chat-suggestion-list': (resolve) => require(['@/components/chat-new/friends-list/suggestion-list'], resolve),
+            'c-search': () => import('~/components/inputs/searcher').then(m => m.default || m),
+            'c-chat-user': () => import('~/components/chat-new/user').then(m => m.default || m),
+            'c-chat-friends-list': () => import('~/components/chat-new/friends-list/list').then(m => m.default || m),
+            'c-chat-suggestion-list': () => import('~/components/chat-new/friends-list/suggestion-list').then(m => m.default || m),
         },
         data(){
             return{

@@ -36,12 +36,12 @@
     export default {
         name: 'video-popup',
         components:{
-            'c-popup': (resolve) => require(['@/components/popups'], resolve),
-            'c-heading-bar': (resolve) => require(['@/components/heading-bar'], resolve),
-            'c-youtube': (resolve) => require(['@/components/youtube'], resolve),
-            'c-video': (resolve) => require(['@/components/video'], resolve),
-            'c-twitch': (resolve) => require(['@/components/twitch'], resolve),
-            'c-loading-bar-circle': (resolve) => require(['@/components/loading-bar/circle'], resolve)
+            'c-popup': () => import('~/components/popups').then(m => m.default || m),
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+            'c-youtube': () => import('~/components/youtube').then(m => m.default || m),
+            'c-video': () => import('~/components/video').then(m => m.default || m),
+            'c-twitch': () => import('~/components/twitch').then(m => m.default || m),
+            'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m)
         },
         props:{
             activated:{

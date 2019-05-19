@@ -12,7 +12,7 @@
 <script>
     export default {
         components: {
-            'c-sidebar-menu': (resolve) => require(['@/components/sidebar-menu'], resolve)
+            'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m)
         },
         computed: {
             signedIn() { return this.$store.state.application.signedIn },

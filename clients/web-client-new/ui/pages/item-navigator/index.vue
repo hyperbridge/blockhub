@@ -62,10 +62,10 @@
 
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/layouts/default'], resolve),
-            'c-navigator-item': (resolve) => require(['@/components/item-navigator/item'], resolve),
-            'c-modal': (resolve) => require(['@/components/modal'], resolve),
-            'c-assets': (resolve) => require(['@/components/assets-grid-inventory'], resolve),
+            'c-layout': () => import('~/layouts/default').then(m => m.default || m),
+            'c-navigator-item': () => import('~/components/item-navigator/item').then(m => m.default || m),
+            'c-modal': () => import('~/components/modal').then(m => m.default || m),
+            'c-assets': () => import('~/components/assets-grid-inventory').then(m => m.default || m),
         },
         data() {
             return {

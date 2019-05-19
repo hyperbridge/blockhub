@@ -32,8 +32,8 @@
 
     export default {
         components: {
-            'c-stream-item': (resolve) => require(['@/components/stream'], resolve),
-            'c-stream-carousel': (resolve) => require(['@/components/stream/carousel'], resolve),
+            'c-stream-item': () => import('~/components/stream').then(m => m.default || m),
+            'c-stream-carousel': () => import('~/components/stream/carousel').then(m => m.default || m),
         },
         data() {
             return {

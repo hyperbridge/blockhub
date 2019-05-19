@@ -58,8 +58,8 @@
             items: Array
         },
         components: {
-            'c-grid': (resolve) => require(['@/components/shortcut-grid'], resolve),
-            'c-icon': (resolve) => require(['@/components/shortcut-icon'], resolve)
+            'c-grid': () => import('~/components/shortcut-grid').then(m => m.default || m),
+            'c-icon': () => import('~/components/shortcut-icon').then(m => m.default || m)
         },
         data () {
             //let colors = generateRGBColors(5)

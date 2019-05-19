@@ -83,9 +83,9 @@
 
         },
         components: {
-            'c-checkbox': (resolve) => require(['@/components/checkbox'], resolve),
-            'c-text-formatting': (resolve) => require(['@/components/text-formatting'], resolve),
-            'c-basic-popup': (resolve) => require(['@/components/popups/basic'], resolve),
+            'c-checkbox': () => import('~/components/checkbox').then(m => m.default || m),
+            'c-text-formatting': () => import('~/components/text-formatting').then(m => m.default || m),
+            'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
         },
         data(){
             return{

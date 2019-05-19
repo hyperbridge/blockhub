@@ -99,11 +99,11 @@
     export default {
         props: [],
         components: {
-            'c-content-navigation': (resolve) => require(['@/components/content-navigation'], resolve),
-            'c-heading-bar': (resolve) => require(['@/components/heading-bar'], resolve),
-            'c-heading-bar-fields' : (resolve) => require(['@/components/heading-bar/additional-action'], resolve),
-            'c-pagination': (resolve) => require(['@/components/pagination'], resolve),
-            'c-assets-grid': (resolve) => require(['@/components/assets-grid'], resolve)
+            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+            'c-heading-bar-fields' : () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
+            'c-pagination': () => import('~/components/pagination').then(m => m.default || m),
+            'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m)
         },
         async asyncData({ params, store }) {
             return await store.dispatch('collections/find', {

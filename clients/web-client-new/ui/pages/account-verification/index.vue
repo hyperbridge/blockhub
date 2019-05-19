@@ -149,10 +149,10 @@
 
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/layouts/default'], resolve),
-            'c-tab': (resolve) => require(['@/components/tab/tab'], resolve),
-            'c-tabs': (resolve) => require(['@/components/tab/tabs'], resolve),
-            'c-user-card': (resolve) => require(['@/components/user-card'], resolve),
+            'c-layout': () => import('~/layouts/default').then(m => m.default || m),
+            'c-tab': () => import('~/components/tab/tab').then(m => m.default || m),
+            'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m),
+            'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         },
         data() {
             const account = this.$store.state.application.account

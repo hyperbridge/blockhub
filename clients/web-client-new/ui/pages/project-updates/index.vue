@@ -8,7 +8,7 @@
     export default {
         props: ['project', 'editing'],
         components: {
-            'c-timeline': (resolve) => require(['@/components/timeline/list'], resolve)
+            'c-timeline': () => import('~/components/timeline/list').then(m => m.default || m)
         },
     }
 </script>

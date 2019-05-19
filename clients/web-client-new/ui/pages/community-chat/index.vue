@@ -7,7 +7,7 @@
 <script>
 export default {
     components: {
-        'c-chat': (resolve) => require(['@/components/chat/chat'], resolve),
+        'c-chat': () => import('~/components/chat/chat').then(m => m.default || m),
     },
     computed: {
         messages() {

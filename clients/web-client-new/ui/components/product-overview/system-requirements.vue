@@ -51,8 +51,8 @@ export default {
         }
     },
     components: {
-        'c-tab-universal': (resolve) => require(['@/components/tab/tab-universal'], resolve),
-        'c-tabs-universal': (resolve) => require(['@/components/tab/tabs-universal'], resolve)
+        'c-tab-universal': () => import('~/components/tab/tab-universal').then(m => m.default || m),
+        'c-tabs-universal': () => import('~/components/tab/tabs-universal').then(m => m.default || m)
     },
     methods: {
         platform(val) {

@@ -30,7 +30,7 @@
 <script>
 export default {
     components: {
-        'c-money-info': (resolve) => require(['@/components/money-info'], resolve),
+        'c-money-info': () => import('~/components/money-info').then(m => m.default || m),
     },
     props: {
         image: String,

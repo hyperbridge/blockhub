@@ -65,11 +65,11 @@ function isVisible(availableFlags, userFlags, code, variant, data) {
 
 export default {
     components: {
-        'c-layout': (resolve) => require(['@/layout/front'], resolve),
-        'c-banner': (resolve) => require(['@/components/banner/simple'], resolve),
-        'c-custom-modal': (resolve) => require(['@/components/modal/custom'], resolve),
-        'c-download-block': (resolve) => require(['@/components/download-block'], resolve),
-        'c-welcome-box': (resolve) => require(['@/components/welcome-box'], resolve)
+        'c-layout': () => import('~/layout/front').then(m => m.default || m),
+        'c-banner': () => import('~/components/banner/simple').then(m => m.default || m),
+        'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
+        'c-download-block': () => import('~/components/download-block').then(m => m.default || m),
+        'c-welcome-box': () => import('~/components/welcome-box').then(m => m.default || m)
     },
     async asyncData(context) {
         context.store.state.application.navigationComponent = 'store'

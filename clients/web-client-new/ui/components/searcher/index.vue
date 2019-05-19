@@ -36,7 +36,7 @@
     export default {
         name: 'c-searcher',
         components: {
-            'c-input-searcher': (resolve) => require(['@/components/inputs/searcher'], resolve),
+            'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
         },
         inheritAttrs: false,
         mixins: [debouncer],

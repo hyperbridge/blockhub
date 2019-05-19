@@ -153,9 +153,9 @@
     export default {
         props: ['activated'],
         components: {
-            'c-popup': (resolve) => require(['@/components/popups'], resolve),
-            'c-tabs': (resolve) => require(['@/components/tab/tabs-universal'], resolve),
-            'c-tab': (resolve) => require(['@/components/tab/tab-universal'], resolve),
+            'c-popup': () => import('~/components/popups').then(m => m.default || m),
+            'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
+            'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
         },
         data() {
             return {

@@ -26,7 +26,7 @@
 
     export default {
         components: {
-            'c-searcher': (resolve) => require(['@/components/searcher'], resolve),
+            'c-searcher': () => import('~/components/searcher').then(m => m.default || m),
         },
         data() {
             return {

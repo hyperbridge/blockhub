@@ -85,8 +85,8 @@
     export default {
         props: ['offersMap', 'asset', 'profile'],
         components: {
-            'c-user': (resolve) => require(['@/components/user/simple'], resolve),
-            'c-tooltip': (resolve) => require(['@/components/tooltips/universal'], resolve),
+            'c-user': () => import('~/components/user/simple').then(m => m.default || m),
+            'c-tooltip': () => import('~/components/tooltips/universal').then(m => m.default || m),
         },
         data() {
             return {

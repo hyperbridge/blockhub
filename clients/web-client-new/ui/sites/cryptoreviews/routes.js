@@ -2,11 +2,11 @@ export default [
     {
         path: '/',
         name: 'Home',
-        component: (resolve) => require(['@/sites/cryptoreviews/ui/screens/home'], resolve)
+        component: () => import('~/sites/cryptoreviews/ui/screens/home').then(m => m.default || m)
     },
     {
         path: "*",
         name: 'Not Found',
-        component: (resolve) => require(['@/pages/not-found'], resolve)
+        component: () => import('~/pages/not-found').then(m => m.default || m)
     }
 ]

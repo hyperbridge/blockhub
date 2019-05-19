@@ -142,14 +142,14 @@
 
     export default {
         components: {
-            'c-block': (resolve) => require(['@/components/block/index'], resolve),
-            'c-asset-list': (resolve) => require(['@/components/asset/list'], resolve),
-            'c-searcher': (resolve) => require(['@/components/searcher'], resolve),
-            'c-asset-preview': (resolve) => require(['@/components/asset/preview-basic'], resolve),
-            'c-range-slider': (resolve) => require(['@/components/range-slider/pure'], resolve),
-            'c-option-tag': (resolve) => require(['@/components/option-tag'], resolve),
-            'c-modal': (resolve) => require(['@/components/modal'], resolve),
-            'c-messages-bar': (resolve) => require(['@/components/message-bar/wrapper'], resolve),
+            'c-block': () => import('~/components/block/index').then(m => m.default || m),
+            'c-asset-list': () => import('~/components/asset/list').then(m => m.default || m),
+            'c-searcher': () => import('~/components/searcher').then(m => m.default || m),
+            'c-asset-preview': () => import('~/components/asset/preview-basic').then(m => m.default || m),
+            'c-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m),
+            'c-option-tag': () => import('~/components/option-tag').then(m => m.default || m),
+            'c-modal': () => import('~/components/modal').then(m => m.default || m),
+            'c-messages-bar': () => import('~/components/message-bar/wrapper').then(m => m.default || m),
         },
         mixins: [debouncer],
         data() {

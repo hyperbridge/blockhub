@@ -52,9 +52,9 @@
             }
         },
         components: {
-            'c-dropdown-menu': (resolve) => require(['@/components/dropdown-menu'], resolve),
-            'c-reply': (resolve) => require(['@/components/community/reply'], resolve),
-            'c-button-arrows': (resolve) => require(['@/components/buttons/arrows'], resolve),
+            'c-dropdown-menu': () => import('~/components/dropdown-menu').then(m => m.default || m),
+            'c-reply': () => import('~/components/community/reply').then(m => m.default || m),
+            'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m),
             'c-emoji-picker': VueEmojiReact
         },
         data() {

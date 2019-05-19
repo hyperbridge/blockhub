@@ -34,7 +34,7 @@
     export default {
         name: 'product-slider',
         components: {
-            'c-stream-item': (resolve) => require(['@/components/stream'], resolve),
+            'c-stream-item': () => import('~/components/stream').then(m => m.default || m),
             
           },
         props: {

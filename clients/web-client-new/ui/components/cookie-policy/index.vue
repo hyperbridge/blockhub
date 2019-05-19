@@ -37,7 +37,7 @@ import { mapMutations } from 'vuex'
 export default {
     name: 'cookie-policy',
     components:{
-        'c-popup': (resolve) => require(['@/components/popups'], resolve),
+        'c-popup': () => import('~/components/popups').then(m => m.default || m),
     },
     data(){
         return {

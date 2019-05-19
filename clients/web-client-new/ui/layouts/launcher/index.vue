@@ -156,9 +156,9 @@
             }
         },
         components:{
-            'c-loading-logo': (resolve) => require(['@/components/loading-bar/logo-loader'], resolve),
-            'c-quick-launch': (resolve) => require(['@/components/quick-launch'], resolve),
-            'c-dropdown': (resolve) => require(['@/components/dropdown-menu/type-4'], resolve),
+            'c-loading-logo': () => import('~/components/loading-bar/logo-loader').then(m => m.default || m),
+            'c-quick-launch': () => import('~/components/quick-launch').then(m => m.default || m),
+            'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m),
         },
         data(){
             return{

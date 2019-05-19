@@ -6,17 +6,17 @@ export default [
     {
         path: '/',
         name: 'Home',
-        component: (resolve) => require(['@/pages/home'], resolve)
+        component: () => import('~/pages/home').then(m => m.default || m)
     },
     {
         path: '/company',
         name: 'About Company',
-        component: (resolve) => require(['@/pages/about'], resolve)
+        component: () => import('~/pages/about').then(m => m.default || m)
     },
     {
         path: '/unlock',
         name: 'Unlock',
-        component: (resolve) => require(['@/pages/unlock'], resolve),
+        component: () => import('~/pages/unlock').then(m => m.default || m),
         meta: {
             auth: false,
             breadcrumb: false
@@ -25,7 +25,7 @@ export default [
     {
         path: '/welcome',
         name: 'Welcome',
-        component: (resolve) => require(['@/pages/welcome'], resolve),
+        component: () => import('~/pages/welcome').then(m => m.default || m),
         meta: {
             auth: false,
             breadcrumb: false
@@ -34,39 +34,39 @@ export default [
     {
         path: '/terms',
         name: 'Terms & Conditions',
-        component: (resolve) => require(['@/pages/terms'], resolve)
+        component: () => import('~/pages/terms').then(m => m.default || m)
     },
     {
         path: '/privacy',
         name: 'Privacy Policy',
-        component: (resolve) => require(['@/pages/privacy'], resolve)
+        component: () => import('~/pages/privacy').then(m => m.default || m)
     },
     {
         path: '/streams',
         name: 'Streams',
-        component: (resolve) => require(['@/pages/streams'], resolve)
+        component: () => import('~/pages/streams').then(m => m.default || m)
     },,
     {
         path: '/stream/:id',
         name: 'Stream',
         props: true,
-        component: (resolve) => require(['@/pages/stream-single'], resolve)
+        component: () => import('~/pages/stream-single').then(m => m.default || m)
     },
     {
         path: '/stash',
         name: 'Stash',
-        component: (resolve) => require(['@/pages/stash'], resolve)
+        component: () => import('~/pages/stash').then(m => m.default || m)
     },
     {
         path: '/sitemap',
         name: 'Sitemap',
-        component: (resolve) => require(['@/pages/sitemap'], resolve)
+        component: () => import('~/pages/sitemap').then(m => m.default || m)
     },
     {
         path: '/go/:code',
         name: 'Go',
         props: true,
-        component: (resolve) => require(['@/pages/go'], resolve),
+        component: () => import('~/pages/go').then(m => m.default || m),
         meta: {
             breadcrumb: false
         }
@@ -75,24 +75,24 @@ export default [
         path: '/help/:id/article/:slug/:info',
         name: 'Help article',
         props: true,
-        component: (resolve) => require(['@/pages/help-article'], resolve)
+        component: () => import('~/pages/help-article').then(m => m.default || m)
     },
     {
         path: '/help/:id/article/:slug',
         name: 'Help article',
         props: true,
-        component: (resolve) => require(['@/pages/help-article'], resolve)
+        component: () => import('~/pages/help-article').then(m => m.default || m)
     },
     {
         path: '/help/:id',
         name: 'Topic',
         props: true,
-        component: (resolve) => require(['@/pages/help-topic'], resolve)
+        component: () => import('~/pages/help-topic').then(m => m.default || m)
     },
     {
         path: '/help',
         name: 'Help',
-        component: (resolve) => require(['@/pages/help'], resolve),
+        component: () => import('~/pages/help').then(m => m.default || m),
         meta: {
             breadcrumb: false
         }
@@ -100,17 +100,17 @@ export default [
     {
         path: '/support',
         name: 'Support',
-        component: (resolve) => require(['@/pages/support'], resolve)
+        component: () => import('~/pages/support').then(m => m.default || m)
     },
     {
         path: '/news',
         name: 'News',
-        component: (resolve) => require(['@/pages/news'], resolve)
+        component: () => import('~/pages/news').then(m => m.default || m)
     },
     {
         path: '/denied',
         name: 'Denied',
-        component: (resolve) => require(['@/pages/denied'], resolve),
+        component: () => import('~/pages/denied').then(m => m.default || m),
         meta: {
             breadcrumb: false
         }
@@ -118,7 +118,7 @@ export default [
     {
         path: '/token',
         name: 'Token',
-        component: (resolve) => require(['@/pages/token'], resolve),
+        component: () => import('~/pages/token').then(m => m.default || m),
         meta: {
             breadcrumb: false
         }
@@ -126,7 +126,7 @@ export default [
     {
         path: '/plans',
         name: 'Plans',
-        component: (resolve) => require(['@/pages/plans'], resolve),
+        component: () => import('~/pages/plans').then(m => m.default || m),
         meta: {
             breadcrumb: false
         }
@@ -134,17 +134,17 @@ export default [
     {
         path: '/redeem',
         name: 'Redeem',
-        component: (resolve) => require(['@/pages/redeem'], resolve)
+        component: () => import('~/pages/redeem').then(m => m.default || m)
     },
     {
         path: '/store',
         name: 'Store',
-        component: (resolve) => require(['@/pages/store'], resolve)
+        component: () => import('~/pages/store').then(m => m.default || m)
     },
     {
         path: '/store/cart',
         name: 'Store Cart',
-        component: (resolve) => require(['@/pages/store-cart'], resolve),
+        component: () => import('~/pages/store-cart').then(m => m.default || m),
         meta: {
             auth: true
         }
@@ -152,7 +152,7 @@ export default [
     {
         path: '/store/checkout',
         name: 'Store Checkout',
-        component: (resolve) => require(['@/pages/store-checkout'], resolve),
+        component: () => import('~/pages/store-checkout').then(m => m.default || m),
         meta: {
             auth: true
         }
@@ -160,7 +160,7 @@ export default [
     {
         path: '/store/invoices',
         name: 'Store Invoices',
-        component: (resolve) => require(['@/pages/store-invoices'], resolve),
+        component: () => import('~/pages/store-invoices').then(m => m.default || m),
         meta: {
             auth: true,
             breadcrumb: [
@@ -173,7 +173,7 @@ export default [
         path: '/store/invoice/:id',
         name: 'Store Invoice',
         props: true,
-        component: (resolve) => require(['@/pages/store-invoice'], resolve),
+        component: () => import('~/pages/store-invoice').then(m => m.default || m),
         meta: {
             auth: true,
             breadcrumb: [
@@ -186,18 +186,18 @@ export default [
     {
         path: '/collections',
         name: 'Collections',
-        component: (resolve) => require(['@/pages/collections'], resolve)
+        component: () => import('~/pages/collections').then(m => m.default || m)
     },
     {
         path: '/collection/:id',
         name: 'Collection',
         props: true,
-        component: (resolve) => require(['@/pages/collection'], resolve)
+        component: () => import('~/pages/collection').then(m => m.default || m)
     },
     {
         path: '/account',
         name: 'Account',
-        component: (resolve) => require(['@/pages/account'], resolve),
+        component: () => import('~/pages/account').then(m => m.default || m),
         meta: {
             auth: true,
             permission: 'signedIn'
@@ -206,7 +206,7 @@ export default [
     {
         path: '/account/signup',
         name: 'Sign Up',
-        component: (resolve) => require(['@/pages/account-signup'], resolve),
+        component: () => import('~/pages/account-signup').then(m => m.default || m),
         meta: {
             auth: false,
             breadcrumb: false
@@ -215,7 +215,7 @@ export default [
     {
         path: '/account/signin',
         name: 'Sign In',
-        component: (resolve) => require(['@/pages/account-signin'], resolve),
+        component: () => import('~/pages/account-signin').then(m => m.default || m),
         meta: {
             auth: false,
             breadcrumb: false
@@ -224,7 +224,7 @@ export default [
     {
         path: '/account/signout',
         name: 'Sign Out',
-        component: (resolve) => require(['@/pages/account-signout'], resolve),
+        component: () => import('~/pages/account-signout').then(m => m.default || m),
         meta: {
             auth: true,
             permission: 'signedIn'
@@ -233,7 +233,7 @@ export default [
     {
         path: '/account/backup',
         name: 'Account Backup',
-        component: (resolve) => require(['@/pages/account-backup'], resolve),
+        component: () => import('~/pages/account-backup').then(m => m.default || m),
         meta: {
             breadcrumb: false
         }
@@ -241,7 +241,7 @@ export default [
     {
         path: '/account/verification',
         name: 'Account Verification',
-        component: (resolve) => require(['@/pages/account-verification'], resolve),
+        component: () => import('~/pages/account-verification').then(m => m.default || m),
         meta: {
             breadcrumb: false
         }
@@ -249,7 +249,7 @@ export default [
     {
         path: '/account/verification/callback',
         name: 'Account Verification',
-        component: (resolve) => require(['@/pages/account-verification-callback'], resolve),
+        component: () => import('~/pages/account-verification-callback').then(m => m.default || m),
         meta: {
             breadcrumb: false
         }
@@ -257,7 +257,7 @@ export default [
     {
         path: '/account/wallets',
         name: 'Wallets',
-        component: (resolve) => require(['@/pages/account-wallets'], resolve),
+        component: () => import('~/pages/account-wallets').then(m => m.default || m),
         meta: {
             auth: true,
             permission: 'signedIn',
@@ -271,7 +271,7 @@ export default [
     {
         path: '/account/profiles',
         name: 'Profiles',
-        component: (resolve) => require(['@/pages/account-profiles'], resolve),
+        component: () => import('~/pages/account-profiles').then(m => m.default || m),
         meta: {
             permission: 'signedIn',
             breadcrumb: [
@@ -284,7 +284,7 @@ export default [
     {
         path: '/kyc',
         name: 'KYC',
-        component: (resolve) => require(['@/pages/kyc'], resolve),
+        component: () => import('~/pages/kyc').then(m => m.default || m),
         meta: {
             breadcrumb: false
         }
@@ -293,25 +293,25 @@ export default [
         path: '/wallet/:id',
         name: 'Wallet',
         props: true,
-        component: (resolve) => require(['@/pages/wallet-overview'], resolve)
+        component: () => import('~/pages/wallet-overview').then(m => m.default || m)
     },
     {
         path: '/wallet/:id/transactions',
         name: 'Transactions',
         props: true,
-        component: (resolve) => require(['@/pages/wallet-transactions'], resolve)
+        component: () => import('~/pages/wallet-transactions').then(m => m.default || m)
     },
     {
         path: '/transaction/:id',
         name: 'Transaction',
         props: true,
-        component: (resolve) => require(['@/pages/transaction-overview'], resolve)
+        component: () => import('~/pages/transaction-overview').then(m => m.default || m)
     },
     {
         path: '/profile/:id',
         name: 'Profile',
         props: true,
-        component: (resolve) => require(['@/pages/profile'], resolve),
+        component: () => import('~/pages/profile').then(m => m.default || m),
         meta: {
             breadcrumb: false
         }
@@ -320,36 +320,36 @@ export default [
         path: '/profile/:id/contacts',
         name: 'Contacts',
         props: true,
-        component: (resolve) => require(['@/pages/profile-contacts'], resolve)
+        component: () => import('~/pages/profile-contacts').then(m => m.default || m)
     },
     {
         path: '/profile/:id/projects',
         name: 'Crowdfunds',
         props: true,
-        component: (resolve) => require(['@/pages/profile-projects'], resolve)
+        component: () => import('~/pages/profile-projects').then(m => m.default || m)
     },
     {
         path: '/profile/:id/licenses',
         name: 'Licenses',
         props: true,
-        component: (resolve) => require(['@/pages/profile-licenses'], resolve)
+        component: () => import('~/pages/profile-licenses').then(m => m.default || m)
     },
     {
         path: '/profile/:id/assets',
         name: 'Assets',
         props: true,
-        component: (resolve) => require(['@/pages/profile-assets'], resolve)
+        component: () => import('~/pages/profile-assets').then(m => m.default || m)
     },
     {
         path: '/profile/:id/collections',
         name: 'Collections',
         props: true,
-        component: (resolve) => require(['@/pages/profile-collection'], resolve)
+        component: () => import('~/pages/profile-collection').then(m => m.default || m)
     },
     {
         path: '/settings',
         name: 'Settings',
-        component: (resolve) => require(['@/pages/settings'], resolve),
+        component: () => import('~/pages/settings').then(m => m.default || m),
         meta: {
             auth: true
         }
@@ -357,7 +357,7 @@ export default [
     {
         path: '/settings/profile',
         name: 'Profile',
-        component: (resolve) => require(['@/pages/settings-profile'], resolve),
+        component: () => import('~/pages/settings-profile').then(m => m.default || m),
         meta: {
             auth: true
         }
@@ -365,7 +365,7 @@ export default [
     {
         path: '/settings/protocol',
         name: 'Protocol Settings',
-        component: (resolve) => require(['@/pages/settings-protocol'], resolve),
+        component: () => import('~/pages/settings-protocol').then(m => m.default || m),
         meta: {
             auth: true
         }
@@ -373,7 +373,7 @@ export default [
     {
         path: '/settings/darklaunch',
         name: 'Darklaunch Settings',
-        component: (resolve) => require(['@/pages/settings-darklaunch'], resolve),
+        component: () => import('~/pages/settings-darklaunch').then(m => m.default || m),
         meta: {
             auth: true
         }
@@ -381,7 +381,7 @@ export default [
     {
         path: '/settings/activity',
         name: 'Activity Settings',
-        component: (resolve) => require(['@/pages/settings-activity'], resolve),
+        component: () => import('~/pages/settings-activity').then(m => m.default || m),
         meta: {
             auth: true
         }
@@ -389,7 +389,7 @@ export default [
     {
         path: '/settings/debug',
         name: 'Debug Settings',
-        component: (resolve) => require(['@/pages/settings-debug'], resolve),
+        component: () => import('~/pages/settings-debug').then(m => m.default || m),
         meta: {
             auth: true
         }
@@ -397,7 +397,7 @@ export default [
     {
         path: '/settings/game-scanner',
         name: 'Game Scanner',
-        component: (resolve) => require(['@/pages/settings-game-scanner'], resolve),
+        component: () => import('~/pages/settings-game-scanner').then(m => m.default || m),
         meta: {
             auth: true
         }
@@ -405,7 +405,7 @@ export default [
     {
         path: '/settings/extensions',
         name: 'Extensions',
-        component: (resolve) => require(['@/pages/settings-extensions'], resolve),
+        component: () => import('~/pages/settings-extensions').then(m => m.default || m),
         meta: {
             auth: true
         }
@@ -413,24 +413,24 @@ export default [
     {
         path: '/monitor',
         name: 'Monitor',
-        component: (resolve) => require(['@/pages/monitor'], resolve)
+        component: () => import('~/pages/monitor').then(m => m.default || m)
     },
     {
         path: '/verification-assistant',
         name: 'Verification Assistant',
-        component: (resolve) => require(['@/pages/verification-assistant'], resolve)
+        component: () => import('~/pages/verification-assistant').then(m => m.default || m)
     },
     {
         path: '/developer',
         name: 'Developer Program',
-        component: (resolve) => require(['@/pages/developer'], resolve),
+        component: () => import('~/pages/developer').then(m => m.default || m),
         meta: {
         }
     },
     {
         path: '/developer/apply',
         name: 'Developer Application',
-        component: (resolve) => require(['@/pages/developer-application'], resolve),
+        component: () => import('~/pages/developer-application').then(m => m.default || m),
         meta: {
             permission: 'signedIn'
         }
@@ -438,7 +438,7 @@ export default [
     {
         path: '/developer/new-product',
         name: 'New Product',
-        component: (resolve) => require(['@/pages/product'], resolve),
+        component: () => import('~/pages/product').then(m => m.default || m),
         props: {
             id: 'new'
         },
@@ -451,7 +451,7 @@ export default [
         path: '/product/new',
         name: 'Product',
         props: true,
-        component: (resolve) => require(['@/pages/product'], resolve),
+        component: () => import('~/pages/product').then(m => m.default || m),
         props: {
             id: 'new'
         },
@@ -465,7 +465,7 @@ export default [
         path: '/product/:id',
         name: 'Product',
         props: true,
-        component: (resolve) => require(['@/pages/product'], resolve),
+        component: () => import('~/pages/product').then(m => m.default || m),
         meta: {
             section: 'overview'
         }
@@ -474,7 +474,7 @@ export default [
         path: '/product/:id/community',
         name: 'Product Community',
         props: true,
-        component: (resolve) => require(['@/pages/product'], resolve),
+        component: () => import('~/pages/product').then(m => m.default || m),
         meta: {
             section: 'community'
         }
@@ -483,7 +483,7 @@ export default [
         path: '/product/:id/projects',
         name: 'Product Crowdfunds',
         props: true,
-        component: (resolve) => require(['@/pages/product'], resolve),
+        component: () => import('~/pages/product').then(m => m.default || m),
         meta: {
             section: 'projects'
         }
@@ -492,7 +492,7 @@ export default [
         path: '/product/:id/assets',
         name: 'Product Assets',
         props: true,
-        component: (resolve) => require(['@/pages/product'], resolve),
+        component: () => import('~/pages/product').then(m => m.default || m),
         meta: {
             section: 'assets'
         }
@@ -500,7 +500,7 @@ export default [
     {
         path: '/community',
         name: 'Community',
-        component: (resolve) => require(['@/pages/community'], resolve),
+        component: () => import('~/pages/community').then(m => m.default || m),
         meta: {
             breadcrumb: [
                 { title: 'Home' },
@@ -511,13 +511,13 @@ export default [
     {
         path: '/community/forums',
         name: 'Community Forums',
-        component: (resolve) => require(['@/pages/community-forums'], resolve)
+        component: () => import('~/pages/community-forums').then(m => m.default || m)
     },
     {
         path: '/community/forum/:id',
         name: 'Community Forum',
         props: true,
-        component: (resolve) => require(['@/pages/community-forum'], resolve),
+        component: () => import('~/pages/community-forum').then(m => m.default || m),
         meta: {
             breadcrumb: [
                 { title: 'Home' },
@@ -530,49 +530,49 @@ export default [
         path: '/community/discussion/:id',
         name: 'Community Discussion',
         props: true,
-        component: (resolve) => require(['@/pages/community-discussion'], resolve)
+        component: () => import('~/pages/community-discussion').then(m => m.default || m)
     },
     {
         path: '/chat',
         name: 'Chat',
-        component: (resolve) => require(['@/pages/chat'], resolve)
+        component: () => import('~/pages/chat').then(m => m.default || m)
     },
     {
         path: '/assets',
         name: 'Assets',
         props: true,
-        component: (resolve) => require(['@/pages/assets'], resolve)
+        component: () => import('~/pages/assets').then(m => m.default || m)
     },
     {
         path: '/asset/:id',
         name: 'Asset',
         props: true,
-        component: (resolve) => require(['@/pages/asset-overview'], resolve)
+        component: () => import('~/pages/asset-overview').then(m => m.default || m)
     },
     {
         path: '/browser',
         name: 'Browser',
-        component: (resolve) => require(['@/pages/browser'], resolve)
+        component: () => import('~/pages/browser').then(m => m.default || m)
     },
     {
         path: '/republic',
         name: 'Republic',
-        component: (resolve) => require(['@/pages/republic'], resolve)
+        component: () => import('~/pages/republic').then(m => m.default || m)
     },
     {
         path: '/republic/citizenship',
         name: 'Republic Citizenship',
-        component: (resolve) => require(['@/pages/republic-citizenship'], resolve)
+        component: () => import('~/pages/republic-citizenship').then(m => m.default || m)
     },
     {
         path: '/republic/district/create',
         name: 'Create District',
-        component: (resolve) => require(['@/pages/republic-district'], resolve)
+        component: () => import('~/pages/republic-district').then(m => m.default || m)
     },
     {
         path: '/ideas',
         name: 'Ideas',
-        component: (resolve) => require(['@/pages/ideas'], resolve),
+        component: () => import('~/pages/ideas').then(m => m.default || m),
         breadcrumb: [
             { title: 'Home' },
             { title: 'Ideas' }
@@ -582,7 +582,7 @@ export default [
         path: '/idea/new',
         name: 'Idea',
         props: true,
-        component: (resolve) => require(['@/pages/idea'], resolve),
+        component: () => import('~/pages/idea').then(m => m.default || m),
         props: {
             id: 'new'
         },
@@ -596,7 +596,7 @@ export default [
         path: '/idea/:id',
         name: 'Idea',
         props: true,
-        component: (resolve) => require(['@/pages/idea'], resolve),
+        component: () => import('~/pages/idea').then(m => m.default || m),
         meta: {
             section: 'overview'
         }
@@ -604,7 +604,7 @@ export default [
     {
         path: '/games',
         name: 'Games',
-        component: (resolve) => require(['@/pages/games'], resolve),
+        component: () => import('~/pages/games').then(m => m.default || m),
         breadcrumb: [
             { title: 'Home' },
             { title: 'Games' }
@@ -613,7 +613,7 @@ export default [
     {
         path: '/projects',
         name: 'Crowdfunds',
-        component: (resolve) => require(['@/pages/projects'], resolve),
+        component: () => import('~/pages/projects').then(m => m.default || m),
         meta: {
         },
         breadcrumb: [
@@ -625,7 +625,7 @@ export default [
         path: '/project/new',
         name: 'Crowdfund',
         props: true,
-        component: (resolve) => require(['@/pages/project'], resolve),
+        component: () => import('~/pages/project').then(m => m.default || m),
         props: {
             id: 'new'
         },
@@ -639,7 +639,7 @@ export default [
         path: '/project/:id',
         name: 'Crowdfund',
         props: true,
-        component: (resolve) => require(['@/pages/project'], resolve),
+        component: () => import('~/pages/project').then(m => m.default || m),
         meta: {
             section: 'overview'
         }
@@ -648,7 +648,7 @@ export default [
         path: '/project/:id/bounties',
         name: 'Crowdfund Bounties',
         props: true,
-        component: (resolve) => require(['@/pages/project'], resolve),
+        component: () => import('~/pages/project').then(m => m.default || m),
         meta: {
             section: 'bounties'
         }
@@ -657,19 +657,19 @@ export default [
         path: '/project/:id/contributors',
         name: 'Crowdfund Contributors',
         props: true,
-        component: (resolve) => require(['@/pages/project-contributors'], resolve)
+        component: () => import('~/pages/project-contributors').then(m => m.default || m)
     },
     {
         path: '/project/:id/discussion',
         name: 'Crowdfund Discussion',
         props: true,
-        component: (resolve) => require(['@/pages/project-discussion'], resolve)
+        component: () => import('~/pages/project-discussion').then(m => m.default || m)
     },
     {
         path: '/project/:id/milestones',
         name: 'Crowdfund Milestones',
         props: true,
-        component: (resolve) => require(['@/pages/project'], resolve),
+        component: () => import('~/pages/project').then(m => m.default || m),
         meta: {
             section: 'milestones'
         }
@@ -678,7 +678,7 @@ export default [
         path: '/project/:id/updates',
         name: 'Crowdfund Updates',
         props: true,
-        component: (resolve) => require(['@/pages/project'], resolve),
+        component: () => import('~/pages/project').then(m => m.default || m),
         meta: {
             section: 'updates'
         }
@@ -687,13 +687,13 @@ export default [
         path: '/project/:projectID/updates/:postID',
         name: 'Crowdfund Updates Post',
         props: true,
-        component: (resolve) => require(['@/pages/project-updates/post'], resolve)
+        component: () => import('~/pages/project-updates/post').then(m => m.default || m)
     },
     {
         path: '/project/:id/community',
         name: 'Crowdfund Community',
         props: true,
-        component: (resolve) => require(['@/pages/project'], resolve),
+        component: () => import('~/pages/project').then(m => m.default || m),
         meta: {
             section: 'community'
         }
@@ -702,18 +702,18 @@ export default [
         path: '/battlepass/:id',
         name: 'Battle Pass',
         props: true,
-        component: (resolve) => require(['@/pages/battle-pass'], resolve)
+        component: () => import('~/pages/battle-pass').then(m => m.default || m)
     },
     {
         path: '/curators',
         name: 'Curators',
-        component: (resolve) => require(['@/pages/curators'], resolve)
+        component: () => import('~/pages/curators').then(m => m.default || m)
     },
     {
         path: '/curator/application',
         name: 'Curator Application',
         props: true,
-        component: (resolve) => require(['@/pages/curator-application'], resolve),
+        component: () => import('~/pages/curator-application').then(m => m.default || m),
         meta: {
             auth: true,
             permission: 'signedIn'
@@ -723,12 +723,12 @@ export default [
         path: '/curator/:id',
         name: 'Curator',
         props: true,
-        component: (resolve) => require(['@/pages/curator-overview'], resolve)
+        component: () => import('~/pages/curator-overview').then(m => m.default || m)
     },
     {
         path: '/download',
         name: 'Download',
-        component: (resolve) => require(['@/pages/download'], resolve),
+        component: () => import('~/pages/download').then(m => m.default || m),
         meta: {
             breadcrumb: false
         }
@@ -736,18 +736,18 @@ export default [
     {
         path: '/realms',
         name: 'Realms',
-        component: (resolve) => require(['@/pages/realms'], resolve)
+        component: () => import('~/pages/realms').then(m => m.default || m)
     },
     {
         path: '/footer',
         name: 'Footer',
-        component: (resolve) => require(['@/pages/footer'], resolve)
+        component: () => import('~/pages/footer').then(m => m.default || m)
     },
     {
         path: '/realm/:id',
         name: 'Realm',
         props: true,
-        component: (resolve) => require(['@/pages/realm'], resolve),
+        component: () => import('~/pages/realm').then(m => m.default || m),
         meta: {
             breadcrumb: false
         }
@@ -755,59 +755,59 @@ export default [
     {
         path: '/unknown',
         name: 'Unknown Layers',
-        component: (resolve) => require(['@/pages/unknown'], resolve)
+        component: () => import('~/pages/unknown').then(m => m.default || m)
     },
     {
         path: '/search',
         name: 'Search',
-        component: (resolve) => require(['@/pages/search'], resolve)
+        component: () => import('~/pages/search').then(m => m.default || m)
     },
     {
         path: '/discussion',
         name: 'Discussion',
         props: true,
-        component: (resolve) => require(['@/pages/discussion'], resolve)
+        component: () => import('~/pages/discussion').then(m => m.default || m)
     },
     {
         path: '/meta',
         name: 'Meta',
-        component: (resolve) => require(['@/pages/meta'], resolve)
+        component: () => import('~/pages/meta').then(m => m.default || m)
     },
     {
         path: '/meta/presets',
         name: 'Presets',
-        component: (resolve) => require(['@/pages/meta-presets'], resolve)
+        component: () => import('~/pages/meta-presets').then(m => m.default || m)
     },
     {
         path: '/updates',
         name: 'Updates',
-        component: (resolve) => require(['@/pages/updates'], resolve)
+        component: () => import('~/pages/updates').then(m => m.default || m)
     },
     {
         path: '/updates/:id',
         name: 'Update',
         props: true,
-        component: (resolve) => require(['@/pages/updates'], resolve)
+        component: () => import('~/pages/updates').then(m => m.default || m)
     },
     {
         path: '/chest',
         name: 'Chest',
-        component: (resolve) => require(['@/pages/chest'], resolve)
+        component: () => import('~/pages/chest').then(m => m.default || m)
     },
     {
         path: '/launcher',
         name: 'Launcher',
-        component: (resolve) => require(['@/pages/launcher'], resolve)
+        component: () => import('~/pages/launcher').then(m => m.default || m)
     },,
     {
         path: '/quick-import',
         name: 'Quick import',
-        component: (resolve) => require(['@/pages/quick-import'], resolve)
+        component: () => import('~/pages/quick-import').then(m => m.default || m)
     },
     {
         path: '/admin',
         name: 'Admin',
-        component: (resolve) => require(['@/pages/business'], resolve),
+        component: () => import('~/pages/business').then(m => m.default || m),
         meta: {
             area: 'business',
         },
@@ -815,7 +815,7 @@ export default [
             {
                 path: '',
                 name: 'Admin',
-                component: (resolve) => require(['@/pages/admin-home'], resolve),
+                component: () => import('~/pages/admin-home').then(m => m.default || m),
                 meta: {
                     title: 'Admin',
                     breadcrumb: [
@@ -829,7 +829,7 @@ export default [
         path: '/business/realm/:id',
         name: 'Realm',
         props: true,
-        component: (resolve) => require(['@/pages/business-realm'], resolve),
+        component: () => import('~/pages/business-realm').then(m => m.default || m),
         meta: {
             title: 'Realm',
             permission: 'signedIn',
@@ -844,7 +844,7 @@ export default [
         path: '/business/product/:id',
         name: 'Product',
         props: true,
-        component: (resolve) => require(['@/pages/business-product'], resolve),
+        component: () => import('~/pages/business-product').then(m => m.default || m),
         meta: {
             title: 'Product',
             permission: 'signedIn',
@@ -859,7 +859,7 @@ export default [
         path: '/business/project/:id',
         name: 'Crowdfund',
         props: true,
-        component: (resolve) => require(['@/pages/business-project'], resolve),
+        component: () => import('~/pages/business-project').then(m => m.default || m),
         meta: {
             title: 'Crowdfund',
             permission: 'signedIn',
@@ -874,7 +874,7 @@ export default [
         path: '/business/asset/:id',
         name: 'Asset',
         props: true,
-        component: (resolve) => require(['@/pages/business-asset'], resolve),
+        component: () => import('~/pages/business-asset').then(m => m.default || m),
         meta: {
             title: 'Asset',
             permission: 'signedIn',
@@ -889,7 +889,7 @@ export default [
         path: '/business/idea/:id',
         name: 'Idea',
         props: true,
-        component: (resolve) => require(['@/pages/business-idea'], resolve),
+        component: () => import('~/pages/business-idea').then(m => m.default || m),
         meta: {
             title: 'Idea',
             permission: 'signedIn',
@@ -903,7 +903,7 @@ export default [
     {
         path: '/business/products',
         name: 'Products',
-        component: (resolve) => require(['@/pages/business-products'], resolve),
+        component: () => import('~/pages/business-products').then(m => m.default || m),
         meta: {
             title: 'Products',
             permission: 'signedIn',
@@ -916,7 +916,7 @@ export default [
     {
         path: '/business/projects',
         name: 'Crowdfunds',
-        component: (resolve) => require(['@/pages/business-projects'], resolve),
+        component: () => import('~/pages/business-projects').then(m => m.default || m),
         meta: {
             title: 'Crowdfunds',
             permission: 'signedIn',
@@ -929,7 +929,7 @@ export default [
     {
         path: '/business',
         name: 'Business',
-        component: (resolve) => require(['@/pages/business'], resolve),
+        component: () => import('~/pages/business').then(m => m.default || m),
         meta: {
             area: 'business',
             permission: 'signedIn',
@@ -938,7 +938,7 @@ export default [
             {
                 path: '',
                 name: 'Business',
-                component: (resolve) => require(['@/pages/business-home'], resolve),
+                component: () => import('~/pages/business-home').then(m => m.default || m),
                 meta: {
                     title: 'Business',
                     permission: 'signedIn',
@@ -951,7 +951,7 @@ export default [
                 path: 'release-history/:id',
                 name: 'Release History',
                 props: true,
-                component: (resolve) => require(['@/pages/business-release-history'], resolve),
+                component: () => import('~/pages/business-release-history').then(m => m.default || m),
                 meta: {
                     title: 'Release History',
                     permission: 'signedIn',
@@ -965,7 +965,7 @@ export default [
                 path: 'new-release',
                 name: 'Add New Release',
                 props: true,
-                component: (resolve) => require(['@/pages/business-new-release'], resolve),
+                component: () => import('~/pages/business-new-release').then(m => m.default || m),
                 meta: {
                     title: 'Add New Release',
                     permission: 'signedIn',
@@ -979,7 +979,7 @@ export default [
                 path: 'release-page/:id',
                 name: 'Release page',
                 props: true,
-                component: (resolve) => require(['@/pages/business-release-page'], resolve),
+                component: () => import('~/pages/business-release-page').then(m => m.default || m),
                 meta: {
                     title: 'Release Page',
                     permission: 'signedIn',
@@ -993,52 +993,52 @@ export default [
     },
     {
         path: '/marketplace',
-        component: (resolve) => require(['@/pages/marketplace'], resolve),
+        component: () => import('~/pages/marketplace').then(m => m.default || m),
         children: [
             {
                 path: '',
                 name: 'Marketplace',
-                component: (resolve) => require(['@/pages/marketplace/home'], resolve),
+                component: () => import('~/pages/marketplace/home').then(m => m.default || m),
             },
             {
                 path: 'trade',
-                component: (resolve) => require(['@/pages/marketplace/trade'], resolve),
+                component: () => import('~/pages/marketplace/trade').then(m => m.default || m),
                 children: [
                     {
                         path: '',
                         name: 'Marketplace Trade Manager',
-                        component: (resolve) => require(['@/pages/marketplace/trade/home'], resolve),
+                        component: () => import('~/pages/marketplace/trade/home').then(m => m.default || m),
                     },
                     {
                         path: 'explorer',
                         name: 'Marketplace Trade Explorer',
-                        component: (resolve) => require(['@/pages/marketplace/trade/explorer'], resolve)
+                        component: () => import('~/pages/marketplace/trade/explorer').then(m => m.default || m)
                     },
                     {
                         path: 'history',
                         name: 'Marketplace Trade History',
-                        component: (resolve) => require(['@/pages/marketplace/trade/history'], resolve),
+                        component: () => import('~/pages/marketplace/trade/history').then(m => m.default || m),
                     },
                     {
                         path: 'settings',
                         name: 'Marketplace Trade Settings',
-                        component: (resolve) => require(['@/pages/marketplace/trade/settings'], resolve),
+                        component: () => import('~/pages/marketplace/trade/settings').then(m => m.default || m),
                     },
                     {
                         path: ':id',
                         name: 'Marketplace Trade',
-                        component: (resolve) => require(['@/pages/marketplace/trade/_id'], resolve),
+                        component: () => import('~/pages/marketplace/trade/_id').then(m => m.default || m),
                         props: true,
                         children: [
                             {
                                 path: '',
                                 name: 'Marketplace Trade Offer',
-                                component: (resolve) => require(['@/pages/marketplace/trade/_id/offer'], resolve)
+                                component: () => import('~/pages/marketplace/trade/_id/offer').then(m => m.default || m)
                             },
                             {
                                 path: 'chat',
                                 name: 'Marketplace Trade Chat',
-                                component: (resolve) => require(['@/pages/marketplace/trade/_id/chat'], resolve)
+                                component: () => import('~/pages/marketplace/trade/_id/chat').then(m => m.default || m)
                             }
                         ]
                     },
@@ -1047,30 +1047,30 @@ export default [
             {
                 path: 'assets',
                 name: 'Marketplace Assets',
-                component: (resolve) => require(['@/pages/marketplace/offers'], resolve),
+                component: () => import('~/pages/marketplace/offers').then(m => m.default || m),
                 children: [
                     // {
                     //     path: ':id',
                     //     name: 'Matketplace Asset Offers',
-                    //     component: (resolve) => require(['@/pages/marketplace/offers/_id'], resolve)
+                    //     component: () => import('~/pages/marketplace/offers/_id').then(m => m.default || m)
                     // }
                 ]
             },
             {
                 path: 'asset/:assetId',
                 name: 'Marketplace Asset',
-                component: (resolve) => require(['@/pages/marketplace/offers/_id'], resolve),
+                component: () => import('~/pages/marketplace/offers/_id').then(m => m.default || m),
                 props: true,
                 children: [
                     {
                         path: '',
                         name: 'Marketplace Asset Offers',
-                        component: (resolve) => require(['@/pages/marketplace/offers/_id/offers'], resolve),
+                        component: () => import('~/pages/marketplace/offers/_id/offers').then(m => m.default || m),
                     },
                     {
                         path: 'offer/:offerId',
                         name: 'Marketplace Asset Offer',
-                        component: (resolve) => require(['@/pages/marketplace/offers/_id/_id'], resolve),
+                        component: () => import('~/pages/marketplace/offers/_id/_id').then(m => m.default || m),
                         props: true
                     }
                 ]
@@ -1078,28 +1078,28 @@ export default [
             {
                 path: 'snipers',
                 name: 'Marketplace Prospectors',
-                component: (resolve) => require(['@/pages/marketplace/snipers'], resolve),
+                component: () => import('~/pages/marketplace/snipers').then(m => m.default || m),
             },
             {
                 path: 'search',
                 name: 'Marketplace Search',
-                component: (resolve) => require(['@/pages/marketplace/search'], resolve),
+                component: () => import('~/pages/marketplace/search').then(m => m.default || m),
             }
         ]
     },
     {
         path: '/marketplace/inventory',
         name: 'Marketplace Inventory',
-        component: (resolve) => require(['@/pages/marketplace-inventory'], resolve),
+        component: () => import('~/pages/marketplace-inventory').then(m => m.default || m),
         children: [
             {
                 path: '',
-                component: (resolve) => require(['@/pages/marketplace-inventory/main'], resolve),
+                component: () => import('~/pages/marketplace-inventory/main').then(m => m.default || m),
             },
             {
                 path: 'compare',
                 name: 'Compare Assets',
-                component: (resolve) => require(['@/pages/marketplace-inventory/compare'], resolve),
+                component: () => import('~/pages/marketplace-inventory/compare').then(m => m.default || m),
             }
         ]
     },
@@ -1107,37 +1107,37 @@ export default [
         path: '/item-navigator',
         name: 'Item Navigator',
         props: true,
-        component: (resolve) => require(['@/pages/item-navigator'], resolve)
+        component: () => import('~/pages/item-navigator').then(m => m.default || m)
     },
     {
         path: '/tests',
         name: 'Tests',
-        component: (resolve) => require(['@/pages/tests'], resolve)
+        component: () => import('~/pages/tests').then(m => m.default || m)
     },
     {
         path: '/purchase-receipt',
         name: 'Purchase Receipt',
-        component: (resolve) => require(['@/pages/purchase-receipt'], resolve)
+        component: () => import('~/pages/purchase-receipt').then(m => m.default || m)
     },
     {
         path: '/achievements',
         name: 'Achievements',
-        component: (resolve) => require(['@/pages/achievements'], resolve)
+        component: () => import('~/pages/achievements').then(m => m.default || m)
     },
     {
         path: '/features',
         name: 'Features',
-        component: (resolve) => require(['@/pages/features'], resolve)
+        component: () => import('~/pages/features').then(m => m.default || m)
     },
     {
         path: '/videos',
         name: 'Test Screen for video',
-        component: (resolve) => require(['@/pages/video'], resolve)
+        component: () => import('~/pages/video').then(m => m.default || m)
     },
     {
         path: '/article-page',
         name: 'Single Article Page',
-        component: (resolve) => require(['@/pages/article-page'], resolve)
+        component: () => import('~/pages/article-page').then(m => m.default || m)
     },
     {
         path: '/download/desktop/mac',
@@ -1190,6 +1190,6 @@ export default [
     {
         path: "*",
         name: 'Not Found',
-        component: (resolve) => require(['@/pages/not-found'], resolve)
+        component: () => import('~/pages/not-found').then(m => m.default || m)
     }
 ]

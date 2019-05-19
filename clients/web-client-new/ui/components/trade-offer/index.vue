@@ -116,9 +116,9 @@
             }
         },
         components: {
-            'c-author': (resolve) => require(['@/components/author'], resolve),
-            'c-tooltip': (resolve) => require(['@/components/tooltips/universal'], resolve),
-            'c-asset-preview': (resolve) => require(['@/components/asset-preview'], resolve),
+            'c-author': () => import('~/components/author').then(m => m.default || m),
+            'c-tooltip': () => import('~/components/tooltips/universal').then(m => m.default || m),
+            'c-asset-preview': () => import('~/components/asset-preview').then(m => m.default || m),
         },
         data() {
             return {

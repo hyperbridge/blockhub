@@ -36,7 +36,7 @@
 <script>
 export default {
     components: {
-        'c-option-block': (resolve) => require(['@/components/option-block'], resolve)
+        'c-option-block': () => import('~/components/option-block').then(m => m.default || m)
     },
     data() {
         return {

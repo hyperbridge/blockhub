@@ -16,7 +16,7 @@
         name: 'assets-list-items',
         props: ['items', 'itemInRow'],
         components:{
-            'c-assets-item': (resolve) => require(['@/components/assets-list-item/item'], resolve)
+            'c-assets-item': () => import('~/components/assets-list-item/item').then(m => m.default || m)
         }
     }
 </script>

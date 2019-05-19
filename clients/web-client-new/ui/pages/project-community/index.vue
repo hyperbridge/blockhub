@@ -29,7 +29,7 @@
 
         props: ['project', 'editing'],
         components: {
-            'c-item': (resolve) => require(['@/components/community/post-item'], resolve)
+            'c-item': () => import('~/components/community/post-item').then(m => m.default || m)
         },
         data() {
             let data = {
