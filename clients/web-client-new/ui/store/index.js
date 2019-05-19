@@ -306,9 +306,7 @@ export const actions = {
         })
 
         init.then(() => {})
-console.log(req)
-        const parsedUrl = url.parse(req.protocol + '://' + req.get('host') + req.originalUrl)
-        const origin = process.env.NODE_ENV !== 'production' ? `${parsedUrl.protocol}//${parsedUrl.hostname}:9001` : 'https://api.blockhub.gg'
+        const origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg'
         console.log(origin)
         const storage = {
             getItem() { },
