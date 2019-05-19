@@ -18,9 +18,9 @@
             currentUser: Object
         },
         components:{
-            'c-chat-user': (resolve) => require(['@/components/chat-new/user'], resolve),
-            'c-chat-answer-field': (resolve) => require(['@/components/chat-new/answer-field/field'], resolve),
-            'c-scrollable-content': (resolve) => require(['@/components/chat-new/content/scrollable-content'], resolve)
+            'c-chat-user': () => import('~/components/chat-new/user').then(m => m.default || m),
+            'c-chat-answer-field': () => import('~/components/chat-new/answer-field/field').then(m => m.default || m),
+            'c-scrollable-content': () => import('~/components/chat-new/content/scrollable-content').then(m => m.default || m)
         }
     }
 </script>

@@ -290,14 +290,14 @@
 
     export default {
         components: {
-            'c-searcher': (resolve) => require(['@/components/searcher'], resolve),
-            'c-input-searcher': (resolve) => require(['@/components/inputs/searcher'], resolve),
-            'c-game-grid': (resolve) => require(['@/components/game-grid/with-description'], resolve),
-            'c-project-card': (resolve) => require(['@/components/project/card'], resolve),
-            'c-option-tag': (resolve) => require(['@/components/option-tag'], resolve),
-            'c-range-slider': (resolve) => require(['@/components/range-slider/pure'], resolve),
-            'c-list': (resolve) => require(['@/components/list'], resolve),
-            'c-content-navigation': (resolve) => require(['@/components/content-navigation'], resolve),
+            'c-searcher': () => import('~/components/searcher').then(m => m.default || m),
+            'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
+            'c-game-grid': () => import('~/components/game-grid/with-description').then(m => m.default || m),
+            'c-project-card': () => import('~/components/project/card').then(m => m.default || m),
+            'c-option-tag': () => import('~/components/option-tag').then(m => m.default || m),
+            'c-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m),
+            'c-list': () => import('~/components/list').then(m => m.default || m),
+            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
         },
         mixins: [debouncer],
         data() {

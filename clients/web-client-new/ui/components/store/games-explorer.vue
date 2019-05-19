@@ -141,14 +141,14 @@
     export default {
         name: 'games-explorer',
         components: {
-            'c-block': (resolve) => require(['@/components/block'], resolve),
-            'c-heading-bar': (resolve) => require(['@/components/heading-bar'], resolve),
-            'c-heading-bar-fields': (resolve) => require(['@/components/heading-bar/additional-action'], resolve),
-            'c-input-searcher': (resolve) => require(['@/components/inputs/searcher'], resolve),
-            'c-dropdown': (resolve) => require(['@/components/dropdown-menu/type-2'], resolve),
-            'c-game-grid': (resolve) => require(['@/components/game-grid/with-description'], resolve),
-            'c-content-navigation': (resolve) => require(['@/components/content-navigation'], resolve),
-            'c-option-tag': (resolve) => require(['@/components/option-tag'], resolve)
+            'c-block': () => import('~/components/block').then(m => m.default || m),
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+            'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
+            'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
+            'c-dropdown': () => import('~/components/dropdown-menu/type-2').then(m => m.default || m),
+            'c-game-grid': () => import('~/components/game-grid/with-description').then(m => m.default || m),
+            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+            'c-option-tag': () => import('~/components/option-tag').then(m => m.default || m)
         },
         data() {
             return {

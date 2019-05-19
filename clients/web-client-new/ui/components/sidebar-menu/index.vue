@@ -36,7 +36,7 @@
             links: Array
         },
         components: {
-            'c-sidebar-menu-link': (resolve) => require(['@/components/sidebar-menu/menu_item'], resolve)
+            'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu_item').then(m => m.default || m)
         }
     }
 </script>

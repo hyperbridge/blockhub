@@ -15,7 +15,7 @@ export default {
     name: 'assets-grid-inventory',
     props: ['assets'],
     components: {
-        'c-asset': (resolve) => require(['@/components/assets-grid-inventory/asset'], resolve),
+        'c-asset': () => import('~/components/assets-grid-inventory/asset').then(m => m.default || m),
     }
 }
 </script>

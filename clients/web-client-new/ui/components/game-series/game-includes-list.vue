@@ -35,8 +35,8 @@
             }
         },
         components: {
-            'c-includes-item': (resolve) => require(['@/components/game-series/game-includes-item'], resolve),
-            'c-load-more': (resolve) => require(['@/components/buttons/load-more'], resolve),
+            'c-includes-item': () => import('~/components/game-series/game-includes-item').then(m => m.default || m),
+            'c-load-more': () => import('~/components/buttons/load-more').then(m => m.default || m),
         },
         methods:{
             hiddenCount() {

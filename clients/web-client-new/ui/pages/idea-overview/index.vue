@@ -40,8 +40,8 @@
     export default {
         props: ['idea', 'editing', 'activeElement'],
         components: {
-            'c-rating-block': (resolve) => require(['@/components/rating-block'], resolve),
-            'c-item': (resolve) => require(['@/components/community/post-item'], resolve)
+            'c-rating-block': () => import('~/components/rating-block').then(m => m.default || m),
+            'c-item': () => import('~/components/community/post-item').then(m => m.default || m)
         },
         data() {
             return {

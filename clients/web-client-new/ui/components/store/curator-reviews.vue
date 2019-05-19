@@ -16,8 +16,8 @@
     export default {
         name: 'curator-reviews',
         components: {
-            'c-heading-bar': (resolve) => require(['@/components/heading-bar'], resolve),
-            'c-curator-review': (resolve) => require(['@/components/store/curator-review'], resolve),
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+            'c-curator-review': () => import('~/components/store/curator-review').then(m => m.default || m),
             
             
         },

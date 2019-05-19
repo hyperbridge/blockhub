@@ -9,8 +9,8 @@
         name: 'promotions-list',
         props:['title'],
         components:{
-            'c-block': (resolve) => require(['@/components/block'], resolve),
-            'c-promotion-item': (resolve) => require(['@/components/promotion-box/item'], resolve)
+            'c-block': () => import('~/components/block').then(m => m.default || m),
+            'c-promotion-item': () => import('~/components/promotion-box/item').then(m => m.default || m)
         }
     }
 </script>

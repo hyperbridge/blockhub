@@ -49,8 +49,8 @@
 export default {
     props: ['product'],
     components: {
-        'c-tags': (resolve) => require(['@/components/tags'], resolve),
-        'c-project-card': (resolve) => require(['@/components/project/card'], resolve)
+        'c-tags': () => import('~/components/tags').then(m => m.default || m),
+        'c-project-card': () => import('~/components/project/card').then(m => m.default || m)
     },
     computed: {
         projects() {

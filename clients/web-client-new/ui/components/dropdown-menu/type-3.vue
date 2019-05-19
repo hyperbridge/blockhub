@@ -33,7 +33,7 @@
             items: Array
         },
         components: {
-            'c-list': (resolve) => require(['@/components/list'], resolve),
+            'c-list': () => import('~/components/list').then(m => m.default || m),
         },
         data() {
             return {

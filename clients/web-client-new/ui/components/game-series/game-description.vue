@@ -39,7 +39,7 @@
         name: 'game-description',
         props: ['game'],
         components: {
-            'c-tags': (resolve) => require(['@/components/tags'], resolve),
+            'c-tags': () => import('~/components/tags').then(m => m.default || m),
             
             
         },

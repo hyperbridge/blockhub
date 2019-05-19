@@ -97,8 +97,8 @@
             }
         },
         components: {
-            'c-line-chart': (resolve) => require(['@/components/charts/line'], resolve),
-            'c-user': (resolve) => require(['@/components/user/simple'], resolve),
+            'c-line-chart': () => import('~/components/charts/line').then(m => m.default || m),
+            'c-user': () => import('~/components/user/simple').then(m => m.default || m),
         },
         computed: {
             asset() {

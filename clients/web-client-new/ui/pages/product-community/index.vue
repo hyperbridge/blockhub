@@ -34,9 +34,9 @@
     export default {
         props: ['product'],
         components: {
-            'c-tags': (resolve) => require(['@/components/tags'], resolve),
-            'c-item': (resolve) => require(['@/components/community/post-item'], resolve),
-            'c-post-comment': (resolve) => require(['@/components/community/comment'], resolve)
+            'c-tags': () => import('~/components/tags').then(m => m.default || m),
+            'c-item': () => import('~/components/community/post-item').then(m => m.default || m),
+            'c-post-comment': () => import('~/components/community/comment').then(m => m.default || m)
         },
         data() {
             const authors = [

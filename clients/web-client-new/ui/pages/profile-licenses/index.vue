@@ -51,8 +51,8 @@
 <script>
     export default {
         components: {
-            'c-content-navigation': (resolve) => require(['@/components/content-navigation'], resolve),
-            'c-heading-bar': (resolve) => require(['@/components/heading-bar'], resolve)
+            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m)
         },
         data() {
             return {

@@ -28,8 +28,8 @@ import 'swiper/dist/css/swiper.css'
 export default {
     name: 'product-slider',
     components: {
-        'c-product-card': (resolve) => require(['@/components/store/product-card'], resolve),
-        'c-product-card-dynamic': (resolve) => require(['@/components/store/product-card-dynamic'], resolve),
+        'c-product-card': () => import('~/components/store/product-card').then(m => m.default || m),
+        'c-product-card-dynamic': () => import('~/components/store/product-card-dynamic').then(m => m.default || m),
     },
     props: {
         products: Array,

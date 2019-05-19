@@ -66,7 +66,7 @@
         mixins: [windowSize],
         components: {
             GridItem,
-            'c-icon': (resolve) => require(['@/components/shortcut-icon'], resolve)
+            'c-icon': () => import('~/components/shortcut-icon').then(m => m.default || m)
         },
         props: {
             items: {

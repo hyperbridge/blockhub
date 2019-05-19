@@ -145,8 +145,8 @@
         name: 'wallet-popup',
         props:{},
         components:{
-            'c-dropdown': (resolve) => require(['@/components/dropdown-menu/type-4'], resolve),
-            'c-dropdown-second': (resolve) => require(['@/components/dropdown-menu/type-2'], resolve)
+            'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m),
+            'c-dropdown-second': () => import('~/components/dropdown-menu/type-2').then(m => m.default || m)
         },
         data(){
             return{

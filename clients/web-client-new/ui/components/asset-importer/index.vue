@@ -197,9 +197,9 @@
     export default {
         props: ['show_skipped'],
         components: {
-            'c-loading-bar': (resolve) => require(['@/components/loading-bar'], resolve),
-            'c-notification-inline': (resolve) => require(['@/components/notification/inline'], resolve),
-            'c-checkbox': (resolve) => require(['@/components/checkbox'], resolve),
+            'c-loading-bar': () => import('~/components/loading-bar').then(m => m.default || m),
+            'c-notification-inline': () => import('~/components/notification/inline').then(m => m.default || m),
+            'c-checkbox': () => import('~/components/checkbox').then(m => m.default || m),
         },
         data(){
             return {

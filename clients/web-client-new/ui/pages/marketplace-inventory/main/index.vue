@@ -82,14 +82,14 @@
     export default {
         props: ['assets'],
         components: {
-            'c-assets-grid-inventory': (resolve) => require(['@/components/assets-grid-inventory'], resolve),
-            'c-asset-preview-basic': (resolve) => require(['@/components/asset/preview-basic'], resolve),
-            'c-asset-preview': (resolve) => require(['@/components/asset/preview'], resolve),
-            'c-asset': (resolve) => require(['@/components/assets-grid-inventory/asset'], resolve),
-            'c-content-navigation': (resolve) => require(['@/components/content-navigation'], resolve),
-            'c-switch': (resolve) => require(['@/components/switch'], resolve),
-            'c-modal': (resolve) => require(['@/components/modal/custom'], resolve),
-            'c-range-slider': (resolve) => require(['@/components/range-slider/pure'], resolve),
+            'c-assets-grid-inventory': () => import('~/components/assets-grid-inventory').then(m => m.default || m),
+            'c-asset-preview-basic': () => import('~/components/asset/preview-basic').then(m => m.default || m),
+            'c-asset-preview': () => import('~/components/asset/preview').then(m => m.default || m),
+            'c-asset': () => import('~/components/assets-grid-inventory/asset').then(m => m.default || m),
+            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+            'c-switch': () => import('~/components/switch').then(m => m.default || m),
+            'c-modal': () => import('~/components/modal/custom').then(m => m.default || m),
+            'c-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m),
         },
         data() {
             return {

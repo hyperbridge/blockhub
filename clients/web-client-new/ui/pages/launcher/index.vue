@@ -19,9 +19,9 @@
 <script>
     export default {
         components:{
-            'c-launcher': (resolve) => require(['@/layouts/launcher'], resolve),
-            'c-metro-grid': (resolve) => require(['@/components/metro/grid'], resolve),
-            'c-metro-item': (resolve) => require(['@/components/metro/metro-item'], resolve),
+            'c-launcher': () => import('~/layouts/launcher').then(m => m.default || m),
+            'c-metro-grid': () => import('~/components/metro/grid').then(m => m.default || m),
+            'c-metro-item': () => import('~/components/metro/metro-item').then(m => m.default || m),
         },
         data(){
             return{

@@ -82,11 +82,11 @@
 <script>
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/layouts/default'], resolve),
-            'c-block': (resolve) => require(['@/components/block'], resolve),
-            'c-benchmark': (resolve) => require(['@/components/benchmark'], resolve),
-            'c-inline-ntf': (resolve) => require(['@/components/notification/inline.vue'], resolve),
-            'c-switch': (resolve) => require(['@/components/switch'], resolve),
+            'c-layout': () => import('~/layouts/default').then(m => m.default || m),
+            'c-block': () => import('~/components/block').then(m => m.default || m),
+            'c-benchmark': () => import('~/components/benchmark').then(m => m.default || m),
+            'c-inline-ntf': () => import('~/components/notification/inline.vue').then(m => m.default || m),
+            'c-switch': () => import('~/components/switch').then(m => m.default || m),
         },
         data() {
             return {

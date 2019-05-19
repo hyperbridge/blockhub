@@ -71,8 +71,8 @@
             }
         },
         components: {
-            'c-button-fav': (resolve) => require(['@/components/buttons/favorite'], resolve),
-            'c-option-list-item': (resolve) => require(['@/components/option-block/list-item'], resolve)
+            'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m),
+            'c-option-list-item': () => import('~/components/option-block/list-item').then(m => m.default || m)
         },
         methods:{
             selectThis(id){

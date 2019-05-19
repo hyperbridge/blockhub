@@ -252,11 +252,11 @@
 export default {
     props: ['isLoader'],
     components: {
-        'c-loading-logo': (resolve) => require(['@/components/loading-bar/logo-loader'], resolve),
-        'c-quick-launch': (resolve) => require(['@/components/quick-launch'], resolve),
-        'c-dropdown': (resolve) => require(['@/components/dropdown-menu/type-4'], resolve),
-        'c-currency-dropdown': (resolve) => require(['@/components/dropdown-menu/currency'], resolve),
-        'c-language-dropdown': (resolve) => require(['@/components/dropdown-menu/language'], resolve)
+        'c-loading-logo': () => import('~/components/loading-bar/logo-loader').then(m => m.default || m),
+        'c-quick-launch': () => import('~/components/quick-launch').then(m => m.default || m),
+        'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m),
+        'c-currency-dropdown': () => import('~/components/dropdown-menu/currency').then(m => m.default || m),
+        'c-language-dropdown': () => import('~/components/dropdown-menu/language').then(m => m.default || m)
     },
     data() {
         return {

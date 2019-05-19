@@ -13,7 +13,7 @@
     export default {
         props: ['id'],
         components: {
-            'c-block-menu': (resolve) => require(['@/components/block/menu'], resolve),
+            'c-block-menu': () => import('~/components/block/menu').then(m => m.default || m),
         },
         data() {
             return {

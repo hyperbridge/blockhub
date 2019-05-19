@@ -46,7 +46,7 @@
 <script>
     export default {
         components: {
-            'c-dropdown': (resolve) => require(['@/components/dropdown-menu/type-4'], resolve),
+            'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m),
         },
         data() {
             return {

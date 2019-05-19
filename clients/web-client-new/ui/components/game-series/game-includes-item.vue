@@ -24,7 +24,7 @@
             image: String
         },
         components: {
-            'c-rating': (resolve) => require(['@/components/rating-stars'], resolve),
+            'c-rating': () => import('~/components/rating-stars').then(m => m.default || m),
         },
     }
 </script>

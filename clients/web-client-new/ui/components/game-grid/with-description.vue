@@ -139,9 +139,9 @@
             }
         },
         components: {
-            'c-tags': (resolve) => require(['@/components/tags'], resolve),
-            'c-rating-stars': (resolve) => require(['@/components/rating-stars'], resolve),
-            'c-tooltip': (resolve) => require(['@/components/tooltips'], resolve),
+            'c-tags': () => import('~/components/tags').then(m => m.default || m),
+            'c-rating-stars': () => import('~/components/rating-stars').then(m => m.default || m),
+            'c-tooltip': () => import('~/components/tooltips').then(m => m.default || m),
         },
         methods: {
             checkWidth(){

@@ -68,9 +68,9 @@
 
     export default {
         components: {
-            'c-heading-bar': (resolve) => require(['@/components/heading-bar'], resolve),
-            'c-community-forum': (resolve) => require(['@/components/community/forum-item.vue'], resolve),
-            'c-search': (resolve) => require(['@/components/searcher'], resolve)
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+            'c-community-forum': () => import('~/components/community/forum-item.vue').then(m => m.default || m),
+            'c-search': () => import('~/components/searcher').then(m => m.default || m)
         },
         data() {
             return {

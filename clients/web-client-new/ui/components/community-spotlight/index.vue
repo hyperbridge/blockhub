@@ -41,7 +41,7 @@ export default {
         activateElement: Boolean
     },
     components:{
-        'c-block': (resolve) => require(['@/components/block'], resolve),
+        'c-block': () => import('~/components/block').then(m => m.default || m),
     }
 }
 </script>

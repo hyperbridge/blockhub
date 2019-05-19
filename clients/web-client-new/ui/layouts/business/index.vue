@@ -99,8 +99,8 @@
         },
         components: {
             SidebarMenu,
-            'c-profile-chooser': (resolve) => require(['@/components/profile-chooser'], resolve),
-            'c-page-heading': (resolve) => require(['@/components/business/page-heading'], resolve),
+            'c-profile-chooser': () => import('~/components/profile-chooser').then(m => m.default || m),
+            'c-page-heading': () => import('~/components/business/page-heading').then(m => m.default || m),
         },
         data() {
             return {

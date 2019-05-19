@@ -94,8 +94,8 @@
             }
         },
         components: {
-            'c-tooltip': (resolve) => require(['@/components/tooltips/universal'], resolve),
-            'c-progress-bar': (resolve) => require(['@/components/progress-bar'], resolve)
+            'c-tooltip': () => import('~/components/tooltips/universal').then(m => m.default || m),
+            'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m)
         },
         computed: {
             brightness() {

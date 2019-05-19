@@ -36,7 +36,7 @@
             }
         },
         components: {
-            'c-timeline-item': (resolve) => require(['@/components/timeline/item.vue'], resolve)
+            'c-timeline-item': () => import('~/components/timeline/item.vue').then(m => m.default || m)
         },
         methods: {
             scroll() {

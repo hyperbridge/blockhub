@@ -31,7 +31,7 @@
 <script>
 export default {
     components: {
-        'c-game-card': (resolve) => require(['@/components/game-card'], resolve),
+        'c-game-card': () => import('~/components/game-card').then(m => m.default || m),
     },
     data() {
         return {

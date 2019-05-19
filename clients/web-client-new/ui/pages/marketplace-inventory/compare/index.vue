@@ -24,10 +24,10 @@
     export default {
         props: ['assets'],
         components: {
-            'c-block': (resolve) => require(['@/components/block'], resolve),
-            'c-asset-comparison': (resolve) => require(['@/components/asset-comparison'], resolve),
-            'c-modal': (resolve) => require(['@/components/modal'], resolve),
-            'c-asset-grid': (resolve) => require(['@/components/assets-grid-inventory'], resolve),
+            'c-block': () => import('~/components/block').then(m => m.default || m),
+            'c-asset-comparison': () => import('~/components/asset-comparison').then(m => m.default || m),
+            'c-modal': () => import('~/components/modal').then(m => m.default || m),
+            'c-asset-grid': () => import('~/components/assets-grid-inventory').then(m => m.default || m),
         },
         data() {
             return {

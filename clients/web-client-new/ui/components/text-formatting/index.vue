@@ -196,7 +196,7 @@
 <script>
     export default {
         components: {
-            'c-table-simple': (resolve) => require(['@/components/table-simple'], resolve),
+            'c-table-simple': () => import('~/components/table-simple').then(m => m.default || m),
         },
     }
 </script>

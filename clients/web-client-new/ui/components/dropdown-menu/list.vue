@@ -21,7 +21,7 @@
     export default {
         name: 'dropdown-list',
         components: {
-            'c-dropdown': (resolve) => require(['@/components/dropdown-menu/type-2'], resolve),
+            'c-dropdown': () => import('~/components/dropdown-menu/type-2').then(m => m.default || m),
         },
         props: {
             id: {

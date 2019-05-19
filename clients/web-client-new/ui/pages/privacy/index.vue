@@ -11,7 +11,7 @@
 <script>
 export default {
   components: {
-    'c-privacy-block': (resolve) => require(['@/components/privacy-block'], resolve)
+    'c-privacy-block': () => import('~/components/privacy-block').then(m => m.default || m)
   },
 }
 </script>

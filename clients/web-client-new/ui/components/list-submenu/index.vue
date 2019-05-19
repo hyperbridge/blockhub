@@ -46,7 +46,7 @@
     export default {
         name: 'list-submenu',
         components: {
-            'c-tag-count': (resolve) => require(['@/components/tags/count'], resolve)
+            'c-tag-count': () => import('~/components/tags/count').then(m => m.default || m)
         },
         props: {
             items: [Object, Array],

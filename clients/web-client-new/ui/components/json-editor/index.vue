@@ -12,7 +12,7 @@ export default {
     },
 
     components: {
-        'c-json-view': (resolve) => require(['@/components/json-editor/json-view'], resolve)
+        'c-json-view': () => import('~/components/json-editor/json-view').then(m => m.default || m)
     },
 
     data() {

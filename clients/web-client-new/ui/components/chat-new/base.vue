@@ -37,7 +37,7 @@
             }
         },
         components:{
-            'c-shortcut-sidebar': (resolve) => require(['@/components/shortcut-sidebar'], resolve)
+            'c-shortcut-sidebar': () => import('~/components/shortcut-sidebar').then(m => m.default || m)
         }
     }
 </script>

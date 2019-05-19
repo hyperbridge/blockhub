@@ -122,7 +122,7 @@
 <script>
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/layouts/business'], resolve),
+            'c-layout': () => import('~/layouts/business').then(m => m.default || m),
         },
         data() {
             return {

@@ -129,10 +129,10 @@
     export default {
         props: ['id'],
         components: {
-            'c-heading-bar': (resolve) => require(['@/components/heading-bar'], resolve),
-            'c-simple-game-grid': (resolve) => require(['@/components/game-grid/simple'], resolve),
-            'c-game-grid': (resolve) => require(['@/components/game-grid/with-description'], resolve),
-            'c-featured-assets': (resolve) => require(['@/components/assets-list-item/featured-list'], resolve),
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+            'c-simple-game-grid': () => import('~/components/game-grid/simple').then(m => m.default || m),
+            'c-game-grid': () => import('~/components/game-grid/with-description').then(m => m.default || m),
+            'c-featured-assets': () => import('~/components/assets-list-item/featured-list').then(m => m.default || m),
         },
         data() {
             return {

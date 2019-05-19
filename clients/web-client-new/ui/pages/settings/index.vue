@@ -7,7 +7,7 @@
 <script>
     export default {
         components: {
-            'c-settings' : (resolve) => require(['@/components/settings'], resolve),
+            'c-settings' : () => import('~/components/settings').then(m => m.default || m),
         }
     }
 </script>

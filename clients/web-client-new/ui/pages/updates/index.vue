@@ -33,8 +33,8 @@ import DottedList from '@/components/list/dots'
 
 export default {
     components: {
-        'c-expand-block': (resolve) => require(['@/components/block/expand'], resolve),
-        'c-heading-bar-color': (resolve) => require(['@/components/heading-bar/simple-colored'], resolve)
+        'c-expand-block': () => import('~/components/block/expand').then(m => m.default || m),
+        'c-heading-bar-color': () => import('~/components/heading-bar/simple-colored').then(m => m.default || m)
     },
     computed: {
     },

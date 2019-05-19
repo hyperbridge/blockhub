@@ -234,11 +234,11 @@
 
     export default {
         components: {
-            'c-benchmark': (resolve) => require(['@/components/benchmark'], resolve),
-            'c-inline-ntf': (resolve) => require(['@/components/notification/inline'], resolve),
-            'c-switch': (resolve) => require(['@/components/switch'], resolve),
-            'c-checkbox': (resolve) => require(['@/components/checkbox'], resolve),
-            'c-checkbox-group': (resolve) => require(['@/components/checkbox/group'], resolve)
+            'c-benchmark': () => import('~/components/benchmark').then(m => m.default || m),
+            'c-inline-ntf': () => import('~/components/notification/inline').then(m => m.default || m),
+            'c-switch': () => import('~/components/switch').then(m => m.default || m),
+            'c-checkbox': () => import('~/components/checkbox').then(m => m.default || m),
+            'c-checkbox-group': () => import('~/components/checkbox/group').then(m => m.default || m)
         },
         data() {
             return {

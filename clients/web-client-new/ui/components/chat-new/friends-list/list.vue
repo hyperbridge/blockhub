@@ -20,7 +20,7 @@
             list: [ Array, Object ]
         },
         components: {
-            'c-chat-user': (resolve) => require(['@/components/chat-new/user'], resolve),
+            'c-chat-user': () => import('~/components/chat-new/user').then(m => m.default || m),
         },
         data(){
             return{

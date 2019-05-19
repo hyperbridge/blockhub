@@ -2,12 +2,12 @@ export default [
     {
         path: '/',
         name: 'Home',
-        component: (resolve) => require(['@/sites/yoranna/ui/screens/home'], resolve)
+        component: () => import('~/sites/yoranna/ui/screens/home').then(m => m.default || m)
     },
     {
         path: "*",
         name: 'Not Found',
-        component: (resolve) => require(['@/pages/not-found'], resolve)
+        component: () => import('~/pages/not-found').then(m => m.default || m)
     }
 ]
 

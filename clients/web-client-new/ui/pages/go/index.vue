@@ -15,8 +15,8 @@
     export default {
         props: ['code'],
         components: {
-            'c-layout': (resolve) => require(['@/layouts/default'], resolve),
-            'c-download-block': (resolve) => require(['@/components/download-block'], resolve)
+            'c-layout': () => import('~/layouts/default').then(m => m.default || m),
+            'c-download-block': () => import('~/components/download-block').then(m => m.default || m)
         },
         mounted() {
             window.location = 'blockhub://go/' + this.code

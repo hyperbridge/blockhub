@@ -18,9 +18,9 @@
 <script>
     export default {
         components: {
-            'c-content-navigation': (resolve) => require(['@/components/content-navigation'], resolve),
-            'c-collection-item': (resolve) => require(['@/components/collection/item'], resolve),
-            'c-pagination': (resolve) => require(['@/components/pagination'], resolve)
+            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+            'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m),
+            'c-pagination': () => import('~/components/pagination').then(m => m.default || m)
         },
         computed:{
             collections: function () {

@@ -30,7 +30,7 @@
     export default {
         props: ['asset'],
         components: {
-            'c-asset-preview-basic': (resolve) => require(['@/components/asset/preview-basic'], resolve),
+            'c-asset-preview-basic': () => import('~/components/asset/preview-basic').then(m => m.default || m),
         },
         filters: {
             parseProp(val) {

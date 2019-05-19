@@ -115,7 +115,7 @@
             onClickPurchase: Function
         },
         components: {
-            'c-button-fav': (resolve) => require(['@/components/buttons/favorite'], resolve)
+            'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m)
         }
     }
 </script>

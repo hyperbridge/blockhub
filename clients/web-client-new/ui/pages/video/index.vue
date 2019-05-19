@@ -9,7 +9,7 @@
 <script>
     export default {
         components: {
-            'c-video': (resolve) => require(['@/components/video'], resolve)
+            'c-video': () => import('~/components/video').then(m => m.default || m)
         }
     }
 </script>

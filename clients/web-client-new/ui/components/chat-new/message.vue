@@ -27,7 +27,7 @@
             text: String
         },
         components:{
-            'c-emoji': (resolve) => require(['@/components/emoji'], resolve),
+            'c-emoji': () => import('~/components/emoji').then(m => m.default || m),
         },
         computed: {
             timeAgo() {

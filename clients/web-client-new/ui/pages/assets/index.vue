@@ -150,17 +150,17 @@
 
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/layouts/default'], resolve),
-            'c-assets-grid': (resolve) => require(['@/components/assets-grid'], resolve),
-            'c-assets-list': (resolve) => require(['@/components/assets-list-item'], resolve),
-            'c-assets-item': (resolve) => require(['@/components/assets-list-item/item'], resolve),
-            'c-heading-bar': (resolve) => require(['@/components/heading-bar'], resolve),
-            'c-heading-bar-fields': (resolve) => require(['@/components/heading-bar/additional-action'], resolve),
-            'c-pagination': (resolve) => require(['@/components/pagination'], resolve),
-            'c-block': (resolve) => require(['@/components/block'], resolve),
-            'c-collection-item': (resolve) => require(['@/components/collection/item'], resolve),
-            'c-banner': (resolve) => require(['@/components/banner/simple'], resolve),
-            'c-main-banner': (resolve) => require(['@/components/banner/index'], resolve),
+            'c-layout': () => import('~/layouts/default').then(m => m.default || m),
+            'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m),
+            'c-assets-list': () => import('~/components/assets-list-item').then(m => m.default || m),
+            'c-assets-item': () => import('~/components/assets-list-item/item').then(m => m.default || m),
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+            'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
+            'c-pagination': () => import('~/components/pagination').then(m => m.default || m),
+            'c-block': () => import('~/components/block').then(m => m.default || m),
+            'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m),
+            'c-banner': () => import('~/components/banner/simple').then(m => m.default || m),
+            'c-main-banner': () => import('~/components/banner/index').then(m => m.default || m),
             
             
         },

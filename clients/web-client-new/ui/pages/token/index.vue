@@ -510,16 +510,16 @@ import { setInterval } from 'core-js';
 
 export default {
     components: {
-        'c-user-card': (resolve) => require(['@/components/user-card'], resolve),
-        'c-block': (resolve) => require(['@/components/block'], resolve),
-        'c-popup': (resolve) => require(['@/components/popups'], resolve),
-        'c-tabs': (resolve) => require(['@/components/tab/tabs'], resolve),
-        'c-tab': (resolve) => require(['@/components/tab/tab'], resolve),
-        'c-carousel-3d': (resolve) => require(['@/components/carousel-3d'], resolve),
-        'c-asset-store-card': (resolve) => require(['@/components/asset/store-card'], resolve),
-        'c-welcome-box': (resolve) => require(['@/components/welcome-box'], resolve),
+        'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
+        'c-block': () => import('~/components/block').then(m => m.default || m),
+        'c-popup': () => import('~/components/popups').then(m => m.default || m),
+        'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m),
+        'c-tab': () => import('~/components/tab/tab').then(m => m.default || m),
+        'c-carousel-3d': () => import('~/components/carousel-3d').then(m => m.default || m),
+        'c-asset-store-card': () => import('~/components/asset/store-card').then(m => m.default || m),
+        'c-welcome-box': () => import('~/components/welcome-box').then(m => m.default || m),
 
-        'c-token-sale': (resolve) => require(['@/components/token-sale-box'], resolve)
+        'c-token-sale': () => import('~/components/token-sale-box').then(m => m.default || m)
     },
     data() {
         const checkEthereumConnection = () => {

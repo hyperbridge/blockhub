@@ -7,7 +7,7 @@
 <script>
     export default {
         components: {
-            'c-business-layout': (resolve) => require(['@/layouts/business'], resolve)
+            'c-business-layout': () => import('~/layouts/business').then(m => m.default || m)
         },
         data() {
             return {

@@ -71,9 +71,9 @@ export default {
         video_url: String
     },
     components: {
-        'c-modal': (resolve) => require(['@/components/modal'], resolve),
-        'c-images-explorer': (resolve) => require(['@/components/images-explorer'], resolve),
-        'c-image-overlay': (resolve) => require(['@/components/image-overlay'], resolve)
+        'c-modal': () => import('~/components/modal').then(m => m.default || m),
+        'c-images-explorer': () => import('~/components/images-explorer').then(m => m.default || m),
+        'c-image-overlay': () => import('~/components/image-overlay').then(m => m.default || m)
     },
     data() {
         return {

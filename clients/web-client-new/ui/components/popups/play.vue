@@ -55,7 +55,7 @@
             gameName: String
         },
         components: {
-            'c-basic-popup': (resolve) => require(['@/components/popups/basic.vue'], resolve)
+            'c-basic-popup': () => import('~/components/popups/basic.vue').then(m => m.default || m)
         }
     }
 </script>

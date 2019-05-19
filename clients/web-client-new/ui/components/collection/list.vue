@@ -32,7 +32,7 @@
         name: 'collection-list',
         props: ['title', 'description', 'collections'],
         components: {
-            'c-collection-item': (resolve) => require(['@/components/collection/item'], resolve),
+            'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m),
         },
         data() {
             return {

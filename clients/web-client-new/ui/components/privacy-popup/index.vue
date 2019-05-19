@@ -10,8 +10,8 @@
 export default {
     props: ['activated'],
     components: {
-        'c-popup': (resolve) => require(['@/components/popups'], resolve),
-        'c-privacy-block': (resolve) => require(['@/components/privacy-block'], resolve)
+        'c-popup': () => import('~/components/popups').then(m => m.default || m),
+        'c-privacy-block': () => import('~/components/privacy-block').then(m => m.default || m)
     },
 }
 </script>

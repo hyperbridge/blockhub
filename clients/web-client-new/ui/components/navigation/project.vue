@@ -62,12 +62,12 @@
 <script>
     export default {
         components: {
-            'c-sidebar-menu': (resolve) => require(['@/components/sidebar-menu'], resolve),
-            'c-searcher': (resolve) => require(['@/components/searcher'], resolve),
-            'c-claim': (resolve) => require(['@/components/curator-panel/claim.vue'], resolve),
-            'c-curator-panel': (resolve) => require(['@/components/curator-panel'], resolve),
-            'c-curator-info': (resolve) => require(['@/components/curator-panel/info-card.vue'], resolve),
-            'c-join-community': (resolve) => require(['@/components/join-community'], resolve),
+            'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m),
+            'c-searcher': () => import('~/components/searcher').then(m => m.default || m),
+            'c-claim': () => import('~/components/curator-panel/claim.vue').then(m => m.default || m),
+            'c-curator-panel': () => import('~/components/curator-panel').then(m => m.default || m),
+            'c-curator-info': () => import('~/components/curator-panel/info-card.vue').then(m => m.default || m),
+            'c-join-community': () => import('~/components/join-community').then(m => m.default || m),
         },
         data() {
             return {

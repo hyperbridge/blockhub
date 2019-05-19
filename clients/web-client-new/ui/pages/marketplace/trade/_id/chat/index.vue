@@ -61,7 +61,7 @@
     export default {
         props: ['trx'],
         components: {
-            'c-chat-message': (resolve) => require(['@/components/chat-message'], resolve),
+            'c-chat-message': () => import('~/components/chat-message').then(m => m.default || m),
         },
         data() {
             return {

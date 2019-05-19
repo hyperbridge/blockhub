@@ -16,9 +16,9 @@
     export default {
         props: ['product'],
         components: {
-            'c-tags': (resolve) => require(['@/components/tags'], resolve),
-            'c-assets-grid': (resolve) => require(['@/components/assets-grid'], resolve),
-            'c-assets-list-item': (resolve) => require(['@/components/assets-list-item'], resolve)
+            'c-tags': () => import('~/components/tags').then(m => m.default || m),
+            'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m),
+            'c-assets-list-item': () => import('~/components/assets-list-item').then(m => m.default || m)
         }
     }
 </script>

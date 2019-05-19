@@ -38,7 +38,7 @@
             },
         },
         components: {
-            'c-drag': (resolve) => require(['@/components/draggable'], resolve)
+            'c-drag': () => import('~/components/draggable').then(m => m.default || m)
         },
         data() {
             return {

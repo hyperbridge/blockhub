@@ -49,7 +49,7 @@
 <script>
 export default {
     components: {
-        'c-project-card': (resolve) => require(['@/components/project/card'], resolve),
+        'c-project-card': () => import('~/components/project/card').then(m => m.default || m),
     },
     data() {
         return {

@@ -69,7 +69,7 @@
         props: ['post'],
         components: {
             'c-post-comment': Comment,
-            'c-reply': (resolve) => require(['@/components/community/reply'], resolve),
+            'c-reply': () => import('~/components/community/reply').then(m => m.default || m),
         },
         data() {
             return {

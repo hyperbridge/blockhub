@@ -27,8 +27,8 @@
         name: 'share-list',
         props: ['onlineList', 'favoritesList', 'show'],
         components:{
-            'c-searcher': (resolve) => require(['@/components/searcher'], resolve),
-            'c-author': (resolve) => require(['@/components/author'], resolve)
+            'c-searcher': () => import('~/components/searcher').then(m => m.default || m),
+            'c-author': () => import('~/components/author').then(m => m.default || m)
         },
         // data(){
         //     return{

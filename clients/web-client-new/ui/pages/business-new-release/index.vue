@@ -94,9 +94,9 @@
 
     export default {
         components: {
-            'c-business-layout': (resolve) => require(['@/layouts/business'], resolve),
-            'c-loading-bar-circle': (resolve) => require(['@/components/loading-bar/circle'], resolve),
-            'c-notification-inline': (resolve) => require(['@/components/notification/inline'], resolve),
+            'c-business-layout': () => import('~/layouts/business').then(m => m.default || m),
+            'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m),
+            'c-notification-inline': () => import('~/components/notification/inline').then(m => m.default || m),
             'c-text-editor': VueEditor,
             'c-file-upload': VueUploadComponent
         },

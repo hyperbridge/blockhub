@@ -221,13 +221,13 @@
 
     export default {
         components: {
-            'c-heading-bar': (resolve) => require(['@/components/heading-bar'], resolve),
-            'c-custom-modal': (resolve) => require(['@/components/modal/custom'], resolve),
-            'c-tabs': (resolve) => require(['@/components/tab/tabs-universal'], resolve),
-            'c-tab': (resolve) => require(['@/components/tab/tab-universal'], resolve),
-            'c-game-includes-item': (resolve) => require(['@/components/game-series/game-includes-item'], resolve),
-            'c-button-fav': (resolve) => require(['@/components/buttons/favorite'], resolve),
-            'c-project-card': (resolve) => require(['@/components/project/card'], resolve),
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+            'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
+            'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
+            'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
+            'c-game-includes-item': () => import('~/components/game-series/game-includes-item').then(m => m.default || m),
+            'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m),
+            'c-project-card': () => import('~/components/project/card').then(m => m.default || m),
         },
         data() {
             return {

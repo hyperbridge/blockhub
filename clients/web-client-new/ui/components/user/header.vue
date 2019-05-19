@@ -39,7 +39,7 @@
 <script>
     export default {
         components: {
-            'c-button-arrows': (resolve) => require(['@/components/buttons/arrows'], resolve),
+            'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m),
         },
         computed: {
             profile() {

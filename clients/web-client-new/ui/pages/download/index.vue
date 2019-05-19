@@ -327,8 +327,8 @@
 
     export default {
         components: {
-            'c-download-block': (resolve) => require(['@/components/download-block'], resolve),
-            'c-block-with-icon': (resolve) => require(['@/components/block/with-icon'], resolve),
+            'c-download-block': () => import('~/components/download-block').then(m => m.default || m),
+            'c-block-with-icon': () => import('~/components/block/with-icon').then(m => m.default || m),
         },
         mounted() {
             if (process.browser) {

@@ -16,7 +16,7 @@
         name: 'message',
         props: ['msg'],
         components:{
-            'c-author': (resolve) => require(['@/components/author'], resolve)
+            'c-author': () => import('~/components/author').then(m => m.default || m)
         },
         methods:{
             getTime(date){

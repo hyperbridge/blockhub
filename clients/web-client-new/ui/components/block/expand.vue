@@ -57,9 +57,9 @@ export default {
         relatedText: String
     },
     components: {
-        'c-rating-stars': (resolve) => require(['@/components/rating-stars'], resolve),
-        'c-button': (resolve) => require(['@/components/buttons/wide'], resolve),
-        'c-heading-bar-color': (resolve) => require(['@/components/heading-bar/simple-colored'], resolve)
+        'c-rating-stars': () => import('~/components/rating-stars').then(m => m.default || m),
+        'c-button': () => import('~/components/buttons/wide').then(m => m.default || m),
+        'c-heading-bar-color': () => import('~/components/heading-bar/simple-colored').then(m => m.default || m)
     },
     data() {
         return {

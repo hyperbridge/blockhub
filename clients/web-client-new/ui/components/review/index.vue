@@ -69,10 +69,10 @@ export default {
         }
     },
     components: {
-        'c-rating-stars': (resolve) => require(['@/components/rating-stars'], resolve),
-        'c-author': (resolve) => require(['@/components/author'], resolve),
-        'c-basic-popup': (resolve) => require(['@/components/popups/basic'], resolve),
-        'c-post' : (resolve) => require(['@/components/community/post-item'], resolve)
+        'c-rating-stars': () => import('~/components/rating-stars').then(m => m.default || m),
+        'c-author': () => import('~/components/author').then(m => m.default || m),
+        'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
+        'c-post' : () => import('~/components/community/post-item').then(m => m.default || m)
     },
     data() {
         return {

@@ -38,8 +38,8 @@
 <script>
     export default {
         components: {
-            'c-icon': (resolve) => require(['@/components/shortcut-icon'], resolve),
-            'c-basic-popup': (resolve) => require(['@/components/popups/basic'], resolve),
+            'c-icon': () => import('~/components/shortcut-icon').then(m => m.default || m),
+            'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
         },
         props: {
             activated: Boolean,

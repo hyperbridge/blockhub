@@ -56,7 +56,7 @@
             }
         },
         components:{
-            'c-progress-bar': (resolve) => require(['@/components/progress-bar/'], resolve),
+            'c-progress-bar': () => import('~/components/progress-bar/').then(m => m.default || m),
         },
         computed:{
             getPercent(){

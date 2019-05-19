@@ -22,10 +22,10 @@
     export default {
         props: ['activated'],
         components: {
-            'c-popup': (resolve) => require(['@/components/popups'], resolve),
-            'c-tabs': (resolve) => require(['@/components/tab/tabs'], resolve),
-            'c-tab': (resolve) => require(['@/components/tab/tab'], resolve),
-            'c-welcome-box': (resolve) => require(['@/components/welcome-box'], resolve),
+            'c-popup': () => import('~/components/popups').then(m => m.default || m),
+            'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m),
+            'c-tab': () => import('~/components/tab/tab').then(m => m.default || m),
+            'c-welcome-box': () => import('~/components/welcome-box').then(m => m.default || m),
         },
         data() {
             return {

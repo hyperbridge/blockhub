@@ -57,7 +57,7 @@
 
     export default {
         components: {
-            'c-user': (resolve) => require(['@/components/user/simple'], resolve),
+            'c-user': () => import('~/components/user/simple').then(m => m.default || m),
         },
         data() {
             return {

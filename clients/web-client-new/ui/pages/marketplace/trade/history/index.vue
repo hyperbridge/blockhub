@@ -45,7 +45,7 @@
     export default {
         props: ['transactions'],
         components: {
-            'c-user': (resolve) => require(['@/components/author'], resolve),
+            'c-user': () => import('~/components/author').then(m => m.default || m),
         },
         computed: {
             transactionsX() {

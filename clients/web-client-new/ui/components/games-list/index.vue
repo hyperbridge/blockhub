@@ -15,8 +15,8 @@
             games: [ Array, Object ]
         },
         components:{
-            'c-game-tab': (resolve) => require(['@/components/games-list/list-item'], resolve),
-            'c-games-navigation': (resolve) => require(['@/components/games-list/list-navigation'], resolve)
+            'c-game-tab': () => import('~/components/games-list/list-item').then(m => m.default || m),
+            'c-games-navigation': () => import('~/components/games-list/list-navigation').then(m => m.default || m)
         },
         data(){
             return{

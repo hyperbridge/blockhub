@@ -50,8 +50,8 @@
 <script>
     export default {
         components: {
-            'c-video': (resolve) => require(['@/components/video'], resolve),
-            'c-chat': (resolve) => require(['@/components/chat/chat'], resolve)
+            'c-video': () => import('~/components/video').then(m => m.default || m),
+            'c-chat': () => import('~/components/chat/chat').then(m => m.default || m)
         },
         data(){
             return{

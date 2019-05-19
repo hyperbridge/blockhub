@@ -298,7 +298,7 @@
           }
         },
         components: {
-            'c-layout': (resolve) => require(['@/layouts/default'], resolve)
+            'c-layout': () => import('~/layouts/default').then(m => m.default || m)
         },
         computed: {
             wallets() {

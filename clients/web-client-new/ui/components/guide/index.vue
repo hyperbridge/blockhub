@@ -246,8 +246,8 @@
 <script>
     export default {
         components: {
-            'c-button': (resolve) => require(['@/components/buttons'], resolve),
-            'c-block': (resolve) => require(['@/components/block'], resolve),
+            'c-button': () => import('~/components/buttons').then(m => m.default || m),
+            'c-block': () => import('~/components/block').then(m => m.default || m),
         }
     }
 </script>

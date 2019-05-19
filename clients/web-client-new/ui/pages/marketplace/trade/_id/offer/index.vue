@@ -100,17 +100,17 @@
         props: ['id', 'trxa', 'trx'],
         mixins: [arrayHandler],
         components: {
-            'c-block': (resolve) => require(['@/components/block'], resolve),
-            'c-block-menu': (resolve) => require(['@/components/block/menu'], resolve),
-            'c-list': (resolve) => require(['@/components/list'], resolve),
-            'c-list-submenu': (resolve) => require(['@/components/list-submenu'], resolve),
-            'c-list-submenu-2': (resolve) => require(['@/components/list-submenu/v2'], resolve),
-            'c-tooltip': (resolve) => require(['@/components/tooltips/universal'], resolve),
-            'c-asset-preview': (resolve) => require(['@/components/asset-preview'], resolve),
-            'c-asset-preview-small': (resolve) => require(['@/components/asset-preview/small'], resolve),
-            'c-exchange-bar': (resolve) => require(['@/components/exchange-bar'], resolve),
-            'c-author': (resolve) => require(['@/components/author'], resolve),
-            'c-assets-grid': (resolve) => require(['@/components/assets-grid-inventory'], resolve)
+            'c-block': () => import('~/components/block').then(m => m.default || m),
+            'c-block-menu': () => import('~/components/block/menu').then(m => m.default || m),
+            'c-list': () => import('~/components/list').then(m => m.default || m),
+            'c-list-submenu': () => import('~/components/list-submenu').then(m => m.default || m),
+            'c-list-submenu-2': () => import('~/components/list-submenu/v2').then(m => m.default || m),
+            'c-tooltip': () => import('~/components/tooltips/universal').then(m => m.default || m),
+            'c-asset-preview': () => import('~/components/asset-preview').then(m => m.default || m),
+            'c-asset-preview-small': () => import('~/components/asset-preview/small').then(m => m.default || m),
+            'c-exchange-bar': () => import('~/components/exchange-bar').then(m => m.default || m),
+            'c-author': () => import('~/components/author').then(m => m.default || m),
+            'c-assets-grid': () => import('~/components/assets-grid-inventory').then(m => m.default || m)
         },
         data() {
             return {
