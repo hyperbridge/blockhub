@@ -58,7 +58,7 @@
 </template>
 
 <script>
-    import { EventBus } from '@/event-bus';
+    // import { EventBus } from '@/event-bus';
 
     export default {
         components: {
@@ -124,15 +124,19 @@
             }
         },
         mounted() {
+            /*
             EventBus.$on('evolve', id => this.activeId = id);
             EventBus.$on('devolve', ({ id, tree, parentId }) => {
                 this.deletingTree = [{ ...tree, isRoot: true }];
                 this.deletingParentId = parentId;
             });
+            */
         },
         beforeDestroy() {
+            /*
             EventBus.$off('evolve');
             EventBus.$off('devolve');
+            */
         }
     }
 </script>

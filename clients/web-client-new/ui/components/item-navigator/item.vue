@@ -55,7 +55,7 @@
 </template>
 
 <script>
-    import { EventBus } from '@/event-bus';
+    // import { EventBus } from '@/event-bus';
 
     export default {
         name: 'navigator-item',
@@ -81,11 +81,11 @@
         },
         methods: {
             handleEvolve(id) {
-                EventBus.$emit('evolve', id);
+                // EventBus.$emit('evolve', id);
             },
             handleDevolve({ id }) {
                 const { parentId } = this;
-                EventBus.$emit('devolve', { tree: this.item, parentId });
+                // EventBus.$emit('devolve', { tree: this.item, parentId });
             }
         }
     }
