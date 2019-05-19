@@ -2,7 +2,7 @@ import config from '../../config'
 import Account from '../models/account'
 import Profile from '../models/profile'
 import Project from '../models/project'
-
+console.log(process.env.DATABASE_URL)
 // const pg = require('pg')
 
 // const connection = new pg.Client({

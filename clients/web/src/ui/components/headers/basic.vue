@@ -340,7 +340,7 @@ export default {
         clickExit() {
             this.$store.dispatch('application/setEditorMode', 'viewing')
         },
-        sonShowMenu() {
+        onShowMenu() {
             $('.snotify').hide()
         },
         onHideMenu() {

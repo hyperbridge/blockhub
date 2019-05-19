@@ -305,6 +305,8 @@ export const actions = {
             DB.init()
         })
 
+        init.then(() => {})
+console.log(req)
         const parsedUrl = url.parse(req.protocol + '://' + req.get('host') + req.originalUrl)
         const origin = process.env.NODE_ENV !== 'production' ? `${parsedUrl.protocol}//${parsedUrl.hostname}:9001` : 'https://api.blockhub.gg'
         console.log(origin)
