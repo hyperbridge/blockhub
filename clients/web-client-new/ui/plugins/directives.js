@@ -1,7 +1,6 @@
 import Vue from 'vue'
-import axios from 'axios'
 
-export default ({ store, app: { $axios } }) => {
+export default ({ store }) => {
 
     Vue.directive('focus', {
         inserted(el) {

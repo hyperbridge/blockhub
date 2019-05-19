@@ -5,7 +5,7 @@ import Snotify, { SnotifyPosition } from 'vue-snotify'
 import { Picker, Emoji } from 'emoji-mart-vue'
 import VueCurrencyFilter from 'vue-currency-filter'
 
-import vuexI18n from 'vuex-i18n/dist/vuex-i18n.umd.js'
+// import vuexI18n from 'vuex-i18n/dist/vuex-i18n.umd.js'
 
 import '@/css/styles.scss'
 
@@ -46,6 +46,7 @@ export default (context, inject) => {
             symbolSpacing: true
         })
 
+    /*
     const translations = {
         global: {
             en: {
@@ -85,5 +86,5 @@ export default (context, inject) => {
     }
 
     initTranslations()
-
+    */
 }

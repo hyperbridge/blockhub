@@ -1,5 +1,3 @@
-import Vue from 'vue'
-import axios from 'axios'
 import * as DB from '../db'
 import * as ChaosMonkey from '../framework/chaos-monkey'
 import * as ReputationEngine from '../framework/reputation-engine'
@@ -9,7 +7,7 @@ import seed from '../db/seed'
 
 if (process.client && window.module) module = window.module;
 
-export default ({ store, app: { $axios } }) => {
+export default ({ store }) => {
     if (!process.client) return
 
     if (!window.BlockHub)

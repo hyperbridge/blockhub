@@ -2,7 +2,7 @@ import Vue from 'vue'
 import moment from 'moment'
 
 
-export default ({ store, app: { $axios } }) => {
+export default ({ store }) => {
 
     Vue.filter('convertCurrency', function (value) {
         const currencyCode = store.state.application.account ? store.state.application.account.currency.code : 'USD'
