@@ -1,1 +1,2 @@
-import moment from "moment-with-locales-es6";
+import moment from 'moment';
+import 'moment/min/locales';
