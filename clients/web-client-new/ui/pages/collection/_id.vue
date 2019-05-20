@@ -118,7 +118,7 @@
                 collection,
                 breadcrumbLinks: [
                     { to: { path: '/' }, title: 'Home' },
-                    { to: { path: '/collection/' + collection.id }, title: collection.name }
+                    (collection && { to: { path: '/collection/' + collection.id }, title: collection.name })
                 ]
             }
         },

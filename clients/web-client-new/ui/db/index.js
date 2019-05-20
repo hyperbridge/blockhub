@@ -171,9 +171,8 @@ export const loadDefault = () => {
 }
 
 export const save = () => {
-    if (!initialized) {
-        return
-    }
+    if (!process.client) return
+    if (!initialized) return
 
     loki.saveDatabase(function (err) {
         if (err) {
