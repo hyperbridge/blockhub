@@ -1,4 +1,4 @@
-import feathersClient, { browserClient } from '../api/feathers-client'
+import feathersClient from '../api/feathers-client'
 import feathersVuex, { initAuth } from 'feathers-vuex'
 import url from 'url'
 import Vue from 'vue'
@@ -175,7 +175,7 @@ if (decentralizedMode) {
         console.log('TODO')
     }
 } else if (process.client) {
-    const feathers = feathersVuex(browserClient, { idField: 'id', enableEvents: false })
+    const feathers = feathersVuex(feathersClient(), { idField: 'id', enableEvents: false })
 
     Vue.use(feathers.FeathersVuex)
 
@@ -235,8 +235,6 @@ export const actions = {
                 store.dispatch('marketplace/init')
                 store.dispatch('funding/init')
 
-                // window.BlockHub.environmentMode = store.state.application.environmentMode
-
                 console.log(`Environment mode: ${store.state.application.environmentMode}`)
 
                 if (store.state.application.environmentMode === 'preview' ||
@@ -285,8 +283,9 @@ export const actions = {
         })
 
         init.then(() => {})
+
         const origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg' // eslint-disable-line no-negated-condition
-        console.log(origin)
+
         const storage = {
             getItem() { },
             setItem() { },
@@ -341,6 +340,6 @@ export const actions = {
             .then(() => dispatch('auth/authenticate', { accessToken: store.state.auth.accessToken, strategy: 'jwt' }))
             .then(() => dispatch('accounts/find', {}))
             .then(() => init)
-            .catch(_ => { })
+            .catch(_ => { console.log('Feathers exception') })
     }
 }

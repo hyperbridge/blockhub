@@ -45,7 +45,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import feathersClient from '~/api/feathers-client'
 
 const updateLandingImage = function() {
     if (!process.client) { return }

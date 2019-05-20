@@ -1,24 +1,22 @@
 import Vue from 'vue'
 import url from 'url'
-import feathersClient, { browserClient } from '~/api/feathers-client'
+import feathersClient from '~/api/feathers-client'
 
 export default ({ app }) => {
-    let client = null
+    let origin = null
+    let storage = null
 
-    if (process.client) {
-        client = browserClient
-    } else {
-        console.log(process.env.NODE_ENV)
-        const origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg'
+    if (process.server) {
+        origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg'
 
-        const storage = {
+        storage = {
             getItem() { },
             setItem() { },
             removeItem() { }
         }
-
-        client = feathersClient(origin, storage)
     }
+
+    let client = feathersClient(origin, storage)
 
     // Set feathers instance on app
     // This way we can use it in middleware and pages asyncData/fetch

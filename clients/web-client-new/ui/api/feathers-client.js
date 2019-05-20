@@ -2,11 +2,9 @@ import feathers from '@feathersjs/feathers'
 import socketio from '@feathersjs/socketio-client'
 import auth from '@feathersjs/authentication-client'
 import io from 'socket.io-client'
-
 import { CookieStorage } from 'cookie-storage'
 
 let client = null
-export let browserClient = null
 
 if (process.client) {
   const getCookie = (name) => {
@@ -25,18 +23,33 @@ if (process.client) {
     setCookie('WEB_SERVICE_URL', 'http://blockhub.gg.local:9001')
   }
 
-  const serviceUrl = getCookie('WEB_SERVICE_URL') || 'https://api.blockhub.gg'
-  //const storage = window.localStorage
-  const storage = new CookieStorage()
+  client = (serviceUrl, storage) => {
+    if (!serviceUrl) serviceUrl = getCookie('WEB_SERVICE_URL') || 'https://api.blockhub.gg'
+    if (!storage) storage = new CookieStorage()
 
-  const socket = io(serviceUrl, { transports: ['websocket'] }) // https://api.blockhub.gg // http://localhost:9001
+    const socket = io(serviceUrl, { transports: ['websocket'] }) // https://api.blockhub.gg // http://localhost:9001
 
-  browserClient = feathers()
-    //.configure(hooks())
-    .configure(socketio(socket, { timeout: 15000 }))
-    .configure(auth({ storage }))
-} 
+    return feathers()
+      //.configure(hooks())
+      .configure(socketio(socket, { timeout: 15000 }))
+      .configure(auth({ storage }))
+  }
+} else {
+  client = (serviceUrl, storage) => {
+    //const serviceUrl = 'https://api.blockhub.gg'
+    const socket = io(serviceUrl) // https://api.blockhub.gg // http://localhost:9001
 
+    return feathers()
+      //.configure(hooks())
+      .configure(socketio(socket, { timeout: 15000 }))
+      .configure(auth({ storage }))
+  }
+}
+
+export default client
+
+
+// BELOW IS USAGE CODE, FOR REFERENCE
 
 //feathersClient.service('/users')
 /* .configure(feathersVuex(store, {
@@ -72,13 +85,3 @@ if (process.client) {
 // });
 
 // services.messageService.on('created', message => this.addMessage(message))
-
-export default (serviceUrl, storage) => {
-  //const serviceUrl = 'https://api.blockhub.gg'
-  const socket = io(serviceUrl) // https://api.blockhub.gg // http://localhost:9001
-
-  return feathers()
-    //.configure(hooks())
-    .configure(socketio(socket, { timeout: 15000 }))
-    .configure(auth({ storage }))
-}
