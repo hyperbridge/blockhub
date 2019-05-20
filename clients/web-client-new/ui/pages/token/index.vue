@@ -618,7 +618,7 @@ export default {
             return this.$store.state.application.desktopMode
         },
         isMobile() {
-            if (!process.browser) {
+            if (!process.client) {
                 return false
             }
             

@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import * as DB from '../db'
 import * as ChaosMonkey from '../framework/chaos-monkey'
 import * as ReputationEngine from '../framework/reputation-engine'
@@ -5,15 +6,12 @@ import * as Bridge from '../framework/desktop-bridge'
 import * as API from '../framework/api'
 import seed from '../db/seed'
 
-if (process.client && window.module) module = window.module;
+export default ({ app, store }) => {
+    // Set blockhub instance on app
+    // This way we can use it in middleware and pages asyncData/fetch
+    app.blockhub = {}
 
-export default ({ store }) => {
-    if (!process.client) return
-
-    if (!window.BlockHub)
-        window.BlockHub = {}
-
-    window.BlockHub.GetMode = () => {
+    app.blockhub.getMode = () => {
         const hostname = window.location.hostname
         let hash = document.location.hash.replace('#/', '')
 
@@ -34,16 +32,16 @@ export default ({ store }) => {
         }
     }
 
-    window.BlockHub.API = API
-    window.BlockHub.Bridge = Bridge
-    window.BlockHub.ChaosMonkey = ChaosMonkey
-    window.BlockHub.ReputationEngine = ReputationEngine
-    window.BlockHub.DB = DB
-    window.BlockHub.store = store
-    //window.BlockHub.router = router // doesnt work?
-    window.BlockHub.seed = seed
+    app.blockhub.API = API
+    app.blockhub.Bridge = Bridge
+    app.blockhub.ChaosMonkey = ChaosMonkey
+    app.blockhub.ReputationEngine = ReputationEngine
+    app.blockhub.DB = DB
+    app.blockhub.store = store
+    //app.blockhub.router = router // doesnt work?
+    app.blockhub.seed = seed
 
-    window.BlockHub.importStarterData = () => {
+    app.blockhub.importStarterData = () => {
         console.log('[BlockHub] Import starter data')
 
         DB.marketplace.config.data[0].realms = seed.realms
@@ -59,7 +57,7 @@ export default ({ store }) => {
         store.dispatch('application/updateState')
     }
 
-    window.BlockHub.importSeedData = () => {
+    app.blockhub.importSeedData = () => {
         console.log('[BlockHub] Import seed data')
         // We dont want to mess with the important signed in account data
         // if (!DB.application.config.data[0].account.address) {
@@ -90,7 +88,7 @@ export default ({ store }) => {
         store.dispatch('application/updateState')
     }
 
-    window.BlockHub.resetSeedData = () => {
+    app.blockhub.resetSeedData = () => {
         // We dont want to mess with the important signed in account data
         // if (!DB.application.config.data[0].account.address) {
         //     DB.application.config.data[0].account.wallets = []
@@ -132,7 +130,7 @@ export default ({ store }) => {
         container.insert(item)
     }
 
-    window.BlockHub.saveDatabase = () => {
+    app.blockhub.saveDatabase = () => {
         DB.clean()
 
         updateContainer(DB.application.config, store.state.application)
@@ -144,7 +142,6 @@ export default ({ store }) => {
 
         DB.save()
     }
-
 
     DB.setInitCallback(async () => {
         console.log('DB init callback')
@@ -159,7 +156,7 @@ export default ({ store }) => {
         store.dispatch('marketplace/init')
         store.dispatch('funding/init')
 
-        window.BlockHub.environmentMode = store.state.application.environmentMode
+        app.blockhub.environmentMode = store.state.application.environmentMode
 
         console.log('Environment mode: ' + store.state.application.environmentMode)
 
@@ -167,7 +164,7 @@ export default ({ store }) => {
             || store.state.application.environmentMode === 'beta'
             || store.state.application.environmentMode === 'production') {
             setTimeout(() => {
-                window.BlockHub.importStarterData()
+                app.blockhub.importStarterData()
             }, 1000)
         }
 
@@ -204,4 +201,22 @@ export default ({ store }) => {
 
         resolve()
     })
+
+    const plugin = {
+        install(Vue, options) {
+            Vue.mixin({
+                created: function () {
+                    // access to blockhub anywhere
+                    this.$blockhub = app.blockhub
+                    this.$desktop = app.blockhub.Bridge
+                    this.$db = app.blockhub.DB
+                }
+            })
+        }
+    }
+
+    Vue.use(plugin)
+
+    if (window.client)
+        window.BlockHub = app.blockhub
 }

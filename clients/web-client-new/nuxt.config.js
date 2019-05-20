@@ -23,11 +23,11 @@ export default {
         { src: '~/plugins/directives' },
         { src: '~/plugins/general' },
         { src: '~/plugins/feathers' },
-        // { src: '~/plugins/pre-vendor.js', ssr: false },
+        { src: '~/plugins/autosize.js', ssr: false },
         { src: '~/plugins/jquery', ssr: false },
         { src: '~/plugins/summernote', ssr: false },
         // { src: '~/plugins/moment', ssr: false },
-        { src: '~/plugins/post-vendor.js', ssr: false },
+        { src: '~/plugins/blockhub.js', ssr: false },
     ],
     modules: [
         // Doc: https://axios.nuxtjs.org/usage

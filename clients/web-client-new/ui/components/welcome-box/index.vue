@@ -116,7 +116,7 @@
         },
         methods:{
             getOS() {
-                if (!process.browser) {
+                if (!process.client) {
                     return 'node'
                 }
 

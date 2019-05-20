@@ -36,7 +36,7 @@
                 }
             },
             'satisfied'() {
-                if (process.browser) {
+                if (process.client) {
                     document.getElementById('startup-loader').style.display = 'none'
                 }
             },
@@ -69,15 +69,15 @@
                         this.satisfied = true
                     }
 
-if (process.browser) {
-                    window.BlockHub.Bridge.updateState({
-                        module: 'application', 
-                        state: {
-                            activeProfile: this.$store.state.application.activeProfile,
-                            profiles: Object.values(this.$store.state.profiles.keyedById)
-                        }
-                    }).then(() => {})
-}
+                    if (process.client) {
+                        this.$desktop.updateState({
+                            module: 'application', 
+                            state: {
+                                activeProfile: this.$store.state.application.activeProfile,
+                                profiles: Object.values(this.$store.state.profiles.keyedById)
+                            }
+                        }).then(() => {})
+                    }
                 }
             }
         },

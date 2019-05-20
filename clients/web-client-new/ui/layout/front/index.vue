@@ -1165,8 +1165,8 @@
                     return alert('Not on desktop')
                 }
 
-                window.BlockHub.Bridge.sendCommand('ping', this.$refs.desktopMessage.value)
-                window.BlockHub.Bridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
+                this.$desktop.sendCommand('ping', this.$refs.desktopMessage.value)
+                this.$desktop.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
             },
             createArticle(request) {
                 request.ownerId = this.$store.state.application.activeProfile.id
@@ -1200,7 +1200,7 @@ debugger
 
                 this.withdrawRequest.processing = true
 
-                window.BlockHub.Bridge.sendCommand('transferTokens', {
+                this.$desktop.sendCommand('transferTokens', {
                     type,
                     fromAddress,
                     toAddress,
@@ -1296,7 +1296,7 @@ debugger
                 }
             },
             handleResize(event) {
-                if (!process.browser) { return }
+                if (!process.client) { return }
                 
                 if (document.documentElement.clientWidth < 768) {
                     this.mobileMode = true
@@ -1321,7 +1321,7 @@ debugger
                 }
             //})
 
-if (process.browser) {
+if (process.client) {
 
             window.addEventListener('resize', this.handleResize())
 }
@@ -1337,7 +1337,7 @@ if (process.browser) {
             this.$nextTick(() => {
                 this.loadingState = false
 
-                if (process.browser) {
+                if (process.client) {
                     if (document.getElementById('startup-loader')) {
                         document.getElementById('startup-loader').style.display = 'none'
                     }
@@ -1378,7 +1378,7 @@ if (process.browser) {
                 symbolSpacing: true
             })
 
-            if (process.browser) {
+            if (process.client) {
                 window.onmousemove = function (e) { // TODO replace?
                     if (e.altKey) {
                         document.body.style.cursor = 'crosshair'
@@ -1408,7 +1408,7 @@ if (process.browser) {
         },
         watch: {
             '$route'(to, from) {
-                if (process.browser) {
+                if (process.client) {
                     $('body').removeClass('show-sidebar')
                     $('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-bars')
                 }
@@ -1472,7 +1472,7 @@ if (process.browser) {
                 })
 
                 
-                // window.BlockHub.Bridge.sendCommand('getTokenBalance', {
+                // this.$desktop.sendCommand('getTokenBalance', {
                 //     type: 'HBX',
                 //     address: this.$store.state.application.activeProfile.key
                 // }).then((res) => {

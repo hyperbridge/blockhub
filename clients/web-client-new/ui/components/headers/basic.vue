@@ -271,7 +271,7 @@ export default {
             return this.$store.state.application.tokenCount !== null ? this.$store.state.application.tokenCount.toLocaleString() : null
         },
         currentLanguage() {
-            if (!process.browser) {
+            if (!process.client) {
                 return 'US'
             }
 
@@ -361,7 +361,7 @@ export default {
             browserWindow.close()
         },
         maximizeWindow() {
-            // window.BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
+            // this.$desktop.sendCommand('eval', cmd).then((productResult) => {
             //     if (productResult.id) {
             //         this.successfulCreationMessage = "Product ownership has been changed"
             //     }

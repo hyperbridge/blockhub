@@ -228,12 +228,11 @@ export const mutations = {
                 }
             }
 
-            window.BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
+            this.$desktop.sendCommand('eval', cmd).then((productResult) => {
                 if (productResult.id) {
                     //this.successfulCreationMessage = "Product has been saved"
                 }
             })
-
         } else {
             const run = function (
                 local,
@@ -318,7 +317,7 @@ export const mutations = {
                 }
             }
 
-            window.BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
+            this.$desktop.sendCommand('eval', cmd).then((productResult) => {
                 if (productResult.id) {
                     //payload.meta.blockchainId = productResult.id
                     //this.successfulCreationMessage = "Congratulations, your product has been synced!"

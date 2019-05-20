@@ -31,16 +31,16 @@ export const windowSize = {
         }
     },
     created() {
-        if (!process.browser) { return }
+        if (!process.client) { return }
         window.addEventListener('resize', this.getWindowSize)
         this.getWindowSize()
     },
     mounted() {
-        if (!process.browser) { return }
+        if (!process.client) { return }
         this.getWindowSize()
     },
     beforeDestroy() {
-        if (!process.browser) { return }
+        if (!process.client) { return }
         window.removeEventListener('resize', this.getWindowSize)
     },
     methods: {

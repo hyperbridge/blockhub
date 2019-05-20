@@ -14,7 +14,7 @@ let localState = null
 export const state = () => localState
 
 const getOS = () => {
-    if (!process.browser) {
+    if (!process.client) {
         return 'node'
     }
 
@@ -55,7 +55,7 @@ const updateState = (savedData, updatedState = {}) => {
         activeProfile: DB.application.config.data[0].activeProfile || {},
         darklaunchFlags: DB.application.config.data[0].darklaunchFlags || [],
         developerMode: savedData.developerMode != null ? savedData.developerMode : DB.application.config.data[0].account && DB.application.config.data[0].activeProfile && DB.application.config.data[0].activeProfile.role === 'developer',
-        environmentMode: savedData.environmentMode != null ? savedData.environmentMode : (process.browser ? window.BlockHub.GetMode() : 'local'),
+        environmentMode: savedData.environmentMode != null ? savedData.environmentMode : (process.client ? window.BlockHub.getMode() : 'local'),
         externalState: savedData.externalState != null ? savedData.externalState : {},
         ...updatedState
     }
@@ -67,7 +67,7 @@ const updateState = (savedData, updatedState = {}) => {
     }
 
     if (rawData.desktopMode == null)
-        rawData.desktopMode = process.browser && window.isElectron
+        rawData.desktopMode = process.client && window.isElectron
 
     const normalizedData = normalize(rawData, {
     })

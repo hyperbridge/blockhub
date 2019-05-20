@@ -287,15 +287,15 @@
                 }
             },
             importSeedData() {
-                window.BlockHub.importSeedData()
+                this.$blockhub.importSeedData()
             },
             resetSeedData() {
-                window.BlockHub.resetSeedData()
+                this.$blockhub.resetSeedData()
             },
             saveSettings() {
-                window.BlockHub.saveDatabase()
+                this.$blockhub.saveDatabase()
 
-                window.BlockHub.Notification.info('', 'Settings saved', {
+                this.$blockhub.Notification.info('', 'Settings saved', {
                     timeout: 2000,
                     pauseOnHover: true
                 })
@@ -308,8 +308,8 @@
                     return alert('Not on desktop')
                 }
 
-                window.BlockHub.Bridge.sendCommand('ping', this.$refs.desktopMessage.value)
-                window.BlockHub.Bridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
+                this.$desktop.sendCommand('ping', this.$refs.desktopMessage.value)
+                this.$desktop.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
             }
         },
         mounted() {
@@ -332,7 +332,7 @@
             })
         },
         created() {
-            if (process.browser) {
+            if (process.client) {
                 $('body').off('click').on('click', "[data-action='fixedpanel-toggle']", (e) => {
                     let btn = $('#sidebar-toggle-btn span')
 

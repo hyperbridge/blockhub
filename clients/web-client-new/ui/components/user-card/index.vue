@@ -124,7 +124,7 @@
 
                 const index = chosenProfile.meta.walletIndex
 
-                window.BlockHub.Bridge.sendCommand('generateAddress', { index }).then((res) => {
+                this.$desktop.sendCommand('generateAddress', { index }).then((res) => {
                     this.$store.dispatch('profiles/update', [
                         chosenProfile.id, 
                         {
@@ -151,7 +151,7 @@
                         ])
 
                         // Update desktop
-                        window.BlockHub.Bridge.updateState({
+                        this.$desktop.updateState({
                             module: 'application', 
                             state: {
                                 profiles: Object.values(this.$store.state.profiles.keyedById)
@@ -161,7 +161,7 @@
                 })
             },
             copyToClipboard(value) {
-                window.BlockHub.Bridge.sendCommand('writeToClipboard', value)
+                this.$desktop.sendCommand('writeToClipboard', value)
 
                 this.$snotify.success('Address copied to clipboard')
             }

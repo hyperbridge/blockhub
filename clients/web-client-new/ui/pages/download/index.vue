@@ -331,17 +331,17 @@
             'c-block-with-icon': () => import('~/components/block/with-icon').then(m => m.default || m),
         },
         mounted() {
-            if (process.browser) {
+            if (process.client) {
                 window.document.getElementById('header-bg').style['background-image'] = 'url(/img/download-bg.png)'
             }
         },
         created() {
-            if (process.browser) {
+            if (process.client) {
                 $('body').addClass('screen--download')
             }
         },
         beforeDestroy() {
-            if (process.browser) {
+            if (process.client) {
                 $('body').removeClass('screen--download')
             }
         },

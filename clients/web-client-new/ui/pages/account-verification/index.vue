@@ -235,9 +235,9 @@
                         }
                     })
                     .then((res) => {
-                        window.BlockHub.DB.application.config.data[0].account.isVerifying = true
-                        window.BlockHub.DB.application.config.data[0].account.verificationTimestamp = new Date()
-                        window.BlockHub.DB.save()
+                        this.$db.application.config.data[0].account.isVerifying = true
+                        this.$db.application.config.data[0].account.verificationTimestamp = new Date()
+                        this.$db.save()
 
                         this.verificationLink = res.data.verification.url
                     })

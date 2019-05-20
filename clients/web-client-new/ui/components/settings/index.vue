@@ -837,7 +837,7 @@
             setOpenStartup(value) {
                 this.updateClientSettings('open_startup', value)
 
-                window.BlockHub.Bridge.sendCommand('setOpenStartup', value)
+                this.$desktop.sendCommand('setOpenStartup', value)
             },
             async requestNotifPerm() {
                 const permission = await Notification.requestPermission()

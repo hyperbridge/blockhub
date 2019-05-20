@@ -22,11 +22,10 @@ export default (context, inject) => {
         }
     })
 
-    if (process.browser) {
+    if (process.client) {
         const VueNumerals = require('vue-numerals')
         const Popover = require('vue-js-popover')
         //const VueDraggable = require('vue-draggable')
-
 
         //Vue.use(VueDraggable)
         Vue.use(VueNumerals)
@@ -76,7 +75,7 @@ export default (context, inject) => {
     const initTranslations = () => {
         Vue.i18n.add('en', translations.global)
 
-        const host = process.browser ? window.location.hostname.replace('www.', '').replace('.local', '').split(':')[0] : context.req.headers.host
+        const host = process.client ? window.location.hostname.replace('www.', '').replace('.local', '').split(':')[0] : context.req.headers.host
 
         if (translations[host]) {
             Vue.i18n.add('en', translations[host].en)

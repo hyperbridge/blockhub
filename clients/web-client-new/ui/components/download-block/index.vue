@@ -125,7 +125,7 @@
         },
         methods: {
             getOS() {
-                if (!process.browser) {
+                if (!process.client) {
                     this.userAgent = 'node'
                     return
                 }

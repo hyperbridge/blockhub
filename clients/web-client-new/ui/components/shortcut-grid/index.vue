@@ -134,7 +134,7 @@
 
         methods: {
             getWindowHeight(event) {
-            if (!process.browser) { return 0 }
+            if (!process.client) { return 0 }
                 this.windowHeight = window.innerHeight
                 // console.log(this.windowHeight)
             },
@@ -251,12 +251,12 @@
             }
         },
         created() {
-            if (process.browser) {
+            if (process.client) {
                 window.addEventListener('resize', this.getWindowHeight)
             }
         },
         mounted () {
-            if (process.browser) {
+            if (process.client) {
                 this.matchHeight()
             }
         },

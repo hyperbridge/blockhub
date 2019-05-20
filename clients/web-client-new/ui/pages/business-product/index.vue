@@ -315,7 +315,7 @@
                     }
                 }
 
-                window.BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
+                this.$desktop.sendCommand('eval', cmd).then((productResult) => {
                     if (productResult.id) {
                         this.successfulCreationMessage = "Product ownership has been changed"
                     }
@@ -323,7 +323,7 @@
             },
             startImport() {
                 if (!this.$store.state.application.desktopMode) {
-                    return window.BlockHub.Notification.error('Desktop app required', 'Error')
+                    return this.$blockhub.Notification.error('Desktop app required', 'Error')
                 }
 
                 const onWindowLoad = `function onWindowLoad(requestId) {
@@ -469,7 +469,7 @@
                     }
                 }
 
-                window.BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
+                this.$desktop.sendCommand('eval', cmd).then((productResult) => {
                     if (productResult.id) {
                         this.successfulCreationMessage = "Product status has been updated"
                     }

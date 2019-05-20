@@ -19,12 +19,12 @@ export default {
     components: {
     },
     created() {
-        if (process.browser) {
+        if (process.client) {
             $('body').addClass('screen--not-found')
         }
     },
     beforeDestroy() {
-        if (process.browser) {
+        if (process.client) {
             $('body').removeClass('screen--not-found')
         }
     },

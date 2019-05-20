@@ -8,7 +8,7 @@ import { CookieStorage } from 'cookie-storage'
 let client = null
 export let browserClient = null
 
-if (process.browser) {
+if (process.client) {
   const getCookie = (name) => {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");

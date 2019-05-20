@@ -48,7 +48,7 @@ import { mapGetters } from 'vuex'
 import feathersClient from '~/api/feathers-client'
 
 const updateLandingImage = function() {
-    if (!process.browser) { return }
+    if (!process.client) { return }
     const frontpageProduct = this.$store.state.marketplace.frontpageProduct
 
     if (frontpageProduct && frontpageProduct.images) {
@@ -343,7 +343,7 @@ export default {
         updateLandingImage.call(this)
     },
     beforeDestroy() {
-        if (!process.browser) { return }
+        if (!process.client) { return }
         window.document.getElementById('header-bg').style['background-image'] = 'url(/img/backgrounds/1.jpg)'
     }
 }

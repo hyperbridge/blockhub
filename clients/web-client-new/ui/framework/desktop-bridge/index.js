@@ -43,7 +43,7 @@ export const once = (event, listener) => {
 
 
 export const isConnected = () => {
-    return process.browser && window.isElectron
+    return process.client && window.isElectron
 }
 
 export const ID = () => {
@@ -249,7 +249,7 @@ export const runCommand = async (cmd, meta = {}) => {
 
         //     // Import seed data for now
         //     if (local.store.state.application.mode === 'production') {
-        //         //window.BlockHub.importSeedData()
+        //         //this.$blockhub.importSeedData()
 
         //         // local.store.state.application.desktopMode = true
         //         // local.store.state.application.signedIn = true
@@ -266,7 +266,7 @@ export const runCommand = async (cmd, meta = {}) => {
         } else if (cmd.key === 'systemError') {
             console.warn('[Bridge] Received system error from desktop', cmd.data)
 
-            window.BlockHub.Notification.error(cmd.data, 'System Error', {
+            this.$blockhub.Notification.error(cmd.data, 'System Error', {
                 timeout: 0,
                 pauseOnHover: true
             })
@@ -338,7 +338,7 @@ export const initContextMenuHandler = () => {
 export const init = (store, router) => {
     local.store = store
     local.router = router
-    local.bridge = process.browser ? window.ipcRenderer : { send: () => {} }
+    local.bridge = process.client ? window.ipcRenderer : { send: () => {} }
 
     if (!isConnected()) {
         console.log('[Bridge] Not initializing. Reason: not connected to desktop app')

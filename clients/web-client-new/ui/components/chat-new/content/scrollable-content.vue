@@ -31,7 +31,7 @@
             },
         },
         mounted () {
-            if (process.browser) {
+            if (process.client) {
                 this._scrollDown();
                 $(this.$refs.scrollList).scroll(() => {
                     this.checkScrollButton()

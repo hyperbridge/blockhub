@@ -60,7 +60,7 @@ export const init = () => {
         let configFound = loki.getCollection('applicationConfig')
 
         // If not desktop mode, then wipe and reload (fresh data)
-        if (process.browser && !window.isElectron && window.BlockHub.GetMode() !== 'local' && configFound) {
+        if (process.client && !window.isElectron && window.BlockHub.getMode() !== 'local' && configFound) {
             console.log('[BlockHub] Production config detected. Clearing database.')
 
             // if (window.closeLokiDatabase) {

@@ -29,7 +29,7 @@ ChaosMonkey.config.ENABLED = false
     - Permanent chaos monkey
 */
 const CheckDevConfig = () => {
-    if (!process.browser) {
+    if (!process.client) {
         return ''
     }
 
@@ -56,7 +56,7 @@ let service = null
 let auth = null
 
 const IsDecentralizedMode = () => {
-    if (!process.browser) return
+    if (!process.client) return
 
     // Decentralized mode if we're not on GameDelta
     return window.location.hostname.toLowerCase().indexOf('gamedelta') !== -1
@@ -174,7 +174,7 @@ if (decentralizedMode) {
     auth = () => {
         console.log('TODO')
     }
-} else if (process.browser) {
+} else if (process.client) {
     const feathers = feathersVuex(browserClient, { idField: 'id', enableEvents: false })
 
     Vue.use(feathers.FeathersVuex)

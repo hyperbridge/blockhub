@@ -5,7 +5,7 @@ import feathersClient, { browserClient } from '~/api/feathers-client'
 export default ({ app }) => {
     let client = null
 
-    if (process.browser) {
+    if (process.client) {
         client = browserClient
     } else {
         console.log(process.env.NODE_ENV)
