@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="store">
+    <c-layout navigationKey="store" :breadcrumbLinks="breadcrumbLinks">
         <div class="row" hidden>
             <div class="col-12 mb-4">
                 <c-banner :imgSrc="'/img/banners/banner-3.png'" to="/token">
@@ -103,6 +103,7 @@ export default {
     },
     data() {
         return {
+            breadcrumbLinks: false,
             showWelcomeModal: false //['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode) && !this.$store.state.application.settings.client.hideWelcomeModal,
         }
     },

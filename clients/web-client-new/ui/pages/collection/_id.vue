@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="collection">
+    <c-layout navigationKey="collection" :breadcrumbLinks="breadcrumbLinks">
         <div class="row">
             <template v-if="!collection">
                 <p>Not found.</p>
@@ -106,16 +106,23 @@
             'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m)
         },
         async asyncData({ params, store }) {
-            return await store.dispatch('collections/find', {
+            await store.dispatch('collections/find', {
                 query: {
                     id: Number(params.id)
                 }
             })
+
+            const collection = store.getters['collections/get'](params.id)
+
+            return {
+                collection,
+                breadcrumbLinks: [
+                    { to: { path: '/' }, title: 'Home' },
+                    { to: { path: '/collection/' + collection.id }, title: collection.name }
+                ]
+            }
         },
         computed: {
-            collection() {
-                return this.$store.getters['collections/get'](this.$route.params.id)
-            },
             assets() {
                 if (!this.collection.meta.assets) return []
                 
