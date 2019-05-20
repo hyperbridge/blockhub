@@ -218,7 +218,7 @@
             id: [String, Number]
         },
         components: {
-            'c-layout': () => import('~/layouts/business').then(m => m.default || m),
+            'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
             'c-html-editor': () => import('~/components/html-editor').then(m => m.default || m),
             'c-json-editor': () => import('~/components/json-editor').then(m => m.default || m),
             'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),

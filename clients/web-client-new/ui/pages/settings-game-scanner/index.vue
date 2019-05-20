@@ -82,7 +82,7 @@
 <script>
     export default {
         components: {
-            'c-layout': () => import('~/layouts/default').then(m => m.default || m),
+            'c-layout': () => import('~/components/front-layout').then(m => m.default || m),
             'c-block': () => import('~/components/block').then(m => m.default || m),
             'c-benchmark': () => import('~/components/benchmark').then(m => m.default || m),
             'c-inline-ntf': () => import('~/components/notification/inline.vue').then(m => m.default || m),

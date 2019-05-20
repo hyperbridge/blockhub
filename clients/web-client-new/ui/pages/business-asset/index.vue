@@ -12,7 +12,7 @@
             id: [String, Number]
         },
         components: {
-            'c-layout': () => import('~/layouts/business').then(m => m.default || m),
+            'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
         },
         data() {
             return {

@@ -40,7 +40,7 @@
     export default {
         props: ['projectID', 'postID'],
         components: {
-            'c-layout': () => import('~/layouts/default').then(m => m.default || m),
+            'c-layout': () => import('~/components/front-layout').then(m => m.default || m),
             'c-block': () => import('~/components/block').then(m => m.default || m),
             'c-tags': () => import('~/components/tags').then(m => m.default || m),
             'c-badges': () => import('~/components/project/badges').then(m => m.default || m)

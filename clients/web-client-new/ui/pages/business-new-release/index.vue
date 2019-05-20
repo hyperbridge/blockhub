@@ -94,7 +94,7 @@
 
     export default {
         components: {
-            'c-business-layout': () => import('~/layouts/business').then(m => m.default || m),
+            'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
             'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m),
             'c-notification-inline': () => import('~/components/notification/inline').then(m => m.default || m),
             'c-text-editor': VueEditor,

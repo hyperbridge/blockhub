@@ -1,5 +1,5 @@
 <template>
-    <c-launcher bgImage="https://www.numerama.com/content/uploads/2016/08/skyrim.jpeg"
+    <c-layout bgImage="https://www.numerama.com/content/uploads/2016/08/skyrim.jpeg"
                 :overlay="true"
                 overlayOpacity="0.3"
     >
@@ -13,13 +13,13 @@
                 </div>
             </c-metro-item>
         </c-metro-grid>
-    </c-launcher>
+    </c-layout>
 </template>
 
 <script>
     export default {
         components:{
-            'c-launcher': () => import('~/layouts/launcher').then(m => m.default || m),
+            'c-layout': () => import('~/components/launcher-layout').then(m => m.default || m),
             'c-metro-grid': () => import('~/components/metro/grid').then(m => m.default || m),
             'c-metro-item': () => import('~/components/metro/metro-item').then(m => m.default || m),
         },

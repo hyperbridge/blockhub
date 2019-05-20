@@ -1,5 +1,5 @@
 <template>
-    <!--<c-business-layout title="Release history">-->
+    <!--<c-layout title="Release history">-->
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-    <!--</c-business-layout>-->
+    <!--</c-layout>-->
 </template>
 
 <script>

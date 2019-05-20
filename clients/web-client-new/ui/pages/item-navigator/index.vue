@@ -62,7 +62,7 @@
 
     export default {
         components: {
-            'c-layout': () => import('~/layouts/default').then(m => m.default || m),
+            'c-layout': () => import('~/components/front-layout').then(m => m.default || m),
             'c-navigator-item': () => import('~/components/item-navigator/item').then(m => m.default || m),
             'c-modal': () => import('~/components/modal').then(m => m.default || m),
             'c-assets': () => import('~/components/assets-grid-inventory').then(m => m.default || m),

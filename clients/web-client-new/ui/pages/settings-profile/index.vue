@@ -13,7 +13,7 @@
 <script>
 export default {
     components: {
-        'c-layout': () => import('~/layouts/default').then(m => m.default || m)
+        'c-layout': () => import('~/components/front-layout').then(m => m.default || m)
     }
 }
 </script>

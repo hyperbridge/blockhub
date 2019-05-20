@@ -150,7 +150,7 @@
 
     export default {
         components: {
-            'c-layout': () => import('~/layouts/default').then(m => m.default || m),
+            'c-layout': () => import('~/components/front-layout').then(m => m.default || m),
             'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m),
             'c-assets-list': () => import('~/components/assets-list-item').then(m => m.default || m),
             'c-assets-item': () => import('~/components/assets-list-item/item').then(m => m.default || m),

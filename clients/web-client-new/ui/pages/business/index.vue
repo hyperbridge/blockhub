@@ -1,13 +1,13 @@
 <template>
-    <c-business-layout>
+    <c-layout>
         <router-view />
-    </c-business-layout>
+    </c-layout>
 </template>
 
 <script>
     export default {
         components: {
-            'c-business-layout': () => import('~/layouts/business').then(m => m.default || m)
+            'c-layout': () => import('~/components/business-layout').then(m => m.default || m)
         },
         data() {
             return {

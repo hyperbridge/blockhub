@@ -64,7 +64,7 @@ function isVisible(availableFlags, userFlags, code, variant, data) {
 
 export default {
     components: {
-        'c-layout': () => import('~/layout/front').then(m => m.default || m),
+        'c-layout': () => import('~/components/front-layout').then(m => m.default || m),
         'c-banner': () => import('~/components/banner/simple').then(m => m.default || m),
         'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
         'c-download-block': () => import('~/components/download-block').then(m => m.default || m),

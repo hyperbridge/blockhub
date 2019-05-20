@@ -15,7 +15,7 @@
     export default {
         props: ['code'],
         components: {
-            'c-layout': () => import('~/layouts/default').then(m => m.default || m),
+            'c-layout': () => import('~/components/front-layout').then(m => m.default || m),
             'c-download-block': () => import('~/components/download-block').then(m => m.default || m)
         },
         mounted() {

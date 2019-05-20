@@ -1,8 +1,8 @@
 import Vue from 'vue'
-import Layout from '../layout/front'
+
+import Layout from '../components/front-layout'
 import HeadingBar from '../components/heading-bar'
 import HeadingBarColor from '../components/heading-bar/simple-colored'
-
 import Button from '../components/buttons'
 import Block from '../components/block'
 import Switch from '../components/switch'
