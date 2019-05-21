@@ -1,4 +1,4 @@
-import feathersClient from '../api/feathers-client'
+import feathersClient from '../framework/feathers-client'
 import feathersVuex, { initAuth } from 'feathers-vuex'
 import url from 'url'
 import Vue from 'vue'

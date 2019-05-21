@@ -110,7 +110,7 @@
 
 
 <script>
-    import offers from '@/db/api/offers';
+    //import offers from '@/db/api/offers';
 
     export default {
         props: ['id', 'profileId'],
@@ -164,10 +164,10 @@
         },
         computed: {
             offers() {
-                return this.$store.getters['assets/offersMap'];
+                return []//this.$store.getters['assets/offersMap'];
             },
             assets() {
-                return this.$store.getters['assets/assetsArray'];
+                return []//this.$store.getters['assets/assetsArray'];
             }
         },
         beforeDestroy() {

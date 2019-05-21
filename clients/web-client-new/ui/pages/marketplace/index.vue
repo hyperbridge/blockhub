@@ -51,9 +51,9 @@
 </template>
 
 <script>
-    import offers from '@/db/api/offers'
-    import prospectors from '@/db/api/prospectors'
-    import transactions from '@/db/api/asset-transactions'
+    // import offers from '@/db/api/offers'
+    // import prospectors from '@/db/api/prospectors'
+    // import transactions from '@/db/api/asset-transactions'
 
     export default {
         components: {
@@ -74,9 +74,9 @@
             cut: val => val.replace('Marketplace ', '')
         },
         mounted() {
-            this.$store.dispatch('loadData', ['assets/offers', offers])
-            this.$store.dispatch('loadData', ['assets/prospectors', prospectors])
-            this.$store.dispatch('loadData', ['assets/transactions', transactions])
+            // this.$store.dispatch('loadData', ['assets/offers', offers])
+            // this.$store.dispatch('loadData', ['assets/prospectors', prospectors])
+            // this.$store.dispatch('loadData', ['assets/transactions', transactions])
         },
         computed: {
             assets() {

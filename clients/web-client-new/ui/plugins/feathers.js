@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import url from 'url'
-import feathersClient from '~/api/feathers-client'
+import feathersClient from '~/framework/feathers-client'
 
 export default ({ app }) => {
     let origin = null

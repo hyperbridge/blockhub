@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import transactionsData from '@/db/api/asset-transactions';
+    //import transactionsData from '@/db/api/asset-transactions';
     import moment from 'moment';
 
     export default {

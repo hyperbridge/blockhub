@@ -3,7 +3,6 @@ import * as DB from '../db'
 import * as ChaosMonkey from '../framework/chaos-monkey'
 import * as ReputationEngine from '../framework/reputation-engine'
 import * as Bridge from '../framework/desktop-bridge'
-import * as API from '../framework/api'
 import seed from '../db/seed'
 
 export default ({ app, store }) => {
@@ -32,14 +31,13 @@ export default ({ app, store }) => {
         }
     }
 
-    app.blockhub.API = API
-    app.blockhub.Bridge = Bridge
-    app.blockhub.ChaosMonkey = ChaosMonkey
-    app.blockhub.ReputationEngine = ReputationEngine
-    app.blockhub.DB = DB
+    app.blockhub.bridge = Bridge
+    app.blockhub.chaosMonkey = ChaosMonkey
+    app.blockhub.reputationEngine = ReputationEngine
+    app.blockhub.db = DB
     app.blockhub.store = store
-    //app.blockhub.router = router // doesnt work?
     app.blockhub.seed = seed
+    //app.blockhub.router = router // doesnt work?
 
     app.blockhub.importStarterData = () => {
         console.log('[BlockHub] Import starter data')
@@ -202,14 +200,35 @@ export default ({ app, store }) => {
         resolve()
     })
 
+    app.blockhub.api = {
+        service: (serviceKey) => {
+            console.log('[BlockHub] Service: ' + serviceKey)
+
+            if (app.blockhub.bridge.isConnected()) { // && app.blockhub.bridge.canFulfillRequest(endpoint
+                return {
+                    find: function (params) {
+                        app.blockhub.bridge.sendCommand('service', {
+                            service,
+                            type: 'find',
+                            params
+                        })
+                    }
+                }
+            } else {
+                return app.feathers.service(serviceKey)
+            }
+        }
+    }
+
     const plugin = {
         install(Vue, options) {
             Vue.mixin({
                 created: function () {
                     // access to blockhub anywhere
                     this.$blockhub = app.blockhub
-                    this.$desktop = app.blockhub.Bridge
-                    this.$db = app.blockhub.DB
+                    this.$desktop = app.blockhub.bridge
+                    this.$db = app.blockhub.db
+                    this.$api = app.blockhub.api
                 }
             })
         }

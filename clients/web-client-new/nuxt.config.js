@@ -26,7 +26,7 @@ export default {
         { src: '~/plugins/autosize', ssr: false },
         { src: '~/plugins/jquery', ssr: false },
         { src: '~/plugins/summernote', ssr: false },
-        // { src: '~/plugins/moment', ssr: false },
+        { src: '~/plugins/moment', ssr: false },
         { src: '~/plugins/blockhub', ssr: false },
     ],
     modules: [
