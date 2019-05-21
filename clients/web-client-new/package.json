@@ -48,7 +48,7 @@
     "vue-currency-filter": "^3.1.0",
     "vue-draggable": "^1.0.6",
     "vue-howler": "^0.7.0",
-    "vue-i18n": "^8.3.1",
+    "vue-i18n": "^8.11.2",
     "vue-js-popover": "^1.1.7",
     "vue-multiselect": "^2.1.3",
     "vue-numerals": "0.0.2",
@@ -88,8 +88,14 @@
     "rules": {
       "vue/attribute-hyphenation": 0,
       "quote-props": 0,
-      "indent": ["error", 4],
-      "semi": ["error", "never"]
+      "indent": [
+        "error",
+        4
+      ],
+      "semi": [
+        "error",
+        "never"
+      ]
     }
   }
 }

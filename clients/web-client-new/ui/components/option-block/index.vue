@@ -19,11 +19,11 @@
         <div class="option-block__body">
             <div class="option-block__list">
                 <c-option-list-item v-for="item in list"
-                                    :selected="selectedId == item.id ? true : false"
-                                    :image="item.image"
-                                    :price="item.price"
-                                    :key="item.id"
-                                    @select="selectThis(item.id)"
+                    :selected="selectedId == item.id ? true : false"
+                    :image="item.image"
+                    :price="item.price"
+                    :key="item.id"
+                    @select="selectThis(item.id)"
                 >
                     {{ item.name }}
                 </c-option-list-item>

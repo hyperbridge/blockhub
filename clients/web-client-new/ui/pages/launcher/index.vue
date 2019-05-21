@@ -4,7 +4,7 @@
                 overlayOpacity="0.3"
     >
         <c-metro-grid class="w-100">
-            <c-metro-item v-for="(item, index) in items" :image="item.image" width="25%" :fullImage=" index == 1 ? true : false">
+            <c-metro-item v-for="(item, index) in items" :image="item.image" width="25%" :fullImage=" index == 1 ? true : false" :key="item.title">
                 <div class="h4 font-weight-bold">
                     {{ item.title }}
                 </div>

@@ -5,8 +5,6 @@ import Snotify, { SnotifyPosition } from 'vue-snotify'
 import { Picker, Emoji } from 'emoji-mart-vue'
 import VueCurrencyFilter from 'vue-currency-filter'
 
-// import vuexI18n from 'vuex-i18n/dist/vuex-i18n.umd.js'
-
 import '@/css/styles.scss'
 
 
@@ -45,45 +43,43 @@ export default (context, inject) => {
             symbolSpacing: true
         })
 
-    /*
-    const translations = {
-        global: {
-            en: {
-                "content": "This is some {type} content",
-                "Start building your collection today, share it and save it!": "Start building your collection today, share it and save it!",
-                "Get Started": "Get Started"
-            }
-        },
-        'blockhub.gg': {
-            en: {
-                "Start building your collection today, share it and save it!": "Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain.",
-            }
-        },
-        'thor.gg': {
-            en: {
-            }
-        }
-    }
+    // const translations = {
+    //     global: {
+    //         en: {
+    //             "content": "This is some {type} content",
+    //             "Start building your collection today, share it and save it!": "Start building your collection today, share it and save it!",
+    //             "Get Started": "Get Started"
+    //         }
+    //     },
+    //     'blockhub.gg': {
+    //         en: {
+    //             "Start building your collection today, share it and save it!": "Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain.",
+    //         }
+    //     },
+    //     'thor.gg': {
+    //         en: {
+    //         }
+    //     }
+    // }
 
-    Vue.use(vuexI18n.plugin, context.store, {
-        moduleName: 'i18n',
-        onTranslationNotFound(locale, key) {
-            return translations.global[key]
-        }
-    })
+    // Vue.use(vuexI18n.plugin, context.store, {
+    //     moduleName: 'i18n',
+    //     onTranslationNotFound(locale, key) {
+    //         return translations.global[key]
+    //     }
+    // })
 
-    const initTranslations = () => {
-        Vue.i18n.add('en', translations.global)
+    // const initTranslations = () => {
+    //     Vue.i18n.add('en', translations.global)
 
-        const host = process.client ? window.location.hostname.replace('www.', '').replace('.local', '').split(':')[0] : context.req.headers.host
+    //     const host = process.client ? window.location.hostname.replace('www.', '').replace('.local', '').split(':')[0] : context.req.headers.host
 
-        if (translations[host]) {
-            Vue.i18n.add('en', translations[host].en)
-        }
+    //     if (translations[host]) {
+    //         Vue.i18n.add('en', translations[host].en)
+    //     }
 
-        Vue.i18n.set('en')
-    }
+    //     Vue.i18n.set('en')
+    // }
 
-    initTranslations()
-    */
+    // initTranslations()
 }

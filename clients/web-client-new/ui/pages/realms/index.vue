@@ -9,7 +9,7 @@
             <div class="row">
                 <c-loading :enabled="!realms.length" size="lg" />
                 <c-metro-grid class="w-100" v-if="realms.length">
-                    <c-metro-item v-for="(realm, index) in realms" :image="realm.meta.images.logo" width="25%" :fullImage=" index == 1 ? true : false">
+                    <c-metro-item v-for="(realm, index) in realms" :image="realm.meta.images.logo" width="25%" :fullImage=" index == 1 ? true : false" :key="realm.id">
                         <c-button class="h4 font-weight-bold" :to="`/realm/${realm.id}`">
                             {{ realm.name }}
                         </c-button>

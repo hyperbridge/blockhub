@@ -14,7 +14,7 @@
                 <th></th>
             </thead>
             <tbody>
-                <transition-group name="fadeLeft" tag="tr" v-for="(item, index) in list" v-if="item.show == 'default' || showDetails">
+                <transition-group name="fadeLeft" tag="tr" v-for="(item) in list" v-if="item.show == 'default' || showDetails" :key="item.name">
                     <td class="decentralization-meter__table-key" :key="`${item.name}-1`">{{ item.name }}</td>
                     <td class="decentralization-meter__table-value" :key="`${item.name}-2`">
                         <i class="fas" :class="{'fa-check-circle': !!item.value, 'fa-times-circle': !item.value }" />

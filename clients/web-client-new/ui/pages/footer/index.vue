@@ -56,7 +56,7 @@
             </div>
             <div class="col-12 logos-slider">
                 <c-swiper :options="sliderOptions" class="padding-bottom-30 margin-bottom-30 padding-top-40 margin-top-50 border-top border-bottom ">
-                    <c-swiper-slide v-for="logo in logos">
+                    <c-swiper-slide v-for="logo in logos" :key="logo">
                         <img :src="logo" alt="" class="img-fluid image-white" />
                     </c-swiper-slide>
                 </c-swiper>

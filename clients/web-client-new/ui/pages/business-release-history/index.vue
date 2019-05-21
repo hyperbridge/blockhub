@@ -17,27 +17,31 @@
                 </div>
                 <div class="col-12">
                     <div class="history-list">
-
-                        <c-release-list-item  v-for="(release, index) in sortedList"
-                                              :version="release.version"
-                                              :date="release.date"
-                                              :author="release.author"
-                                              :size="release.size"
-                                              :files="release.files"
-                                              :text="release.text"
-                                              :id="release.id"
-                                              :latest_release="release.latest_release"
-                                              v-if="listType == 'list'"
-                        />
+                        <div v-if="listType == 'list'">
+                            <c-release-list-item  v-for="(release) in sortedList"
+                                :version="release.version"
+                                :date="release.date"
+                                :author="release.author"
+                                :size="release.size"
+                                :files="release.files"
+                                :text="release.text"
+                                :id="release.id"
+                                :latest_release="release.latest_release"
+                                :key="release.id"
+                            />
+                        </div>
                         <div class="history-list__tags-title" v-if="listType == 'tags'" >
                             <i class="fas fa-tag mr-2"></i> Tags
                         </div>
-                        <c-release-tag-item  v-for="release in sortedList"
-                                            :version="release.version"
-                                            :id="release.id"
-                                            :date="release.date"
-                                            :author="release.author"
-                                            v-if="listType == 'tags'" />
+                        <div v-if="listType == 'tags'">
+                            <c-release-tag-item  v-for="release in sortedList"
+                                :version="release.version"
+                                :id="release.id"
+                                :date="release.date"
+                                :author="release.author"
+                                :key="release.id"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

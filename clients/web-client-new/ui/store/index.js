@@ -343,3 +343,5 @@ export const actions = {
             .catch(_ => { console.log('Feathers exception') })
     }
 }
+
+//export const getters = {}

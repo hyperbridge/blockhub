@@ -5,38 +5,38 @@
         </template>
         <table class="language-support__table">
             <thead>
-            <th>Name</th>
-            <th>Interface</th>
-            <th>Audio</th>
-            <th>CC</th>
+                <th>Name</th>
+                <th>Interface</th>
+                <th>Audio</th>
+                <th>CC</th>
             </thead>
             <tbody>
-            <transition-group name="fadeLeft" tag="tr" v-for="(lang, index) in orderLang" :class="['tr-order-' + lang.order]" v-if="lang.show == 'default' || show || index < 5">
-                <template v-for="(value, property) in lang">
-                    <td v-if="property == 'name'" :key="property">{{ value }}</td>
-                    <td v-else :key="property">
-                        <i
-                            v-if="value"
-                            class="fas"
-                            :class="`fa-${options_icons[property]}`"
-                        ></i>
+                <transition-group name="fadeLeft" tag="tr" v-for="(lang, index) in orderLang" :class="['tr-order-' + lang.order]" v-if="lang.show == 'default' || show || index < 5" :key="index">
+                    <template v-for="(value, property) in lang">
+                        <td v-if="property == 'name'" :key="property">{{ value }}</td>
+                        <td v-else :key="property">
+                            <i
+                                v-if="value"
+                                class="fas"
+                                :class="`fa-${options_icons[property]}`"
+                            ></i>
+                        </td>
+                    </template>
+                </transition-group>
+                <tr style="background: transparent" v-if="languages.length > 5">
+                    <td colspan="10" class="text-center">
+                        <transition name="fade" v-if="!show">
+                            <div class="language-support__toggle-btn" @click="toggleLang">
+                                Show {{ languages.length - 5 }} more languages <i class="fas fa-angle-double-down"></i>
+                            </div>
+                        </transition>
+                        <transition name="fade" v-else>
+                            <div class="language-support__toggle-btn" @click="toggleLang">
+                                Hide languages <i class="fas fa-angle-double-up"></i>
+                            </div>
+                        </transition>
                     </td>
-                </template>
-            </transition-group>
-            <tr style="background: transparent" v-if="languages.length > 5">
-                <td colspan="10" class="text-center">
-                    <transition name="fade" v-if="!show">
-                        <div class="language-support__toggle-btn" @click="toggleLang">
-                            Show {{ languages.length - 5 }} more languages <i class="fas fa-angle-double-down"></i>
-                        </div>
-                    </transition>
-                    <transition name="fade" v-else>
-                        <div class="language-support__toggle-btn" @click="toggleLang">
-                            Hide languages <i class="fas fa-angle-double-up"></i>
-                        </div>
-                    </transition>
-                </td>
-            </tr>
+                </tr>
             </tbody>
         </table>
     </c-block>

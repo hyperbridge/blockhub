@@ -58,26 +58,26 @@
 
                 <!-- PAGE ASIDE PANEL -->
                 <div class="page-aside invert left-sidebar" style="max-width: 250px" id="page-aside" v-if="showLeftPanel">
-                    <!--<transition name="slideLeft" v-if="initialized">-->
-                    <!--<div class="position-relative">-->
-                        <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
-                            <slot name="left-sidebar"></slot>
-                            <component v-if="navigationKey" v-bind:is="`c-${navigationKey}-navigation`" ref="scroll_sidebar_content" :title="navigationTitle"></component>
-                        </div>
-                        <c-load-more @click="scrollSidebarDown" :fixed="true" v-if="scrollMoreDirection == 'down'">
+                    <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
+                        <slot name="left-sidebar"></slot>
+                        <component v-if="navigationKey" v-bind:is="`c-${navigationKey}-navigation`" ref="scroll_sidebar_content" :title="navigationTitle"></component>
+                    </div>
+                    <div v-if="scrollMoreDirection == 'down'">
+                        <c-load-more @click="scrollSidebarDown" :fixed="true">
                             <div class="load-more-slot">
                                 More
                                 <i class="fas fa-sort-down"></i>
                             </div>
                         </c-load-more>
-                        <c-load-more @click="scrollSidebarUp" :fixed="true" v-if="scrollMoreDirection == 'up'">
+                    </div>
+                    <div v-if="scrollMoreDirection == 'up'">
+                        <c-load-more @click="scrollSidebarUp" :fixed="true">
                             <div class="load-more-slot">
                                 <i class="fas fa-sort-up"></i>
                                 Up
                             </div>
                         </c-load-more>
-                    <!--</div>-->
-                    <!--</transition>-->
+                    </div>
                 </div>
                 <!-- //END PAGE ASIDE PANEL -->
 
@@ -627,7 +627,6 @@
                 <p class="startup-loader__message"></p>
                 <p class="startup-loader__user">Submitted by <a href="#" target="_blank"></a></p>
                 </div>
-                <!---->
                 <p class="startup-loader__status-message">Launching...</p>
                 <div id="critical-error" class="startup-loader__links">
                 <p>Connection problems? Let us know!</p> <a href="https://twitter.com/hyperbridge"><span
@@ -886,7 +885,7 @@
             'c-cookie-policy': () => import('~/components/cookie-policy').then(m => m.default || m),
             'c-qr-code': () => import('~/components/qr-code').then(m => m.default || m),
             'c-shortcut-sidebar': () => import('~/components/shortcut-sidebar').then(m => m.default || m),
-            'c-load-more': () => import('~/components/buttons/load-more.vue').then(m => m.default || m),
+            'c-load-more': () => import('~/components/buttons/load-more').then(m => m.default || m),
             'c-render-condition': () => import('~/components/render-condition').then(m => m.default || m),
             'c-drawer': () => import('~/components/drawer').then(m => m.default || m),
             'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu_item').then(m => m.default || m),

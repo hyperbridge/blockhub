@@ -23,6 +23,7 @@ export default {
         { src: '~/plugins/directives' },
         { src: '~/plugins/general' },
         { src: '~/plugins/feathers' },
+        { src: '~/plugins/i18n' },
         { src: '~/plugins/autosize', ssr: false },
         { src: '~/plugins/jquery', ssr: false },
         { src: '~/plugins/summernote', ssr: false },

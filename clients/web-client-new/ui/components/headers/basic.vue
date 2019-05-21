@@ -271,8 +271,8 @@ export default {
             return this.$store.state.application.tokenCount !== null ? this.$store.state.application.tokenCount.toLocaleString() : null
         },
         currentLanguage() {
-            if (!process.client) {
-                return 'US'
+            if (process.server) {
+                return { code: 'US', name: 'English (US)' }
             }
 
             // Try to set based on browser language

@@ -24,7 +24,6 @@
         <transition name="slideDown">
             <sidebar-menu width="250px" :menu="menu" :class="{'light-v' : !darkMode}" @collapse="minimized = !minimized" />
         </transition>
-        <!---->
 
         <!-- PAGE CONTENT -->
         <transition name="fade">
@@ -64,7 +63,6 @@
                 </div>
             </div>
         </transition>
-        <!---->
 
         <!-- PAGE RIGHT PANEL -->
         <transition name="slideRight">
@@ -74,7 +72,6 @@
                 </div>
             </div>
         </transition>
-        <!---->
 
         <c-profile-chooser v-if="$store.state.application.profileChooser && $store.state.application.signedIn" :darkMode="false" />
     </div>
