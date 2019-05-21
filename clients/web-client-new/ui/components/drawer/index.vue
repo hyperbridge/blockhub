@@ -5,7 +5,7 @@
                 <template v-if="developerMode">
                     <h5 v-darklaunch="'REALMS'">Your Realms</h5>
 
-                    <c-button status="none" :to="`/realm/${realm.id}`" v-darklaunch="'REALMS'" :key="index" v-for="(realm, index) in realms">
+                    <c-button status="none" :to="`/realm/${realm.id}`" v-darklaunch="'REALMS'" :key="realm.name" v-for="(realm) in realms">
                         <span class="icon icon-letter-circle">{{ realm.name.slice(0) }}</span>
                         <span class="text">{{ realm.name }}</span>
                     </c-button>
@@ -16,7 +16,7 @@
 
                     <h5 v-if="developerMode && products.length">Your Products</h5>
 
-                    <c-button status="none" :to="`/product/${product.id}`" v-for="(product, index) in products" :key="index">
+                    <c-button status="none" :to="`/product/${product.id}`" v-for="(product) in products" :key="product.id">
                         <span class="icon icon-letter-circle">{{ product.name.slice(0, 1) }}</span>
                         <span class="text">{{ product.name }}</span>
                     </c-button>
@@ -139,7 +139,6 @@
                     </div>
                 </div>
 
-
                 <div class="preview-panel col-12 mt-4" v-if="showPreviewPanel">
                     <div>
                         <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktopMode ? 'ON' : 'OFF' }}</c-button>
@@ -179,8 +178,8 @@
                     <div v-if="developerMode" hidden>
                         <h4>Darklaunch Manager</h4>
                         <select id="darklaunch-editor" class="form-control" multiple="multiple">
-                            <option v-for="(flag, index) in $store.state.application.darklaunchFlags"
-                                :key="index"
+                            <option v-for="(flag) in $store.state.application.darklaunchFlags"
+                                :key="flag.code"
                                 :selected="$store.state.application.account.darklaunchFlags.map(flag => flag.enabled ? flag.code : null).includes(flag.code)"
                             >
                                 {{ flag.code }} - {{ flag.description }}

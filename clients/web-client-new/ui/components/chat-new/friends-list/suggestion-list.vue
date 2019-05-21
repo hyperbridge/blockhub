@@ -6,7 +6,7 @@
             <i class="fas mr-2" :class="[ open ? 'fa-angle-down' : 'fa-angle-right' ]"></i>
         </div>
         <div class="chat-friends-suggestion__list" v-if="open">
-            <c-chat-user v-for="item in list" :avatar="item.avatar" :name="item.name" :game="item.game">
+            <c-chat-user v-for="item in list" :avatar="item.avatar" :name="item.name" :game="item.game" :key="item.name">
                 <div>
                     <c-button status="opacity-info" size="xs">
                         Add

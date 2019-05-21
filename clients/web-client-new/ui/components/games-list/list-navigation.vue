@@ -4,7 +4,7 @@
             <li v-for="item in list"
                 :class="{ 'active' : activeId == item.id }"
                 @click="chooseGame(item.id)"
-                :key="`ListItem${item.id}`">
+                :key="item.id">
                 {{ item.name }}
             </li>
         </ul>

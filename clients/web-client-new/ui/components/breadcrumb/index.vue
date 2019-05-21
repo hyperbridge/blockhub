@@ -10,7 +10,7 @@
 export default {
     props: {
         links: {
-            type: Array,
+            type: [Array, Boolean],
             default: [],
             required: false
         }

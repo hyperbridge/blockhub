@@ -8,7 +8,7 @@
             </span>
         </div>
         <div class="friends-list__list" v-if="open">
-            <c-chat-user v-for="item in list" :avatar="item.avatar" :name="item.name" :game="item.game" :status="item.status"/>
+            <c-chat-user v-for="item in list" :avatar="item.avatar" :name="item.name" :game="item.game" :status="item.status" :key="item.name" />
         </div>
     </div>
 </template>

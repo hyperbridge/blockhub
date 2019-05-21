@@ -843,7 +843,7 @@
                 required: false
             },
             breadcrumbLinks: {
-                type: Array,
+                type: [Array, Boolean],
                 default: () => ([])
             },
             bgImage: String,
