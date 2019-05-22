@@ -86,6 +86,10 @@
       "aqua/node"
     ],
     "rules": {
+      "vue/html-indent": [
+        "error",
+        4
+      ],
       "vue/attribute-hyphenation": 0,
       "quote-props": 0,
       "indent": [
