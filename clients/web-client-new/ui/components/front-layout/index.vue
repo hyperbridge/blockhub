@@ -802,7 +802,7 @@
 <script>
     import axios from 'axios'
     import Vue from 'vue'
-    import { debouncer } from '@/mixins'
+    import { debounce } from '@/mixins'
 
     import 'swiper/dist/css/swiper.css'
 
@@ -848,7 +848,7 @@
             bgImage: String,
             customShortcuts: [ Array, Object ]
         },
-        mixins: [debouncer],
+        mixins: [debounce],
         components: {
             'c-header': () => import('~/components/headers/basic').then(m => m.default || m),
             'c-slim-header': () => import('~/components/headers/slim').then(m => m.default || m),

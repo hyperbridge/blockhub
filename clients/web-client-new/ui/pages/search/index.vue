@@ -286,7 +286,7 @@
 
 <script>
     import { mapGetters } from 'vuex'
-    import { debouncer } from '@/mixins'
+    import { debounce } from '@/mixins'
 
     export default {
         components: {
@@ -299,7 +299,7 @@
             'c-list': () => import('~/components/list').then(m => m.default || m),
             'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
         },
-        mixins: [debouncer],
+        mixins: [debounce],
         data() {
             return {
                 tags: [

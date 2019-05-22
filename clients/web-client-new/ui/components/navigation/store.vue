@@ -25,7 +25,7 @@
 
 
         <h3 class="text-uppercase">Search</h3>
-        <div class="filter-blk">
+        <div class="filter-block">
             <c-searcher
                 @input="search"
                 @keyup.enter.native="goToSearchPage()"
@@ -119,7 +119,7 @@
 
 <script>
     import { mapGetters } from 'vuex'
-    import { arrayHandler } from '@/mixins'
+    import { handleArray } from '@/mixins'
 
     export default {
         components: {
@@ -129,7 +129,7 @@
             'c-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m),
             'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
         },
-        mixins: [arrayHandler],
+        mixins: [handleArray],
         data() {
             return {
                 phrase: '',
@@ -188,7 +188,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .filter-blk {
+    .filter-block {
         .form-group{
             margin-bottom: 10px;
         }

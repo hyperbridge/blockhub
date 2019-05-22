@@ -32,7 +32,7 @@
                 </p>
             </div>
             <div class="col-12 col-md-6 col-lg-4" v-if="activeProfile" hidden>
-                <div class="verification-blk text-center">
+                <div class="verification-block text-center">
                     <h3 class="text-white">Verify Your Profile</h3>
                     <div class="status" v-if="activeProfile.isVerified">
                         <i class="fas fa-check"></i>
@@ -402,7 +402,7 @@
         }
     }
 
-    .verification-blk {
+    .verification-block {
         width: 260px;
         color: #C6C6D6;
         display: flex;

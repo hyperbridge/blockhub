@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <div class="user-data__unknown-blk" v-darklaunch="'BADGES'">
+        <div class="user-data__unknown-block" v-darklaunch="'BADGES'">
             <button v-for="index in 4" :key="index" class="btn">
                 <i class="fas fa-plus"></i>
             </button>
@@ -208,7 +208,7 @@
                     background: #43C981;
                 }
             }
-            .user-data__unknown-blk {
+            .user-data__unknown-block {
                 a {
                     border-color: #404354;
                     color: #404354;
@@ -309,7 +309,7 @@
         align-items: center;
         justify-content: center;
     }
-    .user-data__unknown-blk {
+    .user-data__unknown-block {
         display: flex;
         align-items: center;
         margin: 20px 0;

@@ -323,7 +323,7 @@
                     idea.meta = {}
                 }
 
-                if (idea.meta.images && idea.meta.images.header) {
+                if (process.client && idea.meta.images && idea.meta.images.header) {
                     window.document.getElementById('header-bg').style['background-image'] = 'url(' + idea.meta.images.header + ')'
                 }
 
@@ -383,7 +383,9 @@
             this.updateSection()
         },
         beforeDestroy() {
-            window.document.getElementById('header-bg').style['background-image'] = 'url(/img/backgrounds/1.jpg)'
+            if (process.client) {
+                window.document.getElementById('header-bg').style['background-image'] = 'url(/img/backgrounds/1.jpg)'
+            }
         },
         updated() {
             $('#summernote').summernote({

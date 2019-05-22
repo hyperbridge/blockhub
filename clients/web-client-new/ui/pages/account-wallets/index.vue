@@ -178,7 +178,7 @@
                                 </div>
 
                                 <!--Search block(currency list) on-->
-                                <div class="wallet-item__search-blk" v-if="search_blk">
+                                <div class="wallet-item__search-block" v-if="search_blk">
                                     <div class="input-group input-group-sm">
                                         <input type="text" class="form-control" placeholder="Search" aria-label="Search">
                                         <div class="input-group-append">
@@ -621,7 +621,7 @@
             font-size: 14px;
         }
     }
-    .wallet-item__search-blk{
+    .wallet-item__search-block{
         border-radius: 5px;
         background: #3d3f5a;
         padding: 10px;

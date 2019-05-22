@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-lg-8">
-                    <div class="filter-blk d-flex align-items-center">
+                    <div class="filter-block d-flex align-items-center">
                         <c-dropdown-menu
                             class="margin-right-10 dark-bg"
                             title="FILTER BY CATEGORY"

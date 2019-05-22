@@ -59,11 +59,11 @@
 </template>
 
 <script>
-    import {windowSize} from '@/mixins'
+    import {getWindowSize} from '@/mixins'
     import GridItem from '@/components/shortcut-grid-item'
 
     export default {
-        mixins: [windowSize],
+        mixins: [getWindowSize],
         components: {
             GridItem,
             'c-icon': () => import('~/components/shortcut-icon').then(m => m.default || m)

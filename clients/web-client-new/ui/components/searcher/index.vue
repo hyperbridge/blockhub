@@ -31,7 +31,7 @@
 </template>
 
 <script>
-    import { debouncer } from '@/mixins'
+    import { debounce } from '@/mixins'
 
     export default {
         name: 'c-searcher',
@@ -39,7 +39,7 @@
             'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
         },
         inheritAttrs: false,
-        mixins: [debouncer],
+        mixins: [debounce],
         props: {
             size: {
                 type: String,

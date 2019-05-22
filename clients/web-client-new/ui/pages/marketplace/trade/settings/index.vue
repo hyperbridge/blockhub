@@ -41,11 +41,11 @@
 </template>
 
 <script>
-    import { debouncer } from '@/mixins'
+    import { debounce } from '@/mixins'
 
     export default {
         data: () => ({ val: 'm', timeout: null, add: 0 }),
-        mixins: [debouncer],
+        mixins: [debounce],
         components: {
             'c-test': () => import('~/components/test').then(m => m.default || m),
         },

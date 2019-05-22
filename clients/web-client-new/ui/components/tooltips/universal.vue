@@ -20,11 +20,11 @@
 </template>
 
 <script>
-    import { debouncer } from '@/mixins';
+    import { debounce } from '@/mixins';
 
     export default {
         name: 'tooltip-universal',
-        mixins: [debouncer],
+        mixins: [debounce],
         props: {
             position: {
                 type: String,
