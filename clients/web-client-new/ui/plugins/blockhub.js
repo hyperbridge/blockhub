@@ -145,8 +145,8 @@ export default ({ app, store }) => {
         // TODO: is this a race condition?
         // TODO: PeerService.init()
 
-        ReputationEngine.init(store, router)
-        Bridge.init(store, router)
+        ReputationEngine.init(store) //, router)
+        Bridge.init(store) //, router)
 
         store.dispatch('database/init')
         store.dispatch('application/init')
@@ -183,8 +183,8 @@ export default ({ app, store }) => {
             console.log(err)
         }
 
-        initSubscribers()
-        monitorSimulatorMode()
+        // initSubscribers()
+        // monitorSimulatorMode()
         // monitorPathState()
 
         console.log('BlockHub initialized.')
@@ -194,9 +194,9 @@ export default ({ app, store }) => {
                 store.dispatch('application/checkInternetConnection')
             }
         }, 4000)
-
-        resolve()
     })
+
+    DB.init()
 
     app.blockhub.api = {
         service: serviceKey => {
@@ -232,5 +232,6 @@ export default ({ app, store }) => {
     }
 
     Vue.use(plugin)
-    if (window.client) window.BlockHub = app.blockhub
+
+    if (process.client) window.BlockHub = app.blockhub
 }

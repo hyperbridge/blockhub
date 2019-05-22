@@ -2,7 +2,7 @@
     <c-layout>
         <div class="row">
             <div class="col-12">
-                <div class="search-blk">
+                <div class="search-block">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="tab1-nav" data-toggle="tab" href="#tab1" role="tab"

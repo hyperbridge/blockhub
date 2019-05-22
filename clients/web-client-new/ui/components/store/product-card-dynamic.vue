@@ -35,7 +35,7 @@
 </template>
 
 <script>
-    import { debouncer } from '@/mixins';
+    import { debounce } from '@/mixins';
 
     export default {
         name: 'product-card-dynamic',
@@ -48,7 +48,7 @@
         components: {
             'c-tags': () => import('~/components/tags').then(m => m.default || m)
         },
-        mixins: [debouncer],
+        mixins: [debounce],
         data() {
             return {
                 displayPreview: false,

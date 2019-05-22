@@ -37,7 +37,7 @@ export default {
         parentImage: String,
         parentName: String,
         parentDeveloperName: String,
-        parentDeveloperId: String,
+        parentDeveloperId: Number,
         id: Number,
         customClass: {
             type: String,

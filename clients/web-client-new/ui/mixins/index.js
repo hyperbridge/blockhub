@@ -1,4 +1,4 @@
-export const debouncer = {
+export const debounce = {
     data() {
         return {
             timeout: 0
@@ -12,7 +12,7 @@ export const debouncer = {
     }
 }
 
-export const arrayHandler = {
+export const handleArray = {
     methods: {
         handleArray(val, arrayName) {
             const itemIndex = this[arrayName].indexOf(val)
@@ -23,7 +23,7 @@ export const arrayHandler = {
     }
 }
 
-export const windowSize = {
+export const getWindowSize = {
     data() {
         return {
             windowHeight: 0,

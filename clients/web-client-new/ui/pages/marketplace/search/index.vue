@@ -137,7 +137,7 @@
 </template>
 
 <script>
-    import { debouncer } from '@/mixins'
+    import { debounce } from '@/mixins'
     import { mapElement } from '@/util/store-helpers'
 
     export default {
@@ -151,7 +151,7 @@
             'c-modal': () => import('~/components/modal').then(m => m.default || m),
             'c-messages-bar': () => import('~/components/message-bar/wrapper').then(m => m.default || m),
         },
-        mixins: [debouncer],
+        mixins: [debounce],
         data() {
             return {
                 phrase: '',

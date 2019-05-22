@@ -94,11 +94,11 @@
 
 
 <script>
-    import { arrayHandler } from '@/mixins';
+    import { handleArray } from '@/mixins';
 
     export default {
         props: ['id', 'trxa', 'trx'],
-        mixins: [arrayHandler],
+        mixins: [handleArray],
         components: {
             'c-block': () => import('~/components/block').then(m => m.default || m),
             'c-block-menu': () => import('~/components/block/menu').then(m => m.default || m),

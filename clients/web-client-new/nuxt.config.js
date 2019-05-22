@@ -28,7 +28,7 @@ export default {
         { src: '~/plugins/jquery', ssr: false },
         { src: '~/plugins/summernote', ssr: false },
         { src: '~/plugins/moment', ssr: false },
-        { src: '~/plugins/blockhub', ssr: false },
+        { src: '~/plugins/blockhub' },
     ],
     modules: [
         // Doc: https://axios.nuxtjs.org/usage

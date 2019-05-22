@@ -15,7 +15,7 @@
                     />
                 </template>
 
-                <div class="filter-blk d-flex justify-content-between align-items-center margin-bottom-20">
+                <div class="filter-block d-flex justify-content-between align-items-center margin-bottom-20">
                     <div class="d-inline-flex align-items-center">
                         <c-dropdown-menu
                             class="margin-right-10"
@@ -298,7 +298,7 @@
         }
     }
     @media (max-width: 768px) {
-        .filter-blk{
+        .filter-block{
             display: none!important;
         }
     }
