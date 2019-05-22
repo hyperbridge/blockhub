@@ -11,8 +11,8 @@ export default ({ app, store }) => {
     app.blockhub = {}
 
     app.blockhub.getMode = () => {
-        const hostname = window.location.hostname
-        let hash = document.location.hash.replace('#/', '')
+        const { hostname } = window.location
+        const hash = document.location.hash.replace('#/', '')
 
         if (hash.slice(0, 5) === 'mode=') {
             return hash.replace('mode=', '')
@@ -26,9 +26,8 @@ export default ({ app, store }) => {
             return 'beta'
         } else if (hostname === 'preview.blockhub.gg' || hostname === 'preview.gamedelta.net') {
             return 'preview'
-        } else {
-            return 'local'
         }
+        return 'local'
     }
 
     app.blockhub.bridge = Bridge
@@ -37,7 +36,7 @@ export default ({ app, store }) => {
     app.blockhub.db = DB
     app.blockhub.store = store
     app.blockhub.seed = seed
-    //app.blockhub.router = router // doesnt work?
+    // app.blockhub.router = router // doesnt work?
 
     app.blockhub.importStarterData = () => {
         console.log('[BlockHub] Import starter data')
@@ -118,7 +117,7 @@ export default ({ app, store }) => {
 
     const updateContainer = (container, item) => {
         if (Array.isArray(item)) {
-            for (let i in item) {
+            for (let i in item) { // eslint-disable-line guard-for-in
                 item[i]['$loki'] = undefined
             }
         } else {
@@ -144,7 +143,7 @@ export default ({ app, store }) => {
     DB.setInitCallback(async () => {
         console.log('DB init callback')
         // TODO: is this a race condition?
-        //TODO: PeerService.init()
+        // TODO: PeerService.init()
 
         ReputationEngine.init(store, router)
         Bridge.init(store, router)
@@ -155,12 +154,11 @@ export default ({ app, store }) => {
         store.dispatch('funding/init')
 
         app.blockhub.environmentMode = store.state.application.environmentMode
+        console.log(`Environment mode: ${store.state.application.environmentMode}`)
 
-        console.log('Environment mode: ' + store.state.application.environmentMode)
-
-        if (store.state.application.environmentMode === 'preview'
-            || store.state.application.environmentMode === 'beta'
-            || store.state.application.environmentMode === 'production') {
+        if (store.state.application.environmentMode === 'preview' ||
+            store.state.application.environmentMode === 'beta' ||
+            store.state.application.environmentMode === 'production') {
             setTimeout(() => {
                 app.blockhub.importStarterData()
             }, 1000)
@@ -174,7 +172,7 @@ export default ({ app, store }) => {
             store.state.application.darklaunchOverride = true
 
             // ENABLE SIMULATOR MODE
-            //store.state.application.simulatorMode = true
+            // store.state.application.simulatorMode = true
         }
 
         try { // TODO: we dont need this do we?
@@ -187,7 +185,7 @@ export default ({ app, store }) => {
 
         initSubscribers()
         monitorSimulatorMode()
-        //monitorPathState()
+        // monitorPathState()
 
         console.log('BlockHub initialized.')
 
@@ -201,22 +199,21 @@ export default ({ app, store }) => {
     })
 
     app.blockhub.api = {
-        service: (serviceKey) => {
-            console.log('[BlockHub] Service: ' + serviceKey)
+        service: serviceKey => {
+            console.log(`[BlockHub] Service: ${serviceKey}`)
 
             if (app.blockhub.bridge.isConnected()) { // && app.blockhub.bridge.canFulfillRequest(endpoint
                 return {
-                    find: function (params) {
+                    find: params => {
                         app.blockhub.bridge.sendCommand('service', {
-                            service,
+                            serviceKey,
                             type: 'find',
                             params
                         })
                     }
                 }
-            } else {
-                return app.feathers.service(serviceKey)
             }
+            return app.feathers.service(serviceKey)
         }
     }
 
@@ -235,7 +232,5 @@ export default ({ app, store }) => {
     }
 
     Vue.use(plugin)
-
-    if (window.client)
-        window.BlockHub = app.blockhub
+    if (window.client) window.BlockHub = app.blockhub
 }
