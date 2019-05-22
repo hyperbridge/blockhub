@@ -28,6 +28,9 @@ ChaosMonkey.config.ENABLED = false
     - Best used to mode fault-tolerance, ie. does this thing behave appropriately when problems occur
     - Permanent chaos monkey
 */
+
+/*
+TODO: Implement this in the future
 const CheckDevConfig = () => {
     if (!process.client) {
         return ''
@@ -51,7 +54,7 @@ const CheckDevConfig = () => {
 }
 
 CheckDevConfig()
-
+*/
 let service = null
 let auth = null
 
@@ -132,7 +135,7 @@ if (decentralizedMode) {
     service = module => { // eslint-disable-line arrow-body-style
         return {
             'profiles': {
-                create() {
+                create(newProfile) {
                     Bridge.sendCommand('createProfileRequest', newProfile).then(profile => {
                         newProfile.id = profile.id
                         newProfile.address = profile.address
@@ -144,7 +147,7 @@ if (decentralizedMode) {
                         this.saveProfiles()
                     })
                 },
-                save() {
+                save(profile) {
                     Bridge.sendCommand('saveProfileRequest', profile).then(profile => {
                         this.saveProfiles()
                     })
@@ -172,7 +175,7 @@ if (decentralizedMode) {
     }
 
     auth = () => {
-        console.log('TODO')
+        console.log('[auth] TODO')
     }
 } else if (process.client) {
     const feathers = feathersVuex(feathersClient(), { idField: 'id', enableEvents: false })
