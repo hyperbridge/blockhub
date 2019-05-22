@@ -221,69 +221,6 @@ if (decentralizedMode) {
 
 export const actions = {
     nuxtServerInit({ commit, dispatch, state }, { req, store }) {
-        const init = new Promise((resolve, reject) => {
-            DB.setInitCallback(() => {
-                console.log('DB init callback')
-                // TODO: is this a race condition?
-                // TODO: PeerService.init()
-
-                ReputationEngine.init(store)
-                Bridge.init(store)
-
-                store.dispatch('database/init')
-                store.dispatch('application/init')
-                store.dispatch('marketplace/init')
-                store.dispatch('funding/init')
-
-                console.log(`Environment mode: ${store.state.application.environmentMode}`)
-
-                if (store.state.application.environmentMode === 'preview' ||
-                    store.state.application.environmentMode === 'beta' ||
-                    store.state.application.environmentMode === 'production') {
-                    setTimeout(() => {
-                        window.BlockHub.importStarterData()
-                    }, 1000)
-                }
-
-                if (store.state.application.environmentMode === 'preview') {
-                    store.state.application.desktopMode = true
-                    store.state.application.signedIn = true
-
-                    // ENABLE ALL DARKLAUNCHES
-                    store.state.application.darklaunchOverride = true
-
-                    // ENABLE SIMULATOR MODE
-                    // store.state.application.simulatorMode = true
-                }
-
-                try { // TODO: we dont need this do we?
-                    store.dispatch('application/initEthereum')
-                    store.dispatch('funding/initEthereum')
-                    store.dispatch('marketplace/initEthereum')
-                } catch (err) {
-                    console.log(err)
-                }
-
-                initSubscribers(store)
-                // monitorSimulatorMode()
-                // monitorPathState()
-
-                console.log('BlockHub initialized.')
-
-                setInterval(() => {
-                    if (store.state.application.connection.auto) {
-                        store.dispatch('application/checkInternetConnection')
-                    }
-                }, 4000)
-
-                resolve()
-            })
-
-            DB.init()
-        })
-
-        init.then(() => {})
-
         const origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg' // eslint-disable-line no-negated-condition
 
         const storage = {
