@@ -195,160 +195,160 @@
 
 
 <script>
-    import Vue from 'vue'
-    import * as DB from '@/db'
+import Vue from 'vue'
+import * as DB from '@/db'
 
-    export default {
-        props: [],
-        components: {
-            'c-render-condition': () => import('~/components/render-condition').then(m => m.default || m),
-            'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu_item').then(m => m.default || m),
-            'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m)
-        },
-        updated() {
-        },
-        data() {
-            return {
-                showPreviewPanel: true //['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode)
-            }
-        },
-        computed: {
-            developerMode() { return this.$store.state.application.developerMode },
-            desktopMode() { return this.$store.state.application.desktopMode },
-            signedIn() { return this.$store.state.application.signedIn },
-            simulatorMode() { return this.$store.state.application.simulatorMode },
-            operatingSystem() { return this.$store.state.application.operatingSystem },
-            environmentMode() { return this.$store.state.application.environmentMode },
-            realms() {
-                return this.$store.getters['realms/list']
-            },
-            products() {
-                return this.$store.getters['products/list']
-            },
-        },
-        methods: {
-            ensureDesktopWelcome(to) {
-                // if (this.$store.state.application.desktopMode
-                // && !this.$store.state.application.signedIn
-                // && (!to ? true : (
-                //     to.path !== '/account/signup'
-                //     && to.path !== '/account/signin'
-                //     && to.path !== '/welcome'
-                //     && to.path !== '/unlock'
-                // ))) {
-                //     this.$router.push({ path: '/welcome' })
-                // }
-            },
-            toggleDesktopMode() {
-                this.$store.state.application.desktopMode = !this.$store.state.application.desktopMode
-            },
-            toggleSignedIn() {
-                this.$store.state.application.signedIn = !this.$store.state.application.signedIn
-            },
-            toggleDeveloperMode() {
-                this.$store.state.application.developerMode = !this.$store.state.application.developerMode
-            },
-            toggleDarklaunchOverride() {
-                this.$store.state.application.darklaunchOverride = !this.$store.state.application.darklaunchOverride
-            },
-            toggleSimulator() {
-                this.$store.commit('application/setSimulatorMode', !this.$store.state.application.simulatorMode)
-            },
-            rotateEditorMode() {
-                // if (this.$store.state.application.editorMode === 'editing') {
-                //     this.$store.state.application.editorMode = 'viewing'
-                // } else if (this.$store.state.application.editorMode === 'viewing') {
-                //     this.$store.state.application.editorMode = 'publishing'
-                // } else {
-                //     this.$store.state.application.editorMode = 'editing'
-                // }
-            },
-            rotateOperatingSystem() {
-                if (this.$store.state.application.operatingSystem === 'mac') {
-                    this.$store.state.application.operatingSystem = 'windows'
-                } else if (this.$store.state.application.operatingSystem === 'windows') {
-                    this.$store.state.application.operatingSystem = 'linux'
-                } else {
-                    this.$store.state.application.operatingSystem = 'mac'
-                }
-            },
-            rotateEnvironmentMode() {
-                if (this.$store.state.application.environmentMode === 'production') {
-                    this.$store.commit('application/updateEnvironmentMode', 'staging')
-                } else if (this.$store.state.application.environmentMode === 'staging') {
-                    this.$store.commit('application/updateEnvironmentMode', 'beta')
-                } else if (this.$store.state.application.environmentMode === 'beta') {
-                    this.$store.commit('application/updateEnvironmentMode', 'preview')
-                } else if (this.$store.state.application.environmentMode === 'preview') {
-                    this.$store.commit('application/updateEnvironmentMode', 'local')
-                } else {
-                    this.$store.commit('application/updateEnvironmentMode', 'production')
-                }
-            },
-            importSeedData() {
-                this.$blockhub.importSeedData()
-            },
-            resetSeedData() {
-                this.$blockhub.resetSeedData()
-            },
-            saveSettings() {
-                this.$blockhub.saveDatabase()
-
-                this.$blockhub.Notification.info('', 'Settings saved', {
-                    timeout: 2000,
-                    pauseOnHover: true
-                })
-            },
-            resetSettings() {
-                window.resetSettings()
-            },
-            sendDesktopMessage() {
-                if (!window.isElectron) {
-                    return alert('Not on desktop')
-                }
-
-                this.$desktop.sendCommand('ping', this.$refs.desktopMessage.value)
-                this.$desktop.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
-            }
-        },
-        mounted() {
-            this.$store.dispatch('realms/find', {
-                query: {
-                    $sort: {
-                        createdAt: -1
-                    },
-                    $limit: 25
-                }
-            })
-
-            this.$store.dispatch('products/find', {
-                query: {
-                    $sort: {
-                        createdAt: -1
-                    },
-                    $limit: 25
-                }
-            })
-        },
-        created() {
-            if (process.client) {
-                $('body').off('click').on('click', "[data-action='fixedpanel-toggle']", (e) => {
-                    let btn = $('#sidebar-toggle-btn span')
-
-                    if ($('body').hasClass('show-sidebar')) {
-                        $('body').removeClass('show-sidebar')
-                        $(btn).removeClass('fa-times').addClass('fa-cog')
-                        $('.snotify').show()
-                    }
-                    else {
-                        $('body').addClass('show-sidebar')
-                        $(btn).removeClass('fa-cog').addClass('fa-times')
-                        $('.snotify').hide()
-                    }
-                })
-            }
-        },
-        watch: {
+export default {
+    props: [],
+    components: {
+        'c-render-condition': () => import('~/components/render-condition').then(m => m.default || m),
+        'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu_item').then(m => m.default || m),
+        'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m)
+    },
+    updated() {
+    },
+    data() {
+        return {
+            showPreviewPanel: true //['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode)
         }
+    },
+    computed: {
+        developerMode() { return this.$store.state.application.developerMode },
+        desktopMode() { return this.$store.state.application.desktopMode },
+        signedIn() { return this.$store.state.application.signedIn },
+        simulatorMode() { return this.$store.state.application.simulatorMode },
+        operatingSystem() { return this.$store.state.application.operatingSystem },
+        environmentMode() { return this.$store.state.application.environmentMode },
+        realms() {
+            return this.$store.getters['realms/list']
+        },
+        products() {
+            return this.$store.getters['products/list']
+        },
+    },
+    methods: {
+        ensureDesktopWelcome(to) {
+            // if (this.$store.state.application.desktopMode
+            // && !this.$store.state.application.signedIn
+            // && (!to ? true : (
+            //     to.path !== '/account/signup'
+            //     && to.path !== '/account/signin'
+            //     && to.path !== '/welcome'
+            //     && to.path !== '/unlock'
+            // ))) {
+            //     this.$router.push({ path: '/welcome' })
+            // }
+        },
+        toggleDesktopMode() {
+            this.$store.state.application.desktopMode = !this.$store.state.application.desktopMode
+        },
+        toggleSignedIn() {
+            this.$store.state.application.signedIn = !this.$store.state.application.signedIn
+        },
+        toggleDeveloperMode() {
+            this.$store.state.application.developerMode = !this.$store.state.application.developerMode
+        },
+        toggleDarklaunchOverride() {
+            this.$store.state.application.darklaunchOverride = !this.$store.state.application.darklaunchOverride
+        },
+        toggleSimulator() {
+            this.$store.commit('application/setSimulatorMode', !this.$store.state.application.simulatorMode)
+        },
+        rotateEditorMode() {
+            // if (this.$store.state.application.editorMode === 'editing') {
+            //     this.$store.state.application.editorMode = 'viewing'
+            // } else if (this.$store.state.application.editorMode === 'viewing') {
+            //     this.$store.state.application.editorMode = 'publishing'
+            // } else {
+            //     this.$store.state.application.editorMode = 'editing'
+            // }
+        },
+        rotateOperatingSystem() {
+            if (this.$store.state.application.operatingSystem === 'mac') {
+                this.$store.state.application.operatingSystem = 'windows'
+            } else if (this.$store.state.application.operatingSystem === 'windows') {
+                this.$store.state.application.operatingSystem = 'linux'
+            } else {
+                this.$store.state.application.operatingSystem = 'mac'
+            }
+        },
+        rotateEnvironmentMode() {
+            if (this.$store.state.application.environmentMode === 'production') {
+                this.$store.commit('application/updateEnvironmentMode', 'staging')
+            } else if (this.$store.state.application.environmentMode === 'staging') {
+                this.$store.commit('application/updateEnvironmentMode', 'beta')
+            } else if (this.$store.state.application.environmentMode === 'beta') {
+                this.$store.commit('application/updateEnvironmentMode', 'preview')
+            } else if (this.$store.state.application.environmentMode === 'preview') {
+                this.$store.commit('application/updateEnvironmentMode', 'local')
+            } else {
+                this.$store.commit('application/updateEnvironmentMode', 'production')
+            }
+        },
+        importSeedData() {
+            this.$blockhub.importSeedData()
+        },
+        resetSeedData() {
+            this.$blockhub.resetSeedData()
+        },
+        saveSettings() {
+            this.$blockhub.saveDatabase()
+
+            this.$blockhub.Notification.info('', 'Settings saved', {
+                timeout: 2000,
+                pauseOnHover: true
+            })
+        },
+        resetSettings() {
+            window.resetSettings()
+        },
+        sendDesktopMessage() {
+            if (!window.isElectron) {
+                return alert('Not on desktop')
+            }
+
+            this.$desktop.sendCommand('ping', this.$refs.desktopMessage.value)
+            this.$desktop.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
+        }
+    },
+    mounted() {
+        this.$store.dispatch('realms/find', {
+            query: {
+                $sort: {
+                    createdAt: -1
+                },
+                $limit: 25
+            }
+        })
+
+        this.$store.dispatch('products/find', {
+            query: {
+                $sort: {
+                    createdAt: -1
+                },
+                $limit: 25
+            }
+        })
+    },
+    created() {
+        if (process.client) {
+            $('body').off('click').on('click', "[data-action='fixedpanel-toggle']", (e) => {
+                let btn = $('#sidebar-toggle-btn span')
+
+                if ($('body').hasClass('show-sidebar')) {
+                    $('body').removeClass('show-sidebar')
+                    $(btn).removeClass('fa-times').addClass('fa-cog')
+                    $('.snotify').show()
+                }
+                else {
+                    $('body').addClass('show-sidebar')
+                    $(btn).removeClass('fa-cog').addClass('fa-times')
+                    $('.snotify').hide()
+                }
+            })
+        }
+    },
+    watch: {
     }
+}
 </script>

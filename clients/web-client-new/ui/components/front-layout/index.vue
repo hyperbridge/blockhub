@@ -59,21 +59,25 @@
                 <!-- PAGE ASIDE PANEL -->
                 <div class="page-aside invert left-sidebar" style="max-width: 250px" id="page-aside" v-if="showLeftPanel">
                     <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
-                        <slot name="left-sidebar"></slot>
-                        <component v-if="navigationKey" v-bind:is="`c-${navigationKey}-navigation`" ref="scroll_sidebar_content" :title="navigationTitle"></component>
+                        <slot name="left-sidebar" />
+                        <component
+                            :is="`c-${navigationKey}-navigation`"
+                            v-if="navigationKey"
+                            ref="scroll_sidebar_content"
+                            :title="navigationTitle" />
                     </div>
                     <div v-if="scrollMoreDirection == 'down'">
                         <c-load-more @click="scrollSidebarDown" :fixed="true">
                             <div class="load-more-slot">
                                 More
-                                <i class="fas fa-sort-down"></i>
+                                <i class="fas fa-sort-down" />
                             </div>
                         </c-load-more>
                     </div>
                     <div v-if="scrollMoreDirection == 'up'">
                         <c-load-more @click="scrollSidebarUp" :fixed="true">
                             <div class="load-more-slot">
-                                <i class="fas fa-sort-up"></i>
+                                <i class="fas fa-sort-up" />
                                 Up
                             </div>
                         </c-load-more>
@@ -91,7 +95,7 @@
 
                             <c-drawer />
                         </c-render-condition>
-                        <vue-snotify></vue-snotify>
+                        <vue-snotify />
                     </div>
                 </div>
 
@@ -119,12 +123,11 @@
 
                 <c-basic-popup
                     :activated="$store.state.application.activeModal === 'connect-network'"
-                    @close="$store.state.application.activeModal = null"
                     style="text-align: left;"
-                >
+                    @close="$store.state.application.activeModal = null">
                     <div class="h4" slot="header">Connect</div>
                     <template slot="body">
-                        <c-social-connect 
+                        <c-social-connect
                             :class="index + 1 == socials.length ? 'margin-bottom-0' : 'margin-bottom-20'"
                             :key="index"
                             :icon="item.icon"
@@ -142,17 +145,16 @@
 
                 <c-basic-popup
                     :activated="$store.state.application.editorMode === 'editing' && !$store.state.application.settings.client['hideEditorWelcomeModal']"
-                    @close="$store.commit('application/updateClientSettings', { key: 'hideEditorWelcomeModal', value: true })"
                     style="text-align: left;"
-                >
+                    @close="$store.commit('application/updateClientSettings', { key: 'hideEditorWelcomeModal', value: true })">
                     <div class="h4" slot="header">Welcome to the editor</div>
                     <template slot="body">
                         <p v-if="!voteCasted">
                             The goal of BlockHub is everything is editable and curatable through community vote. Like a super-charged Wikipedia-infused entertainment platform. But we aren't quite there yet! So for now, you can cast votes old school.
                         </p>
                         <p v-if="!voteCasted">
-                            Want this to be the next section we make editable? 
-                            <br />
+                            Want this to be the next section we make editable?
+                            <br>
                             <c-button class="underline" @click="vote">Cast your vote by clicking here!</c-button>
                         </p>
                         <p v-if="voteCasted">
@@ -167,9 +169,8 @@
                 <!--create-shortcut popup-->
                 <c-basic-popup
                     :activated="$store.state.application.activeModal === 'create-shortcut'"
-                    @close="$store.state.application.activeModal = null"
                     style="text-align: left;"
-                >
+                    @close="$store.state.application.activeModal = null">
                     <div class="h4" slot="header">Oh, another creation?</div>
                     <template slot="body">
                         <div class="row">
@@ -177,8 +178,7 @@
                                 <c-button status="none" class="col-md-6 create-shortcut__block" to="/idea/new">
                                     <c-icon
                                         name="plus-circle"
-                                        style="padding: 30px;font-size: 50px;"
-                                    />
+                                        style="padding: 30px;font-size: 50px;" />
                                     <div style="display: block">Create Idea</div>
                                 </c-button>
                             </div>
@@ -186,8 +186,7 @@
                                 <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/project/new">
                                     <c-icon
                                         name="plus-circle"
-                                        style="padding: 30px;font-size: 50px;"
-                                    />
+                                        style="padding: 30px;font-size: 50px;" />
                                     <div style="display: block">Create Crowdfund</div>
                                 </c-button>
                             </div>
@@ -195,8 +194,7 @@
                                 <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/product/new">
                                     <c-icon
                                         name="plus-circle"
-                                        style="padding: 30px;font-size: 50px;"
-                                    />
+                                        style="padding: 30px;font-size: 50px;" />
                                     <div style="display: block">Create Game</div>
                                 </c-button>
                             </div>
@@ -204,57 +202,51 @@
                                 <c-button status="none" class="col-md-6 create-shortcut__block" to="/business/realm/new">
                                     <c-icon
                                         name="plus-circle"
-                                        style="padding: 30px;font-size: 50px;"
-                                    />
+                                        style="padding: 30px;font-size: 50px;" />
                                     <div style="display: block">Create Realm</div>
                                 </c-button>
                             </div>
                         </div>
                     </template>
-                    <p slot="footer">
-                    </p>
+                    <p slot="footer" />
                 </c-basic-popup>
 
                 <!--coming-soon popup-->
                 <c-basic-popup
                     :activated="$store.state.application.activeModal === 'coming-soon'"
-                    @close="$store.state.application.activeModal = null"
                     style="text-align: left;"
-                >
+                    @close="$store.state.application.activeModal = null">
                     <div class="h4" slot="header">Coming Soon!</div>
                     <template slot="body">
                         <div class="row">
                             <p class="col-6">
-                                Stealth mode engage! <br />
-                                &nbsp; &nbsp; &lt;explosion&gt; &nbsp; <br />
-                                &nbsp; &nbsp; &nbsp; &nbsp; Dang, didn't work.<br /><br />
+                                Stealth mode engage! <br>
+                                &nbsp; &nbsp; &lt;explosion&gt; &nbsp; <br>
+                                &nbsp; &nbsp; &nbsp; &nbsp; Dang, didn't work.<br><br>
                                 You caught us, we're still working on this feature, but we'll rush as finish it like a warrior in battle!
-                                <br /><br />
+                                <br><br>
                             </p>
-                            <div class="col-6" style=""><img src="/img/hh/Asset 3.svg" /></div>
+                            <div class="col-6"><img src="/img/hh/Asset 3.svg"></div>
                             <p class="col-12 margin-top-20">We believe in transparency and community-driven development, so why don't you check out the <a href="https://preview.blockhub.gg">Preview Build</a> and let us know what you think!<p>
                             <p class="col-12 margin-bottom-20">To make things simple, hold ALT and click anywhere to send us feedback/bug reports!</p>
                         </div>
                     </template>
-                    <p slot="footer">
-                    </p>
+                    <p slot="footer" />
                 </c-basic-popup>
 
                 <!--token-contract popup-->
                 <c-basic-popup
                     :activated="$store.state.application.activeModal === 'token-contract'"
-                    @close="$store.state.application.activeModal = null"
                     style="text-align: left;"
-                >
+                    @close="$store.state.application.activeModal = null">
                     <div class="h4" slot="header">Token Purchase Contract Address</div>
                     <template slot="body">
                         <div class="input-group mb-4">
-                            <input type="text" class="form-control" ref="input" value="0xebf0027ef3b4b7a742a148cddb0f2b14e5d8f0e9" />
+                            <input type="text" class="form-control" ref="input" value="0xebf0027ef3b4b7a742a148cddb0f2b14e5d8f0e9">
                         </div>
                         <p>You should confirm the contract address <a href="https://t.me/hyperbridgechat" target="_blank">in our Telegram</a>.</p>
                     </template>
-                    <p slot="footer">
-                    </p>
+                    <p slot="footer" />
                 </c-basic-popup>
 
                 <!--report popup-->
@@ -343,7 +335,7 @@
 
                             My familiarity with gaming platforms is...
 
-                            My familiarity with blockchain is... 
+                            My familiarity with blockchain is...
                         </p>
                     </template>
                     <p slot="footer">
@@ -597,7 +589,7 @@
                 <c-clock v-if="desktopMode" />
 
                 <div class="status-bar" @click="$store.commit('application/activateModal', 'connection-status')">
-                    <c-status-dot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" /> 
+                    <c-status-dot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" />
                     OK
                 </div>
 
@@ -616,7 +608,7 @@
             <c-draggable-video :active="video.showPopup" :videoUrl="video.url" :setTime="video.currentTime" @close=" video.showPopup = false" v-if="video" />
             <!--end draggable video block -->
 
-            
+
             <!-- <search /> Discover the next best thing... -->
         </div>
         <!-- //END PAGE WRAPPER -->
@@ -633,8 +625,8 @@
                     class="fab fa-twitter"></span> Tweet Us</a> <a href="https://hyperbridge.org/status"><span
                     class="fas fa-globe-americas"></span> Server Status</a>
                 <br /><br />
-                <button onClick="window.goHome()">Try Home</button> 
-                <button onClick="window.resetSettings()">Reset Settings</button> 
+                <button onClick="window.goHome()">Try Home</button>
+                <button onClick="window.resetSettings()">Reset Settings</button>
                 <button onClick="window.location = 'https://hyperbridge.org/#contact'">Contact Us</button>
                 </div>
             </div>
@@ -958,7 +950,7 @@
                     onDrop(event) {},
                     onDragstart(event) {
                         let $target = $(event.nativeEvent.target)
-                        
+
                         if ($target.parents('.page-shortcuts').length) {
                             event.stop()
                         }
@@ -981,11 +973,11 @@
                             $link = $target.parents('a').length ? $target.parents('a').first() : null
                             $image = $target.parents('a').length ? $target.parents('a').first() : null
                         }
-                        
+
                         if (!$link && $image) {
                             link = $image.data('link')
                         }
-                        
+
                         if (!$image && $link) {
                             image = $link.data('image')
                         }
@@ -1009,7 +1001,7 @@
                         if ($image) {
                             image = $image.attr('src')
                         }
-                        
+
                         if (link) {
                             self.$store.commit('application/addShortcut', {
                                 r: null,
@@ -1060,7 +1052,7 @@
         },
         computed: {
             disableAnimations() { return this.$store.state.application.settings.client.animations },
-        
+
             communities() {
                 return this.$store.getters['communities/list']
             },
@@ -1296,7 +1288,7 @@ debugger
             },
             handleResize(event) {
                 if (!process.client) { return }
-                
+
                 if (document.documentElement.clientWidth < 768) {
                     this.mobileMode = true
                 } else {
@@ -1320,16 +1312,12 @@ debugger
                 }
             //})
 
-if (process.client) {
-
-            window.addEventListener('resize', this.handleResize())
-}
             this.handleResize()
             this.checkScrollButton()
-            
+
         },
         mounted() {
-
+            window.addEventListener('resize', this.handleResize())
             this.getExternalState()
             this.ensureDesktopWelcome()
             this.updateBreadcrumbLinks()
@@ -1411,7 +1399,7 @@ if (process.client) {
                     $('body').removeClass('show-sidebar')
                     $('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-bars')
                 }
-                
+
                 this.$store.state.application.activeModal = null
 
                 if (this.$route.meta.renderCondition) {
@@ -1470,7 +1458,7 @@ if (process.client) {
                     this.$store.state.application.tokenCount = res.balance
                 })
 
-                
+
                 // this.$desktop.sendCommand('getTokenBalance', {
                 //     type: 'HBX',
                 //     address: this.$store.state.application.activeProfile.key
@@ -2279,14 +2267,14 @@ a {
     .create-shortcut__block {
         height: 200px;
         text-align: center;
-        
+
     }
 
     .content {
         width: 100%;
         padding-top: 0;
         margin: 0 auto;
-        
+
     }
 
     .page__with-left-sidebar .content, .page__with-right-sidebar .content {
@@ -2452,4 +2440,3 @@ a {
     }
 
 </style>
-
