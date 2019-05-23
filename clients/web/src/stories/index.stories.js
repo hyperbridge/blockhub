@@ -6555,6 +6555,22 @@ storiesOf('Pro mode', module)
     }))
 
 
+storiesOf('Contributor Box', module)
+    .add('default', () => ({
+        components: {
+            'c-contributor-box': (resolve) => require(['@/ui/components/contributor-box'], resolve),
+        },
+        data(){
+            return {}
+        },
+        template: `<div class="p-5">
+                      <c-contributor-box />
+                  </div>`
+    }))
+
+
+
+
 /*
      Dynamic import - test version
 
