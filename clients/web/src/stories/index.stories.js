@@ -6561,10 +6561,33 @@ storiesOf('Contributor Box', module)
             'c-contributor-box': (resolve) => require(['@/ui/components/contributor-box'], resolve),
         },
         data(){
-            return {}
+            return {
+                steps: [
+                    {
+                        value: true,
+                        label: 'Add a headline to your profile',
+                        description: 'Tell the community a bit about your self'
+                    },
+                    {
+                        value: false,
+                        label: 'Upvote 3 days in a row',
+                        description: 'Come back 3 days in a row and upvote any product'
+                    },
+                    {
+                        value: false,
+                        label: 'Subscribe to the daily digest',
+                        description: 'Keep up-to-date with the latest in tech'
+                    },
+                    {
+                        value: false,
+                        label: 'Upvote 11 products',
+                        description: 'Explore Product Hunt and upvote 11 products'
+                    },
+                ]
+            }
         },
         template: `<div class="p-5">
-                      <c-contributor-box />
+                      <c-contributor-box :steps="steps" />
                   </div>`
     }))
 
