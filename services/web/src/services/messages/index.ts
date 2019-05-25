@@ -8,7 +8,7 @@ export default function(app) {
     const options = {
         model: Model,
         id: 'id',
-        name: 'messages', 
+        name: 'messages',
         paginate: {
             default: 10,
             max: 25,

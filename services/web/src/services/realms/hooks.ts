@@ -1,18 +1,18 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 
-const fillRealm = async function (realm, context) {
+const fillRealm = async function(realm, context) {
 
     return realm
 }
 
-const fillOne = function (options = {}) {
+const fillOne = function(options = {}) {
     return async context => {
         context.data = fillRealm(context.data, context)
         return context
     }
 }
 
-const fillAll = function (options = {}) {
+const fillAll = function(options = {}) {
     return async context => {
         context.result.data = await Promise.all(context.result.data.map((realm) => {
             return fillRealm(realm, context)
@@ -22,7 +22,7 @@ const fillAll = function (options = {}) {
     }
 }
 
-const create = function (options = {}) {
+const create = function(options = {}) {
     return async context => {
         const { app, data } = context
 
@@ -58,7 +58,7 @@ const create = function (options = {}) {
 }
 
 
-const validatePermission = function (options = {}) {
+const validatePermission = function(options = {}) {
     return async context => {
         const { app, data } = context
 

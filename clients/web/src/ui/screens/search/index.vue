@@ -340,7 +340,7 @@
 
                     if (this.filtersActive) {
                         this.debounce(() => {
-                            window.BlockHub.WebClient.service(`/search`).find(
+                            this.$api(`/search`).find(
                                 {
                                     query: this.query
                                 }
@@ -357,7 +357,7 @@
                         this.results = this.products
                     }
 
-                    this.$router.replace({ name: 'Search', query: this.urlQuery })
+                    this.$router.replace({ path: '/search', query: this.urlQuery })
                 }, 500)
             },
             clearFilters() {

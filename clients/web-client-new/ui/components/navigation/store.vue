@@ -79,7 +79,7 @@
                 </router-link>
                 <router-link
                     :to="{
-                        name: 'Search',
+                        path: '/search',
                         query: { showFilters: true }
                     }"
                     class="more-filters">
@@ -146,14 +146,14 @@ export default {
         },
         goToSearchPage() {
             this.$router.push({
-                name: 'Search',
+                path: '/search',
                 query: this.query
             })
         }
     },
     goToSearchPage() {
         this.$router.push({
-            name: 'Search',
+            path: '/search',
             query: this.query
         })
     },

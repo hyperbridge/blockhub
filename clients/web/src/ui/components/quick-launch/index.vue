@@ -50,7 +50,7 @@
             },
             goToSearchPage() {
                 this.$router.push({
-                    name: 'Search',
+                    path: '/search',
                     query: this.query
                 })
             }

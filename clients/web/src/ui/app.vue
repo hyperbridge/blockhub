@@ -140,7 +140,7 @@
                         ...this.$store.state.auth.user
                     }
 
-                    window.BlockHub.WebClient.service(`/application/state`).find().then((res) => {
+                    this.$api(`/application/state`).find().then((res) => {
                         this.$store.commit('application/updateState', res)
                     })
                 }

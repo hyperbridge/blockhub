@@ -3,7 +3,7 @@
         <router-link
             v-for="(tag, index) in tags"
             :key="index"
-            :to="{ name: 'Search', query: { tags: [tag] }}"
+            :to="{ path: '/search', query: { tags: [tag] }}"
             class="tags__link"
         >
             {{ tag }}

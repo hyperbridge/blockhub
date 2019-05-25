@@ -45,6 +45,7 @@ export const getWindowSize = {
     },
     methods: {
         getWindowSize() {
+            if (!process.client) { return }
             this.windowHeight = document.body.clientHeight
             this.windowWidth = document.body.clientWidth
         }

@@ -1,17 +1,17 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 
-const fillCommunity = function (community) {
+const fillCommunity = function(community) {
     return community
 }
 
-const fillOne = function (options = {}) {
+const fillOne = function(options = {}) {
     return async context => {
         context.data = fillCommunity(context.data)
         return context
     }
 }
 
-const fillAll = function (options = {}) {
+const fillAll = function(options = {}) {
     return async context => {
         context.result.data = context.result.data.map((community) => {
             return fillCommunity(community)
@@ -21,7 +21,7 @@ const fillAll = function (options = {}) {
     }
 }
 
-const create = function (options = {}) {
+const create = function(options = {}) {
     return async context => {
         const { app, data } = context
 
@@ -41,7 +41,7 @@ const create = function (options = {}) {
 }
 
 
-const validatePermission = function (options = {}) {
+const validatePermission = function(options = {}) {
     return async context => {
         const { app, data } = context
 

@@ -60,7 +60,7 @@
             convertProfile() {
                 const profileId = this.$store.state.application.activeProfile.id
 
-                window.BlockHub.WebClient.service(`/profiles/:id/convert`).update(
+                this.$api(`/profiles/:id/convert`).update(
                     profileId,
                     {
                         role: 'developer'

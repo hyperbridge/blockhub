@@ -1,18 +1,18 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 
-const fillIdea = async function (idea, context) {
+const fillIdea = async function(idea, context) {
 
     return idea
 }
 
-const fillOne = function (options = {}) {
+const fillOne = function(options = {}) {
     return async context => {
         context.data = fillIdea(context.data, context)
         return context
     }
 }
 
-const fillAll = function (options = {}) {
+const fillAll = function(options = {}) {
     return async context => {
         context.result.data = await Promise.all(context.result.data.map((idea) => {
             return fillIdea(idea, context)
@@ -22,7 +22,7 @@ const fillAll = function (options = {}) {
     }
 }
 
-const create = function (options = {}) {
+const create = function(options = {}) {
     return async context => {
         const { app, data } = context
 
@@ -43,7 +43,7 @@ const create = function (options = {}) {
         const { name, value, meta } = context.data
 
         console.log(owner)
-        
+
         // Override the original data (so that people can't submit additional stuff)
         context.data = {
             name,
@@ -64,7 +64,7 @@ const create = function (options = {}) {
 }
 
 
-const validatePermission = function (options = {}) {
+const validatePermission = function(options = {}) {
     return async context => {
         const { app, data } = context
 
