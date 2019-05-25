@@ -127,7 +127,6 @@
 
                 this.updateEditorMode()
                 this.ensureDesktopWelcome(to)
-                this.updateBreadcrumbLinks()
             },
             '$store.state.auth.user': function(newVal) {
                 if (this.$store.state.application.signedIn && newVal === undefined) {
