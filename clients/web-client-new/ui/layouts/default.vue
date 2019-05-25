@@ -1,7 +1,7 @@
 <template>
     <div id="app" :class="{ 'disable-animations': !disableAnimations }">
         <c-render-condition :type="renderCondition">
-            <router-view></router-view>
+            <nuxt-child keep-alive />
 
             <c-drawer />
         </c-render-condition>
