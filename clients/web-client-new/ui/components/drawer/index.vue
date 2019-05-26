@@ -5,7 +5,7 @@
                 <template v-if="developerMode">
                     <h5 v-darklaunch="'REALMS'">Your Realms</h5>
 
-                    <c-button status="none" :to="`/realm/${realm.id}`" v-darklaunch="'REALMS'" :key="realm.name" v-for="(realm) in realms">
+                    <c-button status="none" :to="`/realm/${realm.id}`" v-darklaunch="'REALMS'" :key="`realm${realm.id}`" v-for="(realm, index) in realms">
                         <span class="icon icon-letter-circle">{{ realm.name.slice(0) }}</span>
                         <span class="text">{{ realm.name }}</span>
                     </c-button>
@@ -16,7 +16,7 @@
 
                     <h5 v-if="developerMode && products.length">Your Products</h5>
 
-                    <c-button status="none" :to="`/product/${product.id}`" v-for="(product) in products" :key="product.id">
+                    <c-button status="none" :to="`/product/${product.id}`" v-for="(product) in products" :key="`product${product.id}`">
                         <span class="icon icon-letter-circle">{{ product.name.slice(0, 1) }}</span>
                         <span class="text">{{ product.name }}</span>
                     </c-button>
