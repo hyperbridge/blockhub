@@ -64,7 +64,7 @@
                     <hr />
                 </template>
 
-                <template v-if="signedIn">
+                <div v-if="signedIn">
 
                     <c-button status="plain" tag="button" to="/account" class="text-left" size="md" icon="user">
                         Account
@@ -99,7 +99,7 @@
                     </c-button>
 
                     <hr />
-                </template>
+                </div>
 
                 <c-button status="plain" to="/sitemap" tag="button" class="text-left" size="md" icon="list-alt">
                     Sitemap

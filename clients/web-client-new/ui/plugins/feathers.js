@@ -28,7 +28,6 @@ export default ({ app }) => {
                 created: function () {
                     // access to the client anywhere
                     this.$feathers = client
-                    this.$api = client
 
                     // Setting up the services
                     this.$services = client.services

@@ -43,10 +43,12 @@ export const recalculateReputation = () => {
 }
 
 export const notify = (notice) => {
-    window.BlockHub.Notification && window.BlockHub.Notification.info(notice.body, notice.title, {
-        timeout: 5000,
-        pauseOnHover: true
-    })
+    if (process.client) {
+        window.BlockHub.Notification && window.BlockHub.Notification.info(notice.body, notice.title, {
+            timeout: 5000,
+            pauseOnHover: true
+        })
+    }
 }
 
 export const addEvent = (title, message, event) => {
@@ -118,6 +120,4 @@ export const monitor = () => {
 export const init = (store, router) => {
     local.store = store
     local.router = router
-
-    monitor()
 }

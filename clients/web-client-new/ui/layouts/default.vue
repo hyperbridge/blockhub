@@ -92,21 +92,24 @@
         mounted() {
             this.getExternalState()
             this.ensureDesktopWelcome()
+
+            if (this.$store.state.auth.user) {
+                this.$store.state.application.signedIn = true
+            } else {
+                this.$store.state.application.signedIn = false
+            }
         },
         created() {
-            this.$store.state.application.signedIn = false
 
-            this.$nextTick(() => {
-                if (this.$route.meta.renderCondition) {
-                    this.renderCondition = this.$route.meta.renderCondition
-                } else if (this.$route.meta.permission === 'signedIn') {
-                    this.renderCondition = 'user'
-                } else if (this.$route.meta.permission === 'developerMode') {
-                    this.renderCondition = 'user'
-                } else {
-                    this.renderCondition = 'initialized'
-                }
-            })
+            if (this.$route.meta.renderCondition) {
+                this.renderCondition = this.$route.meta.renderCondition
+            } else if (this.$route.meta.permission === 'signedIn') {
+                this.renderCondition = 'user'
+            } else if (this.$route.meta.permission === 'developerMode') {
+                this.renderCondition = 'user'
+            } else {
+                this.renderCondition = 'initialized'
+            }
         },
         watch: {
             '$route': function(to, from) {
@@ -128,18 +131,18 @@
                 this.updateEditorMode()
                 this.ensureDesktopWelcome(to)
             },
-            '$store.state.auth.user': function(newVal) {
+            '$store.state.auth.user': async function(newVal) {debugger
                 if (this.$store.state.application.signedIn && newVal === undefined) {
                     this.$store.state.application.signedIn = false
                 } else {
                     this.$store.state.application.signedIn = true
-
+debugger
                     this.$store.state.application.account = {
                         ...this.$store.state.application.account,
                         ...this.$store.state.auth.user
                     }
 
-                    this.$api(`/application/state`).find().then((res) => {
+                    await this.$api.service('/application/state').find().then((res) => {
                         this.$store.commit('application/updateState', res)
                     })
                 }

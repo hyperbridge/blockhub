@@ -140,6 +140,43 @@ export default ({ app, store }) => {
         DB.save()
     }
 
+    app.blockhub.api = {
+        service: serviceKey => {
+            console.log(`[BlockHub] Service: ${serviceKey}`)
+
+            if (app.blockhub.bridge.isConnected()) { // && app.blockhub.bridge.canFulfillRequest(endpoint
+                return {
+                    find: params => {
+                        app.blockhub.bridge.sendCommand('service', {
+                            serviceKey,
+                            type: 'find',
+                            params
+                        })
+                    }
+                }
+            }
+            return app.feathers.service(serviceKey)
+        }
+    }
+
+    const plugin = {
+        install(Vue, options) {
+            Vue.mixin({
+                created: function () {
+                    // access to blockhub anywhere
+                    this.$blockhub = app.blockhub
+                    this.$desktop = app.blockhub.bridge
+                    this.$db = app.blockhub.db
+                    this.$api = app.blockhub.api
+                }
+            })
+        }
+    }
+
+    Vue.use(plugin)
+
+    if (process.client) window.BlockHub = app.blockhub
+
     DB.setInitCallback(async () => {
         console.log('DB init callback')
         // TODO: is this a race condition?
@@ -187,6 +224,8 @@ export default ({ app, store }) => {
         // monitorSimulatorMode()
         // monitorPathState()
 
+        ReputationEngine.monitor()
+
         console.log('BlockHub initialized.')
 
         setInterval(() => {
@@ -197,41 +236,4 @@ export default ({ app, store }) => {
     })
 
     DB.init()
-
-    app.blockhub.api = {
-        service: serviceKey => {
-            console.log(`[BlockHub] Service: ${serviceKey}`)
-
-            if (app.blockhub.bridge.isConnected()) { // && app.blockhub.bridge.canFulfillRequest(endpoint
-                return {
-                    find: params => {
-                        app.blockhub.bridge.sendCommand('service', {
-                            serviceKey,
-                            type: 'find',
-                            params
-                        })
-                    }
-                }
-            }
-            return app.feathers.service(serviceKey)
-        }
-    }
-
-    const plugin = {
-        install(Vue, options) {
-            Vue.mixin({
-                created: function () {
-                    // access to blockhub anywhere
-                    this.$blockhub = app.blockhub
-                    this.$desktop = app.blockhub.bridge
-                    this.$db = app.blockhub.db
-                    this.$api = app.blockhub.api
-                }
-            })
-        }
-    }
-
-    Vue.use(plugin)
-
-    if (process.client) window.BlockHub = app.blockhub
 }
