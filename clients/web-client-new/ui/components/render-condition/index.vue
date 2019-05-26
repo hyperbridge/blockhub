@@ -21,6 +21,8 @@
             }
         },
         async created() {
+            this.$store.state.application.signedIn = false
+
             if (this.type === 'initialized') {
                 await this.initialize()
 
@@ -31,20 +33,7 @@
                 await this.authenticate()
             }
 
-            await this.$store.dispatch('profiles/find', {
-                query: {
-                    accountId: this.$store.state.auth.user.id,
-                    $sort: {
-                        createdAt: -1
-                    },
-                    $limit: 25
-                }
-            })
-
-            this.$store.state.application.activeProfile = this.$store.state.profiles.keyedById[this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.id || 1]
-            this.$store.state.application.developerMode = this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.role === 'developer'
-            this.$store.state.application.editorMode = 'viewing'
-            this.$store.state.application.signedIn = true
+            this.$store.dispatch('application/authenticate')
 
             if (this.type === 'user') {
                 this.satisfied = true

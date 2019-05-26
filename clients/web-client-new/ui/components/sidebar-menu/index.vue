@@ -36,7 +36,7 @@
             links: Array
         },
         components: {
-            'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu_item').then(m => m.default || m)
+            'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m)
         }
     }
 </script>

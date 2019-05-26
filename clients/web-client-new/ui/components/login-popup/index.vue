@@ -98,7 +98,7 @@
 
                 if (email
                 && password) {
-                    this.$store.dispatch('auth/authenticate', { strategy: 'local', email, password })
+                    this.$store.dispatch('application/login', { email, password })
                         .then((res) => {
                             this.$store.commit('application/activateModal', null)
                             this.loading = false

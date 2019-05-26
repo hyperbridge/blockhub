@@ -2,8 +2,7 @@ import morgan = require('morgan')
 import bodyParser = require('body-parser')
 import helmet = require('helmet')
 import Knex = require('knex')
-import SwaggerParser = require('swagger-parser')
-import swaggerRoutes = require('swagger-routes-express')
+import winston = require('winston')
 import api from './api'
 import { Model, RelationMappings } from 'objection'
 import config = require('../config')
@@ -39,17 +38,7 @@ const store = new KnexSessionStore({
 })
 
 export default async () => {
-    const parser = new SwaggerParser({
-        apiSeparator: '_',
-        scopes: {},
-    })
-
-    const apiDescription = await parser.validate('api.yml')
-    const connect = swaggerRoutes(api, apiDescription)
-
     const app = express(feathers())
-
-    //app.use(morgan('tiny'))
 
     app.configure(socketio())
     app.configure(rest())
@@ -95,11 +84,6 @@ export default async () => {
     app.set('knex', knex)
 
 
-    // app.use(function(req, res, next) {
-    //     console.log(req)
-
-    //     next()
-    // })
 
     // app.use(morgan(function(tokens, req, res) {
     //     let { url, method, params, body, _parsedUrl, headers, query } = req
@@ -115,6 +99,9 @@ export default async () => {
     //     ]
     // }))
 
+    // app.use(require('express').logger({
+    //     format: ':remote-addr :method :url'
+    // }))
 
     // Setup channels
     app.configure(channels)
@@ -147,6 +134,12 @@ export default async () => {
 
     // add any error handlers
     app.use(errorHandler({ logger: loggerLib }))
+
+    // app.use((req, res, next) => {
+    //     console.log('Request')
+    //     next()
+    // })
+
 
     // app hooks last
     app.hooks(appHooks)

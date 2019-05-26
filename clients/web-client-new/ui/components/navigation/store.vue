@@ -117,7 +117,7 @@ import { handleArray } from '@/mixins'
 
 export default {
     components: {
-        'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu_item').then(m => m.default || m),
+        'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m),
         'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m),
         'c-searcher': () => import('~/components/searcher').then(m => m.default || m),
         'c-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m),

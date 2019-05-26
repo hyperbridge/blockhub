@@ -115,7 +115,9 @@ export default {
             }
         }
 
-        setInterval(checkEthereumConnection, 2000)
+        if (process.client) {
+            setInterval(checkEthereumConnection, 2000)
+        }
 
         return {
             purchaseAddress: null,

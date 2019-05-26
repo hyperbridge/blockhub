@@ -20,7 +20,7 @@
         components: {
             'c-render-condition': () => import('~/components/render-condition').then(m => m.default || m),
             'c-drawer': () => import('~/components/drawer').then(m => m.default || m),
-            'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu_item').then(m => m.default || m)
+            'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m)
         },
         data() {
             return {
@@ -131,12 +131,12 @@
                 this.updateEditorMode()
                 this.ensureDesktopWelcome(to)
             },
-            '$store.state.auth.user': async function(newVal) {debugger
+            '$store.state.auth.user': async function(newVal) {
                 if (this.$store.state.application.signedIn && newVal === undefined) {
                     this.$store.state.application.signedIn = false
                 } else {
                     this.$store.state.application.signedIn = true
-debugger
+
                     this.$store.state.application.account = {
                         ...this.$store.state.application.account,
                         ...this.$store.state.auth.user

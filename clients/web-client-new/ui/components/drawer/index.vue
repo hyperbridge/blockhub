@@ -202,7 +202,7 @@ export default {
     props: [],
     components: {
         'c-render-condition': () => import('~/components/render-condition').then(m => m.default || m),
-        'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu_item').then(m => m.default || m),
+        'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m),
         'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m)
     },
     updated() {

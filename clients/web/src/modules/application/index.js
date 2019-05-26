@@ -126,7 +126,9 @@ export const actions = {
     },
     activateModal(store, payload) {
         if (payload) {
-            window.ga('send', 'event', 'Modal', 'Show Modal', 'Show Modal', payload, { 'NonInteraction': 1 })
+            if (process.client) {
+                window.ga('send', 'event', 'Modal', 'Show Modal', 'Show Modal', payload, { 'NonInteraction': 1 })
+            }
         }
 
         if (store.state.desktopMode) {
@@ -156,6 +158,29 @@ export const actions = {
     //     //     //store.state.signedIn = true
     //     // })
     // },
+    login(store, payload) {
+        store.dispatch('auth/authenticate', { strategy: 'local', email: payload.email, password: payload.password })
+
+        store.dispatch('application/authenticate')
+    },
+    authenticate(store, payload) {
+        const profiles = await store.dispatch('profiles/find', {
+            query: {
+                accountId: store.state.auth.user.id,
+                $sort: {
+                    createdAt: -1
+                },
+                $limit: 25
+            }
+        })
+
+        console.log(profiles, 'profilezz')
+
+        store.state.application.activeProfile = store.state.profiles.keyedById[store.state.application.activeProfile && store.state.application.activeProfile.id || 1]
+        store.state.application.developerMode = store.state.application.activeProfile && store.state.application.activeProfile.role === 'developer'
+        store.state.application.editorMode = 'viewing'
+        store.state.application.signedIn = true
+    },
     initEthereum(store, payload) {
         // Bridge.initProtocol({ protocolName: 'application' }).then((config) => {
         //     store.state.ethereum[store.state.currentEthereumNetwork] = config

@@ -534,7 +534,9 @@ export default {
             }
         }
 
-        setInterval(checkEthereumConnection, 2000)
+        if (process.client) {
+            setInterval(checkEthereumConnection, 2000)
+        }
 
         let activeProfile = this.$store.state.application.activeProfile
 

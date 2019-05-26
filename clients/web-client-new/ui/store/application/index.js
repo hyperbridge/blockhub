@@ -132,7 +132,9 @@ export const actions = {
     },
     activateModal(store, payload) {
         if (payload) {
-            window.ga('send', 'event', 'Modal', 'Show Modal', 'Show Modal', payload, { 'NonInteraction': 1 })
+            if (process.client) {
+                window.ga('send', 'event', 'Modal', 'Show Modal', 'Show Modal', payload, { 'NonInteraction': 1 })
+            }
         }
 
         if (store.state.desktopMode) {
@@ -144,6 +146,27 @@ export const actions = {
         } else {
             store.commit('activateModal', 'welcome')
         }
+    },
+    login(store, payload) {
+        store.dispatch('auth/authenticate', { strategy: 'local', email: payload.email, password: payload.password }, { root: true })
+
+        store.dispatch('authenticate')
+    },
+    async authenticate(store, payload) {
+        await store.dispatch('profiles/find', {
+            query: {
+                accountId: store.rootState.auth.user.id,
+                $sort: {
+                    createdAt: -1
+                },
+                $limit: 25
+            }
+        }, { root: true })
+
+        store.state.activeProfile = store.rootState.profiles.keyedById[store.state.activeProfile && store.state.activeProfile.id || 1]
+        store.state.developerMode = store.state.activeProfile && store.state.activeProfile.role === 'developer'
+        store.state.editorMode = 'viewing'
+        store.state.signedIn = true
     },
     setEditorMode(store, payload) {
         store.commit('setEditorMode', payload)
