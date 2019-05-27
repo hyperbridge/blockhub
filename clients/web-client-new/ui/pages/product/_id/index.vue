@@ -314,10 +314,10 @@
             }
         },
         components: {
-            'c-product-overview': () => import('~/pages/product-overview').then(m => m.default || m),
-            'c-product-projects': () => import('~/pages/product-projects').then(m => m.default || m),
-            'c-product-assets': () => import('~/pages/product-assets').then(m => m.default || m),
-            'c-product-community': () => import('~/pages/product-community').then(m => m.default || m),
+            'c-product-overview': () => import('~/pages/product/_id/overview').then(m => m.default || m),
+            'c-product-projects': () => import('~/pages/product/_id/projects').then(m => m.default || m),
+            'c-product-assets': () => import('~/pages/product/_id/assets').then(m => m.default || m),
+            'c-product-community': () => import('~/pages/product/_id/community').then(m => m.default || m),
             'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
             'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m),
             'c-tags': () => import('~/components/tags').then(m => m.default || m),
