@@ -1,6 +1,6 @@
 <template>
     <div class="assets-grid">
-        <h4 v-if="list.length === 0">
+        <h4 v-if="list && list.length === 0">
             There is no assets yet.
         </h4>
         <div class="assets-grid__item-container" v-for="(item, index) in list" :key="index" v-else>
