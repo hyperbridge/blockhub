@@ -90,7 +90,7 @@ import ItemAddForm from './item-add-form.vue'
 export default {
     props: { parsedData: {} },
 
-    data: function () {
+    data() {
         return {
             flowData: [],
             toAddItem: false,
@@ -101,12 +101,12 @@ export default {
         }
     },
 
-    beforeMount: function () {
+    beforeMount() {
         this.popoverKey = this.generateKey();
         this.viewType = 'full';
     },
 
-    created: function () {
+    created() {
         this.flowData = this.parsedData;
         this.flowData.map((obj) => {
             this.flowDataKeys.push(obj.name)
@@ -118,30 +118,30 @@ export default {
     },
 
     methods: {
-        rmIndex: function (arr, index) {
+        rmIndex(arr, index) {
             arr.splice(index, 1);
             return arr
         },
-        rmItem: function (arr, item) {
+        rmItem(arr, item) {
             const i = arr.indexOf(item);
             if (i !== -1) {
                 this.rmIndex(arr, i)
             }
             return this
         },
-        delItem: function (parentDom, item, index) {
+        delItem(parentDom, item, index) {
             this.flowData = this.rmIndex(this.flowData, index);
             this.flowDataKeys = this.rmItem(this.flowDataKeys, item.name);
             if (this.hideMyBlock[index]) this.hideMyBlock[index] = false;
             this.$emit('input', this.flowData)
         },
-        closeBlock: function (index, e) {
+        closeBlock(index, e) {
             this.$set(this.hideMyBlock, index, !this.hideMyBlock[index])
         },
-        generateKey: function () {
+        generateKey() {
             return '_' + Math.random().toString(36).substr(2, 9);
         },
-        newItem: function (obj) {
+        newItem(obj) {
             let oj = {
                 'name': obj.key || 'null',
                 'type': obj.type
@@ -162,7 +162,7 @@ export default {
 
             this.$emit('input', this.flowData);
         },
-        keyInputBlur: function (item, e) {
+        keyInputBlur(item, e) {
             if(item.name.length <= 0) {
                 item.name = 'null';
                 e.target.focus();
@@ -171,7 +171,7 @@ export default {
             console.debug(item);
             console.debug(e);
         },
-        popoverClass: function (className) {
+        popoverClass(className) {
             this.viewType = className;
         },
     }

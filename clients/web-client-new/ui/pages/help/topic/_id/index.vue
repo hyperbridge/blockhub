@@ -70,10 +70,12 @@
             'c-list-item': () => import('~/components/help/simple-item').then(m => m.default || m),
             'c-card': () => import('~/components/help/help-card.vue').then(m => m.default || m),
         },
-        data: () => ({
-            showArticles: false,
-            topicId: this.$route.params.id
-        }),
+        data() {
+            return {
+                showArticles: false,
+                topicId: this.$route.params.id
+            }
+        },
         methods: {
             showByTopic(id) {
                 let results = [];

@@ -25,7 +25,7 @@ export default {
             isVisible: isVisible(this.$store.state.application.darklaunchFlags, this.$store.state.application.account.darklaunchFlags, this.code, this.variant, this.data)
         }
     },
-    render: function (createElement) {
+    render(createElement) {
         if (this.isVisible) {
             return createElement(this.tag, {
                 'darklaunch': this.code
