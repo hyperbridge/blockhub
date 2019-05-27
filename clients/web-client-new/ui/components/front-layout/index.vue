@@ -1573,7 +1573,7 @@ a {
     top: 0;
     left: 0;
     width: 100%;
-    height: 383px;
+    height: 382px;
     content: ' ';
     background: url(/img/backgrounds/1.jpg);
     background-size: cover;

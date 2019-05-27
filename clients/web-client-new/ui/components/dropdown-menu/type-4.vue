@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown dropmenu_container" :class="{ 'show' : show }">
+    <div class="dropdown dropmenu_container" :class="{ 'show' : show }" v-click-outside="closeMenu">
         <div class="rw-btn rw-btn--card" @click="toggleMenu" v-if="!$slots.title">
             <div></div>
         </div>
@@ -7,9 +7,8 @@
             <slot name="title" />
         </div>
         <div
-            v-if="show"
+            v-show="show"
             class="dropdown-menu"
-            v-click-outside:self="closeMenu"
             :class="dropdownPosition"
         >
             <div class="position-relative" style="z-index: 4">
@@ -20,6 +19,8 @@
 </template>
 
 <script>
+    import Vue from 'vue'
+
     export default {
         props: {
             position: {
@@ -47,7 +48,6 @@
         },
         computed: {
             dropdownPosition() {
-                console.log('run switch', this.position)
                 switch (this.position) {
                     case 'left':
                         return 'dropdown-menu-left'
