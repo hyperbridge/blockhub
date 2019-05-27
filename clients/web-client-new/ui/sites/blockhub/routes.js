@@ -1117,7 +1117,7 @@ export default [
     {
         path: '/purchase-receipt',
         name: 'Purchase Receipt',
-        component: () => import('~/pages/purchase-receipt').then(m => m.default || m)
+        component: () => import('~/pages/store/receipt').then(m => m.default || m)
     },
     {
         path: '/achievements',

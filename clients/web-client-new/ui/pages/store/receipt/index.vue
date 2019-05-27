@@ -42,7 +42,7 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <img src="../../static/img/logo-only.png" class="table-img" />
+                                            <img src="../../../static/img/logo-only.png" class="table-img" />
                                             <div>
                                                 <strong>
                                                     Diablo III
