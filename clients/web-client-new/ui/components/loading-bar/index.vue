@@ -9,7 +9,6 @@
 
 <script>
 export default {
-    name: 'c-loading-bar',
     props: ['percentage']
 }
 </script>

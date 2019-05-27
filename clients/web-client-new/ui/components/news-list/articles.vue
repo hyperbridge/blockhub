@@ -14,7 +14,6 @@
 
 <script>
 export default {
-    name: 'c-news-list-articles',
     props: {
         articles: {
             type: Array,

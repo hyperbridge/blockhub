@@ -14,7 +14,6 @@
 
 <script>
     export default {
-        name: 'c-button',
         props: {
             tag: {
                 type: String,

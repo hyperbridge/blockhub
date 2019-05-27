@@ -25,7 +25,6 @@
 
 <script>
     export default {
-        name: 'c-basic-popup',
         props:{
             activated:{
                 type: Boolean,

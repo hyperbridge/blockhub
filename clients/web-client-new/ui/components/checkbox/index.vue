@@ -16,7 +16,6 @@
 
 <script>
     export default {
-        name: 'c-checkbox',
         model: {
             prop: 'checked',
             event: 'change'

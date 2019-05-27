@@ -29,7 +29,6 @@
 
 <script>
 export default {
-    name: 'c-rating-block',
     props: {
         items: {
             type: [Array, Object]

@@ -6,7 +6,6 @@
 
 <script>
     export default {
-        name: 'c-loading-logo',
         props: {
             isLoading:{
                 type: Boolean,

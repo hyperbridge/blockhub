@@ -33,7 +33,6 @@
 
 <script>
     export default {
-        name: 'c-switch',
         inheritAttrs: false,
         props: {
             id: {

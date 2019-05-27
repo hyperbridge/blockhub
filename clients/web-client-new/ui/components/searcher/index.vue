@@ -34,7 +34,6 @@
     import { debounce } from '@/mixins'
 
     export default {
-        name: 'c-searcher',
         components: {
             'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
         },

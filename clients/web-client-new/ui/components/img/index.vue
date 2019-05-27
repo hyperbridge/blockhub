@@ -1,6 +1,5 @@
 <script>
 export default {
-    name: 'c-img',
     props: ['src'],
     data() {
         return {

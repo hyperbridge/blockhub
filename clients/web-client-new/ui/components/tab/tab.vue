@@ -11,7 +11,6 @@
 
 <script>
     export default {
-        name: 'c-tab',
         props: {
             name: {
                 type: String,

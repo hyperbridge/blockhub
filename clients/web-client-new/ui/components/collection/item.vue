@@ -20,7 +20,6 @@
 
 <script>
  export default {
-    name: 'c-collection-item',
     props: {
         id: Number,
         name: String,

@@ -24,7 +24,6 @@
 
 <script>
 export default {
-    name: 'c-news-list-navigation',
     props: {
         list: Array
     }

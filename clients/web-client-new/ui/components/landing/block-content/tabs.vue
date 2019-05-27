@@ -24,7 +24,6 @@
 
 <script>
     export default {
-        name: 'c-tabs',
         data() {
             return {
                 tabs: []

@@ -13,7 +13,6 @@
 
 <script>
     export default {
-        name: 'c-money-info',
         props: {
             amount : { required: true },
             currency : { default: 'USD' },
