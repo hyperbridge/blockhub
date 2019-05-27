@@ -72,9 +72,9 @@
             return {
                 links: {
                     gameOverview: [
-                        { to: { path: '/help/1/article/suggesting-features' }, title: 'Suggesting Features' },
-                        { to: { path: '/help/1/article/voting-and-curating-updates' }, title: 'Voting and Curating Updates' },
-                        { to: { path: '/help/1' }, title: 'MORE ...' }
+                        { to: { path: '/help/topic/1/article/suggesting-features' }, title: 'Suggesting Features' },
+                        { to: { path: '/help/topic/1/article/voting-and-curating-updates' }, title: 'Voting and Curating Updates' },
+                        { to: { path: '/help/topic/1' }, title: 'MORE ...' }
                     ]
                 }
             }

@@ -14,7 +14,7 @@
 
 <script>
     export default {
-        props: ['id', 'slug'],
+        props: [],
         components: {
             'c-article-item': () => import('~/components/help/article-item').then(m => m.default || m),
             'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m),
@@ -23,13 +23,13 @@
         },
         computed: {
             article() {
-                return this.$store.getters['discussions/get'](this.id)
+                return this.$store.getters['discussions/get'](this.$route.params.id)
             },
         },
         mounted() {
             this.$store.dispatch('discussions/find', {
                 query: {
-                    id: Number(this.id)
+                    id: Number(this.$route.params.id)
                 }
             })
         }

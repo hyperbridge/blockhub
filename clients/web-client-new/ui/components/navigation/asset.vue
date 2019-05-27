@@ -31,12 +31,12 @@
                         { to: { path: '/' }, title: 'Owned (13)' }
                     ],
                     help: [
-                        { to: { path: '/help/0/article/buying-and-selling-items' }, title: 'Buying and Selling Items' },
-                        { to: { path: '/help/0/article/how-top-picks-are-selected' }, title: 'How Top Picks are selected' },
-                        { to: { path: '/help/0/article/accepting-offers' }, title: 'Accepting offers' },
-                        { to: { path: '/help/0/article/asset-general' }, title: 'General' },
-                        { to: { path: '/help/0/article/asset-browser' }, title: 'Asset Browser' },
-                        { to: { path: '/help/0' }, title: 'MORE ...' },
+                        { to: { path: '/help/topic/0/article/buying-and-selling-items' }, title: 'Buying and Selling Items' },
+                        { to: { path: '/help/topic/0/article/how-top-picks-are-selected' }, title: 'How Top Picks are selected' },
+                        { to: { path: '/help/topic/0/article/accepting-offers' }, title: 'Accepting offers' },
+                        { to: { path: '/help/topic/0/article/asset-general' }, title: 'General' },
+                        { to: { path: '/help/topic/0/article/asset-browser' }, title: 'Asset Browser' },
+                        { to: { path: '/help/topic/0' }, title: 'MORE ...' },
                     ]
                 }
             }

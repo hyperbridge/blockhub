@@ -38,7 +38,7 @@
                         { to: { path: '/help/support' }, title: 'Support' }
                     ],
                     sections: [
-                        { to: { path: '/help/0' }, title: 'General Platform Features' }
+                        { to: { path: '/help/topic/0' }, title: 'General Platform Features' }
                     ],
                     trendingArticles: [
                         { to: { path: '/help/building-communities' }, title: 'Building Communities' },

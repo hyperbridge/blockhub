@@ -33,11 +33,11 @@
                     ],
                     developer: this.$store.state.application.developerMode ? [ { to: { path: '/developer' }, title: 'Developer Area' } ] : [ { to: { path: '/developer/apply' }, title: 'Become a Developer' } ],
                     help: [
-                        { to: { path: '/help/0/article/creating-an-account' }, title: 'Creating an account' },
-                        { to: { path: '/help/0/article/blockchain-gaming' }, title: 'Blockchain gaming' },
-                        { to: { path: '/help/0/article/blockhub-interface' }, title: 'BlockHub interface' },
-                        { to: { path: '/help/0/article/hbx-token' }, title: 'HBX token' },
-                        { to: { path: '/help/0/article/trading-assets' }, title: 'Trading assets' }
+                        { to: { path: '/help/topic/0/article/creating-an-account' }, title: 'Creating an account' },
+                        { to: { path: '/help/topic/0/article/blockchain-gaming' }, title: 'Blockchain gaming' },
+                        { to: { path: '/help/topic/0/article/blockhub-interface' }, title: 'BlockHub interface' },
+                        { to: { path: '/help/topic/0/article/hbx-token' }, title: 'HBX token' },
+                        { to: { path: '/help/topic/0/article/trading-assets' }, title: 'Trading assets' }
                     ],
                     legal: [
                         { to: { path: '/terms' }, title: 'Terms & Conditions' },

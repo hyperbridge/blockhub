@@ -78,10 +78,10 @@
                         { to: { path: `/idea/${this.id}/community/top` }, title: 'Top Posts', icon: 'fa fa-star' }
                     ],
                     help: [
-                        { to: { path: '/help/1/article/building-communities' }, title: 'Building Communities' },
-                        { to: { path: '/help/1/article/suggesting-features' }, title: 'Suggesting Features' },
-                        { to: { path: '/help/1/article/voting-and-curating-updates' }, title: 'Voting & Curating Updates' },
-                        { to: { path: '/help/1' }, title: 'MORE ...' }
+                        { to: { path: '/help/topic/1/article/building-communities' }, title: 'Building Communities' },
+                        { to: { path: '/help/topic/1/article/suggesting-features' }, title: 'Suggesting Features' },
+                        { to: { path: '/help/topic/1/article/voting-and-curating-updates' }, title: 'Voting & Curating Updates' },
+                        { to: { path: '/help/topic/1' }, title: 'MORE ...' }
                     ]
                 }
             }
