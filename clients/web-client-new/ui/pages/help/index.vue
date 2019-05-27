@@ -32,7 +32,7 @@
                         <c-topic-item
                             v-for="(topic, index) in topics"
                             :key="index"
-                            :to="`/help/${topic.id}`"
+                            :to="`/help/topic/${topic.id}`"
                             :icon="topic.icon"
                             class="padding-10">
                             {{ topic.label }}

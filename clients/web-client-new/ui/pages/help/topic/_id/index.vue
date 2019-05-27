@@ -19,7 +19,7 @@
                         <c-topic-item
                             v-for="(topic, index) in topic.subTopics"
                             :key="index"
-                            :to="`/help/${topic.id}`"
+                            :to="`/help/topic/${topic.id}`"
                             :icon="topic.icon"
                             class="padding-10">
                             {{ topic.label }}
@@ -72,7 +72,7 @@
         },
         data: () => ({
             showArticles: false,
-            topic_id: this.id
+            topicId: this.$route.params.id
         }),
         methods: {
             showByTopic(id) {

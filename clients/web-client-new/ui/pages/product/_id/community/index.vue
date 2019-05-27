@@ -61,7 +61,7 @@
                         title: 'This post has been pinned and the title is a single line of text',
                         date: dates[0],
                         rate: -319,
-                        comments_count: 3019,
+                        commentsCount: 3019,
                         status: 'pinned',
                         author: authors[0],
                     },
@@ -69,7 +69,7 @@
                         title: `The previous title doesn't have it's single line aligned vertically because XD does not have this functionality.`,
                         date: dates[1],
                         rate: 232,
-                        comments_count: 3019,
+                        commentsCount: 3019,
                         status: 'locked',
                         author: authors[1]
                     },
@@ -77,7 +77,7 @@
                         title: `The previous title doesn't have it's single line aligned vertically because XD does not have this functionality.`,
                         date: dates[2],
                         rate: 103,
-                        comments_count: 894391,
+                        commentsCount: 894391,
                         status: 'starred',
                         author: authors[1],
                         content: {
@@ -89,7 +89,7 @@
                         title: 'Actually all the boxes with the titles here are the same size',
                         date: dates[3],
                         rate: 103,
-                        comments_count: 894391,
+                        commentsCount: 894391,
                         author: authors[0]
                     }
                 ],
@@ -98,7 +98,7 @@
                     title: `The previous title doesn't have it's single line aligned vertically because XD does not have this functionality.`,
                     date: dates[3],
                     rate: 1391,
-                    comments_count: 894391,
+                    commentsCount: 894391,
                     status: 'starred',
                     author: authors[0],
                     content: {

@@ -54,7 +54,7 @@
                     title: `The previous title doesn't have it's single line aligned vertically because XD does not have this functionality.`,
                     date: dates[3],
                     rate: 1391,
-                    comments_count: 894391,
+                    commentsCount: 894391,
                     status: 'starred',
                     author: authors[0],
                     content: {

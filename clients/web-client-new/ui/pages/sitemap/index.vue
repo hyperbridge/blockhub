@@ -134,7 +134,7 @@
                         <li><c-button status="none" to="/communities">Communities</c-button></li>
                         <li><c-button status="none" to="/community/new">New Community</c-button></li>
                         <li><c-button status="none" to="/community/1">Community #1</c-button></li>
-                        <li><c-button status="none" to="/communit/forum/1">Community #1 > Forum #1</c-button></li>
+                        <li><c-button status="none" to="/community/forum/1">Community #1 > Forum #1</c-button></li>
                         <li><c-button status="none" to="/community/discussion/1">Community #1 > Discussion #1</c-button></li>
                     </ul>
                 </div>

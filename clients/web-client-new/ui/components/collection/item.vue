@@ -1,7 +1,7 @@
 <template>
     <div class="collection-item" v-bind:style="{ 'background-image': 'url(' + image + ')' }">
         <div class="collection-item__items-container">
-            <router-link v-for="(asset, index) in getAsset" :to="{ path: '/asset', params: { id: asset.id } }" :key="index" v-if="index < 4">
+            <router-link v-for="(asset, index) in getAsset" :to="{ name: 'asset-id', params: { id: asset.id } }" :key="index" v-if="index < 4">
                 <c-img :src="asset.image" />
             </router-link>
         </div>

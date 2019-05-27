@@ -49,7 +49,7 @@
                         id: 1,
                         title: "New to BlockHub",
                         rate: "43",
-                        comments_count: "8234",
+                        commentsCount: "8234",
                         status: "pinned",
                         author: {
                             name: "Alan Walker"
@@ -59,7 +59,7 @@
                         id: 2,
                         title: "New to BlockHub",
                         rate: "43",
-                        comments_count: "8234",
+                        commentsCount: "8234",
                         status: "locked",
                         author: {
                             name: "Alan Walker"
@@ -69,7 +69,7 @@
                         id: 3,
                         title: "New to BlockHub",
                         rate: "43",
-                        comments_count: "8234",
+                        commentsCount: "8234",
                         status: "starred",
                         author: {
                             name: "Alan Walker"
@@ -79,7 +79,7 @@
                         id: 4,
                         title: "New to BlockHub",
                         rate: "43",
-                        comments_count: "8234",
+                        commentsCount: "8234",
                         author: {
                             name: "Alan Walker"
                         }

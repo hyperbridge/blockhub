@@ -5,7 +5,7 @@
                 <i :class="icon"></i>
             </div>
             <div class="text">
-                <router-link :to="{ name: 'Community Forum', params: { id: forum.id } }">
+                <router-link :to="{ path: 'community-forum-id', params: { id: forum.id } }">
                     {{ forum.title }}
                 </router-link>
             </div>

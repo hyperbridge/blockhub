@@ -17,7 +17,6 @@
 
 <script>
     export default {
-        name: 'c-join-community',
         computed:{
             signedIn() {
                 return this.$store.state.application.signedIn

@@ -16,9 +16,9 @@
                     <i class="fas" :class="[ post.rate < 0 ? 'fa-chevron-down' : 'fa-chevron-up' ]"></i>
                     {{ post.rate < 0 ? post.rate * -1 : post.rate }}
                 </div>
-                <div class="comments_count">
+                <div class="commentsCount">
                     <i class="fas fa-comment"></i>
-                    {{ post.comments_count }}
+                    {{ post.commentsCount }}
                 </div>
                 <div class="user">
                     <div>
@@ -219,7 +219,7 @@
                     line-height: 16px;
                 }
             }
-            .comments_count {
+            .commentsCount {
                 width: 60px;
                 text-align: left;
                 i {

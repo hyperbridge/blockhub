@@ -1,25 +1,24 @@
 <template>
     <c-layout navigationKey="store">
+        <div class="container-fluid">
+            <c-block :noGutter="true" :onlyContentBg="true">
+                <c-heading-bar
+                    slot="title"
+                    class="mb-0"
+                    :headingTabs="[
+                        { title: 'General', category: 'general_forum' },
+                        { title: 'Game Forums', category: 'game_forums_forum' },
+                        { title: 'Support', category: 'support_forum' }
+                    ]"
+                    @changeTab="category = $event"
+                >
+                </c-heading-bar>
 
-            <div class="container-fluid">
-                <c-block :noGutter="true" :onlyContentBg="true">
-                    <c-heading-bar
-                        slot="title"
-                        class="mb-0"
-                        :headingTabs="[
-                    { title: 'General', category: 'general_forum' },
-                    { title: 'Game Forums', category: 'game_forums_forum' },
-                    { title: 'Support', category: 'support_forum' }
-                ]"
-                        @changeTab="category = $event;"
-                    >
-                    </c-heading-bar>
+                <div class="discussions-list">
 
-                    <div class="discussions-list">
-
-                    </div>
-                </c-block>
-            </div>
+                </div>
+            </c-block>
+        </div>
     </c-layout>
 </template>
 
@@ -37,7 +36,7 @@
                     {
                         title: "New to BlockHub",
                         rate: "43",
-                        comments_count: "8234",
+                        commentsCount: "8234",
                         author: {
                             name: "Alan Walker"
                         }
@@ -45,7 +44,7 @@
                     {
                         title: "New to BlockHub",
                         rate: "43",
-                        comments_count: "8234",
+                        commentsCount: "8234",
                         author: {
                             name: "Alan Walker"
                         }
@@ -53,7 +52,7 @@
                     {
                         title: "New to BlockHub",
                         rate: "43",
-                        comments_count: "8234",
+                        commentsCount: "8234",
                         author: {
                             name: "Alan Walker"
                         }
@@ -61,7 +60,7 @@
                     {
                         title: "New to BlockHub",
                         rate: "43",
-                        comments_count: "8234",
+                        commentsCount: "8234",
                         author: {
                             name: "Alan Walker"
                         }
@@ -217,7 +216,7 @@
                     float: unset;
                 }
             }
-            .comments_count {
+            .commentsCount {
                 width: 60px;
                 text-align: left;
                 i {
