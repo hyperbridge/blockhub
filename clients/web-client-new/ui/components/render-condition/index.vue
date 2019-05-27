@@ -22,11 +22,17 @@
         },
         async created() {
             this.$store.state.application.signedIn = false
-
+console.log('[BlockHub] Render condition - ' + this.type)
             if (this.type === 'initialized') {
-                await this.initialize()
+                const jwt = this.$cookies.get('feathers-jwt')
 
-                return
+                if (jwt) {
+                    await this.authenticate()
+                }
+                else {
+                    await this.initialize()
+                    return
+                }
             } else if (this.type === 'authenticated') {
                 await this.authenticate()
             } else if (this.type === 'user') {
@@ -61,11 +67,12 @@
         methods: {
             async authenticate() {
                 if (this.$store.state.auth.accessToken) {
-                    if (this.type === 'authenticated') {
-                        this.satisfied = true
-                    }
+                    this.satisfied = true
                 } else {
-                    await this.$store.dispatch('auth/authenticate')
+                    await this.$store.dispatch('auth/authenticate', {
+                        strategy: 'jwt',
+                        accessToken: this.$cookies.get('feathers-jwt'),
+                    })
                         .catch(error => {
                             if (error.message.includes('Could not find stored JWT')) {
                                 // if (this.type === 'authenticated') {
@@ -83,16 +90,12 @@
                             return error
                         })
 
-                    if (this.type === 'authenticated') {
-                        this.satisfied = true
-                    }
+                    this.satisfied = true
                 }
             },
             initialize() {
                 if (this.initialized) {
-                    if (this.type === 'initialized') {
-                        this.satisfied = true
-                    }
+                    this.satisfied = true
 
                     return
                 }
@@ -101,9 +104,7 @@
 
                 this.$store.dispatch('root/updateSingle', ['application/initialized', true])
 
-                if (this.type === 'initialized') {
-                    this.satisfied = true
-                }
+                this.satisfied = true
             },
         }
     }

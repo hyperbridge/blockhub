@@ -34,7 +34,8 @@ export default {
         // Doc: https://axios.nuxtjs.org/usage
         '@nuxtjs/axios',
         '@nuxtjs/pwa',
-        '@nuxtjs/moment'
+        '@nuxtjs/moment',
+        'cookie-universal-nuxt'
         // './modules/init'
     ],
     build: {
