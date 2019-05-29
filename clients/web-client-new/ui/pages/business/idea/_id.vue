@@ -32,14 +32,14 @@
                     </label>
                     <div class="col-sm-8">
                         <c-multiselect v-model="project.tags"
-                                    tag-placeholder="Add this as new tag"
-                                    placeholder="Search or add a tag"
-                                    label="value"
-                                    track-by="key"
-                                    :options="tagOptions"
-                                    :multiple="true"
-                                    :taggable="true"
-                                    @tag="addTag">
+                            tag-placeholder="Add this as new tag"
+                            placeholder="Search or add a tag"
+                            label="value"
+                            track-by="key"
+                            :options="tagOptions"
+                            :multiple="true"
+                            :taggable="true"
+                            @tag="addTag">
                         </c-multiselect>
                         <span class="form-text"></span>
                     </div>
@@ -58,7 +58,6 @@
                         <label>Maximum Contribution Goal</label>
                     </label>
                     <div class="col-sm-8">
-
                         <input type="text" class="form-control" placeholder="Example: 1000" v-model="project.meta.funds.cap">
                         <span class="form-text"></span>
                     </div>
@@ -315,175 +314,6 @@
             syncBlockchain() {
 
             },
-            createBlockchain() {
-                const run = function(
-                    local, 
-                    DB,
-                    Bridge,
-                    FundingAPI, 
-                    MarketplaceAPI, 
-                    TokenAPI, 
-                    ReserveAPI, 
-                    BABEL_PROMISE,
-                    BABEL_GENERATOR,
-                    BABEL_REGENERATOR,
-                    params
-                ) {
-                    const { project, profile } = params
-                    
-                    return new Promise(async (resolve, reject) => {
-                        const projectRegistrationContract = FundingAPI.api.ethereum.state.contracts.ProjectRegistration.deployed
-
-                        let created = false
-
-                        const watcher = projectRegistrationContract.ProjectCreated().watch((err, res) => {
-                            if (created) return
-
-                            created = true
-
-                            if (err) {
-                                console.warn('[BlockHub][Marketplace] Error', err)
-
-                                return reject(err)
-                            }
-
-                            project.$loki = undefined
-                            project.id = res.args.projectId.toNumber()
-
-                            try {
-                                DB.funding.projects.insert(project)
-                                console.log('after', project.id)
-                            } catch (e) {
-                                try {
-                                    DB.funding.projects.update(project)
-                                } catch (e) {
-                                    reject(e)
-                                }
-                            }
-
-                            DB.save()
-
-                            Bridge.sendCommand('updateState', {
-                                module: 'funding',
-                                state: {
-                                    projects: DB.funding.projects.data
-                                }
-                            })
-
-                            console.log('Project created')
-
-                            resolve(project)
-                        })
-
-                        await projectRegistrationContract.createProject(
-                            project.name,
-                            project.description,
-                            project.content,
-                            { from: profile.address }
-                        )
-
-                        watcher.stopWatching(() => {
-                            // Must be async or tries to launch nasty process
-                        })
-                    })
-                }
-
-                const cmd = {
-                    key: run.toString(),
-                    params: {
-                        profile: this.$store.state.application.activeProfile,
-                        project: this.project
-                    }
-                }
-
-                this.$desktop.sendCommand('eval', cmd).then((projectResult) => {
-                    if (projectResult.id) {
-                        this.project.id = projectResult.id
-                        this.successfulCreationMessage = "Congratulations, your project has been created!"
-
-                        this.funding.projects[this.project.id] = this.project
-
-                        this.$router.push('/business/project/' + this.project.id)
-                    }
-                })
-            },
-            updateBlockchain() {
-                const run = function(
-                    local, 
-                    DB,
-                    Bridge,
-                    FundingAPI, 
-                    MarketplaceAPI, 
-                    TokenAPI, 
-                    ReserveAPI, 
-                    BABEL_PROMISE,
-                    BABEL_GENERATOR,
-                    BABEL_REGENERATOR,
-                    params
-                ) {
-                    return new Promise(async () => {
-                        const project = {
-                            title: 'test',
-                            description: 'test',
-                            about: 'test',
-                            minContributionGoal: 1000,
-                            maxContributionGoal: 10000,
-                            contributionPeriod: 4,
-                            noRefunds: false,
-                            noTimeline: true,
-                        }
-
-                        const projectRegistrationContract = FundingAPI.api.ethereum.state.contracts.ProjectRegistration.deployed
-
-                        let resProjectId = null
-                        const getProjectId = new Promise((res) => {
-                            resProjectId = res
-                        })
-
-                        const watcher = projectRegistrationContract.ProjectCreated().watch((err, res) => {
-                            if (err) {
-                                console.warn('[BlockHub][Funding] Error', err)
-
-                                return reject(err)
-                            }
-
-                            project.$loki = undefined
-                            project.id = res.args.projectId.toNumber()
-
-                            try {
-                                DB.funding.projects.insert(project)
-                            } catch (e) {
-                                try {
-                                    DB.funding.projects.update(project)
-                                } catch (e) {
-                                    reject(e)
-                                }
-                            }
-
-                            resProjectId(project.id)
-                        })
-
-                        await projectRegistrationContract.createProject(
-                            project.title,
-                            project.description,
-                            project.about,
-                        )
-
-                        watcher.stopWatching()
-
-                        const projectId = await getProjectId
-
-                        await projectRegistrationContract.setProjectContributionGoals(projectId, project.minContributionGoal, project.maxContributionGoal, project.contributionPeriod, { from: developerAccount });
-                        await projectRegistrationContract.setProjectTerms(projectId, project.noRefunds, project.noTimeline, { from: developerAccount });
-
-                        const remoteProject = await projectRegistrationContract.getProject(projectId);
-
-                        console.log(remoteProject)
-                    })
-                }
-
-                this.$desktop.sendCommand('eval', run.toString())
-            },
             addTag (newTag) {
                 const tag = {
                     key: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000)),
@@ -508,7 +338,6 @@
 
                     this.$router.push('/business/project/' + this.project.id)
                 })
-
             },
             save() {
                 this.project.ownerId = this.$store.state.application.activeProfile.id

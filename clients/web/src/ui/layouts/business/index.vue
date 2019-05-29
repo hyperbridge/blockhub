@@ -144,6 +144,101 @@
                                         icon: 'fas fa-square-full icon-sm'
                                     },
                                 ]
+                            },
+                            {
+                                title: 'Ideas',
+                                child: [
+                                    {
+                                        href: '/business/ideas',
+                                        title: 'All Ideas',
+                                        icon: 'fas fa-square-full icon-sm',
+                                    },
+                                    {
+                                        href: '/business/idea/new',
+                                        title: 'New Ideas',
+                                        icon: 'fas fa-square-full icon-sm'
+                                    },
+                                ]
+                            },
+                            {
+                                title: 'Battle Passes',
+                                child: [
+                                    {
+                                        href: '/business/battlepasses',
+                                        title: 'All Battle Passes',
+                                        icon: 'fas fa-square-full icon-sm',
+                                    },
+                                    {
+                                        href: '/business/battlepass/new',
+                                        title: 'New Battle Passes',
+                                        icon: 'fas fa-square-full icon-sm'
+                                    },
+                                ]
+                            },
+                            {
+                                title: 'Communities',
+                                child: [
+                                    {
+                                        href: '/business/communities',
+                                        title: 'All Communities',
+                                        icon: 'fas fa-square-full icon-sm',
+                                    },
+                                ]
+                            },
+                            {
+                                title: 'Orders',
+                                child: [
+                                    {
+                                        href: '/business/orders',
+                                        title: 'All Orders',
+                                        icon: 'fas fa-square-full icon-sm',
+                                    },
+                                ]
+                            },
+                            {
+                                title: 'Tournaments',
+                                child: [
+                                    {
+                                        href: '/business/tournaments',
+                                        title: 'All Tournaments',
+                                        icon: 'fas fa-square-full icon-sm',
+                                    },
+                                    {
+                                        href: '/business/tournament/new',
+                                        title: 'New Tournaments',
+                                        icon: 'fas fa-square-full icon-sm'
+                                    },
+                                ]
+                            },
+                            {
+                                title: 'Realms',
+                                child: [
+                                    {
+                                        href: '/business/realms',
+                                        title: 'All Realms',
+                                        icon: 'fas fa-square-full icon-sm',
+                                    },
+                                    {
+                                        href: '/business/realm/new',
+                                        title: 'New Realms',
+                                        icon: 'fas fa-square-full icon-sm'
+                                    },
+                                ]
+                            },
+                            {
+                                title: 'Licenses',
+                                child: [
+                                    {
+                                        href: '/business/licenses',
+                                        title: 'All Licenses',
+                                        icon: 'fas fa-square-full icon-sm',
+                                    },
+                                    {
+                                        href: '/business/license/new',
+                                        title: 'New Licenses',
+                                        icon: 'fas fa-square-full icon-sm'
+                                    },
+                                ]
                             }
                         ]
                     }
