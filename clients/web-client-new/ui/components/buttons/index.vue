@@ -69,6 +69,10 @@
                 type: Boolean,
                 default: false
             },
+            reload: {
+                type: Boolean,
+                default: false
+            },
             size: {
                 type: String,
                 default: 'sm'
@@ -97,6 +101,11 @@
                 sound.play()
             },
             click() {
+                if (this.reload) {
+                    window.location = window.location.origin + this.to
+                    return
+                }
+
                 this.$store.dispatch('application/setEditorMode', 'viewing')
                 //this.$store.commit('application/activateModal', null)
 
