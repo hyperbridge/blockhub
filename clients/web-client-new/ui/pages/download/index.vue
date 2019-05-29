@@ -323,8 +323,6 @@
 </template>
 
 <script>
-    import 'swiper/dist/css/swiper.css'
-
     export default {
         components: {
             'c-download-block': () => import('~/components/download-block').then(m => m.default || m),

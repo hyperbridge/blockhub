@@ -10,7 +10,6 @@
 
 <script>
 export default {
-    name: 'product-cards',
     components: {
         'c-product-card-dynamic': () => import('~/components/store/product-card-dynamic').then(m => m.default || m)
     },

@@ -59,23 +59,23 @@
 
 <script>
     export default {
-        props:{
+        props: {
             category: {
                 type: Object
             }
         },
-        data(){
-            return{
+        data() {
+            return {
                 showDetails: false
             }
         },
         methods:{
-            chosenCategory(){
-                this.showDetails = true;
+            chosenCategory() {
+                this.showDetails = true
                 this.$emit('categorySelect', this.category)
             },
-            closeCategory(){
-                this.showDetails = false;
+            closeCategory() {
+                this.showDetails = false
                 this.$emit('categoryClose')
             }
         }

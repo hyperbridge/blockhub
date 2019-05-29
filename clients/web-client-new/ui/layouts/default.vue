@@ -14,6 +14,9 @@
     import Vue from 'vue'
     import * as DB from '@/db'
 
+    import '@/css/styles.scss'
+    import 'swiper/dist/css/swiper.css'
+
     export default {
         name: 'app',
         props: ['data'],

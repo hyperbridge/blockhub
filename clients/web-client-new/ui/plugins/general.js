@@ -5,9 +5,6 @@ import Snotify, { SnotifyPosition } from 'vue-snotify'
 import { Picker, Emoji } from 'emoji-mart-vue'
 import VueCurrencyFilter from 'vue-currency-filter'
 
-import '@/css/styles.scss'
-
-
 export default (context, inject) => {
     const debounce = require('debounce')
 
@@ -23,9 +20,9 @@ export default (context, inject) => {
     if (process.client) {
         const VueNumerals = require('vue-numerals')
         const Popover = require('vue-js-popover')
-        //const VueDraggable = require('vue-draggable')
+        const VueDraggable = require('vue-draggable')
 
-        //Vue.use(VueDraggable)
+        Vue.use(VueDraggable)
         Vue.use(VueNumerals)
         Vue.use(Popover)
     }

@@ -90,15 +90,11 @@
 </template>
 
 <script>
-    import 'swiper/dist/css/swiper.css'
-    
-
     export default {
         components:{
             'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m),
             'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m),
             'c-social-link': () => import('~/components/buttons/social-icon').then(m => m.default || m),
-            
           },
         data(){
             return{

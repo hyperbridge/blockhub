@@ -273,7 +273,6 @@ import axios from 'axios'
 import Vue from 'vue'
 import HeadingBar from '@/components/heading-bar/simple-colored'
 import DottedList from '@/components/list/dots'
-import 'swiper/dist/css/swiper.css'
 
 export default {
     components: {

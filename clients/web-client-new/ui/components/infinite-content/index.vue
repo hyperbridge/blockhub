@@ -288,9 +288,6 @@
 <script>
 import { mapGetters } from 'vuex'
 
-
-import 'swiper/dist/css/swiper.css'
-
 export default {
     props: {
         list: {

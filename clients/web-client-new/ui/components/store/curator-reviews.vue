@@ -10,16 +10,10 @@
 </template>
 
 <script>
-    import 'swiper/dist/css/swiper.css'
-    
-
     export default {
-        name: 'curator-reviews',
         components: {
             'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
             'c-curator-review': () => import('~/components/store/curator-review').then(m => m.default || m),
-            
-            
         },
         props: {
             reviews: {
@@ -50,7 +44,7 @@
         },
         computed: {
             slider() {
-                return this.$refs.slider.swiper;
+                return this.$refs.slider.swiper
             },
         }
     }

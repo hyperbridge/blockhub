@@ -49,10 +49,6 @@
 </template>
 
 <script>
-    import * as Bridge from '@/framework/desktop-bridge'
-    
-    import 'swiper/dist/css/swiper.css'
-
     export default {
         props: {
             darkMode: {
@@ -61,7 +57,6 @@
             }
         },
         components: {
-            
               'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         },
         data(){

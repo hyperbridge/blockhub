@@ -22,11 +22,7 @@
 </template>
 
 <script>
-import 'swiper/dist/css/swiper.css'
-
-
 export default {
-    name: 'product-slider',
     components: {
         'c-product-card': () => import('~/components/store/product-card').then(m => m.default || m),
         'c-product-card-dynamic': () => import('~/components/store/product-card-dynamic').then(m => m.default || m),

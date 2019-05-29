@@ -28,15 +28,11 @@
 </template>
 
 <script>
-    import 'swiper/dist/css/swiper.css'
-    
-
     export default {
         name: 'product-slider',
         components: {
             'c-stream-item': () => import('~/components/stream').then(m => m.default || m),
-            
-          },
+        },
         props: {
             streams: Array,
             title: String,

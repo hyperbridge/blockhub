@@ -11,8 +11,8 @@
 
 <script>
     export default {
-        props:{
-            games: [ Array, Object ]
+        props: {
+            games: [Array, Object]
         },
         components:{
             'c-game-tab': () => import('~/components/games-list/list-item').then(m => m.default || m),

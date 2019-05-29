@@ -27,9 +27,6 @@
 </template>
 
 <script>
-    import 'swiper/dist/css/swiper.css'
-    
-
     export default {
         components: {
             'c-stream-item': () => import('~/components/stream').then(m => m.default || m),

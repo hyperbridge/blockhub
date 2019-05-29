@@ -73,9 +73,11 @@
         <div class="block add-key" v-popover="{ name: popoverKey }" @click="viewType = 'array-full'">
             <i class="fa fa-plus"></i>
         </div>
-        <popover :name="popoverKey" :pointer="false" :class="viewType" style="position: fixed;left: 0px;top: 0px;">
-            <c-item-add-form @confirm="newItem" @popoverView="popoverClass" :needName="false"></c-item-add-form>
-        </popover>
+        <no-ssr>
+            <popover :name="popoverKey" :pointer="false" :class="viewType" style="position: fixed;left: 0px;top: 0px;">
+                <c-item-add-form @confirm="newItem" @popoverView="popoverClass" :needName="false"></c-item-add-form>
+            </popover>
+        </no-ssr>
     </div>
 </template>
 

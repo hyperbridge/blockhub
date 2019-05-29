@@ -218,9 +218,6 @@
 </template>
 
 <script>
-    import 'swiper/dist/css/swiper.css'
-    
-
     export default {
         props: ['product', 'editing'],
         components: {

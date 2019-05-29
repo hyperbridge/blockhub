@@ -144,25 +144,17 @@
 </template>
 
 <script>
-    import 'swiper/dist/css/swiper.css'
-
-    
-
     export default {
         components: {
-            'c-layout': () => import('~/components/front-layout').then(m => m.default || m),
             'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m),
             'c-assets-list': () => import('~/components/assets-list-item').then(m => m.default || m),
             'c-assets-item': () => import('~/components/assets-list-item/item').then(m => m.default || m),
             'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
             'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
             'c-pagination': () => import('~/components/pagination').then(m => m.default || m),
-            'c-block': () => import('~/components/block').then(m => m.default || m),
             'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m),
             'c-banner': () => import('~/components/banner/simple').then(m => m.default || m),
             'c-main-banner': () => import('~/components/banner/index').then(m => m.default || m),
-            
-            
         },
         data: () => ({
             collection_items:[

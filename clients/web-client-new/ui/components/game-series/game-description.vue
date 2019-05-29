@@ -31,8 +31,6 @@
 </template>
 
 <script>
-    import 'swiper/dist/css/swiper.css'
-    
     import moment from 'moment'
 
     export default {

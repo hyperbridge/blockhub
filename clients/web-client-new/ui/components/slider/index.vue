@@ -18,16 +18,9 @@
 </template>
 
 <script>
-    import 'swiper/dist/css/swiper.css'
-
-    
-
     export default {
-        name: 'product-slider',
         components: {
-            'c-block': () => import('~/components/block').then(m => m.default || m),
-            
-          },
+        },
         props: {
             products: Array,
             title: String,
