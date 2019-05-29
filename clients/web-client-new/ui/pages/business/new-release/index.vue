@@ -1,95 +1,97 @@
 <template>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-8">
-                <div class="form-group row align-items-center">
-                    <div class="col-sm-3 col-lg-2">
-                        <label>Version</label>
+    <c-layout>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-8">
+                    <div class="form-group row align-items-center">
+                        <div class="col-sm-3 col-lg-2">
+                            <label>Version</label>
+                        </div>
+                        <div class="col-sm-9 col-lg-10">
+                            <input type="text" class="form-control" placeholder="Example: v.0.0.7">
+                        </div>
                     </div>
-                    <div class="col-sm-9 col-lg-10">
-                        <input type="text" class="form-control" placeholder="Example: v.0.0.7">
+                    <div class="form-group row">
+                        <div class="col-sm-3 col-lg-2">
+                            <label>Your text</label>
+                        </div>
+                        <div class="col-sm-9 col-lg-10">
+                            <c-text-editor v-model="text" :editorToolbar="customToolbar" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-3 col-lg-2">
-                        <label>Your text</label>
-                    </div>
-                    <div class="col-sm-9 col-lg-10">
-                        <c-text-editor v-model="text" :editorToolbar="customToolbar" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-3 col-lg-2"></div>
-                    <div class="col-sm-9 col-lg-10">
-                        <div class="file-upload__wrapper">
-                            <div v-show="$refs.upload && $refs.upload.dropActive" class="drop-active">
-                                <h3>Drop files to upload</h3>
-                            </div>
-                            <c-file-upload ref="upload"
-                                           v-model="files"
-                                           :multiple="true"
-                                           :drop="true"
-                                           class="w-100"
-                                           :drop-directory="true"
-                                           @input-file="inputFile"
-                                           @input-filter="inputFilter">
-
-                                <div class="file-upload__select-file">
-                                    Attach files by dragging & dropping or click here.
+                    <div class="form-group row">
+                        <div class="col-sm-3 col-lg-2"></div>
+                        <div class="col-sm-9 col-lg-10">
+                            <div class="file-upload__wrapper">
+                                <div v-show="$refs.upload && $refs.upload.dropActive" class="drop-active">
+                                    <h3>Drop files to upload</h3>
                                 </div>
-                            </c-file-upload>
-                            <c-notification-inline type="danger" v-if="wrongFormat" class="my-3" size="sm">
-                                Wrong file format
-                            </c-notification-inline>
-                            <ul class="file-upload__files-list" v-if="files.length">
-                                <li v-for="(file, index) in files" :key="file.id">
-                                    <span class="upload-status" v-if="file.error">{{file.error}}</span>
-                                    <span class="upload-status" v-else-if="file.success">
-                                        <i class="fas fa-check-circle" style="color: #43C981"></i>
-                                    </span>
-                                    <span class="upload-status" v-else-if="file.active">
-                                        <c-loading-bar-circle />
-                                    </span>
-                                    <span class="file-name">{{file.name}}</span>
-                                    <span class="file-size">
-                                        {{file.size | numeralFormat('0.00b') }}
-                                        <i class="fa fa-times ml-3" aria-hidden="true" v-if="!$refs.upload || !$refs.upload.active" @click.prevent="$refs.upload.remove(file)"></i>
-                                    </span>
-                                </li>
-                                <hr />
-                            </ul>
+                                <c-file-upload ref="upload"
+                                            v-model="files"
+                                            :multiple="true"
+                                            :drop="true"
+                                            class="w-100"
+                                            :drop-directory="true"
+                                            @input-file="inputFile"
+                                            @input-filter="inputFilter">
+
+                                    <div class="file-upload__select-file">
+                                        Attach files by dragging & dropping or click here.
+                                    </div>
+                                </c-file-upload>
+                                <c-notification-inline type="danger" v-if="wrongFormat" class="my-3" size="sm">
+                                    Wrong file format
+                                </c-notification-inline>
+                                <ul class="file-upload__files-list" v-if="files.length">
+                                    <li v-for="(file, index) in files" :key="file.id">
+                                        <span class="upload-status" v-if="file.error">{{file.error}}</span>
+                                        <span class="upload-status" v-else-if="file.success">
+                                            <i class="fas fa-check-circle" style="color: #43C981"></i>
+                                        </span>
+                                        <span class="upload-status" v-else-if="file.active">
+                                            <c-loading-bar-circle />
+                                        </span>
+                                        <span class="file-name">{{file.name}}</span>
+                                        <span class="file-size">
+                                            {{file.size | numeralFormat('0.00b') }}
+                                            <i class="fa fa-times ml-3" aria-hidden="true" v-if="!$refs.upload || !$refs.upload.active" @click.prevent="$refs.upload.remove(file)"></i>
+                                        </span>
+                                    </li>
+                                    <hr />
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group row align-items-center">
-                    <div class="col-sm-3 col-lg-2">
-                    </div>
-                    <div class="col-sm-9 col-lg-10">
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input">
-                            <label class="form-check-label">This is pre-release</label>
+                    <div class="form-group row align-items-center">
+                        <div class="col-sm-3 col-lg-2">
+                        </div>
+                        <div class="col-sm-9 col-lg-10">
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input">
+                                <label class="form-check-label">This is pre-release</label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group row align-items-center">
-                    <div class="col-sm-3 col-lg-2">
-                    </div>
-                    <div class="col-sm-9 col-lg-10">
-                        <c-button status="success" iconHide>
-                            Publish release
-                        </c-button>
-                        <c-button status="danger" iconHide class="mx-3">
-                            Save draft
-                        </c-button>
+                    <div class="form-group row align-items-center">
+                        <div class="col-sm-3 col-lg-2">
+                        </div>
+                        <div class="col-sm-9 col-lg-10">
+                            <c-button status="success" iconHide>
+                                Publish release
+                            </c-button>
+                            <c-button status="danger" iconHide class="mx-3">
+                                Save draft
+                            </c-button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </c-layout>
 </template>
 
 <script>
-    import { VueEditor } from "vue2-editor";
+    import { VueEditor } from 'vue2-editor'
     import VueUploadComponent from 'vue-upload-component'
 
     export default {

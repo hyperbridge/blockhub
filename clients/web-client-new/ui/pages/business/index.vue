@@ -1,5 +1,5 @@
 <template>
-    <!--<c-layout>-->
+    <c-layout>
         <div>
             <div class="container-fluid">
                 <div class="row">
@@ -488,7 +488,7 @@
 
             </div>
         </div>
-    <!--</c-layout>-->
+    </c-layout>
 </template>
 
 <script>
@@ -527,7 +527,10 @@
             
             this.$nextTick(() => {
                 this.loadingState = false
-                document.getElementById('startup-loader').style.display = 'none'
+
+                if (process.client) {
+                    document.getElementById('startup-loader').style.display = 'none'
+                }
             })
         },
     }

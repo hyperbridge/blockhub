@@ -3,14 +3,14 @@
     <div id="business-app" class="page page--w-header page--w-container">
 
         <transition name="slideDown">
-            <div class="page-top-bar draggable" :class="{'invert' : darkMode}">
+            <div class="page-top-bar draggable" :class="{ 'invert' : darkMode }">
                 <c-button status="none" class="logo-holder undraggable" to="/">
                     <c-img src="/img/logo-white.svg" alt="Logo" v-if="darkMode" />
                     <c-img src="/img/logo.svg" alt="Logo" style="height: 90%; margin-top: 2%" v-else />
                 </c-button>
-                <div class="h2 ml-4 mb-0 pl-4 text-uppercase border-left">
+                <router-link to="/business" class="h2 ml-4 mb-0 pl-4 text-uppercase border-left">
                     Business Manager
-                </div>
+                </router-link>
                 <div class="page-top-bar__profile mb-0 float-right h5" style="margin-left: auto" @click="$store.commit('application/showProfileChooser', true)">
                     <div class="page-top-bar__profile-avatar">
                         <c-img src="https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png" />
@@ -22,12 +22,12 @@
 
         <!-- PAGE LEFT PANEL -->
         <transition name="slideDown">
-            <sidebar-menu width="250px" :menu="menu" :class="{'light-v' : !darkMode}" @collapse="minimized = !minimized" />
+            <sidebar-menu width="250px" :menu="menu" :class="{ 'light-v' : !darkMode }" @collapse="minimized = !minimized" />
         </transition>
 
         <!-- PAGE CONTENT -->
         <transition name="fade">
-            <div class="content" id="content" :class="{'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel, 'invert' : darkMode, 'is-minimized' : minimized }">
+            <div class="content" id="content" :class="{ 'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel, 'invert' : darkMode, 'is-minimized' : minimized }">
                 <!-- PAGE HEADING -->
                 <div class="page-heading">
                     <div class="page-heading__container">
@@ -66,7 +66,7 @@
 
         <!-- PAGE RIGHT PANEL -->
         <transition name="slideRight">
-            <div class="page-sidepanel text-right" id="page-sidepanel" v-if="showRightPanel" :class="{'invert' : darkMode}">
+            <div class="page-sidepanel text-right" id="page-sidepanel" v-if="showRightPanel" :class="{ 'invert' : darkMode }">
                 <div class="page-sidepanel__content">
                     <slot name="right" />
                 </div>
@@ -80,6 +80,8 @@
 
 <script>
     import { SidebarMenu } from 'vue-sidebar-menu'
+
+    import 'vue-multiselect/dist/vue-multiselect.min.css'
 
     export default {
         name: 'business',
@@ -175,7 +177,7 @@
         },
         methods: {
             updateBreadcrumbLinks() {
-                this.breadcrumbLinksData = this.$route.meta.breadcrumb
+                //this.breadcrumbLinksData = this.$route.meta.breadcrumb || []
             },
             // initialize() {
             //     if (this.initialized) {
@@ -193,19 +195,21 @@
 
             })
 
-            document.body.classList.add('light')
+            if (process.client) {
+                document.body.classList.add('light')
+            }
 
             this.updateBreadcrumbLinks()
         },
         beforeDestroy() {
-            document.body.classList.remove('light')
+            if (process.client) {
+                document.body.classList.remove('light')
+            }
         },
         watch: {
             '$route'(to, from) {
                 this.updateBreadcrumbLinks()
                 this.pageTitle = to.meta.title || 'Dashboard'
-            },
-            '$store.state.auth.accessToken'() {
             }
         }
     }

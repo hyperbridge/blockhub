@@ -91,7 +91,7 @@
                                     <!--</button>-->
                                 </td>
                                 <td>
-                                    <router-link :to="{ name: 'Release History', params: {id: product.id } }">
+                                    <router-link :to="{ path: '/business/product/' + product.id + '/releases' }">
                                         View
                                     </router-link>
                                 </td>

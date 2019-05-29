@@ -105,8 +105,6 @@
 </template>
 
 <script>
-    import 'vue-multiselect/dist/vue-multiselect.min.css'
-
     export default {
         props: {
             id: [String, Number]

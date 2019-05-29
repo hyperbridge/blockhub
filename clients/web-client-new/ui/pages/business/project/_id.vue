@@ -263,11 +263,9 @@
 
 <script>
     import beautify from 'json-beautify'
-    import 'vue-multiselect/dist/vue-multiselect.min.css'
 
     export default {
         props: {
-            id: [String, Number]
         },
         components: {
             'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
@@ -279,7 +277,7 @@
             return {
                 loadingState: true,
                 notice: "",
-                project: this.id === 'new' ? this.$store.state.funding.defaultProject : this.$store.getters['projects/get'](this.id),
+                project: this.$route.params.id === 'new' ? this.$store.state.funding.defaultProject : this.$store.getters['projects/get'](this.$route.params.id),
                 advanced: false,
                 blockchain: false,
                 tagOptions: []
@@ -287,7 +285,7 @@
         },
         computed: {
             savedProject() {
-                return this.$store.getters['projects/get'](this.id)
+                return this.$store.getters['projects/get'](this.$route.params.id)
             },
             projectJson() {
                 return beautify(this.project, null, 2, 100)
@@ -299,10 +297,10 @@
             }
         },
         created() {
-            if (this.id !== 'new') {
+            if (this.$route.params.id !== 'new') {
                 this.$store.dispatch('projects/find', {
                     query: {
-                        id: Number(this.id),
+                        id: Number(this.$route.params.id),
                         $eager: 'tags',
                     }
                 })

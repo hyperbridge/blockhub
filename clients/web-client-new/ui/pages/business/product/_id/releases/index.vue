@@ -1,5 +1,5 @@
 <template>
-    <!--<c-layout title="Release history">-->
+    <c-layout title="Release history">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -46,12 +46,13 @@
                 </div>
             </div>
         </div>
-    <!--</c-layout>-->
+    </c-layout>
 </template>
 
 <script>
     export default {
         components: {
+            'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
             'c-buttons-group': () => import('~/components/buttons/group').then(m => m.default || m),
             'c-release-tag-item': () => import('~/components/business/release-history/tag-item').then(m => m.default || m),
             'c-release-list-item': () => import('~/components/business/release-history/list-item').then(m => m.default || m),
@@ -59,7 +60,7 @@
         data() {
             return {
                 listType: 'list',
-                releases_list:[
+                releaseList:[
                     {
                         id: "987",
                         date: '2018-03-09T18:31:42+03:30',
@@ -151,7 +152,7 @@
         computed:{
             ifList(){
                 switch (this.listType) {
-                    case "list":
+                    case 'list':
                         return 'success'
                     default:
                         return 'outline-success'
@@ -159,19 +160,19 @@
             },
             ifTags(){
                 switch (this.listType) {
-                    case "tags":
+                    case 'tags':
                         return 'success'
                     default:
                         return 'outline-success'
                 }
             },
             sortedList(){
-                let arr = this.releases_list;
+                let arr = this.releaseList
                 arr.sort(function(a,b){
                     console.log(new Date(b.date) - new Date(a.date))
-                    return new Date(b.date) - new Date(a.date);
-                });
-                return arr;
+                    return new Date(b.date) - new Date(a.date)
+                })
+                return arr
             }
         }
     }

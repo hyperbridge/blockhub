@@ -37,7 +37,7 @@
 </template>
 
 <script>
-    import { VueEditor } from "vue2-editor";
+    import { VueEditor } from 'vue2-editor'
     import VueUploadComponent from 'vue-upload-component'
 
     export default {
