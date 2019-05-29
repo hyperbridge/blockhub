@@ -143,10 +143,6 @@
             })
         },
         mounted() {
-            this.$nextTick(() => {
-                this.loadingState = false
-                document.getElementById('startup-loader').style.display = 'none'
-            })
         },
     }
 </script>

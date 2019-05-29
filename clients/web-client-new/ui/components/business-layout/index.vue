@@ -4,7 +4,7 @@
 
         <transition name="slideDown">
             <div class="page-top-bar draggable" :class="{ 'invert' : darkMode }">
-                <c-button status="none" class="logo-holder undraggable" to="/" reload>
+                <c-button status="none" class="logo-holder undraggable" to="/">
                     <c-img src="/img/logo-white.svg" alt="Logo" v-if="darkMode" />
                     <c-img src="/img/logo.svg" alt="Logo" style="height: 90%; margin-top: 2%" v-else />
                 </c-button>
@@ -297,12 +297,15 @@
             this.updateBreadcrumbLinks()
         },
         beforeDestroy() {
-            if (process.client) {
-                document.body.classList.remove('light')
-            }
         },
         watch: {
             '$route'(to, from) {
+                if (process.client) {
+                    if (from.path.indexOf('/business') !== -1 && to.path.indexOf('/business') === -1) {
+                        document.body.classList.remove('light')
+                    }
+                }
+
                 this.updateBreadcrumbLinks()
                 this.pageTitle = to.meta.title || 'Dashboard'
             }

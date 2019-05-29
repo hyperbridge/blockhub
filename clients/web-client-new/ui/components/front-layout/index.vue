@@ -1242,9 +1242,11 @@
         created() {
             this.handleResize()
             this.checkScrollButton()
-        },
-        mounted() {
-            window.addEventListener('resize', this.handleResize())
+
+            if (process.client) {
+                window.addEventListener('resize', this.handleResize())
+            }
+
             this.updateBreadcrumbLinks()
             this.$nextTick(() => {
                 this.loadingState = false
@@ -1317,6 +1319,8 @@
                     return true
                 })
             }
+        },
+        mounted() {
         },
         watch: {
             'profileChooser': function() {

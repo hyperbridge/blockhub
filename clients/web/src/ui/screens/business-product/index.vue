@@ -234,6 +234,7 @@
             return {
                 product: product,
                 loadingState: true,
+                importing: false,
                 importStep: 1,
                 notice: "",
                 advanced: false,

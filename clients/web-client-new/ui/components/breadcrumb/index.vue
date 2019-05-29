@@ -25,8 +25,9 @@ export default {
         align-items: center;
         flex-wrap: nowrap;
         overflow: hidden;
-        padding: 0;
+        padding: 0 !important;
         background: transparent;
+        margin: 20px 30px !important;
         li {
             background: rgba(255, 255, 255, .3);
             height: 20px;
