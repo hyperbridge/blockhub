@@ -274,12 +274,12 @@ export const actions = {
 
         if (req.headers.cookie) {
             cookieToken = app.$cookies.get('feathers-jwt')
+            const { accessToken } = await store.dispatch('auth/authenticate', {
+                strategy: 'jwt',
+                accessToken: cookieToken,
+            })
+            console.log(cookieToken, accessToken)
         }
-        const { accessToken } = await store.dispatch('auth/authenticate', {
-            strategy: 'jwt',
-            accessToken: cookieToken,
-        })
-        console.log(cookieToken, accessToken)
         var l = await initAuth({
             commit,
             dispatch,
