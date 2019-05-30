@@ -6591,7 +6591,16 @@ storiesOf('Contributor Box', module)
                   </div>`
     }))
 
-
+storiesOf('Gift box', module)
+    .add('default', () => ({
+        components: {
+            'c-gift-box': (resolve) => require(['@/ui/components/gift'], resolve),
+        },
+        data(){
+            return{}
+        },
+        template: `<div class="p-5"><c-gift-box /></div>`
+    }))
 
 
 /*
