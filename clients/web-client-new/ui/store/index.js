@@ -270,10 +270,9 @@ export const actions = {
             userService: 'accounts'
         })(store)
 
-        let cookieToken
+        let cookieToken = app.$cookies.get('feathers-jwt')
 
-        if (req.headers.cookie) {
-            cookieToken = app.$cookies.get('feathers-jwt')
+        if (cookieToken) {
             const { accessToken } = await store.dispatch('auth/authenticate', {
                 strategy: 'jwt',
                 accessToken: cookieToken,
