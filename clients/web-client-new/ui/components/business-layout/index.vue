@@ -21,7 +21,7 @@
         </transition>
 
         <!-- PAGE LEFT PANEL -->
-        <transition name="slideDown">
+        <transition name="slideDown" no-ssr>
             <sidebar-menu width="250px" :menu="menu" :class="{ 'light-v' : !darkMode }" @collapse="minimized = !minimized" />
         </transition>
 
@@ -375,7 +375,7 @@
         .vsm-item{
             border-radius: 5px;
             overflow: hidden;
-            
+
             .vsm-link{
                 padding: 5px 10px;
                 .vsm-icon{
