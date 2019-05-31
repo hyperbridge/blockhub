@@ -1,7 +1,7 @@
 <template>
     <div class="history-list__list-item">
         <div class="history-list__item-info">
-            <div class="latest-badge" v-if="latest_release">
+            <div class="latest-badge" v-if="latestRelease">
                 Latest Release
             </div>
             <span>
@@ -64,7 +64,7 @@
             author: String,
             size: String,
             text: String,
-            latest_release:{
+            latestRelease:{
                 type: Boolean,
                 default: false
             },

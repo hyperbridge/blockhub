@@ -4,11 +4,11 @@ export default {
     srcDir: 'ui/',
     dev: process.env.NODE_ENV !== 'production',
     head: {
-        title: 'blockhub-web-client',
+        title: 'BlockHub',
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            { hid: 'description', name: 'description', content: 'BlockHub Web Client' }
+            { hid: 'description', name: 'description', content: 'BlockHub' }
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }

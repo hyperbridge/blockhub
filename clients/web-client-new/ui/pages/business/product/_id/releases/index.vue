@@ -26,7 +26,7 @@
                                 :files="release.files"
                                 :text="release.text"
                                 :id="release.id"
-                                :latest_release="release.latest_release"
+                                :latestRelease="release.latestRelease"
                                 :key="release.id"
                             />
                         </div>
@@ -64,7 +64,7 @@
                     {
                         id: "987",
                         date: '2018-03-09T18:31:42+03:30',
-                        latest_release: false,
+                        latestRelease: false,
                         version: '0.5.1',
                         author: 'Josh Doel',
                         text: 'In this update:<ul><li>Simplify sign up</li><li>Hold ALT and click to give feedback!</li></ul>',
@@ -89,7 +89,7 @@
                     {
                         id: "23413",
                         date: '2018-08-09T18:31:42+03:30',
-                        latest_release: true,
+                        latestRelease: true,
                         version: '0.2.1',
                         author: 'Josh Doel',
                         text: 'In this update:<ul><li>Token purchase flow</li><li>Copy to address works</li><li>Account recovery</li></ul>',
@@ -114,7 +114,7 @@
                     {
                         id: "12",
                         date: '2013-12-09T18:31:42+03:30',
-                        latest_release: false,
+                        latestRelease: false,
                         version: '0.0.1',
                         author: 'Josh Doel',
                         text: 'Add version for MacOs',
@@ -129,7 +129,7 @@
                     {
                         id: "243",
                         date: '2013-08-09T18:31:42+03:30',
-                        latest_release: false,
+                        latestRelease: false,
                         version: '0.0.1',
                         author: 'Josh Doel',
                         text: 'First release',

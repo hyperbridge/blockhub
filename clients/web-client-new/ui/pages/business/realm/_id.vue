@@ -32,14 +32,14 @@
                     </label>
                     <div class="col-sm-8">
                         <c-multiselect v-model="realm.tags"
-                                    tag-placeholder="Add this as new tag"
-                                    placeholder="Search or add a tag"
-                                    label="value"
-                                    track-by="key"
-                                    :options="tagOptions"
-                                    :multiple="true"
-                                    :taggable="true"
-                                    @tag="addTag">
+                            tag-placeholder="Add this as new tag"
+                            placeholder="Search or add a tag"
+                            label="value"
+                            track-by="key"
+                            :options="tagOptions"
+                            :multiple="true"
+                            :taggable="true"
+                            @tag="addTag">
                         </c-multiselect>
                         <span class="form-text"></span>
                     </div>
@@ -170,26 +170,26 @@
             toggleAdvanced() {
                 this.advanced = !this.advanced
             },
-            create() {
+            async create() {
                 this.realm.ownerId = this.$store.state.application.activeProfile.id
 
-                this.$store.dispatch('realms/create', this.realm).then((res) => {
-                    this.realm.id = res.id
-                    this.notice = "Congratulations, your realm has been created!"
+                const res = await this.$store.dispatch('realms/create', this.realm)
 
-                    this.$router.push('/business/realm/' + this.realm.id)
-                })
+                this.realm.id = res.id
+                this.notice = "Congratulations, your realm has been created!"
+
+                this.$router.push('/business/realm/' + this.realm.id)
             },
-            save() {
+            async save() {
                 this.realm.ownerId = this.$store.state.application.activeProfile.id
                 
-                this.$store.dispatch('realms/update', [this.realm.id, this.realm, {
+                const res = await this.$store.dispatch('realms/update', [this.realm.id, this.realm, {
                     query: {
                         $eager: 'tags'
                     }
-                }]).then(() => {
-                    this.notice = "Realm has been saved."
-                })
+                }])
+                
+                this.notice = "Realm has been saved."
             }
         },
     }

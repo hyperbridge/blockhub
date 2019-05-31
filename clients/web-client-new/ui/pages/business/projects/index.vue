@@ -36,69 +36,69 @@
                         <div class="table-responsive margin-top-20 margin-bottom-0">
                             <table class="table table-striped table-bordered margin-bottom-0" style="min-width: 800px;">
                                 <thead>
-                                <tr>
-                                    <th width="30">
-                                        <label class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input">
-                                            <span class="custom-control-label"></span>
-                                        </label>
-                                    </th>
-                                    <th width="100">ID</th>
-                                    <th>Name</th>
-                                    <th>Date</th>
-                                    <th>Owner</th>
-                                    <th hidden>Operators</th>
-                                    <th>Funding Obtained</th>
-                                    <th>Funding Goal</th>
-                                    <th width="100">Status</th>
-                                    <th width="30"></th>
-                                </tr>
+                                    <tr>
+                                        <th width="30">
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input">
+                                                <span class="custom-control-label"></span>
+                                            </label>
+                                        </th>
+                                        <th width="100">ID</th>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                        <th>Owner</th>
+                                        <th hidden>Operators</th>
+                                        <th>Funding Obtained</th>
+                                        <th>Funding Goal</th>
+                                        <th width="100">Status</th>
+                                        <th width="30"></th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="project in projects" :key="project.id">
-                                    <td>
-                                        <label class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input">
-                                            <span class="custom-control-label"></span>
-                                        </label>
-                                    </td>
-                                    <td>{{ project.id }}</td>
-                                    <td><c-button status="none" :to="`/business/project/${project.id}`" class="text-secondary text-bold">{{ project.name }}</c-button></td>
-                                    <td>{{ project.meta.created }}</td>
-                                    <td>
-                                        <div class="user user--bordered">
-                                            <img src="http://via.placeholder.com/128x128">
-                                            <div class="user__name">
-                                                <strong>{{ project.owner ? project.owner.name : 'Unknown' }}</strong>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td hidden>
-                                        <div class="user-group user-group--bordered">
-                                            <div class="user">
+                                    <tr v-for="project in projects" :key="project.id">
+                                        <td>
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input">
+                                                <span class="custom-control-label"></span>
+                                            </label>
+                                        </td>
+                                        <td>{{ project.id }}</td>
+                                        <td><c-button status="none" :to="`/business/project/${project.id}`" class="text-secondary text-bold">{{ project.name }}</c-button></td>
+                                        <td>{{ project.meta.created }}</td>
+                                        <td>
+                                            <div class="user user--bordered">
                                                 <img src="http://via.placeholder.com/128x128">
+                                                <div class="user__name">
+                                                    <strong>{{ project.owner ? project.owner.name : 'Unknown' }}</strong>
+                                                </div>
                                             </div>
-                                            <div class="user">
-                                                <img src="http://via.placeholder.com/128x128">
+                                        </td>
+                                        <td hidden>
+                                            <div class="user-group user-group--bordered">
+                                                <div class="user">
+                                                    <img src="http://via.placeholder.com/128x128">
+                                                </div>
+                                                <div class="user">
+                                                    <img src="http://via.placeholder.com/128x128">
+                                                </div>
+                                                <div class="user">
+                                                    <img src="http://via.placeholder.com/128x128">
+                                                </div>
                                             </div>
-                                            <div class="user">
-                                                <img src="http://via.placeholder.com/128x128">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        {{ project.meta.funds.obtained }}
-                                    </td>
-                                    <td>
-                                        {{ project.meta.funds.goal }}
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-outline-success btn-block btn-sm">{{ project.status }}</button>
-                                    </td>
-                                    <td>
-                                        <c-button status="dark" class="btn btn-secondary btn-icon" size="sm" :to="`/business/project/${project.id}`" style="color: #fff"><i class="fas fa-pencil-alt" /></c-button>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td>
+                                            {{ project.meta.funds.obtained }}
+                                        </td>
+                                        <td>
+                                            {{ project.meta.funds.goal }}
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-outline-success btn-block btn-sm">{{ project.status }}</button>
+                                        </td>
+                                        <td>
+                                            <c-button status="dark" class="btn btn-secondary btn-icon" size="sm" :to="`/business/project/${project.id}`" style="color: #fff"><i class="fas fa-pencil-alt" /></c-button>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
