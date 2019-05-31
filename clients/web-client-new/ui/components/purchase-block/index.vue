@@ -48,8 +48,7 @@
                 @click="$emit('addToWishlist')"
                 target="Wishlist"
                 :active="inWishlist"
-                class="mt-3"
-            />
+                class="mt-3" />
 
             <c-button-fav
                 @click="$emit('addToShortcut')"
@@ -57,67 +56,105 @@
                 :active="inShortcut"
                 activeIcon="link"
                 unactiveIcon="unlink"
-                class="mt-3"
-            />
+                class="mt-3" />
+
+            <c-button-fav
+                @click="addToCollection"
+                target="Collection"
+                :active="inShortcut"
+                activeIcon="link"
+                unactiveIcon="unlink"
+                class="mt-3" />
         </div>
     </c-block>
 </template>
 
 <script>
-    import moment from 'moment'
-    export default {
-        name: 'purchase-block',
-        props: {
-            tags: Array,
-            title:{
-                type: String,
-                default: null
-            },
-            price: {
-                type: Number,
-                default: null
-            },
-            eligibleTokens: {
-                type: Number,
-                default: 0
-            },
-            releaseDate: {
-                type: String,
-            },
-            offersPurchases: {
-                type: Boolean,
-                default: false
-            },
-            isUnavailable: {
-                type: Boolean,
-                default: false
-            },
-            isPurchased: {
-                type: Boolean,
-                default: false
-            },
-            isReleased: {
-                type: Boolean,
-                default: false
-            },
-            demoLink: {
-                type: String,
-                default: null
-            },
-            playLink: {
-                type: String,
-                default: null
-            },
-            inWishlist: Boolean,
-            inShortcut: Boolean,
-            purchaseLink: String,
-            fullReviewsLink: String,
-            onClickPurchase: Function
+import moment from 'moment'
+export default {
+    name: 'purchase-block',
+    props: {
+        tags: Array,
+        title:{
+            type: String,
+            default: null
         },
-        components: {
-            'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m)
+        price: {
+            type: Number,
+            default: null
+        },
+        eligibleTokens: {
+            type: Number,
+            default: 0
+        },
+        releaseDate: {
+            type: String,
+        },
+        offersPurchases: {
+            type: Boolean,
+            default: false
+        },
+        isUnavailable: {
+            type: Boolean,
+            default: false
+        },
+        isPurchased: {
+            type: Boolean,
+            default: false
+        },
+        isReleased: {
+            type: Boolean,
+            default: false
+        },
+        demoLink: {
+            type: String,
+            default: null
+        },
+        playLink: {
+            type: String,
+            default: null
+        },
+        inWishlist: Boolean,
+        inShortcut: Boolean,
+        purchaseLink: String,
+        fullReviewsLink: String,
+        onClickPurchase: Function
+    },
+    components: {
+        'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m),
+        'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m)
+    },
+    data() {
+        return {}
+    },
+    methods: {
+        addToCollection() {
+            this.$store.dispatch('marketplace/addToCollection', {
+                collections: [
+                    {
+                        name: 'My Top 100',
+                        id: 22
+                    },
+                    {
+                        name: 'Nintendo TOP',
+                        id: 22
+                    },
+                    {
+                        name: 'Game for PS4',
+                        id: 22
+                    },
+                    {
+                        name: 'Something other',
+                        id: 22
+                    }
+                ],
+                image: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
+                name: 'Magic Plate Armor',
+                description: 'Cras in dui eget nulla vulputate finibus sed id ligula.'
+            })
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

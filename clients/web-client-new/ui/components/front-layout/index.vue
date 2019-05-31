@@ -115,6 +115,14 @@
                 <c-privacy-popup :activated="$store.state.application.activeModal === 'privacy'" @close="$store.state.application.activeModal = null" />
                 <c-terms-popup :activated="$store.state.application.activeModal === 'terms'" @close="$store.state.application.activeModal = null" />
                 <c-mission-control-popup :activated="$store.state.application.activeModal === 'mission-control'" @close="$store.state.application.activeModal = null" />
+                <c-popup-collection-add
+                    v-if="$store.state.application.activeModal === 'collection-add'"
+                    :activated="$store.state.application.activeModal === 'collection-add'"
+                    :image="$store.state.marketplace.activeCollectionModal.image"
+                    :name="$store.state.marketplace.activeCollectionModal.name"
+                    :description="$store.state.marketplace.activeCollectionModal.description"
+                    :collections="$store.state.marketplace.activeCollectionModal.collections"
+                    @close="$store.state.application.activeModal = null" />
 
                 <c-basic-popup
                     :activated="$store.state.application.activeModal === 'connect-network'"
@@ -321,8 +329,7 @@
                 <c-basic-popup
                     :activated="$store.state.application.activeModal === 'addition-details'"
                     @close="$store.state.application.activeModal = null"
-                    style="text-align: left;"
-                >
+                    style="text-align: left;">
                     <div class="h4" slot="header"></div>
                     <template slot="body">
                         <p>

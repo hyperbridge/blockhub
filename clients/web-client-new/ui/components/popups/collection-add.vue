@@ -1,6 +1,5 @@
 <template>
     <c-basic-popup :activated="activated && $store.state.application.signedIn" @close="activated = false">
-
         <template slot="body">
             <div class="item-info">
                 <div class="item-info__image" v-if="image">
@@ -47,7 +46,13 @@
             <div class="add-to-collection__list mt-3">
                 <template v-if="collections">
                     <c-checkbox-group v-if="filteredList.length">
-                        <c-checkbox v-for="(collection, idx) in filteredList" :id="`collection_${idx}`" class="my-3" :class="{ 'mt-0' : idx == 1 }">
+                        <c-checkbox
+                            v-for="(collection, idx) in filteredList"
+                            :id="`collection_${idx}`"
+                            :key="idx"
+                            class="my-3"
+                            :class="{ 'mt-0' : idx == 1 }"
+                            @change="updateResource($event, collection)">
                             {{ collection.name }}
                         </c-checkbox>
                     </c-checkbox-group>
@@ -66,63 +71,86 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            activated: Boolean,
-            buttonType: {
-                type: String,
-                default: 'second-info'
-            },
-            image: String,
-            name: String,
-            description: String,
-            collections: Array
+export default {
+    props: {
+        activated: Boolean,
+        buttonType: {
+            type: String,
+            default: 'second-info'
         },
-        components: {
-            'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
-            'c-checkbox-group': () => import('~/components/checkbox/group').then(m => m.default || m),
-            'c-checkbox': () => import('~/components/checkbox').then(m => m.default || m),
-        },
-        data() {
-            return {
-                searchQuery: '',
-                createForm: false,
-                createCollectionRequest: {
-                    name: ''
-                }
-            }
-        },
-        computed: {
-            filteredList() {
-                if (this.collections && this.searchQuery) {
-                    return this.collections.filter(collection => {
-                        return collection.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-                    })
-                } else {
-                    return this.collections
-                }
-            }
-        },
-        watch: {
-            activated(oldVal, newVal) {
-                if (!this.$store.state.application.signedIn) {
-                    this.$store.commit('application/activateModal', 'login')
-                }
-            }
-        },
-        methods: {
-            addCollection(collection) {
-                this.createForm = false
-                
-                this.$store.dispatch('collections/create', [collection, {
-                    query: {
-                        $eager: '[owner]'
-                    }
-                }]).then((res) => {
-                })
+        image: String,
+        name: String,
+        description: String,
+        collections: Array
+    },
+    components: {
+        'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
+        'c-checkbox-group': () => import('~/components/checkbox/group').then(m => m.default || m),
+        'c-checkbox': () => import('~/components/checkbox').then(m => m.default || m),
+    },
+    data() {
+        return {
+            searchQuery: '',
+            createForm: false,
+            createCollectionRequest: {
+                name: ''
             }
         }
+    },
+    computed: {
+        filteredList() {
+            if (this.collections && this.searchQuery) {
+                return this.collections.filter(collection => {
+                    return collection.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+                })
+            }
+            return this.collections
+        }
+    },
+    watch: {
+        activated(oldVal, newVal) {
+            if (!this.$store.state.application.signedIn) {
+                this.$store.commit('application/activateModal', 'login')
+            }
+        }
+    },
+    methods: {
+        async addCollection(collection) {
+            this.createForm = false
+            await this.$store.dispatch('collections/create', [collection, {
+                query: {
+                    $eager: '[owner]'
+                }
+            }])
+        },
+        async updateResource(collection, resource, value) {
+            // TODO: finish this
+            /*
+            const resources = collection.meta.resources
+
+            meta: {
+                resources: [
+                    {
+                        type: 'product',
+                        id: 1
+                    }
+                ]
+            }
+
+            if value ===false
+            resources.removeResource ( resource)
+            else
+            add
+            */
+
+            await this.$store.dispatch('collections/update', [collection.id, collection, {
+                query: {
+                    $eager: '[owner]'
+                }
+            }])
+        }
     }
+}
 </script>
 
 <style lang="scss" scoped>

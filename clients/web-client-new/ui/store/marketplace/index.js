@@ -169,10 +169,17 @@ export const actions = {
 
             store.commit('submitProductForReviewResponse', product)
         })
+    },
+    addToCollection({ commit }, payload) {
+        commit('activeCollectionModal', payload)
+        commit('application/activateModal', 'collection-add', { root: true })
     }
 }
 
 export const mutations = {
+    activeCollectionModal(state, payload) {
+        state.activeCollectionModal = payload
+    },
     updateState(state, payload) {
         for (let x in payload) {
             Vue.set(state, x, payload[x])
@@ -181,7 +188,7 @@ export const mutations = {
         for (let product of Object.values(state.products)) {
             DB.updateCollection(DB.marketplace.products, product)
         }
-        
+
         DB.marketplace.config.update(state)
         DB.save()
     },
@@ -331,4 +338,3 @@ export const mutations = {
         }
     },
 }
-

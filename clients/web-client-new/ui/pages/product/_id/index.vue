@@ -1,7 +1,6 @@
 <template>
     <c-layout navigationKey="product" :showRightPanel="false" navigationTitle="GAME OVERVIEW"
               :breadcrumbLinks="breadcrumbLinks" :showBreadcrumbs="!editing" class="product-single-page">
-
         <c-loading :enabled="loading" size="lg" v-if="!product && loading" />
 
         <div class="row" v-else-if="!product">
@@ -38,12 +37,12 @@
                         <div class="editor-container">
                             <div class="" v-if="editing">
                                 <div class="form-group tag-editor">
-                                    <c-multiselect v-model="product.developerTags"
-                                                 class="dark-mode"
-                                                 :multiple="true"
-                                                 :taggable="true"
-                                                 :options="tagOptions">
-                                    </c-multiselect>
+                                    <c-multiselect
+                                        v-model="product.developerTags"
+                                        class="dark-mode"
+                                        :multiple="true"
+                                        :taggable="true"
+                                        :options="tagOptions" />
                                     <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
                                         <!--<option v-for="(tag, index) in tagOptions" :key="index"-->
                                                 <!--:selected="product.developerTags.includes(tag)">{{ tag }}-->
@@ -105,72 +104,72 @@
                         </div>
                     </div>
 
-                        <div class="col-12" v-if="section === 'configure'" :editing="editing">
-                            <c-block title="Product">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group row">
-                                            <label class="switch switch-sm col-sm-3">
-                                                <label>Price</label>
-                                            </label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Example: 10" v-model="product.price">
-                                                <span class="form-text"></span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="switch switch-sm col-sm-3">
-                                                <label>Old Price</label>
-                                            </label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Example: 20" v-model="product.oldPrice">
-                                                <span class="form-text"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <div class="col-sm-3">
-                                                <label>Genre</label>
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Example: RPG" v-model="product.genre">
-                                                <span class="form-text"></span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-3">
-                                                <label>Release Date</label>
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Example: 12/30/2020" v-model="product.releaseDate">
-                                                <span class="form-text"></span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-3">
-                                                <label>Publisher</label>
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Example: Actilizard Entertainment" v-model="product.publisher">
-                                                <span class="form-text"></span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-3">
-                                                <label>Developer</label>
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Example: Northcap Studios" v-model="product.developer">
-                                                <span class="form-text"></span>
-                                            </div>
+                    <div class="col-12" v-if="section === 'configure'" :editing="editing">
+                        <c-block title="Product">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="switch switch-sm col-sm-3">
+                                            <label>Price</label>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Example: 10" v-model="product.price">
+                                            <span class="form-text"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="switch switch-sm col-sm-3">
+                                            <label>Old Price</label>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Example: 20" v-model="product.oldPrice">
+                                            <span class="form-text"></span>
+                                        </div>
+                                    </div>
 
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label>Genre</label>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Example: RPG" v-model="product.genre">
+                                            <span class="form-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label>Release Date</label>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Example: 12/30/2020" v-model="product.releaseDate">
+                                            <span class="form-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label>Publisher</label>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Example: Actilizard Entertainment" v-model="product.publisher">
+                                            <span class="form-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label>Developer</label>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Example: Northcap Studios" v-model="product.developer">
+                                            <span class="form-text"></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </c-block>
-                        </div>
+                                <div class="col-md-6">
+
+                                </div>
+                            </div>
+                        </c-block>
+                    </div>
 
                     <div class="col-12">
                         <transition name="page" mode="out-in">
@@ -184,7 +183,7 @@
             </div>
         </div>
 
-        
+
         <c-custom-modal title="Help Center" v-if="firstProduct && editing && !$store.state.application.settings.client.hide_product_intro_modal && false" @close="closeModal">
             <div class="help-modal__content" slot="modalBody" style="max-width: 500px">
                 <h4 class="h2 mb-3">Creating your first product?</h4>
@@ -213,7 +212,7 @@
                     <c-button class="c-button--lg outline-white margin-top-20 margin-auto" @click="startSync">Start</c-button>
                 </div>
                 <div v-if="syncStep === 2">
-                   
+
                 </div>
                 <br />
                 <div class="padding-40 loading-process" style="position: relative" v-if="syncing">
@@ -291,433 +290,440 @@
 </template>
 
 <script>
-    import Vue from 'vue'
-    import * as Bridge from '@/framework/desktop-bridge'
-    import * as DB from '@/db'
+import Vue from 'vue'
+import * as Bridge from '@/framework/desktop-bridge'
+import * as DB from '@/db'
 
-    import 'vue-multiselect/dist/vue-multiselect.min.css'
+import 'vue-multiselect/dist/vue-multiselect.min.css'
 
-    const groupBy = function (xs, key) {
-        return xs.reduce(function (rv, x) {
-            if (!x[key]) return rv;
-            (rv[x[key]] = rv[x[key]] || []).push(x);
-            return rv;
-        }, {}) || null;
-    };
+const groupBy = function (xs, key) {
+    return xs.reduce((rv, x) => {
+        if (!x[key]) return rv;
+        (rv[x[key]] = rv[x[key]] || []).push(x);
+        return rv;
+    }, {}) || null;
+};
 
-    export default {
-        props: {
-            id: [String, Number],
-            section: {
-                type: String,
-                default: 'overview'
-            }
+export default {
+    components: {
+        'c-product-overview': () => import('~/pages/product/_id/overview').then(m => m.default || m),
+        'c-product-projects': () => import('~/pages/product/_id/projects').then(m => m.default || m),
+        'c-product-assets': () => import('~/pages/product/_id/assets').then(m => m.default || m),
+        'c-product-community': () => import('~/pages/product/_id/community').then(m => m.default || m),
+        'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
+        'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m),
+        'c-tags': () => import('~/components/tags').then(m => m.default || m),
+        'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
+        'c-popup': () => import('~/components/popups').then(m => m.default || m),
+        'c-multiselect': () => import('vue-multiselect').then(m => m.default || m),
+        'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m),
+    },
+    props: {
+        section: {
+            type: String,
+            default: 'overview'
+        }
+    },
+    data() {
+        return {
+            activeElement: {
+                name: false,
+                backgroundImage: false,
+                tags: false
+            },
+            tagOptions: [
+                'rpg',
+                'adventure',
+                'racing',
+                'action'
+            ],
+            loading: true,
+            syncing: false,
+            syncStep: 1,
+            importing: false,
+            importStep: 1,
+            savedState: false,
+            value: null
+        }
+    },
+    computed: {
+        id() {
+            return this.$route.params.id
         },
-        components: {
-            'c-product-overview': () => import('~/pages/product/_id/overview').then(m => m.default || m),
-            'c-product-projects': () => import('~/pages/product/_id/projects').then(m => m.default || m),
-            'c-product-assets': () => import('~/pages/product/_id/assets').then(m => m.default || m),
-            'c-product-community': () => import('~/pages/product/_id/community').then(m => m.default || m),
-            'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
-            'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m),
-            'c-tags': () => import('~/components/tags').then(m => m.default || m),
-            'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
-            'c-popup': () => import('~/components/popups').then(m => m.default || m),
-            'c-multiselect': (resolve) => require(['vue-multiselect'], resolve),
+        marketplace() {
+            return this.$store.state.marketplace
         },
-        data() {
-            return {
-                activeElement: {
-                    name: false,
-                    backgroundImage: false,
-                    tags: false
-                },
-                tagOptions: [
-                    'rpg',
-                    'adventure',
-                    'racing',
-                    'action'
-                ],
-                loading: true,
-                syncing: false,
-                syncStep: 1,
-                importing: false,
-                importStep: 1,
-                savedState: false,
-                value: null
-            }
-        },
-        computed: {
-            marketplace() {
-                return this.$store.state.marketplace
-            },
-            product() {
-                let product = null
+        product() {
+            let product = null
 
-                if (this.id === 'new') {
-                    product = { ...this.$store.state.marketplace.defaultProduct }
-
-                    this.$store.state.application.developerMode = true
-                    this.$store.dispatch('application/setEditorMode', 'editing')
-                }
-
-                if (!product) {
-                    product = this.$store.getters['products/get'](this.id)
-                }
-
-                if (!product) {
-                    product = DB.marketplace.products.findOne({ 'id': Number(this.id) })
-                }
-
-                if (!product) {
-                    return
-                }
-
-                if (!product.tags) {
-                    product.tags = []
-                }
-
-                if (!product.developerTags) {
-                    product.developerTags = []
-                }
-
-                if (!product.meta) {
-                    product.meta = {}
-                }
-                
-
-                if (!product.meta.community) {
-                    product.meta.community = {
-                        discussions: []
-                    }
-                }
-
-                if (product.meta.images && product.meta.images.preview && product.meta.images.preview.length) {
-                    const header = window.document.getElementById('header-bg');
-                    const randomImage = Math.floor(Math.random() * product.meta.images.preview.length);
-                    header.style['background-image'] = 'url(' + product.meta.images.preview[randomImage] + ')';
-                    header.style['background-size'] = 'cover';
-                }
-
-                if (product.meta.promotions) {
-                    this.promotionSections = groupBy(product.meta.promotions, 'section');
-                }
-
-                return product
-            },
-            editorMode() {
-                return this.$store.state.application.editorMode
-            },
-            nextImportStep() {
-                if (this.importStep === 1) {
-                    this.importStep = 2
-                } else if (this.importStep === 2) {
-
-                }
-            },
-            editing() {
-                if (!this.$store.state.application.editorMode) {
-                    for (let key in this.activeElement) {
-                        this.activeElement[key] = false
-                    }
-                }
-                return this.$store.state.application.editorMode === 'editing'
-            },
-            firstProduct() {
-                return this.$store.state.marketplace.firstProduct
-            },
-            breadcrumbLinks() {
-                if (!this.product) {
-                    return []
-                }
-
-                const links = [
-                    { to: { path: '/' }, title: 'Store' },
-                    { to: { path: '/product/' + this.id }, title: this.product.name }
-                ]
-
-                if (this.section === 'community') {
-                    links.push({ to: { path: '' }, title: 'Community' })
-                } else if (this.section === 'projects') {
-                    links.push({ to: { path: '' }, title: 'Crowdfunding' })
-                } else if (this.section === 'assets') {
-                    links.push({ to: { path: '' }, title: 'Inventory' })
-                }
-
-                return links
-            }
-        },
-        mounted() {
             if (this.id === 'new') {
+                product = { ...this.$store.state.marketplace.defaultProduct }
+
+                this.$store.state.application.developerMode = true
                 this.$store.dispatch('application/setEditorMode', 'editing')
             }
+
+            if (!product) {
+                product = this.$store.getters['products/get'](this.id)
+            }
+
+            if (!product) {
+                product = DB.marketplace.products.findOne({ 'id': Number(this.id) })
+            }
+
+            if (!product) {
+                return
+            }
+
+            if (!product.tags) {
+                product.tags = []
+            }
+
+            if (!product.developerTags) {
+                product.developerTags = []
+            }
+
+            if (!product.meta) {
+                product.meta = {}
+            }
+
+
+            if (!product.meta.community) {
+                product.meta.community = {
+                    discussions: []
+                }
+            }
+
+            if (product.meta.images && product.meta.images.preview && product.meta.images.preview.length) {
+                /*
+                TODO: Make header-bg accesible by $refs
+
+                const header = window.document.getElementById('header-bg');
+                const randomImage = Math.floor(Math.random() * product.meta.images.preview.length);
+                header.style['background-image'] = 'url(' + product.meta.images.preview[randomImage] + ')';
+                header.style['background-size'] = 'cover';
+                */
+            }
+
+            if (product.meta.promotions) {
+                this.promotionSections = groupBy(product.meta.promotions, 'section');
+            }
+
+            return product
         },
-        created() {
-            window.onbeforeunload = this.unsaved
+        editorMode() {
+            return this.$store.state.application.editorMode
+        },
+        nextImportStep() {
+            if (this.importStep === 1) {
+                this.importStep = 2
+            } else if (this.importStep === 2) {
 
-            this.updateSection()
-
-            if (this.id !== 'new') {
-                this.$store.dispatch('products/find', {
-                    query: {
-                        id: this.id
-                    }
-                }).then(() => {
-                    this.loading = false
-                })
             }
         },
-        beforeDestroy() {
-            window.document.getElementById('header-bg').style['background-image'] = 'url(/img/backgrounds/1.jpg)'
-        },
-        methods: {
-            updateSection() {
-                if (!this.section) {
-                    this.section = this.$route.meta.section
-                }
-            },
-            deactivateElement(key) {
-                this.activeElement[key] = false
-            },
-            activateElement(key) {
+        editing() {
+            if (!this.$store.state.application.editorMode) {
                 for (let key in this.activeElement) {
                     this.activeElement[key] = false
                 }
+            }
+            return this.$store.state.application.editorMode === 'editing'
+        },
+        firstProduct() {
+            return this.$store.state.marketplace.firstProduct
+        },
+        breadcrumbLinks() {
+            if (!this.product) {
+                return []
+            }
 
-                this.activeElement[key] = true
+            const links = [
+                { to: { path: '/' }, title: 'Store' },
+                { to: { path: '/product/' + this.id }, title: this.product.name }
+            ]
 
-                setTimeout(() => {
-                    if (this.$refs[key])
-                        this.$refs[key].focus()
-                }, 10)
-            },
-            create() {
-                this.project.ownerId = this.$store.state.application.activeProfile.id
+            if (this.section === 'community') {
+                links.push({ to: { path: '' }, title: 'Community' })
+            } else if (this.section === 'projects') {
+                links.push({ to: { path: '' }, title: 'Crowdfunding' })
+            } else if (this.section === 'assets') {
+                links.push({ to: { path: '' }, title: 'Inventory' })
+            }
 
-                this.$store.dispatch('projects/create', this.project).then((res) => {
-                    this.project.id = res.id
-                    this.notice = "Congratulations, your project has been created!"
+            return links
+        }
+    },
+    mounted() {
+        if (this.id === 'new') {
+            this.$store.dispatch('application/setEditorMode', 'editing')
+        }
+    },
+    created() {
+        if (process.client) window.onbeforeunload = this.unsaved
+
+        this.updateSection()
+
+        if (this.id !== 'new') {
+            this.$store.dispatch('products/find', {
+                query: {
+                    id: this.id
+                }
+            }).then(() => {
+                this.loading = false
+            })
+        }
+    },
+    beforeDestroy() {
+        window.document.getElementById('header-bg').style['background-image'] = 'url(/img/backgrounds/1.jpg)'
+    },
+    methods: {
+        updateSection() {
+            if (!this.section) {
+                this.section = this.$route.meta.section
+            }
+        },
+        deactivateElement(key) {
+            this.activeElement[key] = false
+        },
+        activateElement(key) {
+            for (let key in this.activeElement) {
+                this.activeElement[key] = false
+            }
+
+            this.activeElement[key] = true
+
+            setTimeout(() => {
+                if (this.$refs[key])
+                    this.$refs[key].focus()
+            }, 10)
+        },
+        create() {
+            this.project.ownerId = this.$store.state.application.activeProfile.id
+
+            this.$store.dispatch('projects/create', this.project).then(res => {
+                this.project.id = res.id
+                this.notice = 'Congratulations, your project has been created!'
+
+                this.$router.push('/business/project/' + this.project.id)
+            })
+        },
+        save() {
+            if (this.id === 'new') {
+                this.product.type = 'game'
+                this.product.ownerId = this.$store.state.application.activeProfile.id
+
+                this.$store.dispatch('products/create', this.product).then((res) => {
+                    this.product.id = res.id
+                    this.notice = "Congratulations, your product has been created!"
 
                     this.$router.push('/business/project/' + this.project.id)
                 })
-            },
-            save() {
-                if (this.id === 'new') {
-                    this.product.type = 'game'
-                    this.product.ownerId = this.$store.state.application.activeProfile.id
 
-                    this.$store.dispatch('products/create', this.product).then((res) => {
-                        this.product.id = res.id
-                        this.notice = "Congratulations, your product has been created!"
+                // Bridge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.activeProfile, product: this.product }).then((data) => {
+                //     const product = DB.marketplace.products.insert(data)
+                //     DB.save()
 
-                        this.$router.push('/business/project/' + this.project.id)
-                    })
+                //     Vue.set(this.$store.state.marketplace.products, product.id, product)
 
-                    // Bridge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.activeProfile, product: this.product }).then((data) => {
-                    //     const product = DB.marketplace.products.insert(data)
-                    //     DB.save()
+                //     this.savedState = true
+                // })
+            } else {
+                this.$store.dispatch('products/update', [this.product.id, this.product, {
+                    query: {
+                        $eager: 'tags'
+                    }
+                }]).then(() => {
+                    //this.notice = "Product has been saved."
+                    //this.product.id = productResult.id
+                    //this.successfulCreationMessage = "Congratulations, your project has been created!"
 
-                    //     Vue.set(this.$store.state.marketplace.products, product.id, product)
+                    //this.$router.push('/business/project/' + this.project.id)
 
-                    //     this.savedState = true
-                    // })
-                } else {
-                    this.$store.dispatch('products/update', [this.product.id, this.product, {
-                        query: {
-                            $eager: 'tags'
-                        }
-                    }]).then(() => {
-                        //this.notice = "Product has been saved."
-                        //this.product.id = productResult.id
-                        //this.successfulCreationMessage = "Congratulations, your project has been created!"
+                    this.savedState = true
+                })
+            }
+        },
+        // save() {
+        //     if (this.id === 'new') {
+        //         this.product.type = 'game'
 
-                        //this.$router.push('/business/project/' + this.project.id)
+        //         Bridge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.activeProfile, product: this.product }).then((data) => {
+        //             const product = DB.marketplace.products.insert(data)
+        //             DB.save()
 
-                        this.savedState = true
-                    })
-                }
-            },
-            // save() {
-            //     if (this.id === 'new') {
-            //         this.product.type = 'game'
+        //             Vue.set(this.$store.state.marketplace.products, product.id, product)
 
-            //         Bridge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.activeProfile, product: this.product }).then((data) => {
-            //             const product = DB.marketplace.products.insert(data)
-            //             DB.save()
+        //             this.savedState = true
+        //         })
+        //     } else {
+        //         const product = this.product
 
-            //             Vue.set(this.$store.state.marketplace.products, product.id, product)
+        //         this.$store.commit('marketplace/updateProduct', product)
+        //         Vue.set(this.$store.state.marketplace.products, product.id, product)
 
-            //             this.savedState = true
-            //         })
-            //     } else {
-            //         const product = this.product
+        //         DB.marketplace.products.update(product)
+        //         DB.save()
 
-            //         this.$store.commit('marketplace/updateProduct', product)
-            //         Vue.set(this.$store.state.marketplace.products, product.id, product)
+        //         this.savedState = true
+        //     }
+        // },
+        unsaved() {
+            if (this.savedState === false && this.$store.state.application.editorMode === 'editing')
+                return true
+        },
+        closeModal() {
+            this.$store.state.marketplace.firstProduct = false
+            this.$store.commit('application/updateClientSettings', { key: 'hide_product_intro_modal', value: true })
+        },
+        startSync() {
+            this.$store.commit('marketplace/syncProductBlockchain', this.product)
+        },
+        startImport() {
+            if (!this.$store.state.application.desktopMode) {
+                return this.$blockhub.Notification.error('Desktop app required', 'Error')
+            }
 
-            //         DB.marketplace.products.update(product)
-            //         DB.save()
+            const onWindowLoad = `function onWindowLoad(requestId) {
+                const script = document.createElement('script');
+                script.src = 'https://code.jquery.com/jquery-2.2.4.min.js';
+                script.type = 'text/javascript';
 
-            //         this.savedState = true
-            //     }
-            // },
-            unsaved() {
-                if (this.savedState === false && this.$store.state.application.editorMode === 'editing')
-                    return true
-            },
-            closeModal() {
-                this.$store.state.marketplace.firstProduct = false
-                this.$store.commit('application/updateClientSettings', { key: 'hide_product_intro_modal', value: true })
-            },
-            startSync() {
-                this.$store.commit('marketplace/syncProductBlockchain', this.product)
-            },
-            startImport() {
-                if (!this.$store.state.application.desktopMode) {
-                    return this.$blockhub.Notification.error('Desktop app required', 'Error')
-                }
+                script.onload = script.onreadystatechange = function () {
+                    const monitor = function() {
+                        try {
+                            if (!$('.game_area_description').length) return setTimeout(monitor, 500);
 
-                const onWindowLoad = `function onWindowLoad(requestId) {
-                    const script = document.createElement('script');
-                    script.src = 'https://code.jquery.com/jquery-2.2.4.min.js';
-                    script.type = 'text/javascript';
-
-                    script.onload = script.onreadystatechange = function () {
-                        const monitor = function() {
-                            try {
-                                if (!$('.game_area_description').length) return setTimeout(monitor, 500);
-
-                                const fetchers = {
-                                    steam: () => {
-                                        return {
-                                            title: $('.apphub_AppName').text().trim(),
-                                            description: $('.game_description_snippet').text().trim(),
-                                            about: $('#game_area_description').html().trim(),
-                                            developers: Object.values($('#developers_list a').map((i, el) => $(el).text().trim()).get()),
-                                            publishers: Object.values($('#developers_list').parent().next().find('a').map((i, el) => $(el).text().trim()).get()),
-                                            tags: Object.values($('.popular_tags a').map((i, el) => $(el).text().trim()).get()),
-                                            releaseDate: $('.releaseDate .date').text().trim(),
-                                            images: {
-                                                preview: Object.values($('.highlight_strip_item.highlight_strip_screenshot').map((i, el) => $(el).find('img').attr('src')).get())
-                                            },
-                                            videos: Object.values($('.highlight_strip_item.highlight_strip_movie').map((i, el) => ({
-                                                preview: $(el).find('img').attr('src'),
-                                                url: 'https://cdn.hyperbridge.org/blockhub/videos/products/doom-20087/trailer.mp4'
-                                            })).get())
-                                        }
-                                    },
-                                    gog: () => {
-
-                                    },
-                                    itch: () => {
-
+                            const fetchers = {
+                                steam: () => {
+                                    return {
+                                        title: $('.apphub_AppName').text().trim(),
+                                        description: $('.game_description_snippet').text().trim(),
+                                        about: $('#game_area_description').html().trim(),
+                                        developers: Object.values($('#developers_list a').map((i, el) => $(el).text().trim()).get()),
+                                        publishers: Object.values($('#developers_list').parent().next().find('a').map((i, el) => $(el).text().trim()).get()),
+                                        tags: Object.values($('.popular_tags a').map((i, el) => $(el).text().trim()).get()),
+                                        releaseDate: $('.releaseDate .date').text().trim(),
+                                        images: {
+                                            preview: Object.values($('.highlight_strip_item.highlight_strip_screenshot').map((i, el) => $(el).find('img').attr('src')).get())
+                                        },
+                                        videos: Object.values($('.highlight_strip_item.highlight_strip_movie').map((i, el) => ({
+                                            preview: $(el).find('img').attr('src'),
+                                            url: 'https://cdn.hyperbridge.org/blockhub/videos/products/doom-20087/trailer.mp4'
+                                        })).get())
                                     }
-                                };
+                                },
+                                gog: () => {
 
-                                let fetcherType = null;
+                                },
+                                itch: () => {
 
-                                if (window.location.hostname.indexOf('steampowered.com'))
-                                    fetcherType = 'steam';
-                                else if (window.location.hostname.indexOf('gog.com'))
-                                    fetcherType = 'gog';
-                                else if (window.location.hostname.indexOf('itch.io'))
-                                    fetcherType = 'itch';
-                                else {
-                                    // fail
                                 }
+                            };
 
-                                const fetcher = fetchers[fetcherType];
+                            let fetcherType = null;
 
-                                const cmd = {
-                                    key: 'resolveCallback',
-                                    responseId: requestId,
-                                    data: fetcher()
-                                };
-
-                                window.ipcRenderer.send('command', JSON.stringify(cmd));
+                            if (window.location.hostname.indexOf('steampowered.com'))
+                                fetcherType = 'steam';
+                            else if (window.location.hostname.indexOf('gog.com'))
+                                fetcherType = 'gog';
+                            else if (window.location.hostname.indexOf('itch.io'))
+                                fetcherType = 'itch';
+                            else {
+                                // fail
                             }
-                            catch (e) {
-                                const cmd = {
-                                    key: 'resolveCallback',
-                                    responseId: requestId,
-                                    data: {
-                                        error: true,
-                                        message: 'Error in script: ' + e
-                                    }
-                                };
 
-                                window.ipcRenderer.send('command', JSON.stringify(cmd));
-                            }
+                            const fetcher = fetchers[fetcherType];
+
+                            const cmd = {
+                                key: 'resolveCallback',
+                                responseId: requestId,
+                                data: fetcher()
+                            };
+
+                            window.ipcRenderer.send('command', JSON.stringify(cmd));
                         }
+                        catch (e) {
+                            const cmd = {
+                                key: 'resolveCallback',
+                                responseId: requestId,
+                                data: {
+                                    error: true,
+                                    message: 'Error in script: ' + e
+                                }
+                            };
 
-                        monitor();
-                    };
+                            window.ipcRenderer.send('command', JSON.stringify(cmd));
+                        }
+                    }
 
-                    document.body.appendChild(script);
-                }`
+                    monitor();
+                };
 
-                Bridge.sendCommand('fetchPageDataRequest', {
-                    url: this.$refs.importUrl.value,
-                    script: onWindowLoad
+                document.body.appendChild(script);
+            }`
+
+            Bridge.sendCommand('fetchPageDataRequest', {
+                url: this.$refs.importUrl.value,
+                script: onWindowLoad
+            }).then((data) => {
+                if (data.error) {
+                    return console.log(data.message)
+                }
+
+                console.log('Import response: ', data)
+
+                this.product.name = data.title
+                this.product.value = data.value
+                this.product.tags = [{key: 'imported', value: 'Imported'}]
+                this.product.meta = {}
+                this.product.meta.type = 'game'
+                //this.product.meta.rating.overall = 0
+                this.product.meta.developerTags = data.tags
+                this.product.meta.releaseDate = data.releaseDate
+                this.product.meta.description = data.description
+                this.product.meta.genre = ''
+                this.product.meta.developer = data.developers && data.developers[0]
+                this.product.meta.publisher = data.publishers && data.publishers[0]
+
+                this.$store.commit('application/activateModal', null)
+            })
+        },
+    },
+    updated() {
+        $('#summernote').summernote({
+            placeholder: 'Type in your text',
+            tabsize: 2,
+            height: 300,
+            callbacks: {
+                onBlur: () => {
+                    Vue.set(this.product, 'content', $('#summernote').summernote('code'))
+                }
+            }
+        });
+
+    },
+    watch: {
+        '$route'() {
+            this.updateSection()
+        },
+        editorMode (newMode, oldMode) {
+            if (oldMode === 'editing' && newMode === 'publishing') {
+                this.save()
+
+                this.$store.dispatch('application/setEditorMode', 'viewing')
+            } else if (newMode === 'removing') {
+                Bridge.sendCommand('removeProduct', {
+                    id: this.product.id
                 }).then((data) => {
                     if (data.error) {
                         return console.log(data.message)
                     }
-
-                    console.log('Import response: ', data)
-
-                    this.product.name = data.title
-                    this.product.value = data.value
-                    this.product.tags = [{key: 'imported', value: 'Imported'}]
-                    this.product.meta = {}
-                    this.product.meta.type = 'game'
-                    //this.product.meta.rating.overall = 0
-                    this.product.meta.developerTags = data.tags
-                    this.product.meta.releaseDate = data.releaseDate
-                    this.product.meta.description = data.description
-                    this.product.meta.genre = ''
-                    this.product.meta.developer = data.developers && data.developers[0]
-                    this.product.meta.publisher = data.publishers && data.publishers[0]
-
-                    this.$store.commit('application/activateModal', null)
                 })
-            },
-        },
-        updated() {
-            $('#summernote').summernote({
-                placeholder: 'Type in your text',
-                tabsize: 2,
-                height: 300,
-                callbacks: {
-                    onBlur: () => {
-                        Vue.set(this.product, 'content', $('#summernote').summernote('code'))
-                    }
-                }
-            });
 
-        },
-        watch: {
-            '$route'() {
-                this.updateSection()
-            },
-            editorMode (newMode, oldMode) {
-                if (oldMode === 'editing' && newMode === 'publishing') {
-                    this.save()
-
-                    this.$store.dispatch('application/setEditorMode', 'viewing')
-                } else if (newMode === 'removing') {
-                    Bridge.sendCommand('removeProduct', {
-                        id: this.product.id
-                    }).then((data) => {
-                        if (data.error) {
-                            return console.log(data.message)
-                        }
-                    })
-
-                }
             }
         }
     }
+}
 </script>
 
 <style lang="scss">
@@ -809,4 +815,3 @@
     }
 
 </style>
-
