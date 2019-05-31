@@ -94,49 +94,49 @@
 </template>
 
 <script>
-    import moment from 'moment'
+import moment from 'moment'
 
-    export default {
-        props: [],
-        components: {
-            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-            'c-heading-bar-fields' : () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
-            'c-pagination': () => import('~/components/pagination').then(m => m.default || m),
-            'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m)
-        },
-        async asyncData({ params, store }) {
-            await store.dispatch('collections/find', {
-                query: {
-                    id: Number(params.id)
-                }
-            })
-
-            const collection = store.getters['collections/get'](params.id)
-
-            return {
-                collection,
-                breadcrumbLinks: [
-                    { to: { path: '/' }, title: 'Home' },
-                    (collection && { to: { path: '/collection/' + collection.id }, title: collection.name })
-                ]
+export default {
+    props: [],
+    components: {
+        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+        'c-heading-bar-fields' : () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
+        'c-pagination': () => import('~/components/pagination').then(m => m.default || m),
+        'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m)
+    },
+    async asyncData({ params, store }) {
+        await store.dispatch('collections/find', {
+            query: {
+                id: Number(params.id)
             }
-        },
-        computed: {
-            assets() {
-                if (!this.collection.meta.assets) return []
-                
-                return Promise.all(this.collection.meta.assets.map((id) => {
-                    return this.$store.getters['assets/get'](id)
-                }))
-            },
-            timeAgo() {
-                return moment(this.collection.updates).fromNow()
-            }
-        },
-        created() {
+        })
+
+        const collection = store.getters['collections/get'](params.id)
+
+        return {
+            collection,
+            breadcrumbLinks: [
+                { to: { path: '/' }, title: 'Home' },
+                (collection && { to: { path: '/collection/' + collection.id }, title: collection.name })
+            ]
         }
+    },
+    computed: {
+        assets() {
+            if (!this.collection.meta.assets) return []
+
+            return Promise.all(this.collection.meta.assets.map((id) => {
+                return this.$store.getters['assets/get'](id)
+            }))
+        },
+        timeAgo() {
+            return moment(this.collection.updates).fromNow()
+        }
+    },
+    created() {
     }
+}
 </script>
 
 <style lang="scss" scoped>

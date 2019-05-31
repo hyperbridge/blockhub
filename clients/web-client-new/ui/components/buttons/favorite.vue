@@ -11,28 +11,28 @@
 </template>
 
 <script>
-    export default {
-        name: 'button-favorite',
-        props: {
-            active: Boolean,
-            target: String,
-            title: String,
-            activeIcon: {
-                type: String,
-                default: 'heart'
-            },
-            unactiveIcon: {
-                type: String,
-                default: 'heart'
-            }
+export default {
+    name: 'button-favorite',
+    props: {
+        active: Boolean,
+        target: String,
+        title: String,
+        activeIcon: {
+            type: String,
+            default: 'heart'
         },
-        computed: {
-            dynamicTitle() {
-                const { target, active } = this;
-                return (active ? 'Remove from ' : 'Add to ') + target;
-            }
+        unactiveIcon: {
+            type: String,
+            default: 'heart'
+        }
+    },
+    computed: {
+        dynamicTitle() {
+            const { target, active } = this
+            return (active ? 'Remove from ' : 'Add to ') + target
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>
