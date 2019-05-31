@@ -137,7 +137,7 @@
             toggleAdvanced() {
                 this.advanced = !this.advanced
             },
-            create() {
+            async create() {
                 this.model.ownerId = this.$store.state.application.activeProfile.id
 
                 const res = await this.$store.dispatch(this.serviceKey + '/create', this.model)
@@ -147,7 +147,7 @@
 
                 this.$router.push('/business/' + this.serviceKey + '/' + this.model.id)
             },
-            save() {
+            async save() {
                 this.model.ownerId = this.$store.state.application.activeProfile.id
                 
                 await this.$store.dispatch(this.serviceKey + '/update', [this.model.id, this.model, {
