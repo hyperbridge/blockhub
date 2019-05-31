@@ -3288,7 +3288,7 @@ storiesOf('Collection', module)
                 item: {
                     title: 'Collection name',
                     user: 'John Doel',
-                    count_number: 2741,
+                    countNumber: 2741,
                     background: 'https://via.placeholder.com/100x100',
                     images: [
                         'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
@@ -3317,7 +3317,7 @@ storiesOf('Collection', module)
                     {
                         title: 'Collection name',
                         user: 'John Doel',
-                        count_number: 2741,
+                        countNumber: 2741,
                         background: 'https://via.placeholder.com/100x100',
                         images: [
                             'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
@@ -3328,7 +3328,7 @@ storiesOf('Collection', module)
                     {
                         title: 'Collection name',
                         user: 'John Doel',
-                        count_number: 2741,
+                        countNumber: 2741,
                         background: 'https://via.placeholder.com/100x100',
                         images: [
                             'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
@@ -3339,7 +3339,7 @@ storiesOf('Collection', module)
                     {
                         title: 'Collection name',
                         user: 'John Doel',
-                        count_number: 2741,
+                        countNumber: 2741,
                         background: 'https://via.placeholder.com/100x100',
                         images: [
                             'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
@@ -3350,7 +3350,7 @@ storiesOf('Collection', module)
                     {
                         title: 'Collection name',
                         user: 'John Doel',
-                        count_number: 2741,
+                        countNumber: 2741,
                         background: 'https://via.placeholder.com/100x100',
                         images: [
                             'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
@@ -3361,7 +3361,7 @@ storiesOf('Collection', module)
                     {
                         title: 'Collection name',
                         user: 'John Doel',
-                        count_number: 2741,
+                        countNumber: 2741,
                         background: 'https://via.placeholder.com/100x100',
                         images: [
                             'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
@@ -3372,7 +3372,7 @@ storiesOf('Collection', module)
                     {
                         title: 'Collection name',
                         user: 'John Doel',
-                        count_number: 2741,
+                        countNumber: 2741,
                         background: 'https://via.placeholder.com/100x100',
                         images: [
                             'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
@@ -3383,7 +3383,7 @@ storiesOf('Collection', module)
                     {
                         title: 'Collection name',
                         user: 'John Doel',
-                        count_number: 2741,
+                        countNumber: 2741,
                         background: 'https://via.placeholder.com/100x100',
                         images: [
                             'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
