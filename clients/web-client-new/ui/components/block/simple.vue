@@ -1,7 +1,10 @@
 <template>
-    <div class="simple-block" :class="{'block-hovered' : hovered}">
-        <div class="simple-block__image" v-if="image" :style="{'height' : imgHeight }">
-            <img :src="image" />
+    <div class="simple-block"
+         :class="{'block-hovered' : hovered}">
+        <div v-if="image"
+             class="simple-block__image"
+             :style="{'height' : imgHeight }">
+            <img :src="image">
         </div>
         <div class="simple-block__content">
             <slot />
@@ -10,13 +13,13 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            image: String,
-            imgHeight: String,
-            hovered: Boolean
-        }
+export default {
+    props: {
+        image: String,
+        imgHeight: String,
+        hovered: Boolean
     }
+}
 </script>
 
 <style lang="scss">

@@ -6,60 +6,59 @@
             'bg-color': bgColor,
             'no-gutter': noGutter,
             'only-content-bg': onlyContentBg
-        }"
-    >
+        }">
         <c-heading-bar
             v-if="title"
             :name="title"
             :class="{ 'mb-0' : onlyContentBg }"
             :showArrows="false"
-            :showActions="showActions"
-        >
+            :showActions="showActions">
             <template slot="additional-action">
-                <slot name="additional-action"/>
+                <slot name="additional-action" />
             </template>
         </c-heading-bar>
-        <slot name="title"/>
-        <div class="block__content" :class="{'no-padding': noPadding }">
-            <slot></slot>
+        <slot name="title" />
+        <div class="block__content"
+             :class="{'no-padding': noPadding }">
+            <slot />
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'block-1',
-        props: {
-            title: String,
-            noGutter: {
-                type: Boolean,
-                default: false
-            },
-            bgColor: {
-                type: Boolean,
-                default: true
-            },
-            bgGradient: {
-                type: Boolean,
-                default: false
-            },
-            onlyContentBg: {
-                type: Boolean,
-                default: false
-            },
-            noPadding: {
-                type: Boolean,
-                default: false
-            },
-            showActions: {
-                type: Boolean,
-                default: false
-            }
+export default {
+    name: 'Block1',
+    components: {
+        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m)
+    },
+    props: {
+        title: String,
+        noGutter: {
+            type: Boolean,
+            default: false
         },
-        components: {
-            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m)
+        bgColor: {
+            type: Boolean,
+            default: true
+        },
+        bgGradient: {
+            type: Boolean,
+            default: false
+        },
+        onlyContentBg: {
+            type: Boolean,
+            default: false
+        },
+        noPadding: {
+            type: Boolean,
+            default: false
+        },
+        showActions: {
+            type: Boolean,
+            default: false
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

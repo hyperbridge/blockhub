@@ -2,27 +2,25 @@
     <div class="asset-preview-small">
         <c-img
             class="asset-preview-small__image"
-            :src="asset.image"
-        />
+            :src="asset.image" />
         <span>{{ asset.name }}</span>
         <span
             v-if="showPrice"
-            class="asset-preview-small__price"
-        > - {{ asset.price.current | convertCurrency }}</span>
+            class="asset-preview-small__price"> - {{ asset.price.current | convertCurrency }}</span>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'asset-preview-small',
-        props: {
-            asset: {
-                type: Object,
-                required: true
-            },
-            showPrice: Boolean
-        }
+export default {
+    name: 'AssetPreviewSmall',
+    props: {
+        asset: {
+            type: Object,
+            required: true
+        },
+        showPrice: Boolean
     }
+}
 </script>
 
 <style lang="scss" scoped>

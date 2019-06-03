@@ -1,6 +1,10 @@
 <template>
-    <div class="banner" :style="{ 'background-image' : 'url(' + imgSrc + ')' }">
-        <c-button status="none" :to="to" :href="link" class="block-link">
+    <div class="banner"
+         :style="{ 'background-image' : 'url(' + imgSrc + ')' }">
+        <c-button status="none"
+                  :to="to"
+                  :href="link"
+                  class="block-link">
             <div class="banner__text">
                 <slot />
             </div>
@@ -9,14 +13,14 @@
 </template>
 
 <script>
-    export default {
-        name: 'simple-banner',
-        props: {
-            imgSrc: String,
-            link: String,
-            to: String
-        }
+export default {
+    name: 'SimpleBanner',
+    props: {
+        imgSrc: String,
+        link: String,
+        to: String
     }
+}
 </script>
 
 <style lang="scss" scoped>

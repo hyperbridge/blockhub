@@ -1,22 +1,21 @@
 <template>
     <div class="assets-grid">
         <c-asset
-            v-if="assets.length"
             v-for="(asset, index) in assets"
+            v-if="assets.length"
             :key="index"
             :asset="asset"
-            @click="$emit('click', $event)"
-        />
+            @click="$emit('click', $event)" />
     </div>
 </template>
 
 <script>
 export default {
-    name: 'assets-grid-inventory',
-    props: ['assets'],
+    name: 'AssetsGridInventory',
     components: {
-        'c-asset': () => import('~/components/assets-grid-inventory/asset').then(m => m.default || m),
-    }
+        'c-asset': () => import('~/components/assets-grid-inventory/asset').then(m => m.default || m)
+    },
+    props: ['assets']
 }
 </script>
 

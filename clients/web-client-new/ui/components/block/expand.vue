@@ -1,34 +1,53 @@
 <template>
     <div class="expand-block">
-        <c-img :src="image" class="expand-block__img" v-if="image" />
+        <c-img v-if="image"
+               :src="image"
+               class="expand-block__img" />
         <div class="expand-block__header">
-            <span class="title" v-if="title">
-                <c-img class="title__img" :src="icon" v-if="icon" />
+            <span v-if="title"
+                  class="title">
+                <c-img v-if="icon"
+                       class="title__img"
+                       :src="icon" />
                 {{ title }}
             </span>
-            <span style="font-size: 22px" v-if="rating">
-                <i class="fas fa-star"></i>
+            <span v-if="rating"
+                  style="font-size: 22px">
+                <i class="fas fa-star" />
                 <strong>{{ rating }}</strong>
             </span>
         </div>
         <transition name="fade-scale">
-            <p v-if="expanded" :key="1" v-html="content">{{ content }}</p>
-            <p v-else>{{ description }}...</p>
+            <p v-if="expanded"
+               :key="1"
+               v-html="content">
+                {{ content }}
+            </p>
+            <p v-else>
+                {{ description }}...
+            </p>
         </transition>
-        <a href="#" @click.prevent="expanded = !expanded" class="text-white font-weight-bold">
+        <a href="#"
+           class="text-white font-weight-bold"
+           @click.prevent="expanded = !expanded">
             {{ expanded ? 'SHOW LESS' : 'MORE...' }}
         </a>
-        <h4 class="expand-block__more-header" v-if="relatedText">{{ relatedText }}</h4>
-        <ul class="related" v-if="relatedItems">
+        <h4 v-if="relatedText"
+            class="expand-block__more-header">
+            {{ relatedText }}
+        </h4>
+        <ul v-if="relatedItems"
+            class="related">
             <li
                 v-for="(item, index) in relatedItems"
                 :key="index"
-                class="related__item"
-            >
-                <c-img :src="item.image" class="related__item__img" />
+                class="related__item">
+                <c-img :src="item.image"
+                       class="related__item__img" />
                 <div class="related__item__details">
                     <h5 class="margin-bottom-5">
-                        <a href="#" class="text-white font-weight-bold">{{ item.title }}</a>
+                        <a href="#"
+                           class="text-white font-weight-bold">{{ item.title }}</a>
                     </h5>
                     <div class="text-white font-weight-bold">
                         <span style="font-size: 22px">{{ item.rating }}</span>
@@ -44,7 +63,12 @@
 
 <script>
 export default {
-    name: 'expand-block',
+    name: 'ExpandBlock',
+    components: {
+        'c-rating-stars': () => import('~/components/rating-stars').then(m => m.default || m),
+        'c-button': () => import('~/components/buttons/wide').then(m => m.default || m),
+        'c-heading-bar-color': () => import('~/components/heading-bar/simple-colored').then(m => m.default || m)
+    },
     props: {
         image: String,
         icon: String,
@@ -55,11 +79,6 @@ export default {
         actionText: String,
         relatedItems: Array,
         relatedText: String
-    },
-    components: {
-        'c-rating-stars': () => import('~/components/rating-stars').then(m => m.default || m),
-        'c-button': () => import('~/components/buttons/wide').then(m => m.default || m),
-        'c-heading-bar-color': () => import('~/components/heading-bar/simple-colored').then(m => m.default || m)
     },
     data() {
         return {

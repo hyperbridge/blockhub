@@ -3,7 +3,9 @@
         <h4 v-if="list && list.length === 0">
             There is no assets yet.
         </h4>
-        <div class="assets-grid__item-container" v-for="(item, index) in list" :key="index" v-else>
+        <div v-for="(item, index) in list"
+             :key="index"
+v-else class="assets-grid__item-container">
             <div class="assets-grid__item">
                 <c-img :src="item.image" />
                 <div class="assets-grid__item-info">
@@ -16,7 +18,7 @@
                             {{ item.price['current'] | convertCurrency }}
                         </span>
                         <span class="float-right box">
-                            <i class="fas fa-box"></i>
+                            <i class="fas fa-box" />
                             {{ item.count }}
                         </span>
                     </div>
@@ -27,9 +29,9 @@
 </template>
 
 <script>
-    export default {
-        props: ['list']
-    }
+export default {
+    props: ['list']
+}
 </script>
 
 <style lang="scss" scoped>

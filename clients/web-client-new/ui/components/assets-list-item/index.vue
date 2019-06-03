@@ -1,24 +1,25 @@
 <template>
-    <transition-group class="assets-list" name="assets-list" tag="div">
+    <transition-group class="assets-list"
+                      name="assets-list"
+                      tag="div">
         <div
             v-for="item in items"
             :key="item.id"
             class="assets-list__item-container"
-            :style="{ width: 'calc( 100% / ' + itemInRow + ')'}"
-        >
+            :style="{ width: 'calc( 100% / ' + itemInRow + ')'}">
             <c-assets-item :item="item" />
         </div>
     </transition-group>
 </template>
 
 <script>
-    export default {
-        name: 'assets-list-items',
-        props: ['items', 'itemInRow'],
-        components:{
-            'c-assets-item': () => import('~/components/assets-list-item/item').then(m => m.default || m)
-        }
-    }
+export default {
+    name: 'AssetsListItems',
+    components: {
+        'c-assets-item': () => import('~/components/assets-list-item/item').then(m => m.default || m)
+    },
+    props: ['items', 'itemInRow']
+}
 </script>
 
 <style lang="scss" scoped>

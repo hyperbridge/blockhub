@@ -1,11 +1,11 @@
 <template>
-    <c-button status="none" class="assets-list__item"
-       :class="{ 'transparent-bg' : isTransparent }"
-       :to="`/asset/${item.id}`"
-    >
+    <c-button status="none"
+              class="assets-list__item"
+              :class="{ 'transparent-bg' : isTransparent }"
+              :to="`/asset/${item.id}`">
         <div class="thumb">
             <c-img
-                :src="item.image"/>
+                :src="item.image" />
         </div>
         <div class="info">
             <h5>{{ item.name }}</h5>
@@ -14,7 +14,7 @@
                     {{ item.price.current | convertCurrency }}
                 </span>
                 <span class="float-right box">
-                    <c-icon name="box"/>
+                    <c-icon name="box" />
                     {{ item.count }}
                 </span>
             </slot>
@@ -23,16 +23,16 @@
 </template>
 
 <script>
-    export default {
-        name: 'assets-list-item',
-        props: {
-            item: Object,
-            isTransparent: {
-                type: Boolean,
-                default: false
-            }
+export default {
+    name: 'AssetsListItem',
+    props: {
+        item: Object,
+        isTransparent: {
+            type: Boolean,
+            default: false
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,13 +1,14 @@
 <template>
     <div class="author">
-        <c-img class="author__img" :src="dnUser.img"/>
+        <c-img class="author__img"
+               :src="dnUser.img" />
         {{ dnUser.name }}
     </div>
 </template>
 
 <script>
 export default {
-    name: 'author',
+    name: 'Author',
     props: {
         author: {
             type: Object,
@@ -20,7 +21,7 @@ export default {
     },
     computed: {
         dnUser() {
-            return this.author || this.user;
+            return this.author || this.user
         }
     }
 }

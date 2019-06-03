@@ -2,10 +2,10 @@
     <div class="asset-overview-popup">
         <div class="asset-overview-popup__head">
             <div class="link">
-                <c-icon name="link"/>
+                <c-icon name="link" />
             </div>
             <div class="img">
-                <c-img :src="asset.image"/>
+                <c-img :src="asset.image" />
             </div>
             <div class="info">
                 <h4>{{ asset.name }}</h4>
@@ -13,14 +13,15 @@
                 <div class="description">
                     <h6>{{ asset.price['current'] | convertCurrency }}</h6>
                     <p>Based on 7461 other transactions</p>
-                    <p >Lowest: {{ asset.price['min'] | convertCurrency }} Highest: {{ asset.price['max'] | convertCurrency }}</p>
+                    <p>Lowest: {{ asset.price['min'] | convertCurrency }} Highest: {{ asset.price['max'] | convertCurrency }}</p>
                 </div>
             </div>
         </div>
         <div class="asset-overview-popup__action">
             <div class="button-line d-flex w-100 justify-content-between">
-                <c-button status="danger" iconHide>
-                    <c-icon name="trash-alt"/>
+                <c-button status="danger"
+                          iconHide>
+                    <c-icon name="trash-alt" />
                 </c-button>
                 <div class="text-right">
                     <c-button status="share">
@@ -38,26 +39,28 @@
                     label_size="18px"
                     size="sm"
                     label_position="left"
-                    @change="$store.commit('assets/negateValue', { id: asset.id, iprop: 'acceptOffers' })"
-                />
+                    @change="$store.commit('assets/negateValue', { id: asset.id, iprop: 'acceptOffers' })" />
             </div>
         </div>
         <div class="asset-overview-popup__info-list">
             <div class="metadata">
-                <c-heading-bar name="Game Metadata" :showArrows="false" :showBackground="false"/>
+                <c-heading-bar name="Game Metadata"
+                               :showArrows="false"
+                               :showBackground="false" />
                 <div class="metadata__table padding-bottom-10">
                     <div
                         v-for="(value, prop, index) in asset.metadata"
                         :key="index"
-                        class="item-row"
-                    >
+                        class="item-row">
                         <div class="item-label">
-                            <i class="fas fa-file"></i>
+                            <i class="fas fa-file" />
                             {{ prop | space | upperFirstChar }}
                         </div>
                         <div class="item-description">
-                            <ul v-if="typeof value === 'object'" class="margin-0">
-                                <li v-for="(value, prop, index) in value" :key="index">
+                            <ul v-if="typeof value === 'object'"
+                                class="margin-0">
+                                <li v-for="(value, prop, index) in value"
+                                    :key="index">
                                     {{ prop | space | upperFirstChar }}: {{ value }}
                                 </li>
                             </ul>
@@ -73,17 +76,17 @@
 </template>
 
 <script>
-    export default {
-        name: 'asset-overview-popup',
-        props: {
-            asset: {
-                type: Object
-            }
-        },
-        components:{
-            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+export default {
+    name: 'AssetOverviewPopup',
+    components: {
+        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m)
+    },
+    props: {
+        asset: {
+            type: Object
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

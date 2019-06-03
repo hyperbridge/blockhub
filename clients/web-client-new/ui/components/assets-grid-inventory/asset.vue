@@ -5,44 +5,44 @@
             'assets-grid__asset--selected': asset.selected,
             'assets-grid__asset--sold': showSold
         }"
-        @click="$emit('click', asset)"
-    >
+        @click="$emit('click', asset)">
         <slot>
             <c-tooltip
                 v-if="showTooltip"
                 class="asset__wrapper"
-                iconHide
-            >
+                iconHide>
                 <c-asset-preview
                     slot="tooltip"
-                    :asset="asset"
-                />
-                <c-img :src="asset.image" class="asset__image"/>
+                    :asset="asset" />
+                <c-img :src="asset.image"
+                       class="asset__image" />
                 <span class="asset__price">{{ asset.price.current | convertCurrency }}</span>
             </c-tooltip>
             <div v-else>
-                <c-img :src="asset.image" class="asset__image"/>
+                <c-img :src="asset.image"
+                       class="asset__image" />
                 <span class="asset__price">{{ asset.price.current | convertCurrency }}</span>
             </div>
         </slot>
-        <div class="asset__show-sold" v-show="showSold">
-            <i class="fas fa-check-circle"></i>
+        <div v-show="showSold"
+             class="asset__show-sold">
+            <i class="fas fa-check-circle" />
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        props: {
-            asset: Object,
-            showTooltip: Boolean,
-            showSold: Boolean
-        },
-        components: {
-            'c-tooltip': () => import('~/components/tooltips/universal').then(m => m.default || m),
-            'c-asset-preview': () => import('~/components/asset-preview').then(m => m.default || m)
-        }
+export default {
+    components: {
+        'c-tooltip': () => import('~/components/tooltips/universal').then(m => m.default || m),
+        'c-asset-preview': () => import('~/components/asset-preview').then(m => m.default || m)
+    },
+    props: {
+        asset: Object,
+        showTooltip: Boolean,
+        showSold: Boolean
     }
+}
 </script>
 
 <style lang="scss" scoped>
