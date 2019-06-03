@@ -1,7 +1,13 @@
 <template>
-    <ul class="breadcrumb" v-if="links.length">
-        <li v-for="(link, index) in links" class="breadcrumb-item" :class="{ 'active': index == links.length-1 }" :key="index">
-            <router-link :to="link.to ? link.to : link.title">{{ link.title }}</router-link>
+    <ul v-if="links.length"
+        class="breadcrumb">
+        <li v-for="(link, index) in links"
+            :key="index"
+            class="breadcrumb-item"
+            :class="{ 'active': index == links.length-1 }">
+            <router-link :to="link.to ? link.to : link.title">
+                {{ link.title }}
+            </router-link>
         </li>
     </ul>
 </template>

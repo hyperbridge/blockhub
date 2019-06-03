@@ -7,9 +7,8 @@
                 { 'active' : activeUp === true },
                 size
             ]"
-            @click="$emit('clickUp')"
-        />
-        <slot/>
+            @click="$emit('clickUp')" />
+        <slot />
         <c-icon
             name="caret-down"
             :class="[
@@ -17,20 +16,19 @@
                 { 'active' : activeUp === false },
                 size
             ]"
-            @click="$emit('clickDown')"
-        />
+            @click="$emit('clickDown')" />
     </span>
 </template>
 
 <script>
 export default {
-    name: 'button-arrows',
+    name: 'ButtonArrows',
     props: {
         size: {
             type: String,
             default: 'md',
             validator(val) {
-                return ['sm', 'md', 'lg', 'xl'].includes(val);
+                return ['sm', 'md', 'lg', 'xl'].includes(val)
             }
         },
         colored: Boolean,

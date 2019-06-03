@@ -13,16 +13,16 @@
 </template>
 
 <script>
-    export default {
-        props:{
-            currentUser: Object
-        },
-        components:{
-            'c-chat-user': () => import('~/components/chat-new/user').then(m => m.default || m),
-            'c-chat-answer-field': () => import('~/components/chat-new/answer-field/field').then(m => m.default || m),
-            'c-scrollable-content': () => import('~/components/chat-new/content/scrollable-content').then(m => m.default || m)
-        }
+export default {
+    components: {
+        'c-chat-user': () => import('~/components/chat-new/user').then(m => m.default || m),
+        'c-chat-answer-field': () => import('~/components/chat-new/answer-field/field').then(m => m.default || m),
+        'c-scrollable-content': () => import('~/components/chat-new/content/scrollable-content').then(m => m.default || m)
+    },
+    props: {
+        currentUser: Object
     }
+}
 </script>
 
 <style lang="scss" scoped>

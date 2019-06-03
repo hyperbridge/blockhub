@@ -1,16 +1,16 @@
 <template>
-    <div class="carousel-3d" @keyup.right="next()" ref="carousel">
+    <div ref="carousel"
+         class="carousel-3d"
+         @keyup.right="next()">
         <c-icon
             name="arrow-circle-left"
             class="carousel-3d__btn"
-            @click="previous()"
-        />
+            @click="previous()" />
         <transition-group
             name="carousel-3d-transition"
             class="carousel-wrapper"
-            tag="div"
-        >
-            <slot :items="visible"/>
+            tag="div">
+            <slot :items="visible" />
             <!-- <slot>
                 <div v-for="slide in visible" :key="slide" class="">
                     <h1>{{ slide }}</h1>
@@ -20,8 +20,7 @@
         <c-icon
             name="arrow-circle-right"
             class="carousel-3d__btn"
-            @click="next()"
-        />
+            @click="next()" />
     </div>
 </template>
 
@@ -41,32 +40,32 @@ export default {
             interval: null
         }
     },
-    methods: {
-        next() {
-            // this.$refs.carousel.$el.focus();
-            // console.log();
-            this.$refs.carousel.focus()
-            const firstItem = this.slides.shift();
-            this.slides = [...this.slides, firstItem];
-        },
-        previous() {
-            const lastItem = this.slides.pop();
-            this.slides = [lastItem, ...this.slides];
-        }
-    },
     computed: {
         visible() {
-            return this.slides.slice(0, this.limitTo);
+            return this.slides.slice(0, this.limitTo)
         }
     },
     mounted() {
         // this.children = this.
         if (this.autoSlide) {
-            this.interval = setInterval(this.next, 2000);
+            this.interval = setInterval(this.next, 2000)
         }
     },
     beforeDestroy() {
-        clearInterval(this.interval);
+        clearInterval(this.interval)
+    },
+    methods: {
+        next() {
+            // this.$refs.carousel.$el.focus();
+            // console.log();
+            this.$refs.carousel.focus()
+            const firstItem = this.slides.shift()
+            this.slides = [...this.slides, firstItem]
+        },
+        previous() {
+            const lastItem = this.slides.pop()
+            this.slides = [lastItem, ...this.slides]
+        }
     }
 }
 </script>

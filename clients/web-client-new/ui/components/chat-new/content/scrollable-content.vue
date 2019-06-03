@@ -1,49 +1,52 @@
 <template>
     <div class="scrollable-content">
-        <div class="scrollable-content__wrapper--scroll" ref="scrollList">
+        <div ref="scrollList"
+             class="scrollable-content__wrapper--scroll">
             <slot />
         </div>
         <transition name="fade">
-            <div class="scrollable-content__scroll-btn" @click="_scrollDown" v-if="scrollBottom">
-                <i class="fas fa-angle-down"></i> Most Recent Messages
+            <div v-if="scrollBottom"
+                 class="scrollable-content__scroll-btn"
+                 @click="_scrollDown">
+                <i class="fas fa-angle-down" /> Most Recent Messages
             </div>
         </transition>
     </div>
 </template>
 
 <script>
-    export default {
-        data(){
-            return{
-                scrollBottom: false
-            }
-        },
-        methods: {
-            _scrollDown() {
-                this.$refs.scrollList.scrollTop = this.$refs.scrollList.scrollHeight
-            },
-            checkScrollButton() {
-                if ( this.$refs.scrollList.scrollHeight - this.$refs.scrollList.clientHeight > this.$refs.scrollList.scrollTop ){
-                    this.scrollBottom = true
-                } else {
-                    this.scrollBottom = false
-                }
-            },
-        },
-        mounted () {
-            if (process.client) {
-                this._scrollDown();
-                $(this.$refs.scrollList).scroll(() => {
-                    this.checkScrollButton()
-                })
-            }
-        },
-        updated () {
-            this.$nextTick(() => {
-                this._scrollDown()
+export default {
+    data() {
+        return {
+            scrollBottom: false
+        }
+    },
+    mounted() {
+        if (process.client) {
+            this._scrollDown()
+            $(this.$refs.scrollList).scroll(() => {
+                this.checkScrollButton()
             })
         }
+    },
+    updated() {
+        this.$nextTick(() => {
+            this._scrollDown()
+        })
+    },
+    methods: {
+        _scrollDown() {
+            this.$refs.scrollList.scrollTop = this.$refs.scrollList.scrollHeight
+        },
+        checkScrollButton() {
+            if (this.$refs.scrollList.scrollHeight - this.$refs.scrollList.clientHeight > this.$refs.scrollList.scrollTop) {
+                this.scrollBottom = true
+            } else {
+                this.scrollBottom = false
+            }
+        }
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -2,8 +2,8 @@
     <div class="chat-friends-list">
         <div class="chat-friends-list__head">
             <div class="user-avatar">
-                <img src="http://sharethingz.com/wp-content/uploads/2014/08/avatar.png" />
-                <span class="user-status status-online"></span>
+                <img src="http://sharethingz.com/wp-content/uploads/2014/08/avatar.png">
+                <span class="user-status status-online" />
             </div>
             <div class="user-info">
                 <strong>
@@ -11,19 +11,24 @@
                 </strong>
             </div>
             <div class="user-action">
-                <i class="fas fa-cog"></i>
+                <i class="fas fa-cog" />
             </div>
         </div>
         <div class="chat-friends-list__body">
             <div class="chat-friends-list__action">
-                <c-button status="opacity-info" size="xs">
-                    <i class="fas fa-plus"></i> Add friends
+                <c-button status="opacity-info"
+                          size="xs">
+                    <i class="fas fa-plus" /> Add friends
                 </c-button>
-                <c-search v-model="query" placeholder="Search" class="px-0" />
+                <c-search v-model="query"
+                          placeholder="Search"
+                          class="px-0" />
             </div>
             <div class="chat-friends-list__list">
-                <c-chat-friends-list :list="users" title="Favorites" />
-                <c-chat-friends-list :list="users" title="All" />
+                <c-chat-friends-list :list="users"
+                                     title="Favorites" />
+                <c-chat-friends-list :list="users"
+                                     title="All" />
             </div>
             <c-chat-suggestion-list :list="users" />
         </div>
@@ -31,112 +36,111 @@
 </template>
 
 <script>
-    export default {
-        components: {
-            'c-search': () => import('~/components/inputs/searcher').then(m => m.default || m),
-            'c-chat-user': () => import('~/components/chat-new/user').then(m => m.default || m),
-            'c-chat-friends-list': () => import('~/components/chat-new/friends-list/list').then(m => m.default || m),
-            'c-chat-suggestion-list': () => import('~/components/chat-new/friends-list/suggestion-list').then(m => m.default || m),
-        },
-        data(){
-            return{
-                query: '',
-                users:[
-                    {
-                        id: 1,
-                        avatar: 'http://sharethingz.com/wp-content/uploads/2014/08/avatar.png',
-                        name: 'Gregory Smith',
-                        game: 'Dota II',
-                        status: 'offline',
-                        admin: false
-                    },
-                    {
-                        id: 2,
-                        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE0I_Z85x-UDnEncEgx0myKWxgAirSMenb4VN2TepCnropn4Hl',
-                        name: 'Louis Burns',
-                        game: 'WarCraft',
-                        status: 'busy',
-                        admin: false
-                    },
-                    {
-                        id: 3,
-                        avatar: 'http://geedmo.com/codecanyon/bskins/plan/assets/img/avatar.png',
-                        name: 'Thomas Harris',
-                        game: 'Heroes',
-                        status: 'online',
-                        admin: true
-                    },
-                    {
-                        id: 4,
-                        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6yM6JujrHFOvFH9NvuV2lWnyXECBr1SWeF-I0tMdYmK942MXr',
-                        name: 'Terri Kopp',
-                        game: 'Dota II',
-                        status: 'online',
-                        admin: false
-                    },
-                    {
-                        id: 5,
-                        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPk-mHx8SMUl0FBrnGMm49fksyHtj9yPPodc6JbrdubpbSqKxU',
-                        name: 'Mildred Floyd',
-                        game: 'CS GO',
-                        status: 'online',
-                        admin: false
-                    },
-                    {
-                        id: 1,
-                        avatar: 'http://sharethingz.com/wp-content/uploads/2014/08/avatar.png',
-                        name: 'Gregory Smith',
-                        game: 'Dota II',
-                        status: 'offline',
-                        admin: false
-                    },
-                    {
-                        id: 2,
-                        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE0I_Z85x-UDnEncEgx0myKWxgAirSMenb4VN2TepCnropn4Hl',
-                        name: 'Louis Burns',
-                        game: 'WarCraft',
-                        status: 'busy',
-                        admin: false
-                    },
-                    {
-                        id: 3,
-                        avatar: 'http://geedmo.com/codecanyon/bskins/plan/assets/img/avatar.png',
-                        name: 'Thomas Harris',
-                        game: 'Heroes',
-                        status: 'online',
-                        admin: true
-                    },
-                    {
-                        id: 4,
-                        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6yM6JujrHFOvFH9NvuV2lWnyXECBr1SWeF-I0tMdYmK942MXr',
-                        name: 'Terri Kopp',
-                        game: 'Dota II',
-                        status: 'online',
-                        admin: false
-                    },
-                    {
-                        id: 5,
-                        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPk-mHx8SMUl0FBrnGMm49fksyHtj9yPPodc6JbrdubpbSqKxU',
-                        name: 'Mildred Floyd',
-                        game: 'CS GO',
-                        status: 'online',
-                        admin: false
-                    }
-                ],
-            }
-        },
-        methods:{
-            toggleList(list){
-                switch (list) {
-                    case 'favorites':
-                        this.favorites = true;
-                    case 'all':
-                        this.all = true;
-
+export default {
+    components: {
+        'c-search': () => import('~/components/inputs/searcher').then(m => m.default || m),
+        'c-chat-user': () => import('~/components/chat-new/user').then(m => m.default || m),
+        'c-chat-friends-list': () => import('~/components/chat-new/friends-list/list').then(m => m.default || m),
+        'c-chat-suggestion-list': () => import('~/components/chat-new/friends-list/suggestion-list').then(m => m.default || m)
+    },
+    data() {
+        return {
+            query: '',
+            users: [
+                {
+                    id: 1,
+                    avatar: 'http://sharethingz.com/wp-content/uploads/2014/08/avatar.png',
+                    name: 'Gregory Smith',
+                    game: 'Dota II',
+                    status: 'offline',
+                    admin: false
+                },
+                {
+                    id: 2,
+                    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE0I_Z85x-UDnEncEgx0myKWxgAirSMenb4VN2TepCnropn4Hl',
+                    name: 'Louis Burns',
+                    game: 'WarCraft',
+                    status: 'busy',
+                    admin: false
+                },
+                {
+                    id: 3,
+                    avatar: 'http://geedmo.com/codecanyon/bskins/plan/assets/img/avatar.png',
+                    name: 'Thomas Harris',
+                    game: 'Heroes',
+                    status: 'online',
+                    admin: true
+                },
+                {
+                    id: 4,
+                    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6yM6JujrHFOvFH9NvuV2lWnyXECBr1SWeF-I0tMdYmK942MXr',
+                    name: 'Terri Kopp',
+                    game: 'Dota II',
+                    status: 'online',
+                    admin: false
+                },
+                {
+                    id: 5,
+                    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPk-mHx8SMUl0FBrnGMm49fksyHtj9yPPodc6JbrdubpbSqKxU',
+                    name: 'Mildred Floyd',
+                    game: 'CS GO',
+                    status: 'online',
+                    admin: false
+                },
+                {
+                    id: 1,
+                    avatar: 'http://sharethingz.com/wp-content/uploads/2014/08/avatar.png',
+                    name: 'Gregory Smith',
+                    game: 'Dota II',
+                    status: 'offline',
+                    admin: false
+                },
+                {
+                    id: 2,
+                    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE0I_Z85x-UDnEncEgx0myKWxgAirSMenb4VN2TepCnropn4Hl',
+                    name: 'Louis Burns',
+                    game: 'WarCraft',
+                    status: 'busy',
+                    admin: false
+                },
+                {
+                    id: 3,
+                    avatar: 'http://geedmo.com/codecanyon/bskins/plan/assets/img/avatar.png',
+                    name: 'Thomas Harris',
+                    game: 'Heroes',
+                    status: 'online',
+                    admin: true
+                },
+                {
+                    id: 4,
+                    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6yM6JujrHFOvFH9NvuV2lWnyXECBr1SWeF-I0tMdYmK942MXr',
+                    name: 'Terri Kopp',
+                    game: 'Dota II',
+                    status: 'online',
+                    admin: false
+                },
+                {
+                    id: 5,
+                    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPk-mHx8SMUl0FBrnGMm49fksyHtj9yPPodc6JbrdubpbSqKxU',
+                    name: 'Mildred Floyd',
+                    game: 'CS GO',
+                    status: 'online',
+                    admin: false
                 }
+            ]
+        }
+    },
+    methods: {
+        toggleList(list) {
+            switch (list) {
+            case 'favorites':
+                this.favorites = true
+            case 'all':
+                this.all = true
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

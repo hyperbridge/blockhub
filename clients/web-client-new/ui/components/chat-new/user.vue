@@ -1,60 +1,71 @@
 <template>
     <div class="chat__user-item">
-        <c-chat-user-avatar :name="name" :status="status" :avatar="avatar"  />
+        <c-chat-user-avatar :name="name"
+                            :status="status"
+                            :avatar="avatar" />
         <div class="user-info">
             <strong>
                 {{ name }}
-                <i class="fas fa-crown margin-left-5" style="color: #FADC72" v-if="isAdmin"></i>
+                <i v-if="isAdmin"
+                   class="fas fa-crown margin-left-5"
+                   style="color: #FADC72" />
             </strong>
             <span>{{ game }}</span>
             <span v-if="!game && $slots['sub-info']">
                 <slot name="sub-info" />
             </span>
         </div>
-        <div class="user-action" v-if="action">
-            <i class="fas" :class=" volume ? 'fa-volume-up' : 'fa-volume-off'" @click="toggleVolume"></i>
-            <i class="fas" :class=" microphone ? 'fa-microphone' : 'fa-microphone-slash'" @click="toggleMicrophone"></i>
+        <div v-if="action"
+             class="user-action">
+            <i class="fas"
+               :class=" volume ? 'fa-volume-up' : 'fa-volume-off'"
+               @click="toggleVolume" />
+            <i class="fas"
+               :class=" microphone ? 'fa-microphone' : 'fa-microphone-slash'"
+               @click="toggleMicrophone" />
         </div>
-        <div class="user-custom-action" style="margin-left: auto;" v-if="$slots.default && !action">
+        <div v-if="$slots.default && !action"
+             class="user-custom-action"
+             style="margin-left: auto;">
             <slot />
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        props:{
-            avatar: String,
-            name: String,
-            status: String,
-            game: String,
-            isAdmin:{
-                type: Boolean,
-                default: false
-            },
-            action:{
-                type: Boolean,
-                default: false
-            },
+export default {
+    components: {
+        'c-chat-user-avatar': () => import('~/components/chat-new/user-avatar').then(m => m.default || m)
+    },
+    props: {
+        avatar: String,
+        name: String,
+        status: String,
+        game: String,
+        isAdmin: {
+            type: Boolean,
+            default: false
         },
-        components:{
-            'c-chat-user-avatar': () => import('~/components/chat-new/user-avatar').then(m => m.default || m),
+        action: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data() {
+        return {
+            volume: true,
+            microphone: true
+        }
+    },
+    methods: {
+        toggleVolume() {
+            this.volume = !this.volume
         },
-        data(){
-            return{
-                volume: true,
-                microphone: true
-            }
-        },
-        methods:{
-            toggleVolume(){
-                this.volume = !this.volume
-            },
-            toggleMicrophone(){
-                this.microphone = !this.microphone
-            }
+        toggleMicrophone() {
+            this.microphone = !this.microphone
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

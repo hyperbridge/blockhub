@@ -3,7 +3,7 @@
         <div class="chat__group-head">
             <div class="group-name h5">
                 General
-                <i class="fas fa-plus"></i>
+                <i class="fas fa-plus" />
             </div>
             <div>
                 12 of 450 online
@@ -15,7 +15,7 @@
         <div class="chat__channel-list">
             <div class="title h6 text-uppercase font-weight-bold d-flex justify-content-between">
                 Channel
-                <i class="fas fa-plus"></i>
+                <i class="fas fa-plus" />
             </div>
             <ul>
                 <li class="active">

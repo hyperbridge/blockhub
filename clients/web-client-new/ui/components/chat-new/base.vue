@@ -3,7 +3,8 @@
         <div class="chat-shortcuts">
             <c-shortcut-sidebar :items="shortcuts" />
         </div>
-        <div class="chat__sidebar" v-if="$slots.sidebar">
+        <div v-if="$slots.sidebar"
+             class="chat__sidebar">
             <slot name="sidebar" />
         </div>
         <div class="chat-main">
@@ -16,9 +17,7 @@
                         Ut elementum sit amet tellus non pulvinar. Integer mi quam, mattis at ultrices quis, aliquet ut risus.
                     </div>
                 </div>
-                <div>
-
-                </div>
+                <div />
             </div>
             <div class="chat-main__content">
                 <slot />
@@ -28,18 +27,18 @@
 </template>
 
 <script>
-    export default {
-        props:{
-            shortcuts: [ Array, Object ],
-            showShortcuts: {
-                type: Boolean,
-                default: true
-            }
-        },
-        components:{
-            'c-shortcut-sidebar': () => import('~/components/shortcut-sidebar').then(m => m.default || m)
+export default {
+    components: {
+        'c-shortcut-sidebar': () => import('~/components/shortcut-sidebar').then(m => m.default || m)
+    },
+    props: {
+        shortcuts: [Array, Object],
+        showShortcuts: {
+            type: Boolean,
+            default: true
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

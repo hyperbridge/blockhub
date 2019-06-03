@@ -1,7 +1,7 @@
 <template>
     <div class="chat-message">
         <div class="chat-message__avatar">
-            <img :src="user.avatar" />
+            <img :src="user.avatar">
         </div>
         <div class="chat-message__body">
             <div class="chat-message__info">
@@ -12,29 +12,29 @@
                     {{ time }}
                 </span>
             </div>
-            <div class="chat-message__content" v-html="text">
-            </div>
+            <div class="chat-message__content"
+                 v-html="text" />
             <c-emoji />
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        props:{
-            user: Object,
-            time: String,
-            text: String
-        },
-        components:{
-            'c-emoji': () => import('~/components/emoji').then(m => m.default || m),
-        },
-        computed: {
-            timeAgo() {
-                // return this.time.fromNow();
-            }
+export default {
+    components: {
+        'c-emoji': () => import('~/components/emoji').then(m => m.default || m)
+    },
+    props: {
+        user: Object,
+        time: String,
+        text: String
+    },
+    computed: {
+        timeAgo() {
+            // return this.time.fromNow();
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

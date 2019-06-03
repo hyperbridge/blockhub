@@ -4,27 +4,27 @@
             Welcome to ChanelName!
         </div>
         <div class="welcome-logo">
-            <img src="../../../static/img/logo.png" />
+            <img src="../../../static/img/logo.png">
         </div>
         <div class="chat-group__welcome-action">
             <ul>
                 <li>
                     <c-button status="plain">
-                        <i class="fas fa-user-plus margin-right-5"></i>
+                        <i class="fas fa-user-plus margin-right-5" />
                         Invite some friends
                     </c-button>
                     to fill out your roster.
                 </li>
                 <li>
                     <c-button status="plain">
-                        <i class="fas fa-plus margin-right-5"></i>
+                        <i class="fas fa-plus margin-right-5" />
                         Create channels
                     </c-button>
                     to keep conversation organized.
                 </li>
                 <li>
                     <c-button status="plain">
-                        <i class="fas fa-cog margin-right-5"></i>
+                        <i class="fas fa-cog margin-right-5" />
                         Customize
                     </c-button>
                     your group to make it your own.

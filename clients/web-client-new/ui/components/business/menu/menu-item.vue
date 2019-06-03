@@ -1,61 +1,62 @@
 <template>
     <li :class="{'has-submenu' : $slots.submenu, 'open' : isOpen, 'is-minimized' : minimized }">
-
-        <router-link :to="to" v-if="!$slots.submenu">
-            <i :class="[iconType + ' fa-' + icon ]"></i>
+        <router-link v-if="!$slots.submenu"
+                     :to="to">
+            <i :class="[iconType + ' fa-' + icon ]" />
             <span>
                 <slot />
             </span>
         </router-link>
 
-        <a href="#" @click="toggleSubMenu" v-else>
-            <i :class="[iconType + ' fa-' + icon ]"></i>
+        <a v-else
+           href="#"
+           @click="toggleSubMenu">
+            <i :class="[iconType + ' fa-' + icon ]" />
             <span>
                 <slot />
             </span>
         </a>
 
-        <ul class="sub-menu" v-if="$slots.submenu">
+        <ul v-if="$slots.submenu"
+            class="sub-menu">
             <slot name="submenu" />
         </ul>
-
     </li>
 </template>
 
 <script>
-    export default {
-        name: 'menu-item',
-        props:{
-            to: [ String, Object ],
-            icon: {
-                type: String,
-                default: 'square-full icon-sm'
-            },
-            iconType: {
-                type: String,
-                default: 'fas'
-            },
-            minimized: {
-                type: Boolean,
-                default: false
-            }
+export default {
+    name: 'MenuItem',
+    props: {
+        to: [String, Object],
+        icon: {
+            type: String,
+            default: 'square-full icon-sm'
         },
-        data(){
-            return{
-                isOpen: false,
-                hasActive: false
-            }
+        iconType: {
+            type: String,
+            default: 'fas'
         },
-        methods:{
-            toggleSubMenu(){
-                if(this.$slots.submenu)
-                    this.isOpen = !this.isOpen
-            }
-        },
-        mounted(){
-            console.log('minimized', this.$parent['minimized'])
+        minimized: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data() {
+        return {
+            isOpen: false,
+            hasActive: false
+        }
+    },
+    mounted() {
+        console.log('minimized', this.$parent.minimized)
+    },
+    methods: {
+        toggleSubMenu() {
+            if (this.$slots.submenu) { this.isOpen = !this.isOpen }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

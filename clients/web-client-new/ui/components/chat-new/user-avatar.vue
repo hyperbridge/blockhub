@@ -1,6 +1,9 @@
 <template>
-    <div class="user-avatar" @mouseover=" show = true " @mouseleave=" show = false ">
-        <div class="user-avatar__popover" v-if="show">
+    <div class="user-avatar"
+         @mouseover=" show = true "
+         @mouseleave=" show = false ">
+        <div v-if="show"
+             class="user-avatar__popover">
             <div>
                 <strong class="mr-3">
                     {{ name }}
@@ -11,25 +14,27 @@
                 10 days offline
             </div>
         </div>
-        <img :src="avatar" />
-        <span class="user-status" :class="['status-' + status]" v-if="status"></span>
+        <img :src="avatar">
+        <span v-if="status"
+              class="user-status"
+              :class="['status-' + status]" />
     </div>
 </template>
 
 <script>
-    export default {
-        props:{
-            avatar: String,
-            name: String,
-            number: String,
-            status: String
-        },
-        data(){
-            return{
-                show: false
-            }
+export default {
+    props: {
+        avatar: String,
+        name: String,
+        number: String,
+        status: String
+    },
+    data() {
+        return {
+            show: false
         }
     }
+}
 </script>
 
 <style lang="scss">

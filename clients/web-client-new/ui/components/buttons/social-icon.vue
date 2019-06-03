@@ -3,30 +3,30 @@
        target="_blank"
        class="social-icon"
        :class="`social-icon--size-${size}`"
-       :style="`color: ${color}`"
-    >
-        <i class="fab" :class="`fa-${icon}`"></i>
+       :style="`color: ${color}`">
+        <i class="fab"
+           :class="`fa-${icon}`" />
     </a>
 </template>
 
 <script>
-    export default {
-        props:{
-            link: {
-                type: String,
-                default: '#'
-            },
-            icon: String,
-            size: {
-                type: String,
-                default: 'md'
-            },
-            color: {
-                type: String,
-                default: '#fff'
-            },
+export default {
+    props: {
+        link: {
+            type: String,
+            default: '#'
+        },
+        icon: String,
+        size: {
+            type: String,
+            default: 'md'
+        },
+        color: {
+            type: String,
+            default: '#fff'
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

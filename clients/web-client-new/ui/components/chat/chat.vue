@@ -1,19 +1,20 @@
 <template>
-  <main id="chat" class="flex flex-column">
-    <header class="title-bar flex flex-row flex-center">
-      <div class="title-wrapper block center-element">
-        <span class="title">Chat</span>
-      </div>
-    </header>
-    <div class="flex flex-row flex-1 clear" v-if="user">
+    <main id="chat"
+          class="flex flex-column">
+        <header class="title-bar flex flex-row flex-center">
+            <div class="title-wrapper block center-element">
+                <span class="title">Chat</span>
+            </div>
+        </header>
+        <div v-if="user"
+             class="flex flex-row flex-1 clear">
+            <c-user-list :users="users"
+                         :logout="logout" />
 
-      <c-user-list :users="users"
-        :logout="logout" />
-
-      <c-message-list :messages="messages"
-        :createMessage="createMessage" />
-    </div>
-  </main>
+            <c-message-list :messages="messages"
+                            :createMessage="createMessage" />
+        </div>
+    </main>
 </template>
 
 <script>
@@ -27,11 +28,11 @@ export default {
     },
     computed: {
         ...mapState('auth', [
-          'user'
+            'user'
         ]),
         ...mapGetters('users', {
-          users: 'list'
-        }),
+            users: 'list'
+        })
         // users2 () {
         //   return this.findUsers({
         //     query: {
@@ -57,22 +58,22 @@ export default {
             'logout'
         ])
     },
-    created () {
+    created() {
         this.findMessages({
-          query: {
-            $sort: {
-              createdAt: 1
-            },
-            $limit: 25
-          }
+            query: {
+                $sort: {
+                    createdAt: 1
+                },
+                $limit: 25
+            }
         })
         this.findUsers({
-          query: {
-            $sort: {
-              email: 1
-            },
-            $limit: 25
-          }
+            query: {
+                $sort: {
+                    email: 1
+                },
+                $limit: 25
+            }
         })
     },
     components: {

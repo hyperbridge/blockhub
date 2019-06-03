@@ -1,24 +1,20 @@
 <template>
     <li
         class="chat-message"
-        :class="{ 'chat-message--own': message.author && userId == message.author.id }"
-    >
+        :class="{ 'chat-message--own': message.author && userId == message.author.id }">
         <div class="chat-message__content-wrapper">
             <c-img
-                class="chat-message__img"
                 v-if="userId != message.author.id"
-                :src="message.author.img"
-            />
+                class="chat-message__img"
+                :src="message.author.img" />
             <span
                 class="chat-message__content"
-                v-text="message.content"
-            />
+                v-text="message.content" />
             <button
                 v-if="message.author && userId == message.author.id"
                 class="chat-message__delete-btn"
-                @click="$emit('delete', message.id)"
-            >
-                <c-icon name="trash-alt"/>
+                @click="$emit('delete', message.id)">
+                <c-icon name="trash-alt" />
             </button>
         </div>
         <span class="chat-message__date">
@@ -28,16 +24,16 @@
 </template>
 
 <script>
-    export default {
-        props: ['message', 'userId'],
-        name: 'chat-message',
-        computed: {
-            timeAgo() {
-                return;
-                return this.message.createdAt.fromNow();
-            }
+export default {
+    name: 'ChatMessage',
+    props: ['message', 'userId'],
+    computed: {
+        timeAgo() {
+            return
+            return this.message.createdAt.fromNow()
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

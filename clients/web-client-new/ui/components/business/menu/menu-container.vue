@@ -7,9 +7,9 @@
 </template>
 
 <script>
-    export default {
-        props: ['minimized']
-    }
+export default {
+    props: ['minimized']
+}
 </script>
 
 <style lang="scss" scoped>

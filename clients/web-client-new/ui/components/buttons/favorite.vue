@@ -3,8 +3,7 @@
         class="favorite-btn"
         :class="{ 'favorite-btn--active': active }"
         :title="dynamicTitle"
-        @click="$emit('click')"
-    >
+        @click="$emit('click')">
         <c-icon :name="`${active ? unactiveIcon : activeIcon} mr-2`" />
         {{ dynamicTitle }}
     </button>
@@ -12,7 +11,7 @@
 
 <script>
 export default {
-    name: 'button-favorite',
+    name: 'ButtonFavorite',
     props: {
         active: Boolean,
         target: String,

@@ -1,13 +1,11 @@
 <template>
-    <div class="chat-main">
-
-    </div>
+    <div class="chat-main" />
 </template>
 
 <script>
-    export default {
+export default {
 
-    }
+}
 </script>
 
 <style lang="scss" scoped>

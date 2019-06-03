@@ -5,9 +5,9 @@
 </template>
 
 <script>
-    export default {
-        name: 'buttons-group'
-    }
+export default {
+    name: 'ButtonsGroup'
+}
 </script>
 <style lang="scss">
     .c-buttons-group{

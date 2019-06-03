@@ -1,33 +1,52 @@
 <template>
     <!-- PAGE WRAPPER -->
-    <div id="business-app" class="page page--w-header page--w-container">
-
+    <div id="business-app"
+         class="page page--w-header page--w-container">
         <transition name="slideDown">
-            <div class="page-top-bar draggable" :class="{ 'invert' : darkMode }">
-                <c-button status="none" class="logo-holder undraggable" to="/">
-                    <c-img src="/img/logo-white.svg" alt="Logo" v-if="darkMode" />
-                    <c-img src="/img/logo.svg" alt="Logo" style="height: 90%; margin-top: 2%" v-else />
+            <div class="page-top-bar draggable"
+                 :class="{ 'invert' : darkMode }">
+                <c-button status="none"
+                          class="logo-holder undraggable"
+                          to="/">
+                    <c-img v-if="darkMode"
+                           src="/img/logo-white.svg"
+                           alt="Logo" />
+                    <c-img v-else
+                           src="/img/logo.svg"
+                           alt="Logo"
+                           style="height: 90%; margin-top: 2%" />
                 </c-button>
-                <router-link to="/business" class="h2 ml-4 mb-0 pl-4 text-uppercase border-left">
+                <router-link to="/business"
+                             class="h2 ml-4 mb-0 pl-4 text-uppercase border-left">
                     Business Manager
                 </router-link>
-                <div class="page-top-bar__profile mb-0 float-right h5" style="margin-left: auto" @click="$store.commit('application/showProfileChooser', true)">
+                <div class="page-top-bar__profile mb-0 float-right h5"
+                     style="margin-left: auto"
+                     @click="$store.commit('application/showProfileChooser', true)">
                     <div class="page-top-bar__profile-avatar">
                         <c-img src="https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png" />
                     </div>
-                    <div class="page-top-bar__profile-name">{{ activeProfile.name }}</div>
+                    <div class="page-top-bar__profile-name">
+                        {{ activeProfile.name }}
+                    </div>
                 </div>
             </div>
         </transition>
 
         <!-- PAGE LEFT PANEL -->
-        <transition name="slideDown" no-ssr>
-            <sidebar-menu width="250px" :menu="menu" :class="{ 'light-v' : !darkMode }" @collapse="minimized = !minimized" />
+        <transition name="slideDown"
+                    no-ssr>
+            <sidebar-menu width="250px"
+                          :menu="menu"
+                          :class="{ 'light-v' : !darkMode }"
+                          @collapse="minimized = !minimized" />
         </transition>
 
         <!-- PAGE CONTENT -->
         <transition name="fade">
-            <div class="content" id="content" :class="{ 'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel, 'invert' : darkMode, 'is-minimized' : minimized }">
+            <div id="content"
+                 class="content"
+                 :class="{ 'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel, 'invert' : darkMode, 'is-minimized' : minimized }">
                 <!-- PAGE HEADING -->
                 <div class="page-heading">
                     <div class="page-heading__container">
@@ -41,10 +60,18 @@
                         </div>
                     </div>
 
-                    <nav aria-label="breadcrumb" role="navigation">
-                        <ul class="breadcrumb" v-if="breadcrumbLinksData.length">
-                            <li v-for="(link, index) in breadcrumbLinksData" class="breadcrumb-item" :class="{ 'active': index == breadcrumbLinksData.length-1 }" :key="index">
-                                <router-link :to="link.to" v-if="link.to">{{ link.title }}</router-link>
+                    <nav aria-label="breadcrumb"
+                         role="navigation">
+                        <ul v-if="breadcrumbLinksData.length"
+                            class="breadcrumb">
+                            <li v-for="(link, index) in breadcrumbLinksData"
+                                :key="index"
+                                class="breadcrumb-item"
+                                :class="{ 'active': index == breadcrumbLinksData.length-1 }">
+                                <router-link v-if="link.to"
+                                             :to="link.to">
+                                    {{ link.title }}
+                                </router-link>
                                 <template v-else>
                                     {{ link.title }}
                                 </template>
@@ -58,259 +85,263 @@
                         <slot />
                     </div>
                 </div>
-                <div class="content__bottom-menu" v-if="$slots['menu']">
-                    <slot name="menu"></slot>
+                <div v-if="$slots['menu']"
+                     class="content__bottom-menu">
+                    <slot name="menu" />
                 </div>
             </div>
         </transition>
 
         <!-- PAGE RIGHT PANEL -->
         <transition name="slideRight">
-            <div class="page-sidepanel text-right" id="page-sidepanel" v-if="showRightPanel" :class="{ 'invert' : darkMode }">
+            <div v-if="showRightPanel"
+                 id="page-sidepanel"
+                 class="page-sidepanel text-right"
+                 :class="{ 'invert' : darkMode }">
                 <div class="page-sidepanel__content">
                     <slot name="right" />
                 </div>
             </div>
         </transition>
 
-        <c-profile-chooser v-if="$store.state.application.profileChooser && $store.state.application.signedIn" :darkMode="false" />
+        <c-profile-chooser v-if="$store.state.application.profileChooser && $store.state.application.signedIn"
+                           :darkMode="false" />
     </div>
 </template>
 
 
 <script>
-    import { SidebarMenu } from 'vue-sidebar-menu'
+import { SidebarMenu } from 'vue-sidebar-menu'
 
-    import 'vue-multiselect/dist/vue-multiselect.min.css'
+import 'vue-multiselect/dist/vue-multiselect.min.css'
 
-    export default {
-        name: 'business',
-        props: {
-            showLeftPanel: {
-                type: Boolean,
-                default: true
-            },
-            showRightPanel: {
-                type: Boolean,
-                default: false
-            },
-            title: String
+export default {
+    name: 'Business',
+    components: {
+        SidebarMenu,
+        'c-profile-chooser': () => import('~/components/profile-chooser').then(m => m.default || m),
+        'c-page-heading': () => import('~/components/business/page-heading').then(m => m.default || m)
+    },
+    props: {
+        showLeftPanel: {
+            type: Boolean,
+            default: true
         },
-        components: {
-            SidebarMenu,
-            'c-profile-chooser': () => import('~/components/profile-chooser').then(m => m.default || m),
-            'c-page-heading': () => import('~/components/business/page-heading').then(m => m.default || m),
+        showRightPanel: {
+            type: Boolean,
+            default: false
         },
-        data() {
-            return {
-                loadingState: true,
-                darkMode: false,
-                minimized: false,
-                breadcrumbLinksData: [],
-                pageTitle: '',
-                menu: [
-                    {
-                        title: 'Marketplace',
-                        icon: 'fas fa-home',
-                        child: [
-                            {
-                                title: 'Products',
-                                // icon: 'fas fa-square-full icon-sm',
-                                child: [
-                                    {
-                                        href: '/business/products',
-                                        title: 'All Products',
-                                        icon: 'fas fa-square-full icon-sm',
-                                    },
-                                    {
-                                        href: '/business/product/new',
-                                        title: 'New Product',
-                                        icon: 'fas fa-square-full icon-sm'
-                                    }
-                                ]
-                            },
-                            {
-                                title: 'Crowdfunds',
-                                child: [
-                                    {
-                                        href: '/business/projects',
-                                        title: 'All Crowdfunds',
-                                        icon: 'fas fa-square-full icon-sm',
-                                    },
-                                    {
-                                        href: '/business/project/new',
-                                        title: 'New Crowdfunds',
-                                        icon: 'fas fa-square-full icon-sm'
-                                    },
-                                ]
-                            },
-                            {
-                                title: 'Ideas',
-                                child: [
-                                    {
-                                        href: '/business/ideas',
-                                        title: 'All Ideas',
-                                        icon: 'fas fa-square-full icon-sm',
-                                    },
-                                    {
-                                        href: '/business/idea/new',
-                                        title: 'New Ideas',
-                                        icon: 'fas fa-square-full icon-sm'
-                                    },
-                                ]
-                            },
-                            {
-                                title: 'Battle Passes',
-                                child: [
-                                    {
-                                        href: '/business/battlepasses',
-                                        title: 'All Battle Passes',
-                                        icon: 'fas fa-square-full icon-sm',
-                                    },
-                                    {
-                                        href: '/business/battlepass/new',
-                                        title: 'New Battle Passes',
-                                        icon: 'fas fa-square-full icon-sm'
-                                    },
-                                ]
-                            },
-                            {
-                                title: 'Communities',
-                                child: [
-                                    {
-                                        href: '/business/communities',
-                                        title: 'All Communities',
-                                        icon: 'fas fa-square-full icon-sm',
-                                    },
-                                ]
-                            },
-                            {
-                                title: 'Orders',
-                                child: [
-                                    {
-                                        href: '/business/orders',
-                                        title: 'All Orders',
-                                        icon: 'fas fa-square-full icon-sm',
-                                    },
-                                ]
-                            },
-                            {
-                                title: 'Tournaments',
-                                child: [
-                                    {
-                                        href: '/business/tournaments',
-                                        title: 'All Tournaments',
-                                        icon: 'fas fa-square-full icon-sm',
-                                    },
-                                    {
-                                        href: '/business/tournament/new',
-                                        title: 'New Tournaments',
-                                        icon: 'fas fa-square-full icon-sm'
-                                    },
-                                ]
-                            },
-                            {
-                                title: 'Realms',
-                                child: [
-                                    {
-                                        href: '/business/realms',
-                                        title: 'All Realms',
-                                        icon: 'fas fa-square-full icon-sm',
-                                    },
-                                    {
-                                        href: '/business/realm/new',
-                                        title: 'New Realms',
-                                        icon: 'fas fa-square-full icon-sm'
-                                    },
-                                ]
-                            },
-                            {
-                                title: 'Licenses',
-                                child: [
-                                    {
-                                        href: '/business/licenses',
-                                        title: 'All Licenses',
-                                        icon: 'fas fa-square-full icon-sm',
-                                    },
-                                    {
-                                        href: '/business/license/new',
-                                        title: 'New Licenses',
-                                        icon: 'fas fa-square-full icon-sm'
-                                    },
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        },
-        created() {
-            this.updateBreadcrumbLinks()
-            this.pageTitle = this.$route.meta.title || 'Dashboard'
-            // this.$store.dispatch('auth/authenticate')
-            //     .then(() => {
-            //         if (this.$store.state.auth.accessToken) {
-            //             this.initialize()
-            //         }
-            //     })
-            //     .catch(error => {
-            //         this.initialize()
-
-            //         if (error) {
-            //             if (!error.message.includes('Could not find stored JWT')) {
-            //                 console.error(error)
-            //             }
-            //             return
-            //         }
-
-            //     })
-        },
-        computed: {
-            activeProfile() {
-                return this.$store.state.application.account && this.$store.state.application.activeProfile
-            },
-        },
-        methods: {
-            updateBreadcrumbLinks() {
-                //this.breadcrumbLinksData = this.$route.meta.breadcrumb || []
-            },
-            // initialize() {
-            //     if (this.initialized) {
-            //         return
-            //     }
-
-            //     this.$store.state.application.initialized = window.BlockHub.initialized = true
-
-            //     document.getElementById('startup-loader').style.display = 'none'
-            // }
-        },
-        mounted() {
-            this.$nextTick(() => {
-                this.loadingState = false
-
-            })
-
-            if (process.client) {
-                document.body.classList.add('light')
-            }
-
-            this.updateBreadcrumbLinks()
-        },
-        beforeDestroy() {
-        },
-        watch: {
-            '$route'(to, from) {
-                if (process.client) {
-                    if (from.path.indexOf('/business') !== -1 && to.path.indexOf('/business') === -1) {
-                        document.body.classList.remove('light')
-                    }
+        title: String
+    },
+    data() {
+        return {
+            loadingState: true,
+            darkMode: false,
+            minimized: false,
+            breadcrumbLinksData: [],
+            pageTitle: '',
+            menu: [
+                {
+                    title: 'Marketplace',
+                    icon: 'fas fa-home',
+                    child: [
+                        {
+                            title: 'Products',
+                            // icon: 'fas fa-square-full icon-sm',
+                            child: [
+                                {
+                                    href: '/business/products',
+                                    title: 'All Products',
+                                    icon: 'fas fa-square-full icon-sm'
+                                },
+                                {
+                                    href: '/business/product/new',
+                                    title: 'New Product',
+                                    icon: 'fas fa-square-full icon-sm'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Crowdfunds',
+                            child: [
+                                {
+                                    href: '/business/projects',
+                                    title: 'All Crowdfunds',
+                                    icon: 'fas fa-square-full icon-sm'
+                                },
+                                {
+                                    href: '/business/project/new',
+                                    title: 'New Crowdfunds',
+                                    icon: 'fas fa-square-full icon-sm'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Ideas',
+                            child: [
+                                {
+                                    href: '/business/ideas',
+                                    title: 'All Ideas',
+                                    icon: 'fas fa-square-full icon-sm'
+                                },
+                                {
+                                    href: '/business/idea/new',
+                                    title: 'New Ideas',
+                                    icon: 'fas fa-square-full icon-sm'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Battle Passes',
+                            child: [
+                                {
+                                    href: '/business/battlepasses',
+                                    title: 'All Battle Passes',
+                                    icon: 'fas fa-square-full icon-sm'
+                                },
+                                {
+                                    href: '/business/battlepass/new',
+                                    title: 'New Battle Passes',
+                                    icon: 'fas fa-square-full icon-sm'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Communities',
+                            child: [
+                                {
+                                    href: '/business/communities',
+                                    title: 'All Communities',
+                                    icon: 'fas fa-square-full icon-sm'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Orders',
+                            child: [
+                                {
+                                    href: '/business/orders',
+                                    title: 'All Orders',
+                                    icon: 'fas fa-square-full icon-sm'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Tournaments',
+                            child: [
+                                {
+                                    href: '/business/tournaments',
+                                    title: 'All Tournaments',
+                                    icon: 'fas fa-square-full icon-sm'
+                                },
+                                {
+                                    href: '/business/tournament/new',
+                                    title: 'New Tournaments',
+                                    icon: 'fas fa-square-full icon-sm'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Realms',
+                            child: [
+                                {
+                                    href: '/business/realms',
+                                    title: 'All Realms',
+                                    icon: 'fas fa-square-full icon-sm'
+                                },
+                                {
+                                    href: '/business/realm/new',
+                                    title: 'New Realms',
+                                    icon: 'fas fa-square-full icon-sm'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Licenses',
+                            child: [
+                                {
+                                    href: '/business/licenses',
+                                    title: 'All Licenses',
+                                    icon: 'fas fa-square-full icon-sm'
+                                },
+                                {
+                                    href: '/business/license/new',
+                                    title: 'New Licenses',
+                                    icon: 'fas fa-square-full icon-sm'
+                                }
+                            ]
+                        }
+                    ]
                 }
-
-                this.updateBreadcrumbLinks()
-                this.pageTitle = to.meta.title || 'Dashboard'
-            }
+            ]
         }
+    },
+    computed: {
+        activeProfile() {
+            return this.$store.state.application.account && this.$store.state.application.activeProfile
+        }
+    },
+    watch: {
+        '$route'(to, from) {
+            if (process.client) {
+                if (from.path.indexOf('/business') !== -1 && to.path.indexOf('/business') === -1) {
+                    document.body.classList.remove('light')
+                }
+            }
+
+            this.updateBreadcrumbLinks()
+            this.pageTitle = to.meta.title || 'Dashboard'
+        }
+    },
+    created() {
+        this.updateBreadcrumbLinks()
+        this.pageTitle = this.$route.meta.title || 'Dashboard'
+        // this.$store.dispatch('auth/authenticate')
+        //     .then(() => {
+        //         if (this.$store.state.auth.accessToken) {
+        //             this.initialize()
+        //         }
+        //     })
+        //     .catch(error => {
+        //         this.initialize()
+
+        //         if (error) {
+        //             if (!error.message.includes('Could not find stored JWT')) {
+        //                 console.error(error)
+        //             }
+        //             return
+        //         }
+
+        //     })
+    },
+    mounted() {
+        this.$nextTick(() => {
+            this.loadingState = false
+        })
+
+        if (process.client) {
+            document.body.classList.add('light')
+        }
+
+        this.updateBreadcrumbLinks()
+    },
+    beforeDestroy() {
+    },
+    methods: {
+        updateBreadcrumbLinks() {
+            // this.breadcrumbLinksData = this.$route.meta.breadcrumb || []
+        }
+        // initialize() {
+        //     if (this.initialized) {
+        //         return
+        //     }
+
+        //     this.$store.state.application.initialized = window.BlockHub.initialized = true
+
+        //     document.getElementById('startup-loader').style.display = 'none'
+        // }
     }
+}
 </script>
 
 

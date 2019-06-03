@@ -1,38 +1,47 @@
 <template>
     <div class="friends-list">
-        <div class="friends-list__btn" :class="{ 'active' : open }" @click="toggleList">
-            <i class="fas mr-2" :class="[ open ? 'fa-angle-down' : 'fa-angle-right' ]"></i>
+        <div class="friends-list__btn"
+             :class="{ 'active' : open }"
+             @click="toggleList">
+            <i class="fas mr-2"
+               :class="[ open ? 'fa-angle-down' : 'fa-angle-right' ]" />
             {{ title }}
             <span class="ml-2">
                 0/{{ list.length }}
             </span>
         </div>
-        <div class="friends-list__list" v-if="open">
-            <c-chat-user v-for="item in list" :avatar="item.avatar" :name="item.name" :game="item.game" :status="item.status" :key="item.name" />
+        <div v-if="open"
+             class="friends-list__list">
+            <c-chat-user v-for="item in list"
+                         :key="item.name"
+                         :avatar="item.avatar"
+                         :name="item.name"
+                         :game="item.game"
+                         :status="item.status" />
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        props:{
-            title: String,
-            list: [ Array, Object ]
-        },
-        components: {
-            'c-chat-user': () => import('~/components/chat-new/user').then(m => m.default || m),
-        },
-        data(){
-            return{
-                open: false
-            }
-        },
-        methods:{
-            toggleList(){
-                this.open = !this.open
-            }
+export default {
+    components: {
+        'c-chat-user': () => import('~/components/chat-new/user').then(m => m.default || m)
+    },
+    props: {
+        title: String,
+        list: [Array, Object]
+    },
+    data() {
+        return {
+            open: false
+        }
+    },
+    methods: {
+        toggleList() {
+            this.open = !this.open
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

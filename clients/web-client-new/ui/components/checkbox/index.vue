@@ -1,41 +1,40 @@
 <template>
     <div class="c-checkbox">
         <input
-            type="checkbox"
             :id="id"
+            type="checkbox"
             :checked="checked"
             v-bind="$attrs"
             :class="type"
-            @change="$emit('change', $event.target.checked)"
-        >
+            @change="$emit('change', $event.target.checked)">
         <label :for="id">
-            <slot/>
+            <slot />
         </label>
     </div>
 </template>
 
 <script>
-    export default {
-        model: {
-            prop: 'checked',
-            event: 'change'
-        },
-        inheritAttrs: false,
-        props: {
-            id: {
-                type: [String, Number],
-                default() {
-                    return 'checkbox-' + parseInt(Math.random() * new Date().getUTCMilliseconds() * 5);
-                }
-            },
-            checked: [Boolean, String],
-            type: {
-                type: String,
-                default: 'square',
-                validator: val => ['circle', 'square'].includes(val)
+export default {
+    inheritAttrs: false,
+    model: {
+        prop: 'checked',
+        event: 'change'
+    },
+    props: {
+        id: {
+            type: [String, Number],
+            default() {
+                return `checkbox-${parseInt(Math.random() * new Date().getUTCMilliseconds() * 5)}`
             }
+        },
+        checked: [Boolean, String],
+        type: {
+            type: String,
+            default: 'square',
+            validator: val => ['circle', 'square'].includes(val)
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

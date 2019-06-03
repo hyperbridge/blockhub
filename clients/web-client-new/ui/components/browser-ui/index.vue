@@ -1,71 +1,83 @@
 <template>
     <div class="browser-ui">
         <div class="browser-ui__nav mr-2">
-            <c-button status="plain" class="p-0 mr-2" @click="back">
-                <i class="fas fa-arrow-left"></i>
+            <c-button status="plain"
+                      class="p-0 mr-2"
+                      @click="back">
+                <i class="fas fa-arrow-left" />
             </c-button>
-            <c-button status="plain" class="p-0 ml-2" @click="forward">
-                <i class="fas fa-arrow-right"></i>
+            <c-button status="plain"
+                      class="p-0 ml-2"
+                      @click="forward">
+                <i class="fas fa-arrow-right" />
             </c-button>
         </div>
         <div class="browser-ui__search-bar">
-
             <c-dropdown class="browser-ui__lock-dropdown">
                 <template slot="title">
                     <span class="lock-dropdown__icon">
-                    <i class="fa fa-lock"></i>
+                        <i class="fa fa-lock" />
                     </span>
                 </template>
                 <div class="text-success h4 mb-3">
                     Your connection is secure
                 </div>
-                <p>Vivamus vel eleifend erat, at posuere eros. Suspendisse pharetra elementum sollicitudin. Sed tempus
-                    odio mi, at consequat ante laoreet quis.</p>
-                <hr />
-                <c-button status="plain" icon="cookie-bite" class="text-dark">
+                <p>
+                    Vivamus vel eleifend erat, at posuere eros. Suspendisse pharetra elementum sollicitudin. Sed tempus
+                    odio mi, at consequat ante laoreet quis.
+                </p>
+                <hr>
+                <c-button status="plain"
+                          icon="cookie-bite"
+                          class="text-dark">
                     <span class="ml-3">
                         Cookies
                     </span>
                 </c-button>
-                <c-button status="plain" icon="cookie-bite" class="text-dark">
+                <c-button status="plain"
+                          icon="cookie-bite"
+                          class="text-dark">
                     <span class="ml-3">
                         Settings
                     </span>
                 </c-button>
             </c-dropdown>
 
-            <c-input v-model="searchQuery" ref="searchInput" @focus="$event.target.select()"/>
+            <c-input ref="searchInput"
+                     v-model="searchQuery"
+                     @focus="$event.target.select()" />
 
-            <c-button status="plain" class="p-0 ml-3">
-                <i class="fas fa-cog"></i>
+            <c-button status="plain"
+                      class="p-0 ml-3">
+                <i class="fas fa-cog" />
             </c-button>
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        components: {
-            'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m),
+export default {
+    components: {
+        'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m)
+    },
+    data() {
+        return {
+            searchQuery: document.location.href
+        }
+    },
+    methods: {
+        selectQuery() {
+            // this.$refs.searchInput.select()
+            console.log(this.$refs.searchInput)
         },
-        data() {
-            return {
-                searchQuery: document.location.href
-            }
+        back() {
+            window.history.back()
         },
-        methods: {
-            selectQuery(){
-                // this.$refs.searchInput.select()
-                console.log(this.$refs.searchInput)
-            },
-            back(){
-                window.history.back();
-            },
-            forward(){
-                window.history.forward();
-            }
+        forward() {
+            window.history.forward()
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

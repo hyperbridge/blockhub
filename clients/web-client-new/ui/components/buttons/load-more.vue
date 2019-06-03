@@ -1,5 +1,7 @@
 <template>
-    <a class="load-more" :class="{ 'fixed': fixed }" @click.prevent="$emit('click')">
+    <a class="load-more"
+       :class="{ 'fixed': fixed }"
+       @click.prevent="$emit('click')">
         <span class="load-more__text">
             <slot>Load More</slot>
         </span>
@@ -7,15 +9,15 @@
 </template>
 
 <script>
-    export default {
-        name: 'load-more',
-        props: {
-            fixed: {
-                type: Boolean,
-                default: false
-            }
+export default {
+    name: 'LoadMore',
+    props: {
+        fixed: {
+            type: Boolean,
+            default: false
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

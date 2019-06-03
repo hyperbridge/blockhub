@@ -1,16 +1,16 @@
 <template>
     <div class="c-checkbox-group">
         <h3>{{ title }}</h3>
-        <slot></slot>
+        <slot />
     </div>
 </template>
 
 <script>
-    export default {
-        props: {
-            title: { type: String }
-        }
+export default {
+    props: {
+        title: { type: String }
     }
+}
 </script>
 
 <style lang="scss" scoped>

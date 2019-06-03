@@ -7,26 +7,26 @@
         </div>
         <div class="sub-info">
             <div>
-                <i class="fas fa-clock"></i> {{ date | timeAgo }}
+                <i class="fas fa-clock" /> {{ date | timeAgo }}
             </div>
             <div>
                 <a href="#">
-                    <i class="fas fa-file-archive"></i> .zip
+                    <i class="fas fa-file-archive" /> .zip
                 </a>
             </div>
             <div>
                 <a href="#">
-                    <i class="fas fa-file-archive"></i> .tar.gz
+                    <i class="fas fa-file-archive" /> .tar.gz
                 </a>
             </div>
             <div>
                 <a href="#">
-                    <i class="fas fa-file-alt"></i> Notes
+                    <i class="fas fa-file-alt" /> Notes
                 </a>
             </div>
             <div>
                 <a href="#">
-                    <i class="fas fa-file-download"></i> Download
+                    <i class="fas fa-file-download" /> Download
                 </a>
             </div>
         </div>
@@ -34,14 +34,14 @@
 </template>
 
 <script>
-    export default {
-        name: 'release-tag-item',
-        props: {
-            id: String,
-            version: String,
-            date: String
-        }
+export default {
+    name: 'ReleaseTagItem',
+    props: {
+        id: String,
+        version: String,
+        date: String
     }
+}
 </script>
 
 <style lang="scss" scoped>

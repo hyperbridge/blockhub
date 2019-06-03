@@ -1,110 +1,109 @@
 <template>
     <div class="carousel-3d">
         <div class="carousel-3d__content">
-            <slot :items="visibleItems" :css="css"/>
+            <slot :items="visibleItems"
+                  :css="css" />
         </div>
         <template v-if="items.length > limitTo">
             <c-icon
                 name="arrow-circle-left"
                 class="carousel-3d__btn carousel-3d__btn--left"
-                @click="focusedItem--"
-            />
+                @click="focusedItem--" />
             <c-icon
                 name="arrow-circle-right"
                 class="carousel-3d__btn carousel-3d__btn--right"
-                @click="focusedItem++"
-            />
+                @click="focusedItem++" />
         </template>
     </div>
 </template>
 
 <script>
-    export default {
-        props: {
-            limitTo: {
-                type: Number,
-                default: 3
-            },
-            items: Array
+export default {
+    props: {
+        limitTo: {
+            type: Number,
+            default: 3
         },
-        data() {
-            return {
-                focusedItem: 1
-            }
+        items: Array
+    },
+    data() {
+        return {
+            focusedItem: 1
+        }
+    },
+    computed: {
+        visItemsOld() {
+            return 4
+            const { items, focusItem } = this
+            const visible = []
+
+            visible.push(items[focustItem - 1])
+            visible.push(items[focusItem])
+            visible.push(items[focusItem + 1])
+
+            return items.slice(focusItem - 1, focusItem + 2)
         },
-        methods: {
-        },
-        computed: {
-            visItemsOld() {
-                return 4;
-                const { items, focusItem } = this;
-                const visible = [];
+        focusItems() {
+            return 4
+            const slicer = (array, start = 0, end = array.length) => array
+                .filter((item, index) => {
+                    const { length } = array
 
-                visible.push(items[focustItem - 1]);
-                visible.push(items[focusItem]);
-                visible.push(items[focusItem + 1]);
-
-                return items.slice(focusItem - 1, focusItem + 2);
-            },
-            focusItems() {
-                return 4;
-                const slicer = (array, start = 0, end = array.length) => array
-                    .filter((item, index) => {
-                        const { length } = array;
-
-                        const started = start >= 0
+                    const started = start >= 0
                         ? start
                         : array[length + start]
 
-                        if (start < 0) return index >= started || index <= end;
-                        else return index >= started && index <= end;
-                    });
+                    if (start < 0) return index >= started || index <= end
+                    return index >= started && index <= end
+                })
 
-                const { focusItem } = this;
-                const focused = focusItem
-                return [focusItem, focusItem + 1, focusItem + 2];
-            },
-            visibleItems() {
-                const { items, focusedItem, limitTo } = this;
-                const { length } = items;
+            const { focusItem } = this
+            const focused = focusItem
+            return [focusItem, focusItem + 1, focusItem + 2]
+        },
+        visibleItems() {
+            const { items, focusedItem, limitTo } = this
+            const { length } = items
 
-                let focused = focusedItem % length;
-                if (focused < 0) focused = length + focused;
+            let focused = focusedItem % length
+            if (focused < 0) focused = length + focused
 
-                const itemsPerSide = (limitTo - 1) / 2;
+            const itemsPerSide = (limitTo - 1) / 2
 
-                const start = focused - itemsPerSide < 0
-                    ? items.slice(length - itemsPerSide, length)
-                    : items.slice(focused - itemsPerSide, focused)
+            const start = focused - itemsPerSide < 0
+                ? items.slice(length - itemsPerSide, length)
+                : items.slice(focused - itemsPerSide, focused)
 
-                const end = focused + 1 === length
-                    ? items.slice(0, itemsPerSide)
-                    : items.slice(focused + 1, focused + 1 + itemsPerSide)
+            const end = focused + 1 === length
+                ? items.slice(0, itemsPerSide)
+                : items.slice(focused + 1, focused + 1 + itemsPerSide)
 
-                return [...start, items[focused], ...end];
-            },
-            itemsV2() {
-                return this.items.map(item => ({
-                    ...item,
-                    visible: !!this.visibleItems.filter(vitem => vitem.id === item.id).length
-                }));
-            },
-            css() {
-                const { visibleItems } = this;
-                const { length } = visibleItems;
-                const midIndex = (length - 1) / 2;
+            return [...start, items[focused], ...end]
+        },
+        itemsV2() {
+            return this.items.map(item => ({
+                ...item,
+                visible: Boolean(this.visibleItems.filter(vitem => vitem.id === item.id).length)
+            }))
+        },
+        css() {
+            const { visibleItems } = this
+            const { length } = visibleItems
+            const midIndex = (length - 1) / 2
 
-                return visibleItems.map((item, index) => {
-                    let className = 'carousel-3d__item--';
-                    if (index < midIndex) className += midIndex - index + ' left';
-                    else if (index === midIndex) className += 'main';
-                    else className += index - midIndex + ' right';
+            return visibleItems.map((item, index) => {
+                let className = 'carousel-3d__item--'
+                if (index < midIndex) className += `${midIndex - index} left`
+                else if (index === midIndex) className += 'main'
+                else className += `${index - midIndex} right`
 
-                    return 'carousel-3d__item ' + className;
-                });
-            }
+                return `carousel-3d__item ${className}`
+            })
         }
+    },
+    methods: {
     }
+}
 </script>
 
 <style lang="scss" scoped>

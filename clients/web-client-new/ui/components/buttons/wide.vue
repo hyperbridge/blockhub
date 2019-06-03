@@ -1,12 +1,14 @@
 <template>
-  <component :is="type" class="button" :class="status">
-      <slot/>
-  </component>
+    <component :is="type"
+               class="button"
+               :class="status">
+        <slot />
+    </component>
 </template>
 
 <script>
 export default {
-    name: 'button-wide',
+    name: 'ButtonWide',
     props: {
         type: {
             type: String,

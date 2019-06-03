@@ -4,7 +4,7 @@
         :href="href"
         :target="target"
         :class="[
-            'c-button', 'c-button--' + size, status, 
+            'c-button', 'c-button--' + size, status,
             { 'swap-direction': swapDirection },
             { 'full': full },
             { 'centered': centered },
@@ -14,17 +14,17 @@
         style="font-size: 14px"
         :style="{ 'font-size': fontSize + 'px' }"
         @mouseover="mouseover"
-        @click="click"
-    >
+        @click="click">
         <i
             v-if="(icon || injectFilter.length) && !iconHide"
             class="icon fas"
             :class="[
                 icon ? 'fa-' + icon : injectFilter,
                 swapOrder ? 'swap-order' : ''
-            ]"
-        ></i>
-        <router-link tag="span" :to="to" v-if="to">
+            ]" />
+        <router-link v-if="to"
+                     tag="span"
+                     :to="to">
             <slot />
         </router-link>
         <slot v-if="!to" />
@@ -32,95 +32,95 @@
 </template>
 
 <script>
-    import { Howl } from 'howler'
+import { Howl } from 'howler'
 
-    export default {
-        props: {
-            tag: {
-                type: String,
-                default: 'a',
-            },
-            to: {
-                type: String,
-                default: '',
-            },
-            href: {
-                type: String,
-                default: 'javascript:;',
-            },
-            target: {
-                type: String,
-                default: '_self',
-            },
-            icon: String,
-            iconHide: Boolean,
-            status: {
-                type: String,
-                default: 'default'
-            },
-            swapOrder: Boolean,
-            swapDirection: Boolean,
-            doubled: Boolean,
-            full: {
-                type: Boolean,
-                default: false
-            },
-            centered: {
-                type: Boolean,
-                default: false
-            },
-            reload: {
-                type: Boolean,
-                default: false
-            },
-            size: {
-                type: String,
-                default: 'sm'
-            },
-            shadow: {
-                type: Boolean,
-                default: true
-            },
-            fontSize: {
-                type: String
-            }
+export default {
+    props: {
+        tag: {
+            type: String,
+            default: 'a'
         },
-        computed: {
-            injectFilter() {
-                return this.$options.filters.statusIcon(this.status);
-            }
+        to: {
+            type: String,
+            default: ''
         },
-        methods: {
-            mouseover() {
-                if (!this.$store.state.application.settings.client.sounds || !this.$store.state.application.settings.client.ui_interaction_sounds) return
+        href: {
+            type: String,
+            default: 'javascript:;'
+        },
+        target: {
+            type: String,
+            default: '_self'
+        },
+        icon: String,
+        iconHide: Boolean,
+        status: {
+            type: String,
+            default: 'default'
+        },
+        swapOrder: Boolean,
+        swapDirection: Boolean,
+        doubled: Boolean,
+        full: {
+            type: Boolean,
+            default: false
+        },
+        centered: {
+            type: Boolean,
+            default: false
+        },
+        reload: {
+            type: Boolean,
+            default: false
+        },
+        size: {
+            type: String,
+            default: 'sm'
+        },
+        shadow: {
+            type: Boolean,
+            default: true
+        },
+        fontSize: {
+            type: String
+        }
+    },
+    computed: {
+        injectFilter() {
+            return this.$options.filters.statusIcon(this.status)
+        }
+    },
+    methods: {
+        mouseover() {
+            if (!this.$store.state.application.settings.client.sounds || !this.$store.state.application.settings.client.ui_interaction_sounds) return
 
+            const sound = new Howl({
+                src: ['/sounds/information.mp3']
+            })
+
+            sound.play()
+        },
+        click() {
+            if (this.reload) {
+                window.location = window.location.origin + this.to
+                return
+            }
+
+            this.$store.dispatch('application/setEditorMode', 'viewing')
+            // this.$store.commit('application/activateModal', null)
+
+            if (this.$store.state.application.settings.client.sounds && this.$store.state.application.settings.client.ui_interaction_sounds) {
                 const sound = new Howl({
-                    src: ['/sounds/information.mp3']
+                    src: ['/sounds/ask.mp3']
                 })
 
                 sound.play()
-            },
-            click() {
-                if (this.reload) {
-                    window.location = window.location.origin + this.to
-                    return
-                }
-
-                this.$store.dispatch('application/setEditorMode', 'viewing')
-                //this.$store.commit('application/activateModal', null)
-
-                if (this.$store.state.application.settings.client.sounds && this.$store.state.application.settings.client.ui_interaction_sounds) {
-                    const sound = new Howl({
-                        src: ['/sounds/ask.mp3']
-                    })
-
-                    sound.play()
-                }
-
-                this.$emit('click')
             }
+
+            this.$emit('click')
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -317,7 +317,7 @@
             gradient-danger: (#79610d, rgba(161,202,249,0), #f8f9a1, #d3ba61, #fff),
             gradient-warning: (rgba(141,42,51,1), rgba(161,202,249,0), #f9a1a1, rgb(186, 56, 67), #fff),
         );
-    
+
         @each $status, $colorSet in $gradientColor {
             &.#{$status} {
                 background: nth($colorSet, 1) !important;

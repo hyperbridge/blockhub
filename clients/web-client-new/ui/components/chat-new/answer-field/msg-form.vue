@@ -5,11 +5,11 @@
 </template>
 
 <script>
-    export default {
-        components:{
-            'c-input': () => import('~/components/inputs').then(m => m.default || m)
-        }
+export default {
+    components: {
+        'c-input': () => import('~/components/inputs').then(m => m.default || m)
     }
+}
 </script>
 
 <style lang="scss" scoped>
