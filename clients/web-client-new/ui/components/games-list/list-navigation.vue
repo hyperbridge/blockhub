@@ -2,9 +2,9 @@
     <div class="games-navigation">
         <ul>
             <li v-for="item in list"
+                :key="item.id"
                 :class="{ 'active' : activeId == item.id }"
-                @click="chooseGame(item.id)"
-                :key="item.id">
+                @click="chooseGame(item.id)">
                 {{ item.name }}
             </li>
         </ul>
@@ -12,17 +12,17 @@
 </template>
 
 <script>
-    export default {
-        props:{
-            list: [ Array, Object ],
-            activeId: [ String, Number ]
-        },
-        methods:{
-            chooseGame(id){
-                this.$emit('choose', id)
-            }
+export default {
+    props: {
+        list: [Array, Object],
+        activeId: [String, Number]
+    },
+    methods: {
+        chooseGame(id) {
+            this.$emit('choose', id)
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

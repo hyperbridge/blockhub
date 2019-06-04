@@ -1,21 +1,24 @@
 <template>
     <div class="image-overlay">
-        <div class="image-overlay__title" v-if="title">
+        <div v-if="title"
+             class="image-overlay__title">
             {{ title }}
         </div>
-        <div class="image-overlay__subtitle" v-if="subtitle">
+        <div v-if="subtitle"
+             class="image-overlay__subtitle">
             {{ subtitle }}
         </div>
-        <div class="image-overlay__text" v-if="text">
+        <div v-if="text"
+             class="image-overlay__text">
             {{ text }}
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        props: ['title', 'subtitle', 'text']
-    }
+export default {
+    props: ['title', 'subtitle', 'text']
+}
 </script>
 
 <style lang="scss">

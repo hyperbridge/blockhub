@@ -1,6 +1,6 @@
 <template>
     <div class="layout">
-        <div class="layout__topdisplay"></div>
+        <div class="layout__topdisplay" />
         <div class="layout__content">
             <slot />
         </div>
@@ -8,23 +8,23 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            showLeftPanel: {
-                type: Boolean,
-                default: true
-            },
-            showRightPanel: {
-                type: Boolean,
-                default: false
-            },
-            title: String
+export default {
+    props: {
+        showLeftPanel: {
+            type: Boolean,
+            default: true
         },
-        mounted() {
-            document.getElementById('startup-loader').style.display = 'none'
-            document.body.classList.add('light')
+        showRightPanel: {
+            type: Boolean,
+            default: false
         },
+        title: String
+    },
+    mounted() {
+        document.getElementById('startup-loader').style.display = 'none'
+        document.body.classList.add('light')
     }
+}
 </script>
 
 <style lang="scss" scoped>

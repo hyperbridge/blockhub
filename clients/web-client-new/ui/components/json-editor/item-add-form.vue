@@ -2,62 +2,83 @@
     <div class="add-form">
         <div class="f-input">
             <input
-                type="text"
+                v-if="needName"
                 v-model="keyName"
+                type="text"
                 class="f-input-m"
                 placeholder="key"
-                v-if="needName"
-                @keyup="checkName"
-            >
+                @keyup="checkName">
 
-            <select v-model="formatSelected" class="f-input-m" @change="checkName">
-                <option :value="format" v-for="format in formats" :key="format">{{format}}</option>
+            <select v-model="formatSelected"
+                    class="f-input-m"
+                    @change="checkName">
+                <option v-for="format in formats"
+                        :key="format"
+                        :value="format">
+                    {{ format }}
+                </option>
             </select>
 
-            <span class="f-input-m" v-show="showColon"><b>:</b></span>
+            <span v-show="showColon"
+                  class="f-input-m"><b>:</b></span>
 
             <template v-if="requireName">
                 <input
-                    type="text"
-                    v-model="valName" class="f-input-m"
-                    placeholder="value"
                     v-if="formatSelected === 'string'"
-                >
-                <input
-                    type="number"
                     v-model="valName"
+                    type="text"
+                    class="f-input-m"
+                    placeholder="value">
+                <input
+                    v-if="formatSelected === 'number'"
+                    v-model="valName"
+                    type="number"
                     class="f-input-m"
                     placeholder="value"
-                    v-if="formatSelected === 'number'" @change="numberType"
-                >
+                    @change="numberType">
                 <select
-                    name="value"
-                    v-model="valName"
-                    class="f-input-m"
                     v-if="formatSelected === 'boolean'"
-                    @change="booleanType"
-                >
-                    <option :value="true">true</option>
-                    <option :value="false">false</option>
+                    v-model="valName"
+                    name="value"
+                    class="f-input-m"
+                    @change="booleanType">
+                    <option :value="true">
+                        true
+                    </option>
+                    <option :value="false">
+                        false
+                    </option>
                 </select>
             </template>
         </div>
 
         <div class="f-btns">
-            <button class="f-confirm" @click="confirm" :disabled="disableConfirm" :title="requireNameWarning">
-                <i class="fa fa-check"></i>
+            <button class="f-confirm"
+                    :disabled="disableConfirm"
+                    :title="requireNameWarning"
+                    @click="confirm">
+                <i class="fa fa-check" />
             </button>
-            <button class="f-cancel" @click="cancel" title="Cancel">
-                <i class="fa fa-times"></i>
+            <button class="f-cancel"
+                    title="Cancel"
+                    @click="cancel">
+                <i class="fa fa-times" />
             </button>
         </div>
     </div>
-
 </template>
 
 <script>
 export default {
-    data: function() {
+    props: {
+        needName: {
+            default: true
+        },
+        existingNames: {
+            default() { return [] }
+        }
+    },
+    data() {
         return {
             formats: ['string', 'array', 'object', 'number', 'boolean', 'null'],
             valueFormats: ['string', 'number', 'boolean'],
@@ -66,80 +87,72 @@ export default {
             valName: '',
             disableConfirm: this.needName,
             showColon: true,
-            requireNameWarning: 'A key is required',
-        };
-    },
-    props: {
-        needName: {
-            default: true
-        },
-        existingNames: {
-            default: function () { return [] }
+            requireNameWarning: 'A key is required'
         }
     },
     methods: {
-        checkName: function()    {
-            this.showColon = this.valueFormats.includes(this.formatSelected);
+        checkName() {
+            this.showColon = this.valueFormats.includes(this.formatSelected)
 
             // Check for a key
-            this.disableConfirm = this.needName && this.keyName.length === 0;
-            this.requireNameWarning = this.disableConfirm ? 'A key is required' : 'Add';
+            this.disableConfirm = this.needName && this.keyName.length === 0
+            this.requireNameWarning = this.disableConfirm ? 'A key is required' : 'Add'
 
             // Check for duplicate keys
             if (this.keyName.length > 0 && this.existingNames.includes(this.keyName)) {
-                this.disableConfirm = true;
-                this.requireNameWarning = 'Duplicate key is not allowed';
+                this.disableConfirm = true
+                this.requireNameWarning = 'Duplicate key is not allowed'
             }
 
             // Check type for formatting
             if (this.formatSelected === 'boolean') {
-                this.$emit('popoverView', 'boolean');
+                this.$emit('popoverView', 'boolean')
             } else {
-                this.$emit('popoverView', this.showColon ? 'full' : 'array');
+                this.$emit('popoverView', this.showColon ? 'full' : 'array')
             }
         },
 
-        requireName: function()    {
-            return this.formatSelected !=='array' && this.formatSelected !== 'object'
+        requireName() {
+            return this.formatSelected !== 'array' && this.formatSelected !== 'object'
         },
 
-        confirm: function() {
-            let val = null;
+        confirm() {
+            let val = null
             if (this.formatSelected === 'array' || this.formatSelected === 'object') {
-                val = [];
+                val = []
             } else if (this.formatSelected === 'null') {
                 val = null
             } else {
-                val = this.valName;
+                val = this.valName
             }
 
             const objData = {
                 key: this.needName ? this.keyName : null,
-                val: val,
+                val,
                 type: this.formatSelected
-            };
+            }
 
-            this.$emit('confirm', objData);
-            this.keyName = '';
-            this.valName = '';
-            this.formatSelected = 'string';
+            this.$emit('confirm', objData)
+            this.keyName = ''
+            this.valName = ''
+            this.formatSelected = 'string'
 
             this.$parent.hideEventListener(event)
         },
 
-        cancel: function(event) {
+        cancel(event) {
             this.$parent.hideEventListener(event)
         },
 
-        booleanType: function() {
-            this.valName = Boolean(this.valName);
+        booleanType() {
+            this.valName = Boolean(this.valName)
         },
 
-        numberType: function()    {
-            this.valName = Number(this.valName);
+        numberType() {
+            this.valName = Number(this.valName)
         }
     }
-};
+}
 </script>
 
 <style lang="scss" scoped>

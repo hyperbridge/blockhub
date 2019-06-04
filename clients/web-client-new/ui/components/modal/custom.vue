@@ -1,5 +1,6 @@
 <template>
-    <div class="modal-light" @click.self="$emit('close')">
+    <div class="modal-light"
+         @click.self="$emit('close')">
         <div class="modal-light__content">
             <div :class="modalClass">
                 <div class="custom-modal-header">
@@ -7,21 +8,19 @@
                         {{ title }}
                     </div>
                     <div class="action">
-                        <button type="button" @click="$emit('close')" aria-label="Close">
-                            <i class="fas fa-times"></i>
+                        <button type="button"
+                                aria-label="Close"
+                                @click="$emit('close')">
+                            <i class="fas fa-times" />
                         </button>
                     </div>
                 </div>
                 <div class="modal-body padding-0">
                     <div class="custom-modal-body">
-                        <slot name="modalBody">
-
-                        </slot>
+                        <slot name="modalBody" />
                     </div>
                     <div class="modal-action d-flex w-100 justify-content-between align-items-center flex-nowrap">
-                        <slot name="modalFooter">
-
-                        </slot>
+                        <slot name="modalFooter" />
                     </div>
                 </div>
             </div>
@@ -30,10 +29,10 @@
 </template>
 
 <script>
-    export default {
-        name: 'modal',
-        props: ['id', 'title', 'modalClass']
-    }
+export default {
+    name: 'Modal',
+    props: ['id', 'title', 'modalClass']
+}
 </script>
 
 <style lang="scss" scoped>

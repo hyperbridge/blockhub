@@ -1,24 +1,37 @@
 <template>
-    <div class="idea-card__item" :class="customClass">
-        <div class="head" v-if="parentName">
-            <div class="img" v-if="parentImage">
+    <div class="idea-card__item"
+         :class="customClass">
+        <div v-if="parentName"
+             class="head">
+            <div v-if="parentImage"
+                 class="img">
                 <c-img :src="parentImage" />
             </div>
             <div class="text">
-                <c-button status="none" :to="`/idea/${id}`">
+                <c-button status="none"
+                          :to="`/idea/${id}`">
                     <h4>{{ parentName }}</h4>
                 </c-button>
-                <c-button status="none" :to="`/profile/${parentDeveloperId}`" v-if="parentDeveloperName">
+                <c-button v-if="parentDeveloperName"
+                          status="none"
+                          :to="`/profile/${parentDeveloperId}`">
                     <p>{{ parentDeveloperName }}</p>
                 </c-button>
             </div>
         </div>
-        <c-button status="none" :to="`/idea/${id}`">
-            <c-img :src="image"/>
-            <div class="description">{{ description }}</div>
+        <c-button status="none"
+                  :to="`/idea/${id}`">
+            <c-img :src="image" />
+            <div class="description">
+                {{ description }}
+            </div>
         </c-button>
         <div class="item-action">
-            <c-button status="info" :to="`/idea/${id}`" iconHide>Check it out</c-button>
+            <c-button status="info"
+                      :to="`/idea/${id}`"
+                      iconHide>
+                Check it out
+            </c-button>
         </div>
     </div>
 </template>
@@ -26,6 +39,18 @@
 <script>
 export default {
     components: {
+    },
+    filters: {
+        currencySign(cur_name) {
+            switch (cur_name) {
+            case 'EUR':
+                return '€'
+            case 'GBP':
+                return '£'
+            default:
+                return '$'
+            }
+        }
     },
     props: {
         image: String,
@@ -40,7 +65,7 @@ export default {
         parentDeveloperId: Number,
         id: Number,
         customClass: {
-            type: String,
+            type: String
         }
     },
     computed: {
@@ -50,18 +75,6 @@ export default {
             const { obtained, goal } = this.funds
 
             return Math.round(obtained / goal * 100)
-        }
-    },
-    filters: {
-        currencySign(cur_name) {
-            switch(cur_name) {
-                case 'EUR':
-                    return '€'
-                case 'GBP':
-                    return '£'
-                default:
-                    return '$'
-            }
         }
     }
 }

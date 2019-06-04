@@ -1,12 +1,14 @@
 <template>
-    <section class="landing-section" :class="{'full-height' : fullHeight}"
+    <section class="landing-section"
+             :class="{'full-height' : fullHeight}"
              :style="{
-             'background-image' : 'url(' + bgImage + ')' ,
-             'min-height' : minHeight,
-             'background-position' : bgPosition
+                 'background-image' : 'url(' + bgImage + ')' ,
+                 'min-height' : minHeight,
+                 'background-position' : bgPosition
              }">
         <div class="container">
-            <div class="row landing__content-block-body" :class="[horizontalPozition, verticalPosition]">
+            <div class="row landing__content-block-body"
+                 :class="[horizontalPozition, verticalPosition]">
                 <slot />
             </div>
         </div>
@@ -14,63 +16,63 @@
 </template>
 
 <script>
-    export default {
-        name: 'simple-block',
-        props:{
-            titleGradient: {
-                type: Boolean,
-                default: false
-            },
-            titleShadow: {
-                type: Boolean,
-                default: false
-            },
-            title: String,
-            minHeight: String,
-            fullHeight: {
-                type: Boolean,
-                default: false
-            },
-            bgImage: String,
-            bgPosition:{
-                type: String,
-                default: 'center'
-            },
-            vertical:{
-                type: String,
-                default: 'top'
-            },
-            horizontal:{
-                type: String,
-                default: 'left'
-            },
-            contentWidth: String
+export default {
+    name: 'SimpleBlock',
+    props: {
+        titleGradient: {
+            type: Boolean,
+            default: false
         },
-        computed: {
-            verticalPosition(){
-                switch (this.vertical) {
-                    case 'top':
-                        return 'align-items-start';
-                    case 'center':
-                        return 'align-items-center';
-                    case 'bottom':
-                        return 'align-items-end';
-                    default:
-                        break;
-                }
-            },
-            horizontalPozition(){
-                switch (this.horizontal) {
-                    case 'left':
-                        return 'justify-content-start'
-                    case 'center':
-                        return 'justify-content-center'
-                    case 'right':
-                        return 'justify-content-end'
-                }
+        titleShadow: {
+            type: Boolean,
+            default: false
+        },
+        title: String,
+        minHeight: String,
+        fullHeight: {
+            type: Boolean,
+            default: false
+        },
+        bgImage: String,
+        bgPosition: {
+            type: String,
+            default: 'center'
+        },
+        vertical: {
+            type: String,
+            default: 'top'
+        },
+        horizontal: {
+            type: String,
+            default: 'left'
+        },
+        contentWidth: String
+    },
+    computed: {
+        verticalPosition() {
+            switch (this.vertical) {
+            case 'top':
+                return 'align-items-start'
+            case 'center':
+                return 'align-items-center'
+            case 'bottom':
+                return 'align-items-end'
+            default:
+                break
+            }
+        },
+        horizontalPozition() {
+            switch (this.horizontal) {
+            case 'left':
+                return 'justify-content-start'
+            case 'center':
+                return 'justify-content-center'
+            case 'right':
+                return 'justify-content-end'
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

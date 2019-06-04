@@ -5,9 +5,9 @@
 </template>
 
 <script>
-    export default {
-        name: 'gradient-block',
-    }
+export default {
+    name: 'GradientBlock'
+}
 </script>
 
 <style lang="scss">

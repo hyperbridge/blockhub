@@ -1,35 +1,40 @@
 <template>
     <div>
         <div class="stages-line">
-            <div v-for="(milestone, index) in milestones" :key="index"
+            <div v-for="(milestone, index) in milestones"
+                 :key="index"
                  :class="milestone.status"
                  class="stages-line__stage">
-                <i class="fas fa-check" v-if="milestone.status === 'Done'"></i>
-                <i class="fas fa-clock" v-if="milestone.status === 'InProgress'"></i>
+                <i v-if="milestone.status === 'Done'"
+                   class="fas fa-check" />
+                <i v-if="milestone.status === 'InProgress'"
+                   class="fas fa-clock" />
                 <div class="stage_progress">
-                    <span></span>
-                    <span></span>
+                    <span />
+                    <span />
                 </div>
-                <div class="name">{{ milestone.text }}</div>
+                <div class="name">
+                    {{ milestone.text }}
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        props: [
-            'milestones'
-        ],
-        mounted() {
-            let finished_el = document.getElementsByClassName('Done')
+export default {
+    props: [
+        'milestones'
+    ],
+    mounted() {
+        const finished_el = document.getElementsByClassName('Done')
 
-            if (!finished_el.length) return
-            
-            let last_el = finished_el[finished_el.length - 1]
-            last_el.className += " last-done-el"
-        }
+        if (!finished_el.length) return
+
+        const last_el = finished_el[finished_el.length - 1]
+        last_el.className += ' last-done-el'
     }
+}
 </script>
 
 <style lang="scss" scoped>

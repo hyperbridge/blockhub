@@ -7,30 +7,26 @@
             'navigator-item--last': index === listLength - 1
         }"
         @mouseover="hovered = true"
-        @mouseout="hovered = false"
-    >
+        @mouseout="hovered = false">
         <div class="navigator-item__content">
             <button
                 v-if="!item.evolvesTo.length && hovered && !hideButtons"
-                @click="handleEvolve(item.id)"
                 class="navigator-item__btn navigator-item__btn--right"
-            >
-                <c-icon name="plus"/>
+                @click="handleEvolve(item.id)">
+                <c-icon name="plus" />
             </button>
 
             <button
                 v-if="index === listLength - 1 && hovered && !hideButtons"
-                @click="handleEvolve(parentId)"
                 class="navigator-item__btn navigator-item__btn--bottom"
-            >
-                <c-icon name="plus"/>
+                @click="handleEvolve(parentId)">
+                <c-icon name="plus" />
             </button>
             <!-- {{ item.id }} -->
             <c-asset
                 :asset="item.asset"
                 class="navigator-item__asset"
-                @click="handleDevolve"
-            />
+                @click="handleDevolve" />
         </div>
         <div
             class="navigator-item__sub-navigators"
@@ -38,57 +34,55 @@
                 'sub-navigators__line': item.evolvesTo.length,
                 'first-line': index === 0,
                 'hide-line': item.evolvesTo.length < 2
-            }"
-        >
+            }">
             <navigator-item
                 v-for="(subItem, index) in item.evolvesTo"
-                :index="index"
                 :key="index"
+                :index="index"
                 :item="subItem"
                 :isChildren="true"
                 :listLength="item.evolvesTo.length"
                 :parentId="item.id"
-                :hideButtons="hideButtons"
-            />
+                :hideButtons="hideButtons" />
         </div>
     </div>
 </template>
 
 <script>
-    // import { EventBus } from '@/event-bus';
+// import { EventBus } from '@/event-bus';
 
-    export default {
-        name: 'navigator-item',
-        components: {
-            'c-asset': () => import('~/components/assets-grid-inventory/asset').then(m => m.default || m),
+export default {
+    name: 'NavigatorItem',
+    components: {
+        'c-asset': () => import('~/components/assets-grid-inventory/asset').then(m => m.default || m)
+    },
+    props: {
+        item: Object,
+        isChildren: Boolean,
+        index: Number,
+        listLength: Number,
+        useComp: {
+            type: String,
+            default: 'c-asset'
         },
-        props: {
-            item: Object,
-            isChildren: Boolean,
-            index: Number,
-            listLength: Number,
-            useComp: {
-                type: String,
-                default: 'c-asset'
-            },
-            parentId: [Number, String],
-            hideButtons: Boolean
+        parentId: [Number, String],
+        hideButtons: Boolean
+    },
+    data() {
+        return {
+            hovered: false
+        }
+    },
+    methods: {
+        handleEvolve(id) {
+            // EventBus.$emit('evolve', id);
         },
-        data() {
-            return {
-                hovered: false
-            }
-        },
-        methods: {
-            handleEvolve(id) {
-                // EventBus.$emit('evolve', id);
-            },
-            handleDevolve({ id }) {
-                const { parentId } = this;
-                // EventBus.$emit('devolve', { tree: this.item, parentId });
-            }
+        handleDevolve({ id }) {
+            const { parentId } = this
+            // EventBus.$emit('devolve', { tree: this.item, parentId });
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

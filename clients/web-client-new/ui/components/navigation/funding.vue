@@ -4,8 +4,7 @@
             title="CROWD FUNDING"
             subTitle="General"
             mClass="margin-bottom-20"
-            :links="links.general"
-        />
+            :links="links.general" />
     </div>
 </template>
 

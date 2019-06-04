@@ -1,23 +1,33 @@
 <template>
     <div class="landing-slider">
-        <transition name="fade" v-if="currentSlide">
+        <transition v-if="currentSlide"
+                    name="fade">
             <div class="landing-slider__main">
-                <c-swiper class="gallery-top" ref="swiperTop">
-                    <c-swiper-slide v-for="slide in items" :key="slide">
+                <c-swiper ref="swiperTop"
+                          class="gallery-top">
+                    <c-swiper-slide v-for="slide in items"
+                                    :key="slide">
                         <div class="p-3">
-                            <video :poster="slide.poster"
+                            <video v-if="slide.type === 'video'"
+                                   :poster="slide.poster"
                                    :preload="preload"
                                    :controls="controls"
                                    :autoplay="autoplay"
-                                   loop
-                                   v-if="slide.type === 'video'">
-                                <source type="video/webm" :src="slide.src">
+                                   loop>
+                                <source type="video/webm"
+                                        :src="slide.src">
                             </video>
-                            <c-img :src="slide.image" v-else />
-                            <c-landing-block-title fontSize="32" class="text-uppercase p-0 mt-4 mb-0" v-if="slide.title">
+                            <c-img v-else
+                                   :src="slide.image" />
+                            <c-landing-block-title v-if="slide.title"
+                                                   fontSize="32"
+                                                   class="text-uppercase p-0 mt-4 mb-0">
                                 {{ slide.title }}
                             </c-landing-block-title>
-                            <c-landing-block-title tag="div" fontSize="16" fontWeight="normal" v-if="slide.subtitle">
+                            <c-landing-block-title v-if="slide.subtitle"
+                                                   tag="div"
+                                                   fontSize="16"
+                                                   fontWeight="normal">
                                 {{ slide.subtitle }}
                             </c-landing-block-title>
                         </div>
@@ -26,57 +36,60 @@
             </div>
         </transition>
         <div class="landing-slider__thumbs">
-            <c-swiper :options="swiperOptionThumbs" ref="swiperThumbs">
+            <c-swiper ref="swiperThumbs"
+                      :options="swiperOptionThumbs">
                 <template v-for="slide in items">
                     <c-swiper-slide>
                         <c-img :src="slide.poster" />
                     </c-swiper-slide>
                 </template>
             </c-swiper>
-            <div class="swiper-button-next swiper-button-white" @click.native="slider.slidePrev()"></div>
-            <div class="swiper-button-prev swiper-button-white" @click.native="slider.slideNext()"></div>
+            <div class="swiper-button-next swiper-button-white"
+                 @click.native="slider.slidePrev()" />
+            <div class="swiper-button-prev swiper-button-white"
+                 @click.native="slider.slideNext()" />
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'landing-slider',
-        props: {
-            items: [Object, Array]
-        },
-        components:{
-            
-              'c-landing-block-title' : () => import('~/components/landing/block-title/simple').then(m => m.default || m),
-        },
-        data(){
-            return{
-                swiperOptionThumbs: {
-                    slidesPerView: 6,
-                    spaceBetween: 4,
-                    touchRatio: 0.2,
-                    centeredSlides: true,
-                    slideToClickedSlide: true,
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev'
-                    }
-                },
-                currentSlide: {},
-                autoplay: false,
-                controls: true,
-                preload: false
-            }
-        },
-        mounted() {
-            this.$nextTick(() => {
-                const swiperTop = this.$refs.swiperTop.swiper
-                const swiperThumbs = this.$refs.swiperThumbs.swiper
-                // swiperTop.controller.thumbs = swiperThumbs
-                swiperThumbs.controller.control = swiperTop
-            });
+export default {
+    name: 'LandingSlider',
+    components: {
+
+        'c-landing-block-title': () => import('~/components/landing/block-title/simple').then(m => m.default || m)
+    },
+    props: {
+        items: [Object, Array]
+    },
+    data() {
+        return {
+            swiperOptionThumbs: {
+                slidesPerView: 6,
+                spaceBetween: 4,
+                touchRatio: 0.2,
+                centeredSlides: true,
+                slideToClickedSlide: true,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev'
+                }
+            },
+            currentSlide: {},
+            autoplay: false,
+            controls: true,
+            preload: false
         }
+    },
+    mounted() {
+        this.$nextTick(() => {
+            const swiperTop = this.$refs.swiperTop.swiper
+            const swiperThumbs = this.$refs.swiperThumbs.swiper
+            // swiperTop.controller.thumbs = swiperThumbs
+            swiperThumbs.controller.control = swiperTop
+        })
     }
+}
 </script>
 
 <style lang="scss" scoped>

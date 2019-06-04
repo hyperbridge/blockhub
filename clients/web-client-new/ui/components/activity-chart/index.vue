@@ -1,21 +1,50 @@
 <template>
-    <div class="activity-chart" :class="[ 'size-' + size ]">
-        <c-heading-bar :name="title" :showArrows="false" :showBackground="false" v-if="size != 'xs'" />
-        <h4 class="activity-chart-title" v-if="size == 'xs'">{{ title }}</h4>
-        <div class="activity-chart__head" :class="[ 'size-' + size ]">
-            <div v-for="month in 12" :key="month">
+    <div class="activity-chart"
+         :class="[ 'size-' + size ]">
+        <c-heading-bar v-if="size != 'xs'"
+                       :name="title"
+                       :showArrows="false"
+                       :showBackground="false" />
+        <h4 v-if="size == 'xs'"
+            class="activity-chart-title">
+            {{ title }}
+        </h4>
+        <div class="activity-chart__head"
+             :class="[ 'size-' + size ]">
+            <div v-for="month in 12"
+                 :key="month">
                 <span v-if="size == 'xs'">{{ month }}</span>
                 <span v-else>{{ month | monthName | cutLength }}</span>
             </div>
         </div>
-        <div class="activity-chart__grid"  :class="[ 'size-' + size ]">
-            <div class="activity-chart__item" :class="[ 'size-' + size ]" v-for="(year, index) in years" :key="index">
-                <div class="year">{{ year.title }}</div>
+        <div class="activity-chart__grid"
+             :class="[ 'size-' + size ]">
+            <div v-for="(year, index) in years"
+                 :key="index"
+                 class="activity-chart__item"
+                 :class="[ 'size-' + size ]">
+                <div class="year">
+                    {{ year.title }}
+                </div>
                 <div class="year_row">
-                    <div class="year_month" v-for="(month, index) in year.months" :key="index">
+                    <div v-for="(month, index) in year.months"
+                         :key="index"
+                         class="year_month">
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" :style="{ width: + month.percent +'%'}" :aria-valuenow="month.percent" aria-valuemin="0" aria-valuemax="100" v-if="size == 'lg'"></div>
-                            <div class="progress-bar" role="progressbar" :style="[ month.percent >= 50 ? {'width' : '100%' } : {'width' : '0%'} ]" :aria-valuenow="month.percent" aria-valuemin="0" aria-valuemax="100" v-else></div>
+                            <div v-if="size == 'lg'"
+                                 class="progress-bar"
+                                 role="progressbar"
+                                 :style="{ width: + month.percent +'%'}"
+                                 :aria-valuenow="month.percent"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100" />
+                            <div v-else
+                                 class="progress-bar"
+                                 role="progressbar"
+                                 :style="[ month.percent >= 50 ? {'width' : '100%' } : {'width' : '0%'} ]"
+                                 :aria-valuenow="month.percent"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100" />
                         </div>
                         <div class="tooltips-info">
                             <strong>{{ month.month }} {{ year.title }}</strong>
@@ -29,45 +58,45 @@
 </template>
 
 <script>
-    export default {
-        name: 'activity-chart',
-        components: {
-            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m)
-        },
-        props: {
-            title: {
-                type: String
-            },
-            years: {
-                required: true
-            },
-            size: {
-                type: String,
-                default: 'lg'
+export default {
+    name: 'ActivityChart',
+    components: {
+        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m)
+    },
+    filters: {
+        monthName(number) {
+            switch (number) {
+            case 1: return 'January'
+            case 2: return 'February'
+            case 3: return 'March'
+            case 4: return 'April'
+            case 5: return 'May'
+            case 6: return 'June'
+            case 7: return 'July'
+            case 8: return 'August'
+            case 9: return 'September'
+            case 10: return 'October'
+            case 11: return 'November'
+            case 12: return 'December'
             }
         },
-        filters: {
-            monthName(number) {
-                switch(number) {
-                    case 1: return 'January';
-                    case 2: return 'February';
-                    case 3: return 'March';
-                    case 4: return 'April';
-                    case 5: return 'May';
-                    case 6: return 'June';
-                    case 7: return 'July';
-                    case 8: return 'August';
-                    case 9: return 'September';
-                    case 10: return 'October';
-                    case 11: return 'November';
-                    case 12: return 'December';
-                }
-            },
-            cutLength(value) {
-                return value.substring(0, 3);
-            }
+        cutLength(value) {
+            return value.substring(0, 3)
+        }
+    },
+    props: {
+        title: {
+            type: String
+        },
+        years: {
+            required: true
+        },
+        size: {
+            type: String,
+            default: 'lg'
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

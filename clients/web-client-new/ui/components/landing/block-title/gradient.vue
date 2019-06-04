@@ -1,58 +1,63 @@
 <template>
-    <div class="landing__block-title" :class="['text-' + align]">
-        <div style="padding: 0 10px" v-if="$slots.before">
+    <div class="landing__block-title"
+         :class="['text-' + align]">
+        <div v-if="$slots.before"
+             style="padding: 0 10px">
             <slot name="before" />
         </div>
-        <div class="landing__block-title-gradient" :class="[gradientDirection, 'size-' + size ]">
-            <component :is="tag" :style="{ 'color': color, 'font-size': fontSize + 'px', 'font-weight': fontWeight }">
+        <div class="landing__block-title-gradient"
+             :class="[gradientDirection, 'size-' + size ]">
+            <component :is="tag"
+                       :style="{ 'color': color, 'font-size': fontSize + 'px', 'font-weight': fontWeight }">
                 <slot />
             </component>
         </div>
-        <div style="padding: 0 10px" v-if="$slots.after">
+        <div v-if="$slots.after"
+             style="padding: 0 10px">
             <slot name="after" />
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'title-gradient',
-        props: {
-            tag:{
-                type: String,
-                default: 'h2'
-            },
-            size:{
-                type: String,
-                default: 'md'
-            },
-            fontSize: {
-                type: [Number, String],
-                default: 28
-            },
-            color:{
-                type: String,
-                default: "#fff"
-            },
-            align:{
-                type: String,
-                default: 'left'
-            },
-            fontWeight:{
-                type: String,
-                default: 'bold'
-            }
+export default {
+    name: 'TitleGradient',
+    props: {
+        tag: {
+            type: String,
+            default: 'h2'
         },
-        computed:{
-            gradientDirection(){
-                switch(this.align){
-                    case 'left': return 'left-align';
-                    case 'center': return 'center-align';
-                    case 'right': return 'right-align';
-                }
+        size: {
+            type: String,
+            default: 'md'
+        },
+        fontSize: {
+            type: [Number, String],
+            default: 28
+        },
+        color: {
+            type: String,
+            default: '#fff'
+        },
+        align: {
+            type: String,
+            default: 'left'
+        },
+        fontWeight: {
+            type: String,
+            default: 'bold'
+        }
+    },
+    computed: {
+        gradientDirection() {
+            switch (this.align) {
+            case 'left': return 'left-align'
+            case 'center': return 'center-align'
+            case 'right': return 'right-align'
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

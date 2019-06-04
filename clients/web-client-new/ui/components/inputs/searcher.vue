@@ -1,44 +1,44 @@
 <script>
-    export default {
-        name: 'input-searcher',
-        inheritAttrs: false,
-        props: ['value', 'bgColor', 'textColor'],
-        render(h) {
-            return h('div', {
-                staticClass: 'input-searcher'
-            }, [
-                h('input', {
-                    on: this.listeners,
-                    staticClass: 'c-input',
-                    attrs: this.$attrs,
-                    domProps: {
-                        value: this.value
-                    },
-                    style:{
-                        'background' : this.bgColor,
-                        'color' : this.textColor
-                    }
-                }),
-                h('c-icon', {
-                    staticClass: 'input-searcher__icon',
-                    on: { click: () => this.$emit('click') },
-                    props: {
-                        name: 'search'
-                    }
-                })
-            ])
-        },
-        computed: {
-            listeners() {
-                const listeners = {
-                    ...this.$listeners,
-                    input: e => this.$emit('input', e.target.value)
-                };
-                delete listeners.click;
-                return listeners;
+export default {
+    name: 'InputSearcher',
+    inheritAttrs: false,
+    props: ['value', 'bgColor', 'textColor'],
+    computed: {
+        listeners() {
+            const listeners = {
+                ...this.$listeners,
+                input: e => this.$emit('input', e.target.value)
             }
+            delete listeners.click
+            return listeners
         }
+    },
+    render(h) {
+        return h('div', {
+            staticClass: 'input-searcher'
+        }, [
+            h('input', {
+                on: this.listeners,
+                staticClass: 'c-input',
+                attrs: this.$attrs,
+                domProps: {
+                    value: this.value
+                },
+                style: {
+                    'background': this.bgColor,
+                    'color': this.textColor
+                }
+            }),
+            h('c-icon', {
+                staticClass: 'input-searcher__icon',
+                on: { click: () => this.$emit('click') },
+                props: {
+                    name: 'search'
+                }
+            })
+        ])
     }
+}
 </script>
 
 <style lang="scss" scoped>

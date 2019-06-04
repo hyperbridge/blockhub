@@ -1,37 +1,47 @@
 <template>
     <div class="global-search">
-        <c-input v-model="searchQuery" placeholder="Type to search" @input="startSearch" />
+        <c-input v-model="searchQuery"
+                 placeholder="Type to search"
+                 @input="startSearch" />
         <transition name="slide-in">
-            <div class="global-search__results-loader my-2" v-if="isLoading">
-                <c-loading-bar-circle size="sm" :showBg="false" />
+            <div v-if="isLoading"
+                 class="global-search__results-loader my-2">
+                <c-loading-bar-circle size="sm"
+                                      :showBg="false" />
             </div>
         </transition>
         <transition name="slide-in">
             <template v-if="searchQuery.length">
-                <div class="global-search__results" v-if="results.length">
-                    <div class="global-search__results-type" v-for="type in results" v-if="results.length">
+                <div v-if="results.length"
+                     class="global-search__results">
+                    <div v-for="type in results"
+                         v-if="results.length"
+                         class="global-search__results-type">
                         <div class="h5 font-weight-bold margin-left-5">
                             {{ type.name }}
                         </div>
                         <div class="global-search__result-list">
-                            <a :href="link.link" v-for="link in type.items">
-                                <img :src="link.image" v-if="link.image"/>
+                            <a v-for="link in type.items"
+                               :href="link.link">
+                                <img v-if="link.image"
+                                     :src="link.image">
                                 <span class="link-text">
-                            {{ link.name }}
-                            </span>
+                                    {{ link.name }}
+                                </span>
                                 <span class="enter-icon">
-                                ENTER
-                                <img src="../../static/img/icons/enter-arrow.png" />
-                            </span>
+                                    ENTER
+                                    <img src="../../static/img/icons/enter-arrow.png">
+                                </span>
                             </a>
                         </div>
                     </div>
                     <div class="keyboard-nav-info">
-                        <img src="../../static/img/icons/keyboard-arrows.png" />
+                        <img src="../../static/img/icons/keyboard-arrows.png">
                         Use arrows to select
                     </div>
                 </div>
-                <div class="h6 font-weight-bold text-white p-1 mt-3" v-else>
+                <div v-else
+                     class="h6 font-weight-bold text-white p-1 mt-3">
                     Nothing to show
                 </div>
             </template>
@@ -40,75 +50,75 @@
 </template>
 
 <script>
-    export default {
-        props:{},
-        components:{
-            'c-input': () => import('~/components/inputs').then(m => m.default || m),
-            'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m),
-        },
-        data(){
-            return{
-                searchQuery: '',
-                isLoading: false,
-                results: []
-            }
-        },
-        methods:{
-            startSearch(){
-                this.isLoading = true;
-                this.results = [
+export default {
+    components: {
+        'c-input': () => import('~/components/inputs').then(m => m.default || m),
+        'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m)
+    },
+    props: {},
+    data() {
+        return {
+            searchQuery: '',
+            isLoading: false,
+            results: []
+        }
+    },
+    methods: {
+        startSearch() {
+            this.isLoading = true
+            this.results = [
 
+                {
+                    name: 'Game',
+                    items: [
                         {
-                            name: 'Game',
-                            items: [
-                                {
-                                    name: 'Starcraft 2',
-                                    link: '#',
-                                    image: 'http://aux.iconspalace.com/uploads/1058884804728122131.png'
-                                },
-                                {
-                                    name: 'Starcraft 1',
-                                    link: '#',
-                                    image: 'https://pbs.twimg.com/profile_images/1075815486221299712/K8c4i-oC_400x400.jpg'
-                                }
-                            ]
+                            name: 'Starcraft 2',
+                            link: '#',
+                            image: 'http://aux.iconspalace.com/uploads/1058884804728122131.png'
                         },
                         {
-                            name: 'Curator',
-                            items: [
-                                {
-                                    name: 'StarOfGame',
-                                    link: '#'
-                                },
-                            ]
+                            name: 'Starcraft 1',
+                            link: '#',
+                            image: 'https://pbs.twimg.com/profile_images/1075815486221299712/K8c4i-oC_400x400.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: 'Curator',
+                    items: [
+                        {
+                            name: 'StarOfGame',
+                            link: '#'
+                        }
+                    ]
+                },
+                {
+                    name: 'News',
+                    items: [
+                        {
+                            name: 'Starcraft 2 was released',
+                            link: '#'
+                        }
+                    ]
+                },
+                {
+                    name: 'Help',
+                    items: [
+                        {
+                            name: 'Can I install Starcraft 2 on MAC?',
+                            link: '#'
                         },
                         {
-                            name: 'News',
-                            items: [
-                                {
-                                    name: 'Starcraft 2 was released',
-                                    link: '#'
-                                }
-                            ]
-                        },
-                        {
-                            name: 'Help',
-                            items: [
-                                {
-                                    name: 'Can I install Starcraft 2 on MAC?',
-                                    link: '#'
-                                },
-                                {
-                                    name: 'Starcraft 1 has freeze on Linux',
-                                    link: '#'
-                                },
-                            ]
-                        },
-                ];
-                this.isLoading = false;
-            }
+                            name: 'Starcraft 1 has freeze on Linux',
+                            link: '#'
+                        }
+                    ]
+                }
+            ]
+            this.isLoading = false
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

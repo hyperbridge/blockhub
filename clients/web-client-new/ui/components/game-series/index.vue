@@ -1,27 +1,28 @@
 <template>
     <div class="game-series">
         <c-heading-bar name="Featured Game Series" />
-        <div class="game-series__container" :class="{ 'bg-gradient' : bgGradient }">
+        <div class="game-series__container"
+             :class="{ 'bg-gradient' : bgGradient }">
             <slot />
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'game-stories',
-        props: {
-            bgGradient: {
-                type: Boolean,
-                default: false
-            }
-        },
-        components: {
-            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-            'c-game-includes-list': () => import('~/components/game-series/game-includes-item').then(m => m.default || m),
-            'c-game-description': () => import('~/components/game-series/game-description').then(m => m.default || m)
-        },
+export default {
+    name: 'GameStories',
+    components: {
+        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+        'c-game-includes-list': () => import('~/components/game-series/game-includes-item').then(m => m.default || m),
+        'c-game-description': () => import('~/components/game-series/game-description').then(m => m.default || m)
+    },
+    props: {
+        bgGradient: {
+            type: Boolean,
+            default: false
+        }
     }
+}
 </script>
 
 <style lang="scss" scoped>

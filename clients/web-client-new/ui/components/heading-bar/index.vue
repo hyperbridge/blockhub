@@ -1,9 +1,13 @@
 <template>
     <div class="heading-bar">
-        <h3 class="heading-bar__name margin-right-40" :class="{ 'heading-bar__name--with-bg': showBackground }" v-if="name" jest="name">
+        <h3 v-if="name"
+            class="heading-bar__name margin-right-40"
+            :class="{ 'heading-bar__name--with-bg': showBackground }"
+            jest="name">
             {{ name }}
         </h3>
-        <div class="heading-bar__tabs margin-right-40" v-else>
+        <div v-else
+             class="heading-bar__tabs margin-right-40">
             <slot name="heading-tabs">
                 <a
                     v-for="(tab, index) in headingTabs"
@@ -11,30 +15,33 @@
                     :class="{ 'active': index == activeTab }"
                     href="#"
                     :style="{'z-index': 20 - index}"
-                    @click.prevent="changeTab(index, tab.category)"
                     jest="tab-item"
-                >{{ tab instanceof Object ? tab.title : tab }}</a>
+                    @click.prevent="changeTab(index, tab.category)">{{ tab instanceof Object ? tab.title : tab }}</a>
             </slot>
         </div>
-        <div class="heading-bar__additional-action" v-if="showActions">
-            <slot name="additional-action"></slot>
-            <c-button status="plain" :href="more" v-if="more" icon="angle-right" :swapOrder="true">
+        <div v-if="showActions"
+             class="heading-bar__additional-action">
+            <slot name="additional-action" />
+            <c-button v-if="more"
+                      status="plain"
+                      :href="more"
+                      icon="angle-right"
+                      :swapOrder="true">
                 MORE
             </c-button>
-            <div class="heading-bar__nav" v-if="showArrows">
+            <div v-if="showArrows"
+                 class="heading-bar__nav">
                 <a
                     href="#"
                     class="nav-prev"
-                    @click.prevent="$emit('prevClick')"
-                >
-                   <c-icon name="arrow-left"/>
+                    @click.prevent="$emit('prevClick')">
+                    <c-icon name="arrow-left" />
                 </a>
                 <a
                     href="#"
                     class="nav-next"
-                    @click.prevent="$emit('nextClick')"
-                >
-                   <c-icon name="arrow-right"/>
+                    @click.prevent="$emit('nextClick')">
+                    <c-icon name="arrow-right" />
                 </a>
             </div>
         </div>
@@ -43,7 +50,7 @@
 
 <script>
 export default {
-    name: 'heading-bar',
+    name: 'HeadingBar',
     props: {
         name: String,
         showBackground: Boolean,
@@ -59,17 +66,17 @@ export default {
             activeTab: 0
         }
     },
-    methods: {
-        changeTab(i, category) {
-            this.activeTab = i;
-            this.$emit('changeTab', category);
-        }
-    },
     computed: {
         dynamicIndex() {
-            let { activeIndex: i, itemsLength } = this;
-            i %= itemsLength;
-            return i < 0 ? i * -1 : i;
+            let { activeIndex: i, itemsLength } = this
+            i %= itemsLength
+            return i < 0 ? i * -1 : i
+        }
+    },
+    methods: {
+        changeTab(i, category) {
+            this.activeTab = i
+            this.$emit('changeTab', category)
         }
     }
 }

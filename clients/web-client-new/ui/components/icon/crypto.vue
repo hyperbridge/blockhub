@@ -1,34 +1,34 @@
 <script>
-    export default {
-        name: 'crypto-icon',
-        props: {
-            name: {
-                type: String,
-                required: true
-            },
-            cat: {
-                type: String,
-                default: 'colored'
-            },
-            size: {
-                type: String,
-                default: 'sm'
-            }
+export default {
+    name: 'CryptoIcon',
+    props: {
+        name: {
+            type: String,
+            required: true
         },
-        computed:{
-            background(){
-                let coin = this.name.toLowerCase();
-                return 'background-image: url("/crypto_svg/' + coin + '.svg");'
-            }
+        cat: {
+            type: String,
+            default: 'colored'
         },
-        render(h) {
-            return h('i', {
-                class: `crypto-icon ${this.cat} ci-${this.name} icon-${this.size}`,
-                style: `${this.background}`,
-                on: { click: () => this.$emit('click') }
-            });
+        size: {
+            type: String,
+            default: 'sm'
         }
+    },
+    computed: {
+        background() {
+            const coin = this.name.toLowerCase()
+            return `background-image: url("/crypto_svg/${coin}.svg");`
+        }
+    },
+    render(h) {
+        return h('i', {
+            class: `crypto-icon ${this.cat} ci-${this.name} icon-${this.size}`,
+            style: `${this.background}`,
+            on: { click: () => this.$emit('click') }
+        })
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,7 +1,9 @@
 <template>
     <transition name="slide-in-top">
-        <div class="messages-bar__wrapper" v-if="messages.length">
-            <h4 v-if="status === 'error'" class="messages-bar__title">
+        <div v-if="messages.length"
+             class="messages-bar__wrapper">
+            <h4 v-if="status === 'error'"
+                class="messages-bar__title">
                 Please correct following
                 {{ title }}<span v-show="messages.length > 1">s</span>:
                 <span class="messages-bar__count">({{ messages.length }})</span>
@@ -10,30 +12,29 @@
                 v-for="(message, index) in messages"
                 :key="index"
                 :text="message.text || message"
-                :status="message.status || status"
-            />
+                :status="message.status || status" />
         </div>
     </transition>
 </template>
 
 <script>
-    export default {
-        name: 'messages-bar',
-        props: {
-            messages: Array,
-            status: {
-                type: String,
-                default: 'error'
-            },
-            title: {
-                type: String,
-                default: 'error'
-            }
+export default {
+    name: 'MessagesBar',
+    components: {
+        'c-message-bar': () => import('~/components/message-bar').then(m => m.default || m)
+    },
+    props: {
+        messages: Array,
+        status: {
+            type: String,
+            default: 'error'
         },
-        components: {
-            'c-message-bar': () => import('~/components/message-bar').then(m => m.default || m)
+        title: {
+            type: String,
+            default: 'error'
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

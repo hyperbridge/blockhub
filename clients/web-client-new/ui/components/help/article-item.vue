@@ -1,16 +1,18 @@
 <template>
     <div class="article-list-item">
-        <c-button status="none" :to="to" :href="link">
+        <c-button status="none"
+                  :to="to"
+                  :href="link">
             <slot />
         </c-button>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'article-list-item',
-        props: ['to', 'link']
-    }
+export default {
+    name: 'ArticleListItem',
+    props: ['to', 'link']
+}
 </script>
 
 <style lang="scss" scoped>

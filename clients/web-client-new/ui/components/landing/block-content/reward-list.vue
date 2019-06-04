@@ -3,11 +3,14 @@
         <div class="landing-reward-list__content">
             <slot />
         </div>
-        <div class="landing-reward-list__list-wrapper" v-if="$slots.list">
-            <div class="list-toggle-btn" @click="toggleList">
+        <div v-if="$slots.list"
+             class="landing-reward-list__list-wrapper">
+            <div class="list-toggle-btn"
+                 @click="toggleList">
                 {{ bntText }} Reward list
             </div>
-            <div class="landing-reward-list__list" v-if="showList">
+            <div v-if="showList"
+                 class="landing-reward-list__list">
                 <slot name="list" />
             </div>
         </div>
@@ -15,27 +18,25 @@
 </template>
 
 <script>
-    export default {
-        name: 'reward-list',
-        data(){
-            return{
-                showList: false
-            }
-        },
-        methods:{
-            toggleList(){
-                this.showList = !this.showList
-            }
-        },
-        computed:{
-            bntText(){
-                if (this.showList)
-                    return 'Hide'
-                else
-                    return 'Show'
-            }
+export default {
+    name: 'RewardList',
+    data() {
+        return {
+            showList: false
+        }
+    },
+    computed: {
+        bntText() {
+            if (this.showList) { return 'Hide' }
+            return 'Show'
+        }
+    },
+    methods: {
+        toggleList() {
+            this.showList = !this.showList
         }
     }
+}
 </script>
 
 <style lang="scss">

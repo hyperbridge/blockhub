@@ -1,113 +1,118 @@
 <template>
-    <div class="game-library__item loading--w-spinner" :class="{'is-active': active}">
+    <div class="game-library__item loading--w-spinner"
+         :class="{'is-active': active}">
         <div class="item-img">
-            <c-img :src="game.images.mediumTile"/>
+            <c-img :src="game.images.mediumTile" />
         </div>
         <div class="item-info">
             <div>
                 {{ game.name }}
             </div>
             <div>
-                <i class="fas fa-clock mr-2"></i>
+                <i class="fas fa-clock mr-2" />
                 345 Hours Played
             </div>
             <div>
-                <i class="fas fa-trophy mr-2"></i>
+                <i class="fas fa-trophy mr-2" />
                 15 Achievements
             </div>
         </div>
         <div class="item-action">
             <span class="has-new">
-                <i class="fas fa-cog"></i>
+                <i class="fas fa-cog" />
             </span>
             <span>
-                <i class="fas fa-camera"></i>
+                <i class="fas fa-camera" />
             </span>
             <span>
-                <i class="fas fa-star"></i>
+                <i class="fas fa-star" />
             </span>
             <span>
-                <i class="fas fa-play"></i>
+                <i class="fas fa-play" />
             </span>
         </div>
         <div class="dropdown-container">
-            <c-dropdown :class="{'no-right-border' : shareList}" @click="activeMenu">
+            <c-dropdown :class="{'no-right-border' : shareList}"
+                        @click="activeMenu">
                 <ul class="item-dropdown">
                     <li>
                         <a href="#">
-                            <i class="fas fa-list-alt"></i>
+                            <i class="fas fa-list-alt" />
                             Add to Collection
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fas fa-shopping-basket"></i>
+                            <i class="fas fa-shopping-basket" />
                             Market page
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fas fa-th"></i>
+                            <i class="fas fa-th" />
                             Inventory
                         </a>
                     </li>
                     <hr>
                     <li @click="toggleList">
-                        <i class="fas fa-share"></i>
+                        <i class="fas fa-share" />
                         Share
-                        <c-share-list class="in-dropdown" :onlineList="online" :favoritesList="favorites" :show="shareList" />
+                        <c-share-list class="in-dropdown"
+                                      :onlineList="online"
+                                      :favoritesList="favorites"
+                                      :show="shareList" />
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fas fa-link"></i>
+                            <i class="fas fa-link" />
                             Copy Link
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fab fa-facebook"></i>
+                            <i class="fab fa-facebook" />
                             Share on Facebook
                         </a>
                     </li>
                 </ul>
             </c-dropdown>
         </div>
-        <div class="loader-block" v-if="isLoading">
-            <div class="loading-spinner"></div>
+        <div v-if="isLoading"
+             class="loader-block">
+            <div class="loading-spinner" />
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'game-library-item',
-        props: ['game', 'isLoading', 'online','favorites'],
-        data(){
-            return{
-                shareList: false,
-                active: false
-            }
+export default {
+    name: 'GameLibraryItem',
+    components: {
+        'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m),
+        'c-share-list': () => import('~/components/share/type-1').then(m => m.default || m)
+    },
+    props: ['game', 'isLoading', 'online', 'favorites'],
+    data() {
+        return {
+            shareList: false,
+            active: false
+        }
+    },
+    watch: {
+        active() {
+            if (!this.active) { this.shareList = false }
+        }
+    },
+    methods: {
+        toggleList() {
+            this.shareList = !this.shareList
         },
-        components: {
-            'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m),
-            'c-share-list': () => import('~/components/share/type-1').then(m => m.default || m)
-        },
-        methods:{
-            toggleList(){
-                this.shareList = !this.shareList
-            },
-            activeMenu(){
-                console.log(this.active)
-                this.active = !this.active
-            }
-        },
-        watch:{
-            active(){
-                if (!this.active)
-                    this.shareList = false
-            }
+        activeMenu() {
+            console.log(this.active)
+            this.active = !this.active
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

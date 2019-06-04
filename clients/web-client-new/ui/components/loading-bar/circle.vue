@@ -1,23 +1,24 @@
 <template>
-    <div class="loader-block" :class="{'loader-block--bg' : showBg }">
-        <div class="loading-spinner" :class="['loading-spinner-size--' + size ]">
-        </div>
+    <div class="loader-block"
+         :class="{'loader-block--bg' : showBg }">
+        <div class="loading-spinner"
+             :class="['loading-spinner-size--' + size ]" />
     </div>
 </template>
 
 <script>
-    export default {
-        props:{
-            size: {
-                type: String,
-                default: 'md'
-            },
-            showBg:{
-                type: Boolean,
-                default: true
-            }
+export default {
+    props: {
+        size: {
+            type: String,
+            default: 'md'
+        },
+        showBg: {
+            type: Boolean,
+            default: true
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

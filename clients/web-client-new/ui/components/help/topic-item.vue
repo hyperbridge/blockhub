@@ -1,17 +1,20 @@
 <template>
-    <div class="topic-list-item" :class="['block-size-' + size]">
-        <c-button status="none" :href="link" :to="to">
-            <i :class="['fas fa-' + icon ]"></i>
+    <div class="topic-list-item"
+         :class="['block-size-' + size]">
+        <c-button status="none"
+                  :href="link"
+                  :to="to">
+            <i :class="['fas fa-' + icon ]" />
             <slot />
         </c-button>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'topic-list-item',
-        props: ['link', 'to', 'icon', 'size']
-    }
+export default {
+    name: 'TopicListItem',
+    props: ['link', 'to', 'icon', 'size']
+}
 </script>
 
 <style lang="scss" scoped>

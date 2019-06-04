@@ -1,14 +1,21 @@
 <template>
     <div class="c-giphy">
         <div class="c-giphy__input-container">
-            <c-input v-model="query" @input="getGifs()" placeholder="Type to search" />
+            <c-input v-model="query"
+                     placeholder="Type to search"
+                     @input="getGifs()" />
         </div>
-        <div class="c-giphy__is-loading" v-if="isLoading">
+        <div v-if="isLoading"
+             class="c-giphy__is-loading">
             <c-loading-bar-circle />
         </div>
-        <div class="c-giphy__list" v-if="gifs.length">
+        <div v-if="gifs.length"
+             class="c-giphy__list">
             <div class="c-giphy__list-scroll">
-                <img v-for="gif in gifs" :src="gif" :key="gif.id" @click="choseGif(gif)">
+                <img v-for="gif in gifs"
+                     :key="gif.id"
+                     :src="gif"
+                     @click="choseGif(gif)">
             </div>
         </div>
     </div>
@@ -16,47 +23,43 @@
 
 <script>
 
-    export default {
-        props: {},
-        components:{
-            'c-input': () => import('~/components/inputs/').then(m => m.default || m),
-            'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m),
-        },
-        data() {
-            return {
-                query: '',
-                gifs: [],
-                isLoading: false
-            }
-        },
-        methods: {
-            getGifs() {
-                this.isLoading = true
-                let apiKey = "lNEkB2sK699JdsX5IzoC2YupclkkGpsL"
-                let searchEndPoint = "http://api.giphy.com/v1/gifs/search?"
-                let limit = 15
-                let url = `${searchEndPoint}q=${this.query}&api_key=${apiKey}&limit=${limit}`
-                fetch(url)
-                    .then(response => {
-                        return response.json()
-                    })
-                    .then(json => {
-                        console.log(json)
-                        this.buildGifs(json)
-                    })
-                    .catch(err => console.log(err))
-                this.isLoading = false
-            },
-            buildGifs(json) {
-                this.gifs = json.data.map(gif => gif.id).map(gifId => {
-                    return `https://media.giphy.com/media/${gifId}/giphy.gif`
+export default {
+    components: {
+        'c-input': () => import('~/components/inputs/').then(m => m.default || m),
+        'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m)
+    },
+    props: {},
+    data() {
+        return {
+            query: '',
+            gifs: [],
+            isLoading: false
+        }
+    },
+    methods: {
+        getGifs() {
+            this.isLoading = true
+            const apiKey = 'lNEkB2sK699JdsX5IzoC2YupclkkGpsL'
+            const searchEndPoint = 'http://api.giphy.com/v1/gifs/search?'
+            const limit = 15
+            const url = `${searchEndPoint}q=${this.query}&api_key=${apiKey}&limit=${limit}`
+            fetch(url)
+                .then(response => response.json())
+                .then(json => {
+                    console.log(json)
+                    this.buildGifs(json)
                 })
-            },
-            choseGif(gif){
-                this.$emit('choose', gif)
-            }
+                .catch(err => console.log(err))
+            this.isLoading = false
+        },
+        buildGifs(json) {
+            this.gifs = json.data.map(gif => gif.id).map(gifId => `https://media.giphy.com/media/${gifId}/giphy.gif`)
+        },
+        choseGif(gif) {
+            this.$emit('choose', gif)
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

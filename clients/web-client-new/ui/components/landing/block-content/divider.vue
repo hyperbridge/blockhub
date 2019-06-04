@@ -1,5 +1,5 @@
 <template>
-    <div class="landing-divider"></div>
+    <div class="landing-divider" />
 </template>
 
 <style lang="scss" scoped>

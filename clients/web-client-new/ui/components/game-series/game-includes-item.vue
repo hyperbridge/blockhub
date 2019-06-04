@@ -14,19 +14,19 @@
 </template>
 
 <script>
-    export default {
-        name: 'game-includes-item',
-        props: {
-            id: Number,
-            name: String,
-            developer: String,
-            rating: Number,
-            image: String
-        },
-        components: {
-            'c-rating': () => import('~/components/rating-stars').then(m => m.default || m),
-        },
+export default {
+    name: 'GameIncludesItem',
+    components: {
+        'c-rating': () => import('~/components/rating-stars').then(m => m.default || m)
+    },
+    props: {
+        id: Number,
+        name: String,
+        developer: String,
+        rating: Number,
+        image: String
     }
+}
 </script>
 
 <style lang="scss" scoped>

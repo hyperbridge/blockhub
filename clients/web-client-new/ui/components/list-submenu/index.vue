@@ -1,14 +1,15 @@
 <template>
-    <ul class="list-container" :class="{ 'list-container--parent': isParent }">
-        <li v-for="(list, title, index) in items" :key="index">
+    <ul class="list-container"
+        :class="{ 'list-container--parent': isParent }">
+        <li v-for="(list, title, index) in items"
+            :key="index">
             <slot name="item">
                 <a
-                    @click="itemClick(title, list[0])"
                     class="item__link"
                     :class="{
                         'item_link--active': title > 100
                     }"
-                >
+                    @click="itemClick(title, list[0])">
                     <slot :list="list">
                         <div class="item__container">
                             <span>
@@ -16,17 +17,15 @@
                                     <c-icon
                                         name="arrow-right"
                                         class="arrow"
-                                        :class="{ 'arrow--opened': title === subItem }"
-                                    />
+                                        :class="{ 'arrow--opened': title === subItem }" />
                                     <span
                                         class="title"
-                                        :class="{ 'title--opened': title === subItem }"
-                                    >
+                                        :class="{ 'title--opened': title === subItem }">
                                         {{ title }}
                                     </span>
                                 </slot>
                             </span>
-                            <c-tag-count :number="listLength(list)"/>
+                            <c-tag-count :number="listLength(list)" />
                         </div>
                     </slot>
                 </a>
@@ -35,41 +34,40 @@
                 <slot
                     v-if="subItem === title"
                     name="sublist"
-                    :sublist="list"
-                />
+                    :sublist="list" />
             </transition>
         </li>
     </ul>
 </template>
 
 <script>
-    export default {
-        name: 'list-submenu',
-        components: {
-            'c-tag-count': () => import('~/components/tags/count').then(m => m.default || m)
+export default {
+    name: 'ListSubmenu',
+    components: {
+        'c-tag-count': () => import('~/components/tags/count').then(m => m.default || m)
+    },
+    props: {
+        items: [Object, Array],
+        isParent: Boolean
+    },
+    data() {
+        return {
+            subItem: null
+        }
+    },
+    methods: {
+        itemClick(title, item) {
+            this.$emit('click', item)
+            if (this.subItem && this.subItem === title) this.subItem = null
+            else this.subItem = title
         },
-        props: {
-            items: [Object, Array],
-            isParent: Boolean
-        },
-        data() {
-            return {
-                subItem: null
-            }
-        },
-        methods: {
-            itemClick(title, item) {
-                this.$emit('click', item);
-                if (this.subItem && this.subItem === title) this.subItem = null;
-                else this.subItem = title;
-            },
-            listLength(list) {
-                return Object.keys(list).length;
-                const length = Object.keys(list).length;
-                return length > 0 ? length : 0;
-            }
+        listLength(list) {
+            return Object.keys(list).length
+            const { length } = Object.keys(list)
+            return length > 0 ? length : 0
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,31 +1,33 @@
 <template>
     <div class="images-explorer">
-        <button @click="change_image(-1)" class="images-explorer__btn">
-            <i class="fas fa-angle-left"></i>
+        <button class="images-explorer__btn"
+                @click="change_image(-1)">
+            <i class="fas fa-angle-left" />
         </button>
-        <transition-group tag="div" name="fade-transform">
+        <transition-group tag="div"
+                          name="fade-transform">
             <c-img
                 v-for="(image, index) in images"
                 v-if="index === active_item"
                 :key="image"
                 class="images-explorer__img"
-                :src="images[active_item]"
-            />
+                :src="images[active_item]" />
         </transition-group>
-        <button @click="change_image(1)" class="images-explorer__btn">
-            <i class="fas fa-angle-right"></i>
+        <button class="images-explorer__btn"
+                @click="change_image(1)">
+            <i class="fas fa-angle-right" />
         </button>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'images-explorer',
+    name: 'ImagesExplorer',
     props: {
         images: {
             type: Array
         },
-        start_from: {
+        startFrom: {
             type: Number,
             default: 0
         }
@@ -35,20 +37,20 @@ export default {
             active_item: -1
         }
     },
+    mounted() {
+        this.active_item = this.start_from
+    },
     methods: {
         change_image(direction) {
-            const { active_item, images } = this;
+            const { active_item, images } = this
             if (active_item === 0 && direction === -1) {
-                this.active_item = images.length - 1;
+                this.active_item = images.length - 1
             } else if (active_item === images.length - 1 && direction === 1) {
-                this.active_item = 0;
+                this.active_item = 0
             } else {
-                this.active_item += direction;
+                this.active_item += direction
             }
         }
-    },
-    mounted() {
-        this.active_item = this.start_from;
     }
 }
 </script>

@@ -1,11 +1,16 @@
 <template>
     <div class="landing-feature-item">
-        <a :href="link" v-if="link">
-            <c-img :src="img" :alt="title"/>
+        <a v-if="link"
+           :href="link">
+            <c-img :src="img"
+                   :alt="title" />
         </a>
-        <c-img :src="img" :alt="title" v-else/>
+        <c-img v-else
+               :src="img"
+               :alt="title" />
         <c-landing-block-title fontSize="18">
-            <a :href="link" v-if="link">
+            <a v-if="link"
+               :href="link">
                 {{ title }}
             </a>
             <template v-else>
@@ -17,18 +22,18 @@
 </template>
 
 <script>
-    export default {
-        name: 'landing-feature-item',
-        props:{
-            img: String,
-            title: String,
-            link: String
-        },
-        components:{
-            'c-landing-block-title' : () => import('~/components/landing/block-title/simple').then(m => m.default || m)
-        }
-
+export default {
+    name: 'LandingFeatureItem',
+    components: {
+        'c-landing-block-title': () => import('~/components/landing/block-title/simple').then(m => m.default || m)
+    },
+    props: {
+        img: String,
+        title: String,
+        link: String
     }
+
+}
 </script>
 
 <style lang="scss" scoped>

@@ -3,73 +3,81 @@
         <div class="game-includes__title">
             <h3>What's included</h3>
         </div>
-        <transition-group name="list" tag="div" class="game-includes__list">
-            <div class="game-includes__item-container"
-                 v-for="(item) of limitedList(limit)"
-                 :style="{ width: 'calc(100% / ' + showNumber + ')'}"
-                 :key="item.id" >
-                <c-includes-item :id="item.id" :name="item.name" :developer="item.developer" :rating="item.rating ? item.rating.overall : 0" :image="item.meta ? item.meta.images.mediumTile : null" />
+        <transition-group name="list"
+                          tag="div"
+                          class="game-includes__list">
+            <div v-for="(item) of limitedList(limit)"
+                 :key="item.id"
+                 class="game-includes__item-container"
+                 :style="{ width: 'calc(100% / ' + showNumber + ')'}">
+                <c-includes-item :id="item.id"
+                                 :name="item.name"
+                                 :developer="item.developer"
+                                 :rating="item.rating ? item.rating.overall : 0"
+                                 :image="item.meta ? item.meta.images.mediumTile : null" />
             </div>
         </transition-group>
         <!--Show buttons-->
-        <c-load-more @click="showAll" v-if="showMore && list.length > showNumber - 1">
+        <c-load-more v-if="showMore && list.length > showNumber - 1"
+                     @click="showAll">
             Load More <span class="ml-3">+{{ hiddenCount() }}</span>
         </c-load-more>
 
         <!--Hide buttons-->
-        <c-load-more v-if="!showMore" @click="hideAll">
+        <c-load-more v-if="!showMore"
+                     @click="hideAll">
             Hide
         </c-load-more>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'game-includes-list',
-        props: ['list', 'showNumber'],
-        data() {
-            return {
-                hiddenItems: '',
-                limit: this.showNumber,
-                showMore: true
-            }
+export default {
+    name: 'GameIncludesList',
+    components: {
+        'c-includes-item': () => import('~/components/game-series/game-includes-item').then(m => m.default || m),
+        'c-load-more': () => import('~/components/buttons/load-more').then(m => m.default || m)
+    },
+    props: ['list', 'showNumber'],
+    data() {
+        return {
+            hiddenItems: '',
+            limit: this.showNumber,
+            showMore: true
+        }
+    },
+    computed: {
+        products() {
+            return this.list.map(item => this.$store.state.marketplace.products[item])
+        }
+    },
+    methods: {
+        hiddenCount() {
+            return this.list.length - this.showNumber
         },
-        components: {
-            'c-includes-item': () => import('~/components/game-series/game-includes-item').then(m => m.default || m),
-            'c-load-more': () => import('~/components/buttons/load-more').then(m => m.default || m),
+        showAll() {
+            this.limit = this.list.length
+            this.limitedList(this.limit)
+            this.showMore = false
         },
-        methods:{
-            hiddenCount() {
-                return this.list.length - this.showNumber
-            },
-            showAll() {
-                this.limit = this.list.length
-                this.limitedList(this.limit)
-                this.showMore = false
-            },
-            hideAll() {
-                this.limit = this.showNumber
-                this.limitedList(this.limit)
-                this.showMore = true
-            },
-            limitedList(limit) {
-                let list = this.products,
-                    newList = []
-                    list.forEach(function (item, i){
-                        if (i <= limit-1) {
-                            newList.push(item)
-                        }
-                    })
+        hideAll() {
+            this.limit = this.showNumber
+            this.limitedList(this.limit)
+            this.showMore = true
+        },
+        limitedList(limit) {
+            const list = this.products
+            const newList = []
+            list.forEach((item, i) => {
+                if (i <= limit - 1) {
+                    newList.push(item)
+                }
+            })
 
-                return newList
-            }
-        },
-        computed: {
-            products() {
-                return this.list.map(item => this.$store.state.marketplace.products[item])
-            }
+            return newList
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

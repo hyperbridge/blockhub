@@ -6,12 +6,13 @@
             :icon="plan.price ? 'shopping-bag': '' "
             :href="plan.link"
             data-toggle="modal"
-            data-target="#purchase-modal"
-        >
-            <span class="margin-left-5" v-if="plan.price">
+            data-target="#purchase-modal">
+            <span v-if="plan.price"
+                  class="margin-left-5">
                 {{ plan.price | convertCurrency }}
             </span>
-            <span class="margin-left-5" v-else>
+            <span v-else
+                  class="margin-left-5">
                 <template v-if="plan.link_text">
                     {{ plan.link_text }}
                 </template>
@@ -25,15 +26,15 @@
 
 
 <script>
-    export default {
-        name: 'game-plan',
-        props: {
-            plan: {
-                type: Object,
-                required: true
-            }
+export default {
+    name: 'GamePlan',
+    props: {
+        plan: {
+            type: Object,
+            required: true
         }
     }
+}
 </script>
 
 

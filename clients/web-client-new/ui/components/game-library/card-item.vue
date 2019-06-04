@@ -14,59 +14,66 @@
                  :class="{'active' : hovered }">
                 <div class="item-action__icons px-2">
                     <c-button status="plain">
-                        <i class="fas fa-cog"></i>
+                        <i class="fas fa-cog" />
                     </c-button>
                     <c-button status="plain">
-                        <i class="fas fa-camera"></i>
+                        <i class="fas fa-camera" />
                     </c-button>
                     <c-button status="plain">
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star" />
                     </c-button>
                     <c-button status="plain">
-                        <i class="fas fa-play"></i>
+                        <i class="fas fa-play" />
                     </c-button>
                 </div>
 
                 <c-button status="plain">
-                    <i class="fas" :class="showButtons ? 'fa-chevron-up' : 'fa-chevron-down' " @click=" showButtons = !showButtons " ></i>
+                    <i class="fas"
+                       :class="showButtons ? 'fa-chevron-up' : 'fa-chevron-down' "
+                       @click=" showButtons = !showButtons " />
                 </c-button>
                 <!--Dropdown menu-->
-                <div hidden style="height: 20px; width: 20px;margin-right: -5px">
-                    <c-dropdown :class="{'no-right-border' : shareList}" @click="activeMenu">
+                <div hidden
+                     style="height: 20px; width: 20px;margin-right: -5px">
+                    <c-dropdown :class="{'no-right-border' : shareList}"
+                                @click="activeMenu">
                         <ul class="item-dropdown">
                             <li>
                                 <a href="#">
-                                    <i class="fas fa-list-alt"></i>
+                                    <i class="fas fa-list-alt" />
                                     Add to Collection
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <i class="fas fa-shopping-basket"></i>
+                                    <i class="fas fa-shopping-basket" />
                                     Market page
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <i class="fas fa-th"></i>
+                                    <i class="fas fa-th" />
                                     Inventory
                                 </a>
                             </li>
                             <hr>
                             <li @click="toggleList">
-                                <i class="fas fa-share"></i>
+                                <i class="fas fa-share" />
                                 Share
-                                <c-share-list class="in-dropdown" :onlineList="online" :favoritesList="favorites" :show="shareList" />
+                                <c-share-list class="in-dropdown"
+                                              :onlineList="online"
+                                              :favoritesList="favorites"
+                                              :show="shareList" />
                             </li>
                             <li>
                                 <a href="#">
-                                    <i class="fas fa-link"></i>
+                                    <i class="fas fa-link" />
                                     Copy Link
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <i class="fab fa-facebook"></i>
+                                    <i class="fab fa-facebook" />
                                     Share on Facebook
                                 </a>
                             </li>
@@ -75,54 +82,53 @@
                 </div>
             </div>
 
-            <div class="item-action__buttons w-100" :class="{'active' : showButtons }">
+            <div class="item-action__buttons w-100"
+                 :class="{'active' : showButtons }">
                 <div @click="$emit('continue')">
                     Continue
-                    <i class="fas fa-chevron-right"></i>
+                    <i class="fas fa-chevron-right" />
                 </div>
                 <div @click="$emit('load')">
                     Load
-                    <i class="fas fa-reply"></i>
+                    <i class="fas fa-reply" />
                 </div>
                 <div @click="$emit('options')">
                     Options
-                    <i class="fas fa-cog"></i>
+                    <i class="fas fa-cog" />
                 </div>
             </div>
-
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'game-library-item',
-        props: ['name', 'image', 'isLoading', 'online', 'favorites' ],
-        data(){
-            return{
-                shareList: false,
-                active: false,
-                hovered: false,
-                showButtons: false
-            }
-        },
-        components: {
-            'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m),
-            'c-share-list': () => import('~/components/share/type-1').then(m => m.default || m),
-            'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m)
-        },
-        methods:{
-            toggleList(){
-                this.shareList = !this.shareList;
-            },
-        },
-        watch:{
-            active(){
-                if (!this.active)
-                    this.shareList = false
-            }
+export default {
+    name: 'GameLibraryItem',
+    components: {
+        'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m),
+        'c-share-list': () => import('~/components/share/type-1').then(m => m.default || m),
+        'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m)
+    },
+    props: ['name', 'image', 'isLoading', 'online', 'favorites'],
+    data() {
+        return {
+            shareList: false,
+            active: false,
+            hovered: false,
+            showButtons: false
+        }
+    },
+    watch: {
+        active() {
+            if (!this.active) { this.shareList = false }
+        }
+    },
+    methods: {
+        toggleList() {
+            this.shareList = !this.shareList
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,36 +1,35 @@
 <template>
-    <div class="additional-action" :class="customClass">
+    <div class="additional-action"
+         :class="customClass">
         {{ name }}
         <c-icon
             v-if="icon"
             :name="icon"
-            class="additional-action__icon"
-        />
+            class="additional-action__icon" />
         <c-button-arrows
-            @clickUp="$emit('clickUp')"
-            @clickDown="$emit('clickDown')"
             class="additional-action__button"
             :activeUp="activeUp"
-        />
+            @clickUp="$emit('clickUp')"
+            @clickDown="$emit('clickDown')" />
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'additional-action',
-        props: {
-            name: String,
-            icon: String,
-            customClass: String,
-            activeUp: {
-                type: Boolean,
-                default: undefined
-            }
-        },
-        components: {
-            'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m)
+export default {
+    name: 'AdditionalAction',
+    components: {
+        'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m)
+    },
+    props: {
+        name: String,
+        icon: String,
+        customClass: String,
+        activeUp: {
+            type: Boolean,
+            default: undefined
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,34 +1,36 @@
 <template>
     <div class="app-header slim-header">
-        <div class="app-header__top-bar draggable"></div>
+        <div class="app-header__top-bar draggable" />
         <div class="app-header__bar-left draggable">
             {{ title }}
         </div>
         <div class="app-header__bar-right">
-            <button type="button" @click.prevent="closeWindow" aria-label="Close">
-                <i class="fas fa-times"></i>
+            <button type="button"
+                    aria-label="Close"
+                    @click.prevent="closeWindow">
+                <i class="fas fa-times" />
             </button>
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'slim-header',
-        props: {
-            title: {
-                type: String,
-                default: 'BlockHub'
-            }
-        },
-        methods: {
-            closeWindow() {
-                const { BrowserWindow } = window.require('electron').remote
-                let browserWindow = BrowserWindow.getFocusedWindow()
-                browserWindow.close()
-            },
+export default {
+    name: 'SlimHeader',
+    props: {
+        title: {
+            type: String,
+            default: 'BlockHub'
+        }
+    },
+    methods: {
+        closeWindow() {
+            const { BrowserWindow } = window.require('electron').remote
+            const browserWindow = BrowserWindow.getFocusedWindow()
+            browserWindow.close()
         }
     }
+}
 </script>
 
 <style>

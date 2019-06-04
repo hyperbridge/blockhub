@@ -1,27 +1,33 @@
 <template>
-    <div class="heading-bar-colored" :class="['text-position-' + textAlign]">
-        <span class="heading-bar-colored__left-line" :style="{'background-color': colorCode}" v-if="textAlign != 'left'"></span>
-        <div class="h3 heading-bar-colored__title" :style="{color: colorCode}">
+    <div class="heading-bar-colored"
+         :class="['text-position-' + textAlign]">
+        <span v-if="textAlign != 'left'"
+              class="heading-bar-colored__left-line"
+              :style="{'background-color': colorCode}" />
+        <div class="h3 heading-bar-colored__title"
+             :style="{color: colorCode}">
             <slot />
         </div>
-        <span class="heading-bar-colored__right-line" :style="{'background-color': colorCode}" v-if="textAlign != 'right'"></span>
+        <span v-if="textAlign != 'right'"
+              class="heading-bar-colored__right-line"
+              :style="{'background-color': colorCode}" />
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'heading-bar-colored',
-        props: {
-            colorCode: {
-                type: String,
-                default: '#fff'
-            },
-            textAlign: {
-                type: String,
-                default: 'left'
-            }
+export default {
+    name: 'HeadingBarColored',
+    props: {
+        colorCode: {
+            type: String,
+            default: '#fff'
+        },
+        textAlign: {
+            type: String,
+            default: 'left'
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

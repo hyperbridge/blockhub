@@ -1,10 +1,13 @@
 <template>
     <div class="money-info">
-        <c-progress-bar :percentages="percentage" direction="vertical"/>
+        <c-progress-bar :percentages="percentage"
+                        direction="vertical" />
         <div class="money-info__detail">
-            <div class="text">{{ label }}</div>
+            <div class="text">
+                {{ label }}
+            </div>
             <div class="amount-detail">
-                {{ amount | convertCurrency}}
+                {{ amount | convertCurrency }}
                 <span v-if="goal"> of {{ goal | convertCurrency }}</span>
             </div>
         </div>
@@ -12,34 +15,34 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            amount : { required: true },
-            currency : { default: 'USD' },
-            label: { default: false },
-            goal : {}
-        },
-        components: {
-            'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m)
-        },
-        computed:{
-            percentage(){
-                return this.goal ? parseFloat(this.amount) / parseFloat(this.goal) * 100 : 100
-            }
-        },
-        filters: {
-            currency_sign(cur_name) {
-                switch(cur_name) {
-                    case 'EUR':
-                        return '€'
-                    case 'GBP':
-                        return '£'
-                    default:
-                        return '$'
-                }
+export default {
+    components: {
+        'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m)
+    },
+    filters: {
+        currency_sign(cur_name) {
+            switch (cur_name) {
+            case 'EUR':
+                return '€'
+            case 'GBP':
+                return '£'
+            default:
+                return '$'
             }
         }
+    },
+    props: {
+        amount: { required: true },
+        currency: { default: 'USD' },
+        label: { default: false },
+        goal: {}
+    },
+    computed: {
+        percentage() {
+            return this.goal ? parseFloat(this.amount) / parseFloat(this.goal) * 100 : 100
+        }
     }
+}
 </script>
 
 <style lang="scss" scoped>

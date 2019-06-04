@@ -11,19 +11,19 @@
 </template>
 
 <script>
-    import moment from 'moment'
-    export default {
-        name: 'message',
-        props: ['msg'],
-        components:{
-            'c-author': () => import('~/components/author').then(m => m.default || m)
-        },
-        methods:{
-            getTime(date){
-                return moment(date).format('h:mm')
-            }
+import moment from 'moment'
+export default {
+    name: 'Message',
+    components: {
+        'c-author': () => import('~/components/author').then(m => m.default || m)
+    },
+    props: ['msg'],
+    methods: {
+        getTime(date) {
+            return moment(date).format('h:mm')
         }
     }
+}
 </script>
 
 <style lang="scss">

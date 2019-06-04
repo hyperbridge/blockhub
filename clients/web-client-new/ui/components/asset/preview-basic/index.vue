@@ -1,8 +1,7 @@
 <template>
     <div
         class="asset-preview-basic"
-        :class="[{ 'horizontal': horizontal }, size]"
-    >
+        :class="[{ 'horizontal': horizontal }, size]">
         <h5 class="asset-preview-basic__text">
             <router-link :to="`/asset/${asset.id}`">
                 {{ asset.name }}
@@ -10,33 +9,33 @@
         </h5>
         <c-img
             class="asset-preview-basic__image"
-            :src="asset.image"
-        />
-        <p v-if="!hideGame" class="asset-preview-basic__text">
+            :src="asset.image" />
+        <p v-if="!hideGame"
+           class="asset-preview-basic__text">
             {{ asset.productName }}
         </p>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'asset-preview-basic',
-        props: {
-            asset: {
-                type: Object,
-                required: true
-            },
-            horizontal: Boolean,
-            hideGame: Boolean,
-            size: {
-                type: String,
-                default: 'lg',
-                validator(val) {
-                    return ['sm', 'md', 'lg'].includes(val);
-                }
+export default {
+    name: 'AssetPreviewBasic',
+    props: {
+        asset: {
+            type: Object,
+            required: true
+        },
+        horizontal: Boolean,
+        hideGame: Boolean,
+        size: {
+            type: String,
+            default: 'lg',
+            validator(val) {
+                return ['sm', 'md', 'lg'].includes(val)
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

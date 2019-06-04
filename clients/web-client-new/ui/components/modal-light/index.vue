@@ -1,9 +1,11 @@
 <template>
-    <div class="modal-light" @click.self="$emit('close')">
+    <div class="modal-light"
+         @click.self="$emit('close')">
         <button
-            @click="$emit('close')"
             class="modal-light__btn"
-        >&times;</button>
+            @click="$emit('close')">
+            &times;
+        </button>
         <div class="modal-light__content">
             <slot />
         </div>
@@ -12,7 +14,7 @@
 
 <script>
 export default {
-    name: 'modal-light'
+    name: 'ModalLight'
 }
 </script>
 

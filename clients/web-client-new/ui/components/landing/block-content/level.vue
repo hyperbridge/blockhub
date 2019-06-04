@@ -1,6 +1,9 @@
 <template>
-    <div class="landing-level" :class="['level-size-' + size]" :style="{'color' : textColor}">
-        <div class="landing-level__text-left" v-if="textPosition == 'left'">
+    <div class="landing-level"
+         :class="['level-size-' + size]"
+         :style="{'color' : textColor}">
+        <div v-if="textPosition == 'left'"
+             class="landing-level__text-left">
             <slot />
         </div>
         <div class="landing-level__number">
@@ -8,31 +11,32 @@
                 {{ number }}
             </span>
         </div>
-        <div class="landing-level__text-right" v-if="textPosition == 'right'">
+        <div v-if="textPosition == 'right'"
+             class="landing-level__text-right">
             <slot />
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'level',
-        props:{
-            textPosition: String,
-            textColor:{
-                type: String,
-                default: '#fff'
-            },
-            number: {
-                type: [Number, String],
-                default: 0
-            },
-            size: {
-                type: String,
-                default: 'sm'
-            }
+export default {
+    name: 'Level',
+    props: {
+        textPosition: String,
+        textColor: {
+            type: String,
+            default: '#fff'
+        },
+        number: {
+            type: [Number, String],
+            default: 0
+        },
+        size: {
+            type: String,
+            default: 'sm'
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

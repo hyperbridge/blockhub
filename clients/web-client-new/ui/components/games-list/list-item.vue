@@ -1,9 +1,10 @@
 <template>
     <div class="games-list">
-        <div class="games-list__item" :style="`background-image:url('${game.image}')`">
+        <div class="games-list__item"
+             :style="`background-image:url('${game.image}')`">
             <div class="games-list__item-wrapper">
                 <div class="games-list__item-link">
-                    <i class="fas fa-external-link-alt"></i>
+                    <i class="fas fa-external-link-alt" />
                 </div>
                 <div class="games-list__item-head">
                     <div>
@@ -14,7 +15,10 @@
                             {{ game.sub_name }}
                         </div>
                     </div>
-                    <c-button status="second-info" icon="play" class="margin-top-15" size="xl">
+                    <c-button status="second-info"
+                              icon="play"
+                              class="margin-top-15"
+                              size="xl">
                         Play Now
                     </c-button>
                 </div>
@@ -29,28 +33,31 @@
                 <div class="games-list__item-body">
                     <div class="game-friends-playing margin-bottom-40">
                         <div class="game-friends-playing__ttl">
-                            <i class="fas fa-users"></i>
+                            <i class="fas fa-users" />
                             <span class="ttl">Friends Playing</span>
                             <span>this game</span>
                         </div>
                         <div class="game-friends-playing__list">
                             <template v-for="user in game.friends">
                                 <a :href="user.link">
-                                    <img :src="user.avatar"/>
+                                    <img :src="user.avatar">
                                 </a>
                             </template>
                         </div>
                     </div>
                     <div class="game-achievements margin-bottom-40">
                         <div class="game-achievements__ttl">
-                            <i class="fas fa-trophy"></i>
+                            <i class="fas fa-trophy" />
                             <span class="ttl">Achievements</span>
                             <span>you earned recently</span>
                         </div>
                         <div class="game-achievements__list">
-                            <a v-for="(item, index) in game.achievements" v-if="game.achievements" :href="item.href"
-                               class="game-achievements__list-item" :key="`achievements${index}`">
-                                <i class="fas fa-trophy"></i>
+                            <a v-for="(item, index) in game.achievements"
+                               v-if="game.achievements"
+                               :key="`achievements${index}`"
+                               :href="item.href"
+                               class="game-achievements__list-item">
+                                <i class="fas fa-trophy" />
                             </a>
                             <p v-else>
                                 Nothing to show
@@ -59,26 +66,31 @@
                     </div>
                     <div class="game-downloadable-list  margin-bottom-40">
                         <div class="game-downloadable-list__ttl">
-                            <i class="fas fa-plus-circle"></i>
+                            <i class="fas fa-plus-circle" />
                             <span class="ttl">Downloadable Content</span>
                             <span>for this game</span>
                         </div>
                         <div class="game-downloadable-list__list">
-                            <div class="game-downloadable-list__list-item" v-for="item in game.download_content"
-                                 v-if="game.download_content">
+                            <div v-for="item in game.download_content"
+                                 v-if="game.download_content"
+                                 class="game-downloadable-list__list-item">
                                 <div>
                                     <c-button status="plain">
                                         {{ item.name }}
                                     </c-button>
                                 </div>
                                 <div class="item-action">
-                                        <span>
-                                            $ {{ item.price }}
-                                        </span>
-                                    <c-button status="opacity-success" size="xs" v-if=" item.price == 'free' || 'Free'">
+                                    <span>
+                                        $ {{ item.price }}
+                                    </span>
+                                    <c-button v-if=" item.price == 'free' || 'Free'"
+                                              status="opacity-success"
+                                              size="xs">
                                         Install
                                     </c-button>
-                                    <c-button status="opacity-success" size="xs" v-else>
+                                    <c-button v-else
+                                              status="opacity-success"
+                                              size="xs">
                                         Buy
                                     </c-button>
                                 </div>
@@ -90,7 +102,7 @@
                     </div>
                     <div class="game-news">
                         <div class="game-news__ttl">
-                            <i class="fas fa-rss"></i>
+                            <i class="fas fa-rss" />
                             <span class="ttl">News</span>
                             <span>about this game</span>
                         </div>
@@ -103,8 +115,10 @@
                                     <p>
                                         {{ item.text }}
                                     </p>
-                                    <c-button status="plain" :href="item.link" class="pl-0">
-                                        <i class="fas fa-external-link-alt margin-right-5"></i>
+                                    <c-button status="plain"
+                                              :href="item.link"
+                                              class="pl-0">
+                                        <i class="fas fa-external-link-alt margin-right-5" />
                                         Read More
                                     </c-button>
                                 </li>
@@ -118,11 +132,11 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            game: Object
-        }
+export default {
+    props: {
+        game: Object
     }
+}
 </script>
 
 <style lang="scss" scoped>

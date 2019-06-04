@@ -1,19 +1,27 @@
 <template>
-    <div class="launcher" :style=" `background-image: url(${bgImage})`">
-        <div class="launcher__overlay" :style="`opacity: ${overlayOpacity}; background-color: ${overlayColor}`" v-if="overlay"></div>
+    <div class="launcher"
+         :style=" `background-image: url(${bgImage})`">
+        <div v-if="overlay"
+             class="launcher__overlay"
+             :style="`opacity: ${overlayOpacity}; background-color: ${overlayColor}`" />
         <div class="launcher__top-bar">
-            <router-link class="app-header__bar-center margin-right-50" :to="isLocked ? '#' : '/'">
+            <router-link class="app-header__bar-center margin-right-50"
+                         :to="isLocked ? '#' : '/'">
                 <c-loading-logo :isLoading="isLoader" />
             </router-link>
             <nav class="launcher__top-bar-left">
                 <ul>
-                    <li class="app-header__create-account-btn" v-if="desktopMode && !signedIn && !isLocked">
-                        <router-link to="/account/signup" class="">
+                    <li v-if="desktopMode && !signedIn && !isLocked"
+                        class="app-header__create-account-btn">
+                        <router-link to="/account/signup"
+                                     class="">
                             CREATE ACCOUNT
                         </router-link>
                     </li>
-                    <li class="app-header__download-btn" v-if="!desktopMode">
-                        <router-link to="/download" class="">
+                    <li v-if="!desktopMode"
+                        class="app-header__download-btn">
+                        <router-link to="/download"
+                                     class="">
                             DOWNLOAD
                         </router-link>
                     </li>
@@ -28,86 +36,104 @@
             <div class="launcher__top-bar-right ml-auto">
                 <nav>
                     <ul>
-                        <li v-if="!isLocked" hidden>
-                            <c-quick-launch class="quick-launch" style="margin-top: -7px;" />
+                        <li v-if="!isLocked"
+                            hidden>
+                            <c-quick-launch class="quick-launch"
+                                            style="margin-top: -7px;" />
                         </li>
-                        <li v-if="signedIn" class="token">
-                            <router-link class="mt-1" to="/token">
-                                <span class="token__count token__count--loading" v-if="tokenCount === null">
+                        <li v-if="signedIn"
+                            class="token">
+                            <router-link class="mt-1"
+                                         to="/token">
+                                <span v-if="tokenCount === null"
+                                      class="token__count token__count--loading">
                                     <c-loading :enabled="true" />
                                 </span>
-                                <span class="token__count" v-if="tokenCount !== null">
-                                    {{ tokenCount }} <span class="icon fa fa-coins"></span>
+                                <span v-if="tokenCount !== null"
+                                      class="token__count">
+                                    {{ tokenCount }} <span class="icon fa fa-coins" />
                                 </span>
                                 <span class="text">Tokens</span>
                             </router-link>
                         </li>
                         <li v-if="signedIn">
-                            <c-dropdown class="ml-4 account-menu mt-1" style="z-index: 12" @show="onShowMenu" @hide="onHideMenu">
+                            <c-dropdown class="ml-4 account-menu mt-1"
+                                        style="z-index: 12"
+                                        @show="onShowMenu"
+                                        @hide="onHideMenu">
                                 <template slot="title">
                                     <div class="__title">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-user" />
                                         {{ activeProfile && activeProfile.name }}
                                     </div>
                                 </template>
                                 <ul class="item-dropdown">
                                     <li>
-                                        <c-button status="none" to="/account">
-                                            <i class="fas fa-user"></i>
+                                        <c-button status="none"
+                                                  to="/account">
+                                            <i class="fas fa-user" />
                                             Account Info
                                         </c-button>
                                     </li>
                                     <li v-darklaunch="'WALLETS'">
-                                        <c-button status="none" to="/account/wallets">
-                                            <i class="fas fa-credit-card"></i>
+                                        <c-button status="none"
+                                                  to="/account/wallets">
+                                            <i class="fas fa-credit-card" />
                                             My Wallets
                                         </c-button>
                                     </li>
                                     <li v-if="activeProfile">
-                                        <c-button status="none" :to="`/profile/${activeProfile.id}`">
-                                            <i class="fas fa-user"></i>
+                                        <c-button status="none"
+                                                  :to="`/profile/${activeProfile.id}`">
+                                            <i class="fas fa-user" />
                                             View Public Profile
                                         </c-button>
                                     </li>
-                                    <li v-if="signedIn && activeProfile" v-darklaunch="'CONTACTS'">
-                                        <c-button status="none" :to="`/profile/${activeProfile.id}/contacts`">
-                                            <i class="fas fa-users"></i>
+                                    <li v-if="signedIn && activeProfile"
+                                        v-darklaunch="'CONTACTS'">
+                                        <c-button status="none"
+                                                  :to="`/profile/${activeProfile.id}/contacts`">
+                                            <i class="fas fa-users" />
                                             Contacts
                                         </c-button>
                                     </li>
                                     <li>
-                                        <c-button status="none" to="/account/profiles">
-                                            <i class="fas fa-users-cog"></i>
+                                        <c-button status="none"
+                                                  to="/account/profiles">
+                                            <i class="fas fa-users-cog" />
                                             Profile Manager
                                         </c-button>
                                     </li>
                                     <li>
-                                        <c-button status="none" @click="$store.commit('application/showProfileChooser', true)">
-                                            <i class="fas fa-user-edit"></i>
+                                        <c-button status="none"
+                                                  @click="$store.commit('application/showProfileChooser', true)">
+                                            <i class="fas fa-user-edit" />
                                             Switch Profile
                                         </c-button>
                                     </li>
                                     <li>
-                                        <c-button status="none" to="/account/signout">
-                                            <i class="fa fa-sign-out-alt"></i>
+                                        <c-button status="none"
+                                                  to="/account/signout">
+                                            <i class="fa fa-sign-out-alt" />
                                             Sign Out
                                         </c-button>
                                     </li>
                                     <hr>
                                     <li v-darklaunch="'CHAT'">
-                                        <c-button status="none" to="/settings/chat">
-                                            <i class="fas fa-comments"></i>
+                                        <c-button status="none"
+                                                  to="/settings/chat">
+                                            <i class="fas fa-comments" />
                                             Chat Settings
                                         </c-button>
                                     </li>
                                     <li>
-                                        <c-button status="none" to="/help">
-                                            <i class="fas fa-info-circle"></i>
+                                        <c-button status="none"
+                                                  to="/help">
+                                            <i class="fas fa-info-circle" />
                                             FAQ
                                         </c-button>
                                     </li>
                                 </ul>
-
                             </c-dropdown>
                         </li>
                         <li v-if="!signedIn && !isLocked">
@@ -126,8 +152,9 @@
         </div>
         <div class="game-shortcuts">
             <div class="game-shortcuts__wrapper">
-                <div class="game-shortcuts__item" v-for="game in gamesShortcuts">
-                    <img :src="game.image"/>
+                <div v-for="game in gamesShortcuts"
+                     class="game-shortcuts__item">
+                    <img :src="game.image">
                 </div>
             </div>
         </div>
@@ -139,100 +166,100 @@
 
 <script>
 
-    export default {
-        props: {
-            bgImage: String,
-            overlay: {
-                type: Boolean,
-                default: true
-            },
-            overlayOpacity:{
-                type: [ String, Number ],
-                default: 0.4
-            },
-            overlayColor:{
-                type: String,
-                default: '#000'
-            }
+export default {
+    components: {
+        'c-loading-logo': () => import('~/components/loading-bar/logo-loader').then(m => m.default || m),
+        'c-quick-launch': () => import('~/components/quick-launch').then(m => m.default || m),
+        'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m)
+    },
+    props: {
+        bgImage: String,
+        overlay: {
+            type: Boolean,
+            default: true
         },
-        components:{
-            'c-loading-logo': () => import('~/components/loading-bar/logo-loader').then(m => m.default || m),
-            'c-quick-launch': () => import('~/components/quick-launch').then(m => m.default || m),
-            'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m),
+        overlayOpacity: {
+            type: [String, Number],
+            default: 0.4
         },
-        data(){
-            return{
-                gamesShortcuts: [
-                    {
-                        "image": "http://www.transparentpng.com/download/doom/tml22U-doom-game-free-cut-out.png",
-                    },
-                    {
-                        "image": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/46b63d3c-ae67-464c-9a37-670829b2a157/datt5yp-68d54e82-58e1-44f4-92e9-9a615ff30c63.png",
-                    },
-                    {
-                        "image": "http://icons.iconarchive.com/icons/3xhumed/mega-games-pack-38/256/Silent-Hunter-5-Battle-of-the-Atlantic-1-icon.png",
-                    },
-                    {
-                        "image": "http://bestgames4all.ru/uploads/images/e/a/_/ea_metro_2033_redux.jpg",
-                    },
-                    {
-                        "image": "https://steamuserimages-a.akamaihd.net/ugc/862861700716666132/4906F3679ACA4FAA7BAFBE194B6EBEE00D8ACA90/",
-                    },
-                    {
-                        "image": "http://pluspng.com/img-png/tom-clancys-ghost-recon-png-tom-clancys-ghost-recon-logo-png-picture-512.png",
-                    },
-                    {
-                        "image": "https://cdn.wccftech.com/wp-content/uploads/2014/05/Watch-Dogs-Logo4.png",
-                    },
-                    {
-                        "image": "https://www.digiseller.ru/preview/403777/p1_2208863_988b90bd.png",
-                    },
-                    {
-                        "image": "https://www.digiseller.ru/preview/403777/p1_2208863_35bf7488.png",
-                    },
-                    {
-                        "image": "https://www.digiseller.ru/preview/403777/p1_2208863_02419b9c.png",
-                    },
-                    {
-                        "image": "http://icons.iconarchive.com/icons/3xhumed/mega-games-pack-28/256/Rogue-Trooper-1-icon.png",
-                    },
-                    {
-                        "image": "http://icons.iconarchive.com/icons/3xhumed/mega-games-pack-38/256/Sniper-Ghost-Worrior-3-icon.png",
-                    }
-                ],
-            }
+        overlayColor: {
+            type: String,
+            default: '#000'
+        }
+    },
+    data() {
+        return {
+            gamesShortcuts: [
+                {
+                    'image': 'http://www.transparentpng.com/download/doom/tml22U-doom-game-free-cut-out.png'
+                },
+                {
+                    'image': 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/46b63d3c-ae67-464c-9a37-670829b2a157/datt5yp-68d54e82-58e1-44f4-92e9-9a615ff30c63.png'
+                },
+                {
+                    'image': 'http://icons.iconarchive.com/icons/3xhumed/mega-games-pack-38/256/Silent-Hunter-5-Battle-of-the-Atlantic-1-icon.png'
+                },
+                {
+                    'image': 'http://bestgames4all.ru/uploads/images/e/a/_/ea_metro_2033_redux.jpg'
+                },
+                {
+                    'image': 'https://steamuserimages-a.akamaihd.net/ugc/862861700716666132/4906F3679ACA4FAA7BAFBE194B6EBEE00D8ACA90/'
+                },
+                {
+                    'image': 'http://pluspng.com/img-png/tom-clancys-ghost-recon-png-tom-clancys-ghost-recon-logo-png-picture-512.png'
+                },
+                {
+                    'image': 'https://cdn.wccftech.com/wp-content/uploads/2014/05/Watch-Dogs-Logo4.png'
+                },
+                {
+                    'image': 'https://www.digiseller.ru/preview/403777/p1_2208863_988b90bd.png'
+                },
+                {
+                    'image': 'https://www.digiseller.ru/preview/403777/p1_2208863_35bf7488.png'
+                },
+                {
+                    'image': 'https://www.digiseller.ru/preview/403777/p1_2208863_02419b9c.png'
+                },
+                {
+                    'image': 'http://icons.iconarchive.com/icons/3xhumed/mega-games-pack-28/256/Rogue-Trooper-1-icon.png'
+                },
+                {
+                    'image': 'http://icons.iconarchive.com/icons/3xhumed/mega-games-pack-38/256/Sniper-Ghost-Worrior-3-icon.png'
+                }
+            ]
+        }
+    },
+    computed: {
+        isLocked() {
+            return this.$store.state.application.locked
         },
-        computed:{
-            isLocked() {
-                return this.$store.state.application.locked
-            },
-            isLoading() {
-                return this.$store.state.application.loading
-            },
-            isViewing() {
-                return this.$store.state.application.editorMode === 'viewing'
-            },
-            editorMode() {
-                return this.$store.state.application.editorMode
-            },
-            developerMode() {
-                return this.$store.state.application.developerMode
-            },
-            signedIn() {
-                // return this.$store.state.application.signedIn && !!this.$store.state.auth.user
-                return this.$store.state.application.signedIn
-            },
-            desktopMode() {
-                return this.$store.state.application.desktopMode
-            },
-            operatingSystem() {
-                return this.$store.state.application.operatingSystem
-            }
+        isLoading() {
+            return this.$store.state.application.loading
         },
-        mounted() {
-            document.getElementById('startup-loader').style.display = 'none'
+        isViewing() {
+            return this.$store.state.application.editorMode === 'viewing'
         },
+        editorMode() {
+            return this.$store.state.application.editorMode
+        },
+        developerMode() {
+            return this.$store.state.application.developerMode
+        },
+        signedIn() {
+            // return this.$store.state.application.signedIn && !!this.$store.state.auth.user
+            return this.$store.state.application.signedIn
+        },
+        desktopMode() {
+            return this.$store.state.application.desktopMode
+        },
+        operatingSystem() {
+            return this.$store.state.application.operatingSystem
+        }
+    },
+    mounted() {
+        document.getElementById('startup-loader').style.display = 'none'
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,9 +1,11 @@
 <template>
-    <div class="modal-light" @click.self="$emit('close')">
+    <div class="modal-light"
+         @click.self="$emit('close')">
         <button
-            @click="$emit('close')"
             class="modal-light__btn"
-        >&times;</button>
+            @click="$emit('close')">
+            &times;
+        </button>
         <div class="modal-light__content">
             <slot>
                 <div class="content__wrapper">
@@ -11,13 +13,12 @@
                         <span class="title">{{ title }}</span>
                         <a
                             class="close-btn"
-                            @click.prevent="$emit('close')"
-                        >
-                            <c-icon name="times"/>
+                            @click.prevent="$emit('close')">
+                            <c-icon name="times" />
                         </a>
                     </div>
                     <div class="content__body">
-                        <slot name="body"/>
+                        <slot name="body" />
                     </div>
                 </div>
             </slot>
@@ -27,7 +28,7 @@
 
 <script>
 export default {
-    name: 'modal-light',
+    name: 'ModalLight',
     props: ['title']
 }
 </script>

@@ -1,25 +1,29 @@
 <template>
     <div class="asset-preview">
-        <c-asset-preview-basic :asset="asset"/>
+        <c-asset-preview-basic :asset="asset" />
         <table class="asset-preview__table">
             <thead>
                 <th>Property</th>
                 <th>Value</th>
-                <slot name="th"/>
+                <slot name="th" />
             </thead>
             <tbody>
-                <tr v-for="(val, prop, index) in asset.metadata" :key="index">
+                <tr v-for="(val, prop, index) in asset.metadata"
+                    :key="index">
                     <td>
                         {{ prop | parseProp | upperFirstChar }}
                     </td>
-                    <td v-if="typeof asset.metadata[prop] ===  'object'">
+                    <td v-if="typeof asset.metadata[prop] === 'object'">
                         <ul class="margin-bottom-0">
-                            <li v-for="(subprop, subval, index) in asset.metadata[prop]" :key="index">
+                            <li v-for="(subprop, subval, index) in asset.metadata[prop]"
+                                :key="index">
                                 {{ subprop }} {{ subval }}
                             </li>
                         </ul>
                     </td>
-                    <td v-else>{{ asset.metadata[prop] }}</td>
+                    <td v-else>
+                        {{ asset.metadata[prop] }}
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -27,17 +31,17 @@
 </template>
 
 <script>
-    export default {
-        props: ['asset'],
-        components: {
-            'c-asset-preview-basic': () => import('~/components/asset/preview-basic').then(m => m.default || m),
-        },
-        filters: {
-            parseProp(val) {
-                return val.replace(/_/g, ' ');
-            }
+export default {
+    components: {
+        'c-asset-preview-basic': () => import('~/components/asset/preview-basic').then(m => m.default || m)
+    },
+    filters: {
+        parseProp(val) {
+            return val.replace(/_/g, ' ')
         }
-    }
+    },
+    props: ['asset']
+}
 </script>
 
 <style lang="scss" scoped>

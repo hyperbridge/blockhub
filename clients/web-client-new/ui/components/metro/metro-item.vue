@@ -1,8 +1,10 @@
 <template>
-    <div class="metro-item__wrapper" :style="{ 'padding' : gutter + 'px', 'width' : width }">
-        <div class="metro-item" :class="{ 'metro-item--full-img' : fullImage, 'metro-item--shadow' : shadow }">
+    <div class="metro-item__wrapper"
+         :style="{ 'padding' : gutter + 'px', 'width' : width }">
+        <div class="metro-item"
+             :class="{ 'metro-item--full-img' : fullImage, 'metro-item--shadow' : shadow }">
             <div class="metro-item__image">
-                <img :src="image"/>
+                <img :src="image">
             </div>
             <div class="metro-item__description">
                 <slot />
@@ -12,27 +14,27 @@
 </template>
 
 <script>
-    export default {
-        props:{
-            image: String,
-            width:{
-                type: String,
-                default: '400px'
-            },
-            gutter:{
-                type: [ String, Number ],
-                default: 10
-            },
-            fullImage:{
-                type: Boolean,
-                default: false
-            },
-            shadow:{
-                type: Boolean,
-                default: false
-            }
+export default {
+    props: {
+        image: String,
+        width: {
+            type: String,
+            default: '400px'
+        },
+        gutter: {
+            type: [String, Number],
+            default: 10
+        },
+        fullImage: {
+            type: Boolean,
+            default: false
+        },
+        shadow: {
+            type: Boolean,
+            default: false
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

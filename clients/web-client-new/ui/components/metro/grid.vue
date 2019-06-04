@@ -5,18 +5,18 @@
 </template>
 
 <script>
-    export default {
-        props:{
-            gutter: {
-                type: [ String, Number ],
-                default: 15
-            },
-            itemInRow: {
-                type: [ String, Number ],
-                default: 4
-            },
+export default {
+    props: {
+        gutter: {
+            type: [String, Number],
+            default: 15
+        },
+        itemInRow: {
+            type: [String, Number],
+            default: 4
         }
     }
+}
 </script>
 
 <style lang="scss">

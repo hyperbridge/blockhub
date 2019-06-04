@@ -2,19 +2,16 @@
     <transition-group
         :name="props.transition ? 'assets-list' : 'no-transition'"
         class="assets-list"
-        tag="ul"
-    >
+        tag="ul">
         <li
             v-for="asset in props.assets"
             :key="asset.id"
             class="asset"
-            :class="{ 'asset--transitioned': props.transition }"
-        >
+            :class="{ 'asset--transitioned': props.transition }">
             <div class="asset__info">
                 <c-img
                     :src="asset.image"
-                    class="asset__image"
-                />
+                    class="asset__image" />
                 <div class="asset__meta">
                     <p>
                         <router-link :to="`/asset/${asset.id}`">
@@ -25,15 +22,16 @@
                 </div>
             </div>
             <div class="flex-center-between">
-                <span v-if="asset.userName" class="asset__user">
+                <span v-if="asset.userName"
+                      class="asset__user">
                     <c-icon
                         name="user"
-                        class="margin-right-5"
-                    />
+                        class="margin-right-5" />
                     {{ asset.userName }}
                 </span>
                 <span class="asset__price">{{ asset.price.current | convertCurrency }}</span>
-                <c-button status="success" icon="cart-plus">
+                <c-button status="success"
+                          icon="cart-plus">
                     Proceed to Purchase
                 </c-button>
             </div>

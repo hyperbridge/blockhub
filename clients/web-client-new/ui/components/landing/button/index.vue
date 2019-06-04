@@ -8,35 +8,35 @@
         style="font-size: 14px"
         :style="{ 'font-size': fontSize + 'px', 'width' : width + 'px' }"
         @click="$emit('click')">
-        <slot/>
+        <slot />
     </component>
 </template>
 
 <script>
-    export default {
-        props: {
-            tag: {
-                type: String,
-                default: 'a',
-            },
-            href: {
-                type: String,
-                default: 'javascript:;',
-            },
-            target: {
-                type: String,
-                default: '_self',
-            },
-            status: {
-                type: String,
-                default: 'default'
-            },
-            fontSize: {
-                type: String
-            },
-            width: String
+export default {
+    props: {
+        tag: {
+            type: String,
+            default: 'a'
         },
+        href: {
+            type: String,
+            default: 'javascript:;'
+        },
+        target: {
+            type: String,
+            default: '_self'
+        },
+        status: {
+            type: String,
+            default: 'default'
+        },
+        fontSize: {
+            type: String
+        },
+        width: String
     }
+}
 </script>
 
 <style lang="scss" scoped>

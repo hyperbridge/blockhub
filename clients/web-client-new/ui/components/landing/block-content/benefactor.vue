@@ -4,7 +4,8 @@
             <c-img :src="currentItem.src" />
         </div>
         <div class="landing-benefactor__list">
-            <div class="landing-benefactor__includes-list" v-if="showList">
+            <div v-if="showList"
+                 class="landing-benefactor__includes-list">
                 <h3 class="font-weight-bold text-uppercase mb-4 text-center text-white">
                     EXTRA RARE ITEM LIST
                 </h3>
@@ -14,17 +15,26 @@
                     </li>
                 </ul>
             </div>
-            <div class="landing-benefactor__list-item" v-for="(item, index) in items" :key="index" v-if="items" @mouseover="changeCurrent(item)">
-                <div class="img" :style="{'background-image' : 'url(' + item.src + ')'}">
-                </div>
-                <c-landing-block-title fontSize="18" class="text-uppercase">
+            <div v-for="(item, index) in items"
+                 v-if="items"
+                 :key="index"
+                 class="landing-benefactor__list-item"
+                 @mouseover="changeCurrent(item)">
+                <div class="img"
+                     :style="{'background-image' : 'url(' + item.src + ')'}" />
+                <c-landing-block-title fontSize="18"
+                                       class="text-uppercase">
                     {{ item.name }}
                 </c-landing-block-title>
-                <div class="landing-benefactor__more-link" v-if="item.includes_list" @mouseover="toggleList(item.includes_list)" @mouseleave="showList = false">
+                <div v-if="item.includes_list"
+                     class="landing-benefactor__more-link"
+                     @mouseover="toggleList(item.includes_list)"
+                     @mouseleave="showList = false">
                     Whats include?
                 </div>
             </div>
-            <div class="w-100 text-center" v-else>
+            <div v-else
+                 class="w-100 text-center">
                 Nothing found here. Sorry!
             </div>
         </div>
@@ -35,36 +45,34 @@
 </template>
 
 <script>
-    export default {
-        name: 'benefactor',
-        props:{
-            items: [String, Array]
+export default {
+    name: 'Benefactor',
+    components: {
+        'c-landing-block-title': () => import('~/components/landing/block-title/simple').then(m => m.default || m)
+    },
+    props: {
+        items: [String, Array]
+    },
+    data() {
+        return {
+            currentItem: {},
+            list: [],
+            showList: false
+        }
+    },
+    created() {
+        if (this.items) { this.currentItem = this.items[0] }
+    },
+    methods: {
+        changeCurrent(item) {
+            if (!this.showList) { this.currentItem = item }
         },
-        components:{
-            'c-landing-block-title' : () => import('~/components/landing/block-title/simple').then(m => m.default || m),
-        },
-        data(){
-            return{
-                currentItem: {},
-                list: [],
-                showList: false
-            }
-        },
-        created(){
-            if(this.items)
-                this.currentItem = this.items[0]
-        },
-        methods:{
-            changeCurrent(item){
-                if (!this.showList)
-                    this.currentItem = item
-            },
-            toggleList(list){
-                this.list = list;
-                this.showList = !this.showList
-            }
+        toggleList(list) {
+            this.list = list
+            this.showList = !this.showList
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

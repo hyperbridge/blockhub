@@ -1,5 +1,6 @@
 <template functional>
-    <p class="message-bar" :class="'message-bar--' + props.status">
+    <p class="message-bar"
+       :class="'message-bar--' + props.status">
         {{ props.text }}
     </p>
 </template>

@@ -1,29 +1,30 @@
 <template>
     <ul class="list-container">
-        <li v-for="(item, index) in items" :key="index">
-            <slot name="item" :item="item">
+        <li v-for="(item, index) in items"
+            :key="index">
+            <slot name="item"
+                  :item="item">
                 <a
-                    @click="$emit('click', item)"
                     class="item__link"
                     :class="{ 'item_link--active': item.selected | item.active }"
-                >
+                    @click="$emit('click', item)">
                     <slot :item="item">
                         {{ item.name }}
                     </slot>
                 </a>
             </slot>
-            <slot name="sublist"/>
+            <slot name="sublist" />
         </li>
     </ul>
 </template>
 
 <script>
-    export default {
-        name: 'list',
-        props: {
-            items: Array
-        }
+export default {
+    name: 'List',
+    props: {
+        items: Array
     }
+}
 </script>
 
 <style lang="scss" scoped>

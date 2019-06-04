@@ -1,8 +1,11 @@
 <template>
     <div class="progress-container">
-        <div class="progress" max="100" :value="percentage" v-if="percentage"></div>
+        <div v-if="percentage"
+             class="progress"
+             max="100"
+             :value="percentage" />
         <div class="progress-materializecss">
-            <div class="indeterminate"></div>
+            <div class="indeterminate" />
         </div>
     </div>
 </template>

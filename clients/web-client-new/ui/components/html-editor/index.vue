@@ -1,47 +1,44 @@
 <template>
-    <textarea class="form-control"></textarea>
+    <textarea class="form-control" />
 </template>
 <script>
-    export default {
-        props: {
-            model: {
-                required: true,
+export default {
+    props: {
+        model: {
+            required: true
+        },
+
+        height: {
+            type: String,
+            default: '150'
+        }
+    },
+
+    mounted() {
+        const config = {
+            height: this.height
+        }
+
+        const vm = this
+
+        config.callbacks = {
+
+            onInit() {
+                $(vm.$el).summernote('code', vm.model)
             },
 
-            height: {
-                type: String,
-                default: '150'
+            onChange() {
+                vm.$emit('update:model', $(vm.$el).summernote('code'))
+                vm.$emit('change', $(vm.$el).summernote('code'))
+            },
+
+            onBlur() {
+                vm.$emit('update:model', $(vm.$el).summernote('code'))
+                vm.$emit('change', $(vm.$el).summernote('code'))
             }
-        },
+        }
 
-        mounted() {
-
-        
-            let config = {
-                height: this.height
-            };
-
-            let vm = this;
-
-            config.callbacks = {
-
-                onInit: function () {
-                    $(vm.$el).summernote("code", vm.model);
-                },
-
-                onChange: function () {
-                    vm.$emit('update:model', $(vm.$el).summernote('code'));
-                    vm.$emit('change', $(vm.$el).summernote('code'));
-                },
-
-                onBlur: function () {
-                    vm.$emit('update:model', $(vm.$el).summernote('code'));
-                    vm.$emit('change', $(vm.$el).summernote('code'));
-                }
-            };
-
-            $(this.$el).summernote(config);
-
-        },
+        $(this.$el).summernote(config)
     }
+}
 </script>

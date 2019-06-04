@@ -1,33 +1,33 @@
 <script>
-    export default {
-        props: ['value', 'bgColor', 'textColor', 'error'],
-        render(h) {
-            return h('input', {
-                staticClass: 'c-input',
-                on: this.listeners,
-                attrs: {
-                    ...this.$attrs,
-                    ...this.$props
-                },
-                domProps: {
-                    value: this.value
-                },
-                style:{
-                    'background' : this.bgColor,
-                    'color' : this.textColor,
-                    'border': this.error ? '1px solid red' : ''
-                }
-            });
-        },
-        computed: {
-            listeners() {
-                return {
-                    ...this.$listeners,
-                    input: e => this.$emit('input', e.target.value)
-                }
+export default {
+    props: ['value', 'bgColor', 'textColor', 'error'],
+    computed: {
+        listeners() {
+            return {
+                ...this.$listeners,
+                input: e => this.$emit('input', e.target.value)
             }
         }
+    },
+    render(h) {
+        return h('input', {
+            staticClass: 'c-input',
+            on: this.listeners,
+            attrs: {
+                ...this.$attrs,
+                ...this.$props
+            },
+            domProps: {
+                value: this.value
+            },
+            style: {
+                'background': this.bgColor,
+                'color': this.textColor,
+                'border': this.error ? '1px solid red' : ''
+            }
+        })
     }
+}
 </script>
 
 <style lang="scss" scoped>

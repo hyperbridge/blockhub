@@ -9,17 +9,9 @@ export default {
             loaded: false
         }
     },
-    render(h) {
-        return h('img', {
-            on: this.listeners,
-            attrs: {
-                src: this.dynamicSrc
-            }
-        })
-    },
     computed: {
         dynamicSrc() {
-            return !this.src || this.error ? (this.loaded ? this.blank : this.loader) : this.src
+            return !this.src || this.error ? this.loaded ? this.blank : this.loader : this.src
         },
         listeners() {
             return {
@@ -30,6 +22,14 @@ export default {
                 load: () => this.loaded = true
             }
         }
+    },
+    render(h) {
+        return h('img', {
+            on: this.listeners,
+            attrs: {
+                src: this.dynamicSrc
+            }
+        })
     }
 }
 </script>
