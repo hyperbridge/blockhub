@@ -2,10 +2,10 @@
   "name": "blockhub",
   "private": true,
   "scripts": {
-    "web-client": "cd clients && cd web && npm start",
-    "web-service": "cd services && cd web && npm start",
-    "desktop-client": "cd clients && cd desktop/app && npm run dev",
-    "styleguide": "cd clients && cd web && npm run styleguide"
+    "web-client": "cd clients && cd web && yarn dev",
+    "web-service": "cd services && cd web && yarn dev",
+    "desktop-client": "cd clients && cd desktop/app && yarn dev",
+    "styleguide": "cd tools && cd styleguide && yarn dev"
   },
   "devDependencies": {
     "lerna": "^3.8.0"

@@ -1,4 +1,4 @@
-import autoprefixer from 'autoprefixer';
+import autoprefixer from 'autoprefixer'
 
 export default {
     srcDir: 'ui/',
@@ -16,19 +16,24 @@ export default {
     },
     css: [],
     plugins: [
-        { src: '~/plugins/vue-awesome-swiper', ssr: false },
-        { src: '~/plugins/vue-country-flag', ssr: false },
-        { src: '~/plugins/global-components' },
+        { src: '~/plugins/components' },
         { src: '~/plugins/filters' },
         { src: '~/plugins/directives' },
-        { src: '~/plugins/general' },
         { src: '~/plugins/feathers' },
-        { src: '~/plugins/i18n' },
+        { src: '~/plugins/vue-i18n' },
+        { src: '~/plugins/vue-currency' },
+        { src: '~/plugins/vue-awesome-swiper', ssr: false },
+        { src: '~/plugins/vue-country-flag', ssr: false },
+        { src: '~/plugins/vue-snotify', ssr: false },
+        { src: '~/plugins/vue-numerals', ssr: false },
+        { src: '~/plugins/vue-popover', ssr: false },
+        { src: '~/plugins/vue-draggable', ssr: false },
+        { src: '~/plugins/vue-emoji-mart', ssr: false },
         { src: '~/plugins/autosize', ssr: false },
         { src: '~/plugins/jquery', ssr: false },
         { src: '~/plugins/summernote', ssr: false },
         { src: '~/plugins/moment', ssr: false },
-        { src: '~/plugins/blockhub' },
+        { src: '~/plugins/blockhub' }
     ],
     modules: [
         // Doc: https://axios.nuxtjs.org/usage
@@ -46,7 +51,7 @@ export default {
             }
         },
         extend(config, { isDev }) {
-            if (isDev) config.output.globalObject = 'this';
+            if (isDev) config.output.globalObject = 'this'
             config.node = {
                 fs: 'empty'
             }

@@ -1,2 +1,2 @@
-import moment from 'moment';
-import 'moment/min/locales';
+import moment from 'moment'
+import 'moment/min/locales'

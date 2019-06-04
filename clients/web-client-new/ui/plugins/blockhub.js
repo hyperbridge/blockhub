@@ -6,6 +6,8 @@ import * as Bridge from '../framework/desktop-bridge'
 import seed from '../db/seed'
 
 export default ({ app, store }) => {
+    Vue.config.productionTip = false
+
     // Set blockhub instance on app
     // This way we can use it in middleware and pages asyncData/fetch
     app.blockhub = {}
@@ -117,11 +119,11 @@ export default ({ app, store }) => {
 
     const updateContainer = (container, item) => {
         if (Array.isArray(item)) {
-            for (let i in item) { // eslint-disable-line guard-for-in
-                item[i]['$loki'] = undefined
+            for (const i in item) { // eslint-disable-line guard-for-in
+                item[i].$loki = undefined
             }
         } else {
-            item['$loki'] = undefined
+            item.$loki = undefined
         }
 
         container.insert(item)
@@ -162,7 +164,7 @@ export default ({ app, store }) => {
     const plugin = {
         install(Vue, options) {
             Vue.mixin({
-                created: function () {
+                created () {
                     // access to blockhub anywhere
                     this.$blockhub = app.blockhub
                     this.$desktop = app.blockhub.bridge
@@ -182,8 +184,8 @@ export default ({ app, store }) => {
         // TODO: is this a race condition?
         // TODO: PeerService.init()
 
-        ReputationEngine.init(store) //, router)
-        Bridge.init(store) //, router)
+        ReputationEngine.init(store) // , router)
+        Bridge.init(store) // , router)
 
         store.dispatch('database/init')
         store.dispatch('application/init')

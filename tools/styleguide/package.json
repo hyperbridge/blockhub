@@ -1,0 +1,26 @@
+{
+    "name": "blockhub-styleguide",
+    "version": "1.0.0",
+    "description": "BlockHub Styleguide",
+    "license": "SEE LICENSE IN LICENSE.md",
+    "scripts": {
+      "start": "start-storybook -p 6006",
+      "dev": "yarn start"
+    },
+    "devDependencies": {
+      "@storybook/addon-actions": "4.1.13",
+      "@storybook/addon-knobs": "4.1.13",
+      "@storybook/addon-links": "4.1.13",
+      "@storybook/addon-notes": "4.1.13",
+      "@storybook/addon-storyshots": "4.1.13",
+      "@storybook/addon-viewport": "4.1.13",
+      "@storybook/addons": "4.1.13",
+      "@storybook/vue": "4.1.13",
+      "sass-loader": "6.0.7",
+      "vue-loader": "15.7.0"
+    },
+    "engines": {
+      "node": ">= 8.0.0"
+    }
+  }
+  
