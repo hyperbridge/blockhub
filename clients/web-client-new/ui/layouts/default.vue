@@ -6,60 +6,123 @@
             <c-drawer />
         </c-render-condition>
 
-        <vue-snotify></vue-snotify>
+        <vue-snotify />
     </div>
 </template>
 
 <script>
-    import Vue from 'vue'
-    import * as DB from '@/db'
+import Vue from 'vue'
+import * as DB from '@/db'
 
-    import '@/css/styles.scss'
-    import 'swiper/dist/css/swiper.css'
+import '@/css/styles.scss'
+import 'swiper/dist/css/swiper.css'
 
-    export default {
-        name: 'app',
-        props: ['data'],
-        components: {
-            'c-render-condition': () => import('~/components/render-condition').then(m => m.default || m),
-            'c-drawer': () => import('~/components/drawer').then(m => m.default || m),
-            'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m)
+export default {
+    name: 'App',
+    components: {
+        'c-render-condition': () => import('~/components/render-condition').then(m => m.default || m),
+        'c-drawer': () => import('~/components/drawer').then(m => m.default || m),
+        'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m)
+    },
+    props: ['data'],
+    data() {
+        return {
+            renderCondition: 'none'
+        }
+    },
+    computed: {
+        disableAnimations() { return this.$store.state.application.settings.client.animations }
+    },
+    watch: {
+        '$route'(to, from) {
+            $('body').removeClass('show-sidebar')
+            $('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-bars')
+
+            this.$store.state.application.activeModal = null
+
+            if (this.$route.meta.renderCondition) {
+                this.renderCondition = this.$route.meta.renderCondition
+            } else if (this.$route.meta.permission === 'signedIn') {
+                this.renderCondition = 'user'
+            } else if (this.$route.meta.permission === 'developerMode') {
+                this.renderCondition = 'user'
+            } else {
+                this.renderCondition = 'initialized'
+            }
+
+            this.updateEditorMode()
+            this.ensureDesktopWelcome(to)
         },
-        data() {
-            return {
-                renderCondition: 'none',
+        async '$store.state.auth.user'(newVal) {
+            if (this.$store.state.application.signedIn && newVal === undefined) {
+                this.$store.state.application.signedIn = false
+            } else {
+                this.$store.state.application.signedIn = true
+
+                this.$store.state.application.account = {
+                    ...this.$store.state.application.account,
+                    ...this.$store.state.auth.user
+                }
+
+                await this.$api.service('/application/state').find().then(res => {
+                    this.$store.commit('application/updateState', res)
+                })
             }
         },
-        computed: {
-            disableAnimations() { return this.$store.state.application.settings.client.animations }
-        },
-        methods: {
-            updateEditorMode() {
-                // this.$store.state.application.editorMode = 'viewing'
-            },
-            ensureDesktopWelcome(to) {
-                // if (this.$store.state.application.desktopMode
-                // && !this.$store.state.application.signedIn
-                // && (!to ? true : (
-                //     to.path !== '/account/signup'
-                //     && to.path !== '/account/signin'
-                //     && to.path !== '/welcome'
-                //     && to.path !== '/unlock'
-                // ))) {
-                //     this.$router.push({ path: '/welcome' })
-                // }
-            },
-            getExternalState() {
-                const sheetUrl = 'https://spreadsheets.google.com/feeds/list/1QBzZ7O0l3-wsdvl7PgdYKeQrv_wvuQ4FoqrDgiyxugY/1/public/values?alt=json'
+        '$store.state.application.activeProfile.role'(newVal) {
+            if (newVal === 'developer') {
+                this.$store.state.application.developerMode = true
+            }
+        }
+    },
+    mounted() {
+        this.getExternalState()
+        this.ensureDesktopWelcome()
 
-                this.$axios({
-                    method: 'get',
-                    url: sheetUrl
-                })
-                .then((res) => {
+        if (this.$store.state.auth.user) {
+            this.$store.state.application.signedIn = true
+        } else {
+            this.$store.state.application.signedIn = false
+        }
+    },
+    created() {
+        if (this.$route.meta.renderCondition) {
+            this.renderCondition = this.$route.meta.renderCondition
+        } else if (this.$route.meta.permission === 'signedIn') {
+            this.renderCondition = 'user'
+        } else if (this.$route.meta.permission === 'developerMode') {
+            this.renderCondition = 'user'
+        } else {
+            this.renderCondition = 'initialized'
+        }
+    },
+    methods: {
+        updateEditorMode() {
+            // this.$store.state.application.editorMode = 'viewing'
+        },
+        ensureDesktopWelcome(to) {
+            // if (this.$store.state.application.desktopMode
+            // && !this.$store.state.application.signedIn
+            // && (!to ? true : (
+            //     to.path !== '/account/signup'
+            //     && to.path !== '/account/signin'
+            //     && to.path !== '/welcome'
+            //     && to.path !== '/unlock'
+            // ))) {
+            //     this.$router.push({ path: '/welcome' })
+            // }
+        },
+        getExternalState() {
+            const sheetUrl = 'https://spreadsheets.google.com/feeds/list/1QBzZ7O0l3-wsdvl7PgdYKeQrv_wvuQ4FoqrDgiyxugY/1/public/values?alt=json'
+
+            this.$axios({
+                method: 'get',
+                url: sheetUrl
+            })
+                .then(res => {
                     this.entries = res.data.feed.entry
                     try {
-                        for (let i in this.entries) {
+                        for (const i in this.entries) {
                             const entry = this.entries[i]
                             const key = entry.gsx$key.$t
                             const type = entry.gsx$type.$t
@@ -79,82 +142,18 @@
                         console.log(e)
                     }
                 })
-                .catch((err) => {
-                    console.log('Could not contact external state service. Please contact support with this error: ' + JSON.stringify(err))
+                .catch(err => {
+                    console.log(`Could not contact external state service. Please contact support with this error: ${JSON.stringify(err)}`)
                 })
-            },
-            sendDesktopMessage() {
-                if (!window.isElectron) {
-                    return alert('Not on desktop')
-                }
-
-                window.BlockHub.Bridge.sendCommand('ping', this.$refs.desktopMessage.value)
-                window.BlockHub.Bridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
-            }
         },
-        mounted() {
-            this.getExternalState()
-            this.ensureDesktopWelcome()
-
-            if (this.$store.state.auth.user) {
-                this.$store.state.application.signedIn = true
-            } else {
-                this.$store.state.application.signedIn = false
+        sendDesktopMessage() {
+            if (!window.isElectron) {
+                return alert('Not on desktop')
             }
-        },
-        created() {
 
-            if (this.$route.meta.renderCondition) {
-                this.renderCondition = this.$route.meta.renderCondition
-            } else if (this.$route.meta.permission === 'signedIn') {
-                this.renderCondition = 'user'
-            } else if (this.$route.meta.permission === 'developerMode') {
-                this.renderCondition = 'user'
-            } else {
-                this.renderCondition = 'initialized'
-            }
-        },
-        watch: {
-            '$route': function(to, from) {
-                $('body').removeClass('show-sidebar')
-                $('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-bars')
-
-                this.$store.state.application.activeModal = null
-
-                if (this.$route.meta.renderCondition) {
-                    this.renderCondition = this.$route.meta.renderCondition
-                } else if (this.$route.meta.permission === 'signedIn') {
-                    this.renderCondition = 'user'
-                } else if (this.$route.meta.permission === 'developerMode') {
-                    this.renderCondition = 'user'
-                } else {
-                    this.renderCondition = 'initialized'
-                }
-
-                this.updateEditorMode()
-                this.ensureDesktopWelcome(to)
-            },
-            '$store.state.auth.user': async function(newVal) {
-                if (this.$store.state.application.signedIn && newVal === undefined) {
-                    this.$store.state.application.signedIn = false
-                } else {
-                    this.$store.state.application.signedIn = true
-
-                    this.$store.state.application.account = {
-                        ...this.$store.state.application.account,
-                        ...this.$store.state.auth.user
-                    }
-
-                    await this.$api.service('/application/state').find().then((res) => {
-                        this.$store.commit('application/updateState', res)
-                    })
-                }
-            },
-            '$store.state.application.activeProfile.role': function(newVal) {
-                if (newVal === 'developer') {
-                    this.$store.state.application.developerMode = true
-                }
-            }
+            window.BlockHub.Bridge.sendCommand('ping', this.$refs.desktopMessage.value)
+            window.BlockHub.Bridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg))
         }
     }
+}
 </script>

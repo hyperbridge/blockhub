@@ -6,26 +6,30 @@
                     {{ release.version }}
                 </div>
                 <div class="d-flex">
-                    <div v-if="release.latestRelease"
-                         class="latest-badge mr-3">
+                    <div
+                        v-if="release.latestRelease"
+                        class="latest-badge mr-3">
                         Latest Release
                     </div>
                     <div>
                         {{ release.date | timeAgo }}
                     </div>
                 </div>
-                <div class="my-3"
-                     v-html="release.text" />
+                <div
+                    class="my-3"
+                    v-html="release.text" />
                 <hr>
                 <div class="assets-list">
-                    <div v-for="file in release.files"
-                         class="assets-list__item">
+                    <div
+                        v-for="file in release.files"
+                        class="assets-list__item">
                         <div class="icon">
                             <i class="fas fa-file-download" />
                         </div>
                         <div class="title">
-                            <a :href="file.src"
-                               target="_blank">
+                            <a
+                                :href="file.src"
+                                target="_blank">
                                 {{ file.name }}
                             </a>
                         </div>

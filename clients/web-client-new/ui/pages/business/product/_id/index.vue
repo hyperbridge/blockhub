@@ -1,26 +1,30 @@
 <template>
     <c-layout>
         <div class="row">
-            <div v-if="successfulCreationMessage"
-                 class="col-md-12">
+            <div
+                v-if="successfulCreationMessage"
+                class="col-md-12">
                 <p class="alert alert-info">
                     {{ successfulCreationMessage }}
                 </p>
                 <br><br>
             </div>
             <div class="col-md-6">
-                <div v-if="product.id"
-                     class="form-group row align-items-center">
+                <div
+                    v-if="product.id"
+                    class="form-group row align-items-center">
                     <label class="col-sm-3">
                         <label>Change Status</label>
                     </label>
                     <div class="col-sm-9">
-                        <select v-model="product.status"
-                                name="change_status"
-                                class="form-control"
-                                @change="updateStatus">
-                            <option value=""
-                                    selected>
+                        <select
+                            v-model="product.status"
+                            name="change_status"
+                            class="form-control"
+                            @change="updateStatus">
+                            <option
+                                value=""
+                                selected>
                                 Choose Status
                             </option>
                             <option value="0">
@@ -46,10 +50,11 @@
                         <label>Title</label>
                     </label>
                     <div class="col-sm-9">
-                        <input v-model="product.name"
-                               type="text"
-                               class="form-control"
-                               placeholder="">
+                        <input
+                            v-model="product.name"
+                            type="text"
+                            class="form-control"
+                            placeholder="">
                         <span class="form-text" />
                     </div>
                 </div>
@@ -58,10 +63,11 @@
                         <label>Type</label>
                     </label>
                     <div class="col-sm-9">
-                        <select v-model="product.type"
-                                class="form-control actionWithSelected"
-                                tabindex="-1"
-                                aria-hidden="true">
+                        <select
+                            v-model="product.type"
+                            class="form-control actionWithSelected"
+                            tabindex="-1"
+                            aria-hidden="true">
                             <option />
                             <option value="game">
                                 Game
@@ -80,10 +86,11 @@
                         <label>Description</label>
                     </label>
                     <div class="col-sm-9">
-                        <input v-model="product.description"
-                               type="text"
-                               class="form-control"
-                               placeholder="">
+                        <input
+                            v-model="product.description"
+                            type="text"
+                            class="form-control"
+                            placeholder="">
                         <span class="form-text" />
                     </div>
                 </div>
@@ -92,8 +99,9 @@
                         <label>Content</label>
                     </label>
                     <div class="col-sm-9">
-                        <textarea v-model="product.content"
-                                  class="form-control" />
+                        <textarea
+                            v-model="product.content"
+                            class="form-control" />
 
                         <span class="form-text" />
                     </div>
@@ -101,8 +109,9 @@
             </div>
             <div class="col-md-6" />
             <div class="col-12">
-                <div v-if="product.id"
-                     class="row">
+                <div
+                    v-if="product.id"
+                    class="row">
                     <div class="col-6">
                         Ownership
                     </div>
@@ -117,10 +126,11 @@
                                 <label>Developer Address</label>
                             </label>
                             <div class="col-sm-9">
-                                <input v-model="product.developer"
-                                       type="text"
-                                       class="form-control"
-                                       placeholder="">
+                                <input
+                                    v-model="product.developer"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="">
                                 <span class="form-text" />
                             </div>
                         </div>
@@ -129,10 +139,11 @@
                                 <label>Developer ID</label>
                             </label>
                             <div class="col-sm-9">
-                                <input v-model="product.developerId"
-                                       type="text"
-                                       class="form-control"
-                                       placeholder="">
+                                <input
+                                    v-model="product.developerId"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="">
                                 <span class="form-text" />
                             </div>
                         </div>
@@ -145,46 +156,53 @@
             </div>
 
             <div class="col-12">
-                <c-heading-bar-color class="mt-4 mb-4"
-                                     colorCode="#444"
-                                     textAlign="center"
-                                     hidden>
+                <c-heading-bar-color
+                    class="mt-4 mb-4"
+                    colorCode="#444"
+                    textAlign="center"
+                    hidden>
                     Advanced Options
                 </c-heading-bar-color>
 
                 <div @click="toggleAdvanced">
-                    <i class="mr-2 fas"
-                       :class="advanced ? 'fa-angle-up' : 'fa-angle-down'" />
+                    <i
+                        class="mr-2 fas"
+                        :class="advanced ? 'fa-angle-up' : 'fa-angle-down'" />
                     {{ advanced ? 'Hide' : 'Show' }} Advanced
                 </div>
             </div>
 
-            <div v-if="advanced"
-                 class="col-md-12">
-                <div class="form-group row"
-                     style="text-align: center">
+            <div
+                v-if="advanced"
+                class="col-md-12">
+                <div
+                    class="form-group row"
+                    style="text-align: center">
                     <br>
                     <h3 style="width: 100%">
                         Raw Data Editor
                     </h3>
                     <br><br>
-                    <textarea :value="JSON.stringify(product)"
-                              rows="10"
-                              cols="50"
-                              @input="updateProductRaw($event.target.value)" />
+                    <textarea
+                        :value="JSON.stringify(product)"
+                        rows="10"
+                        cols="50"
+                        @input="updateProductRaw($event.target.value)" />
                     <br><br>
                     <span class="form-text" />
-                    <c-json-editor v-model="product"
-                                   :objData="product"
-                                   style="margin: 0 auto" />
+                    <c-json-editor
+                        v-model="product"
+                        :objData="product"
+                        style="margin: 0 auto" />
                 </div>
             </div>
 
             <div class="col-md-12 margin-top-20">
-                <c-button status="second-info"
-                          size="lg"
-                          class="mb-4"
-                          @click="$store.commit('application/activateModal', 'import-product')">
+                <c-button
+                    status="second-info"
+                    size="lg"
+                    class="mb-4"
+                    @click="$store.commit('application/activateModal', 'import-product')">
                     Import
                 </c-button>
             </div>
@@ -192,21 +210,25 @@
 
         <template slot="menu">
             <div class="row">
-                <div v-if="product.id"
-                     class="col-12 text-right">
-                    <c-button status="success"
-                              size="lg"
-                              icon="save"
-                              @click="save">
+                <div
+                    v-if="product.id"
+                    class="col-12 text-right">
+                    <c-button
+                        status="success"
+                        size="lg"
+                        icon="save"
+                        @click="save">
                         Save
                     </c-button>
                 </div>
-                <div v-if="!product.id"
-                     class="col-12 text-right">
-                    <c-button status="success"
-                              size="lg"
-                              icon="plus"
-                              @click="create">
+                <div
+                    v-if="!product.id"
+                    class="col-12 text-right">
+                    <c-button
+                        status="success"
+                        size="lg"
+                        icon="plus"
+                        @click="create">
                         Create
                     </c-button>
                 </div>
@@ -216,9 +238,10 @@
         <c-basic-popup
             :activated="$store.state.application.activeModal === 'import-product'"
             @close="$store.commit('application/activateModal', null)">
-            <div slot="header"
-                 class="h4"
-                 style="text-align: left">
+            <div
+                slot="header"
+                class="h4"
+                style="text-align: left">
                 Import Product
             </div>
             <template slot="body">
@@ -265,32 +288,37 @@
                     <br>
                     <div class="form-group row">
                         <div class="col-12">
-                            <input ref="importUrl"
-                                   class="form-control"
-                                   type="text"
-                                   value="https://store.steampowered.com/app/441830/I_am_Setsuna/">
+                            <input
+                                ref="importUrl"
+                                class="form-control"
+                                type="text"
+                                value="https://store.steampowered.com/app/441830/I_am_Setsuna/">
                             <span class="form-text">Example: https://store.steampowered.com/app/441830/I_am_Setsuna/</span>
                         </div>
                     </div>
 
-                    <c-button class="c-button--lg outline-white margin-top-20 margin-auto"
-                              @click="startImport">
+                    <c-button
+                        class="c-button--lg outline-white margin-top-20 margin-auto"
+                        @click="startImport">
                         GO
                     </c-button>
                 </div>
                 <br>
-                <div v-if="importing"
-                     class="padding-40 loading-process"
-                     style="position: relative">
+                <div
+                    v-if="importing"
+                    class="padding-40 loading-process"
+                    style="position: relative">
                     <div class="loading loading--w-spinner">
                         <div><div class="loading-spinner" /></div>
                     </div>
                 </div>
             </template>
-            <p slot="footer"
-               class="margin-top-20">
-                <c-button status="dark"
-                          to="/help">
+            <p
+                slot="footer"
+                class="margin-top-20">
+                <c-button
+                    status="dark"
+                    to="/help">
                     Need help? Check the Help Center
                 </c-button>
             </p>

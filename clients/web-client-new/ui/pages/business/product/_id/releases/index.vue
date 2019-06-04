@@ -4,54 +4,60 @@
             <div class="row">
                 <div class="col-12">
                     <c-buttons-group>
-                        <c-button :status="ifList"
-                                  size="md"
-                                  :shadow="false"
-                                  iconHide
-                                  @click="listType = 'list'">
+                        <c-button
+                            :status="ifList"
+                            size="md"
+                            :shadow="false"
+                            iconHide
+                            @click="listType = 'list'">
                             Releases
                         </c-button>
-                        <c-button :status="ifTags"
-                                  size="md"
-                                  :shadow="false"
-                                  iconHide
-                                  @click="listType = 'tags'">
+                        <c-button
+                            :status="ifTags"
+                            size="md"
+                            :shadow="false"
+                            iconHide
+                            @click="listType = 'tags'">
                             Tags
                         </c-button>
                     </c-buttons-group>
-                    <c-button status="success"
-                              icon="plus"
-                              class="float-right"
-                              size="md"
-                              @click="$router.push({ path: '/business/new-release' })">
+                    <c-button
+                        status="success"
+                        icon="plus"
+                        class="float-right"
+                        size="md"
+                        @click="$router.push({ path: '/business/new-release' })">
                         Draft a new release
                     </c-button>
                 </div>
                 <div class="col-12">
                     <div class="history-list">
                         <div v-if="listType == 'list'">
-                            <c-release-list-item v-for="(release) in sortedList"
-                                                 :id="release.id"
-                                                 :key="release.id"
-                                                 :version="release.version"
-                                                 :date="release.date"
-                                                 :author="release.author"
-                                                 :size="release.size"
-                                                 :files="release.files"
-                                                 :text="release.text"
-                                                 :latestRelease="release.latestRelease" />
+                            <c-release-list-item
+                                v-for="(release) in sortedList"
+                                :id="release.id"
+                                :key="release.id"
+                                :version="release.version"
+                                :date="release.date"
+                                :author="release.author"
+                                :size="release.size"
+                                :files="release.files"
+                                :text="release.text"
+                                :latestRelease="release.latestRelease" />
                         </div>
-                        <div v-if="listType == 'tags'"
-                             class="history-list__tags-title">
+                        <div
+                            v-if="listType == 'tags'"
+                            class="history-list__tags-title">
                             <i class="fas fa-tag mr-2" /> Tags
                         </div>
                         <div v-if="listType == 'tags'">
-                            <c-release-tag-item v-for="release in sortedList"
-                                                :id="release.id"
-                                                :key="release.id"
-                                                :version="release.version"
-                                                :date="release.date"
-                                                :author="release.author" />
+                            <c-release-tag-item
+                                v-for="release in sortedList"
+                                :id="release.id"
+                                :key="release.id"
+                                :version="release.version"
+                                :date="release.date"
+                                :author="release.author" />
                         </div>
                     </div>
                 </div>

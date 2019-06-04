@@ -1,11 +1,14 @@
 <template>
-    <c-layout navigationKey="store"
-              :breadcrumbLinks="breadcrumbLinks">
-        <div class="row"
-             hidden>
+    <c-layout
+        :breadcrumbLinks="breadcrumbLinks"
+        navigationKey="store">
+        <div
+            class="row"
+            hidden>
             <div class="col-12 mb-4">
-                <c-banner :imgSrc="'/img/banners/banner-3.png'"
-                          to="/token">
+                <c-banner
+                    :imgSrc="'/img/banners/banner-3.png'"
+                    to="/token">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h3 class="text-yellow">
@@ -14,11 +17,12 @@
                             <p>BlockHub has launched and the token sale is now live!</p>
                         </div>
                         <div class="banner-action">
-                            <c-button tag="div"
-                                      tatus="info"
-                                      iconHide
-                                      size="lg"
-                                      to="/token">
+                            <c-button
+                                tag="div"
+                                tatus="info"
+                                iconHide
+                                size="lg"
+                                to="/token">
                                 JOIN NOW
                             </c-button>
                         </div>
@@ -27,23 +31,28 @@
             </div>
         </div>
 
-        <div class="row"
-             hidden>
-            <div v-if="!$store.state.application.desktopMode"
-                 class="col-12 mb-4">
+        <div
+            class="row"
+            hidden>
+            <div
+                v-if="!$store.state.application.desktopMode"
+                class="col-12 mb-4">
                 <c-welcome-box />
             </div>
         </div>
 
-        <c-infinite-content :list="list"
-                            :showSignIn="true" />
+        <c-infinite-content
+            :list="list"
+            :showSignIn="true" />
 
-        <c-custom-modal v-if="showWelcomeModal"
-                        title="BlockHub Preview"
-                        @close="closeModal">
-            <div slot="modalBody"
-                 class="help-modal__content"
-                 style="max-width: 500px">
+        <c-custom-modal
+            v-if="showWelcomeModal"
+            @close="closeModal"
+            title="BlockHub Preview">
+            <div
+                slot="modalBody"
+                class="help-modal__content"
+                style="max-width: 500px">
                 <h4 class="h2 mb-3">
                     Welcome
                 </h4>
@@ -54,16 +63,19 @@
                     We're a platform built by the community, for the community.
                 </p>
                 <p hidden>
-                    <c-button to="/help"
-                              target="_blank">
+                    <c-button
+                        to="/help"
+                        target="_blank">
                         Check out the BlockHub crowdfund
                     </c-button>
                 </p>
             </div>
-            <div slot="modalFooter"
-                 class="text-right w-100">
-                <c-button size="md"
-                          @click="closeModal">
+            <div
+                slot="modalFooter"
+                class="text-right w-100">
+                <c-button
+                    @click="closeModal"
+                    size="md">
                     Got it
                 </c-button>
             </div>
