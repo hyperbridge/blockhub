@@ -7,43 +7,43 @@ import { CookieStorage } from 'cookie-storage'
 let client = null
 
 if (process.client) {
-  const getCookie = (name) => {
-    var value = "; " + document.cookie;
-    var parts = value.split("; " + name + "=");
-    if (parts.length >= 2) return parts.pop().split(";").shift();
-  }
+    const getCookie = name => {
+        const value = `; ${document.cookie}`
+        const parts = value.split(`; ${name}=`)
+        if (parts.length >= 2) return parts.pop().split(';').shift()
+    }
 
-  const setCookie = (variable, value, expires_seconds) => {
-    var d = new Date();
-    d = new Date(d.getTime() + 1000 * expires_seconds);
-    document.cookie = variable + '=' + value + '; expires=' + d.toGMTString() + ';';
-  }
+    const setCookie = (variable, value, expires_seconds) => {
+        let d = new Date()
+        d = new Date(d.getTime() + 1000 * expires_seconds)
+        document.cookie = `${variable}=${value}; expires=${d.toGMTString()};`
+    }
 
-  if (window.location.hostname === 'blockhub.gg.local') {
-    setCookie('WEB_SERVICE_URL', 'http://blockhub.gg.local:9001')
-  }
+    if (window.location.hostname === 'blockhub.gg.local') {
+        setCookie('WEB_SERVICE_URL', 'http://blockhub.gg.local:9001')
+    }
 
-  client = (serviceUrl, storage) => {
-    if (!serviceUrl) serviceUrl = getCookie('WEB_SERVICE_URL') || 'https://api.blockhub.gg'
-    if (!storage) storage = new CookieStorage()
+    client = (serviceUrl, storage) => {
+        if (!serviceUrl) serviceUrl = getCookie('WEB_SERVICE_URL') || 'https://api.blockhub.gg'
+        if (!storage) storage = new CookieStorage()
 
-    const socket = io(serviceUrl, { transports: ['websocket'] }) // https://api.blockhub.gg // http://localhost:9001
+        const socket = io(serviceUrl, { transports: ['websocket'] }) // https://api.blockhub.gg // http://localhost:9001
 
-    return feathers()
-      //.configure(hooks())
-      .configure(socketio(socket, { timeout: 15000 }))
-      .configure(auth({ storage }))
-  }
+        return feathers()
+        // .configure(hooks())
+            .configure(socketio(socket, { timeout: 15000 }))
+            .configure(auth({ storage }))
+    }
 } else {
-  client = (serviceUrl, storage) => {
-    //const serviceUrl = 'https://api.blockhub.gg'
-    const socket = io(serviceUrl) // https://api.blockhub.gg // http://localhost:9001
+    client = (serviceUrl, storage) => {
+    // const serviceUrl = 'https://api.blockhub.gg'
+        const socket = io(serviceUrl) // https://api.blockhub.gg // http://localhost:9001
 
-    return feathers()
-      //.configure(hooks())
-      .configure(socketio(socket, { timeout: 15000 }))
-      .configure(auth({ storage }))
-  }
+        return feathers()
+        // .configure(hooks())
+            .configure(socketio(socket, { timeout: 15000 }))
+            .configure(auth({ storage }))
+    }
 }
 
 export default client
@@ -51,7 +51,7 @@ export default client
 
 // BELOW IS USAGE CODE, FOR REFERENCE
 
-//feathersClient.service('/users')
+// feathersClient.service('/users')
 /* .configure(feathersVuex(store, {
   idField: '_id',
   auth: {

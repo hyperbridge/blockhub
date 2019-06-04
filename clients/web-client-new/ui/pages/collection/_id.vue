@@ -145,8 +145,6 @@ export default {
                 collection && { to: { path: `/collection/${collection.id}` }, title: collection.name }
             ]
         }
-    },
-    created() {
     }
 }
 </script>

@@ -1,6 +1,6 @@
 import * as DB from '../../db'
 
-export let config = {
+export const config = {
 }
 
 const local = {
@@ -8,157 +8,129 @@ const local = {
     store: null,
     router: null,
     unlockResolve: null,
-    events: {},
+    events: {}
 }
 
 export const on = (event, listener) => {
     if (!Array.isArray(local.events[event])) {
-        local.events[event] = [];
+        local.events[event] = []
     }
-    local.events[event].push(listener);
-    return () => removeListener(event, listener);
+    local.events[event].push(listener)
+    return () => removeListener(event, listener)
 }
 
 export const removeListener = (event, listener) => {
     if (Array.isArray(local.events[event])) {
-        const idx = local.events[event].indexOf(listener);
+        const idx = local.events[event].indexOf(listener)
         if (idx > -1) {
-            local.events[event].splice(idx, 1);
+            local.events[event].splice(idx, 1)
         }
     }
 }
 
 export const emit = (event, ...args) => {
     if (Array.isArray(local.events[event])) {
-        local.events[event].forEach(listener => listener.apply(this, args));
+        local.events[event].forEach(listener => listener.apply(this, args))
     }
 }
 
 export const once = (event, listener) => {
     const remove = on(event, (...args) => {
-        remove();
-        listener.apply(this, args);
-    });
+        remove()
+        listener.apply(this, args)
+    })
 }
 
 
-export const isConnected = () => {
-    return process.client && window.isElectron
-}
+export const isConnected = () => process.client && window.isElectron
 
-export const ID = () => {
+export const ID = () =>
     // Math.random should be unique because of its seeding algorithm.
     // Convert it to base 36 (numbers + letters), and grab the first 9 characters
     // after the decimal.
-    return '_' + Math.random().toString(36).substr(2, 9);
-}
+    `_${Math.random().toString(36).substr(2, 9)}`
 
-export const createTransactionRequest = async (data) => {
-    return await sendCommand('createTransactionRequest', data)
-}
 
-export const sendTransactionRequest = async (data) => {
-    return await sendCommand('sendTransactionRequest', data)
-}
+export const createTransactionRequest = async data => await sendCommand('createTransactionRequest', data)
 
-export const getPassphraseRequest = async (data) => {
-    return await sendCommand('getPassphraseRequest', data)
-}
+export const sendTransactionRequest = async data => await sendCommand('sendTransactionRequest', data)
 
-export const createAccountRequest = async (data) => {
-    return await sendCommand('createAccountRequest', data)
-}
+export const getPassphraseRequest = async data => await sendCommand('getPassphraseRequest', data)
 
-export const updateAccountRequest = async (data) => {
-    return await sendCommand('updateAccountRequest', data)
-}
+export const createAccountRequest = async data => await sendCommand('createAccountRequest', data)
 
-export const initProtocol = async (data) => {
-    return await sendCommand('initProtocol', data)
-}
+export const updateAccountRequest = async data => await sendCommand('updateAccountRequest', data)
 
-export const createFundingProject = async (data) => {
-    return await sendCommand('createFundingProject', data)
-}
+export const initProtocol = async data => await sendCommand('initProtocol', data)
 
-export const updateFundingProject = async (data) => {
-    return await sendCommand('updateFundingProject', data)
-}
+export const createFundingProject = async data => await sendCommand('createFundingProject', data)
 
-export const deployContract = async (data) => {
-    return await sendCommand('deployContract', data)
-}
+export const updateFundingProject = async data => await sendCommand('updateFundingProject', data)
 
-export const resolvePromptPasswordRequest = async (password) => {
-    return new Promise(async (resolve) => {
-        const res = {
-            password
-        }
+export const deployContract = async data => await sendCommand('deployContract', data)
 
-        local.unlockResolve(res)
+export const resolvePromptPasswordRequest = async password => new Promise(async resolve => {
+    const res = {
+        password
+    }
+
+    local.unlockResolve(res)
+})
+
+export const updateState = async data => await sendCommand('updateState', data)
+
+export const promptPasswordRequest = async data => new Promise(async resolve => {
+    if (data.error) {
+
+    }
+
+    local.store.commit('application/updateState', {
+        locked: true,
+        signedIn: false
     })
-}
 
-export const updateState = async (data) => {
-    return await sendCommand('updateState', data)
-}
+    local.router.push('/unlock')
 
-export const promptPasswordRequest = async (data) => {
-    return new Promise(async (resolve) => {
-        if (data.error) {
+    // local.store.commit('application/activateModal', 'unlock')
 
+    local.unlockResolve = resolve
+})
+
+export const setAccountRequest = async data => new Promise(async resolve => {
+    if (data.account.address) {
+        // local.store.commit('application/activateModal', null)
+
+        // We were locked
+        if (DB.application.config.data[0].locked) {
+            local.router.push('/')
         }
 
         local.store.commit('application/updateState', {
-            locked: true,
-            signedIn: false
+            locked: false
         })
+    } else {
+        // local.store.commit('application/activateModal', null)
 
-        local.router.push('/unlock')
+        local.router.push('/welcome')
 
-        //local.store.commit('application/activateModal', 'unlock')
+        local.store.commit('application/updateState', {
+            locked: true
+        })
+    }
 
-        local.unlockResolve = resolve
-    })
-}
+    // DB.application.config.data[0].account = {
+    //     ...DB.application.config.data[0].account,
+    //     ...data.account
+    // }
 
-export const setAccountRequest = async (data) => {
-    return new Promise(async (resolve) => {
-        if (data.account.address) {
-            //local.store.commit('application/activateModal', null)
+    // DB.application.config.data[0].activeProfile = data.account.profiles.find(i => i.id === data.activeProfile.id)
 
-            // We were locked
-            if (DB.application.config.data[0].locked) {
-                local.router.push('/')
-            }
+    // DB.application.config.data[0].developerMode = DB.application.config.data[0].activeProfile.role === 'developer'
 
-            local.store.commit('application/updateState', {
-                locked: false
-            })
-        } else {
-            //local.store.commit('application/activateModal', null)
+    // DB.save()
 
-            local.router.push('/welcome')
-            
-            local.store.commit('application/updateState', {
-                locked: true
-            })
-        }
-
-        // DB.application.config.data[0].account = {
-        //     ...DB.application.config.data[0].account,
-        //     ...data.account
-        // }
-
-        // DB.application.config.data[0].activeProfile = data.account.profiles.find(i => i.id === data.activeProfile.id)
-
-        // DB.application.config.data[0].developerMode = DB.application.config.data[0].activeProfile.role === 'developer'
-
-        //DB.save()
-
-        resolve()
-    })
-}
+    resolve()
+})
 
 export const sendCommand = async (key, data = {}, peer = null, responseId = null) => {
     if (!isConnected()) {
@@ -173,10 +145,10 @@ export const sendCommand = async (key, data = {}, peer = null, responseId = null
     }
 
     const cmd = {
-        key: key,
-        responseId: responseId,
+        key,
+        responseId,
         requestId: ID(),
-        data: data
+        data
     }
 
     console.log('[Bridge] Sending command', cmd)
@@ -185,8 +157,8 @@ export const sendCommand = async (key, data = {}, peer = null, responseId = null
         console.warn('[Bridge] Not connected to bridge. This shouldnt happen.')
     }
 
-    let _resolve, _reject
-    let promise = new Promise((resolve, reject) => {
+    let _resolve; let _reject
+    const promise = new Promise((resolve, reject) => {
         _resolve = resolve
         _reject = reject
     })
@@ -234,7 +206,7 @@ export const runCommand = async (cmd, meta = {}) => {
             // return resolve()
         } else if (cmd.key === 'setProtocolConfig') {
             const { currentNetwork, protocolName, config } = cmd.data
-        
+
             local.store.state.application.ethereum[currentNetwork].packages[protocolName] = config
             local.store.dispatch('application/updateState')
         } else if (cmd.key === 'setAccountRequest') {
@@ -243,7 +215,7 @@ export const runCommand = async (cmd, meta = {}) => {
             // sendCommand('setAccountRequestResponse', res, meta.client, cmd.requestId)
 
             // return resolve()
-        } 
+        }
         // else if (cmd.key === 'setMode') {
         //     local.store.state.application.mode = cmd.data
 
@@ -256,13 +228,13 @@ export const runCommand = async (cmd, meta = {}) => {
         //     }
         //     // store.state.application.locked = true
         //     // store.state.application.signedIn = false
-        // } 
+        // }
         else if (cmd.key === 'updateReady') {
             console.log(cmd.data)
 
             await sendCommand('quitAndInstall')
         } else if (cmd.key === 'updateState') {
-            local.store.commit(cmd.data.module + '/updateState', cmd.data.state)
+            local.store.commit(`${cmd.data.module}/updateState`, cmd.data.state)
         } else if (cmd.key === 'systemError') {
             console.warn('[Bridge] Received system error from desktop', cmd.data)
 
@@ -272,7 +244,7 @@ export const runCommand = async (cmd, meta = {}) => {
             })
 
             // Don't let promise callbacks get stuck
-            for(let i in local.requests) {
+            for (const i in local.requests) {
                 local.requests[i].reject()
 
                 delete local.requests[i]
@@ -300,7 +272,7 @@ export const initCommandMonitor = () => {
 }
 
 export const initResizeMonitor = () => {
-    window.addEventListener('resize', function () {
+    window.addEventListener('resize', () => {
         sendCommand('resize', {
             width: window.innerWidth,
             height: window.innerHeight
@@ -309,18 +281,18 @@ export const initResizeMonitor = () => {
 }
 
 export const initContextMenuHandler = () => {
-    document.body.addEventListener('contextmenu', (e) => {
+    document.body.addEventListener('contextmenu', e => {
         e.preventDefault()
         e.stopPropagation()
 
-        let node = e.target
+        const node = e.target
 
         sendCommand('showContextMenuRequest', {
             x: e.clientX,
             y: e.clientY,
             nodeName: node.nodeName
         })
-        
+
         // while (node) {
         //     if (node.nodeName.match(/^(input|textarea|p)$/i) || node.isContentEditable) {
         //         sendCommand('showContextMenuRequest', {
@@ -348,7 +320,7 @@ export const init = (store, router) => {
 
     console.log('[Bridge] Initializing')
 
-    on('promptPasswordRequest', (data) => {
+    on('promptPasswordRequest', data => {
         DB.application.config.data[0].account.secretQuestion1 = data.secretQuestion1
     })
 

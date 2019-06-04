@@ -94,41 +94,41 @@ export default {
                 {
                     id: 1,
                     title: 'New to BlockHub',
-                    last_post_time: '2018-08-01T04:09:00.000Z',
-                    discussions_count: '8234'
+                    lastPostTime: '2018-08-01T04:09:00.000Z',
+                    discussionsCount: '8234'
                 },
                 {
                     id: 2,
                     title: 'Help and Tips',
-                    last_post_time: '2018-02-13T04:09:00.000Z',
-                    discussions_count: '34'
+                    lastPostTime: '2018-02-13T04:09:00.000Z',
+                    discussionsCount: '34'
                 },
                 {
                     id: 3,
                     title: 'Proposals and Ideas',
-                    last_post_time: '2017-11-04T04:09:00.000Z',
-                    discussions_count: '127',
+                    lastPostTime: '2017-11-04T04:09:00.000Z',
+                    discussionsCount: '127',
                     icon: 'fas fa-life-ring'
                 },
                 {
                     id: 4,
                     title: 'BlockHub for Mac',
-                    last_post_time: '2018-07-24T04:09:00.000Z',
-                    discussions_count: '37',
+                    lastPostTime: '2018-07-24T04:09:00.000Z',
+                    discussionsCount: '37',
                     icon: 'fab fa-apple'
                 },
                 {
                     id: 5,
                     title: 'BlockHub for Windows',
-                    last_post_time: '2018-03-21T04:09:00.000Z',
-                    discussions_count: '328',
+                    lastPostTime: '2018-03-21T04:09:00.000Z',
+                    discussionsCount: '328',
                     icon: 'fab fa-windows'
                 },
                 {
                     id: 4,
                     title: 'BlockHub for Linux',
-                    last_post_time: '2016-07-24T04:09:00.000Z',
-                    discussions_count: '41',
+                    lastPostTime: '2016-07-24T04:09:00.000Z',
+                    discussionsCount: '41',
                     icon: 'fab fa-linux'
                 }
             ]

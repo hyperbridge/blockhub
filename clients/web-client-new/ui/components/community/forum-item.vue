@@ -13,7 +13,7 @@
                 {{ calculateSince }}
             </div>
             <div class="discussions-count">
-                {{ forum.discussions_count }}
+                {{ forum.discussionsCount }}
             </div>
         </div>
     </div>
@@ -28,11 +28,11 @@ export default {
             return 'fas fa-comments'
         },
         calculateSince() {
-            const tTime = new Date(this.forum.last_post_time)
+            const tTime = new Date(this.forum.lastPostTime)
             const cTime = new Date()
             const sinceMin = Math.round((cTime - tTime) / 60000)
             let since; let sinceHr; let sinceDay
-            console.log('0', this.forum.last_post_time)
+            console.log('0', this.forum.lastPostTime)
             if (sinceMin == 0) {
                 const sinceSec = Math.round((cTime - tTime) / 1000)
                 if (sinceSec < 10) { since = 'less than 10 seconds ago' } else if (sinceSec < 20) { since = 'less than 20 seconds ago' } else { since = 'half a minute ago' }

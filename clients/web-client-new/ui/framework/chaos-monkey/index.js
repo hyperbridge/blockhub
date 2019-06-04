@@ -1,19 +1,18 @@
-export let config = {
+export const config = {
     ENABLED: true,
     FORCED: false,
     STRENGTH: null
 }
 
-export const init = function (strength) {
+export const init = function(strength) {
     config.STRENGTH = strength
 
     if (!config.STRENGTH) {
         config.STRENGTH = Math.floor(Math.random() * 10)
     }
-
 }
 
-export const random = function () {
+export const random = function() {
     if (!config.ENABLED) {
         return false
     }
@@ -27,9 +26,9 @@ export const random = function () {
         1: config.STRENGTH / 100
     }
 
-    let i, sum = 0, r = Math.random()
+    let i; let sum = 0; const r = Math.random()
     for (i in spec) {
-        sum += spec[i];
+        sum += spec[i]
         if (r <= sum) return i ? true : false
     }
 }

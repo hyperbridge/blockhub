@@ -15,7 +15,7 @@
                     </c-block>
                 </div>
                 <div class="col-12 col-lg-4 col-xl-3">
-                    <c-block title="Links & Resources"
+                    <c-block title="Links &amp; Resources"
                              :noGutter="true"
                              :onlyContentBg="true">
                         <div class="d-flex flex-column">

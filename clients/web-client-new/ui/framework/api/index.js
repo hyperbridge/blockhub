@@ -1,9 +1,9 @@
-export const service = (serviceKey) => {
-    console.log('[BlockHub] Service: ' + serviceKey)
+export const service = serviceKey => {
+    console.log(`[BlockHub] Service: ${serviceKey}`)
 
     if (BlockHub.Bridge.isConnected()) { // && BlockHub.Bridge.canFulfillRequest(endpoint
         return {
-            find: function (params) {
+            find(params) {
                 BlockHub.Bridge.sendCommand('service', {
                     service,
                     type: 'find',
@@ -11,7 +11,6 @@ export const service = (serviceKey) => {
                 })
             }
         }
-    } else {
-        return BlockHub.WebClient.service(serviceKey)
     }
+    return BlockHub.WebClient.service(serviceKey)
 }

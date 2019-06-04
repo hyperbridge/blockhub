@@ -1,10 +1,10 @@
 <template>
     <div class="community-item"
-         :class="{ is_reply: reply }">
+         :class="{ 'is-reply': reply }">
         <div class="community-item__header">
             <div class="icon">
                 <i class="fas"
-                   :class="post_icon" />
+                   :class="postIcon" />
             </div>
             <div class="text">
                 <router-link :to="{ name: 'Community Discussion', params: {id: post.id } }">
@@ -81,7 +81,7 @@ export default {
         }
     },
     computed: {
-        post_icon() {
+        postIcon() {
             switch (this.post.status) {
             case 'pinned':
                 return 'fa-map-pin'
@@ -103,7 +103,7 @@ export default {
         border: 1px solid rgba(112, 112, 112, .2);
         border-radius: 5px;
         color: #fff;
-        &.is_reply {
+        &.is-reply {
             /*background: rgba(255, 255, 255, .1);*/
         }
     }

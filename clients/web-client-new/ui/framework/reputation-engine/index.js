@@ -8,10 +8,9 @@ const local = {
 }
 
 export const getProfile = () => {
-    const profile = local.store.state.application.activeProfile ?
-        local.store.state.application.activeProfile
-        :
-        local.store.state.application.pendingProfile
+    const profile = local.store.state.application.activeProfile
+        ? local.store.state.application.activeProfile
+        : local.store.state.application.pendingProfile
 
     if (local.cache.profileId !== profile.id) {
         local.cache.profileId = profile.id
@@ -34,15 +33,13 @@ export const recacheEvents = () => {
     })
 }
 
-export const getReputation = () => {
-    return getProfile().reputation
-}
+export const getReputation = () => getProfile().reputation
 
 export const recalculateReputation = () => {
 
 }
 
-export const notify = (notice) => {
+export const notify = notice => {
     if (process.client) {
         window.BlockHub.Notification && window.BlockHub.Notification.info(notice.body, notice.title, {
             timeout: 5000,
@@ -59,15 +56,13 @@ export const addEvent = (title, message, event) => {
 
     if (event.key === 'REPUTATION') {
         notify({
-            title: title,
+            title,
             body: message
         })
     }
 }
 
-export const hasAward = (award) => {
-    return !!local.cache.eventsKeyedByAward['REPUTATION' + award]
-}
+export const hasAward = award => Boolean(local.cache.eventsKeyedByAward[`REPUTATION${  award}`])
 
 export const browseAward = () => {
     const award = 'BROWSE'
@@ -113,7 +108,7 @@ export const monitor = () => {
 
         setTimeout(check, 1000)
     }
-    
+
     check()
 }
 
