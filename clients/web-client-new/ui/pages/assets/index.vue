@@ -3,24 +3,28 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 margin-bottom-30">
-                    <c-main-banner v-if="main_banner"
-                                   class="margin-bottom-30"
-                                   :image="main_banner.img"
-                                   :logo="main_banner.logo" />
+                    <c-main-banner
+                        v-if="main_banner"
+                        class="margin-bottom-30"
+                        :image="main_banner.img"
+                        :logo="main_banner.logo" />
 
                     <c-block>
-                        <c-heading-bar name="Item LookUp"
-                                       :showArrows="false"
-                                       :showBackground="false"
-                                       :showActions="true">
+                        <c-heading-bar
+                            name="Item LookUp"
+                            :showArrows="false"
+                            :showBackground="false"
+                            :showActions="true">
                             <template slot="additional-action">
-                                <div slot="pagination"
-                                     class="assets-swiper-pagination swiper-pagination" />
+                                <div
+                                    slot="pagination"
+                                    class="assets-swiper-pagination swiper-pagination" />
                             </template>
                         </c-heading-bar>
                         <c-swiper :options="assetsSlider">
-                            <c-swiper-slide v-for="(item, index) in assets"
-                                            :key="index">
+                            <c-swiper-slide
+                                v-for="(item, index) in assets"
+                                :key="index">
                                 <c-assets-item :item="item" />
                             </c-swiper-slide>
                         </c-swiper>
@@ -29,28 +33,34 @@
                 <div class="col-12 col-lg-6 margin-bottom-30">
                     <c-block>
                         <div class="img-slider position-relative">
-                            <c-swiper :options="imgSlider"
-                                      style="border-radius: 5px">
+                            <c-swiper
+                                :options="imgSlider"
+                                style="border-radius: 5px">
                                 <c-swiper-slide>
-                                    <c-img src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg"
-                                           class="img-fluid" />
+                                    <c-img
+                                        src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg"
+                                        class="img-fluid" />
                                 </c-swiper-slide>
                                 <c-swiper-slide>
-                                    <c-img src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg"
-                                           class="img-fluid" />
+                                    <c-img
+                                        src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg"
+                                        class="img-fluid" />
                                 </c-swiper-slide>
                                 <c-swiper-slide>
-                                    <c-img src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg"
-                                           class="img-fluid" />
+                                    <c-img
+                                        src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg"
+                                        class="img-fluid" />
                                 </c-swiper-slide>
                                 <c-swiper-slide>
-                                    <c-img src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg"
-                                           class="img-fluid" />
+                                    <c-img
+                                        src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg"
+                                        class="img-fluid" />
                                 </c-swiper-slide>
                             </c-swiper>
                             <div class="slider-dots">
-                                <div slot="pagination"
-                                     class="img-slider-paginetion swiper-pagination" />
+                                <div
+                                    slot="pagination"
+                                    class="img-slider-paginetion swiper-pagination" />
                             </div>
                         </div>
                         <div class="text-left my-4">
@@ -62,12 +72,14 @@
                                 march 21st, up to 90% OFF on selected game assets
                             </div>
                         </div>
-                        <div class="d-flex flex-wrap"
-                             style="margin: 0 -5px">
-                            <div v-for="(item, index) in assets"
-                                 v-if="index < 7"
-                                 :key="index"
-                                 class="assets-item__container padding-5">
+                        <div
+                            class="d-flex flex-wrap"
+                            style="margin: 0 -5px">
+                            <div
+                                v-for="(item, index) in assets"
+                                v-if="index < 7"
+                                :key="index"
+                                class="assets-item__container padding-5">
                                 <c-assets-item :item="item" />
                             </div>
                         </div>
@@ -75,40 +87,47 @@
                 </div>
                 <div class="col-12 col-lg-6 margin-bottom-30 d-flex flex-column">
                     <c-block class="margin-bottom-30">
-                        <c-heading-bar name="Featured"
-                                       :showActions="true">
+                        <c-heading-bar
+                            name="Featured"
+                            :showActions="true">
                             <template slot="additional-action">
-                                <c-heading-bar-fields name="Rarity"
-                                                      icon="fas fa-trophy" />
-                                <c-heading-bar-fields name="Price"
-                                                      icon="fas fa-dollar-sign" />
+                                <c-heading-bar-fields
+                                    name="Rarity"
+                                    icon="fas fa-trophy" />
+                                <c-heading-bar-fields
+                                    name="Price"
+                                    icon="fas fa-dollar-sign" />
                             </template>
                         </c-heading-bar>
                         <div class="collection-list">
-                            <div v-for="(item, index) in collection_items"
-                                 v-if="index < 4"
-                                 :key="index"
-                                 class="collection-list__item-container"
-                                 style="width: 50%">
+                            <div
+                                v-for="(item, index) in collection_items"
+                                v-if="index < 4"
+                                :key="index"
+                                class="collection-list__item-container"
+                                style="width: 50%">
                                 <c-collection-item :item="item" />
                             </div>
                         </div>
                     </c-block>
 
-                    <c-banner :imgSrc="'/img/banners/banner-1.png'"
-                              to="/">
-                        <div class="align-items-start"
-                             style="margin-top: auto">
+                    <c-banner
+                        :imgSrc="'/img/banners/banner-1.png'"
+                        to="/">
+                        <div
+                            class="align-items-start"
+                            style="margin-top: auto">
                             <h3 class="text-white h1 font-weight-bold p-0 m-0">
                                 Very Fiery Contest
                             </h3>
                             <p class="text-capitalize h3 my-3">
                                 What are they playing?
                             </p>
-                            <c-button status="info"
-                                      size="lg"
-                                      class="mt-4"
-                                      iconHide>
+                            <c-button
+                                status="info"
+                                size="lg"
+                                class="mt-4"
+                                iconHide>
                                 Call To action
                             </c-button>
                         </div>
@@ -116,33 +135,39 @@
                 </div>
                 <div class="col-12">
                     <c-block class="margin-bottom-30">
-                        <c-heading-bar name="Get Started"
-                                       :showArrows="false"
-                                       :showBackground="false"
-                                       :showActions="true">
+                        <c-heading-bar
+                            name="Get Started"
+                            :showArrows="false"
+                            :showBackground="false"
+                            :showActions="true">
                             <template slot="additional-action">
-                                <div slot="pagination"
-                                     class="assets-swiper-pagination swiper-pagination" />
+                                <div
+                                    slot="pagination"
+                                    class="assets-swiper-pagination swiper-pagination" />
                             </template>
                         </c-heading-bar>
                         <c-swiper :options="assetsSlider">
-                            <c-swiper-slide v-for="(item, index) in assets"
-                                            :key="index">
+                            <c-swiper-slide
+                                v-for="(item, index) in assets"
+                                :key="index">
                                 <c-assets-item :item="item" />
                             </c-swiper-slide>
                         </c-swiper>
                     </c-block>
 
                     <c-block class="margin-bottom-30">
-                        <c-heading-bar name="Yours"
-                                       :showArrows="false"
-                                       :showBackground="false"
-                                       :showActions="true">
+                        <c-heading-bar
+                            name="Yours"
+                            :showArrows="false"
+                            :showBackground="false"
+                            :showActions="true">
                             <template slot="additional-action">
-                                <c-heading-bar-fields name="Rarity"
-                                                      icon="fas fa-trophy" />
-                                <c-heading-bar-fields name="Price"
-                                                      icon="fas fa-dollar-sign" />
+                                <c-heading-bar-fields
+                                    name="Rarity"
+                                    icon="fas fa-trophy" />
+                                <c-heading-bar-fields
+                                    name="Price"
+                                    icon="fas fa-dollar-sign" />
                             </template>
                         </c-heading-bar>
                         <div class="filter_blk form-inline">
@@ -150,8 +175,9 @@
                                 <label>
                                     Filter by
                                 </label>
-                                <select id="exampleFormControlSelect1"
-                                        class="form-control">
+                                <select
+                                    id="exampleFormControlSelect1"
+                                    class="form-control">
                                     <option>Type</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -163,34 +189,40 @@
                                 <label>
                                     Game
                                 </label>
-                                <input type="text"
-                                       class="form-control">
+                                <input
+                                    type="text"
+                                    class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>
                                     Name
                                 </label>
-                                <input type="text"
-                                       class="form-control">
+                                <input
+                                    type="text"
+                                    class="form-control">
                             </div>
                             <div class="form-group">
-                                <a href="#"
-                                   class="btn btn-sm btn-link">clear</a>
-                                <a href="#"
-                                   class="btn btn-sm btn-link">More Filters</a>
+                                <a
+                                    href="#"
+                                    class="btn btn-sm btn-link">clear</a>
+                                <a
+                                    href="#"
+                                    class="btn btn-sm btn-link">More Filters</a>
                             </div>
                         </div>
                         <c-assets-grid :list="28" />
                         <c-pagination :pages="5" />
                     </c-block>
 
-                    <c-block class="margin-bottom-30"
-                             title="Collections">
+                    <c-block
+                        class="margin-bottom-30"
+                        title="Collections">
                         <div class="collection-list">
-                            <div v-for="(item, index) in collection_items"
-                                 :key="index"
-                                 class="collection-list__item-container"
-                                 style="width: 33.3%">
+                            <div
+                                v-for="(item, index) in collection_items"
+                                :key="index"
+                                class="collection-list__item-container"
+                                style="width: 33.3%">
                                 <c-collection-item :item="item" />
                             </div>
                         </div>

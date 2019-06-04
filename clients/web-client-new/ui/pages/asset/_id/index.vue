@@ -1,14 +1,16 @@
 <template>
     <c-layout navigationKey="asset">
         <div class="container-fluid">
-            <div v-if="!asset"
-                 class="row">
+            <div
+                v-if="!asset"
+                class="row">
                 <div class="col-12">
                     Asset not found
                 </div>
             </div>
-            <div v-if="asset"
-                 class="row">
+            <div
+                v-if="asset"
+                class="row">
                 <div class="col-12 col-lg-8 col-xl-9 margin-bottom-15">
                     <div class="asset-head">
                         <div class="asset-head__asset-title">
@@ -67,8 +69,9 @@
                 </div>
                 <div class="col-12 d-none d-lg-block col-lg-4 col-xl-3 margin-bottom-15">
                     <div class="asset-head__company-logo">
-                        <c-img src="https://i.imgur.com/BngHC98.png"
-                               class="img-fluid" />
+                        <c-img
+                            src="https://i.imgur.com/BngHC98.png"
+                            class="img-fluid" />
                     </div>
                 </div>
 
@@ -78,18 +81,21 @@
                     :backgroundAlpha="0" />
 
                 <div class="col-12 col-lg-6 margin-top-15 margin-bottom-15">
-                    <c-block title="Attributes"
-                             class="h-100"
-                             :noGutter="true"
-                             :onlyContentBg="true"
-                             :bgGradient="true">
+                    <c-block
+                        title="Attributes"
+                        class="h-100"
+                        :noGutter="true"
+                        :onlyContentBg="true"
+                        :bgGradient="true">
                         <template slot="additional-action">
-                            <a href="#"
-                               class="font-weight-bold text-uppercase text-white">
+                            <a
+                                href="#"
+                                class="font-weight-bold text-uppercase text-white">
                                 Game View
                             </a>
-                            <a href="#"
-                               class="font-weight-bold text-uppercase text-white ml-4">
+                            <a
+                                href="#"
+                                class="font-weight-bold text-uppercase text-white ml-4">
                                 Chart
                             </a>
                         </template>
@@ -104,9 +110,11 @@
                                     {{ prop | space | upperFirstChar }}
                                 </div>
                                 <div class="item-description">
-                                    <ul v-if="typeof value === 'object'"
+                                    <ul
+                                        v-if="typeof value === 'object'"
                                         class="margin-0">
-                                        <li v-for="(value, prop, index) in value"
+                                        <li
+                                            v-for="(value, prop, index) in value"
                                             :key="index">
                                             {{ prop | space | upperFirstChar }}: {{ value }}
                                         </li>
@@ -121,19 +129,22 @@
                 </div>
 
                 <div class="col-12 col-lg-6 margin-top-15 margin-bottom-15">
-                    <c-block title="Sales"
-                             class="h-100"
-                             noGutter
-                             onlyContentBg
-                             bgGradient
-                             showActions>
+                    <c-block
+                        title="Sales"
+                        class="h-100"
+                        noGutter
+                        onlyContentBg
+                        bgGradient
+                        showActions>
                         <template slot="additional-action">
-                            <a href="#"
-                               class="font-weight-bold text-uppercase text-white">
+                            <a
+                                href="#"
+                                class="font-weight-bold text-uppercase text-white">
                                 History
                             </a>
-                            <a href="#"
-                               class="font-weight-bold text-uppercase text-white ml-4">
+                            <a
+                                href="#"
+                                class="font-weight-bold text-uppercase text-white ml-4">
                                 Chart
                             </a>
                         </template>
@@ -145,22 +156,27 @@
                 </div>
 
                 <div class="col-12 margin-top-15 margin-bottom-15">
-                    <c-block title="Offers"
-                             class="padding-bottom-0"
-                             noGutter
-                             onlyContentBg
-                             bgGradient
-                             showActions>
+                    <c-block
+                        title="Offers"
+                        class="padding-bottom-0"
+                        noGutter
+                        onlyContentBg
+                        bgGradient
+                        showActions>
                         <template slot="additional-action">
-                            <c-heading-bar-fields name="Rarity"
-                                                  icon="trophy" />
-                            <c-heading-bar-fields name="Value"
-                                                  icon="dollar" />
+                            <c-heading-bar-fields
+                                name="Rarity"
+                                icon="trophy" />
+                            <c-heading-bar-fields
+                                name="Value"
+                                icon="dollar" />
                         </template>
-                        <c-content-navigation :items="asset.offersList"
-                                              :setLimits="4">
-                            <div slot-scope="props"
-                                 class="offers__list">
+                        <c-content-navigation
+                            :items="asset.offersList"
+                            :setLimits="4">
+                            <div
+                                slot-scope="props"
+                                class="offers__list">
                                 <div
                                     v-for="(item, index) in props.items"
                                     :key="index"
@@ -179,28 +195,33 @@
                                         <span class="price">
                                             $ {{ item.price.current }}
                                         </span>
-                                        <a v-if="item.price.current"
-                                           href="#"
-                                           class="btn btn-success float-right">
+                                        <a
+                                            v-if="item.price.current"
+                                            href="#"
+                                            class="btn btn-success float-right">
                                             <c-icon name="cart-plus" />
                                             Proceed to Purchase
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                            <template slot="left-content"
-                                      class="text-left">
+                            <template
+                                slot="left-content"
+                                class="text-left">
                                 <strong>245345</strong> Available on the market
                             </template>
-                            <template slot="right-content"
-                                      class="text-right">
+                            <template
+                                slot="right-content"
+                                class="text-right">
                                 <strong>319</strong> On the list
-                                <a href="#"
-                                   class="text-white mx-2">
+                                <a
+                                    href="#"
+                                    class="text-white mx-2">
                                     <i class="fas fa-reply" />
                                 </a>
-                                <a href="#"
-                                   class="text-white">
+                                <a
+                                    href="#"
+                                    class="text-white">
                                     <i class="fas fa-bookmark" />
                                 </a>
                             </template>
@@ -209,21 +230,25 @@
                 </div>
 
                 <div class="col-12 margin-top-15 margin-bottom-15">
-                    <c-block class="padding-bottom-0"
-                             title="Yours Inventory"
-                             noGutter
-                             onlyContentBg
-                             bgGradient>
-                        <c-content-navigation :items="asset.inventoryList"
-                                              :setLimits="4">
-                            <div slot-scope="props"
-                                 class="my-assets__list">
+                    <c-block
+                        class="padding-bottom-0"
+                        title="Yours Inventory"
+                        noGutter
+                        onlyContentBg
+                        bgGradient>
+                        <c-content-navigation
+                            :items="asset.inventoryList"
+                            :setLimits="4">
+                            <div
+                                slot-scope="props"
+                                class="my-assets__list">
                                 <div
                                     v-for="(item, index) in props.items"
                                     :key="index"
                                     class="item">
-                                    <c-button status="plain"
-                                              @click="openPopup(item)">
+                                    <c-button
+                                        status="plain"
+                                        @click="openPopup(item)">
                                         <i class="fas fa-external-link-alt" />
                                     </c-button>
                                     <div class="item_thumb">
@@ -256,17 +281,19 @@
                 </div>
 
                 <div class="col-12 margin-top-15 margin-bottom-15">
-                    <c-block title="Collections Containing this Item"
-                             class="pb-0"
-                             noGutter
-                             onlyContentBg
-                             bgGradient>
+                    <c-block
+                        title="Collections Containing this Item"
+                        class="pb-0"
+                        noGutter
+                        onlyContentBg
+                        bgGradient>
                         <c-content-navigation
                             v-if="asset.collections.length"
                             :items="asset.collections"
                             :setLimits="3">
-                            <div slot-scope="props"
-                                 class="collections-container">
+                            <div
+                                slot-scope="props"
+                                class="collections-container">
                                 <div
                                     v-for="(item, index) in props.items"
                                     :key="index"
@@ -282,11 +309,13 @@
                 </div>
             </div>
         </div>
-        <c-popup :activated="show_popup"
-                 :width="550"
-                 @close="closePopup">
-            <c-asset-popup slot="customContent"
-                           :asset="tmpItem" />
+        <c-popup
+            :activated="show_popup"
+            :width="550"
+            @close="closePopup">
+            <c-asset-popup
+                slot="customContent"
+                :asset="tmpItem" />
         </c-popup>
     </c-layout>
 </template>

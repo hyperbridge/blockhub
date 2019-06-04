@@ -10,15 +10,18 @@
                 </div>
             </div>
             <div class="col-12 margin-top-30">
-                <div v-for="item in achievements"
-                     class="achievements-item">
-                    <div v-if="item.img"
-                         class="achievements-item__img margin-right-10">
+                <div
+                    v-for="item in achievements"
+                    class="achievements-item">
+                    <div
+                        v-if="item.img"
+                        class="achievements-item__img margin-right-10">
                         <img :src="item.img">
                     </div>
                     <div class="achievements-item__info">
-                        <div class="achievements-item__info-progress"
-                             :style="`width: ${item.percent}%`" />
+                        <div
+                            class="achievements-item__info-progress"
+                            :style="`width: ${item.percent}%`" />
                         <div class="achievements-item__info-text">
                             <div class="h4 pb-0 mb-0">
                                 {{ item.title }}
@@ -27,20 +30,24 @@
                                 {{ item.description }}
                             </div>
                         </div>
-                        <div v-if="item.percent && !item.unlocked && !item.completed"
-                             class="achievements-item__info-percent">
+                        <div
+                            v-if="item.percent && !item.unlocked && !item.completed"
+                            class="achievements-item__info-percent">
                             {{ item.percent }}%
                         </div>
-                        <div v-if="item.unlocked || item.completed"
-                             class="achievements-item__info-status text-right">
-                            <div v-if="item.unlocked"
-                                 class="h5 pb-0 mb-0"
-                                 style="color: #00aeff">
+                        <div
+                            v-if="item.unlocked || item.completed"
+                            class="achievements-item__info-status text-right">
+                            <div
+                                v-if="item.unlocked"
+                                class="h5 pb-0 mb-0"
+                                style="color: #00aeff">
                                 Unlocked
                             </div>
-                            <div v-if="item.completed"
-                                 class="h5 pb-0 mb-0"
-                                 style="color: #1bb934">
+                            <div
+                                v-if="item.completed"
+                                class="h5 pb-0 mb-0"
+                                style="color: #1bb934">
                                 <i class="fas fa-check mr-2" /> Completed
                             </div>
                             <div>
@@ -48,8 +55,9 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="item.img"
-                         class="achievements-item__img margin-left-10">
+                    <div
+                        v-if="item.img"
+                        class="achievements-item__img margin-left-10">
                         <img :src="item.img">
                     </div>
                 </div>
