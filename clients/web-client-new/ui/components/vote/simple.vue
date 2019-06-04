@@ -1,20 +1,30 @@
 <template>
     <div class="c-simple-vote">
-        <i class="fa fa-chevron-up" @click="upvote" :class="{ disabled: upvoted }"></i>
+        <i class="fa fa-chevron-up"
+           :class="{ disabled: upvoted }"
+           @click="upvote" />
         <span class="c-simple-vote__value">{{ value }}</span>
-        <i class="fa fa-chevron-down" @click="downvote" :class="{ disabled: downvoted }"></i>
+        <i class="fa fa-chevron-down"
+           :class="{ disabled: downvoted }"
+           @click="downvote" />
     </div>
 </template>
 
 <script>
 export default {
+    components: {
+    },
     props: {
         votes: {
             type: Number,
             default: 0
         }
     },
-    components: {
+    data() {
+        return {
+            upvoted: false,
+            downvoted: false
+        }
     },
     computed: {
         value() {
@@ -22,10 +32,11 @@ export default {
                 return this.votes + 1
             } else if (this.downvoted) {
                 return this.votes - 1
-            } else {
-                return this.votes
             }
+            return this.votes
         }
+    },
+    created() {
     },
     methods: {
         upvote() {
@@ -36,14 +47,6 @@ export default {
             this.downvoted = !this.downvoted
             this.upvoted = false
         }
-    },
-    data() {
-        return {
-            upvoted: false,
-            downvoted: false
-        }
-    },
-    created() {
     }
 }
 </script>

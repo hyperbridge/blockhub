@@ -1,21 +1,21 @@
 <template>
     <div v-show="tab_id == tab_data.activeTab">
-        <div class="tabs-universal__content" >
+        <div class="tabs-universal__content">
             <transition name="tab-universal">
                 <div v-if="tab_id == tab_data.activeTab">
-                    <slot/>
+                    <slot />
                 </div>
             </transition>
         </div>
-        <slot name="footer"/>
+        <slot name="footer" />
     </div>
 </template>
 
 <script>
 export default {
-    name: 'tab-universal',
+    name: 'TabUniversal',
     props: {
-        tab_id: {
+        tabId: {
             type: [Number, String],
             required: true
         }
@@ -36,6 +36,5 @@ export default {
         transform: translateX(20px);
     }
 </style>
-
 
 

@@ -1,7 +1,7 @@
 <template>
     <div class="sidebar-card">
         <h4 :class="[ type + '-ttl']">
-            <i :class="type | icon"></i>
+            <i :class="type | icon" />
             {{ title }}
         </h4>
         <slot />
@@ -9,32 +9,32 @@
 </template>
 
 <script>
-    export default {
-        name: 'claim',
-        props: {
-            title: String,
-            type: {
-                type: String,
-                default: 'info'
+export default {
+    name: 'Claim',
+    filters: {
+        icon(type) {
+            switch (type) {
+            case 'success':
+                return 'fas fa-check'
+            case 'warning':
+                return 'fas fa-exclamation-triangle'
+            case 'danger':
+                return 'fas fa-times'
+            case 'info':
+                return 'fas fa-info-circle'
+            default:
+                return 'fas fa-check'
             }
-        },
-        filters: {
-            icon(type) {
-                switch(type) {
-                    case 'success':
-                        return 'fas fa-check'
-                    case 'warning':
-                        return 'fas fa-exclamation-triangle'
-                    case 'danger':
-                        return 'fas fa-times'
-                    case 'info':
-                        return 'fas fa-info-circle'
-                    default:
-                        return 'fas fa-check'
-                }
-            },
+        }
+    },
+    props: {
+        title: String,
+        type: {
+            type: String,
+            default: 'info'
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

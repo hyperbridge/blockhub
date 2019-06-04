@@ -1,56 +1,59 @@
 <template>
     <transition name="fade">
-        <div class="inline-notification" :class="[ 'type-' + type, 'size-' + size ]" v-if="show">
+        <div v-if="show"
+             class="inline-notification"
+             :class="[ 'type-' + type, 'size-' + size ]">
             <div class="inline-notification__icon">
-                <i :class="`fas fa-${notif_icon}`"></i>
+                <i :class="`fas fa-${notif_icon}`" />
             </div>
             <div class="inline-notification__text">
                 <slot />
             </div>
-            <div class="close" @click="actionOnClose()">
-                <i class="fas fa-times"></i>
+            <div class="close"
+                 @click="actionOnClose()">
+                <i class="fas fa-times" />
             </div>
         </div>
     </transition>
 </template>
 
 <script>
-    export default {
-        name: 'inline-notification',
-        props:{
-            type:{
-                type: String,
-                default: 'default'
-            },
-            size: String
+export default {
+    name: 'InlineNotification',
+    props: {
+        type: {
+            type: String,
+            default: 'default'
         },
-        data() {
-            return {
-                show: true
-            }
-        },
-        methods: {
-            actionOnClose() {
-                this.show = false
-            }
-        },
-        computed: {
-            notif_icon() {
-                switch (this.type) {
-                    case 'info':
-                        return 'info'
-                    case 'success':
-                        return 'check-circle'
-                    case 'warning':
-                        return 'exclamation-triangle'
-                    case 'danger':
-                        return 'times-circle'
-                    default:
-                        return 'cog'
-                }
+        size: String
+    },
+    data() {
+        return {
+            show: true
+        }
+    },
+    computed: {
+        notif_icon() {
+            switch (this.type) {
+            case 'info':
+                return 'info'
+            case 'success':
+                return 'check-circle'
+            case 'warning':
+                return 'exclamation-triangle'
+            case 'danger':
+                return 'times-circle'
+            default:
+                return 'cog'
             }
         }
+    },
+    methods: {
+        actionOnClose() {
+            this.show = false
+        }
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,15 +1,17 @@
 <template>
     <div class="info-card">
-        <h3 v-if="title">{{ title }}</h3>
+        <h3 v-if="title">
+            {{ title }}
+        </h3>
         <slot />
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'info-card',
-        props: ['title']
-    }
+export default {
+    name: 'InfoCard',
+    props: ['title']
+}
 </script>
 
 <style lang="scss" scoped>

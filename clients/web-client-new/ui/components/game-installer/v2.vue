@@ -3,17 +3,15 @@
         <div class="game-installer__product-preview">
             <c-img
                 class="game-installer__image"
-                :src="product.images.mediumTile"
-            />
+                :src="product.images.mediumTile" />
             <div class="game-installer__description">
                 <h3>{{ product.name }}</h3>
-                <p v-html="description"></p>
+                <p v-html="description" />
                 <c-icon
                     v-for="(reqs, index) in product.systemRequirements"
                     :key="index"
                     cat="fab"
-                    :name="getSysName(reqs.os)"
-                />
+                    :name="getSysName(reqs.os)" />
             </div>
         </div>
 
@@ -22,20 +20,19 @@
                 Location:
             </span>
             <div class="game-installer__input-wrapper">
-                <c-icon name="folder-open"/>
+                <c-icon name="folder-open" />
                 <input
-                    class="game-installer__input"
                     v-model="path"
-                    list="saved-paths"
-                />
+                    class="game-installer__input"
+                    list="saved-paths">
                 <datalist id="saved-paths">
-                    <option v-for="(path, index) in savedPaths" :key="index">
+                    <option v-for="(path, index) in savedPaths"
+                            :key="index">
                         {{ path }}
                     </option>
                 </datalist>
             </div>
         </div>
-
 
 
         <div class="game-installer__space-info">
@@ -52,18 +49,16 @@
 
         <div class="game-installer__buttons-wrapper">
             <button
-                @click="$emit('cancel')"
                 type="button"
                 class="game-installer__button"
-            >
+                @click="$emit('cancel')">
                 Cancel
             </button>
             <button
                 type="button"
                 class="game-installer__button--install"
-                :class="{ 'disabled': !path }"
-            >
-                <c-icon name="hdd"/>
+                :class="{ 'disabled': !path }">
+                <c-icon name="hdd" />
                 <span>Install</span>
             </button>
         </div>
@@ -71,42 +66,42 @@
 </template>
 
 <script>
-    export default {
-        name: 'game-installer',
-        props: {
-            product: Object
+export default {
+    name: 'GameInstaller',
+    components: {
+        'c-dropdown': () => import('~/components/dropdown-menu/type-3').then(m => m.default || m),
+        'c-list': () => import('~/components/list').then(m => m.default || m)
+    },
+    props: {
+        product: Object
+    },
+    data() {
+        return {
+            path: ''
+        }
+    },
+    computed: {
+        description() {
+            // return this.product.content.substring(0, 150) + '...';
         },
-        components: {
-            'c-dropdown': () => import('~/components/dropdown-menu/type-3').then(m => m.default || m),
-            'c-list': () => import('~/components/list').then(m => m.default || m),
-        },
-        data() {
-            return {
-                path: '',
-            }
-        },
-        methods: {
-            getSysName(os) {
-                switch(os) {
-                    case 'win':
-                        return 'windows';
-                    case 'mac':
-                        return 'apple';
-                    case 'linux':
-                        return 'linux';
-                    default: return '';
-                }
-            }
-        },
-        computed: {
-            description() {
-                // return this.product.content.substring(0, 150) + '...';
-            },
-            savedPaths() {
-                // return this.$store.state.application.account.savedPaths;
+        savedPaths() {
+            // return this.$store.state.application.account.savedPaths;
+        }
+    },
+    methods: {
+        getSysName(os) {
+            switch (os) {
+            case 'win':
+                return 'windows'
+            case 'mac':
+                return 'apple'
+            case 'linux':
+                return 'linux'
+            default: return ''
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

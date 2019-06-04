@@ -1,13 +1,15 @@
 <template>
-    <div class="status-dot" :class="{'status-dot--disconnected': status === 'disconnected', 'status-dot--connected': status === 'connected', 'status-dot--semiconnected': status === 'semiconnected' }" @click="$emit('click')">
+    <div class="status-dot"
+         :class="{'status-dot--disconnected': status === 'disconnected', 'status-dot--connected': status === 'connected', 'status-dot--semiconnected': status === 'semiconnected' }"
+         @click="$emit('click')">
         <div class="status-dot__icon" />
     </div>
 </template>
 
 <script>
-    export default {
-        props: ['status']
-    }
+export default {
+    props: ['status']
+}
 </script>
 
 <style lang="scss">

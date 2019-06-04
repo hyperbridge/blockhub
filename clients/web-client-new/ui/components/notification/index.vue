@@ -3,17 +3,20 @@
                 mode="out-in"
                 leave-active-class="animated bounceOutRight">
         <div
-            class="notif"
-            :class="notification.type"
             v-if="show"
-        >
+            class="notif"
+            :class="notification.type">
             <div class="title">
-                <h5 class="text-left" @click.self="$emit('showPopup')">
-                    <c-img :src="icon" v-if="icon" />
-                    <i :class="`fas fa-${notif_icon}`" v-else></i>
+                <h5 class="text-left"
+                    @click.self="$emit('showPopup')">
+                    <c-img v-if="icon"
+                           :src="icon" />
+                    <i v-else
+                       :class="`fas fa-${notif_icon}`" />
                     {{ notification.title }}
-                    <div class="close" @click="actionOnClose()">
-                        <i class="fas fa-times"></i>
+                    <div class="close"
+                         @click="actionOnClose()">
+                        <i class="fas fa-times" />
                     </div>
                 </h5>
             </div>
@@ -25,46 +28,46 @@
 </template>
 
 <script>
-    export default {
-        name: 'notification',
-        props: {
-            notification: {
-                type: Object,
-                required: true
-            },
-            icon: {
-                type: String,
-                require: false
-            }
+export default {
+    name: 'Notification',
+    props: {
+        notification: {
+            type: Object,
+            required: true
         },
-        data() {
-            return {
-                show: true,
-            }
-        },
-        methods: {
-            actionOnClose() {
-                this.show = false
-                setTimeout(() => this.$emit('close'), 150)
-            },
-        },
-        computed: {
-            notif_icon() {
-                switch (this.notification.type) {
-                    case 'info':
-                        return 'info-circle';
-                    case 'success':
-                        return 'check-circle';
-                    case 'warning':
-                        return 'exclamation-triangle';
-                    case 'danger':
-                        return 'times-circle';
-                    default:
-                        return 'cog';
-                }
+        icon: {
+            type: String,
+            require: false
+        }
+    },
+    data() {
+        return {
+            show: true
+        }
+    },
+    computed: {
+        notif_icon() {
+            switch (this.notification.type) {
+            case 'info':
+                return 'info-circle'
+            case 'success':
+                return 'check-circle'
+            case 'warning':
+                return 'exclamation-triangle'
+            case 'danger':
+                return 'times-circle'
+            default:
+                return 'cog'
             }
         }
+    },
+    methods: {
+        actionOnClose() {
+            this.show = false
+            setTimeout(() => this.$emit('close'), 150)
+        }
     }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -89,7 +92,7 @@
             font-weight: bold;
             border-bottom: 2px solid #fff;
             cursor: pointer;
-            
+
             h5 {
                 padding: 0;
                 margin: 0;

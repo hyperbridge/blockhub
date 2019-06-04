@@ -1,30 +1,43 @@
 <template>
-    <c-block title="Community Spotlight" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+    <c-block title="Community Spotlight"
+             :noGutter="true"
+             :bgGradient="true"
+             :onlyContentBg="true">
         <template slot="heading-bar">
-            <c-button status="none" :to="communityPath" class="title-icon text-white">
-                <i class="fas fa-comments" v-if="!activateElement"></i>
-                <i class="fas fa-cog" v-else></i>
+            <c-button status="none"
+                      :to="communityPath"
+                      class="title-icon text-white">
+                <i v-if="!activateElement"
+                   class="fas fa-comments" />
+                <i v-else
+                   class="fas fa-cog" />
             </c-button>
         </template>
-        <div class="w-100" v-if="discussions.length > 0">
-            <div class="editor-container editor-container--style-2" v-if="editing">
+        <div v-if="discussions.length > 0"
+             class="w-100">
+            <div v-if="editing"
+                 class="editor-container editor-container--style-2">
                 <p class="">
                     Set Up Community
                 </p>
             </div>
             <ul class="community-spotlight__list">
-                <li v-for="(item, index) in discussions" :key="index">
+                <li v-for="(item, index) in discussions"
+                    :key="index">
                     <a :href="item.link">
                         <span class="community-spotlight__name">{{ item.name }}</span>
                         <span class="community-spotlight__count">{{ item.count }}</span>
                     </a>
                 </li>
             </ul>
-            <c-button status="outline-white" :to="communityPath" hide_icon>
+            <c-button status="outline-white"
+                      :to="communityPath"
+                      hide_icon>
                 Go To Community
             </c-button>
         </div>
-        <div class="w-100" v-if="discussions.length === 0">
+        <div v-if="discussions.length === 0"
+             class="w-100">
             <h4>No highlighted community activity yet.</h4>
         </div>
     </c-block>
@@ -33,15 +46,15 @@
 
 <script>
 export default {
-    name: 'community-spotlight',
+    name: 'CommunitySpotlight',
+    components: {
+        'c-block': () => import('~/components/block').then(m => m.default || m)
+    },
     props: {
         discussions: Array,
         communityPath: String,
         editing: Boolean,
         activateElement: Boolean
-    },
-    components:{
-        'c-block': () => import('~/components/block').then(m => m.default || m),
     }
 }
 </script>

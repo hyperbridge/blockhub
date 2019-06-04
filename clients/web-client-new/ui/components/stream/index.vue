@@ -1,11 +1,13 @@
 <template>
-    <div class="stream-item" :class="{'stream-item-bg': background}">
+    <div class="stream-item"
+         :class="{'stream-item-bg': background}">
         <div class="stream-item__wrapper">
             <div class="stream-item__img">
                 <c-img :src="streamImg" />
                 <div class="stream-item__run-container">
-                    <router-link :to="streamLink + '/' + streamId" class="stream-item__run-btn">
-                        <i class="fas fa-play"></i>
+                    <router-link :to="streamLink + '/' + streamId"
+                                 class="stream-item__run-btn">
+                        <i class="fas fa-play" />
                     </router-link>
                 </div>
             </div>
@@ -18,13 +20,14 @@
                         {{ streamName }}
                     </div>
                     <div class="m-0 p-0 text-muted product-name">
-                        <a href="#" class="text-muted">
+                        <a href="#"
+                           class="text-muted">
                             {{ streamGame }}
                         </a>
                     </div>
                 </div>
                 <div class="stream-item__viewers">
-                    <i class="fas fa-eye"></i>
+                    <i class="fas fa-eye" />
                     {{ streamViews }}
                 </div>
             </div>
@@ -33,24 +36,24 @@
 </template>
 
 <script>
-    export default {
-        props:{
-            streamGame: String,
-            streamName: String,
-            streamAvatar: String,
-            streamImg: String,
-            streamLink: String,
-            streamId: String,
-            streamViews: {
-                type: [ String, Number ],
-                default: 0
-            },
-            background:{
-                type: Boolean,
-                default: false
-            }
+export default {
+    props: {
+        streamGame: String,
+        streamName: String,
+        streamAvatar: String,
+        streamImg: String,
+        streamLink: String,
+        streamId: String,
+        streamViews: {
+            type: [String, Number],
+            default: 0
+        },
+        background: {
+            type: Boolean,
+            default: false
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

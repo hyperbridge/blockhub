@@ -1,36 +1,68 @@
 <template>
-    <div class="project-card__item" :class="customClass" @mouseover="hovering = true" @mouseout="hovering = false">
-        <div class="head" v-if="parentName">
-            <div class="img" v-if="parentImage">
+    <div class="project-card__item"
+         :class="customClass"
+         @mouseover="hovering = true"
+         @mouseout="hovering = false">
+        <div v-if="parentName"
+             class="head">
+            <div v-if="parentImage"
+                 class="img">
                 <c-img :src="parentImage" />
             </div>
             <div class="text">
                 <h4>{{ parentName }}</h4>
-                <p v-if="parentDeveloper">{{ parentDeveloper }}</p>
+                <p v-if="parentDeveloper">
+                    {{ parentDeveloper }}
+                </p>
             </div>
         </div>
-        <c-button status="none" :to="`/project/${id}`">
-            <c-img :src="image"/>
-            <div class="description">{{ description }}</div>
+        <c-button status="none"
+                  :to="`/project/${id}`">
+            <c-img :src="image" />
+            <div class="description">
+                {{ description }}
+            </div>
         </c-button>
         <c-money-info label="Obtained Funds"
-            :percent="goalProgress"
-            :amount="funds ? funds.obtained : 0"
-            :goal="funds ? funds.goal : 0"
-        />
+                      :percent="goalProgress"
+                      :amount="funds ? funds.obtained : 0"
+                      :goal="funds ? funds.goal : 0" />
         <div class="item-action">
-            <c-button status="info" :to="`/project/${id}`" iconHide>Check it out</c-button>
-            <c-button status="success" :to="`/project/${id}`" iconHide hidden>Donate Funds</c-button>
+            <c-button status="info"
+                      :to="`/project/${id}`"
+                      iconHide>
+                Check it out
+            </c-button>
+            <c-button status="success"
+                      :to="`/project/${id}`"
+                      iconHide
+                      hidden>
+                Donate Funds
+            </c-button>
         </div>
 
-        <c-simple-vote :rating="rating" v-if="hovering" v-darklaunch="'RATINGS'" />
+        <c-simple-vote v-if="hovering"
+                       v-darklaunch="'RATINGS'"
+                       :rating="rating" />
     </div>
 </template>
 
 <script>
 export default {
     components: {
-        'c-money-info': () => import('~/components/money-info').then(m => m.default || m),
+        'c-money-info': () => import('~/components/money-info').then(m => m.default || m)
+    },
+    filters: {
+        currencySign(cur_name) {
+            switch (cur_name) {
+            case 'EUR':
+                return '€'
+            case 'GBP':
+                return '£'
+            default:
+                return '$'
+            }
+        }
     },
     props: {
         image: String,
@@ -45,7 +77,7 @@ export default {
         parentDeveloper: String,
         id: Number,
         customClass: {
-            type: String,
+            type: String
         }
     },
     data() {
@@ -60,18 +92,6 @@ export default {
             const { obtained, goal } = this.funds
 
             return Math.round(obtained / goal * 100)
-        }
-    },
-    filters: {
-        currencySign(cur_name) {
-            switch(cur_name) {
-                case 'EUR':
-                    return '€'
-                case 'GBP':
-                    return '£'
-                default:
-                    return '$'
-            }
         }
     }
 }

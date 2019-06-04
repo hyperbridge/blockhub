@@ -1,7 +1,11 @@
 <template>
-    <div class="collection-item" v-bind:style="{ 'background-image': 'url(' + image + ')' }">
+    <div class="collection-item"
+         :style="{ 'background-image': 'url(' + image + ')' }">
         <div class="collection-item__items-container">
-            <router-link v-for="(asset, index) in getAsset" :to="{ name: 'asset-id', params: { id: asset.id } }" :key="index" v-if="index < 4">
+            <router-link v-for="(asset, index) in getAsset"
+                         v-if="index < 4"
+                         :key="index"
+                         :to="{ name: 'asset-id', params: { id: asset.id } }">
                 <c-img :src="asset.image" />
             </router-link>
         </div>
@@ -11,7 +15,7 @@
             </router-link>
             <h6>by {{ author }}</h6>
             <div class="count">
-                <i class="fas fa-box"></i>
+                <i class="fas fa-box" />
                 {{ assets.length }} {{ assets.length | countLabel }}
             </div>
         </div>
@@ -20,6 +24,16 @@
 
 <script>
 export default {
+    filters: {
+        countLabel(label) {
+            switch (label) {
+            case label = 1:
+                return 'Item'
+            default:
+                return 'Items'
+            }
+        }
+    },
     props: {
         id: Number,
         name: String,
@@ -34,33 +48,23 @@ export default {
     },
     computed: {
         getAsset() {
-            let ids = this.assets,
-                list = this.$store.state.marketplace.assets || {},
-                arr = []
-                
-            if (ids)
+            const ids = this.assets
+            const list = this.$store.state.marketplace.assets || {}
+            const arr = []
+
+            if (ids) {
                 ids.forEach((id, i) => {
-                    if (list[id])
-                        arr.push(list[id])
+                    if (list[id]) { arr.push(list[id]) }
                 })
-            
+            }
+
             return arr
         },
         image() {
-            return this.background || "/img/collection-bg-1.jpeg"
-        }
-    },
-    filters: {
-        countLabel(label) {
-            switch (label) {
-                case label = 1:
-                    return 'Item'
-                default:
-                    return 'Items'
-            }
+            return this.background || '/img/collection-bg-1.jpeg'
         }
     }
- }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -114,7 +118,7 @@ export default {
 
             overflow: hidden;
             position: relative;
-            
+
             &:hover {
                 &:after {
                     animation: badgeGlimmer ease-out infinite;

@@ -3,8 +3,7 @@
         <c-icon
             v-for="(star, index) in stars"
             :key="index"
-            :name="star"
-        />
+            :name="star" />
     </span>
 </template>
 
@@ -17,17 +16,16 @@ export default {
     },
     computed: {
         stars() {
-            const stars = [];
-            let number = Number(this.number)
-            const parsed_number = Math.floor(number).toString();
+            const stars = []
+            const number = Number(this.number)
+            const parsed_number = Math.floor(number).toString()
             for (let i = 0; i < parsed_number; i++) {
-                stars.push('star');
+                stars.push('star')
             }
-            return Number.isInteger(number) ? stars : [...stars, 'star-half'];
+            return Number.isInteger(number) ? stars : [...stars, 'star-half']
         }
     }
 }
 </script>
-
 
 

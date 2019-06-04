@@ -1,17 +1,23 @@
 <template>
-    <div class="dropdown dropmenu_container" :class="{ 'show' : show }" v-click-outside="closeMenu">
-        <div class="rw-btn rw-btn--card" @click="toggleMenu" v-if="!$slots.title">
-            <div></div>
+    <div v-click-outside="closeMenu"
+         class="dropdown dropmenu_container"
+         :class="{ 'show' : show }">
+        <div v-if="!$slots.title"
+             class="rw-btn rw-btn--card"
+             @click="toggleMenu">
+            <div />
         </div>
-        <div class="dropdown__title" @click="toggleMenu" v-else>
+        <div v-else
+             class="dropdown__title"
+             @click="toggleMenu">
             <slot name="title" />
         </div>
         <div
             v-show="show"
             class="dropdown-menu"
-            :class="dropdownPosition"
-        >
-            <div class="position-relative" style="z-index: 4">
+            :class="dropdownPosition">
+            <div class="position-relative"
+                 style="z-index: 4">
                 <slot />
             </div>
         </div>
@@ -19,44 +25,44 @@
 </template>
 
 <script>
-    import Vue from 'vue'
+import Vue from 'vue'
 
-    export default {
-        props: {
-            position: {
-                type: String,
-                default: 'left'
-            }
-        },
-        data() {
-            return {
-                show: false
-            }
-        },
-        methods: {
-            toggleMenu() {
-                this.show = !this.show
-
-                if (this.show) this.$emit('show')
-                if (!this.show) this.$emit('hide')
-            },
-            closeMenu() {
-                this.show = false
-
-                this.$emit('hide')
-            }
-        },
-        computed: {
-            dropdownPosition() {
-                switch (this.position) {
-                    case 'left':
-                        return 'dropdown-menu-left'
-                    case 'right':
-                        return 'dropdown-menu-right'
-                }
+export default {
+    props: {
+        position: {
+            type: String,
+            default: 'left'
+        }
+    },
+    data() {
+        return {
+            show: false
+        }
+    },
+    computed: {
+        dropdownPosition() {
+            switch (this.position) {
+            case 'left':
+                return 'dropdown-menu-left'
+            case 'right':
+                return 'dropdown-menu-right'
             }
         }
+    },
+    methods: {
+        toggleMenu() {
+            this.show = !this.show
+
+            if (this.show) this.$emit('show')
+            if (!this.show) this.$emit('hide')
+        },
+        closeMenu() {
+            this.show = false
+
+            this.$emit('hide')
+        }
     }
+}
 </script>
 
 

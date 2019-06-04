@@ -1,58 +1,60 @@
 <template>
-    <c-block class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+    <c-block class="margin-bottom-30"
+             :noGutter="true"
+             :bgGradient="true"
+             :onlyContentBg="true">
         <c-heading-bar
+            v-if="products"
             slot="title"
             class="mb-0"
             :name="title"
             :showArrows="showArrowsState(products, maxPerView)"
             :showBackground="true"
             @prevClick="slider.slidePrev()"
-            @nextClick="slider.slideNext()"
-            v-if="products"
-        />
+            @nextClick="slider.slideNext()" />
 
-        <c-swiper :options="sliderOptions" ref="slider">
+        <c-swiper ref="slider"
+                  :options="sliderOptions">
             <slot />
         </c-swiper>
     </c-block>
 </template>
 
 <script>
-    export default {
-        components: {
-        },
-        props: {
-            products: Array,
-            title: String,
-            maxPerView: Number,
-            dynamic: {
-                type: Boolean,
-                default: true
+export default {
+    components: {
+    },
+    props: {
+        products: Array,
+        title: String,
+        maxPerView: Number,
+        dynamic: {
+            type: Boolean,
+            default: true
+        }
+    },
+    data() {
+        return {
+            sliderOptions: {
+                slidesPerView: this.maxPerView,
+                spaceBetween: 15
             }
-        },
-        data() {
-            return {
-                sliderOptions: {
-                    slidesPerView: this.maxPerView,
-                    spaceBetween: 15,
-                },
+        }
+    },
+    computed: {
+        slider() {
+            return this.$refs.slider.swiper
+        }
+    },
+    methods: {
+        showArrowsState(el, count) {
+            if (el.length > count) {
+                return true
             }
-        },
-        methods: {
-            showArrowsState(el, count) {
-                if (el.length > count) {
-                    return true
-                } else {
-                    return false
-                }
-            },
-        },
-        computed: {
-            slider() {
-                return this.$refs.slider.swiper;
-            },
+            return false
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,34 +1,36 @@
 <template>
     <div class="c-fancy-progress">
-        <div class="c-fancy-progress__bar" :class="checkColor" :style="{ 'width': + Number(percent) > 100 ? '100' : Number(percent)  + '%'}">
-            <div class="c-fancy-progress__bar-shadow"></div>
+        <div class="c-fancy-progress__bar"
+             :class="checkColor"
+             :style="{ 'width': + Number(percent) > 100 ? '100' : Number(percent) + '%'}">
+            <div class="c-fancy-progress__bar-shadow" />
             <div class="c-fancy-progress__text">
-              Progress: <em>{{ Number(percent) > 100 ? '100' : percent }}%</em>
+                Progress: <em>{{ Number(percent) > 100 ? '100' : percent }}%</em>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        props: {
-            percent: {
-                type: [ Number, String ],
-                default: 0
-            }
-        },
-        computed:{
-            checkColor(){
-                if ( Number(this.percent) > 25 && Number(this.percent) < 50 ){
-                    return 'c-fancy-progress__bar--orange'
-                } else if ( Number(this.percent) >= 50 && Number(this.percent) < 75 ){
-                    return 'c-fancy-progress__bar--yellow'
-                } else if ( Number(this.percent) >= 75 ){
-                    return 'c-fancy-progress__bar--green'
-                }
+export default {
+    props: {
+        percent: {
+            type: [Number, String],
+            default: 0
+        }
+    },
+    computed: {
+        checkColor() {
+            if (Number(this.percent) > 25 && Number(this.percent) < 50) {
+                return 'c-fancy-progress__bar--orange'
+            } else if (Number(this.percent) >= 50 && Number(this.percent) < 75) {
+                return 'c-fancy-progress__bar--yellow'
+            } else if (Number(this.percent) >= 75) {
+                return 'c-fancy-progress__bar--green'
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

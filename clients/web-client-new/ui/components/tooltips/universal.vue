@@ -3,15 +3,20 @@
         <div
             class="tooltip-universal__content"
             @mouseover="debounce(() => show_tooltip = true, delay)"
-            @mouseout="debounce(() => show_tooltip = false, delay + 1)"
-        >
-            <slot/>
-            <c-icon v-if="!iconHide" name="question-circle"/>
+            @mouseout="debounce(() => show_tooltip = false, delay + 1)">
+            <slot />
+            <c-icon v-if="!iconHide"
+                    name="question-circle" />
         </div>
-        <div class="tooltip-universal" :class="position" v-if="show_tooltip">
+        <div v-if="show_tooltip"
+             class="tooltip-universal"
+             :class="position">
             <slot name="tooltip">
-                <div class="tooltip-universal__default" :class="[position, theme, default_class]">
-                    <h4 v-if="title">{{ title }}</h4>
+                <div class="tooltip-universal__default"
+                     :class="[position, theme, default_class]">
+                    <h4 v-if="title">
+                        {{ title }}
+                    </h4>
                     {{ text }}
                 </div>
             </slot>
@@ -20,41 +25,41 @@
 </template>
 
 <script>
-    import { debounce } from '@/mixins';
+import { debounce } from '@/mixins'
 
-    export default {
-        name: 'tooltip-universal',
-        mixins: [debounce],
-        props: {
-            position: {
-                type: String,
-                default: 'top',
-                validator(val) {
-                    return ['top', 'right', 'bottom', 'left'].includes(val);
-                }
-            },
-            text: String,
-            title: String,
-            theme: {
-                type: String,
-                default: 'light',
-                validator(val) {
-                    return ['light', 'dark'].includes(val);
-                }
-            },
-            iconHide: Boolean,
-            default_class: String,
-            delay: {
-                type: Number,
-                default: 50
+export default {
+    name: 'TooltipUniversal',
+    mixins: [debounce],
+    props: {
+        position: {
+            type: String,
+            default: 'top',
+            validator(val) {
+                return ['top', 'right', 'bottom', 'left'].includes(val)
             }
         },
-        data() {
-            return {
-                show_tooltip: false
+        text: String,
+        title: String,
+        theme: {
+            type: String,
+            default: 'light',
+            validator(val) {
+                return ['light', 'dark'].includes(val)
             }
+        },
+        iconHide: Boolean,
+        defaultClass: String,
+        delay: {
+            type: Number,
+            default: 50
+        }
+    },
+    data() {
+        return {
+            show_tooltip: false
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

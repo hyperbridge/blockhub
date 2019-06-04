@@ -6,47 +6,54 @@
                     <c-img
                         src="https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png" />
                     <div class="us_icon">
-                        <i class="fas fa-lock"></i>
+                        <i class="fas fa-lock" />
                     </div>
                 </div>
                 <div class="user_info">
-                    <h2 class="userName">{{ profile.name }} </h2>
-                    <div class="user_status" v-darklaunch="'REPUTATION'">Trusted User</div>
-                    <div class="user_statistic" v-darklaunch="'REPUTATION'">
+                    <h2 class="userName">
+                        {{ profile.name }}
+                    </h2>
+                    <div v-darklaunch="'REPUTATION'"
+                         class="user_status">
+                        Trusted User
+                    </div>
+                    <div v-darklaunch="'REPUTATION'"
+                         class="user_statistic">
                         <span>
                             12
-                            <i class="fas fa-arrow-up"></i>
+                            <i class="fas fa-arrow-up" />
                         </span>
                         <span>
                             193
-                            <i class="fas fa-arrow-down"></i>
+                            <i class="fas fa-arrow-down" />
                         </span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-7">
-            <div class="profile__user-medal" v-darklaunch="'BADGES'">
-                <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
-                <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
-                <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
-                <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
+            <div v-darklaunch="'BADGES'"
+                 class="profile__user-medal">
+                <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png" />
+                <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png" />
+                <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png" />
+                <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        components: {
-            'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m),
-        },
-        computed: {
-            profile() {
-                return this.$store.state.application.activeProfile
-            }
+export default {
+    components: {
+        'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m)
+    },
+    computed: {
+        profile() {
+            return this.$store.state.application.activeProfile
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

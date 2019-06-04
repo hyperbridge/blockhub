@@ -1,34 +1,36 @@
 <template>
-    <div class="article-item" :style="{ width: 'calc( 100% / ' + itemInRow + ')'}">
+    <div class="article-item"
+         :style="{ width: 'calc( 100% / ' + itemInRow + ')'}">
         <h4>{{ heading }}</h4>
         <div class="published_date mb-3">
             Published {{ date | parse_date }}
         </div>
         <p>{{ content }}</p>
-        <a :href="`/${url}`" class="btn btn-link">
+        <a :href="`/${url}`"
+           class="btn btn-link">
             Read More
         </a>
     </div>
 </template>
 
 <script>
-    import moment from 'moment';
-    export default {
-        props: {
-            heading: String,
-            date: String,
-            content: String,
-            url: String,
-            itemInRow: {
-                default: 3
-            }
-        },
-        filters: {
-            parse_date(date) {
-                return moment(date).fromNow();
-            }
+import moment from 'moment'
+export default {
+    filters: {
+        parse_date(date) {
+            return moment(date).fromNow()
+        }
+    },
+    props: {
+        heading: String,
+        date: String,
+        content: String,
+        url: String,
+        itemInRow: {
+            default: 3
         }
     }
+}
 </script>
 
 <style lang="scss">

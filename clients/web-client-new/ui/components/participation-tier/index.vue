@@ -1,5 +1,6 @@
 <template>
-    <div class="participation-tier" :class="{'in-the-list' : inList}">
+    <div class="participation-tier"
+         :class="{'in-the-list' : inList}">
         <div class="participation-tier__stat">
             <div class="font-weight-bold h5 p-0 m-0">
                 {{ price | convertCurrency }}
@@ -18,7 +19,9 @@
             <div class="h5 font-weight-bold mb-1-0 p-0">
                 {{ title }}
             </div>
-            <c-button status="success" icon="hand-holding-usd" @click="purchase">
+            <c-button status="success"
+                      icon="hand-holding-usd"
+                      @click="purchase">
                 Participate
             </c-button>
         </div>
@@ -26,25 +29,25 @@
 </template>
 
 <script>
-    export default {
-        props:{
-            id: Number,
-            price: [ Number, String ],
-            sold: [ Number, String ],
-            left: [ Number, String ],
-            tag: String,
-            title: String,
-            inList: {
-                type: Boolean,
-                default: false
-            }
-        },
-        methods: {
-            purchase() {
-                this.$store.commit('application/activateModal', 'project-participate')
-            }
+export default {
+    props: {
+        id: Number,
+        price: [Number, String],
+        sold: [Number, String],
+        left: [Number, String],
+        tag: String,
+        title: String,
+        inList: {
+            type: Boolean,
+            default: false
+        }
+    },
+    methods: {
+        purchase() {
+            this.$store.commit('application/activateModal', 'project-participate')
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

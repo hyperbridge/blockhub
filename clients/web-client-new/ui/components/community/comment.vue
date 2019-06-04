@@ -1,68 +1,71 @@
 <template>
     <div>
-        <div class="community-item__comment" :class="{ 'is-reply': reply }">
-            <c-button-arrows size="xl" colored v-if="comment.rate">
+        <div class="community-item__comment"
+             :class="{ 'is-reply': reply }">
+            <c-button-arrows v-if="comment.rate"
+                             size="xl"
+                             colored>
                 <span :class="{
                     'up': comment.rate > 400,
                     'down': comment.rate < 0
                 }">{{ comment.rate }}</span>
             </c-button-arrows>
-            <div class="comment-container" :class="{ 'w-100' : !comment.rate }">
+            <div class="comment-container"
+                 :class="{ 'w-100' : !comment.rate }">
                 <c-dropdown-menu
                     dropPosition="right"
-                    style="right: 5px; top: 10px;"
-                />
+                    style="right: 5px; top: 10px;" />
                 <div class="comment-content">
                     <div class="user-info">
-                        <c-img :src="comment.author.img"/>
+                        <c-img :src="comment.author.img" />
                         <div>
                             <h6>{{ comment.author.name }}</h6>
                             <span class="time">{{ comment.date | timeAgoShort }}</span>
                         </div>
                     </div>
-                    <div class="text">{{ comment.text }}</div>
+                    <div class="text">
+                        {{ comment.text }}
+                    </div>
                 </div>
                 <div class="sub-comments-list">
-                    <slot/>
+                    <slot />
                 </div>
             </div>
         </div>
 
         <c-reply
             v-if="canReply"
-            @replyMode="reply = $event"
             class="margin-bottom-10"
-        />
-
+            @replyMode="reply = $event" />
     </div>
 </template>
 
 <script>
-    import moment from 'moment'
+import moment from 'moment'
 
-    export default {
-        name: 'comment',
-        props: {
-            comment: {
-                type: Object,
-                required: true
-            },
-            canReply:{
-                type: Boolean,
-                default: true
-            }
+export default {
+    name: 'Comment',
+    components: {
+        'c-dropdown-menu': () => import('~/components/dropdown-menu').then(m => m.default || m),
+        'c-reply': () => import('~/components/community/reply').then(m => m.default || m),
+        'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m)
+    },
+    props: {
+        comment: {
+            type: Object,
+            required: true
         },
-        components: {
-            'c-dropdown-menu': () => import('~/components/dropdown-menu').then(m => m.default || m),
-            'c-reply': () => import('~/components/community/reply').then(m => m.default || m),
-            'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m)
-        },
-        data() {
-            return {
-                reply: false
-            }
+        canReply: {
+            type: Boolean,
+            default: true
+        }
+    },
+    data() {
+        return {
+            reply: false
         }
     }
+}
 </script>
 
 

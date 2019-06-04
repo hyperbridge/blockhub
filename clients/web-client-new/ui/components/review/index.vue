@@ -1,15 +1,19 @@
 <template>
-    <div class="review" :class="{ 'background-review': background, 'p-0': !background, 'margin-bottom-40': !background}">
+    <div class="review"
+         :class="{ 'background-review': background, 'p-0': !background, 'margin-bottom-40': !background}">
         <div class="review__header">
-            <c-img :src="review.author.img" class="review__author-img"/>
+            <c-img :src="review.author.img"
+                   class="review__author-img" />
             <div class="review__author">
-                <h5 class="review__author-name">{{ review.author.name }}</h5>
+                <h5 class="review__author-name">
+                    {{ review.author.name }}
+                </h5>
                 <span class="review__author-date">{{ review.date | timeAgo }}</span>
             </div>
             <div class="review__rating">
                 <i class="review__rating-score">{{ review.rating }}</i>
                 <div>
-                    <c-rating-stars :number="review.rating"/>
+                    <c-rating-stars :number="review.rating" />
                     <div>
                         <strong>Played for {{ time_played }}</strong>
                     </div>
@@ -19,17 +23,22 @@
         <h4>{{ review.title }}</h4>
 
         <transition name="fade-scale">
-            <p v-if="show_more" :key="show_more">{{ review.text }}</p>
-            <p v-else>{{ review.text.substring(0, 200) }}</p>
+            <p v-if="show_more"
+               :key="show_more">
+                {{ review.text }}
+            </p>
+            <p v-else>
+                {{ review.text.substring(0, 200) }}
+            </p>
         </transition>
 
         <transition name="fade-scale">
-            <div class="review__user-setup" v-if="show_more">
+            <div v-if="show_more"
+                 class="review__user-setup">
                 <div
                     v-for="(param, index) in setup_params"
                     :key="index"
-                    class="param"
-                >
+                    class="param">
                     <strong class="param-title">{{ param }}</strong>
                     {{ review.setup[param.toLowerCase()] }}
                 </div>
@@ -39,25 +48,32 @@
         <div class="review__action">
             <span class="review__action-rate">
                 <a href="#">
-                    <i class="fas fa-thumbs-up up"></i>HELPFUL
+                    <i class="fas fa-thumbs-up up" />HELPFUL
                 </a>
                 <a href="#">
-                    <i class="fas fa-thumbs-down down"></i>NOT HELPFUL
+                    <i class="fas fa-thumbs-down down" />NOT HELPFUL
                 </a>
             </span>
-            <a href="#" @click.prevent="show_more = !show_more">
+            <a href="#"
+               @click.prevent="show_more = !show_more">
                 {{ show_more ? 'HIDE REVIEW' : 'READ MORE...' }}
             </a>
         </div>
         <!--<c-basic-popup :activated="show_more" @close=" show_more = !show_more " width="800">-->
-            <!--<c-post :post="post"/>-->
+        <!--<c-post :post="post"/>-->
         <!--</c-basic-popup>-->
     </div>
 </template>
 
 <script>
 export default {
-    name: 'review',
+    name: 'Review',
+    components: {
+        'c-rating-stars': () => import('~/components/rating-stars').then(m => m.default || m),
+        'c-author': () => import('~/components/author').then(m => m.default || m),
+        'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
+        'c-post': () => import('~/components/community/post-item').then(m => m.default || m)
+    },
     props: {
         review: {
             type: Object,
@@ -67,12 +83,6 @@ export default {
             type: Boolean,
             default: false
         }
-    },
-    components: {
-        'c-rating-stars': () => import('~/components/rating-stars').then(m => m.default || m),
-        'c-author': () => import('~/components/author').then(m => m.default || m),
-        'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
-        'c-post' : () => import('~/components/community/post-item').then(m => m.default || m)
     },
     data() {
         return {
@@ -88,10 +98,10 @@ export default {
     },
     computed: {
         time_played() {
-            const { minutes_played } = this.review;
-            const hours_played = Math.floor(minutes_played / 60);
+            const { minutes_played } = this.review
+            const hours_played = Math.floor(minutes_played / 60)
 
-            return hours_played + 'h ' + (minutes_played - hours_played * 60) + 'm';
+            return `${hours_played}h ${minutes_played - hours_played * 60}m`
         }
     }
 }

@@ -1,9 +1,16 @@
 <template>
     <div class="account-edit">
         <div class="account-name">
-            <input type="text" value="Account 1" :readonly="!nameEdit" :class="{'unstyled' : !nameEdit }"/>
-            <i class="fas fa-pencil-alt" @click="editName" v-if="!nameEdit"></i>
-            <i class="fas fa-check" @click="saveChanges" v-else></i>
+            <input type="text"
+                   value="Account 1"
+                   :readonly="!nameEdit"
+                   :class="{'unstyled' : !nameEdit }">
+            <i v-if="!nameEdit"
+               class="fas fa-pencil-alt"
+               @click="editName" />
+            <i v-else
+               class="fas fa-check"
+               @click="saveChanges" />
         </div>
         <div class="qr-code">
             <c-img src="https://images-eu.ssl-images-amazon.com/images/I/31Umxl57vfL.png" />
@@ -14,32 +21,36 @@
             </span>
         </div>
 
-        <c-button status="opacity-info" class="mb-3 w-100 justify-content-center" size="lg">
+        <c-button status="opacity-info"
+                  class="mb-3 w-100 justify-content-center"
+                  size="lg">
             View account on EtherScan
         </c-button>
 
-        <c-button status="opacity-info" size="lg" class="w-100 justify-content-center">
+        <c-button status="opacity-info"
+                  size="lg"
+                  class="w-100 justify-content-center">
             Export private key
         </c-button>
     </div>
 </template>
 
 <script>
-    export default {
-        data(){
-            return{
-                nameEdit: false
-            }
+export default {
+    data() {
+        return {
+            nameEdit: false
+        }
+    },
+    methods: {
+        editName() {
+            this.nameEdit = true
         },
-        methods:{
-            editName(){
-                this.nameEdit = true
-            },
-            saveChanges(){
-                this.nameEdit = false
-            }
+        saveChanges() {
+            this.nameEdit = false
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

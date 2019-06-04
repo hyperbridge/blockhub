@@ -1,32 +1,41 @@
 <template>
-    <c-block title="System Requirements" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+    <c-block title="System Requirements"
+             :noGutter="true"
+             :bgGradient="true"
+             :onlyContentBg="true">
         <template slot="heading-bar">
-            <i class="fas fa-laptop title-icon"></i>
+            <i class="fas fa-laptop title-icon" />
         </template>
-        <c-tabs-universal :tabNames="['Mac', 'Win', 'Linux']" :setActiveTab="activeTab">
+        <c-tabs-universal :tabNames="['Mac', 'Win', 'Linux']"
+                          :setActiveTab="activeTab">
             <c-tab-universal
                 v-for="(os, index) in ['Mac', 'Win', 'Linux']"
-                :tab_id="index + 1"
-                :key="index">
-                <ul class="system-requirements__list" v-if="platform(os)">
+                :key="index"
+                :tab_id="index + 1">
+                <ul v-if="platform(os)"
+                    class="system-requirements__list">
                     <li
                         v-for="(value, property) in platform(os)"
                         v-if="value"
                         :key="property"
-                        class="system-requirements__list-item"
-                    >
+                        class="system-requirements__list-item">
                         <strong>{{ property | reqProp }}</strong>
-                        <p v-if="property == 'os'" class="system-requirements__value">
+                        <p v-if="property == 'os'"
+                           class="system-requirements__value">
                             {{ value | upperFirstChar }}
                             <i
                                 class="fab"
-                                :class="`fa-${value == 'win' ? 'windows' : value == 'mac' ? 'apple' : 'linux'}`"
-                            ></i>
+                                :class="`fa-${value == 'win' ? 'windows' : value == 'mac' ? 'apple' : 'linux'}`" />
                         </p>
-                        <p v-else class="system-requirements__value">{{ value | upperFirstChar }}</p>
+                        <p v-else
+                           class="system-requirements__value">
+                            {{ value | upperFirstChar }}
+                        </p>
                     </li>
                 </ul>
-                <h4 v-else>Not currently supported.</h4>
+                <h4 v-else>
+                    Not currently supported.
+                </h4>
             </c-tab-universal>
         </c-tabs-universal>
     </c-block>
@@ -34,7 +43,16 @@
 
 <script>
 export default {
-    name: 'system-requirements',
+    name: 'SystemRequirements',
+    components: {
+        'c-tab-universal': () => import('~/components/tab/tab-universal').then(m => m.default || m),
+        'c-tabs-universal': () => import('~/components/tab/tabs-universal').then(m => m.default || m)
+    },
+    filters: {
+        reqProp(val) {
+            return val.replace(/[\s_]+/g, ' ').toUpperCase()
+        }
+    },
     props: {
         requirements: {
             type: Array,
@@ -47,28 +65,17 @@ export default {
         activeTab = activeTab ? activeTab.os : 'win'
 
         return {
-            activeTab: activeTab === 'mac' ? 1 : (activeTab === 'win' ? 2 : 3)
+            activeTab: activeTab === 'mac' ? 1 : activeTab === 'win' ? 2 : 3
         }
-    },
-    components: {
-        'c-tab-universal': () => import('~/components/tab/tab-universal').then(m => m.default || m),
-        'c-tabs-universal': () => import('~/components/tab/tabs-universal').then(m => m.default || m)
     },
     methods: {
         platform(val) {
-            return this.requirements.find((obj) => {
-                if (obj['os'] === val.toLowerCase())
-                    return obj
-                else
-                    return false
+            return this.requirements.find(obj => {
+                if (obj.os === val.toLowerCase()) { return obj }
+                return false
             })
         }
-    },
-    filters: {
-        reqProp(val) {
-            return val.replace(/[\s_]+/g, ' ').toUpperCase()
-        }
-    },
+    }
 }
 </script>
 

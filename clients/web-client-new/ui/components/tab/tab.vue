@@ -1,48 +1,51 @@
 <template>
-    <div class="tab-item" v-show="isActive" :class="{'bg-transparent' : transparentBg}">
+    <div v-show="isActive"
+         class="tab-item"
+         :class="{'bg-transparent' : transparentBg}">
         <div class="tab-item__container">
-            <slot></slot>
+            <slot />
         </div>
-        <div class="tab-item__footer" v-if="showFooter">
-            <slot name="footer"></slot>
+        <div v-if="showFooter"
+             class="tab-item__footer">
+            <slot name="footer" />
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        props: {
-            name: {
-                type: String,
-                required: true
-            },
-            selected: {
-                type: Boolean,
-                default: false
-            },
-            showFooter : {
-                type: Boolean,
-                default: false
-            },
-            transparentBg:{
-                type: Boolean,
-                default: false
-            }
+export default {
+    props: {
+        name: {
+            type: String,
+            required: true
         },
-        data() {
-            return {
-                isActive: false
-            }
+        selected: {
+            type: Boolean,
+            default: false
         },
-        computed: {
-            href() {
-                return '#' + this.name.toLowerCase().replace(/ /g, '-')
-            }
+        showFooter: {
+            type: Boolean,
+            default: false
         },
-        mounted() {
-            this.isActive = this.selected
+        transparentBg: {
+            type: Boolean,
+            default: false
         }
+    },
+    data() {
+        return {
+            isActive: false
+        }
+    },
+    computed: {
+        href() {
+            return `#${this.name.toLowerCase().replace(/ /g, '-')}`
+        }
+    },
+    mounted() {
+        this.isActive = this.selected
     }
+}
 </script>
 
 <style lang="scss" scoped>

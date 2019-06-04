@@ -1,35 +1,56 @@
 <template>
-    <c-block title="Decentralization Meter" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+    <c-block title="Decentralization Meter"
+             :noGutter="true"
+             :bgGradient="true"
+             :onlyContentBg="true">
         <template slot="heading-bar">
-            <i class="fas fa-laptop title-icon"></i>
+            <i class="fas fa-laptop title-icon" />
         </template>
-        <ul class="decentralization-meter" v-if="list.length">
-            <li v-for="(item, index) in list.map(item => item.value).sort().reverse()" class="decentralization-meter-item" :class="{ 'disabled': !item }" :key="index">
+        <ul v-if="list.length"
+            class="decentralization-meter">
+            <li v-for="(item, index) in list.map(item => item.value).sort().reverse()"
+                :key="index"
+                class="decentralization-meter-item"
+                :class="{ 'disabled': !item }">
                 <div>{{ item.title }}</div>
             </li>
         </ul>
         <table class="decentralization-meter__table">
             <thead>
-                <th width="80%"></th>
-                <th></th>
+                <th width="80%" />
+                <th />
             </thead>
             <tbody>
-                <transition-group name="fadeLeft" tag="tr" v-for="(item) in list" v-if="item.show == 'default' || showDetails" :key="item.name">
-                    <td class="decentralization-meter__table-key" :key="`${item.name}-1`">{{ item.name }}</td>
-                    <td class="decentralization-meter__table-value" :key="`${item.name}-2`">
-                        <i class="fas" :class="{'fa-check-circle': !!item.value, 'fa-times-circle': !item.value }" />
+                <transition-group v-for="(item) in list"
+                                  v-if="item.show == 'default' || showDetails"
+                                  :key="item.name"
+                                  name="fadeLeft"
+                                  tag="tr">
+                    <td :key="`${item.name}-1`"
+                        class="decentralization-meter__table-key">
+                        {{ item.name }}
+                    </td>
+                    <td :key="`${item.name}-2`"
+                        class="decentralization-meter__table-value">
+                        <i class="fas"
+                           :class="{'fa-check-circle': !!item.value, 'fa-times-circle': !item.value }" />
                     </td>
                 </transition-group>
                 <tr style="background: transparent">
-                    <td colspan="2" class="text-center">
-                        <transition name="fade" v-if="!showDetails">
-                            <div class="decentralization-meter__toggle-btn" @click="toggleDetails">
-                                Show all <i class="fas fa-angle-double-down"></i>
+                    <td colspan="2"
+                        class="text-center">
+                        <transition v-if="!showDetails"
+                                    name="fade">
+                            <div class="decentralization-meter__toggle-btn"
+                                 @click="toggleDetails">
+                                Show all <i class="fas fa-angle-double-down" />
                             </div>
                         </transition>
-                        <transition name="fade" v-else>
-                            <div class="decentralization-meter__toggle-btn" @click="toggleDetails">
-                                Hide all <i class="fas fa-angle-double-up"></i>
+                        <transition v-else
+                                    name="fade">
+                            <div class="decentralization-meter__toggle-btn"
+                                 @click="toggleDetails">
+                                Hide all <i class="fas fa-angle-double-up" />
                             </div>
                         </transition>
                     </td>
@@ -48,7 +69,7 @@ export default {
             options_icons: {
                 subtitles: 'closed-captioning',
                 interface: 'language',
-                fullAudio: 'volume-off',
+                fullAudio: 'volume-off'
             },
             showDetails: false,
             list: [
@@ -78,9 +99,9 @@ export default {
     },
     methods: {
         toggleDetails() {
-            this.showDetails = !this.showDetails;
+            this.showDetails = !this.showDetails
         }
-    },
+    }
 }
 </script>
 

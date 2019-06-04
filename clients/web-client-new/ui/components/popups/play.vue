@@ -1,6 +1,6 @@
 <template>
-    <c-basic-popup :activated="activated" @close="$emit('close')">
-
+    <c-basic-popup :activated="activated"
+                   @close="$emit('close')">
         <template slot="header">
             <div class="h2 p-0">
                 Got steam?
@@ -13,7 +13,9 @@
                 Do you have BlockHub installed on this computer?
             </p>
             <div class="d-flex mt-3 justify-content-between align-items-center">
-                <a class="action" href="#" @click="$emit('play')">
+                <a class="action"
+                   href="#"
+                   @click="$emit('play')">
                     <div class="h5 font-weight-bold p-0 m-0">
                         Yes, BlockHub is installed
                     </div>
@@ -22,7 +24,9 @@
                     </div>
                 </a>
 
-                <a class="action" href="https://store.steampowered.com/about/" target="_blank">
+                <a class="action"
+                   href="https://store.steampowered.com/about/"
+                   target="_blank">
                     <div class="h5 font-weight-bold p-0 m-0">
                         No, I need BlockHub
                     </div>
@@ -35,10 +39,18 @@
 
         <template slot="footer">
             <div class="d-flex align-items-center justify-content-between border-top pt-4">
-                <img src="../../static/img/icons/steam-square-icon.png" alt="BlockHub" width="45" style="opacity: .5" class="mr-4"/>
+                <img src="../../static/img/icons/steam-square-icon.png"
+                     alt="BlockHub"
+                     width="45"
+                     style="opacity: .5"
+                     class="mr-4">
                 <div>
                     BlockHub is premier desktop gaming platform. It's free to join and ease to use.
-                    <c-button status="plain" href="https://store.steampowered.com/about/" class="p-0">Learn more about BlockHub</c-button>
+                    <c-button status="plain"
+                              href="https://store.steampowered.com/about/"
+                              class="p-0">
+                        Learn more about BlockHub
+                    </c-button>
                 </div>
             </div>
         </template>
@@ -46,18 +58,18 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            activated: {
-                type: Boolean,
-                default: false
-            },
-            gameName: String
+export default {
+    components: {
+        'c-basic-popup': () => import('~/components/popups/basic.vue').then(m => m.default || m)
+    },
+    props: {
+        activated: {
+            type: Boolean,
+            default: false
         },
-        components: {
-            'c-basic-popup': () => import('~/components/popups/basic.vue').then(m => m.default || m)
-        }
+        gameName: String
     }
+}
 </script>
 
 <style lang="scss" scoped>

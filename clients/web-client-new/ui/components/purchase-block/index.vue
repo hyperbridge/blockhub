@@ -1,70 +1,106 @@
 <template>
-    <c-block :title="title" class="purchase-block" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-
-        <div class="purchase-block__tags col-12" v-if="tags">
-            <div v-for="(tag, index) in tags" :key="index">
+    <c-block :title="title"
+             class="purchase-block"
+             :noGutter="true"
+             :bgGradient="true"
+             :onlyContentBg="true">
+        <div v-if="tags"
+             class="purchase-block__tags col-12">
+            <div v-for="(tag, index) in tags"
+                 :key="index">
                 {{ tag }}
             </div>
         </div>
 
-        <div class="purchase-block__price col-12" v-if="!isUnavailable">
+        <div v-if="!isUnavailable"
+             class="purchase-block__price col-12">
             <span v-if="price">{{ price | convertCurrency }}</span><span v-else>$0.00</span>
         </div>
 
-        <div class="purchase-block__info col-12" v-if="eligibleTokens || offersPurchases || releaseDate || isPurchased || isUnavailable">
-            <div v-if="eligibleTokens">Eligible for up to <i class="fas fa-coins mx-1" style="color: #FADC72"></i> HBX +{{ eligibleTokens }}</div>
-            <div v-if="offersPurchases">Offers In-Game Purchases</div>
-            <div class="release-date" v-if="releaseDate">Release date: {{ releaseDate | customDate('MM/DD/YYYY') }}</div>
+        <div v-if="eligibleTokens || offersPurchases || releaseDate || isPurchased || isUnavailable"
+             class="purchase-block__info col-12">
+            <div v-if="eligibleTokens">
+                Eligible for up to <i class="fas fa-coins mx-1"
+                                      style="color: #FADC72" /> HBX +{{ eligibleTokens }}
+            </div>
+            <div v-if="offersPurchases">
+                Offers In-Game Purchases
+            </div>
+            <div v-if="releaseDate"
+                 class="release-date">
+                Release date: {{ releaseDate | customDate('MM/DD/YYYY') }}
+            </div>
 
-            <div v-if="isPurchased" class="purchased-status">
-                <i class="fas fa-check"></i>
+            <div v-if="isPurchased"
+                 class="purchased-status">
+                <i class="fas fa-check" />
                 Purchased
             </div>
 
-            <div v-if="isUnavailable" class="unavailable-status">
-                <i class="fas fa-ban"></i>
+            <div v-if="isUnavailable"
+                 class="unavailable-status">
+                <i class="fas fa-ban" />
                 Unavailable
             </div>
         </div>
 
         <div class="purchase-block__buttons-group col-12">
-            <c-button status="outline-success" :href="purchaseLink" iconHide size="xl" :shadow="false" v-if="isReleased && price" @click="onClickPurchase">
+            <c-button v-if="isReleased && price"
+                      status="outline-success"
+                      :href="purchaseLink"
+                      iconHide
+                      size="xl"
+                      :shadow="false"
+                      @click="onClickPurchase">
                 Proceed to Purchase
             </c-button>
 
-            <c-button status="success" size="lg" icon="download" :href="purchaseLink" v-if="!price && isReleased" @click="onClickPurchase">
+            <c-button v-if="!price && isReleased"
+                      status="success"
+                      size="lg"
+                      icon="download"
+                      :href="purchaseLink"
+                      @click="onClickPurchase">
                 Free Download
             </c-button>
 
-            <c-button iconHide icon="download" :href="demoLink" v-if="demoLink">
+            <c-button v-if="demoLink"
+                      iconHide
+                      icon="download"
+                      :href="demoLink">
                 Download Demo
             </c-button>
 
-            <c-button iconHide status="success" size="xl" icon="download" :href="playLink" v-if="playLink">
+            <c-button v-if="playLink"
+                      iconHide
+                      status="success"
+                      size="xl"
+                      icon="download"
+                      :href="playLink">
                 Play Now
             </c-button>
 
             <c-button-fav
-                @click="$emit('addToWishlist')"
                 target="Wishlist"
                 :active="inWishlist"
-                class="mt-3" />
+                class="mt-3"
+                @click="$emit('addToWishlist')" />
 
             <c-button-fav
-                @click="$emit('addToShortcut')"
                 target="Shortcuts"
                 :active="inShortcut"
                 activeIcon="link"
                 unactiveIcon="unlink"
-                class="mt-3" />
+                class="mt-3"
+                @click="$emit('addToShortcut')" />
 
             <c-button-fav
-                @click="addToCollection"
                 target="Collection"
                 :active="inShortcut"
                 activeIcon="link"
                 unactiveIcon="unlink"
-                class="mt-3" />
+                class="mt-3"
+                @click="addToCollection" />
         </div>
     </c-block>
 </template>
@@ -72,10 +108,14 @@
 <script>
 import moment from 'moment'
 export default {
-    name: 'purchase-block',
+    name: 'PurchaseBlock',
+    components: {
+        'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m),
+        'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m)
+    },
     props: {
         tags: Array,
-        title:{
+        title: {
             type: String,
             default: null
         },
@@ -88,7 +128,7 @@ export default {
             default: 0
         },
         releaseDate: {
-            type: String,
+            type: String
         },
         offersPurchases: {
             type: Boolean,
@@ -119,10 +159,6 @@ export default {
         purchaseLink: String,
         fullReviewsLink: String,
         onClickPurchase: Function
-    },
-    components: {
-        'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m),
-        'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m)
     },
     data() {
         return {}

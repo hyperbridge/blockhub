@@ -1,8 +1,10 @@
 <template>
-    <div class="trade-offer" :class="{ 'trade-offer--new': offer.new }">
+    <div class="trade-offer"
+         :class="{ 'trade-offer--new': offer.new }">
         <div class="trade-offer__date">
             <span>
-                <span class="trade-offer__status" v-if="offer.new">NEW</span>
+                <span v-if="offer.new"
+                      class="trade-offer__status">NEW</span>
                 {{ offer.createdAt | formatDate }} - {{ offer.createdAt | timeAgo }}
             </span>
             <span>
@@ -11,39 +13,45 @@
         </div>
         <div
             class="trade-offer__content"
-            @click="expandDetails()"
-        >
-            <c-author :author="offer.contractor"/>
+            @click="expandDetails()">
+            <c-author :author="offer.contractor" />
             <span>
                 Trade {{ offer.yourOffer.length }} for {{ offer.contractorOffer.length }} assets
             </span>
             <div>
-                <c-button status="success" iconHide>Accept</c-button>
-                <c-button status="danger" iconHide>Decline</c-button>
+                <c-button status="success"
+                          iconHide>
+                    Accept
+                </c-button>
+                <c-button status="danger"
+                          iconHide>
+                    Decline
+                </c-button>
             </div>
         </div>
         <transition name="slide-in-top">
-            <div class="trade-offer__details" v-if="showDetails">
+            <div v-if="showDetails"
+                 class="trade-offer__details">
                 <h4>Offer details</h4>
                 <table
                     v-for="(assets, assetsKey) in assets"
                     :key="assetsKey"
-                    class="trade-offer__assets-table"
-                >
+                    class="trade-offer__assets-table">
                     <thead>
                         <th>{{ assetsKey }} items</th>
                         <th>Total value {{ totalVal[assetsKey] | convertCurrency }}</th>
                     </thead>
                     <tbody>
-                        <tr v-for="(asset, index) in assets" :key="index">
+                        <tr v-for="(asset, index) in assets"
+                            :key="index">
                             <td>
                                 <c-tooltip>
                                     <c-asset-preview
                                         slot="tooltip"
-                                        :asset="asset"
-                                    />
+                                        :asset="asset" />
                                     <div class="asset__info">
-                                        <c-img :src="asset.image" class="asset__image"/>
+                                        <c-img :src="asset.image"
+                                               class="asset__image" />
                                         {{ asset.name }}
                                     </div>
                                 </c-tooltip>
@@ -55,7 +63,9 @@
                 <table class="trade-offer__summary-table">
                     <thead>
                         <tr>
-                            <th colspan="2">Summary:</th>
+                            <th colspan="2">
+                                Summary:
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,8 +89,7 @@
                                         : finalBalance < 0
                                             ? 'total-balance--negative'
                                             : ''
-                                    ]"
-                                >
+                                    ]">
                                     {{ finalBalance > 0 ? '+' : '' }}
                                     {{ finalBalance }}$
                                 </span>
@@ -94,11 +103,14 @@
                         iconHide
                         @click="$router.push({
                             path: '/marketplace/trade/' + offer.id
-                        })"
-                    >Go to transaction</c-button>
+                        })">
+                        Go to transaction
+                    </c-button>
                     <span>
-                        <c-button status="success" iconHide>Accept</c-button>
-                        <c-button status="danger" iconHide>Decline</c-button>
+                        <c-button status="success"
+                                  iconHide>Accept</c-button>
+                        <c-button status="danger"
+                                  iconHide>Decline</c-button>
                     </span>
                 </div>
             </div>
@@ -107,57 +119,57 @@
 </template>
 
 <script>
-    export default {
-        name: 'trade-offer',
-        props: {
-            offer: {
-                type: Object,
-                required: true
-            }
+export default {
+    name: 'TradeOffer',
+    components: {
+        'c-author': () => import('~/components/author').then(m => m.default || m),
+        'c-tooltip': () => import('~/components/tooltips/universal').then(m => m.default || m),
+        'c-asset-preview': () => import('~/components/asset-preview').then(m => m.default || m)
+    },
+    props: {
+        offer: {
+            type: Object,
+            required: true
+        }
+    },
+    data() {
+        return {
+            showDetails: false
+        }
+    },
+    computed: {
+        totalVal() {
+            const { assets, round } = this
+            return Object.entries(assets).reduce((total, [owner, assets]) => ({
+                ...total,
+                [owner]: round(
+                    assets.reduce((price, asset) => price += asset.price.current, 0)
+                )
+            }), {})
         },
-        components: {
-            'c-author': () => import('~/components/author').then(m => m.default || m),
-            'c-tooltip': () => import('~/components/tooltips/universal').then(m => m.default || m),
-            'c-asset-preview': () => import('~/components/asset-preview').then(m => m.default || m),
+        finalBalance() {
+            return this.round(this.totalVal.Yours - this.totalVal[this.contrName])
         },
-        data() {
+        contrName() {
+            return `${this.offer.contractor.name}s`
+        },
+        assets() {
             return {
-                showDetails: false
-            }
-        },
-        methods: {
-            expandDetails() {
-                this.showDetails = !this.showDetails;
-                if (this.offer.new) this.$emit('wasSeen');
-            },
-            round(num) {
-                return Math.floor(num * 100) / 100;
-            }
-        },
-        computed: {
-            totalVal() {
-                const { assets, round } = this;
-                return Object.entries(assets).reduce((total, [owner, assets]) => ({
-                    ...total,
-                    [owner]: round(
-                        assets.reduce((price, asset) => price += asset.price.current, 0)
-                    )
-                }), {});
-            },
-            finalBalance() {
-                return this.round(this.totalVal.Yours - this.totalVal[this.contrName]);
-            },
-            contrName() {
-                return this.offer.contractor.name + 's';
-            },
-            assets() {
-                return {
-                    Yours: this.offer.yourOffer,
-                    [this.contrName]: this.offer.contractorOffer
-                }
+                Yours: this.offer.yourOffer,
+                [this.contrName]: this.offer.contractorOffer
             }
         }
+    },
+    methods: {
+        expandDetails() {
+            this.showDetails = !this.showDetails
+            if (this.offer.new) this.$emit('wasSeen')
+        },
+        round(num) {
+            return Math.floor(num * 100) / 100
+        }
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,10 +1,16 @@
 <template>
-    <div class="promotion-item" :class="{ 'bottom-border': border}">
+    <div class="promotion-item"
+         :class="{ 'bottom-border': border}">
         <div class="promotion-item__icon">
-            <i class="fas fa-star" v-if="basic" style="color: #FADC72"></i>
-            <i class="fas fa-shopping-cart" v-else></i>
+            <i v-if="basic"
+               class="fas fa-star"
+               style="color: #FADC72" />
+            <i v-else
+               class="fas fa-shopping-cart" />
         </div>
-        <h5 class="promotion-item__title" :class="{'font-weight-bold' : basic}" v-if="title">
+        <h5 v-if="title"
+            class="promotion-item__title"
+            :class="{'font-weight-bold' : basic}">
             {{ title }}
         </h5>
         <c-button
@@ -12,10 +18,10 @@
             status="outline-success"
             data-toggle="modal"
             data-target="#purchase-modal"
-            iconHide
-        >
+            iconHide>
             <div v-if="price">
-                <div class="font-weight-normal text-uppercase" v-if="basic">
+                <div v-if="basic"
+                     class="font-weight-normal text-uppercase">
                     Basic Package
                 </div>
                 Buy for {{ price | convertCurrency }}
@@ -29,7 +35,7 @@
 
 <script>
 export default {
-    name: 'promotion-item',
+    name: 'PromotionItem',
     props: {
         title: {
             type: String
@@ -37,23 +43,23 @@ export default {
         price: {
             type: String
         },
-        link:{
+        link: {
             type: String
         },
-        basic:{
+        basic: {
             type: Boolean,
             default: false
         },
-        border:{
+        border: {
             type: Boolean,
             default: false
         },
-        icon:{
+        icon: {
             type: String,
             default: 'shopping-cart'
         },
-        iconColor:{
-            type: String,
+        iconColor: {
+            type: String
         }
     }
 }

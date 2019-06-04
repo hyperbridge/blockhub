@@ -1,23 +1,33 @@
 <template>
-    <transition name="fade" :duration="100">
-        <div class="c-terms-popup" v-if="activated" @click.self.prevent="$emit('close')">
-            <div class="c-terms-popup__item" :style="{ 'width': + width + 'px'}">
+    <transition name="fade"
+                :duration="100">
+        <div v-if="activated"
+             class="c-terms-popup"
+             @click.self.prevent="$emit('close')">
+            <div class="c-terms-popup__item"
+                 :style="{ 'width': + width + 'px'}">
                 <div class="position-relative">
                     <div class="c-terms-popup__content">
-                        <div class="c-terms-popup__close" @click="$emit('close')">
-                            <i class="fas fa-times"></i>
+                        <div class="c-terms-popup__close"
+                             @click="$emit('close')">
+                            <i class="fas fa-times" />
                         </div>
                         <div class="c-terms-popup__header">
                             <slot name="header" />
                         </div>
-                        <div class="c-terms-popup__body" id="terms-popup__body" @scroll="checkReadState">
+                        <div id="terms-popup__body"
+                             class="c-terms-popup__body"
+                             @scroll="checkReadState">
                             <slot name="body" />
                         </div>
                         <div class="c-terms-popup__footer">
-                            <c-button status="plain" class="color-red">
+                            <c-button status="plain"
+                                      class="color-red">
                                 Cancel
                             </c-button>
-                            <c-button status="gradient-info" class="ml-3" :class="{'not-accept' : !isRead}">
+                            <c-button status="gradient-info"
+                                      class="ml-3"
+                                      :class="{'not-accept' : !isRead}">
                                 I Agree
                             </c-button>
                         </div>
@@ -29,30 +39,30 @@
 </template>
 
 <script>
-    export default {
-        props:{
-            activated:{
-                type: Boolean,
-                default: false
-            },
-            width: String
+export default {
+    props: {
+        activated: {
+            type: Boolean,
+            default: false
         },
-        data(){
-            return{
-                isRead: false
-            }
-        },
-        methods:{
-            checkReadState(){
-                if(($('#terms-popup__body').scrollTop() + $('#terms-popup__body').innerHeight()) >= ($('#terms-popup__body')[0].scrollHeight)) {
-                    console.log('1')
-                    this.isRead = true
-                } else {
-                    this.isRead = false
-                }
+        width: String
+    },
+    data() {
+        return {
+            isRead: false
+        }
+    },
+    methods: {
+        checkReadState() {
+            if (($('#terms-popup__body').scrollTop() + $('#terms-popup__body').innerHeight()) >= $('#terms-popup__body')[0].scrollHeight) {
+                console.log('1')
+                this.isRead = true
+            } else {
+                this.isRead = false
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

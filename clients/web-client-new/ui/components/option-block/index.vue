@@ -1,8 +1,9 @@
 <template>
-    <div class="option-block" :class="{'box-shadow' : shadow }">
+    <div class="option-block"
+         :class="{'box-shadow' : shadow }">
         <div class="option-block__head">
             <div class="option-block__head-logo">
-                <img :src="image"/>
+                <img :src="image">
             </div>
             <div class="option-block__head-info">
                 <div class="h3">
@@ -13,73 +14,79 @@
                 </div>
             </div>
         </div>
-        <div class="option-block__notification" :style="{'background-color' : ntfColor }">
+        <div class="option-block__notification"
+             :style="{'background-color' : ntfColor }">
             {{ notification }}
         </div>
         <div class="option-block__body">
             <div class="option-block__list">
                 <c-option-list-item v-for="item in list"
-                    :selected="selectedId == item.id ? true : false"
-                    :image="item.image"
-                    :price="item.price"
-                    :key="item.id"
-                    @select="selectThis(item.id)"
-                >
+                                    :key="item.id"
+                                    :selected="selectedId == item.id ? true : false"
+                                    :image="item.image"
+                                    :price="item.price"
+                                    @select="selectThis(item.id)">
                     {{ item.name }}
                 </c-option-list-item>
             </div>
             <div class="option-block__action-list">
-                <c-button status="second-info" size="xl" class="my-2" @click="$emit('buy')">
+                <c-button status="second-info"
+                          size="xl"
+                          class="my-2"
+                          @click="$emit('buy')">
                     Buy now
                 </c-button>
-                <c-button status="opacity-info" @click="$emit('gift')" class="my-2" size="xl" style="border-radius: 2px">
+                <c-button status="opacity-info"
+                          class="my-2"
+                          size="xl"
+                          style="border-radius: 2px"
+                          @click="$emit('gift')">
                     Gift
                 </c-button>
                 <c-button-fav
-                    @click="$emit('addToWishlist')"
                     target="Wishlist"
                     :active="inWishlist"
                     class="text-center wishlist-btn"
-                />
+                    @click="$emit('addToWishlist')" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'option-block',
-        props:{
-            image: String,
-            title: String,
-            subtitle: String,
-            notification: String,
-            list: [ Array, Object ],
-            ntfColor: String,
-            inWishlist: {
-                type: Boolean,
-                default: false
-            },
-            shadow: {
-                type: Boolean,
-                default: false
-            }
+export default {
+    name: 'OptionBlock',
+    components: {
+        'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m),
+        'c-option-list-item': () => import('~/components/option-block/list-item').then(m => m.default || m)
+    },
+    props: {
+        image: String,
+        title: String,
+        subtitle: String,
+        notification: String,
+        list: [Array, Object],
+        ntfColor: String,
+        inWishlist: {
+            type: Boolean,
+            default: false
         },
-        data(){
-            return{
-                selectedId: ''
-            }
-        },
-        components: {
-            'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m),
-            'c-option-list-item': () => import('~/components/option-block/list-item').then(m => m.default || m)
-        },
-        methods:{
-            selectThis(id){
-                this.selectedId = id
-            }
+        shadow: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data() {
+        return {
+            selectedId: ''
+        }
+    },
+    methods: {
+        selectThis(id) {
+            this.selectedId = id
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

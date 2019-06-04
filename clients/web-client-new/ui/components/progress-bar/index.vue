@@ -1,13 +1,13 @@
 <template>
-    <div class="progress" :class="['progress-bar-' + direction ]">
+    <div class="progress"
+         :class="['progress-bar-' + direction ]">
         <div
             class="progress-bar"
             role="progressbar"
             :style="{ [direction_prop] : progress + '%' }"
             :aria-valuenow="progress"
             aria-valuemin="0"
-            aria-valuemax="100"
-        >
+            aria-valuemax="100">
             {{ show_text && progress > 8 ? progress : '' }}
             <span class="sr-only">{{ progress }}</span>
         </div>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-    name: 'progress-bar',
+    name: 'ProgressBar',
     props: {
         percentages: [String, Number],
         values: Object,
@@ -24,17 +24,17 @@ export default {
             type: String,
             default: 'horizontal',
             validator(direction) {
-                return ['horizontal', 'vertical'].includes(direction);
+                return ['horizontal', 'vertical'].includes(direction)
             }
         },
-        show_text: Boolean
+        showText: Boolean
     },
     computed: {
         progress() {
-            const { values } = this;
-            return values ? parseFloat(values.reached) / parseFloat(values.goal) * 100 : this.percentages;
+            const { values } = this
+            return values ? parseFloat(values.reached) / parseFloat(values.goal) * 100 : this.percentages
         },
-        direction_prop(){
+        direction_prop() {
             return this.direction == 'horizontal' ? 'width' : 'height'
         }
     }

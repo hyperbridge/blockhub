@@ -2,8 +2,8 @@
     <div class="c-table__wrapper">
         <table class="c-table"
                :class="[{
-               'c-table--stripped' : stripped,
-               'c-table--bordered' : bordered,
+                   'c-table--stripped' : stripped,
+                   'c-table--bordered' : bordered,
                }, tableSize ]">
             <slot />
         </table>
@@ -11,34 +11,34 @@
 </template>
 
 <script>
-    export default {
-        props:{
-            stripped:{
-                type: Boolean,
-                default: false
-            },
-            bordered:{
-                type: Boolean,
-                default: false
-            },
-            size:{
-                type: String,
-                default: 'md'
-            }
+export default {
+    props: {
+        stripped: {
+            type: Boolean,
+            default: false
         },
-        computed:{
-            tableSize(){
-                switch (this.size) {
-                    case 'sm' :
-                        return 'c-table--size-sm'
-                    case 'md' :
-                        return 'c-table--size-md'
-                    case 'lg' :
-                        return 'c-table--size-lg'
-                }
+        bordered: {
+            type: Boolean,
+            default: false
+        },
+        size: {
+            type: String,
+            default: 'md'
+        }
+    },
+    computed: {
+        tableSize() {
+            switch (this.size) {
+            case 'sm':
+                return 'c-table--size-sm'
+            case 'md':
+                return 'c-table--size-md'
+            case 'lg':
+                return 'c-table--size-lg'
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

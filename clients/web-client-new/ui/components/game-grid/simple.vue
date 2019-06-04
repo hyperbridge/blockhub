@@ -1,43 +1,58 @@
 <template>
     <div class="product-grid__container">
-        <div class="product-grid__item-container"
+        <div v-for="(item, index) in items"
              v-if="items.length"
-             v-for="(item, index) in items"
-             v-bind:key="index"
-             :style="{ width: 'calc(100% / ' + itemInRow + ')'}"
-        >
+             :key="index"
+             class="product-grid__item-container"
+             :style="{ width: 'calc(100% / ' + itemInRow + ')'}">
             <div class="product-grid__item">
                 <div v-if="$slots.block">
                     <slot name="block" />
                 </div>
-                <div class="card-body padding-0" v-else>
-                    <c-button status="none" :to="`/product/${item.id}`"><c-img class="card-img-top" :src="item.meta.images.mediumTile" /></c-button>
-                    <h4><c-button status="none" :to="`/product/${item.id}`">{{ item.name }}</c-button></h4>
-                    <p class="card-text" hidden>{{ item.shortDescription }} </p>
-                    <c-tags :tags="item.tags.map(t => t.value)"></c-tags>
+                <div v-else
+                     class="card-body padding-0">
+                    <c-button status="none"
+                              :to="`/product/${item.id}`">
+                        <c-img class="card-img-top"
+                               :src="item.meta.images.mediumTile" />
+                    </c-button>
+                    <h4>
+                        <c-button status="none"
+                                  :to="`/product/${item.id}`">
+                            {{ item.name }}
+                        </c-button>
+                    </h4>
+                    <p class="card-text"
+                       hidden>
+                        {{ item.shortDescription }}
+                    </p>
+                    <c-tags :tags="item.tags.map(t => t.value)" />
                 </div>
             </div>
         </div>
         <p v-if="!items.length">
-            Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?
+            Nothing could be found. Want to <c-button status="plain"
+                                                      @click="$store.commit('application/activateModal', 'coming-soon')">
+                Check for updates
+            </c-button>?
         </p>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'game-grid',
+    name: 'GameGrid',
+    components: {
+        'c-tags': () => import('~/components/tags').then(m => m.default || m)
+    },
     props: {
         items: {
             type: Array,
             require: true
         },
-        itemInRow:{
+        itemInRow: {
             default: '4'
         }
-    },
-    components: {
-        'c-tags': () => import('~/components/tags').then(m => m.default || m)
     }
 }
 </script>

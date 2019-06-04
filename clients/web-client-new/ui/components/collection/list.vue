@@ -4,12 +4,17 @@
             <h3>{{ title }}</h3>
             <div>{{ description }}</div>
             <div class="slider-dots">
-                <div class="collection-swiper-pagination swiper-pagination" ref="sliderDots" slot="pagination"></div>
+                <div ref="sliderDots"
+                     slot="pagination"
+                     class="collection-swiper-pagination swiper-pagination" />
             </div>
         </div>
         <div class="collection-list__container">
-            <c-swiper :options="options" class="padding-10" v-if="collections.length">
-                <c-swiper-slide v-for="(collection, index) in collections" :key="index">
+            <c-swiper v-if="collections.length"
+                      :options="options"
+                      class="padding-10">
+                <c-swiper-slide v-for="(collection, index) in collections"
+                                :key="index">
                     <c-collection-item
                         :id="collection.id"
                         :name="collection.name"
@@ -18,39 +23,43 @@
                         :assets="collection.meta.assets" />
                 </c-swiper-slide>
             </c-swiper>
-            <p v-if="!collections.length" style="padding: 20px; text-align: center;">
-                No collections yet. <c-button status="plain" @click="$store.commit('application/activateModal', 'add-collection')">Create one</c-button>?
+            <p v-if="!collections.length"
+               style="padding: 20px; text-align: center;">
+                No collections yet. <c-button status="plain"
+                                              @click="$store.commit('application/activateModal', 'add-collection')">
+                    Create one
+                </c-button>?
             </p>
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'collection-list',
-        props: ['title', 'description', 'collections'],
-        components: {
-            'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m),
-        },
-        data() {
-            return {
-                options: {
-                    slidesPerView: 3,
-                    spaceBetween: 10,
-                    pagination: {
-                        el: '.collection-swiper-pagination',
-                        clickable: true
-                    },
-                    breakpoints: {
-                        768: {
-                            slidesPerView: 1,
-                            spaceBetween: 0
-                        },
+export default {
+    name: 'CollectionList',
+    components: {
+        'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m)
+    },
+    props: ['title', 'description', 'collections'],
+    data() {
+        return {
+            options: {
+                slidesPerView: 3,
+                spaceBetween: 10,
+                pagination: {
+                    el: '.collection-swiper-pagination',
+                    clickable: true
+                },
+                breakpoints: {
+                    768: {
+                        slidesPerView: 1,
+                        spaceBetween: 0
                     }
                 }
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

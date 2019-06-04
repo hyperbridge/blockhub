@@ -1,20 +1,37 @@
 <template>
     <transition name="fade">
-        <div class="cookie-policy" v-if="!settings.client.cookiePolicyAccepted">
+        <div v-if="!settings.client.cookiePolicyAccepted"
+             class="cookie-policy">
             <p class="p-0 m-0">
                 By using this website, you agree to our
-                <c-button status="plain" class="p-0 m-0" @click="showPopup">cookie policy</c-button>
+                <c-button status="plain"
+                          class="p-0 m-0"
+                          @click="showPopup">
+                    cookie policy
+                </c-button>
             </p>
-            <c-button status="info" class="margin-left-20" iconHide @click="updateClientSettings()">
+            <c-button status="info"
+                      class="margin-left-20"
+                      iconHide
+                      @click="updateClientSettings()">
                 Dismiss
             </c-button>
-            <c-popup :activated="show" @close="closePopup" title="Cookie Policy">
+            <c-popup :activated="show"
+                     title="Cookie Policy"
+                     @close="closePopup">
                 <p>
                     We use cookies to make interactions with our websites and services easy and meaningful,
-                    to better understand how they are used and to tailor advertising.</p>
+                    to better understand how they are used and to tailor advertising.
+                </p>
                 <p>
-                    You can <c-button status="plain" href="#">read more</c-button>
-                    and <c-button status="plain" href="#">make you cookies choices here</c-button>.
+                    You can <c-button status="plain"
+                                      href="#">
+                        read more
+                    </c-button>
+                    and <c-button status="plain"
+                                  href="#">
+                        make you cookies choices here
+                    </c-button>.
                 </p>
                 <p>
                     By continuing to use this site you are giving
@@ -22,7 +39,9 @@
                 </p>
                 <template slot="footer">
                     <div class="text-right w-100">
-                        <c-button status="success" iconHide @click="updateClientSettings()">
+                        <c-button status="success"
+                                  iconHide
+                                  @click="updateClientSettings()">
                             Accept
                         </c-button>
                     </div>
@@ -35,11 +54,11 @@
 <script>
 import { mapMutations } from 'vuex'
 export default {
-    name: 'cookie-policy',
-    components:{
-        'c-popup': () => import('~/components/popups').then(m => m.default || m),
+    name: 'CookiePolicy',
+    components: {
+        'c-popup': () => import('~/components/popups').then(m => m.default || m)
     },
-    data(){
+    data() {
         return {
             show: false
         }
@@ -50,10 +69,10 @@ export default {
             this.$store.commit('application/updateClientSettings', { key: 'cookiePolicyAccepted' })
             this.show = false
         },
-        showPopup(){
+        showPopup() {
             this.show = true
         },
-        closePopup(){
+        closePopup() {
             this.show = false
         }
     },

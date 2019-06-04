@@ -4,18 +4,43 @@
             title="STORE"
             subTitle="General"
             mClass="margin-bottom-20">
-            <c-sidebar-menu-link to="/">Home</c-sidebar-menu-link>
-            <c-sidebar-menu-link to="/community"v-darklaunch="'COMMUNITY'">Community</c-sidebar-menu-link>
-            <c-sidebar-menu-link to="/ideas">Browse Ideas</c-sidebar-menu-link>
-            <c-sidebar-menu-link to="/projects">Browse Crowdfunds</c-sidebar-menu-link>
-            <c-sidebar-menu-link to="/games">Browse Games</c-sidebar-menu-link>
-            <c-sidebar-menu-link to="/realms" v-darklaunch="'REALMS'">Browse Realms</c-sidebar-menu-link>
-            <c-sidebar-menu-link to="/curators" v-darklaunch="'CURATORS'">Browse Curators</c-sidebar-menu-link>
-            <c-sidebar-menu-link to="/collections" v-darklaunch="'COLLECTIONS'">Browse Collections</c-sidebar-menu-link>
-            <c-sidebar-menu-link to="/marketplace" v-darklaunch="'MARKETPLACE'">Browse Items</c-sidebar-menu-link>
+            <c-sidebar-menu-link to="/">
+                Home
+            </c-sidebar-menu-link>
+            <c-sidebar-menu-link v-darklaunch="'COMMUNITY'"
+                                 to="/community">
+                Community
+            </c-sidebar-menu-link>
+            <c-sidebar-menu-link to="/ideas">
+                Browse Ideas
+            </c-sidebar-menu-link>
+            <c-sidebar-menu-link to="/projects">
+                Browse Crowdfunds
+            </c-sidebar-menu-link>
+            <c-sidebar-menu-link to="/games">
+                Browse Games
+            </c-sidebar-menu-link>
+            <c-sidebar-menu-link v-darklaunch="'REALMS'"
+                                 to="/realms">
+                Browse Realms
+            </c-sidebar-menu-link>
+            <c-sidebar-menu-link v-darklaunch="'CURATORS'"
+                                 to="/curators">
+                Browse Curators
+            </c-sidebar-menu-link>
+            <c-sidebar-menu-link v-darklaunch="'COLLECTIONS'"
+                                 to="/collections">
+                Browse Collections
+            </c-sidebar-menu-link>
+            <c-sidebar-menu-link v-darklaunch="'MARKETPLACE'"
+                                 to="/marketplace">
+                Browse Items
+            </c-sidebar-menu-link>
         </c-sidebar-menu>
 
-        <c-sidebar-menu subTitle="Browse By Genre" subIcon="fas fa-gamepad" mClass="margin-bottom-20">
+        <c-sidebar-menu subTitle="Browse By Genre"
+                        subIcon="fas fa-gamepad"
+                        mClass="margin-bottom-20">
             <c-sidebar-menu-link
                 v-for="param in ['Action', 'Adventure', 'RPG', 'Co-op', 'Multiplayer', 'Sports']"
                 :key="param"
@@ -25,31 +50,37 @@
         </c-sidebar-menu>
 
 
-        <h3 class="text-uppercase">Search</h3>
+        <h3 class="text-uppercase">
+            Search
+        </h3>
         <div class="filter-block">
             <c-searcher
-                @input="search"
-                @keyup.enter.native="goToSearchPage()"
-                @click="goToSearchPage()"
                 v-model="phrase"
                 class="margin-bottom-20"
                 :results="filteredResults"
-                :resultsCount="filteredResults.length">
+                :resultsCount="filteredResults.length"
+                @input="search"
+                @keyup.enter.native="goToSearchPage()"
+                @click="goToSearchPage()">
                 <router-link
                     slot-scope="props"
                     :to="`/product/${props.result.id}`"
+                    :title="`${props.result.name} - product page`"
                     v-html="$options.filters.highlightPhrase(
                         props.result.name, phrase, 'u'
-                    )"
-                    :title="`${props.result.name} - product page`" />
+                    )" />
             </c-searcher>
 
-            <h4 class="margin-vertical-20">Community Size</h4>
+            <h4 class="margin-vertical-20">
+                Community Size
+            </h4>
             <c-range-slider
                 v-model.number="communitySize"
                 :max="1000" />
 
-            <h4 class="margin-vertical-20">Active Users</h4>
+            <h4 class="margin-vertical-20">
+                Active Users
+            </h4>
             <c-range-slider
                 v-model.number="activeUsers"
                 :max="5000" />
@@ -60,7 +91,7 @@
                     v-for="os in platforms"
                     :key="os.prop"
                     href="#"
-                    @click.prevent="handleArray(os.prop, 'choosenPlatforms')" >
+                    @click.prevent="handleArray(os.prop, 'choosenPlatforms')">
                     <c-icon
                         cat="fab"
                         class="platform-icon"
@@ -92,18 +123,50 @@
         <ul class="help-block"
             hidden>
             <li class="title">
-                <i class="fas fa-question-circle"></i>
+                <i class="fas fa-question-circle" />
                 Help
             </li>
             <li>
-                <c-buttonstatus="none"to="/help/topic/1/article/purchasing-with-cryptocurrency">Purchasing with Cryptocurrency</c-button>
-                <c-buttonstatus="none"to="/help/topic/1/article/content-availability-by-country">Content Availability by Country</c-button>
-                <c-buttonstatus="none"to="/help/topic/1/article/becoming-a-community-curator">Becoming a Community Curator</c-button>
-                <c-buttonstatus="none"to="/help/topic/1/article/18-plus-games-and-verification">18+ Games and Verification</c-button>
-                <c-buttonstatus="none"to="/help/topic/1/article/recporting-misleading-content">Reporting Misleading Content</c-button>
+                <c-buttonstatus="none"to="/help
+                                           topic
+                                           1
+                                           article
+                                           purchasing-with-cryptocurrency">
+                    Purchasing with Cryptocurrency</c-button>
+                    <c-buttonstatus="none"to="/help
+                                               topic
+                                               1
+                                               article
+                                               content-availability-by-country">
+                        Content Availability by Country</c-button>
+                        <c-buttonstatus="none"to="/help
+                                                   topic
+                                                   1
+                                                   article
+                                                   becoming-a-community-curator">
+                            Becoming a Community Curator</c-button>
+                            <c-buttonstatus="none"to="/help
+                                                       topic
+                                                       1
+                                                       article
+                                                       18-plus-games-and-verification">
+                                18+ Games and Verification</c-button>
+                                <c-buttonstatus="none"to="/help
+                                                           topic
+                                                           1
+                                                           article
+                                                           recporting-misleading-content">
+                                    Reporting Misleading Content</c-button>
+                                </c-buttonstatus="none"to=">
+                            </c-buttonstatus="none"to=">
+                        </c-buttonstatus="none"to=">
+                    </c-buttonstatus="none"to=">
+                </c-buttonstatus="none"to=">
             </li>
             <li>
-                <c-button status="none" to="/help/topic/1" class="btn btn-link">
+                <c-button status="none"
+                          to="/help/topic/1"
+                          class="btn btn-link">
                     More...
                 </c-button>
             </li>
@@ -121,7 +184,7 @@ export default {
         'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m),
         'c-searcher': () => import('~/components/searcher').then(m => m.default || m),
         'c-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m),
-        'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
+        'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m)
     },
     mixins: [handleArray],
     data() {
@@ -167,10 +230,8 @@ export default {
             return this.results
                 .filter(result => choosenPlatforms.length
                     ? result.systemRequirements.some(req =>
-                        choosenPlatforms.includes(req.os)
-                        )
-                    : true
-                )
+                        choosenPlatforms.includes(req.os))
+                    : true)
         },
         query() {
             const { phrase, choosenPlatforms, communitySize, activeUsers } = this

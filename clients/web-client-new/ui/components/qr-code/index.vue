@@ -1,34 +1,34 @@
 <template>
     <div>
-        <div ref="qart"></div>
+        <div ref="qart" />
     </div>
 </template>
 
 <script>
 import QArt from 'qartjs'
 export default {
+    name: 'VueQart',
     props: {
         config: {
-            type: Object,
+            type: Object
         },
         download: {
             type: Object,
-            default: function() {
+            default() {
                 return {
-                    visible: false,
+                    visible: false
                 }
-            },
-        },
+            }
+        }
     },
-    name: 'VueQart',
     data() {
         return {}
     },
     watch: {
-        'config.value': function(val, oldVal) {
+        'config.value'(val, oldVal) {
             this.config.value = val
             this.renderQrcode(this.config)
-        },
+        }
     },
     mounted() {
         this.renderQrcode(this.config)
@@ -41,10 +41,10 @@ export default {
         },
         convertToImage(e) {
             const { type = 'image/png', filename = 'download.png' } = this.download
-            const myCanvas = this.$refs.qart.children[0];
+            const myCanvas = this.$refs.qart.children[0]
             e.target.href = myCanvas.toDataURL(type)
             e.target.download = filename
-        },
-    },
+        }
+    }
 }
 </script>

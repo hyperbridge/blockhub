@@ -1,71 +1,89 @@
 <template>
-    <c-popup :activated="activated" type="custom" ref="modal" title="" width="650"  @close="$emit('close')">
-        <div class="send-funds-modal" slot="customContent">
+    <c-popup ref="modal"
+             :activated="activated"
+             type="custom"
+             title=""
+             width="650"
+             @close="$emit('close')">
+        <div slot="customContent"
+             class="send-funds-modal">
             <c-tabs>
-                <c-tab name="Agreement" :selected="agreement" :showFooter="true">
+                <c-tab name="Agreement"
+                       :selected="agreement"
+                       :showFooter="true">
                     <div>
                         <div class="d-flex justify-content-between align-items-center">
                             <h4>Crowdfunding Campaign Agreement</h4>
                         </div>
                         <div class="termsBlock">
-                            <slot name="agreementText"></slot>
+                            <slot name="agreementText" />
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between align-items-center" slot="footer">
+                    <div slot="footer"
+                         class="d-flex justify-content-between align-items-center">
                         <div>
-                            <c-switch size="sm" :value="true" label="I agree with the terms" />
+                            <c-switch size="sm"
+                                      :value="true"
+                                      label="I agree with the terms" />
                         </div>
                         <div>
-                            <c-button status="outline-white" @click="" class="mx-1">
+                            <c-button status="outline-white"
+                                      class="mx-1"
+                                      @click="">
                                 Cancel
                             </c-button>
-                            <c-button status="outline-white" @click="toggleSteps" class="mx-1" icon="arrow-right">
+                            <c-button status="outline-white"
+                                      class="mx-1"
+                                      icon="arrow-right"
+                                      @click="toggleSteps">
                                 Next
                             </c-button>
                         </div>
                     </div>
                 </c-tab>
-                <c-tab name="Sending" :selected="sending" :showFooter="true">
+                <c-tab name="Sending"
+                       :selected="sending"
+                       :showFooter="true">
                     <div class="sending-block">
                         <div class="clmn-1">
                             <div class="grid">
                                 <div class="grid-item">
                                     <div>
-                                        <c-img src="https://www.touchtapplay.com/wp-content/uploads/2017/12/bitcoin-game-cheats-ketchapp.jpg"/>
+                                        <c-img src="https://www.touchtapplay.com/wp-content/uploads/2017/12/bitcoin-game-cheats-ketchapp.jpg" />
                                     </div>
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                             </div>
                             <div class="info text-left">
@@ -76,14 +94,15 @@
                         <div class="clmn-2">
                             <div class="directions">
                                 <div class="right-arrow">
-                                    <div class="progress"></div>
+                                    <div class="progress" />
                                 </div>
                                 <div class="left-arrow">
-                                    <div class="progress" style="width: 45%"></div>
+                                    <div class="progress"
+                                         style="width: 45%" />
                                 </div>
                             </div>
                             <div class="time">
-                                <i class="fas fa-clock"></i>
+                                <i class="fas fa-clock" />
                                 15 seconds
                             </div>
                             <div class="info text-center">
@@ -93,40 +112,40 @@
                         <div class="clmn-3">
                             <div class="grid">
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                                 <div class="grid-item">
-                                    <div></div>
+                                    <div />
                                 </div>
                             </div>
                             <div class="info text-left">
@@ -135,12 +154,18 @@
                             </div>
                         </div>
                     </div>
-                    <div slot="footer" class="d-flex align-items-center justify-content-end">
+                    <div slot="footer"
+                         class="d-flex align-items-center justify-content-end">
                         <div>
-                            <c-button status="outline-danger" @click="" class="mx-1">
+                            <c-button status="outline-danger"
+                                      class="mx-1"
+                                      @click="">
                                 Cancel
                             </c-button>
-                            <c-button status="outline-success" @click="toggleSteps" class="mx-1" icon="check">
+                            <c-button status="outline-success"
+                                      class="mx-1"
+                                      icon="check"
+                                      @click="toggleSteps">
                                 Complete
                             </c-button>
                         </div>
@@ -152,35 +177,35 @@
 </template>
 
 <script>
-    import Tabs from '../tab/tabs'
-    import Tab from '../tab/tab'
-    import Switch from '../switch'
-    import Buttons from '../buttons'
-    import PopUp from '../popups'
+import Tabs from '../tab/tabs'
+import Tab from '../tab/tab'
+import Switch from '../switch'
+import Buttons from '../buttons'
+import PopUp from '../popups'
 
-    export default {
-        props: ['activated'],
-        components: {
-            'c-tab': Tab,
-            'c-tabs': Tabs,
-            'c-switch': Switch,
-            'c-button': Buttons,
-            'c-popup': PopUp,
-        },
-        data() {
-            return {
-                agreement: true,
-                sending: false
-            }
-        },
-        methods: {
-            toggleSteps() {
-                this.agreement = false
-                this.sending = false
-                console.log('toggle step', this.agreement, this.sending)
-            }
+export default {
+    components: {
+        'c-tab': Tab,
+        'c-tabs': Tabs,
+        'c-switch': Switch,
+        'c-button': Buttons,
+        'c-popup': PopUp
+    },
+    props: ['activated'],
+    data() {
+        return {
+            agreement: true,
+            sending: false
+        }
+    },
+    methods: {
+        toggleSteps() {
+            this.agreement = false
+            this.sending = false
+            console.log('toggle step', this.agreement, this.sending)
         }
     }
+}
 
 </script>
 

@@ -1,21 +1,25 @@
 <template>
     <transition name="fadeIn">
-        <div class="share-block" v-if="show">
+        <div v-if="show"
+             class="share-block">
             <c-searcher
-                class="margin-bottom-10"
-            />
+                class="margin-bottom-10" />
             <div class="share-block__users margin-top-20">
                 <div class="list">
                     <h5>
                         Favorites
                     </h5>
-                    <c-author v-for="(author, index) in favoritesList" :author="author" :key="index" />
+                    <c-author v-for="(author, index) in favoritesList"
+                              :key="index"
+                              :author="author" />
                 </div>
                 <div class="list">
                     <h5>
                         Online
                     </h5>
-                    <c-author v-for="(author, index) in onlineList" :author="author" :key="index" />
+                    <c-author v-for="(author, index) in onlineList"
+                              :key="index"
+                              :author="author" />
                 </div>
             </div>
         </div>
@@ -23,24 +27,24 @@
 </template>
 
 <script>
-    export default {
-        name: 'share-list',
-        props: ['onlineList', 'favoritesList', 'show'],
-        components:{
-            'c-searcher': () => import('~/components/searcher').then(m => m.default || m),
-            'c-author': () => import('~/components/author').then(m => m.default || m)
-        },
-        // data(){
-        //     return{
-        //         show: this.show
-        //     }
-        // },
-        methods:{
-            // toggleList(){
-            //     this.show = !this.show
-            // }
-        }
+export default {
+    name: 'ShareList',
+    components: {
+        'c-searcher': () => import('~/components/searcher').then(m => m.default || m),
+        'c-author': () => import('~/components/author').then(m => m.default || m)
+    },
+    props: ['onlineList', 'favoritesList', 'show'],
+    // data(){
+    //     return{
+    //         show: this.show
+    //     }
+    // },
+    methods: {
+        // toggleList(){
+        //     this.show = !this.show
+        // }
     }
+}
 </script>
 
 <style lang="scss" scoped>

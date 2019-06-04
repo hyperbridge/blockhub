@@ -1,21 +1,23 @@
 <template>
-    <span class="c-text-label" :class="['label-type-' + type]" :style="{ 'background-color': bgColor, 'color' : fontColor }">
+    <span class="c-text-label"
+          :class="['label-type-' + type]"
+          :style="{ 'background-color': bgColor, 'color' : fontColor }">
         <slot />
     </span>
 </template>
 
 <script>
-    export default {
-        name: 'text-label',
-        props:{
-            bgColor: String,
-            fontColor: String,
-            type: {
-                type: String,
-                default: 'default'
-            }
+export default {
+    name: 'TextLabel',
+    props: {
+        bgColor: String,
+        fontColor: String,
+        type: {
+            type: String,
+            default: 'default'
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

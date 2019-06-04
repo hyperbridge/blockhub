@@ -1,45 +1,64 @@
 <template>
     <div class="welcome-block">
         <div class="welcome-block__header">
-            <c-img src="/img/logo-white.svg" alt="Logo" />
+            <c-img src="/img/logo-white.svg"
+                   alt="Logo" />
         </div>
         <div class="welcome-block__download-block">
             <div class="info">
-                <h4 class="font-weight-bold text-uppercase h3" v-if="prompt">This requires our desktop version</h4>
-                <p class="h4" v-if="prompt">
+                <h4 v-if="prompt"
+                    class="font-weight-bold text-uppercase h3">
+                    This requires our desktop version
+                </h4>
+                <p v-if="prompt"
+                   class="h4">
                     Some actions are not safe within a browser,
                     so we built BlockHub it's own fortress,
                     a safer environment for you to do much more!
                 </p>
-                <h4 class="font-weight-bold text-uppercase h3" v-if="!prompt">DO MORE WITH OUR DESKTOP CLIENT</h4>
-                <p class="h4" v-if="!prompt">
+                <h4 v-if="!prompt"
+                    class="font-weight-bold text-uppercase h3">
+                    DO MORE WITH OUR DESKTOP CLIENT
+                </h4>
+                <p v-if="!prompt"
+                   class="h4">
                     Some actions are not safe within a browser, so we built BlockHub it's own fortress, a safer environment for you to do much more!
                 </p>
-                <div class="action d-flex align-items-center" v-if="defaultDownload">
-                    <c-button status="none" :to="defaultDownload.to"
-                       class="btn btn-outline-success"
-                       @click="startDownload(defaultDownload)"
-                       v-if="!downloading">
+                <div v-if="defaultDownload"
+                     class="action d-flex align-items-center">
+                    <c-button v-if="!downloading"
+                              status="none"
+                              :to="defaultDownload.to"
+                              class="btn btn-outline-success"
+                              @click="startDownload(defaultDownload)">
                         <strong>Download Now</strong>
                         <small>for {{ defaultDownload.text }}</small>
                     </c-button>
                     <div v-if="downloading">
-                        Downloading now. <c-button status="none" :to="downloading.to">Click here</c-button><br> if it doesn't start in 10 seconds.
+                        Downloading now. <c-button status="none"
+                                                   :to="downloading.to">
+                            Click here
+                        </c-button><br> if it doesn't start in 10 seconds.
                     </div>
-                    <div class="download_info" @click="showAllPlatforms">
+                    <div class="download_info"
+                         @click="showAllPlatforms">
                         <h6>Using another OS?</h6>
                         <p>We are multiplatform, enjoy!</p>
-                        <i class="fab fa-apple"></i>
-                        <i class="fab fa-linux"></i>
-                        <i class="fab fa-windows"></i>
+                        <i class="fab fa-apple" />
+                        <i class="fab fa-linux" />
+                        <i class="fab fa-windows" />
                     </div>
                 </div>
             </div>
-            <div class="other_options" v-if="showAll">
-                <div v-for="(item, index) in downloads" :key="index">
-                    <c-button status="none" :to="item.to"
-                       class="btn"
-                       v-for="(item, index) in item" :key="index">
+            <div v-if="showAll"
+                 class="other_options">
+                <div v-for="(item, index) in downloads"
+                     :key="index">
+                    <c-button v-for="(item, index) in item"
+                              :key="index"
+                              status="none"
+                              :to="item.to"
+                              class="btn">
                         <strong>{{ item.text }}</strong>
                         <small>{{ item.subtext }}</small>
                     </c-button>
@@ -53,102 +72,102 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            prompt: {
-                type: Boolean,
-                default: false
-            }
-        },
-        data() {
-            return {
-                userAgent: '',
-                showAll: false,
-                downloading: null,
-                defaultDownload: null,
-                downloads: {
-                    'macos': {
-                        default: {
-                            text: 'MacOS',
-                            subtext: '64-bit',
-                            to: '/download/desktop/mac'
-                        }
+export default {
+    props: {
+        prompt: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data() {
+        return {
+            userAgent: '',
+            showAll: false,
+            downloading: null,
+            defaultDownload: null,
+            downloads: {
+                'macos': {
+                    default: {
+                        text: 'MacOS',
+                        subtext: '64-bit',
+                        to: '/download/desktop/mac'
+                    }
+                },
+                'windows': {
+                    default: {
+                        text: 'Windows',
+                        subtext: '64-bit',
+                        to: '/download/desktop/windows'
                     },
-                    'windows': {
-                        default: {
-                            text: 'Windows',
-                            subtext: '64-bit',
-                            to: '/download/desktop/windows'
-                        },
-                        generic32: {
-                            text: 'Windows',
-                            subtext: '32-bit',
-                            to: '/download/desktop/windows-32bit'
-                        },
+                    generic32: {
+                        text: 'Windows',
+                        subtext: '32-bit',
+                        to: '/download/desktop/windows-32bit'
+                    }
+                },
+                'linux': {
+                    default: {
+                        text: 'Linux',
+                        subtext: '64-bit',
+                        to: '/download/desktop/linux'
                     },
-                    'linux': {
-                        default: {
-                            text: 'Linux',
-                            subtext: '64-bit',
-                            to: '/download/desktop/linux'
-                        },
-                        generic32: {
-                            text: 'Linux',
-                            subtext: '32-bit',
-                            to: '/download/desktop/linux-32bit'
-                        },
-                        debian64: {
-                            text: 'Linux',
-                            subtext: '64-bit Debian',
-                            to: '/download/desktop/linux-64bit-debian'
-                        },
-                        debian32: {
-                            text: 'Linux',
-                            subtext: '32-bit Debian',
-                            to: '/download/desktop/linux-32bit-debian'
-                        }
+                    generic32: {
+                        text: 'Linux',
+                        subtext: '32-bit',
+                        to: '/download/desktop/linux-32bit'
+                    },
+                    debian64: {
+                        text: 'Linux',
+                        subtext: '64-bit Debian',
+                        to: '/download/desktop/linux-64bit-debian'
+                    },
+                    debian32: {
+                        text: 'Linux',
+                        subtext: '32-bit Debian',
+                        to: '/download/desktop/linux-32bit-debian'
                     }
                 }
             }
-        },
-        created(){
-            this.getOS()
-        },
-        methods:{
-            getOS() {
-                if (!process.client) {
-                    return 'node'
-                }
-
-                let userAgent = window.navigator.userAgent,
-                    platform = window.navigator.platform,
-                    macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
-                    windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
-                    iosPlatforms = ['iPhone', 'iPad', 'iPod'],
-                    os = null;
-
-                if (macosPlatforms.indexOf(platform) !== -1) {
-                    this.userAgent = 'macos';
-                } else if (iosPlatforms.indexOf(platform) !== -1) {
-                    this.userAgent = 'ios';
-                } else if (windowsPlatforms.indexOf(platform) !== -1) {
-                    this.userAgent = 'windows';
-                } else if (/Android/.test(userAgent)) {
-                    this.userAgent = 'android';
-                } else if (!os && /Linux/.test(platform)) {
-                    this.userAgent = 'linux';
-                }
-
-                this.defaultDownload = this.downloads[this.userAgent].default
-            },
-            showAllPlatforms(){
-                this.showAll = !this.showAll;
-            },
-            startDownload(item) {
-                this.downloading = item
+        }
+    },
+    created() {
+        this.getOS()
+    },
+    methods: {
+        getOS() {
+            if (!process.client) {
+                return 'node'
             }
+
+            const { userAgent } = window.navigator
+            const { platform } = window.navigator
+            const macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K']
+            const windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE']
+            const iosPlatforms = ['iPhone', 'iPad', 'iPod']
+            const os = null
+
+            if (macosPlatforms.indexOf(platform) !== -1) {
+                this.userAgent = 'macos'
+            } else if (iosPlatforms.indexOf(platform) !== -1) {
+                this.userAgent = 'ios'
+            } else if (windowsPlatforms.indexOf(platform) !== -1) {
+                this.userAgent = 'windows'
+            } else if (/Android/.test(userAgent)) {
+                this.userAgent = 'android'
+            } else if (!os && /Linux/.test(platform)) {
+                this.userAgent = 'linux'
+            }
+
+            this.defaultDownload = this.downloads[this.userAgent].default
+        },
+        showAllPlatforms() {
+            this.showAll = !this.showAll
+        },
+        startDownload(item) {
+            this.downloading = item
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

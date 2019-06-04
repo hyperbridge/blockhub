@@ -1,15 +1,20 @@
 <template>
     <div class="token">
         <div class="token-nav">
-            <span :class="{ 'active' : isSearch }" @click="activeSearch">
+            <span :class="{ 'active' : isSearch }"
+                  @click="activeSearch">
                 Search
             </span>
-            <span :class="{ 'active' : !isSearch }" @click="activeCustom">
+            <span :class="{ 'active' : !isSearch }"
+                  @click="activeCustom">
                 Add custom
             </span>
         </div>
-        <div class="token-search" v-if="isSearch">
-            <c-input v-model="query" placeholder="Type to search" class="w-100" />
+        <div v-if="isSearch"
+             class="token-search">
+            <c-input v-model="query"
+                     placeholder="Type to search"
+                     class="w-100" />
             <div class="token-search__results">
                 <ul v-if="results.length">
                     <li class="list-title">
@@ -20,46 +25,55 @@
                         {{ item.name }}({{ item.symbol.toUpperCase() }})
                     </li>
                 </ul>
-                <div class="no-results" v-else>
-                    <i class="fas fa-search"></i>
+                <div v-else
+                     class="no-results">
+                    <i class="fas fa-search" />
                     No tokens found
                 </div>
             </div>
             <div class="token-search__action">
-                <c-button status="opacity-danger" size="lg">
+                <c-button status="opacity-danger"
+                          size="lg">
                     Cancel
                 </c-button>
-                <c-button status="opacity-success" size="lg">
+                <c-button status="opacity-success"
+                          size="lg">
                     Next
                 </c-button>
             </div>
         </div>
-        <div class="token__custom-token" v-else>
+        <div v-else
+             class="token__custom-token">
             <div class="w-100">
                 <div class="form-group">
                     <label>
                         Address
                     </label>
-                    <input class="form-control" type="text" />
+                    <input class="form-control"
+                           type="text">
                 </div>
                 <div class="form-group">
                     <label>
                         Symbol
                     </label>
-                    <input class="form-control" type="text" />
+                    <input class="form-control"
+                           type="text">
                 </div>
                 <div class="form-group">
                     <label>
                         Count
                     </label>
-                    <input class="form-control" type="number" />
+                    <input class="form-control"
+                           type="number">
                 </div>
             </div>
             <div class="token__custom-token-action">
-                <c-button status="opacity-danger" size="lg">
+                <c-button status="opacity-danger"
+                          size="lg">
                     Cancel
                 </c-button>
-                <c-button status="opacity-success" size="lg">
+                <c-button status="opacity-success"
+                          size="lg">
                     Next
                 </c-button>
             </div>
@@ -68,72 +82,72 @@
 </template>
 
 <script>
-    export default {
-        components:{
-            'c-input' : () => import('~/components/inputs').then(m => m.default || m),
+export default {
+    components: {
+        'c-input': () => import('~/components/inputs').then(m => m.default || m)
+    },
+    data() {
+        return {
+            query: '',
+            results: [
+                {
+                    img: 'https://rivetz.com/img/logo/250px.png',
+                    name: 'Rivetz',
+                    symbol: 'RVT'
+                },
+                {
+                    img: 'https://pbs.twimg.com/profile_images/902989409976442880/AOLxty97_400x400.jpg',
+                    name: 'DIVI Exchange token',
+                    symbol: 'divx'
+                },
+                {
+                    img: 'https://assets.coingecko.com/coins/images/3508/large/5906667d95a2d43d31378ce7_60x60logo.png?1522119804',
+                    name: 'Spectiv Signal Token',
+                    symbol: 'sig'
+                },
+                {
+                    img: 'https://rivetz.com/img/logo/250px.png',
+                    name: 'Rivetz',
+                    symbol: 'RVT'
+                },
+                {
+                    img: 'https://pbs.twimg.com/profile_images/902989409976442880/AOLxty97_400x400.jpg',
+                    name: 'DIVI Exchange token',
+                    symbol: 'divx'
+                },
+                {
+                    img: 'https://assets.coingecko.com/coins/images/3508/large/5906667d95a2d43d31378ce7_60x60logo.png?1522119804',
+                    name: 'Spectiv Signal Token',
+                    symbol: 'sig'
+                },
+                {
+                    img: 'https://rivetz.com/img/logo/250px.png',
+                    name: 'Rivetz',
+                    symbol: 'RVT'
+                },
+                {
+                    img: 'https://pbs.twimg.com/profile_images/902989409976442880/AOLxty97_400x400.jpg',
+                    name: 'DIVI Exchange token',
+                    symbol: 'divx'
+                },
+                {
+                    img: 'https://assets.coingecko.com/coins/images/3508/large/5906667d95a2d43d31378ce7_60x60logo.png?1522119804',
+                    name: 'Spectiv Signal Token',
+                    symbol: 'sig'
+                }
+            ],
+            isSearch: true
+        }
+    },
+    methods: {
+        activeSearch() {
+            this.isSearch = true
         },
-        data(){
-            return{
-                query: '',
-                results: [
-                    {
-                        img: 'https://rivetz.com/img/logo/250px.png',
-                        name: 'Rivetz',
-                        symbol: 'RVT'
-                    },
-                    {
-                        img: 'https://pbs.twimg.com/profile_images/902989409976442880/AOLxty97_400x400.jpg',
-                        name: 'DIVI Exchange token',
-                        symbol: 'divx'
-                    },
-                    {
-                        img: 'https://assets.coingecko.com/coins/images/3508/large/5906667d95a2d43d31378ce7_60x60logo.png?1522119804',
-                        name: 'Spectiv Signal Token',
-                        symbol: 'sig'
-                    },
-                    {
-                        img: 'https://rivetz.com/img/logo/250px.png',
-                        name: 'Rivetz',
-                        symbol: 'RVT'
-                    },
-                    {
-                        img: 'https://pbs.twimg.com/profile_images/902989409976442880/AOLxty97_400x400.jpg',
-                        name: 'DIVI Exchange token',
-                        symbol: 'divx'
-                    },
-                    {
-                        img: 'https://assets.coingecko.com/coins/images/3508/large/5906667d95a2d43d31378ce7_60x60logo.png?1522119804',
-                        name: 'Spectiv Signal Token',
-                        symbol: 'sig'
-                    },
-                    {
-                        img: 'https://rivetz.com/img/logo/250px.png',
-                        name: 'Rivetz',
-                        symbol: 'RVT'
-                    },
-                    {
-                        img: 'https://pbs.twimg.com/profile_images/902989409976442880/AOLxty97_400x400.jpg',
-                        name: 'DIVI Exchange token',
-                        symbol: 'divx'
-                    },
-                    {
-                        img: 'https://assets.coingecko.com/coins/images/3508/large/5906667d95a2d43d31378ce7_60x60logo.png?1522119804',
-                        name: 'Spectiv Signal Token',
-                        symbol: 'sig'
-                    }
-                ],
-                isSearch: true
-            }
-        },
-        methods:{
-            activeSearch(){
-                this.isSearch = true
-            },
-            activeCustom(){
-                this.isSearch = false
-            }
+        activeCustom() {
+            this.isSearch = false
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

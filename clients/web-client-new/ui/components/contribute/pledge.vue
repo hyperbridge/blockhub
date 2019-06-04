@@ -1,19 +1,28 @@
 <template>
-    <div class="pledge-item" @mouseover=" showToggle = true" @mouseleave=" showToggle = false ">
+    <div class="pledge-item"
+         @mouseover=" showToggle = true"
+         @mouseleave=" showToggle = false ">
         <transition name="fade">
-            <div class="pledge-form-toggle" v-if="showToggle && !form " @click="showFrom" style="animation-duration: 0.5s">
+            <div v-if="showToggle && !form "
+                 class="pledge-form-toggle"
+                 style="animation-duration: 0.5s"
+                 @click="showFrom">
                 Select this reward
             </div>
         </transition>
         <h3>Pledge US {{ pledge.minPrice | convertCurrency }} or more</h3>
-        <h4 v-if="pledge.title">{{ pledge.title }}</h4>
+        <h4 v-if="pledge.title">
+            {{ pledge.title }}
+        </h4>
         <div class="pledge-item__text">
             {{ pledge.description }}
         </div>
-        <div class="pledge-item__includes" v-if="!form && pledge.includes.length > 0">
+        <div v-if="!form && pledge.includes.length > 0"
+             class="pledge-item__includes">
             <h6>Includes</h6>
             <ul>
-                <li v-for="(itm, index) in pledge.includes" :key="index">
+                <li v-for="(itm, index) in pledge.includes"
+                    :key="index">
                     {{ itm.text }}
                 </li>
             </ul>
@@ -27,52 +36,58 @@
                 <span class="h6">Ships to</span>
                 {{ pledge.shipsTo }}
             </div>
-            <div class="w-100 mt-5" v-if="pledge.backers">
+            <div v-if="pledge.backers"
+                 class="w-100 mt-5">
                 <span class="h6">
                     {{ pledge.backers }} backers
                 </span>
             </div>
         </div>
-        <transition name="fade" v-if="form">
+        <transition v-if="form"
+                    name="fade">
             <div class="mt-5">
                 <div class="h6 font-weight-bold text-uppercase mb-3">
                     Pledge amount
                 </div>
-                <c-contribute-form v-model="toBePaid" :defaultValue="pledge.minPrice" :currency="currency" :active="true" @click="$emit('click')" />
+                <c-contribute-form v-model="toBePaid"
+                                   :defaultValue="pledge.minPrice"
+                                   :currency="currency"
+                                   :active="true"
+                                   @click="$emit('click')" />
             </div>
         </transition>
     </div>
 </template>
 
 <script>
-    import ContributeForm from '@/components/contribute/form.vue'
-    import moment from 'moment'
+import ContributeForm from '@/components/contribute/form.vue'
+import moment from 'moment'
 
-    export default {
-        name: 'pledge',
-        props: ['pledge', 'currency'],
-        components: {
-            'c-contribute-form': ContributeForm
-        },
-        data() {
-            return {
-                form: false,
-                showToggle: false,
-                toBePaid: ''
-            }
-        },
-        methods: {
-            showFrom() {
-                this.form = true;
-                this.showToggle = false;
-            }
-        },
-        computed: {
-            date() {
-                return moment(this.pledge.deliveryDate).format('DD MMMM, YYYY')
-            }
+export default {
+    name: 'Pledge',
+    components: {
+        'c-contribute-form': ContributeForm
+    },
+    props: ['pledge', 'currency'],
+    data() {
+        return {
+            form: false,
+            showToggle: false,
+            toBePaid: ''
+        }
+    },
+    computed: {
+        date() {
+            return moment(this.pledge.deliveryDate).format('DD MMMM, YYYY')
+        }
+    },
+    methods: {
+        showFrom() {
+            this.form = true
+            this.showToggle = false
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

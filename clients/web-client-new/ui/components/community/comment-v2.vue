@@ -1,7 +1,9 @@
 <template>
     <div>
-        <div class="community-item__comment" :class="{ 'is-reply': reply }">
-            <c-button-arrows size="xl" colored>
+        <div class="community-item__comment"
+             :class="{ 'is-reply': reply }">
+            <c-button-arrows size="xl"
+                             colored>
                 <span :class="{
                     'up': comment.rate > 400,
                     'down': comment.rate < 0
@@ -10,74 +12,75 @@
             <div class="comment-container">
                 <c-dropdown-menu
                     dropPosition="right"
-                    style="right: 5px; top: 10px;"
-                />
+                    style="right: 5px; top: 10px;" />
                 <div class="comment-content">
                     <div class="user-info">
-                        <c-img :src="comment.author.img"/>
+                        <c-img :src="comment.author.img" />
                         <div>
                             <h6>{{ comment.author.name }}</h6>
                             <!--<span class="time">{{ comment.date | timeAgoShort }}</span>-->
                         </div>
                     </div>
-                    <div class="text">{{ comment.text }}</div>
+                    <div class="text">
+                        {{ comment.text }}
+                    </div>
                 </div>
                 <div class="sub-comments-list">
-                    <slot/>
+                    <slot />
                 </div>
             </div>
         </div>
         <div class="d-flex justify-content-between align-items-center">
             <div>
-                <c-emoji-picker v-model="emojiList" @reaction="onReaction" @emojiClick="onEmojiClick" />
+                <c-emoji-picker v-model="emojiList"
+                                @reaction="onReaction"
+                                @emojiClick="onEmojiClick" />
             </div>
             <c-reply
-                @replyMode="reply = $event"
-            />
+                @replyMode="reply = $event" />
         </div>
-
     </div>
 </template>
 
 <script>
-    import moment from 'moment'
-    import VueEmojiReact from 'vue-emoji-react'
+import moment from 'moment'
+import VueEmojiReact from 'vue-emoji-react'
 
-    export default {
-        name: 'comment',
-        props: {
-            comment: {
-                type: Object,
-                required: true
-            }
+export default {
+    name: 'Comment',
+    components: {
+        'c-dropdown-menu': () => import('~/components/dropdown-menu').then(m => m.default || m),
+        'c-reply': () => import('~/components/community/reply').then(m => m.default || m),
+        'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m),
+        'c-emoji-picker': VueEmojiReact
+    },
+    props: {
+        comment: {
+            type: Object,
+            required: true
+        }
+    },
+    data() {
+        return {
+            reply: false,
+            emojiList: [],
+            showPicker: false
+        }
+    },
+    methods: {
+        onReaction(name, index) {
+            this.emojiList[index].count++
         },
-        components: {
-            'c-dropdown-menu': () => import('~/components/dropdown-menu').then(m => m.default || m),
-            'c-reply': () => import('~/components/community/reply').then(m => m.default || m),
-            'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m),
-            'c-emoji-picker': VueEmojiReact
-        },
-        data() {
-            return {
-                reply: false,
-                emojiList: [],
-                showPicker: false
-            }
-        },
-        methods: {
-            onReaction(name, index) {
-                this.emojiList[index].count++
-            },
-            onEmojiClick(name) {
-                if (this.emojiList.findIndex(emo => emo.name === name) === -1) {
-                    this.emojiList.push({
-                        name,
-                        count: 1
-                    })
-                }
+        onEmojiClick(name) {
+            if (this.emojiList.findIndex(emo => emo.name === name) === -1) {
+                this.emojiList.push({
+                    name,
+                    count: 1
+                })
             }
         }
     }
+}
 </script>
 
 

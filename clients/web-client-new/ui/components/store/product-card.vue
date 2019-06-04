@@ -1,9 +1,21 @@
 <template>
     <div class="product-grid__item">
         <div class="card-body padding-0">
-            <c-button status="none" :to="`/product/${product.id}`"><c-img class="card-img-top" :src="product.images.mediumTile" /></c-button>
-            <h4><c-button status="none" :to="`/product/${product.id}`">{{ product.name }}</c-button></h4>
-            <p class="card-text" hidden>{{ product.shortDescription }} </p>
+            <c-button status="none"
+                      :to="`/product/${product.id}`">
+                <c-img class="card-img-top"
+                       :src="product.images.mediumTile" />
+            </c-button>
+            <h4>
+                <c-button status="none"
+                          :to="`/product/${product.id}`">
+                    {{ product.name }}
+                </c-button>
+            </h4>
+            <p class="card-text"
+               hidden>
+                {{ product.shortDescription }}
+            </p>
             <c-tags :tags="product.developerTags.slice(0,3)" />
         </div>
     </div>
@@ -11,15 +23,15 @@
 
 <script>
 export default {
-    name: 'product-card',
+    name: 'ProductCard',
+    components: {
+        'c-tags': () => import('~/components/tags').then(m => m.default || m)
+    },
     props: {
         product: {
             type: Object,
             required: true
         }
-    },
-    components: {
-        'c-tags': () => import('~/components/tags').then(m => m.default || m)
     }
 }
 </script>

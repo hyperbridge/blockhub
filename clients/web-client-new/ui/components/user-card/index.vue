@@ -1,172 +1,192 @@
 <template>
-    <div class="user-data" :class="{ 'preview-mode': previewMode }" v-if="user">
-        <c-loading :enabled="removing" size="lg" />
-        
-        <div class="user-data__container" v-if="!removing">
+    <div v-if="user"
+         class="user-data"
+         :class="{ 'preview-mode': previewMode }">
+        <c-loading :enabled="removing"
+                   size="lg" />
+
+        <div v-if="!removing"
+             class="user-data__container">
             <div
                 v-if="previewMode"
                 class="user-data__icon"
                 :class="{ 'verified': user.verified }"
-                hidden
-            >
-                <i class="fas" :class="{ 'fa-check': user.verified, 'fa-times': !user.verified }"></i>
+                hidden>
+                <i class="fas"
+                   :class="{ 'fa-check': user.verified, 'fa-times': !user.verified }" />
             </div>
-            <div class="user-data__avatar" v-if="previewMode">
+            <div v-if="previewMode"
+                 class="user-data__avatar">
                 <c-button
                     status="none"
                     :to="`/profiles/${user.id}`"
-                    class="user-data__avatar-upload-btn"
-                >
-                    <c-img v-if="user.img" :src="user.img" />
-                    <c-img v-else src="../../static/img/user.png"/>
+                    class="user-data__avatar-upload-btn">
+                    <c-img v-if="user.img"
+                           :src="user.img" />
+                    <c-img v-else
+                           src="../../static/img/user.png" />
                 </c-button>
             </div>
-            <div class="user-data__avatar" v-if="!previewMode">
+            <div v-if="!previewMode"
+                 class="user-data__avatar">
                 <a
                     v-if="!user.img"
                     href="#"
-                    class="user-data__avatar-upload-btn"
-                >
-                    <c-img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMxOS45ODIgMzE5Ljk4MiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzE5Ljk4MiAzMTkuOTgyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjY0cHgiIGhlaWdodD0iNjRweCI+CjxnPgoJPHBhdGggZD0iTTIzNC45OTEsMzE5Ljk4MmMyLjYxOCwwLDUuMjItMS4wNzgsNy4wNzEtMi45MjlzMi45MjktNC40NTMsMi45MjktNy4wNzF2LTE0MGg2NSAgIGMzLjkyMi0wLjAwOCw3LjcyMS0yLjU1Miw5LjIyMS02LjE3NnMwLjYxLTguMTA5LTIuMTU5LTEwLjg4NmwtMTUwLTE1MEMxNjUuMjAyLDEuMDc0LDE2Mi42MDQsMCwxNTkuOTkxLDAgICBjLTIuNjE0LDAtNS4yMTIsMS4wNzQtNy4wNjIsMi45MmwtMTUwLDE1MGMtMi43NjksMi43NzctMy42NTksNy4yNjMtMi4xNTksMTAuODg2YzEuNSwzLjYyNCw1LjI5OSw2LjE2OCw5LjIyMSw2LjE3Nmg2NXYxNDAgICBjMCwyLjYxOCwxLjA3OCw1LjIyLDIuOTI5LDcuMDcxczQuNDUzLDIuOTI5LDcuMDcxLDIuOTI5SDIzNC45OTF6IiBmaWxsPSIjNjQ3M2Y0Ii8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg=="/>
+                    class="user-data__avatar-upload-btn">
+                    <c-img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMxOS45ODIgMzE5Ljk4MiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzE5Ljk4MiAzMTkuOTgyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjY0cHgiIGhlaWdodD0iNjRweCI+CjxnPgoJPHBhdGggZD0iTTIzNC45OTEsMzE5Ljk4MmMyLjYxOCwwLDUuMjItMS4wNzgsNy4wNzEtMi45MjlzMi45MjktNC40NTMsMi45MjktNy4wNzF2LTE0MGg2NSAgIGMzLjkyMi0wLjAwOCw3LjcyMS0yLjU1Miw5LjIyMS02LjE3NnMwLjYxLTguMTA5LTIuMTU5LTEwLjg4NmwtMTUwLTE1MEMxNjUuMjAyLDEuMDc0LDE2Mi42MDQsMCwxNTkuOTkxLDAgICBjLTIuNjE0LDAtNS4yMTIsMS4wNzQtNy4wNjIsMi45MmwtMTUwLDE1MGMtMi43NjksMi43NzctMy42NTksNy4yNjMtMi4xNTksMTAuODg2YzEuNSwzLjYyNCw1LjI5OSw2LjE2OCw5LjIyMSw2LjE3Nmg2NXYxNDAgICBjMCwyLjYxOCwxLjA3OCw1LjIyLDIuOTI5LDcuMDcxczQuNDUzLDIuOTI5LDcuMDcxLDIuOTI5SDIzNC45OTF6IiBmaWxsPSIjNjQ3M2Y0Ii8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
                 </a>
-                <c-img v-else src="../../static/img/user.png"/>
+                <c-img v-else
+                       src="../../static/img/user.png" />
             </div>
 
             <div style="text-align: left;">
                 <input
                     type="text"
+                    v-focus="!previewMode"
                     class="form-control margin-bottom-5"
                     placeholder="Profile name"
                     :value="user.name"
-                    @input="$emit('update:name', $event.target.value)"
                     :readonly="previewMode"
-                    v-focus="!previewMode"
-                />
+                    @input="$emit('update:name', $event.target.value)">
 
-                <p v-if="user.role === 'user'"><em>Gamer</em></p>
-                <p v-if="user.role === 'developer'"><em>Developer</em></p>
-                <p v-if="user.role === 'curator'"><em>Curator</em></p>
+                <p v-if="user.role === 'user'">
+                    <em>Gamer</em>
+                </p>
+                <p v-if="user.role === 'developer'">
+                    <em>Developer</em>
+                </p>
+                <p v-if="user.role === 'curator'">
+                    <em>Curator</em>
+                </p>
             </div>
         </div>
 
-        <div class="user-data__unknown-block" v-darklaunch="'BADGES'">
-            <button v-for="index in 4" :key="index" class="btn">
-                <i class="fas fa-plus"></i>
+        <div v-darklaunch="'BADGES'"
+             class="user-data__unknown-block">
+            <button v-for="index in 4"
+                    :key="index"
+                    class="btn">
+                <i class="fas fa-plus" />
             </button>
-            <div class="counts" v-if="previewMode">
+            <div v-if="previewMode"
+                 class="counts">
                 <span>
-                    0 <i class="fas fa-long-arrow-alt-down"></i>
+                    0 <i class="fas fa-long-arrow-alt-down" />
                 </span>
-                    <span>
-                    0 <i class="fas fa-long-arrow-alt-up"></i>
+                <span>
+                    0 <i class="fas fa-long-arrow-alt-up" />
                 </span>
             </div>
         </div>
 
-        <div class="user-data__public-address" v-if="previewMode && user.address">
+        <div v-if="previewMode && user.address"
+             class="user-data__public-address">
             <input
                 type="text"
                 class="form-control"
                 name="user-data__public-address"
                 placeholder="Public address"
                 :value="user.address"
-                @input="$emit('update:wallet', $event.target.value)"
                 readonly="readonly"
-            />
+                @input="$emit('update:wallet', $event.target.value)">
             <button @click="copyToClipboard(user.address)">
-                <i :class="`fas fa-${previewMode ? 'copy' : 'redo-alt'}`"></i>
+                <i :class="`fas fa-${previewMode ? 'copy' : 'redo-alt'}`" />
             </button>
         </div>
         <div v-if="previewMode && !user.address">
-            <c-button status="dark" size="small" @click="generateAddress(user.id)">Generate Address</c-button>
+            <c-button status="dark"
+                      size="small"
+                      @click="generateAddress(user.id)">
+                Generate Address
+            </c-button>
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        props: {
-            id: String,
-            type: String,
-            user: {
-                img: String,
-                name: String,
-                wallet: String
-            },
-            status: {
-                type: String,
-                default: 'success',
-                validator(val) {
-                    return ['info', 'success', 'warning', 'danger'].includes(val)
-                }
-            },
-            iconColor: String,
-            iconClass: String,
-            previewMode: Boolean,
-            removing: Boolean
+export default {
+    props: {
+        id: String,
+        type: String,
+        user: {
+            img: String,
+            name: String,
+            wallet: String
         },
-        methods: {
-            generateAddress(profileId) {
-                if (!this.$store.state.application.desktopMode) {
-                    this.$store.commit('application/activateModal', 'welcome')
-                    return
-                }
-
-                const chosenProfile = this.$store.state.profiles.keyedById[profileId]
-
-                if (!chosenProfile.meta) {
-                    chosenProfile.meta = {}
-                }
-
-                if (!chosenProfile.meta.walletIndex) {
-                    chosenProfile.meta.walletIndex = Object.values(this.$store.state.profiles.keyedById).indexOf(chosenProfile)
-                }
-
-                const index = chosenProfile.meta.walletIndex
-
-                this.$desktop.sendCommand('generateAddress', { index }).then((res) => {
-                    this.$store.dispatch('profiles/update', [
-                        chosenProfile.id, 
-                        {
-                            address: res.address
-                        }, 
-                        {
-                            query: {}
-                        }
-                    ]).then((profile) => {
-                        chosenProfile.address = res.address
-
-                        this.$snotify.success('', 'Address generated', { timeout: 3000 })
-
-                        // Update local
-                        this.$store.commit('application/updateState')
-
-                        // Update server
-                        this.$store.dispatch('profiles/update', [
-                            chosenProfile.id, 
-                            {
-                                address: chosenProfile.address,
-                                meta: chosenProfile.meta
-                            }
-                        ])
-
-                        // Update desktop
-                        this.$desktop.updateState({
-                            module: 'application', 
-                            state: {
-                                profiles: Object.values(this.$store.state.profiles.keyedById)
-                            }
-                        }).then(() => {})
-                    })
-                })
-            },
-            copyToClipboard(value) {
-                this.$desktop.sendCommand('writeToClipboard', value)
-
-                this.$snotify.success('Address copied to clipboard')
+        status: {
+            type: String,
+            default: 'success',
+            validator(val) {
+                return ['info', 'success', 'warning', 'danger'].includes(val)
             }
+        },
+        iconColor: String,
+        iconClass: String,
+        previewMode: Boolean,
+        removing: Boolean
+    },
+    methods: {
+        generateAddress(profileId) {
+            if (!this.$store.state.application.desktopMode) {
+                this.$store.commit('application/activateModal', 'welcome')
+                return
+            }
+
+            const chosenProfile = this.$store.state.profiles.keyedById[profileId]
+
+            if (!chosenProfile.meta) {
+                chosenProfile.meta = {}
+            }
+
+            if (!chosenProfile.meta.walletIndex) {
+                chosenProfile.meta.walletIndex = Object.values(this.$store.state.profiles.keyedById).indexOf(chosenProfile)
+            }
+
+            const index = chosenProfile.meta.walletIndex
+
+            this.$desktop.sendCommand('generateAddress', { index }).then(res => {
+                this.$store.dispatch('profiles/update', [
+                    chosenProfile.id,
+                    {
+                        address: res.address
+                    },
+                    {
+                        query: {}
+                    }
+                ]).then(profile => {
+                    chosenProfile.address = res.address
+
+                    this.$snotify.success('', 'Address generated', { timeout: 3000 })
+
+                    // Update local
+                    this.$store.commit('application/updateState')
+
+                    // Update server
+                    this.$store.dispatch('profiles/update', [
+                        chosenProfile.id,
+                        {
+                            address: chosenProfile.address,
+                            meta: chosenProfile.meta
+                        }
+                    ])
+
+                    // Update desktop
+                    this.$desktop.updateState({
+                        module: 'application',
+                        state: {
+                            profiles: Object.values(this.$store.state.profiles.keyedById)
+                        }
+                    }).then(() => {})
+                })
+            })
+        },
+        copyToClipboard(value) {
+            this.$desktop.sendCommand('writeToClipboard', value)
+
+            this.$snotify.success('Address copied to clipboard')
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

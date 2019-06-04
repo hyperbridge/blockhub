@@ -1,19 +1,27 @@
 <template>
     <div class="clock">
         <ul>
-            <li class="clock__hours">{{ hours }}</li>
-            <li class="clock__divider">{{ divider }}</li>
-            <li class="clock__minutes">{{ minutes }}</li>
+            <li class="clock__hours">
+                {{ hours }}
+            </li>
+            <li class="clock__divider">
+                {{ divider }}
+            </li>
+            <li class="clock__minutes">
+                {{ minutes }}
+            </li>
             <!-- <li class="clock__divider">{{ divider }}</li>
             <li class="clock__seconds">{{ seconds }}</li> -->
-            <li class="clock__format">{{ format }}</li>
+            <li class="clock__format">
+                {{ format }}
+            </li>
         </ul>
     </div>
 </template>
 
 <script>
 function zeropadder(n) {
-    return (parseInt(n,10) < 10 ? '0' : '')+n
+    return (parseInt(n, 10) < 10 ? '0' : '') + n
 }
 
 export default {
@@ -26,6 +34,9 @@ export default {
             format: ''
         }
     },
+    created() {
+        setInterval(() => this.updateTime(), 1000)
+    },
     methods: {
         updateTime() {
             const timeNow = new Date()
@@ -33,7 +44,7 @@ export default {
             const ss = timeNow.getSeconds()
             const hh = timeNow.getHours()
 
-            const formatAMPM = (hh >= 12 ? 'PM' : 'AM')
+            const formatAMPM = hh >= 12 ? 'PM' : 'AM'
 
             this.hours = hh % 12 || 12
             this.minutes = zeropadder(mm)
@@ -41,9 +52,6 @@ export default {
             this.format = formatAMPM
             this.divider = this.divider === ':' ? '' : ':'
         }
-    },
-    created() {
-        setInterval(() => this.updateTime(), 1000)
     }
 }
 </script>

@@ -2,82 +2,99 @@
     <div
         class="product-grid__item"
         @mouseover="show_preview(true)"
-        @mouseout="show_preview(false)"
-    >
+        @mouseout="show_preview(false)">
         <div class="position-relative">
-            <div v-if="product.price" class="product-grid__item-price">
+            <div v-if="product.price"
+                 class="product-grid__item-price">
                 <strong>{{ product.price | convertCurrency }}</strong>
             </div>
-            <c-button status="none" :to="`/product/${product.id}`" class="card-img-top">
+            <c-button status="none"
+                      :to="`/product/${product.id}`"
+                      class="card-img-top">
                 <transition name="fade">
-                    <c-img v-if="!displayPreview" class="card-img-top" :src="product.images.mediumTile"/>
+                    <c-img v-if="!displayPreview"
+                           class="card-img-top"
+                           :src="product.images.mediumTile" />
                     <template v-else>
-                        <video v-if="product.video && autoplay" class="card-img-top" width="100%" autoplay>
-                            <source :src="product.video" type="video/mp4">
+                        <video v-if="product.video && autoplay"
+                               class="card-img-top"
+                               width="100%"
+                               autoplay>
+                            <source :src="product.video"
+                                    type="video/mp4">
                         </video>
-                        <transition-group tag="div" name="slide-left" v-else>
+                        <transition-group v-else
+                                          tag="div"
+                                          name="slide-left">
                             <c-img
                                 v-for="(image, index) in product.images.preview"
                                 v-if="index === currentImage"
                                 :key="image"
                                 :src="product.images.preview[index]"
-                                class="card-img-top"
-                            />
+                                class="card-img-top" />
                         </transition-group>
                     </template>
                 </transition>
             </c-button>
         </div>
-        <h4><c-button status="none" :to="`/product/${product.id}`">{{ product.name }}</c-button></h4>
-        <p class="card-text" hidden>{{ product.shortDescription }} </p>
-        <c-tags :tags="product.developerTags.slice(0,3)"/>
+        <h4>
+            <c-button status="none"
+                      :to="`/product/${product.id}`">
+                {{ product.name }}
+            </c-button>
+        </h4>
+        <p class="card-text"
+           hidden>
+            {{ product.shortDescription }}
+        </p>
+        <c-tags :tags="product.developerTags.slice(0,3)" />
     </div>
 </template>
 
 <script>
-    import { debounce } from '@/mixins';
+import { debounce } from '@/mixins'
 
-    export default {
-        name: 'product-card-dynamic',
-        props: {
-            product: {
-                type: Object,
-                required: true
-            }
+export default {
+    name: 'ProductCardDynamic',
+    components: {
+        'c-tags': () => import('~/components/tags').then(m => m.default || m)
+    },
+    mixins: [debounce],
+    props: {
+        product: {
+            type: Object,
+            required: true
+        }
+    },
+    data() {
+        return {
+            displayPreview: false,
+            interval: null,
+            currentImage: 0
+        }
+    },
+    computed: {
+        autoplay() {
+            return this.$store.state.application.settings.client.autoplay
+        }
+    },
+    methods: {
+        show_preview(status) {
+            clearTimeout(this.timeout)
+            this.debounce(() => {
+                if (!status) clearInterval(this.interval)
+                if (status && !this.displayPreview && (!this.product.video || !this.autoplay)) this.slider()
+                this.displayPreview = status
+            }, status ? 250 : 0)
         },
-        components: {
-            'c-tags': () => import('~/components/tags').then(m => m.default || m)
-        },
-        mixins: [debounce],
-        data() {
-            return {
-                displayPreview: false,
-                interval: null,
-                currentImage: 0
-            }
-        },
-        methods: {
-            show_preview(status) {
-                clearTimeout(this.timeout);
-                this.debounce(() => {
-                    if (!status) clearInterval(this.interval);
-                    if (status && !this.displayPreview && (!this.product.video || !this.autoplay)) this.slider();
-                    this.displayPreview = status;
-                }, status ? 250 : 0);
-            },
-            slider() {
-                this.interval = setInterval(() => {
-                    const { currentImage, product: { images }} = this;
-                    this.currentImage = currentImage === images.preview.length - 1 ? 0 : currentImage + 1;
-                }, 1600);
-            }
-        },
-        computed: {
-            autoplay() {
-                return this.$store.state.application.settings.client.autoplay;
-            }
+        slider() {
+            this.interval = setInterval(() => {
+                const { currentImage, product: { images } } = this
+                this.currentImage = currentImage === images.preview.length - 1 ? 0 : currentImage + 1
+            }, 1600)
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

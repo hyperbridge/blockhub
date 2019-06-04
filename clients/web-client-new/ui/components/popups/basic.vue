@@ -1,19 +1,28 @@
 <template>
-    <transition name="fade" :duration="100">
-        <div class="c-basic-popup" v-if="activated" @click.self.prevent="$emit('close')">
-            <div class="c-basic-popup__item" :style="{ 'width': + width + 'px'}">
+    <transition name="fade"
+                :duration="100">
+        <div v-if="activated"
+             class="c-basic-popup"
+             @click.self.prevent="$emit('close')">
+            <div class="c-basic-popup__item"
+                 :style="{ 'width': + width + 'px'}">
                 <div class="position-relative">
                     <div class="c-basic-popup__content">
-                        <div class="c-basic-popup__close" @click="$emit('close')">
-                            <i class="fas fa-times"></i>
+                        <div class="c-basic-popup__close"
+                             @click="$emit('close')">
+                            <i class="fas fa-times" />
                         </div>
-                        <div class="c-basic-popup__header" v-if="$slots.header">
+                        <div v-if="$slots.header"
+                             class="c-basic-popup__header">
                             <slot name="header" />
                         </div>
-                        <div class="c-basic-popup__body" :class="{'margin-top-20' : $slots.header, 'margin-bottom-20' : $slots.footer}" v-if="$slots.body">
+                        <div v-if="$slots.body"
+                             class="c-basic-popup__body"
+                             :class="{'margin-top-20' : $slots.header, 'margin-bottom-20' : $slots.footer}">
                             <slot name="body" />
                         </div>
-                        <div class="c-basic-popup__footer" v-if="$slots.footer">
+                        <div v-if="$slots.footer"
+                             class="c-basic-popup__footer">
                             <slot name="footer" />
                         </div>
                     </div>
@@ -24,18 +33,18 @@
 </template>
 
 <script>
-    export default {
-        props:{
-            activated:{
-                type: Boolean,
-                default: false
-            },
-            width: {
-                type: String,
-                default: '500'
-            }
+export default {
+    props: {
+        activated: {
+            type: Boolean,
+            default: false
+        },
+        width: {
+            type: String,
+            default: '500'
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

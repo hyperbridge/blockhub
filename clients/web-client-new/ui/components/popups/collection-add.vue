@@ -1,21 +1,27 @@
 <template>
-    <c-basic-popup :activated="activated && $store.state.application.signedIn" @close="activated = false">
+    <c-basic-popup :activated="activated && $store.state.application.signedIn"
+                   @close="activated = false">
         <template slot="body">
             <div class="item-info">
-                <div class="item-info__image" v-if="image">
-                    <img :src="image" />
+                <div v-if="image"
+                     class="item-info__image">
+                    <img :src="image">
                 </div>
-                <div class="item-info__description" v-if="name">
+                <div v-if="name"
+                     class="item-info__description">
                     <div class="h4 font-weight-bold mb-2 p-0">
                         {{ name }}
                     </div>
-                    <p class="p-0 m-0" style="opacity: .7">
+                    <p class="p-0 m-0"
+                       style="opacity: .7">
                         {{ description }}
                     </p>
                 </div>
             </div>
             <div v-if="name">
-                <c-button status="plain" icon="star" class="p-0">
+                <c-button status="plain"
+                          icon="star"
+                          class="p-0">
                     Highlight this
                 </c-button>
             </div>
@@ -24,21 +30,33 @@
                     Choose collection
                 </div>
                 <div>
-                    <c-input bgColor="rgba(255, 255, 255, .07)" v-model="searchQuery" placeholder="Filter Collections" />
+                    <c-input v-model="searchQuery"
+                             bgColor="rgba(255, 255, 255, .07)"
+                             placeholder="Filter Collections" />
                 </div>
             </div>
             <div class="create-collection d-flex">
                 <template v-if="createForm">
-                    <c-button status="second-success" size="sm" class="mx-2" @click="addCollection(createCollectionRequest)">
+                    <c-button status="second-success"
+                              size="sm"
+                              class="mx-2"
+                              @click="addCollection(createCollectionRequest)">
                         Add
                     </c-button>
-                    <c-input bgColor="rgba(255, 255, 255, .07)" placeholder="Collection name" v-model="createCollectionRequest.name" />
-                    <c-button status="second-warning" size="sm" @click="createForm = false">
+                    <c-input v-model="createCollectionRequest.name"
+                             bgColor="rgba(255, 255, 255, .07)"
+                             placeholder="Collection name" />
+                    <c-button status="second-warning"
+                              size="sm"
+                              @click="createForm = false">
                         Cancel
                     </c-button>
                 </template>
                 <template v-if="!createForm">
-                    <c-button status="second-info" icon="plus" size="sm" @click="createForm = true">
+                    <c-button status="second-info"
+                              icon="plus"
+                              size="sm"
+                              @click="createForm = true">
                         Create New
                     </c-button>
                 </template>
@@ -56,22 +74,27 @@
                             {{ collection.name }}
                         </c-checkbox>
                     </c-checkbox-group>
-                    <div class="h6 mt-3" v-else>
+                    <div v-else
+                         class="h6 mt-3">
                         No collections were found.
                     </div>
                 </template>
-                <div class="h5" v-else>
+                <div v-else
+                     class="h5">
                     You don't have collection yet.
                 </div>
             </div>
         </template>
-
     </c-basic-popup>
-
 </template>
 
 <script>
 export default {
+    components: {
+        'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
+        'c-checkbox-group': () => import('~/components/checkbox/group').then(m => m.default || m),
+        'c-checkbox': () => import('~/components/checkbox').then(m => m.default || m)
+    },
     props: {
         activated: Boolean,
         buttonType: {
@@ -82,11 +105,6 @@ export default {
         name: String,
         description: String,
         collections: Array
-    },
-    components: {
-        'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
-        'c-checkbox-group': () => import('~/components/checkbox/group').then(m => m.default || m),
-        'c-checkbox': () => import('~/components/checkbox').then(m => m.default || m),
     },
     data() {
         return {
@@ -100,9 +118,7 @@ export default {
     computed: {
         filteredList() {
             if (this.collections && this.searchQuery) {
-                return this.collections.filter(collection => {
-                    return collection.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-                })
+                return this.collections.filter(collection => collection.name.toLowerCase().includes(this.searchQuery.toLowerCase()))
             }
             return this.collections
         }

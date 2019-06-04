@@ -1,19 +1,19 @@
 <template>
     <div
         class="dropdown dropmenu_container"
-        :class="[ dropPosition ? 'drop' + dropPosition : '', isActive ? 'show' : '' ]"
-    >
-        <div class="rw-btn rw-btn--card" @click=" isActive = !isActive ">
-            <div></div>
+        :class="[ dropPosition ? 'drop' + dropPosition : '', isActive ? 'show' : '' ]">
+        <div class="rw-btn rw-btn--card"
+             @click=" isActive = !isActive ">
+            <div />
         </div>
         <div class="dropdown-menu">
             <ul class="list-unstyled">
-                <li v-for="(item, index) in menuItems" :key="index">
+                <li v-for="(item, index) in menuItems"
+                    :key="index">
                     <a
                         href="#"
                         class="btn btn-sm"
-                        :class="item | btnDynamicClass"
-                    >{{ item }}</a>
+                        :class="item | btnDynamicClass">{{ item }}</a>
                 </li>
             </ul>
         </div>
@@ -22,6 +22,19 @@
 
 <script>
 export default {
+    filters: {
+        btnDynamicClass(menuItem) {
+            let class_name = 'btn-'
+            switch (menuItem) {
+            case 'Save':
+                return class_name += 'success'
+            case 'Report':
+                return class_name += 'danger'
+            default:
+                return class_name += 'info'
+            }
+        }
+    },
     props: {
         dropPosition: String,
         menuItems: {
@@ -29,22 +42,9 @@ export default {
             default: () => ['Save', 'Share', 'Report']
         }
     },
-    data(){
-        return{
+    data() {
+        return {
             isActive: false
-        }
-    },
-    filters: {
-        btnDynamicClass(menuItem) {
-            let class_name = 'btn-'
-            switch(menuItem) {
-                case 'Save':
-                    return class_name += 'success'
-                case 'Report':
-                    return class_name += 'danger'
-                default:
-                    return class_name += 'info'
-            }
         }
     }
 }

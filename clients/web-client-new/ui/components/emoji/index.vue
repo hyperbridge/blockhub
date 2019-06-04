@@ -3,70 +3,77 @@
         <div class="text-white">
             <!--{{ emojiList }}-->
         </div>
-        <div class="emojis__list" v-if="emojiList.length">
-            <div class="emojis__list-item" :class="{'couple-items' : emoji.count > 0 }" v-for="(emoji, index) in emojiList" @click="addEmoji(emoji)">
-                <c-emoji :emoji="emoji" :size="18" :native="true"/>
-                <span class="emoji-count" v-if="emoji.count > 0">
+        <div v-if="emojiList.length"
+             class="emojis__list">
+            <div v-for="(emoji, index) in emojiList"
+                 class="emojis__list-item"
+                 :class="{'couple-items' : emoji.count > 0 }"
+                 @click="addEmoji(emoji)">
+                <c-emoji :emoji="emoji"
+                         :size="18"
+                         :native="true" />
+                <span v-if="emoji.count > 0"
+                      class="emoji-count">
                     +{{ emoji.count }}
                 </span>
             </div>
         </div>
         <div class="emoji-picker__container">
-            <c-button status="plain" class="p-0 align-items-center" @click="openPicker">
-                <i class="fas fa-plus mr-0" :class="{'rotate-icon' : showPicker }"></i>
+            <c-button status="plain"
+                      class="p-0 align-items-center"
+                      @click="openPicker">
+                <i class="fas fa-plus mr-0"
+                   :class="{'rotate-icon' : showPicker }" />
             </c-button>
             <transition name="fade">
-                <c-emoji-picker set="apple"
-                                v-show="showPicker"
+                <c-emoji-picker v-show="showPicker"
+                                set="apple"
                                 title=""
                                 :showSearch="false"
                                 :showSkinTones="false"
                                 :showPreview="false"
                                 :native="true"
                                 @select="addEmoji"
-                                @keyup.esc.native="closePicker">
-
-                </c-emoji-picker>
+                                @keyup.esc.native="closePicker" />
             </transition>
         </div>
     </div>
 </template>
 
 <script>
-    import {Picker, Emoji} from 'emoji-mart-vue'
+import { Picker, Emoji } from 'emoji-mart-vue'
 
-    export default {
-        components:{
-            'c-emoji-picker': Picker,
-            'c-emoji' : Emoji
+export default {
+    components: {
+        'c-emoji-picker': Picker,
+        'c-emoji': Emoji
+    },
+    data() {
+        return {
+            emojiList: [],
+            showPicker: false,
+            nEmoji: {},
+            showAll: false
+        }
+    },
+    methods: {
+        closePicker() {
+            if (this.showPicker) { this.showPicker = false }
         },
-        data(){
-            return{
-                emojiList: [],
-                showPicker: false,
-                nEmoji: {},
-                showAll: false
-            }
+        openPicker() {
+            this.showPicker = !this.showPicker
         },
-        methods:{
-            closePicker(){
-                if ( this.showPicker )
-                    this.showPicker = false
-            },
-            openPicker(){
-                this.showPicker = !this.showPicker
-            },
-            addEmoji(emoji) {
-                this.nEmoji = emoji;
-                if ( this.emojiList.includes(emoji) ){
-                    this.emojiList[this.emojiList.indexOf(emoji)].count += 1
-                } else {
-                    this.$set(this.nEmoji, 'count', 0)
-                    this.emojiList.push(this.nEmoji)
-                }
+        addEmoji(emoji) {
+            this.nEmoji = emoji
+            if (this.emojiList.includes(emoji)) {
+                this.emojiList[this.emojiList.indexOf(emoji)].count += 1
+            } else {
+                this.$set(this.nEmoji, 'count', 0)
+                this.emojiList.push(this.nEmoji)
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

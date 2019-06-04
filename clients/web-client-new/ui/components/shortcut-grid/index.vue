@@ -1,42 +1,45 @@
 <template>
-    <div class="c-grid-container" v-on:resize="getWindowHeight">
+    <div class="c-grid-container"
+         @resize="getWindowHeight">
         <div class="c-grid__wrapper">
-            <div class="c-grid__top position-relative" :class="{'margin-bottom-30' : hasNew}">
-                <div class="c-grid" :style="gridStyle">
+            <div class="c-grid__top position-relative"
+                 :class="{'margin-bottom-30' : hasNew}">
+                <div class="c-grid"
+                     :style="gridStyle">
                     <GridItem v-for="v in list"
-                        :key="v.index"
-                        :index="v.index"
-                        :sort="v.sort"
-                        :draggable="draggable"
-                        :drag-delay="dragDelay"
-                        :row-count="rowCount"
-                        :cell-width="cellWidth"
-                        :cell-height="cellHeight"
-                        :window-width="windowWidth"
-                        :row-shift="rowShift"
-                        @dragstart="onDragStart"
-                        @dragend="onDragEnd"
-                        @drag="onDrag"
-                        @click="click"
-                    >
+                              :key="v.index"
+                              :index="v.index"
+                              :sort="v.sort"
+                              :draggable="draggable"
+                              :drag-delay="dragDelay"
+                              :row-count="rowCount"
+                              :cell-width="cellWidth"
+                              :cell-height="cellHeight"
+                              :window-width="windowWidth"
+                              :row-shift="rowShift"
+                              @dragstart="onDragStart"
+                              @dragend="onDragEnd"
+                              @drag="onDrag"
+                              @click="click">
                         <slot name="cell"
-                            :item="v.item"
-                            :index="v.index"
-                            :sort="v.sort"
-                            :remove="() => { removeItem(v) }"
-                        >
-                        </slot>
+                              :item="v.item"
+                              :index="v.index"
+                              :sort="v.sort"
+                              :remove="() => { removeItem(v) }" />
                     </GridItem>
                 </div>
             </div>
-            <div class="c-grid__has-new" v-if="hasNew">
-                new <i class="fas fa-long-arrow-alt-down"></i>
+            <div v-if="hasNew"
+                 class="c-grid__has-new">
+                new <i class="fas fa-long-arrow-alt-down" />
             </div>
-            <div class="c-grid__bottom position-relative" :class="['h-' + fixedIconHeight]" ref="gridFixed">
-                <div class="c-grid__bottom-divider"></div>
+            <div ref="gridFixed"
+                 class="c-grid__bottom position-relative"
+                 :class="['h-' + fixedIconHeight]">
+                <div class="c-grid__bottom-divider" />
                 <c-icon v-for="(item, index) in fixedItems"
-                        :color="item"
                         :key="index"
+                        :color="item"
                         :index="index"
                         :withButton="true"
                         :href="item.href"
@@ -59,241 +62,235 @@
 </template>
 
 <script>
-    import {getWindowSize} from '@/mixins'
-    import GridItem from '@/components/shortcut-grid-item'
+import { getWindowSize } from '@/mixins'
+import GridItem from '@/components/shortcut-grid-item'
 
-    export default {
-        mixins: [getWindowSize],
-        components: {
-            GridItem,
-            'c-icon': () => import('~/components/shortcut-icon').then(m => m.default || m)
+export default {
+    components: {
+        GridItem,
+        'c-icon': () => import('~/components/shortcut-icon').then(m => m.default || m)
+    },
+    mixins: [getWindowSize],
+    props: {
+        items: {
+            type: Array,
+            default: () => []
         },
-        props: {
-            items: {
-                type: Array,
-                default: () => []
-            },
-            fixedItems: {
-                type: Array,
-                default: () => []
-            },
-            gridWidth: {
-                type: Number,
-                default: -1
-            },
-            cellWidth: {
-                type: Number,
-                default: 80,
-            },
-            cellHeight: {
-                type: Number,
-                default: 80
-            },
-            draggable: {
-                type: Boolean,
-                default: false
-            },
-            dragDelay: {
-                type: Number,
-                default: 0
-            },
-            sortable: {
-                type: Boolean,
-                default: false
-            },
-            center: {
-                type: Boolean,
-                default: false
-            },
-            hasNew: {
-                type: Boolean,
-                default: false
-            }
+        fixedItems: {
+            type: Array,
+            default: () => []
         },
-        data() {
+        gridWidth: {
+            type: Number,
+            default: -1
+        },
+        cellWidth: {
+            type: Number,
+            default: 80
+        },
+        cellHeight: {
+            type: Number,
+            default: 80
+        },
+        draggable: {
+            type: Boolean,
+            default: false
+        },
+        dragDelay: {
+            type: Number,
+            default: 0
+        },
+        sortable: {
+            type: Boolean,
+            default: false
+        },
+        center: {
+            type: Boolean,
+            default: false
+        },
+        hasNew: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data() {
+        return {
+            list: [],
+            windowHeight: null,
+            fixedIconHeight: null
+        }
+    },
+    computed: {
+        gridResponsiveWidth() {
+            return 80
+        },
+
+        gridHeight() {
+            return Math.ceil(this.items.length / this.rowCount) *
+                    this.cellHeight
+        },
+
+        gridStyle() {
             return {
-                list: [],
-                windowHeight: null,
-                fixedIconHeight: null
-            }
-        },
-        watch: {
-            items: {
-                handler: function (nextItems = []) {
-                    this.list = nextItems.map((item, index) => {
-                        return {
-                            item,
-                            index: index,
-                            sort: index
-                        }
-                    })
-                },
-                immediate: true
+                height: `${this.gridHeight}px`
             }
         },
 
-        methods: {
-            getWindowHeight(event) {
+        rowCount() {
+            return Math.floor(this.gridResponsiveWidth / this.cellWidth)
+        },
+
+        rowShift() {
+            if (this.center) {
+                const contentWidth = this.items.length * this.cellWidth
+                const rowShift = contentWidth < this.gridResponsiveWidth
+                    ? (this.gridResponsiveWidth - contentWidth) / 2
+                    : (this.gridResponsiveWidth % this.cellWidth) / 2
+
+                return Math.floor(rowShift)
+            }
+
+            return 0
+        }
+    },
+    watch: {
+        items: {
+            handler(nextItems = []) {
+                this.list = nextItems.map((item, index) => ({
+                    item,
+                    index,
+                    sort: index
+                }))
+            },
+            immediate: true
+        }
+    },
+    created() {
+        if (process.client) {
+            window.addEventListener('resize', this.getWindowHeight)
+        }
+    },
+    mounted() {
+        if (process.client) {
+            this.matchHeight()
+        }
+    },
+
+    methods: {
+        getWindowHeight(event) {
             if (!process.client) { return 0 }
-                this.windowHeight = window.innerHeight
-                // console.log(this.windowHeight)
-            },
-            matchHeight () {
-                this.fixedIconHeight = this.$refs.gridFixed.clientHeight
-            },
-            /* Returns merged event object */
-            wrapEvent(other = {}) {
-                return {
-                    datetime: Date.now(),
-                    items: this.getListClone(),
-                    ...other
-                }
-            },
-            /* Returns sorted clone of "list" array */
-            getListClone() {
-                return this.list
-                    .slice(0)
-                    .sort((a, b) => {
-                        return a.sort - b.sort
-                    })
+            this.windowHeight = window.innerHeight
+            // console.log(this.windowHeight)
+        },
+        matchHeight() {
+            this.fixedIconHeight = this.$refs.gridFixed.clientHeight
+        },
+        /* Returns merged event object */
+        wrapEvent(other = {}) {
+            return {
+                datetime: Date.now(),
+                items: this.getListClone(),
+                ...other
+            }
+        },
+        /* Returns sorted clone of "list" array */
+        getListClone() {
+            return this.list
+                .slice(0)
+                .sort((a, b) => a.sort - b.sort)
                 //  .map(v => {
                 //    return { ...v.item }
                 //  })
-            },
+        },
 
-            removeItem({index}) {
-                let removeItem = this.list.find(v => v.index === index)
-                let removeItemSort = removeItem.sort
+        removeItem({ index }) {
+            const removeItem = this.list.find(v => v.index === index)
+            const removeItemSort = removeItem.sort
 
-                this.list = this.list
-                    .filter(v => {
-                        return v.index !== index
-                    })
-                    .map(v => {
-                        let sort = v.sort > removeItemSort
-                            ? (v.sort - 1)
-                            : v.sort
+            this.list = this.list
+                .filter(v => v.index !== index)
+                .map(v => {
+                    const sort = v.sort > removeItemSort
+                        ? v.sort - 1
+                        : v.sort
 
-                        return {...v, sort}
-                    })
+                    return { ...v, sort }
+                })
 
-                this.$emit('remove', this.wrapEvent({index}))
-            },
+            this.$emit('remove', this.wrapEvent({ index }))
+        },
 
-            onDragStart(event) {
-                this.$emit('dragstart', this.wrapEvent(event))
-            },
+        onDragStart(event) {
+            this.$emit('dragstart', this.wrapEvent(event))
+        },
 
-            onDragEnd(event) {
-                this.$emit('dragend', this.wrapEvent(event))
-            },
+        onDragEnd(event) {
+            this.$emit('dragend', this.wrapEvent(event))
+        },
 
-            click(event) {
-                this.$emit('click', this.wrapEvent(event))
-            },
+        click(event) {
+            this.$emit('click', this.wrapEvent(event))
+        },
 
-            onDrag(event) {
-                if (this.sortable) {
-                    this.sortList(event.index, event.gridPosition)
-                }
+        onDrag(event) {
+            if (this.sortable) {
+                this.sortList(event.index, event.gridPosition)
+            }
 
-                this.$emit('drag', this.wrapEvent({event}))
-            },
+            this.$emit('drag', this.wrapEvent({ event }))
+        },
 
-            sortList(itemIndex, gridPosition) {
-                let targetItem = this.list.find(item => item.index === itemIndex)
-                let targetItemSort = targetItem.sort
+        sortList(itemIndex, gridPosition) {
+            const targetItem = this.list.find(item => item.index === itemIndex)
+            const targetItemSort = targetItem.sort
 
-                /*
+            /*
                   Normalizing new grid position
                 */
-                gridPosition = Math.max(gridPosition, 0)
-                /*
+            gridPosition = Math.max(gridPosition, 0)
+            /*
                   If you remove this line you can drag items to positions that
                   are further than items array length
                 */
-                gridPosition = Math.min(gridPosition, this.list.length - 1)
+            gridPosition = Math.min(gridPosition, this.list.length - 1)
 
-                if (targetItemSort !== gridPosition) {
-                    this.list = this.list.map(item => {
-                        if (item.index === targetItem.index) {
+            if (targetItemSort !== gridPosition) {
+                this.list = this.list.map(item => {
+                    if (item.index === targetItem.index) {
+                        return {
+                            ...item,
+                            sort: gridPosition
+                        }
+                    }
+
+                    const { sort } = item
+
+                    if (targetItemSort > gridPosition) {
+                        if (sort <= targetItemSort && sort >= gridPosition) {
                             return {
                                 ...item,
-                                sort: gridPosition
+                                sort: sort + 1
                             }
                         }
+                    }
 
-                        const {sort} = item
-
-                        if (targetItemSort > gridPosition) {
-                            if (sort <= targetItemSort && sort >= gridPosition) {
-                                return {
-                                    ...item,
-                                    sort: sort + 1
-                                }
+                    if (targetItemSort < gridPosition) {
+                        if (sort >= targetItemSort && sort <= gridPosition) {
+                            return {
+                                ...item,
+                                sort: sort - 1
                             }
                         }
+                    }
 
-                        if (targetItemSort < gridPosition) {
-                            if (sort >= targetItemSort && sort <= gridPosition) {
-                                return {
-                                    ...item,
-                                    sort: sort - 1
-                                }
-                            }
-                        }
+                    return item
+                })
 
-                        return item
-                    })
-
-                    this.$emit('sort', this.wrapEvent())
-                }
+                this.$emit('sort', this.wrapEvent())
             }
-        },
-        created() {
-            if (process.client) {
-                window.addEventListener('resize', this.getWindowHeight)
-            }
-        },
-        mounted () {
-            if (process.client) {
-                this.matchHeight()
-            }
-        },
-        computed: {
-            gridResponsiveWidth() {
-                return 80;
-            },
-
-            gridHeight() {
-                return Math.ceil(this.items.length / this.rowCount) *
-                    this.cellHeight
-            },
-
-            gridStyle() {
-                return {
-                    height: this.gridHeight + 'px'
-                }
-            },
-
-            rowCount() {
-                return Math.floor(this.gridResponsiveWidth / this.cellWidth)
-            },
-
-            rowShift() {
-                if (this.center) {
-                    let contentWidth = this.items.length * this.cellWidth
-                    let rowShift = contentWidth < this.gridResponsiveWidth
-                        ? (this.gridResponsiveWidth - contentWidth) / 2
-                        : (this.gridResponsiveWidth % this.cellWidth) / 2
-
-                    return Math.floor(rowShift)
-                }
-
-                return 0
-            }
-        },
+        }
     }
+}
 </script>
 
 <style lang="scss" scoped>

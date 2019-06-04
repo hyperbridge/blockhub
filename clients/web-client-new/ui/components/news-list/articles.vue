@@ -1,28 +1,32 @@
 <template>
     <div
+        :id="`tab_${index}`"
         class="tab-pane"
         :class="[ index === 0 ? 'show active' : '' ]"
-        :id="`tab_${index}`"
         :aria-labelledby="`tab_${index}-tab`"
-        role="tabpanel"
-    >
-      <ul class="home-tabs__news-list">
-          <c-news-article v-for="(article, index) in articles" :key="index" :heading="article.heading" :date="article.date" :url="article.url" :content="article.content" />
-      </ul>
-  </div>
+        role="tabpanel">
+        <ul class="home-tabs__news-list">
+            <c-news-article v-for="(article, index) in articles"
+                            :key="index"
+                            :heading="article.heading"
+                            :date="article.date"
+                            :url="article.url"
+                            :content="article.content" />
+        </ul>
+    </div>
 </template>
 
 <script>
 export default {
+    components: {
+        'c-news-article': () => import('~/components/news-list/article').then(m => m.default || m)
+    },
     props: {
         articles: {
             type: Array,
             required: true
         },
         index: Number
-    },
-    components:{
-        'c-news-article': () => import('~/components/news-list/article').then(m => m.default || m)
     }
 }
 </script>

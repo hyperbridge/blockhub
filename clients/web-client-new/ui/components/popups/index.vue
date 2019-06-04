@@ -1,19 +1,34 @@
 <template>
-    <transition name="fade" :duration="100">
-        <div class="c-popup" v-if="activated" @click.self.prevent="$emit('close')">
-            <div class="c-popup__item" :style="{ 'width': + width + dimension}">
-                <h3 v-if="title">{{ title }}</h3>
+    <transition name="fade"
+                :duration="100">
+        <div v-if="activated"
+             class="c-popup"
+             @click.self.prevent="$emit('close')">
+            <div class="c-popup__item"
+                 :style="{ 'width': + width + dimension}">
+                <h3 v-if="title">
+                    {{ title }}
+                </h3>
                 <div class="position-relative">
-                    <div class="c-popup__close" @click="$emit('close')" v-if="!customClose">
-                        <i class="fas fa-times"></i>
+                    <div v-if="!customClose"
+                         class="c-popup__close"
+                         @click="$emit('close')">
+                        <i class="fas fa-times" />
                     </div>
-                    <slot name="customClose" v-else></slot>
-                    <div class="c-popup__content" v-if="!this.$slots.customContent">
-                        <div class="c-popup__content-header" :class="[ 'c-popup-type-' + type ]" v-if="subTitle">
+                    <slot v-else
+                          name="customClose" />
+                    <div v-if="!this.$slots.customContent"
+                         class="c-popup__content">
+                        <div v-if="subTitle"
+                             class="c-popup__content-header"
+                             :class="[ 'c-popup-type-' + type ]">
                             <div class="popup-icon">
-                                <i class="fas fa-exclamation-triangle" v-if=" type == ['warning', 'danger'] "></i>
-                                <i class="fas fa-check" v-if=" type == 'success' "></i>
-                                <i class="fas fa-info-circle" v-else></i>
+                                <i v-if=" type == ['warning', 'danger'] "
+                                   class="fas fa-exclamation-triangle" />
+                                <i v-if=" type == 'success' "
+                                   class="fas fa-check" />
+                                <i v-else
+                                   class="fas fa-info-circle" />
                             </div>
                             <div class="subTitle">
                                 {{ subTitle }}
@@ -23,14 +38,16 @@
                             <p class="m-0">
                                 <slot />
                             </p>
-                            <slot name="body"></slot>
+                            <slot name="body" />
                         </div>
-                        <div class="c-popup__content-footer" v-if="this.$slots.footer">
-                            <slot name="footer"></slot>
+                        <div v-if="this.$slots.footer"
+                             class="c-popup__content-footer">
+                            <slot name="footer" />
                         </div>
                     </div>
 
-                    <slot name="customContent" v-else></slot>
+                    <slot v-else
+                          name="customContent" />
                 </div>
             </div>
         </div>
@@ -38,34 +55,34 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            type: {
-                default: 'default'
-            },
-            title: {
-                type: String
-            },
-            subTitle: {
-                type: String
-            },
-            activated: {
-                type: Boolean
-            },
-            width: {
-                default: '400'
-            },
-            dimension:{
-                type: String,
-                default: 'px'
-            }
+export default {
+    props: {
+        type: {
+            default: 'default'
         },
-        computed:{
-          customClose() {
-              return this.$slots.customClose
-          }
+        title: {
+            type: String
+        },
+        subTitle: {
+            type: String
+        },
+        activated: {
+            type: Boolean
+        },
+        width: {
+            default: '400'
+        },
+        dimension: {
+            type: String,
+            default: 'px'
+        }
+    },
+    computed: {
+        customClose() {
+            return this.$slots.customClose
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

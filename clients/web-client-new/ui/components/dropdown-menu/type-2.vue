@@ -1,24 +1,30 @@
 <template>
     <div class="dropdown">
-        <a class="btn dropdown-toggle" :class="{ 'show-bg' : showBg}" href="#" role="button"
-           :id="id" data-toggle="dropdown" aria-haspopup="true"
+        <a :id="id"
+           class="btn dropdown-toggle"
+           :class="{ 'show-bg' : showBg}"
+           href="#"
+           role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true"
            aria-expanded="false">
             {{ name }}
         </a>
-        <div class="dropdown-menu" :aria-labelledby="[ id + '_button']">
-            <slot></slot>
+        <div class="dropdown-menu"
+             :aria-labelledby="[ id + '_button']">
+            <slot />
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        props: {
-            name: String,
-            id: String,
-            showBg: Boolean
-        },
+export default {
+    props: {
+        name: String,
+        id: String,
+        showBg: Boolean
     }
+}
 </script>
 
 <style lang="scss" scoped>

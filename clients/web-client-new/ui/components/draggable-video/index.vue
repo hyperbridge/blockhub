@@ -1,26 +1,48 @@
 <template>
     <transition name="fade">
-        <c-drag :w="width" :h="height" :x="20" :y="20" :resizable="false" v-if="active" :z="99999999">
+        <c-drag v-if="active"
+                :w="width"
+                :h="height"
+                :x="20"
+                :y="20"
+                :resizable="false"
+                :z="99999999">
             <div class="video-container">
                 <div class="video-container__wrapper">
                     <div class="video-container__video">
-                        <video ref="video" @timeupdate="" @loadeddata="setCurrentTime" @playing=" isPlaying = true " autoplay>
-                            <source :src="isVideo.src" type="video/mp4">
+                        <video ref="video"
+                               autoplay
+                               @timeupdate=""
+                               @loadeddata="setCurrentTime"
+                               @playing=" isPlaying = true ">
+                            <source :src="isVideo.src"
+                                    type="video/mp4">
                             Your browser does not support HTML5 video.
                         </video>
                     </div>
                     <div class="video-control">
-                        <c-button status="none" class="video-control__btn video-control__btn--expand" @click="fullscreen" v-if="isPlaying">
-                            <i class="fas fa-expand"></i>
+                        <c-button v-if="isPlaying"
+                                  status="none"
+                                  class="video-control__btn video-control__btn--expand"
+                                  @click="fullscreen">
+                            <i class="fas fa-expand" />
                         </c-button>
-                        <c-button status="none" class="video-control__btn video-control__btn--play" @click="play" v-if="!isPlaying">
-                            <i class="fas fa-play"></i>
+                        <c-button v-if="!isPlaying"
+                                  status="none"
+                                  class="video-control__btn video-control__btn--play"
+                                  @click="play">
+                            <i class="fas fa-play" />
                         </c-button>
-                        <c-button status="none" class="video-control__btn video-control__btn--play" @click="pause" v-if="isPlaying">
-                            <i class="fas fa-pause"></i>
+                        <c-button v-if="isPlaying"
+                                  status="none"
+                                  class="video-control__btn video-control__btn--play"
+                                  @click="pause">
+                            <i class="fas fa-pause" />
                         </c-button>
-                        <c-button status="none" class="video-control__btn video-control__btn--times" @click="destroy">
-                            <i class="fas fa-times"></i>
+                        <c-button status="none"
+                                  class="video-control__btn video-control__btn--times"
+                                  @click="destroy">
+                            <i class="fas fa-times" />
                         </c-button>
                     </div>
                 </div>
@@ -30,54 +52,54 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            active: {
-                type: Boolean,
-                default: true
-            },
+export default {
+    components: {
+        'c-drag': () => import('~/components/draggable').then(m => m.default || m)
+    },
+    props: {
+        active: {
+            type: Boolean,
+            default: true
+        }
+    },
+    data() {
+        return {
+            width: 285,
+            height: 160,
+            isPlaying: false
+        }
+    },
+    computed: {
+        isVideo() {
+            return this.$store.state.application.video
+        }
+    },
+    created() {
+        if (!this.isVideo.src) {
+            this.isVideo.showPopup = false
+        }
+    },
+    methods: {
+        destroy() {
+            this.$emit('close')
+            this.isVideo.showPopup = false
         },
-        components: {
-            'c-drag': () => import('~/components/draggable').then(m => m.default || m)
+        play() {
+            this.$refs.video.play()
+            this.isPlaying = true
         },
-        data() {
-            return {
-                width: 285,
-                height: 160,
-                isPlaying: false
-            }
+        pause() {
+            this.$refs.video.pause()
+            this.isPlaying = false
         },
-        methods: {
-            destroy() {
-                this.$emit('close');
-                this.isVideo.showPopup = false
-            },
-            play(){
-                this.$refs.video.play();
-                this.isPlaying = true;
-            },
-            pause(){
-                this.$refs.video.pause();
-                this.isPlaying = false;
-            },
-            fullscreen(){
-                this.$refs.video.requestFullscreen()
-            },
-            setCurrentTime(){
-                this.$refs.video.currentTime = this.isVideo.currentTime
-            }
+        fullscreen() {
+            this.$refs.video.requestFullscreen()
         },
-        computed: {
-            isVideo(){
-                return this.$store.state.application.video
-            },
-        },
-        created(){
-            if ( !this.isVideo.src ){
-                this.isVideo.showPopup = false
-            }
+        setCurrentTime() {
+            this.$refs.video.currentTime = this.isVideo.currentTime
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

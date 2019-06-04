@@ -3,36 +3,34 @@
         :id="id"
         :name="title"
         class="product-genre"
-        :showBg="true"
-    >
+        :showBg="true">
         <div class="dropdown-list__content">
             <a
                 v-for="(item, index) in list"
                 :key="index"
                 :href="`#item-${index+1}`"
-                @click.prevent="$emit('click', item)"
                 :class="{ 'content__item--active': item.selected }"
-            >{{ item.name }}</a>
+                @click.prevent="$emit('click', item)">{{ item.name }}</a>
         </div>
     </c-dropdown>
 </template>
 
 <script>
-    export default {
-        name: 'dropdown-list',
-        components: {
-            'c-dropdown': () => import('~/components/dropdown-menu/type-2').then(m => m.default || m),
+export default {
+    name: 'DropdownList',
+    components: {
+        'c-dropdown': () => import('~/components/dropdown-menu/type-2').then(m => m.default || m)
+    },
+    props: {
+        id: {
+            type: String,
+            default: 'dropdown-list'
         },
-        props: {
-            id: {
-                type: String,
-                default: 'dropdown-list'
-            },
-            title: String,
-            list: Array,
-            activeList: Array
-        }
+        title: String,
+        list: Array,
+        activeList: Array
     }
+}
 </script>
 
 <style lang="scss" scoped>

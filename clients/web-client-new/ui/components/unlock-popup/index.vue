@@ -1,7 +1,12 @@
 <template>
-    <c-popup :activated="activated" type="custom" ref="modal" width="250">
-        <div slot="customClose" hidden></div>
-        <div class="unlock-modal" slot="customContent">
+    <c-popup ref="modal"
+             :activated="activated"
+             type="custom"
+             width="250">
+        <div slot="customClose"
+             hidden />
+        <div slot="customContent"
+             class="unlock-modal">
             <div class="tab-container">
                 <div class="tab-card">
                     <div class="row">
@@ -9,24 +14,45 @@
                             <div class="form-group">
                                 <h3>Password</h3>
                                 <label class="sr-only">Password</label>
-                                <input type="password" name="password" ref="password" placeholder="Password" class="form-control" @keyup.enter="unlock()" v-focus />
-                                <br />
-                                <c-button ref="submit" class="c-button--lg" @click="unlock()">Unlock</c-button>
-                                <br />
-                                <p class="margin-top-20"><span style="color: #aaa">Can't remember?</span> <c-button class="plain" @click="recovery = true">Recover your account</c-button></p>
-                                <div class="row recovery-box" v-if="recovery">
-                                    <div class="col-12" v-if="!password">
+                                <input ref="password"
+                                       v-focus
+                                       type="password"
+                                       name="password"
+                                       placeholder="Password"
+                                       class="form-control"
+                                       @keyup.enter="unlock()">
+                                <br>
+                                <c-button ref="submit"
+                                          class="c-button--lg"
+                                          @click="unlock()">
+                                    Unlock
+                                </c-button>
+                                <br>
+                                <p class="margin-top-20">
+                                    <span style="color: #aaa">Can't remember?</span> <c-button class="plain"
+                                                                                               @click="recovery = true">
+                                        Recover your account
+                                    </c-button>
+                                </p>
+                                <div v-if="recovery"
+                                     class="row recovery-box">
+                                    <div v-if="!password"
+                                         class="col-12">
                                         <div class="form-group">
                                             <label class="sr-only">Enter your secret question #1</label>
                                             <!-- http://goodsecurityquestions.com/examples/ -->
                                             <p>{{ secretQuestion1 }}</p>
                                             <div class="input-group mb-4">
-                                                <input type="text" class="form-control" placeholder="Secret Answer"
-                                                        name="secretAnswer1" v-model="secretAnswer1">
+                                                <input v-model="secretAnswer1"
+                                                       type="text"
+                                                       class="form-control"
+                                                       placeholder="Secret Answer"
+                                                       name="secretAnswer1">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12" v-if="!password">
+                                    <div v-if="!password"
+                                         class="col-12">
                                         <div class="input-group">
                                             <p>What is your birthday?</p>
                                             <label class="sr-only">Enter your birthday</label>
@@ -39,32 +65,50 @@
                                                 minimumView="day"
                                                 maximumView="year"
                                                 initialView="year"
-                                                :format="customBirthdayFormatter"
-                                            />
+                                                :format="customBirthdayFormatter" />
                                         </div>
                                     </div>
-                                    <div class="col-12 margin-bottom-20" v-if="!password">
-                                        <c-button class="outline-green" @click="recoverPassword">Submit</c-button>
+                                    <div v-if="!password"
+                                         class="col-12 margin-bottom-20">
+                                        <c-button class="outline-green"
+                                                  @click="recoverPassword">
+                                            Submit
+                                        </c-button>
                                     </div>
-                                    <div class="col-12" v-if="recoveryError">
-                                        <div class="alert alert-danger mb-4">{{ recoveryError }}</div>
+                                    <div v-if="recoveryError"
+                                         class="col-12">
+                                        <div class="alert alert-danger mb-4">
+                                            {{ recoveryError }}
+                                        </div>
                                     </div>
-                                    <p class="col-12" v-if="password">
+                                    <p v-if="password"
+                                       class="col-12">
                                         <strong>Success!</strong>
-                                        <br /> 
+                                        <br>
                                         Your password has been recovered without a third-party. It was all you. Isn't that awesome? Now don't lose it!
-                                        <br /><br />
+                                        <br><br>
                                         <strong>Your password is:</strong>
-                                        <br />
+                                        <br>
                                         {{ password }}
-                                        <br /><br />
-                                        <c-button @click="recovery = false">I Understand</c-button>
+                                        <br><br>
+                                        <c-button @click="recovery = false">
+                                            I Understand
+                                        </c-button>
                                     </p>
-                                    <div class="col-12" v-if="!password">
+                                    <div v-if="!password"
+                                         class="col-12">
                                         <p><strong>Can't remember?</strong></p>
                                         <p><em>If you can't remember, you can download your account file, reset your account and try again later.</em></p>
-                                        <p><c-button @click="exportAccount">Export Saved Account</c-button></p>
-                                        <p><c-button @click="clearAccount">Clear Saved Account</c-button></p>
+                                        <p>
+                                            <c-button @click="exportAccount">
+                                                Export Saved Account
+                                            </c-button>
+                                        </p>
+                                        <p>
+                                            <c-button @click="clearAccount">
+                                                Clear Saved Account
+                                            </c-button>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -77,88 +121,88 @@
 </template>
 
 <script>
-    import * as Bridge from '@/framework/desktop-bridge'
-    import * as DB from '@/db'
-    import moment from 'moment'
+import * as Bridge from '@/framework/desktop-bridge'
+import * as DB from '@/db'
+import moment from 'moment'
 
-    export default {
-        props: ['activated'],
-        components: {
-            'c-popup': () => import('~/components/popups').then(m => m.default || m),
-            'c-datepicker': (resolve) => require(['vuejs-datepicker'], resolve),
-            'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m),
-            'c-tab': () => import('~/components/tab/tab').then(m => m.default || m),
-        },
-        methods: {
-            unlock() {
-                $(this.$refs.submit.$el).removeClass('wrong')
+export default {
+    components: {
+        'c-popup': () => import('~/components/popups').then(m => m.default || m),
+        'c-datepicker': resolve => require(['vuejs-datepicker'], resolve),
+        'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m),
+        'c-tab': () => import('~/components/tab/tab').then(m => m.default || m)
+    },
+    props: ['activated'],
+    data() {
+        return {
+            recovery: false,
+            password: null,
+            secretAnswer1: null,
+            birthday: null,
+            recoveryError: null
+        }
+    },
+    computed: {
+        secretQuestion1() {
+            if (!DB.application.config.data[0].account.secretQuestion1) return 'Secret question not found'
 
-                Bridge.resolvePromptPasswordRequest(this.$refs.password.value)
-            },
-            recoverPassword() {
-                this.recoveryError = null
+            const expanded = {}
+            expanded.lastName_first_kissed = 'What is the first name of the person you first kissed?'
+            expanded.firstName_favorite_aunt_uncle = 'What is the first name of the your favorite aunt or uncle?'
+            expanded['favorite_high_school_teacher'] = 'What is the last name of your favorite teacher in high school?'
+            expanded.lastName_teacher_failing_grade = 'What is the last name of the teacher who gave you your first failing grade?'
+            expanded['wedding_reception'] = 'What is the name of the plac eyour wedding reception was held?'
+            expanded['city_sibling_live'] = 'In what city or town does your nearest sibling live?'
 
-                Bridge.sendCommand('recoverPasswordRequest', {
-                    secretQuestion1: this.secretQuestion1,
-                    secretAnswer1: this.secretAnswer1.toLowerCase(),
-                    birthday: moment(this.birthday).format('DD-MM-YYYY'),
-                }).then((data) => {
-                    if (data.error) {
-                        this.recoveryError = data.error.message
+            return expanded[DB.application.config.data[0].account.secretQuestion1]
+        }
+    },
+    created() {
+        Bridge.on('promptPasswordRequest', data => {
+            if (data.error) {
+                $(this.$refs.submit.$el).addClass('wrong')
 
-                        return
-                    }
-
-                    this.recoveryError = null
-                    this.password = data.password
-                })
-            },
-            customBirthdayFormatter(date) {
-                return moment(date).format('DD-MM-YYYY')
-            },
-            exportAccount() {
-                Bridge.sendCommand('exportAccountFileRequest')
-            },
-            clearAccount() {
-                Bridge.sendCommand('deleteAccountRequest')
+                setTimeout(() => {
+                    $(this.$refs.submit.$el).removeClass('wrong')
+                }, 350)
             }
-        },
-        computed: {
-            secretQuestion1() {
-                if (!DB.application.config.data[0].account.secretQuestion1) return "Secret question not found"
+        })
+    },
+    methods: {
+        unlock() {
+            $(this.$refs.submit.$el).removeClass('wrong')
 
-                const expanded = {}
-                expanded["lastName_first_kissed"] = "What is the first name of the person you first kissed?"
-                expanded["firstName_favorite_aunt_uncle"] = "What is the first name of the your favorite aunt or uncle?"
-                expanded["favorite_high_school_teacher"] = "What is the last name of your favorite teacher in high school?"
-                expanded["lastName_teacher_failing_grade"] = "What is the last name of the teacher who gave you your first failing grade?"
-                expanded["wedding_reception"] = "What is the name of the plac eyour wedding reception was held?"
-                expanded["city_sibling_live"] = "In what city or town does your nearest sibling live?"
+            Bridge.resolvePromptPasswordRequest(this.$refs.password.value)
+        },
+        recoverPassword() {
+            this.recoveryError = null
 
-                return expanded[DB.application.config.data[0].account.secretQuestion1]
-            }
-        },
-        data() {
-            return {
-                recovery: false,
-                password: null,
-                secretAnswer1: null,
-                birthday: null,
-                recoveryError: null
-            }
-        },
-        created() {
-            Bridge.on('promptPasswordRequest', (data) => {
+            Bridge.sendCommand('recoverPasswordRequest', {
+                secretQuestion1: this.secretQuestion1,
+                secretAnswer1: this.secretAnswer1.toLowerCase(),
+                birthday: moment(this.birthday).format('DD-MM-YYYY')
+            }).then(data => {
                 if (data.error) {
-                    $(this.$refs.submit.$el).addClass('wrong')
+                    this.recoveryError = data.error.message
 
-                    setTimeout(() => {
-                        $(this.$refs.submit.$el).removeClass('wrong')
-                    }, 350)
+                    return
                 }
+
+                this.recoveryError = null
+                this.password = data.password
             })
+        },
+        customBirthdayFormatter(date) {
+            return moment(date).format('DD-MM-YYYY')
+        },
+        exportAccount() {
+            Bridge.sendCommand('exportAccountFileRequest')
+        },
+        clearAccount() {
+            Bridge.sendCommand('deleteAccountRequest')
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

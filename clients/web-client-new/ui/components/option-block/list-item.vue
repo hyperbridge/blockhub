@@ -1,7 +1,10 @@
 <template>
-    <div class="option-block__list-item" :class="{ 'selected' : selected }" @click="$emit('select')">
-        <div class="list-item__image" v-if="image">
-            <img :src="image" />
+    <div class="option-block__list-item"
+         :class="{ 'selected' : selected }"
+         @click="$emit('select')">
+        <div v-if="image"
+             class="list-item__image">
+            <img :src="image">
         </div>
         <div class="list-item__info w-100">
             <div class="h5 mb-0">
@@ -15,16 +18,16 @@
 </template>
 
 <script>
-    export default {
-        props:{
-            price: [ String, Number],
-            image: String,
-            selected: {
-                type: Boolean,
-                default: false
-            }
+export default {
+    props: {
+        price: [String, Number],
+        image: String,
+        selected: {
+            type: Boolean,
+            default: false
         }
     }
+}
 </script>
 <style lang="scss" scoped>
     .option-block__list-item{

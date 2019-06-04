@@ -1,11 +1,15 @@
 <template>
-    <div class="sidebar-menu" :class="mClass">
+    <div class="sidebar-menu"
+         :class="mClass">
         <h3 v-if="title">
-            <i :class="icon" v-if="icon"></i>
+            <i v-if="icon"
+               :class="icon" />
             {{ title }}
         </h3>
-        <h5 v-if="subTitle" class="sidebar-menu__subtitle">
-            <i :class="subIcon" v-if="subIcon"></i>
+        <h5 v-if="subTitle"
+            class="sidebar-menu__subtitle">
+            <i v-if="subIcon"
+               :class="subIcon" />
             {{ subTitle }}
         </h5>
         <ul class="sidebar-menu__list">
@@ -13,10 +17,11 @@
                 <c-sidebar-menu-link
                     v-for="(link, index) in links"
                     :key="index"
-                    :to="link.to"
-                >
-                    <slot name="link" :link="link">
-                        <i :class="link.icon" v-if="link.icon"></i>
+                    :to="link.to">
+                    <slot name="link"
+                          :link="link">
+                        <i v-if="link.icon"
+                           :class="link.icon" />
                         {{ link.title }}
                     </slot>
                 </c-sidebar-menu-link>
@@ -26,19 +31,19 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            icon: String,
-            subIcon: String,
-            title: String,
-            subTitle: String,
-            mClass: String,
-            links: Array
-        },
-        components: {
-            'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m)
-        }
+export default {
+    components: {
+        'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m)
+    },
+    props: {
+        icon: String,
+        subIcon: String,
+        title: String,
+        subTitle: String,
+        mClass: String,
+        links: Array
     }
+}
 </script>
 
 <style lang="scss" scoped>

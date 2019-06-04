@@ -1,8 +1,10 @@
 <template>
-    <div class="community-item" :class="{ is_reply: reply }">
+    <div class="community-item"
+         :class="{ is_reply: reply }">
         <div class="community-item__header">
             <div class="icon">
-                <i class="fas" :class="post_icon"></i>
+                <i class="fas"
+                   :class="post_icon" />
             </div>
             <div class="text">
                 <router-link :to="{ name: 'Community Discussion', params: {id: post.id } }">
@@ -12,85 +14,87 @@
                 {{ post.title.status }}
             </div>
             <div class="statistic">
-                <div class="rating" :class="[ post.rate < 0 ? 'down' : 'up' ]">
-                    <i class="fas" :class="[ post.rate < 0 ? 'fa-chevron-down' : 'fa-chevron-up' ]"></i>
+                <div class="rating"
+                     :class="[ post.rate < 0 ? 'down' : 'up' ]">
+                    <i class="fas"
+                       :class="[ post.rate < 0 ? 'fa-chevron-down' : 'fa-chevron-up' ]" />
                     {{ post.rate < 0 ? post.rate * -1 : post.rate }}
                 </div>
                 <div class="commentsCount">
-                    <i class="fas fa-comment"></i>
+                    <i class="fas fa-comment" />
                     {{ post.commentsCount }}
                 </div>
                 <div class="user">
                     <div>
-                        <c-img :src="post.author.img"/>
+                        <c-img :src="post.author.img" />
                         <span class="name">{{ post.author.name }}</span>
                     </div>
-                    <div class="time">25 min</div>
+                    <div class="time">
+                        25 min
+                    </div>
                 </div>
             </div>
         </div>
         <template v-if="post.content">
             <div class="community-item__post">
                 <p>{{ post.content.text }}</p>
-                <c-img :src="post.content.img"/>
+                <c-img :src="post.content.img" />
             </div>
             <div class="community-item__action text-right">
-                <a href="#" class="btn btn-sm btn-icon" v-if="!reply">
-                    <i class="fas fa-thumbs-down"></i>
+                <a v-if="!reply"
+                   href="#"
+                   class="btn btn-sm btn-icon">
+                    <i class="fas fa-thumbs-down" />
                 </a>
                 <c-reply :class="{'w-100' : reply}"
-                    @replyMode="reply = $event"
-                />
+                         @replyMode="reply = $event" />
             </div>
 
             <c-post-comment
                 v-for="(comment, index) in post.content.comments"
-                :key="index"
-                :comment="comment"
                 v-if="post.content.comments"
-            >
+                :key="index"
+                :comment="comment">
                 <c-post-comment
                     v-for="(subcomment, index) in comment.replies"
-                    :key="index"
-                    :comment="subcomment"
                     v-if="comment.replies"
-                />
+                    :key="index"
+                    :comment="subcomment" />
             </c-post-comment>
-
         </template>
     </div>
 </template>
 
 <script>
-    import Comment from '../community/comment'
-    import moment from 'moment'
+import Comment from '../community/comment'
+import moment from 'moment'
 
-    export default {
-        props: ['post'],
-        components: {
-            'c-post-comment': Comment,
-            'c-reply': () => import('~/components/community/reply').then(m => m.default || m),
-        },
-        data() {
-            return {
-                reply: false
-            }
-        },
-        computed: {
-            post_icon() {
-                switch(this.post.status) {
-                    case 'pinned':
-                        return 'fa-map-pin';
-                    case 'locked':
-                        return 'fa-lock';
-                    case 'starred':
-                        return 'fa-star';
-                    default:
-                        return 'fa-comments';
-                }
+export default {
+    components: {
+        'c-post-comment': Comment,
+        'c-reply': () => import('~/components/community/reply').then(m => m.default || m)
+    },
+    props: ['post'],
+    data() {
+        return {
+            reply: false
+        }
+    },
+    computed: {
+        post_icon() {
+            switch (this.post.status) {
+            case 'pinned':
+                return 'fa-map-pin'
+            case 'locked':
+                return 'fa-lock'
+            case 'starred':
+                return 'fa-star'
+            default:
+                return 'fa-comments'
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

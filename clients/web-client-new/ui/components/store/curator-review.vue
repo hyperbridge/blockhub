@@ -1,31 +1,42 @@
 <template>
     <div class="curator-review">
-        <c-img :src="review.game.img" class="curator-review__img"/>
+        <c-img :src="review.game.img"
+               class="curator-review__img" />
         <div class="curator-review__header">
-            <c-author :author="review.author"/>
+            <c-author :author="review.author" />
             <span style="font-size: 22px">
-                <i class="fas fa-star"></i>
+                <i class="fas fa-star" />
                 <strong>{{ review.rate }}</strong>
             </span>
         </div>
         <transition name="fade-scale">
-            <p v-if="read_more" :key="1">{{ review.text }}</p>
-            <p v-else>{{ review.text.substring(0, 240) }}...</p>
+            <p v-if="read_more"
+               :key="1">
+                {{ review.text }}
+            </p>
+            <p v-else>
+                {{ review.text.substring(0, 240) }}...
+            </p>
         </transition>
-        <a href="#" @click.prevent="read_more = !read_more" class="text-white font-weight-bold">
+        <a href="#"
+           class="text-white font-weight-bold"
+           @click.prevent="read_more = !read_more">
             {{ read_more ? 'SHOW LESS' : 'MORE...' }}
         </a>
-        <h4 class="curator-review__more-header">More curated by {{ review.author.name }}</h4>
+        <h4 class="curator-review__more-header">
+            More curated by {{ review.author.name }}
+        </h4>
         <ul class="moreReviews">
             <li
                 v-for="(sub_review, index) in review.moreReviews"
                 :key="index"
-                class="sub-review"
-            >
-                <c-img :src="sub_review.game.img" class="sub-review__img"/>
+                class="sub-review">
+                <c-img :src="sub_review.game.img"
+                       class="sub-review__img" />
                 <div class="sub-review__details">
                     <h5 class="margin-bottom-5">
-                        <a href="#" class="text-white font-weight-bold">{{ sub_review.game.title }}</a>
+                        <a href="#"
+                           class="text-white font-weight-bold">{{ sub_review.game.title }}</a>
                     </h5>
                     <div class="text-white font-weight-bold">
                         <!--<c-rating-stars :number="sub_review.rate"/>-->
@@ -42,17 +53,17 @@
 
 <script>
 export default {
-    name: 'curator-review',
+    name: 'CuratorReview',
+    components: {
+        'c-author': () => import('~/components/author').then(m => m.default || m),
+        'c-rating-stars': () => import('~/components/rating-stars').then(m => m.default || m),
+        'c-button': () => import('~/components/buttons/wide').then(m => m.default || m)
+    },
     props: {
         review: {
             type: Object,
             required: true
         }
-    },
-    components: {
-        'c-author': () => import('~/components/author').then(m => m.default || m),
-        'c-rating-stars': () => import('~/components/rating-stars').then(m => m.default || m),
-        'c-button': () => import('~/components/buttons/wide').then(m => m.default || m),
     },
     data() {
         return {

@@ -1,19 +1,32 @@
 <template>
     <div class="currency-dropdown">
-        <div class="currency-dropdown__current" @click="toggleList">
-            <c-country-flag :country="currentCurrency.country" size="small" v-if="currentCurrency.country" />
-            <c-crypto-icon :name="currentCurrency.code" v-else />
+        <div class="currency-dropdown__current"
+             @click="toggleList">
+            <c-country-flag v-if="currentCurrency.country"
+                            :country="currentCurrency.country"
+                            size="small" />
+            <c-crypto-icon v-else
+                           :name="currentCurrency.code" />
             <span class="currency-name">
                 {{ currentCurrency.code }}
             </span>
-            <i class="fas " :class="showList ? 'fa-angle-up' : 'fa-angle-down' "></i>
+            <i class="fas "
+               :class="showList ? 'fa-angle-up' : 'fa-angle-down' " />
         </div>
         <transition name="slide-in-top">
-            <div class="currency-dropdown__list" v-if="showList" v-click-outside.bool="showList">
+            <div v-if="showList"
+                 v-click-outside.bool="showList"
+                 class="currency-dropdown__list">
                 <ul :class="{'d-block' : showList}">
-                    <li class="currency-dropdown__list-item" v-for="(currency, index) in currencies" @click="changeCurrency(currency)" :key="index">
-                        <c-country-flag :country="currency.country" size="small" v-if="currency.country" />
-                        <c-crypto-icon :name="currency.code" v-else/>
+                    <li v-for="(currency, index) in currencies"
+                        :key="index"
+                        class="currency-dropdown__list-item"
+                        @click="changeCurrency(currency)">
+                        <c-country-flag v-if="currency.country"
+                                        :country="currency.country"
+                                        size="small" />
+                        <c-crypto-icon v-else
+                                       :name="currency.code" />
                         <span class="currency-name">
                             {{ currency.code }}
                         </span>
@@ -25,30 +38,30 @@
 </template>
 
 <script>
-    export default {
-        name: 'currency-dropdown',
-        props: {
-            currentCurrency: Object,
-            currencies: Array
+export default {
+    name: 'CurrencyDropdown',
+    components: {
+        'c-crypto-icon': () => import('~/components/icon/crypto').then(m => m.default || m)
+    },
+    props: {
+        currentCurrency: Object,
+        currencies: Array
+    },
+    data() {
+        return {
+            showList: false
+        }
+    },
+    methods: {
+        toggleList() {
+            this.showList = !this.showList
         },
-        components: {
-            'c-crypto-icon' : () => import('~/components/icon/crypto').then(m => m.default || m),
-        },
-        data(){
-            return{
-                showList: false
-            }
-        },
-        methods:{
-            toggleList(){
-                this.showList = !this.showList
-            },
-            changeCurrency(currency){
-                this.$emit('change', currency);
-                this.toggleList();
-            }
+        changeCurrency(currency) {
+            this.$emit('change', currency)
+            this.toggleList()
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

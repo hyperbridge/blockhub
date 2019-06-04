@@ -1,7 +1,12 @@
 <template>
-    <div class="single-emogi" :class="{'single-emogi--bg' : count && count > 0}" @click="$emit('click')">
-        <emoji :emoji="emoji" :size="Number(size)" :style=" 'height:' + size + 'px'" />
-        <span class="single-emogi__count" v-if="count && count > 0">
+    <div class="single-emogi"
+         :class="{'single-emogi--bg' : count && count > 0}"
+         @click="$emit('click')">
+        <emoji :emoji="emoji"
+               :size="Number(size)"
+               :style=" 'height:' + size + 'px'" />
+        <span v-if="count && count > 0"
+              class="single-emogi__count">
             {{ count }}
         </span>
     </div>
@@ -9,24 +14,24 @@
 
 <script>
 
-    import {Emoji} from 'emoji-mart-vue'
+import { Emoji } from 'emoji-mart-vue'
 
-    export default {
-        props:{
-            emoji: {
-                type: String,
-                default: 'smile'
-            },
-            size:{
-                type: [ String, Number ],
-                default: '24'
-            },
-            count: [ String, Number ]
+export default {
+    components: {
+        'c-emoji': Emoji
+    },
+    props: {
+        emoji: {
+            type: String,
+            default: 'smile'
         },
-        components: {
-            'c-emoji': Emoji
-        }
+        size: {
+            type: [String, Number],
+            default: '24'
+        },
+        count: [String, Number]
     }
+}
 </script>
 
 <style lang="scss" scoped>

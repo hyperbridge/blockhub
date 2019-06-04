@@ -4,38 +4,37 @@
         :class="[
             isChildren ? 'option-tag--shadow' : 'option-tag--margin',
             { 'option-tag--light': isParent }
-        ]"
-    >
-        <span v-if="title" class="option-tag__title">
+        ]">
+        <span v-if="title"
+              class="option-tag__title">
             {{ title }}
         </span>
         {{ text }}
-        <slot/>
+        <slot />
         <c-icon
             v-if="!hideButton"
             name="times-circle"
             class="option-tag__del-btn"
-            @click="$emit('delete')"
-        />
+            @click="$emit('delete')" />
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'option-tag',
-        props: {
-            title: [String, Number],
-            text: [String, Number],
-            isParent: {
-                type: Boolean,
-                default() {
-                    return !!(this.$slots.default && this.$slots.default.length);
-                }
-            },
-            isChildren: Boolean,
-            hideButton: Boolean
-        }
+export default {
+    name: 'OptionTag',
+    props: {
+        title: [String, Number],
+        text: [String, Number],
+        isParent: {
+            type: Boolean,
+            default() {
+                return Boolean(this.$slots.default && this.$slots.default.length)
+            }
+        },
+        isChildren: Boolean,
+        hideButton: Boolean
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,14 +1,15 @@
 <template>
-    <div class="tabs-universal" :class="`tabs-universal--${styled ? 'styled' : 'default'}`">
-        <nav class="tabs-universal__nav" v-if="!disableMenu">
+    <div class="tabs-universal"
+         :class="`tabs-universal--${styled ? 'styled' : 'default'}`">
+        <nav v-if="!disableMenu"
+             class="tabs-universal__nav">
             <slot name="nav">
                 <ul class="tabs-universal__list">
                     <li
                         v-for="tab in dynamicTabs"
                         :key="tab.id"
                         class="tabs-universal__list-item"
-                        :class="'layer' + tab.id"
-                    >
+                        :class="'layer' + tab.id">
                         <a
                             :aria-selected="activeTab == tab.id"
                             class="list-item__link"
@@ -16,79 +17,78 @@
                                 'active': activeTab == tab.id,
                                 'locked': isTabLocked(tab.id),
                             }"
-                            @click.prevent="tabClick(tab.id)"
                             role="tab"
-                        >{{ tab.name }}</a>
+                            @click.prevent="tabClick(tab.id)">{{ tab.name }}</a>
                     </li>
                 </ul>
             </slot>
         </nav>
-        <slot/>
+        <slot />
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'tabs-universal',
-        props: {
-            tabNames: Array,
-            setActiveTab: [Number, String],
-            tabText: String,
-            activeTabProp: [Number, String],
-            lockedStep: Number,
-            lockedTab: Number,
-            styled: Boolean,
-            disableMenu: Boolean
-        },
-        data() {
-            return {
-                tabs: [],
-                activeTab_data: 1
-            }
-        },
-        methods: {
-            isTabLocked(index) {
-                const { lockedStep, lockedTab } = this;
-                return (lockedTab != null && lockedTab == index) || (lockedStep != null && !(index < lockedStep));
-            },
-            tabClick(index) {
-                this.activeTab_data = index;
-                this.$emit('click', index);
-            }
-        },
-        computed: {
-            dynamicTabs() {
-                return this.tabNames
-                    ? this.tabNames.map((name, index) => ({ id: index + 1, name }))
-                    : this.tabs.map((tab, index) => ({
-                        name: (this.tabText ? this.tabText + ' ' :  'TAB ') +  (index + 1),
-                        id: index + 1
-                      }));
-            },
-            activeTab() {
-                const { setActiveTab, activeTabProp, activeTab_data } = this;
-                return setActiveTab == null
-                    ? activeTabProp == null
-                        ? activeTab_data
-                        : activeTabProp
-                    : setActiveTab;
-            },
-            activeStyle() {
-                return this.styled ? '--styled' : '--default';
-            }
-        },
-        provide() {
-            const tab_data = {};
-            Object.defineProperty(tab_data, 'activeTab', {
-                enumerable: true,
-                get: () => this.activeTab
-            });
-            return { tab_data }
-        },
-        mounted() {
-            this.tabs = this.$children;
+export default {
+    name: 'TabsUniversal',
+    props: {
+        tabNames: Array,
+        setActiveTab: [Number, String],
+        tabText: String,
+        activeTabProp: [Number, String],
+        lockedStep: Number,
+        lockedTab: Number,
+        styled: Boolean,
+        disableMenu: Boolean
+    },
+    data() {
+        return {
+            tabs: [],
+            activeTab_data: 1
         }
+    },
+    computed: {
+        dynamicTabs() {
+            return this.tabNames
+                ? this.tabNames.map((name, index) => ({ id: index + 1, name }))
+                : this.tabs.map((tab, index) => ({
+                    name: (this.tabText ? `${this.tabText} ` : 'TAB ') + (index + 1),
+                    id: index + 1
+                }))
+        },
+        activeTab() {
+            const { setActiveTab, activeTabProp, activeTab_data } = this
+            return setActiveTab == null
+                ? activeTabProp == null
+                    ? activeTab_data
+                    : activeTabProp
+                : setActiveTab
+        },
+        activeStyle() {
+            return this.styled ? '--styled' : '--default'
+        }
+    },
+    mounted() {
+        this.tabs = this.$children
+    },
+    methods: {
+        isTabLocked(index) {
+            const { lockedStep, lockedTab } = this
+            return (lockedTab != null && lockedTab == index) || (lockedStep != null && !(index < lockedStep))
+        },
+        tabClick(index) {
+            this.activeTab_data = index
+            this.$emit('click', index)
+        }
+    },
+    provide() {
+        const tab_data = {}
+        Object.defineProperty(tab_data, 'activeTab', {
+            enumerable: true,
+            get: () => this.activeTab
+        })
+        return { tab_data }
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,9 @@
 <template>
-    <c-block class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true" v-if="streams">
+    <c-block v-if="streams"
+             class="margin-bottom-30"
+             :noGutter="true"
+             :bgGradient="true"
+             :onlyContentBg="true">
         <c-heading-bar
             slot="title"
             class="mb-0"
@@ -8,69 +12,67 @@
             :showArrows="showArrowsState(streams, maxPerView)"
             :showBackground="showBackground"
             @prevClick="slider.slidePrev()"
-            @nextClick="slider.slideNext()"
-        />
+            @nextClick="slider.slideNext()" />
 
-        <c-swiper :options="sliderOptions" ref="slider">
-            <c-swiper-slide v-for="(stream, index) in streams" :key="index">
+        <c-swiper ref="slider"
+                  :options="sliderOptions">
+            <c-swiper-slide v-for="(stream, index) in streams"
+                            :key="index">
                 <c-stream-item
                     :streamName="stream.userName"
                     :streamAvatar="stream.userAvatar"
                     :streamImg="stream.previews"
                     :streamLink="stream.src"
                     :streamViews="stream.views"
-                    :streamId="stream.id"
-                />
+                    :streamId="stream.id" />
             </c-swiper-slide>
         </c-swiper>
-
     </c-block>
 </template>
 
 <script>
-    export default {
-        name: 'product-slider',
-        components: {
-            'c-stream-item': () => import('~/components/stream').then(m => m.default || m),
+export default {
+    name: 'ProductSlider',
+    components: {
+        'c-stream-item': () => import('~/components/stream').then(m => m.default || m)
+    },
+    props: {
+        streams: Array,
+        title: String,
+        maxPerView: {
+            type: Number,
+            default: 3
         },
-        props: {
-            streams: Array,
-            title: String,
-            maxPerView: {
-                type: Number,
-                default: 3
-            },
-            showBackground: Boolean
-        },
-        data() {
-            return {
-                sliderOptions: {
-                    slidesPerView: this.maxPerView,
-                    spaceBetween: 15,
-                    breakpoints: {
-                        768: {
-                            slidesPerView: 1,
-                            spaceBetween: 0
-                        },
+        showBackground: Boolean
+    },
+    data() {
+        return {
+            sliderOptions: {
+                slidesPerView: this.maxPerView,
+                spaceBetween: 15,
+                breakpoints: {
+                    768: {
+                        slidesPerView: 1,
+                        spaceBetween: 0
                     }
-                },
-            }
-        },
-        methods: {
-            showArrowsState(el, count) {
-                if ( el.length > count) {
-                    return true
-                } else {
-                    return false
                 }
-            },
-        },
-        computed: {
-            slider() {
-                return this.$refs.slider.swiper
-            },
+            }
+        }
+    },
+    computed: {
+        slider() {
+            return this.$refs.slider.swiper
+        }
+    },
+    methods: {
+        showArrowsState(el, count) {
+            if (el.length > count) {
+                return true
+            }
+            return false
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,6 +1,8 @@
 <template>
     <div class="row product-grid">
-        <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+        <c-block :noGutter="true"
+                 :bgGradient="true"
+                 :onlyContentBg="true">
             <c-heading-bar
                 slot="title"
                 class="mb-0"
@@ -9,99 +11,95 @@
                     { title: 'New Releases', category: 'newProducts' },
                     { title: 'Upcoming', category: 'upcomingProducts' }
                 ]"
-                @changeTab="category = $event; clearFilters()"
                 :showActions="true"
-            >
+                @changeTab="category = $event; clearFilters()">
                 <template slot="additional-action">
-                    <span class="sort-title" hidden>Sort by:</span>
+                    <span class="sort-title"
+                          hidden>Sort by:</span>
                     <c-heading-bar-fields
                         v-for="(opt, index) in sortOptions"
                         :key="index"
                         :name="opt.title"
                         :icon="opt.icon"
-                        @clickUp="setSort(opt.property, true)"
-                        @clickDown="setSort(opt.property, false)"
                         :activeUp="sortBy.property === opt.property ? sortBy.asc : null"
-                    />
+                        @clickUp="setSort(opt.property, true)"
+                        @clickDown="setSort(opt.property, false)" />
                 </template>
             </c-heading-bar>
             <div class="product-grid__filters align-items-center">
                 <div class="d-flex align-items-center">
-                    <c-dropdown id="product-genres" name="Filter by Genre" :showBg="true" class="product-genre">
+                    <c-dropdown id="product-genres"
+                                name="Filter by Genre"
+                                :showBg="true"
+                                class="product-genre">
                         <div class="product-genre__content">
                             <a
                                 v-for="genre in availableGenres"
                                 :key="genre"
                                 :href="`#${genre}`"
                                 :class="{ 'product-genre__btn--active': selectedGenres.includes(genre) }"
-                                @click.prevent="setGenre(genre)"
-                            >{{ genre }}</a>
+                                @click.prevent="setGenre(genre)">{{ genre }}</a>
                         </div>
                     </c-dropdown>
                     <c-input-searcher
-                        v-model="phrase"
-                    />
+                        v-model="phrase" />
                 </div>
-                <c-button status="lightpurple" iconHide>All New Releases</c-button>
+                <c-button status="lightpurple"
+                          iconHide>
+                    All New Releases
+                </c-button>
             </div>
             <transition name="slide-in">
-                <div v-if="filtersActive" class="active-filters">
+                <div v-if="filtersActive"
+                     class="active-filters">
                     <div class="active-filters__content">
                         <c-option-tag
                             v-if="phrase.length"
                             title="NAME:"
                             :text="phrase"
-                            @delete="phrase = ''"
-                        />
+                            @delete="phrase = ''" />
                         <c-option-tag
                             v-if="selectedGenres.length"
                             title="GENRES:"
-                            @delete="selectedGenres = []"
                             isParent
-                        >
+                            @delete="selectedGenres = []">
                             <c-option-tag
                                 v-for="(genre, index) in selectedGenres"
                                 :key="index"
                                 :text="genre"
-                                @delete="selectedGenres.splice(index, 1)"
                                 isChildren
-                            />
+                                @delete="selectedGenres.splice(index, 1)" />
                         </c-option-tag>
                         <c-option-tag
                             v-if="sortBy.property"
                             title="SORT BY:"
-                            @delete="sortBy.property = null"
-                        >
+                            @delete="sortBy.property = null">
                             <c-option-tag
                                 title="Property:"
-                                @delete="sortBy.property = null"
                                 isChildren
                                 :isParent="false"
-                            >
+                                @delete="sortBy.property = null">
                                 <select v-model="sortBy.property">
                                     <option
                                         v-for="opt in sortOptions"
                                         :key="opt.property"
-                                        :value="opt.property"
-                                    >
+                                        :value="opt.property">
                                         {{ opt.title }}
                                     </option>
                                 </select>
                             </c-option-tag>
                             <c-option-tag
                                 title="Direction:"
-                                @delete="sortBy.asc = !sortBy.asc"
                                 isChildren
                                 :isParent="false"
                                 hideButton
-                            >
+                                @delete="sortBy.asc = !sortBy.asc">
                                 {{ sortBy.asc ? 'Ascending' : 'Descending' }}
                                 <c-icon
                                     name="arrow-up"
                                     class="sort-button"
                                     :class="{ 'desc': !sortBy.asc }"
-                                    @click="sortBy.asc = !sortBy.asc"
-                                />
+                                    @click="sortBy.asc = !sortBy.asc" />
                             </c-option-tag>
                         </c-option-tag>
                     </div>
@@ -109,8 +107,7 @@
             </transition>
             <c-content-navigation
                 v-if="filteredProducts.length"
-                :items="filteredProducts"
-            >
+                :items="filteredProducts">
                 <c-game-grid
                     slot-scope="{ items }"
                     :itemInRow="2"
@@ -118,110 +115,114 @@
                     :items="items"
                     showTime
                     itemBg="transparent"
-                    pricePosition="right"
-                />
+                    pricePosition="right" />
             </c-content-navigation>
             <div v-else-if="filtersActive">
-                <p>No products were found using these filters. Want to <c-button status="plain"  @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
+                <p>
+                    No products were found using these filters. Want to <c-button status="plain"
+                                                                                  @click="$store.commit('application/activateModal', 'coming-soon')">
+                        Check for updates
+                    </c-button>?
+                </p>
                 <c-button
                     status="info"
                     size="md"
                     iconHide
-                    @click="clearFilters()"
-                >Clear filters</c-button>
+                    @click="clearFilters()">
+                    Clear filters
+                </c-button>
             </div>
             <p v-else>
-                Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?
+                Nothing could be found. Want to <c-button status="plain"
+                                                          @click="$store.commit('application/activateModal', 'coming-soon')">
+                    Check for updates
+                </c-button>?
             </p>
         </c-block>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'games-explorer',
-        components: {
-            'c-block': () => import('~/components/block').then(m => m.default || m),
-            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-            'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
-            'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
-            'c-dropdown': () => import('~/components/dropdown-menu/type-2').then(m => m.default || m),
-            'c-game-grid': () => import('~/components/game-grid/with-description').then(m => m.default || m),
-            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-            'c-option-tag': () => import('~/components/option-tag').then(m => m.default || m)
+export default {
+    name: 'GamesExplorer',
+    components: {
+        'c-block': () => import('~/components/block').then(m => m.default || m),
+        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+        'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
+        'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
+        'c-dropdown': () => import('~/components/dropdown-menu/type-2').then(m => m.default || m),
+        'c-game-grid': () => import('~/components/game-grid/with-description').then(m => m.default || m),
+        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+        'c-option-tag': () => import('~/components/option-tag').then(m => m.default || m)
+    },
+    data() {
+        return {
+            category: 'topSellingProducts',
+            phrase: '',
+            selectedGenres: [],
+            sortBy: {
+                property: null,
+                asc: true
+            },
+            sortOptions: [
+                { title: 'Name', property: 'name', icon: 'language' },
+                { title: 'Price', property: 'price', icon: 'dollar-sign' }
+            ]
+        }
+    },
+    computed: {
+        products() {
+            return this.$store.state.marketplace[this.category]
         },
-        data() {
-            return {
-                category: 'topSellingProducts',
-                phrase: '',
-                selectedGenres: [],
-                sortBy: {
-                    property: null,
-                    asc: true
-                },
-                sortOptions: [
-                    { title: 'Name', property: 'name', icon: 'language' },
-                    { title: 'Price', property: 'price', icon: 'dollar-sign' },
-                ]
-            }
+        filteredProducts() {
+            const { property, asc } = this.sortBy
+            const sortDir = dir => asc ? dir : dir * -1
+            return this.$store.state.marketplace[this.category]
+                .filter(product =>
+                    product.name.toLowerCase().includes(this.phrase.toLowerCase()))
+                .filter(product => this.selectedGenres.length
+                    ? product.developerTags.some(genre => this.selectedGenres.includes(genre))
+                    : true)
+                .sort((a, b) => property
+                    ? a[property] > b[property]
+                        ? sortDir(1)
+                        : a[property] < b[property] ? sortDir(-1) : 0
+                    : 0)
         },
-        methods: {
-            setGenre(genre) {
-                const genreKey = this.selectedGenres.indexOf(genre);
-                genreKey > -1
-                 ? this.selectedGenres.splice(genreKey, 1)
-                 : this.selectedGenres.push(genre)
-            },
-            clearFilters() {
-                this.selectedGenres = [];
-                this.phrase = '';
-                this.sortBy.property = null;
-                this.sortBy.asc = true;
-            },
-            setSort(prop, direction) {
-                const { property, asc } = this.sortBy;
-                this.sortBy.property = property === prop && direction === asc
-                 ? null
-                 : prop
-                this.sortBy.asc = direction;
-            },
+        availableGenres() {
+            return this.products.reduce((tags, product) => [
+                ...tags,
+                ...product.developerTags.filter(tag =>
+                    !tags.includes(tag))
+            ], []).sort()
         },
-        computed: {
-            products() {
-                return this.$store.state.marketplace[this.category];
-            },
-            filteredProducts() {
-                const { property, asc } = this.sortBy;
-                const sortDir = dir => asc ? dir : dir * -1;
-                return this.$store.state.marketplace[this.category]
-                    .filter(product =>
-                        product.name.toLowerCase().includes(this.phrase.toLowerCase())
-                    )
-                    .filter(product => this.selectedGenres.length
-                        ? product.developerTags.some(genre => this.selectedGenres.includes(genre))
-                        : true
-                    )
-                    .sort((a, b) => property
-                        ? a[property] > b[property]
-                            ? sortDir(1)
-                            : a[property] < b[property] ? sortDir(-1) : 0
-                        : 0
-                    );
-            },
-            availableGenres() {
-                return this.products.reduce((tags, product) => [
-                    ...tags,
-                    ...product.developerTags.filter(tag =>
-                        !tags.includes(tag)
-                    )
-                ], []).sort();
-            },
-            filtersActive() {
-                const { phrase, selectedGenres, sortBy: { property } } = this;
-                return !!(phrase.length || selectedGenres.length || property);
-            }
+        filtersActive() {
+            const { phrase, selectedGenres, sortBy: { property } } = this
+            return Boolean(phrase.length || selectedGenres.length || property)
+        }
+    },
+    methods: {
+        setGenre(genre) {
+            const genreKey = this.selectedGenres.indexOf(genre)
+            genreKey > -1
+                ? this.selectedGenres.splice(genreKey, 1)
+                : this.selectedGenres.push(genre)
+        },
+        clearFilters() {
+            this.selectedGenres = []
+            this.phrase = ''
+            this.sortBy.property = null
+            this.sortBy.asc = true
+        },
+        setSort(prop, direction) {
+            const { property, asc } = this.sortBy
+            this.sortBy.property = property === prop && direction === asc
+                ? null
+                : prop
+            this.sortBy.asc = direction
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

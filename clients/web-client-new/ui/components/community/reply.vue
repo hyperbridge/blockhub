@@ -1,10 +1,15 @@
 <template>
     <div>
         <transition name="slide-top">
-            <div class="community-item__post-reply" v-if="replyMode">
-                <h4 class="mt-4 mb-2 text-left">Your Reply:</h4>
+            <div v-if="replyMode"
+                 class="community-item__post-reply">
+                <h4 class="mt-4 mb-2 text-left">
+                    Your Reply:
+                </h4>
                 <div class="form-group">
-                    <textarea class="form-control" rows="6" v-focus></textarea>
+                    <textarea v-focus
+                              class="form-control"
+                              rows="6" />
                 </div>
             </div>
         </transition>
@@ -12,15 +17,21 @@
 
         <div class="community-item__action text-right">
             <template v-if="replyMode">
-                <a href="#" class="btn btn-sm btn-danger" @click.prevent="cancelReply">
+                <a href="#"
+                   class="btn btn-sm btn-danger"
+                   @click.prevent="cancelReply">
                     Cancel
                 </a>
-                <a href="#" class="btn btn-sm btn-info" @click.prevent="changeReplyMode">
+                <a href="#"
+                   class="btn btn-sm btn-info"
+                   @click.prevent="changeReplyMode">
                     Submit
                 </a>
             </template>
             <template v-else>
-                <a href="#" class="btn btn-sm btn-info" @click.prevent="changeReplyMode">
+                <a href="#"
+                   class="btn btn-sm btn-info"
+                   @click.prevent="changeReplyMode">
                     Reply
                 </a>
             </template>
@@ -30,7 +41,14 @@
 
 <script>
 export default {
-    name: 'reply',
+    name: 'Reply',
+    directives: {
+        focus: {
+            inserted(el) {
+                el.focus()
+            }
+        }
+    },
     data() {
         return {
             replyMode: false
@@ -38,19 +56,12 @@ export default {
     },
     methods: {
         changeReplyMode() {
-            this.replyMode = !this.replyMode;
-            this.$emit('replyMode', this.replyMode);
+            this.replyMode = !this.replyMode
+            this.$emit('replyMode', this.replyMode)
             this.$store.commit('application/showProfileChooser', true)
         },
-        cancelReply(){
-            this.replyMode = !this.replyMode;
-        }
-    },
-    directives: {
-        focus: {
-            inserted: function (el) {
-                el.focus()
-            }
+        cancelReply() {
+            this.replyMode = !this.replyMode
         }
     }
 }

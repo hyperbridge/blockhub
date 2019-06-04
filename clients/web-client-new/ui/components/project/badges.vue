@@ -1,16 +1,18 @@
 <template>
     <div class="badges-list">
-        <div class="item" v-for="(icon, index) in icons" :key="index">
-            <i :class="[ 'fas fa-' + icon ]"></i>
+        <div v-for="(icon, index) in icons"
+             :key="index"
+             class="item">
+            <i :class="[ 'fas fa-' + icon ]" />
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'project-badges',
-        props: ['icons']
-    }
+export default {
+    name: 'ProjectBadges',
+    props: ['icons']
+}
 </script>
 
 <style lang="scss" scoped>

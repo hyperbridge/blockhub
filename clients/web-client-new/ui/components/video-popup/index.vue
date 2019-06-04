@@ -1,24 +1,47 @@
 <template>
-    <c-popup :activated="activated" :width="showComments ? '1000' : '800'" @close="closeModal">
-        <div class="video-popup" slot="customContent">
+    <c-popup :activated="activated"
+             :width="showComments ? '1000' : '800'"
+             @close="closeModal">
+        <div slot="customContent"
+             class="video-popup">
             <div class="video-popup__video-container">
                 <c-loading-bar-circle v-if="showLoader" />
-                <youtube :video-id="youtube" :player-vars="playerVars" :fitParent="true" height="450" width="800" :resize="true" v-if="youtube" @ready="isReady"></youtube>
-                <c-twitch :channel="twitch" height="450" width="800" v-else-if="twitch" @ready="isReady"></c-twitch>
-                <c-video :video="video" v-else-if="video" @ready="isReady" />
-                <slot name="video" v-else />
+                <youtube v-if="youtube"
+                         :video-id="youtube"
+                         :player-vars="playerVars"
+                         :fitParent="true"
+                         height="450"
+                         width="800"
+                         :resize="true"
+                         @ready="isReady" />
+                <c-twitch v-else-if="twitch"
+                          :channel="twitch"
+                          height="450"
+                          width="800"
+                          @ready="isReady" />
+                <c-video v-else-if="video"
+                         :video="video"
+                         @ready="isReady" />
+                <slot v-else
+                      name="video" />
             </div>
-            <div class="video-popup__video-comments" v-if="showComments">
-                <c-heading-bar name="Comments" :bgColor="false" />
+            <div v-if="showComments"
+                 class="video-popup__video-comments">
+                <c-heading-bar name="Comments"
+                               :bgColor="false" />
                 <div class="comments__wrapper">
                     <slot />
                 </div>
                 <div class="comments__form">
                     <div class="input-group p-0 m-0">
-                        <input type="text" class="form-control" placeholder="Your comment">
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Your comment">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">
-                                <i class="fas fa-paper-plane"></i>
+                            <button id="button-addon2"
+                                    class="btn btn-outline-secondary"
+                                    type="button">
+                                <i class="fas fa-paper-plane" />
                             </button>
                         </div>
                     </div>
@@ -29,51 +52,51 @@
 </template>
 
 <script>
-    import Vue from 'vue'
-    import VueYoutube from 'vue-youtube'
+import Vue from 'vue'
+import VueYoutube from 'vue-youtube'
 
-    Vue.use(VueYoutube)
-    export default {
-        name: 'video-popup',
-        components:{
-            'c-popup': () => import('~/components/popups').then(m => m.default || m),
-            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-            'c-youtube': () => import('~/components/youtube').then(m => m.default || m),
-            'c-video': () => import('~/components/video').then(m => m.default || m),
-            'c-twitch': () => import('~/components/twitch').then(m => m.default || m),
-            'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m)
+Vue.use(VueYoutube)
+export default {
+    name: 'VideoPopup',
+    components: {
+        'c-popup': () => import('~/components/popups').then(m => m.default || m),
+        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+        'c-youtube': () => import('~/components/youtube').then(m => m.default || m),
+        'c-video': () => import('~/components/video').then(m => m.default || m),
+        'c-twitch': () => import('~/components/twitch').then(m => m.default || m),
+        'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m)
+    },
+    props: {
+        activated: {
+            type: Boolean,
+            default: false
         },
-        props:{
-            activated:{
-                type: Boolean,
-                default: false
+        video: [Object, Array],
+        youtube: String,
+        twitch: String,
+        showComments: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data() {
+        return {
+            playerVars: {
+                autoplay: 0
             },
-            video: [ Object, Array ],
-            youtube: String,
-            twitch: String,
-            showComments:{
-                type: Boolean,
-                default: false
-            }
+            showLoader: true
+        }
+    },
+    methods: {
+        isReady() {
+            this.showLoader = false
         },
-        data(){
-            return {
-                playerVars: {
-                    autoplay: 0
-                },
-                showLoader: true
-            }
-        },
-        methods:{
-            isReady(){
-                this.showLoader = false
-            },
-            closeModal(){
-                this.$emit('close')
-                this.showLoader = true
-            }
+        closeModal() {
+            this.$emit('close')
+            this.showLoader = true
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

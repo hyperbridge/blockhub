@@ -1,15 +1,14 @@
 <template>
     <c-input-searcher
-        @input="searchFor"
-    />
+        @input="searchFor" />
 </template>
 
 <script>
-    export default {
-        props: {
-            searchFor: Function
-        }
+export default {
+    props: {
+        searchFor: Function
     }
+}
 </script>
 
 <style>

@@ -1,17 +1,27 @@
 <template>
     <div class="language-dropdown">
-        <div class="language-dropdown__current" @click="toggleList">
-            <c-country-flag :country="currentLanguage.code" size="small" v-if="currentLanguage" />
+        <div class="language-dropdown__current"
+             @click="toggleList">
+            <c-country-flag v-if="currentLanguage"
+                            :country="currentLanguage.code"
+                            size="small" />
             <span class="language-name">
                 {{ currentLanguage ? currentLanguage.name : 'Language' }}
             </span>
-            <i class="fas " :class="showList ? 'fa-angle-up' : 'fa-angle-down' "></i>
+            <i class="fas "
+               :class="showList ? 'fa-angle-up' : 'fa-angle-down' " />
         </div>
         <transition name="slide-in-top">
-            <div class="language-dropdown__list" v-if="showList" v-click-outside.bool="showList">
+            <div v-if="showList"
+                 v-click-outside.bool="showList"
+                 class="language-dropdown__list">
                 <ul :class="{'d-block' : showList}">
-                    <li class="language-dropdown__list-item" v-for="(lang, index) in languages" @click="changeLanguage(lang)" :key="index">
-                        <c-country-flag :country="lang.code" size="small" />
+                    <li v-for="(lang, index) in languages"
+                        :key="index"
+                        class="language-dropdown__list-item"
+                        @click="changeLanguage(lang)">
+                        <c-country-flag :country="lang.code"
+                                        size="small" />
                         <span class="language-name">
                             {{ lang.name }} ({{ lang.native }})
                         </span>
@@ -23,29 +33,29 @@
 </template>
 
 <script>
-    export default {
-        name: 'language-dropdown',
-        props: {
-            currentLanguage: Object,
-            languages: Array
+export default {
+    name: 'LanguageDropdown',
+    components: {
+    },
+    props: {
+        currentLanguage: Object,
+        languages: Array
+    },
+    data() {
+        return {
+            showList: false
+        }
+    },
+    methods: {
+        toggleList() {
+            this.showList = !this.showList
         },
-        components: {
-        },
-        data() {
-            return {
-                showList: false,
-            }
-        },
-        methods: {
-            toggleList() {
-                this.showList = !this.showList
-            },
-            changeLanguage(lang) {
-                this.$emit('change', lang);
-                this.toggleList();
-            }
+        changeLanguage(lang) {
+            this.$emit('change', lang)
+            this.toggleList()
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

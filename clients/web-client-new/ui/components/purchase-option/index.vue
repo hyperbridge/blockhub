@@ -1,12 +1,15 @@
 <template>
-    <div class="purchase-option" :class="{'in-the-list' : inList}">
+    <div class="purchase-option"
+         :class="{'in-the-list' : inList}">
         <div class="purchase-option__price">
-            <s v-if="oldPrice" class="small">
+            <s v-if="oldPrice"
+               class="small">
                 {{ oldPrice | convertCurrency }}
             </s>
             {{ price | convertCurrency }}
         </div>
-        <div class="purchase-option__img" v-if="img">
+        <div v-if="img"
+             class="purchase-option__img">
             <c-img :src="img" />
         </div>
         <div class="purchase-option__info">
@@ -17,13 +20,16 @@
                 {{ title }}
             </div>
             <div class="mt-2">
-                <c-button icon="cart-plus" size="xs">
+                <c-button icon="cart-plus"
+                          size="xs">
                     ADD TO CART
                 </c-button>
-                <c-button icon="play" size="xs">
+                <c-button icon="play"
+                          size="xs">
                     QUICK BUY
                 </c-button>
-                <c-button icon="gift" size="xs">
+                <c-button icon="gift"
+                          size="xs">
                     GIFT
                 </c-button>
             </div>
@@ -32,21 +38,21 @@
 </template>
 
 <script>
-    export default {
-        name: 'purchase-option',
-        props: {
-            price: String,
-            oldPrice: String,
-            img: String,
-            gameTag: String,
-            title: String,
-            id: Number,
-            inList: {
-                type: Boolean,
-                default: false
-            }
+export default {
+    name: 'PurchaseOption',
+    props: {
+        price: String,
+        oldPrice: String,
+        img: String,
+        gameTag: String,
+        title: String,
+        id: Number,
+        inList: {
+            type: Boolean,
+            default: false
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,6 @@
 <template>
-    <span class="tag-count" v-show="number">
+    <span v-show="number"
+          class="tag-count">
         <slot>
             {{ number }}
         </slot>
@@ -7,10 +8,10 @@
 </template>
 
 <script>
-    export default {
-        name: 'tag-count',
-        props: ['number']
-    }
+export default {
+    name: 'TagCount',
+    props: ['number']
+}
 </script>
 
 <style lang="scss" scoped>

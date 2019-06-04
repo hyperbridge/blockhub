@@ -1,15 +1,19 @@
 <template>
-    <ul class="nav custom-tabs w-100" id="myTab" role="tablist">
-        <li class="nav-item" v-for="(item, index) in list" :key="index" v-if="index <= 3">
+    <ul id="myTab"
+        class="nav custom-tabs w-100"
+        role="tablist">
+        <li v-for="(item, index) in list"
+            v-if="index <= 3"
+            :key="index"
+            class="nav-item">
             <a
+                :id="`step${index}-tab`"
                 class="nav-link"
                 :class="[ index === 0 ? 'active' : '' ]"
-                :id="`step${index}-tab`"
                 :href="`#tab_${index}`"
                 :aria-controls="`step${index}-tab`"
                 aria-expanded="true"
-                data-toggle="tab"
-            >
+                data-toggle="tab">
                 <div class="img">
                     <c-img :src="item.image" />
                 </div>

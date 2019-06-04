@@ -1,36 +1,49 @@
 <template>
-    <div class="contribute-form" @mouseover="activeForm = true" @mouseleave=" activeForm = false">
-        <div class="input-group mb-4" :class="[{ 'active' : activeForm }, { 'has-error' : error }]">
+    <div class="contribute-form"
+@mouseover="activeForm = true" @mouseleave=" activeForm = false">
+        <div class="input-group mb-4"
+:class="[{ 'active' : activeForm }, { 'has-error' : error }]">
             <div class="input-group-prepend">
                 <span class="input-group-text">
                     {{ currency }}
                 </span>
             </div>
-            <input type="text" class="form-control" ref="input" placeholder="0.00" v-model="mutableValue" />
+            <input type="text"
+ref="input" class="form-control" v-model="mutableValue" placeholder="0.00" >
         </div>
-        <c-button status="success" class="justify-content-center" iconHide size="xl" @click="$emit('click')">
+        <c-button status="success"
+class="justify-content-center" iconHide size="xl" @click="$emit('click')">
             Continue
         </c-button>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'contribute-form',
-        props: {
-            active: {
-                type: Boolean,
-                default: false
-            },
-            value: '',
-            defaultValue: Number,
-            currency: String
+export default {
+    name: 'ContributeForm',
+    props: {
+        active: {
+            type: Boolean,
+            default: false
         },
-        data() {
-            return {
-                activeForm : false,
-                error: false,
-                mutableValue: this.value
+        value: ,
+        defaultValue: Number,
+        currency: String
+    },
+    data() {
+        return {
+            activeForm: false,
+            error: false,
+            mutableValue: this.value
+        }
+    },
+        watch: {
+            mutableValue(val) {
+                this.$emit('input', val);
+                if ( Number(this.$refs.input.value) < Number(this.defaultValue) )
+                    this.error = true
+                else
+                    this.error = false
             }
         },
         created() {
@@ -46,17 +59,8 @@
                 else
                     this.error = false
             }
-        },
-        watch: {
-            mutableValue(val) {
-                this.$emit('input', val);
-                if ( Number(this.$refs.input.value) < Number(this.defaultValue) )
-                    this.error = true
-                else
-                    this.error = false
-            }
         }
-    }
+}
 </script>
 
 <style lang="scss" scoped>

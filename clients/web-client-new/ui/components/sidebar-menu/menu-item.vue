@@ -2,18 +2,17 @@
     <li class="sidebar-menu__item">
         <router-link
             class="item__link"
-            v-bind="$attrs"
-        >
-            <slot/>
+            v-bind="$attrs">
+            <slot />
         </router-link>
     </li>
 </template>
 
 <script>
-    export default {
-        name: 'sidebar-menu-link',
-        inheritAttrs: false
-    }
+export default {
+    name: 'SidebarMenuLink',
+    inheritAttrs: false
+}
 </script>
 
 <style lang="scss" scoped>

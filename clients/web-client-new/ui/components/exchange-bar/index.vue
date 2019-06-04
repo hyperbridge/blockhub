@@ -14,13 +14,11 @@
                         : price.sum < 0
                             ? 'negative'
                             : ''
-                    ]"
-                >{{ price.sum > 0 ? '+' : '' }}{{ price.sum | convertCurrency }}</span>
+                    ]">{{ price.sum > 0 ? '+' : '' }}{{ price.sum | convertCurrency }}</span>
                 <c-icon
                     name="exchange-alt"
                     class="circle__icon"
-                    :class="{ 'circle__icon--small': price.sum || price.yours || price.their }"
-                />
+                    :class="{ 'circle__icon--small': price.sum || price.yours || price.their }" />
             </div>
         </div>
         <div class="exchange__data">
@@ -31,43 +29,42 @@
 </template>
 
 <script>
-    export default {
-        name: 'exchange-bar',
-        props: {
-            price: {
-                type: Object,
-                required: true
-            },
-            yours: Number,
-            their: Number
+export default {
+    name: 'ExchangeBar',
+    props: {
+        price: {
+            type: Object,
+            required: true
         },
-        data() {
-            return {
-                displayedPrice: 0,
-                interval: 0
-            }
-        },
-        computed: {
-            mainPrice() {
-                return this.price.sum;
-            }
-        },
-        watch: {
-            mainPrice(val) {
-                clearInterval(this.interval);
+        yours: Number,
+        their: Number
+    },
+    data() {
+        return {
+            displayedPrice: 0,
+            interval: 0
+        }
+    },
+    computed: {
+        mainPrice() {
+            return this.price.sum
+        }
+    },
+    watch: {
+        mainPrice(val) {
+            clearInterval(this.interval)
 
-                if (val === this.displayedPrice) return;
+            if (val === this.displayedPrice) return
 
-                this.interval = setInterval(() => {
-                    if (this.displayedPrice !== this.mainPrice) {
-                        const change = (this.mainPrice - this.displayedPrice) / 10;
-                        this.displayedPrice += change;
-                    }
-                }, 20);
-
-            }
+            this.interval = setInterval(() => {
+                if (this.displayedPrice !== this.mainPrice) {
+                    const change = (this.mainPrice - this.displayedPrice) / 10
+                    this.displayedPrice += change
+                }
+            }, 20)
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

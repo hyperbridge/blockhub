@@ -10,20 +10,28 @@
             </p>
         </div>
         <div class="create-review__user-avatar">
-            <img src="https://image.freepik.com/free-vector/skull-with-beard-wear-headphones-gamer-music-mascot_8169-140.jpg"/>
+            <img src="https://image.freepik.com/free-vector/skull-with-beard-wear-headphones-gamer-music-mascot_8169-140.jpg">
         </div>
         <div class="create-review__content pl-4">
             <div class="invert">
-                <textarea placeholder="Type here" class="form-control w-100" rows="6"></textarea>
+                <textarea placeholder="Type here"
+                          class="form-control w-100"
+                          rows="6" />
             </div>
             <div class="create-review__options">
                 <div class="invert mr-5">
                     <label class="mb-0">
                         Visibility
                     </label>
-                    <select class="form-control form-control-sm" v-model="reviewVisibility" @change="onVisibility">
-                        <option value="public">Public</option>
-                        <option value="friends-only">Friends Only</option>
+                    <select v-model="reviewVisibility"
+                            class="form-control form-control-sm"
+                            @change="onVisibility">
+                        <option value="public">
+                            Public
+                        </option>
+                        <option value="friends-only">
+                            Friends Only
+                        </option>
                     </select>
                 </div>
                 <div class="invert mr-5">
@@ -42,7 +50,8 @@
                     </c-checkbox>
                 </div>
                 <div class="ml-auto">
-                    <c-button status="plain" @click=" textFormatting = true ">
+                    <c-button status="plain"
+                              @click=" textFormatting = true ">
                         Formatting Help
                     </c-button>
                 </div>
@@ -52,24 +61,34 @@
                     <div class="mb-2">
                         Do you recommend this game?
                     </div>
-                    <c-button status="second-info" size="sm" icon="thumbs-up">
+                    <c-button status="second-info"
+                              size="sm"
+                              icon="thumbs-up">
                         Yes
                     </c-button>
-                    <c-button status="second-info" size="sm" icon="thumbs-down" class="ml-2">
+                    <c-button status="second-info"
+                              size="sm"
+                              icon="thumbs-down"
+                              class="ml-2">
                         No
                     </c-button>
                 </div>
                 <div>
-                    <c-button status="second-warning" size="md" class="mr-3" @click="$emit('cancel')">
+                    <c-button status="second-warning"
+                              size="md"
+                              class="mr-3"
+                              @click="$emit('cancel')">
                         Cancel
                     </c-button>
-                    <c-button status="second-success" size="md">
+                    <c-button status="second-success"
+                              size="md">
                         Post review
                     </c-button>
                 </div>
             </div>
         </div>
-        <c-basic-popup :activated="textFormatting" @close=" textFormatting = false ">
+        <c-basic-popup :activated="textFormatting"
+                       @close=" textFormatting = false ">
             <template slot="body">
                 <c-text-formatting />
             </template>
@@ -78,27 +97,27 @@
 </template>
 
 <script>
-    export default {
-        props:{
+export default {
+    components: {
+        'c-checkbox': () => import('~/components/checkbox').then(m => m.default || m),
+        'c-text-formatting': () => import('~/components/text-formatting').then(m => m.default || m),
+        'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m)
+    },
+    props: {
 
-        },
-        components: {
-            'c-checkbox': () => import('~/components/checkbox').then(m => m.default || m),
-            'c-text-formatting': () => import('~/components/text-formatting').then(m => m.default || m),
-            'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
-        },
-        data(){
-            return{
-                textFormatting: false,
-                reviewVisibility: 'public'
-            }
-        },
-        methods:{
-            onVisibility(){
-                this.$emit('visibility', this.reviewVisibility)
-            }
+    },
+    data() {
+        return {
+            textFormatting: false,
+            reviewVisibility: 'public'
+        }
+    },
+    methods: {
+        onVisibility() {
+            this.$emit('visibility', this.reviewVisibility)
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

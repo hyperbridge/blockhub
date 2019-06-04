@@ -1,73 +1,79 @@
 <template>
     <div class="switch-container">
-        <div class="label" v-if="!customLabel && label_position == 'left'" style="padding-right: 10px" :style="{ fontSize: label_size }">{{ label }}</div>
-        <div class="label" v-else-if="customLabel && label_position == 'left'" style="padding-right: 10px" :style="{ fontSize: label_size }">
+        <div v-if="!customLabel && label_position == 'left'"
+             class="label"
+             style="padding-right: 10px"
+             :style="{ fontSize: label_size }">
+            {{ label }}
+        </div>
+        <div v-else-if="customLabel && label_position == 'left'"
+             class="label"
+             style="padding-right: 10px"
+             :style="{ fontSize: label_size }">
             <slot />
         </div>
-        <label class="switch my-0" :class="`switch-${size}`">
+        <label class="switch my-0"
+               :class="`switch-${size}`">
             <input
                 :id="id"
                 type="checkbox"
                 v-bind="$attrs"
                 :checked="checked"
-                @change="$emit('change', $event.target.checked)"
-            />
-            <span></span>
+                @change="$emit('change', $event.target.checked)">
+            <span />
         </label>
-        <div class="label"
-            v-if="!customLabel && label_position == 'right'"
-            style="padding-left: 10px"
-            :style="{ fontSize: label_size }"
-        >
+        <div v-if="!customLabel && label_position == 'right'"
+             class="label"
+             style="padding-left: 10px"
+             :style="{ fontSize: label_size }">
             {{ label }}
         </div>
-        <div class="label"
-            v-else-if="customLabel && label_position == 'right'"
-            style="padding-left: 10px"
-            :style="{ fontSize: label_size }"
-        >
+        <div v-else-if="customLabel && label_position == 'right'"
+             class="label"
+             style="padding-left: 10px"
+             :style="{ fontSize: label_size }">
             <slot />
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        inheritAttrs: false,
-        props: {
-            id: {
-                type: [String, Number],
-                default() {
-                    return 'checkbox-' + parseInt(Math.random() * new Date().getUTCMilliseconds() * 5);
-                }
-            },
-            checked: Boolean,
-            size: {
-                type: String,
-                default: 'sm',
-                validator(val) {
-                    return ['sm', 'lg'].includes(val);
-                }
-            },
-            customLabel: Boolean,
-            label: String,
-            label_position: {
-                type: String,
-                default: 'right',
-                validator(val) {
-                    return ['right', 'left'].includes(val);
-                }
-            },
-            label_size: {
-                type: String,
-                default: '14px'
+export default {
+    inheritAttrs: false,
+    model: {
+        prop: 'checked',
+        event: 'change'
+    },
+    props: {
+        id: {
+            type: [String, Number],
+            default() {
+                return `checkbox-${parseInt(Math.random() * new Date().getUTCMilliseconds() * 5)}`
             }
         },
-        model: {
-            prop: 'checked',
-            event: 'change'
+        checked: Boolean,
+        size: {
+            type: String,
+            default: 'sm',
+            validator(val) {
+                return ['sm', 'lg'].includes(val)
+            }
+        },
+        customLabel: Boolean,
+        label: String,
+        labelPosition: {
+            type: String,
+            default: 'right',
+            validator(val) {
+                return ['right', 'left'].includes(val)
+            }
+        },
+        labelSize: {
+            type: String,
+            default: '14px'
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

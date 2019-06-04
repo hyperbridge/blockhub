@@ -1,27 +1,38 @@
 <template>
     <div class="searcher__wrapper">
         <transition name="slide-in">
-            <span v-if="resultsCount && phrase.length" class="searcher__results-count">
+            <span v-if="resultsCount && phrase.length"
+                  class="searcher__results-count">
                 Results: {{ resultsCount }}
             </span>
         </transition>
         <c-input-searcher
             :value="phrase"
-            @input="search"
-            @click="$emit('click')"
             placeholder="Search"
             aria-label="Search"
-        />
-        <div class="results__wrapper" v-if="phrase.length">
+            @input="search"
+            @click="$emit('click')" />
+        <div v-if="phrase.length"
+             class="results__wrapper">
             <div class="results__content">
-                <p v-if="isTyping" class="results__text">Searching...</p>
-                <p v-else-if="resultsCount != null && !resultsCount" class="results__text">
-                    Nothing could be found. Want to <c-button status="plain"  @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?
+                <p v-if="isTyping"
+                   class="results__text">
+                    Searching...
                 </p>
-                <ul v-else class="results__list">
+                <p v-else-if="resultsCount != null && !resultsCount"
+                   class="results__text">
+                    Nothing could be found. Want to <c-button status="plain"
+                                                              @click="$store.commit('application/activateModal', 'coming-soon')">
+                        Check for updates
+                    </c-button>?
+                </p>
+                <ul v-else
+                    class="results__list">
                     <slot name="list">
-                        <li v-for="(result, index) in results" :key="index" class="list__result">
-                            <slot :result="result"/>
+                        <li v-for="(result, index) in results"
+                            :key="index"
+                            class="list__result">
+                            <slot :result="result" />
                         </li>
                     </slot>
                 </ul>
@@ -31,47 +42,47 @@
 </template>
 
 <script>
-    import { debounce } from '@/mixins'
+import { debounce } from '@/mixins'
 
-    export default {
-        components: {
-            'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
-        },
-        inheritAttrs: false,
-        mixins: [debounce],
-        props: {
-            size: {
-                type: String,
-                default: 'md',
-                validator(val) {
-                    return ['md', 'lg'].includes(val)
-                }
-            },
-            resultsCount: Number,
-            delay: {
-                type: Number,
-                default: 250
-            },
-            results: Array
-        },
-        data() {
-            return {
-                phrase: '',
-                isTyping: false
+export default {
+    components: {
+        'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m)
+    },
+    mixins: [debounce],
+    inheritAttrs: false,
+    props: {
+        size: {
+            type: String,
+            default: 'md',
+            validator(val) {
+                return ['md', 'lg'].includes(val)
             }
         },
-        methods: {
-            search(phrase) {
-                this.phrase = phrase
-                if (!this.isTyping) this.isTyping = true
+        resultsCount: Number,
+        delay: {
+            type: Number,
+            default: 250
+        },
+        results: Array
+    },
+    data() {
+        return {
+            phrase: '',
+            isTyping: false
+        }
+    },
+    methods: {
+        search(phrase) {
+            this.phrase = phrase
+            if (!this.isTyping) this.isTyping = true
 
-                this.debounce(() => {
-                    this.isTyping = false
-                    this.$emit('input', phrase)
-                }, this.delay)
-            }
+            this.debounce(() => {
+                this.isTyping = false
+                this.$emit('input', phrase)
+            }, this.delay)
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

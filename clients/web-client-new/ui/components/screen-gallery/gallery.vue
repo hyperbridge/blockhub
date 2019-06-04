@@ -2,26 +2,31 @@
     <div
         class="screen-gallery"
         @mouseover="enableSlideshow(false)"
-        @mouseout="mouseOut()"
-    >
+        @mouseout="mouseOut()">
         <div class="screen-gallery__main-img">
-            <c-icon name="expand" v-show="!run_slideshow && !play_video"/>
+            <c-icon v-show="!run_slideshow && !play_video"
+                    name="expand" />
             <c-img
                 v-if="!play_video"
                 :src="items[active_item].overlay ? items[active_item].src : items[active_item]"
-                @click="show_modal = true"
-            />
-            <video v-else-if="play_video" controls autoplay muted>
-                <source :src="video_url" type="video/mp4">
+                @click="show_modal = true" />
+            <video v-else-if="play_video"
+                   controls
+                   autoplay
+                   muted>
+                <source :src="video_url"
+                        type="video/mp4">
             </video>
-            <div v-show="run_slideshow" class="screen-gallery__progress-bar"></div>
+            <div v-show="run_slideshow"
+                 class="screen-gallery__progress-bar" />
 
             <c-image-overlay v-if="items[active_item]['overlay']"
                              :title="items[active_item]['overlay'].title"
                              :subtitle="items[active_item]['overlay'].subtitle"
                              :text="items[active_item]['overlay'].text" />
         </div>
-        <ul class="screen-gallery__thumb-nav" ref="thumb-nav">
+        <ul ref="thumb-nav"
+            class="screen-gallery__thumb-nav">
             <li
                 v-if="video_url"
                 class="thumb-nav__video-thumb"
@@ -30,27 +35,24 @@
                     backgroundSize: 'cover',
                     background: `black url(${items[random_item]}) no-repeat center`
                 }"
-                @click="enableVideoPlay()"
-            >
-                <c-icon name="play"/>
+                @click="enableVideoPlay()">
+                <c-icon name="play" />
             </li>
             <li
                 v-for="(item, index) in items"
                 :key="index"
-                :ref="`thumb-${index}`"
-            >
+                :ref="`thumb-${index}`">
                 <c-img
                     :src="item.overlay ? item.src : item"
                     :class="{ 'inactive-item': index !== active_item || play_video }"
-                    @click="changeActiveItem(index)"
-                />
+                    @click="changeActiveItem(index)" />
             </li>
         </ul>
-        <c-modal v-if="show_modal" @close="show_modal=false">
+        <c-modal v-if="show_modal"
+                 @close="show_modal=false">
             <c-images-explorer
                 :images="items"
-                :start_from="active_item"
-            />
+                :start_from="active_item" />
         </c-modal>
     </div>
 </template>
@@ -58,7 +60,12 @@
 
 <script>
 export default {
-    name: 'screen-gallery',
+    name: 'ScreenGallery',
+    components: {
+        'c-modal': () => import('~/components/modal').then(m => m.default || m),
+        'c-images-explorer': () => import('~/components/images-explorer').then(m => m.default || m),
+        'c-image-overlay': () => import('~/components/image-overlay').then(m => m.default || m)
+    },
     props: {
         main: {
             type: String
@@ -67,13 +74,8 @@ export default {
             type: Array,
             required: true
         },
-        name_url: String,
-        video_url: String
-    },
-    components: {
-        'c-modal': () => import('~/components/modal').then(m => m.default || m),
-        'c-images-explorer': () => import('~/components/images-explorer').then(m => m.default || m),
-        'c-image-overlay': () => import('~/components/image-overlay').then(m => m.default || m)
+        nameUrl: String,
+        videoUrl: String
     },
     data() {
         return {
@@ -85,77 +87,77 @@ export default {
             play_video: false
         }
     },
+    watch: {
+        $route: 'restartGallery'
+    },
+    mounted() {
+        this.restartGallery()
+    },
+    beforeDestroy() {
+        this.enableSlideshow(false)
+    },
     methods: {
         slideshow() {
             this.interval = setInterval(() => {
                 if (!this.items || !this.items.length) return
 
-                this.active_item < this.items.length - 1 ? this.active_item++ : this.active_item = 0;
-                const [child] = this.$refs[`thumb-${this.active_item}`];
-                const parent = this.$refs['thumb-nav'];
-                this.scrollParentToChild(parent, child);
-            }, 4000);
+                this.active_item < this.items.length - 1 ? this.active_item++ : this.active_item = 0
+                const [child] = this.$refs[`thumb-${this.active_item}`]
+                const parent = this.$refs['thumb-nav']
+                this.scrollParentToChild(parent, child)
+            }, 4000)
         },
         enableSlideshow(status) {
-            clearInterval(this.interval);
-            this.run_slideshow = status;
-            if (status && !this.play_video) this.slideshow();
+            clearInterval(this.interval)
+            this.run_slideshow = status
+            if (status && !this.play_video) this.slideshow()
         },
         enableVideoPlay() {
-            this.enableSlideshow(false);
-            this.play_video = true;
+            this.enableSlideshow(false)
+            this.play_video = true
         },
         changeActiveItem(index) {
             if (this.play_video) {
-                this.play_video = false;
+                this.play_video = false
             }
-            this.active_item = index;
+            this.active_item = index
         },
         mouseOut() {
-            if (!this.play_video) this.enableSlideshow(true);
+            if (!this.play_video) this.enableSlideshow(true)
         },
         scrollParentToChild(parent, child) {
             if (!parent) {
                 return
             }
 
-            const parentRect = parent.getBoundingClientRect();
+            const parentRect = parent.getBoundingClientRect()
 
             const parentViewableArea = {
                 height: parent.clientHeight,
                 width: parent.clientWidth
-            };
+            }
 
-            const childRect = child.getBoundingClientRect();
-            const isViewable = (childRect.top >= parentRect.top) && (childRect.top <= parentRect.top + parentViewableArea.height);
+            const childRect = child.getBoundingClientRect()
+            const isViewable = (childRect.top >= parentRect.top) && (childRect.top <= parentRect.top + parentViewableArea.height)
 
             if (!isViewable) {
-                parent.scrollTop = (childRect.top + parent.scrollTop) - parentRect.top;
+                parent.scrollTop = (childRect.top + parent.scrollTop) - parentRect.top
             }
-            if (status) this.slideshow();
+            if (status) this.slideshow()
         },
         restartGallery() {
-            this.active_item = 0;
-            this.play_video = false;
+            this.active_item = 0
+            this.play_video = false
 
             setTimeout(() => {
                 if (this.video_url) {
-                    this.random_item = Math.floor(Math.random() * this.items.length);
-                    this.enableVideoPlay();
+                    this.random_item = Math.floor(Math.random() * this.items.length)
+                    this.enableVideoPlay()
                 } else {
-                    this.enableSlideshow(true);
+                    this.enableSlideshow(true)
                 }
-            }, 50);
+            }, 50)
         }
-    },
-    mounted() {
-        this.restartGallery();
-    },
-    beforeDestroy() {
-        this.enableSlideshow(false);
-    },
-    watch: {
-        $route: 'restartGallery'
     }
 }
 </script>

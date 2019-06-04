@@ -3,7 +3,7 @@
         <div class="token-sale-box__head">
             <div class="d-flex align-items-center">
                 <div class="coin-img">
-                    <img src="../../static/img/icons/token-icon.png" />
+                    <img src="../../static/img/icons/token-icon.png">
                 </div>
                 <div class="box-title">
                     <h1 class="text-uppercase p-0 m-0">
@@ -26,7 +26,10 @@
                     </div>
                 </div>
                 <div>
-                    <c-button status="success" size="lg" iconHide @click="$emit('purchase')">
+                    <c-button status="success"
+                              size="lg"
+                              iconHide
+                              @click="$emit('purchase')">
                         Purchase HBX
                     </c-button>
                 </div>
@@ -83,35 +86,44 @@
                     </h3>
                     <ul>
                         <li>
-                            <a href="https://hyperbridge.org/downloads/whitepaper.pdf" target="_blank">
-                                <i class="fas fa-file-alt"></i>
+                            <a href="https://hyperbridge.org/downloads/whitepaper.pdf"
+                               target="_blank">
+                                <i class="fas fa-file-alt" />
                                 White Paper
                             </a>
                         </li>
                         <li>
-                            <a href="https://hyperbridge.org/team" target="_blank">
-                                <i class="fas fa-users"></i>
+                            <a href="https://hyperbridge.org/team"
+                               target="_blank">
+                                <i class="fas fa-users" />
                                 Team
                             </a>
                         </li>
                         <li>
-                            <a href="https://hyperbridge.org/roadmap" target="_blank">
-                                <i class="fas fa-gamepad"></i>
+                            <a href="https://hyperbridge.org/roadmap"
+                               target="_blank">
+                                <i class="fas fa-gamepad" />
                                 Roadmap
                             </a>
                         </li>
                         <li>
-                            <a href="https://hyperbridge.org/" target="_blank">
-                                <i class="fas fa-home"></i>
+                            <a href="https://hyperbridge.org/"
+                               target="_blank">
+                                <i class="fas fa-home" />
                                 Corp. website
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="token-sale-box_block-divider"></div>
+            <div class="token-sale-box_block-divider" />
             <div class="token-sale-box__body-media">
-                <iframe width="380" height="220" src="https://www.youtube.com/embed/-QEdXZWMe-M" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="380"
+                        height="220"
+                        src="https://www.youtube.com/embed/-QEdXZWMe-M"
+                        frameborder="0"
+                        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen />
             </div>
         </div>
     </div>
@@ -119,24 +131,24 @@
 
 <script>
 
-    export default {
-        name: 'token-sale',
-        components:{
-            'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m),
-        },
-        props:{
-            hardCap: [ Number, String ],
-            softCap: [ Number, String ],
-            volume: [ Number, String ],
-            soldDollar: [ Number, String ],
-            soldTokens: [ Number, String ]
-        },
-        computed:{
-            percentProgress(){
-                return Number(this.soldTokens) * 100 / Number(this.volume)
-            }
+export default {
+    name: 'TokenSale',
+    components: {
+        'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m)
+    },
+    props: {
+        hardCap: [Number, String],
+        softCap: [Number, String],
+        volume: [Number, String],
+        soldDollar: [Number, String],
+        soldTokens: [Number, String]
+    },
+    computed: {
+        percentProgress() {
+            return Number(this.soldTokens) * 100 / Number(this.volume)
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

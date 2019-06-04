@@ -1,20 +1,32 @@
 <template>
-    <div class="game-card__item" :class="customClass">
-        <div class="head" v-if="parentName">
-            <div class="img" v-if="parentImage">
+    <div class="game-card__item"
+         :class="customClass">
+        <div v-if="parentName"
+             class="head">
+            <div v-if="parentImage"
+                 class="img">
                 <c-img :src="parentImage" />
             </div>
             <div class="text">
                 <h4>{{ parentName }}</h4>
-                <p v-if="parentDeveloper">{{ parentDeveloper }}</p>
+                <p v-if="parentDeveloper">
+                    {{ parentDeveloper }}
+                </p>
             </div>
         </div>
-        <c-button status="none" :to="`/product/${id}`">
+        <c-button status="none"
+                  :to="`/product/${id}`">
             <c-img :src="image" />
-            <div class="description">{{ description }}</div>
+            <div class="description">
+                {{ description }}
+            </div>
         </c-button>
         <div class="item-action">
-            <c-button status="info" :to="`/product/${id}`" iconHide>Check it out</c-button>
+            <c-button status="info"
+                      :to="`/product/${id}`"
+                      iconHide>
+                Check it out
+            </c-button>
         </div>
     </div>
 </template>
@@ -22,6 +34,18 @@
 <script>
 export default {
     components: {
+    },
+    filters: {
+        currencySign(cur_name) {
+            switch (cur_name) {
+            case 'EUR':
+                return '€'
+            case 'GBP':
+                return '£'
+            default:
+                return '$'
+            }
+        }
     },
     props: {
         image: String,
@@ -35,7 +59,7 @@ export default {
         parentDeveloper: String,
         id: Number,
         customClass: {
-            type: String,
+            type: String
         }
     },
     computed: {
@@ -45,18 +69,6 @@ export default {
             const { obtained, goal } = this.funds
 
             return Math.round(obtained / goal * 100)
-        }
-    },
-    filters: {
-        currencySign(cur_name) {
-            switch(cur_name) {
-                case 'EUR':
-                    return '€'
-                case 'GBP':
-                    return '£'
-                default:
-                    return '$'
-            }
         }
     }
 }

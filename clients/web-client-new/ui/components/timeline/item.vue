@@ -1,5 +1,6 @@
 <template>
-    <div class="posts-timeline__post-item" :class="itemPosition">
+    <div class="posts-timeline__post-item"
+         :class="itemPosition">
         <div class="posts-timeline__post--content">
             <div class="post-date">
                 {{ dateFormat(item.date) }}
@@ -7,44 +8,48 @@
             <a href="#">
                 <h3>{{ item.title }}</h3>
             </a>
-            <p class="mb-4">{{ item.text | stringLength }}</p>
-            <c-button status="info" :to="`/project/${projectID}/updates/${item.id}`" iconHide>Read more</c-button>
+            <p class="mb-4">
+                {{ item.text | stringLength }}
+            </p>
+            <c-button status="info"
+                      :to="`/project/${projectID}/updates/${item.id}`"
+                      iconHide>
+                Read more
+            </c-button>
         </div>
     </div>
 </template>
 
 <script>
-    import moment from 'moment';
+import moment from 'moment'
 
-    export default {
-        name: 'timeline-item',
-        props: ['item', 'index', 'projectID'],
-        methods:{
-            dateFormat(date){
-                return moment(date).format('DD MMMM, YYYY');
+export default {
+    name: 'TimelineItem',
+    filters: {
+        stringLength(str) {
+            if (str.length > 250) {
+                const maxLength = 250
+                const trimmedString = str.substr(0, maxLength)
+                return trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(' '))).concat('...')
             }
-        },
-        computed:{
-            itemPosition(){
-                if ( this.index % 2 ){
-                    return 'right-side'
-                } else {
-                    return 'left-side'
-                }
+            return str
+        }
+    },
+    props: ['item', 'index', 'projectID'],
+    computed: {
+        itemPosition() {
+            if (this.index % 2) {
+                return 'right-side'
             }
-        },
-        filters:{
-            stringLength(str){
-                if (str.length > 250 ){
-                    let maxLength = 250,
-                        trimmedString = str.substr(0, maxLength);
-                    return trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))).concat('...')
-                } else {
-                    return str
-                }
-            }
+            return 'left-side'
+        }
+    },
+    methods: {
+        dateFormat(date) {
+            return moment(date).format('DD MMMM, YYYY')
         }
     }
+}
 </script>
 
 <style lang="scss">

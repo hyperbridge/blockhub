@@ -4,6 +4,7 @@ function isVisible(availableFlags, userFlags, code, variant, data) {
 }
 
 export default {
+    name: 'Darklaunch',
     props: {
         code: {
             type: String
@@ -14,15 +15,19 @@ export default {
         data: {
             type: [Object, String]
         },
-        tag: { 
-            type:String,
-            default:'div'
+        tag: {
+            type: String,
+            default: 'div'
         }
     },
-    name: 'darklaunch',
     data() {
         return {
             isVisible: isVisible(this.$store.state.application.darklaunchFlags, this.$store.state.application.account.darklaunchFlags, this.code, this.variant, this.data)
+        }
+    },
+    methods: {
+        _isVisible(code, variant, data) {
+            return isVisible(this.$store.state.application.darklaunchFlags, this.$store.state.application.account.darklaunchFlags, code, variant, data)
         }
     },
     render(createElement) {
@@ -30,11 +35,6 @@ export default {
             return createElement(this.tag, {
                 'darklaunch': this.code
             }, this.$slots.default)
-        }
-    },
-    methods: {
-        _isVisible: function(code, variant, data) {
-            return isVisible(this.$store.state.application.darklaunchFlags, this.$store.state.application.account.darklaunchFlags, code, variant, data)
         }
     }
 }

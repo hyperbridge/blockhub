@@ -1,88 +1,84 @@
 <template>
     <div class="c-quick-launch">
         <c-searcher
-                @input="search"
-                @keyup.enter.native="goToSearchPage()"
-                @click="goToSearchPage()"
-                v-model="phrase"
-                class="margin-bottom-20"
-                :results="filteredResults"
-                :resultsCount="filteredResults.length"
-            >
-                <router-link
-                    slot-scope="props"
-                    :to="`/product/${props.result.id}`"
-                    v-html="$options.filters.highlightPhrase(
-                        props.result.name, phrase, 'u'
-                    )"
-                    :title="`${props.result.name} - product page`"
-                />
-            </c-searcher>
+            v-model="phrase"
+            class="margin-bottom-20"
+            :results="filteredResults"
+            :resultsCount="filteredResults.length"
+            @input="search"
+            @keyup.enter.native="goToSearchPage()"
+            @click="goToSearchPage()">
+            <router-link
+                slot-scope="props"
+                :to="`/product/${props.result.id}`"
+                :title="`${props.result.name} - product page`"
+                v-html="$options.filters.highlightPhrase(
+                    props.result.name, phrase, 'u'
+                )" />
+        </c-searcher>
     </div>
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
-    export default {
-        components: {
-            'c-searcher': () => import('~/components/searcher').then(m => m.default || m),
+export default {
+    components: {
+        'c-searcher': () => import('~/components/searcher').then(m => m.default || m)
+    },
+    data() {
+        return {
+            phrase: '',
+            results: [],
+            platforms: [
+                { prop: 'win', icon: 'windows', name: 'Windows' },
+                { prop: 'mac', icon: 'apple', name: 'macOS' },
+                { prop: 'linux', icon: 'linux', name: 'Linux' }
+            ],
+            choosenPlatforms: [],
+            communitySize: 0,
+            activeUsers: 0
+        }
+    },
+    methods: {
+        search() {
+            this.results = this.phrase.length
+                ? this.getProductsByName(this.phrase)
+                : []
         },
-        data() {
-            return {
-                phrase: '',
-                results: [],
-                platforms: [
-                    { prop: 'win', icon: 'windows', name: 'Windows' },
-                    { prop: 'mac', icon: 'apple', name: 'macOS' },
-                    { prop: 'linux', icon: 'linux', name: 'Linux' }
-                ],
-                choosenPlatforms: [],
-                communitySize: 0,
-                activeUsers: 0
-            }
+        goToSearchPage() {
+            this.$router.push({
+                path: '/search',
+                query: this.query
+            })
+        }
+    },
+    computed: {
+        ...mapGetters({
+            getProductsByName: 'marketplace/getProductsByName'
+        }),
+        filteredResults() {
+            const { choosenPlatforms } = this
+
+            return this.results
+                .filter(result => choosenPlatforms.length
+                    ? result.systemRequirements.some(req =>
+                        choosenPlatforms.includes(req.os))
+                    : true)
         },
-        methods: {
-            search() {
-                this.results = this.phrase.length
-                    ? this.getProductsByName(this.phrase)
-                    : []
-            },
-            goToSearchPage() {
-                this.$router.push({
-                    path: '/search',
-                    query: this.query
-                })
-            }
-        },
-        computed: {
-            ...mapGetters({
-                getProductsByName: 'marketplace/getProductsByName'
-            }),
-            filteredResults() {
-                const { choosenPlatforms } = this
+        query() {
+            const { phrase, choosenPlatforms, communitySize, activeUsers } = this
+            const query = {}
 
-                return this.results
-                    .filter(result => choosenPlatforms.length
-                        ? result.systemRequirements.some(req =>
-                            choosenPlatforms.includes(req.os)
-                          )
-                        : true
-                    )
-            },
-            query() {
-                const { phrase, choosenPlatforms, communitySize, activeUsers } = this
-                const query = {}
+            if (phrase.length) query.name = phrase
+            if (choosenPlatforms.length) query.platforms = choosenPlatforms
+            if (communitySize) query.communitySize = communitySize
+            if (activeUsers) query.activeUsers = activeUsers
 
-                if (phrase.length) query.name = phrase
-                if (choosenPlatforms.length) query.platforms = choosenPlatforms
-                if (communitySize) query.communitySize = communitySize
-                if (activeUsers) query.activeUsers = activeUsers
-
-                return query
-            }
+            return query
         }
     }
+}
 </script>
 
 <style lang="scss">

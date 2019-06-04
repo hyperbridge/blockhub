@@ -1,47 +1,53 @@
 <template>
-    <div class="profile-chooser" :class="{ 'profile-chooser--dark-mode': darkMode, 'profile-chooser--light-mode': !darkMode }">
-        <div class="profile-chooser__overlay" @click="closeProfileChooser">
-        </div>
+    <div class="profile-chooser"
+         :class="{ 'profile-chooser--dark-mode': darkMode, 'profile-chooser--light-mode': !darkMode }">
+        <div class="profile-chooser__overlay"
+             @click="closeProfileChooser" />
         <div class="profile-chooser__wrapper">
             <div class="profile-chooser__content">
                 <c-heading-bar
                     slot="title"
                     class="mb-0"
                     name="Choose Profile"
-                    :showBackground="false"
-                />
+                    :showBackground="false" />
                 <div class="profile-slider">
                     <c-swiper :options="options">
                         <c-swiper-slide
                             v-for="profile in profiles"
-                            :key="profile.id"
-                        >
+                            :key="profile.id">
                             <div
                                 class="user-card__container-link"
-                                @click="setDefault(profile)"
-                            >
+                                @click="setDefault(profile)">
                                 <c-user-card
                                     :user="profile"
                                     :previewMode="!profile.edit"
                                     :class="{
                                         'default': activeProfile && profile.id == activeProfile.id
-                                    }"
-                                />
+                                    }" />
                             </div>
                         </c-swiper-slide>
                     </c-swiper>
-                    <div class="swiper-button-prev" slot="button-prev" v-if="profiles.length > 3"></div>
-                    <div class="swiper-button-next" slot="button-next" v-if="profiles.length > 3"></div>
+                    <div v-if="profiles.length > 3"
+                         slot="button-prev"
+                         class="swiper-button-prev" />
+                    <div v-if="profiles.length > 3"
+                         slot="button-next"
+                         class="swiper-button-next" />
                 </div>
                 <c-heading-bar
                     slot="title"
                     class="mb-0"
                     name=""
-                    :showBackground="false"
-                />
+                    :showBackground="false" />
                 <div class="profile-chooser__actions">
-                    <c-button class="profile-chooser__back-button c-button--lg outline-white" @click="closeProfileChooser">Back</c-button>
-                    <c-button class="profile-chooser__ok-button c-button--lg outline-white" @click="closeProfileChooser">OK</c-button>
+                    <c-button class="profile-chooser__back-button c-button--lg outline-white"
+                              @click="closeProfileChooser">
+                        Back
+                    </c-button>
+                    <c-button class="profile-chooser__ok-button c-button--lg outline-white"
+                              @click="closeProfileChooser">
+                        OK
+                    </c-button>
                 </div>
             </div>
         </div>
@@ -49,59 +55,59 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            darkMode: {
-                type: Boolean,
-                default: true
-            }
-        },
-        components: {
-              'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
-        },
-        data(){
-            return{
-                options: {
-                    slidesPerView: 4,
-                    spaceBetween: 0,
-                    navigation: {
-                        nextEl: '.profile-chooser__wrapper .swiper-button-next',
-                        prevEl: '.profile-chooser__wrapper .swiper-button-prev'
-                    },
-                    breakpoints: {
-                        1024: {
-                            slidesPerView: 2,
-                        },
-                        768: {
-                            slidesPerView: 1,
-                            spaceBetween: 0
-                        },
-                    }
+export default {
+    components: {
+        'c-user-card': () => import('~/components/user-card').then(m => m.default || m)
+    },
+    props: {
+        darkMode: {
+            type: Boolean,
+            default: true
+        }
+    },
+    data() {
+        return {
+            options: {
+                slidesPerView: 4,
+                spaceBetween: 0,
+                navigation: {
+                    nextEl: '.profile-chooser__wrapper .swiper-button-next',
+                    prevEl: '.profile-chooser__wrapper .swiper-button-prev'
                 },
-            }
-        },
-        computed: {
-            profiles() {
-                return Object.values(this.$store.state.profiles.keyedById)
-            },
-            activeProfile() {
-                return this.$store.state.application.activeProfile
-            }
-        },
-        methods: {
-            closeProfileChooser() {
-                this.$store.commit('application/showProfileChooser', false)
-            },
-            setDefault(profile) {
-                this.$store.commit(
-                    'update',
-                    ['application/activeProfile', profile]
-                )
-
-                this.$store.state.application.developerMode = profile.role === 'developer'
+                breakpoints: {
+                    1024: {
+                        slidesPerView: 2
+                    },
+                    768: {
+                        slidesPerView: 1,
+                        spaceBetween: 0
+                    }
+                }
             }
         }
+    },
+    computed: {
+        profiles() {
+            return Object.values(this.$store.state.profiles.keyedById)
+        },
+        activeProfile() {
+            return this.$store.state.application.activeProfile
+        }
+    },
+    methods: {
+        closeProfileChooser() {
+            this.$store.commit('application/showProfileChooser', false)
+        },
+        setDefault(profile) {
+            this.$store.commit(
+                'update',
+                ['application/activeProfile', profile]
+            )
+
+            this.$store.state.application.developerMode = profile.role === 'developer'
+        }
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -2,23 +2,22 @@
     <div class="installer-bar">
         <div
             class="installer-bar__progress"
-            :style="`width: ${progress}%`"
-        >
+            :style="`width: ${progress}%`">
             {{ progress }}
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'installer-progress',
-        props: {
-            progress: {
-                type: [Number, String],
-                default: 0
-            }
+export default {
+    name: 'InstallerProgress',
+    props: {
+        progress: {
+            type: [Number, String],
+            default: 0
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

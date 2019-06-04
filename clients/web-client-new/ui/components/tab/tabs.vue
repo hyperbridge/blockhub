@@ -1,63 +1,60 @@
 <template>
     <div>
-        <div class="tabs-nav" :class="variant">
+        <div class="tabs-nav"
+             :class="variant">
             <ul>
                 <li
                     v-for="(tab, index) in tabs"
                     :key="index"
-                    :class="`nav-item layer${index+1}`"
-                >
+                    :class="`nav-item layer${index+1}`">
                     <a
                         :href="tab.href"
                         :class="{ 'active': tab.isActive }"
-                        @click.prevent="selectTab(tab.name, index)"
-                    >{{ tab.name }}</a>
+                        @click.prevent="selectTab(tab.name, index)">{{ tab.name }}</a>
                 </li>
             </ul>
-            <slot name="tabs-nav">
-            </slot>
+            <slot name="tabs-nav" />
         </div>
-        <div class="tabs-container" ref="tabs">
-            <slot :tabs="tabs"/>
+        <div ref="tabs"
+             class="tabs-container">
+            <slot :tabs="tabs" />
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        props: {
-            variant: {
-                type: String,
-                default: 'default'
-            },
-            currentStep: [Number, String]
+export default {
+    props: {
+        variant: {
+            type: String,
+            default: 'default'
         },
-        data() {
-            return {
-                tabs: []
-            }
-        },
-        created() {
-            this.tabs = this.$children
-        },
-        methods: {
-            selectTab(tabName, tabIndex) {
-                if (this.currentStep) {
-
-                    if (tabIndex + 1 <= this.currentStep) {
-                        this.tabs.forEach((tab, i) => {
-                            tab.isActive = tabIndex == i
-                        })
-                    }
-
-                } else {
-                    this.tabs.forEach(tab => {
-                        tab.isActive = (tab.name == tabName)
+        currentStep: [Number, String]
+    },
+    data() {
+        return {
+            tabs: []
+        }
+    },
+    created() {
+        this.tabs = this.$children
+    },
+    methods: {
+        selectTab(tabName, tabIndex) {
+            if (this.currentStep) {
+                if (tabIndex + 1 <= this.currentStep) {
+                    this.tabs.forEach((tab, i) => {
+                        tab.isActive = tabIndex == i
                     })
                 }
+            } else {
+                this.tabs.forEach(tab => {
+                    tab.isActive = tab.name == tabName
+                })
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

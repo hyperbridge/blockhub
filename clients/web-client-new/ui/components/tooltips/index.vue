@@ -1,19 +1,22 @@
 <template>
     <span class="c-tooltips">
-        <span v-on:mouseover="showToolTip=true" v-on:mouseleave="showToolTip=false" v-if="type == 'hover'">{{ name }}</span>
-        <span @click="clickHandler" v-if="type == 'click'">{{ name }}</span>
+        <span v-if="type == 'hover'"
+              @mouseover="showToolTip=true"
+              @mouseleave="showToolTip=false">{{ name }}</span>
+        <span v-if="type == 'click'"
+              @click="clickHandler">{{ name }}</span>
         <transition name="fade">
-            <div class="c-tooltips__content" v-if="showToolTip"
+            <div v-if="showToolTip"
+                 class="c-tooltips__content"
                  :class="{
-                 'left-position' : position == 'left',
-                 'right-position' : position == 'right',
-                 'center-position' : position == 'center',
-                 'light-style' : lightStyle == true
+                     'left-position' : position == 'left',
+                     'right-position' : position == 'right',
+                     'center-position' : position == 'center',
+                     'light-style' : lightStyle == true
                  }"
-                 style="animation-duration: 0.25s"
-            >
+                 style="animation-duration: 0.25s">
                 <div class="c-tooltips__content-default">
-                    <slot></slot>
+                    <slot />
                 </div>
             </div>
         </transition>
@@ -21,37 +24,37 @@
 </template>
 
 <script>
-    export default {
-        name: 'tooltip',
-        props: {
-            name: [String, Number],
-            position: {
-                type: String,
-                default: 'left'
-            },
-            type: {
-                type: String,
-                default : 'hover',
-                validator(val) {
-                    return ['hover', 'click'].includes(val);
-                }
-            },
-            lightStyle: {
-                type: Boolean,
-                default: false
+export default {
+    name: 'Tooltip',
+    props: {
+        name: [String, Number],
+        position: {
+            type: String,
+            default: 'left'
+        },
+        type: {
+            type: String,
+            default: 'hover',
+            validator(val) {
+                return ['hover', 'click'].includes(val)
             }
         },
-        data() {
-            return {
-                showToolTip: false
-            };
-        },
-        methods: {
-            clickHandler() {
-                this.showToolTip = !this.showToolTip;
-            }
+        lightStyle: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data() {
+        return {
+            showToolTip: false
+        }
+    },
+    methods: {
+        clickHandler() {
+            this.showToolTip = !this.showToolTip
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

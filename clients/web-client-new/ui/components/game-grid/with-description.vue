@@ -1,22 +1,28 @@
 <template>
-    <transition-group tag="div" class="games-list" ref="gameList" name="games-list">
+    <transition-group ref="gameList"
+                      tag="div"
+                      class="games-list"
+                      name="games-list">
         <div
-            class="games-list__item"
             v-for="(item) in items"
-            :key="item.id"
-            :class="{ 'hovered' : hovered }"
-            :style="{ width: itemWidth, background: itemBg }"
             v-if="items && items.length"
-        >
+            :key="item.id"
+            class="games-list__item"
+            :class="{ 'hovered' : hovered }"
+            :style="{ width: itemWidth, background: itemBg }">
             <div class="img">
-                <div v-if="item.price && showPrice" class="price" :class="['price-position-' + pricePosition]">
+                <div v-if="item.price && showPrice"
+                     class="price"
+                     :class="['price-position-' + pricePosition]">
                     <strong>{{ item.price | convertCurrency }}</strong>
                 </div>
-                <c-button status="none" :to="`/product/${item.id}`">
+                <c-button status="none"
+                          :to="`/product/${item.id}`">
                     <c-img :src="item.images.mediumTile" />
                 </c-button>
-                <div class="crowdfund-icon" v-if="item.crowdfund">
-                    <i class="fas fa-hand-holding-usd"></i>
+                <div v-if="item.crowdfund"
+                     class="crowdfund-icon">
+                    <i class="fas fa-hand-holding-usd" />
                 </div>
             </div>
             <div class="info">
@@ -24,52 +30,66 @@
                     <div class="state-tag">
                         <template v-if="item.stateTag == 'trending'">
                             <span style="color: #F75D5D">
-                                <i class="fas fa-fire"></i> Trending
+                                <i class="fas fa-fire" /> Trending
                             </span>
                         </template>
                         <template v-else-if="item.stateTag == 'pre-release'">
-                            <i class="fas fa-bolt" style="color: #FADC72"></i> {{ item.prerelease_count }}
-                            <span class="ml-4" style="color: #499fd3">Pre Release</span>
+                            <i class="fas fa-bolt"
+                               style="color: #FADC72" /> {{ item.prerelease_count }}
+                            <span class="ml-4"
+                                  style="color: #499fd3">Pre Release</span>
                         </template>
                     </div>
-                    <c-button status="none" :to="`/product/${item.id}`"
-                        :title="item.name + ' - product page'"
-                    >
+                    <c-button status="none"
+                              :to="`/product/${item.id}`"
+                              :title="item.name + ' - product page'">
                         <h4>{{ item.name }}</h4>
                     </c-button>
-                    <div class="crowdfund-tag" v-if="item.crowdfund">
+                    <div v-if="item.crowdfund"
+                         class="crowdfund-tag">
                         Crowdfund Campaign
                     </div>
-                    <p v-if="item.publisher">{{ item.publisher }}</p>
-                    <p v-if="item.description">{{ item.description }}</p>
+                    <p v-if="item.publisher">
+                        {{ item.publisher }}
+                    </p>
+                    <p v-if="item.description">
+                        {{ item.description }}
+                    </p>
                 </div>
                 <div class="footer">
                     <div class="d-flex flex-nowrap">
-                        <div class="time mr-3" v-if="item.releaseDate && showDate">
-                            <i class="fas fa-calendar-alt"></i>
+                        <div v-if="item.releaseDate && showDate"
+                             class="time mr-3">
+                            <i class="fas fa-calendar-alt" />
                             <!--<c-tooltip :name="calculateSince(item.releaseDate)" position="center">-->
-                            <c-tooltip :name="calculateSince(item.releaseDate)" position="center">
-                                <div class="text-center" style="white-space: nowrap">
+                            <c-tooltip :name="calculateSince(item.releaseDate)"
+                                       position="center">
+                                <div class="text-center"
+                                     style="white-space: nowrap">
                                     <strong>Released</strong><br>
                                     {{ formatDate(item.releaseDate) }}
                                 </div>
                             </c-tooltip>
                         </div>
-                        <div class="followers mr-3" v-if="item.followers">
-                            <i class="fas fa-eye"></i>
+                        <div v-if="item.followers"
+                             class="followers mr-3">
+                            <i class="fas fa-eye" />
                             <!--<c-tooltip :name="item.followers" position="center">-->
                             <c-tooltip position="center">
-                                <div class="text-center" style="white-space: nowrap">
+                                <div class="text-center"
+                                     style="white-space: nowrap">
                                     <strong>Followers</strong><br>
                                     {{ item.followers }}
                                 </div>
                             </c-tooltip>
                         </div>
-                        <div class="players" v-if="item.players">
-                            <i class="fas fa-user"></i>
+                        <div v-if="item.players"
+                             class="players">
+                            <i class="fas fa-user" />
                             <!--<c-tooltip :name="item.players" position="center">-->
                             <c-tooltip position="center">
-                                <div class="text-center" style="white-space: nowrap">
+                                <div class="text-center"
+                                     style="white-space: nowrap">
                                     <strong>Players</strong><br>
                                     {{ item.players }}
                                 </div>
@@ -79,105 +99,108 @@
                     <c-rating-stars
                         v-if="item.rating && showRating"
                         :number="item.rating.overall"
-                        class="rating_stars"
-                    />
+                        class="rating_stars" />
                     <c-button
-                        status="success"
                         v-if="showLink"
+                        status="success"
                         :to="`/product/${item.id}`"
-                        iconHide
-                    >More</c-button>
+                        iconHide>
+                        More
+                    </c-button>
                 </div>
             </div>
         </div>
-        <p v-if="!items || !items.length" key="nothing">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
+        <p v-if="!items || !items.length"
+           key="nothing">
+            Nothing could be found. Want to <c-button status="plain"
+                                                      @click="$store.commit('application/activateModal', 'coming-soon')">
+                Check for updates
+            </c-button>?
+        </p>
     </transition-group>
 </template>
 
 <script>
-    import moment from 'moment'
-    export default {
-        name: 'game-grid-description',
-        props: {
-            items: {
-                type: Array,
-                required: true
-            },
-            itemInRow: {
-                type: Number,
-                default: 1
-            },
-            showRating: {
-                type: Boolean,
-                default: true
-            },
-            showDate: {
-                type: Boolean,
-                default: true
-            },
-            showPrice: {
-                type: Boolean,
-                default: true
-            },
-            showLink:{
-                type: Boolean,
-                default: false
-            },
-            pricePosition: {
-                type: String,
-                default: 'left'
-            },
-            hovered: {
-                type: Boolean,
-                default: true
-            },
-            itemBg: String
+import moment from 'moment'
+export default {
+    name: 'GameGridDescription',
+    components: {
+        'c-tags': () => import('~/components/tags').then(m => m.default || m),
+        'c-rating-stars': () => import('~/components/rating-stars').then(m => m.default || m),
+        'c-tooltip': () => import('~/components/tooltips').then(m => m.default || m)
+    },
+    props: {
+        items: {
+            type: Array,
+            required: true
         },
-        data() {
-            return {
-                itemWidth: ''
-            }
+        itemInRow: {
+            type: Number,
+            default: 1
         },
-        components: {
-            'c-tags': () => import('~/components/tags').then(m => m.default || m),
-            'c-rating-stars': () => import('~/components/rating-stars').then(m => m.default || m),
-            'c-tooltip': () => import('~/components/tooltips').then(m => m.default || m),
+        showRating: {
+            type: Boolean,
+            default: true
         },
-        methods: {
-            checkWidth(){
-                let def_w = this.$el.offsetWidth / this.itemInRow
-                if ( def_w < 350)
-                    this.itemWidth = '100%'
-                else
-                    this.itemWidth = 100/this.itemInRow + '%'
-            },
-            formatDate(date){
-                return moment(date).format('DD MMMM, YYYY');
-            },
-            calculateSince(date) {
-                // let tTime = new Date(date),
-                //     cTime = new Date(),
-                //     sinceMin = Math.round((cTime - tTime) / 60000),
-                //     since, sinceHr, sinceDay;
-                // if (sinceMin < 1440) {
-                //     sinceHr = Math.round(sinceMin / 60);
-                //     since = '' + sinceHr + 'h';
-                // }
-                // else {
-                //     sinceDay = Math.round(sinceMin / 1440);
-                //     since = sinceDay + 'd';
-                // }
-                return moment(date).fromNow();
-            }
+        showDate: {
+            type: Boolean,
+            default: true
         },
-        mounted() {
-            this.$nextTick(function() {
-                window.addEventListener('resize', this.checkWidth);
-                //Init
-                this.checkWidth()
-            })
+        showPrice: {
+            type: Boolean,
+            default: true
+        },
+        showLink: {
+            type: Boolean,
+            default: false
+        },
+        pricePosition: {
+            type: String,
+            default: 'left'
+        },
+        hovered: {
+            type: Boolean,
+            default: true
+        },
+        itemBg: String
+    },
+    data() {
+        return {
+            itemWidth: ''
+        }
+    },
+    mounted() {
+        this.$nextTick(function() {
+            window.addEventListener('resize', this.checkWidth)
+            // Init
+            this.checkWidth()
+        })
+    },
+    methods: {
+        checkWidth() {
+            const def_w = this.$el.offsetWidth / this.itemInRow
+            if (def_w < 350) { this.itemWidth = '100%' } else { this.itemWidth = `${100 / this.itemInRow}%` }
+        },
+        formatDate(date) {
+            return moment(date).format('DD MMMM, YYYY')
+        },
+        calculateSince(date) {
+            // let tTime = new Date(date),
+            //     cTime = new Date(),
+            //     sinceMin = Math.round((cTime - tTime) / 60000),
+            //     since, sinceHr, sinceDay;
+            // if (sinceMin < 1440) {
+            //     sinceHr = Math.round(sinceMin / 60);
+            //     since = '' + sinceHr + 'h';
+            // }
+            // else {
+            //     sinceDay = Math.round(sinceMin / 1440);
+            //     since = sinceDay + 'd';
+            // }
+            return moment(date).fromNow()
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

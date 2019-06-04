@@ -1,6 +1,12 @@
 <template>
-    <c-terms-popup title="Terms" :activated="activated" @close="$emit('close')" width="800">
-        <div class="h4" slot="header">Terms of Service Agreement</div>
+    <c-terms-popup title="Terms"
+                   :activated="activated"
+                   width="800"
+                   @close="$emit('close')">
+        <div slot="header"
+             class="h4">
+            Terms of Service Agreement
+        </div>
         <div slot="body">
             <div class="termsBlock">
                 <c-terms-block />
@@ -11,11 +17,11 @@
 
 <script>
 export default {
-    props: ['activated'],
     components: {
         'c-terms-popup': () => import('~/components/popups/terms').then(m => m.default || m),
         'c-terms-block': () => import('~/components/terms-block').then(m => m.default || m)
     },
+    props: ['activated']
 }
 </script>
 

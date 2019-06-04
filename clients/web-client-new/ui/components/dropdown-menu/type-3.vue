@@ -4,48 +4,45 @@
             type="button"
             class="dropdown-vue__button"
             :class="{ 'dropdown-vue__button--active': showMenu }"
-            @click.stop="showMenu = !showMenu"
-        >
+            @click.stop="showMenu = !showMenu">
             {{ title }}
             <c-icon
                 name="caret-down"
                 class="dropdown-vue__icon"
-                :class="{ 'dropdown-vue__icon--active': showMenu }"
-            />
+                :class="{ 'dropdown-vue__icon--active': showMenu }" />
         </button>
         <transition name="slide-in-top">
             <div
                 v-if="showMenu"
-                class="dropdown-vue__content"
                 v-click-outside.bool="showMenu"
-                :data-title="title"
-            >
-                <slot/>
+                class="dropdown-vue__content"
+                :data-title="title">
+                <slot />
             </div>
         </transition>
     </div>
 </template>
 
 <script>
-    export default {
-        props: {
-            title: String,
-            items: Array
-        },
-        components: {
-            'c-list': () => import('~/components/list').then(m => m.default || m),
-        },
-        data() {
-            return {
-                showMenu: false
-            }
-        },
-        methods: {
-            closeMenu() {
-                this.showMenu = false;
-            }
+export default {
+    components: {
+        'c-list': () => import('~/components/list').then(m => m.default || m)
+    },
+    props: {
+        title: String,
+        items: Array
+    },
+    data() {
+        return {
+            showMenu: false
+        }
+    },
+    methods: {
+        closeMenu() {
+            this.showMenu = false
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,7 +1,7 @@
 <template>
     <div class="social-connect__item">
         <div class="social-connect__item-icon">
-            <img :src="icon" />
+            <img :src="icon">
         </div>
         <div class="social-connect__item-text">
             <div class="h5 font-weight-bold mb-0 pb-0">
@@ -12,10 +12,13 @@
             </div>
         </div>
         <div class="social-connect__item-action">
-            <c-button status="second-warning" v-if="connected" @click="disconnect">
+            <c-button v-if="connected"
+                      status="second-warning"
+                      @click="disconnect">
                 Disconnect
             </c-button>
-            <c-button status="second-info" @click="connect">
+            <c-button status="second-info"
+                      @click="connect">
                 Connect
             </c-button>
         </div>
@@ -23,17 +26,17 @@
 </template>
 
 <script>
-    export default {
-        props: ['icon', 'name', 'description', 'connected'],
-        methods: {
-            connect() {
-                this.$store.commit('application/activateModal', 'coming-soon')
-            },
-            disconnect() {
-                this.$store.commit('application/activateModal', 'coming-soon')
-            }
+export default {
+    props: ['icon', 'name', 'description', 'connected'],
+    methods: {
+        connect() {
+            this.$store.commit('application/activateModal', 'coming-soon')
+        },
+        disconnect() {
+            this.$store.commit('application/activateModal', 'coming-soon')
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

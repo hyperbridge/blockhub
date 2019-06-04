@@ -1,7 +1,7 @@
 <template>
     <div class="milestones-list__item">
         <div class="thumb">
-            <c-img :src="milestone.img"/>
+            <c-img :src="milestone.img" />
         </div>
         <div class="info">
             <div class="head">
@@ -11,44 +11,46 @@
                 </div>
                 <div class="milestones_progress">
                     <div class="progress_line">
-                        <i class="fas fa-clock icon"></i>
-                        <c-progress-bar :percentages="milestone.progress['percentDays']"/>
+                        <i class="fas fa-clock icon" />
+                        <c-progress-bar :percentages="milestone.progress['percentDays']" />
                         <span class="ml-auto">
                             {{ milestone.progress['daysLeft'] }} days left
                         </span>
                     </div>
                     <div class="progress_line">
-                        <i class="fas fa-check icon"></i>
-                        <c-progress-bar :percentages="milestone.progress['percentDone']"/>
+                        <i class="fas fa-check icon" />
+                        <c-progress-bar :percentages="milestone.progress['percentDone']" />
                         <span class="ml-auto">
                             {{ milestone.progress['percentDone'] }}% Done
                         </span>
                     </div>
                     <div class="progress_line">
-                        <i class="fas fa-dollar-sign icon"></i>
-                        <c-progress-bar :percentages="milestone.progress['percentSpent']"/>
+                        <i class="fas fa-dollar-sign icon" />
+                        <c-progress-bar :percentages="milestone.progress['percentSpent']" />
                         <span class="ml-auto">
                             {{ milestone.progress['percentSpent'] }}% Spent
                         </span>
                     </div>
                 </div>
             </div>
-            <p class="text">{{ milestone.text }}</p>
+            <p class="text">
+                {{ milestone.text }}
+            </p>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'project-milestone',
+    name: 'ProjectMilestone',
+    components: {
+        'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m)
+    },
     props: {
         milestone: {
             type: Object,
             required: true
         }
-    },
-    components: {
-        'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m)
     }
 }
 </script>

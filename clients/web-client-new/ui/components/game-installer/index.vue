@@ -1,6 +1,8 @@
 <template>
-    <c-basic-popup :activated="activated" :width="width">
-        <div class="game-installer" slot="body">
+    <c-basic-popup :activated="activated"
+                   :width="width">
+        <div slot="body"
+             class="game-installer">
             <div class="game-installer__header">
                 <div class="game-installer__game-img">
                     <c-img :src="img" />
@@ -14,9 +16,12 @@
                     </p>
                     <div class="game-operations-support">
                         Systems
-                        <i class="fab fa-apple" v-if="mac"></i>
-                        <i class="fab fa-linux" v-if="linux"></i>
-                        <i class="fab fa-windows" v-if="win"></i>
+                        <i v-if="mac"
+                           class="fab fa-apple" />
+                        <i v-if="linux"
+                           class="fab fa-linux" />
+                        <i v-if="win"
+                           class="fab fa-windows" />
                     </div>
                 </div>
             </div>
@@ -26,15 +31,20 @@
                         Install
                     </label>
                     <div class="dropdown">
-                        <a class="btn dropdown-toggle" href="#" role="button"
-                           data-toggle="dropdown" aria-haspopup="true"
+                        <a class="btn dropdown-toggle"
+                           href="#"
+                           role="button"
+                           data-toggle="dropdown"
+                           aria-haspopup="true"
                            aria-expanded="false">
-                            <i class="fas fa-gamepad"></i>
+                            <i class="fas fa-gamepad" />
                             {{ file }}
                         </a>
                         <div class="dropdown-menu">
                             <ul class="list-unstyled mb-0 p-0">
-                                <li @click="choosenGame(file)" v-for="(file, index) in filesList" :key="index">
+                                <li v-for="(file, index) in filesList"
+                                    :key="index"
+                                    @click="choosenGame(file)">
                                     {{ name }} ({{ makeCapitalize(file.platform) }}, {{ file.size | numeralFormat('0.0') }})
                                 </li>
                             </ul>
@@ -47,13 +57,21 @@
                     </label>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <i class="fas fa-folder-open"></i>
+                            <i class="fas fa-folder-open" />
                         </div>
                         <select class="custom-select">
-                            <option selected>Choose...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option selected>
+                                Choose...
+                            </option>
+                            <option value="1">
+                                One
+                            </option>
+                            <option value="2">
+                                Two
+                            </option>
+                            <option value="3">
+                                Three
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -63,15 +81,18 @@
                     </div>
                     <div>
                         Disk space available <strong>25</strong> GiB
-                        <i class="fas fa-check-circle" style="color: #43C981"></i>
+                        <i class="fas fa-check-circle"
+                           style="color: #43C981" />
                     </div>
                 </div>
                 <div class="game-installer__footer">
-                    <a href="#" class="c-button btn-cancel">
+                    <a href="#"
+                       class="c-button btn-cancel">
                         Cancel
                     </a>
-                    <a href="#" class="c-button btn-download">
-                        <i class="fas fa-download"></i> Install
+                    <a href="#"
+                       class="c-button btn-download">
+                        <i class="fas fa-download" /> Install
                     </a>
                 </div>
             </div>
@@ -80,40 +101,40 @@
 </template>
 
 <script>
-    export default {
-        props:{
-            activated:{
-                type: Boolean,
-                default: false
-            },
-            width: {
-                type: String,
-                default: '500'
-            },
-            name: String,
-            mac: String,
-            win: String,
-            linux: String,
-            img: String,
-            filesList: Array
+export default {
+    components: {
+        'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
+        'c-dropdown': () => import('~/components/dropdown-menu/type-2').then(m => m.default || m)
+    },
+    props: {
+        activated: {
+            type: Boolean,
+            default: false
         },
-        components:{
-            'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
-            'c-dropdown': () => import('~/components/dropdown-menu/type-2').then(m => m.default || m),
+        width: {
+            type: String,
+            default: '500'
         },
-        data(){
-            return{
-                file: 'Choose the game'
-            }
+        name: String,
+        mac: String,
+        win: String,
+        linux: String,
+        img: String,
+        filesList: Array
+    },
+    data() {
+        return {
+            file: 'Choose the game'
+        }
+    },
+    methods: {
+        choosenGame() {
         },
-        methods:{
-            choosenGame(){
-            },
-            makeCapitalize(str){
-                return str.charAt(0).toUpperCase() + str.slice(1);
-            }
+        makeCapitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1)
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

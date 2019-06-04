@@ -5,39 +5,33 @@
             :style="{
                 left: `${percentages}%`,
                 transform: `translateX(-${transform}px)`
-            }"
-        ></div>
+            }" />
         <div
             class="range-slider__progress"
             :style="{
                 width: percentages + '%'
-            }"
-        ></div>
+            }" />
         <input
             type="range"
             class="range-slider"
             :min="min"
             :max="max"
             :value="value"
-            @input="$emit('input', $event.target.value)"
-        />
+            @input="$emit('input', $event.target.value)">
         <span
             class="range-slider__percentages"
-            :style="{ left: `calc(${percentages}% + 2px)`, transform: `translateX(-${transform}px)` }"
-        >{{ showPercentages ? percentagesSign(percentages) : value }}</span>
+            :style="{ left: `calc(${percentages}% + 2px)`, transform: `translateX(-${transform}px)` }">{{ showPercentages ? percentagesSign(percentages) : value }}</span>
         <transition name="slide-in-top">
             <span
-                class="range-slider__range-min"
                 v-show="percentages > 20"
-            >
+                class="range-slider__range-min">
                 {{ min }}
             </span>
         </transition>
         <transition name="slide-in-top">
             <span
-                class="range-slider__range-max"
                 v-show="percentages < (showPercentages ? 70 : 80)"
-            >
+                class="range-slider__range-max">
                 {{ max }}
             </span>
         </transition>
@@ -46,7 +40,7 @@
 
 <script>
 export default {
-    name: 'range-slider',
+    name: 'RangeSlider',
     inheritAttrs: false,
     props: {
         min: {
@@ -62,17 +56,17 @@ export default {
     },
     computed: {
         percentages() {
-            const percentages = Math.round((this.value - this.min) / this.max * 100);
-            return percentages > 100 ? 100 : percentages;
+            const percentages = Math.round((this.value - this.min) / this.max * 100)
+            return percentages > 100 ? 100 : percentages
         },
         transform() {
-            const { percentages } = this;
-            return 20 * (percentages / 100);
+            const { percentages } = this
+            return 20 * (percentages / 100)
         }
     },
     methods: {
         percentagesSign(val) {
-            return val + '%';
+            return `${val}%`
         }
     }
 }

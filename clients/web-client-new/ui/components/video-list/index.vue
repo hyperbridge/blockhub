@@ -3,8 +3,10 @@
         <div class="video-item__wrapper">
             <div class="video-item__img">
                 <c-img :src="poster" />
-                <a href="#" class="video-item__run-btn" @click="toggleModal">
-                    <i class="fas fa-play-circle"></i>
+                <a href="#"
+                   class="video-item__run-btn"
+                   @click="toggleModal">
+                    <i class="fas fa-play-circle" />
                 </a>
             </div>
             <div class="video-item__info">
@@ -17,15 +19,18 @@
                     </div>
                 </div>
                 <div class="video-item__viewers">
-                    <i class="fas fa-eye"></i>
+                    <i class="fas fa-eye" />
                     {{ comments.length }}
                 </div>
             </div>
         </div>
-        <c-video-popup :video="video" @close="toggleModal" :activated="showModal">
+        <c-video-popup :video="video"
+                       :activated="showModal"
+                       @close="toggleModal">
             <template v-for="comment in comments">
                 <div class="mb-3">
-                    <c-author :author="comment.author" class="mb-1"/>
+                    <c-author :author="comment.author"
+                              class="mb-1" />
                     {{ comment.text }}
                 </div>
             </template>
@@ -34,29 +39,29 @@
 </template>
 
 <script>
-    export default {
-        props:{
-            poster: String,
-            author: String,
-            avatar: String,
-            video: [ Object, Array ],
-            comments: [ Object, Array ]
-        },
-        components:{
-            'c-video-popup': () => import('~/components/video-popup').then(m => m.default || m),
-            'c-author': () => import('~/components/author').then(m => m.default || m),
-        },
-        data(){
-            return{
-                showModal: false
-            }
-        },
-        methods:{
-            toggleModal(){
-                this.showModal = !this.showModal
-            }
+export default {
+    components: {
+        'c-video-popup': () => import('~/components/video-popup').then(m => m.default || m),
+        'c-author': () => import('~/components/author').then(m => m.default || m)
+    },
+    props: {
+        poster: String,
+        author: String,
+        avatar: String,
+        video: [Object, Array],
+        comments: [Object, Array]
+    },
+    data() {
+        return {
+            showModal: false
+        }
+    },
+    methods: {
+        toggleModal() {
+            this.showModal = !this.showModal
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

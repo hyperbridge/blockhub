@@ -22,7 +22,9 @@
                 [h1] Header text [/h1]
             </div>
             <div class="text-formatting__example">
-                <h1 class="p-0 m-0 text-white">Header text</h1>
+                <h1 class="p-0 m-0 text-white">
+                    Header text
+                </h1>
             </div>
         </div>
         <div class="text-formatting__item">
@@ -70,16 +72,19 @@
                 [url=google.com] Url link [/i]
             </div>
             <div class="text-formatting__example">
-                <c-button status="plain" href="https://google.com.ua/">Url link</c-button>
+                <c-button status="plain"
+                          href="https://google.com.ua/">
+                    Url link
+                </c-button>
             </div>
         </div>
         <div class="text-formatting__item">
             <div class="text-formatting__syntax">
-                [list]<br/>
-                    <span class="d-block pl-3">[*] Bullet Item 1</span>
-                    <span class="d-block pl-3">[*] Bullet Item 2</span>
-                    <span class="d-block pl-3">[*] Bullet Item 3</span>
-                    <span class="d-block pl-3">[*] Bullet Item 4</span>
+                [list]<br>
+                <span class="d-block pl-3">[*] Bullet Item 1</span>
+                <span class="d-block pl-3">[*] Bullet Item 2</span>
+                <span class="d-block pl-3">[*] Bullet Item 3</span>
+                <span class="d-block pl-3">[*] Bullet Item 4</span>
                 [/list]
             </div>
             <div class="text-formatting__example">
@@ -93,11 +98,11 @@
         </div>
         <div class="text-formatting__item">
             <div class="text-formatting__syntax">
-                [olist]<br/>
-                    <span class="d-block pl-3">[*] Ordered Item 1</span>
-                    <span class="d-block pl-3">[*] Ordered Item 2</span>
-                    <span class="d-block pl-3">[*] Ordered Item 3</span>
-                    <span class="d-block pl-3">[*] Ordered Item 4</span>
+                [olist]<br>
+                <span class="d-block pl-3">[*] Ordered Item 1</span>
+                <span class="d-block pl-3">[*] Ordered Item 2</span>
+                <span class="d-block pl-3">[*] Ordered Item 3</span>
+                <span class="d-block pl-3">[*] Ordered Item 4</span>
                 [/olist]
             </div>
             <div class="text-formatting__example">
@@ -112,7 +117,7 @@
         <div class="text-formatting__item">
             <div class="text-formatting__syntax">
                 [quote=author]
-                    Quoted text
+                Quoted text
                 [/quote]
             </div>
             <div class="text-formatting__example">
@@ -126,16 +131,16 @@
         </div>
         <div class="text-formatting__item">
             <div class="text-formatting__syntax">
-                [code]<br />
-                    function HelloWorld(){<br />
-                        condole.log('Hello World')<br />
-                    }<br />
+                [code]<br>
+                function HelloWorld(){<br>
+                condole.log('Hello World')<br>
+                }<br>
                 [/code]
             </div>
             <div class="text-formatting__example">
                 <code>
-                    function HelloWorld(){<br />
-                    condole.log('Hello World')<br />
+                    function HelloWorld(){<br>
+                    condole.log('Hello World')<br>
                     }
                 </code>
             </div>
@@ -143,20 +148,20 @@
         <div class="text-formatting__item">
             <div class="text-formatting__syntax">
                 [table]
-                    <span class="ml-2 d-block">[tr]</span>
-                    <span class="ml-4 d-block">[td] Name [/td]</span>
-                    <span class="ml-4 d-block">[td] Age [/td]</span>
-                    <span class="ml-2 d-block">[/tr]</span>
+                <span class="ml-2 d-block">[tr]</span>
+                <span class="ml-4 d-block">[td] Name [/td]</span>
+                <span class="ml-4 d-block">[td] Age [/td]</span>
+                <span class="ml-2 d-block">[/tr]</span>
 
-                    <span class="ml-2 d-block">[tr]</span>
-                    <span class="ml-4 d-block">[td] Josh [/td]</span>
-                    <span class="ml-4 d-block">[td] 23 [/td]</span>
-                    <span class="ml-2 d-block">[/tr]</span>
+                <span class="ml-2 d-block">[tr]</span>
+                <span class="ml-4 d-block">[td] Josh [/td]</span>
+                <span class="ml-4 d-block">[td] 23 [/td]</span>
+                <span class="ml-2 d-block">[/tr]</span>
 
-                    <span class="ml-2 d-block">[tr]</span>
-                    <span class="ml-4 d-block">[td] Alan [/td]</span>
-                    <span class="ml-4 d-block">[td] 37 [/td]</span>
-                    <span class="ml-2 d-block">[/tr]</span>
+                <span class="ml-2 d-block">[tr]</span>
+                <span class="ml-4 d-block">[td] Alan [/td]</span>
+                <span class="ml-4 d-block">[td] 37 [/td]</span>
+                <span class="ml-2 d-block">[/tr]</span>
                 [/table]
             </div>
             <div class="text-formatting__example">
@@ -194,11 +199,11 @@
 </template>
 
 <script>
-    export default {
-        components: {
-            'c-table-simple': () => import('~/components/table-simple').then(m => m.default || m),
-        },
+export default {
+    components: {
+        'c-table-simple': () => import('~/components/table-simple').then(m => m.default || m)
     }
+}
 </script>
 
 <style lang="scss" scoped>
