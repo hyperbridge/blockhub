@@ -1,16 +1,18 @@
 <template>
     <transition name="fade">
-        <div v-if="show"
-             class="inline-notification"
-             :class="[ 'type-' + type, 'size-' + size ]">
+        <div
+            v-if="show"
+            class="inline-notification"
+            :class="[ 'type-' + type, 'size-' + size ]">
             <div class="inline-notification__icon">
                 <i :class="`fas fa-${notif_icon}`" />
             </div>
             <div class="inline-notification__text">
                 <slot />
             </div>
-            <div class="close"
-                 @click="actionOnClose()">
+            <div
+                class="close"
+                @click="actionOnClose()">
                 <i class="fas fa-times" />
             </div>
         </div>

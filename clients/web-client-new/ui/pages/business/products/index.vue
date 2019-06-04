@@ -3,11 +3,13 @@
         <div class="row margin-bottom-20">
             <div class="col-12">
                 <div class="form-row">
-                    <div class="col-6 col-lg-2"
-                         hidden>
-                        <select class="form-control actionWithSelected"
-                                tabindex="-1"
-                                aria-hidden="true">
+                    <div
+                        class="col-6 col-lg-2"
+                        hidden>
+                        <select
+                            class="form-control actionWithSelected"
+                            tabindex="-1"
+                            aria-hidden="true">
                             <option />
                             <option value="1">
                                 Set as readed
@@ -18,11 +20,13 @@
                         </select>
                     </div>
                     <div class="col-6 col-lg-4 d-none d-md-block" />
-                    <div class="col-6 col-lg-2"
-                         hidden>
-                        <select class="form-control orderByStatus"
-                                tabindex="-1"
-                                aria-hidden="true">
+                    <div
+                        class="col-6 col-lg-2"
+                        hidden>
+                        <select
+                            class="form-control orderByStatus"
+                            tabindex="-1"
+                            aria-hidden="true">
                             <option />
                             <option value="1">
                                 New
@@ -42,14 +46,16 @@
                 </div>
 
                 <div class="table-responsive margin-top-20 margin-bottom-0">
-                    <table class="table table-striped table-bordered margin-bottom-0"
-                           style="min-width: 800px;">
+                    <table
+                        class="table table-striped table-bordered margin-bottom-0"
+                        style="min-width: 800px;">
                         <thead>
                             <tr>
                                 <th width="30">
                                     <label class="custom-control custom-checkbox">
-                                        <input type="checkbox"
-                                               class="custom-control-input">
+                                        <input
+                                            type="checkbox"
+                                            class="custom-control-input">
                                         <span class="custom-control-label" />
                                     </label>
                                 </th>
@@ -73,21 +79,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="product in products"
+                            <tr
+                                v-for="product in products"
                                 v-if="products"
                                 :key="product.id">
                                 <td>
                                     <label class="custom-control custom-checkbox">
-                                        <input type="checkbox"
-                                               class="custom-control-input">
+                                        <input
+                                            type="checkbox"
+                                            class="custom-control-input">
                                         <span class="custom-control-label" />
                                     </label>
                                 </td>
                                 <td>{{ product.id }}</td>
                                 <td>
-                                    <c-button status="none"
-                                              :to="`/business/product/${product.id}`"
-                                              class="text-secondary text-bold">
+                                    <c-button
+                                        status="none"
+                                        :to="`/business/product/${product.id}`"
+                                        class="text-secondary text-bold">
                                         {{ product.name }}
                                     </c-button>
                                 </td>
@@ -145,10 +154,11 @@
         <template slot="menu">
             <div class="row">
                 <div class="col-12 text-right">
-                    <c-button to="/business/product/new"
-                              status="dark"
-                              icon="plus"
-                              size="lg">
+                    <c-button
+                        to="/business/product/new"
+                        status="dark"
+                        icon="plus"
+                        size="lg">
                         New Product
                     </c-button>
                 </div>

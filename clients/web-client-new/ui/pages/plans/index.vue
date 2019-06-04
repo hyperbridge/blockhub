@@ -1,35 +1,42 @@
 <template>
-    <c-layout navigationKey="store"
-              :showLeftPanel="false"
-              :showRightPanel="false">
+    <c-layout
+        navigationKey="store"
+        :showLeftPanel="false"
+        :showRightPanel="false">
         <div class="row">
             <div class="col-1" />
-            <div class="col-3 text-white"
-                 style="margin: 0; padding: 0;">
-                <c-option-block shadow
-                                image="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"
-                                title="Gamer"
-                                subtitle=""
-                                notification="Free"
-                                :list="list" />
+            <div
+                class="col-3 text-white"
+                style="margin: 0; padding: 0;">
+                <c-option-block
+                    shadow
+                    image="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"
+                    title="Gamer"
+                    subtitle=""
+                    notification="Free"
+                    :list="list" />
             </div>
-            <div class="col-3 text-white"
-                 style="margin: 0; padding: 0;">
-                <c-option-block shadow
-                                image="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"
-                                title="Indie"
-                                subtitle=""
-                                notification="Free"
-                                :list="list" />
+            <div
+                class="col-3 text-white"
+                style="margin: 0; padding: 0;">
+                <c-option-block
+                    shadow
+                    image="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"
+                    title="Indie"
+                    subtitle=""
+                    notification="Free"
+                    :list="list" />
             </div>
-            <div class="col-3 text-white"
-                 style="margin: 0; padding: 0;">
-                <c-option-block shadow
-                                image="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"
-                                title="Studio"
-                                subtitle=""
-                                notification="$10"
-                                :list="list" />
+            <div
+                class="col-3 text-white"
+                style="margin: 0; padding: 0;">
+                <c-option-block
+                    shadow
+                    image="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"
+                    title="Studio"
+                    subtitle=""
+                    notification="$10"
+                    :list="list" />
             </div>
         </div>
     </c-layout>

@@ -11,7 +11,6 @@
 
 <script>
 export default {
-    name: 'ButtonFavorite',
     props: {
         active: Boolean,
         target: String,

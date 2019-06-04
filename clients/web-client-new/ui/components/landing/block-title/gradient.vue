@@ -1,19 +1,24 @@
 <template>
-    <div class="landing__block-title"
-         :class="['text-' + align]">
-        <div v-if="$slots.before"
-             style="padding: 0 10px">
+    <div
+        class="landing__block-title"
+        :class="['text-' + align]">
+        <div
+            v-if="$slots.before"
+            style="padding: 0 10px">
             <slot name="before" />
         </div>
-        <div class="landing__block-title-gradient"
-             :class="[gradientDirection, 'size-' + size ]">
-            <component :is="tag"
-                       :style="{ 'color': color, 'font-size': fontSize + 'px', 'font-weight': fontWeight }">
+        <div
+            class="landing__block-title-gradient"
+            :class="[gradientDirection, 'size-' + size ]">
+            <component
+                :is="tag"
+                :style="{ 'color': color, 'font-size': fontSize + 'px', 'font-weight': fontWeight }">
                 <slot />
             </component>
         </div>
-        <div v-if="$slots.after"
-             style="padding: 0 10px">
+        <div
+            v-if="$slots.after"
+            style="padding: 0 10px">
             <slot name="after" />
         </div>
     </div>

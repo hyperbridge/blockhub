@@ -1,38 +1,45 @@
 <template>
-    <c-popup ref="modal"
-             :activated="activated"
-             type="custom"
-             width="550"
-             @close="$emit('close')">
-        <div slot="customClose"
-             hidden />
-        <div slot="customContent"
-             class="c-popup__content">
+    <c-popup
+        ref="modal"
+        :activated="activated"
+        type="custom"
+        width="550"
+        @close="$emit('close')">
+        <div
+            slot="customClose"
+            hidden />
+        <div
+            slot="customContent"
+            class="c-popup__content">
             <c-tabs
                 :setActiveTab="currentStep"
                 :tabNames="['Product Verification', 'Contact', 'Done']"
                 styled
                 @click="changeTab($event)">
-                <c-tab :tab_id="3"
-                       :selected="true"
-                       :showFooter="true">
+                <c-tab
+                    :tab_id="3"
+                    :selected="true"
+                    :showFooter="true">
                     <div>
                         <p>Product verification request has been submit. We'll be in touch soon. Thank you!</p>
                     </div>
-                    <div slot="footer"
-                         class="d-flex align-items-center justify-content-end margin-top-10">
+                    <div
+                        slot="footer"
+                        class="d-flex align-items-center justify-content-end margin-top-10">
                         <div class="text-right w-100">
-                            <c-button status="info"
-                                      iconHide
-                                      @click="$emit('close')">
+                            <c-button
+                                status="info"
+                                iconHide
+                                @click="$emit('close')">
                                 OK
                             </c-button>
                         </div>
                     </div>
                 </c-tab>
-                <c-tab :tab_id="1"
-                       :selected="true"
-                       :showFooter="true">
+                <c-tab
+                    :tab_id="1"
+                    :selected="true"
+                    :showFooter="true">
                     <div>
                         <p>
                             To manage your product listing, you'll need to verify your connection with this company. <br>
@@ -50,22 +57,24 @@
                                 <p>What's the name of your company?</p>
                                 <div class="form-group">
                                     <label class="sr-only">Company Name</label>
-                                    <input v-model="companyName"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="Company Name"
-                                           name="companyName">
+                                    <input
+                                        v-model="companyName"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Company Name"
+                                        name="companyName">
                                 </div>
                             </div>
                             <div class="col">
                                 <p>What's the name of your product?</p>
                                 <div class="form-group">
                                     <label class="sr-only">Product Name</label>
-                                    <input v-model="productName"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="Product Name"
-                                           name="productName">
+                                    <input
+                                        v-model="productName"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Product Name"
+                                        name="productName">
                                 </div>
                             </div>
                         </div>
@@ -74,79 +83,90 @@
                                 <p v-decentralized-mode>
                                     What's your developer profile address?
                                 </p>
-                                <div v-decentralized-mode
-                                     class="form-group">
+                                <div
+                                    v-decentralized-mode
+                                    class="form-group">
                                     <label class="sr-only">Developer Profile Address</label>
-                                    <input v-model="developerProfileAddress"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="Developer Profile Address"
-                                           name="developerProfileAddress">
+                                    <input
+                                        v-model="developerProfileAddress"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Developer Profile Address"
+                                        name="developerProfileAddress">
                                 </div>
-                                <c-button class="underline"
-                                          @click="$store.commit('application/showProfileChooser', true)">
+                                <c-button
+                                    class="underline"
+                                    @click="$store.commit('application/showProfileChooser', true)">
                                     Choose Different Profile
                                 </c-button>
                             </div>
                         </div>
-                        <div class="row"
-                             hidden>
+                        <div
+                            class="row"
+                            hidden>
                             <div class="col">
                                 <br><br>
                                 <p>By continuing you agree to the following Terms and Services and Privacy Policy</p>
                             </div>
                         </div>
 
-                        <p v-if="errors.length"
-                           class="errors">
+                        <p
+                            v-if="errors.length"
+                            class="errors">
                             <br>
                             <strong>Please correct the following error(s):</strong>
                             <ul>
-                                <li v-for="error in errors"
+                                <li
+                                    v-for="error in errors"
                                     :key="error">
                                     {{ error }}
                                 </li>
                             </ul>
                         </p>
                     </div>
-                    <div slot="footer"
-                         class="d-flex align-items-center justify-content-end margin-top-10">
+                    <div
+                        slot="footer"
+                        class="d-flex align-items-center justify-content-end margin-top-10">
                         <div class="text-right w-100">
                             <c-button @click="$emit('close')">
                                 Cancel
                             </c-button>
-                            <c-button status="info"
-                                      iconHide
-                                      @click="nextStep()">
+                            <c-button
+                                status="info"
+                                iconHide
+                                @click="nextStep()">
                                 Continue
                             </c-button>
                         </div>
                     </div>
                 </c-tab>
-                <c-tab :tab_id="2"
-                       :showFooter="true">
+                <c-tab
+                    :tab_id="2"
+                    :showFooter="true">
                     <div>
                         <div class="row">
                             <div class="col">
                                 <p>Website URL</p>
                                 <div class="form-group">
                                     <label class="sr-only">Website URL</label>
-                                    <input v-model="companyWebsite"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="Website URL"
-                                           name="companyWebsite">
+                                    <input
+                                        v-model="companyWebsite"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Website URL"
+                                        name="companyWebsite">
                                 </div>
                             </div>
                             <div class="col">
                                 <p>Contact Name</p>
                                 <div class="form-group">
                                     <label class="sr-only">Contact Name</label>
-                                    <input v-model="contactName"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="Contact Name"
-                                           name="contactName">
+                                    <input
+                                        v-model="contactName"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Contact Name"
+                                        name="contactName">
                                 </div>
                             </div>
                         </div>
@@ -155,46 +175,52 @@
                                 <p>Contact Email</p>
                                 <div class="form-group">
                                     <label class="sr-only">Contact Email</label>
-                                    <input v-model="contactEmail"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="Contact Email"
-                                           name="contactEmail">
+                                    <input
+                                        v-model="contactEmail"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Contact Email"
+                                        name="contactEmail">
                                 </div>
                             </div>
                             <div class="col">
                                 <p>Contact Number</p>
                                 <div class="form-group">
                                     <label class="sr-only">Contact Number</label>
-                                    <input v-model="contactNumber"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="Contact Name"
-                                           name="contactNumber">
+                                    <input
+                                        v-model="contactNumber"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Contact Name"
+                                        name="contactNumber">
                                 </div>
                             </div>
                         </div>
 
-                        <p v-if="errors.length"
-                           class="errors">
+                        <p
+                            v-if="errors.length"
+                            class="errors">
                             <strong>Please correct the following error(s):</strong>
                             <ul>
-                                <li v-for="error in errors"
+                                <li
+                                    v-for="error in errors"
                                     :key="error">
                                     {{ error }}
                                 </li>
                             </ul>
                         </p>
                     </div>
-                    <div slot="footer"
-                         class="d-flex align-items-center justify-content-end margin-top-10">
+                    <div
+                        slot="footer"
+                        class="d-flex align-items-center justify-content-end margin-top-10">
                         <div class="text-right w-100">
                             <c-button @click="$emit('close')">
                                 Cancel
                             </c-button>
-                            <c-button status="info"
-                                      iconHide
-                                      @click="nextStep()">
+                            <c-button
+                                status="info"
+                                iconHide
+                                @click="nextStep()">
                                 Continue
                             </c-button>
                         </div>

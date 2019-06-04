@@ -16,12 +16,13 @@
         </div>
         <div class="row align-items-center">
             <div class="col-12">
-                <c-block title="Purchase List"
-                         :bgColor="false"
-                         noGutter
-                         bgGradient
-                         onlyContentBg
-                         noPadding>
+                <c-block
+                    title="Purchase List"
+                    :bgColor="false"
+                    noGutter
+                    bgGradient
+                    onlyContentBg
+                    noPadding>
                     <div class="padding-bottom-30 padding-top-15">
                         <c-table-simple stripped>
                             <thead>
@@ -45,8 +46,9 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <img src="../../../static/img/logo-only.png"
-                                                 class="table-img">
+                                            <img
+                                                src="../../../static/img/logo-only.png"
+                                                class="table-img">
                                             <div>
                                                 <strong>
                                                     Diablo III
@@ -153,12 +155,13 @@
                 </c-block>
             </div>
             <div class="col-12">
-                <c-block title="Totals"
-                         :bgColor="false"
-                         noGutter
-                         bgGradient
-                         onlyContentBg
-                         noPadding>
+                <c-block
+                    title="Totals"
+                    :bgColor="false"
+                    noGutter
+                    bgGradient
+                    onlyContentBg
+                    noPadding>
                     <div class="padding-bottom-30 padding-top-15">
                         <c-table-simple stripped>
                             <tbody>
@@ -198,12 +201,13 @@
                 </c-block>
             </div>
             <div class="col-12">
-                <c-block title="Recipients"
-                         :bgColor="false"
-                         noGutter
-                         bgGradient
-                         onlyContentBg
-                         noPadding>
+                <c-block
+                    title="Recipients"
+                    :bgColor="false"
+                    noGutter
+                    bgGradient
+                    onlyContentBg
+                    noPadding>
                     <div class="padding-bottom-30 padding-top-15">
                         <c-table-simple stripped>
                             <thead>

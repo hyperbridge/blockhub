@@ -8,8 +8,9 @@
             <div class="scanning-list margin-top-30 margin-bottom-30">
                 <div class="scanning-list__item">
                     <div class="img">
-                        <c-img src="https://cdn.freebiesupply.com/logos/large/2x/world-of-warcraft-logo-png-transparent.png"
-                               class="img-fluid" />
+                        <c-img
+                            src="https://cdn.freebiesupply.com/logos/large/2x/world-of-warcraft-logo-png-transparent.png"
+                            class="img-fluid" />
                     </div>
                     <div class="info w-100">
                         <h3 class="p-0 m-0">
@@ -28,8 +29,9 @@
                 </div>
                 <div class="scanning-list__item">
                     <div class="img">
-                        <c-img src="https://www.gezginler.net/indir/resim-grafik/dota-2-1484294880.png"
-                               class="img-fluid" />
+                        <c-img
+                            src="https://www.gezginler.net/indir/resim-grafik/dota-2-1484294880.png"
+                            class="img-fluid" />
                     </div>
                     <div class="info w-100">
                         <h3 class="p-0 m-0">
@@ -48,8 +50,9 @@
                 </div>
                 <div class="scanning-list__item">
                     <div class="img">
-                        <c-img src="https://upload.wikimedia.org/wikipedia/ru/0/04/Heroes_of_the_Storm_logo.png"
-                               class="img-fluid" />
+                        <c-img
+                            src="https://upload.wikimedia.org/wikipedia/ru/0/04/Heroes_of_the_Storm_logo.png"
+                            class="img-fluid" />
                     </div>
                     <div class="info w-100">
                         <h3 class="p-0 m-0">
@@ -77,8 +80,9 @@
                             Show us where it's installed!
                         </div>
                     </div>
-                    <c-button status="dark"
-                              size="lg">
+                    <c-button
+                        status="dark"
+                        size="lg">
                         Locate
                     </c-button>
                 </div>

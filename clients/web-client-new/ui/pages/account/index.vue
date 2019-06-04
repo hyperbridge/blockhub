@@ -2,10 +2,11 @@
     <c-layout navigationKey="account">
         <div class="row">
             <div class="col-12">
-                <c-block title="Account Information"
-                         :noGutter="true"
-                         :bgGradient="true"
-                         :onlyContentBg="true">
+                <c-block
+                    title="Account Information"
+                    :noGutter="true"
+                    :bgGradient="true"
+                    :onlyContentBg="true">
                     <form>
                         <div class="row">
                             <div class="col-md-10">
@@ -14,11 +15,12 @@
                                         <label>Email Address</label>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="text"
-                                               class="form-control"
-                                               placeholder="Email"
-                                               :value="account.email"
-                                               readonly>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Email"
+                                            :value="account.email"
+                                            readonly>
                                         <span class="form-text">This field cannot be changed at this time.</span>
                                     </div>
                                 </div>
@@ -27,11 +29,12 @@
                                         <label>Given Name</label>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="text"
-                                               class="form-control"
-                                               placeholder="Given name"
-                                               :value="account.firstName"
-                                               readonly>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Given name"
+                                            :value="account.firstName"
+                                            readonly>
                                         <span class="form-text">This field cannot be changed at this time.</span>
                                     </div>
                                 </div>
@@ -40,41 +43,47 @@
                                         <label>Family Name</label>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="text"
-                                               class="form-control"
-                                               placeholder="Family name"
-                                               :value="account.lastName"
-                                               readonly>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Family name"
+                                            :value="account.lastName"
+                                            readonly>
                                         <span class="form-text">This field cannot be changed at this time.</span>
                                     </div>
                                 </div>
-                                <div class="form-group row"
-                                     hidden>
+                                <div
+                                    class="form-group row"
+                                    hidden>
                                     <label class="switch switch-sm col-sm-3">
                                         <label>Public Address</label>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="text"
-                                               class="form-control"
-                                               placeholder="Public address"
-                                               :value="account.address"
-                                               readonly>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Public address"
+                                            :value="account.address"
+                                            readonly>
                                         <span class="form-text">Your account is an Ethereum wallet, and can be <a
                                             :href="`https://etherscan.io/address/${account.address}`">found on the blockchain using the Public Address</a></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <c-button hidden
-                                          @click="importAccountFile">
+                                <c-button
+                                    hidden
+                                    @click="importAccountFile">
                                     Import Account
                                 </c-button>
-                                <c-button hidden
-                                          @click="exportAccountFile">
+                                <c-button
+                                    hidden
+                                    @click="exportAccountFile">
                                     Export Saved Account
                                 </c-button>
-                                <c-button class="outline-danger"
-                                          @click="deleteAccount">
+                                <c-button
+                                    class="outline-danger"
+                                    @click="deleteAccount">
                                     Clear Saved Account
                                 </c-button>
                             </div>
@@ -82,15 +91,17 @@
                     </form>
                 </c-block>
 
-                <c-block title="Overview"
-                         :noGutter="true"
-                         :bgGradient="true"
-                         :onlyContentBg="true">
+                <c-block
+                    title="Overview"
+                    :noGutter="true"
+                    :bgGradient="true"
+                    :onlyContentBg="true">
                     <div class="stat-card-container">
                         <div class="stat-card-list">
-                            <router-link tag="div"
-                                         to="/account/profiles"
-                                         class="route stat-card">
+                            <router-link
+                                tag="div"
+                                to="/account/profiles"
+                                class="route stat-card">
                                 <div class="icon">
                                     <i class="fas fa-id-card" />
                                 </div>
@@ -106,8 +117,9 @@
                                     </p>
                                 </div>
                             </router-link>
-                            <div v-darklaunch="'TICKETS'"
-                                 class="stat-card">
+                            <div
+                                v-darklaunch="'TICKETS'"
+                                class="stat-card">
                                 <div class="icon">
                                     <i class="fas fa-question-circle" />
                                 </div>
@@ -119,13 +131,15 @@
                                             35
                                         </div>
                                         <div>
-                                            <i class="fas fa-exclamation-triangle"
-                                               style="color: #FADC72" />
+                                            <i
+                                                class="fas fa-exclamation-triangle"
+                                                style="color: #FADC72" />
                                             12
                                         </div>
                                         <div>
-                                            <i class="fas fa-check"
-                                               style="color: #43C981" />
+                                            <i
+                                                class="fas fa-check"
+                                                style="color: #43C981" />
                                             5
                                         </div>
                                     </div>
@@ -134,8 +148,9 @@
                                     </p>
                                 </div>
                             </div>
-                            <div v-darklaunch="'PAYMENTS'"
-                                 class="stat-card">
+                            <div
+                                v-darklaunch="'PAYMENTS'"
+                                class="stat-card">
                                 <div class="icon">
                                     <i class="fas fa-dollar-sign" />
                                 </div>
@@ -151,8 +166,9 @@
                                     </p>
                                 </div>
                             </div>
-                            <div v-darklaunch="'USER_ACTIVITY'"
-                                 class="stat-card">
+                            <div
+                                v-darklaunch="'USER_ACTIVITY'"
+                                class="stat-card">
                                 <div class="icon">
                                     <i class="fas fa-users" />
                                 </div>
@@ -160,23 +176,27 @@
                                     <h4>User Activity</h4>
                                     <div class="stat">
                                         <div>
-                                            <i class="fas fa-circle"
-                                               style="color: #43C981" />
+                                            <i
+                                                class="fas fa-circle"
+                                                style="color: #43C981" />
                                             3
                                         </div>
                                         <div>
-                                            <i class="fas fa-circle"
-                                               style="color: #FADC72" />
+                                            <i
+                                                class="fas fa-circle"
+                                                style="color: #FADC72" />
                                             1
                                         </div>
                                         <div>
-                                            <i class="fas fa-circle"
-                                               style="color: #F75D5D" />
+                                            <i
+                                                class="fas fa-circle"
+                                                style="color: #F75D5D" />
                                             0
                                         </div>
                                         <div>
-                                            <i class="fas fa-circle"
-                                               style="color: #A2A3BE" />
+                                            <i
+                                                class="fas fa-circle"
+                                                style="color: #A2A3BE" />
                                             5
                                         </div>
                                     </div>
@@ -189,15 +209,18 @@
                     </div>
                 </c-block>
 
-                <c-block title="Wishlists"
-                         noGutter
-                         bgGradient
-                         onlyContentBg>
-                    <c-tabs :tabNames="['Products', 'Projects']"
-                            styled>
+                <c-block
+                    title="Wishlists"
+                    noGutter
+                    bgGradient
+                    onlyContentBg>
+                    <c-tabs
+                        :tabNames="['Products', 'Projects']"
+                        styled>
                         <c-tab :tab_id="1">
-                            <div v-if="profile.productWishlist.length"
-                                 class="wishlist-box">
+                            <div
+                                v-if="profile.productWishlist.length"
+                                class="wishlist-box">
                                 <div
                                     v-for="product in profile.productWishlist"
                                     :key="product.id"

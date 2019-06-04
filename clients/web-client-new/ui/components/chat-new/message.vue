@@ -12,8 +12,9 @@
                     {{ time }}
                 </span>
             </div>
-            <div class="chat-message__content"
-                 v-html="text" />
+            <div
+                class="chat-message__content"
+                v-html="text" />
             <c-emoji />
         </div>
     </div>

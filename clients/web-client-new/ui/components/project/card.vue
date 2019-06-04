@@ -1,12 +1,15 @@
 <template>
-    <div class="project-card__item"
-         :class="customClass"
-         @mouseover="hovering = true"
-         @mouseout="hovering = false">
-        <div v-if="parentName"
-             class="head">
-            <div v-if="parentImage"
-                 class="img">
+    <div
+        class="project-card__item"
+        :class="customClass"
+        @mouseover="hovering = true"
+        @mouseout="hovering = false">
+        <div
+            v-if="parentName"
+            class="head">
+            <div
+                v-if="parentImage"
+                class="img">
                 <c-img :src="parentImage" />
             </div>
             <div class="text">
@@ -16,34 +19,39 @@
                 </p>
             </div>
         </div>
-        <c-button status="none"
-                  :to="`/project/${id}`">
+        <c-button
+            status="none"
+            :to="`/project/${id}`">
             <c-img :src="image" />
             <div class="description">
                 {{ description }}
             </div>
         </c-button>
-        <c-money-info label="Obtained Funds"
-                      :percent="goalProgress"
-                      :amount="funds ? funds.obtained : 0"
-                      :goal="funds ? funds.goal : 0" />
+        <c-money-info
+            label="Obtained Funds"
+            :percent="goalProgress"
+            :amount="funds ? funds.obtained : 0"
+            :goal="funds ? funds.goal : 0" />
         <div class="item-action">
-            <c-button status="info"
-                      :to="`/project/${id}`"
-                      iconHide>
+            <c-button
+                status="info"
+                :to="`/project/${id}`"
+                iconHide>
                 Check it out
             </c-button>
-            <c-button status="success"
-                      :to="`/project/${id}`"
-                      iconHide
-                      hidden>
+            <c-button
+                status="success"
+                :to="`/project/${id}`"
+                iconHide
+                hidden>
                 Donate Funds
             </c-button>
         </div>
 
-        <c-simple-vote v-if="hovering"
-                       v-darklaunch="'RATINGS'"
-                       :rating="rating" />
+        <c-simple-vote
+            v-if="hovering"
+            v-darklaunch="'RATINGS'"
+            :rating="rating" />
     </div>
 </template>
 

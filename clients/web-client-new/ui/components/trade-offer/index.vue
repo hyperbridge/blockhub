@@ -1,10 +1,12 @@
 <template>
-    <div class="trade-offer"
-         :class="{ 'trade-offer--new': offer.new }">
+    <div
+        class="trade-offer"
+        :class="{ 'trade-offer--new': offer.new }">
         <div class="trade-offer__date">
             <span>
-                <span v-if="offer.new"
-                      class="trade-offer__status">NEW</span>
+                <span
+                    v-if="offer.new"
+                    class="trade-offer__status">NEW</span>
                 {{ offer.createdAt | formatDate }} - {{ offer.createdAt | timeAgo }}
             </span>
             <span>
@@ -14,25 +16,29 @@
         <div
             class="trade-offer__content"
             @click="expandDetails()">
-            <c-author :name="offer.contractor.name"
-                      :img="offer.contractor.img" />
+            <c-author
+                :name="offer.contractor.name"
+                :img="offer.contractor.img" />
             <span>
                 Trade {{ offer.yourOffer.length }} for {{ offer.contractorOffer.length }} assets
             </span>
             <div>
-                <c-button status="success"
-                          iconHide>
+                <c-button
+                    status="success"
+                    iconHide>
                     Accept
                 </c-button>
-                <c-button status="danger"
-                          iconHide>
+                <c-button
+                    status="danger"
+                    iconHide>
                     Decline
                 </c-button>
             </div>
         </div>
         <transition name="slide-in-top">
-            <div v-if="showDetails"
-                 class="trade-offer__details">
+            <div
+                v-if="showDetails"
+                class="trade-offer__details">
                 <h4>Offer details</h4>
                 <table
                     v-for="(assets, assetsKey) in assets"
@@ -43,7 +49,8 @@
                         <th>Total value {{ totalVal[assetsKey] | convertCurrency }}</th>
                     </thead>
                     <tbody>
-                        <tr v-for="(asset, index) in assets"
+                        <tr
+                            v-for="(asset, index) in assets"
                             :key="index">
                             <td>
                                 <c-tooltip>
@@ -51,8 +58,9 @@
                                         slot="tooltip"
                                         :asset="asset" />
                                     <div class="asset__info">
-                                        <c-img :src="asset.image"
-                                               class="asset__image" />
+                                        <c-img
+                                            :src="asset.image"
+                                            class="asset__image" />
                                         {{ asset.name }}
                                     </div>
                                 </c-tooltip>
@@ -108,10 +116,12 @@
                         Go to transaction
                     </c-button>
                     <span>
-                        <c-button status="success"
-                                  iconHide>Accept</c-button>
-                        <c-button status="danger"
-                                  iconHide>Decline</c-button>
+                        <c-button
+                            status="success"
+                            iconHide>Accept</c-button>
+                        <c-button
+                            status="danger"
+                            iconHide>Decline</c-button>
                     </span>
                 </div>
             </div>

@@ -1,10 +1,11 @@
 <template>
     <div class="featured-assets__list">
-        <div v-for="(item, index) in items"
-             v-if="items && items.length"
-             :key="index"
-             class="featured-assets__item-container"
-             :style="{ width: 'calc( 100% / ' + itemInRow + ')'}">
+        <div
+            v-for="(item, index) in items"
+            v-if="items && items.length"
+            :key="index"
+            class="featured-assets__item-container"
+            :style="{ width: 'calc( 100% / ' + itemInRow + ')'}">
             <div class="featured-assets__list-item">
                 <div class="img">
                     <c-img :src="item.img" />

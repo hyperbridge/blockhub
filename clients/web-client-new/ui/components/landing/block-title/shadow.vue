@@ -1,7 +1,8 @@
 <template>
     <div class="landing__block-title-shadow">
-        <component :is="tag"
-                   :style="{ 'color': color, 'font-size': fontSize + 'px', 'font-weight': fontWeight, 'text-shadow' : textShadow }">
+        <component
+            :is="tag"
+            :style="{ 'color': color, 'font-size': fontSize + 'px', 'font-weight': fontWeight, 'text-shadow' : textShadow }">
             <slot />
         </component>
     </div>

@@ -1,24 +1,29 @@
 <template>
     <c-layout navigationKey="store">
-        <c-block :noGutter="true"
-                 :bgGradient="true"
-                 :onlyContentBg="true">
+        <c-block
+            :noGutter="true"
+            :bgGradient="true"
+            :onlyContentBg="true">
             <c-heading-bar
                 slot="title"
                 class="mb-0"
                 name="Browse All Realms" />
             <div class="row">
-                <c-loading :enabled="!realms.length"
-                           size="lg" />
-                <c-metro-grid v-if="realms.length"
-                              class="w-100">
-                    <c-metro-item v-for="(realm, index) in realms"
-                                  :key="realm.id"
-                                  :image="realm.meta.images.logo"
-                                  width="25%"
-                                  :fullImage=" index == 1 ? true : false">
-                        <c-button class="h4 font-weight-bold"
-                                  :to="`/realm/${realm.id}`">
+                <c-loading
+                    :enabled="!realms.length"
+                    size="lg" />
+                <c-metro-grid
+                    v-if="realms.length"
+                    class="w-100">
+                    <c-metro-item
+                        v-for="(realm, index) in realms"
+                        :key="realm.id"
+                        :image="realm.meta.images.logo"
+                        width="25%"
+                        :fullImage=" index == 1 ? true : false">
+                        <c-button
+                            class="h4 font-weight-bold"
+                            :to="`/realm/${realm.id}`">
                             {{ realm.name }}
                         </c-button>
                         <div>

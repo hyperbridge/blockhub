@@ -1,9 +1,11 @@
 <template>
-    <div class="topic-list-item"
-         :class="['block-size-' + size]">
-        <c-button status="none"
-                  :href="link"
-                  :to="to">
+    <div
+        class="topic-list-item"
+        :class="['block-size-' + size]">
+        <c-button
+            status="none"
+            :href="link"
+            :to="to">
             <i :class="['fas fa-' + icon ]" />
             <slot />
         </c-button>

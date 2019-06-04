@@ -1,50 +1,60 @@
 <template>
-    <div class="activity-chart"
-         :class="[ 'size-' + size ]">
-        <c-heading-bar v-if="size != 'xs'"
-                       :name="title"
-                       :showArrows="false"
-                       :showBackground="false" />
-        <h4 v-if="size == 'xs'"
+    <div
+        class="activity-chart"
+        :class="[ 'size-' + size ]">
+        <c-heading-bar
+            v-if="size != 'xs'"
+            :name="title"
+            :showArrows="false"
+            :showBackground="false" />
+        <h4
+            v-if="size == 'xs'"
             class="activity-chart-title">
             {{ title }}
         </h4>
-        <div class="activity-chart__head"
-             :class="[ 'size-' + size ]">
-            <div v-for="month in 12"
-                 :key="month">
+        <div
+            class="activity-chart__head"
+            :class="[ 'size-' + size ]">
+            <div
+                v-for="month in 12"
+                :key="month">
                 <span v-if="size == 'xs'">{{ month }}</span>
                 <span v-else>{{ month | monthName | cutLength }}</span>
             </div>
         </div>
-        <div class="activity-chart__grid"
-             :class="[ 'size-' + size ]">
-            <div v-for="(year, index) in years"
-                 :key="index"
-                 class="activity-chart__item"
-                 :class="[ 'size-' + size ]">
+        <div
+            class="activity-chart__grid"
+            :class="[ 'size-' + size ]">
+            <div
+                v-for="(year, index) in years"
+                :key="index"
+                class="activity-chart__item"
+                :class="[ 'size-' + size ]">
                 <div class="year">
                     {{ year.title }}
                 </div>
                 <div class="year_row">
-                    <div v-for="(month, index) in year.months"
-                         :key="index"
-                         class="year_month">
+                    <div
+                        v-for="(month, index) in year.months"
+                        :key="index"
+                        class="year_month">
                         <div class="progress">
-                            <div v-if="size == 'lg'"
-                                 class="progress-bar"
-                                 role="progressbar"
-                                 :style="{ width: + month.percent +'%'}"
-                                 :aria-valuenow="month.percent"
-                                 aria-valuemin="0"
-                                 aria-valuemax="100" />
-                            <div v-else
-                                 class="progress-bar"
-                                 role="progressbar"
-                                 :style="[ month.percent >= 50 ? {'width' : '100%' } : {'width' : '0%'} ]"
-                                 :aria-valuenow="month.percent"
-                                 aria-valuemin="0"
-                                 aria-valuemax="100" />
+                            <div
+                                v-if="size == 'lg'"
+                                class="progress-bar"
+                                role="progressbar"
+                                :style="{ width: + month.percent +'%'}"
+                                :aria-valuenow="month.percent"
+                                aria-valuemin="0"
+                                aria-valuemax="100" />
+                            <div
+                                v-else
+                                class="progress-bar"
+                                role="progressbar"
+                                :style="[ month.percent >= 50 ? {'width' : '100%' } : {'width' : '0%'} ]"
+                                :aria-valuenow="month.percent"
+                                aria-valuemin="0"
+                                aria-valuemax="100" />
                         </div>
                         <div class="tooltips-info">
                             <strong>{{ month.month }} {{ year.title }}</strong>

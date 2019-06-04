@@ -22,7 +22,6 @@
 
 <script>
 export default {
-    name: 'ButtonArrows',
     props: {
         size: {
             type: String,

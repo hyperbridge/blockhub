@@ -1,20 +1,24 @@
 <template>
     <div class="token">
         <div class="token-nav">
-            <span :class="{ 'active' : isSearch }"
-                  @click="activeSearch">
+            <span
+                :class="{ 'active' : isSearch }"
+                @click="activeSearch">
                 Search
             </span>
-            <span :class="{ 'active' : !isSearch }"
-                  @click="activeCustom">
+            <span
+                :class="{ 'active' : !isSearch }"
+                @click="activeCustom">
                 Add custom
             </span>
         </div>
-        <div v-if="isSearch"
-             class="token-search">
-            <c-input v-model="query"
-                     placeholder="Type to search"
-                     class="w-100" />
+        <div
+            v-if="isSearch"
+            class="token-search">
+            <c-input
+                v-model="query"
+                placeholder="Type to search"
+                class="w-100" />
             <div class="token-search__results">
                 <ul v-if="results.length">
                     <li class="list-title">
@@ -25,55 +29,64 @@
                         {{ item.name }}({{ item.symbol.toUpperCase() }})
                     </li>
                 </ul>
-                <div v-else
-                     class="no-results">
+                <div
+                    v-else
+                    class="no-results">
                     <i class="fas fa-search" />
                     No tokens found
                 </div>
             </div>
             <div class="token-search__action">
-                <c-button status="opacity-danger"
-                          size="lg">
+                <c-button
+                    status="opacity-danger"
+                    size="lg">
                     Cancel
                 </c-button>
-                <c-button status="opacity-success"
-                          size="lg">
+                <c-button
+                    status="opacity-success"
+                    size="lg">
                     Next
                 </c-button>
             </div>
         </div>
-        <div v-else
-             class="token__custom-token">
+        <div
+            v-else
+            class="token__custom-token">
             <div class="w-100">
                 <div class="form-group">
                     <label>
                         Address
                     </label>
-                    <input class="form-control"
-                           type="text">
+                    <input
+                        class="form-control"
+                        type="text">
                 </div>
                 <div class="form-group">
                     <label>
                         Symbol
                     </label>
-                    <input class="form-control"
-                           type="text">
+                    <input
+                        class="form-control"
+                        type="text">
                 </div>
                 <div class="form-group">
                     <label>
                         Count
                     </label>
-                    <input class="form-control"
-                           type="number">
+                    <input
+                        class="form-control"
+                        type="number">
                 </div>
             </div>
             <div class="token__custom-token-action">
-                <c-button status="opacity-danger"
-                          size="lg">
+                <c-button
+                    status="opacity-danger"
+                    size="lg">
                     Cancel
                 </c-button>
-                <c-button status="opacity-success"
-                          size="lg">
+                <c-button
+                    status="opacity-success"
+                    size="lg">
                     Next
                 </c-button>
             </div>

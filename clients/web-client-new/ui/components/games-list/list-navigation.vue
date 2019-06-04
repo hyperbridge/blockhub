@@ -1,7 +1,8 @@
 <template>
     <div class="games-navigation">
         <ul>
-            <li v-for="item in list"
+            <li
+                v-for="item in list"
                 :key="item.id"
                 :class="{ 'active' : activeId == item.id }"
                 @click="chooseGame(item.id)">

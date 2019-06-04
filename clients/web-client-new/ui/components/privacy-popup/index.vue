@@ -1,8 +1,9 @@
 <template>
-    <c-popup title="Privacy policy"
-             :activated="activated"
-             width="800"
-             @close="$emit('close')">
+    <c-popup
+        title="Privacy policy"
+        :activated="activated"
+        width="800"
+        @close="$emit('close')">
         <div class="scroll_block">
             <c-privacy-block />
         </div>

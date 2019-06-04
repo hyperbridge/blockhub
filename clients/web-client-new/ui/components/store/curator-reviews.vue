@@ -1,16 +1,19 @@
 <template>
     <div class="curator-reviews-wrapper">
-        <c-swiper v-if="reviews.length"
-                  :options="sliderOptions">
-            <c-swiper-slide v-for="(review, index) in reviews"
-                            :key="index"
-                            ref="slider">
+        <c-swiper
+            v-if="reviews.length"
+            :options="sliderOptions">
+            <c-swiper-slide
+                v-for="(review, index) in reviews"
+                :key="index"
+                ref="slider">
                 <c-curator-review :review="review" />
             </c-swiper-slide>
         </c-swiper>
         <p v-if="!reviews.length">
-            Nothing could be found. Want to <c-button status="plain"
-                                                      @click="$store.commit('application/activateModal', 'coming-soon')">
+            Nothing could be found. Want to <c-button
+                status="plain"
+                @click="$store.commit('application/activateModal', 'coming-soon')">
                 Check for updates
             </c-button>?
         </p>

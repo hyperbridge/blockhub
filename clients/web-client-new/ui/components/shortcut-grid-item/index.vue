@@ -1,10 +1,11 @@
 <template>
-    <div ref="self"
-         class="grid-item"
-         :class="className"
-         :style="style"
-         @mousedown="mousedown"
-         @touchstart.stop="mousedown">
+    <div
+        ref="self"
+        class="grid-item"
+        :class="className"
+        :style="style"
+        @mousedown="mousedown"
+        @touchstart.stop="mousedown">
         <slot />
     </div>
 </template>

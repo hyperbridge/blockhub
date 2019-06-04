@@ -1,7 +1,8 @@
 <template>
-    <div ref="carousel"
-         class="carousel-3d"
-         @keyup.right="next()">
+    <div
+        ref="carousel"
+        class="carousel-3d"
+        @keyup.right="next()">
         <c-icon
             name="arrow-circle-left"
             class="carousel-3d__btn"

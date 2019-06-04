@@ -2,17 +2,20 @@
     <div>
         <h2>Explore</h2>
         <div class="inventory-navigation">
-            <c-switch v-model="allowSelect"
-                      :label="labelText" />
+            <c-switch
+                v-model="allowSelect"
+                :label="labelText" />
             <div>
-                <c-button status="info"
-                          icon="hand-pointer"
-                          @click="selectAll()">
+                <c-button
+                    status="info"
+                    icon="hand-pointer"
+                    @click="selectAll()">
                     {{ everySelected ? 'Unselect all' : 'Select all' }}
                 </c-button>
-                <c-button status="info"
-                          icon="dollar-sign"
-                          @click="openModal = true">
+                <c-button
+                    status="info"
+                    icon="dollar-sign"
+                    @click="openModal = true">
                     Sell selected in market
                 </c-button>
             </div>
@@ -22,8 +25,9 @@
                 :items="assets"
                 :setItemsPerPage="12"
                 :setItemsLimit="12">
-                <div slot-scope="props"
-                     class="assets-grid">
+                <div
+                    slot-scope="props"
+                    class="assets-grid">
                     <c-asset
                         v-for="(asset, index) in props.items"
                         :key="index"
@@ -36,17 +40,19 @@
                 v-if="previewAsset"
                 :asset="previewAsset" />
         </div>
-        <c-modal v-if="openModal"
-                 title="Sell assets"
-                 @close="openModal = false">
+        <c-modal
+            v-if="openModal"
+            title="Sell assets"
+            @close="openModal = false">
             <form slot="modalBody">
                 <div class="sell-assets__assets-wrapper">
                     <div
                         v-for="(asset, index) in selectedAssets"
                         :key="index"
                         class="sell-assets__asset">
-                        <c-asset-preview-basic :asset="asset"
-                                               size="sm" />
+                        <c-asset-preview-basic
+                            :asset="asset"
+                            size="sm" />
                         <div class="sell-assets__market-price">
                             <c-input
                                 :value="asset.market_price"
@@ -61,8 +67,9 @@
                         </div>
                     </div>
                 </div>
-                <p v-for="(error, index) in errors"
-                   :key="index">
+                <p
+                    v-for="(error, index) in errors"
+                    :key="index">
                     {{ error }}
                 </p>
                 <span class="sell-assets__summary">
@@ -70,12 +77,14 @@
                     for <strong> {{ sellSummary.price | roundNum }} </strong> $
                 </span>
                 <div class="flex-center-between">
-                    <c-button status="danger"
-                              @click="openModal = false">
+                    <c-button
+                        status="danger"
+                        @click="openModal = false">
                         Cancel
                     </c-button>
-                    <c-button status="success"
-                              @click="sellAssets()">
+                    <c-button
+                        status="success"
+                        @click="sellAssets()">
                         Confirm sell
                     </c-button>
                 </div>

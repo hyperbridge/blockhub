@@ -1,45 +1,53 @@
 <template>
-    <c-layout navigationKey="product"
-              :showRightPanel="false"
-              navigationTitle="GAME OVERVIEW"
-              :breadcrumbLinks="breadcrumbLinks"
-              :showBreadcrumbs="!editing"
-              class="product-single-page">
-        <c-loading v-if="!product && loading"
-                   :enabled="loading"
-                   size="lg" />
+    <c-layout
+        navigationKey="product"
+        :showRightPanel="false"
+        navigationTitle="GAME OVERVIEW"
+        :breadcrumbLinks="breadcrumbLinks"
+        :showBreadcrumbs="!editing"
+        class="product-single-page">
+        <c-loading
+            v-if="!product && loading"
+            :enabled="loading"
+            size="lg" />
 
-        <div v-else-if="!product"
-             class="row">
+        <div
+            v-else-if="!product"
+            class="row">
             <div class="col-12">
                 Product not found
             </div>
         </div>
 
-        <div v-else
-             class="row">
+        <div
+            v-else
+            class="row">
             <div class="col-12 col-md-12">
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <div class="editor-container">
-                            <div v-if="editing"
-                                 class="editor">
-                                <button v-if="!activeElement['name']"
-                                        class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                        @click="activateElement('name')">
+                            <div
+                                v-if="editing"
+                                class="editor">
+                                <button
+                                    v-if="!activeElement['name']"
+                                    class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                    @click="activateElement('name')">
                                     Change
                                     Product Name <span class="fa fa-edit" />
                                 </button>
 
-                                <div v-if="activeElement['name']"
-                                     class="form-group">
+                                <div
+                                    v-if="activeElement['name']"
+                                    class="form-group">
                                     <div class="form-control-element form-control-element--right">
-                                        <input ref="name"
-                                               v-model="product.name"
-                                               name="name"
-                                               type="text"
-                                               class="form-control"
-                                               placeholder="Product name...">
+                                        <input
+                                            ref="name"
+                                            v-model="product.name"
+                                            name="name"
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Product name...">
                                         <div
                                             class="form-control-element__box form-control-element__box--pretify bg-secondary"
                                             @click="deactivateElement('name')">
@@ -54,8 +62,9 @@
                         </div>
 
                         <div class="editor-container">
-                            <div v-if="editing"
-                                 class="">
+                            <div
+                                v-if="editing"
+                                class="">
                                 <div class="form-group tag-editor">
                                     <c-multiselect
                                         v-model="product.developerTags"
@@ -70,29 +79,34 @@
                                     <!--</select>-->
                                 </div>
                             </div>
-                            <c-tags v-if="!editing"
-                                    :tags="product.developerTags" />
+                            <c-tags
+                                v-if="!editing"
+                                :tags="product.developerTags" />
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
-                        <div v-if="editing"
-                             class="editor">
-                            <button v-if="!activeElement['backgroundImage']"
-                                    class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                    @click="activateElement('backgroundImage')">
+                        <div
+                            v-if="editing"
+                            class="editor">
+                            <button
+                                v-if="!activeElement['backgroundImage']"
+                                class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                @click="activateElement('backgroundImage')">
                                 Change Background Image <span
                                     class="fa fa-edit" />
                             </button>
 
-                            <div v-if="activeElement['backgroundImage']"
-                                 class="form-group">
+                            <div
+                                v-if="activeElement['backgroundImage']"
+                                class="form-group">
                                 <div class="form-control-element form-control-element--right">
-                                    <input ref="backgroundImage"
-                                           v-model="product.images.header"
-                                           name="backgroundImage"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="Background image URL...">
+                                    <input
+                                        ref="backgroundImage"
+                                        v-model="product.images.header"
+                                        name="backgroundImage"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Background image URL...">
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary"
                                         @click="deactivateElement('backgroundImage')">
@@ -106,64 +120,77 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <c-button status="dark"
-                                  class="w-100 d-flex d-md-none justify-content-center my-4"
-                                  size="lg"
-                                  data-toggle="collapse"
-                                  data-target="#product_nav"
-                                  aria-expanded="false"
-                                  aria-controls="product_nav">
+                        <c-button
+                            status="dark"
+                            class="w-100 d-flex d-md-none justify-content-center my-4"
+                            size="lg"
+                            data-toggle="collapse"
+                            data-target="#product_nav"
+                            aria-expanded="false"
+                            aria-controls="product_nav">
                             Menu
                         </c-button>
-                        <div id="product_nav"
-                             class="collapse show product_nav">
+                        <div
+                            id="product_nav"
+                            class="collapse show product_nav">
                             <ul class="nav nav-tabs margin-bottom-30 justify-content-between">
-                                <li class="nav-item"
+                                <li
+                                    class="nav-item"
                                     @click="section='overview'">
-                                    <router-link :to="`/product/${id}`"
-                                                 class="nav-link"
-                                                 :class="{ 'active': section === 'overview' }">
+                                    <router-link
+                                        :to="`/product/${id}`"
+                                        class="nav-link"
+                                        :class="{ 'active': section === 'overview' }">
                                         Overview
                                     </router-link>
                                 </li>
-                                <li v-darklaunch="'COMMUNITY'"
+                                <li
+                                    v-darklaunch="'COMMUNITY'"
                                     class="nav-item"
                                     @click="section='community'">
-                                    <router-link :to="`/product/${id}/community`"
-                                                 class="nav-link"
-                                                 :class="{ 'active': section === 'community' }">
+                                    <router-link
+                                        :to="`/product/${id}/community`"
+                                        class="nav-link"
+                                        :class="{ 'active': section === 'community' }">
                                         Community
                                     </router-link>
                                 </li>
-                                <li class="nav-item"
+                                <li
+                                    class="nav-item"
                                     @click="section='projects'">
-                                    <router-link :to="`/product/${id}/projects`"
-                                                 class="nav-link"
-                                                 :class="{ 'active': section === 'projects' }">
+                                    <router-link
+                                        :to="`/product/${id}/projects`"
+                                        class="nav-link"
+                                        :class="{ 'active': section === 'projects' }">
                                         Crowdfunding
                                     </router-link>
                                 </li>
-                                <li class="nav-item"
+                                <li
+                                    class="nav-item"
                                     @click="section='assets'">
-                                    <router-link :to="`/product/${id}/assets`"
-                                                 class="nav-link"
-                                                 :class="{ 'active': section === 'assets' }">
+                                    <router-link
+                                        :to="`/product/${id}/assets`"
+                                        class="nav-link"
+                                        :class="{ 'active': section === 'assets' }">
                                         Inventory
                                     </router-link>
                                 </li>
-                                <li v-if="editing"
+                                <li
+                                    v-if="editing"
                                     class="nav-item">
-                                    <a class="nav-link"
-                                       :class="{ 'active': section === 'configure' }"
-                                       @click="section='configure'">Configure</a>
+                                    <a
+                                        class="nav-link"
+                                        :class="{ 'active': section === 'configure' }"
+                                        @click="section='configure'">Configure</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
 
-                    <div v-if="section === 'configure'"
-                         class="col-12"
-                         :editing="editing">
+                    <div
+                        v-if="section === 'configure'"
+                        class="col-12"
+                        :editing="editing">
                         <c-block title="Product">
                             <div class="row">
                                 <div class="col-6">
@@ -172,10 +199,11 @@
                                             <label>Price</label>
                                         </label>
                                         <div class="col-sm-9">
-                                            <input v-model="product.price"
-                                                   type="text"
-                                                   class="form-control"
-                                                   placeholder="Example: 10">
+                                            <input
+                                                v-model="product.price"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Example: 10">
                                             <span class="form-text" />
                                         </div>
                                     </div>
@@ -184,10 +212,11 @@
                                             <label>Old Price</label>
                                         </label>
                                         <div class="col-sm-9">
-                                            <input v-model="product.oldPrice"
-                                                   type="text"
-                                                   class="form-control"
-                                                   placeholder="Example: 20">
+                                            <input
+                                                v-model="product.oldPrice"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Example: 20">
                                             <span class="form-text" />
                                         </div>
                                     </div>
@@ -197,10 +226,11 @@
                                             <label>Genre</label>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input v-model="product.genre"
-                                                   type="text"
-                                                   class="form-control"
-                                                   placeholder="Example: RPG">
+                                            <input
+                                                v-model="product.genre"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Example: RPG">
                                             <span class="form-text" />
                                         </div>
                                     </div>
@@ -209,10 +239,11 @@
                                             <label>Release Date</label>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input v-model="product.releaseDate"
-                                                   type="text"
-                                                   class="form-control"
-                                                   placeholder="Example: 12/30/2020">
+                                            <input
+                                                v-model="product.releaseDate"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Example: 12/30/2020">
                                             <span class="form-text" />
                                         </div>
                                     </div>
@@ -221,10 +252,11 @@
                                             <label>Publisher</label>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input v-model="product.publisher"
-                                                   type="text"
-                                                   class="form-control"
-                                                   placeholder="Example: Actilizard Entertainment">
+                                            <input
+                                                v-model="product.publisher"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Example: Actilizard Entertainment">
                                             <span class="form-text" />
                                         </div>
                                     </div>
@@ -233,10 +265,11 @@
                                             <label>Developer</label>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input v-model="product.developer"
-                                                   type="text"
-                                                   class="form-control"
-                                                   placeholder="Example: Northcap Studios">
+                                            <input
+                                                v-model="product.developer"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Example: Northcap Studios">
                                             <span class="form-text" />
                                         </div>
                                     </div>
@@ -247,20 +280,25 @@
                     </div>
 
                     <div class="col-12">
-                        <transition name="page"
-                                    mode="out-in">
-                            <c-product-overview v-if="section === 'overview'"
-                                                :product="product"
-                                                :editing="editing" />
-                            <c-product-assets v-if="section === 'assets'"
-                                              :product="product"
-                                              :editing="editing" />
-                            <c-product-community v-if="section === 'community'"
-                                                 :product="product"
-                                                 :editing="editing" />
-                            <c-product-projects v-if="section === 'projects'"
-                                                :product="product"
-                                                :editing="editing" />
+                        <transition
+                            name="page"
+                            mode="out-in">
+                            <c-product-overview
+                                v-if="section === 'overview'"
+                                :product="product"
+                                :editing="editing" />
+                            <c-product-assets
+                                v-if="section === 'assets'"
+                                :product="product"
+                                :editing="editing" />
+                            <c-product-community
+                                v-if="section === 'community'"
+                                :product="product"
+                                :editing="editing" />
+                            <c-product-projects
+                                v-if="section === 'projects'"
+                                :product="product"
+                                :editing="editing" />
                         </transition>
                     </div>
                 </div>
@@ -268,12 +306,14 @@
         </div>
 
 
-        <c-custom-modal v-if="firstProduct && editing && !$store.state.application.settings.client.hide_product_intro_modal && false"
-                        title="Help Center"
-                        @close="closeModal">
-            <div slot="modalBody"
-                 class="help-modal__content"
-                 style="max-width: 500px">
+        <c-custom-modal
+            v-if="firstProduct && editing && !$store.state.application.settings.client.hide_product_intro_modal && false"
+            title="Help Center"
+            @close="closeModal">
+            <div
+                slot="modalBody"
+                class="help-modal__content"
+                style="max-width: 500px">
                 <h4 class="h2 mb-3">
                     Creating your first product?
                 </h4>
@@ -286,16 +326,19 @@
                     Mauris ac facilisis metus. Proin venenatis neque posuere urna sagittis ultricies.
                 </p>
                 <p>
-                    <c-button to="/help"
-                              target="_blank">
+                    <c-button
+                        to="/help"
+                        target="_blank">
                         Learn more about creating products
                     </c-button>
                 </p>
             </div>
-            <div slot="modalFooter"
-                 class="text-right w-100">
-                <c-button size="md"
-                          @click="closeModal">
+            <div
+                slot="modalFooter"
+                class="text-right w-100">
+                <c-button
+                    size="md"
+                    @click="closeModal">
                     Got it
                 </c-button>
             </div>
@@ -305,9 +348,10 @@
         <c-basic-popup
             :activated="$store.state.application.activeModal === 'sync-blockchain'"
             @close="$store.commit('application/activateModal', null)">
-            <div slot="header"
-                 class="h4"
-                 style="text-align: left">
+            <div
+                slot="header"
+                class="h4"
+                style="text-align: left">
                 Sync Blockchain
             </div>
             <template slot="body">
@@ -317,25 +361,29 @@
                     </h3>
                     Contract Address: 0xasdadas<br>
 
-                    <c-button class="c-button--lg outline-white margin-top-20 margin-auto"
-                              @click="startSync">
+                    <c-button
+                        class="c-button--lg outline-white margin-top-20 margin-auto"
+                        @click="startSync">
                         Start
                     </c-button>
                 </div>
                 <div v-if="syncStep === 2" />
                 <br>
-                <div v-if="syncing"
-                     class="padding-40 loading-process"
-                     style="position: relative">
+                <div
+                    v-if="syncing"
+                    class="padding-40 loading-process"
+                    style="position: relative">
                     <div class="loading loading--w-spinner">
                         <div><div class="loading-spinner" /></div>
                     </div>
                 </div>
             </template>
-            <p slot="footer"
-               class="margin-top-20">
-                <c-button status="dark"
-                          to="/help">
+            <p
+                slot="footer"
+                class="margin-top-20">
+                <c-button
+                    status="dark"
+                    to="/help">
                     Need help? Check the Help Center
                 </c-button>
             </p>
@@ -344,9 +392,10 @@
         <c-basic-popup
             :activated="$store.state.application.activeModal === 'import-product'"
             @close="$store.commit('application/activateModal', null)">
-            <div slot="header"
-                 class="h4"
-                 style="text-align: left">
+            <div
+                slot="header"
+                class="h4"
+                style="text-align: left">
                 Import Product
             </div>
             <template slot="body">
@@ -393,32 +442,37 @@
                     <br>
                     <div class="form-group row">
                         <div class="col-12">
-                            <input ref="importUrl"
-                                   class="form-control"
-                                   type="text"
-                                   value="https://store.steampowered.com/app/441830/I_am_Setsuna/">
+                            <input
+                                ref="importUrl"
+                                class="form-control"
+                                type="text"
+                                value="https://store.steampowered.com/app/441830/I_am_Setsuna/">
                             <span class="form-text">Example: https://store.steampowered.com/app/441830/I_am_Setsuna/</span>
                         </div>
                     </div>
 
-                    <c-button class="c-button--lg outline-white margin-top-20 margin-auto"
-                              @click="startImport">
+                    <c-button
+                        class="c-button--lg outline-white margin-top-20 margin-auto"
+                        @click="startImport">
                         GO
                     </c-button>
                 </div>
                 <br>
-                <div v-if="importing"
-                     class="padding-40 loading-process"
-                     style="position: relative">
+                <div
+                    v-if="importing"
+                    class="padding-40 loading-process"
+                    style="position: relative">
                     <div class="loading loading--w-spinner">
                         <div><div class="loading-spinner" /></div>
                     </div>
                 </div>
             </template>
-            <p slot="footer"
-               class="margin-top-20">
-                <c-button status="dark"
-                          to="/help">
+            <p
+                slot="footer"
+                class="margin-top-20">
+                <c-button
+                    status="dark"
+                    to="/help">
                     Need help? Check the Help Center
                 </c-button>
             </p>

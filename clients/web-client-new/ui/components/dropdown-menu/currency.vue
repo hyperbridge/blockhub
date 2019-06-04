@@ -1,32 +1,40 @@
 <template>
     <div class="currency-dropdown">
-        <div class="currency-dropdown__current"
-             @click="toggleList">
-            <c-country-flag v-if="currentCurrency.country"
-                            :country="currentCurrency.country"
-                            size="small" />
-            <c-crypto-icon v-else
-                           :name="currentCurrency.code" />
+        <div
+            class="currency-dropdown__current"
+            @click="toggleList">
+            <c-country-flag
+                v-if="currentCurrency.country"
+                :country="currentCurrency.country"
+                size="small" />
+            <c-crypto-icon
+                v-else
+                :name="currentCurrency.code" />
             <span class="currency-name">
                 {{ currentCurrency.code }}
             </span>
-            <i class="fas "
-               :class="showList ? 'fa-angle-up' : 'fa-angle-down' " />
+            <i
+                class="fas "
+                :class="showList ? 'fa-angle-up' : 'fa-angle-down' " />
         </div>
         <transition name="slide-in-top">
-            <div v-if="showList"
-                 v-click-outside.bool="showList"
-                 class="currency-dropdown__list">
+            <div
+                v-if="showList"
+                v-click-outside.bool="showList"
+                class="currency-dropdown__list">
                 <ul :class="{'d-block' : showList}">
-                    <li v-for="(currency, index) in currencies"
+                    <li
+                        v-for="(currency, index) in currencies"
                         :key="index"
                         class="currency-dropdown__list-item"
                         @click="changeCurrency(currency)">
-                        <c-country-flag v-if="currency.country"
-                                        :country="currency.country"
-                                        size="small" />
-                        <c-crypto-icon v-else
-                                       :name="currency.code" />
+                        <c-country-flag
+                            v-if="currency.country"
+                            :country="currency.country"
+                            size="small" />
+                        <c-crypto-icon
+                            v-else
+                            :name="currency.code" />
                         <span class="currency-name">
                             {{ currency.code }}
                         </span>

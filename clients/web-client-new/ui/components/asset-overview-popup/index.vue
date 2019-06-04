@@ -19,8 +19,9 @@
         </div>
         <div class="asset-overview-popup__action">
             <div class="button-line d-flex w-100 justify-content-between">
-                <c-button status="danger"
-                          iconHide>
+                <c-button
+                    status="danger"
+                    iconHide>
                     <c-icon name="trash-alt" />
                 </c-button>
                 <div class="text-right">
@@ -44,9 +45,10 @@
         </div>
         <div class="asset-overview-popup__info-list">
             <div class="metadata">
-                <c-heading-bar name="Game Metadata"
-                               :showArrows="false"
-                               :showBackground="false" />
+                <c-heading-bar
+                    name="Game Metadata"
+                    :showArrows="false"
+                    :showBackground="false" />
                 <div class="metadata__table padding-bottom-10">
                     <div
                         v-for="(value, prop, index) in asset.metadata"
@@ -57,9 +59,11 @@
                             {{ prop | space | upperFirstChar }}
                         </div>
                         <div class="item-description">
-                            <ul v-if="typeof value === 'object'"
+                            <ul
+                                v-if="typeof value === 'object'"
                                 class="margin-0">
-                                <li v-for="(value, prop, index) in value"
+                                <li
+                                    v-for="(value, prop, index) in value"
                                     :key="index">
                                     {{ prop | space | upperFirstChar }}: {{ value }}
                                 </li>

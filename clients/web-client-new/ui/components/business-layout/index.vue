@@ -1,28 +1,35 @@
 <template>
     <!-- PAGE WRAPPER -->
-    <div id="business-app"
-         class="page page--w-header page--w-container">
+    <div
+        id="business-app"
+        class="page page--w-header page--w-container">
         <transition name="slideDown">
-            <div class="page-top-bar draggable"
-                 :class="{ 'invert' : darkMode }">
-                <c-button status="none"
-                          class="logo-holder undraggable"
-                          to="/">
-                    <c-img v-if="darkMode"
-                           src="/img/logo-white.svg"
-                           alt="Logo" />
-                    <c-img v-else
-                           src="/img/logo.svg"
-                           alt="Logo"
-                           style="height: 90%; margin-top: 2%" />
+            <div
+                class="page-top-bar draggable"
+                :class="{ 'invert' : darkMode }">
+                <c-button
+                    status="none"
+                    class="logo-holder undraggable"
+                    to="/">
+                    <c-img
+                        v-if="darkMode"
+                        src="/img/logo-white.svg"
+                        alt="Logo" />
+                    <c-img
+                        v-else
+                        src="/img/logo.svg"
+                        alt="Logo"
+                        style="height: 90%; margin-top: 2%" />
                 </c-button>
-                <router-link to="/business"
-                             class="h2 ml-4 mb-0 pl-4 text-uppercase border-left">
+                <router-link
+                    to="/business"
+                    class="h2 ml-4 mb-0 pl-4 text-uppercase border-left">
                     Business Manager
                 </router-link>
-                <div class="page-top-bar__profile mb-0 float-right h5"
-                     style="margin-left: auto"
-                     @click="$store.commit('application/showProfileChooser', true)">
+                <div
+                    class="page-top-bar__profile mb-0 float-right h5"
+                    style="margin-left: auto"
+                    @click="$store.commit('application/showProfileChooser', true)">
                     <div class="page-top-bar__profile-avatar">
                         <c-img src="https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png" />
                     </div>
@@ -34,19 +41,22 @@
         </transition>
 
         <!-- PAGE LEFT PANEL -->
-        <transition name="slideDown"
-                    no-ssr>
-            <sidebar-menu width="250px"
-                          :menu="menu"
-                          :class="{ 'light-v' : !darkMode }"
-                          @collapse="minimized = !minimized" />
+        <transition
+            name="slideDown"
+            no-ssr>
+            <sidebar-menu
+                width="250px"
+                :menu="menu"
+                :class="{ 'light-v' : !darkMode }"
+                @collapse="minimized = !minimized" />
         </transition>
 
         <!-- PAGE CONTENT -->
         <transition name="fade">
-            <div id="content"
-                 class="content"
-                 :class="{ 'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel, 'invert' : darkMode, 'is-minimized' : minimized }">
+            <div
+                id="content"
+                class="content"
+                :class="{ 'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel, 'invert' : darkMode, 'is-minimized' : minimized }">
                 <!-- PAGE HEADING -->
                 <div class="page-heading">
                     <div class="page-heading__container">
@@ -60,16 +70,20 @@
                         </div>
                     </div>
 
-                    <nav aria-label="breadcrumb"
-                         role="navigation">
-                        <ul v-if="breadcrumbLinksData.length"
+                    <nav
+                        aria-label="breadcrumb"
+                        role="navigation">
+                        <ul
+                            v-if="breadcrumbLinksData.length"
                             class="breadcrumb">
-                            <li v-for="(link, index) in breadcrumbLinksData"
+                            <li
+                                v-for="(link, index) in breadcrumbLinksData"
                                 :key="index"
                                 class="breadcrumb-item"
                                 :class="{ 'active': index == breadcrumbLinksData.length-1 }">
-                                <router-link v-if="link.to"
-                                             :to="link.to">
+                                <router-link
+                                    v-if="link.to"
+                                    :to="link.to">
                                     {{ link.title }}
                                 </router-link>
                                 <template v-else>
@@ -85,8 +99,9 @@
                         <slot />
                     </div>
                 </div>
-                <div v-if="$slots['menu']"
-                     class="content__bottom-menu">
+                <div
+                    v-if="$slots['menu']"
+                    class="content__bottom-menu">
                     <slot name="menu" />
                 </div>
             </div>
@@ -94,18 +109,20 @@
 
         <!-- PAGE RIGHT PANEL -->
         <transition name="slideRight">
-            <div v-if="showRightPanel"
-                 id="page-sidepanel"
-                 class="page-sidepanel text-right"
-                 :class="{ 'invert' : darkMode }">
+            <div
+                v-if="showRightPanel"
+                id="page-sidepanel"
+                class="page-sidepanel text-right"
+                :class="{ 'invert' : darkMode }">
                 <div class="page-sidepanel__content">
                     <slot name="right" />
                 </div>
             </div>
         </transition>
 
-        <c-profile-chooser v-if="$store.state.application.profileChooser && $store.state.application.signedIn"
-                           :darkMode="false" />
+        <c-profile-chooser
+            v-if="$store.state.application.profileChooser && $store.state.application.signedIn"
+            :darkMode="false" />
     </div>
 </template>
 

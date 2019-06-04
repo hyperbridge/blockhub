@@ -1,6 +1,7 @@
 <template>
-    <c-layout :showLeftPanel="false"
-              :showRightPanel="false">
+    <c-layout
+        :showLeftPanel="false"
+        :showRightPanel="false">
         <div class="row">
             <div class="col-12 mb-4">
                 <h2>Verification Assistant</h2>
@@ -13,20 +14,22 @@
                             URL
                         </span>
                     </div>
-                    <input ref="input"
-                           v-model="sheetUrl"
-                           type="text"
-                           class="form-control"
-                           placeholder="Enter Google Sheet URL...">
+                    <input
+                        ref="input"
+                        v-model="sheetUrl"
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Google Sheet URL...">
                     <c-button @click="fetchData">
                         Update
                     </c-button>
                 </div>
                 <div>
-                    <div v-for="(entry, index) in entries"
-                         v-if="entry.gsx$approved.$t !== 'YES'"
-                         :key="index"
-                         class="col-md-4 entry">
+                    <div
+                        v-for="(entry, index) in entries"
+                        v-if="entry.gsx$approved.$t !== 'YES'"
+                        :key="index"
+                        class="col-md-4 entry">
                         <div class="content">
                             <p>{{ entry.gsx$address.$t }} : {{ entry.gsx$amount.$t }}</p>
                             <c-button @click="whitelist(entry.gsx$address.$t)">

@@ -11,8 +11,9 @@
                     condimentum iaculis.
                 </div>
             </div>
-            <div v-for="stream in streams"
-                 class="col-12 col-md-6 col-lg-4">
+            <div
+                v-for="stream in streams"
+                class="col-12 col-md-6 col-lg-4">
                 <c-stream-item
                     :streamName="stream.userName"
                     :streamAvatar="stream.userAvatar"
@@ -22,9 +23,10 @@
                     :streamViews="stream.views" />
             </div>
             <div class="col-12 mt-5">
-                <c-stream-carousel title="HOT streams"
-                                   :showBackground="false"
-                                   :streams="streams" />
+                <c-stream-carousel
+                    title="HOT streams"
+                    :showBackground="false"
+                    :streams="streams" />
             </div>
         </div>
     </c-layout>

@@ -4,8 +4,9 @@
             <c-img :src="currentItem.src" />
         </div>
         <div class="landing-benefactor__list">
-            <div v-if="showList"
-                 class="landing-benefactor__includes-list">
+            <div
+                v-if="showList"
+                class="landing-benefactor__includes-list">
                 <h3 class="font-weight-bold text-uppercase mb-4 text-center text-white">
                     EXTRA RARE ITEM LIST
                 </h3>
@@ -15,26 +16,31 @@
                     </li>
                 </ul>
             </div>
-            <div v-for="(item, index) in items"
-                 v-if="items"
-                 :key="index"
-                 class="landing-benefactor__list-item"
-                 @mouseover="changeCurrent(item)">
-                <div class="img"
-                     :style="{'background-image' : 'url(' + item.src + ')'}" />
-                <c-landing-block-title fontSize="18"
-                                       class="text-uppercase">
+            <div
+                v-for="(item, index) in items"
+                v-if="items"
+                :key="index"
+                class="landing-benefactor__list-item"
+                @mouseover="changeCurrent(item)">
+                <div
+                    class="img"
+                    :style="{'background-image' : 'url(' + item.src + ')'}" />
+                <c-landing-block-title
+                    fontSize="18"
+                    class="text-uppercase">
                     {{ item.name }}
                 </c-landing-block-title>
-                <div v-if="item.includes_list"
-                     class="landing-benefactor__more-link"
-                     @mouseover="toggleList(item.includes_list)"
-                     @mouseleave="showList = false">
+                <div
+                    v-if="item.includes_list"
+                    class="landing-benefactor__more-link"
+                    @mouseover="toggleList(item.includes_list)"
+                    @mouseleave="showList = false">
                     Whats include?
                 </div>
             </div>
-            <div v-else
-                 class="w-100 text-center">
+            <div
+                v-else
+                class="w-100 text-center">
                 Nothing found here. Sorry!
             </div>
         </div>

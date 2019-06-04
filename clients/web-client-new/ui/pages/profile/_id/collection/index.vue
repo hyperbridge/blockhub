@@ -4,15 +4,17 @@
             <div class="col-12">
                 <c-block title="Collections">
                     <div class="collections-container">
-                        <div v-for="(item, index) in collections"
-                             v-if="index < 6"
-                             :key="index"
-                             class="collections-container__item">
+                        <div
+                            v-for="(item, index) in collections"
+                            v-if="index < 6"
+                            :key="index"
+                            class="collections-container__item">
                             <c-collection-item :item="item" />
                         </div>
                     </div>
-                    <c-pagination v-if="collections.length > 6"
-                                  :pages="8" />
+                    <c-pagination
+                        v-if="collections.length > 6"
+                        :pages="8" />
                 </c-block>
             </div>
         </div>

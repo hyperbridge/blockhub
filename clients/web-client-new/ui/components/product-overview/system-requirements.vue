@@ -1,18 +1,21 @@
 <template>
-    <c-block title="System Requirements"
-             :noGutter="true"
-             :bgGradient="true"
-             :onlyContentBg="true">
+    <c-block
+        title="System Requirements"
+        :noGutter="true"
+        :bgGradient="true"
+        :onlyContentBg="true">
         <template slot="heading-bar">
             <i class="fas fa-laptop title-icon" />
         </template>
-        <c-tabs-universal :tabNames="['Mac', 'Win', 'Linux']"
-                          :setActiveTab="activeTab">
+        <c-tabs-universal
+            :tabNames="['Mac', 'Win', 'Linux']"
+            :setActiveTab="activeTab">
             <c-tab-universal
                 v-for="(os, index) in ['Mac', 'Win', 'Linux']"
                 :key="index"
                 :tab_id="index + 1">
-                <ul v-if="platform(os)"
+                <ul
+                    v-if="platform(os)"
                     class="system-requirements__list">
                     <li
                         v-for="(value, property) in platform(os)"
@@ -20,15 +23,17 @@
                         :key="property"
                         class="system-requirements__list-item">
                         <strong>{{ property | reqProp }}</strong>
-                        <p v-if="property == 'os'"
-                           class="system-requirements__value">
+                        <p
+                            v-if="property == 'os'"
+                            class="system-requirements__value">
                             {{ value | upperFirstChar }}
                             <i
                                 class="fab"
                                 :class="`fa-${value == 'win' ? 'windows' : value == 'mac' ? 'apple' : 'linux'}`" />
                         </p>
-                        <p v-else
-                           class="system-requirements__value">
+                        <p
+                            v-else
+                            class="system-requirements__value">
                             {{ value | upperFirstChar }}
                         </p>
                     </li>

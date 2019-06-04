@@ -1,24 +1,28 @@
 <template>
-    <c-block title="Traded Assets"
-             :noGutter="true"
-             :bgGradient="true"
-             :onlyContentBg="true">
+    <c-block
+        title="Traded Assets"
+        :noGutter="true"
+        :bgGradient="true"
+        :onlyContentBg="true">
         <div v-if="items.length > 0">
             <div class="traded-assets__filter">
                 <slot name="filter" />
             </div>
             <ul class="traded-assets__list">
-                <li v-for="(item, index) in items"
+                <li
+                    v-for="(item, index) in items"
                     :key="index"
                     class="traded-assets__item">
-                    <c-button status="none"
-                              :to="`/asset/${item.id}`">
+                    <c-button
+                        status="none"
+                        :to="`/asset/${item.id}`">
                         <c-img :src="item.image_data" />
                     </c-button>
                 </li>
             </ul>
-            <c-button status="outline-white"
-                      :to="assetsPath">
+            <c-button
+                status="outline-white"
+                :to="assetsPath">
                 Go To Assets
             </c-button>
         </div>

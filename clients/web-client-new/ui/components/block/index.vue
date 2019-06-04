@@ -18,8 +18,9 @@
             </template>
         </c-heading-bar>
         <slot name="title" />
-        <div class="block__content"
-             :class="{'no-padding': noPadding }">
+        <div
+            class="block__content"
+            :class="{'no-padding': noPadding }">
             <slot />
         </div>
     </div>

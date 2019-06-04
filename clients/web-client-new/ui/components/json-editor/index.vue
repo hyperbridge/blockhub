@@ -1,6 +1,7 @@
 <template>
-    <c-json-view v-model="parsedData"
-                 :parsedData="parsedData" />
+    <c-json-view
+        v-model="parsedData"
+        :parsedData="parsedData" />
 </template>
 
 

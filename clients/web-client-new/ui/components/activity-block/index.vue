@@ -2,30 +2,34 @@
     <div class="activity-block">
         <div class="activity-block__head">
             <span>
-                <i class="fas "
-                   :class="[ 'fa-' + labelIcon]" />
+                <i
+                    class="fas "
+                    :class="[ 'fa-' + labelIcon]" />
                 <slot name="label" />
             </span>
             <slot name="title" />
         </div>
         <div class="activity-block__body align-items-center">
             <div>
-                <c-button status="second-info"
-                          size="md"
-                          class="mr-3"
-                          @click="$emit('install')">
+                <c-button
+                    status="second-info"
+                    size="md"
+                    class="mr-3"
+                    @click="$emit('install')">
                     Install BlockHub
                 </c-button>
-                <c-button status="second-info"
-                          size="md"
-                          class="mr-3"
-                          @click="$emit('play')">
+                <c-button
+                    status="second-info"
+                    size="md"
+                    class="mr-3"
+                    @click="$emit('play')">
                     Play Now
                 </c-button>
-                <c-button status="second-info"
-                          size="md"
-                          class="mr-3"
-                          @click="$emit('help')">
+                <c-button
+                    status="second-info"
+                    size="md"
+                    class="mr-3"
+                    @click="$emit('help')">
                     Get Help
                 </c-button>
             </div>
@@ -34,22 +38,25 @@
                     <slot name="description" />
                 </div>
                 <div class="d-flex justify-content-between">
-                    <c-button status="plain"
-                              size="sm"
-                              class="p-0"
-                              style="min-height: 20px; line-height: 14px">
+                    <c-button
+                        status="plain"
+                        size="sm"
+                        class="p-0"
+                        style="min-height: 20px; line-height: 14px">
                         View your stats
                     </c-button>
-                    <c-button status="plain"
-                              size="sm"
-                              class="p-0"
-                              style="min-height: 20px; line-height: 14px">
+                    <c-button
+                        status="plain"
+                        size="sm"
+                        class="p-0"
+                        style="min-height: 20px; line-height: 14px">
                         View global stats
                     </c-button>
                 </div>
             </div>
-            <div style="width: 240px"
-                 class="d-flex flex-column ml-auto">
+            <div
+                style="width: 240px"
+                class="d-flex flex-column ml-auto">
                 <div class="mb-1">
                     {{ earnedAchievements }} of {{ totalAchievements }}({{ getPercent }}%) achievements earned:
                 </div>

@@ -13,8 +13,9 @@
             </ul>
             <slot name="tabs-nav" />
         </div>
-        <div ref="tabs"
-             class="tabs-container">
+        <div
+            ref="tabs"
+            class="tabs-container">
             <slot :tabs="tabs" />
         </div>
     </div>

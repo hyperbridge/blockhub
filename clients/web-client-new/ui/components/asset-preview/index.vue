@@ -3,8 +3,9 @@
         <p class="asset-preview__product">
             {{ asset.productName }}
         </p>
-        <c-img class="asset-preview__image"
-               :src="asset.image" />
+        <c-img
+            class="asset-preview__image"
+            :src="asset.image" />
         <h4 class="asset-preview__name">
             {{ asset.name }}
         </h4>
@@ -13,7 +14,8 @@
         </p>
         <table class="asset-preview__price-table">
             <tbody>
-                <tr v-for="(price, priceKey) in asset.price"
+                <tr
+                    v-for="(price, priceKey) in asset.price"
                     :key="priceKey">
                     <td>{{ priceKey | upperFirstChar }}</td>
                     <td class="price-table__price">

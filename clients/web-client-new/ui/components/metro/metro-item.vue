@@ -1,8 +1,10 @@
 <template>
-    <div class="metro-item__wrapper"
-         :style="{ 'padding' : gutter + 'px', 'width' : width }">
-        <div class="metro-item"
-             :class="{ 'metro-item--full-img' : fullImage, 'metro-item--shadow' : shadow }">
+    <div
+        class="metro-item__wrapper"
+        :style="{ 'padding' : gutter + 'px', 'width' : width }">
+        <div
+            class="metro-item"
+            :class="{ 'metro-item--full-img' : fullImage, 'metro-item--shadow' : shadow }">
             <div class="metro-item__image">
                 <img :src="image">
             </div>

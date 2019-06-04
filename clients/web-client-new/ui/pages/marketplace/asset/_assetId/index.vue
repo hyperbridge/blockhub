@@ -1,16 +1,19 @@
 <template>
     <div>
-        <div v-if="asset"
-             class="asset__wrapper">
-            <c-img class="asset__background-img"
-                   :src="asset.image" />
+        <div
+            v-if="asset"
+            class="asset__wrapper">
+            <c-img
+                class="asset__background-img"
+                :src="asset.image" />
             <h1 class="asset__name">
                 {{ asset.name }}
             </h1>
 
             <div class="asset__details">
-                <c-img class="asset__img"
-                       :src="asset.image" />
+                <c-img
+                    class="asset__img"
+                    :src="asset.image" />
                 <ul class="details__list">
                     <li class="details__list-item">
                         <span class="details__title">Game:</span>

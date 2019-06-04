@@ -1,20 +1,23 @@
 <template>
     <span class="c-tooltips">
-        <span v-if="type == 'hover'"
-              @mouseover="showToolTip=true"
-              @mouseleave="showToolTip=false">{{ name }}</span>
-        <span v-if="type == 'click'"
-              @click="clickHandler">{{ name }}</span>
+        <span
+            v-if="type == 'hover'"
+            @mouseover="showToolTip=true"
+            @mouseleave="showToolTip=false">{{ name }}</span>
+        <span
+            v-if="type == 'click'"
+            @click="clickHandler">{{ name }}</span>
         <transition name="fade">
-            <div v-if="showToolTip"
-                 class="c-tooltips__content"
-                 :class="{
-                     'left-position' : position == 'left',
-                     'right-position' : position == 'right',
-                     'center-position' : position == 'center',
-                     'light-style' : lightStyle == true
-                 }"
-                 style="animation-duration: 0.25s">
+            <div
+                v-if="showToolTip"
+                class="c-tooltips__content"
+                :class="{
+                    'left-position' : position == 'left',
+                    'right-position' : position == 'right',
+                    'center-position' : position == 'center',
+                    'light-style' : lightStyle == true
+                }"
+                style="animation-duration: 0.25s">
                 <div class="c-tooltips__content-default">
                     <slot />
                 </div>

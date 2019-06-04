@@ -1,12 +1,14 @@
 <template>
-    <div class="stream-item"
-         :class="{'stream-item-bg': background}">
+    <div
+        class="stream-item"
+        :class="{'stream-item-bg': background}">
         <div class="stream-item__wrapper">
             <div class="stream-item__img">
                 <c-img :src="streamImg" />
                 <div class="stream-item__run-container">
-                    <router-link :to="streamLink + '/' + streamId"
-                                 class="stream-item__run-btn">
+                    <router-link
+                        :to="streamLink + '/' + streamId"
+                        class="stream-item__run-btn">
                         <i class="fas fa-play" />
                     </router-link>
                 </div>
@@ -20,8 +22,9 @@
                         {{ streamName }}
                     </div>
                     <div class="m-0 p-0 text-muted product-name">
-                        <a href="#"
-                           class="text-muted">
+                        <a
+                            href="#"
+                            class="text-muted">
                             {{ streamGame }}
                         </a>
                     </div>

@@ -1,25 +1,31 @@
 <template>
-    <c-layout navigationKey="project"
-              :showLeftPanel="false"
-              :showRightPanel="false"
-              :breadcrumbLinks="breadcrumbLinks"
-              class="project-single-page">
-        <div v-if="!project"
-             class="row">
+    <c-layout
+        navigationKey="project"
+        :showLeftPanel="false"
+        :showRightPanel="false"
+        :breadcrumbLinks="breadcrumbLinks"
+        class="project-single-page">
+        <div
+            v-if="!project"
+            class="row">
             <!-- <div class="col-12">
                 Project not found
             </div> -->
-            <c-loading :enabled="!project"
-                       size="lg" />
+            <c-loading
+                :enabled="!project"
+                size="lg" />
         </div>
-        <div v-if="project"
-             class="row">
+        <div
+            v-if="project"
+            class="row">
             <div class="col-12">
-                <div v-if="errors.length"
-                     class="errors">
+                <div
+                    v-if="errors.length"
+                    class="errors">
                     <strong>Please correct the following error(s):</strong>
                     <ul>
-                        <li v-for="error in errors"
+                        <li
+                            v-for="error in errors"
                             :key="error">
                             {{ error }}
                         </li>
@@ -29,27 +35,32 @@
                 <div class="row justify-content-between">
                     <div class="col-12 col-md-4 text-center text-md-left">
                         <div class="editor-container">
-                            <div v-if="editing"
-                                 class="editor">
-                                <button v-if="!activeElement['name']"
-                                        class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                        @click="activateElement('name')">
+                            <div
+                                v-if="editing"
+                                class="editor">
+                                <button
+                                    v-if="!activeElement['name']"
+                                    class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                    @click="activateElement('name')">
                                     Change
                                     Project Name <span class="fa fa-edit" />
                                 </button>
 
-                                <div v-if="activeElement['name']"
-                                     class="form-control-element form-control-element--right">
-                                    <input ref="name"
-                                           v-model="project.name"
-                                           name="name"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="Project name...">
+                                <div
+                                    v-if="activeElement['name']"
+                                    class="form-control-element form-control-element--right">
+                                    <input
+                                        ref="name"
+                                        v-model="project.name"
+                                        name="name"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Project name...">
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                        <span class="fa fa-check"
-                                              @click="deactivateElement('name')" />
+                                        <span
+                                            class="fa fa-check"
+                                            @click="deactivateElement('name')" />
                                     </div>
                                 </div>
                             </div>
@@ -58,95 +69,111 @@
                             </h1>
                         </div>
                         <div class="editor-container">
-                            <div v-if="editing"
-                                 class="editor">
-                                <button v-if="!activeElement['tags']"
-                                        class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                        style="margin-bottom: 20px"
-                                        @click="activateElement('tags')">
+                            <div
+                                v-if="editing"
+                                class="editor">
+                                <button
+                                    v-if="!activeElement['tags']"
+                                    class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                    style="margin-bottom: 20px"
+                                    @click="activateElement('tags')">
                                     Change
                                     Tags <span class="fa fa-edit" />
                                 </button>
-                                <div v-if="activeElement['tags']"
-                                     class="form-control-element tag-editor form-control-element--right">
+                                <div
+                                    v-if="activeElement['tags']"
+                                    class="form-control-element tag-editor form-control-element--right">
                                     <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
                                     <!--<option v-for="(tag, index) in authorTagOptions" :key="index"-->
                                     <!--:selected="project.tags.includes(tag)">{{ tag }}-->
                                     <!--</option>-->
                                     <!--</select>-->
 
-                                    <c-multiselect v-model="project.tags"
-                                                   class="dark-mode"
-                                                   :multiple="true"
-                                                   :taggable="true"
-                                                   :options="authorTagOptions" />
+                                    <c-multiselect
+                                        v-model="project.tags"
+                                        class="dark-mode"
+                                        :multiple="true"
+                                        :taggable="true"
+                                        :options="authorTagOptions" />
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary"
                                         style="">
-                                        <span class="fa fa-check"
-                                              @click="deactivateElement('tags')" />
+                                        <span
+                                            class="fa fa-check"
+                                            @click="deactivateElement('tags')" />
                                     </div>
                                 </div>
                             </div>
 
-                            <c-tags v-if="project.tags && (!editing || !activeElement['tags'])"
-                                    :tags="project.tags.map(t => t.value)" />
+                            <c-tags
+                                v-if="project.tags && (!editing || !activeElement['tags'])"
+                                :tags="project.tags.map(t => t.value)" />
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <c-badges :icons="project.meta.badges || []" />
                     </div>
                     <div class="col-12 col-md-4">
-                        <div v-if="editing"
-                             class="editor text-right"
-                             style="margin-bottom: 30px">
-                            <button v-if="!activeElement['backgroundImage']"
-                                    class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                    @click="activateElement('backgroundImage')">
+                        <div
+                            v-if="editing"
+                            class="editor text-right"
+                            style="margin-bottom: 30px">
+                            <button
+                                v-if="!activeElement['backgroundImage']"
+                                class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                @click="activateElement('backgroundImage')">
                                 Change Background Image <span
                                     class="fa fa-edit" />
                             </button>
 
-                            <div v-if="activeElement['backgroundImage']"
-                                 class="">
+                            <div
+                                v-if="activeElement['backgroundImage']"
+                                class="">
                                 <div class="form-control-element form-control-element--right">
-                                    <input ref="backgroundImage"
-                                           v-model="project.images.header"
-                                           name="backgroundImage"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="Background image URL...">
+                                    <input
+                                        ref="backgroundImage"
+                                        v-model="project.images.header"
+                                        name="backgroundImage"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Background image URL...">
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                        <span class="fa fa-check"
-                                              @click="deactivateElement('backgroundImage')" />
+                                        <span
+                                            class="fa fa-check"
+                                            @click="deactivateElement('backgroundImage')" />
                                     </div>
                                 </div>
                             </div>
                             <label style="display: block">RECOMMENDED SIZE: 1120 x 524px</label>
                         </div>
-                        <div v-if="editing"
-                             class="editor text-right">
-                            <button v-if="!activeElement['storeImage']"
-                                    class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                    @click="activateElement('storeImage')">
+                        <div
+                            v-if="editing"
+                            class="editor text-right">
+                            <button
+                                v-if="!activeElement['storeImage']"
+                                class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                @click="activateElement('storeImage')">
                                 Change Project Image <span
                                     class="fa fa-edit" />
                             </button>
 
-                            <div v-if="activeElement['storeImage']"
-                                 class="">
+                            <div
+                                v-if="activeElement['storeImage']"
+                                class="">
                                 <div class="form-control-element form-control-element--right">
-                                    <input ref="storeImage"
-                                           v-model="project.images.header"
-                                           name="storeImage"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="Background image URL...">
+                                    <input
+                                        ref="storeImage"
+                                        v-model="project.images.header"
+                                        name="storeImage"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Background image URL...">
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                        <span class="fa fa-check"
-                                              @click="deactivateElement('storeImage')" />
+                                        <span
+                                            class="fa fa-check"
+                                            @click="deactivateElement('storeImage')" />
                                     </div>
                                 </div>
                             </div>
@@ -154,79 +181,94 @@
                         </div>
                     </div>
                 </div>
-                <c-button status="dark"
-                          class="w-100 d-flex d-md-none justify-content-center my-4"
-                          size="lg"
-                          data-toggle="collapse"
-                          data-target="#project_nav"
-                          aria-expanded="false"
-                          aria-controls="project_nav">
+                <c-button
+                    status="dark"
+                    class="w-100 d-flex d-md-none justify-content-center my-4"
+                    size="lg"
+                    data-toggle="collapse"
+                    data-target="#project_nav"
+                    aria-expanded="false"
+                    aria-controls="project_nav">
                     Menu
                 </c-button>
-                <div id="project_nav"
-                     class="collapse show project_nav">
+                <div
+                    id="project_nav"
+                    class="collapse show project_nav">
                     <ul class="nav nav-tabs margin-bottom-40">
-                        <li class="nav-item"
+                        <li
+                            class="nav-item"
                             @click="section='overview'">
-                            <router-link :to="`/project/${project.id}`"
-                                         class="nav-link"
-                                         :class="{ 'active': section === 'overview' }">
+                            <router-link
+                                :to="`/project/${project.id}`"
+                                class="nav-link"
+                                :class="{ 'active': section === 'overview' }">
                                 Overview
                             </router-link>
                         </li>
-                        <li v-darklaunch="'COMMUNITY'"
+                        <li
+                            v-darklaunch="'COMMUNITY'"
                             class="nav-item"
                             @click="section='community'">
-                            <router-link :to="`/project/${project.id}/community`"
-                                         class="nav-link"
-                                         :class="{ 'active': section === 'community' }">
+                            <router-link
+                                :to="`/project/${project.id}/community`"
+                                class="nav-link"
+                                :class="{ 'active': section === 'community' }">
                                 Community
                                 <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
                                     0
                                 </c-updates-count>
                             </router-link>
                         </li>
-                        <li v-if="project.bounties"
+                        <li
+                            v-if="project.bounties"
                             class="nav-item"
                             @click="section='bounties'">
-                            <router-link :to="`/project/${project.id}/bounties`"
-                                         class="nav-link"
-                                         :class="{ 'active': section === 'bounties' }">
+                            <router-link
+                                :to="`/project/${project.id}/bounties`"
+                                class="nav-link"
+                                :class="{ 'active': section === 'bounties' }">
                                 Bounties
                             </router-link>
                         </li>
-                        <li class="nav-item"
+                        <li
+                            class="nav-item"
                             @click="section='updates'">
-                            <router-link :to="`/project/${project.id}/updates`"
-                                         class="nav-link"
-                                         :class="{ 'active': section === 'updates' }">
+                            <router-link
+                                :to="`/project/${project.id}/updates`"
+                                class="nav-link"
+                                :class="{ 'active': section === 'updates' }">
                                 Updates
                                 <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
                                     0
                                 </c-updates-count>
                             </router-link>
                         </li>
-                        <li class="nav-item"
+                        <li
+                            class="nav-item"
                             @click="section='milestones'">
-                            <router-link :to="`/project/${project.id}/milestones`"
-                                         class="nav-link"
-                                         :class="{ 'active': section === 'milestones' }">
+                            <router-link
+                                :to="`/project/${project.id}/milestones`"
+                                class="nav-link"
+                                :class="{ 'active': section === 'milestones' }">
                                 Milestones
                             </router-link>
                         </li>
-                        <li v-if="editing"
+                        <li
+                            v-if="editing"
                             class="nav-item">
-                            <a class="nav-link"
-                               :class="{ 'active': section === 'configure' }"
-                               @click="section='configure'">Configure</a>
+                            <a
+                                class="nav-link"
+                                :class="{ 'active': section === 'configure' }"
+                                @click="section='configure'">Configure</a>
                         </li>
                     </ul>
                 </div>
 
-                <div v-if="section === 'configure'"
-                     id="configure"
-                     class="row"
-                     :editing="editing">
+                <div
+                    v-if="section === 'configure'"
+                    id="configure"
+                    class="row"
+                    :editing="editing">
                     <c-block title="Campaign">
                         <div class="row">
                             <div class="col-md-6">
@@ -235,9 +277,10 @@
                                         <label>Minimum Contribution Goal</label>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="text"
-                                               class="form-control"
-                                               placeholder="Example: 0">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Example: 0">
                                         <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
                                     </div>
                                 </div>
@@ -246,9 +289,10 @@
                                         <label>Maximum Contribution Goal</label>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="text"
-                                               class="form-control"
-                                               placeholder="Example: 1000">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Example: 1000">
                                         <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
                                     </div>
                                 </div>
@@ -258,9 +302,10 @@
                                         <label>Support Email</label>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="email"
-                                               class="form-control"
-                                               placeholder="Example: example@domain.com">
+                                        <input
+                                            type="email"
+                                            class="form-control"
+                                            placeholder="Example: example@domain.com">
                                         <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
                                     </div>
                                 </div>
@@ -273,9 +318,10 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">@</span>
                                             </div>
-                                            <input type="text"
-                                                   class="form-control"
-                                                   placeholder="Example: @example">
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Example: @example">
                                         </div>
                                     </div>
                                 </div>
@@ -284,9 +330,10 @@
                                         <label>Share Text</label>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="text"
-                                               class="form-control"
-                                               placeholder="Example: Join our crowdfund on BlockHub today!">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Example: Join our crowdfund on BlockHub today!">
                                         <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
                                     </div>
                                 </div>
@@ -294,10 +341,11 @@
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="switch switch-sm col-sm-1">
-                                        <input type="checkbox"
-                                               name="switch_8"
-                                               checked=""
-                                               value="0">
+                                        <input
+                                            type="checkbox"
+                                            name="switch_8"
+                                            checked=""
+                                            value="0">
                                         <span />
                                     </label>
                                     <div class="col-sm-11">
@@ -307,10 +355,11 @@
                                 </div>
                                 <div class="form-group row">
                                     <label class="switch switch-sm col-sm-1">
-                                        <input type="checkbox"
-                                               name="switch_8"
-                                               checked=""
-                                               value="0">
+                                        <input
+                                            type="checkbox"
+                                            name="switch_8"
+                                            checked=""
+                                            value="0">
                                         <span />
                                     </label>
                                     <div class="col-sm-11">
@@ -320,10 +369,11 @@
                                 </div>
                                 <div class="form-group row">
                                     <label class="switch switch-sm col-sm-1">
-                                        <input type="checkbox"
-                                               name="switch_8"
-                                               checked=""
-                                               value="0">
+                                        <input
+                                            type="checkbox"
+                                            name="switch_8"
+                                            checked=""
+                                            value="0">
                                         <span />
                                     </label>
                                     <div class="col-sm-11">
@@ -333,10 +383,11 @@
                                 </div>
                                 <div class="form-group row">
                                     <label class="switch switch-sm col-sm-1">
-                                        <input type="checkbox"
-                                               name="switch_8"
-                                               checked=""
-                                               value="0">
+                                        <input
+                                            type="checkbox"
+                                            name="switch_8"
+                                            checked=""
+                                            value="0">
                                         <span />
                                     </label>
                                     <div class="col-sm-11">
@@ -347,20 +398,22 @@
                                 <div class="form-group row">
                                     <label class="switch switch-sm col-sm-1" />
                                     <div class="col-sm-11">
-                                        <input id="ise_default"
-                                               type="text"
-                                               name="ise_default"
-                                               value="">
+                                        <input
+                                            id="ise_default"
+                                            type="text"
+                                            name="ise_default"
+                                            value="">
                                         <label>Contribution Period</label>
                                         <span class="form-text">Projects with Curation Enabled will allow the community to curate the project and earn reputation for their actions.</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="switch switch-sm col-sm-1">
-                                        <input type="checkbox"
-                                               name="switch_8"
-                                               checked=""
-                                               value="0">
+                                        <input
+                                            type="checkbox"
+                                            name="switch_8"
+                                            checked=""
+                                            value="0">
                                         <span />
                                     </label>
                                     <div class="col-sm-11">
@@ -371,8 +424,9 @@
                             </div>
                         </div>
 
-                        <div v-darklaunch="'GOVERNANCE'"
-                             class="row">
+                        <div
+                            v-darklaunch="'GOVERNANCE'"
+                            class="row">
                             <div class="col-12">
                                 Choose your governance system
                             </div>
@@ -385,29 +439,37 @@
             </div>
 
             <div id="overview">
-                <transition name="page"
-                            mode="out-in">
-                    <c-project-overview v-if="section === 'overview'"
-                                        :project="project"
-                                        :editing="editing" />
-                    <c-project-community v-if="section === 'community'"
-                                         :project="project"
-                                         :editing="editing" />
-                    <c-project-bounties v-if="section === 'bounties'"
-                                        :project="project"
-                                        :editing="editing" />
-                    <c-project-contributors v-if="section === 'contributors'"
-                                            :project="project"
-                                            :editing="editing" />
-                    <c-project-discussion v-if="section === 'discussion'"
-                                          :project="project"
-                                          :editing="editing" />
-                    <c-project-milestones v-if="section === 'milestones'"
-                                          :project="project"
-                                          :editing="editing" />
-                    <c-project-updates v-if="section === 'updates'"
-                                       :project="project"
-                                       :editing="editing" />
+                <transition
+                    name="page"
+                    mode="out-in">
+                    <c-project-overview
+                        v-if="section === 'overview'"
+                        :project="project"
+                        :editing="editing" />
+                    <c-project-community
+                        v-if="section === 'community'"
+                        :project="project"
+                        :editing="editing" />
+                    <c-project-bounties
+                        v-if="section === 'bounties'"
+                        :project="project"
+                        :editing="editing" />
+                    <c-project-contributors
+                        v-if="section === 'contributors'"
+                        :project="project"
+                        :editing="editing" />
+                    <c-project-discussion
+                        v-if="section === 'discussion'"
+                        :project="project"
+                        :editing="editing" />
+                    <c-project-milestones
+                        v-if="section === 'milestones'"
+                        :project="project"
+                        :editing="editing" />
+                    <c-project-updates
+                        v-if="section === 'updates'"
+                        :project="project"
+                        :editing="editing" />
                 </transition>
             </div>
         </div>

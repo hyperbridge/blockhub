@@ -3,12 +3,13 @@
         <nav class="block-menu__header">
             <router-link
                 v-for="(link, index) in props.links"
-                class="block-menu__link"
                 :key="index"
-                :to="link.to"
-            >{{ link.title }}</router-link>
+                class="block-menu__link"
+                :to="link.to">
+                {{ link.title }}
+            </router-link>
         </nav>
-        <slot/>
+        <slot />
     </div>
 </template>
 

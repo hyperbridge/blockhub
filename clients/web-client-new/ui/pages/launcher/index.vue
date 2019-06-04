@@ -1,13 +1,15 @@
 <template>
-    <c-layout bgImage="https://www.numerama.com/content/uploads/2016/08/skyrim.jpeg"
-              :overlay="true"
-              overlayOpacity="0.3">
+    <c-layout
+        bgImage="https://www.numerama.com/content/uploads/2016/08/skyrim.jpeg"
+        :overlay="true"
+        overlayOpacity="0.3">
         <c-metro-grid class="w-100">
-            <c-metro-item v-for="(item, index) in items"
-                          :key="item.title"
-                          :image="item.image"
-                          width="25%"
-                          :fullImage=" index == 1 ? true : false">
+            <c-metro-item
+                v-for="(item, index) in items"
+                :key="item.title"
+                :image="item.image"
+                width="25%"
+                :fullImage=" index == 1 ? true : false">
                 <div class="h4 font-weight-bold">
                     {{ item.title }}
                 </div>

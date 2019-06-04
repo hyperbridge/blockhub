@@ -26,8 +26,9 @@
                     class="game-installer__input"
                     list="saved-paths">
                 <datalist id="saved-paths">
-                    <option v-for="(path, index) in savedPaths"
-                            :key="index">
+                    <option
+                        v-for="(path, index) in savedPaths"
+                        :key="index">
                         {{ path }}
                     </option>
                 </datalist>

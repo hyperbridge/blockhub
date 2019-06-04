@@ -8,26 +8,31 @@
                     <span id="walletNumber">{{ profile.address }}</span>
                 </div>
                 <div class="profile__action-group">
-                    <c-button status="info"
-                              icon="arrow-up"
-                              @click="showSendPopup">
+                    <c-button
+                        status="info"
+                        icon="arrow-up"
+                        @click="showSendPopup">
                         Send
                     </c-button>
-                    <c-button v-darklaunch="'SHARING'"
-                              status="share">
+                    <c-button
+                        v-darklaunch="'SHARING'"
+                        status="share">
                         Share
                     </c-button>
-                    <c-button v-darklaunch="'REPORTING'"
-                              status="danger">
+                    <c-button
+                        v-darklaunch="'REPORTING'"
+                        status="danger">
                         Report
                     </c-button>
                 </div>
             </div>
-            <div v-if="!signedIn && !$store.state.application.settings.client.hide_profile_signup"
-                 class="col-12">
+            <div
+                v-if="!signedIn && !$store.state.application.settings.client.hide_profile_signup"
+                class="col-12">
                 <div class="profile__user-notify">
-                    <c-button class="btn-close"
-                              @click="$store.commit('application/updateClientSettings', { key: 'hide_profile_signup', value: true })">
+                    <c-button
+                        class="btn-close"
+                        @click="$store.commit('application/updateClientSettings', { key: 'hide_profile_signup', value: true })">
                         <i class="fas fa-times" />
                     </c-button>
                     <h3>Create your BlockHub Profile</h3>
@@ -36,29 +41,33 @@
                         digital assets and micro-licensing. Sugn up for your own account and build
                         the future of gaming.
                     </p>
-                    <c-button status="success"
-                              size="lg"
-                              iconHide
-                              to="/download">
+                    <c-button
+                        status="success"
+                        size="lg"
+                        iconHide
+                        to="/download">
                         Sign Up
                     </c-button>
                 </div>
             </div>
             <div class="col-12 margin-top-40">
                 <div class="badges">
-                    <c-heading-bar name="Badges"
-                                   :showArrows="false"
-                                   :showBackground="false">
-                        <div slot="additional-action"
-                             class="additional-action margin-left-20">
+                    <c-heading-bar
+                        name="Badges"
+                        :showArrows="false"
+                        :showBackground="false">
+                        <div
+                            slot="additional-action"
+                            class="additional-action margin-left-20">
                             <div class="text">
                                 Trust
                                 <i class="fas fa-hand-holding-heart" />
                             </div>
                             <c-button-arrows />
                         </div>
-                        <div slot="additional-action"
-                             class="additional-action">
+                        <div
+                            slot="additional-action"
+                            class="additional-action">
                             <div class="text">
                                 Rating
                                 <i class="fas fa-trophy" />
@@ -83,9 +92,10 @@
             </div>
             <div class="col-12 margin-top-40">
                 <div class="featured-assets">
-                    <c-heading-bar name="Featured Assets"
-                                   :showArrows="false"
-                                   :showBackground="false" />
+                    <c-heading-bar
+                        name="Featured Assets"
+                        :showArrows="false"
+                        :showBackground="false" />
 
                     <c-featured-assets />
 
@@ -94,19 +104,22 @@
             </div>
             <div class="col-12 margin-top-40">
                 <div class="assets">
-                    <c-heading-bar name="Assets"
-                                   :showArrows="false"
-                                   :showBackground="false">
-                        <div slot="additional-action"
-                             class="additional-action margin-left-20">
+                    <c-heading-bar
+                        name="Assets"
+                        :showArrows="false"
+                        :showBackground="false">
+                        <div
+                            slot="additional-action"
+                            class="additional-action margin-left-20">
                             <div class="text">
                                 Value
                                 <i class="fas fa-dollar-sign" />
                             </div>
                             <c-button-arrows />
                         </div>
-                        <div slot="additional-action"
-                             class="additional-action">
+                        <div
+                            slot="additional-action"
+                            class="additional-action">
                             <div class="text">
                                 Rating
                                 <i class="fas fa-trophy" />
@@ -123,27 +136,31 @@
 
             <div class="col-12 margin-top-40">
                 <div class="games-list">
-                    <c-heading-bar name="Games"
-                                   :showArrows="false"
-                                   :showBackground="false">
-                        <div slot="additional-action"
-                             class="additional-action margin-left-20">
+                    <c-heading-bar
+                        name="Games"
+                        :showArrows="false"
+                        :showBackground="false">
+                        <div
+                            slot="additional-action"
+                            class="additional-action margin-left-20">
                             <div class="text">
                                 Price
                                 <i class="fas fa-dollar-sign" />
                             </div>
                             <c-button-arrows />
                         </div>
-                        <div slot="additional-action"
-                             class="additional-action margin-left-20">
+                        <div
+                            slot="additional-action"
+                            class="additional-action margin-left-20">
                             <div class="text">
                                 Play Time
                                 <i class="fas fa-clock" />
                             </div>
                             <c-button-arrows />
                         </div>
-                        <div slot="additional-action"
-                             class="additional-action">
+                        <div
+                            slot="additional-action"
+                            class="additional-action">
                             <div class="text">
                                 Purchase Date
                                 <i class="fas fa-calendar" />
@@ -178,18 +195,20 @@
                     <div>
                         <c-user-card />
                     </div>
-                    <div v-if="!signedIn"
-                         class="text text-left">
+                    <div
+                        v-if="!signedIn"
+                        class="text text-left">
                         <h3>Create your BlockHub profile</h3>
                         <p>
                             BlockHub is the best place for curated community-driven game development,
                             digital assets and micro-licensing. Sign up for your own account and build
                             the future of gaming.
                         </p>
-                        <c-button to="/download"
-                                  status="success"
-                                  size="lg"
-                                  iconHide>
+                        <c-button
+                            to="/download"
+                            status="success"
+                            size="lg"
+                            iconHide>
                             Sign Up
                         </c-button>
                     </div>
@@ -199,19 +218,22 @@
         <div class="row align-items-stretch">
             <div class="col-12 col-md-8">
                 <div class="badges">
-                    <c-heading-bar name="Badges"
-                                   :showArrows="false"
-                                   :showBackground="false">
-                        <div slot="additional-action"
-                             class="additional-action margin-left-20">
+                    <c-heading-bar
+                        name="Badges"
+                        :showArrows="false"
+                        :showBackground="false">
+                        <div
+                            slot="additional-action"
+                            class="additional-action margin-left-20">
                             <div class="text">
                                 Trust
                                 <i class="fas fa-hand-holding-heart" />
                             </div>
                             <c-button-arrows />
                         </div>
-                        <div slot="additional-action"
-                             class="additional-action">
+                        <div
+                            slot="additional-action"
+                            class="additional-action">
                             <div class="text">
                                 Rating
                                 <i class="fas fa-trophy" />
@@ -236,9 +258,10 @@
             </div>
             <div class="col-12 col-md-4">
                 <div class="basic-info">
-                    <c-heading-bar name="Basic Information"
-                                   :showArrows="false"
-                                   :showBackground="false" />
+                    <c-heading-bar
+                        name="Basic Information"
+                        :showArrows="false"
+                        :showBackground="false" />
                 </div>
             </div>
         </div>

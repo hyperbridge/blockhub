@@ -1,10 +1,12 @@
 <template>
-    <c-terms-popup title="Terms"
-                   :activated="activated"
-                   width="800"
-                   @close="$emit('close')">
-        <div slot="header"
-             class="h4">
+    <c-terms-popup
+        title="Terms"
+        :activated="activated"
+        width="800"
+        @close="$emit('close')">
+        <div
+            slot="header"
+            class="h4">
             Terms of Service Agreement
         </div>
         <div slot="body">

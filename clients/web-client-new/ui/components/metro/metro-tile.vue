@@ -1,44 +1,54 @@
 <template>
-    <div ref="scene"
-         class="text-white"
-         :style="sceneStyle"
-         @mousemove="onMouseMove($event)"
-         @mousedown="onMouseDown($event)"
-         @mouseup="onMouseUp($event)"
-         @mouseleave="onMouseLeave">
-        <div :style="boxContainerStyle"
-             class="metro-item__container">
-            <div :style="frontFaceStyle"
-                 class="p-3">
+    <div
+        ref="scene"
+        class="text-white"
+        :style="sceneStyle"
+        @mousemove="onMouseMove($event)"
+        @mousedown="onMouseDown($event)"
+        @mouseup="onMouseUp($event)"
+        @mouseleave="onMouseLeave">
+        <div
+            :style="boxContainerStyle"
+            class="metro-item__container">
+            <div
+                :style="frontFaceStyle"
+                class="p-3">
                 <slot name="front" />
             </div>
-            <div :style="backFaceStyle"
-                 class="p-3">
+            <div
+                :style="backFaceStyle"
+                class="p-3">
                 <slot name="back" />
             </div>
-            <div :style="topFaceStyle"
-                 class="p-3">
+            <div
+                :style="topFaceStyle"
+                class="p-3">
                 <slot name="top" />
             </div>
-            <div :style="bottomFaceStyle"
-                 class="p-3">
+            <div
+                :style="bottomFaceStyle"
+                class="p-3">
                 <slot name="bottom" />
             </div>
-            <div :style="rightFaceStyle"
-                 class="p-3">
+            <div
+                :style="rightFaceStyle"
+                class="p-3">
                 <slot name="right" />
             </div>
-            <div :style="leftFaceStyle"
-                 class="p-3">
+            <div
+                :style="leftFaceStyle"
+                class="p-3">
                 <slot name="left" />
             </div>
         </div>
-        <div :class="{border: isHover && !isMouseDown}"
-             :style="glareBoundingBox">
+        <div
+            :class="{border: isHover && !isMouseDown}"
+            :style="glareBoundingBox">
             <div :style="hoverGlareStyle" />
-            <div :class="{ripple: isAnimating }"
-                 :style="clickGlareStyle"
-                 @animationend="resetAnimation" />
+            <div
+                :class="{ripple: isAnimating }"
+                :style="clickGlareStyle"
+                @animationend="resetAnimation" />
         </div>
     </div>
 </template>

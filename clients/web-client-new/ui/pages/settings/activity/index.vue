@@ -1,12 +1,14 @@
 <template>
     <c-layout navigationKey="settings">
-        <c-block title="Activity Log"
-                 :noGutter="true"
-                 :onlyContentBg="true"
-                 :bgGradient="true">
-            <div ref="consoleLog"
-                 class="console-log"
-                 v-html="consoleLogMessages">
+        <c-block
+            title="Activity Log"
+            :noGutter="true"
+            :onlyContentBg="true"
+            :bgGradient="true">
+            <div
+                ref="consoleLog"
+                class="console-log"
+                v-html="consoleLogMessages">
                 {{ consoleLogMessages }}
             </div>
         </c-block>

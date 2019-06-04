@@ -1,34 +1,44 @@
 <template>
-    <transition name="fade"
-                :duration="100">
-        <div v-if="activated"
-             class="c-popup"
-             @click.self.prevent="$emit('close')">
-            <div class="c-popup__item"
-                 :style="{ 'width': + width + dimension}">
+    <transition
+        name="fade"
+        :duration="100">
+        <div
+            v-if="activated"
+            class="c-popup"
+            @click.self.prevent="$emit('close')">
+            <div
+                class="c-popup__item"
+                :style="{ 'width': + width + dimension}">
                 <h3 v-if="title">
                     {{ title }}
                 </h3>
                 <div class="position-relative">
-                    <div v-if="!customClose"
-                         class="c-popup__close"
-                         @click="$emit('close')">
+                    <div
+                        v-if="!customClose"
+                        class="c-popup__close"
+                        @click="$emit('close')">
                         <i class="fas fa-times" />
                     </div>
-                    <slot v-else
-                          name="customClose" />
-                    <div v-if="!this.$slots.customContent"
-                         class="c-popup__content">
-                        <div v-if="subTitle"
-                             class="c-popup__content-header"
-                             :class="[ 'c-popup-type-' + type ]">
+                    <slot
+                        v-else
+                        name="customClose" />
+                    <div
+                        v-if="!this.$slots.customContent"
+                        class="c-popup__content">
+                        <div
+                            v-if="subTitle"
+                            class="c-popup__content-header"
+                            :class="[ 'c-popup-type-' + type ]">
                             <div class="popup-icon">
-                                <i v-if=" type == ['warning', 'danger'] "
-                                   class="fas fa-exclamation-triangle" />
-                                <i v-if=" type == 'success' "
-                                   class="fas fa-check" />
-                                <i v-else
-                                   class="fas fa-info-circle" />
+                                <i
+                                    v-if=" type == ['warning', 'danger'] "
+                                    class="fas fa-exclamation-triangle" />
+                                <i
+                                    v-if=" type == 'success' "
+                                    class="fas fa-check" />
+                                <i
+                                    v-else
+                                    class="fas fa-info-circle" />
                             </div>
                             <div class="subTitle">
                                 {{ subTitle }}
@@ -40,14 +50,16 @@
                             </p>
                             <slot name="body" />
                         </div>
-                        <div v-if="this.$slots.footer"
-                             class="c-popup__content-footer">
+                        <div
+                            v-if="this.$slots.footer"
+                            class="c-popup__content-footer">
                             <slot name="footer" />
                         </div>
                     </div>
 
-                    <slot v-else
-                          name="customContent" />
+                    <slot
+                        v-else
+                        name="customContent" />
                 </div>
             </div>
         </div>

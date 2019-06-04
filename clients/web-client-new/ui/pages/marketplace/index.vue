@@ -15,8 +15,9 @@
                     </p>
                     <div class="marketplace-profile">
                         <div class="marketplace-profile">
-                            <c-img class="marketplace-profile__image"
-                                   :src="profile.img" />
+                            <c-img
+                                class="marketplace-profile__image"
+                                :src="profile.img" />
                             <div>
                                 <h3 class="marketplace-profile__name">
                                     {{ profile.name }}
@@ -32,7 +33,8 @@
 
                     <nav>
                         <ul class="marketplace-menu reset-list">
-                            <li v-for="(link, index) in links"
+                            <li
+                                v-for="(link, index) in links"
                                 :key="index">
                                 <router-link
                                     class="marketplace-menu__link"
@@ -44,8 +46,9 @@
                     </nav>
 
                     <section>
-                        <transition name="page"
-                                    mode="out-in">
+                        <transition
+                            name="page"
+                            mode="out-in">
                             <router-view :profileId="profile.id" />
                         </transition>
                     </section>

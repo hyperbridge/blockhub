@@ -20,7 +20,6 @@
 <script>
 export default {
     components: {
-        'c-block': () => import('~/components/block').then(m => m.default || m),
         'c-asset-comparison': () => import('~/components/asset-comparison').then(m => m.default || m),
         'c-modal': () => import('~/components/modal').then(m => m.default || m),
         'c-asset-grid': () => import('~/components/assets-grid-inventory').then(m => m.default || m)

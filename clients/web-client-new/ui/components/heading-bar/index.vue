@@ -1,13 +1,15 @@
 <template>
     <div class="heading-bar">
-        <h3 v-if="name"
+        <h3
+            v-if="name"
             class="heading-bar__name margin-right-40"
             :class="{ 'heading-bar__name--with-bg': showBackground }"
             jest="name">
             {{ name }}
         </h3>
-        <div v-else
-             class="heading-bar__tabs margin-right-40">
+        <div
+            v-else
+            class="heading-bar__tabs margin-right-40">
             <slot name="heading-tabs">
                 <a
                     v-for="(tab, index) in headingTabs"
@@ -19,18 +21,21 @@
                     @click.prevent="changeTab(index, tab.category)">{{ tab instanceof Object ? tab.title : tab }}</a>
             </slot>
         </div>
-        <div v-if="showActions"
-             class="heading-bar__additional-action">
+        <div
+            v-if="showActions"
+            class="heading-bar__additional-action">
             <slot name="additional-action" />
-            <c-button v-if="more"
-                      status="plain"
-                      :href="more"
-                      icon="angle-right"
-                      :swapOrder="true">
+            <c-button
+                v-if="more"
+                status="plain"
+                :href="more"
+                icon="angle-right"
+                :swapOrder="true">
                 MORE
             </c-button>
-            <div v-if="showArrows"
-                 class="heading-bar__nav">
+            <div
+                v-if="showArrows"
+                class="heading-bar__nav">
                 <a
                     href="#"
                     class="nav-prev"

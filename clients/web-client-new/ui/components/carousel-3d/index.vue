@@ -1,8 +1,9 @@
 <template>
     <div class="carousel-3d">
         <div class="carousel-3d__content">
-            <slot :items="visibleItems"
-                  :css="css" />
+            <slot
+                :items="visibleItems"
+                :css="css" />
         </div>
         <template v-if="items.length > limitTo">
             <c-icon

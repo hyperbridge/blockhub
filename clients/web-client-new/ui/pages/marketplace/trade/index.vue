@@ -3,8 +3,9 @@
         <!-- <button class="create-offer-btn">Create new offer</button> -->
         <c-block-menu :links="links">
             <c-spinner v-if="isLoading" />
-            <router-view v-else
-                         :transactions="transactions" />
+            <router-view
+                v-else
+                :transactions="transactions" />
         </c-block-menu>
     </div>
 </template>

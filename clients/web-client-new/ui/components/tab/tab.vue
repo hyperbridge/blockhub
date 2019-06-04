@@ -1,12 +1,14 @@
 <template>
-    <div v-show="isActive"
-         class="tab-item"
-         :class="{'bg-transparent' : transparentBg}">
+    <div
+        v-show="isActive"
+        class="tab-item"
+        :class="{'bg-transparent' : transparentBg}">
         <div class="tab-item__container">
             <slot />
         </div>
-        <div v-if="showFooter"
-             class="tab-item__footer">
+        <div
+            v-if="showFooter"
+            class="tab-item__footer">
             <slot name="footer" />
         </div>
     </div>

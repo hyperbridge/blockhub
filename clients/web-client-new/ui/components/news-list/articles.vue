@@ -6,12 +6,13 @@
         :aria-labelledby="`tab_${index}-tab`"
         role="tabpanel">
         <ul class="home-tabs__news-list">
-            <c-news-article v-for="(article, index) in articles"
-                            :key="index"
-                            :heading="article.heading"
-                            :date="article.date"
-                            :url="article.url"
-                            :content="article.content" />
+            <c-news-article
+                v-for="(article, index) in articles"
+                :key="index"
+                :heading="article.heading"
+                :date="article.date"
+                :url="article.url"
+                :content="article.content" />
         </ul>
     </div>
 </template>

@@ -1,13 +1,15 @@
 <template>
     <c-layout navigationKey="settings">
-        <c-block class="margin-bottom-30"
-                 title="Darklaunch Settings"
-                 :noGutter="true"
-                 :onlyContentBg="true"
-                 :bgGradient="true">
+        <c-block
+            class="margin-bottom-30"
+            title="Darklaunch Settings"
+            :noGutter="true"
+            :onlyContentBg="true"
+            :bgGradient="true">
             <div class="row">
-                <div class="col-12"
-                     style="padding: 0;">
+                <div
+                    class="col-12"
+                    style="padding: 0;">
                     <div class="">
                         <div class="page-heading">
                             <div class="page-heading__container">
@@ -17,14 +19,16 @@
                                 </p>
                             </div>
                             <div class="page-heading__container float-right d-none d-md-block">
-                                <button v-if="selected.length"
-                                        class="btn btn-outline-secondary"
-                                        @click="enableSelected">
+                                <button
+                                    v-if="selected.length"
+                                    class="btn btn-outline-secondary"
+                                    @click="enableSelected">
                                     Enable selected
                                 </button>
-                                <button v-if="selected.length"
-                                        class="btn btn-outline-secondary"
-                                        @click="disableSelected">
+                                <button
+                                    v-if="selected.length"
+                                    class="btn btn-outline-secondary"
+                                    @click="disableSelected">
                                     Disable selected
                                 </button>
                             </div>
@@ -34,19 +38,22 @@
                                 <table class="table table-dark margin-bottom-0">
                                     <thead>
                                         <tr>
-                                            <th scope="col"
+                                            <th
+                                                scope="col"
                                                 width="40">
                                                 <label class="custom-control custom-checkbox">
-                                                    <input v-model="selectAll"
-                                                           type="checkbox"
-                                                           class="custom-control-input">
+                                                    <input
+                                                        v-model="selectAll"
+                                                        type="checkbox"
+                                                        class="custom-control-input">
                                                     <span class="custom-control-label" />
                                                 </label>
                                             </th>
                                             <th scope="col">
                                                 Code
                                             </th>
-                                            <th scope="col"
+                                            <th
+                                                scope="col"
                                                 width="160">
                                                 Description
                                             </th>
@@ -61,20 +68,23 @@
                                             <tr :key="darklaunch.code">
                                                 <td>
                                                     <label class="custom-control custom-checkbox">
-                                                        <input v-model="selected"
-                                                               type="checkbox"
-                                                               class="custom-control-input"
-                                                               :value="`${darklaunch.code}`"
-                                                               number>
+                                                        <input
+                                                            v-model="selected"
+                                                            type="checkbox"
+                                                            class="custom-control-input"
+                                                            :value="`${darklaunch.code}`"
+                                                            number>
                                                         <span class="custom-control-label" />
                                                     </label>
                                                 </td>
                                                 <td>
                                                     {{ darklaunch.code }}
-                                                    <span v-if="darklaunch.enabled"
-                                                          class="badge badge-success">Enabled</span>
-                                                    <span v-if="!darklaunch.enabled"
-                                                          class="badge badge-warning">Disabled</span>
+                                                    <span
+                                                        v-if="darklaunch.enabled"
+                                                        class="badge badge-success">Enabled</span>
+                                                    <span
+                                                        v-if="!darklaunch.enabled"
+                                                        class="badge badge-warning">Disabled</span>
                                                 </td>
                                                 <td>
                                                     {{ darklaunch.description || '' }}
@@ -83,8 +93,9 @@
                                                     {{ darklaunch.type || '' }}
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-light btn-sm"
-                                                            @click.prevent="toggleDarklaunch(darklaunch.code)">
+                                                    <button
+                                                        class="btn btn-light btn-sm"
+                                                        @click.prevent="toggleDarklaunch(darklaunch.code)">
                                                         Toggle
                                                     </button>
                                                 </td>

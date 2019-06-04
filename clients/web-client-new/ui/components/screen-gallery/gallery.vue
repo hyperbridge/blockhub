@@ -4,28 +4,34 @@
         @mouseover="enableSlideshow(false)"
         @mouseout="mouseOut()">
         <div class="screen-gallery__main-img">
-            <c-icon v-show="!run_slideshow && !play_video"
-                    name="expand" />
+            <c-icon
+                v-show="!run_slideshow && !play_video"
+                name="expand" />
             <c-img
                 v-if="!play_video"
                 :src="items[active_item].overlay ? items[active_item].src : items[active_item]"
                 @click="show_modal = true" />
-            <video v-else-if="play_video"
-                   controls
-                   autoplay
-                   muted>
-                <source :src="video_url"
-                        type="video/mp4">
+            <video
+                v-else-if="play_video"
+                controls
+                autoplay
+                muted>
+                <source
+                    :src="video_url"
+                    type="video/mp4">
             </video>
-            <div v-show="run_slideshow"
-                 class="screen-gallery__progress-bar" />
+            <div
+                v-show="run_slideshow"
+                class="screen-gallery__progress-bar" />
 
-            <c-image-overlay v-if="items[active_item]['overlay']"
-                             :title="items[active_item]['overlay'].title"
-                             :subtitle="items[active_item]['overlay'].subtitle"
-                             :text="items[active_item]['overlay'].text" />
+            <c-image-overlay
+                v-if="items[active_item]['overlay']"
+                :title="items[active_item]['overlay'].title"
+                :subtitle="items[active_item]['overlay'].subtitle"
+                :text="items[active_item]['overlay'].text" />
         </div>
-        <ul ref="thumb-nav"
+        <ul
+            ref="thumb-nav"
             class="screen-gallery__thumb-nav">
             <li
                 v-if="video_url"
@@ -48,8 +54,9 @@
                     @click="changeActiveItem(index)" />
             </li>
         </ul>
-        <c-modal v-if="show_modal"
-                 @close="show_modal=false">
+        <c-modal
+            v-if="show_modal"
+            @close="show_modal=false">
             <c-images-explorer
                 :images="items"
                 :start_from="active_item" />

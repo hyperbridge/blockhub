@@ -1,23 +1,27 @@
 <template>
-    <div v-click-outside="closeMenu"
-         class="dropdown dropmenu_container"
-         :class="{ 'show' : show }">
-        <div v-if="!$slots.title"
-             class="rw-btn rw-btn--card"
-             @click="toggleMenu">
+    <div
+        v-click-outside="closeMenu"
+        class="dropdown dropmenu_container"
+        :class="{ 'show' : show }">
+        <div
+            v-if="!$slots.title"
+            class="rw-btn rw-btn--card"
+            @click="toggleMenu">
             <div />
         </div>
-        <div v-else
-             class="dropdown__title"
-             @click="toggleMenu">
+        <div
+            v-else
+            class="dropdown__title"
+            @click="toggleMenu">
             <slot name="title" />
         </div>
         <div
             v-show="show"
             class="dropdown-menu"
             :class="dropdownPosition">
-            <div class="position-relative"
-                 style="z-index: 4">
+            <div
+                class="position-relative"
+                style="z-index: 4">
                 <slot />
             </div>
         </div>

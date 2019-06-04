@@ -8,16 +8,18 @@
             </div>
             <div class="col-12 col-lg-9 text-center">
                 <div class="input-group input-group-lg my-5">
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Search query"
-                           aria-label="Search query"
-                           aria-describedby="button-addon">
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Search query"
+                        aria-label="Search query"
+                        aria-describedby="button-addon">
                     <div class="input-group-append">
-                        <c-button status="info"
-                                  class="px-4"
-                                  iconHide
-                                  style="border-radius: 0 5px 5px 0">
+                        <c-button
+                            status="info"
+                            class="px-4"
+                            iconHide
+                            style="border-radius: 0 5px 5px 0">
                             Search
                         </c-button>
                     </div>
@@ -26,21 +28,24 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <c-block v-if="articles"
-                         title="Trending articles"
-                         class="margin-bottom-30">
+                <c-block
+                    v-if="articles"
+                    title="Trending articles"
+                    class="margin-bottom-30">
                     <div class="article-list">
-                        <c-article-item v-for="(article, index) in showByTopic(0)"
-                                        :key="index"
-                                        :to="`/help/${0}/article/${article.slug}`"
-                                        :class="{'mb-0': articles.length === index+1 }">
+                        <c-article-item
+                            v-for="(article, index) in showByTopic(0)"
+                            :key="index"
+                            :to="`/help/${0}/article/${article.slug}`"
+                            :class="{'mb-0': articles.length === index+1 }">
                             {{ article.title }}
                         </c-article-item>
                     </div>
                 </c-block>
 
-                <c-block title="Topics"
-                         class="margin-bottom-30">
+                <c-block
+                    title="Topics"
+                    class="margin-bottom-30">
                     <div class="topics-list">
                         <c-topic-item
                             v-for="(topic, index) in topics"
@@ -56,10 +61,11 @@
             <div class="col-12 col-lg-6 margin-bottom-30">
                 <c-block title="Changelog">
                     <div class="simple-list">
-                        <c-list-item v-for="(article, index) in showByTopic(5)"
-                                     :key="index"
-                                     :to="`/help/${5}/article/${article.slug}`"
-                                     :class="{'mb-0': articles.length === index+1 }">
+                        <c-list-item
+                            v-for="(article, index) in showByTopic(5)"
+                            :key="index"
+                            :to="`/help/${5}/article/${article.slug}`"
+                            :class="{'mb-0': articles.length === index+1 }">
                             {{ article.title }}
                         </c-list-item>
                     </div>
@@ -68,10 +74,11 @@
             <div class="col-12 col-lg-6 margin-bottom-30">
                 <c-block title="Common issues">
                     <div class="simple-list">
-                        <c-list-item v-for="(article, index) in showByTopic(6)"
-                                     :key="index"
-                                     :to="`/help/${6}/article/${article.slug}`"
-                                     :class="{'mb-0': articles.length === index+1 }">
+                        <c-list-item
+                            v-for="(article, index) in showByTopic(6)"
+                            :key="index"
+                            :to="`/help/${6}/article/${article.slug}`"
+                            :class="{'mb-0': articles.length === index+1 }">
                             {{ article.title }}
                         </c-list-item>
                     </div>
@@ -84,10 +91,11 @@
                     </h4>
                     <p><strong>Want to get help and maybe meet a new dungeon buddy?</strong></p>
                     <p>Engage with a community of passionate gamers to get the answers you need.</p>
-                    <c-button iconHide
-                              class="width-auto margin-top-10"
-                              href="https://github.com/hyperbridge/blockhub-desktop-client"
-                              target="_blank">
+                    <c-button
+                        iconHide
+                        class="width-auto margin-top-10"
+                        href="https://github.com/hyperbridge/blockhub-desktop-client"
+                        target="_blank">
                         Ask Our Community
                     </c-button>
                 </c-card>
@@ -99,11 +107,12 @@
                     </h4>
                     <p><strong>Didn't find the answer you were looking for?</strong></p>
                     <p>Create a support ticket and our support experts will get back to you.</p>
-                    <c-button href="https://hyperbridge.zendesk.com/"
-                              status="info"
-                              iconHide
-                              class="width-auto margin-top-10"
-                              target="_blank">
+                    <c-button
+                        href="https://hyperbridge.zendesk.com/"
+                        status="info"
+                        iconHide
+                        class="width-auto margin-top-10"
+                        target="_blank">
                         Contact Us
                     </c-button>
                 </c-card>

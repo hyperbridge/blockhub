@@ -1,7 +1,8 @@
 <template>
     <div class="money-info">
-        <c-progress-bar :percentages="percentage"
-                        direction="vertical" />
+        <c-progress-bar
+            :percentages="percentage"
+            direction="vertical" />
         <div class="money-info__detail">
             <div class="text">
                 {{ label }}

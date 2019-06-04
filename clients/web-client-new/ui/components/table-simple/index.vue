@@ -1,10 +1,11 @@
 <template>
     <div class="c-table__wrapper">
-        <table class="c-table"
-               :class="[{
-                   'c-table--stripped' : stripped,
-                   'c-table--bordered' : bordered,
-               }, tableSize ]">
+        <table
+            class="c-table"
+            :class="[{
+                'c-table--stripped' : stripped,
+                'c-table--bordered' : bordered,
+            }, tableSize ]">
             <slot />
         </table>
     </div>

@@ -1,27 +1,33 @@
 <template>
     <div class="language-dropdown">
-        <div class="language-dropdown__current"
-             @click="toggleList">
-            <c-country-flag v-if="currentLanguage"
-                            :country="currentLanguage.code"
-                            size="small" />
+        <div
+            class="language-dropdown__current"
+            @click="toggleList">
+            <c-country-flag
+                v-if="currentLanguage"
+                :country="currentLanguage.code"
+                size="small" />
             <span class="language-name">
                 {{ currentLanguage ? currentLanguage.name : 'Language' }}
             </span>
-            <i class="fas "
-               :class="showList ? 'fa-angle-up' : 'fa-angle-down' " />
+            <i
+                class="fas "
+                :class="showList ? 'fa-angle-up' : 'fa-angle-down' " />
         </div>
         <transition name="slide-in-top">
-            <div v-if="showList"
-                 v-click-outside.bool="showList"
-                 class="language-dropdown__list">
+            <div
+                v-if="showList"
+                v-click-outside.bool="showList"
+                class="language-dropdown__list">
                 <ul :class="{'d-block' : showList}">
-                    <li v-for="(lang, index) in languages"
+                    <li
+                        v-for="(lang, index) in languages"
                         :key="index"
                         class="language-dropdown__list-item"
                         @click="changeLanguage(lang)">
-                        <c-country-flag :country="lang.code"
-                                        size="small" />
+                        <c-country-flag
+                            :country="lang.code"
+                            size="small" />
                         <span class="language-name">
                             {{ lang.name }} ({{ lang.native }})
                         </span>

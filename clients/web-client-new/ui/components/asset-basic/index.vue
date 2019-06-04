@@ -10,7 +10,6 @@
 
 <script>
 export default {
-    name: 'AssetBasic',
     props: {
         asset: {
             type: Object,

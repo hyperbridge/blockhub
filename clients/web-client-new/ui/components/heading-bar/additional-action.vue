@@ -1,6 +1,7 @@
 <template>
-    <div class="additional-action"
-         :class="customClass">
+    <div
+        class="additional-action"
+        :class="customClass">
         {{ name }}
         <c-icon
             v-if="icon"

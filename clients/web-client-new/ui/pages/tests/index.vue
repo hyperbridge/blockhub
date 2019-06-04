@@ -1,13 +1,15 @@
 <template>
     <c-layout>
         <!-- <span v-translate>{{ msg }}</span> -->
-        <div v-if="showDiv"
-             v-click-outside="clicked"
-             class="div">
+        <div
+            v-if="showDiv"
+            v-click-outside="clicked"
+            class="div">
             Test
         </div>
-        <input v-model.number="id"
-               type="number">
+        <input
+            v-model.number="id"
+            type="number">
         <button
             @click="$store.dispatch(
                 'community/updateWishlist',

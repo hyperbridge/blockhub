@@ -1,8 +1,9 @@
 <template>
     <div class="simple-list-item">
-        <c-button status="none"
-                  :to="to"
-                  :href="link">
+        <c-button
+            status="none"
+            :to="to"
+            :href="link">
             <slot />
         </c-button>
     </div>

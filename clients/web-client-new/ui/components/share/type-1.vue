@@ -1,7 +1,8 @@
 <template>
     <transition name="fadeIn">
-        <div v-if="show"
-             class="share-block">
+        <div
+            v-if="show"
+            class="share-block">
             <c-searcher
                 class="margin-bottom-10" />
             <div class="share-block__users margin-top-20">
@@ -9,19 +10,21 @@
                     <h5>
                         Favorites
                     </h5>
-                    <c-author v-for="(author, index) in favoritesList"
-                              :key="index"
-                              :name="author.name"
-                              :img="author.img" />
+                    <c-author
+                        v-for="(author, index) in favoritesList"
+                        :key="index"
+                        :name="author.name"
+                        :img="author.img" />
                 </div>
                 <div class="list">
                     <h5>
                         Online
                     </h5>
-                    <c-author v-for="(author, index) in onlineList"
-                              :key="index"
-                              :name="author.name"
-                              :img="author.img" />
+                    <c-author
+                        v-for="(author, index) in onlineList"
+                        :key="index"
+                        :name="author.name"
+                        :img="author.img" />
                 </div>
             </div>
         </div>

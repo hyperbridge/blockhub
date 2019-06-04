@@ -1,6 +1,7 @@
 <template functional>
-    <div class="badge-card"
-         :class="'badge-card--' + props.tag">
+    <div
+        class="badge-card"
+        :class="'badge-card--' + props.tag">
         <span class="badge-card__text">
             {{ props.title }}
         </span>

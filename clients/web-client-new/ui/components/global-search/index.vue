@@ -1,30 +1,37 @@
 <template>
     <div class="global-search">
-        <c-input v-model="searchQuery"
-                 placeholder="Type to search"
-                 @input="startSearch" />
+        <c-input
+            v-model="searchQuery"
+            placeholder="Type to search"
+            @input="startSearch" />
         <transition name="slide-in">
-            <div v-if="isLoading"
-                 class="global-search__results-loader my-2">
-                <c-loading-bar-circle size="sm"
-                                      :showBg="false" />
+            <div
+                v-if="isLoading"
+                class="global-search__results-loader my-2">
+                <c-loading-bar-circle
+                    size="sm"
+                    :showBg="false" />
             </div>
         </transition>
         <transition name="slide-in">
             <template v-if="searchQuery.length">
-                <div v-if="results.length"
-                     class="global-search__results">
-                    <div v-for="type in results"
-                         v-if="results.length"
-                         class="global-search__results-type">
+                <div
+                    v-if="results.length"
+                    class="global-search__results">
+                    <div
+                        v-for="type in results"
+                        v-if="results.length"
+                        class="global-search__results-type">
                         <div class="h5 font-weight-bold margin-left-5">
                             {{ type.name }}
                         </div>
                         <div class="global-search__result-list">
-                            <a v-for="link in type.items"
-                               :href="link.link">
-                                <img v-if="link.image"
-                                     :src="link.image">
+                            <a
+                                v-for="link in type.items"
+                                :href="link.link">
+                                <img
+                                    v-if="link.image"
+                                    :src="link.image">
                                 <span class="link-text">
                                     {{ link.name }}
                                 </span>
@@ -40,8 +47,9 @@
                         Use arrows to select
                     </div>
                 </div>
-                <div v-else
-                     class="h6 font-weight-bold text-white p-1 mt-3">
+                <div
+                    v-else
+                    class="h6 font-weight-bold text-white p-1 mt-3">
                     Nothing to show
                 </div>
             </template>

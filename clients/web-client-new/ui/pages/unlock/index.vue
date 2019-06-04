@@ -1,9 +1,10 @@
 <template>
-    <c-layout :showLeftPanel="false"
-              :showRightPanel="false"
-              :showShortcuts="false"
-              :slim-mode="true"
-              headerText="BlockHub" />
+    <c-layout
+        :showLeftPanel="false"
+        :showRightPanel="false"
+        :showShortcuts="false"
+        :slim-mode="true"
+        headerText="BlockHub" />
 </template>
 
 <script>

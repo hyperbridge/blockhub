@@ -10,7 +10,6 @@
 
 <script>
 export default {
-    name: 'InstallerProgress',
     props: {
         progress: {
             type: [Number, String],

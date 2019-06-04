@@ -1,82 +1,95 @@
 <template>
-    <c-block :title="title"
-             class="purchase-block"
-             :noGutter="true"
-             :bgGradient="true"
-             :onlyContentBg="true">
-        <div v-if="tags"
-             class="purchase-block__tags col-12">
-            <div v-for="(tag, index) in tags"
-                 :key="index">
+    <c-block
+        :title="title"
+        class="purchase-block"
+        :noGutter="true"
+        :bgGradient="true"
+        :onlyContentBg="true">
+        <div
+            v-if="tags"
+            class="purchase-block__tags col-12">
+            <div
+                v-for="(tag, index) in tags"
+                :key="index">
                 {{ tag }}
             </div>
         </div>
 
-        <div v-if="!isUnavailable"
-             class="purchase-block__price col-12">
+        <div
+            v-if="!isUnavailable"
+            class="purchase-block__price col-12">
             <span v-if="price">{{ price | convertCurrency }}</span><span v-else>$0.00</span>
         </div>
 
-        <div v-if="eligibleTokens || offersPurchases || releaseDate || isPurchased || isUnavailable"
-             class="purchase-block__info col-12">
+        <div
+            v-if="eligibleTokens || offersPurchases || releaseDate || isPurchased || isUnavailable"
+            class="purchase-block__info col-12">
             <div v-if="eligibleTokens">
-                Eligible for up to <i class="fas fa-coins mx-1"
-                                      style="color: #FADC72" /> HBX +{{ eligibleTokens }}
+                Eligible for up to <i
+                    class="fas fa-coins mx-1"
+                    style="color: #FADC72" /> HBX +{{ eligibleTokens }}
             </div>
             <div v-if="offersPurchases">
                 Offers In-Game Purchases
             </div>
-            <div v-if="releaseDate"
-                 class="release-date">
+            <div
+                v-if="releaseDate"
+                class="release-date">
                 Release date: {{ releaseDate | customDate('MM/DD/YYYY') }}
             </div>
 
-            <div v-if="isPurchased"
-                 class="purchased-status">
+            <div
+                v-if="isPurchased"
+                class="purchased-status">
                 <i class="fas fa-check" />
                 Purchased
             </div>
 
-            <div v-if="isUnavailable"
-                 class="unavailable-status">
+            <div
+                v-if="isUnavailable"
+                class="unavailable-status">
                 <i class="fas fa-ban" />
                 Unavailable
             </div>
         </div>
 
         <div class="purchase-block__buttons-group col-12">
-            <c-button v-if="isReleased && price"
-                      status="outline-success"
-                      :href="purchaseLink"
-                      iconHide
-                      size="xl"
-                      :shadow="false"
-                      @click="onClickPurchase">
+            <c-button
+                v-if="isReleased && price"
+                status="outline-success"
+                :href="purchaseLink"
+                iconHide
+                size="xl"
+                :shadow="false"
+                @click="onClickPurchase">
                 Proceed to Purchase
             </c-button>
 
-            <c-button v-if="!price && isReleased"
-                      status="success"
-                      size="lg"
-                      icon="download"
-                      :href="purchaseLink"
-                      @click="onClickPurchase">
+            <c-button
+                v-if="!price && isReleased"
+                status="success"
+                size="lg"
+                icon="download"
+                :href="purchaseLink"
+                @click="onClickPurchase">
                 Free Download
             </c-button>
 
-            <c-button v-if="demoLink"
-                      iconHide
-                      icon="download"
-                      :href="demoLink">
+            <c-button
+                v-if="demoLink"
+                iconHide
+                icon="download"
+                :href="demoLink">
                 Download Demo
             </c-button>
 
-            <c-button v-if="playLink"
-                      iconHide
-                      status="success"
-                      size="xl"
-                      icon="download"
-                      :href="playLink">
+            <c-button
+                v-if="playLink"
+                iconHide
+                status="success"
+                size="xl"
+                icon="download"
+                :href="playLink">
                 Play Now
             </c-button>
 

@@ -3,43 +3,51 @@
         v-if="activated"
         title="Sign In"
         @close="$store.state.application.activeModal = null">
-        <div slot="modalBody"
-             class=""
-             style="width: 100%">
-            <c-loading :enabled="loading"
-                       size="lg" />
+        <div
+            slot="modalBody"
+            class=""
+            style="width: 100%">
+            <c-loading
+                :enabled="loading"
+                size="lg" />
 
             <div v-if="!loading">
                 <div class="row">
-                    <div class="col-12"
-                         style="text-align: center">
+                    <div
+                        class="col-12"
+                        style="text-align: center">
                         <h2>Sign in to BlockHub</h2>
                     </div>
                 </div>
-                <div v-darklaunch="`SOCIAL_SIGNIN`"
-                     class="row">
+                <div
+                    v-darklaunch="`SOCIAL_SIGNIN`"
+                    class="row">
                     <div class="col-12">
-                        <c-button status="second-info"
-                                  size="xl"
-                                  centered
-                                  class="mb-3"
-                                  style="display: block">
+                        <c-button
+                            status="second-info"
+                            size="xl"
+                            centered
+                            class="mb-3"
+                            style="display: block">
                             Sign in with Twitter
                         </c-button>
-                        <c-button status="second-info"
-                                  size="xl"
-                                  centered
-                                  class="mb-3"
-                                  style="display: block">
+                        <c-button
+                            status="second-info"
+                            size="xl"
+                            centered
+                            class="mb-3"
+                            style="display: block">
                             Sign in with Facebook
                         </c-button>
                     </div>
                 </div>
-                <div v-darklaunch="`SOCIAL_SIGNIN`"
-                     class="row mb-3">
+                <div
+                    v-darklaunch="`SOCIAL_SIGNIN`"
+                    class="row mb-3">
                     <div class="col-12">
-                        <c-heading-bar-color colorCode="#fff"
-                                             textAlign="center">
+                        <c-heading-bar-color
+                            colorCode="#fff"
+                            textAlign="center">
                             or sign in with email
                         </c-heading-bar-color>
                     </div>
@@ -48,11 +56,12 @@
                     <div class="col">
                         <div class="form-group">
                             <label>E-mail</label>
-                            <input v-model="email"
-                                   type="text"
-                                   class="form-control"
-                                   placeholder="E-mail"
-                                   name="email">
+                            <input
+                                v-model="email"
+                                type="text"
+                                class="form-control"
+                                placeholder="E-mail"
+                                name="email">
                         </div>
                     </div>
                 </div>
@@ -60,22 +69,25 @@
                     <div class="col">
                         <div class="form-group">
                             <label>Password</label>
-                            <input v-model="password"
-                                   type="password"
-                                   class="form-control"
-                                   placeholder="Password"
-                                   name="password"
-                                   @keyup.enter="next()">
+                            <input
+                                v-model="password"
+                                type="password"
+                                class="form-control"
+                                placeholder="Password"
+                                name="password"
+                                @keyup.enter="next()">
                         </div>
                     </div>
                 </div>
 
-                <p v-if="errors.length"
-                   class="errors">
+                <p
+                    v-if="errors.length"
+                    class="errors">
                     <br>
                     <strong>Please correct the following error(s):</strong>
                     <ul>
-                        <li v-for="error in errors"
+                        <li
+                            v-for="error in errors"
                             :key="error">
                             {{ error }}
                         </li>
@@ -84,16 +96,19 @@
             </div>
         </div>
 
-        <div v-if="!loading"
-             slot="modalFooter"
-             class="text-right w-100">
-            <c-button status="plain"
-                      style="float: left; margin-right: 20px"
-                      @click="$store.commit('application/activateModal', 'register')">
+        <div
+            v-if="!loading"
+            slot="modalFooter"
+            class="text-right w-100">
+            <c-button
+                status="plain"
+                style="float: left; margin-right: 20px"
+                @click="$store.commit('application/activateModal', 'register')">
                 Don't have an account? Sign Up
             </c-button>
-            <c-button size="md"
-                      @click="next()">
+            <c-button
+                size="md"
+                @click="next()">
                 Sign In
             </c-button>
         </div>

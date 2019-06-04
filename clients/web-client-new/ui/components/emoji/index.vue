@@ -3,38 +3,45 @@
         <div class="text-white">
             <!--{{ emojiList }}-->
         </div>
-        <div v-if="emojiList.length"
-             class="emojis__list">
-            <div v-for="(emoji, index) in emojiList"
-                 class="emojis__list-item"
-                 :class="{'couple-items' : emoji.count > 0 }"
-                 @click="addEmoji(emoji)">
-                <c-emoji :emoji="emoji"
-                         :size="18"
-                         :native="true" />
-                <span v-if="emoji.count > 0"
-                      class="emoji-count">
+        <div
+            v-if="emojiList.length"
+            class="emojis__list">
+            <div
+                v-for="(emoji, index) in emojiList"
+                class="emojis__list-item"
+                :class="{'couple-items' : emoji.count > 0 }"
+                @click="addEmoji(emoji)">
+                <c-emoji
+                    :emoji="emoji"
+                    :size="18"
+                    :native="true" />
+                <span
+                    v-if="emoji.count > 0"
+                    class="emoji-count">
                     +{{ emoji.count }}
                 </span>
             </div>
         </div>
         <div class="emoji-picker__container">
-            <c-button status="plain"
-                      class="p-0 align-items-center"
-                      @click="openPicker">
-                <i class="fas fa-plus mr-0"
-                   :class="{'rotate-icon' : showPicker }" />
+            <c-button
+                status="plain"
+                class="p-0 align-items-center"
+                @click="openPicker">
+                <i
+                    class="fas fa-plus mr-0"
+                    :class="{'rotate-icon' : showPicker }" />
             </c-button>
             <transition name="fade">
-                <c-emoji-picker v-show="showPicker"
-                                set="apple"
-                                title=""
-                                :showSearch="false"
-                                :showSkinTones="false"
-                                :showPreview="false"
-                                :native="true"
-                                @select="addEmoji"
-                                @keyup.esc.native="closePicker" />
+                <c-emoji-picker
+                    v-show="showPicker"
+                    set="apple"
+                    title=""
+                    :showSearch="false"
+                    :showSkinTones="false"
+                    :showPreview="false"
+                    :native="true"
+                    @select="addEmoji"
+                    @keyup.esc.native="closePicker" />
             </transition>
         </div>
     </div>

@@ -1,12 +1,15 @@
 <template>
-    <div class="single-emogi"
-         :class="{'single-emogi--bg' : count && count > 0}"
-         @click="$emit('click')">
-        <emoji :emoji="emoji"
-               :size="Number(size)"
-               :style=" 'height:' + size + 'px'" />
-        <span v-if="count && count > 0"
-              class="single-emogi__count">
+    <div
+        class="single-emogi"
+        :class="{'single-emogi--bg' : count && count > 0}"
+        @click="$emit('click')">
+        <emoji
+            :emoji="emoji"
+            :size="Number(size)"
+            :style=" 'height:' + size + 'px'" />
+        <span
+            v-if="count && count > 0"
+            class="single-emogi__count">
             {{ count }}
         </span>
     </div>

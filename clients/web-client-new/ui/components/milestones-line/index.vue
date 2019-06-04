@@ -1,14 +1,17 @@
 <template>
     <div>
         <div class="stages-line">
-            <div v-for="(milestone, index) in milestones"
-                 :key="index"
-                 :class="milestone.status"
-                 class="stages-line__stage">
-                <i v-if="milestone.status === 'Done'"
-                   class="fas fa-check" />
-                <i v-if="milestone.status === 'InProgress'"
-                   class="fas fa-clock" />
+            <div
+                v-for="(milestone, index) in milestones"
+                :key="index"
+                :class="milestone.status"
+                class="stages-line__stage">
+                <i
+                    v-if="milestone.status === 'Done'"
+                    class="fas fa-check" />
+                <i
+                    v-if="milestone.status === 'InProgress'"
+                    class="fas fa-clock" />
                 <div class="stage_progress">
                     <span />
                     <span />

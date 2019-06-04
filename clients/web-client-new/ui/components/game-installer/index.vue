@@ -1,8 +1,10 @@
 <template>
-    <c-basic-popup :activated="activated"
-                   :width="width">
-        <div slot="body"
-             class="game-installer">
+    <c-basic-popup
+        :activated="activated"
+        :width="width">
+        <div
+            slot="body"
+            class="game-installer">
             <div class="game-installer__header">
                 <div class="game-installer__game-img">
                     <c-img :src="img" />
@@ -16,12 +18,15 @@
                     </p>
                     <div class="game-operations-support">
                         Systems
-                        <i v-if="mac"
-                           class="fab fa-apple" />
-                        <i v-if="linux"
-                           class="fab fa-linux" />
-                        <i v-if="win"
-                           class="fab fa-windows" />
+                        <i
+                            v-if="mac"
+                            class="fab fa-apple" />
+                        <i
+                            v-if="linux"
+                            class="fab fa-linux" />
+                        <i
+                            v-if="win"
+                            class="fab fa-windows" />
                     </div>
                 </div>
             </div>
@@ -31,18 +36,20 @@
                         Install
                     </label>
                     <div class="dropdown">
-                        <a class="btn dropdown-toggle"
-                           href="#"
-                           role="button"
-                           data-toggle="dropdown"
-                           aria-haspopup="true"
-                           aria-expanded="false">
+                        <a
+                            class="btn dropdown-toggle"
+                            href="#"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
                             <i class="fas fa-gamepad" />
                             {{ file }}
                         </a>
                         <div class="dropdown-menu">
                             <ul class="list-unstyled mb-0 p-0">
-                                <li v-for="(file, index) in filesList"
+                                <li
+                                    v-for="(file, index) in filesList"
                                     :key="index"
                                     @click="choosenGame(file)">
                                     {{ name }} ({{ makeCapitalize(file.platform) }}, {{ file.size | numeralFormat('0.0') }})
@@ -81,17 +88,20 @@
                     </div>
                     <div>
                         Disk space available <strong>25</strong> GiB
-                        <i class="fas fa-check-circle"
-                           style="color: #43C981" />
+                        <i
+                            class="fas fa-check-circle"
+                            style="color: #43C981" />
                     </div>
                 </div>
                 <div class="game-installer__footer">
-                    <a href="#"
-                       class="c-button btn-cancel">
+                    <a
+                        href="#"
+                        class="c-button btn-cancel">
                         Cancel
                     </a>
-                    <a href="#"
-                       class="c-button btn-download">
+                    <a
+                        href="#"
+                        class="c-button btn-download">
                         <i class="fas fa-download" /> Install
                     </a>
                 </div>

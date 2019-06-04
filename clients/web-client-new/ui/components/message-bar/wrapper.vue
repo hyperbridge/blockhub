@@ -1,8 +1,10 @@
 <template>
     <transition name="slide-in-top">
-        <div v-if="messages.length"
-             class="messages-bar__wrapper">
-            <h4 v-if="status === 'error'"
+        <div
+            v-if="messages.length"
+            class="messages-bar__wrapper">
+            <h4
+                v-if="status === 'error'"
                 class="messages-bar__title">
                 Please correct following
                 {{ title }}<span v-show="messages.length > 1">s</span>:

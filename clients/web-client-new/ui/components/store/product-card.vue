@@ -1,19 +1,23 @@
 <template>
     <div class="product-grid__item">
         <div class="card-body padding-0">
-            <c-button status="none"
-                      :to="`/product/${product.id}`">
-                <c-img class="card-img-top"
-                       :src="product.images.mediumTile" />
+            <c-button
+                status="none"
+                :to="`/product/${product.id}`">
+                <c-img
+                    class="card-img-top"
+                    :src="product.images.mediumTile" />
             </c-button>
             <h4>
-                <c-button status="none"
-                          :to="`/product/${product.id}`">
+                <c-button
+                    status="none"
+                    :to="`/product/${product.id}`">
                     {{ product.name }}
                 </c-button>
             </h4>
-            <p class="card-text"
-               hidden>
+            <p
+                class="card-text"
+                hidden>
                 {{ product.shortDescription }}
             </p>
             <c-tags :tags="product.developerTags.slice(0,3)" />

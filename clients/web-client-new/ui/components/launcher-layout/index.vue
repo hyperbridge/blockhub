@@ -1,27 +1,34 @@
 <template>
-    <div class="launcher"
-         :style=" `background-image: url(${bgImage})`">
-        <div v-if="overlay"
-             class="launcher__overlay"
-             :style="`opacity: ${overlayOpacity}; background-color: ${overlayColor}`" />
+    <div
+        class="launcher"
+        :style=" `background-image: url(${bgImage})`">
+        <div
+            v-if="overlay"
+            class="launcher__overlay"
+            :style="`opacity: ${overlayOpacity}; background-color: ${overlayColor}`" />
         <div class="launcher__top-bar">
-            <router-link class="app-header__bar-center margin-right-50"
-                         :to="isLocked ? '#' : '/'">
+            <router-link
+                class="app-header__bar-center margin-right-50"
+                :to="isLocked ? '#' : '/'">
                 <c-loading-logo :isLoading="isLoader" />
             </router-link>
             <nav class="launcher__top-bar-left">
                 <ul>
-                    <li v-if="desktopMode && !signedIn && !isLocked"
+                    <li
+                        v-if="desktopMode && !signedIn && !isLocked"
                         class="app-header__create-account-btn">
-                        <router-link to="/account/signup"
-                                     class="">
+                        <router-link
+                            to="/account/signup"
+                            class="">
                             CREATE ACCOUNT
                         </router-link>
                     </li>
-                    <li v-if="!desktopMode"
+                    <li
+                        v-if="!desktopMode"
                         class="app-header__download-btn">
-                        <router-link to="/download"
-                                     class="">
+                        <router-link
+                            to="/download"
+                            class="">
                             DOWNLOAD
                         </router-link>
                     </li>
@@ -36,31 +43,38 @@
             <div class="launcher__top-bar-right ml-auto">
                 <nav>
                     <ul>
-                        <li v-if="!isLocked"
+                        <li
+                            v-if="!isLocked"
                             hidden>
-                            <c-quick-launch class="quick-launch"
-                                            style="margin-top: -7px;" />
+                            <c-quick-launch
+                                class="quick-launch"
+                                style="margin-top: -7px;" />
                         </li>
-                        <li v-if="signedIn"
+                        <li
+                            v-if="signedIn"
                             class="token">
-                            <router-link class="mt-1"
-                                         to="/token">
-                                <span v-if="tokenCount === null"
-                                      class="token__count token__count--loading">
+                            <router-link
+                                class="mt-1"
+                                to="/token">
+                                <span
+                                    v-if="tokenCount === null"
+                                    class="token__count token__count--loading">
                                     <c-loading :enabled="true" />
                                 </span>
-                                <span v-if="tokenCount !== null"
-                                      class="token__count">
+                                <span
+                                    v-if="tokenCount !== null"
+                                    class="token__count">
                                     {{ tokenCount }} <span class="icon fa fa-coins" />
                                 </span>
                                 <span class="text">Tokens</span>
                             </router-link>
                         </li>
                         <li v-if="signedIn">
-                            <c-dropdown class="ml-4 account-menu mt-1"
-                                        style="z-index: 12"
-                                        @show="onShowMenu"
-                                        @hide="onHideMenu">
+                            <c-dropdown
+                                class="ml-4 account-menu mt-1"
+                                style="z-index: 12"
+                                @show="onShowMenu"
+                                @hide="onHideMenu">
                                 <template slot="title">
                                     <div class="__title">
                                         <i class="fa fa-user" />
@@ -69,66 +83,76 @@
                                 </template>
                                 <ul class="item-dropdown">
                                     <li>
-                                        <c-button status="none"
-                                                  to="/account">
+                                        <c-button
+                                            status="none"
+                                            to="/account">
                                             <i class="fas fa-user" />
                                             Account Info
                                         </c-button>
                                     </li>
                                     <li v-darklaunch="'WALLETS'">
-                                        <c-button status="none"
-                                                  to="/account/wallets">
+                                        <c-button
+                                            status="none"
+                                            to="/account/wallets">
                                             <i class="fas fa-credit-card" />
                                             My Wallets
                                         </c-button>
                                     </li>
                                     <li v-if="activeProfile">
-                                        <c-button status="none"
-                                                  :to="`/profile/${activeProfile.id}`">
+                                        <c-button
+                                            status="none"
+                                            :to="`/profile/${activeProfile.id}`">
                                             <i class="fas fa-user" />
                                             View Public Profile
                                         </c-button>
                                     </li>
-                                    <li v-if="signedIn && activeProfile"
+                                    <li
+                                        v-if="signedIn && activeProfile"
                                         v-darklaunch="'CONTACTS'">
-                                        <c-button status="none"
-                                                  :to="`/profile/${activeProfile.id}/contacts`">
+                                        <c-button
+                                            status="none"
+                                            :to="`/profile/${activeProfile.id}/contacts`">
                                             <i class="fas fa-users" />
                                             Contacts
                                         </c-button>
                                     </li>
                                     <li>
-                                        <c-button status="none"
-                                                  to="/account/profiles">
+                                        <c-button
+                                            status="none"
+                                            to="/account/profiles">
                                             <i class="fas fa-users-cog" />
                                             Profile Manager
                                         </c-button>
                                     </li>
                                     <li>
-                                        <c-button status="none"
-                                                  @click="$store.commit('application/showProfileChooser', true)">
+                                        <c-button
+                                            status="none"
+                                            @click="$store.commit('application/showProfileChooser', true)">
                                             <i class="fas fa-user-edit" />
                                             Switch Profile
                                         </c-button>
                                     </li>
                                     <li>
-                                        <c-button status="none"
-                                                  to="/account/signout">
+                                        <c-button
+                                            status="none"
+                                            to="/account/signout">
                                             <i class="fa fa-sign-out-alt" />
                                             Sign Out
                                         </c-button>
                                     </li>
                                     <hr>
                                     <li v-darklaunch="'CHAT'">
-                                        <c-button status="none"
-                                                  to="/settings/chat">
+                                        <c-button
+                                            status="none"
+                                            to="/settings/chat">
                                             <i class="fas fa-comments" />
                                             Chat Settings
                                         </c-button>
                                     </li>
                                     <li>
-                                        <c-button status="none"
-                                                  to="/help">
+                                        <c-button
+                                            status="none"
+                                            to="/help">
                                             <i class="fas fa-info-circle" />
                                             FAQ
                                         </c-button>
@@ -152,8 +176,9 @@
         </div>
         <div class="game-shortcuts">
             <div class="game-shortcuts__wrapper">
-                <div v-for="game in gamesShortcuts"
-                     class="game-shortcuts__item">
+                <div
+                    v-for="game in gamesShortcuts"
+                    class="game-shortcuts__item">
                     <img :src="game.image">
                 </div>
             </div>

@@ -8,9 +8,10 @@
             </div>
             <div class="col-12">
                 <div class="licenses-list">
-                    <c-heading-bar name="Owned Licenses"
-                                   :showArrows="false"
-                                   :showBackground="false" />
+                    <c-heading-bar
+                        name="Owned Licenses"
+                        :showArrows="false"
+                        :showBackground="false" />
                     <div class="licenses-list__container margin-top-30">
                         <div
                             v-for="index in 6"

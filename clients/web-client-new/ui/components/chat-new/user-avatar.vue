@@ -1,9 +1,11 @@
 <template>
-    <div class="user-avatar"
-         @mouseover=" show = true "
-         @mouseleave=" show = false ">
-        <div v-if="show"
-             class="user-avatar__popover">
+    <div
+        class="user-avatar"
+        @mouseover=" show = true "
+        @mouseleave=" show = false ">
+        <div
+            v-if="show"
+            class="user-avatar__popover">
             <div>
                 <strong class="mr-3">
                     {{ name }}
@@ -15,9 +17,10 @@
             </div>
         </div>
         <img :src="avatar">
-        <span v-if="status"
-              class="user-status"
-              :class="['status-' + status]" />
+        <span
+            v-if="status"
+            class="user-status"
+            :class="['status-' + status]" />
     </div>
 </template>
 

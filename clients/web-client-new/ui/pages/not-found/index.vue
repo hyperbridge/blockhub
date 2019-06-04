@@ -1,15 +1,17 @@
 <template>
     <c-layout navigationKey="help">
         <div class="row">
-            <div class="col-12"
-                 style="text-align: center">
+            <div
+                class="col-12"
+                style="text-align: center">
                 <br><br><br><br><br><br><br><br><br>
                 <h1><strong>GG.</strong> You broke it.</h1>
                 <h3>That page wasn't found or there's an error in the spacetime continuum. <br>Either way, you better get home quick.</h3>
                 <br><br>
-                <c-button class="c-button--xl"
-                          status="gradient-info"
-                          @click="goHome">
+                <c-button
+                    class="c-button--xl"
+                    status="gradient-info"
+                    @click="goHome">
                     Go Home
                 </c-button>
             </div>

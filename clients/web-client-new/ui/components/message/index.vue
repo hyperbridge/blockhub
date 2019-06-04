@@ -1,8 +1,9 @@
 <template>
     <div class="message">
         <div class="message__head">
-            <c-author :name="msg.author.name"
-                      :img="msg.author.img" />
+            <c-author
+                :name="msg.author.name"
+                :img="msg.author.img" />
             <span>
                 {{ getTime(msg.time) }}
             </span>

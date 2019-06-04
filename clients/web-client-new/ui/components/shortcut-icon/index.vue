@@ -1,136 +1,135 @@
 <template>
     <div class="shortcut-icon" :class="{ 'icon-active' : active }" :style="style" @mouseover="show = true" @mouseleave="show = false">
-        <i v-if="withButton && !icon && removable"
-           class="icon-delete-btn fa fa-times"
-           @mousedown="remove"/>
+        <i
+            v-if="withButton && !icon && removable"
+            class="icon-delete-btn fa fa-times"
+            @mousedown="remove" />
         <slot>
             <c-button status="none" :href="href" :to="to" :style="{ 'background-image': image ? 'url(' + image + ')' : 'none', 'color': 'inherit', 'justify-content': 'center' }" @click="click">
                 <i v-if="icon" :class="icon" />
             </c-button>
         </slot>
-        <c-progress-bar :percentages="74" style="height: 3px; min-height: 3px; margin-top: 7px" v-if="percent" />
-        <transition name="fade" v-if="text && show">
+        <c-progress-bar v-if="percent" :percentages="74" style="height: 3px; min-height: 3px; margin-top: 7px" />
+        <transition v-if="text && show" name="fade">
             <div class="shortcut-icon__title">
                 {{ text }}
             </div>
         </transition>
-        <div class="shortcut-icon__new" v-if="unread"></div>
+        <div v-if="unread" class="shortcut-icon__new" />
     </div>
 </template>
 
 <script>
-    export default {
-        props: {
-            index: {
-                type: Number
-            },
-            text: {
-                type: String,
-                default: null
-            },
-            image: {
-                type: String,
-                default: null
-            },
-            href: {
-                type: String,
-                default: '#'
-            },
-            to: {
-                type: String,
-                default: ''
-            },
-            icon: {
-                type: String,
-                default: null
-            },
-            sort: {
-                type: Number,
-                default: null
-            },
-            eventKey: {
-                type: String,
-                default: null
-            },
-            eventValue: {
-                type: String,
-                default: null
-            },
-            textColor: {
-                type: String,
-                default: null
-            },
-            withButton: {
-                type: Boolean,
-                default: false
-            },
-            removable: {
-                type: Boolean,
-                default: true
-            },
-            unread: {
-                type: Boolean,
-                default: false
-            },
-            color: {
-                type: Object,
-                default: () => {
-                    return {
-                        r: null,
-                        g: null,
-                        b: null
-                    }
-                }
-            },
-            active: {
-                type: Boolean,
-                default: false
-            },
-            percent: [ String, Number ]
+export default {
+    components: {
+        'c-tooltip': () => import('~/components/tooltips/universal').then(m => m.default || m),
+        'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m)
+    },
+    props: {
+        index: {
+            type: Number
         },
-        data(){
-            return{
-                show: false
-            }
+        text: {
+            type: String,
+            default: null
         },
-        components: {
-            'c-tooltip': () => import('~/components/tooltips/universal').then(m => m.default || m),
-            'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m)
+        image: {
+            type: String,
+            default: null
         },
-        computed: {
-            brightness() {
-                let {r, g, b} = this.color
+        href: {
+            type: String,
+            default: '#'
+        },
+        to: {
+            type: String,
+            default: ''
+        },
+        icon: {
+            type: String,
+            default: null
+        },
+        sort: {
+            type: Number,
+            default: null
+        },
+        eventKey: {
+            type: String,
+            default: null
+        },
+        eventValue: {
+            type: String,
+            default: null
+        },
+        textColor: {
+            type: String,
+            default: null
+        },
+        withButton: {
+            type: Boolean,
+            default: false
+        },
+        removable: {
+            type: Boolean,
+            default: true
+        },
+        unread: {
+            type: Boolean,
+            default: false
+        },
+        color: {
+            type: Object,
+            default: () => ({
+                r: null,
+                g: null,
+                b: null
+            })
+        },
+        active: {
+            type: Boolean,
+            default: false
+        },
+        percent: [String, Number]
+    },
+    data() {
+        return {
+            show: false
+        }
+    },
+    computed: {
+        brightness() {
+            const { r, g, b } = this.color
 
-                return 0.299 * r + 0.587 * g + 0.114 * b
-            },
-            style() {
-                if (this.color) {
-                    let {r, g, b} = this.color
-                    let background = `rgb(${r}, ${g}, ${b})`
-                    let shadow = `rgba(${r}, ${g}, ${b}, 0.5)`
-
-                    return {
-                        'background-color': background,
-                        //'box-shadow': `0px 6px 20px ${shadow}`,
-                        'color': this.textColor ? this.textColor : (this.brightness > 180 ? '#777' : 'rgba(255, 255, 255, 0.4)'),
-                    }
-                }
-                return null
-            }
+            return 0.299 * r + 0.587 * g + 0.114 * b
         },
-        methods: {
-            remove() {
-                this.$emit('remove', {
-                    index: this.index
-                })
-            },
-            click() {
-                if (this.eventKey) {
-                    this.$store.commit(this.eventKey, this.eventValue)
+        style() {
+            if (this.color) {
+                const { r, g, b } = this.color
+                const background = `rgb(${r}, ${g}, ${b})`
+                const shadow = `rgba(${r}, ${g}, ${b}, 0.5)`
+
+                return {
+                    'background-color': background,
+                    // 'box-shadow': `0px 6px 20px ${shadow}`,
+                    'color': this.textColor ? this.textColor : this.brightness > 180 ? '#777' : 'rgba(255, 255, 255, 0.4)'
                 }
+            }
+            return null
+        }
+    },
+    methods: {
+        remove() {
+            this.$emit('remove', {
+                index: this.index
+            })
+        },
+        click() {
+            if (this.eventKey) {
+                this.$store.commit(this.eventKey, this.eventValue)
             }
         }
     }
+}
 </script>
 
 <style lang="scss">

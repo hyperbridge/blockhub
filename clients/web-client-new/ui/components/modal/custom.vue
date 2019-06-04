@@ -1,6 +1,7 @@
 <template>
-    <div class="modal-light"
-         @click.self="$emit('close')">
+    <div
+        class="modal-light"
+        @click.self="$emit('close')">
         <div class="modal-light__content">
             <div :class="modalClass">
                 <div class="custom-modal-header">
@@ -8,9 +9,10 @@
                         {{ title }}
                     </div>
                     <div class="action">
-                        <button type="button"
-                                aria-label="Close"
-                                @click="$emit('close')">
+                        <button
+                            type="button"
+                            aria-label="Close"
+                            @click="$emit('close')">
                             <i class="fas fa-times" />
                         </button>
                     </div>

@@ -1,9 +1,10 @@
 <template>
-    <div v-if="enabled"
-         :class="[
-             'loading-process', 'loading-process--' + size
-         ]"
-         style="position: relative">
+    <div
+        v-if="enabled"
+        :class="[
+            'loading-process', 'loading-process--' + size
+        ]"
+        style="position: relative">
         <div class="loading loading--w-spinner">
             <div><div class="loading-spinner" /></div>
         </div>

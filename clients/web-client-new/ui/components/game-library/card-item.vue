@@ -1,17 +1,20 @@
 <template>
-    <div class="game-library__item"
-         :class="{'is-active': active}"
-         :style="{'background-image' : 'url(' + image + ')' }"
-         @mouseover=" hovered=true "
-         @mouseleave=" hovered=false;">
+    <div
+        class="game-library__item"
+        :class="{'is-active': active}"
+        :style="{'background-image' : 'url(' + image + ')' }"
+        @mouseover=" hovered=true "
+        @mouseleave=" hovered=false;">
         <c-loading-bar-circle v-if="isLoading" />
-        <div class="game-library__item-info"
-             @mouseleave="showButtons = false">
+        <div
+            class="game-library__item-info"
+            @mouseleave="showButtons = false">
             <div class="item-name">
                 {{ name }}
             </div>
-            <div class="item-action"
-                 :class="{'active' : hovered }">
+            <div
+                class="item-action"
+                :class="{'active' : hovered }">
                 <div class="item-action__icons px-2">
                     <c-button status="plain">
                         <i class="fas fa-cog" />
@@ -28,15 +31,18 @@
                 </div>
 
                 <c-button status="plain">
-                    <i class="fas"
-                       :class="showButtons ? 'fa-chevron-up' : 'fa-chevron-down' "
-                       @click=" showButtons = !showButtons " />
+                    <i
+                        class="fas"
+                        :class="showButtons ? 'fa-chevron-up' : 'fa-chevron-down' "
+                        @click=" showButtons = !showButtons " />
                 </c-button>
                 <!--Dropdown menu-->
-                <div hidden
-                     style="height: 20px; width: 20px;margin-right: -5px">
-                    <c-dropdown :class="{'no-right-border' : shareList}"
-                                @click="activeMenu">
+                <div
+                    hidden
+                    style="height: 20px; width: 20px;margin-right: -5px">
+                    <c-dropdown
+                        :class="{'no-right-border' : shareList}"
+                        @click="activeMenu">
                         <ul class="item-dropdown">
                             <li>
                                 <a href="#">
@@ -60,10 +66,11 @@
                             <li @click="toggleList">
                                 <i class="fas fa-share" />
                                 Share
-                                <c-share-list class="in-dropdown"
-                                              :onlineList="online"
-                                              :favoritesList="favorites"
-                                              :show="shareList" />
+                                <c-share-list
+                                    class="in-dropdown"
+                                    :onlineList="online"
+                                    :favoritesList="favorites"
+                                    :show="shareList" />
                             </li>
                             <li>
                                 <a href="#">
@@ -82,8 +89,9 @@
                 </div>
             </div>
 
-            <div class="item-action__buttons w-100"
-                 :class="{'active' : showButtons }">
+            <div
+                class="item-action__buttons w-100"
+                :class="{'active' : showButtons }">
                 <div @click="$emit('continue')">
                     Continue
                     <i class="fas fa-chevron-right" />

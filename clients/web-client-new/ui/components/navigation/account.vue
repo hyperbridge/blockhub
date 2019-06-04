@@ -1,19 +1,26 @@
 <template>
-    <div v-if="signedIn"
-         class="navigation">
-        <c-sidebar-menu title="ACCOUNT"
-                        :links="links.account" />
-        <c-sidebar-menu v-darklaunch="'WALLETS'"
-                        subTitle="Wallets"
-                        :links="links.wallets" />
-        <c-sidebar-menu subTitle="Profiles"
-                        :links="links.profiles" />
-        <c-sidebar-menu subTitle="Developer"
-                        :links="links.developer" />
-        <c-sidebar-menu subTitle="Help"
-                        :links="links.help" />
-        <c-sidebar-menu subTitle="Legal"
-                        :links="links.legal" />
+    <div
+        v-if="signedIn"
+        class="navigation">
+        <c-sidebar-menu
+            title="ACCOUNT"
+            :links="links.account" />
+        <c-sidebar-menu
+            v-darklaunch="'WALLETS'"
+            subTitle="Wallets"
+            :links="links.wallets" />
+        <c-sidebar-menu
+            subTitle="Profiles"
+            :links="links.profiles" />
+        <c-sidebar-menu
+            subTitle="Developer"
+            :links="links.developer" />
+        <c-sidebar-menu
+            subTitle="Help"
+            :links="links.help" />
+        <c-sidebar-menu
+            subTitle="Legal"
+            :links="links.legal" />
     </div>
 </template>
 

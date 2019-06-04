@@ -1,47 +1,58 @@
 <template>
     <div class="searcher-bar">
         <div class="searcher-bar__input">
-            <c-input v-model="searchQuery"
-                     :class="{ 'search-active': searchQuery }"
-                     placeholder="Type to search"
-                     @input="startSearch" />
-            <div class="searcher-bar__input-button"
-                 :class="{ 'searcher-bar__input-button-has-category' : currentCat }"
-                 @click="cleanQuery">
-                <i v-if="currentCat"
-                   :class="`fas fa-${currentCat.icon}`"
-                   style="font-size: 20px;margin-right: 14px;color: #fff" />
-                <i v-if="searchQuery"
-                   class="fas fa-times"
-                   @click="cleanQuery" />
-                <i v-else
-                   class="fas fa-search"
-                   @click="startSearch" />
+            <c-input
+                v-model="searchQuery"
+                :class="{ 'search-active': searchQuery }"
+                placeholder="Type to search"
+                @input="startSearch" />
+            <div
+                class="searcher-bar__input-button"
+                :class="{ 'searcher-bar__input-button-has-category' : currentCat }"
+                @click="cleanQuery">
+                <i
+                    v-if="currentCat"
+                    :class="`fas fa-${currentCat.icon}`"
+                    style="font-size: 20px;margin-right: 14px;color: #fff" />
+                <i
+                    v-if="searchQuery"
+                    class="fas fa-times"
+                    @click="cleanQuery" />
+                <i
+                    v-else
+                    class="fas fa-search"
+                    @click="startSearch" />
             </div>
         </div>
         <transition name="slide-in">
-            <div v-if="isLoading || results.length"
-                 class="searcher-bar__results">
+            <div
+                v-if="isLoading || results.length"
+                class="searcher-bar__results">
                 <transition name="slide-in">
-                    <div v-if="isLoading"
-                         class="searcher-bar__results-loader my-2">
-                        <c-loading-bar-circle size="sm"
-                                              :showBg="false" />
+                    <div
+                        v-if="isLoading"
+                        class="searcher-bar__results-loader my-2">
+                        <c-loading-bar-circle
+                            size="sm"
+                            :showBg="false" />
                     </div>
                 </transition>
                 <transition name="slide-in">
-                    <div v-if="results.length"
-                         class="searcher-bar__results-list">
+                    <div
+                        v-if="results.length"
+                        class="searcher-bar__results-list">
                         <div class="searcher-bar__results-list-ttl">
                             Top results
                         </div>
                         <div class="searcher-bar__results-list-wrapper">
-                            <c-search-category v-for="item in results"
-                                               :category="item"
-                                               @categorySelect="categoryIcon"
-                                               @categoryClose=" currentCat = null ">
-                                <template v-if="item.name.toLowerCase() == 'videos' "
-                                          slot="filters">
+                            <c-search-category
+                                v-for="item in results"
+                                :category="item"
+                                @categorySelect="categoryIcon"
+                                @categoryClose=" currentCat = null ">
+                                <template
+                                    v-if="item.name.toLowerCase() == 'videos' "
+                                    slot="filters">
                                     <div class="invert">
                                         <select class="form-control form-control-sm">
                                             <option>

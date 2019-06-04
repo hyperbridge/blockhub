@@ -4,10 +4,11 @@
             Loading ...
         </p>
         <div v-else>
-            <c-block title="Created auction prospectors"
-                     noGutter
-                     onlyContentBg
-                     bgGradient>
+            <c-block
+                title="Created auction prospectors"
+                noGutter
+                onlyContentBg
+                bgGradient>
                 <table class="prospectors-table">
                     <thead>
                         <th>ID</th>
@@ -18,13 +19,15 @@
                         <th>Edit</th>
                     </thead>
                     <tbody>
-                        <tr v-for="[id, prosp] in prospectors"
+                        <tr
+                            v-for="[id, prosp] in prospectors"
                             :key="id">
                             <template v-if="edited.id != prosp.id">
                                 <td>{{ id }}</td>
                                 <td>
-                                    <c-asset-preview :asset="prosp.asset"
-                                                     size="sm" />
+                                    <c-asset-preview
+                                        :asset="prosp.asset"
+                                        size="sm" />
                                 </td>
                                 <td>{{ prosp.priceMin }} $</td>
                                 <td>{{ prosp.priceMax }} $</td>
@@ -41,16 +44,19 @@
                             <template v-else>
                                 <td>{{ id }}</td>
                                 <td>
-                                    <c-asset-preview :asset="prosp.asset"
-                                                     size="sm" />
+                                    <c-asset-preview
+                                        :asset="prosp.asset"
+                                        size="sm" />
                                 </td>
                                 <td>
-                                    <c-input v-model="edited.priceMin"
-                                             class="edit-input" />
+                                    <c-input
+                                        v-model="edited.priceMin"
+                                        class="edit-input" />
                                 </td>
                                 <td>
-                                    <c-input v-model="edited.priceMax"
-                                             class="edit-input" />
+                                    <c-input
+                                        v-model="edited.priceMax"
+                                        class="edit-input" />
                                 </td>
                                 <td>
                                     <c-datepicker
@@ -59,9 +65,10 @@
                                         calendar-class="form-calendar" />
                                 </td>
                                 <td>
-                                    <c-button status="warning"
-                                              iconHide
-                                              @click="edited = {}">
+                                    <c-button
+                                        status="warning"
+                                        iconHide
+                                        @click="edited = {}">
                                         Cancel
                                     </c-button>
                                     <c-button
@@ -87,28 +94,32 @@
                 </table>
             </c-block>
 
-            <c-block title="Create new auction prospector"
-                     noGutter
-                     onlyContentBg
-                     bgGradient>
+            <c-block
+                title="Create new auction prospector"
+                noGutter
+                onlyContentBg
+                bgGradient>
                 <template v-if="errors.length">
                     <p>Correct following error(s):</p>
                     <ul>
-                        <li v-for="(error, index) in errors"
+                        <li
+                            v-for="(error, index) in errors"
                             :key="index">
                             {{ error }}
                         </li>
                     </ul>
                 </template>
 
-                <c-tabs tabText="Step"
-                        class="margin-bottom-100"
-                        :setActiveTab="activeStep"
-                        @click="createProspector">
+                <c-tabs
+                    tabText="Step"
+                    class="margin-bottom-100"
+                    :setActiveTab="activeStep"
+                    @click="createProspector">
                     <c-tab :tab_id="1">
                         <p>Select asset that you are going to buy</p>
-                        <c-content-navigation :items="assetsArray"
-                                              :setLimits="10">
+                        <c-content-navigation
+                            :items="assetsArray"
+                            :setLimits="10">
                             <c-asset-grid
                                 slot-scope="props"
                                 :assets="props.items"
@@ -129,8 +140,9 @@
                                 v-model="newProspector.priceMin"
                                 class="half-width margin-right-20"
                                 :max="getPrice(newProspector.asset, 'min')" />
-                            <c-input v-model="newProspector.priceMin"
-                                     class="half-width" />
+                            <c-input
+                                v-model="newProspector.priceMin"
+                                class="half-width" />
                         </div>
                         <p>Select maximum price</p>
                         <div class="flex-center-between margin-bottom-20">
@@ -138,8 +150,9 @@
                                 v-model="newProspector.priceMax"
                                 class="half-width margin-right-20"
                                 :max="getPrice(newProspector.asset, 'max')" />
-                            <c-input v-model="newProspector.priceMax"
-                                     class="half-width" />
+                            <c-input
+                                v-model="newProspector.priceMax"
+                                class="half-width" />
                         </div>
                         <p>Select expiration date</p>
                         <div class="flex-center margin-bottom-40">
@@ -150,15 +163,17 @@
                                 calendar-class="form-calendar" />
                         </div>
                         <div class="flex-center-between">
-                            <c-button status="warning"
-                                      icon="trash-alt"
-                                      size="lg"
-                                      @click="resetCreation()">
+                            <c-button
+                                status="warning"
+                                icon="trash-alt"
+                                size="lg"
+                                @click="resetCreation()">
                                 Cancel
                             </c-button>
-                            <c-button status="success"
-                                      size="lg"
-                                      @click="createProspector()">
+                            <c-button
+                                status="success"
+                                size="lg"
+                                @click="createProspector()">
                                 Create
                             </c-button>
                         </div>

@@ -1,6 +1,7 @@
 <template>
-    <div class="game-library__item loading--w-spinner"
-         :class="{'is-active': active}">
+    <div
+        class="game-library__item loading--w-spinner"
+        :class="{'is-active': active}">
         <div class="item-img">
             <c-img :src="game.images.mediumTile" />
         </div>
@@ -32,8 +33,9 @@
             </span>
         </div>
         <div class="dropdown-container">
-            <c-dropdown :class="{'no-right-border' : shareList}"
-                        @click="activeMenu">
+            <c-dropdown
+                :class="{'no-right-border' : shareList}"
+                @click="activeMenu">
                 <ul class="item-dropdown">
                     <li>
                         <a href="#">
@@ -57,10 +59,11 @@
                     <li @click="toggleList">
                         <i class="fas fa-share" />
                         Share
-                        <c-share-list class="in-dropdown"
-                                      :onlineList="online"
-                                      :favoritesList="favorites"
-                                      :show="shareList" />
+                        <c-share-list
+                            class="in-dropdown"
+                            :onlineList="online"
+                            :favoritesList="favorites"
+                            :show="shareList" />
                     </li>
                     <li>
                         <a href="#">
@@ -77,8 +80,9 @@
                 </ul>
             </c-dropdown>
         </div>
-        <div v-if="isLoading"
-             class="loader-block">
+        <div
+            v-if="isLoading"
+            class="loader-block">
             <div class="loading-spinner" />
         </div>
     </div>

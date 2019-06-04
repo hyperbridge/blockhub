@@ -1,7 +1,8 @@
 <template>
     <div class="games-list">
-        <div class="games-list__item"
-             :style="`background-image:url('${game.image}')`">
+        <div
+            class="games-list__item"
+            :style="`background-image:url('${game.image}')`">
             <div class="games-list__item-wrapper">
                 <div class="games-list__item-link">
                     <i class="fas fa-external-link-alt" />
@@ -15,10 +16,11 @@
                             {{ game.sub_name }}
                         </div>
                     </div>
-                    <c-button status="second-info"
-                              icon="play"
-                              class="margin-top-15"
-                              size="xl">
+                    <c-button
+                        status="second-info"
+                        icon="play"
+                        class="margin-top-15"
+                        size="xl">
                         Play Now
                     </c-button>
                 </div>
@@ -52,11 +54,12 @@
                             <span>you earned recently</span>
                         </div>
                         <div class="game-achievements__list">
-                            <a v-for="(item, index) in game.achievements"
-                               v-if="game.achievements"
-                               :key="`achievements${index}`"
-                               :href="item.href"
-                               class="game-achievements__list-item">
+                            <a
+                                v-for="(item, index) in game.achievements"
+                                v-if="game.achievements"
+                                :key="`achievements${index}`"
+                                :href="item.href"
+                                class="game-achievements__list-item">
                                 <i class="fas fa-trophy" />
                             </a>
                             <p v-else>
@@ -71,9 +74,10 @@
                             <span>for this game</span>
                         </div>
                         <div class="game-downloadable-list__list">
-                            <div v-for="item in game.download_content"
-                                 v-if="game.download_content"
-                                 class="game-downloadable-list__list-item">
+                            <div
+                                v-for="item in game.download_content"
+                                v-if="game.download_content"
+                                class="game-downloadable-list__list-item">
                                 <div>
                                     <c-button status="plain">
                                         {{ item.name }}
@@ -83,14 +87,16 @@
                                     <span>
                                         $ {{ item.price }}
                                     </span>
-                                    <c-button v-if=" item.price == 'free' || 'Free'"
-                                              status="opacity-success"
-                                              size="xs">
+                                    <c-button
+                                        v-if=" item.price == 'free' || 'Free'"
+                                        status="opacity-success"
+                                        size="xs">
                                         Install
                                     </c-button>
-                                    <c-button v-else
-                                              status="opacity-success"
-                                              size="xs">
+                                    <c-button
+                                        v-else
+                                        status="opacity-success"
+                                        size="xs">
                                         Buy
                                     </c-button>
                                 </div>
@@ -115,9 +121,10 @@
                                     <p>
                                         {{ item.text }}
                                     </p>
-                                    <c-button status="plain"
-                                              :href="item.link"
-                                              class="pl-0">
+                                    <c-button
+                                        status="plain"
+                                        :href="item.link"
+                                        class="pl-0">
                                         <i class="fas fa-external-link-alt margin-right-5" />
                                         Read More
                                     </c-button>

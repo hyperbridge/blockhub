@@ -7,12 +7,14 @@
             :href="plan.link"
             data-toggle="modal"
             data-target="#purchase-modal">
-            <span v-if="plan.price"
-                  class="margin-left-5">
+            <span
+                v-if="plan.price"
+                class="margin-left-5">
                 {{ plan.price | convertCurrency }}
             </span>
-            <span v-else
-                  class="margin-left-5">
+            <span
+                v-else
+                class="margin-left-5">
                 <template v-if="plan.link_text">
                     {{ plan.link_text }}
                 </template>

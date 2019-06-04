@@ -128,8 +128,9 @@
         <div class="row">
             <div class="col-12">
                 <transition name="slide-in-top">
-                    <div v-if="filtersActive"
-                         class="active-filters">
+                    <div
+                        v-if="filtersActive"
+                        class="active-filters">
                         <!-- <h3>Active filters</h3> -->
                         <div class="active-filters__content">
                             <c-option-tag

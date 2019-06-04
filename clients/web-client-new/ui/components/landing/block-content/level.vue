@@ -1,9 +1,11 @@
 <template>
-    <div class="landing-level"
-         :class="['level-size-' + size]"
-         :style="{'color' : textColor}">
-        <div v-if="textPosition == 'left'"
-             class="landing-level__text-left">
+    <div
+        class="landing-level"
+        :class="['level-size-' + size]"
+        :style="{'color' : textColor}">
+        <div
+            v-if="textPosition == 'left'"
+            class="landing-level__text-left">
             <slot />
         </div>
         <div class="landing-level__number">
@@ -11,8 +13,9 @@
                 {{ number }}
             </span>
         </div>
-        <div v-if="textPosition == 'right'"
-             class="landing-level__text-right">
+        <div
+            v-if="textPosition == 'right'"
+            class="landing-level__text-right">
             <slot />
         </div>
     </div>

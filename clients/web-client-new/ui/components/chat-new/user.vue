@@ -1,32 +1,38 @@
 <template>
     <div class="chat__user-item">
-        <c-chat-user-avatar :name="name"
-                            :status="status"
-                            :avatar="avatar" />
+        <c-chat-user-avatar
+            :name="name"
+            :status="status"
+            :avatar="avatar" />
         <div class="user-info">
             <strong>
                 {{ name }}
-                <i v-if="isAdmin"
-                   class="fas fa-crown margin-left-5"
-                   style="color: #FADC72" />
+                <i
+                    v-if="isAdmin"
+                    class="fas fa-crown margin-left-5"
+                    style="color: #FADC72" />
             </strong>
             <span>{{ game }}</span>
             <span v-if="!game && $slots['sub-info']">
                 <slot name="sub-info" />
             </span>
         </div>
-        <div v-if="action"
-             class="user-action">
-            <i class="fas"
-               :class=" volume ? 'fa-volume-up' : 'fa-volume-off'"
-               @click="toggleVolume" />
-            <i class="fas"
-               :class=" microphone ? 'fa-microphone' : 'fa-microphone-slash'"
-               @click="toggleMicrophone" />
+        <div
+            v-if="action"
+            class="user-action">
+            <i
+                class="fas"
+                :class=" volume ? 'fa-volume-up' : 'fa-volume-off'"
+                @click="toggleVolume" />
+            <i
+                class="fas"
+                :class=" microphone ? 'fa-microphone' : 'fa-microphone-slash'"
+                @click="toggleMicrophone" />
         </div>
-        <div v-if="$slots.default && !action"
-             class="user-custom-action"
-             style="margin-left: auto;">
+        <div
+            v-if="$slots.default && !action"
+            class="user-custom-action"
+            style="margin-left: auto;">
             <slot />
         </div>
     </div>

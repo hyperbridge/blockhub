@@ -2,14 +2,16 @@
     <c-layout navigationKey="account">
         <div class="row">
             <div class="col-12">
-                <c-block title="Account Backup"
-                         class="margin-bottom-30"
-                         :noGutter="true"
-                         :bgGradient="true"
-                         :onlyContentBg="true">
+                <c-block
+                    title="Account Backup"
+                    class="margin-bottom-30"
+                    :noGutter="true"
+                    :bgGradient="true"
+                    :onlyContentBg="true">
                     <div class="row">
-                        <div class="topics-list col-3"
-                             @click="exportAccountFile">
+                        <div
+                            class="topics-list col-3"
+                            @click="exportAccountFile">
                             <c-topic-item
                                 icon="fas fa-save"
                                 class="padding-10">

@@ -1,50 +1,59 @@
 <template>
     <div class="row mx-0">
         <div class="col-12 col-lg-7 col-xl-8">
-            <c-screen-gallery v-if="project.images && project.images.preview"
-                              :items="project.images.preview" />
+            <c-screen-gallery
+                v-if="project.images && project.images.preview"
+                :items="project.images.preview" />
 
-            <div class="action"
-                 hidden>
+            <div
+                class="action"
+                hidden>
                 Currently crowdfunding
             </div>
 
-            <c-block title="Participation Tiers"
-                     :noGutter="true"
-                     :onlyContentBg="true"
-                     :bgGradient="true">
-                <c-participation-tier v-for="(item, index) in participationTiers"
-                                      :id="item.id"
-                                      :key="index"
-                                      :price="item.price"
-                                      :sold="item.sold"
-                                      :left="item.left"
-                                      :title="item.title"
-                                      :tag="item.tag"
-                                      :inList="(index < participationTiers.length-1) ? true : false" />
+            <c-block
+                title="Participation Tiers"
+                :noGutter="true"
+                :onlyContentBg="true"
+                :bgGradient="true">
+                <c-participation-tier
+                    v-for="(item, index) in participationTiers"
+                    :id="item.id"
+                    :key="index"
+                    :price="item.price"
+                    :sold="item.sold"
+                    :left="item.left"
+                    :title="item.title"
+                    :tag="item.tag"
+                    :inList="(index < participationTiers.length-1) ? true : false" />
             </c-block>
 
             <div class="editor-container">
-                <div v-if="editing"
-                     class="editor">
-                    <button v-if="!activeElement['description']"
-                            class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                            @click="activateElement('description')">
+                <div
+                    v-if="editing"
+                    class="editor">
+                    <button
+                        v-if="!activeElement['description']"
+                        class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                        @click="activateElement('description')">
                         Change Description <span
                             class="fa fa-edit" />
                     </button>
 
-                    <div v-if="activeElement['description']"
-                         class="form-control-element form-control-element--right">
-                        <input ref="description"
-                               v-model="project.description"
-                               name="name"
-                               type="text"
-                               class="form-control"
-                               placeholder="Project description...">
+                    <div
+                        v-if="activeElement['description']"
+                        class="form-control-element form-control-element--right">
+                        <input
+                            ref="description"
+                            v-model="project.description"
+                            name="name"
+                            type="text"
+                            class="form-control"
+                            placeholder="Project description...">
                         <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                            <span class="fa fa-check"
-                                  @click="deactivateElement('description')" />
+                            <span
+                                class="fa fa-check"
+                                @click="deactivateElement('description')" />
                         </div>
                     </div>
                 </div>
@@ -53,35 +62,41 @@
                 </p>
             </div>
 
-            <c-block v-if="!editing"
-                     title="About Game"
-                     class="margin-bottom-30"
-                     :noPadding="true"
-                     :noGutter="true"
-                     :bgGradient="true"
-                     :onlyContentBg="true">
-                <div class="main-content"
-                     v-html="project.value">
+            <c-block
+                v-if="!editing"
+                title="About Game"
+                class="margin-bottom-30"
+                :noPadding="true"
+                :noGutter="true"
+                :bgGradient="true"
+                :onlyContentBg="true">
+                <div
+                    class="main-content"
+                    v-html="project.value">
                     {{ project.value }}
                 </div>
             </c-block>
 
-            <div v-if="editing"
-                 class="content-editor">
-                <div id="summernote"
-                     v-html="project.value">
+            <div
+                v-if="editing"
+                class="content-editor">
+                <div
+                    id="summernote"
+                    v-html="project.value">
                     {{ project.value }}
                 </div>
             </div>
         </div>
         <div class="col-12 col-lg-5 col-xl-4">
-            <div v-if="project.funding"
-                 class="card invert">
+            <div
+                v-if="project.funding"
+                class="card invert">
                 <div class="card-body">
-                    <a v-if="editing && !activeElement['campaign']"
-                       class="nav-link editor-container editor-container--style-2"
-                       href="javascript:;"
-                       @click="showTab('configure')">
+                    <a
+                        v-if="editing && !activeElement['campaign']"
+                        class="nav-link editor-container editor-container--style-2"
+                        href="javascript:;"
+                        @click="showTab('configure')">
                         <i class="fas fa-cog" />
                         <span>Configure Campaign</span>
                     </a>
@@ -97,14 +112,17 @@
                         )" />
                     <div class="project">
                         <div class="project__progress">
-                            <div v-for="(stage, index) in project.funding.stages"
-                                 :key="index"
-                                 :class="stage.status"
-                                 class="project__progress-stage">
-                                <i v-if="stage.status === 'Done'"
-                                   class="fas fa-check" />
-                                <i v-if="stage.status === 'InProgress'"
-                                   class="fas fa-clock" />
+                            <div
+                                v-for="(stage, index) in project.funding.stages"
+                                :key="index"
+                                :class="stage.status"
+                                class="project__progress-stage">
+                                <i
+                                    v-if="stage.status === 'Done'"
+                                    class="fas fa-check" />
+                                <i
+                                    v-if="stage.status === 'InProgress'"
+                                    class="fas fa-clock" />
                                 <span class="stage_line" />
                                 <span class="name">{{ stage.text }}</span>
                             </div>
@@ -143,17 +161,20 @@
                             </div>
                         </div>
                         <div class="project__action">
-                            <c-button status="share"
-                                      swapDirection>
+                            <c-button
+                                status="share"
+                                swapDirection>
                                 Share
                             </c-button>
-                            <c-button status="info"
-                                      icon="check"
-                                      swapDirection>
+                            <c-button
+                                status="info"
+                                icon="check"
+                                swapDirection>
                                 Follow
                             </c-button>
-                            <c-button status="support"
-                                      swapDirection>
+                            <c-button
+                                status="support"
+                                swapDirection>
                                 Support
                             </c-button>
                         </div>
@@ -161,12 +182,14 @@
                 </div>
             </div>
 
-            <div v-if="project.milestones"
-                 class="card invert milestones">
+            <div
+                v-if="project.milestones"
+                class="card invert milestones">
                 <div class="card-body">
-                    <a v-if="editing && !activeElement['milestones']"
-                       href="#"
-                       class="editor-container editor-container--style-2">
+                    <a
+                        v-if="editing && !activeElement['milestones']"
+                        href="#"
+                        class="editor-container editor-container--style-2">
                         <i class="fas fa-cog" />
                         <span>Set Up Milestones</span>
                     </a>
@@ -174,15 +197,18 @@
                         Milestones
                     </h2>
                     <ul class="milestones__list">
-                        <li v-for="(item, index) in project.milestones.items"
+                        <li
+                            v-for="(item, index) in project.milestones.items"
                             :key="index"
                             :class="{ done: item.status === 'Done' }">
-                            <div v-if="item.status === 'Done'"
-                                 class="stepNumber">
+                            <div
+                                v-if="item.status === 'Done'"
+                                class="stepNumber">
                                 <i class="fas fa-check" />
                             </div>
-                            <div v-else
-                                 class="stepNumber">
+                            <div
+                                v-else
+                                class="stepNumber">
                                 {{ item.stepNumber }}
                             </div>
                             <div class="text">
@@ -193,35 +219,39 @@
                 </div>
             </div>
 
-            <c-community-spotlight v-darklaunch="`COMMUNITY`"
-                                   :discussions="project.community.discussions"
-                                   :communityPath="`/project/${project.id}`"
-                                   :editing="editing"
-                                   :activeElement="activeElement['milestones']"
-                                   class="margin-bottom-30" />
+            <c-community-spotlight
+                v-darklaunch="`COMMUNITY`"
+                :discussions="project.community.discussions"
+                :communityPath="`/project/${project.id}`"
+                :editing="editing"
+                :activeElement="activeElement['milestones']"
+                class="margin-bottom-30" />
 
-            <c-block title="Contribute"
-                     class="margin-bottom-30"
-                     :noGutter="true"
-                     :bgGradient="true"
-                     :onlyContentBg="true">
+            <c-block
+                title="Contribute"
+                class="margin-bottom-30"
+                :noGutter="true"
+                :bgGradient="true"
+                :onlyContentBg="true">
                 <c-contribute-form @click="showContributeModal" />
             </c-block>
 
-            <c-contribute-pledge v-for="(pledge, index) in project.pledges"
-                                 :key="index"
-                                 :pledge="pledge"
-                                 :currency="project.meta.currency"
-                                 @click="showContributeModal" />
+            <c-contribute-pledge
+                v-for="(pledge, index) in project.pledges"
+                :key="index"
+                :pledge="pledge"
+                :currency="project.meta.currency"
+                @click="showContributeModal" />
 
             <c-decentralization-meter v-decentralized-mode />
 
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'contribute'"
                 @close="$store.commit('application/activateModal', null)">
-                <div slot="header"
-                     class="h4"
-                     style="text-align: left">
+                <div
+                    slot="header"
+                    class="h4"
+                    style="text-align: left">
                     Contribute
                 </div>
                 <template slot="body">
@@ -231,25 +261,29 @@
                         </h3>
                         Contract Address: 0xasdadas<br>
 
-                        <c-button class="c-button--lg outline-white margin-top-20 margin-auto"
-                                  @click="startContribution">
+                        <c-button
+                            class="c-button--lg outline-white margin-top-20 margin-auto"
+                            @click="startContribution">
                             Start
                         </c-button>
                     </div>
                     <div v-if="syncStep === 2" />
                     <br>
-                    <div v-if="syncing"
-                         class="padding-40 loading-process"
-                         style="position: relative">
+                    <div
+                        v-if="syncing"
+                        class="padding-40 loading-process"
+                        style="position: relative">
                         <div class="loading loading--w-spinner">
                             <div><div class="loading-spinner" /></div>
                         </div>
                     </div>
                 </template>
-                <p slot="footer"
-                   class="margin-top-20">
-                    <c-button status="dark"
-                              to="/help">
+                <p
+                    slot="footer"
+                    class="margin-top-20">
+                    <c-button
+                        status="dark"
+                        to="/help">
                         Need help? Check the Help Center
                     </c-button>
                 </p>

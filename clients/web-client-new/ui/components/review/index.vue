@@ -1,9 +1,11 @@
 <template>
-    <div class="review"
-         :class="{ 'background-review': background, 'p-0': !background, 'margin-bottom-40': !background}">
+    <div
+        class="review"
+        :class="{ 'background-review': background, 'p-0': !background, 'margin-bottom-40': !background}">
         <div class="review__header">
-            <c-img :src="review.author.img"
-                   class="review__author-img" />
+            <c-img
+                :src="review.author.img"
+                class="review__author-img" />
             <div class="review__author">
                 <h5 class="review__author-name">
                     {{ review.author.name }}
@@ -23,8 +25,9 @@
         <h4>{{ review.title }}</h4>
 
         <transition name="fade-scale">
-            <p v-if="show_more"
-               :key="show_more">
+            <p
+                v-if="show_more"
+                :key="show_more">
                 {{ review.text }}
             </p>
             <p v-else>
@@ -33,8 +36,9 @@
         </transition>
 
         <transition name="fade-scale">
-            <div v-if="show_more"
-                 class="review__user-setup">
+            <div
+                v-if="show_more"
+                class="review__user-setup">
                 <div
                     v-for="(param, index) in setup_params"
                     :key="index"
@@ -54,8 +58,9 @@
                     <i class="fas fa-thumbs-down down" />NOT HELPFUL
                 </a>
             </span>
-            <a href="#"
-               @click.prevent="show_more = !show_more">
+            <a
+                href="#"
+                @click.prevent="show_more = !show_more">
                 {{ show_more ? 'HIDE REVIEW' : 'READ MORE...' }}
             </a>
         </div>

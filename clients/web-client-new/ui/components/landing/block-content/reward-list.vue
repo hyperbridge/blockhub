@@ -3,14 +3,17 @@
         <div class="landing-reward-list__content">
             <slot />
         </div>
-        <div v-if="$slots.list"
-             class="landing-reward-list__list-wrapper">
-            <div class="list-toggle-btn"
-                 @click="toggleList">
+        <div
+            v-if="$slots.list"
+            class="landing-reward-list__list-wrapper">
+            <div
+                class="list-toggle-btn"
+                @click="toggleList">
                 {{ bntText }} Reward list
             </div>
-            <div v-if="showList"
-                 class="landing-reward-list__list">
+            <div
+                v-if="showList"
+                class="landing-reward-list__list">
                 <slot name="list" />
             </div>
         </div>

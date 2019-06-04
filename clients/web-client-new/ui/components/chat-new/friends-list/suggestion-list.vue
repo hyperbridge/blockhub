@@ -1,26 +1,32 @@
 <template>
     <div class="chat-friends-suggestion">
-        <div class="chat-friends-suggestion__btn"
-             @click="toggleList">
+        <div
+            class="chat-friends-suggestion__btn"
+            @click="toggleList">
             <i class="fas fa-user-plus" />
             Suggested friends
-            <i class="fas mr-2"
-               :class="[ open ? 'fa-angle-down' : 'fa-angle-right' ]" />
+            <i
+                class="fas mr-2"
+                :class="[ open ? 'fa-angle-down' : 'fa-angle-right' ]" />
         </div>
-        <div v-if="open"
-             class="chat-friends-suggestion__list">
-            <c-chat-user v-for="item in list"
-                         :key="item.name"
-                         :avatar="item.avatar"
-                         :name="item.name"
-                         :game="item.game">
+        <div
+            v-if="open"
+            class="chat-friends-suggestion__list">
+            <c-chat-user
+                v-for="item in list"
+                :key="item.name"
+                :avatar="item.avatar"
+                :name="item.name"
+                :game="item.game">
                 <div>
-                    <c-button status="opacity-info"
-                              size="xs">
+                    <c-button
+                        status="opacity-info"
+                        size="xs">
                         Add
                     </c-button>
-                    <c-button status="plain"
-                              size="xs">
+                    <c-button
+                        status="plain"
+                        size="xs">
                         <i class="fas fa-times" />
                     </c-button>
                 </div>

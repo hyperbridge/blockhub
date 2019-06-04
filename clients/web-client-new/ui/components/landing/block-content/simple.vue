@@ -1,14 +1,16 @@
 <template>
-    <section class="landing-section"
-             :class="{'full-height' : fullHeight}"
-             :style="{
-                 'background-image' : 'url(' + bgImage + ')' ,
-                 'min-height' : minHeight,
-                 'background-position' : bgPosition
-             }">
+    <section
+        class="landing-section"
+        :class="{'full-height' : fullHeight}"
+        :style="{
+            'background-image' : 'url(' + bgImage + ')' ,
+            'min-height' : minHeight,
+            'background-position' : bgPosition
+        }">
         <div class="container">
-            <div class="row landing__content-block-body"
-                 :class="[horizontalPozition, verticalPosition]">
+            <div
+                class="row landing__content-block-body"
+                :class="[horizontalPozition, verticalPosition]">
                 <slot />
             </div>
         </div>

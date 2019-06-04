@@ -1,17 +1,19 @@
 <template>
-    <video ref="video"
-           :controls="controls"
-           :width="width"
-           :height="height"
-           :autoplay="autoplay"
-           :poster="poster"
-           :preload="preload"
-           @play="onPlay"
-           @timeupdate="onTimeUpdate"
-           @ended="onStop">
+    <video
+        ref="video"
+        :controls="controls"
+        :width="width"
+        :height="height"
+        :autoplay="autoplay"
+        :poster="poster"
+        :preload="preload"
+        @play="onPlay"
+        @timeupdate="onTimeUpdate"
+        @ended="onStop">
         <template>
-            <source :src="src"
-                    type="video/mp4">
+            <source
+                :src="src"
+                type="video/mp4">
         </template>
         Your browser does not support the video tag.
     </video>

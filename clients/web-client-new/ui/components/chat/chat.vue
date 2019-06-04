@@ -1,18 +1,22 @@
 <template>
-    <main id="chat"
-          class="flex flex-column">
+    <main
+        id="chat"
+        class="flex flex-column">
         <header class="title-bar flex flex-row flex-center">
             <div class="title-wrapper block center-element">
                 <span class="title">Chat</span>
             </div>
         </header>
-        <div v-if="user"
-             class="flex flex-row flex-1 clear">
-            <c-user-list :users="users"
-                         :logout="logout" />
+        <div
+            v-if="user"
+            class="flex flex-row flex-1 clear">
+            <c-user-list
+                :users="users"
+                :logout="logout" />
 
-            <c-message-list :messages="messages"
-                            :createMessage="createMessage" />
+            <c-message-list
+                :messages="messages"
+                :createMessage="createMessage" />
         </div>
     </main>
 </template>

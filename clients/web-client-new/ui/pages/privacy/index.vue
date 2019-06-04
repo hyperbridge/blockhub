@@ -1,7 +1,8 @@
 <template>
-    <c-layout navigationKey="help"
-              :showLeftPanel="false"
-              :showRightPanel="false">
+    <c-layout
+        navigationKey="help"
+        :showLeftPanel="false"
+        :showRightPanel="false">
         <div class="row">
             <div class="col-12 mb-4">
                 <c-privacy-block />

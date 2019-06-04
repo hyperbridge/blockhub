@@ -1,8 +1,10 @@
 <template>
-    <div class="loader-block"
-         :class="{'loader-block--bg' : showBg }">
-        <div class="loading-spinner"
-             :class="['loading-spinner-size--' + size ]" />
+    <div
+        class="loader-block"
+        :class="{'loader-block--bg' : showBg }">
+        <div
+            class="loading-spinner"
+            :class="['loading-spinner-size--' + size ]" />
     </div>
 </template>
 

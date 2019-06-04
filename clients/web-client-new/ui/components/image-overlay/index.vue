@@ -1,15 +1,18 @@
 <template>
     <div class="image-overlay">
-        <div v-if="title"
-             class="image-overlay__title">
+        <div
+            v-if="title"
+            class="image-overlay__title">
             {{ title }}
         </div>
-        <div v-if="subtitle"
-             class="image-overlay__subtitle">
+        <div
+            v-if="subtitle"
+            class="image-overlay__subtitle">
             {{ subtitle }}
         </div>
-        <div v-if="text"
-             class="image-overlay__text">
+        <div
+            v-if="text"
+            class="image-overlay__text">
             {{ text }}
         </div>
     </div>

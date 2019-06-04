@@ -1,23 +1,27 @@
 <template>
     <div class="friends-list">
-        <div class="friends-list__btn"
-             :class="{ 'active' : open }"
-             @click="toggleList">
-            <i class="fas mr-2"
-               :class="[ open ? 'fa-angle-down' : 'fa-angle-right' ]" />
+        <div
+            class="friends-list__btn"
+            :class="{ 'active' : open }"
+            @click="toggleList">
+            <i
+                class="fas mr-2"
+                :class="[ open ? 'fa-angle-down' : 'fa-angle-right' ]" />
             {{ title }}
             <span class="ml-2">
                 0/{{ list.length }}
             </span>
         </div>
-        <div v-if="open"
-             class="friends-list__list">
-            <c-chat-user v-for="item in list"
-                         :key="item.name"
-                         :avatar="item.avatar"
-                         :name="item.name"
-                         :game="item.game"
-                         :status="item.status" />
+        <div
+            v-if="open"
+            class="friends-list__list">
+            <c-chat-user
+                v-for="item in list"
+                :key="item.name"
+                :avatar="item.avatar"
+                :name="item.name"
+                :game="item.game"
+                :status="item.status" />
         </div>
     </div>
 </template>

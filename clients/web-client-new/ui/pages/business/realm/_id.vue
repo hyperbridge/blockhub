@@ -1,8 +1,9 @@
 <template>
     <c-layout>
         <div class="row">
-            <div v-if="notice"
-                 class="col-md-12">
+            <div
+                v-if="notice"
+                class="col-md-12">
                 <p class="alert alert-info">
                     {{ notice }}
                 </p>
@@ -14,10 +15,11 @@
                         <label>Title</label>
                     </label>
                     <div class="col-sm-9">
-                        <input v-model="realm.name"
-                               type="text"
-                               class="form-control"
-                               placeholder="">
+                        <input
+                            v-model="realm.name"
+                            type="text"
+                            class="form-control"
+                            placeholder="">
                         <span class="form-text" />
                     </div>
                 </div>
@@ -26,10 +28,11 @@
                         <label>Description</label>
                     </label>
                     <div class="col-sm-9">
-                        <input v-model="realm.description"
-                               type="text"
-                               class="form-control"
-                               placeholder="">
+                        <input
+                            v-model="realm.description"
+                            type="text"
+                            class="form-control"
+                            placeholder="">
                         <span class="form-text" />
                     </div>
                 </div>
@@ -40,97 +43,113 @@
                         <label>Tags</label>
                     </label>
                     <div class="col-sm-8">
-                        <c-multiselect v-model="realm.tags"
-                                       tag-placeholder="Add this as new tag"
-                                       placeholder="Search or add a tag"
-                                       label="value"
-                                       track-by="key"
-                                       :options="tagOptions"
-                                       :multiple="true"
-                                       :taggable="true"
-                                       @tag="addTag" />
+                        <c-multiselect
+                            v-model="realm.tags"
+                            tag-placeholder="Add this as new tag"
+                            placeholder="Search or add a tag"
+                            label="value"
+                            track-by="key"
+                            :options="tagOptions"
+                            :multiple="true"
+                            :taggable="true"
+                            @tag="addTag" />
                         <span class="form-text" />
                     </div>
                 </div>
             </div>
 
             <div class="col-12">
-                <c-html-editor height="200"
-                               :model.sync="realm.value" />
+                <c-html-editor
+                    height="200"
+                    :model.sync="realm.value" />
 
                 <span class="form-text" />
             </div>
 
             <div class="col-12">
-                <c-heading-bar-color class="mt-4 mb-4"
-                                     colorCode="#444"
-                                     textAlign="center"
-                                     hidden>
+                <c-heading-bar-color
+                    class="mt-4 mb-4"
+                    colorCode="#444"
+                    textAlign="center"
+                    hidden>
                     Advanced Options
                 </c-heading-bar-color>
 
                 <div @click="toggleAdvanced">
-                    <i class="mr-2 fas"
-                       :class="advanced ? 'fa-angle-up' : 'fa-angle-down'" />
+                    <i
+                        class="mr-2 fas"
+                        :class="advanced ? 'fa-angle-up' : 'fa-angle-down'" />
                     {{ advanced ? 'Hide' : 'Show' }} Advanced
                 </div>
             </div>
 
-            <div v-if="advanced"
-                 class="col-12">
+            <div
+                v-if="advanced"
+                class="col-12">
                 <hr>
             </div>
 
-            <div v-if="advanced"
-                 class="col-md-6" />
+            <div
+                v-if="advanced"
+                class="col-md-6" />
 
-            <div v-if="advanced"
-                 class="col-md-6" />
+            <div
+                v-if="advanced"
+                class="col-md-6" />
 
-            <div v-if="advanced"
-                 class="col-md-12">
-                <div class="form-group row"
-                     style="text-align: center">
+            <div
+                v-if="advanced"
+                class="col-md-12">
+                <div
+                    class="form-group row"
+                    style="text-align: center">
                     <br>
                     <h3 style="width: 100%">
                         Raw Data Editor
                     </h3>
                     <br><br>
-                    <textarea :value="JSON.stringify(realm)"
-                              rows="10"
-                              cols="50"
-                              @input="updateRealmRaw($event.target.value)" />
+                    <textarea
+                        :value="JSON.stringify(realm)"
+                        rows="10"
+                        cols="50"
+                        @input="updateRealmRaw($event.target.value)" />
                     <br><br>
                     <span class="form-text" />
-                    <c-json-editor v-model="realm"
-                                   :objData="realm"
-                                   style="margin: 0 auto" />
+                    <c-json-editor
+                        v-model="realm"
+                        :objData="realm"
+                        style="margin: 0 auto" />
                 </div>
             </div>
         </div>
 
         <template slot="menu">
             <div class="row">
-                <div v-if="realm.id"
-                     class="col-12 text-right">
-                    <c-button status="info"
-                              :href="`/realm/${realm.id}`"
-                              target="_blank"
-                              icon="open">
+                <div
+                    v-if="realm.id"
+                    class="col-12 text-right">
+                    <c-button
+                        status="info"
+                        :href="`/realm/${realm.id}`"
+                        target="_blank"
+                        icon="open">
                         View Page
                     </c-button>
-                    <c-button status="success"
-                              icon="save"
-                              @click="save">
+                    <c-button
+                        status="success"
+                        icon="save"
+                        @click="save">
                         Save
                     </c-button>
                 </div>
-                <div v-if="!realm.id"
-                     class="col-12 text-right">
-                    <c-button status="success"
-                              size="md"
-                              icon="plus"
-                              @click="create">
+                <div
+                    v-if="!realm.id"
+                    class="col-12 text-right">
+                    <c-button
+                        status="success"
+                        size="md"
+                        icon="plus"
+                        @click="create">
                         Create
                     </c-button>
                 </div>

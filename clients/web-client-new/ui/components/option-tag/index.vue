@@ -5,8 +5,9 @@
             isChildren ? 'option-tag--shadow' : 'option-tag--margin',
             { 'option-tag--light': isParent }
         ]">
-        <span v-if="title"
-              class="option-tag__title">
+        <span
+            v-if="title"
+            class="option-tag__title">
             {{ title }}
         </span>
         {{ text }}

@@ -1,19 +1,22 @@
 <template>
     <div class="switch-container">
-        <div v-if="!customLabel && label_position == 'left'"
-             class="label"
-             style="padding-right: 10px"
-             :style="{ fontSize: label_size }">
+        <div
+            v-if="!customLabel && label_position == 'left'"
+            class="label"
+            style="padding-right: 10px"
+            :style="{ fontSize: label_size }">
             {{ label }}
         </div>
-        <div v-else-if="customLabel && label_position == 'left'"
-             class="label"
-             style="padding-right: 10px"
-             :style="{ fontSize: label_size }">
+        <div
+            v-else-if="customLabel && label_position == 'left'"
+            class="label"
+            style="padding-right: 10px"
+            :style="{ fontSize: label_size }">
             <slot />
         </div>
-        <label class="switch my-0"
-               :class="`switch-${size}`">
+        <label
+            class="switch my-0"
+            :class="`switch-${size}`">
             <input
                 :id="id"
                 type="checkbox"
@@ -22,16 +25,18 @@
                 @change="$emit('change', $event.target.checked)">
             <span />
         </label>
-        <div v-if="!customLabel && label_position == 'right'"
-             class="label"
-             style="padding-left: 10px"
-             :style="{ fontSize: label_size }">
+        <div
+            v-if="!customLabel && label_position == 'right'"
+            class="label"
+            style="padding-left: 10px"
+            :style="{ fontSize: label_size }">
             {{ label }}
         </div>
-        <div v-else-if="customLabel && label_position == 'right'"
-             class="label"
-             style="padding-left: 10px"
-             :style="{ fontSize: label_size }">
+        <div
+            v-else-if="customLabel && label_position == 'right'"
+            class="label"
+            style="padding-left: 10px"
+            :style="{ fontSize: label_size }">
             <slot />
         </div>
     </div>

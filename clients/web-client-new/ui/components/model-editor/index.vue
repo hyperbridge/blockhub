@@ -1,9 +1,11 @@
 <template>
     <div class="model-editor">
-        <div v-if="model"
-             class="row margin-bottom-40">
-            <div v-if="notice"
-                 class="col-md-12">
+        <div
+            v-if="model"
+            class="row margin-bottom-40">
+            <div
+                v-if="notice"
+                class="col-md-12">
                 <p class="alert alert-info">
                     {{ notice }}
                 </p>
@@ -15,93 +17,108 @@
                         <label>Tags</label>
                     </label>
                     <div class="col-sm-8">
-                        <c-multiselect v-model="model.tags"
-                                       tag-placeholder="Add this as new tag"
-                                       placeholder="Search or add a tag"
-                                       label="value"
-                                       track-by="key"
-                                       :options="tagOptions"
-                                       :multiple="true"
-                                       :taggable="true"
-                                       @tag="addTag" />
+                        <c-multiselect
+                            v-model="model.tags"
+                            tag-placeholder="Add this as new tag"
+                            placeholder="Search or add a tag"
+                            label="value"
+                            track-by="key"
+                            :options="tagOptions"
+                            :multiple="true"
+                            :taggable="true"
+                            @tag="addTag" />
                         <span class="form-text" />
                     </div>
                 </div>
             </div>
 
             <div class="col-12">
-                <c-html-editor height="200"
-                               :model.sync="model.value" />
+                <c-html-editor
+                    height="200"
+                    :model.sync="model.value" />
 
                 <span class="form-text" />
             </div>
 
             <div class="col-12 margin-top-10">
-                <c-heading-bar-color class="mt-4 mb-4"
-                                     colorCode="#444"
-                                     textAlign="center"
-                                     hidden>
+                <c-heading-bar-color
+                    class="mt-4 mb-4"
+                    colorCode="#444"
+                    textAlign="center"
+                    hidden>
                     Advanced Options
                 </c-heading-bar-color>
 
                 <div @click="toggleAdvanced">
-                    <i class="mr-2 fas"
-                       :class="advanced ? 'fa-angle-up' : 'fa-angle-down'" />
+                    <i
+                        class="mr-2 fas"
+                        :class="advanced ? 'fa-angle-up' : 'fa-angle-down'" />
                     {{ advanced ? 'Hide' : 'Show' }} Advanced
                 </div>
             </div>
 
-            <div v-if="advanced"
-                 class="col-12">
+            <div
+                v-if="advanced"
+                class="col-12">
                 <hr>
             </div>
 
-            <div v-if="advanced"
-                 class="col-md-12">
-                <div class="form-group row"
-                     style="text-align: center">
+            <div
+                v-if="advanced"
+                class="col-md-12">
+                <div
+                    class="form-group row"
+                    style="text-align: center">
                     <br>
                     <h3 style="width: 100%">
                         Raw Data Editor
                     </h3>
                     <br><br>
-                    <textarea :value="modelJson"
-                              rows="10"
-                              cols="50"
-                              @input="updateModelRaw($event.target.value)" />
+                    <textarea
+                        :value="modelJson"
+                        rows="10"
+                        cols="50"
+                        @input="updateModelRaw($event.target.value)" />
                     <br><br>
                     <span class="form-text" />
-                    <c-json-editor v-model="model"
-                                   :objData="model"
-                                   style="margin: 0 auto" />
+                    <c-json-editor
+                        v-model="model"
+                        :objData="model"
+                        style="margin: 0 auto" />
                 </div>
             </div>
         </div>
 
-        <div slot="menu"
-             class="row">
-            <div v-if="model.id"
-                 class="col-12 text-right">
-                <c-button status="info"
-                          size="lg"
-                          :href="`/model/${model.id}`"
-                          target="_blank"
-                          icon="eye">
+        <div
+            slot="menu"
+            class="row">
+            <div
+                v-if="model.id"
+                class="col-12 text-right">
+                <c-button
+                    status="info"
+                    size="lg"
+                    :href="`/model/${model.id}`"
+                    target="_blank"
+                    icon="eye">
                     View Community
                 </c-button>
-                <c-button status="success"
-                          size="lg"
-                          icon="save"
-                          @click="save">
+                <c-button
+                    status="success"
+                    size="lg"
+                    icon="save"
+                    @click="save">
                     Save
                 </c-button>
             </div>
-            <div v-if="!model.id"
-                 class="col-12 text-right">
-                <c-button status="success"
-                          size="lg"
-                          icon="plus"
-                          @click="create">
+            <div
+                v-if="!model.id"
+                class="col-12 text-right">
+                <c-button
+                    status="success"
+                    size="lg"
+                    icon="plus"
+                    @click="create">
                     Create
                 </c-button>
             </div>

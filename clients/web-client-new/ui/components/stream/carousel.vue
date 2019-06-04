@@ -1,9 +1,10 @@
 <template>
-    <c-block v-if="streams"
-             class="margin-bottom-30"
-             :noGutter="true"
-             :bgGradient="true"
-             :onlyContentBg="true">
+    <c-block
+        v-if="streams"
+        class="margin-bottom-30"
+        :noGutter="true"
+        :bgGradient="true"
+        :onlyContentBg="true">
         <c-heading-bar
             slot="title"
             class="mb-0"
@@ -14,10 +15,12 @@
             @prevClick="slider.slidePrev()"
             @nextClick="slider.slideNext()" />
 
-        <c-swiper ref="slider"
-                  :options="sliderOptions">
-            <c-swiper-slide v-for="(stream, index) in streams"
-                            :key="index">
+        <c-swiper
+            ref="slider"
+            :options="sliderOptions">
+            <c-swiper-slide
+                v-for="(stream, index) in streams"
+                :key="index">
                 <c-stream-item
                     :streamName="stream.userName"
                     :streamAvatar="stream.userAvatar"

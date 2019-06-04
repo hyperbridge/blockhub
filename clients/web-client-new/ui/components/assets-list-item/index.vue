@@ -1,7 +1,8 @@
 <template>
-    <transition-group class="assets-list"
-                      name="assets-list"
-                      tag="div">
+    <transition-group
+        class="assets-list"
+        name="assets-list"
+        tag="div">
         <div
             v-for="item in items"
             :key="item.id"

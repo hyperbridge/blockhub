@@ -4,10 +4,11 @@
             <div class="filter d-flex justify-content-between">
                 <div class="form-group">
                     <div class="input-group input-group-sm">
-                        <input type="text"
-                               class="form-control"
-                               placeholder="Search"
-                               aria-label="Search">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Search"
+                            aria-label="Search">
                         <div class="input-group-append">
                             <span class="input-group-text">
                                 <i class="fas fa-search" />
@@ -16,16 +17,18 @@
                     </div>
                 </div>
                 <div>
-                    <c-button v-if="$store.state.application.developerMode"
-                              status="info"
-                              iconHide
-                              to="/project/new">
+                    <c-button
+                        v-if="$store.state.application.developerMode"
+                        status="info"
+                        iconHide
+                        to="/project/new">
                         Propose Idea
                     </c-button>
-                    <c-button v-if="!$store.state.application.developerMode"
-                              status="info"
-                              iconHide
-                              @click="$store.commit('application/activateModal', 'propose-idea')">
+                    <c-button
+                        v-if="!$store.state.application.developerMode"
+                        status="info"
+                        iconHide
+                        @click="$store.commit('application/activateModal', 'propose-idea')">
                         Propose Idea
                     </c-button>
                 </div>
@@ -33,13 +36,15 @@
         </div>
 
         <div class="col-12">
-            <c-block title="Top 3 Ideas"
-                     :noGutter="true"
-                     :bgGradient="true"
-                     :onlyContentBg="true">
+            <c-block
+                title="Top 3 Ideas"
+                :noGutter="true"
+                :bgGradient="true"
+                :onlyContentBg="true">
                 <div class="row">
-                    <div v-if="projects.length"
-                         class="col-12 col-md-6 col-lg-3">
+                    <div
+                        v-if="projects.length"
+                        class="col-12 col-md-6 col-lg-3">
                         <c-project-card
                             v-for="(project, index) in projects"
                             :id="project.id"
@@ -52,10 +57,12 @@
                             :showGame="false"
                             class="margin-0 w-100" />
                     </div>
-                    <div v-else
-                         class="col-12">
-                        Nothing could be found. Want to <c-button status="plain"
-                                                                  @click="$store.commit('application/activateModal', 'coming-soon')">
+                    <div
+                        v-else
+                        class="col-12">
+                        Nothing could be found. Want to <c-button
+                            status="plain"
+                            @click="$store.commit('application/activateModal', 'coming-soon')">
                             Check for updates
                         </c-button>?
                     </div>

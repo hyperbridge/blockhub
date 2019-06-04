@@ -1,11 +1,13 @@
 <template>
     <div>
         <span v-if="isLoading">Loading ...</span>
-        <c-content-navigation v-else
-                              :items="assets"
-:setLimits="7">
-            <ul slot-scope="props"
-class="assets-list">
+        <c-content-navigation
+            v-else
+            :items="assets"
+            :setLimits="7">
+            <ul
+                slot-scope="props"
+                class="assets-list">
                 <c-asset-list-item
                     v-for="asset in props.items"
                     :key="asset.id"
@@ -137,42 +139,42 @@ export default {
             return []// this.$store.getters['assets/assetsArray'];
         }
     },
-        watch: {
-            profileId: {
-                handler: 'getOffers',
-                immediate: true
-            }
-        },
-        methods: {
-            openOffer(id) {
-                if (this.bidValue != 0) this.bidValue = 0;
-                if (this.openedOffer == id) this.openedOffer = null;
-                else this.openedOffer = id;
-            },
-            createAuction(offerId) {
-                const { bidValue: bid } = this;
-
-                if (bid) {
-                    const newAuction = {
-                        offerId,
-                        bid,
-                        user: { name: 'Me' },
-                        date: moment()
-                    };
-                    this.$store.dispatch('assets/createAuction', newAuction);
-                    this.$snotify.success(`You have successfully created an auction bid for ${bid} $`, 'Created');
-                    this.bidValue = 0;
-                }
-            },
-            async getOffers() {
-                this.isLoading = true;
-                // await new Promise(r => setTimeout(r, 2500));
-                // this.$store.dispatch('loadData', ['assets/offers', offers]);
-                this.isLoading = false;
-            }
-        },
+    watch: {
+        profileId: {
+            handler: 'getOffers',
+            immediate: true
+        }
+    },
     beforeDestroy() {
         // this.$store.dispatch('clearData', 'assets/offers');
+    },
+    methods: {
+        openOffer(id) {
+            if (this.bidValue != 0) this.bidValue = 0
+            if (this.openedOffer == id) this.openedOffer = null
+            else this.openedOffer = id
+        },
+        createAuction(offerId) {
+            const { bidValue: bid } = this
+
+            if (bid) {
+                const newAuction = {
+                    offerId,
+                    bid,
+                    user: { name: 'Me' },
+                    date: moment()
+                }
+                this.$store.dispatch('assets/createAuction', newAuction)
+                this.$snotify.success(`You have successfully created an auction bid for ${bid} $`, 'Created')
+                this.bidValue = 0
+            }
+        },
+        async getOffers() {
+            this.isLoading = true
+            // await new Promise(r => setTimeout(r, 2500));
+            // this.$store.dispatch('loadData', ['assets/offers', offers]);
+            this.isLoading = false
+        }
     }
 }
 </script>

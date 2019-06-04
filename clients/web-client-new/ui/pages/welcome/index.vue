@@ -1,8 +1,9 @@
 <template>
-    <c-layout navigationKey="account"
-              :showLeftPanel="false"
-              :showRightPanel="false"
-              :showShortcuts="false" />
+    <c-layout
+        navigationKey="account"
+        :showLeftPanel="false"
+        :showRightPanel="false"
+        :showShortcuts="false" />
 </template>
 
 

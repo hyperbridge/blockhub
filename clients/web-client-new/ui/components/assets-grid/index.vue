@@ -3,9 +3,11 @@
         <h4 v-if="list && list.length === 0">
             There is no assets yet.
         </h4>
-        <div v-for="(item, index) in list"
-             :key="index"
-v-else class="assets-grid__item-container">
+        <div
+            v-for="(item, index) in list"
+            v-else
+            :key="index"
+            class="assets-grid__item-container">
             <div class="assets-grid__item">
                 <c-img :src="item.image" />
                 <div class="assets-grid__item-info">

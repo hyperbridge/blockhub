@@ -1,23 +1,30 @@
 <template>
     <div>
-        <template v-for="(item, index) in sliced"
-                  v-if="sliced">
-            <transition-group :key="`level-1-${index}`"
-                              name="slideUp">
-                <div :key="`level-2-${index}`"
-                     @mouseover="activeElementIndex = index">
-                    <div v-if="item.type === 'frontpageProduct'"
-                         class="row justify-content-center">
+        <template
+            v-for="(item, index) in sliced"
+            v-if="sliced">
+            <transition-group
+                :key="`level-1-${index}`"
+                name="slideUp">
+                <div
+                    :key="`level-2-${index}`"
+                    @mouseover="activeElementIndex = index">
+                    <div
+                        v-if="item.type === 'frontpageProduct'"
+                        class="row justify-content-center">
                         <div class="col-12">
                             <div class="frontpage-product">
-                                <c-simple-vote v-if="activeElementIndex === index"
-                                               v-darklaunch="'RATINGS'"
-                                               :rating="item.rating" />
+                                <c-simple-vote
+                                    v-if="activeElementIndex === index"
+                                    v-darklaunch="'RATINGS'"
+                                    :rating="item.rating" />
                                 <div class="row">
-                                    <div v-if="item.data.images"
-                                         class="col-12 col-lg-6 frontpage-product__slider">
-                                        <c-img :src="item.data.images.mediumTile"
-                                               :data-link="`/product/${item.data.id}`" />
+                                    <div
+                                        v-if="item.data.images"
+                                        class="col-12 col-lg-6 frontpage-product__slider">
+                                        <c-img
+                                            :src="item.data.images.mediumTile"
+                                            :data-link="`/product/${item.data.id}`" />
                                     </div>
                                     <div class="col-12 col-lg-6 frontpage-product__info">
                                         <h2>
@@ -28,10 +35,12 @@
                                         <p>{{ item.data.shortDescription }}</p>
                                         <c-tags :tags="item.data.developerTags" />
                                         <div class="frontpage-product__footer">
-                                            <div v-if="item.data.price"
-                                                 class="price-list">
-                                                <div v-if="item.data.oldPrice"
-                                                     class="price oldPrice">
+                                            <div
+                                                v-if="item.data.price"
+                                                class="price-list">
+                                                <div
+                                                    v-if="item.data.oldPrice"
+                                                    class="price oldPrice">
                                                     {{ item.data.oldPrice | convertCurrency }}
                                                 <!--<span>usd</span>-->
                                                 </div>
@@ -40,8 +49,9 @@
                                                 <!--<span>usd</span>-->
                                                 </div>
                                             </div>
-                                            <c-button v-if="item.data.price"
-                                                      status="success">
+                                            <c-button
+                                                v-if="item.data.price"
+                                                status="success">
                                                 Proceed to Purchase
                                             </c-button>
                                         </div>
@@ -51,22 +61,26 @@
                         </div>
                     </div>
 
-                    <div v-if="item.type === 'featuredProductGallery'"
-                         class="row margin-bottom-30">
+                    <div
+                        v-if="item.type === 'featuredProductGallery'"
+                        class="row margin-bottom-30">
                         <div class="col-12">
-                            <c-banner v-if="item.data.slides"
-                                      class="margin-bottom-30"
-                                      :slides="item.data.slides" />
+                            <c-banner
+                                v-if="item.data.slides"
+                                class="margin-bottom-30"
+                                :slides="item.data.slides" />
 
-                            <c-block v-else
-                                     class="margin-bottom-30"
-                                     :title="item.data.title"
-                                     :noGutter="true"
-                                     :onlyContentBg="true"
-                                     :bgGradient="true">
+                            <c-block
+                                v-else
+                                class="margin-bottom-30"
+                                :title="item.data.title"
+                                :noGutter="true"
+                                :onlyContentBg="true"
+                                :bgGradient="true">
                                 <p v-if="!item.data.products.length">
-                                    Nothing could be found. Want to <c-button status="plain"
-                                                                              @click="$store.commit('application/activateModal', 'coming-soon')">
+                                    Nothing could be found. Want to <c-button
+                                        status="plain"
+                                        @click="$store.commit('application/activateModal', 'coming-soon')">
                                         Check for updates
                                     </c-button>?
                                 </p>
@@ -74,24 +88,28 @@
                         </div>
                     </div>
 
-                    <div v-if="item.type === 'productSlider'"
-                         class="row">
+                    <div
+                        v-if="item.type === 'productSlider'"
+                        class="row">
                         <div class="col-12">
-                            <c-product-slider v-if="item.data.products.length"
-                                              :dynamic="false"
-                                              :products="item.data.products"
-                                              :title="item.data.title"
-                                              :maxPerView="item.data.slidesPerView" />
+                            <c-product-slider
+                                v-if="item.data.products.length"
+                                :dynamic="false"
+                                :products="item.data.products"
+                                :title="item.data.title"
+                                :maxPerView="item.data.slidesPerView" />
 
-                            <c-block v-else
-                                     class="margin-bottom-30"
-                                     :title="item.data.title"
-                                     :noGutter="true"
-                                     :onlyContentBg="true"
-                                     :bgGradient="true">
+                            <c-block
+                                v-else
+                                class="margin-bottom-30"
+                                :title="item.data.title"
+                                :noGutter="true"
+                                :onlyContentBg="true"
+                                :bgGradient="true">
                                 <p v-if="!item.data.products.length">
-                                    Nothing could be found. Want to <c-button status="plain"
-                                                                              @click="$store.commit('application/activateModal', 'coming-soon')">
+                                    Nothing could be found. Want to <c-button
+                                        status="plain"
+                                        @click="$store.commit('application/activateModal', 'coming-soon')">
                                         Check for updates
                                     </c-button>?
                                 </p>
@@ -99,8 +117,9 @@
                         </div>
                     </div>
 
-                    <div v-if="item.type === 'collectionsList'"
-                         class="row margin-bottom-30">
+                    <div
+                        v-if="item.type === 'collectionsList'"
+                        class="row margin-bottom-30">
                         <div class="col-12">
                             <c-collection-list
                                 :title="`Get Started` | translate"
@@ -109,11 +128,13 @@
                         </div>
                     </div>
 
-                    <div v-if="item.type === 'banners'"
-                         class="row align-items-stretch">
+                    <div
+                        v-if="item.type === 'banners'"
+                        class="row align-items-stretch">
                         <div class="col-12 col-md-5 col-lg-4 margin-bottom-30">
-                            <c-simple-banner imgSrc="/img/banners/banner-1.png"
-                                             to="/battlepass/1">
+                            <c-simple-banner
+                                imgSrc="/img/banners/banner-1.png"
+                                to="/battlepass/1">
                                 <h4 class="text-yellow">
                                     summer block
                                 </h4>
@@ -122,8 +143,9 @@
                             </c-simple-banner>
                         </div>
                         <div class="col-12 col-md-7 col-lg-8 margin-bottom-30">
-                            <c-simple-banner imgSrc="/img/banners/banner-2.png"
-                                             to="/curators">
+                            <c-simple-banner
+                                imgSrc="/img/banners/banner-2.png"
+                                to="/curators">
                                 <div class="align-items-start">
                                     <h3 class="text-yellow margin-bottom-5">
                                         top<br>curators
@@ -136,14 +158,17 @@
                         </div>
                     </div>
 
-                    <div v-if="item.type === 'banners'"
-                         class="row margin-bottom-50 margin-top-20 align-items-stretch">
-                        <div v-for="(banner, index) in item.data.banners"
-                             :key="index"
-                             :class="banner.class">
-                            <c-simple-banner v-if="item.type == 3"
-                                             :imgSrc="banner.image"
-                                             :link="banner.link">
+                    <div
+                        v-if="item.type === 'banners'"
+                        class="row margin-bottom-50 margin-top-20 align-items-stretch">
+                        <div
+                            v-for="(banner, index) in item.data.banners"
+                            :key="index"
+                            :class="banner.class">
+                            <c-simple-banner
+                                v-if="item.type == 3"
+                                :imgSrc="banner.image"
+                                :link="banner.link">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <h3 class="text-yellow">
@@ -152,17 +177,19 @@
                                         <p>{{ banner.subtitle }}</p>
                                     </div>
                                     <div class="banner-action">
-                                        <c-button status="info"
-                                                  iconHide
-                                                  size="lg">
+                                        <c-button
+                                            status="info"
+                                            iconHide
+                                            size="lg">
                                             {{ banner.buttonText }}
                                         </c-button>
                                     </div>
                                 </div>
                             </c-simple-banner>
-                            <c-simple-banner v-if="item.type == 4"
-                                             :imgSrc="banner.imagee"
-                                             :link="banner.link">
+                            <c-simple-banner
+                                v-if="item.type == 4"
+                                :imgSrc="banner.imagee"
+                                :link="banner.link">
                                 <h3 class="text-yellow margin-bottom-5">
                                     {{ banner.title }}
                                 </h3>
@@ -172,8 +199,9 @@
                     </div>
 
 
-                    <div v-if="item.type === 'productNews'"
-                         class="row margin-bottom-30">
+                    <div
+                        v-if="item.type === 'productNews'"
+                        class="row margin-bottom-30">
                         <div class="col-12">
                             <div class="home-tabs">
                                 <c-news-list-navigation
@@ -190,12 +218,14 @@
                     </div>
 
 
-                    <div v-if="item.type === 'curatorReviews'"
-                         class="row margin-bottom-30">
+                    <div
+                        v-if="item.type === 'curatorReviews'"
+                        class="row margin-bottom-30">
                         <div class="col-12">
-                            <c-block :noGutter="true"
-                                     :bgGradient="true"
-                                     :onlyContentBg="true">
+                            <c-block
+                                :noGutter="true"
+                                :bgGradient="true"
+                                :onlyContentBg="true">
                                 <c-heading-bar
                                     slot="title"
                                     class="mb-0"
@@ -206,16 +236,19 @@
                                     :itemsLength="item.data.reviews.length"
                                     @prevClick="swiperCurators.slidePrev(); updateIndex('curatorsIndex', -1, item.data.reviews.length)"
                                     @nextClick="swiperCurators.slideNext(); updateIndex('curatorsIndex', 1, item.data.reviews.length)" />
-                                <c-swiper ref="swiper"
-                                          :options="item.data.options">
-                                    <c-swiper-slide v-for="(review, index) in item.data.reviews"
-                                                    :key="index">
+                                <c-swiper
+                                    ref="swiper"
+                                    :options="item.data.options">
+                                    <c-swiper-slide
+                                        v-for="(review, index) in item.data.reviews"
+                                        :key="index">
                                         <c-curator-review :review="review" />
                                     </c-swiper-slide>
                                 </c-swiper>
                                 <p v-if="!item.data.reviews.length">
-                                    Nothing could be found. Want to <c-button status="plain"
-                                                                              @click="$store.commit('application/activateModal', 'coming-soon')">
+                                    Nothing could be found. Want to <c-button
+                                        status="plain"
+                                        @click="$store.commit('application/activateModal', 'coming-soon')">
                                         Check for updates
                                     </c-button>?
                                 </p>
@@ -227,16 +260,19 @@
                     <c-games-explorer v-if="item.type === 'gamesExplorer'" />
 
 
-                    <c-assets-explorer v-if="item.type === 'assetGrid'"
-                                       :assets="assets" />
+                    <c-assets-explorer
+                        v-if="item.type === 'assetGrid'"
+                        :assets="assets" />
 
 
-                    <div v-if="item.type === 'trendingProjectsRow'"
-                         class="row margin-bottom-30">
+                    <div
+                        v-if="item.type === 'trendingProjectsRow'"
+                        class="row margin-bottom-30">
                         <div class="col-12">
-                            <c-block :noGutter="true"
-                                     :bgGradient="true"
-                                     :onlyContentBg="true">
+                            <c-block
+                                :noGutter="true"
+                                :bgGradient="true"
+                                :onlyContentBg="true">
                                 <c-heading-bar
                                     slot="title"
                                     class="mb-0"
@@ -245,10 +281,12 @@
                                     showActions
                                     @prevClick="swiperProjects.slidePrev()"
                                     @nextClick="swiperProjects.slideNext()" />
-                                <c-swiper ref="swiper"
-                                          :options="item.data.options">
-                                    <c-swiper-slide v-for="(project, index) in item.data.projects"
-                                                    :key="index">
+                                <c-swiper
+                                    ref="swiper"
+                                    :options="item.data.options">
+                                    <c-swiper-slide
+                                        v-for="(project, index) in item.data.projects"
+                                        :key="index">
                                         <c-project-card
                                             :id="project.id"
                                             class="p-2"
@@ -261,8 +299,9 @@
                                     </c-swiper-slide>
                                 </c-swiper>
                                 <p v-if="!item.data.projects.length">
-                                    Nothing could be found. Want to <c-button status="plain"
-                                                                              @click="$store.commit('application/activateModal', 'coming-soon')">
+                                    Nothing could be found. Want to <c-button
+                                        status="plain"
+                                        @click="$store.commit('application/activateModal', 'coming-soon')">
                                         Check for updates
                                     </c-button>?
                                 </p>
@@ -272,17 +311,20 @@
 
 
                     <div v-if="item.type === 'realmsRow'">
-                        <c-swiper :options="item.data.options"
-                                  class="padding-10">
-                            <c-swiper-slide v-for="(realm, index) in item.data.realms"
-                                            :key="index">
+                        <c-swiper
+                            :options="item.data.options"
+                            class="padding-10">
+                            <c-swiper-slide
+                                v-for="(realm, index) in item.data.realms"
+                                :key="index">
                                 <c-collection-item :item="realm" />
                             </c-swiper-slide>
                         </c-swiper>
 
-                        <c-block :noGutter="true"
-                                 :bgGradient="true"
-                                 :onlyContentBg="true">
+                        <c-block
+                            :noGutter="true"
+                            :bgGradient="true"
+                            :onlyContentBg="true">
                             <c-heading-bar
                                 slot="title"
                                 class="mb-0"
@@ -291,18 +333,21 @@
                                 :showActions="true"
                                 @prevClick="swiperRealms.slidePrev()"
                                 @nextClick="swiperRealms.slideNext()" />
-                            <c-swiper :ref="swiper"
-                                      :options="item.data.options">
-                                <c-swiper-slide v-for="(realm, index) in item.data.realms"
-                                                :key="index">
+                            <c-swiper
+                                :ref="swiper"
+                                :options="item.data.options">
+                                <c-swiper-slide
+                                    v-for="(realm, index) in item.data.realms"
+                                    :key="index">
                                     <c-button :to="`/realm/${realm.id}`">
                                         {{ realm.name }}
                                     </c-button>
                                 </c-swiper-slide>
                             </c-swiper>
                             <p v-if="!item.data.realms.length">
-                                Nothing could be found. Want to <c-button status="plain"
-                                                                          @click="$store.commit('application/activateModal', 'coming-soon')">
+                                Nothing could be found. Want to <c-button
+                                    status="plain"
+                                    @click="$store.commit('application/activateModal', 'coming-soon')">
                                     Check for updates
                                 </c-button>?
                             </p>
@@ -310,36 +355,43 @@
                     </div>
 
 
-                    <div v-if="item.type === 'gameSeries'"
-                         class="row margin-bottom-30">
+                    <div
+                        v-if="item.type === 'gameSeries'"
+                        class="row margin-bottom-30">
                         <div class="col-12">
-                            <c-game-series v-for="(game, index) in item.data.list"
-                                           :key="index">
+                            <c-game-series
+                                v-for="(game, index) in item.data.list"
+                                :key="index">
                                 <c-game-description :game="game" />
-                                <c-game-includes-list :list="game.products"
-                                                      :showNumber="item.data.showNumber" />
+                                <c-game-includes-list
+                                    :list="game.products"
+                                    :showNumber="item.data.showNumber" />
                             </c-game-series>
                         </div>
                     </div>
 
 
-                    <div v-if="item.type === 'newReleasesGrid'"
-                         class="row margin-bottom-30">
+                    <div
+                        v-if="item.type === 'newReleasesGrid'"
+                        class="row margin-bottom-30">
                         <div class="col-md-12 col-lg-6 margin-bottom-30">
-                            <c-block title="New Releases"
-                                     :noGutter="true"
-                                     :bgGradient="true"
-                                     :onlyContentBg="true"
-                                     showActions>
+                            <c-block
+                                title="New Releases"
+                                :noGutter="true"
+                                :bgGradient="true"
+                                :onlyContentBg="true"
+                                showActions>
                                 <template slot="additional-action">
-                                    <c-heading-bar-fields name="Reviews"
-                                                          icon="star"
-                                                          @clickUp=""
-                                                          @clickDown="" />
-                                    <c-heading-bar-fields name="Date"
-                                                          icon="calendar"
-                                                          @clickUp=""
-                                                          @clickDown="" />
+                                    <c-heading-bar-fields
+                                        name="Reviews"
+                                        icon="star"
+                                        @clickUp=""
+                                        @clickDown="" />
+                                    <c-heading-bar-fields
+                                        name="Date"
+                                        icon="calendar"
+                                        @clickUp=""
+                                        @clickDown="" />
                                 </template>
 
                                 <c-game-grid
@@ -355,23 +407,27 @@
                     </div>
 
 
-                    <div v-if="item.type === 'topItemsGrid'"
-                         class="row margin-bottom-30">
+                    <div
+                        v-if="item.type === 'topItemsGrid'"
+                        class="row margin-bottom-30">
                         <div class="col-md-12 col-lg-6 margin-bottom-30">
-                            <c-block title="Top 20 Items"
-                                     :noGutter="true"
-                                     :bgGradient="true"
-                                     :onlyContentBg="true"
-                                     showActions>
+                            <c-block
+                                title="Top 20 Items"
+                                :noGutter="true"
+                                :bgGradient="true"
+                                :onlyContentBg="true"
+                                showActions>
                                 <template slot="additional-action">
-                                    <c-heading-bar-fields name="Price"
-                                                          icon="dollar-sign"
-                                                          @clickUp=""
-                                                          @clickDown="" />
-                                    <c-heading-bar-fields name="Trading"
-                                                          icon="star"
-                                                          @clickUp=""
-                                                          @clickDown="" />
+                                    <c-heading-bar-fields
+                                        name="Price"
+                                        icon="dollar-sign"
+                                        @clickUp=""
+                                        @clickDown="" />
+                                    <c-heading-bar-fields
+                                        name="Trading"
+                                        icon="star"
+                                        @clickUp=""
+                                        @clickDown="" />
                                 </template>
 
                                 <c-assets-list
@@ -380,8 +436,9 @@
                                     itemInRow="2" />
 
                                 <p v-if="!assets.length">
-                                    Nothing could be found. Want to <c-button status="plain"
-                                                                              @click="$store.commit('application/activateModal', 'coming-soon')">
+                                    Nothing could be found. Want to <c-button
+                                        status="plain"
+                                        @click="$store.commit('application/activateModal', 'coming-soon')">
                                         Check for updates
                                     </c-button>?
                                 </p>
@@ -394,16 +451,19 @@
             </transition-group>
         </template>
 
-        <transition v-if="showSignIn"
-                    name="fade-slow">
-            <div v-if="end && !$store.state.application.signedIn"
-                 class="row">
+        <transition
+            v-if="showSignIn"
+            name="fade-slow">
+            <div
+                v-if="end && !$store.state.application.signedIn"
+                class="row">
                 <div class="col-12 mb-4 mt-4">
                     <c-recommendation-block />
                 </div>
             </div>
-            <div v-if="!sliced"
-                 class="no-updates">
+            <div
+                v-if="!sliced"
+                class="no-updates">
                 <h3>
                     There is no more content.
                 </h3>

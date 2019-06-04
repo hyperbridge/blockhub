@@ -16,19 +16,23 @@
         </div>
         <div class="chat-friends-list__body">
             <div class="chat-friends-list__action">
-                <c-button status="opacity-info"
-                          size="xs">
+                <c-button
+                    status="opacity-info"
+                    size="xs">
                     <i class="fas fa-plus" /> Add friends
                 </c-button>
-                <c-search v-model="query"
-                          placeholder="Search"
-                          class="px-0" />
+                <c-search
+                    v-model="query"
+                    placeholder="Search"
+                    class="px-0" />
             </div>
             <div class="chat-friends-list__list">
-                <c-chat-friends-list :list="users"
-                                     title="Favorites" />
-                <c-chat-friends-list :list="users"
-                                     title="All" />
+                <c-chat-friends-list
+                    :list="users"
+                    title="Favorites" />
+                <c-chat-friends-list
+                    :list="users"
+                    title="All" />
             </div>
             <c-chat-suggestion-list :list="users" />
         </div>

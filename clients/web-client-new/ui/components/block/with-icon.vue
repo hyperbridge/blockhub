@@ -1,7 +1,7 @@
 <template>
     <div class="block-icon">
         <div class="block-icon__icon" :class="['icon-size-' + size]">
-            <i :class="[iconType + ' fa-' + icon ]"></i>
+            <i :class="[iconType + ' fa-' + icon ]" />
         </div>
         <div class="block-icon__text">
             <slot />
@@ -10,23 +10,23 @@
 </template>
 
 <script>
-    export default {
-        name: 'block-icon',
-        props: {
-            icon: {
-                type: String,
-                default: 'info'
-            },
-            iconType: {
-                type: String,
-                default: 'fas'
-            },
-            size:{
-                type: String,
-                default: 'sm'
-            }
+export default {
+    name: 'BlockIcon',
+    props: {
+        icon: {
+            type: String,
+            default: 'info'
+        },
+        iconType: {
+            type: String,
+            default: 'fas'
+        },
+        size: {
+            type: String,
+            default: 'sm'
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

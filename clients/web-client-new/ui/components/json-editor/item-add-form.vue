@@ -9,18 +9,21 @@
                 placeholder="key"
                 @keyup="checkName">
 
-            <select v-model="formatSelected"
-                    class="f-input-m"
-                    @change="checkName">
-                <option v-for="format in formats"
-                        :key="format"
-                        :value="format">
+            <select
+                v-model="formatSelected"
+                class="f-input-m"
+                @change="checkName">
+                <option
+                    v-for="format in formats"
+                    :key="format"
+                    :value="format">
                     {{ format }}
                 </option>
             </select>
 
-            <span v-show="showColon"
-                  class="f-input-m"><b>:</b></span>
+            <span
+                v-show="showColon"
+                class="f-input-m"><b>:</b></span>
 
             <template v-if="requireName">
                 <input
@@ -53,15 +56,17 @@
         </div>
 
         <div class="f-btns">
-            <button class="f-confirm"
-                    :disabled="disableConfirm"
-                    :title="requireNameWarning"
-                    @click="confirm">
+            <button
+                class="f-confirm"
+                :disabled="disableConfirm"
+                :title="requireNameWarning"
+                @click="confirm">
                 <i class="fa fa-check" />
             </button>
-            <button class="f-cancel"
-                    title="Cancel"
-                    @click="cancel">
+            <button
+                class="f-cancel"
+                title="Cancel"
+                @click="cancel">
                 <i class="fa fa-times" />
             </button>
         </div>

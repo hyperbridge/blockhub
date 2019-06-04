@@ -16,11 +16,13 @@
                     </label>
                 </div>
                 <div class="col-9">
-                    <c-multiselect v-model="value"
-                                   :options="options"
-                                   :show-labels="false">
-                        <template slot="singleLabel"
-                                  slot-scope="props">
+                    <c-multiselect
+                        v-model="value"
+                        :options="options"
+                        :show-labels="false">
+                        <template
+                            slot="singleLabel"
+                            slot-scope="props">
                             <div class="d-flex flex-column">
                                 <div class="font-weight-bold">
                                     {{ props.option.title }}
@@ -31,8 +33,9 @@
                                 </div>
                             </div>
                         </template>
-                        <template slot="option"
-                                  slot-scope="props">
+                        <template
+                            slot="option"
+                            slot-scope="props">
                             <div class="d-flex flex-column">
                                 <div class="font-weight-bold">
                                     {{ props.option.title }}
@@ -54,21 +57,24 @@
                 </div>
                 <div class="col-9 d-flex align-items-center justify-content-between">
                     <div style="width: calc(100% - 30px)">
-                        <c-multiselect v-model="value2"
-                                       :options="options2"
-                                       :taggable="true"
-                                       :show-labels="false"
-                                       @tag="addNew">
-                            <template slot="singleLabel"
-                                      slot-scope="props">
+                        <c-multiselect
+                            v-model="value2"
+                            :options="options2"
+                            :taggable="true"
+                            :show-labels="false"
+                            @tag="addNew">
+                            <template
+                                slot="singleLabel"
+                                slot-scope="props">
                                 <div class="text-ellipsis w-100">
                                     {{ props.option }}
                                 </div>
                             </template>
                         </c-multiselect>
                     </div>
-                    <a href="#"
-                       class="qr-code-btn">
+                    <a
+                        href="#"
+                        class="qr-code-btn">
                         <i class="fas fa-qrcode" />
                     </a>
                 </div>
@@ -84,10 +90,11 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">ETH</span>
                         </div>
-                        <input type="text"
-                               class="form-control"
-                               value="132.00"
-                               aria-label="Amount">
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="132.00"
+                            aria-label="Amount">
                         <div class="input-group-append">
                             <span class="input-group-text">$300.00</span>
                         </div>
@@ -105,11 +112,12 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">ETH</span>
                         </div>
-                        <input type="text"
-                               class="form-control"
-                               aria-label="Amount"
-                               value="0.00986"
-                               readonly>
+                        <input
+                            type="text"
+                            class="form-control"
+                            aria-label="Amount"
+                            value="0.00986"
+                            readonly>
                         <div class="input-group-append">
                             <span class="input-group-text">$0.87</span>
                         </div>
@@ -117,12 +125,14 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between">
-                <c-button status="opacity-danger"
-                          size="lg">
+                <c-button
+                    status="opacity-danger"
+                    size="lg">
                     Cancel
                 </c-button>
-                <c-button status="opacity-success"
-                          size="lg">
+                <c-button
+                    status="opacity-success"
+                    size="lg">
                     Next
                 </c-button>
             </div>

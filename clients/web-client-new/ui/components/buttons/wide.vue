@@ -1,7 +1,8 @@
 <template>
-    <component :is="type"
-               class="button"
-               :class="status">
+    <component
+        :is="type"
+        class="button"
+        :class="status">
         <slot />
     </component>
 </template>

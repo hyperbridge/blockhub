@@ -1,18 +1,22 @@
 <template>
-    <c-layout navigationKey="account"
-              :showLeftPanel="false"
-              :showRightPanel="false"
-              :showShortcuts="false">
-        <div id="content"
-             class="content login-container"
-             hidden>
+    <c-layout
+        navigationKey="account"
+        :showLeftPanel="false"
+        :showRightPanel="false"
+        :showShortcuts="false">
+        <div
+            id="content"
+            class="content login-container"
+            hidden>
             <div class="container">
                 <div class="col-12">
-                    <p v-if="errors.length"
-                       class="errors">
+                    <p
+                        v-if="errors.length"
+                        class="errors">
                         <strong>Please correct the following error(s):</strong>
                         <ul>
-                            <li v-for="error in errors"
+                            <li
+                                v-for="error in errors"
                                 :key="error">
                                 {{ error }}
                             </li>
@@ -24,9 +28,10 @@
                                 Sign In
                             </div>
 
-                            <c-button status="outline-success"
-                                      size="lg"
-                                      @click="importAccountFile">
+                            <c-button
+                                status="outline-success"
+                                size="lg"
+                                @click="importAccountFile">
                                 Import Account
                             </c-button>
                         </div>

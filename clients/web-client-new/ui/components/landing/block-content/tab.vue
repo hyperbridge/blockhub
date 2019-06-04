@@ -1,6 +1,7 @@
 <template>
-    <div v-show="isActive"
-         class="tab-item">
+    <div
+        v-show="isActive"
+        class="tab-item">
         <div class="tab-item__container">
             <slot />
         </div>

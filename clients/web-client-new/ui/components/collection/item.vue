@@ -1,11 +1,13 @@
 <template>
-    <div class="collection-item"
-         :style="{ 'background-image': 'url(' + image + ')' }">
+    <div
+        class="collection-item"
+        :style="{ 'background-image': 'url(' + image + ')' }">
         <div class="collection-item__items-container">
-            <router-link v-for="(asset, index) in getAsset"
-                         v-if="index < 4"
-                         :key="index"
-                         :to="{ name: 'asset-id', params: { id: asset.id } }">
+            <router-link
+                v-for="(asset, index) in getAsset"
+                v-if="index < 4"
+                :key="index"
+                :to="{ name: 'asset-id', params: { id: asset.id } }">
                 <c-img :src="asset.image" />
             </router-link>
         </div>

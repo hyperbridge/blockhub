@@ -46,8 +46,9 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered"
-                                   style="min-width: 600px;">
+                            <table
+                                class="table table-bordered"
+                                style="min-width: 600px;">
                                 <thead>
                                     <tr>
                                         <th colspan="2">
@@ -64,7 +65,8 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td width="40"
+                                        <td
+                                            width="40"
                                             class="text-center">
                                             1
                                         </td>
@@ -135,14 +137,16 @@
 
                         <div class="row">
                             <div class="col-12">
-                                <table class="table table-bordered float-right"
-                                       style="max-width: 300px;">
+                                <table
+                                    class="table table-bordered float-right"
+                                    style="max-width: 300px;">
                                     <tbody>
                                         <tr>
                                             <td class="text-muted">
                                                 Subtotal:
                                             </td>
-                                            <td width="150"
+                                            <td
+                                                width="150"
                                                 class="text-muted">
                                                 $1,357.50
                                             </td>
@@ -151,7 +155,8 @@
                                             <td class="text-muted">
                                                 Taxes (20%):
                                             </td>
-                                            <td width="150"
+                                            <td
+                                                width="150"
                                                 class="text-muted">
                                                 $271.50
                                             </td>
@@ -160,7 +165,8 @@
                                             <td class="text-bold">
                                                 Total Amout:
                                             </td>
-                                            <td width="150"
+                                            <td
+                                                width="150"
                                                 class="text-bold">
                                                 $1,629.00
                                             </td>
@@ -186,9 +192,10 @@
                                 </p>
 
                                 <p>
-                                    <c-img src="/img/logo.be79dbc.svg"
-                                           alt="Signature"
-                                           width="150" />
+                                    <c-img
+                                        src="/img/logo.be79dbc.svg"
+                                        alt="Signature"
+                                        width="150" />
                                 </p>
                             </div>
                         </div>

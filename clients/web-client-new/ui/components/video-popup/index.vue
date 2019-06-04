@@ -1,46 +1,56 @@
 <template>
-    <c-popup :activated="activated"
-             :width="showComments ? '1000' : '800'"
-             @close="closeModal">
-        <div slot="customContent"
-             class="video-popup">
+    <c-popup
+        :activated="activated"
+        :width="showComments ? '1000' : '800'"
+        @close="closeModal">
+        <div
+            slot="customContent"
+            class="video-popup">
             <div class="video-popup__video-container">
                 <c-loading-bar-circle v-if="showLoader" />
-                <youtube v-if="youtube"
-                         :video-id="youtube"
-                         :player-vars="playerVars"
-                         :fitParent="true"
-                         height="450"
-                         width="800"
-                         :resize="true"
-                         @ready="isReady" />
-                <c-twitch v-else-if="twitch"
-                          :channel="twitch"
-                          height="450"
-                          width="800"
-                          @ready="isReady" />
-                <c-video v-else-if="video"
-                         :video="video"
-                         @ready="isReady" />
-                <slot v-else
-                      name="video" />
+                <youtube
+                    v-if="youtube"
+                    :video-id="youtube"
+                    :player-vars="playerVars"
+                    :fitParent="true"
+                    height="450"
+                    width="800"
+                    :resize="true"
+                    @ready="isReady" />
+                <c-twitch
+                    v-else-if="twitch"
+                    :channel="twitch"
+                    height="450"
+                    width="800"
+                    @ready="isReady" />
+                <c-video
+                    v-else-if="video"
+                    :video="video"
+                    @ready="isReady" />
+                <slot
+                    v-else
+                    name="video" />
             </div>
-            <div v-if="showComments"
-                 class="video-popup__video-comments">
-                <c-heading-bar name="Comments"
-                               :bgColor="false" />
+            <div
+                v-if="showComments"
+                class="video-popup__video-comments">
+                <c-heading-bar
+                    name="Comments"
+                    :bgColor="false" />
                 <div class="comments__wrapper">
                     <slot />
                 </div>
                 <div class="comments__form">
                     <div class="input-group p-0 m-0">
-                        <input type="text"
-                               class="form-control"
-                               placeholder="Your comment">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Your comment">
                         <div class="input-group-append">
-                            <button id="button-addon2"
-                                    class="btn btn-outline-secondary"
-                                    type="button">
+                            <button
+                                id="button-addon2"
+                                class="btn btn-outline-secondary"
+                                type="button">
                                 <i class="fas fa-paper-plane" />
                             </button>
                         </div>

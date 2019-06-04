@@ -14,18 +14,21 @@
                 <c-asset-preview
                     slot="tooltip"
                     :asset="asset" />
-                <c-img :src="asset.image"
-                       class="asset__image" />
+                <c-img
+                    :src="asset.image"
+                    class="asset__image" />
                 <span class="asset__price">{{ asset.price.current | convertCurrency }}</span>
             </c-tooltip>
             <div v-else>
-                <c-img :src="asset.image"
-                       class="asset__image" />
+                <c-img
+                    :src="asset.image"
+                    class="asset__image" />
                 <span class="asset__price">{{ asset.price.current | convertCurrency }}</span>
             </div>
         </slot>
-        <div v-show="showSold"
-             class="asset__show-sold">
+        <div
+            v-show="showSold"
+            class="asset__show-sold">
             <i class="fas fa-check-circle" />
         </div>
     </div>

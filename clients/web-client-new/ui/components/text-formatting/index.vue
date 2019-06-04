@@ -72,8 +72,9 @@
                 [url=google.com] Url link [/i]
             </div>
             <div class="text-formatting__example">
-                <c-button status="plain"
-                          href="https://google.com.ua/">
+                <c-button
+                    status="plain"
+                    href="https://google.com.ua/">
                     Url link
                 </c-button>
             </div>

@@ -5,9 +5,10 @@
                 <div class="row">
                     <div class="col-12 col-lg-3">
                         <div class="widget">
-                            <c-button to="/business/products"
-                                      status="none"
-                                      style="display: block">
+                            <c-button
+                                to="/business/products"
+                                status="none"
+                                style="display: block">
                                 <div class="widget__icon_layer widget__icon_layer--right">
                                     <span class="li-window" />
                                 </div>
@@ -32,9 +33,10 @@
                     </div>
                     <div class="col-12 col-lg-3">
                         <div class="widget">
-                            <c-button to="/business/projects"
-                                      status="none"
-                                      style="display: block">
+                            <c-button
+                                to="/business/projects"
+                                status="none"
+                                style="display: block">
                                 <div class="widget__icon_layer widget__icon_layer--right">
                                     <span class="li-window" />
                                 </div>
@@ -57,8 +59,9 @@
                             </c-button>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-3"
-                         hidden>
+                    <div
+                        class="col-12 col-lg-3"
+                        hidden>
                         <div class="widget">
                             <div class="widget__icon_layer widget__icon_layer--right">
                                 <span class="li-users" />
@@ -83,8 +86,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-3"
-                         hidden>
+                    <div
+                        class="col-12 col-lg-3"
+                        hidden>
                         <div class="widget">
                             <div class="widget__icon_layer widget__icon_layer--right">
                                 <span class="li-receipt" />
@@ -109,8 +113,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-3"
-                         hidden>
+                    <div
+                        class="col-12 col-lg-3"
+                        hidden>
                         <div class="widget">
                             <div class="widget__icon_layer widget__icon_layer--right">
                                 <span class="li-lifebuoy" />
@@ -137,14 +142,16 @@
                     </div>
                 </div>
 
-                <div class="card margin-bottom-0"
-                     hidden>
+                <div
+                    class="card margin-bottom-0"
+                    hidden>
                     <div class="card-body">
                         <div class="form-row">
                             <div class="col-6 col-lg-2">
-                                <select class="form-control actionWithSelected"
-                                        tabindex="-1"
-                                        aria-hidden="true">
+                                <select
+                                    class="form-control actionWithSelected"
+                                    tabindex="-1"
+                                    aria-hidden="true">
                                     <option />
                                     <option value="1">
                                         Set as readed
@@ -155,9 +162,10 @@
                                 </select>
                             </div>
                             <div class="col-6 col-lg-2 d-none d-md-block">
-                                <select class="form-control customPeriod"
-                                        tabindex="-1"
-                                        aria-hidden="true">
+                                <select
+                                    class="form-control customPeriod"
+                                    tabindex="-1"
+                                    aria-hidden="true">
                                     <option />
                                     <option value="1">
                                         This month
@@ -172,9 +180,10 @@
                             </div>
                             <div class="col-6 col-lg-4 d-none d-md-block" />
                             <div class="col-6 col-lg-2">
-                                <select class="form-control orderByStatus"
-                                        tabindex="-1"
-                                        aria-hidden="true">
+                                <select
+                                    class="form-control orderByStatus"
+                                    tabindex="-1"
+                                    aria-hidden="true">
                                     <option />
                                     <option value="1">
                                         New
@@ -191,24 +200,27 @@
                                 </select>
                             </div>
                             <div class="col-6 col-lg-2 d-none d-md-block">
-                                <c-button status="dark"
-                                          icon="plus"
-                                          size="mg"
-                                          class="w-100 justify-content-center h-100">
+                                <c-button
+                                    status="dark"
+                                    icon="plus"
+                                    size="mg"
+                                    class="w-100 justify-content-center h-100">
                                     New project
                                 </c-button>
                             </div>
                         </div>
 
                         <div class="table-responsive margin-top-20 margin-bottom-0">
-                            <table class="table table-striped table-bordered margin-bottom-0"
-                                   style="min-width: 800px;">
+                            <table
+                                class="table table-striped table-bordered margin-bottom-0"
+                                style="min-width: 800px;">
                                 <thead>
                                     <tr>
                                         <th width="30">
                                             <label class="custom-control custom-checkbox">
-                                                <input type="checkbox"
-                                                       class="custom-control-input">
+                                                <input
+                                                    type="checkbox"
+                                                    class="custom-control-input">
                                                 <span class="custom-control-label" />
                                             </label>
                                         </th>
@@ -230,15 +242,17 @@
                                     <tr>
                                         <td>
                                             <label class="custom-control custom-checkbox">
-                                                <input type="checkbox"
-                                                       class="custom-control-input">
+                                                <input
+                                                    type="checkbox"
+                                                    class="custom-control-input">
                                                 <span class="custom-control-label" />
                                             </label>
                                         </td>
                                         <td>1442</td>
                                         <td>
-                                            <a href="#"
-                                               class="text-secondary text-bold">Logo design for Company</a>
+                                            <a
+                                                href="#"
+                                                class="text-secondary text-bold">Logo design for Company</a>
                                         </td>
                                         <td>10.04.18</td>
                                         <td>
@@ -279,15 +293,17 @@
                                     <tr>
                                         <td>
                                             <label class="custom-control custom-checkbox">
-                                                <input type="checkbox"
-                                                       class="custom-control-input">
+                                                <input
+                                                    type="checkbox"
+                                                    class="custom-control-input">
                                                 <span class="custom-control-label" />
                                             </label>
                                         </td>
                                         <td>1441</td>
                                         <td>
-                                            <a href="#"
-                                               class="text-secondary text-bold">Website development</a>
+                                            <a
+                                                href="#"
+                                                class="text-secondary text-bold">Website development</a>
                                         </td>
                                         <td>09.04.18</td>
                                         <td>
@@ -328,15 +344,17 @@
                                     <tr>
                                         <td>
                                             <label class="custom-control custom-checkbox">
-                                                <input type="checkbox"
-                                                       class="custom-control-input">
+                                                <input
+                                                    type="checkbox"
+                                                    class="custom-control-input">
                                                 <span class="custom-control-label" />
                                             </label>
                                         </td>
                                         <td>1440</td>
                                         <td>
-                                            <a href="#"
-                                               class="text-secondary text-bold">UI/UX design for backend panel</a>
+                                            <a
+                                                href="#"
+                                                class="text-secondary text-bold">UI/UX design for backend panel</a>
                                         </td>
                                         <td>09.04.18</td>
                                         <td>
@@ -374,15 +392,17 @@
                                     <tr>
                                         <td>
                                             <label class="custom-control custom-checkbox">
-                                                <input type="checkbox"
-                                                       class="custom-control-input">
+                                                <input
+                                                    type="checkbox"
+                                                    class="custom-control-input">
                                                 <span class="custom-control-label" />
                                             </label>
                                         </td>
                                         <td>1438</td>
                                         <td>
-                                            <a href="#"
-                                               class="text-secondary text-bold">Texts for personal website</a>
+                                            <a
+                                                href="#"
+                                                class="text-secondary text-bold">Texts for personal website</a>
                                         </td>
                                         <td>08.04.18</td>
                                         <td>
@@ -417,15 +437,17 @@
                                     <tr>
                                         <td>
                                             <label class="custom-control custom-checkbox">
-                                                <input type="checkbox"
-                                                       class="custom-control-input">
+                                                <input
+                                                    type="checkbox"
+                                                    class="custom-control-input">
                                                 <span class="custom-control-label" />
                                             </label>
                                         </td>
                                         <td>1435</td>
                                         <td>
-                                            <a href="#"
-                                               class="text-secondary text-bold">Content menagement</a>
+                                            <a
+                                                href="#"
+                                                class="text-secondary text-bold">Content menagement</a>
                                         </td>
                                         <td>08.04.18</td>
                                         <td>
@@ -463,15 +485,17 @@
                                     <tr>
                                         <td>
                                             <label class="custom-control custom-checkbox">
-                                                <input type="checkbox"
-                                                       class="custom-control-input">
+                                                <input
+                                                    type="checkbox"
+                                                    class="custom-control-input">
                                                 <span class="custom-control-label" />
                                             </label>
                                         </td>
                                         <td>1433</td>
                                         <td>
-                                            <a href="#"
-                                               class="text-secondary text-bold">Marketing strategy</a>
+                                            <a
+                                                href="#"
+                                                class="text-secondary text-bold">Marketing strategy</a>
                                         </td>
                                         <td>05.04.18</td>
                                         <td>
@@ -515,15 +539,17 @@
                                     <tr>
                                         <td>
                                             <label class="custom-control custom-checkbox">
-                                                <input type="checkbox"
-                                                       class="custom-control-input">
+                                                <input
+                                                    type="checkbox"
+                                                    class="custom-control-input">
                                                 <span class="custom-control-label" />
                                             </label>
                                         </td>
                                         <td>1431</td>
                                         <td>
-                                            <a href="#"
-                                               class="text-secondary text-bold">Website markup</a>
+                                            <a
+                                                href="#"
+                                                class="text-secondary text-bold">Website markup</a>
                                         </td>
                                         <td>03.04.18</td>
                                         <td>
@@ -558,15 +584,17 @@
                                     <tr>
                                         <td>
                                             <label class="custom-control custom-checkbox">
-                                                <input type="checkbox"
-                                                       class="custom-control-input">
+                                                <input
+                                                    type="checkbox"
+                                                    class="custom-control-input">
                                                 <span class="custom-control-label" />
                                             </label>
                                         </td>
                                         <td>1429</td>
                                         <td>
-                                            <a href="#"
-                                               class="text-secondary text-bold">Adsense adv company</a>
+                                            <a
+                                                href="#"
+                                                class="text-secondary text-bold">Adsense adv company</a>
                                         </td>
                                         <td>03.04.18</td>
                                         <td>

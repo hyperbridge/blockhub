@@ -1,35 +1,41 @@
 <template>
     <transition name="fade">
-        <div v-if="!settings.client.cookiePolicyAccepted"
-             class="cookie-policy">
+        <div
+            v-if="!settings.client.cookiePolicyAccepted"
+            class="cookie-policy">
             <p class="p-0 m-0">
                 By using this website, you agree to our
-                <c-button status="plain"
-                          class="p-0 m-0"
-                          @click="showPopup">
+                <c-button
+                    status="plain"
+                    class="p-0 m-0"
+                    @click="showPopup">
                     cookie policy
                 </c-button>
             </p>
-            <c-button status="info"
-                      class="margin-left-20"
-                      iconHide
-                      @click="updateClientSettings()">
+            <c-button
+                status="info"
+                class="margin-left-20"
+                iconHide
+                @click="updateClientSettings()">
                 Dismiss
             </c-button>
-            <c-popup :activated="show"
-                     title="Cookie Policy"
-                     @close="closePopup">
+            <c-popup
+                :activated="show"
+                title="Cookie Policy"
+                @close="closePopup">
                 <p>
                     We use cookies to make interactions with our websites and services easy and meaningful,
                     to better understand how they are used and to tailor advertising.
                 </p>
                 <p>
-                    You can <c-button status="plain"
-                                      href="#">
+                    You can <c-button
+                        status="plain"
+                        href="#">
                         read more
                     </c-button>
-                    and <c-button status="plain"
-                                  href="#">
+                    and <c-button
+                        status="plain"
+                        href="#">
                         make you cookies choices here
                     </c-button>.
                 </p>
@@ -39,9 +45,10 @@
                 </p>
                 <template slot="footer">
                     <div class="text-right w-100">
-                        <c-button status="success"
-                                  iconHide
-                                  @click="updateClientSettings()">
+                        <c-button
+                            status="success"
+                            iconHide
+                            @click="updateClientSettings()">
                             Accept
                         </c-button>
                     </div>

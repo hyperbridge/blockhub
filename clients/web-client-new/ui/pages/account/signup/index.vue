@@ -1,33 +1,39 @@
 <template>
-    <c-layout navigationKey="account"
-              :showLeftPanel="false"
-              :showRightPanel="false"
-              :showShortcuts="false">
-        <div id="content"
-             class="content login-container">
+    <c-layout
+        navigationKey="account"
+        :showLeftPanel="false"
+        :showRightPanel="false"
+        :showShortcuts="false">
+        <div
+            id="content"
+            class="content login-container">
             <div class="container">
                 <div class="col-12">
-                    <p v-if="errors.length"
-                       class="errors">
+                    <p
+                        v-if="errors.length"
+                        class="errors">
                         <strong>Please correct the following error(s):</strong>
                         <ul>
-                            <li v-for="error in errors"
+                            <li
+                                v-for="error in errors"
                                 :key="error">
                                 {{ error }}
                             </li>
                         </ul>
                     </p>
-                    <form action="/"
-                          method="post">
+                    <form
+                        action="/"
+                        method="post">
                         <c-tabs
                             :activeTabProp="currentStep"
                             :lockedStep="finishedStep"
                             tabText="Step"
                             styled
                             @click="changeTab($event)">
-                            <c-tab :tab_id="1"
-                                   :selected="true"
-                                   :showFooter="true">
+                            <c-tab
+                                :tab_id="1"
+                                :selected="true"
+                                :showFooter="true">
                                 <div class="tab-container">
                                     <div class="tab-card">
                                         <h4>Personal Information</h4>
@@ -35,31 +41,34 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Email</label>
-                                                    <input v-model="account.email"
-                                                           type="email"
-                                                           class="form-control"
-                                                           placeholder="Email"
-                                                           name="email">
+                                                    <input
+                                                        v-model="account.email"
+                                                        type="email"
+                                                        class="form-control"
+                                                        placeholder="Email"
+                                                        name="email">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Given Name</label>
-                                                    <input v-model="account.firstName"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Given Name"
-                                                           name="firstName">
+                                                    <input
+                                                        v-model="account.firstName"
+                                                        type="text"
+                                                        class="form-control"
+                                                        placeholder="Given Name"
+                                                        name="firstName">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Family Name</label>
-                                                    <input v-model="account.lastName"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Family Name"
-                                                           name="lastName">
+                                                    <input
+                                                        v-model="account.lastName"
+                                                        type="text"
+                                                        class="form-control"
+                                                        placeholder="Family Name"
+                                                        name="lastName">
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -91,20 +100,23 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div slot="footer"
-                                     class="d-flex justify-content-between align-items-center margin-top-20">
+                                <div
+                                    slot="footer"
+                                    class="d-flex justify-content-between align-items-center margin-top-20">
                                     <c-switch
                                         v-model="account.agreement"
                                         label_position="right"
                                         :customLabel="true">
                                         <template>
                                             I agree to the
-                                            <c-button status="plain"
-                                                      @click="terms = true">
+                                            <c-button
+                                                status="plain"
+                                                @click="terms = true">
                                                 terms
                                             </c-button> and
-                                            <c-button status="plain"
-                                                      @click="privacy_policy = true">
+                                            <c-button
+                                                status="plain"
+                                                @click="privacy_policy = true">
                                                 privacy policy
                                             </c-button>
                                         </template>
@@ -122,40 +134,46 @@
                                     </div>
                                 </div>
                             </c-tab>
-                            <c-tab :tab_id="2"
-                                   :showFooter="true">
+                            <c-tab
+                                :tab_id="2"
+                                :showFooter="true">
                                 <div class="tab-container">
-                                    <div v-if="!passphrase"
-                                         class="padding-40 loading-process"
-                                         style="position: relative">
+                                    <div
+                                        v-if="!passphrase"
+                                        class="padding-40 loading-process"
+                                        style="position: relative">
                                         <div class="loading loading--w-spinner">
                                             <div><div class="loading-spinner" /></div>
                                         </div>
                                     </div>
-                                    <div v-if="passphrase"
-                                         class="tab-card">
+                                    <div
+                                        v-if="passphrase"
+                                        class="tab-card">
                                         <h4>Security</h4>
 
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Password</label>
-                                                    <input v-model="account.password"
-                                                           type="password"
-                                                           class="form-control"
-                                                           placeholder="Password"
-                                                           name="password">
+                                                    <input
+                                                        v-model="account.password"
+                                                        type="password"
+                                                        class="form-control"
+                                                        placeholder="Password"
+                                                        name="password">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Secret Question #1</label>
-                                                    <select id="secretQuestion1"
-                                                            v-model="account.secretQuestion1"
-                                                            name="secretQuestion1"
-                                                            class="form-control">
-                                                        <option value=""
-                                                                selected>
+                                                    <select
+                                                        id="secretQuestion1"
+                                                        v-model="account.secretQuestion1"
+                                                        name="secretQuestion1"
+                                                        class="form-control">
+                                                        <option
+                                                            value=""
+                                                            selected>
                                                             Choose Secret Question
                                                         </option>
                                                         <option value="last_name_first_kissed">
@@ -182,12 +200,14 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Secret Question #2</label>
-                                                    <select id="secretQuestion2"
-                                                            v-model="account.secretQuestion2"
-                                                            name="secretQuestion2"
-                                                            class="form-control">
-                                                        <option value=""
-                                                                selected>
+                                                    <select
+                                                        id="secretQuestion2"
+                                                        v-model="account.secretQuestion2"
+                                                        name="secretQuestion2"
+                                                        class="form-control">
+                                                        <option
+                                                            value=""
+                                                            selected>
                                                             Choose Secret Question
                                                         </option>
                                                         <option value="last_name_first_kissed">
@@ -216,95 +236,108 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Repeat Password</label>
-                                                    <input v-model="account.repeat_password"
-                                                           type="password"
-                                                           class="form-control"
-                                                           placeholder="Password again"
-                                                           name="repeat_password">
+                                                    <input
+                                                        v-model="account.repeat_password"
+                                                        type="password"
+                                                        class="form-control"
+                                                        placeholder="Password again"
+                                                        name="repeat_password">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Answer #1</label>
-                                                    <input v-model="account.secretAnswer1"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Secret Answer #1"
-                                                           name="secretAnswer1">
+                                                    <input
+                                                        v-model="account.secretAnswer1"
+                                                        type="text"
+                                                        class="form-control"
+                                                        placeholder="Secret Answer #1"
+                                                        name="secretAnswer1">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Answer #2</label>
-                                                    <input v-model="account.secretAnswer2"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Secret Answer #2"
-                                                           name="secretAnswer2">
+                                                    <input
+                                                        v-model="account.secretAnswer2"
+                                                        type="text"
+                                                        class="form-control"
+                                                        placeholder="Secret Answer #2"
+                                                        name="secretAnswer2">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div v-if="!verifyingPassphrase"
-                                     class="tab-card"
-                                     hidden>
+                                <div
+                                    v-if="!verifyingPassphrase"
+                                    class="tab-card"
+                                    hidden>
                                     <p>We've generated a passphrase for you. You can change it, but it's not recommended. This is used to access, create &amp; change your data. If you ever need to recover it, you can use your password. If you forget your password, you can use your secret question AND your birthday. We do this to protect you against hackers, however don't lose them, otherwise it will be impossible to recover the account.</p>
 
                                     <p>Make sure to write down your passphase, password, and secret answers and put it somewhere safe.</p>
 
                                     <div class="passphrase">
-                                        <input v-for="(word, index) in passphrase"
-                                               :key="index"
-                                               type="text"
-                                               class="form-control"
-                                               :value="word"
-                                               @keyup="passphrase[index] = $event.target.value">
+                                        <input
+                                            v-for="(word, index) in passphrase"
+                                            :key="index"
+                                            type="text"
+                                            class="form-control"
+                                            :value="word"
+                                            @keyup="passphrase[index] = $event.target.value">
                                     </div>
 
-                                    <c-button v-if="verifyingPassphrase"
-                                              class="plain"
-                                              @click="showPassphrase()" />
+                                    <c-button
+                                        v-if="verifyingPassphrase"
+                                        class="plain"
+                                        @click="showPassphrase()" />
                                     <br><br>
 
-                                    <c-button class="c-button--lg"
-                                              @click="startVerification()">
+                                    <c-button
+                                        class="c-button--lg"
+                                        @click="startVerification()">
                                         Got it
                                     </c-button>
                                 </div>
-                                <div v-if="verifyingPassphrase"
-                                     class="tab-card"
-                                     hidden>
+                                <div
+                                    v-if="verifyingPassphrase"
+                                    class="tab-card"
+                                    hidden>
                                     <p>We've generated a passphrase for you. You can change it, but it's not recommended. This is used to access, create &amp; change your data. If you ever need to recover it, you can use your password. If you forget your password, you can use your secret question AND your birthday. We do this to protect you against hackers, however don't lose them, otherwise it will be impossible to recover the account.</p>
 
                                     <p>Make sure to write down your passphase, password, and secret answers and put it somewhere safe.</p>
 
-                                    <div ref="passphraseVerification"
-                                         class="passphrase">
-                                        <input v-for="(word, index) in repeatPassphrase"
-                                               :key="index"
-                                               type="text"
-                                               class="form-control"
-                                               :value="word"
-                                               @keyup="repeatPassphrase[index] = $event.target.value">
+                                    <div
+                                        ref="passphraseVerification"
+                                        class="passphrase">
+                                        <input
+                                            v-for="(word, index) in repeatPassphrase"
+                                            :key="index"
+                                            type="text"
+                                            class="form-control"
+                                            :value="word"
+                                            @keyup="repeatPassphrase[index] = $event.target.value">
                                     </div>
 
-                                    <c-button v-if="verifyingPassphrase"
-                                              class="plain"
-                                              @click="showPassphrase()">
+                                    <c-button
+                                        v-if="verifyingPassphrase"
+                                        class="plain"
+                                        @click="showPassphrase()">
                                         Show Passphrase Again
                                     </c-button>
                                     <br><br>
 
-                                    <c-button v-if="verifyingPassphrase"
-                                              class="c-button--lg"
-                                              @click="confirmVerification()">
+                                    <c-button
+                                        v-if="verifyingPassphrase"
+                                        class="c-button--lg"
+                                        @click="confirmVerification()">
                                         Verify Now
                                     </c-button>
                                 </div>
-                                <div v-if="verifiedPassphrase"
-                                     slot="footer"
-                                     class="d-flex justify-content-between align-items-center margin-top-20">
+                                <div
+                                    v-if="verifiedPassphrase"
+                                    slot="footer"
+                                    class="d-flex justify-content-between align-items-center margin-top-20">
                                     <c-switch
                                         v-if="false && verifiedPassphrase"
                                         v-model="agreeStoredPassphrase"
@@ -348,19 +381,21 @@
             </div>
         </div>
 
-        <c-popup title="Terms"
-                 :activated="terms"
-                 width="800"
-                 @close="terms = false">
+        <c-popup
+            title="Terms"
+            :activated="terms"
+            width="800"
+            @close="terms = false">
             <div class="scroll_block">
                 <c-terms-block />
             </div>
         </c-popup>
 
-        <c-popup title="Privacy policy"
-                 :activated="privacy_policy"
-                 width="800"
-                 @close="privacy_policy = false">
+        <c-popup
+            title="Privacy policy"
+            :activated="privacy_policy"
+            width="800"
+            @close="privacy_policy = false">
             <div class="scroll_block">
                 <c-privacy-block />
             </div>

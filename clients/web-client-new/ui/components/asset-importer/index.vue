@@ -1,19 +1,22 @@
 <template>
     <div class="assets-import">
-        <div v-if="step1"
-             class="assets-import__contact">
+        <div
+            v-if="step1"
+            class="assets-import__contact">
             <h3>Import contacts</h3>
             <p class="mb-0">
                 Now let's match the columns in your uploaded file to your MailChimp list.
             </p>
             <p><a href="#">See an example of the import field match process</a></p>
-            <c-notification-inline type="info"
-                                   size="md"
-                                   class="my-4">
+            <c-notification-inline
+                type="info"
+                size="md"
+                class="my-4">
                 A simple primary alert—check it out!
             </c-notification-inline>
-            <c-checkbox id="test"
-                        v-model="skippedState">
+            <c-checkbox
+                id="test"
+                v-model="skippedState">
                 Show skipped columns
             </c-checkbox>
             <div class="row mt-4">
@@ -23,20 +26,23 @@
                             <h4>Email Address</h4>
                             <h6>dedeqit@gmail.com</h6>
                             <div class="action">
-                                <c-button status="outline-danger"
-                                          class="mx-1">
+                                <c-button
+                                    status="outline-danger"
+                                    class="mx-1">
                                     Edit
                                 </c-button>
-                                <c-button status="outline-info"
-                                          class="mx-1">
+                                <c-button
+                                    status="outline-info"
+                                    class="mx-1">
                                     Skip
                                 </c-button>
                             </div>
                         </div>
                         <div class="card-header invert p-3 d-none">
                             <div class="form-group mb-2">
-                                <select id="exampleFormControlSelect1"
-                                        class="form-control">
+                                <select
+                                    id="exampleFormControlSelect1"
+                                    class="form-control">
                                     <option>Chose email</option>
                                     <option>1</option>
                                     <option>2</option>
@@ -46,10 +52,12 @@
                                 </select>
                             </div>
                             <div class="form-group m-0">
-                                <a href="#"
-                                   class="btn btn-sm btn-success">Save</a>
-                                <a href="#"
-                                   class="btn btn-sm btn-link mr-2">Skip</a>
+                                <a
+                                    href="#"
+                                    class="btn btn-sm btn-success">Save</a>
+                                <a
+                                    href="#"
+                                    class="btn btn-sm btn-link mr-2">Skip</a>
                             </div>
                         </div>
                         <ul class="list">
@@ -63,19 +71,22 @@
                         </ul>
                     </div>
                 </div>
-                <div v-if="skippedState"
-                     class="col-12 col-md-4">
+                <div
+                    v-if="skippedState"
+                    class="col-12 col-md-4">
                     <div class="card">
                         <div class="card-header p-3 text-center">
                             <h4>First Name</h4>
                             <h6>text field</h6>
                             <div class="action">
-                                <c-button status="outline-danger"
-                                          class="mx-1">
+                                <c-button
+                                    status="outline-danger"
+                                    class="mx-1">
                                     Edit
                                 </c-button>
-                                <c-button status="outline-info"
-                                          class="mx-1">
+                                <c-button
+                                    status="outline-info"
+                                    class="mx-1">
                                     Skip
                                 </c-button>
                             </div>
@@ -91,19 +102,22 @@
                         </ul>
                     </div>
                 </div>
-                <div v-if="skippedState"
-                     class="col-12 col-md-4">
+                <div
+                    v-if="skippedState"
+                    class="col-12 col-md-4">
                     <div class="card">
                         <div class="card-header p-3 text-center">
                             <h4>Last Name</h4>
                             <h6>text field</h6>
                             <div class="action">
-                                <c-button status="outline-danger"
-                                          class="mx-1">
+                                <c-button
+                                    status="outline-danger"
+                                    class="mx-1">
                                     Edit
                                 </c-button>
-                                <c-button status="outline-info"
-                                          class="mx-1">
+                                <c-button
+                                    status="outline-info"
+                                    class="mx-1">
                                     Skip
                                 </c-button>
                             </div>
@@ -122,23 +136,26 @@
             </div>
             <div class="row mt-3">
                 <div class="col-12 text-right">
-                    <c-button status="outline-success"
-                              @click="uploadAssets">
+                    <c-button
+                        status="outline-success"
+                        @click="uploadAssets">
                         Upload
                     </c-button>
                 </div>
             </div>
         </div>
-        <div v-if="step2"
-             class="assets-import__loading">
+        <div
+            v-if="step2"
+            class="assets-import__loading">
             <c-loading-bar class="loading-bar" />
             <div class="text">
                 <h4>We'ar importing your list!( 3 sec delay )</h4>
                 <p>You can navigate away from this page - importing won't be affected!</p>
             </div>
         </div>
-        <div v-if="step3"
-             class="assets-import__results">
+        <div
+            v-if="step3"
+            class="assets-import__results">
             <h3>Import progress</h3>
             <div class="results-status">
                 <div>
@@ -159,40 +176,45 @@
                 </div>
             </div>
             <div class="w-100 mt-5">
-                <ul id="myTab"
+                <ul
+                    id="myTab"
                     class="nav nav-tabs"
                     role="tablist">
                     <li class="nav-item">
-                        <a id="step1-tab"
-                           class="nav-link active"
-                           data-toggle="tab"
-                           href="#tab1"
-                           role="tab"
-                           aria-controls="tab"
-                           aria-expanded="true">Tab 1</a>
+                        <a
+                            id="step1-tab"
+                            class="nav-link active"
+                            data-toggle="tab"
+                            href="#tab1"
+                            role="tab"
+                            aria-controls="tab"
+                            aria-expanded="true">Tab 1</a>
                     </li>
                     <li class="nav-item">
-                        <a id="step2-tab"
-                           class="nav-link"
-                           data-toggle="tab"
-                           href="#tab2"
-                           role="tab"
-                           aria-controls="tab">Tab 2</a>
+                        <a
+                            id="step2-tab"
+                            class="nav-link"
+                            data-toggle="tab"
+                            href="#tab2"
+                            role="tab"
+                            aria-controls="tab">Tab 2</a>
                     </li>
                     <li class="nav-item">
-                        <a id="step3-tab"
-                           class="nav-link"
-                           data-toggle="tab"
-                           href="#tab3"
-                           role="tab"
-                           aria-controls="tab">Tab 3</a>
+                        <a
+                            id="step3-tab"
+                            class="nav-link"
+                            data-toggle="tab"
+                            href="#tab3"
+                            role="tab"
+                            aria-controls="tab">Tab 3</a>
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div id="tab1"
-                         class="tab-pane fade show active"
-                         role="tabpanel"
-                         aria-labelledby="step1-tab">
+                    <div
+                        id="tab1"
+                        class="tab-pane fade show active"
+                        role="tabpanel"
+                        aria-labelledby="step1-tab">
                         <div class="tab-container">
                             <div class="info-list">
                                 <table class="table">

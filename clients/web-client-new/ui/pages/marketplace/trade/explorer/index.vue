@@ -7,8 +7,9 @@
             :class="'trade-offer--status-' + index">
             <div class="trade-offer__items">
                 <div class="trade-offer__user">
-                    <img class="trade-offer__user-image"
-                         :src="trx.you.img">
+                    <img
+                        class="trade-offer__user-image"
+                        :src="trx.you.img">
                     You offered
                 </div>
                 <div class="trade-offer__assets">
@@ -30,8 +31,9 @@
             </p>
             <div class="trade-offer__items">
                 <div class="trade-offer__user">
-                    <img class="trade-offer__user-image"
-                         :src="trx.contractor.img">
+                    <img
+                        class="trade-offer__user-image"
+                        :src="trx.contractor.img">
                     For {{ trx.contractor.name }}'s
                 </div>
                 <div class="trade-offer__assets">

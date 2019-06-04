@@ -8,14 +8,16 @@
                 <slot name="th" />
             </thead>
             <tbody>
-                <tr v-for="(val, prop, index) in asset.metadata"
+                <tr
+                    v-for="(val, prop, index) in asset.metadata"
                     :key="index">
                     <td>
                         {{ prop | parseProp | upperFirstChar }}
                     </td>
                     <td v-if="typeof asset.metadata[prop] === 'object'">
                         <ul class="margin-bottom-0">
-                            <li v-for="(subprop, subval, index) in asset.metadata[prop]"
+                            <li
+                                v-for="(subprop, subval, index) in asset.metadata[prop]"
                                 :key="index">
                                 {{ subprop }} {{ subval }}
                             </li>

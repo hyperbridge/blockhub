@@ -1,27 +1,32 @@
 <template>
-    <c-basic-popup :activated="activated && $store.state.application.signedIn"
-                   @close="activated = false">
+    <c-basic-popup
+        :activated="activated && $store.state.application.signedIn"
+        @close="activated = false">
         <template slot="body">
             <div class="item-info">
-                <div v-if="image"
-                     class="item-info__image">
+                <div
+                    v-if="image"
+                    class="item-info__image">
                     <img :src="image">
                 </div>
-                <div v-if="name"
-                     class="item-info__description">
+                <div
+                    v-if="name"
+                    class="item-info__description">
                     <div class="h4 font-weight-bold mb-2 p-0">
                         {{ name }}
                     </div>
-                    <p class="p-0 m-0"
-                       style="opacity: .7">
+                    <p
+                        class="p-0 m-0"
+                        style="opacity: .7">
                         {{ description }}
                     </p>
                 </div>
             </div>
             <div v-if="name">
-                <c-button status="plain"
-                          icon="star"
-                          class="p-0">
+                <c-button
+                    status="plain"
+                    icon="star"
+                    class="p-0">
                     Highlight this
                 </c-button>
             </div>
@@ -30,33 +35,38 @@
                     Choose collection
                 </div>
                 <div>
-                    <c-input v-model="searchQuery"
-                             bgColor="rgba(255, 255, 255, .07)"
-                             placeholder="Filter Collections" />
+                    <c-input
+                        v-model="searchQuery"
+                        bgColor="rgba(255, 255, 255, .07)"
+                        placeholder="Filter Collections" />
                 </div>
             </div>
             <div class="create-collection d-flex">
                 <template v-if="createForm">
-                    <c-button status="second-success"
-                              size="sm"
-                              class="mx-2"
-                              @click="addCollection(createCollectionRequest)">
+                    <c-button
+                        status="second-success"
+                        size="sm"
+                        class="mx-2"
+                        @click="addCollection(createCollectionRequest)">
                         Add
                     </c-button>
-                    <c-input v-model="createCollectionRequest.name"
-                             bgColor="rgba(255, 255, 255, .07)"
-                             placeholder="Collection name" />
-                    <c-button status="second-warning"
-                              size="sm"
-                              @click="createForm = false">
+                    <c-input
+                        v-model="createCollectionRequest.name"
+                        bgColor="rgba(255, 255, 255, .07)"
+                        placeholder="Collection name" />
+                    <c-button
+                        status="second-warning"
+                        size="sm"
+                        @click="createForm = false">
                         Cancel
                     </c-button>
                 </template>
                 <template v-if="!createForm">
-                    <c-button status="second-info"
-                              icon="plus"
-                              size="sm"
-                              @click="createForm = true">
+                    <c-button
+                        status="second-info"
+                        icon="plus"
+                        size="sm"
+                        @click="createForm = true">
                         Create New
                     </c-button>
                 </template>
@@ -74,13 +84,15 @@
                             {{ collection.name }}
                         </c-checkbox>
                     </c-checkbox-group>
-                    <div v-else
-                         class="h6 mt-3">
+                    <div
+                        v-else
+                        class="h6 mt-3">
                         No collections were found.
                     </div>
                 </template>
-                <div v-else
-                     class="h5">
+                <div
+                    v-else
+                    class="h5">
                     You don't have collection yet.
                 </div>
             </div>

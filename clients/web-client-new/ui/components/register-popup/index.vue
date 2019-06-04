@@ -3,11 +3,13 @@
         v-if="activated"
         title="Sign Up"
         @close="$store.state.application.activeModal = null">
-        <div slot="modalBody"
-             class=""
-             style="width: 100%">
-            <c-loading :enabled="loading"
-                       size="lg" />
+        <div
+            slot="modalBody"
+            class=""
+            style="width: 100%">
+            <c-loading
+                :enabled="loading"
+                size="lg" />
 
             <div v-if="!loading">
                 <p hidden>
@@ -25,11 +27,12 @@
                     <div class="col">
                         <div class="form-group">
                             <label>E-mail</label>
-                            <input v-model="email"
-                                   type="text"
-                                   class="form-control"
-                                   placeholder="E-mail"
-                                   name="email">
+                            <input
+                                v-model="email"
+                                type="text"
+                                class="form-control"
+                                placeholder="E-mail"
+                                name="email">
                         </div>
                     </div>
                 </div>
@@ -37,28 +40,31 @@
                     <div class="col">
                         <div class="form-group">
                             <label>Password</label>
-                            <input v-model="password"
-                                   type="password"
-                                   class="form-control"
-                                   placeholder="Password"
-                                   name="password"
-                                   @keyup.enter="next()">
+                            <input
+                                v-model="password"
+                                type="password"
+                                class="form-control"
+                                placeholder="Password"
+                                name="password"
+                                @keyup.enter="next()">
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label>Repeat Password</label>
-                            <input v-model="repeatPassword"
-                                   type="password"
-                                   class="form-control"
-                                   placeholder="Repeat Password"
-                                   name="repeatPassword"
-                                   @keyup.enter="next()">
+                            <input
+                                v-model="repeatPassword"
+                                type="password"
+                                class="form-control"
+                                placeholder="Repeat Password"
+                                name="repeatPassword"
+                                @keyup.enter="next()">
                         </div>
                     </div>
                 </div>
-                <div class="row"
-                     hidden>
+                <div
+                    class="row"
+                    hidden>
                     <div class="col">
                         <c-switch
                             v-model="agreement"
@@ -66,12 +72,14 @@
                             :customLabel="true">
                             <template slot="label">
                                 I agree to the
-                                <c-button status="plain"
-                                          @click="terms = true">
+                                <c-button
+                                    status="plain"
+                                    @click="terms = true">
                                     terms
                                 </c-button> and
-                                <c-button status="plain"
-                                          @click="privacy = true">
+                                <c-button
+                                    status="plain"
+                                    @click="privacy = true">
                                     privacy policy
                                 </c-button>
                             </template>
@@ -79,12 +87,14 @@
                     </div>
                 </div>
 
-                <p v-if="errors.length"
-                   class="errors">
+                <p
+                    v-if="errors.length"
+                    class="errors">
                     <br>
                     <strong>Please correct the following error(s):</strong>
                     <ul>
-                        <li v-for="error in errors"
+                        <li
+                            v-for="error in errors"
                             :key="error">
                             {{ error }}
                         </li>
@@ -93,26 +103,31 @@
             </div>
         </div>
 
-        <div v-if="!loading"
-             slot="modalFooter"
-             class="text-right w-100">
-            <c-button status="plain"
-                      style="float: left"
-                      @click="$store.commit('application/activateModal', 'login')">
+        <div
+            v-if="!loading"
+            slot="modalFooter"
+            class="text-right w-100">
+            <c-button
+                status="plain"
+                style="float: left"
+                @click="$store.commit('application/activateModal', 'login')">
                 Already registered? Sign In
             </c-button>
-            <c-button size="md"
-                      @click="next()">
+            <c-button
+                size="md"
+                @click="next()">
                 Continue
             </c-button>
         </div>
 
-        <c-terms-popup title="Terms"
-                       :activated="terms"
-                       width="800"
-                       @close="terms = false">
-            <div slot="header"
-                 class="h4">
+        <c-terms-popup
+            title="Terms"
+            :activated="terms"
+            width="800"
+            @close="terms = false">
+            <div
+                slot="header"
+                class="h4">
                 Terms and Conditions for BlockHub
             </div>
             <div slot="body">
@@ -122,12 +137,14 @@
             </div>
         </c-terms-popup>
 
-        <c-terms-popup title="Privacy"
-                       :activated="privacy"
-                       width="800"
-                       @close="privacy = false">
-            <div slot="header"
-                 class="h4">
+        <c-terms-popup
+            title="Privacy"
+            :activated="privacy"
+            width="800"
+            @close="privacy = false">
+            <div
+                slot="header"
+                class="h4">
                 Privacy Policy for BlockHub
             </div>
             <div slot="body">

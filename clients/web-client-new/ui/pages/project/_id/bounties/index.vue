@@ -8,15 +8,17 @@
                     </div>
                 </div>
                 <div class="bounties-header__stat">
-                    <c-icon-block icon="users"
-                                  class="ml-5">
+                    <c-icon-block
+                        icon="users"
+                        class="ml-5">
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             {{ contributors }}
                         </div>
                         Contributors
                     </c-icon-block>
-                    <c-icon-block icon="arrow-right"
-                                  class="ml-5">
+                    <c-icon-block
+                        icon="arrow-right"
+                        class="ml-5">
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             {{ submissions }}
                         </div>
@@ -24,31 +26,34 @@
                     </c-icon-block>
                 </div>
                 <div class="bounties-header__action">
-                    <c-button :to="`/business/projects/${project.id}`"
-                              status="dark"
-                              iconHide
-                              size="lg"
-                              fontSize="14"
-                              class="text-uppercase with-label">
+                    <c-button
+                        :to="`/business/projects/${project.id}`"
+                        status="dark"
+                        iconHide
+                        size="lg"
+                        fontSize="14"
+                        class="text-uppercase with-label">
                         <span class="btn-label">
                             <i class="fas fa-lock" />
                         </span>
                         Management
                     </c-button>
-                    <c-button :to="`/profile/${$store.state.application.activeProfile.id}/bounties`"
-                              status="info"
-                              iconHide
-                              size="lg"
-                              fontSize="14"
-                              class="text-uppercase ml-3">
+                    <c-button
+                        :to="`/profile/${$store.state.application.activeProfile.id}/bounties`"
+                        status="info"
+                        iconHide
+                        size="lg"
+                        fontSize="14"
+                        class="text-uppercase ml-3">
                         My bounties
                     </c-button>
                 </div>
             </div>
 
-            <div v-for="(item, index) in bounties"
-                 :key="index"
-                 class="bounties_item margin-bottom-30">
+            <div
+                v-for="(item, index) in bounties"
+                :key="index"
+                class="bounties_item margin-bottom-30">
                 <div class="bountie__head d-flex justify-content-between align-items-center">
                     <div class="bountie__head-stat">
                         <div>
@@ -70,12 +75,13 @@
                             <span>{{ item.approved }}</span>
                         </div>
                     </div>
-                    <c-button status="success"
-                              fontSize="14"
-                              iconHide
-                              size="lg"
-                              class="text-uppercase"
-                              @click=" showDownload = !showDownload ">
+                    <c-button
+                        status="success"
+                        fontSize="14"
+                        iconHide
+                        size="lg"
+                        class="text-uppercase"
+                        @click=" showDownload = !showDownload ">
                         Claim Bounty
                     </c-button>
                 </div>
@@ -84,20 +90,23 @@
                     <p>{{ item.text }}</p>
                 </div>
                 <transition name="fade">
-                    <div v-if="showDownload"
-                         class="bountie__bottom">
+                    <div
+                        v-if="showDownload"
+                        class="bountie__bottom">
                         <div class="file_upload">
                             <i class="fas fa-download" />
                             Select a Dossier File
                         </div>
                         <span>or</span>
-                        <input v-model="item.explainText"
-                               class="explain_input"
-                               type="text"
-                               placeholder="Explain your findings">
-                        <c-button status="success"
-                                  icon="arrow-right"
-                                  size="md">
+                        <input
+                            v-model="item.explainText"
+                            class="explain_input"
+                            type="text"
+                            placeholder="Explain your findings">
+                        <c-button
+                            status="success"
+                            icon="arrow-right"
+                            size="md">
                             Submit
                         </c-button>
                     </div>

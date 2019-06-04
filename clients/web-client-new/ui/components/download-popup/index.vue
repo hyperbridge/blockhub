@@ -1,22 +1,27 @@
 <template>
-    <c-popup ref="modal"
-             :activated="activated"
-             type="custom"
-             width="550"
-             @close="$emit('close')">
-        <div slot="customClose"
-             hidden />
-        <div slot="customContent"
-             class="download-modal">
+    <c-popup
+        ref="modal"
+        :activated="activated"
+        type="custom"
+        width="550"
+        @close="$emit('close')">
+        <div
+            slot="customClose"
+            hidden />
+        <div
+            slot="customContent"
+            class="download-modal">
             <c-tabs>
-                <c-tab name="Download"
-                       :selected="true"
-                       :showFooter="true">
+                <c-tab
+                    name="Download"
+                    :selected="true"
+                    :showFooter="true">
                     <div>
                         <c-download-block :showPreview="false" />
                     </div>
-                    <div slot="footer"
-                         class="d-flex align-items-center justify-content-end">
+                    <div
+                        slot="footer"
+                        class="d-flex align-items-center justify-content-end">
                         <div>
                             <c-button @click="$emit('close')">
                                 Close

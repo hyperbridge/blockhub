@@ -6,8 +6,9 @@
                 class="asset__image" />
             <div class="asset__meta">
                 <p>
-                    <slot name="link"
-                          :asset="asset">
+                    <slot
+                        name="link"
+                        :asset="asset">
                         <router-link :to="`/asset/${asset.id}`">
                             {{ asset.name }}
                         </router-link>
@@ -17,16 +18,18 @@
             </div>
         </div>
         <div class="flex-center-between">
-            <span v-if="asset.userName"
-                  class="asset__user">
+            <span
+                v-if="asset.userName"
+                class="asset__user">
                 <c-icon
                     name="user"
                     class="margin-right-5" />
                 {{ asset.userName }}
             </span>
             <span class="asset__price">{{ asset.price.current | convertCurrency }}</span>
-            <c-button status="success"
-                      icon="cart-plus">
+            <c-button
+                status="success"
+                icon="cart-plus">
                 Proceed to Purchase
             </c-button>
         </div>

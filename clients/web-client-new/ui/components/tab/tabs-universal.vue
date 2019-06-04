@@ -1,8 +1,10 @@
 <template>
-    <div class="tabs-universal"
-         :class="`tabs-universal--${styled ? 'styled' : 'default'}`">
-        <nav v-if="!disableMenu"
-             class="tabs-universal__nav">
+    <div
+        class="tabs-universal"
+        :class="`tabs-universal--${styled ? 'styled' : 'default'}`">
+        <nav
+            v-if="!disableMenu"
+            class="tabs-universal__nav">
             <slot name="nav">
                 <ul class="tabs-universal__list">
                     <li

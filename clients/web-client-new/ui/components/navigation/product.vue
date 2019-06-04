@@ -7,18 +7,20 @@
             mClass="margin-bottom-20"
             :links="links.gameOverview" />
 
-        <c-button v-if="$store.state.application.editorMode === 'editing'"
-                  status="second-info"
-                  size="lg"
-                  class="mb-4"
-                  @click="$store.commit('application/activateModal', 'sync-blockchain')">
+        <c-button
+            v-if="$store.state.application.editorMode === 'editing'"
+            status="second-info"
+            size="lg"
+            class="mb-4"
+            @click="$store.commit('application/activateModal', 'sync-blockchain')">
             Sync Blockchain
         </c-button>
-        <c-button v-if="$store.state.application.editorMode === 'editing'"
-                  status="second-info"
-                  size="lg"
-                  class="mb-4"
-                  @click="$store.commit('application/activateModal', 'import-product')">
+        <c-button
+            v-if="$store.state.application.editorMode === 'editing'"
+            status="second-info"
+            size="lg"
+            class="mb-4"
+            @click="$store.commit('application/activateModal', 'import-product')">
             Import
         </c-button>
 
@@ -26,13 +28,15 @@
 
         <c-curator-panel>
             <c-curator-info title="">
-                <c-claim v-darklaunch="'CURATORS'"
-                         title="Content curated"
-                         type="success"
-                         class="margin-bottom-10 margin-top-10">
+                <c-claim
+                    v-darklaunch="'CURATORS'"
+                    title="Content curated"
+                    type="success"
+                    class="margin-bottom-10 margin-top-10">
                     <p>This product has been curated by 2041 people.</p>
-                    <c-button to="/curator/application"
-                              class="outline-white">
+                    <c-button
+                        to="/curator/application"
+                        class="outline-white">
                         Become a curator
                     </c-button>
                 </c-claim>
@@ -54,8 +58,9 @@
                         Disapproved with 0 changes
                     </li>
                 </ul>
-                <c-button status="underline"
-                          @click="showClaimPopup">
+                <c-button
+                    status="underline"
+                    @click="showClaimPopup">
                     Created this game?
                 </c-button>
             </c-curator-info>

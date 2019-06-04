@@ -1,7 +1,8 @@
 <template>
     <div>
-        <div v-if="assets.length"
-             class="comparisonable-properties">
+        <div
+            v-if="assets.length"
+            class="comparisonable-properties">
             <div
                 v-for="title in ['comparable', 'calculable']"
                 v-if="compareProps[title + 'Props'].length"
@@ -9,7 +10,8 @@
                 class="properties-list">
                 <h4>{{ title | upperFirstChar }} properties</h4>
                 <ul>
-                    <li v-for="prop in compareProps[title + 'Props']"
+                    <li
+                        v-for="prop in compareProps[title + 'Props']"
                         :key="prop">
                         {{ prop | parseProp | upperFirstChar }}
                     </li>
@@ -38,14 +40,16 @@
                         <th>Difference</th>
                     </thead>
                     <tbody>
-                        <tr v-for="(prop, index) in comparableProps"
+                        <tr
+                            v-for="(prop, index) in comparableProps"
                             :key="index">
                             <td>
                                 {{ prop | parseProp | upperFirstChar }}
                             </td>
                             <td v-if="typeof asset.metadata[prop] === 'object'">
                                 <ul class="margin-bottom-0">
-                                    <li v-for="(subprop, subval, index) in asset.metadata[prop]"
+                                    <li
+                                        v-for="(subprop, subval, index) in asset.metadata[prop]"
                                         :key="index">
                                         {{ subprop }} {{ subval }}
                                     </li>

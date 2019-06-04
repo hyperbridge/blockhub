@@ -1,8 +1,9 @@
 <template>
     <div>
         <div class="wallet__info">
-            <img src="../../static/img/icons/token-icon.png"
-                 alt="Token">
+            <img
+                src="../../static/img/icons/token-icon.png"
+                alt="Token">
             <div class="h2">
                 0 HBX
             </div>
@@ -10,14 +11,16 @@
                 $ 0.00 USD
             </div>
             <div class="wallet__actions margin-top-20">
-                <c-button status="opacity-success"
-                          size="lg"
-                          class="mx-2">
+                <c-button
+                    status="opacity-success"
+                    size="lg"
+                    class="mx-2">
                     Deposit
                 </c-button>
-                <c-button status="opacity-info"
-                          size="lg"
-                          class="mx-2">
+                <c-button
+                    status="opacity-info"
+                    size="lg"
+                    class="mx-2">
                     Send
                 </c-button>
             </div>

@@ -1,34 +1,39 @@
 <template>
     <div class="new-group">
-        <a href="#"
-           class="close-btn">
+        <a
+            href="#"
+            class="close-btn">
             <i class="fas fa-times" />
         </a>
         <div class="new-group__wrapper">
             <div class="new-group__nav">
-                <c-button status="plain"
-                          size="lg"
-                          tag="button"
-                          :class="{ 'active': create_new }"
-                          @click="selectNew">
+                <c-button
+                    status="plain"
+                    size="lg"
+                    tag="button"
+                    :class="{ 'active': create_new }"
+                    @click="selectNew">
                     Create New
                 </c-button>
-                <c-button status="plain"
-                          size="lg"
-                          tag="button"
-                          :class="{ 'active': join }"
-                          @click="selectJoin">
+                <c-button
+                    status="plain"
+                    size="lg"
+                    tag="button"
+                    :class="{ 'active': join }"
+                    @click="selectJoin">
                     Join Group
                 </c-button>
             </div>
-            <div v-if="join"
-                 class="new-group__join-group">
+            <div
+                v-if="join"
+                class="new-group__join-group">
                 <div class="form-group invert w-100">
                     <label>Enter group invitation link or code</label>
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Enter link or code"
-                           name="group_name">
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter link or code"
+                        name="group_name">
                 </div>
                 <div class="text-right w-100">
                     <c-button status="opacity-info">
@@ -36,8 +41,9 @@
                     </c-button>
                 </div>
             </div>
-            <div v-if="create_new"
-                 class="new-group__create-group">
+            <div
+                v-if="create_new"
+                class="new-group__create-group">
                 <div class="create-group__avatar">
                     <img src="https://cdn1.iconfinder.com/data/icons/people-std/512/customers-512.png">
                     <c-button status="plain">
@@ -47,24 +53,28 @@
                 <div class="create-group__info">
                     <div class="form-group invert w-100">
                         <label>Group name</label>
-                        <input type="text"
-                               class="form-control"
-                               placeholder="Enter a name for your group"
-                               name="group_name">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Enter a name for your group"
+                            name="group_name">
                     </div>
                     <div class="form-group invert w-100">
                         <label>Description</label>
-                        <textarea class="form-control"
-                                  placeholder="Enter a name for your group"
-                                  name="group_description" />
+                        <textarea
+                            class="form-control"
+                            placeholder="Enter a name for your group"
+                            name="group_description" />
                     </div>
                     <div class="w-100 text-right margin-top-20">
-                        <c-button status="opacity-success"
-                                  class="ml-2">
+                        <c-button
+                            status="opacity-success"
+                            class="ml-2">
                             Create
                         </c-button>
-                        <c-button status="opacity-warning"
-                                  class="ml-2">
+                        <c-button
+                            status="opacity-warning"
+                            class="ml-2">
                             Cancel
                         </c-button>
                     </div>

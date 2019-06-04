@@ -1,8 +1,9 @@
 <template>
-    <c-block title="Language Support"
-             :noGutter="true"
-             :bgGradient="true"
-             :onlyContentBg="true">
+    <c-block
+        title="Language Support"
+        :noGutter="true"
+        :bgGradient="true"
+        :onlyContentBg="true">
         <template slot="heading-bar">
             <i class="fas fa-laptop title-icon" />
         </template>
@@ -14,18 +15,21 @@
                 <th>CC</th>
             </thead>
             <tbody>
-                <transition-group v-for="(lang, index) in orderLang"
-                                  v-if="lang.show == 'default' || show || index < 5"
-                                  :key="index"
-                                  name="fadeLeft"
-                                  tag="tr"
-                                  :class="['tr-order-' + lang.order]">
+                <transition-group
+                    v-for="(lang, index) in orderLang"
+                    v-if="lang.show == 'default' || show || index < 5"
+                    :key="index"
+                    name="fadeLeft"
+                    tag="tr"
+                    :class="['tr-order-' + lang.order]">
                     <template v-for="(value, property) in lang">
-                        <td v-if="property == 'name'"
+                        <td
+                            v-if="property == 'name'"
                             :key="property">
                             {{ value }}
                         </td>
-                        <td v-else
+                        <td
+                            v-else
                             :key="property">
                             <i
                                 v-if="value"
@@ -34,21 +38,27 @@
                         </td>
                     </template>
                 </transition-group>
-                <tr v-if="languages.length > 5"
+                <tr
+                    v-if="languages.length > 5"
                     style="background: transparent">
-                    <td colspan="10"
+                    <td
+                        colspan="10"
                         class="text-center">
-                        <transition v-if="!show"
-                                    name="fade">
-                            <div class="language-support__toggle-btn"
-                                 @click="toggleLang">
+                        <transition
+                            v-if="!show"
+                            name="fade">
+                            <div
+                                class="language-support__toggle-btn"
+                                @click="toggleLang">
                                 Show {{ languages.length - 5 }} more languages <i class="fas fa-angle-double-down" />
                             </div>
                         </transition>
-                        <transition v-else
-                                    name="fade">
-                            <div class="language-support__toggle-btn"
-                                 @click="toggleLang">
+                        <transition
+                            v-else
+                            name="fade">
+                            <div
+                                class="language-support__toggle-btn"
+                                @click="toggleLang">
                                 Hide languages <i class="fas fa-angle-double-up" />
                             </div>
                         </transition>

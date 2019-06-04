@@ -1,14 +1,18 @@
 <template>
-    <div class="promotion-item"
-         :class="{ 'bottom-border': border}">
+    <div
+        class="promotion-item"
+        :class="{ 'bottom-border': border}">
         <div class="promotion-item__icon">
-            <i v-if="basic"
-               class="fas fa-star"
-               style="color: #FADC72" />
-            <i v-else
-               class="fas fa-shopping-cart" />
+            <i
+                v-if="basic"
+                class="fas fa-star"
+                style="color: #FADC72" />
+            <i
+                v-else
+                class="fas fa-shopping-cart" />
         </div>
-        <h5 v-if="title"
+        <h5
+            v-if="title"
             class="promotion-item__title"
             :class="{'font-weight-bold' : basic}">
             {{ title }}
@@ -20,8 +24,9 @@
             data-target="#purchase-modal"
             iconHide>
             <div v-if="price">
-                <div v-if="basic"
-                     class="font-weight-normal text-uppercase">
+                <div
+                    v-if="basic"
+                    class="font-weight-normal text-uppercase">
                     Basic Package
                 </div>
                 Buy for {{ price | convertCurrency }}

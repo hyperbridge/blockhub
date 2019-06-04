@@ -143,8 +143,9 @@
                             erat.
                         </p>
                         <div class="w-100 text-right">
-                            <c-button status="second-info"
-                                      size="sm">
+                            <c-button
+                                status="second-info"
+                                size="sm">
                                 Read more
                             </c-button>
                         </div>
@@ -185,8 +186,9 @@
                             nascetur ridiculus mus.
                         </p>
                         <div class="w-100 text-right">
-                            <c-button status="second-info"
-                                      size="sm">
+                            <c-button
+                                status="second-info"
+                                size="sm">
                                 Read more
                             </c-button>
                         </div>
@@ -201,8 +203,9 @@
                         Citation Information
                     </div>
                     <template v-for="(item, index) in citation">
-                        <div class="h4"
-                             :class=" index == 0 ? '' : 'mt-4'">
+                        <div
+                            class="h4"
+                            :class=" index == 0 ? '' : 'mt-4'">
                             {{ item.title }}
                         </div>
                         <div>

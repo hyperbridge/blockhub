@@ -10,8 +10,9 @@
         <c-img
             class="asset-preview-basic__image"
             :src="asset.image" />
-        <p v-if="!hideGame"
-           class="asset-preview-basic__text">
+        <p
+            v-if="!hideGame"
+            class="asset-preview-basic__text">
             {{ asset.productName }}
         </p>
     </div>

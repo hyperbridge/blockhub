@@ -1,21 +1,26 @@
 <template>
-    <transition name="custom-classes-transition"
-                mode="out-in"
-                leave-active-class="animated bounceOutRight">
+    <transition
+        name="custom-classes-transition"
+        mode="out-in"
+        leave-active-class="animated bounceOutRight">
         <div
             v-if="show"
             class="notif"
             :class="notification.type">
             <div class="title">
-                <h5 class="text-left"
+                <h5
+                    class="text-left"
                     @click.self="$emit('showPopup')">
-                    <c-img v-if="icon"
-                           :src="icon" />
-                    <i v-else
-                       :class="`fas fa-${notif_icon}`" />
+                    <c-img
+                        v-if="icon"
+                        :src="icon" />
+                    <i
+                        v-else
+                        :class="`fas fa-${notif_icon}`" />
                     {{ notification.title }}
-                    <div class="close"
-                         @click="actionOnClose()">
+                    <div
+                        class="close"
+                        @click="actionOnClose()">
                         <i class="fas fa-times" />
                     </div>
                 </h5>

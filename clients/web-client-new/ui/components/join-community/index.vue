@@ -1,6 +1,7 @@
 <template>
-    <div v-if="!signedIn"
-         class="join-community">
+    <div
+        v-if="!signedIn"
+        class="join-community">
         <div class="join-community__wrapper">
             <c-img src="../../static/img/logo.fw.png" />
             <div class="h5 font-weight-bold">
@@ -9,8 +10,9 @@
             <div>
                 Discover the best games before they're mainstream.
             </div>
-            <c-button status="outline-white"
-                      @click="$store.commit('application/activateModal', 'register')">
+            <c-button
+                status="outline-white"
+                @click="$store.commit('application/activateModal', 'register')">
                 Sign Up
             </c-button>
         </div>

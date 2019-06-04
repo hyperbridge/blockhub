@@ -1,8 +1,9 @@
 <template>
-    <c-block class="margin-bottom-30"
-             :noGutter="true"
-             :bgGradient="true"
-             :onlyContentBg="true">
+    <c-block
+        class="margin-bottom-30"
+        :noGutter="true"
+        :bgGradient="true"
+        :onlyContentBg="true">
         <c-heading-bar
             v-if="products"
             slot="title"
@@ -13,17 +14,21 @@
             @prevClick="slider.slidePrev()"
             @nextClick="slider.slideNext()" />
 
-        <c-swiper v-if="products"
-                  ref="slider"
-                  :options="sliderOptions">
-            <c-swiper-slide v-for="(product, index) in products"
-                            :key="index">
-                <c-product-card-dynamic v-if="dynamic"
-                                        class="m-0"
-                                        :product="product" />
-                <c-product-card v-else
-                                class="m-0"
-                                :product="product" />
+        <c-swiper
+            v-if="products"
+            ref="slider"
+            :options="sliderOptions">
+            <c-swiper-slide
+                v-for="(product, index) in products"
+                :key="index">
+                <c-product-card-dynamic
+                    v-if="dynamic"
+                    class="m-0"
+                    :product="product" />
+                <c-product-card
+                    v-else
+                    class="m-0"
+                    :product="product" />
             </c-swiper-slide>
         </c-swiper>
     </c-block>

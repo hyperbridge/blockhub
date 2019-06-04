@@ -1,21 +1,25 @@
 <template>
-    <c-popup ref="modal"
-             :activated="activated"
-             type="custom"
-             title=""
-             width="650"
-             @close="$emit('close')">
-        <div slot="customClose"
-             class="c-popup__close"
-             @click="$emit('close')">
+    <c-popup
+        ref="modal"
+        :activated="activated"
+        type="custom"
+        title=""
+        width="650"
+        @close="$emit('close')">
+        <div
+            slot="customClose"
+            class="c-popup__close"
+            @click="$emit('close')">
             <i class="fas fa-times" />
         </div>
-        <div slot="customContent"
-             class="purchase-modal">
+        <div
+            slot="customContent"
+            class="purchase-modal">
             <c-tabs>
-                <c-tab name="Agreement"
-                       :selected="agreement"
-                       :showFooter="true">
+                <c-tab
+                    name="Agreement"
+                    :selected="agreement"
+                    :showFooter="true">
                     <div>
                         <div class="d-flex justify-content-between align-items-center">
                             <h4>Purchase Agreement</h4>
@@ -220,29 +224,34 @@
                             </slot>
                         </div>
                     </div>
-                    <div slot="footer"
-                         class="d-flex justify-content-between align-items-center">
+                    <div
+                        slot="footer"
+                        class="d-flex justify-content-between align-items-center">
                         <div>
-                            <c-switch size="sm"
-                                      :value="true"
-                                      label="I agree with the terms" />
+                            <c-switch
+                                size="sm"
+                                :value="true"
+                                label="I agree with the terms" />
                         </div>
                         <div>
-                            <c-button status="danger"
-                                      c_class="mx-1"
-                                      @click="">
+                            <c-button
+                                status="danger"
+                                c_class="mx-1"
+                                @click="">
                                 Cancel
                             </c-button>
-                            <c-button status="success"
-                                      @click="toggleSteps">
+                            <c-button
+                                status="success"
+                                @click="toggleSteps">
                                 Next
                             </c-button>
                         </div>
                     </div>
                 </c-tab>
-                <c-tab name="Sending"
-                       :selected="sending"
-                       :showFooter="true">
+                <c-tab
+                    name="Sending"
+                    :selected="sending"
+                    :showFooter="true">
                     <div class="sending-block">
                         <div class="clmn-1">
                             <div class="grid">
@@ -296,8 +305,9 @@
                                     <div class="progress" />
                                 </div>
                                 <div class="left-arrow">
-                                    <div class="progress"
-                                         style="width: 45%" />
+                                    <div
+                                        class="progress"
+                                        style="width: 45%" />
                                 </div>
                             </div>
                             <div class="time">
@@ -353,15 +363,18 @@
                             </div>
                         </div>
                     </div>
-                    <div slot="footer"
-                         class="d-flex align-items-center justify-content-end">
+                    <div
+                        slot="footer"
+                        class="d-flex align-items-center justify-content-end">
                         <div>
-                            <c-button status="danger"
-                                      @click="">
+                            <c-button
+                                status="danger"
+                                @click="">
                                 Cancel
                             </c-button>
-                            <c-button status="success"
-                                      @click="">
+                            <c-button
+                                status="success"
+                                @click="">
                                 Complete
                             </c-button>
                         </div>

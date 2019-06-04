@@ -1,13 +1,15 @@
 <template>
     <div class="scrollable-content">
-        <div ref="scrollList"
-             class="scrollable-content__wrapper--scroll">
+        <div
+            ref="scrollList"
+            class="scrollable-content__wrapper--scroll">
             <slot />
         </div>
         <transition name="fade">
-            <div v-if="scrollBottom"
-                 class="scrollable-content__scroll-btn"
-                 @click="_scrollDown">
+            <div
+                v-if="scrollBottom"
+                class="scrollable-content__scroll-btn"
+                @click="_scrollDown">
                 <i class="fas fa-angle-down" /> Most Recent Messages
             </div>
         </transition>

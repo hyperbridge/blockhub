@@ -1,7 +1,9 @@
 <template>
-    <ul class="list-container"
+    <ul
+        class="list-container"
         :class="{ 'list-container--parent': isParent }">
-        <li v-for="(list, title, index) in items"
+        <li
+            v-for="(list, title, index) in items"
             :key="index">
             <slot name="item">
                 <a

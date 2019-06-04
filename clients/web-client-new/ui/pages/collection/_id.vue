@@ -1,6 +1,7 @@
 <template>
-    <c-layout navigationKey="collection"
-              :breadcrumbLinks="breadcrumbLinks">
+    <c-layout
+        navigationKey="collection"
+        :breadcrumbLinks="breadcrumbLinks">
         <div class="row">
             <template v-if="!collection">
                 <p>Not found.</p>
@@ -56,8 +57,9 @@
                                     <label>
                                         Filter by
                                     </label>
-                                    <select id="exampleFormControlSelect1"
-                                            class="form-control">
+                                    <select
+                                        id="exampleFormControlSelect1"
+                                        class="form-control">
                                         <option>Type</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -69,33 +71,39 @@
                                     <label>
                                         Game
                                     </label>
-                                    <input type="text"
-                                           class="form-control">
+                                    <input
+                                        type="text"
+                                        class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>
                                         Name
                                     </label>
-                                    <input type="text"
-                                           class="form-control">
+                                    <input
+                                        type="text"
+                                        class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <c-button status="danger"
-                                              class="mr-4"
-                                              icon="times">
+                                    <c-button
+                                        status="danger"
+                                        class="mr-4"
+                                        icon="times">
                                         Clear
                                     </c-button>
-                                    <c-button status="info"
-                                              icon="filter">
+                                    <c-button
+                                        status="info"
+                                        icon="filter">
                                         More filters
                                     </c-button>
                                 </div>
                             </div>
                             <div class="d-inline-flex">
-                                <c-heading-bar-fields name="Rarity"
-                                                      icon="fas fa-trophy" />
-                                <c-heading-bar-fields name="Value"
-                                                      icon="fas fa-dollar" />
+                                <c-heading-bar-fields
+                                    name="Rarity"
+                                    icon="fas fa-trophy" />
+                                <c-heading-bar-fields
+                                    name="Value"
+                                    icon="fas fa-dollar" />
                             </div>
                         </div>
                         <c-assets-grid :list="assets" />

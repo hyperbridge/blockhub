@@ -1,9 +1,11 @@
 <template>
     <c-layout>
-        <div v-if="project"
-             class="row margin-bottom-40">
-            <div v-if="notice"
-                 class="col-md-12">
+        <div
+            v-if="project"
+            class="row margin-bottom-40">
+            <div
+                v-if="notice"
+                class="col-md-12">
                 <p class="alert alert-info">
                     {{ notice }}
                 </p>
@@ -15,10 +17,11 @@
                         <label>Title</label>
                     </label>
                     <div class="col-sm-9">
-                        <input v-model="project.name"
-                               type="text"
-                               class="form-control"
-                               placeholder="">
+                        <input
+                            v-model="project.name"
+                            type="text"
+                            class="form-control"
+                            placeholder="">
                         <span class="form-text" />
                     </div>
                 </div>
@@ -27,10 +30,11 @@
                         <label>Description</label>
                     </label>
                     <div class="col-sm-9">
-                        <input v-model="project.description"
-                               type="text"
-                               class="form-control"
-                               placeholder="">
+                        <input
+                            v-model="project.description"
+                            type="text"
+                            class="form-control"
+                            placeholder="">
                         <span class="form-text" />
                     </div>
                 </div>
@@ -41,15 +45,16 @@
                         <label>Tags</label>
                     </label>
                     <div class="col-sm-8">
-                        <c-multiselect v-model="project.tags"
-                                       tag-placeholder="Add this as new tag"
-                                       placeholder="Search or add a tag"
-                                       label="value"
-                                       track-by="key"
-                                       :options="tagOptions"
-                                       :multiple="true"
-                                       :taggable="true"
-                                       @tag="addTag" />
+                        <c-multiselect
+                            v-model="project.tags"
+                            tag-placeholder="Add this as new tag"
+                            placeholder="Search or add a tag"
+                            label="value"
+                            track-by="key"
+                            :options="tagOptions"
+                            :multiple="true"
+                            :taggable="true"
+                            @tag="addTag" />
                         <span class="form-text" />
                     </div>
                 </div>
@@ -58,10 +63,11 @@
                         <label>Minimum Contribution Goal</label>
                     </label>
                     <div class="col-sm-8">
-                        <input v-model="project.meta.funds.goal"
-                               type="text"
-                               class="form-control"
-                               placeholder="Example: 0">
+                        <input
+                            v-model="project.meta.funds.goal"
+                            type="text"
+                            class="form-control"
+                            placeholder="Example: 0">
                         <span class="form-text" />
                     </div>
                 </div>
@@ -70,53 +76,60 @@
                         <label>Maximum Contribution Goal</label>
                     </label>
                     <div class="col-sm-8">
-                        <input v-model="project.meta.funds.cap"
-                               type="text"
-                               class="form-control"
-                               placeholder="Example: 1000">
+                        <input
+                            v-model="project.meta.funds.cap"
+                            type="text"
+                            class="form-control"
+                            placeholder="Example: 1000">
                         <span class="form-text" />
                     </div>
                 </div>
             </div>
 
             <div class="col-12">
-                <c-html-editor height="200"
-                               :model.sync="project.value" />
+                <c-html-editor
+                    height="200"
+                    :model.sync="project.value" />
 
                 <span class="form-text" />
             </div>
 
             <div class="col-12 margin-top-10">
-                <c-heading-bar-color class="mt-4 mb-4"
-                                     colorCode="#444"
-                                     textAlign="center"
-                                     hidden>
+                <c-heading-bar-color
+                    class="mt-4 mb-4"
+                    colorCode="#444"
+                    textAlign="center"
+                    hidden>
                     Advanced Options
                 </c-heading-bar-color>
 
                 <div @click="toggleAdvanced">
-                    <i class="mr-2 fas"
-                       :class="advanced ? 'fa-angle-up' : 'fa-angle-down'" />
+                    <i
+                        class="mr-2 fas"
+                        :class="advanced ? 'fa-angle-up' : 'fa-angle-down'" />
                     {{ advanced ? 'Hide' : 'Show' }} Advanced
                 </div>
             </div>
 
-            <div v-if="advanced"
-                 class="col-12">
+            <div
+                v-if="advanced"
+                class="col-12">
                 <hr>
             </div>
 
-            <div v-if="advanced"
-                 class="col-md-6">
+            <div
+                v-if="advanced"
+                class="col-md-6">
                 <div class="form-group row">
                     <div class="col-sm-3">
                         <label>Support Email</label>
                     </div>
                     <div class="col-sm-9">
-                        <input v-model="project.meta.supportEmail"
-                               type="email"
-                               class="form-control"
-                               placeholder="Example: example@domain.com">
+                        <input
+                            v-model="project.meta.supportEmail"
+                            type="email"
+                            class="form-control"
+                            placeholder="Example: example@domain.com">
                         <span class="form-text" />
                     </div>
                 </div>
@@ -129,10 +142,11 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">@</span>
                             </div>
-                            <input v-model="project.meta.twitterUsername"
-                                   type="text"
-                                   class="form-control"
-                                   placeholder="Example: @example">
+                            <input
+                                v-model="project.meta.twitterUsername"
+                                type="text"
+                                class="form-control"
+                                placeholder="Example: @example">
                         </div>
                     </div>
                 </div>
@@ -141,17 +155,19 @@
                         <label>Share Text</label>
                     </div>
                     <div class="col-sm-9">
-                        <input v-model="project.meta.shareText"
-                               type="text"
-                               class="form-control"
-                               placeholder="Example: Join our crowdfund on BlockHub today!">
+                        <input
+                            v-model="project.meta.shareText"
+                            type="text"
+                            class="form-control"
+                            placeholder="Example: Join our crowdfund on BlockHub today!">
                         <span class="form-text" />
                     </div>
                 </div>
             </div>
 
-            <div v-if="advanced"
-                 class="col-md-6">
+            <div
+                v-if="advanced"
+                class="col-md-6">
                 <div class="form-group row">
                     <div class="col-sm-1">
                         <c-switch
@@ -203,10 +219,11 @@
                 <div class="form-group row">
                     <label class="switch switch-sm col-sm-1" />
                     <div class="col-sm-11">
-                        <input id="ise_default"
-                               type="text"
-                               name="ise_default"
-                               value="">
+                        <input
+                            id="ise_default"
+                            type="text"
+                            name="ise_default"
+                            value="">
                         <label>Contribution Period</label>
                         <span class="form-text">Projects with Curation Enabled will allow the community to curate the project and earn reputation for their actions.</span>
                     </div>
@@ -225,31 +242,37 @@
                 </div>
             </div>
 
-            <div v-if="advanced"
-                 class="col-md-12">
-                <div class="form-group row"
-                     style="text-align: center">
+            <div
+                v-if="advanced"
+                class="col-md-12">
+                <div
+                    class="form-group row"
+                    style="text-align: center">
                     <br>
                     <h3 style="width: 100%">
                         Raw Data Editor
                     </h3>
                     <br><br>
-                    <textarea :value="projectJson"
-                              rows="10"
-                              cols="50"
-                              @input="updateProjectRaw($event.target.value)" />
+                    <textarea
+                        :value="projectJson"
+                        rows="10"
+                        cols="50"
+                        @input="updateProjectRaw($event.target.value)" />
                     <br><br>
                     <span class="form-text" />
-                    <c-json-editor v-model="project"
-                                   :objData="project"
-                                   style="margin: 0 auto" />
+                    <c-json-editor
+                        v-model="project"
+                        :objData="project"
+                        style="margin: 0 auto" />
                 </div>
             </div>
 
-            <div class="col-12"
-                 hidden>
-                <div v-darklaunch="'GOVERNANCE'"
-                     class="row">
+            <div
+                class="col-12"
+                hidden>
+                <div
+                    v-darklaunch="'GOVERNANCE'"
+                    class="row">
                     <div class="col-12">
                         Choose your governance system
                     </div>
@@ -260,31 +283,35 @@
             </div>
 
             <div class="col-12">
-                <c-heading-bar-color class="mt-4 mb-4"
-                                     colorCode="#444"
-                                     textAlign="center">
+                <c-heading-bar-color
+                    class="mt-4 mb-4"
+                    colorCode="#444"
+                    textAlign="center">
                     Blockchain Options
                 </c-heading-bar-color>
 
                 <div v-if="blockchain">
                     <p>Project found. ID: {{ blockchain.id }}</p>
 
-                    <c-button status="outline-info"
-                              @click="updateBlockchain">
+                    <c-button
+                        status="outline-info"
+                        @click="updateBlockchain">
                         Update
                     </c-button>
                 </div>
 
                 <div v-if="!blockchain">
                     <strong>Project not found within Funding Protocol.</strong>
-                    <c-button status="outline-info"
-                              size="sm"
-                              @click="syncBlockchain">
+                    <c-button
+                        status="outline-info"
+                        size="sm"
+                        @click="syncBlockchain">
                         Sync
                     </c-button>
-                    <c-button status="outline-info"
-                              size="sm"
-                              @click="createBlockchain">
+                    <c-button
+                        status="outline-info"
+                        size="sm"
+                        @click="createBlockchain">
                         Deploy
                     </c-button>
                 </div>
@@ -293,28 +320,33 @@
 
         <template slot="menu">
             <div class="row">
-                <div v-if="project.id"
-                     class="col-12 text-right">
-                    <c-button status="info"
-                              size="lg"
-                              :href="`/project/${project.id}`"
-                              target="_blank"
-                              icon="eye">
+                <div
+                    v-if="project.id"
+                    class="col-12 text-right">
+                    <c-button
+                        status="info"
+                        size="lg"
+                        :href="`/project/${project.id}`"
+                        target="_blank"
+                        icon="eye">
                         View Page
                     </c-button>
-                    <c-button status="success"
-                              size="lg"
-                              icon="save"
-                              @click="save">
+                    <c-button
+                        status="success"
+                        size="lg"
+                        icon="save"
+                        @click="save">
                         Save
                     </c-button>
                 </div>
-                <div v-if="!project.id"
-                     class="col-12 text-right">
-                    <c-button status="success"
-                              size="lg"
-                              icon="plus"
-                              @click="create">
+                <div
+                    v-if="!project.id"
+                    class="col-12 text-right">
+                    <c-button
+                        status="success"
+                        size="lg"
+                        icon="plus"
+                        @click="create">
                         Create
                     </c-button>
                 </div>

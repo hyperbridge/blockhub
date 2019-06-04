@@ -1,9 +1,11 @@
 <template>
     <ul class="list-container">
-        <li v-for="(item, index) in items"
+        <li
+            v-for="(item, index) in items"
             :key="index">
-            <slot name="item"
-                  :item="item">
+            <slot
+                name="item"
+                :item="item">
                 <a
                     class="item__link"
                     :class="{ 'item_link--active': item.selected | item.active }"

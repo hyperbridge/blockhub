@@ -1,6 +1,7 @@
 <template>
     <div>
-        <ul ref="chatList"
+        <ul
+            ref="chatList"
             class="reset-list chat">
             <c-chat-message
                 v-for="(msg, index) in trx.messages"
@@ -40,16 +41,18 @@
         )">
             deleteSub
         </button> -->
-        <button @click="$store.dispatch(
-            'createRelation',
-            ['assets/trxs/messages', trx.id, { content: 'New message!', author: 1 }]
-        )">
+        <button
+            @click="$store.dispatch(
+                'createRelation',
+                ['assets/trxs/messages', trx.id, { content: 'New message!', author: 1 }]
+            )">
             Dispatch root createRelation
         </button>
-        <button @click="$store.dispatch(
-            'deleteRelation',
-            ['assets/trxs/messages', trx.id, 8]
-        )">
+        <button
+            @click="$store.dispatch(
+                'deleteRelation',
+                ['assets/trxs/messages', trx.id, 8]
+            )">
             Dispatch root deleteRelation
         </button>
     </div>

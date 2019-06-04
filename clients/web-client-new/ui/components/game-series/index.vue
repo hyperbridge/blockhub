@@ -1,8 +1,9 @@
 <template>
     <div class="game-series">
         <c-heading-bar name="Featured Game Series" />
-        <div class="game-series__container"
-             :class="{ 'bg-gradient' : bgGradient }">
+        <div
+            class="game-series__container"
+            :class="{ 'bg-gradient' : bgGradient }">
             <slot />
         </div>
     </div>

@@ -1,17 +1,19 @@
 <template>
     <div class="dropdown">
-        <a :id="id"
-           class="btn dropdown-toggle"
-           :class="{ 'show-bg' : showBg}"
-           href="#"
-           role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true"
-           aria-expanded="false">
+        <a
+            :id="id"
+            class="btn dropdown-toggle"
+            :class="{ 'show-bg' : showBg}"
+            href="#"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
             {{ name }}
         </a>
-        <div class="dropdown-menu"
-             :aria-labelledby="[ id + '_button']">
+        <div
+            class="dropdown-menu"
+            :aria-labelledby="[ id + '_button']">
             <slot />
         </div>
     </div>

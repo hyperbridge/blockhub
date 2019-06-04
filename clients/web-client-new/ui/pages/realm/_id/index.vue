@@ -3,8 +3,9 @@
         <div class="row realm_page_header margin-bottom-30">
             <div class="col-10 col-md-3">
                 <div class="logo">
-                    <c-img class="img-fluid"
-                           :src="realm.meta.images.logo" />
+                    <c-img
+                        class="img-fluid"
+                        :src="realm.meta.images.logo" />
                 </div>
             </div>
             <div class="col-12 col-md-3 mb-4 mb-md-0">
@@ -40,20 +41,24 @@
             <div class="col-12">
                 <ul class="nav">
                     <li class="nav-item active">
-                        <a href="#"
-                           class="nav-link">Home</a>
+                        <a
+                            href="#"
+                            class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#"
-                           class="nav-link">News</a>
+                        <a
+                            href="#"
+                            class="nav-link">News</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#"
-                           class="nav-link">Community</a>
+                        <a
+                            href="#"
+                            class="nav-link">Community</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#"
-                           class="nav-link">Games</a>
+                        <a
+                            href="#"
+                            class="nav-link">Games</a>
                     </li>
                 </ul>
             </div>
@@ -81,31 +86,36 @@
                             <c-img :src="realm.meta.images.follow" />
                         </div>
                         <div class="text">
-                            <a href="#"
-                               class="btn btn-sm btn-info">Follow Us</a>
+                            <a
+                                href="#"
+                                class="btn btn-sm btn-info">Follow Us</a>
                             <h4>Get the news first!</h4>
                         </div>
                     </div>
                 </div>
 
                 <div class="product-grid">
-                    <c-heading-bar name="Featured Games"
-                                   :showArrows="false"
-                                   :showBackground="false" />
+                    <c-heading-bar
+                        name="Featured Games"
+                        :showArrows="false"
+                        :showBackground="false" />
                 </div>
                 <div class="featured-assets">
-                    <c-heading-bar name="Featured Assets"
-                                   :showArrows="false"
-                                   :showBackground="false" />
+                    <c-heading-bar
+                        name="Featured Assets"
+                        :showArrows="false"
+                        :showBackground="false" />
                     <c-featured-assets />
                 </div>
                 <div class="games-container">
-                    <c-heading-bar name="Games"
-                                   :showArrows="false"
-                                   :showBackground="false"
-                                   showActions>
-                        <div slot="additional-action"
-                             class="additional-action margin-left-20">
+                    <c-heading-bar
+                        name="Games"
+                        :showArrows="false"
+                        :showBackground="false"
+                        showActions>
+                        <div
+                            slot="additional-action"
+                            class="additional-action margin-left-20">
                             <div class="text">
                                 Price
                                 <i class="fas fa-dollar-sign" />
@@ -115,8 +125,9 @@
                                 <i class="fas fa-sort-down" />
                             </div>
                         </div>
-                        <div slot="additional-action"
-                             class="additional-action">
+                        <div
+                            slot="additional-action"
+                            class="additional-action">
                             <div class="text">
                                 Rating
                                 <i class="fas fa-star" />

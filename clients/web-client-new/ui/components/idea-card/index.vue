@@ -1,35 +1,42 @@
 <template>
-    <div class="idea-card__item"
-         :class="customClass">
-        <div v-if="parentName"
-             class="head">
-            <div v-if="parentImage"
-                 class="img">
+    <div
+        class="idea-card__item"
+        :class="customClass">
+        <div
+            v-if="parentName"
+            class="head">
+            <div
+                v-if="parentImage"
+                class="img">
                 <c-img :src="parentImage" />
             </div>
             <div class="text">
-                <c-button status="none"
-                          :to="`/idea/${id}`">
+                <c-button
+                    status="none"
+                    :to="`/idea/${id}`">
                     <h4>{{ parentName }}</h4>
                 </c-button>
-                <c-button v-if="parentDeveloperName"
-                          status="none"
-                          :to="`/profile/${parentDeveloperId}`">
+                <c-button
+                    v-if="parentDeveloperName"
+                    status="none"
+                    :to="`/profile/${parentDeveloperId}`">
                     <p>{{ parentDeveloperName }}</p>
                 </c-button>
             </div>
         </div>
-        <c-button status="none"
-                  :to="`/idea/${id}`">
+        <c-button
+            status="none"
+            :to="`/idea/${id}`">
             <c-img :src="image" />
             <div class="description">
                 {{ description }}
             </div>
         </c-button>
         <div class="item-action">
-            <c-button status="info"
-                      :to="`/idea/${id}`"
-                      iconHide>
+            <c-button
+                status="info"
+                :to="`/idea/${id}`"
+                iconHide>
                 Check it out
             </c-button>
         </div>

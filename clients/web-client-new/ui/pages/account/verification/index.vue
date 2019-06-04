@@ -1,18 +1,22 @@
 <template>
-    <c-layout navigationKey="account"
-              :showLeftPanel="false"
-              :showRightPanel="false">
-        <div id="content"
-             class="content login-container">
+    <c-layout
+        navigationKey="account"
+        :showLeftPanel="false"
+        :showRightPanel="false">
+        <div
+            id="content"
+            class="content login-container">
             <div class="container">
                 <div class="col-12">
                     <c-tabs :currentStep="current_step">
-                        <c-tab name="Account Verification"
-                               :selected="true"
-                               :showFooter="true">
+                        <c-tab
+                            name="Account Verification"
+                            :selected="true"
+                            :showFooter="true">
                             <div class="tab-container">
-                                <div v-if="isVerified"
-                                     class="tab-card padding-20">
+                                <div
+                                    v-if="isVerified"
+                                    class="tab-card padding-20">
                                     <p>Your account has been verified. You can request approval for additional profiles below.</p>
 
                                     <div class="profile-picker">
@@ -42,12 +46,14 @@
                                         Send Again
                                     </c-button>
                                 </div>
-                                <div v-if="isVerifying"
-                                     class="tab-card padding-20">
+                                <div
+                                    v-if="isVerifying"
+                                    class="tab-card padding-20">
                                     <div class="col-12 mb-4 text-center">
                                         <h2>
-                                            <img src="/img/success.png"
-                                                 style="max-width: 40px;"> Account Verification Requested
+                                            <img
+                                                src="/img/success.png"
+                                                style="max-width: 40px;"> Account Verification Requested
                                         </h2>
                                         <p>Account is undergoing verification. You can now close this browser tab.</p>
                                         <br>
@@ -61,8 +67,9 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div v-if="!(isVerified || isVerifying) || been1hour || manual_override"
-                                     class="tab-card padding-20">
+                                <div
+                                    v-if="!(isVerified || isVerifying) || been1hour || manual_override"
+                                    class="tab-card padding-20">
                                     <div v-if="!verificationLink">
                                         <p>
                                             Submit proof of profile for KYC by providing your legal name, country of residence, and documentation.<br><br>
@@ -76,31 +83,34 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Given Name (First + Middle)</label>
-                                                    <input v-model="firstName"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Given Name (First + Middle Name)"
-                                                           name="firstName">
+                                                    <input
+                                                        v-model="firstName"
+                                                        type="text"
+                                                        class="form-control"
+                                                        placeholder="Given Name (First + Middle Name)"
+                                                        name="firstName">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Family Name</label>
-                                                    <input v-model="lastName"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Family Name (Last Name)"
-                                                           name="lastName">
+                                                    <input
+                                                        v-model="lastName"
+                                                        type="text"
+                                                        class="form-control"
+                                                        placeholder="Family Name (Last Name)"
+                                                        name="lastName">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">E-mail</label>
-                                                    <input v-model="email"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="E-mail"
-                                                           name="email">
+                                                    <input
+                                                        v-model="email"
+                                                        type="text"
+                                                        class="form-control"
+                                                        placeholder="E-mail"
+                                                        name="email">
                                                 </div>
                                             </div>
                                         </div>
@@ -108,12 +118,14 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Document Type</label>
-                                                    <select id="document_type"
-                                                            v-model="document_type"
-                                                            name="document_type"
-                                                            class="form-control">
-                                                        <option value=""
-                                                                selected>
+                                                    <select
+                                                        id="document_type"
+                                                        v-model="document_type"
+                                                        name="document_type"
+                                                        class="form-control">
+                                                        <option
+                                                            value=""
+                                                            selected>
                                                             Choose Document Type
                                                         </option>
                                                         <option value="government_id">
@@ -131,11 +143,12 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Document Number</label>
-                                                    <input v-model="document_number"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Document Number"
-                                                           name="documentNumber">
+                                                    <input
+                                                        v-model="document_number"
+                                                        type="text"
+                                                        class="form-control"
+                                                        placeholder="Document Number"
+                                                        name="documentNumber">
                                                 </div>
                                             </div>
                                         </div>
@@ -143,21 +156,24 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Ethereum Public Address</label>
-                                                    <input v-model="address"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Ethereum Public Address"
-                                                           name="address">
+                                                    <input
+                                                        v-model="address"
+                                                        type="text"
+                                                        class="form-control"
+                                                        placeholder="Ethereum Public Address"
+                                                        name="address">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <br>
-                                        <p v-if="errors.length"
-                                           class="errors">
+                                        <p
+                                            v-if="errors.length"
+                                            class="errors">
                                             <strong>Please correct the following error(s):</strong>
                                             <ul>
-                                                <li v-for="error in errors"
+                                                <li
+                                                    v-for="error in errors"
                                                     :key="error">
                                                     {{ error }}
                                                 </li>

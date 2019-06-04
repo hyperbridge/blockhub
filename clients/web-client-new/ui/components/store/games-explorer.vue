@@ -1,8 +1,9 @@
 <template>
     <div class="row product-grid">
-        <c-block :noGutter="true"
-                 :bgGradient="true"
-                 :onlyContentBg="true">
+        <c-block
+            :noGutter="true"
+            :bgGradient="true"
+            :onlyContentBg="true">
             <c-heading-bar
                 slot="title"
                 class="mb-0"
@@ -14,8 +15,9 @@
                 :showActions="true"
                 @changeTab="category = $event; clearFilters()">
                 <template slot="additional-action">
-                    <span class="sort-title"
-                          hidden>Sort by:</span>
+                    <span
+                        class="sort-title"
+                        hidden>Sort by:</span>
                     <c-heading-bar-fields
                         v-for="(opt, index) in sortOptions"
                         :key="index"
@@ -28,10 +30,11 @@
             </c-heading-bar>
             <div class="product-grid__filters align-items-center">
                 <div class="d-flex align-items-center">
-                    <c-dropdown id="product-genres"
-                                name="Filter by Genre"
-                                :showBg="true"
-                                class="product-genre">
+                    <c-dropdown
+                        id="product-genres"
+                        name="Filter by Genre"
+                        :showBg="true"
+                        class="product-genre">
                         <div class="product-genre__content">
                             <a
                                 v-for="genre in availableGenres"
@@ -44,14 +47,16 @@
                     <c-input-searcher
                         v-model="phrase" />
                 </div>
-                <c-button status="lightpurple"
-                          iconHide>
+                <c-button
+                    status="lightpurple"
+                    iconHide>
                     All New Releases
                 </c-button>
             </div>
             <transition name="slide-in">
-                <div v-if="filtersActive"
-                     class="active-filters">
+                <div
+                    v-if="filtersActive"
+                    class="active-filters">
                     <div class="active-filters__content">
                         <c-option-tag
                             v-if="phrase.length"
@@ -119,8 +124,9 @@
             </c-content-navigation>
             <div v-else-if="filtersActive">
                 <p>
-                    No products were found using these filters. Want to <c-button status="plain"
-                                                                                  @click="$store.commit('application/activateModal', 'coming-soon')">
+                    No products were found using these filters. Want to <c-button
+                        status="plain"
+                        @click="$store.commit('application/activateModal', 'coming-soon')">
                         Check for updates
                     </c-button>?
                 </p>
@@ -133,8 +139,9 @@
                 </c-button>
             </div>
             <p v-else>
-                Nothing could be found. Want to <c-button status="plain"
-                                                          @click="$store.commit('application/activateModal', 'coming-soon')">
+                Nothing could be found. Want to <c-button
+                    status="plain"
+                    @click="$store.commit('application/activateModal', 'coming-soon')">
                     Check for updates
                 </c-button>?
             </p>

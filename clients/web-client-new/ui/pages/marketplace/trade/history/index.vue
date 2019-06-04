@@ -9,8 +9,9 @@
             </span>
             <div class="trade-history__user">
                 You traded with
-                <router-link :to="`/profile/${trx.contractor.id}`"
-                             class="trade-history__user-link">
+                <router-link
+                    :to="`/profile/${trx.contractor.id}`"
+                    class="trade-history__user-link">
                     <c-user :user="trx.contractor" />
                 </router-link>
             </div>
@@ -29,8 +30,9 @@
                     <router-link
                         class="trade-history__item-link"
                         :to="`/asset/${asset.id}`">
-                        <c-img :src="asset.image"
-                               class="trade-history__item-image" />
+                        <c-img
+                            :src="asset.image"
+                            class="trade-history__item-image" />
                         {{ asset.name }}
                     </router-link>
                 </li>

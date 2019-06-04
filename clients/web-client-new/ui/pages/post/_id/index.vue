@@ -1,7 +1,8 @@
 <template>
     <c-layout navigationKey="project">
-        <div v-if="post"
-             class="row">
+        <div
+            v-if="post"
+            class="row">
             <div class="col-12">
                 <h2>
                     {{ post.title }}
@@ -9,8 +10,9 @@
                 <div v-html="post.text" />
             </div>
         </div>
-        <div v-else
-             class="row">
+        <div
+            v-else
+            class="row">
             <div class="col-12">
                 <h4>
                     Something went wrong

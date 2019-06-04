@@ -1,7 +1,8 @@
 <template>
     <div class="author">
-        <c-img class="author__img"
-               :src="img" />
+        <c-img
+            class="author__img"
+            :src="img" />
         {{ name }}
     </div>
 </template>

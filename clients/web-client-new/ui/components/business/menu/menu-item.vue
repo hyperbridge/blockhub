@@ -1,23 +1,26 @@
 <template>
     <li :class="{'has-submenu' : $slots.submenu, 'open' : isOpen, 'is-minimized' : minimized }">
-        <router-link v-if="!$slots.submenu"
-                     :to="to">
+        <router-link
+            v-if="!$slots.submenu"
+            :to="to">
             <i :class="[iconType + ' fa-' + icon ]" />
             <span>
                 <slot />
             </span>
         </router-link>
 
-        <a v-else
-           href="#"
-           @click="toggleSubMenu">
+        <a
+            v-else
+            href="#"
+            @click="toggleSubMenu">
             <i :class="[iconType + ' fa-' + icon ]" />
             <span>
                 <slot />
             </span>
         </a>
 
-        <ul v-if="$slots.submenu"
+        <ul
+            v-if="$slots.submenu"
             class="sub-menu">
             <slot name="submenu" />
         </ul>

@@ -1,10 +1,12 @@
 <template>
-    <div class="community-item"
-         :class="{ 'is-reply': reply }">
+    <div
+        class="community-item"
+        :class="{ 'is-reply': reply }">
         <div class="community-item__header">
             <div class="icon">
-                <i class="fas"
-                   :class="postIcon" />
+                <i
+                    class="fas"
+                    :class="postIcon" />
             </div>
             <div class="text">
                 <router-link :to="{ name: 'Community Discussion', params: {id: post.id } }">
@@ -14,10 +16,12 @@
                 {{ post.title.status }}
             </div>
             <div class="statistic">
-                <div class="rating"
-                     :class="[ post.rate < 0 ? 'down' : 'up' ]">
-                    <i class="fas"
-                       :class="[ post.rate < 0 ? 'fa-chevron-down' : 'fa-chevron-up' ]" />
+                <div
+                    class="rating"
+                    :class="[ post.rate < 0 ? 'down' : 'up' ]">
+                    <i
+                        class="fas"
+                        :class="[ post.rate < 0 ? 'fa-chevron-down' : 'fa-chevron-up' ]" />
                     {{ post.rate < 0 ? post.rate * -1 : post.rate }}
                 </div>
                 <div class="commentsCount">
@@ -41,13 +45,15 @@
                 <c-img :src="post.content.img" />
             </div>
             <div class="community-item__action text-right">
-                <a v-if="!reply"
-                   href="#"
-                   class="btn btn-sm btn-icon">
+                <a
+                    v-if="!reply"
+                    href="#"
+                    class="btn btn-sm btn-icon">
                     <i class="fas fa-thumbs-down" />
                 </a>
-                <c-reply :class="{'w-100' : reply}"
-                         @replyMode="reply = $event" />
+                <c-reply
+                    :class="{'w-100' : reply}"
+                    @replyMode="reply = $event" />
             </div>
 
             <c-post-comment

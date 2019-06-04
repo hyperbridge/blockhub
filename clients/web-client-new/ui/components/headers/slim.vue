@@ -5,9 +5,10 @@
             {{ title }}
         </div>
         <div class="app-header__bar-right">
-            <button type="button"
-                    aria-label="Close"
-                    @click.prevent="closeWindow">
+            <button
+                type="button"
+                aria-label="Close"
+                @click.prevent="closeWindow">
                 <i class="fas fa-times" />
             </button>
         </div>

@@ -6,10 +6,11 @@
                     <div class="">
                         <div class="form-row">
                             <div class="col-6 col-lg-2">
-                                <select class="form-control actionWithSelected"
-                                        tabindex="-1"
-                                        aria-hidden="true"
-                                        hidden>
+                                <select
+                                    class="form-control actionWithSelected"
+                                    tabindex="-1"
+                                    aria-hidden="true"
+                                    hidden>
                                     <option />
                                     <option value="1">
                                         Set as readed
@@ -21,10 +22,11 @@
                             </div>
                             <div class="col-6 col-lg-4 d-none d-md-block" />
                             <div class="col-6 col-lg-2">
-                                <select class="form-control orderByStatus"
-                                        tabindex="-1"
-                                        aria-hidden="true"
-                                        hidden>
+                                <select
+                                    class="form-control orderByStatus"
+                                    tabindex="-1"
+                                    aria-hidden="true"
+                                    hidden>
                                     <option />
                                     <option value="1">
                                         New
@@ -44,14 +46,16 @@
                         </div>
 
                         <div class="table-responsive margin-top-20 margin-bottom-0">
-                            <table class="table table-striped table-bordered margin-bottom-0"
-                                   style="min-width: 800px;">
+                            <table
+                                class="table table-striped table-bordered margin-bottom-0"
+                                style="min-width: 800px;">
                                 <thead>
                                     <tr>
                                         <th width="30">
                                             <label class="custom-control custom-checkbox">
-                                                <input type="checkbox"
-                                                       class="custom-control-input">
+                                                <input
+                                                    type="checkbox"
+                                                    class="custom-control-input">
                                                 <span class="custom-control-label" />
                                             </label>
                                         </th>
@@ -73,20 +77,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="project in projects"
+                                    <tr
+                                        v-for="project in projects"
                                         :key="project.id">
                                         <td>
                                             <label class="custom-control custom-checkbox">
-                                                <input type="checkbox"
-                                                       class="custom-control-input">
+                                                <input
+                                                    type="checkbox"
+                                                    class="custom-control-input">
                                                 <span class="custom-control-label" />
                                             </label>
                                         </td>
                                         <td>{{ project.id }}</td>
                                         <td>
-                                            <c-button status="none"
-                                                      :to="`/business/project/${project.id}`"
-                                                      class="text-secondary text-bold">
+                                            <c-button
+                                                status="none"
+                                                :to="`/business/project/${project.id}`"
+                                                class="text-secondary text-bold">
                                                 {{ project.name }}
                                             </c-button>
                                         </td>
@@ -124,11 +131,12 @@
                                             </button>
                                         </td>
                                         <td>
-                                            <c-button status="dark"
-                                                      class="btn btn-secondary btn-icon"
-                                                      size="sm"
-                                                      :to="`/business/project/${project.id}`"
-                                                      style="color: #fff">
+                                            <c-button
+                                                status="dark"
+                                                class="btn btn-secondary btn-icon"
+                                                size="sm"
+                                                :to="`/business/project/${project.id}`"
+                                                style="color: #fff">
                                                 <i class="fas fa-pencil-alt" />
                                             </c-button>
                                         </td>
@@ -144,10 +152,11 @@
         <template slot="menu">
             <div class="row">
                 <div class="col-12 text-right">
-                    <c-button to="/business/project/new"
-                              status="dark"
-                              icon="plus"
-                              size="lg">
+                    <c-button
+                        to="/business/project/new"
+                        status="dark"
+                        icon="plus"
+                        size="lg">
                         New Crowdfund
                     </c-button>
                 </div>

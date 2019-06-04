@@ -1,14 +1,17 @@
 <template>
-    <form id="send-message"
-          class="flex flex-row flex-space-between"
-          @submit.prevent>
-        <input v-model="newMessage"
-               type="text"
-               name="text"
-               class="flex flex-1">
-        <button class="button-primary"
-                type="submit"
-                @click="addMessage">
+    <form
+        id="send-message"
+        class="flex flex-row flex-space-between"
+        @submit.prevent>
+        <input
+            v-model="newMessage"
+            type="text"
+            name="text"
+            class="flex flex-1">
+        <button
+            class="button-primary"
+            type="submit"
+            @click="addMessage">
             Send
         </button>
     </form>

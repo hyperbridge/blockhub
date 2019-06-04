@@ -4,17 +4,20 @@
             <h3>{{ title }}</h3>
             <div>{{ description }}</div>
             <div class="slider-dots">
-                <div ref="sliderDots"
-                     slot="pagination"
-                     class="collection-swiper-pagination swiper-pagination" />
+                <div
+                    ref="sliderDots"
+                    slot="pagination"
+                    class="collection-swiper-pagination swiper-pagination" />
             </div>
         </div>
         <div class="collection-list__container">
-            <c-swiper v-if="collections.length"
-                      :options="options"
-                      class="padding-10">
-                <c-swiper-slide v-for="(collection, index) in collections"
-                                :key="index">
+            <c-swiper
+                v-if="collections.length"
+                :options="options"
+                class="padding-10">
+                <c-swiper-slide
+                    v-for="(collection, index) in collections"
+                    :key="index">
                     <c-collection-item
                         :id="collection.id"
                         :name="collection.name"
@@ -23,10 +26,12 @@
                         :assets="collection.meta.assets" />
                 </c-swiper-slide>
             </c-swiper>
-            <p v-if="!collections.length"
-               style="padding: 20px; text-align: center;">
-                No collections yet. <c-button status="plain"
-                                              @click="$store.commit('application/activateModal', 'add-collection')">
+            <p
+                v-if="!collections.length"
+                style="padding: 20px; text-align: center;">
+                No collections yet. <c-button
+                    status="plain"
+                    @click="$store.commit('application/activateModal', 'add-collection')">
                     Create one
                 </c-button>?
             </p>

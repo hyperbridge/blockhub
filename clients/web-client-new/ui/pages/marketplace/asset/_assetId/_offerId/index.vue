@@ -16,7 +16,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="bid in offer.bids"
+                    <tr
+                        v-for="bid in offer.bids"
                         :key="bid.id">
                         <td><c-user :user="bid.user" /></td>
                         <td>
@@ -41,8 +42,9 @@
                 Bid value
                 <c-input v-model="value" />
             </label>
-            <c-button size="md"
-                      @click="createBid()">
+            <c-button
+                size="md"
+                @click="createBid()">
                 Create bid
             </c-button>
         </div>

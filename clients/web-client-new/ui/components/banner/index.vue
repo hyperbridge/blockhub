@@ -1,37 +1,45 @@
 <template>
     <div class="main-banner text-white">
         <c-swiper :options="sliderOptions">
-            <c-swiper-slide v-for="(slide, index) in slides"
-                            :key="index">
+            <c-swiper-slide
+                v-for="(slide, index) in slides"
+                :key="index">
                 <div class="main-banner__content">
-                    <div class="image-bg"
-                         :style="bannerImg(slide.image)" />
-                    <div class="main-banner__content--logo"
-                         :class="[ slide.logo['size'] ? 'logo-size-' + slide.logo['size'] : 'logo-size-md', slide.logo['position'] ]"
-                         :style="logoPosition(slide.logo)">
-                        <c-img :src="slide.logo.src"
-                               :alt="slide.title" />
+                    <div
+                        class="image-bg"
+                        :style="bannerImg(slide.image)" />
+                    <div
+                        class="main-banner__content--logo"
+                        :class="[ slide.logo['size'] ? 'logo-size-' + slide.logo['size'] : 'logo-size-md', slide.logo['position'] ]"
+                        :style="logoPosition(slide.logo)">
+                        <c-img
+                            :src="slide.logo.src"
+                            :alt="slide.title" />
                     </div>
-                    <c-image-overlay v-if="slide.overlay"
-                                     :title="slide.overlay.title"
-                                     :subtitle="slide.overlay.subtitle"
-                                     :text="slide.overlay.text" />
+                    <c-image-overlay
+                        v-if="slide.overlay"
+                        :title="slide.overlay.title"
+                        :subtitle="slide.overlay.subtitle"
+                        :text="slide.overlay.text" />
                 </div>
                 <div class="main-banner__footer">
                     <h4>
                         {{ slide.title }}
                     </h4>
                     <div class="main-banner__footer-actions">
-                        <div v-if="slides.length > 1"
-                             ref="sliderDots"
-                             class="slider-dots">
-                            <div slot="pagination"
-                                 class="main-banner-swiper-pagination swiper-pagination" />
+                        <div
+                            v-if="slides.length > 1"
+                            ref="sliderDots"
+                            class="slider-dots">
+                            <div
+                                slot="pagination"
+                                class="main-banner-swiper-pagination swiper-pagination" />
                         </div>
-                        <c-button status="lightpurple"
-                                  size="md"
-                                  iconHide
-                                  :to="`/product/${slide.id}`">
+                        <c-button
+                            status="lightpurple"
+                            size="md"
+                            iconHide
+                            :to="`/product/${slide.id}`">
                             {{ slide.buttonText }}
                         </c-button>
                     </div>

@@ -1,7 +1,8 @@
 <template>
     <article>
-        <c-block :title="`Trading with ${trx.contractor.name}`"
-                 class="transaction">
+        <c-block
+            :title="`Trading with ${trx.contractor.name}`"
+            class="transaction">
             <div class="transaction__block">
                 <div class="transaction__headings">
                     <h4>You offered</h4>
@@ -15,8 +16,9 @@
                             @click="handleArray($event, 'yoursOffer')" />
                     </div>
                     <div class="management__inventory-explorer">
-                        <c-list-submenu :items="trx.you.inventoryGrouped"
-                                        isParent>
+                        <c-list-submenu
+                            :items="trx.you.inventoryGrouped"
+                            isParent>
                             <c-list-submenu
                                 slot="sublist"
                                 slot-scope="{ sublist }"
@@ -45,8 +47,9 @@
             <div class="transaction__block">
                 <div class="transaction__headings">
                     <h4>For {{ trx.contractor.name }}'s</h4>
-                    <c-author :name="trx.contractor.name"
-                              :img="trx.contractor.img" />
+                    <c-author
+                        :name="trx.contractor.name"
+                        :img="trx.contractor.img" />
                     <h4>{{ trx.contractor.name }}'s inventory</h4>
                 </div>
                 <div class="transaction__management">
@@ -57,8 +60,9 @@
                             @click="handleArray($event, 'theirOffer')" />
                     </div>
                     <div class="management__inventory-explorer">
-                        <c-list-submenu :items="trx.contractor.inventoryGrouped"
-                                        isParent>
+                        <c-list-submenu
+                            :items="trx.contractor.inventoryGrouped"
+                            isParent>
                             <c-list-submenu
                                 slot="sublist"
                                 slot-scope="{ sublist }"

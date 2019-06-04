@@ -1,15 +1,17 @@
 <template>
     <div class="row">
-        <div v-if="!posts.length"
-             class="col-12">
+        <div
+            v-if="!posts.length"
+            class="col-12">
             <div class="no-updates">
                 <h3>
                     There is no community setup yet.
                 </h3>
             </div>
         </div>
-        <div v-if="posts.length"
-             class="col-12">
+        <div
+            v-if="posts.length"
+            class="col-12">
             <div v-if="community_1">
                 <c-item
                     v-for="(post, index) in posts"

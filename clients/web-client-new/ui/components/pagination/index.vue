@@ -4,8 +4,9 @@
             <slot name="left-content" />
         </div>
 
-        <nav class="pagination__nav"
-             :class="{ 'show-bg' : showBg }">
+        <nav
+            class="pagination__nav"
+            :class="{ 'show-bg' : showBg }">
             <ul>
                 <li v-show="activePage > 1">
                     <a

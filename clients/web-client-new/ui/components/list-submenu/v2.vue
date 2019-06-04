@@ -1,6 +1,7 @@
 <template>
     <ul>
-        <li v-for="(value, prop) in list"
+        <li
+            v-for="(value, prop) in list"
             :key="prop">
             <span>{{ prop }}</span> -
             <span>{{ subListLength(value) }}</span>

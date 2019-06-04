@@ -13,12 +13,14 @@
                     <h2 class="userName">
                         {{ profile.name }}
                     </h2>
-                    <div v-darklaunch="'REPUTATION'"
-                         class="user_status">
+                    <div
+                        v-darklaunch="'REPUTATION'"
+                        class="user_status">
                         Trusted User
                     </div>
-                    <div v-darklaunch="'REPUTATION'"
-                         class="user_statistic">
+                    <div
+                        v-darklaunch="'REPUTATION'"
+                        class="user_statistic">
                         <span>
                             12
                             <i class="fas fa-arrow-up" />
@@ -32,8 +34,9 @@
             </div>
         </div>
         <div class="col-7">
-            <div v-darklaunch="'BADGES'"
-                 class="profile__user-medal">
+            <div
+                v-darklaunch="'BADGES'"
+                class="profile__user-medal">
                 <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png" />
                 <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png" />
                 <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png" />

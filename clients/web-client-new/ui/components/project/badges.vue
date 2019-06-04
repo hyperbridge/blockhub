@@ -1,8 +1,9 @@
 <template>
     <div class="badges-list">
-        <div v-for="(icon, index) in icons"
-             :key="index"
-             class="item">
+        <div
+            v-for="(icon, index) in icons"
+            :key="index"
+            class="item">
             <i :class="[ 'fas fa-' + icon ]" />
         </div>
     </div>
@@ -10,7 +11,6 @@
 
 <script>
 export default {
-    name: 'ProjectBadges',
     props: ['icons']
 }
 </script>

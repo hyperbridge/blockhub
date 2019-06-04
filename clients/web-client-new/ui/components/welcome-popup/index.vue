@@ -1,22 +1,27 @@
 <template>
-    <c-popup ref="modal"
-             :activated="activated"
-             type="custom"
-             width="850"
-             @close="$emit('close')">
-        <div slot="customClose"
-             hidden />
-        <div slot="customContent"
-             class="welcome-modal">
+    <c-popup
+        ref="modal"
+        :activated="activated"
+        type="custom"
+        width="850"
+        @close="$emit('close')">
+        <div
+            slot="customClose"
+            hidden />
+        <div
+            slot="customContent"
+            class="welcome-modal">
             <c-tabs>
-                <c-tab name="Welcome"
-                       :selected="true"
-                       :showFooter="true">
+                <c-tab
+                    name="Welcome"
+                    :selected="true"
+                    :showFooter="true">
                     <div>
                         <c-welcome-box :prompt="true" />
                     </div>
-                    <div slot="footer"
-                         class="d-flex align-items-center justify-content-end">
+                    <div
+                        slot="footer"
+                        class="d-flex align-items-center justify-content-end">
                         <div>
                             <c-button @click="$emit('close')">
                                 Close

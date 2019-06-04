@@ -3,29 +3,34 @@
         <div class="game-includes__title">
             <h3>What's included</h3>
         </div>
-        <transition-group name="list"
-                          tag="div"
-                          class="game-includes__list">
-            <div v-for="(item) of limitedList(limit)"
-                 :key="item.id"
-                 class="game-includes__item-container"
-                 :style="{ width: 'calc(100% / ' + showNumber + ')'}">
-                <c-includes-item :id="item.id"
-                                 :name="item.name"
-                                 :developer="item.developer"
-                                 :rating="item.rating ? item.rating.overall : 0"
-                                 :image="item.meta ? item.meta.images.mediumTile : null" />
+        <transition-group
+            name="list"
+            tag="div"
+            class="game-includes__list">
+            <div
+                v-for="(item) of limitedList(limit)"
+                :key="item.id"
+                class="game-includes__item-container"
+                :style="{ width: 'calc(100% / ' + showNumber + ')'}">
+                <c-includes-item
+                    :id="item.id"
+                    :name="item.name"
+                    :developer="item.developer"
+                    :rating="item.rating ? item.rating.overall : 0"
+                    :image="item.meta ? item.meta.images.mediumTile : null" />
             </div>
         </transition-group>
         <!--Show buttons-->
-        <c-load-more v-if="showMore && list.length > showNumber - 1"
-                     @click="showAll">
+        <c-load-more
+            v-if="showMore && list.length > showNumber - 1"
+            @click="showAll">
             Load More <span class="ml-3">+{{ hiddenCount() }}</span>
         </c-load-more>
 
         <!--Hide buttons-->
-        <c-load-more v-if="!showMore"
-                     @click="hideAll">
+        <c-load-more
+            v-if="!showMore"
+            @click="hideAll">
             Hide
         </c-load-more>
     </div>

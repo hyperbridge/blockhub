@@ -1,47 +1,56 @@
 <template>
     <div class="welcome-block">
         <div class="welcome-block__header">
-            <c-img src="/img/logo-white.svg"
-                   alt="Logo" />
+            <c-img
+                src="/img/logo-white.svg"
+                alt="Logo" />
         </div>
         <div class="welcome-block__download-block">
             <div class="info">
-                <h4 v-if="prompt"
+                <h4
+                    v-if="prompt"
                     class="font-weight-bold text-uppercase h3">
                     This requires our desktop version
                 </h4>
-                <p v-if="prompt"
-                   class="h4">
+                <p
+                    v-if="prompt"
+                    class="h4">
                     Some actions are not safe within a browser,
                     so we built BlockHub it's own fortress,
                     a safer environment for you to do much more!
                 </p>
-                <h4 v-if="!prompt"
+                <h4
+                    v-if="!prompt"
                     class="font-weight-bold text-uppercase h3">
                     DO MORE WITH OUR DESKTOP CLIENT
                 </h4>
-                <p v-if="!prompt"
-                   class="h4">
+                <p
+                    v-if="!prompt"
+                    class="h4">
                     Some actions are not safe within a browser, so we built BlockHub it's own fortress, a safer environment for you to do much more!
                 </p>
-                <div v-if="defaultDownload"
-                     class="action d-flex align-items-center">
-                    <c-button v-if="!downloading"
-                              status="none"
-                              :to="defaultDownload.to"
-                              class="btn btn-outline-success"
-                              @click="startDownload(defaultDownload)">
+                <div
+                    v-if="defaultDownload"
+                    class="action d-flex align-items-center">
+                    <c-button
+                        v-if="!downloading"
+                        status="none"
+                        :to="defaultDownload.to"
+                        class="btn btn-outline-success"
+                        @click="startDownload(defaultDownload)">
                         <strong>Download Now</strong>
                         <small>for {{ defaultDownload.text }}</small>
                     </c-button>
                     <div v-if="downloading">
-                        Downloading now. <c-button status="none"
-                                                   :to="downloading.to">
+                        Downloading now. <c-button
+                            status="none"
+                            :to="downloading.to">
                             Click here
                         </c-button><br> if it doesn't start in 10 seconds.
                     </div>
-                    <div class="download_info"
-                         @click="showAllPlatforms">
+                    <div
+                        class="download_info"
+                        @click="showAllPlatforms">
                         <h6>Using another OS?</h6>
                         <p>We are multiplatform, enjoy!</p>
                         <i class="fab fa-apple" />
@@ -50,15 +59,18 @@
                     </div>
                 </div>
             </div>
-            <div v-if="showAll"
-                 class="other_options">
-                <div v-for="(item, index) in downloads"
-                     :key="index">
-                    <c-button v-for="(item, index) in item"
-                              :key="index"
-                              status="none"
-                              :to="item.to"
-                              class="btn">
+            <div
+                v-if="showAll"
+                class="other_options">
+                <div
+                    v-for="(item, index) in downloads"
+                    :key="index">
+                    <c-button
+                        v-for="(item, index) in item"
+                        :key="index"
+                        status="none"
+                        :to="item.to"
+                        class="btn">
                         <strong>{{ item.text }}</strong>
                         <small>{{ item.subtext }}</small>
                     </c-button>

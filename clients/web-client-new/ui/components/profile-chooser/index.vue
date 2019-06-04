@@ -1,8 +1,10 @@
 <template>
-    <div class="profile-chooser"
-         :class="{ 'profile-chooser--dark-mode': darkMode, 'profile-chooser--light-mode': !darkMode }">
-        <div class="profile-chooser__overlay"
-             @click="closeProfileChooser" />
+    <div
+        class="profile-chooser"
+        :class="{ 'profile-chooser--dark-mode': darkMode, 'profile-chooser--light-mode': !darkMode }">
+        <div
+            class="profile-chooser__overlay"
+            @click="closeProfileChooser" />
         <div class="profile-chooser__wrapper">
             <div class="profile-chooser__content">
                 <c-heading-bar
@@ -27,12 +29,14 @@
                             </div>
                         </c-swiper-slide>
                     </c-swiper>
-                    <div v-if="profiles.length > 3"
-                         slot="button-prev"
-                         class="swiper-button-prev" />
-                    <div v-if="profiles.length > 3"
-                         slot="button-next"
-                         class="swiper-button-next" />
+                    <div
+                        v-if="profiles.length > 3"
+                        slot="button-prev"
+                        class="swiper-button-prev" />
+                    <div
+                        v-if="profiles.length > 3"
+                        slot="button-next"
+                        class="swiper-button-next" />
                 </div>
                 <c-heading-bar
                     slot="title"
@@ -40,12 +44,14 @@
                     name=""
                     :showBackground="false" />
                 <div class="profile-chooser__actions">
-                    <c-button class="profile-chooser__back-button c-button--lg outline-white"
-                              @click="closeProfileChooser">
+                    <c-button
+                        class="profile-chooser__back-button c-button--lg outline-white"
+                        @click="closeProfileChooser">
                         Back
                     </c-button>
-                    <c-button class="profile-chooser__ok-button c-button--lg outline-white"
-                              @click="closeProfileChooser">
+                    <c-button
+                        class="profile-chooser__ok-button c-button--lg outline-white"
+                        @click="closeProfileChooser">
                         OK
                     </c-button>
                 </div>

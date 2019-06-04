@@ -1,8 +1,9 @@
 <template>
     <c-layout navigationKey="store">
         <div class="container-fluid">
-            <c-block :noGutter="true"
-                     :onlyContentBg="true">
+            <c-block
+                :noGutter="true"
+                :onlyContentBg="true">
                 <c-heading-bar
                     slot="title"
                     class="mb-0"

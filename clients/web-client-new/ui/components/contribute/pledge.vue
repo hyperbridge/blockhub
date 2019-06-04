@@ -1,12 +1,14 @@
 <template>
-    <div class="pledge-item"
-         @mouseover=" showToggle = true"
-         @mouseleave=" showToggle = false ">
+    <div
+        class="pledge-item"
+        @mouseover=" showToggle = true"
+        @mouseleave=" showToggle = false ">
         <transition name="fade">
-            <div v-if="showToggle && !form "
-                 class="pledge-form-toggle"
-                 style="animation-duration: 0.5s"
-                 @click="showFrom">
+            <div
+                v-if="showToggle && !form "
+                class="pledge-form-toggle"
+                style="animation-duration: 0.5s"
+                @click="showFrom">
                 Select this reward
             </div>
         </transition>
@@ -17,11 +19,13 @@
         <div class="pledge-item__text">
             {{ pledge.description }}
         </div>
-        <div v-if="!form && pledge.includes.length > 0"
-             class="pledge-item__includes">
+        <div
+            v-if="!form && pledge.includes.length > 0"
+            class="pledge-item__includes">
             <h6>Includes</h6>
             <ul>
-                <li v-for="(itm, index) in pledge.includes"
+                <li
+                    v-for="(itm, index) in pledge.includes"
                     :key="index">
                     {{ itm.text }}
                 </li>
@@ -36,24 +40,27 @@
                 <span class="h6">Ships to</span>
                 {{ pledge.shipsTo }}
             </div>
-            <div v-if="pledge.backers"
-                 class="w-100 mt-5">
+            <div
+                v-if="pledge.backers"
+                class="w-100 mt-5">
                 <span class="h6">
                     {{ pledge.backers }} backers
                 </span>
             </div>
         </div>
-        <transition v-if="form"
-                    name="fade">
+        <transition
+            v-if="form"
+            name="fade">
             <div class="mt-5">
                 <div class="h6 font-weight-bold text-uppercase mb-3">
                     Pledge amount
                 </div>
-                <c-contribute-form v-model="toBePaid"
-                                   :defaultValue="pledge.minPrice"
-                                   :currency="currency"
-                                   :active="true"
-                                   @click="$emit('click')" />
+                <c-contribute-form
+                    v-model="toBePaid"
+                    :defaultValue="pledge.minPrice"
+                    :currency="currency"
+                    :active="true"
+                    @click="$emit('click')" />
             </div>
         </transition>
     </div>

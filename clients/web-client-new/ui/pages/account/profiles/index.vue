@@ -1,11 +1,13 @@
 <template>
     <c-layout navigationKey="account">
-        <div v-if="profiles"
-             class="row align-items-stretch justify-content-center margin-bottom-40">
+        <div
+            v-if="profiles"
+            class="row align-items-stretch justify-content-center margin-bottom-40">
             <div class="col-12">
-                <c-heading-bar name="My Profile"
-                               :showArrows="false"
-                               :showBackground="false" />
+                <c-heading-bar
+                    name="My Profile"
+                    :showArrows="false"
+                    :showBackground="false" />
             </div>
             <div class="col-12 col-md-6 col-lg-4 my_profile">
                 <div
@@ -35,31 +37,36 @@
                     You don't have a default profile.
                 </p>
             </div>
-            <div v-if="activeProfile"
-                 class="col-12 col-md-6 col-lg-4"
-                 hidden>
+            <div
+                v-if="activeProfile"
+                class="col-12 col-md-6 col-lg-4"
+                hidden>
                 <div class="verification-block text-center">
                     <h3 class="text-white">
                         Verify Your Profile
                     </h3>
-                    <div v-if="activeProfile.isVerified"
-                         class="status">
+                    <div
+                        v-if="activeProfile.isVerified"
+                        class="status">
                         <i class="fas fa-check" />
                         Verified
                     </div>
-                    <div v-else-if="activeProfile.isVerifying"
-                         class="status">
+                    <div
+                        v-else-if="activeProfile.isVerifying"
+                        class="status">
                         <i class="fas fa-hourglass" />
                         Verifying
                     </div>
-                    <c-button v-else
-                              status="outline-success"
-                              class="mt-3"
-to="/account/verification">
+                    <c-button
+                        v-else
+                        status="outline-success"
+                        class="mt-3"
+                        to="/account/verification">
                         Click here to verify
                     </c-button>
-                    <div v-if="activeProfile.isVerified"
-                         class="date">
+                    <div
+                        v-if="activeProfile.isVerified"
+                        class="date">
                         Valid up to $7,500 USD
                     </div>
                 </div>
@@ -69,32 +76,37 @@ to="/account/verification">
             <div class="col-12 mb-4" />
 
             <div class="col-12">
-                <c-heading-bar name="All Profiles"
-                               :showArrows="false"
-                               :showBackground="false"
-                               showActions>
-                    <div slot="additional-action"
-                         class="additional-action margin-left-20">
+                <c-heading-bar
+                    name="All Profiles"
+                    :showArrows="false"
+                    :showBackground="false"
+                    showActions>
+                    <div
+                        slot="additional-action"
+                        class="additional-action margin-left-20">
                         <span class="text">Name <c-icon name="user" /></span>
                         <c-button-arrows
                             :activeUp="sortAsc"
                             @clickUp="sortAsc = true"
                             @clickDown="sortAsc = false" />
                     </div>
-                    <div slot="additional-action"
-                         v-darklaunch="'REPUTATION'"
-                         class="additional-action margin-left-20">
+                    <div
+                        slot="additional-action"
+                        v-darklaunch="'REPUTATION'"
+                        class="additional-action margin-left-20">
                         <span class="text">Rating <c-icon name="trophy" /></span>
                         <c-button-arrows />
                     </div>
-                    <div slot="additional-action"
-                         class="additional-action margin-left-20 padding-5">
+                    <div
+                        slot="additional-action"
+                        class="additional-action margin-left-20 padding-5">
                         <c-input-searcher
                             v-model="filterPhrase"
                             placeholder="Search" />
                     </div>
-                    <div slot="additional-action"
-                         class="additional-action margin-left-10">
+                    <div
+                        slot="additional-action"
+                        class="additional-action margin-left-10">
                         <c-button
                             status="outline-white"
                             icon="user-plus"
@@ -111,12 +123,14 @@ to="/account/verification">
                 name="item"
                 :duration="100"
             > -->
-            <c-loading key="loading"
-                       :enabled="!filteredProfiles.length"
-                       size="lg" />
+            <c-loading
+                key="loading"
+                :enabled="!filteredProfiles.length"
+                size="lg" />
 
-            <div v-if="filteredProfiles.length"
-                 class="profile-picker">
+            <div
+                v-if="filteredProfiles.length"
+                class="profile-picker">
                 <div
                     v-for="profile in filteredProfiles"
                     :key="profile.id"
@@ -287,15 +301,14 @@ export default {
             const firstNames = ['Aiden', 'Jackson', 'Mason', 'Liam', 'Jacob', 'Jayden', 'Ethan', 'Noah', 'Lucas', 'Logan', 'Caleb', 'Caden', 'Jack', 'Ryan', 'Connor', 'Michael', 'Elijah', 'Brayden', 'Benjamin', 'Nicholas', 'Alexander', 'William', 'Matthew', 'James', 'Landon', 'Nathan', 'Dylan', 'Evan', 'Luke', 'Andrew', 'Gabriel', 'Gavin', 'Joshua', 'Owen', 'Daniel', 'Carter', 'Tyler', 'Cameron', 'Christian', 'Wyatt', 'Henry', 'Eli', 'Joseph', 'Max', 'Isaac', 'Samuel', 'Anthony', 'Grayson', 'Zachary', 'David', 'Christopher', 'John', 'Isaiah', 'Levi', 'Jonathan', 'Oliver', 'Chase', 'Cooper', 'Tristan', 'Colton', 'Austin', 'Colin', 'Charlie', 'Dominic', 'Parker', 'Hunter', 'Thomas', 'Alex', 'Ian', 'Jordan', 'Cole', 'Julian', 'Aaron', 'Carson', 'Miles', 'Blake', 'Brody', 'Adam', 'Sebastian', 'Adrian', 'Nolan', 'Sean', 'Riley', 'Bentley', 'Xavier', 'Hayden', 'Jeremiah', 'Jason', 'Jake', 'Asher', 'Micah', 'Jace', 'Brandon', 'Josiah', 'Hudson', 'Nathaniel', 'Bryson', 'Ryder', 'Justin', 'Bryce', 'Sophia', 'Emma', 'Isabella', 'Olivia', 'Ava', 'Lily', 'Chloe', 'Madison', 'Emily', 'Abigail', 'Addison', 'Mia', 'Madelyn', 'Ella', 'Hailey', 'Kaylee', 'Avery', 'Kaitlyn', 'Riley', 'Aubrey', 'Brooklyn', 'Peyton', 'Layla', 'Hannah', 'Charlotte', 'Bella', 'Natalie', 'Sarah', 'Grace', 'Amelia', 'Kylie', 'Arianna', 'Anna', 'Elizabeth', 'Sophie', 'Claire', 'Lila', 'Aaliyah', 'Gabriella', 'Elise', 'Lillian', 'Samantha', 'Makayla', 'Audrey', 'Alyssa', 'Ellie', 'Alexis', 'Isabelle', 'Savannah', 'Evelyn', 'Leah', 'Keira', 'Allison', 'Maya', 'Lucy', 'Sydney', 'Taylor', 'Molly', 'Lauren', 'Harper', 'Scarlett', 'Brianna', 'Victoria', 'Liliana', 'Aria', 'Kayla', 'Annabelle', 'Gianna', 'Kennedy', 'Stella', 'Reagan', 'Julia', 'Bailey', 'Alexandra', 'Jordyn', 'Nora', 'Carolin', 'Mackenzie', 'Jasmine', 'Jocelyn', 'Kendall', 'Morgan', 'Nevaeh', 'Maria', 'Eva', 'Juliana', 'Abby', 'Alexa', 'Summer', 'Brooke', 'Penelope', 'Violet', 'Kate', 'Hadley', 'Ashlyn', 'Sadie', 'Paige', 'Katherine', 'Sienna', 'Piper', 'Eric']
             const titleNames = ['the Death Dealer', 'the Forsaken', 'the Lustful', 'the Machine', 'the Striker', 'the Constructed', 'the Firey', 'the Cold', 'the Destroyer', 'the Slayer', 'the Impaler', 'the Sword', 'the Sly', 'the Mad', 'the Swift', 'the Morbid', 'the Insane', 'the Furious', 'the Bloody', 'the Brutal', 'the Vicious', 'the Bitter', 'the Gruesome', 'the Curious', 'the Invoker', 'the Master', 'the Righteous', 'the Devoted']
 
-            return `${firstNames[Math.floor(Math.random() * firstNames.length)]  } ${  titleNames[Math.floor(Math.random() * titleNames.length)]}`
+            return `${firstNames[Math.floor(Math.random() * firstNames.length)]} ${titleNames[Math.floor(Math.random() * titleNames.length)]}`
         },
         saveProfile(profile) {
             for (const key in profile) {
                 profile[key] = this.profileClone[key]
             }
 
-            if (!profile.name)
-                {profile.name = 'Default'}
+            if (!profile.name) { profile.name = 'Default' }
 
             profile.edit = false
             this.editedProfile = null

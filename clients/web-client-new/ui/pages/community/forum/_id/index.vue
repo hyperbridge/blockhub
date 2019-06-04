@@ -1,41 +1,49 @@
 <template>
-    <c-layout navigationKey="store"
-              :defaultBreadcrumb="false">
+    <c-layout
+        navigationKey="store"
+        :defaultBreadcrumb="false">
         <div class="container-fluid">
             <div class="row margin-bottom-50">
                 <div class="col-12 col-lg-8 col-xl-9">
-                    <c-block title="General"
-                             :noGutter="true"
-                             :onlyContentBg="true">
+                    <c-block
+                        title="General"
+                        :noGutter="true"
+                        :onlyContentBg="true">
                         <div class="community-list">
-                            <c-community-item v-for="(post, index) in posts"
-                                              :key="index"
-                                              :post="post" />
+                            <c-community-item
+                                v-for="(post, index) in posts"
+                                :key="index"
+                                :post="post" />
                         </div>
                     </c-block>
                 </div>
                 <div class="col-12 col-lg-4 col-xl-3">
-                    <c-block title="Links &amp; Resources"
-                             :noGutter="true"
-                             :onlyContentBg="true">
+                    <c-block
+                        title="Links &amp; Resources"
+                        :noGutter="true"
+                        :onlyContentBg="true">
                         <div class="d-flex flex-column">
                             <c-search class="mb-2" />
-                            <c-button status="plain"
-                                      class="my-1">
+                            <c-button
+                                status="plain"
+                                class="my-1">
                                 <i class="fas fa-info-circle" /> View Discussion Guidelines
                             </c-button>
-                            <c-button status="plain"
-                                      class="my-1">
+                            <c-button
+                                status="plain"
+                                class="my-1">
                                 <i class="fas fa-info-circle" /> Discussion Rules
                             </c-button>
-                            <c-button status="plain"
-                                      class="my-1">
+                            <c-button
+                                status="plain"
+                                class="my-1">
                                 <i class="fas fa-question-circle" /> FAQ
                             </c-button>
-                            <c-button status="success"
-                                      icon="plus"
-                                      class="margin-top-20"
-                                      style="margin-right: auto">
+                            <c-button
+                                status="success"
+                                icon="plus"
+                                class="margin-top-20"
+                                style="margin-right: auto">
                                 New discussion
                             </c-button>
                         </div>

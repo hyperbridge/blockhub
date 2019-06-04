@@ -3,8 +3,9 @@
         <div class="chat-shortcuts">
             <c-shortcut-sidebar :items="shortcuts" />
         </div>
-        <div v-if="$slots.sidebar"
-             class="chat__sidebar">
+        <div
+            v-if="$slots.sidebar"
+            class="chat__sidebar">
             <slot name="sidebar" />
         </div>
         <div class="chat-main">

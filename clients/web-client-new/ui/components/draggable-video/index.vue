@@ -1,47 +1,54 @@
 <template>
     <transition name="fade">
-        <c-drag v-if="active"
-                :w="width"
-                :h="height"
-                :x="20"
-                :y="20"
-                :resizable="false"
-                :z="99999999">
+        <c-drag
+            v-if="active"
+            :w="width"
+            :h="height"
+            :x="20"
+            :y="20"
+            :resizable="false"
+            :z="99999999">
             <div class="video-container">
                 <div class="video-container__wrapper">
                     <div class="video-container__video">
-                        <video ref="video"
-                               autoplay
-                               @timeupdate=""
-                               @loadeddata="setCurrentTime"
-                               @playing=" isPlaying = true ">
-                            <source :src="isVideo.src"
-                                    type="video/mp4">
+                        <video
+                            ref="video"
+                            autoplay
+                            @timeupdate=""
+                            @loadeddata="setCurrentTime"
+                            @playing=" isPlaying = true ">
+                            <source
+                                :src="isVideo.src"
+                                type="video/mp4">
                             Your browser does not support HTML5 video.
                         </video>
                     </div>
                     <div class="video-control">
-                        <c-button v-if="isPlaying"
-                                  status="none"
-                                  class="video-control__btn video-control__btn--expand"
-                                  @click="fullscreen">
+                        <c-button
+                            v-if="isPlaying"
+                            status="none"
+                            class="video-control__btn video-control__btn--expand"
+                            @click="fullscreen">
                             <i class="fas fa-expand" />
                         </c-button>
-                        <c-button v-if="!isPlaying"
-                                  status="none"
-                                  class="video-control__btn video-control__btn--play"
-                                  @click="play">
+                        <c-button
+                            v-if="!isPlaying"
+                            status="none"
+                            class="video-control__btn video-control__btn--play"
+                            @click="play">
                             <i class="fas fa-play" />
                         </c-button>
-                        <c-button v-if="isPlaying"
-                                  status="none"
-                                  class="video-control__btn video-control__btn--play"
-                                  @click="pause">
+                        <c-button
+                            v-if="isPlaying"
+                            status="none"
+                            class="video-control__btn video-control__btn--play"
+                            @click="pause">
                             <i class="fas fa-pause" />
                         </c-button>
-                        <c-button status="none"
-                                  class="video-control__btn video-control__btn--times"
-                                  @click="destroy">
+                        <c-button
+                            status="none"
+                            class="video-control__btn video-control__btn--times"
+                            @click="destroy">
                             <i class="fas fa-times" />
                         </c-button>
                     </div>

@@ -1,8 +1,9 @@
 <template>
     <div class="history-list__list-item">
         <div class="history-list__item-info">
-            <div v-if="latestRelease"
-                 class="latest-badge">
+            <div
+                v-if="latestRelease"
+                class="latest-badge">
                 Latest Release
             </div>
             <span>
@@ -24,31 +25,38 @@
             <div style="font-size: 14px">
                 {{ author }} released this this version {{ date | timeAgo }}
             </div>
-            <div class="release-text padding-top-15"
-                 v-html="text" />
-            <div v-if="files"
-                 class="assets-list__wrapper">
-                <div class="assets-list__button"
-                     @click="showList = !showList">
+            <div
+                class="release-text padding-top-15"
+                v-html="text" />
+            <div
+                v-if="files"
+                class="assets-list__wrapper">
+                <div
+                    class="assets-list__button"
+                    @click="showList = !showList">
                     <div class="icon">
-                        <i class="fas"
-                           :class="[ showList ? 'fa-angle-up' : 'fa-angle-down']" />
+                        <i
+                            class="fas"
+                            :class="[ showList ? 'fa-angle-up' : 'fa-angle-down']" />
                     </div>
                     <div class="text">
                         Assets ({{ files.length }})
                     </div>
                 </div>
-                <div v-if="showList"
-                     class="assets-list">
-                    <div v-for="file in files"
-                         class="assets-list__item"
-                         @click="">
+                <div
+                    v-if="showList"
+                    class="assets-list">
+                    <div
+                        v-for="file in files"
+                        class="assets-list__item"
+                        @click="">
                         <div class="icon">
                             <i class="fas fa-file-download" />
                         </div>
                         <div class="title">
-                            <a :href="file.src"
-                               target="_blank">
+                            <a
+                                :href="file.src"
+                                target="_blank">
                                 {{ file.name }}
                             </a>
                         </div>

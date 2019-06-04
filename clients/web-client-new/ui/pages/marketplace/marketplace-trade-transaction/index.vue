@@ -5,9 +5,10 @@
                 <div class="col-12">
                     Marketplace
                     <h2>Trade transaction</h2>
-                    <c-block v-if="transaction"
-                             :title="'Transaction: ' + tradeId"
-                             class="transaction">
+                    <c-block
+                        v-if="transaction"
+                        :title="'Transaction: ' + tradeId"
+                        class="transaction">
                         <div class="transaction__block">
                             <div class="transaction__headings">
                                 <h4>Yours selling offer</h4>
@@ -21,21 +22,24 @@
                                             :key="index"
                                             class="assets-grid__asset"
                                             @click="yoursOffer.splice(index, 1)">
-                                            <c-tooltip :delay="30"
-                                                       iconHide>
+                                            <c-tooltip
+                                                :delay="30"
+                                                iconHide>
                                                 <c-asset-preview
                                                     slot="tooltip"
                                                     :asset="asset" />
-                                                <c-img :src="asset.image"
-                                                       class="asset__image" />
+                                                <c-img
+                                                    :src="asset.image"
+                                                    class="asset__image" />
                                                 <span class="asset__price">{{ asset.price.current }}$</span>
                                             </c-tooltip>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="management__inventory-explorer">
-                                    <c-list-submenu :items="inventory.yours"
-                                                    isParent>
+                                    <c-list-submenu
+                                        :items="inventory.yours"
+                                        isParent>
                                         <c-list-submenu
                                             slot="sublist"
                                             slot-scope="{ sublist }"
@@ -61,8 +65,9 @@
                         <div class="transaction__block">
                             <div class="transaction__headings">
                                 <h4>{{ transaction.contractor.user.name }}'s selling offer</h4>
-                                <c-author :name="transaction.contractor.user.name"
-                                          :img="transaction.contractor.user.img" />
+                                <c-author
+                                    :name="transaction.contractor.user.name"
+                                    :img="transaction.contractor.user.img" />
                                 <h4>{{ transaction.contractor.user.name }}'s inventory</h4>
                             </div>
                             <div class="transaction__management">
@@ -73,22 +78,25 @@
                                             :key="asset"
                                             class="assets-grid__asset"
                                             @click="theirOffer.splice(index, 1)">
-                                            <c-tooltip v-show="asset.id"
-                                                       :delay="30"
-                                                       iconHide>
+                                            <c-tooltip
+                                                v-show="asset.id"
+                                                :delay="30"
+                                                iconHide>
                                                 <c-asset-preview
                                                     slot="tooltip"
                                                     :asset="asset" />
-                                                <c-img :src="asset.image"
-                                                       class="asset__image" />
+                                                <c-img
+                                                    :src="asset.image"
+                                                    class="asset__image" />
                                                 <span class="asset__price">{{ asset.price.current }}$</span>
                                             </c-tooltip>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="management__inventory-explorer">
-                                    <c-list-submenu :items="inventory.their"
-                                                    isParent>
+                                    <c-list-submenu
+                                        :items="inventory.their"
+                                        isParent>
                                         <c-list-submenu
                                             slot="sublist"
                                             slot-scope="{ sublist }"
@@ -115,9 +123,10 @@
                             </c-button>
                         </div>
                     </c-block>
-                    <c-block v-else
-                             :title="'Transaction: ' + tradeId"
-                             class="transaction">
+                    <c-block
+                        v-else
+                        :title="'Transaction: ' + tradeId"
+                        class="transaction">
                         <p>Transaction with id <i>{{ tradeId }}</i> doesn't exist</p>
                     </c-block>
                 </div>

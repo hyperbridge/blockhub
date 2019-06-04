@@ -13,7 +13,6 @@
 
 <script>
 export default {
-    name: 'TabUniversal',
     props: {
         tabId: {
             type: [Number, String],

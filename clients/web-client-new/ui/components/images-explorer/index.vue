@@ -1,11 +1,13 @@
 <template>
     <div class="images-explorer">
-        <button class="images-explorer__btn"
-                @click="change_image(-1)">
+        <button
+            class="images-explorer__btn"
+            @click="change_image(-1)">
             <i class="fas fa-angle-left" />
         </button>
-        <transition-group tag="div"
-                          name="fade-transform">
+        <transition-group
+            tag="div"
+            name="fade-transform">
             <c-img
                 v-for="(image, index) in images"
                 v-if="index === active_item"
@@ -13,8 +15,9 @@
                 class="images-explorer__img"
                 :src="images[active_item]" />
         </transition-group>
-        <button class="images-explorer__btn"
-                @click="change_image(1)">
+        <button
+            class="images-explorer__btn"
+            @click="change_image(1)">
             <i class="fas fa-angle-right" />
         </button>
     </div>

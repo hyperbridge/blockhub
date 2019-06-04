@@ -63,26 +63,30 @@
                     </span>
                 </div>
 
-                <div class="del-btn"
-                     @click="delItem(parsedData, member, index)">
+                <div
+                    class="del-btn"
+                    @click="delItem(parsedData, member, index)">
                     <i class="fas fa-trash" />
                 </div>
             </li>
         </ol>
 
-        <div v-popover="{ name: popoverKey }"
-             class="block add-key"
-             @click="viewType = 'array-full'">
+        <div
+            v-popover="{ name: popoverKey }"
+            class="block add-key"
+            @click="viewType = 'array-full'">
             <i class="fa fa-plus" />
         </div>
         <no-ssr>
-            <popover :name="popoverKey"
-                     :pointer="false"
-                     :class="viewType"
-                     style="position: fixed;left: 0px;top: 0px;">
-                <c-item-add-form :needName="false"
-                                 @confirm="newItem"
-                                 @popoverView="popoverClass" />
+            <popover
+                :name="popoverKey"
+                :pointer="false"
+                :class="viewType"
+                style="position: fixed;left: 0px;top: 0px;">
+                <c-item-add-form
+                    :needName="false"
+                    @confirm="newItem"
+                    @popoverView="popoverClass" />
             </popover>
         </no-ssr>
     </div>

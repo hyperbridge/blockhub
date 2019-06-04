@@ -1,15 +1,19 @@
 <template>
-    <div class="sidebar-menu"
-         :class="mClass">
+    <div
+        class="sidebar-menu"
+        :class="mClass">
         <h3 v-if="title">
-            <i v-if="icon"
-               :class="icon" />
+            <i
+                v-if="icon"
+                :class="icon" />
             {{ title }}
         </h3>
-        <h5 v-if="subTitle"
+        <h5
+            v-if="subTitle"
             class="sidebar-menu__subtitle">
-            <i v-if="subIcon"
-               :class="subIcon" />
+            <i
+                v-if="subIcon"
+                :class="subIcon" />
             {{ subTitle }}
         </h5>
         <ul class="sidebar-menu__list">
@@ -18,10 +22,12 @@
                     v-for="(link, index) in links"
                     :key="index"
                     :to="link.to">
-                    <slot name="link"
-                          :link="link">
-                        <i v-if="link.icon"
-                           :class="link.icon" />
+                    <slot
+                        name="link"
+                        :link="link">
+                        <i
+                            v-if="link.icon"
+                            :class="link.icon" />
                         {{ link.title }}
                     </slot>
                 </c-sidebar-menu-link>

@@ -26,10 +26,11 @@
                     </div>
                 </div>
                 <div>
-                    <c-button status="success"
-                              size="lg"
-                              iconHide
-                              @click="$emit('purchase')">
+                    <c-button
+                        status="success"
+                        size="lg"
+                        iconHide
+                        @click="$emit('purchase')">
                         Purchase HBX
                     </c-button>
                 </div>
@@ -86,29 +87,33 @@
                     </h3>
                     <ul>
                         <li>
-                            <a href="https://hyperbridge.org/downloads/whitepaper.pdf"
-                               target="_blank">
+                            <a
+                                href="https://hyperbridge.org/downloads/whitepaper.pdf"
+                                target="_blank">
                                 <i class="fas fa-file-alt" />
                                 White Paper
                             </a>
                         </li>
                         <li>
-                            <a href="https://hyperbridge.org/team"
-                               target="_blank">
+                            <a
+                                href="https://hyperbridge.org/team"
+                                target="_blank">
                                 <i class="fas fa-users" />
                                 Team
                             </a>
                         </li>
                         <li>
-                            <a href="https://hyperbridge.org/roadmap"
-                               target="_blank">
+                            <a
+                                href="https://hyperbridge.org/roadmap"
+                                target="_blank">
                                 <i class="fas fa-gamepad" />
                                 Roadmap
                             </a>
                         </li>
                         <li>
-                            <a href="https://hyperbridge.org/"
-                               target="_blank">
+                            <a
+                                href="https://hyperbridge.org/"
+                                target="_blank">
                                 <i class="fas fa-home" />
                                 Corp. website
                             </a>
@@ -118,12 +123,13 @@
             </div>
             <div class="token-sale-box_block-divider" />
             <div class="token-sale-box__body-media">
-                <iframe width="380"
-                        height="220"
-                        src="https://www.youtube.com/embed/-QEdXZWMe-M"
-                        frameborder="0"
-                        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen />
+                <iframe
+                    width="380"
+                    height="220"
+                    src="https://www.youtube.com/embed/-QEdXZWMe-M"
+                    frameborder="0"
+                    allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen />
             </div>
         </div>
     </div>

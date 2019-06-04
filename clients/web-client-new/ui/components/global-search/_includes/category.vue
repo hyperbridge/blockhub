@@ -1,35 +1,42 @@
 <template>
     <div class="search-category">
-        <div class="search-category__head"
-             @click="chosenCategory()">
+        <div
+            class="search-category__head"
+            @click="chosenCategory()">
             <div>
                 {{ category.name }}
             </div>
             <div class="count">
                 {{ category.items.length }}
             </div>
-            <c-button status="plain"
-                      size="sm"
-                      class="p-0 ml-auto">
+            <c-button
+                status="plain"
+                size="sm"
+                class="p-0 ml-auto">
                 MORE
             </c-button>
         </div>
         <div class="search-category__body">
-            <div v-for="(item, index) in category.items"
-                 v-if="index < 4"
-                 class="search-item">
-                <div v-if="item.image"
-                     class="search-item__img">
+            <div
+                v-for="(item, index) in category.items"
+                v-if="index < 4"
+                class="search-item">
+                <div
+                    v-if="item.image"
+                    class="search-item__img">
                     <img :src="item.image">
                 </div>
                 <div class="search-item__info">
-                    <span v-if="item.name"
-                          class="h6 font-weight-bold mb-1 p-0">{{ item.name }}</span>
-                    <span v-if="item.description"
-                          class="text-muted"
-                          style="font-size: 12px">{{ item.description }}</span>
-                    <div v-if="item.tags"
-                         class="search-item__item-tags">
+                    <span
+                        v-if="item.name"
+                        class="h6 font-weight-bold mb-1 p-0">{{ item.name }}</span>
+                    <span
+                        v-if="item.description"
+                        class="text-muted"
+                        style="font-size: 12px">{{ item.description }}</span>
+                    <div
+                        v-if="item.tags"
+                        class="search-item__item-tags">
                         <span v-for="tag in item.tags">{{ tag }}</span>
                     </div>
                 </div>
@@ -38,38 +45,47 @@
 
         <!--Full list block-->
         <transition name="fade">
-            <div v-if="showDetails"
-                 class="category-full">
-                <div class="search-category__head"
-                     :class="{'mb-0' : $slots.filters }">
-                    <c-button status="plain"
-                              size="sm"
-                              class="p-0 mr-3"
-                              @click="closeCategory">
+            <div
+                v-if="showDetails"
+                class="category-full">
+                <div
+                    class="search-category__head"
+                    :class="{'mb-0' : $slots.filters }">
+                    <c-button
+                        status="plain"
+                        size="sm"
+                        class="p-0 mr-3"
+                        @click="closeCategory">
                         <i class="fas fa-angle-left" />
                     </c-button>
                     <div>
                         {{ category.name }}
                     </div>
                 </div>
-                <div v-if="$slots.filters"
-                     class="search-category__filters">
+                <div
+                    v-if="$slots.filters"
+                    class="search-category__filters">
                     <slot name="filters" />
                 </div>
-                <div v-for="(item, index) in category.items"
-                     class="search-item">
-                    <div v-if="item.image"
-                         class="search-item__img">
+                <div
+                    v-for="(item, index) in category.items"
+                    class="search-item">
+                    <div
+                        v-if="item.image"
+                        class="search-item__img">
                         <img :src="item.image">
                     </div>
                     <div class="search-item__info">
-                        <span v-if="item.name"
-                              class="h6 font-weight-bold mb-1 p-0">{{ item.name }}</span>
-                        <span v-if="item.description"
-                              class="text-muted"
-                              style="font-size: 12px">{{ item.description }}</span>
-                        <div v-if="item.tags"
-                             class="search-item__item-tags">
+                        <span
+                            v-if="item.name"
+                            class="h6 font-weight-bold mb-1 p-0">{{ item.name }}</span>
+                        <span
+                            v-if="item.description"
+                            class="text-muted"
+                            style="font-size: 12px">{{ item.description }}</span>
+                        <div
+                            v-if="item.tags"
+                            class="search-item__item-tags">
                             <span v-for="tag in item.tags">{{ tag }}</span>
                         </div>
                     </div>

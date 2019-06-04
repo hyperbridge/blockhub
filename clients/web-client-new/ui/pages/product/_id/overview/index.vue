@@ -6,10 +6,12 @@
                 :items="[product.meta.images.mediumTile, ...product.meta.images.preview]"
                 :video_url="product.meta.video" />
 
-            <div v-for="(promotions, section) in promotionSections"
-                 v-if="promotionSections"
-                 :key="section">
-                <h3 v-if="section"
+            <div
+                v-for="(promotions, section) in promotionSections"
+                v-if="promotionSections"
+                :key="section">
+                <h3
+                    v-if="section"
                     style="margin-top: 20px;">
                     {{ section }}
                 </h3>
@@ -28,16 +30,19 @@
                     :plan="plan" />
             </div>
 
-            <div v-if="!editing"
-                 class="main-content"
-                 v-html="product.meta.content">
+            <div
+                v-if="!editing"
+                class="main-content"
+                v-html="product.meta.content">
                 {{ product.meta.content }}
             </div>
 
-            <div v-if="editing"
-                 class="content-editor">
-                <div id="summernote"
-                     v-html="product.meta.content">
+            <div
+                v-if="editing"
+                class="content-editor">
+                <div
+                    id="summernote"
+                    v-html="product.meta.content">
                     {{ product.meta.content }}
                 </div>
             </div>
@@ -61,102 +66,116 @@
                     'application/updateShortcut',
                     { id: 'product' + product.id, type: 'product', text: product.name, to: '/product/' + product.id, image: product.meta.images.mediumTile }
                 )" />
-            <c-button iconHide
-                      hidden
-                      @click="showInstaller = !showInstaller">
+            <c-button
+                iconHide
+                hidden
+                @click="showInstaller = !showInstaller">
                 Open installer
             </c-button>
 
-            <c-rating-block v-darklaunch="'RATINGS'"
-                            class="margin-bottom-20"
-                            :items="product.meta.rating"
-                            :parentPath="`/product/${product.id}`"
-                            @goto="scrollToReviews" />
+            <c-rating-block
+                v-darklaunch="'RATINGS'"
+                class="margin-bottom-20"
+                :items="product.meta.rating"
+                :parentPath="`/product/${product.id}`"
+                @goto="scrollToReviews" />
 
-            <c-frequently-traded-assets v-darklaunch="'ASSETS'"
-                                        class="margin-bottom-20"
-                                        :items="product.meta.frequentlyTradedAssets"
-                                        :assetsPath="`/product/${product.id}/assets`" />
+            <c-frequently-traded-assets
+                v-darklaunch="'ASSETS'"
+                class="margin-bottom-20"
+                :items="product.meta.frequentlyTradedAssets"
+                :assetsPath="`/product/${product.id}/assets`" />
 
-            <c-community-spotlight v-darklaunch="'COMMUNITY'"
-                                   class="margin-bottom-20"
-                                   :discussions="product.meta.community.discussions"
-                                   :communityPath="`/product/${product.id}/community`" />
+            <c-community-spotlight
+                v-darklaunch="'COMMUNITY'"
+                class="margin-bottom-20"
+                :discussions="product.meta.community.discussions"
+                :communityPath="`/product/${product.id}/community`" />
 
-            <c-block :title="`Official`"
-                     :noGutter="true"
-                     :bgGradient="true"
-                     :onlyContentBg="true"
-                     :showBackground="true"
-                     class="margin-top-30 margin-bottom-20">
+            <c-block
+                :title="`Official`"
+                :noGutter="true"
+                :bgGradient="true"
+                :onlyContentBg="true"
+                :showBackground="true"
+                class="margin-top-30 margin-bottom-20">
                 <div>
-                    <c-button class="mb-1 text-align-center"
-                              status="dark"
-                              size="md"
-                              full
-                              @click="$store.commit('application/activateModal', 'coming-soon')">
+                    <c-button
+                        class="mb-1 text-align-center"
+                        status="dark"
+                        size="md"
+                        full
+                        @click="$store.commit('application/activateModal', 'coming-soon')">
                         Open in Discord
                     </c-button>
-                    <c-button class="mb-1 text-align-center"
-                              status="dark"
-                              size="md"
-                              full
-                              @click="$store.commit('application/activateModal', 'coming-soon')">
+                    <c-button
+                        class="mb-1 text-align-center"
+                        status="dark"
+                        size="md"
+                        full
+                        @click="$store.commit('application/activateModal', 'coming-soon')">
                         Open in Twitch
                     </c-button>
-                    <c-button class="mb-1 text-align-center"
-                              status="dark"
-                              size="md"
-                              full
-                              @click="$store.commit('application/activateModal', 'coming-soon')">
+                    <c-button
+                        class="mb-1 text-align-center"
+                        status="dark"
+                        size="md"
+                        full
+                        @click="$store.commit('application/activateModal', 'coming-soon')">
                         Open in YouTube
                     </c-button>
-                    <c-button class="mb-1 text-align-center"
-                              status="dark"
-                              size="md"
-                              full
-                              @click="$store.commit('application/activateModal', 'coming-soon')">
+                    <c-button
+                        class="mb-1 text-align-center"
+                        status="dark"
+                        size="md"
+                        full
+                        @click="$store.commit('application/activateModal', 'coming-soon')">
                         Open in BlockHub
                     </c-button>
                 </div>
             </c-block>
 
-            <c-system-requirements class="margin-bottom-20"
-                                   :requirements="product.meta.systemRequirements" />
+            <c-system-requirements
+                class="margin-bottom-20"
+                :requirements="product.meta.systemRequirements" />
 
             <c-language-support :languages="product.meta.languageSupport" />
         </div>
         <div class="col-12">
-            <c-block ref="streamsSlider"
-                     :title="`Updates`"
-                     :noGutter="true"
-                     :bgGradient="true"
-                     :onlyContentBg="true"
-                     :showArrows="true"
-                     :showBackground="true"
-                     class="margin-top-30 margin-bottom-20"
-                     @prevClick="streamsSlider.slidePrev()"
-                     @nextClick="streamsSlider.slideNext()">
+            <c-block
+                ref="streamsSlider"
+                :title="`Updates`"
+                :noGutter="true"
+                :bgGradient="true"
+                :onlyContentBg="true"
+                :showArrows="true"
+                :showBackground="true"
+                class="margin-top-30 margin-bottom-20"
+                @prevClick="streamsSlider.slidePrev()"
+                @nextClick="streamsSlider.slideNext()">
                 <div class="h5">
                     Updates were not found.
                 </div>
             </c-block>
         </div>
         <div class="col-12">
-            <c-block ref="streamsSlider"
-                     :title="`Streams`"
-                     :noGutter="true"
-                     :bgGradient="true"
-                     :onlyContentBg="true"
-                     :showArrows="true"
-                     :showBackground="true"
-                     class="margin-top-30 margin-bottom-20"
-                     @prevClick="streamsSlider.slidePrev()"
-                     @nextClick="streamsSlider.slideNext()">
-                <c-swiper v-if="streams"
-                          :options="sliderOptions">
-                    <c-swiper-slide v-for="(stream, index) in streams"
-                                    :key="index">
+            <c-block
+                ref="streamsSlider"
+                :title="`Streams`"
+                :noGutter="true"
+                :bgGradient="true"
+                :onlyContentBg="true"
+                :showArrows="true"
+                :showBackground="true"
+                class="margin-top-30 margin-bottom-20"
+                @prevClick="streamsSlider.slidePrev()"
+                @nextClick="streamsSlider.slideNext()">
+                <c-swiper
+                    v-if="streams"
+                    :options="sliderOptions">
+                    <c-swiper-slide
+                        v-for="(stream, index) in streams"
+                        :key="index">
                         <!--<c-stream-item />-->
                         <c-stream-item
                             :streamGame="product.name"
@@ -167,59 +186,66 @@
                             :streamViews="stream.views" />
                     </c-swiper-slide>
                 </c-swiper>
-                <div v-else
-                     class="h5">
+                <div
+                    v-else
+                    class="h5">
                     Twitch streams were not found.
                 </div>
             </c-block>
         </div>
         <div class="col-12">
-            <c-block ref="streamsSlider"
-                     :title="`World Records`"
-                     :noGutter="true"
-                     :bgGradient="true"
-                     :onlyContentBg="true"
-                     :showArrows="true"
-                     :showBackground="true"
-                     class="margin-top-30 margin-bottom-20"
-                     @prevClick="streamsSlider.slidePrev()"
-                     @nextClick="streamsSlider.slideNext()">
+            <c-block
+                ref="streamsSlider"
+                :title="`World Records`"
+                :noGutter="true"
+                :bgGradient="true"
+                :onlyContentBg="true"
+                :showArrows="true"
+                :showBackground="true"
+                class="margin-top-30 margin-bottom-20"
+                @prevClick="streamsSlider.slidePrev()"
+                @nextClick="streamsSlider.slideNext()">
                 <div class="h5">
                     World records were not found.
                 </div>
             </c-block>
         </div>
-        <div v-darklaunch="'TOURNAMENTS'"
-             class="col-12">
-            <c-block ref="streamsSlider"
-                     :title="`Upcoming tournaments`"
-                     :noGutter="true"
-                     :bgGradient="true"
-                     :onlyContentBg="true"
-                     :showArrows="true"
-                     :showBackground="true"
-                     class="margin-top-30 margin-bottom-20"
-                     @prevClick="streamsSlider.slidePrev()"
-                     @nextClick="streamsSlider.slideNext()">
+        <div
+            v-darklaunch="'TOURNAMENTS'"
+            class="col-12">
+            <c-block
+                ref="streamsSlider"
+                :title="`Upcoming tournaments`"
+                :noGutter="true"
+                :bgGradient="true"
+                :onlyContentBg="true"
+                :showArrows="true"
+                :showBackground="true"
+                class="margin-top-30 margin-bottom-20"
+                @prevClick="streamsSlider.slidePrev()"
+                @nextClick="streamsSlider.slideNext()">
                 <div class="h5">
                     Tournaments not found.
                 </div>
             </c-block>
         </div>
-        <div ref="reviews"
-             class="col-12">
-            <c-block ref="streamsSlider"
-                     :title="`Reviews`"
-                     :noGutter="true"
-                     :bgGradient="true"
-                     :onlyContentBg="true"
-                     :showArrows="true"
-                     :showBackground="true"
-                     class="margin-top-30 margin-bottom-20"
-                     @prevClick="streamsSlider.slidePrev()"
-                     @nextClick="streamsSlider.slideNext()">
-                <div v-if="helpfulReviews.length"
-                     class="col-md-6 col-12">
+        <div
+            ref="reviews"
+            class="col-12">
+            <c-block
+                ref="streamsSlider"
+                :title="`Reviews`"
+                :noGutter="true"
+                :bgGradient="true"
+                :onlyContentBg="true"
+                :showArrows="true"
+                :showBackground="true"
+                class="margin-top-30 margin-bottom-20"
+                @prevClick="streamsSlider.slidePrev()"
+                @nextClick="streamsSlider.slideNext()">
+                <div
+                    v-if="helpfulReviews.length"
+                    class="col-md-6 col-12">
                     <h3 class="margin-vertical-20">
                         Most helpful
                     </h3>
@@ -228,8 +254,9 @@
                         :key="index"
                         :review="review" />
                 </div>
-                <div v-else-if="recentReviews.length"
-                     class="col-md-6 col-12">
+                <div
+                    v-else-if="recentReviews.length"
+                    class="col-md-6 col-12">
                     <h3 class="margin-vertical-20">
                         Most recent
                     </h3>
@@ -238,13 +265,15 @@
                         :key="index"
                         :review="review" />
                 </div>
-                <div v-else
-                     class="h5">
+                <div
+                    v-else
+                    class="h5">
                     <template v-if="!reviewForm">
-                        No reviews yet. <c-button status="plain"
-                                                  size="md"
-                                                  class="p-0"
-                                                  @click="reviewForm=true">
+                        No reviews yet. <c-button
+                            status="plain"
+                            size="md"
+                            class="p-0"
+                            @click="reviewForm=true">
                             Be the first?
                         </c-button>
                     </template>

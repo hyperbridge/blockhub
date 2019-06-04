@@ -7,8 +7,9 @@
             <c-sidebar-menu-link to="/">
                 Home
             </c-sidebar-menu-link>
-            <c-sidebar-menu-link v-darklaunch="'COMMUNITY'"
-                                 to="/community">
+            <c-sidebar-menu-link
+                v-darklaunch="'COMMUNITY'"
+                to="/community">
                 Community
             </c-sidebar-menu-link>
             <c-sidebar-menu-link to="/ideas">
@@ -20,27 +21,32 @@
             <c-sidebar-menu-link to="/games">
                 Browse Games
             </c-sidebar-menu-link>
-            <c-sidebar-menu-link v-darklaunch="'REALMS'"
-                                 to="/realms">
+            <c-sidebar-menu-link
+                v-darklaunch="'REALMS'"
+                to="/realms">
                 Browse Realms
             </c-sidebar-menu-link>
-            <c-sidebar-menu-link v-darklaunch="'CURATORS'"
-                                 to="/curators">
+            <c-sidebar-menu-link
+                v-darklaunch="'CURATORS'"
+                to="/curators">
                 Browse Curators
             </c-sidebar-menu-link>
-            <c-sidebar-menu-link v-darklaunch="'COLLECTIONS'"
-                                 to="/collections">
+            <c-sidebar-menu-link
+                v-darklaunch="'COLLECTIONS'"
+                to="/collections">
                 Browse Collections
             </c-sidebar-menu-link>
-            <c-sidebar-menu-link v-darklaunch="'MARKETPLACE'"
-                                 to="/marketplace">
+            <c-sidebar-menu-link
+                v-darklaunch="'MARKETPLACE'"
+                to="/marketplace">
                 Browse Items
             </c-sidebar-menu-link>
         </c-sidebar-menu>
 
-        <c-sidebar-menu subTitle="Browse By Genre"
-                        subIcon="fas fa-gamepad"
-                        mClass="margin-bottom-20">
+        <c-sidebar-menu
+            subTitle="Browse By Genre"
+            subIcon="fas fa-gamepad"
+            mClass="margin-bottom-20">
             <c-sidebar-menu-link
                 v-for="param in ['Action', 'Adventure', 'RPG', 'Co-op', 'Multiplayer', 'Sports']"
                 :key="param"
@@ -120,42 +126,48 @@
         </div>
 
 
-        <ul class="help-block"
+        <ul
+            class="help-block"
             hidden>
             <li class="title">
                 <i class="fas fa-question-circle" />
                 Help
             </li>
             <li>
-                <c-buttonstatus="none"to="/help
-                                           topic
-                                           1
-                                           article
-                                           purchasing-with-cryptocurrency">
+                <c-buttonstatus="none"to="
+                    help
+                    topic
+                    1
+                    article
+                    purchasing-with-cryptocurrency">
                     Purchasing with Cryptocurrency</c-button>
-                    <c-buttonstatus="none"to="/help
-                                               topic
-                                               1
-                                               article
-                                               content-availability-by-country">
+                    <c-buttonstatus="none"to="
+                        help
+                        topic
+                        1
+                        article
+                        content-availability-by-country">
                         Content Availability by Country</c-button>
-                        <c-buttonstatus="none"to="/help
-                                                   topic
-                                                   1
-                                                   article
-                                                   becoming-a-community-curator">
+                        <c-buttonstatus="none"to="
+                            help
+                            topic
+                            1
+                            article
+                            becoming-a-community-curator">
                             Becoming a Community Curator</c-button>
-                            <c-buttonstatus="none"to="/help
-                                                       topic
-                                                       1
-                                                       article
-                                                       18-plus-games-and-verification">
+                            <c-buttonstatus="none"to="
+                                help
+                                topic
+                                1
+                                article
+                                18-plus-games-and-verification">
                                 18+ Games and Verification</c-button>
-                                <c-buttonstatus="none"to="/help
-                                                           topic
-                                                           1
-                                                           article
-                                                           recporting-misleading-content">
+                                <c-buttonstatus="none"to="
+                                    help
+                                    topic
+                                    1
+                                    article
+                                    recporting-misleading-content">
                                     Reporting Misleading Content</c-button>
                                 </c-buttonstatus="none"to=">
                             </c-buttonstatus="none"to=">
@@ -164,9 +176,10 @@
                 </c-buttonstatus="none"to=">
             </li>
             <li>
-                <c-button status="none"
-                          to="/help/topic/1"
-                          class="btn btn-link">
+                <c-button
+                    status="none"
+                    to="/help/topic/1"
+                    class="btn btn-link">
                     More...
                 </c-button>
             </li>

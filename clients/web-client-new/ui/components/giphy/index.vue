@@ -1,21 +1,25 @@
 <template>
     <div class="c-giphy">
         <div class="c-giphy__input-container">
-            <c-input v-model="query"
-                     placeholder="Type to search"
-                     @input="getGifs()" />
+            <c-input
+                v-model="query"
+                placeholder="Type to search"
+                @input="getGifs()" />
         </div>
-        <div v-if="isLoading"
-             class="c-giphy__is-loading">
+        <div
+            v-if="isLoading"
+            class="c-giphy__is-loading">
             <c-loading-bar-circle />
         </div>
-        <div v-if="gifs.length"
-             class="c-giphy__list">
+        <div
+            v-if="gifs.length"
+            class="c-giphy__list">
             <div class="c-giphy__list-scroll">
-                <img v-for="gif in gifs"
-                     :key="gif.id"
-                     :src="gif"
-                     @click="choseGif(gif)">
+                <img
+                    v-for="gif in gifs"
+                    :key="gif.id"
+                    :src="gif"
+                    @click="choseGif(gif)">
             </div>
         </div>
     </div>

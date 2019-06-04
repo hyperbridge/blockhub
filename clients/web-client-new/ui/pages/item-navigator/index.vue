@@ -38,13 +38,15 @@
                             :listLength="item.evolvesTo.length"
                             hideButtons />
                         <div class="flex-center-between margin-top-50">
-                            <c-button status="info"
-                                      iconHide
-                                      @click="deletingTree = null">
+                            <c-button
+                                status="info"
+                                iconHide
+                                @click="deletingTree = null">
                                 Cancel
                             </c-button>
-                            <c-button status="success"
-                                      @click="deleteTree(deletingTree[0].id)">
+                            <c-button
+                                status="success"
+                                @click="deleteTree(deletingTree[0].id)">
                                 Confirm
                             </c-button>
                         </div>

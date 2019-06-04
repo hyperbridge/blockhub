@@ -1,8 +1,9 @@
 <template>
-    <c-block class="margin-bottom-30"
-             :noGutter="true"
-             :bgGradient="true"
-             :onlyContentBg="true">
+    <c-block
+        class="margin-bottom-30"
+        :noGutter="true"
+        :bgGradient="true"
+        :onlyContentBg="true">
         <c-heading-bar
             v-if="products"
             slot="title"
@@ -13,8 +14,9 @@
             @prevClick="slider.slidePrev()"
             @nextClick="slider.slideNext()" />
 
-        <c-swiper ref="slider"
-                  :options="sliderOptions">
+        <c-swiper
+            ref="slider"
+            :options="sliderOptions">
             <slot />
         </c-swiper>
     </c-block>

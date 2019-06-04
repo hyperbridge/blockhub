@@ -2,13 +2,15 @@
     <div
         class="dropdown dropmenu_container"
         :class="[ dropPosition ? 'drop' + dropPosition : '', isActive ? 'show' : '' ]">
-        <div class="rw-btn rw-btn--card"
-             @click=" isActive = !isActive ">
+        <div
+            class="rw-btn rw-btn--card"
+            @click=" isActive = !isActive ">
             <div />
         </div>
         <div class="dropdown-menu">
             <ul class="list-unstyled">
-                <li v-for="(item, index) in menuItems"
+                <li
+                    v-for="(item, index) in menuItems"
                     :key="index">
                     <a
                         href="#"

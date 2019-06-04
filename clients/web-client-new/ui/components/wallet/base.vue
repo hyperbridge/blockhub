@@ -3,8 +3,9 @@
         <div class="wallet-header slim-header">
             <div class="wallet-header__top-bar">
                 <div class="network-status">
-                    <c-dropdown-second name="Ethereum"
-                                       style="float: unset">
+                    <c-dropdown-second
+                        name="Ethereum"
+                        style="float: unset">
                         <ul class="p-0 m-0">
                             <li>
                                 <a href="#">
@@ -30,8 +31,9 @@
             </div>
             <div class="wallet-header__bar-right">
                 <c-dropdown position="right">
-                    <div slot="title"
-                         class="account_btn">
+                    <div
+                        slot="title"
+                        class="account_btn">
                         <i class="fas fa-user" />
                     </div>
                     <ul class="p-0 m-0">
@@ -74,14 +76,17 @@
         </div>
         <div class="wallet__account-info">
             <div class="account-menu text-left">
-                <div class="account-menu_btn"
-                     @click="toggleInfo">
+                <div
+                    class="account-menu_btn"
+                    @click="toggleInfo">
                     <i class="fas fa-bars" />
                 </div>
-                <div v-if="showInfo"
-                     class="account-menu__info">
-                    <i class="close-info fas fa-times"
-                       @click="toggleInfo" />
+                <div
+                    v-if="showInfo"
+                    class="account-menu__info">
+                    <i
+                        class="close-info fas fa-times"
+                        @click="toggleInfo" />
                     <div class="account-number">
                         <div>
                             <strong>Account 1</strong>
@@ -92,8 +97,9 @@
                         <c-img src="https://images-eu.ssl-images-amazon.com/images/I/31Umxl57vfL.png" />
                     </div>
                     <div class="money-info">
-                        <img src="../../static/img/icons/token-icon.png"
-                             alt="Token">
+                        <img
+                            src="../../static/img/icons/token-icon.png"
+                            alt="Token">
                         <div>
                             <strong>0 HBX</strong>
                             <span>$ 0.00 USD</span>
@@ -104,8 +110,9 @@
                             Don't see your tokens?
                         </div>
                         <div>
-                            Click <c-button status="plain"
-                                            class="p-0">
+                            Click <c-button
+                                status="plain"
+                                class="p-0">
                                 here
                             </c-button> to add token to your account
                         </div>
@@ -120,8 +127,9 @@
             </div>
             <div class="account-options text-right">
                 <c-dropdown position="right">
-                    <div slot="title"
-                         class="account-options_btn">
+                    <div
+                        slot="title"
+                        class="account-options_btn">
                         <i class="fas fa-ellipsis-v" />
                     </div>
                     <ul class="p-0 m-0">

@@ -50,8 +50,9 @@
             Create filter
         </c-button>
 
-        <select v-model="selectedFilterId"
-                name="Select saved filter">
+        <select
+            v-model="selectedFilterId"
+            name="Select saved filter">
             <option
                 v-for="(filter, index) in filters"
                 :key="index"
@@ -103,8 +104,9 @@
             Edit selected filter
         </c-button>
 
-        <c-modal v-if="editedFilter"
-                 @close="editedFilter = null">
+        <c-modal
+            v-if="editedFilter"
+            @close="editedFilter = null">
             <div slot="body">
                 <div class="filter-box">
                     <p>
@@ -127,10 +129,12 @@
         </c-modal>
 
 
-        <c-block title="Filtered assets"
-                 class="assets-wrapper">
-            <c-asset-list :assets="filteredAssets"
-                          :transition="true" />
+        <c-block
+            title="Filtered assets"
+            class="assets-wrapper">
+            <c-asset-list
+                :assets="filteredAssets"
+                :transition="true" />
         </c-block>
     </div>
 </template>

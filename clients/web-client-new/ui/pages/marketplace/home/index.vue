@@ -35,17 +35,21 @@
                 </template>
             </c-carousel-3d>
         </div>
-        <c-block title="Recently sold"
-                 class="margin-bottom-40">
-            <c-asset-list :assets="recentlySold"
-                          :transition="true" />
+        <c-block
+            title="Recently sold"
+            class="margin-bottom-40">
+            <c-asset-list
+                :assets="recentlySold"
+                :transition="true" />
         </c-block>
-        <c-block title="Explore available assets"
-                 noGutter
-                 onlyContentBg
-                 bgGradient>
-            <c-content-navigation :items="assets"
-                                  class="assets-block">
+        <c-block
+            title="Explore available assets"
+            noGutter
+            onlyContentBg
+            bgGradient>
+            <c-content-navigation
+                :items="assets"
+                class="assets-block">
                 <c-asset-list
                     slot-scope="props"
                     :assets="props.items" />

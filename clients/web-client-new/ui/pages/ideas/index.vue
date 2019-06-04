@@ -1,11 +1,13 @@
 <template>
     <c-layout navigationKey="idea">
         <div class="row">
-            <div v-if="!$store.state.application.settings.client.hide_crowdfund_game_notice"
-                 class="crowdfund-notice col-12 col-md-6 offset-md-3"
-                 style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
-                <c-button class="btn-close"
-                          @click="$store.commit('application/updateClientSettings', { key: 'hide_crowdfund_game_notice', value: true })">
+            <div
+                v-if="!$store.state.application.settings.client.hide_crowdfund_game_notice"
+                class="crowdfund-notice col-12 col-md-6 offset-md-3"
+                style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
+                <c-button
+                    class="btn-close"
+                    @click="$store.commit('application/updateClientSettings', { key: 'hide_crowdfund_game_notice', value: true })">
                     <i class="fas fa-times" />
                 </c-button>
 
@@ -17,29 +19,32 @@
                 </div>
                 <br>
                 <p>
-                    <c-button class="c-button--lg outline-white"
-                              to="/idea/new">
+                    <c-button
+                        class="c-button--lg outline-white"
+                        to="/idea/new">
                         Get Started
                     </c-button>
                 </p>
             </div>
         </div>
 
-        <c-block :noGutter="true"
-                 :bgGradient="true"
-                 :onlyContentBg="true">
+        <c-block
+            :noGutter="true"
+            :bgGradient="true"
+            :onlyContentBg="true">
             <c-heading-bar
                 slot="title"
                 class="mb-0"
                 name="Browse All Ideas" />
             <div class="row">
-                <c-loading :enabled="!ideas.length"
-                           size="lg" />
+                <c-loading
+                    :enabled="!ideas.length"
+                    size="lg" />
                 <c-idea-card
-                    :id="idea.id"
                     v-for="(idea, index) in ideas"
-                    class="p-2 col-3"
+                    :id="idea.id"
                     :key="index"
+                    class="p-2 col-3"
                     :description="idea.description"
                     :parentName="idea.name"
                     :parentDeveloperId="idea.meta.owner && idea.meta.owner.id"

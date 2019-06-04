@@ -16,8 +16,9 @@
         <c-join-community />
 
         <c-curator-panel>
-            <c-curator-info v-darklaunch="'CURATORS'"
-                            title="Curator panel">
+            <c-curator-info
+                v-darklaunch="'CURATORS'"
+                title="Curator panel">
                 <div v-if="!editing">
                     <p>
                         {{ curators.total }} people have

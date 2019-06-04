@@ -1,61 +1,69 @@
 <template>
-    <div class="c-grid-container"
-         @resize="getWindowHeight">
+    <div
+        class="c-grid-container"
+        @resize="getWindowHeight">
         <div class="c-grid__wrapper">
-            <div class="c-grid__top position-relative"
-                 :class="{'margin-bottom-30' : hasNew}">
-                <div class="c-grid"
-                     :style="gridStyle">
-                    <GridItem v-for="v in list"
-                              :key="v.index"
-                              :index="v.index"
-                              :sort="v.sort"
-                              :draggable="draggable"
-                              :drag-delay="dragDelay"
-                              :row-count="rowCount"
-                              :cell-width="cellWidth"
-                              :cell-height="cellHeight"
-                              :window-width="windowWidth"
-                              :row-shift="rowShift"
-                              @dragstart="onDragStart"
-                              @dragend="onDragEnd"
-                              @drag="onDrag"
-                              @click="click">
-                        <slot name="cell"
-                              :item="v.item"
-                              :index="v.index"
-                              :sort="v.sort"
-                              :remove="() => { removeItem(v) }" />
+            <div
+                class="c-grid__top position-relative"
+                :class="{'margin-bottom-30' : hasNew}">
+                <div
+                    class="c-grid"
+                    :style="gridStyle">
+                    <GridItem
+                        v-for="v in list"
+                        :key="v.index"
+                        :index="v.index"
+                        :sort="v.sort"
+                        :draggable="draggable"
+                        :drag-delay="dragDelay"
+                        :row-count="rowCount"
+                        :cell-width="cellWidth"
+                        :cell-height="cellHeight"
+                        :window-width="windowWidth"
+                        :row-shift="rowShift"
+                        @dragstart="onDragStart"
+                        @dragend="onDragEnd"
+                        @drag="onDrag"
+                        @click="click">
+                        <slot
+                            name="cell"
+                            :item="v.item"
+                            :index="v.index"
+                            :sort="v.sort"
+                            :remove="() => { removeItem(v) }" />
                     </GridItem>
                 </div>
             </div>
-            <div v-if="hasNew"
-                 class="c-grid__has-new">
+            <div
+                v-if="hasNew"
+                class="c-grid__has-new">
                 new <i class="fas fa-long-arrow-alt-down" />
             </div>
-            <div ref="gridFixed"
-                 class="c-grid__bottom position-relative"
-                 :class="['h-' + fixedIconHeight]">
+            <div
+                ref="gridFixed"
+                class="c-grid__bottom position-relative"
+                :class="['h-' + fixedIconHeight]">
                 <div class="c-grid__bottom-divider" />
-                <c-icon v-for="(item, index) in fixedItems"
-                        :key="index"
-                        :color="item"
-                        :index="index"
-                        :withButton="true"
-                        :href="item.href"
-                        :to="item.to"
-                        :image="item.image"
-                        :text="item.text"
-                        :eventKey="item.eventKey"
-                        :eventValue="item.eventValue"
-                        :textColor="item.textColor"
-                        :icon="item.icon"
-                        :unread="item.unread"
-                        :removable="item.removable"
-                        :percent="item.percent"
-                        :active="item.active"
-                        class="margin-bottom-10 border-none"
-                        @remove="remove()" />
+                <c-icon
+                    v-for="(item, index) in fixedItems"
+                    :key="index"
+                    :color="item"
+                    :index="index"
+                    :withButton="true"
+                    :href="item.href"
+                    :to="item.to"
+                    :image="item.image"
+                    :text="item.text"
+                    :eventKey="item.eventKey"
+                    :eventValue="item.eventValue"
+                    :textColor="item.textColor"
+                    :icon="item.icon"
+                    :unread="item.unread"
+                    :removable="item.removable"
+                    :percent="item.percent"
+                    :active="item.active"
+                    class="margin-bottom-10 border-none"
+                    @remove="remove()" />
             </div>
         </div>
     </div>

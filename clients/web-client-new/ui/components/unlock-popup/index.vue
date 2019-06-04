@@ -1,12 +1,15 @@
 <template>
-    <c-popup ref="modal"
-             :activated="activated"
-             type="custom"
-             width="250">
-        <div slot="customClose"
-             hidden />
-        <div slot="customContent"
-             class="unlock-modal">
+    <c-popup
+        ref="modal"
+        :activated="activated"
+        type="custom"
+        width="250">
+        <div
+            slot="customClose"
+            hidden />
+        <div
+            slot="customContent"
+            class="unlock-modal">
             <div class="tab-container">
                 <div class="tab-card">
                     <div class="row">
@@ -14,45 +17,52 @@
                             <div class="form-group">
                                 <h3>Password</h3>
                                 <label class="sr-only">Password</label>
-                                <input ref="password"
-                                       v-focus
-                                       type="password"
-                                       name="password"
-                                       placeholder="Password"
-                                       class="form-control"
-                                       @keyup.enter="unlock()">
+                                <input
+                                    ref="password"
+                                    v-focus
+                                    type="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    class="form-control"
+                                    @keyup.enter="unlock()">
                                 <br>
-                                <c-button ref="submit"
-                                          class="c-button--lg"
-                                          @click="unlock()">
+                                <c-button
+                                    ref="submit"
+                                    class="c-button--lg"
+                                    @click="unlock()">
                                     Unlock
                                 </c-button>
                                 <br>
                                 <p class="margin-top-20">
-                                    <span style="color: #aaa">Can't remember?</span> <c-button class="plain"
-                                                                                               @click="recovery = true">
+                                    <span style="color: #aaa">Can't remember?</span> <c-button
+                                        class="plain"
+                                        @click="recovery = true">
                                         Recover your account
                                     </c-button>
                                 </p>
-                                <div v-if="recovery"
-                                     class="row recovery-box">
-                                    <div v-if="!password"
-                                         class="col-12">
+                                <div
+                                    v-if="recovery"
+                                    class="row recovery-box">
+                                    <div
+                                        v-if="!password"
+                                        class="col-12">
                                         <div class="form-group">
                                             <label class="sr-only">Enter your secret question #1</label>
                                             <!-- http://goodsecurityquestions.com/examples/ -->
                                             <p>{{ secretQuestion1 }}</p>
                                             <div class="input-group mb-4">
-                                                <input v-model="secretAnswer1"
-                                                       type="text"
-                                                       class="form-control"
-                                                       placeholder="Secret Answer"
-                                                       name="secretAnswer1">
+                                                <input
+                                                    v-model="secretAnswer1"
+                                                    type="text"
+                                                    class="form-control"
+                                                    placeholder="Secret Answer"
+                                                    name="secretAnswer1">
                                             </div>
                                         </div>
                                     </div>
-                                    <div v-if="!password"
-                                         class="col-12">
+                                    <div
+                                        v-if="!password"
+                                        class="col-12">
                                         <div class="input-group">
                                             <p>What is your birthday?</p>
                                             <label class="sr-only">Enter your birthday</label>
@@ -68,21 +78,25 @@
                                                 :format="customBirthdayFormatter" />
                                         </div>
                                     </div>
-                                    <div v-if="!password"
-                                         class="col-12 margin-bottom-20">
-                                        <c-button class="outline-green"
-                                                  @click="recoverPassword">
+                                    <div
+                                        v-if="!password"
+                                        class="col-12 margin-bottom-20">
+                                        <c-button
+                                            class="outline-green"
+                                            @click="recoverPassword">
                                             Submit
                                         </c-button>
                                     </div>
-                                    <div v-if="recoveryError"
-                                         class="col-12">
+                                    <div
+                                        v-if="recoveryError"
+                                        class="col-12">
                                         <div class="alert alert-danger mb-4">
                                             {{ recoveryError }}
                                         </div>
                                     </div>
-                                    <p v-if="password"
-                                       class="col-12">
+                                    <p
+                                        v-if="password"
+                                        class="col-12">
                                         <strong>Success!</strong>
                                         <br>
                                         Your password has been recovered without a third-party. It was all you. Isn't that awesome? Now don't lose it!
@@ -95,8 +109,9 @@
                                             I Understand
                                         </c-button>
                                     </p>
-                                    <div v-if="!password"
-                                         class="col-12">
+                                    <div
+                                        v-if="!password"
+                                        class="col-12">
                                         <p><strong>Can't remember?</strong></p>
                                         <p><em>If you can't remember, you can download your account file, reset your account and try again later.</em></p>
                                         <p>

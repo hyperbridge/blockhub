@@ -1,7 +1,8 @@
 <template>
     <div>
-        <div class="tabs-nav"
-             :class="variant">
+        <div
+            class="tabs-nav"
+            :class="variant">
             <ul>
                 <li
                     v-for="(tab, index) in tabs"
@@ -15,8 +16,9 @@
             </ul>
             <slot name="tabs-nav" />
         </div>
-        <div ref="tabs"
-             class="tabs-container">
+        <div
+            ref="tabs"
+            class="tabs-container">
             <slot :tabs="tabs" />
         </div>
     </div>

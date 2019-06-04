@@ -1,9 +1,10 @@
 <template>
     <div class="games-list">
         <div class="col-3 p-0">
-            <c-games-navigation :list="games"
-                                :activeId="currentID"
-                                @choose="getGame" />
+            <c-games-navigation
+                :list="games"
+                :activeId="currentID"
+                @choose="getGame" />
         </div>
         <div class="col-9 p-0">
             <c-game-tab :game="game" />

@@ -36,23 +36,26 @@
                 </div>
             </div>
             <div class="row align-items-stretch margin-top-30">
-                <div v-for="(game, index) in games"
-                     :key="index"
-                     class="col-12 col-md-6 col-lg-4 col-xl-3 py-3">
-                    <c-game-card :game="game"
-                                 :online="online"
-                                 :favorites="favorites"
-                                 :isLoading="(index == 2 ) ? true : false" />
+                <div
+                    v-for="(game, index) in games"
+                    :key="index"
+                    class="col-12 col-md-6 col-lg-4 col-xl-3 py-3">
+                    <c-game-card
+                        :game="game"
+                        :online="online"
+                        :favorites="favorites"
+                        :isLoading="(index == 2 ) ? true : false" />
                 </div>
             </div>
             <div class="row align-items-stretch margin-top-30">
                 <div class="col-12 games-list">
-                    <c-game-list v-for="(game, index) in games"
-                                 :key="index"
-                                 :online="online"
-                                 :favorites="favorites"
-                                 :game="game"
-                                 :isLoading="(index == 2 ) ? true : false" />
+                    <c-game-list
+                        v-for="(game, index) in games"
+                        :key="index"
+                        :online="online"
+                        :favorites="favorites"
+                        :game="game"
+                        :isLoading="(index == 2 ) ? true : false" />
                 </div>
             </div>
         </div>

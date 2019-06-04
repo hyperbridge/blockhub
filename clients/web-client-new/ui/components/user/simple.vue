@@ -1,14 +1,14 @@
 <template>
     <div class="user-simple">
-        <c-img class="user-simple__img"
-               :src="user.img" />
+        <c-img
+            class="user-simple__img"
+            :src="user.img" />
         {{ user.name }}
     </div>
 </template>
 
 <script>
 export default {
-    name: 'UserSimple',
     props: {
         user: {
             type: Object,

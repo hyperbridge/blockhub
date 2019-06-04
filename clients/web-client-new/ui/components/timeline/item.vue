@@ -1,6 +1,7 @@
 <template>
-    <div class="posts-timeline__post-item"
-         :class="itemPosition">
+    <div
+        class="posts-timeline__post-item"
+        :class="itemPosition">
         <div class="posts-timeline__post--content">
             <div class="post-date">
                 {{ dateFormat(item.date) }}
@@ -11,9 +12,10 @@
             <p class="mb-4">
                 {{ item.text | stringLength }}
             </p>
-            <c-button status="info"
-                      :to="`/project/${projectID}/updates/${item.id}`"
-                      iconHide>
+            <c-button
+                status="info"
+                :to="`/project/${projectID}/updates/${item.id}`"
+                iconHide>
                 Read more
             </c-button>
         </div>

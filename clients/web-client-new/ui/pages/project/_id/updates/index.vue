@@ -1,7 +1,8 @@
 <template>
     <div class="col-12">
-        <c-timeline :items="project.updates"
-                    :project_id="project.id" />
+        <c-timeline
+            :items="project.updates"
+            :project_id="project.id" />
     </div>
 </template>
 

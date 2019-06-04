@@ -1,9 +1,11 @@
 <template>
-    <div class="simple-block"
-         :class="{'block-hovered' : hovered}">
-        <div v-if="image"
-             class="simple-block__image"
-             :style="{'height' : imgHeight }">
+    <div
+        class="simple-block"
+        :class="{'block-hovered' : hovered}">
+        <div
+            v-if="image"
+            class="simple-block__image"
+            :style="{'height' : imgHeight }">
             <img :src="image">
         </div>
         <div class="simple-block__content">

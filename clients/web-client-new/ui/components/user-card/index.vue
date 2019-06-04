@@ -1,48 +1,57 @@
 <template>
-    <div v-if="user"
-         class="user-data"
-         :class="{ 'preview-mode': previewMode }">
-        <c-loading :enabled="removing"
-                   size="lg" />
+    <div
+        v-if="user"
+        class="user-data"
+        :class="{ 'preview-mode': previewMode }">
+        <c-loading
+            :enabled="removing"
+            size="lg" />
 
-        <div v-if="!removing"
-             class="user-data__container">
+        <div
+            v-if="!removing"
+            class="user-data__container">
             <div
                 v-if="previewMode"
                 class="user-data__icon"
                 :class="{ 'verified': user.verified }"
                 hidden>
-                <i class="fas"
-                   :class="{ 'fa-check': user.verified, 'fa-times': !user.verified }" />
+                <i
+                    class="fas"
+                    :class="{ 'fa-check': user.verified, 'fa-times': !user.verified }" />
             </div>
-            <div v-if="previewMode"
-                 class="user-data__avatar">
+            <div
+                v-if="previewMode"
+                class="user-data__avatar">
                 <c-button
                     status="none"
                     :to="`/profiles/${user.id}`"
                     class="user-data__avatar-upload-btn">
-                    <c-img v-if="user.img"
-                           :src="user.img" />
-                    <c-img v-else
-                           src="../../static/img/user.png" />
+                    <c-img
+                        v-if="user.img"
+                        :src="user.img" />
+                    <c-img
+                        v-else
+                        src="../../static/img/user.png" />
                 </c-button>
             </div>
-            <div v-if="!previewMode"
-                 class="user-data__avatar">
+            <div
+                v-if="!previewMode"
+                class="user-data__avatar">
                 <a
                     v-if="!user.img"
                     href="#"
                     class="user-data__avatar-upload-btn">
                     <c-img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMxOS45ODIgMzE5Ljk4MiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzE5Ljk4MiAzMTkuOTgyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjY0cHgiIGhlaWdodD0iNjRweCI+CjxnPgoJPHBhdGggZD0iTTIzNC45OTEsMzE5Ljk4MmMyLjYxOCwwLDUuMjItMS4wNzgsNy4wNzEtMi45MjlzMi45MjktNC40NTMsMi45MjktNy4wNzF2LTE0MGg2NSAgIGMzLjkyMi0wLjAwOCw3LjcyMS0yLjU1Miw5LjIyMS02LjE3NnMwLjYxLTguMTA5LTIuMTU5LTEwLjg4NmwtMTUwLTE1MEMxNjUuMjAyLDEuMDc0LDE2Mi42MDQsMCwxNTkuOTkxLDAgICBjLTIuNjE0LDAtNS4yMTIsMS4wNzQtNy4wNjIsMi45MmwtMTUwLDE1MGMtMi43NjksMi43NzctMy42NTksNy4yNjMtMi4xNTksMTAuODg2YzEuNSwzLjYyNCw1LjI5OSw2LjE2OCw5LjIyMSw2LjE3Nmg2NXYxNDAgICBjMCwyLjYxOCwxLjA3OCw1LjIyLDIuOTI5LDcuMDcxczQuNDUzLDIuOTI5LDcuMDcxLDIuOTI5SDIzNC45OTF6IiBmaWxsPSIjNjQ3M2Y0Ii8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
                 </a>
-                <c-img v-else
-                       src="../../static/img/user.png" />
+                <c-img
+                    v-else
+                    src="../../static/img/user.png" />
             </div>
 
             <div style="text-align: left;">
                 <input
-                    type="text"
                     v-focus="!previewMode"
+                    type="text"
                     class="form-control margin-bottom-5"
                     placeholder="Profile name"
                     :value="user.name"
@@ -61,15 +70,18 @@
             </div>
         </div>
 
-        <div v-darklaunch="'BADGES'"
-             class="user-data__unknown-block">
-            <button v-for="index in 4"
-                    :key="index"
-                    class="btn">
+        <div
+            v-darklaunch="'BADGES'"
+            class="user-data__unknown-block">
+            <button
+                v-for="index in 4"
+                :key="index"
+                class="btn">
                 <i class="fas fa-plus" />
             </button>
-            <div v-if="previewMode"
-                 class="counts">
+            <div
+                v-if="previewMode"
+                class="counts">
                 <span>
                     0 <i class="fas fa-long-arrow-alt-down" />
                 </span>
@@ -79,8 +91,9 @@
             </div>
         </div>
 
-        <div v-if="previewMode && user.address"
-             class="user-data__public-address">
+        <div
+            v-if="previewMode && user.address"
+            class="user-data__public-address">
             <input
                 type="text"
                 class="form-control"
@@ -94,9 +107,10 @@
             </button>
         </div>
         <div v-if="previewMode && !user.address">
-            <c-button status="dark"
-                      size="small"
-                      @click="generateAddress(user.id)">
+            <c-button
+                status="dark"
+                size="small"
+                @click="generateAddress(user.id)">
                 Generate Address
             </c-button>
         </div>

@@ -8,14 +8,17 @@
                 <div class="benchmark__status mr-4">
                     STATUS: {{ running ? 'Running' : finished ? 'Finished' : 'Waiting to start' }}
                 </div>
-                <div v-if="running"
-                     class="mr-4">
+                <div
+                    v-if="running"
+                    class="mr-4">
                     FPS: {{ fps }}
                 </div>
-                <div v-else-if="finished"
-                     class="mr-4">
-                    Average fps: <strong class="benchmark__fps"
-                                         :class="results.grade">{{ results.avgFps }}</strong><br>
+                <div
+                    v-else-if="finished"
+                    class="mr-4">
+                    Average fps: <strong
+                        class="benchmark__fps"
+                        :class="results.grade">{{ results.avgFps }}</strong><br>
                     {{ results.text }}
                 </div>
                 <div v-else>
@@ -31,14 +34,16 @@
                 @click="benchmark">
                 {{ finished ? 'Try again' : running ? 'Running...' : 'Run Test' }}
             </c-button>
-            <c-button v-if="settings.client.auto_update_settings"
-                      status="success"
-                      @click="toggleAutoUpdateSettings">
+            <c-button
+                v-if="settings.client.auto_update_settings"
+                status="success"
+                @click="toggleAutoUpdateSettings">
                 SETTINGS UPDATED AUTOMATICALLY
             </c-button>
-            <c-button v-if="!settings.client.auto_update_settings"
-                      status="warning"
-                      @click="toggleAutoUpdateSettings">
+            <c-button
+                v-if="!settings.client.auto_update_settings"
+                status="warning"
+                @click="toggleAutoUpdateSettings">
                 SETTINGS NOT UPDATED AUTOMATICALLY
             </c-button>
         </div>

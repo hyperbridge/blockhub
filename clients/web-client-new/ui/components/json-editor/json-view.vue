@@ -1,8 +1,9 @@
 <template>
     <div class="block_content">
-        <span v-for="(item, index) in flowData"
-              :key="index"
-              :class="['block', 'clearfix', {'hide-block': hideMyBlock[index] === true}]">
+        <span
+            v-for="(item, index) in flowData"
+            :key="index"
+            :class="['block', 'clearfix', {'hide-block': hideMyBlock[index] === true}]">
             <span class="json-key">
                 <input
                     v-if="typeof item.name === 'string'"
@@ -22,25 +23,29 @@
                     <i class="fas fa-trash" />
                 </div>
 
-                <i v-if="item.type === 'object'"
-                   class="i-type">
+                <i
+                    v-if="item.type === 'object'"
+                    class="i-type">
                     {{ '{' + item.childParams.length + '}' }}
                 </i>
-                <i v-if="item.type === 'array'"
-                   class="i-type">
+                <i
+                    v-if="item.type === 'array'"
+                    class="i-type">
                     {{ '[' + item.childParams.length + ']' }}
                 </i>
 
             </span>
             <span class="json-val">
                 <template v-if="item.type === 'object'">
-                    <c-json-view v-model="item.childParams"
-                                 :parsedData="item.childParams" />
+                    <c-json-view
+                        v-model="item.childParams"
+                        :parsedData="item.childParams" />
                 </template>
 
                 <template v-else-if="item.type === 'array'">
-                    <c-array-view v-model="item.childParams"
-                                  :parsedData="item.childParams" />
+                    <c-array-view
+                        v-model="item.childParams"
+                        :parsedData="item.childParams" />
                 </template>
 
                 <template v-else>
@@ -63,23 +68,26 @@
                             <option :value="true">true</option>
                             <option :value="false">false</option>
                         </select>
-                        <span v-if="item.type === 'null'"
-                              class="val-input">NULL</span>
+                        <span
+                            v-if="item.type === 'null'"
+                            class="val-input">NULL</span>
                     </span>
                 </template>
             </span>
         </span>
 
-        <div v-popover="{ name: popoverKey }"
-             class="block add-key"
-             @click="viewType = 'full'">
+        <div
+            v-popover="{ name: popoverKey }"
+            class="block add-key"
+            @click="viewType = 'full'">
             <i class="fa fa-plus" />
         </div>
         <no-ssr>
-            <popover :name="popoverKey"
-                     :pointer="true"
-                     :class="viewType"
-                     style="position: fixed;left: 0px;top: 0px;">
+            <popover
+                :name="popoverKey"
+                :pointer="true"
+                :class="viewType"
+                style="position: fixed;left: 0px;top: 0px;">
                 <c-item-add-form
                     :existingNames="flowDataKeys"
                     @confirm="newItem"

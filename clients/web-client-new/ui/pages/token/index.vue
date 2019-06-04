@@ -11,8 +11,9 @@
                     :soldTokens="soldTokens"
                     @purchase="scrollMeTo('purchase')"
                 /> -->
-                <c-block class="margin-bottom-30"
-                         hidden>
+                <c-block
+                    class="margin-bottom-30"
+                    hidden>
                     <div class="d-flex justify-content-between align-items-center padding-10">
                         <div>
                             <div class="h3 font-weight-bold p-0 m-0">
@@ -22,9 +23,10 @@
                                 Don't miss exclusive splash sale on nov 15, 16, 17! Only for 20k+ HBX holders!
                             </div>
                         </div>
-                        <c-button size="lg"
-                                  status="success"
-                                  iconHide>
+                        <c-button
+                            size="lg"
+                            status="success"
+                            iconHide>
                             Purchase 20k+ HBX
                         </c-button>
                     </div>
@@ -33,19 +35,21 @@
                 <c-block>
                     <div class="d-flex justify-content-between align-items-center padding-10">
                         <div>
-                            <c-img src="../../static/img/hyperbridge-logo_brand-color-h.png"
-                                   style="height: 50px"
-                                   alt="Hyperbridge" />
+                            <c-img
+                                src="../../static/img/hyperbridge-logo_brand-color-h.png"
+                                style="height: 50px"
+                                alt="Hyperbridge" />
                         </div>
                         <div class="h4 px-4 m-0 w-auto font-weight-light">
                             BlockHub and HBX are brought to you by Hyperbridge Technology. We build technology for a crowdfunded world.
                         </div>
-                        <c-button href="https://hyperbridge.org/"
-                                  size="lg"
-                                  status="info"
-                                  iconHide
-                                  target="_blank"
-                                  hidden>
+                        <c-button
+                            href="https://hyperbridge.org/"
+                            size="lg"
+                            status="info"
+                            iconHide
+                            target="_blank"
+                            hidden>
                             Learn more
                         </c-button>
                     </div>
@@ -55,9 +59,10 @@
                 <c-block>
                     <h2>What is HBX?</h2>
                     <p>
-                        Built by <c-button status="underline"
-                                           size="md"
-                                           href="https://hyperbridge.org">
+                        Built by <c-button
+                            status="underline"
+                            size="md"
+                            href="https://hyperbridge.org">
                             Hyperbridge
                         </c-button>, HBX tokens are used to fuel the decentralized protocols underlying window.BlockHub.
                         BlockHub is the first economy built on these protocols, designed to let players and game developers productively interact in mutually beneficial ways.
@@ -72,8 +77,9 @@
                             <li>Polls/Questionnaires</li>
                         </ul>
                     </p>
-                    <div class="carousel-wrapper margin-auto margin-top-20 margin-bottom-20"
-                         style="zoom: 0.7">
+                    <div
+                        class="carousel-wrapper margin-auto margin-top-20 margin-bottom-20"
+                        style="zoom: 0.7">
                         <c-carousel-3d
                             :items="[assets[0]]"
                             :limitTo="1">
@@ -101,16 +107,18 @@
                             <li>Running promotions within BlockHub</li>
                         </ul>
                         <br>
-                        For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees by 50%. To learn more, please see the <c-button status="underline"
-                                                                                                                                                                                  size="md"
-                                                                                                                                                                                  href="https://hyperbridge.org/whitepaper"
-                                                                                                                                                                                  target="_blank">
+                        For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees by 50%. To learn more, please see the <c-button
+                            status="underline"
+                            size="md"
+                            href="https://hyperbridge.org/whitepaper"
+                            target="_blank">
                             White Paper
                         </c-button>.
                         <br><br>
                     </p>
-                    <div class="carousel-wrapper margin-auto margin-top-20 margin-bottom-20"
-                         style="zoom: 0.7">
+                    <div
+                        class="carousel-wrapper margin-auto margin-top-20 margin-bottom-20"
+                        style="zoom: 0.7">
                         <c-carousel-3d
                             :items="[assets[1], assets[2]]"
                             :limitTo="2">
@@ -124,8 +132,9 @@
                         </c-carousel-3d>
                     </div>
                     <p>
-                        Purchasers will be rewarded the exclusive Voyager Badge and Master Sword (<a href="http://erc721.org/"
-                                                                                                     target="_blank">ERC-721 NFTs</a>). These unique items will be some of the first items tradeable within our upcoming games &amp; marketplace.
+                        Purchasers will be rewarded the exclusive Voyager Badge and Master Sword (<a
+                            href="http://erc721.org/"
+                            target="_blank">ERC-721 NFTs</a>). These unique items will be some of the first items tradeable within our upcoming games &amp; marketplace.
                     </p>
                 </c-block>
             </div>
@@ -137,41 +146,48 @@
             </div>
         </div> -->
 
-        <div ref="purchase"
-             class="row promotion margin-top-40 margin-bottom-20" />
+        <div
+            ref="purchase"
+            class="row promotion margin-top-40 margin-bottom-20" />
 
-        <div v-if="!ethereumConnected"
-             class=""
-             style="text-align: center; width: 100%"
-             hidden>
+        <div
+            v-if="!ethereumConnected"
+            class=""
+            style="text-align: center; width: 100%"
+            hidden>
             <c-welcome-box />
             <br><br>
         </div>
 
-        <div v-if="isMobile"
-             class="col-12"
-             style="text-align: center; width: 100%; margin-top: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
+        <div
+            v-if="isMobile"
+            class="col-12"
+            style="text-align: center; width: 100%; margin-top: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
             <h2>Mobile Detected</h2>
             <p>We're sorry, but purchasing is only supported on desktop. Please come back on a PC to purchase. Thank you.</p>
         </div>
 
         <div v-if="!isMobile">
-            <div v-if="!ethereumConnected"
-                 class="col-12 col-md-6 offset-md-3"
-                 style="text-align: center; width: 100%">
+            <div
+                v-if="!ethereumConnected"
+                class="col-12 col-md-6 offset-md-3"
+                style="text-align: center; width: 100%">
                 <h2 hidden>
                     Purchase Tokens with MetaMask
                 </h2>
 
                 <br>
 
-                <img src="/img/metamask-logo.png"
-                     style="max-width: 150px;margin: 0 auto;opacity: 0.3; filter: grayscale(1);">
+                <img
+                    src="/img/metamask-logo.png"
+                    style="max-width: 150px;margin: 0 auto;opacity: 0.3; filter: grayscale(1);">
 
-                <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
-                   hidden>
-                    <img src="/img/metamask.png"
-                         style="max-width: 350px;margin: 0 auto">
+                <a
+                    href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
+                    hidden>
+                    <img
+                        src="/img/metamask.png"
+                        style="max-width: 350px;margin: 0 auto">
                 </a>
 
                 <br><br>
@@ -181,61 +197,70 @@
                 </p>
 
                 <br><br>
-                <c-button class="c-button--lg "
-                          href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
-                          @click="gaStep(1)">
+                <c-button
+                    class="c-button--lg "
+                    href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
+                    @click="gaStep(1)">
                     Install MetaMask to Purchase Tokens
                 </c-button>
                 <br><br>
-                <c-button status="underline"
-                          size="sm"
-                          @click="showContractAddress">
+                <c-button
+                    status="underline"
+                    size="sm"
+                    @click="showContractAddress">
                     Click here if you just want the contract address
                 </c-button>
                 <br><br>
             </div>
 
-            <div v-if="ethereumConnected && !ethereumUnlocked"
-                 class="col-12"
-                 hidden>
+            <div
+                v-if="ethereumConnected && !ethereumUnlocked"
+                class="col-12"
+                hidden>
                 <c-welcome-box />
             </div>
 
-            <div v-if="ethereumConnected && !ethereumUnlocked"
-                 class="col-6 offset-3"
-                 style="text-align: center; width: 100%; margin-top: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
+            <div
+                v-if="ethereumConnected && !ethereumUnlocked"
+                class="col-6 offset-3"
+                style="text-align: center; width: 100%; margin-top: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
                 <h2 hidden>
                     Purchase Tokens with MetaMask
                 </h2>
 
                 <br>
 
-                <img src="/img/metamask-logo.png"
-                     style="max-width: 150px;margin: 0 auto;opacity: 0.3; filter: grayscale(1);">
+                <img
+                    src="/img/metamask-logo.png"
+                    style="max-width: 150px;margin: 0 auto;opacity: 0.3; filter: grayscale(1);">
 
                 <br>
 
                 <br>
                 <br>
-                <c-button class="c-button--lg "
-                          @click="unlockWallet">
+                <c-button
+                    class="c-button--lg "
+                    @click="unlockWallet">
                     Unlock Wallet
                 </c-button>
                 <br><br>
-                <c-button status="underline"
-                          size="sm"
-                          @click="showContractAddress">
+                <c-button
+                    status="underline"
+                    size="sm"
+                    @click="showContractAddress">
                     Click here if you just want the contract address
                 </c-button>
                 <br><br>
             </div>
 
-            <div v-if="ethereumConnected && ethereumUnlocked"
-                 class="col-4 offset-4"
-                 style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2); zoom: 0.8"
-                 hidden>
-                <img src="/img/metamask-logo.png"
-                     style="max-width: 150px;margin: 0 auto;">
+            <div
+                v-if="ethereumConnected && ethereumUnlocked"
+                class="col-4 offset-4"
+                style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2); zoom: 0.8"
+                hidden>
+                <img
+                    src="/img/metamask-logo.png"
+                    style="max-width: 150px;margin: 0 auto;">
 
                 <br><br>
 
@@ -245,10 +270,12 @@
             </div>
 
             <div class="row">
-                <div v-if="ethereumConnected && ethereumUnlocked"
-                     class="col-12 col-md-6">
-                    <c-block title="Purchase"
-                             class="margin-bottom-30">
+                <div
+                    v-if="ethereumConnected && ethereumUnlocked"
+                    class="col-12 col-md-6">
+                    <c-block
+                        title="Purchase"
+                        class="margin-bottom-30">
                         <p>Each HBX token is <strong>${{ tokenPriceUSD }}</strong>, and can be purchased with ETH at the current price of <strong>{{ (1/ETH2USD).toString().slice(0, 6) }} ETH</strong> per HBX <em>(Based on a locked conversion of ${{ ETH2USD }} USD per 1 ETH)</em>.</p>
                         <div class="input-group mb-4">
                             <div class="input-group-prepend">
@@ -256,12 +283,13 @@
                                     ETH
                                 </span>
                             </div>
-                            <input ref="input"
-                                   v-model="purchaseETH"
-                                   type="text"
-                                   class="form-control"
-                                   placeholder="0.00"
-                                   @keyup="calcHBX">
+                            <input
+                                ref="input"
+                                v-model="purchaseETH"
+                                type="text"
+                                class="form-control"
+                                placeholder="0.00"
+                                @keyup="calcHBX">
                         </div>
                         <p>Estimated purchase:</p>
                         <div class="input-group mb-4">
@@ -270,25 +298,29 @@
                                     HBX
                                 </span>
                             </div>
-                            <input ref="input"
-                                   v-model="purchaseHBX"
-                                   type="text"
-                                   class="form-control"
-                                   placeholder="0.00"
-                                   readonly>
+                            <input
+                                ref="input"
+                                v-model="purchaseHBX"
+                                type="text"
+                                class="form-control"
+                                placeholder="0.00"
+                                readonly>
                         </div>
                         <strong>Note:</strong> Maximum purchase amount is {{ (maxPurchaseUSD / ETH2USD).toString().slice(0, 3) }} ETH (${{ maxPurchaseUSD }} USD equivalent).
                     </c-block>
                 </div>
 
-                <div v-if="ethereumConnected && ethereumUnlocked && desktopMode"
-                     class="col-12 col-md-6">
-                    <c-block title="Payment"
-                             class="margin-bottom-30">
+                <div
+                    v-if="ethereumConnected && ethereumUnlocked && desktopMode"
+                    class="col-12 col-md-6">
+                    <c-block
+                        title="Payment"
+                        class="margin-bottom-30">
                         <div class="profile-picker">
                             <c-swiper :options="profileOptions">
-                                <c-swiper-slide v-for="profile in profiles"
-                                                :key="profile.id">
+                                <c-swiper-slide
+                                    v-for="profile in profiles"
+                                    :key="profile.id">
                                     <div
                                         v-if="profiles && profiles.length"
                                         class="profile-picker__profile w-100 m-0 padding-15 pb-0">
@@ -312,10 +344,12 @@
                     </c-block>
                 </div>
 
-                <div v-if="ethereumConnected && ethereumUnlocked && !desktopMode"
-                     class="col-12 col-md-6">
-                    <c-block title="Payment Profile"
-                             class="margin-bottom-30">
+                <div
+                    v-if="ethereumConnected && ethereumUnlocked && !desktopMode"
+                    class="col-12 col-md-6">
+                    <c-block
+                        title="Payment Profile"
+                        class="margin-bottom-30">
                         <p>Your Ethereum address:</p>
                         <div class="input-group mb-4">
                             <div class="input-group-prepend">
@@ -323,17 +357,19 @@
                                     Address
                                 </span>
                             </div>
-                            <input ref="input"
-                                   v-model="purchaseAddress"
-                                   type="text"
-                                   class="form-control"
-                                   placeholder="Public Ethereum address....">
+                            <input
+                                ref="input"
+                                v-model="purchaseAddress"
+                                type="text"
+                                class="form-control"
+                                placeholder="Public Ethereum address....">
                         </div>
                         <p hidden>
-                            Haven't verified yet? You'll need to do that! <c-button class=""
-                                                                                    to="/account/verification"
-                                                                                    style="margin: 0 auto"
-                                                                                    @click="gaStep(5)">
+                            Haven't verified yet? You'll need to do that! <c-button
+                                class=""
+                                to="/account/verification"
+                                style="margin: 0 auto"
+                                @click="gaStep(5)">
                                 Verify Account
                             </c-button>
                         </p>
@@ -344,40 +380,46 @@
                     <p>The BlockHub desktop client is the recommended way to load up on tokens.</p>
                 </div> -->
 
-                <div v-if="ethereumConnected && ethereumUnlocked && desktopMode && (!account.isVerified && !account.isVerifying) && !override"
-                     class="col-8 offset-2"
-                     style="text-align: center">
-                    <h2 style="text-align: center"
+                <div
+                    v-if="ethereumConnected && ethereumUnlocked && desktopMode && (!account.isVerified && !account.isVerifying) && !override"
+                    class="col-8 offset-2"
+                    style="text-align: center">
+                    <h2
+                        style="text-align: center"
                         hidden>
                         Oops, you haven't verified your account yet. <br>You'll need to do this to purchase.
                     </h2>
                     <br>
-                    <c-button class="c-button--lg"
-                              to="/account/verification"
-                              style="margin: 0 auto"
-                              @click="gaStep(6)">
+                    <c-button
+                        class="c-button--lg"
+                        to="/account/verification"
+                        style="margin: 0 auto"
+                        @click="gaStep(6)">
                         Verify Account
                     </c-button>
                     <br><br>
-                    <c-button status="underline"
-                              size="sm"
-                              @click="manualOverride">
+                    <c-button
+                        status="underline"
+                        size="sm"
+                        @click="manualOverride">
                         Click here if you're pretty sure you've verified
                     </c-button>
                     <br><br>
                 </div>
 
-                <div v-if="ethereumConnected && ethereumUnlocked && desktopMode && !account.isVerified && account.isVerifying"
-                     class="col-8 offset-2"
-                     style="text-align: center">
+                <div
+                    v-if="ethereumConnected && ethereumUnlocked && desktopMode && !account.isVerified && account.isVerifying"
+                    class="col-8 offset-2"
+                    style="text-align: center">
                     <p>Your account is currently being verified. You'll need to wait until it's finished to purchase.</p>
                     <p>Please check back later. If you've been waiting too long or have problems, please email support@hyperbridge.org</p>
                 </div>
 
                 <br><br><br>
 
-                <div v-if="ethereumConnected && ethereumUnlocked && (!desktopMode || account.isVerified || override)"
-                     style="text-align: center">
+                <div
+                    v-if="ethereumConnected && ethereumUnlocked && (!desktopMode || account.isVerified || override)"
+                    style="text-align: center">
                     <div class="col-10 offset-1 tab-card">
                         <h4>Purchase Agreement</h4>
                         <div class="termsBlock">
@@ -385,28 +427,33 @@
                                 <span class="c5" />
                             </p><p class="c19 c21">
                                 <span class="c11">This Token Sale Agreement (the</span><span class="c13">&nbsp;“Agreement”</span><span class="c11">)</span><span class="c13">&nbsp;</span><span class="c6">is an agreement between </span>
-                            </p><ol class="c7 lst-kix_list_14-0 start"
-                                    start="1">
+                            </p><ol
+                                class="c7 lst-kix_list_14-0 start"
+                                start="1">
                                 <li class="c25">
                                     <span class="c6">you or the legal entity that you represent (</span><span class="c1">“Buyer”</span><span class="c6">) and </span>
                                 </li><li class="c15">
-                                    <span class="c1">Hyperbridge Technology Inc. OÜ </span><span class="c6">(<a href="https://www.teatmik.ee/en/personlegal/14476002-Hyperbridge-Technology-Inc.-O%C3%9C"
-                                                                                                                target="_blank">registry code: 14476002</a>) registered under the laws of Estonia</span><span class="c1">&nbsp;</span><span class="c6">(</span><span class="c1">“Company”</span><span class="c6">).</span>
+                                    <span class="c1">Hyperbridge Technology Inc. OÜ </span><span class="c6">(<a
+                                        href="https://www.teatmik.ee/en/personlegal/14476002-Hyperbridge-Technology-Inc.-O%C3%9C"
+                                        target="_blank">registry code: 14476002</a>) registered under the laws of Estonia</span><span class="c1">&nbsp;</span><span class="c6">(</span><span class="c1">“Company”</span><span class="c6">).</span>
                                 </li>
                             </ol><p class="c19">
                                 <span class="c11">Buyer and Company, individually herein referred to as a </span><span class="c13">“Party”</span><span class="c11">&nbsp;and collectively as the “</span><span class="c13">Parties</span><span class="c6">”, have agreed on the following:</span>
-                            </p><ol class="c7 lst-kix_list_3-0 start"
-                                    start="1">
+                            </p><ol
+                                class="c7 lst-kix_list_3-0 start"
+                                start="1">
                                 <li class="c0">
                                     <span class="c5">DEFINITIONS </span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_3-1 start"
-                                     start="1">
+                            </ol><ol
+                                class="c7 lst-kix_list_3-1 start"
+                                start="1">
                                 <li class="c12">
                                     <span class="c6">The Agreement terms that are written in the upper case first letter hereinafter is used in the following meanings unless the context indicates a different meaning:</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_17-2 start"
-                                     start="1">
+                            </ol><ol
+                                class="c7 lst-kix_list_17-2 start"
+                                start="1">
                                 <li class="c4">
                                     <span class="c6">“</span><span class="c1">Account</span><span class="c6">” - a Participant’s account on the Website, which is created and used to purchase HBX tokens. Only Participants have a right to purchase HBX tokens on the terms provided herein.</span>
                                 </li><li class="c4">
@@ -428,12 +475,15 @@
                                 </li><li class="c4">
                                     <span class="c6">“</span><span class="c1">Terms</span><span class="c6">” - these Terms and Conditions.</span>
                                 </li><li class="c4">
-                                    <span class="c6">“</span><span class="c1">Website</span><span class="c6">” - HYPERBRIDGE website: </span><span class="c11 c22"><a class="c17"
-                                                                                                                                                                      href="https://www.hyperbridge.org">https://www.hyperbridge.org</a></span><span class="c6">, the Crowdsale Dashboard, all subdomains and all their respective pages.</span>
-                                </li><li id="h.gjdgxs"
-                                         class="c4">
-                                    <span class="c6">“</span><span class="c1">White</span><span class="c6">&nbsp;</span><span class="c1">Paper</span><span class="c6">” - the document describing HYPERBRIDGE Project available on the Website at </span><span class="c22 c11"><a class="c17"
-                                                                                                                                                                                                                                                                                  href="https://hyperbridge.org/whitepaper">https://hyperbridge.org/whitepaper</a></span><span class="c6">&nbsp;as may be amended from time to time.</span>
+                                    <span class="c6">“</span><span class="c1">Website</span><span class="c6">” - HYPERBRIDGE website: </span><span class="c11 c22"><a
+                                        class="c17"
+                                        href="https://www.hyperbridge.org">https://www.hyperbridge.org</a></span><span class="c6">, the Crowdsale Dashboard, all subdomains and all their respective pages.</span>
+                                </li><li
+                                    id="h.gjdgxs"
+                                    class="c4">
+                                    <span class="c6">“</span><span class="c1">White</span><span class="c6">&nbsp;</span><span class="c1">Paper</span><span class="c6">” - the document describing HYPERBRIDGE Project available on the Website at </span><span class="c22 c11"><a
+                                        class="c17"
+                                        href="https://hyperbridge.org/whitepaper">https://hyperbridge.org/whitepaper</a></span><span class="c6">&nbsp;as may be amended from time to time.</span>
                                 </li><li class="c4">
                                     <span class="c6">“</span><span class="c1">User</span><span class="c6">” - anyone who uses the Website, without prior registration and authorization using the Account.</span>
                                 </li><li class="c4">
@@ -441,18 +491,21 @@
                                 </li><li class="c4">
                                     <span class="c6">“</span><span class="c1">HBX</span><span class="c6">&nbsp;</span><span class="c1">Tokens</span><span class="c6">” or “</span><span class="c1">HBX</span><span class="c6">” - a coin based on ERC20 Ethereum token standard, which will allow its owner to participate in HYPERBRIDGE Project as further described in the White Paper and in the future use HBX for payment of services and products offered through HYPERBRIDGE platform, if and to the extent HYPERBRIDGE Project has been successfully completed and Launched.</span>
                                 </li>
-                            </ol><p id="h.30j0zll"
-                                    class="c8 c18">
+                            </ol><p
+                                id="h.30j0zll"
+                                class="c8 c18">
                                 <span class="c1" />
                             </p><p class="c3 c8 c24">
                                 <span class="c1" />
-                            </p><ol class="c7 lst-kix_list_3-0"
-                                    start="2">
+                            </p><ol
+                                class="c7 lst-kix_list_3-0"
+                                start="2">
                                 <li class="c2">
                                     <span class="c5">ENTERING INTO THE AGREEMENT AND TERMS OF USE. WHITE PAPER. LEGAL STATUS OF TOKENS </span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_3-1 start"
-                                     start="1">
+                            </ol><ol
+                                class="c7 lst-kix_list_3-1 start"
+                                start="1">
                                 <li class="c0">
                                     <span class="c6">Buyer agrees to purchase, and Company agrees to sell the Tokens on the terms and conditions set forth in the Agreement. Buyer fully acknowledges, understands and agrees that it is subject to and bound by the Agreement by virtue of Buyer’s purchase of Tokens. The Agreement becomes effective and binding on Parties after Company has received the payment from Buyer. </span>
                                 </li><li class="c0">
@@ -468,13 +521,15 @@
                                 </li><li class="c0">
                                     <span class="c6">Company may decide to amend the intended functionality of the Tokens to ensure compliance with any legal or regulatory requirements the Tokens are subject to. Company may publish a notice of any changes to the functionality of the Tokens and it is &#8203;Buyer's &#8203;responsibility &#8203;to &#8203;regularly &#8203;check &#8203; Hyperbridge communication channels &#8203;for &#8203;any &#8203;such &#8203;notices. </span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_3-0"
-                                     start="3">
+                            </ol><ol
+                                class="c7 lst-kix_list_3-0"
+                                start="3">
                                 <li class="c2">
                                     <span class="c5">TOKEN SALE PROCEDURE</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_3-1 start"
-                                     start="1">
+                            </ol><ol
+                                class="c7 lst-kix_list_3-1 start"
+                                start="1">
                                 <li class="c0">
                                     <span class="c6">The substantial information about the procedures and material specifications of the Token Sale are provided in the White Paper and on the https://www.hyperbridge.org, including details regarding the timing, pricing of the Token Sale, the number of Tokens purchased and the wallet address. By making the payment for the Tokens, Buyer acknowledges that Buyer has no objection to these procedures and material specifications.</span>
                                 </li><li class="c0">
@@ -488,15 +543,17 @@
                                 </li><li class="c0">
                                     <span class="c6">At any time prior to the end of the Token Sale, Company may, at its own discretion, either temporarily suspend or permanently abort the Token Sale for security or any other reasons. Any suspension or abortion of Token Sale shall be deemed to commence from the moment that Company publishes a &#8203;notice &#8203;to &#8203;that &#8203;effect &#8203;on &#8203;the https://www.hyperbridge.org.</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_3-0"
-                                     start="4">
+                            </ol><ol
+                                class="c7 lst-kix_list_3-0"
+                                start="4">
                                 <li class="c2">
                                     <span class="c5">REPRESENTATIONS AND WARRANTIES OF BUYER </span>
                                 </li>
                             </ol><p class="c19 c21">
                                 <span class="c6">Buyer represents and warrants, understands and agrees without any reservation that:</span>
-                            </p><ol class="c7 lst-kix_list_9-1 start"
-                                    start="1">
+                            </p><ol
+                                class="c7 lst-kix_list_9-1 start"
+                                start="1">
                                 <li class="c0 c8">
                                     <span class="c6">Buyer has all required powers and authority to execute, deliver, carry out and perform its obligations under the Agreement, including but not limited to making payments and purchase HBX Tokens within the process of Token Sale. </span>
                                 </li><li class="c0 c8">
@@ -520,21 +577,25 @@
                                 </li><li class="c0 c8">
                                     <span class="c6">The Tokens will not be offered or distributed to, as well as they will not be resold or otherwise alienated by their holders to the following persons:</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_9-2 start"
-                                     start="1">
-                                <li id="h.1fob9te"
+                            </ol><ol
+                                class="c7 lst-kix_list_9-2 start"
+                                start="1">
+                                <li
+                                    id="h.1fob9te"
                                     class="c10">
                                     <span class="c6">citizens of, natural and legal persons or persons acting on their behalf, having their habitual residence, location or their seat of incorporation in the United States of America, Puerto Rico, Northern Mariana Islands, Virgin Islands of the United States, American Samoa, or any other possessions of the United States of America; People’s Republic of China; South Korea and</span>
                                 </li><li class="c10">
                                     <span class="c6">citizens of, natural and legal persons or persons acting on their behalf, having their habitual residence, location or their seat of incorporation in the country or territory where transactions with digital tokens are prohibited or in any manner restricted by applicable laws or regulations, or will become prohibited or restricted at any time after the Agreement becomes effective.</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_9-1"
-                                     start="12">
+                            </ol><ol
+                                class="c7 lst-kix_list_9-1"
+                                start="12">
                                 <li class="c0">
                                     <span class="c6">The entering into, and performance of, the Agreement will not result in any violation of, and be in conflict with, or constitute a material default under: </span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_9-2 start"
-                                     start="1">
+                            </ol><ol
+                                class="c7 lst-kix_list_9-2 start"
+                                start="1">
                                 <li class="c0">
                                     <span class="c6">any &#8203;provision &#8203;of &#8203;Buyer’s corporation &#8203;documents;</span>
                                 </li><li class="c0">
@@ -546,8 +607,9 @@
                                 </li><li class="c0">
                                     <span class="c6">any &#8203;laws, &#8203;regulations &#8203;or &#8203;rules &#8203;applicable &#8203;to &#8203;Buyer.</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_9-1"
-                                     start="13">
+                            </ol><ol
+                                class="c7 lst-kix_list_9-1"
+                                start="13">
                                 <li class="c0">
                                     <span class="c6">Buyer undertakes to comply with any applicable tax obligations in Buyer's jurisdiction arising from &#8203;&#8203;the Token Sale.</span>
                                 </li><li class="c0">
@@ -571,22 +633,25 @@
                                 </li>
                             </ol><p class="c3">
                                 <span class="c6" />
-                            </p><ol class="c7 lst-kix_list_9-0 start"
-                                    start="4">
+                            </p><ol
+                                class="c7 lst-kix_list_9-0 start"
+                                start="4">
                                 <li class="c12">
                                     <span class="c5">NO COMPANY'S REPRESENTATIONS AND WARRANTIES</span>
                                 </li>
                             </ol><p class="c18">
                                 <span class="c9" />
-                            </p><ol class="c7 lst-kix_list_9-1"
-                                    start="23">
+                            </p><ol
+                                class="c7 lst-kix_list_9-1"
+                                start="23">
                                 <li class="c12">
                                     <span class="c6">Buyer expressly acknowledges, understands and agrees entirely and without any reservation that Buyer is purchasing the Tokens solely at Buyer’s own risk and that Tokens are provided, used and acquired on an “</span><span class="c11 c14">as is</span><span class="c6">” and on an “</span><span class="c14 c11">as available</span><span class="c6">” basis without representations, warranties, promises or guarantees whatsoever of any kind. Buyer’s decision to purchase the Tokens and enter into the Agreement shall be made based on Buyer’s own knowledge and information disclosed herein and in White Paper. Additionally, Buyer has conducted to its own satisfaction an independent investigation and verification of Hyperbridge Platform, HBX Tokens and shall therefore rely solely on its own examination. </span>
                                 </li><li class="c12">
                                     <span class="c6">Company expressly disclaims all express and implied warranties and representations as to the Tokens, HBX Tokens and Hyperbridge Platform. Company &#8203;does not &#8203;make &#8203;any &#8203;representations &#8203;or &#8203;warranties, &#8203;express &#8203;or &#8203;implied, &#8203;including:</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_9-2 start"
-                                     start="1">
+                            </ol><ol
+                                class="c7 lst-kix_list_9-2 start"
+                                start="1">
                                 <li class="c12">
                                     <span class="c6">any &#8203;warranties &#8203;or &#8203;representations &#8203;of &#8203;title;</span>
                                 </li><li class="c12">
@@ -594,13 +659,15 @@
                                 </li><li class="c12">
                                     <span class="c6">the suitability, reliability, availability, timeliness, and accuracy of Hyperbridge Platform, the Tokens, information, software, products, services and related graphics on &#8203;the &#8203; Hyperbridge Platform &#8203;for &#8203;any &#8203;purpose. </span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_9-0"
-                                     start="5">
+                            </ol><ol
+                                class="c7 lst-kix_list_9-0"
+                                start="5">
                                 <li class="c2">
                                     <span class="c5">LIMITATION OF LIABILITY</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_9-1 start"
-                                     start="1">
+                            </ol><ol
+                                class="c7 lst-kix_list_9-1 start"
+                                start="1">
                                 <li class="c0">
                                     <span class="c6">Company is not liable for any delay or failure to perform any obligation under the Agreement where the delay or failure results from any cause beyond Company's reasonable control.</span>
                                 </li><li class="c0">
@@ -610,8 +677,9 @@
                                 </li><li class="c0">
                                     <span class="c6">Except otherwise provided in the Agreement, Buyer will indemnify, defend, hold harmless and reimburse Company from and against any and all actions, proceedings, claims, damages, demands and actions (including, without limitation, fees and expenses of counsel), incurred by Company arising from or relating to:</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_4-0 start"
-                                     start="1">
+                            </ol><ol
+                                class="c7 lst-kix_list_4-0 start"
+                                start="1">
                                 <li class="c0">
                                     <span class="c6">Token Sale;</span>
                                 </li><li class="c0">
@@ -627,8 +695,9 @@
                                 </li><li class="c0">
                                     <span class="c6">any act or omission of Buyer that is negligent, unlawful or constitutes wilful misconduct.</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_9-1 start"
-                                     start="1">
+                            </ol><ol
+                                class="c7 lst-kix_list_9-1 start"
+                                start="1">
                                 <li class="c0">
                                     <span class="c6">Company shall not be liable for the content, veracity and accuracy of the information published on the Company’s website in the advertising section. The information in the advertising section is not an offer, promise or warranty to the Buyer from the Company.</span>
                                 </li><li class="c0">
@@ -638,13 +707,15 @@
                                 </li><li class="c0">
                                     <span class="c6">Company is not liable for risks associated with lack of information. Buyers may not be able to obtain all information it would want regarding the Company, the HBX Tokens, Hyperbridge Platform, or the HBX Token ICO on a timely basis or at all. It is possible that Buyers may not be aware on a timely basis of material adverse changes that have occurred. Information may be highly technical by nature. As a result of these difficulties, as well as other uncertainties, Buyers may not have accurate or accessible information about Hyperbridge Platform. </span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_9-0"
-                                     start="6">
+                            </ol><ol
+                                class="c7 lst-kix_list_9-0"
+                                start="6">
                                 <li class="c2">
                                     <span class="c5">Force Majeure</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_5-1 start"
-                                     start="1">
+                            </ol><ol
+                                class="c7 lst-kix_list_5-1 start"
+                                start="1">
                                 <li class="c0">
                                     <span class="c6">Buyer understands and agrees that Company shall not be liable in connection with any force majeure event, including, labour disputes or other industrial disturbances, electrical, telecommunications, hardware, software or other utility failures, software or smart contract bugs or weaknesses, earthquakes, storms, or other nature-related events, blockages, embargoes, riots, strikes, acts or orders of Government Authority, acts of terrorism or war, technological change, changes in interest rates or other monetary conditions, and, for the avoidance of doubt, changes to any blockchain-related protocol.</span>
                                 </li><li class="c0">
@@ -654,13 +725,15 @@
                                 <span class="c6" />
                             </p><p class="c28">
                                 <span class="c6" />
-                            </p><ol class="c7 lst-kix_list_9-0"
-                                    start="7">
+                            </p><ol
+                                class="c7 lst-kix_list_9-0"
+                                start="7">
                                 <li class="c2">
                                     <span class="c5">TAXES</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_8-1 start"
-                                     start="1">
+                            </ol><ol
+                                class="c7 lst-kix_list_8-1 start"
+                                start="1">
                                 <li class="c0">
                                     <span class="c6">Buyer must seek her/his own tax advice in connection with purchasing HBX Tokens, which may result in adverse tax consequences, including withholding taxes, income taxes, indirect taxes and tax reporting requirements. </span>
                                 </li><li class="c0">
@@ -668,15 +741,17 @@
                                 </li><li class="c0">
                                     <span class="c6">Company bears no liability or responsibility with respect to any tax consequences to Buyer arising from the Token Sale.</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_8-0 start"
-                                     start="8">
+                            </ol><ol
+                                class="c7 lst-kix_list_8-0 start"
+                                start="8">
                                 <li class="c12 c8">
                                     <span class="c5">DATA AND PRIVACY</span>
                                 </li>
                             </ol><p class="c18 c8">
                                 <span class="c5" />
-                            </p><ol class="c7 lst-kix_list_8-1"
-                                    start="4">
+                            </p><ol
+                                class="c7 lst-kix_list_8-1"
+                                start="4">
                                 <li class="c0">
                                     <span class="c6">Buyer shall implement reasonable and appropriate measures designed to secure access to: (i) any device associated with Buyer and utilized in connection with Buyer’s purchase of HBX Token and (ii) any other username, passwords or other login or identifying credentials. </span>
                                 </li><li class="c0">
@@ -688,25 +763,29 @@
                                 </li><li class="c0">
                                     <span class="c6">Privacy and personal data clauses are provided in the Privacy Policy, which is an annex to this Agreement.</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_8-0"
-                                     start="9">
+                            </ol><ol
+                                class="c7 lst-kix_list_8-0"
+                                start="9">
                                 <li class="c2">
                                     <span class="c5">INTELLECTUAL PROPERTY RIGHTS</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_8-1 start"
-                                     start="1">
+                            </ol><ol
+                                class="c7 lst-kix_list_8-1 start"
+                                start="1">
                                 <li class="c0">
                                     <span class="c6">Hyperbridge has valid, unrestricted and exclusive ownership of rights to use the patents, trademarks, trademark registrations, trade names, copyrights, know-how, technology and other intellectual property necessary to the conduct the Crowdsale of the HBX and his activities generally.</span>
                                 </li><li class="c0">
                                     <span class="c6">In no way shall this Agreement entitle the User or Participant for any intellectual property of Hyperbridge, including the intellectual property rights for the Website and all text, graphics, user interface, visual interface, photographs, trademarks, logos, artwork, and computer code, design, structure, selection, coordination, expression and other content connected to the Website. Arrangement of such content is owned by Hyperbridge and is protected by the Intellectual Property Rights and fair competition laws.</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_8-0"
-                                     start="10">
+                            </ol><ol
+                                class="c7 lst-kix_list_8-0"
+                                start="10">
                                 <li class="c2">
                                     <span class="c5">APPLICABLE LAW AND DISPUTE RESOLUTION</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_8-1 start"
-                                     start="1">
+                            </ol><ol
+                                class="c7 lst-kix_list_8-1 start"
+                                start="1">
                                 <li class="c0">
                                     <span class="c6">The Agreement has been drawn up in accordance with the laws of the Republic of Estonia and the application, interpretation, and termination thereof shall be subject to the laws of the Republic of Estonia. </span>
                                 </li><li class="c0">
@@ -714,20 +793,23 @@
                                 </li><li class="c0">
                                     <span class="c6">Any Disputes arising from the performance of the Agreement shall be settled through negotiations. If the Parties fail to resolve the Dispute through negotiation, the Disputes shall be settled by Harju Maakohus (Harju County Court), pursuant to the procedure provided by the law of the Republic of Estonia.</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_8-0"
-                                     start="11">
+                            </ol><ol
+                                class="c7 lst-kix_list_8-0"
+                                start="11">
                                 <li class="c2">
                                     <span class="c5">TERMINATION OF AGREEMENT</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_8-1 start"
-                                     start="1">
+                            </ol><ol
+                                class="c7 lst-kix_list_8-1 start"
+                                start="1">
                                 <li class="c0">
                                     <span class="c6">Company`s obligations to transfer Tokens to Buyer under this Agreement shall terminate upon performance of the obligations of the parties in accordance with chapters 2 and 3 of the Agreement. Company may terminate this Agreement at its sole discretion, including without limitation, by reason of change in tax, securities, corporate or other law.</span>
                                 </li><li class="c0">
                                     <span class="c6">Company may terminate the Agreement immediately without prior notice, if: &nbsp;</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_8-2 start"
-                                     start="1">
+                            </ol><ol
+                                class="c7 lst-kix_list_8-2 start"
+                                start="1">
                                 <li class="c0">
                                     <span class="c6">Buyer breaches this Agreement;</span>
                                 </li><li class="c0">
@@ -737,20 +819,23 @@
                                 </li><li class="c0">
                                     <span class="c6">in respect of Buyer, a liquidator, receiver or administrative receiver is appointed, Buyer is adjudicated as bankrupt, or declared insolvent. &nbsp;</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_11-1 start"
-                                     start="3">
+                            </ol><ol
+                                class="c7 lst-kix_list_11-1 start"
+                                start="3">
                                 <li class="c0">
                                     <span class="c6">Upon termination or expiration of this Agreement provisions related to limitation of Company's liability shall survive and apply, including, but not limited to, Articles 5 and 6 of this Agreement.</span>
                                 </li><li class="c0">
                                     <span class="c6">Upon termination of this Agreement due to any reason Buyer’s rights shall terminate (including right to use Hyperbridge Platform and all rights associated with HBX Tokens) and the Buyer is not entitled to any refund.</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_8-0"
-                                     start="12">
+                            </ol><ol
+                                class="c7 lst-kix_list_8-0"
+                                start="12">
                                 <li class="c2">
                                     <span class="c5">MISCELLANEOUS</span>
                                 </li>
-                            </ol><ol class="c7 lst-kix_list_8-1 start"
-                                     start="1">
+                            </ol><ol
+                                class="c7 lst-kix_list_8-1 start"
+                                start="1">
                                 <li class="c0">
                                     <span class="c6">All agreements, notices, disclosures and other communications that the Party provides to the other Party pursuant to this Agreement or in connection with or related to Buyer’s purchase of HBX Token, including this Agreement, may be provided by the Party in electronic form.</span>
                                 </li><li class="c0 c8">
@@ -795,11 +880,13 @@
                     </div>
 
                     <div class="col-8 offset-2">
-                        <div v-if="errors.length"
-                             class="errors">
+                        <div
+                            v-if="errors.length"
+                            class="errors">
                             <strong>Please correct the following error(s):</strong>
                             <ul>
-                                <li v-for="error in errors"
+                                <li
+                                    v-for="error in errors"
                                     :key="error">
                                     {{ error }}
                                 </li>
@@ -807,12 +894,13 @@
                         </div>
 
                         <br><br>
-                        <c-button status="success"
-                                  class="justify-content-center"
-                                  iconHide
-                                  size="xl"
-                                  :class="{'disabled': !canContinue }"
-                                  @click="proceed">
+                        <c-button
+                            status="success"
+                            class="justify-content-center"
+                            iconHide
+                            size="xl"
+                            :class="{'disabled': !canContinue }"
+                            @click="proceed">
                             Proceed to Purchase
                         </c-button>
                     </div>
@@ -821,24 +909,29 @@
             </div>
         </div>
 
-        <c-popup v-if="purchasePopup && purchasePopup.show"
-                 ref="purchasePopup"
-                 :activated="purchasePopup.show"
-                 width="800"
-                 :type="purchasePopup.type"
-                 :subTitle="purchasePopup.text"
-                 @close="closePurchasePopup">
-            <div slot="customClose"
-                 hidden />
-            <div slot="customContent"
-                 class="purchase-modal">
+        <c-popup
+            v-if="purchasePopup && purchasePopup.show"
+            ref="purchasePopup"
+            :activated="purchasePopup.show"
+            width="800"
+            :type="purchasePopup.type"
+            :subTitle="purchasePopup.text"
+            @close="closePurchasePopup">
+            <div
+                slot="customClose"
+                hidden />
+            <div
+                slot="customContent"
+                class="purchase-modal">
                 <c-tabs>
-                    <c-tab name="Confirm Purchase"
-                           :selected="true"
-                           :showFooter="true">
+                    <c-tab
+                        name="Confirm Purchase"
+                        :selected="true"
+                        :showFooter="true">
                         <div>
-                            <div v-if="!purchaseSuccessful"
-                                 class="tab-card">
+                            <div
+                                v-if="!purchaseSuccessful"
+                                class="tab-card">
                                 <div class="sending-block">
                                     <div class="clmn-1">
                                         <div class="grid">
@@ -886,16 +979,19 @@
                                             <strong>{{ purchaseAddress.slice(0, 8) }}...{{ purchaseAddress.slice(-4) }}</strong>
                                         </div>
                                     </div>
-                                    <div class="clmn-2"
-                                         style="margin-bottom: 130px;">
+                                    <div
+                                        class="clmn-2"
+                                        style="margin-bottom: 130px;">
                                         <div class="directions">
                                             <div class="right-arrow">
-                                                <div class="progress"
-                                                     style="width: 100%" />
+                                                <div
+                                                    class="progress"
+                                                    style="width: 100%" />
                                             </div>
                                             <div class="left-arrow">
-                                                <div class="progress"
-                                                     style="width: 100%" />
+                                                <div
+                                                    class="progress"
+                                                    style="width: 100%" />
                                             </div>
                                         </div>
                                     </div>
@@ -903,8 +999,9 @@
                                         <div class="grid">
                                             <div class="grid-item">
                                                 <div style="background-color: #eee">
-                                                    <c-img src="../../static/img/icons/token-icon.png"
-                                                           style="padding: 5px;" />
+                                                    <c-img
+                                                        src="../../static/img/icons/token-icon.png"
+                                                        style="padding: 5px;" />
                                                     <span class="grid-item__amount">{{ purchaseHBX }} HBX</span>
                                                 </div>
                                             </div>
@@ -952,8 +1049,9 @@
 
                                 <h3>Transaction Details</h3>
 
-                                <div v-if="purchaseError"
-                                     class="alert alert-warning">
+                                <div
+                                    v-if="purchaseError"
+                                    class="alert alert-warning">
                                     An error occurred with the purchase: {{ purchaseError }}
                                 </div>
 
@@ -961,18 +1059,21 @@
                                     <p>
                                         Purchase Amount: {{ purchaseHBX }} HBX
                                         <br>
-                                        Purchase Address: <a :href="`https://etherscan.io/address/${purchaseAddress}`"
-                                                             @click="gaStep(20)"><strong>{{ purchaseAddress }}</strong></a>
+                                        Purchase Address: <a
+                                            :href="`https://etherscan.io/address/${purchaseAddress}`"
+                                            @click="gaStep(20)"><strong>{{ purchaseAddress }}</strong></a>
                                         <br>
                                         Payment Amount: {{ purchaseETH }} ETH
                                         <br>
                                         <template v-if="tokenContractAddress">
-                                            Payment Address: <a :href="`https://etherscan.io/address/${tokenContractAddress}`"
-                                                                @click="gaStep(21)"><strong>{{ tokenContractAddress }}</strong></a>
+                                            Payment Address: <a
+                                                :href="`https://etherscan.io/address/${tokenContractAddress}`"
+                                                @click="gaStep(21)"><strong>{{ tokenContractAddress }}</strong></a>
                                         </template>
                                         <br>
-                                        <template v-if="!tokenContractAddress"
-                                                  class="alert alert-warning">
+                                        <template
+                                            v-if="!tokenContractAddress"
+                                            class="alert alert-warning">
                                             No contract address. Check your <c-button href="/settings/protocol">
                                                 Protocol Settings
                                             </c-button>
@@ -982,23 +1083,26 @@
 
                                 <br><br>
                                 <div style="text-align: center">
-                                    <c-button status="info"
-                                              class="justify-content-center"
-                                              iconHide
-                                              size="xl"
-                                              @click="confirmPurchase">
+                                    <c-button
+                                        status="info"
+                                        class="justify-content-center"
+                                        iconHide
+                                        size="xl"
+                                        @click="confirmPurchase">
                                         Confirm Purchase
                                     </c-button>
                                 </div>
                                 <br>
                             </div>
-                            <div v-if="purchaseSuccessful"
-                                 class="tab-card">
+                            <div
+                                v-if="purchaseSuccessful"
+                                class="tab-card">
                                 <div class="row">
                                     <div class="col-12 mb-4 text-center">
                                         <h2>
-                                            <img src="/img/success.png"
-                                                 style="max-width: 100px;">
+                                            <img
+                                                src="/img/success.png"
+                                                style="max-width: 100px;">
                                         </h2>
                                         <p>
                                             Transaction <a :href="`http://etherscan.io/tx/${transactionHash}`">{{ transactionHash }}</a>
@@ -1013,8 +1117,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div slot="footer"
-                             class="d-flex align-items-center justify-content-end">
+                        <div
+                            slot="footer"
+                            class="d-flex align-items-center justify-content-end">
                             <div>
                                 <c-button @click="closePurchasePopup">
                                     Cancel

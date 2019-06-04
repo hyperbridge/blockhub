@@ -1,7 +1,9 @@
 <template>
-    <ul v-if="links.length"
+    <ul
+        v-if="links.length"
         class="breadcrumb">
-        <li v-for="(link, index) in links"
+        <li
+            v-for="(link, index) in links"
             :key="index"
             class="breadcrumb-item"
             :class="{ 'active': index == links.length-1 }">

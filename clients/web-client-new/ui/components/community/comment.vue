@@ -1,17 +1,21 @@
 <template>
     <div>
-        <div class="community-item__comment"
-             :class="{ 'is-reply': reply }">
-            <c-button-arrows v-if="comment.rate"
-                             size="xl"
-                             colored>
-                <span :class="{
-                    'up': comment.rate > 400,
-                    'down': comment.rate < 0
-                }">{{ comment.rate }}</span>
+        <div
+            class="community-item__comment"
+            :class="{ 'is-reply': reply }">
+            <c-button-arrows
+                v-if="comment.rate"
+                size="xl"
+                colored>
+                <span
+                    :class="{
+                        'up': comment.rate > 400,
+                        'down': comment.rate < 0
+                    }">{{ comment.rate }}</span>
             </c-button-arrows>
-            <div class="comment-container"
-                 :class="{ 'w-100' : !comment.rate }">
+            <div
+                class="comment-container"
+                :class="{ 'w-100' : !comment.rate }">
                 <c-dropdown-menu
                     dropPosition="right"
                     style="right: 5px; top: 10px;" />

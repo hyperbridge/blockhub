@@ -3,9 +3,10 @@
         <div class="video-item__wrapper">
             <div class="video-item__img">
                 <c-img :src="poster" />
-                <a href="#"
-                   class="video-item__run-btn"
-                   @click="toggleModal">
+                <a
+                    href="#"
+                    class="video-item__run-btn"
+                    @click="toggleModal">
                     <i class="fas fa-play-circle" />
                 </a>
             </div>
@@ -24,14 +25,16 @@
                 </div>
             </div>
         </div>
-        <c-video-popup :video="video"
-                       :activated="showModal"
-                       @close="toggleModal">
+        <c-video-popup
+            :video="video"
+            :activated="showModal"
+            @close="toggleModal">
             <template v-for="comment in comments">
                 <div class="mb-3">
-                    <c-author :name="comment.author.name"
-                              :img="comment.author.img"
-                              class="mb-1" />
+                    <c-author
+                        :name="comment.author.name"
+                        :img="comment.author.img"
+                        class="mb-1" />
                     {{ comment.text }}
                 </div>
             </template>

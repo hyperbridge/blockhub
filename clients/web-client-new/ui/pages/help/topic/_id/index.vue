@@ -1,23 +1,26 @@
 <template>
     <c-layout navigationKey="help">
-        <div v-if="!topic"
-             class="row margin-bottom-30">
+        <div
+            v-if="!topic"
+            class="row margin-bottom-30">
             <div class="col-12">
                 <c-card class="text-center">
                     <p>Oh no! That topic was not found!</p>
                 </c-card>
             </div>
         </div>
-        <div v-if="topic"
-             class="row">
+        <div
+            v-if="topic"
+            class="row">
             <div class="col-12">
                 <h3 class="topic-ttl margin-bottom-30">
                     <i :class="['fas fa-' + topic.icon ]" />
                     {{ topic.label }}
                 </h3>
 
-                <c-block v-if="topic.subTopics"
-                         class="margin-bottom-30 padding-top-5 padding-bottom-5">
+                <c-block
+                    v-if="topic.subTopics"
+                    class="margin-bottom-30 padding-top-5 padding-bottom-5">
                     <div class="topics-list">
                         <c-topic-item
                             v-for="(topic, index) in topic.subTopics"
@@ -31,11 +34,13 @@
                 </c-block>
 
                 <c-block class="margin-bottom-30 padding-bottom-5">
-                    <div v-if="showByTopic(topic.id).length"
-                         class="article-list">
-                        <c-article-item v-for="(article, index) in showByTopic(topic.id)"
-                                        :key="index"
-                                        :to="`/help/${topic.id}/article/${article.slug}`">
+                    <div
+                        v-if="showByTopic(topic.id).length"
+                        class="article-list">
+                        <c-article-item
+                            v-for="(article, index) in showByTopic(topic.id)"
+                            :key="index"
+                            :to="`/help/${topic.id}/article/${article.slug}`">
                             {{ article.title }}
                         </c-article-item>
                     </div>
@@ -50,10 +55,11 @@
                         Community
                     </h4>
                     <p>Engage with a community of passionate experts to get the answers you need</p>
-                    <c-button iconHide
-                              class="width-auto margin-top-10"
-                              href="https://github.com/hyperbridge/blockhub-desktop-client"
-                              target="_blank">
+                    <c-button
+                        iconHide
+                        class="width-auto margin-top-10"
+                        href="https://github.com/hyperbridge/blockhub-desktop-client"
+                        target="_blank">
                         Visit GitHub
                     </c-button>
                 </c-card>
@@ -64,10 +70,11 @@
                         BlockHub Support
                     </h4>
                     <p>Create a support ticket and our support experts will get back to you</p>
-                    <c-button href="https://hyperbridge.zendesk.com/"
-                              status="info"
-                              iconHide
-                              class="width-auto margin-top-10">
+                    <c-button
+                        href="https://hyperbridge.zendesk.com/"
+                        status="info"
+                        iconHide
+                        class="width-auto margin-top-10">
                         Create a ticket
                     </c-button>
                 </c-card>

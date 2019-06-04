@@ -1,28 +1,35 @@
 <template>
-    <transition name="fade"
-                :duration="100">
-        <div v-if="activated"
-             class="c-basic-popup"
-             @click.self.prevent="$emit('close')">
-            <div class="c-basic-popup__item"
-                 :style="{ 'width': + width + 'px'}">
+    <transition
+        name="fade"
+        :duration="100">
+        <div
+            v-if="activated"
+            class="c-basic-popup"
+            @click.self.prevent="$emit('close')">
+            <div
+                class="c-basic-popup__item"
+                :style="{ 'width': + width + 'px'}">
                 <div class="position-relative">
                     <div class="c-basic-popup__content">
-                        <div class="c-basic-popup__close"
-                             @click="$emit('close')">
+                        <div
+                            class="c-basic-popup__close"
+                            @click="$emit('close')">
                             <i class="fas fa-times" />
                         </div>
-                        <div v-if="$slots.header"
-                             class="c-basic-popup__header">
+                        <div
+                            v-if="$slots.header"
+                            class="c-basic-popup__header">
                             <slot name="header" />
                         </div>
-                        <div v-if="$slots.body"
-                             class="c-basic-popup__body"
-                             :class="{'margin-top-20' : $slots.header, 'margin-bottom-20' : $slots.footer}">
+                        <div
+                            v-if="$slots.body"
+                            class="c-basic-popup__body"
+                            :class="{'margin-top-20' : $slots.header, 'margin-bottom-20' : $slots.footer}">
                             <slot name="body" />
                         </div>
-                        <div v-if="$slots.footer"
-                             class="c-basic-popup__footer">
+                        <div
+                            v-if="$slots.footer"
+                            class="c-basic-popup__footer">
                             <slot name="footer" />
                         </div>
                     </div>

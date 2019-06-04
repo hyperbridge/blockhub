@@ -1,27 +1,32 @@
 <template>
     <div>
-        <div v-if="loading"
-             class="col-12 text-center">
+        <div
+            v-if="loading"
+            class="col-12 text-center">
             <c-spinner />
         </div>
         <template v-else>
-            <div v-if="!visibleItems.length"
-                 class="col-12 text-center">
+            <div
+                v-if="!visibleItems.length"
+                class="col-12 text-center">
                 <h3>No results</h3>
             </div>
             <slot :items="visibleItems" />
-            <div v-show="visibleItems.length"
-                 class="content-navigation-wrapper">
+            <div
+                v-show="visibleItems.length"
+                class="content-navigation-wrapper">
                 <c-pagination
                     v-if="paginationMode"
                     v-bind="$attrs"
                     :activePage="activePage + 1"
                     :pages="pagination.pages"
                     @pageChange="activePage = $event - 1">
-                    <slot slot="left-content"
-                          name="left-content" />
-                    <slot slot="right-content"
-                          name="right-content" />
+                    <slot
+                        slot="left-content"
+                        name="left-content" />
+                    <slot
+                        slot="right-content"
+                        name="right-content" />
                 </c-pagination>
                 <c-load-more
                     v-else

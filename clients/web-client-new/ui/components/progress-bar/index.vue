@@ -1,6 +1,7 @@
 <template>
-    <div class="progress"
-         :class="['progress-bar-' + direction ]">
+    <div
+        class="progress"
+        :class="['progress-bar-' + direction ]">
         <div
             class="progress-bar"
             role="progressbar"

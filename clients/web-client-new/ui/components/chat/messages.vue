@@ -1,10 +1,11 @@
 <template>
     <div class="flex flex-column col col-9">
         <main class="chat flex flex-column flex-1 clear">
-            <c-single-message v-for="message in messages"
-                              v-cloak
-                              :key="message._id"
-                              :message="message" />
+            <c-single-message
+                v-for="message in messages"
+                v-cloak
+                :key="message._id"
+                :message="message" />
         </main>
         <c-compose-message :createMessage="createMessage" />
     </div>

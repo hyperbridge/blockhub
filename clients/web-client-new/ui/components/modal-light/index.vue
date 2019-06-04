@@ -1,6 +1,7 @@
 <template>
-    <div class="modal-light"
-         @click.self="$emit('close')">
+    <div
+        class="modal-light"
+        @click.self="$emit('close')">
         <button
             class="modal-light__btn"
             @click="$emit('close')">

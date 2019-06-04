@@ -1,15 +1,17 @@
 <template>
     <div class="row">
-        <div v-if="!project.milestones"
-             class="col-12">
+        <div
+            v-if="!project.milestones"
+            class="col-12">
             <c-block>
                 <h3>
                     There is no milestones defined.
                 </h3>
             </c-block>
         </div>
-        <div v-if="project.milestones"
-             class="col-12">
+        <div
+            v-if="project.milestones"
+            class="col-12">
             <div class="milestones-header margin-bottom-20">
                 <div class="milestones-header__info">
                     <div class="h3 text-white font-weight-bold mb-0">
@@ -45,15 +47,18 @@
                 </div>
             </div>
             <div class="timeline-block position-relative">
-                <div class="progress main_timeline"
-                     style="height: 15px;">
+                <div
+                    class="progress main_timeline"
+                    style="height: 15px;">
                     <c-progress-bar :percentages="project.milestones.overallProgress" />
                 </div>
-                <div v-if="milestones"
-                     class="period-container">
-                    <div v-for="(milestone, index) in milestones"
-                         :key="index"
-                         class="period">
+                <div
+                    v-if="milestones"
+                    class="period-container">
+                    <div
+                        v-for="(milestone, index) in milestones"
+                        :key="index"
+                        class="period">
                         <div class="number">
                             {{ milestone.stepNumber }}
                         </div>

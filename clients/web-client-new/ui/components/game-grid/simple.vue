@@ -1,29 +1,35 @@
 <template>
     <div class="product-grid__container">
-        <div v-for="(item, index) in items"
-             v-if="items.length"
-             :key="index"
-             class="product-grid__item-container"
-             :style="{ width: 'calc(100% / ' + itemInRow + ')'}">
+        <div
+            v-for="(item, index) in items"
+            v-if="items.length"
+            :key="index"
+            class="product-grid__item-container"
+            :style="{ width: 'calc(100% / ' + itemInRow + ')'}">
             <div class="product-grid__item">
                 <div v-if="$slots.block">
                     <slot name="block" />
                 </div>
-                <div v-else
-                     class="card-body padding-0">
-                    <c-button status="none"
-                              :to="`/product/${item.id}`">
-                        <c-img class="card-img-top"
-                               :src="item.meta.images.mediumTile" />
+                <div
+                    v-else
+                    class="card-body padding-0">
+                    <c-button
+                        status="none"
+                        :to="`/product/${item.id}`">
+                        <c-img
+                            class="card-img-top"
+                            :src="item.meta.images.mediumTile" />
                     </c-button>
                     <h4>
-                        <c-button status="none"
-                                  :to="`/product/${item.id}`">
+                        <c-button
+                            status="none"
+                            :to="`/product/${item.id}`">
                             {{ item.name }}
                         </c-button>
                     </h4>
-                    <p class="card-text"
-                       hidden>
+                    <p
+                        class="card-text"
+                        hidden>
                         {{ item.shortDescription }}
                     </p>
                     <c-tags :tags="item.tags.map(t => t.value)" />
@@ -31,8 +37,9 @@
             </div>
         </div>
         <p v-if="!items.length">
-            Nothing could be found. Want to <c-button status="plain"
-                                                      @click="$store.commit('application/activateModal', 'coming-soon')">
+            Nothing could be found. Want to <c-button
+                status="plain"
+                @click="$store.commit('application/activateModal', 'coming-soon')">
                 Check for updates
             </c-button>?
         </p>

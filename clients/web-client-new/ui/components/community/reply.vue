@@ -1,15 +1,17 @@
 <template>
     <div>
         <transition name="slide-top">
-            <div v-if="replyMode"
-                 class="community-item__post-reply">
+            <div
+                v-if="replyMode"
+                class="community-item__post-reply">
                 <h4 class="mt-4 mb-2 text-left">
                     Your Reply:
                 </h4>
                 <div class="form-group">
-                    <textarea v-focus
-                              class="form-control"
-                              rows="6" />
+                    <textarea
+                        v-focus
+                        class="form-control"
+                        rows="6" />
                 </div>
             </div>
         </transition>
@@ -17,21 +19,24 @@
 
         <div class="community-item__action text-right">
             <template v-if="replyMode">
-                <a href="#"
-                   class="btn btn-sm btn-danger"
-                   @click.prevent="cancelReply">
+                <a
+                    href="#"
+                    class="btn btn-sm btn-danger"
+                    @click.prevent="cancelReply">
                     Cancel
                 </a>
-                <a href="#"
-                   class="btn btn-sm btn-info"
-                   @click.prevent="changeReplyMode">
+                <a
+                    href="#"
+                    class="btn btn-sm btn-info"
+                    @click.prevent="changeReplyMode">
                     Submit
                 </a>
             </template>
             <template v-else>
-                <a href="#"
-                   class="btn btn-sm btn-info"
-                   @click.prevent="changeReplyMode">
+                <a
+                    href="#"
+                    class="btn btn-sm btn-info"
+                    @click.prevent="changeReplyMode">
                     Reply
                 </a>
             </template>

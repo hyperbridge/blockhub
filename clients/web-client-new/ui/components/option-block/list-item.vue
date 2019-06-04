@@ -1,9 +1,11 @@
 <template>
-    <div class="option-block__list-item"
-         :class="{ 'selected' : selected }"
-         @click="$emit('select')">
-        <div v-if="image"
-             class="list-item__image">
+    <div
+        class="option-block__list-item"
+        :class="{ 'selected' : selected }"
+        @click="$emit('select')">
+        <div
+            v-if="image"
+            class="list-item__image">
             <img :src="image">
         </div>
         <div class="list-item__info w-100">

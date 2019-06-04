@@ -1,11 +1,13 @@
 <template>
     <c-layout navigationKey="funding">
         <div class="row">
-            <div v-if="!$store.state.application.settings.client.hide_crowdfund_game_notice"
-                 class="crowdfund-notice col-12 col-md-6 offset-md-3"
-                 style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
-                <c-button class="btn-close"
-                          @click="$store.commit('application/updateClientSettings', { key: 'hide_crowdfund_game_notice', value: true })">
+            <div
+                v-if="!$store.state.application.settings.client.hide_crowdfund_game_notice"
+                class="crowdfund-notice col-12 col-md-6 offset-md-3"
+                style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
+                <c-button
+                    class="btn-close"
+                    @click="$store.commit('application/updateClientSettings', { key: 'hide_crowdfund_game_notice', value: true })">
                     <i class="fas fa-times" />
                 </c-button>
 
@@ -16,14 +18,16 @@
                 </div>
                 <br>
                 <p v-if="$store.state.application.developerMode">
-                    <c-button class="c-button--lg outline-white"
-                              to="/business/project/new">
+                    <c-button
+                        class="c-button--lg outline-white"
+                        to="/business/project/new">
                         Get Started
                     </c-button>
                 </p>
                 <p v-if="!$store.state.application.developerMode">
-                    <c-button class="c-button--lg outline-white"
-                              to="/developer/apply">
+                    <c-button
+                        class="c-button--lg outline-white"
+                        to="/developer/apply">
                         Get Started
                     </c-button>
                 </p>
@@ -31,31 +35,34 @@
             </div>
         </div>
 
-        <c-block :noGutter="true"
-                 :bgGradient="true"
-                 :onlyContentBg="true">
+        <c-block
+            :noGutter="true"
+            :bgGradient="true"
+            :onlyContentBg="true">
             <c-heading-bar
                 slot="title"
                 class="mb-0"
                 name="Browse All Projects" />
             <div class="row">
-                <c-loading :enabled="loading"
-                           size="lg" />
+                <c-loading
+                    :enabled="loading"
+                    size="lg" />
                 <p v-if="!loading && !projects.length">
-                    Nothing could be found. Want to <c-button status="plain"
-                                                              @click="$store.commit('application/activateModal', 'coming-soon')">
+                    Nothing could be found. Want to <c-button
+                        status="plain"
+                        @click="$store.commit('application/activateModal', 'coming-soon')">
                         Check for updates
                     </c-button>?
                 </p>
                 <c-project-card
-                    class="p-2 col-3"
-                    :id="project.id"
-                    :description="project.description"
                     v-for="(project, index) in projects"
-                    :image="project.meta && project.meta.images.mediumTile"
+                    :id="project.id"
                     :key="index"
-                    :funds="project.meta && project.meta.funds"
+                    class="p-2 col-3"
                     v-if="projects.length"
+                    :description="project.description"
+                    :image="project.meta && project.meta.images.mediumTile"
+                    :funds="project.meta && project.meta.funds"
                     :parentName="project.product && project.product.name"
                     :parentDeveloper="project.product && project.product.owner"
                     :parentImage="project.product && project.product.meta && project.product.meta.images.mediumTile" />

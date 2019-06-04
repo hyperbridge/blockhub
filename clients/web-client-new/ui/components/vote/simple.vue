@@ -1,12 +1,14 @@
 <template>
     <div class="c-simple-vote">
-        <i class="fa fa-chevron-up"
-           :class="{ disabled: upvoted }"
-           @click="upvote" />
+        <i
+            class="fa fa-chevron-up"
+            :class="{ disabled: upvoted }"
+            @click="upvote" />
         <span class="c-simple-vote__value">{{ value }}</span>
-        <i class="fa fa-chevron-down"
-           :class="{ disabled: downvoted }"
-           @click="downvote" />
+        <i
+            class="fa fa-chevron-down"
+            :class="{ disabled: downvoted }"
+            @click="downvote" />
     </div>
 </template>
 

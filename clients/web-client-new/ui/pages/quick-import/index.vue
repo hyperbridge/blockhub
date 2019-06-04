@@ -1,18 +1,21 @@
 <template>
     <c-layout navigationKey="store">
         <div class="row">
-            <div v-if="!quickImport && !integrateLocally"
-                 class="col-12 col-lg-6">
-                <c-block title="Quick import"
-                         bgGradient
-                         noGutter
-                         onlyContentBg>
+            <div
+                v-if="!quickImport && !integrateLocally"
+                class="col-12 col-lg-6">
+                <c-block
+                    title="Quick import"
+                    bgGradient
+                    noGutter
+                    onlyContentBg>
                     <div class="text-center pb-4">
                         <p>Sed posuere varius ex id ullamcorper. Donec et aliquet mi, in tincidunt massa. Maecenas ornare, elit nec condimentum semper</p>
-                        <c-button status="second-info"
-                                  size="md"
-                                  class="mt-3 px-5"
-                                  @click=" quickImport = true">
+                        <c-button
+                            status="second-info"
+                            size="md"
+                            class="mt-3 px-5"
+                            @click=" quickImport = true">
                             Continue
                         </c-button>
                         <small class="text-muted d-block text-center mt-2">
@@ -21,18 +24,21 @@
                     </div>
                 </c-block>
             </div>
-            <div v-if="!quickImport && !integrateLocally"
-                 class="col-12 col-lg-6">
-                <c-block title="Integrate locally"
-                         bgGradient
-                         noGutter
-                         onlyContentBg>
+            <div
+                v-if="!quickImport && !integrateLocally"
+                class="col-12 col-lg-6">
+                <c-block
+                    title="Integrate locally"
+                    bgGradient
+                    noGutter
+                    onlyContentBg>
                     <div class="text-center pb-4">
                         <p>Sed posuere varius ex id ullamcorper. Donec et aliquet mi, in tincidunt massa. Maecenas ornare, elit nec condimentum semper</p>
-                        <c-button status="second-info"
-                                  size="md"
-                                  class="mt-3 px-5"
-                                  @click=" integrateLocally = true">
+                        <c-button
+                            status="second-info"
+                            size="md"
+                            class="mt-3 px-5"
+                            @click=" integrateLocally = true">
                             View Guide
                         </c-button>
                         <small class="text-success d-block text-center mt-2">
@@ -43,52 +49,61 @@
             </div>
 
             <!--Second step on Quick import-->
-            <div v-if="signedIn && quickImport"
-                 class="col-12">
-                <c-block title="Quick import"
-                         bgGradient
-                         noGutter
-                         onlyContentBg>
+            <div
+                v-if="signedIn && quickImport"
+                class="col-12">
+                <c-block
+                    title="Quick import"
+                    bgGradient
+                    noGutter
+                    onlyContentBg>
                     <p class="mb-2">
                         Automatically analyze from code host for easy initial result.
                     </p>
-                    <c-button status="plain"
-                              icon="arrow-left"
-                              class="mb-3"
-                              @click=" quickImport=false ">
+                    <c-button
+                        status="plain"
+                        icon="arrow-left"
+                        class="mb-3"
+                        @click=" quickImport=false ">
                         Go Back
                     </c-button>
                     <div class="row">
-                        <div v-for="service in services"
-                             :key="service.name"
-                             class="col-12 col-md-6 col-lg-4 mb-4">
-                            <c-icon-block :icon="service.icon"
-                                          iconType="fab"
-                                          size="md"
-                                          class="icon-block-border w-100">
+                        <div
+                            v-for="service in services"
+                            :key="service.name"
+                            class="col-12 col-md-6 col-lg-4 mb-4">
+                            <c-icon-block
+                                :icon="service.icon"
+                                iconType="fab"
+                                size="md"
+                                class="icon-block-border w-100">
                                 <div class="h4 p-0">
                                     {{ service.name }}
                                 </div>
                             </c-icon-block>
                         </div>
-                        <div class="col-12 mb-4"
-                             hidden>
-                            <div id="drag-zone"
-                                 class="file-drag-zone"
-                                 @drop="dropHandler(event)"
-                                 @dragover="dragOverHandler(event)">
+                        <div
+                            class="col-12 mb-4"
+                            hidden>
+                            <div
+                                id="drag-zone"
+                                class="file-drag-zone"
+                                @drop="dropHandler(event)"
+                                @dragover="dragOverHandler(event)">
                                 Drag zone
                             </div>
                         </div>
                     </div>
                 </c-block>
             </div>
-            <div v-if="!signedIn && quickImport"
-                 class="col-12">
+            <div
+                v-if="!signedIn && quickImport"
+                class="col-12">
                 <div class="h6">
                     You are not signed in. Please
-                    <c-button status="plain"
-                              @click="$store.commit('application/activateModal', 'login')">
+                    <c-button
+                        status="plain"
+                        @click="$store.commit('application/activateModal', 'login')">
                         Sign In
                     </c-button>
                     to continue.

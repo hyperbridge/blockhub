@@ -1,31 +1,33 @@
 <template>
-    <c-basic-popup :activated="activated"
-                   @close="activated = false">
+    <c-basic-popup
+        :activated="activated"
+        @close="activated = false">
         <template slot="body">
             <div class="c-grid-container">
                 <div class="c-grid__wrapper">
                     <div class="c-grid__top position-relative">
                         <div class="c-grid">
-                            <c-icon v-for="(item, index) in items"
-                                    :key="index"
-                                    :color="item"
-                                    :index="index"
-                                    :withButton="true"
-                                    :href="item.href"
-                                    :to="item.to"
-                                    :image="item.image"
-                                    :text="item.text"
-                                    :eventKey="item.eventKey"
-                                    :eventValue="item.eventValue"
-                                    :textColor="item.textColor"
-                                    :icon="item.icon"
-                                    :unread="item.unread"
-                                    :removable="item.removable"
-                                    :percent="item.percent"
-                                    :active="item.active"
-                                    class="margin-bottom-10 border-none"
-                                    style="display: inline-block; margin-right: 10px;"
-                                    @remove="remove()" />
+                            <c-icon
+                                v-for="(item, index) in items"
+                                :key="index"
+                                :color="item"
+                                :index="index"
+                                :withButton="true"
+                                :href="item.href"
+                                :to="item.to"
+                                :image="item.image"
+                                :text="item.text"
+                                :eventKey="item.eventKey"
+                                :eventValue="item.eventValue"
+                                :textColor="item.textColor"
+                                :icon="item.icon"
+                                :unread="item.unread"
+                                :removable="item.removable"
+                                :percent="item.percent"
+                                :active="item.active"
+                                class="margin-bottom-10 border-none"
+                                style="display: inline-block; margin-right: 10px;"
+                                @remove="remove()" />
                         </div>
                     </div>
                 </div>

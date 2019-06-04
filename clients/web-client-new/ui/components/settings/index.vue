@@ -1,22 +1,24 @@
 <template>
     <div class="settings__wrapper">
         <div class="settings-nav">
-            <div v-for="item in navList"
-                 v-if="item.show"
-                 :class="{ 'current-block' : item.block_id == currentBlock }"
-                 @click="setBlock(item.block_id)">
+            <div
+                v-for="item in navList"
+                v-if="item.show"
+                :class="{ 'current-block' : item.block_id == currentBlock }"
+                @click="setBlock(item.block_id)">
                 {{ item.name }}
             </div>
         </div>
         <div class="settings__block-container">
             <!--<transition-group name="fade">-->
-            <c-block v-if=" currentBlock == 'client' "
-                     key="block_1"
-                     class="margin-bottom-30"
-                     title="Client Settings"
-                     :noGutter="true"
-                     :onlyContentBg="true"
-                     :bgGradient="true">
+            <c-block
+                v-if=" currentBlock == 'client' "
+                key="block_1"
+                class="margin-bottom-30"
+                title="Client Settings"
+                :noGutter="true"
+                :onlyContentBg="true"
+                :bgGradient="true">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
@@ -67,13 +69,14 @@
                     </div>
                 </div>
             </c-block>
-            <c-block v-if=" currentBlock == 'sound' "
-                     key="block_2"
-                     class="margin-bottom-30"
-                     title="Sound Settings"
-                     :noGutter="true"
-                     :onlyContentBg="true"
-                     :bgGradient="true">
+            <c-block
+                v-if=" currentBlock == 'sound' "
+                key="block_2"
+                class="margin-bottom-30"
+                title="Sound Settings"
+                :noGutter="true"
+                :onlyContentBg="true"
+                :bgGradient="true">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
@@ -99,14 +102,15 @@
                     </div>
                 </div>
             </c-block>
-            <c-block v-if=" currentBlock == 'decentralization' "
-                     key="block_3"
-                     v-decentralized-mode
-                     class="margin-bottom-30"
-                     title="Decentralization Settings"
-                     :noGutter="true"
-                     :onlyContentBg="true"
-                     :bgGradient="true">
+            <c-block
+                v-if=" currentBlock == 'decentralization' "
+                key="block_3"
+                v-decentralized-mode
+                class="margin-bottom-30"
+                title="Decentralization Settings"
+                :noGutter="true"
+                :onlyContentBg="true"
+                :bgGradient="true">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
@@ -132,13 +136,14 @@
                     </div>
                 </div>
             </c-block>
-            <c-block v-if=" currentBlock == 'performance' "
-                     key="block_4"
-                     class="margin-bottom-30"
-                     title="Performance Settings"
-                     :noGutter="true"
-                     :onlyContentBg="true"
-                     :bgGradient="true">
+            <c-block
+                v-if=" currentBlock == 'performance' "
+                key="block_4"
+                class="margin-bottom-30"
+                title="Performance Settings"
+                :noGutter="true"
+                :onlyContentBg="true"
+                :bgGradient="true">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
@@ -167,13 +172,14 @@
                         class="col-12 d-flex justify-content-between align-items-center" />
                 </div>
             </c-block>
-            <c-block v-if=" currentBlock == 'advanced' "
-                     key="block_5"
-                     class="margin-bottom-30"
-                     title="Advanced"
-                     :noGutter="true"
-                     :onlyContentBg="true"
-                     :bgGradient="true">
+            <c-block
+                v-if=" currentBlock == 'advanced' "
+                key="block_5"
+                class="margin-bottom-30"
+                title="Advanced"
+                :noGutter="true"
+                :onlyContentBg="true"
+                :bgGradient="true">
                 <div class="row">
                     <div class="col-12 d-flex flex-column">
                         <div class="w-100">
@@ -181,21 +187,23 @@
                             <br><strong>Warning:</strong> Only use these if you know what you're doing.
                         </div>
                         <div class="w-100 mt-3">
-                            <c-button status="warning"
-                                      @click="clearDatabase">
+                            <c-button
+                                status="warning"
+                                @click="clearDatabase">
                                 DELETE DATABASE
                             </c-button>
                         </div>
                     </div>
                 </div>
             </c-block>
-            <c-block v-if=" currentBlock == 'game-activity' "
-                     key="block_6"
-                     class="margin-bottom-30"
-                     title="Game Activity"
-                     :noGutter="true"
-                     :onlyContentBg="true"
-                     :bgGradient="true">
+            <c-block
+                v-if=" currentBlock == 'game-activity' "
+                key="block_6"
+                class="margin-bottom-30"
+                title="Game Activity"
+                :noGutter="true"
+                :onlyContentBg="true"
+                :bgGradient="true">
                 <c-inline-ntf type="warning">
                     <div class="h4 font-weight-bold p-0 m-0">
                         No game activity!
@@ -213,13 +221,14 @@
                     <c-switch label="Display currently running games as a status message" />
                 </div>
             </c-block>
-            <c-block v-if=" currentBlock == 'added-games' "
-                     key="block_7"
-                     class="margin-bottom-30"
-                     title="Added games"
-                     :noGutter="true"
-                     :onlyContentBg="true"
-                     :bgGradient="true">
+            <c-block
+                v-if=" currentBlock == 'added-games' "
+                key="block_7"
+                class="margin-bottom-30"
+                title="Added games"
+                :noGutter="true"
+                :onlyContentBg="true"
+                :bgGradient="true">
                 <div class="games-list">
                     <div class="games-list__item">
                         <div class="icon">
@@ -248,22 +257,25 @@
                     No added games yet.
                 </div>
             </c-block>
-            <c-block v-if=" currentBlock == 'language' "
-                     key="block_8"
-                     class="margin-bottom-30"
-                     title="Language Preferences"
-                     :noGutter="true"
-                     :onlyContentBg="true"
-                     :bgGradient="true">
+            <c-block
+                v-if=" currentBlock == 'language' "
+                key="block_8"
+                class="margin-bottom-30"
+                title="Language Preferences"
+                :noGutter="true"
+                :onlyContentBg="true"
+                :bgGradient="true">
                 <h3>Primary language</h3>
                 <p>
                     When possible, display content in this language:
                 </p>
-                <select class="form-control"
-                        style="width: 300px">
-                    <option v-for="(lang, index) in languages"
-                            :id="['select_' + lang.name.toLowerCase() ]"
-                            :key="index">
+                <select
+                    class="form-control"
+                    style="width: 300px">
+                    <option
+                        v-for="(lang, index) in languages"
+                        :id="['select_' + lang.name.toLowerCase() ]"
+                        :key="index">
                         {{ lang.nativeName }}
                     </option>
                 </select>
@@ -275,16 +287,18 @@
                     Additionally, show me content only available on this languages:
                 </p>
                 <c-checkbox-group>
-                    <c-checkbox v-for="(lang, index) in languages"
-                                :id="lang.name.toLowerCase()"
-                                :key="index"
-                                class="lang-checkbox">
+                    <c-checkbox
+                        v-for="(lang, index) in languages"
+                        :id="lang.name.toLowerCase()"
+                        :key="index"
+                        class="lang-checkbox">
                         {{ lang.nativeName }}
                     </c-checkbox>
                 </c-checkbox-group>
                 <div class="text-right">
-                    <c-button status="success"
-                              class="margin-top-30">
+                    <c-button
+                        status="success"
+                        class="margin-top-30">
                         Save
                     </c-button>
                 </div>

@@ -1,9 +1,11 @@
 <template>
-    <div class="c-range-slider"
-         :class="sClass">
+    <div
+        class="c-range-slider"
+        :class="sClass">
         <label v-if="label">{{ label }}</label>
-        <p v-if="description"
-           class="subtitle">
+        <p
+            v-if="description"
+            class="subtitle">
             {{ description }}
         </p>
         <input

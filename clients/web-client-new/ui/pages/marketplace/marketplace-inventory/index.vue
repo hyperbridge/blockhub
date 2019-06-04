@@ -7,10 +7,12 @@
                     <h2>Inventory</h2>
                     <nav class="inventory__menu-container">
                         <ul class="inventory__menu reset-list">
-                            <li v-for="(link, index) in links"
+                            <li
+                                v-for="(link, index) in links"
                                 :key="index">
-                                <router-link :to="link.url"
-                                             class="menu__link">
+                                <router-link
+                                    :to="link.url"
+                                    class="menu__link">
                                     {{ link.title }}
                                 </router-link>
                             </li>
@@ -26,7 +28,6 @@
 <script>
 export default {
     components: {
-        'c-block': () => import('~/components/block').then(m => m.default || m),
         'c-asset-comparison': () => import('~/components/asset-comparison').then(m => m.default || m),
         'c-assets-grid-inventory': () => import('~/components/assets-grid-inventory').then(m => m.default || m)
     },

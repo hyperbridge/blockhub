@@ -1,12 +1,15 @@
 <template>
-    <c-block title="Rating"
-             :noGutter="true"
-             :bgGradient="true"
-             :onlyContentBg="true">
-        <div v-if="items.length > 0"
-             class="w-100">
+    <c-block
+        title="Rating"
+        :noGutter="true"
+        :bgGradient="true"
+        :onlyContentBg="true">
+        <div
+            v-if="items.length > 0"
+            class="w-100">
             <ul class="rating-block__list">
-                <li v-for="(item, index) in items"
+                <li
+                    v-for="(item, index) in items"
                     :key="index">
                     <div class="rating-block__info">
                         <span class="rating-block__name">{{ item.name }}</span>
@@ -17,22 +20,25 @@
                         class="rating-block__stars" />
                 </li>
             </ul>
-            <c-button v-if="fullReviewsPath"
-                      status="outline-white"
-                      :to="fullReviewsPath">
+            <c-button
+                v-if="fullReviewsPath"
+                status="outline-white"
+                :to="fullReviewsPath">
                 See Full Reviews
             </c-button>
-            <c-button v-if="rateGamePath"
-                      status="outline-white"
-                      :to="rateGamePath">
+            <c-button
+                v-if="rateGamePath"
+                status="outline-white"
+                :to="rateGamePath">
                 Rate this game
             </c-button>
         </div>
         <div v-else>
             <h4>No reviews yet.</h4>
-            <c-button tag="button"
-                      status="outline-white"
-                      @click="$emit('goto')">
+            <c-button
+                tag="button"
+                status="outline-white"
+                @click="$emit('goto')">
                 Be the first reviewer
             </c-button>
         </div>

@@ -1,8 +1,10 @@
 <template>
-    <div class="store-card"
-         :class="'store-card--' + asset.tags[0]">
-        <div v-if="asset.tags.length"
-             class="store-card__badges">
+    <div
+        class="store-card"
+        :class="'store-card--' + asset.tags[0]">
+        <div
+            v-if="asset.tags.length"
+            class="store-card__badges">
             <c-badge-card
                 v-for="(tag, index) in asset.tags"
                 :key="index"
@@ -10,8 +12,9 @@
                 :title="tag.value | space"
                 :tag="tag.value" />
         </div>
-        <c-img :src="asset.image"
-               class="store-card__image" />
+        <c-img
+            :src="asset.image"
+            class="store-card__image" />
         <div class="store-card__info">
             <span class="store-card__name">{{ asset.name }}</span>
             <span class="store-card__price">

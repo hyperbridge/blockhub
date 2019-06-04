@@ -64,8 +64,9 @@
                     </tr>
                 </tbody>
             </table>
-            <c-button size="md"
-                      @click="createOffer()">
+            <c-button
+                size="md"
+                @click="createOffer()">
                 Create offer
             </c-button>
         </div>

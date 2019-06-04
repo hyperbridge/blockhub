@@ -1,13 +1,16 @@
 <template>
     <div>
-        <div class="community-item__comment"
-             :class="{ 'is-reply': reply }">
-            <c-button-arrows size="xl"
-                             colored>
-                <span :class="{
-                    'up': comment.rate > 400,
-                    'down': comment.rate < 0
-                }">{{ comment.rate }}</span>
+        <div
+            class="community-item__comment"
+            :class="{ 'is-reply': reply }">
+            <c-button-arrows
+                size="xl"
+                colored>
+                <span
+                    :class="{
+                        'up': comment.rate > 400,
+                        'down': comment.rate < 0
+                    }">{{ comment.rate }}</span>
             </c-button-arrows>
             <div class="comment-container">
                 <c-dropdown-menu
@@ -32,9 +35,10 @@
         </div>
         <div class="d-flex justify-content-between align-items-center">
             <div>
-                <c-emoji-picker v-model="emojiList"
-                                @reaction="onReaction"
-                                @emojiClick="onEmojiClick" />
+                <c-emoji-picker
+                    v-model="emojiList"
+                    @reaction="onReaction"
+                    @emojiClick="onEmojiClick" />
             </div>
             <c-reply
                 @replyMode="reply = $event" />

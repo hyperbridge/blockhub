@@ -2,15 +2,19 @@
     <div class="game-description">
         <div class="game-description__carousel">
             <div class="slider-dots">
-                <div slot="pagination"
-                     class="swiper-pagination" />
+                <div
+                    slot="pagination"
+                    class="swiper-pagination" />
             </div>
-            <c-swiper :options="sliderOptions"
-                      class="custom-dots-top carousel-full-height">
-                <c-swiper-slide v-for="(img, index) in game.images"
-                                :key="index">
-                    <c-button status="none"
-                              :to="`/product/${game.id}`">
+            <c-swiper
+                :options="sliderOptions"
+                class="custom-dots-top carousel-full-height">
+                <c-swiper-slide
+                    v-for="(img, index) in game.images"
+                    :key="index">
+                    <c-button
+                        status="none"
+                        :to="`/product/${game.id}`">
                         <c-img :src="img" />
                     </c-button>
                 </c-swiper-slide>
@@ -18,22 +22,25 @@
         </div>
         <div class="game-description__info">
             <h3>
-                <c-button status="none"
-                          :to="`/product/${game.id}`">
+                <c-button
+                    status="none"
+                    :to="`/product/${game.id}`">
                     {{ game.title }}
                 </c-button>
             </h3>
             <p>{{ game.description }}</p>
             <c-tags :tags="game.tags || []" />
-            <div v-if="game.price"
-                 class="game-description__info--bottom">
+            <div
+                v-if="game.price"
+                class="game-description__info--bottom">
                 <div class="text">
                     <h4>Get all for only</h4>
                     <small>Expires {{ expires_date }}</small>
                 </div>
                 <div>
-                    <a href="#"
-                       class="btn-price">
+                    <a
+                        href="#"
+                        class="btn-price">
                         <span class="price">{{ game.price | convertCurrency }}</span>
                         <span class="name">BUY NOW</span>
                     </a>

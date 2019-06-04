@@ -1,9 +1,10 @@
 <template>
     <div style="height: 100%;">
-        <a class="shortcut-sidebar__grid"
-           href="#"
-           hidden
-           @click.prevent="showGrid" />
+        <a
+            class="shortcut-sidebar__grid"
+            href="#"
+            hidden
+            @click.prevent="showGrid" />
         <c-grid
             :center="false"
             :draggable="true"
@@ -17,24 +18,26 @@
             @remove="remove"
             @click="click"
             @sort="sort">
-            <template slot="cell"
-                      scope="props">
-                <c-icon :color="props.item"
-                        :index="props.index"
-                        :withButton="true"
-                        :image="props.item.image"
-                        :text="props.item.text"
-                        :href="props.item.href"
-                        :to="props.item.to"
-                        :eventKey="props.item.eventKey"
-                        :eventValue="props.item.eventValue"
-                        :textColor="props.item.textColor"
-                        :icon="props.item.icon"
-                        :removable="props.item.removable"
-                        :unread="props.item.unread"
-                        :percent="props.item.percent"
-                        :active="props.item.active"
-                        @remove="props.remove()" />
+            <template
+                slot="cell"
+                scope="props">
+                <c-icon
+                    :color="props.item"
+                    :index="props.index"
+                    :withButton="true"
+                    :image="props.item.image"
+                    :text="props.item.text"
+                    :href="props.item.href"
+                    :to="props.item.to"
+                    :eventKey="props.item.eventKey"
+                    :eventValue="props.item.eventValue"
+                    :textColor="props.item.textColor"
+                    :icon="props.item.icon"
+                    :removable="props.item.removable"
+                    :unread="props.item.unread"
+                    :percent="props.item.percent"
+                    :active="props.item.active"
+                    @remove="props.remove()" />
             </template>
         </c-grid>
     </div>

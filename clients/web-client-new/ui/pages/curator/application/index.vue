@@ -1,44 +1,51 @@
 <template>
     <c-layout navigationKey="store">
         <div class="row">
-            <div v-if="!curatorMode"
-                 class="col-12">
-                <c-block title="Curator Application"
-                         class="margin-bottom-30"
-                         :noGutter="true"
-                         :bgGradient="true"
-                         :onlyContentBg="true">
+            <div
+                v-if="!curatorMode"
+                class="col-12">
+                <c-block
+                    title="Curator Application"
+                    class="margin-bottom-30"
+                    :noGutter="true"
+                    :bgGradient="true"
+                    :onlyContentBg="true">
                     <p>Welcome</p>
                 </c-block>
 
-                <div v-if="!curatorMode"
-                     style="text-align: center">
+                <div
+                    v-if="!curatorMode"
+                    style="text-align: center">
                     <c-user-card
                         class="col-3 margin-auto"
                         :user="activeProfile"
                         :previewMode="true"
                         :class="{ 'default': true }" />
                     <br>
-                    <c-button class="underline"
-                              @click="$store.commit('application/showProfileChooser', true)">
+                    <c-button
+                        class="underline"
+                        @click="$store.commit('application/showProfileChooser', true)">
                         Choose Different Profile
                     </c-button>
 
                     <br><br>
 
-                    <c-button class="c-button--lg outline-white margin-top-20"
-                              @click="convertProfile">
+                    <c-button
+                        class="c-button--lg outline-white margin-top-20"
+                        @click="convertProfile">
                         Convert to Curator
                     </c-button>
                 </div>
             </div>
-            <div v-if="curatorMode"
-                 class="col-12">
-                <c-block title="Congratulations"
-                         class="margin-bottom-30"
-                         :noGutter="true"
-                         :bgGradient="true"
-                         :onlyContentBg="true">
+            <div
+                v-if="curatorMode"
+                class="col-12">
+                <c-block
+                    title="Congratulations"
+                    class="margin-bottom-30"
+                    :noGutter="true"
+                    :bgGradient="true"
+                    :onlyContentBg="true">
                     Your profile is all setup.
 
                     <br><br>

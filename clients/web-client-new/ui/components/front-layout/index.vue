@@ -9,23 +9,27 @@
         </div>
 
         <!-- PAGE WRAPPER -->
-        <div class="page page--w-header page--w-container"
-             :class="{'page__with-left-sidebar': showLeftPanel, 'page__with-right-sidebar': showRightPanel }">
+        <div
+            class="page page--w-header page--w-container"
+            :class="{'page__with-left-sidebar': showLeftPanel, 'page__with-right-sidebar': showRightPanel }">
             <!-- PAGE HEADER -->
             <transition name="slideDown">
-                <c-header v-if="!slimMode"
-                          :isLoader="loadingState" />
-                <c-slim-header v-if="slimMode"
-                               :isLoader="loadingState"
-                               :title="headerText" />
+                <c-header
+                    v-if="!slimMode"
+                    :isLoader="loadingState" />
+                <c-slim-header
+                    v-if="slimMode"
+                    :isLoader="loadingState"
+                    :title="headerText" />
             </transition>
             <!-- //END PAGE HEADER -->
 
             <!-- PAGE CONTENT WRAPPER -->
-            <div id="page-content"
-                 class="page__content page__content-invert invert"
-                 :class="{'make-it-blur': bluredBg, 'with-shortcuts': showShortcuts}"
-                 :style=" `background: url(${bgImage}) top center no-repeat;background-size: cover;`">
+            <div
+                id="page-content"
+                class="page__content page__content-invert invert"
+                :class="{'make-it-blur': bluredBg, 'with-shortcuts': showShortcuts}"
+                :style="`background: url(${bgImage}) top center no-repeat;background-size: cover;`">
                 <!-- v-drag-and-drop:options="dragOptions"> -->
                 <!-- <div class="loader-block" v-if="!isConnected">
                     <div class="loader-block__container">
@@ -56,19 +60,22 @@
                     </div>
                 </div> -->
 
-                <div v-if="showShortcuts"
-                     class="page-shortcuts invert">
+                <div
+                    v-if="showShortcuts"
+                    class="page-shortcuts invert">
                     <c-shortcut-sidebar :items="customShortcuts ? customShortcuts : shortcuts" />
                 </div>
 
                 <!-- PAGE ASIDE PANEL -->
-                <div v-if="showLeftPanel"
-                     id="page-aside"
-                     class="page-aside invert left-sidebar"
-                     style="max-width: 250px">
-                    <div id="scroll_sidebar"
-                         ref="scroll_sidebar"
-                         class="left-sidebar__content">
+                <div
+                    v-if="showLeftPanel"
+                    id="page-aside"
+                    class="page-aside invert left-sidebar"
+                    style="max-width: 250px">
+                    <div
+                        id="scroll_sidebar"
+                        ref="scroll_sidebar"
+                        class="left-sidebar__content">
                         <slot name="left-sidebar" />
                         <component
                             :is="`c-${navigationKey}-navigation`"
@@ -77,8 +84,9 @@
                             :title="navigationTitle" />
                     </div>
                     <div v-if="scrollMoreDirection == 'down'">
-                        <c-load-more :fixed="true"
-                                     @click="scrollSidebarDown">
+                        <c-load-more
+                            :fixed="true"
+                            @click="scrollSidebarDown">
                             <div class="load-more-slot">
                                 More
                                 <i class="fas fa-sort-down" />
@@ -86,8 +94,9 @@
                         </c-load-more>
                     </div>
                     <div v-if="scrollMoreDirection == 'up'">
-                        <c-load-more :fixed="true"
-                                     @click="scrollSidebarUp">
+                        <c-load-more
+                            :fixed="true"
+                            @click="scrollSidebarUp">
                             <div class="load-more-slot">
                                 <i class="fas fa-sort-up" />
                                 Up
@@ -97,14 +106,17 @@
                 </div>
                 <!-- //END PAGE ASIDE PANEL -->
 
-                <div id="content"
-                     class="content"
-                     :class="{'w-100': !showRightPanel && !showLeftPanel}">
-                    <c-breadcrumb v-if="showBreadcrumbs"
-                                  ref="breadcrumb"
-                                  :links="breadcrumbLinksData" />
-                    <div class="container-fluid"
-                         style="padding-top: 0!important;">
+                <div
+                    id="content"
+                    class="content"
+                    :class="{'w-100': !showRightPanel && !showLeftPanel}">
+                    <c-breadcrumb
+                        v-if="showBreadcrumbs"
+                        ref="breadcrumb"
+                        :links="breadcrumbLinksData" />
+                    <div
+                        class="container-fluid"
+                        style="padding-top: 0!important;">
                         <div class="content-body">
                             <slot />
                         </div>
@@ -112,12 +124,14 @@
                 </div>
 
                 <!-- SIDEPANEL -->
-                <transition v-if="showRightPanel"
-                            name="slideRight"
-                            style="max-width: 250px">
-                    <c-sidepanel class="right-sidebar"
-                                 style="max-width: 250px"
-                                 :navigationKey="navigationKey" />
+                <transition
+                    v-if="showRightPanel"
+                    name="slideRight"
+                    style="max-width: 250px">
+                    <c-sidepanel
+                        class="right-sidebar"
+                        style="max-width: 250px"
+                        :navigationKey="navigationKey" />
                 </transition>
                 <!-- //END SIDEPANEL -->
 
@@ -125,28 +139,39 @@
                     {{ connectionStatus.message }}
                 </div> -->
 
-                <c-welcome-popup :activated="$store.state.application.activeModal === 'welcome'"
-                                 @close="$store.state.application.activeModal = null" />
-                <c-download-popup :activated="$store.state.application.activeModal === 'download'"
-                                  @close="$store.state.application.activeModal = null" />
-                <c-unlock-popup :activated="$store.state.application.activeModal === 'unlock'"
-                                @close="$store.state.application.activeModal = null" />
-                <c-send-funds-popup :activated="$store.state.application.activeModal === 'send-funds'"
-                                    @close="$store.state.application.activeModal = null" />
-                <c-purchase-popup :activated="$store.state.application.activeModal === 'purchase'"
-                                  @close="$store.state.application.activeModal = null" />
-                <c-claim-popup :activated="$store.state.application.activeModal === 'claim'"
-                               @close="$store.state.application.activeModal = null" />
-                <c-login-popup :activated="$store.state.application.activeModal === 'login'"
-                               @close="$store.state.application.activeModal = null" />
-                <c-register-popup :activated="$store.state.application.activeModal === 'register'"
-                                  @close="$store.state.application.activeModal = null" />
-                <c-privacy-popup :activated="$store.state.application.activeModal === 'privacy'"
-                                 @close="$store.state.application.activeModal = null" />
-                <c-terms-popup :activated="$store.state.application.activeModal === 'terms'"
-                               @close="$store.state.application.activeModal = null" />
-                <c-mission-control-popup :activated="$store.state.application.activeModal === 'mission-control'"
-                                         @close="$store.state.application.activeModal = null" />
+                <c-welcome-popup
+                    :activated="$store.state.application.activeModal === 'welcome'"
+                    @close="$store.state.application.activeModal = null" />
+                <c-download-popup
+                    :activated="$store.state.application.activeModal === 'download'"
+                    @close="$store.state.application.activeModal = null" />
+                <c-unlock-popup
+                    :activated="$store.state.application.activeModal === 'unlock'"
+                    @close="$store.state.application.activeModal = null" />
+                <c-send-funds-popup
+                    :activated="$store.state.application.activeModal === 'send-funds'"
+                    @close="$store.state.application.activeModal = null" />
+                <c-purchase-popup
+                    :activated="$store.state.application.activeModal === 'purchase'"
+                    @close="$store.state.application.activeModal = null" />
+                <c-claim-popup
+                    :activated="$store.state.application.activeModal === 'claim'"
+                    @close="$store.state.application.activeModal = null" />
+                <c-login-popup
+                    :activated="$store.state.application.activeModal === 'login'"
+                    @close="$store.state.application.activeModal = null" />
+                <c-register-popup
+                    :activated="$store.state.application.activeModal === 'register'"
+                    @close="$store.state.application.activeModal = null" />
+                <c-privacy-popup
+                    :activated="$store.state.application.activeModal === 'privacy'"
+                    @close="$store.state.application.activeModal = null" />
+                <c-terms-popup
+                    :activated="$store.state.application.activeModal === 'terms'"
+                    @close="$store.state.application.activeModal = null" />
+                <c-mission-control-popup
+                    :activated="$store.state.application.activeModal === 'mission-control'"
+                    @close="$store.state.application.activeModal = null" />
                 <c-popup-collection-add
                     v-if="$store.state.application.activeModal === 'collection-add'"
                     :activated="$store.state.application.activeModal === 'collection-add'"
@@ -160,8 +185,9 @@
                     :activated="$store.state.application.activeModal === 'connect-network'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
-                    <div slot="header"
-                         class="h4">
+                    <div
+                        slot="header"
+                        class="h4">
                         Connect
                     </div>
                     <template slot="body">
@@ -175,8 +201,9 @@
                             :connected="item.connected" />
                     </template>
                     <p slot="footer">
-                        <c-button status="dark"
-                                  to="/help">
+                        <c-button
+                            status="dark"
+                            to="/help">
                             Need help? Check the Help Center
                         </c-button>
                     </p>
@@ -188,8 +215,9 @@
                     :activated="$store.state.application.editorMode === 'editing' && !$store.state.application.settings.client['hideEditorWelcomeModal']"
                     style="text-align: left;"
                     @close="$store.commit('application/updateClientSettings', { key: 'hideEditorWelcomeModal', value: true })">
-                    <div slot="header"
-                         class="h4">
+                    <div
+                        slot="header"
+                        class="h4">
                         Welcome to the editor
                     </div>
                     <template slot="body">
@@ -199,8 +227,9 @@
                         <p v-if="!voteCasted">
                             Want this to be the next section we make editable?
                             <br>
-                            <c-button class="underline"
-                                      @click="vote">
+                            <c-button
+                                class="underline"
+                                @click="vote">
                                 Cast your vote by clicking here!
                             </c-button>
                         </p>
@@ -209,8 +238,9 @@
                         </p>
                     </template>
                     <p slot="footer">
-                        <c-button status="dark"
-                                  to="/help">
+                        <c-button
+                            status="dark"
+                            to="/help">
                             Need help? Check the Help Center
                         </c-button>
                     </p>
@@ -221,16 +251,18 @@
                     :activated="$store.state.application.activeModal === 'create-shortcut'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
-                    <div slot="header"
-                         class="h4">
+                    <div
+                        slot="header"
+                        class="h4">
                         Oh, another creation?
                     </div>
                     <template slot="body">
                         <div class="row">
                             <div class="col-6">
-                                <c-button status="none"
-                                          class="col-md-6 create-shortcut__block"
-                                          to="/idea/new">
+                                <c-button
+                                    status="none"
+                                    class="col-md-6 create-shortcut__block"
+                                    to="/idea/new">
                                     <c-icon
                                         name="plus-circle"
                                         style="padding: 30px;font-size: 50px;" />
@@ -240,9 +272,10 @@
                                 </c-button>
                             </div>
                             <div class="col-6">
-                                <c-button status="none"
-                                          class="col-md-6 create-shortcut__block"
-                                          to="/business/project/new">
+                                <c-button
+                                    status="none"
+                                    class="col-md-6 create-shortcut__block"
+                                    to="/business/project/new">
                                     <c-icon
                                         name="plus-circle"
                                         style="padding: 30px;font-size: 50px;" />
@@ -252,9 +285,10 @@
                                 </c-button>
                             </div>
                             <div class="col-6">
-                                <c-button status="none"
-                                          class="col-md-6 create-shortcut__block"
-                                          to="/business/product/new">
+                                <c-button
+                                    status="none"
+                                    class="col-md-6 create-shortcut__block"
+                                    to="/business/product/new">
                                     <c-icon
                                         name="plus-circle"
                                         style="padding: 30px;font-size: 50px;" />
@@ -264,9 +298,10 @@
                                 </c-button>
                             </div>
                             <div class="col-6">
-                                <c-button status="none"
-                                          class="col-md-6 create-shortcut__block"
-                                          to="/business/realm/new">
+                                <c-button
+                                    status="none"
+                                    class="col-md-6 create-shortcut__block"
+                                    to="/business/realm/new">
                                     <c-icon
                                         name="plus-circle"
                                         style="padding: 30px;font-size: 50px;" />
@@ -285,8 +320,9 @@
                     :activated="$store.state.application.activeModal === 'coming-soon'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
-                    <div slot="header"
-                         class="h4">
+                    <div
+                        slot="header"
+                        class="h4">
                         Coming Soon!
                     </div>
                     <template slot="body">
@@ -316,20 +352,23 @@
                     :activated="$store.state.application.activeModal === 'token-contract'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
-                    <div slot="header"
-                         class="h4">
+                    <div
+                        slot="header"
+                        class="h4">
                         Token Purchase Contract Address
                     </div>
                     <template slot="body">
                         <div class="input-group mb-4">
-                            <input ref="input"
-                                   type="text"
-                                   class="form-control"
-                                   value="0xebf0027ef3b4b7a742a148cddb0f2b14e5d8f0e9">
+                            <input
+                                ref="input"
+                                type="text"
+                                class="form-control"
+                                value="0xebf0027ef3b4b7a742a148cddb0f2b14e5d8f0e9">
                         </div>
                         <p>
-                            You should confirm the contract address <a href="https://t.me/hyperbridgechat"
-                                                                       target="_blank">in our Telegram</a>.
+                            You should confirm the contract address <a
+                                href="https://t.me/hyperbridgechat"
+                                target="_blank">in our Telegram</a>.
                         </p>
                     </template>
                     <p slot="footer" />
@@ -340,8 +379,9 @@
                     :activated="$store.state.application.activeModal === 'report'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
-                    <div slot="header"
-                         class="h4">
+                    <div
+                        slot="header"
+                        class="h4">
                         Feedback/Report
                     </div>
                     <template slot="body">
@@ -350,12 +390,13 @@
                         </p>
                         <br>
                         <div class="form-group">
-                            <input ref="reportText"
-                                   v-focus
-                                   type="text"
-                                   class="form-control"
-                                   placeholder="Report..."
-                                   @keyup.enter="sendReport()">
+                            <input
+                                ref="reportText"
+                                v-focus
+                                type="text"
+                                class="form-control"
+                                placeholder="Report..."
+                                @keyup.enter="sendReport()">
                         </div>
                         <br>
                         <p><em>Hit ENTER when done</em></p>
@@ -367,15 +408,17 @@
                 <c-basic-popup
                     :activated="$store.state.application.activeModal === 'propose-idea'"
                     @close="$store.commit('application/activateModal', null)">
-                    <div slot="header"
-                         class="h4">
+                    <div
+                        slot="header"
+                        class="h4">
                         Propose Idea
                     </div>
                     <template slot="body">
                         <div v-if="activeProfile && activeProfile.role === 'curator'">
                             <p>
-                                Great, you're a curator. <c-button class="underline"
-                                                                   href="/project/new">
+                                Great, you're a curator. <c-button
+                                    class="underline"
+                                    href="/project/new">
                                     Click here to continue
                                 </c-button>.
                             </p>
@@ -394,22 +437,25 @@
                                 :previewMode="true"
                                 :class="{ 'default': true }" />
                             <br>
-                            <c-button class="underline"
-                                      @click="$store.commit('application/showProfileChooser', true)">
+                            <c-button
+                                class="underline"
+                                @click="$store.commit('application/showProfileChooser', true)">
                                 Choose Different Profile
                             </c-button>
 
                             <br><br>
 
-                            <c-button class="c-button--lg outline-white margin-top-20"
-                                      @click="$store.commit('application/convertCurator', { profile: activeProfile })">
+                            <c-button
+                                class="c-button--lg outline-white margin-top-20"
+                                @click="$store.commit('application/convertCurator', { profile: activeProfile })">
                                 Convert to Curator
                             </c-button>
                         </div>
                     </template>
                     <p slot="footer">
-                        <c-button status="dark"
-                                  to="/help">
+                        <c-button
+                            status="dark"
+                            to="/help">
                             Need help? Check the Help Center
                         </c-button>
                     </p>
@@ -420,8 +466,9 @@
                     :activated="$store.state.application.activeModal === 'notification'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
-                    <div slot="header"
-                         class="h4">
+                    <div
+                        slot="header"
+                        class="h4">
                         {{ activeNotification.title }}
                     </div>
                     <template slot="body">
@@ -435,8 +482,9 @@
                     :activated="$store.state.application.activeModal === 'addition-details'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
-                    <div slot="header"
-                         class="h4" />
+                    <div
+                        slot="header"
+                        class="h4" />
                     <template slot="body">
                         <p>
                             secret question / answer
@@ -454,37 +502,44 @@
                     :activated="$store.state.application.activeModal === 'connection-status'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
-                    <div slot="header"
-                         class="h4">
+                    <div
+                        slot="header"
+                        class="h4">
                         Connection Status
                     </div>
                     <template slot="body">
                         <div class="connection-status__status-items">
                             <div>
-                                Internet Connection <span class="fa"
-                                                          :class="{'fa-check-circle': $store.state.application.connection.internet, 'fa-times-circle': !$store.state.application.connection.internet }" />
+                                Internet Connection <span
+                                    class="fa"
+                                    :class="{'fa-check-circle': $store.state.application.connection.internet, 'fa-times-circle': !$store.state.application.connection.internet }" />
                             </div>
                             <div>
-                                Web Server Connection <span class="fa"
-                                                            :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }" />
+                                Web Server Connection <span
+                                    class="fa"
+                                    :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }" />
                             </div>
                             <div>
-                                Real-time Server Connection <span class="fa"
-                                                                  :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }" />
+                                Real-time Server Connection <span
+                                    class="fa"
+                                    :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }" />
                             </div>
                             <div v-decentralized-mode>
-                                Ethereum Connection <span class="fa"
-                                                          :class="{'fa-check-circle': $store.state.application.connection.ethereum, 'fa-times-circle': !$store.state.application.connection.ethereum }" />
+                                Ethereum Connection <span
+                                    class="fa"
+                                    :class="{'fa-check-circle': $store.state.application.connection.ethereum, 'fa-times-circle': !$store.state.application.connection.ethereum }" />
                             </div>
                         </div>
 
-                        <h1 v-if="connectionStatus.code"
+                        <h1
+                            v-if="connectionStatus.code"
                             class="connection-status__status-code">
                             ERROR {{ connectionStatus.code }}
                         </h1>
-                        <p v-if="connectionStatus.message"
-                           class="connection-status__status-message"
-                           hidden>
+                        <p
+                            v-if="connectionStatus.message"
+                            class="connection-status__status-message"
+                            hidden>
                             {{ connectionStatus.message }}
                         </p>
                     </template>
@@ -496,14 +551,17 @@
                     :activated="$store.state.application.activeModal === 'withdraw'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
-                    <div slot="header"
-                         class="h4">
+                    <div
+                        slot="header"
+                        class="h4">
                         Withdraw
                     </div>
-                    <template v-if="activeProfile"
-                              slot="body">
-                        <c-loading :enabled="withdrawRequest.processing"
-                                   size="lg" />
+                    <template
+                        v-if="activeProfile"
+                        slot="body">
+                        <c-loading
+                            :enabled="withdrawRequest.processing"
+                            size="lg" />
                         <div v-if="!withdrawRequest.processing && !activeProfile.address">
                             <p>No address found for this profile. You'll need to generate one within the desktop app.</p>
                         </div>
@@ -519,10 +577,11 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Type</label>
-                                        <select v-model="withdrawRequest.type"
-                                                class="form-control actionWithSelected"
-                                                tabindex="-1"
-                                                aria-hidden="true">
+                                        <select
+                                            v-model="withdrawRequest.type"
+                                            class="form-control actionWithSelected"
+                                            tabindex="-1"
+                                            aria-hidden="true">
                                             <option />
                                             <option value="ETH">
                                                 ETH
@@ -538,10 +597,11 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Amount</label>
-                                        <input v-model="withdrawRequest.amount"
-                                               type="text"
-                                               class="form-control"
-                                               placeholder="Amount">
+                                        <input
+                                            v-model="withdrawRequest.amount"
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Amount">
                                     </div>
                                 </div>
                             </div>
@@ -549,32 +609,37 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Address</label>
-                                        <input v-model="withdrawRequest.toAddress"
-                                               type="text"
-                                               class="form-control"
-                                               placeholder="Address">
+                                        <input
+                                            v-model="withdrawRequest.toAddress"
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Address">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </template>
-                    <p v-if="!withdrawRequest.processing"
-                       slot="footer">
-                        <c-button status="plain"
-                                  class="color-red"
-                                  @click="$store.state.application.activeModal = null">
+                    <p
+                        v-if="!withdrawRequest.processing"
+                        slot="footer">
+                        <c-button
+                            status="plain"
+                            class="color-red"
+                            @click="$store.state.application.activeModal = null">
                             Cancel
                         </c-button>
-                        <c-button v-if="!activeProfile.address"
-                                  status="second-info"
-                                  class="ml-3"
-                                  @click="$store.state.application.activeModal = null">
+                        <c-button
+                            v-if="!activeProfile.address"
+                            status="second-info"
+                            class="ml-3"
+                            @click="$store.state.application.activeModal = null">
                             OK
                         </c-button>
-                        <c-button v-if="activeProfile.address"
-                                  status="second-info"
-                                  class="ml-3"
-                                  @click="withdraw">
+                        <c-button
+                            v-if="activeProfile.address"
+                            status="second-info"
+                            class="ml-3"
+                            @click="withdraw">
                             Send
                         </c-button>
                     </p>
@@ -585,8 +650,9 @@
                     :activated="$store.state.application.activeModal === 'deposit'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
-                    <div slot="header"
-                         class="h4">
+                    <div
+                        slot="header"
+                        class="h4">
                         Deposit
                     </div>
                     <template slot="body">
@@ -597,13 +663,14 @@
                             <h3>Deposit Address: {{ activeProfile.address }}</h3>
                             <br>
                             <div style="text-align: center;">
-                                <c-qr-code style="display: inline-block; background: #fff;"
-                                           :config="{
-                                               value: activeProfile.address,
-                                               imagePath: 'http://localhost:8000/static/img/logo-only.png',
-                                               filter: 'threshold',
-                                               size: 400,
-                                           }" />
+                                <c-qr-code
+                                    style="display: inline-block; background: #fff;"
+                                    :config="{
+                                        value: activeProfile.address,
+                                        imagePath: 'http://localhost:8000/static/img/logo-only.png',
+                                        filter: 'threshold',
+                                        size: 400,
+                                    }" />
                             </div>
                             <br><br>
                             <p>You can send Ethereum or Hyperbridge Tokens to this address and they will become available by this profile</p>
@@ -612,14 +679,16 @@
                         </div>
                     </template>
                     <p slot="footer">
-                        <c-button status="plain"
-                                  class="color-red"
-                                  @click="$store.state.application.activeModal = null">
+                        <c-button
+                            status="plain"
+                            class="color-red"
+                            @click="$store.state.application.activeModal = null">
                             Cancel
                         </c-button>
-                        <c-button status="second-info"
-                                  class="ml-3"
-                                  @click="$store.state.application.activeModal = null">
+                        <c-button
+                            status="second-info"
+                            class="ml-3"
+                            @click="$store.state.application.activeModal = null">
                             OK
                         </c-button>
                     </p>
@@ -636,8 +705,9 @@
                     :activated="$store.state.application.activeModal === 'create-article'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
-                    <div slot="header"
-                         class="h4">
+                    <div
+                        slot="header"
+                        class="h4">
                         Create Article
                     </div>
                     <template slot="body">
@@ -646,10 +716,11 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Slug</label>
-                                        <input v-model="createArticleRequest.key"
-                                               type="text"
-                                               class="form-control"
-                                               placeholder="Slug">
+                                        <input
+                                            v-model="createArticleRequest.key"
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Slug">
                                     </div>
                                 </div>
                             </div>
@@ -657,10 +728,11 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Title</label>
-                                        <input v-model="createArticleRequest.name"
-                                               type="text"
-                                               class="form-control"
-                                               placeholder="Title">
+                                        <input
+                                            v-model="createArticleRequest.name"
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Title">
                                     </div>
                                 </div>
                             </div>
@@ -668,22 +740,25 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Text</label>
-                                        <textarea v-model="createArticleRequest.value"
-                                                  class="form-control" />
+                                        <textarea
+                                            v-model="createArticleRequest.value"
+                                            class="form-control" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </template>
                     <p slot="footer">
-                        <c-button status="plain"
-                                  class="color-red"
-                                  @click="$store.state.application.activeModal = null">
+                        <c-button
+                            status="plain"
+                            class="color-red"
+                            @click="$store.state.application.activeModal = null">
                             Cancel
                         </c-button>
-                        <c-button status="second-info"
-                                  class="ml-3"
-                                  @click="createArticle(createArticleRequest)">
+                        <c-button
+                            status="second-info"
+                            class="ml-3"
+                            @click="createArticle(createArticleRequest)">
                             OK
                         </c-button>
                     </p>
@@ -694,8 +769,9 @@
                     :activated="$store.state.application.activeModal === 'new-discussion'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
-                    <div slot="header"
-                         class="h4">
+                    <div
+                        slot="header"
+                        class="h4">
                         New Discussion
                     </div>
                     <template slot="body">
@@ -704,14 +780,16 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Community</label>
-                                        <select v-model="newDiscussionRequest.communityId"
-                                                class="form-control actionWithSelected"
-                                                tabindex="-1"
-                                                aria-hidden="true">
+                                        <select
+                                            v-model="newDiscussionRequest.communityId"
+                                            class="form-control actionWithSelected"
+                                            tabindex="-1"
+                                            aria-hidden="true">
                                             <option />
-                                            <option v-for="(community, index) in communities"
-                                                    :key="index"
-                                                    :value="community.id">
+                                            <option
+                                                v-for="(community, index) in communities"
+                                                :key="index"
+                                                :value="community.id">
                                                 {{ community.name }}
                                             </option>
                                         </select>
@@ -722,10 +800,11 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Title</label>
-                                        <input v-model="newDiscussionRequest.name"
-                                               type="text"
-                                               class="form-control"
-                                               placeholder="Title">
+                                        <input
+                                            v-model="newDiscussionRequest.name"
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Title">
                                     </div>
                                 </div>
                             </div>
@@ -733,22 +812,25 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Text</label>
-                                        <textarea v-model="newDiscussionRequest.value"
-                                                  class="form-control" />
+                                        <textarea
+                                            v-model="newDiscussionRequest.value"
+                                            class="form-control" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </template>
                     <p slot="footer">
-                        <c-button status="plain"
-                                  class="color-red"
-                                  @click="$store.state.application.activeModal = null">
+                        <c-button
+                            status="plain"
+                            class="color-red"
+                            @click="$store.state.application.activeModal = null">
                             Cancel
                         </c-button>
-                        <c-button status="second-info"
-                                  class="ml-3"
-                                  @click="submitNewDiscussion(newDiscussionRequest)">
+                        <c-button
+                            status="second-info"
+                            class="ml-3"
+                            @click="submitNewDiscussion(newDiscussionRequest)">
                             OK
                         </c-button>
                     </p>
@@ -768,14 +850,16 @@
 
                 <c-clock v-if="desktopMode" />
 
-                <div class="status-bar"
-                     @click="$store.commit('application/activateModal', 'connection-status')">
+                <div
+                    class="status-bar"
+                    @click="$store.commit('application/activateModal', 'connection-status')">
                     <c-status-dot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" />
                     OK
                 </div>
 
-                <div v-if="desktopMode"
-                     class="version">
+                <div
+                    v-if="desktopMode"
+                    class="version">
                     v{{ $store.state.application.version }}
                 </div>
             </div>
@@ -789,33 +873,37 @@
 
 
             <!--Draggable video block -->
-            <c-draggable-video v-if="video"
-                               :active="video.showPopup"
-                               :videoUrl="video.url"
-                               :setTime="video.currentTime"
-                               @close=" video.showPopup = false" />
+            <c-draggable-video
+                v-if="video"
+                :active="video.showPopup"
+                :videoUrl="video.url"
+                :setTime="video.currentTime"
+                @close=" video.showPopup = false" />
             <!--end draggable video block -->
 
 
             <!-- <search /> Discover the next best thing... -->
         </div>
         <!-- //END PAGE WRAPPER -->
-        <div id="startup-loader"
-             class="startup-loader">
+        <div
+            id="startup-loader"
+            class="startup-loader">
             <div class="startup-loader__container">
                 <div>
                     <div class="startup-loader__spinner" />
                     <p class="startup-loader__message" />
                     <p class="startup-loader__user">
-                        Submitted by <a href="#"
-                                        target="_blank" />
+                        Submitted by <a
+                            href="#"
+                            target="_blank" />
                     </p>
                 </div>
                 <p class="startup-loader__status-message">
                     Launching...
                 </p>
-                <div id="critical-error"
-                     class="startup-loader__links">
+                <div
+                    id="critical-error"
+                    class="startup-loader__links">
                     <p>Connection problems? Let us know!</p> <a href="https://twitter.com/hyperbridge"><span
                         class="fab fa-twitter" /> Tweet Us</a> <a href="https://hyperbridge.org/status"><span
                         class="fas fa-globe-americas" /> Server Status</a>

@@ -1,27 +1,31 @@
 <template>
     <div class="curator-review">
-        <c-img :src="review.game.img"
-               class="curator-review__img" />
+        <c-img
+            :src="review.game.img"
+            class="curator-review__img" />
         <div class="curator-review__header">
-            <c-author :name="review.author.name"
-                      :img="review.author.img" />
+            <c-author
+                :name="review.author.name"
+                :img="review.author.img" />
             <span style="font-size: 22px">
                 <i class="fas fa-star" />
                 <strong>{{ review.rate }}</strong>
             </span>
         </div>
         <transition name="fade-scale">
-            <p v-if="read_more"
-               :key="1">
+            <p
+                v-if="read_more"
+                :key="1">
                 {{ review.text }}
             </p>
             <p v-else>
                 {{ review.text.substring(0, 240) }}...
             </p>
         </transition>
-        <a href="#"
-           class="text-white font-weight-bold"
-           @click.prevent="read_more = !read_more">
+        <a
+            href="#"
+            class="text-white font-weight-bold"
+            @click.prevent="read_more = !read_more">
             {{ read_more ? 'SHOW LESS' : 'MORE...' }}
         </a>
         <h4 class="curator-review__more-header">
@@ -32,12 +36,14 @@
                 v-for="(sub_review, index) in review.moreReviews"
                 :key="index"
                 class="sub-review">
-                <c-img :src="sub_review.game.img"
-                       class="sub-review__img" />
+                <c-img
+                    :src="sub_review.game.img"
+                    class="sub-review__img" />
                 <div class="sub-review__details">
                     <h5 class="margin-bottom-5">
-                        <a href="#"
-                           class="text-white font-weight-bold">{{ sub_review.game.title }}</a>
+                        <a
+                            href="#"
+                            class="text-white font-weight-bold">{{ sub_review.game.title }}</a>
                     </h5>
                     <div class="text-white font-weight-bold">
                         <!--<c-rating-stars :number="sub_review.rate"/>-->

@@ -3,11 +3,13 @@
         <p v-if="!trx">
             Transaction with id <i>{{ id }}</i> doesn't exist
         </p>
-        <c-block-menu v-else
-                      :links="links">
-            <router-view :id="id"
-                         :trxa="trx"
-                         :trx="trx" />
+        <c-block-menu
+            v-else
+            :links="links">
+            <router-view
+                :id="id"
+                :trxa="trx"
+                :trx="trx" />
         </c-block-menu>
     </div>
 </template>

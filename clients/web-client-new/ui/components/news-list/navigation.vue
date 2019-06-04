@@ -1,8 +1,10 @@
 <template>
-    <ul id="myTab"
+    <ul
+        id="myTab"
         class="nav custom-tabs w-100"
         role="tablist">
-        <li v-for="(item, index) in list"
+        <li
+            v-for="(item, index) in list"
             v-if="index <= 3"
             :key="index"
             class="nav-item">

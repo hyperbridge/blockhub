@@ -1,7 +1,8 @@
 <template>
-    <span class="c-text-label"
-          :class="['label-type-' + type]"
-          :style="{ 'background-color': bgColor, 'color' : fontColor }">
+    <span
+        class="c-text-label"
+        :class="['label-type-' + type]"
+        :style="{ 'background-color': bgColor, 'color' : fontColor }">
         <slot />
     </span>
 </template>

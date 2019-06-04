@@ -1,8 +1,9 @@
 <template>
-    <transition-group ref="gameList"
-                      tag="div"
-                      class="games-list"
-                      name="games-list">
+    <transition-group
+        ref="gameList"
+        tag="div"
+        class="games-list"
+        name="games-list">
         <div
             v-for="(item) in items"
             v-if="items && items.length"
@@ -11,17 +12,20 @@
             :class="{ 'hovered' : hovered }"
             :style="{ width: itemWidth, background: itemBg }">
             <div class="img">
-                <div v-if="item.price && showPrice"
-                     class="price"
-                     :class="['price-position-' + pricePosition]">
+                <div
+                    v-if="item.price && showPrice"
+                    class="price"
+                    :class="['price-position-' + pricePosition]">
                     <strong>{{ item.price | convertCurrency }}</strong>
                 </div>
-                <c-button status="none"
-                          :to="`/product/${item.id}`">
+                <c-button
+                    status="none"
+                    :to="`/product/${item.id}`">
                     <c-img :src="item.images.mediumTile" />
                 </c-button>
-                <div v-if="item.crowdfund"
-                     class="crowdfund-icon">
+                <div
+                    v-if="item.crowdfund"
+                    class="crowdfund-icon">
                     <i class="fas fa-hand-holding-usd" />
                 </div>
             </div>
@@ -34,19 +38,23 @@
                             </span>
                         </template>
                         <template v-else-if="item.stateTag == 'pre-release'">
-                            <i class="fas fa-bolt"
-                               style="color: #FADC72" /> {{ item.prerelease_count }}
-                            <span class="ml-4"
-                                  style="color: #499fd3">Pre Release</span>
+                            <i
+                                class="fas fa-bolt"
+                                style="color: #FADC72" /> {{ item.prerelease_count }}
+                            <span
+                                class="ml-4"
+                                style="color: #499fd3">Pre Release</span>
                         </template>
                     </div>
-                    <c-button status="none"
-                              :to="`/product/${item.id}`"
-                              :title="item.name + ' - product page'">
+                    <c-button
+                        status="none"
+                        :to="`/product/${item.id}`"
+                        :title="item.name + ' - product page'">
                         <h4>{{ item.name }}</h4>
                     </c-button>
-                    <div v-if="item.crowdfund"
-                         class="crowdfund-tag">
+                    <div
+                        v-if="item.crowdfund"
+                        class="crowdfund-tag">
                         Crowdfund Campaign
                     </div>
                     <p v-if="item.publisher">
@@ -58,38 +66,45 @@
                 </div>
                 <div class="footer">
                     <div class="d-flex flex-nowrap">
-                        <div v-if="item.releaseDate && showDate"
-                             class="time mr-3">
+                        <div
+                            v-if="item.releaseDate && showDate"
+                            class="time mr-3">
                             <i class="fas fa-calendar-alt" />
                             <!--<c-tooltip :name="calculateSince(item.releaseDate)" position="center">-->
-                            <c-tooltip :name="calculateSince(item.releaseDate)"
-                                       position="center">
-                                <div class="text-center"
-                                     style="white-space: nowrap">
+                            <c-tooltip
+                                :name="calculateSince(item.releaseDate)"
+                                position="center">
+                                <div
+                                    class="text-center"
+                                    style="white-space: nowrap">
                                     <strong>Released</strong><br>
                                     {{ formatDate(item.releaseDate) }}
                                 </div>
                             </c-tooltip>
                         </div>
-                        <div v-if="item.followers"
-                             class="followers mr-3">
+                        <div
+                            v-if="item.followers"
+                            class="followers mr-3">
                             <i class="fas fa-eye" />
                             <!--<c-tooltip :name="item.followers" position="center">-->
                             <c-tooltip position="center">
-                                <div class="text-center"
-                                     style="white-space: nowrap">
+                                <div
+                                    class="text-center"
+                                    style="white-space: nowrap">
                                     <strong>Followers</strong><br>
                                     {{ item.followers }}
                                 </div>
                             </c-tooltip>
                         </div>
-                        <div v-if="item.players"
-                             class="players">
+                        <div
+                            v-if="item.players"
+                            class="players">
                             <i class="fas fa-user" />
                             <!--<c-tooltip :name="item.players" position="center">-->
                             <c-tooltip position="center">
-                                <div class="text-center"
-                                     style="white-space: nowrap">
+                                <div
+                                    class="text-center"
+                                    style="white-space: nowrap">
                                     <strong>Players</strong><br>
                                     {{ item.players }}
                                 </div>
@@ -110,10 +125,12 @@
                 </div>
             </div>
         </div>
-        <p v-if="!items || !items.length"
-           key="nothing">
-            Nothing could be found. Want to <c-button status="plain"
-                                                      @click="$store.commit('application/activateModal', 'coming-soon')">
+        <p
+            v-if="!items || !items.length"
+            key="nothing">
+            Nothing could be found. Want to <c-button
+                status="plain"
+                @click="$store.commit('application/activateModal', 'coming-soon')">
                 Check for updates
             </c-button>?
         </p>

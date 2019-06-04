@@ -1,10 +1,13 @@
 <template>
-    <div class="game-card__item"
-         :class="customClass">
-        <div v-if="parentName"
-             class="head">
-            <div v-if="parentImage"
-                 class="img">
+    <div
+        class="game-card__item"
+        :class="customClass">
+        <div
+            v-if="parentName"
+            class="head">
+            <div
+                v-if="parentImage"
+                class="img">
                 <c-img :src="parentImage" />
             </div>
             <div class="text">
@@ -14,17 +17,19 @@
                 </p>
             </div>
         </div>
-        <c-button status="none"
-                  :to="`/product/${id}`">
+        <c-button
+            status="none"
+            :to="`/product/${id}`">
             <c-img :src="image" />
             <div class="description">
                 {{ description }}
             </div>
         </c-button>
         <div class="item-action">
-            <c-button status="info"
-                      :to="`/product/${id}`"
-                      iconHide>
+            <c-button
+                status="info"
+                :to="`/product/${id}`"
+                iconHide>
                 Check it out
             </c-button>
         </div>

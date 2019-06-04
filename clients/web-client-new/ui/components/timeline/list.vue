@@ -1,19 +1,23 @@
 <template>
     <div class="posts-timeline">
-        <template v-for="(item, index) in sliced"
-                  v-if="items">
-            <c-timeline-item :key="index"
-                             :item="item"
-                             :index="index"
-                             :projectID="project_id" />
-            <div v-if="item.period"
-                 class="post-timeline__period-info">
+        <template
+            v-for="(item, index) in sliced"
+            v-if="items">
+            <c-timeline-item
+                :key="index"
+                :item="item"
+                :index="index"
+                :projectID="project_id" />
+            <div
+                v-if="item.period"
+                class="post-timeline__period-info">
                 {{ item.period }}
             </div>
         </template>
         <transition name="fade-slow">
-            <div v-if="end"
-                 class="posts-timeline__end">
+            <div
+                v-if="end"
+                class="posts-timeline__end">
                 <h3>End of updates</h3>
             </div>
             <c-block v-if="!items">

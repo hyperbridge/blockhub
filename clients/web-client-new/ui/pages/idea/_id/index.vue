@@ -1,23 +1,29 @@
 <template>
-    <c-layout navigationKey="idea"
-              :showRightPanel="false"
-              :breadcrumbLinks="breadcrumbLinks">
-        <div v-if="!idea && id !== 'new'"
-             class="row">
+    <c-layout
+        navigationKey="idea"
+        :showRightPanel="false"
+        :breadcrumbLinks="breadcrumbLinks">
+        <div
+            v-if="!idea && id !== 'new'"
+            class="row">
             <!-- <div class="col-12">
                 Idea not found
             </div> -->
-            <c-loading :enabled="true"
-                       size="lg" />
+            <c-loading
+                :enabled="true"
+                size="lg" />
         </div>
-        <div v-if="idea || id === 'new'"
-             class="row">
+        <div
+            v-if="idea || id === 'new'"
+            class="row">
             <div class="col-12">
-                <div v-if="errors.length"
-                     class="errors">
+                <div
+                    v-if="errors.length"
+                    class="errors">
                     <strong>Please correct the following error(s):</strong>
                     <ul>
-                        <li v-for="error in errors"
+                        <li
+                            v-for="error in errors"
                             :key="error">
                             {{ error }}
                         </li>
@@ -27,27 +33,32 @@
                 <div class="row justify-content-between">
                     <div class="col-12 col-md-4 text-center text-md-left">
                         <div class="editor-container">
-                            <div v-if="editing"
-                                 class="editor">
-                                <button v-if="!activeElement['name']"
-                                        class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                        @click="activateElement('name')">
+                            <div
+                                v-if="editing"
+                                class="editor">
+                                <button
+                                    v-if="!activeElement['name']"
+                                    class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                    @click="activateElement('name')">
                                     Change
                                     Idea Name <span class="fa fa-edit" />
                                 </button>
 
-                                <div v-if="activeElement['name']"
-                                     class="form-control-element form-control-element--right">
-                                    <input ref="name"
-                                           v-model="idea.name"
-                                           name="name"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="Idea name...">
+                                <div
+                                    v-if="activeElement['name']"
+                                    class="form-control-element form-control-element--right">
+                                    <input
+                                        ref="name"
+                                        v-model="idea.name"
+                                        name="name"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Idea name...">
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                        <span class="fa fa-check"
-                                              @click="deactivateElement('name')" />
+                                        <span
+                                            class="fa fa-check"
+                                            @click="deactivateElement('name')" />
                                     </div>
                                 </div>
                             </div>
@@ -56,97 +67,113 @@
                             </h1>
                         </div>
                         <div class="editor-container">
-                            <div v-if="editing"
-                                 class="editor">
-                                <button v-if="!activeElement['tags']"
-                                        class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                        style="margin-bottom: 20px"
-                                        @click="activateElement('tags')">
+                            <div
+                                v-if="editing"
+                                class="editor">
+                                <button
+                                    v-if="!activeElement['tags']"
+                                    class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                    style="margin-bottom: 20px"
+                                    @click="activateElement('tags')">
                                     Change
                                     Tags <span class="fa fa-edit" />
                                 </button>
-                                <div v-if="activeElement['tags']"
-                                     class="form-control-element tag-editor form-control-element--right">
+                                <div
+                                    v-if="activeElement['tags']"
+                                    class="form-control-element tag-editor form-control-element--right">
                                     <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
                                     <!--<option v-for="(tag, index) in tagOptions" :key="index"-->
                                     <!--:selected="idea.tags.includes(tag)">{{ tag }}-->
                                     <!--</option>-->
                                     <!--</select>-->
 
-                                    <c-multiselect v-model="idea.tags"
-                                                   class="dark-mode"
-                                                   label="value"
-                                                   track-by="key"
-                                                   :multiple="true"
-                                                   :taggable="false"
-                                                   :options="tagOptions" />
+                                    <c-multiselect
+                                        v-model="idea.tags"
+                                        class="dark-mode"
+                                        label="value"
+                                        track-by="key"
+                                        :multiple="true"
+                                        :taggable="false"
+                                        :options="tagOptions" />
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary"
                                         style="">
-                                        <span class="fa fa-check"
-                                              @click="deactivateElement('tags')" />
+                                        <span
+                                            class="fa fa-check"
+                                            @click="deactivateElement('tags')" />
                                     </div>
                                 </div>
                             </div>
 
-                            <c-tags v-if="!editing || !activeElement['tags']"
-                                    :tags="idea.tags ? idea.tags.map(t => t.value) : []" />
+                            <c-tags
+                                v-if="!editing || !activeElement['tags']"
+                                :tags="idea.tags ? idea.tags.map(t => t.value) : []" />
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <c-badges :icons="idea.meta.badges || []" />
                     </div>
                     <div class="col-12 col-md-4">
-                        <div v-if="editing"
-                             class="editor text-right"
-                             style="margin-bottom: 30px">
-                            <button v-if="!activeElement['backgroundImage']"
-                                    class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                    @click="activateElement('backgroundImage')">
+                        <div
+                            v-if="editing"
+                            class="editor text-right"
+                            style="margin-bottom: 30px">
+                            <button
+                                v-if="!activeElement['backgroundImage']"
+                                class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                @click="activateElement('backgroundImage')">
                                 Change Background Image <span
                                     class="fa fa-edit" />
                             </button>
 
-                            <div v-if="activeElement['backgroundImage']"
-                                 class="">
+                            <div
+                                v-if="activeElement['backgroundImage']"
+                                class="">
                                 <div class="form-control-element form-control-element--right">
-                                    <input ref="backgroundImage"
-                                           v-model="idea.meta.images.header"
-                                           name="backgroundImage"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="Background image URL...">
+                                    <input
+                                        ref="backgroundImage"
+                                        v-model="idea.meta.images.header"
+                                        name="backgroundImage"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Background image URL...">
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                        <span class="fa fa-check"
-                                              @click="deactivateElement('backgroundImage')" />
+                                        <span
+                                            class="fa fa-check"
+                                            @click="deactivateElement('backgroundImage')" />
                                     </div>
                                 </div>
                             </div>
                             <label style="display: block">RECOMMENDED SIZE: 1120 x 524px</label>
                         </div>
-                        <div v-if="editing"
-                             class="editor text-right">
-                            <button v-if="!activeElement['storeImage']"
-                                    class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                    @click="activateElement('storeImage')">
+                        <div
+                            v-if="editing"
+                            class="editor text-right">
+                            <button
+                                v-if="!activeElement['storeImage']"
+                                class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                @click="activateElement('storeImage')">
                                 Change Idea Image <span
                                     class="fa fa-edit" />
                             </button>
 
-                            <div v-if="activeElement['storeImage']"
-                                 class="">
+                            <div
+                                v-if="activeElement['storeImage']"
+                                class="">
                                 <div class="form-control-element form-control-element--right">
-                                    <input ref="storeImage"
-                                           v-model="idea.meta.images.header"
-                                           name="storeImage"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="Background image URL...">
+                                    <input
+                                        ref="storeImage"
+                                        v-model="idea.meta.images.header"
+                                        name="storeImage"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Background image URL...">
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                        <span class="fa fa-check"
-                                              @click="deactivateElement('storeImage')" />
+                                        <span
+                                            class="fa fa-check"
+                                            @click="deactivateElement('storeImage')" />
                                     </div>
                                 </div>
                             </div>
@@ -154,51 +181,60 @@
                         </div>
                     </div>
                 </div>
-                <c-button status="dark"
-                          class="w-100 d-flex d-md-none justify-content-center my-4"
-                          size="lg"
-                          data-toggle="collapse"
-                          data-target="#c-nav"
-                          aria-expanded="false"
-                          aria-controls="c-nav">
+                <c-button
+                    status="dark"
+                    class="w-100 d-flex d-md-none justify-content-center my-4"
+                    size="lg"
+                    data-toggle="collapse"
+                    data-target="#c-nav"
+                    aria-expanded="false"
+                    aria-controls="c-nav">
                     Menu
                 </c-button>
-                <div id="c-nav"
-                     class="collapse show c-nav">
+                <div
+                    id="c-nav"
+                    class="collapse show c-nav">
                     <ul class="nav nav-tabs justify-content-between">
-                        <li class="nav-item"
+                        <li
+                            class="nav-item"
                             @click="section='overview'">
-                            <router-link :to="`/idea/${idea.id || 'new'}`"
-                                         class="nav-link"
-                                         :class="{ 'active': section === 'overview' }">
+                            <router-link
+                                :to="`/idea/${idea.id || 'new'}`"
+                                class="nav-link"
+                                :class="{ 'active': section === 'overview' }">
                                 Overview
                             </router-link>
                         </li>
-                        <li v-darklaunch="'COMMUNITY'"
+                        <li
+                            v-darklaunch="'COMMUNITY'"
                             class="nav-item"
                             @click="section='community'">
-                            <router-link :to="`/idea/${idea.id || 'new'}/community`"
-                                         class="nav-link"
-                                         :class="{ 'active': section === 'community' }">
+                            <router-link
+                                :to="`/idea/${idea.id || 'new'}/community`"
+                                class="nav-link"
+                                :class="{ 'active': section === 'community' }">
                                 Community
                                 <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
                                     0
                                 </c-updates-count>
                             </router-link>
                         </li>
-                        <li v-if="editing"
+                        <li
+                            v-if="editing"
                             class="nav-item">
-                            <a class="nav-link"
-                               :class="{ 'active': section === 'configure' }"
-                               @click="section='configure'">Configure</a>
+                            <a
+                                class="nav-link"
+                                :class="{ 'active': section === 'configure' }"
+                                @click="section='configure'">Configure</a>
                         </li>
                     </ul>
                 </div>
 
-                <div v-if="section === 'configure'"
-                     id="configure"
-                     class="row"
-                     :editing="editing">
+                <div
+                    v-if="section === 'configure'"
+                    id="configure"
+                    class="row"
+                    :editing="editing">
                     <div class="col-12">
                         <c-block title="Settings">
                             No settings yet
@@ -207,20 +243,24 @@
                 </div>
             </div>
 
-            <div id="overview"
-                 class="col-12 margin-top-40 ">
-                <transition name="page"
-                            mode="out-in">
-                    <c-idea-overview v-if="section === 'overview'"
-                                     :idea="idea"
-                                     :editing="editing"
-                                     :activeElement="activeElement"
-                                     @activateElement="activateElement"
-                                     @deactivateElement="deactivateElement" />
-                    <c-idea-community v-if="section === 'community'"
-                                      :idea="idea"
-                                      :editing="editing"
-                                      :activeElement="activeElement" />
+            <div
+                id="overview"
+                class="col-12 margin-top-40 ">
+                <transition
+                    name="page"
+                    mode="out-in">
+                    <c-idea-overview
+                        v-if="section === 'overview'"
+                        :idea="idea"
+                        :editing="editing"
+                        :activeElement="activeElement"
+                        @activateElement="activateElement"
+                        @deactivateElement="deactivateElement" />
+                    <c-idea-community
+                        v-if="section === 'community'"
+                        :idea="idea"
+                        :editing="editing"
+                        :activeElement="activeElement" />
                 </transition>
             </div>
         </div>

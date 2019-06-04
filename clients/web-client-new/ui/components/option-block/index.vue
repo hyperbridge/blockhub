@@ -1,6 +1,7 @@
 <template>
-    <div class="option-block"
-         :class="{'box-shadow' : shadow }">
+    <div
+        class="option-block"
+        :class="{'box-shadow' : shadow }">
         <div class="option-block__head">
             <div class="option-block__head-logo">
                 <img :src="image">
@@ -14,33 +15,37 @@
                 </div>
             </div>
         </div>
-        <div class="option-block__notification"
-             :style="{'background-color' : ntfColor }">
+        <div
+            class="option-block__notification"
+            :style="{'background-color' : ntfColor }">
             {{ notification }}
         </div>
         <div class="option-block__body">
             <div class="option-block__list">
-                <c-option-list-item v-for="item in list"
-                                    :key="item.id"
-                                    :selected="selectedId == item.id ? true : false"
-                                    :image="item.image"
-                                    :price="item.price"
-                                    @select="selectThis(item.id)">
+                <c-option-list-item
+                    v-for="item in list"
+                    :key="item.id"
+                    :selected="selectedId == item.id ? true : false"
+                    :image="item.image"
+                    :price="item.price"
+                    @select="selectThis(item.id)">
                     {{ item.name }}
                 </c-option-list-item>
             </div>
             <div class="option-block__action-list">
-                <c-button status="second-info"
-                          size="xl"
-                          class="my-2"
-                          @click="$emit('buy')">
+                <c-button
+                    status="second-info"
+                    size="xl"
+                    class="my-2"
+                    @click="$emit('buy')">
                     Buy now
                 </c-button>
-                <c-button status="opacity-info"
-                          class="my-2"
-                          size="xl"
-                          style="border-radius: 2px"
-                          @click="$emit('gift')">
+                <c-button
+                    status="opacity-info"
+                    class="my-2"
+                    size="xl"
+                    style="border-radius: 2px"
+                    @click="$emit('gift')">
                     Gift
                 </c-button>
                 <c-button-fav

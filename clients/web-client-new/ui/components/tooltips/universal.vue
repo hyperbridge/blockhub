@@ -5,15 +5,18 @@
             @mouseover="debounce(() => show_tooltip = true, delay)"
             @mouseout="debounce(() => show_tooltip = false, delay + 1)">
             <slot />
-            <c-icon v-if="!iconHide"
-                    name="question-circle" />
+            <c-icon
+                v-if="!iconHide"
+                name="question-circle" />
         </div>
-        <div v-if="show_tooltip"
-             class="tooltip-universal"
-             :class="position">
+        <div
+            v-if="show_tooltip"
+            class="tooltip-universal"
+            :class="position">
             <slot name="tooltip">
-                <div class="tooltip-universal__default"
-                     :class="[position, theme, default_class]">
+                <div
+                    class="tooltip-universal__default"
+                    :class="[position, theme, default_class]">
                     <h4 v-if="title">
                         {{ title }}
                     </h4>

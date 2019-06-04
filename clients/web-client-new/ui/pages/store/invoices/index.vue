@@ -15,21 +15,26 @@
                     </div>
                     <div class="card-container">
                         <div class="dropdown">
-                            <div class="rw-btn rw-btn--card"
-                                 data-toggle="dropdown"
-                                 aria-expanded="false">
+                            <div
+                                class="rw-btn rw-btn--card"
+                                data-toggle="dropdown"
+                                aria-expanded="false">
                                 <div />
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item"
-                                   href="#">See details</a>
-                                <a class="dropdown-item"
-                                   href="#">Download</a>
-                                <a class="dropdown-item"
-                                   href="#">Edit</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">See details</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Download</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Edit</a>
                                 <div class="dropdown-divider" />
-                                <a class="dropdown-item"
-                                   href="#">Delete</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -83,21 +88,26 @@
                     </div>
                     <div class="card-container">
                         <div class="dropdown">
-                            <div class="rw-btn rw-btn--card"
-                                 data-toggle="dropdown"
-                                 aria-expanded="false">
+                            <div
+                                class="rw-btn rw-btn--card"
+                                data-toggle="dropdown"
+                                aria-expanded="false">
                                 <div />
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item"
-                                   href="#">See details</a>
-                                <a class="dropdown-item"
-                                   href="#">Download</a>
-                                <a class="dropdown-item"
-                                   href="#">Edit</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">See details</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Download</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Edit</a>
                                 <div class="dropdown-divider" />
-                                <a class="dropdown-item"
-                                   href="#">Delete</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -151,21 +161,26 @@
                     </div>
                     <div class="card-container">
                         <div class="dropdown">
-                            <div class="rw-btn rw-btn--card"
-                                 data-toggle="dropdown"
-                                 aria-expanded="false">
+                            <div
+                                class="rw-btn rw-btn--card"
+                                data-toggle="dropdown"
+                                aria-expanded="false">
                                 <div />
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item"
-                                   href="#">See details</a>
-                                <a class="dropdown-item"
-                                   href="#">Download</a>
-                                <a class="dropdown-item"
-                                   href="#">Edit</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">See details</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Download</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Edit</a>
                                 <div class="dropdown-divider" />
-                                <a class="dropdown-item"
-                                   href="#">Delete</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -219,21 +234,26 @@
                     </div>
                     <div class="card-container">
                         <div class="dropdown">
-                            <div class="rw-btn rw-btn--card"
-                                 data-toggle="dropdown"
-                                 aria-expanded="false">
+                            <div
+                                class="rw-btn rw-btn--card"
+                                data-toggle="dropdown"
+                                aria-expanded="false">
                                 <div />
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item"
-                                   href="#">See details</a>
-                                <a class="dropdown-item"
-                                   href="#">Download</a>
-                                <a class="dropdown-item"
-                                   href="#">Edit</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">See details</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Download</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Edit</a>
                                 <div class="dropdown-divider" />
-                                <a class="dropdown-item"
-                                   href="#">Delete</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -287,21 +307,26 @@
                     </div>
                     <div class="card-container">
                         <div class="dropdown">
-                            <div class="rw-btn rw-btn--card"
-                                 data-toggle="dropdown"
-                                 aria-expanded="false">
+                            <div
+                                class="rw-btn rw-btn--card"
+                                data-toggle="dropdown"
+                                aria-expanded="false">
                                 <div />
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item"
-                                   href="#">See details</a>
-                                <a class="dropdown-item"
-                                   href="#">Download</a>
-                                <a class="dropdown-item"
-                                   href="#">Edit</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">See details</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Download</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Edit</a>
                                 <div class="dropdown-divider" />
-                                <a class="dropdown-item"
-                                   href="#">Delete</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -355,21 +380,26 @@
                     </div>
                     <div class="card-container">
                         <div class="dropdown">
-                            <div class="rw-btn rw-btn--card"
-                                 data-toggle="dropdown"
-                                 aria-expanded="false">
+                            <div
+                                class="rw-btn rw-btn--card"
+                                data-toggle="dropdown"
+                                aria-expanded="false">
                                 <div />
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item"
-                                   href="#">See details</a>
-                                <a class="dropdown-item"
-                                   href="#">Download</a>
-                                <a class="dropdown-item"
-                                   href="#">Edit</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">See details</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Download</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Edit</a>
                                 <div class="dropdown-divider" />
-                                <a class="dropdown-item"
-                                   href="#">Delete</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -423,21 +453,26 @@
                     </div>
                     <div class="card-container">
                         <div class="dropdown">
-                            <div class="rw-btn rw-btn--card"
-                                 data-toggle="dropdown"
-                                 aria-expanded="false">
+                            <div
+                                class="rw-btn rw-btn--card"
+                                data-toggle="dropdown"
+                                aria-expanded="false">
                                 <div />
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item"
-                                   href="#">See details</a>
-                                <a class="dropdown-item"
-                                   href="#">Download</a>
-                                <a class="dropdown-item"
-                                   href="#">Edit</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">See details</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Download</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Edit</a>
                                 <div class="dropdown-divider" />
-                                <a class="dropdown-item"
-                                   href="#">Delete</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -491,21 +526,26 @@
                     </div>
                     <div class="card-container">
                         <div class="dropdown">
-                            <div class="rw-btn rw-btn--card"
-                                 data-toggle="dropdown"
-                                 aria-expanded="false">
+                            <div
+                                class="rw-btn rw-btn--card"
+                                data-toggle="dropdown"
+                                aria-expanded="false">
                                 <div />
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item"
-                                   href="#">See details</a>
-                                <a class="dropdown-item"
-                                   href="#">Download</a>
-                                <a class="dropdown-item"
-                                   href="#">Edit</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">See details</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Download</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Edit</a>
                                 <div class="dropdown-divider" />
-                                <a class="dropdown-item"
-                                   href="#">Delete</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -559,21 +599,26 @@
                     </div>
                     <div class="card-container">
                         <div class="dropdown">
-                            <div class="rw-btn rw-btn--card"
-                                 data-toggle="dropdown"
-                                 aria-expanded="false">
+                            <div
+                                class="rw-btn rw-btn--card"
+                                data-toggle="dropdown"
+                                aria-expanded="false">
                                 <div />
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item"
-                                   href="#">See details</a>
-                                <a class="dropdown-item"
-                                   href="#">Download</a>
-                                <a class="dropdown-item"
-                                   href="#">Edit</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">See details</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Download</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Edit</a>
                                 <div class="dropdown-divider" />
-                                <a class="dropdown-item"
-                                   href="#">Delete</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -627,21 +672,26 @@
                     </div>
                     <div class="card-container">
                         <div class="dropdown">
-                            <div class="rw-btn rw-btn--card"
-                                 data-toggle="dropdown"
-                                 aria-expanded="false">
+                            <div
+                                class="rw-btn rw-btn--card"
+                                data-toggle="dropdown"
+                                aria-expanded="false">
                                 <div />
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item"
-                                   href="#">See details</a>
-                                <a class="dropdown-item"
-                                   href="#">Download</a>
-                                <a class="dropdown-item"
-                                   href="#">Edit</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">See details</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Download</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Edit</a>
                                 <div class="dropdown-divider" />
-                                <a class="dropdown-item"
-                                   href="#">Delete</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -695,21 +745,26 @@
                     </div>
                     <div class="card-container">
                         <div class="dropdown">
-                            <div class="rw-btn rw-btn--card"
-                                 data-toggle="dropdown"
-                                 aria-expanded="false">
+                            <div
+                                class="rw-btn rw-btn--card"
+                                data-toggle="dropdown"
+                                aria-expanded="false">
                                 <div />
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item"
-                                   href="#">See details</a>
-                                <a class="dropdown-item"
-                                   href="#">Download</a>
-                                <a class="dropdown-item"
-                                   href="#">Edit</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">See details</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Download</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Edit</a>
                                 <div class="dropdown-divider" />
-                                <a class="dropdown-item"
-                                   href="#">Delete</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -763,21 +818,26 @@
                     </div>
                     <div class="card-container">
                         <div class="dropdown">
-                            <div class="rw-btn rw-btn--card"
-                                 data-toggle="dropdown"
-                                 aria-expanded="false">
+                            <div
+                                class="rw-btn rw-btn--card"
+                                data-toggle="dropdown"
+                                aria-expanded="false">
                                 <div />
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item"
-                                   href="#">See details</a>
-                                <a class="dropdown-item"
-                                   href="#">Download</a>
-                                <a class="dropdown-item"
-                                   href="#">Edit</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">See details</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Download</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Edit</a>
                                 <div class="dropdown-divider" />
-                                <a class="dropdown-item"
-                                   href="#">Delete</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Delete</a>
                             </div>
                         </div>
                     </div>

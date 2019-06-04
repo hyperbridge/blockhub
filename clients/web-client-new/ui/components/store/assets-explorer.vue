@@ -1,14 +1,16 @@
 <template>
     <div class="row margin-bottom-30">
         <div class="col-12">
-            <c-block title="Top 20 Items"
-                     :noGutter="true"
-                     :onlyContentBg="true"
-                     :bgGradient="true"
-                     showActions>
+            <c-block
+                title="Top 20 Items"
+                :noGutter="true"
+                :onlyContentBg="true"
+                :bgGradient="true"
+                showActions>
                 <template slot="additional-action">
-                    <span class="margin-right-15"
-                          hidden>Sort by:</span>
+                    <span
+                        class="margin-right-15"
+                        hidden>Sort by:</span>
                     <c-heading-bar-fields
                         v-for="(opt, index) in sortOptions"
                         :key="index"
@@ -143,8 +145,9 @@
                 </c-content-navigation>
                 <div v-else-if="filtersActive">
                     <p>
-                        No products were found using these filters. Want to <c-button status="plain"
-                                                                                      @click="$store.commit('application/activateModal', 'coming-soon')">
+                        No products were found using these filters. Want to <c-button
+                            status="plain"
+                            @click="$store.commit('application/activateModal', 'coming-soon')">
                             Check for updates
                         </c-button>?
                     </p>
@@ -157,8 +160,9 @@
                     </c-button>
                 </div>
                 <p v-else>
-                    Nothing could be found. Want to <c-button status="plain"
-                                                              @click="$store.commit('application/activateModal', 'coming-soon')">
+                    Nothing could be found. Want to <c-button
+                        status="plain"
+                        @click="$store.commit('application/activateModal', 'coming-soon')">
                         Check for updates
                     </c-button>?
                 </p>

@@ -1,8 +1,9 @@
 <template>
     <div class="searcher__wrapper">
         <transition name="slide-in">
-            <span v-if="resultsCount && phrase.length"
-                  class="searcher__results-count">
+            <span
+                v-if="resultsCount && phrase.length"
+                class="searcher__results-count">
                 Results: {{ resultsCount }}
             </span>
         </transition>
@@ -12,24 +13,30 @@
             aria-label="Search"
             @input="search"
             @click="$emit('click')" />
-        <div v-if="phrase.length"
-             class="results__wrapper">
+        <div
+            v-if="phrase.length"
+            class="results__wrapper">
             <div class="results__content">
-                <p v-if="isTyping"
-                   class="results__text">
+                <p
+                    v-if="isTyping"
+                    class="results__text">
                     Searching...
                 </p>
-                <p v-else-if="resultsCount != null && !resultsCount"
-                   class="results__text">
-                    Nothing could be found. Want to <c-button status="plain"
-                                                              @click="$store.commit('application/activateModal', 'coming-soon')">
+                <p
+                    v-else-if="resultsCount != null && !resultsCount"
+                    class="results__text">
+                    Nothing could be found. Want to <c-button
+                        status="plain"
+                        @click="$store.commit('application/activateModal', 'coming-soon')">
                         Check for updates
                     </c-button>?
                 </p>
-                <ul v-else
+                <ul
+                    v-else
                     class="results__list">
                     <slot name="list">
-                        <li v-for="(result, index) in results"
+                        <li
+                            v-for="(result, index) in results"
                             :key="index"
                             class="list__result">
                             <slot :result="result" />

@@ -1,8 +1,9 @@
 <template>
-    <c-block :title="title"
-             :noGutter="true"
-             :bgGradient="true"
-             :onlyContentBg="true">
+    <c-block
+        :title="title"
+        :noGutter="true"
+        :bgGradient="true"
+        :onlyContentBg="true">
         <slot />
     </c-block>
 </template>

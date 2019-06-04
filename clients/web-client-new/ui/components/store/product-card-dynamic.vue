@@ -4,28 +4,34 @@
         @mouseover="show_preview(true)"
         @mouseout="show_preview(false)">
         <div class="position-relative">
-            <div v-if="product.price"
-                 class="product-grid__item-price">
+            <div
+                v-if="product.price"
+                class="product-grid__item-price">
                 <strong>{{ product.price | convertCurrency }}</strong>
             </div>
-            <c-button status="none"
-                      :to="`/product/${product.id}`"
-                      class="card-img-top">
+            <c-button
+                status="none"
+                :to="`/product/${product.id}`"
+                class="card-img-top">
                 <transition name="fade">
-                    <c-img v-if="!displayPreview"
-                           class="card-img-top"
-                           :src="product.images.mediumTile" />
+                    <c-img
+                        v-if="!displayPreview"
+                        class="card-img-top"
+                        :src="product.images.mediumTile" />
                     <template v-else>
-                        <video v-if="product.video && autoplay"
-                               class="card-img-top"
-                               width="100%"
-                               autoplay>
-                            <source :src="product.video"
-                                    type="video/mp4">
+                        <video
+                            v-if="product.video && autoplay"
+                            class="card-img-top"
+                            width="100%"
+                            autoplay>
+                            <source
+                                :src="product.video"
+                                type="video/mp4">
                         </video>
-                        <transition-group v-else
-                                          tag="div"
-                                          name="slide-left">
+                        <transition-group
+                            v-else
+                            tag="div"
+                            name="slide-left">
                             <c-img
                                 v-for="(image, index) in product.images.preview"
                                 v-if="index === currentImage"
@@ -38,13 +44,15 @@
             </c-button>
         </div>
         <h4>
-            <c-button status="none"
-                      :to="`/product/${product.id}`">
+            <c-button
+                status="none"
+                :to="`/product/${product.id}`">
                 {{ product.name }}
             </c-button>
         </h4>
-        <p class="card-text"
-           hidden>
+        <p
+            class="card-text"
+            hidden>
             {{ product.shortDescription }}
         </p>
         <c-tags :tags="product.developerTags.slice(0,3)" />

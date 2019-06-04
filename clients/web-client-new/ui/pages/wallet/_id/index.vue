@@ -1,17 +1,20 @@
 <template>
     <c-layout navigationKey="wallet">
         <div class="row">
-            <div v-if="!wallet"
-                 class="col-12">
+            <div
+                v-if="!wallet"
+                class="col-12">
                 Wallet not found
             </div>
-            <div v-if="wallet"
-                 class="col-12">
+            <div
+                v-if="wallet"
+                class="col-12">
                 {{ wallet.name }}
                 {{ wallet.id }}
                 <br>
-                <c-button status="none"
-                          :to="`/wallet/${wallet.id}/transactions`">
+                <c-button
+                    status="none"
+                    :to="`/wallet/${wallet.id}/transactions`">
                     Transactions
                 </c-button>
             </div>

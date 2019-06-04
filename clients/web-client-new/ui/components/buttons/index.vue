@@ -22,9 +22,10 @@
                 icon ? 'fa-' + icon : injectFilter,
                 swapOrder ? 'swap-order' : ''
             ]" />
-        <router-link v-if="to"
-                     tag="span"
-                     :to="to">
+        <router-link
+            v-if="to"
+            tag="span"
+            :to="to">
             <slot />
         </router-link>
         <slot v-if="!to" />

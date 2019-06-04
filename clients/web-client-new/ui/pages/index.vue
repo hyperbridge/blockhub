@@ -47,8 +47,8 @@
 
         <c-custom-modal
             v-if="showWelcomeModal"
-            @close="closeModal"
-            title="BlockHub Preview">
+            title="BlockHub Preview"
+            @close="closeModal">
             <div
                 slot="modalBody"
                 class="help-modal__content"
@@ -74,8 +74,8 @@
                 slot="modalFooter"
                 class="text-right w-100">
                 <c-button
-                    @click="closeModal"
-                    size="md">
+                    size="md"
+                    @click="closeModal">
                     Got it
                 </c-button>
             </div>

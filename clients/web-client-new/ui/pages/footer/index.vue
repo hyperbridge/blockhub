@@ -1,16 +1,19 @@
 <template>
-    <c-layout :showLeftPanel="false"
-              :showRightPanel="false">
+    <c-layout
+        :showLeftPanel="false"
+        :showRightPanel="false">
         <div class="row justify-content-center">
             <div class="col-12 py-5 text-center margin-bottom-30">
-                <c-button status="second-info"
-                          size="lg">
+                <c-button
+                    status="second-info"
+                    size="lg">
                     Go to Blog
                 </c-button>
             </div>
             <div class="col-12 col-lg-2">
-                <c-sidebar-menu subTitle="Tools"
-                                mClass="margin-bottom-20">
+                <c-sidebar-menu
+                    subTitle="Tools"
+                    mClass="margin-bottom-20">
                     <c-sidebar-menu-link to="/">
                         Bridge
                     </c-sidebar-menu-link>
@@ -23,8 +26,9 @@
                 </c-sidebar-menu>
             </div>
             <div class="col-12 col-lg-2">
-                <c-sidebar-menu subTitle="Company"
-                                mClass="margin-bottom-20">
+                <c-sidebar-menu
+                    subTitle="Company"
+                    mClass="margin-bottom-20">
                     <c-sidebar-menu-link to="/">
                         Press
                     </c-sidebar-menu-link>
@@ -37,8 +41,9 @@
                 </c-sidebar-menu>
             </div>
             <div class="col-12 col-lg-2">
-                <c-sidebar-menu subTitle="Inspiration & Learning"
-                                mClass="margin-bottom-20">
+                <c-sidebar-menu
+                    subTitle="Inspiration & Learning"
+                    mClass="margin-bottom-20">
                     <c-sidebar-menu-link to="/">
                         Blog
                     </c-sidebar-menu-link>
@@ -51,8 +56,9 @@
                 </c-sidebar-menu>
             </div>
             <div class="col-12 col-lg-2">
-                <c-sidebar-menu subTitle="Community & Support"
-                                mClass="margin-bottom-20">
+                <c-sidebar-menu
+                    subTitle="Community & Support"
+                    mClass="margin-bottom-20">
                     <c-sidebar-menu-link to="/">
                         Artist Community
                     </c-sidebar-menu-link>
@@ -70,57 +76,71 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-stretch mt-3 mb-4">
                     <c-input placeholder="Join our mailing list" />
-                    <c-button status="second-info"
-                              size="sm"
-                              class="ml-3 px-4">
+                    <c-button
+                        status="second-info"
+                        size="sm"
+                        class="ml-3 px-4">
                         Join
                     </c-button>
                 </div>
                 <div class="social-list d-flex justify-content-between mt-3">
-                    <c-social-link size="xl"
-                                   icon="facebook" />
-                    <c-social-link size="xl"
-                                   icon="twitter" />
-                    <c-social-link size="xl"
-                                   icon="slack" />
-                    <c-social-link size="xl"
-                                   icon="instagram" />
-                    <c-social-link size="xl"
-                                   icon="youtube" />
-                    <c-social-link size="xl"
-                                   icon="discord" />
-                    <c-social-link size="xl"
-                                   icon="linkedin" />
+                    <c-social-link
+                        size="xl"
+                        icon="facebook" />
+                    <c-social-link
+                        size="xl"
+                        icon="twitter" />
+                    <c-social-link
+                        size="xl"
+                        icon="slack" />
+                    <c-social-link
+                        size="xl"
+                        icon="instagram" />
+                    <c-social-link
+                        size="xl"
+                        icon="youtube" />
+                    <c-social-link
+                        size="xl"
+                        icon="discord" />
+                    <c-social-link
+                        size="xl"
+                        icon="linkedin" />
                 </div>
             </div>
             <div class="col-12 logos-slider">
-                <c-swiper :options="sliderOptions"
-                          class="padding-bottom-30 margin-bottom-30 padding-top-40 margin-top-50 border-top border-bottom ">
-                    <c-swiper-slide v-for="logo in logos"
-                                    :key="logo">
-                        <img :src="logo"
-                             alt=""
-                             class="img-fluid image-white">
+                <c-swiper
+                    :options="sliderOptions"
+                    class="padding-bottom-30 margin-bottom-30 padding-top-40 margin-top-50 border-top border-bottom ">
+                    <c-swiper-slide
+                        v-for="logo in logos"
+                        :key="logo">
+                        <img
+                            :src="logo"
+                            alt=""
+                            class="img-fluid image-white">
                     </c-swiper-slide>
                 </c-swiper>
             </div>
             <div class="col-12 col-md-6">
                 <ul class="list-unstyled d-flex align-items-center">
                     <li class="px-3 border-right">
-                        <a href="#3"
-                           class="text-white">
+                        <a
+                            href="#3"
+                            class="text-white">
                             Legal
                         </a>
                     </li>
                     <li class="px-3 border-right">
-                        <a href="#3"
-                           class="text-white">
+                        <a
+                            href="#3"
+                            class="text-white">
                             Privacy
                         </a>
                     </li>
                     <li class="px-3">
-                        <a href="#3"
-                           class="text-white">
+                        <a
+                            href="#3"
+                            class="text-white">
                             Cookies
                         </a>
                     </li>

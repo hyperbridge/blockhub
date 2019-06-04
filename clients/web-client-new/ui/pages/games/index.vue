@@ -1,29 +1,32 @@
 <template>
     <c-layout navigationKey="store">
-        <c-block :noGutter="true"
-                 :bgGradient="true"
-                 :onlyContentBg="true">
+        <c-block
+            :noGutter="true"
+            :bgGradient="true"
+            :onlyContentBg="true">
             <c-heading-bar
                 slot="title"
                 class="mb-0"
                 name="Browse All Games"
                 :showArrows="games.length > 4" />
             <div class="row">
-                <c-loading :enabled="loading"
-                           size="lg" />
+                <c-loading
+                    :enabled="loading"
+                    size="lg" />
                 <p v-if="!loading && !games.length">
-                    Nothing could be found. Want to <c-button status="plain"
-                                                              @click="$store.commit('application/activateModal', 'coming-soon')">
+                    Nothing could be found. Want to <c-button
+                        status="plain"
+                        @click="$store.commit('application/activateModal', 'coming-soon')">
                         Check for updates
                     </c-button>?
                 </p>
                 <c-game-card
-                    class="p-2 col-3"
-                    :id="game.id"
-                    :image="game.meta.images.mediumTile"
                     v-for="(game, index) in games"
-                    :description="game.description"
+                    :id="game.id"
                     :key="index"
+                    class="p-2 col-3"
+                    :image="game.meta.images.mediumTile"
+                    :description="game.description"
                     :funds="game.meta.funds"
                     :parentName="game.product && game.product.name"
                     :parentDeveloper="game.product && game.product.developer"
