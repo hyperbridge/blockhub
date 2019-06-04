@@ -1,20 +1,23 @@
 <template>
     <c-layout navigationKey="help">
-        <div class="row margin-bottom-30" v-if="!topic">
+        <div v-if="!topic"
+             class="row margin-bottom-30">
             <div class="col-12">
                 <c-card class="text-center">
                     <p>Oh no! That topic was not found!</p>
                 </c-card>
             </div>
         </div>
-        <div class="row" v-if="topic">
+        <div v-if="topic"
+             class="row">
             <div class="col-12">
                 <h3 class="topic-ttl margin-bottom-30">
-                    <i :class="['fas fa-' + topic.icon ]"></i>
+                    <i :class="['fas fa-' + topic.icon ]" />
                     {{ topic.label }}
                 </h3>
 
-                <c-block class="margin-bottom-30 padding-top-5 padding-bottom-5" v-if="topic.subTopics">
+                <c-block v-if="topic.subTopics"
+                         class="margin-bottom-30 padding-top-5 padding-bottom-5">
                     <div class="topics-list">
                         <c-topic-item
                             v-for="(topic, index) in topic.subTopics"
@@ -28,32 +31,44 @@
                 </c-block>
 
                 <c-block class="margin-bottom-30 padding-bottom-5">
-                    <div class="article-list" v-if="showByTopic(topic.id).length">
-                        <c-article-item :to="`/help/${topic.id}/article/${article.slug}`"
-                                        v-for="(article, index) in showByTopic(topic.id)"
+                    <div v-if="showByTopic(topic.id).length"
+                         class="article-list">
+                        <c-article-item v-for="(article, index) in showByTopic(topic.id)"
                                         :key="index"
-                        >
+                                        :to="`/help/${topic.id}/article/${article.slug}`">
                             {{ article.title }}
                         </c-article-item>
                     </div>
-                    <h3 v-else>No articles yet</h3>
+                    <h3 v-else>
+                        No articles yet
+                    </h3>
                 </c-block>
-
             </div>
             <div class="col-12 col-lg-6 mb-4 mb-lg-0">
                 <c-card class="text-center">
-                    <h4 class="h2">Community</h4>
+                    <h4 class="h2">
+                        Community
+                    </h4>
                     <p>Engage with a community of passionate experts to get the answers you need</p>
-                    <c-button iconHide class="width-auto margin-top-10" href="https://github.com/hyperbridge/blockhub-desktop-client"
-                                target="_blank">Visit GitHub
+                    <c-button iconHide
+                              class="width-auto margin-top-10"
+                              href="https://github.com/hyperbridge/blockhub-desktop-client"
+                              target="_blank">
+                        Visit GitHub
                     </c-button>
                 </c-card>
             </div>
             <div class="col-12 col-lg-6 mb-4 mb-lg-0">
                 <c-card class="text-center">
-                    <h4 class="h2">BlockHub Support</h4>
+                    <h4 class="h2">
+                        BlockHub Support
+                    </h4>
                     <p>Create a support ticket and our support experts will get back to you</p>
-                    <c-button href="https://hyperbridge.zendesk.com/" status="info" iconHide class="width-auto margin-top-10">Create a ticket
+                    <c-button href="https://hyperbridge.zendesk.com/"
+                              status="info"
+                              iconHide
+                              class="width-auto margin-top-10">
+                        Create a ticket
                     </c-button>
                 </c-card>
             </div>
@@ -62,42 +77,42 @@
 </template>
 
 <script>
-    export default {
-        props: ['id'],
-        components: {
-            'c-article-item': () => import('~/components/help/article-item').then(m => m.default || m),
-            'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m),
-            'c-list-item': () => import('~/components/help/simple-item').then(m => m.default || m),
-            'c-card': () => import('~/components/help/help-card.vue').then(m => m.default || m),
+export default {
+    components: {
+        'c-article-item': () => import('~/components/help/article-item').then(m => m.default || m),
+        'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m),
+        'c-list-item': () => import('~/components/help/simple-item').then(m => m.default || m),
+        'c-card': () => import('~/components/help/help-card.vue').then(m => m.default || m)
+    },
+    props: ['id'],
+    data() {
+        return {
+            showArticles: false,
+            topicId: this.$route.params.id
+        }
+    },
+    computed: {
+        topic() {
+            return this.$store.state.marketplace.help.topics[this.id]
         },
-        data() {
-            return {
-                showArticles: false,
-                topicId: this.$route.params.id
-            }
-        },
-        methods: {
-            showByTopic(id) {
-                let results = [];
-                let data = Object.values(this.$store.state.marketplace.help.topics[id].articles || [])
+        articles() {
+            return this.$store.state.marketplace.help.articles
+        }
 
-                for (let i = 0; i < data.length; i++) {
-                    results.push(this.$store.state.marketplace.help.articles[data[i]]);
-                }
+    },
+    methods: {
+        showByTopic(id) {
+            const results = []
+            const data = Object.values(this.$store.state.marketplace.help.topics[id].articles || [])
 
-                return results;
-            }
-        },
-        computed: {
-            topic: function () {
-                return this.$store.state.marketplace.help.topics[this.id]
-            },
-            articles: function () {
-                return this.$store.state.marketplace.help.articles
+            for (let i = 0; i < data.length; i++) {
+                results.push(this.$store.state.marketplace.help.articles[data[i]])
             }
 
+            return results
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,12 +1,12 @@
 <template>
     <c-layout>
-            <div class="container-fluid">  
-                <div class="row">
-                    <div class="col-12">
-                        TAB 1: Network Monitor
-                    </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    TAB 1: Network Monitor
                 </div>
             </div>
+        </div>
     </c-layout>
 </template>
 

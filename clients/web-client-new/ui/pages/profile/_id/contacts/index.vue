@@ -1,19 +1,17 @@
 <template>
-    <c-layout>
-
-    </c-layout>
+    <c-layout />
 </template>
 
 <script>
 export default {
-  components: {
-  },
-  components: {
-    'c-layout': () => import('~/components/front-layout').then(m => m.default || m)
-  },
-  data: () => ({
-    wallets: []
-  })
+    components: {
+    },
+    components: {
+        'c-layout': () => import('~/components/front-layout').then(m => m.default || m)
+    },
+    data: () => ({
+        wallets: []
+    })
 }
 </script>
 

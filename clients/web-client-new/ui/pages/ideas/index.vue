@@ -1,9 +1,12 @@
 <template>
     <c-layout navigationKey="idea">
         <div class="row">
-            <div class="crowdfund-notice col-12 col-md-6 offset-md-3" v-if="!$store.state.application.settings.client.hide_crowdfund_game_notice" style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
-                <c-button class="btn-close" @click="$store.commit('application/updateClientSettings', { key: 'hide_crowdfund_game_notice', value: true })">
-                    <i class="fas fa-times"></i>
+            <div v-if="!$store.state.application.settings.client.hide_crowdfund_game_notice"
+                 class="crowdfund-notice col-12 col-md-6 offset-md-3"
+                 style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
+                <c-button class="btn-close"
+                          @click="$store.commit('application/updateClientSettings', { key: 'hide_crowdfund_game_notice', value: true })">
+                    <i class="fas fa-times" />
                 </c-button>
 
                 <h2>Create Idea</h2>
@@ -12,28 +15,35 @@
                     <p>Want to inspire your favourite dev studio to continue a series? Let's do it.</p>
                     <p>Maybe some day we'll get a Half-life 3 or HL2 Episode 3.</p>
                 </div>
-                <br />
-                <p><c-button class="c-button--lg outline-white" to="/idea/new">Get Started</c-button></p>
+                <br>
+                <p>
+                    <c-button class="c-button--lg outline-white"
+                              to="/idea/new">
+                        Get Started
+                    </c-button>
+                </p>
             </div>
         </div>
 
-        <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+        <c-block :noGutter="true"
+                 :bgGradient="true"
+                 :onlyContentBg="true">
             <c-heading-bar
                 slot="title"
                 class="mb-0"
-                name="Browse All Ideas"
-            />
+                name="Browse All Ideas" />
             <div class="row">
-                <c-loading :enabled="!ideas.length" size="lg" />
+                <c-loading :enabled="!ideas.length"
+                           size="lg" />
                 <c-idea-card
-                    class="p-2 col-3"
-                    :description="idea.description" 
-                    :parentName="idea.name"
-                    :parentDeveloperId="idea.meta.owner && idea.meta.owner.id" 
-                    :parentDeveloperName="idea.meta.owner && idea.meta.owner.name" 
                     :id="idea.id"
-                    v-for="(idea, index) in ideas" :key="index"
-                />
+                    v-for="(idea, index) in ideas"
+                    class="p-2 col-3"
+                    :key="index"
+                    :description="idea.description"
+                    :parentName="idea.name"
+                    :parentDeveloperId="idea.meta.owner && idea.meta.owner.id"
+                    :parentDeveloperName="idea.meta.owner && idea.meta.owner.name" />
             </div>
         </c-block>
 
@@ -44,17 +54,7 @@
 <script>
 export default {
     components: {
-        'c-idea-card': () => import('~/components/idea-card').then(m => m.default || m),
-    },
-    created() {
-        this.$store.dispatch('ideas/find', {
-            query: {
-                $sort: {
-                    createdAt: -1
-                },
-                $limit: 25
-            }
-        })
+        'c-idea-card': () => import('~/components/idea-card').then(m => m.default || m)
     },
     computed: {
         ideas() {
@@ -74,7 +74,7 @@ export default {
                             768: {
                                 slidesPerView: 1,
                                 spaceBetween: 0
-                            },
+                            }
                         }
                     },
                     projects: this.$store.state.funding.trendingProjects || []
@@ -92,7 +92,7 @@ export default {
                             768: {
                                 slidesPerView: 1,
                                 spaceBetween: 0
-                            },
+                            }
                         }
                     },
                     projects: this.$store.state.funding.trendingProjects || []
@@ -110,7 +110,7 @@ export default {
                             768: {
                                 slidesPerView: 1,
                                 spaceBetween: 0
-                            },
+                            }
                         }
                     },
                     projects: this.$store.state.funding.topGameIdeas || []
@@ -128,7 +128,7 @@ export default {
                             768: {
                                 slidesPerView: 1,
                                 spaceBetween: 0
-                            },
+                            }
                         }
                     },
                     projects: this.$store.state.funding.topContentIdeas || []
@@ -146,7 +146,7 @@ export default {
                             768: {
                                 slidesPerView: 1,
                                 spaceBetween: 0
-                            },
+                            }
                         }
                     },
                     projects: this.$store.state.funding.topItemIdeas || []
@@ -155,6 +155,16 @@ export default {
 
             return result
         }
+    },
+    created() {
+        this.$store.dispatch('ideas/find', {
+            query: {
+                $sort: {
+                    createdAt: -1
+                },
+                $limit: 25
+            }
+        })
     }
 }
 </script>

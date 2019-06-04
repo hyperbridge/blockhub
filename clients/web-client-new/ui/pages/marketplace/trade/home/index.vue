@@ -4,79 +4,77 @@
             <ul class="trade-block__menu-list reset-list">
                 <li
                     v-for="(title, index) in ['received', 'sent', 'closed']"
-                    :key="index"
-                >
+                    :key="index">
                     <a
                         class="menu-list__item"
                         :class="{ 'menu-list__item--active': activeTab === index + 1}"
-                        @click="activeTab = index + 1"
-                    >
+                        @click="activeTab = index + 1">
                         {{ title | upperFirstChar }}
-                        <c-tag-count :number="offersCount[title]"/>
+                        <c-tag-count :number="offersCount[title]" />
                     </a>
                 </li>
             </ul>
         </nav>
-        <c-tabs :activeTabProp="activeTab" disableMenu>
+        <c-tabs :activeTabProp="activeTab"
+                disableMenu>
             <c-tab
                 v-for="(offers, offersKey, index) in offers"
                 :key="offersKey"
                 :tab_id="index + 1"
-                class="trade-block__offers-tab"
-            >
+                class="trade-block__offers-tab">
                 <c-trade-offer
                     v-for="offer in offers"
                     :key="offer.id"
                     :offer="offer"
-                    @wasSeen="offer.new = false"
-                />
-                <p v-if="!offers.length">No offers were found</p>
+                    @wasSeen="offer.new = false" />
+                <p v-if="!offers.length">
+                    No offers were found
+                </p>
             </c-tab>
         </c-tabs>
     </article>
 </template>
 
 <script>
-    export default {
-        props: ['transactions'],
-        components: {
-            'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
-            'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
-            'c-trade-offer': () => import('~/components/trade-offer').then(m => m.default || m),
-            'c-tag-count': () => import('~/components/tags/count').then(m => m.default || m),
+export default {
+    components: {
+        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
+        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
+        'c-trade-offer': () => import('~/components/trade-offer').then(m => m.default || m),
+        'c-tag-count': () => import('~/components/tags/count').then(m => m.default || m)
+    },
+    props: ['transactions'],
+    data() {
+        return {
+            activeTab: 1
+        }
+    },
+    computed: {
+        transactionsX() {
+            return
+            return this.$store.getters['assets/transactionsArray']
         },
-        data() {
-            return {
-                activeTab: 1,
-            }
+        userId() {
+            return this.$store.state.application.account.id
         },
-        computed: {
-            transactionsX() {
-                return;
-                return this.$store.getters['assets/transactionsArray'];
-            },
-            userId() {
-                return this.$store.state.application.account.id;
-            },
-            offers() {
-                const { userId } = this;
-                return this.transactions.reduce((offers, trx) => {
+        offers() {
+            const { userId } = this
+            return this.transactions.reduce((offers, trx) => {
+                const target = !trx.accepted
+                    ? trx.createdBy == userId ? 'sent' : 'received'
+                    : 'closed'
 
-                    const target = !trx.accepted
-                        ? trx.createdBy == userId ? 'sent' : 'received'
-                        : 'closed';
-
-                    offers[target].push(trx);
-                    return offers;
-                }, { received: [], sent: [], closed: [] });
-            },
-            offersCount() {
-                return Object.entries(this.offers).reduce((count, [name, offers]) =>
-                    ({ ...count, [name]: offers.length })
-                , { received: 0, sent: 0, closed: 0 });
-            }
+                offers[target].push(trx)
+                return offers
+            }, { received: [], sent: [], closed: [] })
+        },
+        offersCount() {
+            return Object.entries(this.offers).reduce((count, [name, offers]) =>
+                ({ ...count, [name]: offers.length })
+            , { received: 0, sent: 0, closed: 0 })
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

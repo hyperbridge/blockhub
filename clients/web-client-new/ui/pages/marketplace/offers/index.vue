@@ -1,13 +1,15 @@
 <template>
     <div>
         <span v-if="isLoading">Loading ...</span>
-        <c-content-navigation v-else :items="assets" :setLimits="7">
-            <ul class="assets-list" slot-scope="props">
+        <c-content-navigation v-else
+                              :items="assets"
+:setLimits="7">
+            <ul slot-scope="props"
+class="assets-list">
                 <c-asset-list-item
                     v-for="asset in props.items"
                     :key="asset.id"
-                    :asset="asset"
-                >
+                    :asset="asset">
                     <router-link
                         slot="link"
                         slot-scope="props"
@@ -15,8 +17,7 @@
                             name: 'Marketplace Asset Offers',
                             params: { assetId: props.asset.id }
                         }"
-                        v-text="props.asset.name"
-                    />
+                        v-text="props.asset.name" />
                     <!-- <a slot="link" slot-scope="props" :title="props.asset.name">
                         {{ props.asset.name }}
                     </a> -->
@@ -110,22 +111,36 @@
 
 
 <script>
-    //import offers from '@/db/api/offers';
+// import offers from '@/db/api/offers';
 
-    export default {
-        props: ['id', 'profileId'],
-        components: {
-            'c-block': () => import('~/components/block/index').then(m => m.default || m),
-            'c-asset-list-item': () => import('~/components/asset/list/list-item').then(m => m.default || m),
-            'c-asset-preview-basic': () => import('~/components/asset/preview-basic').then(m => m.default || m),
-            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+export default {
+    components: {
+        'c-block': () => import('~/components/block/index').then(m => m.default || m),
+        'c-asset-list-item': () => import('~/components/asset/list/list-item').then(m => m.default || m),
+        'c-asset-preview-basic': () => import('~/components/asset/preview-basic').then(m => m.default || m),
+        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m)
+    },
+    props: ['id', 'profileId'],
+    data() {
+        return {
+            openedOffer: null,
+            bidValue: 0,
+            results: [],
+            isLoading: true
+        }
+    },
+    computed: {
+        offers() {
+            return []// this.$store.getters['assets/offersMap'];
         },
-        data() {
-            return {
-                openedOffer: null,
-                bidValue: 0,
-                results: [],
-                isLoading: true
+        assets() {
+            return []// this.$store.getters['assets/assetsArray'];
+        }
+    },
+        watch: {
+            profileId: {
+                handler: 'getOffers',
+                immediate: true
             }
         },
         methods: {
@@ -156,24 +171,10 @@
                 this.isLoading = false;
             }
         },
-        watch: {
-            profileId: {
-                handler: 'getOffers',
-                immediate: true
-            }
-        },
-        computed: {
-            offers() {
-                return []//this.$store.getters['assets/offersMap'];
-            },
-            assets() {
-                return []//this.$store.getters['assets/assetsArray'];
-            }
-        },
-        beforeDestroy() {
-            // this.$store.dispatch('clearData', 'assets/offers');
-        }
+    beforeDestroy() {
+        // this.$store.dispatch('clearData', 'assets/offers');
     }
+}
 </script>
 
 <style lang="scss" scoped>

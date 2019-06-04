@@ -4,50 +4,82 @@
             <div class="col-12">
                 <ul class="nav nav-tabs margin-bottom-10">
                     <li class="nav-item">
-                        <c-button status="none" class="nav-link" to="/account/wallets">Overview</c-button>
+                        <c-button status="none"
+                                  class="nav-link"
+                                  to="/account/wallets">
+                            Overview
+                        </c-button>
                     </li>
                     <li class="nav-item">
-                        <c-button status="none" class="nav-link active" to="/account/transactions">Transactions</c-button>
+                        <c-button status="none"
+                                  class="nav-link active"
+                                  to="/account/transactions">
+                            Transactions
+                        </c-button>
                     </li>
                 </ul>
                 <div class="filter-line margin-bottom-50">
                     <div class="filter-line__search">
-                        <input type="text" class="form-control" placeholder="Term Search">
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Term Search">
                     </div>
                     <div class="filter-line__filter">
                         Filter by:
                         <div class="dropdown">
-                            <a class="btn dropdown-toggle" href="#" role="button" id="filtering_type"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a id="filtering_type"
+                               class="btn dropdown-toggle"
+                               href="#"
+                               role="button"
+                               data-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
                                 Type
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="dropdown-menu"
+                                 aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item"
+                                   href="#">Action</a>
+                                <a class="dropdown-item"
+                                   href="#">Another action</a>
+                                <a class="dropdown-item"
+                                   href="#">Something else here</a>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-sm btn-danger">clear <i class="fas fa-times"></i></a>
-                        <a href="#" class="btn btn-sm btn-info">more filters</a>
+                        <a href="#"
+                           class="btn btn-sm btn-danger">clear <i class="fas fa-times" /></a>
+                        <a href="#"
+                           class="btn btn-sm btn-info">more filters</a>
                     </div>
                     <div class="filter-line__sorting">
                         Sort by:
                         <div class="dropdown">
-                            <a class="btn dropdown-toggle" href="#" role="button" id="sorting_value"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a id="sorting_value"
+                               class="btn dropdown-toggle"
+                               href="#"
+                               role="button"
+                               data-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
                                 Value
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="dropdown-menu"
+                                 aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item"
+                                   href="#">Action</a>
+                                <a class="dropdown-item"
+                                   href="#">Another action</a>
+                                <a class="dropdown-item"
+                                   href="#">Something else here</a>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-link">
-                            <i class="fas fa-sort-numeric-up"></i>
+                        <a href="#"
+                           class="btn btn-link">
+                            <i class="fas fa-sort-numeric-up" />
                         </a>
-                        <a href="#" class="btn btn-link">
-                            <i class="fas fa-sort-amount-up"></i>
+                        <a href="#"
+                           class="btn btn-link">
+                            <i class="fas fa-sort-amount-up" />
                         </a>
                     </div>
                 </div>
@@ -58,7 +90,7 @@
                             17 nov
                         </div>
                         <div class="direction up">
-                            <i class="fas fa-angle-double-up"></i>
+                            <i class="fas fa-angle-double-up" />
                         </div>
                         <div class="company">
                             <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
@@ -79,7 +111,7 @@
                             17 nov
                         </div>
                         <div class="direction down">
-                            <i class="fas fa-angle-double-down"></i>
+                            <i class="fas fa-angle-double-down" />
                         </div>
                         <div class="company">
                             <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
@@ -100,7 +132,7 @@
                             17 nov
                         </div>
                         <div class="direction up">
-                            <i class="fas fa-angle-double-up"></i>
+                            <i class="fas fa-angle-double-up" />
                         </div>
                         <div class="company">
                             <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
@@ -121,7 +153,7 @@
                             17 nov
                         </div>
                         <div class="direction up">
-                            <i class="fas fa-angle-double-up"></i>
+                            <i class="fas fa-angle-double-up" />
                         </div>
                         <div class="company">
                             <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
@@ -142,7 +174,7 @@
                             17 nov
                         </div>
                         <div class="direction up">
-                            <i class="fas fa-angle-double-up"></i>
+                            <i class="fas fa-angle-double-up" />
                         </div>
                         <div class="company">
                             <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
@@ -163,7 +195,7 @@
                             17 nov
                         </div>
                         <div class="direction up">
-                            <i class="fas fa-angle-double-up"></i>
+                            <i class="fas fa-angle-double-up" />
                         </div>
                         <div class="company">
                             <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
@@ -186,18 +218,18 @@
 </template>
 
 <script>
-    export default {
-        props: ['id'],
-        data() {
-            return {
-                msg: '',
-            }
-        },
-        components: {
-        },
-        created() {
+export default {
+    components: {
+    },
+    props: ['id'],
+    data() {
+        return {
+            msg: ''
         }
+    },
+    created() {
     }
+}
 </script>
 
 <style lang="scss" scoped>

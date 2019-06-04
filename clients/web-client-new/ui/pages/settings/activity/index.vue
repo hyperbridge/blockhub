@@ -1,10 +1,15 @@
 <template>
     <c-layout navigationKey="settings">
-            <c-block title="Activity Log" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                <div class="console-log" ref="consoleLog" v-html="consoleLogMessages">
-                    {{ consoleLogMessages }}
-                </div>
-            </c-block>
+        <c-block title="Activity Log"
+                 :noGutter="true"
+                 :onlyContentBg="true"
+                 :bgGradient="true">
+            <div ref="consoleLog"
+                 class="console-log"
+                 v-html="consoleLogMessages">
+                {{ consoleLogMessages }}
+            </div>
+        </c-block>
     </c-layout>
 </template>
 
@@ -18,7 +23,7 @@ export default {
     },
     created() {
         this.consoleLogInterval = setInterval(() => {
-            this.consoleLogMessages = window.consoleLogMessages.join("<br />")
+            this.consoleLogMessages = window.consoleLogMessages.join('<br />')
             this.$forceUpdate()
             this.$refs.consoleLog.scrollTop = this.$refs.consoleLog.scrollHeight
         }, 1000)

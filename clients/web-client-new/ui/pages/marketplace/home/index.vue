@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h2 class="text-align-center margin-bottom-10">Picks of the week</h2>
+        <h2 class="text-align-center margin-bottom-10">
+            Picks of the week
+        </h2>
         <!-- <carousel-3d-v2 :items="assets">
             <template slot-scope="props">
                 <c-asset-store-card
@@ -12,8 +14,7 @@
         <div class="carousel-wrapper">
             <c-carousel-3d
                 :items="assets"
-                :limitTo="3"
-            >
+                :limitTo="3">
                 <!-- <transition-group name="simple" class="carousel-3d__content" tag="div" slot-scope="props">
                     <c-asset-store-card
                         v-for="(item, index) in props.items"
@@ -25,26 +26,29 @@
                 <template slot-scope="props">
                     <router-link
                         v-for="(item, index) in props.items"
-                        :class="props.css[index]"
                         :key="item.id"
-                        :to="`/marketplace/asset/${item.id}`"
-                    >
+                        :class="props.css[index]"
+                        :to="`/marketplace/asset/${item.id}`">
                         <c-asset-store-card
-                            :asset="item"
-                        />
+                            :asset="item" />
                     </router-link>
                 </template>
             </c-carousel-3d>
         </div>
-        <c-block title="Recently sold" class="margin-bottom-40">
-            <c-asset-list :assets="recentlySold" :transition="true"/>
+        <c-block title="Recently sold"
+                 class="margin-bottom-40">
+            <c-asset-list :assets="recentlySold"
+                          :transition="true" />
         </c-block>
-        <c-block title="Explore available assets" noGutter onlyContentBg bgGradient>
-            <c-content-navigation :items="assets" class="assets-block">
+        <c-block title="Explore available assets"
+                 noGutter
+                 onlyContentBg
+                 bgGradient>
+            <c-content-navigation :items="assets"
+                                  class="assets-block">
                 <c-asset-list
                     slot-scope="props"
-                    :assets="props.items"
-                />
+                    :assets="props.items" />
             </c-content-navigation>
         </c-block>
     </div>
@@ -59,7 +63,7 @@ export default {
         'c-block': () => import('~/components/block/index').then(m => m.default || m),
         'c-asset-store-card': () => import('~/components/asset/store-card').then(m => m.default || m),
         'c-carousel-3d': () => import('~/components/carousel-3d').then(m => m.default || m),
-        'carousel-3d-v2': () => import('~/components/carousel-3d/v2').then(m => m.default || m),
+        'carousel-3d-v2': () => import('~/components/carousel-3d/v2').then(m => m.default || m)
     },
     data() {
         return {
@@ -70,24 +74,24 @@ export default {
     },
     computed: {
         assets() {
-            return this.$store.getters['assets/assetsArray'];
+            return this.$store.getters['assets/assetsArray']
         }
     },
     mounted() {
-        const { assets, counter } = this;
-        this.recentlySold = assets.slice(0, counter);
-        const rand = num => Math.floor(Math.random() * num);
+        const { assets, counter } = this
+        this.recentlySold = assets.slice(0, counter)
+        const rand = num => Math.floor(Math.random() * num)
 
         this.interval = setInterval(() => {
-            this.recentlySold.splice(0, 1);
+            this.recentlySold.splice(0, 1)
 
             if (this.counter === assets.length - 1) {
-                this.counter = 1;
+                this.counter = 1
             }
 
-            this.recentlySold.push(assets[this.counter]);
-            this.counter++;
-        }, 2000);
+            this.recentlySold.push(assets[this.counter])
+            this.counter++
+        }, 2000)
     }
 }
 </script>

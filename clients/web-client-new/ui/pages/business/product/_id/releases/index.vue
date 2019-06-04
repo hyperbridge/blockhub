@@ -4,43 +4,54 @@
             <div class="row">
                 <div class="col-12">
                     <c-buttons-group>
-                        <c-button :status="ifList" size="md" @click="listType = 'list'" :shadow="false" iconHide>
+                        <c-button :status="ifList"
+                                  size="md"
+                                  :shadow="false"
+                                  iconHide
+                                  @click="listType = 'list'">
                             Releases
                         </c-button>
-                        <c-button :status="ifTags" size="md" @click="listType = 'tags'" :shadow="false" iconHide>
+                        <c-button :status="ifTags"
+                                  size="md"
+                                  :shadow="false"
+                                  iconHide
+                                  @click="listType = 'tags'">
                             Tags
                         </c-button>
                     </c-buttons-group>
-                    <c-button status="success" icon="plus" class="float-right" size="md" @click="$router.push({ path: '/business/new-release' })">
+                    <c-button status="success"
+                              icon="plus"
+                              class="float-right"
+                              size="md"
+                              @click="$router.push({ path: '/business/new-release' })">
                         Draft a new release
                     </c-button>
                 </div>
                 <div class="col-12">
                     <div class="history-list">
                         <div v-if="listType == 'list'">
-                            <c-release-list-item  v-for="(release) in sortedList"
-                                :version="release.version"
-                                :date="release.date"
-                                :author="release.author"
-                                :size="release.size"
-                                :files="release.files"
-                                :text="release.text"
-                                :id="release.id"
-                                :latestRelease="release.latestRelease"
-                                :key="release.id"
-                            />
+                            <c-release-list-item v-for="(release) in sortedList"
+                                                 :id="release.id"
+                                                 :key="release.id"
+                                                 :version="release.version"
+                                                 :date="release.date"
+                                                 :author="release.author"
+                                                 :size="release.size"
+                                                 :files="release.files"
+                                                 :text="release.text"
+                                                 :latestRelease="release.latestRelease" />
                         </div>
-                        <div class="history-list__tags-title" v-if="listType == 'tags'" >
-                            <i class="fas fa-tag mr-2"></i> Tags
+                        <div v-if="listType == 'tags'"
+                             class="history-list__tags-title">
+                            <i class="fas fa-tag mr-2" /> Tags
                         </div>
                         <div v-if="listType == 'tags'">
-                            <c-release-tag-item  v-for="release in sortedList"
-                                :version="release.version"
-                                :id="release.id"
-                                :date="release.date"
-                                :author="release.author"
-                                :key="release.id"
-                            />
+                            <c-release-tag-item v-for="release in sortedList"
+                                                :id="release.id"
+                                                :key="release.id"
+                                                :version="release.version"
+                                                :date="release.date"
+                                                :author="release.author" />
                         </div>
                     </div>
                 </div>
@@ -50,132 +61,132 @@
 </template>
 
 <script>
-    export default {
-        components: {
-            'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
-            'c-buttons-group': () => import('~/components/buttons/group').then(m => m.default || m),
-            'c-release-tag-item': () => import('~/components/business/release-history/tag-item').then(m => m.default || m),
-            'c-release-list-item': () => import('~/components/business/release-history/list-item').then(m => m.default || m),
-        },
-        data() {
-            return {
-                listType: 'list',
-                releaseList:[
-                    {
-                        id: "987",
-                        date: '2018-03-09T18:31:42+03:30',
-                        latestRelease: false,
-                        version: '0.5.1',
-                        author: 'Josh Doel',
-                        text: 'In this update:<ul><li>Simplify sign up</li><li>Hold ALT and click to give feedback!</li></ul>',
-                        files: [
-                            {
-                                name: 'BlockHub-0.3.1-mac.zip',
-                                src: '#',
-                                size: 234214324
-                            },
-                            {
-                                name: 'BlockHub-0.3.1-Win86.zip',
-                                src: '#',
-                                size: 2342324324
-                            },
-                            {
-                                name: 'BlockHub-0.3.1-Linux.zip',
-                                src: '#',
-                                size: 942324324
-                            }
-                        ]
-                    },
-                    {
-                        id: "23413",
-                        date: '2018-08-09T18:31:42+03:30',
-                        latestRelease: true,
-                        version: '0.2.1',
-                        author: 'Josh Doel',
-                        text: 'In this update:<ul><li>Token purchase flow</li><li>Copy to address works</li><li>Account recovery</li></ul>',
-                        files: [
-                            {
-                                name: 'BlockHub-0.2.1-mac.zip',
-                                src: '#',
-                                size: 234214324
-                            },
-                            {
-                                name: 'BlockHub-0.2.1-Win86.zip',
-                                src: '#',
-                                size: 2342324324
-                            },
-                            {
-                                name: 'BlockHub-0.2.1-Linux.zip',
-                                src: '#',
-                                size: 942324324
-                            }
-                        ]
-                    },
-                    {
-                        id: "12",
-                        date: '2013-12-09T18:31:42+03:30',
-                        latestRelease: false,
-                        version: '0.0.1',
-                        author: 'Josh Doel',
-                        text: 'Add version for MacOs',
-                        files: [
-                            {
-                                name: 'BlockHub-0.0.1-mac.zip',
-                                src: '#',
-                                size: 234214324
-                            }
-                        ]
-                    },
-                    {
-                        id: "243",
-                        date: '2013-08-09T18:31:42+03:30',
-                        latestRelease: false,
-                        version: '0.0.1',
-                        author: 'Josh Doel',
-                        text: 'First release',
-                        files: [
-                            {
-                                name: 'BlockHub-0.0.1-Win86.zip',
-                                src: '#',
-                                size: 2342324324
-                            },
-                            {
-                                name: 'BlockHub-0.0.1-Win64.zip',
-                                src: '#',
-                                size: 2342324324
-                            },
-                        ]
-                    }
-                ]
+export default {
+    components: {
+        'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
+        'c-buttons-group': () => import('~/components/buttons/group').then(m => m.default || m),
+        'c-release-tag-item': () => import('~/components/business/release-history/tag-item').then(m => m.default || m),
+        'c-release-list-item': () => import('~/components/business/release-history/list-item').then(m => m.default || m)
+    },
+    data() {
+        return {
+            listType: 'list',
+            releaseList: [
+                {
+                    id: '987',
+                    date: '2018-03-09T18:31:42+03:30',
+                    latestRelease: false,
+                    version: '0.5.1',
+                    author: 'Josh Doel',
+                    text: 'In this update:<ul><li>Simplify sign up</li><li>Hold ALT and click to give feedback!</li></ul>',
+                    files: [
+                        {
+                            name: 'BlockHub-0.3.1-mac.zip',
+                            src: '#',
+                            size: 234214324
+                        },
+                        {
+                            name: 'BlockHub-0.3.1-Win86.zip',
+                            src: '#',
+                            size: 2342324324
+                        },
+                        {
+                            name: 'BlockHub-0.3.1-Linux.zip',
+                            src: '#',
+                            size: 942324324
+                        }
+                    ]
+                },
+                {
+                    id: '23413',
+                    date: '2018-08-09T18:31:42+03:30',
+                    latestRelease: true,
+                    version: '0.2.1',
+                    author: 'Josh Doel',
+                    text: 'In this update:<ul><li>Token purchase flow</li><li>Copy to address works</li><li>Account recovery</li></ul>',
+                    files: [
+                        {
+                            name: 'BlockHub-0.2.1-mac.zip',
+                            src: '#',
+                            size: 234214324
+                        },
+                        {
+                            name: 'BlockHub-0.2.1-Win86.zip',
+                            src: '#',
+                            size: 2342324324
+                        },
+                        {
+                            name: 'BlockHub-0.2.1-Linux.zip',
+                            src: '#',
+                            size: 942324324
+                        }
+                    ]
+                },
+                {
+                    id: '12',
+                    date: '2013-12-09T18:31:42+03:30',
+                    latestRelease: false,
+                    version: '0.0.1',
+                    author: 'Josh Doel',
+                    text: 'Add version for MacOs',
+                    files: [
+                        {
+                            name: 'BlockHub-0.0.1-mac.zip',
+                            src: '#',
+                            size: 234214324
+                        }
+                    ]
+                },
+                {
+                    id: '243',
+                    date: '2013-08-09T18:31:42+03:30',
+                    latestRelease: false,
+                    version: '0.0.1',
+                    author: 'Josh Doel',
+                    text: 'First release',
+                    files: [
+                        {
+                            name: 'BlockHub-0.0.1-Win86.zip',
+                            src: '#',
+                            size: 2342324324
+                        },
+                        {
+                            name: 'BlockHub-0.0.1-Win64.zip',
+                            src: '#',
+                            size: 2342324324
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    computed: {
+        ifList() {
+            switch (this.listType) {
+            case 'list':
+                return 'success'
+            default:
+                return 'outline-success'
             }
         },
-        computed:{
-            ifList(){
-                switch (this.listType) {
-                    case 'list':
-                        return 'success'
-                    default:
-                        return 'outline-success'
-                }
-            },
-            ifTags(){
-                switch (this.listType) {
-                    case 'tags':
-                        return 'success'
-                    default:
-                        return 'outline-success'
-                }
-            },
-            sortedList(){
-                let arr = this.releaseList
-                arr.sort(function(a,b){
-                    console.log(new Date(b.date) - new Date(a.date))
-                    return new Date(b.date) - new Date(a.date)
-                })
-                return arr
+        ifTags() {
+            switch (this.listType) {
+            case 'tags':
+                return 'success'
+            default:
+                return 'outline-success'
             }
+        },
+        sortedList() {
+            const arr = this.releaseList
+            arr.sort((a, b) => {
+                console.log(new Date(b.date) - new Date(a.date))
+                return new Date(b.date) - new Date(a.date)
+            })
+            return arr
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

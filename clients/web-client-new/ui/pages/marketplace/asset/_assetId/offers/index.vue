@@ -7,22 +7,21 @@
             <ul class="reset-list flex-center-between margin-bottom-10">
                 <li
                     v-for="title in ['Latest bid', 'Bids', 'Buyout', 'Market value', 'Created by']"
-                    :key="title"
-                >
+                    :key="title">
                     {{ title }}
                 </li>
             </ul>
             <ul class="reset-list">
                 <!-- Can be replaced with router[...]() function -->
                 <router-link
-                    v-for="[id, offer] in offersMap" :key="id"
+                    v-for="[id, offer] in offersMap"
+                    :key="id"
                     tag="li"
                     class="offer"
                     :to="{
                         name: 'Marketplace Asset Offer',
                         params: { assetId: asset.id, offerId: offer.id }
-                    }"
-                >
+                    }">
                     <span>
                         <span class="offer__max-bid">
                             <template v-if="offer.bids.length">
@@ -34,7 +33,7 @@
                         </span>$
                     </span>
                     <span class="offer__bids-count">
-                        <i class="fas fa-gavel"></i>
+                        <i class="fas fa-gavel" />
                         {{ offer.bids.length }}
                     </span>
                     <span>{{ offer.buyout }}</span>
@@ -42,8 +41,7 @@
                     <div class="flex-center">
                         <c-user
                             :user="offer.seller"
-                            class="margin-left-5"
-                        />
+                            class="margin-left-5" />
                     </div>
                 </router-link>
             </ul>
@@ -54,19 +52,20 @@
                 <tbody>
                     <tr>
                         <td>Buyout value</td>
-                        <td><c-input v-model="newOffer.buyout"/></td>
+                        <td><c-input v-model="newOffer.buyout" /></td>
                     </tr>
                     <tr>
                         <td>Minimum bid difference</td>
-                        <td><c-input v-model="newOffer.bidDiff"/></td>
+                        <td><c-input v-model="newOffer.bidDiff" /></td>
                     </tr>
                     <tr>
                         <td>Market value</td>
-                        <td><c-input v-model="newOffer.marketValue"/></td>
+                        <td><c-input v-model="newOffer.marketValue" /></td>
                     </tr>
                 </tbody>
             </table>
-            <c-button size="md" @click="createOffer()">
+            <c-button size="md"
+                      @click="createOffer()">
                 Create offer
             </c-button>
         </div>
@@ -74,63 +73,63 @@
 </template>
 
 <script>
-    import moment from 'moment';
+import moment from 'moment'
 
-    const newOffer = {
-        buyout: 0,
-        bidDiff: 0,
-        marketValue: 42
-    }
+const newOffer = {
+    buyout: 0,
+    bidDiff: 0,
+    marketValue: 42
+}
 
-    export default {
-        props: ['offersMap', 'asset', 'profile'],
-        components: {
-            'c-user': () => import('~/components/user/simple').then(m => m.default || m),
-            'c-tooltip': () => import('~/components/tooltips/universal').then(m => m.default || m),
-        },
-        data() {
-            return {
-                newOffer: { ...newOffer },
-                errors: []
-            }
-        },
-        methods: {
-            createOffer() {
-                const vals = Object.values(this.newOffer);
-                this.errors = [];
+export default {
+    components: {
+        'c-user': () => import('~/components/user/simple').then(m => m.default || m),
+        'c-tooltip': () => import('~/components/tooltips/universal').then(m => m.default || m)
+    },
+    props: ['offersMap', 'asset', 'profile'],
+    data() {
+        return {
+            newOffer: { ...newOffer },
+            errors: []
+        }
+    },
+    methods: {
+        createOffer() {
+            const vals = Object.values(this.newOffer)
+            this.errors = []
 
-                if (vals.some(val => !val)) {
-                    this.errors.push('No value can be null');
-                } else {
-                    const id = Math.round(Math.random() * 10000);
+            if (vals.some(val => !val)) {
+                this.errors.push('No value can be null')
+            } else {
+                const id = Math.round(Math.random() * 10000)
 
-                    const createdOffer = {
-                        id,
-                        seller: this.profile,
-                        asset: this.asset,
-                        bids: [],
-                        expiresIn: moment().add(1, 'week'),
-                        ...this.newOffer
-                    }
-
-
-                    this.$store.dispatch('loadData', ['assets/offers', [createdOffer]]);
-
-                    // this.$store.dispatch('create',
-                    //     ['assets/offers', {
-                    //         seller: this.profileId,
-                    //         asset: this.asset,
-                    //         bids: [],
-                    //         expiresIn: moment().add(1, 'week'),
-                    //         ...this.newOffer
-                    //     }]
-                    // );
-
-                    this.newOffer = { ...newOffer };
+                const createdOffer = {
+                    id,
+                    seller: this.profile,
+                    asset: this.asset,
+                    bids: [],
+                    expiresIn: moment().add(1, 'week'),
+                    ...this.newOffer
                 }
+
+
+                this.$store.dispatch('loadData', ['assets/offers', [createdOffer]])
+
+                // this.$store.dispatch('create',
+                //     ['assets/offers', {
+                //         seller: this.profileId,
+                //         asset: this.asset,
+                //         bids: [],
+                //         expiresIn: moment().add(1, 'week'),
+                //         ...this.newOffer
+                //     }]
+                // );
+
+                this.newOffer = { ...newOffer }
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

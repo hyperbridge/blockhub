@@ -16,8 +16,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="bid in offer.bids" :key="bid.id">
-                        <td><c-user :user="bid.user"/></td>
+                    <tr v-for="bid in offer.bids"
+                        :key="bid.id">
+                        <td><c-user :user="bid.user" /></td>
                         <td>
                             <span class="bid-price">
                                 {{ bid.value }}
@@ -34,14 +35,14 @@
                 <li
                     v-for="(error, index) in errors"
                     :key="index"
-                    v-text="error"
-                />
+                    v-text="error" />
             </ul>
             <label>
                 Bid value
-                <c-input v-model="value"/>
+                <c-input v-model="value" />
             </label>
-            <c-button size="md" @click="createBid()">
+            <c-button size="md"
+                      @click="createBid()">
                 Create bid
             </c-button>
         </div>
@@ -49,54 +50,53 @@
 </template>
 
 <script>
-    import moment from 'moment';
+import moment from 'moment'
 
-    export default {
-        props: ['offersMap', 'asset', 'profile', 'offerId'],
-        components: {
-            'c-user': () => import('~/components/user/simple').then(m => m.default || m),
+export default {
+    components: {
+        'c-user': () => import('~/components/user/simple').then(m => m.default || m)
+    },
+    props: ['offersMap', 'asset', 'profile', 'offerId'],
+    data: () => ({
+        value: 0,
+        errors: []
+    }),
+    computed: {
+        offer() {
+            return this.$store.getters['assets/offers'][this.offerId]
         },
-        data: () => ({
-            value: 0,
-            errors: []
-        }),
-        methods: {
-            async createBid() {
-                this.errors = [];
+        minValue() {
+            const { offer } = this
 
-                if (this.value < this.minValue) {
-                    this.errors.push(`Minimum bid value for this offer is ${this.minValue}`);
-                }
+            if (!offer || !offer.bids.length) return 0
 
-                this.$store.dispatch('createRelation',
-                    ['assets/offers/bids', this.offerId, {
-                        value: this.value,
-                        user: this.profile,
-                        createdAt: moment()
-                    }]
-                );
+            const highestVal = offer.bids[offer.bids.length - 1].value
+            return Math.round((highestVal + highestVal * 0.05) * 100) / 100
+        }
+    },
+    mounted() {
+        this.value = this.minValue
+    },
+    methods: {
+        async createBid() {
+            this.errors = []
 
-                await this.$nextTick();
-                this.value = this.minValue;
-            },
-        },
-        computed: {
-            offer() {
-                return this.$store.getters['assets/offers'][this.offerId];
-            },
-            minValue() {
-                const { offer } = this;
-
-                if (!offer || !offer.bids.length) return 0;
-
-                const highestVal = offer.bids[offer.bids.length - 1].value;
-                return Math.round((highestVal + highestVal * 0.05) * 100) / 100;
+            if (this.value < this.minValue) {
+                this.errors.push(`Minimum bid value for this offer is ${this.minValue}`)
             }
-        },
-        mounted() {
-            this.value = this.minValue;
+
+            this.$store.dispatch('createRelation',
+                ['assets/offers/bids', this.offerId, {
+                    value: this.value,
+                    user: this.profile,
+                    createdAt: moment()
+                }])
+
+            await this.$nextTick()
+            this.value = this.minValue
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

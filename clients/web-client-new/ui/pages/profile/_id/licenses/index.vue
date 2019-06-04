@@ -8,14 +8,14 @@
             </div>
             <div class="col-12">
                 <div class="licenses-list">
-                    <c-heading-bar name="Owned Licenses" :showArrows="false" :showBackground="false">
-                    </c-heading-bar>
+                    <c-heading-bar name="Owned Licenses"
+                                   :showArrows="false"
+                                   :showBackground="false" />
                     <div class="licenses-list__container margin-top-30">
                         <div
                             v-for="index in 6"
                             :key="index"
-                            class="licenses-list__item"
-                        >
+                            class="licenses-list__item">
                             <div class="icon">
                                 <c-img :src="license.game.img" />
                             </div>
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                     </div>
-                    <c-content-navigation/>
+                    <c-content-navigation />
                 </div>
             </div>
         </div>
@@ -49,27 +49,27 @@
 </template>
 
 <script>
-    export default {
-        components: {
-            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m)
-        },
-        data() {
-            return {
-                license: {
-                    game: {
-                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240',
-                        name: 'Diablo III',
-                        developer: 'Blizzadr Entertainment Inc'
-                    },
-                    trade: true,
-                    expiration_date: 'July 8th 2021',
-                    sell: 'Yes, publisher earns 5%',
-                    price: '$2999.00'
-                }
+export default {
+    components: {
+        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m)
+    },
+    data() {
+        return {
+            license: {
+                game: {
+                    img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240',
+                    name: 'Diablo III',
+                    developer: 'Blizzadr Entertainment Inc'
+                },
+                trade: true,
+                expiration_date: 'July 8th 2021',
+                sell: 'Yes, publisher earns 5%',
+                price: '$2999.00'
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

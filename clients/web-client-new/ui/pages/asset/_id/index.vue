@@ -1,288 +1,339 @@
 <template>
     <c-layout navigationKey="asset">
-            <div class="container-fluid">
-                <div class="row" v-if="!asset">
-                    <div class="col-12">
-                        Asset not found
-                    </div>
-                </div>
-                <div class="row" v-if="asset">
-
-                    <div class="col-12 col-lg-8 col-xl-9 margin-bottom-15">
-                        <div class="asset-head">
-                            <div class="asset-head__asset-title">
-                                <div class="title-thumb">
-                                    <c-img
-                                        :src="asset.image"/>
-                                </div>
-                                <div class="title-text">
-                                    <h1>{{ asset.name }}</h1>
-                                    <span><strong>{{ asset.gameName }}</strong></span>
-                                    <span class="company">{{ asset.productName }}</span>
-                                </div>
-                            </div>
-                            <div class="asset-head__icons">
-                                <div class="icon_item">
-                                    <div class="icon">
-                                        <i class="fas fa-box"></i>
-                                    </div>
-                                    <div class="info">
-                                        <div class="h5 mb-0 font-weight-bold">{{ asset.inventoryCount | numeralFormat('0 a') }}</div>
-                                        <p class="p-0">Your Inventory</p>
-                                    </div>
-                                </div>
-                                <div class="icon_item">
-                                    <div class="icon">
-                                        <i class="fas fa-shopping-basket"></i>
-                                    </div>
-                                    <div class="info">
-                                        <div class="h5 mb-0 font-weight-bold">{{ asset.existingCount | numeralFormat('0.0 a') }}</div>
-                                        <p class="p-0">For Sale</p>
-                                    </div>
-                                </div>
-                                <div class="icon_item">
-                                    <div class="icon">
-                                        <i class="fas fa-globe"></i>
-                                    </div>
-                                    <div class="info">
-                                        <div class="h5 mb-0 font-weight-bold">{{ asset.forSaleCount | numeralFormat('0.0 a') }}</div>
-                                        <p class="p-0">Existing</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 d-none d-lg-block col-lg-4 col-xl-3 margin-bottom-15">
-                        <div class="asset-head__company-logo">
-                            <c-img src="https://i.imgur.com/BngHC98.png" class="img-fluid"/>
-                        </div>
-                    </div>
-
-                    <c-model-obj
-                        src="../../static/assets-3d/sylvanas/Sylvanas.obj"
-                        mtl="../../static/assets-3d/sylvanas/Sylvanas.mtl"
-                        :backgroundAlpha="0"
-                    />
-
-                    <div class="col-12 col-lg-6 margin-top-15 margin-bottom-15">
-                        <c-block title="Attributes" class="h-100" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                                <template slot="additional-action">
-                                    <a href="#" class="font-weight-bold text-uppercase text-white">
-                                        Game View
-                                    </a>
-                                    <a href="#" class="font-weight-bold text-uppercase text-white ml-4">
-                                        Chart
-                                    </a>
-                                </template>
-
-                            <div class="metadata__table padding-bottom-10">
-                                <div
-                                    v-for="(value, prop, index) in asset.metadata"
-                                    :key="index"
-                                    class="item-row"
-                                >
-                                    <div class="item-label">
-                                        <i class="fas fa-file"></i>
-                                        {{ prop | space | upperFirstChar }}
-                                    </div>
-                                    <div class="item-description">
-                                        <ul v-if="typeof value === 'object'" class="margin-0">
-                                            <li v-for="(value, prop, index) in value" :key="index">
-                                                {{ prop | space | upperFirstChar }}: {{ value }}
-                                            </li>
-                                        </ul>
-                                        <span v-else>
-                                            {{ value }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </c-block>
-                    </div>
-
-                    <div class="col-12 col-lg-6 margin-top-15 margin-bottom-15">
-                        <c-block title="Sales" class="h-100" noGutter onlyContentBg bgGradient showActions>
-                                <template slot="additional-action">
-                                    <a href="#" class="font-weight-bold text-uppercase text-white">
-                                        History
-                                    </a>
-                                    <a href="#" class="font-weight-bold text-uppercase text-white ml-4">
-                                        Chart
-                                    </a>
-                                </template>
-                            <div v-if="sales">
-                            </div>
-                            <p v-else>
-                                Nothing to show for now
-                            </p>
-                        </c-block>
-                    </div>
-
-                    <div class="col-12 margin-top-15 margin-bottom-15">
-                        <c-block title="Offers" class="padding-bottom-0" noGutter onlyContentBg bgGradient showActions>
-                            <template slot="additional-action">
-                                <c-heading-bar-fields name="Rarity" icon="trophy"/>
-                                <c-heading-bar-fields name="Value" icon="dollar"/>
-                            </template>
-                            <c-content-navigation :items="asset.offersList" :setLimits="4">
-                                <div class="offers__list" slot-scope="props">
-                                    <div
-                                        v-for="(item, index) in props.items"
-                                        :key="index"
-                                        class="list-item"
-                                    >
-                                        <div class="item-name-img">
-                                            <c-img :src="item.image"/>
-                                            <h4>{{ item.name }}</h4>
-                                        </div>
-                                        <div class="item-company text-center">
-                                            {{ item.company_name }}
-                                        </div>
-                                        <div class="item-info">
-                                            <span class="userName">
-                                                {{ item.userName }}
-                                            </span>
-                                            <span class="price">
-                                                $ {{ item.price.current }}
-                                            </span>
-                                            <a href="#" class="btn btn-success float-right" v-if="item.price.current">
-                                                <c-icon name="cart-plus"/>
-                                                Proceed to Purchase
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <template slot="left-content" class="text-left">
-                                    <strong>245345</strong> Available on the market
-                                </template>
-                                <template slot="right-content" class="text-right">
-                                    <strong>319</strong> On the list
-                                    <a href="#" class="text-white mx-2">
-                                        <i class="fas fa-reply"></i>
-                                    </a>
-                                    <a href="#" class="text-white">
-                                        <i class="fas fa-bookmark"></i>
-                                    </a>
-                                </template>
-                            </c-content-navigation>
-                        </c-block>
-                    </div>
-
-                    <div class="col-12 margin-top-15 margin-bottom-15">
-                        <c-block class="padding-bottom-0" title="Yours Inventory" noGutter onlyContentBg bgGradient>
-                            <c-content-navigation :items="asset.inventoryList" :setLimits="4">
-                                <div class="my-assets__list" slot-scope="props">
-                                    <div
-                                        v-for="(item, index) in props.items"
-                                        :key="index"
-                                        class="item"
-                                    >
-                                        <c-button status="plain" @click="openPopup(item)">
-                                            <i class="fas fa-external-link-alt"></i>
-                                        </c-button>
-                                        <div class="item_thumb">
-                                            <c-img :src="item.image"/>
-                                        </div>
-                                        <div class="item_info">
-                                            <h5>{{ item.name }}</h5>
-                                            <span class="price">
-                                                $ {{ item.price.current }}
-                                            </span>
-                                            <div class="switcher">
-                                                <c-switch
-                                                    label="Accept offers"
-                                                    :checked="item.acceptOffers"
-                                                    @change="$store.commit('assets/negateValue', {
-                                                        id: item.id,
-                                                        iprop: 'acceptOffers'
-                                                    })"
-                                                    @changev2="$store.commit('assets/negateValue', {
-                                                        ['id'+item.id]: 'acceptOffers'
-                                                    })"
-                                                    size="sm"
-                                                    label_position="left"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </c-content-navigation>
-                        </c-block>
-                    </div>
-
-                    <div class="col-12 margin-top-15 margin-bottom-15">
-                        <c-block title="Collections Containing this Item" class="pb-0" noGutter onlyContentBg bgGradient>
-                            <c-content-navigation
-                                v-if="asset.collections.length"
-                                :items="asset.collections"
-                                :setLimits="3"
-                            >
-                                <div class="collections-container" slot-scope="props">
-                                    <div
-                                        v-for="(item, index) in props.items"
-                                        :key="index"
-                                        class="item"
-                                    >
-                                        <c-collection-item :item="item"/>
-                                    </div>
-                                </div>
-                            </c-content-navigation>
-                            <p v-else>
-                                Nothing to show for now
-                            </p>
-                        </c-block>
-                    </div>
+        <div class="container-fluid">
+            <div v-if="!asset"
+                 class="row">
+                <div class="col-12">
+                    Asset not found
                 </div>
             </div>
-        <c-popup :activated="show_popup" @close="closePopup" :width="550">
-            <c-asset-popup :asset="tmpItem" slot="customContent" />
+            <div v-if="asset"
+                 class="row">
+                <div class="col-12 col-lg-8 col-xl-9 margin-bottom-15">
+                    <div class="asset-head">
+                        <div class="asset-head__asset-title">
+                            <div class="title-thumb">
+                                <c-img
+                                    :src="asset.image" />
+                            </div>
+                            <div class="title-text">
+                                <h1>{{ asset.name }}</h1>
+                                <span><strong>{{ asset.gameName }}</strong></span>
+                                <span class="company">{{ asset.productName }}</span>
+                            </div>
+                        </div>
+                        <div class="asset-head__icons">
+                            <div class="icon_item">
+                                <div class="icon">
+                                    <i class="fas fa-box" />
+                                </div>
+                                <div class="info">
+                                    <div class="h5 mb-0 font-weight-bold">
+                                        {{ asset.inventoryCount | numeralFormat('0 a') }}
+                                    </div>
+                                    <p class="p-0">
+                                        Your Inventory
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="icon_item">
+                                <div class="icon">
+                                    <i class="fas fa-shopping-basket" />
+                                </div>
+                                <div class="info">
+                                    <div class="h5 mb-0 font-weight-bold">
+                                        {{ asset.existingCount | numeralFormat('0.0 a') }}
+                                    </div>
+                                    <p class="p-0">
+                                        For Sale
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="icon_item">
+                                <div class="icon">
+                                    <i class="fas fa-globe" />
+                                </div>
+                                <div class="info">
+                                    <div class="h5 mb-0 font-weight-bold">
+                                        {{ asset.forSaleCount | numeralFormat('0.0 a') }}
+                                    </div>
+                                    <p class="p-0">
+                                        Existing
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 d-none d-lg-block col-lg-4 col-xl-3 margin-bottom-15">
+                    <div class="asset-head__company-logo">
+                        <c-img src="https://i.imgur.com/BngHC98.png"
+                               class="img-fluid" />
+                    </div>
+                </div>
+
+                <c-model-obj
+                    src="../../static/assets-3d/sylvanas/Sylvanas.obj"
+                    mtl="../../static/assets-3d/sylvanas/Sylvanas.mtl"
+                    :backgroundAlpha="0" />
+
+                <div class="col-12 col-lg-6 margin-top-15 margin-bottom-15">
+                    <c-block title="Attributes"
+                             class="h-100"
+                             :noGutter="true"
+                             :onlyContentBg="true"
+                             :bgGradient="true">
+                        <template slot="additional-action">
+                            <a href="#"
+                               class="font-weight-bold text-uppercase text-white">
+                                Game View
+                            </a>
+                            <a href="#"
+                               class="font-weight-bold text-uppercase text-white ml-4">
+                                Chart
+                            </a>
+                        </template>
+
+                        <div class="metadata__table padding-bottom-10">
+                            <div
+                                v-for="(value, prop, index) in asset.metadata"
+                                :key="index"
+                                class="item-row">
+                                <div class="item-label">
+                                    <i class="fas fa-file" />
+                                    {{ prop | space | upperFirstChar }}
+                                </div>
+                                <div class="item-description">
+                                    <ul v-if="typeof value === 'object'"
+                                        class="margin-0">
+                                        <li v-for="(value, prop, index) in value"
+                                            :key="index">
+                                            {{ prop | space | upperFirstChar }}: {{ value }}
+                                        </li>
+                                    </ul>
+                                    <span v-else>
+                                        {{ value }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </c-block>
+                </div>
+
+                <div class="col-12 col-lg-6 margin-top-15 margin-bottom-15">
+                    <c-block title="Sales"
+                             class="h-100"
+                             noGutter
+                             onlyContentBg
+                             bgGradient
+                             showActions>
+                        <template slot="additional-action">
+                            <a href="#"
+                               class="font-weight-bold text-uppercase text-white">
+                                History
+                            </a>
+                            <a href="#"
+                               class="font-weight-bold text-uppercase text-white ml-4">
+                                Chart
+                            </a>
+                        </template>
+                        <div v-if="sales" />
+                        <p v-else>
+                            Nothing to show for now
+                        </p>
+                    </c-block>
+                </div>
+
+                <div class="col-12 margin-top-15 margin-bottom-15">
+                    <c-block title="Offers"
+                             class="padding-bottom-0"
+                             noGutter
+                             onlyContentBg
+                             bgGradient
+                             showActions>
+                        <template slot="additional-action">
+                            <c-heading-bar-fields name="Rarity"
+                                                  icon="trophy" />
+                            <c-heading-bar-fields name="Value"
+                                                  icon="dollar" />
+                        </template>
+                        <c-content-navigation :items="asset.offersList"
+                                              :setLimits="4">
+                            <div slot-scope="props"
+                                 class="offers__list">
+                                <div
+                                    v-for="(item, index) in props.items"
+                                    :key="index"
+                                    class="list-item">
+                                    <div class="item-name-img">
+                                        <c-img :src="item.image" />
+                                        <h4>{{ item.name }}</h4>
+                                    </div>
+                                    <div class="item-company text-center">
+                                        {{ item.company_name }}
+                                    </div>
+                                    <div class="item-info">
+                                        <span class="userName">
+                                            {{ item.userName }}
+                                        </span>
+                                        <span class="price">
+                                            $ {{ item.price.current }}
+                                        </span>
+                                        <a v-if="item.price.current"
+                                           href="#"
+                                           class="btn btn-success float-right">
+                                            <c-icon name="cart-plus" />
+                                            Proceed to Purchase
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <template slot="left-content"
+                                      class="text-left">
+                                <strong>245345</strong> Available on the market
+                            </template>
+                            <template slot="right-content"
+                                      class="text-right">
+                                <strong>319</strong> On the list
+                                <a href="#"
+                                   class="text-white mx-2">
+                                    <i class="fas fa-reply" />
+                                </a>
+                                <a href="#"
+                                   class="text-white">
+                                    <i class="fas fa-bookmark" />
+                                </a>
+                            </template>
+                        </c-content-navigation>
+                    </c-block>
+                </div>
+
+                <div class="col-12 margin-top-15 margin-bottom-15">
+                    <c-block class="padding-bottom-0"
+                             title="Yours Inventory"
+                             noGutter
+                             onlyContentBg
+                             bgGradient>
+                        <c-content-navigation :items="asset.inventoryList"
+                                              :setLimits="4">
+                            <div slot-scope="props"
+                                 class="my-assets__list">
+                                <div
+                                    v-for="(item, index) in props.items"
+                                    :key="index"
+                                    class="item">
+                                    <c-button status="plain"
+                                              @click="openPopup(item)">
+                                        <i class="fas fa-external-link-alt" />
+                                    </c-button>
+                                    <div class="item_thumb">
+                                        <c-img :src="item.image" />
+                                    </div>
+                                    <div class="item_info">
+                                        <h5>{{ item.name }}</h5>
+                                        <span class="price">
+                                            $ {{ item.price.current }}
+                                        </span>
+                                        <div class="switcher">
+                                            <c-switch
+                                                label="Accept offers"
+                                                :checked="item.acceptOffers"
+                                                size="sm"
+                                                label_position="left"
+                                                @change="$store.commit('assets/negateValue', {
+                                                    id: item.id,
+                                                    iprop: 'acceptOffers'
+                                                })"
+                                                @changev2="$store.commit('assets/negateValue', {
+                                                    ['id'+item.id]: 'acceptOffers'
+                                                })" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c-content-navigation>
+                    </c-block>
+                </div>
+
+                <div class="col-12 margin-top-15 margin-bottom-15">
+                    <c-block title="Collections Containing this Item"
+                             class="pb-0"
+                             noGutter
+                             onlyContentBg
+                             bgGradient>
+                        <c-content-navigation
+                            v-if="asset.collections.length"
+                            :items="asset.collections"
+                            :setLimits="3">
+                            <div slot-scope="props"
+                                 class="collections-container">
+                                <div
+                                    v-for="(item, index) in props.items"
+                                    :key="index"
+                                    class="item">
+                                    <c-collection-item :item="item" />
+                                </div>
+                            </div>
+                        </c-content-navigation>
+                        <p v-else>
+                            Nothing to show for now
+                        </p>
+                    </c-block>
+                </div>
+            </div>
+        </div>
+        <c-popup :activated="show_popup"
+                 :width="550"
+                 @close="closePopup">
+            <c-asset-popup slot="customContent"
+                           :asset="tmpItem" />
         </c-popup>
     </c-layout>
 </template>
 
 <script>
-    import { ModelObj } from 'vue-3d-model'
+import { ModelObj } from 'vue-3d-model'
 
-    export default {
-        props: ['id'],
-        components: {
-            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-            'c-heading-bar-fields' : () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
-            'c-pagination': () => import('~/components/pagination/index').then(m => m.default || m),
-            'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m),
-            'c-popup': () => import('~/components/popups').then(m => m.default || m),
-            'c-asset-popup': () => import('~/components/asset-overview-popup').then(m => m.default || m),
-            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-            'c-model-obj': ModelObj
+export default {
+    components: {
+        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+        'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
+        'c-pagination': () => import('~/components/pagination/index').then(m => m.default || m),
+        'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m),
+        'c-popup': () => import('~/components/popups').then(m => m.default || m),
+        'c-asset-popup': () => import('~/components/asset-overview-popup').then(m => m.default || m),
+        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+        'c-model-obj': ModelObj
+    },
+    props: ['id'],
+    data() {
+        return {
+            totalOwned: 3,
+            show_popup: false,
+            tmpItem: {},
+            sales: false, // ToDo
+            assetId: this.id
+        }
+    },
+    computed: {
+        asset() {
+            return this.$store.getters['assets/assets'][this.id]
+        }
+    },
+    methods: {
+        numberFormat(value) {
+            return Math.log(value) / Math.log(10)
         },
-        data() {
-            return {
-                totalOwned: 3,
-                show_popup: false,
-                tmpItem: {},
-                sales: false, //ToDo
-                assetId: this.id
-            }
+        closePopup() {
+            this.show_popup = false
+            this.tmpItem = {}
         },
-        methods: {
-            numberFormat(value) {
-                return Math.log(value) / Math.log(10)
-            },
-            closePopup() {
-                this.show_popup = false
-                this.tmpItem = {}
-            },
-            openPopup(obj) {
-                this.tmpItem = obj
-                this.show_popup = true
-            }
-        },
-        computed: {
-            asset() {
-                return this.$store.getters['assets/assets'][this.id]
-            }
+        openPopup(obj) {
+            this.tmpItem = obj
+            this.show_popup = true
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

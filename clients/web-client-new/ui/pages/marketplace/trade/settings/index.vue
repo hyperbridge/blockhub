@@ -4,19 +4,17 @@
             <h3>Your trade URL</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             <div class="trade-settings__url-form">
-                <c-icon name="copy"/>
+                <c-icon name="copy" />
                 <c-input
                     class="trade-settings__url-input"
-                    @click="copyTradeURL()"
                     :value="tradeURL"
                     readonly
-                />
+                    @click="copyTradeURL()" />
             </div>
             <c-button
-                @click="$store.dispatch('application/createTradeUrl')"
                 status="info"
                 iconHide
-            >
+                @click="$store.dispatch('application/createTradeUrl')">
                 Generate new trade URL
             </c-button>
         </section>
@@ -36,59 +34,58 @@
             v-debounce:testEvent
         >Test e</button>
         {{ val }} -->
-
     </article>
 </template>
 
 <script>
-    import { debounce } from '@/mixins'
+import { debounce } from '@/mixins'
 
-    export default {
-        data: () => ({ val: 'm', timeout: null, add: 0 }),
-        mixins: [debounce],
-        components: {
-            'c-test': () => import('~/components/test').then(m => m.default || m),
+export default {
+    components: {
+        'c-test': () => import('~/components/test').then(m => m.default || m)
+    },
+    mixins: [debounce],
+    data: () => ({ val: 'm', timeout: null, add: 0 }),
+    computed: {
+        account() {
+            return this.$store.getters['application/account']
         },
-        computed: {
-            account() {
-                return this.$store.getters['application/account']
-            },
-            profile() {
-                return this.activeProfile
-            },
-            tradeURL() {
-                const { tradeURLId } = this.account
-                const { id } = this.profile
-                return `${window.location.origin}/tradeoffer/new/?partner=${id}&id=${tradeURLId}`
-            },
-            assets() { return this.$store.state.assets.assets }
+        profile() {
+            return this.activeProfile
         },
-        methods: {
-            storeTest() {
-                this.$store.dispatch('create', {
-                    module: 'assets',
-                    target: 'assets',
-                    data: {
-                        id: 30,
-                        name: 'New asset'
-                    }
-                })
-            },
-            copyTradeURL() {
-                navigator.clipboard.writeText(this.tradeURL)
-                    .then(() => this.$snotify.info('TradeURL has been copied'))
-                    .catch(err => this.$snotify.warning('TradeURL could not be copied'))
-            },
-            updateVal(e) {
-                console.log(e)
-                return
-                clearTimeout(this.timeout)
-                this.timeout = setTimeout(() => {
-                    this.val = e.target.value
-                }, 300)
-            }
+        tradeURL() {
+            const { tradeURLId } = this.account
+            const { id } = this.profile
+            return `${window.location.origin}/tradeoffer/new/?partner=${id}&id=${tradeURLId}`
+        },
+        assets() { return this.$store.state.assets.assets }
+    },
+    methods: {
+        storeTest() {
+            this.$store.dispatch('create', {
+                module: 'assets',
+                target: 'assets',
+                data: {
+                    id: 30,
+                    name: 'New asset'
+                }
+            })
+        },
+        copyTradeURL() {
+            navigator.clipboard.writeText(this.tradeURL)
+                .then(() => this.$snotify.info('TradeURL has been copied'))
+                .catch(err => this.$snotify.warning('TradeURL could not be copied'))
+        },
+        updateVal(e) {
+            console.log(e)
+            return
+            clearTimeout(this.timeout)
+            this.timeout = setTimeout(() => {
+                this.val = e.target.value
+            }, 300)
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

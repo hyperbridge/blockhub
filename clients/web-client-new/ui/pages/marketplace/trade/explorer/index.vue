@@ -4,20 +4,19 @@
             v-for="(trx, index) in transactions"
             :key="trx.id"
             class="trade-offer"
-            :class="'trade-offer--status-' + index"
-        >
+            :class="'trade-offer--status-' + index">
             <div class="trade-offer__items">
                 <div class="trade-offer__user">
-                    <img class="trade-offer__user-image" :src="trx.you.img"/>
+                    <img class="trade-offer__user-image"
+                         :src="trx.you.img">
                     You offered
                 </div>
                 <div class="trade-offer__assets">
                     <c-asset
                         v-for="(asset, index) in trx.yourOffer"
-                        :asset="asset"
                         :key="index"
-                        showTooltip
-                    />
+                        :asset="asset"
+                        showTooltip />
                 </div>
             </div>
             <p class="trade-offer__bar">
@@ -31,16 +30,16 @@
             </p>
             <div class="trade-offer__items">
                 <div class="trade-offer__user">
-                    <img class="trade-offer__user-image" :src="trx.contractor.img"/>
+                    <img class="trade-offer__user-image"
+                         :src="trx.contractor.img">
                     For {{ trx.contractor.name }}'s
                 </div>
                 <div class="trade-offer__assets">
                     <c-asset
                         v-for="(asset, index) in trx.contractorOffer"
-                        :asset="asset"
                         :key="index"
-                        showTooltip
-                    />
+                        :asset="asset"
+                        showTooltip />
                 </div>
             </div>
         </section>
@@ -49,17 +48,17 @@
 
 <script>
 
-    export default {
-        props: ['transactions'],
-        components: {
-            'c-asset': () => import('~/components/assets-grid-inventory/asset').then(m => m.default || m),
-        },
-        computed: {
-            transactionsX() {
-                return this.$store.getters['assets/transactionsArray'];
-            }
+export default {
+    components: {
+        'c-asset': () => import('~/components/assets-grid-inventory/asset').then(m => m.default || m)
+    },
+    props: ['transactions'],
+    computed: {
+        transactionsX() {
+            return this.$store.getters['assets/transactionsArray']
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

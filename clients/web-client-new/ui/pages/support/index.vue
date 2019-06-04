@@ -2,8 +2,12 @@
     <c-layout navigationKey="help">
         <div class="row page-heading">
             <div class="page-heading__container">
-                <h1 class="title">Support</h1>
-                <p class="caption">Let us know if you need further help.</p>
+                <h1 class="title">
+                    Support
+                </h1>
+                <p class="caption">
+                    Let us know if you need further help.
+                </p>
             </div>
             <c-heading />
         </div>

@@ -1,19 +1,34 @@
 <template>
-    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false" :showShortcuts="false">
-        <div class="content login-container" id="content" hidden>
+    <c-layout navigationKey="account"
+              :showLeftPanel="false"
+              :showRightPanel="false"
+              :showShortcuts="false">
+        <div id="content"
+             class="content login-container"
+             hidden>
             <div class="container">
                 <div class="col-12">
-                    <p class="errors" v-if="errors.length">
+                    <p v-if="errors.length"
+                       class="errors">
                         <strong>Please correct the following error(s):</strong>
                         <ul>
-                            <li v-for="error in errors" :key="error">{{ error }}</li>
+                            <li v-for="error in errors"
+                                :key="error">
+                                {{ error }}
+                            </li>
                         </ul>
                     </p>
                     <div class="chosen-box">
                         <div class="chosen-box__container">
-                            <div class="h1 mb-4">Sign In</div>
+                            <div class="h1 mb-4">
+                                Sign In
+                            </div>
 
-                            <c-button status="outline-success" size="lg" @click="importAccountFile">Import Account</c-button>
+                            <c-button status="outline-success"
+                                      size="lg"
+                                      @click="importAccountFile">
+                                Import Account
+                            </c-button>
                         </div>
                     </div>
                 </div>
@@ -70,32 +85,32 @@
 
 
 <script>
-    import * as Bridge from '@/framework/desktop-bridge'
+import * as Bridge from '@/framework/desktop-bridge'
 
-    export default {
-        components: {
-        },
-        data() {
-            return {
-                errors: []
-            }
-        },
-        methods: {
-            signIn() {
-                this.$store.dispatch('application/signIn')
+export default {
+    components: {
+    },
+    data() {
+        return {
+            errors: []
+        }
+    },
+    mounted() {
+        this.$store.commit('application/activateModal', 'login')
+    },
+    methods: {
+        signIn() {
+            this.$store.dispatch('application/signIn')
 
-                this.$router.push({ path: '/' })
-            },
-            importAccountFile() {
-                Bridge.sendCommand('importAccountFileRequest').then(() => {
-                    window.location.reload()
-                })
-            }
+            this.$router.push({ path: '/' })
         },
-        mounted() {
-            this.$store.commit('application/activateModal', 'login')
+        importAccountFile() {
+            Bridge.sendCommand('importAccountFileRequest').then(() => {
+                window.location.reload()
+            })
         }
     }
+}
 </script>
 
 

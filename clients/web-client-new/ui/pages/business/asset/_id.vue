@@ -5,26 +5,26 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            id: [String, Number]
-        },
-        components: {
-            'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
-        },
-        data() {
-            return {
-            }
-        },
-        computed: {
-        },
-        watch: {
-        },
-        created() {
-        },
-        methods: {
-        },
+export default {
+    components: {
+        'c-layout': () => import('~/components/business-layout').then(m => m.default || m)
+    },
+    props: {
+        id: [String, Number]
+    },
+    data() {
+        return {
+        }
+    },
+    computed: {
+    },
+    watch: {
+    },
+    created() {
+    },
+    methods: {
     }
+}
 </script>
 
 <style lang="scss">

@@ -3,44 +3,71 @@
         <div class="row">
             <div class="col-12">
                 <div class="search-block">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <ul id="myTab"
+                        class="nav nav-tabs"
+                        role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="tab1-nav" data-toggle="tab" href="#tab1" role="tab"
-                                aria-controls="tab" aria-expanded="true">Tab 1</a>
+                            <a id="tab1-nav"
+                               class="nav-link active"
+                               data-toggle="tab"
+                               href="#tab1"
+                               role="tab"
+                               aria-controls="tab"
+                               aria-expanded="true">Tab 1</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="tab2-nav" data-toggle="tab" href="#tab2" role="tab"
-                                aria-controls="tab">Tab 2</a>
+                            <a id="tab2-nav"
+                               class="nav-link"
+                               data-toggle="tab"
+                               href="#tab2"
+                               role="tab"
+                               aria-controls="tab">Tab 2</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="tab3-nav" data-toggle="tab" href="#tab3" role="tab"
-                                aria-controls="tab">Tab 3</a>
+                            <a id="tab3-nav"
+                               class="nav-link"
+                               data-toggle="tab"
+                               href="#tab3"
+                               role="tab"
+                               aria-controls="tab">Tab 3</a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab">
+                        <div id="tab1"
+                             class="tab-pane fade show active"
+                             role="tabpanel"
+                             aria-labelledby="tab">
                             <div class="tab-container">
                                 <div class="row align-items-center">
                                     <div class="col-12 col-md-6 col-lg-8">
                                         <div class="form-group mb-0">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+                                                <input type="text"
+                                                       class="form-control"
+                                                       placeholder="Search"
+                                                       aria-label="Search">
                                                 <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <i class="fas fa-search"></i>
-                                                </span>
+                                                    <span class="input-group-text">
+                                                        <i class="fas fa-search" />
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-auto">
-                                        <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="collapseFilters">
-                                            <i class="fas fa-sliders-h"></i>
+                                        <button class="btn btn-success"
+                                                type="button"
+                                                data-toggle="collapse"
+                                                data-target="#moreFilters"
+                                                aria-expanded="false"
+                                                aria-controls="collapseFilters">
+                                            <i class="fas fa-sliders-h" />
                                             Filters
                                         </button>
                                     </div>
                                 </div>
-                                <div class="collapse" id="moreFilters">
+                                <div id="moreFilters"
+                                     class="collapse">
                                     <hr>
                                     <!--Checkbox list-->
                                     <div class="row">
@@ -48,33 +75,26 @@
                                             <div class="checkbox-list">
                                                 <h4>Filters Type Title</h4>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkbox1" checked>
-                                                    <label class="custom-control-label" for="checkbox1">Check this custom checkbox</label>
+                                                    <input id="checkbox1"
+                                                           type="checkbox"
+                                                           class="custom-control-input"
+                                                           checked>
+                                                    <label class="custom-control-label"
+                                                           for="checkbox1">Check this custom checkbox</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkbox2">
-                                                    <label class="custom-control-label" for="checkbox2">Check this custom checkbox</label>
+                                                    <input id="checkbox2"
+                                                           type="checkbox"
+                                                           class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                           for="checkbox2">Check this custom checkbox</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkbox3">
-                                                    <label class="custom-control-label" for="checkbox3">Check this custom checkbox</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-card col-12 col-md-4 col-lg-3 mb-4">
-                                            <div class="checkbox-list">
-                                                <h4>Filters Type Title</h4>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkbox1" checked>
-                                                    <label class="custom-control-label" for="checkbox1">Check this custom checkbox</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkbox2">
-                                                    <label class="custom-control-label" for="checkbox2">Check this custom checkbox</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkbox3">
-                                                    <label class="custom-control-label" for="checkbox3">Check this custom checkbox</label>
+                                                    <input id="checkbox3"
+                                                           type="checkbox"
+                                                           class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                           for="checkbox3">Check this custom checkbox</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -82,33 +102,26 @@
                                             <div class="checkbox-list">
                                                 <h4>Filters Type Title</h4>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkbox1" checked>
-                                                    <label class="custom-control-label" for="checkbox1">Check this custom checkbox</label>
+                                                    <input id="checkbox1"
+                                                           type="checkbox"
+                                                           class="custom-control-input"
+                                                           checked>
+                                                    <label class="custom-control-label"
+                                                           for="checkbox1">Check this custom checkbox</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkbox2">
-                                                    <label class="custom-control-label" for="checkbox2">Check this custom checkbox</label>
+                                                    <input id="checkbox2"
+                                                           type="checkbox"
+                                                           class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                           for="checkbox2">Check this custom checkbox</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkbox3">
-                                                    <label class="custom-control-label" for="checkbox3">Check this custom checkbox</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-card col-12 col-md-4 col-lg-3 mb-4">
-                                            <div class="checkbox-list">
-                                                <h4>Filters Type Title</h4>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkbox1" checked>
-                                                    <label class="custom-control-label" for="checkbox1">Check this custom checkbox</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkbox2">
-                                                    <label class="custom-control-label" for="checkbox2">Check this custom checkbox</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkbox3">
-                                                    <label class="custom-control-label" for="checkbox3">Check this custom checkbox</label>
+                                                    <input id="checkbox3"
+                                                           type="checkbox"
+                                                           class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                           for="checkbox3">Check this custom checkbox</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -116,16 +129,80 @@
                                             <div class="checkbox-list">
                                                 <h4>Filters Type Title</h4>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkbox1" checked>
-                                                    <label class="custom-control-label" for="checkbox1">Check this custom checkbox</label>
+                                                    <input id="checkbox1"
+                                                           type="checkbox"
+                                                           class="custom-control-input"
+                                                           checked>
+                                                    <label class="custom-control-label"
+                                                           for="checkbox1">Check this custom checkbox</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkbox2">
-                                                    <label class="custom-control-label" for="checkbox2">Check this custom checkbox</label>
+                                                    <input id="checkbox2"
+                                                           type="checkbox"
+                                                           class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                           for="checkbox2">Check this custom checkbox</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkbox3">
-                                                    <label class="custom-control-label" for="checkbox3">Check this custom checkbox</label>
+                                                    <input id="checkbox3"
+                                                           type="checkbox"
+                                                           class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                           for="checkbox3">Check this custom checkbox</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-card col-12 col-md-4 col-lg-3 mb-4">
+                                            <div class="checkbox-list">
+                                                <h4>Filters Type Title</h4>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input id="checkbox1"
+                                                           type="checkbox"
+                                                           class="custom-control-input"
+                                                           checked>
+                                                    <label class="custom-control-label"
+                                                           for="checkbox1">Check this custom checkbox</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input id="checkbox2"
+                                                           type="checkbox"
+                                                           class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                           for="checkbox2">Check this custom checkbox</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input id="checkbox3"
+                                                           type="checkbox"
+                                                           class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                           for="checkbox3">Check this custom checkbox</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-card col-12 col-md-4 col-lg-3 mb-4">
+                                            <div class="checkbox-list">
+                                                <h4>Filters Type Title</h4>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input id="checkbox1"
+                                                           type="checkbox"
+                                                           class="custom-control-input"
+                                                           checked>
+                                                    <label class="custom-control-label"
+                                                           for="checkbox1">Check this custom checkbox</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input id="checkbox2"
+                                                           type="checkbox"
+                                                           class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                           for="checkbox2">Check this custom checkbox</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input id="checkbox3"
+                                                           type="checkbox"
+                                                           class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                           for="checkbox3">Check this custom checkbox</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -138,11 +215,14 @@
                                                 <label>Search Title 1</label>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               placeholder="Search"
+                                                               aria-label="Search">
                                                         <div class="input-group-append">
-                                                    <span class="input-group-text">
-                                                        <i class="fas fa-search"></i>
-                                                    </span>
+                                                            <span class="input-group-text">
+                                                                <i class="fas fa-search" />
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -153,11 +233,14 @@
                                                 <label>Search Title 2</label>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               placeholder="Search"
+                                                               aria-label="Search">
                                                         <div class="input-group-append">
-                                                    <span class="input-group-text">
-                                                        <i class="fas fa-search"></i>
-                                                    </span>
+                                                            <span class="input-group-text">
+                                                                <i class="fas fa-search" />
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -168,11 +251,14 @@
                                                 <label>Search Title 3</label>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               placeholder="Search"
+                                                               aria-label="Search">
                                                         <div class="input-group-append">
-                                                    <span class="input-group-text">
-                                                        <i class="fas fa-search"></i>
-                                                    </span>
+                                                            <span class="input-group-text">
+                                                                <i class="fas fa-search" />
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -182,8 +268,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="tab2" role="tabpanel" aria-labelledby="tab"></div>
-                        <div class="tab-pane" id="tab3" role="tabpanel" aria-labelledby="tab"></div>
+                        <div id="tab2"
+                             class="tab-pane"
+                             role="tabpanel"
+                             aria-labelledby="tab" />
+                        <div id="tab3"
+                             class="tab-pane"
+                             role="tabpanel"
+                             aria-labelledby="tab" />
                     </div>
                 </div>
             </div>
@@ -192,13 +284,13 @@
 </template>
 
 <script>
-    export default {
-        components: {
-        },
-        data: () => ({
+export default {
+    components: {
+    },
+    data: () => ({
 
-        })
-    }
+    })
+}
 </script>
 
 <style lang="scss" scoped>

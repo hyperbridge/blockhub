@@ -1,126 +1,161 @@
 <template>
     <div class="row">
-    <div class="col-12">
-        <div class="bounties-header margin-bottom-20">
-            <div class="bounties-header__info">
-                <div class="h3 text-white font-weight-bold mb-0">
-                    {{ bounties.length }} Bounties available
+        <div class="col-12">
+            <div class="bounties-header margin-bottom-20">
+                <div class="bounties-header__info">
+                    <div class="h3 text-white font-weight-bold mb-0">
+                        {{ bounties.length }} Bounties available
+                    </div>
+                </div>
+                <div class="bounties-header__stat">
+                    <c-icon-block icon="users"
+                                  class="ml-5">
+                        <div class="h6 p-0 m-0 text-white font-weight-bold">
+                            {{ contributors }}
+                        </div>
+                        Contributors
+                    </c-icon-block>
+                    <c-icon-block icon="arrow-right"
+                                  class="ml-5">
+                        <div class="h6 p-0 m-0 text-white font-weight-bold">
+                            {{ submissions }}
+                        </div>
+                        Submissions
+                    </c-icon-block>
+                </div>
+                <div class="bounties-header__action">
+                    <c-button :to="`/business/projects/${project.id}`"
+                              status="dark"
+                              iconHide
+                              size="lg"
+                              fontSize="14"
+                              class="text-uppercase with-label">
+                        <span class="btn-label">
+                            <i class="fas fa-lock" />
+                        </span>
+                        Management
+                    </c-button>
+                    <c-button :to="`/profile/${$store.state.application.activeProfile.id}/bounties`"
+                              status="info"
+                              iconHide
+                              size="lg"
+                              fontSize="14"
+                              class="text-uppercase ml-3">
+                        My bounties
+                    </c-button>
                 </div>
             </div>
-            <div class="bounties-header__stat">
-                <c-icon-block icon="users" class="ml-5">
-                    <div class="h6 p-0 m-0 text-white font-weight-bold">
-                        {{ contributors }}
-                    </div>
-                    Contributors
-                </c-icon-block>
-                <c-icon-block icon="arrow-right" class="ml-5">
-                    <div class="h6 p-0 m-0 text-white font-weight-bold">
-                        {{ submissions }}
-                    </div>
-                    Submissions
-                </c-icon-block>
-            </div>
-            <div class="bounties-header__action">
-                <c-button :to="`/business/projects/${project.id}`" status="dark" iconHide size="lg" fontSize="14" class="text-uppercase with-label">
-                    <span class="btn-label">
-                        <i class="fas fa-lock"></i>
-                    </span>
-                    Management
-                </c-button>
-                <c-button :to="`/profile/${$store.state.application.activeProfile.id}/bounties`" status="info" iconHide size="lg" fontSize="14" class="text-uppercase ml-3">
-                    My bounties
-                </c-button>
-            </div>
-        </div>
 
-        <div v-for="(item, index) in bounties" :key="index" class="bounties_item margin-bottom-30">
-            <div class="bountie__head d-flex justify-content-between align-items-center">
-                <div class="bountie__head-stat">
-                    <div>
-                        <h4 class="mb-0">Prize</h4>
-                        <span>{{ item.prize | numeralFormat('0,0') }} HBX</span>
+            <div v-for="(item, index) in bounties"
+                 :key="index"
+                 class="bounties_item margin-bottom-30">
+                <div class="bountie__head d-flex justify-content-between align-items-center">
+                    <div class="bountie__head-stat">
+                        <div>
+                            <h4 class="mb-0">
+                                Prize
+                            </h4>
+                            <span>{{ item.prize | numeralFormat('0,0') }} HBX</span>
+                        </div>
+                        <div>
+                            <h4 class="mb-0">
+                                Submited
+                            </h4>
+                            <span>{{ item.submited }}</span>
+                        </div>
+                        <div>
+                            <h4 class="mb-0">
+                                Approved
+                            </h4>
+                            <span>{{ item.approved }}</span>
+                        </div>
                     </div>
-                    <div>
-                        <h4 class="mb-0">Submited</h4>
-                        <span>{{ item.submited }}</span>
-                    </div>
-                    <div>
-                        <h4 class="mb-0">Approved</h4>
-                        <span>{{ item.approved }}</span>
-                    </div>
+                    <c-button status="success"
+                              fontSize="14"
+                              iconHide
+                              size="lg"
+                              class="text-uppercase"
+                              @click=" showDownload = !showDownload ">
+                        Claim Bounty
+                    </c-button>
                 </div>
-                <c-button status="success" fontSize="14" iconHide @click=" showDownload = !showDownload " size="lg" class="text-uppercase">
-                    Claim Bounty
-                </c-button>
-            </div>
-            <div class="bountie__text padding-left-15 padding-right-15">
-                <h4>{{ item.title }}</h4>
-                <p>{{ item.text }}</p>
-            </div>
-            <transition name="fade">
-                <div class="bountie__bottom" v-if="showDownload">
-                    <div class="file_upload">
-                        <i class="fas fa-download"></i>
-                        Select a Dossier File
-                    </div>
-                    <span>or</span>
-                    <input v-model="item.explainText" class="explain_input" type="text" placeholder="Explain your findings"/>
-                    <c-button status="success" icon="arrow-right" size="md">Submit</c-button>
+                <div class="bountie__text padding-left-15 padding-right-15">
+                    <h4>{{ item.title }}</h4>
+                    <p>{{ item.text }}</p>
                 </div>
-            </transition>
+                <transition name="fade">
+                    <div v-if="showDownload"
+                         class="bountie__bottom">
+                        <div class="file_upload">
+                            <i class="fas fa-download" />
+                            Select a Dossier File
+                        </div>
+                        <span>or</span>
+                        <input v-model="item.explainText"
+                               class="explain_input"
+                               type="text"
+                               placeholder="Explain your findings">
+                        <c-button status="success"
+                                  icon="arrow-right"
+                                  size="md">
+                            Submit
+                        </c-button>
+                    </div>
+                </transition>
+            </div>
         </div>
-    </div>
     </div>
 </template>
 
 <script>
-    export default {
-        props: ['project', 'editing'],
-        data() {
-            let data = {
-                contributors: 0,
-                submissions: 0,
-                bounties: [],
-                showDownload: false,
-                bounties: []
-            }
+export default {
+    components: {
+        'c-icon-block': () => import('~/components/block/with-icon').then(m => m.default || m)
+    },
+    props: ['project', 'editing'],
+    data() {
+        let data = {
+            contributors: 0,
+            submissions: 0,
+            bounties: [],
+            showDownload: false,
+            bounties: []
+        }
 
-            if (this.$store.state.application.environmentMode !== 'production') {
-                data = {...data, ...{
+        if (this.$store.state.application.environmentMode !== 'production') {
+            data = {
+                ...data, ...{
                     contributors: 81,
                     submissions: 81,
                     bounties: [
                         {
-                            "title": "Find a bug, behind the word mountains, far from the countries Vokalia and Consonantia, there live.",
-                            "submited": "2851",
-                            "approved": "408",
-                            "prize": "30000",
-                            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu nulla sed urna malesuada ornare nec ac risus. Nam vehicula mauris ac augue finibus finibus non et erat. Integer malesuada rutrum elit non hendrerit. Nam volutpat scelerisque magna, in lacinia nulla consectetur eget. Nunc feugiat egestas arcu id lobortis. Proin rhoncus viverra mi, ac bibendum ligula molestie eget. Vivamus a tempor ligula.",
-                            "explainText": "",
-                            "fileSrc": ""
+                            'title': 'Find a bug, behind the word mountains, far from the countries Vokalia and Consonantia, there live.',
+                            'submited': '2851',
+                            'approved': '408',
+                            'prize': '30000',
+                            'text': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu nulla sed urna malesuada ornare nec ac risus. Nam vehicula mauris ac augue finibus finibus non et erat. Integer malesuada rutrum elit non hendrerit. Nam volutpat scelerisque magna, in lacinia nulla consectetur eget. Nunc feugiat egestas arcu id lobortis. Proin rhoncus viverra mi, ac bibendum ligula molestie eget. Vivamus a tempor ligula.',
+                            'explainText': '',
+                            'fileSrc': ''
 
                         },
                         {
-                            "title": "Find a bug, behind the word mountains, far from the countries Vokalia and Consonantia, there live.",
-                            "submited": "2851",
-                            "approved": "408",
-                            "prize": "30000",
-                            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu nulla sed urna malesuada ornare nec ac risus. Nam vehicula mauris ac augue finibus finibus non et erat. Integer malesuada rutrum elit non hendrerit. Nam volutpat scelerisque magna, in lacinia nulla consectetur eget. Nunc feugiat egestas arcu id lobortis. Proin rhoncus viverra mi, ac bibendum ligula molestie eget. Vivamus a tempor ligula.",
-                            "explainText": "",
-                            "fileSrc": ""
+                            'title': 'Find a bug, behind the word mountains, far from the countries Vokalia and Consonantia, there live.',
+                            'submited': '2851',
+                            'approved': '408',
+                            'prize': '30000',
+                            'text': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu nulla sed urna malesuada ornare nec ac risus. Nam vehicula mauris ac augue finibus finibus non et erat. Integer malesuada rutrum elit non hendrerit. Nam volutpat scelerisque magna, in lacinia nulla consectetur eget. Nunc feugiat egestas arcu id lobortis. Proin rhoncus viverra mi, ac bibendum ligula molestie eget. Vivamus a tempor ligula.',
+                            'explainText': '',
+                            'fileSrc': ''
 
                         }
                     ]
-                }}
+                }
             }
+        }
 
-            return data
-        },
-        components: {
-            'c-icon-block': () => import('~/components/block/with-icon').then(m => m.default || m)
-        },
+        return data
     }
+}
 </script>
 
 <style lang="scss" scoped>

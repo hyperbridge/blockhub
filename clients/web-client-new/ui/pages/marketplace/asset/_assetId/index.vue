@@ -1,11 +1,16 @@
 <template>
     <div>
-        <div v-if="asset" class="asset__wrapper">
-            <c-img class="asset__background-img" :src="asset.image"/>
-            <h1 class="asset__name">{{ asset.name }}</h1>
+        <div v-if="asset"
+             class="asset__wrapper">
+            <c-img class="asset__background-img"
+                   :src="asset.image" />
+            <h1 class="asset__name">
+                {{ asset.name }}
+            </h1>
 
             <div class="asset__details">
-                <c-img class="asset__img" :src="asset.image"/>
+                <c-img class="asset__img"
+                       :src="asset.image" />
                 <ul class="details__list">
                     <li class="details__list-item">
                         <span class="details__title">Game:</span>
@@ -36,13 +41,11 @@
             <c-line-chart
                 :data="chartData"
                 :options="chartOptions"
-                :height="400"
-            />
+                :height="400" />
 
             <h2
                 key="offers"
-                class="offers__title"
-            >
+                class="offers__title">
                 {{ $route.name === 'Marketplace Asset Offers'
                     ? 'Offers'
                     : 'Offer bids'
@@ -52,9 +55,8 @@
             <nav class="back-btn">
                 <router-link
                     v-show="$route.name === 'Marketplace Asset Offer'"
-                    :to="{ name: 'Marketplace Asset Offers' }"
-                >
-                    <c-icon name="arrow-left"/>
+                    :to="{ name: 'Marketplace Asset Offers' }">
+                    <c-icon name="arrow-left" />
                     Go back
                 </router-link>
             </nav>
@@ -64,69 +66,67 @@
                     <router-view
                         :offersMap="offersMap"
                         :asset="asset"
-                        :profile="profile"
-                    />
+                        :profile="profile" />
                 </transition>
             </div>
-
         </div>
-        <p v-else>Asset with id {{ id }} doesn't exist</p>
+        <p v-else>
+            Asset with id {{ id }} doesn't exist
+        </p>
     </div>
 </template>
 
 <script>
-    import moment from 'moment';
+import moment from 'moment'
 
-    export default {
-        props: ['assetId', 'profileId'],
-        data() {
-            return {
-                priceHistory: Array.from({ length: 100 }, (x, i) =>
-                    Math.round(Math.random() * (i + 1))
-                ),
-                priceDates: Array.from({ length: 100 }, (x, i) =>
-                    moment().add(-100 + i, 'days').format('DD / MM')
-                ),
-                chartOptions: {
-                    maintainAspectRatio: false,
-                    // scales: {
-                    //     xAxes: [{ gridLines: { display: false } }],
-                    //     yAxes: [{ gridLines: { display: false } }]
-                    // }
-                }
-            }
-        },
-        components: {
-            'c-line-chart': () => import('~/components/charts/line').then(m => m.default || m),
-            'c-user': () => import('~/components/user/simple').then(m => m.default || m),
-        },
-        computed: {
-            asset() {
-                return this.$store.getters['assets/assets'][this.assetId];
-            },
-            chartData() {
-                const { priceDates, priceHistory } = this;
-                return {
-                    labels: priceDates,
-                    datasets: [{
-                        label: 'Price history',
-                        data: priceHistory,
-                        backgroundColor: '#83D0F2'
-                    }]
-                };
-            },
-            priceHistorySorted() {
-                return [...this.priceHistory].sort();
-            },
-            offersMap() {
-                return this.$store.getters['assets/offersMap']
-                    .filter(([id, offer]) => offer.asset.id == this.assetId);
-            },
-            profile() {
-                return this.$store.state.application.activeProfile
+export default {
+    components: {
+        'c-line-chart': () => import('~/components/charts/line').then(m => m.default || m),
+        'c-user': () => import('~/components/user/simple').then(m => m.default || m)
+    },
+    props: ['assetId', 'profileId'],
+    data() {
+        return {
+            priceHistory: Array.from({ length: 100 }, (x, i) =>
+                Math.round(Math.random() * (i + 1))),
+            priceDates: Array.from({ length: 100 }, (x, i) =>
+                moment().add(-100 + i, 'days').format('DD / MM')),
+            chartOptions: {
+                maintainAspectRatio: false
+                // scales: {
+                //     xAxes: [{ gridLines: { display: false } }],
+                //     yAxes: [{ gridLines: { display: false } }]
+                // }
             }
         }
+    },
+    computed: {
+        asset() {
+            return this.$store.getters['assets/assets'][this.assetId]
+        },
+        chartData() {
+            const { priceDates, priceHistory } = this
+            return {
+                labels: priceDates,
+                datasets: [{
+                    label: 'Price history',
+                    data: priceHistory,
+                    backgroundColor: '#83D0F2'
+                }]
+            }
+        },
+        priceHistorySorted() {
+            return [...this.priceHistory].sort()
+        },
+        offersMap() {
+            return this.$store.getters['assets/offersMap']
+                .filter(([id, offer]) => offer.asset.id == this.assetId)
+        },
+        profile() {
+            return this.$store.state.application.activeProfile
+        }
     }
+}
 </script>
 
 <style lang="scss" scoped>

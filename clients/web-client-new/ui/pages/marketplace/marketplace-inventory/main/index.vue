@@ -2,12 +2,17 @@
     <div>
         <h2>Explore</h2>
         <div class="inventory-navigation">
-            <c-switch :label="labelText" v-model="allowSelect"/>
+            <c-switch v-model="allowSelect"
+                      :label="labelText" />
             <div>
-                <c-button status="info" @click="selectAll()" icon="hand-pointer">
+                <c-button status="info"
+                          icon="hand-pointer"
+                          @click="selectAll()">
                     {{ everySelected ? 'Unselect all' : 'Select all' }}
                 </c-button>
-                <c-button status="info" icon="dollar-sign" @click="openModal = true">
+                <c-button status="info"
+                          icon="dollar-sign"
+                          @click="openModal = true">
                     Sell selected in market
                 </c-button>
             </div>
@@ -16,49 +21,48 @@
             <c-content-navigation
                 :items="assets"
                 :setItemsPerPage="12"
-                :setItemsLimit="12"
-            >
-                <div class="assets-grid" slot-scope="props">
+                :setItemsLimit="12">
+                <div slot-scope="props"
+                     class="assets-grid">
                     <c-asset
                         v-for="(asset, index) in props.items"
                         :key="index"
                         :asset="asset"
                         :showSold="showSold && asset.selected"
-                        @click="selectAsset($event)"
-                    />
+                        @click="selectAsset($event)" />
                 </div>
             </c-content-navigation>
             <c-asset-preview
                 v-if="previewAsset"
-                :asset="previewAsset"
-            />
+                :asset="previewAsset" />
         </div>
-        <c-modal title="Sell assets" v-if="openModal" @close="openModal = false">
+        <c-modal v-if="openModal"
+                 title="Sell assets"
+                 @close="openModal = false">
             <form slot="modalBody">
                 <div class="sell-assets__assets-wrapper">
                     <div
                         v-for="(asset, index) in selectedAssets"
                         :key="index"
-                        class="sell-assets__asset"
-                    >
-                        <c-asset-preview-basic :asset="asset" size="sm"/>
+                        class="sell-assets__asset">
+                        <c-asset-preview-basic :asset="asset"
+                                               size="sm" />
                         <div class="sell-assets__market-price">
                             <c-input
                                 :value="asset.market_price"
-                                @input="updateAsset(asset.id, { market_price: parseFloat($event) || 0 })"
-                            />
+                                @input="updateAsset(asset.id, { market_price: parseFloat($event) || 0 })" />
                             <span>
                                 Sell asset for <strong>{{ asset.market_price }}</strong> $
                             </span>
                             <c-range-slider
                                 :value="asset.market_price"
-                                @input="updateAsset(asset.id, { market_price: parseFloat($event) })"
                                 :max="Math.round(asset.price.max * 2)"
-                            />
+                                @input="updateAsset(asset.id, { market_price: parseFloat($event) })" />
                         </div>
                     </div>
                 </div>
-                <p v-for="(error, index) in errors" :key="index">
+                <p v-for="(error, index) in errors"
+                   :key="index">
                     {{ error }}
                 </p>
                 <span class="sell-assets__summary">
@@ -66,10 +70,12 @@
                     for <strong> {{ sellSummary.price | roundNum }} </strong> $
                 </span>
                 <div class="flex-center-between">
-                    <c-button status="danger" @click="openModal = false">
+                    <c-button status="danger"
+                              @click="openModal = false">
                         Cancel
                     </c-button>
-                    <c-button status="success" @click="sellAssets()">
+                    <c-button status="success"
+                              @click="sellAssets()">
                         Confirm sell
                     </c-button>
                 </div>
@@ -79,99 +85,99 @@
 </template>
 
 <script>
-    export default {
-        props: ['assets'],
-        components: {
-            'c-assets-grid-inventory': () => import('~/components/assets-grid-inventory').then(m => m.default || m),
-            'c-asset-preview-basic': () => import('~/components/asset/preview-basic').then(m => m.default || m),
-            'c-asset-preview': () => import('~/components/asset/preview').then(m => m.default || m),
-            'c-asset': () => import('~/components/assets-grid-inventory/asset').then(m => m.default || m),
-            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-            'c-switch': () => import('~/components/switch').then(m => m.default || m),
-            'c-modal': () => import('~/components/modal/custom').then(m => m.default || m),
-            'c-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m),
+export default {
+    components: {
+        'c-assets-grid-inventory': () => import('~/components/assets-grid-inventory').then(m => m.default || m),
+        'c-asset-preview-basic': () => import('~/components/asset/preview-basic').then(m => m.default || m),
+        'c-asset-preview': () => import('~/components/asset/preview').then(m => m.default || m),
+        'c-asset': () => import('~/components/assets-grid-inventory/asset').then(m => m.default || m),
+        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+        'c-switch': () => import('~/components/switch').then(m => m.default || m),
+        'c-modal': () => import('~/components/modal/custom').then(m => m.default || m),
+        'c-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m)
+    },
+    props: ['assets'],
+    data() {
+        return {
+            previewAsset: null,
+            selectableAssets: [],
+            allowSelect: true,
+            openModal: false,
+            showSold: false,
+            errors: []
+        }
+    },
+    computed: {
+        labelText() {
+            return `${this.allowSelect ? 'Disable' : 'Enable'} on click selection`
         },
-        data() {
+        selectedAssets() {
+            return this.assets.filter(asset => asset.selected)
+        },
+        everySelected() {
+            return !(this.assets.length - this.selectedAssets.length)
+        },
+        sellSummary() {
             return {
-                previewAsset: null,
-                selectableAssets: [],
-                allowSelect: true,
-                openModal: false,
-                showSold: false,
-                errors: []
+                count: this.selectedAssets.length,
+                price: this.selectedAssets.reduce((price, asset) =>
+                    price += asset.market_price
+                , 0)
+            }
+        }
+    },
+    mounted() {
+        this.previewAsset = this.assets[0]
+        this.selectableAssets = this.assets.map(asset => ({
+            ...asset,
+            selected: false,
+            marketPrice: 0
+        }))
+    },
+    methods: {
+        selectAsset(asset) {
+            this.previewAsset = asset
+            if (this.allowSelect) {
+                this.updateAsset(asset.id, { selected: !asset.selected })
+                asset.selected = !asset.selected
             }
         },
-        methods: {
-            selectAsset(asset) {
-                this.previewAsset = asset;
-                if (this.allowSelect) {
-                    this.updateAsset(asset.id, { selected: !asset.selected });
-                    asset.selected = !asset.selected
-                };
-            },
-            selectAll() {
-                const { everySelected } = this;
-                this.updateAssets({ selected: !everySelected });
-            },
-            sellAssets() {
-                const { selectedAssets } = this;
-                this.errors = [];
+        selectAll() {
+            const { everySelected } = this
+            this.updateAssets({ selected: !everySelected })
+        },
+        sellAssets() {
+            const { selectedAssets } = this
+            this.errors = []
 
-                if (!selectedAssets.length) {
-                    return;
-                } else if (selectedAssets.some(asset => asset.market_price <= 0)) {
-                    this.errors.push(`You can't sell asset for no price`);
-                } else {
-                    this.showSold = true;
-                    setTimeout(() => {
-                        this.showSold = false;
-                        this.updateAssets(
-                            { for_sale: true, selected: false },
-                            selectedAssets.map(asset => asset.id)
-                        );
-                    }, 3000);
-                    this.$snotify.success('Assets have been placed in the market', 'Confirmed', {
-                        timeout: 2500,
-                        pauseOnHover: true
-                    });
-                    this.openModal = false;
-                }
-            },
-            updateAsset(id, data) {
-                this.$store.commit('assets/updateAsset', { id, data });
-            },
-            updateAssets(data, ids) {
-                this.$store.commit('assets/updateAssets', { data, ids });
+            if (!selectedAssets.length) {
+
+            } else if (selectedAssets.some(asset => asset.market_price <= 0)) {
+                this.errors.push(`You can't sell asset for no price`)
+            } else {
+                this.showSold = true
+                setTimeout(() => {
+                    this.showSold = false
+                    this.updateAssets(
+                        { for_sale: true, selected: false },
+                        selectedAssets.map(asset => asset.id)
+                    )
+                }, 3000)
+                this.$snotify.success('Assets have been placed in the market', 'Confirmed', {
+                    timeout: 2500,
+                    pauseOnHover: true
+                })
+                this.openModal = false
             }
         },
-        computed: {
-            labelText() {
-                return `${this.allowSelect ? 'Disable' : 'Enable'} on click selection`;
-            },
-            selectedAssets() {
-                return this.assets.filter(asset => asset.selected);
-            },
-            everySelected() {
-                return !(this.assets.length - this.selectedAssets.length);
-            },
-            sellSummary() {
-                return {
-                    count: this.selectedAssets.length,
-                    price: this.selectedAssets.reduce((price, asset) =>
-                        price += asset.market_price
-                    , 0)
-                }
-            }
+        updateAsset(id, data) {
+            this.$store.commit('assets/updateAsset', { id, data })
         },
-        mounted() {
-            this.previewAsset = this.assets[0];
-            this.selectableAssets = this.assets.map(asset =>({
-                ...asset,
-                selected: false,
-                marketPrice: 0
-            }));
+        updateAssets(data, ids) {
+            this.$store.commit('assets/updateAssets', { data, ids })
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

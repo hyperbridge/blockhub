@@ -42,8 +42,7 @@
                             name="article-date"
                             calendar-class="form-calendar"
                             minimumView="day"
-                            maximumView="month"
-                        />
+                            maximumView="month" />
                     </div>
                 </div>
             </div>
@@ -53,13 +52,15 @@
                 <div class="col-12">
                     <h1>HTML Ipsum Presents</h1>
 
-                    <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac
+                    <p>
+                        <strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac
                         turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.
                         Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris
                         placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat
                         wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit
                         eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a
-                            href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+                            href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.
+                    </p>
 
                     <h2>Header Level 2</h2>
 
@@ -68,10 +69,14 @@
                         <li>Aliquam tincidunt mauris eu risus.</li>
                     </ol>
 
-                    <blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at
-                        felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend,
-                        libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam.
-                        Vivamus pretium ornare est.</p></blockquote>
+                    <blockquote>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at
+                            felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend,
+                            libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam.
+                            Vivamus pretium ornare est.
+                        </p>
+                    </blockquote>
 
                     <h3>Header Level 3</h3>
 
@@ -118,7 +123,6 @@
                             </c-button>
                         </li>
                     </ul>
-
                 </div>
                 <div class="col-12">
                     <div class="also-in-day__item">
@@ -139,7 +143,8 @@
                             erat.
                         </p>
                         <div class="w-100 text-right">
-                            <c-button status="second-info" size="sm">
+                            <c-button status="second-info"
+                                      size="sm">
                                 Read more
                             </c-button>
                         </div>
@@ -164,7 +169,6 @@
                             </c-button>
                         </li>
                     </ul>
-
                 </div>
                 <div class="col-12">
                     <div class="also-in-day__item">
@@ -181,7 +185,8 @@
                             nascetur ridiculus mus.
                         </p>
                         <div class="w-100 text-right">
-                            <c-button status="second-info" size="sm">
+                            <c-button status="second-info"
+                                      size="sm">
                                 Read more
                             </c-button>
                         </div>
@@ -196,7 +201,8 @@
                         Citation Information
                     </div>
                     <template v-for="(item, index) in citation">
-                        <div class="h4" :class=" index == 0 ? '' : 'mt-4'">
+                        <div class="h4"
+                             :class=" index == 0 ? '' : 'mt-4'">
                             {{ item.title }}
                         </div>
                         <div>
@@ -210,38 +216,38 @@
 </template>
 
 <script>
-    export default {
-        components: {
-            'c-datepicker': (resolve) => require(['vuejs-datepicker'], resolve),
-        },
-        data() {
-            return {
-                date: '2019-02-04T22:07:00.000Z',
-                citation: [
-                    {
-                        title: 'Article Title',
-                        text: 'Great Tokyo Fire continues to blaze'
-                    },
-                    {
-                        title: 'Author',
-                        text: 'History.com Editors'
-                    },
-                    {
-                        title: 'Website Name',
-                        text: 'HISTORY'
-                    },
-                    {
-                        title: 'URL',
-                        text: 'https://www.history.com/this-day-in-history/great-tokyo-fire-continues-to-blaze'
-                    },
-                    {
-                        title: 'Access Date',
-                        text: 'February 10, 2019'
-                    },
-                ]
-            }
-        },
+export default {
+    components: {
+        'c-datepicker': resolve => require(['vuejs-datepicker'], resolve)
+    },
+    data() {
+        return {
+            date: '2019-02-04T22:07:00.000Z',
+            citation: [
+                {
+                    title: 'Article Title',
+                    text: 'Great Tokyo Fire continues to blaze'
+                },
+                {
+                    title: 'Author',
+                    text: 'History.com Editors'
+                },
+                {
+                    title: 'Website Name',
+                    text: 'HISTORY'
+                },
+                {
+                    title: 'URL',
+                    text: 'https://www.history.com/this-day-in-history/great-tokyo-fire-continues-to-blaze'
+                },
+                {
+                    title: 'Access Date',
+                    text: 'February 10, 2019'
+                }
+            ]
+        }
     }
+}
 </script>
 
 <style lang="scss">

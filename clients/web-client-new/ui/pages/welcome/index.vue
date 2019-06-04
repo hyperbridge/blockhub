@@ -1,19 +1,22 @@
 <template>
-    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false" :showShortcuts="false"></c-layout>
+    <c-layout navigationKey="account"
+              :showLeftPanel="false"
+              :showRightPanel="false"
+              :showShortcuts="false" />
 </template>
 
 
 <script>
 export default {
-    created() {
-        this.$store.commit('application/activateModal', 'login')
-    },
     watch: {
         '$store.state.application.signedIn'(newVal) {
             // if (newVal === true) {
             //     this.$router.push({ path: '/' })
             // }
         }
+    },
+    created() {
+        this.$store.commit('application/activateModal', 'login')
     }
 }
 </script>

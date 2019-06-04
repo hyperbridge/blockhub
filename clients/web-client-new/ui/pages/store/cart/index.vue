@@ -1,15 +1,15 @@
 
                                         <div class="table-responsive">
-                                            <table class="table table-striped table-bordered margin-bottom-0">                                                                                    
+                                            <table class="table table-striped table-bordered margin-bottom-0">
                                                 <thead>
-                                                    <tr>        
+                                                    <tr>
                                                         <th width="30">
                                                             <label class="custom-control custom-checkbox">
                                                                 <input type="checkbox" class="custom-control-input">
                                                                 <span class="custom-control-label"></span>
                                                             </label>
                                                         </th>
-                                                        <th>Name</th>                                                                                                    
+                                                        <th>Name</th>
                                                         <th width="80">Date</th>
                                                         <th width="30"></th>
                                                     </tr>

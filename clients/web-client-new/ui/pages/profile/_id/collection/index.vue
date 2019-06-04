@@ -4,11 +4,15 @@
             <div class="col-12">
                 <c-block title="Collections">
                     <div class="collections-container">
-                        <div class="collections-container__item" v-for="(item, index) in collections" :key="index" v-if="index < 6">
+                        <div v-for="(item, index) in collections"
+                             v-if="index < 6"
+                             :key="index"
+                             class="collections-container__item">
                             <c-collection-item :item="item" />
                         </div>
                     </div>
-                    <c-pagination :pages="8" v-if="collections.length > 6" />
+                    <c-pagination v-if="collections.length > 6"
+                                  :pages="8" />
                 </c-block>
             </div>
         </div>
@@ -16,18 +20,18 @@
 </template>
 
 <script>
-    export default {
-        components: {
-            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-            'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m),
-            'c-pagination': () => import('~/components/pagination').then(m => m.default || m)
-        },
-        computed:{
-            collections: function () {
-                return this.$store.state.marketplace.collections
-            }
+export default {
+    components: {
+        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+        'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m),
+        'c-pagination': () => import('~/components/pagination').then(m => m.default || m)
+    },
+    computed: {
+        collections() {
+            return this.$store.state.marketplace.collections
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

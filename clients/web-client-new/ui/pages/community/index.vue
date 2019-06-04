@@ -24,11 +24,11 @@
 </template>
 
 <script>
-    export default {
-        components: {
-            'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m),
-        }
+export default {
+    components: {
+        'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m)
     }
+}
 </script>
 
 <style lang="scss" scoped>

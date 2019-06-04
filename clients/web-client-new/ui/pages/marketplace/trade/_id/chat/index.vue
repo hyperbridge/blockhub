@@ -1,16 +1,16 @@
 <template>
     <div>
-        <ul class="reset-list chat" ref="chatList">
+        <ul ref="chatList"
+            class="reset-list chat">
             <c-chat-message
                 v-for="(msg, index) in trx.messages"
-                @delete="$store.dispatch(
-                    'deleteRelation',
-                    ['assets/trxs/messages', trx.id, $event]
-                )"
                 :key="index"
                 :message="msg"
                 :userId="userId"
-            />
+                @delete="$store.dispatch(
+                    'deleteRelation',
+                    ['assets/trxs/messages', trx.id, $event]
+                )" />
             <!-- @delete="$store.dispatch(
                 'assets/deleteTransactionMessage',
                 { id: $event, trxId: trx.id }
@@ -18,16 +18,14 @@
         </ul>
         <div class="chat-form">
             <input
+                v-model="newMessage"
                 class="chat-form__input"
                 type="text"
-                v-model="newMessage"
-                @keyup.enter="sendMessageV2()"
-            />
+                @keyup.enter="sendMessageV2()">
             <button
-                @click="sendMessage()"
                 class="chat-form__btn"
-            >
-                <c-icon name="paper-plane"/>
+                @click="sendMessage()">
+                <c-icon name="paper-plane" />
             </button>
         </div>
         <!-- <button @click="$store.dispatch(
@@ -58,89 +56,87 @@
 </template>
 
 <script>
-    export default {
-        props: ['trx'],
-        components: {
-            'c-chat-message': () => import('~/components/chat-message').then(m => m.default || m),
+export default {
+    components: {
+        'c-chat-message': () => import('~/components/chat-message').then(m => m.default || m)
+    },
+    props: ['trx'],
+    data() {
+        return {
+            newMessage: '',
+            lastMessageId: null,
+            lastMsg: null
+        }
+    },
+    computed: {
+        trxRaw() {
+            return this.$store.state.assets.trxs[this.trx.id]
         },
-        data() {
-            return {
-                newMessage: '',
-                lastMessageId: null,
-                lastMsg: null
+        userId() {
+            return this.$store.state.application.account.id
+        },
+        messages() {
+            return this.$store.getters['community/messages']
+        }
+    },
+    methods: {
+        async sendMessage() {
+            if (this.newMessage && Date.now() / 1000 - this.lastMsg < 10) {
+                const { lastMessageId: id } = this
+                const oldMsg = this.trx.messages.find(msg => msg.id == lastMessageId)
+                this.$store.dispatch(
+                    'community/update',
+                    { id, data: { content: `${oldMsg.content} ${this.newMessage}` } }
+                )
+                this.cleanUp()
+            } else if (this.newMessage) {
+                const { id, messages } = this.trx
+                const payload = {
+                    message: this.newMessage,
+                    trxId: id
+                }
+
+                this.lastMessageId = await this.$store.dispatch(
+                    'assets/createTransactionMessage',
+                    payload
+                )
+                this.cleanUp()
             }
         },
-        methods: {
-            async sendMessage() {
-                if (this.newMessage && Date.now() / 1000 - this.lastMsg < 10) {
-                    const { lastMessageId: id } = this;
-                    const oldMsg = this.trx.messages.find(msg => msg.id == lastMessageId);
-                    this.$store.dispatch(
-                        'community/update',
-                        { id, data: { content: `${oldMsg.content} ${this.newMessage}` }}
-                    );
-                    this.cleanUp();
+        async sendMessageV2() {
+            if (this.newMessage && Date.now() / 1000 - this.lastMsg < 10) {
+                const { lastMessageId: id } = this
+                const oldMsg = this.trx.messages.find(msg => msg.id == id)
+                const data = {
+                    content: `${oldMsg.content} ${this.newMessage}`
                 }
-                else if (this.newMessage) {
-                    const { id, messages } = this.trx;
-                    const payload = {
-                        message: this.newMessage,
-                        trxId: id
-                    };
 
-                    this.lastMessageId = await this.$store.dispatch(
-                        'assets/createTransactionMessage',
-                        payload
-                    );
-                    this.cleanUp();
+                this.$store.dispatch('updateV2', ['community/messages', id, data])
+                this.cleanUp()
+            } else if (this.newMessage) {
+                const { id } = this.trx
+                const data = {
+                    content: this.newMessage,
+                    author: 1
                 }
-            },
-            async sendMessageV2() {
-                if (this.newMessage && Date.now() / 1000 - this.lastMsg < 10) {
-                    const { lastMessageId: id } = this;
-                    const oldMsg = this.trx.messages.find(msg => msg.id == id);
-                    const data = {
-                        content: `${oldMsg.content} ${this.newMessage}`
-                    };
 
-                    this.$store.dispatch('updateV2', ['community/messages', id, data]);
-                    this.cleanUp();
-                }
-                else if (this.newMessage) {
-                    const { id } = this.trx;
-                    const data = {
-                        content: this.newMessage,
-                        author: 1
-                    };
-
-                    this.lastMessageId = await this.$store.dispatch(
-                        'createRelation',
-                        ['assets/trxs/messages', id, data]
-                    );
-                    this.cleanUp();
-                }
-            },
-            async cleanUp() {
-                this.newMessage = '';
-                this.lastMsg = Date.now() / 1000;
-
-                const { chatList } = this.$refs;
-                await this.$nextTick();
-                chatList.scrollTop = chatList.scrollHeight;
+                this.lastMessageId = await this.$store.dispatch(
+                    'createRelation',
+                    ['assets/trxs/messages', id, data]
+                )
+                this.cleanUp()
             }
         },
-        computed: {
-            trxRaw() {
-                return this.$store.state.assets.trxs[this.trx.id];
-            },
-            userId() {
-                return this.$store.state.application.account.id;
-            },
-            messages() {
-                return this.$store.getters['community/messages'];
-            }
+        async cleanUp() {
+            this.newMessage = ''
+            this.lastMsg = Date.now() / 1000
+
+            const { chatList } = this.$refs
+            await this.$nextTick()
+            chatList.scrollTop = chatList.scrollHeight
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

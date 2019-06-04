@@ -1,14 +1,19 @@
 <template>
     <c-layout navigationKey="wallet">
         <div class="row">
-            <div class="col-12" v-if="!wallet">
+            <div v-if="!wallet"
+                 class="col-12">
                 Wallet not found
             </div>
-            <div class="col-12" v-if="wallet">
+            <div v-if="wallet"
+                 class="col-12">
                 {{ wallet.name }}
                 {{ wallet.id }}
-                <br />
-                <c-button status="none" :to="`/wallet/${wallet.id}/transactions`">Transactions</c-button>
+                <br>
+                <c-button status="none"
+                          :to="`/wallet/${wallet.id}/transactions`">
+                    Transactions
+                </c-button>
             </div>
         </div>
     </c-layout>
@@ -17,18 +22,16 @@
 
 <script>
 export default {
-    props: ['id'],
     components: {
     },
+    props: ['id'],
     computed: {
         wallet() {
-            if (!this.$store.state.application.wallets)
-                return
-            
+            if (!this.$store.state.application.wallets) { return }
+
             const wallet = this.$store.state.application.wallets[this.id]
 
-            if (!wallet)
-                return
+            if (!wallet) { return }
 
             return wallet
         }

@@ -1,5 +1,6 @@
 <template>
-    <c-layout :showLeftPanel="false" :showRightPanel="false">
+    <c-layout :showLeftPanel="false"
+              :showRightPanel="false">
         <div class="row">
             <div class="col-12 mb-4">
                 <h2>Verification Assistant</h2>
@@ -12,14 +13,25 @@
                             URL
                         </span>
                     </div>
-                    <input type="text" class="form-control" ref="input" placeholder="Enter Google Sheet URL..." v-model="sheetUrl" />
-                    <c-button @click="fetchData">Update</c-button>
+                    <input ref="input"
+                           v-model="sheetUrl"
+                           type="text"
+                           class="form-control"
+                           placeholder="Enter Google Sheet URL...">
+                    <c-button @click="fetchData">
+                        Update
+                    </c-button>
                 </div>
                 <div>
-                    <div v-for="(entry, index) in entries" class="col-md-4 entry" :key="index" v-if="entry.gsx$approved.$t !== 'YES'">
+                    <div v-for="(entry, index) in entries"
+                         v-if="entry.gsx$approved.$t !== 'YES'"
+                         :key="index"
+                         class="col-md-4 entry">
                         <div class="content">
-                            <p>{{entry.gsx$address.$t}} : {{ entry.gsx$amount.$t }}</p>
-                            <c-button @click="whitelist(entry.gsx$address.$t)">Whitelist</c-button>
+                            <p>{{ entry.gsx$address.$t }} : {{ entry.gsx$amount.$t }}</p>
+                            <c-button @click="whitelist(entry.gsx$address.$t)">
+                                Whitelist
+                            </c-button>
                         </div>
                     </div>
                 </div>
@@ -38,7 +50,22 @@
 export default {
     components: {
     },
+    data() {
+        return {
+            sheetUrl: 'https://spreadsheets.google.com/feeds/list/1wKotu_xf0Ye2dh6PsJUJSbpXTSG7BcBlwJlScfI5Sbg/1/public/values?alt=json',
+            entries: [],
+            allAddresses: [],
+            newAddresses: []
+        }
+    },
     computed: {
+    },
+    created() {
+        const monitorAddresses = () => {
+            setTimeout(monitorAddresses, 10 * 1000)
+        }
+
+        monitorAddresses()
     },
     methods: {
         fetchData() {
@@ -49,7 +76,7 @@ export default {
                 this.entries = JSON.parse(xhr.responseText)
                 this.entries = this.entries.feed.entry
 
-                for (let i in this.entries) {
+                for (const i in this.entries) {
                     const entry = this.entries[i]
                     const address = entry.gsx$address.$t
                     const amount = entry.gsx$amount.$t
@@ -67,22 +94,6 @@ export default {
             // Send ETH call here
 
         }
-    },
-    data() {
-        return {
-            sheetUrl: 'https://spreadsheets.google.com/feeds/list/1wKotu_xf0Ye2dh6PsJUJSbpXTSG7BcBlwJlScfI5Sbg/1/public/values?alt=json',
-            entries: [],
-            allAddresses: [],
-            newAddresses: []
-        }
-    },
-    created() {
-        const monitorAddresses = () => {
-
-            setTimeout(monitorAddresses, 10 * 1000)
-        }
-
-        monitorAddresses()
     }
 }
 </script>

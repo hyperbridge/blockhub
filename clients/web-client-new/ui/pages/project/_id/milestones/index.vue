@@ -1,13 +1,15 @@
 <template>
     <div class="row">
-        <div class="col-12" v-if="!project.milestones">
-            <c-block >
+        <div v-if="!project.milestones"
+             class="col-12">
+            <c-block>
                 <h3>
                     There is no milestones defined.
                 </h3>
             </c-block>
         </div>
-        <div class="col-12" v-if="project.milestones">
+        <div v-if="project.milestones"
+             class="col-12">
             <div class="milestones-header margin-bottom-20">
                 <div class="milestones-header__info">
                     <div class="h3 text-white font-weight-bold mb-0">
@@ -38,34 +40,40 @@
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             Project Budget
                         </div>
-                        {{ project.funding.fundedAmount | convertCurrency  }}
+                        {{ project.funding.fundedAmount | convertCurrency }}
                     </c-icon-block>
                 </div>
             </div>
             <div class="timeline-block position-relative">
-                <div class="progress main_timeline" style="height: 15px;">
-                    <c-progress-bar :percentages="project.milestones.overallProgress"/>
+                <div class="progress main_timeline"
+                     style="height: 15px;">
+                    <c-progress-bar :percentages="project.milestones.overallProgress" />
                 </div>
-                <div class="period-container" v-if="milestones">
-                    <div v-for="(milestone, index) in milestones" :key="index" class="period">
-                        <div class="number">{{ milestone.stepNumber }}</div>
+                <div v-if="milestones"
+                     class="period-container">
+                    <div v-for="(milestone, index) in milestones"
+                         :key="index"
+                         class="period">
+                        <div class="number">
+                            {{ milestone.stepNumber }}
+                        </div>
                         <div class="info">
                             <div class="title">
                                 {{ milestone.shortDescription }}
                             </div>
                             <div class="progress_line">
-                                <i class="fas fa-clock icon"></i>
-                                <c-progress-bar :percentages="milestone.progress['percentDays']"/>
+                                <i class="fas fa-clock icon" />
+                                <c-progress-bar :percentages="milestone.progress['percentDays']" />
                                 {{ milestone.progress['daysLeft'] }} days left
                             </div>
                             <div class="progress_line">
-                                <i class="fas fa-check icon"></i>
-                                <c-progress-bar :percentages="milestone.progress['percentDone']"/>
+                                <i class="fas fa-check icon" />
+                                <c-progress-bar :percentages="milestone.progress['percentDone']" />
                                 {{ milestone.progress['percentDone'] }}% Done
                             </div>
                             <div class="progress_line">
-                                <i class="fas fa-dollar-sign icon"></i>
-                                <c-progress-bar :percentages="milestone.progress['percentSpent']"/>
+                                <i class="fas fa-dollar-sign icon" />
+                                <c-progress-bar :percentages="milestone.progress['percentSpent']" />
                                 {{ milestone.progress['percentSpent'] }}% Spent
                             </div>
                         </div>
@@ -76,39 +84,37 @@
                 <c-milestone
                     v-for="(milestone, index) in milestones"
                     :key="index"
-                    :milestone="milestone"
-                />
+                    :milestone="milestone" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        props: ['project', 'editing'],
-        components: {
-            'c-milestone': () => import('~/components/project/milestone').then(m => m.default || m),
-            'c-icon-block': () => import('~/components/block/with-icon').then(m => m.default || m),
-            'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m)
+export default {
+    components: {
+        'c-milestone': () => import('~/components/project/milestone').then(m => m.default || m),
+        'c-icon-block': () => import('~/components/block/with-icon').then(m => m.default || m),
+        'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m)
+    },
+    props: ['project', 'editing'],
+    computed: {
+        milestones() {
+            const arr = this.project.milestones.items
+            return arr.sort()
         },
-        computed: {
-            milestones() {
-                let arr = this.project.milestones.items
-                return arr.sort()
-            },
-            doneMilestones() {
-                let arr = this.project.milestones.items,
-                    count = 0
-                
-                arr.forEach((obj, i) => {
-                    if (obj.status === 'Done')
-                        count += 1
-                })
+        doneMilestones() {
+            const arr = this.project.milestones.items
+            let count = 0
 
-                return count
-            }
+            arr.forEach((obj, i) => {
+                if (obj.status === 'Done') { count += 1 }
+            })
+
+            return count
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

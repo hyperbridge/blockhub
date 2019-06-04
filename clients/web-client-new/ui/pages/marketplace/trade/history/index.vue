@@ -3,22 +3,21 @@
         <section
             v-for="trx in transactions"
             :key="trx.id"
-            class="trade-history"
-        >
+            class="trade-history">
             <span class="trade-history__date">
                 {{ trx.createdAt | customDate('MMM DD YYYY, hh:mm') }}
             </span>
             <div class="trade-history__user">
                 You traded with
-                <router-link :to="`/profile/${trx.contractor.id}`" class="trade-history__user-link">
-                    <c-user :user="trx.contractor"/>
+                <router-link :to="`/profile/${trx.contractor.id}`"
+                             class="trade-history__user-link">
+                    <c-user :user="trx.contractor" />
                 </router-link>
             </div>
             <ul
                 v-for="(offer, index) in ['yourOffer', 'contractorOffer']"
                 :key="index"
-                class="trade-history__list"
-            >
+                class="trade-history__list">
                 <p class="trade-history__list-title">
                     {{ offer === 'yourOffer' ? 'Bought:' : 'Sold:' }}
                 </p>
@@ -26,13 +25,12 @@
                     v-for="(asset, index) in trx[offer]"
                     :key="index"
                     class="trade-history__item"
-                    :class="`trade-history__item--${offer === 'yourOffer' ? 'bought' : 'sold' }`"
-                >
+                    :class="`trade-history__item--${offer === 'yourOffer' ? 'bought' : 'sold' }`">
                     <router-link
                         class="trade-history__item-link"
-                        :to="`/asset/${asset.id}`"
-                    >
-                        <c-img :src="asset.image" class="trade-history__item-image"/>
+                        :to="`/asset/${asset.id}`">
+                        <c-img :src="asset.image"
+                               class="trade-history__item-image" />
                         {{ asset.name }}
                     </router-link>
                 </li>
@@ -42,18 +40,18 @@
 </template>
 
 <script>
-    export default {
-        props: ['transactions'],
-        components: {
-            'c-user': () => import('~/components/author').then(m => m.default || m),
-        },
-        computed: {
-            transactionsX() {
-                return;
-                return this.$store.getters['assets/transactionsArray'];
-            }
+export default {
+    components: {
+        'c-user': () => import('~/components/author').then(m => m.default || m)
+    },
+    props: ['transactions'],
+    computed: {
+        transactionsX() {
+            return
+            return this.$store.getters['assets/transactionsArray']
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

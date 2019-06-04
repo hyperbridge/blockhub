@@ -23,7 +23,7 @@ export default {
                             el: '.swiper-pagination',
                             clickable: true
                         }
-                    },
+                    }
                 }
             })
 

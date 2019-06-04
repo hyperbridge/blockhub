@@ -1,29 +1,36 @@
 <template>
     <c-layout navigationKey="store">
-        <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+        <c-block :noGutter="true"
+                 :bgGradient="true"
+                 :onlyContentBg="true">
             <c-heading-bar
                 slot="title"
                 class="mb-0"
                 name="Browse All Games"
-                :showArrows="games.length > 4"
-            />
+                :showArrows="games.length > 4" />
             <div class="row">
-                <c-loading :enabled="loading" size="lg" />
-                <p v-if="!loading && !games.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
+                <c-loading :enabled="loading"
+                           size="lg" />
+                <p v-if="!loading && !games.length">
+                    Nothing could be found. Want to <c-button status="plain"
+                                                              @click="$store.commit('application/activateModal', 'coming-soon')">
+                        Check for updates
+                    </c-button>?
+                </p>
                 <c-game-card
                     class="p-2 col-3"
-                    :image="game.meta.images.mediumTile" 
-                    :description="game.description" 
-                    :funds="game.meta.funds" 
-                    :parentName="game.product && game.product.name" 
-                    :parentDeveloper="game.product && game.product.developer" 
-                    :parentImage="game.product && game.product.meta.images.mediumTile"
                     :id="game.id"
-                    v-for="(game, index) in games" :key="index"
-                />
+                    :image="game.meta.images.mediumTile"
+                    v-for="(game, index) in games"
+                    :description="game.description"
+                    :key="index"
+                    :funds="game.meta.funds"
+                    :parentName="game.product && game.product.name"
+                    :parentDeveloper="game.product && game.product.developer"
+                    :parentImage="game.product && game.product.meta.images.mediumTile" />
             </div>
         </c-block>
-        
+
         <c-infinite-content :list="list" />
     </c-layout>
 </template>
@@ -31,29 +38,17 @@
 <script>
 export default {
     components: {
-        'c-game-card': () => import('~/components/game-card').then(m => m.default || m),
+        'c-game-card': () => import('~/components/game-card').then(m => m.default || m)
     },
     data() {
         return {
             loading: true
         }
     },
-    created() {
-        this.$store.dispatch('products/find', {
-            query: {
-                $sort: {
-                    createdAt: -1
-                },
-                $limit: 25
-            }
-        }).then(() => {
-            this.loading = false
-        })
-    },
     computed: {
         games() {
             return this.$store.getters['products/list'] // Object.values(this.$store.state.funding.projects)//this.$store.getters['projects/list']
-                //.filter(trx => trx.you.id == this.profileId);
+            // .filter(trx => trx.you.id == this.profileId);
         },
         list() {
             const result = []
@@ -69,7 +64,7 @@ export default {
                             768: {
                                 slidesPerView: 1,
                                 spaceBetween: 0
-                            },
+                            }
                         }
                     },
                     projects: this.$store.state.funding.trendingProjects || []
@@ -87,7 +82,7 @@ export default {
                             768: {
                                 slidesPerView: 1,
                                 spaceBetween: 0
-                            },
+                            }
                         }
                     },
                     projects: this.$store.state.funding.topGameIdeas || []
@@ -105,7 +100,7 @@ export default {
                             768: {
                                 slidesPerView: 1,
                                 spaceBetween: 0
-                            },
+                            }
                         }
                     },
                     projects: this.$store.state.funding.topItemIdeas || []
@@ -114,6 +109,18 @@ export default {
 
             return result
         }
+    },
+    created() {
+        this.$store.dispatch('products/find', {
+            query: {
+                $sort: {
+                    createdAt: -1
+                },
+                $limit: 25
+            }
+        }).then(() => {
+            this.loading = false
+        })
     }
 }
 </script>

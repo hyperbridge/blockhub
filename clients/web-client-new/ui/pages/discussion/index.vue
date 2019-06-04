@@ -1,7 +1,8 @@
 <template>
     <c-layout navigationKey="store">
         <div class="container-fluid">
-            <c-block :noGutter="true" :onlyContentBg="true">
+            <c-block :noGutter="true"
+                     :onlyContentBg="true">
                 <c-heading-bar
                     slot="title"
                     class="mb-0"
@@ -10,68 +11,64 @@
                         { title: 'Game Forums', category: 'game_forums_forum' },
                         { title: 'Support', category: 'support_forum' }
                     ]"
-                    @changeTab="category = $event"
-                >
-                </c-heading-bar>
+                    @changeTab="category = $event" />
 
-                <div class="discussions-list">
-
-                </div>
+                <div class="discussions-list" />
             </c-block>
         </div>
     </c-layout>
 </template>
 
 <script>
-    import moment from 'moment'
+import moment from 'moment'
 
-    export default {
-        components: {
-            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-            'c-community-item': () => import('~/components/pagination').then(m => m.default || m)
-        },
-        data() {
-            return {
-                posts: [
-                    {
-                        title: "New to BlockHub",
-                        rate: "43",
-                        commentsCount: "8234",
-                        author: {
-                            name: "Alan Walker"
-                        }
-                    },
-                    {
-                        title: "New to BlockHub",
-                        rate: "43",
-                        commentsCount: "8234",
-                        author: {
-                            name: "Alan Walker"
-                        }
-                    },
-                    {
-                        title: "New to BlockHub",
-                        rate: "43",
-                        commentsCount: "8234",
-                        author: {
-                            name: "Alan Walker"
-                        }
-                    },
-                    {
-                        title: "New to BlockHub",
-                        rate: "43",
-                        commentsCount: "8234",
-                        author: {
-                            name: "Alan Walker"
-                        }
+export default {
+    components: {
+        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+        'c-community-item': () => import('~/components/pagination').then(m => m.default || m)
+    },
+    data() {
+        return {
+            posts: [
+                {
+                    title: 'New to BlockHub',
+                    rate: '43',
+                    commentsCount: '8234',
+                    author: {
+                        name: 'Alan Walker'
                     }
-                ]
-            }
-        },
-        created() {
-            this.$store.commit('application/activateModal', 'coming-soon')
+                },
+                {
+                    title: 'New to BlockHub',
+                    rate: '43',
+                    commentsCount: '8234',
+                    author: {
+                        name: 'Alan Walker'
+                    }
+                },
+                {
+                    title: 'New to BlockHub',
+                    rate: '43',
+                    commentsCount: '8234',
+                    author: {
+                        name: 'Alan Walker'
+                    }
+                },
+                {
+                    title: 'New to BlockHub',
+                    rate: '43',
+                    commentsCount: '8234',
+                    author: {
+                        name: 'Alan Walker'
+                    }
+                }
+            ]
         }
+    },
+    created() {
+        this.$store.commit('application/activateModal', 'coming-soon')
     }
+}
 </script>
 
 <style lang="scss" scoped>

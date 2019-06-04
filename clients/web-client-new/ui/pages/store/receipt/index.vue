@@ -10,13 +10,18 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 text-right">
-                <strong>DATE</strong><br />
+                <strong>DATE</strong><br>
                 December 23, 2018
             </div>
         </div>
         <div class="row align-items-center">
             <div class="col-12">
-                <c-block title="Purchase List" :bgColor="false" noGutter bgGradient onlyContentBg noPadding>
+                <c-block title="Purchase List"
+                         :bgColor="false"
+                         noGutter
+                         bgGradient
+                         onlyContentBg
+                         noPadding>
                     <div class="padding-bottom-30 padding-top-15">
                         <c-table-simple stripped>
                             <thead>
@@ -30,9 +35,7 @@
                                     <th>
                                         Authorization
                                     </th>
-                                    <th>
-
-                                    </th>
+                                    <th />
                                     <th>
                                         Purchased from
                                     </th>
@@ -42,12 +45,13 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <img src="../../../static/img/logo-only.png" class="table-img" />
+                                            <img src="../../../static/img/logo-only.png"
+                                                 class="table-img">
                                             <div>
                                                 <strong>
                                                     Diablo III
                                                 </strong>
-                                                <br />
+                                                <br>
                                                 Blizzard Entertainment INC
                                             </div>
                                         </div>
@@ -56,21 +60,21 @@
                                         <strong>
                                             Expires on a Date
                                         </strong>
-                                        <br />
+                                        <br>
                                         July 8th 2019
                                     </td>
                                     <td>
                                         <strong>
                                             Sell
                                         </strong>
-                                        <br />
+                                        <br>
                                         Yes, publisher earns 5%
                                     </td>
                                     <td>
                                         <strong>
                                             Trade
                                         </strong>
-                                        <br />
+                                        <br>
                                         No
                                     </td>
                                     <td>
@@ -82,28 +86,28 @@
                                         <strong>
                                             Diablo III
                                         </strong>
-                                        <br />
+                                        <br>
                                         Blizzard Entertainment INC
                                     </td>
                                     <td>
                                         <strong>
                                             Expires on a Date
                                         </strong>
-                                        <br />
+                                        <br>
                                         July 8th 2019
                                     </td>
                                     <td>
                                         <strong>
                                             Sell
                                         </strong>
-                                        <br />
+                                        <br>
                                         Yes, publisher earns 5%
                                     </td>
                                     <td>
                                         <strong>
                                             Trade
                                         </strong>
-                                        <br />
+                                        <br>
                                         No
                                     </td>
                                     <td>
@@ -115,28 +119,28 @@
                                         <strong>
                                             Diablo III
                                         </strong>
-                                        <br />
+                                        <br>
                                         Blizzard Entertainment INC
                                     </td>
                                     <td>
                                         <strong>
                                             Expires on a Date
                                         </strong>
-                                        <br />
+                                        <br>
                                         July 8th 2019
                                     </td>
                                     <td>
                                         <strong>
                                             Sell
                                         </strong>
-                                        <br />
+                                        <br>
                                         Yes, publisher earns 5%
                                     </td>
                                     <td>
                                         <strong>
                                             Trade
                                         </strong>
-                                        <br />
+                                        <br>
                                         No
                                     </td>
                                     <td>
@@ -149,7 +153,12 @@
                 </c-block>
             </div>
             <div class="col-12">
-                <c-block title="Totals" :bgColor="false" noGutter bgGradient onlyContentBg noPadding>
+                <c-block title="Totals"
+                         :bgColor="false"
+                         noGutter
+                         bgGradient
+                         onlyContentBg
+                         noPadding>
                     <div class="padding-bottom-30 padding-top-15">
                         <c-table-simple stripped>
                             <tbody>
@@ -189,44 +198,49 @@
                 </c-block>
             </div>
             <div class="col-12">
-                <c-block title="Recipients" :bgColor="false" noGutter bgGradient onlyContentBg noPadding>
+                <c-block title="Recipients"
+                         :bgColor="false"
+                         noGutter
+                         bgGradient
+                         onlyContentBg
+                         noPadding>
                     <div class="padding-bottom-30 padding-top-15">
                         <c-table-simple stripped>
                             <thead>
-                            <tr class="text-uppercase">
-                                <th>
-                                    Amount
-                                </th>
-                                <th>
-                                    Paid To
-                                </th>
-                            </tr>
+                                <tr class="text-uppercase">
+                                    <th>
+                                        Amount
+                                    </th>
+                                    <th>
+                                        Paid To
+                                    </th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    ETH 23.66
-                                </td>
-                                <td>
-                                    Hyperbridge Technology Inc
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    ETH 193.63
-                                </td>
-                                <td>
-                                    Blizzard Technology Inc
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    ETH 3.04
-                                </td>
-                                <td>
-                                    TAX(GST)
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        ETH 23.66
+                                    </td>
+                                    <td>
+                                        Hyperbridge Technology Inc
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        ETH 193.63
+                                    </td>
+                                    <td>
+                                        Blizzard Technology Inc
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        ETH 3.04
+                                    </td>
+                                    <td>
+                                        TAX(GST)
+                                    </td>
+                                </tr>
                             </tbody>
                         </c-table-simple>
                     </div>
@@ -237,12 +251,12 @@
 </template>
 
 <script>
-    export default {
-        props: [],
-        components: {
-            'c-table-simple': () => import('~/components/table-simple').then(m => m.default || m),
-        },
-    }
+export default {
+    components: {
+        'c-table-simple': () => import('~/components/table-simple').then(m => m.default || m)
+    },
+    props: []
+}
 </script>
 
 <style lang="scss" scoped>

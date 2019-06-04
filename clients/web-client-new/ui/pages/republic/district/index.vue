@@ -4,11 +4,11 @@
 
 <script>
 export default {
-  components: {
-  },
-  data: () => ({
-    wallets: []
-  })
+    components: {
+    },
+    data: () => ({
+        wallets: []
+    })
 }
 </script>
 

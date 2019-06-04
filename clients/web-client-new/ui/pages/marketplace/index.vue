@@ -10,10 +10,13 @@
                         </h2>
                     </transition>
 
-                    <p class="marketplace__profile-info">You are connected to marketplace as:</p>
+                    <p class="marketplace__profile-info">
+                        You are connected to marketplace as:
+                    </p>
                     <div class="marketplace-profile">
                         <div class="marketplace-profile">
-                            <c-img class="marketplace-profile__image" :src="profile.img"/>
+                            <c-img class="marketplace-profile__image"
+                                   :src="profile.img" />
                             <div>
                                 <h3 class="marketplace-profile__name">
                                     {{ profile.name }}
@@ -22,26 +25,28 @@
                                     class="marketplace-profile__wallet"
                                     type="text"
                                     :value="profile.wallet"
-                                    readonly
-                                />
+                                    readonly>
                             </div>
                         </div>
                     </div>
 
                     <nav>
                         <ul class="marketplace-menu reset-list">
-                            <li v-for="(link, index) in links" :key="index">
+                            <li v-for="(link, index) in links"
+                                :key="index">
                                 <router-link
                                     class="marketplace-menu__link"
-                                    :to="{ name: link }"
-                                >{{ link | cut }}</router-link>
+                                    :to="{ name: link }">
+                                    {{ link | cut }}
+                                </router-link>
                             </li>
                         </ul>
                     </nav>
 
                     <section>
-                        <transition name="page" mode="out-in">
-                            <router-view :profileId="profile.id"/>
+                        <transition name="page"
+                                    mode="out-in">
+                            <router-view :profileId="profile.id" />
                         </transition>
                     </section>
                 </div>
@@ -51,45 +56,45 @@
 </template>
 
 <script>
-    // import offers from '@/db/api/offers'
-    // import prospectors from '@/db/api/prospectors'
-    // import transactions from '@/db/api/asset-transactions'
+// import offers from '@/db/api/offers'
+// import prospectors from '@/db/api/prospectors'
+// import transactions from '@/db/api/asset-transactions'
 
-    export default {
-        components: {
-            'c-user': () => import('~/components/user/simple').then(m => m.default || m),
-        },
-        data() {
-            return {
-                links: [
-                    'Marketplace',
-                    'Marketplace Trade Manager',
-                    'Marketplace Prospectors',
-                    'Marketplace Search',
-                    'Marketplace Assets',
-                ]
-            }
-        },
-        filters: {
-            cut: val => val.replace('Marketplace ', '')
-        },
-        mounted() {
-            // this.$store.dispatch('loadData', ['assets/offers', offers])
-            // this.$store.dispatch('loadData', ['assets/prospectors', prospectors])
-            // this.$store.dispatch('loadData', ['assets/transactions', transactions])
-        },
-        computed: {
-            assets() {
-                return this.$store.getters['assets/assets']
-            },
-            profile() {
-                return this.$store.state.application.activeProfile
-            }
-        },
-        created() {
-            this.$store.commit('application/activateModal', 'coming-soon')
+export default {
+    components: {
+        'c-user': () => import('~/components/user/simple').then(m => m.default || m)
+    },
+    filters: {
+        cut: val => val.replace('Marketplace ', '')
+    },
+    data() {
+        return {
+            links: [
+                'Marketplace',
+                'Marketplace Trade Manager',
+                'Marketplace Prospectors',
+                'Marketplace Search',
+                'Marketplace Assets'
+            ]
         }
+    },
+    computed: {
+        assets() {
+            return this.$store.getters['assets/assets']
+        },
+        profile() {
+            return this.$store.state.application.activeProfile
+        }
+    },
+    mounted() {
+        // this.$store.dispatch('loadData', ['assets/offers', offers])
+        // this.$store.dispatch('loadData', ['assets/prospectors', prospectors])
+        // this.$store.dispatch('loadData', ['assets/transactions', transactions])
+    },
+    created() {
+        this.$store.commit('application/activateModal', 'coming-soon')
     }
+}
 </script>
 
 <style lang="scss" scoped>

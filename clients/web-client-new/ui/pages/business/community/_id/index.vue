@@ -9,26 +9,26 @@
 </template>
 
 <script>
-    export default {
-        props: {
-        },
-        components: {
-            'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
-            'c-model-editor': () => import('~/components/model-editor').then(m => m.default || m),
-        },
-        data() {
-            return {
-            }
-        },
-        computed: {
-        },
-        watch: {
-        },
-        created() {
-        },
-        methods: {
-        },
+export default {
+    components: {
+        'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
+        'c-model-editor': () => import('~/components/model-editor').then(m => m.default || m)
+    },
+    props: {
+    },
+    data() {
+        return {
+        }
+    },
+    computed: {
+    },
+    watch: {
+    },
+    created() {
+    },
+    methods: {
     }
+}
 </script>
 
 <style lang="scss">

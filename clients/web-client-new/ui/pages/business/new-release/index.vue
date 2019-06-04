@@ -8,7 +8,9 @@
                             <label>Version</label>
                         </div>
                         <div class="col-sm-9 col-lg-10">
-                            <input type="text" class="form-control" placeholder="Example: v.0.0.7">
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Example: v.0.0.7">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -16,70 +18,85 @@
                             <label>Your text</label>
                         </div>
                         <div class="col-sm-9 col-lg-10">
-                            <c-text-editor v-model="text" :editorToolbar="customToolbar" />
+                            <c-text-editor v-model="text"
+                                           :editorToolbar="customToolbar" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-3 col-lg-2"></div>
+                        <div class="col-sm-3 col-lg-2" />
                         <div class="col-sm-9 col-lg-10">
                             <div class="file-upload__wrapper">
-                                <div v-show="$refs.upload && $refs.upload.dropActive" class="drop-active">
+                                <div v-show="$refs.upload && $refs.upload.dropActive"
+                                     class="drop-active">
                                     <h3>Drop files to upload</h3>
                                 </div>
                                 <c-file-upload ref="upload"
-                                            v-model="files"
-                                            :multiple="true"
-                                            :drop="true"
-                                            class="w-100"
-                                            :drop-directory="true"
-                                            @input-file="inputFile"
-                                            @input-filter="inputFilter">
-
+                                               v-model="files"
+                                               :multiple="true"
+                                               :drop="true"
+                                               class="w-100"
+                                               :drop-directory="true"
+                                               @input-file="inputFile"
+                                               @input-filter="inputFilter">
                                     <div class="file-upload__select-file">
                                         Attach files by dragging & dropping or click here.
                                     </div>
                                 </c-file-upload>
-                                <c-notification-inline type="danger" v-if="wrongFormat" class="my-3" size="sm">
+                                <c-notification-inline v-if="wrongFormat"
+                                                       type="danger"
+                                                       class="my-3"
+                                                       size="sm">
                                     Wrong file format
                                 </c-notification-inline>
-                                <ul class="file-upload__files-list" v-if="files.length">
-                                    <li v-for="(file, index) in files" :key="file.id">
-                                        <span class="upload-status" v-if="file.error">{{file.error}}</span>
-                                        <span class="upload-status" v-else-if="file.success">
-                                            <i class="fas fa-check-circle" style="color: #43C981"></i>
+                                <ul v-if="files.length"
+                                    class="file-upload__files-list">
+                                    <li v-for="(file, index) in files"
+                                        :key="file.id">
+                                        <span v-if="file.error"
+                                              class="upload-status">{{ file.error }}</span>
+                                        <span v-else-if="file.success"
+                                              class="upload-status">
+                                            <i class="fas fa-check-circle"
+                                               style="color: #43C981" />
                                         </span>
-                                        <span class="upload-status" v-else-if="file.active">
+                                        <span v-else-if="file.active"
+                                              class="upload-status">
                                             <c-loading-bar-circle />
                                         </span>
-                                        <span class="file-name">{{file.name}}</span>
+                                        <span class="file-name">{{ file.name }}</span>
                                         <span class="file-size">
-                                            {{file.size | numeralFormat('0.00b') }}
-                                            <i class="fa fa-times ml-3" aria-hidden="true" v-if="!$refs.upload || !$refs.upload.active" @click.prevent="$refs.upload.remove(file)"></i>
+                                            {{ file.size | numeralFormat('0.00b') }}
+                                            <i v-if="!$refs.upload || !$refs.upload.active"
+                                               class="fa fa-times ml-3"
+                                               aria-hidden="true"
+                                               @click.prevent="$refs.upload.remove(file)" />
                                         </span>
                                     </li>
-                                    <hr />
+                                    <hr>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row align-items-center">
-                        <div class="col-sm-3 col-lg-2">
-                        </div>
+                        <div class="col-sm-3 col-lg-2" />
                         <div class="col-sm-9 col-lg-10">
                             <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input">
+                                <input type="checkbox"
+                                       class="form-check-input">
                                 <label class="form-check-label">This is pre-release</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row align-items-center">
-                        <div class="col-sm-3 col-lg-2">
-                        </div>
+                        <div class="col-sm-3 col-lg-2" />
                         <div class="col-sm-9 col-lg-10">
-                            <c-button status="success" iconHide>
+                            <c-button status="success"
+                                      iconHide>
                                 Publish release
                             </c-button>
-                            <c-button status="danger" iconHide class="mx-3">
+                            <c-button status="danger"
+                                      iconHide
+                                      class="mx-3">
                                 Save draft
                             </c-button>
                         </div>
@@ -91,57 +108,57 @@
 </template>
 
 <script>
-    import { VueEditor } from 'vue2-editor'
-    import VueUploadComponent from 'vue-upload-component'
+import { VueEditor } from 'vue2-editor'
+import VueUploadComponent from 'vue-upload-component'
 
-    export default {
-        components: {
-            'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
-            'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m),
-            'c-notification-inline': () => import('~/components/notification/inline').then(m => m.default || m),
-            'c-text-editor': VueEditor,
-            'c-file-upload': VueUploadComponent
-        },
-        data() {
-            return {
-                loadingState: true,
-                text: '',
-                customToolbar: [
-                    ["bold", "italic", "underline"],
-                    [{ list: "ordered" }, { list: "bullet" }],
-                    [ "code-block"],
-                    [{ 'size': ['small', false, 'large', 'huge'] }],
-                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                    [{ 'color': [] }, { 'background': [] }],
-                    ['clean']
-                ],
-                files: [],
-                wrongFormat: false
+export default {
+    components: {
+        'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
+        'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m),
+        'c-notification-inline': () => import('~/components/notification/inline').then(m => m.default || m),
+        'c-text-editor': VueEditor,
+        'c-file-upload': VueUploadComponent
+    },
+    data() {
+        return {
+            loadingState: true,
+            text: '',
+            customToolbar: [
+                ['bold', 'italic', 'underline'],
+                [{ list: 'ordered' }, { list: 'bullet' }],
+                ['code-block'],
+                [{ 'size': ['small', false, 'large', 'huge'] }],
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                [{ 'color': [] }, { 'background': [] }],
+                ['clean']
+            ],
+            files: [],
+            wrongFormat: false
+        }
+    },
+    methods: {
+        inputFile(newFile, oldFile) {
+            if (newFile && oldFile && !newFile.active && oldFile.active) {
+                // Get response data
+                console.log('response', newFile.response)
+                if (newFile.xhr) {
+                    //  Get the response status code
+                    console.log('status', newFile.xhr.status)
+                }
             }
         },
-        methods:{
-            inputFile: function (newFile, oldFile) {
-                if (newFile && oldFile && !newFile.active && oldFile.active) {
-                    // Get response data
-                    console.log('response', newFile.response)
-                    if (newFile.xhr) {
-                        //  Get the response status code
-                        console.log('status', newFile.xhr.status)
-                    }
-                }
-            },
-            inputFilter: function (newFile, oldFile, prevent) {
-                if (newFile && !oldFile) {
-                    // Filter non-image file
-                    if (!/\.(jpeg|jpe|jpg|gif|png|webp)$/i.test(newFile.name)) {
-                        // console.log('wrong file')
-                        this.wrongFormat = true
-                        return prevent()
-                    }
+        inputFilter(newFile, oldFile, prevent) {
+            if (newFile && !oldFile) {
+                // Filter non-image file
+                if (!/\.(jpeg|jpe|jpg|gif|png|webp)$/i.test(newFile.name)) {
+                    // console.log('wrong file')
+                    this.wrongFormat = true
+                    return prevent()
                 }
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,7 @@
 <template>
-    <c-layout navigationKey="help" :showLeftPanel="false" :showRightPanel="false">
+    <c-layout navigationKey="help"
+              :showLeftPanel="false"
+              :showRightPanel="false">
         <div class="row">
             <div class="col-12 mb-4">
                 <c-privacy-block />
@@ -10,9 +12,9 @@
 
 <script>
 export default {
-  components: {
-    'c-privacy-block': () => import('~/components/privacy-block').then(m => m.default || m)
-  },
+    components: {
+        'c-privacy-block': () => import('~/components/privacy-block').then(m => m.default || m)
+    }
 }
 </script>
 

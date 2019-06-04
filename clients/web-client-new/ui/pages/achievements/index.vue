@@ -10,12 +10,15 @@
                 </div>
             </div>
             <div class="col-12 margin-top-30">
-                <div class="achievements-item" v-for="item in achievements">
-                    <div class="achievements-item__img margin-right-10" v-if="item.img">
-                        <img :src="item.img"/>
+                <div v-for="item in achievements"
+                     class="achievements-item">
+                    <div v-if="item.img"
+                         class="achievements-item__img margin-right-10">
+                        <img :src="item.img">
                     </div>
                     <div class="achievements-item__info">
-                        <div class="achievements-item__info-progress" :style="`width: ${item.percent}%`"></div>
+                        <div class="achievements-item__info-progress"
+                             :style="`width: ${item.percent}%`" />
                         <div class="achievements-item__info-text">
                             <div class="h4 pb-0 mb-0">
                                 {{ item.title }}
@@ -24,23 +27,30 @@
                                 {{ item.description }}
                             </div>
                         </div>
-                        <div class="achievements-item__info-percent" v-if="item.percent && !item.unlocked && !item.completed">
+                        <div v-if="item.percent && !item.unlocked && !item.completed"
+                             class="achievements-item__info-percent">
                             {{ item.percent }}%
                         </div>
-                        <div class="achievements-item__info-status text-right" v-if="item.unlocked || item.completed">
-                            <div class="h5 pb-0 mb-0" style="color: #00aeff" v-if="item.unlocked">
+                        <div v-if="item.unlocked || item.completed"
+                             class="achievements-item__info-status text-right">
+                            <div v-if="item.unlocked"
+                                 class="h5 pb-0 mb-0"
+                                 style="color: #00aeff">
                                 Unlocked
                             </div>
-                            <div class="h5 pb-0 mb-0" style="color: #1bb934" v-if="item.completed">
-                                <i class="fas fa-check mr-2"></i> Completed
+                            <div v-if="item.completed"
+                                 class="h5 pb-0 mb-0"
+                                 style="color: #1bb934">
+                                <i class="fas fa-check mr-2" /> Completed
                             </div>
                             <div>
                                 April 22, 2018
                             </div>
                         </div>
                     </div>
-                    <div class="achievements-item__img margin-left-10" v-if="item.img">
-                        <img :src="item.img"/>
+                    <div v-if="item.img"
+                         class="achievements-item__img margin-left-10">
+                        <img :src="item.img">
                     </div>
                 </div>
             </div>
@@ -49,38 +59,38 @@
 </template>
 
 <script>
-    export default {
-        data(){
-            return{
-                achievements:[
-                    {
-                        img: 'https://blog.captainup.com/wp-content/uploads/2014/12/Start-a-game_4.png',
-                        percent: '16',
-                        title: 'Ring the Till',
-                        description: 'Have a credit balance +1000',
-                        completed: false,
-                        unlocked: true
-                    },
-                    {
-                        img: 'https://png.pngtree.com/element_origin_min_pic/17/04/12/c5490bc7210a7eb88f22804682570e9b.jpg',
-                        percent: '22',
-                        title: 'Closing the Circuit',
-                        description: 'Produce +1000 energy in a single sector',
-                        completed: false,
-                        unlocked: false
-                    },
-                    {
-                        img: 'https://blog.captainup.com/wp-content/uploads/2014/12/Start-a-game_4.png',
-                        percent: '16',
-                        title: 'Ring the Till',
-                        description: 'Have a credit balance +1000',
-                        completed: true,
-                        unlocked: false
-                    },
-                ]
-            }
+export default {
+    data() {
+        return {
+            achievements: [
+                {
+                    img: 'https://blog.captainup.com/wp-content/uploads/2014/12/Start-a-game_4.png',
+                    percent: '16',
+                    title: 'Ring the Till',
+                    description: 'Have a credit balance +1000',
+                    completed: false,
+                    unlocked: true
+                },
+                {
+                    img: 'https://png.pngtree.com/element_origin_min_pic/17/04/12/c5490bc7210a7eb88f22804682570e9b.jpg',
+                    percent: '22',
+                    title: 'Closing the Circuit',
+                    description: 'Produce +1000 energy in a single sector',
+                    completed: false,
+                    unlocked: false
+                },
+                {
+                    img: 'https://blog.captainup.com/wp-content/uploads/2014/12/Start-a-game_4.png',
+                    percent: '16',
+                    title: 'Ring the Till',
+                    description: 'Have a credit balance +1000',
+                    completed: true,
+                    unlocked: false
+                }
+            ]
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

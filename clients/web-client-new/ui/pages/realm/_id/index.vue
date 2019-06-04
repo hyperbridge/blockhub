@@ -3,7 +3,8 @@
         <div class="row realm_page_header margin-bottom-30">
             <div class="col-10 col-md-3">
                 <div class="logo">
-                    <c-img class="img-fluid" :src="realm.meta.images.logo" />
+                    <c-img class="img-fluid"
+                           :src="realm.meta.images.logo" />
                 </div>
             </div>
             <div class="col-12 col-md-3 mb-4 mb-md-0">
@@ -39,16 +40,20 @@
             <div class="col-12">
                 <ul class="nav">
                     <li class="nav-item active">
-                        <a href="#" class="nav-link">Home</a>
+                        <a href="#"
+                           class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">News</a>
+                        <a href="#"
+                           class="nav-link">News</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Community</a>
+                        <a href="#"
+                           class="nav-link">Community</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Games</a>
+                        <a href="#"
+                           class="nav-link">Games</a>
                     </li>
                 </ul>
             </div>
@@ -62,9 +67,13 @@
                         </div>
                         <div class="text">
                             <h4>Announcing: The Boomsday Project</h4>
-                            <p>Sed pulvinar nibh id interdum tempus. Nam id massa sit amet dolor tincidunt bibendum.
-                                Nullam ante nunc, dapibus et mauris ut, sodales accumsan lorem.</p>
-                            <c-button to="/project/1">Read More</c-button>
+                            <p>
+                                Sed pulvinar nibh id interdum tempus. Nam id massa sit amet dolor tincidunt bibendum.
+                                Nullam ante nunc, dapibus et mauris ut, sodales accumsan lorem.
+                            </p>
+                            <c-button to="/project/1">
+                                Read More
+                            </c-button>
                         </div>
                     </div>
                     <div class="banner-sm">
@@ -72,44 +81,53 @@
                             <c-img :src="realm.meta.images.follow" />
                         </div>
                         <div class="text">
-                            <a href="#" class="btn btn-sm btn-info">Follow Us</a>
+                            <a href="#"
+                               class="btn btn-sm btn-info">Follow Us</a>
                             <h4>Get the news first!</h4>
                         </div>
                     </div>
                 </div>
 
                 <div class="product-grid">
-                    <c-heading-bar name="Featured Games" :showArrows="false" :showBackground="false" />
+                    <c-heading-bar name="Featured Games"
+                                   :showArrows="false"
+                                   :showBackground="false" />
                 </div>
                 <div class="featured-assets">
-                    <c-heading-bar name="Featured Assets" :showArrows="false" :showBackground="false">
-                    </c-heading-bar>
-                    <c-featured-assets></c-featured-assets>
+                    <c-heading-bar name="Featured Assets"
+                                   :showArrows="false"
+                                   :showBackground="false" />
+                    <c-featured-assets />
                 </div>
                 <div class="games-container">
-                    <c-heading-bar name="Games" :showArrows="false" :showBackground="false" showActions>
-                        <div class="additional-action margin-left-20" slot="additional-action">
+                    <c-heading-bar name="Games"
+                                   :showArrows="false"
+                                   :showBackground="false"
+                                   showActions>
+                        <div slot="additional-action"
+                             class="additional-action margin-left-20">
                             <div class="text">
                                 Price
-                                <i class="fas fa-dollar-sign"></i>
+                                <i class="fas fa-dollar-sign" />
                             </div>
                             <div class="arrow_container">
-                                <i class="fas fa-sort-up"></i>
-                                <i class="fas fa-sort-down"></i>
+                                <i class="fas fa-sort-up" />
+                                <i class="fas fa-sort-down" />
                             </div>
                         </div>
-                        <div class="additional-action" slot="additional-action">
+                        <div slot="additional-action"
+                             class="additional-action">
                             <div class="text">
                                 Rating
-                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star" />
                             </div>
                             <div class="arrow_container">
-                                <i class="fas fa-sort-up"></i>
-                                <i class="fas fa-sort-down"></i>
+                                <i class="fas fa-sort-up" />
+                                <i class="fas fa-sort-down" />
                             </div>
                         </div>
                     </c-heading-bar>
-                    <c-game-grid></c-game-grid>
+                    <c-game-grid />
                 </div>
             </div>
         </div>
@@ -117,84 +135,84 @@
 </template>
 
 <script>
-    function hexToRgb(hex) {
-        var bigint = parseInt(hex, 16);
-        var r = (bigint >> 16) & 255;
-        var g = (bigint >> 8) & 255;
-        var b = bigint & 255;
+function hexToRgb(hex) {
+    const bigint = parseInt(hex, 16)
+    const r = (bigint >> 16) & 255
+    const g = (bigint >> 8) & 255
+    const b = bigint & 255
 
-        return r + "," + g + "," + b;
-    }
+    return `${r},${g},${b}`
+}
 
-    export default {
-        props: ['id'],
-        components: {
-            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-            'c-simple-game-grid': () => import('~/components/game-grid/simple').then(m => m.default || m),
-            'c-game-grid': () => import('~/components/game-grid/with-description').then(m => m.default || m),
-            'c-featured-assets': () => import('~/components/assets-list-item/featured-list').then(m => m.default || m),
-        },
-        data() {
-            return {
-                css: {
-                    bodyBgColor: null,
-                    headerBg: {},
-                    headerBgLayer1: {},
-                    headerBgLayer2: {}
-                }
+export default {
+    components: {
+        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+        'c-simple-game-grid': () => import('~/components/game-grid/simple').then(m => m.default || m),
+        'c-game-grid': () => import('~/components/game-grid/with-description').then(m => m.default || m),
+        'c-featured-assets': () => import('~/components/assets-list-item/featured-list').then(m => m.default || m)
+    },
+    props: ['id'],
+    data() {
+        return {
+            css: {
+                bodyBgColor: null,
+                headerBg: {},
+                headerBgLayer1: {},
+                headerBgLayer2: {}
             }
-        },
-        computed: {
-            realm() {
-                let realm = null
-
-                if (!realm) {
-                    realm = this.$store.getters['realms/get'](this.id)
-                }
-
-                if (!realm) {
-                    realm = DB.marketplace.realms.findOne({ 'id': Number(this.id) })
-                }
-
-                if (!realm) {
-                    return
-                }
-
-                // if (realm.images && realm.images.header) {
-                //     window.document.getElementById('header-bg').style['background-image'] = 'url(' + realm.images.header + ')'
-                // }
-
-                return realm
-            },
-        },
-        mounted() {
-            this.$nextTick(() => {
-                this.css.bodyBgColor = document.body.style.backgroundColor
-                this.css.headerBg = $('#header-bg')[0].style
-                this.css.headerBgLayer1 = $('.header-bg__layer-1')[0].style
-                this.css.headerBgLayer2 = $('.header-bg__layer-2')[0].style
-
-                document.body.style.backgroundColor = this.realm.meta.theme.backgroundColor
-                $('#header-bg').css({ 'background-image': `url(${this.realm.meta.images.background})`, 'background-size': this.realm.meta.theme.header.backgroundSize || 'cover' })
-                $('.header-bg__layer-1').css({ 'background': `linear-gradient(to bottom, rgba(${hexToRgb(this.realm.meta.theme.backgroundColor.slice(1))}, 0.34) 0%, rgba(${hexToRgb(this.realm.meta.theme.backgroundColor.slice(1))}, 1) 100%)` })
-                $('.header-bg__layer-2').css({ 'position': 'fixed', 'background': 'rgba(255, 255, 255, 0.2)', 'height': '48px' })
-                $('.app-header__shadow').hide()
-                $('#page-aside').hide()
-            })
-        },
-        beforeDestroy() {
-            document.body.style.backgroundColor = this.css.bodyBgColor
-
-            $('#header-bg')[0].style = this.css.headerBg
-            $('.header-bg__layer-1')[0].style = this.css.headerBgLayer1
-            $('.header-bg__layer-2')[0].style = this.css.headerBgLayer2
-            $('.app-header__shadow').show()
-            $('#page-aside').show()
-        },
-        created() {
-            //this.$store.commit('application/activateModal', 'coming-soon')
         }
+    },
+    computed: {
+        realm() {
+            let realm = null
+
+            if (!realm) {
+                realm = this.$store.getters['realms/get'](this.id)
+            }
+
+            if (!realm) {
+                realm = DB.marketplace.realms.findOne({ 'id': Number(this.id) })
+            }
+
+            if (!realm) {
+                return
+            }
+
+            // if (realm.images && realm.images.header) {
+            //     window.document.getElementById('header-bg').style['background-image'] = 'url(' + realm.images.header + ')'
+            // }
+
+            return realm
+        }
+    },
+    mounted() {
+        this.$nextTick(() => {
+            this.css.bodyBgColor = document.body.style.backgroundColor
+            this.css.headerBg = $('#header-bg')[0].style
+            this.css.headerBgLayer1 = $('.header-bg__layer-1')[0].style
+            this.css.headerBgLayer2 = $('.header-bg__layer-2')[0].style
+
+            document.body.style.backgroundColor = this.realm.meta.theme.backgroundColor
+            $('#header-bg').css({ 'background-image': `url(${this.realm.meta.images.background})`, 'background-size': this.realm.meta.theme.header.backgroundSize || 'cover' })
+            $('.header-bg__layer-1').css({ 'background': `linear-gradient(to bottom, rgba(${hexToRgb(this.realm.meta.theme.backgroundColor.slice(1))}, 0.34) 0%, rgba(${hexToRgb(this.realm.meta.theme.backgroundColor.slice(1))}, 1) 100%)` })
+            $('.header-bg__layer-2').css({ 'position': 'fixed', 'background': 'rgba(255, 255, 255, 0.2)', 'height': '48px' })
+            $('.app-header__shadow').hide()
+            $('#page-aside').hide()
+        })
+    },
+    beforeDestroy() {
+        document.body.style.backgroundColor = this.css.bodyBgColor
+
+        $('#header-bg')[0].style = this.css.headerBg
+        $('.header-bg__layer-1')[0].style = this.css.headerBgLayer1
+        $('.header-bg__layer-2')[0].style = this.css.headerBgLayer2
+        $('.app-header__shadow').show()
+        $('#page-aside').show()
+    },
+    created() {
+        // this.$store.commit('application/activateModal', 'coming-soon')
     }
+}
 </script>
 
 <style lang="scss" scoped>

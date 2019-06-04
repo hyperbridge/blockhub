@@ -4,47 +4,44 @@
         <c-asset-comparison
             :assets="selectedAssets"
             @addMore="addMore = true"
-            @delete="negateValue"
-        />
+            @delete="negateValue" />
         <c-modal
             v-if="addMore"
-            @close="addMore = false"
             title="Select assets to compare"
-        >
+            @close="addMore = false">
             <c-asset-grid
-                :assets="assets"
-                @click="negateValue"
                 slot="body"
-            />
+                :assets="assets"
+                @click="negateValue" />
         </c-modal>
     </div>
 </template>
 
 <script>
-    export default {
-        props: ['assets'],
-        components: {
-            'c-block': () => import('~/components/block').then(m => m.default || m),
-            'c-asset-comparison': () => import('~/components/asset-comparison').then(m => m.default || m),
-            'c-modal': () => import('~/components/modal').then(m => m.default || m),
-            'c-asset-grid': () => import('~/components/assets-grid-inventory').then(m => m.default || m),
-        },
-        data() {
-            return {
-                addMore: false
-            }
-        },
-        methods: {
-            negateValue({ id }, iprop = 'selected') {
-                this.$store.commit('assets/negateValue', { id, iprop });
-            }
-        },
-        computed: {
-            selectedAssets() {
-                return this.$store.getters['assets/selectedAssets'];
-            }
+export default {
+    components: {
+        'c-block': () => import('~/components/block').then(m => m.default || m),
+        'c-asset-comparison': () => import('~/components/asset-comparison').then(m => m.default || m),
+        'c-modal': () => import('~/components/modal').then(m => m.default || m),
+        'c-asset-grid': () => import('~/components/assets-grid-inventory').then(m => m.default || m)
+    },
+    props: ['assets'],
+    data() {
+        return {
+            addMore: false
+        }
+    },
+    computed: {
+        selectedAssets() {
+            return this.$store.getters['assets/selectedAssets']
+        }
+    },
+    methods: {
+        negateValue({ id }, iprop = 'selected') {
+            this.$store.commit('assets/negateValue', { id, iprop })
         }
     }
+}
 </script>
 
 <style>

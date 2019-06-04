@@ -323,27 +323,27 @@
 </template>
 
 <script>
-    export default {
-        components: {
-            'c-download-block': () => import('~/components/download-block').then(m => m.default || m),
-            'c-block-with-icon': () => import('~/components/block/with-icon').then(m => m.default || m),
-        },
-        mounted() {
-            if (process.client) {
-                window.document.getElementById('header-bg').style['background-image'] = 'url(/img/download-bg.png)'
-            }
-        },
-        created() {
-            if (process.client) {
-                $('body').addClass('screen--download')
-            }
-        },
-        beforeDestroy() {
-            if (process.client) {
-                $('body').removeClass('screen--download')
-            }
-        },
+export default {
+    components: {
+        'c-download-block': () => import('~/components/download-block').then(m => m.default || m),
+        'c-block-with-icon': () => import('~/components/block/with-icon').then(m => m.default || m)
+    },
+    mounted() {
+        if (process.client) {
+            window.document.getElementById('header-bg').style['background-image'] = 'url(/img/download-bg.png)'
+        }
+    },
+    created() {
+        if (process.client) {
+            $('body').addClass('screen--download')
+        }
+    },
+    beforeDestroy() {
+        if (process.client) {
+            $('body').removeClass('screen--download')
+        }
     }
+}
 </script>
 
 <style lang="scss" scoped>

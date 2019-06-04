@@ -1,136 +1,188 @@
 <template>
     <div class="row mx-0">
         <div class="col-12 col-lg-7 col-xl-8">
-            <c-screen-gallery :items="project.images.preview" v-if="project.images && project.images.preview" />
+            <c-screen-gallery v-if="project.images && project.images.preview"
+                              :items="project.images.preview" />
 
-            <div class="action" hidden>Currently crowdfunding</div>
+            <div class="action"
+                 hidden>
+                Currently crowdfunding
+            </div>
 
-            <c-block title="Participation Tiers" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                <c-participation-tier v-for="(item, index) in participationTiers" 
-                    :key="index"
-                    :id="item.id" 
-                    :price="item.price" 
-                    :sold="item.sold" 
-                    :left="item.left" 
-                    :title="item.title" 
-                    :tag="item.tag"
-                    :inList="(index < participationTiers.length-1) ? true : false"
-                />
+            <c-block title="Participation Tiers"
+                     :noGutter="true"
+                     :onlyContentBg="true"
+                     :bgGradient="true">
+                <c-participation-tier v-for="(item, index) in participationTiers"
+                                      :id="item.id"
+                                      :key="index"
+                                      :price="item.price"
+                                      :sold="item.sold"
+                                      :left="item.left"
+                                      :title="item.title"
+                                      :tag="item.tag"
+                                      :inList="(index < participationTiers.length-1) ? true : false" />
             </c-block>
 
             <div class="editor-container">
-                <div class="editor" v-if="editing">
-                    <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                            @click="activateElement('description')"
-                            v-if="!activeElement['description']">Change Description <span
-                        class="fa fa-edit"></span></button>
+                <div v-if="editing"
+                     class="editor">
+                    <button v-if="!activeElement['description']"
+                            class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                            @click="activateElement('description')">
+                        Change Description <span
+                            class="fa fa-edit" />
+                    </button>
 
-                    <div class="form-control-element form-control-element--right"
-                         v-if="activeElement['description']">
-                        <input ref="description" name="name" type="text" class="form-control"
-                               placeholder="Project description..." v-model="project.description"/>
+                    <div v-if="activeElement['description']"
+                         class="form-control-element form-control-element--right">
+                        <input ref="description"
+                               v-model="project.description"
+                               name="name"
+                               type="text"
+                               class="form-control"
+                               placeholder="Project description...">
                         <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
                             <span class="fa fa-check"
-                                    @click="deactivateElement('description')"></span>
+                                  @click="deactivateElement('description')" />
                         </div>
                     </div>
                 </div>
-                <p class="project__description">{{ project.description }}</p>
+                <p class="project__description">
+                    {{ project.description }}
+                </p>
             </div>
 
-            <c-block title="About Game" class="margin-bottom-30" :noPadding="true" :noGutter="true" :bgGradient="true" :onlyContentBg="true" v-if="!editing">
-                <div class="main-content" v-html="project.value">
+            <c-block v-if="!editing"
+                     title="About Game"
+                     class="margin-bottom-30"
+                     :noPadding="true"
+                     :noGutter="true"
+                     :bgGradient="true"
+                     :onlyContentBg="true">
+                <div class="main-content"
+                     v-html="project.value">
                     {{ project.value }}
                 </div>
             </c-block>
 
-            <div class="content-editor" v-if="editing">
-                <div id="summernote" v-html="project.value">{{ project.value }}</div>
+            <div v-if="editing"
+                 class="content-editor">
+                <div id="summernote"
+                     v-html="project.value">
+                    {{ project.value }}
+                </div>
             </div>
         </div>
         <div class="col-12 col-lg-5 col-xl-4">
-
-            <div class="card invert" v-if="project.funding">
+            <div v-if="project.funding"
+                 class="card invert">
                 <div class="card-body">
-                    <a class="nav-link editor-container editor-container--style-2"
-                       href="javascript:;" v-if="editing && !activeElement['campaign']"
+                    <a v-if="editing && !activeElement['campaign']"
+                       class="nav-link editor-container editor-container--style-2"
+                       href="javascript:;"
                        @click="showTab('configure')">
-                        <i class="fas fa-cog"></i>
+                        <i class="fas fa-cog" />
                         <span>Configure Campaign</span>
                     </a>
-                    <h2 class="title">Crowdfunding campaign</h2>
+                    <h2 class="title">
+                        Crowdfunding campaign
+                    </h2>
                     <c-button-fav
                         target="wishlist"
                         :active="!!wishlist[project.id]"
                         @click="$store.dispatch(
                             'community/updateWishlist',
                             ['project', project.id]
-                        )"
-                    />
+                        )" />
                     <div class="project">
                         <div class="project__progress">
-                            <div v-for="(stage, index) in project.funding.stages" :key="index"
+                            <div v-for="(stage, index) in project.funding.stages"
+                                 :key="index"
                                  :class="stage.status"
                                  class="project__progress-stage">
-                                <i class="fas fa-check" v-if="stage.status === 'Done'"></i>
-                                <i class="fas fa-clock" v-if="stage.status === 'InProgress'"></i>
-                                <span class="stage_line"></span>
-                                <span class="name">{{ stage.text}}</span>
+                                <i v-if="stage.status === 'Done'"
+                                   class="fas fa-check" />
+                                <i v-if="stage.status === 'InProgress'"
+                                   class="fas fa-clock" />
+                                <span class="stage_line" />
+                                <span class="name">{{ stage.text }}</span>
                             </div>
                         </div>
                         <div class="project__info">
                             <div class="funded">
-                                <div class="text">114% Funded</div>
+                                <div class="text">
+                                    114% Funded
+                                </div>
                                 {{ project.funding.fundedAmount | convertCurrency }}
                             </div>
                             <div class="goal">
-                                <div class="text">Goal</div>
+                                <div class="text">
+                                    Goal
+                                </div>
                                 {{ project.funding.goalAmount | convertCurrency }}
                             </div>
                             <div
                                 v-for="(prop, index) in crowdfundingProps"
                                 :key="index"
-                                :class="prop"
-                            >
+                                :class="prop">
                                 <div class="progress-bar-vertical">
                                     <c-progress-bar
                                         :values="{
                                             reached: project.funding[prop + '_amount'],
                                             goal: project.funding.goalAmount
                                         }"
-                                        direction="vertical"
-                                    />
+                                        direction="vertical" />
                                 </div>
                                 <div>
-                                    <p class="text"><strong>{{ prop | upperFirstChar }}</strong></p>
+                                    <p class="text">
+                                        <strong>{{ prop | upperFirstChar }}</strong>
+                                    </p>
                                     {{ project.funding[prop + '_amount'] | convertCurrency }}
                                 </div>
                             </div>
                         </div>
                         <div class="project__action">
-                            <c-button status="share" swapDirection>Share</c-button>
-                            <c-button status="info" icon="check" swapDirection>Follow</c-button>
-                            <c-button status="support" swapDirection>Support</c-button>
+                            <c-button status="share"
+                                      swapDirection>
+                                Share
+                            </c-button>
+                            <c-button status="info"
+                                      icon="check"
+                                      swapDirection>
+                                Follow
+                            </c-button>
+                            <c-button status="support"
+                                      swapDirection>
+                                Support
+                            </c-button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card invert milestones" v-if="project.milestones">
+            <div v-if="project.milestones"
+                 class="card invert milestones">
                 <div class="card-body">
-                    <a href="#" class="editor-container editor-container--style-2"
-                       v-if="editing && !activeElement['milestones']">
-                        <i class="fas fa-cog"></i>
+                    <a v-if="editing && !activeElement['milestones']"
+                       href="#"
+                       class="editor-container editor-container--style-2">
+                        <i class="fas fa-cog" />
                         <span>Set Up Milestones</span>
                     </a>
-                    <h2 class="title">Milestones</h2>
+                    <h2 class="title">
+                        Milestones
+                    </h2>
                     <ul class="milestones__list">
                         <li v-for="(item, index) in project.milestones.items"
-                            v-bind:class="{ done: item.status === 'Done' }" :key="index">
-                            <div class="stepNumber" v-if="item.status === 'Done'">
-                                <i class="fas fa-check"></i>
+                            :key="index"
+                            :class="{ done: item.status === 'Done' }">
+                            <div v-if="item.status === 'Done'"
+                                 class="stepNumber">
+                                <i class="fas fa-check" />
                             </div>
-                            <div class="stepNumber" v-else>
+                            <div v-else
+                                 class="stepNumber">
                                 {{ item.stepNumber }}
                             </div>
                             <div class="text">
@@ -141,42 +193,65 @@
                 </div>
             </div>
 
-            <c-community-spotlight :discussions="project.community.discussions"
-                                   :communityPath="`/project/${project.id}`" :editing="editing"
+            <c-community-spotlight v-darklaunch="`COMMUNITY`"
+                                   :discussions="project.community.discussions"
+                                   :communityPath="`/project/${project.id}`"
+                                   :editing="editing"
                                    :activeElement="activeElement['milestones']"
-                                   class="margin-bottom-30" 
-                                   v-darklaunch="`COMMUNITY`" />
+                                   class="margin-bottom-30" />
 
-            <c-block title="Contribute" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+            <c-block title="Contribute"
+                     class="margin-bottom-30"
+                     :noGutter="true"
+                     :bgGradient="true"
+                     :onlyContentBg="true">
                 <c-contribute-form @click="showContributeModal" />
             </c-block>
 
-            <c-contribute-pledge @click="showContributeModal" v-for="(pledge, index) in project.pledges" :key="index" :pledge="pledge" :currency="project.meta.currency" />
+            <c-contribute-pledge v-for="(pledge, index) in project.pledges"
+                                 :key="index"
+                                 :pledge="pledge"
+                                 :currency="project.meta.currency"
+                                 @click="showContributeModal" />
 
             <c-decentralization-meter v-decentralized-mode />
 
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'contribute'"
-                @close="$store.commit('application/activateModal', null)"
-            >
-                <div class="h4" slot="header" style="text-align: left">Contribute</div>
+                @close="$store.commit('application/activateModal', null)">
+                <div slot="header"
+                     class="h4"
+                     style="text-align: left">
+                    Contribute
+                </div>
                 <template slot="body">
                     <div v-if="syncStep === 1">
-                        <h3 class="margin-auto"><strong>Status:</strong> unsynced </h3>
-                        Contract Address: 0xasdadas<br />
+                        <h3 class="margin-auto">
+                            <strong>Status:</strong> unsynced
+                        </h3>
+                        Contract Address: 0xasdadas<br>
 
-                        <c-button class="c-button--lg outline-white margin-top-20 margin-auto" @click="startContribution">Start</c-button>
+                        <c-button class="c-button--lg outline-white margin-top-20 margin-auto"
+                                  @click="startContribution">
+                            Start
+                        </c-button>
                     </div>
-                    <div v-if="syncStep === 2">
-                    
-                    </div>
-                    <br />
-                    <div class="padding-40 loading-process" style="position: relative" v-if="syncing">
-                        <div class="loading loading--w-spinner"><div><div class="loading-spinner"></div></div></div>
+                    <div v-if="syncStep === 2" />
+                    <br>
+                    <div v-if="syncing"
+                         class="padding-40 loading-process"
+                         style="position: relative">
+                        <div class="loading loading--w-spinner">
+                            <div><div class="loading-spinner" /></div>
+                        </div>
                     </div>
                 </template>
-                <p slot="footer" class="margin-top-20">
-                    <c-button status="dark" to="/help">Need help? Check the Help Center</c-button>
+                <p slot="footer"
+                   class="margin-top-20">
+                    <c-button status="dark"
+                              to="/help">
+                        Need help? Check the Help Center
+                    </c-button>
                 </p>
             </c-basic-popup>
         </div>
@@ -184,51 +259,52 @@
 </template>
 
 <script>
-    import Vue from 'vue'
+import Vue from 'vue'
 
-    export default {
-        props: ['project', 'editing'],
-        components: {
-            'c-game-plan': () => import('~/components/game-plans/plan').then(m => m.default || m),
-            'c-screen-gallery': () => import('~/components/screen-gallery/gallery').then(m => m.default || m),
-            'c-tags': () => import('~/components/tags').then(m => m.default || m),
-            'c-rating-block': () => import('~/components/rating-block').then(m => m.default || m),
-            'c-frequently-traded-assets': () => import('~/components/frequently-traded-assets').then(m => m.default || m),
-            'c-community-spotlight': () => import('~/components/community-spotlight').then(m => m.default || m),
-            'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
-            'c-participation-tier': () => import('~/components/participation-tier').then(m => m.default || m),
-            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-            'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m),
-            'c-contribute-form': () => import('~/components/contribute/form').then(m => m.default || m),
-            'c-contribute-pledge': () => import('~/components/contribute/pledge').then(m => m.default || m),
-            'c-badges': () => import('~/components/project/badges').then(m => m.default || m),
-            'c-decentralization-meter': () => import('~/components/decentralization-meter').then(m => m.default || m),
-            'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m),
-        },
-        data() {
-            let data = {
-                errors: [],
-                syncing: false,
-                syncStep: 1,
-                participationTiers: this.project.meta.participationTiers,
-                activeElement: {
-                    name: false,
-                    backgroundImage: false,
-                    storeImage: false,
-                    developerTags: false,
-                    description: false,
-                    content: false
-                },
-                authorTagOptions: [
-                    'game',
-                    'mod',
-                    'other'
-                ],
-                crowdfundingProps: ['spent', 'locked', 'overflow']
-            }
+export default {
+    components: {
+        'c-game-plan': () => import('~/components/game-plans/plan').then(m => m.default || m),
+        'c-screen-gallery': () => import('~/components/screen-gallery/gallery').then(m => m.default || m),
+        'c-tags': () => import('~/components/tags').then(m => m.default || m),
+        'c-rating-block': () => import('~/components/rating-block').then(m => m.default || m),
+        'c-frequently-traded-assets': () => import('~/components/frequently-traded-assets').then(m => m.default || m),
+        'c-community-spotlight': () => import('~/components/community-spotlight').then(m => m.default || m),
+        'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
+        'c-participation-tier': () => import('~/components/participation-tier').then(m => m.default || m),
+        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+        'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m),
+        'c-contribute-form': () => import('~/components/contribute/form').then(m => m.default || m),
+        'c-contribute-pledge': () => import('~/components/contribute/pledge').then(m => m.default || m),
+        'c-badges': () => import('~/components/project/badges').then(m => m.default || m),
+        'c-decentralization-meter': () => import('~/components/decentralization-meter').then(m => m.default || m),
+        'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m)
+    },
+    props: ['project', 'editing'],
+    data() {
+        let data = {
+            errors: [],
+            syncing: false,
+            syncStep: 1,
+            participationTiers: this.project.meta.participationTiers,
+            activeElement: {
+                name: false,
+                backgroundImage: false,
+                storeImage: false,
+                developerTags: false,
+                description: false,
+                content: false
+            },
+            authorTagOptions: [
+                'game',
+                'mod',
+                'other'
+            ],
+            crowdfundingProps: ['spent', 'locked', 'overflow']
+        }
 
-            if (this.$store.state.application.environmentMode !== 'production' && !data.participationTiers) {
-                data = {...data, ...{
+        if (this.$store.state.application.environmentMode !== 'production' && !data.participationTiers) {
+            data = {
+                ...data, ...{
                     participationTiers: [
                         {
                             id: 1,
@@ -255,27 +331,28 @@
                             title: 'Game Standard Edition'
                         }
                     ]
-                }}
-            }
-
-            return data
-        },
-        methods: {
-            showContributeModal() {
-                this.$store.commit('application/activateModal', 'contribute')
-                //this.$store.commit('application/showProfileChooser', true)
-                //this.$store.dispatch('application/activateModal', 'send-funds')
-            },
-            startContribution() {
-                this.$store.commit('marketplace/contributeProjectBlockchain', this.product)
-            },
-        },
-        computed: {
-            wishlist() {
-                return this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.productWishlist || {}
+                }
             }
         }
+
+        return data
+    },
+    computed: {
+        wishlist() {
+            return this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.productWishlist || {}
+        }
+    },
+    methods: {
+        showContributeModal() {
+            this.$store.commit('application/activateModal', 'contribute')
+            // this.$store.commit('application/showProfileChooser', true)
+            // this.$store.dispatch('application/activateModal', 'send-funds')
+        },
+        startContribution() {
+            this.$store.commit('marketplace/contributeProjectBlockchain', this.product)
+        }
     }
+}
 </script>
 
 

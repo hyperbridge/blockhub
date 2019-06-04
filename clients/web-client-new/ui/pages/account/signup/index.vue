@@ -1,23 +1,33 @@
 <template>
-    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false" :showShortcuts="false">
-        <div class="content login-container" id="content">
+    <c-layout navigationKey="account"
+              :showLeftPanel="false"
+              :showRightPanel="false"
+              :showShortcuts="false">
+        <div id="content"
+             class="content login-container">
             <div class="container">
                 <div class="col-12">
-                    <p class="errors" v-if="errors.length">
+                    <p v-if="errors.length"
+                       class="errors">
                         <strong>Please correct the following error(s):</strong>
                         <ul>
-                            <li v-for="error in errors" :key="error">{{ error }}</li>
+                            <li v-for="error in errors"
+                                :key="error">
+                                {{ error }}
+                            </li>
                         </ul>
                     </p>
-                    <form action="/" method="post">
+                    <form action="/"
+                          method="post">
                         <c-tabs
                             :activeTabProp="currentStep"
                             :lockedStep="finishedStep"
-                            @click="changeTab($event)"
                             tabText="Step"
                             styled
-                        >
-                            <c-tab :tab_id="1" :selected="true" :showFooter="true">
+                            @click="changeTab($event)">
+                            <c-tab :tab_id="1"
+                                   :selected="true"
+                                   :showFooter="true">
                                 <div class="tab-container">
                                     <div class="tab-card">
                                         <h4>Personal Information</h4>
@@ -25,22 +35,31 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Email</label>
-                                                    <input type="email" class="form-control" placeholder="Email"
-                                                            name="email" v-model="account.email">
+                                                    <input v-model="account.email"
+                                                           type="email"
+                                                           class="form-control"
+                                                           placeholder="Email"
+                                                           name="email">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Given Name</label>
-                                                    <input type="text" class="form-control" placeholder="Given Name"
-                                                            name="firstName" v-model="account.firstName">
+                                                    <input v-model="account.firstName"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Given Name"
+                                                           name="firstName">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Family Name</label>
-                                                    <input type="text" class="form-control" placeholder="Family Name"
-                                                            name="lastName" v-model="account.lastName">
+                                                    <input v-model="account.lastName"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Family Name"
+                                                           name="lastName">
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -55,11 +74,10 @@
                                                         minimumView="day"
                                                         maximumView="year"
                                                         initialView="year"
-                                                        :format="customBirthdayFormatter"
-                                                    />
+                                                        :format="customBirthdayFormatter" />
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">
-                                                            <i class="fas fa-calendar-alt"></i>
+                                                            <i class="fas fa-calendar-alt" />
                                                         </span>
                                                     </div>
                                                 </div>
@@ -73,72 +91,123 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center margin-top-20" slot="footer">
+                                <div slot="footer"
+                                     class="d-flex justify-content-between align-items-center margin-top-20">
                                     <c-switch
                                         v-model="account.agreement"
                                         label_position="right"
-                                        :customLabel="true"
-                                    >
+                                        :customLabel="true">
                                         <template>
                                             I agree to the
-                                            <c-button status="plain" @click="terms = true">terms</c-button> and
-                                            <c-button status="plain" @click="privacy_policy = true">privacy policy</c-button>
+                                            <c-button status="plain"
+                                                      @click="terms = true">
+                                                terms
+                                            </c-button> and
+                                            <c-button status="plain"
+                                                      @click="privacy_policy = true">
+                                                privacy policy
+                                            </c-button>
                                         </template>
                                     </c-switch>
                                     <c-switch
                                         v-model="account.newsletter"
                                         label="Sign up for our newsletter, get 100 HBX Bonus!"
-                                        label_position="right"
-                                    />
+                                        label_position="right" />
                                     <div>
                                         <c-button
-                                            @click="checkForm()"
                                             :class="{'disabled': !account.agreement}"
-                                        >CONTINUE</c-button>
+                                            @click="checkForm()">
+                                            CONTINUE
+                                        </c-button>
                                     </div>
                                 </div>
                             </c-tab>
-                            <c-tab :tab_id="2" :showFooter="true">
+                            <c-tab :tab_id="2"
+                                   :showFooter="true">
                                 <div class="tab-container">
-                                    <div class="padding-40 loading-process" style="position: relative" v-if="!passphrase">
-                                        <div class="loading loading--w-spinner"><div><div class="loading-spinner"></div></div></div>
+                                    <div v-if="!passphrase"
+                                         class="padding-40 loading-process"
+                                         style="position: relative">
+                                        <div class="loading loading--w-spinner">
+                                            <div><div class="loading-spinner" /></div>
+                                        </div>
                                     </div>
-                                    <div class="tab-card" v-if="passphrase">
+                                    <div v-if="passphrase"
+                                         class="tab-card">
                                         <h4>Security</h4>
-                                        
+
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Password</label>
-                                                    <input type="password" class="form-control" placeholder="Password"
-                                                            name="password" v-model="account.password">
+                                                    <input v-model="account.password"
+                                                           type="password"
+                                                           class="form-control"
+                                                           placeholder="Password"
+                                                           name="password">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Secret Question #1</label>
-                                                    <select id="secretQuestion1" name="secretQuestion1" class="form-control" v-model="account.secretQuestion1">
-                                                        <option value="" selected>Choose Secret Question</option>
-                                                        <option value="last_name_first_kissed">What is the first name of the person you first kissed?</option>
-                                                        <option value="first_name_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
-                                                        <option value="favorite_high_school_teacher">What is the last name of your favorite teacher in high school?</option>
-                                                        <option value="last_name_teacher_failing_grade">What is the last name of the teacher who gave you your first failing grade?</option>
-                                                        <option value="wedding_reception">What is the name of the plac eyour wedding reception was held?</option>
-                                                        <option value="city_sibling_live">In what city or town does your nearest sibling live?</option>
+                                                    <select id="secretQuestion1"
+                                                            v-model="account.secretQuestion1"
+                                                            name="secretQuestion1"
+                                                            class="form-control">
+                                                        <option value=""
+                                                                selected>
+                                                            Choose Secret Question
+                                                        </option>
+                                                        <option value="last_name_first_kissed">
+                                                            What is the first name of the person you first kissed?
+                                                        </option>
+                                                        <option value="first_name_favorite_aunt_uncle">
+                                                            What is the first name of the your favorite aunt or uncle?
+                                                        </option>
+                                                        <option value="favorite_high_school_teacher">
+                                                            What is the last name of your favorite teacher in high school?
+                                                        </option>
+                                                        <option value="last_name_teacher_failing_grade">
+                                                            What is the last name of the teacher who gave you your first failing grade?
+                                                        </option>
+                                                        <option value="wedding_reception">
+                                                            What is the name of the plac eyour wedding reception was held?
+                                                        </option>
+                                                        <option value="city_sibling_live">
+                                                            In what city or town does your nearest sibling live?
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Secret Question #2</label>
-                                                    <select id="secretQuestion2" name="secretQuestion2" class="form-control" v-model="account.secretQuestion2">
-                                                        <option value="" selected>Choose Secret Question</option>
-                                                        <option value="last_name_first_kissed">What is the first name of the person you first kissed?</option>
-                                                        <option value="first_name_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
-                                                        <option value="favorite_high_school_teacher">What is the last name of your favorite teacher in high school?</option>
-                                                        <option value="last_name_teacher_failing_grade">What is the last name of the teacher who gave you your first failing grade?</option>
-                                                        <option value="wedding_reception">What is the name of the plac eyour wedding reception was held?</option>
-                                                        <option value="city_sibling_live">In what city or town does your nearest sibling live?</option>
+                                                    <select id="secretQuestion2"
+                                                            v-model="account.secretQuestion2"
+                                                            name="secretQuestion2"
+                                                            class="form-control">
+                                                        <option value=""
+                                                                selected>
+                                                            Choose Secret Question
+                                                        </option>
+                                                        <option value="last_name_first_kissed">
+                                                            What is the first name of the person you first kissed?
+                                                        </option>
+                                                        <option value="first_name_favorite_aunt_uncle">
+                                                            What is the first name of the your favorite aunt or uncle?
+                                                        </option>
+                                                        <option value="favorite_high_school_teacher">
+                                                            What is the last name of your favorite teacher in high school?
+                                                        </option>
+                                                        <option value="last_name_teacher_failing_grade">
+                                                            What is the last name of the teacher who gave you your first failing grade?
+                                                        </option>
+                                                        <option value="wedding_reception">
+                                                            What is the name of the plac eyour wedding reception was held?
+                                                        </option>
+                                                        <option value="city_sibling_live">
+                                                            In what city or town does your nearest sibling live?
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -147,73 +216,111 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Repeat Password</label>
-                                                    <input type="password" class="form-control" placeholder="Password again"
-                                                            name="repeat_password" v-model="account.repeat_password">
+                                                    <input v-model="account.repeat_password"
+                                                           type="password"
+                                                           class="form-control"
+                                                           placeholder="Password again"
+                                                           name="repeat_password">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Answer #1</label>
-                                                    <input type="text" class="form-control" placeholder="Secret Answer #1"
-                                                            name="secretAnswer1" v-model="account.secretAnswer1">
+                                                    <input v-model="account.secretAnswer1"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Secret Answer #1"
+                                                           name="secretAnswer1">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Answer #2</label>
-                                                    <input type="text" class="form-control" placeholder="Secret Answer #2"
-                                                            name="secretAnswer2" v-model="account.secretAnswer2">
+                                                    <input v-model="account.secretAnswer2"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Secret Answer #2"
+                                                           name="secretAnswer2">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-card" v-if="!verifyingPassphrase" hidden>
+                                <div v-if="!verifyingPassphrase"
+                                     class="tab-card"
+                                     hidden>
                                     <p>We've generated a passphrase for you. You can change it, but it's not recommended. This is used to access, create &amp; change your data. If you ever need to recover it, you can use your password. If you forget your password, you can use your secret question AND your birthday. We do this to protect you against hackers, however don't lose them, otherwise it will be impossible to recover the account.</p>
 
                                     <p>Make sure to write down your passphase, password, and secret answers and put it somewhere safe.</p>
 
                                     <div class="passphrase">
-                                        <input type="text" class="form-control" v-for="(word, index) in passphrase" :key="index" :value="word" @keyup="passphrase[index] = $event.target.value" />
+                                        <input v-for="(word, index) in passphrase"
+                                               :key="index"
+                                               type="text"
+                                               class="form-control"
+                                               :value="word"
+                                               @keyup="passphrase[index] = $event.target.value">
                                     </div>
 
-                                    <c-button class="plain" @click="showPassphrase()" v-if="verifyingPassphrase"> </c-button> 
-                                    <br /><br />
+                                    <c-button v-if="verifyingPassphrase"
+                                              class="plain"
+                                              @click="showPassphrase()" />
+                                    <br><br>
 
-                                    <c-button class="c-button--lg" @click="startVerification()">Got it</c-button>
+                                    <c-button class="c-button--lg"
+                                              @click="startVerification()">
+                                        Got it
+                                    </c-button>
                                 </div>
-                                <div class="tab-card" v-if="verifyingPassphrase" hidden>
+                                <div v-if="verifyingPassphrase"
+                                     class="tab-card"
+                                     hidden>
                                     <p>We've generated a passphrase for you. You can change it, but it's not recommended. This is used to access, create &amp; change your data. If you ever need to recover it, you can use your password. If you forget your password, you can use your secret question AND your birthday. We do this to protect you against hackers, however don't lose them, otherwise it will be impossible to recover the account.</p>
 
                                     <p>Make sure to write down your passphase, password, and secret answers and put it somewhere safe.</p>
 
-                                    <div class="passphrase" ref="passphraseVerification">
-                                        <input type="text" class="form-control" v-for="(word, index) in repeatPassphrase" :key="index" :value="word" @keyup="repeatPassphrase[index] = $event.target.value" />
+                                    <div ref="passphraseVerification"
+                                         class="passphrase">
+                                        <input v-for="(word, index) in repeatPassphrase"
+                                               :key="index"
+                                               type="text"
+                                               class="form-control"
+                                               :value="word"
+                                               @keyup="repeatPassphrase[index] = $event.target.value">
                                     </div>
 
-                                    <c-button class="plain" @click="showPassphrase()" v-if="verifyingPassphrase">Show Passphrase Again</c-button> 
-                                    <br /><br />
+                                    <c-button v-if="verifyingPassphrase"
+                                              class="plain"
+                                              @click="showPassphrase()">
+                                        Show Passphrase Again
+                                    </c-button>
+                                    <br><br>
 
-                                    <c-button class="c-button--lg" @click="confirmVerification()" v-if="verifyingPassphrase">Verify Now</c-button>
+                                    <c-button v-if="verifyingPassphrase"
+                                              class="c-button--lg"
+                                              @click="confirmVerification()">
+                                        Verify Now
+                                    </c-button>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center margin-top-20" slot="footer" v-if="verifiedPassphrase">
+                                <div v-if="verifiedPassphrase"
+                                     slot="footer"
+                                     class="d-flex justify-content-between align-items-center margin-top-20">
                                     <c-switch
+                                        v-if="false && verifiedPassphrase"
                                         v-model="agreeStoredPassphrase"
                                         label="I have safely stored my passphrase"
-                                        label_position="right"
-                                        v-if="false && verifiedPassphrase"
-                                    />
+                                        label_position="right" />
                                     <c-switch
+                                        v-if="false && verifiedPassphrase"
                                         v-model="account.encryptPassphrase"
                                         label="I want to encrypt my passphrase with my password"
-                                        label_position="right"
-                                        v-if="false && verifiedPassphrase"
-                                    />
+                                        label_position="right" />
                                     <div>
                                         <c-button
-                                            @click="checkForm()"
                                             v-if="verifiedPassphrase"
-                                        >CONTINUE</c-button>
+                                            @click="checkForm()">
+                                            CONTINUE
+                                        </c-button>
                                     </div>
                                 </div>
                             </c-tab>
@@ -221,14 +328,17 @@
                                 <div class="tab-container">
                                     <div class="tab-card">
                                         <h3>Congratulations!</h3>
-                                        <p>That's it! You're now a member of BlockHub, and the future of decentralized protocols.<br />
-                                        We hope you enjoy many years of success with BlockHub and the Hyperbridge family!</p>
+                                        <p>
+                                            That's it! You're now a member of BlockHub, and the future of decentralized protocols.<br>
+                                            We hope you enjoy many years of success with BlockHub and the Hyperbridge family!
+                                        </p>
 
-                                        <br />
+                                        <br>
                                         <c-button
                                             class="c-button--lg outline-green"
-                                            @click="checkForm()"
-                                        >Continue to BlockHub</c-button>
+                                            @click="checkForm()">
+                                            Continue to BlockHub
+                                        </c-button>
                                     </div>
                                 </div>
                             </c-tab>
@@ -238,18 +348,23 @@
             </div>
         </div>
 
-        <c-popup title="Terms" :activated="terms" @close="terms = false" width="800">
+        <c-popup title="Terms"
+                 :activated="terms"
+                 width="800"
+                 @close="terms = false">
             <div class="scroll_block">
                 <c-terms-block />
             </div>
         </c-popup>
 
-        <c-popup title="Privacy policy" :activated="privacy_policy" @close="privacy_policy = false" width="800">
+        <c-popup title="Privacy policy"
+                 :activated="privacy_policy"
+                 width="800"
+                 @close="privacy_policy = false">
             <div class="scroll_block">
                 <c-privacy-block />
             </div>
         </c-popup>
-
     </c-layout>
 </template>
 
@@ -260,13 +375,13 @@ import moment from 'moment'
 
 export default {
     components: {
-        'c-datepicker': (resolve) => require(['vuejs-datepicker'], resolve),
+        'c-datepicker': resolve => require(['vuejs-datepicker'], resolve),
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         'c-privacy-block': () => import('~/components/privacy-block').then(m => m.default || m),
         'c-terms-block': () => import('~/components/terms-block').then(m => m.default || m),
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
         'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
+        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m)
     },
     data() {
         return {
@@ -319,29 +434,32 @@ export default {
             privacy_policy: false
         }
     },
+    created() {
+        this.$store.commit('application/activateModal', 'register')
+    },
     methods: {
         checkForm() {
-            this.errors = [];
+            this.errors = []
 
             if (this.currentStep === 1) {
                 if (
-                    this.account.firstName
-                    && this.account.lastName
-                    && this.account.email
-                    && this.account.birthday
-                    && this.account.agreement
+                    this.account.firstName &&
+                    this.account.lastName &&
+                    this.account.email &&
+                    this.account.birthday &&
+                    this.account.agreement
                 ) {
                     Bridge.getPassphraseRequest({
-                        seed: 13891737193, // TODO:  remove hardcode. should derived from input data + mouse movement
-                    }).then((res) => {
+                        seed: 13891737193 // TODO:  remove hardcode. should derived from input data + mouse movement
+                    }).then(res => {
                         this.passphrase = res.split(' ')
                         this.repeatPassphrase = res.split(' ')
                         // this.repeatPassphrase[2] = ''
                         // this.repeatPassphrase[4] = ''
                         // this.repeatPassphrase[8] = ''
 
-                        this.finishedStep = 1;
-                        this.currentStep = 2;
+                        this.finishedStep = 1
+                        this.currentStep = 2
                     })
                 } else {
                     if (!this.account.firstName) {
@@ -359,46 +477,45 @@ export default {
                     if (!this.account.agreement) {
                         this.errors.push('To continue using BlockHub, you will need to review and agree to the Terms & Service Agreement.')
                     }
-                    
                 }
             } else if (this.currentStep === 2) {
                 const passphraseOriginal = this.passphrase.join(' ')
                 const passphraseVerification = this.repeatPassphrase.join(' ')
 
-                if (this.account.secretQuestion1
-                    && this.account.secretAnswer1
-                    && this.account.secretQuestion2
-                    && this.account.secretAnswer2
-                    && this.account.password
-                    && this.account.repeat_password
-                    && this.account.password === this.account.repeat_password
-                    && this.agreeStoredPassphrase
-                    && !this.passphrase.includes('')
-                    && !this.repeatPassphrase.includes('')
-                    && passphraseOriginal === passphraseVerification) {
-                        Bridge.createAccountRequest({
-                            seed: 13891737193, // TODO:  remove hardcode. should derived from input data + mouse movement
-                            firstName: this.account.firstName,
-                            lastName: this.account.lastName,
-                            email: this.account.email,
-                            birthday: moment(this.account.birthday).format('DD-MM-YYYY'),
-                            password: this.account.password,
-                            passphrase: passphraseOriginal,
-                            encryptPassphrase: this.account.encryptPassphrase,
-                            secretQuestion1: this.account.secretQuestion1,
-                            secretAnswer1: this.account.secretAnswer1.toLowerCase(),
-                            secretQuestion2: this.account.secretQuestion2,
-                            secretAnswer2: this.account.secretAnswer2.toLowerCase()
-                        }).then((res) => {
-                            this.finishedStep = 2;
-                            this.currentStep = 3;
+                if (this.account.secretQuestion1 &&
+                    this.account.secretAnswer1 &&
+                    this.account.secretQuestion2 &&
+                    this.account.secretAnswer2 &&
+                    this.account.password &&
+                    this.account.repeat_password &&
+                    this.account.password === this.account.repeat_password &&
+                    this.agreeStoredPassphrase &&
+                    !this.passphrase.includes('') &&
+                    !this.repeatPassphrase.includes('') &&
+                    passphraseOriginal === passphraseVerification) {
+                    Bridge.createAccountRequest({
+                        seed: 13891737193, // TODO:  remove hardcode. should derived from input data + mouse movement
+                        firstName: this.account.firstName,
+                        lastName: this.account.lastName,
+                        email: this.account.email,
+                        birthday: moment(this.account.birthday).format('DD-MM-YYYY'),
+                        password: this.account.password,
+                        passphrase: passphraseOriginal,
+                        encryptPassphrase: this.account.encryptPassphrase,
+                        secretQuestion1: this.account.secretQuestion1,
+                        secretAnswer1: this.account.secretAnswer1.toLowerCase(),
+                        secretQuestion2: this.account.secretQuestion2,
+                        secretAnswer2: this.account.secretAnswer2.toLowerCase()
+                    }).then(res => {
+                        this.finishedStep = 2
+                        this.currentStep = 3
 
-                            this.$store.dispatch('application/updateState', {
-                                account: { ...this.$store.state.application.account, ...res.account },
-                                locked: false,
-                                signedIn: true
-                            })
+                        this.$store.dispatch('application/updateState', {
+                            account: { ...this.$store.state.application.account, ...res.account },
+                            locked: false,
+                            signedIn: true
                         })
+                    })
                 } else {
                     if (!this.account.password) {
                         this.errors.push('Password required.')
@@ -431,17 +548,16 @@ export default {
                         this.errors.push('Passphrase does not match.')
                     }
                 }
-                
             } else if (this.currentStep === 3) {
-                this.finishedStep = 3;
+                this.finishedStep = 3
                 this.$router.push({ path: '/' })
             }
         },
         changeTab(step) {
             if (step > this.currentStep) {
-                this.checkForm();
+                this.checkForm()
             } else {
-                this.currentStep = step;
+                this.currentStep = step
             }
         },
         customBirthdayFormatter(date) {
@@ -461,11 +577,11 @@ export default {
             this.errors = []
 
             const passphraseOriginal = this.passphrase.join(' ')
-            const passphraseVerification = this.repeatPassphrase.join(' ')//$.map($(this.$refs.passphraseVerification).find('input'), (item) => $(item).val()).join(' ')
+            const passphraseVerification = this.repeatPassphrase.join(' ')// $.map($(this.$refs.passphraseVerification).find('input'), (item) => $(item).val()).join(' ')
 
-            if (!this.passphrase.includes('')
-                && !this.repeatPassphrase.includes('')
-                && passphraseOriginal === passphraseVerification) {
+            if (!this.passphrase.includes('') &&
+                !this.repeatPassphrase.includes('') &&
+                passphraseOriginal === passphraseVerification) {
                 this.verifiedPassphrase = true
                 return
             }
@@ -477,9 +593,6 @@ export default {
                 this.errors.push('Passphrase does not match.')
             }
         }
-    },
-    created() {
-        this.$store.commit('application/activateModal', 'register')
     }
 }
 </script>

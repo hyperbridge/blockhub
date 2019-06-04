@@ -1,47 +1,49 @@
 <template>
     <c-layout>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        Marketplace
-                        <h2>Inventory</h2>
-                        <nav class="inventory__menu-container">
-                            <ul class="inventory__menu reset-list">
-                                <li v-for="(link, index) in links" :key="index">
-                                    <router-link :to="link.url" class="menu__link">
-                                        {{ link.title }}
-                                    </router-link>
-                                </li>
-                            </ul>
-                        </nav>
-                        <router-view :assets="assets"/>
-                    </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    Marketplace
+                    <h2>Inventory</h2>
+                    <nav class="inventory__menu-container">
+                        <ul class="inventory__menu reset-list">
+                            <li v-for="(link, index) in links"
+                                :key="index">
+                                <router-link :to="link.url"
+                                             class="menu__link">
+                                    {{ link.title }}
+                                </router-link>
+                            </li>
+                        </ul>
+                    </nav>
+                    <router-view :assets="assets" />
                 </div>
             </div>
+        </div>
     </c-layout>
 </template>
 
 <script>
-    export default {
-        components: {
-            'c-block': () => import('~/components/block').then(m => m.default || m),
-            'c-asset-comparison': () => import('~/components/asset-comparison').then(m => m.default || m),
-            'c-assets-grid-inventory': () => import('~/components/assets-grid-inventory').then(m => m.default || m),
-        },
-        data() {
-            return {
-                links: [
-                   { url: '/marketplace/inventory', title: 'Explore' },
-                   { url: '/marketplace/inventory/compare', title: 'Compare assets' }
-                ]
-            }
-        },
-        computed: {
-            assets() {
-                return this.$store.getters['assets/inventoryAssets'];
-            }
+export default {
+    components: {
+        'c-block': () => import('~/components/block').then(m => m.default || m),
+        'c-asset-comparison': () => import('~/components/asset-comparison').then(m => m.default || m),
+        'c-assets-grid-inventory': () => import('~/components/assets-grid-inventory').then(m => m.default || m)
+    },
+    data() {
+        return {
+            links: [
+                { url: '/marketplace/inventory', title: 'Explore' },
+                { url: '/marketplace/inventory/compare', title: 'Compare assets' }
+            ]
+        }
+    },
+    computed: {
+        assets() {
+            return this.$store.getters['assets/inventoryAssets']
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

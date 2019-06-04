@@ -2,7 +2,10 @@
     <c-layout navigationKey="account">
         <div class="row">
             <div class="col-12">
-                <c-block title="Account Information" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                <c-block title="Account Information"
+                         :noGutter="true"
+                         :bgGradient="true"
+                         :onlyContentBg="true">
                     <form>
                         <div class="row">
                             <div class="col-md-10">
@@ -11,8 +14,11 @@
                                         <label>Email Address</label>
                                     </label>
                                     <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Email"
-                                        :value="account.email" readonly>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Email"
+                                               :value="account.email"
+                                               readonly>
                                         <span class="form-text">This field cannot be changed at this time.</span>
                                     </div>
                                 </div>
@@ -21,7 +27,11 @@
                                         <label>Given Name</label>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="Given name" :value="account.firstName" readonly>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Given name"
+                                               :value="account.firstName"
+                                               readonly>
                                         <span class="form-text">This field cannot be changed at this time.</span>
                                     </div>
                                 </div>
@@ -30,37 +40,59 @@
                                         <label>Family Name</label>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="Family name" :value="account.lastName" readonly>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Family name"
+                                               :value="account.lastName"
+                                               readonly>
                                         <span class="form-text">This field cannot be changed at this time.</span>
                                     </div>
                                 </div>
-                                <div class="form-group row" hidden>
+                                <div class="form-group row"
+                                     hidden>
                                     <label class="switch switch-sm col-sm-3">
                                         <label>Public Address</label>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="Public address"
-                                                :value="account.address" readonly>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Public address"
+                                               :value="account.address"
+                                               readonly>
                                         <span class="form-text">Your account is an Ethereum wallet, and can be <a
-                                    :href="`https://etherscan.io/address/${account.address}`">found on the blockchain using the Public Address</a></span>
+                                            :href="`https://etherscan.io/address/${account.address}`">found on the blockchain using the Public Address</a></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <c-button @click="importAccountFile" hidden>Import Account</c-button>
-                                <c-button @click="exportAccountFile" hidden>Export Saved Account</c-button>
-                                <c-button class="outline-danger" @click="deleteAccount">Clear Saved Account</c-button>
+                                <c-button hidden
+                                          @click="importAccountFile">
+                                    Import Account
+                                </c-button>
+                                <c-button hidden
+                                          @click="exportAccountFile">
+                                    Export Saved Account
+                                </c-button>
+                                <c-button class="outline-danger"
+                                          @click="deleteAccount">
+                                    Clear Saved Account
+                                </c-button>
                             </div>
                         </div>
                     </form>
                 </c-block>
 
-                <c-block title="Overview" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                <c-block title="Overview"
+                         :noGutter="true"
+                         :bgGradient="true"
+                         :onlyContentBg="true">
                     <div class="stat-card-container">
                         <div class="stat-card-list">
-                            <router-link tag="div" to="/account/profiles" class="route stat-card">
+                            <router-link tag="div"
+                                         to="/account/profiles"
+                                         class="route stat-card">
                                 <div class="icon">
-                                    <i class="fas fa-id-card"></i>
+                                    <i class="fas fa-id-card" />
                                 </div>
                                 <div class="info">
                                     <h4>Profiles</h4>
@@ -74,23 +106,26 @@
                                     </p>
                                 </div>
                             </router-link>
-                            <div class="stat-card" v-darklaunch="'TICKETS'">
+                            <div v-darklaunch="'TICKETS'"
+                                 class="stat-card">
                                 <div class="icon">
-                                    <i class="fas fa-question-circle"></i>
+                                    <i class="fas fa-question-circle" />
                                 </div>
                                 <div class="info">
                                     <h4>Support Tickets</h4>
                                     <div class="stat">
                                         <div>
-                                            <i class="fa fa-clock"></i>
+                                            <i class="fa fa-clock" />
                                             35
                                         </div>
                                         <div>
-                                            <i class="fas fa-exclamation-triangle" style="color: #FADC72"></i>
+                                            <i class="fas fa-exclamation-triangle"
+                                               style="color: #FADC72" />
                                             12
                                         </div>
                                         <div>
-                                            <i class="fas fa-check" style="color: #43C981"></i>
+                                            <i class="fas fa-check"
+                                               style="color: #43C981" />
                                             5
                                         </div>
                                     </div>
@@ -99,9 +134,10 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="stat-card" v-darklaunch="'PAYMENTS'">
+                            <div v-darklaunch="'PAYMENTS'"
+                                 class="stat-card">
                                 <div class="icon">
-                                    <i class="fas fa-dollar-sign"></i>
+                                    <i class="fas fa-dollar-sign" />
                                 </div>
                                 <div class="info">
                                     <h4>Open Payments</h4>
@@ -115,27 +151,32 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="stat-card" v-darklaunch="'USER_ACTIVITY'">
+                            <div v-darklaunch="'USER_ACTIVITY'"
+                                 class="stat-card">
                                 <div class="icon">
-                                    <i class="fas fa-users"></i>
+                                    <i class="fas fa-users" />
                                 </div>
                                 <div class="info">
                                     <h4>User Activity</h4>
                                     <div class="stat">
                                         <div>
-                                            <i class="fas fa-circle" style="color: #43C981"></i>
+                                            <i class="fas fa-circle"
+                                               style="color: #43C981" />
                                             3
                                         </div>
                                         <div>
-                                            <i class="fas fa-circle" style="color: #FADC72"></i>
+                                            <i class="fas fa-circle"
+                                               style="color: #FADC72" />
                                             1
                                         </div>
                                         <div>
-                                            <i class="fas fa-circle" style="color: #F75D5D"></i>
+                                            <i class="fas fa-circle"
+                                               style="color: #F75D5D" />
                                             0
                                         </div>
                                         <div>
-                                            <i class="fas fa-circle" style="color: #A2A3BE"></i>
+                                            <i class="fas fa-circle"
+                                               style="color: #A2A3BE" />
                                             5
                                         </div>
                                     </div>
@@ -148,66 +189,62 @@
                     </div>
                 </c-block>
 
-                <c-block title="Wishlists" noGutter bgGradient onlyContentBg>
-                    <c-tabs :tabNames="['Products', 'Projects']" styled>
+                <c-block title="Wishlists"
+                         noGutter
+                         bgGradient
+                         onlyContentBg>
+                    <c-tabs :tabNames="['Products', 'Projects']"
+                            styled>
                         <c-tab :tab_id="1">
-                            <div v-if="profile.productWishlist.length" class="wishlist-box">
+                            <div v-if="profile.productWishlist.length"
+                                 class="wishlist-box">
                                 <div
-                                    class="wishlist-box__item"
                                     v-for="product in profile.productWishlist"
                                     :key="product.id"
-                                >
+                                    class="wishlist-box__item">
                                     <c-game-includes-item
                                         :id="product.id"
                                         :image="product.images.mediumTile"
                                         :name="product.name"
                                         :rating="product.rating.overall"
-                                        :developer="product.developer"
-                                    />
+                                        :developer="product.developer" />
                                     <c-button-fav
+                                        target="wishlist"
+                                        :active="true"
                                         @click="$store.dispatch(
                                             'community/updateWishlist',
                                             ['product', product.id]
-                                        )"
-                                        target="wishlist"
-                                        :active="true"
-                                    />
+                                        )" />
                                 </div>
                             </div>
                             <p v-else>
                                 You have not added any products to your wishlist
                             </p>
-
                         </c-tab>
                         <c-tab :tab_id="2">
                             <div
                                 v-if="profile.projectWishlist.length"
-                                class="wishlist-box"
-                            >
+                                class="wishlist-box">
                                 <div
-                                    class="wishlist-box__item"
                                     v-for="project in profile.projectWishlist"
                                     :key="project.id"
-                                >
+                                    class="wishlist-box__item">
                                     <c-project-card
                                         class="p-0 mb-2"
                                         :image="project.images[0]"
-                                        :funds="project.funds"
-                                    />
+                                        :funds="project.funds" />
                                     <c-button-fav
                                         target="wishlist"
                                         :active="true"
                                         @click="$store.dispatch(
                                             'community/updateWishlist',
                                             ['project', project.id]
-                                        )"
-                                    />
+                                        )" />
                                 </div>
                             </div>
                             <p v-else>
                                 You have not added any projects to your wishlist
                             </p>
-
                         </c-tab>
                     </c-tabs>
                 </c-block>
@@ -217,54 +254,54 @@
 </template>
 
 <script>
-    import * as Bridge from '@/framework/desktop-bridge'
+import * as Bridge from '@/framework/desktop-bridge'
 
-    export default {
-        components: {
-            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-            'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
-            'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
-            'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
-            'c-game-includes-item': () => import('~/components/game-series/game-includes-item').then(m => m.default || m),
-            'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m),
-            'c-project-card': () => import('~/components/project/card').then(m => m.default || m),
+export default {
+    components: {
+        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+        'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
+        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
+        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
+        'c-game-includes-item': () => import('~/components/game-series/game-includes-item').then(m => m.default || m),
+        'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m),
+        'c-project-card': () => import('~/components/project/card').then(m => m.default || m)
+    },
+    data() {
+        return {
+            wallets: [],
+            expertMode: false
+        }
+    },
+    computed: {
+        profileCount() {
+            return Object.values(this.$store.state.profiles.keyedById).length
         },
-        data() {
+        account() {
+            return this.$store.state.application.account
+        },
+        profile() {
+            const { products } = this.$store.state.marketplace
+            const { projects } = this.$store.state.funding
+            const profile = this.$store.state.application.activeProfile
             return {
-                wallets: [],
-                expertMode: false
-            }
-        },
-        methods: {
-            exportAccountFile() {
-                Bridge.sendCommand('exportAccountFileRequest')
-            },
-            importAccountFile() {
-                Bridge.sendCommand('importAccountFileRequest')
-            },
-            deleteAccount() {
-                Bridge.sendCommand('deleteAccountRequest')
-            }
-        },
-        computed: {
-            profileCount() {
-                return Object.values(this.$store.state.profiles.keyedById).length
-            },
-            account() {
-                return this.$store.state.application.account
-            },
-            profile() {
-                const { products } = this.$store.state.marketplace
-                const { projects } = this.$store.state.funding
-                const profile = this.$store.state.application.activeProfile
-                return {
-                    ...profile,
-                    productWishlist: Object.keys(profile.productWishlist || []).map(id => products[id]),
-                    projectWishlist: Object.keys(profile.projectWishlist || []).map(id => projects[id])
-                }
+                ...profile,
+                productWishlist: Object.keys(profile.productWishlist || []).map(id => products[id]),
+                projectWishlist: Object.keys(profile.projectWishlist || []).map(id => projects[id])
             }
         }
+    },
+    methods: {
+        exportAccountFile() {
+            Bridge.sendCommand('exportAccountFileRequest')
+        },
+        importAccountFile() {
+            Bridge.sendCommand('importAccountFileRequest')
+        },
+        deleteAccount() {
+            Bridge.sendCommand('deleteAccountRequest')
+        }
     }
+}
 </script>
 
 <style lang="scss">

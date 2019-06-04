@@ -1,5 +1,6 @@
 <template>
-    <c-layout navigationKey="collection" :breadcrumbLinks="breadcrumbLinks">
+    <c-layout navigationKey="collection"
+              :breadcrumbLinks="breadcrumbLinks">
         <div class="row">
             <template v-if="!collection">
                 <p>Not found.</p>
@@ -8,7 +9,9 @@
                 <div class="col-12 margin-bottom-40">
                     <div class="collection-header">
                         <div class="collection-header__name">
-                            <div class="p-0 margin-bottom-5 h1 text-white">{{ collection.name }}</div>
+                            <div class="p-0 margin-bottom-5 h1 text-white">
+                                {{ collection.name }}
+                            </div>
                             <div>
                                 <strong class="mr-3">
                                     {{ assets.length }} Items
@@ -46,15 +49,15 @@
                 </div>
                 <div class="col-12">
                     <c-block>
-                        <c-heading-bar name="Items">
-                        </c-heading-bar>
+                        <c-heading-bar name="Items" />
                         <div class="d-flex justify-content-between align-items-center margin-bottom-20">
                             <div class="filter_blk form-inline">
                                 <div class="form-group">
                                     <label>
                                         Filter by
                                     </label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
+                                    <select id="exampleFormControlSelect1"
+                                            class="form-control">
                                         <option>Type</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -66,22 +69,33 @@
                                     <label>
                                         Game
                                     </label>
-                                    <input type="text" class="form-control" />
+                                    <input type="text"
+                                           class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>
                                         Name
                                     </label>
-                                    <input type="text" class="form-control" />
+                                    <input type="text"
+                                           class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <c-button status="danger" class="mr-4" icon="times">Clear</c-button>
-                                    <c-button status="info" icon="filter">More filters</c-button>
+                                    <c-button status="danger"
+                                              class="mr-4"
+                                              icon="times">
+                                        Clear
+                                    </c-button>
+                                    <c-button status="info"
+                                              icon="filter">
+                                        More filters
+                                    </c-button>
                                 </div>
                             </div>
                             <div class="d-inline-flex">
-                                <c-heading-bar-fields name="Rarity" icon="fas fa-trophy" />
-                                <c-heading-bar-fields name="Value" icon="fas fa-dollar" />
+                                <c-heading-bar-fields name="Rarity"
+                                                      icon="fas fa-trophy" />
+                                <c-heading-bar-fields name="Value"
+                                                      icon="fas fa-dollar" />
                             </div>
                         </div>
                         <c-assets-grid :list="assets" />
@@ -97,13 +111,23 @@
 import moment from 'moment'
 
 export default {
-    props: [],
     components: {
         'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-        'c-heading-bar-fields' : () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
+        'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
         'c-pagination': () => import('~/components/pagination').then(m => m.default || m),
         'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m)
+    },
+    props: [],
+    computed: {
+        assets() {
+            if (!this.collection.meta.assets) return []
+
+            return Promise.all(this.collection.meta.assets.map(id => this.$store.getters['assets/get'](id)))
+        },
+        timeAgo() {
+            return moment(this.collection.updates).fromNow()
+        }
     },
     async asyncData({ params, store }) {
         await store.dispatch('collections/find', {
@@ -118,20 +142,8 @@ export default {
             collection,
             breadcrumbLinks: [
                 { to: { path: '/' }, title: 'Home' },
-                (collection && { to: { path: '/collection/' + collection.id }, title: collection.name })
+                collection && { to: { path: `/collection/${collection.id}` }, title: collection.name }
             ]
-        }
-    },
-    computed: {
-        assets() {
-            if (!this.collection.meta.assets) return []
-
-            return Promise.all(this.collection.meta.assets.map((id) => {
-                return this.$store.getters['assets/get'](id)
-            }))
-        },
-        timeAgo() {
-            return moment(this.collection.updates).fromNow()
         }
     },
     created() {

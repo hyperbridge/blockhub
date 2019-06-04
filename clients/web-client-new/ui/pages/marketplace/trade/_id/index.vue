@@ -3,34 +3,37 @@
         <p v-if="!trx">
             Transaction with id <i>{{ id }}</i> doesn't exist
         </p>
-        <c-block-menu v-else :links="links">
-            <router-view :trxa="trx" :trx="trx" :id="id"/>
+        <c-block-menu v-else
+                      :links="links">
+            <router-view :id="id"
+                         :trxa="trx"
+                         :trx="trx" />
         </c-block-menu>
     </div>
 </template>
 
 <script>
-    export default {
-        props: ['id'],
-        components: {
-            'c-block-menu': () => import('~/components/block/menu').then(m => m.default || m),
+export default {
+    components: {
+        'c-block-menu': () => import('~/components/block/menu').then(m => m.default || m)
+    },
+    props: ['id'],
+    data() {
+        return {
+        }
+    },
+    computed: {
+        links() {
+            return [
+                { title: 'Offer', to: `/marketplace/trade/${this.id}` },
+                { title: 'Chat', to: `/marketplace/trade/${this.id}/chat` }
+            ]
         },
-        data() {
-            return {
-            }
-        },
-        computed: {
-            links() {
-                return [
-                    { title: 'Offer', to: `/marketplace/trade/${this.id}` },
-                    { title: 'Chat', to: `/marketplace/trade/${this.id}/chat` }
-                ];
-            },
-            trx() {
-                return this.$store.getters['assets/transactions'][this.id];
-            }
+        trx() {
+            return this.$store.getters['assets/transactions'][this.id]
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

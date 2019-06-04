@@ -1,16 +1,24 @@
 <template>
     <c-layout navigationKey="store">
-        <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+        <c-block :noGutter="true"
+                 :bgGradient="true"
+                 :onlyContentBg="true">
             <c-heading-bar
                 slot="title"
                 class="mb-0"
-                name="Browse All Realms"
-            />
+                name="Browse All Realms" />
             <div class="row">
-                <c-loading :enabled="!realms.length" size="lg" />
-                <c-metro-grid class="w-100" v-if="realms.length">
-                    <c-metro-item v-for="(realm, index) in realms" :image="realm.meta.images.logo" width="25%" :fullImage=" index == 1 ? true : false" :key="realm.id">
-                        <c-button class="h4 font-weight-bold" :to="`/realm/${realm.id}`">
+                <c-loading :enabled="!realms.length"
+                           size="lg" />
+                <c-metro-grid v-if="realms.length"
+                              class="w-100">
+                    <c-metro-item v-for="(realm, index) in realms"
+                                  :key="realm.id"
+                                  :image="realm.meta.images.logo"
+                                  width="25%"
+                                  :fullImage=" index == 1 ? true : false">
+                        <c-button class="h4 font-weight-bold"
+                                  :to="`/realm/${realm.id}`">
                             {{ realm.name }}
                         </c-button>
                         <div>
@@ -27,7 +35,7 @@
 export default {
     components: {
         'c-metro-grid': () => import('~/components/metro/grid').then(m => m.default || m),
-        'c-metro-item': () => import('~/components/metro/metro-item').then(m => m.default || m),
+        'c-metro-item': () => import('~/components/metro/metro-item').then(m => m.default || m)
     },
     data() {
         return {
@@ -73,7 +81,7 @@ export default {
         }).then(() => {
             this.loading = false
         })
-       //this.$store.commit('application/activateModal', 'coming-soon')
+        // this.$store.commit('application/activateModal', 'coming-soon')
     }
 }
 </script>

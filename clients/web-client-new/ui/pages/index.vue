@@ -1,42 +1,71 @@
 <template>
-    <c-layout navigationKey="store" :breadcrumbLinks="breadcrumbLinks">
-        <div class="row" hidden>
+    <c-layout navigationKey="store"
+              :breadcrumbLinks="breadcrumbLinks">
+        <div class="row"
+             hidden>
             <div class="col-12 mb-4">
-                <c-banner :imgSrc="'/img/banners/banner-3.png'" to="/token">
+                <c-banner :imgSrc="'/img/banners/banner-3.png'"
+                          to="/token">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <h3 class="text-yellow">Launch Sale</h3>
+                            <h3 class="text-yellow">
+                                Launch Sale
+                            </h3>
                             <p>BlockHub has launched and the token sale is now live!</p>
                         </div>
                         <div class="banner-action">
-                            <c-button tag="div" tatus="info" iconHide size="lg" to="/token">JOIN NOW</c-button>
+                            <c-button tag="div"
+                                      tatus="info"
+                                      iconHide
+                                      size="lg"
+                                      to="/token">
+                                JOIN NOW
+                            </c-button>
                         </div>
                     </div>
                 </c-banner>
             </div>
         </div>
 
-        <div class="row" hidden>
-            <div class="col-12 mb-4" v-if="!$store.state.application.desktopMode">
+        <div class="row"
+             hidden>
+            <div v-if="!$store.state.application.desktopMode"
+                 class="col-12 mb-4">
                 <c-welcome-box />
             </div>
         </div>
 
-        <c-infinite-content :list="list" :showSignIn="true" />
+        <c-infinite-content :list="list"
+                            :showSignIn="true" />
 
-        <c-custom-modal title="BlockHub Preview" v-if="showWelcomeModal" @close="closeModal">
-            <div class="help-modal__content" slot="modalBody" style="max-width: 500px">
-                <h4 class="h2 mb-3">Welcome</h4>
+        <c-custom-modal v-if="showWelcomeModal"
+                        title="BlockHub Preview"
+                        @close="closeModal">
+            <div slot="modalBody"
+                 class="help-modal__content"
+                 style="max-width: 500px">
+                <h4 class="h2 mb-3">
+                    Welcome
+                </h4>
                 <p>Welcome to the the BlockHub Preview Build. All features are enabled, with or without bugs. Gotta catch 'em all! 🐛</p>
                 <p>These features are still in active development, and may not functional properly and may not make it into production.</p>
-                <p>We believe in transparency and community-driven development, so why don't you let us know what you think!<p>
-                <p>To make things simple, hold ALT and click anywhere to send us feedback/bug reports!<p>
-                <p>Thanks for visiting and joining us on the journey to a decentralized future.</p>
-                <p hidden>We're a platform built by the community, for the community.</p>
-                <p hidden><c-button to="/help" target="_blank">Check out the BlockHub crowdfund</c-button></p>
+                <p>We believe in transparency and community-driven development, so why don't you let us know what you think!</p><p /></p><p>To make things simple, hold ALT and click anywhere to send us feedback/bug reports!</p><p /></p><p>Thanks for visiting and joining us on the journey to a decentralized future.</p>
+                <p hidden>
+                    We're a platform built by the community, for the community.
+                </p>
+                <p hidden>
+                    <c-button to="/help"
+                              target="_blank">
+                        Check out the BlockHub crowdfund
+                    </c-button>
+                </p>
             </div>
-            <div slot="modalFooter" class="text-right w-100">
-                <c-button size="md" @click="closeModal">Got it</c-button>
+            <div slot="modalFooter"
+                 class="text-right w-100">
+                <c-button size="md"
+                          @click="closeModal">
+                    Got it
+                </c-button>
             </div>
         </c-custom-modal>
     </c-layout>
@@ -48,13 +77,13 @@ import { mapGetters } from 'vuex'
 
 const updateLandingImage = function() {
     if (!process.client) { return }
-    const frontpageProduct = this.$store.state.marketplace.frontpageProduct
+    const { frontpageProduct } = this.$store.state.marketplace
 
     if (frontpageProduct && frontpageProduct.images) {
-        const header = window.document.getElementById('header-bg');
-        const randomImage = Math.floor(Math.random() * frontpageProduct.images.preview.length);
-        header.style['background-image'] = 'url(' + frontpageProduct.images.preview[randomImage] + ')';
-        header.style['background-size'] = 'cover';
+        const header = window.document.getElementById('header-bg')
+        const randomImage = Math.floor(Math.random() * frontpageProduct.images.preview.length)
+        header.style['background-image'] = `url(${frontpageProduct.images.preview[randomImage]})`
+        header.style['background-size'] = 'cover'
     }
 }
 
@@ -70,42 +99,42 @@ export default {
         'c-download-block': () => import('~/components/download-block').then(m => m.default || m),
         'c-welcome-box': () => import('~/components/welcome-box').then(m => m.default || m)
     },
-    async asyncData(context) {
-        context.store.state.application.navigationComponent = 'store'
-
-        //return new Promise((resolve, reject) => {
-            // feathersClient.authenticate({
-                
-            // }).then((response) => {
-                // feathersClient.service('collections').find({
-                //     query: {
-                //         $sort: {
-                //             createdAt: -1
-                //         },
-                //         $limit: 25
-                //     }
-                // }).then(() => {console.log(arguments)
-                //     resolve()
-                // })
-            // }, (error) => {
-            //     return reject(error) //Promise.reject(error)
-            // })
-
-            return await context.store.dispatch('collections/find', {
-                query: {
-                    $sort: {
-                        createdAt: -1
-                    },
-                    $limit: 25
-                }
-            })
-        //})
-    },
     data() {
         return {
             breadcrumbLinks: false,
-            showWelcomeModal: false //['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode) && !this.$store.state.application.settings.client.hideWelcomeModal,
+            showWelcomeModal: false // ['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode) && !this.$store.state.application.settings.client.hideWelcomeModal,
         }
+    },
+    async asyncData(context) {
+        context.store.state.application.navigationComponent = 'store'
+
+        // return new Promise((resolve, reject) => {
+        // feathersClient.authenticate({
+
+        // }).then((response) => {
+        // feathersClient.service('collections').find({
+        //     query: {
+        //         $sort: {
+        //             createdAt: -1
+        //         },
+        //         $limit: 25
+        //     }
+        // }).then(() => {console.log(arguments)
+        //     resolve()
+        // })
+        // }, (error) => {
+        //     return reject(error) //Promise.reject(error)
+        // })
+
+        return await context.store.dispatch('collections/find', {
+            query: {
+                $sort: {
+                    createdAt: -1
+                },
+                $limit: 25
+            }
+        })
+        // })
     },
     computed: {
         ...mapGetters({
@@ -120,8 +149,8 @@ export default {
                     data: this.$store.state.marketplace.frontpageProduct
                 })
             }
-            
-            if (this.$store.state.marketplace.featuredProducts.length ) {
+
+            if (this.$store.state.marketplace.featuredProducts.length) {
                 result.push({
                     type: 'featuredProductGallery',
                     data: {
@@ -131,46 +160,46 @@ export default {
                         products: this.$store.state.marketplace.featuredProducts,
                         slides: [
                             {
-                                image:  {
-                                    src:  this.$store.state.marketplace.featuredProducts[0].images.preview[0],
+                                image: {
+                                    src: this.$store.state.marketplace.featuredProducts[0].images.preview[0],
                                     position: 'center'
                                 },
                                 logo: {
-                                    src:  this.$store.state.marketplace.featuredProducts[0].images.icon,
+                                    src: this.$store.state.marketplace.featuredProducts[0].images.icon,
                                     position: 'left bottom',
-                                    size: 'lg',
+                                    size: 'lg'
                                 },
-                                title:  this.$store.state.marketplace.featuredProducts[0].name,
+                                title: this.$store.state.marketplace.featuredProducts[0].name,
                                 buttonText: 'Check it out',
-                                id:  this.$store.state.marketplace.featuredProducts[0].id
+                                id: this.$store.state.marketplace.featuredProducts[0].id
                             },
                             {
-                                image:  {
-                                    src:  this.$store.state.marketplace.featuredProducts[1].images.preview[0],
+                                image: {
+                                    src: this.$store.state.marketplace.featuredProducts[1].images.preview[0],
                                     position: 'center'
                                 },
                                 logo: {
-                                    src:  this.$store.state.marketplace.featuredProducts[1].images.icon,
+                                    src: this.$store.state.marketplace.featuredProducts[1].images.icon,
                                     position: 'left bottom',
-                                    size: 'lg',
+                                    size: 'lg'
                                 },
-                                title:  this.$store.state.marketplace.featuredProducts[1].name,
+                                title: this.$store.state.marketplace.featuredProducts[1].name,
                                 buttonText: 'Check it out',
-                                id:  this.$store.state.marketplace.featuredProducts[1].id
+                                id: this.$store.state.marketplace.featuredProducts[1].id
                             },
                             {
-                                image:  {
-                                    src:  this.$store.state.marketplace.featuredProducts[2].images.preview[0],
+                                image: {
+                                    src: this.$store.state.marketplace.featuredProducts[2].images.preview[0],
                                     position: 'center'
                                 },
                                 logo: {
-                                    src:  this.$store.state.marketplace.featuredProducts[2].images.icon,
+                                    src: this.$store.state.marketplace.featuredProducts[2].images.icon,
                                     position: 'left bottom',
-                                    size: 'lg',
+                                    size: 'lg'
                                 },
-                                title:  this.$store.state.marketplace.featuredProducts[2].name,
+                                title: this.$store.state.marketplace.featuredProducts[2].name,
                                 buttonText: 'Check it out',
-                                id:  this.$store.state.marketplace.featuredProducts[2].id
+                                id: this.$store.state.marketplace.featuredProducts[2].id
                             }
                         ]
                     }
@@ -182,7 +211,7 @@ export default {
                 data: {
                     collectionsList: this.$store.getters['collections/list'],
                     ref: 'collectionsSlider',
-                    swiper: this.$refs.collectionsSlider && this.$refs.collectionsSlider.swiper,
+                    swiper: this.$refs.collectionsSlider && this.$refs.collectionsSlider.swiper
                 }
             })
 
@@ -215,7 +244,7 @@ export default {
                             title: 'Top Collections',
                             subtitle: 'Our community has curated the best ones for you',
                             to: '/collections'
-                        },
+                        }
                     ]
                 }
             })
@@ -241,9 +270,9 @@ export default {
                 }
             })
 
-            if (this.$store.state.application.darklaunchFlags
-            && this.$store.state.application.account.darklaunchFlags
-            && isVisible(this.$store.state.application.darklaunchFlags, this.$store.state.application.account.darklaunchFlags, 'CURATORS')) {
+            if (this.$store.state.application.darklaunchFlags &&
+            this.$store.state.application.account.darklaunchFlags &&
+            isVisible(this.$store.state.application.darklaunchFlags, this.$store.state.application.account.darklaunchFlags, 'CURATORS')) {
                 result.push({
                     type: 'curatorReviews',
                     data: {
@@ -257,7 +286,7 @@ export default {
                                 768: {
                                     slidesPerView: 1,
                                     spaceBetween: 0
-                                },
+                                }
                             }
                         },
                         reviews: this.$store.state.marketplace.curatorReviews
@@ -266,13 +295,13 @@ export default {
             }
 
             const groupBy = function(xs, key) {
-                return xs.reduce(function(rv, x) {
+                return xs.reduce((rv, x) => {
                     if (!x[key]) return rv;
-                    (rv[x[key]] = rv[x[key]] || []).push(x);
-                    return rv;
-                }, {}) || null;
-            };
-            
+                    (rv[x[key]] = rv[x[key]] || []).push(x)
+                    return rv
+                }, {}) || null
+            }
+
             result.push({
                 type: 'productNews',
                 data: {
@@ -285,9 +314,8 @@ export default {
                                 title: target.name,
                                 developer: target.developer
                             }
-                        } else {
-                            return undefined
                         }
+                        return undefined
                     }),
                     lists: Object.values(groupBy(this.$store.state.marketplace.posts, 'targetId'))
                 }
@@ -304,7 +332,7 @@ export default {
                             768: {
                                 slidesPerView: 1,
                                 spaceBetween: 0
-                            },
+                            }
                         }
                     },
                     projects: this.$store.state.funding.trendingProjects
@@ -320,21 +348,13 @@ export default {
             })
 
             return result
-        },
+        }
         // products() {
         //     if (this.$store.state.cache.screens['/store'] && this.$store.state.cache.screens['/store'].products)
         //         return this.$store.state.cache.screens['/store'].products
 
         //     return this.$store.state.marketplace.products
         // },
-    },
-    methods: {
-        closeModal() {
-            this.showWelcomeModal = false
-            this.$store.commit('application/updateClientSettings', { key: 'hideWelcomeModal', value: true })
-        }
-    },
-    watch: {
     },
     mounted() {
         updateLandingImage.call(this)
@@ -345,6 +365,14 @@ export default {
     beforeDestroy() {
         if (!process.client) { return }
         window.document.getElementById('header-bg').style['background-image'] = 'url(/img/backgrounds/1.jpg)'
+    },
+    methods: {
+        closeModal() {
+            this.showWelcomeModal = false
+            this.$store.commit('application/updateClientSettings', { key: 'hideWelcomeModal', value: true })
+        }
+    },
+    watch: {
     }
 }
 </script>

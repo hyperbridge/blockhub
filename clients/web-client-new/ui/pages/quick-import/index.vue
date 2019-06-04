@@ -1,62 +1,93 @@
 <template>
     <c-layout navigationKey="store">
         <div class="row">
-            <div class="col-12 col-lg-6" v-if="!quickImport && !integrateLocally">
-                <c-block title="Quick import" bgGradient noGutter onlyContentBg>
+            <div v-if="!quickImport && !integrateLocally"
+                 class="col-12 col-lg-6">
+                <c-block title="Quick import"
+                         bgGradient
+                         noGutter
+                         onlyContentBg>
                     <div class="text-center pb-4">
                         <p>Sed posuere varius ex id ullamcorper. Donec et aliquet mi, in tincidunt massa. Maecenas ornare, elit nec condimentum semper</p>
-                        <c-button status="second-info" size="md" class="mt-3 px-5" @click=" quickImport = true">
+                        <c-button status="second-info"
+                                  size="md"
+                                  class="mt-3 px-5"
+                                  @click=" quickImport = true">
                             Continue
                         </c-button>
                         <small class="text-muted d-block text-center mt-2">
-                            <i class="fas fa-lock mr-2"></i>Authentication required
+                            <i class="fas fa-lock mr-2" />Authentication required
                         </small>
                     </div>
                 </c-block>
             </div>
-            <div class="col-12 col-lg-6" v-if="!quickImport && !integrateLocally">
-                <c-block title="Integrate locally" bgGradient noGutter onlyContentBg>
+            <div v-if="!quickImport && !integrateLocally"
+                 class="col-12 col-lg-6">
+                <c-block title="Integrate locally"
+                         bgGradient
+                         noGutter
+                         onlyContentBg>
                     <div class="text-center pb-4">
                         <p>Sed posuere varius ex id ullamcorper. Donec et aliquet mi, in tincidunt massa. Maecenas ornare, elit nec condimentum semper</p>
-                        <c-button status="second-info" size="md" class="mt-3 px-5" @click=" integrateLocally = true">
+                        <c-button status="second-info"
+                                  size="md"
+                                  class="mt-3 px-5"
+                                  @click=" integrateLocally = true">
                             View Guide
                         </c-button>
                         <small class="text-success d-block text-center mt-2">
-                            <i class="fas fa-eye-slash mr-2"></i> No Auth / Code Access
+                            <i class="fas fa-eye-slash mr-2" /> No Auth / Code Access
                         </small>
                     </div>
                 </c-block>
             </div>
 
             <!--Second step on Quick import-->
-            <div class="col-12" v-if="signedIn && quickImport">
-                <c-block title="Quick import" bgGradient noGutter onlyContentBg>
+            <div v-if="signedIn && quickImport"
+                 class="col-12">
+                <c-block title="Quick import"
+                         bgGradient
+                         noGutter
+                         onlyContentBg>
                     <p class="mb-2">
                         Automatically analyze from code host for easy initial result.
                     </p>
-                    <c-button status="plain" icon="arrow-left" class="mb-3" @click=" quickImport=false ">
+                    <c-button status="plain"
+                              icon="arrow-left"
+                              class="mb-3"
+                              @click=" quickImport=false ">
                         Go Back
                     </c-button>
                     <div class="row">
-                        <div class="col-12 col-md-6 col-lg-4 mb-4" v-for="service in services">
-                            <c-icon-block :icon="service.icon" iconType="fab" size="md" class="icon-block-border w-100">
+                        <div v-for="service in services"
+                             class="col-12 col-md-6 col-lg-4 mb-4">
+                            <c-icon-block :icon="service.icon"
+                                          iconType="fab"
+                                          size="md"
+                                          class="icon-block-border w-100">
                                 <div class="h4 p-0">
                                     {{ service.name }}
                                 </div>
                             </c-icon-block>
                         </div>
-                        <div class="col-12 mb-4" hidden>
-                            <div class="file-drag-zone" id="drag-zone" @drop="dropHandler(event)" @dragover="dragOverHandler(event)">
+                        <div class="col-12 mb-4"
+                             hidden>
+                            <div id="drag-zone"
+                                 class="file-drag-zone"
+                                 @drop="dropHandler(event)"
+                                 @dragover="dragOverHandler(event)">
                                 Drag zone
                             </div>
                         </div>
                     </div>
                 </c-block>
             </div>
-            <div class="col-12" v-if="!signedIn && quickImport">
+            <div v-if="!signedIn && quickImport"
+                 class="col-12">
                 <div class="h6">
                     You are not signed in. Please
-                    <c-button status="plain" @click="$store.commit('application/activateModal', 'login')">
+                    <c-button status="plain"
+                              @click="$store.commit('application/activateModal', 'login')">
                         Sign In
                     </c-button>
                     to continue.
@@ -67,76 +98,76 @@
 </template>
 
 <script>
-    export default {
-        components: {
-            'c-icon-block': () => import('~/components/block/with-icon').then(m => m.default || m)
-        },
-        data(){
-            return{
-                quickImport: false,
-                integrateLocally: false,
-                services: [
-                    {
-                        name: 'GitHub',
-                        icon: 'github'
-                    },
-                    {
-                        name: 'BitBucket',
-                        icon: 'bitbucket'
-                    },
-                    {
-                        name: 'GitKraken',
-                        icon: 'gitkraken'
-                    },
-                    {
-                        name: 'GitHub',
-                        icon: 'github'
-                    },
-                    {
-                        name: 'BitBucket',
-                        icon: 'bitbucket'
-                    },
-                    {
-                        name: 'GitKraken',
-                        icon: 'gitkraken'
-                    }
-                ]
-            }
-        },
-        computed: {
-            signedIn() {
-                return this.$store.state.application.signedIn
-            },
-        },
-        methods: {
-            dropHandler(ev) {
-                console.log('File(s) dropped');
+export default {
+    components: {
+        'c-icon-block': () => import('~/components/block/with-icon').then(m => m.default || m)
+    },
+    data() {
+        return {
+            quickImport: false,
+            integrateLocally: false,
+            services: [
+                {
+                    name: 'GitHub',
+                    icon: 'github'
+                },
+                {
+                    name: 'BitBucket',
+                    icon: 'bitbucket'
+                },
+                {
+                    name: 'GitKraken',
+                    icon: 'gitkraken'
+                },
+                {
+                    name: 'GitHub',
+                    icon: 'github'
+                },
+                {
+                    name: 'BitBucket',
+                    icon: 'bitbucket'
+                },
+                {
+                    name: 'GitKraken',
+                    icon: 'gitkraken'
+                }
+            ]
+        }
+    },
+    computed: {
+        signedIn() {
+            return this.$store.state.application.signedIn
+        }
+    },
+    methods: {
+        dropHandler(ev) {
+            console.log('File(s) dropped')
 
-                // Prevent default behavior (Prevent file from being opened)
-                ev.preventDefault();
+            // Prevent default behavior (Prevent file from being opened)
+            ev.preventDefault()
 
-                if (ev.dataTransfer.items) {
-                    // Use DataTransferItemList interface to access the file(s)
-                    for (var i = 0; i < ev.dataTransfer.items.length; i++) {
-                        // If dropped items aren't files, reject them
-                        if (ev.dataTransfer.items[i].kind === 'file') {
-                            var file = ev.dataTransfer.items[i].getAsFile();
-                            console.log('... file[' + i + '].name = ' + file.name);
-                        }
-                    }
-                } else {
-                    // Use DataTransfer interface to access the file(s)
-                    for (var i = 0; i < ev.dataTransfer.files.length; i++) {
-                        console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
+            if (ev.dataTransfer.items) {
+                // Use DataTransferItemList interface to access the file(s)
+                for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+                    // If dropped items aren't files, reject them
+                    if (ev.dataTransfer.items[i].kind === 'file') {
+                        const file = ev.dataTransfer.items[i].getAsFile()
+                        console.log(`... file[${i}].name = ${file.name}`)
                     }
                 }
-            },
-            dragOverHandler(ev) {
-                console.log('File(s) in drop zone');
-                ev.preventDefault();
+            } else {
+                // Use DataTransfer interface to access the file(s)
+                for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+                    console.log(`... file[${i}].name = ${ev.dataTransfer.files[i].name}`)
+                }
             }
+        },
+        dragOverHandler(ev) {
+            console.log('File(s) in drop zone')
+            ev.preventDefault()
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

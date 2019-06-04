@@ -4,40 +4,60 @@
             <div class="filter d-flex justify-content-between">
                 <div class="form-group">
                     <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Search"
+                               aria-label="Search">
                         <div class="input-group-append">
                             <span class="input-group-text">
-                                <i class="fas fa-search"></i>
+                                <i class="fas fa-search" />
                             </span>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <c-button status="info" iconHide to="/project/new" v-if="$store.state.application.developerMode">Propose Idea</c-button>
-                    <c-button status="info" iconHide @click="$store.commit('application/activateModal', 'propose-idea')" v-if="!$store.state.application.developerMode">Propose Idea</c-button>
+                    <c-button v-if="$store.state.application.developerMode"
+                              status="info"
+                              iconHide
+                              to="/project/new">
+                        Propose Idea
+                    </c-button>
+                    <c-button v-if="!$store.state.application.developerMode"
+                              status="info"
+                              iconHide
+                              @click="$store.commit('application/activateModal', 'propose-idea')">
+                        Propose Idea
+                    </c-button>
                 </div>
             </div>
         </div>
 
         <div class="col-12">
-            <c-block title="Top 3 Ideas" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+            <c-block title="Top 3 Ideas"
+                     :noGutter="true"
+                     :bgGradient="true"
+                     :onlyContentBg="true">
                 <div class="row">
-                    <div class="col-12 col-md-6 col-lg-3" v-if="projects.length">
+                    <div v-if="projects.length"
+                         class="col-12 col-md-6 col-lg-3">
                         <c-project-card
                             v-for="(project, index) in projects"
+                            :id="project.id"
                             :key="index"
                             :image="project.images.mediumTile"
                             :description="project.description"
                             :funds="project.funds"
                             :name="project.name"
                             :developer="product.developer"
-                            :id="project.id"
                             :showGame="false"
-                            class="margin-0 w-100"
-                        />
+                            class="margin-0 w-100" />
                     </div>
-                    <div class="col-12" v-else>
-                        Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?
+                    <div v-else
+                         class="col-12">
+                        Nothing could be found. Want to <c-button status="plain"
+                                                                  @click="$store.commit('application/activateModal', 'coming-soon')">
+                            Check for updates
+                        </c-button>?
                     </div>
                 </div>
             </c-block>
@@ -47,11 +67,11 @@
 
 <script>
 export default {
-    props: ['product'],
     components: {
         'c-tags': () => import('~/components/tags').then(m => m.default || m),
         'c-project-card': () => import('~/components/project/card').then(m => m.default || m)
     },
+    props: ['product'],
     computed: {
         projects() {
             return this.$db.funding.projects.find({ 'targetId': { '$eq': this.product.id } }) || []
