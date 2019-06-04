@@ -146,7 +146,7 @@
                         </div>
 
                         <!--Add New Wallet Block Empty div-->
-                        <div v-if="!set_new_wallets"
+                        <div v-if="!setNewWallets"
                              class="wallet-item empty-item new-wallet"
                              @click="addNewWallet">
                             <div class="empty-overlay">
@@ -156,12 +156,12 @@
                         </div>
 
                         <!--Add New Wallet Block Empty Model-->
-                        <div v-if="set_new_wallets"
+                        <div v-if="setNewWallets"
                              class="wallet-item">
                             <!--Search block(currency list) off-->
-                            <div v-if="!search_blk"
+                            <div v-if="!searchBlock"
                                  class="wallet-item__info">
-                                <div v-if="set_new_wallets_step_1"
+                                <div v-if="setNewWalletsStep1"
                                      class="wallet-item__head">
                                     <div class="wallet-item__name">
                                         <a href="#"
@@ -169,30 +169,30 @@
                                            @click="showCurrencyList">
                                             <i class="fas fa-angle-down" />
                                         </a>
-                                        {{ new_wallets.name }}
+                                        {{ newWallets.name }}
                                     </div>
                                     <div class="wallet-item__count">
                                         <span>
-                                            {{ new_wallets.shortName }}
+                                            {{ newWallets.shortName }}
                                         </span>
                                         <span>
-                                            {{ new_wallets.count }}
+                                            {{ newWallets.count }}
                                         </span>
                                     </div>
                                 </div>
-                                <div v-if="set_new_wallets_step_2"
+                                <div v-if="setNewWalletsStep2"
                                      class="wallet-item__head">
                                     <div class="wallet-item__name"
-                                         :class="{ preferred: new_wallets.preferredSwitcher }">
+                                         :class="{ preferred: newWallets.preferredSwitcher }">
                                         <i class="fab fa-bitcoin" />
-                                        {{ new_wallets.name }}
+                                        {{ newWallets.name }}
                                     </div>
                                     <div class="wallet-item__count">
                                         <span>
-                                            {{ new_wallets.shortName }}
+                                            {{ newWallets.shortName }}
                                         </span>
                                         <span>
-                                            {{ new_wallets.count }}
+                                            {{ newWallets.count }}
                                         </span>
                                     </div>
                                 </div>
@@ -200,7 +200,7 @@
                                     <div class="wallet-item__graph" />
                                     <div class="wallet-item__history">
                                         <ul>
-                                            <li v-for="(item, index) in new_wallets.history"
+                                            <li v-for="(item, index) in newWallets.history"
                                                 :key="index"
                                                 :class="item.direction">
                                                 <span class="time">
@@ -219,20 +219,20 @@
                                         </ul>
                                     </div>
                                     <div class="wallet-item__wallet_address">
-                                        <span id="new_walletNumber">{{ new_wallets.walletNumber }}</span>
-                                        <i v-if="set_new_wallets_step_1"
+                                        <span id="new_walletNumber">{{ newWallets.walletNumber }}</span>
+                                        <i v-if="setNewWalletsStep1"
                                            class="fas fa-redo"
                                            style="color: #c25a5c"
                                            @click="generateNewWalletNumber" />
                                         <i v-else
                                            class="fas fa-copy"
-                                           @click="copyWalletNumber(new_wallets.walletNumber)" />
+                                           @click="copyWalletNumber(newWallets.walletNumber)" />
                                     </div>
                                 </div>
                             </div>
 
                             <!--Search block(currency list) on-->
-                            <div v-if="search_blk"
+                            <div v-if="searchBlock"
                                  class="wallet-item__search-block">
                                 <div class="input-group input-group-sm">
                                     <input type="text"
@@ -246,7 +246,7 @@
                                     </div>
                                 </div>
                                 <ul>
-                                    <li v-for="(currency, index) in currency_choices"
+                                    <li v-for="(currency, index) in currencyChoices"
                                         :key="index"
                                         @click="choseCurrency(currency.name, currency.shortName)">
                                         <div class="float-left">
@@ -262,7 +262,7 @@
                             <div class="wallet-item__footer">
                                 <div class="wallet-item__preferredSwitcher">
                                     <label class="switch switch-sm">
-                                        <input v-model="new_wallets.preferredSwitcher"
+                                        <input v-model="newWallets.preferredSwitcher"
                                                type="checkbox"
                                                name="preeferred"
                                                checked=""
@@ -270,7 +270,7 @@
                                         <span>Preferred</span>
                                     </label>
                                 </div>
-                                <div v-if="set_new_wallets_step_1"
+                                <div v-if="setNewWalletsStep1"
                                      class="wallet-item__action">
                                     <a class="btn btn-sm btn-success"
                                        @click="nextStep">
@@ -303,13 +303,9 @@
 
 <script>
 export default {
-    name: 'Wallets',
-    components: {
-        'c-layout': () => import('~/components/front-layout').then(m => m.default || m)
-    },
     data() {
         return {
-            new_wallets: {
+            newWallets: {
                 'id': '',
                 'name': '--',
                 'icon': '',
@@ -335,11 +331,11 @@ export default {
                 'walletNumber': 'xxxxxxxxxxxxxxxxxxxx',
                 'preferredSwitcher': true
             },
-            set_new_wallets: false,
-            set_new_wallets_step_1: false,
-            set_new_wallets_step_2: false,
-            search_blk: false,
-            currency_choices: [
+            setNewWallets: false,
+            setNewWalletsStep1: false,
+            setNewWalletsStep2: false,
+            searchBlock: false,
+            currencyChoices: [
                 {
                     name: 'Bitcoin',
                     shortName: 'BTC'
@@ -377,26 +373,26 @@ export default {
             alert(`You have copy wallet number - ${number}`)
         },
         addNewWallet() {
-            this.set_new_wallets = true
-            this.set_new_wallets_step_1 = true
+            this.setNewWallets = true
+            this.setNewWalletsStep1 = true
         },
         nextStep() {
-            this.set_new_wallets_step_1 = false
-            this.set_new_wallets_step_2 = true
+            this.setNewWalletsStep1 = false
+            this.setNewWalletsStep2 = true
         },
         generateNewWalletNumber() {
             let text = ''
             const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
             for (let i = 0; i < 25; i++) { text += possible.charAt(Math.floor(Math.random() * possible.length)) }
-            this.new_wallets.walletNumber = text
+            this.newWallets.walletNumber = text
         },
         showCurrencyList() {
-            this.search_blk = true
+            this.searchBlock = true
         },
         choseCurrency(name, shortName) {
-            this.search_blk = false
-            this.new_wallets.name = name
-            this.new_wallets.shortName = shortName
+            this.searchBlock = false
+            this.newWallets.name = name
+            this.newWallets.shortName = shortName
             this.generateNewWalletNumber()
         }
     }
