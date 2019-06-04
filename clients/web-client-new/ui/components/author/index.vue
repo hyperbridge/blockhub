@@ -1,8 +1,8 @@
 <template>
     <div class="author">
         <c-img class="author__img"
-               :src="dnUser.img" />
-        {{ dnUser.name }}
+               :src="img" />
+        {{ name }}
     </div>
 </template>
 
@@ -10,18 +10,13 @@
 export default {
     name: 'Author',
     props: {
-        author: {
-            type: Object,
+        img: {
+            type: String,
             required: false
         },
-        user: {
-            type: Object,
+        name: {
+            type: String,
             required: false
-        }
-    },
-    computed: {
-        dnUser() {
-            return this.author || this.user
         }
     }
 }

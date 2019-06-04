@@ -235,9 +235,9 @@
                         :key="index"
                         class="p-2 col-12 col-md-6 col-lg-4 col-xl-3">
                         <c-project-card
+                            :id="project.id"
                             :image="project.meta.images && project.meta.images.mediumTile"
                             :description="project.description"
-                            :id="project.id"
                             :funds="project.meta.funds"
                             :parentName="project.product && project.product.name"
                             :parentDeveloper="project.product && project.product.developer"
@@ -267,14 +267,17 @@ import { debounce } from '@/mixins'
 
 export default {
     components: {
-        'c-searcher': () => import('~/components/searcher').then(m => m.default || m),
         'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
-        'c-game-grid': () => import('~/components/game-grid/with-description').then(m => m.default || m),
         'c-project-card': () => import('~/components/project/card').then(m => m.default || m),
         'c-option-tag': () => import('~/components/option-tag').then(m => m.default || m),
         'c-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m),
         'c-list': () => import('~/components/list').then(m => m.default || m),
         'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m)
+    },
+    filters: {
+        replaceLoDash(val) {
+            return val.replace(/_/g, ' ')
+        }
     },
     mixins: [debounce],
     data() {
@@ -306,6 +309,52 @@ export default {
                 { prop: 'mac', icon: 'apple', name: 'macOS', selected: false },
                 { prop: 'linux', icon: 'linux', name: 'Linux', selected: false }
             ]
+        }
+    },
+    mounted() {
+        if (Object.keys(this.$route.query).length) {
+            this.loading = true
+            const {
+                tags,
+                langs,
+                name,
+                priceMin,
+                priceMax,
+                specials,
+                showFilters,
+                activeUsers,
+                communitySize,
+                platforms
+            } = this.$route.query
+
+            if (name) this.phrase = name
+            if (priceMin) this.price.min = priceMin
+            if (priceMax) this.price.max = priceMax
+
+            this.selectableTags = this.productsTags.map(tag => ({
+                name: tag, selected: tags && tags.includes(tag)
+            }))
+
+            this.selectableLanguages = this.languages.map(lang => ({
+                name: lang, selected: Boolean(langs && langs.includes(lang))
+            }))
+
+            if (showFilters) this.expandFilters = true
+            if (activeUsers) this.activeUsers = activeUsers
+            if (communitySize) this.communitySize = communitySize
+            if (platforms) {
+                this.platforms.forEach(platform => {
+                    if (platforms.includes(platform.prop)) platform.selected = true
+                })
+            }
+
+            if (specials) {
+                this.tags.forEach(tag => {
+                    if (specials.includes(tag.value)) tag.selected = true
+                })
+            }
+        } else {
+            this.results = this.products
         }
     },
     methods: {
@@ -448,57 +497,6 @@ export default {
         urlQuery: {
             handler: 'search',
             deep: true
-        }
-    },
-    mounted() {
-        if (!Object.keys(this.$route.query).length) {
-            this.results = this.products
-        } else {
-            this.loading = true
-            const {
-                tags,
-                langs,
-                name,
-                priceMin,
-                priceMax,
-                specials,
-                showFilters,
-                activeUsers,
-                communitySize,
-                platforms
-            } = this.$route.query
-
-            if (name) this.phrase = name
-            if (priceMin) this.price.min = priceMin
-            if (priceMax) this.price.max = priceMax
-
-            this.selectableTags = this.productsTags.map(tag => ({
-                name: tag, selected: tags && tags.includes(tag)
-            }))
-
-            this.selectableLanguages = this.languages.map(lang => ({
-                name: lang, selected: Boolean(langs && langs.includes(lang))
-            }))
-
-            if (showFilters) this.expandFilters = true
-            if (activeUsers) this.activeUsers = activeUsers
-            if (communitySize) this.communitySize = communitySize
-            if (platforms) {
-                this.platforms.forEach(platform => {
-                    if (platforms.includes(platform.prop)) platform.selected = true
-                })
-            }
-
-            if (specials) {
-                this.tags.forEach(tag => {
-                    if (specials.includes(tag.value)) tag.selected = true
-                })
-            }
-        }
-    },
-    filters: {
-        replaceLoDash(val) {
-            return val.replace(/_/g, ' ')
         }
     }
 }

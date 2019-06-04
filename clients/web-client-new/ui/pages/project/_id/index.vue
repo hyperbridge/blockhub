@@ -553,23 +553,27 @@ export default {
         }
     },
     beforeDestroy() {
-        window.document.getElementById('header-bg').style['background-image'] = 'url(/img/backgrounds/1.jpg)'
+        if (process.client) {
+            window.document.getElementById('header-bg').style['background-image'] = 'url(/img/backgrounds/1.jpg)'
+        }
     },
     updated() {
-        $('#summernote').summernote({
-            placeholder: 'Type in your text',
-            tabsize: 2,
-            height: 300,
-            callbacks: {
-                onBlur: () => {
-                    Vue.set(this.project, 'content', $('#summernote').summernote('code'))
+        if (process.client) {
+            $('#summernote').summernote({
+                placeholder: 'Type in your text',
+                tabsize: 2,
+                height: 300,
+                callbacks: {
+                    onBlur: () => {
+                        Vue.set(this.project, 'content', $('#summernote').summernote('code'))
+                    }
                 }
-            }
-        })
+            })
 
-        // $('#ise_default').ionRangeSlider({
-        //     from: 15
-        // })
+            // $('#ise_default').ionRangeSlider({
+            //     from: 15
+            // })
+        }
     },
     methods: {
         showTab(name) {

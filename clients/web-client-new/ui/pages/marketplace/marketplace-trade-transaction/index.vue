@@ -61,7 +61,8 @@
                         <div class="transaction__block">
                             <div class="transaction__headings">
                                 <h4>{{ transaction.contractor.user.name }}'s selling offer</h4>
-                                <c-author :author="transaction.contractor.user" />
+                                <c-author :name="transaction.contractor.user.name"
+                                          :img="transaction.contractor.user.img" />
                                 <h4>{{ transaction.contractor.user.name }}'s inventory</h4>
                             </div>
                             <div class="transaction__management">

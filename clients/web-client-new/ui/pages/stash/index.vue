@@ -16,7 +16,6 @@ export default {
         list() {
             const result = []
 
-
             return result
         }
     },

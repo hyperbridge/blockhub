@@ -45,7 +45,8 @@
             <div class="transaction__block">
                 <div class="transaction__headings">
                     <h4>For {{ trx.contractor.name }}'s</h4>
-                    <c-author :author="trx.contractor" />
+                    <c-author :name="trx.contractor.name"
+                              :img="trx.contractor.img" />
                     <h4>{{ trx.contractor.name }}'s inventory</h4>
                 </div>
                 <div class="transaction__management">

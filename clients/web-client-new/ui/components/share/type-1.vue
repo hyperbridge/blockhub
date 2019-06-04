@@ -11,7 +11,8 @@
                     </h5>
                     <c-author v-for="(author, index) in favoritesList"
                               :key="index"
-                              :author="author" />
+                              :name="author.name"
+                              :img="author.img" />
                 </div>
                 <div class="list">
                     <h5>
@@ -19,7 +20,8 @@
                     </h5>
                     <c-author v-for="(author, index) in onlineList"
                               :key="index"
-                              :author="author" />
+                              :name="author.name"
+                              :img="author.img" />
                 </div>
             </div>
         </div>

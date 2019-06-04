@@ -92,6 +92,7 @@
         4
       ],
       "vue/attribute-hyphenation": 0,
+      "max-statements-per-line": 2,
       "quote-props": 0,
       "indent": [
         "error",

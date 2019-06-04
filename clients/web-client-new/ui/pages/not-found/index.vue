@@ -21,8 +21,6 @@
 
 <script>
 export default {
-    components: {
-    },
     created() {
         if (process.client) {
             $('body').addClass('screen--not-found')

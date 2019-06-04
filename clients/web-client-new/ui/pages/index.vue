@@ -93,10 +93,8 @@ function isVisible(availableFlags, userFlags, code, variant, data) {
 
 export default {
     components: {
-        'c-layout': () => import('~/components/front-layout').then(m => m.default || m),
         'c-banner': () => import('~/components/banner/simple').then(m => m.default || m),
         'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
-        'c-download-block': () => import('~/components/download-block').then(m => m.default || m),
         'c-welcome-box': () => import('~/components/welcome-box').then(m => m.default || m)
     },
     data() {
@@ -371,8 +369,6 @@ export default {
             this.showWelcomeModal = false
             this.$store.commit('application/updateClientSettings', { key: 'hideWelcomeModal', value: true })
         }
-    },
-    watch: {
     }
 }
 </script>

@@ -5,9 +5,9 @@
 </template>
 
 <script>
-    export default {
-        components: {
-            'c-settings' : () => import('~/components/settings').then(m => m.default || m),
-        }
+export default {
+    components: {
+        'c-settings': () => import('~/components/settings').then(m => m.default || m)
     }
+}
 </script>

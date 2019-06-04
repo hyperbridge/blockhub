@@ -29,7 +29,8 @@
                        @close="toggleModal">
             <template v-for="comment in comments">
                 <div class="mb-3">
-                    <c-author :author="comment.author"
+                    <c-author :name="comment.author.name"
+                              :img="comment.author.img"
                               class="mb-1" />
                     {{ comment.text }}
                 </div>

@@ -28,7 +28,6 @@
 <script>
 export default {
     components: {
-        'c-tags': () => import('~/components/tags').then(m => m.default || m),
         'c-item': () => import('~/components/community/post-item').then(m => m.default || m),
         'c-post-comment': () => import('~/components/community/comment').then(m => m.default || m)
     },

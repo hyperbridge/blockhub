@@ -3,7 +3,7 @@
         <!-- <span v-translate>{{ msg }}</span> -->
         <div v-if="showDiv"
              v-click-outside="clicked"
-             class="divv">
+             class="div">
             Test
         </div>
         <input v-model.number="id"

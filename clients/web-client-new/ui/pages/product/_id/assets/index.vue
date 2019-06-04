@@ -15,7 +15,6 @@
 <script>
 export default {
     components: {
-        'c-tags': () => import('~/components/tags').then(m => m.default || m),
         'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m),
         'c-assets-list-item': () => import('~/components/assets-list-item').then(m => m.default || m)
     },

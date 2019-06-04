@@ -3,7 +3,8 @@
         <c-img :src="review.game.img"
                class="curator-review__img" />
         <div class="curator-review__header">
-            <c-author :author="review.author" />
+            <c-author :name="review.author.name"
+                      :img="review.author.img" />
             <span style="font-size: 22px">
                 <i class="fas fa-star" />
                 <strong>{{ review.rate }}</strong>

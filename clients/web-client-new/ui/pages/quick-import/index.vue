@@ -60,6 +60,7 @@
                     </c-button>
                     <div class="row">
                         <div v-for="service in services"
+                             :key="service.name"
                              class="col-12 col-md-6 col-lg-4 mb-4">
                             <c-icon-block :icon="service.icon"
                                           iconType="fab"
@@ -148,7 +149,7 @@ export default {
 
             if (ev.dataTransfer.items) {
                 // Use DataTransferItemList interface to access the file(s)
-                for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+                for (let i = 0; i < ev.dataTransfer.items.length; i++) {
                     // If dropped items aren't files, reject them
                     if (ev.dataTransfer.items[i].kind === 'file') {
                         const file = ev.dataTransfer.items[i].getAsFile()
@@ -157,7 +158,7 @@ export default {
                 }
             } else {
                 // Use DataTransfer interface to access the file(s)
-                for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+                for (let i = 0; i < ev.dataTransfer.files.length; i++) {
                     console.log(`... file[${i}].name = ${ev.dataTransfer.files[i].name}`)
                 }
             }

@@ -1,12 +1,12 @@
 <template>
     <c-layout navigationKey="project">
-        <div v-if="post"
+        <div v-if="update"
              class="row">
             <div class="col-12">
                 <h2>
-                    {{ post.title }}
+                    {{ update.title }}
                 </h2>
-                <div v-html="post.text" />
+                <div v-html="update.text" />
             </div>
         </div>
         <div v-else
@@ -41,12 +41,7 @@ const updateProject = function() {
 
 export default {
     components: {
-        'c-layout': () => import('~/components/front-layout').then(m => m.default || m),
-        'c-block': () => import('~/components/block').then(m => m.default || m),
-        'c-tags': () => import('~/components/tags').then(m => m.default || m),
-        'c-badges': () => import('~/components/project/badges').then(m => m.default || m)
     },
-    props: ['projectID', 'postID'],
     data() {
         return {
             id: this.projectID
@@ -54,9 +49,9 @@ export default {
     },
     computed: {
         project: updateProject,
-        post() {
+        update() {
             return this.project.updates.find(obj => {
-                if (obj.id === Number(this.postID)) { return obj }
+                if (obj.id === Number(this.$route.params.id)) { return obj }
                 return false
             })
         }

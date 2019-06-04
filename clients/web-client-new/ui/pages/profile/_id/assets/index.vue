@@ -5,7 +5,6 @@
 <script>
 export default {
     components: {
-        'c-layout': () => import('~/components/front-layout').then(m => m.default || m)
     },
     data: () => ({
         items: []

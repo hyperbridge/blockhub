@@ -14,7 +14,8 @@
         <div
             class="trade-offer__content"
             @click="expandDetails()">
-            <c-author :author="offer.contractor" />
+            <c-author :name="offer.contractor.name"
+                      :img="offer.contractor.img" />
             <span>
                 Trade {{ offer.yourOffer.length }} for {{ offer.contractorOffer.length }} assets
             </span>
