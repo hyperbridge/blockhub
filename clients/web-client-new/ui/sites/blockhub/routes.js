@@ -809,7 +809,7 @@ export default [
         name: 'Admin',
         component: () => import('~/pages/business').then(m => m.default || m),
         meta: {
-            area: 'business',
+            area: 'business'
         },
         children: [
             {
@@ -819,7 +819,7 @@ export default [
                 meta: {
                     title: 'Admin',
                     breadcrumb: [
-                        { path: '/admin', title: 'Dashboard' },
+                        { path: '/admin', title: 'Dashboard' }
                     ]
                 }
             }
@@ -932,7 +932,7 @@ export default [
         component: () => import('~/pages/business').then(m => m.default || m),
         meta: {
             area: 'business',
-            permission: 'signedIn',
+            permission: 'signedIn'
         },
         children: [
             {
@@ -943,7 +943,7 @@ export default [
                     title: 'Business',
                     permission: 'signedIn',
                     breadcrumb: [
-                        { to: '/business', title: 'Dashboard' },
+                        { to: '/business', title: 'Dashboard' }
                     ]
                 }
             },
@@ -988,7 +988,7 @@ export default [
                         { title: 'Release page' }
                     ]
                 }
-            },
+            }
         ]
     },
     {
@@ -998,7 +998,7 @@ export default [
             {
                 path: '',
                 name: 'Marketplace',
-                component: () => import('~/pages/marketplace/home').then(m => m.default || m),
+                component: () => import('~/pages/marketplace/home').then(m => m.default || m)
             },
             {
                 path: 'trade',
@@ -1007,7 +1007,7 @@ export default [
                     {
                         path: '',
                         name: 'Marketplace Trade Manager',
-                        component: () => import('~/pages/marketplace/trade/home').then(m => m.default || m),
+                        component: () => import('~/pages/marketplace/trade/home').then(m => m.default || m)
                     },
                     {
                         path: 'explorer',
@@ -1017,12 +1017,12 @@ export default [
                     {
                         path: 'history',
                         name: 'Marketplace Trade History',
-                        component: () => import('~/pages/marketplace/trade/history').then(m => m.default || m),
+                        component: () => import('~/pages/marketplace/trade/history').then(m => m.default || m)
                     },
                     {
                         path: 'settings',
                         name: 'Marketplace Trade Settings',
-                        component: () => import('~/pages/marketplace/trade/settings').then(m => m.default || m),
+                        component: () => import('~/pages/marketplace/trade/settings').then(m => m.default || m)
                     },
                     {
                         path: ':id',
@@ -1041,7 +1041,7 @@ export default [
                                 component: () => import('~/pages/marketplace/trade/_id/chat').then(m => m.default || m)
                             }
                         ]
-                    },
+                    }
                 ]
             },
             {
@@ -1065,7 +1065,7 @@ export default [
                     {
                         path: '',
                         name: 'Marketplace Asset Offers',
-                        component: () => import('~/pages/marketplace/offers/_id/offers').then(m => m.default || m),
+                        component: () => import('~/pages/marketplace/offers/_id/offers').then(m => m.default || m)
                     },
                     {
                         path: 'offer/:offerId',
@@ -1076,14 +1076,14 @@ export default [
                 ]
             },
             {
-                path: 'snipers',
+                path: 'prospectors',
                 name: 'Marketplace Prospectors',
-                component: () => import('~/pages/marketplace/snipers').then(m => m.default || m),
+                component: () => import('~/pages/marketplace/prospectors').then(m => m.default || m)
             },
             {
                 path: 'search',
                 name: 'Marketplace Search',
-                component: () => import('~/pages/marketplace/search').then(m => m.default || m),
+                component: () => import('~/pages/marketplace/search').then(m => m.default || m)
             }
         ]
     },
@@ -1094,12 +1094,12 @@ export default [
         children: [
             {
                 path: '',
-                component: () => import('~/pages/marketplace-inventory/main').then(m => m.default || m),
+                component: () => import('~/pages/marketplace-inventory/main').then(m => m.default || m)
             },
             {
                 path: 'compare',
                 name: 'Compare Assets',
-                component: () => import('~/pages/marketplace-inventory/compare').then(m => m.default || m),
+                component: () => import('~/pages/marketplace-inventory/compare').then(m => m.default || m)
             }
         ]
     },
@@ -1188,7 +1188,7 @@ export default [
         }
     },
     {
-        path: "*",
+        path: '*',
         name: 'Not Found',
         component: () => import('~/pages/not-found').then(m => m.default || m)
     }

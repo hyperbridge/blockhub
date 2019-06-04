@@ -22,11 +22,10 @@ const assets = {
             for_sale: false
         }),
         collections: normalize(collectionsData),
-        snipers: {
-            1: { id: 1, asset: 4, priceMin: 31, priceMax: 59, expDate: "2018-12-15T14:29:47+02:00" },
-            3: { id: 3, asset: 6, priceMin: 11, priceMax: 89, expDate: "2018-11-14T14:29:47+02:00" }
+        prospectors: {
+            1: { id: 1, asset: 4, priceMin: 31, priceMax: 59, expDate: '2018-12-15T14:29:47+02:00' },
+            3: { id: 3, asset: 6, priceMin: 11, priceMax: 89, expDate: '2018-11-14T14:29:47+02:00' }
         },
-        prospectors: {},
         offers: {},
         offerBids: {},
         auctions: {
@@ -42,9 +41,9 @@ const assets = {
         users: normalize(usersData),
         navigator: {
             1: { id: 1, assetId: 1, evolvesTo: [2, 3], isRoot: true },
-            2: { id: 2, assetId: 2, evolvesTo: [4]},
-            3: { id: 3, assetId: 3, evolvesTo: []},
-            4: { id: 4, assetId: 4, evolvesTo: []}
+            2: { id: 2, assetId: 2, evolvesTo: [4] },
+            3: { id: 3, assetId: 3, evolvesTo: [] },
+            4: { id: 4, assetId: 4, evolvesTo: [] }
         },
         products: normalize(productsData)
     }),
@@ -72,7 +71,7 @@ const assets = {
         },
         deleteMany(state, { prop = 'assets', ids }) {
             const copy = { ...state[prop] }
-            for (let id of ids) {
+            for (const id of ids) {
                 delete copy[id]
             }
             state[prop] = copy
@@ -86,11 +85,11 @@ const assets = {
         },
         updateAssets(state, { prop = 'assets', data, ids }) {
             if (!ids) {
-                for (let id in state[prop]) {
+                for (const id in state[prop]) {
                     state[prop][id] = { ...state[prop][id], ...data }
                 }
             } else {
-                for (let id of ids) {
+                for (const id of ids) {
                     const payloadData = data[id] || data
                     state[prop][id] = { ...state[prop][id], ...payloadData }
                 }
@@ -120,7 +119,6 @@ const assets = {
             }
         },
         devolveNavigator(state, { id: itemId, parentId }) {
-
             const navTree = state.navigator[parentId]
             state.navigator[parentId] = {
                 ...navTree,
@@ -131,7 +129,7 @@ const assets = {
     actions: {
         create({ commit }, payload) {
             const id = getId()
-            commit('create', { ...payload, id, data: { ...payload.data, id }})
+            commit('create', { ...payload, id, data: { ...payload.data, id } })
         },
         update({ commit }, payload) {
             const { prop, target = prop || 'messages', data, id } = payload
@@ -166,7 +164,7 @@ const assets = {
         devolveNavigator({ state: { navigator }, commit }, { id, parentId }) {
             const idsToDelete = []
 
-            const checkId = (id) => {
+            const checkId = id => {
                 if (navigator[id].evolvesTo.length) {
                     navigator[id].evolvesTo.forEach(id => {
                         idsToDelete.push(id)
@@ -180,17 +178,17 @@ const assets = {
 
             commit('devolveNavigator', { id, parentId })
             commit('deleteMany', { prop: 'navigator', ids: [...idsToDelete, id] })
-        },
+        }
 
     },
     getters: {
-        assets: ({ assets, products }, { collections: col }, { marketplace: { collections }}) => [],
-            // normalize(assets, asset => ({
-            //     offersList: asset.offersList.map(id => assets[id]),
-            //     inventoryList: asset.inventoryList.map(id => assets[id]),
-            //     collections: asset.collections.map(id => collections[id]),
-            //     product: extract(products[asset.product], ['images', 'price'])
-            // })),
+        assets: ({ assets, products }, { collections: col }, { marketplace: { collections } }) => [],
+        // normalize(assets, asset => ({
+        //     offersList: asset.offersList.map(id => assets[id]),
+        //     inventoryList: asset.inventoryList.map(id => assets[id]),
+        //     collections: asset.collections.map(id => collections[id]),
+        //     product: extract(products[asset.product], ['images', 'price'])
+        // })),
         /* Old normalization
         assets: ({ assets, products }, { collections: col }, { marketplace: { collections }}) => Object.values(assets)
             .reduce((populated, asset) => ({
@@ -225,12 +223,12 @@ const assets = {
             }), {}),
         transactions: (
             { transactions, assets }, getters, rootState,
-            { ['community/messages']: messages, ['community/profiles']: profiles }
+            { 'community/messages': messages, 'community/profiles': profiles }
         ) => normalize({}, trx => ({
-                contractorOffer: trx.contractorOffer.map(id => assets[id]),
-                yourOffer: trx.yourOffer.map(id => assets[id]),
-                messages: trx.messages.map(id => messages[id])
-            })),
+            contractorOffer: trx.contractorOffer.map(id => assets[id]),
+            yourOffer: trx.yourOffer.map(id => assets[id]),
+            messages: trx.messages.map(id => messages[id])
+        })),
         transactionsMap: (state, { transactions }) => Object.entries(transactions),
         transactionsArray: (state, { transactions }) => Object.values(transactions),
         inventoryAssets: (state, { assetsArray }) => assetsArray
@@ -243,33 +241,31 @@ const assets = {
             .reduce((tags, asset) => [
                 ...tags,
                 ...asset.tags.filter(tag =>
-                    !tags.includes(tag)
-                 )
+                    !tags.includes(tag))
             ], []),
         assetsAttributes: (state, { assetsArray }) => assetsArray
             .reduce((attributes, asset) => [
                 ...attributes,
                 ...Object.keys(asset.metadata).filter(attr =>
-                    !attributes.includes(attr)
-                )
+                    !attributes.includes(attr))
             ], []),
         assetsByName: (state, { assetsArray }) => name => assetsArray
             .filter(asset => asset.name.toLowerCase().includes(name.toLowerCase())),
         collections: ({ assets, collections }) => [],
-            // normalize(collections, col => ({
-            //     assets: col.assets.map(id => assets[id])
-            // })),
+        // normalize(collections, col => ({
+        //     assets: col.assets.map(id => assets[id])
+        // })),
         collectionsArray: (state, { collections }) => Object.values(collections),
-        snipers: ({ snipers, assets }) => Object.values({})
-            .reduce((populated, sniper) => ({
+        prospectors: ({ prospectors, assets }) => Object.values({})
+            .reduce((populated, prospector) => ({
                 ...populated,
-                [sniper.id]: {
-                    ...sniper,
-                    asset: assets[sniper.asset]
+                [prospector.id]: {
+                    ...prospector,
+                    asset: assets[prospector.asset]
                 }
             }), {}),
         prospectorsMap: ({ prospectors }) => Object.entries({}),
-        offers: ({ offers, offerBids }, getters, { community: { offersSeller }}) =>
+        offers: ({ offers, offerBids }, getters, { community: { offersSeller } }) =>
             normalize({}, offer => ({
                 bids: offer.bids.map(id => offerBids[id]),
                 seller: offersSeller[offer.seller]

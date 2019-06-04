@@ -8,7 +8,7 @@
                      noGutter
                      onlyContentBg
                      bgGradient>
-                <table class="snipers-table">
+                <table class="prospectors-table">
                     <thead>
                         <th>ID</th>
                         <th>Asset</th>
@@ -104,7 +104,7 @@
                 <c-tabs tabText="Step"
                         class="margin-bottom-100"
                         :setActiveTab="activeStep"
-                        @click="createSniper">
+                        @click="createProspector">
                     <c-tab :tab_id="1">
                         <p>Select asset that you are going to buy</p>
                         <c-content-navigation :items="assetsArray"
@@ -112,7 +112,7 @@
                             <c-asset-grid
                                 slot-scope="props"
                                 :assets="props.items"
-                                @click="newSniper.asset = $event; activeStep = 2" />
+                                @click="newProspector.asset = $event; activeStep = 2" />
                         </c-content-navigation>
                     </c-tab>
 
@@ -121,30 +121,30 @@
                             Selected asset:
                         </h4>
                         <c-asset-preview-price
-                            :asset="newSniper.asset"
+                            :asset="newProspector.asset"
                             class="margin-auto margin-bottom-30 half-width" />
                         <p>Select minimum price</p>
                         <div class="flex-center-between margin-bottom-20">
                             <c-range-slider
-                                v-model="newSniper.priceMin"
+                                v-model="newProspector.priceMin"
                                 class="half-width margin-right-20"
-                                :max="getPrice(newSniper.asset, 'min')" />
-                            <c-input v-model="newSniper.priceMin"
+                                :max="getPrice(newProspector.asset, 'min')" />
+                            <c-input v-model="newProspector.priceMin"
                                      class="half-width" />
                         </div>
                         <p>Select maximum price</p>
                         <div class="flex-center-between margin-bottom-20">
                             <c-range-slider
-                                v-model="newSniper.priceMax"
+                                v-model="newProspector.priceMax"
                                 class="half-width margin-right-20"
-                                :max="getPrice(newSniper.asset, 'max')" />
-                            <c-input v-model="newSniper.priceMax"
+                                :max="getPrice(newProspector.asset, 'max')" />
+                            <c-input v-model="newProspector.priceMax"
                                      class="half-width" />
                         </div>
                         <p>Select expiration date</p>
                         <div class="flex-center margin-bottom-40">
                             <c-datepicker
-                                v-model="newSniper.expDate"
+                                v-model="newProspector.expDate"
                                 placeholder="Expiration date"
                                 input-class="form-control form-calendar__text"
                                 calendar-class="form-calendar" />
@@ -158,7 +158,7 @@
                             </c-button>
                             <c-button status="success"
                                       size="lg"
-                                      @click="createSniper()">
+                                      @click="createProspector()">
                                 Create
                             </c-button>
                         </div>
@@ -185,7 +185,7 @@ export default {
     props: ['profileId'],
     data() {
         return {
-            newSniper: {
+            newProspector: {
                 asset: null,
                 priceMin: 0,
                 priceMax: 0,
@@ -198,8 +198,8 @@ export default {
         }
     },
     computed: {
-        snipers() {
-            return this.$store.getters['assets/snipers']
+        prospectors() {
+            return this.$store.getters['assets/prospectors']
         },
         assets() {
             return this.$store.getters['assets/assets']
@@ -222,9 +222,9 @@ export default {
         }
     },
     methods: {
-        createSniper(tabId) {
+        createProspector(tabId) {
             const { activeStep } = this
-            const { asset, ...rest } = this.newSniper
+            const { asset, ...rest } = this.newProspector
             this.errors = []
             const push = msg => this.errors.push(msg)
 
@@ -241,7 +241,7 @@ export default {
             } else {
                 this.$store.dispatch('create', [
                     'assets/prospectors', {
-                        ...this.newSniper,
+                        ...this.newProspector,
                         user: this.profile
                     }
                 ])
@@ -254,7 +254,7 @@ export default {
         },
         resetCreation() {
             this.activeStep = 1
-            this.newSniper = {
+            this.newProspector = {
                 asset: null,
                 priceMin: 0,
                 priceMax: 0,
@@ -275,7 +275,7 @@ export default {
 <style lang="scss" scoped>
     @import "@/css/helpers/mixins.scss";
 
-    .snipers-table {
+    .prospectors-table {
         width: 100%;
         margin-bottom: 50px;
         th, td {
