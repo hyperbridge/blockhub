@@ -115,12 +115,12 @@ export default {
         },
         image: String,
         name: String,
-        description: String,
-        collections: Array
+        description: String
     },
     data() {
         return {
             searchQuery: '',
+            collections: [],
             createForm: false,
             createCollectionRequest: {
                 name: ''
@@ -136,10 +136,20 @@ export default {
         }
     },
     watch: {
-        activated(oldVal, newVal) {
+        async activated(oldVal, newVal) {
+            if (!newVal) return
+
             if (!this.$store.state.application.signedIn) {
                 this.$store.commit('application/activateModal', 'login')
+                return
             }
+
+            this.collections = await this.$store.dispatch('collections/find', {
+                query: {
+                    'owner.id': this.$store.state.currentProfile.id,
+                    $eager: '[owner]'
+                }
+            })
         }
     },
     methods: {

@@ -40,10 +40,12 @@ export default class Project extends Model {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' }
+                id: { type: 'integer' },
+                createdAt: { type: 'string', format: 'date-time' },
+                updatedAt: { type: 'string', format: 'date-time' }
             },
             options: {
-                timestamps: true
+                timestamps: false
             }
         }
     }
@@ -214,6 +216,18 @@ export default class Project extends Model {
             // has many contributors -> node (parentId = this, parentType = project, nextId = profile.id, nextType = profile)
             // has many moderators -> node (parentId = this, parentType = project, nextId = profile.id, nextType = profile)
         }
+    }
+
+    static get namedFilters() {
+        const knex = this.app.get('knex');
+
+        return {
+            incomplete: builder => {
+            builder
+                .where('complete', '=', false)
+                .where('dueDate', '<', knex.fn.now());
+            }
+        };
     }
 
     $beforeInsert() {

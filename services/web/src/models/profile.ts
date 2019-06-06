@@ -53,11 +53,23 @@ export default class Profile extends Model {
 
             properties: {
                 id: { type: 'integer' },
+                createdAt: { type: 'string', format: 'date-time' },
+                updatedAt: { type: 'string', format: 'date-time' },
                 accountId: { type: 'integer' },
-                address: { type: ['string', 'null'] }
+                address: { type: ['string', 'null'] },
+                status: {
+                    type: 'string',
+                    enum: ['active', 'disabled', 'removed'],
+                    default: 'active'
+                },
+                role: {
+                    type: 'string',
+                    enum: ['user', 'developer', 'curator'],
+                    default: 'user'
+                }
             },
             options: {
-                timestamps: true
+                timestamps: false
             }
         }
     }
@@ -306,6 +318,15 @@ export default class Profile extends Model {
             // }
         }
     }
+
+    static get namedFilters() {
+        return {
+            active: builder => {
+                builder.where('status', 'active')
+            }
+        }
+    }
+  
 
     $beforeInsert() {
         this.createdAt = this.updatedAt = new Date().toISOString()

@@ -1,10 +1,9 @@
 import { Model, RelationMappings } from 'objection'
+import BaseModel from './base'
 import Profile from './profile'
 
-export default class Account extends Model {
+export default class Account extends BaseModel {
     id!: Number
-    createdAt!: String
-    updatedAt!: String
     key!: String
     value!: String
     meta!: Object
@@ -18,6 +17,10 @@ export default class Account extends Model {
     avatar!: String
     //isActive!: boolean
 
+    static get timestamps() {
+        return true
+    }
+
     static get tableName() {
         return 'accounts'
     }
@@ -29,12 +32,14 @@ export default class Account extends Model {
             properties: {
                 id: { type: 'integer' },
                 email: { type: 'string' },
-                firstName: { type: 'string' },
-                lastName: { type: 'string' },
-                password: { type: 'string' }
-            },
-            options: {
-                timestamps: true
+                firstName: { type: 'string', minLength: 1, maxLength: 255 },
+                lastName: { type: 'string', minLength: 1, maxLength: 255 },
+                password: { type: 'string' },
+                status: {
+                    type: 'string',
+                    enum: ['active', 'disabled', 'removed'],
+                    default: 'active'
+                }
             }
         }
     }
@@ -49,6 +54,14 @@ export default class Account extends Model {
                     to: 'profiles.accountId'
                 }
             },
+        }
+    }
+
+    static get namedFilters() {
+        return {
+            active: builder => {
+                builder.where('status', 'active')
+            }
         }
     }
 

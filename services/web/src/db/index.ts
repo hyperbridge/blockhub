@@ -2,26 +2,6 @@ import config from '../../config'
 import Account from '../models/account'
 import Profile from '../models/profile'
 import Project from '../models/project'
-console.log(process.env.DATABASE_URL)
-// const pg = require('pg')
-
-// const connection = new pg.Client({
-//     connectionString: process.env.DATABASE_URL,
-//     ssl: true
-// })
-
-// connection.connect(function(err) {
-//     if (err) {
-//         return console.error('Could not connect to Postgres', err)
-//     }
-// })
-
-// const connection = mysql.createConnection({
-//     host: config.db.host,
-//     account: config.db.account,
-//     database: config.db.database,
-//     debug: false
-// })
 
 export type UpdateTokenRequest = {
     id: number,
