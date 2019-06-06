@@ -1,13 +1,30 @@
 import { Model } from 'objection'
 
 export  default class BaseModel extends Model {
+    id!: Number
+    key!: String
+    value!: String
+    status!: String
+    meta!: Object
+
     createdAt!: String
     updatedAt!: String
+
+    static idColumn = 'id'
 
     $beforeValidate (jsonSchema, json, opt) {
         if (this.constructor.timestamps) {
             jsonSchema.properties.createdAt = { type: 'string', format: 'date-time' }
             jsonSchema.properties.updatedAt = { type: 'string', format: 'date-time' }
+        }
+
+        jsonSchema.properties.id = { type: 'integer' }
+        jsonSchema.properties.key = { type: 'string' }
+        jsonSchema.properties.value = { type: 'string' }
+        jsonSchema.properties.status = {
+            type: 'string',
+            enum: ['active', 'disabled', 'removed'],
+            default: 'active'
         }
 
         return jsonSchema
@@ -23,6 +40,21 @@ export  default class BaseModel extends Model {
         this.updatedAt = new Date().toISOString()
     }
 
+    static get namedFilters() {
+        return {
+            active: builder => {
+                builder.where('status', 'active')
+            }
+        }
+    }
+
+    // $beforeInsert() {
+    //     this.createdAt = this.updatedAt = new Date().toISOString()
+    // }
+
+    // $beforeUpdate() {
+    //     this.updatedAt = new Date().toISOString()
+    // }
     // $toDatabaseJson() {
     //     const omit = this.constructor.getRelations()
     //     return this.$$toJson(true, omit, null)

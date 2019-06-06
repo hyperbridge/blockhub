@@ -3,19 +3,13 @@ import BaseModel from './base'
 import Profile from './profile'
 
 export default class Account extends BaseModel {
-    id!: Number
-    key!: String
-    value!: String
-    meta!: Object
     parentId!: Number
-    status!: String
 
     email!: String
     firstName!: String
     lastName!: String
     password!: String
     avatar!: String
-    //isActive!: boolean
 
     static get timestamps() {
         return true
@@ -30,16 +24,15 @@ export default class Account extends BaseModel {
             type: 'object',
             required: ['email', 'password'],
             properties: {
-                id: { type: 'integer' },
                 email: { type: 'string' },
                 firstName: { type: 'string', minLength: 1, maxLength: 255 },
                 lastName: { type: 'string', minLength: 1, maxLength: 255 },
                 password: { type: 'string' },
-                status: {
-                    type: 'string',
-                    enum: ['active', 'disabled', 'removed'],
-                    default: 'active'
-                }
+                // status: {
+                //     type: 'string',
+                //     enum: ['active', 'disabled', 'removed'],
+                //     default: 'active'
+                // }
             }
         }
     }
@@ -57,19 +50,4 @@ export default class Account extends BaseModel {
         }
     }
 
-    static get namedFilters() {
-        return {
-            active: builder => {
-                builder.where('status', 'active')
-            }
-        }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
-    }
 }

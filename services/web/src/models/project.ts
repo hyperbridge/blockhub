@@ -9,14 +9,9 @@ import Tag from './tag'
 import Rating from './rating'
 import Node from './node'
 import Event from './event'
+import BaseModel from './base'
 
-export default class Project extends Model {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: Object
+export default class Project extends BaseModel {
     parentId!: Number
     score!: Number
 
@@ -40,12 +35,6 @@ export default class Project extends Model {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' },
-                createdAt: { type: 'string', format: 'date-time' },
-                updatedAt: { type: 'string', format: 'date-time' }
-            },
-            options: {
-                timestamps: false
             }
         }
     }
@@ -228,14 +217,6 @@ export default class Project extends Model {
                 .where('dueDate', '<', knex.fn.now());
             }
         };
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }
 
