@@ -16,7 +16,7 @@ let isInitialised = false
 
 export default async ({ store, redirect, route, req }) => {
     if (store.state.auth.payload && isInitialised) {
-
+        return
     }
 
     isInitialised = true
