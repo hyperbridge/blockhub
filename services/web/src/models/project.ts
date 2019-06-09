@@ -9,14 +9,9 @@ import Tag from './tag'
 import Rating from './rating'
 import Node from './node'
 import Event from './event'
+import BaseModel from './base'
 
-export default class Project extends Model {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: Object
+export default class Project extends BaseModel {
     parentId!: Number
     score!: Number
 
@@ -40,10 +35,6 @@ export default class Project extends Model {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' }
-            },
-            options: {
-                timestamps: true
             }
         }
     }
@@ -216,12 +207,16 @@ export default class Project extends Model {
         }
     }
 
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
+    static get namedFilters() {
+        const knex = this.app.get('knex');
 
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
+        return {
+            incomplete: builder => {
+            builder
+                .where('complete', '=', false)
+                .where('dueDate', '<', knex.fn.now());
+            }
+        };
     }
 }
 

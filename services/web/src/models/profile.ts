@@ -1,4 +1,4 @@
-import { Model, RelationMappings } from 'objection'
+import { RelationMappings } from 'objection'
 import Project from './project'
 import License from './license'
 import Order from './order'
@@ -12,15 +12,10 @@ import Collection from './collection'
 import Event from './event'
 import Idea from './idea'
 import Product from './product'
+import BaseModel from './base'
 
 
-export default class Profile extends Model {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: Object
+export default class Profile extends BaseModel {
     parentId!: Number
 
     accountId!: Number
@@ -40,8 +35,6 @@ export default class Profile extends Model {
     collections!: Array<Collection>
     wishlists!: Array<Node>
 
-    static idColumn = 'id'
-
     static get tableName() {
         return 'profiles'
     }
@@ -52,12 +45,16 @@ export default class Profile extends Model {
             required: ['accountId'],
 
             properties: {
-                id: { type: 'integer' },
                 accountId: { type: 'integer' },
-                address: { type: ['string', 'null'] }
+                address: { type: ['string', 'null'] },
+                role: {
+                    type: 'string',
+                    enum: ['user', 'developer', 'curator'],
+                    default: 'user'
+                }
             },
             options: {
-                timestamps: true
+                timestamps: false
             }
         }
     }
@@ -305,13 +302,5 @@ export default class Profile extends Model {
             //     }
             // }
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }
