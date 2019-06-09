@@ -17,7 +17,7 @@
                 autoplay
                 muted>
                 <source
-                    :src="video_url"
+                    :src="videoUrl"
                     type="video/mp4">
             </video>
             <div
@@ -34,7 +34,7 @@
             ref="thumb-nav"
             class="screen-gallery__thumb-nav">
             <li
-                v-if="video_url"
+                v-if="videoUrl"
                 class="thumb-nav__video-thumb"
                 :class="{ 'inactive-item': !play_video }"
                 :style="{
@@ -157,7 +157,7 @@ export default {
             this.play_video = false
 
             setTimeout(() => {
-                if (this.video_url) {
+                if (this.videoUrl) {
                     this.random_item = Math.floor(Math.random() * this.items.length)
                     this.enableVideoPlay()
                 } else {

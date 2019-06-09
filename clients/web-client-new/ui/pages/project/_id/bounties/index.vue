@@ -127,8 +127,7 @@ export default {
             contributors: 0,
             submissions: 0,
             bounties: [],
-            showDownload: false,
-            bounties: []
+            showDownload: false
         }
 
         if (this.$store.state.application.environmentMode !== 'production') {

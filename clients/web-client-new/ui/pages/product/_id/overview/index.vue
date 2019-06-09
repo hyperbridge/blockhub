@@ -4,7 +4,7 @@
             <c-screen-gallery
                 v-if="product.meta.images"
                 :items="[product.meta.images.mediumTile, ...product.meta.images.preview]"
-                :video_url="product.meta.video" />
+                :videoUrl="product.meta.video" />
 
             <div
                 v-for="(promotions, section) in promotionSections"
