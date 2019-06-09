@@ -6601,8 +6601,16 @@ storiesOf('Gift box', module)
                 status: 'Unredeemed',
                 user: 'Nicola Roberts',
                 date: '4 May',
-                text: '<p>Massa enim ligula diam donec lectus ut ornare vitae ipsum elementum lectus in vivamus molestie lorem pellentesque: ligula morbi porta curabitur auctor urna tellus. Proin congue eros at: ornare urna et sed ut a, eros ornare nam, maecenas congue proin. Ipsum mattis arcu maecenas arcu mauris gravida in gravida porta commodo orci diam adipiscing fusce. Tellus ornare vivamus morbi mattis leo, quam odio enim duis justo, eros elementum sodales mattis ligula, magna commodo tempus. Pharetra et integer, rutrum, justo congue at eu lorem lectus mauris vitae vulputate. Rutrum massa ipsum, arcu sodales odio, a fusce risus quam sapien cursus tempus: ultricies magna eget sit nec malesuada mattis et.</p><p>Nulla molestie mattis arcu et ornare porta nulla ipsum sit, ornare, et commodo porttitor et justo. Nam risus ornare morbi mauris massa, pharetra non tempus nam morbi commodo vivamus proin, orci nec mattis, curabitur sit nibh, sagittis. Risus morbi, risus quam donec vulputate eu lectus nibh et, ultricies&nbsp;&mdash; leo molestie cursus arcu fusce eros sagittis nibh. Donec amet elementum nibh commodo: ligula bibendum eget bibendum in. Diam adipiscing: lorem sagittis nulla ultricies orci mattis, ultricies nam integer.</p> ',
-                gift: {}
+                text: '<p>Massa enim ligula diam donec lectus ut ornare vitae ipsum elementum lectus in vivamus molestie .</p><p>Nulla molestie mattis arcu et ornare porta nulla ipsum sit, ultricies nam integer.</p> ',
+                gift: {
+                    name: 'Some gift name',
+                    image: 'https://media01.gameloft.com/layout/support/revamp/assets/images/game-banner/banner_CC_Windows.jpg',
+                    description: 'In eget massa a mauris ultricies finibus a nec nunc. In faucibus consectetur diam id fermentum.\n' +
+                        '                    Aenean\n' +
+                        '                    dapibus massa quis venenatis porta. Curabitur non tempor dolor. Proin pulvinar ipsum turpis, vel\n' +
+                        '                    auctor\n' +
+                        '                    elit laoreet ac. Duis consectetur sem magna.'
+                }
             }
         },
         template: `<div class="p-5">
@@ -6610,7 +6618,9 @@ storiesOf('Gift box', module)
                                     :user="user"
                                     :date="date"
                                     :text="text"
-                                    :gift="gift" />
+                                    :gift="gift" 
+                                    @accept="" 
+                                    @decline="" />
                   </div>`
     }))
 

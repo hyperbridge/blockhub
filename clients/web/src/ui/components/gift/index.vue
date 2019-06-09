@@ -2,20 +2,14 @@
     <div class="gift-box">
         <div class="gift-box__preview">
             <div class="gift-box__img">
-                <img src="https://media01.gameloft.com/layout/support/revamp/assets/images/game-banner/banner_CC_Windows.jpg"/>
+                <img :src="gift.image"/>
             </div>
             <div class="gift-box__divider"></div>
             <div class="gift-box__preview-content text-center">
                 <div class="h3 text-white margin-bottom-20">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing
+                    {{ gift.name }}
                 </div>
-                <p>
-                    In eget massa a mauris ultricies finibus a nec nunc. In faucibus consectetur diam id fermentum.
-                    Aenean
-                    dapibus massa quis venenatis porta. Curabitur non tempor dolor. Proin pulvinar ipsum turpis, vel
-                    auctor
-                    elit laoreet ac. Duis consectetur sem magna.
-                </p>
+                <p v-html="gift.description"></p>
             </div>
         </div>
         <div class="gift-box__content">
@@ -31,11 +25,11 @@
                 <div>
                     Status: {{ status }}
                 </div>
-                <c-button status="second-success" size="md" class="margin-top-10 mx-2">
-                    Accept
+                <c-button status="second-success" @click="$emit('accept')" size="md" class="margin-top-10 mx-2">
+                    Accept gift
                 </c-button>
-                <c-button status="second-warning" size="md" class="margin-top-10 mx-2">
-                    Accept
+                <c-button status="second-warning" @click="$emit('decline')" size="md" class="margin-top-10 mx-2">
+                    Decline gift
                 </c-button>
             </div>
         </div>
