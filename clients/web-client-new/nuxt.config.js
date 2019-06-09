@@ -1,4 +1,5 @@
 import autoprefixer from 'autoprefixer'
+import sites from './ui/sites'
 
 export default {
     srcDir: 'ui/',
@@ -43,6 +44,17 @@ export default {
         'cookie-universal-nuxt'
         // './modules/init'
     ],
+    router: {
+        extendRoutes(routes) {
+            console.log(sites)
+            sites.forEach(site => {
+                site.routes.forEach(route => {
+                    console.log(route)
+                    routes.push(route)
+                })
+            })
+        }
+    },
     build: {
         extractCSS: true,
         postcss: {
