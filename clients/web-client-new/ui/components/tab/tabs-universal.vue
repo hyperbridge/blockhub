@@ -45,7 +45,7 @@ export default {
     data() {
         return {
             tabs: [],
-            activeTab_data: 1
+            activetabData: 1
         }
     },
     computed: {
@@ -58,10 +58,10 @@ export default {
                 }))
         },
         activeTab() {
-            const { setActiveTab, activeTabProp, activeTab_data } = this
+            const { setActiveTab, activeTabProp, activetabData } = this
             return setActiveTab == null
                 ? activeTabProp == null
-                    ? activeTab_data
+                    ? activetabData
                     : activeTabProp
                 : setActiveTab
         },
@@ -78,17 +78,17 @@ export default {
             return (lockedTab != null && lockedTab == index) || (lockedStep != null && !(index < lockedStep))
         },
         tabClick(index) {
-            this.activeTab_data = index
+            this.activetabData = index
             this.$emit('click', index)
         }
     },
     provide() {
-        const tab_data = {}
-        Object.defineProperty(tab_data, 'activeTab', {
+        const tabData = {}
+        Object.defineProperty(tabData, 'activeTab', {
             enumerable: true,
             get: () => this.activeTab
         })
-        return { tab_data }
+        return { tabData }
     }
 }
 </script>

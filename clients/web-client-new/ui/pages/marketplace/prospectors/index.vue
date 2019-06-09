@@ -115,7 +115,7 @@
                     class="margin-bottom-100"
                     :setActiveTab="activeStep"
                     @click="createProspector">
-                    <c-tab :tab_id="1">
+                    <c-tab :tabId="1">
                         <p>Select asset that you are going to buy</p>
                         <c-content-navigation
                             :items="assetsArray"
@@ -127,7 +127,7 @@
                         </c-content-navigation>
                     </c-tab>
 
-                    <c-tab :tab_id="2">
+                    <c-tab :tabId="2">
                         <h4 class="text-align-center">
                             Selected asset:
                         </h4>

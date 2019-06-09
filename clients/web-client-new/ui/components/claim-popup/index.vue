@@ -17,7 +17,7 @@
                 styled
                 @click="changeTab($event)">
                 <c-tab
-                    :tab_id="3"
+                    :tabId="3"
                     :selected="true"
                     :showFooter="true">
                     <div>
@@ -37,7 +37,7 @@
                     </div>
                 </c-tab>
                 <c-tab
-                    :tab_id="1"
+                    :tabId="1"
                     :selected="true"
                     :showFooter="true">
                     <div>
@@ -141,7 +141,7 @@
                     </div>
                 </c-tab>
                 <c-tab
-                    :tab_id="2"
+                    :tabId="2"
                     :showFooter="true">
                     <div>
                         <div class="row">

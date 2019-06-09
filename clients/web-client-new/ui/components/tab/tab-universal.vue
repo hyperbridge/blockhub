@@ -1,8 +1,8 @@
 <template>
-    <div v-show="tab_id == tab_data.activeTab">
+    <div v-show="tabId == tabData.activeTab">
         <div class="tabs-universal__content">
             <transition name="tab-universal">
-                <div v-if="tab_id == tab_data.activeTab">
+                <div v-if="tabId == tabData.activeTab">
                     <slot />
                 </div>
             </transition>
@@ -19,7 +19,7 @@ export default {
             required: true
         }
     },
-    inject: ['tab_data']
+    inject: ['tabData']
 }
 </script>
 

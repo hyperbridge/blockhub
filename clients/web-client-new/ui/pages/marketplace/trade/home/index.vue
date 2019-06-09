@@ -21,7 +21,7 @@
             <c-tab
                 v-for="(offers, offersKey, index) in offers"
                 :key="offersKey"
-                :tab_id="index + 1"
+                :tabId="index + 1"
                 class="trade-block__offers-tab">
                 <c-trade-offer
                     v-for="offer in offers"

@@ -13,7 +13,7 @@
             <c-tab-universal
                 v-for="(os, index) in ['Mac', 'Win', 'Linux']"
                 :key="index"
-                :tab_id="index + 1">
+                :tabId="index + 1">
                 <ul
                     v-if="platform(os)"
                     class="system-requirements__list">

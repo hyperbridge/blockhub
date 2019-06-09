@@ -217,7 +217,7 @@
                     <c-tabs
                         :tabNames="['Products', 'Projects']"
                         styled>
-                        <c-tab :tab_id="1">
+                        <c-tab :tabId="1">
                             <div
                                 v-if="profile.productWishlist.length"
                                 class="wishlist-box">
@@ -244,7 +244,7 @@
                                 You have not added any products to your wishlist
                             </p>
                         </c-tab>
-                        <c-tab :tab_id="2">
+                        <c-tab :tabId="2">
                             <div
                                 v-if="profile.projectWishlist.length"
                                 class="wishlist-box">
