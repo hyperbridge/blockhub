@@ -6597,9 +6597,21 @@ storiesOf('Gift box', module)
             'c-gift-box': (resolve) => require(['@/ui/components/gift'], resolve),
         },
         data(){
-            return{}
+            return{
+                status: 'Unredeemed',
+                user: 'Nicola Roberts',
+                date: '4 May',
+                text: '<p>Massa enim ligula diam donec lectus ut ornare vitae ipsum elementum lectus in vivamus molestie lorem pellentesque: ligula morbi porta curabitur auctor urna tellus. Proin congue eros at: ornare urna et sed ut a, eros ornare nam, maecenas congue proin. Ipsum mattis arcu maecenas arcu mauris gravida in gravida porta commodo orci diam adipiscing fusce. Tellus ornare vivamus morbi mattis leo, quam odio enim duis justo, eros elementum sodales mattis ligula, magna commodo tempus. Pharetra et integer, rutrum, justo congue at eu lorem lectus mauris vitae vulputate. Rutrum massa ipsum, arcu sodales odio, a fusce risus quam sapien cursus tempus: ultricies magna eget sit nec malesuada mattis et.</p><p>Nulla molestie mattis arcu et ornare porta nulla ipsum sit, ornare, et commodo porttitor et justo. Nam risus ornare morbi mauris massa, pharetra non tempus nam morbi commodo vivamus proin, orci nec mattis, curabitur sit nibh, sagittis. Risus morbi, risus quam donec vulputate eu lectus nibh et, ultricies&nbsp;&mdash; leo molestie cursus arcu fusce eros sagittis nibh. Donec amet elementum nibh commodo: ligula bibendum eget bibendum in. Diam adipiscing: lorem sagittis nulla ultricies orci mattis, ultricies nam integer.</p> ',
+                gift: {}
+            }
         },
-        template: `<div class="p-5"><c-gift-box /></div>`
+        template: `<div class="p-5">
+                      <c-gift-box :status="status" 
+                                    :user="user"
+                                    :date="date"
+                                    :text="text"
+                                    :gift="gift" />
+                  </div>`
     }))
 
 
