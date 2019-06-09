@@ -1150,6 +1150,11 @@ export default [
         component: (resolve) => require(['@/ui/screens/license'], resolve)
     },
     {
+        path: '/identity/:id',
+        name: 'Identity',
+        component: (resolve) => require(['@/ui/screens/identity'], resolve)
+    },
+    {
         path: '/download/desktop/mac',
         beforeEnter(to, from, next) {
             window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/BlockHub-${appVersion}.dmg`
