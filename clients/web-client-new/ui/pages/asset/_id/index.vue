@@ -264,7 +264,7 @@
                                                 label="Accept offers"
                                                 :checked="item.acceptOffers"
                                                 size="sm"
-                                                label_position="left"
+                                                labelPosition="left"
                                                 @change="$store.commit('assets/negateValue', {
                                                     id: item.id,
                                                     iprop: 'acceptOffers'

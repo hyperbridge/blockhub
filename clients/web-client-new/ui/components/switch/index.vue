@@ -1,17 +1,17 @@
 <template>
     <div class="switch-container">
         <div
-            v-if="!customLabel && label_position == 'left'"
+            v-if="!customLabel && labelPosition == 'left'"
             class="label"
             style="padding-right: 10px"
-            :style="{ fontSize: label_size }">
+            :style="{ fontSize: labelSize }">
             {{ label }}
         </div>
         <div
-            v-else-if="customLabel && label_position == 'left'"
+            v-else-if="customLabel && labelPosition == 'left'"
             class="label"
             style="padding-right: 10px"
-            :style="{ fontSize: label_size }">
+            :style="{ fontSize: labelSize }">
             <slot />
         </div>
         <label
@@ -26,17 +26,17 @@
             <span />
         </label>
         <div
-            v-if="!customLabel && label_position == 'right'"
+            v-if="!customLabel && labelPosition == 'right'"
             class="label"
             style="padding-left: 10px"
-            :style="{ fontSize: label_size }">
+            :style="{ fontSize: labelSize }">
             {{ label }}
         </div>
         <div
-            v-else-if="customLabel && label_position == 'right'"
+            v-else-if="customLabel && labelPosition == 'right'"
             class="label"
             style="padding-left: 10px"
-            :style="{ fontSize: label_size }">
+            :style="{ fontSize: labelSize }">
             <slot />
         </div>
     </div>

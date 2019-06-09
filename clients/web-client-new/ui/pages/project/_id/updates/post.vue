@@ -46,7 +46,7 @@ export default {
     },
     data() {
         return {
-            id: this.projectID
+            id: this.projectId
         }
     },
     computed: {

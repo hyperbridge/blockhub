@@ -37,9 +37,9 @@
                 <c-switch
                     label="Accept offers for this item?"
                     :checked="asset.acceptOffers"
-                    label_size="18px"
+                    labelSize="18px"
                     size="sm"
-                    label_position="left"
+                    labelPosition="left"
                     @change="$store.commit('assets/negateValue', { id: asset.id, iprop: 'acceptOffers' })" />
             </div>
         </div>

@@ -7,7 +7,7 @@
                 :key="index"
                 :item="item"
                 :index="index"
-                :projectID="project_id" />
+                :projectId="project_id" />
             <div
                 v-if="item.period"
                 class="post-timeline__period-info">

@@ -68,7 +68,7 @@
                     <div class="col">
                         <c-switch
                             v-model="agreement"
-                            label_position="right"
+                            labelPosition="right"
                             :customLabel="true">
                             <template slot="label">
                                 I agree to the

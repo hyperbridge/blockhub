@@ -105,7 +105,7 @@
                                     class="d-flex justify-content-between align-items-center margin-top-20">
                                     <c-switch
                                         v-model="account.agreement"
-                                        label_position="right"
+                                        labelPosition="right"
                                         :customLabel="true">
                                         <template>
                                             I agree to the
@@ -124,7 +124,7 @@
                                     <c-switch
                                         v-model="account.newsletter"
                                         label="Sign up for our newsletter, get 100 HBX Bonus!"
-                                        label_position="right" />
+                                        labelPosition="right" />
                                     <div>
                                         <c-button
                                             :class="{'disabled': !account.agreement}"
@@ -342,12 +342,12 @@
                                         v-if="false && verifiedPassphrase"
                                         v-model="agreeStoredPassphrase"
                                         label="I have safely stored my passphrase"
-                                        label_position="right" />
+                                        labelPosition="right" />
                                     <c-switch
                                         v-if="false && verifiedPassphrase"
                                         v-model="account.encryptPassphrase"
                                         label="I want to encrypt my passphrase with my password"
-                                        label_position="right" />
+                                        labelPosition="right" />
                                     <div>
                                         <c-button
                                             v-if="verifiedPassphrase"

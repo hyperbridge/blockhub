@@ -46,17 +46,17 @@ export default {
         'c-tags': () => import('~/components/tags').then(m => m.default || m),
         'c-badges': () => import('~/components/project/badges').then(m => m.default || m)
     },
-    props: ['projectID', 'postID'],
+    props: ['projectId', 'postId'],
     data() {
         return {
-            id: this.projectID
+            id: this.projectId
         }
     },
     computed: {
         project: updateProject,
         post() {
             return this.project.updates.find(obj => {
-                if (obj.id === Number(this.postID)) { return obj }
+                if (obj.id === Number(this.postId)) { return obj }
                 return false
             })
         }

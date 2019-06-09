@@ -14,7 +14,7 @@
             </p>
             <c-button
                 status="info"
-                :to="`/project/${projectID}/updates/${item.id}`"
+                :to="`/project/${projectId}/updates/${item.id}`"
                 iconHide>
                 Read more
             </c-button>
@@ -37,7 +37,7 @@ export default {
             return str
         }
     },
-    props: ['item', 'index', 'projectID'],
+    props: ['item', 'index', 'projectId'],
     computed: {
         itemPosition() {
             if (this.index % 2) {

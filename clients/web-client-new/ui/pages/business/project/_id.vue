@@ -527,9 +527,9 @@ export default {
 
                     const projectRegistrationContract = FundingAPI.api.ethereum.state.contracts.ProjectRegistration.deployed
 
-                    let resProjectId = null
-                    const getProjectId = new Promise(res => {
-                        resProjectId = res
+                    let resprojectId = null
+                    const getprojectId = new Promise(res => {
+                        resprojectId = res
                     })
 
                     const watcher = projectRegistrationContract.ProjectCreated().watch((err, res) => {
@@ -552,7 +552,7 @@ export default {
                             }
                         }
 
-                        resProjectId(project.id)
+                        resprojectId(project.id)
                     })
 
                     await projectRegistrationContract.createProject(
@@ -563,7 +563,7 @@ export default {
 
                     watcher.stopWatching()
 
-                    const projectId = await getProjectId
+                    const projectId = await getprojectId
 
                     await projectRegistrationContract.setProjectContributionGoals(projectId, project.minContributionGoal, project.maxContributionGoal, project.contributionPeriod, { from: developerAccount })
                     await projectRegistrationContract.setProjectTerms(projectId, project.noRefunds, project.noTimeline, { from: developerAccount })

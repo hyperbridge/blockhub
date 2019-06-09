@@ -684,7 +684,7 @@ export default [
         }
     },
     {
-        path: '/project/:projectID/updates/:postID',
+        path: '/project/:projectId/updates/:postId',
         name: 'Crowdfund Updates Post',
         props: true,
         component: () => import('~/pages/project-updates/post').then(m => m.default || m)
