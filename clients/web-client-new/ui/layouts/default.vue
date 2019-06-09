@@ -12,31 +12,31 @@
 
 <script>
 import Vue from 'vue'
-import * as DB from '@/db'
 
 import '@/css/styles.scss'
 import 'swiper/dist/css/swiper.css'
 
 export default {
-    name: 'App',
     components: {
         'c-render-condition': () => import('~/components/render-condition').then(m => m.default || m),
-        'c-drawer': () => import('~/components/drawer').then(m => m.default || m),
-        'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m)
+        'c-drawer': () => import('~/components/drawer').then(m => m.default || m)
     },
-    props: ['data'],
     data() {
         return {
             renderCondition: 'none'
         }
     },
     computed: {
-        disableAnimations() { return this.$store.state.application.settings.client.animations }
+        disableAnimations() {
+            return this.$store.state.application.settings.client.animations
+        }
     },
     watch: {
         '$route'(to, from) {
-            $('body').removeClass('show-sidebar')
-            $('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-bars')
+            if (process.client) {
+                this.$('body').removeClass('show-sidebar')
+                this.$('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-bars')
+            }
 
             this.$store.state.application.activeModal = null
 
@@ -54,6 +54,7 @@ export default {
             this.ensureDesktopWelcome(to)
         },
         async '$store.state.auth.user'(newVal) {
+            // TODO: this is a little janky
             if (this.$store.state.application.signedIn && newVal === undefined) {
                 this.$store.state.application.signedIn = false
             } else {
@@ -64,9 +65,8 @@ export default {
                     ...this.$store.state.auth.user
                 }
 
-                await this.$api.service('/application/state').find().then(res => {
-                    this.$store.commit('application/updateState', res)
-                })
+                const state = await this.$api.service('/application/state').find()
+                this.$store.commit('application/updateState', state)
             }
         },
         '$store.state.application.activeProfile.role'(newVal) {

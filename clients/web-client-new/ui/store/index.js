@@ -215,7 +215,7 @@ if (decentralizedMode) {
         service('tags', { paginate: true }),
         service('votes', { paginate: true }),
         service('search', { paginate: true }),
-        service('application', { paginate: true }),
+        // service('application', { paginate: true }),
         auth({
             userService: 'accounts'
         })
@@ -264,22 +264,22 @@ export const actions = {
         service('tags', { paginate: true })(store)
         service('votes', { paginate: true })(store)
         service('search', { paginate: true })(store)
-        service('application', { paginate: true })(store)
+        // service('application', { paginate: true })(store)
 
         auth({
             userService: 'accounts'
         })(store)
 
-        let cookieToken = app.$cookies.get('feathers-jwt')
+        const cookieToken = app.$cookies.get('feathers-jwt')
 
         if (cookieToken) {
             const { accessToken } = await store.dispatch('auth/authenticate', {
                 strategy: 'jwt',
-                accessToken: cookieToken,
+                accessToken: cookieToken
             })
             console.log(cookieToken, accessToken)
         }
-        var l = await initAuth({
+        const l = await initAuth({
             commit,
             dispatch,
             req,
@@ -287,9 +287,9 @@ export const actions = {
             cookieName: 'feathers-jwt'
         })
             .catch(e => { console.log('Feathers exception', e) })
-console.log(l)
-            return l
+
+        return l
     }
 }
 
-//export const getters = {}
+// export const getters = {}

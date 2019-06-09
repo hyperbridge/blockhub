@@ -6,44 +6,82 @@ let loki = null
 let initCallback = null
 let initialized = false
 
-export let application = {
+export const application = {
     config: null
 }
 
-export let marketplace = {
+export const marketplace = {
     config: null,
     products: null,
     assets: null,
     posts: null
 }
 
-export let funding = {
+export const funding = {
     projects: null
 }
 
-export let setInitCallback = (cb) => {
+export const setInitCallback = cb => {
     initCallback = cb
 }
 
-export const init = () => {
+export const instance = () => loki
 
+export const updateCollection = (collection, data) => {
+    const obj = collection.findObject({ 'id': data.id })
+
+    if (obj && obj.$loki) {
+        collection.update(data)
+    } else {
+        data.$loki = undefined
+        collection.insert(data)
+    }
+}
+
+export const loadDefault = () => {
+    application.config = loki.addCollection('applicationConfigDefault')
+    marketplace.config = loki.addCollection('marketplaceConfigDefault')
+    marketplace.products = loki.addCollection('marketplaceProductsDefault')
+    marketplace.assets = loki.addCollection('marketplaceAssetsDefault')
+    marketplace.posts = loki.addCollection('marketplacePostsDefault')
+    funding.config = loki.addCollection('fundingConfigDefault')
+    funding.projects = loki.addCollection('fundingProjectsDefault')
+
+    data.marketplace.id = '1'
+    data.funding.id = '1'
+    data.application.id = '1'
+
+    try {
+        updateCollection(application.config, data.application)
+        updateCollection(marketplace.config, data.marketplace)
+        updateCollection(marketplace.products, data.marketplace.products)
+        updateCollection(marketplace.assets, data.marketplace.assets)
+        updateCollection(marketplace.posts, data.marketplace.posts)
+        updateCollection(funding.projects, data.funding.projects)
+        updateCollection(funding.config, data.funding)
+    } catch (e) {
+        console.warn(e)
+    }
+}
+
+export const init = () => {
     const databaseInitialize = () => {
     }
 
-    if (typeof indexedDB !== 'undefined') {
+    if (typeof indexedDB === 'undefined') {
+        loki = new Loki(null, {
+            autoload: false,
+            autosave: false,
+            autosaveInterval: 4000
+        })
+    } else {
         const idbAdapter = (new Loki()).getIndexedAdapter()
 
         loki = new Loki('main.db', {
             adapter: new idbAdapter('main.db'),
             autoload: false,
-            //autoloadCallback: databaseInitialize,
+            // autoloadCallback: databaseInitialize,
             autosave: true,
-            autosaveInterval: 4000
-        })
-    } else {
-        loki = new Loki(null, {
-            autoload: false,
-            autosave: false,
             autosaveInterval: 4000
         })
     }
@@ -54,7 +92,7 @@ export const init = () => {
 
     loadDefault()
 
-    loki.loadDatabase({}, (result) => {
+    const loadDatabase = () => {
         console.log('[BlockHub] Database loaded')
 
         let configFound = loki.getCollection('applicationConfig')
@@ -69,15 +107,15 @@ export const init = () => {
 
             const req = indexedDB.deleteDatabase('LokiCatalog')
 
-            req.onsuccess = function () {
-                //alert("Deleted settings successfully. The page will now reload.")
+            req.onsuccess = function onsuccess() {
+                // alert("Deleted settings successfully. The page will now reload.")
                 window.location = window.location.href.replace(window.location.hash, '')
             }
-            req.onerror = function () {
-                //alert("ERR 301: Couldn't delete database")
+            req.onerror = function onerror() {
+                // alert("ERR 301: Couldn't delete database")
             }
-            req.onblocked = function (event) {
-                //alert("ERR 302: Couldn't delete database due to the operation being blocked.")
+            req.onblocked = function onblocked() {
+                // alert("ERR 302: Couldn't delete database due to the operation being blocked.")
             }
 
             configFound = false
@@ -91,15 +129,14 @@ export const init = () => {
             marketplace.posts = loki.getCollection('marketplacePosts')
             funding.projects = loki.getCollection('fundingProjects')
             funding.config = loki.getCollection('fundingConfig')
-        }
-        else {
-            let applicationConfigData = application.config.data
-            let marketplaceConfigData = marketplace.config.data
-            let marketplaceProductsData = marketplace.products.data
-            let marketplaceAssetsData = marketplace.assets.data
-            let marketplacePostsData = marketplace.posts.data
-            let fundingProjectsData = funding.projects.data
-            let fundingConfigData = funding.config.data
+        } else {
+            const applicationConfigData = application.config.data
+            const marketplaceConfigData = marketplace.config.data
+            const marketplaceProductsData = marketplace.products.data
+            const marketplaceAssetsData = marketplace.assets.data
+            const marketplacePostsData = marketplace.posts.data
+            const fundingProjectsData = funding.projects.data
+            const fundingConfigData = funding.config.data
 
             application.config.chain().remove()
             marketplace.config.chain().remove()
@@ -136,37 +173,12 @@ export const init = () => {
         initialized = true
 
         initCallback && initCallback()
-    })
-}
-
-export const instance = () => {
-    return loki
-}
-
-export const loadDefault = () => {
-    application.config = loki.addCollection('applicationConfigDefault')
-    marketplace.config = loki.addCollection('marketplaceConfigDefault')
-    marketplace.products = loki.addCollection('marketplaceProductsDefault')
-    marketplace.assets = loki.addCollection('marketplaceAssetsDefault')
-    marketplace.posts = loki.addCollection('marketplacePostsDefault')
-    funding.config = loki.addCollection('fundingConfigDefault')
-    funding.projects = loki.addCollection('fundingProjectsDefault')
-
-    data.marketplace.id = '1'
-    data.funding.id = '1'
-    data.application.id = '1'
-
-    try {
-        updateCollection(application.config, data.application)
-        updateCollection(marketplace.config, data.marketplace)
-        updateCollection(marketplace.products, data.marketplace.products)
-        updateCollection(marketplace.assets, data.marketplace.assets)
-        updateCollection(marketplace.posts, data.marketplace.posts)
-        updateCollection(funding.projects, data.funding.projects)
-        updateCollection(funding.config, data.funding)
     }
-    catch (e) {
-        console.warn(e)
+
+    if (process.client) {
+        loki.loadDatabase({}, loadDatabase)
+    } else {
+        loadDatabase()
     }
 }
 
@@ -174,13 +186,13 @@ export const save = () => {
     if (!process.client) return
     if (!initialized) return
 
-    loki.saveDatabase(function (err) {
+    loki.saveDatabase(err => {
         if (err) {
             console.log(err)
             return
         }
 
-        console.log("[BlockHub] Database saved.")
+        console.log('[BlockHub] Database saved.')
     })
 }
 
@@ -194,24 +206,10 @@ export const clean = () => {
     funding.config.chain().remove()
 }
 
-export const updateCollection = (collection, data) => {
-    let obj = collection.findObject({ 'id': data.id })
-
-    if (obj && obj.$loki) {
-        collection.update(data)
-    } else {
-        data.$loki = undefined
-        collection.insert(data)
-    }
-}
-
 export const reload = () => {
     clean()
 
     loadDefault()
 }
 
-export const toObject = () => {
-    return {
-    }
-}
+export const toObject = () => ({})

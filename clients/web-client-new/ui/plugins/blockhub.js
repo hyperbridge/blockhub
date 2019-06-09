@@ -164,7 +164,7 @@ export default ({ app, store }) => {
     const plugin = {
         install(Vue, options) {
             Vue.mixin({
-                created () {
+                created() {
                     // access to blockhub anywhere
                     this.$blockhub = app.blockhub
                     this.$desktop = app.blockhub.bridge
