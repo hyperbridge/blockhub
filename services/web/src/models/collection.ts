@@ -1,14 +1,10 @@
 import { Model, RelationMappings } from 'objection'
 import Profile from './profile'
 import Node from './node'
+import BaseModel from './base'
 
-export default class Collection extends Model {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: Object
+export default class Collection extends BaseModel {
+    name!: String
     parentId!: Number
 
     static get tableName() {
@@ -18,12 +14,10 @@ export default class Collection extends Model {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: [],
+            required: ['id', 'createdAt', 'name', 'meta'],
             properties: {
-                id: { type: 'integer' }
-            },
-            options: {
-                timestamps: true
+                parentId: { type: 'integer' },
+                name: { type: 'string' }
             }
         }
     }
@@ -58,13 +52,5 @@ export default class Collection extends Model {
                 }
             },
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }

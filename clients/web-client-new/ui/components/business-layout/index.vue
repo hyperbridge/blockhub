@@ -313,23 +313,6 @@ export default {
     created() {
         this.updateBreadcrumbLinks()
         this.pageTitle = this.$route.meta.title || 'Dashboard'
-        // this.$store.dispatch('auth/authenticate')
-        //     .then(() => {
-        //         if (this.$store.state.auth.accessToken) {
-        //             this.initialize()
-        //         }
-        //     })
-        //     .catch(error => {
-        //         this.initialize()
-
-        //         if (error) {
-        //             if (!error.message.includes('Could not find stored JWT')) {
-        //                 console.error(error)
-        //             }
-        //             return
-        //         }
-
-        //     })
     },
     mounted() {
         this.$nextTick(() => {

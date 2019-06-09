@@ -32,7 +32,8 @@ export default {
             default: 'default'
         },
         fontSize: {
-            type: String
+            type: String,
+            default: '14'
         },
         width: String
     }

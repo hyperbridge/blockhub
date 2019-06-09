@@ -30,7 +30,7 @@ export default {
         }
     },
     async created() {
-        this.$store.state.application.signedIn = false
+        // this.$store.state.application.signedIn = false
         console.log(`[BlockHub] Render condition - ${this.type}`)
         if (this.type === 'initialized') {
             const jwt = this.$cookies.get('feathers-jwt')
@@ -68,26 +68,26 @@ export default {
             if (this.$store.state.auth.accessToken) {
                 this.satisfied = true
             } else {
-                await this.$store.dispatch('auth/authenticate', {
-                    strategy: 'jwt',
-                    accessToken: this.$cookies.get('feathers-jwt')
-                })
-                    .catch(error => {
-                        if (error.message.includes('Could not find stored JWT')) {
-                            // if (this.type === 'authenticated') {
-                            //     this.satisfied = true
-                            // }
+                // await this.$store.dispatch('auth/authenticate', {
+                //     strategy: 'jwt',
+                //     accessToken: this.$cookies.get('feathers-jwt')
+                // })
+                //     .catch(error => {
+                //         if (error.message.includes('Could not find stored JWT')) {
+                //             // if (this.type === 'authenticated') {
+                //             //     this.satisfied = true
+                //             // }
 
-                            // redirect to access denied screen
-                            this.$router.push('/denied')
+                //             // redirect to access denied screen
+                //             this.$router.push('/denied')
 
-                            return
-                        }
+                //             return
+                //         }
 
-                        console.error(error)
+                //         console.error(error)
 
-                        return error
-                    })
+                //         return error
+                //     })
 
                 this.satisfied = true
             }

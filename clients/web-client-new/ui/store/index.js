@@ -1,14 +1,9 @@
 import feathersClient from '../framework/feathers-client'
 import feathersVuex, { initAuth } from 'feathers-vuex'
-import url from 'url'
 import Vue from 'vue'
 
-import * as DB from '../db'
 import * as ChaosMonkey from '../framework/chaos-monkey'
-import * as ReputationEngine from '../framework/reputation-engine'
 import * as Bridge from '../framework/desktop-bridge'
-import * as API from '../framework/api'
-import seed from '../db/seed'
 
 export const strict = false
 
@@ -58,14 +53,14 @@ CheckDevConfig()
 let service = null
 let auth = null
 
-const IsDecentralizedMode = () => {
+const isDecentralizedMode = () => {
     if (!process.client) return
 
     // Decentralized mode if we're not on GameDelta
     return window.location.hostname.toLowerCase().indexOf('gamedelta') !== -1
 }
 
-const decentralizedMode = IsDecentralizedMode()
+const decentralizedMode = isDecentralizedMode()
 
 // const feathers = feathersVuex(feathersClient, {
 //     idField: 'id',
@@ -132,7 +127,7 @@ const initSubscribers = store => {
 }
 
 if (decentralizedMode) {
-    service = module => { // eslint-disable-line arrow-body-style
+    service = () => { // eslint-disable-line arrow-body-style
         return {
             'profiles': {
                 create(newProfile) {
@@ -220,6 +215,20 @@ if (decentralizedMode) {
             userService: 'accounts'
         })
     ]
+
+
+    // auth({
+    //     userService: 'accounts'
+    // })(store)
+
+    // const cookieToken = app.$cookies.get('feathers-jwt')
+
+    // if (cookieToken) {
+    //     store.dispatch('auth/authenticate', {
+    //         strategy: 'jwt',
+    //         accessToken: cookieToken
+    //     })
+    // }
 }
 
 export const actions = {
@@ -227,13 +236,22 @@ export const actions = {
         const origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg' // eslint-disable-line no-negated-condition
 
         const storage = {
-            getItem() { },
-            setItem() { },
-            removeItem() { }
+            getItem() {
+                return store.state.auth ? store.state.auth.accessToken : ''
+            },
+            setItem(key, value) {
+                store.state.auth.accessToken = value
+            },
+            removeItem() {
+                store.state.auth.accessToken = null
+            }
         }
 
         const client = feathersClient(origin, storage)
-        const { service, auth } = feathersVuex(client, { idField: 'id', enableEvents: false })
+        const feathers = feathersVuex(client, { idField: 'id', enableEvents: false })
+
+        service = feathers.service
+        auth = feathers.auth
 
         service('accounts', { paginate: true })(store)
         service('messages', { paginate: true })(store)
@@ -277,9 +295,10 @@ export const actions = {
                 strategy: 'jwt',
                 accessToken: cookieToken
             })
-            console.log(cookieToken, accessToken)
+            console.log(33333, cookieToken, accessToken)
         }
-        const l = await initAuth({
+
+        return initAuth({
             commit,
             dispatch,
             req,
@@ -287,8 +306,6 @@ export const actions = {
             cookieName: 'feathers-jwt'
         })
             .catch(e => { console.log('Feathers exception', e) })
-
-        return l
     }
 }
 

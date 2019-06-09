@@ -17,6 +17,7 @@ export default {
     },
     css: [],
     plugins: [
+        { src: '~/plugins/auth', ssr: false },
         { src: '~/plugins/components' },
         { src: '~/plugins/filters' },
         { src: '~/plugins/directives' },
@@ -46,7 +47,6 @@ export default {
     ],
     router: {
         extendRoutes(routes) {
-            console.log(sites)
             sites.forEach(site => {
                 site.routes.forEach(route => {
                     console.log(route)

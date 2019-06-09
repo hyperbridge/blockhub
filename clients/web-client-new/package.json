@@ -37,6 +37,7 @@
     "feathers-vuex": "^1.6.2",
     "jquery": "^3.3.1",
     "json-beautify": "^1.0.1",
+    "jsonwebtoken": "^8.5.1",
     "normalizr": "^3.3.0",
     "nuxt": "^2.7.1",
     "popper.js": "^1.15.0",
@@ -88,17 +89,23 @@
     ],
     "rules": {
       "vue/component-name-in-template-casing": "off",
-      "vue/max-attributes-per-line": ["error", {
-        "singleline": 5,
-        "multiline": {
-          "max": 1,
-          "allowFirstLine": false
+      "vue/max-attributes-per-line": [
+        "error",
+        {
+          "singleline": 5,
+          "multiline": {
+            "max": 1,
+            "allowFirstLine": false
+          }
         }
-      }],
-      "vue/html-closing-bracket-newline": ["error", {
-        "singleline": "never",
-        "multiline": "never"
-      }],
+      ],
+      "vue/html-closing-bracket-newline": [
+        "error",
+        {
+          "singleline": "never",
+          "multiline": "never"
+        }
+      ],
       "vue/html-closing-bracket-spacing": "error",
       "vue/html-indent": [
         "error",

@@ -83,7 +83,8 @@ export default {
             default: true
         },
         fontSize: {
-            type: String
+            type: String,
+            default: '14'
         }
     },
     computed: {

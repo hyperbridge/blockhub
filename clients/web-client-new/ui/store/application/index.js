@@ -145,15 +145,15 @@ export const actions = {
             store.commit('activateModal', 'welcome')
         }
     },
-    login(store, payload) {
-        store.dispatch('auth/authenticate', { strategy: 'local', email: payload.email, password: payload.password }, { root: true })
+    async login(store, payload) {
+        await store.dispatch('auth/authenticate', { strategy: 'local', email: payload.email, password: payload.password }, { root: true })
 
-        store.dispatch('authenticate')
+        await store.dispatch('authenticate')
     },
     async authenticate(store, payload) {
         await store.dispatch('profiles/find', {
             query: {
-                accountId: store.rootState.auth.user.id,
+                accountId: store.rootState.accounts.currentId,
                 $sort: {
                     createdAt: -1
                 },

@@ -29,7 +29,7 @@
                 id="page-content"
                 class="page__content page__content-invert invert"
                 :class="{'make-it-blur': bluredBg, 'with-shortcuts': showShortcuts}"
-                :style="`background: url(${bgImage}) top center no-repeat;background-size: cover;`">
+                :style="bgImage ? `background: url(${bgImage}) top center no-repeat;background-size: cover;` : ''">
                 <!-- v-drag-and-drop:options="dragOptions"> -->
                 <!-- <div class="loader-block" v-if="!isConnected">
                     <div class="loader-block__container">

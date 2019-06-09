@@ -26,6 +26,7 @@ export  default class BaseModel extends Model {
             enum: ['active', 'disabled', 'removed'],
             default: 'active'
         }
+        jsonSchema.properties.meta = { type: 'object' }
 
         return jsonSchema
     }

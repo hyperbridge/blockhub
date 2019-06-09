@@ -124,6 +124,7 @@ export default {
             createForm: false,
             createCollectionRequest: {
                 name: ''
+                // meta: {}
             }
         }
     },

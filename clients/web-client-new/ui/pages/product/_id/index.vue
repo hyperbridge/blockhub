@@ -629,8 +629,7 @@ export default {
             }
 
             const links = [
-                { to: { path: '/' }, title: 'Store' },
-                { to: { path: `/product/${this.id}` }, title: this.product.name }
+                { to: { path: '/' }, title: 'Store' }
             ]
 
             if (this.section === 'community') {
@@ -701,6 +700,7 @@ export default {
     },
     methods: {
         updateSection() {
+            return
             if (!this.section) {
                 this.section = this.$route.meta.section
             }
