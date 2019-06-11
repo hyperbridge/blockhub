@@ -5,9 +5,7 @@
         "accountId": 1,
         "address": null,
         "avatar": null,
-        "key": null,
         "meta": {},
-        "role": "developer",
-        "value": null
+        "role": "developer"
     }
 ]

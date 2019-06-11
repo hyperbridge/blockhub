@@ -13,6 +13,7 @@ export  default class BaseModel extends Model {
     static idColumn = 'id'
 
     $beforeValidate (jsonSchema, json, opt) {
+        // @ts-ignore
         if (this.constructor.timestamps) {
             jsonSchema.properties.createdAt = { type: 'string', format: 'date-time' }
             jsonSchema.properties.updatedAt = { type: 'string', format: 'date-time' }
@@ -32,11 +33,13 @@ export  default class BaseModel extends Model {
     }
 
     $beforeInsert () {
+        // @ts-ignore
         if (!this.constructor.timestamps) return
         this.createdAt = new Date().toISOString()
     }
 
     $beforeUpdate () {
+        // @ts-ignore
         if (!this.constructor.timestamps) return
         this.updatedAt = new Date().toISOString()
     }

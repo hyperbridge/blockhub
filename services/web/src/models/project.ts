@@ -207,17 +207,17 @@ export default class Project extends BaseModel {
         }
     }
 
-    static get namedFilters() {
-        const knex = this.app.get('knex');
+    // static get namedFilters() {
+    //     const knex = this.app.get('knex');
 
-        return {
-            incomplete: builder => {
-            builder
-                .where('complete', '=', false)
-                .where('dueDate', '<', knex.fn.now());
-            }
-        };
-    }
+    //     return {
+    //         incomplete: builder => {
+    //         builder
+    //             .where('complete', '=', false)
+    //             .where('dueDate', '<', knex.fn.now());
+    //         }
+    //     };
+    // }
 }
 
         // "id": 1,

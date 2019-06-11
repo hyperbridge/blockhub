@@ -1,4 +1,4 @@
-import { RelationMappings } from 'objection'
+import { Model, RelationMappings } from 'objection'
 import Project from './project'
 import License from './license'
 import Order from './order'

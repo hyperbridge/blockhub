@@ -19,11 +19,11 @@ export default class Offer extends Model {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['accountId'],
+            required: ['ownerId'],
 
             properties: {
                 id: { type: 'integer' },
-                accountId: { type: 'integer' },
+                ownerId: { type: 'integer' },
                 address: { type: 'string' }
             },
             options: {
@@ -42,11 +42,11 @@ export default class Offer extends Model {
                     to: 'nodes.id'
                 }
             },
-            profile: {
+            owner: {
                 relation: Model.HasOneRelation,
                 modelClass: Profile,
                 join: {
-                    from: 'offers.assetId',
+                    from: 'offers.ownerId',
                     to: 'profiles.id'
                 }
             },
