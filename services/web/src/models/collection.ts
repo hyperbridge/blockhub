@@ -11,6 +11,10 @@ export default class Collection extends BaseModel {
         return 'collections'
     }
 
+    static get timestamps() {
+        return true
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',

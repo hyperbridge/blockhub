@@ -27,12 +27,7 @@ export default class Account extends BaseModel {
                 email: { type: 'string' },
                 firstName: { type: 'string', minLength: 1, maxLength: 255 },
                 lastName: { type: 'string', minLength: 1, maxLength: 255 },
-                password: { type: 'string' },
-                // status: {
-                //     type: 'string',
-                //     enum: ['active', 'disabled', 'removed'],
-                //     default: 'active'
-                // }
+                password: { type: 'string' }
             }
         }
     }
