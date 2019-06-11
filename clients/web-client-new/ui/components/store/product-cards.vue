@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/css/helpers/mixins.scss';
+@import '../../css/helpers/mixins.scss';
 
 .product-grid-wrapper {
     margin-bottom: 40px;

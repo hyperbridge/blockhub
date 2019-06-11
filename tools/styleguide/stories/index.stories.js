@@ -20,34 +20,34 @@ import {withKnobs, text, boolean, number, object} from '@storybook/addon-knobs/v
 import * as data from './components-data'
 
 
-const StoreDummy = {
-    install(Vue, options) {
-        Vue.prototype.$store = store
-    }
-}
+// const StoreDummy = {
+//     install(Vue, options) {
+//         Vue.prototype.$store = store
+//     }
+// }
 
-Vue.use(StoreDummy)
+// Vue.use(StoreDummy)
 
-//import '!style-loader!css-loader!./styles.scss'
+// //import '!style-loader!css-loader!./styles.scss'
 
-window.ga = function() {}
+// window.ga = function() {}
 
-Bridge.init(store, router)
+// Bridge.init(store, router)
 
-store.dispatch('database/init')
-store.dispatch('application/init')
-store.dispatch('marketplace/init')
-store.dispatch('funding/init')
+// store.dispatch('database/init')
+// store.dispatch('application/init')
+// store.dispatch('marketplace/init')
+// store.dispatch('funding/init')
 
-console.log('BlockHub initialized.')
+// console.log('BlockHub initialized.')
 
 
 // addDecorator(withViewport('desktop'))
 addDecorator(StoryRouter())
 
 
-import PromotionItem from '../ui/components/promotion-box/item'
-import PromotionList from '../ui/components/promotion-box/list'
+import PromotionItem from '@/components/promotion-box/item'
+import PromotionList from '@/components/promotion-box/list'
 
 storiesOf('Promotion Box', module)
     .add('item', () => ({
@@ -97,7 +97,7 @@ storiesOf('Promotion Box', module)
                     </div></div>`
     }))
 
-import AssetsImporter from '../ui/components/asset-importer'
+import AssetsImporter from '@/components/asset-importer'
 
 storiesOf('Assets Importer', module)
     .add('default', () => ({
@@ -112,8 +112,8 @@ storiesOf('Assets Importer', module)
         template: '<div class="row"><div class="col-8"><c-assets-importer show_skipped="show_skipped" /></div></div>'
     }))
 
-import Notification from '../ui/components/notification'
-import NotificationInline from '../ui/components/notification/inline'
+import Notification from '@/components/notification'
+import NotificationInline from '@/components/notification/inline'
 
 storiesOf('Notifications', module)
     .add('default', () => ({
@@ -262,7 +262,7 @@ storiesOf('Notifications', module)
         `
     }))
 
-import Searcher from '../ui/components/searcher';
+import Searcher from '@/components/searcher';
 
 storiesOf('Searcher', module)
     .add('default', () => ({
@@ -319,8 +319,8 @@ storiesOf('Searcher', module)
             </div>`
     }))
 
-import RatingStars from '../ui/components/rating-stars';
-import RatingBlock from '../ui/components/rating-block/index'
+import RatingStars from '@/components/rating-stars';
+import RatingBlock from '@/components/rating-block/index'
 
 storiesOf('Rating', module)
     .add('Stars', () => ({
@@ -360,7 +360,7 @@ storiesOf('Rating', module)
         `
     }))
 
-import Author from '../ui/components/author';
+import Author from '@/components/author';
 
 storiesOf('Author', module)
     .add('Author', () => ({
@@ -376,7 +376,7 @@ storiesOf('Author', module)
         template: `<div class="text-white p-5"><author :author="author"/></div>`
     }))
 
-import Tags from '../ui/components/tags';
+import Tags from '@/components/tags';
 
 storiesOf('Tags', module)
     .add('Tags', () => ({
@@ -384,8 +384,8 @@ storiesOf('Tags', module)
         template: `<div class="text-white p-5"><tags :tags="['RPG', 'Open-World']"/></div>`
     }))
 
-import LoadingLine from '../ui/components/loading-bar';
-import LoadingCircle from '../ui/components/loading-bar/circle';
+import LoadingLine from '@/components/loading-bar';
+import LoadingCircle from '@/components/loading-bar/circle';
 
 storiesOf('LoadingBar', module)
     .add('line', () => ({
@@ -402,14 +402,14 @@ storiesOf('LoadingBar', module)
     }))
 
 
-import NavigationAccount from '../ui/components/navigation/account';
-import NavigationAsset from '../ui/components/navigation/asset';
-import NavigationFunding from '../ui/components/navigation/funding';
-import NavigationHelp from '../ui/components/navigation/help';
-import NavigationProduct from '../ui/components/navigation/product';
-import NavigationProject from '../ui/components/navigation/project';
-import NavigationSettings from '../ui/components/navigation/settings';
-import NavigationWallet from '../ui/components/navigation/wallet';
+import NavigationAccount from '@/components/navigation/account';
+import NavigationAsset from '@/components/navigation/asset';
+import NavigationFunding from '@/components/navigation/funding';
+import NavigationHelp from '@/components/navigation/help';
+import NavigationProduct from '@/components/navigation/product';
+import NavigationProject from '@/components/navigation/project';
+import NavigationSettings from '@/components/navigation/settings';
+import NavigationWallet from '@/components/navigation/wallet';
 
 storiesOf('Navigation', module)
     .add('account', () => ({
@@ -438,10 +438,10 @@ storiesOf('Navigation', module)
     }))
 
 
-import Card from '../ui/components/project/card';
-import Badges from '../ui/components/project/badges';
-import Milestone from '../ui/components/project/milestone';
-import UpdatesCount from '../ui/components/project/updates-count';
+import Card from '@/components/project/card';
+import Badges from '@/components/project/badges';
+import Milestone from '@/components/project/milestone';
+import UpdatesCount from '@/components/project/updates-count';
 
 storiesOf('Projects', module)
     .add('card', () => ({
@@ -623,10 +623,10 @@ storiesOf('Projects', module)
     }))
 
 
-import Tabs from '../ui/components/tab/tabs.vue'
-import Tab from '../ui/components/tab/tab.vue'
-import TabsUniversal from '@/ui/components/tab/tabs-universal';
-import TabUniversal from '@/ui/components/tab/tab-universal';
+import Tabs from '@/components/tab/tabs.vue'
+import Tab from '@/components/tab/tab.vue'
+import TabsUniversal from '@/components/tab/tabs-universal';
+import TabUniversal from '@/components/tab/tab-universal';
 
 storiesOf('Tabs', module)
     .add('default', () => ({
@@ -845,9 +845,9 @@ storiesOf('Tabs', module)
             </div>`
     }))
 
-import SystemRequirements from '@/ui/components/product-overview/system-requirements';
+import SystemRequirements from '@/components/product-overview/system-requirements';
 
-import MilestonesLine from '../ui/components/milestones-line'
+import MilestonesLine from '@/components/milestones-line'
 
 storiesOf('Milestones Line', module)
     .addDecorator(withKnobs)
@@ -886,8 +886,8 @@ storiesOf('Milestones Line', module)
     }))
 
 
-import SidebarMenu from '../ui/components/sidebar-menu'
-import SidebarMenuLink from '../ui/components/sidebar-menu/menu_item'
+import SidebarMenu from '@/components/sidebar-menu'
+import SidebarMenuLink from '@/components/sidebar-menu/menu-item'
 
 storiesOf('Sidebar Menu', module)
     .add('Main title', () => ({
@@ -952,9 +952,9 @@ const injectButtonTemplate = code => `
     </div>
 `;
 
-import Buttons from '../ui/components/buttons'
-import LoadMore from '../ui/components/buttons/load-more'
-import ButtonArrows from '@/ui/components/buttons/arrows'
+import Buttons from '@/components/buttons'
+import LoadMore from '@/components/buttons/load-more'
+import ButtonArrows from '@/components/buttons/arrows'
 
 storiesOf('Buttons', module)
     .add('default', () => ({
@@ -1170,7 +1170,7 @@ storiesOf('Buttons', module)
     }))
 
 
-import MoneyInfo from '../ui/components/money-info'
+import MoneyInfo from '@/components/money-info'
 
 storiesOf('Money Info', module)
     .add('default', () => ({
@@ -1184,8 +1184,8 @@ storiesOf('Money Info', module)
         `
     }));
 
-import Checkbox from '@/ui/components/checkbox';
-import CheckboxGroup from '@/ui/components/checkbox/group.vue';
+import Checkbox from '@/components/checkbox';
+import CheckboxGroup from '@/components/checkbox/group.vue';
 
 storiesOf('Checkbox', module)
     .add('Single checkbox', () => ({
@@ -1220,7 +1220,7 @@ storiesOf('Checkbox', module)
         `
     }));
 
-import Tooltips from '@/ui/components/tooltips';
+import Tooltips from '@/components/tooltips';
 
 storiesOf('Tooltips', module)
     .add('dark', () => ({
@@ -1294,7 +1294,7 @@ storiesOf('Tooltips', module)
         `
     }))
 
-import TooltipUniversal from '@/ui/components/tooltips/universal';
+import TooltipUniversal from '@/components/tooltips/universal';
 
 storiesOf('Tooltip Universal', module)
     .add('default', () => ({
@@ -1439,7 +1439,7 @@ storiesOf('Tooltip Universal', module)
     }))
 
 
-import ActivityChart from '../ui/components/activity-chart'
+import ActivityChart from '@/components/activity-chart'
 
 storiesOf('Activity Chart', module)
     .add('default', () => ({
@@ -1487,9 +1487,9 @@ storiesOf('Activity Chart', module)
         `
     }))
 
-import PopUps from '@/ui/components/popups'
-import BasicPopup from '@/ui/components/popups/basic'
-import TermsPopup from '@/ui/components/popups/terms'
+import PopUps from '@/components/popups'
+import BasicPopup from '@/components/popups/basic'
+import TermsPopup from '@/components/popups/terms'
 
 storiesOf('Popups', module)
     .add('default', () => ({
@@ -1922,7 +1922,7 @@ storiesOf('Popups', module)
     }))
     .add('play', () => ({
         components:{
-            'c-play-popup' : (resolve) => require(['@/ui/components/popups/play'], resolve)
+            'c-play-popup' : (resolve) => require(['@/components/popups/play'], resolve)
         },
         data(){
             return{
@@ -1933,7 +1933,7 @@ storiesOf('Popups', module)
     }))
     .add('Add to Collection', () =>({
         components:{
-            'c-popup-collection-add': (resolve) => require(['@/ui/components/popups/collection-add'], resolve),
+            'c-popup-collection-add': (resolve) => require(['@/components/popups/collection-add'], resolve),
         },
         data(){
             return{
@@ -1964,7 +1964,7 @@ storiesOf('Popups', module)
     }))
 
 
-import RangeSlider from '../ui/components/range-slider/pure'
+import RangeSlider from '@/components/range-slider/pure'
 
 storiesOf('Range Slider', module)
     .add('default', () => ({
@@ -1992,7 +1992,7 @@ storiesOf('Range Slider', module)
     }))
 
 
-import AssetsGrid from '../ui/components/assets-grid'
+import AssetsGrid from '@/components/assets-grid'
 
 const assets_list = [
     {
@@ -2072,7 +2072,7 @@ storiesOf('Assets Grid', module)
         `
     }), {viewport: 'desktop'})
 
-import AssetsPopup from '../ui/components/asset-overview-popup'
+import AssetsPopup from '@/components/asset-overview-popup'
 
 storiesOf('Assets Overview Popup', module)
     .addDecorator(withKnobs)
@@ -2132,7 +2132,7 @@ storiesOf('Assets Overview Popup', module)
         `
     }));
 
-import Switch from '../ui/components/switch'
+import Switch from '@/components/switch'
 
 storiesOf('Switch', module)
     .addDecorator(withKnobs)
@@ -2171,8 +2171,8 @@ storiesOf('Switch', module)
     }));
 
 
-import AssetsList from '../ui/components/assets-list-item/featured-list.vue'
-import AssetsListDetail from '../ui/components/assets-list-item'
+import AssetsList from '@/components/assets-list-item/featured-list.vue'
+import AssetsListDetail from '@/components/assets-list-item'
 
 storiesOf('Assets List', module)
     .addDecorator(withKnobs)
@@ -2242,8 +2242,8 @@ storiesOf('Assets List', module)
     }))
 
 
-import Block from '../ui/components/block'
-import simpleBlock from '../ui/components/block/simple'
+import Block from '@/components/block'
+import simpleBlock from '@/components/block/simple'
 
 storiesOf('Block', module)
     .add('default', () => ({
@@ -2315,8 +2315,8 @@ storiesOf('Block', module)
     }))
 
 
-import CustomModal from '../ui/components/modal/custom'
-import Modal from '@/ui/components/modal/';
+import CustomModal from '@/components/modal/custom'
+import Modal from '@/components/modal/';
 
 storiesOf('Modal', module)
     .add('image', () => ({
@@ -2361,11 +2361,11 @@ storiesOf('Modal', module)
         `
     }))
 
-import Dropdown from '../ui/components/dropdown-menu/type-2'
-import DropdownCustom from '../ui/components/dropdown-menu/type-3'
-import DropdownPost from '../ui/components/dropdown-menu/index'
-import DropdownCurrency from '../ui/components/dropdown-menu/currency'
-import DropdownLang from '../ui/components/dropdown-menu/language'
+import Dropdown from '@/components/dropdown-menu/type-2'
+import DropdownCustom from '@/components/dropdown-menu/type-3'
+import DropdownPost from '@/components/dropdown-menu/index'
+import DropdownCurrency from '@/components/dropdown-menu/currency'
+import DropdownLang from '@/components/dropdown-menu/language'
 
 storiesOf('Dropdown', module)
     .add('default', () => ({
@@ -2521,8 +2521,8 @@ storiesOf('Dropdown', module)
         `
     }))
 
-import DropdownMenu from '../ui/components/dropdown-menu/type-2.vue'
-import FTradedAssets from '../ui/components/frequently-traded-assets/index'
+import DropdownMenu from '@/components/dropdown-menu/type-2.vue'
+import FTradedAssets from '@/components/frequently-traded-assets/index'
 
 storiesOf('Frequently traded assets', module)
     .add('default', () => ({
@@ -2548,7 +2548,7 @@ storiesOf('Frequently traded assets', module)
         `
     }))
 
-import GamePlan from '@/ui/components/game-plans/plan'
+import GamePlan from '@/components/game-plans/plan'
 
 storiesOf('Game Plans', module)
     .add('default', () => ({
@@ -2588,8 +2588,8 @@ storiesOf('Game Plans', module)
          `
     }))
 
-import GamesGrid from '../ui/components/game-grid/with-description'
-import GamesGridSimple from '../ui/components/game-grid/simple'
+import GamesGrid from '@/components/game-grid/with-description'
+import GamesGridSimple from '@/components/game-grid/simple'
 
 storiesOf('Games Grid', module)
     .addDecorator(withKnobs)
@@ -2631,7 +2631,7 @@ storiesOf('Games Grid', module)
          `
     }))
 
-// import Headers from '../ui/components/headers/basic'
+// import Headers from '@/components/headers/basic'
 // storiesOf('Headers', module)
 //     .add('default', () => ({
 //         components: {
@@ -2642,9 +2642,9 @@ storiesOf('Games Grid', module)
 // `
 // }))
 
-import BlockHeaders from '../ui/components/heading-bar/index'
-import BlockHeadersColor from '../ui/components/heading-bar/simple-colored.vue'
-import BlockHeadersAddFields from '../ui/components/heading-bar/additional-action'
+import BlockHeaders from '@/components/heading-bar/index'
+import BlockHeadersColor from '@/components/heading-bar/simple-colored.vue'
+import BlockHeadersAddFields from '@/components/heading-bar/additional-action'
 
 const injectHBarTemp = code => `
     <div class="row">
@@ -2734,9 +2734,9 @@ storiesOf('Block Title', module)
     }))
 
 
-import NewsListNav from '../ui/components/news-list/navigation'
-import NewsList from '../ui/components/news-list/articles'
-import NewsArticle from '../ui/components/news-list/article'
+import NewsListNav from '@/components/news-list/navigation'
+import NewsList from '@/components/news-list/articles'
+import NewsArticle from '@/components/news-list/article'
 
 storiesOf('News List', module)
     .add('default', () => ({
@@ -2858,7 +2858,7 @@ storiesOf('News List', module)
         `
     }))
 
-import Pagination from '@/ui/components/pagination/index';
+import Pagination from '@/components/pagination/index';
 
 storiesOf('Pagination', module)
     .add('default', () => ({
@@ -2893,9 +2893,9 @@ storiesOf('Pagination', module)
     }))
 
 
-import ProductCommunity from '@/ui/components/community/post-item';
-import ProductCommunityComment from '@/ui/components/community/comment';
-import ProductCommunityReply from '@/ui/components/community/reply';
+import ProductCommunity from '@/components/community/post-item';
+import ProductCommunityComment from '@/components/community/comment';
+import ProductCommunityReply from '@/components/community/reply';
 
 storiesOf('Product Community', module)
     .add('post', () => ({
@@ -2934,7 +2934,7 @@ storiesOf('Product Community', module)
     }))
 
 
-import ProjectCard from '../ui/components/project/card'
+import ProjectCard from '@/components/project/card'
 
 storiesOf('Project Card', module)
     .add('default', () => ({
@@ -3025,7 +3025,7 @@ storiesOf('Project Card', module)
     }))
 
 
-import SendingFundsPopup from '../ui/components/send-funds-popup/index'
+import SendingFundsPopup from '@/components/send-funds-popup/index'
 
 storiesOf('Sending Funds(not finished)', module)
     .add('default', () => ({
@@ -3047,7 +3047,7 @@ storiesOf('Sending Funds(not finished)', module)
     }))
 
 
-import UserCard from '@/ui/components/user-card/index';
+import UserCard from '@/components/user-card/index';
 
 storiesOf('User Card', module)
     .add('default', () => ({
@@ -3082,7 +3082,7 @@ storiesOf('User Card', module)
     }))
 
 
-import ScreenGallery from '../ui/components/screen-gallery/gallery';
+import ScreenGallery from '@/components/screen-gallery/gallery';
 
 storiesOf('Gallery', module)
     .add('screen-gallery', () => ({
@@ -3108,9 +3108,9 @@ storiesOf('Gallery', module)
     }))
 
 
-import ProductCardDynamic from '@/ui/components/store/product-card-dynamic';
-import ProductCard from '@/ui/components/store/product-card';
-import ProductsCards from '@/ui/components/store/product-cards';
+import ProductCardDynamic from '@/components/store/product-card-dynamic';
+import ProductCard from '@/components/store/product-card';
+import ProductsCards from '@/components/store/product-cards';
 
 const productsCardsData = [
     {
@@ -3211,8 +3211,8 @@ storiesOf('Product Card', module)
     }))
 
 
-import CuratorReview from '@/ui/components/store/curator-review';
-import CuratorsReviews from '@/ui/components/store/curator-reviews';
+import CuratorReview from '@/components/store/curator-review';
+import CuratorsReviews from '@/components/store/curator-reviews';
 
 const curatorReview = {
     author: {name: 'SatoSan', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'},
@@ -3251,7 +3251,7 @@ storiesOf('Curators Reviews', module)
     }))
 
 
-import ImagesExplorer from '@/ui/components/images-explorer';
+import ImagesExplorer from '@/components/images-explorer';
 
 storiesOf('Images Explorer', module)
     .add('default', () => ({
@@ -3273,8 +3273,8 @@ storiesOf('Images Explorer', module)
     }))
 
 
-import CollectionItem from '@/ui/components/collection/item';
-import CollectionList from '@/ui/components/collection/list';
+import CollectionItem from '@/components/collection/item';
+import CollectionList from '@/components/collection/list';
 import 'swiper/dist/css/swiper.css'
 import {swiper, swiperSlide} from 'vue-awesome-swiper'
 
@@ -3413,10 +3413,10 @@ storiesOf('Collection', module)
     }))
 
 
-import GameSeries from '@/ui/components/game-series/index'
-import GameDescription from '@/ui/components/game-series/game-description'
-import GameIncludesList from '@/ui/components/game-series/game-includes-list'
-import GameIncludesItem from '@/ui/components/game-series/game-includes-item'
+import GameSeries from '@/components/game-series/index'
+import GameDescription from '@/components/game-series/game-description'
+import GameIncludesList from '@/components/game-series/game-includes-list'
+import GameIncludesItem from '@/components/game-series/game-includes-item'
 
 storiesOf('Game Series', module)
     .add('default', () => ({
@@ -3581,8 +3581,8 @@ storiesOf('Game Series', module)
     }))
 
 
-import ProgressBar from '@/ui/components/progress-bar';
-import ProgressBarFancy from '@/ui/components/progress-bar/fancy';
+import ProgressBar from '@/components/progress-bar';
+import ProgressBarFancy from '@/components/progress-bar/fancy';
 
 storiesOf('Progress Bar', module)
     .add('default', () => ({
@@ -3648,7 +3648,7 @@ storiesOf('Progress Bar', module)
                     </div>`
     }))
 
-import ProjectMilestone from '@/ui/components/project/milestone';
+import ProjectMilestone from '@/components/project/milestone';
 
 storiesOf('Project Milestone', module)
     .add('default', () => ({
@@ -3681,7 +3681,7 @@ storiesOf('Project Milestone', module)
         `
     }))
 
-import CommunitySpotlight from '@/ui/components/community-spotlight';
+import CommunitySpotlight from '@/components/community-spotlight';
 
 storiesOf('Community Spotlight', module)
     .add('default', () => ({
@@ -3706,8 +3706,8 @@ storiesOf('Community Spotlight', module)
         `
     }))
 
-import ProductReview from '@/ui/components/review';
-import ProductReviewForm from '@/ui/components/review/create';
+import ProductReview from '@/components/review';
+import ProductReviewForm from '@/components/review/create';
 
 storiesOf('Product Review', module)
     .add('default', () => ({
@@ -3750,13 +3750,13 @@ storiesOf('Product Review', module)
     }))
     .add('view review', () => ({
         components: {
-            'c-view-review': (resolve) => require(['@/ui/components/review/view'], resolve),
+            'c-view-review': (resolve) => require(['@/components/review/view'], resolve),
         },
         template: `<div class='p-5' style="width: 1000px"><c-view-review /></div>`
     }))
 
 
-import Banner from '@/ui/components/banner'
+import Banner from '@/components/banner'
 
 storiesOf('Banner', module)
     .add('image', () => ({
@@ -3846,7 +3846,7 @@ storiesOf('Banner', module)
             </div>`
     }))
 
-import LanguageSupport from '@/ui/components/product-overview/language-support';
+import LanguageSupport from '@/components/product-overview/language-support';
 
 storiesOf('Product Overview', module)
     .add('Language Support', () => ({
@@ -3951,8 +3951,8 @@ storiesOf('Product Overview', module)
     }))
 
 
-import Input from '@/ui/components/inputs';
-import InputSearcher from '@/ui/components/inputs/searcher';
+import Input from '@/components/inputs';
+import InputSearcher from '@/components/inputs/searcher';
 
 storiesOf('Inputs', module)
     .add('default', () => ({
@@ -3985,8 +3985,8 @@ storiesOf('Inputs', module)
     }))
 
 
-import TimelineList from '@/ui/components/timeline/list.vue';
-import TimelineItem from '@/ui/components/timeline/item.vue';
+import TimelineList from '@/components/timeline/list.vue';
+import TimelineItem from '@/components/timeline/item.vue';
 
 storiesOf('Timeline', module)
     .add('item', () => ({
@@ -4108,7 +4108,7 @@ storiesOf('Timeline', module)
                         </div>`
     }))
 
-import PurchaseBlock from '@/ui/components/purchase-block';
+import PurchaseBlock from '@/components/purchase-block';
 
 storiesOf('Purchase block', module)
     .add('default', () => ({
@@ -4177,7 +4177,7 @@ storiesOf('Purchase block', module)
     }))
 
 
-import PurchaseOption from '@/ui/components/purchase-option';
+import PurchaseOption from '@/components/purchase-option';
 
 storiesOf('Purchase Option', module)
     .add('single', () => ({
@@ -4254,7 +4254,7 @@ storiesOf('Purchase Option', module)
         `
     }))
 
-import ParticipationTier from '@/ui/components/participation-tier'
+import ParticipationTier from '@/components/participation-tier'
 
 storiesOf('Participation Tiers', module)
     .add('default', () => ({
@@ -4331,8 +4331,8 @@ storiesOf('Participation Tiers', module)
         `
     }))
 
-import ContributeForm from '@/ui/components/contribute/form.vue'
-import ContributePledge from '@/ui/components/contribute/pledge.vue'
+import ContributeForm from '@/components/contribute/form.vue'
+import ContributePledge from '@/components/contribute/pledge.vue'
 
 storiesOf('Contribute', module)
     .add('form', () => ({
@@ -4378,7 +4378,7 @@ storiesOf('Contribute', module)
                     </div>`
     }))
 
-import CookiePolicy from '@/ui/components/cookie-policy'
+import CookiePolicy from '@/components/cookie-policy'
 
 storiesOf('Cookie policy', module)
     .add('default', () => ({
@@ -4390,7 +4390,7 @@ storiesOf('Cookie policy', module)
                     </div> `
     }))
 
-import WelcomeBox from '@/ui/components/welcome-box'
+import WelcomeBox from '@/components/welcome-box'
 
 storiesOf('Welcome Box', module)
     .add('default', () => ({
@@ -4402,7 +4402,7 @@ storiesOf('Welcome Box', module)
                     </div> `
     }))
 
-import Share from '@/ui/components/share/type-1'
+import Share from '@/components/share/type-1'
 
 storiesOf('Share', module)
     .add('type 1', () => ({
@@ -4462,7 +4462,7 @@ storiesOf('Share', module)
                     </div> `
     }))
 
-import StreamItem from '@/ui/components/stream'
+import StreamItem from '@/components/stream'
 
 storiesOf('Stream', module)
     .add('default', () => ({
@@ -4497,7 +4497,7 @@ storiesOf('Stream', module)
     }))
 
 
-import List from '@/ui/components/list/dots'
+import List from '@/components/list/dots'
 
 storiesOf('List', module)
     .add('doted', () => ({
@@ -4514,7 +4514,7 @@ storiesOf('List', module)
         </div>`
     }))
 
-import GameInstallerModal from '@/ui/components/game-installer'
+import GameInstallerModal from '@/components/game-installer'
 
 storiesOf('Game Installer Modal', module)
     .add('default', () => ({
@@ -4570,8 +4570,8 @@ storiesOf('Game Installer Modal', module)
     }))
 
 
-import Emoji from '@/ui/components/emoji'
-import EmojiSingle from '@/ui/components/emoji/single'
+import Emoji from '@/components/emoji'
+import EmojiSingle from '@/components/emoji/single'
 
 storiesOf('Emoji', module)
     .add('picker', () => ({
@@ -4594,11 +4594,11 @@ storiesOf('Emoji', module)
     }))
 
 
-import Landing from '@/ui/components/landing'
-import LandingTitle from '@/ui/components/landing/block-title/simple'
-import LandingTitleShadow from '@/ui/components/landing/block-title/shadow'
-import LandingTitleGradient from '@/ui/components/landing/block-title/gradient'
-import LandingContent from '@/ui/components/landing/block-content/simple'
+import Landing from '@/components/landing'
+import LandingTitle from '@/components/landing/block-title/simple'
+import LandingTitleShadow from '@/components/landing/block-title/shadow'
+import LandingTitleGradient from '@/components/landing/block-title/gradient'
+import LandingContent from '@/components/landing/block-content/simple'
 
 storiesOf('Landing Page', module)
     .add('block title', () => ({
@@ -4655,7 +4655,7 @@ storiesOf('Landing Page', module)
     }))
     .add('divider', () => ({
         components: {
-            'c-landing-divider': (resolve) => require(['@/ui/components/landing/block-content/divider'], resolve),
+            'c-landing-divider': (resolve) => require(['@/components/landing/block-content/divider'], resolve),
         },
         template: `
         <div class="p-5">
@@ -4665,7 +4665,7 @@ storiesOf('Landing Page', module)
     }))
     .add('level', () => ({
         components: {
-            'c-landing-level': (resolve) => require(['@/ui/components/landing/block-content/level'], resolve),
+            'c-landing-level': (resolve) => require(['@/components/landing/block-content/level'], resolve),
         },
         template: `
         <div class="p-5">
@@ -4686,7 +4686,7 @@ storiesOf('Landing Page', module)
     }))
     .add('feature item', () => ({
         components: {
-            'c-landing-feature-item': (resolve) => require(['@/ui/components/landing/block-content/feature-item'], resolve),
+            'c-landing-feature-item': (resolve) => require(['@/components/landing/block-content/feature-item'], resolve),
         },
         data(){
             return{
@@ -4721,7 +4721,7 @@ storiesOf('Landing Page', module)
     }))
     .add('benefactor', () => ({
         components:{
-            'c-landing-benefactor' : (resolve) => require(['@/ui/components/landing/block-content/benefactor'], resolve),
+            'c-landing-benefactor' : (resolve) => require(['@/components/landing/block-content/benefactor'], resolve),
         },
         data(){
             return{
@@ -4760,7 +4760,7 @@ storiesOf('Landing Page', module)
     }))
     .add('reward list', () =>({
         components:{
-            'c-landing-reward-list': (resolve) => require(['@/ui/components/landing/block-content/reward-list'], resolve),
+            'c-landing-reward-list': (resolve) => require(['@/components/landing/block-content/reward-list'], resolve),
         },
         data(){
             return{
@@ -4782,19 +4782,19 @@ storiesOf('Landing Page', module)
     .add('page', () => ({
         components: {
             'c-landing-block': LandingContent,
-            'c-landing-block-title' : (resolve) => require(['@/ui/components/landing/block-title/simple'], resolve),
-            'c-landing-block-title-shadow' : (resolve) => require(['@/ui/components/landing/block-title/shadow'], resolve),
-            'c-landing-block-title-gradient' : (resolve) => require(['@/ui/components/landing/block-title/gradient'], resolve),
-            'c-landing-feature-item': (resolve) => require(['@/ui/components/landing/block-content/feature-item'], resolve),
-            'c-landing-tabs': (resolve) => require(['@/ui/components/landing/block-content/tabs'], resolve),
-            'c-landing-tab': (resolve) => require(['@/ui/components/landing/block-content/tab'], resolve),
-            'c-landing-slider' : (resolve) => require(['@/ui/components/landing/block-content/slider'], resolve),
-            'c-landing-gradient-block' : (resolve) => require(['@/ui/components/landing/block-content/gradient'], resolve),
-            'c-landing-benefactor' : (resolve) => require(['@/ui/components/landing/block-content/benefactor'], resolve),
-            'c-landing-level': (resolve) => require(['@/ui/components/landing/block-content/level'], resolve),
-            'c-landing-reward-list': (resolve) => require(['@/ui/components/landing/block-content/reward-list'], resolve),
-            'c-landing-divider': (resolve) => require(['@/ui/components/landing/block-content/divider'], resolve),
-            'c-landing-button': (resolve) => require(['@/ui/components/landing/button'], resolve),
+            'c-landing-block-title' : (resolve) => require(['@/components/landing/block-title/simple'], resolve),
+            'c-landing-block-title-shadow' : (resolve) => require(['@/components/landing/block-title/shadow'], resolve),
+            'c-landing-block-title-gradient' : (resolve) => require(['@/components/landing/block-title/gradient'], resolve),
+            'c-landing-feature-item': (resolve) => require(['@/components/landing/block-content/feature-item'], resolve),
+            'c-landing-tabs': (resolve) => require(['@/components/landing/block-content/tabs'], resolve),
+            'c-landing-tab': (resolve) => require(['@/components/landing/block-content/tab'], resolve),
+            'c-landing-slider' : (resolve) => require(['@/components/landing/block-content/slider'], resolve),
+            'c-landing-gradient-block' : (resolve) => require(['@/components/landing/block-content/gradient'], resolve),
+            'c-landing-benefactor' : (resolve) => require(['@/components/landing/block-content/benefactor'], resolve),
+            'c-landing-level': (resolve) => require(['@/components/landing/block-content/level'], resolve),
+            'c-landing-reward-list': (resolve) => require(['@/components/landing/block-content/reward-list'], resolve),
+            'c-landing-divider': (resolve) => require(['@/components/landing/block-content/divider'], resolve),
+            'c-landing-button': (resolve) => require(['@/components/landing/button'], resolve),
         },
         data(){
             return{
@@ -5084,7 +5084,7 @@ storiesOf('Landing Page', module)
 storiesOf('Token Sale Box', module)
     .add('default', () => ({
         components: {
-            'c-token-sale': (resolve) => require(['@/ui/components/token-sale-box'], resolve),
+            'c-token-sale': (resolve) => require(['@/components/token-sale-box'], resolve),
         },
         template: `
         <div class="p-5" style="width: 1200px;">
@@ -5099,7 +5099,7 @@ storiesOf('Token Sale Box', module)
     }))
     .add('type 2', () => ({
         components: {
-            'c-toke-sale-2': (resolve) => require(['@/ui/components/token-sale-box/type-2'], resolve),
+            'c-toke-sale-2': (resolve) => require(['@/components/token-sale-box/type-2'], resolve),
         },
         template: `
         <div class="p-5" style="width: 1200px;">
@@ -5116,7 +5116,7 @@ storiesOf('Token Sale Box', module)
 storiesOf('Guide', module)
     .add('default', () =>({
         components:{
-            'c-guide': (resolve) => require(['@/ui/components/guide'], resolve),
+            'c-guide': (resolve) => require(['@/components/guide'], resolve),
         },
         template: `<c-guide />`
     }))
@@ -5124,7 +5124,7 @@ storiesOf('Guide', module)
 storiesOf('Video Popup', module)
     .add('default', () =>({
         components:{
-            'c-video-popup': (resolve) => require(['@/ui/components/video-popup'], resolve),
+            'c-video-popup': (resolve) => require(['@/components/video-popup'], resolve),
             Author
         },
         data(){
@@ -5225,8 +5225,8 @@ storiesOf('Video Popup', module)
     }))
     .add('video list', () => ({
         components:{
-            'c-video-popup': (resolve) => require(['@/ui/components/video-popup'], resolve),
-            'c-video-item': (resolve) => require(['@/ui/components/video-list'], resolve),
+            'c-video-popup': (resolve) => require(['@/components/video-popup'], resolve),
+            'c-video-item': (resolve) => require(['@/components/video-list'], resolve),
             Author
         },
         data(){
@@ -5367,12 +5367,12 @@ storiesOf('Video Popup', module)
 storiesOf('Wallet Popup', module)
     .add('default', () => ({
         components: {
-            'c-wallet-base': (resolve) => require(['@/ui/components/wallet/base'], resolve),
-            'c-wallet-main': (resolve) => require(['@/ui/components/wallet'], resolve),
-            'c-wallet-transfer': (resolve) => require(['@/ui/components/wallet/transfer'], resolve),
-            'c-wallet-deposit': (resolve) => require(['@/ui/components/wallet/deposit'], resolve),
-            'c-wallet-edit': (resolve) => require(['@/ui/components/wallet/account-edit'], resolve),
-            'c-wallet-token': (resolve) => require(['@/ui/components/wallet/token'], resolve),
+            'c-wallet-base': (resolve) => require(['@/components/wallet/base'], resolve),
+            'c-wallet-main': (resolve) => require(['@/components/wallet'], resolve),
+            'c-wallet-transfer': (resolve) => require(['@/components/wallet/transfer'], resolve),
+            'c-wallet-deposit': (resolve) => require(['@/components/wallet/deposit'], resolve),
+            'c-wallet-edit': (resolve) => require(['@/components/wallet/account-edit'], resolve),
+            'c-wallet-token': (resolve) => require(['@/components/wallet/token'], resolve),
         },
         template: `<div class="row p-3 m-0 flex-wrap" style="width: 1125px">
                         <div class="mx-2 mb-4">
@@ -5412,15 +5412,15 @@ storiesOf('Wallet Popup', module)
 storiesOf('Chat', module)
     .add('base', () => ({
         components: {
-            'c-chat-base': (resolve) => require(['@/ui/components/chat-new/base'], resolve),
-            'c-chat-group': (resolve) => require(['@/ui/components/chat-new/content/group'], resolve),
-            'c-chat-private': (resolve) => require(['@/ui/components/chat-new/content/private'], resolve),
-            'c-chat-message': (resolve) => require(['@/ui/components/chat-new/message'], resolve),
-            'c-chat-user': (resolve) => require(['@/ui/components/chat-new/user'], resolve),
-            'c-chat-group-welcome': (resolve) => require(['@/ui/components/chat-new/content/welcome'], resolve),
-            'c-chat-group-sidebar': (resolve) => require(['@/ui/components/chat-new/content/group-list'], resolve),
-            'c-chat-group-new': (resolve) => require(['@/ui/components/chat-new/content/new-group'], resolve),
-            'c-chat-friends-list': (resolve) => require(['@/ui/components/chat-new/friends-list/index'], resolve),
+            'c-chat-base': (resolve) => require(['@/components/chat-new/base'], resolve),
+            'c-chat-group': (resolve) => require(['@/components/chat-new/content/group'], resolve),
+            'c-chat-private': (resolve) => require(['@/components/chat-new/content/private'], resolve),
+            'c-chat-message': (resolve) => require(['@/components/chat-new/message'], resolve),
+            'c-chat-user': (resolve) => require(['@/components/chat-new/user'], resolve),
+            'c-chat-group-welcome': (resolve) => require(['@/components/chat-new/content/welcome'], resolve),
+            'c-chat-group-sidebar': (resolve) => require(['@/components/chat-new/content/group-list'], resolve),
+            'c-chat-group-new': (resolve) => require(['@/components/chat-new/content/new-group'], resolve),
+            'c-chat-friends-list': (resolve) => require(['@/components/chat-new/friends-list/index'], resolve),
         },
         data(){
             return{
@@ -5600,7 +5600,7 @@ storiesOf('Chat', module)
 storiesOf('Games list', module)
     .add('base', () => ({
         components:{
-            'c-game-list': (resolve) => require(['@/ui/components/games-list/index'], resolve)
+            'c-game-list': (resolve) => require(['@/components/games-list/index'], resolve)
         },
         data(){
             return{
@@ -5716,7 +5716,7 @@ storiesOf('Games list', module)
 storiesOf('Text label', module)
     .add('default', () => ({
         components:{
-            'c-text-label': (resolve) => require(['@/ui/components/text-label'], resolve),
+            'c-text-label': (resolve) => require(['@/components/text-label'], resolve),
         },
         template: `<div class="p-3 m-0 text-white" style="width: 900px">
                     <c-text-label>Default</c-text-label>
@@ -5738,7 +5738,7 @@ storiesOf('Text label', module)
 storiesOf('Option Block', module)
     .add('default', () => ({
         components:{
-            'c-option-block': (resolve) => require(['@/ui/components/option-block'], resolve),
+            'c-option-block': (resolve) => require(['@/components/option-block'], resolve),
         },
         data(){
             return{
@@ -5781,7 +5781,7 @@ storiesOf('Option Block', module)
 storiesOf('Games Library', module)
     .add('default', () => ({
         components:{
-            'c-game-library-card': (resolve) => require(['@/ui/components/game-library/card-item.vue'], resolve),
+            'c-game-library-card': (resolve) => require(['@/components/game-library/card-item.vue'], resolve),
         },
         data(){
             return{
@@ -5807,7 +5807,7 @@ storiesOf('Games Library', module)
 storiesOf('Quick Launch', module)
     .add('default', () => ({
         components:{
-            'c-quick-launch': (resolve) => require(['@/ui/components/quick-launch'], resolve),
+            'c-quick-launch': (resolve) => require(['@/components/quick-launch'], resolve),
         },
         data(){
             return{
@@ -5833,7 +5833,7 @@ storiesOf('Quick Launch', module)
 storiesOf('Global Search', module)
     .add('default', () => ({
         components:{
-            'c-global-search': (resolve) => require(['@/ui/components/global-search'], resolve),
+            'c-global-search': (resolve) => require(['@/components/global-search'], resolve),
         },
         data(){
             return{
@@ -5849,7 +5849,7 @@ storiesOf('Global Search', module)
     }))
     .add('header bar', () => ({
         components:{
-            'c-bar-search': (resolve) => require(['@/ui/components/global-search/second'], resolve),
+            'c-bar-search': (resolve) => require(['@/components/global-search/second'], resolve),
         },
         data(){
             return{
@@ -5869,7 +5869,7 @@ storiesOf('Global Search', module)
 storiesOf('Giphy', module)
     .add('default', () => ({
         components:{
-            'c-giphy': (resolve) => require(['@/ui/components/giphy'], resolve),
+            'c-giphy': (resolve) => require(['@/components/giphy'], resolve),
         },
         data(){
             return{
@@ -5898,7 +5898,7 @@ storiesOf('Giphy', module)
 storiesOf('Table', module)
     .add('default', () => ({
         components: {
-            'c-table-simple': (resolve) => require(['@/ui/components/table-simple'], resolve),
+            'c-table-simple': (resolve) => require(['@/components/table-simple'], resolve),
         },
         data(){
             return{
@@ -5968,8 +5968,8 @@ storiesOf('Table', module)
 storiesOf('Text Formatting', module)
     .add('default', () => ({
         components:{
-            'c-text-formatting': (resolve) => require(['@/ui/components/text-formatting'], resolve),
-            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic.vue'], resolve),
+            'c-text-formatting': (resolve) => require(['@/components/text-formatting'], resolve),
+            'c-basic-popup': (resolve) => require(['@/components/popups/basic.vue'], resolve),
         },
         template: `<div class="p-4" style="width: 600px">
                     <c-basic-popup :activated="true">
@@ -5984,7 +5984,7 @@ storiesOf('Text Formatting', module)
 storiesOf('Activity block', module)
     .add('default', () => ({
         components:{
-            'c-activity-block': (resolve) => require(['@/ui/components/activity-block'], resolve),
+            'c-activity-block': (resolve) => require(['@/components/activity-block'], resolve),
         },
         template: `<div style="width: 1000px;" class="p-5">
                     <c-activity-block @play="" @install="" @help="" labelIcon="list" :percent="37" earnedAchievements="31" totalAchievements="193">
@@ -6005,7 +6005,7 @@ storiesOf('Activity block', module)
 storiesOf('Metro', module)
     .add('metro-tile', () => ({
         components:{
-            'c-metro-tile': (resolve) => require(['@/ui/components/metro/metro-tile'], resolve),
+            'c-metro-tile': (resolve) => require(['@/components/metro/metro-tile'], resolve),
         },
         data(){
             return{
@@ -6196,7 +6196,7 @@ storiesOf('Metro', module)
     }))
     .add('metro-item', () => ({
         components: {
-            'c-metro-item': (resolve) => require(['@/ui/components/metro/metro-item'], resolve),
+            'c-metro-item': (resolve) => require(['@/components/metro/metro-item'], resolve),
         },
         data(){
             return{
@@ -6237,8 +6237,8 @@ storiesOf('Metro', module)
     }))
     .add('metro grid', () => ({
         components: {
-            'c-metro-grid': (resolve) => require(['@/ui/components/metro/grid'], resolve),
-            'c-metro-item': (resolve) => require(['@/ui/components/metro/metro-item'], resolve),
+            'c-metro-grid': (resolve) => require(['@/components/metro/grid'], resolve),
+            'c-metro-item': (resolve) => require(['@/components/metro/metro-item'], resolve),
         },
         data(){
             return{
@@ -6289,7 +6289,7 @@ storiesOf('Metro', module)
 storiesOf('Security check', module)
     .add('default', () => ({
         components:{
-            'c-security-check' : (resolve) => require(['@/ui/components/security-check'], resolve),
+            'c-security-check' : (resolve) => require(['@/components/security-check'], resolve),
         },
         data(){
             return{
@@ -6324,7 +6324,7 @@ storiesOf('Security check', module)
 storiesOf('Browser UI', module)
     .add('default', () => ({
         components: {
-            'c-browser-ui' : (resolve) => require(['@/ui/components/browser-ui'], resolve),
+            'c-browser-ui' : (resolve) => require(['@/components/browser-ui'], resolve),
         },
         template: `<div style="width: 600px" class="m-4"><c-browser-ui /></div>`
     }))
@@ -6332,7 +6332,7 @@ storiesOf('Browser UI', module)
 storiesOf('Settings', module)
     .add('default', () => ({
         components:{
-            'c-settings' : (resolve) => require(['@/ui/components/settings'], resolve),
+            'c-settings' : (resolve) => require(['@/components/settings'], resolve),
         },
         template: `<div class="m-4" style="width: 1000px;">
                         <c-settings />
@@ -6342,7 +6342,7 @@ storiesOf('Settings', module)
 storiesOf('Add friends', module)
     .add('default', () => ({
         components: {
-            'c-add-friends': (resolve) => require(['@/ui/components/add-friends'], resolve),
+            'c-add-friends': (resolve) => require(['@/components/add-friends'], resolve),
         },
         data(){
             return{
@@ -6388,7 +6388,7 @@ storiesOf('Add friends', module)
 storiesOf('Draggble video', module)
     .add('default', () => ({
         components: {
-            'c-draggable-video' : (resolve) => require(['@/ui/components/draggable-video'], resolve),
+            'c-draggable-video' : (resolve) => require(['@/components/draggable-video'], resolve),
         },
         template: `<div><c-draggable-video /></div>`
     }))
@@ -6402,7 +6402,7 @@ const navigation = storiesOf('Navigation', module);
 
 ['account', 'asset', 'funding'].forEach(component => {
     navigation.add(component, () => ({
-        components: { [component]: (resolve) => require([`../ui/components/navigation/${component}`], resolve) },
+        components: { [component]: (resolve) => require([`@/components/navigation/${component}`], resolve) },
         template: `<${component}/>`
     }))
 });

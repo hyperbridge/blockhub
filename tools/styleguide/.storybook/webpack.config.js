@@ -7,7 +7,7 @@ module.exports = (storybookBaseConfig, configType, defaultConfig) => {
         include: path.resolve(__dirname, "../../../clients/web-client-new")
     })
 
-    defaultConfig.resolve.alias['@'] = path.resolve(__dirname, "../../../clients/web-client-new")
+    defaultConfig.resolve.alias['@'] = path.resolve(__dirname, "../../../clients/web-client-new/ui")
 
     defaultConfig.resolve.alias['~'] = path.resolve(__dirname, "../../../clients/web-client-new/ui")
 
