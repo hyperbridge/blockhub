@@ -8,15 +8,15 @@ import StoryRouter from 'storybook-vue-router'
 import {withViewport} from '@storybook/addon-viewport'
 import {withKnobs, text, boolean, number, object} from '@storybook/addon-knobs/vue'
 
-import '../css/styles.scss'
-import '@/entry-client'
-import '@/filters'
-import '@/directives'
-import '@/components'
-import store from '@/store'
-import router from '@/router'
+// import '../css/styles.scss'
+// import '@/entry-client'
+// import '@/filters'
+// import '@/directives'
+// import '@/components'
+// import store from '@/store'
+// import router from '@/router'
 
-import * as Bridge from '@/framework/desktop-bridge'
+//import * as Bridge from '@/framework/desktop-bridge'
 import * as data from './components-data'
 
 
