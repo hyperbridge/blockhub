@@ -141,6 +141,25 @@ export default async () => {
     // })
 
 
+    app.use('/ping', {
+        async find(params) {
+            return {
+                name: 'test',
+                description: 'test',
+                version: '0.1',
+                uptime: process.uptime()
+            }
+        }
+    })
+
+    app.use('/version', {
+        async find(params) {
+            return [
+                '0.8.1'
+            ]
+        }
+    })
+
     // app hooks last
     app.hooks(appHooks)
 
