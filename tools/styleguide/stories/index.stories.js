@@ -10,12 +10,14 @@ import {withKnobs, text, boolean, number, object} from '@storybook/addon-knobs/v
 
 // import '../css/styles.scss'
 // import '@/entry-client'
-// import '@/filters'
-// import '@/directives'
-// import '@/components'
+import filters from '@/plugins/filters'
+import directives from '@/plugins/directives'
+import '@/plugins/components'
 // import store from '@/store'
 // import router from '@/router'
 
+filters({})
+directives({})
 //import * as Bridge from '@/framework/desktop-bridge'
 import * as data from './components-data'
 
@@ -43,7 +45,21 @@ import * as data from './components-data'
 
 
 // addDecorator(withViewport('desktop'))
-addDecorator(StoryRouter())
+//addDecorator(StoryRouter())
+
+
+storiesOf('test', module)
+    .add('item', () => ({
+        components: {
+        },
+        data() {
+            return {
+                title: 'test',
+                price: '10.00'
+            }
+        },
+        template: '<div class="row"><div class="col-6 p-5">{{ title }}</div></div>'
+    }))
 
 
 import PromotionItem from '@/components/promotion-box/item'

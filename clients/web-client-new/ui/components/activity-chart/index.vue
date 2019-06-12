@@ -69,7 +69,6 @@
 
 <script>
 export default {
-    name: 'ActivityChart',
     components: {
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m)
     },

@@ -4,6 +4,10 @@ import moment from 'moment'
 
 export default ({ store }) => {
     Vue.filter('convertCurrency', value => {
+        if (!store) {
+            return 'USD'
+        }
+
         const currencyCode = store.state.application.account ? store.state.application.account.currency.code : 'USD'
         const currencyMap = {
             'USD': {
