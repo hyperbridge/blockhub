@@ -3,8 +3,8 @@
         class="game-library__item"
         :class="{'is-active': active}"
         :style="{'background-image' : 'url(' + image + ')' }"
-        @mouseover=" hovered=true "
-        @mouseleave=" hovered=false;">
+        @mouseover="hovered=true"
+        @mouseleave="hovered=false">
         <c-loading-bar-circle v-if="isLoading" />
         <div
             class="game-library__item-info"

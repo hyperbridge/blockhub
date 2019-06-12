@@ -1,11 +1,11 @@
 <template>
     <div
         class="pledge-item"
-        @mouseover=" showToggle = true"
-        @mouseleave=" showToggle = false ">
+        @mouseover="showToggle = true"
+        @mouseleave="showToggle = false">
         <transition name="fade">
             <div
-                v-if="showToggle && !form "
+                v-if="showToggle && !form"
                 class="pledge-form-toggle"
                 style="animation-duration: 0.5s"
                 @click="showFrom">

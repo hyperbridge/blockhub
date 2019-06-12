@@ -8,7 +8,7 @@ import StoryRouter from 'storybook-vue-router'
 import {withViewport} from '@storybook/addon-viewport'
 import {withKnobs, text, boolean, number, object} from '@storybook/addon-knobs/vue'
 
-// import '../css/styles.scss'
+import '@/css/styles.scss'
 // import '@/entry-client'
 import filters from '@/plugins/filters'
 import directives from '@/plugins/directives'
@@ -22,13 +22,15 @@ directives({})
 import * as data from './components-data'
 
 
-// const StoreDummy = {
-//     install(Vue, options) {
-//         Vue.prototype.$store = store
-//     }
-// }
+const StoreDummy = {
+    install(Vue, options) {
+        Vue.prototype.$store = {
+            state: {}
+        }
+    }
+}
 
-// Vue.use(StoreDummy)
+Vue.use(StoreDummy)
 
 // //import '!style-loader!css-loader!./styles.scss'
 

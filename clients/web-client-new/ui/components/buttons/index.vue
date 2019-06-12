@@ -85,6 +85,10 @@ export default {
         fontSize: {
             type: String,
             default: '14'
+        },
+        soundEnabled: {
+            type: Boolean,
+            default: true
         }
     },
     computed: {
@@ -92,9 +96,16 @@ export default {
             return this.$options.filters.statusIcon(this.status)
         }
     },
+    created() {
+        if (this.$store.state.application) {
+            if (!this.$store.state.application.settings.client.sounds || !this.$store.state.application.settings.client.ui_interaction_sounds) {
+                this.soundEnabled = false
+            }
+        }
+    },
     methods: {
         mouseover() {
-            if (!this.$store.state.application.settings.client.sounds || !this.$store.state.application.settings.client.ui_interaction_sounds) return
+            if (!this.soundEnabled) return
 
             const sound = new Howl({
                 src: ['/sounds/information.mp3']
@@ -111,7 +122,7 @@ export default {
             this.$store.dispatch('application/setEditorMode', 'viewing')
             // this.$store.commit('application/activateModal', null)
 
-            if (this.$store.state.application.settings.client.sounds && this.$store.state.application.settings.client.ui_interaction_sounds) {
+            if (this.soundEnabled) {
                 const sound = new Howl({
                     src: ['/sounds/ask.mp3']
                 })

@@ -1,8 +1,8 @@
 <template>
     <div
         class="user-avatar"
-        @mouseover=" show = true "
-        @mouseleave=" show = false ">
+        @mouseover="show = true"
+        @mouseleave="show = false">
         <div
             v-if="show"
             class="user-avatar__popover">
