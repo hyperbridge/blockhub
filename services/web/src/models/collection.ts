@@ -18,7 +18,7 @@ export default class Collection extends BaseModel {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['createdAt', 'name', 'meta'],
+            required: ['name', 'meta'],
             properties: {
                 parentId: { type: 'integer' },
                 name: { type: 'string' }

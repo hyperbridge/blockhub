@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2019-06-12T06:11:08.330Z
+__export_date: 2019-06-12T08:19:20.554Z
 __export_source: insomnia.desktop.app:v6.5.4
 resources:
   - _id: req_404dec80a4bc44998c217eb1c3a59465
@@ -62,17 +62,118 @@ resources:
     _type: request
   - _id: req_a5100ad79a424189bb6d54c6f943df89
     authentication: {}
-    body: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"strategy": "jwt",
+        	"accessToken": ""
+        }
     created: 1560319802132
+    description: ""
+    headers:
+      - name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1560319802132
+    method: POST
+    modified: 1560323207834
+    name: Authenticate (token)
+    parameters:
+      - id: pair_c4f50aaf6cd44ce7b74b133d700bf008
+        name: ""
+        value: ""
+    parentId: fld_f33e9d8618ab4cec8651a4712beb1153
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ url  }}/auth/authenticate"
+    _type: request
+  - _id: req_c3a8895601fb4580b9886d38237bdc51
+    authentication: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"strategy": "local",
+        	"email": "test@test.com",
+        	"password": "123"
+        }
+    created: 1560323210674
+    description: ""
+    headers:
+      - name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1560319761716
+    method: POST
+    modified: 1560323733085
+    name: Authenticate (creds)
+    parameters:
+      - id: pair_c4f50aaf6cd44ce7b74b133d700bf008
+        name: ""
+        value: ""
+    parentId: fld_f33e9d8618ab4cec8651a4712beb1153
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ url  }}/authentication"
+    _type: request
+  - _id: req_88167cd65d9c45c4aaa70a3afe79755c
+    authentication: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "test@test.com",
+        	"password": "123"
+        }
+    created: 1560323003492
+    description: ""
+    headers:
+      - name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1560323003492
+    method: POST
+    modified: 1560323360649
+    name: Create account
+    parameters: []
+    parentId: fld_8bd4c248e9e44f32a356b4691d6defeb
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ url  }}/accounts"
+    _type: request
+  - _id: fld_8bd4c248e9e44f32a356b4691d6defeb
+    created: 1560319590086
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1560319715734
+    modified: 1560319743353
+    name: Accounts
+    parentId: wrk_e351362d39e743d0a7d34070a8b7a5c6
+    _type: request_group
+  - _id: req_5ea4e22d8f3d4fa99ce8631a67b0a1e6
+    authentication: {}
+    body: {}
+    created: 1560327534321
     description: ""
     headers: []
     isPrivate: false
-    metaSortKey: -1560319802132
-    method: GET
-    modified: 1560319802132
-    name: Login
+    metaSortKey: -1560327534321
+    method: DELETE
+    modified: 1560327537730
+    name: Delete collection
     parameters: []
-    parentId: fld_f33e9d8618ab4cec8651a4712beb1153
+    parentId: fld_3c5806ec007f4726b32f0f3febfeb37f
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
     settingRebuildPath: true
@@ -80,36 +181,79 @@ resources:
     settingStoreCookies: true
     url: ""
     _type: request
-  - _id: req_879717944d2d4d95919af8b0454eef38
+  - _id: fld_3c5806ec007f4726b32f0f3febfeb37f
+    created: 1560319477289
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1560319715684.7812
+    modified: 1560324132128
+    name: Collections
+    parentId: wrk_e351362d39e743d0a7d34070a8b7a5c6
+    _type: request_group
+  - _id: req_646dc9842a864596a6a363d3d9372052
     authentication: {}
     body: {}
-    created: 1560319721300
+    created: 1560327529491
     description: ""
     headers: []
     isPrivate: false
-    metaSortKey: -1560319721300
-    method: GET
-    modified: 1560319728064
-    name: Get all tags
+    metaSortKey: -1560327529491
+    method: PATCH
+    modified: 1560327540930
+    name: Update collection
     parameters: []
-    parentId: fld_a47adde09393417191af09f15d5a6ba8
+    parentId: fld_3c5806ec007f4726b32f0f3febfeb37f
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
-    url: "{{ url  }}/tags"
+    url: ""
     _type: request
-  - _id: fld_a47adde09393417191af09f15d5a6ba8
-    created: 1560319709170
+  - _id: req_002263b0a07c475c97e35f64fbfdfe41
+    authentication:
+      token: "{{ token  }}"
+      type: bearer
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "My Collection",
+          "status": "active",
+        	"meta": {
+        		"author": "Yvenide Belizaire",
+        		"background": null,
+        		"assets": [
+        			1,
+        			2,
+        			3,
+        			4,
+        			5
+        		],
+        		"updates": "2018-07-24T04:09:00.000Z",
+        		"estimatedValue": 34562
+        	}
+        }
+    created: 1560324148244
     description: ""
-    environment: {}
-    environmentPropertyOrder: null
-    metaSortKey: -1560319709170
-    modified: 1560319709170
-    name: Tags
-    parentId: wrk_e351362d39e743d0a7d34070a8b7a5c6
-    _type: request_group
+    headers:
+      - name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1560324148244
+    method: POST
+    modified: 1560324235775
+    name: Create collection
+    parameters: []
+    parentId: fld_3c5806ec007f4726b32f0f3febfeb37f
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ url  }}/collections"
+    _type: request
   - _id: req_ba45060c7da84ab4817f7b85eb425a6a
     authentication: {}
     body: {}
@@ -130,16 +274,69 @@ resources:
     settingStoreCookies: true
     url: "{{ url  }}/collections"
     _type: request
-  - _id: fld_3c5806ec007f4726b32f0f3febfeb37f
-    created: 1560319477289
+  - _id: req_95463f2a45f44268bee454cbaff0f278
+    authentication: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"key": "name",
+        	"value": "something",
+        	"meta": {
+        		
+        	}
+        }
+    created: 1560324040740
+    description: ""
+    headers:
+      - name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1560324040740
+    method: POST
+    modified: 1560324090835
+    name: Create tag
+    parameters: []
+    parentId: fld_a47adde09393417191af09f15d5a6ba8
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: ""
+    _type: request
+  - _id: fld_a47adde09393417191af09f15d5a6ba8
+    created: 1560319709170
     description: ""
     environment: {}
     environmentPropertyOrder: null
-    metaSortKey: -1560319477289
-    modified: 1560319477289
-    name: Collections
+    metaSortKey: -1560319709170
+    modified: 1560319709170
+    name: Tags
     parentId: wrk_e351362d39e743d0a7d34070a8b7a5c6
     _type: request_group
+  - _id: req_879717944d2d4d95919af8b0454eef38
+    authentication:
+      token: "{{ token  }}"
+      type: bearer
+    body: {}
+    created: 1560319721300
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1560319721300
+    method: GET
+    modified: 1560324014535
+    name: Get all tags
+    parameters: []
+    parentId: fld_a47adde09393417191af09f15d5a6ba8
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ url  }}/tags"
+    _type: request
   - _id: env_cb8f3d49af752fa7e2c0782a26b77fdf2828235a
     color: null
     created: 1560319414642
@@ -155,16 +352,16 @@ resources:
     cookies:
       - creation: 2019-06-12T06:05:55.388Z
         domain: 3.113.89.192
-        expires: 2019-06-12T06:08:58.000Z
+        expires: 2019-06-12T07:25:08.000Z
         hostOnly: true
         httpOnly: true
-        id: "7591255829769985"
+        id: "5512039793791825"
         key: connect.sid
-        lastAccessed: 2019-06-12T06:08:50.128Z
+        lastAccessed: 2019-06-12T07:24:58.920Z
         path: /
-        value: s%3AgtFJDRbLKiTNgyRYo1pJF3sOEA6oaY6W.BMQnUh%2FepjqBymmsjLjRvKNYCRHToHQkovyxTkFvTQE
+        value: s%3ACdTKDNSmMyj3YtbwNhsU29cUhvMCNxx0.6OAfCmxu2hFYQ8bvdE4T4wnE9DJ5lTDz36yytc55mdM
     created: 1560319414647
-    modified: 1560319730128
+    modified: 1560324298921
     name: Default Jar
     parentId: wrk_e351362d39e743d0a7d34070a8b7a5c6
     _type: cookie_jar
@@ -172,13 +369,16 @@ resources:
     color: null
     created: 1560319423785
     data:
+      token: "{% response 'body', 'req_c3a8895601fb4580b9886d38237bdc51',
+        'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never' %}"
       url: http://3.113.89.192:9001
     dataPropertyOrder:
       "&":
         - url
+        - token
     isPrivate: false
     metaSortKey: 1560319423785
-    modified: 1560319456815
+    modified: 1560323980863
     name: Local
     parentId: env_cb8f3d49af752fa7e2c0782a26b77fdf2828235a
     _type: environment
