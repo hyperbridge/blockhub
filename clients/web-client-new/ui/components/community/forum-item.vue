@@ -5,7 +5,7 @@
                 <i :class="icon" />
             </div>
             <div class="text">
-                <router-link :to="{ path: 'community-forum-id', params: { id: forum.id } }">
+                <router-link :to="{ path: `forum/${forum.id}`, params: { id: forum.id } }">
                     {{ forum.title }}
                 </router-link>
             </div>
@@ -21,7 +21,12 @@
 
 <script>
 export default {
-    props: ['forum'],
+    props: {
+        forum: {
+            type: Object,
+            default: () => {}
+        }
+    },
     computed: {
         icon() {
             if (this.forum.icon) { return this.forum.icon }
