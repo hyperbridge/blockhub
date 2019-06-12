@@ -43,7 +43,8 @@
                                 status="success"
                                 icon="plus"
                                 class="margin-top-20"
-                                style="margin-right: auto">
+                                style="margin-right: auto"
+                                @click="activateModal()">
                                 New discussion
                             </c-button>
                         </div>
@@ -106,6 +107,30 @@ export default {
                     }
                 }
             ]
+        }
+    },
+    computed: {
+        community() {
+            // TODO: Use community.discussions instead of the hardcoded posts
+            return this.$store.getters['communities/get'](this.$route.params.id)
+        }
+    },
+    async mounted() {
+        await this.$store.dispatch('communities/find', {
+            query: {
+                id: this.$route.params.id,
+                $eager: 'discussions'
+            }
+        })
+    },
+    methods: {
+        activateModal() {
+            this.$store.commit('application/activeModalData', {
+                community: {
+                    id: this.$route.params.id
+                }
+            })
+            this.$store.commit('application/activateModal', 'new-discussion')
         }
     }
 }

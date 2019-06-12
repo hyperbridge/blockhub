@@ -776,6 +776,8 @@
                     </div>
                     <template slot="body">
                         <div>
+                            <!--
+                            TODO: For the time being the communityId is being passed from the context that called the popup
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
@@ -796,6 +798,7 @@
                                     </div>
                                 </div>
                             </div>
+                            -->
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
@@ -1403,17 +1406,18 @@
 
                 this.$store.state.application.activeModal = null
             },
-            submitNewDiscussion(request) {
+            async submitNewDiscussion(request) {
+                request.communityId = parseInt(this.$store.state.application.activeModalData.community.id, 10)
                 request.ownerId = this.$store.state.application.activeProfile.id
 
-                this.$store.dispatch('discussions/create', request).then((res) => {
-                    request.id = res.id
-                    //this.notice = "Congratulations, your discussion has been created!"
-
-                    this.$router.push('/community/discussion/' + request.id)
-                })
-
+                await this.$store.dispatch('discussions/create', [request, {
+                    query: {
+                        $eager: '[community]'
+                    }
+                }])
+                //this.notice = "Congratulations, your discussion has been created!"
                 this.$store.state.application.activeModal = null
+                this.$router.push('/community/discussion/' + request.id)
             },
             deposit() {
 
