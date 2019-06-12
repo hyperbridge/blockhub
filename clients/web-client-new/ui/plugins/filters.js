@@ -3,8 +3,7 @@ import moment from 'moment'
 
 
 export default ({ store }) => {
-
-    Vue.filter('convertCurrency', function (value) {
+    Vue.filter('convertCurrency', value => {
         const currencyCode = store.state.application.account ? store.state.application.account.currency.code : 'USD'
         const currencyMap = {
             'USD': {
@@ -13,7 +12,7 @@ export default ({ store }) => {
                 'ETH': 0.0047,
                 'DAI': 1,
                 'RUB': 0.66
-            },
+            }
             // 'BTC': {
             //     'USD': 6455,
             //     'ETH': 30.28,
@@ -31,7 +30,7 @@ export default ({ store }) => {
         return Vue.options.filters.currency(price * currencyMap['USD'][currencyCode])
     })
 
-    Vue.filter('formatDate', function (value) {
+    Vue.filter('formatDate', value => {
         if (value) {
             return moment(value).format('MMMM D, YYYY')
         }
@@ -39,45 +38,44 @@ export default ({ store }) => {
 
     Vue.filter('customDate', (val, dateFormat = 'MMMM D, YYYY') => moment(val).format(dateFormat))
 
-    Vue.filter('formatTime', function (value) {
+    Vue.filter('formatTime', value => {
         if (value) {
-            return moment(value).format('hh:mm:ss') + ' GMT'
+            return `${moment(value).format('hh:mm:ss')} GMT`
         }
     })
 
     Vue.filter('addTime', (date, number = 1, period = 'days') => moment(date).add(number, period))
 
-    Vue.filter('timeAgo', (date) => moment(date).fromNow())
+    Vue.filter('timeAgo', date => moment(date).fromNow())
 
-    Vue.filter('timeAgoShort', (date) => moment(date).fromNow().replace(/ ago|in /, ''))
+    Vue.filter('timeAgoShort', date => moment(date).fromNow().replace(/ ago|in /, ''))
 
     Vue.filter('timeAgoSShort', date => moment(date).fromNow()
         .replace(/ ago|in /, '')
         .replace('hours', 'hrs')
         .replace('minutes', 'mins')
-        .replace('years', 'yrs')
-    )
+        .replace('years', 'yrs'))
 
     Vue.filter('statusIcon', status => {
         const getClass = status => {
             switch (status) {
-                case 'info': return 'info'
-                case 'success': return 'check'
-                case 'success-circle': return 'check-circle'
-                case 'warning': return 'exclamation'
-                case 'danger': return 'times'
-                case 'danger-circle': return 'times-circle'
-                case 'settings': return 'cog'
-                case 'support': return 'life-ring'
-                case 'share': return 'share'
-                default: return ''
+            case 'info': return 'info'
+            case 'success': return 'check'
+            case 'success-circle': return 'check-circle'
+            case 'warning': return 'exclamation'
+            case 'danger': return 'times'
+            case 'danger-circle': return 'times-circle'
+            case 'settings': return 'cog'
+            case 'support': return 'life-ring'
+            case 'share': return 'share'
+            default: return ''
             }
         }
         const statusClass = getClass(status)
-        return statusClass.length ? 'fa-' + statusClass : ''
+        return statusClass.length ? `fa-${statusClass}` : ''
     })
 
-    Vue.filter('upperFirstChar', (value) => value.charAt(0).toUpperCase() + value.substring(1, value.length))
+    Vue.filter('upperFirstChar', value => value.charAt(0).toUpperCase() + value.substring(1, value.length))
 
     Vue.filter('highlightPhrase', (value, phrase, tag = 'strong') => {
         if (!phrase) return value
@@ -91,10 +89,10 @@ export default ({ store }) => {
         if (firstCharIndex < 0) return value
 
         const phraseEndPos = firstCharIndex + phrase.length
-        let valueWithPhrase =
-            cut(0, firstCharIndex) +
-            `<${tag}>` + cut(firstCharIndex, phraseEndPos) + `</${tag}>` +
-            cut(phraseEndPos, value.length)
+        const valueWithPhrase =
+            `${cut(0, firstCharIndex)
+            }<${tag}>${cut(firstCharIndex, phraseEndPos)}</${tag}>${
+                cut(phraseEndPos, value.length)}`
 
         return valueWithPhrase
     })
@@ -102,6 +100,4 @@ export default ({ store }) => {
     Vue.filter('roundNum', num => Math.round(num * 100) / 100)
 
     Vue.filter('space', val => val.replace(/-|_/g, ' '))
-
-
 }

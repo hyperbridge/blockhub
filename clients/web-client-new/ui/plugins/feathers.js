@@ -16,7 +16,7 @@ export default ({ app }) => {
         }
     }
 
-    let client = feathersClient(origin, storage)
+    const client = feathersClient(origin, storage)
 
     // Set feathers instance on app
     // This way we can use it in middleware and pages asyncData/fetch
@@ -25,7 +25,7 @@ export default ({ app }) => {
     const feathersPlugin = {
         install(Vue, options) {
             Vue.mixin({
-                created: function () {
+                created() {
                     // access to the client anywhere
                     this.$feathers = client
 

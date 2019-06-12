@@ -1,7 +1,6 @@
 import Vue from 'vue'
 
 export default ({ store }) => {
-
     Vue.directive('focus', {
         inserted(el) {
             el.focus()
@@ -91,7 +90,7 @@ export default ({ store }) => {
             const { context } = vnode
 
             const delay = 250
-            let timeout = null
+            const timeout = null
 
             el.__debounce__ = e => {
                 clearTimeout(timeout)
