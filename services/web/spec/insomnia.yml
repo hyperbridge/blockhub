@@ -1,0 +1,184 @@
+_type: export
+__export_format: 4
+__export_date: 2019-06-12T06:11:08.330Z
+__export_source: insomnia.desktop.app:v6.5.4
+resources:
+  - _id: req_404dec80a4bc44998c217eb1c3a59465
+    authentication: {}
+    body: {}
+    created: 1560319814883
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1560319814883
+    method: GET
+    modified: 1560319814883
+    name: Register
+    parameters: []
+    parentId: fld_f33e9d8618ab4cec8651a4712beb1153
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: ""
+    _type: request
+  - _id: fld_f33e9d8618ab4cec8651a4712beb1153
+    created: 1560319797099
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1560319797099
+    modified: 1560319797099
+    name: Auth
+    parentId: wrk_e351362d39e743d0a7d34070a8b7a5c6
+    _type: request_group
+  - _id: wrk_e351362d39e743d0a7d34070a8b7a5c6
+    created: 1560319414525
+    description: ""
+    modified: 1560319414525
+    name: Web
+    parentId: null
+    _type: workspace
+  - _id: req_590ce61f9fc7489ebccb99a33bdb6a3a
+    authentication: {}
+    body: {}
+    created: 1560319808050
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1560319808050
+    method: GET
+    modified: 1560319808050
+    name: Logout
+    parameters: []
+    parentId: fld_f33e9d8618ab4cec8651a4712beb1153
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: ""
+    _type: request
+  - _id: req_a5100ad79a424189bb6d54c6f943df89
+    authentication: {}
+    body: {}
+    created: 1560319802132
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1560319802132
+    method: GET
+    modified: 1560319802132
+    name: Login
+    parameters: []
+    parentId: fld_f33e9d8618ab4cec8651a4712beb1153
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: ""
+    _type: request
+  - _id: req_879717944d2d4d95919af8b0454eef38
+    authentication: {}
+    body: {}
+    created: 1560319721300
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1560319721300
+    method: GET
+    modified: 1560319728064
+    name: Get all tags
+    parameters: []
+    parentId: fld_a47adde09393417191af09f15d5a6ba8
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ url  }}/tags"
+    _type: request
+  - _id: fld_a47adde09393417191af09f15d5a6ba8
+    created: 1560319709170
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1560319709170
+    modified: 1560319709170
+    name: Tags
+    parentId: wrk_e351362d39e743d0a7d34070a8b7a5c6
+    _type: request_group
+  - _id: req_ba45060c7da84ab4817f7b85eb425a6a
+    authentication: {}
+    body: {}
+    created: 1560319484925
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1560319484925
+    method: GET
+    modified: 1560319552741
+    name: Get all collections
+    parameters: []
+    parentId: fld_3c5806ec007f4726b32f0f3febfeb37f
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ url  }}/collections"
+    _type: request
+  - _id: fld_3c5806ec007f4726b32f0f3febfeb37f
+    created: 1560319477289
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1560319477289
+    modified: 1560319477289
+    name: Collections
+    parentId: wrk_e351362d39e743d0a7d34070a8b7a5c6
+    _type: request_group
+  - _id: env_cb8f3d49af752fa7e2c0782a26b77fdf2828235a
+    color: null
+    created: 1560319414642
+    data: {}
+    dataPropertyOrder: null
+    isPrivate: false
+    metaSortKey: 1560319414643
+    modified: 1560319414642
+    name: Base Environment
+    parentId: wrk_e351362d39e743d0a7d34070a8b7a5c6
+    _type: environment
+  - _id: jar_cb8f3d49af752fa7e2c0782a26b77fdf2828235a
+    cookies:
+      - creation: 2019-06-12T06:05:55.388Z
+        domain: 3.113.89.192
+        expires: 2019-06-12T06:08:58.000Z
+        hostOnly: true
+        httpOnly: true
+        id: "7591255829769985"
+        key: connect.sid
+        lastAccessed: 2019-06-12T06:08:50.128Z
+        path: /
+        value: s%3AgtFJDRbLKiTNgyRYo1pJF3sOEA6oaY6W.BMQnUh%2FepjqBymmsjLjRvKNYCRHToHQkovyxTkFvTQE
+    created: 1560319414647
+    modified: 1560319730128
+    name: Default Jar
+    parentId: wrk_e351362d39e743d0a7d34070a8b7a5c6
+    _type: cookie_jar
+  - _id: env_a8b26d7217324869898f55dd41d33991
+    color: null
+    created: 1560319423785
+    data:
+      url: http://3.113.89.192:9001
+    dataPropertyOrder:
+      "&":
+        - url
+    isPrivate: false
+    metaSortKey: 1560319423785
+    modified: 1560319456815
+    name: Local
+    parentId: env_cb8f3d49af752fa7e2c0782a26b77fdf2828235a
+    _type: environment

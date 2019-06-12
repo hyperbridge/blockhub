@@ -1,7 +1,7 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
-const Collection = require('../../models/Collection')
+const Collection = require('../../models/collection').default
 const Ajv = require('ajv')
-const validateSchema = require('feathers-hooks-validate-joi')
+const { validateSchema } = require('feathers-hooks-common')
 
 const fillCollection = function(collection) {
     return collection
@@ -65,7 +65,7 @@ export const before = {
     all: [],
     find: [],
     get: [],
-    create: [authenticate('jwt'), create(), validateSchema(Collection.jsonSchema(), Ajv)],
+    create: [authenticate('jwt'), create(), validateSchema(Collection.jsonSchema, Ajv)],
     update: [authenticate('jwt'), validatePermission()],
     patch: [authenticate('jwt'), validatePermission()],
     remove: [authenticate('jwt'), validatePermission()]

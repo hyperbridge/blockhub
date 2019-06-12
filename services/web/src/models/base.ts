@@ -1,6 +1,6 @@
 import { Model } from 'objection'
 
-export  default class BaseModel extends Model {
+export default class BaseModel extends Model {
     id!: Number
     key!: String
     value!: String
@@ -12,7 +12,7 @@ export  default class BaseModel extends Model {
 
     static idColumn = 'id'
 
-    $beforeValidate (jsonSchema, json, opt) {
+    $beforeValidate(jsonSchema, json, opt) {
         // @ts-ignore
         if (this.constructor.timestamps) {
             jsonSchema.properties.createdAt = { type: 'string', format: 'date-time' }
@@ -32,13 +32,13 @@ export  default class BaseModel extends Model {
         return jsonSchema
     }
 
-    $beforeInsert () {
+    $beforeInsert() {
         // @ts-ignore
         if (!this.constructor.timestamps) return
         this.createdAt = new Date().toISOString()
     }
 
-    $beforeUpdate () {
+    $beforeUpdate() {
         // @ts-ignore
         if (!this.constructor.timestamps) return
         this.updatedAt = new Date().toISOString()
