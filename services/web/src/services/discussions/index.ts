@@ -12,7 +12,10 @@ export default function(app) {
             default: 10,
             max: 25,
             ...paginate
-        }
+        },
+        allowedInsert: '[owner]',
+        allowedEager: '[owner, discussions]',
+        allowedUpsert: '[owner]'
     }
 
     app.use('/discussions', createService(options))

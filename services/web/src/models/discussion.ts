@@ -4,6 +4,7 @@ import Message from './message'
 import Event from './event'
 import Node from './node'
 import Rating from './rating'
+import Community from './community'
 
 export default class Discussion extends Model {
     id!: Number
@@ -133,6 +134,25 @@ export default class Discussion extends Model {
                     }
                 }
             },
+            community: {
+                relation: Model.HasOneThroughRelation,
+                modelClass: Community,
+                filter: {
+                    relationKey: 'discussions'
+                },
+                beforeInsert(model) {
+                    (model as Node).relationKey = 'discussions'
+                },
+                join: {
+                    from: 'discussions.id',
+                    to: 'communities.id',
+                    through: {
+                        from: 'nodes.fromDiscussionId',
+                        to: 'nodes.toCommunityId',
+                        extra: ['relationKey']
+                    }
+                }
+            }
         }
     }
 
