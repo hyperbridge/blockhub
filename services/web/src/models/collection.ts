@@ -21,7 +21,17 @@ export default class Collection extends BaseModel {
             required: ['name', 'meta'],
             properties: {
                 parentId: { type: 'integer' },
-                name: { type: 'string' }
+                name: { type: 'string' },
+                meta: {
+                    type: 'object',
+                    required: ['author', 'assets'],
+                    properties: {
+                        author: { type: 'string' },
+                        assets: { type: 'array' },
+                        background: { type: ['string', 'null'] },
+                        estimatedValue: { type: 'integer' }
+                    }
+                }
             }
         }
     }
