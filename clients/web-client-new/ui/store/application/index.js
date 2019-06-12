@@ -450,5 +450,8 @@ export const mutations = {
 
         DB.application.config.update(state)
         DB.save()
+    },
+    activeModalData(state, payload) {
+        state.activeModalData = payload
     }
 }
