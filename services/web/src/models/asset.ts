@@ -8,7 +8,6 @@ import BaseModel from './base'
 export default class Asset extends BaseModel {
     parentId!: Number
     score!: Number
-    status!: String
 
     static get tableName() {
         return 'assets'

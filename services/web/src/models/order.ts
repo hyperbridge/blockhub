@@ -3,12 +3,7 @@ import Node from './node'
 import BaseModel from './base'
 
 export default class Order extends BaseModel {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: Object // licenseConditions licenseKey license (needs to meet conditions)
+    // meta = licenseConditions licenseKey license (needs to meet conditions)
     parentId!: Number
 
     transactionId!: String
@@ -26,10 +21,6 @@ export default class Order extends BaseModel {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' }
-            },
-            options: {
-                timestamps: true
             }
         }
     }

@@ -5,12 +5,6 @@ import Profile from './profile'
 import BaseModel from './base'
 
 export default class Rating extends BaseModel {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: Object
     parentId!: Number
     ownerId!: Number
 

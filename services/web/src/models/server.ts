@@ -5,12 +5,6 @@ import Tag from './tag'
 import BaseModel from './base'
 
 export default class Server extends BaseModel {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: Object
     parentId!: Number
     score!: Number
 

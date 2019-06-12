@@ -5,7 +5,6 @@ import BaseModel from './base'
 
 export default class Badge extends BaseModel {
     parentId!: Number
-    status!: String
 
     name!: String
 

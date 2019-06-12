@@ -5,12 +5,6 @@ import Node from './node'
 import BaseModel from './base'
 
 export default class Realm extends BaseModel {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: Object
     parentId!: Number
 
     ownerId!: Number

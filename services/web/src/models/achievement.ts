@@ -4,7 +4,6 @@ import BaseModel from './base'
 
 export default class Achievement extends BaseModel {
     parentId!: Number
-    status!: String
 
     static get tableName() {
         return 'achievements'
