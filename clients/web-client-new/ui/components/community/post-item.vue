@@ -9,7 +9,7 @@
                     :class="postIcon" />
             </div>
             <div class="text">
-                <router-link :to="{ name: 'Community Discussion', params: {id: post.id } }">
+                <router-link :to="`/community/discussion/${post.id}`">
                     {{ post.title }}
                 </router-link>
 
