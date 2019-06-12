@@ -25,7 +25,9 @@ import * as data from './components-data'
 const StoreDummy = {
     install(Vue, options) {
         Vue.prototype.$store = {
-            state: {}
+            state: {},
+            dispatch: () => {},
+            commit: () => {}
         }
     }
 }
