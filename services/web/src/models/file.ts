@@ -2,14 +2,10 @@ import { Model, RelationMappings } from 'objection'
 import Profile from './profile'
 import Message from './message'
 import Node from './node'
+import BaseModel from './base'
 
-export default class File extends Model {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String // [image, document, other]
-    value!: String
-    meta!: String
+export default class File extends BaseModel {
+    // key = [image, document, other]
     parentId!: Number
 
     storageType!: String // s3, github, etc.
@@ -19,15 +15,15 @@ export default class File extends Model {
         return 'files'
     }
 
+    static get timestamps() {
+        return true
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' }
-            },
-            options: {
-                timestamps: true
             }
         }
     }
@@ -51,13 +47,5 @@ export default class File extends Model {
                 }
             },
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }

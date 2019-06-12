@@ -4,16 +4,11 @@ import Profile from './profile'
 import Idea from './idea'
 import Project from './project'
 import Product from './product'
+import BaseModel from './base'
 
 // Based on https://github.com/Vincit/objection.js/issues/19
 // Exclusive ARC https://hashrocket.com/blog/posts/modeling-polymorphic-associations-in-a-relational-database#exclusive-belongs-to-aka-exclusive-arc-
-export default class Node extends Model {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: Object
+export default class Node extends BaseModel {
     parentId!: Number
 
     relationKey!: String
@@ -104,16 +99,16 @@ export default class Node extends Model {
         return 'nodes'
     }
 
+    static get timestamps() {
+        return false
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' },
                 relationKey: { type: 'string' }
-            },
-            options: {
-                timestamps: true
             }
         }
     }
@@ -215,14 +210,6 @@ export default class Node extends Model {
         if (this.toProfileId) return this.toProfile
 
         throw new Error("No TO relation")
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }
 

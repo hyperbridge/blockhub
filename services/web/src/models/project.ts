@@ -30,6 +30,10 @@ export default class Project extends BaseModel {
         return 'projects'
     }
 
+    static get timestamps() {
+        return true
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',

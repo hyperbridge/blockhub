@@ -2,8 +2,9 @@ import { Model, RelationMappings } from 'objection'
 import Node from './node'
 import Vote from './vote'
 import Profile from './profile'
+import BaseModel from './base'
 
-export default class Rating extends Model {
+export default class Rating extends BaseModel {
     id!: Number
     createdAt!: String
     updatedAt!: String
@@ -24,15 +25,15 @@ export default class Rating extends Model {
         return 'ratings'
     }
 
+    static get timestamps() {
+        return true
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' }
-            },
-            options: {
-                timestamps: true
             }
         }
     }
@@ -75,13 +76,5 @@ export default class Rating extends Model {
                 }
             },
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }

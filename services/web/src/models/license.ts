@@ -1,17 +1,16 @@
 import { Model, RelationMappings } from 'objection'
 import Node from './node'
+import BaseModel from './base'
 
-export default class License extends Model {
-    id!: Number
-    key!: String
-    value!: String
-    createdAt!: String
-    updatedAt!: String
-    meta!: Object
+export default class License extends BaseModel {
     parentId!: Number
 
     static get tableName() {
         return 'licenses'
+    }
+
+    static get timestamps() {
+        return true
     }
 
     static get jsonSchema() {
@@ -19,7 +18,6 @@ export default class License extends Model {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' }
             },
             options: {
                 timestamps: true
@@ -38,13 +36,5 @@ export default class License extends Model {
                 }
             },
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }

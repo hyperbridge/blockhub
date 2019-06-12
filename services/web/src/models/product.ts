@@ -10,6 +10,7 @@ import Discussion from './discussion'
 import Server from './server'
 import File from './file'
 import Node from './node'
+import BaseModel from './base'
 
 type Language = Object
 type SystemRequirement = Object
@@ -43,13 +44,7 @@ type ProductMeta = {
     author: String
 }
 
-export default class Product extends Model {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: ProductMeta
+export default class Product extends BaseModel {
     parentId!: Number
     score!: Number
 
@@ -68,6 +63,20 @@ export default class Product extends Model {
 
     static get tableName() {
         return 'products'
+    }
+
+    static get timestamps() {
+        return true
+    }
+
+    static get jsonSchema() {
+        return {
+            type: 'object',
+            required: [],
+
+            properties: {
+            }
+        }
     }
 
     static get relationMappings(): RelationMappings {
@@ -211,13 +220,5 @@ export default class Product extends Model {
                 }
             }
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }

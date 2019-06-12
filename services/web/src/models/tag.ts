@@ -1,30 +1,36 @@
 import { Model, RelationMappings } from 'objection'
 import Node from './node'
+import BaseModel from './base'
 
-export default class Tag extends Model {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: Object
+export default class Tag extends BaseModel {
     parentId!: Number
-
     locked!: Boolean
 
     static get tableName() {
         return 'tags'
     }
 
+    static get timestamps() {
+        return true
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',
-            required: [],
+            required: ['key', 'value', 'meta'],
             properties: {
-                id: { type: 'integer' }
-            },
-            options: {
-                timestamps: true
+                key: { type: 'string' },
+                value: { type: 'string' },
+                meta: {
+                    type: 'object',
+                    required: ['author', 'assets'],
+                    properties: {
+                        author: { type: 'string' },
+                        assets: { type: 'array' },
+                        background: { type: ['string', 'null'] },
+                        estimatedValue: { type: 'integer' }
+                    }
+                }
             }
         }
     }
@@ -40,13 +46,5 @@ export default class Tag extends Model {
                 }
             },
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }

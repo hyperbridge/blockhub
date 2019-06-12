@@ -1,18 +1,18 @@
 import { Model, RelationMappings } from 'objection'
 import Profile from './profile'
 import Node from './node'
+import BaseModel from './base'
 
-export default class Vote extends Model {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String // value = 1 or -1 or emoji
-    meta!: Object
+export default class Vote extends BaseModel {
+    // value = 1 or -1 or emoji
     parentId!: Number
 
     static get tableName() {
         return 'votes'
+    }
+
+    static get timestamps() {
+        return true
     }
 
     static get jsonSchema() {
@@ -20,10 +20,6 @@ export default class Vote extends Model {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' }
-            },
-            options: {
-                timestamps: true
             }
         }
     }
@@ -47,13 +43,5 @@ export default class Vote extends Model {
                 }
             },
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }

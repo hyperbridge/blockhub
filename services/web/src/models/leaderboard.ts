@@ -2,6 +2,7 @@ import { Model, RelationMappings } from 'objection'
 import Profile from './profile'
 import Product from './product'
 import Node from './node'
+import BaseModel from './base'
 
 
 // export interface RelationMappings {
@@ -16,13 +17,7 @@ import Node from './node'
 //     beforeInsert: any
 // }
 
-export default class Leaderboard extends Model {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: Object
+export default class Leaderboard extends BaseModel {
     parentId!: Number
     score!: Number
 
@@ -33,15 +28,15 @@ export default class Leaderboard extends Model {
         return 'leaderboards'
     }
 
+    static get timestamps() {
+        return true
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' }
-            },
-            options: {
-                timestamps: true
             }
         }
     }
@@ -85,13 +80,5 @@ export default class Leaderboard extends Model {
                 }
             },
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }

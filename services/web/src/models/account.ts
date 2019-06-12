@@ -4,19 +4,18 @@ import Profile from './profile'
 
 export default class Account extends BaseModel {
     parentId!: Number
-
     email!: String
     firstName!: String
     lastName!: String
     password!: String
     avatar!: String
 
-    static get timestamps() {
-        return true
-    }
-
     static get tableName() {
         return 'accounts'
+    }
+
+    static get timestamps() {
+        return true
     }
 
     static get jsonSchema() {

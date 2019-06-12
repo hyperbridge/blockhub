@@ -1,18 +1,18 @@
 import { Model, RelationMappings } from 'objection'
 import Profile from './profile'
 import Node from './node'
+import BaseModel from './base'
 
-export default class Bounty extends Model {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: Object // prize
+export default class Bounty extends BaseModel {
+    // meta = prize
     parentId!: Number
 
     static get tableName() {
         return 'bounties'
+    }
+
+    static get timestamps() {
+        return true
     }
 
     static get jsonSchema() {
@@ -20,10 +20,6 @@ export default class Bounty extends Model {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' }
-            },
-            options: {
-                timestamps: true
             }
         }
     }
@@ -58,13 +54,5 @@ export default class Bounty extends Model {
                 }
             },
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }

@@ -39,6 +39,10 @@ export default class Profile extends BaseModel {
         return 'profiles'
     }
 
+    static get timestamps() {
+        return true
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',
@@ -52,9 +56,6 @@ export default class Profile extends BaseModel {
                     enum: ['user', 'developer', 'curator'],
                     default: 'user'
                 }
-            },
-            options: {
-                timestamps: false
             }
         }
     }

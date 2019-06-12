@@ -3,14 +3,9 @@ import { Model, RelationMappings } from 'objection'
 import License from './license'
 import Offer from './offer'
 import Node from './node'
+import BaseModel from './base'
 
-export default class Asset extends Model {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: Object
+export default class Asset extends BaseModel {
     parentId!: Number
     score!: Number
     status!: String
@@ -19,15 +14,15 @@ export default class Asset extends Model {
         return 'assets'
     }
 
+    static get timestamps() {
+        return true
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' }
-            },
-            options: {
-                timestamps: true
             }
         }
     }
@@ -70,13 +65,5 @@ export default class Asset extends Model {
                 }
             },
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }

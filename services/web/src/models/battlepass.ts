@@ -1,17 +1,17 @@
 import { Model, RelationMappings } from 'objection'
 import Node from './node'
+import BaseModel from './base'
 
-export default class BattlePass extends Model {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: Object // tiers, rewards, associated product, etc.
+export default class BattlePass extends BaseModel {
+    // meta = tiers, rewards, associated product, etc.
     parentId!: Number
 
     static get tableName() {
         return 'battlepasses'
+    }
+
+    static get timestamps() {
+        return true
     }
 
     static get jsonSchema() {
@@ -19,10 +19,6 @@ export default class BattlePass extends Model {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' }
-            },
-            options: {
-                timestamps: true
             }
         }
     }
@@ -38,13 +34,5 @@ export default class BattlePass extends Model {
                 }
             },
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }

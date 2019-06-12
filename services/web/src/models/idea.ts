@@ -4,15 +4,9 @@ import Rating from './rating'
 import Profile from './profile'
 import Community from './community'
 import Tag from './tag'
+import BaseModel from './base'
 
-export default class Idea extends Model {
-    id!: Number
-    key!: String
-    value!: String
-    meta!: Object
-    createdAt!: String
-    updatedAt!: String
-
+export default class Idea extends BaseModel {
     ownerId!: Number
     owner!: Profile
     communityId!: Number
@@ -27,12 +21,15 @@ export default class Idea extends Model {
         return 'ideas'
     }
 
+    static get timestamps() {
+        return true
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' }
             },
             options: {
                 timestamps: true
@@ -135,13 +132,5 @@ export default class Idea extends Model {
                 }
             },
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }

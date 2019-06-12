@@ -1,15 +1,10 @@
 import { Model, RelationMappings } from 'objection'
 import Node from './node'
-import Rating from './rating';
-import Profile from './profile';
+import Rating from './rating'
+import Profile from './profile'
+import BaseModel from './base'
 
-export default class Review extends Model {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: Object
+export default class Review extends BaseModel {
     parentId!: Number
 
     rating!: Rating
@@ -17,10 +12,12 @@ export default class Review extends Model {
     owner!: Profile
     ownerId!: Number
 
-
-
     static get tableName() {
         return 'reviews'
+    }
+
+    static get timestamps() {
+        return true
     }
 
     static get jsonSchema() {
@@ -28,10 +25,6 @@ export default class Review extends Model {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' }
-            },
-            options: {
-                timestamps: true
             }
         }
     }
@@ -47,13 +40,5 @@ export default class Review extends Model {
                 }
             },
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }

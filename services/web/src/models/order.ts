@@ -1,7 +1,8 @@
 import { Model, RelationMappings } from 'objection'
 import Node from './node'
+import BaseModel from './base'
 
-export default class Order extends Model {
+export default class Order extends BaseModel {
     id!: Number
     createdAt!: String
     updatedAt!: String
@@ -14,6 +15,10 @@ export default class Order extends Model {
 
     static get tableName() {
         return 'orders'
+    }
+
+    static get timestamps() {
+        return true
     }
 
     static get jsonSchema() {

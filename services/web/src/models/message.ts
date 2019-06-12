@@ -1,13 +1,9 @@
 import { Model, RelationMappings } from 'objection'
 import Node from './node'
 import Profile from './profile'
+import BaseModel from './base'
 
-export default class Message extends Model {
-    id!: number
-    key!: String
-    value!: String
-    createdAt!: String
-    updatedAt!: String
+export default class Message extends BaseModel {
     parentId!: Number
 
     ownerId!: Number
@@ -16,15 +12,15 @@ export default class Message extends Model {
         return 'messages'
     }
 
+    static get timestamps() {
+        return true
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' }
-            },
-            options: {
-                timestamps: true
             }
         }
     }
@@ -56,13 +52,5 @@ export default class Message extends Model {
                 }
             },
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }

@@ -2,18 +2,17 @@
 import { Model, RelationMappings } from 'objection'
 import Profile from './profile'
 import Node from './node'
+import BaseModel from './base'
 
-export default class Offer extends Model {
-    id!: number
-    key!: String
-    value!: String
-    meta!: String
-    createdAt!: String
-    updatedAt!: String
+export default class Offer extends BaseModel {
     parentId!: Number
 
     static get tableName() {
         return 'offers'
+    }
+
+    static get timestamps() {
+        return true
     }
 
     static get jsonSchema() {
@@ -22,12 +21,8 @@ export default class Offer extends Model {
             required: ['ownerId'],
 
             properties: {
-                id: { type: 'integer' },
                 ownerId: { type: 'integer' },
                 address: { type: 'string' }
-            },
-            options: {
-                timestamps: true
             }
         }
     }
@@ -51,13 +46,5 @@ export default class Offer extends Model {
                 }
             },
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }

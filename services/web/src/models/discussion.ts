@@ -4,13 +4,10 @@ import Message from './message'
 import Event from './event'
 import Node from './node'
 import Rating from './rating'
+import BaseModel from './base'
 
-export default class Discussion extends Model {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
+export default class Discussion extends BaseModel {
     content!: String
-    meta!: Object
     parentId!: Number
     rootMessageId!: Number
 
@@ -18,15 +15,15 @@ export default class Discussion extends Model {
         return 'discussions'
     }
 
+    static get timestamps() {
+        return true
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' }
-            },
-            options: {
-                timestamps: true
             }
         }
     }
@@ -134,13 +131,5 @@ export default class Discussion extends Model {
                 }
             },
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }

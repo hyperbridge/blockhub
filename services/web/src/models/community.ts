@@ -3,14 +3,9 @@ import Profile from './profile'
 import Discussion from './discussion'
 import Event from './event'
 import Node from './node'
+import BaseModel from './base'
 
-export default class Community extends Model {
-    id!: Number
-    createdAt!: String
-    updatedAt!: String
-    key!: String
-    value!: String
-    meta!: Object
+export default class Community extends BaseModel {
     parentId!: Number
     ownerId!: Number
 
@@ -22,15 +17,15 @@ export default class Community extends Model {
         return 'communities'
     }
 
+    static get timestamps() {
+        return true
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',
             required: [],
             properties: {
-                id: { type: 'integer' }
-            },
-            options: {
-                timestamps: true
             }
         }
     }
@@ -114,13 +109,5 @@ export default class Community extends Model {
                 }
             },
         }
-    }
-
-    $beforeInsert() {
-        this.createdAt = this.updatedAt = new Date().toISOString()
-    }
-
-    $beforeUpdate() {
-        this.updatedAt = new Date().toISOString()
     }
 }
