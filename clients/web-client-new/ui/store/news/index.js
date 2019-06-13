@@ -1,7 +1,5 @@
-import { normalize } from 'normalizr'
-import schema from './schema'
 
-const rawData = {
+const localState = {
     articles: [
         {
             id: 'post1',
@@ -46,7 +44,7 @@ const rawData = {
     ]
 }
 
-export const state = () => normalize(rawData, { articles: [schema.article] })
+export const state = () => localState
 export const getters = {}
 export const actions = {}
 export const mutations = {}

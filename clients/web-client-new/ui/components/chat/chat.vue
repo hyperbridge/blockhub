@@ -1,5 +1,5 @@
 <template>
-    <main
+    <div
         id="chat"
         class="flex flex-column">
         <header class="title-bar flex flex-row flex-center">
@@ -8,35 +8,32 @@
             </div>
         </header>
         <div
-            v-if="user"
             class="flex flex-row flex-1 clear">
             <c-user-list
-                :users="users"
+                :users="profiles"
                 :logout="logout" />
-
             <c-message-list
                 :messages="messages"
                 :createMessage="createMessage" />
         </div>
-    </main>
+    </div>
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
 import UserList from './users'
 import MessageList from './messages'
 
 export default {
+    components: {
+        'c-user-list': UserList,
+        'c-message-list': MessageList
+    },
     props: {
-        messages: Array
     },
     computed: {
-        ...mapState('auth', [
-            'user'
-        ]),
-        ...mapGetters('users', {
-            users: 'list'
-        })
+        user() { return this.$store.state.auth.user },
+        messages() { return this.$store.getters['messages/list'] },
+        profiles() { return this.$store.getters['profiles/list'] }
         // users2 () {
         //   return this.findUsers({
         //     query: {
@@ -48,22 +45,8 @@ export default {
         //   })
         // },
     },
-    methods: {
-        ...mapActions('messages', {
-            createMessage: 'create'
-        }),
-        ...mapActions('users', {
-            findUsers: 'find'
-        }),
-        ...mapActions('messages', {
-            findMessages: 'find'
-        }),
-        ...mapActions('auth', [
-            'logout'
-        ])
-    },
     created() {
-        this.findMessages({
+        this.$store.dispatch('messages/find', {
             query: {
                 $sort: {
                     createdAt: 1
@@ -71,24 +54,24 @@ export default {
                 $limit: 25
             }
         })
-        this.findUsers({
+        this.$store.dispatch('profiles/find', {
             query: {
                 $sort: {
-                    email: 1
+                    createdAt: 1
                 },
                 $limit: 25
             }
         })
     },
-    components: {
-        'c-user-list': UserList,
-        'c-message-list': MessageList
+    methods: {
+        createMessage(...args) { return this.$api.service('messages').create(...args) },
+        logout(...args) { return this.$api.service('auth').logout(...args) }
     }
 }
 </script>
 
 <style scoped>
-main#chat {
+#chat {
   height: 100%;
 }
 

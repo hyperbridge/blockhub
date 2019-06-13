@@ -4,7 +4,7 @@
             <c-single-message
                 v-for="message in messages"
                 v-cloak
-                :key="message._id"
+                :key="message.id"
                 :message="message" />
         </main>
         <c-compose-message :createMessage="createMessage" />

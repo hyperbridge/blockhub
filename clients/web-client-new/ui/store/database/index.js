@@ -1,4 +1,3 @@
-import { normalize } from 'normalizr'
 import * as DB from '../../db'
 
 let localState = {

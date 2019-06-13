@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import { normalize } from 'normalizr'
 import * as DB from '../../db'
 import * as Bridge from '../../framework/desktop-bridge'
 

@@ -1,7 +1,5 @@
 import Vue from 'vue'
-import { normalize } from 'normalizr'
 import * as DB from '../../db'
-import * as Bridge from '../../framework/desktop-bridge'
 
 
 let localState = {}
@@ -53,31 +51,31 @@ export const actions = {
         console.log('viewProject', id)
     },
     createProject(store, payload) {
-        return new Promise((resolve, reject) => {
-            Bridge
-                .createFundingProject({ title: payload.name, description: payload.description, about: payload.content })
-                .then(project => {
-                    store.state.projects[project.id] = project
+        // return new Promise((resolve, reject) => {
+        //     Bridge
+        //         .createFundingProject({ title: payload.name, description: payload.description, about: payload.content })
+        //         .then(project => {
+        //             store.state.projects[project.id] = project
 
-                    store.dispatch('updateState')
+        //             store.dispatch('updateState')
 
-                    resolve(project)
-                })
-        })
+        //             resolve(project)
+        //         })
+        // })
     },
     updateProject(store, payload) {
-        return new Promise((resolve, reject) => {
-            const project = DB.funding.projects.findOne({ 'id': payload.id })
+        // return new Promise((resolve, reject) => {
+        //     const project = DB.funding.projects.findOne({ 'id': payload.id })
 
-            Bridge
-                .updateFundingProject({ id: project.id, data: payload })
-                .then(project => {
-                    store.state.projects[payload.id] = project
-                    store.dispatch('updateState')
+        //     Bridge
+        //         .updateFundingProject({ id: project.id, data: payload })
+        //         .then(project => {
+        //             store.state.projects[payload.id] = project
+        //             store.dispatch('updateState')
 
-                    resolve(project)
-                })
-        })
+        //             resolve(project)
+        //         })
+        // })
     }
 }
 

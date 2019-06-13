@@ -1149,6 +1149,7 @@
             'c-asset-navigation': () => import('~/components/navigation/asset').then(m => m.default || m),
             'c-product-navigation': () => import('~/components/navigation/product').then(m => m.default || m),
             'c-project-navigation': () => import('~/components/navigation/project').then(m => m.default || m),
+            'c-chat-navigation': () => import('~/components/navigation/chat').then(m => m.default || m),
             'c-idea-navigation': () => import('~/components/navigation/idea').then(m => m.default || m),
             'c-welcome-popup': () => import('~/components/welcome-popup').then(m => m.default || m),
             'c-download-popup': () => import('~/components/download-popup').then(m => m.default || m),
