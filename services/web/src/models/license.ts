@@ -18,9 +18,6 @@ export default class License extends BaseModel {
             type: 'object',
             required: [],
             properties: {
-            },
-            options: {
-                timestamps: true
             }
         }
     }

@@ -198,27 +198,31 @@ export default {
     },
     mounted() {
         this.$nextTick(() => {
+            if (process.client) return
+
             this.css.bodyBgColor = document.body.style.backgroundColor
-            this.css.headerBg = $('#header-bg')[0].style
-            this.css.headerBgLayer1 = $('.header-bg__layer-1')[0].style
-            this.css.headerBgLayer2 = $('.header-bg__layer-2')[0].style
+            this.css.headerBg = this.$('#header-bg')[0].style
+            this.css.headerBgLayer1 = this.$('.header-bg__layer-1')[0].style
+            this.css.headerBgLayer2 = this.$('.header-bg__layer-2')[0].style
 
             document.body.style.backgroundColor = this.realm.meta.theme.backgroundColor
-            $('#header-bg').css({ 'background-image': `url(${this.realm.meta.images.background})`, 'background-size': this.realm.meta.theme.header.backgroundSize || 'cover' })
-            $('.header-bg__layer-1').css({ 'background': `linear-gradient(to bottom, rgba(${hexToRgb(this.realm.meta.theme.backgroundColor.slice(1))}, 0.34) 0%, rgba(${hexToRgb(this.realm.meta.theme.backgroundColor.slice(1))}, 1) 100%)` })
-            $('.header-bg__layer-2').css({ 'position': 'fixed', 'background': 'rgba(255, 255, 255, 0.2)', 'height': '48px' })
-            $('.app-header__shadow').hide()
-            $('#page-aside').hide()
+            this.$('#header-bg').css({ 'background-image': `url(${this.realm.meta.images.background})`, 'background-size': this.realm.meta.theme.header.backgroundSize || 'cover' })
+            this.$('.header-bg__layer-1').css({ 'background': `linear-gradient(to bottom, rgba(${hexToRgb(this.realm.meta.theme.backgroundColor.slice(1))}, 0.34) 0%, rgba(${hexToRgb(this.realm.meta.theme.backgroundColor.slice(1))}, 1) 100%)` })
+            this.$('.header-bg__layer-2').css({ 'position': 'fixed', 'background': 'rgba(255, 255, 255, 0.2)', 'height': '48px' })
+            this.$('.app-header__shadow').hide()
+            this.$('#page-aside').hide()
         })
     },
     beforeDestroy() {
+        if (process.client) return
+
         document.body.style.backgroundColor = this.css.bodyBgColor
 
-        $('#header-bg')[0].style = this.css.headerBg
-        $('.header-bg__layer-1')[0].style = this.css.headerBgLayer1
-        $('.header-bg__layer-2')[0].style = this.css.headerBgLayer2
-        $('.app-header__shadow').show()
-        $('#page-aside').show()
+        this.$('#header-bg')[0].style = this.css.headerBg
+        this.$('.header-bg__layer-1')[0].style = this.css.headerBgLayer1
+        this.$('.header-bg__layer-2')[0].style = this.css.headerBgLayer2
+        this.$('.app-header__shadow').show()
+        this.$('#page-aside').show()
     },
     created() {
         // this.$store.commit('application/activateModal', 'coming-soon')

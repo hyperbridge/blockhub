@@ -52,6 +52,12 @@ export default class BaseModel extends Model {
         }
     }
 
+    get parent() {
+        if (this.parentId) return Node.where(id = parentId)
+
+        throw new Error("No parent")
+    }
+
     // $beforeInsert() {
     //     this.createdAt = this.updatedAt = new Date().toISOString()
     // }

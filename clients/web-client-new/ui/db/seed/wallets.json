@@ -1,4 +1,6 @@
-[
+{
+	"meta": {
+		"wallets": [
     {
         "id": "1",
         "name": "Bitcoin",
@@ -104,3 +106,5 @@
         "preferredSwitcher": true
     }
 ]
+	}
+}

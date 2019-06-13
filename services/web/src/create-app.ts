@@ -3,7 +3,6 @@ import bodyParser = require('body-parser')
 import helmet = require('helmet')
 import Knex = require('knex')
 import winston = require('winston')
-import api from './api'
 import { Model, RelationMappings } from 'objection'
 import config = require('../config')
 import feathers = require('@feathersjs/feathers')

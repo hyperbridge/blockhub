@@ -28,11 +28,18 @@ export default class Idea extends BaseModel {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: [],
+            required: ['name', 'meta', 'ownerId', 'communityId', 'ratingId'],
             properties: {
-            },
-            options: {
-                timestamps: true
+                name: { type: 'string' },
+                ownerId: { type: 'integer' },
+                communityId: { type: 'integer' },
+                ratingId: { type: 'integer' },
+                meta: {
+                    type: 'object',
+                    required: [],
+                    properties: {
+                    }
+                }
             }
         }
     }
