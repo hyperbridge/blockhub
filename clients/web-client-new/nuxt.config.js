@@ -86,7 +86,6 @@ export default {
         extendRoutes(routes) {
             sites.forEach(site => {
                 site.routes.forEach(route => {
-                    console.log(route)
                     routes.push(route)
                 })
             })
