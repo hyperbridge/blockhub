@@ -1,24 +1,16 @@
 import Vue from 'vue'
-import { normalize } from 'normalizr'
 
-let rawData = {
+let localState = {
     initial: true,
     screens: {}
 }
 
-let localState = null
-
 export const state = () => localState
 
 const updateState = () => {
-    rawData = {
-        ...rawData
+    localState = {
+        ...localState
     }
-
-    const normalizedData = normalize(rawData, {
-    })
-
-    localState = { ...rawData, ...normalizedData.entities }
 }
 
 updateState()

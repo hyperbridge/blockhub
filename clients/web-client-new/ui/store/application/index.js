@@ -1,15 +1,11 @@
 import Vue from 'vue'
-import { normalize } from 'normalizr'
 import axios from 'axios'
 import FormData from 'form-data'
 import * as DB from '../../db'
 import * as Bridge from '../../framework/desktop-bridge'
-import schema from './schema'
 // import { extract, getId } from '../../util/store'
 
-let rawData = {}
-
-let localState = null
+let localState = {}
 
 export const state = () => localState
 
@@ -40,8 +36,8 @@ const getOS = () => {
 }
 
 const updateState = (savedData, updatedState = {}) => {
-    rawData = {
-        ...rawData,
+    localState = {
+        ...localState,
         ...savedData,
         status: {
             code: null,
@@ -59,18 +55,13 @@ const updateState = (savedData, updatedState = {}) => {
         ...updatedState
     }
 
-    rawData.connection.internet = true
+    localState.connection.internet = true
 
     if (updatedState.locked !== undefined) {
-        rawData.locked = updatedState.locked
+        localState.locked = updatedState.locked
     }
 
-    if (rawData.desktopMode === null) { rawData.desktopMode = process.client && window.isElectron }
-
-    const normalizedData = normalize(rawData, {
-    })
-
-    localState = { ...rawData, ...normalizedData.entities }
+    if (localState.desktopMode === null) { localState.desktopMode = process.client && window.isElectron }
 }
 
 export const getters = {

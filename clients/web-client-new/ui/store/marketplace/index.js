@@ -1,26 +1,22 @@
 import Vue from 'vue'
 import { normalize } from 'normalizr'
-import schema from './schema'
 import * as DB from '../../db'
 import * as Bridge from '../../framework/desktop-bridge'
 
-let rawData = {}
-
-let localState = null
+let localState = {}
 
 export const state = () => localState
 
 const updateState = (savedData, updatedState = {}) => {
-    rawData = {
-        ...rawData,
+    localState = {
+        ...localState,
         ...savedData,
         assets: DB.marketplace ? DB.marketplace.assets.data : [],
         products: DB.marketplace ? DB.marketplace.products.data : [],
-        posts: DB.marketplace ? DB.marketplace.posts.data : [],
+        posts: DB.marketplace ? DB.marketplace.config.data[0].posts : [],
         collections: DB.marketplace.config.data[0].collections,
         realms: DB.marketplace.config.data[0].realms,
         curatorReviews: DB.marketplace.config.data[0].curatorReviews,
-        posts: DB.marketplace.config.data[0].posts,
         gameSeries: DB.marketplace.config.data[0].gameSeries,
         ideas: DB.marketplace.config.data[0].ideas,
         frontpageProduct: DB.marketplace ? DB.marketplace.products.findOne({ 'systemTags': { '$contains': ['frontpage'] } }) : {},
@@ -35,69 +31,55 @@ const updateState = (savedData, updatedState = {}) => {
         top5: DB.marketplace ? DB.marketplace.products.find({ 'rating.overall': { '$gte': 5 } }) : [],
         ...updatedState
     }
-
-    const normalizedData = normalize(rawData, {
-        assets: [schema.asset],
-        products: [schema.product],
-        frontpageProduct: schema.product,
-        newProducts: [schema.product],
-        saleProducts: [schema.product],
-        upcomingProducts: [schema.product],
-        trendingProducts: [schema.product],
-        topSellingProducts: [schema.product],
-        specialProducts: [schema.product]
-    })
-
-    localState = { ...rawData, ...normalizedData.entities }
 }
 
 const sortDir = (dir, asc) => asc ? dir : dir * -1
 
 export const getters = {
-    assetsArray: state => Array.isArray(state.assets) ? state.assets : Object.values({}),
-    productsArray: state => Array.isArray(state.products) ? state.products : Object.values({}),
-    getProductsQuery: state => query => DB.marketplace.products.find(query),
-    productsTags: (state, getters) => getters.productsArray
-        .reduce((tags, product) => [
-            ...tags,
-            ...product.developerTags
-                .filter(tag =>
-                    !tags.includes(tag))
-        ], []).sort(),
-    systemTags: (state, getters) => getters.productsArray
-        .reduce((tags, product) => [
-            ...tags,
-            ...product.systemTags
-                .filter(tag =>
-                    !tags.includes(tag))
-        ], []).sort(),
-    productsLanguages: (state, getters) => getters.productsArray
-        .reduce((languages, product) => [
-            ...languages,
-            ...product.languageSupport
-                .filter(lang =>
-                    !languages.includes(lang.name))
-                .map(lang => lang.name)
-        ], []).sort(),
-    getProductsByName: (state, getters) => name => getters.productsArray.filter(product =>
-        product.name.toLowerCase().includes(name.toLowerCase())),
-    getProductsFiltered: (state, getters) => ({ name, tags, sortBy }) => getters.productsArray
-        .filter(product => name && name.length
-            ? product.name.toLowerCase().includes(name.toLowerCase())
-            : true)
-        .filter(product => tags && tags.length
-            ? product.developerTags.some(genre => this.selectedGenres.includes(genre))
-            : true)
-        .sort((a, b) => sortBy
-            ? a[sortBy.property] > b[sortBy.property]
-                ? sortDir(1, sortBy.asc)
-                : a[sortBy.property] < b[sortBy.property] ? sortDir(-1, sortBy.asc) : 0
-            : 0),
-    assetsProducts: (state, getters) => getters.assetsArray.reduce((products, asset) =>
-        products.includes(asset.productName)
-            ? products
-            : [...products, asset.productName]
-    , []).sort()
+    // assetsArray: state => Array.isArray(state.assets) ? state.assets : Object.values({}),
+    // productsArray: state => Array.isArray(state.products) ? state.products : Object.values({}),
+    // getProductsQuery: state => query => DB.marketplace.products.find(query),
+    // productsTags: (state, getters) => getters.productsArray
+    //     .reduce((tags, product) => [
+    //         ...tags,
+    //         ...product.developerTags
+    //             .filter(tag =>
+    //                 !tags.includes(tag))
+    //     ], []).sort(),
+    // systemTags: (state, getters) => getters.productsArray
+    //     .reduce((tags, product) => [
+    //         ...tags,
+    //         ...product.systemTags
+    //             .filter(tag =>
+    //                 !tags.includes(tag))
+    //     ], []).sort(),
+    // productsLanguages: (state, getters) => getters.productsArray
+    //     .reduce((languages, product) => [
+    //         ...languages,
+    //         ...product.languageSupport
+    //             .filter(lang =>
+    //                 !languages.includes(lang.name))
+    //             .map(lang => lang.name)
+    //     ], []).sort(),
+    // getProductsByName: (state, getters) => name => getters.productsArray.filter(product =>
+    //     product.name.toLowerCase().includes(name.toLowerCase())),
+    // getProductsFiltered: (state, getters) => ({ name, tags, sortBy }) => getters.productsArray
+    //     .filter(product => name && name.length
+    //         ? product.name.toLowerCase().includes(name.toLowerCase())
+    //         : true)
+    //     .filter(product => tags && tags.length
+    //         ? product.developerTags.some(genre => this.selectedGenres.includes(genre))
+    //         : true)
+    //     .sort((a, b) => sortBy
+    //         ? a[sortBy.property] > b[sortBy.property]
+    //             ? sortDir(1, sortBy.asc)
+    //             : a[sortBy.property] < b[sortBy.property] ? sortDir(-1, sortBy.asc) : 0
+    //         : 0),
+    // assetsProducts: (state, getters) => getters.assetsArray.reduce((products, asset) =>
+    //     products.includes(asset.productName)
+    //         ? products
+    //         : [...products, asset.productName]
+    // , []).sort()
 }
 
 export const actions = {

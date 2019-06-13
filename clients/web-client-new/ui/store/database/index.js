@@ -1,25 +1,17 @@
 import { normalize } from 'normalizr'
 import * as DB from '../../db'
 
-let rawData = {
+let localState = {
     initialized: true
 }
-
-let localState = null
 
 export const state = () => localState
 
 const updateState = () => {
-    rawData = {
-        ...rawData
+    localState = {
+        ...localState
         // db stuff
     }
-
-    const normalizedData = normalize(rawData, {
-        // schema stuff
-    })
-
-    localState = { ...rawData, ...normalizedData.entities }
 }
 
 updateState()

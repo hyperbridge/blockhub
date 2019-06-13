@@ -1,19 +1,16 @@
 import Vue from 'vue'
 import { normalize } from 'normalizr'
-import schema from './schema'
 import * as DB from '../../db'
 import * as Bridge from '../../framework/desktop-bridge'
 
 
-let rawData = {}
-
-let localState = null
+let localState = {}
 
 export const state = () => localState
 
 const updateState = (savedData, updatedState = {}) => {
-    rawData = {
-        ...rawData,
+    localState = {
+        ...localState,
         ...savedData,
         ...updatedState,
         projects: DB.funding ? DB.funding.projects.find({ 'status': { '$eq': 'approved' } }) : [],
@@ -23,12 +20,6 @@ const updateState = (savedData, updatedState = {}) => {
         topItemIdeas: DB.funding ? DB.funding.projects.find({ 'systemTags': { '$contains': ['top', 'item', 'suggestion'] } }) : [],
         most_popular_games: DB.funding ? DB.funding.projects.find({ 'systemTags': { '$contains': ['popular', 'game'] } }) : []
     }
-
-    const normalizedData = normalize(rawData, {
-        projects: [schema.project],
-    })
-
-    localState = { ...rawData, ...normalizedData.entities }
 }
 
 
@@ -65,7 +56,7 @@ export const actions = {
         return new Promise((resolve, reject) => {
             Bridge
                 .createFundingProject({ title: payload.name, description: payload.description, about: payload.content })
-                .then((project) => {
+                .then(project => {
                     store.state.projects[project.id] = project
 
                     store.dispatch('updateState')
@@ -80,7 +71,7 @@ export const actions = {
 
             Bridge
                 .updateFundingProject({ id: project.id, data: payload })
-                .then((project) => {
+                .then(project => {
                     store.state.projects[payload.id] = project
                     store.dispatch('updateState')
 
@@ -92,7 +83,7 @@ export const actions = {
 
 export const mutations = {
     updateState(s, payload) {
-        for (let x in payload) {
+        for (const x in payload) {
             Vue.set(s, x, payload[x])
         }
 
