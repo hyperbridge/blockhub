@@ -57,8 +57,8 @@ export const mutations = {
         state.initialized = true
     },
     updateState(s, payload) {
-        for (let x in payload) {
+        for (const x in payload) {
             s[x] = payload[x]
         }
-    },
+    }
 }

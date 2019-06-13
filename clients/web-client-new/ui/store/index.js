@@ -1,7 +1,6 @@
 import feathersClient from '../framework/feathers-client'
 import feathersVuex, { initAuth } from 'feathers-vuex'
 import Vue from 'vue'
-
 import * as ChaosMonkey from '../framework/chaos-monkey'
 import * as Bridge from '../framework/desktop-bridge'
 

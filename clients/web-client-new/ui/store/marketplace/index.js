@@ -33,7 +33,7 @@ const updateState = (savedData, updatedState = {}) => {
         productNews: DB.marketplace ? DB.marketplace.posts.find({ 'target': { '$eq': ['product'] }, 'systemTags': { '$contains': ['news'] } }) : [],
         topFree: DB.marketplace ? DB.marketplace.products.find({ 'price': { '$eq': 0 } }) : [],
         top5: DB.marketplace ? DB.marketplace.products.find({ 'rating.overall': { '$gte': 5 } }) : [],
-        ...updatedState,
+        ...updatedState
     }
 
     const normalizedData = normalize(rawData, {
@@ -62,58 +62,47 @@ export const getters = {
             ...tags,
             ...product.developerTags
                 .filter(tag =>
-                    !tags.includes(tag)
-                )
-        ], []).sort()
-    ,
+                    !tags.includes(tag))
+        ], []).sort(),
     systemTags: (state, getters) => getters.productsArray
         .reduce((tags, product) => [
             ...tags,
             ...product.systemTags
                 .filter(tag =>
-                    !tags.includes(tag)
-                )
-        ], []).sort()
-    ,
+                    !tags.includes(tag))
+        ], []).sort(),
     productsLanguages: (state, getters) => getters.productsArray
         .reduce((languages, product) => [
             ...languages,
             ...product.languageSupport
                 .filter(lang =>
-                    !languages.includes(lang.name)
-                )
+                    !languages.includes(lang.name))
                 .map(lang => lang.name)
-        ], []).sort()
-    ,
+        ], []).sort(),
     getProductsByName: (state, getters) => name => getters.productsArray.filter(product =>
-        product.name.toLowerCase().includes(name.toLowerCase())
-    ),
+        product.name.toLowerCase().includes(name.toLowerCase())),
     getProductsFiltered: (state, getters) => ({ name, tags, sortBy }) => getters.productsArray
         .filter(product => name && name.length
             ? product.name.toLowerCase().includes(name.toLowerCase())
-            : true
-        )
+            : true)
         .filter(product => tags && tags.length
             ? product.developerTags.some(genre => this.selectedGenres.includes(genre))
-            : true
-        )
+            : true)
         .sort((a, b) => sortBy
             ? a[sortBy.property] > b[sortBy.property]
                 ? sortDir(1, sortBy.asc)
                 : a[sortBy.property] < b[sortBy.property] ? sortDir(-1, sortBy.asc) : 0
-            : 0
-        )
-    ,
+            : 0),
     assetsProducts: (state, getters) => getters.assetsArray.reduce((products, asset) =>
         products.includes(asset.productName)
             ? products
-            : [ ...products, asset.productName ]
-        , []).sort()
+            : [...products, asset.productName]
+    , []).sort()
 }
 
 export const actions = {
     init(store, payload) {
-        console.log("[BlockHub][Marketplace] Initializing...")
+        console.log('[BlockHub][Marketplace] Initializing...')
 
         updateState(DB.marketplace.config.data[0], store.state)
 
@@ -126,7 +115,7 @@ export const actions = {
         // })
     },
     updateState(store, payload) {
-        //console.log("[BlockHub][Marketplace] Updating store...")
+        // console.log("[BlockHub][Marketplace] Updating store...")
 
         updateState(store.state, payload)
 
@@ -162,7 +151,7 @@ export const actions = {
     submitProductForReviewRequest(store, payload) {
         // payload = name, version, category, files, checksum, permissions
 
-        MarketplaceProtocol.Ethereum.Models.Marketplace.submitAppForReview(payload).then((res) => {
+        MarketplaceProtocol.Ethereum.Models.Marketplace.submitAppForReview(payload).then(res => {
             const product = DB.marketplace.products.findOne({ 'name': product.name })
             product.id = res[0]
             // TODO: assign rest of props
@@ -181,11 +170,11 @@ export const mutations = {
         state.activeCollectionModal = payload
     },
     updateState(state, payload) {
-        for (let x in payload) {
+        for (const x in payload) {
             Vue.set(state, x, payload[x])
         }
 
-        for (let product of Object.values(state.products)) {
+        for (const product of Object.values(state.products)) {
             DB.updateCollection(DB.marketplace.products, product)
         }
 
@@ -197,7 +186,7 @@ export const mutations = {
     },
     syncProductBlockchain(store, payload) {
         if (payload.meta.blockchainId) {
-            const run = function (
+            const run = function(
                 local,
                 DB,
                 Bridge,
@@ -235,13 +224,13 @@ export const mutations = {
                 }
             }
 
-            this.$desktop.sendCommand('eval', cmd).then((productResult) => {
+            this.$desktop.sendCommand('eval', cmd).then(productResult => {
                 if (productResult.id) {
-                    //this.successfulCreationMessage = "Product has been saved"
+                    // this.successfulCreationMessage = "Product has been saved"
                 }
             })
         } else {
-            const run = function (
+            const run = function(
                 local,
                 DB,
                 Bridge,
@@ -259,8 +248,7 @@ export const mutations = {
                 return new Promise(async (resolve, reject) => {
                     const productRegistrationContract = MarketplaceAPI.api.ethereum.state.contracts.ProductRegistration.deployed
 
-                    if (!productRegistrationContract)
-                        return reject('Contract not setup')
+                    if (!productRegistrationContract) { return reject('Contract not setup') }
 
                     let created = false
 
@@ -324,17 +312,17 @@ export const mutations = {
                 }
             }
 
-            this.$desktop.sendCommand('eval', cmd).then((productResult) => {
+            this.$desktop.sendCommand('eval', cmd).then(productResult => {
                 if (productResult.id) {
-                    //payload.meta.blockchainId = productResult.id
-                    //this.successfulCreationMessage = "Congratulations, your product has been synced!"
+                    // payload.meta.blockchainId = productResult.id
+                    // this.successfulCreationMessage = "Congratulations, your product has been synced!"
 
-                    //store.state.products[this.product.id] = payload
+                    // store.state.products[this.product.id] = payload
                     BlockHub.store.state.products.keyedById[payload.id].meta.blockchainId = productResult.id
 
-                    //BlockHub.router.push('/business/product/' + this.product.id)
+                    // BlockHub.router.push('/business/product/' + this.product.id)
                 }
             })
         }
-    },
+    }
 }

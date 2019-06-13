@@ -141,7 +141,6 @@
 
 <script>
 import { debounce } from '@/mixins'
-import { mapElement } from '@/util/store-helpers'
 
 export default {
     components: {
@@ -176,27 +175,6 @@ export default {
             ]
         }
     },
-    methods: {
-        runIt(e) {
-            console.log(e)
-        },
-        createFilter() {
-            this.$store.dispatch('assets/create', { prop: 'filters', data: this.newFilter })
-            this.newFiler = { phrase: '', priceMin: 0, priceMax: 0 }
-        },
-        updateFilter(data) {
-            console.log('CALLED')
-            if (this.activeFilter) {
-                const { id } = this.activeFilter
-                this.$store.dispatch('assets/update', { id, data, prop: 'filters' })
-            }
-        },
-        debounceUpdate(data) {
-            console.log(data)
-            this.debounce(() => this.updateFilter(data), 400)
-            // this.timeout = setTimeout(() => this.updateFilter(data), 250);
-        }
-    },
     computed: {
         assets() {
             return this.$store.getters['assets/assetsArray']
@@ -217,12 +195,34 @@ export default {
                 .filter(({ price, ...asset }) => this.choosenFilter
                     ? price.current > filter.priceMin && price.current < filter.priceMax
                     : true)
+        }
+        // TODO
+        // ...mapElement({
+        //     name: 'selectedFilter',
+        //     prop: 'filters',
+        //     module: 'assets'
+        // })
+    },
+    methods: {
+        runIt(e) {
+            console.log(e)
         },
-        ...mapElement({
-            name: 'selectedFilter',
-            prop: 'filters',
-            module: 'assets'
-        })
+        createFilter() {
+            this.$store.dispatch('assets/create', { prop: 'filters', data: this.newFilter })
+            this.newFiler = { phrase: '', priceMin: 0, priceMax: 0 }
+        },
+        updateFilter(data) {
+            console.log('CALLED')
+            if (this.activeFilter) {
+                const { id } = this.activeFilter
+                this.$store.dispatch('assets/update', { id, data, prop: 'filters' })
+            }
+        },
+        debounceUpdate(data) {
+            console.log(data)
+            this.debounce(() => this.updateFilter(data), 400)
+            // this.timeout = setTimeout(() => this.updateFilter(data), 250);
+        }
     }
 }
 </script>
