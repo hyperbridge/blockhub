@@ -394,34 +394,6 @@ export default {
                 margin-left: 5px;
             }
         }
-        .arrow_container{
-            width: 20px;
-            position: relative;
-            display: inline-block;
-            text-align: center;
-            height: 25px;
-            i{
-                font-size: 18px;
-                position: absolute;
-                opacity: .7;
-                left: 0;
-                right: 0;
-                &:first-child{
-                    top: 0;
-                    height: 50%;
-                    z-index: 3;
-                }
-                &:last-child{
-                    bottom: 0px;
-                    height: 18px;
-                    z-index: 1;
-                }
-                &:hover{
-                    opacity: 1;
-                    cursor: pointer;
-                }
-            }
-        }
     }
 
     .badges{

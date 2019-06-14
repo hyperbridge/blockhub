@@ -236,15 +236,10 @@
 
 <script>
 export default {
-    components: {
-    },
-    props: ['id'],
     data() {
         return {
             msg: ''
         }
-    },
-    created() {
     }
 }
 </script>

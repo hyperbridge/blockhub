@@ -62,9 +62,6 @@ export default {
         'c-idea-card': () => import('~/components/idea-card').then(m => m.default || m)
     },
     computed: {
-        ideas() {
-            return this.$store.getters['ideas/list']
-        },
         list() {
             const result = []
 
@@ -82,7 +79,7 @@ export default {
                             }
                         }
                     },
-                    projects: this.$store.state.funding.trendingProjects || []
+                    projects: this.$store.getters['funding/trendingProjects'] || []
                 }
             })
 
@@ -100,7 +97,7 @@ export default {
                             }
                         }
                     },
-                    projects: this.$store.state.funding.trendingProjects || []
+                    projects: this.$store.getters['funding/trendingProjects'] || []
                 }
             })
 
@@ -118,7 +115,7 @@ export default {
                             }
                         }
                     },
-                    projects: this.$store.state.funding.topGameIdeas || []
+                    projects: this.$store.getters['funding/topGameIdeas'] || []
                 }
             })
 
@@ -136,7 +133,7 @@ export default {
                             }
                         }
                     },
-                    projects: this.$store.state.funding.topContentIdeas || []
+                    projects: this.$store.getters['funding/topContentIdeas'] || []
                 }
             })
 
@@ -154,15 +151,15 @@ export default {
                             }
                         }
                     },
-                    projects: this.$store.state.funding.topItemIdeas || []
+                    projects: this.$store.getters['funding/topItemIdeas'] || []
                 }
             })
 
             return result
         }
     },
-    created() {
-        this.$store.dispatch('ideas/find', {
+    async asyncData({ params, store }) {
+        await store.dispatch('ideas/find', {
             query: {
                 $sort: {
                     createdAt: -1
@@ -170,6 +167,18 @@ export default {
                 $limit: 25
             }
         })
+
+        await store.dispatch('ideas/topGameIdeas')
+
+        const ideas = store.getters['ideas/list']
+
+        return {
+            ideas,
+            breadcrumbLinks: [
+                { to: { path: '/' }, title: 'Home' },
+                { to: { path: '/ideas' }, title: 'Ideas' }
+            ]
+        }
     }
 }
 </script>

@@ -44,49 +44,29 @@ export default {
     },
     data() {
         return {
-            loading: true
         }
     },
     computed: {
-        realms() {
-            return this.$store.getters['realms/list']
-        },
-        list() {
-            const result = []
-
-            result.push({
-                type: 'realmsRow',
-                data: {
-                    title: 'Realms',
-                    ref: 'realms_sl',
-                    swiper: this.$refs.realms_sl && this.$refs.realms_sl.swiper,
-                    options: {
-                        slidesPerView: 3,
-                        spaceBetween: 10,
-                        pagination: {
-                            el: '.swiper-pagination',
-                            clickable: true
-                        }
-                    },
-                    realms: this.$store.state.marketplace.realms
-                }
-            })
-
-            return result
-        }
     },
-    created() {
-        this.$store.dispatch('realms/find', {
+    async asyncData({ params, store }) {
+        await store.dispatch('realms/find', {
             query: {
                 $sort: {
                     createdAt: -1
                 },
                 $limit: 25
             }
-        }).then(() => {
-            this.loading = false
         })
-        // this.$store.commit('application/activateModal', 'coming-soon')
+
+        const realms = store.getters['realms/list']
+
+        return {
+            realms,
+            breadcrumbLinks: [
+                { to: { path: '/' }, title: 'Home' },
+                { to: { path: '/realms' }, title: 'Realms' }
+            ]
+        }
     }
 }
 </script>

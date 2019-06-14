@@ -23,7 +23,16 @@ export default function(app) {
         allowedUpsert: '[owner.^, tags.^, community.[owner], rating.^]'
     }
 
+    // app.use('/ideas', {
+    //     topGameIdeas() {
+    //         return [
+    //             { something: 1 }
+    //         ]
+    //     }
+    // })
+
     app.use('/ideas', createService(options))
+
 
     const service = app.service('/ideas')
 

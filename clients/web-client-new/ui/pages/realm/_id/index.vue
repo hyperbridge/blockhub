@@ -120,7 +120,7 @@
                                 Price
                                 <i class="fas fa-dollar-sign" />
                             </div>
-                            <div class="arrow_container">
+                            <div class="arrow-container">
                                 <i class="fas fa-sort-up" />
                                 <i class="fas fa-sort-down" />
                             </div>
@@ -132,7 +132,7 @@
                                 Rating
                                 <i class="fas fa-star" />
                             </div>
-                            <div class="arrow_container">
+                            <div class="arrow-container">
                                 <i class="fas fa-sort-up" />
                                 <i class="fas fa-sort-down" />
                             </div>
@@ -383,7 +383,7 @@ export default {
                 margin-left: 5px;
             }
         }
-        .arrow_container{
+        .arrow-container{
             width: 20px;
             position: relative;
             display: inline-block;

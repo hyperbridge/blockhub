@@ -1,32 +1,82 @@
 <template>
-    <section class="hero is-fullheight">
-        <div class="hero-body">
-            <div class="container">
-                <h3>Whoops, not found!</h3>
+    <c-layout navigationKey="help">
+        <div class="row">
+            <div
+                class="col-12"
+                style="text-align: center">
+                <br><br><br><br><br><br><br><br><br>
+                <h1><strong>GG.</strong> You broke it.</h1>
+                <h3>That page wasn't found or there's an error in the spacetime continuum. <br>Either way, you better get home quick.</h3>
+                <br><br>
+                <c-button
+                    class="c-button--xl"
+                    status="gradient-info"
+                    @click="goHome">
+                    Go Home
+                </c-button>
             </div>
         </div>
-    </section>
+        <!-- <div class="not-found__404" /> -->
+    </c-layout>
 </template>
+
 
 <script>
 export default {
+    created() {
+        if (process.client) {
+            this.$('body').addClass('screen--not-found')
+        }
+    },
     mounted() {
         this.$ga.page({
             page: '/404',
             title: 'Not Found',
             location: window.location.href
         })
+    },
+    beforeDestroy() {
+        if (process.client) {
+            this.$('body').removeClass('screen--not-found')
+        }
+    },
+    methods: {
+        goHome() {
+            // Dont use route, reload because there might be an error
+            window.location.href = '/'
+        }
     }
 }
 </script>
 
-<style lang="scss" scoped>
-	div.container {
-		text-align: center;
-	}
-	h3 {
-		font-weight: 100;
-		color: #4a4a4a;
-		font-size: 2em;
-	}
+
+<style lang="scss">
+    body.screen--not-found {
+        .app-header {
+            transform: rotate(-20deg) translateX(-80px) translateY(-450px) !important;
+            overflow: hidden;
+
+            &:before {
+                position: absolute;
+                top: 0;
+                left: 0;
+                content: " ";
+                z-index: 120;
+                background: url("/img/cracked-glass.png") no-repeat 0% 30%;
+                width: 1000px;
+                height: 1000px;
+                background-size: contain;
+                /*filter: drop-shadow(0 0 0px #fff);*/
+                opacity: 0.5;
+            }
+        }
+        .app-header__top-bar {
+            height: 600px !important;
+            max-height: 600px !important;
+        }
+        .quick-launch {
+            display: none;
+        }
+    }
+
 </style>
