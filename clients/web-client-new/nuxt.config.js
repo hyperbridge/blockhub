@@ -20,13 +20,17 @@ export default {
         titleTemplate: '%s',
         meta: [
             { charset: 'utf-8' },
-            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            { hid: 'theme-color', name: 'theme-color', content: '#FF015B' },
-            { hid: 'description', name: 'description', content: 'BlockHub' },
-            { hid: 'keywords', name: 'keywords', content: 'Comma,separated,keywords' },
+            { name: 'viewport', content: 'width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui' },
+            { hid: 'theme-color', name: 'theme-color', content: '#4DBA87' },
+            { hid: 'description', name: 'description', content: 'BlockHub is a next-generation decentralized digital distribution platform' },
+            { hid: 'keywords', name: 'keywords', content: 'blockhub, hyperbridge, blockchain, cryptocurrency, game, indie, developer' },
 
-            { hid: 'apple-mobile-web-app-title', name: 'apple-mobile-web-app-title', content: 'Page title' },
-            { hid: 'application-name', name: 'application-name', content: 'Page title' },
+            { hid: 'mobile-web-app-capable', name: 'mobile-web-app-capable', content: 'yes' },
+            { hid: 'apple-mobile-web-app-capable', name: 'apple-mobile-web-app-capable', content: 'yes' },
+            { hid: 'apple-mobile-web-app-status-bar-style', name: 'apple-mobile-web-app-status-bar-style', content: 'black' },
+
+            { hid: 'apple-mobile-web-app-title', name: 'apple-mobile-web-app-title', content: 'BlockHub' },
+            { hid: 'application-name', name: 'application-name', content: 'BlockHub' },
             { hid: 'msapplication-config', name: 'msapplication-config', content: '/images/icons/browserconfig.xml' },
 
             { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
@@ -36,18 +40,20 @@ export default {
             { hid: 'twitter:description', name: 'twitter:description', content: 'Page description' },
             { hid: 'twitter:image', name: 'twitter:image', content: 'https://full-public-path-to-image.jpg' },
 
-            { hid: 'og:url', property: 'og:url', content: 'https://full-url' },
+            { hid: 'og:url', property: 'og:url', content: 'https://blockhub.gg' },
             { hid: 'og:type', property: 'og:type', content: 'website' },
-            { hid: 'og:title', property: 'og:title', content: `Page title` },
-            { hid: 'og:description', property: 'og:description', content: 'Page description' },
-            { hid: 'og:image', property: 'og:image', content: 'https://full-public-path-to-image.jpg' },
-            { hid: 'og:image:secure_url', property: 'og:image:secure_url', content: 'https://full-public-path-to-image.jpg' },
-            { hid: 'og:site_name', property: 'og:site_name', content: 'Page title' }
+            { hid: 'og:title', property: 'og:title', content: `BlockHub | Page title` },
+            { hid: 'og:description', property: 'og:description', content: 'BlockHub' },
+            { hid: 'og:image', property: 'og:image', content: 'https://blockhub.gg/static/img/logo.png' },
+            { hid: 'og:image:secure_url', property: 'og:image:secure_url', content: 'https://blockhub.gg/static/img/logo.png' },
+            { hid: 'og:image:width', property: 'og:image:width', content: '470' },
+            { hid: 'og:image:height', property: 'og:image:height', content: '246' },
+            { hid: 'og:site_name', property: 'og:site_name', content: 'BlockHub' }
         ],
         link: [
             // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Nunito:300,400,600,700' },
             { type: 'application/json+oembed', href: 'https://full-url/oembed.json' },
-            { rel: 'icon', type: 'image/jpeg', href: '/images/favicon/favicon_base.jpg' }
+            { rel: 'icon', type: 'image/png', href: '/static/img/icons/favicon-32x32.png' }
         ]
         /*
         script: [

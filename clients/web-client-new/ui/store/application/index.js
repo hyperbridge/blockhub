@@ -2,7 +2,6 @@ import Vue from 'vue'
 import axios from 'axios'
 import FormData from 'form-data'
 import * as DB from '../../db'
-// import { extract, getId } from '../../util/store'
 
 let localState = {}
 
@@ -44,13 +43,6 @@ const updateState = (savedData, updatedState = {}) => {
         },
         shortcuts: savedData.shortcuts != null ? savedData.shortcuts : [],
         operatingSystem: savedData.operatingSystem != null ? savedData.operatingSystem : getOS(),
-        // initialized: window.BlockHub.initialized,
-        account: DB.application.config.data[0].account || {},
-        activeProfile: DB.application.config.data[0].activeProfile || {},
-        darklaunchFlags: DB.application.config.data[0].darklaunchFlags || [],
-        developerMode: savedData.developerMode != null ? savedData.developerMode : DB.application.config.data[0].account && DB.application.config.data[0].activeProfile && DB.application.config.data[0].activeProfile.role === 'developer',
-        environmentMode: savedData.environmentMode != null ? savedData.environmentMode : process.client ? window.BlockHub.getMode() : 'local',
-        externalState: savedData.externalState != null ? savedData.externalState : {},
         ...updatedState
     }
 

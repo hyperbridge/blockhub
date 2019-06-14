@@ -161,20 +161,6 @@ if (decentralizedMode) {
             userService: 'accounts'
         })
     ]
-
-
-    // auth({
-    //     userService: 'accounts'
-    // })(store)
-
-    // const cookieToken = app.$cookies.get('feathers-jwt')
-
-    // if (cookieToken) {
-    //     store.dispatch('auth/authenticate', {
-    //         strategy: 'jwt',
-    //         accessToken: cookieToken
-    //     })
-    // }
 }
 
 export const actions = {

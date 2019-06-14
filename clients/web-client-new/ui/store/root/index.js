@@ -1,8 +1,4 @@
 import Vue from 'vue'
-// import { getId, mergeId, normalize } from '../../util/store'
-// import { findRelation, decompose, findRelationPaths } from '../../util/modules-relation'
-
-/* Create and populate action/mutation needed (asset/offers) */
 
 export const state = () => ({})
 
@@ -58,6 +54,7 @@ export const mutations = {
         }
     }
 }
+
 export const actions = {
     create({ commit }, [path, payload]) {
         const [module, target] = path.split('/')
@@ -95,97 +92,4 @@ export const actions = {
         // await axios.delete(`/${target}/${id}`)
         commit('delete', [path, id])
     }
-
-
-    // // Version that creates relation with existing element (doesn't require new data, only item id)
-    // createWeakRel(
-    //     { commit, dispatch, state },
-    //     [targets, targetId, itemId]
-    // ) {
-    //     const [module, target, prop] = targets.split('/')
-
-    //     const data = {
-    //         [prop]: [...state[module][target][targetId][prop], itemId]
-    //     }
-
-    //     commit('updateObject', [`${module}/${target}`, targetId, data])
-    // },
-    // deleteWeakRel(
-    //     { commit, dispatch, state },
-    //     [targets, targetId, itemId]
-    // ) {
-    //     const [module, target, prop] = targets.split('/')
-
-    //     const data = {
-    //         [prop]: state[module][target][targetId][prop].filter(id => id != itemId)
-    //     }
-    //     commit('updateObject', [`${module}/${target}`, targetId, data])
-    // },
-
-
-    // async createRelation(
-    //     { commit, dispatch, state },
-    //     [targets, targetId, data]
-    // ) {
-    //     const [module, target, prop] = targets.split('/')
-    //     /* "assets/transactions/messages" => path, dest, targets? */
-
-    //     // const propModule = findRelation(module, target, prop)
-    //     const [propModule, propTarget] = findRelation(module, target, prop)
-
-    //     const newId = await dispatch(
-    //         'create',
-    //         [`${propModule}/${propTarget}`, data]
-    //     )
-
-    //     const targetData = {
-    //         [prop]: [...state[module][target][targetId][prop], newId]
-    //     }
-    //     commit('updateObject', [`${module}/${target}`, targetId, targetData])
-    //     return newId
-    // },
-    // deleteRelation(
-    //     { commit, dispatch, state },
-    //     [targets, targetId, id]
-    // ) {
-    //     const [module, target, prop] = targets.split('/')
-    //     const propModule =  findRelation(module, target, prop)
-
-    //     const targetData = {
-    //         [prop]: state[module][target][targetId][prop].filter(propId => propId != id)
-    //     }
-    //     commit('updateObject', [`${module}/${target}`, targetId, targetData])
-    //     dispatch('delete', [`${propModule}/${prop}`, id])
-    // },
-
-
-    // loadData({ commit }, [destination, data]) {
-    //     const mutations = Object.entries(decompose(destination, data))
-
-    //     for (let [mutation, data] of mutations) {
-    //         commit('loadData', [mutation, data])
-    //     }
-    // },
-    // clearData({ commit }, target) {
-    //     commit('clearData', findRelationPaths(target))
-    // }
 }
-
-
-/*
-
-    **** Future: support for nested modules e.g. assets/transactions
-
-    Example payload data to create new asset in assets module
-
-    commit('create', {
-        id: 30,
-        module: 'assets',
-        target: 'assets',
-        data: {
-            id: 30,
-            name: 'New asset'
-        }
-    })
-
-*/
