@@ -848,7 +848,12 @@
                 ]
             }
         },
-        "projects": []
+        "projects": [],
+        "trendingProjects": [],
+        "topGameIdeas": [],
+        "topContentIdeas": [],
+        "topItemIdeas": [],
+        "mostPopularGames": []
     },
     "marketplace": {
         "currentEthereumNetwork": "local",
@@ -867,6 +872,10 @@
         "gameSeries": [],
         "collections": [],
         "curatorReviews": [],
+        "featuredProducts": [],
+        "trendingProducts": [],
+        "topFree": [],
+        "top5": [],
         "defaultRealm": {
             "name": "My Realm",
             "value": "<p>Realm about</p>",

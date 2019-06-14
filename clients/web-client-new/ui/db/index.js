@@ -8,21 +8,6 @@ let initialized = false
 
 export let store = {}
 
-export const application = {
-    config: null
-}
-
-export const marketplace = {
-    config: null,
-    products: null,
-    assets: null,
-    posts: null
-}
-
-export const funding = {
-    projects: null
-}
-
 export const setInitCallback = cb => {
     initCallback = cb
 }
@@ -42,27 +27,9 @@ export const updateCollection = (collection, data) => {
 
 export const loadDefault = () => {
     store = loki.addCollection('storeDefault')
-    application.config = loki.addCollection('applicationConfigDefault')
-    marketplace.config = loki.addCollection('marketplaceConfigDefault')
-    marketplace.products = loki.addCollection('marketplaceProductsDefault')
-    marketplace.assets = loki.addCollection('marketplaceAssetsDefault')
-    marketplace.posts = loki.addCollection('marketplacePostsDefault')
-    funding.config = loki.addCollection('fundingConfigDefault')
-    funding.projects = loki.addCollection('fundingProjectsDefault')
-
-    data.marketplace.id = '1'
-    data.funding.id = '1'
-    data.application.id = '1'
 
     try {
         updateCollection(store, data)
-        updateCollection(application.config, data.application)
-        updateCollection(marketplace.config, data.marketplace)
-        updateCollection(marketplace.products, data.marketplace.products)
-        updateCollection(marketplace.assets, data.marketplace.assets)
-        updateCollection(marketplace.posts, data.marketplace.posts)
-        updateCollection(funding.projects, data.funding.projects)
-        updateCollection(funding.config, data.funding)
     } catch (e) {
         console.warn(e)
     }
@@ -99,7 +66,7 @@ export const init = () => {
     const loadDatabase = () => {
         console.log('[BlockHub] Database loaded')
 
-        let configFound = loki.getCollection('applicationConfig')
+        let configFound = loki.getCollection('store')
 
         // If not desktop mode, then wipe and reload (fresh data)
         if (process.client && !window.isElectron && window.BlockHub.getMode() !== 'local' && configFound) {
@@ -127,58 +94,17 @@ export const init = () => {
 
         if (configFound) {
             store = loki.getCollection('store')
-            application.config = loki.getCollection('applicationConfig')
-            marketplace.config = loki.getCollection('marketplaceConfig')
-            marketplace.products = loki.getCollection('marketplaceProducts')
-            marketplace.assets = loki.getCollection('marketplaceAssets')
-            marketplace.posts = loki.getCollection('marketplacePosts')
-            funding.projects = loki.getCollection('fundingProjects')
-            funding.config = loki.getCollection('fundingConfig')
         } else {
             const storeData = store.data
-            const applicationConfigData = application.config.data
-            const marketplaceConfigData = marketplace.config.data
-            const marketplaceProductsData = marketplace.products.data
-            const marketplaceAssetsData = marketplace.assets.data
-            const marketplacePostsData = marketplace.posts.data
-            const fundingProjectsData = funding.projects.data
-            const fundingConfigData = funding.config.data
 
             store.chain().remove()
-            application.config.chain().remove()
-            marketplace.config.chain().remove()
-            marketplace.products.chain().remove()
-            marketplace.assets.chain().remove()
-            marketplace.posts.chain().remove()
-            funding.projects.chain().remove()
-            funding.config.chain().remove()
 
             store = loki.addCollection('store')
-            application.config = loki.addCollection('applicationConfig')
-            marketplace.config = loki.addCollection('marketplaceConfig')
-            marketplace.products = loki.addCollection('marketplaceProducts')
-            marketplace.assets = loki.addCollection('marketplaceAssets')
-            marketplace.posts = loki.addCollection('marketplacePosts')
-            funding.config = loki.addCollection('fundingConfig')
-            funding.projects = loki.addCollection('fundingProjects')
 
             store.data = storeData
-            application.config.data = applicationConfigData
-            marketplace.config.data = marketplaceConfigData
-            marketplace.products.data = marketplaceProductsData
-            marketplace.assets.data = marketplaceAssetsData
-            marketplace.posts.data = marketplacePostsData
-            funding.projects.data = fundingProjectsData
-            funding.config.data = fundingConfigData
 
             store.ensureId()
             store.ensureAllIndexes(true)
-            application.config.ensureId()
-            application.config.ensureAllIndexes(true)
-            marketplace.config.ensureId()
-            marketplace.config.ensureAllIndexes(true)
-            funding.config.ensureId()
-            funding.config.ensureAllIndexes(true)
         }
 
         initialized = true
@@ -215,13 +141,6 @@ export const save = () => {
 
 export const clean = () => {
     store.chain().remove()
-    application.config.chain().remove()
-    marketplace.config.chain().remove()
-    marketplace.products.chain().remove()
-    marketplace.assets.chain().remove()
-    marketplace.posts.chain().remove()
-    funding.projects.chain().remove()
-    funding.config.chain().remove()
 }
 
 export const reload = () => {

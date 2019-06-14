@@ -22,7 +22,7 @@ export const actions = {
     init(store, payload) {
         console.log('[BlockHub][Funding] Initializing...')
 
-        updateState(DB.funding.config.data[0], store.state)
+        updateState(DB.store.data[0].funding, store.state)
 
         store.commit('updateState', localState)
     },
@@ -48,9 +48,6 @@ export const mutations = {
         for (const x in payload) {
             Vue.set(s, x, payload[x])
         }
-
-        DB.funding.config.update(s)
-        DB.save()
     }
 }
 

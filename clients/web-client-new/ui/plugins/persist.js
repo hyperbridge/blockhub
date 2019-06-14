@@ -13,11 +13,9 @@ export default ({ store }) => {
     const saveState = () => {
         if (!isChanged) return
 
-        DB.store.data = currentState
+        DB.store.data[0] = currentState
         DB.save()
     }
 
     setInterval(saveState, 1 * 60 * 1000)
-
-    store.commit('initialize', DB.store.data)
 }

@@ -85,10 +85,8 @@
 
 
 <script>
-import { mapGetters } from 'vuex'
-
 const updateLandingImage = function() {
-    if (!process.client) { return }
+    if (!process.client) return
     const { frontpageProduct } = this.$store.state.marketplace
 
     if (frontpageProduct && frontpageProduct.images) {
@@ -115,41 +113,7 @@ export default {
             showWelcomeModal: false // ['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode) && !this.$store.state.application.settings.client.hideWelcomeModal,
         }
     },
-    async asyncData(context) {
-        context.store.state.application.navigationComponent = 'store'
-
-        // return new Promise((resolve, reject) => {
-        // feathersClient.authenticate({
-
-        // }).then((response) => {
-        // feathersClient.service('collections').find({
-        //     query: {
-        //         $sort: {
-        //             createdAt: -1
-        //         },
-        //         $limit: 25
-        //     }
-        // }).then(() => {console.log(arguments)
-        //     resolve()
-        // })
-        // }, (error) => {
-        //     return reject(error) //Promise.reject(error)
-        // })
-
-        return await context.store.dispatch('collections/find', {
-            query: {
-                $sort: {
-                    createdAt: -1
-                },
-                $limit: 25
-            }
-        })
-        // })
-    },
     computed: {
-        ...mapGetters({
-            assets: 'marketplace/assetsArray'
-        }),
         list() {
             const result = []
 
@@ -276,7 +240,7 @@ export default {
             result.push({
                 type: 'assetGrid',
                 data: {
-                    assets: this.assets
+                    assets: this.$store.getters['marketplace/assetsArray']
                 }
             })
 
@@ -366,6 +330,37 @@ export default {
         //     return this.$store.state.marketplace.products
         // },
     },
+    async asyncData(context) {
+        context.store.state.application.navigationComponent = 'store'
+
+        // return new Promise((resolve, reject) => {
+        // feathersClient.authenticate({
+
+        // }).then((response) => {
+        // feathersClient.service('collections').find({
+        //     query: {
+        //         $sort: {
+        //             createdAt: -1
+        //         },
+        //         $limit: 25
+        //     }
+        // }).then(() => {console.log(arguments)
+        //     resolve()
+        // })
+        // }, (error) => {
+        //     return reject(error) //Promise.reject(error)
+        // })
+
+        return await context.store.dispatch('collections/find', {
+            query: {
+                $sort: {
+                    createdAt: -1
+                },
+                $limit: 25
+            }
+        })
+        // })
+    },
     mounted() {
         updateLandingImage.call(this)
     },
@@ -373,7 +368,7 @@ export default {
         updateLandingImage.call(this)
     },
     beforeDestroy() {
-        if (!process.client) { return }
+        if (!process.client) return
         window.document.getElementById('header-bg').style['background-image'] = 'url(/img/backgrounds/1.jpg)'
     },
     methods: {

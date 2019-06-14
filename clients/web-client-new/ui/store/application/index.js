@@ -41,6 +41,7 @@ const updateState = (savedData, updatedState = {}) => {
             code: null,
             message: null
         },
+        settings: {},
         shortcuts: savedData.shortcuts != null ? savedData.shortcuts : [],
         operatingSystem: savedData.operatingSystem != null ? savedData.operatingSystem : getOS(),
         ...updatedState
@@ -52,7 +53,9 @@ const updateState = (savedData, updatedState = {}) => {
         localState.locked = updatedState.locked
     }
 
-    if (localState.desktopMode === null) { localState.desktopMode = process.client && window.isElectron }
+    if (localState.desktopMode === null) {
+        localState.desktopMode = process.client && window.isElectron
+    }
 }
 
 export const getters = {
@@ -87,7 +90,7 @@ export const actions = {
     init(store, payload) {
         console.log('[BlockHub][Application] Initializing...')
 
-        updateState(DB.application.config.data[0], store.state)
+        updateState(DB.store.data[0].application, store.state)
 
         localState.connection.status.code = null
         localState.connection.status.message = 'Establishing connection...'
@@ -209,7 +212,7 @@ export const actions = {
         xhr.send()
 
         function processRequest(e) {
-            if (xhr.readyState == 4) {
+            if (xhr.readyState === 4) {
                 try {
                     if (xhr.status >= 200 && xhr.status < 304) {
                         store.commit('setInternetConnection', { connected: true, message: 'Connected.' })
@@ -217,8 +220,8 @@ export const actions = {
                     } else {
                         store.commit('setInternetConnection', { connected: false, message: 'Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection.' })
                     }
-                } catch (e) {
-                    console.log(e)
+                } catch (err) {
+                    console.log(err)
                 }
             }
         }
@@ -266,40 +269,19 @@ export const mutations = {
         for (const x in payload) {
             Vue.set(state, x, payload[x])
         }
-
-        DB.application.config.update(state)
-        DB.save()
-    },
-    updateAccount({ account }, { prop, data, key }) {
-        if (Array.isArray(account[prop])) {
-            account[prop][key] = data
-        } else if (typeof account[prop] === 'object') {
-            account[prop] = { ...account[prop], [id]: data }
-        } else {
-            account[prop] = data
-        }
     },
     addShortcut(state, shortcut) {
         state.shortcuts.push(shortcut)
-
-        DB.application.config.update(state)
-        DB.save()
     },
     removeShortcut(state, index) {
         state.shortcuts.splice(index, 1)
-
-        DB.application.config.update(state)
-        DB.save()
     },
     updateShortcut(state, shortcut) {
-        if (state.shortcuts.find(s => s.id == shortcut.id)) {
-            state.shortcuts.splice(state.shortcuts.findIndex(s => s.id == shortcut.id), 1)
+        if (state.shortcuts.find(s => s.id === shortcut.id)) {
+            state.shortcuts.splice(state.shortcuts.findIndex(s => s.id === shortcut.id), 1)
         } else {
             state.shortcuts.push(shortcut)
         }
-
-        DB.application.config.update(state)
-        DB.save()
     },
     showNotification(state, notification) {
         state.activeNotification = notification
@@ -334,15 +316,9 @@ export const mutations = {
     },
     signIn(state, payload) {
         state.signedIn = true
-
-        DB.application.config.update(state)
-        DB.save()
     },
     signOut(state, payload) {
         state.signedIn = false
-
-        DB.application.config.update(state)
-        DB.save()
     },
     setEditorMode(state, payload) {
         state.editorMode = payload
@@ -429,9 +405,6 @@ export const mutations = {
         Vue.set(state.settings.client, key, value)
 
         state.settings.client[key] = value
-
-        DB.application.config.update(state)
-        DB.save()
     },
     activeModalData(state, payload) {
         state.activeModalData = payload
