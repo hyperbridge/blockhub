@@ -156,11 +156,6 @@ export default async () => {
             return [
                 '0.8.1'
             ]
-        },
-        async topGameIdeas() {
-            return [
-                { something: 1 }
-            ]
         }
     })
 

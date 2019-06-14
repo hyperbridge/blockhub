@@ -54,3 +54,4 @@ export default [
             window.location = `https://github.com/hyperbridge/blockhub/releases/download/v0.8.0/blockhub-desktop-client_0.8.0_i386.deb`
         }
     }
+]
