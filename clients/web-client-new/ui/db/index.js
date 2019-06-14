@@ -6,6 +6,8 @@ let loki = null
 let initCallback = null
 let initialized = false
 
+export let store = {}
+
 export const application = {
     config: null
 }
@@ -39,6 +41,7 @@ export const updateCollection = (collection, data) => {
 }
 
 export const loadDefault = () => {
+    store = loki.addCollection('storeDefault')
     application.config = loki.addCollection('applicationConfigDefault')
     marketplace.config = loki.addCollection('marketplaceConfigDefault')
     marketplace.products = loki.addCollection('marketplaceProductsDefault')
@@ -52,6 +55,7 @@ export const loadDefault = () => {
     data.application.id = '1'
 
     try {
+        updateCollection(store, data)
         updateCollection(application.config, data.application)
         updateCollection(marketplace.config, data.marketplace)
         updateCollection(marketplace.products, data.marketplace.products)
@@ -122,6 +126,7 @@ export const init = () => {
         }
 
         if (configFound) {
+            store = loki.getCollection('store')
             application.config = loki.getCollection('applicationConfig')
             marketplace.config = loki.getCollection('marketplaceConfig')
             marketplace.products = loki.getCollection('marketplaceProducts')
@@ -130,6 +135,7 @@ export const init = () => {
             funding.projects = loki.getCollection('fundingProjects')
             funding.config = loki.getCollection('fundingConfig')
         } else {
+            const storeData = store.data
             const applicationConfigData = application.config.data
             const marketplaceConfigData = marketplace.config.data
             const marketplaceProductsData = marketplace.products.data
@@ -138,6 +144,7 @@ export const init = () => {
             const fundingProjectsData = funding.projects.data
             const fundingConfigData = funding.config.data
 
+            store.chain().remove()
             application.config.chain().remove()
             marketplace.config.chain().remove()
             marketplace.products.chain().remove()
@@ -146,6 +153,7 @@ export const init = () => {
             funding.projects.chain().remove()
             funding.config.chain().remove()
 
+            store = loki.addCollection('store')
             application.config = loki.addCollection('applicationConfig')
             marketplace.config = loki.addCollection('marketplaceConfig')
             marketplace.products = loki.addCollection('marketplaceProducts')
@@ -154,6 +162,7 @@ export const init = () => {
             funding.config = loki.addCollection('fundingConfig')
             funding.projects = loki.addCollection('fundingProjects')
 
+            store.data = storeData
             application.config.data = applicationConfigData
             marketplace.config.data = marketplaceConfigData
             marketplace.products.data = marketplaceProductsData
@@ -162,6 +171,8 @@ export const init = () => {
             funding.projects.data = fundingProjectsData
             funding.config.data = fundingConfigData
 
+            store.ensureId()
+            store.ensureAllIndexes(true)
             application.config.ensureId()
             application.config.ensureAllIndexes(true)
             marketplace.config.ensureId()
@@ -173,6 +184,8 @@ export const init = () => {
         initialized = true
 
         initCallback && initCallback()
+
+        loki.close()
     }
 
     if (process.client) {
@@ -186,17 +199,22 @@ export const save = () => {
     if (!process.client) return
     if (!initialized) return
 
-    loki.saveDatabase(err => {
-        if (err) {
-            console.log(err)
-            return
-        }
+    loki.loadDatabase({}, () => {
+        loki.saveDatabase(err => {
+            if (err) {
+                console.log(err)
+                return
+            }
 
-        console.log('[BlockHub] Database saved.')
+            console.log('[BlockHub] Database saved.')
+        })
+
+        loki.close()
     })
 }
 
 export const clean = () => {
+    store.chain().remove()
     application.config.chain().remove()
     marketplace.config.chain().remove()
     marketplace.products.chain().remove()

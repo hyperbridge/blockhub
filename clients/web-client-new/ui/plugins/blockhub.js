@@ -187,6 +187,7 @@ export default ({ app, store }) => {
         ReputationEngine.init(store) // , router)
         Bridge.init(store) // , router)
 
+        store.dispatch('init', DB.store.data)
         store.dispatch('database/init')
         store.dispatch('application/init')
         store.dispatch('marketplace/init')

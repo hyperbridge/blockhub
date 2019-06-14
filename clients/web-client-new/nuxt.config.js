@@ -4,6 +4,10 @@ import path from 'path'
 import sites from './ui/sites'
 
 export default {
+    server: {
+        port: process.env.PORT,
+        host: '0.0.0.0'
+    },
     srcDir: 'ui/',
     dev: process.env.NODE_ENV !== 'production',
     head: {
@@ -53,6 +57,7 @@ export default {
     },
     css: [],
     plugins: [
+        { src: '~/plugins/persist' },
         { src: '~/plugins/auth', ssr: false },
         { src: '~/plugins/components' },
         { src: '~/plugins/filters' },
