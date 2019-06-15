@@ -1,7 +1,5 @@
 <template>
-    <c-layout
-        navigationKey="collection"
-        :breadcrumbLinks="breadcrumbLinks">
+    <c-layout navigationKey="collection" :breadcrumbLinks="breadcrumbLinks">
         <div class="row">
             <template v-if="!collection">
                 <p>Not found.</p>
@@ -120,7 +118,6 @@ import moment from 'moment'
 
 export default {
     components: {
-        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
         'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
         'c-pagination': () => import('~/components/pagination').then(m => m.default || m),
@@ -131,7 +128,7 @@ export default {
         assets() {
             if (!this.collection.meta.assets) return []
 
-            return Promise.all(this.collection.meta.assets.map(id => this.$store.getters['assets/get'](id)))
+            return this.collection.meta.assets.map(id => this.$store.getters['assets/get'](id))
         },
         timeAgo() {
             return moment(this.collection.updates).fromNow()
@@ -145,6 +142,14 @@ export default {
         })
 
         const collection = store.getters['collections/get'](params.id)
+
+        if (collection.meta.assets) {
+            await Promise.all(collection.meta.assets.map(id => store.dispatch('assets/find', {
+                query: {
+                    id
+                }
+            })))
+        }
 
         return {
             collection,

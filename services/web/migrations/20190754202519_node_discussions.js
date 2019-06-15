@@ -33,6 +33,7 @@ exports.up = knex => {
                 add constraint "from_is_set" check(count_not_nulls(
                     "fromAccountId",
                     "fromProfileId",
+                    "fromMessageId",
                     "fromIdeaId",
                     "fromProjectId",
                     "fromProductId",
@@ -47,6 +48,7 @@ exports.up = knex => {
                 add constraint "to_is_set" check(count_not_nulls(
                     "toAccountId",
                     "toProfileId",
+                    "toMessageId",
                     "toIdeaId",
                     "toProjectId",
                     "toProductId",
