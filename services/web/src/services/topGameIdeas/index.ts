@@ -2,7 +2,9 @@ export default function(app) {
     const paginate = app.get('paginate')
 
     class Service {
-        constructor () {
+        options: Object
+
+        constructor() {
             this.options = {
                 paginate: {
                     default: 10,
@@ -11,8 +13,8 @@ export default function(app) {
                 }
             }
         }
-        
-        async get (id, params) {
+
+        async get(id, params) {
             return {
                 id
             }

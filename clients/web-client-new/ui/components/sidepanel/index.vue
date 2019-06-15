@@ -325,7 +325,7 @@ import DottedList from '@/components/list/dots'
 
 export default {
     components: {
-        'c-notification': () => import('~/components/notification/index.vue').then(m => m.default || m),
+        'c-notification': () => import('~/components/notification/index').then(m => m.default || m),
         'c-message': () => import('~/components/message').then(m => m.default || m),
         'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
         'c-dotted-list': () => import('~/components/list/dots').then(m => m.default || m),

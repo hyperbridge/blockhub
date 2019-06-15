@@ -35,7 +35,7 @@ import moment from 'moment'
 export default {
     name: 'TimelineList',
     components: {
-        'c-timeline-item': () => import('~/components/timeline/item.vue').then(m => m.default || m)
+        'c-timeline-item': () => import('~/components/timeline/item').then(m => m.default || m)
     },
     props: ['items', 'projectId'],
     data() {

@@ -65,7 +65,7 @@
 <script>
 export default {
     components: {
-        'c-basic-popup': () => import('~/components/popups/basic.vue').then(m => m.default || m)
+        'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m)
     },
     props: {
         activated: {

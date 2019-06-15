@@ -127,7 +127,7 @@ export default {
         'c-article-item': () => import('~/components/help/article-item').then(m => m.default || m),
         'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m),
         'c-list-item': () => import('~/components/help/simple-item').then(m => m.default || m),
-        'c-card': () => import('~/components/help/help-card.vue').then(m => m.default || m)
+        'c-card': () => import('~/components/help/help-card').then(m => m.default || m)
     },
     computed: {
         topics() {

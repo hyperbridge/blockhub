@@ -477,7 +477,7 @@ import { mapGetters } from 'vuex'
 
 export default {
     components: {
-        'c-button': () => import('~/components/buttons/index.vue').then(m => m.default || m),
+        'c-button': () => import('~/components/buttons/index').then(m => m.default || m),
         'c-tags': () => import('~/components/tags').then(m => m.default || m),
         'c-tab': () => import('~/components/tab/tab').then(m => m.default || m),
         'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m),

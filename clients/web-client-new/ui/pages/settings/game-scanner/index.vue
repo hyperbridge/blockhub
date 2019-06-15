@@ -94,7 +94,7 @@
 <script>
 export default {
     components: {
-        'c-inline-ntf': () => import('~/components/notification/inline.vue').then(m => m.default || m),
+        'c-inline-ntf': () => import('~/components/notification/inline').then(m => m.default || m),
         'c-switch': () => import('~/components/switch').then(m => m.default || m)
     },
     data() {

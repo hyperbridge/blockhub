@@ -398,7 +398,8 @@ export default {
         }
     },
     updated() {
-        $('#summernote').summernote({
+        if (!process.client) return
+        this.$('#summernote').summernote({
             placeholder: 'Type in your text',
             tabsize: 2,
             height: 300,
