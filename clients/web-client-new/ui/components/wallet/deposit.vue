@@ -67,8 +67,6 @@
 </template>
 
 <script>
-import 'vue-multiselect/dist/vue-multiselect.min.css'
-
 export default {
     components: {
         'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m),

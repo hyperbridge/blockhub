@@ -485,8 +485,6 @@ import Vue from 'vue'
 import * as Bridge from '@/framework/desktop-bridge'
 import * as DB from '@/db'
 
-import 'vue-multiselect/dist/vue-multiselect.min.css'
-
 const groupBy = function(xs, key) {
     return xs.reduce((rv, x) => {
         if (!x[key]) return rv;

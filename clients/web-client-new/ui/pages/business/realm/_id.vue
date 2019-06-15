@@ -167,7 +167,6 @@ export default {
         'c-multiselect': resolve => require(['vue-multiselect'], resolve)
     },
     props: {
-        id: [String, Number]
     },
     data() {
         let realm = this.id === 'new' ? this.$store.state.marketplace.defaultRealm : this.$store.getters['realms/get'](this.id)

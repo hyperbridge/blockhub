@@ -578,14 +578,14 @@
                         <li>
                             <c-button
                                 status="none"
-                                to="/community/new">
+                                to="/communities/new">
                                 New Community
                             </c-button>
                         </li>
                         <li>
                             <c-button
                                 status="none"
-                                to="/community/1">
+                                to="/communities/1">
                                 Community #1
                             </c-button>
                         </li>

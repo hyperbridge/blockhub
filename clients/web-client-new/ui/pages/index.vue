@@ -85,18 +85,6 @@
 
 
 <script>
-const updateLandingImage = function() {
-    if (!process.client) return
-    const { frontpageProduct } = this.$store.state.marketplace
-
-    if (frontpageProduct && frontpageProduct.images) {
-        const header = window.document.getElementById('header-bg')
-        const randomImage = Math.floor(Math.random() * frontpageProduct.images.preview.length)
-        header.style['background-image'] = `url(${frontpageProduct.images.preview[randomImage]})`
-        header.style['background-size'] = 'cover'
-    }
-}
-
 function isVisible(availableFlags, userFlags, code, variant, data) {
     return availableFlags.map(flag => flag.code).includes(code) && userFlags.map(flag => flag.enabled ? flag.code : null).includes(code)
 }
@@ -333,25 +321,7 @@ export default {
     async asyncData(context) {
         context.store.state.application.navigationComponent = 'store'
 
-        // return new Promise((resolve, reject) => {
-        // feathersClient.authenticate({
-
-        // }).then((response) => {
-        // feathersClient.service('collections').find({
-        //     query: {
-        //         $sort: {
-        //             createdAt: -1
-        //         },
-        //         $limit: 25
-        //     }
-        // }).then(() => {console.log(arguments)
-        //     resolve()
-        // })
-        // }, (error) => {
-        //     return reject(error) //Promise.reject(error)
-        // })
-
-        return await context.store.dispatch('collections/find', {
+        return context.store.dispatch('collections/find', {
             query: {
                 $sort: {
                     createdAt: -1
@@ -359,19 +329,30 @@ export default {
                 $limit: 25
             }
         })
-        // })
     },
     mounted() {
-        updateLandingImage.call(this)
+        this.updateLandingImage()
     },
     created() {
-        updateLandingImage.call(this)
+        this.updateLandingImage()
     },
     beforeDestroy() {
         if (!process.client) return
         window.document.getElementById('header-bg').style['background-image'] = 'url(/img/backgrounds/1.jpg)'
     },
     methods: {
+        updateLandingImage() {
+            if (!process.client) return
+
+            const { frontpageProduct } = this.$store.state.marketplace
+
+            if (frontpageProduct && frontpageProduct.images) {
+                const header = window.document.getElementById('header-bg')
+                const randomImage = Math.floor(Math.random() * frontpageProduct.images.preview.length)
+                header.style['background-image'] = `url(${frontpageProduct.images.preview[randomImage]})`
+                header.style['background-size'] = 'cover'
+            }
+        },
         closeModal() {
             this.showWelcomeModal = false
             this.$store.commit('application/updateClientSettings', { key: 'hideWelcomeModal', value: true })

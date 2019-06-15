@@ -269,7 +269,6 @@
 
 <script>
 import Vue from 'vue'
-import 'vue-multiselect/dist/vue-multiselect.min.css'
 
 export default {
     components: {

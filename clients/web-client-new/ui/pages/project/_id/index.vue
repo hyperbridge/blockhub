@@ -478,7 +478,6 @@
 
 <script>
 import * as DB from '@/db'
-import 'vue-multiselect/dist/vue-multiselect.min.css'
 
 export default {
     components: {

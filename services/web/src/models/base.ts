@@ -7,6 +7,11 @@ export default class BaseModel extends Model {
     status!: String
     meta!: Object
 
+    currentScore!: Number
+    dailyScore!: Number
+    monthlyScore!: Number
+    yearlyScore!: Number
+
     createdAt!: String
     updatedAt!: String
 

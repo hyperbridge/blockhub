@@ -1087,6 +1087,7 @@
     import { debounce } from '@/mixins'
 
     import 'swiper/dist/css/swiper.css'
+    import 'vue-multiselect/dist/vue-multiselect.min.css'
 
     export default {
         props: {
@@ -1151,6 +1152,7 @@
             'c-project-navigation': () => import('~/components/navigation/project').then(m => m.default || m),
             'c-chat-navigation': () => import('~/components/navigation/chat').then(m => m.default || m),
             'c-idea-navigation': () => import('~/components/navigation/idea').then(m => m.default || m),
+            'c-community-navigation': () => import('~/components/navigation/community').then(m => m.default || m),
             'c-welcome-popup': () => import('~/components/welcome-popup').then(m => m.default || m),
             'c-download-popup': () => import('~/components/download-popup').then(m => m.default || m),
             'c-unlock-popup': () => import('~/components/unlock-popup').then(m => m.default || m),
