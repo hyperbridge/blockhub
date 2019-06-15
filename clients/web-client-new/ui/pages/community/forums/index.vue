@@ -60,9 +60,9 @@
                     slot="title"
                     class="mb-0"
                     :headingTabs="[
-                        { title: 'General', category: 'general_forum' },
-                        { title: 'Game Forums', category: 'game_forums_forum' },
-                        { title: 'Support', category: 'support_forum' }
+                        { title: 'General', category: 'general' },
+                        { title: 'Game Forums', category: 'gameForums' },
+                        { title: 'Support', category: 'support' }
                     ]"
                     @changeTab="category = $event" />
 
@@ -80,8 +80,12 @@
                     </div>
                     <c-community-forum
                         v-for="(forum, index) in forums"
+                        :id="forum.id"
                         :key="index"
-                        :forum="forum" />
+                        :title="forum.name"
+                        :icon="forum.meta.icon"
+                        :lastPostTime="forum.meta.lastPostTime"
+                        :discussionsCount="forum.meta.discussionsCount" />
                 </div>
             </c-block>
         </div>
@@ -89,57 +93,37 @@
 </template>
 
 <script>
-import moment from 'moment'
-
 export default {
     components: {
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-        'c-community-forum': () => import('~/components/community/forum-item.vue').then(m => m.default || m),
+        'c-community-forum': () => import('~/components/community/forum-item').then(m => m.default || m),
         'c-search': () => import('~/components/searcher').then(m => m.default || m)
     },
     data() {
         return {
-            forums: [
-                {
-                    id: 1,
-                    title: 'New to BlockHub',
-                    lastPostTime: '2018-08-01T04:09:00.000Z',
-                    discussionsCount: '8234'
+            category: 'general'
+        }
+    },
+    async asyncData({ params, store }) {
+        await store.dispatch('communities/find', {
+            query: {
+                // type: 'forum',
+                // category: 'general',
+                $sort: {
+                    createdAt: -1
                 },
-                {
-                    id: 2,
-                    title: 'Help and Tips',
-                    lastPostTime: '2018-02-13T04:09:00.000Z',
-                    discussionsCount: '34'
-                },
-                {
-                    id: 3,
-                    title: 'Proposals and Ideas',
-                    lastPostTime: '2017-11-04T04:09:00.000Z',
-                    discussionsCount: '127',
-                    icon: 'fas fa-life-ring'
-                },
-                {
-                    id: 4,
-                    title: 'BlockHub for Mac',
-                    lastPostTime: '2018-07-24T04:09:00.000Z',
-                    discussionsCount: '37',
-                    icon: 'fab fa-apple'
-                },
-                {
-                    id: 5,
-                    title: 'BlockHub for Windows',
-                    lastPostTime: '2018-03-21T04:09:00.000Z',
-                    discussionsCount: '328',
-                    icon: 'fab fa-windows'
-                },
-                {
-                    id: 4,
-                    title: 'BlockHub for Linux',
-                    lastPostTime: '2016-07-24T04:09:00.000Z',
-                    discussionsCount: '41',
-                    icon: 'fab fa-linux'
-                }
+                $limit: 25
+            }
+        })
+
+        const forums = store.getters['communities/list']
+
+        return {
+            forums,
+            breadcrumbLinks: [
+                { to: { path: '/' }, title: 'Home' },
+                { to: { path: '/community' }, title: 'Community' },
+                { to: { path: '/community/forums' }, title: 'Forums' }
             ]
         }
     }

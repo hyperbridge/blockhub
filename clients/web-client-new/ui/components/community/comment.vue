@@ -4,31 +4,31 @@
             class="community-item__comment"
             :class="{ 'is-reply': reply }">
             <c-button-arrows
-                v-if="comment.rate"
+                v-if="rate"
                 size="xl"
                 colored>
                 <span
                     :class="{
-                        'up': comment.rate > 400,
-                        'down': comment.rate < 0
-                    }">{{ comment.rate }}</span>
+                        'up': rate > 400,
+                        'down': rate < 0
+                    }">{{ rate }}</span>
             </c-button-arrows>
             <div
                 class="comment-container"
-                :class="{ 'w-100' : !comment.rate }">
+                :class="{ 'w-100' : !rate }">
                 <c-dropdown-menu
                     dropPosition="right"
                     style="right: 5px; top: 10px;" />
                 <div class="comment-content">
-                    <div class="user-info">
-                        <c-img :src="comment.author.img" />
+                    <div v-if="author" class="user-info">
+                        <c-img :src="author.img" />
                         <div>
-                            <h6>{{ comment.author.name }}</h6>
-                            <span class="time">{{ comment.date | timeAgoShort }}</span>
+                            <h6>{{ author.name }}</h6>
+                            <span class="time">{{ date | timeAgoShort }}</span>
                         </div>
                     </div>
                     <div class="text">
-                        {{ comment.text }}
+                        {{ text }}
                     </div>
                 </div>
                 <div class="sub-comments-list">
@@ -55,10 +55,10 @@ export default {
         'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m)
     },
     props: {
-        comment: {
-            type: Object,
-            required: true
-        },
+        rate: Number,
+        author: Object,
+        date: String,
+        text: String,
         canReply: {
             type: Boolean,
             default: true

@@ -18,7 +18,7 @@ export default function(app) {
         },
         createUseUpsertGraph: true,
         allowedInsert: '[owner]',
-        allowedEager: '[owner, discussions]',
+        allowedEager: '[owner.^, discussions.^]',
         allowedUpsert: '[owner]'
     }
 

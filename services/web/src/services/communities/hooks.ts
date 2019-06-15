@@ -1,21 +1,21 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 
-const fillCommunity = function(community) {
+const fillCommunity = async function(community, context) {
     return community
 }
 
 const fillOne = function(options = {}) {
     return async context => {
-        context.data = fillCommunity(context.data)
+        context.data = fillCommunity(context.data, context)
         return context
     }
 }
 
 const fillAll = function(options = {}) {
     return async context => {
-        context.result.data = context.result.data.map((community) => {
-            return fillCommunity(community)
-        })
+        context.result.data = await Promise.all(context.result.data.map((community) => {
+            return fillCommunity(community, context)
+        }))
 
         return context
     }

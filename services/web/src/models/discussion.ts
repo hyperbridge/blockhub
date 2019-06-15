@@ -23,7 +23,7 @@ export default class Discussion extends BaseModel {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: [],
+            required: ['name', 'value', 'meta'],
             properties: {
             }
         }
@@ -103,11 +103,11 @@ export default class Discussion extends BaseModel {
                     (model as Node).relationKey = 'messages'
                 },
                 join: {
-                    from: 'messages.id',
-                    to: 'discussions.id',
+                    from: 'discussions.id',
+                    to: 'messages.id',
                     through: {
-                        from: 'nodes.fromMessageId',
-                        to: 'nodes.toDiscussionId',
+                        from: 'nodes.fromDiscussionId',
+                        to: 'nodes.toMessageId',
                         extra: ['relationKey']
                     }
                 }

@@ -43,6 +43,14 @@ export default class Message extends BaseModel {
                     to: 'profiles.id'
                 }
             },
+            replies: {
+                relation: Model.HasManyRelation,
+                modelClass: Message,
+                join: {
+                    from: 'messages.id',
+                    to: 'messages.replyToId'
+                }
+            },
             replyTo: {
                 relation: Model.HasOneRelation,
                 modelClass: Message,

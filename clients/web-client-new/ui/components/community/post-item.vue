@@ -9,29 +9,27 @@
                     :class="postIcon" />
             </div>
             <div class="text">
-                <router-link :to="`/community/discussion/${post.id}`">
-                    {{ post.title }}
+                <router-link :to="`/community/discussion/${id}`">
+                    {{ title }}
                 </router-link>
-
-                {{ post.title.status }}
             </div>
             <div class="statistic">
                 <div
                     class="rating"
-                    :class="[ post.rate < 0 ? 'down' : 'up' ]">
+                    :class="[ rate < 0 ? 'down' : 'up' ]">
                     <i
                         class="fas"
-                        :class="[ post.rate < 0 ? 'fa-chevron-down' : 'fa-chevron-up' ]" />
-                    {{ post.rate < 0 ? post.rate * -1 : post.rate }}
+                        :class="[ rate < 0 ? 'fa-chevron-down' : 'fa-chevron-up' ]" />
+                    {{ rate < 0 ? rate * -1 : rate }}
                 </div>
                 <div class="commentsCount">
                     <i class="fas fa-comment" />
-                    {{ post.commentsCount }}
+                    {{ commentsCount }}
                 </div>
-                <div class="user">
+                <div v-if="author" class="user">
                     <div>
-                        <c-img :src="post.author.img" />
-                        <span class="name">{{ post.author.name }}</span>
+                        <c-img :src="author.img" />
+                        <span class="name">{{ author.name }}</span>
                     </div>
                     <div class="time">
                         25 min
@@ -39,35 +37,33 @@
                 </div>
             </div>
         </div>
-        <template v-if="post.content">
-            <div class="community-item__post">
-                <p>{{ post.content.text }}</p>
-                <c-img :src="post.content.img" />
-            </div>
-            <div class="community-item__action text-right">
-                <a
-                    v-if="!reply"
-                    href="#"
-                    class="btn btn-sm btn-icon">
-                    <i class="fas fa-thumbs-down" />
-                </a>
-                <c-reply
-                    :class="{'w-100' : reply}"
-                    @replyMode="reply = $event" />
-            </div>
+        <div v-if="content" class="community-item__post">
+            <p>{{ content }}</p>
+            <c-img :src="preview" />
+        </div>
+        <div v-if="content" class="community-item__action text-right">
+            <a
+                v-if="!reply"
+                href="#"
+                class="btn btn-sm btn-icon">
+                <i class="fas fa-thumbs-down" />
+            </a>
+            <c-reply
+                :class="{ 'w-100' : reply }"
+                @replyMode="reply = $event" />
+        </div>
 
+        <c-post-comment
+            v-for="(comment, index) in comments"
+            v-if="comments"
+            :key="index"
+            :comment="comment">
             <c-post-comment
-                v-for="(comment, index) in post.content.comments"
-                v-if="post.content.comments"
+                v-for="(subcomment, index) in comment.replies"
+                v-if="comment.replies"
                 :key="index"
-                :comment="comment">
-                <c-post-comment
-                    v-for="(subcomment, index) in comment.replies"
-                    v-if="comment.replies"
-                    :key="index"
-                    :comment="subcomment" />
-            </c-post-comment>
-        </template>
+                :comment="subcomment" />
+        </c-post-comment>
     </div>
 </template>
 
@@ -80,7 +76,19 @@ export default {
         'c-post-comment': Comment,
         'c-reply': () => import('~/components/community/reply').then(m => m.default || m)
     },
-    props: ['post'],
+    props: {
+        id: Number,
+        title: String,
+        actionStatus: String,
+        rate: Number,
+        commentsCount: Number,
+        author: {
+            img: String,
+            name: String
+        },
+        content: String,
+        comments: Array
+    },
     data() {
         return {
             reply: false
@@ -88,7 +96,7 @@ export default {
     },
     computed: {
         postIcon() {
-            switch (this.post.status) {
+            switch (this.actionStatus) {
             case 'pinned':
                 return 'fa-map-pin'
             case 'locked':

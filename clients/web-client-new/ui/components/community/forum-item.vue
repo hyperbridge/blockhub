@@ -5,15 +5,15 @@
                 <i :class="icon" />
             </div>
             <div class="text">
-                <router-link :to="{ path: `forum/${forum.id}`, params: { id: forum.id } }">
-                    {{ forum.title }}
+                <router-link :to="{ path: `forum/${id}`, params: { id: id } }">
+                    {{ title }}
                 </router-link>
             </div>
             <div class="last-post">
                 {{ calculateSince }}
             </div>
             <div class="discussions-count">
-                {{ forum.discussionsCount }}
+                {{ discussionsCount }}
             </div>
         </div>
     </div>
@@ -22,22 +22,24 @@
 <script>
 export default {
     props: {
-        forum: {
-            type: Object,
-            default: () => {}
-        }
+        id: Number,
+        title: String,
+        icon: {
+            type: String,
+            default: 'fas fa-comments'
+        },
+        lastPostTime: String,
+        discussionsCount: Number
     },
     computed: {
-        icon() {
-            if (this.forum.icon) { return this.forum.icon }
-            return 'fas fa-comments'
-        },
         calculateSince() {
-            const tTime = new Date(this.forum.lastPostTime)
+            const tTime = new Date(this.lastPostTime)
             const cTime = new Date()
             const sinceMin = Math.round((cTime - tTime) / 60000)
-            let since; let sinceHr; let sinceDay
-            console.log('0', this.forum.lastPostTime)
+            let since
+            let sinceHr
+            let sinceDay
+
             if (sinceMin == 0) {
                 const sinceSec = Math.round((cTime - tTime) / 1000)
                 if (sinceSec < 10) { since = 'less than 10 seconds ago' } else if (sinceSec < 20) { since = 'less than 20 seconds ago' } else { since = 'half a minute ago' }
@@ -51,6 +53,7 @@ export default {
                 sinceDay = Math.round(sinceMin / 1440)
                 since = `${sinceDay} days ago`
             }
+
             return since
         }
     }

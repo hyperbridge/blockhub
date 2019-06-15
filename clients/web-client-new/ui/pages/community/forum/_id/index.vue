@@ -1,7 +1,5 @@
 <template>
-    <c-layout
-        navigationKey="store"
-        :defaultBreadcrumb="false">
+    <c-layout navigationKey="store" :breadcrumbLinks="breadcrumbLinks">
         <div class="container-fluid">
             <div class="row margin-bottom-50">
                 <div class="col-12 col-lg-8 col-xl-9">
@@ -11,9 +9,15 @@
                         :onlyContentBg="true">
                         <div class="community-list">
                             <c-community-item
-                                v-for="(post, index) in posts"
+                                v-for="(discussion, index) in forum.discussions"
+                                :id="discussion.id"
                                 :key="index"
-                                :post="post" />
+                                :title="discussion.name"
+                                :actionStatus="discussion.meta.actionStatus"
+                                :rate="discussion.meta.rate"
+                                :commentsCount="discussion.meta.commentsCount"
+                                :author="discussion.owner"
+                                :comments="discussion.comments" />
                         </div>
                     </c-block>
                 </div>
@@ -56,78 +60,36 @@
 </template>
 
 <script>
-import moment from 'moment'
-
 export default {
     components: {
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
         'c-community-item': () => import('~/components/community/post-item').then(m => m.default || m),
         'c-search': () => import('~/components/searcher').then(m => m.default || m)
     },
-    data() {
-        return {
-            posts: [
-                {
-                    id: 1,
-                    title: 'New to BlockHub',
-                    rate: '43',
-                    commentsCount: '8234',
-                    status: 'pinned',
-                    author: {
-                        name: 'Alan Walker'
-                    }
-                },
-                {
-                    id: 2,
-                    title: 'New to BlockHub',
-                    rate: '43',
-                    commentsCount: '8234',
-                    status: 'locked',
-                    author: {
-                        name: 'Alan Walker'
-                    }
-                },
-                {
-                    id: 3,
-                    title: 'New to BlockHub',
-                    rate: '43',
-                    commentsCount: '8234',
-                    status: 'starred',
-                    author: {
-                        name: 'Alan Walker'
-                    }
-                },
-                {
-                    id: 4,
-                    title: 'New to BlockHub',
-                    rate: '43',
-                    commentsCount: '8234',
-                    author: {
-                        name: 'Alan Walker'
-                    }
-                }
-            ]
-        }
-    },
-    computed: {
-        community() {
-            // TODO: Use community.discussions instead of the hardcoded posts
-            return this.$store.getters['communities/get'](this.$route.params.id)
-        }
-    },
-    async mounted() {
-        await this.$store.dispatch('communities/find', {
+    async asyncData({ params, store }) {
+        await store.dispatch('communities/find', {
             query: {
-                id: this.$route.params.id,
-                $eager: 'discussions'
+                id: params.id,
+                $eager: '[discussions]'
             }
         })
+
+        const forum = store.getters['communities/get'](params.id)
+
+        return {
+            forum,
+            breadcrumbLinks: [
+                { to: { path: '/' }, title: 'Home' },
+                { to: { path: '/community' }, title: 'Community' },
+                { to: { path: '/community/forums' }, title: 'Forums' },
+                { to: { path: `/communities/${forum.id}` }, title: forum.name }
+            ]
+        }
     },
     methods: {
         activateModal() {
             this.$store.commit('application/activeModalData', {
                 community: {
-                    id: this.$route.params.id
+                    id: this.forum.id
                 }
             })
             this.$store.commit('application/activateModal', 'new-discussion')

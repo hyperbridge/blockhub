@@ -1,18 +1,32 @@
 <template>
-    <c-layout navigationKey="store">
+    <c-layout navigationKey="store" :breadcrumbLinks="breadcrumbLinks">
         <div class="row">
             <div class="col-12">
                 <div class="community-wrapper">
-                    <c-item :post="post" />
+                    <c-item
+                        :id="discussion.id"
+                        :title="discussion.name"
+                        :content="discussion.value"
+                        :comments="discussion.messages"
+                        :actionStatus="discussion.meta.actionStatus"
+                        :rate="discussion.meta.rate"
+                        :commentsCount="discussion.meta.commentsCount"
+                        :author="discussion.meta.author" />
 
                     <c-post-comment
-                        v-for="(comment, index) in post.content.comments"
+                        v-for="(comment, index) in discussion.messages"
                         :key="index"
-                        :comment="comment">
+                        :date="comment.createdAt"
+                        :text="comment.value"
+                        :author="comment.meta.author"
+                        :rate="comment.meta.rate">
                         <c-post-comment
                             v-for="(subcomment, index) in comment.replies"
                             :key="index"
-                            :comment="subcomment" />
+                            :date="subcomment.createdAt"
+                            :text="subcomment.value"
+                            :author="comment.meta.author"
+                            :rate="subcomment.meta.rate" />
                     </c-post-comment>
                 </div>
             </div>
@@ -70,6 +84,28 @@ export default {
                     ]
                 }
             }
+        }
+    },
+    async asyncData({ params, store }) {
+        await store.dispatch('discussions/find', {
+            query: {
+                id: params.id,
+                $eager: '[messages.^, messages.replies.^]'
+            }
+        })
+
+        const discussion = store.getters['discussions/get'](params.id)
+        const forum = { id: 1, name: 'zzz' } // store.getters['community/get'](discussion.communityId)
+
+        return {
+            discussion,
+            breadcrumbLinks: [
+                { to: { path: '/' }, title: 'Home' },
+                { to: { path: '/community' }, title: 'Community' },
+                { to: { path: '/community/discussions' }, title: 'Forums' },
+                { to: { path: `/community/forum/${forum.id}` }, title: forum.name },
+                { to: { path: `/discussion/${discussion.id}` }, title: discussion.name }
+            ]
         }
     }
 }

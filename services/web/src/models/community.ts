@@ -12,6 +12,7 @@ export default class Community extends BaseModel {
     currentActiveUsers!: Number
     monthlyActiveUsers!: Number
     dailyActiveUsers!: Number
+    discussions!: Array<Discussion>
 
     static get tableName() {
         return 'communities'
@@ -24,7 +25,7 @@ export default class Community extends BaseModel {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: [],
+            required: ['name', 'meta'],
             properties: {
             }
         }
@@ -54,20 +55,20 @@ export default class Community extends BaseModel {
             discussions: {
                 relation: Model.ManyToManyRelation,
                 modelClass: Discussion,
+                join: {
+                    from: 'communities.id',
+                    to: 'discussions.id',
+                    through: {
+                        from: 'nodes.fromCommunityId',
+                        to: 'nodes.toDiscussionId',
+                        extra: ['relationKey']
+                    }
+                },
                 filter: {
                     relationKey: 'discussions'
                 },
                 beforeInsert(model) {
                     (model as Node).relationKey = 'discussions'
-                },
-                join: {
-                    from: 'discussions.id',
-                    to: 'communities.id',
-                    through: {
-                        from: 'nodes.fromDiscussionId',
-                        to: 'nodes.toCommunityId',
-                        extra: ['relationKey']
-                    }
                 }
             },
             subscribers: {
