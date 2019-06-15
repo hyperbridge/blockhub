@@ -19,20 +19,11 @@ export default function(app) {
         },
         createUseUpsertGraph: true,
         allowedInsert: '[owner.^, tags.^, community.[owner], rating.^]',
-        allowedEager: '[owner.^, tags.^, community.[owner], rating.^]',
+        allowedEager: '[owner.^, owner.account, tags.^, community.[owner], rating.^]',
         allowedUpsert: '[owner.^, tags.^, community.[owner], rating.^]'
     }
 
-    // app.use('/ideas', {
-    //     topGameIdeas() {
-    //         return [
-    //             { something: 1 }
-    //         ]
-    //     }
-    // })
-
     app.use('/ideas', createService(options))
-
 
     const service = app.service('/ideas')
 

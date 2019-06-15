@@ -2,6 +2,7 @@ import { Model, RelationMappings } from 'objection'
 import Project from './project'
 import License from './license'
 import Order from './order'
+import Account from './account'
 import Message from './message'
 import Asset from './asset'
 import Offer from './offer'
@@ -162,6 +163,25 @@ export default class Profile extends BaseModel {
                     (model as Node).relationKey = 'offers'
                 }
             },
+            ideas: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Idea,
+                join: {
+                    from: 'profiles.id',
+                    to: 'ideas.id',
+                    through: {
+                        from: 'nodes.fromProfileId',
+                        to: 'nodes.toIdeaId',
+                        extra: ['relationKey']
+                    }
+                },
+                filter: {
+                    relationKey: 'ideas'
+                },
+                beforeInsert(model) {
+                    (model as Node).relationKey = 'ideas'
+                }
+            },
             pledges: {
                 relation: Model.ManyToManyRelation,
                 modelClass: Project,
@@ -271,15 +291,14 @@ export default class Profile extends BaseModel {
                     (model as Node).relationKey = 'wishlists'
                 }
             },
-
-            // account: {
-            //     relation: Model.BelongsToOneRelation,
-            //     modelClass: Account,
-            //     join: {
-            //         from: 'profiles.accountId',
-            //         to: 'accounts.id'
-            //     }
-            // },
+            account: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Account,
+                join: {
+                    from: 'profiles.accountId',
+                    to: 'accounts.id'
+                }
+            },
             projects: {
                 relation: Model.HasManyRelation,
                 modelClass: Project,
