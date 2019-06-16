@@ -5008,6 +5008,11 @@ dotenv@^6.0.0, dotenv@^6.2.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.2.0.tgz#941c0410535d942c8becf28d3f357dbd9d476064"
   integrity sha512-HygQCKUBSFl8wKQZBSemMywRWcEDNidvNbjGVyZu3nbZ8qq9ubiPoGLMdRDpfSrpkkm9BXYFkpKxxFX38o/76w==
 
+dotenv@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.0.0.tgz#ed310c165b4e8a97bb745b0a9d99c31bda566440"
+  integrity sha512-30xVGqjLjiUOArT4+M5q9sYdvuR4riM6yK9wMcas9Vbp6zZa+ocC9dp6QoftuhTPhFAiLK/0C5Ni2nou/Bk8lg==
+
 duplexer@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
@@ -6561,6 +6566,11 @@ ini@^1.3.4, ini@~1.3.0:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
   integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
+
+inputmask@^3.3.8:
+  version "3.3.11"
+  resolved "https://registry.yarnpkg.com/inputmask/-/inputmask-3.3.11.tgz#1421c94ae28c3dcd1b4d26337b508bb34998e2d8"
+  integrity sha1-FCHJSuKMPc0bTSYze1CLs0mY4tg=
 
 inquirer@6.2.0:
   version "6.2.0"
@@ -11678,6 +11688,11 @@ vue-3d-model@^1.0.2:
   dependencies:
     three "^0.88.0"
 
+vue-analytics@^5.17.0:
+  version "5.17.0"
+  resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.17.0.tgz#c9530b82b9b4acd111c9cba7d249adf4089746b3"
+  integrity sha512-1Cn/v06cGjmGDfRlG2hc0RF0sc2rNC88shOeLGNIlllSFv5GDZ9kLXGTPB9z9I+WyvFewyUONPIdQnpOls6h6w==
+
 vue-awesome-swiper@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/vue-awesome-swiper/-/vue-awesome-swiper-3.1.3.tgz#05500b501ffb3fec9bf7eb9985bcf4ae8360ed9e"
@@ -11727,6 +11742,14 @@ vue-i18n@^8.11.2:
   version "8.11.2"
   resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.11.2.tgz#92827fc42449f4602d2a0ddb437dfc4e3370d9d7"
   integrity sha512-STcpmxqBrG77SyWi7e0Yn/B3DjKR6mSDwYS4F/V7zoi+e/+CPbVb2TaBqFwnrkoDcPmRfjM7nTwsiRQQOGdifw==
+
+vue-inputmask@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/vue-inputmask/-/vue-inputmask-0.2.1.tgz#135158e830dc2de40e5e8122de475e03d70b02ad"
+  integrity sha512-T05NnZSjCq99cu4UOyzK0CIjvQm399G5BuoTWoS5udE3wRvflAPpUopOaRPbhu8YsKgWwKn2S+AslicFrXmy8g==
+  dependencies:
+    inputmask "^3.3.8"
+    vue "^2.4.2"
 
 vue-js-popover@^1.1.7:
   version "1.1.8"
@@ -11850,7 +11873,7 @@ vue2-editor@^2.6.6:
     quill "^1.3.6"
     vue "^2.6.10"
 
-vue@^2.5.11, vue@^2.5.2, vue@^2.6.10:
+vue@^2.4.2, vue@^2.5.11, vue@^2.5.2, vue@^2.6.10:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
@@ -11886,7 +11909,7 @@ watchpack@^1.5.0:
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
 
-web-client@../../clients/web-client-new:
+web-client@../../clients/web:
   version "1.0.0"
   dependencies:
     "@feathersjs/authentication-client" "^1.0.8"
@@ -11905,6 +11928,7 @@ web-client@../../clients/web-client-new:
     cookie-storage "^3.2.0"
     cookie-universal-nuxt "^2.0.14"
     debounce "^1.2.0"
+    dotenv "^8.0.0"
     emoji-mart-vue "^2.5.3"
     feathers-vuex "^1.6.2"
     jquery "^3.3.1"
@@ -11916,6 +11940,7 @@ web-client@../../clients/web-client-new:
     qartjs "^1.1.2"
     socket.io-client "^2.2.0"
     vue-3d-model "^1.0.2"
+    vue-analytics "^5.17.0"
     vue-awesome-swiper "^3.1.3"
     vue-chartjs "^3.4.0"
     vue-country-flag "^1.0.1"
@@ -11923,6 +11948,7 @@ web-client@../../clients/web-client-new:
     vue-draggable "^1.0.6"
     vue-howler "^0.7.0"
     vue-i18n "^8.11.2"
+    vue-inputmask "^0.2.1"
     vue-js-popover "^1.1.7"
     vue-multiselect "^2.1.3"
     vue-numerals "0.0.2"

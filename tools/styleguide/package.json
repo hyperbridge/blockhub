@@ -1,7 +1,7 @@
 {
     "name": "blockhub-styleguide",
     "version": "1.0.0",
-    "description": "BlockHub Styleguide",
+    "description": "BlockHub Style Guide",
     "license": "SEE LICENSE IN LICENSE.md",
     "scripts": {
       "start": "start-storybook -p 6006 --ci",
@@ -32,7 +32,7 @@
       "vue-plugin-load-script": "^1.2.0",
       "node-sass": "^4.9.3",
       "storybook-vue-router": "^1.0.1",
-      "web-client": "../../clients/web-client-new"
+      "web-client": "../../clients/web"
     },
     "engines": {
       "node": ">= 8.0.0"
