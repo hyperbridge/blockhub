@@ -131,7 +131,7 @@ export const save = () => {
                 console.log(err)
             }
 
-            // console.log('[BlockHub] Database saved.')
+            console.log('[BlockHub] Database saved.')
         })
 
         loki.close()

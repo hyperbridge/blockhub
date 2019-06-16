@@ -80,11 +80,11 @@ export default {
         this.getExternalState()
         this.ensureDesktopWelcome()
 
-        if (this.$store.state.auth.user) {
-            this.$store.state.application.signedIn = true
-        } else {
-            this.$store.state.application.signedIn = false
-        }
+        // if (this.$store.state.auth.user) {
+        //     this.$store.state.application.signedIn = true
+        // } else {
+        //     this.$store.state.application.signedIn = false
+        // }
     },
     created() {
         if (this.$route.meta.renderCondition) {

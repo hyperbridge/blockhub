@@ -18,9 +18,9 @@ export default function(app) {
             // insertMissing: true
         },
         createUseUpsertGraph: true,
-        allowedInsert: '[owner.^, tags.^, community.[owner], rating.^]',
+        allowedInsert: '[tags.^, community.[owner], rating.^]',
         allowedEager: '[owner.^, owner.account, tags.^, community.[owner], rating.^]',
-        allowedUpsert: '[owner.^, tags.^, community.[owner], rating.^]'
+        allowedUpsert: '[tags.^, community.[owner], rating.^]'
     }
 
     app.use('/ideas', createService(options))

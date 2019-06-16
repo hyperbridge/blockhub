@@ -131,7 +131,7 @@ export default {
             return this.collection.meta.assets.map(id => this.$store.getters['assets/get'](id))
         },
         timeAgo() {
-            return moment(this.collection.updates).fromNow()
+            return moment(this.collection.updatedAt).fromNow()
         }
     },
     async asyncData({ params, store }) {

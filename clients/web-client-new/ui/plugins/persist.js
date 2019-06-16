@@ -5,17 +5,24 @@ let currentState = {}
 let isChanged = false
 
 export default ({ store }) => {
-    store.subscribe((mutation, state) => {
-        currentState = state
-        isChanged = true
-    })
-
     const saveState = () => {
         if (!isChanged) return
+        if (!DB.store.data) return
 
         DB.store.data[0] = currentState
         DB.save()
     }
 
-    setInterval(saveState, 1 * 60 * 1000)
+    let timeout = null
+    const debounce = (fn, debounceTime = 250) => {
+        if (timeout) clearTimeout(timeout)
+        timeout = setTimeout(fn, debounceTime)
+    }
+
+    store.subscribe((mutation, state) => {
+        currentState = state
+        isChanged = true
+
+        debounce(saveState, 1000)
+    })
 }
