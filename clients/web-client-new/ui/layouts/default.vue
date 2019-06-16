@@ -66,7 +66,7 @@ export default {
                     ...this.$store.state.auth.user
                 }
 
-                const state = await this.$api.service('/application/state').find()
+                const state = await this.$api.service('application/state').find()
                 this.$store.commit('application/updateState', state)
             }
         },
@@ -152,7 +152,7 @@ export default {
                 return alert('Not on desktop')
             }
 
-            window.BlockHub.Bridge.sendCommand('ping', this.$refs.desktopMessage.value)
+            this.$desktop.sendCommand('ping', this.$refs.desktopMessage.value)
             window.BlockHub.Bridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg))
         }
     }

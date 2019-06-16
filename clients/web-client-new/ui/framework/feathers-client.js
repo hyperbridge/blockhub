@@ -13,9 +13,9 @@ if (process.client) {
         if (parts.length >= 2) return parts.pop().split(';').shift()
     }
 
-    const setCookie = (variable, value, expires_seconds) => {
+    const setCookie = (variable, value, expires) => {
         let d = new Date()
-        d = new Date(d.getTime() + 1000 * expires_seconds)
+        d = new Date(d.getTime() + (1000 * expires))
         document.cookie = `${variable}=${value}; expires=${d.toGMTString()};`
     }
 
@@ -27,20 +27,17 @@ if (process.client) {
         if (!serviceUrl) serviceUrl = getCookie('WEB_SERVICE_URL') || 'https://api.blockhub.gg'
         if (!storage) storage = new CookieStorage()
 
-        const socket = io(serviceUrl, { transports: ['websocket'] }) // https://api.blockhub.gg // http://localhost:9001
+        const socket = io(serviceUrl, { transports: ['websocket'] })
 
         return feathers()
-        // .configure(hooks())
             .configure(socketio(socket, { timeout: 15000 }))
             .configure(auth({ storage }))
     }
 } else {
     client = (serviceUrl, storage) => {
-    // const serviceUrl = 'https://api.blockhub.gg'
-        const socket = io(serviceUrl) // https://api.blockhub.gg // http://localhost:9001
+        const socket = io(serviceUrl)
 
         return feathers()
-        // .configure(hooks())
             .configure(socketio(socket, { timeout: 15000 }))
             .configure(auth({ storage }))
     }

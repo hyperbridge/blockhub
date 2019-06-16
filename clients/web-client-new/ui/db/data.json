@@ -1,5 +1,6 @@
 {
     "application": {
+        "externalState": {},
         "brands": {
             "blockhub": {
                 "name": "BlockHub",
