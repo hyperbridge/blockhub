@@ -25,12 +25,10 @@
 </template>
 
 <script>
-import * as Bridge from '@/framework/desktop-bridge'
-
 export default {
     methods: {
         deleteAccount() {
-            Bridge.sendCommand('deleteAccountRequest')
+            this.$desktop.sendCommand('deleteAccountRequest')
         },
         signOut() {
             this.$store.state.application.signedIn = false

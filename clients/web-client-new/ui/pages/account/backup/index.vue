@@ -26,15 +26,13 @@
 </template>
 
 <script>
-import * as Bridge from '@/framework/desktop-bridge'
-
 export default {
     components: {
         'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m)
     },
     methods: {
         exportAccountFile() {
-            Bridge.sendCommand('exportAccountFileRequest')
+            this.$desktop.sendCommand('exportAccountFileRequest')
         }
     }
 }

@@ -1135,7 +1135,6 @@
 
 <script>
 import axios from 'axios'
-import * as Bridge from '@/framework/desktop-bridge'
 import { setInterval } from 'core-js'
 
 

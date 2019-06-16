@@ -482,7 +482,6 @@
 
 <script>
 import Vue from 'vue'
-import * as Bridge from '@/framework/desktop-bridge'
 import * as DB from '@/db'
 
 const groupBy = function(xs, key) {
@@ -651,7 +650,7 @@ export default {
 
                 this.$store.dispatch('application/setEditorMode', 'viewing')
             } else if (newMode === 'removing') {
-                Bridge.sendCommand('removeProduct', {
+                this.$desktop.sendCommand('removeProduct', {
                     id: this.product.id
                 }).then(data => {
                     if (data.error) {
@@ -739,7 +738,7 @@ export default {
                     this.$router.push(`/business/project/${this.project.id}`)
                 })
 
-                // Bridge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.activeProfile, product: this.product }).then((data) => {
+                // this.$desktop.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.activeProfile, product: this.product }).then((data) => {
                 //     const product = DB.marketplace.products.insert(data)
                 //     DB.save()
 
@@ -767,7 +766,7 @@ export default {
         //     if (this.id === 'new') {
         //         this.product.type = 'game'
 
-        //         Bridge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.activeProfile, product: this.product }).then((data) => {
+        //         this.$desktop.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.activeProfile, product: this.product }).then((data) => {
         //             const product = DB.marketplace.products.insert(data)
         //             DB.save()
 
@@ -881,7 +880,7 @@ export default {
                 document.body.appendChild(script);
             }`
 
-            Bridge.sendCommand('fetchPageDataRequest', {
+            this.$desktop.sendCommand('fetchPageDataRequest', {
                 url: this.$refs.importUrl.value,
                 script: onWindowLoad
             }).then(data => {

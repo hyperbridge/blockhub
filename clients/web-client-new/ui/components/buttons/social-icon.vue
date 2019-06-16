@@ -5,9 +5,7 @@
         class="social-icon"
         :class="`social-icon--size-${size}`"
         :style="`color: ${color}`">
-        <i
-            class="fab"
-            :class="`fa-${icon}`" />
+        <i class="fab" :class="`fa-${icon}`" />
     </a>
 </template>
 

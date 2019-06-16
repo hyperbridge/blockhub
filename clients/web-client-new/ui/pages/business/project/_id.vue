@@ -455,7 +455,7 @@ export default {
 
                         DB.save()
 
-                        Bridge.sendCommand('updateState', {
+                        this.$desktop.sendCommand('updateState', {
                             module: 'funding',
                             state: {
                                 projects: DB.funding.projects.data

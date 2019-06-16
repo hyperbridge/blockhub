@@ -90,8 +90,6 @@
 
 
 <script>
-import * as Bridge from '@/framework/desktop-bridge'
-
 export default {
     components: {
     },
@@ -110,7 +108,7 @@ export default {
             this.$router.push({ path: '/' })
         },
         importAccountFile() {
-            Bridge.sendCommand('importAccountFileRequest').then(() => {
+            this.$desktop.sendCommand('importAccountFileRequest').then(() => {
                 window.location.reload()
             })
         }

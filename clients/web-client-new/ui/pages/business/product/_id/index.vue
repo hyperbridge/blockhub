@@ -520,7 +520,7 @@ export default {
                     document.body.appendChild(script);
                 }`
 
-            Bridge.sendCommand('fetchPageDataRequest', {
+            this.$desktop.sendCommand('fetchPageDataRequest', {
                 url: this.$refs.importUrl.value,
                 script: onWindowLoad
             }).then(data => {

@@ -1,11 +1,11 @@
 <template>
-    <c-button status="none"
-              class="assets-list__item"
-              :class="{ 'transparent-bg' : isTransparent }"
-              :to="`/asset/${item.id}`">
+    <c-button
+        status="none"
+        class="assets-list__item"
+        :class="{ 'transparent-bg' : isTransparent }"
+        :to="`/asset/${item.id}`">
         <div class="thumb">
-            <c-img
-                :src="item.image" />
+            <c-img :src="item.image" />
         </div>
         <div class="info">
             <h5>{{ item.name }}</h5>

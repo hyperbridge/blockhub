@@ -322,7 +322,7 @@ export default {
                 }
             ])
 
-            // Bridge.sendCommand('saveProfileRequest', profile).then((profile) => {
+            // this.$desktop.sendCommand('saveProfileRequest', profile).then((profile) => {
             //     this.saveProfiles()
             // })
         },
@@ -334,7 +334,7 @@ export default {
                 this.removeProfile = null
 
                 // this.saveProfiles()
-                // Bridge.sendCommand('removeProfileRequest', this.removeProfile).then(() => {
+                // this.$desktop.sendCommand('removeProfileRequest', this.removeProfile).then(() => {
                 //     const index = this.profiles.indexOf(this.removeProfile)
                 //     this.profiles.splice(index, 1)
                 //     this.removeProfile.edit = false

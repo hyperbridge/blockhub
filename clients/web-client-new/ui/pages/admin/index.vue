@@ -41,8 +41,6 @@
 </template>
 
 <script>
-import * as Bridge from '@/framework/desktop-bridge'
-
 export default {
     components: {
     },
@@ -82,7 +80,7 @@ export default {
                     }
                 }
 
-                await Bridge.sendCommand('transferTokenBatch', {
+                await this.$desktop.sendCommand('transferTokenBatch', {
                     batch,
                     walletIndex
                 }).then(() => {

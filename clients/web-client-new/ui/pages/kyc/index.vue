@@ -145,7 +145,6 @@
 </template>
 
 <script>
-import * as Bridge from '@/framework/desktop-bridge'
 import { setInterval } from 'core-js'
 
 export default {

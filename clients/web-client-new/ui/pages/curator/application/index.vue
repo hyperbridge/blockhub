@@ -60,9 +60,6 @@
 </template>
 
 <script>
-import * as Bridge from '@/framework/desktop-bridge'
-import * as DB from '@/db'
-
 export default {
     components: {
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m)
@@ -84,7 +81,7 @@ export default {
     },
     methods: {
         convertProfile() {
-            Bridge.sendCommand('createCuratorRequest', this.activeProfile).then(data => {
+            this.$desktop.sendCommand('createCuratorRequest', this.activeProfile).then(data => {
                 this.activeProfile.role = 'curator'
                 this.curatorProfile = this.activeProfile
                 this.$store.state.application.curatorMode = true

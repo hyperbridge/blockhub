@@ -405,7 +405,6 @@
 
 
 <script>
-import * as Bridge from '@/framework/desktop-bridge'
 import moment from 'moment'
 
 export default {

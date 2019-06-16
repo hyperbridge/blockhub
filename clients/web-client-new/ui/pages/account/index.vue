@@ -277,12 +277,8 @@
 </template>
 
 <script>
-import * as Bridge from '@/framework/desktop-bridge'
-
 export default {
     components: {
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-        'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
         'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
         'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
         'c-game-includes-item': () => import('~/components/game-series/game-includes-item').then(m => m.default || m),
@@ -315,13 +311,13 @@ export default {
     },
     methods: {
         exportAccountFile() {
-            Bridge.sendCommand('exportAccountFileRequest')
+            this.$desktop.sendCommand('exportAccountFileRequest')
         },
         importAccountFile() {
-            Bridge.sendCommand('importAccountFileRequest')
+            this.$desktop.sendCommand('importAccountFileRequest')
         },
         deleteAccount() {
-            Bridge.sendCommand('deleteAccountRequest')
+            this.$desktop.sendCommand('deleteAccountRequest')
         }
     }
 }
