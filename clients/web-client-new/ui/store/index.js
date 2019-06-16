@@ -199,6 +199,19 @@ export const actions = {
     },
     init({ commit }, payload) {
         commit('init', payload)
+    },
+    update({ rootState }, [path, data]) {
+        const [module, target] = path.split('/')
+        if (data !== null && typeof data === 'object') {
+            rootState[module][target] = {
+                ...rootState[module][target],
+                ...data
+            }
+        } else {
+            console.log(arguments)
+            // rootState[module][target] = data
+            Vue.set(rootState[module], target, data)
+        }
     }
 }
 

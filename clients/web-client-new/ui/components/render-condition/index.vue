@@ -101,7 +101,7 @@ export default {
 
             this.initialized = true
 
-            this.$store.dispatch('root/updateSingle', ['application/initialized', true])
+            this.$store.dispatch('update', ['application/initialized', true])
 
             this.satisfied = true
         }
