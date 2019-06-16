@@ -6,7 +6,7 @@
                     {{ release.version }}
                 </div>
                 <div class="d-flex">
-                    <div class="latest-badge mr-3" v-if="release.latestRelease">
+                    <div class="latest-badge mr-3" v-if="release.latest_release">
                         Latest Release
                     </div>
                     <div>
@@ -52,7 +52,7 @@
             return {
                 release: {
                     date: '2005-08-09T18:31:42+03:30',
-                    latestRelease: true,
+                    latest_release: true,
                     version: '0.7.1',
                     author: 'Josh Doel',
                     text: 'In this update:<ul><li>Token purchase flow\n</li><li>Copy to address works</li><li>Account recovery</li><li>Simplify sign up</li><li>Hold ALT and click to give feedback!</li></ul>',

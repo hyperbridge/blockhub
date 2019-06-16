@@ -1,5 +1,5 @@
 <template>
-    <div class="user-data" :class="{ 'preview-mode': previewMode }" v-if="user">
+    <div class="user-data" :class="{ 'preview-mode': previewMode }">
         <c-loading :enabled="removing" size="lg" />
         
         <div class="user-data__container" v-if="!removing">

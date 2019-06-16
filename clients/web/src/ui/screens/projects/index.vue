@@ -51,32 +51,27 @@ export default {
     components: {
         'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
     },
-    async asyncData({ params, store }) {
-        await store.dispatch('projects/find', {
+    data() {
+        return {
+            loading: true
+        }
+    },
+    created() {
+        this.$store.dispatch('projects/find', {
             query: {
                 $sort: {
                     createdAt: -1
                 },
                 $limit: 25
             }
+        }).then(() => {
+            this.loading = false
         })
-
-        const projects = store.getters['projects/list']
-
-        return {
-            projects,
-            breadcrumbLinks: [
-                { to: { path: '/' }, title: 'Home' },
-                { to: { path: '/projects' }, title: 'Projects' }
-            ]
-        }
-    },
-    data() {
-        return {
-            loading: false
-        }
     },
     computed: {
+        projects() {
+            return this.$store.getters['projects/list']
+        },
         list() {
             const result = []
 
