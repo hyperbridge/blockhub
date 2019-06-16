@@ -48,8 +48,7 @@
 <script>
 export default {
     components: {
-        'c-block': () => import('~/components/block').then(m => m.default || m),
-        'c-rating-stars': resolve => require(['../rating-stars'], resolve)
+        'c-rating-stars': () => import('~/components/rating-stars').then(m => m.default || m)
     },
     props: {
         items: {

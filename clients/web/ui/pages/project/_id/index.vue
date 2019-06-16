@@ -492,7 +492,7 @@ export default {
         'c-project-bounties': () => import('~/pages/project/_id/bounties').then(m => m.default || m),
         'c-project-updates': () => import('~/pages/project/_id/updates').then(m => m.default || m),
         'c-updates-count': () => import('~/components/project/updates-count').then(m => m.default || m),
-        'c-multiselect': resolve => require(['vue-multiselect'], resolve)
+        'c-multiselect': () => import('vue-multiselect').then(m => m.default || m)
     },
     props: {
         id: [String, Number],

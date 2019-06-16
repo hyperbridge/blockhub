@@ -409,7 +409,7 @@ import moment from 'moment'
 
 export default {
     components: {
-        'c-datepicker': resolve => require(['vuejs-datepicker'], resolve),
+        'c-datepicker': () => import('vuejs-datepicker').then(m => m.default || m),
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         'c-privacy-block': () => import('~/components/privacy-block').then(m => m.default || m),
         'c-terms-block': () => import('~/components/terms-block').then(m => m.default || m),

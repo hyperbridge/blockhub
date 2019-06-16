@@ -144,7 +144,7 @@
 export default {
     components: {
         'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m),
-        'c-multiselect': resolve => require(['vue-multiselect'], resolve)
+        'c-multiselect': () => import('vue-multiselect').then(m => m.default || m)
     },
     data() {
         return {

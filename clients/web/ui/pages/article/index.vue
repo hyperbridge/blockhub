@@ -221,7 +221,7 @@
 <script>
 export default {
     components: {
-        'c-datepicker': resolve => require(['vuejs-datepicker'], resolve)
+        'c-datepicker': () => import('vuejs-datepicker').then(m => m.default || m)
     },
     data() {
         return {

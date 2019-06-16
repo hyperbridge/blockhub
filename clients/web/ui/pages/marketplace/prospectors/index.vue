@@ -195,7 +195,7 @@ export default {
         'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
         'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
         'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
-        'c-datepicker': resolve => require(['vuejs-datepicker'], resolve)
+        'c-datepicker': () => import('vuejs-datepicker').then(m => m.default || m)
     },
     props: ['profileId'],
     data() {

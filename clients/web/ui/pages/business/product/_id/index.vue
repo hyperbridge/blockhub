@@ -333,7 +333,7 @@ export default {
         'c-html-editor': () => import('~/components/html-editor').then(m => m.default || m),
         'c-json-editor': () => import('~/components/json-editor').then(m => m.default || m),
         'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
-        'c-multiselect': resolve => require(['vue-multiselect'], resolve)
+        'c-multiselect': () => import('vue-multiselect').then(m => m.default || m)
     },
     props: {
         id: [String, Number]
