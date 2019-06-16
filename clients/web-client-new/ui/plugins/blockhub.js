@@ -64,16 +64,17 @@ export default ({ app, store }) => {
             return hash.replace('mode=', '')
         }
 
-        if (hostname === 'blockhub.gg' || hostname === 'gamedelta.net') {
-            return 'production'
-        } else if (hostname === 'staging.blockhub.gg' || hostname === 'staging.gamedelta.net') {
+        if (hostname === 'localhost' || hostname.indexOf('.local') !== -1) {
+            return 'local'
+        } else if (hostname.startsWith('staging')) {
             return 'staging'
-        } else if (hostname === 'beta.blockhub.gg' || hostname === 'beta.gamedelta.net') {
+        } else if (hostname.startsWith('beta')) {
             return 'beta'
-        } else if (hostname === 'preview.blockhub.gg' || hostname === 'preview.gamedelta.net') {
+        } else if (hostname.startsWith('preview')) {
             return 'preview'
         }
-        return 'local'
+
+        return 'production'
     }
 
     app.blockhub.bridge = Bridge
@@ -201,6 +202,7 @@ export default ({ app, store }) => {
                     }
                 }
             }
+
             return app.feathers.service(serviceKey)
         }
     }
@@ -228,8 +230,8 @@ export default ({ app, store }) => {
         // TODO: is this a race condition?
         // TODO: PeerService.init()
 
-        ReputationEngine.init(store) // , router)
-        Bridge.init(store) // , router)
+        app.blockhub.reputationEngine.init(store) // , router)
+        app.blockhub.bridge.init(store) // , router)
 
         store.dispatch('init', DB.store.data[0])
         store.dispatch('database/init')
@@ -237,7 +239,6 @@ export default ({ app, store }) => {
         store.dispatch('marketplace/init')
         store.dispatch('funding/init')
 
-        app.blockhub.environmentMode = store.state.application.environmentMode
         console.log(`Environment mode: ${store.state.application.environmentMode}`)
 
         if (store.state.application.environmentMode === 'preview' ||

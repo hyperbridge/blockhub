@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import axios from 'axios'
 import FormData from 'form-data'
-import * as DB from '../../db'
+import * as DB from '@/db'
+import * as Bridge from '@/framework/desktop-bridge'
 
 let localState = {}
 
