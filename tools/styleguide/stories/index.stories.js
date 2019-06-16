@@ -289,7 +289,7 @@ storiesOf('Searcher', module)
         components: {
             'c-searcher': Searcher
         },
-        data(){
+        data() {
             return {
                 results:[],
                 phrase: [],
@@ -305,7 +305,7 @@ storiesOf('Searcher', module)
                 ]
             }
         },
-        methods:{
+        methods: {
             search() {
                 this.results = this.phrase.length ? this.getByVal(this.phrase) : []
             },
@@ -321,10 +321,10 @@ storiesOf('Searcher', module)
                 return arr;
             }
         },
-        computed:{
+        computed: {
         },
-        watch:{
-            results(){
+        watch: {
+            results() {
                 console.log(this.results)
             }
         },
@@ -1694,8 +1694,8 @@ storiesOf('Popups', module)
             'c-heading-bar-color': BlockHeadersColor,
             'c-emoji-single': EmojiSingle
         },
-        data(){
-            return{
+        data() {
+            return {
                 pensive: 0,
                 smile: 0,
                 neutral_face: 0
@@ -1941,22 +1941,22 @@ storiesOf('Popups', module)
         `
     }))
     .add('play', () => ({
-        components:{
-            'c-play-popup' : () => import('~/components/popups/play').then(m => m.default || m)
+        components: {
+            'c-play-popup': () => import('~/components/popups/play').then(m => m.default || m)
         },
-        data(){
-            return{
+        data() {
+            return {
                 activated: false
             }
         },
         template: `<div class="p-4"><c-button @click=" activated = true ">Play Now</c-button> <c-play-popup :activated="activated" @close=" activated = !activated " /></div>`
     }))
     .add('Add to Collection', () =>({
-        components:{
+        components: {
             'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m),
         },
-        data(){
-            return{
+        data() {
+            return {
                 collections: [
                     {
                         name: 'My Top 100',
@@ -3112,7 +3112,7 @@ storiesOf('Gallery', module)
                 items: [
                     {
                         src: 'https://cdn.vox-cdn.com/thumbor/-9ezNi6jWxByZiYsLDfoAILAJC4=/0x38:1920x1043/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/12648875/HowFortniteWonSite.png',
-                        overlay:{
+                        overlay: {
                             title: 'How Fortnite became the biggest game of 2018',
                             subtitle: 'It comes down to three big things',
                             text: 'Fortnite has achieved monumental success, the rare game to crossover into mainstream pop culture. Fortnite is referenced by musicians, imitated by athletes and reported on by news outlets. How did it achieve such broad recognition when so few games do?'
@@ -3656,8 +3656,8 @@ storiesOf('Progress Bar', module)
         components: {
             'c-progress-bar-fancy': ProgressBarFancy
         },
-        data(){
-            return{
+        data() {
+            return {
                 percent: 90
             }
         },
@@ -3763,7 +3763,7 @@ storiesOf('Product Review', module)
         `
     }))
     .add('form', () => ({
-        components:{
+        components: {
             'c-review-form' : ProductReviewForm
         },
         template: `<div class="p-4" style="width: 1000px;"><c-review-form /></div>`
@@ -4489,8 +4489,8 @@ storiesOf('Stream', module)
         components: {
             'c-stream-item': StreamItem
         },
-        data(){
-            return{
+        data() {
+            return {
                 "game": "Dota II",
                 "userName": "GodOfDota",
                 "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVIOE5IdK4MWeI-iEphf-BhZh2XsXBrBn_fcsGXbFGSF-xwH8h",
@@ -4708,8 +4708,8 @@ storiesOf('Landing Page', module)
         components: {
             'c-landing-feature-item': () => import('~/components/landing/block-content/feature-item').then(m => m.default || m),
         },
-        data(){
-            return{
+        data() {
+            return {
                 items:[
                     {
                         img: 'https://i.ytimg.com/vi/6ki31hkQk8c/maxresdefault.jpg',
@@ -4740,11 +4740,11 @@ storiesOf('Landing Page', module)
         `
     }))
     .add('benefactor', () => ({
-        components:{
-            'c-landing-benefactor' : () => import('~/components/landing/block-content/benefactor').then(m => m.default || m),
+        components: {
+            'c-landing-benefactor': () => import('~/components/landing/block-content/benefactor').then(m => m.default || m),
         },
-        data(){
-            return{
+        data() {
+            return {
                 items:[
                     {
                         src: 'http://dotafun.su/images/aeee/b_keeperofthelight.png',
@@ -4779,11 +4779,11 @@ storiesOf('Landing Page', module)
             `
     }))
     .add('reward list', () =>({
-        components:{
+        components: {
             'c-landing-reward-list': () => import('~/components/landing/block-content/reward-list').then(m => m.default || m),
         },
-        data(){
-            return{
+        data() {
+            return {
             }
         },
         template:
@@ -4802,22 +4802,22 @@ storiesOf('Landing Page', module)
     .add('page', () => ({
         components: {
             'c-landing-block': LandingContent,
-            'c-landing-block-title' : () => import('~/components/landing/block-title/simple').then(m => m.default || m),
-            'c-landing-block-title-shadow' : () => import('~/components/landing/block-title/shadow').then(m => m.default || m),
-            'c-landing-block-title-gradient' : () => import('~/components/landing/block-title/gradient').then(m => m.default || m),
+            'c-landing-block-title': () => import('~/components/landing/block-title/simple').then(m => m.default || m),
+            'c-landing-block-title-shadow': () => import('~/components/landing/block-title/shadow').then(m => m.default || m),
+            'c-landing-block-title-gradient': () => import('~/components/landing/block-title/gradient').then(m => m.default || m),
             'c-landing-feature-item': () => import('~/components/landing/block-content/feature-item').then(m => m.default || m),
             'c-landing-tabs': () => import('~/components/landing/block-content/tabs').then(m => m.default || m),
             'c-landing-tab': () => import('~/components/landing/block-content/tab').then(m => m.default || m),
-            'c-landing-slider' : () => import('~/components/landing/block-content/slider').then(m => m.default || m),
-            'c-landing-gradient-block' : () => import('~/components/landing/block-content/gradient').then(m => m.default || m),
-            'c-landing-benefactor' : () => import('~/components/landing/block-content/benefactor').then(m => m.default || m),
+            'c-landing-slider': () => import('~/components/landing/block-content/slider').then(m => m.default || m),
+            'c-landing-gradient-block': () => import('~/components/landing/block-content/gradient').then(m => m.default || m),
+            'c-landing-benefactor': () => import('~/components/landing/block-content/benefactor').then(m => m.default || m),
             'c-landing-level': () => import('~/components/landing/block-content/level').then(m => m.default || m),
             'c-landing-reward-list': () => import('~/components/landing/block-content/reward-list').then(m => m.default || m),
             'c-landing-divider': () => import('~/components/landing/block-content/divider').then(m => m.default || m),
             'c-landing-button': () => import('~/components/landing/button').then(m => m.default || m),
         },
-        data(){
-            return{
+        data() {
+            return {
                 items:[
                     {
                         img: 'https://i.ytimg.com/vi/6ki31hkQk8c/maxresdefault.jpg',
@@ -5135,7 +5135,7 @@ storiesOf('Token Sale Box', module)
 
 storiesOf('Guide', module)
     .add('default', () =>({
-        components:{
+        components: {
             'c-guide': () => import('~/components/guide').then(m => m.default || m),
         },
         template: `<c-guide />`
@@ -5143,12 +5143,12 @@ storiesOf('Guide', module)
 
 storiesOf('Video Popup', module)
     .add('default', () =>({
-        components:{
+        components: {
             'c-video-popup': () => import('~/components/video-popup').then(m => m.default || m),
             Author
         },
-        data(){
-            return{
+        data() {
+            return {
                 video:[
                     {
                         src: 'https://static.videezy.com/system/resources/previews/000/004/944/original/Magical_Tree_4K_Living_Background.mp4',
@@ -5158,28 +5158,28 @@ storiesOf('Video Popup', module)
                 comments:[
                     {
                         text: 'Lorem ipsum dolor si',
-                        author:{
+                        author: {
                             name: 'Satoshi',
                             img: 'https://banner2.kisspng.com/20180403/qtw/kisspng-computer-icons-avatar-woman-user-avatar-5ac3a1dfb11ca9.9792609515227703997255.jpg'
                         }
                     },
                     {
                         text: 'Fusce imperdiet massa sit amet odio blandit aliquam.',
-                        author:{
+                        author: {
                             name: 'Hakato',
                             img: 'https://www.exclutips.com/wp-content/uploads/2015/08/wordpress-custom-user-avatar.png'
                         }
                     },
                     {
                         text: 'Morbi dignissim mauris vitae turpis efficitur, in dapibus neque consectetur. Etiam sit amet consectetur ex.',
-                        author:{
+                        author: {
                             name: 'Daniel',
                             img: 'http://paquitosoftware.com/content/images/2015/07/gravatar.jpeg'
                         }
                     },
                     {
                         text: 'Mauris in enim vitae dolor porttitor maximus',
-                        author:{
+                        author: {
                             name: 'Monik',
                             img: 'https://relayfm.s3.amazonaws.com/uploads/user/avatar/103/user_avatar_tiffanyarment_artwork.png'
                         }
@@ -5188,24 +5188,24 @@ storiesOf('Video Popup', module)
                 showLocal: false,
                 showYoutube: false,
                 showTwitch: false,
-                showVideo:{},
+                showVideo: {},
                 youtube: 'A747o4LwQfM',
                 twitch: 'inflameswemust'
             }
         },
-        methods:{
-            closeModal(){
+        methods: {
+            closeModal() {
                 this.showYoutube = false;
                 this.showTwitch = false;
                 this.showLocal = false;
             },
-            showLocalHandler(){
+            showLocalHandler() {
                 this.showLocal = true
             },
-            showYoutubeHandler(){
+            showYoutubeHandler() {
                 this.showYoutube = true
             },
-            showTwitchHandler(){
+            showTwitchHandler() {
                 this.showTwitch = true
             }
         },
@@ -5244,47 +5244,47 @@ storiesOf('Video Popup', module)
 `
     }))
     .add('video list', () => ({
-        components:{
+        components: {
             'c-video-popup': () => import('~/components/video-popup').then(m => m.default || m),
             'c-video-item': () => import('~/components/video-list').then(m => m.default || m),
             Author
         },
-        data(){
-            return{
+        data() {
+            return {
                 videos:[
                     {
                         poster: 'https://i.ytimg.com/vi/4B2TgQG48Sg/maxresdefault.jpg',
                         name: 'Satoshi',
                         avatar: 'https://banner2.kisspng.com/20180403/qtw/kisspng-computer-icons-avatar-woman-user-avatar-5ac3a1dfb11ca9.9792609515227703997255.jpg',
-                        video:{
+                        video: {
                             src: 'https://static.videezy.com/system/resources/previews/000/004/944/original/Magical_Tree_4K_Living_Background.mp4',
                             format: 'mp4'
                         },
                         comments:[
                             {
                                 text: 'Lorem ipsum dolor si',
-                                author:{
+                                author: {
                                     name: 'Satoshi',
                                     img: 'https://banner2.kisspng.com/20180403/qtw/kisspng-computer-icons-avatar-woman-user-avatar-5ac3a1dfb11ca9.9792609515227703997255.jpg'
                                 }
                             },
                             {
                                 text: 'Fusce imperdiet massa sit amet odio blandit aliquam.',
-                                author:{
+                                author: {
                                     name: 'Hakato',
                                     img: 'https://www.exclutips.com/wp-content/uploads/2015/08/wordpress-custom-user-avatar.png'
                                 }
                             },
                             {
                                 text: 'Morbi dignissim mauris vitae turpis efficitur, in dapibus neque consectetur. Etiam sit amet consectetur ex.',
-                                author:{
+                                author: {
                                     name: 'Daniel',
                                     img: 'http://paquitosoftware.com/content/images/2015/07/gravatar.jpeg'
                                 }
                             },
                             {
                                 text: 'Mauris in enim vitae dolor porttitor maximus',
-                                author:{
+                                author: {
                                     name: 'Monik',
                                     img: 'https://relayfm.s3.amazonaws.com/uploads/user/avatar/103/user_avatar_tiffanyarment_artwork.png'
                                 }
@@ -5299,28 +5299,28 @@ storiesOf('Video Popup', module)
                         comments:[
                             {
                                 text: 'Lorem ipsum dolor si',
-                                author:{
+                                author: {
                                     name: 'Satoshi',
                                     img: 'https://banner2.kisspng.com/20180403/qtw/kisspng-computer-icons-avatar-woman-user-avatar-5ac3a1dfb11ca9.9792609515227703997255.jpg'
                                 }
                             },
                             {
                                 text: 'Fusce imperdiet massa sit amet odio blandit aliquam.',
-                                author:{
+                                author: {
                                     name: 'Hakato',
                                     img: 'https://www.exclutips.com/wp-content/uploads/2015/08/wordpress-custom-user-avatar.png'
                                 }
                             },
                             {
                                 text: 'Morbi dignissim mauris vitae turpis efficitur, in dapibus neque consectetur. Etiam sit amet consectetur ex.',
-                                author:{
+                                author: {
                                     name: 'Daniel',
                                     img: 'http://paquitosoftware.com/content/images/2015/07/gravatar.jpeg'
                                 }
                             },
                             {
                                 text: 'Mauris in enim vitae dolor porttitor maximus',
-                                author:{
+                                author: {
                                     name: 'Monik',
                                     img: 'https://relayfm.s3.amazonaws.com/uploads/user/avatar/103/user_avatar_tiffanyarment_artwork.png'
                                 }
@@ -5335,28 +5335,28 @@ storiesOf('Video Popup', module)
                         comments:[
                             {
                                 text: 'Lorem ipsum dolor si',
-                                author:{
+                                author: {
                                     name: 'Satoshi',
                                     img: 'https://banner2.kisspng.com/20180403/qtw/kisspng-computer-icons-avatar-woman-user-avatar-5ac3a1dfb11ca9.9792609515227703997255.jpg'
                                 }
                             },
                             {
                                 text: 'Fusce imperdiet massa sit amet odio blandit aliquam.',
-                                author:{
+                                author: {
                                     name: 'Hakato',
                                     img: 'https://www.exclutips.com/wp-content/uploads/2015/08/wordpress-custom-user-avatar.png'
                                 }
                             },
                             {
                                 text: 'Morbi dignissim mauris vitae turpis efficitur, in dapibus neque consectetur. Etiam sit amet consectetur ex.',
-                                author:{
+                                author: {
                                     name: 'Daniel',
                                     img: 'http://paquitosoftware.com/content/images/2015/07/gravatar.jpeg'
                                 }
                             },
                             {
                                 text: 'Mauris in enim vitae dolor porttitor maximus',
-                                author:{
+                                author: {
                                     name: 'Monik',
                                     img: 'https://relayfm.s3.amazonaws.com/uploads/user/avatar/103/user_avatar_tiffanyarment_artwork.png'
                                 }
@@ -5442,8 +5442,8 @@ storiesOf('Chat', module)
             'c-chat-group-new': () => import('~/components/chat-new/content/new-group').then(m => m.default || m),
             'c-chat-friends-list': () => import('~/components/chat-new/friends-list/index').then(m => m.default || m),
         },
-        data(){
-            return{
+        data() {
+            return {
                 users:[
                     {
                         id: 1,
@@ -5555,8 +5555,8 @@ storiesOf('Chat', module)
                 ]
             }
         },
-        computed:{
-            userList(){
+        computed: {
+            userList() {
             }
         },
         template: `<div class="row p-3 m-0 flex-wrap" style="width: 1100px;">
@@ -5619,11 +5619,11 @@ storiesOf('Chat', module)
 
 storiesOf('Games list', module)
     .add('base', () => ({
-        components:{
+        components: {
             'c-game-list': () => import('~/components/games-list/index').then(m => m.default || m)
         },
-        data(){
-            return{
+        data() {
+            return {
                 games:[
                     {
                         id: '1',
@@ -5735,7 +5735,7 @@ storiesOf('Games list', module)
 
 storiesOf('Text label', module)
     .add('default', () => ({
-        components:{
+        components: {
             'c-text-label': () => import('~/components/text-label').then(m => m.default || m),
         },
         template: `<div class="p-3 m-0 text-white" style="width: 900px">
@@ -5757,11 +5757,11 @@ storiesOf('Text label', module)
 
 storiesOf('Option Block', module)
     .add('default', () => ({
-        components:{
+        components: {
             'c-option-block': () => import('~/components/option-block').then(m => m.default || m),
         },
-        data(){
-            return{
+        data() {
+            return {
                 list: [
                     {
                         id: '23423',
@@ -5800,14 +5800,14 @@ storiesOf('Option Block', module)
 
 storiesOf('Games Library', module)
     .add('default', () => ({
-        components:{
+        components: {
             'c-game-library-card': () => import('~/components/game-library/card-item.vue').then(m => m.default || m),
         },
-        data(){
-            return{
-                game:{
+        data() {
+            return {
+                game: {
                     id: '2',
-                    images:{
+                    images: {
                         mediumTile: 'https://kor.ill.in.ua/m/610x385/1848785.jpg'
                     },
                     name: 'Dota 2',
@@ -5826,14 +5826,14 @@ storiesOf('Games Library', module)
 
 storiesOf('Quick Launch', module)
     .add('default', () => ({
-        components:{
+        components: {
             'c-quick-launch': () => import('~/components/quick-launch').then(m => m.default || m),
         },
-        data(){
-            return{
-                game:{
+        data() {
+            return {
+                game: {
                     id: '2',
-                    images:{
+                    images: {
                         mediumTile: 'https://kor.ill.in.ua/m/610x385/1848785.jpg'
                     },
                     name: 'Dota 2',
@@ -5852,11 +5852,11 @@ storiesOf('Quick Launch', module)
 
 storiesOf('Global Search', module)
     .add('default', () => ({
-        components:{
+        components: {
             'c-global-search': () => import('~/components/global-search').then(m => m.default || m),
         },
-        data(){
-            return{
+        data() {
+            return {
             }
         },
         template: `
@@ -5868,11 +5868,11 @@ storiesOf('Global Search', module)
         `
     }))
     .add('header bar', () => ({
-        components:{
+        components: {
             'c-bar-search': () => import('~/components/global-search/second').then(m => m.default || m),
         },
-        data(){
-            return{
+        data() {
+            return {
 
             }
         },
@@ -5888,15 +5888,15 @@ storiesOf('Global Search', module)
 
 storiesOf('Giphy', module)
     .add('default', () => ({
-        components:{
+        components: {
             'c-giphy': () => import('~/components/giphy').then(m => m.default || m),
         },
-        data(){
-            return{
+        data() {
+            return {
                 gif: ''
             }
         },
-        methods:{
+        methods: {
             setGif(value){
                 this.gif = value
             }
@@ -5920,8 +5920,8 @@ storiesOf('Table', module)
         components: {
             'c-table-simple': () => import('~/components/table-simple').then(m => m.default || m),
         },
-        data(){
-            return{
+        data() {
+            return {
                 fields:[
                     {
                         label: 'First TH',
@@ -5987,7 +5987,7 @@ storiesOf('Table', module)
 
 storiesOf('Text Formatting', module)
     .add('default', () => ({
-        components:{
+        components: {
             'c-text-formatting': () => import('~/components/text-formatting').then(m => m.default || m),
             'c-basic-popup': () => import('~/components/popups/basic.vue').then(m => m.default || m),
         },
@@ -6003,7 +6003,7 @@ storiesOf('Text Formatting', module)
 
 storiesOf('Activity block', module)
     .add('default', () => ({
-        components:{
+        components: {
             'c-activity-block': () => import('~/components/activity-block').then(m => m.default || m),
         },
         template: `<div style="width: 1000px;" class="p-5">
@@ -6024,11 +6024,11 @@ storiesOf('Activity block', module)
 
 storiesOf('Metro', module)
     .add('metro-tile', () => ({
-        components:{
+        components: {
             'c-metro-tile': () => import('~/components/metro/metro-tile').then(m => m.default || m),
         },
-        data(){
-            return{
+        data() {
+            return {
                 BASE_LEN : 65,
                 MARGIN : 3,
                 items: [
@@ -6218,8 +6218,8 @@ storiesOf('Metro', module)
         components: {
             'c-metro-item': () => import('~/components/metro/metro-item').then(m => m.default || m),
         },
-        data(){
-            return{
+        data() {
+            return {
                 image: 'https://cdn.images.dailystar.co.uk/dynamic/184/photos/532000/620x/Days-Gone-PS4-Release-Date-gameplay-trailers-E3-2018-news-updates-for-new-zombie-games-677269.jpg'
             }
         },
@@ -6260,8 +6260,8 @@ storiesOf('Metro', module)
             'c-metro-grid': () => import('~/components/metro/grid').then(m => m.default || m),
             'c-metro-item': () => import('~/components/metro/metro-item').then(m => m.default || m),
         },
-        data(){
-            return{
+        data() {
+            return {
                 items: [
                     {
                         image: 'https://cdn.images.dailystar.co.uk/dynamic/184/photos/532000/620x/Days-Gone-PS4-Release-Date-gameplay-trailers-E3-2018-news-updates-for-new-zombie-games-677269.jpg',
@@ -6308,11 +6308,11 @@ storiesOf('Metro', module)
 
 storiesOf('Security check', module)
     .add('default', () => ({
-        components:{
-            'c-security-check' : () => import('~/components/security-check').then(m => m.default || m),
+        components: {
+            'c-security-check': () => import('~/components/security-check').then(m => m.default || m),
         },
-        data(){
-            return{
+        data() {
+            return {
                 code: false,
                 err: false
             }
@@ -6344,15 +6344,15 @@ storiesOf('Security check', module)
 storiesOf('Browser UI', module)
     .add('default', () => ({
         components: {
-            'c-browser-ui' : () => import('~/components/browser-ui').then(m => m.default || m),
+            'c-browser-ui': () => import('~/components/browser-ui').then(m => m.default || m),
         },
         template: `<div style="width: 600px" class="m-4"><c-browser-ui /></div>`
     }))
 
 storiesOf('Settings', module)
     .add('default', () => ({
-        components:{
-            'c-settings' : () => import('~/components/settings').then(m => m.default || m),
+        components: {
+            'c-settings': () => import('~/components/settings').then(m => m.default || m),
         },
         template: `<div class="m-4" style="width: 1000px;">
                         <c-settings />
@@ -6364,8 +6364,8 @@ storiesOf('Add friends', module)
         components: {
             'c-add-friends': () => import('~/components/add-friends').then(m => m.default || m),
         },
-        data(){
-            return{
+        data() {
+            return {
                 userFriends: [
                     {
                         avatar: 'https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg',
@@ -6408,7 +6408,7 @@ storiesOf('Add friends', module)
 storiesOf('Draggble video', module)
     .add('default', () => ({
         components: {
-            'c-draggable-video' : () => import('~/components/draggable-video').then(m => m.default || m),
+            'c-draggable-video': () => import('~/components/draggable-video').then(m => m.default || m),
         },
         template: `<div><c-draggable-video /></div>`
     }))
