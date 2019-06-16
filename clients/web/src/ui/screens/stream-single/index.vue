@@ -2,7 +2,7 @@
     <c-layout navigationKey="store" :showBreadcrumbs="false" :showRightPanel="false">
         <div class="single-stream">
             <div class="single-stream__wrapper">
-                <div class="row">
+                <div class="row align-items-stretch">
                     <div class="col-12 col-lg-9 position-relative">
                         <div class="single-stream__nav">
                             <c-button status="dark" class="w-100 d-flex d-md-none justify-content-center my-4" size="lg" data-toggle="collapse" data-target="#product_nav" aria-expanded="false" aria-controls="product_nav">
@@ -38,8 +38,22 @@
                             <c-video src="https://www.w3schools.com/tags/mov_bbb.mp4" width="100%" :controls="true" />
                         </template>
                     </div>
-                    <div class="col-12 col-lg-3 pl-0">
-                        <c-chat :messages="messages" />
+                    <div class="col-12 col-lg-3 pl-0 flex-column align-items-end">
+                        <div class="messages-title">
+                            <div class="h3">
+                                Chat
+                            </div>
+                        </div>
+                        <div class="messages-list">
+                            <c-scrollable-content>
+                                <c-message-small v-for="msg in messages"
+                                                 :author="msg.author"
+                                                 :color="msg.color"
+                                                 :content="msg.content"
+                                />
+                            </c-scrollable-content>
+                        </div>
+                        <c-chat-answer class="mt-auto" :showAttachment="false"/>
                     </div>
                 </div>
             </div>
@@ -51,71 +65,132 @@
     export default {
         components: {
             'c-video': (resolve) => require(['@/ui/components/video'], resolve),
-            'c-chat': (resolve) => require(['@/ui/components/chat/chat'], resolve)
+            'c-chat': (resolve) => require(['@/ui/components/chat/chat'], resolve),
+            'c-chat-answer': (resolve) => require(['@/ui/components/chat-new/answer-field/field'], resolve),
+            'c-message-small': (resolve) => require(['@/ui/components/chat-new/message-small'], resolve),
+            'c-scrollable-content': (resolve) => require(['@/ui/components/chat-new/content/scrollable-content'], resolve)
         },
         data(){
             return{
                 section: 'online',
                 messages: [
                     {
-                        "id": 1,
-                        "author": 1,
+                        "author": "Joseph",
                         "content": "Hello",
-                        "createdAt": ""
+                        "createdAt": "",
+                        "color": "green"
                     },
                     {
-                        "id": 2,
-                        "author": 2,
+                        "author": "killer",
                         "content": "Is it a good offer?",
-                        "createdAt": ""
+                        "createdAt": "",
+                        "color": "green"
                     },
                     {
-                        "id": 3,
-                        "author": 3,
+                        "author": "Mort",
                         "content": "Looks good",
-                        "createdAt": ""
+                        "createdAt": "",
+                        "color": "red"
                     },
                     {
-                        "id": 4,
-                        "author": 3,
+                        "author": "Poll",
                         "content": "Hi, what do you think about this offer?",
-                        "createdAt": ""
+                        "createdAt": "",
+                        "color": "blue"
                     },
                     {
-                        "id": 4,
-                        "author": 1,
+                        "author": "Alan",
                         "content": "Hi, what do you think about this offer?",
-                        "createdAt": ""
+                        "createdAt": "",
+                        "color": "purple"
                     },
                     {
-                        "id": 5,
-                        "author": 1,
+                        "author": "klon",
                         "content": "Ok",
-                        "createdAt": ""
+                        "createdAt": "",
+                        "color": "yellow"
                     },
                     {
-                        "id": 6,
-                        "author": 1,
+                        "author": "dorat",
                         "content": "Yes",
-                        "createdAt": ""
+                        "createdAt": "",
+                        "color": "darkblue"
                     },
                     {
-                        "id": 7,
-                        "author": 2,
+                        "author": "Walter",
                         "content": "Looks good",
-                        "createdAt": ""
+                        "createdAt": "",
                     },
                     {
-                        "id": 8,
-                        "author": 3,
+                        "author": "iglan",
                         "content": "Hello",
-                        "createdAt": ""
+                        "createdAt": "",
+                        "color": "green"
                     },
                     {
-                        "id": 9,
-                        "author": 1,
+                        "author": "weltor",
                         "content": "Is it a good offer?",
-                        "createdAt": ""
+                        "createdAt": "",
+                        "color": "green"
+                    },
+                    {
+                        "author": "Joseph",
+                        "content": "Hello",
+                        "createdAt": "",
+                        "color": "green"
+                    },
+                    {
+                        "author": "killer",
+                        "content": "Is it a good offer?",
+                        "createdAt": "",
+                        "color": "green"
+                    },
+                    {
+                        "author": "Mort",
+                        "content": "Looks good",
+                        "createdAt": "",
+                        "color": "red"
+                    },
+                    {
+                        "author": "Poll",
+                        "content": "Hi, what do you think about this offer?",
+                        "createdAt": "",
+                        "color": "blue"
+                    },
+                    {
+                        "author": "Alan",
+                        "content": "Hi, what do you think about this offer?",
+                        "createdAt": "",
+                        "color": "purple"
+                    },
+                    {
+                        "author": "klon",
+                        "content": "Ok",
+                        "createdAt": "",
+                        "color": "yellow"
+                    },
+                    {
+                        "author": "dorat",
+                        "content": "Yes",
+                        "createdAt": "",
+                        "color": "darkblue"
+                    },
+                    {
+                        "author": "Walter",
+                        "content": "Looks good",
+                        "createdAt": "",
+                    },
+                    {
+                        "author": "iglan",
+                        "content": "Hello",
+                        "createdAt": "",
+                        "color": "green"
+                    },
+                    {
+                        "author": "weltor",
+                        "content": "Is it a good offer?",
+                        "createdAt": "",
+                        "color": "green"
                     }
                 ]
             }
@@ -128,5 +203,15 @@
         max-height: calc( 100vh - 200px );
         overflow-y: auto;
         overflow-x: hidden;
+    }
+    .messages-title{
+        padding: 4px 0;
+        margin: 0;
+        font-size: 21px;
+        border-bottom: 1px solid #dee2e6;
+    }
+    .messages-list{
+        height: 400px;
+        margin-top: 10px;
     }
 </style>

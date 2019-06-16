@@ -1,4 +1,5 @@
 <script>
+
     export default {
         name: 'c-input',
         props: ['value', 'bgColor', 'textColor', 'error'],

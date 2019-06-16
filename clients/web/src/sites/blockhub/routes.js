@@ -45,7 +45,7 @@ export default [
         path: '/streams',
         name: 'Streams',
         component: (resolve) => require(['@/ui/screens/streams'], resolve)
-    },,
+    },
     {
         path: '/stream/:id',
         name: 'Stream',
@@ -1138,6 +1138,21 @@ export default [
         path: '/article-page',
         name: 'Single Article Page',
         component: (resolve) => require(['@/ui/screens/article-page'], resolve)
+    },
+    {
+        path: '/payment',
+        name: 'Payment',
+        component: (resolve) => require(['@/ui/screens/payment'], resolve)
+    },
+    {
+        path: '/license',
+        name: 'License',
+        component: (resolve) => require(['@/ui/screens/license'], resolve)
+    },
+    {
+        path: '/identity/:id',
+        name: 'Identity',
+        component: (resolve) => require(['@/ui/screens/identity'], resolve)
     },
     {
         path: '/download/desktop/mac',

@@ -2,6 +2,11 @@ import Vue from 'vue'
 import store from './store'
 import axios from 'axios'
 
+const VueInputMask = require('vue-inputmask').default
+
+Vue.use(VueInputMask)
+
+
 Vue.directive('focus', {
     inserted(el) {
         el.focus()
