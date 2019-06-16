@@ -1223,15 +1223,16 @@
                     processing: false
                 },
                 newDiscussionRequest: {
-                    communityId: null,
                     name: '',
-                    value: ''
+                    value: '',
+                    meta: {}
                 },
                 createArticleRequest: {
                     communityId: 1,
                     key: '',
                     name: '',
-                    value: ''
+                    value: '',
+                    meta: {}
                 },
                 dragOptions: {
                     dropzoneSelector: '.does-not-exist',
@@ -1410,17 +1411,17 @@
                 this.$store.state.application.activeModal = null
             },
             async submitNewDiscussion(request) {
-                request.communityId = parseInt(this.$store.state.application.activeModalData.community.id, 10)
-                request.ownerId = this.$store.state.application.activeProfile.id
+                request.community = { id: this.$store.state.application.activeModalData.community.id }
+                request.owner = { id: this.$store.state.application.activeProfile.id }
 
-                await this.$store.dispatch('discussions/create', [request, {
+                const result = await this.$store.dispatch('discussions/create', [request, {
                     query: {
-                        $eager: '[community]'
+                        $eager: '[community, owner]'
                     }
                 }])
                 //this.notice = "Congratulations, your discussion has been created!"
                 this.$store.state.application.activeModal = null
-                this.$router.push('/community/discussion/' + request.id)
+                this.$router.push('/community/discussion/' + result.id)
             },
             deposit() {
 

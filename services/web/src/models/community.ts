@@ -37,7 +37,7 @@ export default class Community extends BaseModel {
                 relation: Model.HasOneThroughRelation,
                 modelClass: Profile,
                 filter: {
-                    relationKey: 'owner'
+                    'nodes.relationKey': 'owner'
                 },
                 beforeInsert(model) {
                     (model as Node).relationKey = 'owner'
@@ -48,7 +48,7 @@ export default class Community extends BaseModel {
                     through: {
                         from: 'nodes.fromCommunityId',
                         to: 'nodes.toProfileId',
-                        extra: ['relationKey']
+                        extra: ['nodes.relationKey']
                     }
                 }
             },

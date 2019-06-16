@@ -13,14 +13,14 @@ export default function(app) {
             max: 25,
             ...paginate
         },
-        allowedInsert: '[owner]',
-        allowedEager: '[owner.^, messages.^, messages.replies.^]',
-        allowedUpsert: '[owner]'
+        allowedInsert: '[]',
+        allowedEager: '[community.^, owner.^, messages.^, messages.replies.^]',
+        allowedUpsert: '[]'
     }
 
-    app.use('/discussions', createService(options))
+    app.use('discussions', createService(options))
 
-    const service = app.service('/discussions')
+    const service = app.service('discussions')
 
     service.hooks(hooks)
 }

@@ -20,12 +20,12 @@ export default class BaseModel extends Model {
     $beforeValidate(jsonSchema, json, opt) {
         // @ts-ignore
         if (this.constructor.timestamps) {
-            jsonSchema.properties.createdAt = { type: 'string', format: 'date-time' }
-            jsonSchema.properties.updatedAt = { type: 'string', format: 'date-time' }
+            jsonSchema.properties.createdAt = { type: ['string', 'object'], format: 'date-time' }
+            //jsonSchema.properties.updatedAt = { type: ['string', 'object'], format: 'date-time' }
         }
 
         jsonSchema.properties.id = { type: 'integer' }
-        jsonSchema.properties.key = { type: 'string' }
+        jsonSchema.properties.key = { type: ['string', 'null'] }
         jsonSchema.properties.value = { type: 'string' }
         jsonSchema.properties.status = {
             type: 'string',
@@ -46,6 +46,8 @@ export default class BaseModel extends Model {
     $beforeUpdate() {
         // @ts-ignore
         if (!this.constructor.timestamps) return
+        //// @ts-ignore
+        //if (typeof this.createdAt === 'function') this.createdAt = this.createdAt.toISOString()
         this.updatedAt = new Date().toISOString()
     }
 

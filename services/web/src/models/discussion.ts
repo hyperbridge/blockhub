@@ -34,19 +34,12 @@ export default class Discussion extends BaseModel {
             owner: {
                 relation: Model.HasOneThroughRelation,
                 modelClass: Profile,
-                filter: {
-                    relationKey: 'owner'
-                },
-                beforeInsert(model) {
-                    (model as Node).relationKey = 'owner'
-                },
                 join: {
                     from: 'discussions.id',
                     to: 'profiles.id',
                     through: {
                         from: 'nodes.fromDiscussionId',
-                        to: 'nodes.toProfileId',
-                        extra: ['relationKey']
+                        to: 'nodes.toProfileId'
                     }
                 }
             },
@@ -141,11 +134,11 @@ export default class Discussion extends BaseModel {
                     (model as Node).relationKey = 'discussions'
                 },
                 join: {
-                    from: 'discussions.id',
-                    to: 'communities.id',
+                    from: 'communities.id',
+                    to: 'discussions.id',
                     through: {
-                        from: 'nodes.fromDiscussionId',
-                        to: 'nodes.toCommunityId',
+                        from: 'nodes.fromCommunityId',
+                        to: 'nodes.toDiscussionId',
                         extra: ['relationKey']
                     }
                 }

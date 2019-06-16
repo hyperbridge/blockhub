@@ -90,19 +90,19 @@ export default {
         await store.dispatch('discussions/find', {
             query: {
                 id: params.id,
-                $eager: '[messages.^, messages.replies.^]'
+                $eager: '[community, messages.^, messages.replies.^]'
             }
         })
 
         const discussion = store.getters['discussions/get'](params.id)
-        const forum = { id: 1, name: 'zzz' } // store.getters['community/get'](discussion.communityId)
+        const forum = discussion.community // store.getters['community/get'](discussion.communityId)
 
         return {
             discussion,
             breadcrumbLinks: [
                 { to: { path: '/' }, title: 'Home' },
                 { to: { path: '/community' }, title: 'Community' },
-                { to: { path: '/community/discussions' }, title: 'Forums' },
+                { to: { path: '/community/forums' }, title: 'Forums' },
                 { to: { path: `/community/forum/${forum.id}` }, title: forum.name },
                 { to: { path: `/discussion/${discussion.id}` }, title: discussion.name }
             ]

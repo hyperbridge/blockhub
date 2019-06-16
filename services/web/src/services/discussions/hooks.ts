@@ -34,13 +34,13 @@ const create = function(options = {}) {
             throw new Error('A discussion must have a account')
         }
 
-        const community = await app.service('communities').get(data.communityId)
+        const community = await app.service('communities').get(data.community.id)
 
-        if (data.communityId !== community.id) {
+        if (!community) {
             throw new Error('A discussion must have a community')
         }
 
-        const owner = await app.service('profiles').get(data.ownerId)
+        const owner = await app.service('profiles').get(data.owner.id)
 
         if (owner.accountId !== account.id) {
             throw new Error('Discussion must be owned by a profile of authenticated account')
@@ -55,15 +55,39 @@ const create = function(options = {}) {
             key,
             name,
             value,
-            meta,
-            //meta: context.data,
-            owner: owner
+            meta
+        }
+
+        context.relations = {
+            owner,
+            community
         }
 
         return context
     }
 }
 
+const afterCreate = function(options = {}) {
+    return async context => {
+        const { app, data, relations, result } = context
+
+        console.log('After discussion creation request: ', result, relations)
+
+        const { owner, community } = relations
+
+        result.community = community
+        result.owner = owner
+
+        await app.service('discussions').update(result.id, result, {
+            relate: [
+                'community',
+                'owner'
+            ]
+        })
+
+        return context
+    }
+}
 
 const validatePermission = function(options = {}) {
     return async context => {
@@ -71,12 +95,17 @@ const validatePermission = function(options = {}) {
 
         const account = context.params.user
 
-        const discussion = await app.service('discussions').get(data.id)
-        const profile = await app.service('profiles').get(discussion.ownerId)
-
-        if (profile.accountId !== account.id) {
-            throw new Error('Discussion must be owned by a profile of authenticated account')
-        }
+        // const discussion = await app.service('discussions').find({
+        //     query: {
+        //         'discussions.id': data.id,
+        //         $eager: '[owner]',
+        //         $joinEager: '[owner]'
+        //     }
+        // })
+        // console.log(222, discussion)
+        // if (discussion.owner.accountId !== account.id) {
+        //     throw new Error('Discussion must be owned by a profile of authenticated account')
+        // }
 
         return context
     }
@@ -96,7 +125,7 @@ export const after = {
     all: [],
     find: [fillAll()],
     get: [fillOne()],
-    create: [],
+    create: [afterCreate()],
     update: [],
     patch: [],
     remove: []
