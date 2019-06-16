@@ -1,46 +1,30 @@
 <template>
     <div class="c-user-input">
-        <div
-            v-if="typing"
-            class="c-user-input__typing">
+        <div v-if="typing" class="c-user-input__typing">
             Josh and Ann is typing ...
         </div>
-        <form
-            class="c-user-input-field"
-            :class="{ 'active': inputActive }">
-            <div
-                v-if="user"
-                class="c-user-input--avatar">
-                <c-chat-user-avatar
-                    :avatar="user.avatar"
-                    :name="user.name"
-                    :number="user.number"
-                    style="width: 25px; height: 25px" />
+        <form class="c-user-input-field" :class="{ 'active': inputActive }">
+            <div v-if="user" class="c-user-input--avatar">
+                <c-chat-user-avatar :avatar="user.avatar" :name="user.name" :number="user.number" style="width: 25px; height: 25px" />
             </div>
             <div
-                ref="userInput"
                 role="button"
                 tabIndex="0"
                 contentEditable="true"
                 :placeholder="placeholder"
                 class="c-user-input--text"
+                ref="userInput"
                 @focus="setInputActive(true)"
                 @blur="setInputActive(false)"
                 @keydown="handleKey" />
             <div class="c-user-input--buttons">
-                <c-button
-                    status="plain"
-                    @click="$emit('attachment')">
+                <c-button v-if="showAttachment" status="plain" @click="$emit('attachment')">
                     <i class="fas fa-paperclip" />
                 </c-button>
-                <c-button
-                    status="plain"
-                    @click="$emit('emoji')">
+                <c-button v-if="showEmoji" status="plain" @click="$emit('emoji')">
                     <i class="far fa-smile" />
                 </c-button>
-                <c-button
-                    status="plain"
-                    @click="$emit('send')">
+                <c-button status="plain" @click="$emit('send')">
                     <svg
                         version="1.1"
                         class="c-user-input--send-icon"
@@ -60,12 +44,8 @@
                         </g>
                     </svg>
                 </c-button>
-                <c-button
-                    status="plain"
-                    @click="$emit('like')">
-                    <i
-                        class="fas fa-thumbs-up"
-                        style="color: #00aeff" />
+                <c-button status="plain" @click="$emit('like')">
+                    <i class="fas fa-thumbs-up" style="color: #00aeff" />
                 </c-button>
             </div>
         </form>
@@ -87,6 +67,14 @@ export default {
         typing: {
             type: Boolean,
             default: false
+        },
+        showAttachment: {
+            type: Boolean,
+            default: true
+        },
+        showEmoji: {
+            type: Boolean,
+            default: true
         },
         user: Object
     },

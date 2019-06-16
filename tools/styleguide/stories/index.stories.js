@@ -6414,6 +6414,237 @@ storiesOf('Draggble video', module)
     }))
 
 
+storiesOf('Video', module)
+    .add('default', () => ({
+        components: {
+            'c-video': (resolve) => require(['@/components/c-video'], resolve)
+        },
+        data() {
+            return {
+                youtube: '-QEdXZWMe-M',
+                twitch: 'inflameswemust',
+                src: 'https://static.videezy.com/system/resources/previews/000/004/944/original/Magical_Tree_4K_Living_Background.mp4',
+            }
+        },
+        template: `<div class="p-4">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="h3 text-white">
+                                Youtube video
+                            </div>
+                            <c-video :youtube="youtube" height="300" />
+                        </div>
+                        <div class="col-4">
+                            <div class="h3 text-white">
+                                Twitch video
+                            </div>
+                            <c-video :twitch="twitch" height="300" />
+                        </div>
+                        <div class="col-4">
+                            <div class="h3 text-white">
+                                Local video
+                            </div>
+                            <c-video :src="src" height="300" />
+                        </div>
+                    </div>
+            </div>`
+    }))
+
+
+storiesOf('Pricing table', module)
+    .add('v1', () => ({
+        components: {
+            'c-pricing-table': (resolve) => require(['@/components/pricing-table/v1'], resolve),
+        },
+        data() {
+            return {
+                items: [
+                    {
+                        title: 'Premium',
+                        description: 'This is really a good deal!',
+                        price: '29',
+                        highline: false,
+                        specs: [
+                            'Some great feature',
+                            'Another coll feature',
+                            'And more ...',
+                        ]
+                    },
+                    {
+                        title: 'Plus',
+                        description: 'This is really a good deal!',
+                        price: '59',
+                        highline: true,
+                        specs: [
+                            'Some great feature',
+                            'Another coll feature',
+                            'And more ...',
+                        ]
+                    },
+                    {
+                        title: 'Basic',
+                        description: 'This is really a good deal!',
+                        price: '39',
+                        highline: false,
+                        specs: [
+                            'Some great feature',
+                            'Another coll feature',
+                            'And more ...',
+                        ]
+                    }
+                ]
+            }
+        },
+        template: `<div><c-pricing-table :items="items" /></div>`
+    }))
+    .add('v2', () => ({
+        components: {
+            'c-pricing-table': (resolve) => require(['@/components/pricing-table/v2'], resolve),
+        },
+        data() {
+            return {
+                items: [
+                    {
+                        title: 'Premium',
+                        description: 'This is really a good deal!',
+                        price: '29',
+                        highline: false,
+                        specs: [
+                            'Some great feature',
+                            'Another coll feature',
+                            'And more ...',
+                        ]
+                    },
+                    {
+                        title: 'Plus',
+                        description: 'This is really a good deal!',
+                        price: '59',
+                        highline: true,
+                        specs: [
+                            'Some great feature',
+                            'Another coll feature',
+                            'And more ...',
+                        ]
+                    },
+                    {
+                        title: 'Basic',
+                        description: 'This is really a good deal!',
+                        price: '39',
+                        highline: false,
+                        specs: [
+                            'Some great feature',
+                            'Another coll feature',
+                            'And more ...',
+                        ]
+                    }
+                ]
+            }
+        },
+        template: `<div><c-pricing-table :items="items" /></div>`
+    }))
+
+storiesOf('Pro mode', module)
+    .add('button', () => ({
+        components: {
+            'c-pro-mode-button': (resolve) => require(['@/components/pro-mode/button.vue'], resolve),
+        },
+        template: `<div class="p-4">
+                        <c-pro-mode-button icon="gem">
+                            Go Pro
+                        </c-pro-mode-button>
+                    </div>`
+    }))
+    .add('notice 1', () => ({
+        components: {
+            'c-pro-mode-n1': (resolve) => require(['@/components/pro-mode/notice1.vue'], resolve),
+        },
+        template: `<div class="p-4">
+                        <c-pro-mode-n1>
+                            Hey Eron, you're on a Basic account. Unlock more space and sharing controls!
+                        </c-pro-mode-n1>
+                    </div>`
+    }))
+    .add('notice 2', () => ({
+        components: {
+            'c-pro-mode-n2': (resolve) => require(['@/components/pro-mode/notice2.vue'], resolve),
+        },
+        template: `<div class="p-4">
+                        <c-pro-mode-n2>
+                            Hey Eron, you're on a Basic account. Unlock more space and sharing controls!
+                        </c-pro-mode-n2>
+                    </div>`
+    }))
+
+
+storiesOf('Contributor Box', module)
+    .add('default', () => ({
+        components: {
+            'c-contributor-box': (resolve) => require(['@/components/contributor-box'], resolve),
+        },
+        data() {
+            return {
+                steps: [
+                    {
+                        value: true,
+                        label: 'Add a headline to your profile',
+                        description: 'Tell the community a bit about your self'
+                    },
+                    {
+                        value: false,
+                        label: 'Upvote 3 days in a row',
+                        description: 'Come back 3 days in a row and upvote any product'
+                    },
+                    {
+                        value: false,
+                        label: 'Subscribe to the daily digest',
+                        description: 'Keep up-to-date with the latest in tech'
+                    },
+                    {
+                        value: false,
+                        label: 'Upvote 11 products',
+                        description: 'Explore Product Hunt and upvote 11 products'
+                    },
+                ]
+            }
+        },
+        template: `<div class="p-5">
+                      <c-contributor-box :steps="steps" />
+                  </div>`
+    }))
+
+storiesOf('Gift box', module)
+    .add('default', () => ({
+        components: {
+            'c-gift-box': (resolve) => require(['@/components/gift'], resolve),
+        },
+        data() {
+            return {
+                status: 'Unredeemed',
+                user: 'Nicola Roberts',
+                date: '4 May',
+                text: '<p>Massa enim ligula diam donec lectus ut ornare vitae ipsum elementum lectus in vivamus molestie .</p><p>Nulla molestie mattis arcu et ornare porta nulla ipsum sit, ultricies nam integer.</p> ',
+                gift: {
+                    name: 'Some gift name',
+                    image: 'https://media01.gameloft.com/layout/support/revamp/assets/images/game-banner/banner_CC_Windows.jpg',
+                    description: 'In eget massa a mauris ultricies finibus a nec nunc. In faucibus consectetur diam id fermentum.\n' +
+                        '                    Aenean\n' +
+                        '                    dapibus massa quis venenatis porta. Curabitur non tempor dolor. Proin pulvinar ipsum turpis, vel\n' +
+                        '                    auctor\n' +
+                        '                    elit laoreet ac. Duis consectetur sem magna.'
+                }
+            }
+        },
+        template: `<div class="p-5">
+                      <c-gift-box :status="status" 
+                                    :user="user"
+                                    :date="date"
+                                    :text="text"
+                                    :gift="gift" 
+                                    @accept="" 
+                                    @decline="" />
+                  </div>`
+    }))
+
 
 /*
      Dynamic import - test version

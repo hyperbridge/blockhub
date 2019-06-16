@@ -1,11 +1,8 @@
 <template>
-    <c-layout
-        navigationKey="store"
-        :showBreadcrumbs="false"
-        :showRightPanel="false">
+    <c-layout navigationKey="store" :showBreadcrumbs="false" :showRightPanel="false">
         <div class="single-stream">
             <div class="single-stream__wrapper">
-                <div class="row">
+                <div class="row align-items-stretch">
                     <div class="col-12 col-lg-9 position-relative">
                         <div class="single-stream__nav">
                             <c-button
@@ -18,57 +15,52 @@
                                 aria-controls="product_nav">
                                 Menu
                             </c-button>
-                            <div
-                                id="product_nav"
-                                class="collapse show product_nav">
+                            <div id="product_nav" class="collapse show product_nav">
                                 <ul class="nav nav-tabs margin-bottom-30 justify-content-between">
                                     <li class="nav-item active">
-                                        <a
-                                            class="nav-link active"
-                                            href="#">Online</a>
+                                        <a class="nav-link active" href="#">Online</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a
-                                            class="nav-link"
-                                            href="#">Videos</a>
+                                        <a class="nav-link" href="#">Videos</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a
-                                            class="nav-link"
-                                            href="#">Clips</a>
+                                        <a class="nav-link" href="#">Clips</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a
-                                            class="nav-link"
-                                            href="#">Followers</a>
+                                        <a class="nav-link" href="#">Followers</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a
-                                            class="nav-link"
-                                            href="#">Events</a>
+                                        <a class="nav-link" href="#">Events</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a
-                                            class="nav-link"
-                                            href="#">Followers</a>
+                                        <a class="nav-link" href="#">Followers</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a
-                                            class="nav-link"
-                                            href="#">Following</a>
+                                        <a class="nav-link" href="#">Following</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <template v-if="section == 'online'">
-                            <c-video
-                                src="https://www.w3schools.com/tags/mov_bbb.mp4"
-                                width="100%"
-                                :controls="true" />
+                            <c-video src="https://www.w3schools.com/tags/mov_bbb.mp4" width="100%" :controls="true" />
                         </template>
                     </div>
-                    <div class="col-12 col-lg-3 pl-0">
-                        <c-chat :messages="messages" />
+                    <div class="col-12 col-lg-3 pl-0 flex-column align-items-end">
+                        <div class="messages-title">
+                            <div class="h3">
+                                Chat
+                            </div>
+                        </div>
+                        <div class="messages-list">
+                            <c-scrollable-content>
+                                <c-message-small
+                                    v-for="msg in messages"
+                                    :author="msg.author"
+                                    :color="msg.color"
+                                    :content="msg.content" />
+                            </c-scrollable-content>
+                        </div>
+                        <c-chat-answer class="mt-auto" :showAttachment="false" />
                     </div>
                 </div>
             </div>
@@ -80,71 +72,132 @@
 export default {
     components: {
         'c-video': () => import('~/components/video').then(m => m.default || m),
-        'c-chat': () => import('~/components/chat/chat').then(m => m.default || m)
+        'c-chat': () => import('~/components/chat/chat').then(m => m.default || m),
+        'c-chat-answer': () => import('~/components/chat-new/answer-field/field').then(m => m.default || m),
+        'c-message-small': () => import('~/components/chat-new/message-small').then(m => m.default || m),
+        'c-scrollable-content': () => import('~/components/chat-new/content/scrollable-content').then(m => m.default || m)
     },
     data() {
         return {
             section: 'online',
             messages: [
                 {
-                    'id': 1,
-                    'author': 1,
+                    'author': 'Joseph',
                     'content': 'Hello',
-                    'createdAt': ''
+                    'createdAt': '',
+                    'color': 'green'
                 },
                 {
-                    'id': 2,
-                    'author': 2,
+                    'author': 'killer',
                     'content': 'Is it a good offer?',
-                    'createdAt': ''
+                    'createdAt': '',
+                    'color': 'green'
                 },
                 {
-                    'id': 3,
-                    'author': 3,
+                    'author': 'Mort',
                     'content': 'Looks good',
-                    'createdAt': ''
+                    'createdAt': '',
+                    'color': 'red'
                 },
                 {
-                    'id': 4,
-                    'author': 3,
+                    'author': 'Poll',
                     'content': 'Hi, what do you think about this offer?',
-                    'createdAt': ''
+                    'createdAt': '',
+                    'color': 'blue'
                 },
                 {
-                    'id': 4,
-                    'author': 1,
+                    'author': 'Alan',
                     'content': 'Hi, what do you think about this offer?',
-                    'createdAt': ''
+                    'createdAt': '',
+                    'color': 'purple'
                 },
                 {
-                    'id': 5,
-                    'author': 1,
+                    'author': 'klon',
                     'content': 'Ok',
-                    'createdAt': ''
+                    'createdAt': '',
+                    'color': 'yellow'
                 },
                 {
-                    'id': 6,
-                    'author': 1,
+                    'author': 'dorat',
                     'content': 'Yes',
-                    'createdAt': ''
+                    'createdAt': '',
+                    'color': 'darkblue'
                 },
                 {
-                    'id': 7,
-                    'author': 2,
+                    'author': 'Walter',
                     'content': 'Looks good',
                     'createdAt': ''
                 },
                 {
-                    'id': 8,
-                    'author': 3,
+                    'author': 'iglan',
                     'content': 'Hello',
+                    'createdAt': '',
+                    'color': 'green'
+                },
+                {
+                    'author': 'weltor',
+                    'content': 'Is it a good offer?',
+                    'createdAt': '',
+                    'color': 'green'
+                },
+                {
+                    'author': 'Joseph',
+                    'content': 'Hello',
+                    'createdAt': '',
+                    'color': 'green'
+                },
+                {
+                    'author': 'killer',
+                    'content': 'Is it a good offer?',
+                    'createdAt': '',
+                    'color': 'green'
+                },
+                {
+                    'author': 'Mort',
+                    'content': 'Looks good',
+                    'createdAt': '',
+                    'color': 'red'
+                },
+                {
+                    'author': 'Poll',
+                    'content': 'Hi, what do you think about this offer?',
+                    'createdAt': '',
+                    'color': 'blue'
+                },
+                {
+                    'author': 'Alan',
+                    'content': 'Hi, what do you think about this offer?',
+                    'createdAt': '',
+                    'color': 'purple'
+                },
+                {
+                    'author': 'klon',
+                    'content': 'Ok',
+                    'createdAt': '',
+                    'color': 'yellow'
+                },
+                {
+                    'author': 'dorat',
+                    'content': 'Yes',
+                    'createdAt': '',
+                    'color': 'darkblue'
+                },
+                {
+                    'author': 'Walter',
+                    'content': 'Looks good',
                     'createdAt': ''
                 },
                 {
-                    'id': 9,
-                    'author': 1,
+                    'author': 'iglan',
+                    'content': 'Hello',
+                    'createdAt': '',
+                    'color': 'green'
+                },
+                {
+                    'author': 'weltor',
                     'content': 'Is it a good offer?',
-                    'createdAt': ''
+                    'createdAt': '',
+                    'color': 'green'
                 }
             ]
         }
@@ -157,5 +210,15 @@ export default {
         max-height: calc( 100vh - 200px );
         overflow-y: auto;
         overflow-x: hidden;
+    }
+    .messages-title{
+        padding: 4px 0;
+        margin: 0;
+        font-size: 21px;
+        border-bottom: 1px solid #dee2e6;
+    }
+    .messages-list{
+        height: 400px;
+        margin-top: 10px;
     }
 </style>

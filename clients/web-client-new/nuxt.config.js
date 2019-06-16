@@ -79,6 +79,7 @@ export default {
         { src: '~/plugins/vue-popover', ssr: false },
         { src: '~/plugins/vue-draggable', ssr: false },
         { src: '~/plugins/vue-emoji-mart', ssr: false },
+        { src: '~/plugins/vue-inputmask', ssr: false },
         { src: '~/plugins/autosize', ssr: false },
         { src: '~/plugins/jquery', ssr: false },
         { src: '~/plugins/summernote', ssr: false },
