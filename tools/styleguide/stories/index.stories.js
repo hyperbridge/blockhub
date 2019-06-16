@@ -1942,7 +1942,7 @@ storiesOf('Popups', module)
     }))
     .add('play', () => ({
         components:{
-            'c-play-popup' : (resolve) => require(['@/components/popups/play'], resolve)
+            'c-play-popup' : () => import('~/components/popups/play').then(m => m.default || m)
         },
         data(){
             return{
@@ -1953,7 +1953,7 @@ storiesOf('Popups', module)
     }))
     .add('Add to Collection', () =>({
         components:{
-            'c-popup-collection-add': (resolve) => require(['@/components/popups/collection-add'], resolve),
+            'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m),
         },
         data(){
             return{
@@ -3770,7 +3770,7 @@ storiesOf('Product Review', module)
     }))
     .add('view review', () => ({
         components: {
-            'c-view-review': (resolve) => require(['@/components/review/view'], resolve),
+            'c-view-review': () => import('~/components/review/view').then(m => m.default || m),
         },
         template: `<div class='p-5' style="width: 1000px"><c-view-review /></div>`
     }))
@@ -4675,7 +4675,7 @@ storiesOf('Landing Page', module)
     }))
     .add('divider', () => ({
         components: {
-            'c-landing-divider': (resolve) => require(['@/components/landing/block-content/divider'], resolve),
+            'c-landing-divider': () => import('~/components/landing/block-content/divider').then(m => m.default || m),
         },
         template: `
         <div class="p-5">
@@ -4685,7 +4685,7 @@ storiesOf('Landing Page', module)
     }))
     .add('level', () => ({
         components: {
-            'c-landing-level': (resolve) => require(['@/components/landing/block-content/level'], resolve),
+            'c-landing-level': () => import('~/components/landing/block-content/level').then(m => m.default || m),
         },
         template: `
         <div class="p-5">
@@ -4706,7 +4706,7 @@ storiesOf('Landing Page', module)
     }))
     .add('feature item', () => ({
         components: {
-            'c-landing-feature-item': (resolve) => require(['@/components/landing/block-content/feature-item'], resolve),
+            'c-landing-feature-item': () => import('~/components/landing/block-content/feature-item').then(m => m.default || m),
         },
         data(){
             return{
@@ -4741,7 +4741,7 @@ storiesOf('Landing Page', module)
     }))
     .add('benefactor', () => ({
         components:{
-            'c-landing-benefactor' : (resolve) => require(['@/components/landing/block-content/benefactor'], resolve),
+            'c-landing-benefactor' : () => import('~/components/landing/block-content/benefactor').then(m => m.default || m),
         },
         data(){
             return{
@@ -4780,7 +4780,7 @@ storiesOf('Landing Page', module)
     }))
     .add('reward list', () =>({
         components:{
-            'c-landing-reward-list': (resolve) => require(['@/components/landing/block-content/reward-list'], resolve),
+            'c-landing-reward-list': () => import('~/components/landing/block-content/reward-list').then(m => m.default || m),
         },
         data(){
             return{
@@ -4802,19 +4802,19 @@ storiesOf('Landing Page', module)
     .add('page', () => ({
         components: {
             'c-landing-block': LandingContent,
-            'c-landing-block-title' : (resolve) => require(['@/components/landing/block-title/simple'], resolve),
-            'c-landing-block-title-shadow' : (resolve) => require(['@/components/landing/block-title/shadow'], resolve),
-            'c-landing-block-title-gradient' : (resolve) => require(['@/components/landing/block-title/gradient'], resolve),
-            'c-landing-feature-item': (resolve) => require(['@/components/landing/block-content/feature-item'], resolve),
-            'c-landing-tabs': (resolve) => require(['@/components/landing/block-content/tabs'], resolve),
-            'c-landing-tab': (resolve) => require(['@/components/landing/block-content/tab'], resolve),
-            'c-landing-slider' : (resolve) => require(['@/components/landing/block-content/slider'], resolve),
-            'c-landing-gradient-block' : (resolve) => require(['@/components/landing/block-content/gradient'], resolve),
-            'c-landing-benefactor' : (resolve) => require(['@/components/landing/block-content/benefactor'], resolve),
-            'c-landing-level': (resolve) => require(['@/components/landing/block-content/level'], resolve),
-            'c-landing-reward-list': (resolve) => require(['@/components/landing/block-content/reward-list'], resolve),
-            'c-landing-divider': (resolve) => require(['@/components/landing/block-content/divider'], resolve),
-            'c-landing-button': (resolve) => require(['@/components/landing/button'], resolve),
+            'c-landing-block-title' : () => import('~/components/landing/block-title/simple').then(m => m.default || m),
+            'c-landing-block-title-shadow' : () => import('~/components/landing/block-title/shadow').then(m => m.default || m),
+            'c-landing-block-title-gradient' : () => import('~/components/landing/block-title/gradient').then(m => m.default || m),
+            'c-landing-feature-item': () => import('~/components/landing/block-content/feature-item').then(m => m.default || m),
+            'c-landing-tabs': () => import('~/components/landing/block-content/tabs').then(m => m.default || m),
+            'c-landing-tab': () => import('~/components/landing/block-content/tab').then(m => m.default || m),
+            'c-landing-slider' : () => import('~/components/landing/block-content/slider').then(m => m.default || m),
+            'c-landing-gradient-block' : () => import('~/components/landing/block-content/gradient').then(m => m.default || m),
+            'c-landing-benefactor' : () => import('~/components/landing/block-content/benefactor').then(m => m.default || m),
+            'c-landing-level': () => import('~/components/landing/block-content/level').then(m => m.default || m),
+            'c-landing-reward-list': () => import('~/components/landing/block-content/reward-list').then(m => m.default || m),
+            'c-landing-divider': () => import('~/components/landing/block-content/divider').then(m => m.default || m),
+            'c-landing-button': () => import('~/components/landing/button').then(m => m.default || m),
         },
         data(){
             return{
@@ -5104,7 +5104,7 @@ storiesOf('Landing Page', module)
 storiesOf('Token Sale Box', module)
     .add('default', () => ({
         components: {
-            'c-token-sale': (resolve) => require(['@/components/token-sale-box'], resolve),
+            'c-token-sale': () => import('~/components/token-sale-box').then(m => m.default || m),
         },
         template: `
         <div class="p-5" style="width: 1200px;">
@@ -5119,7 +5119,7 @@ storiesOf('Token Sale Box', module)
     }))
     .add('type 2', () => ({
         components: {
-            'c-toke-sale-2': (resolve) => require(['@/components/token-sale-box/type-2'], resolve),
+            'c-toke-sale-2': () => import('~/components/token-sale-box/type-2').then(m => m.default || m),
         },
         template: `
         <div class="p-5" style="width: 1200px;">
@@ -5136,7 +5136,7 @@ storiesOf('Token Sale Box', module)
 storiesOf('Guide', module)
     .add('default', () =>({
         components:{
-            'c-guide': (resolve) => require(['@/components/guide'], resolve),
+            'c-guide': () => import('~/components/guide').then(m => m.default || m),
         },
         template: `<c-guide />`
     }))
@@ -5144,7 +5144,7 @@ storiesOf('Guide', module)
 storiesOf('Video Popup', module)
     .add('default', () =>({
         components:{
-            'c-video-popup': (resolve) => require(['@/components/video-popup'], resolve),
+            'c-video-popup': () => import('~/components/video-popup').then(m => m.default || m),
             Author
         },
         data(){
@@ -5245,8 +5245,8 @@ storiesOf('Video Popup', module)
     }))
     .add('video list', () => ({
         components:{
-            'c-video-popup': (resolve) => require(['@/components/video-popup'], resolve),
-            'c-video-item': (resolve) => require(['@/components/video-list'], resolve),
+            'c-video-popup': () => import('~/components/video-popup').then(m => m.default || m),
+            'c-video-item': () => import('~/components/video-list').then(m => m.default || m),
             Author
         },
         data(){
@@ -5387,12 +5387,12 @@ storiesOf('Video Popup', module)
 storiesOf('Wallet Popup', module)
     .add('default', () => ({
         components: {
-            'c-wallet-base': (resolve) => require(['@/components/wallet/base'], resolve),
-            'c-wallet-main': (resolve) => require(['@/components/wallet'], resolve),
-            'c-wallet-transfer': (resolve) => require(['@/components/wallet/transfer'], resolve),
-            'c-wallet-deposit': (resolve) => require(['@/components/wallet/deposit'], resolve),
-            'c-wallet-edit': (resolve) => require(['@/components/wallet/account-edit'], resolve),
-            'c-wallet-token': (resolve) => require(['@/components/wallet/token'], resolve),
+            'c-wallet-base': () => import('~/components/wallet/base').then(m => m.default || m),
+            'c-wallet-main': () => import('~/components/wallet').then(m => m.default || m),
+            'c-wallet-transfer': () => import('~/components/wallet/transfer').then(m => m.default || m),
+            'c-wallet-deposit': () => import('~/components/wallet/deposit').then(m => m.default || m),
+            'c-wallet-edit': () => import('~/components/wallet/account-edit').then(m => m.default || m),
+            'c-wallet-token': () => import('~/components/wallet/token').then(m => m.default || m),
         },
         template: `<div class="row p-3 m-0 flex-wrap" style="width: 1125px">
                         <div class="mx-2 mb-4">
@@ -5432,15 +5432,15 @@ storiesOf('Wallet Popup', module)
 storiesOf('Chat', module)
     .add('base', () => ({
         components: {
-            'c-chat-base': (resolve) => require(['@/components/chat-new/base'], resolve),
-            'c-chat-group': (resolve) => require(['@/components/chat-new/content/group'], resolve),
-            'c-chat-private': (resolve) => require(['@/components/chat-new/content/private'], resolve),
-            'c-chat-message': (resolve) => require(['@/components/chat-new/message'], resolve),
-            'c-chat-user': (resolve) => require(['@/components/chat-new/user'], resolve),
-            'c-chat-group-welcome': (resolve) => require(['@/components/chat-new/content/welcome'], resolve),
-            'c-chat-group-sidebar': (resolve) => require(['@/components/chat-new/content/group-list'], resolve),
-            'c-chat-group-new': (resolve) => require(['@/components/chat-new/content/new-group'], resolve),
-            'c-chat-friends-list': (resolve) => require(['@/components/chat-new/friends-list/index'], resolve),
+            'c-chat-base': () => import('~/components/chat-new/base').then(m => m.default || m),
+            'c-chat-group': () => import('~/components/chat-new/content/group').then(m => m.default || m),
+            'c-chat-private': () => import('~/components/chat-new/content/private').then(m => m.default || m),
+            'c-chat-message': () => import('~/components/chat-new/message').then(m => m.default || m),
+            'c-chat-user': () => import('~/components/chat-new/user').then(m => m.default || m),
+            'c-chat-group-welcome': () => import('~/components/chat-new/content/welcome').then(m => m.default || m),
+            'c-chat-group-sidebar': () => import('~/components/chat-new/content/group-list').then(m => m.default || m),
+            'c-chat-group-new': () => import('~/components/chat-new/content/new-group').then(m => m.default || m),
+            'c-chat-friends-list': () => import('~/components/chat-new/friends-list/index').then(m => m.default || m),
         },
         data(){
             return{
@@ -5620,7 +5620,7 @@ storiesOf('Chat', module)
 storiesOf('Games list', module)
     .add('base', () => ({
         components:{
-            'c-game-list': (resolve) => require(['@/components/games-list/index'], resolve)
+            'c-game-list': () => import('~/components/games-list/index').then(m => m.default || m)
         },
         data(){
             return{
@@ -5736,7 +5736,7 @@ storiesOf('Games list', module)
 storiesOf('Text label', module)
     .add('default', () => ({
         components:{
-            'c-text-label': (resolve) => require(['@/components/text-label'], resolve),
+            'c-text-label': () => import('~/components/text-label').then(m => m.default || m),
         },
         template: `<div class="p-3 m-0 text-white" style="width: 900px">
                     <c-text-label>Default</c-text-label>
@@ -5758,7 +5758,7 @@ storiesOf('Text label', module)
 storiesOf('Option Block', module)
     .add('default', () => ({
         components:{
-            'c-option-block': (resolve) => require(['@/components/option-block'], resolve),
+            'c-option-block': () => import('~/components/option-block').then(m => m.default || m),
         },
         data(){
             return{
@@ -5801,7 +5801,7 @@ storiesOf('Option Block', module)
 storiesOf('Games Library', module)
     .add('default', () => ({
         components:{
-            'c-game-library-card': (resolve) => require(['@/components/game-library/card-item.vue'], resolve),
+            'c-game-library-card': () => import('~/components/game-library/card-item.vue').then(m => m.default || m),
         },
         data(){
             return{
@@ -5827,7 +5827,7 @@ storiesOf('Games Library', module)
 storiesOf('Quick Launch', module)
     .add('default', () => ({
         components:{
-            'c-quick-launch': (resolve) => require(['@/components/quick-launch'], resolve),
+            'c-quick-launch': () => import('~/components/quick-launch').then(m => m.default || m),
         },
         data(){
             return{
@@ -5853,7 +5853,7 @@ storiesOf('Quick Launch', module)
 storiesOf('Global Search', module)
     .add('default', () => ({
         components:{
-            'c-global-search': (resolve) => require(['@/components/global-search'], resolve),
+            'c-global-search': () => import('~/components/global-search').then(m => m.default || m),
         },
         data(){
             return{
@@ -5869,7 +5869,7 @@ storiesOf('Global Search', module)
     }))
     .add('header bar', () => ({
         components:{
-            'c-bar-search': (resolve) => require(['@/components/global-search/second'], resolve),
+            'c-bar-search': () => import('~/components/global-search/second').then(m => m.default || m),
         },
         data(){
             return{
@@ -5889,7 +5889,7 @@ storiesOf('Global Search', module)
 storiesOf('Giphy', module)
     .add('default', () => ({
         components:{
-            'c-giphy': (resolve) => require(['@/components/giphy'], resolve),
+            'c-giphy': () => import('~/components/giphy').then(m => m.default || m),
         },
         data(){
             return{
@@ -5918,7 +5918,7 @@ storiesOf('Giphy', module)
 storiesOf('Table', module)
     .add('default', () => ({
         components: {
-            'c-table-simple': (resolve) => require(['@/components/table-simple'], resolve),
+            'c-table-simple': () => import('~/components/table-simple').then(m => m.default || m),
         },
         data(){
             return{
@@ -5988,8 +5988,8 @@ storiesOf('Table', module)
 storiesOf('Text Formatting', module)
     .add('default', () => ({
         components:{
-            'c-text-formatting': (resolve) => require(['@/components/text-formatting'], resolve),
-            'c-basic-popup': (resolve) => require(['@/components/popups/basic.vue'], resolve),
+            'c-text-formatting': () => import('~/components/text-formatting').then(m => m.default || m),
+            'c-basic-popup': () => import('~/components/popups/basic.vue').then(m => m.default || m),
         },
         template: `<div class="p-4" style="width: 600px">
                     <c-basic-popup :activated="true">
@@ -6004,7 +6004,7 @@ storiesOf('Text Formatting', module)
 storiesOf('Activity block', module)
     .add('default', () => ({
         components:{
-            'c-activity-block': (resolve) => require(['@/components/activity-block'], resolve),
+            'c-activity-block': () => import('~/components/activity-block').then(m => m.default || m),
         },
         template: `<div style="width: 1000px;" class="p-5">
                     <c-activity-block @play="" @install="" @help="" labelIcon="list" :percent="37" earnedAchievements="31" totalAchievements="193">
@@ -6025,7 +6025,7 @@ storiesOf('Activity block', module)
 storiesOf('Metro', module)
     .add('metro-tile', () => ({
         components:{
-            'c-metro-tile': (resolve) => require(['@/components/metro/metro-tile'], resolve),
+            'c-metro-tile': () => import('~/components/metro/metro-tile').then(m => m.default || m),
         },
         data(){
             return{
@@ -6216,7 +6216,7 @@ storiesOf('Metro', module)
     }))
     .add('metro-item', () => ({
         components: {
-            'c-metro-item': (resolve) => require(['@/components/metro/metro-item'], resolve),
+            'c-metro-item': () => import('~/components/metro/metro-item').then(m => m.default || m),
         },
         data(){
             return{
@@ -6257,8 +6257,8 @@ storiesOf('Metro', module)
     }))
     .add('metro grid', () => ({
         components: {
-            'c-metro-grid': (resolve) => require(['@/components/metro/grid'], resolve),
-            'c-metro-item': (resolve) => require(['@/components/metro/metro-item'], resolve),
+            'c-metro-grid': () => import('~/components/metro/grid').then(m => m.default || m),
+            'c-metro-item': () => import('~/components/metro/metro-item').then(m => m.default || m),
         },
         data(){
             return{
@@ -6309,7 +6309,7 @@ storiesOf('Metro', module)
 storiesOf('Security check', module)
     .add('default', () => ({
         components:{
-            'c-security-check' : (resolve) => require(['@/components/security-check'], resolve),
+            'c-security-check' : () => import('~/components/security-check').then(m => m.default || m),
         },
         data(){
             return{
@@ -6344,7 +6344,7 @@ storiesOf('Security check', module)
 storiesOf('Browser UI', module)
     .add('default', () => ({
         components: {
-            'c-browser-ui' : (resolve) => require(['@/components/browser-ui'], resolve),
+            'c-browser-ui' : () => import('~/components/browser-ui').then(m => m.default || m),
         },
         template: `<div style="width: 600px" class="m-4"><c-browser-ui /></div>`
     }))
@@ -6352,7 +6352,7 @@ storiesOf('Browser UI', module)
 storiesOf('Settings', module)
     .add('default', () => ({
         components:{
-            'c-settings' : (resolve) => require(['@/components/settings'], resolve),
+            'c-settings' : () => import('~/components/settings').then(m => m.default || m),
         },
         template: `<div class="m-4" style="width: 1000px;">
                         <c-settings />
@@ -6362,7 +6362,7 @@ storiesOf('Settings', module)
 storiesOf('Add friends', module)
     .add('default', () => ({
         components: {
-            'c-add-friends': (resolve) => require(['@/components/add-friends'], resolve),
+            'c-add-friends': () => import('~/components/add-friends').then(m => m.default || m),
         },
         data(){
             return{
@@ -6408,7 +6408,7 @@ storiesOf('Add friends', module)
 storiesOf('Draggble video', module)
     .add('default', () => ({
         components: {
-            'c-draggable-video' : (resolve) => require(['@/components/draggable-video'], resolve),
+            'c-draggable-video' : () => import('~/components/draggable-video').then(m => m.default || m),
         },
         template: `<div><c-draggable-video /></div>`
     }))
@@ -6417,7 +6417,7 @@ storiesOf('Draggble video', module)
 storiesOf('Video', module)
     .add('default', () => ({
         components: {
-            'c-video': (resolve) => require(['@/components/c-video'], resolve)
+            'c-video': () => import('~/components/c-video').then(m => m.default || m)
         },
         data() {
             return {
@@ -6454,7 +6454,7 @@ storiesOf('Video', module)
 storiesOf('Pricing table', module)
     .add('v1', () => ({
         components: {
-            'c-pricing-table': (resolve) => require(['@/components/pricing-table/v1'], resolve),
+            'c-pricing-table': () => import('~/components/pricing-table/v1').then(m => m.default || m),
         },
         data() {
             return {
@@ -6499,7 +6499,7 @@ storiesOf('Pricing table', module)
     }))
     .add('v2', () => ({
         components: {
-            'c-pricing-table': (resolve) => require(['@/components/pricing-table/v2'], resolve),
+            'c-pricing-table': () => import('~/components/pricing-table/v2').then(m => m.default || m),
         },
         data() {
             return {
@@ -6546,7 +6546,7 @@ storiesOf('Pricing table', module)
 storiesOf('Pro mode', module)
     .add('button', () => ({
         components: {
-            'c-pro-mode-button': (resolve) => require(['@/components/pro-mode/button.vue'], resolve),
+            'c-pro-mode-button': () => import('~/components/pro-mode/button.vue').then(m => m.default || m),
         },
         template: `<div class="p-4">
                         <c-pro-mode-button icon="gem">
@@ -6556,7 +6556,7 @@ storiesOf('Pro mode', module)
     }))
     .add('notice 1', () => ({
         components: {
-            'c-pro-mode-n1': (resolve) => require(['@/components/pro-mode/notice1.vue'], resolve),
+            'c-pro-mode-n1': () => import('~/components/pro-mode/notice1.vue').then(m => m.default || m),
         },
         template: `<div class="p-4">
                         <c-pro-mode-n1>
@@ -6566,7 +6566,7 @@ storiesOf('Pro mode', module)
     }))
     .add('notice 2', () => ({
         components: {
-            'c-pro-mode-n2': (resolve) => require(['@/components/pro-mode/notice2.vue'], resolve),
+            'c-pro-mode-n2': () => import('~/components/pro-mode/notice2.vue').then(m => m.default || m),
         },
         template: `<div class="p-4">
                         <c-pro-mode-n2>
@@ -6579,7 +6579,7 @@ storiesOf('Pro mode', module)
 storiesOf('Contributor Box', module)
     .add('default', () => ({
         components: {
-            'c-contributor-box': (resolve) => require(['@/components/contributor-box'], resolve),
+            'c-contributor-box': () => import('~/components/contributor-box').then(m => m.default || m),
         },
         data() {
             return {
@@ -6615,7 +6615,7 @@ storiesOf('Contributor Box', module)
 storiesOf('Gift box', module)
     .add('default', () => ({
         components: {
-            'c-gift-box': (resolve) => require(['@/components/gift'], resolve),
+            'c-gift-box': () => import('~/components/gift').then(m => m.default || m),
         },
         data() {
             return {
