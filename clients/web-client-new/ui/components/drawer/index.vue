@@ -415,17 +415,17 @@ export default {
     },
     created() {
         if (process.client) {
-            $('body').off('click').on('click', "[data-action='fixedpanel-toggle']", e => {
-                const btn = $('#sidebar-toggle-btn span')
+            this.$('body').off('click').on('click', "[data-action='fixedpanel-toggle']", e => {
+                const btn = this.$('#sidebar-toggle-btn span')
 
-                if ($('body').hasClass('show-sidebar')) {
-                    $('body').removeClass('show-sidebar')
-                    $(btn).removeClass('fa-times').addClass('fa-cog')
-                    $('.snotify').show()
+                if (this.$('body').hasClass('show-sidebar')) {
+                    this.$('body').removeClass('show-sidebar')
+                    this.$(btn).removeClass('fa-times').addClass('fa-cog')
+                    this.$('.snotify').show()
                 } else {
-                    $('body').addClass('show-sidebar')
-                    $(btn).removeClass('fa-cog').addClass('fa-times')
-                    $('.snotify').hide()
+                    this.$('body').addClass('show-sidebar')
+                    this.$(btn).removeClass('fa-cog').addClass('fa-times')
+                    this.$('.snotify').hide()
                 }
             })
         }

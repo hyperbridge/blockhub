@@ -136,16 +136,13 @@
 </template>
 
 <script>
-import * as Bridge from '@/framework/desktop-bridge'
 import * as DB from '@/db'
 import moment from 'moment'
 
 export default {
     components: {
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-datepicker': resolve => require(['vuejs-datepicker'], resolve),
-        'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab').then(m => m.default || m)
+        'c-datepicker': resolve => require(['vuejs-datepicker'], resolve)
     },
     props: ['activated'],
     data() {
@@ -173,26 +170,26 @@ export default {
         }
     },
     created() {
-        Bridge.on('promptPasswordRequest', data => {
+        this.$desktop.on('promptPasswordRequest', data => {
             if (data.error) {
-                $(this.$refs.submit.$el).addClass('wrong')
+                this.$(this.$refs.submit.$el).addClass('wrong')
 
                 setTimeout(() => {
-                    $(this.$refs.submit.$el).removeClass('wrong')
+                    this.$(this.$refs.submit.$el).removeClass('wrong')
                 }, 350)
             }
         })
     },
     methods: {
         unlock() {
-            $(this.$refs.submit.$el).removeClass('wrong')
+            this.$(this.$refs.submit.$el).removeClass('wrong')
 
-            Bridge.resolvePromptPasswordRequest(this.$refs.password.value)
+            this.$desktop.resolvePromptPasswordRequest(this.$refs.password.value)
         },
         recoverPassword() {
             this.recoveryError = null
 
-            Bridge.sendCommand('recoverPasswordRequest', {
+            this.$desktop.sendCommand('recoverPasswordRequest', {
                 secretQuestion1: this.secretQuestion1,
                 secretAnswer1: this.secretAnswer1.toLowerCase(),
                 birthday: moment(this.birthday).format('DD-MM-YYYY')
@@ -211,10 +208,10 @@ export default {
             return moment(date).format('DD-MM-YYYY')
         },
         exportAccount() {
-            Bridge.sendCommand('exportAccountFileRequest')
+            this.$desktop.sendCommand('exportAccountFileRequest')
         },
         clearAccount() {
-            Bridge.sendCommand('deleteAccountRequest')
+            this.$desktop.sendCommand('deleteAccountRequest')
         }
     }
 }
