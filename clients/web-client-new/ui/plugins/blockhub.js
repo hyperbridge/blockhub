@@ -10,12 +10,12 @@ export default ({ app, store }) => {
 
     const initSubscribers = () => {
         store.subscribeAction((action, state) => {
-            console.info(`[BlockHub] Store Action: ${action.type}`, action.payload, state)
+            console.info(`[BlockHub] Store Action: ${action.type}`) // , action.payload)
         })
 
         store.subscribe((mutation, state) => {
             if (mutation.type !== 'application/setInternetConnection') {
-                console.info(`[BlockHub] Store Mutation: ${mutation.type}`, mutation.payload, state)
+                console.info(`[BlockHub] Store Mutation: ${mutation.type}`, mutation.payload)
             }
 
             if (mutation.type === 'database/updateState') {
