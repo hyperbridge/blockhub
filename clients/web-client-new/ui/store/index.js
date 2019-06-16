@@ -30,48 +30,6 @@ export const state = () => ({
     initialized: false
 })
 
-const initSubscribers = store => {
-    return /* eslint-disable no-unreachable */
-    store.subscribeAction((action, state) => {
-        console.info(`[BlockHub] Store Action: ${action.type}`, action.payload, state)
-    })
-
-    store.subscribe((mutation, state) => {
-        if (mutation.type !== 'application/setInternetConnection') {
-            console.info(`[BlockHub] Store Mutation: ${mutation.type}`, mutation.payload, state)
-        }
-
-        if (mutation.type === 'database/updateState') {
-            // TODO: hook up to desktop
-            // PeerService.setResolver((cmd) => {
-            //     if (cmd.key = 'pageContentHashRequest' || cmd.key === 'pageContentDataRequest') {
-            //         const computedState = {}
-
-            //         try {
-            //             if (router.matcher.match(cmd.data.path).matched.length && router.matcher.match(cmd.data.path).matched[0].components.default.computed) {
-            //                 for (let x in router.matcher.match(cmd.data.path).matched[0].components.default.computed) {
-            //                     computedState[x] = router.matcher.match(cmd.data.path).matched[0].components.default.computed[x].bind(new function FakeStore() { this.$store = store; })()
-            //                 }
-            //             }
-            //         } catch (e) {
-            //             console.log("Problem encountered computing vue state", e)
-            //         }
-
-            //         console.log('[BlockHub] Computed vue state', computedState)
-
-            //         return computedState
-            //     }
-
-            //     return {}
-            // })
-
-            store.dispatch('marketplace/updateState')
-            store.dispatch('funding/updateState')
-            store.dispatch('application/updateState')
-        }
-    })
-}
-
 if (decentralizedMode) {
     service = () => { // eslint-disable-line arrow-body-style
         return {
