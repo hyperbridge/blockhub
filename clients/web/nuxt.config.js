@@ -91,6 +91,7 @@ export default {
         '@nuxtjs/axios',
         '@nuxtjs/pwa',
         '@nuxtjs/moment',
+        '@nuxtjs/sitemap',
         'cookie-universal-nuxt'
         // './modules/init'
     ],
@@ -108,6 +109,22 @@ export default {
                 component: path.resolve(__dirname, 'ui/layouts/error.vue')
             })
         }
+    },
+    sitemap: {
+        hostname: 'https://blockhub.gg',
+        gzip: true,
+        exclude: [
+            '/business/**'
+        ],
+        routes: [
+            '/about',
+            {
+                url: '/about',
+                changefreq: 'monthly',
+                priority: 1,
+                lastmodISO: '2018-06-30T13:30:00.000Z'
+            }
+        ]
     },
     build: {
         extractCSS: true,

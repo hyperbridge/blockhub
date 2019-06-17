@@ -9,5 +9,8 @@
   },
   "devDependencies": {
     "lerna": "^3.8.0"
+  },
+  "dependencies": {
+    "@nuxtjs/sitemap": "^1.2.0"
   }
 }
