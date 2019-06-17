@@ -324,6 +324,11 @@
 import { ModelObj } from 'vue-3d-model'
 
 export default {
+    head() {
+        return {
+            title: `${this.asset.name}`
+        }
+    },
     components: {
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
         'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
@@ -334,7 +339,6 @@ export default {
         'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
         'c-model-obj': ModelObj
     },
-    props: ['id'],
     data() {
         return {
             totalOwned: 3,

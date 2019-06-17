@@ -37,12 +37,12 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `${this.community.name}`
+        }
+    },
     components: {
-        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-        'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
-        'c-pagination': () => import('~/components/pagination').then(m => m.default || m),
-        'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m)
     },
     async asyncData({ params, store }) {
         await store.dispatch('communities/find', {
