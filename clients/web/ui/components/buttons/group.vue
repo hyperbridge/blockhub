@@ -1,5 +1,5 @@
 <template>
-    <div class="c-buttons-group">
+    <div class="buttons-group">
         <slot />
     </div>
 </template>
@@ -9,10 +9,10 @@ export default {
 }
 </script>
 <style lang="scss">
-    .c-buttons-group{
+    .buttons-group{
         display: inline-flex;
         align-items: stretch;
-        .c-button{
+        .button{
             border-radius: 0;
             &:first-child{
                 border-radius: 5px 0 0 5px;

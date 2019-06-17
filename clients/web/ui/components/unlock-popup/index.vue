@@ -28,7 +28,7 @@
                                 <br>
                                 <c-button
                                     ref="submit"
-                                    class="c-button--lg"
+                                    class="button--lg"
                                     @click="unlock()">
                                     Unlock
                                 </c-button>
@@ -218,7 +218,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .c-popup {
+    .popup {
         background: #383853 !important;
     }
     .unlock-modal{
@@ -239,7 +239,7 @@ export default {
             box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
             background: #303049;
         }
-        .c-button {
+        .button {
             border: 2px solid transparent;
 
             &.wrong {

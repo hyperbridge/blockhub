@@ -1,5 +1,5 @@
 <template>
-    <div class="c-checkbox-group">
+    <div class="checkbox-group">
         <h3>{{ title }}</h3>
         <slot />
     </div>
@@ -14,7 +14,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .c-checkbox-group{
+    .checkbox-group{
         display: block;
         width: 100%;
         overflow: hidden;
@@ -25,7 +25,7 @@ export default {
             margin: 0 0 15px 0;
             padding: 0;
         }
-        .c-checkbox{
+        .checkbox{
             margin-bottom: 5px;
             display: flex;
             &:last-child{

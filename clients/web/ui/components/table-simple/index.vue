@@ -1,7 +1,7 @@
 <template>
-    <div class="c-table__wrapper">
+    <div class="table__wrapper">
         <table
-            class="c-table"
+            class="table"
             :class="[{
                 'c-table--stripped' : stripped,
                 'c-table--bordered' : bordered,
@@ -43,18 +43,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .c-table__wrapper{
+    .table__wrapper{
         width: 100%;
         display: block;
     }
-    .c-table{
+    .table{
         color: #fff;
         width: 100%;
         th{
             font-weight: bold;
         }
     }
-    .c-table--stripped{
+    .table--stripped{
         tbody{
             tr:nth-child(odd){
                 background: rgba(0, 0, 0, .1);
@@ -63,25 +63,25 @@ export default {
             }
         }
     }
-    .c-table--bordered{
+    .table--bordered{
         td,th{
             border: 1px solid rgba(255, 255, 255, .05);
         }
     }
-    .c-table--size-sm{
+    .table--size-sm{
         td,
         th{
             padding: 2px 5px;
             font-size: 12px;
         }
     }
-    .c-table--size-md{
+    .table--size-md{
         td,
         th{
             padding: 5px 10px;
         }
     }
-    .c-table--size-lg{
+    .table--size-lg{
         td,
         th{
             padding: 8px 15px;

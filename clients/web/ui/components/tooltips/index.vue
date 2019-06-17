@@ -1,5 +1,5 @@
 <template>
-    <span class="c-tooltips">
+    <span class="tooltips">
         <span
             v-if="type == 'hover'"
             @mouseover="showToolTip=true"
@@ -10,7 +10,7 @@
         <transition name="fade">
             <div
                 v-if="showToolTip"
-                class="c-tooltips__content"
+                class="tooltips__content"
                 :class="{
                     'left-position' : position == 'left',
                     'right-position' : position == 'right',
@@ -18,7 +18,7 @@
                     'light-style' : lightStyle == true
                 }"
                 style="animation-duration: 0.25s">
-                <div class="c-tooltips__content-default">
+                <div class="tooltips__content-default">
                     <slot />
                 </div>
             </div>
@@ -28,7 +28,6 @@
 
 <script>
 export default {
-    name: 'Tooltip',
     props: {
         name: [String, Number],
         position: {
@@ -61,13 +60,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .c-tooltips{
+    .tooltips{
         display: inline-block;
         position: relative;
         color: #fff;
         cursor: pointer;
     }
-    .c-tooltips__content{
+    .tooltips__content{
         position: absolute;
         max-width: 360px;
         min-width: 50px;
@@ -132,7 +131,7 @@ export default {
                 background: #5D75F7;
             }
         }
-        .c-tooltips__content-default{
+        .tooltips__content-default{
             z-index: 1000;
             position: relative;
         }

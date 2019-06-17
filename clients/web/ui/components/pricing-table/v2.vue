@@ -1,25 +1,25 @@
 <template>
-    <div class="c-pricing-table-v2">
-        <div class="c-pricing-table-v2__container">
-            <div class="c-pricing-table-v2__item"
+    <div class="pricing-table-v2">
+        <div class="pricing-table-v2__container">
+            <div class="pricing-table-v2__item"
                  v-for="(item, idx) in items"
                  :style="`width: calc( 100% / ${items.length} - 20px );`"
                  :class="{'c-pricing-table-v2__item--highline': item.highline }"
                  :key="`price-${idx}`">
-                <div class="c-pricing-table-v2__item-title">
+                <div class="pricing-table-v2__item-title">
                     {{ item.title }}
                 </div>
-                <div class="c-pricing-table-v2__item-price">
+                <div class="pricing-table-v2__item-price">
                     {{ item.price }}
                 </div>
-                <div class="c-pricing-table-v2__item-spec">
+                <div class="pricing-table-v2__item-spec">
                     <ul>
                         <li v-for="(spec, idx) in item.specs" :key="`spec-${idx}`">
                             {{ spec }}
                         </li>
                     </ul>
                 </div>
-                <div class="c-pricing-table-v2__item-action">
+                <div class="pricing-table-v2__item-action">
                     <c-button :status="item.highline ? 'dark' : 'second-success'" size="lg">
                         Select Plan
                     </c-button>
@@ -38,7 +38,7 @@
 </script>
 
 <style lang="scss">
-    .c-pricing-table-v2{
+    .pricing-table-v2{
         display: flex;
         width: 100%;
         justify-content: flex-start;

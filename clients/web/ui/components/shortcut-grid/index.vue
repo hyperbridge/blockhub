@@ -1,13 +1,13 @@
 <template>
     <div
-        class="c-grid-container"
+        class="grid-container"
         @resize="getWindowHeight">
-        <div class="c-grid__wrapper">
+        <div class="grid__wrapper">
             <div
-                class="c-grid__top position-relative"
+                class="grid__top position-relative"
                 :class="{'margin-bottom-30' : hasNew}">
                 <div
-                    class="c-grid"
+                    class="grid"
                     :style="gridStyle">
                     <GridItem
                         v-for="v in list"
@@ -36,14 +36,14 @@
             </div>
             <div
                 v-if="hasNew"
-                class="c-grid__has-new">
+                class="grid__has-new">
                 new <i class="fas fa-long-arrow-alt-down" />
             </div>
             <div
                 ref="gridFixed"
-                class="c-grid__bottom position-relative"
+                class="grid__bottom position-relative"
                 :class="['h-' + fixedIconHeight]">
-                <div class="c-grid__bottom-divider" />
+                <div class="grid__bottom-divider" />
                 <c-icon
                     v-for="(item, index) in fixedItems"
                     :key="index"
@@ -302,19 +302,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .c-grid {
+    .grid {
         margin-top: 10px;
         position: relative;
     }
 
-    .c-grid__wrapper {
+    .grid__wrapper {
         display: flex;
         height: 100%;
         flex-direction: column;
         justify-content: space-between;
     }
 
-    .c-grid__top {
+    .grid__top {
         margin-top: 0;
         overflow-y: auto;
         overflow-x: hidden;
@@ -327,7 +327,7 @@ export default {
         }
 
     }
-    .c-grid__has-new{
+    .grid__has-new{
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -344,7 +344,7 @@ export default {
         margin-top: -40px;
         z-index: 3;
     }
-    .c-grid__bottom{
+    .grid__bottom{
         /*padding-bottom: 40px;*/
         margin-top: auto;
         .border-none{
@@ -352,7 +352,7 @@ export default {
         }
     }
 
-    .c-grid__bottom-divider{
+    .grid__bottom-divider{
         width: 70%;
         height: 4px;
         margin: 15px auto;
@@ -361,7 +361,7 @@ export default {
         background: rgba(255, 255, 255, .2);
     }
 
-    .c-grid-container {
+    .grid-container {
         display: block;
         position: relative;
         width: 50px;
@@ -372,7 +372,7 @@ export default {
         }
     }
 
-    .c-grid_add-button {
+    .grid_add-button {
         border: 1px dashed rgba(0, 0, 0, 1);
         background-image: url(/img/icons/grid.png);
         background-size: 70%;

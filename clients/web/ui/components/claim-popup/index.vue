@@ -10,7 +10,7 @@
             hidden />
         <div
             slot="customContent"
-            class="c-popup__content">
+            class="popup__content">
             <c-tabs
                 :setActiveTab="currentStep"
                 :tabNames="['Product Verification', 'Contact', 'Done']"
@@ -110,7 +110,7 @@
                             </div>
                         </div>
 
-                        <p
+                        <div
                             v-if="errors.length"
                             class="errors">
                             <br>
@@ -122,7 +122,7 @@
                                     {{ error }}
                                 </li>
                             </ul>
-                        </p>
+                        </div>
                     </div>
                     <div
                         slot="footer"
@@ -197,7 +197,7 @@
                             </div>
                         </div>
 
-                        <p
+                        <div
                             v-if="errors.length"
                             class="errors">
                             <strong>Please correct the following error(s):</strong>
@@ -208,7 +208,7 @@
                                     {{ error }}
                                 </li>
                             </ul>
-                        </p>
+                        </div>
                     </div>
                     <div
                         slot="footer"
@@ -333,7 +333,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .c-popup__content {
+    .popup__content {
         background: transparent;
         color: #fff;
         text-align: left;

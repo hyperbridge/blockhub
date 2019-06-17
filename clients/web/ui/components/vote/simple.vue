@@ -1,10 +1,10 @@
 <template>
-    <div class="c-simple-vote">
+    <div class="simple-vote">
         <i
             class="fa fa-chevron-up"
             :class="{ disabled: upvoted }"
             @click="upvote" />
-        <span class="c-simple-vote__value">{{ value }}</span>
+        <span class="simple-vote__value">{{ value }}</span>
         <i
             class="fa fa-chevron-down"
             :class="{ disabled: downvoted }"
@@ -54,7 +54,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.c-simple-vote {
+.simple-vote {
     position: absolute;
     top: 0px;
     right: -45px;

@@ -3,10 +3,10 @@
         :activated="activated"
         @close="activated = false">
         <template slot="body">
-            <div class="c-grid-container">
-                <div class="c-grid__wrapper">
-                    <div class="c-grid__top position-relative">
-                        <div class="c-grid">
+            <div class="grid-container">
+                <div class="grid__wrapper">
+                    <div class="grid__top position-relative">
+                        <div class="grid">
                             <c-icon
                                 v-for="(item, index) in items"
                                 :key="index"
@@ -118,12 +118,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .c-grid {
+    .grid {
         margin-top: 10px;
         position: relative;
     }
 
-    .c-grid__wrapper {
+    .grid__wrapper {
         display: flex;
         height: 100%;
         width: 100%;
@@ -131,7 +131,7 @@ export default {
         justify-content: space-between;
     }
 
-    .c-grid__top {
+    .grid__top {
         margin-top: 0;
         overflow-y: auto;
         overflow-x: hidden;
@@ -143,7 +143,7 @@ export default {
         }
 
     }
-    .c-grid__bottom{
+    .grid__bottom{
         /*padding-bottom: 40px;*/
         margin-top: auto;
         .border-none{
@@ -151,7 +151,7 @@ export default {
         }
     }
 
-    .c-grid__bottom-divider{
+    .grid__bottom-divider{
         width: 70%;
         height: 4px;
         margin: 15px auto;
@@ -160,7 +160,7 @@ export default {
         background: rgba(255, 255, 255, .2);
     }
 
-    .c-grid-container {
+    .grid-container {
         display: block;
         position: relative;
         width: 100%;

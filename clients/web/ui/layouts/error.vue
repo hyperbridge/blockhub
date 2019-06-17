@@ -9,7 +9,7 @@
                 <h3>That page wasn't found or there's an error in the spacetime continuum. <br>Either way, you better get home quick.</h3>
                 <br><br>
                 <c-button
-                    class="c-button--xl"
+                    class="button--xl"
                     status="gradient-info"
                     @click="goHome">
                     Go Home

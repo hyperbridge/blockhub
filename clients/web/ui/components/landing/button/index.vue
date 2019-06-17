@@ -3,7 +3,7 @@
         :is="tag"
         :href="href"
         :target="target"
-        class="c-landing-btn"
+        class="landing-btn"
         :class="['c-button-' + size]"
         style="font-size: 14px"
         :style="{ 'font-size': fontSize + 'px', 'width' : width + 'px' }"
@@ -46,7 +46,7 @@ export default {
         background: linear-gradient(to bottom, $first 0%, $second 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     }
 
-    .c-landing-btn {
+    .landing-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;

@@ -1,9 +1,9 @@
 <template>
-    <div class="c-contributor-box">
-        <div class="c-contributor-box__title">
+    <div class="contributor-box">
+        <div class="contributor-box__title">
             Become a product Hunt contributor
         </div>
-        <div class="c-contributor-box__description">
+        <div class="contributor-box__description">
             <div class="text-white margin-bottom-15">
                 Becoming a Product Hunt contributor allows you to hunt products.
             </div>
@@ -19,12 +19,12 @@
         </div>
         <div
             v-if="showDetails"
-            class="c-contributor-box__details"
+            class="contributor-box__details"
             :class="{'is-active': showDetails}">
             <div
                 v-for="(step, idx) in steps"
                 :key="`step-${idx}`"
-                class="c-contributor-box__details-item margin-right-40">
+                class="contributor-box__details-item margin-right-40">
                 <div class="d-flex flex-column">
                     <c-checkbox :value="step.value">
                         {{ step.label }}
@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .c-contributor-box{
+    .contributor-box{
         background: #26263d;
         padding: 25px;
         border-radius: 5px;
@@ -68,7 +68,7 @@ export default {
         color: #fff;
         flex-direction: column;
     }
-    .c-contributor-box__title{
+    .contributor-box__title{
         padding-bottom: 15px;
         margin-bottom: 15px;
         border-bottom: 1px solid rgba(255, 255, 255, .1);
@@ -78,7 +78,7 @@ export default {
         display: flex;
         width: 100%;
     }
-    .c-contributor-box__details{
+    .contributor-box__details{
         height: 0;
         overflow: hidden;
         transition: all 200ms ease-in-out;
@@ -86,7 +86,7 @@ export default {
             height: auto;
         }
     }
-    .c-contributor-box__details-item{
+    .contributor-box__details-item{
         display: flex;
         align-items: center;
         justify-content: space-between;

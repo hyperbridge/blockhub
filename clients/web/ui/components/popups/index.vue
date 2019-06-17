@@ -4,10 +4,10 @@
         :duration="100">
         <div
             v-if="activated"
-            class="c-popup"
+            class="popup"
             @click.self.prevent="$emit('close')">
             <div
-                class="c-popup__item"
+                class="popup__item"
                 :style="{ 'width': + width + dimension}">
                 <h3 v-if="title">
                     {{ title }}
@@ -15,7 +15,7 @@
                 <div class="position-relative">
                     <div
                         v-if="!customClose"
-                        class="c-popup__close"
+                        class="popup__close"
                         @click="$emit('close')">
                         <i class="fas fa-times" />
                     </div>
@@ -24,11 +24,11 @@
                         name="customClose" />
                     <div
                         v-if="!this.$slots.customContent"
-                        class="c-popup__content">
+                        class="popup__content">
                         <div
                             v-if="subTitle"
-                            class="c-popup__content-header"
-                            :class="[ 'c-popup-type-' + type ]">
+                            class="popup__content-header"
+                            :class="[ 'popup-type-' + type ]">
                             <div class="popup-icon">
                                 <i
                                     v-if=" type == ['warning', 'danger'] "
@@ -44,7 +44,7 @@
                                 {{ subTitle }}
                             </div>
                         </div>
-                        <div class="c-popup__content-body">
+                        <div class="popup__content-body">
                             <p class="m-0">
                                 <slot />
                             </p>
@@ -52,7 +52,7 @@
                         </div>
                         <div
                             v-if="this.$slots.footer"
-                            class="c-popup__content-footer">
+                            class="popup__content-footer">
                             <slot name="footer" />
                         </div>
                     </div>
@@ -98,7 +98,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .c-popup {
+    .popup {
         display: flex;
         width: 100%;
         height: 100vh;
@@ -113,7 +113,7 @@ export default {
         background: rgba(0, 0, 0, 0.7);
     }
 
-    .c-popup__close {
+    .popup__close {
         position: absolute;
         top: -25px;
         right: 0px;
@@ -136,7 +136,7 @@ export default {
         }
     }
 
-    .c-popup__item {
+    .popup__item {
         display: flex;
         position: relative;
         z-index: 30;
@@ -157,7 +157,7 @@ export default {
         }
     }
 
-    .c-popup__content {
+    .popup__content {
         background: #1C2032;
         padding: 10px;
         border-radius: 5px;
@@ -165,7 +165,7 @@ export default {
         box-shadow: 0 0 10px rgba(0, 0, 0, .3);
     }
 
-    .c-popup__content-header {
+    .popup__content-header {
         display: flex;
         width: 100%;
         align-items: center;
@@ -174,20 +174,20 @@ export default {
         padding: 10px;
         border-radius: 5px;
         text-align: left;
-        &.c-popup-type-warning {
+        &.popup-type-warning {
             background: #FADC72;
             color: #3D3E5D;
         }
-        &.c-popup-type-danger {
+        &.popup-type-danger {
             background: #F75D5D;
         }
-        &.c-popup-type-info {
+        &.popup-type-info {
             background: #5D75F7;
         }
-        &.c-popup-type-success {
+        &.popup-type-success {
             background: #43C981;
         }
-        &.c-popup-type-default {
+        &.popup-type-default {
             background: rgba(255, 255, 255, .3)
         }
         .popup-icon {
@@ -202,7 +202,7 @@ export default {
         }
     }
 
-    .c-popup__content-body {
+    .popup__content-body {
         color: #fff;
         padding: 10px 0;
         font-size: 16px;
@@ -211,7 +211,7 @@ export default {
         width: 100%;
     }
 
-    .c-popup__content-footer {
+    .popup__content-footer {
         margin-top: 15px;
         display: flex;
         width: 100%;

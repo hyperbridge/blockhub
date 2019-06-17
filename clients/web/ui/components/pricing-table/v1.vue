@@ -1,28 +1,28 @@
 <template>
-    <div class="c-pricing-table-v1">
-        <div class="c-pricing-table-v1__container">
-            <div class="c-pricing-table-v1__item"
+    <div class="pricing-table-v1">
+        <div class="pricing-table-v1__container">
+            <div class="pricing-table-v1__item"
                  v-for="(item, idx) in items"
                  :style="`width: calc( 100% / ${items.length} - 20px );`"
                  :class="{'c-pricing-table__item--highline': item.highline }"
                  :key="`price-${idx}`">
-                <div class="c-pricing-table-v1__item-title">
+                <div class="pricing-table-v1__item-title">
                     {{ item.title }}
                 </div>
-                <div class="c-pricing-table-v1__item-description">
+                <div class="pricing-table-v1__item-description">
                     {{ item.description }}
                 </div>
-                <div class="c-pricing-table-v1__item-price">
+                <div class="pricing-table-v1__item-price">
                     {{ item.price }}
                 </div>
-                <div class="c-pricing-table-v1__item-spec">
+                <div class="pricing-table-v1__item-spec">
                     <ul>
                         <li v-for="(spec, idx) in item.specs" :key="`spec-${idx}`">
                             {{ spec }}
                         </li>
                     </ul>
                 </div>
-                <div class="c-pricing-table-v1__item-action margin-bottom-20 margin-top-10">
+                <div class="pricing-table-v1__item-action margin-bottom-20 margin-top-10">
                     <c-button status="second-success">
                         Sign Up
                     </c-button>
@@ -41,7 +41,7 @@
 </script>
 
 <style lang="scss">
-    .c-pricing-table-v1{
+    .pricing-table-v1{
         display: flex;
         width: 100%;
         justify-content: center;

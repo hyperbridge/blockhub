@@ -1,5 +1,5 @@
 <template>
-    <div class="c-quick-launch">
+    <div class="quick-launch">
         <c-searcher
             v-model="phrase"
             class="margin-bottom-20"
@@ -82,7 +82,7 @@ export default {
 </script>
 
 <style lang="scss">
-    .c-quick-launch {
+    .quick-launch {
         /*background: rgba(0, 0, 0, .2);*/
         .c-input {
             background: transparent  !important;

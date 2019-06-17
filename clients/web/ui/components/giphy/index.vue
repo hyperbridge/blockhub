@@ -1,6 +1,6 @@
 <template>
-    <div class="c-giphy">
-        <div class="c-giphy__input-container">
+    <div class="giphy">
+        <div class="giphy__input-container">
             <c-input
                 v-model="query"
                 placeholder="Type to search"
@@ -8,13 +8,13 @@
         </div>
         <div
             v-if="isLoading"
-            class="c-giphy__is-loading">
+            class="giphy__is-loading">
             <c-loading-bar-circle />
         </div>
         <div
             v-if="gifs.length"
-            class="c-giphy__list">
-            <div class="c-giphy__list-scroll">
+            class="giphy__list">
+            <div class="giphy__list-scroll">
                 <img
                     v-for="gif in gifs"
                     :key="gif.id"
@@ -67,19 +67,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .c-giphy__input-container{
+    .giphy__input-container{
         padding: 5px;
         background: rgba(0, 0, 0, .1);
         border: 1px solid rgba(0, 0, 0, .3);
     }
-    .c-giphy__is-loading{
+    .giphy__is-loading{
         width: 100%;
         height: 100px;
         position: relative;
         background: rgba(0, 0, 0, .2);
         border-radius: 0 0 5px 5px;
     }
-    .c-giphy__list{
+    .giphy__list{
         display: flex;
         flex-wrap: wrap;
         padding: 5px;
@@ -97,7 +97,7 @@ export default {
             }
         }
     }
-    .c-giphy__list-scroll{
+    .giphy__list-scroll{
         max-height: 300px;
         overflow-y: auto;
         overflow-x: hidden;
