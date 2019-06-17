@@ -24,6 +24,15 @@
 import moment from 'moment'
 
 export default {
+    head() {
+        return {
+            title: `Discussion | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub discussion` },
+                { hid: 'keywords', name: 'keywords', content: 'discussion, community, social, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
         'c-community-item': () => import('~/components/pagination').then(m => m.default || m)

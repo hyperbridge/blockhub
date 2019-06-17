@@ -12,12 +12,13 @@
                 </div>
                 <div>
                     <ul class="badge-list">
-                        <li class="badge-list__item"
-                            :class="{'badge-list__item--disabled': badge.disabled}"
+                        <li
                             v-for="(badge, idx) in badges"
-                            :key="`badge-${idx}`">
+                            :key="`badge-${idx}`"
+                            class="badge-list__item"
+                            :class="{'badge-list__item--disabled': badge.disabled}">
                             <div class="badge-list__item-icon">
-                                <i :class="`fas ${badge.icon}`"></i>
+                                <i :class="`fas ${badge.icon}`" />
                             </div>
                             <div class="badge-list__item-text">
                                 <div class="h5 font-weight-bold">
@@ -36,71 +37,77 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            id: String,
-        },
-        data(){
-            return{
-                badges: [
-                    {
-                        icon: 'fa-shield-alt',
-                        title: 'Duis feugiat dictum porta',
-                        description: 'Sed suscipit elementum accumsan. Morbi fringilla sem elit, ac elementum tellus egestas quis.',
-                        disabled: false
-                    },
-                    {
-                        icon: 'fa-leaf',
-                        title: 'Nullam in libero',
-                        description: 'Quisque ornare nisl a vestibulum feugiat. Proin nisl lorem, lacinia non mi nec, cursus sollicitudin nunc.',
-                        disabled: true
-                    },
-                    {
-                        icon: 'fa-crown',
-                        title: 'Proin ac tellus tempus',
-                        description: 'Nunc maximus nunc est. Nullam vulputate nisi eros, eget porta ex porta vitae.',
-                        disabled: true
-                    },
-                    {
-                        icon: 'fa-cannabis',
-                        title: 'Suspendisse ac lorem rutrum',
-                        description: 'Vivamus convallis, ligula id tincidunt egestas, nunc odio ultrices leo, in luctus nisi magna ut quam.',
-                        disabled: false
-                    },
-                    {
-                        icon: 'fa-certificate',
-                        title: 'Class aptent taciti sociosqu ad',
-                        description: 'Aliquam fringilla aliquet pellentesque. Class aptent taciti per conubia nostra, per inceptos himenaeos.',
-                        disabled: false
-                    },
-                    {
-                        icon: 'fa-bolt',
-                        title: 'Sed vestibulum molestie',
-                        description: 'Nulla in nibh nec urna laoreet gravida vel suscipit nulla',
-                        disabled: false
-                    },
-                    {
-                        icon: 'fa-award',
-                        title: 'Ut lacinia nec ante vitae cursus',
-                        description: 'Sed varius nisl vitae leo rhoncus, accumsan tincidunt orci sagittis. Donec dictum, lectus at accumsan rutrum.',
-                        disabled: true
-                    },
-                    {
-                        icon: 'fa-bell',
-                        title: 'Suspendisse a varius nisi',
-                        description: 'Quisque ornare nisl a vestibulum feugiat. Proin nisl lorem, lacinia non mi nec, cursus sollicitudin nunc.',
-                        disabled: true
-                    },
-                    {
-                        icon: 'fa-cookie',
-                        title: 'Morbi lobortis laoreet neque',
-                        description: 'Vestibulum ornare porttitor libero. Morbi lobortis laoreet neque a rhoncus.',
-                        disabled: true
-                    },
-                ]
-            }
+export default {
+    head() {
+        return {
+            title: `Identity | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub identity` },
+                { hid: 'keywords', name: 'keywords', content: 'identity, Ethereum, blockchain, game, indie, developer' }
+            ]
+        }
+    },
+    data() {
+        return {
+            badges: [
+                {
+                    icon: 'fa-shield-alt',
+                    title: 'Duis feugiat dictum porta',
+                    description: 'Sed suscipit elementum accumsan. Morbi fringilla sem elit, ac elementum tellus egestas quis.',
+                    disabled: false
+                },
+                {
+                    icon: 'fa-leaf',
+                    title: 'Nullam in libero',
+                    description: 'Quisque ornare nisl a vestibulum feugiat. Proin nisl lorem, lacinia non mi nec, cursus sollicitudin nunc.',
+                    disabled: true
+                },
+                {
+                    icon: 'fa-crown',
+                    title: 'Proin ac tellus tempus',
+                    description: 'Nunc maximus nunc est. Nullam vulputate nisi eros, eget porta ex porta vitae.',
+                    disabled: true
+                },
+                {
+                    icon: 'fa-cannabis',
+                    title: 'Suspendisse ac lorem rutrum',
+                    description: 'Vivamus convallis, ligula id tincidunt egestas, nunc odio ultrices leo, in luctus nisi magna ut quam.',
+                    disabled: false
+                },
+                {
+                    icon: 'fa-certificate',
+                    title: 'Class aptent taciti sociosqu ad',
+                    description: 'Aliquam fringilla aliquet pellentesque. Class aptent taciti per conubia nostra, per inceptos himenaeos.',
+                    disabled: false
+                },
+                {
+                    icon: 'fa-bolt',
+                    title: 'Sed vestibulum molestie',
+                    description: 'Nulla in nibh nec urna laoreet gravida vel suscipit nulla',
+                    disabled: false
+                },
+                {
+                    icon: 'fa-award',
+                    title: 'Ut lacinia nec ante vitae cursus',
+                    description: 'Sed varius nisl vitae leo rhoncus, accumsan tincidunt orci sagittis. Donec dictum, lectus at accumsan rutrum.',
+                    disabled: true
+                },
+                {
+                    icon: 'fa-bell',
+                    title: 'Suspendisse a varius nisi',
+                    description: 'Quisque ornare nisl a vestibulum feugiat. Proin nisl lorem, lacinia non mi nec, cursus sollicitudin nunc.',
+                    disabled: true
+                },
+                {
+                    icon: 'fa-cookie',
+                    title: 'Morbi lobortis laoreet neque',
+                    description: 'Vestibulum ornare porttitor libero. Morbi lobortis laoreet neque a rhoncus.',
+                    disabled: true
+                }
+            ]
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

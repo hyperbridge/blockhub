@@ -123,6 +123,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Help | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub help centre` },
+                { hid: 'keywords', name: 'keywords', content: 'help, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-article-item': () => import('~/components/help/article-item').then(m => m.default || m),
         'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m),

@@ -22,8 +22,8 @@ export default {
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui' },
             { hid: 'theme-color', name: 'theme-color', content: '#4DBA87' },
-            { hid: 'description', name: 'description', content: 'BlockHub is a next-generation decentralized digital distribution platform' },
-            { hid: 'keywords', name: 'keywords', content: 'blockhub, hyperbridge, blockchain, cryptocurrency, game, indie, developer' },
+            // { hid: 'description', name: 'description', content: 'BlockHub is a next-generation decentralized digital distribution platform' },
+            // { hid: 'keywords', name: 'keywords', content: 'blockhub, hyperbridge, blockchain, cryptocurrency, game, indie, developer' },
 
             { hid: 'mobile-web-app-capable', name: 'mobile-web-app-capable', content: 'yes' },
             { hid: 'apple-mobile-web-app-capable', name: 'apple-mobile-web-app-capable', content: 'yes' },

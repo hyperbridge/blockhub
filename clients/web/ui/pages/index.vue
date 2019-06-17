@@ -90,6 +90,15 @@ function isVisible(availableFlags, userFlags, code, variant, data) {
 }
 
 export default {
+    head() {
+        return {
+            title: `BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: 'BlockHub is a next-generation decentralized digital distribution platform' },
+                { hid: 'keywords', name: 'keywords', content: 'blockhub, hyperbridge, blockchain, cryptocurrency, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-banner': () => import('~/components/banner/simple').then(m => m.default || m),
         'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),

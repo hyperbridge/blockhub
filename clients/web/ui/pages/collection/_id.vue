@@ -134,7 +134,7 @@ export default {
             return moment(this.collection.updatedAt).fromNow()
         }
     },
-    async asyncData({ params, store }) {
+    async asyncData({ params, store, error }) {
         await store.dispatch('collections/find', {
             query: {
                 id: Number(params.id)
@@ -142,6 +142,8 @@ export default {
         })
 
         const collection = store.getters['collections/get'](params.id)
+
+        if (!collection) error({ statusCode: 404, message: 'Collection not found' })
 
         if (collection.meta.assets) {
             await Promise.all(collection.meta.assets.map(id => store.dispatch('assets/find', {
@@ -155,7 +157,7 @@ export default {
             collection,
             breadcrumbLinks: [
                 { to: { path: '/' }, title: 'Home' },
-                collection && { to: { path: `/collection/${collection.id}` }, title: collection.name }
+                { to: { path: `/collection/${collection.id}` }, title: collection.name }
             ]
         }
     }

@@ -324,6 +324,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Download | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub download` },
+                { hid: 'keywords', name: 'keywords', content: 'download, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-download-block': () => import('~/components/download-block').then(m => m.default || m),
         'c-block-with-icon': () => import('~/components/block/with-icon').then(m => m.default || m)
@@ -335,12 +344,12 @@ export default {
     },
     created() {
         if (process.client) {
-            $('body').addClass('screen--download')
+            this.$('body').addClass('screen--download')
         }
     },
     beforeDestroy() {
         if (process.client) {
-            $('body').removeClass('screen--download')
+            this.$('body').removeClass('screen--download')
         }
     }
 }

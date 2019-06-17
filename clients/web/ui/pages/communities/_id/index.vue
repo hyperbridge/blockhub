@@ -44,7 +44,7 @@ export default {
     },
     components: {
     },
-    async asyncData({ params, store }) {
+    async asyncData({ params, store, error }) {
         await store.dispatch('communities/find', {
             query: {
                 id: Number(params.id)
@@ -52,6 +52,8 @@ export default {
         })
 
         const community = store.getters['communities/get'](params.id)
+
+        if (!community) error({ statusCode: 404, message: 'Community not found' })
 
         return {
             community,

@@ -822,6 +822,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Sitemap | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub sitemap` },
+                { hid: 'keywords', name: 'keywords', content: 'sitemap, links, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
     }
 }

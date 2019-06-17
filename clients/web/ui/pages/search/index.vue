@@ -275,6 +275,7 @@ export default {
         'c-list': () => import('~/components/list').then(m => m.default || m),
         'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m)
     },
+    watchQuery: ['page', 'count'],
     filters: {
         replaceLoDash(val) {
             return val.replace(/_/g, ' ')

@@ -506,14 +506,9 @@ export default {
         'c-multiselect': () => import('vue-multiselect').then(m => m.default || m),
         'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m)
     },
-    props: {
-        section: {
-            type: String,
-            default: 'overview'
-        }
-    },
     data() {
         return {
+            section: 'overview',
             activeElement: {
                 name: false,
                 backgroundImage: false,
@@ -538,67 +533,64 @@ export default {
         id() {
             return this.$route.params.id
         },
-        marketplace() {
-            return this.$store.state.marketplace
-        },
-        product() {
-            let product = null
+        // product() {
+        //     let product = null
 
-            if (this.id === 'new') {
-                product = { ...this.$store.state.marketplace.defaultProduct }
+        //     if (this.id === 'new') {
+        //         product = { ...this.$store.state.marketplace.defaultProduct }
 
-                this.$store.state.application.developerMode = true
-                this.$store.dispatch('application/setEditorMode', 'editing')
-            }
+        //         this.$store.state.application.developerMode = true
+        //         this.$store.dispatch('application/setEditorMode', 'editing')
+        //     }
 
-            if (!product) {
-                product = this.$store.getters['products/get'](this.id)
-            }
+        //     if (!product) {
+        //         product = this.$store.getters['products/get'](this.id)
+        //     }
 
-            if (!product) {
-                product = DB.marketplace.products.findOne({ 'id': Number(this.id) })
-            }
+        //     if (!product) {
+        //         product = DB.marketplace.products.findOne({ 'id': Number(this.id) })
+        //     }
 
-            if (!product) {
-                return
-            }
+        //     if (!product) {
+        //         return
+        //     }
 
-            if (!product.tags) {
-                product.tags = []
-            }
+        //     if (!product.tags) {
+        //         product.tags = []
+        //     }
 
-            if (!product.developerTags) {
-                product.developerTags = []
-            }
+        //     if (!product.developerTags) {
+        //         product.developerTags = []
+        //     }
 
-            if (!product.meta) {
-                product.meta = {}
-            }
+        //     if (!product.meta) {
+        //         product.meta = {}
+        //     }
 
 
-            if (!product.meta.community) {
-                product.meta.community = {
-                    discussions: []
-                }
-            }
+        //     if (!product.meta.community) {
+        //         product.meta.community = {
+        //             discussions: []
+        //         }
+        //     }
 
-            if (product.meta.images && product.meta.images.preview && product.meta.images.preview.length) {
-                /*
-                TODO: Make header-bg accesible by $refs
+        //     if (product.meta.images && product.meta.images.preview && product.meta.images.preview.length) {
+        //         /*
+        //         TODO: Make header-bg accesible by $refs
 
-                const header = window.document.getElementById('header-bg');
-                const randomImage = Math.floor(Math.random() * product.meta.images.preview.length);
-                header.style['background-image'] = 'url(' + product.meta.images.preview[randomImage] + ')';
-                header.style['background-size'] = 'cover';
-                */
-            }
+        //         const header = window.document.getElementById('header-bg');
+        //         const randomImage = Math.floor(Math.random() * product.meta.images.preview.length);
+        //         header.style['background-image'] = 'url(' + product.meta.images.preview[randomImage] + ')';
+        //         header.style['background-size'] = 'cover';
+        //         */
+        //     }
 
-            if (product.meta.promotions) {
-                this.promotionSections = groupBy(product.meta.promotions, 'section')
-            }
+        //     if (product.meta.promotions) {
+        //         this.promotionSections = groupBy(product.meta.promotions, 'section')
+        //     }
 
-            return product
-        },
+        //     return product
+        // },
         editorMode() {
             return this.$store.state.application.editorMode
         },
@@ -660,6 +652,25 @@ export default {
             }
         }
     },
+    async asyncData({ params, store, error }) {
+        await store.dispatch('products/find', {
+            query: {
+                id: Number(params.id)
+            }
+        })
+
+        const product = store.getters['products/get'](params.id)
+
+        if (!product) error({ statusCode: 404, message: 'Product not found' })
+
+        return {
+            product,
+            breadcrumbLinks: [
+                { to: { path: '/' }, title: 'Home' },
+                { to: { path: `/products/${product.id}` }, title: product.name }
+            ]
+        }
+    },
     mounted() {
         if (this.id === 'new') {
             this.$store.dispatch('application/setEditorMode', 'editing')
@@ -684,7 +695,8 @@ export default {
         window.document.getElementById('header-bg').style['background-image'] = 'url(/img/backgrounds/1.jpg)'
     },
     updated() {
-        $('#summernote').summernote({
+        if (!process.client) return
+        this.$('#summernote').summernote({
             placeholder: 'Type in your text',
             tabsize: 2,
             height: 300,

@@ -348,9 +348,23 @@ export default {
             assetId: this.id
         }
     },
-    computed: {
-        asset() {
-            return this.$store.getters['assets/assets'][this.id]
+    async asyncData({ params, store, error }) {
+        await store.dispatch('assets/find', {
+            query: {
+                id: Number(params.id)
+            }
+        })
+
+        const asset = store.getters['assets/get'](params.id)
+
+        if (!asset) error({ statusCode: 404, message: 'Asset not found' })
+
+        return {
+            asset,
+            breadcrumbLinks: [
+                { to: { path: '/' }, title: 'Home' },
+                { to: { path: `/assets/${asset.id}` }, title: asset.name }
+            ]
         }
     },
     methods: {

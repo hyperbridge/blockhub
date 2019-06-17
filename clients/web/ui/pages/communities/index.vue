@@ -25,6 +25,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Communities | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: 'BlockHub communities are places for the gaming community to gather' },
+                { hid: 'keywords', name: 'keywords', content: 'community, forums, chat, social, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m)
     }
