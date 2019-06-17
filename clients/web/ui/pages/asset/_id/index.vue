@@ -326,7 +326,11 @@ import { ModelObj } from 'vue-3d-model'
 export default {
     head() {
         return {
-            title: `${this.asset.name}`
+            title: `${this.asset.name}`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub asset` },
+                { hid: 'keywords', name: 'keywords', content: 'asset, blockchain, game, indie, developer' }
+            ]
         }
     },
     components: {

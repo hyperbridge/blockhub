@@ -18,3 +18,21 @@
         </div>
     </c-layout>
 </template>
+
+<script>
+export default {
+    head() {
+        return {
+            title: `Redeem Code | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub code redemption` },
+                { hid: 'keywords', name: 'keywords', content: 'blockhub, code, redeem, redemption, blockchain, game, indie, developer' }
+            ]
+        }
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+
+</style>

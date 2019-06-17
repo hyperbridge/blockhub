@@ -10,6 +10,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Stash | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub stash combines everything you love together` },
+                { hid: 'keywords', name: 'keywords', content: 'stash, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     computed: {
         list() {
             const result = []

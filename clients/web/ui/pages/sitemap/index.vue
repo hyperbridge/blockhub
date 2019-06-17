@@ -125,13 +125,6 @@
                         <li>
                             <c-button
                                 status="none"
-                                to="/verification-assistant">
-                                Verification Assistant
-                            </c-button>
-                        </li>
-                        <li>
-                            <c-button
-                                status="none"
                                 to="/not-found">
                                 Not Found
                             </c-button>
@@ -811,6 +804,13 @@
                                 status="none"
                                 to="/admin">
                                 Admin
+                            </c-button>
+                        </li>
+                        <li>
+                            <c-button
+                                status="none"
+                                to="/admin/verification-assistant">
+                                Verification Assistant
                             </c-button>
                         </li>
                     </ul>

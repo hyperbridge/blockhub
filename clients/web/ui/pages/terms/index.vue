@@ -13,6 +13,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Terms & Conditions | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub terms` },
+                { hid: 'keywords', name: 'keywords', content: 'terms, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-terms-block': () => import('~/components/terms-block').then(m => m.default || m)
     }
