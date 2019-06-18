@@ -10,10 +10,10 @@
             name="fade-transform">
             <c-img
                 v-for="(image, index) in images"
-                v-if="index === active_item"
+                v-if="index === activeItem"
                 :key="image"
                 class="images-explorer__img"
-                :src="images[active_item]" />
+                :src="images[activeItem]" />
         </transition-group>
         <button
             class="images-explorer__btn"
@@ -37,21 +37,21 @@ export default {
     },
     data() {
         return {
-            active_item: -1
+            activeItem: -1
         }
     },
     mounted() {
-        this.active_item = this.start_from
+        this.activeItem = this.startFrom
     },
     methods: {
         change_image(direction) {
-            const { active_item, images } = this
-            if (active_item === 0 && direction === -1) {
-                this.active_item = images.length - 1
-            } else if (active_item === images.length - 1 && direction === 1) {
-                this.active_item = 0
+            const { activeItem, images } = this
+            if (activeItem === 0 && direction === -1) {
+                this.activeItem = images.length - 1
+            } else if (activeItem === images.length - 1 && direction === 1) {
+                this.activeItem = 0
             } else {
-                this.active_item += direction
+                this.activeItem += direction
             }
         }
     }

@@ -30,12 +30,11 @@ export default {
         'milestones'
     ],
     mounted() {
-        const finished_el = document.getElementsByClassName('Done')
+        const finishedElement = document.getElementsByClassName('Done')
 
-        if (!finished_el.length) return
-
-        const last_el = finished_el[finished_el.length - 1]
-        last_el.className += ' last-done-el'
+        if (!finishedElement.length) return
+        const lastElement = finishedElement[finishedElement.length - 1]
+        lastElement.className += ' last-done-el'
     }
 }
 </script>

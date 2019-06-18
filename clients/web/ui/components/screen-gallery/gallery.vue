@@ -86,12 +86,12 @@ export default {
     },
     data() {
         return {
-            active_item: 0,
-            random_item: 0,
-            show_modal: false,
+            activeItem: 0,
+            randomItem: 0,
+            showModal: false,
             interval: null,
-            run_slideshow: true,
-            play_video: false
+            runSlideshow: true,
+            playVideo: false
         }
     },
     watch: {
@@ -108,29 +108,29 @@ export default {
             this.interval = setInterval(() => {
                 if (!this.items || !this.items.length) return
 
-                this.active_item < this.items.length - 1 ? this.active_item++ : this.active_item = 0
-                const [child] = this.$refs[`thumb-${this.active_item}`]
+                this.activeItem < this.items.length - 1 ? this.activeItem++ : this.activeItem = 0
+                const [child] = this.$refs[`thumb-${this.activeItem}`]
                 const parent = this.$refs['thumb-nav']
                 this.scrollParentToChild(parent, child)
             }, 4000)
         },
         enableSlideshow(status) {
             clearInterval(this.interval)
-            this.run_slideshow = status
-            if (status && !this.play_video) this.slideshow()
+            this.runSlideshow = status
+            if (status && !this.playVideo) this.slideshow()
         },
         enableVideoPlay() {
             this.enableSlideshow(false)
-            this.play_video = true
+            this.playVideo = true
         },
         changeActiveItem(index) {
-            if (this.play_video) {
-                this.play_video = false
+            if (this.playVideo) {
+                this.playVideo = false
             }
-            this.active_item = index
+            this.activeItem = index
         },
         mouseOut() {
-            if (!this.play_video) this.enableSlideshow(true)
+            if (!this.playVideo) this.enableSlideshow(true)
         },
         scrollParentToChild(parent, child) {
             if (!parent) {
@@ -153,12 +153,12 @@ export default {
             if (status) this.slideshow()
         },
         restartGallery() {
-            this.active_item = 0
-            this.play_video = false
+            this.activeItem = 0
+            this.playVideo = false
 
             setTimeout(() => {
                 if (this.videoUrl) {
-                    this.random_item = Math.floor(Math.random() * this.items.length)
+                    this.randomItem = Math.floor(Math.random() * this.items.length)
                     this.enableVideoPlay()
                 } else {
                     this.enableSlideshow(true)
