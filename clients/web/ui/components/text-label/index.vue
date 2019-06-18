@@ -1,6 +1,6 @@
 <template>
     <span
-        class="c-text-label"
+        class="text-label"
         :class="['label-type-' + type]"
         :style="{ 'background-color': bgColor, 'color' : fontColor }">
         <slot />
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .c-text-label{
+    .text-label{
         padding: 0.20em 0.5em;
         border-radius: 3px;
         $labelColor: (

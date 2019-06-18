@@ -1,5 +1,5 @@
 <template>
-    <div class="c-checkbox">
+    <div class="checkbox">
         <input
             :id="id"
             type="checkbox"
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .c-checkbox {
+    .checkbox {
         display: inline-flex;
         overflow: hidden;
         input[type=checkbox] {

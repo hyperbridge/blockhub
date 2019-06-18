@@ -1,5 +1,5 @@
 <template>
-    <div class="c-video">
+    <div class="video">
         <c-loading-bar-circle v-if="showLoader" />
         <youtube
             v-if="youtube"
@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style lang="scss">
-    .c-video{
+    .video{
         position: relative;
         display: inline-flex;
         max-width: 100%;

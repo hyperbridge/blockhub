@@ -74,8 +74,6 @@
 
 <script>
 export default {
-    props: {
-    },
     data() {
         return {
             options_icons: {

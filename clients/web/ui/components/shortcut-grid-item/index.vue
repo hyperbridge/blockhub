@@ -11,7 +11,7 @@
 </template>
 
 <script>
-const CLICK_PIXEL_DISTANCE = 4
+const clickPixelDistance = 4
 
 export default {
     name: 'GridItem',
@@ -207,7 +207,7 @@ export default {
 
             const $event = this.wrapEvent(event)
 
-            if (distance < CLICK_PIXEL_DISTANCE) {
+            if (distance < clickPixelDistance) {
                 this.$emit('click', $event)
             }
 

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="c-range-slider"
+        class="range-slider"
         :class="sClass">
         <label v-if="label">{{ label }}</label>
         <p
@@ -106,7 +106,7 @@ export default {
 </script>
 
 <style lang="scss">
-    .c-range-slider{
+    .range-slider{
         label{
             display: block;
             color: #fff;

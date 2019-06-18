@@ -18,8 +18,8 @@ export default {
         stars() {
             const stars = []
             const number = Number(this.number)
-            const parsed_number = Math.floor(number).toString()
-            for (let i = 0; i < parsed_number; i++) {
+            const parsedNumber = Math.floor(number).toString()
+            for (let i = 0; i < parsedNumber; i++) {
                 stars.push('star')
             }
             return Number.isInteger(number) ? stars : [...stars, 'star-half']

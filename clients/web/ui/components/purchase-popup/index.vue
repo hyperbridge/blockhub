@@ -8,7 +8,7 @@
         @close="$emit('close')">
         <div
             slot="customClose"
-            class="c-popup__close"
+            class="popup__close"
             @click="$emit('close')">
             <i class="fas fa-times" />
         </div>
@@ -575,7 +575,7 @@ export default {
 
     }
 
-    .c-popup__close {
+    .popup__close {
         position: absolute;
         top: 0px;
         right: 0px;

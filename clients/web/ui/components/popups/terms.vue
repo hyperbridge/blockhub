@@ -4,28 +4,28 @@
         :duration="100">
         <div
             v-if="activated"
-            class="c-terms-popup"
+            class="terms-popup"
             @click.self.prevent="$emit('close')">
             <div
-                class="c-terms-popup__item"
+                class="terms-popup__item"
                 :style="{ 'width': + width + 'px'}">
                 <div class="position-relative">
-                    <div class="c-terms-popup__content">
+                    <div class="terms-popup__content">
                         <div
-                            class="c-terms-popup__close"
+                            class="terms-popup__close"
                             @click="$emit('close')">
                             <i class="fas fa-times" />
                         </div>
-                        <div class="c-terms-popup__header">
+                        <div class="terms-popup__header">
                             <slot name="header" />
                         </div>
                         <div
                             id="terms-popup__body"
-                            class="c-terms-popup__body"
+                            class="terms-popup__body"
                             @scroll="checkReadState">
                             <slot name="body" />
                         </div>
-                        <div class="c-terms-popup__footer">
+                        <div class="terms-popup__footer">
                             <c-button
                                 status="plain"
                                 class="color-red">
@@ -73,7 +73,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .c-terms-popup {
+    .terms-popup {
         display: flex;
         width: 100%;
         height: 100vh;
@@ -92,7 +92,7 @@ export default {
         }
     }
 
-    .c-terms-popup__close {
+    .terms-popup__close {
         position: absolute;
         top: 10px;
         right: 10px;
@@ -114,7 +114,7 @@ export default {
         }
     }
 
-    .c-terms-popup__item {
+    .terms-popup__item {
         display: flex;
         position: relative;
         z-index: 30;
@@ -124,7 +124,7 @@ export default {
         color: #fff;
     }
 
-    .c-terms-popup__content {
+    .terms-popup__content {
         background: #1C2032;
         padding: 20px;
         border-radius: 5px;
@@ -132,7 +132,7 @@ export default {
         box-shadow: 0 0 10px rgba(0, 0, 0, .3);
     }
 
-    .c-terms-popup__header{
+    .terms-popup__header{
         padding-bottom: 10px;
         margin-bottom: 10px;
         border-bottom: 1px solid rgba(255, 255, 255, .1);
@@ -147,7 +147,7 @@ export default {
             margin: 0;
         }
     }
-    .c-terms-popup__body{
+    .terms-popup__body{
         display: flex;
         flex-direction: column;
         overflow-y: auto;
@@ -158,7 +158,7 @@ export default {
         background: rgba(255, 255, 255, .03);
         padding: 10px;
     }
-    .c-terms-popup__footer{
+    .terms-popup__footer{
         display: flex;
         justify-content: flex-end;
         align-items: center;

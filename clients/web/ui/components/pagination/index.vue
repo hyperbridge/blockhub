@@ -82,19 +82,19 @@ export default {
     },
     computed: {
         visiblePages() {
-            const { activePage, pages, base_pages, pagesShow } = this
-            const mid_val = Math.round(pagesShow / 2)
+            const { activePage, pages, basePages, pagesShow } = this
+            const midVal = Math.round(pagesShow / 2)
             const numbers = []
 
-            if (activePage > mid_val && pages > pagesShow) {
-                let cur_page = activePage + mid_val >= pages ? pages - pagesShow : activePage - mid_val
+            if (activePage > midVal && pages > pagesShow) {
+                let curPage = activePage + midVal >= pages ? pages - pagesShow : activePage - midVal
                 for (let i = 0; i < pagesShow; i++) {
-                    cur_page++
-                    numbers.push(cur_page)
+                    curPage++
+                    numbers.push(curPage)
                 }
             } else {
-                const max_number = pages < pagesShow ? pages : pagesShow
-                for (let i = 0; i < max_number; i++) {
+                const maxNumber = pages < pagesShow ? pages : pagesShow
+                for (let i = 0; i < maxNumber; i++) {
                     numbers.push(i + 1)
                 }
             }
