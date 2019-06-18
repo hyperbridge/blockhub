@@ -125,13 +125,6 @@
                         <li>
                             <c-button
                                 status="none"
-                                to="/verification-assistant">
-                                Verification Assistant
-                            </c-button>
-                        </li>
-                        <li>
-                            <c-button
-                                status="none"
                                 to="/not-found">
                                 Not Found
                             </c-button>
@@ -813,6 +806,13 @@
                                 Admin
                             </c-button>
                         </li>
+                        <li>
+                            <c-button
+                                status="none"
+                                to="/admin/verification-assistant">
+                                Verification Assistant
+                            </c-button>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -822,6 +822,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Sitemap | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub sitemap` },
+                { hid: 'keywords', name: 'keywords', content: 'sitemap, links, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
     }
 }

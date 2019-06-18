@@ -156,13 +156,21 @@ function hexToRgb(hex) {
 }
 
 export default {
+    head() {
+        return {
+            title: `${this.realm.name}`,
+            meta: [
+                { hid: 'description', name: 'description', content: 'BlockHub realms are where you keep up with game studios' },
+                { hid: 'keywords', name: 'keywords', content: 'realms, game studios, gaming, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
         'c-simple-game-grid': () => import('~/components/game-grid/simple').then(m => m.default || m),
         'c-game-grid': () => import('~/components/game-grid/with-description').then(m => m.default || m),
         'c-featured-assets': () => import('~/components/assets-list-item/featured-list').then(m => m.default || m)
     },
-    props: ['id'],
     data() {
         return {
             css: {
@@ -174,26 +182,24 @@ export default {
         }
     },
     computed: {
-        realm() {
-            let realm = null
-
-            if (!realm) {
-                realm = this.$store.getters['realms/get'](this.id)
+    },
+    async asyncData({ params, store, error }) {
+        await store.dispatch('realms/find', {
+            query: {
+                id: Number(params.id)
             }
+        })
 
-            if (!realm) {
-                realm = DB.marketplace.realms.findOne({ 'id': Number(this.id) })
-            }
+        const realm = store.getters['realms/get'](params.id)
 
-            if (!realm) {
-                return
-            }
+        if (!realm) error({ statusCode: 404, message: 'Realm not found' })
 
-            // if (realm.images && realm.images.header) {
-            //     window.document.getElementById('header-bg').style['background-image'] = 'url(' + realm.images.header + ')'
-            // }
-
-            return realm
+        return {
+            realm,
+            breadcrumbLinks: [
+                { to: { path: '/' }, title: 'Home' },
+                { to: { path: `/realms/${realm.id}` }, title: realm.name }
+            ]
         }
     },
     mounted() {

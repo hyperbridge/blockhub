@@ -13,6 +13,7 @@
             </div>
             <div
                 v-for="stream in streams"
+                :key="stream.id"
                 class="col-12 col-md-6 col-lg-4">
                 <c-stream-item
                     :streamName="stream.userName"
@@ -34,6 +35,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Streams | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub streams` },
+                { hid: 'keywords', name: 'keywords', content: 'streams, twitch, youtube, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-stream-item': () => import('~/components/stream').then(m => m.default || m),
         'c-stream-carousel': () => import('~/components/stream/carousel').then(m => m.default || m)

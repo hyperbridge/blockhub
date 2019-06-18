@@ -279,7 +279,6 @@ export default {
         'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m),
         'c-user-head': () => import('~/components/user/header').then(m => m.default || m)
     },
-    props: ['id'],
     data() {
         return {
             badges: [],
@@ -298,8 +297,26 @@ export default {
         }
     },
     computed: {
-        signedIn() { return this.$store.state.application.signedIn },
-        profile() { return this.$store.state.application.activeProfile }
+        signedIn() { return this.$store.state.application.signedIn }
+    },
+    async asyncData({ params, store, error }) {
+        await store.dispatch('profiles/find', {
+            query: {
+                id: Number(params.id)
+            }
+        })
+
+        const profile = store.getters['profiles/get'](params.id)
+
+        if (!profile) error({ statusCode: 404, message: 'Profile not found' })
+
+        return {
+            profile,
+            breadcrumbLinks: [
+                { to: { path: '/' }, title: 'Home' },
+                { to: { path: `/profiles/${profile.id}` }, title: profile.name }
+            ]
+        }
     },
     created() {
         // $('.rating_readonly').raty({ readOnly: true })

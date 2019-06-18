@@ -86,7 +86,7 @@ export default {
             }
         }
     },
-    async asyncData({ params, store }) {
+    async asyncData({ params, store, error }) {
         await store.dispatch('discussions/find', {
             query: {
                 id: params.id,
@@ -96,6 +96,8 @@ export default {
 
         const discussion = store.getters['discussions/get'](params.id)
         const forum = discussion.community // store.getters['community/get'](discussion.communityId)
+
+        if (!discussion) error({ statusCode: 404, message: 'Discussion not found' })
 
         return {
             discussion,

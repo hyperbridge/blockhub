@@ -37,14 +37,14 @@
 
 <script>
 export default {
-    components: {
-        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-        'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
-        'c-pagination': () => import('~/components/pagination').then(m => m.default || m),
-        'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m)
+    head() {
+        return {
+            title: `${this.community.name}`
+        }
     },
-    async asyncData({ params, store }) {
+    components: {
+    },
+    async asyncData({ params, store, error }) {
         await store.dispatch('communities/find', {
             query: {
                 id: Number(params.id)
@@ -52,6 +52,8 @@ export default {
         })
 
         const community = store.getters['communities/get'](params.id)
+
+        if (!community) error({ statusCode: 404, message: 'Community not found' })
 
         return {
             community,

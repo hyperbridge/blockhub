@@ -38,6 +38,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Realms | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: 'BlockHub realms are where you keep up with game studios' },
+                { hid: 'keywords', name: 'keywords', content: 'realms, game studios, gaming, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-metro-grid': () => import('~/components/metro/grid').then(m => m.default || m),
         'c-metro-item': () => import('~/components/metro/metro-item').then(m => m.default || m)

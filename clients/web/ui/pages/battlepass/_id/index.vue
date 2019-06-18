@@ -9,6 +9,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Battle Pass ${this.battlepass.name} | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub battle pass` },
+                { hid: 'keywords', name: 'keywords', content: 'blockhub, battlepass, battle pass, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
     },
     computed: {

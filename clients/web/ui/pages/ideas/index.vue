@@ -58,6 +58,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Ideas | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub ideas are where the next best thing in gaming start` },
+                { hid: 'keywords', name: 'keywords', content: 'ideas, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-idea-card': () => import('~/components/idea-card').then(m => m.default || m)
     },

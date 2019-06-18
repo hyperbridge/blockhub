@@ -95,8 +95,19 @@
         </div>
     </c-layout>
 </template>
+
 <script>
-    export default {}
+export default {
+    head() {
+        return {
+            title: `License ${license.name} | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub license` },
+                { hid: 'keywords', name: 'keywords', content: 'license, blockchain, game, indie, developer' }
+            ]
+        }
+    }
+}
 </script>
 
 <style lang="scss" scoped>

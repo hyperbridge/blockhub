@@ -56,10 +56,10 @@
                 </p>
                 <c-project-card
                     v-for="(project, index) in projects"
+                    v-if="projects.length"
                     :id="project.id"
                     :key="index"
                     class="p-2 col-3"
-                    v-if="projects.length"
                     :description="project.description"
                     :image="project.meta && project.meta.images.mediumTile"
                     :funds="project.meta && project.meta.funds"
@@ -75,6 +75,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Projects | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: 'BlockHub projects are crowdfunded by the community on the blockchain' },
+                { hid: 'keywords', name: 'keywords', content: 'crowdfunding, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-project-card': () => import('~/components/project/card').then(m => m.default || m)
     },

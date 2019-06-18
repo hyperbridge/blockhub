@@ -220,6 +220,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Article | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub article` },
+                { hid: 'keywords', name: 'keywords', content: 'blockhub, article, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-datepicker': () => import('vuejs-datepicker').then(m => m.default || m)
     },

@@ -1139,6 +1139,15 @@ import { setInterval } from 'core-js'
 
 
 export default {
+    head() {
+        return {
+            title: `Token | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `Hyperbridge token used within BlockHub` },
+                { hid: 'keywords', name: 'keywords', content: 'hyperbridge token, token, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         'c-block': () => import('~/components/block').then(m => m.default || m),

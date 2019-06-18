@@ -280,17 +280,11 @@ export default {
         'c-updates-count': () => import('~/components/project/updates-count').then(m => m.default || m),
         'c-multiselect': () => import('vue-multiselect').then(m => m.default || m)
     },
-    props: {
-        id: [String, Number],
-        section: {
-            type: String,
-            default: 'overview'
-        }
-    },
     data() {
         return {
             errors: [],
             notice: '',
+            section: 'overview',
             activeElement: {
                 name: false,
                 backgroundImage: false,

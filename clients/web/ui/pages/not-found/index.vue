@@ -23,14 +23,23 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Not Found | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: 'BlockHub page could not be found' },
+                { hid: 'keywords', name: 'keywords', content: 'not found, blockhub' }
+            ]
+        }
+    },
     created() {
         if (process.client) {
-            $('body').addClass('screen--not-found')
+            this.$('body').addClass('screen--not-found')
         }
     },
     beforeDestroy() {
         if (process.client) {
-            $('body').removeClass('screen--not-found')
+            this.$('body').removeClass('screen--not-found')
         }
     },
     methods: {

@@ -324,6 +324,15 @@
 import { ModelObj } from 'vue-3d-model'
 
 export default {
+    head() {
+        return {
+            title: `${this.asset.name}`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub asset` },
+                { hid: 'keywords', name: 'keywords', content: 'asset, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
         'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
@@ -334,7 +343,6 @@ export default {
         'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
         'c-model-obj': ModelObj
     },
-    props: ['id'],
     data() {
         return {
             totalOwned: 3,
@@ -344,9 +352,23 @@ export default {
             assetId: this.id
         }
     },
-    computed: {
-        asset() {
-            return this.$store.getters['assets/assets'][this.id]
+    async asyncData({ params, store, error }) {
+        await store.dispatch('assets/find', {
+            query: {
+                id: Number(params.id)
+            }
+        })
+
+        const asset = store.getters['assets/get'](params.id)
+
+        if (!asset) error({ statusCode: 404, message: 'Asset not found' })
+
+        return {
+            asset,
+            breadcrumbLinks: [
+                { to: { path: '/' }, title: 'Home' },
+                { to: { path: `/assets/${asset.id}` }, title: asset.name }
+            ]
         }
     },
     methods: {

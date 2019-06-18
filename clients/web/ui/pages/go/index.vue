@@ -15,7 +15,14 @@
 
 <script>
 export default {
-    components: {
+    head() {
+        return {
+            title: `Go | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub Go` },
+                { hid: 'keywords', name: 'keywords', content: 'blockhub, go, blockchain, game, indie, developer' }
+            ]
+        }
     },
     props: ['code'],
     mounted() {

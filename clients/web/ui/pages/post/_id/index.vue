@@ -42,6 +42,15 @@ const updateProject = function() {
 }
 
 export default {
+    head() {
+        return {
+            title: `Post | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub post` },
+                { hid: 'keywords', name: 'keywords', content: 'post, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-tags': () => import('~/components/tags').then(m => m.default || m),
         'c-badges': () => import('~/components/project/badges').then(m => m.default || m)

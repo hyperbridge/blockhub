@@ -55,6 +55,7 @@
                             <c-scrollable-content>
                                 <c-message-small
                                     v-for="msg in messages"
+                                    :key="msg.id"
                                     :author="msg.author"
                                     :color="msg.color"
                                     :content="msg.content" />
@@ -70,6 +71,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `${this.stream.name} | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub stream` },
+                { hid: 'keywords', name: 'keywords', content: 'streams, twitch, youtube, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-video': () => import('~/components/video').then(m => m.default || m),
         'c-chat': () => import('~/components/chat/chat').then(m => m.default || m),

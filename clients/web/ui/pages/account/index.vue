@@ -278,6 +278,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Account | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub account management` },
+                { hid: 'keywords', name: 'keywords', content: 'account, identity, Ethereum, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
         'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),

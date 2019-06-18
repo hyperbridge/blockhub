@@ -494,16 +494,10 @@ export default {
         'c-updates-count': () => import('~/components/project/updates-count').then(m => m.default || m),
         'c-multiselect': () => import('vue-multiselect').then(m => m.default || m)
     },
-    props: {
-        id: [String, Number],
-        section: {
-            type: String,
-            default: 'overview'
-        }
-    },
     data() {
         return {
             errors: [],
+            section: 'overview',
             activeElement: {
                 name: false,
                 backgroundImage: false,
@@ -521,40 +515,40 @@ export default {
         }
     },
     computed: {
-        project() {
-            let project = null
+        // project() {
+        //     let project = null
 
-            if (this.id === 'new') {
-                project = { ...this.$store.state.funding.defaultProject }
+        //     if (this.id === 'new') {
+        //         project = { ...this.$store.state.funding.defaultProject }
 
-                this.$store.state.application.developerMode = true
-                this.$store.dispatch('application/setEditorMode', 'editing')
-            }
+        //         this.$store.state.application.developerMode = true
+        //         this.$store.dispatch('application/setEditorMode', 'editing')
+        //     }
 
-            if (!project) {
-                project = this.$store.getters['projects/get'](this.id)
-            }
+        //     if (!project) {
+        //         project = this.$store.getters['projects/get'](this.id)
+        //     }
 
-            if (!project) {
-                project = DB.funding.projects.findOne({ 'id': Number(this.id) })
-            }
+        //     if (!project) {
+        //         project = DB.funding.projects.findOne({ 'id': Number(this.id) })
+        //     }
 
-            if (!project) {
-                return
-            }
+        //     if (!project) {
+        //         return
+        //     }
 
-            if (project.images && project.images.header) {
-                window.document.getElementById('header-bg').style['background-image'] = `url(${project.images.header})`
-            }
+        //     if (project.images && project.images.header) {
+        //         window.document.getElementById('header-bg').style['background-image'] = `url(${project.images.header})`
+        //     }
 
-            if (!project.community) {
-                project.community = {
-                    discussions: []
-                }
-            }
+        //     if (!project.community) {
+        //         project.community = {
+        //             discussions: []
+        //         }
+        //     }
 
-            return project
-        },
+        //     return project
+        // },
         editing() {
             if (!this.$store.state.application.editorMode) {
                 for (const key in this.activeElement) {
@@ -591,13 +585,29 @@ export default {
         '$route'() {
             this.updateSection()
         },
-        '$store.state.projects.list'() {
-            this.project = this.$store.getters['projects/get'](this.id)
-        },
         editing() {
             if (this.$store.state.application.editorMode === 'publishing') {
                 this.save()
             }
+        }
+    },
+    async asyncData({ params, store, error }) {
+        await store.dispatch('projects/find', {
+            query: {
+                id: Number(params.id)
+            }
+        })
+
+        const project = store.getters['projects/get'](params.id)
+
+        if (!project) error({ statusCode: 404, message: 'Project not found' })
+
+        return {
+            project,
+            breadcrumbLinks: [
+                { to: { path: '/' }, title: 'Home' },
+                { to: { path: `/projects/${project.id}` }, title: project.name }
+            ]
         }
     },
     created() {
@@ -620,7 +630,7 @@ export default {
     },
     updated() {
         if (process.client) {
-            $('#summernote').summernote({
+            this.$('#summernote').summernote({
                 placeholder: 'Type in your text',
                 tabsize: 2,
                 height: 300,
@@ -638,7 +648,7 @@ export default {
     },
     methods: {
         showTab(name) {
-            $(`.nav-tabs a[href="#${name}"]`).tab('show')
+            this.$(`.nav-tabs a[href="#${name}"]`).tab('show')
         },
         deactivateElement(key) {
             this.activeElement[key] = false

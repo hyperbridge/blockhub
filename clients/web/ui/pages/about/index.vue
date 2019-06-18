@@ -10,6 +10,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `About | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub origin and story` },
+                { hid: 'keywords', name: 'keywords', content: 'about, blockhub, story, origin, blockchain, game, indie, developer' }
+            ]
+        }
+    }
 }
 </script>
 

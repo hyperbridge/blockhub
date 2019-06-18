@@ -8,6 +8,15 @@
 import Chat from '@/components/chat/chat'
 
 export default {
+    head() {
+        return {
+            title: `Chat | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub chat` },
+                { hid: 'keywords', name: 'keywords', content: 'chat, social, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-chat': Chat
     },

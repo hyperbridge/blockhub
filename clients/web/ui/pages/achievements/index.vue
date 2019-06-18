@@ -68,6 +68,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Achievements | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub achievements` },
+                { hid: 'keywords', name: 'keywords', content: 'achievements, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     data() {
         return {
             achievements: [

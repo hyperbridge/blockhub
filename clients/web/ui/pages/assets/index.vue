@@ -236,6 +236,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Assets | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub assets` },
+                { hid: 'keywords', name: 'keywords', content: 'assets, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m),
         'c-assets-list': () => import('~/components/assets-list-item').then(m => m.default || m),

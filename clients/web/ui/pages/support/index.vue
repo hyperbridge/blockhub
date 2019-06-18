@@ -22,6 +22,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Support | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub support` },
+                { hid: 'keywords', name: 'keywords', content: 'support, help, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
     },
     data: () => ({
