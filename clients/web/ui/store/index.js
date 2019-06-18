@@ -122,7 +122,7 @@ if (decentralizedMode) {
 }
 
 export const actions = {
-    async nuxtServerInit({ commit, dispatch, state }, { app, req, store }) {
+    async nuxtServerInit({ commit, dispatch }, { app, req, store }) {
         const origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg' // eslint-disable-line no-negated-condition
 
         const storage = {
@@ -181,11 +181,15 @@ export const actions = {
         const cookieToken = app.$cookies.get('feathers-jwt')
 
         if (cookieToken) {
-            const { accessToken } = await store.dispatch('auth/authenticate', {
-                strategy: 'jwt',
-                accessToken: cookieToken
-            })
-            console.log(33333, cookieToken, accessToken)
+            try {
+                const { accessToken } = await store.dispatch('auth/authenticate', {
+                    strategy: 'jwt',
+                    accessToken: cookieToken
+                })
+            } catch (error) {
+                app.$cookies.remove('feathers-jwt')
+                return
+            }
         }
 
         return initAuth({
