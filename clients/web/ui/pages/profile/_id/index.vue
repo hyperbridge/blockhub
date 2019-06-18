@@ -308,7 +308,7 @@ export default {
 
         const profile = store.getters['profiles/get'](params.id)
 
-        if (!profile) error({ statusCode: 404, message: 'Profile not found' })
+        if (!profile) return error({ statusCode: 404, message: 'Profile not found' })
 
         return {
             profile,

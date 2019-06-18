@@ -53,7 +53,7 @@ export default {
 
         const community = store.getters['communities/get'](params.id)
 
-        if (!community) error({ statusCode: 404, message: 'Community not found' })
+        if (!community) return error({ statusCode: 404, message: 'Community not found' })
 
         return {
             community,

@@ -1201,7 +1201,6 @@
             const self = this
 
             return {
-                renderCondition: 'none',
                 loadingState: true,
                 userSubmittedConnectionMessage: this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))],
                 panelOption: {

@@ -192,7 +192,7 @@ export default {
 
         const realm = store.getters['realms/get'](params.id)
 
-        if (!realm) error({ statusCode: 404, message: 'Realm not found' })
+        if (!realm) return error({ statusCode: 404, message: 'Realm not found' })
 
         return {
             realm,

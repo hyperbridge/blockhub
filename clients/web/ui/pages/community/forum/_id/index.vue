@@ -65,7 +65,7 @@ export default {
         'c-community-item': () => import('~/components/community/post-item').then(m => m.default || m),
         'c-search': () => import('~/components/searcher').then(m => m.default || m)
     },
-    async asyncData({ params, store }) {
+    async asyncData({ params, store, error }) {
         await store.dispatch('communities/find', {
             query: {
                 id: params.id,
@@ -74,6 +74,8 @@ export default {
         })
 
         const forum = store.getters['communities/get'](params.id)
+
+        if (!forum) return error({ statusCode: 404, message: 'Forum not found' })
 
         return {
             forum,

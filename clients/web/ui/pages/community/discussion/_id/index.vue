@@ -97,7 +97,8 @@ export default {
         const discussion = store.getters['discussions/get'](params.id)
         const forum = discussion.community // store.getters['community/get'](discussion.communityId)
 
-        if (!discussion) error({ statusCode: 404, message: 'Discussion not found' })
+        if (!discussion) return error({ statusCode: 404, message: 'Discussion not found' })
+        if (!forum) return error({ statusCode: 404, message: 'Forum not found' })
 
         return {
             discussion,

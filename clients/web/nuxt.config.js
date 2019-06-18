@@ -104,9 +104,8 @@ export default {
             })
 
             routes.push({
-                name: 'error',
                 path: '*',
-                component: path.resolve(__dirname, 'ui/layouts/error.vue')
+                component: path.resolve(__dirname, 'ui/pages/not-found/index.vue')
             })
         }
     },

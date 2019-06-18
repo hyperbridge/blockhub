@@ -361,7 +361,7 @@ export default {
 
         const asset = store.getters['assets/get'](params.id)
 
-        if (!asset) error({ statusCode: 404, message: 'Asset not found' })
+        if (!asset) return error({ statusCode: 404, message: 'Asset not found' })
 
         return {
             asset,

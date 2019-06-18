@@ -9,10 +9,10 @@
 export default {
     head() {
         return {
-            title: `Not Found | BlockHub`,
+            title: `Error | BlockHub`,
             meta: [
-                { hid: 'description', name: 'description', content: 'BlockHub page could not be found' },
-                { hid: 'keywords', name: 'keywords', content: 'not found, blockhub' }
+                { hid: 'description', name: 'description', content: 'BlockHub error' },
+                { hid: 'keywords', name: 'keywords', content: 'error, blockhub' }
             ]
         }
     },
@@ -23,16 +23,6 @@ export default {
         error: {
             type: Object,
             default: () => ({})
-        }
-    },
-    asyncData({ res }) {
-        res.statusCode = 404
-
-        return {
-            error: {
-                statusCode: 404,
-                message: 'Page not found'
-            }
         }
     }
 }
