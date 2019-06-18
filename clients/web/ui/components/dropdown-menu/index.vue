@@ -26,14 +26,14 @@
 export default {
     filters: {
         btnDynamicClass(menuItem) {
-            let class_name = 'btn-'
+            let className = 'btn-'
             switch (menuItem) {
             case 'Save':
-                return class_name += 'success'
+                return className += 'success'
             case 'Report':
-                return class_name += 'danger'
+                return className += 'danger'
             default:
-                return class_name += 'info'
+                return className += 'info'
             }
         }
     },
