@@ -60,7 +60,6 @@ export default class Product extends BaseModel {
     project!: Project
     projectId!: Number
 
-
     static get tableName() {
         return 'products'
     }
@@ -213,7 +212,7 @@ export default class Product extends BaseModel {
                     }
                 },
                 filter(builder) {
-                    builder.where('nodes.relationKey', 'tags')
+                    //builder.where('nodes.relationKey', 'tags')
                 },
                 beforeInsert(model) {
                     (model as Node).relationKey = 'tags'

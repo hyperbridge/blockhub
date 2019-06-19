@@ -47,4 +47,12 @@ export default class Tag extends BaseModel {
             },
         }
     }
+
+    static get modifiers() {
+        return {
+            released(builder) {
+                builder.where('tags.value', 'released')
+            }
+        }
+    }
 }
