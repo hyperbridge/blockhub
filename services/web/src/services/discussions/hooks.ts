@@ -1,4 +1,8 @@
+import Discussion from '../../models/discussion'
+import Node from '../../models/node'
+
 const { authenticate } = require('@feathersjs/authentication').hooks
+
 
 const fillDiscussion = async function(discussion, context) {
 
@@ -75,15 +79,47 @@ const afterCreate = function(options = {}) {
 
         const { owner, community } = relations
 
-        result.community = community
-        result.owner = owner
-
-        await app.service('discussions').update(result.id, result, {
-            relate: [
-                'community',
-                'owner'
-            ]
+        await Node.query().insert({
+            fromCommunityId: community.id,
+            toDiscussionId: result.id,
+            relationKey: 'discussions'
         })
+        await Node.query().insert({
+            fromDiscussionId: result.id,
+            toProfileId: owner.id,
+            relationKey: 'owner'
+        })
+
+        // result.community = community
+        // result.owner = owner
+
+
+        // const discussion = await Discussion
+        //     .query()
+        //     .where('id', result.id)
+
+        // await discussion
+        //     // @ts-ignore
+        //     .$relatedQuery('community')
+        //     .insert({ relationKey: 'discussions' })
+        // console.log({
+        //     fromCommunityId: community.id,
+        //     toDiscussionId: result.id,
+        //     relationKey: 'discussions'
+        // })
+        // Discussion
+        //     .query()
+        //     .patch(result)
+        //     .where('id', result.id)
+        //     .eager('[owner, community]')
+        //     .returning('*')
+
+        // await app.service('discussions').update(result.id, result, {
+        //     relate: [
+        //         'owner',
+        //         'community'
+        //     ]
+        // })
 
         return context
     }

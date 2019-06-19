@@ -14,7 +14,7 @@ export default function(app) {
             ...paginate
         },
         allowedInsert: '[]',
-        allowedEager: '[community.^, owner.^, messages.^, messages.replies.^]',
+        allowedEager: '[owner.^, community.^, messages.^, messages.replies.^]',
         allowedUpsert: '[]'
     }
 
