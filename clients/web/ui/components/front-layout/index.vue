@@ -1418,7 +1418,9 @@
                         $eager: '[community, owner]'
                     }
                 }])
+
                 //this.notice = "Congratulations, your discussion has been created!"
+
                 this.$store.state.application.activeModal = null
                 this.$router.push('/community/discussion/' + result.id)
             },

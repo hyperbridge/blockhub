@@ -212,7 +212,7 @@ export const actions = {
                 ...data
             }
         } else {
-            console.log(arguments)
+            // console.log(arguments)
             // rootState[module][target] = data
             Vue.set(rootState[module], target, data)
         }

@@ -1,6 +1,25 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 const populateProfile = require('../../hooks/populate-profile')
 
+const beforeFind = async function() {
+    return async context => {
+        const { params } = context
+
+        // if (params.filter) {
+        //     if (params.filter === 'newReleases') {
+        //         params.released = true
+        //         params.$sort = {
+        //             releaseDate: -1
+        //         }
+        //     }
+
+        //     delete params.filter
+        // }
+
+        return context
+    }
+}
+
 const fillProduct = async function(product) {
     // product.images = {
     //     "mediumTile": "https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"
@@ -44,7 +63,7 @@ const create = function(options = {}) {
             throw new Error('Account required')
         }
 
-        if (data.ownerId) {
+        if (!data.ownerId) {
             throw new Error('Owner required')
         }
 

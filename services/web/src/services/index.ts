@@ -28,6 +28,7 @@ import ideas from './ideas'
 import tags from './tags'
 import search from './search'
 import application from './application'
+import topGameIdeas from './topGameIdeas'
 
 export default {
     accounts,
@@ -59,5 +60,6 @@ export default {
     tags,
     votes,
     search,
-    application
+    application,
+    topGameIdeas
 }

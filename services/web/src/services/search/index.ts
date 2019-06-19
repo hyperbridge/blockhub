@@ -57,6 +57,17 @@ export default function(app) {
                 }
             }
 
+            // TODO: support queries below
+            // if (phrase.length) query.name = { '$eq': phrase }
+            // if (selectedTags.length) query.tags = { '$contains': selectedTags.map(tag => tag.value) }
+            // if (selectedGenres.length) query.genres = { '$contains': selectedGenres.map(tag => tag.name) }
+            // // if (selectedLanguages.length) query['languageSupport'] = {
+            // //     '$contains': { name: selectedLanguages.map(lang => lang.name) }
+            // // }
+            // if (price.min || price.max) query.price = { '$between': [price.min, price.max | 300] }
+            // if (communitySize) query.communitySize = { '$between': [communitySize, 999999999] }
+            // if (activeUsers) query.activeUsers = { '$between': [activeUsers, 999999999] }
+
             const projects = await app.service('/projects').find({ query })
 
             return {

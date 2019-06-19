@@ -291,7 +291,8 @@ export default {
                 { value: 'specials', selected: false },
                 { value: 'topSeller', selected: false },
                 { value: 'trending', selected: false },
-                { value: 'upcoming', selected: false }
+                { value: 'upcoming', selected: false },
+                { value: 'series', selected: false }
             ],
             phrase: '',
             results: [],
@@ -303,7 +304,6 @@ export default {
                 max: 0
             },
             expandFilters: true,
-            timeout2: 0,
             communitySize: 0,
             activeUsers: 0,
             platforms: [
