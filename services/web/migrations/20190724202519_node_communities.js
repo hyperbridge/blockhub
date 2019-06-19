@@ -5,13 +5,13 @@ exports.up = knex => {
                 .integer('fromCommunityId')
                 .unsigned()
                 .references('id')
-                .inTable('collections')
+                .inTable('communities')
                 .onDelete('CASCADE')
             table
                 .integer('toCommunityId')
                 .unsigned()
                 .references('id')
-                .inTable('collections')
+                .inTable('communities')
                 .onDelete('CASCADE')
         })
         .raw(`
