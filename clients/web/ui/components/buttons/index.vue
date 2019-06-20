@@ -1,7 +1,7 @@
 <template>
     <component
         :is="tag"
-        :href="href"
+        :href="to || href"
         :target="target"
         :class="[
             'c-button', 'c-button--' + size, status,
