@@ -8,19 +8,32 @@
             :key="item.id"
             class="assets-list__item-container"
             :style="{ width: 'calc( 100% / ' + itemInRow + ')'}">
-            <c-assets-item :item="item" />
+            <c-assets-item
+                :id="item.id"
+                :name="item.name"
+                :currentPrice="item.price.current"
+                :count="item.count" />
         </div>
     </transition-group>
 </template>
 
 <script>
-export default {
-    name: 'AssetsListItems',
-    components: {
-        'c-assets-item': () => import('~/components/assets-list-item/item').then(m => m.default || m)
-    },
-    props: ['items', 'itemInRow']
-}
+    export default {
+        name: 'AssetsListItems',
+        components: {
+            'c-assets-item': () => import('~/components/assets-list-item/item').then(m => m.default || m)
+        },
+        props: {
+            items: {
+                type: Array,
+                default: () => []
+            },
+            itemInRow: {
+                type: [Number, String],
+                default: 3
+            }
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
@@ -29,18 +42,22 @@ export default {
         justify-content: flex-start;
         flex-wrap: wrap;
         margin: 0 -10px;
-        width: calc( 100% + 20px );
+        width: calc(100% + 20px);
     }
+
     .assets-list-leave-active {
         position: absolute !important;
         opacity: 0;
     }
+
     .assets-list-move {
         transition: transform 1s ease, opacity 1s ease !important;
     }
+
     .assets-list__item-container {
         padding: 10px;
     }
+
     .assets-list__item {
         border-radius: 5px;
         padding: 10px;
@@ -60,9 +77,9 @@ export default {
         }
         .info {
             display: inline-block;
-            width: calc( 100% - 80px );
+            width: calc(100% - 80px);
             float: right;
-            h5{
+            h5 {
                 color: #fff;
             }
             span {
@@ -72,13 +89,14 @@ export default {
             }
         }
     }
+
     @media (max-width: 767px) {
-        .assets-list__item-container{
-            width: 100%!important;
+        .assets-list__item-container {
+            width: 100% !important;
             padding: 0;
             margin-bottom: 10px;
             border-bottom: 1px solid rgba(255, 255, 255, .1);
-            &:last-child{
+            &:last-child {
                 margin: 0;
                 border: unset;
             }

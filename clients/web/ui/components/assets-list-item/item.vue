@@ -3,19 +3,19 @@
         status="none"
         class="assets-list__item"
         :class="{ 'transparent-bg' : isTransparent }"
-        :to="`/asset/${item.id}`">
+        :to="`/asset/${id}`">
         <div class="thumb">
-            <c-img :src="item.image" />
+            <c-img :src="image" />
         </div>
         <div class="info">
-            <h5>{{ item.name }}</h5>
+            <h5>{{ name }}</h5>
             <slot>
                 <span class="float-left price">
-                    {{ item.price.current | convertCurrency }}
+                    {{ currentPrice }}
                 </span>
                 <span class="float-right box">
                     <c-icon name="box" />
-                    {{ item.count }}
+                    {{ count }}
                 </span>
             </slot>
         </div>
@@ -26,7 +26,10 @@
 export default {
     name: 'AssetsListItem',
     props: {
-        item: Object,
+        id: [ Number, String ],
+        name: String,
+        currentPrice: String,
+        count: String,
         isTransparent: {
             type: Boolean,
             default: false

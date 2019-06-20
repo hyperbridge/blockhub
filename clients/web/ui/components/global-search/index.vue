@@ -63,7 +63,6 @@ export default {
         'c-input': () => import('~/components/inputs').then(m => m.default || m),
         'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m)
     },
-    props: {},
     data() {
         return {
             searchQuery: '',
