@@ -29,6 +29,10 @@ const KnexSessionStore = require('connect-session-knex')(session)
 const knexfile = require('./knexfile')
 const knex = Knex(knexfile)
 
+knex.on('query', (query) => {
+    console.log(query)
+})
+
 Model.knex(knex)
 
 const store = new KnexSessionStore({
