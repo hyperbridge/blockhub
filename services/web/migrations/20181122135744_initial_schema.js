@@ -7,7 +7,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('email', 100)
             table.string('firstName', 50)
@@ -23,7 +23,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table
                 .integer('accountId')
@@ -43,7 +43,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('name', 100)
         })
@@ -54,7 +54,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('name', 100)
         })
@@ -65,7 +65,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('name', 100)
             table.integer('currentActiveUsers').unsigned()
@@ -79,7 +79,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('type', 100)
             table.string('standard', 100)
@@ -103,7 +103,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('name', 100)
         })
@@ -114,7 +114,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('name', 100)
             table
@@ -137,7 +137,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
         })
         .createTable('ideas', table => {
             table.increments('id').primary()
@@ -146,7 +146,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('name', 100)
             table.string('type', 100)
@@ -170,7 +170,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('name', 100)
         })
@@ -181,7 +181,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['Inactive', 'Draft', 'Pending', 'Contributable', 'InDevelopment', 'Refundable', 'Rejected', 'Completed']).defaultTo('Draft')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('name', 100)
             table
@@ -228,7 +228,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
         })
         .createTable('battlepasses', table => {
             table.increments('id').primary()
@@ -237,7 +237,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
         })
         .createTable('bounties', table => {
             table.increments('id').primary()
@@ -246,7 +246,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('name', 100)
         })
@@ -257,7 +257,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('name', 100)
         })
@@ -268,7 +268,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('name', 100)
         })
@@ -279,7 +279,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
         })
         .createTable('files', table => {
             table.increments('id').primary()
@@ -288,7 +288,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('storageType', 100)
             table.string('accessType', 100)
@@ -302,7 +302,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('name', 100)
             table
@@ -319,7 +319,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
         })
         .createTable('messages', table => {
             table.increments('id').primary()
@@ -328,7 +328,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('type', 100)
             table
@@ -345,7 +345,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
         })
         .createTable('orders', table => {
             table.increments('id').primary()
@@ -354,7 +354,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
         })
         .createTable('servers', table => {
             table.increments('id').primary()
@@ -363,7 +363,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
         })
         .createTable('suggestions', table => {
             table.increments('id').primary()
@@ -372,7 +372,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('name', 100)
         })
@@ -383,7 +383,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
         })
         .createTable('tournaments', table => {
             table.increments('id').primary()
@@ -392,7 +392,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('name', 100)
         })
@@ -403,7 +403,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table
                 .integer('ratingId')
@@ -419,7 +419,7 @@ exports.up = knex => {
             table.string('key', 100)
             table.text('value')
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            table.json('meta')
+            table.jsonb('meta')
 
             table.string('relationKey', 100)
             table
@@ -578,7 +578,7 @@ exports.up = knex => {
         //         .references('id')
         //         .inTable('projects')
         //         .onDelete('CASCADE')
-        //     table.json('meta')
+        //     table.jsonb('meta')
         // })
         // .createTable('asset_offers', table => {
         //     table.increments('id').primary()
@@ -604,7 +604,7 @@ exports.up = knex => {
         //         .onDelete('CASCADE')
         //     table.timestamp('createdAt')
         //     table.timestamp('updatedAt')
-        //     table.json('meta')
+        //     table.jsonb('meta')
         // })
         // .createTable('profile_friends', table => {
         //     table.increments('id').primary()
@@ -624,11 +624,11 @@ exports.up = knex => {
         //         .onDelete('CASCADE')
         //     table.timestamp('createdAt')
         //     table.timestamp('updatedAt')
-        //     table.json('meta')
+        //     table.jsonb('meta')
         // })
         // .createTable('sessions', table => {
         //     table.string('sid').primary()
-        //     table.json('sess').notNullable()
+        //     table.jsonb('sess').notNullable()
         //     table.timestamp('expired').notNullable()
         // })
 }
