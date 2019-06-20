@@ -5,8 +5,9 @@
                 status="none"
                 :to="`/product/${product.id}`">
                 <c-img
+                    v-if="product.meta.images"
                     class="card-img-top"
-                    :src="product.images.mediumTile" />
+                    :src="product.meta.images.mediumTile" />
             </c-button>
             <h4>
                 <c-button
@@ -18,9 +19,9 @@
             <p
                 class="card-text"
                 hidden>
-                {{ product.shortDescription }}
+                {{ product.meta.shortDescription }}
             </p>
-            <c-tags :tags="product.developerTags.slice(0,3)" />
+            <c-tags v-if="product.meta.developerTags" :tags="product.meta.developerTags.slice(0,3)" />
         </div>
     </div>
 </template>

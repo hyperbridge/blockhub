@@ -180,7 +180,7 @@ export default {
             result.push({
                 type: 'collectionsList',
                 data: {
-                    collectionsList: this.$store.getters['collections/list'],
+                    collectionsList: this.collections,
                     ref: 'collectionsSlider',
                     swiper: this.$refs.collectionsSlider && this.$refs.collectionsSlider.swiper
                 }
@@ -191,7 +191,7 @@ export default {
                 data: {
                     title: 'New Releases',
                     slidesPerView: 3,
-                    products: this.$store.state.marketplace.newProducts.slice(0, 12)
+                    products: this.newReleases || []
                 }
             })
 
@@ -327,10 +327,10 @@ export default {
         //     return this.$store.state.marketplace.products
         // },
     },
-    async asyncData(context) {
-        context.store.state.application.navigationComponent = 'store'
+    async asyncData({ store }) {
+        store.state.application.navigationComponent = 'store'
 
-        return context.store.dispatch('collections/find', {
+        const collections = await store.dispatch('collections/find', {
             query: {
                 $sort: {
                     createdAt: -1
@@ -338,6 +338,25 @@ export default {
                 $limit: 25
             }
         })
+
+        // this.$store.getters['collections/list']
+
+        const newReleases = (await store.dispatch('products/find', {
+            query: {
+                'type': 'game',
+                'tags.value': 'released',
+                '$joinRelation': 'tags',
+                '$eager': 'tags',
+                '$sort[releaseDate]': -1,
+                '$limit': 20
+                // filter: 'newReleases',
+            }
+        })).data
+
+        return {
+            collections,
+            newReleases // this.$store.state.marketplace.newProducts.slice(0, 12)
+        }
     },
     mounted() {
         this.updateLandingImage()
