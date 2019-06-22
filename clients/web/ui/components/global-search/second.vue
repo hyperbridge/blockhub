@@ -46,7 +46,8 @@
                         </div>
                         <div class="searcher-bar__results-list-wrapper">
                             <c-search-category
-                                v-for="item in results"
+                                v-for="(item, idx) in results"
+                                :key="`result-item${idx}`"
                                 :category="item"
                                 @categorySelect="categoryIcon"
                                 @categoryClose=" currentCat = null ">

@@ -68,7 +68,8 @@
                 v-if="comments"
                 class="w-100">
                 <c-comment
-                    v-for="comment in comments"
+                    v-for="(comment, idx) in comments"
+                    :key="`comment=${idx}`"
                     :canReply="false"
                     :comment="comment"
                     class="px-0" />

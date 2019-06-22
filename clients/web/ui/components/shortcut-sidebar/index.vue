@@ -19,8 +19,7 @@
             @click="click"
             @sort="sort">
             <template
-                slot="cell"
-                scope="props">
+                v-slot:cell="props">
                 <c-icon
                     :color="props.item"
                     :index="props.index"

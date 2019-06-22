@@ -40,7 +40,10 @@ export default {
         id: Number,
         name: String,
         author: String,
-        assets: Array,
+        assets: {
+            type: Array,
+            default: () => []
+        },
         background: String
     },
     data() {
@@ -117,9 +120,7 @@ export default {
             display: flex;
             justify-content: center;
             align-items: center;
-
             overflow: hidden;
-            position: relative;
 
             &:hover {
                 &:after {
