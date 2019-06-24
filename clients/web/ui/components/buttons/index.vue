@@ -88,7 +88,7 @@ export default {
         },
         soundEnabled: {
             type: Boolean,
-            default: true
+            default: false
         }
     },
     computed: {
