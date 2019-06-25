@@ -92,7 +92,8 @@ export default {
         '@nuxtjs/pwa',
         '@nuxtjs/moment',
         '@nuxtjs/sitemap',
-        'cookie-universal-nuxt'
+        'cookie-universal-nuxt',
+        '@nuxtjs/sentry'
         // './modules/init'
     ],
     router: {
@@ -141,6 +142,13 @@ export default {
             config.node = {
                 fs: 'empty'
             }
+        }
+    },
+    sentry: {
+        dsn: 'https://2728639f44194aea9c5ba79abfe34c42@sentry.io/1489980',
+        disabled: process.env.NODE_ENV !== 'production',
+        config: {
+            environment: process.env.NODE_ENV
         }
     }
 }
