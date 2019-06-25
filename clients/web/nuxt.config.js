@@ -54,12 +54,10 @@ export default {
             // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Nunito:300,400,600,700' },
             { type: 'application/json+oembed', href: 'https://full-url/oembed.json' },
             { rel: 'icon', type: 'image/png', href: '/static/img/icons/favicon-32x32.png' }
-        ]
-        /*
+        ],
         script: [
-          { src: 'https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.0/jsmediatags.min.js', defer: true }
+            { src: 'https://js.stripe.com/v3/', defer: true }
         ]
-        */
     },
     css: [],
     plugins: [
@@ -84,7 +82,8 @@ export default {
         { src: '~/plugins/jquery', ssr: false },
         { src: '~/plugins/summernote', ssr: false },
         { src: '~/plugins/moment', ssr: false },
-        { src: '~/plugins/blockhub' }
+        { src: '~/plugins/blockhub' },
+        { src: '~/plugins/stripe' }
     ],
     modules: [
         // Doc: https://axios.nuxtjs.org/usage
