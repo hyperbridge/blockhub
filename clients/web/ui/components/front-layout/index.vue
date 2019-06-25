@@ -911,13 +911,13 @@
                         class="fab fa-twitter" /> Tweet Us</a> <a href="https://hyperbridge.org/status"><span
                         class="fas fa-globe-americas" /> Server Status</a>
                     <br><br>
-                    <button onClick="window.goHome()">
+                    <button @click="window.goHome()">
                         Try Home
                     </button>
-                    <button onClick="window.resetSettings()">
+                    <button @click="window.resetSettings()">
                         Reset Settings
                     </button>
-                    <button onClick="window.location = 'https://hyperbridge.org/#contact'">
+                    <button @click="window.location = 'https://hyperbridge.org/#contact'">
                         Contact Us
                     </button>
                 </div>

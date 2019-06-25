@@ -30,7 +30,7 @@
                 </c-banner>
             </div>
         </div>
-
+        <!--
         <div
             class="row"
             hidden>
@@ -39,7 +39,7 @@
                 class="col-12 mb-4">
                 <c-welcome-box />
             </div>
-        </div>
+        </div> -->
 
         <c-infinite-content
             :list="list"

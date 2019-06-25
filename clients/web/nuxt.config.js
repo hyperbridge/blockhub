@@ -72,7 +72,7 @@ export default {
         { src: '~/plugins/vue-i18n' },
         { src: '~/plugins/vue-currency' },
         { src: '~/plugins/vue-analytics', ssr: false },
-        { src: '~/plugins/vue-awesome-swiper', ssr: false },
+        { src: '~/plugins/vue-awesome-swiper' },
         { src: '~/plugins/vue-country-flag', ssr: false },
         { src: '~/plugins/vue-snotify', ssr: false },
         { src: '~/plugins/vue-numerals', ssr: false },

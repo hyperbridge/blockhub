@@ -10,11 +10,7 @@
                     :src="product.meta.images.mediumTile" />
             </c-button>
             <h4>
-                <c-button
-                    status="none"
-                    :to="`/product/${product.id}`">
-                    {{ product.name }}
-                </c-button>
+                {{ product.name }}
             </h4>
             <p
                 class="card-text"

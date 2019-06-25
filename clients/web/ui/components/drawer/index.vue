@@ -323,7 +323,7 @@
                         </c-button>
                         <br><br>
                     </div>
-                    <div
+                    <!-- <div
                         v-if="desktopMode"
                         hidden>
                         <input
@@ -332,7 +332,7 @@
                         <c-button @click="sendDesktopMessage()">
                             Send Message To Desktop
                         </c-button>
-                    </div>
+                    </div> -->
                     <div
                         v-if="developerMode"
                         hidden>

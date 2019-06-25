@@ -9,7 +9,9 @@
             <c-drawer />
         </c-render-condition>
 
-        <vue-snotify />
+        <no-ssr>
+            <vue-snotify />
+        </no-ssr>
     </div>
 </template>
 
