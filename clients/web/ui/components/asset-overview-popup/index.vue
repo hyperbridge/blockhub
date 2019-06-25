@@ -5,7 +5,7 @@
                 <c-icon name="link" />
             </div>
             <div class="img">
-                <c-img :src="asset.image" />
+                <c-img :src="image" />
             </div>
             <div class="info">
                 <h4>{{ asset.name }}</h4>
@@ -87,7 +87,10 @@ export default {
     },
     props: {
         asset: {
-            type: Object
+            type: Object,
+            image: {
+                type: String
+            },
         }
     }
 }
