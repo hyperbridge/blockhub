@@ -47,7 +47,10 @@ export default {
         title: String,
         subTitle: String,
         mClass: String,
-        links: Array
+        links: {
+            type: Array,
+            default: () => []
+        }
     }
 }
 </script>

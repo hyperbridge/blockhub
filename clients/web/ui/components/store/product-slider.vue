@@ -41,7 +41,10 @@ export default {
         'c-product-card-dynamic': () => import('~/components/store/product-card-dynamic').then(m => m.default || m)
     },
     props: {
-        products: Array,
+        products: {
+            type: Array,
+            default: () => []
+        },
         title: String,
         maxPerView: {
             type: Number,

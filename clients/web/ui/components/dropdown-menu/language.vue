@@ -45,7 +45,10 @@ export default {
     },
     props: {
         currentLanguage: Object,
-        languages: Array
+        languages: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {

@@ -33,7 +33,10 @@ export default {
         'c-shortcut-sidebar': () => import('~/components/shortcut-sidebar').then(m => m.default || m)
     },
     props: {
-        shortcuts: [Array, Object],
+        shortcuts: {
+            type: Array,
+            default: () => []
+        },
         showShortcuts: {
             type: Boolean,
             default: true

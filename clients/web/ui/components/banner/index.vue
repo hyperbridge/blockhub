@@ -58,7 +58,10 @@ export default {
 
     },
     props: {
-        slides: Array
+        slides: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {

@@ -198,7 +198,6 @@
                         </div>
                     </div>
 
-
                     <div
                         v-if="item.type === 'productNews'"
                         class="row margin-bottom-30">
@@ -216,7 +215,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div
                         v-if="item.type === 'curatorReviews'"
@@ -256,14 +254,11 @@
                         </div>
                     </div>
 
-
                     <c-games-explorer v-if="item.type === 'gamesExplorer'" />
-
 
                     <c-assets-explorer
                         v-if="item.type === 'assetGrid'"
                         :assets="assets" />
-
 
                     <div
                         v-if="item.type === 'trendingProjectsRow'"
@@ -309,7 +304,6 @@
                         </div>
                     </div>
 
-
                     <div v-if="item.type === 'realmsRow'">
                         <c-swiper
                             :options="item.data.options"
@@ -354,7 +348,6 @@
                         </c-block>
                     </div>
 
-
                     <div
                         v-if="item.type === 'gameSeries'"
                         class="row margin-bottom-30">
@@ -369,7 +362,6 @@
                             </c-game-series>
                         </div>
                     </div>
-
 
                     <div
                         v-if="item.type === 'newReleasesGrid'"
@@ -405,7 +397,6 @@
                             </c-block>
                         </div>
                     </div>
-
 
                     <div
                         v-if="item.type === 'topItemsGrid'"

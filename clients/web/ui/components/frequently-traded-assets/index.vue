@@ -39,7 +39,10 @@ export default {
         'c-block': () => import('~/components/block').then(m => m.default || m)
     },
     props: {
-        items: Array,
+        items: {
+            type: Array,
+            default: () => []
+        },
         assetsPath: String
     }
 }

@@ -130,7 +130,10 @@ export default {
         win: String,
         linux: String,
         img: String,
-        filesList: Array
+        filesList: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {

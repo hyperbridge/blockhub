@@ -52,8 +52,14 @@ export default {
         poster: String,
         author: String,
         avatar: String,
-        video: [Object, Array],
-        comments: [Object, Array]
+        video: {
+            type: Array,
+            default: () => []
+        },
+        comments: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {

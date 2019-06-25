@@ -53,7 +53,10 @@ export default {
     },
     props: {
         currentCurrency: Object,
-        currencies: Array
+        currencies: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {
