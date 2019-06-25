@@ -82,8 +82,7 @@ export default {
         { src: '~/plugins/jquery', ssr: false },
         { src: '~/plugins/summernote', ssr: false },
         { src: '~/plugins/moment', ssr: false },
-        { src: '~/plugins/blockhub' },
-        { src: '~/plugins/stripe' }
+        { src: '~/plugins/blockhub' }
     ],
     modules: [
         // Doc: https://axios.nuxtjs.org/usage
@@ -139,7 +138,8 @@ export default {
             }
 
             config.node = {
-                fs: 'empty'
+                fs: 'empty',
+                child_process: 'empty'
             }
         }
     },
