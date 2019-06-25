@@ -1,12 +1,17 @@
 <template>
     <div id="app" :class="{ 'disable-animations': !disableAnimations }">
         <c-render-condition :type="renderCondition">
-            <nuxt-child keep-alive />
+            <div v-if="error">
+                <c-error-page :error="error" />
+            </div>
+            <nuxt-child v-else keep-alive />
 
             <c-drawer />
         </c-render-condition>
 
-        <vue-snotify />
+        <no-ssr>
+            <vue-snotify />
+        </no-ssr>
     </div>
 </template>
 
@@ -18,11 +23,15 @@ import 'swiper/dist/css/swiper.css'
 
 export default {
     components: {
+        'c-error-page': () => import('~/pages/error').then(m => m.default || m),
         'c-render-condition': () => import('~/components/render-condition').then(m => m.default || m),
         'c-drawer': () => import('~/components/drawer').then(m => m.default || m)
     },
     data() {
+        const error = this.$nuxt.nuxt.err
+
         return {
+            error,
             renderCondition: 'none'
         }
     },

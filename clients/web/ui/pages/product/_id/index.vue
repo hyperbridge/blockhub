@@ -661,7 +661,7 @@ export default {
 
         const product = store.getters['products/get'](params.id)
 
-        if (!product) error({ statusCode: 404, message: 'Product not found' })
+        if (!product) return error({ statusCode: 404, message: 'Product not found' })
 
         return {
             product,

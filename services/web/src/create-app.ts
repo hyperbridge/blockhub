@@ -29,6 +29,10 @@ const KnexSessionStore = require('connect-session-knex')(session)
 const knexfile = require('./knexfile')
 const knex = Knex(knexfile)
 
+knex.on('query', (query) => {
+    console.log(query)
+})
+
 Model.knex(knex)
 
 const store = new KnexSessionStore({
@@ -123,6 +127,16 @@ export default async () => {
             ],
             remove: [
                 authentication.hooks.authenticate('jwt')
+            ]
+        },
+        after: {
+            create: [
+                (context) => {
+                    context.result.accountId = context.params.user.id
+                    context.result.profiles = context.params.user.profiles
+
+                    return context
+                }
             ]
         }
     })

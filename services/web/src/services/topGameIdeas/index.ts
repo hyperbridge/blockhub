@@ -14,10 +14,10 @@ export default function(app) {
             }
         }
 
-        async get(id, params) {
-            return {
-                id
-            }
+        async find(params) {
+            return [
+                'sss'
+            ]
         }
     }
 

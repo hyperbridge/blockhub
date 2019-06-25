@@ -54,12 +54,10 @@ export default {
             // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Nunito:300,400,600,700' },
             { type: 'application/json+oembed', href: 'https://full-url/oembed.json' },
             { rel: 'icon', type: 'image/png', href: '/static/img/icons/favicon-32x32.png' }
-        ]
-        /*
+        ],
         script: [
-          { src: 'https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.0/jsmediatags.min.js', defer: true }
+            { src: 'https://js.stripe.com/v3/', defer: true }
         ]
-        */
     },
     css: [],
     plugins: [
@@ -72,7 +70,7 @@ export default {
         { src: '~/plugins/vue-i18n' },
         { src: '~/plugins/vue-currency' },
         { src: '~/plugins/vue-analytics', ssr: false },
-        { src: '~/plugins/vue-awesome-swiper', ssr: false },
+        { src: '~/plugins/vue-awesome-swiper' },
         { src: '~/plugins/vue-country-flag', ssr: false },
         { src: '~/plugins/vue-snotify', ssr: false },
         { src: '~/plugins/vue-numerals', ssr: false },
@@ -92,7 +90,8 @@ export default {
         '@nuxtjs/pwa',
         '@nuxtjs/moment',
         '@nuxtjs/sitemap',
-        'cookie-universal-nuxt'
+        'cookie-universal-nuxt',
+        '@nuxtjs/sentry'
         // './modules/init'
     ],
     router: {
@@ -104,9 +103,8 @@ export default {
             })
 
             routes.push({
-                name: 'error',
                 path: '*',
-                component: path.resolve(__dirname, 'ui/layouts/error.vue')
+                component: path.resolve(__dirname, 'ui/pages/not-found/index.vue')
             })
         }
     },
@@ -140,8 +138,16 @@ export default {
             }
 
             config.node = {
-                fs: 'empty'
+                fs: 'empty',
+                child_process: 'empty'
             }
+        }
+    },
+    sentry: {
+        dsn: 'https://2728639f44194aea9c5ba79abfe34c42@sentry.io/1489980',
+        disabled: process.env.NODE_ENV !== 'production',
+        config: {
+            environment: process.env.NODE_ENV
         }
     }
 }

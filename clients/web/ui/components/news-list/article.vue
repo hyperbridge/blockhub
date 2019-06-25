@@ -1,15 +1,15 @@
 <template>
     <div
-class="article-item"
-         :style="{ width: 'calc( 100% / ' + itemInRow + ')'}">
+        class="article-item"
+        :style="{ width: 'calc( 100% / ' + itemInRow + ')'}">
         <h4>{{ heading }}</h4>
         <div class="published_date mb-3">
             Published {{ date | parse_date }}
         </div>
         <p>{{ content }}</p>
         <a
-:href="`/${url}`"
-           class="btn btn-link">
+            :href="`/${url}`"
+            class="btn btn-link">
             Read More
         </a>
     </div>

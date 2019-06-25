@@ -4,6 +4,8 @@ import Profile from './profile'
 import Idea from './idea'
 import Project from './project'
 import Product from './product'
+import Community from './community'
+import Discussion from './discussion'
 import BaseModel from './base'
 
 // Based on https://github.com/Vincit/objection.js/issues/19
@@ -50,9 +52,13 @@ export default class Node extends BaseModel {
     fromRealmId!: Number
     toRealmId!: Number
 
+    fromCommunity!: Community
+    toCommunity!: Community
     fromCommunityId!: Number
     toCommunityId!: Number
 
+    fromDiscussion!: Discussion
+    toDiscussion!: Discussion
     fromDiscussionId!: Number
     toDiscussionId!: Number
 
@@ -193,6 +199,38 @@ export default class Node extends BaseModel {
                 join: {
                     from: 'nodes.toProductId',
                     to: 'profiles.id'
+                }
+            },
+            fromCommunity: {
+                relation: Model.HasOneRelation,
+                modelClass: Community,
+                join: {
+                    from: 'nodes.fromCommunityId',
+                    to: 'communities.id'
+                }
+            },
+            toCommunity: {
+                relation: Model.HasOneRelation,
+                modelClass: Community,
+                join: {
+                    from: 'nodes.toCommunityId',
+                    to: 'communities.id'
+                }
+            },
+            fromDiscussion: {
+                relation: Model.HasOneRelation,
+                modelClass: Discussion,
+                join: {
+                    from: 'nodes.fromDiscussionId',
+                    to: 'discussions.id'
+                }
+            },
+            toDiscussion: {
+                relation: Model.HasOneRelation,
+                modelClass: Discussion,
+                join: {
+                    from: 'nodes.toDiscussionId',
+                    to: 'discussions.id'
                 }
             },
         }

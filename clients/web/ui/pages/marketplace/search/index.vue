@@ -142,6 +142,7 @@
 <script>
 import { debounce } from '@/mixins'
 
+// TODO: simplify this shit
 export default {
     components: {
         'c-block': () => import('~/components/block/index').then(m => m.default || m),

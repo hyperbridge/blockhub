@@ -1,28 +1,36 @@
 <template>
-    <c-layout navigationKey="help">
-        <div class="row">
-            <div
-                class="col-12"
-                style="text-align: center">
-                <br><br><br><br><br><br><br><br><br>
-                <h1><strong>GG.</strong> You broke it.</h1>
-                <h3>That page wasn't found or there's an error in the spacetime continuum. <br>Either way, you better get home quick.</h3>
-                <br><br>
-                <c-button
-                    class="button--xl"
-                    status="gradient-info"
-                    @click="goHome">
-                    Go Home
-                </c-button>
-            </div>
+    <div class="row">
+        <div
+            class="col-12"
+            style="text-align: center">
+            <br><br><br><br><br><br><br><br><br>
+            <h1 v-if="error.statusCode === 404">
+                <strong>GG.</strong> Page not found.
+            </h1>
+            <h1 v-else>
+                <strong>GG.</strong> You broke it.
+            </h1>
+            <h3>Maybe there was an error in the spacetime continuum. <br>You better get home quick.</h3>
+            <br><br>
+            <c-button
+                class="c-button--xl"
+                status="gradient-info"
+                @click="goHome">
+                Go Home
+            </c-button>
         </div>
-        <!-- <div class="not-found__404" /> -->
-    </c-layout>
+    </div>
 </template>
 
 
 <script>
 export default {
+    props: {
+        error: {
+            type: Object,
+            default: () => ({})
+        }
+    },
     created() {
         if (process.client) {
             this.$('body').addClass('screen--not-found')
@@ -53,7 +61,8 @@ export default {
 <style lang="scss">
     body.screen--not-found {
         .app-header {
-            transform: rotate(-20deg) translateX(-80px) translateY(-450px) !important;
+            transform: rotate(-20deg) translateX(-5%) translateY(-70%) !important;
+            width: 140%;
             overflow: hidden;
 
             &:before {
@@ -73,6 +82,7 @@ export default {
         .app-header__top-bar {
             height: 600px !important;
             max-height: 600px !important;
+            width: 100%;
         }
         .quick-launch {
             display: none;

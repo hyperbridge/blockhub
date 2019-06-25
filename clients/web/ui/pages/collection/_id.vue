@@ -143,7 +143,7 @@ export default {
 
         const collection = store.getters['collections/get'](params.id)
 
-        if (!collection) error({ statusCode: 404, message: 'Collection not found' })
+        if (!collection) return error({ statusCode: 404, message: 'Collection not found' })
 
         if (collection.meta.assets) {
             await Promise.all(collection.meta.assets.map(id => store.dispatch('assets/find', {

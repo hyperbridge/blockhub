@@ -600,7 +600,7 @@ export default {
 
         const project = store.getters['projects/get'](params.id)
 
-        if (!project) error({ statusCode: 404, message: 'Project not found' })
+        if (!project) return error({ statusCode: 404, message: 'Project not found' })
 
         return {
             project,

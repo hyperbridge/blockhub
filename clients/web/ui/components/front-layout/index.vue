@@ -911,13 +911,13 @@
                         class="fab fa-twitter" /> Tweet Us</a> <a href="https://hyperbridge.org/status"><span
                         class="fas fa-globe-americas" /> Server Status</a>
                     <br><br>
-                    <button onClick="window.goHome()">
+                    <button @click="window.goHome()">
                         Try Home
                     </button>
-                    <button onClick="window.resetSettings()">
+                    <button @click="window.resetSettings()">
                         Reset Settings
                     </button>
-                    <button onClick="window.location = 'https://hyperbridge.org/#contact'">
+                    <button @click="window.location = 'https://hyperbridge.org/#contact'">
                         Contact Us
                     </button>
                 </div>
@@ -1201,7 +1201,6 @@
             const self = this
 
             return {
-                renderCondition: 'none',
                 loadingState: true,
                 userSubmittedConnectionMessage: this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))],
                 panelOption: {
@@ -1419,7 +1418,9 @@
                         $eager: '[community, owner]'
                     }
                 }])
+
                 //this.notice = "Congratulations, your discussion has been created!"
+
                 this.$store.state.application.activeModal = null
                 this.$router.push('/community/discussion/' + result.id)
             },
