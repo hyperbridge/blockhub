@@ -122,7 +122,7 @@ if (decentralizedMode) {
 }
 
 export const actions = {
-    async nuxtServerInit({ commit, dispatch }, { app, req, store }) {
+    async nuxtServerInit({ commit, dispatch }, { app, req, store, $sentry }) {
         const origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg' // eslint-disable-line no-negated-condition
 
         const storage = {
@@ -191,6 +191,13 @@ export const actions = {
                 return
             }
         }
+
+        /*
+            TODO: If the user is authenticated, we can actually pass it to Sentry as part
+            of the context to have a better understanding of how to reproduce an error.
+
+            $sentry.configureScope(scope => scope.setUser({ username: 'john.doe@example.com' }))
+        */
 
         return initAuth({
             commit,
