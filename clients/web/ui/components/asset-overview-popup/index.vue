@@ -8,10 +8,10 @@
                 <c-img :src="image" />
             </div>
             <div class="info">
-                <h4>{{ asset.name }}</h4>
-                <h6>{{ asset.productName }}</h6>
+                <h4>{{ name }}</h4>
+                <h6>{{ productName }}</h6>
                 <div class="description">
-                    <h6>{{ asset.price['current'] | convertCurrency }}</h6>
+                    <h6>{{ price['current'] | convertCurrency }}</h6>
                     <p>Based on 7461 other transactions</p>
                     <p>Lowest: {{ asset.price['min'] | convertCurrency }} Highest: {{ asset.price['max'] | convertCurrency }}</p>
                 </div>
@@ -91,6 +91,9 @@ export default {
             image: {
                 type: String
             },
+            name: String,
+            productName: String,
+            price: String,
         }
     }
 }
