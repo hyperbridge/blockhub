@@ -9694,10 +9694,9 @@ vue-analytics@^5.17.0:
   resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.17.0.tgz#c9530b82b9b4acd111c9cba7d249adf4089746b3"
   integrity sha512-1Cn/v06cGjmGDfRlG2hc0RF0sc2rNC88shOeLGNIlllSFv5GDZ9kLXGTPB9z9I+WyvFewyUONPIdQnpOls6h6w==
 
-vue-awesome-swiper@^3.1.3:
+"vue-awesome-swiper@git+ssh://git@github.com/hamburgscleanest/vue-awesome-swiper.git":
   version "3.1.3"
-  resolved "https://registry.yarnpkg.com/vue-awesome-swiper/-/vue-awesome-swiper-3.1.3.tgz#05500b501ffb3fec9bf7eb9985bcf4ae8360ed9e"
-  integrity sha512-E7suzkyApO8vNZbgdEnjSmnpsmQZyRvSVXJ7sey3XYwKPOkLhH3+GnHroBw+5PZIQXvWBwdCeQsPG1xQ1r1Rhg==
+  resolved "git+ssh://git@github.com/hamburgscleanest/vue-awesome-swiper.git#17b96d2eb61d13cec5cd94e123f48649452bf135"
   dependencies:
     object-assign "^4.1.1"
     swiper "^4.0.7"
