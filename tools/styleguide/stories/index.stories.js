@@ -6417,7 +6417,7 @@ storiesOf('Draggble video', module)
 storiesOf('Video', module)
     .add('default', () => ({
         components: {
-            'c-video': () => import('~/components/c-video').then(m => m.default || m)
+            'c-video': () => import('~/components/video').then(m => m.default || m)
         },
         data() {
             return {
