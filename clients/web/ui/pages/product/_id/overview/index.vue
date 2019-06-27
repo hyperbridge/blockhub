@@ -289,7 +289,9 @@
             @close="showInstaller = false">
             <c-game-installer
                 slot="body"
-                :product="product"
+                :productImagesMediumTile="product.images.mediumTile"
+                :productName="product.name"
+                :productSystemRequirements="product.systemRequirements"
                 @cancel="showInstaller = false" />
         </c-modal>
     </div>

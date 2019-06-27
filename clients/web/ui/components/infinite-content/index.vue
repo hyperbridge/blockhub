@@ -426,13 +426,13 @@
                                     :items="assets"
                                     itemInRow="2" />
 
-                                <p v-if="!assets.length">
+                                <div v-if="!assets.length">
                                     Nothing could be found. Want to <c-button
                                         status="plain"
                                         @click="$store.commit('application/activateModal', 'coming-soon')">
                                         Check for updates
                                     </c-button>?
-                                </p>
+                                </div>
 
                                 <c-content-navigation v-if="assets.length" />
                             </c-block>
