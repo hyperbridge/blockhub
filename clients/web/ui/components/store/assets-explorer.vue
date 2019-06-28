@@ -41,7 +41,7 @@
                             v-model="phrase"
                             class="assets-explorer__input-searcher" />
                     </div>
-                    <router-link
+                    <nuxt-link
                         tag="div"
                         :to="{
                             name: 'Marketplace',
@@ -54,7 +54,7 @@
                             iconHide>
                             View All
                         </c-button>
-                    </router-link>
+                    </nuxt-link>
                 </div>
                 <transition name="slide-in-top">
                     <div v-if="filtersActive">

@@ -5,9 +5,9 @@
                 <i :class="icon" />
             </div>
             <div class="text">
-                <router-link :to="{ path: `forum/${id}`, params: { id: id } }">
+                <nuxt-link :to="{ path: `forum/${id}`, params: { id: id } }">
                     {{ title }}
-                </router-link>
+                </nuxt-link>
             </div>
             <div class="last-post">
                 {{ calculateSince }}

@@ -1,13 +1,13 @@
 <template functional>
     <div class="block-menu">
         <nav class="block-menu__header">
-            <router-link
+            <nuxt-link
                 v-for="(link, index) in props.links"
                 :key="index"
                 class="block-menu__link"
                 :to="link.to">
                 {{ link.title }}
-            </router-link>
+            </nuxt-link>
         </nav>
         <slot />
     </div>

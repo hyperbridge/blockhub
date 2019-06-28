@@ -11,9 +11,9 @@
                 <h4>{{ name }}</h4>
                 <h6>{{ productName }}</h6>
                 <div class="description">
-                    <h6>{{ price['current'] | convertCurrency }}</h6>
+                    <h6>{{ priceCurrent }}</h6>
                     <p>Based on 7461 other transactions</p>
-                    <p>Lowest: {{ priceMin | convertCurrency }} Highest: {{ priceMax | convertCurrency }}</p>
+                    <p>Lowest: {{ priceMin }} Highest: {{ priceMax }}</p>
                 </div>
             </div>
         </div>
@@ -81,7 +81,6 @@
 
 <script>
 export default {
-    name: 'AssetOverviewPopup',
     components: {
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m)
     },
@@ -92,8 +91,9 @@ export default {
         id: String,
         name: String,
         productName: String,
-        priceMin: String,
-        priceMax: String,
+        priceMin: Number,
+        priceMax: Number,
+        priceCurrent: Number,
         acceptOffers: Boolean,
         metadata: {
             type:  Array,

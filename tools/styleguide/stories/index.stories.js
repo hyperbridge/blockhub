@@ -868,28 +868,6 @@ storiesOf('Milestones Line', module)
                 </div>
             </div>`
     }))
-    .add('in progress', () => ({
-        components: {
-            'c-milestones-line': MilestonesLine
-        },
-        data: () => object('Data', data.MilestonesLine),
-        template: `<div class="row m-0">
-                <div class="col-8 p-4">
-                    <c-milestones-line :milestones="milestones" />
-                </div>
-            </div>`
-    }))
-    .add('complete', () => ({
-        components: {
-            'c-milestones-line': MilestonesLine
-        },
-        data: () => object('Data', data.MilestonesLine),
-        template: `<div class="row m-0">
-                <div class="col-8 p-4">
-                    <c-milestones-line :milestones="milestones" />
-                </div>
-            </div>`
-    }))
 
 
 import SidebarMenu from '@/components/sidebar-menu'
@@ -2009,7 +1987,7 @@ const assets_list = [
             "current": 2.99
         },
         count: '240.000',
-        image: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
+		    image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
     },
     {
         name: 'some another item name',
@@ -2088,52 +2066,64 @@ storiesOf('Assets Overview Popup', module)
         },
         data() {
             return object('Data', {
-                asset: {
-                    metadata: [
-                        {
-                            "label": "type",
-                            "text": "Legendary Two Handed Sword"
-                        },
-                        {
-                            "label": "average dps",
-                            "text": "2,903.6"
-                        },
-                        {
-                            "label": "Damage Range",
-                            "text": "2193-2880"
-                        },
-                        {
-                            "label": "Attack speed",
-                            "text": "1.15"
-                        },
-                        {
-                            "label": "Bonus 1",
-                            "text": "+1379-1679 Damage, +9% Damage, +1121 strenght"
-                        },
-                        {
-                            "label": "Bonus 2",
-                            "text": "Monster kills grant +151 experiance"
-                        },
-                        {
-                            "label": "Level Requirement",
-                            "text": "70"
-                        },
-                        {
-                            "label": "Item Durability",
-                            "text": "40/41"
-                        }
-                    ],
-                    price: {
-                        "min": 0.99,
-                        "max": 9.99,
-                        "current": 2.99
-                    }
-                }
+		            image: 'https://via.placeholder.com/300',
+		            id: '123',
+		            name: 'Asset title',
+		            productName: 'Asset product name',
+		            acceptOffers: true,
+		            metadata: [
+				            {
+						            "label": "type",
+						            "text": "Legendary Two Handed Sword"
+				            },
+				            {
+						            "label": "average dps",
+						            "text": "2,903.6"
+				            },
+				            {
+						            "label": "Damage Range",
+						            "text": "2193-2880"
+				            },
+				            {
+						            "label": "Attack speed",
+						            "text": "1.15"
+				            },
+				            {
+						            "label": "Bonus 1",
+						            "text": "+1379-1679 Damage, +9% Damage, +1121 strenght"
+				            },
+				            {
+						            "label": "Bonus 2",
+						            "text": "Monster kills grant +151 experiance"
+				            },
+				            {
+						            "label": "Level Requirement",
+						            "text": "70"
+				            },
+				            {
+						            "label": "Item Durability",
+						            "text": "40/41"
+				            }
+		            ],
+		            price: {
+				            "min": 0.99,
+				            "max": 9.99,
+				            "current": 2.99
+		            }
             })
         },
         template: `
          <div class="row m-0 p-3">
-             <c-asset-popup :asset="asset" />
+             <c-asset-popup 
+                :image="image"
+                :id="id"
+                :name="name"
+                :productName="productName"
+                :priceMin="price.min"
+                :priceMax="price.max"
+                :priceCurrent="price.current"
+                :acceptOffers="acceptOffers"
+                :metadata="metadata" />
          </div>
         `
     }));

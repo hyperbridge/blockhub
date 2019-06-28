@@ -28,9 +28,9 @@
                                     </div>
                                     <div class="col-12 col-lg-6 frontpage-product__info">
                                         <h2>
-                                            <router-link :to="`/product/${item.data.id}`">
+                                            <nuxt-link :to="`/product/${item.data.id}`">
                                                 {{ item.data.name }}
-                                            </router-link>
+                                            </nuxt-link>
                                         </h2>
                                         <p>{{ item.data.shortDescription }}</p>
                                         <c-tags v-if="item.developerTags" :tags="item.data.developerTags" />

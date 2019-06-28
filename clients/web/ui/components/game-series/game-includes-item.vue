@@ -1,11 +1,11 @@
 <template>
     <div class="game-includes__item">
-        <router-link :to="`/product/${id}`">
+        <nuxt-link :to="`/product/${id}`">
             <c-img :src="image" />
-        </router-link>
-        <router-link :to="`/product/${id}`">
+        </nuxt-link>
+        <nuxt-link :to="`/product/${id}`">
             <h4>{{ name }}</h4>
-        </router-link>
+        </nuxt-link>
         <p>{{ developer }}</p>
         <div class="rating-stars">
             <c-rating :number="rating" />

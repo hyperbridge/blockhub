@@ -69,7 +69,7 @@
                     @input="search"
                     @keyup.enter.native="goToSearchPage()"
                     @click="goToSearchPage()">
-                    <router-link
+                    <nuxt-link
                         slot-scope="props"
                         :to="`/product/${props.result.id}`"
                         :title="`${props.result.name} - product page`"
@@ -107,19 +107,19 @@
                     </a>
                 </div>
                 <div class="action">
-                    <router-link
+                    <nuxt-link
                         :to="{ path: '/search', query }"
                         class="search">
                         Search
-                    </router-link>
-                    <router-link
+                    </nuxt-link>
+                    <nuxt-link
                         :to="{
                             path: '/search',
                             query: { showFilters: true }
                         }"
                         class="more-filters">
                         More filters ...
-                    </router-link>
+                    </nuxt-link>
                 </div>
             </div>
         </no-ssr>

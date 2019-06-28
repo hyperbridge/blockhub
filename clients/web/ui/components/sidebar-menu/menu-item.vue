@@ -1,10 +1,10 @@
 <template>
     <li class="sidebar-menu__item">
-        <router-link
+        <nuxt-link
             class="item__link"
             v-bind="$attrs">
             <slot />
-        </router-link>
+        </nuxt-link>
     </li>
 </template>
 

@@ -3,18 +3,18 @@
         class="collection-item"
         :style="{ 'background-image': 'url(' + image + ')' }">
         <div class="collection-item__items-container">
-            <router-link
+            <nuxt-link
                 v-for="(asset, index) in getAsset"
                 v-if="index < 4"
                 :key="index"
                 :to="{ name: 'asset-id', params: { id: asset.id } }">
                 <c-img :src="asset.image" />
-            </router-link>
+            </nuxt-link>
         </div>
         <div class="collection-item__info">
-            <router-link :to="{ name: 'collection-id', params: { id: id } }">
+            <nuxt-link :to="{ name: 'collection-id', params: { id: id } }">
                 <h4>{{ name }}</h4>
-            </router-link>
+            </nuxt-link>
             <h6>by {{ author }}</h6>
             <div class="count">
                 <i class="fas fa-box" />
