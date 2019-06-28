@@ -1,18 +1,19 @@
 <template>
     <div
+        v-if="items[activeItem]"
         class="screen-gallery"
         @mouseover="enableSlideshow(false)"
         @mouseout="mouseOut()">
         <div class="screen-gallery__main-img">
             <c-icon
-                v-show="!run_slideshow && !play_video"
+                v-show="!runSlideshow && !playVideo"
                 name="expand" />
             <c-img
-                v-if="!play_video"
-                :src="items[active_item].overlay ? items[active_item].src : items[active_item]"
-                @click="show_modal = true" />
+                v-if="!playVideo"
+                :src="items[activeItem].overlay ? items[activeItem].src : items[activeItem]"
+                @click="showModal = true" />
             <video
-                v-else-if="play_video"
+                v-else-if="playVideo"
                 controls
                 autoplay
                 muted>
@@ -21,14 +22,14 @@
                     type="video/mp4">
             </video>
             <div
-                v-show="run_slideshow"
+                v-show="runSlideshow"
                 class="screen-gallery__progress-bar" />
 
             <c-image-overlay
-                v-if="items[active_item]['overlay']"
-                :title="items[active_item]['overlay'].title"
-                :subtitle="items[active_item]['overlay'].subtitle"
-                :text="items[active_item]['overlay'].text" />
+                v-if="items[activeItem]['overlay']"
+                :title="items[activeItem]['overlay'].title"
+                :subtitle="items[activeItem]['overlay'].subtitle"
+                :text="items[activeItem]['overlay'].text" />
         </div>
         <ul
             ref="thumb-nav"
@@ -36,10 +37,10 @@
             <li
                 v-if="videoUrl"
                 class="thumb-nav__video-thumb"
-                :class="{ 'inactive-item': !play_video }"
+                :class="{ 'inactive-item': !playVideo }"
                 :style="{
                     backgroundSize: 'cover',
-                    background: `black url(${items[random_item]}) no-repeat center`
+                    background: `black url(${items[randomItem].src}) no-repeat center`
                 }"
                 @click="enableVideoPlay()">
                 <c-icon name="play" />
@@ -50,16 +51,16 @@
                 :ref="`thumb-${index}`">
                 <c-img
                     :src="item.overlay ? item.src : item"
-                    :class="{ 'inactive-item': index !== active_item || play_video }"
+                    :class="{ 'inactive-item': index !== activeItem || playVideo }"
                     @click="changeActiveItem(index)" />
             </li>
         </ul>
         <c-modal
-            v-if="show_modal"
-            @close="show_modal=false">
+            v-if="showModal"
+            @close="showModal=false">
             <c-images-explorer
                 :images="items"
-                :start_from="active_item" />
+                :startFrom="activeItem" />
         </c-modal>
     </div>
 </template>
@@ -67,7 +68,6 @@
 
 <script>
 export default {
-    name: 'ScreenGallery',
     components: {
         'c-modal': () => import('~/components/modal').then(m => m.default || m),
         'c-images-explorer': () => import('~/components/images-explorer').then(m => m.default || m),

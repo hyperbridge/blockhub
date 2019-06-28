@@ -33,7 +33,7 @@
                                             </router-link>
                                         </h2>
                                         <p>{{ item.data.shortDescription }}</p>
-                                        <c-tags :tags="item.data.developerTags" />
+                                        <c-tags v-if="item.developerTags" :tags="item.data.developerTags" />
                                         <div class="frontpage-product__footer">
                                             <div
                                                 v-if="item.data.price"
@@ -523,7 +523,7 @@ export default {
         // ...mapGetters({
         //     assets: 'marketplace/assetsArray'
         // }),
-        assets(){
+        assets() {
             return []
         },
         sliced() {

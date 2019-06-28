@@ -32,7 +32,7 @@
                         hidden>
                         {{ item.shortDescription }}
                     </p>
-                    <c-tags :tags="item.tags.map(t => t.value)" />
+                    <c-tags v-if="item.tags" :tags="item.tags.map(t => t.value)" />
                 </div>
             </div>
         </div>

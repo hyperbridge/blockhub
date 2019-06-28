@@ -55,7 +55,7 @@
             hidden>
             {{ productShortDescription }}
         </p>
-        <c-tags :tags="productDeveloperTags.slice(0,3)" />
+        <c-tags v-if="productDeveloperTags" :tags="productDeveloperTags.slice(0,3)" />
     </div>
 </template>
 
@@ -63,7 +63,6 @@
 import { debounce } from '@/mixins'
 
 export default {
-    name: 'ProductCardDynamic',
     components: {
         'c-tags': () => import('~/components/tags').then(m => m.default || m)
     },
@@ -81,7 +80,7 @@ export default {
         productDeveloperTags: {
             type: Array,
             default: () => []
-        },
+        }
     },
     data() {
         return {
