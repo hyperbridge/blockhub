@@ -1,7 +1,7 @@
 <template>
     <div id="app" :class="{ 'disable-animations': !disableAnimations }">
         <c-render-condition :type="renderCondition">
-            <div v-if="_error">
+            <div v-if="nuxtError">
                 <c-error-page :error="error" />
             </div>
             <nuxt-child v-else keep-alive />
@@ -64,10 +64,10 @@ export default {
         'c-drawer': () => import('~/components/drawer').then(m => m.default || m)
     },
     data() {
-        const _error = this.$nuxt.nuxt.err
+        const nuxtError = this.$nuxt.nuxt.err
 
         return {
-            _error,
+            nuxtError,
             renderCondition: 'none'
         }
     },
