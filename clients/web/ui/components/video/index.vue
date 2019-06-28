@@ -18,7 +18,7 @@
             :width="width"
             class="twitch-video"
             @ready="isReady" />
-        <c-video
+        <c-local-video
             v-else-if="src"
             :src="src"
             :height="height"
@@ -36,8 +36,8 @@ Vue.use(VueYoutube)
 
 export default {
     components: {
-        'c-video': () => import('~/components/video').then(m => m.default || m),
         'c-twitch': () => import('~/components/twitch').then(m => m.default || m),
+        'c-local-video': () => import('_local.vue').then(m => m.default || m),
         'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m)
     },
     props: {
@@ -51,6 +51,12 @@ export default {
         width: {
             type: String,
             default: '800'
+        },
+        poster: String,
+        videoType: String,
+        controls: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
