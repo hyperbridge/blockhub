@@ -156,7 +156,7 @@ export default {
     },
     computed: {
         secretQuestion1() {
-            if (!DB.application.config.data[0].account.secretQuestion1) return 'Secret question not found'
+            if (!DB.store.data[0].application.account.secretQuestion1) return 'Secret question not found'
 
             const expanded = {}
             expanded.lastName_first_kissed = 'What is the first name of the person you first kissed?'
@@ -166,7 +166,7 @@ export default {
             expanded['wedding_reception'] = 'What is the name of the plac eyour wedding reception was held?'
             expanded['city_sibling_live'] = 'In what city or town does your nearest sibling live?'
 
-            return expanded[DB.application.config.data[0].account.secretQuestion1]
+            return expanded[DB.store.data[0].application.account.secretQuestion1]
         }
     },
     created() {

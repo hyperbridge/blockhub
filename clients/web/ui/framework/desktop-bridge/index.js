@@ -1,4 +1,5 @@
 import * as DB from '../../db'
+import blockhub from '../../plugins/blockhub'
 
 export const config = {
 }
@@ -101,7 +102,7 @@ export const setAccountRequest = async data => new Promise(async resolve => {
         // local.store.commit('application/activateModal', null)
 
         // We were locked
-        if (DB.application.config.data[0].locked) {
+        if (local.store.state.application.locked) {
             local.router.push('/')
         }
 
@@ -321,7 +322,7 @@ export const init = (store, router) => {
     console.log('[Bridge] Initializing')
 
     on('promptPasswordRequest', data => {
-        DB.application.config.data[0].account.secretQuestion1 = data.secretQuestion1
+        local.store.state.application.account.secretQuestion1 = data.secretQuestion1
     })
 
     sendCommand('init', 1)

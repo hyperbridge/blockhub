@@ -373,7 +373,7 @@ export default {
     },
     computed: {
         wishlist() {
-            return this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.productWishlist || {}
+            return (this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.productWishlist) || {}
         }
     },
     methods: {

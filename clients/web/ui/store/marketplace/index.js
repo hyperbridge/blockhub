@@ -42,13 +42,13 @@ export const actions = {
     submitProductForReviewRequest(store, payload) {
         // payload = name, version, category, files, checksum, permissions
 
-        MarketplaceProtocol.Ethereum.Models.Marketplace.submitAppForReview(payload).then(res => {
-            const product = DB.marketplace.products.findOne({ 'name': product.name })
-            product.id = res[0]
-            // TODO: assign rest of props
+        // MarketplaceProtocol.Ethereum.Models.Marketplace.submitAppForReview(payload).then(res => {
+        //     const product = DB.marketplace.products.findOne({ 'name': product.name })
+        //     product.id = res[0]
+        //     // TODO: assign rest of props
 
-            store.commit('submitProductForReviewResponse', product)
-        })
+        //     store.commit('submitProductForReviewResponse', product)
+        // })
     },
     addToCollection({ commit }, payload) {
         commit('activeCollectionModal', payload)
