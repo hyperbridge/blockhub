@@ -8,11 +8,9 @@
             <div class="header-bg__layer-3" />
         </div>
 
-        <!-- PAGE WRAPPER -->
         <div
             class="page page--w-header page--w-container"
             :class="{'page__with-left-sidebar': showLeftPanel, 'page__with-right-sidebar': showRightPanel }">
-            <!-- PAGE HEADER -->
             <transition name="slideDown">
                 <c-header
                     v-if="!slimMode"
@@ -22,9 +20,7 @@
                     :isLoader="loadingState"
                     :title="headerText" />
             </transition>
-            <!-- //END PAGE HEADER -->
 
-            <!-- PAGE CONTENT WRAPPER -->
             <div
                 id="page-content"
                 class="page__content page__content-invert invert"
@@ -66,9 +62,8 @@
                     <c-shortcut-sidebar :items="customShortcuts ? customShortcuts : shortcuts" />
                 </div>
 
-                <!-- PAGE ASIDE PANEL -->
                 <div
-                    v-if="showLeftPanel"
+                    v-if="!loadingState && showLeftPanel"
                     id="page-aside"
                     class="page-aside invert left-sidebar"
                     style="max-width: 250px">
@@ -104,7 +99,6 @@
                         </c-load-more>
                     </div>
                 </div>
-                <!-- //END PAGE ASIDE PANEL -->
 
                 <div
                     id="content"
@@ -123,7 +117,6 @@
                     </div>
                 </div>
 
-                <!-- SIDEPANEL -->
                 <transition
                     v-if="showRightPanel"
                     name="slideRight"
@@ -133,11 +126,6 @@
                         style="max-width: 250px"
                         :navigationKey="navigationKey" />
                 </transition>
-                <!-- //END SIDEPANEL -->
-
-                <!-- <div class="status-bar" hidden>
-                    {{ connectionStatus.message }}
-                </div> -->
 
                 <c-welcome-popup
                     :activated="$store.state.application.activeModal === 'welcome'"
@@ -208,8 +196,6 @@
                         </c-button>
                     </p>
                 </c-basic-popup>
-
-                <!-- use below $router.currentRoute.fullPath -->
 
                 <c-basic-popup
                     :activated="$store.state.application.editorMode === 'editing' && !$store.state.application.settings.client['hideEditorWelcomeModal']"
@@ -866,28 +852,20 @@
                     v{{ $store.state.application.version }}
                 </div>
             </div>
-            <!-- //END PAGE CONTENT -->
 
             <!-- <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktopMode"><img src="/img/powered-by-hyperbridge.png" /></a> -->
 
-            <!--<transition name="slideDown">-->
             <c-profile-chooser v-if="profileChooser && signedIn" />
-            <!--</transition>-->
 
 
-            <!--Draggable video block -->
             <c-draggable-video
                 v-if="video"
                 :active="video.showPopup"
                 :videoUrl="video.url"
                 :setTime="video.currentTime"
                 @close=" video.showPopup = false" />
-            <!--end draggable video block -->
-
-
-            <!-- <search /> Discover the next best thing... -->
         </div>
-        <!-- //END PAGE WRAPPER -->
+
         <div
             id="startup-loader"
             class="startup-loader">
