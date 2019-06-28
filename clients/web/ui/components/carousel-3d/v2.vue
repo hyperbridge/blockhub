@@ -28,7 +28,10 @@
 <script>
 export default {
     props: {
-        items: Array,
+        items: {
+            type: Array,
+            default: () => []
+        },
         autoSlide: Boolean,
         limitTo: {
             type: Number,

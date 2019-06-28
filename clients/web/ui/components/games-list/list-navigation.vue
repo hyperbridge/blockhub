@@ -15,7 +15,10 @@
 <script>
 export default {
     props: {
-        list: [Array, Object],
+        list: {
+            type: Array,
+            default: () => []
+        },
         activeId: [String, Number]
     },
     methods: {

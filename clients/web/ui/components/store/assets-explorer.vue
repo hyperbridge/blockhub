@@ -227,9 +227,15 @@ export default {
     },
     computed: {
         ...mapGetters({
-            'genres': 'marketplace/productsTags',
-            'products': 'marketplace/assetsProducts'
+            // 'genres': 'marketplace/productsTags',
+            // 'products': 'marketplace/assetsProducts'
         }),
+        genres(){
+            return []
+        },
+        products(){
+            return []
+        },
         selectedProducts() {
             return this.selectableProducts.filter(product => product.selected)
         },

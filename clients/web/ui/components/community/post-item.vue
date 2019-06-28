@@ -87,7 +87,10 @@ export default {
             name: String
         },
         content: String,
-        comments: Array
+        comments: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {

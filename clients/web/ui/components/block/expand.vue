@@ -87,7 +87,10 @@ export default {
         rating: Number,
         content: String,
         actionText: String,
-        relatedItems: Array,
+        relatedItems: {
+            type: Array,
+            default: () => []
+        },
         relatedText: String
     },
     data() {

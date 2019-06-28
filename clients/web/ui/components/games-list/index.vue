@@ -19,7 +19,10 @@ export default {
         'c-games-navigation': () => import('~/components/games-list/list-navigation').then(m => m.default || m)
     },
     props: {
-        games: [Array, Object]
+        games: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {

@@ -1,12 +1,12 @@
 <template>
     <div class="chat-message">
         <div class="chat-message__avatar">
-            <img :src="user.avatar">
+            <img :src="userAvatar">
         </div>
         <div class="chat-message__body">
             <div class="chat-message__info">
                 <strong>
-                    {{ user.name }}
+                    {{ userName }}
                 </strong>
                 <span>
                     {{ time }}
@@ -26,7 +26,8 @@ export default {
         'c-emoji': () => import('~/components/emoji').then(m => m.default || m)
     },
     props: {
-        user: Object,
+        userAvatar: String,
+        userName: String,
         time: String,
         text: String
     },

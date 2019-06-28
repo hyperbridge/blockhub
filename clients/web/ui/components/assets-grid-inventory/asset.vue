@@ -13,7 +13,11 @@
                 iconHide>
                 <c-asset-preview
                     slot="tooltip"
-                    :asset="asset" />
+                    :asset="asset"
+                    :assetName="asset.name"
+                    :assetProductName="asset.productName"
+                    :assetImage="asset.image"
+                    :assetPrice="asset.price" />
                 <c-img
                     :src="asset.image"
                     class="asset__image" />

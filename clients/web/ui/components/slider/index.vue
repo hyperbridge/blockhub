@@ -27,7 +27,10 @@ export default {
     components: {
     },
     props: {
-        products: Array,
+        products: {
+            type: Array,
+            default: () => []
+        },
         title: String,
         maxPerView: Number,
         dynamic: {

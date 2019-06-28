@@ -40,7 +40,10 @@ export default {
         'c-stream-item': () => import('~/components/stream').then(m => m.default || m)
     },
     props: {
-        streams: Array,
+        streams: {
+            type: Array,
+            default: () => []
+        },
         title: String,
         maxPerView: {
             type: Number,
