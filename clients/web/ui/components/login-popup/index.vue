@@ -160,6 +160,8 @@ export default {
                     })
                 // Just use the returned error instead of mapping it from the store.
                     .catch(error => {
+                        console.warn(error)
+
                         // Convert the error to a plain object and add a message.
                         const type = error.className
                         error = Object.assign({}, error)

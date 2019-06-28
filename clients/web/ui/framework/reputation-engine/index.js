@@ -12,6 +12,8 @@ export const getProfile = () => {
         ? local.store.state.application.activeProfile
         : local.store.state.application.pendingProfile
 
+    if (!profile) return
+
     if (local.cache.profileId !== profile.id) {
         local.cache.profileId = profile.id
 
@@ -27,6 +29,8 @@ export const getProfile = () => {
 
 export const recacheEvents = () => {
     const profile = getProfile()
+
+    if (!profile) return
 
     getProfile().events.forEach(event => {
         local.cache.eventsKeyedByAward[event.key + event.meta.award] = true
@@ -49,8 +53,12 @@ export const notify = notice => {
 }
 
 export const addEvent = (title, message, event) => {
-    getProfile().events.push(event)
-    getProfile().reputation += event.value
+    const profile = getProfile()
+
+    if (!profile) return
+
+    profile.events.push(event)
+    profile.reputation += event.value
 
     local.cache.eventsKeyedByAward[event.key + event.meta.award] = true
 
@@ -62,7 +70,7 @@ export const addEvent = (title, message, event) => {
     }
 }
 
-export const hasAward = award => Boolean(local.cache.eventsKeyedByAward[`REPUTATION${  award}`])
+export const hasAward = award => Boolean(local.cache.eventsKeyedByAward[`REPUTATION${award}`])
 
 export const browseAward = () => {
     const award = 'BROWSE'
