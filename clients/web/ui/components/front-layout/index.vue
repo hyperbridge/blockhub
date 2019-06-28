@@ -864,8 +864,6 @@
                 </div>
             </div>
 
-            <!-- <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktopMode"><img src="/img/powered-by-hyperbridge.png" /></a> -->
-
             <c-profile-chooser v-if="profileChooser && signedIn" />
 
             <c-draggable-video
@@ -927,7 +925,6 @@ export default {
         'c-qr-code': () => import('~/components/qr-code').then(m => m.default || m),
         'c-shortcut-sidebar': () => import('~/components/shortcut-sidebar').then(m => m.default || m),
         'c-load-more': () => import('~/components/buttons/load-more').then(m => m.default || m),
-        'c-drawer': () => import('~/components/drawer').then(m => m.default || m),
         'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m),
         'c-profile-chooser': () => import('~/components/profile-chooser').then(m => m.default || m),
         'c-settings': () => import('~/components/settings').then(m => m.default || m),

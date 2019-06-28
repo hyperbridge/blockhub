@@ -5,11 +5,10 @@
                 <c-error-page :error="error" />
             </div>
             <nuxt-child v-else keep-alive />
-
-            <c-drawer />
         </c-render-condition>
 
         <no-ssr>
+            <c-drawer />
             <vue-snotify />
         </no-ssr>
 
