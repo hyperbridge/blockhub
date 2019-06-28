@@ -52,20 +52,6 @@ Vue.use(StoreDummy)
 //addDecorator(StoryRouter())
 
 
-storiesOf('test', module)
-    .add('item', () => ({
-        components: {
-        },
-        data() {
-            return {
-                title: 'test',
-                price: '10.00'
-            }
-        },
-        template: '<div class="row"><div class="col-6 p-5">{{ title }}</div></div>'
-    }))
-
-
 import PromotionItem from '@/components/promotion-box/item'
 import PromotionList from '@/components/promotion-box/list'
 
@@ -195,9 +181,11 @@ storiesOf('Notifications', module)
         },
         template: `
             <div class="row m-0">
-                <div class="col-4 pt-3 text-white">
+                <div class="col-4 pt-3 text-white d-flex flex-column">
                     Single:
                     <c-notification :notification="notif"/>
+                </div>
+                <div class="col-4 pt-3 text-white d-flex flex-column">
                     Multiple:
                     <c-notification v-for="(notif, index) in notifs" :key="index" :notification="notif"/>
                 </div>
