@@ -7,7 +7,13 @@
                 @choose="getGame" />
         </div>
         <div class="col-9 p-0">
-            <c-game-tab :game="game" />
+            <c-game-tab :name="game.name"
+                        :subName="game.sub_name"
+                        :image="game.image"
+                        :friends="game.friends"
+                        :achievements="game.achievements"
+                        :downloadContent="game.download_content"
+                        :news="game.news" />
         </div>
     </div>
 </template>
