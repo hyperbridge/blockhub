@@ -4,7 +4,7 @@
             class="col-12"
             style="text-align: center">
             <br><br><br><br><br><br><br><br><br>
-            <h1 v-if="error.statusCode === 404">
+            <h1 v-if="isError.statusCode === 404">
                 <strong>GG.</strong> Page not found.
             </h1>
             <h1 v-else>
@@ -26,7 +26,7 @@
 <script>
 export default {
     props: {
-        error: {
+        isError: {
             type: Object,
             default: () => ({})
         }

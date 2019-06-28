@@ -1,8 +1,8 @@
 <template>
     <div id="app" :class="{ 'disable-animations': !disableAnimations }">
         <c-render-condition :type="renderCondition">
-            <div v-if="_error">
-                <c-error-page :error="error" />
+            <div v-if="isError">
+                <c-error-page :isError="isError" />
             </div>
             <nuxt-child v-else keep-alive />
 
@@ -28,10 +28,10 @@ export default {
         'c-drawer': () => import('~/components/drawer').then(m => m.default || m)
     },
     data() {
-        const _error = this.$nuxt.nuxt.err
+        const isError = this.$nuxt.nuxt.err
 
         return {
-            _error,
+            isError,
             renderCondition: 'none'
         }
     },
