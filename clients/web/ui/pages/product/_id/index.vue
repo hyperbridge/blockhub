@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                             <c-tags
-                                v-if="!editing"
+                                v-if="!editing && product.developerTags"
                                 :tags="product.developerTags" />
                         </div>
                     </div>
@@ -611,25 +611,6 @@ export default {
         },
         firstProduct() {
             return this.$store.state.marketplace.firstProduct
-        },
-        breadcrumbLinks() {
-            if (!this.product) {
-                return []
-            }
-
-            const links = [
-                { to: { path: '/' }, title: 'Store' }
-            ]
-
-            if (this.section === 'community') {
-                links.push({ to: { path: '' }, title: 'Community' })
-            } else if (this.section === 'projects') {
-                links.push({ to: { path: '' }, title: 'Crowdfunding' })
-            } else if (this.section === 'assets') {
-                links.push({ to: { path: '' }, title: 'Inventory' })
-            }
-
-            return links
         }
     },
     watch: {
@@ -662,6 +643,14 @@ export default {
         const product = store.getters['products/get'](params.id)
 
         if (!product) return error({ statusCode: 404, message: 'Product not found' })
+
+        // if (this.section === 'community') {
+        //     links.push({ to: { path: '' }, title: 'Community' })
+        // } else if (this.section === 'projects') {
+        //     links.push({ to: { path: '' }, title: 'Crowdfunding' })
+        // } else if (this.section === 'assets') {
+        //     links.push({ to: { path: '' }, title: 'Inventory' })
+        // }
 
         return {
             product,

@@ -8,11 +8,9 @@
             <div class="header-bg__layer-3" />
         </div>
 
-        <!-- PAGE WRAPPER -->
         <div
             class="page page--w-header page--w-container"
             :class="{'page__with-left-sidebar': showLeftPanel, 'page__with-right-sidebar': showRightPanel }">
-            <!-- PAGE HEADER -->
             <transition name="slideDown">
                 <c-header
                     v-if="!slimMode"
@@ -22,43 +20,52 @@
                     :isLoader="loadingState"
                     :title="headerText" />
             </transition>
-            <!-- //END PAGE HEADER -->
 
-            <!-- PAGE CONTENT WRAPPER -->
             <div
                 id="page-content"
                 class="page__content page__content-invert invert"
                 :class="{'make-it-blur': bluredBg, 'with-shortcuts': showShortcuts}"
                 :style="bgImage ? `background: url(${bgImage}) top center no-repeat;background-size: cover;` : ''">
-                <!-- v-drag-and-drop:options="dragOptions"> -->
-                <!-- <div class="loader-block" v-if="!isConnected">
+                <div v-if="!isConnected" class="loader-block">
                     <div class="loader-block__container">
-                        <div class="loader-block__spinner"></div>
+                        <div class="loader-block__spinner" />
 
-                        <p class="loader-block__message">{{ userSubmittedConnectionMessage.message }}</p>
-                        <p class="loader-block__user">Submitted by <a
-                            :href="`/profile/${userSubmittedConnectionMessage.user.id}`">@{{ userSubmittedConnectionMessage.user.name }}</a></p>
+                        <p class="loader-block__message">
+                            {{ userSubmittedConnectionMessage.message }}
+                        </p>
+                        <p class="loader-block__user">
+                            Submitted by <a
+                                :href="`/profile/${userSubmittedConnectionMessage.user.id}`">@{{ userSubmittedConnectionMessage.user.name }}</a>
+                        </p>
 
-                        <h1 class="loader-block__status-code" v-if="connectionStatus.code">ERROR {{ connectionStatus.code }}</h1>
+                        <h1 v-if="connectionStatus.code" class="loader-block__status-code">
+                            ERROR {{ connectionStatus.code }}
+                        </h1>
 
-                        <div class="loader-block__status-message" v-if="connectionStatus.message">
-                            <p hidden>{{ connectionStatus.message }}</p>
-                            <div>Internet Connection <span class="fa"
-                                :class="{'fa-check-circle': $store.state.application.connection.internet, 'fa-times-circle': !$store.state.application.connection.internet }"></span>
+                        <div v-if="connectionStatus.message" class="loader-block__status-message">
+                            <p hidden>
+                                {{ connectionStatus.message }}
+                            </p>
+                            <div>
+                                Internet Connection <span
+                                    class="fa"
+                                    :class="{'fa-check-circle': $store.state.application.connection.internet, 'fa-times-circle': !$store.state.application.connection.internet }" />
                             </div>
-                            <div>Server Connection <span class="fa"
-                                :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }"></span>
+                            <div>
+                                Server Connection <span
+                                    class="fa"
+                                    :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }" />
                             </div>
                         </div>
 
                         <div class="loader-block__links">
                             <p>Connection problems? Let us know!</p>
-                            <a href="https://twitter.com/hyperbridge"><span class="fab fa-twitter"></span> Tweet Us</a>
-                            <a href="https://hyperbridge.org/status"><span class="fas fa-globe-americas"></span> Server
+                            <a href="https://twitter.com/hyperbridge"><span class="fab fa-twitter" /> Tweet Us</a>
+                            <a href="https://hyperbridge.org/status"><span class="fas fa-globe-americas" /> Server
                                 Status</a>
                         </div>
                     </div>
-                </div> -->
+                </div>
 
                 <div
                     v-if="showShortcuts"
@@ -66,9 +73,8 @@
                     <c-shortcut-sidebar :items="customShortcuts ? customShortcuts : shortcuts" />
                 </div>
 
-                <!-- PAGE ASIDE PANEL -->
                 <div
-                    v-if="showLeftPanel"
+                    v-if="!loadingState && showLeftPanel"
                     id="page-aside"
                     class="page-aside invert left-sidebar"
                     style="max-width: 250px">
@@ -104,7 +110,6 @@
                         </c-load-more>
                     </div>
                 </div>
-                <!-- //END PAGE ASIDE PANEL -->
 
                 <div
                     id="content"
@@ -117,13 +122,12 @@
                     <div
                         class="container-fluid"
                         style="padding-top: 0!important;">
-                        <div class="content-body">
+                        <div v-if="isConnected" class="content-body">
                             <slot />
                         </div>
                     </div>
                 </div>
 
-                <!-- SIDEPANEL -->
                 <transition
                     v-if="showRightPanel"
                     name="slideRight"
@@ -133,11 +137,6 @@
                         style="max-width: 250px"
                         :navigationKey="navigationKey" />
                 </transition>
-                <!-- //END SIDEPANEL -->
-
-                <!-- <div class="status-bar" hidden>
-                    {{ connectionStatus.message }}
-                </div> -->
 
                 <c-welcome-popup
                     :activated="$store.state.application.activeModal === 'welcome'"
@@ -208,8 +207,6 @@
                         </c-button>
                     </p>
                 </c-basic-popup>
-
-                <!-- use below $router.currentRoute.fullPath -->
 
                 <c-basic-popup
                     :activated="$store.state.application.editorMode === 'editing' && !$store.state.application.settings.client['hideEditorWelcomeModal']"
@@ -866,795 +863,584 @@
                     v{{ $store.state.application.version }}
                 </div>
             </div>
-            <!-- //END PAGE CONTENT -->
 
             <!-- <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktopMode"><img src="/img/powered-by-hyperbridge.png" /></a> -->
 
-            <!--<transition name="slideDown">-->
             <c-profile-chooser v-if="profileChooser && signedIn" />
-            <!--</transition>-->
 
-
-            <!--Draggable video block -->
             <c-draggable-video
                 v-if="video"
                 :active="video.showPopup"
                 :videoUrl="video.url"
                 :setTime="video.currentTime"
                 @close=" video.showPopup = false" />
-            <!--end draggable video block -->
-
-
-            <!-- <search /> Discover the next best thing... -->
-        </div>
-        <!-- //END PAGE WRAPPER -->
-        <div
-            id="startup-loader"
-            class="startup-loader">
-            <div class="startup-loader__container">
-                <div>
-                    <div class="startup-loader__spinner" />
-                    <p class="startup-loader__message" />
-                    <p class="startup-loader__user">
-                        Submitted by <a
-                            href="#"
-                            target="_blank" />
-                    </p>
-                </div>
-                <p class="startup-loader__status-message">
-                    Launching...
-                </p>
-                <div
-                    id="critical-error"
-                    class="startup-loader__links">
-                    <p>Connection problems? Let us know!</p> <a href="https://twitter.com/hyperbridge"><span
-                        class="fab fa-twitter" /> Tweet Us</a> <a href="https://hyperbridge.org/status"><span
-                        class="fas fa-globe-americas" /> Server Status</a>
-                    <br><br>
-                    <button @click="window.goHome()">
-                        Try Home
-                    </button>
-                    <button @click="window.resetSettings()">
-                        Reset Settings
-                    </button>
-                    <button @click="window.location = 'https://hyperbridge.org/#contact'">
-                        Contact Us
-                    </button>
-                </div>
-            </div>
         </div>
     </div>
 </template>
 
 
 <script>
-// window.goHome = function() {
-//   window.location = "/"
-// }
+import axios from 'axios'
+import Vue from 'vue'
+import { debounce } from '@/mixins'
 
-// window.resetSettings = function() {
-//   if (window.closeLokiDatabase) {
-//     window.closeLokiDatabase()
-//   }
+import 'swiper/dist/css/swiper.css'
+import 'vue-multiselect/dist/vue-multiselect.min.css'
 
-//   var req = indexedDB.deleteDatabase('LokiCatalog');
-//   req.onsuccess = function () {
-//     //alert("Deleted settings successfully. The page will now reload.");
-//     window.location = window.location.href.replace(window.location.hash, '')
-//   };
-//   req.onerror = function () {
-//     //alert("ERR 301: Couldn't delete database");
-//   };
-//   req.onblocked = function (event) {
-//     //alert("ERR 302: Couldn't delete database due to the operation being blocked.");
-//     window.location = window.location.href.replace(window.location.hash, '')
-//   };
-// }
-
-// function isWhiteSpace(coords) {
-//   var element = document.elementFromPoint(coords.x, coords.y);
-//   var whitespace = $(document).add('body, html, #business-app, #app, #header-bg, #startup-loader, #critical-error, #left-bg, #right-bg, .startup-loader__container');
-
-//   return (whitespace.get().indexOf(element) > -1) ? true : false;
-// }
-
-// function bootChecker() {
-//   if (typeof($) == 'undefined') return setTimeout(bootChecker, 1000)
-
-//   // If any of these randomly chosen coordinates is not a bottom layer element, then assume loading occurred properly
-//   const isLoaded = !isWhiteSpace({ x: 50, y: 50 })
-
-//   if (isLoaded) {
-//     $('#startup-loader, #critical-error').hide()
-//     return setTimeout(bootChecker, 1 * 1000)
-//   }
-
-//   $('#startup-loader, #critical-error').show()
-
-//   return setTimeout(bootChecker, 1000)
-// }
-
-// setTimeout(bootChecker, 15 * 1000)
-
-// function setStatusMessage() {
-//   if (typeof ($) == 'undefined') return setTimeout(setStatusMessage, 100)
-
-//   const userSubmittedConnectionMessages = [
-//     {
-//       "id": 1,
-//       "message": "wubba lubba dub dubbbb",
-//       "user": {
-//         "id": 1,
-//         "name": "fr0stbyte"
-//       }
-//     },
-//     {
-//       "id": 2,
-//       "message": "LOADING SIMULATION",
-//       "user": {
-//         "id": 2,
-//         "name": "GymTim"
-//       }
-//     },
-//     {
-//       "id": 3,
-//       "message": "Leeroooooy Jeeeenkiiiiins!",
-//       "user": {
-//         "id": 1,
-//         "name": "fr0stbyte"
-//       }
-//     },
-//     {
-//       "id": 4,
-//       "message": "Well, at least I have chicken!",
-//       "user": {
-//         "id": 1,
-//         "name": "fr0stbyte"
-//       }
-//     },
-//     {
-//       "id": 6,
-//       "message": "Your lack of faith is disturbing",
-//       "user": {
-//         "id": 1,
-//         "name": "fr0stbyte"
-//       }
-//     },
-//     {
-//       "id": 7,
-//       "message": "Many whelps. Handle it! Who was that!? That's a 50 DKP minus!!",
-//       "user": {
-//         "id": 1,
-//         "name": "fr0stbyte"
-//       }
-//     },
-//     {
-//       "id": 8,
-//       "message": "Maybe Elon was right about AI",
-//       "user": {
-//         "id": 1,
-//         "name": "fr0stbyte"
-//       }
-//     },
-//     {
-//       "id": 9,
-//       "message": "I can dance all day, try to hit me, come on, try to hit me",
-//       "user": {
-//         "id": 1,
-//         "name": "fr0stbyte"
-//       }
-//     },
-//     {
-//       "id": 10,
-//       "message": "My hands are shaking, but I'm still shooting, still getting headshots like BOOM headshot BOOM HEADSHOT!",
-//       "user": {
-//         "id": 1,
-//         "name": "fr0stbyte"
-//       }
-//     },
-//     {
-//       "id": 11,
-//       "message": "Drinking too much will make chuck sick",
-//       "user": {
-//         "id": 4,
-//         "name": "Spyder"
-//       }
-//     },
-//     {
-//       "id": 12,
-//       "message": "The cake is a lie.",
-//       "user": {
-//         "id": 5,
-//         "name": "JordoBrooks"
-//       }
-//     }
-//   ]
-
-//   const message = userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(userSubmittedConnectionMessages.length))]
-
-//   $('.startup-loader__message').html(message.message)
-//   $('.startup-loader__user a').html(message.user.name)
-//   $('.startup-loader__user a').attr('href', '#/profile/' + message.user.id)
-//   $('.startup-loader').show()
-// }
-
-// setStatusMessage()
-</script>
-
-<script>
-    import axios from 'axios'
-    import Vue from 'vue'
-    import { debounce } from '@/mixins'
-
-    import 'swiper/dist/css/swiper.css'
-    import 'vue-multiselect/dist/vue-multiselect.min.css'
-
-    export default {
-        props: {
-            navigationKey: {
-                type: String,
-                required: false
-            },
-            navigationTitle: {
-                type: String,
-                required: false
-            },
-            showLeftPanel: {
-                type: Boolean,
-                default: true,
-                required: false
-            },
-            showRightPanel: {
-                type: Boolean,
-                default: true,
-                required: false
-            },
-            showShortcuts: {
-                type: Boolean,
-                default: true,
-                required: false
-            },
-            showBreadcrumbs: {
-                type: Boolean,
-                default: true,
-                required: false
-            },
-            headerText: {
-                type: String,
-                default: 'BlockHub',
-                required: false
-            },
-            breadcrumbLinks: {
-                type: [Array, Boolean],
-                default: () => ([])
-            },
-            bgImage: String,
-            customShortcuts: [ Array, Object ]
+export default {
+    components: {
+        'c-header': () => import('~/components/headers/basic').then(m => m.default || m),
+        'c-slim-header': () => import('~/components/headers/slim').then(m => m.default || m),
+        'c-popup': () => import('~/components/popups').then(m => m.default || m),
+        'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
+        'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
+        'c-terms-popup': () => import('~/components/terms-popup').then(m => m.default || m),
+        'c-privacy-popup': () => import('~/components/privacy-popup').then(m => m.default || m),
+        'c-collection-navigation': () => import('~/components/navigation/collection').then(m => m.default || m),
+        'c-wallet-navigation': () => import('~/components/navigation/wallet').then(m => m.default || m),
+        'c-account-navigation': () => import('~/components/navigation/account').then(m => m.default || m),
+        'c-settings-navigation': () => import('~/components/navigation/settings').then(m => m.default || m),
+        'c-help-navigation': () => import('~/components/navigation/help').then(m => m.default || m),
+        'c-funding-navigation': () => import('~/components/navigation/funding').then(m => m.default || m),
+        'c-store-navigation': () => import('~/components/navigation/store').then(m => m.default || m),
+        'c-asset-navigation': () => import('~/components/navigation/asset').then(m => m.default || m),
+        'c-product-navigation': () => import('~/components/navigation/product').then(m => m.default || m),
+        'c-project-navigation': () => import('~/components/navigation/project').then(m => m.default || m),
+        'c-chat-navigation': () => import('~/components/navigation/chat').then(m => m.default || m),
+        'c-idea-navigation': () => import('~/components/navigation/idea').then(m => m.default || m),
+        'c-community-navigation': () => import('~/components/navigation/community').then(m => m.default || m),
+        'c-welcome-popup': () => import('~/components/welcome-popup').then(m => m.default || m),
+        'c-download-popup': () => import('~/components/download-popup').then(m => m.default || m),
+        'c-unlock-popup': () => import('~/components/unlock-popup').then(m => m.default || m),
+        'c-claim-popup': () => import('~/components/claim-popup').then(m => m.default || m),
+        'c-login-popup': () => import('~/components/login-popup').then(m => m.default || m),
+        'c-register-popup': () => import('~/components/register-popup').then(m => m.default || m),
+        'c-send-funds-popup': () => import('~/components/send-funds-popup').then(m => m.default || m),
+        'c-purchase-popup': () => import('~/components/purchase-popup').then(m => m.default || m),
+        'c-mission-control-popup': () => import('~/components/mission-control-popup').then(m => m.default || m),
+        'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m),
+        'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
+        'c-clock': () => import('~/components/clock').then(m => m.default || m),
+        'c-status-dot': () => import('~/components/status-dot').then(m => m.default || m),
+        'c-sidepanel': () => import('~/components/sidepanel').then(m => m.default || m),
+        'c-cookie-policy': () => import('~/components/cookie-policy').then(m => m.default || m),
+        'c-qr-code': () => import('~/components/qr-code').then(m => m.default || m),
+        'c-shortcut-sidebar': () => import('~/components/shortcut-sidebar').then(m => m.default || m),
+        'c-load-more': () => import('~/components/buttons/load-more').then(m => m.default || m),
+        'c-drawer': () => import('~/components/drawer').then(m => m.default || m),
+        'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m),
+        'c-profile-chooser': () => import('~/components/profile-chooser').then(m => m.default || m),
+        'c-settings': () => import('~/components/settings').then(m => m.default || m),
+        'c-social-connect': () => import('~/components/social-connect').then(m => m.default || m),
+        'c-draggable-video': () => import('~/components/draggable-video').then(m => m.default || m)
+    },
+    mixins: [debounce],
+    props: {
+        navigationKey: {
+            type: String,
+            required: false
         },
-        mixins: [debounce],
-        components: {
-            'c-header': () => import('~/components/headers/basic').then(m => m.default || m),
-            'c-slim-header': () => import('~/components/headers/slim').then(m => m.default || m),
-            'c-popup': () => import('~/components/popups').then(m => m.default || m),
-            'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
-            'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
-            'c-terms-popup': () => import('~/components/terms-popup').then(m => m.default || m),
-            'c-privacy-popup': () => import('~/components/privacy-popup').then(m => m.default || m),
-            'c-collection-navigation': () => import('~/components/navigation/collection').then(m => m.default || m),
-            'c-wallet-navigation': () => import('~/components/navigation/wallet').then(m => m.default || m),
-            'c-account-navigation': () => import('~/components/navigation/account').then(m => m.default || m),
-            'c-settings-navigation': () => import('~/components/navigation/settings').then(m => m.default || m),
-            'c-help-navigation': () => import('~/components/navigation/help').then(m => m.default || m),
-            'c-funding-navigation': () => import('~/components/navigation/funding').then(m => m.default || m),
-            'c-store-navigation': () => import('~/components/navigation/store').then(m => m.default || m),
-            'c-asset-navigation': () => import('~/components/navigation/asset').then(m => m.default || m),
-            'c-product-navigation': () => import('~/components/navigation/product').then(m => m.default || m),
-            'c-project-navigation': () => import('~/components/navigation/project').then(m => m.default || m),
-            'c-chat-navigation': () => import('~/components/navigation/chat').then(m => m.default || m),
-            'c-idea-navigation': () => import('~/components/navigation/idea').then(m => m.default || m),
-            'c-community-navigation': () => import('~/components/navigation/community').then(m => m.default || m),
-            'c-welcome-popup': () => import('~/components/welcome-popup').then(m => m.default || m),
-            'c-download-popup': () => import('~/components/download-popup').then(m => m.default || m),
-            'c-unlock-popup': () => import('~/components/unlock-popup').then(m => m.default || m),
-            'c-claim-popup': () => import('~/components/claim-popup').then(m => m.default || m),
-            'c-login-popup': () => import('~/components/login-popup').then(m => m.default || m),
-            'c-register-popup': () => import('~/components/register-popup').then(m => m.default || m),
-            'c-send-funds-popup': () => import('~/components/send-funds-popup').then(m => m.default || m),
-            'c-purchase-popup': () => import('~/components/purchase-popup').then(m => m.default || m),
-            'c-mission-control-popup': () => import('~/components/mission-control-popup').then(m => m.default || m),
-            'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m),
-            'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
-            'c-clock': () => import('~/components/clock').then(m => m.default || m),
-            'c-status-dot': () => import('~/components/status-dot').then(m => m.default || m),
-            'c-sidepanel': () => import('~/components/sidepanel').then(m => m.default || m),
-            'c-cookie-policy': () => import('~/components/cookie-policy').then(m => m.default || m),
-            'c-qr-code': () => import('~/components/qr-code').then(m => m.default || m),
-            'c-shortcut-sidebar': () => import('~/components/shortcut-sidebar').then(m => m.default || m),
-            'c-load-more': () => import('~/components/buttons/load-more').then(m => m.default || m),
-            'c-drawer': () => import('~/components/drawer').then(m => m.default || m),
-            'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m),
-            'c-profile-chooser': () => import('~/components/profile-chooser').then(m => m.default || m),
-            'c-settings' : () => import('~/components/settings').then(m => m.default || m),
-            'c-social-connect': () => import('~/components/social-connect').then(m => m.default || m),
-            'c-draggable-video' : () => import('~/components/draggable-video').then(m => m.default || m)
+        navigationTitle: {
+            type: String,
+            required: false
         },
-        asyncData() {
-            this.$store.dispatch('communities/find', {
-                query: {
-                    $sort: {
-                        createdAt: -1
-                    },
-                    $limit: 25
-                }
-            })
-
-            this.$store.dispatch('collections/find', {
-                query: {
-                    $sort: {
-                        createdAt: -1
-                    },
-                    $limit: 25
-                }
-            })
+        showLeftPanel: {
+            type: Boolean,
+            default: true,
+            required: false
         },
-        data() {
-            const self = this
+        showRightPanel: {
+            type: Boolean,
+            default: true,
+            required: false
+        },
+        showShortcuts: {
+            type: Boolean,
+            default: true,
+            required: false
+        },
+        showBreadcrumbs: {
+            type: Boolean,
+            default: true,
+            required: false
+        },
+        headerText: {
+            type: String,
+            default: 'BlockHub',
+            required: false
+        },
+        breadcrumbLinks: {
+            type: [Array, Boolean],
+            default: () => []
+        },
+        bgImage: String,
+        customShortcuts: [Array, Object]
+    },
+    data() {
+        const self = this
 
-            return {
-                loadingState: true,
-                userSubmittedConnectionMessage: this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))],
-                panelOption: {
-                    spaceBetween: 0,
-                    loop: false,
-                },
-                scrollMoreDirection: null,
-                slimMode: false,
-                mobileMode: false,
-                bluredBg: false,
-                voteCasted: false,
-                reportCoords: null,
-                breadcrumbLinksData: this.breadcrumbLinks,
-                shortcutItems: [],
-                withdrawRequest: {
-                    type: 'ETH',
-                    amount: 0,
-                    address: null,
-                    processing: false
-                },
-                newDiscussionRequest: {
-                    name: '',
-                    value: '',
-                    meta: {}
-                },
-                createArticleRequest: {
-                    communityId: 1,
-                    key: '',
-                    name: '',
-                    value: '',
-                    meta: {}
-                },
-                dragOptions: {
-                    dropzoneSelector: '.does-not-exist',
-                    draggableSelector: 'a',
-                    excludeOlderBrowsers: true,
-                    showDropzoneAreas: true,
-                    multipleDropzonesItemsDraggingEnabled: true,
-                    onDrop(event) {},
-                    onDragstart(event) {
-                        let $target = $(event.nativeEvent.target)
+        return {
+            loadingState: true,
+            userSubmittedConnectionMessage: this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))],
+            panelOption: {
+                spaceBetween: 0,
+                loop: false
+            },
+            scrollMoreDirection: null,
+            slimMode: false,
+            mobileMode: false,
+            bluredBg: false,
+            voteCasted: false,
+            reportCoords: null,
+            breadcrumbLinksData: this.breadcrumbLinks,
+            shortcutItems: [],
+            withdrawRequest: {
+                type: 'ETH',
+                amount: 0,
+                address: null,
+                processing: false
+            },
+            newDiscussionRequest: {
+                name: '',
+                value: '',
+                meta: {}
+            },
+            createArticleRequest: {
+                communityId: 1,
+                key: '',
+                name: '',
+                value: '',
+                meta: {}
+            },
+            dragOptions: {
+                dropzoneSelector: '.does-not-exist',
+                draggableSelector: 'a',
+                excludeOlderBrowsers: true,
+                showDropzoneAreas: true,
+                multipleDropzonesItemsDraggingEnabled: true,
+                onDrop(event) {},
+                onDragstart(event) {
+                    const $target = $(event.nativeEvent.target)
 
-                        if ($target.parents('.page-shortcuts').length) {
-                            event.stop()
-                        }
-                    },
-                    onDragend(event) {
-                        let $target = $(event.nativeEvent.target)
-                        let $link = null
-                        let $image = null
-                        let link = null
-                        let image = null
-                        let text = null
-
-                        if ($target.is('a')) {
-                            $link = $target
-                        }
-                        else if ($target.is('img')) {
-                            $image = $target
-                            $link = $target.parents('a').length ? $target.parents('a').first() : null
-                        } else {
-                            $link = $target.parents('a').length ? $target.parents('a').first() : null
-                            $image = $target.parents('a').length ? $target.parents('a').first() : null
-                        }
-
-                        if (!$link && $image) {
-                            link = $image.data('link')
-                        }
-
-                        if (!$image && $link) {
-                            image = $link.data('image')
-                        }
-
-                        if (!$image && $link) {
-                            $image = $link.find('img').length ? $link.find('img').first() : null
-                        }
-
-                        // Set text
-                        if ($image) {
-                            text = $image.attr('alt')
-                        }
-                        else if ($link) {
-                            text = $link.text()
-                        }
-
-                        if ($link) {
-                            link = $link.attr('href')
-                        }
-
-                        if ($image) {
-                            image = $image.attr('src')
-                        }
-
-                        if (link) {
-                            self.$store.commit('application/addShortcut', {
-                                r: null,
-                                g: null,
-                                b: null,
-                                text,
-                                link,
-                                image
-                            })
-                        }
-
+                    if ($target.parents('.page-shortcuts').length) {
                         event.stop()
                     }
                 },
-                socials: [
-                    {
-                        name: 'Facebook',
-                        description: 'Shares achievements to your news feed.',
-                        icon: '/img/icons/facebook.svg',
-                        connected: false
-                    },
-                    {
-                        name: 'Twitter',
-                        description: 'Shares achievements to your Twitter feed.',
-                        icon: '/img/icons/twitter.svg',
-                        connected: false
-                    },
-                    {
-                        name: 'Twitch',
-                        description: 'Lets you contribute to streamers.',
-                        icon: '/img/icons/twitch-large.png',
-                        connected: false
-                    },
-                    {
-                        name: 'Discord',
-                        description: 'Lets you connect to your Discord voice/chat channels.',
-                        icon: '/img/icons/discord.png',
-                        connected: false
-                    },
-                    {
-                        name: 'Steam',
-                        description: 'Lets you connect to your Steam account.',
-                        icon: '/img/icons/steam.png',
-                        connected: false
-                    }
-                ]
-            }
-        },
-        computed: {
-            communities() {
-                return this.$store.getters['communities/list']
-            },
-            collections() {
-                return this.$store.getters['collections/list']
-            },
-            isConnected() {
-                return this.$store.state.application.connection.internet && this.$store.state.application.connection.datasource
-            },
-            activeProfile() {
-                return this.$store.state.application.activeProfile
-            },
-            shortcuts() {
-                return this.$store.state.application.shortcuts
-            },
-            connectionStatus() {
-                return this.$store.state.application.connection.status
-            },
-            desktopMode() {
-                return this.$store.state.application.desktopMode
-            },
-            signedIn() {
-                return this.$store.state.application.signedIn
-            },
-            activeNotification() {
-                return this.$store.state.application.activeNotification || {}
-            },
-            dynamicLinks() {
-                const [empty, ...links] = this.$route.path.split('/');
-                // const names = links.filter()
-                const names = links;
+                onDragend(event) {
+                    const $target = $(event.nativeEvent.target)
+                    let $link = null
+                    let $image = null
+                    let link = null
+                    let image = null
+                    let text = null
 
-                return names.map((name, i) => ({
-                    title: this.$options.filters.upperFirstChar(name),
-                    to: names.reduce((to, name, index) => (index < i + 1) ? to += '/' + name : to, '')
-                }));
-            },
-            profileChooser() {
-                return this.$store.state.application.profileChooser
-            },
-            video() {
-                return this.$store.state.application.video
-            }
-        },
-        updated() {
-            this.userSubmittedConnectionMessage = this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))];
-            this.checkScrollButton()
-        },
-        methods: {
-            sendDesktopMessage() {
-                if (!window.isElectron) {
-                    return alert('Not on desktop')
-                }
-
-                this.$desktop.sendCommand('ping', this.$refs.desktopMessage.value)
-                this.$desktop.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
-            },
-            createArticle(request) {
-                request.ownerId = this.$store.state.application.activeProfile.id
-
-                this.$store.dispatch('discussions/create', request).then((res) => {
-                    this.$router.push('/help/' + res.id + '/article/' + request.key)
-                })
-
-                this.$store.state.application.activeModal = null
-            },
-            async submitNewDiscussion(request) {
-                request.community = { id: this.$store.state.application.activeModalData.community.id }
-                request.owner = { id: this.$store.state.application.activeProfile.id }
-
-                const result = await this.$store.dispatch('discussions/create', [request, {
-                    query: {
-                        $eager: '[community, owner]'
-                    }
-                }])
-
-                //this.notice = "Congratulations, your discussion has been created!"
-
-                this.$store.state.application.activeModal = null
-                this.$router.push('/community/discussion/' + result.id)
-            },
-            deposit() {
-
-            },
-            withdraw() {
-                let fromAddress = this.$store.state.application.activeProfile.address
-                let { type, toAddress, amount } = this.withdrawRequest
-
-                amount = Number(amount)
-
-                this.withdrawRequest.processing = true
-
-                this.$desktop.sendCommand('transferTokens', {
-                    type,
-                    fromAddress,
-                    toAddress,
-                    amount
-                }).then(() => {
-                    this.withdrawRequest = {...this.withdrawRequest, processing: false}
-                })
-            },
-            onSwipeLeft() {
-                this.showRightPanel = true
-            },
-            onSwipeRight() {
-                this.showLeftPanel = true
-            },
-            vote() {
-                this.$store.commit('application/entry', { key: 'editable_page', value: window.location.hash, user: this.$store.state.application.account.address })
-                this.voteCasted = true
-            },
-            sendReport() {
-                if (this.reportCoords) {
-                    const getPathTo = (element) => {
-                        if (element.tagName == 'HTML')
-                            return '/html[1]'
-                        if (element===document.body)
-                            return '/html[1]/body[1]'
-
-                        let ix = 0
-                        let siblings = element.parentNode.childNodes
-                        for (let i= 0; i<siblings.length; i++) {
-                            let sibling= siblings[i]
-                            if (sibling===element)
-                                return getPathTo(element.parentNode)+'/'+element.tagName.toLowerCase()+'['+(ix+1)+']'
-                            if (sibling.nodeType===1 && sibling.tagName===element.tagName)
-                                ix++
-                        }
-                    }
-
-                    const cmd = {
-                        key: 'report',
-                        data: {
-                            coords: { x: this.reportCoords.x, y: this.reportCoords.y },
-                            path: this.$router.currentRoute.fullPath,
-                            element: getPathTo(document.elementFromPoint(this.reportCoords.x, this.reportCoords.y)),
-                            message: this.$refs.reportText.value
-                        }
-                    }
-
-                    this.$store.commit('application/entry', { key: 'report', value: JSON.stringify(cmd), user: this.$store.state.application.account.address })
-                }
-
-                this.$store.commit('application/activateModal', null)
-            },
-            scrollSidebarDown() {
-                $('#scroll_sidebar').animate({scrollTop: '+=100', duration: '150'});
-                this.checkScrollButton()
-            },
-            scrollSidebarUp() {
-                $('#scroll_sidebar').animate({scrollTop: '-=500', duration: '150'});
-                this.checkScrollButton()
-            },
-            checkScrollButton() {
-                //console.log('Checking scroll')
-                try {
-                    if ($('#scroll_sidebar').children().height() > $('#scroll_sidebar').height()) {
-                        // Change the scroll direction when it hits the last 10px of the sidebar
-                        if(($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight()) >= ($('#scroll_sidebar')[0].scrollHeight - 10)) {
-                            this.scrollMoreDirection = 'up'
-                        }
-                        else {
-                            this.scrollMoreDirection = 'down'
-                        }
+                    if ($target.is('a')) {
+                        $link = $target
+                    } else if ($target.is('img')) {
+                        $image = $target
+                        $link = $target.parents('a').length ? $target.parents('a').first() : null
                     } else {
-                        this.scrollMoreDirection = null
+                        $link = $target.parents('a').length ? $target.parents('a').first() : null
+                        $image = $target.parents('a').length ? $target.parents('a').first() : null
                     }
-                } catch(e) {
 
+                    if (!$link && $image) {
+                        link = $image.data('link')
+                    }
+
+                    if (!$image && $link) {
+                        image = $link.data('image')
+                    }
+
+                    if (!$image && $link) {
+                        $image = $link.find('img').length ? $link.find('img').first() : null
+                    }
+
+                    // Set text
+                    if ($image) {
+                        text = $image.attr('alt')
+                    } else if ($link) {
+                        text = $link.text()
+                    }
+
+                    if ($link) {
+                        link = $link.attr('href')
+                    }
+
+                    if ($image) {
+                        image = $image.attr('src')
+                    }
+
+                    if (link) {
+                        self.$store.commit('application/addShortcut', {
+                            r: null,
+                            g: null,
+                            b: null,
+                            text,
+                            link,
+                            image
+                        })
+                    }
+
+                    event.stop()
                 }
             },
-            updateBreadcrumbLinks() {
-                if (this.breadcrumbLinksData.length === 0) {
-                    if (this.$route.meta.breadcrumb) {
-                        this.breadcrumbLinksData = this.$route.meta.breadcrumb
-                    } else if (this.$route.meta.breadcrumb === false) {
-                        this.breadcrumbLinksData = []
-                    } else {
-                        if (this.$route.name !== 'Home') {
-                            this.breadcrumbLinksData = [
-                                { to: { path: '/' }, title: 'Home' },
-                                { to: { path: this.$route.path }, title: this.$route.name }
-                            ]
-                        }
-                    }
+            socials: [
+                {
+                    name: 'Facebook',
+                    description: 'Shares achievements to your news feed.',
+                    icon: '/img/icons/facebook.svg',
+                    connected: false
+                },
+                {
+                    name: 'Twitter',
+                    description: 'Shares achievements to your Twitter feed.',
+                    icon: '/img/icons/twitter.svg',
+                    connected: false
+                },
+                {
+                    name: 'Twitch',
+                    description: 'Lets you contribute to streamers.',
+                    icon: '/img/icons/twitch-large.png',
+                    connected: false
+                },
+                {
+                    name: 'Discord',
+                    description: 'Lets you connect to your Discord voice/chat channels.',
+                    icon: '/img/icons/discord.png',
+                    connected: false
+                },
+                {
+                    name: 'Steam',
+                    description: 'Lets you connect to your Steam account.',
+                    icon: '/img/icons/steam.png',
+                    connected: false
                 }
-            },
-            handleResize(event) {
-                if (!process.client) { return }
+            ]
+        }
+    },
+    computed: {
+        communities() {
+            return this.$store.getters['communities/list']
+        },
+        collections() {
+            return this.$store.getters['collections/list']
+        },
+        isConnected() {
+            return this.$store.state.application.connection.internet && this.$store.state.application.connection.datasource
+        },
+        activeProfile() {
+            return this.$store.state.application.activeProfile
+        },
+        shortcuts() {
+            return this.$store.state.application.shortcuts
+        },
+        connectionStatus() {
+            return this.$store.state.application.connection.status
+        },
+        desktopMode() {
+            return this.$store.state.application.desktopMode
+        },
+        signedIn() {
+            return this.$store.state.application.signedIn
+        },
+        activeNotification() {
+            return this.$store.state.application.activeNotification || {}
+        },
+        dynamicLinks() {
+            const [empty, ...links] = this.$route.path.split('/')
+            // const names = links.filter()
+            const names = links
 
-                if (document.documentElement.clientWidth < 768) {
-                    this.mobileMode = true
-                } else {
-                    this.mobileMode = false
-                }
+            return names.map((name, i) => ({
+                title: this.$options.filters.upperFirstChar(name),
+                to: names.reduce((to, name, index) => index < i + 1 ? to += `/${name}` : to, '')
+            }))
+        },
+        profileChooser() {
+            return this.$store.state.application.profileChooser
+        },
+        video() {
+            return this.$store.state.application.video
+        }
+    },
+    watch: {
+        'profileChooser'() {
+            if (this.signedIn) {
+                if (this.profileChooser) { this.bluredBg = true } else { this.bluredBg = false }
             }
         },
-        created() {
-            this.handleResize()
-            this.checkScrollButton()
+        '$store.state.application.activeProfile'() {
+            if (!this.$store.state.application.activeProfile.key) return
+
+            this.$store.state.application.tokenCount = null
+
+            this.$api.service('profiles/balance').find({
+                query: {
+                    type: 'HBX',
+                    address: this.$store.state.application.activeProfile.key
+                }
+            }).then(res => {
+                this.$store.state.application.tokenCount = res.balance
+            })
+
+
+            // this.$desktop.sendCommand('getTokenBalance', {
+            //     type: 'HBX',
+            //     address: this.$store.state.application.activeProfile.key
+            // }).then((res) => {
+            //     this.$store.state.application.tokenCount = res.balance
+            // })
+        }
+    },
+    asyncData() {
+        this.$store.dispatch('communities/find', {
+            query: {
+                $sort: {
+                    createdAt: -1
+                },
+                $limit: 25
+            }
+        })
+
+        this.$store.dispatch('collections/find', {
+            query: {
+                $sort: {
+                    createdAt: -1
+                },
+                $limit: 25
+            }
+        })
+    },
+    updated() {
+        this.userSubmittedConnectionMessage = this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))]
+        this.checkScrollButton()
+    },
+    created() {
+        this.handleResize()
+        this.checkScrollButton()
+
+        if (process.client) {
+            window.addEventListener('resize', this.handleResize())
+        }
+
+        this.updateBreadcrumbLinks()
+
+        // setTimeout(() => {
+        //     $(this.$refs.poweredBy).fadeOut(400)
+        // }, 10 * 1000)
+
+        const fractionCountMap = {
+            'BTC': 6,
+            'ETH': 6,
+            'DAI': 2
+        }
+
+        this.$CurrencyFilter.setConfig({
+            symbol: this.$store.state.application.account.currency.symbol,
+            thousandsSeparator: ',',
+            fractionCount: fractionCountMap[this.$store.state.application.account.currency.code] || 2,
+            fractionSeparator: '.',
+            symbolPosition: 'front',
+            symbolSpacing: true
+        })
+    },
+    mounted() {
+        this.$nextTick(() => {
+            this.loadingState = false
 
             if (process.client) {
-                window.addEventListener('resize', this.handleResize())
-            }
+                if (document.getElementById('startup-loader')) {
+                    document.getElementById('startup-loader').style.display = 'none'
+                }
 
-            this.updateBreadcrumbLinks()
-            this.$nextTick(() => {
-                this.loadingState = false
-
-                if (process.client) {
-                    if (document.getElementById('startup-loader')) {
-                        document.getElementById('startup-loader').style.display = 'none'
-                    }
-
-                    // check sidebar button
-                    $(this.$refs.scroll_sidebar).scroll(() => {
-                        this.debounce(() => {
-                            this.checkScrollButton()
-                        }, 250)
-                    })
-                    //this.checkScrollButton()
-
-                    // setTimeout(() => {
-                    //     this.checkScrollButton()
-                    // }, 1000)
-                    setInterval(() => {
+                // check sidebar button
+                $(this.$refs.scroll_sidebar).scroll(() => {
+                    this.debounce(() => {
                         this.checkScrollButton()
-                    }, 500)
+                    }, 250)
+                })
+                // this.checkScrollButton()
+
+                // setTimeout(() => {
+                //     this.checkScrollButton()
+                // }, 1000)
+                setInterval(() => {
+                    this.checkScrollButton()
+                }, 500)
+            }
+        })
+        if (process.client) {
+            window.onmousemove = function(e) { // TODO replace?
+                if (e.altKey) {
+                    document.body.style.cursor = 'crosshair'
+                } else {
+                    document.body.style.cursor = 'default'
                 }
-            })
-
-            // setTimeout(() => {
-            //     $(this.$refs.poweredBy).fadeOut(400)
-            // }, 10 * 1000)
-
-            const fractionCountMap = {
-                'BTC': 6,
-                'ETH': 6,
-                'DAI': 2
             }
 
-            this.$CurrencyFilter.setConfig({
-                symbol: this.$store.state.application.account.currency.symbol,
-                thousandsSeparator: ',',
-                fractionCount: fractionCountMap[this.$store.state.application.account.currency.code] || 2,
-                fractionSeparator: '.',
-                symbolPosition: 'front',
-                symbolSpacing: true
+
+            $(document).on('click', e => {
+                if (e.altKey) {
+                    e.preventDefault()
+
+                    this.reportCoords = {
+                        x: e.clientX,
+                        y: e.clientY
+                    }
+
+                    this.$store.state.application.activeModal = 'report'
+
+                    return false
+                }
+
+                return true
+            })
+        }
+    },
+    methods: {
+        sendDesktopMessage() {
+            if (!window.isElectron) {
+                return alert('Not on desktop')
+            }
+
+            this.$desktop.sendCommand('ping', this.$refs.desktopMessage.value)
+            this.$desktop.on('pong', (event, msg) => console.log('Message from desktop: ', msg))
+        },
+        createArticle(request) {
+            request.ownerId = this.$store.state.application.activeProfile.id
+
+            this.$store.dispatch('discussions/create', request).then(res => {
+                this.$router.push(`/help/${res.id}/article/${request.key}`)
             })
 
-            if (process.client) {
-                window.onmousemove = function (e) { // TODO replace?
-                    if (e.altKey) {
-                        document.body.style.cursor = 'crosshair'
+            this.$store.state.application.activeModal = null
+        },
+        async submitNewDiscussion(request) {
+            request.community = { id: this.$store.state.application.activeModalData.community.id }
+            request.owner = { id: this.$store.state.application.activeProfile.id }
+
+            const result = await this.$store.dispatch('discussions/create', [request, {
+                query: {
+                    $eager: '[community, owner]'
+                }
+            }])
+
+            // this.notice = "Congratulations, your discussion has been created!"
+
+            this.$store.state.application.activeModal = null
+            this.$router.push(`/community/discussion/${result.id}`)
+        },
+        deposit() {
+
+        },
+        withdraw() {
+            const fromAddress = this.$store.state.application.activeProfile.address
+            let { type, toAddress, amount } = this.withdrawRequest
+
+            amount = Number(amount)
+
+            this.withdrawRequest.processing = true
+
+            this.$desktop.sendCommand('transferTokens', {
+                type,
+                fromAddress,
+                toAddress,
+                amount
+            }).then(() => {
+                this.withdrawRequest = { ...this.withdrawRequest, processing: false }
+            })
+        },
+        onSwipeLeft() {
+            this.showRightPanel = true
+        },
+        onSwipeRight() {
+            this.showLeftPanel = true
+        },
+        vote() {
+            this.$store.commit('application/entry', { key: 'editable_page', value: window.location.hash, user: this.$store.state.application.account.address })
+            this.voteCasted = true
+        },
+        sendReport() {
+            if (this.reportCoords) {
+                const getPathTo = element => {
+                    if (element.tagName == 'HTML') { return '/html[1]' }
+                    if (element === document.body) { return '/html[1]/body[1]' }
+
+                    let ix = 0
+                    const siblings = element.parentNode.childNodes
+                    for (let i = 0; i < siblings.length; i++) {
+                        const sibling = siblings[i]
+                        if (sibling === element) { return `${getPathTo(element.parentNode)}/${element.tagName.toLowerCase()}[${ix + 1}]` }
+                        if (sibling.nodeType === 1 && sibling.tagName === element.tagName) { ix++ }
+                    }
+                }
+
+                const cmd = {
+                    key: 'report',
+                    data: {
+                        coords: { x: this.reportCoords.x, y: this.reportCoords.y },
+                        path: this.$router.currentRoute.fullPath,
+                        element: getPathTo(document.elementFromPoint(this.reportCoords.x, this.reportCoords.y)),
+                        message: this.$refs.reportText.value
+                    }
+                }
+
+                this.$store.commit('application/entry', { key: 'report', value: JSON.stringify(cmd), user: this.$store.state.application.account.address })
+            }
+
+            this.$store.commit('application/activateModal', null)
+        },
+        scrollSidebarDown() {
+            $('#scroll_sidebar').animate({ scrollTop: '+=100', duration: '150' })
+            this.checkScrollButton()
+        },
+        scrollSidebarUp() {
+            $('#scroll_sidebar').animate({ scrollTop: '-=500', duration: '150' })
+            this.checkScrollButton()
+        },
+        checkScrollButton() {
+            // console.log('Checking scroll')
+            try {
+                if ($('#scroll_sidebar').children().height() > $('#scroll_sidebar').height()) {
+                    // Change the scroll direction when it hits the last 10px of the sidebar
+                    if (($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight()) >= ($('#scroll_sidebar')[0].scrollHeight - 10)) {
+                        this.scrollMoreDirection = 'up'
                     } else {
-                        document.body.style.cursor = 'default'
+                        this.scrollMoreDirection = 'down'
                     }
+                } else {
+                    this.scrollMoreDirection = null
                 }
+            } catch (e) {
 
-
-                $(document).on('click', (e) => {
-                    if (e.altKey) {
-                        e.preventDefault()
-
-                        this.reportCoords = {
-                            x: e.clientX,
-                            y: e.clientY
-                        }
-
-                        this.$store.state.application.activeModal = 'report'
-
-                        return false
-                    }
-
-                    return true
-                })
             }
         },
-        mounted() {
+        updateBreadcrumbLinks() {
+            if (this.breadcrumbLinksData.length === 0) {
+                if (this.$route.meta.breadcrumb) {
+                    this.breadcrumbLinksData = this.$route.meta.breadcrumb
+                } else if (this.$route.meta.breadcrumb === false) {
+                    this.breadcrumbLinksData = []
+                } else if (this.$route.name !== 'Home') {
+                    this.breadcrumbLinksData = [
+                        { to: { path: '/' }, title: 'Home' },
+                        { to: { path: this.$route.path }, title: this.$route.name }
+                    ]
+                }
+            }
         },
-        watch: {
-            'profileChooser': function() {
-                if (this.signedIn)
-                    if (this.profileChooser)
-                        this.bluredBg = true
-                    else
-                        this.bluredBg = false
-            },
-            '$store.state.application.activeProfile': function() {
-                if (!this.$store.state.application.activeProfile.key) return
+        handleResize(event) {
+            if (!process.client) { return }
 
-                this.$store.state.application.tokenCount = null
-
-                this.$api.service('profiles/balance').find({
-                    query: {
-                        type: 'HBX',
-                        address: this.$store.state.application.activeProfile.key
-                    }
-                }).then((res) => {
-                    this.$store.state.application.tokenCount = res.balance
-                })
-
-
-                // this.$desktop.sendCommand('getTokenBalance', {
-                //     type: 'HBX',
-                //     address: this.$store.state.application.activeProfile.key
-                // }).then((res) => {
-                //     this.$store.state.application.tokenCount = res.balance
-                // })
+            if (document.documentElement.clientWidth < 768) {
+                this.mobileMode = true
+            } else {
+                this.mobileMode = false
             }
         }
     }
+}
 </script>
 
 
@@ -1799,47 +1585,6 @@
 }
     </style>
     <style>
-
-body {
-    overflow-x: hidden;
-    margin: 0px;
-    padding: 0px;
-    -ms-text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: 'Barlow', sans-serif;
-    font-size: 13px;
-    line-height: 20px;
-    color: #323c47;
-    background: #30314c;
-    -webkit-font-smoothing: subpixel-antialiased; /* fix for blur? */
-    text-rendering:optimizeSpeed; /* fix for blur? */
-}
-
-
-/*Try to fix scrollable div height problems*/
-/*html, body, #app, .page {*/
-    /*min-height: 100vh;*/
- /*}*/
-html, body{
-    min-height: 100vh;
-}
-
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
-
-p {
-    margin-bottom: 10px;
-}
-
-a {
-    color: #5abaf9;
-    text-decoration: none;
-    background-color: transparent;
-}
-
 #left-bg {
     position: fixed;
     top: 0;
@@ -1900,133 +1645,6 @@ a {
     background: linear-gradient(to bottom, rgba(48, 49, 77, 0.34) 0%, rgba(48, 49, 77, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
-
-#__nuxt {
-    z-index: 2;
-    position: relative;
-}
-
-#critical-error {
-    display: none;
-    padding: 10px;
-    font-size: 15px;
-    color: #ddd;
-    width: 100%;
-    margin: 0 auto;
-    /* background: rgba(10, 2, 2, 0.3); */
-    padding: 15px;
-    border-radius: 6px;
-    /* box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); */
-}
-
-#critical-error button {
-    background: transparent;
-    color: #fff;
-    border-radius: 4px;
-    padding: 6px;
-    font-size: 15px;
-    border: 1px solid #fff;
-}
-
-.startup-loader {
-    position: fixed;
-    z-index: 100000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: none;
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
-}
-
-.startup-loader .startup-loader__container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    text-align: center;
-    padding-top: 100px;
-    font-size: 14px;
-}
-
-.startup-loader__message {
-    color: #fff;
-    font-size: 20px;
-    font-style: italic;
-    text-transform: uppercase;
-    margin-top: 40px;
-}
-
-.startup-loader__user {
-    color: #999;
-    text-transform: uppercase;
-}
-
-.startup-loader__user a {
-  color: #ddd;
-  font-weight: bold;
-}
-
-.startup-loader__status-code {
-    margin-top: 80px;
-}
-
-.startup-loader__status-message {
-    color: #ddd;
-    font-size: 16px;
-    margin-top: 30px;
-    text-transform: uppercase;
-}
-
-.startup-loader__links {
-    display: none;
-    position: absolute;
-    bottom: 30px;
-    left: 0;
-    text-align: center;
-    width: 100%;
-    font-size: 16px;
-}
-
-.startup-loader__links p {
-  color: #999;
-}
-
-.startup-loader__links a {
-  color: #fff;
-  margin-right: 20px;
-  font-size: 18px;
-  font-weight: bold;
-}
-.startup-loader__links a span {
-  color: #fff;
-  margin-right: 5px;
-}
-
-.startup-loader__spinner {
-  position: relative;
-  margin: 0 auto;
-  left: 0px;
-  top: 0px;
-  width: 20px;
-  height: 20px;
-  animation: rotate 500ms infinite linear;
-  zoom: 4;
-  display: none;
-}
-
-.startup-loader__spinner:before {
-  position: absolute;
-  left: 3px;
-  top: 3px;
-  content: " ";
-  width: 14px;
-  height: 14px;
-  border: 2px solid #dfdfe9;
-  border-radius: 7px;
-  border-right-color: transparent;
-}
-
 @keyframes pulse-opacity {
   0% {
     opacity: 0.5;
@@ -2035,6 +1653,8 @@ a {
     opacity: 1;
   }
 }
+
+
     </style>
 
 <style>

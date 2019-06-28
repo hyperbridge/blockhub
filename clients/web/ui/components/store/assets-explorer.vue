@@ -229,7 +229,7 @@ export default {
         genres(){
             return []
         },
-        products(){
+        products() {
             return []
         },
         selectedProducts() {

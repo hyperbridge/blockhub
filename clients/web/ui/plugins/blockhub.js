@@ -54,9 +54,9 @@ export default ({ app, store }) => {
 
     // Set blockhub instance on app
     // This way we can use it in middleware and pages asyncData/fetch
-    app.blockhub = {}
+    const blockhub = {}
 
-    app.blockhub.getMode = () => {
+    blockhub.getMode = () => {
         const { hostname } = window.location
         const hash = document.location.hash.replace('#/', '')
 
@@ -77,31 +77,31 @@ export default ({ app, store }) => {
         return 'production'
     }
 
-    app.blockhub.bridge = Bridge
-    app.blockhub.chaosMonkey = ChaosMonkey
-    app.blockhub.reputationEngine = ReputationEngine
-    app.blockhub.db = DB
-    app.blockhub.store = store
-    app.blockhub.seed = seed
-    // app.blockhub.router = router // doesnt work?
+    blockhub.bridge = Bridge
+    blockhub.chaosMonkey = ChaosMonkey
+    blockhub.reputationEngine = ReputationEngine
+    blockhub.db = DB
+    blockhub.store = store
+    blockhub.seed = seed
+    // blockhub.router = router // doesnt work?
 
-    app.blockhub.importStarterData = () => {
+    blockhub.importStarterData = () => {
         console.log('[BlockHub] Import starter data')
 
-        DB.marketplace.config.data[0].realms = seed.realms
-        DB.marketplace.assets.data = seed.assets
-        DB.marketplace.config.data[0].collections = seed.collections
-        DB.marketplace.config.data[0].gameSeries = seed.gameSeries
-        DB.marketplace.products.data = seed.products
-        DB.marketplace.config.data[0].ideas = seed.ideas
-        DB.funding.projects.data = seed.projects
+        store.state.marketplace.realms = seed.realms
+        store.state.marketplace.assets = seed.assets
+        store.state.marketplace.collections = seed.collections
+        store.state.marketplace.gameSeries = seed.gameSeries
+        store.state.marketplace.products = seed.products
+        store.state.marketplace.ideas = seed.ideas
+        store.state.funding.projects = seed.projects
 
         store.dispatch('marketplace/updateState')
         store.dispatch('funding/updateState')
         store.dispatch('application/updateState')
     }
 
-    app.blockhub.importSeedData = () => {
+    blockhub.importSeedData = () => {
         console.log('[BlockHub] Import seed data')
         // We dont want to mess with the important signed in account data
         // if (!DB.application.config.data[0].account.address) {
@@ -112,50 +112,50 @@ export default ({ app, store }) => {
         //     }
         // }
 
-        DB.application.config.data[0].account.notifications = seed.notifications
-        DB.application.config.data[0].updates = seed.updates
-        DB.marketplace.config.data[0].curatorReviews = seed.curatorReviews
-        DB.marketplace.config.data[0].realms = seed.realms
-        DB.marketplace.config.data[0].collections = seed.collections
-        DB.marketplace.config.data[0].gameSeries = seed.gameSeries
-        DB.marketplace.config.data[0].bounties = seed.bounties
-        DB.marketplace.config.data[0].ideas = seed.ideas
+        store.state.application.account.notifications = seed.notifications
+        store.state.application.updates = seed.updates
+        store.state.marketplace.curatorReviews = seed.curatorReviews
+        store.state.marketplace.realms = seed.realms
+        store.state.marketplace.collections = seed.collections
+        store.state.marketplace.gameSeries = seed.gameSeries
+        store.state.marketplace.bounties = seed.bounties
+        store.state.marketplace.ideas = seed.ideas
 
-        DB.marketplace.assets.data = seed.assets
-        DB.marketplace.products.data = seed.products
-        DB.marketplace.posts.data = seed.posts
+        store.state.marketplace.assets = seed.assets
+        store.state.marketplace.products = seed.products
+        store.state.marketplace.posts = seed.posts
 
-        DB.funding.projects.data = seed.projects
+        store.state.funding.projects = seed.projects
 
         store.dispatch('marketplace/updateState')
         store.dispatch('funding/updateState')
         store.dispatch('application/updateState')
     }
 
-    app.blockhub.resetSeedData = () => {
+    blockhub.resetSeedData = () => {
         // We dont want to mess with the important signed in account data
-        // if (!DB.application.config.data[0].account.address) {
-        //     DB.application.config.data[0].account.wallets = []
-        //     DB.application.config.data[0].account.profiles = []
-        //     DB.application.config.data[0].activeProfile = { id: null }
+        // if (!store.state.application.account.address) {
+        //     store.state.application.account.wallets = []
+        //     store.state.application.account.profiles = []
+        //     store.state.application.activeProfile = { id: null }
         // }
 
-        DB.application.config.data[0].account.notifications = []
-        DB.marketplace.config.data[0].updates = []
-        DB.marketplace.config.data[0].curatorReviews = []
-        DB.marketplace.config.data[0].productNews = []
-        DB.marketplace.config.data[0].realms = []
-        DB.marketplace.config.data[0].collections = []
-        DB.marketplace.config.data[0].gameSeries = []
-        DB.marketplace.config.data[0].bounties = []
-        DB.marketplace.config.data[0].ideas = []
+        store.state.application.account.notifications = []
+        store.state.marketplace.updates = []
+        store.state.marketplace.curatorReviews = []
+        store.state.marketplace.productNews = []
+        store.state.marketplace.realms = []
+        store.state.marketplace.collections = []
+        store.state.marketplace.gameSeries = []
+        store.state.marketplace.bounties = []
+        store.state.marketplace.ideas = []
 
-        DB.marketplace.products.data = []
-        DB.marketplace.assets.data = []
-        DB.marketplace.posts.data = []
+        store.state.marketplace.products = []
+        store.state.marketplace.assets = []
+        store.state.marketplace.posts = []
 
-        DB.funding.config.data[0].trendingProjects = []
-        DB.funding.projects.data = []
+        store.state.funding.trendingProjects = []
+        store.state.funding.projects = []
 
         store.dispatch('marketplace/updateState')
         store.dispatch('funding/updateState')
@@ -174,27 +174,22 @@ export default ({ app, store }) => {
         container.insert(item)
     }
 
-    app.blockhub.saveDatabase = () => {
+    blockhub.saveDatabase = () => {
         DB.clean()
 
-        updateContainer(DB.application.config, store.state.application)
-        updateContainer(DB.marketplace.products, Object.values(store.state.marketplace.products))
-        updateContainer(DB.marketplace.assets, Object.values(store.state.marketplace.assets))
-        updateContainer(DB.marketplace.config, store.state.marketplace)
-        updateContainer(DB.funding.config, store.state.funding)
-        updateContainer(DB.funding.projects, Object.values(store.state.funding.projects))
+        updateContainer(DB.store, store.state)
 
         DB.save()
     }
 
-    app.blockhub.api = {
+    blockhub.api = {
         service: serviceKey => {
             console.log(`[BlockHub] Service: ${serviceKey}`)
 
-            if (app.blockhub.bridge.isConnected()) { // && app.blockhub.bridge.canFulfillRequest(endpoint
+            if (blockhub.bridge.isConnected()) { // && blockhub.bridge.canFulfillRequest(endpoint
                 return {
                     find: params => {
-                        app.blockhub.bridge.sendCommand('service', {
+                        blockhub.bridge.sendCommand('service', {
                             serviceKey,
                             type: 'find',
                             params
@@ -212,10 +207,10 @@ export default ({ app, store }) => {
             Vue.mixin({
                 created() {
                     // access to blockhub anywhere
-                    this.$blockhub = app.blockhub
-                    this.$desktop = app.blockhub.bridge
-                    this.$db = app.blockhub.db
-                    this.$api = app.blockhub.api
+                    this.$blockhub = blockhub
+                    this.$desktop = blockhub.bridge
+                    this.$db = blockhub.db
+                    this.$api = blockhub.api
                 }
             })
         }
@@ -223,15 +218,17 @@ export default ({ app, store }) => {
 
     Vue.use(plugin)
 
-    if (process.client) window.BlockHub = app.blockhub
+    app.$blockhub = blockhub
+
+    if (process.client) window.BlockHub = blockhub
 
     DB.setInitCallback(async () => {
         console.log('DB init callback')
         // TODO: is this a race condition?
         // TODO: PeerService.init()
 
-        app.blockhub.reputationEngine.init(store) // , router)
-        app.blockhub.bridge.init(store) // , router)
+        blockhub.reputationEngine.init(store) // , router)
+        blockhub.bridge.init(store) // , router)
 
         store.dispatch('init', DB.store.data[0])
         store.dispatch('database/init')
@@ -245,7 +242,7 @@ export default ({ app, store }) => {
             store.state.application.environmentMode === 'beta' ||
             store.state.application.environmentMode === 'production') {
             setTimeout(() => {
-                app.blockhub.importStarterData()
+                blockhub.importStarterData()
             }, 1000)
         }
 
