@@ -56,75 +56,73 @@
         </c-sidebar-menu>
 
 
-        <h3 class="text-uppercase">
-            Search
-        </h3>
-        <div class="filter-block">
-            <div>
-                <no-ssr>
-                    <c-searcher
-                        v-model="phrase"
-                        class="margin-bottom-20"
-                        :results="filteredResults"
-                        :resultsCount="filteredResults.length"
-                        @input="search"
-                        @keyup.enter.native="goToSearchPage()"
-                        @click="goToSearchPage()">
-                        <router-link
-                            slot-scope="props"
-                            :to="`/product/${props.result.id}`"
-                            :title="`${props.result.name} - product page`"
-                            v-html="$options.filters.highlightPhrase(
-                                props.result.name, phrase, 'u'
-                            )" />
-                    </c-searcher>
-                    <h4 class="margin-vertical-20">
-                        Community Size
-                    </h4>
-                    <c-range-slider
-                        v-model.number="communitySize"
-                        :max="1000" />
-                    <h4 class="margin-vertical-20">
-                        Active Users
-                    </h4>
-                    <c-range-slider
-                        v-model.number="activeUsers"
-                        :max="5000" />
-                </no-ssr>
+        <no-ssr>
+            <h3 class="text-uppercase">
+                Search
+            </h3>
+            <div class="filter-block">
+                <c-searcher
+                    v-model="phrase"
+                    class="margin-bottom-20"
+                    :results="filteredResults"
+                    :resultsCount="filteredResults.length"
+                    @input="search"
+                    @keyup.enter.native="goToSearchPage()"
+                    @click="goToSearchPage()">
+                    <router-link
+                        slot-scope="props"
+                        :to="`/product/${props.result.id}`"
+                        :title="`${props.result.name} - product page`"
+                        v-html="$options.filters.highlightPhrase(
+                            props.result.name, phrase, 'u'
+                        )" />
+                </c-searcher>
+                <h4 class="margin-vertical-20">
+                    Community Size
+                </h4>
+                <c-range-slider
+                    v-model.number="communitySize"
+                    :max="1000" />
+                <h4 class="margin-vertical-20">
+                    Active Users
+                </h4>
+                <c-range-slider
+                    v-model.number="activeUsers"
+                    :max="5000" />
+                <div class="form-group platform-chose margin-vertical-20">
+                    <label>Platform Availability</label>
+                    <a
+                        v-for="os in platforms"
+                        :key="os.prop"
+                        href="#"
+                        @click.prevent="handleArray(os.prop, 'choosenPlatforms')">
+                        <c-icon
+                            cat="fab"
+                            class="platform-icon"
+                            :name="os.icon"
+                            :class="[ choosenPlatforms.includes(os.prop)
+                                ? 'platform-icon--active'
+                                : 'platform-icon--inactive'
+                            ]" />
+                    </a>
+                </div>
+                <div class="action">
+                    <router-link
+                        :to="{ path: '/search', query }"
+                        class="search">
+                        Search
+                    </router-link>
+                    <router-link
+                        :to="{
+                            path: '/search',
+                            query: { showFilters: true }
+                        }"
+                        class="more-filters">
+                        More filters ...
+                    </router-link>
+                </div>
             </div>
-            <div class="form-group platform-chose margin-vertical-20">
-                <label>Platform Availability</label>
-                <a
-                    v-for="os in platforms"
-                    :key="os.prop"
-                    href="#"
-                    @click.prevent="handleArray(os.prop, 'choosenPlatforms')">
-                    <c-icon
-                        cat="fab"
-                        class="platform-icon"
-                        :name="os.icon"
-                        :class="[ choosenPlatforms.includes(os.prop)
-                            ? 'platform-icon--active'
-                            : 'platform-icon--inactive'
-                        ]" />
-                </a>
-            </div>
-            <div class="action">
-                <router-link
-                    :to="{ path: '/search', query }"
-                    class="search">
-                    Search
-                </router-link>
-                <router-link
-                    :to="{
-                        path: '/search',
-                        query: { showFilters: true }
-                    }"
-                    class="more-filters">
-                    More filters ...
-                </router-link>
-            </div>
-        </div>
+        </no-ssr>
 
 
         <ul
