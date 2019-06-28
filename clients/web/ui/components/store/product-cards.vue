@@ -3,13 +3,13 @@
         <c-product-card-dynamic
             v-for="(product, index) in products"
             :key="index"
-            :productId="product.id"
-            :productPrice="product.price"
-            :productImagesMediumTile="product.images.mediumTile"
-            :productVideo="product.video"
-            :productShortDescription="product.shortDescription"
-            :productImagesPreview="product.images.review"
-            :productDeveloperTags="product.developerTags" />
+            :id="product.id"
+            :price="product.price"
+            :imagesMediumTile="product.images.mediumTile"
+            :video="product.video"
+            :shortDescription="product.shortDescription"
+            :imagesPreview="product.images.review"
+            :developerTags="product.developerTags" />
     </div>
 </template>
 
