@@ -37,7 +37,7 @@ Vue.use(VueYoutube)
 export default {
     components: {
         'c-twitch': () => import('~/components/twitch').then(m => m.default || m),
-        'c-local-video': () => import('_local.vue').then(m => m.default || m),
+        'c-local-video': () => import('./_local.vue').then(m => m.default || m),
         'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m)
     },
     props: {
