@@ -8,7 +8,7 @@
             @input="search"
             @keyup.enter.native="goToSearchPage()"
             @click="goToSearchPage()">
-            <router-link
+            <nuxt-link
                 slot-scope="props"
                 :to="`/product/${props.result.id}`"
                 :title="`${props.result.name} - product page`"

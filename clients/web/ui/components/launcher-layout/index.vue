@@ -7,35 +7,35 @@
             class="launcher__overlay"
             :style="`opacity: ${overlayOpacity}; background-color: ${overlayColor}`" />
         <div class="launcher__top-bar">
-            <router-link
+            <nuxt-link
                 class="app-header__bar-center margin-right-50"
                 :to="isLocked ? '#' : '/'">
                 <c-loading-logo :isLoading="isLoader" />
-            </router-link>
+            </nuxt-link>
             <nav class="launcher__top-bar-left">
                 <ul>
                     <li
                         v-if="desktopMode && !signedIn && !isLocked"
                         class="app-header__create-account-btn">
-                        <router-link
+                        <nuxt-link
                             to="/account/signup"
                             class="">
                             CREATE ACCOUNT
-                        </router-link>
+                        </nuxt-link>
                     </li>
                     <li
                         v-if="!desktopMode"
                         class="app-header__download-btn">
-                        <router-link
+                        <nuxt-link
                             to="/download"
                             class="">
                             DOWNLOAD
-                        </router-link>
+                        </nuxt-link>
                     </li>
                     <li v-if="signedIn">
-                        <router-link to="/">
+                        <nuxt-link to="/">
                             Store
-                        </router-link>
+                        </nuxt-link>
                     </li>
                 </ul>
             </nav>
@@ -53,7 +53,7 @@
                         <li
                             v-if="signedIn"
                             class="token">
-                            <router-link
+                            <nuxt-link
                                 class="mt-1"
                                 to="/token">
                                 <span
@@ -67,7 +67,7 @@
                                     {{ tokenCount }} <span class="icon fa fa-coins" />
                                 </span>
                                 <span class="text">Tokens</span>
-                            </router-link>
+                            </nuxt-link>
                         </li>
                         <li v-if="signedIn">
                             <c-dropdown
@@ -161,14 +161,14 @@
                             </c-dropdown>
                         </li>
                         <li v-if="!signedIn && !isLocked">
-                            <router-link @click="$store.commit('application/activateModal', 'login')">
+                            <nuxt-link @click="$store.commit('application/activateModal', 'login')">
                                 Sign In
-                            </router-link>
+                            </nuxt-link>
                         </li>
                         <li v-if="!isLocked">
-                            <router-link to="/help">
+                            <nuxt-link to="/help">
                                 Help
-                            </router-link>
+                            </nuxt-link>
                         </li>
                     </ul>
                 </nav>

@@ -47,13 +47,13 @@
                     </a>
                 </div>
                 <div v-if="!desktopMode">
-                    <router-link
+                    <nuxt-link
                         class="app-header__bar-left-link"
                         to="/">
                         <span
                             class="fa fa-home"
                             style="color: #000" />
-                    </router-link>
+                    </nuxt-link>
                     <c-button
                         status="none"
                         class="app-header__bar-left-link hide-on-mobile"
@@ -73,11 +73,11 @@
                 </div>
             </div>
             <div class="app-header__shadow" />
-            <router-link
+            <nuxt-link
                 class="app-header__bar-center"
                 :to="isLocked ? '#' : '/'">
                 <c-loading-logo :isLoading="isLoader" />
-            </router-link>
+            </nuxt-link>
             <div class="app-header__bar-right">
                 <div
                     v-if="desktopMode && operatingSystem === 'windows'"

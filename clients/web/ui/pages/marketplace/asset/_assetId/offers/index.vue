@@ -13,7 +13,7 @@
             </ul>
             <ul class="reset-list">
                 <!-- Can be replaced with router[...]() function -->
-                <router-link
+                <nuxt-link
                     v-for="[id, offer] in offersMap"
                     :key="id"
                     tag="li"
@@ -43,7 +43,7 @@
                             :user="offer.seller"
                             class="margin-left-5" />
                     </div>
-                </router-link>
+                </nuxt-link>
             </ul>
         </template>
         <div class="create-offer">

@@ -12,7 +12,7 @@
                     v-for="asset in props.items"
                     :key="asset.id"
                     :asset="asset">
-                    <router-link
+                    <nuxt-link
                         slot="link"
                         slot-scope="props"
                         :to="{
@@ -23,9 +23,9 @@
                     <!-- <a slot="link" slot-scope="props" :title="props.asset.name">
                         {{ props.asset.name }}
                     </a> -->
-                    <!-- <router-link slot="link" slot-scope="props" :to="`/`">
+                    <!-- <nuxt-link slot="link" slot-scope="props" :to="`/`">
                         {{ props.asset }} 123
-                    </router-link> -->
+                    </nuxt-link> -->
                 </c-asset-list-item>
             </ul>
             <!-- <table class="offers-table" slot-scope="props">

@@ -10,11 +10,11 @@
                             <li
                                 v-for="(link, index) in links"
                                 :key="index">
-                                <router-link
+                                <nuxt-link
                                     :to="link.url"
                                     class="menu__link">
                                     {{ link.title }}
-                                </router-link>
+                                </nuxt-link>
                             </li>
                         </ul>
                     </nav>
@@ -62,7 +62,7 @@ export default {
             &:hover {
                 background-color: rgba(255,255,255,.1);
             }
-            &.router-link-exact-active {
+            &.nuxt-link-exact-active {
                 // background-image: linear-gradient(to bottom, rgba(1,1,1,.3), rgba(1,1,1,.05));
             }
         }

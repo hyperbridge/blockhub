@@ -7,9 +7,9 @@
             :key="index"
             class="breadcrumb-item"
             :class="{ 'active': index == links.length-1 }">
-            <router-link :to="link.to ? link.to : link.title">
+            <nuxt-link :to="link.to ? link.to : link.title">
                 {{ link.title }}
-            </router-link>
+            </nuxt-link>
         </li>
     </ul>
 </template>

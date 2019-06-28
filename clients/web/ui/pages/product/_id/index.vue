@@ -137,43 +137,43 @@
                                 <li
                                     class="nav-item"
                                     @click="section='overview'">
-                                    <router-link
+                                    <nuxt-link
                                         :to="`/product/${id}`"
                                         class="nav-link"
                                         :class="{ 'active': section === 'overview' }">
                                         Overview
-                                    </router-link>
+                                    </nuxt-link>
                                 </li>
                                 <li
                                     v-darklaunch="'COMMUNITY'"
                                     class="nav-item"
                                     @click="section='community'">
-                                    <router-link
+                                    <nuxt-link
                                         :to="`/product/${id}/community`"
                                         class="nav-link"
                                         :class="{ 'active': section === 'community' }">
                                         Community
-                                    </router-link>
+                                    </nuxt-link>
                                 </li>
                                 <li
                                     class="nav-item"
                                     @click="section='projects'">
-                                    <router-link
+                                    <nuxt-link
                                         :to="`/product/${id}/projects`"
                                         class="nav-link"
                                         :class="{ 'active': section === 'projects' }">
                                         Crowdfunding
-                                    </router-link>
+                                    </nuxt-link>
                                 </li>
                                 <li
                                     class="nav-item"
                                     @click="section='assets'">
-                                    <router-link
+                                    <nuxt-link
                                         :to="`/product/${id}/assets`"
                                         class="nav-link"
                                         :class="{ 'active': section === 'assets' }">
                                         Inventory
-                                    </router-link>
+                                    </nuxt-link>
                                 </li>
                                 <li
                                     v-if="editing"

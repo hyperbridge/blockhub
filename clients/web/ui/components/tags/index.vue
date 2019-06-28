@@ -1,12 +1,12 @@
 <template>
     <div class="tags">
-        <router-link
+        <nuxt-link
             v-for="(tag, index) in tags"
             :key="index"
             :to="{ path: '/search', query: { tags: [tag] }}"
             class="tags__link">
             {{ tag }}
-        </router-link>
+        </nuxt-link>
     </div>
 </template>
 
