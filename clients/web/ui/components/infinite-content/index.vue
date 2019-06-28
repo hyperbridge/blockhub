@@ -520,9 +520,6 @@ export default {
         }
     },
     computed: {
-        // ...mapGetters({
-        //     assets: 'marketplace/assetsArray'
-        // }),
         assets(){
             return []
         },

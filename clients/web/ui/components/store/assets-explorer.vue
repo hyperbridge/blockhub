@@ -226,10 +226,6 @@ export default {
         }
     },
     computed: {
-        ...mapGetters({
-            // 'genres': 'marketplace/productsTags',
-            // 'products': 'marketplace/assetsProducts'
-        }),
         genres(){
             return []
         },
