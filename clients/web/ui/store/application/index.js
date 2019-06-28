@@ -49,6 +49,7 @@ const updateState = (savedData, updatedState = {}) => {
     }
 
     localState.connection.internet = true
+    localState.connection.datasource = true
 
     if (updatedState.locked !== undefined) {
         localState.locked = updatedState.locked
