@@ -105,6 +105,10 @@ export default {
     },
     methods: {
         slideshow() {
+            if (this.interval) {
+                clearInterval(this.interval)
+            }
+
             this.interval = setInterval(() => {
                 if (!this.items || !this.items.length) return
 
