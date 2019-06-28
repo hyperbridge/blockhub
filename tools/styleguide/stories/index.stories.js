@@ -328,7 +328,7 @@ storiesOf('Searcher', module)
     }))
 
 import RatingStars from '@/components/rating-stars';
-import RatingBlock from '@/components/rating-block/index'
+import RatingBlock from '@/components/rating-block';
 
 storiesOf('Rating', module)
     .add('Stars', () => ({
@@ -375,13 +375,11 @@ storiesOf('Author', module)
         components: {Author},
         data() {
             return {
-                author: {
-                    name: 'SatoSan',
-                    img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'
-                }
+		            name: 'SatoSan',
+		            img: 'https://via.placeholder.com/150'
             }
         },
-        template: `<div class="text-white p-5"><author :author="author"/></div>`
+        template: `<div class="text-white p-5"><author :name="name" :img="img"/></div>`
     }))
 
 import Tags from '@/components/tags';

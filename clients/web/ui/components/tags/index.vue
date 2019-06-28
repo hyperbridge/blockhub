@@ -15,7 +15,8 @@ export default {
     props: {
         tags: {
             type: Array,
-            required: true
+            required: true,
+            default: () => []
         }
     }
 }
