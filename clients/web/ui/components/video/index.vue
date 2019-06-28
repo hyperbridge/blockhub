@@ -53,7 +53,10 @@ export default {
             default: '800'
         },
         poster: String,
-        videoType: String,
+        videoType: {
+            type: String,
+            default: 'video/mp4'
+        },
         controls: {
             type: Boolean,
             default: true
