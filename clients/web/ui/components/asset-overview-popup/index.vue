@@ -5,15 +5,15 @@
                 <c-icon name="link" />
             </div>
             <div class="img">
-                <c-img :src="asset.image" />
+                <c-img :src="image" />
             </div>
             <div class="info">
-                <h4>{{ asset.name }}</h4>
-                <h6>{{ asset.productName }}</h6>
+                <h4>{{ name }}</h4>
+                <h6>{{ productName }}</h6>
                 <div class="description">
-                    <h6>{{ asset.price['current'] | convertCurrency }}</h6>
+                    <h6>{{ price['current'] | convertCurrency }}</h6>
                     <p>Based on 7461 other transactions</p>
-                    <p>Lowest: {{ asset.price['min'] | convertCurrency }} Highest: {{ asset.price['max'] | convertCurrency }}</p>
+                    <p>Lowest: {{ priceMin | convertCurrency }} Highest: {{ priceMax | convertCurrency }}</p>
                 </div>
             </div>
         </div>
@@ -36,11 +36,11 @@
             <div class="w-100 py-4">
                 <c-switch
                     label="Accept offers for this item?"
-                    :checked="asset.acceptOffers"
+                    :checked="acceptOffers"
                     labelSize="18px"
                     size="sm"
                     labelPosition="left"
-                    @change="$store.commit('assets/negateValue', { id: asset.id, iprop: 'acceptOffers' })" />
+                    @change="$store.commit('assets/negateValue', { id: id, iprop: 'acceptOffers' })" />
             </div>
         </div>
         <div class="asset-overview-popup__info-list">
@@ -51,7 +51,7 @@
                     :showBackground="false" />
                 <div class="metadata__table padding-bottom-10">
                     <div
-                        v-for="(value, prop, index) in asset.metadata"
+                        v-for="(value, prop, index) in metadata"
                         :key="index"
                         class="item-row">
                         <div class="item-label">
@@ -86,8 +86,18 @@ export default {
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m)
     },
     props: {
-        asset: {
-            type: Object
+        image: {
+            type: String
+        },
+        id: String,
+        name: String,
+        productName: String,
+        priceMin: String,
+        priceMax: String,
+        acceptOffers: Boolean,
+        metadata: {
+            type:  Array,
+            default: () => []
         }
     }
 }

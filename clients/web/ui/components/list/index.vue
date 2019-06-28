@@ -24,7 +24,10 @@
 export default {
     name: 'List',
     props: {
-        items: Array
+        items: {
+            type: Array,
+            default: () => []
+        }
     }
 }
 </script>

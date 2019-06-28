@@ -58,7 +58,10 @@ export default {
         'c-icon': () => import('~/components/shortcut-icon').then(m => m.default || m)
     },
     props: {
-        items: Array
+        items: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         // let colors = generateRGBColors(5)

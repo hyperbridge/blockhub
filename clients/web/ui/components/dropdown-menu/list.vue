@@ -27,8 +27,14 @@ export default {
             default: 'dropdown-list'
         },
         title: String,
-        list: Array,
-        activeList: Array
+        list: {
+            type: Array,
+            default: () => []
+        },
+        activeList: {
+            type: Array,
+            default: () => []
+        }
     }
 }
 </script>

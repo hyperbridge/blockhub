@@ -410,9 +410,12 @@ export default {
         ...mapGetters({
             getProductsQuery: 'marketplace/getProductsQuery',
             products: 'marketplace/productsArray',
-            productsTags: 'marketplace/productsTags',
+            // productsTags: 'marketplace/productsTags',
             languages: 'marketplace/productsLanguages'
         }),
+        genres(){
+            return []
+        },
         query() {
             const { phrase, selectedTags, selectedGenres, selectedLanguages, price, communitySize, activeUsers } = this
             const query = {}

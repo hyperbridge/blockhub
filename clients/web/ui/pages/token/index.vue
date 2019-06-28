@@ -88,7 +88,10 @@
                                     v-for="(item) in props.items"
                                     :key="item.id"
                                     :class="item.css"
-                                    :asset="item" />
+                                    :assetName="item.name"
+                                    :assetPriceCurrent="item.price.current"
+                                    :assetTags="item.tags"
+                                    :assetImage="item.image" />
                             </template>
                         </c-carousel-3d>
                     </div>
@@ -127,7 +130,10 @@
                                     v-for="(item) in props.items"
                                     :key="item.id"
                                     :class="item.css"
-                                    :asset="item" />
+                                    :assetName="item.name"
+                                    :assetPriceCurrent="item.price.current"
+                                    :assetTags="item.tags"
+                                    :assetImage="item.image" />
                             </template>
                         </c-carousel-3d>
                     </div>

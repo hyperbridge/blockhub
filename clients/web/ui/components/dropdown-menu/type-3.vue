@@ -30,7 +30,10 @@ export default {
     },
     props: {
         title: String,
-        items: Array
+        items: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {

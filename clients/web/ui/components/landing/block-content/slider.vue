@@ -71,7 +71,10 @@ export default {
         'c-landing-block-title': () => import('~/components/landing/block-title/simple').then(m => m.default || m)
     },
     props: {
-        items: [Object, Array]
+        items: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {

@@ -84,7 +84,10 @@ export default {
             type: Boolean,
             default: false
         },
-        files: [Array, Object]
+        files: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {
