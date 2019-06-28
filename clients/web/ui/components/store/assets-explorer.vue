@@ -44,7 +44,7 @@
                     <router-link
                         tag="div"
                         :to="{
-                            name: 'Marketplace',
+                            path: '/marketplace',
                             query: { showFilters: true }
                         }">
                         <c-button
@@ -230,10 +230,10 @@ export default {
             // 'genres': 'marketplace/productsTags',
             // 'products': 'marketplace/assetsProducts'
         }),
-        genres(){
+        genres() {
             return []
         },
-        products(){
+        products() {
             return []
         },
         selectedProducts() {

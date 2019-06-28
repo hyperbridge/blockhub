@@ -185,6 +185,7 @@ export default {
                     return setTimeout(bootChecker, 1 * 1000)
                 }
 
+                $('.startup-loader__status-message').text('An error occurred. Please try again in a few minutes.')
                 $('#startup-loader, #critical-error').show()
 
                 return setTimeout(bootChecker, 1000)
