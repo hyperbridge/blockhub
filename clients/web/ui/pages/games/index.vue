@@ -25,12 +25,12 @@
                     :id="game.id"
                     :key="index"
                     class="p-2 col-3"
-                    :image="game.meta.images.mediumTile"
+                    :image="game.meta && game.meta.images && game.meta.images.mediumTile"
                     :description="game.description"
-                    :funds="game.meta.funds"
+                    :funds="game.meta && game.meta.funds"
                     :parentName="game.product && game.product.name"
                     :parentDeveloper="game.product && game.product.developer"
-                    :parentImage="game.product && game.product.meta.images.mediumTile" />
+                    :parentImage="game.product && game.product.meta && game.product.meta.images && game.product.meta.images.mediumTile" />
             </div>
         </c-block>
 
