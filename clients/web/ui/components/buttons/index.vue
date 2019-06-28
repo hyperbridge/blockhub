@@ -22,12 +22,12 @@
                 icon ? 'fa-' + icon : injectFilter,
                 swapOrder ? 'swap-order' : ''
             ]" />
-        <router-link
+        <nuxt-link
             v-if="to"
             tag="span"
             :to="to">
             <slot />
-        </router-link>
+        </nuxt-link>
         <slot v-if="!to" />
     </component>
 </template>
