@@ -1,13 +1,13 @@
 <template>
     <div class="asset-preview">
         <p class="asset-preview__product">
-            {{ assetProductName }}
+            {{ productName }}
         </p>
         <c-img
             class="asset-preview__image"
-            :src="assetImage" />
+            :src="image" />
         <h4 class="asset-preview__name">
-            {{ assetName }}
+            {{ name }}
         </h4>
         <p class="asset-preview__history-title">
             Market price history:
@@ -15,11 +15,11 @@
         <table class="asset-preview__price-table">
             <tbody>
                 <tr
-                    v-for="(price, priceKey) in assetPrice"
+                    v-for="(price, priceKey) in price"
                     :key="priceKey">
                     <td>{{ priceKey | upperFirstChar }}</td>
                     <td class="price-table__price">
-                        {{ assetPrice[priceKey] | convertCurrency }}
+                        {{ price[priceKey] | convertCurrency }}
                     </td>
                 </tr>
             </tbody>
@@ -31,10 +31,10 @@
 export default {
     name: 'AssetPreview',
     props: {
-        assetName: String,
-        assetProductName: String,
-        assetImage: String,
-        assetPrice: {
+        name: String,
+        productName: String,
+        image: String,
+        price: {
             type: Array,
             default: () => []
         }

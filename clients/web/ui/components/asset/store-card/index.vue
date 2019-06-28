@@ -1,24 +1,24 @@
 <template>
     <div
         class="store-card"
-        :class="'store-card--' + assetTags[0]">
+        :class="'store-card--' + tags[0]">
         <div
             v-if="assetTags.length"
             class="store-card__badges">
             <c-badge-card
-                v-for="(tag, index) in assetTags"
+                v-for="(tag, index) in tags"
                 :key="index"
                 class="store-card__single-badge"
                 :title="tag.value | space"
                 :tag="tag.value" />
         </div>
         <c-img
-            :src="assetImage"
+            :src="image"
             class="store-card__image" />
         <div class="store-card__info">
-            <span class="store-card__name">{{ assetName }}</span>
+            <span class="store-card__name">{{ name }}</span>
             <span class="store-card__price">
-                $ {{ assetPriceCurrent }}
+                $ {{ priceCurrent }}
             </span>
         </div>
     </div>
@@ -30,10 +30,10 @@ export default {
         'c-badge-card': () => import('~/components/badge-card').then(m => m.default || m)
     },
     props: {
-        assetImage: String,
-        assetName: String,
-        assetPriceCurrent: String,
-        assetTags: {
+        image: String,
+        name: String,
+        priceCurrent: String,
+        tags: {
             type: Array,
             default: () => []
         }
