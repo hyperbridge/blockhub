@@ -34,6 +34,17 @@ const StoreDummy = {
 
 Vue.use(StoreDummy)
 
+
+Vue.component('nuxt-link', {
+		props: ['to'],
+		methods: {
+				log() {
+						action('link target')(this.to)
+				},
+		},
+		template: '<div @click="log()"><slot /></div>',
+})
+
 // //import '!style-loader!css-loader!./styles.scss'
 
 // window.ga = function() {}

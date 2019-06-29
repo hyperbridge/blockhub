@@ -24,6 +24,7 @@
             ]" />
         <nuxt-link
             v-if="to"
+            class="w-100"
             tag="span"
             :to="to">
             <slot />
