@@ -2207,7 +2207,7 @@ storiesOf('Assets List', module)
                 items: [
                     {
                         image: 'https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de',
-                        title: 'Magic Plate Armor',
+                        name: 'Magic Plate Armor',
                         price: {
                             "min": 0.99,
                             "max": 9.99,
@@ -2218,7 +2218,7 @@ storiesOf('Assets List', module)
                     },
                     {
                         image: 'https://vignette.wikia.nocookie.net/angrybirds-fiction/images/8/8b/Toons_assets_chuck_01.png/revision/latest?cb=20150120103056&path-prefix=ru',
-                        title: 'Magic Chuck',
+		                    name: 'Magic Chuck',
                         price: {
                             "min": 0.99,
                             "max": 9.99,
