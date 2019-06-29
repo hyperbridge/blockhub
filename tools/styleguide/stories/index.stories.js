@@ -2151,7 +2151,7 @@ storiesOf('Switch', module)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-switch label="Some text" label_position="right" label_size="22px" />
+             <c-switch label="Some text" labelPosition="right" labelSize="22px" />
          </div>
         `
     }))

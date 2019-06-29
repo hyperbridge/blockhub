@@ -50,26 +50,18 @@
                     :showArrows="false"
                     :showBackground="false" />
                 <div class="metadata__table padding-bottom-10">
+                    <!--{{ metadata }}-->
                     <div
-                        v-for="(value, prop, index) in metadata"
+                        v-for="(value, index) in metadata"
                         :key="index"
                         class="item-row">
                         <div class="item-label">
                             <i class="fas fa-file" />
-                            {{ prop | space | upperFirstChar }}
+                            {{ value.label }}
                         </div>
                         <div class="item-description">
-                            <ul
-                                v-if="typeof value === 'object'"
-                                class="margin-0">
-                                <li
-                                    v-for="(value, prop, index) in value"
-                                    :key="index">
-                                    {{ prop | space | upperFirstChar }}: {{ value }}
-                                </li>
-                            </ul>
-                            <span v-else>
-                                {{ value }}
+                            <span>
+                                {{ value.text }}
                             </span>
                         </div>
                     </div>
