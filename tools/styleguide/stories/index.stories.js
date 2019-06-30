@@ -2913,7 +2913,14 @@ storiesOf('Product Community', module)
         template: `
             <div class="row m-0 p-5">
                 <div class="col-10">
-                    <c-post :post="post"/>
+                    <c-post :id="post.id"
+                            :title="post.title" 
+                            :rate="post.rate" 
+                            :commentsCount="post.comments_count" 
+                            :author="post.author" 
+                            :contentImg="post.content.img" 
+                            :contentText="post.content.text" 
+                            :comments="post.content.comments"/>
                 </div>
             </div>
         `
@@ -2925,7 +2932,11 @@ storiesOf('Product Community', module)
         data: () => data.ProductCommunity,
         template: `
             <div class="padding-30">
-                <c-comment :comment="post.content.comments[0]"/>
+                <c-comment  :rate="post.content.comments[0].rate"
+                            :author="post.content.comments[0].author"
+                            :date="post.content.comments[0].date"
+                            :text="post.content.comments[0].text"
+                            :comment="post.content.comments[0]"/>
             </div>
         `
     }))

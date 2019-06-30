@@ -16,11 +16,11 @@
                 :aria-controls="`step${index}-tab`"
                 aria-expanded="true"
                 data-toggle="tab">
-                <div class="img">
+                <div class="img" v-if="item.image">
                     <c-img :src="item.image" />
                 </div>
                 <div class="text">
-                    <h4>{{ item.title }}</h4>
+                    <h4>{{ item.heading }}</h4>
                     <p>{{ item.developer }}</p>
                 </div>
             </a>

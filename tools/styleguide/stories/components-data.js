@@ -546,7 +546,9 @@ export const ImagesExplorer = {
 }
 
 const authors = [
-    {name: 'Nakatochi', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'},
+    {
+        name: 'Nakatochi',
+        img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'},
     {
         name: 'Nakatochi',
         img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL'
@@ -565,7 +567,7 @@ export const ProductCommunity = {
         rate: 103,
         comments_count: 894391,
         status: 'starred',
-        author: authors[0],
+        author: authors[1],
         content: {
             img: 'http://memesbams.com/wp-content/uploads/2017/08/2.3-Delightful-cheer-up-cat-meme.jpg',
             text: placeholderText,
