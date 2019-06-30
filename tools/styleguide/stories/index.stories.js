@@ -3035,7 +3035,7 @@ storiesOf('Project Card', module)
                                     :parentImage="project.game.img"
                                     :parentName="project.game.title"
                                     :parentDeveloper="project.game.developer"
-                                    :id="id"
+                                    :id="project.id"
                                     customClass="margin-bottom-20"/>
                 </div>
             </div>
@@ -3065,7 +3065,7 @@ storiesOf('Sending Funds(not finished)', module)
     }))
 
 
-import UserCard from '@/components/user-card/index';
+import UserCard from '@/components/user-card';
 
 storiesOf('User Card', module)
     .add('default', () => ({
@@ -3132,70 +3132,80 @@ import ProductsCards from '@/components/store/product-cards';
 
 const productsCardsData = [
     {
-        id: "8",
+        id: 8,
         name: "Gothic® 3",
-        images: {
-            header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
-            mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
-            main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
-            preview: [
-                "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
-                "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004034.1920x1080.jpg?t=1533039803",
-                "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004035.1920x1080.jpg?t=1533039803",
-                "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004037.1920x1080.jpg?t=1533039803"
-            ]
+		    meta: {
+				    images: {
+						    header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+						    mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
+						    main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+						    preview: [
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004034.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004035.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004037.1920x1080.jpg?t=1533039803"
+						    ]
+				    },
+				    developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
         },
         author: "Piranha Bytes",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/901191/movie480.webm?t=1490866901"],
-        developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     },
     {
-        id: "9",
+        id: 9,
         name: "The Witcher® 3: Wild Hunt",
-        images: {
-            header: "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_b74d60ee215337d765e4d20c8ca6710ae2362cc2.600x338.jpg?t=1529405012",
-            mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/292030/header.jpg?t=1529405012",
-            main: "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_b74d60ee215337d765e4d20c8ca6710ae2362cc2.600x338.jpg?t=1529405012",
-            preview: [
-                "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012",
-                "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_64eb760f9a2b67f6731a71cce3a8fb684b9af267.600x338.jpg?t=1529405012",
-                "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_eda99e7f705a113d04ab2a7a36068f3e7b343d17.600x338.jpg?t=1529405012",
-                "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_d5b80eb63c12a6484f26796f3e34410651bba068.600x338.jpg?t=1529405012"
-            ]
-        },
+		    meta: {
+				    images: {
+						    header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+						    mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
+						    main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+						    preview: [
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004034.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004035.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004037.1920x1080.jpg?t=1533039803"
+						    ]
+				    },
+				    developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
+		    },
         author: "CD PROJEKT RED",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256658589/movie480.webm?t=1528288687"],
-        developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     },
     {
-        id: "10",
+        id: 10,
         name: "Fallout 4",
-        images: {
-            header: "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_c6b798424a93617b4b825aea3bcd9547c0b0a5ce.1920x1080.jpg?t=1533676954",
-            mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/377160/header.jpg?t=1533676954",
-            main: "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_c6b798424a93617b4b825aea3bcd9547c0b0a5ce.1920x1080.jpg?t=1533676954",
-            preview: [
-                "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_f7861bd71e6c0c218d8ff69fb1c626aec0d187cf.1920x1080.jpg?t=1533676954",
-                "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_910437ac708aed7c028f6e43a6224c633d086b0a.1920x1080.jpg?t=1533676954",
-                "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_f649b8e57749f380cca225db5074edbb1e06d7f5.1920x1080.jpg?t=1533676954",
-                "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_c310f858e6a7b02ffa21db984afb0dd1b24c1423.1920x1080.jpg?t=1533676954"
-            ]
-        },
+		    meta: {
+				    images: {
+						    header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+						    mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
+						    main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+						    preview: [
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004034.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004035.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004037.1920x1080.jpg?t=1533039803"
+						    ]
+				    },
+				    developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
+		    },
         author: "Bethesda",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256657338/movie480.webm?t=1447378505"],
-        developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     }
 ];
+
 storiesOf('Product Card', module)
     .add('basic', () => ({
         components: {ProductCard},
-        data: () => ({products: productsCardsData}),
+        data: () => ({ products: productsCardsData }),
         template: `
             <div class="row">
                 <product-card
                     v-for="(product, index) in products"
-                    :product="product"
-                    :key="index"
+                    :id="product.id"
+                    :imagesMediumTile="product.meta.images.mediumTile"
+                    :name="product.name"
+                    :metaShortDescription="product.meta.shortDescription"
+                    :metaDeveloperTags="product.meta.developerTags"
                     class="col-3"
                 />
             </div>
@@ -3208,7 +3218,14 @@ storiesOf('Product Card', module)
             <div class="row">
                 <product-card-dynamic
                     v-for="(product, index) in products"
-                    :product="product"
+                    :id="product.id"
+                    :name="product.name"
+                    :price="product.price"
+                    :imagesMediumTile="product.meta.images.mediumTile"
+                    :video="product.video"
+                    :shortDescription="product.shortDescription"
+                    :imagesPreview="product.meta.images.review"
+                    :developerTags="product.meta.developerTags"
                     :key="index"
                     class="col-3"
                 />

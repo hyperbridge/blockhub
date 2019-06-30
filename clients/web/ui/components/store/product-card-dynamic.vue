@@ -50,11 +50,11 @@
                 {{ name }}
             </c-button>
         </h4>
-        <p
+        <div
             class="card-text"
             hidden>
             {{ shortDescription }}
-        </p>
+        </div>
         <c-tags v-if="developerTags" :tags="developerTags.slice(0,3)" />
     </div>
 </template>
@@ -70,6 +70,7 @@ export default {
     props: {
         id: Number,
         price: String,
+        name: String,
         imagesMediumTile: String,
         video: String,
         shortDescription: String,
