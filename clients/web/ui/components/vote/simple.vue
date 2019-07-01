@@ -22,9 +22,6 @@ export default {
             type: Number,
             default: 0
         },
-        getChange:{
-            type: Function,
-        }
     },
     data() {
         return {
