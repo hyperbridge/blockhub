@@ -198,18 +198,18 @@
                         <li
                             class="nav-item"
                             @click="section='overview'">
-                            <router-link
+                            <nuxt-link
                                 :to="`/idea/${idea.id || 'new'}`"
                                 class="nav-link"
                                 :class="{ 'active': section === 'overview' }">
                                 Overview
-                            </router-link>
+                            </nuxt-link>
                         </li>
                         <li
                             v-darklaunch="'COMMUNITY'"
                             class="nav-item"
                             @click="section='community'">
-                            <router-link
+                            <nuxt-link
                                 :to="`/idea/${idea.id || 'new'}/community`"
                                 class="nav-link"
                                 :class="{ 'active': section === 'community' }">
@@ -217,7 +217,7 @@
                                 <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
                                     0
                                 </c-updates-count>
-                            </router-link>
+                            </nuxt-link>
                         </li>
                         <li
                             v-if="editing"

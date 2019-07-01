@@ -56,12 +56,12 @@
             </h2>
 
             <nav class="back-btn">
-                <router-link
+                <nuxt-link
                     v-show="$route.name === 'Marketplace Asset Offer'"
                     :to="{ name: 'Marketplace Asset Offers' }">
                     <c-icon name="arrow-left" />
                     Go back
-                </router-link>
+                </nuxt-link>
             </nav>
 
             <div class="offers-route">

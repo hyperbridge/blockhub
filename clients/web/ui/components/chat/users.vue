@@ -29,7 +29,10 @@
 <script>
 export default {
     props: {
-        users: Array,
+        users: {
+            type: Array,
+            default: () => []
+        },
         logout: Function
     },
     data() {

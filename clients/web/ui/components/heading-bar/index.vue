@@ -62,7 +62,10 @@ export default {
         showArrows: Boolean,
         more: Boolean,
         showActions: Boolean,
-        headingTabs: Array,
+        headingTabs: {
+            type: Array,
+            default: () => []
+        },
         activeIndex: Number,
         itemsLength: Number
     },

@@ -33,7 +33,10 @@
 export default {
     name: 'TabsUniversal',
     props: {
-        tabNames: Array,
+        tabNames: {
+            type: Array,
+            default: () => []
+        },
         setActiveTab: [Number, String],
         tabText: String,
         activeTabProp: [Number, String],

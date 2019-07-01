@@ -8,9 +8,9 @@
                 colored>
                 <span
                     :class="{
-                        'up': comment.rate > 400,
-                        'down': comment.rate < 0
-                    }">{{ comment.rate }}</span>
+                        'up': rate > 400,
+                        'down': rate < 0
+                    }">{{ rate }}</span>
             </c-button-arrows>
             <div class="comment-container">
                 <c-dropdown-menu
@@ -18,14 +18,14 @@
                     style="right: 5px; top: 10px;" />
                 <div class="comment-content">
                     <div class="user-info">
-                        <c-img :src="comment.author.img" />
+                        <c-img :src="authorImg" />
                         <div>
-                            <h6>{{ comment.author.name }}</h6>
+                            <h6>{{ authorName }}</h6>
                             <!--<span class="time">{{ comment.date | timeAgoShort }}</span>-->
                         </div>
                     </div>
                     <div class="text">
-                        {{ comment.text }}
+                        {{ text }}
                     </div>
                 </div>
                 <div class="sub-comments-list">
@@ -51,7 +51,6 @@ import moment from 'moment'
 import VueEmojiReact from 'vue-emoji-react'
 
 export default {
-    name: 'Comment',
     components: {
         'c-dropdown-menu': () => import('~/components/dropdown-menu').then(m => m.default || m),
         'c-reply': () => import('~/components/community/reply').then(m => m.default || m),
@@ -59,10 +58,10 @@ export default {
         'c-emoji-picker': VueEmojiReact
     },
     props: {
-        comment: {
-            type: Object,
-            required: true
-        }
+        rate: Number,
+        authorImg: String,
+        authorName: String,
+        text: String,
     },
     data() {
         return {

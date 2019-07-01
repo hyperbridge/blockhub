@@ -21,7 +21,10 @@ export default {
         'c-single-message': SingleMessage
     },
     props: {
-        messages: Array,
+        messages: {
+            type: Array,
+            default: () => []
+        },
         createMessage: Function
     },
     data() {

@@ -60,7 +60,10 @@ export default {
         'c-block': () => import('~/components/block').then(m => m.default || m)
     },
     props: {
-        discussions: Array,
+        discussions: {
+            type: Array,
+            default: () => []
+        },
         communityPath: String,
         editing: Boolean,
         activateElement: Boolean

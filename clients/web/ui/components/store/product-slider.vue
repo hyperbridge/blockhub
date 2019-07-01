@@ -24,11 +24,21 @@
                 <c-product-card-dynamic
                     v-if="dynamic"
                     class="m-0"
-                    :product="product" />
+                    :productId="product.id"
+                    :productPrice="product.price"
+                    :productImagesMediumTile="product.images.mediumTile"
+                    :productVideo="product.video"
+                    :productShortDescription="product.shortDescription"
+                    :productImagesPreview="product.images.review"
+                    :productDeveloperTags="product.developerTags" />
                 <c-product-card
                     v-else
                     class="m-0"
-                    :product="product" />
+                    :productId="product.id"
+                    :productMetaImagesMediumTile="product.meta.images.mediumTile"
+                    :productName="product.name"
+                    :productMetaShortDescription="product.meta.shortDescription"
+                    :productMetaDeveloperTags="product.meta.developerTags" />
             </c-swiper-slide>
         </c-swiper>
     </c-block>
@@ -41,7 +51,10 @@ export default {
         'c-product-card-dynamic': () => import('~/components/store/product-card-dynamic').then(m => m.default || m)
     },
     props: {
-        products: Array,
+        products: {
+            type: Array,
+            default: () => []
+        },
         title: String,
         maxPerView: {
             type: Number,

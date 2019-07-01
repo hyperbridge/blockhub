@@ -3,12 +3,12 @@
         <div class="game-installer__product-preview">
             <c-img
                 class="game-installer__image"
-                :src="product.images.mediumTile" />
+                :src="productImagesMediumTile" />
             <div class="game-installer__description">
-                <h3>{{ product.name }}</h3>
+                <h3>{{ productName }}</h3>
                 <p v-html="description" />
                 <c-icon
-                    v-for="(reqs, index) in product.systemRequirements"
+                    v-for="(reqs, index) in productSystemRequirements"
                     :key="index"
                     cat="fab"
                     :name="getSysName(reqs.os)" />
@@ -74,7 +74,12 @@ export default {
         'c-list': () => import('~/components/list').then(m => m.default || m)
     },
     props: {
-        product: Object
+        productImagesMediumTile: String,
+        productName: String,
+        productSystemRequirements: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {

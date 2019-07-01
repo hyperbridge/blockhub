@@ -49,6 +49,7 @@ const updateState = (savedData, updatedState = {}) => {
     }
 
     localState.connection.internet = true
+    localState.connection.datasource = true
 
     if (updatedState.locked !== undefined) {
         localState.locked = updatedState.locked
@@ -147,7 +148,7 @@ export const actions = {
             }
         }, { root: true })
 
-        store.state.activeProfile = store.rootState.profiles.keyedById[store.state.activeProfile && store.state.activeProfile.id || 1]
+        store.state.activeProfile = store.rootState.profiles.keyedById[(store.state.activeProfile && store.state.activeProfile.id) || store.rootState.profiles.ids[0]]
         store.state.developerMode = store.state.activeProfile && store.state.activeProfile.role === 'developer'
         store.state.editorMode = 'viewing'
         store.state.signedIn = true

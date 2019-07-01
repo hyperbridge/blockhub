@@ -10,17 +10,17 @@
                 {{ date | timeAgo }}
             </span>
             <span>
-                <!--<router-link :to="{ name: 'Release page', params: {id: id } }">-->
+                <!--<nuxt-link :to="{ name: 'Release page', params: {id: id } }">-->
                 <i class="fas fa-tag mr-2" />
                 {{ version }}
-                <!--</router-link>-->
+                <!--</nuxt-link>-->
             </span>
         </div>
         <div class="history-list__item-description">
             <div class="h1">
-                <router-link :to="{ name: 'Release page', params: {id: id } }">
+                <nuxt-link :to="{ name: 'Release page', params: {id: id } }">
                     {{ version }}
-                </router-link>
+                </nuxt-link>
             </div>
             <div style="font-size: 14px">
                 {{ author }} released this this version {{ date | timeAgo }}
@@ -84,7 +84,10 @@ export default {
             type: Boolean,
             default: false
         },
-        files: [Array, Object]
+        files: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {

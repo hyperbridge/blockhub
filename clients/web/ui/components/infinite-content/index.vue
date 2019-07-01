@@ -28,12 +28,12 @@
                                     </div>
                                     <div class="col-12 col-lg-6 frontpage-product__info">
                                         <h2>
-                                            <router-link :to="`/product/${item.data.id}`">
+                                            <nuxt-link :to="`/product/${item.data.id}`">
                                                 {{ item.data.name }}
-                                            </router-link>
+                                            </nuxt-link>
                                         </h2>
                                         <p>{{ item.data.shortDescription }}</p>
-                                        <c-tags :tags="item.data.developerTags" />
+                                        <c-tags v-if="item.developerTags" :tags="item.data.developerTags" />
                                         <div class="frontpage-product__footer">
                                             <div
                                                 v-if="item.data.price"
@@ -198,7 +198,6 @@
                         </div>
                     </div>
 
-
                     <div
                         v-if="item.type === 'productNews'"
                         class="row margin-bottom-30">
@@ -216,7 +215,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div
                         v-if="item.type === 'curatorReviews'"
@@ -256,14 +254,11 @@
                         </div>
                     </div>
 
-
                     <c-games-explorer v-if="item.type === 'gamesExplorer'" />
-
 
                     <c-assets-explorer
                         v-if="item.type === 'assetGrid'"
                         :assets="assets" />
-
 
                     <div
                         v-if="item.type === 'trendingProjectsRow'"
@@ -309,7 +304,6 @@
                         </div>
                     </div>
 
-
                     <div v-if="item.type === 'realmsRow'">
                         <c-swiper
                             :options="item.data.options"
@@ -354,7 +348,6 @@
                         </c-block>
                     </div>
 
-
                     <div
                         v-if="item.type === 'gameSeries'"
                         class="row margin-bottom-30">
@@ -369,7 +362,6 @@
                             </c-game-series>
                         </div>
                     </div>
-
 
                     <div
                         v-if="item.type === 'newReleasesGrid'"
@@ -406,7 +398,6 @@
                         </div>
                     </div>
 
-
                     <div
                         v-if="item.type === 'topItemsGrid'"
                         class="row margin-bottom-30">
@@ -435,13 +426,13 @@
                                     :items="assets"
                                     itemInRow="2" />
 
-                                <p v-if="!assets.length">
+                                <div v-if="!assets.length">
                                     Nothing could be found. Want to <c-button
                                         status="plain"
                                         @click="$store.commit('application/activateModal', 'coming-soon')">
                                         Check for updates
                                     </c-button>?
-                                </p>
+                                </div>
 
                                 <c-content-navigation v-if="assets.length" />
                             </c-block>
@@ -529,9 +520,12 @@ export default {
         }
     },
     computed: {
-        ...mapGetters({
-            assets: 'marketplace/assetsArray'
-        }),
+        // ...mapGetters({
+        //     assets: 'marketplace/assetsArray'
+        // }),
+        assets() {
+            return []
+        },
         sliced() {
             return this.list.slice(0, this.display)
         },

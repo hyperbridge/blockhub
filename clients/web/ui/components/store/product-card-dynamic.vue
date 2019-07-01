@@ -5,27 +5,27 @@
         @mouseout="show_preview(false)">
         <div class="position-relative">
             <div
-                v-if="product.price"
+                v-if="productPrice"
                 class="product-grid__item-price">
-                <strong>{{ product.price | convertCurrency }}</strong>
+                <strong>{{ productPrice | convertCurrency }}</strong>
             </div>
             <c-button
                 status="none"
-                :to="`/product/${product.id}`"
+                :to="`/product/${productId}`"
                 class="card-img-top">
                 <transition name="fade">
                     <c-img
                         v-if="!displayPreview"
                         class="card-img-top"
-                        :src="product.images.mediumTile" />
+                        :src="productImagesMediumTile" />
                     <template v-else>
                         <video
-                            v-if="product.video && autoplay"
+                            v-if="productVideo && autoplay"
                             class="card-img-top"
                             width="100%"
                             autoplay>
                             <source
-                                :src="product.video"
+                                :src="productVideo"
                                 type="video/mp4">
                         </video>
                         <transition-group
@@ -33,10 +33,10 @@
                             tag="div"
                             name="slide-left">
                             <c-img
-                                v-for="(image, index) in product.images.preview"
+                                v-for="(image, index) in productImagesPreview"
                                 v-if="index === currentImage"
                                 :key="image"
-                                :src="product.images.preview[index]"
+                                :src="productImagesPreview[index]"
                                 class="card-img-top" />
                         </transition-group>
                     </template>
@@ -46,16 +46,16 @@
         <h4>
             <c-button
                 status="none"
-                :to="`/product/${product.id}`">
-                {{ product.name }}
+                :to="`/product/${productId}`">
+                {{ productName }}
             </c-button>
         </h4>
         <p
             class="card-text"
             hidden>
-            {{ product.shortDescription }}
+            {{ productShortDescription }}
         </p>
-        <c-tags :tags="product.developerTags.slice(0,3)" />
+        <c-tags v-if="productDeveloperTags" :tags="productDeveloperTags.slice(0,3)" />
     </div>
 </template>
 
@@ -63,15 +63,23 @@
 import { debounce } from '@/mixins'
 
 export default {
-    name: 'ProductCardDynamic',
     components: {
         'c-tags': () => import('~/components/tags').then(m => m.default || m)
     },
     mixins: [debounce],
     props: {
-        product: {
-            type: Object,
-            required: true
+        productId: Number,
+        productPrice: String,
+        productImagesMediumTile: String,
+        productVideo: String,
+        productShortDescription: String,
+        productImagesPreview: {
+            type: Array,
+            default: () => []
+        },
+        productDeveloperTags: {
+            type: Array,
+            default: () => []
         }
     },
     data() {
@@ -91,7 +99,7 @@ export default {
             clearTimeout(this.timeout)
             this.debounce(() => {
                 if (!status) clearInterval(this.interval)
-                if (status && !this.displayPreview && (!this.product.video || !this.autoplay)) this.slider()
+                if (status && !this.displayPreview && (!this.productVideo || !this.autoplay)) this.slider()
                 this.displayPreview = status
             }, status ? 250 : 0)
         },

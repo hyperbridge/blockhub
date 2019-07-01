@@ -6,11 +6,11 @@
             <div class="stream-item__img">
                 <c-img :src="streamImg" />
                 <div class="stream-item__run-container">
-                    <router-link
+                    <nuxt-link
                         :to="streamLink + '/' + streamId"
                         class="stream-item__run-btn">
                         <i class="fas fa-play" />
-                    </router-link>
+                    </nuxt-link>
                 </div>
             </div>
             <div class="stream-item__info">

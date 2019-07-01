@@ -21,11 +21,11 @@
                         alt="Logo"
                         style="height: 90%; margin-top: 2%" />
                 </c-button>
-                <router-link
+                <nuxt-link
                     to="/business"
                     class="h2 ml-4 mb-0 pl-4 text-uppercase border-left">
                     Business Manager
-                </router-link>
+                </nuxt-link>
                 <div
                     class="page-top-bar__profile mb-0 float-right h5"
                     style="margin-left: auto"
@@ -81,11 +81,11 @@
                                 :key="index"
                                 class="breadcrumb-item"
                                 :class="{ 'active': index == breadcrumbLinksData.length-1 }">
-                                <router-link
+                                <nuxt-link
                                     v-if="link.to"
                                     :to="link.to">
                                     {{ link.title }}
-                                </router-link>
+                                </nuxt-link>
                                 <template v-else>
                                     {{ link.title }}
                                 </template>

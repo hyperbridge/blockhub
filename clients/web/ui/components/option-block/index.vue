@@ -70,7 +70,10 @@ export default {
         title: String,
         subtitle: String,
         notification: String,
-        list: [Array, Object],
+        list: {
+            type: Array,
+            default: () => []
+        },
         ntfColor: String,
         inWishlist: {
             type: Boolean,

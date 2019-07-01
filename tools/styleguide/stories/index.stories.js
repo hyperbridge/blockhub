@@ -9,16 +9,13 @@ import {withViewport} from '@storybook/addon-viewport'
 import {withKnobs, text, boolean, number, object} from '@storybook/addon-knobs/vue'
 
 import '@/css/styles.scss'
-// import '@/entry-client'
 import filters from '@/plugins/filters'
 import directives from '@/plugins/directives'
 import '@/plugins/components'
-// import store from '@/store'
-// import router from '@/router'
 
 filters({})
 directives({})
-//import * as Bridge from '@/framework/desktop-bridge'
+
 import * as data from './components-data'
 
 
@@ -34,19 +31,26 @@ const StoreDummy = {
 
 Vue.use(StoreDummy)
 
-// //import '!style-loader!css-loader!./styles.scss'
 
-// window.ga = function() {}
+Vue.component('router-link', {
+    props: ['to'],
+    methods: {
+        log() {
+            action('link target')(this.to)
+        },
+    },
+    template: '<div @click="log()"><slot /></div>',
+})
 
-// Bridge.init(store, router)
-
-// store.dispatch('database/init')
-// store.dispatch('application/init')
-// store.dispatch('marketplace/init')
-// store.dispatch('funding/init')
-
-// console.log('BlockHub initialized.')
-
+Vue.component('nuxt-link', {
+    props: ['to'],
+    methods: {
+        log() {
+            action('link target')(this.to)
+        },
+    },
+    template: '<div @click="log()"><slot /></div>',
+})
 
 // addDecorator(withViewport('desktop'))
 //addDecorator(StoryRouter())
@@ -6417,7 +6421,7 @@ storiesOf('Draggble video', module)
 storiesOf('Video', module)
     .add('default', () => ({
         components: {
-            'c-video': () => import('~/components/c-video').then(m => m.default || m)
+            'c-video': () => import('~/components/video').then(m => m.default || m)
         },
         data() {
             return {

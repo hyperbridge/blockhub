@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                             <c-tags
-                                v-if="!editing"
+                                v-if="!editing && product.developerTags"
                                 :tags="product.developerTags" />
                         </div>
                     </div>
@@ -137,43 +137,43 @@
                                 <li
                                     class="nav-item"
                                     @click="section='overview'">
-                                    <router-link
+                                    <nuxt-link
                                         :to="`/product/${id}`"
                                         class="nav-link"
                                         :class="{ 'active': section === 'overview' }">
                                         Overview
-                                    </router-link>
+                                    </nuxt-link>
                                 </li>
                                 <li
                                     v-darklaunch="'COMMUNITY'"
                                     class="nav-item"
                                     @click="section='community'">
-                                    <router-link
+                                    <nuxt-link
                                         :to="`/product/${id}/community`"
                                         class="nav-link"
                                         :class="{ 'active': section === 'community' }">
                                         Community
-                                    </router-link>
+                                    </nuxt-link>
                                 </li>
                                 <li
                                     class="nav-item"
                                     @click="section='projects'">
-                                    <router-link
+                                    <nuxt-link
                                         :to="`/product/${id}/projects`"
                                         class="nav-link"
                                         :class="{ 'active': section === 'projects' }">
                                         Crowdfunding
-                                    </router-link>
+                                    </nuxt-link>
                                 </li>
                                 <li
                                     class="nav-item"
                                     @click="section='assets'">
-                                    <router-link
+                                    <nuxt-link
                                         :to="`/product/${id}/assets`"
                                         class="nav-link"
                                         :class="{ 'active': section === 'assets' }">
                                         Inventory
-                                    </router-link>
+                                    </nuxt-link>
                                 </li>
                                 <li
                                     v-if="editing"
@@ -611,25 +611,6 @@ export default {
         },
         firstProduct() {
             return this.$store.state.marketplace.firstProduct
-        },
-        breadcrumbLinks() {
-            if (!this.product) {
-                return []
-            }
-
-            const links = [
-                { to: { path: '/' }, title: 'Store' }
-            ]
-
-            if (this.section === 'community') {
-                links.push({ to: { path: '' }, title: 'Community' })
-            } else if (this.section === 'projects') {
-                links.push({ to: { path: '' }, title: 'Crowdfunding' })
-            } else if (this.section === 'assets') {
-                links.push({ to: { path: '' }, title: 'Inventory' })
-            }
-
-            return links
         }
     },
     watch: {
@@ -662,6 +643,14 @@ export default {
         const product = store.getters['products/get'](params.id)
 
         if (!product) return error({ statusCode: 404, message: 'Product not found' })
+
+        // if (this.section === 'community') {
+        //     links.push({ to: { path: '' }, title: 'Community' })
+        // } else if (this.section === 'projects') {
+        //     links.push({ to: { path: '' }, title: 'Crowdfunding' })
+        // } else if (this.section === 'assets') {
+        //     links.push({ to: { path: '' }, title: 'Inventory' })
+        // }
 
         return {
             product,

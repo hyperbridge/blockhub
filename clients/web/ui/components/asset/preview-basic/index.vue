@@ -3,9 +3,9 @@
         class="asset-preview-basic"
         :class="[{ 'horizontal': horizontal }, size]">
         <h5 class="asset-preview-basic__text">
-            <router-link :to="`/asset/${asset.id}`">
+            <nuxt-link :to="`/asset/${asset.id}`">
                 {{ asset.name }}
-            </router-link>
+            </nuxt-link>
         </h5>
         <c-img
             class="asset-preview-basic__image"

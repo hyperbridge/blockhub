@@ -14,9 +14,9 @@
                     class="asset__image" />
                 <div class="asset__meta">
                     <p>
-                        <router-link :to="`/asset/${asset.id}`">
+                        <nuxt-link :to="`/asset/${asset.id}`">
                             {{ asset.name }}
-                        </router-link>
+                        </nuxt-link>
                     </p>
                     <span>{{ asset.productName }}</span>
                 </div>

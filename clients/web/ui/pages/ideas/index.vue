@@ -47,8 +47,8 @@
                     class="p-2 col-3"
                     :description="idea.description"
                     :parentName="idea.name"
-                    :parentDeveloperId="idea.meta.owner && idea.meta.owner.id"
-                    :parentDeveloperName="idea.meta.owner && idea.meta.owner.name" />
+                    :parentDeveloperId="idea.meta && idea.meta.owner && idea.meta.owner.id"
+                    :parentDeveloperName="idea.meta && idea.meta.owner && idea.meta.owner.name" />
             </div>
         </c-block>
 

@@ -1,20 +1,19 @@
 <template>
     <div>
         <div>
-            <span>{{ asset.name }}</span>
-            <span>{{ asset.productName }}</span>
+            <span>{{ assetName }}</span>
+            <span>{{ assetProductName }}</span>
         </div>
-        <c-img :src="asset.image" />
+        <c-img :src="assetImage" />
     </div>
 </template>
 
 <script>
 export default {
     props: {
-        asset: {
-            type: Object,
-            required: true
-        }
+        assetName: String,
+        assetProductName: String,
+        assetImage: String,
     }
 }
 </script>

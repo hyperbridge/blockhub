@@ -1,13 +1,13 @@
 <template functional>
     <div class="block-menu">
         <nav class="block-menu__header">
-            <router-link
+            <nuxt-link
                 v-for="(link, index) in props.links"
                 :key="index"
                 class="block-menu__link"
                 :to="link.to">
                 {{ link.title }}
-            </router-link>
+            </nuxt-link>
         </nav>
         <slot />
     </div>
@@ -31,7 +31,7 @@
         display: flex;
         border-bottom: 2px solid #fff;
         margin-bottom: 20px;
-        .router-link-exact-active:not(:first-child):before {
+        .nuxt-link-exact-active:not(:first-child):before {
             @extend %triangle;
             left: -5px;
         }
@@ -45,7 +45,7 @@
         padding: 5px 0 10px 0;
         position: relative;
         text-decoration: none;
-        &.router-link-exact-active {
+        &.nuxt-link-exact-active {
             border-bottom: 5px solid #fff;
             &:after {
                 @extend %triangle;

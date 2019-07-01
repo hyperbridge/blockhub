@@ -9,9 +9,9 @@
                     <slot
                         name="link"
                         :asset="asset">
-                        <router-link :to="`/asset/${asset.id}`">
+                        <nuxt-link :to="`/asset/${asset.id}`">
                             {{ asset.name }}
-                        </router-link>
+                        </nuxt-link>
                     </slot>
                 </p>
                 <span>{{ asset.productName }}</span>

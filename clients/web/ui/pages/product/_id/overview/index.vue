@@ -289,7 +289,9 @@
             @close="showInstaller = false">
             <c-game-installer
                 slot="body"
-                :product="product"
+                :productImagesMediumTile="product.images.mediumTile"
+                :productName="product.name"
+                :productSystemRequirements="product.systemRequirements"
                 @cancel="showInstaller = false" />
         </c-modal>
     </div>
@@ -343,13 +345,7 @@ export default {
             return this.$refs.streamsSlider.swiper
         },
         wishlist() {
-            if (!this.$store.state.community.profiles[this.$store.state.application.activeProfile.id]) {
-                this.$store.state.community.profiles[this.$store.state.application.activeProfile.id] = {
-                    productWishlist: {}
-                }
-            }
-
-            return this.$store.state.community.profiles[this.$store.state.application.activeProfile.id].productWishlist
+            return (this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.productWishlist) || {}
         },
         streams() {
             return this.product.meta.streams

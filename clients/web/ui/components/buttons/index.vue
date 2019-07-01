@@ -22,12 +22,12 @@
                 icon ? 'fa-' + icon : injectFilter,
                 swapOrder ? 'swap-order' : ''
             ]" />
-        <router-link
+        <nuxt-link
             v-if="to"
             tag="span"
             :to="to">
             <slot />
-        </router-link>
+        </nuxt-link>
         <slot v-if="!to" />
     </component>
 </template>
@@ -98,7 +98,7 @@ export default {
     },
     created() {
         if (this.$store.state.application) {
-            if (!this.$store.state.application.settings.client.sounds || !this.$store.state.application.settings.client.ui_interaction_sounds) {
+            if (!this.$store.state.application.settings.client.sounds || !this.$store.state.application.settings.client.interfaceInteractionSounds) {
                 // TODO: Mutating the prop is a no no.
                 // this.soundEnabled = false
             }

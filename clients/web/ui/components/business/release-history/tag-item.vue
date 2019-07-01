@@ -1,9 +1,9 @@
 <template>
     <div class="history-list__tag-item">
         <div class="h3">
-            <router-link :to="{ name: 'Release page', params: {id: id } }">
+            <nuxt-link :to="{ name: 'Release page', params: {id: id } }">
                 {{ version }}
-            </router-link>
+            </nuxt-link>
         </div>
         <div class="sub-info">
             <div>

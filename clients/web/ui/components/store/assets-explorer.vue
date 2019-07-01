@@ -41,10 +41,10 @@
                             v-model="phrase"
                             class="assets-explorer__input-searcher" />
                     </div>
-                    <router-link
+                    <nuxt-link
                         tag="div"
                         :to="{
-                            name: 'Marketplace',
+                            path: '/marketplace',
                             query: { showFilters: true }
                         }">
                         <c-button
@@ -54,7 +54,7 @@
                             iconHide>
                             View All
                         </c-button>
-                    </router-link>
+                    </nuxt-link>
                 </div>
                 <transition name="slide-in-top">
                     <div v-if="filtersActive">
@@ -227,9 +227,15 @@ export default {
     },
     computed: {
         ...mapGetters({
-            'genres': 'marketplace/productsTags',
-            'products': 'marketplace/assetsProducts'
+            // 'genres': 'marketplace/productsTags',
+            // 'products': 'marketplace/assetsProducts'
         }),
+        genres() {
+            return []
+        },
+        products() {
+            return []
+        },
         selectedProducts() {
             return this.selectableProducts.filter(product => product.selected)
         },

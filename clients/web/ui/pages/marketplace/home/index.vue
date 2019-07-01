@@ -24,14 +24,20 @@
                     />
                 </transition-group> -->
                 <template slot-scope="props">
-                    <router-link
+                    <nuxt-link
                         v-for="(item, index) in props.items"
                         :key="item.id"
                         :class="props.css[index]"
                         :to="`/marketplace/asset/${item.id}`">
                         <c-asset-store-card
-                            :asset="item" />
-                    </router-link>
+                            v-for="(item) in props.items"
+                            :key="item.id"
+                            :class="item.css"
+                            :assetName="item.name"
+                            :assetPriceCurrent="item.price.current"
+                            :assetTags="item.tags"
+                            :assetImage="item.image" />
+                    </nuxt-link>
                 </template>
             </c-carousel-3d>
         </div>

@@ -9,9 +9,9 @@
                     :class="postIcon" />
             </div>
             <div class="text">
-                <router-link :to="`/community/discussion/${id}`">
+                <nuxt-link :to="`/community/discussion/${id}`">
                     {{ title }}
-                </router-link>
+                </nuxt-link>
             </div>
             <div class="statistic">
                 <div
@@ -87,7 +87,10 @@ export default {
             name: String
         },
         content: String,
-        comments: Array
+        comments: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {
