@@ -5,7 +5,7 @@
         :bgColor="false">
         <div class="vote-from">
             <p>
-                Please vote!.
+                Please vote!
             </p>
             <div class="invert">
                 <div class="form-group">
@@ -28,6 +28,14 @@
                         </option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <c-notification-inline
+                        type="danger"
+                        size="md"
+                        class="my-4 type-danger">
+                        Object type is required!
+                    </c-notification-inline>
+                </div>                
             </div>
             <div class="invert">
                 <div class="form-group">
@@ -38,6 +46,14 @@
                         placeholder="Input objectId"
                     />
                 </div>
+                <div class="form-group">
+                    <c-notification-inline
+                        type="danger"
+                        size="md"
+                        class="my-4 type-danger">
+                        ObjectId is required!
+                    </c-notification-inline>
+                </div> 
             </div>
             <div class="invert">
                 <div class="form-group">

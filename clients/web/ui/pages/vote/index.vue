@@ -17,8 +17,8 @@ export default {
     },
     methods: {
         getVote(data){
-            console.log('profile check')
-            console.log(this.$store.state.profiles)
+            console.log('profile id')
+            console.log(this.$store.state.application.activeProfile.accountId)
             if(data.objectType && data.objectId && data.vote) console.log('send');
         },
     },
