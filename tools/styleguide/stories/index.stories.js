@@ -2935,8 +2935,7 @@ storiesOf('Product Community', module)
                 <c-comment  :rate="post.content.comments[0].rate"
                             :author="post.content.comments[0].author"
                             :date="post.content.comments[0].date"
-                            :text="post.content.comments[0].text"
-                            :comment="post.content.comments[0]"/>
+                            :text="post.content.comments[0].text"/>
             </div>
         `
     }))
@@ -3320,22 +3319,22 @@ storiesOf('Collection', module)
         },
         data() {
             return {
-                item: {
-                    title: 'Collection name',
-                    user: 'John Doel',
-                    countNumber: 2741,
-                    background: 'https://via.placeholder.com/100x100',
-                    images: [
-                        'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                    ]
-                }
+                id: 44,
+		            title: 'Collection name',
+		            user: 'John Doel',
+		            countNumber: 2741,
+		            background: 'https://via.placeholder.com/100x100',
+		            assets: []
             }
         },
         template: `
             <div class="col-3 p-5">
-                <c-collection-item :item="item" />
+                <c-collection-item 
+                :id="id" 
+                :name="title" 
+                :author="user" 
+                :assets="assets" 
+                :background="background" />
             </div>
         `
     }))
@@ -3350,82 +3349,21 @@ storiesOf('Collection', module)
             return {
                 items: [
                     {
-                        title: 'Collection name',
-                        user: 'John Doel',
-                        countNumber: 2741,
-                        background: 'https://via.placeholder.com/100x100',
-                        images: [
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        ]
+		                    name: 'Collection name',
+                        meta: {
+		                        author: 'John Doel',
+		                        background: 'https://via.placeholder.com/100x100',
+                            assets: []
+                        },
                     },
                     {
-                        title: 'Collection name',
-                        user: 'John Doel',
-                        countNumber: 2741,
-                        background: 'https://via.placeholder.com/100x100',
-                        images: [
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        ]
+		                    name: 'Collection name',
+                        meta: {
+		                        author: 'John Doel',
+		                        background: 'https://via.placeholder.com/100x100',
+                            assets: []
+                        },
                     },
-                    {
-                        title: 'Collection name',
-                        user: 'John Doel',
-                        countNumber: 2741,
-                        background: 'https://via.placeholder.com/100x100',
-                        images: [
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        ]
-                    },
-                    {
-                        title: 'Collection name',
-                        user: 'John Doel',
-                        countNumber: 2741,
-                        background: 'https://via.placeholder.com/100x100',
-                        images: [
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        ]
-                    },
-                    {
-                        title: 'Collection name',
-                        user: 'John Doel',
-                        countNumber: 2741,
-                        background: 'https://via.placeholder.com/100x100',
-                        images: [
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        ]
-                    },
-                    {
-                        title: 'Collection name',
-                        user: 'John Doel',
-                        countNumber: 2741,
-                        background: 'https://via.placeholder.com/100x100',
-                        images: [
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        ]
-                    },
-                    {
-                        title: 'Collection name',
-                        user: 'John Doel',
-                        countNumber: 2741,
-                        background: 'https://via.placeholder.com/100x100',
-                        images: [
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        ]
-                    }
                 ],
                 sliderOptions: {
                     slidesPerView: 4,
@@ -3439,16 +3377,17 @@ storiesOf('Collection', module)
         },
         template: `
             <div class="p-5" style="width: 900px">
-                <c-collection-list title="Get Started" :collections="items"
-                                    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet tellus in neque porttitor consequat."
-                                    >
+                <c-collection-list 
+                title="Get Started" 
+                :collections="items"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet tellus in neque porttitor consequat.">
                 </c-collection-list>
             </div>
         `
     }))
 
 
-import GameSeries from '@/components/game-series/index'
+import GameSeries from '@/components/game-series'
 import GameDescription from '@/components/game-series/game-description'
 import GameIncludesList from '@/components/game-series/game-includes-list'
 import GameIncludesItem from '@/components/game-series/game-includes-item'
@@ -3462,62 +3401,105 @@ storiesOf('Game Series', module)
         },
         data() {
             return {
-                product: {},
+                id: 34,
+                title: 'Product title',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                tags: ['Nunc', 'Praesent', 'Vestibulum'],
+		            images: ['https://via.placeholder.com/400x250', 'https://via.placeholder.com/400x250'],
+                price: 33.49,
                 list: [
                     {
-                        img: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-                        title: 'Dragon Age: Inquisition',
-                        company: 'BioWare',
-                        stars: 5,
+		                    title: 'Dragon Age: Inquisition',
+		                    company: 'BioWare',
+		                    stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    },
                     },
                     {
-                        img: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
-                        title: 'Dragon Age II',
-                        company: 'BioWare',
-                        stars: 4,
+		                    title: 'Dragon Age II',
+		                    company: 'BioWare',
+		                    stars: 4,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    },
                     },
                     {
-                        img: 'https://via.placeholder.com/100x100',
-                        title: 'Dragon Age Down Of the Seeker',
-                        company: 'BioWare',
-                        stars: 5,
+		                    title: 'Dragon Age Down Of the Seeker',
+		                    company: 'BioWare',
+		                    stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    },
                     },
                     {
-                        img: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg',
-                        title: 'Dragon Age Origins',
-                        company: 'BioWare',
-                        stars: 5,
+		                    title: 'Dragon Age Origins',
+		                    company: 'BioWare',
+		                    stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    },
                     },
                     {
-                        img: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-                        title: 'Dragon Age: Inquisition',
-                        company: 'BioWare',
-                        stars: 5,
+		                    title: 'Dragon Age: Inquisition',
+		                    company: 'BioWare',
+		                    stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    },
                     },
                     {
-                        img: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
-                        title: 'Dragon Age II',
-                        company: 'BioWare',
-                        stars: 4,
+		                    title: 'Dragon Age II',
+		                    company: 'BioWare',
+		                    stars: 4,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    },
                     },
                     {
-                        img: 'https://via.placeholder.com/100x100',
-                        title: 'Dragon Age Down Of the Seeker',
-                        company: 'BioWare',
-                        stars: 5,
+		                    title: 'Dragon Age Down Of the Seeker',
+		                    company: 'BioWare',
+		                    stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    },
                     },
                     {
-                        img: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg',
-                        title: 'Dragon Age Origins',
-                        company: 'BioWare',
-                        stars: 5,
+		                    title: 'Dragon Age Origins',
+		                    company: 'BioWare',
+		                    stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    },
                     }
                 ]
             }
         },
         template: `<div class="p-5" style="width: 900px">
                     <c-game-series>
-                        <c-game-description :product="product" />
+                        <c-game-description 
+                        :id="id" 
+                        :title="title" 
+                        :description="description" 
+                        :tags="tags" 
+                        :images="images" 
+                        :price="price" />
                         <c-game-includes-list :list="list" :showNumber="5" />
                     </c-game-series>
                     </div>`
@@ -3526,9 +3508,24 @@ storiesOf('Game Series', module)
         components: {
             'c-game-description': GameDescription
         },
-        data: () => object('Data', data.GameSeries),
+		    data() {
+				    return {
+						    id: 34,
+						    title: 'Product title',
+						    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+						    tags: ['Nunc', 'Praesent', 'Vestibulum'],
+						    images: ['https://via.placeholder.com/400x250', 'https://via.placeholder.com/400x250'],
+						    price: 33.49,
+            }
+        },
         template: `<div class="p-5" style="width: 900px">
-            <c-game-description :game="game" />
+            <c-game-description 
+            :id="id" 
+            :title="title" 
+            :description="description" 
+            :tags="tags" 
+            :images="images" 
+            :price="price" />
         </div>`
     }))
     .add('includes item', () => ({
@@ -3562,52 +3559,84 @@ storiesOf('Game Series', module)
             return {
                 list: [
                     {
-                        img: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
                         title: 'Dragon Age: Inquisition',
                         company: 'BioWare',
                         stars: 5,
+		                    meta: {
+                            images: {
+		                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg'
+                            }
+                        }
                     },
                     {
-                        img: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
                         title: 'Dragon Age II',
                         company: 'BioWare',
                         stars: 4,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
+				                    }
+		                    }
                     },
                     {
-                        img: 'https://via.placeholder.com/100x100',
                         title: 'Dragon Age Down Of the Seeker',
                         company: 'BioWare',
                         stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://via.placeholder.com/300x430',
+				                    }
+		                    }
                     },
                     {
-                        img: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg',
                         title: 'Dragon Age Origins',
                         company: 'BioWare',
                         stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg',
+				                    }
+		                    }
                     },
                     {
-                        img: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
                         title: 'Dragon Age: Inquisition',
                         company: 'BioWare',
                         stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    }
                     },
                     {
-                        img: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
                         title: 'Dragon Age II',
                         company: 'BioWare',
                         stars: 4,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
+				                    }
+		                    }
                     },
                     {
-                        img: 'https://via.placeholder.com/100x100',
                         title: 'Dragon Age Down Of the Seeker',
                         company: 'BioWare',
                         stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://via.placeholder.com/300x430',
+				                    }
+		                    }
                     },
                     {
-                        img: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg',
                         title: 'Dragon Age Origins',
                         company: 'BioWare',
                         stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg'
+				                    }
+		                    }
                     }
                 ]
             }

@@ -15,7 +15,6 @@
 
 <script>
 export default {
-    name: 'GameIncludesItem',
     components: {
         'c-rating': () => import('~/components/rating-stars').then(m => m.default || m)
     },

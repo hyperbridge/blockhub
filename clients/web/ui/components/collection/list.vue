@@ -40,12 +40,23 @@
 </template>
 
 <script>
+    import 'swiper/dist/css/swiper.css'
+    import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
 export default {
-    name: 'CollectionList',
     components: {
-        'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m)
+        'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m),
+        'c-swiper': swiper,
+        'c-swiper-slide': swiperSlide
     },
-    props: ['title', 'description', 'collections'],
+    props: {
+        title: String,
+        description: String,
+        collections: {
+            type: Array,
+            default: () => []
+        },
+    },
     data() {
         return {
             options: {

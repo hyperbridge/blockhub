@@ -7,31 +7,31 @@
                     class="swiper-pagination" />
             </div>
             <c-swiper
+                v-if="images"
                 :options="sliderOptions"
                 class="custom-dots-top carousel-full-height">
                 <c-swiper-slide
-                    v-for="(img, index) in game.images"
+                    v-for="(img, index) in images"
                     :key="index">
                     <c-button
                         status="none"
-                        :to="`/product/${game.id}`">
+                        :to="`/product/${id}`">
                         <c-img :src="img" />
                     </c-button>
                 </c-swiper-slide>
             </c-swiper>
         </div>
         <div class="game-description__info">
-            <h3>
-                <c-button
-                    status="none"
-                    :to="`/product/${game.id}`">
-                    {{ game.title }}
-                </c-button>
-            </h3>
-            <p>{{ game.description }}</p>
-            <c-tags :tags="game.tags || []" />
+            <c-button
+                status="plain"
+                class="h2 p-0"
+                :to="`/product/${id}`">
+                {{ title }}
+            </c-button>
+            <p>{{ description }}</p>
+            <c-tags :tags="tags || []" />
             <div
-                v-if="game.price"
+                v-if="price"
                 class="game-description__info--bottom">
                 <div class="text">
                     <h4>Get all for only</h4>
@@ -41,7 +41,7 @@
                     <a
                         href="#"
                         class="btn-price">
-                        <span class="price">{{ game.price | convertCurrency }}</span>
+                        <span class="price">{{ price }}</span>
                         <span class="name">BUY NOW</span>
                     </a>
                 </div>
@@ -52,15 +52,30 @@
 
 <script>
 import moment from 'moment'
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 export default {
-    name: 'GameDescription',
     components: {
-        'c-tags': () => import('~/components/tags').then(m => m.default || m)
-
-
+        'c-tags': () => import('~/components/tags').then(m => m.default || m),
+        'c-swiper': swiper,
+        'c-swiper-slide': swiperSlide
     },
-    props: ['game'],
+    props: {
+        id: Number,
+        title: String,
+        description: String,
+        tags: {
+            type: Array,
+            default: () => []
+        },
+        images: {
+            type: Array,
+            default: () => []
+        },
+        price: Number,
+        expires: String
+    },
     data() {
         return {
             sliderOptions: {
@@ -75,7 +90,7 @@ export default {
     },
     computed: {
         expires_date() {
-            return moment(this.game.expires).format('Do MMM YYYY')
+            return moment(this.expires).format('Do MMM YYYY')
         }
     }
 }

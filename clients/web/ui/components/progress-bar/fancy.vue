@@ -16,18 +16,18 @@
 export default {
     props: {
         percent: {
-            type: [Number, String],
+            type: String,
             default: 0
         }
     },
     computed: {
         checkColor() {
             if (Number(this.percent) > 25 && Number(this.percent) < 50) {
-                return 'c-fancy-progress__bar--orange'
+                return 'fancy-progress__bar--orange'
             } else if (Number(this.percent) >= 50 && Number(this.percent) < 75) {
-                return 'c-fancy-progress__bar--yellow'
+                return 'fancy-progress__bar--yellow'
             } else if (Number(this.percent) >= 75) {
-                return 'c-fancy-progress__bar--green'
+                return 'fancy-progress__bar--green'
             }
         }
     }
