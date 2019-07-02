@@ -2,49 +2,58 @@ const charset = 'utf8mb4'
 const collation = 'utf8mb4_unicode_ci'
 
 exports.up = knex => {
-    const defaults = (table) => {
+    const defaults = (table, options = { status: true, timestamps: true, editors: true }) => {
         table.charset(charset)
         table.collate(collation)
 
         table.increments('id').primary()
 
-        table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now())
-        table.timestamp('updatedAt').nullable()
-        table.timestamp('deletedAt').nullable()
-
-        table.integer('createdBy')
-            .unsigned()
-            .notNullable()
-            .references('accounts.accountId')
-            .onUpdate('CASCADE')
-            .onDelete('CASCADE')
-        table.integer('editedBy')
-            .unsigned()
-            .nullable()
-            .references('accounts.accountId')
-            .onUpdate('CASCADE')
-            .onDelete('CASCADE')
-        table.integer('deletedBy')
-            .unsigned()
-            .nullable()
-            .references('accounts.accountId')
-            .onUpdate('CASCADE')
-            .onDelete('CASCADE')
-        
         table.string('key', 100)
+        table.index('key', 'idx_key')
+
         table.text('value')
-        table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
         table.jsonb('meta')
 
-        table.index('key', 'idx_key')
-        table.index('status', 'idx_status')
-        table.index(['createdAt', 'editedAt'], 'mul_timestamp')
-        table.index('deletedAt', 'idx_deleted_at')
+        if (options.status) {
+            table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
+            
+            table.index('status', 'idx_status')
+        }
+
+        if (options.editors)
+            table.integer('createdBy')
+                .unsigned()
+                .notNullable()
+                .references('profiles.id')
+                .onUpdate('CASCADE')
+                .onDelete('CASCADE')
+            table.integer('editedBy')
+                .unsigned()
+                .nullable()
+                .references('profiles.id')
+                .onUpdate('CASCADE')
+                .onDelete('CASCADE')
+            table.integer('deletedBy')
+                .unsigned()
+                .nullable()
+                .references('profiles.id')
+                .onUpdate('CASCADE')
+                .onDelete('CASCADE')
+        }
+
+        if (options.timestamps) {
+            table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now())
+            table.timestamp('updatedAt').nullable()
+            table.timestamp('deletedAt').nullable()
+
+            table.index(['createdAt', 'editedAt'], 'mul_timestamp')
+            table.index('deletedAt', 'idx_deleted_at')
+        }
     }
 
     return knex.schema
         .createTable('accounts', table => {
-            defaults(table)
+            defaults(table, { editors: false })
 
             table.string('email', 100)
             table.string('firstName', 50)
@@ -152,7 +161,7 @@ exports.up = knex => {
             table.string('name', 100)
         })
         .createTable('projects', table => {
-            defaults(table)
+            defaults(table, { status: false })
             
             table.enum('status', ['Inactive', 'Draft', 'Pending', 'Contributable', 'InDevelopment', 'Refundable', 'Rejected', 'Completed']).defaultTo('Draft')
 
@@ -198,8 +207,10 @@ exports.up = knex => {
             defaults(table)
         })
         .createTable('battlepasses', table => {
+            defaults(table)
         })
-        .createTable('bounties', table => {            defaults(table)
+        .createTable('bounties', table => {
+            defaults(table)
 
             table.string('name', 100)
         })
@@ -282,7 +293,7 @@ exports.up = knex => {
                 .onDelete('CASCADE')
         })
         .createTable('nodes', table => {
-            defaults(table)
+            defaults(table, { timestamps: false, editors: false })
 
             table.string('relationKey', 100)
             table
