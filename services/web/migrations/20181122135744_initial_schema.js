@@ -65,16 +65,17 @@ exports.up = knex => {
         .createTable('profiles', table => {
             defaults(table)
 
+            table.string('name', 100)
+            table.string('address', 100)
+            table.string('avatar', 100)
+            table.enum('role', ['user', 'developer', 'curator', 'admin']).defaultTo('user')
+
             table
                 .integer('accountId')
                 .unsigned()
                 .references('id')
                 .inTable('accounts')
                 .onDelete('SET NULL')
-            table.string('name', 100)
-            table.string('address', 100)
-            table.string('avatar', 100)
-            table.enum('role', ['user', 'developer', 'curator', 'admin']).defaultTo('user')
         })
         .createTable('licenses', table => {
             defaults(table)
@@ -90,6 +91,7 @@ exports.up = knex => {
             defaults(table)
 
             table.string('name', 100)
+
             table.integer('currentActiveUsers').unsigned()
             table.integer('dailyActiveUsers').unsigned()
             table.integer('monthlyActiveUsers').unsigned()
@@ -121,6 +123,7 @@ exports.up = knex => {
             defaults(table)
 
             table.string('name', 100)
+
             table
                 .integer('ownerId')
                 .unsigned()
@@ -142,6 +145,7 @@ exports.up = knex => {
 
             table.string('name', 100)
             table.string('type', 100)
+
             table
                 .integer('ownerId')
                 .unsigned()
@@ -163,9 +167,9 @@ exports.up = knex => {
         .createTable('projects', table => {
             defaults(table, { status: false })
             
+            table.string('name', 100)
             table.enum('status', ['Inactive', 'Draft', 'Pending', 'Contributable', 'InDevelopment', 'Refundable', 'Rejected', 'Completed']).defaultTo('Draft')
 
-            table.string('name', 100)
             table
                 .integer('ownerId')
                 .unsigned()
@@ -230,15 +234,16 @@ exports.up = knex => {
         .createTable('files', table => {
             defaults(table)
 
+            table.string('name', 100)
+
             table.string('storageType', 100)
             table.string('accessType', 100)
-
-            table.string('name', 100)
         })
         .createTable('leaderboards', table => {
             defaults(table)
 
             table.string('name', 100)
+
             table
                 .integer('productId')
                 .unsigned()
@@ -293,9 +298,13 @@ exports.up = knex => {
                 .onDelete('CASCADE')
         })
         .createTable('nodes', table => {
-            defaults(table, { timestamps: false, editors: false })
+            table.charset(charset)
+            table.collate(collation)
+    
+            table.increments('id').primary()
 
             table.string('relationKey', 100)
+
             table
                 .integer('fromAccountId')
                 .unsigned()
