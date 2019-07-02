@@ -50,7 +50,7 @@ const accessGate = function(options = {}) {
             }
 
             if (!item) {
-                throw new Error('Idea not found')
+                throw new Error('Badge not found')
             }
 
             if (item.accountId !== account.id) {
