@@ -31,8 +31,7 @@
                 </div>
                 <div class="form-group">
                     <c-notification-hidden
-                        :objCheck="objTypecheck"
-                        :closeCheck="closeTypeCheck"
+                        :visibleNotification="visibleTypeNotification"
                         type="warning"
                         size="md"
                         class="my-4 warning">
@@ -52,8 +51,7 @@
                 </div>
                 <div class="form-group">
                     <c-notification-hidden
-                        :objCheck="objIdcheck"
-                        :closeCheck="closeIdCheck"
+                        :visibleNotification="visibleIdNotification"
                         type="warning"
                         size="md"
                         class="my-4 warning">
@@ -63,7 +61,7 @@
             </div>
             <div class="invert">
                 <div class="form-group">
-                    <c-simple-vote :votes="value" v-on:upVote="getVote($event)" v-on:downVote="getVote($event)" />
+                    <c-vote :votes="value" :actived="vote_actived" v-on:upVote="getVote($event)" v-on:downVote="getVote($event)" />
                 </div>
             </div>
         </div>
@@ -73,17 +71,17 @@
 <script>
 export default {
     components: {
-        'c-notification-hidden': () => import('~/components/notification/hidden.vue').then(m => m.default || m)
+        'c-notification-hidden': () => import('~/components/notification/hidden.vue').then(m => m.default || m),
+        'c-vote': () => import('~/components/vote/form.vue').then(m => m.default || m)
     },
     props: {
 
     },
     data() {
         return {
-            closeTypeCheck:true,
-            closeIdCheck:true,
-            objTypecheck:false,
-            objIdcheck:false,
+            vote_actived:false,
+            visibleTypeNotification:false,
+            visibleIdNotification:false,
             vote:'',
             objectType:'',
             objectId:''
@@ -91,29 +89,31 @@ export default {
     },
     methods: {
         onChangeType(event) {
-            if(event.target.value){
-                this.closeTypeCheck = false;
+            if (event.target.value) {
+                this.visibleTypeNotification = false;
+            } else {
+                this.visibleTypeNotification = true;
             }
         },
         onChangeId(event) {
-            if(event.target.value){
-                this.closeIdCheck = false;
+            if (event.target.value) {
+                this.visibleIdNotification = false;
+            } else {
+                this.visibleIdNotification = true;
             }
         },
         getVote:function(vote){
-            if  (!this.objectType)  {
-                this.objTypecheck = true;
-            }  else  {
-                this.objTypecheck = false;
+            if (!this.objectType) {
+                this.visibleTypeNotification = true;
             }
-            this.closeCheck = true 
-            if  (!this.objectId)  {
-                this.objIdcheck = true;
-            }   else  {
-                this.objIdcheck = false;
+            if (!this.objectId) {
+                this.visibleIdNotification = true;
             }
-            this.closeTypeCheck = true;
-            this.closeIdCheck = true;
+            if (this.objectType && this.objectId) {
+                this.vote_actived = true
+            } else {
+                this.vote_actived = false
+            }
            let data = {
                 'vote':vote,
                 'objectType':this.objectType,
@@ -128,7 +128,7 @@ export default {
     computed:{
         value() {
             return this.votes;
-        }
+        }   
     },
 }
 </script>

@@ -18,17 +18,9 @@
 export default {
     name: 'hiddenNotification',
     props: {
-        objCheck: {
+        visibleNotification: {
             type: Boolean,
             default: false
-        },
-        closeCheck: {
-            type: Boolean,
-            default: true
-        },
-        type: {
-            type: String,
-            default: 'default'
         },
         type: {
             type: String,
@@ -42,7 +34,8 @@ export default {
     },
     computed: {
         showNotification(){
-            return this.objCheck&&this.closeCheck;
+            console.log('this.visibleNotification',this.visibleNotification)
+            return this.visibleNotification;
         },
         notif_icon() {
             switch (this.type) {

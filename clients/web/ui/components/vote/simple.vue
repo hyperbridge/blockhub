@@ -1,18 +1,17 @@
 <template>
-    <div>
-        <div class="simple-vote">
-            <i
-                class="fa fa-chevron-up"
-                :class="{ disabled: upvoted }"
-                @click="upvote" />
-            <span class="simple-vote__value">{{ value }}</span>
-            <i
-                class="fa fa-chevron-down"
-                :class="{ disabled: downvoted }"
-                @click="downvote" />    
-        </div>        
+    <div class="simple-vote">
+        <i
+            class="fa fa-chevron-up"
+            :class="{ disabled: upvoted }"
+            @click="upvote" />
+        <span class="simple-vote__value">{{ value }}</span>
+        <i
+            class="fa fa-chevron-down"
+            :class="{ disabled: downvoted }"
+            @click="downvote" />
     </div>
 </template>
+
 <script>
 export default {
     components: {
@@ -21,7 +20,7 @@ export default {
         votes: {
             type: Number,
             default: 0
-        },
+        }
     },
     data() {
         return {
@@ -31,42 +30,24 @@ export default {
     },
     computed: {
         value() {
-            let votes = 0;
             if (this.upvoted) {
-                votes = this.votes + 1;
-                return votes;
+                return this.votes + 1
             } else if (this.downvoted) {
-                votes = this.votes - 1;
-                return votes;
+                return this.votes - 1
             }
             return this.votes
         }
     },
     created() {
-        
     },
     methods: {
         upvote() {
             this.upvoted = !this.upvoted
             this.downvoted = false
-            let votes = 0;
-            if (this.upvoted) {
-                votes = this.votes + 1;
-            } else if (this.downvoted) {
-                votes = this.votes - 1;
-            }
-            this.$emit('upVote',votes)
         },
         downvote() {
             this.downvoted = !this.downvoted
             this.upvoted = false
-            let votes = 0;
-            if (this.upvoted) {
-                votes = this.votes + 1;
-            } else if (this.downvoted) {
-                votes = this.votes - 1;
-            }
-            this.$emit('upVote',votes)
         }
     }
 }
@@ -75,6 +56,8 @@ export default {
 <style lang="scss" scoped>
 .simple-vote {
     position: absolute;
+    top: 0px;
+    right: -45px;
     z-index: 1;
     background: rgba(0, 0, 0, 1);
     border-radius: 5px;
