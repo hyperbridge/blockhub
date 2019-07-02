@@ -1,0 +1,672 @@
+openapi: 3.0.0
+info:
+  description: This is an API specification for BlockHub APIs
+  version: 1.0.0
+  title: BlockHub APIs
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: help@blockhub.gg
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'http://localhost:7001/'
+  - url: 'https://api.blockhub.gg/'
+security:
+- default: []
+tags:
+- name: profile
+  description: Profiles.
+paths:
+  '/auth/register':
+    post:
+      summary: Register
+      description: Register
+      operationId: authRegister
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthRegisterResponse'
+        '400':
+          $ref: '#/components/responses/400_ValidationError'
+        '401':
+          $ref: '#/components/responses/401_UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/403_Forbidden'
+        '422':
+          $ref: '#/components/responses/422_UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/500_InternalServerError'
+        '503':
+          $ref: '#/components/responses/503_Maintenance'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRegisterRequest'
+        required: true
+  '/auth/login':
+    post:
+      summary: Login
+      description: Login
+      operationId: authLogin
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthLoginResponse'
+        '400':
+          $ref: '#/components/responses/400_ValidationError'
+        '401':
+          $ref: '#/components/responses/401_UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/403_Forbidden'
+        '422':
+          $ref: '#/components/responses/422_UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/500_InternalServerError'
+        '503':
+          $ref: '#/components/responses/503_Maintenance'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthLoginRequest'
+        required: true
+
+  '/verify':
+    get:
+      summary: Verify token
+      description: Verify token
+      operationId: verify
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthRegisterResponse'
+        '400':
+          $ref: '#/components/responses/400_ValidationError'
+        '401':
+          $ref: '#/components/responses/401_UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/403_Forbidden'
+        '500':
+          $ref: '#/components/responses/500_InternalServerError'
+        '503':
+          $ref: '#/components/responses/503_Maintenance'
+      security:
+      - default: ['auth']
+
+  '/profile':
+    post:
+      tags:
+        - profile
+      summary: Creates profile
+      description: |-
+        ### Authentication requirement (if failed 401 error will be returned)
+        ```
+        Login
+        ```
+
+        ### Error Handling
+
+        ```
+        Any unmet conditions from 'Validation Requirements' will result in a 400 Validation Error
+
+        The following will result in a 422 Unprocessable Entity Error
+         -If applicationId doesn't exist
+         ```
+      operationId: createProfile
+      parameters:
+      - $ref: '#/components/parameters/applicationId'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProfileResponse'
+        '400':
+          $ref: '#/components/responses/400_ValidationError'
+        '401':
+          $ref: '#/components/responses/401_UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/403_Forbidden'
+        '422':
+          $ref: '#/components/responses/422_UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/500_InternalServerError'
+        '503':
+          $ref: '#/components/responses/503_Maintenance'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProfileRequest'
+        required: true
+      security:
+      - default: ['auth', 'admin']
+  '/profile/{profileId}':
+    get:
+      tags:
+      - profile
+      summary: Retrieve a profile by id
+      description: |
+        ### Authentication requirement (if failed 401 error will be returned)
+        ```
+        Login
+        ```
+
+        ### Output
+        ```
+        returns the related profile information for specified
+        profile id.
+        ```
+      operationId: getProfile
+      parameters:
+      - $ref: '#/components/parameters/applicationId'
+      - name: profileId
+        in: path
+        description: queries by profile id
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProfileResponse'
+        '401':
+          $ref: '#/components/responses/401_UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/403_Forbidden'
+        '404':
+          $ref: '#/components/responses/404_NotFound'
+        '500':
+          $ref: '#/components/responses/500_InternalServerError'
+    patch:
+      tags:
+        - profile
+      summary: Updates profile info
+      description: |-
+        ### Authentication requirement (if failed 401 error will be returned)
+        ```
+        Login
+        ```
+
+        ### Error Handling
+
+        ```
+        Any unmet conditions from 'Validation Requirements' will result in a 400 Validation Error
+
+        The following will result in a 422 Unprocessable Entity Error
+         -If id doesn't exist
+         -If applicationId doesn't exist
+         -If id is not associated with applicationId
+         ```
+      operationId: updateProfile
+      parameters:
+      - $ref: '#/components/parameters/applicationId'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProfileResponse'
+        '400':
+          $ref: '#/components/responses/400_ValidationError'
+        '401':
+          $ref: '#/components/responses/401_UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/403_Forbidden'
+        '422':
+          $ref: '#/components/responses/422_UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/500_InternalServerError'
+        '503':
+          $ref: '#/components/responses/503_Maintenance'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProfileRequest'
+        required: true
+        description: |
+          ```
+          courses, routes, contacts should have full information regardless of their diff, if each fields exists
+          ```
+      security:
+      - default: ['auth', 'admin']
+    delete:
+      tags:
+      - profile
+      summary: Delete profile
+      description: |
+        ### Authentication requirement (if failed 401 error will be returned)
+        ```
+        Login
+        ```
+
+        ### Error handling
+        ```
+        The following will result in a 422 Unprocessable Entity Error
+          - delete a non-existing profile id
+        ```
+      operationId: deleteProfile
+      parameters:
+      - $ref: '#/components/parameters/applicationId'
+      - name: profileId
+        in: path
+        description: request by profile id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProfileIdResponse'
+        '400':
+          $ref: '#/components/responses/400_ValidationError'
+        '401':
+          $ref: '#/components/responses/401_UnauthorizedError'
+        '422':
+          $ref: '#/components/responses/422_UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/500_InternalServerError'
+        '503':
+          $ref: '#/components/responses/503_Maintenance'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteProfile'
+        description: ID of Profile to be deleted
+        required: true
+      security:
+      - default: ['auth', 'admin']
+  '/profiles':
+    get:
+      tags:
+      - profile
+      summary: Retrieve array of profiles
+      description: |
+        ### Authentication requirement (if failed 401 error will be returned)
+        ```
+        Login
+        ```
+
+        ### Output
+        ```
+        returns the related profile information for specified
+        profile id.
+        ```
+      operationId: getProfiles
+      parameters:
+      - $ref: '#/components/parameters/applicationId'
+      - name: profileIds
+        in: body
+        description: queries by array of profile ids
+        required: false
+        schema:
+          type: array
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProfilesResponse'
+        '401':
+          $ref: '#/components/responses/401_UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/403_Forbidden'
+        '404':
+          $ref: '#/components/responses/404_NotFound'
+        '500':
+          $ref: '#/components/responses/500_InternalServerError'
+  '/profiles/generate':
+    get:
+      tags:
+      - profile
+      summary: Generate the profiles json file
+      description: |
+        ### Authentication requirement (if failed 401 error will be returned)
+        ```
+        Login
+        ```
+
+        ### Output
+        ```
+        returns the related profile information for specified
+        profile id.
+        ```
+      operationId: generateProfiles
+      parameters:
+      - $ref: '#/components/parameters/applicationId'
+      responses:
+        '200':
+          description: successful operation
+        '401':
+          $ref: '#/components/responses/401_UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/500_InternalServerError'
+  '/profile/search':
+    post:
+      tags:
+      - profile
+      summary: Retrieve array of profiles
+      description: |
+        ### Authentication requirement (if failed 401 error will be returned)
+        ```
+        Login
+        ```
+
+        ### Output
+        ```
+        returns the related profile information for specified
+        profile id.
+        ```
+      operationId: searchProfiles
+      parameters:
+      - $ref: '#/components/parameters/applicationId'
+      - name: profileIds
+        in: body
+        description: queries by array of profile ids
+        required: false
+        schema:
+          type: array
+      - name: profileName
+        in: body
+        description: queries by profile name
+        required: false
+        schema:
+          type: integer
+      - name: resultMax
+        in: body
+        description: returns x max results
+        required: false
+        schema:
+          type: integer
+      - name: resultStartIndex
+        in: body
+        description: returns results starting from this index
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProfilesResponse'
+        '401':
+          $ref: '#/components/responses/401_UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/403_Forbidden'
+        '404':
+          $ref: '#/components/responses/404_NotFound'
+        '500':
+          $ref: '#/components/responses/500_InternalServerError'
+components:
+  parameters:
+    applicationId:
+      name: applicationId
+      in: header
+      description: queries by application id
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    400_ValidationError:
+      description: |
+        Validation Error.
+        Some specified fields were invalid.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                field:
+                  type: string
+                  example: XXX_id
+                errorCode:
+                  type: integer
+                  example: 4031
+                message:
+                  type: string
+                  example: XXX id must be integer
+    401_UnauthorizedError:
+      description: Unauthorized Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Unauthorized
+    403_Forbidden:
+      description: Forbidden Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Forbidden
+    404_NotFound:
+      description: Not Found Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Not Found
+    422_UnprocessableEntity:
+      description: |
+        Unprocessable Entity.
+        Data has something wrong logically.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                errorCode:
+                  type: string
+                  example: null
+                message:
+                  type: string
+                  example: ''
+                messageAttributes:
+                  type: array
+                  example: []
+                  items:
+                    type: string
+    500_InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Internal Server Error
+    503_Maintenance:
+      description: Service Unavailable (Maintenance mode)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Service Unavailable
+  schemas:
+    AuthLoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: myusername
+          maximum: 100
+        password:
+          type: string
+          example: mypassword
+          maximum: 100
+      required:
+        - username
+        - password
+    AuthLoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXZpbiIsImlhdCI6MTU1NDI3NTMxNzM2
+        data:
+          type: object
+          properties:
+            username:
+              type: string
+              example: myusername
+            createdAt:
+              type: integer
+              example: 1554273439983
+            editedAt:
+              type: integer
+              example: 1554273439983
+            passwordEditedAt:
+              type: integer
+              example: 1554273439983
+      required:
+        - message
+        - token
+        - user
+    AuthRegisterRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: myusername
+          maximum: 100
+        password:
+          type: string
+          example: mypassword
+          maximum: 100
+      required:
+        - username
+        - password
+    AuthRegisterResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The account was created successfully
+      required:
+        - status
+        - message
+    Profile:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: My Name
+          maximum: 100
+        type:
+          type: string
+          example: profile
+          maximum: 50
+        enabled:
+          type: boolean
+          example: true
+        note:
+          type: string
+          example: This is my note
+          maximum: 500
+        chance:
+          type: integer
+          example: 100
+          maximum: 100
+        variants:
+          type: array
+          items:
+            properties:
+              key:
+                type: string
+                example: myKey
+                maximum: 100
+              name:
+                type: string
+                example: My Name
+                maximum: 100
+              value:
+                type: integer
+                example: 0
+                default: 0
+            required:
+              - key
+              - value
+    GetProfileResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Profile'
+    CreateProfileRequest:
+      type: object
+      $ref: '#/components/schemas/Profile'
+      required:
+        - key
+        - name
+        - chance
+        - enabled
+        - note
+        - variants
+    UpdateProfileRequest:
+      type: object
+      $ref: '#/components/schemas/Profile'
+    GetProfilesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Profile'
+    DeleteProfile:
+      type: integer
+      example: 1
+    GetProfileIdResponse:
+      type: object
+      properties:
+        data:
+          type: string
+  securitySchemes:
+    default:
+      type: http
+      description: Authorization via header required
+      name: authorization
+      in: header
