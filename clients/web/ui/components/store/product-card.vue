@@ -3,21 +3,21 @@
         <div class="card-body padding-0">
             <c-button
                 status="none"
-                :to="`/product/${productId}`">
+                :to="`/product/${id}`">
                 <c-img
-                    v-if="productMetaImagesMediumTile"
+                    v-if="metaImagesMediumTile"
                     class="card-img-top"
-                    :src="productMetaImagesMediumTile" />
+                    :src="metaImagesMediumTile" />
             </c-button>
             <h4>
-                {{ productName }}
+                {{ name }}
             </h4>
             <p
                 class="card-text"
                 hidden>
-                {{ productMetaShortDescription }}
+                {{ metaShortDescription }}
             </p>
-            <c-tags v-if="productMetaDeveloperTags" :tags="productMetaDeveloperTags.slice(0,3)" />
+            <c-tags v-if="metaDeveloperTags" :tags="metaDeveloperTags.slice(0,3)" />
         </div>
     </div>
 </template>
@@ -29,11 +29,11 @@ export default {
         'c-tags': () => import('~/components/tags').then(m => m.default || m)
     },
     props: {
-        productId: Number,
-        productMetaImagesMediumTile: String,
-        productName: String,
-        productMetaShortDescription: String,
-        productMetaDeveloperTags: {
+        id: Number,
+        metaImagesMediumTile: String,
+        name: String,
+        metaShortDescription: String,
+        metaDeveloperTags: {
             type: Array,
             default: () => []
         },

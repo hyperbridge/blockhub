@@ -24,21 +24,21 @@
                 <c-product-card-dynamic
                     v-if="dynamic"
                     class="m-0"
-                    :productId="product.id"
-                    :productPrice="product.price"
-                    :productImagesMediumTile="product.images.mediumTile"
-                    :productVideo="product.video"
-                    :productShortDescription="product.shortDescription"
-                    :productImagesPreview="product.images.review"
-                    :productDeveloperTags="product.developerTags" />
+                    :id="product.id"
+                    :price="product.price"
+                    :imagesMediumTile="product.images.mediumTile"
+                    :video="product.video"
+                    :shortDescription="product.shortDescription"
+                    :imagesPreview="product.images.review"
+                    :developerTags="product.developerTags" />
                 <c-product-card
                     v-else
                     class="m-0"
-                    :productId="product.id"
-                    :productMetaImagesMediumTile="product.meta.images.mediumTile"
-                    :productName="product.name"
-                    :productMetaShortDescription="product.meta.shortDescription"
-                    :productMetaDeveloperTags="product.meta.developerTags" />
+                    :id="product.id"
+                    :imagesMediumTile="product.meta.images.mediumTile"
+                    :name="product.name"
+                    :metaShortDescription="product.meta.shortDescription"
+                    :metaDeveloperTags="product.meta.developerTags" />
             </c-swiper-slide>
         </c-swiper>
     </c-block>

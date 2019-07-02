@@ -21,42 +21,47 @@
 </template>
 
 <script>
-export default {
-    components: {
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-        'c-curator-review': () => import('~/components/store/curator-review').then(m => m.default || m)
-    },
-    props: {
-        reviews: {
-            type: Array,
-            require: true
+    import 'swiper/dist/css/swiper.css'
+    import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
+    export default {
+        components: {
+            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+            'c-curator-review': () => import('~/components/store/curator-review').then(m => m.default || m),
+            'c-swiper': swiper,
+            'c-swiper-slide': swiperSlide
         },
-        maxPerView: {
-            type: Number,
-            default: 3
-        }
-    },
-    data() {
-        return {
-            sliderOptions: {
-                slidesPerView: this.maxPerView,
-                spaceBetween: 15
+        props: {
+            reviews: {
+                type: Array,
+                require: true
+            },
+            maxPerView: {
+                type: Number,
+                default: 3
             }
-        }
-    },
-    computed: {
-        slider() {
-            return this.$refs.slider.swiper
-        }
-    },
-    methods: {
-        showArrowsState(el, count) {
-            if (el.length > count) {
-                return true
+        },
+        data() {
+            return {
+                sliderOptions: {
+                    slidesPerView: this.maxPerView,
+                    spaceBetween: 15
+                }
             }
-            return false
+        },
+        computed: {
+            slider() {
+                return this.$refs.slider.swiper
+            }
+        },
+        methods: {
+            showArrowsState(el, count) {
+                if (el.length > count) {
+                    return true
+                }
+                return false
+            }
         }
     }
-}
 </script>
 

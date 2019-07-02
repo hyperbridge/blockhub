@@ -27,9 +27,11 @@
                     :to="`/profiles/${user.id}`"
                     class="user-data__avatar-upload-btn">
                     <c-img
+                        class="user-data__avatar no-avatar"
                         v-if="user.img"
                         :src="user.img" />
                     <c-img
+                        class="user-data__avatar user-avatar"
                         v-else
                         src="../../static/img/user.png" />
                 </c-button>

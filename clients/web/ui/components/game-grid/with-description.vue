@@ -18,11 +18,12 @@
                     :class="['price-position-' + pricePosition]">
                     <strong>{{ item.price | convertCurrency }}</strong>
                 </div>
-                <c-button
-                    status="none"
-                    :to="`/product/${item.id}`">
+                <!--<c-button-->
+                    <!--status="none"-->
+                    <!--class="w-100"-->
+                    <!--:to="`/product/${item.id}`">-->
                     <c-img :src="item.images.mediumTile" />
-                </c-button>
+                <!--</c-button>-->
                 <div
                     v-if="item.crowdfund"
                     class="crowdfund-icon">
@@ -173,7 +174,8 @@ export default {
         },
         pricePosition: {
             type: String,
-            default: 'left'
+            default: 'left',
+            validator: val => ['left', 'right',].includes(val)
         },
         hovered: {
             type: Boolean,

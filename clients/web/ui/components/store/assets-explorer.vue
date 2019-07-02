@@ -44,7 +44,7 @@
                     <nuxt-link
                         tag="div"
                         :to="{
-                            path: '/marketplace',
+                            name: 'Marketplace',
                             query: { showFilters: true }
                         }">
                         <c-button
@@ -226,11 +226,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters({
-            // 'genres': 'marketplace/productsTags',
-            // 'products': 'marketplace/assetsProducts'
-        }),
-        genres() {
+        genres(){
             return []
         },
         products() {

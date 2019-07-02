@@ -37,11 +37,11 @@
                 </div>
             </div>
         </div>
-        <div v-if="content" class="community-item__post">
-            <p>{{ content }}</p>
-            <c-img :src="preview" />
+        <div v-if="contentText" class="community-item__post">
+            <p>{{ contentText }}</p>
+            <c-img :src="contentImg" />
         </div>
-        <div v-if="content" class="community-item__action text-right">
+        <div v-if="contentText" class="community-item__action text-right">
             <a
                 v-if="!reply"
                 href="#"
@@ -57,23 +57,28 @@
             v-for="(comment, index) in comments"
             v-if="comments"
             :key="index"
-            :comment="comment">
+            :rate="comment.rate"
+            :author="comment.author"
+            :date="comment.date"
+            :text="comment.text">
             <c-post-comment
                 v-for="(subcomment, index) in comment.replies"
                 v-if="comment.replies"
                 :key="index"
-                :comment="subcomment" />
+                :rate="subcomment.rate"
+                :author="subcomment.author"
+                :date="subcomment.date"
+                :text="subcomment.text" />
         </c-post-comment>
     </div>
 </template>
 
 <script>
-import Comment from '../community/comment'
 import moment from 'moment'
 
 export default {
     components: {
-        'c-post-comment': Comment,
+        'c-post-comment': import('~/components/community/comment').then(m => m.default || m),
         'c-reply': () => import('~/components/community/reply').then(m => m.default || m)
     },
     props: {
@@ -81,12 +86,13 @@ export default {
         title: String,
         actionStatus: String,
         rate: Number,
-        commentsCount: Number,
         author: {
             img: String,
             name: String
         },
-        content: String,
+        contentImg: String,
+        contentText: String,
+        commentsCount: Number,
         comments: {
             type: Array,
             default: () => []

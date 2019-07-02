@@ -15,6 +15,7 @@
                 <th>CC</th>
             </thead>
             <tbody>
+            {{ orderLang }}
                 <transition-group
                     v-for="(lang, index) in orderLang"
                     v-if="lang.show == 'default' || show || index < 5"

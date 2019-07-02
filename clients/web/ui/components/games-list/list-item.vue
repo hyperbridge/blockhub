@@ -2,7 +2,7 @@
     <div class="games-list">
         <div
             class="games-list__item"
-            :style="`background-image:url('${game.image}')`">
+            :style="`background-image:url('${image}')`">
             <div class="games-list__item-wrapper">
                 <div class="games-list__item-link">
                     <i class="fas fa-external-link-alt" />
@@ -10,10 +10,10 @@
                 <div class="games-list__item-head">
                     <div>
                         <div class="h2 display-4 games-list__title">
-                            {{ game.name }}
+                            {{ name }}
                         </div>
                         <div class="h5 games-list__sub-title">
-                            {{ game.sub_name }}
+                            {{ subName }}
                         </div>
                     </div>
                     <c-button
@@ -40,7 +40,7 @@
                             <span>this game</span>
                         </div>
                         <div class="game-friends-playing__list">
-                            <template v-for="user in game.friends">
+                            <template v-for="user in friends">
                                 <a :href="user.link">
                                     <img :src="user.avatar">
                                 </a>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="game-achievements__list">
                             <a
-                                v-for="(item, index) in game.achievements"
+                                v-for="(item, index) in achievements"
                                 v-if="game.achievements"
                                 :key="`achievements${index}`"
                                 :href="item.href"
@@ -75,8 +75,8 @@
                         </div>
                         <div class="game-downloadable-list__list">
                             <div
-                                v-for="item in game.download_content"
-                                v-if="game.download_content"
+                                v-for="item in downloadContent"
+                                v-if="downloadContent"
                                 class="game-downloadable-list__list-item">
                                 <div>
                                     <c-button status="plain">
@@ -141,7 +141,25 @@
 <script>
 export default {
     props: {
-        game: Object
+        name: String,
+        subName: String,
+        image: String,
+        friends: {
+            type: Array,
+            default: () => []
+        },
+        achievements: {
+            type: Array,
+            default: () => []
+        },
+        downloadContent: {
+            type: Array,
+            default: () => []
+        },
+        news: {
+            type: Array,
+            default: () => []
+        }
     }
 }
 </script>

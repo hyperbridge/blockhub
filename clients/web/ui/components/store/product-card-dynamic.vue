@@ -5,27 +5,27 @@
         @mouseout="show_preview(false)">
         <div class="position-relative">
             <div
-                v-if="productPrice"
+                v-if="price"
                 class="product-grid__item-price">
-                <strong>{{ productPrice | convertCurrency }}</strong>
+                <strong>{{ price | convertCurrency }}</strong>
             </div>
             <c-button
                 status="none"
-                :to="`/product/${productId}`"
+                :to="`/product/${id}`"
                 class="card-img-top">
                 <transition name="fade">
                     <c-img
                         v-if="!displayPreview"
                         class="card-img-top"
-                        :src="productImagesMediumTile" />
+                        :src="imagesMediumTile" />
                     <template v-else>
                         <video
-                            v-if="productVideo && autoplay"
+                            v-if="video && autoplay"
                             class="card-img-top"
                             width="100%"
                             autoplay>
                             <source
-                                :src="productVideo"
+                                :src="video"
                                 type="video/mp4">
                         </video>
                         <transition-group
@@ -33,10 +33,10 @@
                             tag="div"
                             name="slide-left">
                             <c-img
-                                v-for="(image, index) in productImagesPreview"
+                                v-for="(image, index) in imagesPreview"
                                 v-if="index === currentImage"
                                 :key="image"
-                                :src="productImagesPreview[index]"
+                                :src="imagesPreview[index]"
                                 class="card-img-top" />
                         </transition-group>
                     </template>
@@ -46,16 +46,16 @@
         <h4>
             <c-button
                 status="none"
-                :to="`/product/${productId}`">
-                {{ productName }}
+                :to="`/product/${id}`">
+                {{ name }}
             </c-button>
         </h4>
-        <p
+        <div
             class="card-text"
             hidden>
-            {{ productShortDescription }}
-        </p>
-        <c-tags v-if="productDeveloperTags" :tags="productDeveloperTags.slice(0,3)" />
+            {{ shortDescription }}
+        </div>
+        <c-tags v-if="developerTags" :tags="developerTags.slice(0,3)" />
     </div>
 </template>
 
@@ -68,16 +68,17 @@ export default {
     },
     mixins: [debounce],
     props: {
-        productId: Number,
-        productPrice: String,
-        productImagesMediumTile: String,
-        productVideo: String,
-        productShortDescription: String,
-        productImagesPreview: {
+        id: Number,
+        price: String,
+        name: String,
+        imagesMediumTile: String,
+        video: String,
+        shortDescription: String,
+        imagesPreview: {
             type: Array,
             default: () => []
         },
-        productDeveloperTags: {
+        developerTags: {
             type: Array,
             default: () => []
         }
