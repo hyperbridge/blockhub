@@ -21,7 +21,7 @@ import { Emoji } from 'emoji-mart-vue'
 
 export default {
     components: {
-        'c-emoji': Emoji
+        'emoji': Emoji
     },
     props: {
         emoji: {

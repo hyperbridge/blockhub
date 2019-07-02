@@ -4211,7 +4211,7 @@ storiesOf('Purchase block', module)
                         :tags="['top', 'new']"
                         :price="49.99"
                         releaseDate="8 Jun, 2018"
-                        :demoLink="#"
+                        demoLink="#"
                         :offersPurchases="true"
                         :inWishlist="inWishlist"
                         @addToWishlist="inWishlist = true"
@@ -4405,10 +4405,11 @@ storiesOf('Contribute', module)
         },
         data() {
             return {
-                value: ''
+                value: 0
             }
         },
-        template: `<div class="p-4" style="width: 400px"><c-contribute-form v-model="value" :defaultValue="15" /> <div class="mt-4 text-white">Value - {{ value }}</div></div>`
+        template: `<div class="p-4" style="width: 400px">
+                <c-contribute-form v-model="value" :defaultValue="15" /> <div class="mt-4 text-white">Value - {{ value }}</div></div>`
     }))
     .add('pledge', () => ({
         components: {
@@ -4438,7 +4439,14 @@ storiesOf('Contribute', module)
             }
         },
         template: `<div class="p-4" style="width: 400px">
-                        <c-contribute-pledge :pledge="pledge" />
+                        <c-contribute-pledge 
+                                    :minPrice="pledge.minPrice"
+                                    :title="pledge.name"
+                                    :description="pledge.description"
+                                    :includes="pledge.includes"
+                                    :deliveryDate="pledge.estimated_delivery"
+                                    :shipsTo="pledge.shipsTo"
+                                    :backers="pledge.backers" />
                     </div>`
     }))
 
@@ -4538,7 +4546,7 @@ storiesOf('Stream', module)
                 "game": "Dota II",
                 "userName": "GodOfDota",
                 "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVIOE5IdK4MWeI-iEphf-BhZh2XsXBrBn_fcsGXbFGSF-xwH8h",
-                "previews": "http://dota2-videos.com/wp-content/uploads/2018/07/jx3Oj0O-G8Ihqdefault.jpg",
+                "previews": "http://placehold.it/600x350",
                 "src": "#",
                 "views": 10
             }
@@ -5664,14 +5672,14 @@ storiesOf('Chat', module)
 storiesOf('Games list', module)
     .add('base', () => ({
         components: {
-            'c-game-list': () => import('~/components/games-list/index').then(m => m.default || m)
+            'c-game-list': () => import('~/components/games-list').then(m => m.default || m)
         },
         data() {
             return {
                 games:[
                     {
-                        id: '1',
-                        name: 'Game Of Thor',
+                        id: 1,
+                        name: 'Game Of Thor 1',
                         sub_name: 'Legendary Edition',
                         image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
                         download_content:[
@@ -5692,7 +5700,7 @@ storiesOf('Games list', module)
                                 price: '13.99'
                             }
                         ],
-                        achievements: [
+		                    achievements: [
                             {
                                 icon: '',
                                 href: ''
@@ -5738,37 +5746,141 @@ storiesOf('Games list', module)
                         ]
                     },
                     {
-                        id: '2',
-                        name: 'CS GO: Advanced',
-                        sub_name: 'Gold Edition',
-                        image: 'https://img3.akspic.ru/image/43286-monohromnyj-monoxromnyj_rejim-videoigra-voennosluzhashhie-protivogaz-1920x1080.jpg',
-                        download_content:[
-                            {
-                                name: 'M16-2',
-                                price: '0.99'
-                            },
-                            {
-                                name: 'AK-74',
-                                price: '3.99'
-                            },
-                            {
-                                name: 'GOLD AWP',
-                                price: '193.99'
-                            }
-                        ]
+		                    id: 2,
+		                    name: 'Game Of Thor 2',
+		                    sub_name: 'Legendary Edition',
+		                    image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
+		                    download_content:[
+				                    {
+						                    name: 'DragonBore',
+						                    price: '3.99'
+				                    },
+				                    {
+						                    name: 'Hearthfire',
+						                    price: '6.99'
+				                    },
+				                    {
+						                    name: 'Hight Resultation Texture Pack',
+						                    price: '13.99'
+				                    },
+				                    {
+						                    name: 'Dawnguard',
+						                    price: '13.99'
+				                    }
+		                    ],
+		                    achievements: [
+				                    {
+						                    icon: '',
+						                    href: ''
+				                    },
+				                    {
+						                    icon: '',
+						                    href: ''
+				                    },
+				                    {
+						                    icon: '',
+						                    href: ''
+				                    },
+				                    {
+						                    icon: '',
+						                    href: ''
+				                    }
+		                    ],
+		                    friends:[
+				                    {
+						                    link: '#',
+						                    avatar: 'http://kharkov.city/wp-content/uploads/2015/09/cubegirl-avatar_400x4001.jpg'
+				                    },
+				                    {
+						                    link: '#',
+						                    avatar: 'http://www.auto-sib.com/upload/main/2e6/2e667dbfe5de0eda8c1f98777b2a2db8.png'
+				                    },
+				                    {
+						                    link: '#',
+						                    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUCwHqPE2M4z3HsyeQsaOoWtuxjX92a2vVi5p7N9Qm72IM8Dh'
+				                    }
+		                    ],
+		                    news:[
+				                    {
+						                    title: 'Morbi at ligula placerat',
+						                    text: 'Morbi at ligula placerat, vestibulum tortor ac, sollicitudin massa. In in risus vulputate, posuere libero ac, egestas justo. Ut non mattis nulla. Suspendisse acmaximus metus. Nulla auctor laoreet quam, in congue nulla.',
+						                    link: '#'
+				                    },
+				                    {
+						                    title: 'Sed lobortis lacinia ante a bibendum.',
+						                    text: 'Ut gravida vestibulum nunc, sit amet malesuada nisi egestas eu. Integer felis eros, venenatis vel augue sit amet, cursus laoreet eros. Nam fringilla euismod feugiat.',
+						                    link: '#'
+				                    }
+		                    ]
                     },
-                    {
-                        id: '3',
-                        name: 'DOTA II',
-                        sub_name: '',
-                        image: 'https://i.pinimg.com/originals/66/36/5e/66365e390b9edf68991820fd11da9c0b.jpg'
-                    },
-                    {
-                        id: '4',
-                        name: 'Assassins Creed',
-                        sub_name: '',
-                        image: 'https://i.pinimg.com/originals/ce/51/f6/ce51f6e88f1a81dfb5d5621f7ac56762.jpg'
-                    }
+		                {
+				                id: 3,
+				                name: 'Game Of Thor 3',
+				                sub_name: 'Legendary Edition',
+				                image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
+				                download_content:[
+						                {
+								                name: 'DragonBore',
+								                price: '3.99'
+						                },
+						                {
+								                name: 'Hearthfire',
+								                price: '6.99'
+						                },
+						                {
+								                name: 'Hight Resultation Texture Pack',
+								                price: '13.99'
+						                },
+						                {
+								                name: 'Dawnguard',
+								                price: '13.99'
+						                }
+				                ],
+				                achievements: [
+						                {
+								                icon: '',
+								                href: ''
+						                },
+						                {
+								                icon: '',
+								                href: ''
+						                },
+						                {
+								                icon: '',
+								                href: ''
+						                },
+						                {
+								                icon: '',
+								                href: ''
+						                }
+				                ],
+				                friends:[
+						                {
+								                link: '#',
+								                avatar: 'http://kharkov.city/wp-content/uploads/2015/09/cubegirl-avatar_400x4001.jpg'
+						                },
+						                {
+								                link: '#',
+								                avatar: 'http://www.auto-sib.com/upload/main/2e6/2e667dbfe5de0eda8c1f98777b2a2db8.png'
+						                },
+						                {
+								                link: '#',
+								                avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUCwHqPE2M4z3HsyeQsaOoWtuxjX92a2vVi5p7N9Qm72IM8Dh'
+						                }
+				                ],
+				                news:[
+						                {
+								                title: 'Morbi at ligula placerat',
+								                text: 'Morbi at ligula placerat, vestibulum tortor ac, sollicitudin massa. In in risus vulputate, posuere libero ac, egestas justo. Ut non mattis nulla. Suspendisse acmaximus metus. Nulla auctor laoreet quam, in congue nulla.',
+								                link: '#'
+						                },
+						                {
+								                title: 'Sed lobortis lacinia ante a bibendum.',
+								                text: 'Ut gravida vestibulum nunc, sit amet malesuada nisi egestas eu. Integer felis eros, venenatis vel augue sit amet, cursus laoreet eros. Nam fringilla euismod feugiat.',
+								                link: '#'
+						                }
+				                ]
+		                },
                 ]
             }
         },

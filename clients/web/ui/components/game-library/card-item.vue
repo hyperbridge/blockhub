@@ -42,7 +42,7 @@
                     style="height: 20px; width: 20px;margin-right: -5px">
                     <c-dropdown
                         :class="{'no-right-border' : shareList}"
-                        @click="activeMenu">
+                        @click="activeMenu()">
                         <ul class="item-dropdown">
                             <li>
                                 <a href="#">

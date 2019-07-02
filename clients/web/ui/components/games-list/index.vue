@@ -41,8 +41,8 @@ export default {
             this.currentID = this.game.id
         }
     },
-    created() {
-        this.game = this.games[0]
+    mounted() {
+        this.game = this.games[1]
     },
     methods: {
         getGame(id) {
