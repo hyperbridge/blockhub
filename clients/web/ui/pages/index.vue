@@ -330,6 +330,7 @@ export default {
     async asyncData({ store }) {
         store.state.application.navigationComponent = 'store'
 
+        // TODO: collections should be Array not object
         const collections = await store.dispatch('collections/find', {
             query: {
                 $sort: {
