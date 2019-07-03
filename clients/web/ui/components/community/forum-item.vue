@@ -1,13 +1,13 @@
 <template>
-    <div class="forum-item">
+    <nuxt-link :to="{ path: `forum/${id}`, params: { id: id } }" class="forum-item">
         <div class="forum-item__header">
             <div class="icon">
                 <i :class="icon" />
             </div>
             <div class="text">
-                <nuxt-link :to="{ path: `forum/${id}`, params: { id: id } }">
+                <!--<nuxt-link :to="">-->
                     {{ title }}
-                </nuxt-link>
+                <!--</nuxt-link>-->
             </div>
             <div class="last-post">
                 {{ calculateSince }}
@@ -16,7 +16,7 @@
                 {{ discussionsCount }}
             </div>
         </div>
-    </div>
+    </nuxt-link>
 </template>
 
 <script>
@@ -66,6 +66,11 @@ export default {
         border: 1px solid rgba(112, 112, 112, .2);
         border-radius: 5px;
         color: #fff;
+        display: flex;
+        &:hover{
+            cursor: pointer;
+            text-decoration: none;
+        }
     }
     .forum-item__header {
         color: #fff;
@@ -73,6 +78,7 @@ export default {
         justify-content: space-between;
         align-items: center;
         padding: 10px;
+        width: 100%;
         .icon {
             width: 40px;
             height: 40px;
