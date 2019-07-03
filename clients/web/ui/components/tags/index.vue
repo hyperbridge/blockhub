@@ -1,6 +1,5 @@
 <template>
     <div class="tags">
-        {{ tags }}
         <nuxt-link
             v-for="(tag, index) in tags"
             :key="index"
