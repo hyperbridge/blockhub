@@ -2,7 +2,7 @@
     <div id="app" :class="{ 'disable-animations': !disableAnimations }">
         <c-render-condition :type="renderCondition">
             <div v-if="nuxtError">
-                <c-error-page :error="error" />
+                <c-error-page :isError="error" />
             </div>
             <nuxt-child v-else keep-alive />
 
@@ -65,7 +65,6 @@ export default {
     },
     data() {
         const nuxtError = this.$nuxt.nuxt.err
-
         return {
             nuxtError,
             renderCondition: 'none'
