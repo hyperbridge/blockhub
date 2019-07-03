@@ -254,56 +254,64 @@
                         Oh, another creation?
                     </div>
                     <template slot="body">
-                        <div class="row">
-                            <div class="col-6">
+                        <div class="row padding-bottom-30">
+                            <div class="col-3 text-center">
                                 <c-button
                                     status="none"
-                                    class="col-md-6 create-shortcut__block"
+                                    class="create-shortcut__block w-100"
                                     to="/idea/new">
                                     <c-icon
                                         name="plus-circle"
-                                        style="padding: 30px;font-size: 50px;" />
+                                        class="padding-bottom-10 padding-top-10"
+                                        style="font-size: 50px;" />
                                     <div style="display: block">
-                                        Create Idea
+                                        Create<br/>
+                                        Idea
                                     </div>
                                 </c-button>
                             </div>
-                            <div class="col-6">
+                            <div class="col-3 text-center">
                                 <c-button
                                     status="none"
-                                    class="col-md-6 create-shortcut__block"
+                                    class="create-shortcut__block w-100"
                                     to="/business/project/new">
                                     <c-icon
                                         name="plus-circle"
-                                        style="padding: 30px;font-size: 50px;" />
+                                        class="padding-bottom-10 padding-top-10"
+                                        style="font-size: 50px;" />
                                     <div style="display: block">
-                                        Create Crowdfund
+                                        Create<br/>
+                                        Crowdfund
                                     </div>
                                 </c-button>
                             </div>
-                            <div class="col-6">
+                            <div class="col-3 text-center">
                                 <c-button
                                     status="none"
-                                    class="col-md-6 create-shortcut__block"
+                                    class="create-shortcut__block w-100"
                                     to="/business/product/new">
                                     <c-icon
                                         name="plus-circle"
-                                        style="padding: 30px;font-size: 50px;" />
+                                        class="padding-bottom-10 padding-top-10"
+                                        style="font-size: 50px;" />
                                     <div style="display: block">
-                                        Create Game
+                                        Create<br/>
+                                        Game
                                     </div>
                                 </c-button>
                             </div>
-                            <div class="col-6">
+                            <div class="col-3 text-center">
                                 <c-button
                                     status="none"
-                                    class="col-md-6 create-shortcut__block"
+                                    class="create-shortcut__block w-100"
                                     to="/business/realm/new">
                                     <c-icon
                                         name="plus-circle"
-                                        style="padding: 30px;font-size: 50px;" />
+                                        class="padding-bottom-10 padding-top-10"
+                                        style="font-size: 50px;" />
                                     <div style="display: block">
-                                        Create Realm
+                                        Create<br/>
+                                        Realm
                                     </div>
                                 </c-button>
                             </div>
@@ -2069,9 +2077,13 @@ export default {
     }
 
     .create-shortcut__block {
-        height: 200px;
+        /*height: 200px;*/
         text-align: center;
-
+        transition: all .3s ease;
+        &:hover{
+            cursor: pointer;
+            transform: scale(1.1);
+        }
     }
 
     .content {
