@@ -18,13 +18,13 @@
                             selected>
                             Select Object type
                         </option>
-                        <option value="product">
+                        <option value="Product">
                             product
                         </option>
-                        <option value="project">
+                        <option value="Project">
                             project
                         </option>
-                        <option value="idea">
+                        <option value="Idea">
                             idea
                         </option>
                     </select>

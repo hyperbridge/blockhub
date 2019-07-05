@@ -13,11 +13,13 @@ export default function(app) {
             max: 25,
             ...paginate
         }
+        ,allowedInsert: '[]',
+        allowedUpsert: '[]'
     }
 
-    app.use('/votes', createService(options))
-
-    const service = app.service('/votes')
-
+    app.use('votes', createService(options))
+    const service = app.service('votes')
     service.hooks(hooks)
 }
+
+

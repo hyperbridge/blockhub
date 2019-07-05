@@ -733,7 +733,7 @@ export default {
                 this.product.ownerId = this.$store.state.application.activeProfile.id
 
                 this.$store.dispatch('products/create', this.product).then(res => {
-                    this.product.id = res.id
+                    this.product.id = res.id        
                     this.notice = 'Congratulations, your product has been created!'
 
                     this.$router.push(`/business/project/${this.project.id}`)

@@ -21,7 +21,7 @@ const create = function(options = {}) {
             throw new Error('Vote must be owned by a profile of authenticated account')
         }
 
-        const { key, name, value, meta,ratingId } = context.data
+        const { key, name, value, meta,ratingId,objectType,objectId } = context.data
 
 
         // Override the original data (so that people can't submit additional stuff)
@@ -36,6 +36,10 @@ const create = function(options = {}) {
         context.relations = {
             profile
         }
+        context.params = {
+            objectType ,
+            objectId
+        }
 
         return context
     }
@@ -44,17 +48,21 @@ const create = function(options = {}) {
 const afterCreate = function(options = {}) {
     return async context => {
 
-        const { app, data, relations, result } = context
+        const { app, data, relations, result,params } = context
 
         console.log('After Vote creation request: ', result, relations)
 
         const { profile } = relations
 
-        await Node.query().insert({
-            fromVoteId: result.id,
-            toProfileId: profile.id,
-            relationKey: 'owner'
-        })
+        let parent = new Node();
+        parent.fromVoteId = result.id; 
+        parent[`to${params.objectType}Id`] = params.objectId;
+        parent.relationKey = `vote${params.objectType}`;
+        
+        console.log('toProductId',`to${params.objectType}Id`);
+        console.log('parent',parent);
+
+        await Node.query().insert(parent)
 
         return context
     }

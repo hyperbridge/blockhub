@@ -3,6 +3,7 @@ import Profile from './profile'
 import Node from './node'
 import BaseModel from './base'
 
+
 export default class Vote extends BaseModel {
     // value = 1 or -1 or emoji
     parentId!: Number
@@ -34,14 +35,18 @@ export default class Vote extends BaseModel {
                     to: 'nodes.id'
                 }
             },
-            profile: {
-                relation: Model.HasOneRelation,
+            owner: {
+                relation: Model.HasOneThroughRelation,
                 modelClass: Profile,
                 join: {
-                    from: 'votes.profileId',
-                    to: 'profiles.id'
+                    from: 'votes.id',
+                    to: 'profiles.id',
+                    through: {
+                        from: 'nodes.fromVoteId',
+                        to: 'nodes.toProfileId'
+                    }
                 }
-            },
+            }
         }
     }
 }

@@ -102,7 +102,7 @@ export default {
                 // TODO: Mutating the prop is a no no.
                 // this.soundEnabled = false
             }
-        }
+        }   
     },
     methods: {
         mouseover() {

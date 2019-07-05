@@ -29,7 +29,6 @@ export let plugins = []
 export const state = () => ({
     initialized: false
 })
-
 if (decentralizedMode) {
     service = () => { // eslint-disable-line arrow-body-style
         return {
@@ -42,7 +41,6 @@ if (decentralizedMode) {
                         if (!newProfile.name) newProfile.name = 'Default'
                         this.profiles.push({ ...newProfile, edit: true })
                         this.editedProfile = newProfile
-
                         this.saveProfiles()
                     })
                 },
@@ -102,7 +100,7 @@ if (decentralizedMode) {
         service('leaderboards', { paginate: true }),
         service('licenses', { paginate: true }),
         service('logs', { paginate: true }),
-        service('offers', { paginate: true }),
+        service('offers', { paginate: true }), 
         service('ratings', { paginate: true }),
         service('reviews', { paginate: true }),
         service('realms', { paginate: true }),
@@ -171,6 +169,7 @@ export const actions = {
         service('ideas', { paginate: true })(store)
         service('tags', { paginate: true })(store)
         service('votes', { paginate: true })(store)
+        service('votes1', { paginate: true })(store)
         service('search', { paginate: true })(store)
         // service('application', { paginate: true })(store)
 
@@ -206,7 +205,7 @@ export const actions = {
             moduleName: 'auth',
             cookieName: 'feathers-jwt'
         })
-            .catch(e => { console.log('Feathers exception', e) })
+         .catch(e => { console.log('Feathers exception', e) })
     },
     init({ commit }, payload) {
         commit('init', payload)
