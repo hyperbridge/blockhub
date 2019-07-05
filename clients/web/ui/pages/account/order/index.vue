@@ -63,7 +63,57 @@
                     Vancouver, British Columbia V6E 0B1 Canada
                 </div>
             </div>
-            <div class="col-12 col-lg-4 ml-auto"></div>
+            <div class="col-12 col-lg-4 ml-auto">
+                <div class="h5 pt-0 mt-0">
+                    Order summary
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>
+                        Items
+                    </span>
+                    <span>
+                        $99.99
+                    </span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>
+                        Discount
+                    </span>
+                    <span>
+                        $19.99
+                    </span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>
+                        Subtotal
+                    </span>
+                    <span>
+                        $80.00
+                    </span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>
+                        Tax
+                    </span>
+                    <span>
+                        $0.00
+                    </span>
+                </div>
+                <hr />
+                <div class="h3 d-flex justify-content-between">
+                    <span>
+                        Order Total
+                    </span>
+                    <span>
+                        $80.00
+                    </span>
+                </div>
+                <div class="w-100 mt-5">
+                    <c-button status="second-success" class="w-100">
+                        Submit
+                    </c-button>
+                </div>
+            </div>
         </div>
     </c-layout>
 </template>
