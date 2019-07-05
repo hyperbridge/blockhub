@@ -101,7 +101,7 @@
             <div class="col-12 col-md-6">
                 <c-block>
                     <h2>What can HBX be used for?</h2>
-                    <p>
+                    <div>
                         <ul>
                             <li>Contribute to crowdfund projects</li>
                             <li>Purchase products within the store</li>
@@ -118,7 +118,7 @@
                             White Paper
                         </c-button>.
                         <br><br>
-                    </p>
+                    </div>
                     <div
                         class="carousel-wrapper margin-auto margin-top-20 margin-bottom-20"
                         style="zoom: 0.7">
@@ -127,6 +127,7 @@
                             :limitTo="2">
                             <template slot-scope="props">
                                 <c-asset-store-card
+                                    v-if="props.items"
                                     v-for="(item) in props.items"
                                     :key="item.id"
                                     :class="item.css"
