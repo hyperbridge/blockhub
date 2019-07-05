@@ -83,7 +83,9 @@
 			"marine/node"
 		],
 		"rules": {
-			"quote-props": 0,
+      "quote-props": 0,
+      "func-names": 0,
+			"guard-for-in": 0,
 			"@typescript-eslint/semi": [
 				"error",
 				"never"
