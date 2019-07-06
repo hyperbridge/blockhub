@@ -3,8 +3,9 @@
         <div class="row">
             <div class="col-12">
                 <c-block title="Payment method">
-                    <c-tabs>
-                        <c-tab name="Payment information" :selected="true">
+                    <c-tabs :tabNames="['Payment information', 'Billing information']"
+                            styled>
+                        <c-tab name="Payment information" :tabId="1">
                             <div class="row align-items-stretch">
                                 <div class="col-12 h5 margin-top-10 margin-bottom-20">
                                     Payment Information
@@ -182,7 +183,7 @@
                                 </div>
                             </div>
                         </c-tab>
-                        <c-tab name="Billing information">
+                        <c-tab name="Billing information" :tabId="2">
                             <div class="row align-items-stretch">
                                 <div class="col-12 h5 margin-top-15 margin-bottom-20">
                                     Billing Information
@@ -277,8 +278,8 @@ export default {
     components: {
         'c-multiselect': () => import('vue-multiselect').then(m => m.default || m),
         'c-input': () => import('~/components/inputs').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m)
+        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
+        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m)
     },
     data() {
         return {

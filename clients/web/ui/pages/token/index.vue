@@ -58,7 +58,7 @@
             <div class="col-12 col-md-6 mb-4">
                 <c-block>
                     <h2>What is HBX?</h2>
-                    <p>
+                    <div>
                         Built by <c-button
                             status="underline"
                             size="md"
@@ -76,14 +76,14 @@
                             <li>Product testing</li>
                             <li>Polls/Questionnaires</li>
                         </ul>
-                    </p>
+                    </div>
                     <div
                         class="carousel-wrapper margin-auto margin-top-20 margin-bottom-20"
                         style="zoom: 0.7">
                         <c-carousel-3d
                             :items="[assets[0]]"
                             :limitTo="1">
-                            <template slot-scope="props">
+                            <template v-slot="props">
                                 <c-asset-store-card
                                     v-for="(item) in props.items"
                                     :key="item.id"
@@ -125,7 +125,7 @@
                         <c-carousel-3d
                             :items="[assets[1], assets[2]]"
                             :limitTo="2">
-                            <template slot-scope="props">
+                            <template v-slot="props">
                                 <c-asset-store-card
                                     v-if="props.items"
                                     v-for="(item) in props.items"
@@ -930,11 +930,8 @@
             <div
                 slot="customContent"
                 class="purchase-modal">
-                <c-tabs>
-                    <c-tab
-                        name="Confirm Purchase"
-                        :selected="true"
-                        :showFooter="true">
+                <c-tabs :tabNames="['Confirm Purchase']">
+                    <c-tab :tabId="1">
                         <div>
                             <div
                                 v-if="!purchaseSuccessful"
@@ -1125,7 +1122,6 @@
                             </div>
                         </div>
                         <div
-                            slot="footer"
                             class="d-flex align-items-center justify-content-end">
                             <div>
                                 <c-button @click="closePurchasePopup">
@@ -1159,8 +1155,8 @@ export default {
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         'c-block': () => import('~/components/block').then(m => m.default || m),
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab').then(m => m.default || m),
+        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
+        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
         'c-carousel-3d': () => import('~/components/carousel-3d').then(m => m.default || m),
         'c-asset-store-card': () => import('~/components/asset/store-card').then(m => m.default || m),
         'c-welcome-box': () => import('~/components/welcome-box').then(m => m.default || m),
