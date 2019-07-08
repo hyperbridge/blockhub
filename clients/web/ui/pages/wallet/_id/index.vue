@@ -27,8 +27,10 @@
 export default {
     components: {
     },
-    props: ['id'],
     computed: {
+        id() {
+            return this.$route.params.id
+        },
         wallet() {
             if (!this.$store.state.application.wallets) { return }
 
