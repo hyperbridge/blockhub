@@ -5,6 +5,7 @@ import Profile from './profile'
 import Community from './community'
 import Tag from './tag'
 import BaseModel from './base'
+import Vote from './vote'
 
 export default class Idea extends BaseModel {
     ownerId!: Number
@@ -64,6 +65,19 @@ export default class Idea extends BaseModel {
                         extra: ['relationKey']
                     }
                 }
+            },
+            vote: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Vote,
+                join: {
+                    from: 'ideas.id',
+                    to: 'votes.id',
+                    through: {
+                        from: 'nodes.toIdeaId',
+                        to: 'nodes.fromVoteId',
+                        extra: ['relationKey']
+                    }
+                },
             },
             community: {
                 relation: Model.HasOneRelation,

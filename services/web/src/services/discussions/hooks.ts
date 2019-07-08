@@ -52,7 +52,6 @@ const create = function(options = {}) {
 
         const { key, name, value, meta } = context.data
 
-        console.log(owner)
 
         // Override the original data (so that people can't submit additional stuff)
         context.data = {

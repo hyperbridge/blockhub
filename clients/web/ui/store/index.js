@@ -122,7 +122,7 @@ if (decentralizedMode) {
 export const actions = {
     async nuxtServerInit({ commit, dispatch }, { app, req, store, $sentry }) {
         const origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg' // eslint-disable-line no-negated-condition
-
+        
         const storage = {
             getItem() {
                 return store.state.auth ? store.state.auth.accessToken : ''
@@ -169,7 +169,6 @@ export const actions = {
         service('ideas', { paginate: true })(store)
         service('tags', { paginate: true })(store)
         service('votes', { paginate: true })(store)
-        service('votes1', { paginate: true })(store)
         service('search', { paginate: true })(store)
         // service('application', { paginate: true })(store)
 

@@ -1,54 +1,162 @@
 <template>
     <c-layout>
-        <div class="col-md-12">
-            <c-vote-form :votes="0" v-on:getVote="getVote($event)" />            
-        </div>                          
+        <c-block
+            title="Vote Form"
+            noGutter
+            :bgColor="false">
+            <div class="vote-from">
+                <p>
+                    Please vote!
+                </p>
+                <div class="invert">
+                    <div class="form-group">
+                        <select
+                            class="form-control"
+                            @change="onChangeType($event)">
+                            <option
+                                value=""
+                                selected>
+                                Please Select Object.
+                            </option>
+                            <option value="Product">
+                                product 
+                            </option>
+                            <option value="Project">
+                                project
+                            </option>
+                            <option value="Idea">
+                                idea
+                            </option>
+                        </select>
+                    </div>          
+                </div>
+                <div v-if="selectObject" class="invert">
+                    <div class="form-group">
+                        <select
+                            class="form-control"
+                            @change="onChangeId($event)">
+                            <option
+                                value=""
+                                selected>
+                                Please Select {{selectedObject}} Name.
+                            </option>
+                            <option v-for="object in objects" v-bind:value="object.id" :key="object.id">
+                                {{object.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div v-if="visibleVote" class="invert">
+                    <div class="form-group">
+                        <c-vote ref="myVote" :votes="0"  v-on:getVote="getVote" />
+                    </div>
+                </div>
+            </div>
+        </c-block>                         
     </c-layout>    
 </template>
 <script>
-import axios from 'axios'
 export default {
     head() {
         return {
-            title: `Vote`
+            title: 'Vote'
         }
     },
     components: {   
-        'c-vote-form': () => import('~/components/vote-form/index.vue').then(m => m.default || m)
+        'c-vote': () => import('~/components/vote').then(m => m.default || m)
+    },
+    data() {
+        return {
+            vote:'0',
+            selectObject: false,
+            selectObjectId: false,
+            selectedObject: 'Object',
+            selectedObjectId: ''
+        }
     },
     methods: {
-        async getVote(data){
-            console.log('profile_id',this.$store.state.application.activeProfile.id)
-            console.log('vote',data.vote)
-            
-            if(this.$store.state.application.activeProfile.id){
-                if(data.objectType && data.objectId && data.vote) {
-             
-            let request = { 
-                            value: data.vote ,
+        async getVote(value) {
+            console.log('profileId',this.$store.state.application.activeProfile.id);
+            if (this.$store.state.application.activeProfile.id) {
+                if (this.selectedObject && this.selectedObjectId && value) {                    
+                    let request = { 
+                            value: String(value),
                             ownerId:  this.$store.state.application.activeProfile.id,                                 
-                            accountId: this.$store.state.application.activeProfile.accountId,
-                            objectType: data.objectType,
-                            objectId: data.objectId,
-                }        
-                    console.log('request',request)
-                    let data1 = await this.$store.dispatch('votes/find')
+                            objectType: this.selectedObject,
+                            objectId: this.selectedObjectId
+                        }        
+                        console.log('requestCheck',request)
 
-                    console.log('vote_result_dispatch');
-                    let data3 = await this.$store.dispatch('votes/create',request) 
-                    console.log('result',data3)
-                    }   
+                        let result = await this.$api.service('votes/check').find({
+                            query: {
+                                type: 'HBX',
+                                objectType: request.objectType,
+                                objectId: request.objectId,
+                                profileId: request.ownerId
+                            }
+                        })
+                        console.log('result',result);
+
+                        if(result.voted){                          
+                            let update_data = await this.$store.dispatch('votes/get',result.id) 
+                            let data3;
+                                console.log('updatedData',update_data)
+                                update_data.value = String(value);
+                                update_data.meta = {};
+                                update_data.objectType = request.objectType;
+                                update_data.objectId = request.objectId;
+                                update_data.ownerId = request.ownerId;
+                                update_data = await this.$store.dispatch('votes/update',
+                                [
+                                    result.id,
+                                    update_data
+                                ]) 
+                                console.log('updateResult',update_data)
+                        } else {                            
+                            let data3 = await this.$store.dispatch('votes/create',request) 
+                            console.log('createResult',data3)
+                        }
+                }   
+            }
+        },
+        onChangeType(event) {
+            if (event.target.value) {
+                this.selectObject = true;
+                this.selectedObject = event.target.value;
+            } else {
+                this.selectObject = false;
+                this.selectedObject = 'Object';
+            }
+        },
+        onChangeId(event) {
+            if (event.target.value) {
+                this.selectObjectId = true;       
+                this.selectedObjectId = event.target.value;
+            } else {
+                this.selectObjectId = false; 
+                this.selectedObjectId = ''
             }
         },
     },
     computed: {
+        visibleVote() {
+            return this.selectObject&&this.selectObjectId
+        },
+        objects() {
+            if (this.selectedObject != 'Object') {
+                let object = this.selectedObject.toLowerCase();
+                return this.$store.getters[`${object}s/list`]
+            }
+            return;
+        }
     },
-
+    mounted() {
+        this.$store.dispatch('projects/find')
+        this.$store.dispatch('products/find');
+        this.$store.dispatch('ideas/find');
+    }
 }
 </script>
-
-<style lang="scss">
-</style>
 
 <style lang="scss" scoped>
 </style>

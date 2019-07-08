@@ -14,6 +14,7 @@ import Event from './event'
 import Idea from './idea'
 import Product from './product'
 import BaseModel from './base'
+import Vote from './vote'
 
 
 export default class Profile extends BaseModel {
@@ -68,6 +69,18 @@ export default class Profile extends BaseModel {
             // has many friends -> profiles
             // has many wishlistProducts -> nodes fromProfileId = profile.id toProductId
             // has many wishlistAssets -> nodes fromProfileId = profile.id toAssetId isn't null
+            vote: {
+                relation: Model.ManyToManyRelation  ,
+                modelClass: Vote,
+                join: {
+                    from: 'profiles.id',
+                    to: 'votes.id',
+                    through: {
+                        from: 'nodes.toProfileId',
+                        to: 'nodes.fromVoteId',
+                    }
+                },
+            },
             licenses: {
                 relation: Model.ManyToManyRelation,
                 modelClass: License,

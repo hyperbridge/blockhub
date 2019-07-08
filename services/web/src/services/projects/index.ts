@@ -14,8 +14,8 @@ export default function(app) {
             max: 25,
             ...paginate
         },
-        allowedEager: 'tags',
-        allowedUpsert: 'tags'
+        allowedEager: '[tags,vote]',
+        allowedUpsert: 'tags,'
         // namedEagerFilters: {
         //     all: function (builder) {
         //         builder.where('done', false)

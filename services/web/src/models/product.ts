@@ -11,6 +11,7 @@ import Server from './server'
 import File from './file'
 import Node from './node'
 import BaseModel from './base'
+import Vote from './vote'
 
 type Language = Object
 type SystemRequirement = Object
@@ -94,6 +95,20 @@ export default class Product extends BaseModel {
             //         to: 'users.id'
             //     }
             // },
+
+            vote: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Vote,
+                join: {
+                    from: 'products.id',
+                    to: 'votes.id',
+                    through: {
+                        from: 'nodes.toProductId',
+                        to: 'nodes.fromVoteId',
+                        extra: ['relationKey']
+                    }
+                },
+            },
             rating: {
                 relation: Model.HasOneRelation,
                 modelClass: Rating,

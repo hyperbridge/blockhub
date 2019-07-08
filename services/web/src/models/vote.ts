@@ -1,5 +1,8 @@
 import { Model, RelationMappings } from 'objection'
 import Profile from './profile'
+import Idea from './idea'
+import Product from './product'
+import Project from './project'
 import Node from './node'
 import BaseModel from './base'
 
@@ -46,7 +49,32 @@ export default class Vote extends BaseModel {
                         to: 'nodes.toProfileId'
                     }
                 }
-            }
+            },
+            // idea: {
+            //     relation: Model.HasOneThroughRelation,
+            //     modelClass: Idea,
+            //     join: {
+            //         from: 'votes.id',
+            //         to: 'ideas.id',
+            //         through: {
+            //             from: 'nodes.fromVoteId',
+            //             to: 'nodes.toIdeaId'
+            //         }
+            //     }
+            // },
+
+            // project: {
+            //     relation: Model.HasOneThroughRelation,
+            //     modelClass: Project,
+            //     join: {
+            //         from: 'votes.id',
+            //         to: 'projects.id',
+            //         through: {
+            //             from: 'nodes.fromVoteId',
+            //             to: 'nodes.toProjectId'
+            //         }
+            //     }
+            // }
         }
     }
 }
