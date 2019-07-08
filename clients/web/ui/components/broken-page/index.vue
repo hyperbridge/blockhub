@@ -31,6 +31,13 @@ export default {
             default: () => ({})
         }
     },
+    watch: {
+        '$route'() {
+            if (process.client) {
+                this.$('body').removeClass('screen--not-found')
+            }
+        }
+    },
     created() {
         if (process.client) {
             this.$('body').addClass('screen--not-found')
