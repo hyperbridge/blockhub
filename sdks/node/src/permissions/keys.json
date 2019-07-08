@@ -1,0 +1,10 @@
+[
+    "god",
+    "admin",
+    "adminPanel",
+    "role",
+    "role.create",
+    "role.read",
+    "role.update",
+    "role.delete"
+]
