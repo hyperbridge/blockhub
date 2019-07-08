@@ -194,9 +194,10 @@ export const actions = {
 
                 dispatch('login', {
                     token: accessToken,
-                    user: store.state.accounts.keyedById[store.state.accounts.currentId]
+                    user: store.state.auth.user
                 })
             } catch (error) {
+                console.log('[BlockHub] Error logging in', error)
                 dispatch('logout')
                 return
             }
@@ -282,6 +283,15 @@ export const mutations = {
         }
 
         state.initialized = true
+    },
+    user(state, payload) {
+        state.user = payload
+    },
+    token(state, payload) {
+        state.token = payload
+    },
+    loggedIn(state, payload) {
+        state.loggedIn = payload
     }
 }
 

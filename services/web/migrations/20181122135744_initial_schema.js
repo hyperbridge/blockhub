@@ -55,7 +55,7 @@ exports.up = knex => {
         .createTable('accounts', table => {
             defaults(table, { editors: false })
 
-            table.string('email', 100)
+            table.string('email', 100).unique()
             table.string('firstName', 50)
             table.string('lastName', 50)
             table.string('address', 150)
