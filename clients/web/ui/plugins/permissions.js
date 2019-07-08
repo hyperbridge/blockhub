@@ -1,7 +1,6 @@
 import Vue from 'vue'
 
 export default ({ app, store }) => {
-    if (process.client) window.Outbound = { store }
     let defaultUserId = null
 
     const permissions = {

@@ -260,7 +260,7 @@ export const actions = {
     },
     createTradeUrl({ commit, state }) {
         // async call => delete previous trade url
-        // state.account.tradeURLId
+        // state.account.tradeLinkId
         commit('createTradeUrl', getId())
     }
 }
@@ -313,7 +313,7 @@ export const mutations = {
         })
     },
     createTradeUrl(state, id) {
-        state.account.tradeURLId = id
+        state.account.tradeLinkId = id
     },
     signIn(state, payload) {
         state.signedIn = true

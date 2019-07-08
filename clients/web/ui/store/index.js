@@ -206,14 +206,16 @@ export const actions = {
             $sentry.configureScope(scope => scope.setUser({ username: 'john.doe@example.com' }))
         */
 
-        return initAuth({
-            commit,
-            dispatch,
-            req,
-            moduleName: 'auth',
-            cookieName: 'feathers-jwt'
-        })
-            .catch(e => { console.log('Feathers exception', e) })
+        if (req) {
+            return initAuth({
+                commit,
+                dispatch,
+                req,
+                moduleName: 'auth',
+                cookieName: 'feathers-jwt'
+            })
+                .catch(e => { console.log('Feathers exception', e) })
+        }
     },
 
     nuxtClientInit({ commit }, context) {
