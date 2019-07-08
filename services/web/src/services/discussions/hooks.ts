@@ -1,4 +1,4 @@
-import Discussion from '../../models/discussion'
+import { DiscussionType } from '../../models/discussion'
 import Node from '../../models/node'
 
 const { authenticate } = require('@feathersjs/authentication').hooks
@@ -40,28 +40,28 @@ const create = function(options = {}) {
 
         const community = await app.service('communities').get(data.community.id)
 
-        if (!community) {
+        if (data.community.id && !community) {
             throw new Error('A discussion must have a community')
         }
 
-        const owner = await app.service('profiles').get(data.owner.id)
+        const owner = await app.service('profiles').get(data.owner.id);
 
         if (owner.accountId !== account.id) {
             throw new Error('Discussion must be owned by a profile of authenticated account')
         }
 
-        const { key, name, value, meta } = context.data
-
-        console.log(owner)
+        const { key, name, value, meta, type = DiscussionType.Discussion } = context.data
 
         // Override the original data (so that people can't submit additional stuff)
         context.data = {
             key,
             name,
             value,
-            meta
+            meta,
+            type
         }
 
+        //console.log(context.data);
         context.relations = {
             owner,
             community

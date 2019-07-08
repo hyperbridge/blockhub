@@ -18,25 +18,37 @@
                 <i class="fas fa-plus" />
             </div>
             <ul>
-                <li class="active">
-                    General
-                </li>
-                <li>
-                    Trash
-                </li>
-                <li>
-                    Only Playload
-                </li>
-                <li>
-                    Other staff
-                </li>
-                <li>
-                    Help
+                <li v-for="(channel, indx) in channels" :class="{ active: indx == currentChannelI }" @click="onChannelClick(indx)">
+                    {{ channel.name }}
                 </li>
             </ul>
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+        components: {},
+
+        props: {
+            channels: {
+                type: Array,
+                default: () => []
+            }
+        },
+
+        data: () => ({
+            currentChannelI: 0
+        }),
+
+        methods: {
+            onChannelClick(channelIndex) {
+                this.$emit('onChannelChange', channelIndex)
+                this.currentChannelI = channelIndex
+            }
+        }
+    }
+</script>
 
 <style lang="scss" scoped>
     .chat__group-head{
