@@ -251,7 +251,7 @@ export const actions = {
         commit('user', null)
         commit('token', null)
         app.$cookies.remove('feathers-jwt')
-        this.$router.replace({ path: 'login' })
+        // this.$router.push('/login')
     },
 
     init({ commit }, payload) {

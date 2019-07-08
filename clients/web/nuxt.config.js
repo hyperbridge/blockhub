@@ -99,6 +99,7 @@ export default {
     ],
     router: {
         extendRoutes(routes) {
+            // TODO: check hostname
             sites.forEach(site => {
                 site.routes.forEach(route => {
                     routes.push(route)
