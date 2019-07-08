@@ -13,6 +13,8 @@ import Collection from './collection'
 import Event from './event'
 import Idea from './idea'
 import Product from './product'
+import Role from './role'
+import Permission from './permission'
 import BaseModel from './base'
 
 
@@ -305,6 +307,30 @@ export default class Profile extends BaseModel {
                 join: {
                     from: 'profiles.id',
                     to: 'projects.ownerId'
+                }
+            },
+            roles: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Role,
+                join: {
+                    from: 'profiles.id',
+                    to: 'roles.id',
+                    through: {
+                        from: 'profiles_roles.userId',
+                        to: 'profiles_roles.roleId'
+                    }
+                }
+            },
+            permissions: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Permission,
+                join: {
+                    from: 'profiles.id',
+                    to: 'permissions.id',
+                    through: {
+                        from: 'profiles_permissions.profileId',
+                        to: 'profiles_permissions.permissionId'
+                    }
                 }
             },
             // projects: {

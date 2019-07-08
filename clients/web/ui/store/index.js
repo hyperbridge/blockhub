@@ -187,9 +187,11 @@ export const actions = {
                     accessToken: cookieToken
                 })
             } catch (error) {
-                app.$cookies.remove('feathers-jwt')
+                dispatch('logout')
                 return
             }
+        } else {
+            dispatch('logout')
         }
 
         /*
@@ -208,9 +210,44 @@ export const actions = {
         })
             .catch(e => { console.log('Feathers exception', e) })
     },
+
+    nuxtClientInit ({ commit }, context) {
+      if (context.store.state.user) {
+        const { userId, meta } = context.store.state.user
+        this.$can.setUserId(userId)
+        this.$can.setUserPermissions(userId, meta.permissions)
+      }
+    },
+
+  /*
+    Whenever possible, use an action to modify state by commiting to the mutation.
+    Actions have the benefit of being able to perform async operations.
+  */
+ login ({ commit }, { token, user }) {
+    // this.$axios.setToken(token, 'bearer')
+    // this.$cookies.set('token', token)
+    this.$can.setUserId(user.userId)
+    this.$can.setUserPermissions(user.userId, user.meta.permissions)
+
+    commit('token', token)
+    commit('user', user)
+    commit('loggedIn', true)
+  },
+
+  logout ({ commit }) {
+    // this.$axios.setToken(false)
+    // this.$cookies.remove('token')
+    commit('loggedIn', false)
+    commit('user', null)
+    commit('token', null)
+    app.$cookies.remove('feathers-jwt')
+    this.$router.replace({ path: 'login' })
+  },
+
     init({ commit }, payload) {
         commit('init', payload)
     },
+
     update({ rootState }, [path, data]) {
         const [module, target] = path.split('/')
         if (data !== null && typeof data === 'object') {
