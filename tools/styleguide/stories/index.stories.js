@@ -6801,6 +6801,54 @@ storiesOf('Gift box', module)
                   </div>`
     }))
 
+storiesOf('Profile picker', module)
+    .add('default', () => ({
+		    components: {
+				    'c-profile-picker': () => import('~/components/profile-picker').then(m => m.default || m),
+		    },
+        data(){
+		        return{
+		            profiles: [
+                    {
+		                    id: 1,
+		                    name: 'Mr. Satoshi',
+		                    wallet: '0x6cc5f688a315f3dc28a7781717a',
+		                    img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+		                    default: false,
+		                    edit: false,
+		                    status: 'warning'
+                    },
+				            {
+						            id: 2,
+						            name: 'Mr. Satoshi',
+						            wallet: '0x6cc5f688a315f3dc28a7781717a',
+						            img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+						            default: false,
+						            edit: false,
+						            status: 'danger'
+				            },
+				            {
+						            id: 3,
+						            name: 'Mr. Satoshi',
+						            wallet: '0x6cc5f688a315f3dc28a7781717a',
+						            img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+						            default: false,
+						            edit: false,
+                        status: 'success'
+				            },
+                ]
+            }
+        },
+        template: `<div class="p-5">
+                      <c-profile-picker :profiles="profiles" />
+                  </div>`
+    }))
+
+
+
+
+
+
 
 /*
      Dynamic import - test version
