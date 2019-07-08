@@ -7,10 +7,12 @@ export default {
     name: 'Darklaunch',
     props: {
         code: {
-            type: String
+            type: String,
+            default: null
         },
         variant: {
-            type: String
+            type: String,
+            default: null
         },
         data: {
             type: [Object, String]
