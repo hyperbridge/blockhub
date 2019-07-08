@@ -191,6 +191,11 @@ export const actions = {
                     strategy: 'jwt',
                     accessToken: cookieToken
                 })
+
+                dispatch('login', {
+                    token: accessToken,
+                    user: store.state.accounts.keyedById[store.state.accounts.currentId]
+                })
             } catch (error) {
                 dispatch('logout')
                 return
@@ -227,8 +232,9 @@ export const actions = {
     },
 
     login({ commit }, { token, user }) {
-    // this.$axios.setToken(token, 'bearer')
-    // this.$cookies.set('token', token)
+        console.log('[BlockHub] Logging in: ', user)
+        this.$axios.setToken(token, 'bearer')
+        // this.$cookies.set('token', token)
         this.$can.setUserId(user.userId)
         this.$can.setUserPermissions(user.userId, user.meta.permissions)
 
@@ -238,7 +244,8 @@ export const actions = {
     },
 
     logout({ commit }) {
-        // this.$axios.setToken(false)
+        console.log('[BlockHub] Logging out')
+        this.$axios.setToken(false)
         // this.$cookies.remove('token')
         commit('loggedIn', false)
         commit('user', null)
