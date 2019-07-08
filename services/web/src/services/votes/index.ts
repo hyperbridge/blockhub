@@ -73,7 +73,7 @@ export default function(app) {
 
                     profile.data[0].vote.forEach((voteFromProfile)=>object.data[0].vote.forEach((voteFromObject)=> {
                         if(voteFromProfile.id === voteFromObject.id){
-                        ret = voteFromProfile;
+                            ret = voteFromProfile;
                         }
                    }
                  ));

@@ -120,22 +120,13 @@ export default {
             }
         },
         onChangeType(event) {
-            if (event.target.value) {
-                this.selectObject = true;
-                this.selectedObject = event.target.value;
-            } else {
-                this.selectObject = false;
-                this.selectedObject = 'Object';
-            }
+                this.selectObject = Boolean(event.target.value);
+                this.selectedObject = event.target.value||'Object';
+
         },
         onChangeId(event) {
-            if (event.target.value) {
-                this.selectObjectId = true;       
-                this.selectedObjectId = event.target.value;
-            } else {
-                this.selectObjectId = false; 
-                this.selectedObjectId = ''
-            }
+                this.selectObjectId = Boolean(event.target.value)     
+                this.selectedObjectId = event.target.value||'';
         },
     },
     computed: {
