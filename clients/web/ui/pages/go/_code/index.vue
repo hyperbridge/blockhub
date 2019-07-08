@@ -24,7 +24,11 @@ export default {
             ]
         }
     },
-    props: ['code'],
+    computed: {
+        code() {
+            return this.$route.params.code
+        }
+    },
     mounted() {
         window.location = `blockhub://go/${this.code}`
     }

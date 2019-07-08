@@ -42,11 +42,9 @@
                                                     v-if="item.data.oldPrice"
                                                     class="price oldPrice">
                                                     {{ item.data.oldPrice | convertCurrency }}
-                                                <!--<span>usd</span>-->
                                                 </div>
                                                 <div class="price">
                                                     {{ item.data.price | convertCurrency }}
-                                                <!--<span>usd</span>-->
                                                 </div>
                                             </div>
                                             <c-button
@@ -77,13 +75,13 @@
                                 :noGutter="true"
                                 :onlyContentBg="true"
                                 :bgGradient="true">
-                                <p v-if="!item.data.products.length">
+                                <div v-if="!item.data.products.length">
                                     Nothing could be found. Want to <c-button
                                         status="plain"
                                         @click="$store.commit('application/activateModal', 'coming-soon')">
                                         Check for updates
                                     </c-button>?
-                                </p>
+                                </div>
                             </c-block>
                         </div>
                     </div>
@@ -106,13 +104,13 @@
                                 :noGutter="true"
                                 :onlyContentBg="true"
                                 :bgGradient="true">
-                                <p v-if="!item.data.products.length">
+                                <div v-if="!item.data.products.length">
                                     Nothing could be found. Want to <c-button
                                         status="plain"
                                         @click="$store.commit('application/activateModal', 'coming-soon')">
                                         Check for updates
                                     </c-button>?
-                                </p>
+                                </div>
                             </c-block>
                         </div>
                     </div>
@@ -243,13 +241,13 @@
                                         <c-curator-review :review="review" />
                                     </c-swiper-slide>
                                 </c-swiper>
-                                <p v-if="!item.data.reviews.length">
+                                <div v-if="!item.data.reviews.length">
                                     Nothing could be found. Want to <c-button
                                         status="plain"
                                         @click="$store.commit('application/activateModal', 'coming-soon')">
                                         Check for updates
                                     </c-button>?
-                                </p>
+                                </div>
                             </c-block>
                         </div>
                     </div>
@@ -293,13 +291,13 @@
                                             :parentImage="project.product && project.product.images.mediumTile" />
                                     </c-swiper-slide>
                                 </c-swiper>
-                                <p v-if="!item.data.projects.length">
+                                <div v-if="!item.data.projects.length">
                                     Nothing could be found. Want to <c-button
                                         status="plain"
                                         @click="$store.commit('application/activateModal', 'coming-soon')">
                                         Check for updates
                                     </c-button>?
-                                </p>
+                                </div>
                             </c-block>
                         </div>
                     </div>
@@ -470,8 +468,8 @@ export default {
     components: {
         'c-button': () => import('~/components/buttons/index').then(m => m.default || m),
         'c-tags': () => import('~/components/tags').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m),
+        'c-tab-universal': () => import('~/components/tab/tab-universal').then(m => m.default || m),
+        'c-tabs-universal': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
         'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
         'c-product-card': () => import('~/components/store/product-card').then(m => m.default || m),
@@ -520,7 +518,7 @@ export default {
         }
     },
     computed: {
-        assets(){
+        assets() {
             return []
         },
         sliced() {

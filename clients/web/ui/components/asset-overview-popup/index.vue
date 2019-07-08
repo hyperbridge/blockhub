@@ -50,7 +50,6 @@
                     :showArrows="false"
                     :showBackground="false" />
                 <div class="metadata__table padding-bottom-10">
-                    <!--{{ metadata }}-->
                     <div
                         v-for="(value, index) in metadata"
                         :key="index"
@@ -88,7 +87,7 @@ export default {
         priceCurrent: Number,
         acceptOffers: Boolean,
         metadata: {
-            type:  Array,
+            type: Array,
             default: () => []
         }
     }

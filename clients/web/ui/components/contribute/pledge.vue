@@ -12,39 +12,39 @@
                 Select this reward
             </div>
         </transition>
-        <h3>Pledge US {{ pledge.minPrice | convertCurrency }} or more</h3>
-        <h4 v-if="pledge.title">
-            {{ pledge.title }}
+        <h3>Pledge US {{ minPrice | convertCurrency }} or more</h3>
+        <h4 v-if="title">
+            {{ title }}
         </h4>
         <div class="pledge-item__text">
-            {{ pledge.description }}
+            {{ description }}
         </div>
         <div
-            v-if="!form && pledge.includes.length > 0"
+            v-if="!form && includes.length > 0"
             class="pledge-item__includes">
             <h6>Includes</h6>
             <ul>
                 <li
-                    v-for="(itm, index) in pledge.includes"
+                    v-for="(itm, index) in includes"
                     :key="index">
                     {{ itm.text }}
                 </li>
             </ul>
         </div>
         <div class="pledge-item__info">
-            <div v-if="pledge.deliveryDate">
+            <div v-if="deliveryDate">
                 <span class="h6">Estimated delivery</span>
                 {{ date }}
             </div>
-            <div v-if="pledge.shipsTo">
+            <div v-if="shipsTo">
                 <span class="h6">Ships to</span>
-                {{ pledge.shipsTo }}
+                {{ shipsTo }}
             </div>
             <div
-                v-if="pledge.backers"
+                v-if="backers"
                 class="w-100 mt-5">
                 <span class="h6">
-                    {{ pledge.backers }} backers
+                    {{ backers }} backers
                 </span>
             </div>
         </div>
@@ -57,7 +57,7 @@
                 </div>
                 <c-contribute-form
                     v-model="toBePaid"
-                    :defaultValue="pledge.minPrice"
+                    :defaultValue="minPrice"
                     :currency="currency"
                     :active="true"
                     @click="$emit('click')" />
@@ -71,11 +71,25 @@ import ContributeForm from '@/components/contribute/form.vue'
 import moment from 'moment'
 
 export default {
-    name: 'Pledge',
     components: {
         'c-contribute-form': ContributeForm
     },
-    props: ['pledge', 'currency'],
+    props: {
+        currency: {
+            type: String,
+            default: '$'
+        },
+        minPrice: Number,
+        title: String,
+        description: String,
+        includes: {
+            type: Array,
+            default: () => []
+        },
+        deliveryDate: String,
+        shipsTo: String,
+        backers: Number
+    },
     data() {
         return {
             form: false,
@@ -85,7 +99,7 @@ export default {
     },
     computed: {
         date() {
-            return moment(this.pledge.deliveryDate).format('DD MMMM, YYYY')
+            return moment(this.deliveryDate).format('DD MMMM, YYYY')
         }
     },
     methods: {

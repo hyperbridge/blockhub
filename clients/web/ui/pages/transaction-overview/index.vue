@@ -27,8 +27,10 @@
 export default {
     components: {
     },
-    props: ['id'],
     computed: {
+        id() {
+            return this.$route.params.id
+        },
         transaction() {
             if (!this.$store.state.application.transactions) { return }
 

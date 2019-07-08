@@ -21,9 +21,10 @@ export default {
         'c-list-item': () => import('~/components/help/simple-item').then(m => m.default || m),
         'c-card': () => import('~/components/help/help-card').then(m => m.default || m)
     },
-    props: ['id'],
     computed: {
-
+        id() {
+            return this.$route.params.id
+        }
     },
     created() {
         this.$store.commit('application/activateModal', 'coming-soon')

@@ -11,7 +11,6 @@
             </div>
         </div>
         <div class="settings__block-container">
-            <!--<transition-group name="fade">-->
             <c-block
                 v-if=" currentBlock == 'client' "
                 key="block_1"
@@ -304,7 +303,6 @@
                     </c-button>
                 </div>
             </c-block>
-            <!--</transition-group>-->
         </div>
     </div>
 </template>

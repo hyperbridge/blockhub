@@ -56,7 +56,7 @@
                         <div class="game-achievements__list">
                             <a
                                 v-for="(item, index) in achievements"
-                                v-if="game.achievements"
+                                v-if="achievements"
                                 :key="`achievements${index}`"
                                 :href="item.href"
                                 class="game-achievements__list-item">
@@ -114,7 +114,7 @@
                         </div>
                         <div class="game-news__list">
                             <ul>
-                                <li v-for="item in game.news">
+                                <li v-for="item in news">
                                     <h3 class="text-white mb-2 font-weight-bold">
                                         {{ item.title }}
                                     </h3>

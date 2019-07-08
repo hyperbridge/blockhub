@@ -105,7 +105,6 @@ export default {
         'c-modal': () => import('~/components/modal/custom').then(m => m.default || m),
         'c-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m)
     },
-    props: ['assets'],
     data() {
         return {
             previewAsset: null,
@@ -117,6 +116,9 @@ export default {
         }
     },
     computed: {
+        assets() {
+            return this.$route.params.assets
+        },
         labelText() {
             return `${this.allowSelect ? 'Disable' : 'Enable'} on click selection`
         },

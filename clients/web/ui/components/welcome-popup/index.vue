@@ -11,11 +11,8 @@
         <div
             slot="customContent"
             class="welcome-modal">
-            <c-tabs>
-                <c-tab
-                    name="Welcome"
-                    :selected="true"
-                    :showFooter="true">
+            <c-tabs :tabNames="['Welcome']">
+                <c-tab :tabId="1">
                     <div>
                         <c-welcome-box :prompt="true" />
                     </div>
@@ -38,8 +35,8 @@
 export default {
     components: {
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab').then(m => m.default || m),
+        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
+        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
         'c-welcome-box': () => import('~/components/welcome-box').then(m => m.default || m)
     },
     props: ['activated'],

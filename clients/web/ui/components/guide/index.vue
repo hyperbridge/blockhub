@@ -379,9 +379,7 @@
                 </div>
             </div>
         </c-block>
-        <!--Buttons block end-->
 
-        <!--Title block-->
         <c-block title="Heading">
             <div class="row">
                 <div class="col-12">

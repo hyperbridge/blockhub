@@ -414,8 +414,8 @@ export default {
         'c-privacy-block': () => import('~/components/privacy-block').then(m => m.default || m),
         'c-terms-block': () => import('~/components/terms-block').then(m => m.default || m),
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m)
+        'c-steps': () => import('~/components/steps/list').then(m => m.default || m),
+        'c-step': () => import('~/components/steps/_item').then(m => m.default || m)
     },
     data() {
         return {

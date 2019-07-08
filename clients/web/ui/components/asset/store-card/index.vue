@@ -3,7 +3,7 @@
         class="store-card"
         :class="'store-card--' + tags[0]">
         <div
-            v-if="assetTags.length"
+            v-if="tags.length"
             class="store-card__badges">
             <c-badge-card
                 v-for="(tag, index) in tags"

@@ -122,7 +122,6 @@ export default {
         'c-asset-preview-basic': () => import('~/components/asset/preview-basic').then(m => m.default || m),
         'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m)
     },
-    props: ['id', 'profileId'],
     data() {
         return {
             openedOffer: null,
@@ -132,6 +131,12 @@ export default {
         }
     },
     computed: {
+        id() {
+            return this.$route.params.id
+        },
+        profileId() {
+            return this.$route.params.profileId
+        },
         offers() {
             return []// this.$store.getters['assets/offersMap'];
         },
