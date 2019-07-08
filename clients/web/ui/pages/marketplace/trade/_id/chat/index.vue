@@ -63,7 +63,6 @@ export default {
     components: {
         'c-chat-message': () => import('~/components/chat-message').then(m => m.default || m)
     },
-    props: ['trx'],
     data() {
         return {
             newMessage: '',
@@ -72,6 +71,9 @@ export default {
         }
     },
     computed: {
+        trx() {
+            return this.$route.params.trx
+        },
         trxRaw() {
             return this.$store.state.assets.trxs[this.trx.id]
         },
