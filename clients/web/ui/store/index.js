@@ -5,6 +5,7 @@ import * as Bridge from '../framework/desktop-bridge'
 
 export const strict = false
 
+let app = null
 let service = null
 let auth = null
 
@@ -122,7 +123,11 @@ if (decentralizedMode) {
 }
 
 export const actions = {
-    async nuxtServerInit({ commit, dispatch }, { app, req, store, $sentry }) {
+    async nuxtServerInit({ commit, dispatch }, context) {
+        const { req, store, $sentry } = context
+
+        app = context.app
+
         const origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg' // eslint-disable-line no-negated-condition
 
         const storage = {
@@ -211,38 +216,34 @@ export const actions = {
             .catch(e => { console.log('Feathers exception', e) })
     },
 
-    nuxtClientInit ({ commit }, context) {
-      if (context.store.state.user) {
-        const { userId, meta } = context.store.state.user
-        this.$can.setUserId(userId)
-        this.$can.setUserPermissions(userId, meta.permissions)
-      }
+    nuxtClientInit({ commit }, context) {
+        if (context.store.state.user) {
+            const { userId, meta } = context.store.state.user
+            this.$can.setUserId(userId)
+            this.$can.setUserPermissions(userId, meta.permissions)
+        }
     },
 
-  /*
-    Whenever possible, use an action to modify state by commiting to the mutation.
-    Actions have the benefit of being able to perform async operations.
-  */
- login ({ commit }, { token, user }) {
+    login({ commit }, { token, user }) {
     // this.$axios.setToken(token, 'bearer')
     // this.$cookies.set('token', token)
-    this.$can.setUserId(user.userId)
-    this.$can.setUserPermissions(user.userId, user.meta.permissions)
+        this.$can.setUserId(user.userId)
+        this.$can.setUserPermissions(user.userId, user.meta.permissions)
 
-    commit('token', token)
-    commit('user', user)
-    commit('loggedIn', true)
-  },
+        commit('token', token)
+        commit('user', user)
+        commit('loggedIn', true)
+    },
 
-  logout ({ commit }) {
-    // this.$axios.setToken(false)
-    // this.$cookies.remove('token')
-    commit('loggedIn', false)
-    commit('user', null)
-    commit('token', null)
-    app.$cookies.remove('feathers-jwt')
-    this.$router.replace({ path: 'login' })
-  },
+    logout({ commit }) {
+        // this.$axios.setToken(false)
+        // this.$cookies.remove('token')
+        commit('loggedIn', false)
+        commit('user', null)
+        commit('token', null)
+        app.$cookies.remove('feathers-jwt')
+        this.$router.replace({ path: 'login' })
+    },
 
     init({ commit }, payload) {
         commit('init', payload)
