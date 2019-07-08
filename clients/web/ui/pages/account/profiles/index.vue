@@ -117,12 +117,6 @@
                 </c-heading-bar>
             </div>
 
-            <!-- <transition-group
-                tag="div"
-                class="profile-picker"
-                name="item"
-                :duration="100"
-            > -->
             <c-loading
                 key="loading"
                 :enabled="!filteredProfiles.length"
@@ -181,8 +175,6 @@
                     </div>
                 </div>
             </div>
-            <!-- </transition-group> -->
-
 
             <c-modal-light
                 v-if="removeProfile"

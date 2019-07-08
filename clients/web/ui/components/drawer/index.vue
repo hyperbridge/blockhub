@@ -41,19 +41,6 @@
                         <span class="text">{{ product.name }}</span>
                     </c-button>
 
-                    <!-- <c-button status="none" to="/product/1">
-                        <span class="icon icon-letter-circle">B</span>
-                        <span class="text">BlockHub</span>
-                    </c-button>
-                    <c-button status="none" to="/product/1">
-                        <span class="icon icon-letter-circle">D</span>
-                        <span class="text">Dataforce</span>
-                    </c-button>
-                    <c-button status="none" to="/product/1">
-                        <span class="icon icon-letter-circle">R</span>
-                        <span class="text">Republic</span>
-                    </c-button> -->
-
                     <c-button
                         v-if="developerMode && products.length > 3"
                         status="none"
@@ -197,7 +184,6 @@
                     Sitemap
                 </c-button>
 
-                <!--Global Bottom banner-->
                 <div
                     v-if="!developerMode"
                     class="developer-banner">
@@ -323,16 +309,16 @@
                         </c-button>
                         <br><br>
                     </div>
-                    <!-- <div
+                    <div
                         v-if="desktopMode"
                         hidden>
                         <input
                             ref="desktopMessage"
                             type="text">
-                        <c-button @click="sendDesktopMessage()">
+                        <c-button @click="sendDesktopMessage">
                             Send Message To Desktop
                         </c-button>
-                    </div> -->
+                    </div>
                     <div
                         v-if="developerMode"
                         hidden>

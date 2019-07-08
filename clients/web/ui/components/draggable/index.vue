@@ -1,6 +1,3 @@
-<!-- Author - mauricius -->
-<!-- Copied from https://github.com/mauricius/vue-draggable-resizable -->
-
 <template>
     <div
         :style="style"
@@ -531,7 +528,7 @@ export default {
         },
         deselect(e) {
             const target = e.target || e.srcElement
-            const regex = new RegExp(`${this.className }-([trmbl]{2})`, '')
+            const regex = new RegExp(`${this.className}-([trmbl]{2})`, '')
             if (!this.$el.contains(target) && !regex.test(target.className)) {
                 if (this.enabled && !this.preventDeactivation) {
                     this.enabled = false
