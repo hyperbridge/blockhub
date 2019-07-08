@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import axios from 'axios'
 import FormData from 'form-data'
 import * as DB from '@/db'
 import * as Bridge from '@/framework/desktop-bridge'
@@ -377,7 +376,7 @@ export const mutations = {
         bodyFormData.set('entry.399172045', payload.value)
         bodyFormData.set('entry.832916558', payload.user || '')
 
-        axios({
+        this.$axios({
             method: 'post',
             url: 'https://docs.google.com/forms/d/1W1_7UuaDjjCKp08vSllvyKZTQRCSej9kd743Z2N1NvY/formResponse',
             data: bodyFormData,

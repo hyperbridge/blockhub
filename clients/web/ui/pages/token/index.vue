@@ -127,8 +127,8 @@
                             :limitTo="2">
                             <template v-slot="props">
                                 <c-asset-store-card
-                                    v-if="props.items"
                                     v-for="(item) in props.items"
+                                    v-if="props.items"
                                     :key="item.id"
                                     :class="item.css"
                                     :assetName="item.name"
@@ -1137,7 +1137,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { setInterval } from 'core-js'
 
 
@@ -1160,7 +1159,6 @@ export default {
         'c-carousel-3d': () => import('~/components/carousel-3d').then(m => m.default || m),
         'c-asset-store-card': () => import('~/components/asset/store-card').then(m => m.default || m),
         'c-welcome-box': () => import('~/components/welcome-box').then(m => m.default || m),
-
         'c-token-sale': () => import('~/components/token-sale-box').then(m => m.default || m)
     },
     data() {
