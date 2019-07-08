@@ -120,13 +120,13 @@ export default {
             }
         },
         onChangeType(event) {
-                this.selectObject = Boolean(event.target.value);
-                this.selectedObject = event.target.value||'Object';
+            this.selectObject = Boolean(event.target.value);
+            this.selectedObject = event.target.value||'Object';
 
         },
         onChangeId(event) {
-                this.selectObjectId = Boolean(event.target.value)     
-                this.selectedObjectId = event.target.value||'';
+            this.selectObjectId = Boolean(event.target.value)     
+            this.selectedObjectId = event.target.value||'';
         },
     },
     computed: {

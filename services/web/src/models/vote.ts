@@ -49,32 +49,7 @@ export default class Vote extends BaseModel {
                         to: 'nodes.toProfileId'
                     }
                 }
-            },
-            // idea: {
-            //     relation: Model.HasOneThroughRelation,
-            //     modelClass: Idea,
-            //     join: {
-            //         from: 'votes.id',
-            //         to: 'ideas.id',
-            //         through: {
-            //             from: 'nodes.fromVoteId',
-            //             to: 'nodes.toIdeaId'
-            //         }
-            //     }
-            // },
-
-            // project: {
-            //     relation: Model.HasOneThroughRelation,
-            //     modelClass: Project,
-            //     join: {
-            //         from: 'votes.id',
-            //         to: 'projects.id',
-            //         through: {
-            //             from: 'nodes.fromVoteId',
-            //             to: 'nodes.toProjectId'
-            //         }
-            //     }
-            // }
+            }
         }
     }
 }
