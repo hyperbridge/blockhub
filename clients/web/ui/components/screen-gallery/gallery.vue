@@ -75,7 +75,7 @@ export default {
     },
     props: {
         main: {
-            type: String,,
+            type: String,
             default: 'https://via.placeholder.com/400x300'
         },
         items: {
