@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <div class="purchase-block__buttons-group col-12">
+        <div class="purchase-block__buttons-group padding-bottom-30 col-12">
             <c-button
                 v-if="isReleased && price"
                 status="outline-success"

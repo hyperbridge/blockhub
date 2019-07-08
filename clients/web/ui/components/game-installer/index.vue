@@ -126,9 +126,9 @@ export default {
             default: '500'
         },
         name: String,
-        mac: String,
-        win: String,
-        linux: String,
+        mac: Boolean,
+        win: Boolean,
+        linux: Boolean,
         img: String,
         filesList: {
             type: Array,

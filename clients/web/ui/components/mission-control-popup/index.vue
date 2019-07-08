@@ -6,7 +6,7 @@
             <div class="grid-container">
                 <div class="grid__wrapper">
                     <div class="grid__top position-relative">
-                        <div class="grid">
+                        <div class="grid d-flex justify-content-center">
                             <c-icon
                                 v-for="(item, index) in items"
                                 :key="index"
@@ -16,7 +16,6 @@
                                 :href="item.href"
                                 :to="item.to"
                                 :image="item.image"
-                                :text="item.text"
                                 :eventKey="item.eventKey"
                                 :eventValue="item.eventValue"
                                 :textColor="item.textColor"
@@ -25,8 +24,8 @@
                                 :removable="item.removable"
                                 :percent="item.percent"
                                 :active="item.active"
-                                class="margin-bottom-10 border-none"
-                                style="display: inline-block; margin-right: 10px;"
+                                class="margin-right-10 margin-left-10"
+                                :style="`z-index: ${ 100-index }`"
                                 @remove="remove()" />
                         </div>
                     </div>
@@ -133,14 +132,14 @@ export default {
 
     .grid__top {
         margin-top: 0;
-        overflow-y: auto;
-        overflow-x: hidden;
-        margin-bottom: 10px;
-        &::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0) !important;
-            border: 0 none !important;
-            display: none;
-        }
+        /*overflow-y: auto;*/
+        /*overflow-x: hidden;*/
+        /*margin-bottom: 10px;*/
+        /*&::-webkit-scrollbar-thumb {*/
+            /*background: rgba(255, 255, 255, 0) !important;*/
+            /*border: 0 none !important;*/
+            /*display: none;*/
+        /*}*/
 
     }
     .grid__bottom{

@@ -8,11 +8,10 @@
             class="content login-container">
             <div class="container">
                 <div class="col-12">
-                    <c-tabs :currentStep="current_step">
+                    <c-tabs :tabNames="['Account Verification']"
+                            styled>
                         <c-tab
-                            name="Account Verification"
-                            :selected="true"
-                            :showFooter="true">
+                            :tabId="1">
                             <div class="tab-container">
                                 <div
                                     v-if="isVerified"
@@ -167,7 +166,7 @@
                                         </div>
 
                                         <br>
-                                        <p
+                                        <div
                                             v-if="errors.length"
                                             class="errors">
                                             <strong>Please correct the following error(s):</strong>
@@ -178,7 +177,7 @@
                                                     {{ error }}
                                                 </li>
                                             </ul>
-                                        </p>
+                                        </div>
                                         <br>
 
                                         <c-button
@@ -209,13 +208,13 @@
 
 
 <script>
-import Veriff from '@veriff/js-sdk'
+// import Veriff from '@veriff/js-sdk'
 import axios from 'axios'
 
 export default {
     components: {
-        'c-tab': () => import('~/components/tab/tab').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m),
+        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
+        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m)
     },
     data() {
