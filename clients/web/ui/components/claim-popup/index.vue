@@ -238,8 +238,6 @@ import FormData from 'form-data'
 export default {
     components: {
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m)
     },
     props: ['activated'],
     data() {

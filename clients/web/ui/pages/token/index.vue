@@ -1155,8 +1155,6 @@ export default {
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         'c-block': () => import('~/components/block').then(m => m.default || m),
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
         'c-carousel-3d': () => import('~/components/carousel-3d').then(m => m.default || m),
         'c-asset-store-card': () => import('~/components/asset/store-card').then(m => m.default || m),
         'c-welcome-box': () => import('~/components/welcome-box').then(m => m.default || m),

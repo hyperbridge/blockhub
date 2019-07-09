@@ -469,9 +469,6 @@ import { mapGetters } from 'vuex'
 export default {
     components: {
         'c-button': () => import('~/components/buttons/index').then(m => m.default || m),
-        'c-tags': () => import('~/components/tags').then(m => m.default || m),
-        'c-tab-universal': () => import('~/components/tab/tab-universal').then(m => m.default || m),
-        'c-tabs-universal': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
         'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
         'c-product-card': () => import('~/components/store/product-card').then(m => m.default || m),

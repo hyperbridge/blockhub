@@ -193,8 +193,6 @@ import axios from 'axios'
 
 export default {
     components: {
-        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         'c-profile-picker': () => import('~/components/profile-picker').then(m => m.default || m)
     },

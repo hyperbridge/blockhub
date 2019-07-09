@@ -288,8 +288,6 @@ export default {
         }
     },
     components: {
-        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
         'c-game-includes-item': () => import('~/components/game-series/game-includes-item').then(m => m.default || m),
         'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m),
         'c-project-card': () => import('~/components/project/card').then(m => m.default || m)

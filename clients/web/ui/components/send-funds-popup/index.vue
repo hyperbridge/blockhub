@@ -189,16 +189,12 @@
 </template>
 
 <script>
-import Tabs from '../tab/tabs'
-import Tab from '../tab/tab'
 import Switch from '../switch'
 import Buttons from '../buttons'
 import PopUp from '../popups'
 
 export default {
     components: {
-        'c-tab': Tab,
-        'c-tabs': Tabs,
         'c-switch': Switch,
         'c-button': Buttons,
         'c-popup': PopUp

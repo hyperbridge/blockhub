@@ -386,16 +386,12 @@
 </template>
 
 <script>
-import Tabs from '../tab/tabs.vue'
-import Tab from '../tab/tab.vue'
 import Switch from '../switch/index'
 import Buttons from '../buttons/index.vue'
 import PopUp from '../popups/index'
 
 export default {
     components: {
-        'c-tab': Tab,
-        'c-tabs': Tabs,
         'c-switch': Switch,
         'c-button': Buttons,
         'c-popup': PopUp
