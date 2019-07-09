@@ -1,5 +1,6 @@
 # Web Service API
 
+
 ```sh
 git clone https://github.com/hyperbridge/blockhub
 cd services/web
@@ -40,3 +41,14 @@ Refer to [SwaggerHub](https://app.swaggerhub.com/apis/hyperbri/blockhub-web-serv
     })
     return q;
   }
+
+
+## DB operations
+
+Create and run a specific seed file:
+
+```bash
+npm i -g https://github.com/tgriesser/knex.git#master
+knex seed:create roles
+knex seed:run --specific=roles.js
+```
