@@ -1,3 +1,8 @@
+License Agreement for BLOCKHUB
+––––––––––––––––––––––––––––––––––––––––––––––––––
+
+BLOCKHUB combines free software packages (like a Linux distribution). BLOCKHUB is totally free of charge. You can copy it under the terms of the Crypto General Public License ("CGPL"). But only the compilation of BLOCKHUB and the BLOCKHUB program itself is published under the CGPL. The contained products may have different licenses. Please check every single license to get a summary of what is allowed and what not.
+
 Crypto General Public License
 =================================
 
