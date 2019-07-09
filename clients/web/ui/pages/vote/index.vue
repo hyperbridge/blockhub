@@ -35,18 +35,13 @@
                         <select
                             class="form-control"
                             @change="onChangeId($event)">
-                            <option
-                                value=""
-                                selected>
-                                Please Select {{selectedObject}} Name.
-                            </option>
                             <option v-for="object in objects" v-bind:value="object.id" :key="object.id">
                                 {{object.name}}
                             </option>
                         </select>
                     </div>
                 </div>
-                <div v-if="visibleVote" class="invert">
+                <div v-if="selectObject && selectObjectId" class="invert">
                     <div class="form-group">
                         <c-vote ref="myVote" :votes="0"  v-on:getVote="getVote" />
                     </div>
@@ -122,17 +117,13 @@ export default {
         onChangeType(event) {
             this.selectObject = Boolean(event.target.value);
             this.selectedObject = event.target.value||'Object';
-
         },
         onChangeId(event) {
-            this.selectObjectId = Boolean(event.target.value)     
+            this.selectObjectId = Boolean(event.target.value)
             this.selectedObjectId = event.target.value||'';
         },
     },
     computed: {
-        visibleVote() {
-            return this.selectObject&&this.selectObjectId
-        },
         objects() {
             if (this.selectedObject != 'Object') {
                 let object = this.selectedObject.toLowerCase();

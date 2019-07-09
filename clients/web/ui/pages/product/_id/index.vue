@@ -10,7 +10,6 @@
             v-if="!product && loading"
             :enabled="loading"
             size="lg" />
-
         <div
             v-else-if="!product"
             class="row">

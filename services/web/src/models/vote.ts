@@ -1,8 +1,5 @@
 import { Model, RelationMappings } from 'objection'
 import Profile from './profile'
-import Idea from './idea'
-import Product from './product'
-import Project from './project'
 import Node from './node'
 import BaseModel from './base'
 
