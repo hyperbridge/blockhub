@@ -11,6 +11,7 @@ export default {
     props: {
         type: {
             type: String,
+            default: 'none',
             validator: val => ['initialized', 'authenticated', 'user', 'none'].includes(val)
         }
     },
