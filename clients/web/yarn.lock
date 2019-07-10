@@ -769,6 +769,15 @@
     events "^3.0.0"
     uberproto "^2.0.2"
 
+"@feathersjs/rest-client@^1.4.7":
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/@feathersjs/rest-client/-/rest-client-1.4.7.tgz#6fb556721b661f7aa73f27173925b17274fae164"
+  integrity sha512-Eybe9iTMz2r1J8ITRZH4/WGfIhwSIzP9kiTpwAVESo6NGE6rgwvN95FmtI5AtCABV5v4C2Cy/tVDsMMa9Dgs+A==
+  dependencies:
+    "@feathersjs/commons" "^4.0.0"
+    "@feathersjs/errors" "^3.3.6"
+    qs "^6.5.0"
+
 "@feathersjs/socketio-client@^1.1.5":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@feathersjs/socketio-client/-/socketio-client-1.2.1.tgz#2480cb113b2c7c7fb8f49442bf8b764dc20931f6"
@@ -8653,7 +8662,7 @@ qartjs@^1.1.2:
   dependencies:
     canvas "^2.4.1"
 
-qs@6.7.0, qs@^6.6.0:
+qs@6.7.0, qs@^6.5.0, qs@^6.6.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
