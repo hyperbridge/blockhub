@@ -32,6 +32,17 @@ const StoreDummy = {
 Vue.use(StoreDummy)
 
 
+Vue.component('nuxt-link', {
+		props: ['to'],
+		methods: {
+				log() {
+						action('link target')(this.to)
+				},
+		},
+		template: '<div @click="log()"><slot /></div>',
+})
+
+
 Vue.component('router-link', {
     props: ['to'],
     methods: {
@@ -54,20 +65,6 @@ Vue.component('nuxt-link', {
 
 // addDecorator(withViewport('desktop'))
 //addDecorator(StoryRouter())
-
-
-storiesOf('test', module)
-    .add('item', () => ({
-        components: {
-        },
-        data() {
-            return {
-                title: 'test',
-                price: '10.00'
-            }
-        },
-        template: '<div class="row"><div class="col-6 p-5">{{ title }}</div></div>'
-    }))
 
 
 import PromotionItem from '@/components/promotion-box/item'
@@ -199,9 +196,11 @@ storiesOf('Notifications', module)
         },
         template: `
             <div class="row m-0">
-                <div class="col-4 pt-3 text-white">
+                <div class="col-4 pt-3 text-white d-flex flex-column">
                     Single:
                     <c-notification :notification="notif"/>
+                </div>
+                <div class="col-4 pt-3 text-white d-flex flex-column">
                     Multiple:
                     <c-notification v-for="(notif, index) in notifs" :key="index" :notification="notif"/>
                 </div>
@@ -344,7 +343,7 @@ storiesOf('Searcher', module)
     }))
 
 import RatingStars from '@/components/rating-stars';
-import RatingBlock from '@/components/rating-block/index'
+import RatingBlock from '@/components/rating-block';
 
 storiesOf('Rating', module)
     .add('Stars', () => ({
@@ -391,13 +390,11 @@ storiesOf('Author', module)
         components: {Author},
         data() {
             return {
-                author: {
-                    name: 'SatoSan',
-                    img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'
-                }
+		            name: 'SatoSan',
+		            img: 'https://via.placeholder.com/150'
             }
         },
-        template: `<div class="text-white p-5"><author :author="author"/></div>`
+        template: `<div class="text-white p-5"><author :name="name" :img="img"/></div>`
     }))
 
 import Tags from '@/components/tags';
@@ -876,28 +873,6 @@ import MilestonesLine from '@/components/milestones-line'
 storiesOf('Milestones Line', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
-        components: {
-            'c-milestones-line': MilestonesLine
-        },
-        data: () => object('Data', data.MilestonesLine),
-        template: `<div class="row m-0">
-                <div class="col-8 p-4">
-                    <c-milestones-line :milestones="milestones" />
-                </div>
-            </div>`
-    }))
-    .add('in progress', () => ({
-        components: {
-            'c-milestones-line': MilestonesLine
-        },
-        data: () => object('Data', data.MilestonesLine),
-        template: `<div class="row m-0">
-                <div class="col-8 p-4">
-                    <c-milestones-line :milestones="milestones" />
-                </div>
-            </div>`
-    }))
-    .add('complete', () => ({
         components: {
             'c-milestones-line': MilestonesLine
         },
@@ -2027,7 +2002,7 @@ const assets_list = [
             "current": 2.99
         },
         count: '240.000',
-        image: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
+		    image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
     },
     {
         name: 'some another item name',
@@ -2106,52 +2081,64 @@ storiesOf('Assets Overview Popup', module)
         },
         data() {
             return object('Data', {
-                asset: {
-                    metadata: [
-                        {
-                            "label": "type",
-                            "text": "Legendary Two Handed Sword"
-                        },
-                        {
-                            "label": "average dps",
-                            "text": "2,903.6"
-                        },
-                        {
-                            "label": "Damage Range",
-                            "text": "2193-2880"
-                        },
-                        {
-                            "label": "Attack speed",
-                            "text": "1.15"
-                        },
-                        {
-                            "label": "Bonus 1",
-                            "text": "+1379-1679 Damage, +9% Damage, +1121 strenght"
-                        },
-                        {
-                            "label": "Bonus 2",
-                            "text": "Monster kills grant +151 experiance"
-                        },
-                        {
-                            "label": "Level Requirement",
-                            "text": "70"
-                        },
-                        {
-                            "label": "Item Durability",
-                            "text": "40/41"
-                        }
-                    ],
-                    price: {
-                        "min": 0.99,
-                        "max": 9.99,
-                        "current": 2.99
-                    }
-                }
+		            image: 'https://via.placeholder.com/300',
+		            id: '123',
+		            name: 'Asset title',
+		            productName: 'Asset product name',
+		            acceptOffers: true,
+		            metadata: [
+				            {
+						            "label": "type",
+						            "text": "Legendary Two Handed Sword"
+				            },
+				            {
+						            "label": "average dps",
+						            "text": "2,903.6"
+				            },
+				            {
+						            "label": "Damage Range",
+						            "text": "2193-2880"
+				            },
+				            {
+						            "label": "Attack speed",
+						            "text": "1.15"
+				            },
+				            {
+						            "label": "Bonus 1",
+						            "text": "+1379-1679 Damage, +9% Damage, +1121 strenght"
+				            },
+				            {
+						            "label": "Bonus 2",
+						            "text": "Monster kills grant +151 experiance"
+				            },
+				            {
+						            "label": "Level Requirement",
+						            "text": "70"
+				            },
+				            {
+						            "label": "Item Durability",
+						            "text": "40/41"
+				            }
+		            ],
+		            price: {
+				            "min": 0.99,
+				            "max": 9.99,
+				            "current": 2.99
+		            }
             })
         },
         template: `
          <div class="row m-0 p-3">
-             <c-asset-popup :asset="asset" />
+             <c-asset-popup 
+                :image="image"
+                :id="id"
+                :name="name"
+                :productName="productName"
+                :priceMin="price.min"
+                :priceMax="price.max"
+                :priceCurrent="price.current"
+                :acceptOffers="acceptOffers"
+                :metadata="metadata" />
          </div>
         `
     }));
@@ -2179,7 +2166,7 @@ storiesOf('Switch', module)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-switch label="Some text" label_position="right" label_size="22px" />
+             <c-switch label="Some text" labelPosition="right" labelSize="22px" />
          </div>
         `
     }))
@@ -2235,7 +2222,7 @@ storiesOf('Assets List', module)
                 items: [
                     {
                         image: 'https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de',
-                        title: 'Magic Plate Armor',
+                        name: 'Magic Plate Armor',
                         price: {
                             "min": 0.99,
                             "max": 9.99,
@@ -2246,7 +2233,7 @@ storiesOf('Assets List', module)
                     },
                     {
                         image: 'https://vignette.wikia.nocookie.net/angrybirds-fiction/images/8/8b/Toons_assets_chuck_01.png/revision/latest?cb=20150120103056&path-prefix=ru',
-                        title: 'Magic Chuck',
+		                    name: 'Magic Chuck',
                         price: {
                             "min": 0.99,
                             "max": 9.99,
@@ -2930,7 +2917,14 @@ storiesOf('Product Community', module)
         template: `
             <div class="row m-0 p-5">
                 <div class="col-10">
-                    <c-post :post="post"/>
+                    <c-post :id="post.id"
+                            :title="post.title" 
+                            :rate="post.rate" 
+                            :commentsCount="post.comments_count" 
+                            :author="post.author" 
+                            :contentImg="post.content.img" 
+                            :contentText="post.content.text" 
+                            :comments="post.content.comments"/>
                 </div>
             </div>
         `
@@ -2942,7 +2936,10 @@ storiesOf('Product Community', module)
         data: () => data.ProductCommunity,
         template: `
             <div class="padding-30">
-                <c-comment :comment="post.content.comments[0]"/>
+                <c-comment  :rate="post.content.comments[0].rate"
+                            :author="post.content.comments[0].author"
+                            :date="post.content.comments[0].date"
+                            :text="post.content.comments[0].text"/>
             </div>
         `
     }))
@@ -3041,7 +3038,7 @@ storiesOf('Project Card', module)
                                     :parentImage="project.game.img"
                                     :parentName="project.game.title"
                                     :parentDeveloper="project.game.developer"
-                                    :id="id"
+                                    :id="project.id"
                                     customClass="margin-bottom-20"/>
                 </div>
             </div>
@@ -3071,7 +3068,7 @@ storiesOf('Sending Funds(not finished)', module)
     }))
 
 
-import UserCard from '@/components/user-card/index';
+import UserCard from '@/components/user-card';
 
 storiesOf('User Card', module)
     .add('default', () => ({
@@ -3138,70 +3135,80 @@ import ProductsCards from '@/components/store/product-cards';
 
 const productsCardsData = [
     {
-        id: "8",
+        id: 8,
         name: "Gothic® 3",
-        images: {
-            header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
-            mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
-            main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
-            preview: [
-                "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
-                "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004034.1920x1080.jpg?t=1533039803",
-                "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004035.1920x1080.jpg?t=1533039803",
-                "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004037.1920x1080.jpg?t=1533039803"
-            ]
+		    meta: {
+				    images: {
+						    header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+						    mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
+						    main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+						    preview: [
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004034.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004035.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004037.1920x1080.jpg?t=1533039803"
+						    ]
+				    },
+				    developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
         },
         author: "Piranha Bytes",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/901191/movie480.webm?t=1490866901"],
-        developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     },
     {
-        id: "9",
+        id: 9,
         name: "The Witcher® 3: Wild Hunt",
-        images: {
-            header: "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_b74d60ee215337d765e4d20c8ca6710ae2362cc2.600x338.jpg?t=1529405012",
-            mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/292030/header.jpg?t=1529405012",
-            main: "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_b74d60ee215337d765e4d20c8ca6710ae2362cc2.600x338.jpg?t=1529405012",
-            preview: [
-                "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012",
-                "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_64eb760f9a2b67f6731a71cce3a8fb684b9af267.600x338.jpg?t=1529405012",
-                "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_eda99e7f705a113d04ab2a7a36068f3e7b343d17.600x338.jpg?t=1529405012",
-                "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_d5b80eb63c12a6484f26796f3e34410651bba068.600x338.jpg?t=1529405012"
-            ]
-        },
+		    meta: {
+				    images: {
+						    header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+						    mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
+						    main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+						    preview: [
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004034.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004035.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004037.1920x1080.jpg?t=1533039803"
+						    ]
+				    },
+				    developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
+		    },
         author: "CD PROJEKT RED",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256658589/movie480.webm?t=1528288687"],
-        developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     },
     {
-        id: "10",
+        id: 10,
         name: "Fallout 4",
-        images: {
-            header: "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_c6b798424a93617b4b825aea3bcd9547c0b0a5ce.1920x1080.jpg?t=1533676954",
-            mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/377160/header.jpg?t=1533676954",
-            main: "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_c6b798424a93617b4b825aea3bcd9547c0b0a5ce.1920x1080.jpg?t=1533676954",
-            preview: [
-                "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_f7861bd71e6c0c218d8ff69fb1c626aec0d187cf.1920x1080.jpg?t=1533676954",
-                "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_910437ac708aed7c028f6e43a6224c633d086b0a.1920x1080.jpg?t=1533676954",
-                "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_f649b8e57749f380cca225db5074edbb1e06d7f5.1920x1080.jpg?t=1533676954",
-                "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_c310f858e6a7b02ffa21db984afb0dd1b24c1423.1920x1080.jpg?t=1533676954"
-            ]
-        },
+		    meta: {
+				    images: {
+						    header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+						    mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
+						    main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+						    preview: [
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004034.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004035.1920x1080.jpg?t=1533039803",
+								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004037.1920x1080.jpg?t=1533039803"
+						    ]
+				    },
+				    developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
+		    },
         author: "Bethesda",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256657338/movie480.webm?t=1447378505"],
-        developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     }
 ];
+
 storiesOf('Product Card', module)
     .add('basic', () => ({
         components: {ProductCard},
-        data: () => ({products: productsCardsData}),
+        data: () => ({ products: productsCardsData }),
         template: `
             <div class="row">
                 <product-card
                     v-for="(product, index) in products"
-                    :product="product"
-                    :key="index"
+                    :id="product.id"
+                    :imagesMediumTile="product.meta.images.mediumTile"
+                    :name="product.name"
+                    :metaShortDescription="product.meta.shortDescription"
+                    :metaDeveloperTags="product.meta.developerTags"
                     class="col-3"
                 />
             </div>
@@ -3214,7 +3221,14 @@ storiesOf('Product Card', module)
             <div class="row">
                 <product-card-dynamic
                     v-for="(product, index) in products"
-                    :product="product"
+                    :id="product.id"
+                    :name="product.name"
+                    :price="product.price"
+                    :imagesMediumTile="product.meta.images.mediumTile"
+                    :video="product.video"
+                    :shortDescription="product.shortDescription"
+                    :imagesPreview="product.meta.images.review"
+                    :developerTags="product.meta.developerTags"
                     :key="index"
                     class="col-3"
                 />
@@ -3309,22 +3323,22 @@ storiesOf('Collection', module)
         },
         data() {
             return {
-                item: {
-                    title: 'Collection name',
-                    user: 'John Doel',
-                    countNumber: 2741,
-                    background: 'https://via.placeholder.com/100x100',
-                    images: [
-                        'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                    ]
-                }
+                id: 44,
+		            title: 'Collection name',
+		            user: 'John Doel',
+		            countNumber: 2741,
+		            background: 'https://via.placeholder.com/100x100',
+		            assets: []
             }
         },
         template: `
             <div class="col-3 p-5">
-                <c-collection-item :item="item" />
+                <c-collection-item 
+                :id="id" 
+                :name="title" 
+                :author="user" 
+                :assets="assets" 
+                :background="background" />
             </div>
         `
     }))
@@ -3339,82 +3353,21 @@ storiesOf('Collection', module)
             return {
                 items: [
                     {
-                        title: 'Collection name',
-                        user: 'John Doel',
-                        countNumber: 2741,
-                        background: 'https://via.placeholder.com/100x100',
-                        images: [
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        ]
+		                    name: 'Collection name',
+                        meta: {
+		                        author: 'John Doel',
+		                        background: 'https://via.placeholder.com/100x100',
+                            assets: []
+                        },
                     },
                     {
-                        title: 'Collection name',
-                        user: 'John Doel',
-                        countNumber: 2741,
-                        background: 'https://via.placeholder.com/100x100',
-                        images: [
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        ]
+		                    name: 'Collection name',
+                        meta: {
+		                        author: 'John Doel',
+		                        background: 'https://via.placeholder.com/100x100',
+                            assets: []
+                        },
                     },
-                    {
-                        title: 'Collection name',
-                        user: 'John Doel',
-                        countNumber: 2741,
-                        background: 'https://via.placeholder.com/100x100',
-                        images: [
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        ]
-                    },
-                    {
-                        title: 'Collection name',
-                        user: 'John Doel',
-                        countNumber: 2741,
-                        background: 'https://via.placeholder.com/100x100',
-                        images: [
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        ]
-                    },
-                    {
-                        title: 'Collection name',
-                        user: 'John Doel',
-                        countNumber: 2741,
-                        background: 'https://via.placeholder.com/100x100',
-                        images: [
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        ]
-                    },
-                    {
-                        title: 'Collection name',
-                        user: 'John Doel',
-                        countNumber: 2741,
-                        background: 'https://via.placeholder.com/100x100',
-                        images: [
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        ]
-                    },
-                    {
-                        title: 'Collection name',
-                        user: 'John Doel',
-                        countNumber: 2741,
-                        background: 'https://via.placeholder.com/100x100',
-                        images: [
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                            'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        ]
-                    }
                 ],
                 sliderOptions: {
                     slidesPerView: 4,
@@ -3428,16 +3381,17 @@ storiesOf('Collection', module)
         },
         template: `
             <div class="p-5" style="width: 900px">
-                <c-collection-list title="Get Started" :collections="items"
-                                    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet tellus in neque porttitor consequat."
-                                    >
+                <c-collection-list 
+                title="Get Started" 
+                :collections="items"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet tellus in neque porttitor consequat.">
                 </c-collection-list>
             </div>
         `
     }))
 
 
-import GameSeries from '@/components/game-series/index'
+import GameSeries from '@/components/game-series'
 import GameDescription from '@/components/game-series/game-description'
 import GameIncludesList from '@/components/game-series/game-includes-list'
 import GameIncludesItem from '@/components/game-series/game-includes-item'
@@ -3451,62 +3405,105 @@ storiesOf('Game Series', module)
         },
         data() {
             return {
-                product: {},
+                id: 34,
+                title: 'Product title',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                tags: ['Nunc', 'Praesent', 'Vestibulum'],
+		            images: ['https://via.placeholder.com/400x250', 'https://via.placeholder.com/400x250'],
+                price: 33.49,
                 list: [
                     {
-                        img: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-                        title: 'Dragon Age: Inquisition',
-                        company: 'BioWare',
-                        stars: 5,
+		                    title: 'Dragon Age: Inquisition',
+		                    company: 'BioWare',
+		                    stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    },
                     },
                     {
-                        img: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
-                        title: 'Dragon Age II',
-                        company: 'BioWare',
-                        stars: 4,
+		                    title: 'Dragon Age II',
+		                    company: 'BioWare',
+		                    stars: 4,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    },
                     },
                     {
-                        img: 'https://via.placeholder.com/100x100',
-                        title: 'Dragon Age Down Of the Seeker',
-                        company: 'BioWare',
-                        stars: 5,
+		                    title: 'Dragon Age Down Of the Seeker',
+		                    company: 'BioWare',
+		                    stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    },
                     },
                     {
-                        img: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg',
-                        title: 'Dragon Age Origins',
-                        company: 'BioWare',
-                        stars: 5,
+		                    title: 'Dragon Age Origins',
+		                    company: 'BioWare',
+		                    stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    },
                     },
                     {
-                        img: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-                        title: 'Dragon Age: Inquisition',
-                        company: 'BioWare',
-                        stars: 5,
+		                    title: 'Dragon Age: Inquisition',
+		                    company: 'BioWare',
+		                    stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    },
                     },
                     {
-                        img: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
-                        title: 'Dragon Age II',
-                        company: 'BioWare',
-                        stars: 4,
+		                    title: 'Dragon Age II',
+		                    company: 'BioWare',
+		                    stars: 4,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    },
                     },
                     {
-                        img: 'https://via.placeholder.com/100x100',
-                        title: 'Dragon Age Down Of the Seeker',
-                        company: 'BioWare',
-                        stars: 5,
+		                    title: 'Dragon Age Down Of the Seeker',
+		                    company: 'BioWare',
+		                    stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    },
                     },
                     {
-                        img: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg',
-                        title: 'Dragon Age Origins',
-                        company: 'BioWare',
-                        stars: 5,
+		                    title: 'Dragon Age Origins',
+		                    company: 'BioWare',
+		                    stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    },
                     }
                 ]
             }
         },
         template: `<div class="p-5" style="width: 900px">
                     <c-game-series>
-                        <c-game-description :product="product" />
+                        <c-game-description 
+                        :id="id" 
+                        :title="title" 
+                        :description="description" 
+                        :tags="tags" 
+                        :images="images" 
+                        :price="price" />
                         <c-game-includes-list :list="list" :showNumber="5" />
                     </c-game-series>
                     </div>`
@@ -3515,9 +3512,24 @@ storiesOf('Game Series', module)
         components: {
             'c-game-description': GameDescription
         },
-        data: () => object('Data', data.GameSeries),
+		    data() {
+				    return {
+						    id: 34,
+						    title: 'Product title',
+						    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+						    tags: ['Nunc', 'Praesent', 'Vestibulum'],
+						    images: ['https://via.placeholder.com/400x250', 'https://via.placeholder.com/400x250'],
+						    price: 33.49,
+            }
+        },
         template: `<div class="p-5" style="width: 900px">
-            <c-game-description :game="game" />
+            <c-game-description 
+            :id="id" 
+            :title="title" 
+            :description="description" 
+            :tags="tags" 
+            :images="images" 
+            :price="price" />
         </div>`
     }))
     .add('includes item', () => ({
@@ -3551,52 +3563,84 @@ storiesOf('Game Series', module)
             return {
                 list: [
                     {
-                        img: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
                         title: 'Dragon Age: Inquisition',
                         company: 'BioWare',
                         stars: 5,
+		                    meta: {
+                            images: {
+		                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg'
+                            }
+                        }
                     },
                     {
-                        img: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
                         title: 'Dragon Age II',
                         company: 'BioWare',
                         stars: 4,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
+				                    }
+		                    }
                     },
                     {
-                        img: 'https://via.placeholder.com/100x100',
                         title: 'Dragon Age Down Of the Seeker',
                         company: 'BioWare',
                         stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://via.placeholder.com/300x430',
+				                    }
+		                    }
                     },
                     {
-                        img: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg',
                         title: 'Dragon Age Origins',
                         company: 'BioWare',
                         stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg',
+				                    }
+		                    }
                     },
                     {
-                        img: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
                         title: 'Dragon Age: Inquisition',
                         company: 'BioWare',
                         stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+				                    }
+		                    }
                     },
                     {
-                        img: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
                         title: 'Dragon Age II',
                         company: 'BioWare',
                         stars: 4,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
+				                    }
+		                    }
                     },
                     {
-                        img: 'https://via.placeholder.com/100x100',
                         title: 'Dragon Age Down Of the Seeker',
                         company: 'BioWare',
                         stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://via.placeholder.com/300x430',
+				                    }
+		                    }
                     },
                     {
-                        img: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg',
                         title: 'Dragon Age Origins',
                         company: 'BioWare',
                         stars: 5,
+		                    meta: {
+				                    images: {
+						                    mediumTile: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg'
+				                    }
+		                    }
                     }
                 ]
             }
@@ -4171,7 +4215,7 @@ storiesOf('Purchase block', module)
                         :tags="['top', 'new']"
                         :price="49.99"
                         releaseDate="8 Jun, 2018"
-                        :demoLink="#"
+                        demoLink="#"
                         :offersPurchases="true"
                         :inWishlist="inWishlist"
                         @addToWishlist="inWishlist = true"
@@ -4365,10 +4409,11 @@ storiesOf('Contribute', module)
         },
         data() {
             return {
-                value: ''
+                value: 0
             }
         },
-        template: `<div class="p-4" style="width: 400px"><c-contribute-form v-model="value" :defaultValue="15" /> <div class="mt-4 text-white">Value - {{ value }}</div></div>`
+        template: `<div class="p-4" style="width: 400px">
+                <c-contribute-form v-model="value" :defaultValue="15" /> <div class="mt-4 text-white">Value - {{ value }}</div></div>`
     }))
     .add('pledge', () => ({
         components: {
@@ -4398,7 +4443,14 @@ storiesOf('Contribute', module)
             }
         },
         template: `<div class="p-4" style="width: 400px">
-                        <c-contribute-pledge :pledge="pledge" />
+                        <c-contribute-pledge 
+                                    :minPrice="pledge.minPrice"
+                                    :title="pledge.name"
+                                    :description="pledge.description"
+                                    :includes="pledge.includes"
+                                    :deliveryDate="pledge.estimated_delivery"
+                                    :shipsTo="pledge.shipsTo"
+                                    :backers="pledge.backers" />
                     </div>`
     }))
 
@@ -4498,7 +4550,7 @@ storiesOf('Stream', module)
                 "game": "Dota II",
                 "userName": "GodOfDota",
                 "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVIOE5IdK4MWeI-iEphf-BhZh2XsXBrBn_fcsGXbFGSF-xwH8h",
-                "previews": "http://dota2-videos.com/wp-content/uploads/2018/07/jx3Oj0O-G8Ihqdefault.jpg",
+                "previews": "http://placehold.it/600x350",
                 "src": "#",
                 "views": 10
             }
@@ -5624,14 +5676,14 @@ storiesOf('Chat', module)
 storiesOf('Games list', module)
     .add('base', () => ({
         components: {
-            'c-game-list': () => import('~/components/games-list/index').then(m => m.default || m)
+            'c-game-list': () => import('~/components/games-list').then(m => m.default || m)
         },
         data() {
             return {
                 games:[
                     {
-                        id: '1',
-                        name: 'Game Of Thor',
+                        id: 1,
+                        name: 'Game Of Thor 1',
                         sub_name: 'Legendary Edition',
                         image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
                         download_content:[
@@ -5652,7 +5704,7 @@ storiesOf('Games list', module)
                                 price: '13.99'
                             }
                         ],
-                        achievements: [
+		                    achievements: [
                             {
                                 icon: '',
                                 href: ''
@@ -5698,37 +5750,141 @@ storiesOf('Games list', module)
                         ]
                     },
                     {
-                        id: '2',
-                        name: 'CS GO: Advanced',
-                        sub_name: 'Gold Edition',
-                        image: 'https://img3.akspic.ru/image/43286-monohromnyj-monoxromnyj_rejim-videoigra-voennosluzhashhie-protivogaz-1920x1080.jpg',
-                        download_content:[
-                            {
-                                name: 'M16-2',
-                                price: '0.99'
-                            },
-                            {
-                                name: 'AK-74',
-                                price: '3.99'
-                            },
-                            {
-                                name: 'GOLD AWP',
-                                price: '193.99'
-                            }
-                        ]
+		                    id: 2,
+		                    name: 'Game Of Thor 2',
+		                    sub_name: 'Legendary Edition',
+		                    image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
+		                    download_content:[
+				                    {
+						                    name: 'DragonBore',
+						                    price: '3.99'
+				                    },
+				                    {
+						                    name: 'Hearthfire',
+						                    price: '6.99'
+				                    },
+				                    {
+						                    name: 'Hight Resultation Texture Pack',
+						                    price: '13.99'
+				                    },
+				                    {
+						                    name: 'Dawnguard',
+						                    price: '13.99'
+				                    }
+		                    ],
+		                    achievements: [
+				                    {
+						                    icon: '',
+						                    href: ''
+				                    },
+				                    {
+						                    icon: '',
+						                    href: ''
+				                    },
+				                    {
+						                    icon: '',
+						                    href: ''
+				                    },
+				                    {
+						                    icon: '',
+						                    href: ''
+				                    }
+		                    ],
+		                    friends:[
+				                    {
+						                    link: '#',
+						                    avatar: 'http://kharkov.city/wp-content/uploads/2015/09/cubegirl-avatar_400x4001.jpg'
+				                    },
+				                    {
+						                    link: '#',
+						                    avatar: 'http://www.auto-sib.com/upload/main/2e6/2e667dbfe5de0eda8c1f98777b2a2db8.png'
+				                    },
+				                    {
+						                    link: '#',
+						                    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUCwHqPE2M4z3HsyeQsaOoWtuxjX92a2vVi5p7N9Qm72IM8Dh'
+				                    }
+		                    ],
+		                    news:[
+				                    {
+						                    title: 'Morbi at ligula placerat',
+						                    text: 'Morbi at ligula placerat, vestibulum tortor ac, sollicitudin massa. In in risus vulputate, posuere libero ac, egestas justo. Ut non mattis nulla. Suspendisse acmaximus metus. Nulla auctor laoreet quam, in congue nulla.',
+						                    link: '#'
+				                    },
+				                    {
+						                    title: 'Sed lobortis lacinia ante a bibendum.',
+						                    text: 'Ut gravida vestibulum nunc, sit amet malesuada nisi egestas eu. Integer felis eros, venenatis vel augue sit amet, cursus laoreet eros. Nam fringilla euismod feugiat.',
+						                    link: '#'
+				                    }
+		                    ]
                     },
-                    {
-                        id: '3',
-                        name: 'DOTA II',
-                        sub_name: '',
-                        image: 'https://i.pinimg.com/originals/66/36/5e/66365e390b9edf68991820fd11da9c0b.jpg'
-                    },
-                    {
-                        id: '4',
-                        name: 'Assassins Creed',
-                        sub_name: '',
-                        image: 'https://i.pinimg.com/originals/ce/51/f6/ce51f6e88f1a81dfb5d5621f7ac56762.jpg'
-                    }
+		                {
+				                id: 3,
+				                name: 'Game Of Thor 3',
+				                sub_name: 'Legendary Edition',
+				                image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
+				                download_content:[
+						                {
+								                name: 'DragonBore',
+								                price: '3.99'
+						                },
+						                {
+								                name: 'Hearthfire',
+								                price: '6.99'
+						                },
+						                {
+								                name: 'Hight Resultation Texture Pack',
+								                price: '13.99'
+						                },
+						                {
+								                name: 'Dawnguard',
+								                price: '13.99'
+						                }
+				                ],
+				                achievements: [
+						                {
+								                icon: '',
+								                href: ''
+						                },
+						                {
+								                icon: '',
+								                href: ''
+						                },
+						                {
+								                icon: '',
+								                href: ''
+						                },
+						                {
+								                icon: '',
+								                href: ''
+						                }
+				                ],
+				                friends:[
+						                {
+								                link: '#',
+								                avatar: 'http://kharkov.city/wp-content/uploads/2015/09/cubegirl-avatar_400x4001.jpg'
+						                },
+						                {
+								                link: '#',
+								                avatar: 'http://www.auto-sib.com/upload/main/2e6/2e667dbfe5de0eda8c1f98777b2a2db8.png'
+						                },
+						                {
+								                link: '#',
+								                avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUCwHqPE2M4z3HsyeQsaOoWtuxjX92a2vVi5p7N9Qm72IM8Dh'
+						                }
+				                ],
+				                news:[
+						                {
+								                title: 'Morbi at ligula placerat',
+								                text: 'Morbi at ligula placerat, vestibulum tortor ac, sollicitudin massa. In in risus vulputate, posuere libero ac, egestas justo. Ut non mattis nulla. Suspendisse acmaximus metus. Nulla auctor laoreet quam, in congue nulla.',
+								                link: '#'
+						                },
+						                {
+								                title: 'Sed lobortis lacinia ante a bibendum.',
+								                text: 'Ut gravida vestibulum nunc, sit amet malesuada nisi egestas eu. Integer felis eros, venenatis vel augue sit amet, cursus laoreet eros. Nam fringilla euismod feugiat.',
+								                link: '#'
+						                }
+				                ]
+		                },
                 ]
             }
         },
@@ -6648,6 +6804,54 @@ storiesOf('Gift box', module)
                                     @decline="" />
                   </div>`
     }))
+
+storiesOf('Profile picker', module)
+    .add('default', () => ({
+		    components: {
+				    'c-profile-picker': () => import('~/components/profile-picker').then(m => m.default || m),
+		    },
+        data(){
+		        return{
+		            profiles: [
+                    {
+		                    id: 1,
+		                    name: 'Mr. Satoshi',
+		                    wallet: '0x6cc5f688a315f3dc28a7781717a',
+		                    img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+		                    default: false,
+		                    edit: false,
+		                    status: 'warning'
+                    },
+				            {
+						            id: 2,
+						            name: 'Mr. Satoshi',
+						            wallet: '0x6cc5f688a315f3dc28a7781717a',
+						            img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+						            default: false,
+						            edit: false,
+						            status: 'danger'
+				            },
+				            {
+						            id: 3,
+						            name: 'Mr. Satoshi',
+						            wallet: '0x6cc5f688a315f3dc28a7781717a',
+						            img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+						            default: false,
+						            edit: false,
+                        status: 'success'
+				            },
+                ]
+            }
+        },
+        template: `<div class="p-5">
+                      <c-profile-picker :profiles="profiles" />
+                  </div>`
+    }))
+
+
+
+
+
 
 
 /*

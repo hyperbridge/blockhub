@@ -67,6 +67,7 @@ export default {
         { src: '~/plugins/filters' },
         { src: '~/plugins/directives' },
         { src: '~/plugins/feathers' },
+        { src: '~/plugins/permissions' },
         { src: '~/plugins/vue-i18n' },
         { src: '~/plugins/vue-currency' },
         { src: '~/plugins/vue-analytics', ssr: false },
@@ -78,6 +79,8 @@ export default {
         { src: '~/plugins/vue-draggable', ssr: false },
         { src: '~/plugins/vue-emoji-mart', ssr: false },
         { src: '~/plugins/vue-inputmask', ssr: false },
+        { src: '~/plugins/vue2-editor', ssr: false },
+        { src: '~/plugins/vue-upload-component', ssr: false },
         { src: '~/plugins/autosize', ssr: false },
         { src: '~/plugins/jquery', ssr: false },
         { src: '~/plugins/summernote', ssr: false },
@@ -96,6 +99,7 @@ export default {
     ],
     router: {
         extendRoutes(routes) {
+            // TODO: check hostname
             sites.forEach(site => {
                 site.routes.forEach(route => {
                     routes.push(route)

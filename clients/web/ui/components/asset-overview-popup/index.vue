@@ -11,9 +11,9 @@
                 <h4>{{ name }}</h4>
                 <h6>{{ productName }}</h6>
                 <div class="description">
-                    <h6>{{ price['current'] | convertCurrency }}</h6>
+                    <h6>{{ priceCurrent }}</h6>
                     <p>Based on 7461 other transactions</p>
-                    <p>Lowest: {{ priceMin | convertCurrency }} Highest: {{ priceMax | convertCurrency }}</p>
+                    <p>Lowest: {{ priceMin }} Highest: {{ priceMax }}</p>
                 </div>
             </div>
         </div>
@@ -51,25 +51,16 @@
                     :showBackground="false" />
                 <div class="metadata__table padding-bottom-10">
                     <div
-                        v-for="(value, prop, index) in metadata"
+                        v-for="(value, index) in metadata"
                         :key="index"
                         class="item-row">
                         <div class="item-label">
                             <i class="fas fa-file" />
-                            {{ prop | space | upperFirstChar }}
+                            {{ value.label }}
                         </div>
                         <div class="item-description">
-                            <ul
-                                v-if="typeof value === 'object'"
-                                class="margin-0">
-                                <li
-                                    v-for="(value, prop, index) in value"
-                                    :key="index">
-                                    {{ prop | space | upperFirstChar }}: {{ value }}
-                                </li>
-                            </ul>
-                            <span v-else>
-                                {{ value }}
+                            <span>
+                                {{ value.text }}
                             </span>
                         </div>
                     </div>
@@ -81,22 +72,23 @@
 
 <script>
 export default {
-    name: 'AssetOverviewPopup',
     components: {
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m)
     },
     props: {
         image: {
-            type: String
+            type: String,
+            default: 'https://via.placeholder.com/400x300'
         },
         id: String,
         name: String,
         productName: String,
-        priceMin: String,
-        priceMax: String,
+        priceMin: Number,
+        priceMax: Number,
+        priceCurrent: Number,
         acceptOffers: Boolean,
         metadata: {
-            type:  Array,
+            type: Array,
             default: () => []
         }
     }

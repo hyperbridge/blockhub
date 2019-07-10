@@ -1,5 +1,6 @@
 {
   "name": "blockhub",
+  "license": "SEE LICENSE IN LICENSE.md",
   "private": true,
   "scripts": {
     "web-client": "cd clients && cd web && yarn dev",

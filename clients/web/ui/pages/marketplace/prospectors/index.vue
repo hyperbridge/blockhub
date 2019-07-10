@@ -197,7 +197,6 @@ export default {
         'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
         'c-datepicker': () => import('vuejs-datepicker').then(m => m.default || m)
     },
-    props: ['profileId'],
     data() {
         return {
             newProspector: {
@@ -213,6 +212,9 @@ export default {
         }
     },
     computed: {
+        profileId() {
+            return this.$route.params.profileId
+        },
         prospectors() {
             return this.$store.getters['assets/prospectors']
         },

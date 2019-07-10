@@ -15,7 +15,12 @@ export default {
     components: {
         'c-asset': () => import('~/components/assets-grid-inventory/asset').then(m => m.default || m)
     },
-    props: ['assets']
+    props: {
+        assets: {
+            type: Array,
+            default: () => []
+        }
+    }
 }
 </script>
 

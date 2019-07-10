@@ -169,7 +169,6 @@
                             </div>
                         </div>
 
-                        <!--Add New Wallet Block Empty div-->
                         <div
                             v-if="!setNewWallets"
                             class="wallet-item empty-item new-wallet"
@@ -180,11 +179,9 @@
                             </div>
                         </div>
 
-                        <!--Add New Wallet Block Empty Model-->
                         <div
                             v-if="setNewWallets"
                             class="wallet-item">
-                            <!--Search block(currency list) off-->
                             <div
                                 v-if="!searchBlock"
                                 class="wallet-item__info">
@@ -267,7 +264,6 @@
                                 </div>
                             </div>
 
-                            <!--Search block(currency list) on-->
                             <div
                                 v-if="searchBlock"
                                 class="wallet-item__search-block">

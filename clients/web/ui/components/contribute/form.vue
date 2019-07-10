@@ -8,7 +8,7 @@
             :class="[{ 'active' : activeForm }, { 'has-error' : error }]">
             <div class="input-group-prepend">
                 <span class="input-group-text">
-                    {{ currency }}
+                    {{ currency ? currency : '$' }}
                 </span>
             </div>
             <input
@@ -37,7 +37,7 @@ export default {
             type: Boolean,
             default: false
         },
-        value: String,
+        value: Number,
         defaultValue: Number,
         currency: String
     },

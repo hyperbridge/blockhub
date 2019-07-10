@@ -13,9 +13,16 @@
         "format": "./node_modules/.bin/tsfmt -r",
         "start": "npm run build-production && node ./build/src/index.js",
         "dev": "cross-env NODE_ENV=development yarn run nodemon",
-        "migrate": "./node_modules/.bin/knex migrate:latest",
+        "migrate": "ts-node -P ./tsconfig.json node_modules/.bin/knex migrate:latest --knexfile knexfile.js",
         "migrate-heroku": "heroku run 'knex migrate:latest'",
+        "seed-all": "ts-node -P ./tsconfig.json ~/.nvm/versions/node/v10.16.0/bin/knex seed:run --knexfile knexfile.js",
+        "seed": "ts-node -P ./tsconfig.json ~/.nvm/versions/node/v10.16.0/bin/knex seed:run --knexfile knexfile.js --specific=",
         "test-api-call": "curl http://localhost:9001/api/v1/ping",
+        "knex": "ts-node -P ./tsconfig.json node_modules/.bin/knex",
+        "db:refresh": "yarn db:migrate && yarn db:seed",
+        "db:seed": "ts-node -P ./tsconfig.json node_modules/.bin/knex seed:run --knexfile knexfile.js --specific=",
+        "db:seedAll": "ts-node -P ./tsconfig.json node_modules/.bin/knex seed:run --knexfile knexfile.js",
+        "db:migrate": "ts-node -P ./tsconfig.json node_modules/.bin/knex migrate:latest --knexfile knexfile.js",
         "deploy-beta": "cp -R dist/ ../../../beta-api.blockhub.gg && cd ../../../beta-api.blockhub.gg && rm CNAME && git add -A && git commit -m \"Rebuild\" && git push && cd ../../../blockhub/services/web",
         "deploy-preview": "cp -R dist/ ../../../preview-api.blockhub.gg && cd ../../../preview-api.blockhub.gg && rm CNAME && git add -A && git commit -m \"Rebuild\" && git push && cd ../../../blockhub/services/web",
         "deploy-staging": "cp -R dist/ ../../../staging-api.blockhub.gg && cd ../../../staging-api.blockhub.gg && rm CNAME && git add -A && git commit -m \"Rebuild\" && git push && cd ../../../blockhub/services/web",
@@ -42,8 +49,7 @@
         "blockhub-node-sdk": "^1.3.0",
         "body-parser": "^1.18.3",
         "connect-session-knex": "^1.4.0",
-		"cross-env": "^5.2.0",
-		"nodemon": "^1.18.10",
+        "cors": "^2.8.5",
         "dotenv": "^6.2.0",
         "express": "^4.16.4",
         "express-session": "^1.15.6",
@@ -56,8 +62,10 @@
         "helmet": "^3.15.0",
         "knex": "^0.15.2",
         "knex-migrate": "^1.7.0",
+        "moment": "^2.24.0",
         "morgan": "^1.9.1",
         "mysql": "^2.16.0",
+        "nodemailer": "^6.2.1",
         "objection": "^1.5.0-rc.4",
         "pg": "^7.7.1",
         "swagger-express-validator": "^0.1.1",
@@ -65,24 +73,46 @@
         "swagger-routes-express": "^2.0.0",
         "typescript": "^3.2.2",
         "typescript-formatter": "^7.2.2",
-        "winston": "^3.2.1",
-		"ts-node": "^8.3.0"
+        "underscore": "^1.9.1",
+        "winston": "^3.2.1"
     },
-    "devDependencies": {},
-    "babel": {
-        "presets": [
-            "es2015"
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^1.9.0",
+        "@typescript-eslint/parser": "^1.9.0",
+        "cross-env": "^5.2.0",
+        "eslint": "^5.13.0",
+        "eslint-config-marine": "^3.0.2",
+        "nodemon": "^1.18.10",
+        "ts-node": "^8.3.0"
+    },
+    "eslintConfig": {
+        "parser": "@typescript-eslint/parser",
+        "plugins": [
+            "@typescript-eslint"
         ],
-        "env": {
-            "development": {
-                "presets": []
-            },
-            "production": {
-                "presets": []
-            },
-            "test": {
-                "presets": []
-            }
+        "extends": [
+            "marine/node"
+        ],
+        "rules": {
+            "quote-props": 0,
+            "func-names": 0,
+            "guard-for-in": 0,
+            "@typescript-eslint/semi": [
+                "error",
+                "never"
+            ],
+            "@typescript-eslint/indent": [
+                "error",
+                4
+            ],
+            "indent": [
+                "error",
+                4
+            ],
+            "space-before-function-paren": [
+                "error",
+                "always"
+            ]
         }
     }
 }

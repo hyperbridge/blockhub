@@ -5,6 +5,7 @@ import * as Bridge from '../framework/desktop-bridge'
 
 export const strict = false
 
+let app = null
 let service = null
 let auth = null
 
@@ -100,7 +101,7 @@ if (decentralizedMode) {
         service('leaderboards', { paginate: true }),
         service('licenses', { paginate: true }),
         service('logs', { paginate: true }),
-        service('offers', { paginate: true }), 
+        service('offers', { paginate: true }),
         service('ratings', { paginate: true }),
         service('reviews', { paginate: true }),
         service('realms', { paginate: true }),
@@ -120,9 +121,13 @@ if (decentralizedMode) {
 }
 
 export const actions = {
-    async nuxtServerInit({ commit, dispatch }, { app, req, store, $sentry }) {
+    async nuxtServerInit({ commit, dispatch }, context) {
+        const { req, store, $sentry } = context
+
+        app = context.app
+
         const origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg' // eslint-disable-line no-negated-condition
-        
+
         const storage = {
             getItem() {
                 return store.state.auth ? store.state.auth.accessToken : ''
@@ -184,10 +189,18 @@ export const actions = {
                     strategy: 'jwt',
                     accessToken: cookieToken
                 })
+
+                dispatch('login', {
+                    token: accessToken,
+                    user: store.state.auth.user
+                })
             } catch (error) {
-                app.$cookies.remove('feathers-jwt')
+                console.log('[BlockHub] Error logging in', error)
+                dispatch('logout')
                 return
             }
+        } else {
+            dispatch('logout')
         }
 
         /*
@@ -197,18 +210,53 @@ export const actions = {
             $sentry.configureScope(scope => scope.setUser({ username: 'john.doe@example.com' }))
         */
 
-        return initAuth({
-            commit,
-            dispatch,
-            req,
-            moduleName: 'auth',
-            cookieName: 'feathers-jwt'
-        })
-         .catch(e => { console.log('Feathers exception', e) })
+        if (req) {
+            return initAuth({
+                commit,
+                dispatch,
+                req,
+                moduleName: 'auth',
+                cookieName: 'feathers-jwt'
+            })
+                .catch(e => { console.log('Feathers exception', e) })
+        }
     },
+
+    nuxtClientInit({ commit }, context) {
+        if (context.store.state.user) {
+            const { userId, meta } = context.store.state.user
+            this.$can.setUserId(userId)
+            this.$can.setUserPermissions(userId, meta.permissions)
+        }
+    },
+
+    login({ commit }, { token, user }) {
+        console.log('[BlockHub] Logging in: ', user)
+        this.$axios.setToken(token, 'bearer')
+        // this.$cookies.set('token', token)
+        this.$can.setUserId(user.userId)
+        this.$can.setUserPermissions(user.userId, user.meta.permissions)
+
+        commit('token', token)
+        commit('user', user)
+        commit('loggedIn', true)
+    },
+
+    logout({ commit }) {
+        console.log('[BlockHub] Logging out')
+        this.$axios.setToken(false)
+        // this.$cookies.remove('token')
+        commit('loggedIn', false)
+        commit('user', null)
+        commit('token', null)
+        app.$cookies.remove('feathers-jwt')
+        // this.$router.push('/login')
+    },
+
     init({ commit }, payload) {
         commit('init', payload)
     },
+
     update({ rootState }, [path, data]) {
         const [module, target] = path.split('/')
         if (data !== null && typeof data === 'object') {
@@ -233,6 +281,15 @@ export const mutations = {
         }
 
         state.initialized = true
+    },
+    user(state, payload) {
+        state.user = payload
+    },
+    token(state, payload) {
+        state.token = payload
+    },
+    loggedIn(state, payload) {
+        state.loggedIn = payload
     }
 }
 

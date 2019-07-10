@@ -14,6 +14,7 @@
                     v-else
                     class="card-body padding-0">
                     <c-button
+                        class="w-100"
                         status="none"
                         :to="`/product/${item.id}`">
                         <c-img
@@ -30,7 +31,7 @@
                     <p
                         class="card-text"
                         hidden>
-                        {{ item.shortDescription }}
+                        {{ item.description }}
                     </p>
                     <c-tags v-if="item.tags" :tags="item.tags.map(t => t.value)" />
                 </div>

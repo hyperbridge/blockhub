@@ -35,7 +35,13 @@ export default (context, inject) => {
     const initTranslations = () => {
         Vue.i18n.add('en', translations.global)
 
-        const host = process.client ? window.location.hostname.replace('www.', '').replace('.local', '').split(':')[0] : context.req.headers.host
+        let host = 'blockhub.gg'
+
+        if (process.client) {
+            host = window.location.hostname.replace('www.', '').replace('.local', '').split(':')[0]
+        } else if (context.req) {
+            host = context.req.headers.host
+        }
 
         if (translations[host]) {
             Vue.i18n.add('en', translations[host].en)

@@ -10,8 +10,6 @@
             <li class="clock__minutes">
                 {{ minutes }}
             </li>
-            <!-- <li class="clock__divider">{{ divider }}</li>
-            <li class="clock__seconds">{{ seconds }}</li> -->
             <li class="clock__format">
                 {{ format }}
             </li>

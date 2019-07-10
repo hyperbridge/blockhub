@@ -54,9 +54,9 @@ export default {
             return this.activeProfile
         },
         tradeURL() {
-            const { tradeURLId } = this.account
+            const { tradeLinkId } = this.account
             const { id } = this.profile
-            return `${window.location.origin}/tradeoffer/new/?partner=${id}&id=${tradeURLId}`
+            return `${window.location.origin}/tradeoffer/new/?partner=${id}&id=${tradeLinkId}`
         },
         assets() { return this.$store.state.assets.assets }
     },

@@ -71,7 +71,10 @@
                     v-for="(comment, idx) in comments"
                     :key="`comment=${idx}`"
                     :canReply="false"
-                    :comment="comment"
+                    :rate="comment.rate"
+                    :author="comment.author"
+                    :date="comment.date"
+                    :text="comment.text"
                     class="px-0" />
             </div>
             <div

@@ -2,11 +2,11 @@
     <div class="asset-preview-small">
         <c-img
             class="asset-preview-small__image"
-            :src="assetImage" />
-        <span>{{ assetName }}</span>
+            :src="image" />
+        <span>{{ name }}</span>
         <span
             v-if="showPrice"
-            class="asset-preview-small__price"> - {{ assetPriceCurrent | convertCurrency }}</span>
+            class="asset-preview-small__price"> - {{ priceCurrent | convertCurrency }}</span>
     </div>
 </template>
 
@@ -18,10 +18,10 @@ export default {
             type: Object,
             required: true
         },
-        assetName: String,
-        assetImage: String,
+        name: String,
+        image: String,
         showPrice: Boolean,
-        assetPriceCurrent: String
+        priceCurrent: String
     }
 }
 </script>

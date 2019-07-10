@@ -33,18 +33,25 @@
 <script>
 export default {
     name: 'Modal',
-    props: ['id', 'title', 'modalClass']
+    // props: ['id', 'title', 'modalClass'],
+    props: {
+        id: String,
+        title: String,
+        modalClass: String,
+    }
 }
 </script>
 
 <style lang="scss" scoped>
     .modal-light {
         position: fixed;
-        left: 0;
         top: 0;
-        z-index: 99;
-        width: 100vw;
-        height: 100vh;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 1000;
+        width: 100%;
+        height: 100%;
         background: rgba(33, 33, 51, 0.6);
         animation: opacity .5s ease;
         display: flex;

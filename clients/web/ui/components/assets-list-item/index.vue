@@ -10,6 +10,7 @@
             :style="{ width: 'calc( 100% / ' + itemInRow + ')'}">
             <c-assets-item
                 :id="item.id"
+                :image="item.image"
                 :name="item.name"
                 :currentPrice="item.price.current"
                 :count="item.count" />

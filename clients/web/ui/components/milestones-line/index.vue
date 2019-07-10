@@ -7,7 +7,7 @@
                 :class="milestone.status"
                 class="stages-line__stage">
                 <i
-                    v-if="milestone.status === 'Done'"
+                    v-if="milestone.status === 'done'"
                     class="fas fa-check" />
                 <i
                     v-if="milestone.status === 'InProgress'"
@@ -26,9 +26,12 @@
 
 <script>
 export default {
-    props: [
-        'milestones'
-    ],
+    props: {
+        milestones: {
+            type: Array,
+            default: () => []
+        }
+    },
     mounted() {
         const finishedElement = document.getElementsByClassName('Done')
 

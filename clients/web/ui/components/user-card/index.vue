@@ -27,9 +27,11 @@
                     :to="`/profiles/${user.id}`"
                     class="user-data__avatar-upload-btn">
                     <c-img
+                        class="user-data__avatar no-avatar"
                         v-if="user.img"
                         :src="user.img" />
                     <c-img
+                        class="user-data__avatar user-avatar"
                         v-else
                         src="../../static/img/user.png" />
                 </c-button>
@@ -120,12 +122,27 @@
 <script>
 export default {
     props: {
-        id: String,
-        type: String,
+        id: {
+            type: String,
+            default: null
+        },
+        type: {
+            type: String,
+            default: null
+        },
         user: {
-            img: String,
-            name: String,
-            wallet: String
+            img: {
+                type: String,
+                default: null
+            },
+            name: {
+                type: String,
+                default: null
+            },
+            wallet: {
+                type: String,
+                default: null
+            }
         },
         status: {
             type: String,
@@ -134,8 +151,14 @@ export default {
                 return ['info', 'success', 'warning', 'danger'].includes(val)
             }
         },
-        iconColor: String,
-        iconClass: String,
+        iconColor: {
+            type: String,
+            default: null
+        },
+        iconClass: {
+            type: String,
+            default: null
+        },
         previewMode: Boolean,
         removing: Boolean
     },

@@ -35,7 +35,7 @@
         <div class="dropdown-container">
             <c-dropdown
                 :class="{'no-right-border' : shareList}"
-                @click="activeMenu">
+                @click="activeMenu()">
                 <ul class="item-dropdown">
                     <li>
                         <a href="#">

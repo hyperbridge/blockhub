@@ -11,11 +11,8 @@
         <div
             slot="customContent"
             class="download-modal">
-            <c-tabs>
-                <c-tab
-                    name="Download"
-                    :selected="true"
-                    :showFooter="true">
+            <c-tabs :tabNames="['Download']">
+                <c-tab :tabId="1">
                     <div>
                         <c-download-block :showPreview="false" />
                     </div>
@@ -38,8 +35,8 @@
 export default {
     components: {
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab').then(m => m.default || m),
+        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
+        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
         'c-download-block': () => import('~/components/download-block').then(m => m.default || m)
     },
     props: ['activated'],

@@ -9,7 +9,7 @@
             :aria-valuenow="progress"
             aria-valuemin="0"
             aria-valuemax="100">
-            {{ show_text && progress > 8 ? progress : '' }}
+            {{ showText && progress > 8 ? progress : '' }}
             <span class="sr-only">{{ progress }}</span>
         </div>
     </div>

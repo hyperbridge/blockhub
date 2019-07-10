@@ -24,7 +24,6 @@ export default {
         'c-list-item': () => import('~/components/help/simple-item').then(m => m.default || m),
         'c-card': () => import('~/components/help/help-card').then(m => m.default || m)
     },
-    props: [],
     computed: {
         article() {
             return this.$store.getters['discussions/get'](this.$route.params.id)

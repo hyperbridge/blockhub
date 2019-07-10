@@ -43,7 +43,6 @@
             </div>
         </div>
 
-        <!--Full list block-->
         <transition name="fade">
             <div
                 v-if="showDetails"

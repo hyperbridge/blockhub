@@ -3,6 +3,7 @@ import bodyParser = require('body-parser')
 import helmet = require('helmet')
 import Knex = require('knex')
 import winston = require('winston')
+import cors = require('cors')
 import { Model, RelationMappings } from 'objection'
 import config = require('../config')
 import feathers = require('@feathersjs/feathers')
@@ -46,6 +47,7 @@ export default async () => {
     app.configure(socketio())
     app.configure(rest())
 
+    app.use(cors())
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
 
@@ -60,14 +62,6 @@ export default async () => {
         },
         store: store
     }))
-
-    // var count = 0
-
-    // app.use('/test', function(req, res, next) {
-    //     var n = req.session.views || 0
-    //     req.session.views = ++n
-    //     res.end(n + ' views')
-    // })
 
     app.use('/schema', async function(req, res, next) {
         const result = {}
@@ -86,26 +80,6 @@ export default async () => {
 
     app.set('knex', knex)
 
-
-
-    // app.use(morgan(function(tokens, req, res) {
-    //     let { url, method, params, body, _parsedUrl, headers, query } = req
-
-    //     console.log(111111, url, method, params)
-    //     // do something with the data, save it to db, etc..
-    //     return [
-    //         tokens.method(req, res),
-    //         tokens.url(req, res),
-    //         tokens.status(req, res),
-    //         tokens.res(req, res, 'content-length'), '-',
-    //         tokens['response-time'](req, res), 'ms'
-    //     ]
-    // }))
-
-    // app.use(require('express').logger({
-    //     format: ':remote-addr :method :url'
-    // }))
-
     // Setup channels
     app.configure(channels)
 
@@ -113,11 +87,6 @@ export default async () => {
     for (let key in services) {
         app.configure(services[key])
     }
-
-    // app.service('users').hooks({
-    //     // Make sure `password` never gets sent to the client
-    //     after: local.hooks.protect('password')
-    // })
 
     app.service('/authentication').hooks({
         before: {
@@ -141,17 +110,8 @@ export default async () => {
         }
     })
 
-    // do any other app stuff, such as wire in passport, use cors etc
-    // then attach the routes
-    //connect(app)
-
     // add any error handlers
     app.use(errorHandler({ logger: loggerLib }))
-
-    // app.use((req, res, next) => {
-    //     console.log('Request')
-    //     next()
-    // })
 
 
     app.use('/ping', {

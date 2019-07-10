@@ -1,7 +1,7 @@
 <template>
-    <c-button
+    <nuxt-link
         status="none"
-        class="assets-list__item"
+        class="assets-list__item text-white"
         :class="{ 'transparent-bg' : isTransparent }"
         :to="`/asset/${id}`">
         <div class="thumb">
@@ -19,16 +19,16 @@
                 </span>
             </slot>
         </div>
-    </c-button>
+    </nuxt-link>
 </template>
 
 <script>
 export default {
-    name: 'AssetsListItem',
     props: {
-        id: [ Number, String ],
+        id: Number,
         name: String,
-        currentPrice: String,
+        image: String,
+        currentPrice: Number,
         count: String,
         isTransparent: {
             type: Boolean,

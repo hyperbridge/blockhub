@@ -226,8 +226,8 @@ export default class Product extends BaseModel {
                         extra: ['relationKey']
                     }
                 },
-                filter(builder) {
-                    //builder.where('nodes.relationKey', 'tags')
+                filter(query) {
+                    //query.where('nodes.relationKey', 'tags')
                 },
                 beforeInsert(model) {
                     (model as Node).relationKey = 'tags'
@@ -236,11 +236,21 @@ export default class Product extends BaseModel {
         }
     }
 
-    static get modifiers() {
-        return {
-            released(builder) {
-                builder.where('tags.value', 'released')
-            }
-        }
-    }
+    // static get modifiers() {
+	// 	const knex = this.knex()
+    //     return {
+    //         released(query) {
+    //             query.where('tags.value', 'released')
+    //         },
+	// 		permission(query) {
+	// 			const accountId = query.context().account.accountId
+	// 			const permission = query.context().permission
+
+	// 			query
+	// 				.join('accounts', 'accounts.accountId', '=', accountId)
+	// 				.where(knex.raw(`JSON_CONTAINS(accounts.meta, CAST(CONCAT('{ "permissions": { "${permission}": true }}') AS JSON), '$')`))
+	// 				.orWhere(knex.raw(`JSON_CONTAINS(accounts.meta, CAST(CONCAT('{ "permissions": { "${permission}": [', products.id, ']}}') AS JSON), '$')`))
+	// 		},
+    //     }
+    // }
 }

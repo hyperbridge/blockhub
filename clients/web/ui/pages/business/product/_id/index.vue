@@ -211,7 +211,7 @@
         <template slot="menu">
             <div class="row">
                 <div
-                    v-if="product.id"
+                    v-if="product.id && $can('editProducts')"
                     class="col-12 text-right">
                     <c-button
                         status="success"

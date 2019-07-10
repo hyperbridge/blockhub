@@ -15,7 +15,8 @@ export default {
     props: {
         tags: {
             type: Array,
-            required: true
+            required: true,
+            default: () => []
         }
     }
 }
@@ -42,6 +43,7 @@ export default {
         &:hover {
             text-decoration: none;
             background: #d8c26c;
+            cursor: pointer;
         }
         &:last-child {
             margin: 0;

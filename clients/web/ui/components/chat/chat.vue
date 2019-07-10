@@ -7,53 +7,51 @@
                 <span class="title">Chat</span>
             </div>
         </header>
-        <div
-            class="flex flex-row flex-1 clear">
-            <c-user-list
-                :users="profiles"
-                :logout="logout" />
-            <c-message-list
-                :messages="messages"
-                :createMessage="createMessage" />
+        <div class="col-12" >
+            <c-chat-base style="height: 700px">
+                <template slot="sidebar">
+                    <c-chat-group-sidebar :channels="channels" v-on:onChannelChange="onChannelChange($event)"/>
+                </template>
+                <c-chat-group :currentUser="user" :channel="activeChannel">
+                    <template slot="messages">
+                        <c-chat-message v-for="msg in messages" :text="msg.value" :time="msg.createdAt" :user="user" />
+                    </template>
+                    <!--<template slot="users">
+                        <c-chat-user v-for="user in users" :isAdmin="user.admin" :action="true" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>
+                    </template>-->
+                </c-chat-group>
+            </c-chat-base>
+            <hr />
         </div>
     </div>
 </template>
 
 <script>
-import UserList from './users'
-import MessageList from './messages'
 
 export default {
     components: {
-        'c-user-list': UserList,
-        'c-message-list': MessageList
+        'c-chat-base': () => import('~/components/chat-new/base').then(m => m.default || m),
+        'c-chat-group-sidebar': () => import('~/components/chat-new/content/group-list').then(m => m.default || m),
+        'c-chat-group': () => import('~/components/chat-new/content/group').then(m => m.default || m),
+        'c-chat-message': () => import('~/components/chat-new/message').then(m => m.default || m),
     },
     props: {
     },
+
+    data: () => ({
+        channels: [],
+        messages: [],
+        channelIndex: 0,
+        activeChannel: null
+    }),
+
     computed: {
-        user() { return this.$store.state.auth.user },
-        messages() { return this.$store.getters['messages/list'] },
+        user() {
+            return this.$store.state.auth.user
+        },
         profiles() { return this.$store.getters['profiles/list'] }
-        // users2 () {
-        //   return this.findUsers({
-        //     query: {
-        //       $sort: {
-        //         email: 1
-        //       },
-        //       $limit: 25
-        //     }
-        //   })
-        // },
     },
-    created() {
-        this.$store.dispatch('messages/find', {
-            query: {
-                $sort: {
-                    createdAt: 1
-                },
-                $limit: 25
-            }
-        })
+    async created() {
         this.$store.dispatch('profiles/find', {
             query: {
                 $sort: {
@@ -62,10 +60,41 @@ export default {
                 $limit: 25
             }
         })
+
+        // Listen to created events and add the new message in real-time
+        //client.service('messages').on('created', addMessage);
+
+        this.$store.dispatch('discussions/find',  {
+            query: {
+                type: { $in: ['chat', 'both']}
+            }
+        }).then(({ data }) => {
+            this.channels = data;
+            this.activeChannel = this.channels[this.channelIndex];
+
+            this.$store.dispatch('messages/find', {
+                query: {
+                    $sort: {
+                        createdAt: 1
+                    },
+                    $limit: 25,
+                    /*discussionId: this.activeChannel.id need to only get an active channel*/
+                }
+            }).then(({ data }) => {
+                this.messages = data;
+            })
+        });
+
     },
+
     methods: {
         createMessage(...args) { return this.$api.service('messages').create(...args) },
-        logout(...args) { return this.$api.service('auth').logout(...args) }
+        logout(...args) { return this.$api.service('auth').logout(...args) },
+
+        onChannelChange(channelIndex) {
+            this.channelIndex = channelIndex;
+            this.activeChannel = this.channels[this.channelIndex];
+        }
     }
 }
 </script>

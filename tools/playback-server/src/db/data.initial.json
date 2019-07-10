@@ -1,0 +1,36 @@
+{
+    "application": [
+      {
+        "environment_mode": "local",
+        "signed_in": false,
+        "loading": false,
+        "connection": {
+          "auto": true,
+          "internet": false,
+          "datasource": false,
+          "operator": false,
+          "ethereum": false,
+          "status": { "code": null, "message": "Launching..." }
+        },
+        "user_submitted_connection_messages": [
+          {
+            "id": "1",
+            "message": "test",
+            "user": { "id": "0x0", "name": "test" }
+          }
+        ],
+        "active_modal": null,
+        "simulator_mode": false,
+        "desktop_mode": null,
+        "developer_mode": false,
+        "editor_mode": "viewing",
+        "flags": [],
+        "requests": [],
+        "migrations": { "latest": "1537948419066", "current": "" },
+        "$loki": 1,
+        "id": "1",
+        "meta": { "updated": 1542255636853, "revision": 714 }
+      }
+    ],
+    "requests": []
+  }

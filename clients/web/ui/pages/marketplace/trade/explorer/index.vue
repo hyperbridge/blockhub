@@ -54,8 +54,10 @@ export default {
     components: {
         'c-asset': () => import('~/components/assets-grid-inventory/asset').then(m => m.default || m)
     },
-    props: ['transactions'],
     computed: {
+        transactions() {
+            return this.$route.params.transactions
+        },
         transactionsX() {
             return this.$store.getters['assets/transactionsArray']
         }

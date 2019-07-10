@@ -123,8 +123,10 @@ export default {
         'c-pagination': () => import('~/components/pagination').then(m => m.default || m),
         'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m)
     },
-    props: [],
     computed: {
+        id() {
+            return this.$route.params.id
+        },
         assets() {
             if (!this.collection.meta.assets) return []
 

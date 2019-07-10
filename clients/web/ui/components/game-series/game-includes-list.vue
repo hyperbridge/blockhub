@@ -3,9 +3,7 @@
         <div class="game-includes__title">
             <h3>What's included</h3>
         </div>
-        <transition-group
-            name="list"
-            tag="div"
+        <div
             class="game-includes__list">
             <div
                 v-for="(item) of limitedList(limit)"
@@ -19,7 +17,7 @@
                     :rating="item.rating ? item.rating.overall : 0"
                     :image="item.meta ? item.meta.images.mediumTile : null" />
             </div>
-        </transition-group>
+        </div>
         <!--Show buttons-->
         <c-load-more
             v-if="showMore && list.length > showNumber - 1"
@@ -38,12 +36,20 @@
 
 <script>
 export default {
-    name: 'GameIncludesList',
     components: {
         'c-includes-item': () => import('~/components/game-series/game-includes-item').then(m => m.default || m),
         'c-load-more': () => import('~/components/buttons/load-more').then(m => m.default || m)
     },
-    props: ['list', 'showNumber'],
+    props: {
+        list: {
+            type: Array,
+            default: () => []
+        },
+        showNumber: {
+            type: Number,
+            default: 4
+        }
+    },
     data() {
         return {
             hiddenItems: '',
@@ -71,8 +77,9 @@ export default {
             this.showMore = true
         },
         limitedList(limit) {
-            const list = this.products
+            const list = this.list
             const newList = []
+
             list.forEach((item, i) => {
                 if (i <= limit - 1) {
                     newList.push(item)
