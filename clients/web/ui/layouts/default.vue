@@ -52,10 +52,8 @@
 
 <script>
 import Vue from 'vue'
-
 import '@/css/styles.scss'
 import 'swiper/dist/css/swiper.css'
-
 export default {
     components: {
         'c-error-page': () => import('~/pages/error').then(m => m.default || m),
@@ -71,7 +69,7 @@ export default {
     },
     computed: {
         disableAnimations() {
-            console.log(this.$store.state.application)
+            console.log('disable', this.$store.state.application)
             return this.$store.state.application.settings.client.animations
         }
     },
@@ -81,9 +79,7 @@ export default {
                 this.$('body').removeClass('show-sidebar')
                 this.$('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-bars')
             }
-
             this.$store.state.application.activeModal = null
-
             if (this.$route.meta.renderCondition) {
                 this.renderCondition = this.$route.meta.renderCondition
             } else if (this.$route.meta.permission === 'signedIn') {
@@ -93,7 +89,6 @@ export default {
             } else {
                 this.renderCondition = 'initialized'
             }
-
             this.updateEditorMode()
             this.ensureDesktopWelcome(to)
         },
@@ -103,12 +98,10 @@ export default {
                 this.$store.state.application.signedIn = false
             } else {
                 this.$store.state.application.signedIn = true
-
                 this.$store.state.application.account = {
                     ...this.$store.state.application.account,
                     ...this.$store.state.auth.user
                 }
-
                 const state = await this.$api.service('application/state').find()
                 this.$store.commit('application/updateState', state)
             }
@@ -145,12 +138,10 @@ export default {
             window.goHome = function goHome() {
                 window.location = '/'
             }
-
             window.resetSettings = function resetSettings() {
                 if (window.closeLokiDatabase) {
                     window.closeLokiDatabase()
                 }
-
                 const req = indexedDB.deleteDatabase('LokiCatalog')
                 req.onsuccess = function onsuccess() {
                 // alert("Deleted settings successfully. The page will now reload.");
@@ -164,36 +155,26 @@ export default {
                     window.location = window.location.href.replace(window.location.hash, '')
                 }
             }
-
             function isWhiteSpace(coords) {
                 const element = document.elementFromPoint(coords.x, coords.y)
                 const whitespace = $(document).add('body, html, #business-app, #app, #header-bg, #startup-loader, #critical-error, #left-bg, #right-bg, .startup-loader__container')
-
-                return whitespace.get().indexOf(element) > -1 ? true : false
+                return whitespace.get().includes(element) ? true : false
             }
-
             function bootChecker() {
                 if (typeof $ == 'undefined') return setTimeout(bootChecker, 1000)
-
                 // If any of these randomly chosen coordinates is not a bottom layer element, then assume loading occurred properly
                 const isLoaded = !isWhiteSpace({ x: 50, y: 50 })
-
                 if (isLoaded) {
                     $('#startup-loader, #critical-error').hide()
                     return setTimeout(bootChecker, 1 * 1000)
                 }
-
                 $('.startup-loader__status-message').text('An error occurred. Please try again in a few minutes.')
                 $('#startup-loader, #critical-error').show()
-
                 return setTimeout(bootChecker, 1000)
             }
-
             setTimeout(bootChecker, 15 * 1000)
-
             function setStatusMessage() {
                 if (typeof $ == 'undefined') return setTimeout(setStatusMessage, 100)
-
                 const userSubmittedConnectionMessages = [
                     {
                         'id': 1,
@@ -284,16 +265,13 @@ export default {
                         }
                     }
                 ]
-
                 const message = userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(userSubmittedConnectionMessages.length))]
-
                 $('.startup-loader__message').html(message.message)
                 $('.startup-loader__user a').html(message.user.name)
                 $('.startup-loader__user a').attr('href', `#/profile/${message.user.id}`)
                 $('.startup-loader__user').show()
                 $('.startup-loader').show()
             }
-
             setStatusMessage()
         },
         updateEditorMode() {
@@ -313,7 +291,6 @@ export default {
         },
         getExternalState() {
             const sheetUrl = 'https://spreadsheets.google.com/feeds/list/1QBzZ7O0l3-wsdvl7PgdYKeQrv_wvuQ4FoqrDgiyxugY/1/public/values?alt=json'
-
             this.$axios({
                 method: 'get',
                 url: sheetUrl
@@ -326,7 +303,6 @@ export default {
                             const key = entry.gsx$key.$t
                             const type = entry.gsx$type.$t
                             let value = entry.gsx$value.$t
-
                             if (type === 'int32') {
                                 value = Number(value)
                             } else if (type === 'boolean') {
@@ -334,7 +310,6 @@ export default {
                             } else if (type === 'json') {
                                 value = JSON.parse(value)
                             }
-
                             Vue.set(this.$store.state.application.externalState, key, value)
                         }
                     } catch (e) {
@@ -349,7 +324,6 @@ export default {
             if (!window.isElectron) {
                 return alert('Not on desktop')
             }
-
             this.$desktop.sendCommand('ping', this.$refs.desktopMessage.value)
             window.BlockHub.Bridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg))
         }
@@ -358,8 +332,6 @@ export default {
 </script>
 
 <style>
-
-
 body {
     overflow-x: hidden;
     margin: 0px;
@@ -375,8 +347,6 @@ body {
     -webkit-font-smoothing: subpixel-antialiased; /* fix for blur? */
     text-rendering:optimizeSpeed; /* fix for blur? */
 }
-
-
 /*Try to fix scrollable div height problems*/
 /*html, body, #app, .page {*/
     /*min-height: 100vh;*/
@@ -384,28 +354,21 @@ body {
 html, body{
     min-height: 100vh;
 }
-
 *, *::before, *::after {
     box-sizing: border-box;
 }
-
-
 p {
     margin-bottom: 10px;
 }
-
 a {
     color: #5abaf9;
     text-decoration: none;
     background-color: transparent;
 }
-
-
 #__nuxt {
     z-index: 2;
     position: relative;
 }
-
 #critical-error {
     display: none;
     padding: 10px;
@@ -418,7 +381,6 @@ a {
     border-radius: 6px;
     /* box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); */
 }
-
 #critical-error button {
     background: transparent;
     color: #fff;
@@ -427,7 +389,6 @@ a {
     font-size: 15px;
     border: 1px solid #fff;
 }
-
 .startup-loader {
     position: fixed;
     background: #30314c;
@@ -439,7 +400,6 @@ a {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
 }
-
 .startup-loader .startup-loader__container {
     width: 100%;
     height: 100%;
@@ -448,7 +408,6 @@ a {
     padding-top: 100px;
     font-size: 14px;
 }
-
 .startup-loader__message {
     color: #fff;
     font-size: 20px;
@@ -456,29 +415,24 @@ a {
     text-transform: uppercase;
     margin-top: 40px;
 }
-
 .startup-loader__user {
     display: none;
     color: #999;
     text-transform: uppercase;
 }
-
 .startup-loader__user a {
   color: #ddd;
   font-weight: bold;
 }
-
 .startup-loader__status-code {
     margin-top: 80px;
 }
-
 .startup-loader__status-message {
     color: #ddd;
     font-size: 16px;
     margin-top: 30px;
     text-transform: uppercase;
 }
-
 .startup-loader__links {
     display: none;
     position: absolute;
@@ -488,11 +442,9 @@ a {
     width: 100%;
     font-size: 16px;
 }
-
 .startup-loader__links p {
   color: #999;
 }
-
 .startup-loader__links a {
   color: #fff;
   margin-right: 20px;
@@ -503,7 +455,6 @@ a {
   color: #fff;
   margin-right: 5px;
 }
-
 .startup-loader__spinner {
   position: relative;
   margin: 0 auto;
@@ -515,7 +466,6 @@ a {
   zoom: 4;
   display: none;
 }
-
 .startup-loader__spinner:before {
   position: absolute;
   left: 3px;

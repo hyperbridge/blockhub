@@ -320,42 +320,6 @@
                     <p slot="footer" />
                 </c-basic-popup>
 
-                <!--please-vote popup-->
-                <c-vote-popup
-                    :activated="$store.state.application.activeModal === 'please-vote'"
-                    :title="'Please recommend our product.'"
-                    style="text-align: left;"
-                    @close="$store.state.application.activeModal = null">
-                    <template slot="body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label> Product quality:</label>
-                                    <div>
-                                        <c-pure-range-slider v-model.number="quality" :min="0" :max="10" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label> Pick your emotion :</label>
-                                    <div>
-                                        <c-vote-emoji />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label> Like or Dislike:</label>
-                                    <div>
-                                        <c-vote :votes="0" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </template>
-                    <p slot="footer" />
-                </c-vote-popup>
                 <!--coming-soon popup-->
                 <c-basic-popup
                     :activated="$store.state.application.activeModal === 'coming-soon'"
@@ -926,16 +890,10 @@ import 'vue-multiselect/dist/vue-multiselect.min.css'
 
 export default {
     components: {
-        'c-pure-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m),
-        'c-vote-emoji': () => import('~/components/emoji/vote').then(m => m.default || m),
-        'c-rating-stars': () => import('~/components/rating-stars').then(m => m.default || m),
-        'c-simple-vote': () => import('~/components/vote/simple').then(m => m.default || m),
-        'c-vote': () => import('~/components/vote').then(m => m.default || m),
         'c-header': () => import('~/components/headers/basic').then(m => m.default || m),
         'c-slim-header': () => import('~/components/headers/slim').then(m => m.default || m),
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
         'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
-        'c-vote-popup': () => import('~/components/popups/vote').then(m => m.default || m),
         'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
         'c-terms-popup': () => import('~/components/terms-popup').then(m => m.default || m),
         'c-privacy-popup': () => import('~/components/privacy-popup').then(m => m.default || m),
@@ -1019,15 +977,7 @@ export default {
             default: () => []
         },
         bgImage: String,
-        customShortcuts: [Array, Object],
-        quality: {
-            type: Number,
-            default: 0
-        },
-        count: {
-            type: Number,
-            default: 0
-        }
+        customShortcuts: [Array, Object]
     },
     data() {
         const self = this

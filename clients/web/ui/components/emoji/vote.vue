@@ -8,9 +8,9 @@
             class="emojis__list">
             <div
                 v-for="(emoji) in emojiList"
+                :key="emoji.count"
                 class="emojis__list-item"
                 :class="{'couple-items' : emoji.count > 0 }"
-                :key="emoji.count"
                 @click="addEmoji(emoji)">
                 <c-emoji
                     :emoji="emoji"
