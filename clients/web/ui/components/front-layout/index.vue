@@ -340,7 +340,7 @@
                                 <div class="form-group">
                                     <label> Pick your emotion :</label>
                                     <div>
-                                        <c-emoji />
+                                        <c-vote-emoji />
                                     </div>
                                 </div>
                             </div>
@@ -927,8 +927,7 @@ import 'vue-multiselect/dist/vue-multiselect.min.css'
 export default {
     components: {
         'c-pure-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m),
-        'c-single-emoji': () => import('~/components/emoji/single').then(m => m.default || m),
-        'c-emoji': () => import('~/components/emoji').then(m => m.default || m),
+        'c-vote-emoji': () => import('~/components/emoji/vote').then(m => m.default || m),
         'c-rating-stars': () => import('~/components/rating-stars').then(m => m.default || m),
         'c-simple-vote': () => import('~/components/vote/simple').then(m => m.default || m),
         'c-vote': () => import('~/components/vote').then(m => m.default || m),
@@ -1236,12 +1235,8 @@ export default {
                 }
             })
 
-<<<<<<< HEAD
-=======
             this.$store.state.application.tokenCount = res.balance
 
-
->>>>>>> 7aa03c851e664ba27c4e385522893808fc6cce88
             // this.$desktop.sendCommand('getTokenBalance', {
             //     type: 'HBX',
             //     address: this.$store.state.application.activeProfile.key
@@ -1336,12 +1331,7 @@ export default {
                 }
             }
 
-<<<<<<< HEAD
-            $(document).on('click', e => {
-=======
-
             this.$(document).on('click', e => {
->>>>>>> 7aa03c851e664ba27c4e385522893808fc6cce88
                 if (e.altKey) {
                     e.preventDefault()
 

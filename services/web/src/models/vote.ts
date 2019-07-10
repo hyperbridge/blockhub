@@ -3,7 +3,6 @@ import Profile from './profile'
 import Node from './node'
 import BaseModel from './base'
 
-
 export default class Vote extends BaseModel {
     // value = 1 or -1 or emoji
     parentId!: Number
