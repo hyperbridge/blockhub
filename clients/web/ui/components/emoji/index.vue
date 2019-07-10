@@ -57,7 +57,22 @@ export default {
     },
     data() {
         return {
-            emojiList: [],
+            emojiList: [
+                'grinning',
+                '+1',
+                'kissing_heart',
+                'heart_eyes',
+                'stuck_out_tongue_winking_eye',
+                'sweat_smile',
+                'laughing',
+                'joy',
+                'grin',
+                'hugging_face',
+                'scream',
+                'blush',
+                'yum',
+                'sunglasses'
+            ],
             showPicker: false,
             nEmoji: {},
             showAll: false
@@ -71,6 +86,7 @@ export default {
             this.showPicker = !this.showPicker
         },
         addEmoji(emoji) {
+            console.log(emoji)
             this.nEmoji = emoji
             if (this.emojiList.includes(emoji)) {
                 this.emojiList[this.emojiList.indexOf(emoji)].count += 1

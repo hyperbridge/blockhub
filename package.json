@@ -8,7 +8,11 @@
     "styleguide": "cd tools && cd styleguide && yarn dev"
   },
   "devDependencies": {
+    "@nuxtjs/eslint-config": "^1.0.1",
+    "babel-eslint": "^10.0.2",
     "lerna": "^3.8.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "eslint": "^6.0.1"
+  }
 }

@@ -82,7 +82,7 @@ export default {
             type: Boolean
         },
         width: {
-            default: '400'
+            default: '400px'
         },
         dimension: {
             type: String,

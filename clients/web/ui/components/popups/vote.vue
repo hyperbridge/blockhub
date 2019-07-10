@@ -4,62 +4,37 @@
         :duration="100">
         <div
             v-if="activated"
-            class="popup"
+            class="terms-popup"
             @click.self.prevent="$emit('close')">
             <div
-                class="popup__item"
-                :style="{ 'width': + width + dimension}">
-                <h3 v-if="title">
-                    {{ title }}
-                </h3>
+                class="terms-popup__item"
+                :style="{ 'width': + width + 'px'}">
                 <div class="position-relative">
-                    <div
-                        v-if="!customClose"
-                        class="popup__close"
-                        @click="$emit('close')">
-                        <i class="fas fa-times" />
-                    </div>
-                    <slot
-                        v-else
-                        name="customClose" />
-                    <div
-                        v-if="!this.$slots.customContent"
-                        class="popup__content">
+                    <div class="terms-popup__content">
                         <div
-                            v-if="subTitle"
-                            class="popup__content-header"
-                            :class="[ 'popup-type-' + type ]">
-                            <div class="popup-icon">
-                                <i
-                                    v-if=" type == ['warning', 'danger'] "
-                                    class="fas fa-exclamation-triangle" />
-                                <i
-                                    v-if=" type == 'success' "
-                                    class="fas fa-check" />
-                                <i
-                                    v-else
-                                    class="fas fa-info-circle" />
-                            </div>
-                            <div class="subTitle">
-                                {{ subTitle }}
-                            </div>
+                            class="terms-popup__close"
+                            @click="$emit('close')">
+                            <i class="fas fa-times" />
                         </div>
-                        <div class="popup__content-body">
-                            <p class="m-0">
-                                <slot />
-                            </p>
+                        <div class="terms-popup__header">
+                            <h4 v-if="title">
+                                {{ title }}
+                            </h4>
+                            <slot name="header" />
+                        </div>
+                        <div
+                            id="terms-popup__body"
+                            class="terms-popup__body"
+                            @scroll="checkReadState">
                             <slot name="body" />
                         </div>
-                        <div
-                            v-if="this.$slots.footer"
-                            class="popup__content-footer">
-                            <slot name="footer" />
+                        <div class="terms-popup__footer">
+                            <c-checkbox
+                                id="vote">
+                                Don't show it again.
+                            </c-checkbox>
                         </div>
                     </div>
-
-                    <slot
-                        v-else
-                        name="customContent" />
                 </div>
             </div>
         </div>
@@ -69,36 +44,39 @@
 <script>
 export default {
     props: {
-        type: {
-            default: 'default'
-        },
         title: {
-            type: String
-        },
-        subTitle: {
-            type: String
+            type: String,
+            default: ''
         },
         activated: {
-            type: Boolean
+            type: Boolean,
+            default: false
         },
         width: {
-            default: '400'
-        },
-        dimension: {
             type: String,
-            default: 'px'
+            default: '700px'
         }
     },
-    computed: {
-        customClose() {
-            return this.$slots.customClose
+    data() {
+        return {
+            isRead: false
+        }
+    },
+    methods: {
+        checkReadState() {
+            if (($('#terms-popup__body').scrollTop() + $('#terms-popup__body').innerHeight()) >= $('#terms-popup__body')[0].scrollHeight) {
+                console.log('1')
+                this.isRead = true
+            } else {
+                this.isRead = false
+            }
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-    .popup {
+    .terms-popup {
         display: flex;
         width: 100%;
         height: 100vh;
@@ -111,19 +89,22 @@ export default {
         bottom: 0;
         z-index: 99;
         background: rgba(0, 0, 0, 0.7);
+        @media (max-width: 768px) {
+            max-width: 80%!important;
+            max-height: 70vh;
+        }
     }
 
-    .popup__close {
+    .terms-popup__close {
         position: absolute;
-        top: -25px;
-        right: 0px;
-        opacity: .5;
-        -webkit-transition: 0.1s ease-out;
-        -moz-transition:  0.1s ease-out;
-        transition:  0.1s ease-out;
+        top: 10px;
+        right: 10px;
+        opacity: .7;
+        -webkit-transition: 0.2s ease-out;
+        -moz-transition:  0.2s ease-out;
+        transition:  0.2s ease-out;
         font-size: 22px;
         z-index: 999;
-        color: #fff;
         img {
             width: 24px;
         }
@@ -136,93 +117,56 @@ export default {
         }
     }
 
-    .popup__item {
+    .terms-popup__item {
         display: flex;
         position: relative;
         z-index: 30;
         flex-direction: column;
-        width: 400px;
+        width: 700px;
         max-width: 90%;
-        @media (max-width: 768px) {
-            max-width: 80%!important;
-            max-height: 70vh;
-        }
-        h3 {
-            color: #C6C6D6;
-            font-size: 30px;
-            text-align: center;
-            margin-bottom: 20px;
-            padding: 0;
-            text-transform: uppercase;
-        }
+        color: #fff;
     }
 
-    .popup__content {
+    .terms-popup__content {
         background: #1C2032;
-        padding: 10px;
+        padding: 20px;
         border-radius: 5px;
         width: 100%;
         box-shadow: 0 0 10px rgba(0, 0, 0, .3);
     }
 
-    .popup__content-header {
-        display: flex;
+    .terms-popup__header{
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
         width: 100%;
-        align-items: center;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        padding: 10px;
-        border-radius: 5px;
-        text-align: left;
-        &.popup-type-warning {
-            background: #FADC72;
-            color: #3D3E5D;
-        }
-        &.popup-type-danger {
-            background: #F75D5D;
-        }
-        &.popup-type-info {
-            background: #5D75F7;
-        }
-        &.popup-type-success {
-            background: #43C981;
-        }
-        &.popup-type-default {
-            background: rgba(255, 255, 255, .3)
-        }
-        .popup-icon {
-            width: 45px;
-            font-size: 40px;
-        }
-        .subTitle {
-            width: calc(100% - 55px);
-            font-size: 18px;
-            font-weight: bold;
-            line-height: 22px;
-        }
-    }
-
-    .popup__content-body {
+        padding-right: 100px;
+        display: block;
         color: #fff;
-        padding: 10px 0;
-        font-size: 16px;
-        line-height: 19px;
+        h2,h3,h4,h5,
+        .h2,.h3,.h4,.h5{
+            color: #fff;
+            padding: 0;
+            margin: 0;
+        }
+    }
+    .terms-popup__body{
         display: flex;
-        width: 100%;
+        flex-direction: column;
+        overflow-y: auto;
+        height: auto;
+        color: #fff;
+        max-height: 60vh;
+        margin: 20px 0;
+        background: rgba(255, 255, 255, .03);
+        padding: 10px;
     }
-
-    .popup__content-footer {
-        margin-top: 15px;
+    .terms-popup__footer{
         display: flex;
-        width: 100%;
-    }
-
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .1s;
-    }
-
-    .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */
-    {
-        opacity: 0;
+        align-items: center;
+        .not-accept{
+            pointer-events: none;
+            opacity: .5;
+        }
     }
 </style>
