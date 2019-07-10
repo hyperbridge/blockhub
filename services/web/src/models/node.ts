@@ -7,6 +7,7 @@ import Product from './product'
 import Community from './community'
 import Discussion from './discussion'
 import BaseModel from './base'
+import Vote from './vote';
 
 // Based on https://github.com/Vincit/objection.js/issues/19
 // Exclusive ARC https://hashrocket.com/blog/posts/modeling-polymorphic-associations-in-a-relational-database#exclusive-belongs-to-aka-exclusive-arc-
@@ -31,16 +32,22 @@ export default class Node extends BaseModel {
     fromAchievementId!: Number
     toAchievementId!: Number
 
+    fromIdea!:Idea
     fromIdeaId!: Number
+    toIdea!:Idea
     toIdeaId!: Number
 
     fromSuggestionId!: Number
     toSuggestionId!: Number
 
+    fromProject!: Project
     fromProjectId!: Number
+    toProject!:Project
     toProjectId!: Number
 
+    fromProduct!:Product
     fromProductId!: Number
+    toProduct!:Product
     toProductId!: Number
 
     fromAssetId!: Number
@@ -83,7 +90,9 @@ export default class Node extends BaseModel {
     fromTagId!: Number
     toTagId!: Number
 
+    fromVote!: Vote
     fromVoteId!: Number
+    toVote!: Vote
     toVoteId!: Number
 
     fromLeaderboardId!: Number
@@ -231,6 +240,22 @@ export default class Node extends BaseModel {
                 join: {
                     from: 'nodes.toDiscussionId',
                     to: 'discussions.id'
+                }
+            },
+            fromVote: {
+                relation: Model.HasOneRelation,
+                modelClass: Vote,
+                join: {
+                    from: 'nodes.fromVoteId',
+                    to: 'votes.id'
+                }
+            },
+            toVote: {
+                relation: Model.HasOneRelation,
+                modelClass: Vote,
+                join: {
+                    from: 'nodes.toVoteId',
+                    to: 'votes.id'
                 }
             },
         }

@@ -13,7 +13,7 @@ export default function(app) {
             max: 25,
             ...paginate
         },
-        allowedEager: '[account, collections]'
+        allowedEager: '[account, collections, vote]'
     }
 
     app.use('/profiles', createService(options))
