@@ -7,10 +7,17 @@ import Rating from './rating'
 import BaseModel from './base'
 import Community from './community'
 
+export enum DiscussionType {
+    Discussion = 'discussion',
+    Chat = 'chat',
+    Both = 'both'
+}
+
 export default class Discussion extends BaseModel {
-    content!: String
-    parentId!: Number
-    rootMessageId!: Number
+    content!: String;
+    parentId!: Number;
+    rootMessageId!: Number;
+    type!: DiscussionType;
 
     static get tableName() {
         return 'discussions'
