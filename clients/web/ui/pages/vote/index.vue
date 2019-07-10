@@ -35,7 +35,7 @@
                         <select
                             class="form-control"
                             @change="onChangeId($event)">
-                            <option v-for="object in objects" v-bind:value="object.id" :key="object.id">
+                            <option v-for="object in objects" :value="object.id" :key="object.id">
                                 {{object.name}}
                             </option>
                         </select>
@@ -43,7 +43,7 @@
                 </div>
                 <div v-if="selectObject && selectObjectId" class="invert">
                     <div class="form-group">
-                        <c-vote ref="myVote" :votes="0"  v-on:getVote="getVote" />
+                        <c-vote ref="myVote" :votes="0"  @getVote="getVote" />
                     </div>
                 </div>
             </div>
@@ -72,47 +72,45 @@ export default {
     methods: {
         async getVote(value) {
             console.log('profileId',this.$store.state.application.activeProfile.id);
-            if (this.$store.state.application.activeProfile.id) {
-                if (this.selectedObject && this.selectedObjectId && value) {                    
-                    let request = { 
-                            value: String(value),
-                            ownerId:  this.$store.state.application.activeProfile.id,                                 
-                            objectType: this.selectedObject,
-                            objectId: this.selectedObjectId
-                        }        
-                        console.log('requestCheck',request)
+            if (!this.$store.state.application.activeProfile.id) return ;
+            if (!(this.selectedObject && this.selectedObjectId && value)) return; 
+                           
+            const request = { 
+                    value: String(value),
+                    ownerId:  this.$store.state.application.activeProfile.id,                                 
+                    objectType: this.selectedObject,
+                    objectId: this.selectedObjectId
+                }        
+                console.log('requestCheck',request)
 
-                        let result = await this.$api.service('votes/check').find({
-                            query: {
-                                type: 'HBX',
-                                objectType: request.objectType,
-                                objectId: request.objectId,
-                                profileId: request.ownerId
-                            }
-                        })
-                        console.log('result',result);
+                const result = await this.$api.service('votes/check').find({
+                    query: {
+                        type: 'HBX',
+                        objectType: request.objectType,
+                        objectId: request.objectId,
+                        profileId: request.ownerId
+                    }
+                })
+                console.log('result',result);
 
-                        if(result.voted){                          
-                            let update_data = await this.$store.dispatch('votes/get',result.id) 
-                            let data3;
-                                console.log('updatedData',update_data)
-                                update_data.value = String(value);
-                                update_data.meta = {};
-                                update_data.objectType = request.objectType;
-                                update_data.objectId = request.objectId;
-                                update_data.ownerId = request.ownerId;
-                                update_data = await this.$store.dispatch('votes/update',
-                                [
-                                    result.id,
-                                    update_data
-                                ]) 
-                                console.log('updateResult',update_data)
-                        } else {                            
-                            let data3 = await this.$store.dispatch('votes/create',request) 
-                            console.log('createResult',data3)
-                        }
-                }   
-            }
+                if(result.voted){                          
+                    let updateData = await this.$store.dispatch('votes/get',result.id) 
+                        console.log('updatedData',updateData)
+                        updateData.value = String(value);
+                        updateData.meta = {};
+                        updateData.objectType = request.objectType;
+                        updateData.objectId = request.objectId;
+                        updateData.ownerId = request.ownerId;
+                        updateData = await this.$store.dispatch('votes/update',
+                        [
+                            result.id,
+                            updateData
+                        ]) 
+                        console.log('updateResult',updateData)
+                } else {                            
+                    let data3 = await this.$store.dispatch('votes/create',request) 
+                    console.log('createResult',data3)
+                }
         },
         onChangeType(event) {
             this.selectObject = Boolean(event.target.value);

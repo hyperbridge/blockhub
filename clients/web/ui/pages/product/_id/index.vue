@@ -17,7 +17,6 @@
                 Product not found
             </div>
         </div>
-
         <div
             v-else
             class="row">
@@ -503,7 +502,8 @@ export default {
         'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
         'c-multiselect': () => import('vue-multiselect').then(m => m.default || m),
-        'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m)
+        'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m),
+        
     },
     data() {
         return {
