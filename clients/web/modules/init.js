@@ -6,6 +6,5 @@ export default function () {
 
     this.nuxt.hook("render:before", (renderer, options) => {
         console.log("render:before");
-
     });
 }

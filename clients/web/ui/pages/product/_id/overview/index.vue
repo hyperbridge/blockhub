@@ -390,7 +390,10 @@ export default {
         scrollToReviews() {
             this.$refs.reviews.scrollIntoView()
         }
-    }
+    },
+    mounted() {
+        this.$store.commit('application/activateModal', 'please-vote'); 
+    },
 }
 </script>
 

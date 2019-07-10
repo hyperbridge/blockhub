@@ -30,7 +30,6 @@ export let plugins = []
 export const state = () => ({
     initialized: false
 })
-
 if (decentralizedMode) {
     service = () => { // eslint-disable-line arrow-body-style
         return {
@@ -43,7 +42,6 @@ if (decentralizedMode) {
                         if (!newProfile.name) newProfile.name = 'Default'
                         this.profiles.push({ ...newProfile, edit: true })
                         this.editedProfile = newProfile
-
                         this.saveProfiles()
                     })
                 },

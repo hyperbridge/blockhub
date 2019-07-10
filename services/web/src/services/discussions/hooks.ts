@@ -27,7 +27,7 @@ const fillAll = function(options = {}) {
 }
 
 const create = function(options = {}) {
-    return async context => {
+    return async context => { 
         const { app, data } = context
 
         console.log('Discussion creation request: ', data)
