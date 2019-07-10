@@ -22,6 +22,7 @@ export default {
     },
     data: () => ({
     }),
+
     computed: {
         messages() {
             return this.$store.getters['messages/list']

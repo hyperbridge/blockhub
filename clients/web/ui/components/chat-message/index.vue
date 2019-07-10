@@ -29,7 +29,6 @@ export default {
     props: ['message', 'userId'],
     computed: {
         timeAgo() {
-            return
             return this.message.createdAt.fromNow()
         }
     }
