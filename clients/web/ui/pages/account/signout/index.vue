@@ -12,10 +12,10 @@
 
                     <c-button
                         hidden
-                        @click="deleteAccount">
+                        @click="deleteAccount()">
                         Delete Account
                     </c-button>
-                    <c-button @click="signOut">
+                    <c-button @click="signOut()">
                         Sign Out
                     </c-button>
                 </div>
@@ -31,9 +31,9 @@ export default {
             this.$desktop.sendCommand('deleteAccountRequest')
         },
         signOut() {
-            this.$store.state.application.signedIn = false
-            this.$store.dispatch('auth/logout')
-            this.$router.push({ path: '/' })
+            debugger
+            this.$store.dispatch('logout')
+            this.$router.push('/')
         }
     }
 }

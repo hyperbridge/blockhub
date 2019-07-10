@@ -223,6 +223,8 @@ export const actions = {
     },
 
     nuxtClientInit({ commit }, context) {
+        app = context.app
+
         if (context.store.state.user) {
             const { userId, meta } = context.store.state.user
             this.$can.setUserId(userId)
@@ -230,26 +232,29 @@ export const actions = {
         }
     },
 
-    login({ commit }, { token, user }) {
+    login({ dispatch, commit }, { token, user }) {
         console.log('[BlockHub] Logging in: ', user)
         this.$axios.setToken(token, 'bearer')
         // this.$cookies.set('token', token)
         this.$can.setUserId(user.userId)
         this.$can.setUserPermissions(user.userId, user.meta.permissions)
 
+        dispatch('application/login')
         commit('token', token)
         commit('user', user)
         commit('loggedIn', true)
     },
 
-    logout({ commit }) {
+    logout({ dispatch, commit }) {
         console.log('[BlockHub] Logging out')
+        dispatch('auth/logout')
+        dispatch('application/logout')
         this.$axios.setToken(false)
         // this.$cookies.remove('token')
         commit('loggedIn', false)
         commit('user', null)
         commit('token', null)
-        app.$cookies.remove('feathers-jwt')
+        this.$cookies.remove('feathers-jwt')
         // this.$router.push('/login')
     },
 

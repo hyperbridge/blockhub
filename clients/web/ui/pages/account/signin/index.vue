@@ -103,7 +103,7 @@ export default {
     },
     methods: {
         signIn() {
-            this.$store.dispatch('application/signIn')
+            this.$store.dispatch('login')
 
             this.$router.push({ path: '/' })
         },

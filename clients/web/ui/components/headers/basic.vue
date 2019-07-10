@@ -514,13 +514,13 @@ export default {
             this.$store.dispatch('application/setEditorMode', 'viewing')
         },
         onShowMenu() {
-            $('.snotify').hide()
+            this.$('.snotify').hide()
         },
         onHideMenu() {
-            $('.snotify').show()
+            this.$('.snotify').show()
         },
         signOut() {
-            this.$store.dispatch('application/signOut')
+            this.$store.dispatch('ogout')
 
             this.isLoading = true
         },

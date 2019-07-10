@@ -3240,7 +3240,7 @@ cookie-storage@^3.2.0:
   resolved "https://registry.yarnpkg.com/cookie-storage/-/cookie-storage-3.2.0.tgz#ada5f23152eb76f2a1d48777e921ebc2789535b4"
   integrity sha512-E2IlZrqJ00Y+9GLugfqyumcjXBtCkNWvX0opx0RUqaqvB67i6zzngrrFjeWNkJVhw0cO/ixThKLRDgDOak9eCw==
 
-cookie-universal-nuxt@^2.0.14:
+cookie-universal-nuxt@^2.0.16:
   version "2.0.16"
   resolved "https://registry.yarnpkg.com/cookie-universal-nuxt/-/cookie-universal-nuxt-2.0.16.tgz#8d528098c973162b352199240e40da0e5429b13f"
   integrity sha512-wRK2zw8w+a5xPehb5kLbgOic/4mbjl2exUCxWZwGuttcwsFgOymiwDrCOzmQslqrDevPDL2SsBbH6wtOm7dB9g==
