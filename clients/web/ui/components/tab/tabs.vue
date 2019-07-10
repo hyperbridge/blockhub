@@ -25,7 +25,9 @@
                 </ul>
             </slot>
         </nav>
-        <slot />
+        <div class="tabs__content">
+            <slot />
+        </div>
     </div>
 </template>
 
@@ -152,16 +154,24 @@ export default {
     .tabs--styled {
         .tabs__nav {
             position: relative;
+            padding-bottom: 15px;
         }
         .tabs__nav:after {
             content: "";
             position: absolute;
             left: 0;
             top: 32px;
-            right: 15px;
+            right: 0;
             height: 15px;
             background: #3e3e5c;
             z-index: 10;
+            border-radius: 0 8px 0 0;
+        }
+        .tabs__content{
+            padding: 15px 10px 10px;
+            margin-top: -5px;
+            border-radius: 0 0 10px 10px;
+            background: #3e3e5c;
         }
         .tabs__list-item {
             margin-right: 20px;
