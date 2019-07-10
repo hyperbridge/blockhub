@@ -9,6 +9,7 @@ import Tag from './tag'
 import Rating from './rating'
 import Node from './node'
 import Event from './event'
+import Vote from './vote'
 import BaseModel from './base'
 
 export default class Project extends BaseModel {
@@ -42,7 +43,7 @@ export default class Project extends BaseModel {
             }
         }
     }
-
+    
     static get relationMappings(): RelationMappings {
         return {
             // members: {
@@ -77,6 +78,19 @@ export default class Project extends BaseModel {
             //         // https://www.tutorialspoint.com/postgresql/postgresql_views.htm
             //     }
             // },
+            vote: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Vote,
+                join: {
+                    from: 'projects.id',
+                    to: 'votes.id',
+                    through: {
+                        from: 'nodes.toProjectId',
+                        to: 'nodes.fromVoteId',
+                        extra: ['relationKey']
+                    }
+                },
+            },
             community: {
                 relation: Model.HasOneRelation,
                 modelClass: Community,

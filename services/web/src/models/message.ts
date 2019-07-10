@@ -5,7 +5,6 @@ import BaseModel from './base'
 
 export default class Message extends BaseModel {
     parentId!: Number
-
     ownerId!: Number
 
     static get tableName() {

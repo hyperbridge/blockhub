@@ -3,6 +3,7 @@ import bodyParser = require('body-parser')
 import helmet = require('helmet')
 import Knex = require('knex')
 import winston = require('winston')
+import cors = require('cors')
 import { Model, RelationMappings } from 'objection'
 import config = require('../config')
 import feathers = require('@feathersjs/feathers')
@@ -46,6 +47,7 @@ export default async () => {
     app.configure(socketio())
     app.configure(rest())
 
+    app.use(cors())
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
 

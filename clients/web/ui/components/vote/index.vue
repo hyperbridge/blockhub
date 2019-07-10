@@ -44,11 +44,12 @@ export default {
         upvote() {
             this.upvoted = !this.upvoted
             this.downvoted = false
-
+            this.$emit('getVote',this.value)
         },
         downvote() {
             this.downvoted = !this.downvoted
             this.upvoted = false
+            this.$emit('getVote',this.value)
         }
     }
 }
@@ -56,7 +57,6 @@ export default {
 
 <style lang="scss" scoped>
 .simple-vote {
-    position: absolute;
     top: 0px;
     right: -45px;
     z-index: 1;

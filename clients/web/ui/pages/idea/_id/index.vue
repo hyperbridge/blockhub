@@ -434,7 +434,6 @@ export default {
         save() {
             if (!this.checkForm()) {
                 this.$store.dispatch('application/setEditorMode', 'editing')
-
                 return
             }
 
