@@ -55,10 +55,12 @@ export default {
             type: [Array, Object]
         },
         fullReviewsPath: {
-            type: String
+            type: String,
+            default: null
         },
         rateGamePath: {
-            type: String
+            type: String,
+            default: null
         }
     }
 }

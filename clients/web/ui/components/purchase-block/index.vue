@@ -130,18 +130,19 @@ export default {
         tags: Array,
         title: {
             type: String,
-            default: null
+            default: 'Title'
         },
         price: {
             type: Number,
-            default: null
+            default: 0
         },
         eligibleTokens: {
             type: Number,
             default: 0
         },
         releaseDate: {
-            type: String
+            type: String,
+            default: new Date()
         },
         offersPurchases: {
             type: Boolean,

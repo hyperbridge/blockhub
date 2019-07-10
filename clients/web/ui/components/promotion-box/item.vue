@@ -43,13 +43,16 @@ export default {
     name: 'PromotionItem',
     props: {
         title: {
-            type: String
+            type: String,
+            default: null
         },
         price: {
-            type: String
+            type: String,
+            default: null
         },
         link: {
-            type: String
+            type: String,
+            default: null
         },
         basic: {
             type: Boolean,
@@ -64,7 +67,8 @@ export default {
             default: 'shopping-cart'
         },
         iconColor: {
-            type: String
+            type: String,
+            default: null
         }
     }
 }

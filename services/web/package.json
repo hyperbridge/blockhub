@@ -13,8 +13,10 @@
         "format": "./node_modules/.bin/tsfmt -r",
         "start": "npm run build-production && node ./build/src/index.js",
         "dev": "cross-env NODE_ENV=development yarn run nodemon",
-        "migrate": "./node_modules/.bin/knex migrate:latest",
+        "migrate": "ts-node -P ./tsconfig.json node_modules/.bin/knex migrate:latest --knexfile knexfile.js",
         "migrate-heroku": "heroku run 'knex migrate:latest'",
+        "seed-all": "ts-node -P ./tsconfig.json ~/.nvm/versions/node/v10.16.0/bin/knex seed:run --knexfile knexfile.js",
+        "seed": "ts-node -P ./tsconfig.json ~/.nvm/versions/node/v10.16.0/bin/knex seed:run --knexfile knexfile.js --specific=",
         "test-api-call": "curl http://localhost:9001/api/v1/ping",
         "deploy-beta": "cp -R dist/ ../../../beta-api.blockhub.gg && cd ../../../beta-api.blockhub.gg && rm CNAME && git add -A && git commit -m \"Rebuild\" && git push && cd ../../../blockhub/services/web",
         "deploy-preview": "cp -R dist/ ../../../preview-api.blockhub.gg && cd ../../../preview-api.blockhub.gg && rm CNAME && git add -A && git commit -m \"Rebuild\" && git push && cd ../../../blockhub/services/web",
@@ -54,8 +56,10 @@
         "helmet": "^3.15.0",
         "knex": "^0.15.2",
         "knex-migrate": "^1.7.0",
+        "moment": "^2.24.0",
         "morgan": "^1.9.1",
         "mysql": "^2.16.0",
+        "nodemailer": "^6.2.1",
         "objection": "^1.5.0-rc.4",
         "pg": "^7.7.1",
         "swagger-express-validator": "^0.1.1",
@@ -63,45 +67,46 @@
         "swagger-routes-express": "^2.0.0",
         "typescript": "^3.2.2",
         "typescript-formatter": "^7.2.2",
+        "underscore": "^1.9.1",
         "winston": "^3.2.1"
     },
     "devDependencies": {
-		"cross-env": "^5.2.0",
-		"eslint-config-marine": "^3.0.2",
-		"eslint": "^5.13.0",
-		"@typescript-eslint/eslint-plugin": "^1.9.0",
-		"@typescript-eslint/parser": "^1.9.0",
-		"nodemon": "^1.18.10",
-		"ts-node": "^8.3.0"
+        "@typescript-eslint/eslint-plugin": "^1.9.0",
+        "@typescript-eslint/parser": "^1.9.0",
+        "cross-env": "^5.2.0",
+        "eslint": "^5.13.0",
+        "eslint-config-marine": "^3.0.2",
+        "nodemon": "^1.18.10",
+        "ts-node": "^8.3.0"
     },
-	"eslintConfig": {
-		"parser": "@typescript-eslint/parser",
-		"plugins": [
-			"@typescript-eslint"
-		],
-		"extends": [
-			"marine/node"
-		],
-		"rules": {
-      "quote-props": 0,
-      "func-names": 0,
-			"guard-for-in": 0,
-			"@typescript-eslint/semi": [
-				"error",
-				"never"
-			],
-			"@typescript-eslint/indent": [
-			  "error",
-			  4
-			],
-			"indent": [
-			  "error",
-			  4
-			],
-			"space-before-function-paren": [
-			  "error",
-			  "always"
-			]
-		}
-	}
+    "eslintConfig": {
+        "parser": "@typescript-eslint/parser",
+        "plugins": [
+            "@typescript-eslint"
+        ],
+        "extends": [
+            "marine/node"
+        ],
+        "rules": {
+            "quote-props": 0,
+            "func-names": 0,
+            "guard-for-in": 0,
+            "@typescript-eslint/semi": [
+                "error",
+                "never"
+            ],
+            "@typescript-eslint/indent": [
+                "error",
+                4
+            ],
+            "indent": [
+                "error",
+                4
+            ],
+            "space-before-function-paren": [
+                "error",
+                "always"
+            ]
+        }
+    }
 }
