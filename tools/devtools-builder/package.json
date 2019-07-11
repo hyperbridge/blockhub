@@ -1,7 +1,7 @@
 {
-    "name": "hyperbridge-app-builder",
-    "version": "0.7.1",
-    "description": "Hyperbridge App Builder",
+    "name": "blockhub-devtools-builder",
+    "description": "BlockHub DevTools Builder",
+    "version": "1.0.0rc1",
     "homepage": "https://hyperbridge.com",
     "license": "SEE LICENSE IN LICENSE.md",
     "author": {
@@ -130,4 +130,3 @@
       }
     }
   }
-  

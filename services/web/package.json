@@ -1,6 +1,6 @@
 {
-    "name": "web",
-    "description": "Web service",
+    "name": "blockhub-web-service",
+    "description": "BlockHub Web Service",
     "repository": {},
     "license": "SEE LICENSE IN LICENSE.md",
     "version": "0.1.0",
