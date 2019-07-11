@@ -7,7 +7,8 @@
             v-if="emojiList.length"
             class="emojis__list">
             <div
-                v-for="(emoji, index) in emojiList"
+                v-for="(emoji) in emojiList"
+                :key="emoji.count"
                 class="emojis__list-item"
                 :class="{'couple-items' : emoji.count > 0 }"
                 @click="addEmoji(emoji)">
@@ -57,7 +58,22 @@ export default {
     },
     data() {
         return {
-            emojiList: [],
+            emojiList: [
+                'grinning',
+                '+1',
+                'kissing_heart',
+                'heart_eyes',
+                'stuck_out_tongue_winking_eye',
+                'sweat_smile',
+                'laughing',
+                'joy',
+                'grin',
+                'hugging_face',
+                'scream',
+                'blush',
+                'yum',
+                'sunglasses'
+            ],
             showPicker: false,
             nEmoji: {},
             showAll: false

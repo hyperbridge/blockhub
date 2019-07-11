@@ -303,7 +303,6 @@
             </div>
         </div>
 
-
         <c-custom-modal
             v-if="firstProduct && editing && !$store.state.application.settings.client.hide_product_intro_modal && false"
             title="Help Center"
@@ -341,7 +340,6 @@
                 </c-button>
             </div>
         </c-custom-modal>
-
 
         <c-basic-popup
             :activated="$store.state.application.activeModal === 'sync-blockchain'"
@@ -502,8 +500,8 @@ export default {
         'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
         'c-multiselect': () => import('vue-multiselect').then(m => m.default || m),
-        'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m),
-        
+        'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m)
+
     },
     data() {
         return {
@@ -565,7 +563,6 @@ export default {
         //     if (!product.meta) {
         //         product.meta = {}
         //     }
-
 
         //     if (!product.meta.community) {
         //         product.meta.community = {
@@ -732,7 +729,7 @@ export default {
                 this.product.ownerId = this.$store.state.application.activeProfile.id
 
                 this.$store.dispatch('products/create', this.product).then(res => {
-                    this.product.id = res.id        
+                    this.product.id = res.id
                     this.notice = 'Congratulations, your product has been created!'
 
                     this.$router.push(`/business/project/${this.project.id}`)

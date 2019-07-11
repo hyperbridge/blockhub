@@ -44,7 +44,6 @@ export default {
         upvote() {
             this.upvoted = !this.upvoted
             this.downvoted = false
-
         },
         downvote() {
             this.downvoted = !this.downvoted
@@ -72,8 +71,6 @@ export default {
 .disabled {
     color: orange;
 }
-
-
 /* some simple transitions to make the upvote and downvote
 buttons fade in as a visual cue for the user */
 
