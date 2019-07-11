@@ -49,7 +49,6 @@
         </div>
     </div>
 </template>
-
 <script>
 import Vue from 'vue'
 import '@/css/styles.scss'
