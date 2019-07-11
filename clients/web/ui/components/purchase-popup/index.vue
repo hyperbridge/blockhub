@@ -486,7 +486,7 @@ export default {
                             }
                             &:hover{
                                 cursor: pointer;
-                                background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQyIDQyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0MiA0MjsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIzMnB4IiBoZWlnaHQ9IjMycHgiPgo8cGF0aCBkPSJNMzcuMDU5LDE2SDI2VjQuOTQxQzI2LDIuMjI0LDIzLjcxOCwwLDIxLDBzLTUsMi4yMjQtNSw0Ljk0MVYxNkg0Ljk0MUMyLjIyNCwxNiwwLDE4LjI4MiwwLDIxczIuMjI0LDUsNC45NDEsNUgxNnYxMS4wNTkgIEMxNiwzOS43NzYsMTguMjgyLDQyLDIxLDQyczUtMi4yMjQsNS00Ljk0MVYyNmgxMS4wNTlDMzkuNzc2LDI2LDQyLDIzLjcxOCw0MiwyMVMzOS43NzYsMTYsMzcuMDU5LDE2eiIgZmlsbD0iIzJhMzA0ZCIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
+                                background-image: url('./../../assets/SVG/plus-icon.svg');
                                 background-position: center;
                                 background-size: 16px;
                                 background-repeat: no-repeat;

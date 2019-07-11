@@ -1,8 +1,8 @@
 <template>
-    <div v-show="tabId == tabData.activeTab">
+    <div v-show="tabId === tabData.activeTab">
         <div class="tab__content">
             <transition name="tab">
-                <div v-if="tabId == tabData.activeTab">
+                <div v-if="tabId === tabData.activeTab">
                     <slot />
                 </div>
             </transition>
