@@ -20,7 +20,7 @@ exports.up = knex => {
 
             alter table "nodes"
                 drop constraint "to_is_set" restrict;
-                
+
             DROP FUNCTION count_not_nulls;
 
             CREATE FUNCTION count_not_nulls(variadic p_array anyarray)
@@ -44,7 +44,7 @@ exports.up = knex => {
                     "fromDiscussionId",
                     "fromVoteId"
                 ) = 1);
-                
+
             alter table "nodes"
                 add constraint "to_is_set" check(count_not_nulls(
                     "toAccountId",
