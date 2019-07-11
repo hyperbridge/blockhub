@@ -20,7 +20,7 @@ const productSchema = Schema({
   downloads: Number,
   plans: Array,
   frequentlyTradedAssets: Array,
-  sale_box: Object,
+  saleBox: Object,
   rating: Array,
   assets: Array,
   community: Object,
@@ -32,5 +32,3 @@ const productSchema = Schema({
 });
 
 module.exports = mongoose.model('Product', productSchema);
-
-

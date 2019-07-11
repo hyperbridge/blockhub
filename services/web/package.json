@@ -7,10 +7,9 @@
     "scripts": {
         "tsc": "./node_modules/tsc",
         "watch": "tsc -w",
-        "build-development": "npm run format && tsc --listEmittedFiles",
-        "build-production": "tsc",
+        "build-development": "cross-env NODE_ENV=development tsc --listEmittedFiles",
+        "build-production": "cross-env NODE_ENV=production tsc",
         "build": "tsc",
-        "format": "./node_modules/.bin/tsfmt -r",
         "start": "npm run build-production && node ./build/src/index.js",
         "dev": "cross-env NODE_ENV=development yarn run nodemon",
         "migrate": "ts-node -P ./tsconfig.json ./node_modules/.bin/knex migrate:latest --knexfile knexfile.js",

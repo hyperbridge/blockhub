@@ -1053,8 +1053,8 @@
                 "languageSupport": [
                     {
                         "name": "English",
-                        "closed_captioning": true,
-                        "audio_description": true
+                        "closedCaptioning": true,
+                        "audioDescription": true
                     }
                 ]
             }
