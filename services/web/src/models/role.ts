@@ -46,7 +46,7 @@ export default class Role extends BaseModel {
                         to: 'roles_profiles.userId'
                     }
                 }
-            },
+            }
         }
     }
 }

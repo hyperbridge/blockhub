@@ -15,7 +15,7 @@ export default class Permission extends BaseModel {
 
             properties: {
                 permissionId: { type: 'integer' },
-                key: { type: 'string' },
+                key: { type: 'string' }
             }
         }
     }
@@ -45,7 +45,7 @@ export default class Permission extends BaseModel {
                         to: 'roles_permissions.roleId'
                     }
                 }
-            },
+            }
         }
     }
 }

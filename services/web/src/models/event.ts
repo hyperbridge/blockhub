@@ -36,7 +36,7 @@ export default class Event extends BaseModel {
                     from: 'events.parentId',
                     to: 'nodes.id'
                 }
-            },
+            }
         }
     }
 }

@@ -57,7 +57,7 @@ export default class Server extends BaseModel {
                 filter: {
                     relationKey: 'tags'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'tags'
                 }
             },

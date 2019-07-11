@@ -58,10 +58,10 @@ export default class Order extends BaseModel {
                 filter: {
                     relationKey: 'items'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'items'
-                },
-            },
+                }
+            }
         }
     }
 }

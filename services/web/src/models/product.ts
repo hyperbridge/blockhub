@@ -172,7 +172,7 @@ export default class Product extends BaseModel {
                 filter: {
                     relationKey: 'updates'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'updates'
                 }
             },
@@ -191,7 +191,7 @@ export default class Product extends BaseModel {
             //     filter: {
             //         relationKey: 'orders'
             //     },
-            //     beforeInsert(model) {
+            //     beforeInsert (model) {
             //         model.key = 'orders'
             //     }
             // },
@@ -210,7 +210,7 @@ export default class Product extends BaseModel {
                 filter: {
                     relationKey: 'files'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'files'
                 }
             },
@@ -226,10 +226,10 @@ export default class Product extends BaseModel {
                         extra: ['relationKey']
                     }
                 },
-                filter(query) {
+                filter (query) {
                     //query.where('nodes.relationKey', 'tags')
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'tags'
                 }
             }
@@ -237,20 +237,20 @@ export default class Product extends BaseModel {
     }
 
     // static get modifiers() {
-	// 	const knex = this.knex()
+    //     const knex = this.knex()
     //     return {
     //         released(query) {
     //             query.where('tags.value', 'released')
     //         },
-	// 		permission(query) {
-	// 			const accountId = query.context().account.accountId
-	// 			const permission = query.context().permission
+    //         permission(query) {
+    //             const accountId = query.context().account.accountId
+    //             const permission = query.context().permission
 
-	// 			query
-	// 				.join('accounts', 'accounts.accountId', '=', accountId)
-	// 				.where(knex.raw(`JSON_CONTAINS(accounts.meta, CAST(CONCAT('{ "permissions": { "${permission}": true }}') AS JSON), '$')`))
-	// 				.orWhere(knex.raw(`JSON_CONTAINS(accounts.meta, CAST(CONCAT('{ "permissions": { "${permission}": [', products.id, ']}}') AS JSON), '$')`))
-	// 		},
+    //             query
+    //                 .join('accounts', 'accounts.accountId', '=', accountId)
+    //                 .where(knex.raw(`JSON_CONTAINS(accounts.meta, CAST(CONCAT('{ "permissions": { "${permission}": true }}') AS JSON), '$')`))
+    //                 .orWhere(knex.raw(`JSON_CONTAINS(accounts.meta, CAST(CONCAT('{ "permissions": { "${permission}": [', products.id, ']}}') AS JSON), '$')`))
+    //         },
     //     }
     // }
 }

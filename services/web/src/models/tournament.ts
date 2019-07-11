@@ -31,7 +31,7 @@ export default class Tournament extends BaseModel {
                     from: 'tournaments.parentId',
                     to: 'nodes.id'
                 }
-            },
+            }
         }
     }
 }

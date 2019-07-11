@@ -44,7 +44,7 @@ export default class Offer extends BaseModel {
                     from: 'offers.ownerId',
                     to: 'profiles.id'
                 }
-            },
+            }
         }
     }
 }

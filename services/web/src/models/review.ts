@@ -38,7 +38,7 @@ export default class Review extends BaseModel {
                     from: 'reviews.parentId',
                     to: 'nodes.id'
                 }
-            },
+            }
         }
     }
 }

@@ -80,7 +80,7 @@ export default class Discussion extends BaseModel {
                 filter: {
                     relationKey: 'members'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'members'
                 },
                 join: {
@@ -99,7 +99,7 @@ export default class Discussion extends BaseModel {
                 filter: {
                     relationKey: 'messages'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'messages'
                 },
                 join: {
@@ -118,7 +118,7 @@ export default class Discussion extends BaseModel {
                 filter: {
                     relationKey: 'events'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'events'
                 },
                 join: {
@@ -137,7 +137,7 @@ export default class Discussion extends BaseModel {
                 filter: {
                     relationKey: 'discussions'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'discussions'
                 },
                 join: {

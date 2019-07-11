@@ -31,7 +31,7 @@ export default class License extends BaseModel {
                     from: 'licenses.parentId',
                     to: 'nodes.id'
                 }
-            },
+            }
         }
     }
 }

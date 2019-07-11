@@ -32,7 +32,7 @@ export default class Log extends BaseModel {
                     from: 'logs.parentId',
                     to: 'nodes.id'
                 }
-            },
+            }
         }
     }
 }

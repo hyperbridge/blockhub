@@ -40,7 +40,7 @@ export default class Bounty extends BaseModel {
                 filter: {
                     relationKey: 'hunters'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'hunters'
                 },
                 join: {
@@ -52,7 +52,7 @@ export default class Bounty extends BaseModel {
                         extra: ['relationKey']
                     }
                 }
-            },
+            }
         }
     }
 }

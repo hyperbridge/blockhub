@@ -57,7 +57,7 @@ export default class Message extends BaseModel {
                     from: 'messages.replyToId',
                     to: 'messages.id'
                 }
-            },
+            }
         }
     }
 }

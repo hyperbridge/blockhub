@@ -50,7 +50,7 @@ export default class Asset extends BaseModel {
                 filter: {
                     relationKey: 'offers'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'offers'
                 },
                 join: {
@@ -62,7 +62,7 @@ export default class Asset extends BaseModel {
                         extra: ['relationKey']
                     }
                 }
-            },
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-import { Model, RelationMappings, JsonSchema } from 'objection'
+import { Model } from 'objection'
 
 export default class BaseModel extends Model {
     public id!: number
@@ -17,7 +17,7 @@ export default class BaseModel extends Model {
 
     public static idColumn = 'id'
 
-    public $beforeValidate(jsonSchema, json, opt) {
+    public $beforeValidate (jsonSchema, json, opt): any {
         // @ts-ignore
         if (this.constructor.timestamps) {
             jsonSchema.properties.createdAt = { type: ['string', 'object'], format: 'date-time' }
@@ -37,13 +37,13 @@ export default class BaseModel extends Model {
         return jsonSchema
     }
 
-    public $beforeInsert () {
+    public $beforeInsert (): any {
         // @ts-ignore
         if (!this.constructor.timestamps) return
         this.createdAt = new Date().toISOString()
     }
 
-    public $beforeUpdate () {
+    public $beforeUpdate (): any {
         // @ts-ignore
         if (!this.constructor.timestamps) return
         //// @ts-ignore

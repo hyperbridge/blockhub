@@ -32,7 +32,7 @@ export default class BattlePass extends BaseModel {
                     from: 'battlepasses.parentId',
                     to: 'nodes.id'
                 }
-            },
+            }
         }
     }
 }

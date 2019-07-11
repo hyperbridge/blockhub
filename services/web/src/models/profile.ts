@@ -98,7 +98,7 @@ export default class Profile extends BaseModel {
                 filter: {
                     relationKey: 'licenses'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'licenses'
                 }
             },
@@ -117,7 +117,7 @@ export default class Profile extends BaseModel {
                 filter: {
                     relationKey: 'orders'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'orders'
                 }
             },
@@ -136,7 +136,7 @@ export default class Profile extends BaseModel {
                 filter: {
                     relationKey: 'messages'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'messages'
                 }
             },
@@ -155,7 +155,7 @@ export default class Profile extends BaseModel {
                 filter: {
                     relationKey: 'assets'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'assets'
                 }
             },
@@ -174,7 +174,7 @@ export default class Profile extends BaseModel {
                 filter: {
                     relationKey: 'offers'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'offers'
                 }
             },
@@ -193,7 +193,7 @@ export default class Profile extends BaseModel {
                 filter: {
                     relationKey: 'ideas'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'ideas'
                 }
             },
@@ -212,7 +212,7 @@ export default class Profile extends BaseModel {
                 filter: {
                     relationKey: 'pledges'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'pledges'
                 }
             },
@@ -231,7 +231,7 @@ export default class Profile extends BaseModel {
                 filter: {
                     relationKey: 'realms'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'realms'
                 }
             },
@@ -250,7 +250,7 @@ export default class Profile extends BaseModel {
                 filter: {
                     relationKey: 'events'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'events'
                 }
             },
@@ -269,7 +269,7 @@ export default class Profile extends BaseModel {
                 filter: {
                     relationKey: 'badges'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'badges'
                 }
             },
@@ -288,7 +288,7 @@ export default class Profile extends BaseModel {
                 filter: {
                     relationKey: 'collections'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'collections'
                 }
             },
@@ -302,7 +302,7 @@ export default class Profile extends BaseModel {
                 filter: {
                     relationKey: 'wishlists'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'wishlists'
                 }
             },
@@ -345,7 +345,7 @@ export default class Profile extends BaseModel {
                         to: 'profiles_permissions.permissionId'
                     }
                 }
-            },
+            }
             // projects: {
             //     relation: Model.ManyToManyRelation,
             //     modelClass: Project,

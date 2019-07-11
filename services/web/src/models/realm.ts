@@ -35,7 +35,7 @@ export default class Realm extends BaseModel {
                 filter: {
                     relationKey: 'owner'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'owner'
                 },
                 join: {
@@ -71,7 +71,7 @@ export default class Realm extends BaseModel {
                 filter: {
                     relationKey: 'rating'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     console.log(model);
                     (model as Node).relationKey = 'rating'
                 }

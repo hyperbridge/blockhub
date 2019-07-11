@@ -51,7 +51,7 @@ export default class Suggestion extends BaseModel {
                     from: 'suggestions.ratingId',
                     to: 'ratings.id'
                 }
-            },
+            }
         }
     }
 }

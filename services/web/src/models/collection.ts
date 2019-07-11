@@ -44,7 +44,7 @@ export default class Collection extends BaseModel {
                 filter: {
                     relationKey: 'owner'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'owner'
                 },
                 join: {
@@ -64,7 +64,7 @@ export default class Collection extends BaseModel {
                     from: 'collections.parentId',
                     to: 'nodes.id'
                 }
-            },
+            }
         }
     }
 }

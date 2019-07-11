@@ -53,7 +53,7 @@ export default class Idea extends BaseModel {
                 filter: {
                     relationKey: 'owner'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'owner'
                 },
                 join: {
@@ -93,7 +93,7 @@ export default class Idea extends BaseModel {
                 filter: {
                     relationKey: 'backers'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'backers'
                 },
                 join: {
@@ -112,7 +112,7 @@ export default class Idea extends BaseModel {
                 filter: {
                     relationKey: 'applications'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'applications'
                 },
                 join: {
@@ -148,7 +148,7 @@ export default class Idea extends BaseModel {
                 filter: {
                     relationKey: 'tags'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'tags'
                 }
             },

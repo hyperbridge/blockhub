@@ -1,6 +1,5 @@
 import { Model, RelationMappings, JsonSchema } from 'objection'
 import Profile from './profile'
-import Message from './message'
 import Node from './node'
 import BaseModel from './base'
 
@@ -45,7 +44,7 @@ export default class File extends BaseModel {
                     from: 'files.ownerId',
                     to: 'profiles.id'
                 }
-            },
+            }
         }
     }
 }

@@ -48,7 +48,7 @@ export default class Rating extends BaseModel {
                 filter: {
                     relationKey: 'parent'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'parent'
                 },
                 join: {
@@ -68,7 +68,7 @@ export default class Rating extends BaseModel {
                     from: 'ratings.id',
                     to: 'votes.ratingId'
                 }
-            },
+            }
         }
     }
 }

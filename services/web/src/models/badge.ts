@@ -34,7 +34,7 @@ export default class Badge extends BaseModel {
                     from: 'badges.parentId',
                     to: 'nodes.id'
                 }
-            },
+            }
         }
     }
 }

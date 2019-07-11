@@ -257,22 +257,22 @@ export default class Node extends BaseModel {
                     from: 'nodes.toVoteId',
                     to: 'votes.id'
                 }
-            },
+            }
         }
     }
 
-    from() {
+    public from (): any {
         if (this.fromAccountId) return this.fromAccount
         if (this.fromProfileId) return this.fromProfile
 
-        throw new Error("No FROM relation")
+        throw new Error('No FROM relation')
     }
 
-    to() {
+    public to (): any {
         if (this.toAccountId) return this.toAccount
         if (this.toProfileId) return this.toProfile
 
-        throw new Error("No TO relation")
+        throw new Error('No TO relation')
     }
 }
 

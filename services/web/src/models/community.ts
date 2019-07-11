@@ -39,7 +39,7 @@ export default class Community extends BaseModel {
                 filter: {
                     'nodes.relationKey': 'owner'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'owner'
                 },
                 join: {
@@ -67,7 +67,7 @@ export default class Community extends BaseModel {
                 filter: {
                     relationKey: 'discussions'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'discussions'
                 }
             },
@@ -77,7 +77,7 @@ export default class Community extends BaseModel {
                 filter: {
                     relationKey: 'subscribers'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'subscribers'
                 },
                 join: {
@@ -96,7 +96,7 @@ export default class Community extends BaseModel {
                 filter: {
                     relationKey: 'events'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'events'
                 },
                 join: {
@@ -108,7 +108,7 @@ export default class Community extends BaseModel {
                         extra: ['relationKey']
                     }
                 }
-            },
+            }
         }
     }
 }
