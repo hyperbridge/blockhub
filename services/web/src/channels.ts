@@ -1,7 +1,7 @@
 import Discussions, { DiscussionType } from './models/discussion'
 import Project from '../src/models/project'
 
-export default function(app) {
+export default function (app): any {
     app.on('connection', connection => {
         // On a new real-time connection, add it to the anonymous channel
         // app.channel('anonymous').join(connection)
@@ -17,7 +17,7 @@ export default function(app) {
             // const account = connection.account
 
             // The connection is no longer anonymous, remove it
-            //app.channel('anonymous').leave(connection)
+            // app.channel('anonymous').leave(connection)
 
             const commonChannels = await Discussions
                 .query()

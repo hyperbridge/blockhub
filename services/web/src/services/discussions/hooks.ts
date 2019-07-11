@@ -4,30 +4,27 @@ import Node from '../../models/node'
 const { authenticate } = require('@feathersjs/authentication').hooks
 
 
-const fillDiscussion = async function(discussion, context) {
-
+const fillDiscussion = async function (discussion, context): any {
     return discussion
 }
 
-const fillOne = function(options = {}) {
+const fillOne = function (options = {}): any {
     return async context => {
         context.data = fillDiscussion(context.data, context)
         return context
     }
 }
 
-const fillAll = function(options = {}) {
+const fillAll = function (options = {}): any {
     return async context => {
-        context.result.data = await Promise.all(context.result.data.map((discussion) => {
-            return fillDiscussion(discussion, context)
-        }))
+        context.result.data = await Promise.all(context.result.data.map(discussion => fillDiscussion(discussion, context)))
 
         return context
     }
 }
 
-const create = function(options = {}) {
-    return async context => { 
+const create = function (options = {}): any {
+    return async context => {
         const { app, data } = context
 
         console.log('Discussion creation request: ', data)
@@ -44,7 +41,7 @@ const create = function(options = {}) {
             throw new Error('A discussion must have a community')
         }
 
-        const owner = await app.service('profiles').get(data.owner.id);
+        const owner = await app.service('profiles').get(data.owner.id)
 
         if (owner.accountId !== account.id) {
             throw new Error('Discussion must be owned by a profile of authenticated account')
@@ -61,7 +58,7 @@ const create = function(options = {}) {
             type
         }
 
-        //console.log(context.data);
+        // console.log(context.data);
         context.relations = {
             owner,
             community
@@ -71,7 +68,7 @@ const create = function(options = {}) {
     }
 }
 
-const afterCreate = function(options = {}) {
+const afterCreate = function (options = {}) {
     return async context => {
         const { app, data, relations, result } = context
 
@@ -125,7 +122,7 @@ const afterCreate = function(options = {}) {
     }
 }
 
-const validatePermission = function(options = {}) {
+const validatePermission = function (options = {}) {
     return async context => {
         const { app, data } = context
 

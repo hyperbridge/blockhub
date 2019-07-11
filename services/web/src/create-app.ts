@@ -66,7 +66,7 @@ export default async () => {
             .select('tablename')
             .where({ schemaname: 'public' })
 
-        for (let i in tables) {
+        for (const i in tables) {
             const tableInfo = await knex.table(tables[i].tablename).columnInfo()
 
             result[tables[i].tablename] = tableInfo
@@ -81,7 +81,7 @@ export default async () => {
     app.configure(channels)
 
     // Setup services
-    for (let key in services) {
+    for (const key in services) {
         app.configure(services[key])
     }
 

@@ -43,7 +43,7 @@ const { allowNull, wildcardsInLike } = require('../../hooks')
 //     }
 // }
 
-const beforeCreate = function(options = {}) {
+const beforeCreate = function (options = {}): any {
     return async context => {
         console.log('[service=profiles, hook=beforeCreate]')
         context.data.accountId = context.params.user.id
@@ -53,7 +53,7 @@ const beforeCreate = function(options = {}) {
 }
 
 
-const beforeUpdate = function(options = {}) {
+const beforeUpdate = function (options = {}): any {
     return async context => {
         console.log('[service=profiles, hook=beforeUpdate]')
         const item = await context.app.service('/profiles').get(context.id)
@@ -67,7 +67,7 @@ const beforeUpdate = function(options = {}) {
     }
 }
 
-const afterUpdate = function(options = {}) {
+const afterUpdate = function (options = {}): any {
     return async context => {
         console.log('[service=profiles, hook=afterUpdate]')
         context.result = {
@@ -80,13 +80,13 @@ const afterUpdate = function(options = {}) {
     }
 }
 
-const accessGate = function(options = {}) {
+const accessGate = function (options = {}): any {
     return async context => {
         console.log('[service=profiles, hook=accessGate]')
-        //console.log(context)
+        // console.log(context)
         const { app, method, result, params } = context
         const items = method === 'find' ? result.data : [result]
-        let account = params.user
+        const account = params.user
 
         if (!account.id) {
             throw new Error('You dont have access to do that')
@@ -94,8 +94,7 @@ const accessGate = function(options = {}) {
 
         await Promise.all(items.map(async item => {
             if (method === 'create') {
-            }
-            else if (method === 'update') {
+            } else if (method === 'update') {
             }
 
             if (!item) {

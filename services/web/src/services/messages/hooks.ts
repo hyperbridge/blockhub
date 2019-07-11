@@ -1,8 +1,8 @@
-import {DiscussionType} from "../../models/discussion";
+import { DiscussionType } from '../../models/discussion'
 
 const { authenticate } = require('@feathersjs/authentication').hooks
 
-const fillMessage = async function(message, context) {
+const fillMessage = async function (message, context): any {
     // Throw an error if we didn't get a text
     if (!message.value) {
         throw new Error('A message must have value')
@@ -16,29 +16,27 @@ const fillMessage = async function(message, context) {
     }
 }
 
-const fillOne = function(options = {}) {
+const fillOne = function (options = {}): any {
     return async context => {
         context.data = fillMessage(context.data, context)
         return context
     }
 }
 
-const fillAll = function(options = {}) {
+const fillAll = function (options = {}): any {
     return async context => {
-        context.result.data = await Promise.all(context.result.data.map((message) => {
-            return fillMessage(message, context)
-        }))
+        context.result.data = await Promise.all(context.result.data.map(message => fillMessage(message, context)))
 
         return context
     }
 }
 
-const validageChatMessage = function(options = {}) {
+const validageChatMessage = function (options = {}): any {
     return async context => {
-        const {app, data} = context
+        const { app, data } = context
 
-        if (!data.discussionId) throw new Error('You must provice discussionId');
-        if (!data.ownerId) throw new Error('You must provice ownerId');
+        if (!data.discussionId) throw new Error('You must provice discussionId')
+        if (!data.ownerId) throw new Error('You must provice ownerId')
 
         const discussion = await app.service('discussions').get(data.discussionId)
 
@@ -48,9 +46,9 @@ const validageChatMessage = function(options = {}) {
 
         if (data.value.length == 0) throw new Error('Message should contain somthing')
     }
-};
+}
 
-const create = function(options = {}) {
+const create = function (options = {}): any {
     return async context => {
         const { app, data } = context
         console.log('Message creation request: ', data)
@@ -81,24 +79,24 @@ const create = function(options = {}) {
     }
 }
 
-const publishMessage = function(options = {}) {
+const publishMessage = function (options = {}): any {
     return async context => {
-        const { app, method, result, params } = context;
+        const { app, method, result, params } = context
 
-        const messages = method === 'find' ? result.data : [ result ];
+        const messages = method === 'find' ? result.data : [result]
 
         await Promise.all(messages.map(async message => {
-            const user = await app.service('profiles').get(message.ownerId, params);
+            const user = await app.service('profiles').get(message.ownerId, params)
 
-            message.owner = user;
-        }));
+            message.owner = user
+        }))
 
-        return context;
+        return context
     }
 }
 
 
-const validatePermission = function(options = {}) {
+const validatePermission = function (options = {}): any {
     return async context => {
         const { app, data } = context
 

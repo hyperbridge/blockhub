@@ -1,10 +1,10 @@
-export default function(app) {
+export default function (app): any {
     const paginate = app.get('paginate')
 
     class Service {
-        options: Object
+        public options: Record<string, any>
 
-        constructor() {
+        public constructor () {
             this.options = {
                 paginate: {
                     default: 10,
@@ -14,7 +14,7 @@ export default function(app) {
             }
         }
 
-        async find(params) {
+        public async find (params): Promise<any> {
             return [
                 'sss'
             ]

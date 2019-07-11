@@ -3,7 +3,7 @@ const { hashPassword, protect } = require('@feathersjs/authentication-local').ho
 const { errorIfReadonly, allowNull, wildcardsInLike } = require('../../hooks')
 const gravatar = require('../../hooks/gravatar')
 
-const populate = function(options = {}) {
+const populate = function (options = {}): any {
     return async context => {
         const { app, method, result, params } = context
         const items = method === 'find' ? result.data : [result]
@@ -16,8 +16,8 @@ const populate = function(options = {}) {
                     accountId: item.id,
                     name: 'Default'
                 }, {
-                        user: { id: item.id }
-                    })
+                    user: { id: item.id }
+                })
 
                 item.profiles = [profile]
             } else {
@@ -70,8 +70,6 @@ export const error = {
     patch: [],
     remove: []
 }
-
-
 
 
 // function findCategoryById(hook) {
