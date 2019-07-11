@@ -8,11 +8,32 @@ export const data = [
         lastName: 'Last name',
         password: '$2a$13$vEf6V5EnDiapOIKRG4Kxy.DQ9v6WZG6cZqNq4qOh2/IuLXDIx9i2S',
         address: null,
-        avatar: 'https://s.gravatar.com/avatar/40901655a5f67296d89a7d3b069b373a?s=60',
         meta: {
             permissions: {
                 god: true
-            }
+            },
+            verificationTimestamp: null,
+            avatar: 'https://s.gravatar.com/avatar/40901655a5f67296d89a7d3b069b373a?s=60',
+            isVerified: false,
+            isVerifying: false,
+            birthday: null,
+            currency: {},
+            language: {},
+            notifications: [],
+            wallets: [],
+            profiles: [],
+            idts: [],
+            darklaunchFlags: [
+            ],
+            projectWishlist: { 1: true },
+            projectFavorites: {},
+            savedPaths: [
+                "/home/leafo/.config/itch/apps",
+                "C:/Users/Tom/Program Files/apps",
+                "/home/games"
+            ],
+            friendsList: [4, 5],
+            tradeLinkId: "478"
         }
     },
     {

@@ -2,6 +2,116 @@ import Product from '../src/models/product'
 
 export const data = [
     {
+        // TODO: Testing
+        id: 100,
+        name: "My Product Name",
+        meta: {
+            revision: 0,
+            created: 1531430916082,
+            version: 0,
+            description: "Product description",
+            type: "game",
+            downloads: 20,
+            price: 0,
+            oldPrice: 0,
+            images: {
+                header: "https://picsum.photos/2000/300/?random",
+                mediumTile: "https://picsum.photos/200/300/?random",
+                main: "https://picsum.photos/200/300/?image=3",
+                preview: [
+                    "https://picsum.photos/200/300/?image=0",
+                    "https://picsum.photos/200/300/?image=1",
+                    "https://picsum.photos/200/300/?image=2"
+                ]
+            },
+            tags: [
+                {
+                    key: "game",
+                    value: "Game"
+                },
+                {
+                    key: "new",
+                    value: "New"
+                }
+            ],
+            funds: {
+                currency: "USD",
+                obtained: 7613,
+                goal: 8500
+            },
+            author: "0x0",
+            developerTags: [
+                "adventure"
+            ],
+            plans: [
+                {
+                    title: "Play Now",
+                    link: "#"
+                },
+                {
+                    title: "3 Month Subscription",
+                    price: "12.95",
+                    link: ""
+                },
+                {
+                    title: "1 Year Subscription",
+                    price: "120.95",
+                    link: ""
+                }
+            ],
+            content: "<h2>An adventure of a lifetime...</h2>\n<p>Any new features or tools which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.</p><p>Our store is hosted on Shopify Inc. They provide us with the online e-commerce platform that allows us to sell our products and services to you.</p> IMAGE LIST",
+            frequentlyTradedAssets: [],
+            rating: [
+                {
+                    name: "Game",
+                    number: 0
+                },
+                {
+                    name: "Developer",
+                    number: 0
+                },
+                {
+                    name: "Market",
+                    number: 0
+                }
+            ],
+            assets: [],
+            community: {
+                discussions: [
+                    {
+                        name: "Example Discussion",
+                        count: "0",
+                        link: ""
+                    }
+                ]
+            },
+            systemRequirements: [
+                {
+                    system: "Microsoft Windows",
+                    requirements: "8GB storage space,\n4GB RAM, GTX 1050, or equivalent",
+                    icon: "fab fa-windows"
+                },
+                {
+                    system: "Linux/Debian",
+                    requirements: "8GB storage space,\n4GB RAM, GTX 1050, or equivalent",
+                    icon: "fab fa-linux"
+                },
+                {
+                    system: "MacOS",
+                    requirements: "macOS Hight Sierra,\n8GB storage space,\n8GB RAM, GTX 1050, or equivalent",
+                    icon: "fab fa-apple"
+                }
+            ],
+            languageSupport: [
+                {
+                    name: "English",
+                    closedCaptioning: true,
+                    audioDescription: true
+                }
+            ]
+        }
+    },
+    {
         id: 1,
         name: "Might & Magic: Heroes VI",
         status: 'active',

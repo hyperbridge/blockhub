@@ -7,8 +7,20 @@ export const data = [
         accountId: 1,
         address: null,
         avatar: null,
-        meta: {},
-        role: 'developer'
+        role: 'developer', // [developer, user]
+        meta: {
+            reputation: 0,
+            badges: [],
+            assets: [],
+            licenses: [],
+            products: [],
+            messages: [],
+            passphrase: null,
+            privateKey: null,
+            productWishlist: {},
+            productFavorites: {},
+            events: []
+        },
     }
 ]
 

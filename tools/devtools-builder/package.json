@@ -2,12 +2,12 @@
     "name": "blockhub-devtools-builder",
     "description": "BlockHub DevTools Builder",
     "version": "1.0.0rc1",
-    "homepage": "https://hyperbridge.com",
+    "homepage": "https://hyperbridge.org",
     "license": "SEE LICENSE IN LICENSE.md",
     "author": {
       "name": "Hyperbridge",
-      "email": "hello@hyperbridge.com",
-      "url": "https://hyperbridge.com"
+      "email": "hello@hyperbridge.org",
+      "url": "https://hyperbridge.org"
     },
     "scripts": {
       "build-quick": "cd ../app-builder && rm -rf dist/packages/win-unpacked/resources/app/src && cp -r ../app/src dist/packages/win-unpacked/resources/app && rm dist/packages/win-unpacked/resources/app/src/db/data.json",
@@ -28,8 +28,8 @@
     },
     "optionalDependencies": {},
     "build": {
-      "appId": "com.hyperbridge.FrontendDevTools",
-      "productName": "FrontendDevTools",
+      "appId": "com.hyperbridge.DevTools",
+      "productName": "DevTools",
       "copyright": "",
       "removePackageScripts": false,
       "generateUpdatesFilesForAllChannels": true,
