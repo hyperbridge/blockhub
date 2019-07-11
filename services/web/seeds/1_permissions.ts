@@ -1,4 +1,4 @@
-import Server from '../src/models/server'
+import Permission from '../src/models/permission'
 
 export const data = [
     {
@@ -7,9 +7,9 @@ export const data = [
 ]
 
 export const seed = async function (knex): Promise<any> {
-    await knex('servers').del()
+    await knex('permissions').del()
 
-    await Server
+    await Permission
         .query(knex)
         .upsertGraph(data)
 }

@@ -6,8 +6,10 @@ export const data = [
     }
 ]
 
-export const seed = function (knex): Promise<any> {
-    return Realm
+export const seed = async function (knex): Promise<any> {
+    await knex('realms').del()
+
+    await Realm
         .query(knex)
         .upsertGraph(data)
 }

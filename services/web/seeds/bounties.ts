@@ -6,8 +6,10 @@ export const data = [
     }
 ]
 
-export const seed = function (knex): Promise<any> {
-    return Bounty
+export const seed = async function (knex): Promise<any> {
+    await knex('profiles').del()
+
+    await Bounty
         .query(knex)
         .upsertGraph(data)
 }
