@@ -1,8 +1,8 @@
 <template>
     <div class="chat">
-        <div class="chat-shortcuts">
+        <!--<div class="chat-shortcuts">
             <c-shortcut-sidebar :items="shortcuts" />
-        </div>
+        </div>-->
         <div
             v-if="$slots.sidebar"
             class="chat__sidebar">

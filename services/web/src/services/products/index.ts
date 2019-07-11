@@ -14,18 +14,38 @@ export default function(app) {
             max: 25,
             ...paginate
         },
-        allowedEager: 'tags',
+        allowedEager: '[tags.^,vote.^]',
         allowedUpsert: 'tags'
         // namedEagerFilters: {
         //     all: function (builder) {
         //         builder.where('done', false)
         //     }
-        // },
+        // },   
     }
 
     app.use('/products', createService(options))
 
     const service = app.service('/products')
+
+    // app.use('/products/vote/check', {
+    //     async find(params) {
+    //         const { objectId } = params.query;
+
+    //         console.log('[service=/products/vote/check, action=find]')
+    //         console.log(params)
+            
+
+    //         const object = await app.service('products').find({
+    //             query: {
+    //                 'products.id': objectId,
+    //                 $eager: '[vote]',
+    //             }
+    //         })
+            
+    //         console.log(object.data[0])
+    //         return 
+    //     }
+    // })
 
     service.hooks(hooks)
 }

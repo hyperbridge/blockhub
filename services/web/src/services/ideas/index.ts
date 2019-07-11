@@ -19,7 +19,7 @@ export default function(app) {
         },
         createUseUpsertGraph: true,
         allowedInsert: '[tags.^, community.[owner], rating.^]',
-        allowedEager: '[owner.^, owner.account, tags.^, community.[owner], rating.^]',
+        allowedEager: '[owner.^, owner.account, tags.^, community.[owner],vote.^, rating.^]',
         allowedUpsert: '[tags.^, community.[owner], rating.^]'
     }
 
