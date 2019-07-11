@@ -2,7 +2,7 @@ import { DiscussionType } from '../../models/discussion'
 
 const { authenticate } = require('@feathersjs/authentication').hooks
 
-const fillMessage = async function (message, context): any {
+const fillMessage = async function (message, context): Promise<any> {
     // Throw an error if we didn't get a text
     if (!message.value) {
         throw new Error('A message must have value')

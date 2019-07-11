@@ -49,7 +49,7 @@ export default function (app): any {
 
             console.log(params.query)
 
-            const query = {}
+            const query: any = {}
 
             if (params.query.name) {
                 query.name = {

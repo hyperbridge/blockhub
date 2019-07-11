@@ -27,7 +27,7 @@ export default function (app): any {
         async find (params) {
             const { objectType, objectId, profileId } = params.query
 
-            let ret = {}
+            let ret: any = {}
             console.log('[service=/vote/check, action=find]')
 
             const profile = await app.service('profiles').find({
