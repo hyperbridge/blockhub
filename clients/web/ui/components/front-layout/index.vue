@@ -320,36 +320,7 @@
                     <p slot="footer" />
                 </c-basic-popup>
 
-                <!--please-vote popup-->
-                <c-vote-popup
-                    :activated="$store.state.application.activeModal === 'please-vote'" 
-                    :title="'Please Vote!'"
-                    style="text-align: left;"
-                    @close="$store.state.application.activeModal = null">
-                    <template slot="body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <c-rating-stars
-                                    :number="5"
-                                    class="rating_stars"/>
-                                </div>                                
-                            </div>  
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <c-single-emoji/>
-                                </div>    
-                            </div>                   
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <c-vote :votes="0"/>
-                                </div>
-                            </div>
-                        </div>
-                    </template>
-                    <p slot="footer"/>
-                </c-vote-popup>
-                                <!--coming-soon popup-->
+                <!--coming-soon popup-->
                 <c-basic-popup
                     :activated="$store.state.application.activeModal === 'coming-soon'"
                     style="text-align: left;"
@@ -373,7 +344,8 @@
                             </div>
                             <p class="col-12 margin-top-20">
                                 We believe in transparency and community-driven development, so why don't you check out the <a href="https://preview.blockhub.gg">Preview Build</a> and let us know what you think!
-                            </p><p /></p><p class="col-12 margin-bottom-20">
+                            </p>
+                            <p class="col-12 margin-bottom-20">
                                 To make things simple, hold ALT and click anywhere to send us feedback/bug reports!
                             </p>
                         </div>
@@ -405,7 +377,7 @@
                         </p>
                     </template>
                     <p slot="footer" />
-                </c-basic-popup>    
+                </c-basic-popup>
 
                 <!--report popup-->
                 <c-basic-popup
@@ -727,11 +699,9 @@
                     </p>
                 </c-basic-popup>
 
-
                 <c-popup-collection-add
                     :activated="$store.state.application.activeModal === 'add-collection'"
                     :collections="collections" />
-
 
                 <!--create article popup-->
                 <c-basic-popup
@@ -912,7 +882,6 @@
     </div>
 </template>
 
-
 <script>
 import { debounce } from '@/mixins'
 
@@ -921,16 +890,10 @@ import 'vue-multiselect/dist/vue-multiselect.min.css'
 
 export default {
     components: {
-        'c-emoji': () => import('~/components/emoji').then(m => m.default || m),
-        'c-single-emoji': () => import('~/components/emoji/single').then(m => m.default || m),        
-        'c-rating-stars': () => import('~/components/rating-stars').then(m => m.default || m),
-        'c-simple-vote': () => import('~/components/vote/simple').then(m => m.default || m),
-        'c-vote': () => import('~/components/vote').then(m => m.default || m),
         'c-header': () => import('~/components/headers/basic').then(m => m.default || m),
         'c-slim-header': () => import('~/components/headers/slim').then(m => m.default || m),
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
         'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
-        'c-vote-popup': () => import('~/components/popups/vote').then(m => m.default || m),
         'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
         'c-terms-popup': () => import('~/components/terms-popup').then(m => m.default || m),
         'c-privacy-popup': () => import('~/components/privacy-popup').then(m => m.default || m),
@@ -970,18 +933,19 @@ export default {
         'c-settings': () => import('~/components/settings').then(m => m.default || m),
         'c-social-connect': () => import('~/components/social-connect').then(m => m.default || m),
         'c-draggable-video': () => import('~/components/draggable-video').then(m => m.default || m),
-        'c-video': () => import('~/components/draggable-video').then(m => m.default || m),
-        'c-draggable-video': () => import('~/components/draggable-video').then(m => m.default || m),
+        'c-video': () => import('~/components/draggable-video').then(m => m.default || m)
     },
     mixins: [debounce],
     props: {
         navigationKey: {
             type: String,
-            required: false
+            required: false,
+            default: ''
         },
         navigationTitle: {
             type: String,
-            required: false
+            required: false,
+            default: ''
         },
         showLeftPanel: {
             type: Boolean,
@@ -1223,7 +1187,6 @@ export default {
 
             this.$store.state.application.tokenCount = res.balance
 
-
             // this.$desktop.sendCommand('getTokenBalance', {
             //     type: 'HBX',
             //     address: this.$store.state.application.activeProfile.key
@@ -1317,7 +1280,6 @@ export default {
                     document.body.style.cursor = 'default'
                 }
             }
-
 
             this.$(document).on('click', e => {
                 if (e.altKey) {
@@ -1481,7 +1443,6 @@ export default {
     }
 }
 </script>
-
 
     <style>
 /*------------------------------------------------------------------
@@ -1693,7 +1654,6 @@ export default {
   }
 }
 
-
     </style>
 
 <style>
@@ -1757,7 +1717,6 @@ export default {
         height: 50px;
         opacity: 0.85;
         z-index: 100;
-
 
         animation: badgeGlimmer ease-out;
         animation-fill-mode: forwards;
@@ -1980,7 +1939,6 @@ export default {
             }
         }
     }
-
 
     .messages-action {
         display: flex;

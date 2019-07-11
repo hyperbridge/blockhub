@@ -1,27 +1,25 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 
-const fillCommunity = async function(community, context) {
+const fillCommunity = async function (community, context): Promise<any> {
     return community
 }
 
-const fillOne = function(options = {}) {
+const fillOne = function (options = {}): any {
     return async context => {
         context.data = fillCommunity(context.data, context)
         return context
     }
 }
 
-const fillAll = function(options = {}) {
+const fillAll = function (options = {}): any {
     return async context => {
-        context.result.data = await Promise.all(context.result.data.map((community) => {
-            return fillCommunity(community, context)
-        }))
+        context.result.data = await Promise.all(context.result.data.map(community => fillCommunity(community, context)))
 
         return context
     }
 }
 
-const create = function(options = {}) {
+const create = function (options = {}): any {
     return async context => {
         const { app, data } = context
 
@@ -33,7 +31,7 @@ const create = function(options = {}) {
         context.data = {
             name,
             value,
-            meta,
+            meta
         }
 
         return context
@@ -41,7 +39,7 @@ const create = function(options = {}) {
 }
 
 
-const validatePermission = function(options = {}) {
+const validatePermission = function (options = {}): any {
     return async context => {
         const { app, data } = context
 

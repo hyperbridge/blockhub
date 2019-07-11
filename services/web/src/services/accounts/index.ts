@@ -2,7 +2,7 @@ import Model from '../../models/account'
 import createService = require('feathers-objection')
 import hooks = require('./hooks')
 
-export default function(app) {
+export default function (app): any {
     const paginate = app.get('paginate')
 
     const options = {
@@ -19,7 +19,7 @@ export default function(app) {
 
     // TODO
     app.use('/accounts/self', {
-        async update(id, data, params) {
+        async update (id, data, params) {
             const { role } = data
 
             // const result = await app.service('/accounts').get(id)

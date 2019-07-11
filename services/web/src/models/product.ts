@@ -1,4 +1,4 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import Profile from './profile'
 import Asset from './asset'
 import Rating from './rating'
@@ -13,63 +13,63 @@ import Node from './node'
 import BaseModel from './base'
 import Vote from './vote'
 
-type Language = Object
-type SystemRequirement = Object
-type ProductPlan = Object
+type Language = any
+type SystemRequirement = any
+type ProductPlan = any
 
 type ProductMeta = {
-    name: String
-    members: Array<Profile>
-    isProposal: Boolean
-    price: Number
-    oldPrice: Number
-    images: Object
-    video: String
-    genre: String
-    releaseDate: String
-    developer: String
-    publisher: String
-    developerTags: Array<String>
-    languageSupport: Array<Language>
-    systemRequirements: Array<SystemRequirement>
-    tags: Array<Tag>
-    type: String
-    downloads: Number
-    plans: Array<ProductPlan>
-    frequentlyTradedAssets: Array<Asset>
-    saleBox: Object
-    assets: Array<Asset>
-    community: Object
-    nameUrl: String
-    steamId: Number
-    author: String
+    name: string;
+    members: Array<Profile>;
+    isProposal: boolean;
+    price: number;
+    oldPrice: number;
+    images: Record<string, any>;
+    video: string;
+    genre: string;
+    releaseDate: string;
+    developer: string;
+    publisher: string;
+    developerTags: Array<string>;
+    languageSupport: Array<Language>;
+    systemRequirements: Array<SystemRequirement>;
+    tags: Array<Tag>;
+    type: string;
+    downloads: number;
+    plans: Array<ProductPlan>;
+    frequentlyTradedAssets: Array<Asset>;
+    saleBox: Record<string, any>;
+    assets: Array<Asset>;
+    community: Record<string, any>;
+    nameUrl: string;
+    steamId: number;
+    author: string;
 }
 
 export default class Product extends BaseModel {
-    parentId!: Number
-    score!: Number
+    public parentId!: number
+    public score!: number
 
-    owner!: Profile
-    ownerId!: Number
+    public owner!: Profile
+    public ownerId!: number
 
-    rating!: Rating
-    ratingId!: Number
+    public rating!: Rating
+    public ratingId!: number
 
-    idea!: Idea
-    ideaId!: Number
+    public idea!: Idea
+    public ideaId!: number
 
-    project!: Project
-    projectId!: Number
+    public project!: Project
+    public projectId!: number
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'products'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: [],
@@ -79,7 +79,7 @@ export default class Product extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             // members: {
             //     relation: Model.ManyToManyRelation,
@@ -172,7 +172,7 @@ export default class Product extends BaseModel {
                 filter: {
                     relationKey: 'updates'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'updates'
                 }
             },
@@ -191,7 +191,7 @@ export default class Product extends BaseModel {
             //     filter: {
             //         relationKey: 'orders'
             //     },
-            //     beforeInsert(model) {
+            //     beforeInsert (model) {
             //         model.key = 'orders'
             //     }
             // },
@@ -210,7 +210,7 @@ export default class Product extends BaseModel {
                 filter: {
                     relationKey: 'files'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'files'
                 }
             },
@@ -226,10 +226,10 @@ export default class Product extends BaseModel {
                         extra: ['relationKey']
                     }
                 },
-                filter(query) {
+                filter (query) {
                     //query.where('nodes.relationKey', 'tags')
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'tags'
                 }
             }
@@ -237,20 +237,20 @@ export default class Product extends BaseModel {
     }
 
     // static get modifiers() {
-	// 	const knex = this.knex()
+    //     const knex = this.knex()
     //     return {
     //         released(query) {
     //             query.where('tags.value', 'released')
     //         },
-	// 		permission(query) {
-	// 			const accountId = query.context().account.accountId
-	// 			const permission = query.context().permission
+    //         permission(query) {
+    //             const accountId = query.context().account.accountId
+    //             const permission = query.context().permission
 
-	// 			query
-	// 				.join('accounts', 'accounts.accountId', '=', accountId)
-	// 				.where(knex.raw(`JSON_CONTAINS(accounts.meta, CAST(CONCAT('{ "permissions": { "${permission}": true }}') AS JSON), '$')`))
-	// 				.orWhere(knex.raw(`JSON_CONTAINS(accounts.meta, CAST(CONCAT('{ "permissions": { "${permission}": [', products.id, ']}}') AS JSON), '$')`))
-	// 		},
+    //             query
+    //                 .join('accounts', 'accounts.accountId', '=', accountId)
+    //                 .where(knex.raw(`JSON_CONTAINS(accounts.meta, CAST(CONCAT('{ "permissions": { "${permission}": true }}') AS JSON), '$')`))
+    //                 .orWhere(knex.raw(`JSON_CONTAINS(accounts.meta, CAST(CONCAT('{ "permissions": { "${permission}": [', products.id, ']}}') AS JSON), '$')`))
+    //         },
     //     }
     // }
 }

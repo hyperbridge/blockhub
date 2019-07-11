@@ -2,7 +2,7 @@ import Model from '../../models/product'
 import createService = require('feathers-objection')
 import hooks = require('./hooks')
 
-export default function(app) {
+export default function (app): any {
     const paginate = app.get('paginate')
 
     const options = {
@@ -20,7 +20,7 @@ export default function(app) {
         //     all: function (builder) {
         //         builder.where('done', false)
         //     }
-        // },   
+        // },
     }
 
     app.use('/products', createService(options))
@@ -33,7 +33,7 @@ export default function(app) {
 
     //         console.log('[service=/products/vote/check, action=find]')
     //         console.log(params)
-            
+
 
     //         const object = await app.service('products').find({
     //             query: {
@@ -41,9 +41,9 @@ export default function(app) {
     //                 $eager: '[vote]',
     //             }
     //         })
-            
+
     //         console.log(object.data[0])
-    //         return 
+    //         return
     //     }
     // })
 

@@ -1,21 +1,21 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import Profile from './profile'
 import Node from './node'
 import BaseModel from './base'
 
 export default class Bounty extends BaseModel {
     // meta = prize
-    parentId!: Number
+    public parentId!: number
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'bounties'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: [],
@@ -24,7 +24,7 @@ export default class Bounty extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             parent: {
                 relation: Model.HasOneRelation,
@@ -40,7 +40,7 @@ export default class Bounty extends BaseModel {
                 filter: {
                     relationKey: 'hunters'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'hunters'
                 },
                 join: {
@@ -52,7 +52,7 @@ export default class Bounty extends BaseModel {
                         extra: ['relationKey']
                     }
                 }
-            },
+            }
         }
     }
 }

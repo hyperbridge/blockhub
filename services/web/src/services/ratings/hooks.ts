@@ -1,27 +1,25 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 
-const fillRating = function(rating) {
+const fillRating = function (rating): any {
     return rating
 }
 
-const fillOne = function(options = {}) {
+const fillOne = function (options = {}): any {
     return async context => {
         context.data = fillRating(context.data)
         return context
     }
 }
 
-const fillAll = function(options = {}) {
+const fillAll = function (options = {}): any {
     return async context => {
-        context.result.data = context.result.data.map((rating) => {
-            return fillRating(rating)
-        })
+        context.result.data = context.result.data.map(rating => fillRating(rating))
 
         return context
     }
 }
 
-const create = function(options = {}) {
+const create = function (options = {}): any {
     return async context => {
         const { app, data } = context
 
@@ -33,9 +31,9 @@ const create = function(options = {}) {
         context.data = {
             name,
             value,
-            meta,
-            //meta: context.data,
-            //ownerId: profile.id
+            meta
+            // meta: context.data,
+            // ownerId: profile.id
         }
 
         return context
@@ -43,7 +41,7 @@ const create = function(options = {}) {
 }
 
 
-const validatePermission = function(options = {}) {
+const validatePermission = function (options = {}): any {
     return async context => {
         const { app, data } = context
 

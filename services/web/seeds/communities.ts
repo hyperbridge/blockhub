@@ -1,4 +1,4 @@
-import Community from '../src/models/idea'
+import Community from '../src/models/community'
 
 export const data = [
     {
@@ -55,8 +55,10 @@ export const data = [
     }
 ]
 
-export const seed = function (knex): Promise<any> {
-    return Community
+export const seed = async function (knex): Promise<any> {
+    await knex('communities').del()
+
+    await Community
         .query(knex)
         .upsertGraph(data)
 }

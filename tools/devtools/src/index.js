@@ -834,6 +834,72 @@ const initIPC = () => {
             loadResolution(env, cmd.data)
         } else if (cmd.key === 'openConsole') {
             env.main.webContents.openDevTools({ mode: 'detach' })
+        } else if (cmd.key === 'fetchPageDataRequest') {
+            const { url, script } = cmd.data
+
+            const requestedWindow = new electron.BrowserWindow({
+                width: 330,
+                height: 330,
+                resizable: false,
+                frame: false,
+                show: false,
+                backgroundColor: '#30314c',
+                webPreferences: {
+                    preload: path.join(__dirname, '../main/preload.js'),
+                    experimentalFeatures: false,
+                    nodeIntegration: false,
+                    nodeIntegrationInWorker: false,
+                    webSecurity: false
+                }
+            })
+
+            requestedWindow.webContents.session.webRequest.onBeforeSendHeaders({ urls: [] }, (details, callback) => {
+                details.requestHeaders['Connection'] = 'keep-alive'
+                details.requestHeaders['Pragma'] = 'no-cache'
+                details.requestHeaders['Cache-Control'] = 'no-cache'
+                details.requestHeaders['Upgrade-Insecure-Requests'] = '1'
+                details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
+                details.requestHeaders['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+                details.requestHeaders['Accept-Encoding'] = 'gzip, deflate, br'
+                details.requestHeaders['Accept-Language'] = 'en-US,en;q=0.9'
+                details.requestHeaders['Origin'] = 'https://blockhub.gg'
+                details.requestHeaders['Referer'] = 'https://blockhub.gg'
+                // No Cookie?
+
+                callback({ cancel: false, requestHeaders: details.requestHeaders })
+            })
+
+            const onHeadersReceived = (d, c) => {
+                if (d.responseHeaders['x-frame-options'])
+                    delete d.responseHeaders['x-frame-options']
+                if (d.responseHeaders['Content-Security-Policy'])
+                    delete d.responseHeaders['Content-Security-Policy']
+
+                c({ cancel: false, responseHeaders: d.responseHeaders })
+            }
+
+            requestedWindow.webContents.session.webRequest.onHeadersReceived({ urls: [] }, onHeadersReceived)
+
+            requestedWindow.webContents.once('did-finish-load', () => {console.log("FINISHED LOAD");
+                requestedWindow.webContents.executeJavaScript(`(${script})("${cmd.requestId}");`)
+            })
+
+            requestedWindow.webContents.loadURL(url)
+
+            //requestedWindow.webContents.openDevTools({ mode: "detach" })
+
+            local.requests[cmd.requestId] = {
+                resolve: async (data) => {
+                    requestedWindow.close()
+
+                    await sendCommand('fetchPageDataResponse', data, meta.client, cmd.requestId)
+
+                    resolve()
+                },
+                reject
+            }
+
+            return // Return unresolved, let the injected script resolve
         } else if (cmd.key === 'auth') {
             const { username, password } = cmd.data
 

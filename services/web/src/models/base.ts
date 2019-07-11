@@ -1,23 +1,23 @@
 import { Model } from 'objection'
 
 export default class BaseModel extends Model {
-    id!: Number
-    key!: String
-    value!: String
-    status!: String
-    meta!: Object
+    public id!: number
+    public key!: string
+    public value!: string
+    public status!: string
+    public meta!: Record<string, any>
 
-    currentScore!: Number
-    dailyScore!: Number
-    monthlyScore!: Number
-    yearlyScore!: Number
+    public currentScore!: number
+    public dailyScore!: number
+    public monthlyScore!: number
+    public yearlyScore!: number
 
-    createdAt!: String
-    updatedAt!: String
+    public createdAt!: string
+    public updatedAt!: string
 
-    static idColumn = 'id'
+    public static idColumn = 'id'
 
-    $beforeValidate(jsonSchema, json, opt) {
+    public $beforeValidate (jsonSchema, json, opt): any {
         // @ts-ignore
         if (this.constructor.timestamps) {
             jsonSchema.properties.createdAt = { type: ['string', 'object'], format: 'date-time' }
@@ -37,13 +37,13 @@ export default class BaseModel extends Model {
         return jsonSchema
     }
 
-    $beforeInsert() {
+    public $beforeInsert (): any {
         // @ts-ignore
         if (!this.constructor.timestamps) return
         this.createdAt = new Date().toISOString()
     }
 
-    $beforeUpdate() {
+    public $beforeUpdate (): any {
         // @ts-ignore
         if (!this.constructor.timestamps) return
         //// @ts-ignore
@@ -51,7 +51,7 @@ export default class BaseModel extends Model {
         this.updatedAt = new Date().toISOString()
     }
 
-    static get namedFilters() {
+    public static get namedFilters (): any {
         return {
             active: builder => {
                 builder.where('status', 'active')

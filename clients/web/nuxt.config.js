@@ -1,6 +1,6 @@
+import path from 'path'
 import dotenv from 'dotenv/config'
 import autoprefixer from 'autoprefixer'
-import path from 'path'
 import sites from './ui/sites'
 
 export default {

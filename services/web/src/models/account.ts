@@ -1,24 +1,24 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import BaseModel from './base'
 import Profile from './profile'
 
 export default class Account extends BaseModel {
-    parentId!: Number
-    email!: String
-    firstName!: String
-    lastName!: String
-    password!: String
-    avatar!: String
+    public parentId!: number
+    public email!: string
+    public firstName!: string
+    public lastName!: string
+    public password!: string
+    public avatar!: string
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'accounts'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: ['email', 'password'],
@@ -31,7 +31,7 @@ export default class Account extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             profiles: {
                 relation: Model.HasManyRelation,
@@ -40,8 +40,7 @@ export default class Account extends BaseModel {
                     from: 'accounts.id',
                     to: 'profiles.accountId'
                 }
-            },
+            }
         }
     }
-
 }

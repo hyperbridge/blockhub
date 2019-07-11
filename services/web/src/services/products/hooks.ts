@@ -1,7 +1,7 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 const populateProfile = require('../../hooks/populate-profile')
 
-const beforeFind = async function() {
+const beforeFind = async function (): Promise<any> {
     return async context => {
         const { params } = context
 
@@ -20,7 +20,7 @@ const beforeFind = async function() {
     }
 }
 
-const fillProduct = async function(product) {
+const fillProduct = async function (product): Promise<any> {
     // product.images = {
     //     "mediumTile": "https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"
     // }
@@ -34,24 +34,22 @@ const fillProduct = async function(product) {
     return product
 }
 
-const fillOne = function(options = {}) {
+const fillOne = function (options = {}): any {
     return async context => {
         context.data = fillProduct(context.data)
         return context
     }
 }
 
-const fillAll = function(options = {}) {
+const fillAll = function (options = {}): any {
     return async context => {
-        context.result.data = await Promise.all(context.result.data.map((product) => {
-            return fillProduct(product)
-        }))
+        context.result.data = await Promise.all(context.result.data.map(product => fillProduct(product)))
 
         return context
     }
 }
 
-const create = function(options = {}) {
+const create = function (options = {}): any {
     return async context => {
         const { app, data } = context
 
@@ -81,7 +79,7 @@ const create = function(options = {}) {
             description,
             value,
             meta,
-            //meta: context.data,
+            // meta: context.data,
             ownerId: profile.id
         }
 
@@ -90,7 +88,7 @@ const create = function(options = {}) {
 }
 
 
-const validatePermission = function(options = {}) {
+const validatePermission = function (options = {}): any {
     return async context => {
         const { app, data } = context
 

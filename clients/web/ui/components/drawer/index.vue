@@ -345,16 +345,12 @@
     </div>
 </template>
 
-
 <script>
 import Vue from 'vue'
 import * as DB from '@/db'
 
 export default {
     components: {
-        'c-render-condition': () => import('~/components/render-condition').then(m => m.default || m),
-        'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m),
-        'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m)
     },
     props: [],
     data() {

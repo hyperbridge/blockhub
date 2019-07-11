@@ -1,27 +1,27 @@
-import { Model } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import Profile from './profile'
 import Role from './role'
 import BaseModel from './base'
 
 export default class Permission extends BaseModel {
-	static get tableName() {
-		return 'permissions'
-	}
+    public static get tableName (): string {
+        return 'permissions'
+    }
 
-	static get jsonSchema() {
-		return {
-			type: 'object',
-			required: ['key'],
+    public static get jsonSchema (): JsonSchema {
+        return {
+            type: 'object',
+            required: ['key'],
 
-			properties: {
-				permissionId: { type: 'integer' },
-				key: { type: 'string' },
-			}
-		}
-	}
+            properties: {
+                permissionId: { type: 'integer' },
+                key: { type: 'string' }
+            }
+        }
+    }
 
-	static get relationMappings() {
-		return {
+    public static get relationMappings (): RelationMappings {
+        return {
             users: {
                 relation: Model.ManyToManyRelation,
                 modelClass: Profile,
@@ -45,7 +45,7 @@ export default class Permission extends BaseModel {
                         to: 'roles_permissions.roleId'
                     }
                 }
-            },
-		}
-	}
+            }
+        }
+    }
 }

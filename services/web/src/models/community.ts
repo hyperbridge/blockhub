@@ -1,4 +1,4 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import Profile from './profile'
 import Discussion from './discussion'
 import Event from './event'
@@ -6,23 +6,23 @@ import Node from './node'
 import BaseModel from './base'
 
 export default class Community extends BaseModel {
-    parentId!: Number
-    ownerId!: Number
+    public parentId!: number
+    public ownerId!: number
 
-    currentActiveUsers!: Number
-    monthlyActiveUsers!: Number
-    dailyActiveUsers!: Number
-    discussions!: Array<Discussion>
+    public currentActiveUsers!: number
+    public monthlyActiveUsers!: number
+    public dailyActiveUsers!: number
+    public discussions!: Array<Discussion>
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'communities'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: ['name', 'meta'],
@@ -31,7 +31,7 @@ export default class Community extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             owner: {
                 relation: Model.HasOneThroughRelation,
@@ -39,7 +39,7 @@ export default class Community extends BaseModel {
                 filter: {
                     'nodes.relationKey': 'owner'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'owner'
                 },
                 join: {
@@ -67,7 +67,7 @@ export default class Community extends BaseModel {
                 filter: {
                     relationKey: 'discussions'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'discussions'
                 }
             },
@@ -77,7 +77,7 @@ export default class Community extends BaseModel {
                 filter: {
                     relationKey: 'subscribers'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'subscribers'
                 },
                 join: {
@@ -96,7 +96,7 @@ export default class Community extends BaseModel {
                 filter: {
                     relationKey: 'events'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'events'
                 },
                 join: {
@@ -108,7 +108,7 @@ export default class Community extends BaseModel {
                         extra: ['relationKey']
                     }
                 }
-            },
+            }
         }
     }
 }

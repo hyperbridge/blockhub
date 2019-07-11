@@ -6,8 +6,10 @@ export const data = [
     }
 ]
 
-export const seed = function (knex): Promise<any> {
-    return File
+export const seed = async function (knex): Promise<any> {
+    await knex('files').del()
+
+    await File
         .query(knex)
         .upsertGraph(data)
 }
