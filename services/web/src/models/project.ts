@@ -1,4 +1,4 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 //import ProjectMember from './project-member'
 import Profile from './profile'
 import Community from './community'
@@ -13,29 +13,29 @@ import Vote from './vote'
 import BaseModel from './base'
 
 export default class Project extends BaseModel {
-    parentId!: Number
-    score!: Number
+    public parentId!: number
+    public score!: number
 
-    owner!: Profile
-    ownerId!: Number
+    public owner!: Profile
+    public ownerId!: number
 
-    rating!: Rating
+    public rating!: Rating
 
-    name!: string
-    members!: Array<Profile>
-    isProposal!: Boolean
+    public name!: string
+    public members!: Array<Profile>
+    public isProposal!: boolean
 
-    tags!: Array<Tag>
+    public tags!: Array<Tag>
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'projects'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: [],
@@ -43,8 +43,8 @@ export default class Project extends BaseModel {
             }
         }
     }
-    
-    static get relationMappings(): RelationMappings {
+
+    public static get relationMappings (): RelationMappings {
         return {
             // members: {
             //     relation: Model.ManyToManyRelation,
@@ -74,7 +74,7 @@ export default class Project extends BaseModel {
             //     join: {
             //         from: 'projects.id',
             //         to: 'bounties.parentId'
-            //         // join view through where parentType == 'project' 
+            //         // join view through where parentType == 'project'
             //         // https://www.tutorialspoint.com/postgresql/postgresql_views.htm
             //     }
             // },

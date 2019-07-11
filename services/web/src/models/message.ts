@@ -1,21 +1,21 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import Node from './node'
 import Profile from './profile'
 import BaseModel from './base'
 
 export default class Message extends BaseModel {
-    parentId!: Number
-    ownerId!: Number
+    public parentId!: number
+    public ownerId!: number
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'messages'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: [],
@@ -24,7 +24,7 @@ export default class Message extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             parent: {
                 relation: Model.HasOneRelation,

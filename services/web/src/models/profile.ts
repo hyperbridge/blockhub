@@ -1,4 +1,4 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import Project from './project'
 import License from './license'
 import Order from './order'
@@ -20,34 +20,34 @@ import Vote from './vote'
 
 
 export default class Profile extends BaseModel {
-    parentId!: Number
+    public parentId!: number
 
-    accountId!: Number
-    role!: String // [user, developer, curator]
-    reputation!: Number // based on events
+    public accountId!: number
+    public role!: string // [user, developer, curator]
+    public reputation!: number // based on events
 
-    ideas!: Array<Idea>
-    projects!: Array<Project>
-    products!: Array<Product>
-    licenses!: Array<License>
-    orders!: Array<Order>
-    messages!: Array<Message>
-    assets!: Array<Asset>
-    offers!: Array<Offer>
-    badges!: Array<Badge>
-    events!: Array<Event>
-    collections!: Array<Collection>
-    wishlists!: Array<Node>
+    public ideas!: Array<Idea>
+    public projects!: Array<Project>
+    public products!: Array<Product>
+    public licenses!: Array<License>
+    public orders!: Array<Order>
+    public messages!: Array<Message>
+    public assets!: Array<Asset>
+    public offers!: Array<Offer>
+    public badges!: Array<Badge>
+    public events!: Array<Event>
+    public collections!: Array<Collection>
+    public wishlists!: Array<Node>
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'profiles'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: ['accountId'],
@@ -64,7 +64,7 @@ export default class Profile extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             // has many realms
             // has many contributions

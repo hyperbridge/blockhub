@@ -1,10 +1,7 @@
-import morgan = require('morgan')
 import bodyParser = require('body-parser')
-import helmet = require('helmet')
 import Knex = require('knex')
-import winston = require('winston')
 import cors = require('cors')
-import { Model, RelationMappings } from 'objection'
+import { Model } from 'objection'
 import config = require('../config')
 import feathers = require('@feathersjs/feathers')
 import express = require('@feathersjs/express')
@@ -30,7 +27,7 @@ const KnexSessionStore = require('connect-session-knex')(session)
 const knexfile = require('./knexfile')
 const knex = Knex(knexfile)
 
-knex.on('query', (query) => {
+knex.on('query', (query): any => {
     console.log(query)
 })
 
@@ -63,7 +60,7 @@ export default async () => {
         store: store
     }))
 
-    app.use('/schema', async function(req, res, next) {
+    app.use('/schema', async (req, res, next): Promise<any> => {
         const result = {}
         const tables = await knex('pg_catalog.pg_tables')
             .select('tablename')
@@ -100,7 +97,7 @@ export default async () => {
         },
         after: {
             create: [
-                (context) => {
+                (context): any => {
                     context.result.accountId = context.params.user.id
                     context.result.profiles = context.params.user.profiles
 
@@ -115,7 +112,7 @@ export default async () => {
 
 
     app.use('/ping', {
-        async find(params) {
+        async find (params) {
             return {
                 name: 'test',
                 description: 'test',
@@ -126,7 +123,7 @@ export default async () => {
     })
 
     app.use('/version', {
-        async find(params) {
+        async find (params) {
             return [
                 '0.8.1'
             ]

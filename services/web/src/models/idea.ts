@@ -1,4 +1,4 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import Node from './node'
 import Rating from './rating'
 import Profile from './profile'
@@ -8,25 +8,25 @@ import BaseModel from './base'
 import Vote from './vote'
 
 export default class Idea extends BaseModel {
-    ownerId!: Number
-    owner!: Profile
-    communityId!: Number
-    community!: Community
-    ratingId!: Number
-    rating!: Rating
+    public ownerId!: number
+    public owner!: Profile
+    public communityId!: number
+    public community!: Community
+    public ratingId!: number
+    public rating!: Rating
 
-    type!: String // [battlepass, app, game, etc.]
-    tags!: Array<Tag>
+    public type!: string // [battlepass, app, game, etc.]
+    public tags!: Array<Tag>
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'ideas'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: ['name', 'meta', 'ownerId', 'communityId', 'ratingId'],
@@ -45,7 +45,7 @@ export default class Idea extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             owner: {
                 relation: Model.HasOneThroughRelation,

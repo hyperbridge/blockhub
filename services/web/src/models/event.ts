@@ -1,4 +1,4 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import Node from './node'
 import BaseModel from './base'
 
@@ -6,19 +6,19 @@ export default class Event extends BaseModel {
     // meta { message: "Earned 10 reputation points for being awesome" }
     // key = PROFILE_REPUTATION
     // value = -10, 10, etc.
-    parentId!: Number
+    public parentId!: number
 
-    property!: String
+    public property!: string
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'events'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: [],
@@ -27,7 +27,7 @@ export default class Event extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             parent: {
                 relation: Model.HasOneRelation,

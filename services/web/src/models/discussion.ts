@@ -1,4 +1,4 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import Profile from './profile'
 import Message from './message'
 import Event from './event'
@@ -14,20 +14,20 @@ export enum DiscussionType {
 }
 
 export default class Discussion extends BaseModel {
-    content!: String;
-    parentId!: Number;
-    rootMessageId!: Number;
-    type!: DiscussionType;
+    public content!: string
+    public parentId!: number
+    public rootMessageId!: number
+    public type!: DiscussionType
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'discussions'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: ['name', 'value', 'meta'],
@@ -36,7 +36,7 @@ export default class Discussion extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             owner: {
                 relation: Model.HasOneThroughRelation,

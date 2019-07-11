@@ -1,29 +1,29 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import Node from './node'
 import Vote from './vote'
 import Profile from './profile'
 import BaseModel from './base'
 
 export default class Rating extends BaseModel {
-    parentId!: Number
-    ownerId!: Number
+    public parentId!: number
+    public ownerId!: number
 
-    votes!: Array<Vote>
+    public votes!: Array<Vote>
 
-    score!: Number // based on upvote/downvote profile reputation
-    average!: Number
-    upvoteTotal!: Number // has many upvoters votes -> profile where value = 1
-    downvoteTOtal!: Number // has many downvoters votes -> profile where value = -1
+    public score!: number // based on upvote/downvote profile reputation
+    public average!: number
+    public upvoteTotal!: number // has many upvoters votes -> profile where value = 1
+    public downvoteTOtal!: number // has many downvoters votes -> profile where value = -1
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'ratings'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: [],
@@ -32,7 +32,7 @@ export default class Rating extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             owner: {
                 relation: Model.HasOneRelation,
