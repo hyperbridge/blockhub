@@ -23,8 +23,8 @@ export default function (app): any {
     app.use('votes', createService(options))
     const service = app.service('votes')
 
-    app.use('/votes/check', {
-        async find (params) {
+    app.use('vote/check', {
+        async find(params) {
             const { objectType, objectId, profileId } = params.query
 
             let ret: any = {}
@@ -81,7 +81,7 @@ export default function (app): any {
             ret.objectId = objectType
             ret.voted = ret.id ? true : false
 
-            console.log(ret)
+            console.log('check_result', ret)
             return ret
         }
     })

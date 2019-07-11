@@ -96,9 +96,8 @@ export default {
             }
             console.log('requestCheck', request)
 
-            const result = await this.$api.service('votes/check').find({
+            const result = await this.$api.service('vote/check').find({
                 query: {
-                    type: 'HBX',
                     objectType: request.objectType,
                     objectId: request.objectId,
                     profileId: request.ownerId
@@ -106,19 +105,19 @@ export default {
             })
             console.log('result', result)
             if (result.voted) {
-                let updateData = await this.$store.dispatch('votes/get', result.id)
-                console.log('updatedData', updateData)
+                const updateData = await this.$store.dispatch('votes/get', result.id)
+                console.log('updateData', updateData)
                 updateData.value = String(value)
                 updateData.meta = {}
                 updateData.objectType = request.objectType
                 updateData.objectId = request.objectId
                 updateData.ownerId = request.ownerId
-                updateData = await this.$store.dispatch('votes/update',
+                const updatedData = await this.$store.dispatch('votes/update',
                     [
-                        result.id,
+                        updateData.id,
                         updateData
                     ])
-                console.log('updateResult', updateData)
+                console.log('updatedResult', updatedData)
             } else {
                 const data3 = await this.$store.dispatch('votes/create', request)
                 console.log('createResult', data3)
