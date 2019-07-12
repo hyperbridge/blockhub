@@ -289,10 +289,8 @@ export default {
                             }
                             &:hover{
                                 cursor: pointer;
-                                background-image: url('./../../assets/img');
-                                background-position: center;
                                 background-size: 16px;
-                                background-repeat: no-repeat;
+                                background: url('./../../assets/SVG/plus-icon.svg') no-repeat center;
                             }
                         }
                     }

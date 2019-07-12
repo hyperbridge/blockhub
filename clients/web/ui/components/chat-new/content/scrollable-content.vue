@@ -113,21 +113,16 @@ export default {
         background: #171717 -webkit-gradient(linear, left center, 89 center, from(rgb(75, 75, 75)), to(rgb(23, 23, 23)));
     }
     .scrollable-content__wrapper--scroll::-webkit-scrollbar-thumb {
-        background: #1c2033;
         border-radius: 2px;
-        background-image: url('./../../../assets/');
-        background-repeat: no-repeat;
-        background-position: center center;
+        background: #1c2033 url('./../../../assets/img/scroll-icon-1.png') no-repeat center center;
         border: none;
     }
     .scrollable-content__wrapper--scroll::-webkit-scrollbar-thumb:hover {
         background-color: #00aeff;
     }
     .scrollable-content__wrapper--scroll::-webkit-scrollbar-button {
-        background-color: #00aeff;
         border-radius: 2px;
-        background-position: center;
-        background-repeat: no-repeat;
+        background: #00aeff no-repeat center;
     }
     .scrollable-content__wrapper--scroll::-webkit-scrollbar-button:hover {
         background-color: #00aeff;
