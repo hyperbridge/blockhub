@@ -1,6 +1,6 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 
-const beforeCreate = function(options = {}) {
+const beforeCreate = function (options = {}): any {
     return async context => {
         context.data.accountId = context.params.user.id
 
@@ -8,20 +8,12 @@ const beforeCreate = function(options = {}) {
     }
 }
 
-const beforeUpdate = function(options = {}) {
-    return async context => {
-        // const item = await context.app.service('/ideas').get(context.id)
+const beforeUpdate = function (options = {}): any {
+    return async context => context
 
-        // context.data = {
-        //     ...item,
-        //     ...context.data
-        // }
-
-        return context
-    }
 }
 
-const afterUpdate = function(options = {}) {
+const afterUpdate = function (options = {}): any {
     return async context => {
         context.result = {
             name: context.data.name,
@@ -32,12 +24,12 @@ const afterUpdate = function(options = {}) {
     }
 }
 
-const accessGate = function(options = {}) {
+const accessGate = function (options = {}): any {
     return async context => {
-        //console.log(context)
+        // console.log(context)
         const { app, method, result, params } = context
         const items = method === 'find' ? result.data : [result]
-        let account = params.user
+        const account = params.user
 
         if (!account.id) {
             throw new Error('You dont have access to do that')
@@ -45,12 +37,11 @@ const accessGate = function(options = {}) {
 
         await Promise.all(items.map(async item => {
             if (method === 'create') {
-            }
-            else if (method === 'update') {
+            } else if (method === 'update') {
             }
 
             if (!item) {
-                throw new Error('Idea not found')
+                throw new Error('Asset not found')
             }
 
             if (item.accountId !== account.id) {

@@ -130,9 +130,9 @@
                                     <!--</button>-->
                                 </td>
                                 <td>
-                                    <router-link :to="{ path: '/business/product/' + product.id + '/releases' }">
+                                    <nuxt-link :to="{ path: '/business/product/' + product.id + '/releases' }">
                                         View
-                                    </router-link>
+                                    </nuxt-link>
                                 </td>
                                 <td>
                                     <button class="btn btn-secondary btn-icon btn-sm">

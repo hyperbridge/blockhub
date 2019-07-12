@@ -24,7 +24,7 @@
                     />
                 </transition-group> -->
                 <template slot-scope="props">
-                    <router-link
+                    <nuxt-link
                         v-for="(item, index) in props.items"
                         :key="item.id"
                         :class="props.css[index]"
@@ -37,7 +37,7 @@
                             :assetPriceCurrent="item.price.current"
                             :assetTags="item.tags"
                             :assetImage="item.image" />
-                    </router-link>
+                    </nuxt-link>
                 </template>
             </c-carousel-3d>
         </div>

@@ -3,21 +3,29 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 heading-title mb-0">
-                    <h3 class="title tw-5 mb-20"><a href="#quick">Quick Links</a></h3>
+                    <h3 class="title tw-5 mb-20">
+                        <a href="#quick">Quick Links</a>
+                    </h3>
                 </div>
                 <div class="col-12 cart_total heading-left" v-html="social.content">
-                    <h4 class="mb-30 title tw-5">Social Networks</h4>
-                    <br />
+                    <h4 class="mb-30 title tw-5">
+                        Social Networks
+                    </h4>
+                    <br>
                     {{ social.content }}
-                    <br />
+                    <br>
                     <div class="table-responsive">
                         <table class="table table-bordered shopping-cart-table">
                             <thead>
                                 <tr>
-                                    <th width="20%">Name</th>
+                                    <th width="20%">
+                                        Name
+                                    </th>
                                     <th>Rating</th>
                                     <th>Categories</th>
-                                    <th width="50%">Notes</th>
+                                    <th width="50%">
+                                        Notes
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,7 +40,9 @@
                                     </td>
                                     <td class="align-middle">
                                         <ul class="tags list-inline" :style="{ width: '240px' }">
-                                            <li v-for="(tag, index) in item.tags" :key="index"><span>{{ tag }}</span></li>
+                                            <li v-for="(tag, index) in item.tags" :key="index">
+                                                <span>{{ tag }}</span>
+                                            </li>
                                         </ul>
                                     </td>
                                     <td v-html="item.notes">
@@ -44,15 +54,21 @@
                     </div>
                 </div>
                 <div class="col-12 cart_total">
-                    <h4 class="mb-30 title tw-5">Discussion Forums</h4>
+                    <h4 class="mb-30 title tw-5">
+                        Discussion Forums
+                    </h4>
                     <div class="table-responsive">
                         <table class="table table-bordered shopping-cart-table">
                             <thead>
                                 <tr>
-                                    <th width="20%">Name</th>
+                                    <th width="20%">
+                                        Name
+                                    </th>
                                     <th>Rating</th>
                                     <th>Categories</th>
-                                    <th width="50%">Notes</th>
+                                    <th width="50%">
+                                        Notes
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,7 +83,9 @@
                                     </td>
                                     <td class="align-middle">
                                         <ul class="tags list-inline" :style="{ width: '240px' }">
-                                            <li v-for="(tag, index) in item.tags" :key="index"><span>{{ tag }}</span></li>
+                                            <li v-for="(tag, index) in item.tags" :key="index">
+                                                <span>{{ tag }}</span>
+                                            </li>
                                         </ul>
                                     </td>
                                     <td v-html="item.notes">
@@ -80,15 +98,21 @@
                 </div>
 
                 <div class="col-12 cart_total">
-                    <h4 class="mb-30 title tw-5">Other</h4>
+                    <h4 class="mb-30 title tw-5">
+                        Other
+                    </h4>
                     <div class="table-responsive">
                         <table class="table table-bordered shopping-cart-table">
                             <thead>
                                 <tr>
-                                    <th width="20%">Name</th>
+                                    <th width="20%">
+                                        Name
+                                    </th>
                                     <th>Rating</th>
                                     <th>Categories</th>
-                                    <th width="50%">Notes</th>
+                                    <th width="50%">
+                                        Notes
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -103,7 +127,9 @@
                                     </td>
                                     <td class="align-middle">
                                         <ul class="tags list-inline" :style="{ width: '240px' }">
-                                            <li v-for="(tag, index) in item.tags" :key="index"><span>{{ tag }}</span></li>
+                                            <li v-for="(tag, index) in item.tags" :key="index">
+                                                <span>{{ tag }}</span>
+                                            </li>
                                         </ul>
                                     </td>
                                     <td v-html="item.notes">
@@ -121,7 +147,7 @@
 
 
 <script>
-    export default {
-        props: ['social', 'forums', 'other']
-    }
+export default {
+    props: ['social', 'forums', 'other']
+}
 </script>

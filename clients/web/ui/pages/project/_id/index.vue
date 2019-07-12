@@ -198,18 +198,18 @@
                         <li
                             class="nav-item"
                             @click="section='overview'">
-                            <router-link
+                            <nuxt-link
                                 :to="`/project/${project.id}`"
                                 class="nav-link"
                                 :class="{ 'active': section === 'overview' }">
                                 Overview
-                            </router-link>
+                            </nuxt-link>
                         </li>
                         <li
                             v-darklaunch="'COMMUNITY'"
                             class="nav-item"
                             @click="section='community'">
-                            <router-link
+                            <nuxt-link
                                 :to="`/project/${project.id}/community`"
                                 class="nav-link"
                                 :class="{ 'active': section === 'community' }">
@@ -217,23 +217,23 @@
                                 <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
                                     0
                                 </c-updates-count>
-                            </router-link>
+                            </nuxt-link>
                         </li>
                         <li
                             v-if="project.bounties"
                             class="nav-item"
                             @click="section='bounties'">
-                            <router-link
+                            <nuxt-link
                                 :to="`/project/${project.id}/bounties`"
                                 class="nav-link"
                                 :class="{ 'active': section === 'bounties' }">
                                 Bounties
-                            </router-link>
+                            </nuxt-link>
                         </li>
                         <li
                             class="nav-item"
                             @click="section='updates'">
-                            <router-link
+                            <nuxt-link
                                 :to="`/project/${project.id}/updates`"
                                 class="nav-link"
                                 :class="{ 'active': section === 'updates' }">
@@ -241,17 +241,17 @@
                                 <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
                                     0
                                 </c-updates-count>
-                            </router-link>
+                            </nuxt-link>
                         </li>
                         <li
                             class="nav-item"
                             @click="section='milestones'">
-                            <router-link
+                            <nuxt-link
                                 :to="`/project/${project.id}/milestones`"
                                 class="nav-link"
                                 :class="{ 'active': section === 'milestones' }">
                                 Milestones
-                            </router-link>
+                            </nuxt-link>
                         </li>
                         <li
                             v-if="editing"

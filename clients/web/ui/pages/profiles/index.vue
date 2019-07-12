@@ -12,8 +12,7 @@ export default {
                 { hid: 'keywords', name: 'keywords', content: 'profiles, Ethereum, blockchain, game, indie, developer' }
             ]
         }
-    },
-    components: {
+    },components: {
     },
     data: () => ({
         wallets: []

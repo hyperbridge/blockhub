@@ -190,16 +190,16 @@ export default {
         }
     },
     methods: {
-        unlockWallet() {
+        async unlockWallet() {
             if (typeof window.web3 !== 'undefined') {
                 if (window.ethereum) {
                     try {
                         // Request account access if needed
-                        window.ethereum.enable().then(() => {
-                            window.web3 = new Web3(window.ethereum)
+                        await window.ethereum.enable()
 
-                            checkEthereumConnection()
-                        })
+                        window.web3 = new Web3(window.ethereum)
+
+                        checkEthereumConnection()
                     } catch (error) {
                         // User denied account access...
                     }

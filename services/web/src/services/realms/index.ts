@@ -2,7 +2,7 @@ import Model from '../../models/realm'
 import createService = require('feathers-objection')
 import hooks = require('./hooks')
 
-export default function(app) {
+export default function (app): any {
     const paginate = app.get('paginate')
 
     const options = {

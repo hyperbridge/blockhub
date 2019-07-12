@@ -10,7 +10,6 @@
             v-if="!product && loading"
             :enabled="loading"
             size="lg" />
-
         <div
             v-else-if="!product"
             class="row">
@@ -18,7 +17,6 @@
                 Product not found
             </div>
         </div>
-
         <div
             v-else
             class="row">
@@ -137,43 +135,43 @@
                                 <li
                                     class="nav-item"
                                     @click="section='overview'">
-                                    <router-link
+                                    <nuxt-link
                                         :to="`/product/${id}`"
                                         class="nav-link"
                                         :class="{ 'active': section === 'overview' }">
                                         Overview
-                                    </router-link>
+                                    </nuxt-link>
                                 </li>
                                 <li
                                     v-darklaunch="'COMMUNITY'"
                                     class="nav-item"
                                     @click="section='community'">
-                                    <router-link
+                                    <nuxt-link
                                         :to="`/product/${id}/community`"
                                         class="nav-link"
                                         :class="{ 'active': section === 'community' }">
                                         Community
-                                    </router-link>
+                                    </nuxt-link>
                                 </li>
                                 <li
                                     class="nav-item"
                                     @click="section='projects'">
-                                    <router-link
+                                    <nuxt-link
                                         :to="`/product/${id}/projects`"
                                         class="nav-link"
                                         :class="{ 'active': section === 'projects' }">
                                         Crowdfunding
-                                    </router-link>
+                                    </nuxt-link>
                                 </li>
                                 <li
                                     class="nav-item"
                                     @click="section='assets'">
-                                    <router-link
+                                    <nuxt-link
                                         :to="`/product/${id}/assets`"
                                         class="nav-link"
                                         :class="{ 'active': section === 'assets' }">
                                         Inventory
-                                    </router-link>
+                                    </nuxt-link>
                                 </li>
                                 <li
                                     v-if="editing"
@@ -305,7 +303,6 @@
             </div>
         </div>
 
-
         <c-custom-modal
             v-if="firstProduct && editing && !$store.state.application.settings.client.hide_product_intro_modal && false"
             title="Help Center"
@@ -343,7 +340,6 @@
                 </c-button>
             </div>
         </c-custom-modal>
-
 
         <c-basic-popup
             :activated="$store.state.application.activeModal === 'sync-blockchain'"
@@ -505,6 +501,7 @@ export default {
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
         'c-multiselect': () => import('vue-multiselect').then(m => m.default || m),
         'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m)
+
     },
     data() {
         return {
@@ -566,7 +563,6 @@ export default {
         //     if (!product.meta) {
         //         product.meta = {}
         //     }
-
 
         //     if (!product.meta.community) {
         //         product.meta.community = {
@@ -665,19 +661,19 @@ export default {
             this.$store.dispatch('application/setEditorMode', 'editing')
         }
     },
-    created() {
+    async created() {
         if (process.client) window.onbeforeunload = this.unsaved
 
         this.updateSection()
 
         if (this.id !== 'new') {
-            this.$store.dispatch('products/find', {
+            await this.$store.dispatch('products/find', {
                 query: {
                     id: this.id
                 }
-            }).then(() => {
-                this.loading = false
             })
+
+            this.loading = false
         }
     },
     beforeDestroy() {
@@ -727,17 +723,17 @@ export default {
                 this.$router.push(`/business/project/${this.project.id}`)
             })
         },
-        save() {
+        async save() {
             if (this.id === 'new') {
                 this.product.type = 'game'
                 this.product.ownerId = this.$store.state.application.activeProfile.id
 
-                this.$store.dispatch('products/create', this.product).then(res => {
-                    this.product.id = res.id
-                    this.notice = 'Congratulations, your product has been created!'
+                const res = await this.$store.dispatch('products/create', this.product)
 
-                    this.$router.push(`/business/project/${this.project.id}`)
-                })
+                this.product.id = res.id
+                this.notice = 'Congratulations, your product has been created!'
+
+                this.$router.push(`/business/project/${this.project.id}`)
 
                 // this.$desktop.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.activeProfile, product: this.product }).then((data) => {
                 //     const product = DB.marketplace.products.insert(data)
@@ -748,19 +744,19 @@ export default {
                 //     this.savedState = true
                 // })
             } else {
-                this.$store.dispatch('products/update', [this.product.id, this.product, {
+                await this.$store.dispatch('products/update', [this.product.id, this.product, {
                     query: {
                         $eager: 'tags'
                     }
-                }]).then(() => {
-                    // this.notice = "Product has been saved."
-                    // this.product.id = productResult.id
-                    // this.successfulCreationMessage = "Congratulations, your project has been created!"
+                }])
 
-                    // this.$router.push('/business/project/' + this.project.id)
+                // this.notice = "Product has been saved."
+                // this.product.id = productResult.id
+                // this.successfulCreationMessage = "Congratulations, your project has been created!"
 
-                    this.savedState = true
-                })
+                // this.$router.push('/business/project/' + this.project.id)
+
+                this.savedState = true
             }
         },
         // save() {

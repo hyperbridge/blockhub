@@ -98,7 +98,7 @@
                     :onlyContentBg="true">
                     <div class="stat-card-container">
                         <div class="stat-card-list">
-                            <router-link
+                            <nuxt-link
                                 tag="div"
                                 to="/account/profiles"
                                 class="route stat-card">
@@ -116,7 +116,7 @@
                                         View and manage profiles on this account.
                                     </p>
                                 </div>
-                            </router-link>
+                            </nuxt-link>
                             <div
                                 v-darklaunch="'TICKETS'"
                                 class="stat-card">
@@ -315,6 +315,9 @@ export default {
                 projectWishlist: Object.keys(profile.projectWishlist || []).map(id => projects[id])
             }
         }
+    },
+    asyncData({ store, error }) {
+        if (!store.state.auth.user) return error({ statusCode: 500, message: 'Not signed in' })
     },
     methods: {
         exportAccountFile() {

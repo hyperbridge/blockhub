@@ -54,9 +54,9 @@ export default {
             return this.activeProfile
         },
         tradeURL() {
-            const { tradeURLId } = this.account
+            const { tradeLinkId } = this.account
             const { id } = this.profile
-            return `${window.location.origin}/tradeoffer/new/?partner=${id}&id=${tradeURLId}`
+            return `${window.location.origin}/tradeoffer/new/?partner=${id}&id=${tradeLinkId}`
         },
         assets() { return this.$store.state.assets.assets }
     },
@@ -71,10 +71,11 @@ export default {
                 }
             })
         },
-        copyTradeURL() {
-            navigator.clipboard.writeText(this.tradeURL)
-                .then(() => this.$snotify.info('TradeURL has been copied'))
+        async copyTradeURL() {
+            await navigator.clipboard.writeText(this.tradeURL)
                 .catch(err => this.$snotify.warning('TradeURL could not be copied'))
+
+            this.$snotify.info('TradeURL has been copied')
         },
         updateVal(e) {
             console.log(e)

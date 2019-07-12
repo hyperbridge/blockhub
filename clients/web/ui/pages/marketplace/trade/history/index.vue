@@ -9,11 +9,11 @@
             </span>
             <div class="trade-history__user">
                 You traded with
-                <router-link
+                <nuxt-link
                     :to="`/profile/${trx.contractor.id}`"
                     class="trade-history__user-link">
                     <c-user :user="trx.contractor" />
-                </router-link>
+                </nuxt-link>
             </div>
             <ul
                 v-for="(offer, index) in ['yourOffer', 'contractorOffer']"
@@ -27,14 +27,14 @@
                     :key="index"
                     class="trade-history__item"
                     :class="`trade-history__item--${offer === 'yourOffer' ? 'bought' : 'sold' }`">
-                    <router-link
+                    <nuxt-link
                         class="trade-history__item-link"
                         :to="`/asset/${asset.id}`">
                         <c-img
                             :src="asset.image"
                             class="trade-history__item-image" />
                         {{ asset.name }}
-                    </router-link>
+                    </nuxt-link>
                 </li>
             </ul>
         </section>
@@ -46,8 +46,10 @@ export default {
     components: {
         'c-user': () => import('~/components/author').then(m => m.default || m)
     },
-    props: ['transactions'],
     computed: {
+        transactions() {
+            return this.$route.params.transactions
+        },
         transactionsX() {
             return
             return this.$store.getters['assets/transactionsArray']

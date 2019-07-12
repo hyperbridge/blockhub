@@ -65,7 +65,9 @@ export default {
     },
     methods: {
         closePicker() {
-            if (this.showPicker) { this.showPicker = false }
+            if (this.showPicker) {
+                this.showPicker = false
+            }
         },
         openPicker() {
             this.showPicker = !this.showPicker

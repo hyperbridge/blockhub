@@ -127,8 +127,8 @@
                             :limitTo="2">
                             <template v-slot="props">
                                 <c-asset-store-card
-                                    v-if="props.items"
                                     v-for="(item) in props.items"
+                                    v-if="props.items"
                                     :key="item.id"
                                     :class="item.css"
                                     :assetName="item.name"
@@ -1137,7 +1137,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { setInterval } from 'core-js'
 
 
@@ -1158,7 +1157,6 @@ export default {
         'c-carousel-3d': () => import('~/components/carousel-3d').then(m => m.default || m),
         'c-asset-store-card': () => import('~/components/asset/store-card').then(m => m.default || m),
         'c-welcome-box': () => import('~/components/welcome-box').then(m => m.default || m),
-
         'c-token-sale': () => import('~/components/token-sale-box').then(m => m.default || m)
     },
     data() {
@@ -1336,20 +1334,20 @@ export default {
 
             window.scrollTo(0, top)
         },
-        unlockWallet() {
+        async unlockWallet() {
             this.gaStep(2)
 
             if (typeof window.web3 !== 'undefined') {
                 if (window.ethereum) {
                     try {
                         // Request account access if needed
-                        window.ethereum.enable().then(() => {
-                            window.web3 = new Web3(window.ethereum)
+                        await window.ethereum.enable()
 
-                            window.web3.eth.getAccounts((err, accounts) => {
-                                this.purchaseAddress = accounts[0]
-                                this.account.address = accounts[0] // save for verification screen
-                            })
+                        window.web3 = new Web3(window.ethereum)
+
+                        window.web3.eth.getAccounts((err, accounts) => {
+                            this.purchaseAddress = accounts[0]
+                            this.account.address = accounts[0] // save for verification screen
                         })
                     } catch (error) {
                         // User denied account access...

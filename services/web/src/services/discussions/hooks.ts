@@ -1,32 +1,29 @@
-import Discussion from '../../models/discussion'
+import { DiscussionType } from '../../models/discussion'
 import Node from '../../models/node'
 
 const { authenticate } = require('@feathersjs/authentication').hooks
 
 
-const fillDiscussion = async function(discussion, context) {
-
+const fillDiscussion = async function (discussion, context): Promise<any> {
     return discussion
 }
 
-const fillOne = function(options = {}) {
+const fillOne = function (options = {}): any {
     return async context => {
         context.data = fillDiscussion(context.data, context)
         return context
     }
 }
 
-const fillAll = function(options = {}) {
+const fillAll = function (options = {}): any {
     return async context => {
-        context.result.data = await Promise.all(context.result.data.map((discussion) => {
-            return fillDiscussion(discussion, context)
-        }))
+        context.result.data = await Promise.all(context.result.data.map(discussion => fillDiscussion(discussion, context)))
 
         return context
     }
 }
 
-const create = function(options = {}) {
+const create = function (options = {}): any {
     return async context => {
         const { app, data } = context
 
@@ -40,7 +37,7 @@ const create = function(options = {}) {
 
         const community = await app.service('communities').get(data.community.id)
 
-        if (!community) {
+        if (data.community.id && !community) {
             throw new Error('A discussion must have a community')
         }
 
@@ -50,18 +47,18 @@ const create = function(options = {}) {
             throw new Error('Discussion must be owned by a profile of authenticated account')
         }
 
-        const { key, name, value, meta } = context.data
-
-        console.log(owner)
+        const { key, name, value, meta, type = DiscussionType.Discussion } = context.data
 
         // Override the original data (so that people can't submit additional stuff)
         context.data = {
             key,
             name,
             value,
-            meta
+            meta,
+            type
         }
 
+        // console.log(context.data);
         context.relations = {
             owner,
             community
@@ -71,7 +68,7 @@ const create = function(options = {}) {
     }
 }
 
-const afterCreate = function(options = {}) {
+const afterCreate = function (options = {}) {
     return async context => {
         const { app, data, relations, result } = context
 
@@ -125,7 +122,7 @@ const afterCreate = function(options = {}) {
     }
 }
 
-const validatePermission = function(options = {}) {
+const validatePermission = function (options = {}) {
     return async context => {
         const { app, data } = context
 

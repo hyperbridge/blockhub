@@ -1,7 +1,7 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 const populateProfile = require('../../hooks/populate-profile')
 
-const fillProject = function(project) {
+const fillProject = function (project): any {
     // project.images = {
     //     "mediumTile": "https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"
     // }
@@ -15,24 +15,22 @@ const fillProject = function(project) {
     return project
 }
 
-const fillOne = function(options = {}) {
+const fillOne = function (options = {}): any {
     return async context => {
         context.data = fillProject(context.data)
         return context
     }
 }
 
-const fillAll = function(options = {}) {
+const fillAll = function (options = {}): any {
     return async context => {
-        context.result.data = context.result.data.map((project) => {
-            return fillProject(project)
-        })
+        context.result.data = context.result.data.map(project => fillProject(project))
 
         return context
     }
 }
 
-const create = function(options = {}) {
+const create = function (options = {}): any {
     return async context => {
         const { app, data } = context
 
@@ -58,7 +56,7 @@ const create = function(options = {}) {
             description,
             value,
             meta,
-            //meta: context.data,
+            // meta: context.data,
             ownerId: profile.id
         }
 
@@ -67,7 +65,7 @@ const create = function(options = {}) {
 }
 
 
-const validatePermission = function(options = {}) {
+const validatePermission = function (options = {}): any {
     return async context => {
         const { app, data } = context
 
@@ -115,11 +113,10 @@ export const error = {
 }
 
 
-                        // : image = "project.images.mediumTile" 
-                        // : description = "project.description" 
-                        // : funds = "project.funds" 
-                        // : parentName = "project.product && project.product.name" 
-                        // : parentDeveloper = "project.product && project.product.developer" 
-                        // : parentImage = "project.product && project.product.images.mediumTile"
-                        // : id = "project.id"
-
+// : image = "project.images.mediumTile"
+// : description = "project.description"
+// : funds = "project.funds"
+// : parentName = "project.product && project.product.name"
+// : parentDeveloper = "project.product && project.product.developer"
+// : parentImage = "project.product && project.product.images.mediumTile"
+// : id = "project.id"

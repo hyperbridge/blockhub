@@ -12,7 +12,7 @@
                     v-for="asset in props.items"
                     :key="asset.id"
                     :asset="asset">
-                    <router-link
+                    <nuxt-link
                         slot="link"
                         slot-scope="props"
                         :to="{
@@ -23,9 +23,9 @@
                     <!-- <a slot="link" slot-scope="props" :title="props.asset.name">
                         {{ props.asset.name }}
                     </a> -->
-                    <!-- <router-link slot="link" slot-scope="props" :to="`/`">
+                    <!-- <nuxt-link slot="link" slot-scope="props" :to="`/`">
                         {{ props.asset }} 123
-                    </router-link> -->
+                    </nuxt-link> -->
                 </c-asset-list-item>
             </ul>
             <!-- <table class="offers-table" slot-scope="props">
@@ -122,7 +122,6 @@ export default {
         'c-asset-preview-basic': () => import('~/components/asset/preview-basic').then(m => m.default || m),
         'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m)
     },
-    props: ['id', 'profileId'],
     data() {
         return {
             openedOffer: null,
@@ -132,6 +131,12 @@ export default {
         }
     },
     computed: {
+        id() {
+            return this.$route.params.id
+        },
+        profileId() {
+            return this.$route.params.profileId
+        },
         offers() {
             return []// this.$store.getters['assets/offersMap'];
         },

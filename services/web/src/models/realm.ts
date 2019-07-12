@@ -1,24 +1,24 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import Rating from './rating'
 import Profile from './profile'
 import Node from './node'
 import BaseModel from './base'
 
 export default class Realm extends BaseModel {
-    parentId!: Number
+    public parentId!: number
 
-    ownerId!: Number
-    owner!: Profile
+    public ownerId!: number
+    public owner!: Profile
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'realms'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: [],
@@ -27,7 +27,7 @@ export default class Realm extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             owner: {
                 relation: Model.HasOneThroughRelation,
@@ -35,7 +35,7 @@ export default class Realm extends BaseModel {
                 filter: {
                     relationKey: 'owner'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'owner'
                 },
                 join: {
@@ -71,7 +71,7 @@ export default class Realm extends BaseModel {
                 filter: {
                     relationKey: 'rating'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     console.log(model);
                     (model as Node).relationKey = 'rating'
                 }

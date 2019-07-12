@@ -8,7 +8,8 @@
             class="content login-container">
             <div class="container">
                 <div class="col-12">
-                    <c-tabs :tabNames="['Account Verification']"
+                    <c-tabs
+:tabNames="['Account Verification']"
                             styled>
                         <c-tab
                             :tabId="1">
@@ -189,7 +190,6 @@
 
 <script>
 // import Veriff from '@veriff/js-sdk'
-import axios from 'axios'
 
 export default {
     components: {
@@ -267,7 +267,7 @@ export default {
                     }
                 }
 
-                axios({
+                this.$axios({
                     method: 'post',
                     url: 'https://magic.veriff.me/v1/sessions',
                     data,

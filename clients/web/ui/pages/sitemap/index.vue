@@ -394,6 +394,20 @@
                                 Store Invoice #1
                             </c-button>
                         </li>
+                        <li>
+                            <c-button
+                                status="none"
+                                to="/store/orders">
+                                Store Orders
+                            </c-button>
+                        </li>
+                        <li>
+                            <c-button
+                                status="none"
+                                to="/store/order/1">
+                                Store Order #1
+                            </c-button>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4">

@@ -99,7 +99,7 @@ export default {
     },
     created() {
         if (this.$store.state.application) {
-            if (!this.$store.state.application.settings.client.sounds || !this.$store.state.application.settings.client.ui_interaction_sounds) {
+            if (!this.$store.state.application.settings.client.sounds || !this.$store.state.application.settings.client.interfaceInteractionSounds) {
                 // TODO: Mutating the prop is a no no.
                 // this.soundEnabled = false
             }

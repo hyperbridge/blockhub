@@ -5,9 +5,7 @@
                 <i :class="icon" />
             </div>
             <div class="text">
-                <!--<nuxt-link :to="">-->
-                    {{ title }}
-                <!--</nuxt-link>-->
+                {{ title }}
             </div>
             <div class="last-post">
                 {{ calculateSince }}

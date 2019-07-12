@@ -9,23 +9,35 @@ import {withViewport} from '@storybook/addon-viewport'
 import {withKnobs, text, boolean, number, object} from '@storybook/addon-knobs/vue'
 
 import '@/css/styles.scss'
-// import '@/entry-client'
 import filters from '@/plugins/filters'
 import directives from '@/plugins/directives'
 import '@/plugins/components'
-// import store from '@/store'
-// import router from '@/router'
 
 filters({})
 directives({})
-//import * as Bridge from '@/framework/desktop-bridge'
+
 import * as data from './components-data'
 
 
 const StoreDummy = {
     install(Vue, options) {
         Vue.prototype.$store = {
-            state: {},
+            state: {
+                profiles: {
+                    keyedById: {}
+                },
+                application: {
+                    desktopMode: true,
+                    settings: {
+                        client: {
+                            autoplay: false
+                        }
+                    },
+                    video: {
+                        src: null
+                    }
+                }
+            },
             dispatch: () => {},
             commit: () => {}
         }
@@ -45,19 +57,26 @@ Vue.component('nuxt-link', {
 		template: '<div @click="log()"><slot /></div>',
 })
 
-// //import '!style-loader!css-loader!./styles.scss'
 
-// window.ga = function() {}
+Vue.component('router-link', {
+    props: ['to'],
+    methods: {
+        log() {
+            action('link target')(this.to)
+        },
+    },
+    template: '<div @click="log()"><slot /></div>',
+})
 
-// Bridge.init(store, router)
-
-// store.dispatch('database/init')
-// store.dispatch('application/init')
-// store.dispatch('marketplace/init')
-// store.dispatch('funding/init')
-
-// console.log('BlockHub initialized.')
-
+Vue.component('nuxt-link', {
+    props: ['to'],
+    methods: {
+        log() {
+            action('link target')(this.to)
+        },
+    },
+    template: '<div @click="log()"><slot /></div>',
+})
 
 // addDecorator(withViewport('desktop'))
 //addDecorator(StoryRouter())
@@ -642,8 +661,6 @@ storiesOf('Projects', module)
 
 import Tabs from '@/components/tab/tabs.vue'
 import Tab from '@/components/tab/tab.vue'
-import TabsUniversal from '@/components/tab/tabs-universal';
-import TabUniversal from '@/components/tab/tab-universal';
 
 storiesOf('Tabs', module)
     .add('default', () => ({

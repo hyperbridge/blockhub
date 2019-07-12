@@ -16,7 +16,9 @@
                 ref="userInput"
                 @focus="setInputActive(true)"
                 @blur="setInputActive(false)"
-                @keydown="handleKey" />
+                @keydown="handleKey"
+                v-text="message"
+            />
             <div class="user-input--buttons">
                 <c-button v-if="showAttachment" status="plain" @click="$emit('attachment')">
                     <i class="fas fa-paperclip" />
@@ -24,7 +26,7 @@
                 <c-button v-if="showEmoji" status="plain" @click="$emit('emoji')">
                     <i class="far fa-smile" />
                 </c-button>
-                <c-button status="plain" @click="$emit('send')">
+                <c-button status="plain" @click="emitSendMessage">
                     <img src="./../../../assets/SVG/send.svg"
                          class="user-input--send-icon"
                          alt="send"/>
@@ -66,18 +68,25 @@ export default {
     data() {
         return {
             file: null,
-            inputActive: false
+            inputActive: false,
+            message: ''
         }
     },
     methods: {
         setInputActive(onoff) {
             this.inputActive = onoff
         },
+
         handleKey(event) {
             if (event.keyCode === 13 && !event.shiftKey) {
-                this._submitText(event)
+                this.emitSendMessage()
                 event.preventDefault()
-            }
+            } else this.message = event.target.innerHTML;
+        },
+
+        emitSendMessage() {
+            this.$emit('sendMessage', this.message);
+            this.message = '';
         }
     }
 }

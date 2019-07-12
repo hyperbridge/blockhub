@@ -42,13 +42,15 @@ export default {
         'c-trade-offer': () => import('~/components/trade-offer').then(m => m.default || m),
         'c-tag-count': () => import('~/components/tags/count').then(m => m.default || m)
     },
-    props: ['transactions'],
     data() {
         return {
             activeTab: 1
         }
     },
     computed: {
+        transactions() {
+            return this.$route.params.transactions
+        },
         transactionsX() {
             return
             return this.$store.getters['assets/transactionsArray']

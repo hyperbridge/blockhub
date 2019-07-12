@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>BlockHub DevTools</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background: transparent;
+                color: #fff;
+                font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, sans-serif;
+                overflow: hidden;
+            }
+
+            html, body, #container {
+                height: 100%;
+            }
+
+            button, input, textarea {
+                background: #fff;
+                border: 1px solid #333;
+                padding: 4px;
+                border-radius: 3px;
+            }
+
+            button {
+                color: #333;
+            }
+
+            a {
+                color: #ccc;
+                text-decoration: none;
+            }
+
+            h1 {
+                font-size: 32px;
+                text-align: center;
+                /* background: rgba(255, 255, 255, 0.6);
+                color: #000; */
+                padding: 10px;
+            }
+
+            #container {
+                display: none;
+                background: #fff;
+                /*border-radius: 7px 7px 0 0;*/
+                overflow: hidden;
+                box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+                margin: 0 10px;
+                height: 100%;
+            }
+
+            #header {
+                width: 100%;
+                background: #fff;
+                box-shadow: 0 0 5px #333;
+                overflow: hidden;
+                top: 0;
+                left: 0;
+                position: sticky;
+            }
+
+            #header .draggable {
+                width: calc(100% - 60px);
+                height: 60px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                -webkit-app-region: drag;
+            }
+
+            #header .logo {
+                width: 113px;
+                height: 34px;
+                margin: 10px;
+                display: block;
+                float: left;
+                background: url(http://something.com/image.png) no-repeat 0 0;
+                background-size: contain;
+            }
+
+            #header .title {
+                display: block;
+                float: left;
+                border-left: 1px solid #666;
+                color: #000;
+                font-size: 18px;
+                padding-left: 20px;
+                margin: 16px 0 10px 20px;
+            }
+
+            #section-wrapper {
+                overflow-y: auto;
+                height: 100%;
+                padding-bottom: 50px;
+            }
+
+            #auth-prompt {
+                display: none;
+            }
+
+            #main-section, #auth-prompt {
+                padding: 20px;
+                height: 100%;
+            }
+
+            #log {
+                width: 100%;
+                height: 300px;
+            }
+
+            #advanced, #log {
+                display: none;
+            }
+
+            #expanded {
+                position: fixed;
+                top: 0px;
+                right: 10px;
+                width: 30px;
+                height: 50px;
+                padding: 10px;
+                z-index: 1;
+                color: #222;
+                font-size: 22px;
+                font-weight: bold;
+                text-align: center;
+                background: #fff;
+                border: 1px solid #000;
+            }
+
+            body.expanded #container {
+                display: block;
+            }
+
+            body.expanded #expanded {
+                border: none;
+            }
+        </style>
+    </head>
+    <body class="">
+        <a id="expanded" href="#">&lang;</a>
+        <div id="container">
+            <header id="header">
+                <nav class="">
+                    <div class="logo"></div>
+                    <div class="title">
+                        Frontend DevTools
+                    </div>
+                </nav>
+                <div class="draggable"></div>
+            </header>
+
+            <div id="section-wrapper">
+                <h1 id="title">gsdg_front</h1>
+                <div id="main-section">
+                    <br /><br />
+
+                    <p><strong>Environment</strong></p>
+                    <select id="env-value">
+                        <option value="gsdg_front">gsdg_front</option>
+                        <option value="gsdg_intra">gsdg_intra</option>
+                    </select>
+                    <button id="env-button">Load</button>
+                    
+                    <br /><br />
+
+                    <p><strong>Resolution</strong></p>
+                    <select id="resolution-value">
+                        <option value="mobile">mobile</option>
+                        <option value="tablet">tablet</option>
+                        <option value="desktop" selected>desktop</option>
+                    </select>
+                    <button id="resolution-button">Load</button>
+                    
+                    <br /><br />
+
+                    <p><strong>Scenario</strong></p>
+                    <select id="scenario-value">
+                        <option value="">None detected</option>
+                    </select>
+                    <button id="scenario-button">Load</button>
+                    
+                    <br /><br />
+
+                    <p><strong>Development</strong></p>
+                    <button id="open-console-button">Open Console</button>
+                    
+                    <br /><br />
+
+                    <select id="preset-uri-value">
+                        <option>Saved Sites</option>
+                        <option value="http://localhost:8080">Front</option>
+                        <option value="http://localhost:8081">Intra</option>
+                    </select>
+                    <br />
+                    <input type="text" id="load-uri-value" value="" />
+                    <button id="load-uri-button">Go</button>
+                    <button id="reload-uri-button">Reload</button>
+                    
+                    <br /><br />
+
+                    <p><strong>Testing</strong></p>
+                    <p>API Recording Enabled</p>
+                    <input id="api-recording" type="checkbox" name="api-recording" value="" />
+                    <p>API Playback Enabled</p>
+                    <input id="api-playback" type="checkbox" name="api-playback" value="" />
+                    
+                    <br /><br />
+
+                    <p><strong>Advanced Settings (<a id="toggle-advanced-button" href="#">Show</a>)</strong></p>
+                    <div id="advanced">
+                        <p>Proxy Host</p>
+                        <input id="proxy-host-value" type="text" value="" />
+                        <p>Proxy Port</p>
+                        <input id="proxy-port-value" type="text" value="" />
+                        <p>Override Headers</p>
+                        <input id="override-headers-value" type="checkbox" value="" checked />
+                        <p>Override CORS</p>
+                        <input id="override-cors-value" type="checkbox" value="" checked />
+
+                        <br /><br />
+                        <button id="advanced-button">Update</button>
+                    </div>
+
+
+                    <br /><br />
+                    <p><strong>Log (<a id="toggle-log-button" href="#">Show</a>)</strong></p>
+                    <textarea id="log"></textarea>
+
+                    <br /><br />
+                    <br /><br />
+                    <br /><br />
+                </div>
+
+                <div id="auth-prompt">
+                    <p><strong>Authentication</strong></p>
+                    <p>Username</p>
+                    <input type="text" id="username-value" value="" />
+                    <p>Password</p>
+                    <input type="password" id="password-value" value="" />
+                    
+                    <br /><br />
+
+                    <button id="auth-button">Submit</button>
+                </div>
+            </div>
+
+            <script>
+                let env = null
+
+                function sendCommand(key, data) {
+                    console.log('Sending command: ', key, data)
+
+                    if (window.ipcRenderer) {
+                        window.ipcRenderer.send('command', JSON.stringify({
+                            env,
+                            key,
+                            data
+                        }))
+                    }
+                }
+
+                function setBackground(id) {
+                    let start = '#ac2287'
+                    let middle = '#6658be'
+                    let end = '#6599da'
+
+                    let bgs = [
+                        {
+                            start: '#ac2287',
+                            middle: '#6658be',
+                            end: '#6599da'
+                        },
+                        {
+                            start: '#bdc3c7',
+                            middle: '#2c3e50',
+                            end: '#2c3e50'
+                        },
+                        // {
+                        //     start: '#c21500',
+                        //     middle: '#ffc500',
+                        //     end: '#ffc500'
+                        // },
+                        {
+                            start: '#3a7bd5',
+                            middle: '#3a6073',
+                            end: '#3a6073'
+                        },
+                        {
+                            start: '#23074d',
+                            middle: '#cc5333',
+                            end: '#cc5333'
+                        },
+                    ]
+
+
+                    if (id > bgs.length) {
+                        id = Math.floor(Math.random() * bgs.length)
+                    }
+                    
+                    let bg = bgs[id]
+
+                    document.getElementById('container').style.background = `linear-gradient(312deg, ${bg.start} 0%, ${bg.middle} 70%, ${bg.end} 100%)`
+                }
+
+                function setTitle(title) {
+                    document.getElementById('title').innerHTML = title
+                }
+
+                function setExpanded(expanded) {
+                    if (expanded) {
+                        document.body.classList.add('expanded')
+                        document.getElementById('expanded').innerHTML = '&lang;'
+                    } else {
+                        document.body.classList.remove('expanded')
+                        document.getElementById('expanded').innerHTML = '&rang;'
+                    }
+                }
+
+                document.addEventListener('DOMContentLoaded', () => {
+                })
+
+                document.getElementById('expanded').addEventListener('click', () => {
+                    let expanded = !document.body.classList.contains('expanded')
+                    setExpanded(expanded)
+                    sendCommand('setAdminExpanded', expanded)
+                })
+
+                document.getElementById('toggle-advanced-button').addEventListener('click', () => {
+                    let display = document.getElementById('advanced').style.display
+                    document.getElementById('advanced').style.display = display === 'block' ? 'none' : 'block'
+                    document.getElementById('toggle-advanced-button').innerHTML = display === 'block' ? 'Show' : 'Hide'
+                })
+
+                document.getElementById('toggle-log-button').addEventListener('click', () => {
+                    let display = document.getElementById('log').style.display
+                    document.getElementById('log').style.display = display === 'block' ? 'none' : 'block'
+                    document.getElementById('toggle-log-button').innerHTML = display === 'block' ? 'Show' : 'Hide'
+                })
+                
+                document.getElementById('advanced-button').addEventListener('click', () => {
+                    const overrideHeaders = document.getElementById('override-headers-value').checked
+                    const overrideCors = document.getElementById('override-cors-value').checked
+
+                    sendCommand('overrideHeaders', overrideHeaders)
+                    sendCommand('overrideCors', overrideCors)
+
+                    const host = document.getElementById('proxy-host-value').value
+                    const port = document.getElementById('proxy-port-value').value
+
+                    if (host && port) {
+                        sendCommand('setProxy', {
+                            host,
+                            port
+                        })
+                    }
+                })
+                
+                document.getElementById('env-button').addEventListener('click', () => {
+                    const value = document.getElementById('env-value').value
+                    sendCommand('loadEnvironment', value)
+                })
+
+                document.getElementById('resolution-button').addEventListener('click', () => {
+                    const value = document.getElementById('resolution-value').value
+                    sendCommand('loadResolution', value)
+                })
+
+                document.getElementById('load-uri-button').addEventListener('click', () => {
+                    const value = document.getElementById('load-uri-value').value
+                    sendCommand('loadUri', value)
+                })
+
+                document.getElementById('load-uri-value').onkeydown = function(e) {
+                    if(e.keyCode === 13) {
+                        document.getElementById('load-uri-button').click()
+                    }
+                }
+
+                document.getElementById('password-value').onkeydown = function(e) {
+                    if(e.keyCode === 13) {
+                        document.getElementById('auth-button').click()
+                    }
+                }
+
+                document.getElementById('reload-uri-button').addEventListener('click', () => {
+                    sendCommand('reloadUri')
+                })
+
+                document.getElementById('open-console-button').addEventListener('click', () => {
+                    sendCommand('openConsole')
+                })
+
+                document.getElementById('preset-uri-value').addEventListener('change', () => {
+                    const value = document.getElementById('load-uri-value').value = document.getElementById('preset-uri-value').value
+                })
+                
+                document.getElementById('api-recording').addEventListener('change', () => {
+                    const value = document.getElementById('api-recording').checked
+
+                    sendCommand('apiRecording', value)
+                })
+
+                document.getElementById('api-playback').addEventListener('change', () => {
+                    const value = document.getElementById('api-playback').checked
+
+                    sendCommand('apiPlayback', value)
+                })
+
+                document.getElementById('auth-button').addEventListener('click', () => {
+                    const username = document.getElementById('username-value').value
+                    const password = document.getElementById('password-value').value
+
+                    sendCommand('auth', {
+                        username,
+                        password
+                    })
+                    
+                    document.getElementById('username-value').value = ''
+                    document.getElementById('password-value').value = ''
+
+                    document.getElementById('main-section').style.display = 'block'
+                    document.getElementById('auth-prompt').style.display = 'none'
+                })
+                
+                if (window.ipcRenderer) {
+                    window.ipcRenderer.on('command', (event, msg) => {
+                        const cmd = JSON.parse(msg)
+
+                        if (cmd.key === 'init') {
+                            env = cmd.env
+
+                            setBackground(env)
+                            setTitle(cmd.data.key)
+                            setExpanded(cmd.data.state.expanded)
+
+                            document.getElementById('env-value').value = cmd.data.state.key
+                            document.getElementById('resolution-value').value = cmd.data.state.resolution
+                            document.getElementById('load-uri-value').value = cmd.data.state.uri
+                            document.getElementById('api-playback').checked = cmd.data.state.playbackMode
+                            document.getElementById('api-recording').checked = cmd.data.state.recordingMode
+                            document.getElementById('proxy-host-value').value = cmd.data.state.proxy.host
+                            document.getElementById('proxy-port-value').value = cmd.data.state.proxy.port
+
+                            sendCommand('ready')
+                        } else if (cmd.key === 'showAuth') {
+                            document.getElementById('main-section').style.display = 'none'
+                            document.getElementById('auth-prompt').style.display = 'block'
+                        } else if (cmd.key === 'setState') {
+
+                        } else if (cmd.key === 'systemError') {
+                            document.getElementById('errors').value += cmd.data + "\n\n"
+                        }
+                    })
+                }
+            </script>
+        </div>
+    </body>
+</html>

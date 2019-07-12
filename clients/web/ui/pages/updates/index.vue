@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Vue from 'vue'
 import HeadingBar from '@/components/heading-bar/simple-colored'
 import DottedList from '@/components/list/dots'
@@ -63,7 +62,7 @@ export default {
     created() {
         const sheetUrl = 'https://spreadsheets.google.com/feeds/list/1Ndg4etkvLQZKeTcPfP1L1nJiMWn6UkwFd9RVSMcltp4/1/public/values?alt=json'
 
-        axios({
+        this.$axios({
             method: 'get',
             url: sheetUrl
         })

@@ -13,7 +13,7 @@ const local = {
     },
     passphrase: null,
     password: null,
-    events: {},
+    events: {}
 }
 
 export const on = (event, listener) => {

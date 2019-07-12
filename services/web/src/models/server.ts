@@ -1,29 +1,29 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import Node from './node'
 import Product from './product'
 import Tag from './tag'
 import BaseModel from './base'
 
 export default class Server extends BaseModel {
-    parentId!: Number
-    score!: Number
+    public parentId!: number
+    public score!: number
 
-    product!: Product
-    productId!: Number
+    public product!: Product
+    public productId!: number
 
-    address!: String
-    port!: Number
-    totalConnected!: Number
+    public address!: string
+    public port!: number
+    public totalConnected!: number
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'servers'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: [],
@@ -32,7 +32,7 @@ export default class Server extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             parent: {
                 relation: Model.HasOneRelation,
@@ -57,7 +57,7 @@ export default class Server extends BaseModel {
                 filter: {
                     relationKey: 'tags'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'tags'
                 }
             },

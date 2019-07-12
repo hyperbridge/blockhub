@@ -3,28 +3,26 @@ const Collection = require('../../models/collection').default
 const Ajv = require('ajv')
 const { validateSchema } = require('feathers-hooks-common')
 
-const fillCollection = function(collection) {
+const fillCollection = function (collection): any {
     return collection
 }
 
-const fillOne = function(options = {}) {
+const fillOne = function (options = {}): any {
     return async context => {
         context.data = fillCollection(context.data)
         return context
     }
 }
 
-const fillAll = function(options = {}) {
+const fillAll = function (options = {}): any {
     return async context => {
-        context.result.data = context.result.data.map((collection) => {
-            return fillCollection(collection)
-        })
+        context.result.data = context.result.data.map(collection => fillCollection(collection))
 
         return context
     }
 }
 
-const create = function(options = {}) {
+const create = function (options = {}): any {
     return async context => {
         const { app, data } = context
 
@@ -36,7 +34,7 @@ const create = function(options = {}) {
         context.data = {
             name,
             value,
-            meta,
+            meta
         }
 
         return context
@@ -44,7 +42,7 @@ const create = function(options = {}) {
 }
 
 
-const validatePermission = function(options = {}) {
+const validatePermission = function (options = {}): any {
     return async context => {
         const { app, data } = context
 

@@ -1,4 +1,4 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import Account from './account'
 import Profile from './profile'
 import Idea from './idea'
@@ -7,109 +7,118 @@ import Product from './product'
 import Community from './community'
 import Discussion from './discussion'
 import BaseModel from './base'
+import Vote from './vote';
 
 // Based on https://github.com/Vincit/objection.js/issues/19
 // Exclusive ARC https://hashrocket.com/blog/posts/modeling-polymorphic-associations-in-a-relational-database#exclusive-belongs-to-aka-exclusive-arc-
 export default class Node extends BaseModel {
-    parentId!: Number
+    public parentId!: number
 
-    relationKey!: String
+    public relationKey!: string
 
-    fromAccount!: Account
-    fromAccountId!: Number
-    toAccount!: Account
-    toAccountId!: Number
+    public fromAccount!: Account
+    public fromAccountId!: number
+    public toAccount!: Account
+    public toAccountId!: number
 
-    fromProfile!: Profile
-    fromProfileId!: Number
-    toProfile!: Profile
-    toProfileId!: Number
+    public fromProfile!: Profile
+    public fromProfileId!: number
+    public toProfile!: Profile
+    public toProfileId!: number
 
-    fromBadgeId!: Number
-    toBadgeId!: Number
+    public fromBadgeId!: number
+    public toBadgeId!: number
 
-    fromAchievementId!: Number
-    toAchievementId!: Number
+    public fromAchievementId!: number
+    public toAchievementId!: number
 
-    fromIdeaId!: Number
-    toIdeaId!: Number
+    public fromIdea!: Idea
+    public fromIdeaId!: number
+    public toIdea!: Idea
+    public toIdeaId!: number
 
-    fromSuggestionId!: Number
-    toSuggestionId!: Number
+    public fromSuggestionId!: number
+    public toSuggestionId!: number
 
-    fromProjectId!: Number
-    toProjectId!: Number
+    public fromProject!: Project
+    public fromProjectId!: number
+    public toProject!: Project
+    public toProjectId!: number
 
-    fromProductId!: Number
-    toProductId!: Number
+    public fromProduct!: Product
+    public fromProductId!: number
+    public toProduct!: Product
+    public toProductId!: number
 
-    fromAssetId!: Number
-    toAssetId!: Number
+    public fromAssetId!: number
+    public toAssetId!: number
 
-    fromBountyId!: Number
-    toBountyId!: Number
+    public fromBountyId!: number
+    public toBountyId!: number
 
-    fromRealmId!: Number
-    toRealmId!: Number
+    public fromRealmId!: number
+    public toRealmId!: number
 
-    fromCommunity!: Community
-    toCommunity!: Community
-    fromCommunityId!: Number
-    toCommunityId!: Number
+    public fromCommunity!: Community
+    public toCommunity!: Community
+    public fromCommunityId!: number
+    public toCommunityId!: number
 
-    fromDiscussion!: Discussion
-    toDiscussion!: Discussion
-    fromDiscussionId!: Number
-    toDiscussionId!: Number
+    public fromDiscussion!: Discussion
+    public toDiscussion!: Discussion
+    public fromDiscussionId!: number
+    public toDiscussionId!: number
 
-    fromMessageId!: Number
-    toMessageId!: Number
+    public fromMessageId!: number
+    public toMessageId!: number
 
-    fromOfferId!: Number
-    toOfferId!: Number
+    public fromOfferId!: number
+    public toOfferId!: number
 
-    fromLicenseId!: Number
-    toLicenseId!: Number
+    public fromLicenseId!: number
+    public toLicenseId!: number
 
-    fromOrderId!: Number
-    toOrderId!: Number
+    public fromOrderId!: number
+    public toOrderId!: number
 
-    fromRatingId!: Number
-    toRatingId!: Number
+    public fromRatingId!: number
+    public toRatingId!: number
 
-    fromReviewId!: Number
-    toReviewId!: Number
+    public fromReviewId!: number
+    public toReviewId!: number
 
-    fromTagId!: Number
-    toTagId!: Number
+    public fromTagId!: number
+    public toTagId!: number
 
-    fromVoteId!: Number
-    toVoteId!: Number
+    public fromVote!: Vote
+    public fromVoteId!: number
+    public toVote!: Vote
+    public toVoteId!: number
 
-    fromLeaderboardId!: Number
-    toLeaderboardId!: Number
+    public fromLeaderboardId!: number
+    public toLeaderboardId!: number
 
-    fromLogId!: Number
-    toLogId!: Number
+    public fromLogId!: number
+    public toLogId!: number
 
-    fromFileId!: Number
-    toFileId!: Number
+    public fromFileId!: number
+    public toFileId!: number
 
-    fromEventId!: Number
-    toEventId!: Number
+    public fromEventId!: number
+    public toEventId!: number
 
-    fromServerId!: Number
-    toServerId!: Number
+    public fromServerId!: number
+    public toServerId!: number
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'nodes'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return false
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: [],
@@ -119,7 +128,7 @@ export default class Node extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             fromProfile: {
                 relation: Model.HasOneRelation,
@@ -233,28 +242,44 @@ export default class Node extends BaseModel {
                     to: 'discussions.id'
                 }
             },
+            fromVote: {
+                relation: Model.HasOneRelation,
+                modelClass: Vote,
+                join: {
+                    from: 'nodes.fromVoteId',
+                    to: 'votes.id'
+                }
+            },
+            toVote: {
+                relation: Model.HasOneRelation,
+                modelClass: Vote,
+                join: {
+                    from: 'nodes.toVoteId',
+                    to: 'votes.id'
+                }
+            }
         }
     }
 
-    from() {
+    public from (): any {
         if (this.fromAccountId) return this.fromAccount
         if (this.fromProfileId) return this.fromProfile
 
-        throw new Error("No FROM relation")
+        throw new Error('No FROM relation')
     }
 
-    to() {
+    public to (): any {
         if (this.toAccountId) return this.toAccount
         if (this.toProfileId) return this.toProfile
 
-        throw new Error("No TO relation")
+        throw new Error('No TO relation')
     }
 }
 
 // objectId: { type: Schema.Types.ObjectId, required: true },
 // author: { type: String, required: true },
 // text: { type: String, required: true },
-// rate: { type: Number, default: 0 },
+// rate: { type: number, default: 0 },
 // createdAt: { type: Date, default: Date.now },
 // updatedAt: { type: Date, default: Date.now },
 // replies: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
@@ -263,8 +288,8 @@ export default class Node extends BaseModel {
 // product reviews =  has many meta join fromProduct = product.id where type = 'review'
 
 // parentId is nodeId which is anything
-// parentId is profile or project or product 
-// event.parent.getAssociation() => 
+// parentId is profile or project or product
+// event.parent.getAssociation() =>
 //     if (this.productId !== null)
 //         return this.product
 

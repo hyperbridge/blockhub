@@ -27,12 +27,12 @@
                     :to="`/profiles/${user.id}`"
                     class="user-data__avatar-upload-btn">
                     <c-img
-                        class="user-data__avatar no-avatar"
                         v-if="user.img"
+                        class="user-data__avatar no-avatar"
                         :src="user.img" />
                     <c-img
-                        class="user-data__avatar user-avatar"
                         v-else
+                        class="user-data__avatar user-avatar"
                         src="../../static/img/user.png" />
                 </c-button>
             </div>
@@ -163,7 +163,7 @@ export default {
         removing: Boolean
     },
     methods: {
-        generateAddress(profileId) {
+        async generateAddress(profileId) {
             if (!this.$store.state.application.desktopMode) {
                 this.$store.commit('application/activateModal', 'welcome')
                 return
@@ -181,40 +181,36 @@ export default {
 
             const index = chosenProfile.meta.walletIndex
 
-            this.$desktop.sendCommand('generateAddress', { index }).then(res => {
-                this.$store.dispatch('profiles/update', [
-                    chosenProfile.id,
-                    {
-                        address: res.address
-                    },
-                    {
-                        query: {}
-                    }
-                ]).then(profile => {
-                    chosenProfile.address = res.address
+            const res = await this.$desktop.sendCommand('generateAddress', { index })
+            const profile = await this.$store.dispatch('profiles/update', [chosenProfile.id, {
+                address: res.address
+            },
+            {
+                query: {}
+            }])
 
-                    this.$snotify.success('', 'Address generated', { timeout: 3000 })
+            chosenProfile.address = res.address
 
-                    // Update local
-                    this.$store.commit('application/updateState')
+            this.$snotify.success('', 'Address generated', { timeout: 3000 })
 
-                    // Update server
-                    this.$store.dispatch('profiles/update', [
-                        chosenProfile.id,
-                        {
-                            address: chosenProfile.address,
-                            meta: chosenProfile.meta
-                        }
-                    ])
+            // Update local
+            this.$store.commit('application/updateState')
 
-                    // Update desktop
-                    this.$desktop.updateState({
-                        module: 'application',
-                        state: {
-                            profiles: Object.values(this.$store.state.profiles.keyedById)
-                        }
-                    }).then(() => {})
-                })
+            // Update server
+            this.$store.dispatch('profiles/update', [
+                chosenProfile.id,
+                {
+                    address: chosenProfile.address,
+                    meta: chosenProfile.meta
+                }
+            ])
+
+            // Update desktop
+            await this.$desktop.updateState({
+                module: 'application',
+                state: {
+                    profiles: Object.values(this.$store.state.profiles.keyedById)
+                }
             })
         },
         copyToClipboard(value) {

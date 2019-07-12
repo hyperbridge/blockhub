@@ -294,12 +294,55 @@
                 :productSystemRequirements="product.systemRequirements"
                 @cancel="showInstaller = false" />
         </c-modal>
+        <div v-if="showVote" class="row m-0 p-3">
+            <c-vote-modal id="voteModal" title="Please vote our product" @close="showVote = false">
+                <template slot="modalBody">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label> Product quality:</label>
+                                <div>
+                                    <c-pure-range-slider v-model.number="quality" :min="0" :max="10" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label> Pick your emotion :</label>
+                                <div>
+                                    <no-ssr placeholder="loading...">
+                                        <c-vote-emoji />
+                                    </no-ssr>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label> Like or Dislike:</label>
+                                <div>
+                                    <c-vote :votes="0" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <template slot="modalFooter">
+                    <c-checkbox
+                        id="vote">
+                        Don't show it again.
+                    </c-checkbox>
+                </template>
+            </c-vote-modal>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
     components: {
+        'c-pure-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m),
+        'c-vote-emoji': () => import('~/components/emoji/vote').then(m => m.default || m),
+        'c-vote': () => import('~/components/vote').then(m => m.default || m),
         'c-game-plan': () => import('~/components/game-plans/plan').then(m => m.default || m),
         'c-screen-gallery': () => import('~/components/screen-gallery/gallery').then(m => m.default || m),
         'c-promotion-box': () => import('~/components/promotion-box/item').then(m => m.default || m),
@@ -307,19 +350,27 @@ export default {
         'c-purchase-block': () => import('~/components/purchase-block').then(m => m.default || m),
         'c-frequently-traded-assets': () => import('~/components/frequently-traded-assets').then(m => m.default || m),
         'c-community-spotlight': () => import('~/components/community-spotlight').then(m => m.default || m),
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
         'c-review': () => import('~/components/review').then(m => m.default || m),
         'c-system-requirements': () => import('~/components/product-overview/system-requirements').then(m => m.default || m),
         'c-language-support': () => import('~/components/product-overview/language-support').then(m => m.default || m),
         'c-stream-item': () => import('~/components/stream').then(m => m.default || m),
         'c-modal': () => import('~/components/modal').then(m => m.default || m),
+        'c-vote-modal': () => import('~/components/modal/vote').then(m => m.default || m),
         'c-game-installer': () => import('~/components/game-installer').then(m => m.default || m),
-
         'c-review-form': () => import('~/components/review/create').then(m => m.default || m)
     },
-    props: ['product', 'editing'],
+    props: {
+        product: {
+            type: Object
+        },
+        editing: {
+            type: Boolean,
+            default: true
+        }
+    },
     data() {
         return {
+            quality: 0,
             promotionSections: null,
             sliderOptions: {
                 slidesPerView: 4,
@@ -337,7 +388,8 @@ export default {
             },
             streamersList: 8,
             showInstaller: false,
-            reviewForm: false
+            reviewForm: false,
+            showVote: true
         }
     },
     computed: {
@@ -376,6 +428,9 @@ export default {
 
             return arr
         }
+    },
+    mounted() {
+        // this.$store.commit('application/activateModal', 'please-vote');
     },
     methods: {
         showPurchaseModal() {

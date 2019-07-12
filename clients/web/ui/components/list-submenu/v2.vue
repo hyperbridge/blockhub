@@ -9,7 +9,6 @@
                 :listLength="subListLength(value)"
                 :title="prop"
                 :item="value">
-                <!-- {{ value }} -->
                 <list-submenu-v2
                     v-for="(value, prop) in value"
                     v-if="value instanceof Object && !Array.isArray(value)"

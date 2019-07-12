@@ -3,14 +3,14 @@
         <div class="settings-nav">
             <div
                 v-for="item in navList"
-                v-if="item.show"
-                :class="{ 'current-block' : item.block_id == currentBlock }"
-                @click="setBlock(item.block_id)">
+                v-show="item.show"
+                :key="item.key"
+                :class="{ 'current-block' : item.key == currentBlock }"
+                @click="setBlock(item.key)">
                 {{ item.name }}
             </div>
         </div>
         <div class="settings__block-container">
-            <!--<transition-group name="fade">-->
             <c-block
                 v-if=" currentBlock == 'client' "
                 key="block_1"
@@ -23,8 +23,8 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
                             <c-switch
-                                :checked="settings.client.open_startup"
-                                @change="setOpenStartup(settings.client.open_startup)" />
+                                :checked="settings.client.openStartup"
+                                @change="setOpenStartup(settings.client.openStartup)" />
                             <div class="text">
                                 <h4>Open on system startup</h4>
                                 <p>
@@ -37,8 +37,8 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
                             <c-switch
-                                :checked="settings.client.system_warnings"
-                                @change="updateClientSettings('system_warnings')" />
+                                :checked="settings.client.systemWarnings"
+                                @change="updateClientSettings('systemWarnings')" />
                             <div class="text">
                                 <h4>System warnings</h4>
                                 <p>Turn on if you want to see system warnings (useful for debugging)</p>
@@ -92,8 +92,8 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
                             <c-switch
-                                :checked="settings.client.ui_interaction_sounds"
-                                @change="updateClientSettings('ui_interaction_sounds')" />
+                                :checked="settings.client.interfaceInteractionSounds"
+                                @change="updateClientSettings('interfaceInteractionSounds')" />
                             <div class="text">
                                 <h4>UI interaction sounds</h4>
                                 <p>Turn on if you want to enable UI interaction sounds</p>
@@ -115,8 +115,8 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
                             <c-switch
-                                :checked="settings.client.ethereum_connection"
-                                @change="updateClientSettings('ethereum_connection')" />
+                                :checked="settings.client.ethereumConnection"
+                                @change="updateClientSettings('ethereumConnection')" />
                             <div class="text">
                                 <h4>Ethereum connection</h4>
                                 <p>Turn on if you want the application to enable Ethereum connection</p>
@@ -126,8 +126,8 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
                             <c-switch
-                                :checked="settings.client.ethereum_connection"
-                                @change="updateClientSettings('ethereum_connection')" />
+                                :checked="settings.client.ethereumConnection"
+                                @change="updateClientSettings('ethereumConnection')" />
                             <div class="text">
                                 <h4>Node opeator (P2P)</h4>
                                 <p>Turn on if you want to enable node operator (P2P)</p>
@@ -303,7 +303,6 @@
                     </c-button>
                 </div>
             </c-block>
-            <!--</transition-group>-->
         </div>
     </div>
 </template>
@@ -323,42 +322,42 @@ export default {
         return {
             navList: [
                 {
-                    block_id: 'client',
+                    key: 'client',
                     name: 'Client Settings',
                     show: true
                 },
                 {
-                    block_id: 'sound',
+                    key: 'sound',
                     name: 'Sound Settings',
                     show: true
                 },
                 {
-                    block_id: 'decentralization',
+                    key: 'decentralization',
                     name: 'Decentralization Settings',
                     show: true
                 },
                 {
-                    block_id: 'performance',
+                    key: 'performance',
                     name: 'Performance Settings',
                     show: true
                 },
                 {
-                    block_id: 'advanced',
+                    key: 'advanced',
                     name: 'Advanced',
                     show: true
                 },
                 {
-                    block_id: 'game-activity',
+                    key: 'game-activity',
                     name: 'Game Activity',
                     show: true
                 },
                 {
-                    block_id: 'added-games',
+                    key: 'added-games',
                     name: 'Added games',
                     show: true
                 },
                 {
-                    block_id: 'language',
+                    key: 'language',
                     name: 'Language Preferences',
                     show: true
                 }
@@ -914,7 +913,7 @@ export default {
             window.resetSettings()
         },
         setOpenStartup(value) {
-            this.updateClientSettings('open_startup', value)
+            this.updateClientSettings('openStartup', value)
 
             this.$desktop.sendCommand('setOpenStartup', value)
         },

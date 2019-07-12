@@ -5,6 +5,7 @@ import * as Bridge from '../framework/desktop-bridge'
 
 export const strict = false
 
+let app = null
 let service = null
 let auth = null
 
@@ -29,45 +30,39 @@ export let plugins = []
 export const state = () => ({
     initialized: false
 })
-
 if (decentralizedMode) {
     service = () => { // eslint-disable-line arrow-body-style
         return {
             'profiles': {
-                create(newProfile) {
-                    Bridge.sendCommand('createProfileRequest', newProfile).then(profile => {
-                        newProfile.id = profile.id
-                        newProfile.address = profile.address
+                async create(newProfile) {
+                    const profile = await Bridge.sendCommand('createProfileRequest', newProfile)
+                    newProfile.id = profile.id
+                    newProfile.address = profile.address
 
-                        if (!newProfile.name) newProfile.name = 'Default'
-                        this.profiles.push({ ...newProfile, edit: true })
-                        this.editedProfile = newProfile
-
-                        this.saveProfiles()
-                    })
+                    if (!newProfile.name) newProfile.name = 'Default'
+                    this.profiles.push({ ...newProfile, edit: true })
+                    this.editedProfile = newProfile
+                    this.saveProfiles()
                 },
-                save(profile) {
-                    Bridge.sendCommand('saveProfileRequest', profile).then(profile => {
-                        this.saveProfiles()
-                    })
+                async save(profile) {
+                    await Bridge.sendCommand('saveProfileRequest', profile)
+                    this.saveProfiles()
                 },
-                remove() {
-                    Bridge.sendCommand('removeProfileRequest', this.removeProfile).then(() => {
-                        const index = this.profiles.indexOf(this.removeProfile)
-                        this.profiles.splice(index, 1)
-                        this.removeProfile.edit = false
-                        this.removeProfile = null
+                async remove() {
+                    await Bridge.sendCommand('removeProfileRequest', this.removeProfile)
+                    const index = this.profiles.indexOf(this.removeProfile)
+                    this.profiles.splice(index, 1)
+                    this.removeProfile.edit = false
+                    this.removeProfile = null
 
-                        this.saveProfiles()
-                    })
+                    this.saveProfiles()
                 },
-                convert() {
-                    Bridge.sendCommand('createDeveloperRequest', this.activeProfile).then(data => {
-                        this.activeProfile.meta.contractDeveloperId = data
-                        this.$store.state.application.developerMode = true
+                async convert() {
+                    const data = await Bridge.sendCommand('createDeveloperRequest', this.activeProfile)
+                    this.activeProfile.meta.contractDeveloperId = data
+                    this.$store.state.application.developerMode = true
 
-                        // TODO: just redirect here?
-                    })
+                    // TODO: just redirect here?
                 }
             }
         }
@@ -122,7 +117,11 @@ if (decentralizedMode) {
 }
 
 export const actions = {
-    async nuxtServerInit({ commit, dispatch }, { app, req, store, $sentry }) {
+    async nuxtServerInit({ commit, dispatch }, context) {
+        const { req, store, $sentry } = context
+
+        app = context.app
+
         const origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg' // eslint-disable-line no-negated-condition
 
         const storage = {
@@ -186,10 +185,18 @@ export const actions = {
                     strategy: 'jwt',
                     accessToken: cookieToken
                 })
+
+                dispatch('login', {
+                    token: accessToken,
+                    user: store.state.auth.user
+                })
             } catch (error) {
-                app.$cookies.remove('feathers-jwt')
+                console.log('[BlockHub] Error logging in', error)
+                dispatch('logout')
                 return
             }
+        } else {
+            dispatch('logout')
         }
 
         /*
@@ -199,18 +206,58 @@ export const actions = {
             $sentry.configureScope(scope => scope.setUser({ username: 'john.doe@example.com' }))
         */
 
-        return initAuth({
-            commit,
-            dispatch,
-            req,
-            moduleName: 'auth',
-            cookieName: 'feathers-jwt'
-        })
-            .catch(e => { console.log('Feathers exception', e) })
+        if (req) {
+            return initAuth({
+                commit,
+                dispatch,
+                req,
+                moduleName: 'auth',
+                cookieName: 'feathers-jwt'
+            })
+                .catch(e => { console.log('Feathers exception', e) })
+        }
     },
+
+    nuxtClientInit({ commit }, context) {
+        app = context.app
+
+        if (context.store.state.user) {
+            const { userId, meta } = context.store.state.user
+            this.$can.setUserId(userId)
+            this.$can.setUserPermissions(userId, meta.permissions)
+        }
+    },
+
+    login({ dispatch, commit }, { token, user }) {
+        console.log('[BlockHub] Logging in: ', user)
+        this.$axios.setToken(token, 'bearer')
+        // this.$cookies.set('token', token)
+        this.$can.setUserId(user.userId)
+        this.$can.setUserPermissions(user.userId, user.meta.permissions)
+
+        dispatch('application/login')
+        commit('token', token)
+        commit('user', user)
+        commit('loggedIn', true)
+    },
+
+    logout({ dispatch, commit }) {
+        console.log('[BlockHub] Logging out')
+        dispatch('auth/logout')
+        dispatch('application/logout')
+        this.$axios.setToken(false)
+        // this.$cookies.remove('token')
+        commit('loggedIn', false)
+        commit('user', null)
+        commit('token', null)
+        this.$cookies.remove('feathers-jwt')
+        // this.$router.push('/login')
+    },
+
     init({ commit }, payload) {
         commit('init', payload)
     },
+
     update({ rootState }, [path, data]) {
         const [module, target] = path.split('/')
         if (data !== null && typeof data === 'object') {
@@ -235,6 +282,15 @@ export const mutations = {
         }
 
         state.initialized = true
+    },
+    user(state, payload) {
+        state.user = payload
+    },
+    token(state, payload) {
+        state.token = payload
+    },
+    loggedIn(state, payload) {
+        state.loggedIn = payload
     }
 }
 

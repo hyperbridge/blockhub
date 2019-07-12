@@ -42,11 +42,9 @@
                                                     v-if="item.data.oldPrice"
                                                     class="price oldPrice">
                                                     {{ item.data.oldPrice | convertCurrency }}
-                                                <!--<span>usd</span>-->
                                                 </div>
                                                 <div class="price">
                                                     {{ item.data.price | convertCurrency }}
-                                                <!--<span>usd</span>-->
                                                 </div>
                                             </div>
                                             <c-button
@@ -517,7 +515,7 @@ export default {
         }
     },
     computed: {
-        assets(){
+        assets() {
             return []
         },
         sliced() {

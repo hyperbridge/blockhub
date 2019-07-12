@@ -22,7 +22,6 @@
                 @click="handleEvolve(parentId)">
                 <c-icon name="plus" />
             </button>
-            <!-- {{ item.id }} -->
             <c-asset
                 :asset="item.asset"
                 class="navigator-item__asset"

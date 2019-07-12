@@ -18,12 +18,12 @@
                     :class="['price-position-' + pricePosition]">
                     <strong>{{ item.price | convertCurrency }}</strong>
                 </div>
-                <!--<c-button-->
-                    <!--status="none"-->
-                    <!--class="w-100"-->
-                    <!--:to="`/product/${item.id}`">-->
+                <c-button
+                    status="none"
+                    class="w-100"
+                    :to="`/product/${item.id}`">
                     <c-img :src="item.images.mediumTile" />
-                <!--</c-button>-->
+                </c-button>
                 <div
                     v-if="item.crowdfund"
                     class="crowdfund-icon">
@@ -71,7 +71,6 @@
                             v-if="item.releaseDate && showDate"
                             class="time mr-3">
                             <i class="fas fa-calendar-alt" />
-                            <!--<c-tooltip :name="calculateSince(item.releaseDate)" position="center">-->
                             <c-tooltip
                                 :name="calculateSince(item.releaseDate)"
                                 position="center">
@@ -87,7 +86,6 @@
                             v-if="item.followers"
                             class="followers mr-3">
                             <i class="fas fa-eye" />
-                            <!--<c-tooltip :name="item.followers" position="center">-->
                             <c-tooltip position="center">
                                 <div
                                     class="text-center"
@@ -101,7 +99,6 @@
                             v-if="item.players"
                             class="players">
                             <i class="fas fa-user" />
-                            <!--<c-tooltip :name="item.players" position="center">-->
                             <c-tooltip position="center">
                                 <div
                                     class="text-center"
@@ -175,7 +172,7 @@ export default {
         pricePosition: {
             type: String,
             default: 'left',
-            validator: val => ['left', 'right',].includes(val)
+            validator: val => ['left', 'right'].includes(val)
         },
         hovered: {
             type: Boolean,

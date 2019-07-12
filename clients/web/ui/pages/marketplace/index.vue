@@ -36,11 +36,11 @@
                             <li
                                 v-for="(link, index) in links"
                                 :key="index">
-                                <router-link
+                                <nuxt-link
                                     class="marketplace-menu__link"
                                     :to="{ name: link }">
                                     {{ link | cut }}
-                                </router-link>
+                                </nuxt-link>
                             </li>
                         </ul>
                     </nav>
@@ -109,7 +109,7 @@ export default {
         margin-top: 40px;
         .marketplace-menu__link {
             display: block;
-            &.router-link-exact-active {
+            &.nuxt-link-exact-active {
                 border-color: #fff;
             }
             color: #fff;

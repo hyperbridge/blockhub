@@ -36,7 +36,6 @@
                         :class="showButtons ? 'fa-chevron-up' : 'fa-chevron-down' "
                         @click=" showButtons = !showButtons " />
                 </c-button>
-                <!--Dropdown menu-->
                 <div
                     hidden
                     style="height: 20px; width: 20px;margin-right: -5px">

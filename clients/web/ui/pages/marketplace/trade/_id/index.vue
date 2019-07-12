@@ -19,12 +19,14 @@ export default {
     components: {
         'c-block-menu': () => import('~/components/block/menu').then(m => m.default || m)
     },
-    props: ['id'],
     data() {
         return {
         }
     },
     computed: {
+        id() {
+            return this.$route.params.id
+        },
         links() {
             return [
                 { title: 'Offer', to: `/marketplace/trade/${this.id}` },

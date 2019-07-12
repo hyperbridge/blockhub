@@ -44,16 +44,8 @@
 </template>
 
 <script>
-import { VueEditor } from 'vue2-editor'
-import VueUploadComponent from 'vue-upload-component'
-
 export default {
     components: {
-        'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
-        'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m),
-        'c-notification-inline': () => import('~/components/notification/inline').then(m => m.default || m),
-        'c-text-editor': VueEditor,
-        'c-file-upload': VueUploadComponent
     },
     data() {
         return {

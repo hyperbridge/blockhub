@@ -1,62 +1,92 @@
+import Vote from '../../models/vote'
+import Node from '../../models/node'
+
 const { authenticate } = require('@feathersjs/authentication').hooks
 
-const beforeCreate = function(options = {}) {
+const create = function (options = {}): any {
     return async context => {
-        context.data.accountId = context.params.user.id
+        const { app, data } = context
 
-        return context
-    }
-}
+        console.log('Vote creation request: ', data)
 
-const beforeUpdate = function(options = {}) {
-    return async context => {
-        // const item = await context.app.service('/ideas').get(context.id)
+        if (!data.ownerId) {
+            throw new Error('A vote must have a profile')
+        }
 
-        // context.data = {
-        //     ...item,
-        //     ...context.data
-        // }
+        const owner = await app.service('profiles').get(data.ownerId)
 
-        return context
-    }
-}
+        const { key, name, value, meta, ratingId, objectType, objectId, ownerId } = context.data
 
-const afterUpdate = function(options = {}) {
-    return async context => {
-        context.result = {
-            name: context.data.name,
-            avatar: context.data.avatar
+        // Override the original data (so that people can't submit additional stuff)
+        context.data = {
+            key,
+            name,
+            value,
+            meta,
+            ratingId
+        }
+
+        context.relations = {
+            owner
+        }
+        context.params = {
+            objectType,
+            objectId,
+            ownerId
         }
 
         return context
     }
 }
 
-const accessGate = function(options = {}) {
+const afterCreate = function (options = {}): any {
     return async context => {
-        //console.log(context)
-        const { app, method, result, params } = context
-        const items = method === 'find' ? result.data : [result]
-        let account = params.user
+        const { app, data, result, params, relations } = context
+        const { owner } = relations
 
-        if (!account.id) {
-            throw new Error('You dont have access to do that')
+        console.log('After vote creation request: ', result)
+
+        const parentObject = new Node()
+        parentObject.fromVoteId = result.id
+        parentObject[`to${params.objectType}Id`] = params.objectId
+        parentObject.relationKey = 'vote'
+        const object = await Node.query().insert(parentObject)
+
+        console.log('Vote object check', object)
+
+        const parentOwner = new Node()
+        parentOwner.fromVoteId = result.id
+        parentOwner.toProfileId = params.ownerId
+        parentOwner.relationKey = 'owner'
+        const profile = await Node.query().insert(parentOwner)
+
+        console.log('Vote owner check', profile)
+
+        return context
+    }
+}
+
+const validatePermission = function (options = {}): any {
+    return async context => {
+        const { app, data, id } = context
+        console.log('Vote Validateion request', data)
+
+        const vote = await app.service('votes').find({
+            query: {
+                'votes.id': id,
+                $eager: '[owner]'
+            }
+        })
+
+        console.log('Validation check vote owner', vote.data[0].owner)
+        console.log('vote.data[0].owner.id', vote.data[0].owner.id)
+        console.log('profile.id', vote.data[0].owner.id)
+        console.log('params.ownerId', data.ownerId)
+        const profile = await app.service('profiles').get(vote.data[0].owner.id)
+        if (profile.id !== data.ownerId) {
+            throw new Error('Vote must be owned by a user with profile')
         }
-
-        await Promise.all(items.map(async item => {
-            if (method === 'create') {
-            }
-            else if (method === 'update') {
-            }
-
-            if (!item) {
-                throw new Error('Idea not found')
-            }
-
-            if (item.accountId !== account.id) {
-                throw new Error('You dont have access to do that')
-            }
-        }))
+        context.id = Number(id);
 
         return context
     }
@@ -66,20 +96,20 @@ export const before = {
     all: [],
     find: [],
     get: [],
-    create: [authenticate('jwt'), beforeCreate()],
-    update: [authenticate('jwt'), beforeUpdate()],
-    patch: [authenticate('jwt')],
-    remove: [authenticate('jwt')]
+    create: [authenticate('jwt'), create()],
+    update: [authenticate('jwt'), validatePermission()],
+    patch: [authenticate('jwt'), validatePermission()],
+    remove: [authenticate('jwt'), validatePermission()]
 }
 
 export const after = {
     all: [],
     find: [],
     get: [],
-    create: [accessGate()],
-    update: [accessGate(), afterUpdate()],
-    patch: [accessGate()],
-    remove: [accessGate()]
+    create: [afterCreate()],
+    update: [],
+    patch: [],
+    remove: []
 }
 
 export const error = {

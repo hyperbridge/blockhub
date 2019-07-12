@@ -318,7 +318,6 @@
 
 <script>
 
-import axios from 'axios'
 import Vue from 'vue'
 import HeadingBar from '@/components/heading-bar/simple-colored'
 import DottedList from '@/components/list/dots'
@@ -358,41 +357,37 @@ export default {
             return this.activeProfile && this.activeProfile.messages
         }
     },
-    created() {
+    async created() {
         if (this.navigationKey === 'store' && this.$store.state.application.desktopMode) {
             const sheetUrl = 'https://spreadsheets.google.com/feeds/list/1Ndg4etkvLQZKeTcPfP1L1nJiMWn6UkwFd9RVSMcltp4/1/public/values?alt=json'
 
-            axios({
+            const res = await this.$axios({
                 method: 'get',
                 url: sheetUrl
+            }).catch(err => {
+                this.errors.push(`Could not contact update service. Please contact support with this error: ${JSON.stringify(err)}`)
             })
-                .then(res => {
-                    this.entries = res.data.feed.entry
 
-                    for (const i in this.entries) {
-                        const entry = this.entries[i]
+            this.entries = res.data.feed.entry
 
-                        let el = Vue.compile(`<div>${entry.gsx$content.$t}</div>`)
-                        el = new Vue({
-                            components: {
-                                'c-heading-bar-color': HeadingBar,
-                                'c-dotted-list': DottedList
-                            },
-                            render: el.render,
-                            staticRenderFns: el.staticRenderFns
-                        }).$mount()
+            for (const entry of this.entries) {
+                let el = Vue.compile(`<div>${entry.gsx$content.$t}</div>`)
+                el = new Vue({
+                    components: {
+                        'c-heading-bar-color': HeadingBar,
+                        'c-dotted-list': DottedList
+                    },
+                    render: el.render,
+                    staticRenderFns: el.staticRenderFns
+                }).$mount()
 
-                        this.updates.push({
-                            version: entry.gsx$version.$t,
-                            title: entry.gsx$title.$t,
-                            description: entry.gsx$description.$t,
-                            content: el.$el.innerHTML // .replace(/\n/g, '<br />')
-                        })
-                    }
+                this.updates.push({
+                    version: entry.gsx$version.$t,
+                    title: entry.gsx$title.$t,
+                    description: entry.gsx$description.$t,
+                    content: el.$el.innerHTML // .replace(/\n/g, '<br />')
                 })
-                .catch(err => {
-                    this.errors.push(`Could not contact update service. Please contact support with this error: ${JSON.stringify(err)}`)
-                })
+            }
         }
     },
     methods: {

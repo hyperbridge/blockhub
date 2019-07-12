@@ -24,13 +24,15 @@ export default {
         'c-modal': () => import('~/components/modal').then(m => m.default || m),
         'c-asset-grid': () => import('~/components/assets-grid-inventory').then(m => m.default || m)
     },
-    props: ['assets'],
     data() {
         return {
             addMore: false
         }
     },
     computed: {
+        assets() {
+            return this.$route.params.assets
+        },
         selectedAssets() {
             return this.$store.getters['assets/selectedAssets']
         }

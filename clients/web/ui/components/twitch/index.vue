@@ -54,37 +54,36 @@ export default {
             }
         }
     },
-    beforeCreate() {
-        Vue.loadScript('https://player.twitch.tv/js/embed/v1.js')
-            .then(() => {
-                const options = {
-                    width: this.width,
-                    height: this.height
-                }
-                if (this.playsInline) {
-                    options.playsinline = true
-                }
-                if (this.channel) {
-                    options.channel = this.channel
-                } else if (this.collection) {
-                    options.collection = this.collection
-                } else if (this.video) {
-                    options.video = this.video
-                } else {
-                    this.$emit('error', 'no source specified')
-                }
-                player = new window.Twitch.Player(this.$refs.player, options)
-                player.addEventListener('ended', () => this.$emit('ended'))
-                player.addEventListener('pause', () => this.$emit('pause'))
-                player.addEventListener('play', () => this.$emit('play'))
-                player.addEventListener('offline', () => this.$emit('offline'))
-                player.addEventListener('online', () => this.$emit('online'))
-                player.addEventListener('ready', () => {
-                    player.setQuality(this.quality)
-                    player.setVolume(this.volume)
-                    this.$emit('ready')
-                })
-            }).catch(e => this.$emit('error', e))
+    async beforeCreate() {
+        await Vue.loadScript('https://player.twitch.tv/js/embed/v1.js').catch(e => this.$emit('error', e))
+
+        const options = {
+            width: this.width,
+            height: this.height
+        }
+        if (this.playsInline) {
+            options.playsinline = true
+        }
+        if (this.channel) {
+            options.channel = this.channel
+        } else if (this.collection) {
+            options.collection = this.collection
+        } else if (this.video) {
+            options.video = this.video
+        } else {
+            this.$emit('error', 'no source specified')
+        }
+        player = new window.Twitch.Player(this.$refs.player, options)
+        player.addEventListener('ended', () => this.$emit('ended'))
+        player.addEventListener('pause', () => this.$emit('pause'))
+        player.addEventListener('play', () => this.$emit('play'))
+        player.addEventListener('offline', () => this.$emit('offline'))
+        player.addEventListener('online', () => this.$emit('online'))
+        player.addEventListener('ready', () => {
+            player.setQuality(this.quality)
+            player.setVolume(this.volume)
+            this.$emit('ready')
+        })
     },
     methods: {
         play() { // Begins playing the specified video.

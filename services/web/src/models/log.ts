@@ -1,20 +1,20 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import Node from './node'
 import BaseModel from './base'
 
 export default class Log extends BaseModel {
     // key = [warning, information, error, report]
-    parentId!: Number
+    public parentId!: number
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'logs'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: [],
@@ -23,7 +23,7 @@ export default class Log extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             parent: {
                 relation: Model.HasOneRelation,
@@ -32,7 +32,7 @@ export default class Log extends BaseModel {
                     from: 'logs.parentId',
                     to: 'nodes.id'
                 }
-            },
+            }
         }
     }
 }

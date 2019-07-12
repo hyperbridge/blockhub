@@ -26,7 +26,9 @@ export default {
         }
     },
     asyncData({ res }) {
-        res.statusCode = 404
+        if (res) {
+            res.statusCode = 404
+        }
 
         return {
             error: {
