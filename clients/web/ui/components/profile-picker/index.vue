@@ -24,17 +24,17 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            profiles: {
-                type: Array,
-                default: () => []
-            }
-        },
-        components: {
-            'c-user-card': () => import('~/components/user-card').then(m => m.default || m)
-        },
+export default {
+    components: {
+        'c-user-card': () => import('~/components/user-card').then(m => m.default || m)
+    },
+    props: {
+        profiles: {
+            type: Array,
+            default: () => []
+        }
     }
+}
 </script>
 
 <style lang="scss" scoped>

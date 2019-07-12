@@ -22,7 +22,22 @@ import * as data from './components-data'
 const StoreDummy = {
     install(Vue, options) {
         Vue.prototype.$store = {
-            state: {},
+            state: {
+                profiles: {
+                    keyedById: {}
+                },
+                application: {
+                    desktopMode: true,
+                    settings: {
+                        client: {
+                            autoplay: false
+                        }
+                    },
+                    video: {
+                        src: null
+                    }
+                }
+            },
             dispatch: () => {},
             commit: () => {}
         }
