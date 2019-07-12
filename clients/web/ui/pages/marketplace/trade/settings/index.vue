@@ -71,10 +71,11 @@ export default {
                 }
             })
         },
-        copyTradeURL() {
-            navigator.clipboard.writeText(this.tradeURL)
-                .then(() => this.$snotify.info('TradeURL has been copied'))
+        async copyTradeURL() {
+            await navigator.clipboard.writeText(this.tradeURL)
                 .catch(err => this.$snotify.warning('TradeURL could not be copied'))
+
+            this.$snotify.info('TradeURL has been copied')
         },
         updateVal(e) {
             console.log(e)

@@ -449,10 +449,10 @@ export default {
             }
 
             // Try to set based on browser language
-            if (!this.account.language || !this.account.language.code) { return this.languages.find(el => Boolean((navigator.language || navigator.userLanguage).toLowerCase().includes(el.code.toLowerCase()))) }
+            if (!this.account.language || !this.account.language.code) return this.languages.find(el => Boolean((navigator.language || navigator.userLanguage).toLowerCase().includes(el.code.toLowerCase())))
 
             // If that failed, set to default: US
-            if (!this.account.language || !this.account.language.code) { return this.languages.find(el => Boolean(el.code.toLowerCase().includes('us'))) }
+            if (!this.account.language || !this.account.language.code) return this.languages.find(el => Boolean(el.code.toLowerCase().includes('us')))
 
             return this.account.language
         },
@@ -461,10 +461,14 @@ export default {
         },
         currentCurrency() {
             // Try to set currency based on language
-            if (!this.account.currency || !this.account.currency.code) { this.account.currency = this.currencies.find(el => el.country && Boolean(el.country.includes(this.account.language.code))) }
+            if (!this.account.currency || !this.account.currency.code) {
+                this.account.currency = this.currencies.find(el => el.country && Boolean(el.country.includes(this.account.language.code)))
+            }
 
             // If that failed, set to default: USD
-            if (!this.account.currency || !this.account.currency.code) { this.account.currency = this.currencies.find(el => Boolean(el.code.toLowerCase().includes('usd'))) }
+            if (!this.account.currency || !this.account.currency.code) {
+                this.account.currency = this.currencies.find(el => Boolean(el.code.toLowerCase().includes('usd')))
+            }
 
             return this.account.currency
         },

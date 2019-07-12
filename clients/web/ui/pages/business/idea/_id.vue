@@ -430,20 +430,20 @@ export default {
                 this.$router.push(`/business/project/${this.project.id}`)
             })
         },
-        save() {
+        async save() {
             this.project.ownerId = this.$store.state.application.activeProfile.id
 
-            this.$store.dispatch('projects/update', [this.project.id, this.project, {
+            await this.$store.dispatch('projects/update', [this.project.id, this.project, {
                 query: {
                     $eager: 'tags'
                 }
-            }]).then(() => {
-                this.notice = 'Project has been saved.'
-                // this.project.id = projectResult.id
-                // this.successfulCreationMessage = "Congratulations, your project has been created!"
+            }])
 
-                // this.$router.push('/business/project/' + this.project.id)
-            })
+            this.notice = 'Project has been saved.'
+            // this.project.id = projectResult.id
+            // this.successfulCreationMessage = "Congratulations, your project has been created!"
+
+            // this.$router.push('/business/project/' + this.project.id)
         }
     }
 }

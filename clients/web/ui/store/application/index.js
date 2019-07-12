@@ -254,8 +254,8 @@ export const actions = {
                 })
         })
     },
-    sendCommand(store, { key, data }) {
-        Bridge.sendCommand(key, data).then(() => {})
+    async sendCommand(store, { key, data }) {
+        await Bridge.sendCommand(key, data)
     },
     createTradeUrl({ commit, state }) {
         // async call => delete previous trade url

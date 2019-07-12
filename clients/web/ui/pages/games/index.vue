@@ -113,17 +113,17 @@ export default {
             return result
         }
     },
-    created() {
-        this.$store.dispatch('products/find', {
+    async created() {
+        await this.$store.dispatch('products/find', {
             query: {
                 $sort: {
                     createdAt: -1
                 },
                 $limit: 25
             }
-        }).then(() => {
-            this.loading = false
         })
+
+        this.loading = false
     }
 }
 </script>

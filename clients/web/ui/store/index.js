@@ -34,39 +34,35 @@ if (decentralizedMode) {
     service = () => { // eslint-disable-line arrow-body-style
         return {
             'profiles': {
-                create(newProfile) {
-                    Bridge.sendCommand('createProfileRequest', newProfile).then(profile => {
-                        newProfile.id = profile.id
-                        newProfile.address = profile.address
+                async create(newProfile) {
+                    const profile = await Bridge.sendCommand('createProfileRequest', newProfile)
+                    newProfile.id = profile.id
+                    newProfile.address = profile.address
 
-                        if (!newProfile.name) newProfile.name = 'Default'
-                        this.profiles.push({ ...newProfile, edit: true })
-                        this.editedProfile = newProfile
-                        this.saveProfiles()
-                    })
+                    if (!newProfile.name) newProfile.name = 'Default'
+                    this.profiles.push({ ...newProfile, edit: true })
+                    this.editedProfile = newProfile
+                    this.saveProfiles()
                 },
-                save(profile) {
-                    Bridge.sendCommand('saveProfileRequest', profile).then(profile => {
-                        this.saveProfiles()
-                    })
+                async save(profile) {
+                    await Bridge.sendCommand('saveProfileRequest', profile)
+                    this.saveProfiles()
                 },
-                remove() {
-                    Bridge.sendCommand('removeProfileRequest', this.removeProfile).then(() => {
-                        const index = this.profiles.indexOf(this.removeProfile)
-                        this.profiles.splice(index, 1)
-                        this.removeProfile.edit = false
-                        this.removeProfile = null
+                async remove() {
+                    await Bridge.sendCommand('removeProfileRequest', this.removeProfile)
+                    const index = this.profiles.indexOf(this.removeProfile)
+                    this.profiles.splice(index, 1)
+                    this.removeProfile.edit = false
+                    this.removeProfile = null
 
-                        this.saveProfiles()
-                    })
+                    this.saveProfiles()
                 },
-                convert() {
-                    Bridge.sendCommand('createDeveloperRequest', this.activeProfile).then(data => {
-                        this.activeProfile.meta.contractDeveloperId = data
-                        this.$store.state.application.developerMode = true
+                async convert() {
+                    const data = await Bridge.sendCommand('createDeveloperRequest', this.activeProfile)
+                    this.activeProfile.meta.contractDeveloperId = data
+                    this.$store.state.application.developerMode = true
 
-                        // TODO: just redirect here?
-                    })
+                    // TODO: just redirect here?
                 }
             }
         }

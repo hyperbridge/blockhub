@@ -83,9 +83,9 @@ export default {
                 await this.$desktop.sendCommand('transferTokenBatch', {
                     batch,
                     walletIndex
-                }).then(() => {
-                    console.log('Done')
                 })
+
+                console.log('Done')
             }
         }
     }
