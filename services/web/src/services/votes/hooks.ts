@@ -50,7 +50,7 @@ const afterCreate = function (options = {}): any {
         parentObject.fromVoteId = result.id
         parentObject[`to${params.objectType}Id`] = params.objectId
         parentObject.relationKey = 'vote'
-        let object = await Node.query().insert(parentObject)
+        const object = await Node.query().insert(parentObject)
 
         console.log('Vote object check', object)
 
@@ -58,9 +58,9 @@ const afterCreate = function (options = {}): any {
         parentOwner.fromVoteId = result.id
         parentOwner.toProfileId = params.ownerId
         parentOwner.relationKey = 'owner'
-        object = await Node.query().insert(parentOwner)
+        const profile = await Node.query().insert(parentOwner)
 
-        console.log('Vote owner check', object)
+        console.log('Vote owner check', profile)
 
         return context
     }
@@ -77,6 +77,7 @@ const validatePermission = function (options = {}): any {
                 $eager: '[owner]'
             }
         })
+
         console.log('Validation check vote owner', vote.data[0].owner)
         console.log('vote.data[0].owner.id', vote.data[0].owner.id)
         console.log('profile.id', vote.data[0].owner.id)
@@ -85,6 +86,7 @@ const validatePermission = function (options = {}): any {
         if (profile.id !== data.ownerId) {
             throw new Error('Vote must be owned by a user with profile')
         }
+        context.id = Number(id);
 
         return context
     }
