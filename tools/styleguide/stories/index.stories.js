@@ -665,61 +665,6 @@ import Tab from '@/components/tab/tab.vue'
 storiesOf('Tabs', module)
     .add('default', () => ({
         components: {
-            'c-tabs': Tabs,
-            'c-tab': Tab,
-        },
-        data() {
-            return {}
-        },
-        template: `<div class="row m-0">
-            <div class="col-8 p-4">
-                <c-tabs>
-                    <c-tab name="Tab 1" :selected="true" showFooter="true">
-                        <p>This is first tab with footer content</p>
-                         <template slot="footer">
-                            <a href="#" class="btn btn-sm btn-success float-right">Button</a>
-                        </template>
-                    </c-tab>
-                     <c-tab name="Tab 2">
-                        <p>This is second tab</p>
-                    </c-tab>
-                    <c-tab name="Tab 3">
-                        <p>This is third tab</p>
-                    </c-tab>
-                </c-tabs>
-            </div>
-            </div>`
-    }))
-    .add('type-2', () => ({
-        components: {
-            'c-tabs': Tabs,
-            'c-tab': Tab,
-            'c-heading-bar-fields': BlockHeadersAddFields
-        },
-        data() {
-            return {}
-        },
-        template: `<div class="row m-0">
-            <div class="col-8 p-4">
-                <c-tabs variant="type-2">
-                    <c-tab name="Tab 1" :selected="true" :transparentBg="true" :showFooter="true">
-                        <p>This is first tab with footer content</p>
-                         <template slot="footer">
-                            <a href="#" class="btn btn-sm btn-success float-right">Button</a>
-                        </template>
-                    </c-tab>
-                    <c-tab name="Tab 2" :transparentBg="true">
-                        <p>This is second tab</p>
-                    </c-tab>
-                    <c-tab name="Tab 3" :transparentBg="true">
-                        <p>This is third tab</p>
-                    </c-tab>
-                </c-tabs>
-            </div>
-            </div>`
-    }))
-    .add('universal', () => ({
-        components: {
             'c-tabs-universal': TabsUniversal,
             'c-tab-universal': TabUniversal
         },
@@ -740,31 +685,31 @@ storiesOf('Tabs', module)
     }))
     .add('Tabs Names', () => ({
         components: {
-            'c-tabs-universal': TabsUniversal,
-            'c-tab-universal': TabUniversal
+            'c-tabs': Tabs,
+            'c-tab': Tab
         },
         template: `
             <div class="padding-50">
-                <c-tabs-universal
+                <c-tabs
                     style="color: #fff;"
                     :tab_names="['Custom tab One', 'Second', 'Im third tab']"
                 >
-                    <c-tab-universal :tab_id="0">
+                    <c-tab :tab_id="0">
                         First tab
-                    </c-tab-universal>
-                    <c-tab-universal :tab_id="1">
+                    </c-tab>
+                    <c-tab :tab_id="1">
                         Wwww
-                    </c-tab-universal>
-                    <c-tab-universal :tab_id="2">
+                    </c-tab>
+                    <c-tab :tab_id="2">
                         12345
-                    </c-tab-universal>
-                </c-tabs-universal>
+                    </c-tab>
+                </c-tabs>
             </div>`
     }))
     .add('Custom Navigation', () => ({
         components: {
-            'c-tabs-universal': TabsUniversal,
-            'c-tab-universal': TabUniversal
+            'c-tabs': Tabs,
+            'c-tab': Tab
         },
         data() {
             return {
@@ -773,7 +718,7 @@ storiesOf('Tabs', module)
         },
         template: `
             <div class="padding-50">
-                <c-tabs-universal
+                <c-tabs
                     style="color: #fff;"
                     :activeTabProp="activeTab"
                 >
@@ -783,25 +728,25 @@ storiesOf('Tabs', module)
                         <button @click="activeTab = 3">Tab 3</button>
                         <button @click="activeTab = 4">Tab 4</button>
                     </template>
-                    <c-tab-universal :tab_id="1">
+                    <c-tab :tab_id="1">
                         First tab
-                    </c-tab-universal>
-                    <c-tab-universal :tab_id="2">
+                    </c-tab>
+                    <c-tab :tab_id="2">
                         Wwww
-                    </c-tab-universal>
-                    <c-tab-universal :tab_id="3">
+                    </c-tab>
+                    <c-tab :tab_id="3">
                         12345
-                    </c-tab-universal>
-                    <c-tab-universal :tab_id="4">
+                    </c-tab>
+                    <c-tab :tab_id="4">
                         Fourth tab
-                    </c-tab-universal>
-                </c-tabs-universal>
+                    </c-tab>
+                </c-tabs>
             </div>`
     }))
     .add('Locked Tab', () => ({
         components: {
-            'c-tabs-universal': TabsUniversal,
-            'c-tab-universal': TabUniversal
+            'c-tabs': Tabs,
+            'c-tab': Tab
         },
         data() {
             return {
@@ -816,23 +761,23 @@ storiesOf('Tabs', module)
         },
         template: `
             <div class="padding-50">
-                <c-tabs-universal
+                <c-tabs
                     style="color: #fff;"
                     :lockedTab="lockedTab"
                 >
-                    <c-tab-universal :tab_id="0">
+                    <c-tab :tab_id="0">
                         First tab
-                    </c-tab-universal>
-                    <c-tab-universal :tab_id="1">
+                    </c-tab>
+                    <c-tab :tab_id="1">
                         Second tab
-                    </c-tab-universal>
-                    <c-tab-universal :tab_id="2">
+                    </c-tab>
+                    <c-tab :tab_id="2">
                         Third tab
-                    </c-tab-universal>
-                    <c-tab-universal :tab_id="3">
+                    </c-tab>
+                    <c-tab :tab_id="3">
                         Fourth tab
-                    </c-tab-universal>
-                </c-tabs-universal>
+                    </c-tab>
+                </c-tabs>
                 <button
                     @click="changeLockedTab"
                     class="margin-top-50"
@@ -843,8 +788,8 @@ storiesOf('Tabs', module)
     }))
     .add('Locked Step', () => ({
         components: {
-            'c-tabs-universal': TabsUniversal,
-            'c-tab-universal': TabUniversal
+            'c-tabs': Tabs,
+            'c-tab': Tab
         },
         data() {
             return {
@@ -853,23 +798,23 @@ storiesOf('Tabs', module)
         },
         template: `
             <div class="padding-50">
-                <c-tabs-universal
+                <c-tabs
                     style="color: #fff;"
                     :locked_step="locked_step"
                 >
-                    <c-tab-universal :tab_id="0">
+                    <c-tab :tab_id="0">
                         First tab
-                    </c-tab-universal>
-                    <c-tab-universal :tab_id="1">
+                    </c-tab>
+                    <c-tab :tab_id="1">
                         Second tab
-                    </c-tab-universal>
-                    <c-tab-universal :tab_id="2">
+                    </c-tab>
+                    <c-tab :tab_id="2">
                         Third tab
-                    </c-tab-universal>
-                    <c-tab-universal :tab_id="3">
+                    </c-tab>
+                    <c-tab :tab_id="3">
                         Fourth tab
-                    </c-tab-universal>
-                </c-tabs-universal>
+                    </c-tab>
+                </c-tabs>
                 <button
                     @click="locked_step++"
                     class="margin-top-50"
