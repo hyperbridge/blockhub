@@ -939,13 +939,13 @@ export default {
     props: {
         navigationKey: {
             type: String,
-            required: false,
-            default: ''
+            default: null,
+            required: false
         },
         navigationTitle: {
             type: String,
-            required: false,
-            default: ''
+            default: null,
+            required: false
         },
         showLeftPanel: {
             type: Boolean,
