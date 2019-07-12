@@ -42,6 +42,7 @@ export default {
         },
         icon: {
             type: String,
+            default: null,
             require: false
         }
     },

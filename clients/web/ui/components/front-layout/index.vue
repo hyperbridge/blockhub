@@ -946,10 +946,12 @@ export default {
     props: {
         navigationKey: {
             type: String,
+            default: null,
             required: false
         },
         navigationTitle: {
             type: String,
+            default: null,
             required: false
         },
         showLeftPanel: {
