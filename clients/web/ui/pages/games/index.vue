@@ -50,8 +50,7 @@ export default {
     },
     computed: {
         games() {
-            return this.$store.getters['products/list'] // Object.values(this.$store.state.funding.projects)//this.$store.getters['projects/list']
-            // .filter(trx => trx.you.id == this.profileId);
+            return this.$store.getters['products/list']
         },
         list() {
             const result = []
