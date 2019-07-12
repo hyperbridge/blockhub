@@ -19,7 +19,6 @@ export default {
         'c-block-menu': () => import('~/components/block/menu').then(m => m.default || m),
         'c-spinner': () => import('~/components/spinner').then(m => m.default || m)
     },
-    props: ['profileId'],
     data() {
         return {
             links: [
@@ -33,6 +32,9 @@ export default {
         }
     },
     computed: {
+        profileId() {
+            return this.$route.params.profileId
+        },
         transactions() {
             return Object.values(this.$store.getters['assets/transactions'])
                 .filter(trx => trx.you.id == this.profileId)

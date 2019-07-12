@@ -31,7 +31,7 @@ const OPERATORS_MAP = {
     $ilike: 'ilike'
 }
 
-export default function(app) {
+export default function (app): any {
     const paginate = app.get('paginate')
 
     const options = {
@@ -44,16 +44,16 @@ export default function(app) {
     }
 
     app.use('/search', {
-        async find(params) {
+        async find (params) {
             console.log('[service=/search, action=find]')
 
             console.log(params.query)
 
-            const query = {}
+            const query: any = {}
 
             if (params.query.name) {
-                query['name'] = {
-                    $ilike: '%' + params.query.name.$eq + '%'
+                query.name = {
+                    $ilike: `%${  params.query.name.$eq  }%`
                 }
             }
 

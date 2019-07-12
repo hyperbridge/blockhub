@@ -4,7 +4,7 @@ import hooks = require('./hooks')
 import Profile from "../../models/profile";
 import Node, {NodeRelation} from "../../models/node";
 
-export default function(app) {
+export default function (app): any {
     const paginate = app.get('paginate')
 
     const options = {

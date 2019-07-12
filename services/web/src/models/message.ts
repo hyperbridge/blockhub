@@ -74,7 +74,7 @@ export default class Message extends BaseModel {
                     },
                     to: 'discussions.id'
                 }
-            },
+            }
         }
     }
 }

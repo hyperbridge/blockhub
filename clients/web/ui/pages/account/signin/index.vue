@@ -103,14 +103,13 @@ export default {
     },
     methods: {
         signIn() {
-            this.$store.dispatch('application/signIn')
+            this.$store.dispatch('login')
 
             this.$router.push({ path: '/' })
         },
-        importAccountFile() {
-            this.$desktop.sendCommand('importAccountFileRequest').then(() => {
-                window.location.reload()
-            })
+        async importAccountFile() {
+            await this.$desktop.sendCommand('importAccountFileRequest')
+            window.location.reload()
         }
     }
 }

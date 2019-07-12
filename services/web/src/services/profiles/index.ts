@@ -3,7 +3,7 @@ import createService = require('feathers-objection')
 import hooks = require('./hooks')
 import Profile from "../../models/profile";
 
-export default function(app) {
+export default function (app): any {
     const paginate = app.get('paginate')
 
     const options = {
@@ -14,13 +14,13 @@ export default function(app) {
             max: 25,
             ...paginate
         },
-        allowedEager: '[account, collections]'
+        allowedEager: '[account, collections, vote]'
     }
 
     app.use('/profiles', createService(options))
 
     app.use('/profiles/:id/convert', {
-        async update(id, data, params) {
+        async update (id, data, params) {
             console.log('[service=/profiles/:id/convert, action=update]')
 
             await Model.query()
@@ -32,7 +32,7 @@ export default function(app) {
     })
 
     app.use('/profiles/:id/setAddress', {
-        async update(id, data, params) {
+        async update (id, data, params) {
             console.log('[service=/profiles/:id/setAddress, action=update]')
 
             await Model.query()
@@ -44,7 +44,7 @@ export default function(app) {
     })
 
     app.use('/profiles/balance', {
-        async find(params) {
+        async find (params) {
             console.log('[service=/profiles/balance, action=find]')
 
             const profiles = await app.service('/profiles').find({
@@ -62,7 +62,7 @@ export default function(app) {
     app.service('/profiles').hooks(hooks)
     app.service('/profiles/:id/convert').hooks(hooks)
     app.service('/profiles/:id/setAddress').hooks(hooks)
-    //app.service('/profiles/:id/tags').hooks(hooks)
+    // app.service('/profiles/:id/tags').hooks(hooks)
 }
 
 // add to base:

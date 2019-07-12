@@ -58,7 +58,7 @@
             <div class="col-12 col-md-6 mb-4">
                 <c-block>
                     <h2>What is HBX?</h2>
-                    <p>
+                    <div>
                         Built by <c-button
                             status="underline"
                             size="md"
@@ -76,14 +76,14 @@
                             <li>Product testing</li>
                             <li>Polls/Questionnaires</li>
                         </ul>
-                    </p>
+                    </div>
                     <div
                         class="carousel-wrapper margin-auto margin-top-20 margin-bottom-20"
                         style="zoom: 0.7">
                         <c-carousel-3d
                             :items="[assets[0]]"
                             :limitTo="1">
-                            <template slot-scope="props">
+                            <template v-slot="props">
                                 <c-asset-store-card
                                     v-for="(item) in props.items"
                                     :key="item.id"
@@ -101,7 +101,7 @@
             <div class="col-12 col-md-6">
                 <c-block>
                     <h2>What can HBX be used for?</h2>
-                    <p>
+                    <div>
                         <ul>
                             <li>Contribute to crowdfund projects</li>
                             <li>Purchase products within the store</li>
@@ -118,16 +118,17 @@
                             White Paper
                         </c-button>.
                         <br><br>
-                    </p>
+                    </div>
                     <div
                         class="carousel-wrapper margin-auto margin-top-20 margin-bottom-20"
                         style="zoom: 0.7">
                         <c-carousel-3d
                             :items="[assets[1], assets[2]]"
                             :limitTo="2">
-                            <template slot-scope="props">
+                            <template v-slot="props">
                                 <c-asset-store-card
                                     v-for="(item) in props.items"
+                                    v-if="props.items"
                                     :key="item.id"
                                     :class="item.css"
                                     :assetName="item.name"
@@ -929,11 +930,8 @@
             <div
                 slot="customContent"
                 class="purchase-modal">
-                <c-tabs>
-                    <c-tab
-                        name="Confirm Purchase"
-                        :selected="true"
-                        :showFooter="true">
+                <c-tabs :tabNames="['Confirm Purchase']">
+                    <c-tab :tabId="1">
                         <div>
                             <div
                                 v-if="!purchaseSuccessful"
@@ -1124,7 +1122,6 @@
                             </div>
                         </div>
                         <div
-                            slot="footer"
                             class="d-flex align-items-center justify-content-end">
                             <div>
                                 <c-button @click="closePurchasePopup">
@@ -1140,7 +1137,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { setInterval } from 'core-js'
 
 
@@ -1158,12 +1154,9 @@ export default {
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         'c-block': () => import('~/components/block').then(m => m.default || m),
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab').then(m => m.default || m),
         'c-carousel-3d': () => import('~/components/carousel-3d').then(m => m.default || m),
         'c-asset-store-card': () => import('~/components/asset/store-card').then(m => m.default || m),
         'c-welcome-box': () => import('~/components/welcome-box').then(m => m.default || m),
-
         'c-token-sale': () => import('~/components/token-sale-box').then(m => m.default || m)
     },
     data() {
@@ -1341,20 +1334,20 @@ export default {
 
             window.scrollTo(0, top)
         },
-        unlockWallet() {
+        async unlockWallet() {
             this.gaStep(2)
 
             if (typeof window.web3 !== 'undefined') {
                 if (window.ethereum) {
                     try {
                         // Request account access if needed
-                        window.ethereum.enable().then(() => {
-                            window.web3 = new Web3(window.ethereum)
+                        await window.ethereum.enable()
 
-                            window.web3.eth.getAccounts((err, accounts) => {
-                                this.purchaseAddress = accounts[0]
-                                this.account.address = accounts[0] // save for verification screen
-                            })
+                        window.web3 = new Web3(window.ethereum)
+
+                        window.web3.eth.getAccounts((err, accounts) => {
+                            this.purchaseAddress = accounts[0]
+                            this.account.address = accounts[0] // save for verification screen
                         })
                     } catch (error) {
                         // User denied account access...
@@ -1588,7 +1581,7 @@ ol.lst-kix_list_7-0{list-style-type:none}.lst-kix_list_14-1>li:before{content:""
                             }
                             &:hover{
                                 cursor: pointer;
-                                background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQyIDQyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0MiA0MjsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIzMnB4IiBoZWlnaHQ9IjMycHgiPgo8cGF0aCBkPSJNMzcuMDU5LDE2SDI2VjQuOTQxQzI2LDIuMjI0LDIzLjcxOCwwLDIxLDBzLTUsMi4yMjQtNSw0Ljk0MVYxNkg0Ljk0MUMyLjIyNCwxNiwwLDE4LjI4MiwwLDIxczIuMjI0LDUsNC45NDEsNUgxNnYxMS4wNTkgIEMxNiwzOS43NzYsMTguMjgyLDQyLDIxLDQyczUtMi4yMjQsNS00Ljk0MVYyNmgxMS4wNTlDMzkuNzc2LDI2LDQyLDIzLjcxOCw0MiwyMVMzOS43NzYsMTYsMzcuMDU5LDE2eiIgZmlsbD0iIzJhMzA0ZCIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
+                                background-image: url('./../../assets/SVG/plus-icon.svg');
                                 background-position: center;
                                 background-size: 16px;
                                 background-repeat: no-repeat;

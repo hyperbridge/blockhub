@@ -91,7 +91,6 @@ export default {
         'c-list-item': () => import('~/components/help/simple-item').then(m => m.default || m),
         'c-card': () => import('~/components/help/help-card').then(m => m.default || m)
     },
-    props: ['id'],
     data() {
         return {
             showArticles: false,
@@ -99,13 +98,15 @@ export default {
         }
     },
     computed: {
+        id() {
+            return this.$route.params.id
+        },
         topic() {
             return this.$store.state.marketplace.help.topics[this.id]
         },
         articles() {
             return this.$store.state.marketplace.help.articles
         }
-
     },
     methods: {
         showByTopic(id) {

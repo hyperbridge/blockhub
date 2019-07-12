@@ -9,6 +9,7 @@
                         :onlyContentBg="true">
                         <div class="community-list">
                             <c-community-item
+                                v-if="forum.discussions"
                                 v-for="(discussion, index) in forum.discussions"
                                 :id="discussion.id"
                                 :key="index"
@@ -18,6 +19,9 @@
                                 :commentsCount="discussion.meta.commentsCount"
                                 :author="discussion.owner"
                                 :comments="discussion.comments" />
+                            <div class="h4" v-else>
+                                Oops! Something went wrong :(
+                            </div>
                         </div>
                     </c-block>
                 </div>

@@ -254,56 +254,64 @@
                         Oh, another creation?
                     </div>
                     <template slot="body">
-                        <div class="row">
-                            <div class="col-6">
+                        <div class="row padding-bottom-30">
+                            <div class="col-3 text-center">
                                 <c-button
                                     status="none"
-                                    class="col-md-6 create-shortcut__block"
+                                    class="create-shortcut__block w-100"
                                     to="/idea/new">
                                     <c-icon
                                         name="plus-circle"
-                                        style="padding: 30px;font-size: 50px;" />
+                                        class="padding-bottom-10 padding-top-10"
+                                        style="font-size: 50px;" />
                                     <div style="display: block">
-                                        Create Idea
+                                        Create<br>
+                                        Idea
                                     </div>
                                 </c-button>
                             </div>
-                            <div class="col-6">
+                            <div class="col-3 text-center">
                                 <c-button
                                     status="none"
-                                    class="col-md-6 create-shortcut__block"
+                                    class="create-shortcut__block w-100"
                                     to="/business/project/new">
                                     <c-icon
                                         name="plus-circle"
-                                        style="padding: 30px;font-size: 50px;" />
+                                        class="padding-bottom-10 padding-top-10"
+                                        style="font-size: 50px;" />
                                     <div style="display: block">
-                                        Create Crowdfund
+                                        Create<br>
+                                        Crowdfund
                                     </div>
                                 </c-button>
                             </div>
-                            <div class="col-6">
+                            <div class="col-3 text-center">
                                 <c-button
                                     status="none"
-                                    class="col-md-6 create-shortcut__block"
+                                    class="create-shortcut__block w-100"
                                     to="/business/product/new">
                                     <c-icon
                                         name="plus-circle"
-                                        style="padding: 30px;font-size: 50px;" />
+                                        class="padding-bottom-10 padding-top-10"
+                                        style="font-size: 50px;" />
                                     <div style="display: block">
-                                        Create Game
+                                        Create<br>
+                                        Game
                                     </div>
                                 </c-button>
                             </div>
-                            <div class="col-6">
+                            <div class="col-3 text-center">
                                 <c-button
                                     status="none"
-                                    class="col-md-6 create-shortcut__block"
+                                    class="create-shortcut__block w-100"
                                     to="/business/realm/new">
                                     <c-icon
                                         name="plus-circle"
-                                        style="padding: 30px;font-size: 50px;" />
+                                        class="padding-bottom-10 padding-top-10"
+                                        style="font-size: 50px;" />
                                     <div style="display: block">
-                                        Create Realm
+                                        Create<br>
+                                        Realm
                                     </div>
                                 </c-button>
                             </div>
@@ -336,14 +344,14 @@
                             </div>
                             <p class="col-12 margin-top-20">
                                 We believe in transparency and community-driven development, so why don't you check out the <a href="https://preview.blockhub.gg">Preview Build</a> and let us know what you think!
-                            </p><p /></p><p class="col-12 margin-bottom-20">
+                            </p>
+                            <p class="col-12 margin-bottom-20">
                                 To make things simple, hold ALT and click anywhere to send us feedback/bug reports!
                             </p>
                         </div>
                     </template>
                     <p slot="footer" />
                 </c-basic-popup>
-
                 <!--token-contract popup-->
                 <c-basic-popup
                     :activated="$store.state.application.activeModal === 'token-contract'"
@@ -691,11 +699,9 @@
                     </p>
                 </c-basic-popup>
 
-
                 <c-popup-collection-add
                     :activated="$store.state.application.activeModal === 'add-collection'"
                     :collections="collections" />
-
 
                 <!--create article popup-->
                 <c-basic-popup
@@ -876,10 +882,7 @@
     </div>
 </template>
 
-
 <script>
-import axios from 'axios'
-import Vue from 'vue'
 import { debounce } from '@/mixins'
 
 import 'swiper/dist/css/swiper.css'
@@ -929,16 +932,19 @@ export default {
         'c-profile-chooser': () => import('~/components/profile-chooser').then(m => m.default || m),
         'c-settings': () => import('~/components/settings').then(m => m.default || m),
         'c-social-connect': () => import('~/components/social-connect').then(m => m.default || m),
-        'c-draggable-video': () => import('~/components/draggable-video').then(m => m.default || m)
+        'c-draggable-video': () => import('~/components/draggable-video').then(m => m.default || m),
+        'c-video': () => import('~/components/draggable-video').then(m => m.default || m)
     },
     mixins: [debounce],
     props: {
         navigationKey: {
             type: String,
+            default: null,
             required: false
         },
         navigationTitle: {
             type: String,
+            default: null,
             required: false
         },
         showLeftPanel: {
@@ -970,8 +976,14 @@ export default {
             type: [Array, Boolean],
             default: () => []
         },
-        bgImage: String,
-        customShortcuts: [Array, Object]
+        bgImage: {
+            type: String,
+            default: null
+        },
+        customShortcuts: {
+            type: [Array, Object],
+            default: () => []
+        }
     },
     data() {
         const self = this
@@ -1015,16 +1027,16 @@ export default {
                 excludeOlderBrowsers: true,
                 showDropzoneAreas: true,
                 multipleDropzonesItemsDraggingEnabled: true,
-                onDrop(event) {},
-                onDragstart(event) {
-                    const $target = $(event.nativeEvent.target)
+                onDrop: event => {},
+                onDragstart: event => {
+                    const $target = this.$(event.nativeEvent.target)
 
                     if ($target.parents('.page-shortcuts').length) {
                         event.stop()
                     }
                 },
-                onDragend(event) {
-                    const $target = $(event.nativeEvent.target)
+                onDragend: event => {
+                    const $target = this.$(event.nativeEvent.target)
                     let $link = null
                     let $image = null
                     let link = null
@@ -1164,30 +1176,22 @@ export default {
     watch: {
         'profileChooser'() {
             if (this.signedIn) {
-                if (this.profileChooser) { this.bluredBg = true } else { this.bluredBg = false }
+                this.bluredBg = Boolean(this.profileChooser)
             }
         },
-        '$store.state.application.activeProfile'() {
+        async '$store.state.application.activeProfile'() {
             if (!this.$store.state.application.activeProfile.key) return
 
             this.$store.state.application.tokenCount = null
 
-            this.$api.service('profiles/balance').find({
+            const res = await this.$api.service('profiles/balance').find({
                 query: {
                     type: 'HBX',
                     address: this.$store.state.application.activeProfile.key
                 }
-            }).then(res => {
-                this.$store.state.application.tokenCount = res.balance
             })
 
-
-            // this.$desktop.sendCommand('getTokenBalance', {
-            //     type: 'HBX',
-            //     address: this.$store.state.application.activeProfile.key
-            // }).then((res) => {
-            //     this.$store.state.application.tokenCount = res.balance
-            // })
+            this.$store.state.application.tokenCount = res.balance
         }
     },
     asyncData() {
@@ -1252,7 +1256,7 @@ export default {
                 }
 
                 // check sidebar button
-                $(this.$refs.scroll_sidebar).scroll(() => {
+                this.$(this.$refs.scroll_sidebar).scroll(() => {
                     this.debounce(() => {
                         this.checkScrollButton()
                     }, 250)
@@ -1267,17 +1271,13 @@ export default {
                 }, 500)
             }
         })
+
         if (process.client) {
-            window.onmousemove = function(e) { // TODO replace?
-                if (e.altKey) {
-                    document.body.style.cursor = 'crosshair'
-                } else {
-                    document.body.style.cursor = 'default'
-                }
+            window.onmousemove = e => { // TODO replace?
+                document.body.style.cursor = e.altKey ? 'crosshair' : 'default'
             }
 
-
-            $(document).on('click', e => {
+            this.$(document).on('click', e => {
                 if (e.altKey) {
                     e.preventDefault()
 
@@ -1298,7 +1298,7 @@ export default {
     methods: {
         sendDesktopMessage() {
             if (!window.isElectron) {
-                return alert('Not on desktop')
+                return window.alert('Not on desktop')
             }
 
             this.$desktop.sendCommand('ping', this.$refs.desktopMessage.value)
@@ -1331,7 +1331,7 @@ export default {
         deposit() {
 
         },
-        withdraw() {
+        async withdraw() {
             const fromAddress = this.$store.state.application.activeProfile.address
             let { type, toAddress, amount } = this.withdrawRequest
 
@@ -1339,14 +1339,14 @@ export default {
 
             this.withdrawRequest.processing = true
 
-            this.$desktop.sendCommand('transferTokens', {
+            await this.$desktop.sendCommand('transferTokens', {
                 type,
                 fromAddress,
                 toAddress,
                 amount
-            }).then(() => {
-                this.withdrawRequest = { ...this.withdrawRequest, processing: false }
             })
+
+            this.withdrawRequest = { ...this.withdrawRequest, processing: false }
         },
         onSwipeLeft() {
             this.showRightPanel = true
@@ -1361,15 +1361,15 @@ export default {
         sendReport() {
             if (this.reportCoords) {
                 const getPathTo = element => {
-                    if (element.tagName == 'HTML') { return '/html[1]' }
-                    if (element === document.body) { return '/html[1]/body[1]' }
+                    if (element.tagName === 'HTML') return '/html[1]'
+                    if (element === document.body) return '/html[1]/body[1]'
 
                     let ix = 0
                     const siblings = element.parentNode.childNodes
                     for (let i = 0; i < siblings.length; i++) {
                         const sibling = siblings[i]
-                        if (sibling === element) { return `${getPathTo(element.parentNode)}/${element.tagName.toLowerCase()}[${ix + 1}]` }
-                        if (sibling.nodeType === 1 && sibling.tagName === element.tagName) { ix++ }
+                        if (sibling === element) return `${getPathTo(element.parentNode)}/${element.tagName.toLowerCase()}[${ix + 1}]`
+                        if (sibling.nodeType === 1 && sibling.tagName === element.tagName) ix++
                     }
                 }
 
@@ -1389,19 +1389,19 @@ export default {
             this.$store.commit('application/activateModal', null)
         },
         scrollSidebarDown() {
-            $('#scroll_sidebar').animate({ scrollTop: '+=100', duration: '150' })
+            this.$('#scroll_sidebar').animate({ scrollTop: '+=100', duration: '150' })
             this.checkScrollButton()
         },
         scrollSidebarUp() {
-            $('#scroll_sidebar').animate({ scrollTop: '-=500', duration: '150' })
+            this.$('#scroll_sidebar').animate({ scrollTop: '-=500', duration: '150' })
             this.checkScrollButton()
         },
         checkScrollButton() {
             // console.log('Checking scroll')
             try {
-                if ($('#scroll_sidebar').children().height() > $('#scroll_sidebar').height()) {
+                if (this.$('#scroll_sidebar').children().height() > this.$('#scroll_sidebar').height()) {
                     // Change the scroll direction when it hits the last 10px of the sidebar
-                    if (($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight()) >= ($('#scroll_sidebar')[0].scrollHeight - 10)) {
+                    if ((this.$('#scroll_sidebar').scrollTop() + this.$('#scroll_sidebar').innerHeight()) >= (this.$('#scroll_sidebar')[0].scrollHeight - 10)) {
                         this.scrollMoreDirection = 'up'
                     } else {
                         this.scrollMoreDirection = 'down'
@@ -1428,18 +1428,13 @@ export default {
             }
         },
         handleResize(event) {
-            if (!process.client) { return }
+            if (!process.client) return
 
-            if (document.documentElement.clientWidth < 768) {
-                this.mobileMode = true
-            } else {
-                this.mobileMode = false
-            }
+            this.mobileMode = document.documentElement.clientWidth < 768 ? true : false
         }
     }
 }
 </script>
-
 
     <style>
 /*------------------------------------------------------------------
@@ -1651,7 +1646,6 @@ export default {
   }
 }
 
-
     </style>
 
 <style>
@@ -1715,7 +1709,6 @@ export default {
         height: 50px;
         opacity: 0.85;
         z-index: 100;
-
 
         animation: badgeGlimmer ease-out;
         animation-fill-mode: forwards;
@@ -1939,7 +1932,6 @@ export default {
         }
     }
 
-
     .messages-action {
         display: flex;
         justify-content: space-between;
@@ -2066,9 +2058,13 @@ export default {
     }
 
     .create-shortcut__block {
-        height: 200px;
+        /*height: 200px;*/
         text-align: center;
-
+        transition: all .3s ease;
+        &:hover{
+            cursor: pointer;
+            transform: scale(1.1);
+        }
     }
 
     .content {

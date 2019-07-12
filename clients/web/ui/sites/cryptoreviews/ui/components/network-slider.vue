@@ -3,13 +3,15 @@
         <div class="network-slider__heading">
             <h6>
                 <img class="network-slider__img" src="/projects/cryptoreviews/img/rbo-logo-with-title.png" alt=""><br>
-                <div class="network-slider__title">Review Network</div>
+                <div class="network-slider__title">
+                    Review Network
+                </div>
             </h6>
         </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-lg-3">
-                    <img src="https://via.placeholder.com/240x60" class="img-fluid"/>
+                    <img src="https://via.placeholder.com/240x60" class="img-fluid">
                 </div>
                 <div class="col-12 col-lg-9">
                     <c-swiper :options="sliderOptions">
@@ -71,30 +73,30 @@
 
 
 <script>
-    import {swiper, swiperSlide} from 'vue-awesome-swiper'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
-    export default {
-        props: ['content', 'items'],
-        components: {},
-        data() {
-            return {
-                sliderOptions: {
-                    slidesPerView: 4,
-                    spaceBetween: 15,
-                    loop: true,
-                    autoplay: {
-                        delay: 3000,
-                    },
-                    breakpoints: {
-                        768: {
-                            slidesPerView: 2,
-                            spaceBetween: 0
-                        },
+export default {
+    components: {},
+    props: ['content', 'items'],
+    data() {
+        return {
+            sliderOptions: {
+                slidesPerView: 4,
+                spaceBetween: 15,
+                loop: true,
+                autoplay: {
+                    delay: 3000
+                },
+                breakpoints: {
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 0
                     }
                 }
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

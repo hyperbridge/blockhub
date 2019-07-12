@@ -1,4 +1,6 @@
+import axios from 'axios'
 import feathers from '@feathersjs/feathers'
+import rest from '@feathersjs/rest-client'
 import socketio from '@feathersjs/socketio-client'
 import auth from '@feathersjs/authentication-client'
 import io from 'socket.io-client'
@@ -30,7 +32,8 @@ if (process.client) {
         const socket = io(serviceUrl, { transports: ['websocket'] })
 
         return feathers()
-            .configure(socketio(socket, { timeout: 15000 }))
+            .configure(rest(serviceUrl).axios(axios))
+            // .configure(socketio(socket, { timeout: 15000 }))
             .configure(auth({ storage }))
     }
 } else {
@@ -38,7 +41,8 @@ if (process.client) {
         const socket = io(serviceUrl)
 
         return feathers()
-            .configure(socketio(socket, { timeout: 15000 }))
+            .configure(rest(serviceUrl).axios(axios))
+            // .configure(socketio(socket, { timeout: 15000 }))
             .configure(auth({ storage }))
     }
 }

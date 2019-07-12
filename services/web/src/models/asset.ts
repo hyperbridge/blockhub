@@ -1,23 +1,23 @@
 
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import License from './license'
 import Offer from './offer'
 import Node from './node'
 import BaseModel from './base'
 
 export default class Asset extends BaseModel {
-    parentId!: Number
-    score!: Number
+    public parentId!: number
+    public score!: number
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'assets'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: [],
@@ -26,7 +26,7 @@ export default class Asset extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             parent: {
                 relation: Model.HasOneRelation,
@@ -50,7 +50,7 @@ export default class Asset extends BaseModel {
                 filter: {
                     relationKey: 'offers'
                 },
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = 'offers'
                 },
                 join: {
@@ -62,7 +62,7 @@ export default class Asset extends BaseModel {
                         extra: ['relationKey']
                     }
                 }
-            },
+            }
         }
     }
 }

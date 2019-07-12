@@ -2,7 +2,7 @@ import Model from '../../models/project'
 import createService = require('feathers-objection')
 import hooks = require('./hooks')
 
-export default function(app) {
+export default function (app): any {
     const paginate = app.get('paginate')
 
     const options = {
@@ -14,8 +14,8 @@ export default function(app) {
             max: 25,
             ...paginate
         },
-        allowedEager: 'tags',
-        allowedUpsert: 'tags'
+        allowedEager: '[tags,vote]',
+        allowedUpsert: 'tags,'
         // namedEagerFilters: {
         //     all: function (builder) {
         //         builder.where('done', false)

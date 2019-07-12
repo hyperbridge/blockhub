@@ -112,7 +112,7 @@
                             <h2>Connected to MetaMask <span class="fa fa-check-circle" /></h2>
                         </div>
 
-                        <p
+                        <div
                             v-if="errors.length"
                             class="alert alert-danger errors">
                             <ul>
@@ -122,7 +122,7 @@
                                     {{ error }}
                                 </li>
                             </ul>
-                        </p>
+                        </div>
 
                         <div
                             class="margin-top-30"
@@ -151,8 +151,6 @@ export default {
     components: {
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab').then(m => m.default || m),
         'c-welcome-box': () => import('~/components/welcome-box').then(m => m.default || m)
     },
     data() {
@@ -192,16 +190,16 @@ export default {
         }
     },
     methods: {
-        unlockWallet() {
+        async unlockWallet() {
             if (typeof window.web3 !== 'undefined') {
                 if (window.ethereum) {
                     try {
                         // Request account access if needed
-                        window.ethereum.enable().then(() => {
-                            window.web3 = new Web3(window.ethereum)
+                        await window.ethereum.enable()
 
-                            checkEthereumConnection()
-                        })
+                        window.web3 = new Web3(window.ethereum)
+
+                        checkEthereumConnection()
                     } catch (error) {
                         // User denied account access...
                     }

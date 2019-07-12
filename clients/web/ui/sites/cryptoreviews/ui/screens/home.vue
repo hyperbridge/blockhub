@@ -20,10 +20,10 @@
                 </div>
             </div> -->
         </div>
-        
+
         <c-history :content="data.history.content" :timeline="data.history.timeline" />
 
-        <img border="0" src="http://partners.etoro.com/B10521_A73660_TGet.aspx" />
+        <img border="0" src="http://partners.etoro.com/B10521_A73660_TGet.aspx">
 
         <c-quick-links :social="data.quickLinks.social" :forums="data.quickLinks.forums" :other="data.quickLinks.other" />
         <c-notifications :content="data.notifications.content" :alerts="data.notifications.alerts" :warnings="data.notifications.warnings" />
@@ -42,90 +42,100 @@
 </template>
 
 <script>
-    import bitcoinData from '../../data/token/bitcoin'
-    import * as DB from '@/db'
-    import allData from '../../data'
+import bitcoinData from '../../data/token/bitcoin'
+import * as DB from '@/db'
+import allData from '../../data'
 
-    const tokenName = 'bitcoin'
+const tokenName = 'bitcoin'
 
 
-    const clean = () => {
-        DB.instance().getCollection('tokens') && DB.instance().getCollection('tokens').chain().remove()
-        DB.instance().getCollection('books') && DB.instance().getCollection('books').chain().remove()
-        DB.instance().getCollection('sites') && DB.instance().getCollection('sites').chain().remove()
-        DB.instance().getCollection('courses') && DB.instance().getCollection('courses').chain().remove()
-        DB.instance().getCollection('exchanges') && DB.instance().getCollection('exchanges').chain().remove()
-        DB.instance().getCollection('faq') && DB.instance().getCollection('faq').chain().remove()
-        DB.instance().getCollection('hardwareWallets') && DB.instance().getCollection('hardwareWallets').chain().remove()
-        DB.instance().getCollection('softwareWallets') && DB.instance().getCollection('softwareWallets').chain().remove()
-        DB.instance().getCollection('videos') && DB.instance().getCollection('videos').chain().remove()
-        DB.instance().getCollection('notifications') && DB.instance().getCollection('notifications').chain().remove()
-    }
+const clean = () => {
+    DB.instance().getCollection('tokens') && DB.instance().getCollection('tokens').chain()
+        .remove()
+    DB.instance().getCollection('books') && DB.instance().getCollection('books').chain()
+        .remove()
+    DB.instance().getCollection('sites') && DB.instance().getCollection('sites').chain()
+        .remove()
+    DB.instance().getCollection('courses') && DB.instance().getCollection('courses').chain()
+        .remove()
+    DB.instance().getCollection('exchanges') && DB.instance().getCollection('exchanges').chain()
+        .remove()
+    DB.instance().getCollection('faq') && DB.instance().getCollection('faq').chain()
+        .remove()
+    DB.instance().getCollection('hardwareWallets') && DB.instance().getCollection('hardwareWallets').chain()
+        .remove()
+    DB.instance().getCollection('softwareWallets') && DB.instance().getCollection('softwareWallets').chain()
+        .remove()
+    DB.instance().getCollection('videos') && DB.instance().getCollection('videos').chain()
+        .remove()
+    DB.instance().getCollection('notifications') && DB.instance().getCollection('notifications').chain()
+        .remove()
+}
 
-    export default {
-        components: {
-            'c-layout': () => import('~/sites/cryptoreviews/ui/layouts/token/bitcoin').then(m => m.default || m),
-            'c-header': () => import('~/sites/cryptoreviews/ui/components/header').then(m => m.default || m),
-            'c-footer': () => import('~/sites/cryptoreviews/ui/components/footer').then(m => m.default || m),
-            'c-intro': () => import('~/sites/cryptoreviews/ui/components/intro').then(m => m.default || m),
-            'c-network-slider': () => import('~/sites/cryptoreviews/ui/components/network-slider').then(m => m.default || m),
-            'c-history': () => import('~/sites/cryptoreviews/ui/components/history').then(m => m.default || m),
-            'c-quick-links': () => import('~/sites/cryptoreviews/ui/components/quick-links').then(m => m.default || m),
-            'c-notifications': () => import('~/sites/cryptoreviews/ui/components/notifications').then(m => m.default || m),
-            'c-compare': () => import('~/sites/cryptoreviews/ui/components/compare').then(m => m.default || m),
-            'c-media': () => import('~/sites/cryptoreviews/ui/components/media').then(m => m.default || m),
-            'c-education': () => import('~/sites/cryptoreviews/ui/components/education').then(m => m.default || m),
-            'c-exchanges': () => import('~/sites/cryptoreviews/ui/components/exchanges').then(m => m.default || m),
-            'c-etoro-block': () => import('~/sites/cryptoreviews/ui/components/etoro-block').then(m => m.default || m),
-            'c-market': () => import('~/sites/cryptoreviews/ui/components/market').then(m => m.default || m),
-            'c-software-wallets': () => import('~/sites/cryptoreviews/ui/components/software-wallets').then(m => m.default || m),
-            'c-hardware-wallets': () => import('~/sites/cryptoreviews/ui/components/hardware-wallets').then(m => m.default || m),
-            'c-faq': () => import('~/sites/cryptoreviews/ui/components/faq').then(m => m.default || m),
-        },
-        data() {
-            const data = allData(DB)
+export default {
+    components: {
+        'c-layout': () => import('~/sites/cryptoreviews/ui/layouts/token/bitcoin').then(m => m.default || m),
+        'c-header': () => import('~/sites/cryptoreviews/ui/components/header').then(m => m.default || m),
+        'c-footer': () => import('~/sites/cryptoreviews/ui/components/footer').then(m => m.default || m),
+        'c-intro': () => import('~/sites/cryptoreviews/ui/components/intro').then(m => m.default || m),
+        'c-network-slider': () => import('~/sites/cryptoreviews/ui/components/network-slider').then(m => m.default || m),
+        'c-history': () => import('~/sites/cryptoreviews/ui/components/history').then(m => m.default || m),
+        'c-quick-links': () => import('~/sites/cryptoreviews/ui/components/quick-links').then(m => m.default || m),
+        'c-notifications': () => import('~/sites/cryptoreviews/ui/components/notifications').then(m => m.default || m),
+        'c-compare': () => import('~/sites/cryptoreviews/ui/components/compare').then(m => m.default || m),
+        'c-media': () => import('~/sites/cryptoreviews/ui/components/media').then(m => m.default || m),
+        'c-education': () => import('~/sites/cryptoreviews/ui/components/education').then(m => m.default || m),
+        'c-exchanges': () => import('~/sites/cryptoreviews/ui/components/exchanges').then(m => m.default || m),
+        'c-etoro-block': () => import('~/sites/cryptoreviews/ui/components/etoro-block').then(m => m.default || m),
+        'c-market': () => import('~/sites/cryptoreviews/ui/components/market').then(m => m.default || m),
+        'c-software-wallets': () => import('~/sites/cryptoreviews/ui/components/software-wallets').then(m => m.default || m),
+        'c-hardware-wallets': () => import('~/sites/cryptoreviews/ui/components/hardware-wallets').then(m => m.default || m),
+        'c-faq': () => import('~/sites/cryptoreviews/ui/components/faq').then(m => m.default || m)
+    },
+    data() {
+        const data = allData(DB)
 
-            clean()
+        clean()
 
-            const database = {}
+        const database = {}
 
-            database.tokens = DB.instance().addCollection('tokens')
-            database.tokens.insert(data.tokens)
+        database.tokens = DB.instance().addCollection('tokens')
+        database.tokens.insert(data.tokens)
 
-            database.books = DB.instance().addCollection('books')
-            database.books.insert(data.books)
+        database.books = DB.instance().addCollection('books')
+        database.books.insert(data.books)
 
-            database.sites = DB.instance().addCollection('sites')
-            database.sites.insert(data.sites)
+        database.sites = DB.instance().addCollection('sites')
+        database.sites.insert(data.sites)
 
-            database.courses = DB.instance().addCollection('courses')
-            database.courses.insert(data.courses)
+        database.courses = DB.instance().addCollection('courses')
+        database.courses.insert(data.courses)
 
-            database.exchanges = DB.instance().addCollection('exchanges')
-            database.exchanges.insert(data.exchanges)
+        database.exchanges = DB.instance().addCollection('exchanges')
+        database.exchanges.insert(data.exchanges)
 
-            database.faq = DB.instance().addCollection('faq')
-            database.faq.insert(data.faq)
+        database.faq = DB.instance().addCollection('faq')
+        database.faq.insert(data.faq)
 
-            database.hardwareWallets = DB.instance().addCollection('hardwareWallets')
-            database.hardwareWallets.insert(data.hardwareWallets)
+        database.hardwareWallets = DB.instance().addCollection('hardwareWallets')
+        database.hardwareWallets.insert(data.hardwareWallets)
 
-            database.softwareWallets = DB.instance().addCollection('softwareWallets')
-            database.softwareWallets.insert(data.softwareWallets)
+        database.softwareWallets = DB.instance().addCollection('softwareWallets')
+        database.softwareWallets.insert(data.softwareWallets)
 
-            database.videos = DB.instance().addCollection('videos')
-            database.videos.insert(data.videos)
+        database.videos = DB.instance().addCollection('videos')
+        database.videos.insert(data.videos)
 
-            database.notifications = DB.instance().addCollection('notifications')
-            database.notifications.insert(data.notifications)
+        database.notifications = DB.instance().addCollection('notifications')
+        database.notifications.insert(data.notifications)
 
-            const viewData = bitcoinData(database)
+        const viewData = bitcoinData(database)
 
-            return {
-                data: viewData
-            }
+        return {
+            data: viewData
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -142,7 +152,6 @@
     #left-bg, #right-bg, #header-bg {
         display: none;
     }
-
 
 
     .section {

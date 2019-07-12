@@ -1,87 +1,42 @@
 <template>
-    <div
-        v-show="isActive"
-        class="tab-item"
-        :class="{'bg-transparent' : transparentBg}">
-        <div class="tab-item__container">
-            <slot />
+    <div v-show="tabId === tabData.activeTab">
+        <div class="tab__content">
+            <transition name="tab">
+                <div v-if="tabId === tabData.activeTab">
+                    <slot />
+                </div>
+            </transition>
         </div>
-        <div
-            v-if="showFooter"
-            class="tab-item__footer">
-            <slot name="footer" />
-        </div>
+        <slot name="footer" />
     </div>
 </template>
 
 <script>
 export default {
     props: {
-        name: {
-            type: String,
+        tabId: {
+            type: [Number, String],
             required: true
-        },
-        selected: {
-            type: Boolean,
-            default: false
-        },
-        showFooter: {
-            type: Boolean,
-            default: false
-        },
-        transparentBg: {
-            type: Boolean,
-            default: false
         }
     },
-    data() {
-        return {
-            isActive: false
-        }
-    },
-    computed: {
-        href() {
-            return `#${this.name.toLowerCase().replace(/ /g, '-')}`
-        }
-    },
-    mounted() {
-        this.isActive = this.selected
-    }
+    inject: ['tabData']
 }
 </script>
 
 <style lang="scss" scoped>
-    .tab-item {
-        position: relative;
-        color: #fff;
-        &:before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 15px;
-            height: 15px;
-            background: #3e3e5c;
-            z-index: 10;
-        }
-        &.bg-transparent{
-            &:before,
-            .tab-item__container{
-                background: transparent;
-                box-shadow: none;
-            }
-
-        }
+    .tab-enter-active, .tab-leave-active {
+        transition: opacity .4s ease, transform .4s ease;
     }
-    .tab-item__container {
-        background: #3e3e5c;
-        padding: 15px;
-        border-radius: 0 5px 5px 5px;
-        border-top: none;
-        box-shadow: 0 3px 20px rgba(0, 0, 0, .2);
+    .tab-leave-active {
+        position: absolute;
     }
-    .tab-item__footer{
-        margin-top: 15px;
-        width: 100%;
+    .tab-enter, .tab-leave-to {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    .tab__content{
+        display: block;
     }
 </style>
+
+

@@ -1,6 +1,6 @@
 <template>
     <c-layout navigationKey="help">
-        <c-broken-page :error="error" />
+        <c-broken-page :isError="isError" />
     </c-layout>
 </template>
 
@@ -20,13 +20,15 @@ export default {
         'c-broken-page': () => import('~/components/broken-page').then(m => m.default || m)
     },
     props: {
-        error: {
+        isError: {
             type: Object,
             default: () => ({})
         }
     },
     asyncData({ res }) {
-        res.statusCode = 404
+        if (res) {
+            res.statusCode = 404
+        }
 
         return {
             error: {

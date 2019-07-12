@@ -288,8 +288,6 @@ export default {
         }
     },
     components: {
-        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
         'c-game-includes-item': () => import('~/components/game-series/game-includes-item').then(m => m.default || m),
         'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m),
         'c-project-card': () => import('~/components/project/card').then(m => m.default || m)
@@ -317,6 +315,9 @@ export default {
                 projectWishlist: Object.keys(profile.projectWishlist || []).map(id => projects[id])
             }
         }
+    },
+    asyncData({ store, error }) {
+        if (!store.state.auth.user) return error({ statusCode: 500, message: 'Not signed in' })
     },
     methods: {
         exportAccountFile() {

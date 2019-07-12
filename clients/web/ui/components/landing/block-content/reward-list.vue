@@ -22,7 +22,6 @@
 
 <script>
 export default {
-    name: 'RewardList',
     data() {
         return {
             showList: false

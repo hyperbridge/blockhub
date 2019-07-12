@@ -1,25 +1,24 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import Profile from './profile'
-import Message from './message'
 import Node from './node'
 import BaseModel from './base'
 
 export default class File extends BaseModel {
     // key = [image, document, other]
-    parentId!: Number
+    public parentId!: number
 
-    storageType!: String // s3, github, etc.
-    accessType!: String
+    public storageType!: string // s3, github, etc.
+    public accessType!: string
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'files'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: [],
@@ -28,7 +27,7 @@ export default class File extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             parent: {
                 relation: Model.HasOneRelation,
@@ -45,7 +44,7 @@ export default class File extends BaseModel {
                     from: 'files.ownerId',
                     to: 'profiles.id'
                 }
-            },
+            }
         }
     }
 }

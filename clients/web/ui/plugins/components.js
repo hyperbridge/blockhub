@@ -18,6 +18,8 @@ import Darklaunch from '../components/darklaunch'
 import SimpleVote from '../components/vote/simple'
 import JsonView from '../components/json-editor/json-view'
 import ArrayView from '../components/json-editor/array-view'
+import Tabs from '../components/tab/tabs'
+import Tab from '../components/tab/tab'
 
 Vue.component('c-layout', Layout)
 Vue.component('c-heading-bar', HeadingBar)
@@ -37,3 +39,5 @@ Vue.component('c-breadcrumb', Breadcrumb)
 Vue.component('c-simple-vote', SimpleVote)
 Vue.component('c-img', Img)
 Vue.component('c-darklaunch', Darklaunch)
+Vue.component('c-tabs', Tabs)
+Vue.component('c-tab', Tab)

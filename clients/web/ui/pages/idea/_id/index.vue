@@ -431,10 +431,9 @@ export default {
                 this.$router.push('/ideas')
             })
         },
-        save() {
+        async save() {
             if (!this.checkForm()) {
                 this.$store.dispatch('application/setEditorMode', 'editing')
-
                 return
             }
 
@@ -466,15 +465,15 @@ export default {
                 this.idea.ownerId = this.$store.state.application.activeProfile.id
                 this.idea.meta.owner = this.$store.state.application.activeProfile
 
-                this.$store.dispatch('ideas/update', [this.idea.id, this.idea, {
+                await this.$store.dispatch('ideas/update', [this.idea.id, this.idea, {
                     query: {
                         $eager: '[tags, community, rating]'
                     }
-                }]).then(() => {
-                    this.notice = 'Idea has been saved.'
+                }])
 
-                    this.$store.dispatch('application/setEditorMode', 'viewing')
-                })
+                this.notice = 'Idea has been saved.'
+
+                this.$store.dispatch('application/setEditorMode', 'viewing')
             }
         },
         checkForm() {

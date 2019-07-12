@@ -27,12 +27,12 @@
                     :to="`/profiles/${user.id}`"
                     class="user-data__avatar-upload-btn">
                     <c-img
-                        class="user-data__avatar no-avatar"
                         v-if="user.img"
+                        class="user-data__avatar no-avatar"
                         :src="user.img" />
                     <c-img
-                        class="user-data__avatar user-avatar"
                         v-else
+                        class="user-data__avatar user-avatar"
                         src="../../static/img/user.png" />
                 </c-button>
             </div>
@@ -43,7 +43,7 @@
                     v-if="!user.img"
                     href="#"
                     class="user-data__avatar-upload-btn">
-                    <c-img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMxOS45ODIgMzE5Ljk4MiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzE5Ljk4MiAzMTkuOTgyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjY0cHgiIGhlaWdodD0iNjRweCI+CjxnPgoJPHBhdGggZD0iTTIzNC45OTEsMzE5Ljk4MmMyLjYxOCwwLDUuMjItMS4wNzgsNy4wNzEtMi45MjlzMi45MjktNC40NTMsMi45MjktNy4wNzF2LTE0MGg2NSAgIGMzLjkyMi0wLjAwOCw3LjcyMS0yLjU1Miw5LjIyMS02LjE3NnMwLjYxLTguMTA5LTIuMTU5LTEwLjg4NmwtMTUwLTE1MEMxNjUuMjAyLDEuMDc0LDE2Mi42MDQsMCwxNTkuOTkxLDAgICBjLTIuNjE0LDAtNS4yMTIsMS4wNzQtNy4wNjIsMi45MmwtMTUwLDE1MGMtMi43NjksMi43NzctMy42NTksNy4yNjMtMi4xNTksMTAuODg2YzEuNSwzLjYyNCw1LjI5OSw2LjE2OCw5LjIyMSw2LjE3Nmg2NXYxNDAgICBjMCwyLjYxOCwxLjA3OCw1LjIyLDIuOTI5LDcuMDcxczQuNDUzLDIuOTI5LDcuMDcxLDIuOTI5SDIzNC45OTF6IiBmaWxsPSIjNjQ3M2Y0Ii8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
+                    <c-img src="https://via.placeholder.com/150" />
                 </a>
                 <c-img
                     v-else
@@ -122,12 +122,27 @@
 <script>
 export default {
     props: {
-        id: String,
-        type: String,
+        id: {
+            type: String,
+            default: null
+        },
+        type: {
+            type: String,
+            default: null
+        },
         user: {
-            img: String,
-            name: String,
-            wallet: String
+            img: {
+                type: String,
+                default: null
+            },
+            name: {
+                type: String,
+                default: null
+            },
+            wallet: {
+                type: String,
+                default: null
+            }
         },
         status: {
             type: String,
@@ -136,13 +151,19 @@ export default {
                 return ['info', 'success', 'warning', 'danger'].includes(val)
             }
         },
-        iconColor: String,
-        iconClass: String,
+        iconColor: {
+            type: String,
+            default: null
+        },
+        iconClass: {
+            type: String,
+            default: null
+        },
         previewMode: Boolean,
         removing: Boolean
     },
     methods: {
-        generateAddress(profileId) {
+        async generateAddress(profileId) {
             if (!this.$store.state.application.desktopMode) {
                 this.$store.commit('application/activateModal', 'welcome')
                 return
@@ -160,40 +181,36 @@ export default {
 
             const index = chosenProfile.meta.walletIndex
 
-            this.$desktop.sendCommand('generateAddress', { index }).then(res => {
-                this.$store.dispatch('profiles/update', [
-                    chosenProfile.id,
-                    {
-                        address: res.address
-                    },
-                    {
-                        query: {}
-                    }
-                ]).then(profile => {
-                    chosenProfile.address = res.address
+            const res = await this.$desktop.sendCommand('generateAddress', { index })
+            const profile = await this.$store.dispatch('profiles/update', [chosenProfile.id, {
+                address: res.address
+            },
+            {
+                query: {}
+            }])
 
-                    this.$snotify.success('', 'Address generated', { timeout: 3000 })
+            chosenProfile.address = res.address
 
-                    // Update local
-                    this.$store.commit('application/updateState')
+            this.$snotify.success('', 'Address generated', { timeout: 3000 })
 
-                    // Update server
-                    this.$store.dispatch('profiles/update', [
-                        chosenProfile.id,
-                        {
-                            address: chosenProfile.address,
-                            meta: chosenProfile.meta
-                        }
-                    ])
+            // Update local
+            this.$store.commit('application/updateState')
 
-                    // Update desktop
-                    this.$desktop.updateState({
-                        module: 'application',
-                        state: {
-                            profiles: Object.values(this.$store.state.profiles.keyedById)
-                        }
-                    }).then(() => {})
-                })
+            // Update server
+            this.$store.dispatch('profiles/update', [
+                chosenProfile.id,
+                {
+                    address: chosenProfile.address,
+                    meta: chosenProfile.meta
+                }
+            ])
+
+            // Update desktop
+            await this.$desktop.updateState({
+                module: 'application',
+                state: {
+                    profiles: Object.values(this.$store.state.profiles.keyedById)
+                }
             })
         },
         copyToClipboard(value) {

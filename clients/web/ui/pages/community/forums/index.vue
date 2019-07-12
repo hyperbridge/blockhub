@@ -85,7 +85,7 @@
                         :title="forum.name"
                         :icon="forum.meta.icon"
                         :lastPostTime="forum.meta.lastPostTime"
-                        :discussionsCount="forum.meta.discussionsCount" />
+                        :discussionsCount="Number(forum.meta.discussionsCount)" />
                 </div>
             </c-block>
         </div>
@@ -102,6 +102,11 @@ export default {
     data() {
         return {
             category: 'general'
+        }
+    },
+    computed: {
+        developerMode() {
+            return this.$store.state.application.developerMode
         }
     },
     async asyncData({ params, store }) {

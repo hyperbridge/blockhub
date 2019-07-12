@@ -1,19 +1,19 @@
-import { Model, RelationMappings } from 'objection'
+import { Model, RelationMappings, JsonSchema } from 'objection'
 import Node from './node'
 import BaseModel from './base'
 
 export default class Tournament extends BaseModel {
-    parentId!: Number
+    public parentId!: number
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'tournaments'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: [],
@@ -22,7 +22,7 @@ export default class Tournament extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             parent: {
                 relation: Model.HasOneRelation,
@@ -31,7 +31,7 @@ export default class Tournament extends BaseModel {
                     from: 'tournaments.parentId',
                     to: 'nodes.id'
                 }
-            },
+            }
         }
     }
 }

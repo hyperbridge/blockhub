@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <div class="purchase-block__buttons-group col-12">
+        <div class="purchase-block__buttons-group padding-bottom-30 col-12">
             <c-button
                 v-if="isReleased && price"
                 status="outline-success"
@@ -130,18 +130,19 @@ export default {
         tags: Array,
         title: {
             type: String,
-            default: null
+            default: 'Title'
         },
         price: {
             type: Number,
-            default: null
+            default: 0
         },
         eligibleTokens: {
             type: Number,
             default: 0
         },
         releaseDate: {
-            type: String
+            type: String,
+            default: new Date()
         },
         offersPurchases: {
             type: Boolean,

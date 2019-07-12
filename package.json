@@ -1,5 +1,6 @@
 {
   "name": "blockhub",
+  "license": "SEE LICENSE IN LICENSE.md",
   "private": true,
   "scripts": {
     "web-client": "cd clients && cd web && yarn dev",
@@ -9,7 +10,5 @@
   },
   "devDependencies": {
     "lerna": "^3.8.0"
-  },
-  "dependencies": {
   }
 }

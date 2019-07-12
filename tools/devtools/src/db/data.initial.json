@@ -1,0 +1,12 @@
+{
+    "application": {
+      "0": {
+        "environments": [],
+        "proxy": { "host": "myproxy.com", "port": 9502 },
+        "$loki": 1,
+        "id": "1",
+        "meta": { "updated": 1542255636853, "revision": 714 }
+      }
+    },
+    "requests": []
+  }

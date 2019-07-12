@@ -2,7 +2,7 @@ import Model from '../../models/idea'
 import createService = require('feathers-objection')
 import hooks = require('./hooks')
 
-export default function(app) {
+export default function (app): any {
     const paginate = app.get('paginate')
 
     const options = {
@@ -19,7 +19,7 @@ export default function(app) {
         },
         createUseUpsertGraph: true,
         allowedInsert: '[tags.^, community.[owner], rating.^]',
-        allowedEager: '[owner.^, owner.account, tags.^, community.[owner], rating.^]',
+        allowedEager: '[owner.^, owner.account, tags.^, community.[owner],vote.^, rating.^]',
         allowedUpsert: '[tags.^, community.[owner], rating.^]'
     }
 

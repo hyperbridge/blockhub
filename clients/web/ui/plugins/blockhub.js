@@ -15,6 +15,7 @@ export default ({ app, store }) => {
 
         store.subscribe((mutation, state) => {
             if (mutation.type !== 'application/setInternetConnection') {
+                console.log(mutation.type)
                 console.info(`[BlockHub] Store Mutation: ${mutation.type}`) // , mutation.payload)
             }
 
@@ -184,20 +185,19 @@ export default ({ app, store }) => {
 
     blockhub.api = {
         service: serviceKey => {
-            console.log(`[BlockHub] Service: ${serviceKey}`)
-
-            if (blockhub.bridge.isConnected()) { // && blockhub.bridge.canFulfillRequest(endpoint
-                return {
-                    find: params => {
-                        blockhub.bridge.sendCommand('service', {
-                            serviceKey,
-                            type: 'find',
-                            params
-                        })
-                    }
-                }
-            }
-
+            // if (blockhub.bridge.isConnected()) { // && blockhub.bridge.canFulfillRequest(endpoint
+            //     console.log('if')
+            //     return {
+            //         find: params => {
+            //             blockhub.bridge.sendCommand('service', {
+            //                 serviceKey,
+            //                 type: 'find',
+            //                 params
+            //             })
+            //         }
+            //     }
+            // }
+            console.log('servicekey', serviceKey)
             return app.feathers.service(serviceKey)
         }
     }
@@ -235,6 +235,8 @@ export default ({ app, store }) => {
         store.dispatch('application/init')
         store.dispatch('marketplace/init')
         store.dispatch('funding/init')
+        store.dispatch('votes')
+        store.dispatch('votes/check')
 
         console.log(`Environment mode: ${store.state.application.environmentMode}`)
 

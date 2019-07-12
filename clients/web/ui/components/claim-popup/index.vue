@@ -232,14 +232,11 @@
 </template>
 
 <script>
-import axios from 'axios'
 import FormData from 'form-data'
 
 export default {
     components: {
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m)
     },
     props: ['activated'],
     data() {
@@ -293,7 +290,7 @@ export default {
                     bodyFormData.set('entry.817087000', this.companyWebsite)
                     bodyFormData.set('entry.199140031', this.developerProfileAddress)
 
-                    axios({
+                    this.$axios({
                         method: 'post',
                         url: 'https://docs.google.com/forms/d/1X0LukIIimTL9egE9dbtHYECXG9W-y3HFj_kGRKk7cww/formResponse',
                         data: bodyFormData,

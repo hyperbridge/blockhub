@@ -50,8 +50,7 @@ export default {
     },
     computed: {
         games() {
-            return this.$store.getters['products/list'] // Object.values(this.$store.state.funding.projects)//this.$store.getters['projects/list']
-            // .filter(trx => trx.you.id == this.profileId);
+            return this.$store.getters['products/list']
         },
         list() {
             const result = []
@@ -113,17 +112,17 @@ export default {
             return result
         }
     },
-    created() {
-        this.$store.dispatch('products/find', {
+    async created() {
+        await this.$store.dispatch('products/find', {
             query: {
                 $sort: {
                     createdAt: -1
                 },
                 $limit: 25
             }
-        }).then(() => {
-            this.loading = false
         })
+
+        this.loading = false
     }
 }
 </script>

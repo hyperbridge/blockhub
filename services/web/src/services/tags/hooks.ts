@@ -1,27 +1,25 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 
-const fillTag = function(tag) {
+const fillTag = function (tag): any {
     return tag
 }
 
-const fillOne = function(options = {}) {
+const fillOne = function (options = {}): any {
     return async context => {
         context.data = fillTag(context.data)
         return context
     }
 }
 
-const fillAll = function(options = {}) {
+const fillAll = function (options = {}): any {
     return async context => {
-        context.result.data = context.result.data.map((tag) => {
-            return fillTag(tag)
-        })
+        context.result.data = context.result.data.map(tag => fillTag(tag))
 
         return context
     }
 }
 
-const create = function(options = {}) {
+const create = function (options = {}): any {
     return async context => {
         const { app, data } = context
 
@@ -44,7 +42,7 @@ const create = function(options = {}) {
         // Override the original data (so that people can't submit additional stuff)
         context.data = {
             value,
-            meta,
+            meta
         }
 
         // Best practise, hooks should always return the context
@@ -53,7 +51,7 @@ const create = function(options = {}) {
 }
 
 
-const validatePermission = function(options = {}) {
+const validatePermission = function (options = {}): any {
     return async context => {
         const { app, data } = context
 

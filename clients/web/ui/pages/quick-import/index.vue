@@ -48,7 +48,6 @@
                 </c-block>
             </div>
 
-            <!--Second step on Quick import-->
             <div
                 v-if="signedIn && quickImport"
                 class="col-12">

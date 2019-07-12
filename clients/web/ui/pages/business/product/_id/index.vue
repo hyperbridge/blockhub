@@ -211,7 +211,7 @@
         <template slot="menu">
             <div class="row">
                 <div
-                    v-if="product.id"
+                    v-if="product.id && $can('editProducts')"
                     class="col-12 text-right">
                     <c-button
                         status="success"
@@ -600,21 +600,21 @@ export default {
                 this.$router.push(`/business/product/${this.product.id}`)
             })
         },
-        save() {
+        async save() {
             this.product.type = 'game'
             this.product.ownerId = this.$store.state.application.activeProfile.id
 
-            this.$store.dispatch('products/update', [this.product.id, this.product, {
+            await this.$store.dispatch('products/update', [this.product.id, this.product, {
                 query: {
                     $eager: 'tags'
                 }
-            }]).then(() => {
-                this.notice = 'Product has been saved.'
-                // this.product.id = productResult.id
-                // this.successfulCreationMessage = "Congratulations, your product has been created!"
+            }])
 
-                // this.$router.push('/business/product/' + this.product.id)
-            })
+            this.notice = 'Product has been saved.'
+            // this.product.id = productResult.id
+            // this.successfulCreationMessage = "Congratulations, your product has been created!"
+
+            // this.$router.push('/business/product/' + this.product.id)
         }
     }
 }

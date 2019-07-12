@@ -8,38 +8,18 @@
             class="content login-container">
             <div class="container">
                 <div class="col-12">
-                    <c-tabs :currentStep="current_step">
+                    <c-tabs
+:tabNames="['Account Verification']"
+                            styled>
                         <c-tab
-                            name="Account Verification"
-                            :selected="true"
-                            :showFooter="true">
+                            :tabId="1">
                             <div class="tab-container">
                                 <div
                                     v-if="isVerified"
                                     class="tab-card padding-20">
                                     <p>Your account has been verified. You can request approval for additional profiles below.</p>
 
-                                    <div class="profile-picker">
-                                        <div
-                                            v-for="profile in profiles"
-                                            :key="profile.id"
-                                            class="profile-picker__profile">
-                                            <c-user-card
-                                                :user="profile"
-                                                :previewMode="true"
-                                                :class="{ 'default': profile.chosen }" />
-                                            <div class="profile__action">
-                                                <c-button
-                                                    v-if="!profile.chosen"
-                                                    status="info"
-                                                    icon="check"
-                                                    @click="chooseProfile(profile)">
-                                                    Choose
-                                                </c-button>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    <c-profile-picker :profiles="profiles" @chooseProfile="chooseProfile()" />
                                     <br>
 
                                     <c-button @click="verifyProfile">
@@ -167,7 +147,7 @@
                                         </div>
 
                                         <br>
-                                        <p
+                                        <div
                                             v-if="errors.length"
                                             class="errors">
                                             <strong>Please correct the following error(s):</strong>
@@ -178,7 +158,7 @@
                                                     {{ error }}
                                                 </li>
                                             </ul>
-                                        </p>
+                                        </div>
                                         <br>
 
                                         <c-button
@@ -209,14 +189,12 @@
 
 
 <script>
-import Veriff from '@veriff/js-sdk'
-import axios from 'axios'
+// import Veriff from '@veriff/js-sdk'
 
 export default {
     components: {
-        'c-tab': () => import('~/components/tab/tab').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs').then(m => m.default || m),
-        'c-user-card': () => import('~/components/user-card').then(m => m.default || m)
+        'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
+        'c-profile-picker': () => import('~/components/profile-picker').then(m => m.default || m)
     },
     data() {
         const { account } = this.$store.state.application
@@ -289,7 +267,7 @@ export default {
                     }
                 }
 
-                axios({
+                this.$axios({
                     method: 'post',
                     url: 'https://magic.veriff.me/v1/sessions',
                     data,
@@ -363,61 +341,6 @@ export default {
     p {
         font-size: 14px;
         line-height: 18px;
-    }
-
-
-    .profile-picker {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .profile-picker__profile {
-        position: relative;
-        margin: 10px 2%;
-        width: 46%;
-        &:hover .profile__action, &.edit .profile__action {
-            display: flex;
-        }
-        >.default {
-            $defColor: #43C981;
-            border-color: $defColor !important;
-            &:before {
-                content: "";
-                width: 26px;
-                position: absolute;
-                border-radius: 5px 0 0 5px;
-                left: -22px;
-                bottom: -1px;
-                height: calc(100% + 2px);
-                background: $defColor;
-            }
-            &:after {
-                font-family: 'Font Awesome 5 Free', 'Barlow', sans-serif;
-                content: "CHOSEN \F14A";
-                color: #1C2032;
-                font-weight: bold;
-                font-size: 16px;
-                position: absolute;
-                transform: rotate(-90deg);
-                top: 40px;
-                left: -50px;
-            }
-        }
-    }
-
-    .profile__action {
-        display: none;
-        position: absolute;
-        justify-content: center;
-        bottom: -20px;
-        width: 100%;
-        height: 26px;
-        .c-button {
-            margin: 0 5px;
-        }
     }
 
 </style>

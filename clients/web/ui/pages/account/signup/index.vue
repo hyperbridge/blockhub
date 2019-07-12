@@ -9,7 +9,7 @@
             class="content login-container">
             <div class="container">
                 <div class="col-12">
-                    <p
+                    <div
                         v-if="errors.length"
                         class="errors">
                         <strong>Please correct the following error(s):</strong>
@@ -20,7 +20,7 @@
                                 {{ error }}
                             </li>
                         </ul>
-                    </p>
+                    </div>
                     <form
                         action="/"
                         method="post">
@@ -414,8 +414,6 @@ export default {
         'c-privacy-block': () => import('~/components/privacy-block').then(m => m.default || m),
         'c-terms-block': () => import('~/components/terms-block').then(m => m.default || m),
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m)
     },
     data() {
         return {

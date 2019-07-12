@@ -73,16 +73,18 @@ export default {
             default: 'default'
         },
         title: {
-            type: String
+            type: String,
+            default: null
         },
         subTitle: {
-            type: String
+            type: String,
+            default: null
         },
         activated: {
             type: Boolean
         },
         width: {
-            default: '400'
+            default: '400px'
         },
         dimension: {
             type: String,

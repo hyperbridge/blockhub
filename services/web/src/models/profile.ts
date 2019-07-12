@@ -13,7 +13,10 @@ import Collection from './collection'
 import Event from './event'
 import Idea from './idea'
 import Product from './product'
+import Role from './role'
+import Permission from './permission'
 import BaseModel from './base'
+import Vote from './vote'
 
 export enum ProfileStatus {
     Active = 'active',
@@ -73,7 +76,7 @@ export default class Profile extends BaseModel {
         };
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             // has many realms
             // has many contributions

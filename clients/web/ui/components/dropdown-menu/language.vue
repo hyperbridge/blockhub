@@ -3,10 +3,6 @@
         <div
             class="language-dropdown__current"
             @click="toggleList">
-            <!--<c-country-flag-->
-                <!--v-if="currentLanguage"-->
-                <!--:country="currentLanguage.code"-->
-                <!--size="small" />-->
             <span class="language-name">
                 {{ currentLanguage ? currentLanguage.name : 'Language' }}
             </span>
@@ -25,9 +21,6 @@
                         :key="index"
                         class="language-dropdown__list-item"
                         @click="changeLanguage(lang)">
-                        <!--<c-country-flag-->
-                            <!--:country="lang.code"-->
-                            <!--size="small" />-->
                         <span class="language-name">
                             {{ lang.name }} ({{ lang.native }})
                         </span>

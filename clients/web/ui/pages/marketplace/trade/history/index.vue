@@ -46,8 +46,10 @@ export default {
     components: {
         'c-user': () => import('~/components/author').then(m => m.default || m)
     },
-    props: ['transactions'],
     computed: {
+        transactions() {
+            return this.$route.params.transactions
+        },
         transactionsX() {
             return
             return this.$store.getters['assets/transactionsArray']
