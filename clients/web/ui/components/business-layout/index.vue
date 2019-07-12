@@ -148,7 +148,10 @@ export default {
             type: Boolean,
             default: false
         },
-        title: String
+        title: {
+            type: String,
+            default: 'Title'
+        }
     },
     data() {
         return {

@@ -28,12 +28,14 @@
 
 <script>
 export default {
-    name: 'Block1',
     components: {
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m)
     },
     props: {
-        title: String,
+        title: {
+            type: String,
+            default: 'Title'
+        },
         noGutter: {
             type: Boolean,
             default: false

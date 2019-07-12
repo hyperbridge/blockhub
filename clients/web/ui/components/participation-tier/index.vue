@@ -34,11 +34,26 @@
 export default {
     props: {
         id: Number,
-        price: [Number, String],
-        sold: [Number, String],
-        left: [Number, String],
-        tag: String,
-        title: String,
+        price: {
+            type: Number,
+            default: 0
+        },
+        sold: {
+            type: Number,
+            default: 0
+        },
+        left: {
+            type: Number,
+            default: 0
+        },
+        tag: {
+            type: String,
+            default: null
+        },
+        title: {
+            type: String,
+            default: 'Title'
+        },
         inList: {
             type: Boolean,
             default: false

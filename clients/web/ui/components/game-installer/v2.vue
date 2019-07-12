@@ -74,8 +74,14 @@ export default {
         'c-list': () => import('~/components/list').then(m => m.default || m)
     },
     props: {
-        productImagesMediumTile: String,
-        productName: String,
+        productImagesMediumTile: {
+            type: String,
+            default: null
+        },
+        productName: {
+            type: String,
+            default: null
+        },
         productSystemRequirements: {
             type: Array,
             default: () => []

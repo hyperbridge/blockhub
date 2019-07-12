@@ -81,13 +81,34 @@ export default {
             type: String,
             default: 'https://via.placeholder.com/400x300'
         },
-        id: String,
-        name: String,
-        productName: String,
-        priceMin: Number,
-        priceMax: Number,
-        priceCurrent: Number,
-        acceptOffers: Boolean,
+        id: {
+            type: String,
+            default: null
+        },
+        name: {
+            type: String,
+            default: null
+        },
+        productName: {
+            type: String,
+            default: null
+        },
+        priceMin: {
+            type: Number,
+            default: 0
+        },
+        priceMax: {
+            type: Number,
+            default: 0
+        },
+        priceCurrent: {
+            type: Number,
+            default: 0
+        },
+        acceptOffers: {
+            type: Boolean,
+            default: false
+        },
         metadata: {
             type:  Array,
             default: () => []

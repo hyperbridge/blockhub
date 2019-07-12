@@ -82,8 +82,14 @@ export default {
             type: Array,
             required: true
         },
-        nameUrl: String,
-        videoUrl: String
+        nameUrl: {
+            type: String,
+            default: null
+        },
+        videoUrl: {
+            type: String,
+            default: null
+        }
     },
     data() {
         return {
