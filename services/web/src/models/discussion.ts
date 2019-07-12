@@ -1,8 +1,8 @@
 import { Model, RelationMappings } from 'objection'
-import Profile from './profile'
+import Profile, {ProfileStatus} from './profile'
 import Message from './message'
 import Event from './event'
-import Node from './node'
+import Node, {NodeRelation} from './node'
 import Rating from './rating'
 import BaseModel from './base'
 import Community from './community'
@@ -34,6 +34,17 @@ export default class Discussion extends BaseModel {
             properties: {
             }
         }
+    }
+
+    static get modifiers() {
+        return {
+            publicCols(builder) {
+                builder.select(['name', 'key', 'id', 'value']);
+            },
+            idCol(builder) {
+                builder.select(['id']);
+            }
+        };
     }
 
     static get relationMappings(): RelationMappings {
@@ -91,6 +102,29 @@ export default class Discussion extends BaseModel {
                         to: 'nodes.toDiscussionId',
                         extra: ['relationKey']
                     }
+                }
+            },
+            chat: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Profile,
+                filter: {
+                    relationKey: NodeRelation.Chat
+                },
+                beforeInsert(model) {
+                    (model as Node).relationKey = NodeRelation.Chat
+                },
+                modify: (query) => {
+                    query.select(['profiles.id', 'profiles.name', 'profiles.avatar', 'profiles.role', 'profiles.status'])
+                    query.andWhere('profiles.status', ProfileStatus.Active)
+                },
+                join: {
+                    from: 'discussions.id',
+                    through: {
+                        to: 'nodes.fromProfileId',
+                        extra: ['relationKey'],
+                        from: 'nodes.toDiscussionId'
+                    },
+                    to: 'profiles.id'
                 }
             },
             messages: {

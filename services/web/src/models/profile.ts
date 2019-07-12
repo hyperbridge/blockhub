@@ -15,6 +15,10 @@ import Idea from './idea'
 import Product from './product'
 import BaseModel from './base'
 
+export enum ProfileStatus {
+    Active = 'active',
+    Disabled = 'disabled'
+}
 
 export default class Profile extends BaseModel {
     parentId!: Number
@@ -59,6 +63,14 @@ export default class Profile extends BaseModel {
                 }
             }
         }
+    }
+
+    static get modifiers() {
+        return {
+            publicCols(builder) {
+                builder.select(['name', 'avatar', 'id']);
+            }
+        };
     }
 
     static get relationMappings(): RelationMappings {

@@ -7,18 +7,27 @@
                 <span class="title">Chat</span>
             </div>
         </header>
-        <div class="col-12" >
+        <div class="col-12">
             <c-chat-base style="height: 700px">
                 <template slot="sidebar">
-                    <c-chat-group-sidebar :channels="channels" v-on:onChannelChange="onChannelChange($event)"/>
+                    <c-chat-group-sidebar :channels="channels" v-on:onChannelChange="onChannelChange($event)" />
                 </template>
-                <c-chat-group :currentUser="user" :channel="activeChannel">
+                <c-chat-group :currentUser="user" :sendMessage="createMessage">
                     <template slot="messages">
-                        <c-chat-message v-for="msg in messages" :text="msg.value" :time="msg.createdAt" :user="user" />
+                        <c-chat-message v-for="msg in messages.data" v-bind:key="msg.id" :text="msg.value" :time="msg.createdAt" :user="msg.owner" />
                     </template>
-                    <!--<template slot="users">
-                        <c-chat-user v-for="user in users" :isAdmin="user.admin" :action="true" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>
-                    </template>-->
+                    <template slot="users">
+                        <c-chat-user
+                            v-for="user in discussion.chat"
+                            v-bind:key="user.id"
+                            :isAdmin="user.admin"
+                            :action="true"
+                            :avatar="user.avatar"
+                            :name="user.name"
+                            :game="user.game"
+                            :status="user.status" />
+                    </template>
+                    {{ discussion.chat }}
                 </c-chat-group>
             </c-chat-base>
             <hr />
@@ -28,73 +37,134 @@
 
 <script>
 
+import { mapState, mapGetters, mapActions } from 'vuex'
+
 export default {
     components: {
-        'c-chat-base': () => import('~/components/chat-new/base').then(m => m.default || m),
-        'c-chat-group-sidebar': () => import('~/components/chat-new/content/group-list').then(m => m.default || m),
-        'c-chat-group': () => import('~/components/chat-new/content/group').then(m => m.default || m),
-        'c-chat-message': () => import('~/components/chat-new/message').then(m => m.default || m),
+        cChatBase: () => import('~/components/chat-new/base').then(m => m.default || m),
+        cChatGroupSidebar: () => import('~/components/chat-new/content/group-list').then(m => m.default || m),
+        cChatGroup: () => import('~/components/chat-new/content/group').then(m => m.default || m),
+        cChatMessage: () => import('~/components/chat-new/message').then(m => m.default || m),
+        cChatUser: () => import('~/components/chat-new/user').then(m => m.default || m)
     },
+
     props: {
     },
 
     data: () => ({
         channels: [],
-        messages: [],
         channelIndex: 0,
         activeChannel: null
     }),
 
     computed: {
+        ...mapGetters('messages', {
+            getterFindMessages: 'find'
+        }),
+
+        ...mapGetters('discussions', {
+            getterGetDiscussion: 'get'
+        }),
+
         user() {
             return this.$store.state.auth.user
         },
-        profiles() { return this.$store.getters['profiles/list'] }
-    },
-    async created() {
-        this.$store.dispatch('profiles/find', {
-            query: {
-                $sort: {
-                    createdAt: 1
-                },
-                $limit: 25
-            }
-        })
 
-        // Listen to created events and add the new message in real-time
-        //client.service('messages').on('created', addMessage);
+        messages() {
+            if (!this.activeChannel) return { data: [] }
 
-        this.$store.dispatch('discussions/find',  {
-            query: {
-                type: { $in: ['chat', 'both']}
-            }
-        }).then(({ data }) => {
-            this.channels = data;
-            this.activeChannel = this.channels[this.channelIndex];
-
-            this.$store.dispatch('messages/find', {
+            return this.getterFindMessages({
                 query: {
+                    'discussion.id': this.activeChannel.id,
                     $sort: {
                         createdAt: 1
                     },
-                    $limit: 25,
-                    /*discussionId: this.activeChannel.id need to only get an active channel*/
+                    $limit: 25
                 }
-            }).then(({ data }) => {
-                this.messages = data;
             })
-        });
+        },
 
+        discussion() {
+            if (!this.activeChannel) return []
+
+            return this.getterGetDiscussion(
+                this.activeChannel.id,
+                {
+                    query: {
+                        $eager: '[chat]'
+                    }
+                }
+            )
+        }
     },
 
     methods: {
-        createMessage(...args) { return this.$api.service('messages').create(...args) },
-        logout(...args) { return this.$api.service('auth').logout(...args) },
+        ...mapActions('messages', {
+            actionFindMessages: 'find',
+            actionCreateMessage: 'create'
+        }),
 
-        onChannelChange(channelIndex) {
-            this.channelIndex = channelIndex;
-            this.activeChannel = this.channels[this.channelIndex];
+        ...mapActions('discussions', {
+            actionGetDiscussion: 'get'
+        }),
+
+        async onChannelChange(channelIndex) {
+            this.channelIndex = channelIndex
+            this.activeChannel = this.channels[this.channelIndex]
+            this.updateChannelUsers()
+            this.updateChannelMessages()
+        },
+
+        async createMessage(data) {
+            return await this.actionCreateMessage({
+                value: data,
+                discussionId: this.activeChannel.id,
+                ownerId: this.$store.state.application.activeProfile.id
+            })
+        },
+
+        async updateChannelMessages() {
+            if (!this.activeChannel) {
+                return
+            }
+
+            await this.actionFindMessages({
+                query: {
+                    'discussion.id': this.activeChannel.id,
+                    $sort: {
+                        createdAt: -1
+                    },
+                    $limit: 25
+                }
+            })
+        },
+
+        async updateChannelUsers() {
+            if (!this.activeChannel) {
+                return
+            }
+
+            await this.actionGetDiscussion([
+                this.activeChannel.id,
+                {
+                    query: {
+                        $eager: '[chat]'
+                    }
+                }
+            ])
         }
+    },
+
+    async created() {
+        this.channels = (await this.$store.dispatch('discussions/find', {
+            query: {
+                type: { $in: ['chat', 'both'] }
+            }
+        })).data
+        this.activeChannel = this.channels[this.channelIndex]
+
+        this.updateChannelUsers()
+        this.updateChannelMessages()
     }
 }
 </script>

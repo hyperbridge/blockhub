@@ -1,7 +1,8 @@
 import { Model, RelationMappings } from 'objection'
-import Node from './node'
+import Node, {NodeRelation} from './node'
 import Profile from './profile'
 import BaseModel from './base'
+import Discussion from "./discussion";
 
 export default class Message extends BaseModel {
     parentId!: Number
@@ -56,6 +57,22 @@ export default class Message extends BaseModel {
                 join: {
                     from: 'messages.replyToId',
                     to: 'messages.id'
+                }
+            },
+            discussion: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Discussion,
+                beforeInsert(model) {
+                    (model as Node).relationKey = NodeRelation.Chat
+                },
+                join: {
+                    from: 'messages.id',
+                    through: {
+                        from: 'nodes.fromMessageId',
+                        extra: ['relationKey'],
+                        to: 'nodes.toDiscussionId'
+                    },
+                    to: 'discussions.id'
                 }
             },
         }

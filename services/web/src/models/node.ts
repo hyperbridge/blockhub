@@ -8,6 +8,10 @@ import Community from './community'
 import Discussion from './discussion'
 import BaseModel from './base'
 
+export enum NodeRelation {
+    Chat = 'chat'
+}
+
 // Based on https://github.com/Vincit/objection.js/issues/19
 // Exclusive ARC https://hashrocket.com/blog/posts/modeling-polymorphic-associations-in-a-relational-database#exclusive-belongs-to-aka-exclusive-arc-
 export default class Node extends BaseModel {
@@ -263,8 +267,8 @@ export default class Node extends BaseModel {
 // product reviews =  has many meta join fromProduct = product.id where type = 'review'
 
 // parentId is nodeId which is anything
-// parentId is profile or project or product 
-// event.parent.getAssociation() => 
+// parentId is profile or project or product
+// event.parent.getAssociation() =>
 //     if (this.productId !== null)
 //         return this.product
 

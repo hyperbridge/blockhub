@@ -1,6 +1,8 @@
-import Model from '../../models/discussion'
+import Model, {DiscussionType} from '../../models/discussion'
 import createService = require('feathers-objection')
 import hooks = require('./hooks')
+import Profile from "../../models/profile";
+import Node, {NodeRelation} from "../../models/node";
 
 export default function(app) {
     const paginate = app.get('paginate')
@@ -14,9 +16,31 @@ export default function(app) {
             ...paginate
         },
         allowedInsert: '[]',
-        allowedEager: '[owner.^, community.^, messages.^, messages.replies.^]',
+        allowedEager: '[owner.^, community.^, messages.^, messages.replies.^, chat]',
         allowedUpsert: '[]'
     }
+
+    app.use('/discussions/:id/:channelId/joinChannel', {
+        async create(data, {route: {id, channelId}}) {
+
+            return await Node.query().insert({
+                fromProfileId: id,
+                toDiscussionId: channelId,
+                relationKey: NodeRelation.Chat
+            })
+        }
+    })
+
+    app.use('/discussions/:id/joinChannel', {
+        async create(data, {route: {id, channelId}}) {
+
+            return await Node.query().insert({
+                fromProfileId: id,
+                toDiscussionId: channelId,
+                relationKey: NodeRelation.Chat
+            })
+        }
+    })
 
     app.use('discussions', createService(options))
 
