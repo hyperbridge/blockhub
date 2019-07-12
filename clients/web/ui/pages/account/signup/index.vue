@@ -409,7 +409,7 @@ import moment from 'moment'
 
 export default {
     components: {
-        'c-datepicker': () => import('vuejs-datepicker').then(m => m.default || m),
+        'c-datepicker': () => import('@hokify/vuejs-datepicker').then(m => m.default || m),
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         'c-privacy-block': () => import('~/components/privacy-block').then(m => m.default || m),
         'c-terms-block': () => import('~/components/terms-block').then(m => m.default || m),
@@ -631,6 +631,8 @@ export default {
 
 
 <style lang="scss" scoped>
+    @import "@hokify/vuejs-datepicker/dist/vuejs-datepicker.css";
+
     .tab-card {
         background: #383853;
         border-radius: 5px;

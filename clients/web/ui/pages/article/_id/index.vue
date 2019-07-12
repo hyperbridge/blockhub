@@ -230,7 +230,7 @@ export default {
         }
     },
     components: {
-        'c-datepicker': () => import('vuejs-datepicker').then(m => m.default || m)
+        'c-datepicker': () => import('@hokify/vuejs-datepicker').then(m => m.default || m)
     },
     data() {
         return {

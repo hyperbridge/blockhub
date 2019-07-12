@@ -193,7 +193,7 @@ export default {
         'c-asset-preview-price': () => import('~/components/asset-preview').then(m => m.default || m),
         'c-asset-grid': () => import('~/components/assets-grid-inventory').then(m => m.default || m),
         'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-        'c-datepicker': () => import('vuejs-datepicker').then(m => m.default || m)
+        'c-datepicker': () => import('@hokify/vuejs-datepicker').then(m => m.default || m)
     },
     data() {
         return {
