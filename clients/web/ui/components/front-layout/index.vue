@@ -976,8 +976,14 @@ export default {
             type: [Array, Boolean],
             default: () => []
         },
-        bgImage: String,
-        customShortcuts: [Array, Object]
+        bgImage: {
+            type: String,
+            default: null
+        },
+        customShortcuts: {
+            type: [Array, Object],
+            default: () => []
+        }
     },
     data() {
         const self = this
@@ -1186,13 +1192,6 @@ export default {
             })
 
             this.$store.state.application.tokenCount = res.balance
-
-            // this.$desktop.sendCommand('getTokenBalance', {
-            //     type: 'HBX',
-            //     address: this.$store.state.application.activeProfile.key
-            // }).then((res) => {
-            //     this.$store.state.application.tokenCount = res.balance
-            // })
         }
     },
     asyncData() {
@@ -1272,13 +1271,10 @@ export default {
                 }, 500)
             }
         })
+
         if (process.client) {
-            window.onmousemove = function(e) { // TODO replace?
-                if (e.altKey) {
-                    document.body.style.cursor = 'crosshair'
-                } else {
-                    document.body.style.cursor = 'default'
-                }
+            window.onmousemove = e => { // TODO replace?
+                document.body.style.cursor = e.altKey ? 'crosshair' : 'default'
             }
 
             this.$(document).on('click', e => {
@@ -1302,7 +1298,7 @@ export default {
     methods: {
         sendDesktopMessage() {
             if (!window.isElectron) {
-                return alert('Not on desktop')
+                return window.alert('Not on desktop')
             }
 
             this.$desktop.sendCommand('ping', this.$refs.desktopMessage.value)
@@ -1335,7 +1331,7 @@ export default {
         deposit() {
 
         },
-        withdraw() {
+        async withdraw() {
             const fromAddress = this.$store.state.application.activeProfile.address
             let { type, toAddress, amount } = this.withdrawRequest
 
@@ -1343,14 +1339,14 @@ export default {
 
             this.withdrawRequest.processing = true
 
-            this.$desktop.sendCommand('transferTokens', {
+            await this.$desktop.sendCommand('transferTokens', {
                 type,
                 fromAddress,
                 toAddress,
                 amount
-            }).then(() => {
-                this.withdrawRequest = { ...this.withdrawRequest, processing: false }
             })
+
+            this.withdrawRequest = { ...this.withdrawRequest, processing: false }
         },
         onSwipeLeft() {
             this.showRightPanel = true
@@ -1365,15 +1361,15 @@ export default {
         sendReport() {
             if (this.reportCoords) {
                 const getPathTo = element => {
-                    if (element.tagName == 'HTML') { return '/html[1]' }
-                    if (element === document.body) { return '/html[1]/body[1]' }
+                    if (element.tagName === 'HTML') return '/html[1]'
+                    if (element === document.body) return '/html[1]/body[1]'
 
                     let ix = 0
                     const siblings = element.parentNode.childNodes
                     for (let i = 0; i < siblings.length; i++) {
                         const sibling = siblings[i]
-                        if (sibling === element) { return `${getPathTo(element.parentNode)}/${element.tagName.toLowerCase()}[${ix + 1}]` }
-                        if (sibling.nodeType === 1 && sibling.tagName === element.tagName) { ix++ }
+                        if (sibling === element) return `${getPathTo(element.parentNode)}/${element.tagName.toLowerCase()}[${ix + 1}]`
+                        if (sibling.nodeType === 1 && sibling.tagName === element.tagName) ix++
                     }
                 }
 
@@ -1432,13 +1428,9 @@ export default {
             }
         },
         handleResize(event) {
-            if (!process.client) { return }
+            if (!process.client) return
 
-            if (document.documentElement.clientWidth < 768) {
-                this.mobileMode = true
-            } else {
-                this.mobileMode = false
-            }
+            this.mobileMode = document.documentElement.clientWidth < 768 ? true : false
         }
     }
 }

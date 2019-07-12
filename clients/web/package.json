@@ -123,6 +123,7 @@
             "vue/no-v-html": "off",
             "max-statements-per-line": 2,
             "quote-props": 0,
+            "no-alert": 0,
             "indent": [
                 "error",
                 4
