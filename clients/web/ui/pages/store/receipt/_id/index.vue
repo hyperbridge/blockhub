@@ -47,7 +47,7 @@
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <img
-                                                src="../../../static/img/logo-only.png"
+                                                src="../../../../static/img/logo-only.png"
                                                 class="table-img">
                                             <div>
                                                 <strong>
