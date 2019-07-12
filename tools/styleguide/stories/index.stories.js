@@ -665,22 +665,22 @@ import Tab from '@/components/tab/tab.vue'
 storiesOf('Tabs', module)
     .add('default', () => ({
         components: {
-            'c-tabs-universal': TabsUniversal,
-            'c-tab-universal': TabUniversal
+            'c-tabs': Tabs,
+            'c-tab': Tab
         },
         template: `
             <div class="padding-50">
-                <c-tabs-universal style="color: #fff;">
-                    <c-tab-universal :tab_id="0">
+                <c-tabs style="color: #fff;">
+                    <c-tab :tab_id="0">
                         First tab
-                    </c-tab-universal>
-                    <c-tab-universal :tab_id="1">
+                    </c-tab>
+                    <c-tab :tab_id="1">
                         Wwww
-                    </c-tab-universal>
-                    <c-tab-universal :tab_id="2">
+                    </c-tab>
+                    <c-tab :tab_id="2">
                         12345
-                    </c-tab-universal>
-                </c-tabs-universal>
+                    </c-tab>
+                </c-tabs>
             </div>`
     }))
     .add('Tabs Names', () => ({
