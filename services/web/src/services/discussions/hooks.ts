@@ -4,7 +4,7 @@ import Node from '../../models/node'
 const { authenticate } = require('@feathersjs/authentication').hooks
 
 
-const fillDiscussion = async function (discussion, context): any {
+const fillDiscussion = async function (discussion, context): Promise<any> {
     return discussion
 }
 

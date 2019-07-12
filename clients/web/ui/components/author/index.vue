@@ -10,10 +10,12 @@ export default {
     props: {
         img: {
             type: String,
+            default: null,
             required: false
         },
         name: {
             type: String,
+            default: null,
             required: false
         }
     }

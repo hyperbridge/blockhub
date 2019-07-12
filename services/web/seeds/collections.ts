@@ -21,8 +21,10 @@ export const data = [
     }
 ]
 
-export const seed = function (knex): Promise<any> {
-    return Collection
+export const seed = async function (knex): Promise<any> {
+    await knex('collections').del()
+
+    await Collection
         .query(knex)
         .upsertGraph(data)
 }

@@ -113,35 +113,30 @@ export default {
         background: #171717 -webkit-gradient(linear, left center, 89 center, from(rgb(75, 75, 75)), to(rgb(23, 23, 23)));
     }
     .scrollable-content__wrapper--scroll::-webkit-scrollbar-thumb {
-        background: #1c2033;
         border-radius: 2px;
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAD9JREFUeNpi/P//PwMhwAQibly/9h8fzUi0SefPnfuPjybepKNHjvxHpQ+j0MSbtGvXzv/I9G44vYN4kwACDAA7RESWY5qxTAAAAABJRU5ErkJggg==);
-        background-repeat: no-repeat;
-        background-position: center center;
+        background: #1c2033 url('./../../../assets/img/scroll-icon-1.png') no-repeat center center;
         border: none;
     }
     .scrollable-content__wrapper--scroll::-webkit-scrollbar-thumb:hover {
         background-color: #00aeff;
     }
     .scrollable-content__wrapper--scroll::-webkit-scrollbar-button {
-        background-color: #00aeff;
         border-radius: 2px;
-        background-position: center;
-        background-repeat: no-repeat;
+        background: #00aeff no-repeat center;
     }
     .scrollable-content__wrapper--scroll::-webkit-scrollbar-button:hover {
         background-color: #00aeff;
     }
     .scrollable-content__wrapper--scroll::-webkit-scrollbar-button:vertical:decrement {
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAFCAYAAACXU8ZrAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAD9JREFUeNpi+P//PwMyTk6I+48uxssabfis4//7+PqDaWRxJnQFIICukAldAQwgK2QEuQFdATLYsnkjA0CAAQCJHDCKKVQLaAAAAABJRU5ErkJggg==);
+        background-image: url('./../../../assets/img/scroll-icon-2.png');
     }
     .scrollable-content__wrapper--scroll::-webkit-scrollbar-button:vertical:increment {
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAFCAYAAACXU8ZrAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAENJREFUeNpiTE6I++/j68+AC2zZvJGBac78hYwgBi4FIHkmEAebQpgCMOf///9wDLJ6/dq1/0E0sjiKIphCdDGAAAMAtQVIOLvLsjoAAAAASUVORK5CYII=);
+        background-image: url('./../../../assets/img/scroll-icon-3.png');
     }
     .scrollable-content__wrapper--scroll::-webkit-scrollbar-button:horizontal:decrement {
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAYAAAD6reaeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEZJREFUeNpi+P//PwMyTk6I+8/EgARSEuP/+/j6MzChC4AAE7oACDA/eXgfRQCscs78hYxbNm9EFQQR6BJwi1AksLkTIMAAsFg1w4z04pgAAAAASUVORK5CYII=);
+        background-image: url('./../../../assets/img/scroll-icon-4.png');
     }
     .scrollable-content__wrapper--scroll::-webkit-scrollbar-button:horizontal:increment {
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAYAAAD6reaeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAENJREFUeNpiSE6I+w8EDMiYycfXnyElMf4/AxJgAhHoEkwwBrIEE7I2mASK4JbNGxnmzF/IyIQuANeOLAAG2NwJEGAAuVg0Qtlxn1kAAAAASUVORK5CYII=);
+        background-image: url('./../../../assets/img/scroll-icon-5.png');
     }
 </style>

@@ -19,7 +19,7 @@ const productSchema = Joi.object().keys({
   downloads: Joi.number(),
   plans: Joi.array(),
   frequentlyTradedAssets: Joi.array(),
-  sale_box: Joi.object(),
+  saleBox: Joi.object(),
   rating: Joi.array(),
   assets: Joi.array(),
   community: Joi.object(),

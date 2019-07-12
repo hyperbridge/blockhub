@@ -278,8 +278,6 @@ export default {
     components: {
         'c-multiselect': () => import('vue-multiselect').then(m => m.default || m),
         'c-input': () => import('~/components/inputs').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m)
     },
     data() {
         return {

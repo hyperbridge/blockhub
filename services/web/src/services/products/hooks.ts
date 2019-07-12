@@ -1,7 +1,7 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 const populateProfile = require('../../hooks/populate-profile')
 
-const beforeFind = async function (): any {
+const beforeFind = async function (): Promise<any> {
     return async context => {
         const { params } = context
 
@@ -20,7 +20,7 @@ const beforeFind = async function (): any {
     }
 }
 
-const fillProduct = async function (product): any {
+const fillProduct = async function (product): Promise<any> {
     // product.images = {
     //     "mediumTile": "https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"
     // }

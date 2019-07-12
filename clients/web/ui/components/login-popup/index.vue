@@ -123,8 +123,6 @@ export default {
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
         'c-terms-popup': () => import('~/components/popups/terms').then(m => m.default || m),
         'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
         'c-heading-bar-color': () => import('~/components/heading-bar/simple-colored').then(m => m.default || m),
         'c-terms-block': () => import('~/components/terms-block').then(m => m.default || m),
         'c-privacy-block': () => import('~/components/privacy-block').then(m => m.default || m)

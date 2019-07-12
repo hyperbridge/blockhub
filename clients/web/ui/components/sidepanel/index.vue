@@ -333,7 +333,7 @@ export default {
     props: {
         navigationKey: {
             type: String,
-            default: ''
+            default: null
         }
     },
     data() {

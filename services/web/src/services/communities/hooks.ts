@@ -1,6 +1,6 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 
-const fillCommunity = async function (community, context): any {
+const fillCommunity = async function (community, context): Promise<any> {
     return community
 }
 

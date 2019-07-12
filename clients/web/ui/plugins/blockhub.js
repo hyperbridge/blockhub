@@ -185,7 +185,7 @@ export default ({ app, store }) => {
 
     blockhub.api = {
         service: serviceKey => {
-            // if (blockhub.bridge.isConnected()) { // && blockhub.bridge.canFulfillRequest(endpoint                
+            // if (blockhub.bridge.isConnected()) { // && blockhub.bridge.canFulfillRequest(endpoint
             //     console.log('if')
             //     return {
             //         find: params => {
@@ -194,10 +194,10 @@ export default ({ app, store }) => {
             //                 type: 'find',
             //                 params
             //             })
-            //         }       
+            //         }
             //     }
             // }
-            console.log('servicekey',serviceKey)
+            console.log('servicekey', serviceKey)
             return app.feathers.service(serviceKey)
         }
     }
@@ -235,6 +235,8 @@ export default ({ app, store }) => {
         store.dispatch('application/init')
         store.dispatch('marketplace/init')
         store.dispatch('funding/init')
+        store.dispatch('votes')
+        store.dispatch('votes/check')
 
         console.log(`Environment mode: ${store.state.application.environmentMode}`)
 

@@ -73,10 +73,12 @@ export default {
             default: 'default'
         },
         title: {
-            type: String
+            type: String,
+            default: null
         },
         subTitle: {
-            type: String
+            type: String,
+            default: null
         },
         activated: {
             type: Boolean

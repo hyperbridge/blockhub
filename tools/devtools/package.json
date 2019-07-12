@@ -1,0 +1,43 @@
+{
+    "name": "web",
+    "description": "BlockHub DevTools",
+    "repository": {},
+    "license": "SEE LICENSE IN LICENSE.md",
+    "version": "1.0.0rc1",
+    "scripts": {
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+    },
+    "eslintConfig": {
+        "parser": "@typescript-eslint/parser",
+        "plugins": [
+            "@typescript-eslint"
+        ],
+        "extends": [
+            "marine/node"
+        ],
+        "rules": {
+            "quote-props": 0,
+            "func-names": 0,
+            "guard-for-in": 0,
+            "@typescript-eslint/semi": [
+                "error",
+                "never"
+            ],
+            "@typescript-eslint/indent": [
+                "error",
+                4
+            ],
+            "indent": [
+                "error",
+                4
+            ],
+            "space-before-function-paren": [
+                "error",
+                "always"
+            ]
+        }
+    }
+}

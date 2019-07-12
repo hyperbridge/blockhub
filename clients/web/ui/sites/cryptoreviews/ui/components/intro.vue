@@ -30,8 +30,8 @@
                 </div>
                 <div class="col-lg-5 col-md-12">
                     <div class="coin-stats">
-                        <div class="coin-stats__icon" v-if="showIcon">
-                            <img src="../../../static/img/icons/token-icon.png"/>
+                        <div v-if="showIcon" class="coin-stats__icon">
+                            <img src="../../../static/img/icons/token-icon.png">
                         </div>
                         <div class="h2 font-weight-bold">
                             {{ name }}
@@ -39,28 +39,28 @@
                         Stats
                         <ul>
                             <li>
-                                <i class="fas fa-info-circle"></i>
+                                <i class="fas fa-info-circle" />
                                 <strong>
                                     Released:
                                 </strong>
                                 {{ stats.released }}
                             </li>
                             <li>
-                                <i class="fas fa-info-circle"></i>
+                                <i class="fas fa-info-circle" />
                                 <strong>
                                     Ledger:
                                 </strong>
                                 {{ stats.ledger }}
                             </li>
                             <li>
-                                <i class="fas fa-info-circle"></i>
+                                <i class="fas fa-info-circle" />
                                 <strong>
                                     Architecture:
                                 </strong>
                                 {{ stats.architecture }}
                             </li>
                             <li>
-                                <i class="fas fa-info-circle"></i>
+                                <i class="fas fa-info-circle" />
                                 <strong>
                                     Type:
                                 </strong>
@@ -76,9 +76,9 @@
 
 
 <script>
-    export default {
-        props: ['showIcon', 'name', 'stats']
-    }
+export default {
+    props: ['showIcon', 'name', 'stats']
+}
 </script>
 
 <style lang="scss" scoped>

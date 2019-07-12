@@ -357,7 +357,6 @@ export default {
         'c-modal': () => import('~/components/modal').then(m => m.default || m),
         'c-vote-modal': () => import('~/components/modal/vote').then(m => m.default || m),
         'c-game-installer': () => import('~/components/game-installer').then(m => m.default || m),
-
         'c-review-form': () => import('~/components/review/create').then(m => m.default || m)
     },
     props: {

@@ -1,6 +1,6 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
 
-const fillIdea = async function (idea, context) {
+const fillIdea = async function (idea, context): Promise<any> {
     return idea
 }
 

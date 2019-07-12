@@ -3,7 +3,7 @@ import FormData from 'form-data'
 import * as DB from '@/db'
 import * as Bridge from '@/framework/desktop-bridge'
 
-let localState = {}
+let localState = { }
 
 export const state = () => localState
 
@@ -135,6 +135,11 @@ export const actions = {
         await store.dispatch('auth/authenticate', { strategy: 'local', email: payload.email, password: payload.password }, { root: true })
 
         await store.dispatch('authenticate')
+
+        store.commit('signedIn', true)
+    },
+    logout(store) {
+        store.commit('signedIn', false)
     },
     async authenticate(store, payload) {
         await store.dispatch('profiles/find', {
@@ -150,7 +155,7 @@ export const actions = {
         store.state.activeProfile = store.rootState.profiles.keyedById[(store.state.activeProfile && store.state.activeProfile.id) || store.rootState.profiles.ids[0]]
         store.state.developerMode = store.state.activeProfile && store.state.activeProfile.role === 'developer'
         store.state.editorMode = 'viewing'
-        store.state.signedIn = true
+        store.commit('signedIn', true)
     },
     setEditorMode(store, payload) {
         store.commit('setEditorMode', payload)
@@ -228,12 +233,6 @@ export const actions = {
         }
 
         xhr.addEventListener('readystatechange', processRequest, false)
-    },
-    signIn(store, payload) {
-        store.commit('signIn', payload)
-    },
-    signOut(store, payload) {
-        store.commit('signOut', payload)
     },
     enableDarklaunch(store, payload) {
         store.commit('enableDarklaunch', payload)
@@ -315,11 +314,9 @@ export const mutations = {
     createTradeUrl(state, id) {
         state.account.tradeLinkId = id
     },
-    signIn(state, payload) {
-        state.signedIn = true
-    },
-    signOut(state, payload) {
-        state.signedIn = false
+    signedIn(state, payload) {
+        console.log('signedIn', state, payload)
+        state.signedIn = payload
     },
     setEditorMode(state, payload) {
         state.editorMode = payload

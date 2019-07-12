@@ -98,7 +98,7 @@ export default {
         const forum = discussion.community // store.getters['community/get'](discussion.communityId)
 
         if (!discussion) return error({ statusCode: 404, message: 'Discussion not found' })
-        if (!forum) return error({ statusCode: 404, message: 'Forum not found' })
+        // if (!forum) return error({ statusCode: 404, message: 'Forum not found' })
 
         return {
             discussion,
@@ -106,7 +106,7 @@ export default {
                 { to: { path: '/' }, title: 'Home' },
                 { to: { path: '/community' }, title: 'Community' },
                 { to: { path: '/community/forums' }, title: 'Forums' },
-                { to: { path: `/community/forum/${forum.id}` }, title: forum.name },
+                // { to: { path: `/community/forum/${forum.id}` }, title: forum.name },
                 { to: { path: `/discussion/${discussion.id}` }, title: discussion.name }
             ]
         }

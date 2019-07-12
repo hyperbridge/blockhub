@@ -72,7 +72,8 @@ export default {
         parentDeveloperId: Number,
         id: Number,
         customClass: {
-            type: String
+            type: String,
+            default: null
         }
     },
     computed: {

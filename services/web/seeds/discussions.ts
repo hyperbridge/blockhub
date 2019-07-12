@@ -57,11 +57,61 @@ export const data = [
                 name: 'Alan Walker'
             }
         }
+    },
+    {
+        "id": 1,
+        "slug": "test-slug-1",
+        "title": "Why am I seeing H12 request timeout?",
+        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+    },
+    {
+        "id": 2,
+        "slug": "test-slug-2",
+        "title": "I'm still seeing 'Your password has expired'",
+        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+    },
+    {
+        "id": 3,
+        "slug": "developer-program",
+        "title": "Developer Program",
+        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+    },
+    {
+        "id": 4,
+        "slug": "test-slug-3",
+        "title": "Performing Load Test on BlockHub",
+        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+    },
+    {
+        "id": 5,
+        "slug": "test-slug-3",
+        "title": "Performing Load Test on BlockHub",
+        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+    },
+    {
+        "id": 6,
+        "slug": "test-slug-3",
+        "title": "Performing Load Test on BlockHub",
+        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+    },
+    {
+        "id": 7,
+        "slug": "test-slug-3",
+        "title": "Performing Load Test on BlockHub",
+        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+    },
+    {
+        "id": 8,
+        "slug": "test-slug-3",
+        "title": "Performing Load Test on BlockHub",
+        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
     }
 ]
 
-export const seed = function (knex): Promise<any> {
-    return Discussion
+export const seed = async function (knex): Promise<any> {
+    await knex('discussions').del()
+
+    await Discussion
         .query(knex)
         .upsertGraph(data)
 }
