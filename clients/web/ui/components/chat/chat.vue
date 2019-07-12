@@ -14,7 +14,11 @@
                 </template>
                 <c-chat-group :currentUser="user" :channel="activeChannel">
                     <template slot="messages">
-                        <c-chat-message v-for="msg in messages" :text="msg.value" :time="msg.createdAt" :user="user" />
+                        <c-chat-message v-for="(msg, idx) in messages"
+                                        :key="`msg-${idx}`"
+                                        :text="msg.value"
+                                        :time="msg.createdAt"
+                                        :user="user" />
                     </template>
                     <!--<template slot="users">
                         <c-chat-user v-for="user in users" :isAdmin="user.admin" :action="true" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>

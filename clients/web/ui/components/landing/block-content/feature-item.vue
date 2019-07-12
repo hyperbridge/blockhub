@@ -32,9 +32,18 @@ export default {
         'c-landing-block-title': () => import('~/components/landing/block-title/simple').then(m => m.default || m)
     },
     props: {
-        img: String,
-        title: String,
-        link: String
+        img: {
+            type: String,
+            default: null
+        },
+        title: {
+            type: String,
+            default: null
+        },
+        link: {
+            type: String,
+            default: null
+        }
     }
 
 }

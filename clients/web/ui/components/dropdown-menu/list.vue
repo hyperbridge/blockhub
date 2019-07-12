@@ -26,7 +26,10 @@ export default {
             type: String,
             default: 'dropdown-list'
         },
-        title: String,
+        title: {
+            type: String,
+            default: null
+        },
         list: {
             type: Array,
             default: () => []

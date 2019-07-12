@@ -28,7 +28,10 @@ export default {
         }
     },
     props: {
-        title: String,
+        title: {
+            type: String,
+            default: null
+        },
         type: {
             type: String,
             default: 'info'

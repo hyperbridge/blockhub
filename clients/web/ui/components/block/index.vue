@@ -34,7 +34,7 @@ export default {
     props: {
         title: {
             type: String,
-            default: 'Title'
+            default: null
         },
         noGutter: {
             type: Boolean,

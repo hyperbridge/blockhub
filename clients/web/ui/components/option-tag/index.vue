@@ -24,8 +24,14 @@
 export default {
     name: 'OptionTag',
     props: {
-        title: [String, Number],
-        text: [String, Number],
+        title: {
+            type: String,
+            default: null
+        },
+        text: {
+            type: String,
+            default: null
+        },
         isParent: {
             type: Boolean,
             default() {

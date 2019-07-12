@@ -96,7 +96,7 @@ export default {
     props: {
         title: {
             type: String,
-            default: 'Title'
+            default: null
         },
         years: {
             required: true

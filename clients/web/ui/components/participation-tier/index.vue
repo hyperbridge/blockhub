@@ -52,7 +52,7 @@ export default {
         },
         title: {
             type: String,
-            default: 'Title'
+            default: null
         },
         inList: {
             type: Boolean,
