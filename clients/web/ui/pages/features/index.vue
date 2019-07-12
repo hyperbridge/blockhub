@@ -50,7 +50,7 @@
                     arcu. Nulla vel lacus vitae ligula pretium consequat ac et neque. Mauris sodales arcu nec lacus
                     porta sodales.
                     <img
-                        src="https://bitsrc.io/dist/f0f25596ce442161664bc9daf5cec798.png"
+                        src="https://via.placeholder.com/600x400"
                         class="img-fluid mt-5">
                 </div>
             </div>
@@ -59,7 +59,7 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-12 col-lg-4">
                     <img
-                        src="https://bitsrc.io/dist/cd3bd04cd27f1f9a64f88c56bfe0e7cd.jpg"
+                        src="https://via.placeholder.com/600x400"
                         class="img-fluid">
                 </div>
                 <div class="col-12 col-lg-4">
@@ -86,12 +86,12 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-12 col-md-5 col-lg-5">
                     <img
-                        src="https://bitsrc.io/dist/1c77f739c4d5bb4d9100ef4cb29bbaec.png"
+                        src="https://via.placeholder.com/600x400"
                         class="img-fluid mt-5">
                 </div>
                 <div class="col-12 col-md-5 col-lg-3">
                     <img
-                        src="https://bitsrc.io/dist/bec34bb5f85ebf617489056daee85dda.png"
+                        src="https://via.placeholder.com/300x350"
                         class="img-fluid mt-5">
                 </div>
             </div>
@@ -108,7 +108,7 @@
                 </div>
                 <div class="col-12 col-lg-4 text-center">
                     <img
-                        src="https://bitsrc.io/dist/af8fb298d7808088a37469d9268ac773.jpg"
+                        src="https://via.placeholder.com/600x400"
                         class="img-fluid">
                 </div>
             </div>
@@ -123,7 +123,7 @@
                     arcu. Nulla vel lacus vitae ligula pretium consequat ac et neque. Mauris sodales arcu nec lacus
                     porta sodales.
                     <img
-                        src="https://bitsrc.io/dist/d03b3285fa74887bb77040bc6996a0a5.png"
+                        src="https://via.placeholder.com/600x400"
                         class="img-fluid mt-5">
                 </div>
             </div>
@@ -137,7 +137,7 @@
                 </div>
                 <div class="col-12 col-md-5 col-lg-4 text-center">
                     <img
-                        src="https://bitsrc.io/dist/82275db83fcdb77d27216c49ed678f32.jpg"
+                        src="https://via.placeholder.com/600x400"
                         width="110"
                         class="d-block mx-auto mb-5">
                     <p>
@@ -147,7 +147,7 @@
                 </div>
                 <div class="col-12 col-md-5 col-lg-4 text-center">
                     <img
-                        src="https://bitsrc.io/dist/29fa571ba4124c70463d07f5740a646a.jpg"
+                        src="https://via.placeholder.com/600x400g"
                         width="110"
                         class="d-block mx-auto mb-5">
                     <p>
@@ -172,32 +172,32 @@
                         <div class="mx-4">
                             <img
                                 height="50"
-                                src="https://via.placeholder.com/150">
+                                src="https://via.placeholder.com/60">
                         </div>
                         <div class="mx-4">
                             <img
                                 height="50"
-                                src="https://bitsrc.io/dist/20e8ddbec883b9a332e0eea14fa3d0a1.jpg">
+                                src="https://via.placeholder.com/60">
                         </div>
                         <div class="mx-4">
                             <img
                                 height="70"
-                                src="https://bitsrc.io/dist/8d2a4c3cf46af3faa19416c0c961f7f3.jpg">
+                                src="https://via.placeholder.com/60">
                         </div>
                         <div class="mx-4">
                             <img
                                 height="50"
-                                src="https://via.placeholder.com/150">
+                                src="https://via.placeholder.com/60">
                         </div>
                         <div class="mx-4">
                             <img
                                 height="50"
-                                src="https://bitsrc.io/dist/62497abcd1ff9d8d81271d00903df3c1.jpg">
+                                src="https://via.placeholder.com/60">
                         </div>
                         <div class="mx-4">
                             <img
                                 height="50"
-                                src="https://bitsrc.io/dist/4a1c0ed9b326490480dbddb8c3987b41.jpg">
+                                src="https://via.placeholder.com/60">
                         </div>
                     </div>
                 </div>
@@ -232,8 +232,7 @@
     }
 
     .section_3 {
-        background: url("https://bitsrc.io/dist/26f9fc664341d163c3ef107c6602d77e.png") #fff no-repeat;
-        background-position: center right;
+        background: #fff url("https://bitsrc.io/dist/26f9fc664341d163c3ef107c6602d77e.png") no-repeat center right;
         background-size: 60% auto;
         color: #000;
         padding: 15vh 0;
