@@ -17,7 +17,7 @@
                                 <c-simple-vote
                                     v-if="activeElementIndex === index"
                                     v-darklaunch="'RATINGS'"
-                                    :rating="item.rating" />
+                                    :votes="item.rating" />
                                 <div class="row">
                                     <div
                                         v-if="item.data.images"
