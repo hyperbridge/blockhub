@@ -26,7 +26,7 @@
                         :assets="collection.meta.assets" />
                 </c-swiper-slide>
             </c-swiper>
-            <p
+            <div
                 v-if="!collections.length"
                 style="padding: 20px; text-align: center;">
                 No collections yet. <c-button
@@ -34,7 +34,7 @@
                     @click="$store.commit('application/activateModal', 'add-collection')">
                     Create one
                 </c-button>?
-            </p>
+            </div>
         </div>
     </div>
 </template>
