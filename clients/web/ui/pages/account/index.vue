@@ -316,6 +316,9 @@ export default {
             }
         }
     },
+    asyncData({ store, error }) {
+        if (!store.state.auth.user) return error({ statusCode: 500, message: 'Not signed in' })
+    },
     methods: {
         exportAccountFile() {
             this.$desktop.sendCommand('exportAccountFileRequest')

@@ -11,6 +11,10 @@
                 <strong>GG.</strong> You broke it.
             </h1>
             <h3>Maybe there was an error in the spacetime continuum. <br>You better get home quick.</h3>
+            <br>
+            <p style="font-style: italic">
+                Error message: {{ isError.message }}
+            </p>
             <br><br>
             <c-button
                 class="c-button--xl"

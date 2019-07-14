@@ -1334,20 +1334,20 @@ export default {
 
             window.scrollTo(0, top)
         },
-        unlockWallet() {
+        async unlockWallet() {
             this.gaStep(2)
 
             if (typeof window.web3 !== 'undefined') {
                 if (window.ethereum) {
                     try {
                         // Request account access if needed
-                        window.ethereum.enable().then(() => {
-                            window.web3 = new Web3(window.ethereum)
+                        await window.ethereum.enable()
 
-                            window.web3.eth.getAccounts((err, accounts) => {
-                                this.purchaseAddress = accounts[0]
-                                this.account.address = accounts[0] // save for verification screen
-                            })
+                        window.web3 = new Web3(window.ethereum)
+
+                        window.web3.eth.getAccounts((err, accounts) => {
+                            this.purchaseAddress = accounts[0]
+                            this.account.address = accounts[0] // save for verification screen
                         })
                     } catch (error) {
                         // User denied account access...

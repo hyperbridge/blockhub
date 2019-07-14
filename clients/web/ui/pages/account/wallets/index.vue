@@ -1,335 +1,333 @@
 <template>
-    <c-layout navigationKey="account">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <ul class="nav nav-tabs justify-content-between">
-                        <li class="nav-item">
+    <c-layout navigationKey="account" :breadcrumbLinks="breadcrumbLinks">
+        <div class="row">
+            <div class="col-12">
+                <ul class="nav nav-tabs justify-content-between">
+                    <li class="nav-item">
+                        <a
+                            class="nav-link active"
+                            href="#">Overview</a>
+                    </li>
+                </ul>
+                <div class="filter-line">
+                    <div class="filter-line__search">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Term Search">
+                    </div>
+                    <div class="filter-line__filter">
+                        Filter by:
+                        <div class="dropdown">
                             <a
-                                class="nav-link active"
-                                href="#">Overview</a>
-                        </li>
-                    </ul>
-                    <div class="filter-line">
-                        <div class="filter-line__search">
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Term Search">
-                        </div>
-                        <div class="filter-line__filter">
-                            Filter by:
-                            <div class="dropdown">
+                                id="filtering_type"
+                                class="btn dropdown-toggle"
+                                href="#"
+                                role="button"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                                Type
+                            </a>
+                            <div
+                                class="dropdown-menu"
+                                aria-labelledby="dropdownMenuLink">
                                 <a
-                                    id="filtering_type"
-                                    class="btn dropdown-toggle"
-                                    href="#"
-                                    role="button"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="false">
-                                    Type
-                                </a>
+                                    class="dropdown-item"
+                                    href="#">Action</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Another action</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Something else here</a>
+                            </div>
+                        </div>
+                        <a
+                            href="#"
+                            class="btn btn-sm btn-danger text-uppercase font-weight-bold">clear <i class="fas fa-times" /></a>
+                        <a
+                            href="#"
+                            class="btn btn-sm btn-info text-uppercase font-weight-bold">more filters</a>
+                    </div>
+                    <div class="filter-line__sorting">
+                        Sort by:
+                        <div class="dropdown">
+                            <a
+                                id="sorting_value"
+                                class="btn dropdown-toggle"
+                                href="#"
+                                role="button"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                                Value
+                            </a>
+                            <div
+                                class="dropdown-menu"
+                                aria-labelledby="dropdownMenuLink">
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Action</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Another action</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="#">Something else here</a>
+                            </div>
+                        </div>
+                        <a
+                            href="#"
+                            class="btn btn-link">
+                            <i class="fas fa-sort-numeric-up" />
+                        </a>
+                        <a
+                            href="#"
+                            class="btn btn-link">
+                            <i class="fas fa-sort-amount-up" />
+                        </a>
+                    </div>
+                </div>
+                <div class="wallets-list">
+                    <div
+                        v-for="(wallet, index) in wallets"
+                        :key="index"
+                        class="wallet-item">
+                        <c-button
+                            status="none"
+                            class="wallet-item__info"
+                            :to="`/wallet/${wallet.id}`">
+                            <div class="wallet-item__head">
                                 <div
-                                    class="dropdown-menu"
-                                    aria-labelledby="dropdownMenuLink">
-                                    <a
-                                        class="dropdown-item"
-                                        href="#">Action</a>
-                                    <a
-                                        class="dropdown-item"
-                                        href="#">Another action</a>
-                                    <a
-                                        class="dropdown-item"
-                                        href="#">Something else here</a>
+                                    class="wallet-item__name"
+                                    :class="{ preferred: wallet.preferredSwitcher }">
+                                    <i class="fab fa-bitcoin" />
+                                    {{ wallet.name }}
+                                </div>
+                                <div class="wallet-item__count">
+                                    <span>
+                                        {{ wallet.shortName }}
+                                    </span>
+                                    <span>
+                                        {{ wallet.count }}
+                                    </span>
                                 </div>
                             </div>
-                            <a
-                                href="#"
-                                class="btn btn-sm btn-danger text-uppercase font-weight-bold">clear <i class="fas fa-times" /></a>
-                            <a
-                                href="#"
-                                class="btn btn-sm btn-info text-uppercase font-weight-bold">more filters</a>
-                        </div>
-                        <div class="filter-line__sorting">
-                            Sort by:
-                            <div class="dropdown">
-                                <a
-                                    id="sorting_value"
-                                    class="btn dropdown-toggle"
-                                    href="#"
-                                    role="button"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="false">
-                                    Value
-                                </a>
+                            <div class="wallet-item__body">
+                                <div class="wallet-item__graph" />
+                                <div class="wallet-item__history">
+                                    <ul>
+                                        <li
+                                            v-for="(item, index) in wallet.history"
+                                            :key="index"
+                                            :class="item.direction">
+                                            <span class="time">
+                                                {{ item.time }}
+                                            </span>
+                                            <span class="percent">
+                                                {{ item.percent }}%
+                                            </span>
+                                            <span class="icon">
+                                                <i
+                                                    v-if="item.direction === 'up'"
+                                                    class="fas fa-arrow-up" />
+                                                <i
+                                                    v-else
+                                                    class="fas fa-arrow-down" />
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
                                 <div
-                                    class="dropdown-menu"
-                                    aria-labelledby="dropdownMenuLink">
-                                    <a
-                                        class="dropdown-item"
-                                        href="#">Action</a>
-                                    <a
-                                        class="dropdown-item"
-                                        href="#">Another action</a>
-                                    <a
-                                        class="dropdown-item"
-                                        href="#">Something else here</a>
+                                    class="wallet-item__wallet_address"
+                                    @click="copyWalletNumber(wallet.walletNumber)">
+                                    <span>{{ wallet.walletNumber }}</span>
+                                    <i class="fas fa-copy" />
                                 </div>
                             </div>
-                            <a
-                                href="#"
-                                class="btn btn-link">
-                                <i class="fas fa-sort-numeric-up" />
-                            </a>
-                            <a
-                                href="#"
-                                class="btn btn-link">
-                                <i class="fas fa-sort-amount-up" />
-                            </a>
+                        </c-button>
+                        <div class="wallet-item__footer">
+                            <div class="wallet-item__preferredSwitcher">
+                                <label class="switch switch-sm">
+                                    <input
+                                        v-model="wallet.preferredSwitcher"
+                                        type="checkbox"
+                                        name="preeferred"
+                                        checked=""
+                                        value="0">
+                                    <span>Preferred</span>
+                                </label>
+                            </div>
+                            <div class="wallet-item__action">
+                                <a class="btn btn-sm btn-info">
+                                    Send
+                                    <i class="fas fa-arrow-right" />
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="wallets-list">
-                        <div
-                            v-for="(wallet, index) in wallets"
-                            :key="index"
-                            class="wallet-item">
-                            <c-button
-                                status="none"
-                                class="wallet-item__info"
-                                :to="`/wallet/${wallet.id}`">
-                                <div class="wallet-item__head">
-                                    <div
-                                        class="wallet-item__name"
-                                        :class="{ preferred: wallet.preferredSwitcher }">
-                                        <i class="fab fa-bitcoin" />
-                                        {{ wallet.name }}
-                                    </div>
-                                    <div class="wallet-item__count">
-                                        <span>
-                                            {{ wallet.shortName }}
-                                        </span>
-                                        <span>
-                                            {{ wallet.count }}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="wallet-item__body">
-                                    <div class="wallet-item__graph" />
-                                    <div class="wallet-item__history">
-                                        <ul>
-                                            <li
-                                                v-for="(item, index) in wallet.history"
-                                                :key="index"
-                                                :class="item.direction">
-                                                <span class="time">
-                                                    {{ item.time }}
-                                                </span>
-                                                <span class="percent">
-                                                    {{ item.percent }}%
-                                                </span>
-                                                <span class="icon">
-                                                    <i
-                                                        v-if="item.direction === 'up'"
-                                                        class="fas fa-arrow-up" />
-                                                    <i
-                                                        v-else
-                                                        class="fas fa-arrow-down" />
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div
-                                        class="wallet-item__wallet_address"
-                                        @click="copyWalletNumber(wallet.walletNumber)">
-                                        <span>{{ wallet.walletNumber }}</span>
-                                        <i class="fas fa-copy" />
-                                    </div>
-                                </div>
-                            </c-button>
-                            <div class="wallet-item__footer">
-                                <div class="wallet-item__preferredSwitcher">
-                                    <label class="switch switch-sm">
-                                        <input
-                                            v-model="wallet.preferredSwitcher"
-                                            type="checkbox"
-                                            name="preeferred"
-                                            checked=""
-                                            value="0">
-                                        <span>Preferred</span>
-                                    </label>
-                                </div>
-                                <div class="wallet-item__action">
-                                    <a class="btn btn-sm btn-info">
-                                        Send
-                                        <i class="fas fa-arrow-right" />
-                                    </a>
-                                </div>
-                            </div>
+
+                    <div
+                        v-if="!setNewWallets"
+                        class="wallet-item empty-item new-wallet"
+                        @click="addNewWallet">
+                        <div class="empty-overlay">
+                            <i class="fas fa-plus" />
+                            New Wallet
                         </div>
+                    </div>
 
+                    <div
+                        v-if="setNewWallets"
+                        class="wallet-item">
                         <div
-                            v-if="!setNewWallets"
-                            class="wallet-item empty-item new-wallet"
-                            @click="addNewWallet">
-                            <div class="empty-overlay">
-                                <i class="fas fa-plus" />
-                                New Wallet
-                            </div>
-                        </div>
-
-                        <div
-                            v-if="setNewWallets"
-                            class="wallet-item">
+                            v-if="!searchBlock"
+                            class="wallet-item__info">
                             <div
-                                v-if="!searchBlock"
-                                class="wallet-item__info">
-                                <div
-                                    v-if="setNewWalletsStep1"
-                                    class="wallet-item__head">
-                                    <div class="wallet-item__name">
-                                        <a
-                                            href="#"
-                                            class="btn btn-sm wallet-item__toggle-search"
-                                            @click="showCurrencyList">
-                                            <i class="fas fa-angle-down" />
-                                        </a>
-                                        {{ newWallets.name }}
-                                    </div>
-                                    <div class="wallet-item__count">
-                                        <span>
-                                            {{ newWallets.shortName }}
-                                        </span>
-                                        <span>
-                                            {{ newWallets.count }}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div
-                                    v-if="setNewWalletsStep2"
-                                    class="wallet-item__head">
-                                    <div
-                                        class="wallet-item__name"
-                                        :class="{ preferred: newWallets.preferredSwitcher }">
-                                        <i class="fab fa-bitcoin" />
-                                        {{ newWallets.name }}
-                                    </div>
-                                    <div class="wallet-item__count">
-                                        <span>
-                                            {{ newWallets.shortName }}
-                                        </span>
-                                        <span>
-                                            {{ newWallets.count }}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="wallet-item__body">
-                                    <div class="wallet-item__graph" />
-                                    <div class="wallet-item__history">
-                                        <ul>
-                                            <li
-                                                v-for="(item, index) in newWallets.history"
-                                                :key="index"
-                                                :class="item.direction">
-                                                <span class="time">
-                                                    {{ item.time }}
-                                                </span>
-                                                <span class="percent">
-                                                    {{ item.percent }}%
-                                                </span>
-                                                <span class="icon">
-                                                    <i
-                                                        v-if="item.direction === 'up'"
-                                                        class="fas fa-arrow-up" />
-                                                    <i
-                                                        v-else
-                                                        class="fas fa-arrow-down" />
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="wallet-item__wallet_address">
-                                        <span id="new_walletNumber">{{ newWallets.walletNumber }}</span>
-                                        <i
-                                            v-if="setNewWalletsStep1"
-                                            class="fas fa-redo"
-                                            style="color: #c25a5c"
-                                            @click="generateNewWalletNumber" />
-                                        <i
-                                            v-else
-                                            class="fas fa-copy"
-                                            @click="copyWalletNumber(newWallets.walletNumber)" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div
-                                v-if="searchBlock"
-                                class="wallet-item__search-block">
-                                <div class="input-group input-group-sm">
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Search"
-                                        aria-label="Search">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-search" />
-                                        </span>
-                                    </div>
-                                </div>
-                                <ul>
-                                    <li
-                                        v-for="(currency, index) in currencyChoices"
-                                        :key="index"
-                                        @click="choseCurrency(currency.name, currency.shortName)">
-                                        <div class="float-left">
-                                            <i class="fab fa-btc" />
-                                            {{ currency.shortName }}
-                                        </div>
-                                        <div class="float-right">
-                                            {{ currency.name }}
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="wallet-item__footer">
-                                <div class="wallet-item__preferredSwitcher">
-                                    <label class="switch switch-sm">
-                                        <input
-                                            v-model="newWallets.preferredSwitcher"
-                                            type="checkbox"
-                                            name="preeferred"
-                                            checked=""
-                                            value="0">
-                                        <span>Preferred</span>
-                                    </label>
-                                </div>
-                                <div
-                                    v-if="setNewWalletsStep1"
-                                    class="wallet-item__action">
+                                v-if="setNewWalletsStep1"
+                                class="wallet-item__head">
+                                <div class="wallet-item__name">
                                     <a
-                                        class="btn btn-sm btn-success"
-                                        @click="nextStep">
-                                        Done
-                                        <i class="fas fa-check" />
+                                        href="#"
+                                        class="btn btn-sm wallet-item__toggle-search"
+                                        @click="showCurrencyList">
+                                        <i class="fas fa-angle-down" />
                                     </a>
+                                    {{ newWallets.name }}
                                 </div>
+                                <div class="wallet-item__count">
+                                    <span>
+                                        {{ newWallets.shortName }}
+                                    </span>
+                                    <span>
+                                        {{ newWallets.count }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div
+                                v-if="setNewWalletsStep2"
+                                class="wallet-item__head">
                                 <div
-                                    v-else
-                                    class="wallet-item__action">
-                                    <a class="btn btn-sm btn-info">
-                                        <i class="fas fa-list ml-0" />
-                                    </a>
-                                    <a class="btn btn-sm btn-info">
-                                        <i class="fas fa-cog ml-0" />
-                                    </a>
-                                    <a class="btn btn-sm btn-info">
-                                        Send
-                                        <i class="fas fa-arrow-right" />
-                                    </a>
+                                    class="wallet-item__name"
+                                    :class="{ preferred: newWallets.preferredSwitcher }">
+                                    <i class="fab fa-bitcoin" />
+                                    {{ newWallets.name }}
                                 </div>
+                                <div class="wallet-item__count">
+                                    <span>
+                                        {{ newWallets.shortName }}
+                                    </span>
+                                    <span>
+                                        {{ newWallets.count }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="wallet-item__body">
+                                <div class="wallet-item__graph" />
+                                <div class="wallet-item__history">
+                                    <ul>
+                                        <li
+                                            v-for="(item, index) in newWallets.history"
+                                            :key="index"
+                                            :class="item.direction">
+                                            <span class="time">
+                                                {{ item.time }}
+                                            </span>
+                                            <span class="percent">
+                                                {{ item.percent }}%
+                                            </span>
+                                            <span class="icon">
+                                                <i
+                                                    v-if="item.direction === 'up'"
+                                                    class="fas fa-arrow-up" />
+                                                <i
+                                                    v-else
+                                                    class="fas fa-arrow-down" />
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="wallet-item__wallet_address">
+                                    <span id="new_walletNumber">{{ newWallets.walletNumber }}</span>
+                                    <i
+                                        v-if="setNewWalletsStep1"
+                                        class="fas fa-redo"
+                                        style="color: #c25a5c"
+                                        @click="generateNewWalletNumber" />
+                                    <i
+                                        v-else
+                                        class="fas fa-copy"
+                                        @click="copyWalletNumber(newWallets.walletNumber)" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            v-if="searchBlock"
+                            class="wallet-item__search-block">
+                            <div class="input-group input-group-sm">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Search"
+                                    aria-label="Search">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-search" />
+                                    </span>
+                                </div>
+                            </div>
+                            <ul>
+                                <li
+                                    v-for="(currency, index) in currencyChoices"
+                                    :key="index"
+                                    @click="choseCurrency(currency.name, currency.shortName)">
+                                    <div class="float-left">
+                                        <i class="fab fa-btc" />
+                                        {{ currency.shortName }}
+                                    </div>
+                                    <div class="float-right">
+                                        {{ currency.name }}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="wallet-item__footer">
+                            <div class="wallet-item__preferredSwitcher">
+                                <label class="switch switch-sm">
+                                    <input
+                                        v-model="newWallets.preferredSwitcher"
+                                        type="checkbox"
+                                        name="preeferred"
+                                        checked=""
+                                        value="0">
+                                    <span>Preferred</span>
+                                </label>
+                            </div>
+                            <div
+                                v-if="setNewWalletsStep1"
+                                class="wallet-item__action">
+                                <a
+                                    class="btn btn-sm btn-success"
+                                    @click="nextStep">
+                                    Done
+                                    <i class="fas fa-check" />
+                                </a>
+                            </div>
+                            <div
+                                v-else
+                                class="wallet-item__action">
+                                <a class="btn btn-sm btn-info">
+                                    <i class="fas fa-list ml-0" />
+                                </a>
+                                <a class="btn btn-sm btn-info">
+                                    <i class="fas fa-cog ml-0" />
+                                </a>
+                                <a class="btn btn-sm btn-info">
+                                    Send
+                                    <i class="fas fa-arrow-right" />
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -345,30 +343,30 @@ export default {
     data() {
         return {
             newWallets: {
-                'id': '',
-                'name': '--',
-                'icon': '',
-                'shortName': '--',
-                'count': '--',
-                'history': [
+                id: '',
+                name: '--',
+                icon: '',
+                shortName: '--',
+                count: '--',
+                history: [
                     {
-                        'time': '00:00',
-                        'percent': '0.00',
-                        'direction': 'up'
+                        time: '00:00',
+                        percent: '0.00',
+                        direction: 'up'
                     },
                     {
-                        'time': '00:00',
-                        'percent': '0.00',
-                        'direction': 'up'
+                        time: '00:00',
+                        percent: '0.00',
+                        direction: 'up'
                     },
                     {
-                        'time': '00:00',
-                        'percent': '0.00',
-                        'direction': 'up'
+                        time: '00:00',
+                        percent: '0.00',
+                        direction: 'up'
                     }
                 ],
-                'walletNumber': 'xxxxxxxxxxxxxxxxxxxx',
-                'preferredSwitcher': true
+                walletNumber: 'xxxxxxxxxxxxxxxxxxxx',
+                preferredSwitcher: true
             },
             setNewWallets: false,
             setNewWalletsStep1: false,
@@ -407,6 +405,17 @@ export default {
             return this.$store.state.application.wallets
         }
     },
+    async asyncData({ params, store, error }) {
+        if (!store.state.auth.user) return error({ statusCode: 500, message: 'Not signed in' })
+
+        return {
+            breadcrumbLinks: [
+                { to: { path: '/' }, title: 'Home' },
+                { to: { path: `/account` }, title: 'Account' },
+                { to: { path: `/account/wallets` }, title: 'Wallets' }
+            ]
+        }
+    },
     methods: {
         copyWalletNumber(number) {
             alert(`You have copy wallet number - ${number}`)
@@ -422,7 +431,9 @@ export default {
         generateNewWalletNumber() {
             let text = ''
             const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-            for (let i = 0; i < 25; i++) { text += possible.charAt(Math.floor(Math.random() * possible.length)) }
+            for (let i = 0; i < 25; i++) {
+                text += possible.charAt(Math.floor(Math.random() * possible.length))
+            }
             this.newWallets.walletNumber = text
         },
         showCurrencyList() {

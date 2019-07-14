@@ -661,8 +661,6 @@ storiesOf('Projects', module)
 
 import Tabs from '@/components/tab/tabs.vue'
 import Tab from '@/components/tab/tab.vue'
-import TabsUniversal from '@/components/tab/tabs-universal';
-import TabUniversal from '@/components/tab/tab-universal';
 
 storiesOf('Tabs', module)
     .add('default', () => ({
