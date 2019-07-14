@@ -306,6 +306,7 @@ export default {
             return this.$store.state.application.account
         },
         profile() {
+            // TODO: Replace this old stuff
             const { products } = this.$store.state.marketplace
             const { projects } = this.$store.state.funding
             const profile = this.$store.state.application.activeProfile

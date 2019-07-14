@@ -1,11 +1,11 @@
 <template>
-    <c-layout>
+    <c-layout :breadcrumbLinks="breadcrumbLinks">
         <c-user-head />
         <div class="row justify-content-between align-items-center">
             <div class="col-12 d-flex margin-top-30 justify-content-end">
                 <div class="profile__wallet">
                     <i class="fas fa-copy" />
-                    <span id="walletNumber">{{ profile.address }}</span>
+                    <span id="walletNumber">{{ profile && profile.address }}</span>
                 </div>
                 <div class="profile__action-group">
                     <c-button
@@ -29,7 +29,7 @@
             <div
                 v-if="!signedIn && !$store.state.application.settings.client.hide_profile_signup"
                 class="col-12">
-                <div class="profile__user-notify">
+                <c-block class="profile__user-notify">
                     <c-button
                         class="btn-close"
                         @click="$store.commit('application/updateClientSettings', { key: 'hide_profile_signup', value: true })">
@@ -48,10 +48,10 @@
                         to="/download">
                         Sign Up
                     </c-button>
-                </div>
+                </c-block>
             </div>
             <div class="col-12 margin-top-40">
-                <div class="badges">
+                <c-block class="badges2">
                     <c-heading-bar
                         name="Badges"
                         :showArrows="false"
@@ -75,11 +75,11 @@
                             <c-button-arrows />
                         </div>
                     </c-heading-bar>
-                    <div class="badges__list">
+                    <div class="badges2__list">
                         <div
                             v-for="(badge, index) in badges"
                             :key="index"
-                            class="badges__item">
+                            class="badges2__item">
                             <div class="img">
                                 <c-img :src="badge.img" />
                             </div>
@@ -88,10 +88,10 @@
                         </div>
                     </div>
                     <c-content-navigation />
-                </div>
+                </c-block>
             </div>
             <div class="col-12 margin-top-40">
-                <div class="featured-assets">
+                <c-block class="featured-assets">
                     <c-heading-bar
                         name="Featured Assets"
                         :showArrows="false"
@@ -100,10 +100,43 @@
                     <c-featured-assets />
 
                     <c-content-navigation />
-                </div>
+                </c-block>
             </div>
             <div class="col-12 margin-top-40">
-                <div class="assets">
+                <c-block title="Badges">
+                    <div class="identity-page__description margin-bottom-30">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed laoreet arcu nec tortor consectetur
+                            faucibus. Fusce consequat fermentum fermentum. Nulla semper nisi id augue lobortis, a suscipit
+                            dui feugiat. Duis feugiat dictum porta. Sed suscipit elementum accumsan. Morbi fringilla sem
+                            elit, ac elementum tellus egestas quis.
+                        </p>
+                    </div>
+                    <div>
+                        <ul class="badge-list">
+                            <li
+                                v-for="(badge, idx) in badges"
+                                :key="`badge-${idx}`"
+                                class="badge-list__item"
+                                :class="{'badge-list__item--disabled': badge.disabled}">
+                                <div class="badge-list__item-icon">
+                                    <i :class="`fas ${badge.icon}`" />
+                                </div>
+                                <div class="badge-list__item-text">
+                                    <div class="h5 font-weight-bold">
+                                        {{ badge.title }}
+                                    </div>
+                                    <p>
+                                        {{ badge.description }}
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </c-block>
+            </div>
+            <div class="col-12 margin-top-40">
+                <c-block class="assets">
                     <c-heading-bar
                         name="Assets"
                         :showArrows="false"
@@ -131,11 +164,11 @@
                     <c-assets-grid />
 
                     <c-content-navigation />
-                </div>
+                </c-block>
             </div>
 
             <div class="col-12 margin-top-40">
-                <div class="games-list">
+                <c-block class="games-list">
                     <c-heading-bar
                         name="Games"
                         :showArrows="false"
@@ -187,11 +220,11 @@
                         </div>
                     </div>
                     <c-content-navigation />
-                </div>
+                </c-block>
             </div>
 
             <div class="col-12 margin-top-40 margin-bottom-40">
-                <div class="profile__user-notify-card">
+                <c-block class="profile__user-notify-card">
                     <div>
                         <c-user-card />
                     </div>
@@ -212,57 +245,17 @@
                             Sign Up
                         </c-button>
                     </div>
-                </div>
+                </c-block>
             </div>
         </div>
         <div class="row align-items-stretch">
-            <div class="col-12 col-md-8">
-                <div class="badges">
-                    <c-heading-bar
-                        name="Badges"
-                        :showArrows="false"
-                        :showBackground="false">
-                        <div
-                            slot="additional-action"
-                            class="additional-action margin-left-20">
-                            <div class="text">
-                                Trust
-                                <i class="fas fa-hand-holding-heart" />
-                            </div>
-                            <c-button-arrows />
-                        </div>
-                        <div
-                            slot="additional-action"
-                            class="additional-action">
-                            <div class="text">
-                                Rating
-                                <i class="fas fa-trophy" />
-                            </div>
-                            <c-button-arrows />
-                        </div>
-                    </c-heading-bar>
-                    <div class="badges__list">
-                        <div
-                            v-for="(badge, index) in badges"
-                            :key="index"
-                            class="badges__item">
-                            <div class="img">
-                                <c-img :src="badge.img" />
-                            </div>
-                            <h3>{{ badge.title }}</h3>
-                            <p>{{ badge.product }}</p>
-                        </div>
-                    </div>
-                    <c-content-navigation />
-                </div>
-            </div>
             <div class="col-12 col-md-4">
-                <div class="basic-info">
+                <c-block class="basic-info">
                     <c-heading-bar
                         name="Basic Information"
                         :showArrows="false"
                         :showBackground="false" />
-                </div>
+                </c-block>
             </div>
         </div>
     </c-layout>
@@ -281,7 +274,89 @@ export default {
     },
     data() {
         return {
-            badges: [],
+            badges: [
+                {
+                    img: 'https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108',
+                    product: 'Product name',
+                    minutesPlayed: 8931,
+                    icon: 'fa-shield-alt',
+                    title: 'Duis feugiat dictum porta',
+                    description: 'Sed suscipit elementum accumsan. Morbi fringilla sem elit, ac elementum tellus egestas quis.',
+                    disabled: false
+                },
+                {
+                    img: 'https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108',
+                    product: 'Product name',
+                    minutesPlayed: 8931,
+                    icon: 'fa-leaf',
+                    title: 'Nullam in libero',
+                    description: 'Quisque ornare nisl a vestibulum feugiat. Proin nisl lorem, lacinia non mi nec, cursus sollicitudin nunc.',
+                    disabled: true
+                },
+                {
+                    img: 'https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108',
+                    product: 'Product name',
+                    minutesPlayed: 8931,
+                    icon: 'fa-crown',
+                    title: 'Proin ac tellus tempus',
+                    description: 'Nunc maximus nunc est. Nullam vulputate nisi eros, eget porta ex porta vitae.',
+                    disabled: true
+                },
+                {
+                    img: 'https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108',
+                    product: 'Product name',
+                    minutesPlayed: 8931,
+                    icon: 'fa-cannabis',
+                    title: 'Suspendisse ac lorem rutrum',
+                    description: 'Vivamus convallis, ligula id tincidunt egestas, nunc odio ultrices leo, in luctus nisi magna ut quam.',
+                    disabled: false
+                },
+                {
+                    img: 'https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108',
+                    product: 'Product name',
+                    minutesPlayed: 8931,
+                    icon: 'fa-certificate',
+                    title: 'Class aptent taciti sociosqu ad',
+                    description: 'Aliquam fringilla aliquet pellentesque. Class aptent taciti per conubia nostra, per inceptos himenaeos.',
+                    disabled: false
+                },
+                {
+                    img: 'https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108',
+                    product: 'Product name',
+                    minutesPlayed: 8931,
+                    icon: 'fa-bolt',
+                    title: 'Sed vestibulum molestie',
+                    description: 'Nulla in nibh nec urna laoreet gravida vel suscipit nulla',
+                    disabled: false
+                },
+                {
+                    img: 'https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108',
+                    product: 'Product name',
+                    minutesPlayed: 8931,
+                    icon: 'fa-award',
+                    title: 'Ut lacinia nec ante vitae cursus',
+                    description: 'Sed varius nisl vitae leo rhoncus, accumsan tincidunt orci sagittis. Donec dictum, lectus at accumsan rutrum.',
+                    disabled: true
+                },
+                {
+                    img: 'https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108',
+                    product: 'Product name',
+                    minutesPlayed: 8931,
+                    icon: 'fa-bell',
+                    title: 'Suspendisse a varius nisi',
+                    description: 'Quisque ornare nisl a vestibulum feugiat. Proin nisl lorem, lacinia non mi nec, cursus sollicitudin nunc.',
+                    disabled: true
+                },
+                {
+                    img: 'https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108',
+                    product: 'Product name',
+                    minutesPlayed: 8931,
+                    icon: 'fa-cookie',
+                    title: 'Morbi lobortis laoreet neque',
+                    description: 'Vestibulum ornare porttitor libero. Morbi lobortis laoreet neque a rhoncus.',
+                    disabled: true
+                }
+            ],
             games: []
             // badge: {
             //     img: 'https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108',
@@ -361,8 +436,6 @@ export default {
         padding: 25px 40px;
         text-align: center;
         position: relative;
-        border-radius: 5px;
-        background: rgba(28, 32, 59, .5);
         margin: 30px 0 0;
         .btn-close{
             position: absolute;
@@ -413,18 +486,69 @@ export default {
         }
     }
 
-    .badges{
+    .badge-list{
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+        margin: 0 -10px;
+        flex-wrap: wrap;
+    }
+    .badge-list__item{
+        list-style: none;
+        width: calc( 50% - 20px);
+        margin: 10px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        &--disabled{
+            .badge-list__item-icon{
+                &:after{
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    background: rgba(0, 0, 0, .6);
+                }
+            }
+            .badge-list__item-text{
+                opacity: .5;
+            }
+        }
+    }
+    .badge-list__item-icon{
+        margin-right: 20px;
+        flex-basis: 40px;
+        width: 40px;
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 21px;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, .05);
+        border: 1px solid rgba(0, 0, 0, .1);
+        position: relative;
+        overflow: hidden;
+    }
+    .badge-list__item-text{
+        width: calc( 100% - 60px )
+    }
+    .badges2{
         border-radius: 5px;
         background: rgba(28, 32, 59, .5);
         padding: 15px 15px 0 15px;
     }
-    .badges__list{
+    .badges2__list{
         display: flex;
         margin-top: 15px;
         width: 100%;
         justify-content: space-between;
     }
-    .badges__item{
+    .badges2__item{
         display: inline-block;
         text-align: center;
         width: 25%;
@@ -443,24 +567,12 @@ export default {
     }
 
     .featured-assets{
-        border-radius: 5px;
-        background: rgba(28, 32, 59, .5);
-        padding: 15px;
-        overflow: hidden;
     }
 
     .assets{
-        border-radius: 5px;
-        background: rgba(28, 32, 59, .5);
-        padding: 15px 15px 0 15px;
-        overflow: hidden;
     }
 
     .games-list{
-        border-radius: 5px;
-        background: rgba(28, 32, 59, .5);
-        padding: 15px 15px 0 15px;
-        overflow: hidden;
     }
     .games-list__grid{
         display: flex;
@@ -505,11 +617,8 @@ export default {
     }
 
     .profile__user-notify-card{
-        padding: 20px;
         text-align: center;
         position: relative;
-        border-radius: 5px;
-        background: rgba(28, 32, 59, .5);
         margin: 30px 0 0;
         display: flex;
         justify-content: space-between;
@@ -537,8 +646,5 @@ export default {
 
     .basic-info{
         height: 100%;
-        border-radius: 5px;
-        background: rgba(28, 32, 59, .5);
-        padding: 15px 15px 0 15px;
     }
 </style>
