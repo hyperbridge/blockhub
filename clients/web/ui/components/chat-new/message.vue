@@ -1,39 +1,47 @@
 <template>
     <div class="chat-message">
         <div class="chat-message__avatar">
-            <img :src="userAvatar">
+            <img :src="avatar">
         </div>
         <div class="chat-message__body">
             <div class="chat-message__info">
                 <strong>
-                    {{ userName }}
+                    {{ user.name }}
                 </strong>
                 <span>
-                    {{ time }}
+                    {{ when }}
                 </span>
             </div>
             <div
                 class="chat-message__content"
                 v-html="text" />
-            <c-emoji />
+            <!--<c-emoji />-->
         </div>
     </div>
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
+    name: 'c-chat-message',
     components: {
-        'c-emoji': () => import('~/components/emoji').then(m => m.default || m)
+        // 'c-emoji': () => import('~/components/emoji').then(m => m.default || m)
     },
     props: {
-        userAvatar: String,
-        userName: String,
+        user: Object,
         time: String,
         text: String
     },
     computed: {
         timeAgo() {
             // return this.time.fromNow();
+        },
+        when() {
+            return moment(this.time).format('DD MMMM, YYYY h:mm')
+        },
+        avatar() {
+            return this.user.avatar ? this.user.avatar : 'https://i.pravatar.cc/40?img=50'
         }
     }
 }

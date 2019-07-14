@@ -3,7 +3,8 @@
         <c-chat-user-avatar
             :name="name"
             :status="status"
-            :avatar="avatar" />
+            :avatar="avatar"
+            :number="'NUMBER'" />
         <div class="user-info">
             <strong>
                 {{ name }}
@@ -40,6 +41,7 @@
 
 <script>
 export default {
+    name: 'c-chat-user',
     components: {
         'c-chat-user-avatar': () => import('~/components/chat-new/user-avatar').then(m => m.default || m)
     },

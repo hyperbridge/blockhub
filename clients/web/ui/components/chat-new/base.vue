@@ -29,8 +29,9 @@
 
 <script>
 export default {
+    name: 'c-chat-base',
     components: {
-        'c-shortcut-sidebar': () => import('~/components/shortcut-sidebar').then(m => m.default || m)
+        // 'c-shortcut-sidebar': () => import('~/components/shortcut-sidebar').then(m => m.default || m)
     },
     props: {
         shortcuts: {
