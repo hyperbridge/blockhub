@@ -49,7 +49,9 @@
                 "autoplay": false,
                 "pagination": true,
                 "hideWelcomeModal": false,
-                "cookiePolicyAccepted": false
+                "cookiePolicyAccepted": false,
+                "sounds": false,
+                "interfaceInteractionSounds": false
             }
         },
         "currentEthereumNetwork": "local",

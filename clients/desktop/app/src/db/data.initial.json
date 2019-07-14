@@ -4,6 +4,17 @@
       "environmentMode": "production",
       "signedIn": false,
       "loading": false,
+      "settings": {
+        "client": {
+          "animations": false,
+          "autoplay": false,
+          "pagination": true,
+          "hideWelcomeModal": false,
+          "cookiePolicyAccepted": false,
+          "sounds": false,
+          "interfaceInteractionSounds": false
+        }
+      },
       "connection": {
         "auto": true,
         "internet": false,
