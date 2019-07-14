@@ -32,7 +32,10 @@ export default {
         'c-chat-user': () => import('~/components/chat-new/user').then(m => m.default || m)
     },
     props: {
-        title: String,
+        title: {
+            type: String,
+            default: null
+        },
         list: [Array, Object]
     },
     data() {

@@ -198,7 +198,10 @@ export default {
         'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m)
     },
     props: {
-        bgImage: String,
+        bgImage: {
+            type: String,
+            default: null
+        },
         overlay: {
             type: Boolean,
             default: true

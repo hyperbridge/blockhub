@@ -43,7 +43,10 @@ export default {
             type: Array,
             default: () => []
         },
-        assetsPath: String
+        assetsPath: {
+            type: String,
+            default: null
+        }
     }
 }
 </script>

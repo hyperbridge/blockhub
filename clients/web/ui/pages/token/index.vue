@@ -36,7 +36,7 @@
                     <div class="d-flex justify-content-between align-items-center padding-10">
                         <div>
                             <c-img
-                                src="../../static/img/hyperbridge-logo_brand-color-h.png"
+                                src="/img/hyperbridge-logo_brand-color-h.png"
                                 style="height: 50px"
                                 alt="Hyperbridge" />
                         </div>
@@ -1247,7 +1247,8 @@ export default {
                     nextEl: '.profile-picker .swiper-button-next',
                     prevEl: '.profile-picker .swiper-button-prev'
                 }
-            }
+            },
+            HyperBLogo: '/img/hyperbridge-logo_brand-color-h.png'
         }
 
         return result

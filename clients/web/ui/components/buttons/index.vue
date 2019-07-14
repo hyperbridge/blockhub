@@ -351,6 +351,8 @@ export default {
 
         &[disabled], &.disabled {
             background: #bfbfbf !important;
+            cursor: not-allowed;
+            pointer-events: none;
         }
 
         $opacityColor: (

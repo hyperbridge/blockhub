@@ -57,15 +57,30 @@ export default {
     },
     props: {
         item: Object,
-        isChildren: Boolean,
-        index: Number,
-        listLength: Number,
+        isChildren: {
+            type: Boolean,
+            default: null
+        },
+        index: {
+            type: Number,
+            default: 0
+        },
+        listLength: {
+            type: Number,
+            default: 5
+        },
         useComp: {
             type: String,
             default: 'c-asset'
         },
-        parentId: [Number, String],
-        hideButtons: Boolean
+        parentId: {
+            type: Number,
+            default: null
+        },
+        hideButtons: {
+            type: Boolean,
+            default: false
+        }
     },
     data() {
         return {

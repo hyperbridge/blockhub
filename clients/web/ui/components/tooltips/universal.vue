@@ -41,8 +41,14 @@ export default {
                 return ['top', 'right', 'bottom', 'left'].includes(val)
             }
         },
-        text: String,
-        title: String,
+        text: {
+            type: String,
+            default: null
+        },
+        title: {
+            type: String,
+            default: null
+        },
         theme: {
             type: String,
             default: 'light',
@@ -50,8 +56,14 @@ export default {
                 return ['light', 'dark'].includes(val)
             }
         },
-        iconHide: Boolean,
-        defaultClass: String,
+        iconHide: {
+            type: Boolean,
+            default: null
+        },
+        defaultClass: {
+            type: String,
+            default: null
+        },
         delay: {
             type: Number,
             default: 50

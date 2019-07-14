@@ -66,15 +66,30 @@ export default {
         'c-option-list-item': () => import('~/components/option-block/list-item').then(m => m.default || m)
     },
     props: {
-        image: String,
-        title: String,
-        subtitle: String,
-        notification: String,
+        image: {
+            type: String,
+            default: null
+        },
+        title: {
+            type: String,
+            default: null
+        },
+        subtitle: {
+            type: String,
+            default: null
+        },
+        notification: {
+            type: String,
+            default: null
+        },
         list: {
             type: Array,
             default: () => []
         },
-        ntfColor: String,
+        ntfColor: {
+            type: String,
+            default: null
+        },
         inWishlist: {
             type: Boolean,
             default: false

@@ -25,11 +25,26 @@
 <script>
 export default {
     props: {
-        id: Number,
-        name: String,
-        image: String,
-        currentPrice: Number,
-        count: String,
+        id: {
+            type: Number,
+            default: null
+        },
+        name: {
+            type: String,
+            default: 'Name'
+        },
+        image: {
+            type: String,
+            default: null
+        },
+        currentPrice: {
+            type: Number,
+            default: 0
+        },
+        count: {
+            type: String,
+            default: null
+        },
         isTransparent: {
             type: Boolean,
             default: false

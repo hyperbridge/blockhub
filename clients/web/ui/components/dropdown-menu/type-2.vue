@@ -22,9 +22,18 @@
 <script>
 export default {
     props: {
-        name: String,
-        id: String,
-        showBg: Boolean
+        name: {
+            type: String,
+            default: null
+        },
+        id: {
+            type: String,
+            default: null
+        },
+        showBg: {
+            type: Boolean,
+            default: false
+        }
     }
 }
 </script>
