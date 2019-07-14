@@ -51,7 +51,7 @@
         <c-simple-vote
             v-if="hovering"
             v-darklaunch="'RATINGS'"
-            :rating="rating" />
+            :votes="rating" />
     </div>
 </template>
 
@@ -73,19 +73,35 @@ export default {
         }
     },
     props: {
-        image: String,
-        description: String,
+        image: {
+            type: String,
+            default: null
+        },
+        description: {
+            type: String,
+            default: null
+        },
         rating: Object,
         funds: {
             obtained: Number,
             goal: Number
         },
-        parentImage: String,
-        parentName: String,
-        parentDeveloper: String,
+        parentImage: {
+            type: String,
+            default: null
+        },
+        parentName: {
+            type: String,
+            default: null
+        },
+        parentDeveloper: {
+            type: String,
+            default: null
+        },
         id: Number,
         customClass: {
-            type: String
+            type: String,
+            default: null
         }
     },
     data() {

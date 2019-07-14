@@ -75,7 +75,10 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
 <script>
 export default {
     props: {
-        name: String
+        name: {
+            type: String,
+            default: null
+        }
     }
 }
 </script>

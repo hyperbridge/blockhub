@@ -63,8 +63,14 @@ export default {
     },
     props: {
         id: Number,
-        title: String,
-        description: String,
+        title: {
+            type: String,
+            default: null
+        },
+        description: {
+            type: String,
+            default: null
+        },
         tags: {
             type: Array,
             default: () => []
@@ -74,7 +80,10 @@ export default {
             default: () => []
         },
         price: Number,
-        expires: String
+        expires: {
+            type: String,
+            default: null
+        }
     },
     data() {
         return {

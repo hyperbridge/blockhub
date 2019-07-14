@@ -22,9 +22,18 @@ export default {
         'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m)
     },
     props: {
-        name: String,
-        icon: String,
-        customClass: String,
+        name: {
+            type: String,
+            default: null
+        },
+        icon: {
+            type: String,
+            default: null
+        },
+        customClass: {
+            type: String,
+            default: null
+        },
         activeUp: {
             type: Boolean,
             default: undefined

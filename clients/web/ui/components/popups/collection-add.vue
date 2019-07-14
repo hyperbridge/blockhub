@@ -113,9 +113,18 @@ export default {
             type: String,
             default: 'second-info'
         },
-        image: String,
-        name: String,
-        description: String
+        image: {
+            type: String,
+            default: null
+        },
+        name: {
+            type: String,
+            default: null
+        },
+        description: {
+            type: String,
+            default: null
+        }
     },
     data() {
         return {

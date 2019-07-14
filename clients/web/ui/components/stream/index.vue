@@ -41,12 +41,30 @@
 <script>
 export default {
     props: {
-        streamGame: String,
-        streamName: String,
-        streamAvatar: String,
-        streamImg: String,
-        streamLink: String,
-        streamId: String,
+        streamGame: {
+            type: String,
+            default: null
+        },
+        streamName: {
+            type: String,
+            default: null
+        },
+        streamAvatar: {
+            type: String,
+            default: null
+        },
+        streamImg: {
+            type: String,
+            default: null
+        },
+        streamLink: {
+            type: String,
+            default: null
+        },
+        streamId: {
+            type: String,
+            default: null
+        },
         streamViews: {
             type: [String, Number],
             default: 0

@@ -12,9 +12,18 @@
 <script>
 export default {
     props: {
-        active: Boolean,
-        target: String,
-        title: String,
+        active: {
+            type: String,
+            default: false
+        },
+        target: {
+            type: String,
+            default: null
+        },
+        title: {
+            type: String,
+            default: null
+        },
         activeIcon: {
             type: String,
             default: 'heart'

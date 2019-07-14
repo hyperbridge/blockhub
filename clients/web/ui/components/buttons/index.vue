@@ -54,15 +54,30 @@ export default {
             type: String,
             default: '_self'
         },
-        icon: String,
-        iconHide: Boolean,
+        icon: {
+            type: String,
+            default: null
+        },
+        iconHide: {
+            type: String,
+            default: false
+        },
         status: {
             type: String,
             default: 'default'
         },
-        swapOrder: Boolean,
-        swapDirection: Boolean,
-        doubled: Boolean,
+        swapOrder: {
+            type: String,
+            default: false
+        },
+        swapDirection: {
+            type: String,
+            default: false
+        },
+        doubled: {
+            type: String,
+            default: false
+        },
         full: {
             type: Boolean,
             default: false

@@ -65,12 +65,18 @@ export default {
                 return ['md', 'lg'].includes(val)
             }
         },
-        resultsCount: Number,
+        resultsCount: {
+            type: Number,
+            default: null
+        },
         delay: {
             type: Number,
             default: 250
         },
-        results: Array
+        results: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {

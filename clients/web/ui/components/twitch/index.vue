@@ -31,9 +31,18 @@ export default {
             type: Boolean,
             default: false
         },
-        channel: String,
-        collection: String,
-        video: String
+        channel: {
+            type: String,
+            default: null
+        },
+        collection: {
+            type: String,
+            default: null
+        },
+        video: {
+            type: String,
+            default: null
+        }
     },
     watch: {
         channel(newChannel) {
