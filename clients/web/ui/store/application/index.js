@@ -304,12 +304,10 @@ export const mutations = {
             account[prop] = { ...account[prop], [id]: true }
         }
     },
-    updateEnvironmentMode(state, payload) {
+    async updateEnvironmentMode(state, payload) {
         state.environmentMode = payload
 
-        Bridge.sendCommand('setEnvironmentMode', payload).then(data => {
-
-        })
+        await this.$desktop.sendCommand('setEnvironmentMode', payload)
     },
     createTradeUrl(state, id) {
         state.account.tradeLinkId = id
