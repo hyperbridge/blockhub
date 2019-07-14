@@ -142,7 +142,7 @@
                     </button>
                     <ul>
                         <li
-                            v-if="desktopMode && !signedIn && !isLocked"
+                            v-if="!signedIn && !isLocked"
                             class="app-header__create-account-btn">
                             <c-button
                                 status="none"
