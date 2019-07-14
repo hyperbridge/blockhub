@@ -28,11 +28,10 @@
                         <c-tabs
                             :activeTabProp="currentStep"
                             :lockedStep="finishedStep"
-                            tabText="Step"
+                            :tabNames="['Step 1', 'Step 2', 'Step 3']"
                             styled
                             @click="changeTab($event)">
-                            <c-tab
-                                :tabId="1"
+                            <c-tab :tabId="1"
                                 :selected="true"
                                 :showFooter="true">
                                 <div class="tab-container">
@@ -73,24 +72,14 @@
                                                 </div>
                                             </div>
                                             <div class="col">
-                                                <div class="input-group">
-                                                    <label class="sr-only">Birthday</label>
-                                                    <c-datepicker
-                                                        v-model="account.birthday"
-                                                        placeholder="Birthday"
-                                                        input-class="form-control form-calendar__text"
-                                                        name="birthday"
-                                                        calendar-class="form-calendar"
-                                                        minimumView="day"
-                                                        maximumView="year"
-                                                        initialView="year"
-                                                        :format="customBirthdayFormatter" />
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">
-                                                            <i class="fas fa-calendar-alt" />
-                                                        </span>
-                                                    </div>
-                                                </div>
+                                                <c-datepicker placeholder="Birthday"
+                                                              name="birthday"
+                                                              calendar-class="form-calendar"
+                                                              minimumView="day"
+                                                              maximumView="year"
+                                                              initialView="year"
+                                                              :format="customBirthdayFormatter">
+                                                </c-datepicker>
                                             </div>
                                         </div>
                                     </div>
@@ -135,8 +124,7 @@
                                     </div>
                                 </div>
                             </c-tab>
-                            <c-tab
-                                :tabId="2"
+                            <c-tab :tabId="2"
                                 :showFooter="true">
                                 <div class="tab-container">
                                     <div
@@ -410,6 +398,7 @@ import moment from 'moment'
 
 export default {
     components: {
+        'c-datepicker': () => import('~/components/datepicker').then(m => m.default || m),
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         'c-privacy-block': () => import('~/components/privacy-block').then(m => m.default || m),
         'c-terms-block': () => import('~/components/terms-block').then(m => m.default || m),
@@ -649,6 +638,7 @@ export default {
 
 
 <style lang="scss" scoped>
+
     .tab-card {
         background: #383853;
         border-radius: 5px;

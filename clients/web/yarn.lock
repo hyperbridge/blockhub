@@ -796,6 +796,13 @@
     lodash "^4.17.10"
     radix-router "^3.0.1"
 
+"@hokify/vuejs-datepicker@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@hokify/vuejs-datepicker/-/vuejs-datepicker-2.0.2.tgz#17c747feb69696a70e224be450d48e9ea00f0160"
+  integrity sha512-IhZ6tDu29t2iIFUIfTFB/D0bjNNW5KoSszP2pI12Crs+AGYSaQCerSC0oF6TT+2Pvlahvesb2LcPSyVMoXb5Mg==
+  dependencies:
+    moment "^2.24.0"
+
 "@jimp/bmp@^0.6.4":
   version "0.6.4"
   resolved "https://registry.yarnpkg.com/@jimp/bmp/-/bmp-0.6.4.tgz#0f4b94486e979d82c83e1e87cd00b756afb26e49"
@@ -10983,11 +10990,6 @@ vue@^2.4.2, vue@^2.5.11, vue@^2.6.10:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
-
-vuejs-datepicker@^1.5.3:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/vuejs-datepicker/-/vuejs-datepicker-1.6.2.tgz#83c1e8fd4108e7f1d01c061a7e344918f25e47ae"
-  integrity sha512-PkC4vxzFBo7i6FSCUAJfnaWOx6VkKbOqxijSGHHlWxh8FIUKEZVtFychkonVWtK3iwWfhmYtqHcwsmgxefLpLQ==
 
 vuex-i18n@^1.11.0:
   version "1.11.0"
