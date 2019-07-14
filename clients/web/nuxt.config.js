@@ -81,6 +81,7 @@ export default {
         { src: '~/plugins/vue-inputmask', ssr: false },
         { src: '~/plugins/vue2-editor', ssr: false },
         { src: '~/plugins/vue-upload-component', ssr: false },
+        { src: '~/plugins/vue-datepicker', ssr: false },
         { src: '~/plugins/autosize', ssr: false },
         { src: '~/plugins/jquery', ssr: false },
         { src: '~/plugins/summernote', ssr: false },

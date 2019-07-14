@@ -71,14 +71,24 @@
                                                 </div>
                                             </div>
                                             <div class="col">
-                                                <c-datepicker placeholder="Birthday"
-                                                              name="birthday"
-                                                              calendar-class="form-calendar"
-                                                              minimumView="day"
-                                                              maximumView="year"
-                                                              initialView="year"
-                                                              :format="customBirthdayFormatter">
-                                                </c-datepicker>
+                                                <div class="input-group">
+                                                    <label class="sr-only">Birthday</label>
+                                                    <c-datepicker
+                                                        v-model="account.birthday"
+                                                        placeholder="Birthday"
+                                                        input-class="form-control form-calendar__text"
+                                                        name="birthday"
+                                                        calendar-class="form-calendar"
+                                                        minimumView="day"
+                                                        maximumView="year"
+                                                        initialView="year"
+                                                        :format="customBirthdayFormatter" />
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-calendar-alt" />
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -397,7 +407,6 @@ import moment from 'moment'
 
 export default {
     components: {
-        'c-datepicker': () => import('~/components/datepicker').then(m => m.default || m),
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         'c-privacy-block': () => import('~/components/privacy-block').then(m => m.default || m),
         'c-terms-block': () => import('~/components/terms-block').then(m => m.default || m),

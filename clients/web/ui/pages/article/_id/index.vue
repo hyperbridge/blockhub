@@ -229,9 +229,6 @@ export default {
             ]
         }
     },
-    components: {
-        'c-datepicker': () => import('@hokify/vuejs-datepicker').then(m => m.default || m)
-    },
     data() {
         return {
             date: '2019-02-04T22:07:00.000Z',

@@ -141,8 +141,7 @@ import moment from 'moment'
 
 export default {
     components: {
-        'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-datepicker': () => import('@hokify/vuejs-datepicker').then(m => m.default || m)
+        'c-popup': () => import('~/components/popups').then(m => m.default || m)
     },
     props: ['activated'],
     data() {
