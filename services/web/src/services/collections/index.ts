@@ -14,11 +14,14 @@ export default function (app): any {
             ...paginate
         },
         upsertGraphOptions: {
-            relate: true
+            relate: true,
+            unrelate: true,
+            update: true,
+            noDelete: ['owner']
         },
         createUseUpsertGraph: true,
         allowedInsert: '[owner]',
-        allowedEager: '[owner]',
+        allowedEager: '[owner, owner.^]',
         allowedUpsert: '[owner]'
     }
 

@@ -28,13 +28,16 @@ const create = function (options = {}): any {
 
         console.log('Collection creation request: ', data)
 
-        const { name, value, meta } = context.data
+        const { name, value, meta, owner } = context.data
 
         // Override the original data (so that people can't submit additional stuff)
         context.data = {
             name,
             value,
-            meta
+            meta,
+            owner: {
+                id: owner.id
+            }
         }
 
         return context

@@ -1,7 +1,7 @@
 <template>
     <c-basic-popup
-        :activated="activated && $store.state.application.signedIn"
-        @close="activated = false">
+        :activated="activated"
+        @close="close">
         <template slot="body">
             <div class="item-info">
                 <div
@@ -123,8 +123,13 @@ export default {
             collections: [],
             createForm: false,
             createCollectionRequest: {
-                name: ''
-                // meta: {}
+                name: '',
+                meta: {
+                    author: 'Yvenide Belizaire',
+                    background: null,
+                    assets: [],
+                    estimatedValue: 0
+                }
             }
         }
     },
@@ -136,31 +141,36 @@ export default {
             return this.collections
         }
     },
-    watch: {
-        async activated(oldVal, newVal) {
-            if (!newVal) return
-
-            if (!this.$store.state.application.signedIn) {
-                this.$store.commit('application/activateModal', 'login')
-                return
-            }
-
-            this.collections = await this.$store.dispatch('collections/find', {
-                query: {
-                    'owner.id': this.$store.state.currentProfile.id,
-                    $eager: '[owner]'
-                }
-            })
-        }
+    async created() {
+        this.fetchCollections()
     },
     methods: {
+        close() {
+            this.activated = false
+            this.$store.commit('application/activeModal', null)
+        },
+        async fetchCollections() {
+            this.collections = (await this.$store.dispatch('collections/find', {
+                query: {
+                    'owner.id': this.$store.state.application.activeProfile.id,
+                    '$joinRelation': '[owner]',
+                    '$eager': '[owner]'
+                }
+            })).data
+        },
         async addCollection(collection) {
             this.createForm = false
+
+            collection.owner = this.$store.state.application.activeProfile
+
             await this.$store.dispatch('collections/create', [collection, {
                 query: {
-                    $eager: '[owner]'
+                    '$joinRelation': '[owner]',
+                    '$eager': '[owner]'
                 }
             }])
+
+            await this.fetchCollections()
         },
         async updateResource(collection, resource, value) {
             // TODO: finish this
