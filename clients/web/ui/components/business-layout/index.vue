@@ -148,7 +148,10 @@ export default {
             type: Boolean,
             default: false
         },
-        title: String
+        title: {
+            type: String,
+            default: null
+        }
     },
     data() {
         return {
@@ -295,7 +298,7 @@ export default {
     },
     computed: {
         activeProfile() {
-            return this.$store.state.application.account && this.$store.state.application.activeProfile
+            return this.$store.state.application.activeProfile
         }
     },
     watch: {

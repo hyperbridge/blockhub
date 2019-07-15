@@ -114,14 +114,14 @@
                     v-if="!isViewing"
                     class="remove-btn btn btn-secondary btn-block btn--icon btn--icon-left"
                     @click="clickRemove()">
-                    <c-img src="/static/img/remove-btn.png" />
+                    <img src="/img/remove-btn.png" />
                     <p><span class="fa fa-trash" /> Remove</p>
                 </button>
                 <button
                     v-if="!isViewing"
                     class="publish-btn btn btn-secondary btn-block btn--icon btn--icon-left"
                     @click="clickPublish()">
-                    <c-img src="/static/img/publish-btn.png" />
+                    <img src="/img/publish-btn.png" />
                     <p><span class="fa fa-check" /> Publish</p>
                 </button>
                 <button
@@ -142,7 +142,7 @@
                     </button>
                     <ul>
                         <li
-                            v-if="desktopMode && !signedIn && !isLocked"
+                            v-if="!signedIn && !isLocked"
                             class="app-header__create-account-btn">
                             <c-button
                                 status="none"
@@ -258,7 +258,7 @@
                             <button
                                 class="edit-btn btn btn-secondary btn-block btn--icon btn--icon-left"
                                 @click="clickEdit">
-                                <c-img src="/static/img/edit-btn.png" />
+                                <img src="/img/edit-btn.png" />
                                 <p><span class="fa fa-edit" />Edit</p>
                             </button>
                         </li>
@@ -383,7 +383,7 @@
                         <li v-if="!signedIn && !isLocked">
                             <c-button
                                 status="none"
-                                @click="$store.commit('application/activateModal', 'login')">
+                                @click="$store.commit('application/activeModal', 'login')">
                                 <span class="icon fa fa-sign-out-alt" />
                                 <span class="text">Sign In</span>
                             </c-button>

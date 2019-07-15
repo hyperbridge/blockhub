@@ -72,7 +72,10 @@ export default {
         'c-progress-bar': () => import('~/components/progress-bar/').then(m => m.default || m)
     },
     props: {
-        labelIcon: String,
+        labelIcon: {
+            type: String,
+            default: null
+        },
         totalAchievements: {
             type: [String, Number],
             default: 1

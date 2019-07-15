@@ -99,7 +99,7 @@ export default {
         }
     },
     mounted() {
-        this.$store.commit('application/activateModal', 'login')
+        this.$store.commit('application/activeModal', 'login')
     },
     methods: {
         signIn() {

@@ -105,7 +105,7 @@
                         status="dark"
                         size="md"
                         full
-                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                        @click="$store.commit('application/activeModal', 'coming-soon')">
                         Open in Discord
                     </c-button>
                     <c-button
@@ -113,7 +113,7 @@
                         status="dark"
                         size="md"
                         full
-                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                        @click="$store.commit('application/activeModal', 'coming-soon')">
                         Open in Twitch
                     </c-button>
                     <c-button
@@ -121,7 +121,7 @@
                         status="dark"
                         size="md"
                         full
-                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                        @click="$store.commit('application/activeModal', 'coming-soon')">
                         Open in YouTube
                     </c-button>
                     <c-button
@@ -129,7 +129,7 @@
                         status="dark"
                         size="md"
                         full
-                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                        @click="$store.commit('application/activeModal', 'coming-soon')">
                         Open in BlockHub
                     </c-button>
                 </div>
@@ -430,11 +430,11 @@ export default {
         }
     },
     mounted() {
-        // this.$store.commit('application/activateModal', 'please-vote');
+        // this.$store.commit('application/activeModal', 'please-vote');
     },
     methods: {
         showPurchaseModal() {
-            this.$store.dispatch('application/activateModal', 'purchase')
+            this.$store.dispatch('application/activeModal', 'purchase')
         },
         showArrowsState(el, count) {
             if (el.length > count) {

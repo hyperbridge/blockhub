@@ -122,7 +122,7 @@ export default {
             }
 
             this.$store.dispatch('application/setEditorMode', 'viewing')
-            // this.$store.commit('application/activateModal', null)
+            // this.$store.commit('application/activeModal', null)
 
             if (this.soundEnabled) {
                 const sound = new Howl({
@@ -351,6 +351,8 @@ export default {
 
         &[disabled], &.disabled {
             background: #bfbfbf !important;
+            cursor: not-allowed;
+            pointer-events: none;
         }
 
         $opacityColor: (

@@ -12,7 +12,7 @@
             </div>
             <c-button
                 status="outline-white"
-                @click="$store.commit('application/activateModal', 'register')">
+                @click="$store.commit('application/activeModal', 'register')">
                 Sign Up
             </c-button>
         </div>

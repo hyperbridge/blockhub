@@ -2,11 +2,6 @@
     <div
         id="chat"
         class="flex flex-column">
-        <header class="title-bar flex flex-row flex-center">
-            <div class="title-wrapper block center-element">
-                <span class="title">Chat</span>
-            </div>
-        </header>
         <div class="col-12">
             <c-chat-base style="height: 700px" :channelInfo="channelIfo">
                 <template slot="sidebar">

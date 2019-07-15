@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="chat">
+    <c-layout :showLeftPanel="false" :showRightPanel="false">
         <c-chat :messages="messages" />
     </c-layout>
 </template>

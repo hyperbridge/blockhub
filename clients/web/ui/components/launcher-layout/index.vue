@@ -161,7 +161,7 @@
                             </c-dropdown>
                         </li>
                         <li v-if="!signedIn && !isLocked">
-                            <nuxt-link @click="$store.commit('application/activateModal', 'login')">
+                            <nuxt-link @click="$store.commit('application/activeModal', 'login')">
                                 Sign In
                             </nuxt-link>
                         </li>
@@ -198,7 +198,10 @@ export default {
         'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m)
     },
     props: {
-        bgImage: String,
+        bgImage: {
+            type: String,
+            default: null
+        },
         overlay: {
             type: Boolean,
             default: true

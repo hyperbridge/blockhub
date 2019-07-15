@@ -143,11 +143,26 @@ export default {
         'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m)
     },
     props: {
-        hardCap: [Number, String],
-        softCap: [Number, String],
-        volume: [Number, String],
-        soldDollar: [Number, String],
-        soldTokens: [Number, String]
+        hardCap: {
+            type: Number,
+            default: 0
+        },
+        softCap: {
+            type: Number,
+            default: 0
+        },
+        volume: {
+            type: Number,
+            default: 0
+        },
+        soldDollar: {
+            type: Number,
+            default: 0
+        },
+        soldTokens: {
+            type: Number,
+            default: 0
+        }
     },
     computed: {
         percentProgress() {

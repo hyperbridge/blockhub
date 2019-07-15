@@ -27,7 +27,8 @@ export default {
     },
     props: {
         index: {
-            type: Number
+            type: Number,
+            default: 0
         },
         text: {
             type: String,
@@ -89,7 +90,10 @@ export default {
             type: Boolean,
             default: false
         },
-        percent: [String, Number]
+        percent: {
+            type: [String, Number],
+            default: null
+        }
     },
     data() {
         return {

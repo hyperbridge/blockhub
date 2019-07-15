@@ -46,7 +46,7 @@
                                 icon="plus"
                                 class="margin-top-20"
                                 style="margin-right: auto"
-                                @click="$store.commit('application/activateModal', 'new-discussion')">
+                                @click="$store.commit('application/activeModal', 'new-discussion')">
                                 New discussion
                             </c-button>
                         </div>

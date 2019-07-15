@@ -114,7 +114,7 @@ export const actions = {
 
         store.commit('updateState', localState)
     },
-    activateModal(store, payload) {
+    activeModal(store, payload) {
         if (payload) {
             if (process.client) {
                 window.ga('send', 'event', 'Modal', 'Show Modal', 'Show Modal', payload, { 'NonInteraction': 1 })
@@ -123,12 +123,12 @@ export const actions = {
 
         if (store.state.desktopMode) {
             if (store.state.signedIn) {
-                store.commit('activateModal', payload)
+                store.commit('activeModal', payload)
             } else {
-                store.commit('activateModal', 'login')
+                store.commit('activeModal', 'login')
             }
         } else {
-            store.commit('activateModal', 'welcome')
+            store.commit('activeModal', 'welcome')
         }
     },
     async login(store, payload) {
@@ -161,7 +161,7 @@ export const actions = {
         store.commit('setEditorMode', payload)
 
         // if (!store.state.settings.client.hideEditorWelcomeModal) {
-        //     store.commit('activateModal', 'editor-welcome')
+        //     store.commit('activeModal', 'editor-welcome')
         // }
     },
     // unlockAccount(store, payload) {
@@ -304,12 +304,10 @@ export const mutations = {
             account[prop] = { ...account[prop], [id]: true }
         }
     },
-    updateEnvironmentMode(state, payload) {
+    async updateEnvironmentMode(state, payload) {
         state.environmentMode = payload
 
-        Bridge.sendCommand('setEnvironmentMode', payload).then(data => {
-
-        })
+        await this.$desktop.sendCommand('setEnvironmentMode', payload)
     },
     createTradeUrl(state, id) {
         state.account.tradeLinkId = id
@@ -386,7 +384,8 @@ export const mutations = {
                 console.log('An error occurred. Please check your input or try again later.')
             })
     },
-    activateModal(state, payload) {
+    activeModal(state, payload) {
+        console.log('[BlockHub] Activating modal:', payload)
         state.activeModal = payload
     },
     convertCurator(state, payload) {

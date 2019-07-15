@@ -9,13 +9,13 @@
                 status="second-info"
                 class="mb-4 mt-2"
                 size="lg"
-                @click="$store.commit('application/activateModal', 'login')">
+                @click="$store.commit('application/activeModal', 'login')">
                 Sign In
             </c-button>
             <p>
                 or <c-button
                     status="underline"
-                    @click="$store.commit('application/activateModal', 'register')">
+                    @click="$store.commit('application/activeModal', 'register')">
                     sign up
                 </c-button> and join BlockHub for free
             </p>

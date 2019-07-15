@@ -15,7 +15,6 @@ export const data = [
                 4,
                 5
             ],
-            updates: '2018-07-24T04:09:00.000Z',
             estimatedValue: 34562
         }
     }

@@ -47,12 +47,30 @@
 export default {
     name: 'PurchaseOption',
     props: {
-        price: String,
-        oldPrice: String,
-        img: String,
-        gameTag: String,
-        title: String,
-        id: Number,
+        price: {
+            type: String,
+            default: null
+        },
+        oldPrice: {
+            type: String,
+            default: null
+        },
+        img: {
+            type: String,
+            default: null
+        },
+        gameTag: {
+            type: String,
+            default: null
+        },
+        title: {
+            type: String,
+            default: null
+        },
+        id: {
+            type: Number,
+            default: null
+        },
         inList: {
             type: Boolean,
             default: false

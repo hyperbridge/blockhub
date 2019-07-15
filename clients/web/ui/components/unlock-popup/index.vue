@@ -18,17 +18,17 @@
                                 <h3>Password</h3>
                                 <label class="sr-only">Password</label>
                                 <input
-                                    ref="password"
+                                    class="form-control"
                                     v-focus
+                                    ref="password"
                                     type="password"
                                     name="password"
                                     placeholder="Password"
-                                    class="form-control"
                                     @keyup.enter="unlock()">
                                 <br>
                                 <c-button
-                                    ref="submit"
-                                    class="button--lg"
+                                    :class="{'wrong': wrongPassword}"
+                                    class="c-button--lg"
                                     @click="unlock()">
                                     Unlock
                                 </c-button>
@@ -142,12 +142,13 @@ import moment from 'moment'
 export default {
     components: {
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-datepicker': () => import('vuejs-datepicker').then(m => m.default || m)
+        'c-datepicker': () => import('@hokify/vuejs-datepicker').then(m => m.default || m)
     },
     props: ['activated'],
     data() {
         return {
             recovery: false,
+            wrongPassword: false,
             password: null,
             secretAnswer1: null,
             birthday: null,
@@ -159,50 +160,51 @@ export default {
             if (!DB.store.data[0].application.account.secretQuestion1) return 'Secret question not found'
 
             const expanded = {}
-            expanded.lastName_first_kissed = 'What is the first name of the person you first kissed?'
-            expanded.firstName_favorite_aunt_uncle = 'What is the first name of the your favorite aunt or uncle?'
+            expanded['last_name_first_kissed'] = 'What is the first name of the person you first kissed?'
+            expanded['first_name_favorite_aunt_uncle'] = 'What is the first name of the your favorite aunt or uncle?'
             expanded['favorite_high_school_teacher'] = 'What is the last name of your favorite teacher in high school?'
-            expanded.lastName_teacher_failing_grade = 'What is the last name of the teacher who gave you your first failing grade?'
+            expanded['last_name_teacher_failing_grade'] = 'What is the last name of the teacher who gave you your first failing grade?'
             expanded['wedding_reception'] = 'What is the name of the plac eyour wedding reception was held?'
             expanded['city_sibling_live'] = 'In what city or town does your nearest sibling live?'
 
             return expanded[DB.store.data[0].application.account.secretQuestion1]
         }
     },
-    created() {
+    mounted() {
+        const self = this
         this.$desktop.on('promptPasswordRequest', data => {
-            if (data.error) {
-                this.$(this.$refs.submit.$el).addClass('wrong')
+            if (!data.error) return
 
-                setTimeout(() => {
-                    this.$(this.$refs.submit.$el).removeClass('wrong')
-                }, 350)
-            }
+            self.wrongPassword = true
+
+            setTimeout(() => {
+                self.wrongPassword = true
+            }, 350)
         })
     },
     methods: {
         unlock() {
-            this.$(this.$refs.submit.$el).removeClass('wrong')
+            this.wrongPassword = false
 
             this.$desktop.resolvePromptPasswordRequest(this.$refs.password.value)
         },
-        recoverPassword() {
+        async recoverPassword() {
             this.recoveryError = null
 
-            this.$desktop.sendCommand('recoverPasswordRequest', {
+            const data = await this.$desktop.sendCommand('recoverPasswordRequest', {
                 secretQuestion1: this.secretQuestion1,
                 secretAnswer1: this.secretAnswer1.toLowerCase(),
                 birthday: moment(this.birthday).format('DD-MM-YYYY')
-            }).then(data => {
-                if (data.error) {
-                    this.recoveryError = data.error.message
-
-                    return
-                }
-
-                this.recoveryError = null
-                this.password = data.password
             })
+
+            if (data.error) {
+                this.recoveryError = data.error.message
+
+                return
+            }
+
+            this.recoveryError = null
+            this.password = data.password
         },
         customBirthdayFormatter(date) {
             return moment(date).format('DD-MM-YYYY')
@@ -239,14 +241,14 @@ export default {
             box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
             background: #303049;
         }
-        .button {
+        .c-button--lg {
             border: 2px solid transparent;
 
             &.wrong {
                 position: relative;
                 left: 0;
                 border-color: #ed1c24;
-                animation: wrong-log 0.3s;
+                animation: wrong-log 0.3s !important;
             }
         }
     }

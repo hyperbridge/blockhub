@@ -64,9 +64,18 @@ export default {
             type: Array,
             default: () => []
         },
-        communityPath: String,
-        editing: Boolean,
-        activateElement: Boolean
+        communityPath: {
+            type: String,
+            default: null
+        },
+        editing: {
+            type: Boolean,
+            default: false
+        },
+        activateElement: {
+            type: Boolean,
+            default: false
+        }
     }
 }
 </script>

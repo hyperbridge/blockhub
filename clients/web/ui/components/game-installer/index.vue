@@ -125,11 +125,26 @@ export default {
             type: String,
             default: '500'
         },
-        name: String,
-        mac: Boolean,
-        win: Boolean,
-        linux: Boolean,
-        img: String,
+        name: {
+            type: String,
+            default: null
+        },
+        mac: {
+            type: Boolean,
+            default: true
+        },
+        win: {
+            type: Boolean,
+            default: true
+        },
+        linux: {
+            type: Boolean,
+            default: true
+        },
+        img: {
+            type: String,
+            default: null
+        },
         filesList: {
             type: Array,
             default: () => []

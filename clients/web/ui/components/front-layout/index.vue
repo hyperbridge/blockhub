@@ -172,12 +172,12 @@
                     :activated="$store.state.application.activeModal === 'mission-control'"
                     @close="$store.state.application.activeModal = null" />
                 <c-popup-collection-add
-                    v-if="$store.state.application.activeModal === 'collection-add'"
-                    :activated="$store.state.application.activeModal === 'collection-add'"
-                    :image="$store.state.marketplace.activeCollectionModal.image"
-                    :name="$store.state.marketplace.activeCollectionModal.name"
-                    :description="$store.state.marketplace.activeCollectionModal.description"
-                    :collections="$store.state.marketplace.activeCollectionModal.collections"
+                    v-if="$store.state.application.activeModal === 'add-collection'"
+                    :activated="$store.state.application.activeModal === 'add-collection'"
+                    :image="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.image"
+                    :name="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.name"
+                    :description="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.description"
+                    :collections="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.collections"
                     @close="$store.state.application.activeModal = null" />
 
                 <c-basic-popup
@@ -412,7 +412,7 @@
                 <!--propose-idea popup-->
                 <c-basic-popup
                     :activated="$store.state.application.activeModal === 'propose-idea'"
-                    @close="$store.commit('application/activateModal', null)">
+                    @close="$store.commit('application/activeModal', null)">
                     <div
                         slot="header"
                         class="h4">
@@ -699,10 +699,6 @@
                     </p>
                 </c-basic-popup>
 
-                <c-popup-collection-add
-                    :activated="$store.state.application.activeModal === 'add-collection'"
-                    :collections="collections" />
-
                 <!--create article popup-->
                 <c-basic-popup
                     :activated="$store.state.application.activeModal === 'create-article'"
@@ -858,7 +854,7 @@
 
                 <div
                     class="status-bar"
-                    @click="$store.commit('application/activateModal', 'connection-status')">
+                    @click="$store.commit('application/activeModal', 'connection-status')">
                     <c-status-dot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" />
                     OK
                 </div>
@@ -1386,7 +1382,7 @@ export default {
                 this.$store.commit('application/entry', { key: 'report', value: JSON.stringify(cmd), user: this.$store.state.application.account.address })
             }
 
-            this.$store.commit('application/activateModal', null)
+            this.$store.commit('application/activeModal', null)
         },
         scrollSidebarDown() {
             this.$('#scroll_sidebar').animate({ scrollTop: '+=100', duration: '150' })
@@ -2106,7 +2102,7 @@ export default {
 
     @media (max-width: 1200px) {
         .page .page__content{
-            padding-top: 50px!important;
+            padding-top: 100px!important;
         }
         .right-sidebar,
         .left-sidebar{

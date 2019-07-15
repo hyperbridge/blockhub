@@ -34,11 +34,26 @@
 export default {
     props: {
         id: Number,
-        price: [Number, String],
-        sold: [Number, String],
-        left: [Number, String],
-        tag: String,
-        title: String,
+        price: {
+            type: Number,
+            default: 0
+        },
+        sold: {
+            type: Number,
+            default: 0
+        },
+        left: {
+            type: Number,
+            default: 0
+        },
+        tag: {
+            type: String,
+            default: null
+        },
+        title: {
+            type: String,
+            default: null
+        },
         inList: {
             type: Boolean,
             default: false
@@ -46,7 +61,7 @@ export default {
     },
     methods: {
         purchase() {
-            this.$store.commit('application/activateModal', 'project-participate')
+            this.$store.commit('application/activeModal', 'project-participate')
         }
     }
 }

@@ -29,7 +29,10 @@ export default {
         'c-list': () => import('~/components/list').then(m => m.default || m)
     },
     props: {
-        title: String,
+        title: {
+            type: String,
+            default: null
+        },
         items: {
             type: Array,
             default: () => []

@@ -1,6 +1,7 @@
 <template>
     <c-layout
         navigationKey="account"
+        :breadcrumbLinks="breadcrumbLinks"
         :showLeftPanel="false"
         :showRightPanel="false"
         :showShortcuts="false">
@@ -27,11 +28,10 @@
                         <c-tabs
                             :activeTabProp="currentStep"
                             :lockedStep="finishedStep"
-                            tabText="Step"
+                            :tabNames="['Step 1', 'Step 2', 'Step 3']"
                             styled
                             @click="changeTab($event)">
-                            <c-tab
-                                :tabId="1"
+                            <c-tab :tabId="1"
                                 :selected="true"
                                 :showFooter="true">
                                 <div class="tab-container">
@@ -72,24 +72,14 @@
                                                 </div>
                                             </div>
                                             <div class="col">
-                                                <div class="input-group">
-                                                    <label class="sr-only">Birthday</label>
-                                                    <c-datepicker
-                                                        v-model="account.birthday"
-                                                        placeholder="Birthday"
-                                                        input-class="form-control form-calendar__text"
-                                                        name="birthday"
-                                                        calendar-class="form-calendar"
-                                                        minimumView="day"
-                                                        maximumView="year"
-                                                        initialView="year"
-                                                        :format="customBirthdayFormatter" />
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">
-                                                            <i class="fas fa-calendar-alt" />
-                                                        </span>
-                                                    </div>
-                                                </div>
+                                                <c-datepicker placeholder="Birthday"
+                                                              name="birthday"
+                                                              calendar-class="form-calendar"
+                                                              minimumView="day"
+                                                              maximumView="year"
+                                                              initialView="year"
+                                                              :format="customBirthdayFormatter">
+                                                </c-datepicker>
                                             </div>
                                         </div>
                                     </div>
@@ -116,7 +106,7 @@
                                             </c-button> and
                                             <c-button
                                                 status="plain"
-                                                @click="privacy_policy = true">
+                                                @click="privacyPolicy = true">
                                                 privacy policy
                                             </c-button>
                                         </template>
@@ -134,8 +124,7 @@
                                     </div>
                                 </div>
                             </c-tab>
-                            <c-tab
-                                :tabId="2"
+                            <c-tab :tabId="2"
                                 :showFooter="true">
                                 <div class="tab-container">
                                     <div
@@ -237,11 +226,11 @@
                                                 <div class="form-group">
                                                     <label class="sr-only">Repeat Password</label>
                                                     <input
-                                                        v-model="account.repeat_password"
+                                                        v-model="account.repeatPassword"
                                                         type="password"
                                                         class="form-control"
                                                         placeholder="Password again"
-                                                        name="repeat_password">
+                                                        name="repeatPassword">
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -386,17 +375,17 @@
             :activated="terms"
             width="800"
             @close="terms = false">
-            <div class="scroll_block">
+            <div class="scroll-block">
                 <c-terms-block />
             </div>
         </c-popup>
 
         <c-popup
             title="Privacy policy"
-            :activated="privacy_policy"
+            :activated="privacyPolicy"
             width="800"
-            @close="privacy_policy = false">
-            <div class="scroll_block">
+            @close="privacyPolicy = false">
+            <div class="scroll-block">
                 <c-privacy-block />
             </div>
         </c-popup>
@@ -409,7 +398,7 @@ import moment from 'moment'
 
 export default {
     components: {
-        'c-datepicker': () => import('vuejs-datepicker').then(m => m.default || m),
+        'c-datepicker': () => import('~/components/datepicker').then(m => m.default || m),
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         'c-privacy-block': () => import('~/components/privacy-block').then(m => m.default || m),
         'c-terms-block': () => import('~/components/terms-block').then(m => m.default || m),
@@ -433,7 +422,7 @@ export default {
                 birthday: '',
                 email: '',
                 password: '',
-                repeat_password: '',
+                repeatPassword: '',
                 secretQuestion1: '',
                 secretQuestion2: '',
                 secretAnswer1: '',
@@ -445,7 +434,7 @@ export default {
                 // birthday: '26 Mar 1952',
                 // email: 'eric@muyser.com',
                 // password: '1234',
-                // repeat_password: '1234',
+                // repeatPassword: '1234',
                 // secretQuestion1: 'first_name_favorite_aunt_uncle',
                 // secretQuestion2: 'first_name_favorite_aunt_uncle',
                 // secretAnswer1: 'larry',
@@ -454,7 +443,7 @@ export default {
 
                 newsletter: true,
                 passphrase: null,
-                repeat_passphrase: null,
+                repeatPassphrase: null,
                 encryptPassphrase: true,
                 profile: {
                     name: '',
@@ -463,14 +452,32 @@ export default {
                 }
             },
             terms: false,
-            privacy_policy: false
+            privacyPolicy: false
+        }
+    },
+    head() {
+        return {
+            title: `Sign Up | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub Sign Up` },
+                { hid: 'keywords', name: 'keywords', content: 'blockhub, sign up, blockchain, game, indie, developer' }
+            ]
+        }
+    },
+    async asyncData({ params, store, error }) {
+        return {
+            breadcrumbLinks: [
+                { to: { path: '/' }, title: 'Home' },
+                { to: { path: `/account` }, title: 'Account' },
+                { to: { path: `/account/signup` }, title: 'Sign Up' }
+            ]
         }
     },
     created() {
-        this.$store.commit('application/activateModal', 'register')
+        this.$store.commit('application/activeModal', 'register')
     },
     methods: {
-        checkForm() {
+        async checkForm() {
             this.errors = []
 
             if (this.currentStep === 1) {
@@ -481,18 +488,18 @@ export default {
                     this.account.birthday &&
                     this.account.agreement
                 ) {
-                    Bridge.getPassphraseRequest({
+                    const res = await this.$desktop.getPassphraseRequest({
                         seed: 13891737193 // TODO:  remove hardcode. should derived from input data + mouse movement
-                    }).then(res => {
-                        this.passphrase = res.split(' ')
-                        this.repeatPassphrase = res.split(' ')
-                        // this.repeatPassphrase[2] = ''
-                        // this.repeatPassphrase[4] = ''
-                        // this.repeatPassphrase[8] = ''
-
-                        this.finishedStep = 1
-                        this.currentStep = 2
                     })
+
+                    this.passphrase = res.split(' ')
+                    this.repeatPassphrase = res.split(' ')
+                    // this.repeatPassphrase[2] = ''
+                    // this.repeatPassphrase[4] = ''
+                    // this.repeatPassphrase[8] = ''
+
+                    this.finishedStep = 1
+                    this.currentStep = 2
                 } else {
                     if (!this.account.firstName) {
                         this.errors.push('First name required.')
@@ -519,13 +526,13 @@ export default {
                     this.account.secretQuestion2 &&
                     this.account.secretAnswer2 &&
                     this.account.password &&
-                    this.account.repeat_password &&
-                    this.account.password === this.account.repeat_password &&
+                    this.account.repeatPassword &&
+                    this.account.password === this.account.repeatPassword &&
                     this.agreeStoredPassphrase &&
                     !this.passphrase.includes('') &&
                     !this.repeatPassphrase.includes('') &&
                     passphraseOriginal === passphraseVerification) {
-                    Bridge.createAccountRequest({
+                    const res = this.$desktop.createAccountRequest({
                         seed: 13891737193, // TODO:  remove hardcode. should derived from input data + mouse movement
                         firstName: this.account.firstName,
                         lastName: this.account.lastName,
@@ -538,24 +545,24 @@ export default {
                         secretAnswer1: this.account.secretAnswer1.toLowerCase(),
                         secretQuestion2: this.account.secretQuestion2,
                         secretAnswer2: this.account.secretAnswer2.toLowerCase()
-                    }).then(res => {
-                        this.finishedStep = 2
-                        this.currentStep = 3
+                    })
 
-                        this.$store.dispatch('application/updateState', {
-                            account: { ...this.$store.state.application.account, ...res.account },
-                            locked: false,
-                            signedIn: true
-                        })
+                    this.finishedStep = 2
+                    this.currentStep = 3
+
+                    this.$store.dispatch('application/updateState', {
+                        account: { ...this.$store.state.application.account, ...res.account },
+                        locked: false,
+                        signedIn: true
                     })
                 } else {
                     if (!this.account.password) {
                         this.errors.push('Password required.')
                     }
-                    if (!this.account.repeat_password) {
+                    if (!this.account.repeatPassword) {
                         this.errors.push('Repeat password required.')
                     }
-                    if (this.account.password !== this.account.repeat_password) {
+                    if (this.account.password !== this.account.repeatPassword) {
                         this.errors.push('Passwords must match.')
                     }
                     if (!this.account.secretQuestion1) {
@@ -631,6 +638,7 @@ export default {
 
 
 <style lang="scss" scoped>
+
     .tab-card {
         background: #383853;
         border-radius: 5px;
@@ -715,7 +723,7 @@ export default {
             float: right;
             width: calc(100% - 75px);
         }
-        .unknown_blk {
+        .unknown-block {
             display: inline-block;
             float: left;
             width: 100%;
@@ -741,7 +749,7 @@ export default {
                 }
             }
         }
-        .walletNumber {
+        .wallet-number {
             .form-group {
                 display: inline-block;
                 width: calc(100% - 40px);
@@ -774,7 +782,7 @@ export default {
                 color: #fff;
                 padding: 9px 0;
             }
-            .unknown_blk {
+            .unknown-block {
                 a {
                     border-color: #404354;
                     color: #404354;
@@ -865,7 +873,7 @@ export default {
     }
 
     .c-popup{
-        .scroll_block{
+        .scroll-block{
             max-height: 500px;
             overflow-y: auto;
             padding: 20px;

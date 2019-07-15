@@ -6,6 +6,7 @@ import BaseModel from './base'
 export default class Collection extends BaseModel {
     public name!: string
     public parentId!: number
+    public owner!: Profile;
 
     public static get tableName (): string {
         return 'collections'
@@ -41,8 +42,9 @@ export default class Collection extends BaseModel {
             owner: {
                 relation: Model.HasOneThroughRelation,
                 modelClass: Profile,
-                filter: {
-                    relationKey: 'owner'
+                filter: (qb) => {
+                    qb.join('nodes as node_profiles', 'node_profiles.toProfileId', '=', 'profiles.id')
+                    qb.where('node_profiles.relationKey', 'owner')
                 },
                 beforeInsert (model) {
                     (model as Node).relationKey = 'owner'
@@ -52,8 +54,7 @@ export default class Collection extends BaseModel {
                     to: 'profiles.id',
                     through: {
                         from: 'nodes.fromCollectionId',
-                        to: 'nodes.toProfileId',
-                        extra: ['relationKey']
+                        to: 'nodes.toProfileId'
                     }
                 }
             },

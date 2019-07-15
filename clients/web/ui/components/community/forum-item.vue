@@ -21,12 +21,18 @@
 export default {
     props: {
         id: Number,
-        title: String,
+        title: {
+            type: String,
+            default: null
+        },
         icon: {
             type: String,
             default: 'fas fa-comments'
         },
-        lastPostTime: String,
+        lastPostTime: {
+            type: String,
+            default: null
+        },
         discussionsCount: Number
     },
     computed: {

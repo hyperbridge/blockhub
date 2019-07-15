@@ -31,7 +31,7 @@
                         Get Started
                     </c-button>
                 </p>
-                <!-- <p v-if="!$store.state.application.desktopMode"><c-button class="c-button--lg outline-white" @click="$store.commit('application/activateModal', 'welcome')">Get Started</c-button></p> -->
+                <!-- <p v-if="!$store.state.application.desktopMode"><c-button class="c-button--lg outline-white" @click="$store.commit('application/activeModal', 'welcome')">Get Started</c-button></p> -->
             </div>
         </div>
 
@@ -50,7 +50,7 @@
                 <p v-if="!loading && !projects.length">
                     Nothing could be found. Want to <c-button
                         status="plain"
-                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                        @click="$store.commit('application/activeModal', 'coming-soon')">
                         Check for updates
                     </c-button>?
                 </p>
