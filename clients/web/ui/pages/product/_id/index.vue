@@ -500,7 +500,7 @@ export default {
         'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
         'c-multiselect': () => import('vue-multiselect').then(m => m.default || m),
-        'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m)
+        'c-add-collection-popup': () => import('~/components/popups/add-collection').then(m => m.default || m)
 
     },
     data() {

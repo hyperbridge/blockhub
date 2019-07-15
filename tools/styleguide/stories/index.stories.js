@@ -1890,7 +1890,7 @@ storiesOf('Popups', module)
     }))
     .add('Add to Collection', () =>({
         components: {
-            'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m),
+            'c-add-collection-popup': () => import('~/components/popups/add-collection').then(m => m.default || m),
         },
         data() {
             return {
@@ -1917,7 +1917,7 @@ storiesOf('Popups', module)
                 description: 'Cras in dui eget nulla vulputate finibus sed id ligula.',
             }
         },
-        template: `<div class="m-4"><c-popup-collection-add  :collections="collections" :image="image" :name="name" :description="description" /></div>`
+        template: `<div class="m-4"><c-add-collection-popup :collections="collections" :image="image" :name="name" :description="description" /></div>`
     }))
 
 

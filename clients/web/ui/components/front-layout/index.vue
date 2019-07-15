@@ -171,7 +171,7 @@
                 <c-mission-control-popup
                     :activated="$store.state.application.activeModal === 'mission-control'"
                     @close="$store.state.application.activeModal = null" />
-                <c-popup-collection-add
+                <c-add-collection-popup
                     v-if="$store.state.application.activeModal === 'add-collection'"
                     :activated="$store.state.application.activeModal === 'add-collection'"
                     :image="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.image"
@@ -915,7 +915,7 @@ export default {
         'c-send-funds-popup': () => import('~/components/send-funds-popup').then(m => m.default || m),
         'c-purchase-popup': () => import('~/components/purchase-popup').then(m => m.default || m),
         'c-mission-control-popup': () => import('~/components/mission-control-popup').then(m => m.default || m),
-        'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m),
+        'c-add-collection-popup': () => import('~/components/popups/add-collection').then(m => m.default || m),
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         'c-clock': () => import('~/components/clock').then(m => m.default || m),
         'c-status-dot': () => import('~/components/status-dot').then(m => m.default || m),
