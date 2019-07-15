@@ -1,22 +1,22 @@
-import { Model, RelationMappings } from 'objection'
-import Node, {NodeRelation} from './node'
+import { JsonSchema, Model, RelationMappings } from 'objection'
+import Node, { NodeRelation } from './node'
 import Profile from './profile'
 import BaseModel from './base'
-import Discussion from "./discussion";
+import Discussion from './discussion'
 
 export default class Message extends BaseModel {
-    parentId!: Number
-    ownerId!: Number
+    public parentId!: number
+    public ownerId!: number
 
-    static get tableName() {
+    public static get tableName (): string {
         return 'messages'
     }
 
-    static get timestamps() {
+    public static get timestamps (): boolean {
         return true
     }
 
-    static get jsonSchema() {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: [],
@@ -25,7 +25,7 @@ export default class Message extends BaseModel {
         }
     }
 
-    static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             parent: {
                 relation: Model.HasOneRelation,
@@ -62,7 +62,7 @@ export default class Message extends BaseModel {
             discussion: {
                 relation: Model.ManyToManyRelation,
                 modelClass: Discussion,
-                beforeInsert(model) {
+                beforeInsert (model) {
                     (model as Node).relationKey = NodeRelation.Chat
                 },
                 join: {

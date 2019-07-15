@@ -24,7 +24,6 @@
 import moment from 'moment'
 
 export default {
-    name: 'c-chat-message',
     components: {
         // 'c-emoji': () => import('~/components/emoji').then(m => m.default || m)
     },

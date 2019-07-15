@@ -41,7 +41,6 @@
 
 <script>
 export default {
-    name: 'c-chat-user',
     components: {
         'c-chat-user-avatar': () => import('~/components/chat-new/user-avatar').then(m => m.default || m)
     },

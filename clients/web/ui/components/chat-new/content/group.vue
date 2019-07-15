@@ -14,7 +14,6 @@
 
 <script>
 export default {
-    name: 'c-chat-group',
     components: {
         // 'c-chat-user': () => import('~/components/chat-new/user').then(m => m.default || m),
         'c-chat-answer-field': () => import('~/components/chat-new/answer-field/field').then(m => m.default || m),
