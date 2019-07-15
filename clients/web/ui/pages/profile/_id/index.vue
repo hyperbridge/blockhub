@@ -398,7 +398,7 @@ export default {
     },
     methods: {
         showSendPopup() {
-            this.$store.dispatch('application/activateModal', 'send-funds')
+            this.$store.dispatch('application/activeModal', 'send-funds')
         }
     }
 }

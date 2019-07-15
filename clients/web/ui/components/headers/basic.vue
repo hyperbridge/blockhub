@@ -383,7 +383,7 @@
                         <li v-if="!signedIn && !isLocked">
                             <c-button
                                 status="none"
-                                @click="$store.commit('application/activateModal', 'login')">
+                                @click="$store.commit('application/activeModal', 'login')">
                                 <span class="icon fa fa-sign-out-alt" />
                                 <span class="text">Sign In</span>
                             </c-button>

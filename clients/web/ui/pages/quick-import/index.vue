@@ -102,7 +102,7 @@
                     You are not signed in. Please
                     <c-button
                         status="plain"
-                        @click="$store.commit('application/activateModal', 'login')">
+                        @click="$store.commit('application/activeModal', 'login')">
                         Sign In
                     </c-button>
                     to continue.

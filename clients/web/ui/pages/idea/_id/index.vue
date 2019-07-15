@@ -438,7 +438,7 @@ export default {
             }
 
             if (!this.$store.state.application.signedIn) {
-                return this.$store.commit('application/activateModal', 'login')
+                return this.$store.commit('application/activeModal', 'login')
             }
 
             if (this.id === 'new') {

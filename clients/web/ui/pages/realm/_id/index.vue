@@ -231,7 +231,7 @@ export default {
         this.$('#page-aside').show()
     },
     created() {
-        // this.$store.commit('application/activateModal', 'coming-soon')
+        // this.$store.commit('application/activeModal', 'coming-soon')
     }
 }
 </script>

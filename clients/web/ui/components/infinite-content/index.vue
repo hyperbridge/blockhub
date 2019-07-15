@@ -78,7 +78,7 @@
                                 <div v-if="!item.data.products.length">
                                     Nothing could be found. Want to <c-button
                                         status="plain"
-                                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                                        @click="$store.commit('application/activeModal', 'coming-soon')">
                                         Check for updates
                                     </c-button>?
                                 </div>
@@ -107,7 +107,7 @@
                                 <div v-if="!item.data.products.length">
                                     Nothing could be found. Want to <c-button
                                         status="plain"
-                                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                                        @click="$store.commit('application/activeModal', 'coming-soon')">
                                         Check for updates
                                     </c-button>?
                                 </div>
@@ -244,7 +244,7 @@
                                 <div v-if="!item.data.reviews.length">
                                     Nothing could be found. Want to <c-button
                                         status="plain"
-                                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                                        @click="$store.commit('application/activeModal', 'coming-soon')">
                                         Check for updates
                                     </c-button>?
                                 </div>
@@ -294,7 +294,7 @@
                                 <div v-if="!item.data.projects.length">
                                     Nothing could be found. Want to <c-button
                                         status="plain"
-                                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                                        @click="$store.commit('application/activeModal', 'coming-soon')">
                                         Check for updates
                                     </c-button>?
                                 </div>
@@ -339,7 +339,7 @@
                             <p v-if="!item.data.realms.length">
                                 Nothing could be found. Want to <c-button
                                     status="plain"
-                                    @click="$store.commit('application/activateModal', 'coming-soon')">
+                                    @click="$store.commit('application/activeModal', 'coming-soon')">
                                     Check for updates
                                 </c-button>?
                             </p>
@@ -427,7 +427,7 @@
                                 <div v-if="!assets.length">
                                     Nothing could be found. Want to <c-button
                                         status="plain"
-                                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                                        @click="$store.commit('application/activeModal', 'coming-soon')">
                                         Check for updates
                                     </c-button>?
                                 </div>

@@ -202,7 +202,7 @@
                     status="second-info"
                     size="lg"
                     class="mb-4"
-                    @click="$store.commit('application/activateModal', 'import-product')">
+                    @click="$store.commit('application/activeModal', 'import-product')">
                     Import
                 </c-button>
             </div>
@@ -237,7 +237,7 @@
 
         <c-basic-popup
             :activated="$store.state.application.activeModal === 'import-product'"
-            @close="$store.commit('application/activateModal', null)">
+            @close="$store.commit('application/activeModal', null)">
             <div
                 slot="header"
                 class="h4"
@@ -543,7 +543,7 @@ export default {
                 this.product.meta.developer = data.developers && data.developers[0]
                 this.product.meta.publisher = data.publishers && data.publishers[0]
 
-                this.$store.commit('application/activateModal', null)
+                this.$store.commit('application/activeModal', null)
             })
         },
         updateStatus() {

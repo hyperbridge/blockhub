@@ -92,14 +92,14 @@ export const promptPasswordRequest = async data => new Promise(async resolve => 
 
     local.redirect('/unlock')
 
-    // local.store.commit('application/activateModal', 'unlock')
+    // local.store.commit('application/activeModal', 'unlock')
 
     local.unlockResolve = resolve
 })
 
 export const setAccountRequest = async data => new Promise(async resolve => {
     if (data.account.address) {
-        // local.store.commit('application/activateModal', null)
+        // local.store.commit('application/activeModal', null)
 
         // We were locked
         if (local.store.state.application.locked) {
@@ -110,7 +110,7 @@ export const setAccountRequest = async data => new Promise(async resolve => {
             locked: false
         })
     } else {
-        // local.store.commit('application/activateModal', null)
+        // local.store.commit('application/activeModal', null)
 
         local.redirect('/welcome')
 
@@ -139,7 +139,7 @@ export const sendCommand = async (key, data = {}, peer = null, responseId = null
 
         // Ignore startup commands
         if (key !== 'initProtocol' && key !== 'error' && key !== 'updateState') {
-            local.store.commit('application/activateModal', 'welcome')
+            local.store.commit('application/activeModal', 'welcome')
         }
 
         return false

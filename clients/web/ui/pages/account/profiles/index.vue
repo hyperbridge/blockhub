@@ -20,13 +20,13 @@
                     <c-button
                         status="info"
                         icon="download"
-                        @click="$store.commit('application/activateModal', 'deposit')">
+                        @click="$store.commit('application/activeModal', 'deposit')">
                         Deposit
                     </c-button>
                     <c-button
                         status="info"
                         icon="upload"
-                        @click="$store.commit('application/activateModal', 'withdraw')">
+                        @click="$store.commit('application/activeModal', 'withdraw')">
                         Withdraw
                     </c-button>
                 </div>
