@@ -70,7 +70,7 @@
                 <div
                     v-if="showShortcuts"
                     class="page-shortcuts invert">
-                    <c-shortcut-sidebar :items="customShortcuts ? customShortcuts : shortcuts" />
+                    <c-shortcut-sidebar :items="customShortcuts.length ? customShortcuts : shortcuts" />
                 </div>
 
                 <div

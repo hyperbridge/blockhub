@@ -75,7 +75,7 @@
                                 class="form-control"
                                 placeholder="Password"
                                 name="password"
-                                @keyup.enter="next()">
+                                @keyup.enter="next">
                         </div>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
             </c-button>
             <c-button
                 size="md"
-                @click="next()">
+                @click="next">
                 Sign In
             </c-button>
         </div>
@@ -137,43 +137,42 @@ export default {
         }
     },
     methods: {
-        next() {
+        async next() {
             const { email, password } = this
             this.errors = []
             this.$store.commit('auth/clearAuthenticateError')
 
             this.loading = true
 
-            if (email &&
-                password) {
-                this.$store.dispatch('application/login', { email, password })
-                    .then(res => {
-                        this.$store.commit('application/activeModal', null)
-                        this.loading = false
-
-                        if (this.$route.query.redirect) {
-                            this.$router.push(this.$route.query.redirect)
-                        }
-                    })
-                // Just use the returned error instead of mapping it from the store.
-                    .catch(error => {
-                        console.warn(error)
-
-                        // Convert the error to a plain object and add a message.
-                        const type = error.className
-                        error = Object.assign({}, error)
-                        error.message = type === 'not-authenticated'
-                            ? 'Incorrect email or password.'
-                            : 'An error prevented login.'
-                        this.errors = [error.message]
-
-                        this.loading = false
-                    })
-
+            if (!email ||
+                !password) {
+                this.errors.push('Missing fields.')
                 return
             }
 
-            this.errors.push('Missing fields.')
+            await this.$store.dispatch('application/login', { email, password })
+                // Just use the returned error instead of mapping it from the store.
+                .catch(error => {
+                    console.warn(error)
+
+                    // Convert the error to a plain object and add a message.
+                    const type = error.className
+                    error = Object.assign({}, error)
+                    error.message = type === 'not-authenticated'
+                        ? 'Incorrect email or password.'
+                        : 'An error prevented login.'
+                    this.errors = [error.message]
+
+                    this.loading = false
+                })
+
+            this.$store.commit('application/activeModal', null)
+            this.loading = false
+
+            if (this.$route.query.redirect) {
+                this.$router.push(this.$route.query.redirect)
+            }
+
         }
     }
 }
