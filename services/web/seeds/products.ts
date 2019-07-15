@@ -43,6 +43,47 @@ export const data = [
             developerTags: [
                 "adventure"
             ],
+            official: {
+                discord: {
+                    online: 10,
+                    link: 'https://something'
+                },
+                twitch: {
+                    followers: 1000,
+                    link: 'https://something'
+                },
+                youtube: {
+                    subscribers: 1000,
+                    link: 'https://youtube'
+                },
+                instagram: {
+                    followers: 100,
+                    link: 'https://instagram'
+                }
+            },
+            retailers: {
+                amazon: {
+                    prices: {
+                        us: 16.55,
+                        ca: 20.00
+                    },
+                    link: 'http://'
+                },
+                steam: {
+                    prices: {
+                        us: 16.55,
+                        ca: 20.00
+                    },
+                    link: 'http://'
+                },
+                gog: {
+                    prices: {
+                        us: 16.55,
+                        ca: 20.00
+                    },
+                    link: 'http://'
+                }
+            },
             plans: [
                 {
                     title: "Play Now",

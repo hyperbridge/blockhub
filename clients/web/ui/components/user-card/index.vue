@@ -165,7 +165,7 @@ export default {
     methods: {
         async generateAddress(profileId) {
             if (!this.$store.state.application.desktopMode) {
-                this.$store.commit('application/activateModal', 'welcome')
+                this.$store.commit('application/activeModal', 'welcome')
                 return
             }
 

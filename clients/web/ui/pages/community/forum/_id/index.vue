@@ -52,7 +52,7 @@
                                 icon="plus"
                                 class="margin-top-20"
                                 style="margin-right: auto"
-                                @click="activateModal()">
+                                @click="activeModal()">
                                 New discussion
                             </c-button>
                         </div>
@@ -92,13 +92,13 @@ export default {
         }
     },
     methods: {
-        activateModal() {
+        activeModal() {
             this.$store.commit('application/activeModalData', {
                 community: {
                     id: this.forum.id
                 }
             })
-            this.$store.commit('application/activateModal', 'new-discussion')
+            this.$store.commit('application/activeModal', 'new-discussion')
         }
     }
 }

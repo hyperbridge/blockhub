@@ -1,8 +1,8 @@
 <template>
     <div
         class="product-grid__item"
-        @mouseover="show_preview(true)"
-        @mouseout="show_preview(false)">
+        @mouseover="showPreview(true)"
+        @mouseout="showPreview(false)">
         <div class="position-relative">
             <div
                 v-if="price"
@@ -96,7 +96,7 @@ export default {
         }
     },
     methods: {
-        show_preview(status) {
+        showPreview(status) {
             clearTimeout(this.timeout)
             this.debounce(() => {
                 if (!status) clearInterval(this.interval)

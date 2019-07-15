@@ -110,7 +110,7 @@
             <c-button
                 status="plain"
                 style="float: left"
-                @click="$store.commit('application/activateModal', 'login')">
+                @click="$store.commit('application/activeModal', 'login')">
                 Already registered? Sign In
             </c-button>
             <c-button
@@ -191,7 +191,7 @@ export default {
                 this.$store.dispatch('accounts/create', { email, password })
                     .then(res => {
                         this.$store.dispatch('auth/authenticate', { strategy: 'local', email, password })
-                        this.$store.commit('application/activateModal', null)
+                        this.$store.commit('application/activeModal', null)
                         this.loading = false
                     })
                 // .then(response => this.$store.dispatch('auth/authenticate', { strategy: 'local', email, password }))

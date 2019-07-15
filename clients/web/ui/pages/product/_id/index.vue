@@ -343,7 +343,7 @@
 
         <c-basic-popup
             :activated="$store.state.application.activeModal === 'sync-blockchain'"
-            @close="$store.commit('application/activateModal', null)">
+            @close="$store.commit('application/activeModal', null)">
             <div
                 slot="header"
                 class="h4"
@@ -387,7 +387,7 @@
 
         <c-basic-popup
             :activated="$store.state.application.activeModal === 'import-product'"
-            @close="$store.commit('application/activateModal', null)">
+            @close="$store.commit('application/activeModal', null)">
             <div
                 slot="header"
                 class="h4"
@@ -900,7 +900,7 @@ export default {
                 this.product.meta.developer = data.developers && data.developers[0]
                 this.product.meta.publisher = data.publishers && data.publishers[0]
 
-                this.$store.commit('application/activateModal', null)
+                this.$store.commit('application/activeModal', null)
             })
         }
     }

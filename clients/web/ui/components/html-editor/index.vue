@@ -24,17 +24,17 @@ export default {
         config.callbacks = {
 
             onInit() {
-                this.$(vm.$el).summernote('code', vm.model)
+                $(vm.$el).summernote('code', vm.model)
             },
 
             onChange() {
-                vm.$emit('update:model', this.$(vm.$el).summernote('code'))
-                vm.$emit('change', this.$(vm.$el).summernote('code'))
+                vm.$emit('update:model', $(vm.$el).summernote('code'))
+                vm.$emit('change', $(vm.$el).summernote('code'))
             },
 
             onBlur() {
-                vm.$emit('update:model', this.$(vm.$el).summernote('code'))
-                vm.$emit('change', this.$(vm.$el).summernote('code'))
+                vm.$emit('update:model', $(vm.$el).summernote('code'))
+                vm.$emit('change', $(vm.$el).summernote('code'))
             }
         }
 

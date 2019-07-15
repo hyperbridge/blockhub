@@ -21,8 +21,8 @@ if (process.client) {
         document.cookie = `${variable}=${value}; expires=${d.toGMTString()};`
     }
 
-    if (window.location.hostname === 'blockhub.gg.local') {
-        setCookie('WEB_SERVICE_URL', 'http://blockhub.gg.local:9001')
+    if (window.location.hostname === 'localhost' || window.location.hostname === 'blockhub.gg.local') {
+        setCookie('WEB_SERVICE_URL', 'http://localhost:9001')
     }
 
     client = (serviceUrl, storage) => {

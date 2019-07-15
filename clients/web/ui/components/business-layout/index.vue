@@ -298,7 +298,7 @@ export default {
     },
     computed: {
         activeProfile() {
-            return this.$store.state.application.account && this.$store.state.application.activeProfile
+            return this.$store.state.application.activeProfile
         }
     },
     watch: {

@@ -1,8 +1,10 @@
-import { DiscussionType } from '../../models/discussion'
+import Discussion, {DiscussionType} from "../../models/discussion";
+import Node from "../../models/node";
+import Message from "../../models/message";
 
 const { authenticate } = require('@feathersjs/authentication').hooks
 
-const fillMessage = async function (message, context): Promise<any> {
+const fillMessage = async function(message, context) {
     // Throw an error if we didn't get a text
     if (!message.value) {
         throw new Error('A message must have value')
@@ -16,27 +18,49 @@ const fillMessage = async function (message, context): Promise<any> {
     }
 }
 
-const fillOne = function (options = {}): any {
+const fillOne = function(options = {}) {
     return async context => {
         context.data = fillMessage(context.data, context)
         return context
     }
 }
 
-const fillAll = function (options = {}): any {
+const fillAll = function(options = {}) {
     return async context => {
-        context.result.data = await Promise.all(context.result.data.map(message => fillMessage(message, context)))
+        context.result.data = await Promise.all(context.result.data.map((message) => {
+            return fillMessage(message, context)
+        }))
 
         return context
     }
 }
 
-const validageChatMessage = function (options = {}): any {
+const customFindMessages = function(options = {}) {
     return async context => {
-        const { app, data } = context
+        const {app, data, service} = context
 
-        if (!data.discussionId) throw new Error('You must provice discussionId')
-        if (!data.ownerId) throw new Error('You must provice ownerId')
+        const query = service.createQuery(context.params);
+        const page = (+context.params.$page > 0) ? +context.params.$page : 0
+
+        const result = await query
+            .eagerAlgorithm(Message.JoinEagerAlgorithm)
+            .eager('[discussion(idCol), owner(publicCols)]')
+            .page(page, 25);
+        context.result = {
+            data: result.results,
+            count: result.results.total,
+            page
+        }
+        return context;
+    }
+}
+
+const validageChatMessage = function(options = {}) {
+    return async context => {
+        const {app, data} = context
+
+        if (!data.discussionId) throw new Error('You must provice discussionId');
+        if (!data.ownerId) throw new Error('You must provice ownerId');
 
         const discussion = await app.service('discussions').get(data.discussionId)
 
@@ -45,10 +69,19 @@ const validageChatMessage = function (options = {}): any {
         }
 
         if (data.value.length == 0) throw new Error('Message should contain somthing')
+
+        return {
+            ...context,
+            discussionId: data.discussionId,
+            data: {
+                ...data,
+                value: data.value.substring(0, 1000) // Messages can't be longer than 1000 characters
+            }
+        };
     }
 }
 
-const create = function (options = {}): any {
+const create = function(options = {}) {
     return async context => {
         const { app, data } = context
         console.log('Message creation request: ', data)
@@ -79,24 +112,40 @@ const create = function (options = {}): any {
     }
 }
 
-const publishMessage = function (options = {}): any {
+const addChatNode = function(options = {}) {
     return async context => {
-        const { app, method, result, params } = context
+        const { app, discussionId, result } = context
+        console.log('After message creation request: ', result)
 
-        const messages = method === 'find' ? result.data : [result]
+        const discussion = await app.service('discussions').get(discussionId)
 
-        await Promise.all(messages.map(async message => {
-            const user = await app.service('profiles').get(message.ownerId, params)
-
-            message.owner = user
-        }))
+        await Node.query().insert({
+            fromMessageId: result.id,
+            toDiscussionId: discussion.id,
+            relationKey: DiscussionType.Chat
+        })
 
         return context
     }
 }
 
+const addMessageOwner = function(options = {}) {
+    return async context => {
+        const { app, method, result, params } = context;
 
-const validatePermission = function (options = {}): any {
+        const messages = method === 'find' ? result.data : [ result ];
+
+        await Promise.all(messages.map(async message => {
+            let {accountId, id, avatar, name} = await app.service('profiles').get(message.ownerId, params);
+
+            message.owner = {accountId, id, avatar, name};
+        }));
+
+        return context;
+    }
+}
+
+const validatePermission = function(options = {}) {
     return async context => {
         const { app, data } = context
 
@@ -115,7 +164,7 @@ const validatePermission = function (options = {}): any {
 
 export const before = {
     all: [],
-    find: [],
+    find: [customFindMessages()],
     get: [],
     create: [authenticate('jwt'), validageChatMessage(), create()],
     update: [authenticate('jwt'), validatePermission(), validageChatMessage()],
@@ -125,9 +174,9 @@ export const before = {
 
 export const after = {
     all: [],
-    find: [fillAll(), publishMessage()],
-    get: [fillOne()],
-    create: [publishMessage()],
+    find: [],
+    get: [addMessageOwner()],
+    create: [addChatNode(), addMessageOwner()],
     update: [],
     patch: [],
     remove: []

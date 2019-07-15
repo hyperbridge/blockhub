@@ -1,6 +1,7 @@
 import Model from '../../models/profile'
 import createService = require('feathers-objection')
 import hooks = require('./hooks')
+import Profile from "../../models/profile";
 
 export default function (app): any {
     const paginate = app.get('paginate')

@@ -137,7 +137,7 @@ export default {
             }
 
             this.$store.dispatch('application/setEditorMode', 'viewing')
-            // this.$store.commit('application/activateModal', null)
+            // this.$store.commit('application/activeModal', null)
 
             if (this.soundEnabled) {
                 const sound = new Howl({

@@ -103,7 +103,7 @@
             <c-button
                 status="plain"
                 style="float: left; margin-right: 20px"
-                @click="$store.commit('application/activateModal', 'register')">
+                @click="$store.commit('application/activeModal', 'register')">
                 Don't have an account? Sign Up
             </c-button>
             <c-button
@@ -148,7 +148,7 @@ export default {
                 password) {
                 this.$store.dispatch('application/login', { email, password })
                     .then(res => {
-                        this.$store.commit('application/activateModal', null)
+                        this.$store.commit('application/activeModal', null)
                         this.loading = false
 
                         if (this.$route.query.redirect) {

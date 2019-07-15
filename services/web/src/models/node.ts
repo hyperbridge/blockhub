@@ -9,6 +9,10 @@ import Discussion from './discussion'
 import BaseModel from './base'
 import Vote from './vote';
 
+export enum NodeRelation {
+    Chat = 'chat'
+}
+
 // Based on https://github.com/Vincit/objection.js/issues/19
 // Exclusive ARC https://hashrocket.com/blog/posts/modeling-polymorphic-associations-in-a-relational-database#exclusive-belongs-to-aka-exclusive-arc-
 export default class Node extends BaseModel {

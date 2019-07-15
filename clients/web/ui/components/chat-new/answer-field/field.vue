@@ -13,12 +13,10 @@
                 contentEditable="true"
                 :placeholder="placeholder"
                 class="user-input--text"
-                ref="userInput"
+                ref="messageDOM"
                 @focus="setInputActive(true)"
                 @blur="setInputActive(false)"
-                @keydown="handleKey"
-                v-text="message"
-            />
+                @keydown="handleKey"></div>
             <div class="user-input--buttons">
                 <c-button v-if="showAttachment" status="plain" @click="$emit('attachment')">
                     <i class="fas fa-paperclip" />
@@ -27,9 +25,10 @@
                     <i class="far fa-smile" />
                 </c-button>
                 <c-button status="plain" @click="emitSendMessage">
-                    <img src="./../../../assets/SVG/send.svg"
-                         class="user-input--send-icon"
-                         alt="send"/>
+                    <img
+                        class="user-input--send-icon"
+                        src="./../../../assets/SVG/send.svg"
+                        alt="send" />
                 </c-button>
                 <c-button status="plain" @click="$emit('like')">
                     <i class="fas fa-thumbs-up" style="color: #00aeff" />
@@ -46,6 +45,7 @@ export default {
     components: {
         'c-chat-user-avatar': () => import('~/components/chat-new/user-avatar').then(m => m.default || m)
     },
+
     props: {
         placeholder: {
             type: String,
@@ -63,15 +63,17 @@ export default {
             type: Boolean,
             default: true
         },
-        user: Object
+        user: Object,
+        sendMessage: Function
     },
+
     data() {
         return {
             file: null,
-            inputActive: false,
-            message: ''
+            inputActive: false
         }
     },
+
     methods: {
         setInputActive(onoff) {
             this.inputActive = onoff
@@ -81,12 +83,14 @@ export default {
             if (event.keyCode === 13 && !event.shiftKey) {
                 this.emitSendMessage()
                 event.preventDefault()
-            } else this.message = event.target.innerHTML;
+            }
         },
 
-        emitSendMessage() {
-            this.$emit('sendMessage', this.message);
-            this.message = '';
+        async emitSendMessage() {
+            this.$refs.messageDOM.contentEditable = false
+            await this.sendMessage(this.$refs.messageDOM.innerHTML)
+            this.$refs.messageDOM.contentEditable = true
+            this.$refs.messageDOM.innerHTML = ''
         }
     }
 }

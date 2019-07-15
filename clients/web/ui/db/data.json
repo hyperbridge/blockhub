@@ -49,7 +49,9 @@
                 "autoplay": false,
                 "pagination": true,
                 "hideWelcomeModal": false,
-                "cookiePolicyAccepted": false
+                "cookiePolicyAccepted": false,
+                "sounds": false,
+                "interfaceInteractionSounds": false
             }
         },
         "currentEthereumNetwork": "local",
@@ -60,7 +62,7 @@
                 "b": 255,
                 "image": "/img/icons/grid.png",
                 "textColor": "#43434d",
-                "eventKey": "application/activateModal",
+                "eventKey": "application/activeModal",
                 "eventValue": "mission-control",
                 "text": "Open Grid",
                 "sort": 1,
@@ -82,7 +84,7 @@
                 "b": 255,
                 "icon": "fa fa-plus",
                 "textColor": "#43434d",
-                "eventKey": "application/activateModal",
+                "eventKey": "application/activeModal",
                 "eventValue": "create-shortcut",
                 "text": "Create",
                 "sort": -1,
@@ -651,7 +653,7 @@
         ],
         "activeProfile": {
             "id": null,
-            "name": null,
+            "name": "Unsaved",
             "role": "user",
             "reputation": 0,
             "badges": [],
