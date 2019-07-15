@@ -15,7 +15,6 @@
                 <th>CC</th>
             </thead>
             <tbody>
-            {{ orderLang }}
                 <transition-group
                     v-for="(lang, index) in orderLang"
                     v-if="lang.show == 'default' || show || index < 5"
@@ -25,17 +24,17 @@
                     :class="['tr-order-' + lang.order]">
                     <template v-for="(value, property) in lang">
                         <td
-                            v-if="property == 'name'"
+                            v-if="property === 'name'"
                             :key="property">
                             {{ value }}
                         </td>
                         <td
-                            v-else
+                            v-else-if="property !== 'code'"
                             :key="property">
                             <i
                                 v-if="value"
                                 class="fas"
-                                :class="`fa-${options_icons[property]}`" />
+                                :class="`fa-${optionsIcons[property]}`" />
                         </td>
                     </template>
                 </transition-group>
@@ -81,7 +80,7 @@ export default {
     },
     data() {
         return {
-            options_icons: {
+            optionsIcons: {
                 subtitles: 'closed-captioning',
                 interface: 'language',
                 fullAudio: 'volume-off'
