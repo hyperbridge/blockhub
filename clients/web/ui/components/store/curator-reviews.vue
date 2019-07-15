@@ -21,15 +21,10 @@
 </template>
 
 <script>
-    import 'swiper/dist/css/swiper.css'
-    import { swiper, swiperSlide } from 'vue-awesome-swiper'
-
     export default {
         components: {
             'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-            'c-curator-review': () => import('~/components/store/curator-review').then(m => m.default || m),
-            'c-swiper': swiper,
-            'c-swiper-slide': swiperSlide
+            'c-curator-review': () => import('~/components/store/curator-review').then(m => m.default || m)
         },
         props: {
             reviews: {

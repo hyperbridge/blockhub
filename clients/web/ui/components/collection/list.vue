@@ -40,14 +40,9 @@
 </template>
 
 <script>
-import 'swiper/dist/css/swiper.css'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
-
 export default {
     components: {
-        'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m),
-        'c-swiper': swiper,
-        'c-swiper-slide': swiperSlide
+        'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m)
     },
     props: {
         title: String,
