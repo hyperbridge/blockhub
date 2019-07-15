@@ -1,7 +1,8 @@
-"use strict";
-require('dotenv').config();
-const pg = require('pg');
-pg.defaults.ssl = true;
+"use strict"
+require('dotenv').config()
+
+const pg = require('pg')
+pg.defaults.ssl = true
 
 module.exports = {
     client: 'pg',

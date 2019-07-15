@@ -124,7 +124,7 @@ export default {
                             }
                         }
                     },
-                    projects: this.$store.getters['funding/topGameIdeas'] || []
+                    projects: topGameIdeas
                 }
             })
 
@@ -177,12 +177,13 @@ export default {
             }
         })
 
-        await store.dispatch('ideas/topGameIdeas')
+        const topGameIdeas = (await store.dispatch('getTopGameIdeas/find')).data
 
         const ideas = store.getters['ideas/list']
 
         return {
             ideas,
+            topGameIdeas,
             breadcrumbLinks: [
                 { to: { path: '/' }, title: 'Home' },
                 { to: { path: '/ideas' }, title: 'Ideas' }

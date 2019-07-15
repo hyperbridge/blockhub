@@ -21,5 +21,5 @@ export default function (app): any {
         }
     }
 
-    app.use('topGameIdeas', new Service())
+    app.use('getTopGameIdeas', new Service())
 }

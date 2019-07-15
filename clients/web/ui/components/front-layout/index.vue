@@ -873,7 +873,7 @@
                 :active="video.showPopup"
                 :videoUrl="video.url"
                 :setTime="video.currentTime"
-                @close=" video.showPopup = false" />
+                @close="video.showPopup = false" />
         </div>
     </div>
 </template>
