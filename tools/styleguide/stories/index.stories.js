@@ -2318,11 +2318,11 @@ storiesOf('Modal', module)
                 </button>
             </div>
             <c-custom-modal id="exampleModal" title="Some modal title">
-                <template slot="modalBody">
+                <template slot="body">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id rhoncus turpis.</p>
                     <p>Aliquam nec blandit mi. Integer sed neque urna.</p>
                 </template>
-                <template slot="modalFooter">
+                <template slot="footer">
                     <a href="#" class="btn btn-sm btn-success">Some Link</a>
                 </template>
             </c-custom-modal>

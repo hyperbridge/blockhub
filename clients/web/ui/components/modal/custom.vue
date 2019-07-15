@@ -19,10 +19,10 @@
                 </div>
                 <div class="modal-body padding-0">
                     <div class="custom-modal-body">
-                        <slot name="modalBody" />
+                        <slot name="body" />
                     </div>
                     <div class="modal-action d-flex w-100 justify-content-between align-items-center flex-nowrap">
-                        <slot name="modalFooter" />
+                        <slot name="footer" />
                     </div>
                 </div>
             </div>

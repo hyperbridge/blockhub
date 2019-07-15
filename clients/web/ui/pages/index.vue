@@ -50,7 +50,7 @@
             title="BlockHub Preview"
             @close="closeModal">
             <div
-                slot="modalBody"
+                slot="body"
                 class="help-modal__content"
                 style="max-width: 500px">
                 <h4 class="h2 mb-3">
@@ -71,7 +71,7 @@
                 </p>
             </div>
             <div
-                slot="modalFooter"
+                slot="footer"
                 class="text-right w-100">
                 <c-button
                     size="md"

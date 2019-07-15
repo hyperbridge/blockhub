@@ -4,7 +4,7 @@
         title="Sign In"
         @close="$store.state.application.activeModal = null">
         <div
-            slot="modalBody"
+            slot="body"
             class=""
             style="width: 100%">
             <c-loading
@@ -98,7 +98,7 @@
 
         <div
             v-if="!loading"
-            slot="modalFooter"
+            slot="footer"
             class="text-right w-100">
             <c-button
                 status="plain"

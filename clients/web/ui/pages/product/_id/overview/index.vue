@@ -296,7 +296,7 @@
         </c-modal>
         <div v-if="showVote" class="row m-0 p-3">
             <c-vote-modal id="voteModal" title="Please vote our product" @close="showVote = false">
-                <template slot="modalBody">
+                <template slot="body">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
@@ -326,7 +326,7 @@
                         </div>
                     </div>
                 </template>
-                <template slot="modalFooter">
+                <template slot="footer">
                     <c-checkbox
                         id="vote">
                         Don't show it again.

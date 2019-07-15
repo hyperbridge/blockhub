@@ -308,7 +308,7 @@
             title="Help Center"
             @close="closeModal">
             <div
-                slot="modalBody"
+                slot="body"
                 class="help-modal__content"
                 style="max-width: 500px">
                 <h4 class="h2 mb-3">
@@ -331,7 +331,7 @@
                 </p>
             </div>
             <div
-                slot="modalFooter"
+                slot="footer"
                 class="text-right w-100">
                 <c-button
                     size="md"
@@ -478,7 +478,6 @@
 
 <script>
 import Vue from 'vue'
-import * as DB from '@/db'
 
 const groupBy = function(xs, key) {
     return xs.reduce((rv, x) => {
@@ -501,7 +500,6 @@ export default {
         'c-popup': () => import('~/components/popups').then(m => m.default || m),
         'c-multiselect': () => import('vue-multiselect').then(m => m.default || m),
         'c-add-collection-popup': () => import('~/components/popups/add-collection').then(m => m.default || m)
-
     },
     data() {
         return {
