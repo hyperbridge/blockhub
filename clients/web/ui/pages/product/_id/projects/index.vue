@@ -28,7 +28,7 @@
                         v-if="!$store.state.application.developerMode"
                         status="info"
                         iconHide
-                        @click="$store.commit('application/activeModal', 'propose-idea')">
+                        @click="$store.commit('application/activeModal', 'proposeIdea')">
                         Propose Idea
                     </c-button>
                 </div>
@@ -62,7 +62,7 @@
                         class="col-12">
                         Nothing could be found. Want to <c-button
                             status="plain"
-                            @click="$store.commit('application/activeModal', 'coming-soon')">
+                            @click="$store.commit('application/activeModal', 'comingSoon')">
                             Check for updates
                         </c-button>?
                     </div>

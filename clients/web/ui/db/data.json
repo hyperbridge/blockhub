@@ -63,7 +63,7 @@
                 "image": "/img/icons/grid.png",
                 "textColor": "#43434d",
                 "eventKey": "application/activeModal",
-                "eventValue": "mission-control",
+                "eventValue": "missionControl",
                 "text": "Open Grid",
                 "sort": 1,
                 "removable": false
@@ -85,7 +85,7 @@
                 "icon": "fa fa-plus",
                 "textColor": "#43434d",
                 "eventKey": "application/activeModal",
-                "eventValue": "create-shortcut",
+                "eventValue": "createShortcut",
                 "text": "Create",
                 "sort": -1,
                 "removable": false

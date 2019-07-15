@@ -304,7 +304,7 @@
         </div>
 
         <c-custom-modal
-            v-if="firstProduct && editing && !$store.state.application.settings.client.hide_product_intro_modal && false"
+            v-if="firstProduct && editing && !$store.state.application.settings.client.hideProductIntroModal && false"
             title="Help Center"
             @close="closeModal">
             <div
@@ -342,7 +342,7 @@
         </c-custom-modal>
 
         <c-basic-popup
-            :activated="$store.state.application.activeModal === 'sync-blockchain'"
+            :activated="$store.state.application.activeModal === 'syncBlockchain'"
             @close="$store.commit('application/activeModal', null)">
             <div
                 slot="header"
@@ -786,7 +786,7 @@ export default {
         },
         closeModal() {
             this.$store.state.marketplace.firstProduct = false
-            this.$store.commit('application/updateClientSettings', { key: 'hide_product_intro_modal', value: true })
+            this.$store.commit('application/updateClientSettings', { key: 'hideProductIntroModal', value: true })
         },
         startSync() {
             this.$store.commit('marketplace/syncProductBlockchain', this.product)

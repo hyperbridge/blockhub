@@ -5561,7 +5561,7 @@ storiesOf('Chat', module)
                     {
                         "icon": "fa fa-plus",
                         "eventKey": "application/activeModal",
-                        "eventValue": "create-shortcut",
+                        "eventValue": "createShortcut",
                         "text": "Create",
                         "sort": -1,
                         "removable": false

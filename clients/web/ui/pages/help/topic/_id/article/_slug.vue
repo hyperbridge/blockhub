@@ -9,7 +9,7 @@
         <div v-if="!article">
             Oh no, that article wasn't found! Would you <c-button
                 status="underline"
-                @click="$store.commit('application/activeModal', 'create-article')">
+                @click="$store.commit('application/activeModal', 'createArticle')">
                 like to create it
             </c-button>?
         </div>

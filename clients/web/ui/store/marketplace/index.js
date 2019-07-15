@@ -52,7 +52,7 @@ export const actions = {
     },
     addToCollection({ commit }, payload) {
         commit('activeCollectionModal', payload)
-        commit('application/activeModal', 'add-collection', { root: true })
+        commit('application/activeModal', 'addCollection', { root: true })
     }
 }
 

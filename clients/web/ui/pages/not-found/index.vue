@@ -31,7 +31,7 @@ export default {
         }
 
         return {
-            error: {
+            isError: {
                 statusCode: 404,
                 message: 'Page not found'
             }

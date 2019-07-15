@@ -380,7 +380,7 @@ export default {
         showContributeModal() {
             this.$store.commit('application/activeModal', 'contribute')
             // this.$store.commit('application/showProfileChooser', true)
-            // this.$store.dispatch('application/activeModal', 'send-funds')
+            // this.$store.dispatch('application/activeModal', 'sendFunds')
         },
         startContribution() {
             this.$store.commit('marketplace/contributeProjectBlockchain', this.product)

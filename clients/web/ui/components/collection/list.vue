@@ -31,7 +31,7 @@
                 style="padding: 20px; text-align: center;">
                 No collections yet. <c-button
                     status="plain"
-                    @click="$store.commit('application/activeModal', 'add-collection')">
+                    @click="$store.commit('application/activeModal', 'addCollection')">
                     Create one
                 </c-button>?
             </div>

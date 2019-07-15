@@ -12,7 +12,7 @@
             status="second-info"
             size="lg"
             class="mb-4"
-            @click="$store.commit('application/activeModal', 'sync-blockchain')">
+            @click="$store.commit('application/activeModal', 'syncBlockchain')">
             Sync Blockchain
         </c-button>
         <c-button

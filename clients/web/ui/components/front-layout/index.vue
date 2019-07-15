@@ -148,7 +148,7 @@
                     :activated="$store.state.application.activeModal === 'unlock'"
                     @close="$store.state.application.activeModal = null" />
                 <c-send-funds-popup
-                    :activated="$store.state.application.activeModal === 'send-funds'"
+                    :activated="$store.state.application.activeModal === 'sendFunds'"
                     @close="$store.state.application.activeModal = null" />
                 <c-purchase-popup
                     :activated="$store.state.application.activeModal === 'purchase'"
@@ -169,11 +169,11 @@
                     :activated="$store.state.application.activeModal === 'terms'"
                     @close="$store.state.application.activeModal = null" />
                 <c-mission-control-popup
-                    :activated="$store.state.application.activeModal === 'mission-control'"
+                    :activated="$store.state.application.activeModal === 'missionControl'"
                     @close="$store.state.application.activeModal = null" />
                 <c-add-collection-popup
-                    v-if="$store.state.application.activeModal === 'add-collection'"
-                    :activated="$store.state.application.activeModal === 'add-collection'"
+                    v-if="$store.state.application.activeModal === 'addCollection'"
+                    :activated="$store.state.application.activeModal === 'addCollection'"
                     :image="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.image"
                     :name="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.name"
                     :description="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.description"
@@ -181,7 +181,7 @@
                     @close="$store.state.application.activeModal = null" />
 
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'connect-network'"
+                    :activated="$store.state.application.activeModal === 'connectNetwork'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
                     <div
@@ -245,7 +245,7 @@
 
                 <!--create-shortcut popup-->
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'create-shortcut'"
+                    :activated="$store.state.application.activeModal === 'createShortcut'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
                     <div
@@ -259,7 +259,7 @@
                                 <c-button
                                     status="none"
                                     class="create-shortcut__block w-100"
-                                    to="/idea/new">
+                                    to="/business/idea/new">
                                     <c-icon
                                         name="plus-circle"
                                         class="padding-bottom-10 padding-top-10"
@@ -320,9 +320,9 @@
                     <p slot="footer" />
                 </c-basic-popup>
 
-                <!--coming-soon popup-->
+                <!--comingSoon popup-->
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'coming-soon'"
+                    :activated="$store.state.application.activeModal === 'comingSoon'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
                     <div
@@ -352,9 +352,9 @@
                     </template>
                     <p slot="footer" />
                 </c-basic-popup>
-                <!--token-contract popup-->
+                <!--tokenContract popup-->
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'token-contract'"
+                    :activated="$store.state.application.activeModal === 'tokenContract'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
                     <div
@@ -409,9 +409,9 @@
                     <p slot="footer" />
                 </c-basic-popup>
 
-                <!--propose-idea popup-->
+                <!--proposeIdea popup-->
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'propose-idea'"
+                    :activated="$store.state.application.activeModal === 'proposeIdea'"
                     @close="$store.commit('application/activeModal', null)">
                     <div
                         slot="header"
@@ -482,9 +482,9 @@
                     <p slot="footer" />
                 </c-basic-popup>
 
-                <!--addition-details popup-->
+                <!--additionDetails popup-->
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'addition-details'"
+                    :activated="$store.state.application.activeModal === 'additionDetails'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
                     <div
@@ -504,7 +504,7 @@
 
                 <!--connection-status popup-->
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'connection-status'"
+                    :activated="$store.state.application.activeModal === 'connectionStatus'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
                     <div
@@ -701,7 +701,7 @@
 
                 <!--create article popup-->
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'create-article'"
+                    :activated="$store.state.application.activeModal === 'createArticle'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
                     <div
@@ -765,7 +765,7 @@
 
                 <!--new discussion popup-->
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'new-discussion'"
+                    :activated="$store.state.application.activeModal === 'newDiscussion'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
                     <div
@@ -854,7 +854,7 @@
 
                 <div
                     class="status-bar"
-                    @click="$store.commit('application/activeModal', 'connection-status')">
+                    @click="$store.commit('application/activeModal', 'connectionStatus')">
                     <c-status-dot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" />
                     OK
                 </div>

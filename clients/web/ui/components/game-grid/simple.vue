@@ -36,7 +36,7 @@
         <p v-if="!items.length">
             Nothing could be found. Want to <c-button
                 status="plain"
-                @click="$store.commit('application/activeModal', 'coming-soon')">
+                @click="$store.commit('application/activeModal', 'comingSoon')">
                 Check for updates
             </c-button>?
         </p>

@@ -27,12 +27,12 @@
                 </div>
             </div>
             <div
-                v-if="!signedIn && !$store.state.application.settings.client.hide_profile_signup"
+                v-if="!signedIn && !$store.state.application.settings.client.hideProfileSignup"
                 class="col-12">
                 <c-block class="profile__user-notify">
                     <c-button
                         class="btn-close"
-                        @click="$store.commit('application/updateClientSettings', { key: 'hide_profile_signup', value: true })">
+                        @click="$store.commit('application/updateClientSettings', { key: 'hideProfileSignup', value: true })">
                         <i class="fas fa-times" />
                     </c-button>
                     <h3>Create your BlockHub Profile</h3>
@@ -398,7 +398,7 @@ export default {
     },
     methods: {
         showSendPopup() {
-            this.$store.dispatch('application/activeModal', 'send-funds')
+            this.$store.dispatch('application/activeModal', 'sendFunds')
         }
     }
 }

@@ -95,7 +95,7 @@ export default {
         // this.$store.dispatch('loadData', ['assets/transactions', transactions])
     },
     created() {
-        this.$store.commit('application/activeModal', 'coming-soon')
+        this.$store.commit('application/activeModal', 'comingSoon')
     }
 }
 </script>

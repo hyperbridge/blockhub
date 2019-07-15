@@ -105,7 +105,7 @@
                         status="dark"
                         size="md"
                         full
-                        @click="$store.commit('application/activeModal', 'coming-soon')">
+                        @click="$store.commit('application/activeModal', 'comingSoon')">
                         Open in Discord
                     </c-button>
                     <c-button
@@ -113,7 +113,7 @@
                         status="dark"
                         size="md"
                         full
-                        @click="$store.commit('application/activeModal', 'coming-soon')">
+                        @click="$store.commit('application/activeModal', 'comingSoon')">
                         Open in Twitch
                     </c-button>
                     <c-button
@@ -121,7 +121,7 @@
                         status="dark"
                         size="md"
                         full
-                        @click="$store.commit('application/activeModal', 'coming-soon')">
+                        @click="$store.commit('application/activeModal', 'comingSoon')">
                         Open in YouTube
                     </c-button>
                     <c-button
@@ -129,7 +129,7 @@
                         status="dark"
                         size="md"
                         full
-                        @click="$store.commit('application/activeModal', 'coming-soon')">
+                        @click="$store.commit('application/activeModal', 'comingSoon')">
                         Open in BlockHub
                     </c-button>
                 </div>

@@ -98,7 +98,7 @@ export default {
                     id: this.forum.id
                 }
             })
-            this.$store.commit('application/activeModal', 'new-discussion')
+            this.$store.commit('application/activeModal', 'newDiscussion')
         }
     }
 }

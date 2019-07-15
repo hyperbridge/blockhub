@@ -147,7 +147,7 @@
                     <p>
                         No products were found using these filters. Want to <c-button
                             status="plain"
-                            @click="$store.commit('application/activeModal', 'coming-soon')">
+                            @click="$store.commit('application/activeModal', 'comingSoon')">
                             Check for updates
                         </c-button>?
                     </p>
@@ -162,7 +162,7 @@
                 <p v-else>
                     Nothing could be found. Want to <c-button
                         status="plain"
-                        @click="$store.commit('application/activeModal', 'coming-soon')">
+                        @click="$store.commit('application/activeModal', 'comingSoon')">
                         Check for updates
                     </c-button>?
                 </p>
