@@ -28,7 +28,6 @@
 
 <script>
 export default {
-    name: 'c-chat-group-sidebar',
     components: {},
 
     props: {
