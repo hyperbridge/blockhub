@@ -150,7 +150,7 @@ export default {
                 return
             }
 
-            await this.$store.dispatch('application/login', { email, password })
+            const res = await this.$store.dispatch('application/login', { email, password })
                 // Just use the returned error instead of mapping it from the store.
                 .catch(error => {
                     console.warn(error)
@@ -165,6 +165,8 @@ export default {
 
                     this.loading = false
                 })
+
+            if (!this.$store.state.application.signedIn) return
 
             this.$store.commit('application/activeModal', null)
             this.loading = false

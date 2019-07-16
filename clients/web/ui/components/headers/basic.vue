@@ -524,7 +524,7 @@ export default {
             this.$('.snotify').show()
         },
         signOut() {
-            this.$store.dispatch('ogout')
+            this.$store.dispatch('logout')
 
             this.isLoading = true
         },
