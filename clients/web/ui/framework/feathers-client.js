@@ -5,28 +5,19 @@ import socketio from '@feathersjs/socketio-client'
 import auth from '@feathersjs/authentication-client'
 import io from 'socket.io-client'
 import { CookieStorage } from 'cookie-storage'
+import Cookie from 'cookie-universal'
 
 let client = null
 
 if (process.client) {
-    const getCookie = name => {
-        const value = `; ${document.cookie}`
-        const parts = value.split(`; ${name}=`)
-        if (parts.length >= 2) return parts.pop().split(';').shift()
-    }
+    const cookies = Cookie()
 
-    const setCookie = (variable, value, expires) => {
-        let d = new Date()
-        d = new Date(d.getTime() + (1000 * expires))
-        document.cookie = `${variable}=${value}; expires=${d.toGMTString()};`
-    }
-
-    if (window.location.hostname === 'blockhub.gg.local') {
-        setCookie('WEB_SERVICE_URL', 'http://blockhub.gg.local:9001')
+    if (window.location.hostname === 'localhost' || window.location.hostname === 'blockhub.gg.local') {
+        cookies.set('WEB_SERVICE_URL', 'http://localhost:9001')
     }
 
     client = (serviceUrl, storage) => {
-        if (!serviceUrl) serviceUrl = getCookie('WEB_SERVICE_URL') || 'https://api.blockhub.gg'
+        if (!serviceUrl) serviceUrl = cookies.get('WEB_SERVICE_URL') || 'https://api.blockhub.gg'
         if (!storage) storage = new CookieStorage()
 
         const socket = io(serviceUrl, { transports: ['websocket'] })

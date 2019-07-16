@@ -120,11 +120,11 @@
 
 <script>
 import moment from 'moment'
+
 export default {
-    name: 'PurchaseBlock',
     components: {
         'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m),
-        'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m)
+        'c-add-collection-popup': () => import('~/components/popups/add-collection').then(m => m.default || m)
     },
     props: {
         tags: {

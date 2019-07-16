@@ -7,7 +7,7 @@ export const config = {
 const local = {
     requests: {},
     store: null,
-    router: null,
+    redirect: null,
     unlockResolve: null,
     events: {}
 }
@@ -90,29 +90,29 @@ export const promptPasswordRequest = async data => new Promise(async resolve => 
         signedIn: false
     })
 
-    local.router.push('/unlock')
+    local.redirect('/unlock')
 
-    // local.store.commit('application/activateModal', 'unlock')
+    // local.store.commit('application/activeModal', 'unlock')
 
     local.unlockResolve = resolve
 })
 
 export const setAccountRequest = async data => new Promise(async resolve => {
     if (data.account.address) {
-        // local.store.commit('application/activateModal', null)
+        // local.store.commit('application/activeModal', null)
 
         // We were locked
         if (local.store.state.application.locked) {
-            local.router.push('/')
+            local.redirect('/')
         }
 
         local.store.commit('application/updateState', {
             locked: false
         })
     } else {
-        // local.store.commit('application/activateModal', null)
+        // local.store.commit('application/activeModal', null)
 
-        local.router.push('/welcome')
+        local.redirect('/welcome')
 
         local.store.commit('application/updateState', {
             locked: true
@@ -139,7 +139,7 @@ export const sendCommand = async (key, data = {}, peer = null, responseId = null
 
         // Ignore startup commands
         if (key !== 'initProtocol' && key !== 'error' && key !== 'updateState') {
-            local.store.commit('application/activateModal', 'welcome')
+            local.store.commit('application/activeModal', 'welcome')
         }
 
         return false
@@ -217,19 +217,20 @@ export const runCommand = async (cmd, meta = {}) => {
 
             // return resolve()
         }
-        // else if (cmd.key === 'setMode') {
-        //     local.store.state.application.mode = cmd.data
+        else if (cmd.key === 'setMode') {
+            local.store.state.application.mode = cmd.data
+            local.store.state.application.desktopMode = true
 
-        //     // Import seed data for now
-        //     if (local.store.state.application.mode === 'production') {
-        //         //this.$blockhub.importSeedData()
+            // Import seed data for now
+            if (local.store.state.application.mode === 'production') {
+                //this.$blockhub.importSeedData()
 
-        //         // local.store.state.application.desktopMode = true
-        //         // local.store.state.application.signedIn = true
-        //     }
-        //     // store.state.application.locked = true
-        //     // store.state.application.signedIn = false
-        // }
+                // local.store.state.application.desktopMode = true
+                // local.store.state.application.signedIn = true
+            }
+            // store.state.application.locked = true
+            // store.state.application.signedIn = false
+        }
         else if (cmd.key === 'updateReady') {
             console.log(cmd.data)
 
@@ -251,7 +252,7 @@ export const runCommand = async (cmd, meta = {}) => {
                 delete local.requests[i]
             }
         } else if (cmd.key === 'navigate') {
-            local.router.push(cmd.data)
+            local.redirect(cmd.data)
         } else {
             console.warn('[Bridge] Unhandled command:', cmd)
         }
@@ -308,9 +309,9 @@ export const initContextMenuHandler = () => {
     })
 }
 
-export const init = (store, router) => {
+export const init = (store, redirect) => {
     local.store = store
-    local.router = router
+    local.redirect = redirect
     local.bridge = process.client ? window.ipcRenderer : { send: () => {} }
 
     if (!isConnected()) {

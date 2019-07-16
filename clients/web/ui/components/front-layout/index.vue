@@ -70,7 +70,7 @@
                 <div
                     v-if="showShortcuts"
                     class="page-shortcuts invert">
-                    <c-shortcut-sidebar :items="customShortcuts ? customShortcuts : shortcuts" />
+                    <c-shortcut-sidebar :items="customShortcuts.length ? customShortcuts : shortcuts" />
                 </div>
 
                 <div
@@ -148,7 +148,7 @@
                     :activated="$store.state.application.activeModal === 'unlock'"
                     @close="$store.state.application.activeModal = null" />
                 <c-send-funds-popup
-                    :activated="$store.state.application.activeModal === 'send-funds'"
+                    :activated="$store.state.application.activeModal === 'sendFunds'"
                     @close="$store.state.application.activeModal = null" />
                 <c-purchase-popup
                     :activated="$store.state.application.activeModal === 'purchase'"
@@ -169,19 +169,19 @@
                     :activated="$store.state.application.activeModal === 'terms'"
                     @close="$store.state.application.activeModal = null" />
                 <c-mission-control-popup
-                    :activated="$store.state.application.activeModal === 'mission-control'"
+                    :activated="$store.state.application.activeModal === 'missionControl'"
                     @close="$store.state.application.activeModal = null" />
-                <c-popup-collection-add
-                    v-if="$store.state.application.activeModal === 'collection-add'"
-                    :activated="$store.state.application.activeModal === 'collection-add'"
-                    :image="$store.state.marketplace.activeCollectionModal.image"
-                    :name="$store.state.marketplace.activeCollectionModal.name"
-                    :description="$store.state.marketplace.activeCollectionModal.description"
-                    :collections="$store.state.marketplace.activeCollectionModal.collections"
+                <c-add-collection-popup
+                    v-if="$store.state.application.activeModal === 'addCollection'"
+                    :activated="$store.state.application.activeModal === 'addCollection'"
+                    :image="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.image"
+                    :name="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.name"
+                    :description="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.description"
+                    :collections="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.collections"
                     @close="$store.state.application.activeModal = null" />
 
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'connect-network'"
+                    :activated="$store.state.application.activeModal === 'connectNetwork'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
                     <div
@@ -245,7 +245,7 @@
 
                 <!--create-shortcut popup-->
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'create-shortcut'"
+                    :activated="$store.state.application.activeModal === 'createShortcut'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
                     <div
@@ -259,7 +259,7 @@
                                 <c-button
                                     status="none"
                                     class="create-shortcut__block w-100"
-                                    to="/idea/new">
+                                    to="/business/idea/new">
                                     <c-icon
                                         name="plus-circle"
                                         class="padding-bottom-10 padding-top-10"
@@ -320,9 +320,9 @@
                     <p slot="footer" />
                 </c-basic-popup>
 
-                <!--coming-soon popup-->
+                <!--comingSoon popup-->
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'coming-soon'"
+                    :activated="$store.state.application.activeModal === 'comingSoon'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
                     <div
@@ -352,9 +352,9 @@
                     </template>
                     <p slot="footer" />
                 </c-basic-popup>
-                <!--token-contract popup-->
+                <!--tokenContract popup-->
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'token-contract'"
+                    :activated="$store.state.application.activeModal === 'tokenContract'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
                     <div
@@ -409,10 +409,10 @@
                     <p slot="footer" />
                 </c-basic-popup>
 
-                <!--propose-idea popup-->
+                <!--proposeIdea popup-->
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'propose-idea'"
-                    @close="$store.commit('application/activateModal', null)">
+                    :activated="$store.state.application.activeModal === 'proposeIdea'"
+                    @close="$store.commit('application/activeModal', null)">
                     <div
                         slot="header"
                         class="h4">
@@ -482,9 +482,9 @@
                     <p slot="footer" />
                 </c-basic-popup>
 
-                <!--addition-details popup-->
+                <!--additionDetails popup-->
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'addition-details'"
+                    :activated="$store.state.application.activeModal === 'additionDetails'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
                     <div
@@ -504,7 +504,7 @@
 
                 <!--connection-status popup-->
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'connection-status'"
+                    :activated="$store.state.application.activeModal === 'connectionStatus'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
                     <div
@@ -699,13 +699,9 @@
                     </p>
                 </c-basic-popup>
 
-                <c-popup-collection-add
-                    :activated="$store.state.application.activeModal === 'add-collection'"
-                    :collections="collections" />
-
                 <!--create article popup-->
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'create-article'"
+                    :activated="$store.state.application.activeModal === 'createArticle'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
                     <div
@@ -769,7 +765,7 @@
 
                 <!--new discussion popup-->
                 <c-basic-popup
-                    :activated="$store.state.application.activeModal === 'new-discussion'"
+                    :activated="$store.state.application.activeModal === 'newDiscussion'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
                     <div
@@ -858,7 +854,7 @@
 
                 <div
                     class="status-bar"
-                    @click="$store.commit('application/activateModal', 'connection-status')">
+                    @click="$store.commit('application/activeModal', 'connectionStatus')">
                     <c-status-dot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" />
                     OK
                 </div>
@@ -877,7 +873,7 @@
                 :active="video.showPopup"
                 :videoUrl="video.url"
                 :setTime="video.currentTime"
-                @close=" video.showPopup = false" />
+                @close="video.showPopup = false" />
         </div>
     </div>
 </template>
@@ -919,7 +915,7 @@ export default {
         'c-send-funds-popup': () => import('~/components/send-funds-popup').then(m => m.default || m),
         'c-purchase-popup': () => import('~/components/purchase-popup').then(m => m.default || m),
         'c-mission-control-popup': () => import('~/components/mission-control-popup').then(m => m.default || m),
-        'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m),
+        'c-add-collection-popup': () => import('~/components/popups/add-collection').then(m => m.default || m),
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
         'c-clock': () => import('~/components/clock').then(m => m.default || m),
         'c-status-dot': () => import('~/components/status-dot').then(m => m.default || m),
@@ -1386,7 +1382,7 @@ export default {
                 this.$store.commit('application/entry', { key: 'report', value: JSON.stringify(cmd), user: this.$store.state.application.account.address })
             }
 
-            this.$store.commit('application/activateModal', null)
+            this.$store.commit('application/activeModal', null)
         },
         scrollSidebarDown() {
             this.$('#scroll_sidebar').animate({ scrollTop: '+=100', duration: '150' })
@@ -2106,7 +2102,7 @@ export default {
 
     @media (max-width: 1200px) {
         .page .page__content{
-            padding-top: 50px!important;
+            padding-top: 100px!important;
         }
         .right-sidebar,
         .left-sidebar{

@@ -44,7 +44,7 @@
             v-if="openModal"
             title="Sell assets"
             @close="openModal = false">
-            <form slot="modalBody">
+            <form slot="body">
                 <div class="sell-assets__assets-wrapper">
                     <div
                         v-for="(asset, index) in selectedAssets"

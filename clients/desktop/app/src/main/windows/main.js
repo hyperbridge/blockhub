@@ -441,7 +441,7 @@ export const init = (deeplinkUri, devMode, showTools) => {
     })
 
     if (devMode) {
-        window.webContents.loadURL('http://localhost:8000/')
+        window.webContents.loadURL('http://localhost:3000/')
     } else {
         // const fs = require('fs')
 

@@ -1,7 +1,8 @@
-import { Model, RelationMappings, JsonSchema } from 'objection'
-import Node from './node'
+import { JsonSchema, Model, RelationMappings } from 'objection'
+import Node, { NodeRelation } from './node'
 import Profile from './profile'
 import BaseModel from './base'
+import Discussion from './discussion'
 
 export default class Message extends BaseModel {
     public parentId!: number
@@ -18,8 +19,11 @@ export default class Message extends BaseModel {
     public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
-            required: [],
+            required: [], // 'owner'
             properties: {
+                owner: {
+                    type: 'object'
+                }
             }
         }
     }
@@ -56,6 +60,22 @@ export default class Message extends BaseModel {
                 join: {
                     from: 'messages.replyToId',
                     to: 'messages.id'
+                }
+            },
+            discussion: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Discussion,
+                beforeInsert (model) {
+                    (model as Node).relationKey = NodeRelation.Chat
+                },
+                join: {
+                    from: 'messages.id',
+                    through: {
+                        from: 'nodes.fromMessageId',
+                        extra: ['relationKey'],
+                        to: 'nodes.toDiscussionId'
+                    },
+                    to: 'discussions.id'
                 }
             }
         }

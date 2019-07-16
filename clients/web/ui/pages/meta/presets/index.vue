@@ -14,7 +14,7 @@ export default {
     components: {
     },
     created() {
-        this.$store.commit('application/activateModal', 'coming-soon')
+        this.$store.commit('application/activeModal', 'comingSoon')
     }
 }
 </script>

@@ -128,7 +128,7 @@
             key="nothing">
             Nothing could be found. Want to <c-button
                 status="plain"
-                @click="$store.commit('application/activateModal', 'coming-soon')">
+                @click="$store.commit('application/activeModal', 'comingSoon')">
                 Check for updates
             </c-button>?
         </p>

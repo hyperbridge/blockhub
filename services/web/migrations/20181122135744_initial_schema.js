@@ -2,43 +2,45 @@ const charset = 'utf8mb4'
 const collation = 'utf8mb4_unicode_ci'
 
 exports.up = knex => {
-    const defaults = (table, options = { status: true, timestamps: true, editors: true }) => {
-        table.charset(charset)
-        table.collate(collation)
+    const defaults = (table, options = {}) => {
+        options = { status: true, timestamps: true, editors: true, ...options }
+
+        // table.charset(charset)
+        // table.collate(collation)
 
         table.increments('id').primary()
 
         table.string('key', 100)
-        table.index('key', 'idx_key')
+        table.index('key', `${table._tableName}_idx_key`)
 
         table.text('value')
         table.jsonb('meta')
 
         if (options.status) {
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
-            
-            table.index('status', 'idx_status')
+
+            table.index('status', `${table._tableName}_idx_status`)
         }
 
-        if (options.editors)
+        if (options.editors) {
             table.integer('createdBy')
                 .unsigned()
-                .notNullable()
+                .nullable()
                 .references('profiles.id')
-                .onUpdate('CASCADE')
-                .onDelete('CASCADE')
+                .onUpdate('SET NULL')
+                .onDelete('SET NULL')
             table.integer('editedBy')
                 .unsigned()
                 .nullable()
                 .references('profiles.id')
-                .onUpdate('CASCADE')
-                .onDelete('CASCADE')
+                .onUpdate('SET NULL')
+                .onDelete('SET NULL')
             table.integer('deletedBy')
                 .unsigned()
                 .nullable()
                 .references('profiles.id')
-                .onUpdate('CASCADE')
-                .onDelete('CASCADE')
+                .onUpdate('SET NULL')
+                .onDelete('SET NULL')
         }
 
         if (options.timestamps) {
@@ -46,8 +48,8 @@ exports.up = knex => {
             table.timestamp('updatedAt').nullable()
             table.timestamp('deletedAt').nullable()
 
-            table.index(['createdAt', 'editedAt'], 'mul_timestamp')
-            table.index('deletedAt', 'idx_deleted_at')
+            table.index(['createdAt', 'updatedAt'], `${table._tableName}_mul_timestamp`)
+            table.index('deletedAt', `${table._tableName}_idx_deleted_at`)
         }
     }
 
@@ -90,8 +92,6 @@ exports.up = knex => {
         .createTable('communities', table => {
             defaults(table)
 
-            table.string('name', 100)
-
             table.integer('currentActiveUsers').unsigned()
             table.integer('dailyActiveUsers').unsigned()
             table.integer('monthlyActiveUsers').unsigned()
@@ -106,7 +106,7 @@ exports.up = knex => {
                 .unsigned()
                 .references('id')
                 .inTable('profiles')
-                .onDelete('CASCADE')
+                .onDelete('SET NULL')
             table
                 .integer('licenseId')
                 .unsigned()
@@ -129,7 +129,7 @@ exports.up = knex => {
                 .unsigned()
                 .references('id')
                 .inTable('profiles')
-                .onDelete('CASCADE')
+                .onDelete('SET NULL')
             table
                 .integer('communityId')
                 .unsigned()
@@ -143,7 +143,6 @@ exports.up = knex => {
         .createTable('ideas', table => {
             defaults(table)
 
-            table.string('name', 100)
             table.string('type', 100)
 
             table
@@ -165,10 +164,10 @@ exports.up = knex => {
             table.string('name', 100)
         })
         .createTable('projects', table => {
-            defaults(table, { status: false })
-            
+            defaults(table)
+
             table.string('name', 100)
-            table.enum('status', ['Inactive', 'Draft', 'Pending', 'Contributable', 'InDevelopment', 'Refundable', 'Rejected', 'Completed']).defaultTo('Draft')
+            table.enum('contractStatus', ['Inactive', 'Draft', 'Pending', 'Contributable', 'InDevelopment', 'Refundable', 'Rejected', 'Completed']).defaultTo('Draft')
 
             table
                 .integer('ownerId')
@@ -225,8 +224,6 @@ exports.up = knex => {
         })
         .createTable('discussions', table => {
             defaults(table)
-
-            table.string('name', 100)
         })
         .createTable('events', table => {
             defaults(table)
@@ -297,10 +294,12 @@ exports.up = knex => {
                 .inTable('ratings')
                 .onDelete('CASCADE')
         })
+        .createTable('roles', table => {
+            defaults(table)
+
+            table.string('name', 100)
+        })
         .createTable('nodes', table => {
-            table.charset(charset)
-            table.collate(collation)
-    
             table.increments('id').primary()
 
             table.string('relationKey', 100)
@@ -418,106 +417,106 @@ exports.up = knex => {
                 ) = 1);
         `)
 
-        // .raw(`
-        //     alter table "nodes"
-        //     add constraint "exactly_one" check(
-        //         (
-        //             "fromAccountId" is not null 
-        //             and "toAccountId" is null
-        //         )
-        //         or
-        //         (
-        //             "fromAchievementId" is null 
-        //             and "toAchievementId" is not null
-        //         )
-        //     )
-        // `)
-        // .createTable('project_members', table => {
-        //     table.increments('id').primary()
-        //     table
-        //         .integer('profileId')
-        //         .unsigned()
-        //         .references('id')
-        //         .inTable('profiles')
-        //         .onDelete('CASCADE')
-        //     table
-        //         .integer('projectId')
-        //         .unsigned()
-        //         .references('id')
-        //         .inTable('projects')
-        //         .onDelete('CASCADE')
-        // })
-        // .createTable('project_pledges', table => {
-        //     table.increments('id').primary()
-        //     table
-        //         .integer('profileId')
-        //         .unsigned()
-        //         .references('id')
-        //         .inTable('profiles')
-        //         .onDelete('CASCADE')
-        //     table
-        //         .integer('projectId')
-        //         .unsigned()
-        //         .references('id')
-        //         .inTable('projects')
-        //         .onDelete('CASCADE')
-        //     table.jsonb('meta')
-        // })
-        // .createTable('asset_offers', table => {
-        //     table.increments('id').primary()
-        //     table.string('type', 100)
-        //     table.string('text', 500)
-        //     table
-        //         .integer('assetId')
-        //         .unsigned()
-        //         .references('id')
-        //         .inTable('assets')
-        //         .onDelete('SET NULL')
-        //     table
-        //         .integer('fromId')
-        //         .unsigned()
-        //         .references('id')
-        //         .inTable('profiles')
-        //         .onDelete('CASCADE')
-        //     table
-        //         .integer('toId')
-        //         .unsigned()
-        //         .references('id')
-        //         .inTable('profiles')
-        //         .onDelete('CASCADE')
-        //     table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now())
-        //     table.timestamp('updatedAt')
-        //     table.jsonb('meta')
-        // })
-        // .createTable('profile_friends', table => {
-        //     table.increments('id').primary()
-        //     table.string('type', 100)
-        //     table.string('text', 500)
-        //     table
-        //         .integer('fromId')
-        //         .unsigned()
-        //         .references('id')
-        //         .inTable('profiles')
-        //         .onDelete('CASCADE')
-        //     table
-        //         .integer('toId')
-        //         .unsigned()
-        //         .references('id')
-        //         .inTable('profiles')
-        //         .onDelete('CASCADE')
-        //     table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now())
-        //     table.timestamp('updatedAt')
-        //     table.jsonb('meta')
-        // })
-        // .createTable('sessions', table => {
-        //     table.string('sid').primary()
-        //     table.jsonb('sess').notNullable()
-        //     table.timestamp('expired').notNullable()
-        // })
+    // .raw(`
+    //     alter table "nodes"
+    //     add constraint "exactly_one" check(
+    //         (
+    //             "fromAccountId" is not null
+    //             and "toAccountId" is null
+    //         )
+    //         or
+    //         (
+    //             "fromAchievementId" is null
+    //             and "toAchievementId" is not null
+    //         )
+    //     )
+    // `)
+    // .createTable('project_members', table => {
+    //     table.increments('id').primary()
+    //     table
+    //         .integer('profileId')
+    //         .unsigned()
+    //         .references('id')
+    //         .inTable('profiles')
+    //         .onDelete('CASCADE')
+    //     table
+    //         .integer('projectId')
+    //         .unsigned()
+    //         .references('id')
+    //         .inTable('projects')
+    //         .onDelete('CASCADE')
+    // })
+    // .createTable('project_pledges', table => {
+    //     table.increments('id').primary()
+    //     table
+    //         .integer('profileId')
+    //         .unsigned()
+    //         .references('id')
+    //         .inTable('profiles')
+    //         .onDelete('CASCADE')
+    //     table
+    //         .integer('projectId')
+    //         .unsigned()
+    //         .references('id')
+    //         .inTable('projects')
+    //         .onDelete('CASCADE')
+    //     table.jsonb('meta')
+    // })
+    // .createTable('asset_offers', table => {
+    //     table.increments('id').primary()
+    //     table.string('type', 100)
+    //     table.string('text', 500)
+    //     table
+    //         .integer('assetId')
+    //         .unsigned()
+    //         .references('id')
+    //         .inTable('assets')
+    //         .onDelete('SET NULL')
+    //     table
+    //         .integer('fromId')
+    //         .unsigned()
+    //         .references('id')
+    //         .inTable('profiles')
+    //         .onDelete('CASCADE')
+    //     table
+    //         .integer('toId')
+    //         .unsigned()
+    //         .references('id')
+    //         .inTable('profiles')
+    //         .onDelete('CASCADE')
+    //     table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now())
+    //     table.timestamp('updatedAt')
+    //     table.jsonb('meta')
+    // })
+    // .createTable('profile_friends', table => {
+    //     table.increments('id').primary()
+    //     table.string('type', 100)
+    //     table.string('text', 500)
+    //     table
+    //         .integer('fromId')
+    //         .unsigned()
+    //         .references('id')
+    //         .inTable('profiles')
+    //         .onDelete('CASCADE')
+    //     table
+    //         .integer('toId')
+    //         .unsigned()
+    //         .references('id')
+    //         .inTable('profiles')
+    //         .onDelete('CASCADE')
+    //     table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now())
+    //     table.timestamp('updatedAt')
+    //     table.jsonb('meta')
+    // })
+    // .createTable('sessions', table => {
+    //     table.string('sid').primary()
+    //     table.jsonb('sess').notNullable()
+    //     table.timestamp('expired').notNullable()
+    // })
 }
 
-exports.down = knex => {
-    return knex.schema
+exports.down = knex =>
+    knex.schema
         .dropTableIfExists('accounts')
         .dropTableIfExists('achievements')
         .dropTableIfExists('assets')
@@ -547,23 +546,23 @@ exports.down = knex => {
         .dropTableIfExists('tags')
         .dropTableIfExists('tournaments')
         .dropTableIfExists('votes')
-        // table.dropIndex ALTER TABLE 'x' DROP CONSTRAINT IF EXISTS 'x_y_foreign' 
-    // knex.schema.table('me', function (t) {
-    //     t.dropForeign('other_id');
-    //     t.dropColumn('other_id');
-    // });
+        // table.dropIndex ALTER TABLE 'x' DROP CONSTRAINT IF EXISTS 'x_y_foreign'
+// knex.schema.table('me', function (t) {
+//     t.dropForeign('other_id');
+//     t.dropColumn('other_id');
+// });
 //     return knex.schema.raw(`
 //     ALTER TABLE "car"
 //     DROP CONSTRAINT "car_fuel_type_check",
-//     ADD CONSTRAINT "car_fuel_type_check" 
+//     ADD CONSTRAINT "car_fuel_type_check"
 //     CHECK (fuel_type IN ('HYBRID', 'ELECTRIC', 'PETROL', 'DIESEL'))
 //   `);
-    // return knex.schema
-    //     .alterTable('images', (table) => {
-    //         table.string('checksum').nullable().alter();
-    //     });
-        //.dropTableIfExists('profile_friends')
+// return knex.schema
+//     .alterTable('images', (table) => {
+//         table.string('checksum').nullable().alter();
+//     });
+        // .dropTableIfExists('profile_friends')
         // .dropTableIfExists('project_pledges')
         // .dropTableIfExists('project_members')
         // .dropTableIfExists('asset_offers')
-}
+

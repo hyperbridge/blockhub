@@ -247,7 +247,7 @@
 
             <c-basic-popup
                 :activated="$store.state.application.activeModal === 'contribute'"
-                @close="$store.commit('application/activateModal', null)">
+                @close="$store.commit('application/activeModal', null)">
                 <div
                     slot="header"
                     class="h4"
@@ -378,9 +378,9 @@ export default {
     },
     methods: {
         showContributeModal() {
-            this.$store.commit('application/activateModal', 'contribute')
+            this.$store.commit('application/activeModal', 'contribute')
             // this.$store.commit('application/showProfileChooser', true)
-            // this.$store.dispatch('application/activateModal', 'send-funds')
+            // this.$store.dispatch('application/activeModal', 'sendFunds')
         },
         startContribution() {
             this.$store.commit('marketplace/contributeProjectBlockchain', this.product)

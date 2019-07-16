@@ -40,6 +40,11 @@ export default class Project extends BaseModel {
             type: 'object',
             required: [],
             properties: {
+                contractStatus: {
+                    type: 'string',
+                    enum: ['Inactive', 'Draft', 'Pending', 'Contributable', 'InDevelopment', 'Refundable', 'Rejected', 'Completed'],
+                    default: 'Draft'
+                }
             }
         }
     }

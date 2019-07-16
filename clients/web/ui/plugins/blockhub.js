@@ -5,7 +5,7 @@ import * as ReputationEngine from '../framework/reputation-engine'
 import * as Bridge from '../framework/desktop-bridge'
 import seed from '../db/seed'
 
-export default ({ app, store }) => {
+export default ({ app, store, redirect }) => {
     Vue.config.productionTip = false
 
     const initSubscribers = () => {
@@ -227,8 +227,8 @@ export default ({ app, store }) => {
         // TODO: is this a race condition?
         // TODO: PeerService.init()
 
-        blockhub.reputationEngine.init(store) // , router)
-        blockhub.bridge.init(store) // , router)
+        blockhub.reputationEngine.init(store, redirect)
+        blockhub.bridge.init(store, redirect)
 
         store.dispatch('init', DB.store.data[0])
         store.dispatch('database/init')

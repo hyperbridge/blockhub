@@ -202,7 +202,7 @@
                     status="second-info"
                     size="lg"
                     class="mb-4"
-                    @click="$store.commit('application/activateModal', 'import-product')">
+                    @click="$store.commit('application/activeModal', 'import-product')">
                     Import
                 </c-button>
             </div>
@@ -237,7 +237,7 @@
 
         <c-basic-popup
             :activated="$store.state.application.activeModal === 'import-product'"
-            @close="$store.commit('application/activateModal', null)">
+            @close="$store.commit('application/activeModal', null)">
             <div
                 slot="header"
                 class="h4"
@@ -436,9 +436,10 @@ export default {
                 }
             })
         },
-        startImport() {
+        async startImport() {
             if (!this.$store.state.application.desktopMode) {
-                return this.$blockhub.Notification.error('Desktop app required', 'Error')
+                this.$blockhub.Notification.error('Desktop app required', 'Error')
+                return
             }
 
             const onWindowLoad = `function onWindowLoad(requestId) {
@@ -520,33 +521,34 @@ export default {
                     document.body.appendChild(script);
                 }`
 
-            this.$desktop.sendCommand('fetchPageDataRequest', {
+            const data = await this.$desktop.sendCommand('fetchPageDataRequest', {
                 url: this.$refs.importUrl.value,
                 script: onWindowLoad
-            }).then(data => {
-                if (data.error) {
-                    return console.log(data.message)
-                }
-
-                console.log('Import response: ', data)
-
-                this.product.name = data.title
-                this.product.value = data.value
-                this.product.tags = [{ key: 'imported', value: 'Imported' }]
-                this.product.meta = {}
-                this.product.meta.type = 'game'
-                // this.product.meta.rating.overall = 0
-                this.product.meta.developerTags = data.tags
-                this.product.meta.releaseDate = data.releaseDate
-                this.product.meta.description = data.description
-                this.product.meta.genre = ''
-                this.product.meta.developer = data.developers && data.developers[0]
-                this.product.meta.publisher = data.publishers && data.publishers[0]
-
-                this.$store.commit('application/activateModal', null)
             })
+
+            if (data.error) {
+                console.log(data.message)
+                return
+            }
+
+            console.log('Import response: ', data)
+
+            this.product.name = data.title
+            this.product.value = data.value
+            this.product.tags = [{ key: 'imported', value: 'Imported' }]
+            this.product.meta = {}
+            this.product.meta.type = 'game'
+            // this.product.meta.rating.overall = 0
+            this.product.meta.developerTags = data.tags
+            this.product.meta.releaseDate = data.releaseDate
+            this.product.meta.description = data.description
+            this.product.meta.genre = ''
+            this.product.meta.developer = data.developers && data.developers[0]
+            this.product.meta.publisher = data.publishers && data.publishers[0]
+
+            this.$store.commit('application/activeModal', null)
         },
-        updateStatus() {
+        async updateStatus() {
             const run = function(
                 local,
                 DB,
@@ -583,22 +585,21 @@ export default {
                 }
             }
 
-            this.$desktop.sendCommand('eval', cmd).then(productResult => {
-                if (productResult.id) {
-                    this.successfulCreationMessage = 'Product status has been updated'
-                }
-            })
+            const productResult = await this.$desktop.sendCommand('eval', cmd)
+            if (productResult.id) {
+                this.successfulCreationMessage = 'Product status has been updated'
+            }
         },
-        create() {
+        async create() {
             this.product.type = 'game'
             this.product.ownerId = this.$store.state.application.activeProfile.id
 
-            this.$store.dispatch('products/create', this.product).then(res => {
-                this.product.id = res.id
-                this.notice = 'Congratulations, your product has been created!'
+            const res = await this.$store.dispatch('products/create', this.product)
+        
+            this.product.id = res.id
+            this.notice = 'Congratulations, your product has been created!'
 
-                this.$router.push(`/business/product/${this.product.id}`)
-            })
+            this.$router.push(`/business/product/${this.product.id}`)
         },
         async save() {
             this.product.type = 'game'

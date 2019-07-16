@@ -2,12 +2,12 @@
     <c-layout navigationKey="idea">
         <div class="row">
             <div
-                v-if="!$store.state.application.settings.client.hide_crowdfund_game_notice"
+                v-if="!$store.state.application.settings.client.hideCrowdfundGameNotice"
                 class="crowdfund-notice col-12 col-md-6 offset-md-3"
                 style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
                 <c-button
                     class="btn-close"
-                    @click="$store.commit('application/updateClientSettings', { key: 'hide_crowdfund_game_notice', value: true })">
+                    @click="$store.commit('application/updateClientSettings', { key: 'hideCrowdfundGameNotice', value: true })">
                     <i class="fas fa-times" />
                 </c-button>
 
@@ -124,7 +124,7 @@ export default {
                             }
                         }
                     },
-                    projects: this.$store.getters['funding/topGameIdeas'] || []
+                    projects: topGameIdeas
                 }
             })
 
@@ -177,12 +177,13 @@ export default {
             }
         })
 
-        await store.dispatch('ideas/topGameIdeas')
+        const topGameIdeas = (await store.dispatch('getTopGameIdeas/find')).data
 
         const ideas = store.getters['ideas/list']
 
         return {
             ideas,
+            topGameIdeas,
             breadcrumbLinks: [
                 { to: { path: '/' }, title: 'Home' },
                 { to: { path: '/ideas' }, title: 'Ideas' }

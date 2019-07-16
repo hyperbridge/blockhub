@@ -35,13 +35,13 @@
                 {{ finished ? 'Try again' : running ? 'Running...' : 'Run Test' }}
             </c-button>
             <c-button
-                v-if="settings.client.auto_update_settings"
+                v-if="settings.client.autoUpdateSettings"
                 status="success"
                 @click="toggleAutoUpdateSettings">
                 SETTINGS UPDATED AUTOMATICALLY
             </c-button>
             <c-button
-                v-if="!settings.client.auto_update_settings"
+                v-if="!settings.client.autoUpdateSettings"
                 status="warning"
                 @click="toggleAutoUpdateSettings">
                 SETTINGS NOT UPDATED AUTOMATICALLY
@@ -124,12 +124,12 @@ export default {
             this.$store.commit('application/updateClientSettings', { key, value })
         },
         toggleAutoUpdateSettings() {
-            this.updateSettings('auto_update_settings')
+            this.updateSettings('autoUpdateSettings')
         },
         autoUpdateSettings() {
             const { settings } = this
 
-            if (!settings.client.auto_update_settings) return
+            if (!settings.client.autoUpdateSettings) return
             if (!this.finished || this.running) return
 
             const { grade } = this.results

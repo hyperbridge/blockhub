@@ -1,4 +1,4 @@
-import { Model, RelationMappings, JsonSchema } from 'objection'
+import { JsonSchema, Model, RelationMappings } from 'objection'
 import Project from './project'
 import License from './license'
 import Order from './order'
@@ -18,6 +18,10 @@ import Permission from './permission'
 import BaseModel from './base'
 import Vote from './vote'
 
+export enum ProfileStatus {
+    Active = 'active',
+    Disabled = 'disabled'
+}
 
 export default class Profile extends BaseModel {
     public parentId!: number
@@ -64,6 +68,14 @@ export default class Profile extends BaseModel {
         }
     }
 
+    static get modifiers () {
+        return {
+            publicCols (builder) {
+                builder.select(['name', 'avatar', 'id'])
+            }
+        }
+    }
+
     public static get relationMappings (): RelationMappings {
         return {
             // has many realms
@@ -71,18 +83,6 @@ export default class Profile extends BaseModel {
             // has many friends -> profiles
             // has many wishlistProducts -> nodes fromProfileId = profile.id toProductId
             // has many wishlistAssets -> nodes fromProfileId = profile.id toAssetId isn't null
-            vote: {
-                relation: Model.ManyToManyRelation  ,
-                modelClass: Vote,
-                join: {
-                    from: 'profiles.id',
-                    to: 'votes.id',
-                    through: {
-                        from: 'nodes.toProfileId',
-                        to: 'nodes.fromVoteId',
-                    }
-                },
-            },
             licenses: {
                 relation: Model.ManyToManyRelation,
                 modelClass: License,
@@ -320,30 +320,6 @@ export default class Profile extends BaseModel {
                 join: {
                     from: 'profiles.id',
                     to: 'projects.ownerId'
-                }
-            },
-            roles: {
-                relation: Model.ManyToManyRelation,
-                modelClass: Role,
-                join: {
-                    from: 'profiles.id',
-                    to: 'roles.id',
-                    through: {
-                        from: 'profiles_roles.userId',
-                        to: 'profiles_roles.roleId'
-                    }
-                }
-            },
-            permissions: {
-                relation: Model.ManyToManyRelation,
-                modelClass: Permission,
-                join: {
-                    from: 'profiles.id',
-                    to: 'permissions.id',
-                    through: {
-                        from: 'profiles_permissions.profileId',
-                        to: 'profiles_permissions.permissionId'
-                    }
                 }
             }
             // projects: {

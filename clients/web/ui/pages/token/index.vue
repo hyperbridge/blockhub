@@ -1310,7 +1310,7 @@ export default {
         showContractAddress() {
             this.gaStep(11)
 
-            this.$store.commit('application/activateModal', 'token-contract')
+            this.$store.commit('application/activeModal', 'tokenContract')
         },
         gaStep(step) {
             window.ga('send', 'event', 'Token', 'Token Purchase', `Token Purchase Step ${step}`, step, { 'NonInteraction': 1 })

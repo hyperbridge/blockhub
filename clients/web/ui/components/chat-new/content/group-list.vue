@@ -27,27 +27,27 @@
 </template>
 
 <script>
-    export default {
-        components: {},
+export default {
+    components: {},
 
-        props: {
-            channels: {
-                type: Array,
-                default: () => []
-            }
-        },
+    props: {
+        channels: {
+            type: Array,
+            default: () => []
+        }
+    },
 
-        data: () => ({
-            currentChannelI: 0
-        }),
+    data: () => ({
+        currentChannelI: 0
+    }),
 
-        methods: {
-            onChannelClick(channelIndex) {
-                this.$emit('onChannelChange', channelIndex)
-                this.currentChannelI = channelIndex
-            }
+    methods: {
+        onChannelClick(channelIndex) {
+            this.$emit('onChannelChange', channelIndex)
+            this.currentChannelI = channelIndex
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -61,7 +61,7 @@ export default {
     },
     methods: {
         purchase() {
-            this.$store.commit('application/activateModal', 'project-participate')
+            this.$store.commit('application/activeModal', 'project-participate')
         }
     }
 }

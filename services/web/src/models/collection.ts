@@ -6,6 +6,7 @@ import BaseModel from './base'
 export default class Collection extends BaseModel {
     public name!: string
     public parentId!: number
+    public owner!: Profile
 
     public static get tableName (): string {
         return 'collections'
@@ -41,11 +42,13 @@ export default class Collection extends BaseModel {
             owner: {
                 relation: Model.HasOneThroughRelation,
                 modelClass: Profile,
-                filter: {
-                    relationKey: 'owner'
-                },
-                beforeInsert (model) {
-                    (model as Node).relationKey = 'owner'
+                filter: (qb) => {
+                    // TODO: simplify this when this issue is resolved https://github.com/Vincit/objection.js/issues/1356
+                    qb.select('profiles.id', 'node_profiles.fromCollectionId')
+                    qb.join('nodes as node_profiles', 'node_profiles.toProfileId', 'profiles.id')
+                    qb.where('node_profiles.relationKey', '=', 'owner')
+                    // @ts-ignore
+                    qb._parentQuery.whereRaw('"owner"."fromCollectionId" = "collections"."id"')
                 },
                 join: {
                     from: 'collections.id',
@@ -53,7 +56,10 @@ export default class Collection extends BaseModel {
                     through: {
                         from: 'nodes.fromCollectionId',
                         to: 'nodes.toProfileId',
-                        extra: ['relationKey']
+                        extra: ['relationKey'],
+                        beforeInsert(model) {
+                            (model as Node).relationKey = 'owner'
+                        },
                     }
                 }
             },

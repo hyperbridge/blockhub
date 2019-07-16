@@ -1890,7 +1890,7 @@ storiesOf('Popups', module)
     }))
     .add('Add to Collection', () =>({
         components: {
-            'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m),
+            'c-add-collection-popup': () => import('~/components/popups/add-collection').then(m => m.default || m),
         },
         data() {
             return {
@@ -1917,7 +1917,7 @@ storiesOf('Popups', module)
                 description: 'Cras in dui eget nulla vulputate finibus sed id ligula.',
             }
         },
-        template: `<div class="m-4"><c-popup-collection-add  :collections="collections" :image="image" :name="name" :description="description" /></div>`
+        template: `<div class="m-4"><c-add-collection-popup :collections="collections" :image="image" :name="name" :description="description" /></div>`
     }))
 
 
@@ -2318,11 +2318,11 @@ storiesOf('Modal', module)
                 </button>
             </div>
             <c-custom-modal id="exampleModal" title="Some modal title">
-                <template slot="modalBody">
+                <template slot="body">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id rhoncus turpis.</p>
                     <p>Aliquam nec blandit mi. Integer sed neque urna.</p>
                 </template>
-                <template slot="modalFooter">
+                <template slot="footer">
                     <a href="#" class="btn btn-sm btn-success">Some Link</a>
                 </template>
             </c-custom-modal>
@@ -5560,8 +5560,8 @@ storiesOf('Chat', module)
                     },
                     {
                         "icon": "fa fa-plus",
-                        "eventKey": "application/activateModal",
-                        "eventValue": "create-shortcut",
+                        "eventKey": "application/activeModal",
+                        "eventValue": "createShortcut",
                         "text": "Create",
                         "sort": -1,
                         "removable": false

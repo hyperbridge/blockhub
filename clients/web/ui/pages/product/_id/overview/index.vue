@@ -105,7 +105,7 @@
                         status="dark"
                         size="md"
                         full
-                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                        @click="$store.commit('application/activeModal', 'comingSoon')">
                         Open in Discord
                     </c-button>
                     <c-button
@@ -113,7 +113,7 @@
                         status="dark"
                         size="md"
                         full
-                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                        @click="$store.commit('application/activeModal', 'comingSoon')">
                         Open in Twitch
                     </c-button>
                     <c-button
@@ -121,7 +121,7 @@
                         status="dark"
                         size="md"
                         full
-                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                        @click="$store.commit('application/activeModal', 'comingSoon')">
                         Open in YouTube
                     </c-button>
                     <c-button
@@ -129,7 +129,7 @@
                         status="dark"
                         size="md"
                         full
-                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                        @click="$store.commit('application/activeModal', 'comingSoon')">
                         Open in BlockHub
                     </c-button>
                 </div>
@@ -296,7 +296,7 @@
         </c-modal>
         <div v-if="showVote" class="row m-0 p-3">
             <c-vote-modal id="voteModal" title="Please vote our product" @close="showVote = false">
-                <template slot="modalBody">
+                <template slot="body">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
@@ -326,7 +326,7 @@
                         </div>
                     </div>
                 </template>
-                <template slot="modalFooter">
+                <template slot="footer">
                     <c-checkbox
                         id="vote">
                         Don't show it again.
@@ -430,11 +430,11 @@ export default {
         }
     },
     mounted() {
-        // this.$store.commit('application/activateModal', 'please-vote');
+        // this.$store.commit('application/activeModal', 'please-vote');
     },
     methods: {
         showPurchaseModal() {
-            this.$store.dispatch('application/activateModal', 'purchase')
+            this.$store.dispatch('application/activeModal', 'purchase')
         },
         showArrowsState(el, count) {
             if (el.length > count) {
