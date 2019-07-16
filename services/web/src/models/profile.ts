@@ -73,7 +73,7 @@ export default class Profile extends BaseModel {
             publicCols(builder) {
                 builder.select(['name', 'avatar', 'id']);
             }
-        };
+        }
     }
 
     public static get relationMappings (): RelationMappings {

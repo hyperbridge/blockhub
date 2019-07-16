@@ -6,7 +6,7 @@ import BaseModel from './base'
 export default class Collection extends BaseModel {
     public name!: string
     public parentId!: number
-    public owner!: Profile;
+    public owner!: Profile
 
     public static get tableName (): string {
         return 'collections'
