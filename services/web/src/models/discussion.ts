@@ -30,7 +30,7 @@ export default class Discussion extends BaseModel {
     static get jsonSchema () {
         return {
             type: 'object',
-            required: ['name', 'value', 'meta'],
+            required: ['key', 'value', 'meta'],
             properties: {
             }
         }
@@ -39,7 +39,7 @@ export default class Discussion extends BaseModel {
     static get modifiers () {
         return {
             publicCols (builder) {
-                builder.select(['name', 'key', 'id', 'value'])
+                builder.select(['id', 'key', 'value']);
             },
             idCol (builder) {
                 builder.select(['id'])

@@ -19,8 +19,11 @@ export default class Message extends BaseModel {
     public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
-            required: [],
+            required: [], // 'owner'
             properties: {
+                owner: {
+                    type: 'object'
+                }
             }
         }
     }

@@ -1,14 +1,14 @@
 
-exports.up = function(knex, Promise) {
+exports.up = function (knex, Promise) {
     return knex.schema
-        .table('messages', function (table) {
+        .table('messages', table => {
             table
                 .integer('ownerId')
                 .unsigned()
                 .references('id')
                 .inTable('profiles')
                 .onDelete('CASCADE')
-                .notNull();
+                .nullable()
             table
                 .integer('parentId')
                 .unsigned()
@@ -16,24 +16,24 @@ exports.up = function(knex, Promise) {
                 .inTable('messages')
                 .onDelete('CASCADE')
         })
-        .table('discussions', function(table){
-            table.text('content');
-            table.integer('parentId').unsigned();
-            table.integer('rootMessageId').unsigned();
-            table.enum('type', ['discussion', 'chat', 'both']).defaultTo('discussion');
-        });
-};
+        .table('discussions', table => {
+            table.text('content')
+            table.integer('parentId').unsigned()
+            table.integer('rootMessageId').unsigned()
+            table.enum('type', ['discussion', 'chat', 'both']).defaultTo('discussion')
+        })
+}
 
-exports.down = function(knex, Promise) {
+exports.down = function (knex, Promise) {
     return knex.schema
-        .table('messages', function (table) {
+        .table('messages', table => {
             table.dropColumn('ownerId')
             table.dropColumn('parentId')
         })
-        .table('discussions', function(table){
-            table.dropColumn('content');
-            table.dropColumn('parentId');
-            table.dropColumn('rootMessageId');
-            table.dropColumn('type');
-        });
-};
+        .table('discussions', table => {
+            table.dropColumn('content')
+            table.dropColumn('parentId')
+            table.dropColumn('rootMessageId')
+            table.dropColumn('type')
+        })
+}

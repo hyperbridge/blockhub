@@ -7,6 +7,8 @@ export const data = [
 ]
 
 export const seed = async function (knex): Promise<any> {
+    console.log('[BlockHub] Seeding votes')
+
     await knex('votes').del()
 
     await Vote

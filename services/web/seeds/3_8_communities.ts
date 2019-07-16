@@ -3,14 +3,15 @@ import Community from '../src/models/community'
 export const data = [
     {
         status: 'active',
-        name: 'New to BlockHub',
+        value: 'New to BlockHub',
         meta: {
             lastPostTime: '2018-08-01T04:09:00.000Z',
             discussionsCount: '8234'
         }
     },
     {
-        title: 'Help and Tips',
+        status: 'active',
+        value: 'Help and Tips',
         meta: {
             lastPostTime: '2017-11-04T04:09:00.000Z',
             discussionsCount: 34
@@ -18,7 +19,7 @@ export const data = [
     },
     {
         status: 'active',
-        name: 'Proposals and Ideas',
+        value: 'Proposals and Ideas',
         meta: {
             lastPostTime: '2017-11-04T04:09:00.000Z',
             discussionsCount: '127',
@@ -27,7 +28,7 @@ export const data = [
     },
     {
         status: 'active',
-        name: 'BlockHub for Mac',
+        value: 'BlockHub for Mac',
         meta: {
             lastPostTime: '2018-07-24T04:09:00.000Z',
             discussionsCount: '37',
@@ -36,7 +37,7 @@ export const data = [
     },
     {
         status: 'active',
-        name: 'BlockHub for Windows',
+        value: 'BlockHub for Windows',
         meta: {
             lastPostTime: '2018-03-21T04:09:00.000Z',
             discussionsCount: '328',
@@ -44,9 +45,8 @@ export const data = [
         }
     },
     {
-        id: '4',
         status: 'active',
-        name: 'BlockHub for Linux',
+        value: 'BlockHub for Linux',
         meta: {
             lastPostTime: '2016-07-24T04:09:00.000Z',
             discussionsCount: '41',
@@ -56,9 +56,12 @@ export const data = [
 ]
 
 export const seed = async function (knex): Promise<any> {
+    console.log('[BlockHub] Seeding communities')
+
     await knex('communities').del()
 
     await Community
         .query(knex)
+        // @ts-ignore
         .upsertGraph(data)
 }

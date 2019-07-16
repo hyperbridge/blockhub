@@ -5,6 +5,8 @@ export const data = [
         ownerId: 1,
         name: "My Project Name",
         value: "<h2>An adventure of a lifetime...</h2>\n<p>Any new features or tools which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.</p><p>Our store is hosted on Shopify Inc. They provide us with the online e-commerce platform that allows us to sell our products and services to you.</p> IMAGE LIST",
+        status: 'active',
+        contractStatus: 'Contributable',
         meta: {
             revision: 0,
             created: 1531430916082,
@@ -118,6 +120,8 @@ export const data = [
 ]
 
 export const seed = async function (knex): Promise<any> {
+    console.log('[BlockHub] Seeding projects')
+
     await knex('projects').del()
 
     await Project

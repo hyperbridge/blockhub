@@ -138,7 +138,10 @@ export const data = [
 ]
 
 export const seed = async function (knex): Promise<any> {
+    console.log('[BlockHub] Seeding profiles')
+
     await knex('profiles').del()
+    await knex.raw('TRUNCATE TABLE profiles RESTART IDENTITY CASCADE')
 
     await Profile
         .query(knex)

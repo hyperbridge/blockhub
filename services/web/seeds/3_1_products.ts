@@ -3449,7 +3449,7 @@ export const data = [
                     directx: "DirectX® 11",
                     hardDrive: "10 GB",
                     sound: "100% DirectX® 9.0C compliant sound card or equivalent onboard sound",
-                    "coop_play: "NVIDIA® GeForce® 8800 cards require 640MB of Video RAM.  ATI Radeon™ HD3800 cards require 1GB of Video RAM"
+                    coopPlay: "NVIDIA® GeForce® 8800 cards require 640MB of Video RAM.  ATI Radeon™ HD3800 cards require 1GB of Video RAM"
                 },
                 {
                     os: "linux",
@@ -3458,7 +3458,7 @@ export const data = [
                     gpu: "GeForce GTX 760 (2048 MB) or equivalent or Radeon HD 7950 (2048 MB) or equivalent",
                     recommended_graphics_drivers: "Nvidia 352, 355 or 358 series driver / AMD: AMD Catalyst (fglrx) 15.9 or better. MESA drivers and Intel Graphics are not currently supported.",
                     ram: "8192 MB",
-                    disk_space: "Around 7 GB"
+                    diskSpace: "Around 7 GB"
                 }
             ],
             systemTags: [
@@ -3749,9 +3749,12 @@ export const data = [
 ]
 
 export const seed = async function (knex): Promise<any> {
+    console.log('[BlockHub] Seeding products')
+
     await knex('products').del()
 
     Product
         .query(knex)
+        // @ts-ignore
         .upsertGraph(data)
 }

@@ -40,7 +40,7 @@ export const data = [
         status: 'active',
         email: 'onlyUserPermission@test.com',
         firstName: 'onlyUsers',
-        lastName: '',
+        lastName: 'Test',
         password: '$2a$13$vEf6V5EnDiapOIKRG4Kxy.DQ9v6WZG6cZqNq4qOh2/IuLXDIx9i2S',
         meta: {
             permissions: {
@@ -53,7 +53,7 @@ export const data = [
         status: 'active',
         email: 'noPermissions@test.com',
         firstName: 'noPermissions',
-        lastName: '',
+        lastName: 'Test',
         password: '$2a$13$vEf6V5EnDiapOIKRG4Kxy.DQ9v6WZG6cZqNq4qOh2/IuLXDIx9i2S',
         meta: {
             permissions: {
@@ -63,9 +63,12 @@ export const data = [
 ]
 
 export const seed = async function (knex): Promise<any> {
-    await knex('accounts').del()
+    console.log('[BlockHub] Seeding accounts')
 
-    await Account
+    await knex('accounts').del()
+    await knex.raw('TRUNCATE TABLE accounts RESTART IDENTITY CASCADE')
+
+    const accounts = await Account
         .query(knex)
         .upsertGraph(data)
 }

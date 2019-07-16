@@ -3254,7 +3254,7 @@
                 "gpu": "GeForce GTX 760 (2048 MB) or equivalent or Radeon HD 7950 (2048 MB) or equivalent",
                 "recommended_graphics_drivers": "Nvidia 352, 355 or 358 series driver / AMD: AMD Catalyst (fglrx) 15.9 or better. MESA drivers and Intel Graphics are not currently supported.",
                 "ram": "8192 MB",
-                "disk_space": "Around 7 GB"
+                "diskSpace": "Around 7 GB"
             }
         ],
         "systemTags": [

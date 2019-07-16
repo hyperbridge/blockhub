@@ -6,6 +6,9 @@ export const data = [
         type: 'game',
         key: 'Game idea name',
         value: 'Game idea about',
+        owner: { id: 1 },
+        community: { id: 1 },
+        rating: { id: 1 },
         meta: {
             description: 'Game idea description',
             revision: 0,
@@ -29,6 +32,9 @@ export const data = [
         type: 'mod',
         key: 'Mod idea name',
         value: 'Mod idea about',
+        owner: { id: 1 },
+        community: { id: 1 },
+        rating: { id: 1 },
         meta: {
             description: 'Mod idea description',
             revision: 0,
@@ -52,6 +58,9 @@ export const data = [
         type: 'item',
         key: 'Item idea name',
         value: 'Item idea about',
+        owner: { id: 1 },
+        community: { id: 1 },
+        rating: { id: 1 },
         meta: {
             description: 'Item idea description',
             revision: 0,
@@ -73,9 +82,13 @@ export const data = [
 ]
 
 export const seed = async function (knex): Promise<any> {
+    console.log('[BlockHub] Seeding ideas')
+
     await knex('ideas').del()
 
     await Idea
         .query(knex)
-        .upsertGraph(data)
+        .upsertGraph(data, {
+            relate: true
+        })
 }

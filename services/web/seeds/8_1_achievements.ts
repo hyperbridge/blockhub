@@ -7,6 +7,8 @@ export const data = [
 ]
 
 export const seed = async function (knex): Promise<any> {
+    console.log('[BlockHub] Seeding achievements')
+
     await knex('achievements').del()
 
     await Achievement

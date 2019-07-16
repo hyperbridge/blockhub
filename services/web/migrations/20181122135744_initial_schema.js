@@ -2,7 +2,9 @@ const charset = 'utf8mb4'
 const collation = 'utf8mb4_unicode_ci'
 
 exports.up = knex => {
-    const defaults = (table, options = { status: true, timestamps: true, editors: true }) => {
+    const defaults = (table, options = {}) => {
+        options = { status: true, timestamps: true, editors: true, ...options }
+
         // table.charset(charset)
         // table.collate(collation)
 
@@ -23,22 +25,22 @@ exports.up = knex => {
         if (options.editors) {
             table.integer('createdBy')
                 .unsigned()
-                .notNullable()
+                .nullable()
                 .references('profiles.id')
-                .onUpdate('CASCADE')
-                .onDelete('CASCADE')
+                .onUpdate('SET NULL')
+                .onDelete('SET NULL')
             table.integer('editedBy')
                 .unsigned()
                 .nullable()
                 .references('profiles.id')
-                .onUpdate('CASCADE')
-                .onDelete('CASCADE')
+                .onUpdate('SET NULL')
+                .onDelete('SET NULL')
             table.integer('deletedBy')
                 .unsigned()
                 .nullable()
                 .references('profiles.id')
-                .onUpdate('CASCADE')
-                .onDelete('CASCADE')
+                .onUpdate('SET NULL')
+                .onDelete('SET NULL')
         }
 
         if (options.timestamps) {
@@ -90,8 +92,6 @@ exports.up = knex => {
         .createTable('communities', table => {
             defaults(table)
 
-            table.string('name', 100)
-
             table.integer('currentActiveUsers').unsigned()
             table.integer('dailyActiveUsers').unsigned()
             table.integer('monthlyActiveUsers').unsigned()
@@ -106,7 +106,7 @@ exports.up = knex => {
                 .unsigned()
                 .references('id')
                 .inTable('profiles')
-                .onDelete('CASCADE')
+                .onDelete('SET NULL')
             table
                 .integer('licenseId')
                 .unsigned()
@@ -129,7 +129,7 @@ exports.up = knex => {
                 .unsigned()
                 .references('id')
                 .inTable('profiles')
-                .onDelete('CASCADE')
+                .onDelete('SET NULL')
             table
                 .integer('communityId')
                 .unsigned()
@@ -143,7 +143,6 @@ exports.up = knex => {
         .createTable('ideas', table => {
             defaults(table)
 
-            table.string('name', 100)
             table.string('type', 100)
 
             table
@@ -165,10 +164,10 @@ exports.up = knex => {
             table.string('name', 100)
         })
         .createTable('projects', table => {
-            defaults(table, { status: false })
+            defaults(table)
 
             table.string('name', 100)
-            table.enum('status', ['Inactive', 'Draft', 'Pending', 'Contributable', 'InDevelopment', 'Refundable', 'Rejected', 'Completed']).defaultTo('Draft')
+            table.enum('contractStatus', ['Inactive', 'Draft', 'Pending', 'Contributable', 'InDevelopment', 'Refundable', 'Rejected', 'Completed']).defaultTo('Draft')
 
             table
                 .integer('ownerId')
@@ -225,8 +224,6 @@ exports.up = knex => {
         })
         .createTable('discussions', table => {
             defaults(table)
-
-            table.string('name', 100)
         })
         .createTable('events', table => {
             defaults(table)
@@ -296,6 +293,11 @@ exports.up = knex => {
                 .references('id')
                 .inTable('ratings')
                 .onDelete('CASCADE')
+        })
+        .createTable('roles', table => {
+            defaults(table)
+
+            table.string('name', 100)
         })
         .createTable('nodes', table => {
             table.increments('id').primary()

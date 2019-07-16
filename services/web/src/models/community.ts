@@ -25,7 +25,7 @@ export default class Community extends BaseModel {
     public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
-            required: ['name', 'meta'],
+            required: ['value', 'meta'],
             properties: {
             }
         }
