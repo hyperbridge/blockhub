@@ -52,7 +52,10 @@ export default {
             type: Boolean,
             default: false
         },
-        width: String
+        width: {
+            type: String,
+            default: null
+        }
     },
     data() {
         return {

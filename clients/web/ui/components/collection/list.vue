@@ -40,6 +40,7 @@
 </template>
 
 <script>
+
 export default {
     components: {
         'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m)
