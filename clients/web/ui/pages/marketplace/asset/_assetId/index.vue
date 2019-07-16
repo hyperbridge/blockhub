@@ -17,7 +17,7 @@
                 <ul class="details__list">
                     <li class="details__list-item">
                         <span class="details__title">Game:</span>
-                        {{ asset.product.value }}
+                        {{ asset.product.name }}
                     </li>
                     <li class="details__list-item">
                         <span class="details__title">Type:</span>

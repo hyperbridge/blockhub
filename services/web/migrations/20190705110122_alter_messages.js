@@ -3,18 +3,11 @@ exports.up = function (knex, Promise) {
     return knex.schema
         .table('messages', table => {
             table
-                .integer('ownerId')
-                .unsigned()
-                .references('id')
-                .inTable('profiles')
-                .onDelete('CASCADE')
-                .nullable()
-            table
                 .integer('parentId')
                 .unsigned()
                 .references('id')
                 .inTable('messages')
-                .onDelete('CASCADE')
+                .onDelete('SET NULL')
         })
         .table('discussions', table => {
             table.text('content')
@@ -27,7 +20,6 @@ exports.up = function (knex, Promise) {
 exports.down = function (knex, Promise) {
     return knex.schema
         .table('messages', table => {
-            table.dropColumn('ownerId')
             table.dropColumn('parentId')
         })
         .table('discussions', table => {

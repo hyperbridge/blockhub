@@ -17,10 +17,10 @@ export default class Tag extends BaseModel {
     public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
-            required: ['key', 'value', 'meta'],
+            required: ['key', 'name', 'meta'],
             properties: {
                 key: { type: 'string' },
-                value: { type: 'string' },
+                name: { type: 'string' },
                 meta: {
                     type: 'object',
                     required: ['author', 'assets'],
@@ -51,7 +51,7 @@ export default class Tag extends BaseModel {
     public static get modifiers (): any {
         return {
             released (builder) {
-                builder.where('tags.value', 'Released')
+                builder.where('tags.name', 'Released')
             }
         }
     }

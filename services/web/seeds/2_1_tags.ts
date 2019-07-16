@@ -2,45 +2,45 @@ import Tag from '../src/models/tag'
 
 export const data = [
     {
-        id: 1,
         status: 'active',
-        key: 'Game',
-        value: 'Game',
+        key: 'game',
+        name: 'Game',
+        value: 'why is this required',
         meta: {}
     },
     {
-        id: 2,
         status: 'active',
         key: 'Item',
-        value: 'Item',
+        name: 'Item',
+        value: 'why is this required',
         meta: {}
     },
     {
-        id: 3,
         status: 'active',
         key: 'released',
-        value: 'Released',
+        name: 'Released',
+        value: 'why is this required',
         meta: {}
     },
     {
-        id: 4,
         status: 'active',
         key: 'rpg',
-        value: 'RPG',
+        name: 'RPG',
+        value: 'why is this required',
         meta: {}
     },
     {
-        id: 5,
         status: 'active',
         key: 'fantasy',
-        value: 'Fantasy',
+        name: 'Fantasy',
+        value: 'why is this required',
         meta: {}
     },
     {
-        id: 6,
         status: 'active',
         key: 'onlineCoop',
-        value: 'Online Co-Op',
+        name: 'Online Co-Op',
+        value: 'why is this required',
         meta: {}
     }
 ]
@@ -54,6 +54,6 @@ export const seed = async function (knex): Promise<any> {
     await Tag
         .query(knex)
         .upsertGraph(data, {
-            insertMissing: true
+            relate: true
         })
 }

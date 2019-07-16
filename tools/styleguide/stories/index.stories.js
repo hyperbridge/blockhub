@@ -3164,7 +3164,7 @@ storiesOf('Product Card', module)
                     v-for="(product, index) in products"
                     :id="product.id"
                     :imagesMediumTile="product.meta.images.mediumTile"
-                    :name="product.value"
+                    :name="product.name"
                     :metaShortDescription="product.meta.shortDescription"
                     :metaDeveloperTags="product.meta.developerTags"
                     class="col-3"
@@ -3180,7 +3180,7 @@ storiesOf('Product Card', module)
                 <product-card-dynamic
                     v-for="(product, index) in products"
                     :id="product.id"
-                    :name="product.value"
+                    :name="product.name"
                     :price="product.price"
                     :imagesMediumTile="product.meta.images.mediumTile"
                     :video="product.video"

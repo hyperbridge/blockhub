@@ -240,7 +240,7 @@
                             :image="project.meta.images && project.meta.images.mediumTile"
                             :description="project.description"
                             :funds="project.meta.funds"
-                            :parentName="project.product && project.product.value"
+                            :parentName="project.product && project.product.name"
                             :parentDeveloper="project.product && project.product.developer"
                             :parentImage="project.product && project.product.meta.images.mediumTile"
                             class="p-0" />

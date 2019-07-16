@@ -239,7 +239,7 @@ export default class Product extends BaseModel {
                 },
                 filter: (qb) => {
                     // TODO: simplify this when this issue is resolved https://github.com/Vincit/objection.js/issues/1356
-                    qb.select('tags.id', 'tags.value', 'node_tags.fromProductId')
+                    qb.select('tags.id', 'tags.name', 'node_tags.fromProductId')
                     qb.join('nodes as node_tags', 'node_tags.toTagId', 'tags.id')
                     qb.where('node_tags.relationKey', '=', 'tags')
                     // @ts-ignore

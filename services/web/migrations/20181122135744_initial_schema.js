@@ -3,23 +3,36 @@ const collation = 'utf8mb4_unicode_ci'
 
 exports.up = knex => {
     const defaults = (table, options = {}) => {
-        options = { status: true, timestamps: true, editors: true, ...options }
+        options = { status: true, timestamps: true, editors: true, owner: true, ...options }
 
         // table.charset(charset)
         // table.collate(collation)
 
         table.increments('id').primary()
 
+        table.string('name', 100)
+        table.index('name', `${table._tableName}_idx_name`)
+
         table.string('key', 100)
         table.index('key', `${table._tableName}_idx_key`)
 
         table.text('value')
+
         table.jsonb('meta')
 
         if (options.status) {
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
 
             table.index('status', `${table._tableName}_idx_status`)
+        }
+
+        if (options.owner) {
+            table
+                .integer('ownerId')
+                .unsigned()
+                .references('id')
+                .inTable('profiles')
+                .onDelete('SET NULL')
         }
 
         if (options.editors) {
@@ -55,7 +68,7 @@ exports.up = knex => {
 
     return knex.schema
         .createTable('accounts', table => {
-            defaults(table, { editors: false })
+            defaults(table, { editors: false, owner: false })
 
             table.string('email', 100).unique()
             table.string('firstName', 50)
@@ -65,9 +78,8 @@ exports.up = knex => {
             table.string('password', 550)
         })
         .createTable('profiles', table => {
-            defaults(table)
+            defaults(table, { owner: false })
 
-            table.string('name', 100)
             table.string('address', 100)
             table.string('avatar', 100)
             table.enum('role', ['user', 'developer', 'curator', 'admin']).defaultTo('user')
@@ -81,13 +93,9 @@ exports.up = knex => {
         })
         .createTable('licenses', table => {
             defaults(table)
-
-            table.string('name', 100)
         })
         .createTable('achievements', table => {
             defaults(table)
-
-            table.string('name', 100)
         })
         .createTable('communities', table => {
             defaults(table)
@@ -102,12 +110,6 @@ exports.up = knex => {
             table.string('type', 100)
             table.string('standard', 100)
             table
-                .integer('ownerId')
-                .unsigned()
-                .references('id')
-                .inTable('profiles')
-                .onDelete('SET NULL')
-            table
                 .integer('licenseId')
                 .unsigned()
                 .references('id')
@@ -116,20 +118,10 @@ exports.up = knex => {
         })
         .createTable('realms', table => {
             defaults(table)
-
-            table.string('name', 100)
         })
         .createTable('products', table => {
             defaults(table)
 
-            table.string('name', 100)
-
-            table
-                .integer('ownerId')
-                .unsigned()
-                .references('id')
-                .inTable('profiles')
-                .onDelete('SET NULL')
             table
                 .integer('communityId')
                 .unsigned()
@@ -146,12 +138,6 @@ exports.up = knex => {
             table.string('type', 100)
 
             table
-                .integer('ownerId')
-                .unsigned()
-                .references('id')
-                .inTable('profiles')
-                .onDelete('SET NULL')
-            table
                 .integer('communityId')
                 .unsigned()
                 .references('id')
@@ -160,21 +146,12 @@ exports.up = knex => {
         })
         .createTable('reviews', table => {
             defaults(table)
-
-            table.string('name', 100)
         })
         .createTable('projects', table => {
             defaults(table)
 
-            table.string('name', 100)
             table.enum('contractStatus', ['Inactive', 'Draft', 'Pending', 'Contributable', 'InDevelopment', 'Refundable', 'Rejected', 'Completed']).defaultTo('Draft')
 
-            table
-                .integer('ownerId')
-                .unsigned()
-                .references('id')
-                .inTable('profiles')
-                .onDelete('SET NULL')
             table
                 .integer('parentId')
                 .unsigned()
@@ -214,13 +191,9 @@ exports.up = knex => {
         })
         .createTable('bounties', table => {
             defaults(table)
-
-            table.string('name', 100)
         })
         .createTable('collections', table => {
             defaults(table)
-
-            table.string('name', 100)
         })
         .createTable('discussions', table => {
             defaults(table)
@@ -231,15 +204,11 @@ exports.up = knex => {
         .createTable('files', table => {
             defaults(table)
 
-            table.string('name', 100)
-
             table.string('storageType', 100)
             table.string('accessType', 100)
         })
         .createTable('leaderboards', table => {
             defaults(table)
-
-            table.string('name', 100)
 
             table
                 .integer('productId')
@@ -273,16 +242,12 @@ exports.up = knex => {
         })
         .createTable('suggestions', table => {
             defaults(table)
-
-            table.string('name', 100)
         })
         .createTable('tags', table => {
             defaults(table)
         })
         .createTable('tournaments', table => {
             defaults(table)
-
-            table.string('name', 100)
         })
         .createTable('votes', table => {
             defaults(table)
@@ -296,8 +261,6 @@ exports.up = knex => {
         })
         .createTable('roles', table => {
             defaults(table)
-
-            table.string('name', 100)
         })
         .createTable('nodes', table => {
             table.increments('id').primary()

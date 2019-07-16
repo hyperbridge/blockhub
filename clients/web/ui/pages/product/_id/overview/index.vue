@@ -58,13 +58,15 @@
                 :inShortcut="$store.state.application.shortcuts.find(s => s.id == ('product' + product.id))"
                 :releaseDate="product.meta.releaseDate"
                 :playLink="currentRelease && currentRelease.playLink"
+                resourceType="product"
+                :resourceId="product.id"
                 @addToWishlist="$store.dispatch(
                     'community/updateWishlist',
                     ['product', product.id]
                 )"
                 @addToShortcut="$store.commit(
                     'application/updateShortcut',
-                    { id: 'product' + product.id, type: 'product', text: product.value, to: '/product/' + product.id, image: product.meta.images.mediumTile }
+                    { id: 'product' + product.id, type: 'product', text: product.name, to: '/product/' + product.id, image: product.meta.images.mediumTile }
                 )" />
             <c-button
                 iconHide
@@ -178,7 +180,7 @@
                         :key="index">
                         <!--<c-stream-item />-->
                         <c-stream-item
-                            :streamGame="product.value"
+                            :streamGame="product.name"
                             :streamName="stream.userName"
                             :streamAvatar="stream.userAvatar"
                             :streamImg="stream.previews"
@@ -285,12 +287,12 @@
         </div>
         <c-modal
             v-if="showInstaller"
-            :title="product.value"
+            :title="product.name"
             @close="showInstaller = false">
             <c-game-installer
                 slot="body"
                 :productImagesMediumTile="product.images.mediumTile"
-                :productName="product.value"
+                :productName="product.name"
                 :productSystemRequirements="product.systemRequirements"
                 @cancel="showInstaller = false" />
         </c-modal>

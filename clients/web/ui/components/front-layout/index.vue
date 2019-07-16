@@ -178,6 +178,8 @@
                     :name="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.name"
                     :description="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.description"
                     :collections="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.collections"
+                    :resourceType="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.resourceType"
+                    :resourceId="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.resourceId"
                     @close="$store.state.application.activeModal = null" />
 
                 <c-basic-popup

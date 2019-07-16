@@ -80,8 +80,8 @@
                             :key="idx"
                             class="my-3"
                             :class="{ 'mt-0' : idx == 1 }"
-                            @change="updateResource($event, collection)">
-                            {{ collection.name }}
+                            @change="updateResource(collection, $event)">
+                            {{ collection.name }} zzz
                         </c-checkbox>
                     </c-checkbox-group>
                     <div
@@ -123,6 +123,14 @@ export default {
         },
         description: {
             type: String,
+            default: null
+        },
+        resourceType: {
+            type: String,
+            default: null
+        },
+        resourceId: {
+            type: Number,
             default: null
         }
     },
@@ -181,7 +189,8 @@ export default {
 
             await this.fetchCollections()
         },
-        async updateResource(collection, resource, value) {
+        async updateResource(collection, enabled) {
+            console.log(this.resourceType, this.resourceId)
             // TODO: finish this
             /*
             const resources = collection.meta.resources
@@ -195,7 +204,7 @@ export default {
                 ]
             }
 
-            if value ===false
+            if enabled ===false
             resources.removeResource ( resource)
             else
             add
@@ -203,7 +212,7 @@ export default {
 
             await this.$store.dispatch('collections/update', [collection.id, collection, {
                 query: {
-                    $eager: '[owner]'
+                    
                 }
             }])
         }

@@ -35,7 +35,7 @@
                     v-else
                     class="m-0"
                     :id="product.id"
-                    :name="product.value"
+                    :name="product.name"
                     :imagesMediumTile="product.meta.images.mediumTile"
                     :metaShortDescription="product.meta.shortDescription"
                     :metaDeveloperTags="product.meta.developerTags" />

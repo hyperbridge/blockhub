@@ -186,7 +186,7 @@ export default {
             const sortDir = dir => asc ? dir : dir * -1
             return this.$store.state.marketplace[this.category]
                 .filter(product =>
-                    product.value.toLowerCase().includes(this.phrase.toLowerCase()))
+                    product.name.toLowerCase().includes(this.phrase.toLowerCase()))
                 .filter(product => this.selectedGenres.length
                     ? product.developerTags.some(genre => this.selectedGenres.includes(genre))
                     : true)

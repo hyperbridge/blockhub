@@ -28,10 +28,11 @@ const create = function (options = {}): any {
 
         console.log('Collection creation request: ', data)
 
-        const { name, value, meta, owner } = context.data
+        const { key, name, value, meta, owner } = context.data
 
         // Override the original data (so that people can't submit additional stuff)
         context.data = {
+            key,
             name,
             value,
             meta,
@@ -39,7 +40,7 @@ const create = function (options = {}): any {
                 id: owner.id
             }
         }
-
+console.log('bbb', context.data) 
         return context
     }
 }
@@ -51,13 +52,15 @@ const validatePermission = function (options = {}): any {
 
         const account = context.params.user
 
-        const collection = await app.service('communities').get(data.id)
+        const collection = await app.service('collections').get(data.id)
         const profile = await app.service('profiles').get(collection.ownerId)
 
         if (profile.accountId !== account.id) {
             throw new Error('Collection must be owned by a profile of authenticated account')
         }
-
+console.log('sss', context)
+context.id = Number(context.id)
+context.data.value='sss'
         return context
     }
 }

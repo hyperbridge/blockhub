@@ -41,7 +41,7 @@
                                     <div class="form-control-element form-control-element--right">
                                         <input
                                             ref="name"
-                                            v-model="product.value"
+                                            v-model="product.name"
                                             name="name"
                                             type="text"
                                             class="form-control"
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <h1 class="title margin-top-10 margin-bottom-15">
-                                {{ product.value }}
+                                {{ product.name }}
                             </h1>
                         </div>
 
@@ -650,7 +650,7 @@ export default {
             product,
             breadcrumbLinks: [
                 { to: { path: '/' }, title: 'Home' },
-                { to: { path: `/products/${product.id}` }, title: product.value }
+                { to: { path: `/products/${product.id}` }, title: product.name }
             ]
         }
     },
@@ -885,7 +885,7 @@ export default {
 
             console.log('Import response: ', data)
 
-            this.product.value = data.title
+            this.product.name = data.title
             this.product.tags = [{ key: 'imported', value: 'Imported' }]
             this.product.meta = {}
             this.product.meta.type = 'game'

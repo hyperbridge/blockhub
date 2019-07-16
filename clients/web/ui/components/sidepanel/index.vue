@@ -243,7 +243,7 @@
                                     <c-button
                                         status="none"
                                         :to="`/product/${product.id}`">
-                                        <span class="text">{{ product.value }}</span>
+                                        <span class="text">{{ product.name }}</span>
                                     </c-button>
                                 </li>
                                 <li class="more">
@@ -266,7 +266,7 @@
                                     <c-button
                                         status="none"
                                         :to="`/product/${product.id}`">
-                                        <span class="text">{{ product.value }}</span>
+                                        <span class="text">{{ product.name }}</span>
                                     </c-button>
                                 </li>
                                 <li class="more">

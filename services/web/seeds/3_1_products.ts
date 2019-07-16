@@ -9,18 +9,18 @@ export const seed = async function (knex): Promise<any> {
 
     await knex('products').del()
 
-    const community = await Community.query(knex).where('value', 'New to BlockHub').first()
+    const community = await Community.query(knex).where('name', 'New to BlockHub').first()
     const rating = await Rating.query(knex).findById(1)
     const owner = await Profile.query(knex).findById(1)
-
+    console.log('sss', await Tag.query(knex).where('name', 'Released').first())
     const data = [
         {
             // TODO: Testing
-            value: "My Product Name",
+            name: "My Product Name",
             status: 'active',
             owner,
             tags: [
-                await Tag.query(knex).where('value', 'Released').first()
+                await Tag.query(knex).where('name', 'Released').first()
             ],
             meta: {
                 revision: 0,
@@ -44,11 +44,11 @@ export const seed = async function (knex): Promise<any> {
                 tags: [
                     {
                         key: "game",
-                        value: "Game"
+                        name: "Game"
                     },
                     {
                         key: "new",
-                        value: "New"
+                        name: "New"
                     }
                 ],
                 funds: {
@@ -170,7 +170,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Might & Magic: Heroes VI",
+            name: "Might & Magic: Heroes VI",
             status: 'active',
             owner,
             meta: {
@@ -415,7 +415,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Capsized",
+            name: "Capsized",
             status: 'active',
             owner,
             meta: {
@@ -529,7 +529,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "DOOM",
+            name: "DOOM",
             status: 'active',
             owner,
             meta: {
@@ -675,7 +675,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "A Game of Thrones - Genesis",
+            name: "A Game of Thrones - Genesis",
             status: 'active',
             owner,
             meta: {
@@ -794,7 +794,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Teeworlds",
+            name: "Teeworlds",
             status: 'active',
             owner,
             meta: {
@@ -1006,7 +1006,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Wargame: European Escalation",
+            name: "Wargame: European Escalation",
             status: 'active',
             owner,
             meta: {
@@ -1156,7 +1156,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "ArcaniA",
+            name: "ArcaniA",
             status: 'active',
             owner,
             meta: {
@@ -1286,7 +1286,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Pride of Nations",
+            name: "Pride of Nations",
             status: 'active',
             owner,
             meta: {
@@ -1398,7 +1398,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Car Mechanic Simulator 2015 Demo",
+            name: "Car Mechanic Simulator 2015 Demo",
             status: 'active',
             owner,
             meta: {
@@ -1542,7 +1542,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Kingdom Come: Deliverance",
+            name: "Kingdom Come: Deliverance",
             status: 'active',
             owner,
             meta: {
@@ -1690,7 +1690,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Fishing Planet",
+            name: "Fishing Planet",
             status: 'active',
             owner,
             meta: {
@@ -1859,7 +1859,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Men of War: Assault Squad",
+            name: "Men of War: Assault Squad",
             status: 'active',
             owner,
             meta: {
@@ -1989,7 +1989,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Sniper Elite V2",
+            name: "Sniper Elite V2",
             status: 'active',
             owner,
             meta: {
@@ -2119,7 +2119,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Chime",
+            name: "Chime",
             status: 'active',
             owner,
             meta: {
@@ -2229,7 +2229,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Who's That Flying?!",
+            name: "Who's That Flying?!",
             status: 'active',
             owner,
             meta: {
@@ -2318,7 +2318,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Fallout New Vegas: Dead Money",
+            name: "Fallout New Vegas: Dead Money",
             status: 'active',
             owner,
             meta: {
@@ -2423,7 +2423,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Fallout New Vegas: Honest Hearts",
+            name: "Fallout New Vegas: Honest Hearts",
             status: 'active',
             owner,
             meta: {
@@ -2531,7 +2531,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Call of Duty®: Black Ops",
+            name: "Call of Duty®: Black Ops",
             status: 'active',
             owner,
             meta: {
@@ -2648,7 +2648,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Homefront",
+            name: "Homefront",
             status: 'active',
             owner,
             meta: {
@@ -2773,7 +2773,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Mafia II",
+            name: "Mafia II",
             status: 'active',
             owner,
             meta: {
@@ -2919,7 +2919,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "The Witcher 2: Assassins of Kings Enhanced Edition",
+            name: "The Witcher 2: Assassins of Kings Enhanced Edition",
             status: 'active',
             owner,
             meta: {
@@ -3096,7 +3096,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Dungeon Defenders",
+            name: "Dungeon Defenders",
             status: 'active',
             owner,
             meta: {
@@ -3231,7 +3231,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Worms Ultimate Mayhem",
+            name: "Worms Ultimate Mayhem",
             status: 'active',
             owner,
             meta: {
@@ -3350,7 +3350,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Saints Row: The Third",
+            name: "Saints Row: The Third",
             status: 'active',
             owner,
             meta: {
@@ -3501,7 +3501,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "World of Warcraft",
+            name: "World of Warcraft",
             status: 'active',
             owner,
             meta: {
@@ -3652,7 +3652,7 @@ export const seed = async function (knex): Promise<any> {
             }
         },
         {
-            value: "Fishbank",
+            name: "Fishbank",
             status: 'active',
             owner,
             meta: {
@@ -3753,6 +3753,7 @@ export const seed = async function (knex): Promise<any> {
         .query(knex)
         // @ts-ignore
         .upsertGraph(data, {
-            relate: true
+            relate: true,
+            update: false
         })
 }

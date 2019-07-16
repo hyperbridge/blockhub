@@ -37,8 +37,8 @@
                         :key="`product${product.id}`"
                         status="none"
                         :to="`/product/${product.id}`">
-                        <span class="icon icon-letter-circle">{{ product.value.slice(0, 1) }}</span>
-                        <span class="text">{{ product.value }}</span>
+                        <span class="icon icon-letter-circle">{{ product.name.slice(0, 1) }}</span>
+                        <span class="text">{{ product.name }}</span>
                     </c-button>
 
                     <c-button
