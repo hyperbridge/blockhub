@@ -43,18 +43,23 @@ export default class Collection extends BaseModel {
                 relation: Model.HasOneThroughRelation,
                 modelClass: Profile,
                 filter: (qb) => {
-                    qb.join('nodes as node_profiles', 'node_profiles.toProfileId', '=', 'profiles.id')
-                    qb.where('node_profiles.relationKey', 'owner')
-                },
-                beforeInsert (model) {
-                    (model as Node).relationKey = 'owner'
+                    // TODO: simplify this when this issue is resolved https://github.com/Vincit/objection.js/issues/1356
+                    qb.select('profiles.id', 'node_profiles.fromCollectionId')
+                    qb.join('nodes as node_profiles', 'node_profiles.toProfileId', 'profiles.id')
+                    qb.where('node_profiles.relationKey', '=', 'owner')
+                    // @ts-ignore
+                    qb._parentQuery.whereRaw('"owner"."fromCollectionId" = "collections"."id"')
                 },
                 join: {
                     from: 'collections.id',
                     to: 'profiles.id',
                     through: {
                         from: 'nodes.fromCollectionId',
-                        to: 'nodes.toProfileId'
+                        to: 'nodes.toProfileId',
+                        extra: ['relationKey'],
+                        beforeInsert(model) {
+                            (model as Node).relationKey = 'owner'
+                        },
                     }
                 }
             },

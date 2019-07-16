@@ -653,7 +653,7 @@
         ],
         "activeProfile": {
             "id": null,
-            "name": "Unsaved",
+            "name": "Default",
             "role": "user",
             "reputation": 0,
             "badges": [],
