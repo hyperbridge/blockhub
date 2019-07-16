@@ -64,7 +64,7 @@
                 )"
                 @addToShortcut="$store.commit(
                     'application/updateShortcut',
-                    { id: 'product' + product.id, type: 'product', text: product.name, to: '/product/' + product.id, image: product.meta.images.mediumTile }
+                    { id: 'product' + product.id, type: 'product', text: product.value, to: '/product/' + product.id, image: product.meta.images.mediumTile }
                 )" />
             <c-button
                 iconHide
@@ -178,7 +178,7 @@
                         :key="index">
                         <!--<c-stream-item />-->
                         <c-stream-item
-                            :streamGame="product.name"
+                            :streamGame="product.value"
                             :streamName="stream.userName"
                             :streamAvatar="stream.userAvatar"
                             :streamImg="stream.previews"
@@ -285,12 +285,12 @@
         </div>
         <c-modal
             v-if="showInstaller"
-            :title="product.name"
+            :title="product.value"
             @close="showInstaller = false">
             <c-game-installer
                 slot="body"
                 :productImagesMediumTile="product.images.mediumTile"
-                :productName="product.name"
+                :productName="product.value"
                 :productSystemRequirements="product.systemRequirements"
                 @cancel="showInstaller = false" />
         </c-modal>

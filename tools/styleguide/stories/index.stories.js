@@ -48,13 +48,13 @@ Vue.use(StoreDummy)
 
 
 Vue.component('nuxt-link', {
-		props: ['to'],
-		methods: {
-				log() {
-						action('link target')(this.to)
-				},
-		},
-		template: '<div @click="log()"><slot /></div>',
+    props: ['to'],
+    methods: {
+        log() {
+            action('link target')(this.to)
+        },
+    },
+    template: '<div @click="log()"><slot /></div>',
 })
 
 
@@ -405,8 +405,8 @@ storiesOf('Author', module)
         components: {Author},
         data() {
             return {
-		            name: 'SatoSan',
-		            img: 'https://via.placeholder.com/150'
+                    name: 'SatoSan',
+                    img: 'https://via.placeholder.com/150'
             }
         },
         template: `<div class="text-white p-5"><author :name="name" :img="img"/></div>`
@@ -1960,7 +1960,7 @@ const assets_list = [
             "current": 2.99
         },
         count: '240.000',
-		    image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+            image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
     },
     {
         name: 'some another item name',
@@ -2039,50 +2039,50 @@ storiesOf('Assets Overview Popup', module)
         },
         data() {
             return object('Data', {
-		            image: 'https://via.placeholder.com/300',
-		            id: '123',
-		            name: 'Asset title',
-		            productName: 'Asset product name',
-		            acceptOffers: true,
-		            metadata: [
-				            {
-						            "label": "type",
-						            "text": "Legendary Two Handed Sword"
-				            },
-				            {
-						            "label": "average dps",
-						            "text": "2,903.6"
-				            },
-				            {
-						            "label": "Damage Range",
-						            "text": "2193-2880"
-				            },
-				            {
-						            "label": "Attack speed",
-						            "text": "1.15"
-				            },
-				            {
-						            "label": "Bonus 1",
-						            "text": "+1379-1679 Damage, +9% Damage, +1121 strenght"
-				            },
-				            {
-						            "label": "Bonus 2",
-						            "text": "Monster kills grant +151 experiance"
-				            },
-				            {
-						            "label": "Level Requirement",
-						            "text": "70"
-				            },
-				            {
-						            "label": "Item Durability",
-						            "text": "40/41"
-				            }
-		            ],
-		            price: {
-				            "min": 0.99,
-				            "max": 9.99,
-				            "current": 2.99
-		            }
+                    image: 'https://via.placeholder.com/300',
+                    id: '123',
+                    name: 'Asset title',
+                    productName: 'Asset product name',
+                    acceptOffers: true,
+                    metadata: [
+                            {
+                                    "label": "type",
+                                    "text": "Legendary Two Handed Sword"
+                            },
+                            {
+                                    "label": "average dps",
+                                    "text": "2,903.6"
+                            },
+                            {
+                                    "label": "Damage Range",
+                                    "text": "2193-2880"
+                            },
+                            {
+                                    "label": "Attack speed",
+                                    "text": "1.15"
+                            },
+                            {
+                                    "label": "Bonus 1",
+                                    "text": "+1379-1679 Damage, +9% Damage, +1121 strenght"
+                            },
+                            {
+                                    "label": "Bonus 2",
+                                    "text": "Monster kills grant +151 experiance"
+                            },
+                            {
+                                    "label": "Level Requirement",
+                                    "text": "70"
+                            },
+                            {
+                                    "label": "Item Durability",
+                                    "text": "40/41"
+                            }
+                    ],
+                    price: {
+                            "min": 0.99,
+                            "max": 9.99,
+                            "current": 2.99
+                    }
             })
         },
         template: `
@@ -2191,7 +2191,7 @@ storiesOf('Assets List', module)
                     },
                     {
                         image: 'https://vignette.wikia.nocookie.net/angrybirds-fiction/images/8/8b/Toons_assets_chuck_01.png/revision/latest?cb=20150120103056&path-prefix=ru',
-		                    name: 'Magic Chuck',
+                            name: 'Magic Chuck',
                         price: {
                             "min": 0.99,
                             "max": 9.99,
@@ -3094,61 +3094,61 @@ import ProductsCards from '@/components/store/product-cards';
 const productsCardsData = [
     {
         id: 8,
-        name: "Gothic® 3",
-		    meta: {
-				    images: {
-						    header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
-						    mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
-						    main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
-						    preview: [
-								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
-								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004034.1920x1080.jpg?t=1533039803",
-								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004035.1920x1080.jpg?t=1533039803",
-								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004037.1920x1080.jpg?t=1533039803"
-						    ]
-				    },
-				    developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
+        value: "Gothic® 3",
+        meta: {
+            images: {
+                header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+                mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
+                main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+                preview: [
+                    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
+                    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004034.1920x1080.jpg?t=1533039803",
+                    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004035.1920x1080.jpg?t=1533039803",
+                    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004037.1920x1080.jpg?t=1533039803"
+                ]
+            },
+            developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
         },
         author: "Piranha Bytes",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/901191/movie480.webm?t=1490866901"],
     },
     {
         id: 9,
-        name: "The Witcher® 3: Wild Hunt",
-		    meta: {
-				    images: {
-						    header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
-						    mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
-						    main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
-						    preview: [
-								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
-								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004034.1920x1080.jpg?t=1533039803",
-								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004035.1920x1080.jpg?t=1533039803",
-								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004037.1920x1080.jpg?t=1533039803"
-						    ]
-				    },
-				    developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
-		    },
+        value: "The Witcher® 3: Wild Hunt",
+        meta: {
+            images: {
+                header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+                mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
+                main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+                preview: [
+                    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
+                    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004034.1920x1080.jpg?t=1533039803",
+                    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004035.1920x1080.jpg?t=1533039803",
+                    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004037.1920x1080.jpg?t=1533039803"
+                ]
+            },
+            developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
+        },
         author: "CD PROJEKT RED",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256658589/movie480.webm?t=1528288687"],
     },
     {
         id: 10,
-        name: "Fallout 4",
-		    meta: {
-				    images: {
-						    header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
-						    mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
-						    main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
-						    preview: [
-								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
-								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004034.1920x1080.jpg?t=1533039803",
-								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004035.1920x1080.jpg?t=1533039803",
-								    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004037.1920x1080.jpg?t=1533039803"
-						    ]
-				    },
-				    developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
-		    },
+        value: "Fallout 4",
+        meta: {
+            images: {
+                header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+                mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
+                main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+                preview: [
+                    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
+                    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004034.1920x1080.jpg?t=1533039803",
+                    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004035.1920x1080.jpg?t=1533039803",
+                    "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004037.1920x1080.jpg?t=1533039803"
+                ]
+            },
+            developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
+        },
         author: "Bethesda",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256657338/movie480.webm?t=1447378505"],
     }
@@ -3164,7 +3164,7 @@ storiesOf('Product Card', module)
                     v-for="(product, index) in products"
                     :id="product.id"
                     :imagesMediumTile="product.meta.images.mediumTile"
-                    :name="product.name"
+                    :name="product.value"
                     :metaShortDescription="product.meta.shortDescription"
                     :metaDeveloperTags="product.meta.developerTags"
                     class="col-3"
@@ -3180,7 +3180,7 @@ storiesOf('Product Card', module)
                 <product-card-dynamic
                     v-for="(product, index) in products"
                     :id="product.id"
-                    :name="product.name"
+                    :name="product.value"
                     :price="product.price"
                     :imagesMediumTile="product.meta.images.mediumTile"
                     :video="product.video"
@@ -3282,11 +3282,11 @@ storiesOf('Collection', module)
         data() {
             return {
                 id: 44,
-		            title: 'Collection name',
-		            user: 'John Doel',
-		            countNumber: 2741,
-		            background: 'https://via.placeholder.com/100x100',
-		            assets: []
+                    title: 'Collection name',
+                    user: 'John Doel',
+                    countNumber: 2741,
+                    background: 'https://via.placeholder.com/100x100',
+                    assets: []
             }
         },
         template: `
@@ -3311,18 +3311,18 @@ storiesOf('Collection', module)
             return {
                 items: [
                     {
-		                    name: 'Collection name',
+                            name: 'Collection name',
                         meta: {
-		                        author: 'John Doel',
-		                        background: 'https://via.placeholder.com/100x100',
+                                author: 'John Doel',
+                                background: 'https://via.placeholder.com/100x100',
                             assets: []
                         },
                     },
                     {
-		                    name: 'Collection name',
+                            name: 'Collection name',
                         meta: {
-		                        author: 'John Doel',
-		                        background: 'https://via.placeholder.com/100x100',
+                                author: 'John Doel',
+                                background: 'https://via.placeholder.com/100x100',
                             assets: []
                         },
                     },
@@ -3367,88 +3367,88 @@ storiesOf('Game Series', module)
                 title: 'Product title',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
                 tags: ['Nunc', 'Praesent', 'Vestibulum'],
-		            images: ['https://via.placeholder.com/400x250', 'https://via.placeholder.com/400x250'],
+                    images: ['https://via.placeholder.com/400x250', 'https://via.placeholder.com/400x250'],
                 price: 33.49,
                 list: [
                     {
-		                    title: 'Dragon Age: Inquisition',
-		                    company: 'BioWare',
-		                    stars: 5,
-		                    meta: {
-				                    images: {
-						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-				                    }
-		                    },
+                            title: 'Dragon Age: Inquisition',
+                            company: 'BioWare',
+                            stars: 5,
+                            meta: {
+                                    images: {
+                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                                    }
+                            },
                     },
                     {
-		                    title: 'Dragon Age II',
-		                    company: 'BioWare',
-		                    stars: 4,
-		                    meta: {
-				                    images: {
-						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-				                    }
-		                    },
+                            title: 'Dragon Age II',
+                            company: 'BioWare',
+                            stars: 4,
+                            meta: {
+                                    images: {
+                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                                    }
+                            },
                     },
                     {
-		                    title: 'Dragon Age Down Of the Seeker',
-		                    company: 'BioWare',
-		                    stars: 5,
-		                    meta: {
-				                    images: {
-						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-				                    }
-		                    },
+                            title: 'Dragon Age Down Of the Seeker',
+                            company: 'BioWare',
+                            stars: 5,
+                            meta: {
+                                    images: {
+                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                                    }
+                            },
                     },
                     {
-		                    title: 'Dragon Age Origins',
-		                    company: 'BioWare',
-		                    stars: 5,
-		                    meta: {
-				                    images: {
-						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-				                    }
-		                    },
+                            title: 'Dragon Age Origins',
+                            company: 'BioWare',
+                            stars: 5,
+                            meta: {
+                                    images: {
+                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                                    }
+                            },
                     },
                     {
-		                    title: 'Dragon Age: Inquisition',
-		                    company: 'BioWare',
-		                    stars: 5,
-		                    meta: {
-				                    images: {
-						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-				                    }
-		                    },
+                            title: 'Dragon Age: Inquisition',
+                            company: 'BioWare',
+                            stars: 5,
+                            meta: {
+                                    images: {
+                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                                    }
+                            },
                     },
                     {
-		                    title: 'Dragon Age II',
-		                    company: 'BioWare',
-		                    stars: 4,
-		                    meta: {
-				                    images: {
-						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-				                    }
-		                    },
+                            title: 'Dragon Age II',
+                            company: 'BioWare',
+                            stars: 4,
+                            meta: {
+                                    images: {
+                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                                    }
+                            },
                     },
                     {
-		                    title: 'Dragon Age Down Of the Seeker',
-		                    company: 'BioWare',
-		                    stars: 5,
-		                    meta: {
-				                    images: {
-						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-				                    }
-		                    },
+                            title: 'Dragon Age Down Of the Seeker',
+                            company: 'BioWare',
+                            stars: 5,
+                            meta: {
+                                    images: {
+                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                                    }
+                            },
                     },
                     {
-		                    title: 'Dragon Age Origins',
-		                    company: 'BioWare',
-		                    stars: 5,
-		                    meta: {
-				                    images: {
-						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-				                    }
-		                    },
+                            title: 'Dragon Age Origins',
+                            company: 'BioWare',
+                            stars: 5,
+                            meta: {
+                                    images: {
+                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                                    }
+                            },
                     }
                 ]
             }
@@ -3470,14 +3470,14 @@ storiesOf('Game Series', module)
         components: {
             'c-game-description': GameDescription
         },
-		    data() {
-				    return {
-						    id: 34,
-						    title: 'Product title',
-						    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-						    tags: ['Nunc', 'Praesent', 'Vestibulum'],
-						    images: ['https://via.placeholder.com/400x250', 'https://via.placeholder.com/400x250'],
-						    price: 33.49,
+            data() {
+                    return {
+                            id: 34,
+                            title: 'Product title',
+                            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                            tags: ['Nunc', 'Praesent', 'Vestibulum'],
+                            images: ['https://via.placeholder.com/400x250', 'https://via.placeholder.com/400x250'],
+                            price: 33.49,
             }
         },
         template: `<div class="p-5" style="width: 900px">
@@ -3524,9 +3524,9 @@ storiesOf('Game Series', module)
                         title: 'Dragon Age: Inquisition',
                         company: 'BioWare',
                         stars: 5,
-		                    meta: {
+                            meta: {
                             images: {
-		                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg'
+                                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg'
                             }
                         }
                     },
@@ -3534,71 +3534,71 @@ storiesOf('Game Series', module)
                         title: 'Dragon Age II',
                         company: 'BioWare',
                         stars: 4,
-		                    meta: {
-				                    images: {
-						                    mediumTile: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
-				                    }
-		                    }
+                            meta: {
+                                    images: {
+                                            mediumTile: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
+                                    }
+                            }
                     },
                     {
                         title: 'Dragon Age Down Of the Seeker',
                         company: 'BioWare',
                         stars: 5,
-		                    meta: {
-				                    images: {
-						                    mediumTile: 'https://via.placeholder.com/300x430',
-				                    }
-		                    }
+                            meta: {
+                                    images: {
+                                            mediumTile: 'https://via.placeholder.com/300x430',
+                                    }
+                            }
                     },
                     {
                         title: 'Dragon Age Origins',
                         company: 'BioWare',
                         stars: 5,
-		                    meta: {
-				                    images: {
-						                    mediumTile: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg',
-				                    }
-		                    }
+                            meta: {
+                                    images: {
+                                            mediumTile: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg',
+                                    }
+                            }
                     },
                     {
                         title: 'Dragon Age: Inquisition',
                         company: 'BioWare',
                         stars: 5,
-		                    meta: {
-				                    images: {
-						                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-				                    }
-		                    }
+                            meta: {
+                                    images: {
+                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                                    }
+                            }
                     },
                     {
                         title: 'Dragon Age II',
                         company: 'BioWare',
                         stars: 4,
-		                    meta: {
-				                    images: {
-						                    mediumTile: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
-				                    }
-		                    }
+                            meta: {
+                                    images: {
+                                            mediumTile: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
+                                    }
+                            }
                     },
                     {
                         title: 'Dragon Age Down Of the Seeker',
                         company: 'BioWare',
                         stars: 5,
-		                    meta: {
-				                    images: {
-						                    mediumTile: 'https://via.placeholder.com/300x430',
-				                    }
-		                    }
+                            meta: {
+                                    images: {
+                                            mediumTile: 'https://via.placeholder.com/300x430',
+                                    }
+                            }
                     },
                     {
                         title: 'Dragon Age Origins',
                         company: 'BioWare',
                         stars: 5,
-		                    meta: {
-				                    images: {
-						                    mediumTile: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg'
-				                    }
-		                    }
+                            meta: {
+                                    images: {
+                                            mediumTile: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg'
+                                    }
+                            }
                     }
                 ]
             }
@@ -5662,7 +5662,7 @@ storiesOf('Games list', module)
                                 price: '13.99'
                             }
                         ],
-		                    achievements: [
+                            achievements: [
                             {
                                 icon: '',
                                 href: ''
@@ -5708,141 +5708,141 @@ storiesOf('Games list', module)
                         ]
                     },
                     {
-		                    id: 2,
-		                    name: 'Game Of Thor 2',
-		                    sub_name: 'Legendary Edition',
-		                    image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
-		                    download_content:[
-				                    {
-						                    name: 'DragonBore',
-						                    price: '3.99'
-				                    },
-				                    {
-						                    name: 'Hearthfire',
-						                    price: '6.99'
-				                    },
-				                    {
-						                    name: 'Hight Resultation Texture Pack',
-						                    price: '13.99'
-				                    },
-				                    {
-						                    name: 'Dawnguard',
-						                    price: '13.99'
-				                    }
-		                    ],
-		                    achievements: [
-				                    {
-						                    icon: '',
-						                    href: ''
-				                    },
-				                    {
-						                    icon: '',
-						                    href: ''
-				                    },
-				                    {
-						                    icon: '',
-						                    href: ''
-				                    },
-				                    {
-						                    icon: '',
-						                    href: ''
-				                    }
-		                    ],
-		                    friends:[
-				                    {
-						                    link: '#',
-						                    avatar: 'http://kharkov.city/wp-content/uploads/2015/09/cubegirl-avatar_400x4001.jpg'
-				                    },
-				                    {
-						                    link: '#',
-						                    avatar: 'http://www.auto-sib.com/upload/main/2e6/2e667dbfe5de0eda8c1f98777b2a2db8.png'
-				                    },
-				                    {
-						                    link: '#',
-						                    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUCwHqPE2M4z3HsyeQsaOoWtuxjX92a2vVi5p7N9Qm72IM8Dh'
-				                    }
-		                    ],
-		                    news:[
-				                    {
-						                    title: 'Morbi at ligula placerat',
-						                    text: 'Morbi at ligula placerat, vestibulum tortor ac, sollicitudin massa. In in risus vulputate, posuere libero ac, egestas justo. Ut non mattis nulla. Suspendisse acmaximus metus. Nulla auctor laoreet quam, in congue nulla.',
-						                    link: '#'
-				                    },
-				                    {
-						                    title: 'Sed lobortis lacinia ante a bibendum.',
-						                    text: 'Ut gravida vestibulum nunc, sit amet malesuada nisi egestas eu. Integer felis eros, venenatis vel augue sit amet, cursus laoreet eros. Nam fringilla euismod feugiat.',
-						                    link: '#'
-				                    }
-		                    ]
+                            id: 2,
+                            name: 'Game Of Thor 2',
+                            sub_name: 'Legendary Edition',
+                            image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
+                            download_content:[
+                                    {
+                                            name: 'DragonBore',
+                                            price: '3.99'
+                                    },
+                                    {
+                                            name: 'Hearthfire',
+                                            price: '6.99'
+                                    },
+                                    {
+                                            name: 'Hight Resultation Texture Pack',
+                                            price: '13.99'
+                                    },
+                                    {
+                                            name: 'Dawnguard',
+                                            price: '13.99'
+                                    }
+                            ],
+                            achievements: [
+                                    {
+                                            icon: '',
+                                            href: ''
+                                    },
+                                    {
+                                            icon: '',
+                                            href: ''
+                                    },
+                                    {
+                                            icon: '',
+                                            href: ''
+                                    },
+                                    {
+                                            icon: '',
+                                            href: ''
+                                    }
+                            ],
+                            friends:[
+                                    {
+                                            link: '#',
+                                            avatar: 'http://kharkov.city/wp-content/uploads/2015/09/cubegirl-avatar_400x4001.jpg'
+                                    },
+                                    {
+                                            link: '#',
+                                            avatar: 'http://www.auto-sib.com/upload/main/2e6/2e667dbfe5de0eda8c1f98777b2a2db8.png'
+                                    },
+                                    {
+                                            link: '#',
+                                            avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUCwHqPE2M4z3HsyeQsaOoWtuxjX92a2vVi5p7N9Qm72IM8Dh'
+                                    }
+                            ],
+                            news:[
+                                    {
+                                            title: 'Morbi at ligula placerat',
+                                            text: 'Morbi at ligula placerat, vestibulum tortor ac, sollicitudin massa. In in risus vulputate, posuere libero ac, egestas justo. Ut non mattis nulla. Suspendisse acmaximus metus. Nulla auctor laoreet quam, in congue nulla.',
+                                            link: '#'
+                                    },
+                                    {
+                                            title: 'Sed lobortis lacinia ante a bibendum.',
+                                            text: 'Ut gravida vestibulum nunc, sit amet malesuada nisi egestas eu. Integer felis eros, venenatis vel augue sit amet, cursus laoreet eros. Nam fringilla euismod feugiat.',
+                                            link: '#'
+                                    }
+                            ]
                     },
-		                {
-				                id: 3,
-				                name: 'Game Of Thor 3',
-				                sub_name: 'Legendary Edition',
-				                image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
-				                download_content:[
-						                {
-								                name: 'DragonBore',
-								                price: '3.99'
-						                },
-						                {
-								                name: 'Hearthfire',
-								                price: '6.99'
-						                },
-						                {
-								                name: 'Hight Resultation Texture Pack',
-								                price: '13.99'
-						                },
-						                {
-								                name: 'Dawnguard',
-								                price: '13.99'
-						                }
-				                ],
-				                achievements: [
-						                {
-								                icon: '',
-								                href: ''
-						                },
-						                {
-								                icon: '',
-								                href: ''
-						                },
-						                {
-								                icon: '',
-								                href: ''
-						                },
-						                {
-								                icon: '',
-								                href: ''
-						                }
-				                ],
-				                friends:[
-						                {
-								                link: '#',
-								                avatar: 'http://kharkov.city/wp-content/uploads/2015/09/cubegirl-avatar_400x4001.jpg'
-						                },
-						                {
-								                link: '#',
-								                avatar: 'http://www.auto-sib.com/upload/main/2e6/2e667dbfe5de0eda8c1f98777b2a2db8.png'
-						                },
-						                {
-								                link: '#',
-								                avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUCwHqPE2M4z3HsyeQsaOoWtuxjX92a2vVi5p7N9Qm72IM8Dh'
-						                }
-				                ],
-				                news:[
-						                {
-								                title: 'Morbi at ligula placerat',
-								                text: 'Morbi at ligula placerat, vestibulum tortor ac, sollicitudin massa. In in risus vulputate, posuere libero ac, egestas justo. Ut non mattis nulla. Suspendisse acmaximus metus. Nulla auctor laoreet quam, in congue nulla.',
-								                link: '#'
-						                },
-						                {
-								                title: 'Sed lobortis lacinia ante a bibendum.',
-								                text: 'Ut gravida vestibulum nunc, sit amet malesuada nisi egestas eu. Integer felis eros, venenatis vel augue sit amet, cursus laoreet eros. Nam fringilla euismod feugiat.',
-								                link: '#'
-						                }
-				                ]
-		                },
+                        {
+                                id: 3,
+                                name: 'Game Of Thor 3',
+                                sub_name: 'Legendary Edition',
+                                image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
+                                download_content:[
+                                        {
+                                                name: 'DragonBore',
+                                                price: '3.99'
+                                        },
+                                        {
+                                                name: 'Hearthfire',
+                                                price: '6.99'
+                                        },
+                                        {
+                                                name: 'Hight Resultation Texture Pack',
+                                                price: '13.99'
+                                        },
+                                        {
+                                                name: 'Dawnguard',
+                                                price: '13.99'
+                                        }
+                                ],
+                                achievements: [
+                                        {
+                                                icon: '',
+                                                href: ''
+                                        },
+                                        {
+                                                icon: '',
+                                                href: ''
+                                        },
+                                        {
+                                                icon: '',
+                                                href: ''
+                                        },
+                                        {
+                                                icon: '',
+                                                href: ''
+                                        }
+                                ],
+                                friends:[
+                                        {
+                                                link: '#',
+                                                avatar: 'http://kharkov.city/wp-content/uploads/2015/09/cubegirl-avatar_400x4001.jpg'
+                                        },
+                                        {
+                                                link: '#',
+                                                avatar: 'http://www.auto-sib.com/upload/main/2e6/2e667dbfe5de0eda8c1f98777b2a2db8.png'
+                                        },
+                                        {
+                                                link: '#',
+                                                avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUCwHqPE2M4z3HsyeQsaOoWtuxjX92a2vVi5p7N9Qm72IM8Dh'
+                                        }
+                                ],
+                                news:[
+                                        {
+                                                title: 'Morbi at ligula placerat',
+                                                text: 'Morbi at ligula placerat, vestibulum tortor ac, sollicitudin massa. In in risus vulputate, posuere libero ac, egestas justo. Ut non mattis nulla. Suspendisse acmaximus metus. Nulla auctor laoreet quam, in congue nulla.',
+                                                link: '#'
+                                        },
+                                        {
+                                                title: 'Sed lobortis lacinia ante a bibendum.',
+                                                text: 'Ut gravida vestibulum nunc, sit amet malesuada nisi egestas eu. Integer felis eros, venenatis vel augue sit amet, cursus laoreet eros. Nam fringilla euismod feugiat.',
+                                                link: '#'
+                                        }
+                                ]
+                        },
                 ]
             }
         },
@@ -6765,39 +6765,39 @@ storiesOf('Gift box', module)
 
 storiesOf('Profile picker', module)
     .add('default', () => ({
-		    components: {
-				    'c-profile-picker': () => import('~/components/profile-picker').then(m => m.default || m),
-		    },
+            components: {
+                    'c-profile-picker': () => import('~/components/profile-picker').then(m => m.default || m),
+            },
         data(){
-		        return{
-		            profiles: [
+                return{
+                    profiles: [
                     {
-		                    id: 1,
-		                    name: 'Mr. Satoshi',
-		                    wallet: '0x6cc5f688a315f3dc28a7781717a',
-		                    img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
-		                    default: false,
-		                    edit: false,
-		                    status: 'warning'
+                            id: 1,
+                            name: 'Mr. Satoshi',
+                            wallet: '0x6cc5f688a315f3dc28a7781717a',
+                            img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                            default: false,
+                            edit: false,
+                            status: 'warning'
                     },
-				            {
-						            id: 2,
-						            name: 'Mr. Satoshi',
-						            wallet: '0x6cc5f688a315f3dc28a7781717a',
-						            img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
-						            default: false,
-						            edit: false,
-						            status: 'danger'
-				            },
-				            {
-						            id: 3,
-						            name: 'Mr. Satoshi',
-						            wallet: '0x6cc5f688a315f3dc28a7781717a',
-						            img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
-						            default: false,
-						            edit: false,
+                            {
+                                    id: 2,
+                                    name: 'Mr. Satoshi',
+                                    wallet: '0x6cc5f688a315f3dc28a7781717a',
+                                    img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                                    default: false,
+                                    edit: false,
+                                    status: 'danger'
+                            },
+                            {
+                                    id: 3,
+                                    name: 'Mr. Satoshi',
+                                    wallet: '0x6cc5f688a315f3dc28a7781717a',
+                                    img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                                    default: false,
+                                    edit: false,
                         status: 'success'
-				            },
+                            },
                 ]
             }
         },
@@ -6809,11 +6809,11 @@ storiesOf('Profile picker', module)
 
 storiesOf('Vote', module)
     .add('default', () => ({
-		    components: {
-				    'c-simple-vote': () => import('~/components/vote/simple').then(m => m.default || m),
-		    },
+            components: {
+                    'c-simple-vote': () => import('~/components/vote/simple').then(m => m.default || m),
+            },
         data(){
-		        return{}
+                return{}
         },
         template: `<div class="p-5">
                         <div class="position-relative" style="width:300px">

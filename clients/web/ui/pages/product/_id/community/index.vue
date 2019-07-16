@@ -121,7 +121,7 @@ export default {
         breadcrumbLinks() {
             return [
                 { to: { path: '/' }, title: 'Store' },
-                { to: { path: `/product/${this.product.id}` }, title: this.product.name },
+                { to: { path: `/product/${this.product.id}` }, title: this.product.value },
                 { to: { path: '' }, title: 'Community' }
             ]
         }

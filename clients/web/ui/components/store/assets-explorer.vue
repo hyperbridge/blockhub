@@ -71,7 +71,7 @@
                                 <c-option-tag
                                     v-for="(product, index) in selectedProducts"
                                     :key="index"
-                                    :text="product.name"
+                                    :text="product.value"
                                     isChildren
                                     @delete="product.selected = false" />
                             </c-option-tag>
@@ -236,7 +236,7 @@ export default {
             return this.selectableProducts.filter(product => product.selected)
         },
         selectedProductsNames() {
-            return this.selectedProducts.map(product => product.name)
+            return this.selectedProducts.map(product => product.value)
         },
         selectedGenres() {
             return this.selectableGenres.filter(genre => genre.selected)

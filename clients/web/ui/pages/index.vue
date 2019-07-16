@@ -345,7 +345,7 @@ export default {
         const newReleases = (await store.dispatch('products/find', {
             query: {
                 'type': 'game',
-                'tags.value': 'released',
+                'tags.value': 'Released',
                 '$joinRelation': 'tags',
                 '$eager': 'tags',
                 '$sort[releaseDate]': -1,

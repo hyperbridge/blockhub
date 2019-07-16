@@ -24,7 +24,6 @@
 
 <script>
 export default {
-    name: 'ProductCard',
     components: {
         'c-tags': () => import('~/components/tags').then(m => m.default || m)
     },
@@ -36,7 +35,7 @@ export default {
         metaDeveloperTags: {
             type: Array,
             default: () => []
-        },
+        }
     }
 }
 </script>

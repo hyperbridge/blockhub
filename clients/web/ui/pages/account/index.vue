@@ -228,7 +228,7 @@
                                     <c-game-includes-item
                                         :id="product.id"
                                         :image="product.images.mediumTile"
-                                        :name="product.name"
+                                        :name="product.value"
                                         :rating="product.rating.overall"
                                         :developer="product.developer" />
                                     <c-button-fav

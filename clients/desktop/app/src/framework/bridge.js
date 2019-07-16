@@ -442,12 +442,12 @@ export const createMarketplaceProductRequest = async ({ profile, product }) => {
             resolve(product)
         })
 
-        // product.name = 'test'
+        // product.value = 'test'
         // product.type = 'game'
         // product.content = 'test'
 
         await productRegistrationContract.createProduct(
-            product.name,
+            product.value,
             product.type,
             product.content,
             { from: profile.address }

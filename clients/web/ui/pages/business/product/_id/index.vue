@@ -51,7 +51,7 @@
                     </label>
                     <div class="col-sm-9">
                         <input
-                            v-model="product.name"
+                            v-model="product.value"
                             type="text"
                             class="form-control"
                             placeholder="">
@@ -533,11 +533,11 @@ export default {
 
             console.log('Import response: ', data)
 
-            this.product.name = data.title
-            this.product.value = data.value
+            this.product.value = data.title
             this.product.tags = [{ key: 'imported', value: 'Imported' }]
             this.product.meta = {}
             this.product.meta.type = 'game'
+            this.product.meta.description = data.value
             // this.product.meta.rating.overall = 0
             this.product.meta.developerTags = data.tags
             this.product.meta.releaseDate = data.releaseDate

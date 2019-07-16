@@ -59,7 +59,7 @@ export default class Collection extends BaseModel {
                         extra: ['relationKey'],
                         beforeInsert(model) {
                             (model as Node).relationKey = 'owner'
-                        },
+                        }
                     }
                 }
             },

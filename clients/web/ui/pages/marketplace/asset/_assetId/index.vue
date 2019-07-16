@@ -7,7 +7,7 @@
                 class="asset__background-img"
                 :src="asset.image" />
             <h1 class="asset__name">
-                {{ asset.name }}
+                {{ asset.value }}
             </h1>
 
             <div class="asset__details">
@@ -17,7 +17,7 @@
                 <ul class="details__list">
                     <li class="details__list-item">
                         <span class="details__title">Game:</span>
-                        {{ asset.product.name }}
+                        {{ asset.product.value }}
                     </li>
                     <li class="details__list-item">
                         <span class="details__title">Type:</span>

@@ -9,7 +9,7 @@ export const data = [
 export const seed = async function (knex): Promise<any> {
     console.log('[BlockHub] Seeding bounties')
 
-    await knex('profiles').del()
+    await knex('bounties').del()
 
     await Bounty
         .query(knex)

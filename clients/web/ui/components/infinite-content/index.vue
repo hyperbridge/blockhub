@@ -286,7 +286,7 @@
                                             :image="project.images.mediumTile"
                                             :description="project.description"
                                             :funds="project.funds"
-                                            :parentName="project.product && project.product.name"
+                                            :parentName="project.product && project.product.value"
                                             :parentDeveloper="project.product && project.product.developer"
                                             :parentImage="project.product && project.product.images.mediumTile" />
                                     </c-swiper-slide>

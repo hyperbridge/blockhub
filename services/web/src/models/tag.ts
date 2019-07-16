@@ -51,7 +51,7 @@ export default class Tag extends BaseModel {
     public static get modifiers (): any {
         return {
             released (builder) {
-                builder.where('tags.value', 'released')
+                builder.where('tags.value', 'Released')
             }
         }
     }

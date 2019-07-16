@@ -25,18 +25,18 @@
                     v-if="dynamic"
                     class="m-0"
                     :id="product.id"
-                    :price="product.price"
-                    :imagesMediumTile="product.images.mediumTile"
-                    :video="product.video"
-                    :shortDescription="product.shortDescription"
-                    :imagesPreview="product.images.review"
-                    :developerTags="product.developerTags" />
+                    :price="product.meta.price"
+                    :imagesMediumTile="product.meta.images.mediumTile"
+                    :video="product.meta.video"
+                    :shortDescription="product.meta.shortDescription"
+                    :imagesPreview="product.meta.images.review"
+                    :developerTags="product.meta.developerTags" />
                 <c-product-card
                     v-else
                     class="m-0"
                     :id="product.id"
+                    :name="product.value"
                     :imagesMediumTile="product.meta.images.mediumTile"
-                    :name="product.name"
                     :metaShortDescription="product.meta.shortDescription"
                     :metaDeveloperTags="product.meta.developerTags" />
             </c-swiper-slide>

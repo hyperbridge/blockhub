@@ -43,7 +43,7 @@ export const actions = {
         // payload = name, version, category, files, checksum, permissions
 
         // MarketplaceProtocol.Ethereum.Models.Marketplace.submitAppForReview(payload).then(res => {
-        //     const product = DB.marketplace.products.findOne({ 'name': product.name })
+        //     const product = DB.marketplace.products.findOne({ 'value': product.value })
         //     product.id = res[0]
         //     // TODO: assign rest of props
 
@@ -90,7 +90,7 @@ export const mutations = {
 
                     await productRegistrationContract.editProductInfo(
                         product.id,
-                        product.name,
+                        product.value,
                         product.type,
                         product.content,
                         { from: profile.address }
@@ -177,7 +177,7 @@ export const mutations = {
                     })
 
                     await productRegistrationContract.createProduct(
-                        product.name,
+                        product.value,
                         product.type,
                         product.content,
                         { from: profile.address }

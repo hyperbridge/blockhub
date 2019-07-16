@@ -97,7 +97,7 @@
                                         status="none"
                                         :to="`/business/product/${product.id}`"
                                         class="text-secondary text-bold">
-                                        {{ product.name }}
+                                        {{ product.value }}
                                     </c-button>
                                 </td>
                                 <td>{{ product.meta.created }}</td>

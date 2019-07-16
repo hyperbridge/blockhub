@@ -63,7 +63,7 @@
                     :description="project.description"
                     :image="project.meta && project.meta.images.mediumTile"
                     :funds="project.meta && project.meta.funds"
-                    :parentName="project.product && project.product.name"
+                    :parentName="project.product && project.product.value"
                     :parentDeveloper="project.product && project.product.owner"
                     :parentImage="project.product && project.product.meta && project.product.meta.images.mediumTile" />
             </div>

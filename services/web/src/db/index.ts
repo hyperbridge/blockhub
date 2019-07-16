@@ -3,6 +3,12 @@ import Account from '../models/account'
 import Profile from '../models/profile'
 import Project from '../models/project'
 
+/*
+    THIS IS ALL OLD DEPRACATED STUFF
+    DO NOT USE
+    REMOVE SOON
+*/
+
 export type UpdateTokenRequest = {
     id: number,
     accountId: number,
