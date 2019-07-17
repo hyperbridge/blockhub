@@ -23,8 +23,8 @@ if (process.client) {
         const socket = io(serviceUrl, { transports: ['websocket'] })
 
         return feathers()
-            .configure(rest(serviceUrl).axios(axios))
-            // .configure(socketio(socket, { timeout: 15000 }))
+            // .configure(rest(serviceUrl).axios(axios))
+            .configure(socketio(socket, { timeout: 15000 }))
             .configure(auth({ storage }))
     }
 } else {
@@ -32,8 +32,8 @@ if (process.client) {
         const socket = io(serviceUrl)
 
         return feathers()
-            .configure(rest(serviceUrl).axios(axios))
-            // .configure(socketio(socket, { timeout: 15000 }))
+            // .configure(rest(serviceUrl).axios(axios))
+            .configure(socketio(socket, { timeout: 15000 }))
             .configure(auth({ storage }))
     }
 }
