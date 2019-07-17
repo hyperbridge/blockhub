@@ -59,7 +59,6 @@ export default {
         padding: 0 15px;
         display: flex;
         flex-direction: column;
-        width: 50%;
     }
     .social-connect__item-action{
         margin-left: auto;

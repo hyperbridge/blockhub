@@ -6812,9 +6812,6 @@ storiesOf('Vote', module)
 		    components: {
 				    'c-vote': () => import('~/components/vote').then(m => m.default || m),
 		    },
-        data(){
-		        return{}
-        },
         template: `<div class="p-5">
                         <div class="position-relative" style="width:300px">
                             <c-vote :votes="4" />
@@ -6822,6 +6819,93 @@ storiesOf('Vote', module)
                     </div>`
 
     }))
+
+storiesOf('Social connect', module)
+    .add('default', () => ({
+        components: {
+		        'c-social-connect': () => import('~/components/social-connect').then(m => m.default || m)
+        },
+        data(){
+            return{
+		            socials: [
+				            {
+						            name: 'Facebook',
+						            description: 'Shares achievements to your news feed.',
+						            icon: '/img/icons/facebook.svg',
+						            connected: false
+				            },
+				            {
+						            name: 'Twitter',
+						            description: 'Shares achievements to your Twitter feed.',
+						            icon: '/img/icons/twitter.svg',
+						            connected: false
+				            },
+				            {
+						            name: 'Twitch',
+						            description: 'Lets you contribute to streamers.',
+						            icon: '/img/icons/twitch-large.png',
+						            connected: false
+				            },
+				            {
+						            name: 'Discord',
+						            description: 'Lets you connect to your Discord voice/chat channels.',
+						            icon: '/img/icons/discord.png',
+						            connected: false
+				            },
+				            {
+						            name: 'Steam',
+						            description: 'Lets you connect to your Steam account.',
+						            icon: '/img/icons/steam.png',
+						            connected: false
+				            }
+		            ]
+            }
+        },
+        template: `<div class="p-5 text-white" style="width: 550px">
+                        <c-social-connect
+                            v-for="(item, index) in socials"
+                            :key="index"
+                            :class="index + 1 == socials.length ? 'margin-bottom-0' : 'margin-bottom-20'"
+                            :icon="item.icon"
+                            :name="item.name"
+                            :description="item.description"
+                            :connected="item.connected" />
+                            </div>`
+    }))
+
+// storiesOf('Shortcut Grid', module)
+// 		.add('default', () => ({
+// 			components: {
+// 					'c-shortcut-sidebar': () => import('~/components/shortcut-sidebar').then(m => m.default || m),
+// 			},
+// 				data(){
+// 						return{
+// 								shortcuts: []
+// 						}
+// 				},
+// 				template: `<div class="p-5 text-white" style="width: 550px">
+// 												<c-shortcut-sidebar :items="shortcuts" />
+//                     </div>`
+// 		}))
+
+
+storiesOf('QR code', module)
+    .add('default', () => ({
+        components: {
+		        'c-qr-code': () => import('~/components/qr-code').then(m => m.default || m),
+        },
+        template: `<div class="p-7">
+                        <c-qr-code
+                            style="display: inline-block; background: #fff;"
+                            :config="{
+                                value: '23234234k23n4k24j',
+                                imagePath: 'http://localhost:8000/static/img/logo-only.png',
+                                filter: 'threshold',
+                                size: 400,
+                            }" />
+                    </div>`
+    }))
+
 
 
 
