@@ -65,6 +65,7 @@ export default {
     },
     css: [],
     plugins: [
+        { src: '~/plugins/axios' },
         { src: '~/plugins/persist' },
         { src: '~/plugins/auth', ssr: false },
         { src: '~/plugins/components' },
@@ -103,7 +104,7 @@ export default {
         // './modules/init'
     ],
     moment: {
-      locales: ['en', 'fr', 'jp'] // 'en' is built into Moment and cannot be removed
+        locales: ['en', 'fr', 'jp'] // 'en' is built into Moment and cannot be removed
     },
     router: {
         extendRoutes(routes) {
@@ -156,6 +157,10 @@ export default {
             activeSite.routes.forEach(route => {
                 routes.push(route)
             })
+
+            // routes.splice(0, routes.length, ...routes.map((route) => {
+            //     return { ...route, component: path.resolve(__dirname, route.component) }
+            // }))
         }
     },
     sitemap: {
