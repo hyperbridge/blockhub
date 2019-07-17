@@ -11,8 +11,6 @@ import * as bodyParser from 'body-parser'
 import * as jetpack from 'fs-jetpack'
 import * as path from 'path'
 import * as morgan from 'morgan'
-import * as Knex from 'knex'
-import * as Objection from 'objection'
 import * as SwaggerParser from 'swagger-parser'
 import extractPaths, { ExtractPathType } from './utils/spec/extractPaths'
 import middleware from './middleware'
@@ -23,30 +21,6 @@ import middleware from './middleware'
 const port = process.env.API_PORT || 7001
 const server = express()
 
-const knex: Knex = Knex({
-    client: 'mysql',
-    connection: {
-        port: process.env.DATABASE_PORT,
-        host: process.env.DATABASE_HOST,
-        database: process.env.DATABASE_NAME,
-        user: process.env.DATABASE_USER,
-        password: process.env.DATABASE_PASSWORD,
-        typeCast (field: any, next: any) {
-            if (field.type === 'TINY' && field.length === 1) {
-                return field.string() === '1'
-            }
-            return next()
-        }
-    }
-} as Knex.Config)
-
-knex.on('query', query => {
-    console.log(query)
-})
-
-Objection.Model.knex(knex)
-
-// TODO: (Kevin) Remove this completely once it's decided if ElasticSearch is gonna be a thing or not. No ETA.
 const db = {}
 
 // @ts-ignore

@@ -7,12 +7,7 @@
 		"dev": "cross-env NODE_ENV=development yarn run nodemon",
 		"prod": "cross-env NODE_ENV=production yarn run nodemon",
 		"build": "tsc",
-		"start": "cross-env NODE_ENV=production node build/api/src/index.js",
-		"knex": "ts-node -P ./tsconfig.json node_modules/.bin/knex",
-		"db:refresh": "yarn db:migrate && yarn db:seed",
-		"db:seed": "ts-node -P ./tsconfig.json node_modules/.bin/knex seed:run --knexfile knexfile.js --specific=",
-		"db:seedAll": "ts-node -P ./tsconfig.json node_modules/.bin/knex seed:run --knexfile knexfile.js",
-		"db:migrate": "ts-node -P ./tsconfig.json node_modules/.bin/knex migrate:latest --knexfile knexfile.js"
+		"start": "cross-env NODE_ENV=production node build/api/src/index.js"
 	},
 	"engines": {
 		"node": ">=10.0.0"

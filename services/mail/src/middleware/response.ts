@@ -50,12 +50,6 @@ export default async function (options, db, req, res, next): Promise<any> {
         })
     }
 
-    res.permissions = function (permissionsData) {
-        res.permissionsData = permissionsData
-
-        return res
-    }
-
     res.meta = function (metaData) {
         res.metaData = metaData
 
@@ -74,7 +68,7 @@ export default async function (options, db, req, res, next): Promise<any> {
         if (!isValid()) return res
 
         if (!options.responses[res.statusCode].content ||
-			!options.responses[res.statusCode].content['application/json']
+            !options.responses[res.statusCode].content['application/json']
         ) {
             res.statusCode = 500
             jsonOriginal.call(res, { message: 'Response content type not found in spec' })
