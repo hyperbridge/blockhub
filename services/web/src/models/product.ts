@@ -237,7 +237,7 @@ export default class Product extends BaseModel {
                         }
                     }
                 },
-                filter: (qb) => {
+                filter: qb => {
                     // TODO: simplify this when this issue is resolved https://github.com/Vincit/objection.js/issues/1356
                     qb.select('tags.id', 'tags.name', 'node_tags.fromProductId')
                     qb.join('nodes as node_tags', 'node_tags.toTagId', 'tags.id')
@@ -245,7 +245,32 @@ export default class Product extends BaseModel {
                     // @ts-ignore
                     // TODO: figure this out
                     //qb._parentQuery.whereRaw('"nodes"."fromProductId" = "products"."id"')
+                }
+            },
+            internalTags: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Tag,
+                join: {
+                    from: 'products.id',
+                    to: 'tags.id',
+                    through: {
+                        from: 'nodes.fromProductId',
+                        to: 'nodes.toTagId',
+                        extra: ['relationKey'],
+                        beforeInsert(model) {
+                            (model as Node).relationKey = 'internalTags'
+                        }
+                    }
                 },
+                filter: qb => {
+                    // TODO: simplify this when this issue is resolved https://github.com/Vincit/objection.js/issues/1356
+                    qb.select('tags.id', 'tags.name', 'node_tags.fromProductId')
+                    qb.join('nodes as node_tags', 'node_tags.toTagId', 'tags.id')
+                    qb.where('node_tags.relationKey', '=', 'internalTags')
+                    // @ts-ignore
+                    // TODO: figure this out
+                    //qb._parentQuery.whereRaw('"nodes"."fromProductId" = "products"."id"')
+                }
             }
         }
     }

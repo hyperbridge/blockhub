@@ -12,16 +12,13 @@ export const seed = async function (knex): Promise<any> {
     const community = await Community.query(knex).where('name', 'New to BlockHub').first()
     const rating = await Rating.query(knex).findById(1)
     const owner = await Profile.query(knex).findById(1)
-    console.log('sss', await Tag.query(knex).where('name', 'Released').first())
+
     const data = [
         {
             // TODO: Testing
             name: "My Product Name",
             status: 'active',
             owner,
-            tags: [
-                await Tag.query(knex).where('name', 'Released').first()
-            ],
             meta: {
                 revision: 0,
                 created: 1531430916082,
@@ -42,14 +39,7 @@ export const seed = async function (knex): Promise<any> {
                     ]
                 },
                 tags: [
-                    {
-                        key: "game",
-                        name: "Game"
-                    },
-                    {
-                        key: "new",
-                        name: "New"
-                    }
+                    'Released'
                 ],
                 funds: {
                     currency: "USD",
@@ -57,9 +47,6 @@ export const seed = async function (knex): Promise<any> {
                     goal: 8500
                 },
                 author: "0x0",
-                developerTags: [
-                    "adventure"
-                ],
                 official: {
                     discord: {
                         online: 10,
@@ -198,14 +185,6 @@ export const seed = async function (knex): Promise<any> {
                 developer: "Blackhole",
                 publisher: "Ubisoft",
                 content: "The adventure in Heroes VI, starting 400 years before events in Heroes V, catapults a family of heroes into a fast-paced epic story where Angels plot to end -- once and for all -- an unfinished war with their ancient rivals, the Faceless. <br><br>\t\t\t\t\t\tA legendary Archangel General is resurrected, but with his powers crippled. Plagued by horrible memories of the Elder Wars, he plots to recover his powers and take control of Ashan while destroying both Faceless and Demons in a series of carefully orchestrated attacks and betrayals. He underestimates, however, the power of the all-too-human Griffin dynasty. <br><br>\t\t\t\t\t\tThe destiny of these Griffin heroes will be determined by our players.<br><br>\t\t\t\t\t\t<ul><li>Soundtrack.<br>\t\t\t\t\t\t</li><li>Artbook/Poster.<br>\t\t\t\t\t\t</li><li>One month subscription on Heroes Kingdom.<br>\t\t\t\t\t\t</li><li>1 Bonus Single Player Skirmish Map.<br>\t\t\t\t\t\t</li><li>4 Dynasty Heroes : Aguirre, Sveltana, Yume and Kraal.<br>\t\t\t\t\t\t</li><li>2 Dynasty Weapon : Staff of Cleansing and Staff of Asha&#x2019;s Eightfold.</li></ul> Content is delivered via download only.<br><br>\t\t\t\t\t\t<ul><li>Enjoy the critically acclaimed Heroes gameplay, remasterized with the well-known developer, Black Hole, and in close partnership with the game&#x2019;s numerous fans.<br>\t\t\t\t\t\t</li><li><strong>Experience the unique mix of Turn-Based Strategy &amp; RPG:</strong> Explore extra-large adventure maps, collect tons of resources and build extraordinary cities. Perfect your tactics to level-up your heroes, recruit troops &amp; ready them for combat on exclusive battle maps.<br>\t\t\t\t\t\t</li><li><strong>Shape your destiny:</strong> Lead the Heroes of the Griffin dynasty through an intriguing scenario. Choose your path, assume your choices and customize your gaming experience thanks to a brand new Reputation system.<br>\t\t\t\t\t\t</li><li><strong>Rediscover the richness of the M&amp;M Universe:</strong> Discover fantastic landscapes and creatures from the world of Ashan.  Enjoy improved 3D designs and an exclusive new bestiary.<br>\t\t\t\t\t\t</li><li><strong>Share with the community:</strong> Post content &amp; compete with your friends using a new and intelligent, online community interface.</li></ul>",
-                developerTags: [
-                    "Strategy",
-                    "RPG",
-                    "Turn-Based Strategy",
-                    "Turn-Based",
-                    "Fantasy",
-                    "Multiplayer"
-                ],
                 languageSupport: [
                     {
                         name: "English",
@@ -291,10 +270,18 @@ export const seed = async function (knex): Promise<any> {
                         specialInfo: "ATI® RADEON® HD 6000 Series"
                     }
                 ],
+                developerTags: [
+                    'Strategy',
+                    'RPG',
+                    'Turn-Based Strategy',
+                    'Turn-Based',
+                    'Fantasy',
+                    'Multiplayer'
+                ],
                 systemTags: [
-                    "new",
-                    "featured",
-                    "upcoming"
+                    "New",
+                    "Featured",
+                    "Upcoming"
                 ],
                 type: "game",
                 downloads: 0,
@@ -3748,6 +3735,17 @@ export const seed = async function (knex): Promise<any> {
             }
         }
     ]
+
+    for (const item of data) {
+        if (item.meta.developerTags) {
+            // @ts-ignore
+            item.tags = await Tag.query(knex).where('name', item.meta.developerTags)
+        }
+        if (item.meta.systemTags) {
+            // @ts-ignore
+            item.internalTags = await Tag.query(knex).where('name', item.meta.systemTags)
+        }
+    }
 
     await Product
         .query(knex)
