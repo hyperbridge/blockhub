@@ -59,7 +59,7 @@ export default {
             default: null
         },
         iconHide: {
-            type: String,
+            type: Boolean,
             default: false
         },
         status: {
@@ -67,15 +67,15 @@ export default {
             default: 'default'
         },
         swapOrder: {
-            type: String,
+            type: Boolean,
             default: false
         },
         swapDirection: {
-            type: String,
+            type: Boolean,
             default: false
         },
         doubled: {
-            type: String,
+            type: Boolean,
             default: false
         },
         full: {
