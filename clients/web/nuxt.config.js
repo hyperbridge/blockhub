@@ -10,6 +10,10 @@ export default {
     },
     srcDir: 'ui/',
     dev: process.env.NODE_ENV !== 'production',
+    htmlAttrs: {
+        lang: 'en',
+        class: ''
+    },
     head: {
         title: this.pageTitle || 'BlockHub',
         env: {
@@ -98,6 +102,9 @@ export default {
         '@nuxtjs/sentry'
         // './modules/init'
     ],
+    moment: {
+      locales: ['en', 'fr', 'jp'] // 'en' is built into Moment and cannot be removed
+    },
     router: {
         extendRoutes(routes) {
             routes.push({
@@ -184,6 +191,46 @@ export default {
                 fs: 'empty',
                 child_process: 'empty'
             }
+
+            // config.optimization = {
+            //     splitChunks: {
+            //         chunks: 'all',
+            //         automaticNameDelimiter: '.',
+            //         name: isDev ? true : undefined,
+            //         minSize: 30000,
+            //         maxSize: 0,
+            //         minChunks: 1,
+            //         maxAsyncRequests: 5,
+            //         maxInitialRequests: 3,
+            //         cacheGroups: {
+            //             default: default: {
+            //                 minChunks: 2,
+            //                 priority: -20,
+            //                 reuseExistingChunk: true
+            //             }
+            //             vendors: false,
+            //             // vendor chunk
+            //             vendor: {
+            //                 // name of the chunk
+            //                 name: 'vendor',
+            //                 // async + async chunks
+            //                 chunks: 'all',
+            //                 // import file path containing node_modules
+            //                 test: /node_modules/,
+            //                 // priority
+            //                 priority: 20
+            //             },
+            //             common: {
+            //                 name: 'common',
+            //                 minChunks: 2,
+            //                 chunks: 'async',
+            //                 priority: 10,
+            //                 reuseExistingChunk: true,
+            //                 enforce: true
+            //             }
+            //         }
+            //     }
+            // }
         }
     },
     sentry: {
