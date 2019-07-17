@@ -223,8 +223,8 @@ export const actions = {
 
         if (context.store.state.user) {
             const { userId, meta } = context.store.state.user
-            this.$can.setUserId(userId)
-            this.$can.setUserPermissions(userId, meta.permissions)
+            this.$access.setUserId(userId)
+            this.$access.setUserPermissions(userId, meta.permissions)
         }
     },
 
@@ -232,8 +232,8 @@ export const actions = {
         console.log('[BlockHub] Logging in: ', user)
         this.$axios.setToken(token, 'bearer')
         // this.$cookies.set('token', token)
-        this.$can.setUserId(user.userId)
-        this.$can.setUserPermissions(user.userId, user.meta.permissions)
+        this.$access.setUserId(user.userId)
+        this.$access.setUserPermissions(user.userId, user.meta.permissions)
 
         dispatch('application/login')
         commit('token', token)

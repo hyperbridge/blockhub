@@ -211,7 +211,7 @@
         <template slot="menu">
             <div class="row">
                 <div
-                    v-if="product.id && $can('editProducts')"
+                    v-if="product.id && $access('editProducts')"
                     class="col-12 text-right">
                     <c-button
                         status="success"
@@ -595,7 +595,7 @@ export default {
             this.product.ownerId = this.$store.state.application.activeProfile.id
 
             const res = await this.$store.dispatch('products/create', this.product)
-        
+
             this.product.id = res.id
             this.notice = 'Congratulations, your product has been created!'
 

@@ -7,7 +7,7 @@ export default ({ app, store }) => {
         'anonymous': {}
     }
 
-    const $can = function(keys, id, options) {
+    const $access = function(keys, id, options) {
         if (typeof keys === 'string') {
             keys = [keys]
         }
@@ -45,22 +45,22 @@ export default ({ app, store }) => {
         return false
     }
 
-    $can.setUserPermissions = function setUserPermissions(userId, userPermissions) {
+    $access.setUserPermissions = function setUserPermissions(userId, userPermissions) {
         permissions[userId] = userPermissions || {}
     }
 
-    $can.setUserId = function setUserId(userId) {
+    $access.setUserId = function setUserId(userId) {
         defaultUserId = userId
     }
 
-    app.$can = $can
-    store.$can = $can
+    app.$access = $access
+    store.$access = $access
 
     const plugin = {
         install() {
             Vue.mixin({
                 created() {
-                    this.$can = $can
+                    this.$access = $access
                 }
             })
         }
