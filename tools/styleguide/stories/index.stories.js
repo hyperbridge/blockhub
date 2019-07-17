@@ -6810,14 +6810,14 @@ storiesOf('Profile picker', module)
 storiesOf('Vote', module)
     .add('default', () => ({
 		    components: {
-				    'c-simple-vote': () => import('~/components/vote/simple').then(m => m.default || m),
+				    'c-vote': () => import('~/components/vote').then(m => m.default || m),
 		    },
         data(){
 		        return{}
         },
         template: `<div class="p-5">
                         <div class="position-relative" style="width:300px">
-                            <c-simple-vote :votes="4" />
+                            <c-vote :votes="4" />
                         </div>
                     </div>`
 

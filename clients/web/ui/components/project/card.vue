@@ -48,7 +48,7 @@
             </c-button>
         </div>
 
-        <c-simple-vote
+        <c-vote
             v-if="hovering"
             v-darklaunch="'RATINGS'"
             :votes="rating" />
