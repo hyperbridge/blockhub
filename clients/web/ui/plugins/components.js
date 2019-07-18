@@ -37,3 +37,4 @@ Vue.component('c-breadcrumb', Breadcrumb)
 Vue.component('c-simple-vote', SimpleVote)
 Vue.component('c-img', Img)
 Vue.component('c-darklaunch', Darklaunch)
+

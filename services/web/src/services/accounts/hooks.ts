@@ -1,3 +1,5 @@
+import { appendFile } from 'fs'
+/* eslint-disable no-shadow-restricted-names */
 const { authenticate } = require('@feathersjs/authentication').hooks
 const { hashPassword, protect } = require('@feathersjs/authentication-local').hooks
 const { errorIfReadonly, allowNull, wildcardsInLike } = require('../../hooks')
@@ -26,10 +28,29 @@ const populate = function (options = {}): any {
                         accountId: item.id
                     }
                 })
-
                 item.profiles = profiles.data
             }
         }))
+        return context
+    }
+}
+
+const beforePatch = function (options = {}): any {
+    return async context => {
+        const { id, app, data } = context
+
+        if (data.google) {
+            console.log('Social account patch', data)
+
+            context.data = {
+                email: data.google.profile.email,
+                firstName: data.google.profile.name.givenName || ' ',
+                lastName: data.google.profile.name.familyName || ' ',
+                key: 'google',
+                value: data.googleId,
+                password: ' '
+            }
+        }
 
         return context
     }
@@ -42,8 +63,9 @@ export const before = {
     get: [],
     create: [hashPassword(), gravatar()],
     update: [hashPassword(), authenticate('jwt')],
-    patch: [hashPassword(), authenticate('jwt')],
-    remove: [authenticate('jwt')]
+    patch: [beforePatch(), hashPassword(), authenticate('jwt')],
+    remove: []
+    // remove: [authenticate('jwt')]
 }
 
 export const after = {

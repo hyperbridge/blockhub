@@ -10,5 +10,11 @@
   },
   "devDependencies": {
     "lerna": "^3.8.0"
+  },
+  "dependencies": {
+    "hellojs": "^1.18.1",
+    "location-href": "^1.0.0",
+    "passport-google-oauth20": "^2.0.0",
+    "vue-hellojs": "^0.0.4"
   }
 }

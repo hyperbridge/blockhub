@@ -20,8 +20,8 @@ if (process.client) {
         d = new Date(d.getTime() + (1000 * expires))
         document.cookie = `${variable}=${value}; expires=${d.toGMTString()};`
     }
-
-    if (window.location.hostname === 'blockhub.gg.local') {
+    // For google auth
+    if (window.location.hostname === 'blockhub.gg.local' || window.location.hostname === 'localhost') {
         setCookie('WEB_SERVICE_URL', 'http://blockhub.gg.local:9001')
     }
 

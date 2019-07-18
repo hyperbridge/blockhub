@@ -23,12 +23,11 @@ import session = require('express-session')
 
 // Google Login
 import passport = require('passport')
-import oauth2, { Verifier } from '@feathersjs/authentication-oauth2'
-import location = require('location-href')
+import oauth2 = require('@feathersjs/authentication-oauth2')
 import { CLIENT_RENEG_WINDOW } from 'tls'
 
 
-const { Strategy } = require('passport-google-oauth2')
+import GoogleStrategy = require('passport-google-oauth2')
 
 require('dotenv').config()
 
@@ -38,7 +37,7 @@ const knexfile = require('./knexfile')
 const knex = Knex(knexfile)
 
 knex.on('query', (query): any => {
-    // console.log(query)
+    console.log(query)
 })
 
 Model.knex(knex)
@@ -72,11 +71,8 @@ export default async () => {
     //     Strategy,
     //     clientID: googleClientID,
     //     clientSecret: googleClientSecret,
-    //     scope: ['email', 'profile'],
+    //     scope: ['email'],
     //     passReqToCallback: true,
-    //     accessType: 'offline',
-    //     userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
-    //     callbackPATH: 'http://localhost:9001/auth/google/callback'
     //     callbackURL: 'http://localhost:9001/auth/google/callbackURL'
     // }))
 
@@ -116,7 +112,6 @@ export default async () => {
         app.configure(services[key])
     }
 
-    console.log("app.service('/authentication').hooks check")
     app.service('/authentication').hooks({
         before: {
             all: [
@@ -130,6 +125,7 @@ export default async () => {
         after: {
             create: [
                 (context): any => {
+                    console.log('auth.check', context.params.user.id)
                     context.result.accountId = context.params.user.id
                     context.result.profiles = context.params.user.profiles
                     return context
@@ -141,17 +137,42 @@ export default async () => {
     // add any error handlers
     app.use(errorHandler({ logger: loggerLib }))
 
-    // Google Auth Check
+    // app.configure(oauth2({
+    //     name: 'google',
+    //     Strategy,
+    //     clientID: googleClientID,
+    //     clientSecret: googleClientSecret,
+    //     scope: ['email'],
+    //     passReqToCallback: true,
+    //     callbackURL: 'http://localhost:9001/auth/google/callbackURL'
+    // }))
 
-    // app.get('/auth/google/callbackURL', (req, res) => {
-    //     res.send('good')
-    // })
+    // passport.use(
+    //     new GoogleStrategy(
+    //         {
+    //             clientID: googleClientID,
+    //             clientSecret: googleClientSecret,
+    //             callbackURL: 'http://localhost:9001/auth/google/callbackURL',
+    //             accessType: 'offline',
+    //             userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
+    //         },
+    //         (accessToken, refreshToken, profile, cb) => {
+    //         // Extract the minimal profile information we need from the profile object
+    //         // provided by Google
+    //             console.log('profile')
+    //             console.log(profile)
+    //         }
+    //     )
+    // )
 
-
-        // How to use:
-        //
-        // import EmailFirstOAuth2Verifier from './verifiers/verifier';
-        //
+    app.get('/auth/google/callbackURL',
+        passport.authenticate('google', { scope: ['profile'] }),
+        // Redirect back to the original page, if any
+        (req, res) => {
+            console.log('call_back_chek')
+            console.log(req)
+            res.send('call_back_check')
+        })
 
     app.use('/ping', {
         async find (params) {
@@ -183,4 +204,3 @@ export default async () => {
 
     return app
 }
-

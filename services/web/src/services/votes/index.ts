@@ -1,5 +1,4 @@
 import Model from '../../models/vote'
-import Node from '../../models/node'
 
 import createService = require('feathers-objection')
 import hooks = require('./hooks')
@@ -24,7 +23,7 @@ export default function (app): any {
     const service = app.service('votes')
 
     app.use('vote/check', {
-        async find(params) {
+        async find (params) {
             const { objectType, objectId, profileId } = params.query
 
             let ret: any = {}
@@ -42,7 +41,7 @@ export default function (app): any {
             if (profile.data[0].vote) {
                 let query = {}
                 const objectTypeLow = objectType.toLowerCase()
-                if (objectTypeLow == 'product') {
+                if (objectTypeLow === 'product') {
                     query = {
                         query: {
                             'products.id': objectId,
@@ -50,7 +49,7 @@ export default function (app): any {
                         }
                     }
                 }
-                if (objectTypeLow == 'idea') {
+                if (objectTypeLow === 'idea') {
                     query = {
                         query: {
                             'ideas.id': objectId,
@@ -58,7 +57,7 @@ export default function (app): any {
                         }
                     }
                 }
-                if (objectTypeLow == 'project') {
+                if (objectTypeLow === 'project') {
                     query = {
                         query: {
                             'projects.id': objectId,

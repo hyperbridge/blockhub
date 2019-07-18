@@ -19,6 +19,28 @@
                         <h2>Sign in to BlockHub</h2>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <c-button
+                            status="second-info"
+                            size="xl"
+                            centered
+                            class="mb-3"
+                            style="display: block"
+                            @click="socialLogin('google')">
+                            Sign in with Google
+                        </c-button>
+                        <c-button
+                            status="second-info"
+                            size="xl"
+                            centered
+                            class="mb-3"
+                            style="display: block"
+                            @click="socialLogin('github')">
+                            Sign in with Github
+                        </c-button>
+                    </div>
+                </div>
                 <div
                     v-darklaunch="`SOCIAL_SIGNIN`"
                     class="row">
@@ -143,11 +165,8 @@ export default {
             const { email, password } = this
             this.errors = []
             this.$store.commit('auth/clearAuthenticateError')
-
             this.loading = true
-
-            if (email &&
-                password) {
+            if (email && password) {
                 this.$store.dispatch('application/login', { email, password })
                     .then(res => {
                         this.$store.commit('application/activateModal', null)
@@ -160,7 +179,6 @@ export default {
                 // Just use the returned error instead of mapping it from the store.
                     .catch(error => {
                         console.warn(error)
-
                         // Convert the error to a plain object and add a message.
                         const type = error.className
                         error = Object.assign({}, error)
@@ -176,9 +194,101 @@ export default {
             }
 
             this.errors.push('Missing fields.')
-        }
+        },
+        socialSignup() {
+            console.log('socialSignup')
+            const { email, password } = this
+            this.errors = []
+            this.$store.commit('accounts/clearCreateError')
+            this.loading = true
+            if (email &&
+                password) {
+                // Automatically log the user in after successful signup.
+                this.$store.dispatch('accounts/create', { email, password })
+                    .then(res => {
+                        this.$store.dispatch('auth/authenticate', { strategy: 'local', email, password })
+                        this.$store.commit('application/activateModal', null)
+                        this.loading = false
+                    })
+                // .then(response => this.$store.dispatch('auth/authenticate', { strategy: 'local', email, password }))
+                // Just use the returned error instead of mapping it from the store.
+                    .catch(error => {
+                        // Convert the error to a plain object and add a message.
+                        const type = error.errorType
+                        error = Object.assign({}, error)
+                        error.message = type === 'uniqueViolated'
+                            ? 'That email address is unavailable.'
+                            : 'An error prevented signup.'
+                        this.errors = [error.message]
+                        
+                        this.loading = false
+                    })
+
+                return
+            }
+
+            this.errors.push('Missing fields.')
+        },
+        socialSigin() {
+            const { email, password } = this
+            this.errors = []
+            this.$store.commit('auth/clearAuthenticateError')
+            this.loading = true
+            if (email && password) {
+                this.$store.dispatch('application/login', { email, password })
+                    .then(res => {
+                        this.$store.commit('application/activateModal', null)
+                        this.loading = false
+                        if (this.$route.query.redirect) {
+                            this.$router.push(this.$route.query.redirect)
+                        }
+                    })
+                // Just use the returned error instead of mapping it from the store.
+                    .catch(error => {
+                        console.warn(error)
+                        // Convert the error to a plain object and add a message.
+                        const type = error.className
+                        error = Object.assign({}, error)
+                        if( type === 'not-authenticated' ){
+                            console.log('social signin bug check')
+                            this.socialSignup()
+                        } else {
+                            error.message = 'An error prevented login.'
+                        }    
+                        this.errors = [error.message]
+
+                        this.loading = false
+                    })
+                return
+            }
+
+            this.errors.push('Missing fields.')
+        },
+        socialLogin(social) {
+            console.log('profile check')
+            const hello = this.$hello;
+            const $this = this;
+            hello(social).login({
+                    scope: ['email']
+                }, auth =>{
+                    console.log('Auth Login', auth)
+                })
+            console.log('Email check')                
+            hello.on('auth.login', async function (auth) {
+                console.log('github_login', auth)
+                const socialToken = auth.authResponse.access_token;
+                const userInfo = await hello(auth.network).api('me');
+                console.log('userInfo', userInfo)
+                // const userId = userInfo.id;
+                // $this.email = userInfo.email;
+                // $this.password = ' ';
+                // console.log('Email check',$this.email)
+                // if (email)
+                // $this.socialSigin()
+            });
+        },
     }
-}
+}    
 </script>
 
 <style lang="scss" scoped>

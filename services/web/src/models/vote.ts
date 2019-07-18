@@ -7,15 +7,15 @@ export default class Vote extends BaseModel {
     // value = 1 or -1 or emoji
     public parentId!: number
 
-    public static get tableName(): string {
+    public static get tableName (): string {
         return 'votes'
     }
 
-    public static get timestamps(): boolean {
+    public static get timestamps (): boolean {
         return true
     }
 
-    public static get jsonSchema(): JsonSchema {
+    public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
             required: [],
@@ -24,7 +24,7 @@ export default class Vote extends BaseModel {
         }
     }
 
-    public static get relationMappings(): RelationMappings {
+    public static get relationMappings (): RelationMappings {
         return {
             parent: {
                 relation: Model.HasOneRelation,

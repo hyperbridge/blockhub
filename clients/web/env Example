@@ -1,0 +1,4 @@
+GOOGLE_CLIENT_ID=201686756178-k9fpb4r2gcvfta4kutfito7aij4qm0bs.apps.googleusercontent.com'
+GOOGLE_CLIENT_SECRET=a621d9f69f4c32e0b5d7
+SOCIAL_LOGIN_REDIRECT_URI=http://localhost:3000/
+OAUTH_PROXY=https://auth-server.herokuapp.com/proxy
