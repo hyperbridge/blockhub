@@ -1302,17 +1302,10 @@ export default {
         a {
             position: relative;
             float: left;
-            width: 15px;
-            height: 15px;
+            width: 18px;
+            height: 18px;
             margin: 0 2px;
-            &:before {
-                @extend %extend_1;
-                opacity: 0;
-            }
-            &:after {
-                @extend %extend_1;
-                opacity: 0;
-            }
+            min-height: 15px!important;
             &:hover {
                 &:after {
                     border-color: $color_2;
@@ -1325,6 +1318,8 @@ export default {
                 background: #ff6159;
                 border-radius: 100%;
                 &:before {
+                    @extend %extend_1;
+                    opacity: 0;
                     bottom: 55%;
                     top: 45%;
                     //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
@@ -1333,6 +1328,8 @@ export default {
                     left: 25%;
                 }
                 &:after {
+                    @extend %extend_1;
+                    opacity: 0;
                     bottom: 55%;
                     top: 45%;
                     //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
@@ -1342,21 +1339,33 @@ export default {
                 }
             }
             &.minimize{
-                background: #ffc434;
+                background: #999;
                 border-radius: 100%;
                 &:before {
+                    @extend %extend_1;
+                    opacity: 0;
                     bottom: 40%;
                     border-bottom-width: 2px;
                 }
                 &:after{
+                    @extend %extend_1;
+                    opacity: 0;
                     display: none;
                 }
             }
             &.maximize{
-                background: #2dd04a;
+                background: #999;
                 border-radius: 100%;
                 &:before {
-                    border-width: 1px 1px 2px 1px;
+                    @extend %extend_1;
+                    opacity: 0;
+                    bottom: 40%;
+                    border-bottom-width: 2px;
+                }
+                &:after{
+                    @extend %extend_1;
+                    opacity: 0;
+                    display: none;
                 }
             }
         }
