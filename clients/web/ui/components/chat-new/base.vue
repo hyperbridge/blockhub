@@ -70,11 +70,13 @@ export default {
         background: #272745;
         flex: 0 0 200px;
         padding: 15px;
+        padding-top: 60px;
         color: #fff;
         border-left: 1px solid rgba(255, 255, 255, .1);
     }
     .chat-main{
         padding: 15px;
+        padding-top: 60px;
         background: #3D3E5D;
         width: 100%;
         position: relative;
