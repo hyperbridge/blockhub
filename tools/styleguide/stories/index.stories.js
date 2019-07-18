@@ -6983,6 +6983,92 @@ storiesOf('Curator panel', module)
     }))
 
 
+storiesOf('Clock', module)
+    .add('default', () => ({
+        components: {
+		        'c-clock': () => import('~/components/clock').then(m => m.default || m),
+        },
+		    template: `<div class="p-5"><c-clock /></div>`
+    }))
+
+storiesOf('Content navigation', module)
+    .add('default', () => ({
+        components: {
+		        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m)
+        },
+        template: `<div class="p-5">
+                        <c-content-navigation
+                            :setLimits="4">
+                            <!--<div-->
+                                <!--slot-scope="props"-->
+                                <!--class="offers__list">-->
+                                <!--<div-->
+                                    <!--v-for="(item, index) in props.items"-->
+                                    <!--:key="index"-->
+                                    <!--class="list-item">-->
+                                    <!--<div class="item-name-img">-->
+                                        <!--<c-img :src="item.image" />-->
+                                        <!--<h4>{{ item.name }}</h4>-->
+                                    <!--</div>-->
+                                    <!--<div class="item-company text-center">-->
+                                        <!--{{ item.company_name }}-->
+                                    <!--</div>-->
+                                    <!--<div class="item-info">-->
+                                        <!--<span class="userName">-->
+                                            <!--{{ item.userName }}-->
+                                        <!--</span>-->
+                                        <!--<span class="price">-->
+                                            <!--$ {{ item.price.current }}-->
+                                        <!--</span>-->
+                                        <!--<a-->
+                                            <!--v-if="item.price.current"-->
+                                            <!--href="#"-->
+                                            <!--class="btn btn-success float-right">-->
+                                            <!--<c-icon name="cart-plus" />-->
+                                            <!--Proceed to Purchase-->
+                                        <!--</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <template
+                                slot="left-content"
+                                class="text-left">
+                                <strong>245345</strong> Available on the market
+                            </template>
+                            <template
+                                slot="right-content"
+                                class="text-right">
+                                <strong>319</strong> On the list
+                                <a
+                                    href="#"
+                                    class="text-white mx-2">
+                                    <i class="fas fa-reply" />
+                                </a>
+                                <a
+                                    href="#"
+                                    class="text-white">
+                                    <i class="fas fa-bookmark" />
+                                </a>
+                            </template>
+                        </c-content-navigation>
+                    </div>`
+    }))
+
+storiesOf('Broken page', module)
+    .add('default', () => ({
+        components: {
+		        'c-broken-page': () => import('~/components/broken-page').then(m => m.default || m)
+        },
+        data(){
+            return{
+		            isError: {
+				            statusCode: 401,
+				            message: 'Unauthorized'
+                }
+            }
+        },
+        template: `<c-broken-page :isError="isError" />`
+    }))
 
 
 
