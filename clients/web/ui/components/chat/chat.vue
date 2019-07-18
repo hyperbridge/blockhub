@@ -2,19 +2,19 @@
     <div
         id="chat"
         class="flex flex-column">
-        <div class="col-12">
-            <c-chat-base style="height: 700px" :channelInfo="channelIfo">
+        <div class="col-12" style="height: 100%;">
+            <c-chat-base style="height: 100%" :channelInfo="channelIfo">
                 <template slot="sidebar">
-                    <c-chat-group-sidebar :channels="channels" v-on:onChannelChange="onChannelChange($event)" />
+                    <c-chat-group-sidebar :channels="channels" @onChannelChange="onChannelChange($event)" />
                 </template>
                 <c-chat-group :currentUser="user" :sendMessage="createMessage">
                     <template slot="messages">
-                        <c-chat-message v-for="msg in messages" v-bind:key="msg.id" :text="msg.value" :time="msg.createdAt" :user="msg.owner" />
+                        <c-chat-message v-for="msg in messages" :key="msg.id" :text="msg.value" :time="msg.createdAt" :user="msg.owner" />
                     </template>
                     <template slot="users">
                         <c-chat-user
                             v-for="user in channelUsers"
-                            v-bind:key="user.id"
+                            :key="user.id"
                             :isAdmin="user.admin"
                             :action="true"
                             :avatar="user.avatar"
@@ -24,7 +24,7 @@
                     </template>
                 </c-chat-group>
             </c-chat-base>
-            <hr />
+            <hr>
         </div>
     </div>
 </template>
@@ -59,6 +59,29 @@ export default {
         messages() {
             return this.$store.getters['messages/list']
         }
+    },
+
+
+    async created() {
+        await this.updateChannels()
+        this.updateChannelInfo()
+        this.updateChannelMessages()
+        
+        this.$feathers.service('messages').on('created', function(message) {debugger
+            console.log('Someone created a message', message)
+        })
+        // this.$feathers.service('messages').on('created', function(message) {debugger
+        //     console.log('Someone created a message', message)
+        // })
+        // console.log(this.$feathers.service, this.$feathers.service('messages'), this.$feathers.io.io)
+        // console.log(2)
+        // this.$feathers.io.io.on('messages created', function(message) {debugger
+        //     console.log('Someone created a message', message)
+        // })
+        // console.log(3)
+        // this.$feathers.on('messages created', function(message) {debugger
+        //     console.log('Someone created a message', message)
+        // })
     },
 
     methods: {
@@ -102,14 +125,14 @@ export default {
                 return
             }
 
-            const { chat, ...channel } = (await this.$store.dispatch('discussions/get', [
+            const { chat, ...channel } = await this.$store.dispatch('discussions/get', [
                 this.activeChannel.id,
                 {
                     query: {
                         $eager: '[chat]'
                     }
                 }
-            ]))
+            ])
             this.channelUsers = chat
             this.channelIfo = channel
         },
@@ -123,51 +146,36 @@ export default {
 
             this.activeChannel = this.channels[this.channelIndex]
         }
-    },
-
-
-    async created() {
-        await this.updateChannels()
-        this.updateChannelInfo()
-        this.updateChannelMessages()
-
-        this.$feathers.service('messages').on('messages created', message => {
-            console.log('Someone created a message', message)
-        })
-
-        this.$feathers.io.on('messages created', message => {
-            console.log('Someone created a message', message)
-        })
-
-        this.$feathers.on('created', message => {
-            console.log('Someone created a message', message)
-        })
-
     }
 }
 </script>
 
 <style scoped>
 #chat {
-  height: 100%;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    top: 16px;
+    left: 55px;
 }
 
 /* Header */
 header.title-bar {
-  padding: 10px 0;
-  border-bottom: 1px solid #f1f1f1;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f1f1;
 }
 
 header.title-bar img.logo {
-  width: 100%;
-  max-width: 140px;
+    width: 100%;
+    max-width: 140px;
 }
 
 header.title-bar span.title {
-  color: #969696;
-  font-weight: 100;
-  text-transform: uppercase;
-  font-size: 1.2em;
-  margin-left: 7px;
+    color: #969696;
+    font-weight: 100;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    margin-left: 7px;
 }
 </style>
