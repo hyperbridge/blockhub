@@ -66,8 +66,8 @@ export default {
         { src: '~/plugins/components' },
         { src: '~/plugins/filters' },
         { src: '~/plugins/directives' },
-        { src: '~/plugins/feathers' },
         { src: '~/plugins/permissions' },
+        { src: '~/plugins/feathers' }, // plugin deps: permissions
         { src: '~/plugins/vue-i18n' },
         { src: '~/plugins/vue-currency' },
         { src: '~/plugins/vue-analytics', ssr: false },

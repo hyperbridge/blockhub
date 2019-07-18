@@ -25,11 +25,8 @@ const decentralizedMode = isDecentralizedMode()
 //     }
 // })
 
-export let plugins = []
+let feathers = null
 
-export const state = () => ({
-    initialized: false
-})
 if (decentralizedMode) {
     service = () => { // eslint-disable-line arrow-body-style
         return {
@@ -72,49 +69,15 @@ if (decentralizedMode) {
         console.log('[auth] TODO')
     }
 } else if (process.client) {
-    const feathers = feathersVuex(feathersClient(), { idField: 'id', enableEvents: false })
-
-    Vue.use(feathers.FeathersVuex)
-
-    service = feathers.service
-    auth = feathers.auth
-
-    plugins = [
-        service('accounts', { paginate: true }),
-        service('messages', { paginate: true }),
-        service('profiles', { paginate: true }),
-        service('products', { paginate: true }),
-        service('achievements', { paginate: true }),
-        service('assets', { paginate: true }),
-        service('badges', { paginate: true }),
-        service('battlepasses', { paginate: true }),
-        service('bounties', { paginate: true }),
-        service('collections', { paginate: true }),
-        service('communities', { paginate: true }),
-        service('discussions', { paginate: true }),
-        service('events', { paginate: true }),
-        service('files', { paginate: true }),
-        service('leaderboards', { paginate: true }),
-        service('licenses', { paginate: true }),
-        service('logs', { paginate: true }),
-        service('offers', { paginate: true }),
-        service('ratings', { paginate: true }),
-        service('reviews', { paginate: true }),
-        service('realms', { paginate: true }),
-        service('servers', { paginate: true }),
-        service('suggestions', { paginate: true }),
-        service('tournaments', { paginate: true }),
-        service('projects', { paginate: true }),
-        service('ideas', { paginate: true }),
-        service('tags', { paginate: true }),
-        service('votes', { paginate: true }),
-        service('search', { paginate: true }),
-        // service('application', { paginate: true }),
-        auth({
-            userService: 'accounts'
-        })
-    ]
+    console.log('zzzzzzzzzzzzz')
 }
+
+export let plugins = []
+
+export const state = () => ({
+    initialized: false,
+    feathers
+})
 
 export const actions = {
     async nuxtServerInit({ commit, dispatch }, context) {
@@ -122,106 +85,47 @@ export const actions = {
 
         app = context.app
 
-        const origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg' // eslint-disable-line no-negated-condition
+        app.req = req
 
-        const storage = {
-            getItem() {
-                return store.state.auth ? store.state.auth.accessToken : ''
-            },
-            setItem(key, value) {
-                store.state.auth.accessToken = value
-            },
-            removeItem() {
-                store.state.auth.accessToken = null
-            }
-        }
-
-        const client = feathersClient(origin, storage)
-        const feathers = feathersVuex(client, { idField: 'id', enableEvents: false })
-
-        service = feathers.service
-        auth = feathers.auth
-
-        service('accounts', { paginate: true })(store)
-        service('messages', { paginate: true })(store)
-        service('profiles', { paginate: true })(store)
-        service('products', { paginate: true })(store)
-        service('achievements', { paginate: true })(store)
-        service('assets', { paginate: true })(store)
-        service('badges', { paginate: true })(store)
-        service('battlepasses', { paginate: true })(store)
-        service('bounties', { paginate: true })(store)
-        service('collections', { paginate: true })(store)
-        service('communities', { paginate: true })(store)
-        service('discussions', { paginate: true })(store)
-        service('events', { paginate: true })(store)
-        service('files', { paginate: true })(store)
-        service('leaderboards', { paginate: true })(store)
-        service('licenses', { paginate: true })(store)
-        service('logs', { paginate: true })(store)
-        service('offers', { paginate: true })(store)
-        service('ratings', { paginate: true })(store)
-        service('reviews', { paginate: true })(store)
-        service('realms', { paginate: true })(store)
-        service('servers', { paginate: true })(store)
-        service('suggestions', { paginate: true })(store)
-        service('tournaments', { paginate: true })(store)
-        service('projects', { paginate: true })(store)
-        service('ideas', { paginate: true })(store)
-        service('tags', { paginate: true })(store)
-        service('votes', { paginate: true })(store)
-        service('search', { paginate: true })(store)
-        // service('application', { paginate: true })(store)
-
-        auth({
-            userService: 'accounts'
-        })(store)
-
-        const cookieToken = app.$cookies.get('feathers-jwt')
-
-        if (cookieToken) {
-            try {
-                const { accessToken } = await store.dispatch('auth/authenticate', {
-                    strategy: 'jwt',
-                    accessToken: cookieToken
-                })
-
-                dispatch('login', {
-                    token: accessToken,
-                    user: store.state.auth.user
-                })
-            } catch (error) {
-                console.log('[BlockHub] Error logging in', error)
-                dispatch('logout')
-                return
-            }
-        } else {
-            dispatch('logout')
-        }
-
-        /*
-            TODO: If the user is authenticated, we can actually pass it to Sentry as part
-            of the context to have a better understanding of how to reproduce an error.
-
-            $sentry.configureScope(scope => scope.setUser({ username: 'john.doe@example.com' }))
-        */
-
-        if (req) {
-            return initAuth({
-                commit,
-                dispatch,
-                req,
-                moduleName: 'auth',
-                cookieName: 'feathers-jwt'
-            })
-                .catch(e => { console.log('Feathers exception', e) })
-        }
     },
 
-    nuxtClientInit({ commit }, context) {
+    async nuxtClientInit({ commit, dispatch }, context) {
         app = context.app
 
+        // const cookieToken = app.$cookies.get('feathers-jwt')
+
+        // if (cookieToken) {
+        //     try {
+        //         const { accessToken } = await dispatch('auth/authenticate', {
+        //             strategy: 'jwt',
+        //             accessToken: cookieToken
+        //         })
+
+        //         dispatch('login', {
+        //             token: accessToken,
+        //             user: state.auth.user
+        //         })
+                
+        //         // const { payload } = jwt.decode(accessToken, { complete: true })
+
+        //         // commit('accounts/setCurrent', payload.userId)
+        //         // commit('auth/setAccessToken', accessToken)
+        //         // commit('auth/setPayload', payload)
+        //         // commit('auth/setUser', getters['accounts/current'])
+
+        //         await dispatch('application/authenticate')
+        //     } catch (error) {
+        //         console.log('[BlockHub] Error logging in', error)
+        //         dispatch('logout')
+        //         return
+        //     }
+        // } else {
+        //     dispatch('logout')
+        // }
+        
         if (context.store.state.user) {
+            // await dispatch('application/authenticate')
+            
             const { userId, meta } = context.store.state.user
             this.$can.setUserId(userId)
             this.$can.setUserPermissions(userId, meta.permissions)
@@ -235,7 +139,8 @@ export const actions = {
         this.$can.setUserId(user.userId)
         this.$can.setUserPermissions(user.userId, user.meta.permissions)
 
-        dispatch('application/login')
+        dispatch('application/authenticate')
+
         commit('token', token)
         commit('user', user)
         commit('loggedIn', true)
