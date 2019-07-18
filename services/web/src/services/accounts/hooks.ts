@@ -35,27 +35,6 @@ const populate = function (options = {}): any {
     }
 }
 
-const beforePatch = function (options = {}): any {
-    return async context => {
-        const { id, app, data } = context
-
-        if (data.google) {
-            console.log('Social account patch', data)
-
-            context.data = {
-                email: data.google.profile.email,
-                firstName: data.google.profile.name.givenName || ' ',
-                lastName: data.google.profile.name.familyName || ' ',
-                key: 'google',
-                value: data.googleId,
-                password: ' '
-            }
-        }
-
-        return context
-    }
-}
-
 // TODO lower case in before
 export const before = {
     all: [],
@@ -63,9 +42,8 @@ export const before = {
     get: [],
     create: [hashPassword(), gravatar()],
     update: [hashPassword(), authenticate('jwt')],
-    patch: [beforePatch(), hashPassword(), authenticate('jwt')],
-    remove: []
-    // remove: [authenticate('jwt')]
+    patch: [hashPassword(), authenticate('jwt')],
+    remove: [authenticate('jwt')]
 }
 
 export const after = {

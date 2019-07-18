@@ -21,14 +21,6 @@ import jwt = require('@feathersjs/authentication-jwt')
 import socketio = require('@feathersjs/socketio')
 import session = require('express-session')
 
-// Google Login
-import passport = require('passport')
-import oauth2, { Verifier } from '@feathersjs/authentication-oauth2'
-import { CLIENT_RENEG_WINDOW } from 'tls'
-
-
-const { Strategy } = require('passport-google-oauth2')
-
 require('dotenv').config()
 
 const KnexSessionStore = require('connect-session-knex')(session)
@@ -56,28 +48,7 @@ export default async () => {
     app.use(cors())
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
-
     app.configure(authentication(config.authentication))
-
-    // Google login
-
-    const {
-        GOOGLE_CLIENT_ID: googleClientID,
-        GOOGLE_CLIENT_SECRET: googleClientSecret
-    } = process.env
-
-    // app.configure(oauth2({
-    //     name: 'google',
-    //     Strategy,
-    //     clientID: googleClientID,
-    //     clientSecret: googleClientSecret,
-    //     scope: ['email', 'profile'],
-    //     passReqToCallback: true,
-    //     accessType: 'offline',
-    //     userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
-    //     callbackPATH: 'http://localhost:9001/auth/google/callback'
-    //     callbackURL: 'http://localhost:9001/auth/google/callbackURL'
-    // }))
 
     app.configure(local())
     app.configure(jwt())
@@ -115,7 +86,6 @@ export default async () => {
         app.configure(services[key])
     }
 
-    console.log("app.service('/authentication').hooks check")
     app.service('/authentication').hooks({
         before: {
             all: [
@@ -139,13 +109,6 @@ export default async () => {
 
     // add any error handlers
     app.use(errorHandler({ logger: loggerLib }))
-
-    // Google Auth Check
-
-    // app.get('/auth/google/callbackURL', (req, res) => {
-    //     res.send('good')
-    // })
-
 
     // How to use:
     //

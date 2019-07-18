@@ -3,12 +3,12 @@ import Account from '../models/account'
 import Profile from '../models/profile'
 import Project from '../models/project'
 
-export type UpdateTokenRequest = {
-    id: number,
-    accountId: number,
-    accessToken1: string,
-    accessToken2: string,
-    snType: string,
+export interface UpdateTokenRequest {
+    id: number;
+    accountId: number;
+    accessToken1: string;
+    accessToken2: string;
+    snType: string;
 }
 
 // export type Project = {
@@ -40,10 +40,10 @@ export type UpdateTokenRequest = {
 // }
 
 export const fetchProjectMembers = async (projectId: number, isAdmin: boolean) => {
-    let projectRecord = await Project
+    const projectRecord = await Project
         .query()
         .eager('members(onlyMembers)', {
-            onlyMembers: (builder) => {
+            onlyMembers: builder => {
                 builder.where('isAdmin', isAdmin ? 1 : 0)
             }
         })
@@ -52,8 +52,7 @@ export const fetchProjectMembers = async (projectId: number, isAdmin: boolean) =
     return Promise.resolve(projectRecord!.members)
 }
 
-export const findSocalProfile = async (uId: string, snType: string) => {
-    return new Promise((resolve, reject) => {
+export const findSocalProfile = async (uId: string, snType: string) => new Promise((resolve, reject) => {
         // let queryString = 'SELECT * from socialProfile where snUid=? AND snType=?'
         // connection.query(queryString, [uId, snType], function(
         //     error,
@@ -65,10 +64,8 @@ export const findSocalProfile = async (uId: string, snType: string) => {
         //     resolve(results)
         // })
     })
-}
 
-export const storeToken = async (accountId: number, accessToken1: string, accessToken2: string, snType: string, snUid: string) => {
-    return new Promise((resolve, reject) => {
+export const storeToken = async (accountId: number, accessToken1: string, accessToken2: string, snType: string, snUid: string) => new Promise((resolve, reject) => {
         // let queryString = 'INSERT INTO socialProfile (accountId, accessToken1, accessToken2, snType, snUid) VALUES(?,?,?,?,?)'
         // connection.query(
         //     queryString,
@@ -81,10 +78,8 @@ export const storeToken = async (accountId: number, accessToken1: string, access
         //     }
         // )
     })
-}
 
-export const updateToken = async (req: UpdateTokenRequest) => {
-    return new Promise((resolve, reject) => {
+export const updateToken = async (req: UpdateTokenRequest) => new Promise((resolve, reject) => {
         // let queryString = 'UPDATE socialProfile set accountId = ?, accessToken1 = ?, accessToken2 =? , snType = ? where id = ? '
         // connection.query(
         //     queryString,
@@ -97,7 +92,6 @@ export const updateToken = async (req: UpdateTokenRequest) => {
         //     }
         // )
     })
-}
 
 
 // export const createAccount = async (email: string, firstName: string, lastName: string, password: string): Promise<Account | undefined> => {
@@ -136,27 +130,27 @@ export const getAccounts = async (isAdmin: boolean) => {
     //         builder.where('isAdmin', isAdmin ? 1 : 0)
     //     }
     // })
-    //.groupBy('id')
+    // .groupBy('id')
 
     return Promise.resolve(accountRecords)
 }
 
 
 export const getAccount = async ({ id, email, fieldKey }): Promise<Account | undefined> => {
-    let result = await Account
+    const result = await Account
         .query()
         .findOne(fieldKey, fieldKey === 'id' ? id : email)
         .eager('profiles')
 
     if (!result) { return Promise.resolve(result) }
 
-    result.status = result.status || (!!result.password ? 'active' : 'disabled')
+    result.status = result.status || (Boolean(result.password) ? 'active' : 'disabled')
 
     return Promise.resolve(result)
 }
 
 export const removeAccount = async ({ id }): Promise<number> => {
-    let result = await Account.query().deleteById(id)
+    const result = await Account.query().deleteById(id)
 
     return Promise.resolve(result)
 }
@@ -171,14 +165,14 @@ export const getProfiles = async (isAdmin: boolean) => {
     //         builder.where('isAdmin', isAdmin ? 1 : 0)
     //     }
     // })
-    //.groupBy('id')
+    // .groupBy('id')
 
     return Promise.resolve(accountRecords)
 }
 
 
 export const getProfile = async ({ id, email, fieldKey }): Promise<Profile | undefined> => {
-    let result = await Profile
+    const result = await Profile
         .query()
         .findOne(fieldKey, fieldKey === 'id' ? id : email)
         .eager('projects')

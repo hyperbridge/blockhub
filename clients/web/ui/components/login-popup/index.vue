@@ -155,7 +155,7 @@ export default {
             errors: [],
             email: null,
             password: null,
-            loading: false
+            loading: false,
         }
     },
     methods: {
@@ -196,7 +196,45 @@ export default {
 
             this.errors.push('Missing fields.')
         },
-        socialSignup() {
+        async socialSigin() {
+            const { email, password } = this
+            this.errors = []
+            this.$store.commit('auth/clearAuthenticateError')
+            this.loading = true
+
+            if (!email ||
+                !password) {
+                this.errors.push('Missing fields.')
+                return
+            }
+
+            await this.$store.dispatch('application/login', { email, password })
+                // Just use the returned error instead of mapping it from the store.
+                .catch(error => {
+                    console.warn(error)
+
+                    // Convert the error to a plain object and add a message.
+                    const type = error.className
+                    error = Object.assign({}, error)                     
+                    if(type === 'not-authenticated'){
+                        this.socialSignup()
+                    } else {
+                        error.message = 'An error prevented login.'
+                    }
+                    this.errors = [error.message]
+                    this.loading = false
+                })
+
+            this.$store.commit('application/activeModal', null)
+            this.loading = false
+
+            if (this.$route.query.redirect) {
+                this.$router.push(this.$route.query.redirect)
+            }
+
+            this.errors.push('Missing fields.')
+        },
+        async socialSignup() {
             console.log('socialSignup')
             const { email, password } = this
             this.errors = []
@@ -230,68 +268,34 @@ export default {
 
             this.errors.push('Missing fields.')
         },
-                async next() {
-            const { email, password } = this
-            this.errors = []
-            this.$store.commit('auth/clearAuthenticateError')
-            this.loading = true
-
-            if (!email ||
-                !password) {
-                this.errors.push('Missing fields.')
-                return
-            }
-
-            await this.$store.dispatch('application/login', { email, password })
-                // Just use the returned error instead of mapping it from the store.
-                .catch(error => {
-                    console.warn(error)
-
-                    // Convert the error to a plain object and add a message.
-                    const type = error.className
-                    error = Object.assign({}, error)
-                    if( type === 'not-authenticated' ){
-                            console.log('social signin bug check')
-                            this.socialSignup()
-                        } else {
-                            error.message = 'An error prevented login.'
-                        }    
-                    this.errors = [error.message]
-                    this.loading = false
-                })
-
-            this.$store.commit('application/activeModal', null)
-            this.loading = false
-
-            if (this.$route.query.redirect) {
-                this.$router.push(this.$route.query.redirect)
-            }
-
-            this.errors.push('Missing fields.')
-        },
         socialLogin(social) {
-            console.log('profile check')
             const hello = this.$hello;
-            const $this = this;
+            const $this = this
+
+            // START setup hellojs
+            hello.init({
+                google: process.env.GOOGLE_CLIENT_ID,
+                github: process.env.GITHUB_CLIENT_ID
+            }, { 
+                redirect_uri: process.env.SOCIAL_LOGIN_REDIRECT_URI
+            }, {
+                oauth_proxy: process.env.OAUTH_PROXY
+            }); 
             hello(social).login({
                     scope: ['email']
-                }, auth =>{
-                    console.log('Auth Login', auth)
-                })
-            console.log('Email check')                
+                })                         
             hello.on('auth.login', async function (auth) {
-                console.log('github_login', auth)
                 const socialToken = auth.authResponse.access_token;
                 const userInfo = await hello(auth.network).api('me');
                 console.log('userInfo', userInfo)
-                // const userId = userInfo.id;
-                // $this.email = userInfo.email;
-                // $this.password = ' ';
-                // console.log('Email check',$this.email)
-                // if (email)
-                // $this.socialSigin()
+                const userId = userInfo.id;
+                $this.email = auth.network == 'github' ? `${userInfo.login}.com`:userInfo.email;
+                $this.password = 'socialLogin';                
+                $this.socialSigin()
             });
         },
+    },
+    mounted(){        
     }
 }    
 </script>

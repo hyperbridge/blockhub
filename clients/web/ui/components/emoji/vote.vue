@@ -59,20 +59,6 @@ export default {
     data() {
         return {
             emojiList: [
-                'grinning',
-                '+1',
-                'kissing_heart',
-                'heart_eyes',
-                'stuck_out_tongue_winking_eye',
-                'sweat_smile',
-                'laughing',
-                'joy',
-                'grin',
-                'hugging_face',
-                'scream',
-                'blush',
-                'yum',
-                'sunglasses'
             ],
             showPicker: false,
             nEmoji: {},

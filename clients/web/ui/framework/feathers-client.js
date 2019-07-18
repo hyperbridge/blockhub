@@ -10,20 +10,10 @@ import Cookie from 'cookie-universal'
 let client = null
 
 if (process.client) {
-    const getCookie = name => {
-        const value = `; ${document.cookie}`
-        const parts = value.split(`; ${name}=`)
-        if (parts.length >= 2) return parts.pop().split(';').shift()
-    }
+    const cookies = Cookie()
 
-    const setCookie = (variable, value, expires) => {
-        let d = new Date()
-        d = new Date(d.getTime() + (1000 * expires))
-        document.cookie = `${variable}=${value}; expires=${d.toGMTString()};`
-    }
-    // For google auth
-    if (window.location.hostname === 'blockhub.gg.local' || window.location.hostname === 'localhost') {
-        setCookie('WEB_SERVICE_URL', 'http://blockhub.gg.local:9001')
+    if (window.location.hostname === 'localhost' || window.location.hostname === 'blockhub.gg.local') {
+        cookies.set('WEB_SERVICE_URL', 'http://localhost:9001')
     }
 
     client = (serviceUrl, storage) => {

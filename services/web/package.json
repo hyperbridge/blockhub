@@ -44,7 +44,6 @@
         "@feathersjs/express": "^1.2.7",
         "@feathersjs/feathers": "^3.2.3",
         "@feathersjs/socketio": "^3.2.7",
-        "passport-google-oauth2": "^0.1.6",
         "blockhub-node-sdk": "^1.3.0",
         "body-parser": "^1.18.3",
         "connect-session-knex": "^1.4.0",
