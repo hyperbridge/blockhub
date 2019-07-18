@@ -48,7 +48,6 @@
         "nuxt": "^2.7.1",
         "popper.js": "^1.15.0",
         "qartjs": "^1.1.2",
-        "s": "^0.1.1",
         "socket.io-client": "^2.2.0",
         "stripe": "^7.3.0",
         "vue-3d-model": "^1.0.2",
