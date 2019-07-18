@@ -57,7 +57,7 @@ export default {
             }
         },
         checked: {
-            type: String,
+            type: Boolean,
             default: false
         },
         size: {
@@ -68,7 +68,7 @@ export default {
             }
         },
         customLabel: {
-            type: String,
+            type: Boolean,
             default: false
         },
         label: {

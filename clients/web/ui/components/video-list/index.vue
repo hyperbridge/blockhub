@@ -49,12 +49,21 @@ export default {
         'c-author': () => import('~/components/author').then(m => m.default || m)
     },
     props: {
-        poster: String,
-        author: String,
-        avatar: String,
+        poster: {
+            type: String,
+            default: null
+        },
+        author: {
+            type: String,
+            default: null
+        },
+        avatar: {
+            type: String,
+            default: null
+        },
         video: {
-            type: Array,
-            default: () => []
+            type: Object,
+            default: () => {}
         },
         comments: {
             type: Array,

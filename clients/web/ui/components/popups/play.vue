@@ -72,7 +72,10 @@ export default {
             type: Boolean,
             default: false
         },
-        gameName: String
+        gameName: {
+            type: String,
+            default: null
+        }
     }
 }
 </script>

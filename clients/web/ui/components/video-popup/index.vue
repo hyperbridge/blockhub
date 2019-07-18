@@ -81,9 +81,15 @@ export default {
             type: Boolean,
             default: false
         },
-        video: [Object, Array],
-        youtube: String,
-        twitch: String,
+        video: Object,
+        youtube: {
+            type: String,
+            default: null
+        },
+        twitch: {
+            type: String,
+            default: null
+        },
         showComments: {
             type: Boolean,
             default: false

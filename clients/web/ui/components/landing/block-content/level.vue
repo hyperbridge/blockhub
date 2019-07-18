@@ -25,7 +25,10 @@
 export default {
     name: 'Level',
     props: {
-        textPosition: String,
+        textPosition: {
+            type: String,
+            default: null
+        },
         textColor: {
             type: String,
             default: '#fff'

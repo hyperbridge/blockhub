@@ -16,7 +16,7 @@
                 <h4>{{ name }}</h4>
             </nuxt-link>
             <h6>by {{ author }}</h6>
-            <div class="count">
+            <div class="count" v-if="assets">
                 <i class="fas fa-box" />
                 {{ assets.length }} {{ assets.length | countLabel }}
             </div>
@@ -38,13 +38,22 @@ export default {
     },
     props: {
         id: Number,
-        name: String,
-        author: String,
+        name: {
+            type: String,
+            default: null
+        },
+        author: {
+            type: String,
+            default: null
+        },
         assets: {
             type: Array,
             default: () => []
         },
-        background: String
+        background: {
+            type: String,
+            default: null
+        }
     },
     data() {
         return {
@@ -52,8 +61,13 @@ export default {
         }
     },
     computed: {
+        image() {
+            return this.background || '/img/collection-bg-1.jpeg'
+        }
+    },
+    methods: {
         getAsset() {
-            const ids = this.assets
+            const ids = this.assets ? this.assets : []
             const list = this.$store.state.marketplace.assets || {}
             const arr = []
 
@@ -65,9 +79,6 @@ export default {
 
             return arr
         },
-        image() {
-            return this.background || '/img/collection-bg-1.jpeg'
-        }
     }
 }
 </script>
