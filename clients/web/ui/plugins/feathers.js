@@ -24,14 +24,6 @@ export default async ({ app, store, req }, bbb) => {
         }
 
         feathers = feathersClient(origin, storage)
-
-        /*
-            TODO: If the user is authenticated, we can actually pass it to Sentry as part
-            of the context to have a better understanding of how to reproduce an error.
-
-            $sentry.configureScope(scope => scope.setUser({ username: 'john.doe@example.com' }))
-        */
-
     } else {
         feathers = feathersClient()
     }
@@ -43,7 +35,6 @@ export default async ({ app, store, req }, bbb) => {
     const service = FeathersVuex.service
     const auth = FeathersVuex.auth
 
-    //plugins = [
     service('accounts', { paginate: true })(store)
     service('messages', { paginate: true })(store)
     service('profiles', { paginate: true })(store)

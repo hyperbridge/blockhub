@@ -68,8 +68,6 @@ if (decentralizedMode) {
     auth = () => {
         console.log('[auth] TODO')
     }
-} else if (process.client) {
-    console.log('zzzzzzzzzzzzz')
 }
 
 export let plugins = []
@@ -86,16 +84,21 @@ export const actions = {
         app = context.app
 
         app.req = req
-
     },
 
     async nuxtClientInit({ commit, dispatch }, context) {
         app = context.app
         
         if (context.store.state.user) {
-            const { userId, meta } = context.store.state.user
+            const { userId, email, meta } = context.store.state.user
             this.$access.setUserId(userId)
             this.$access.setUserPermissions(userId, meta.permissions)
+
+            /*
+                If the user is authenticated, we can actually pass it to Sentry as part
+                of the context to have a better understanding of how to reproduce an error.
+            */
+            this.$sentry.configureScope(scope => scope.setUser({ username: email }))
         }
     },
 
