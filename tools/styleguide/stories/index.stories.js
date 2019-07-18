@@ -6894,7 +6894,7 @@ storiesOf('QR code', module)
         components: {
 		        'c-qr-code': () => import('~/components/qr-code').then(m => m.default || m),
         },
-        template: `<div class="p-7">
+        template: `<div class="p-5">
                         <c-qr-code
                             style="display: inline-block; background: #fff;"
                             :config="{
@@ -6904,6 +6904,20 @@ storiesOf('QR code', module)
                                 size: 400,
                             }" />
                     </div>`
+    }))
+
+
+storiesOf('Curator panel', module)
+    .add('claim', () => ({
+        components: {
+		        'c-claim': () => import('~/components/curator-panel/claim').then(m => m.default || m),
+        },
+		    template: `<div class="p-5">
+                    <!--<c-claim-->
+                        <!--v-for="type in ['warning', 'danger', 'info', 'success']"-->
+                        <!--title="Some title" -->
+                        <!--:type="type"></c-claim>-->
+                </div>`
     }))
 
 
