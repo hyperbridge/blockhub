@@ -107,7 +107,7 @@ export default {
         // './modules/init'
     ],
     moment: {
-        locales: ['en', 'fr', 'jp'] // 'en' is built into Moment and cannot be removed
+        locales: ['en', 'fr', 'ja'] // 'en' is built into Moment and cannot be removed
     },
     router: {
         extendRoutes(routes) {
