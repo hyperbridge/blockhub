@@ -6912,12 +6912,74 @@ storiesOf('Curator panel', module)
         components: {
 		        'c-claim': () => import('~/components/curator-panel/claim').then(m => m.default || m),
         },
+        data(){
+            return{
+                claimTypes: [
+                    {
+                        type: 'warning',
+                        title: 'Warning claim',
+                        text: 'Pellentesque id lectus et sem convallis venenatis dapibus nec est'
+                    },
+		                {
+				                type: 'success',
+				                title: 'Success claim',
+				                text: 'Pellentesque id lectus et sem convallis venenatis dapibus nec est'
+		                },
+		                {
+				                type: 'danger',
+				                title: 'Danger claim',
+				                text: 'Pellentesque id lectus et sem convallis venenatis dapibus nec est'
+		                },
+		                {
+				                type: 'info',
+				                title: 'Info claim',
+				                text: 'Pellentesque id lectus et sem convallis venenatis dapibus nec est'
+		                }
+                ]
+            }
+        },
 		    template: `<div class="p-5">
-                    <!--<c-claim-->
-                        <!--v-for="type in ['warning', 'danger', 'info', 'success']"-->
-                        <!--title="Some title" -->
-                        <!--:type="type"></c-claim>-->
+                    <c-claim
+                        class="mb-4"
+                        v-for="claim in claimTypes"
+                        :title="claim.title" 
+                        :type="claim.type">
+                            {{ claim.text }}
+                    </c-claim>
                 </div>`
+    }))
+    .add('info', () => ({
+        components: {
+		        'c-curator-info': () => import('~/components/curator-panel/info-card').then(m => m.default || m)
+        },
+		    template: `<div class="p-5" style="width: 350px">
+                        <c-curator-info title="Curator panel">
+                            <div v-if="!editing">
+                                <p>
+                                    20 people have
+                                    curated this idea.
+                                </p>
+                                <ul>
+                                    <li>
+                                        <strong>3</strong>
+                                        Approved with 0 changes
+                                    </li>
+                                    <li>
+                                        <strong>7</strong>
+                                        Approved with at least 1 change requested
+                                    </li>
+                                    <li>
+                                        <strong>6</strong>
+                                        Disapproved with requests
+                                    </li>
+                                    <li>
+                                        <strong>4</strong>
+                                        Disapproved with 0 changes
+                                    </li>
+                                </ul>
+                            </div>
+                        </c-curator-info>
+                    </div>`
     }))
 
 
