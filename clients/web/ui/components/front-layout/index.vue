@@ -1587,7 +1587,7 @@ export default {
     background-repeat: no-repeat;
     z-index: 1;
     opacity: 0.7;
-    animation: pulse-opacity ease-in-out 2s infinite alternate;
+    animation: pulse-opacity ease-in-out 2s infinite alternate !important;
 }
 
 #right-bg {
@@ -1602,7 +1602,7 @@ export default {
     background-repeat: no-repeat;
     z-index: 1;
     opacity: 0.7;
-    animation: pulse-opacity ease-in-out 2s infinite alternate;
+    animation: pulse-opacity ease-in-out 2s infinite alternate !important;
 }
 
 #header-bg {

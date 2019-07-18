@@ -3,10 +3,31 @@ import Message from '../src/models/message'
 export const data = [
     {
         status: 'active',
-        value: 'test',
+        value: 'Hello',
+        owner: { id: 1 }
+    },
+    {
+        status: 'active',
+        value: 'World',
+        owner: { id: 1 }
+    },
+    {
+        status: 'active',
+        value: 'Is it a good offer?',
+        owner: { id: 1 }
+    },
+    {
+        status: 'active',
+        value: 'Looks good',
+        owner: { id: 1 }
+    },
+    {
+        status: 'active',
+        value: 'Ok good',
         owner: { id: 1 }
     }
 ]
+
 
 export const seed = async function (knex): Promise<any> {
     console.log('[BlockHub] Seeding messages')

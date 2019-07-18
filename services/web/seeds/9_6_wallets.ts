@@ -1,6 +1,4 @@
-{
-	"meta": {
-		"wallets": [
+const data = [
     {
         "id": "1",
         "name": "Bitcoin",
@@ -106,5 +104,6 @@
         "preferredSwitcher": true
     }
 ]
-	}
+
+export const seed = async function (knex): Promise<any> {
 }

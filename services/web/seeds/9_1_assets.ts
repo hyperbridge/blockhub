@@ -1,4 +1,4 @@
-[
+const data = [
     {
         "id": 1,
         "name": "Magic Plate Armor",
@@ -568,3 +568,9 @@
         "systemTags": []
     }
 ]
+
+
+export const seed = async function (knex): Promise<any> {
+}
+
+

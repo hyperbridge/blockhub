@@ -1,4 +1,4 @@
-[
+const data = [
     {
         "id": 1,
         "asset": 4,
@@ -32,3 +32,7 @@
         "expDate": "2018-12-15T14:29:47+02:00"
     }
 ]
+
+
+export const seed = async function (knex): Promise<any> {
+}

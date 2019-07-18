@@ -1,4 +1,4 @@
-[
+const data = [
     {
         "id": "507f191e810c19729de860ea",
         "contractor": 2,
@@ -52,3 +52,7 @@
         "messages": []
     }
 ]
+
+
+export const seed = async function (knex): Promise<any> {
+}
