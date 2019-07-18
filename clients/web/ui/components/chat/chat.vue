@@ -30,9 +30,6 @@
 </template>
 
 <script>
-
-import { mapState, mapGetters, mapActions } from 'vuex'
-
 export default {
     components: {
         'c-chat-base': () => import('~/components/chat-new/base').then(m => m.default || m),
@@ -49,7 +46,7 @@ export default {
         channels: [],
         channelIndex: 0,
         activeChannel: null,
-        messages: [],
+        messagesData: [],
         channelUsers: [],
         channelIfo: {}
     }),
@@ -57,6 +54,10 @@ export default {
     computed: {
         user() {
             return this.$store.state.auth.user
+        },
+
+        messages() {
+            return this.$store.getters['messages/list']
         }
     },
 
@@ -76,7 +77,7 @@ export default {
                 ownerId: this.$store.state.application.activeProfile.id
             })
 
-            this.messages.push(result)
+            // this.messages.push(result)
             return result
         },
 
@@ -85,7 +86,7 @@ export default {
                 return
             }
 
-            this.messages = (await this.$store.dispatch('messages/find', {
+            this.messagesData = (await this.$store.dispatch('messages/find', {
                 query: {
                     'discussion.id': this.activeChannel.id,
                     $sort: {
@@ -124,10 +125,24 @@ export default {
         }
     },
 
+
     async created() {
         await this.updateChannels()
         this.updateChannelInfo()
         this.updateChannelMessages()
+
+        this.$feathers.service('messages').on('messages created', message => {
+            console.log('Someone created a message', message)
+        })
+
+        this.$feathers.io.on('messages created', message => {
+            console.log('Someone created a message', message)
+        })
+
+        this.$feathers.on('created', message => {
+            console.log('Someone created a message', message)
+        })
+
     }
 }
 </script>
