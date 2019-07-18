@@ -7,10 +7,10 @@
         <template slot="heading-bar">
             <i class="fas fa-laptop title-icon" />
         </template>
-        <c-tabs-universal
+        <c-tabs
             :tabNames="['Mac', 'Win', 'Linux']"
             :setActiveTab="activeTab">
-            <c-tab-universal
+            <c-tab
                 v-for="(os, index) in ['Mac', 'Win', 'Linux']"
                 :key="index"
                 :tabId="index + 1">
@@ -41,18 +41,14 @@
                 <h4 v-else>
                     Not currently supported.
                 </h4>
-            </c-tab-universal>
-        </c-tabs-universal>
+            </c-tab>
+        </c-tabs>
     </c-block>
 </template>
 
 <script>
 export default {
     name: 'SystemRequirements',
-    components: {
-        'c-tab-universal': () => import('~/components/tab/tab-universal').then(m => m.default || m),
-        'c-tabs-universal': () => import('~/components/tab/tabs-universal').then(m => m.default || m)
-    },
     filters: {
         reqProp(val) {
             return val.replace(/[\s_]+/g, ' ').toUpperCase()

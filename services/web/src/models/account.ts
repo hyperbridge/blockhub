@@ -15,7 +15,7 @@ export default class Account extends BaseModel {
     }
 
     public static get timestamps (): boolean {
-        return true
+        return false
     }
 
     public static get jsonSchema (): JsonSchema {

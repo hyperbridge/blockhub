@@ -3,8 +3,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-5">
-                    <a class="logo mt-0 mb-20" href="https://readyblock.one"><img class="img-fluid" src="/projects/cryptoreviews/img/rbo-logo-with-title-inverted.png" alt="" /> </a>
-                    <p class="font-white">The world is changing. Are you ready?</p>
+                    <a class="logo mt-0 mb-20" href="https://readyblock.one"><img class="img-fluid" src="/projects/cryptoreviews/img/rbo-logo-with-title-inverted.png" alt=""> </a>
+                    <p class="font-white">
+                        The world is changing. Are you ready?
+                    </p>
                 </div>
                 <div class="col-sm-7">
                     <ul class="menu">
@@ -16,20 +18,26 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <hr class="mtb-20" />
+                    <hr class="mtb-20">
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-6">
                     <ul class="media-blog ">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="https://www.facebook.com/readyblockone/"><i class="fa fa-facebook"></i></a></li>
-                        <li :style="{ display: 'none' }"><a href="#"><i class="fa fa-google"></i></a></li>
-                        <li :style="{ display: 'none' }"><a href="#"><i class="fa fa-github"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter" /></a></li>
+                        <li><a href="https://www.facebook.com/readyblockone/"><i class="fa fa-facebook" /></a></li>
+                        <li :style="{ display: 'none' }">
+                            <a href="#"><i class="fa fa-google" /></a>
+                        </li>
+                        <li :style="{ display: 'none' }">
+                            <a href="#"><i class="fa fa-github" /></a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <div class="copyright mt-10">Copyright <span id="copyright">2018</span> <a href="http://readyblock.one"><span class="font-yellow">readyblock.one</span></a></div>
+                    <div class="copyright mt-10">
+                        Copyright <span id="copyright">2018</span> <a href="http://readyblock.one"><span class="font-yellow">readyblock.one</span></a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -14,8 +14,6 @@
 
 <script>
 export default {
-    components: {
-    },
     props: {
         votes: {
             type: Number,

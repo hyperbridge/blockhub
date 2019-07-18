@@ -29,13 +29,22 @@ export default {
             type: Boolean,
             default: false
         },
-        title: String,
-        minHeight: String,
+        title: {
+            type: String,
+            default: null
+        },
+        minHeight: {
+            type: String,
+            default: null
+        },
         fullHeight: {
             type: Boolean,
             default: false
         },
-        bgImage: String,
+        bgImage: {
+            type: String,
+            default: null
+        },
         bgPosition: {
             type: String,
             default: 'center'
@@ -48,7 +57,10 @@ export default {
             type: String,
             default: 'left'
         },
-        contentWidth: String
+        contentWidth: {
+            type: String,
+            default: null
+        }
     },
     computed: {
         verticalPosition() {

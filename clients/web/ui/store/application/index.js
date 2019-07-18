@@ -4,7 +4,7 @@ import FormData from 'form-data'
 import * as DB from '@/db'
 import * as Bridge from '@/framework/desktop-bridge'
 
-let localState = {}
+let localState = { }
 
 export const state = () => localState
 
@@ -115,7 +115,7 @@ export const actions = {
 
         store.commit('updateState', localState)
     },
-    activateModal(store, payload) {
+    activeModal(store, payload) {
         if (payload) {
             if (process.client) {
                 window.ga('send', 'event', 'Modal', 'Show Modal', 'Show Modal', payload, { 'NonInteraction': 1 })
@@ -124,18 +124,23 @@ export const actions = {
 
         if (store.state.desktopMode) {
             if (store.state.signedIn) {
-                store.commit('activateModal', payload)
+                store.commit('activeModal', payload)
             } else {
-                store.commit('activateModal', 'login')
+                store.commit('activeModal', 'login')
             }
         } else {
-            store.commit('activateModal', 'welcome')
+            store.commit('activeModal', 'welcome')
         }
     },
     async login(store, payload) {
         await store.dispatch('auth/authenticate', { strategy: 'local', email: payload.email, password: payload.password }, { root: true })
 
         await store.dispatch('authenticate')
+
+        store.commit('signedIn', true)
+    },
+    logout(store) {
+        store.commit('signedIn', false)
     },
     async authenticate(store, payload) {
         await store.dispatch('profiles/find', {
@@ -151,13 +156,13 @@ export const actions = {
         store.state.activeProfile = store.rootState.profiles.keyedById[(store.state.activeProfile && store.state.activeProfile.id) || store.rootState.profiles.ids[0]]
         store.state.developerMode = store.state.activeProfile && store.state.activeProfile.role === 'developer'
         store.state.editorMode = 'viewing'
-        store.state.signedIn = true
+        store.commit('signedIn', true)
     },
     setEditorMode(store, payload) {
         store.commit('setEditorMode', payload)
 
         // if (!store.state.settings.client.hideEditorWelcomeModal) {
-        //     store.commit('activateModal', 'editor-welcome')
+        //     store.commit('activeModal', 'editor-welcome')
         // }
     },
     // unlockAccount(store, payload) {
@@ -230,12 +235,6 @@ export const actions = {
 
         xhr.addEventListener('readystatechange', processRequest, false)
     },
-    signIn(store, payload) {
-        store.commit('signIn', payload)
-    },
-    signOut(store, payload) {
-        store.commit('signOut', payload)
-    },
     enableDarklaunch(store, payload) {
         store.commit('enableDarklaunch', payload)
         store.dispatch('updateState')
@@ -256,8 +255,8 @@ export const actions = {
                 })
         })
     },
-    sendCommand(store, { key, data }) {
-        Bridge.sendCommand(key, data).then(() => {})
+    async sendCommand(store, { key, data }) {
+        await Bridge.sendCommand(key, data)
     },
     createTradeUrl({ commit, state }) {
         // async call => delete previous trade url
@@ -306,21 +305,17 @@ export const mutations = {
             account[prop] = { ...account[prop], [id]: true }
         }
     },
-    updateEnvironmentMode(state, payload) {
+    async updateEnvironmentMode(state, payload) {
         state.environmentMode = payload
 
-        Bridge.sendCommand('setEnvironmentMode', payload).then(data => {
-
-        })
+        await this.$desktop.sendCommand('setEnvironmentMode', payload)
     },
     createTradeUrl(state, id) {
         state.account.tradeLinkId = id
     },
-    signIn(state, payload) {
-        state.signedIn = true
-    },
-    signOut(state, payload) {
-        state.signedIn = false
+    signedIn(state, payload) {
+        console.log('signedIn', state, payload)
+        state.signedIn = payload
     },
     setEditorMode(state, payload) {
         state.editorMode = payload
@@ -390,7 +385,8 @@ export const mutations = {
                 console.log('An error occurred. Please check your input or try again later.')
             })
     },
-    activateModal(state, payload) {
+    activeModal(state, payload) {
+        console.log('[BlockHub] Activating modal:', payload)
         state.activeModal = payload
     },
     convertCurator(state, payload) {

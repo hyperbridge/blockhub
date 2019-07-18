@@ -38,7 +38,10 @@ export default {
         }
     },
     props: {
-        dropPosition: String,
+        dropPosition: {
+            type: String,
+            default: null
+        },
         menuItems: {
             type: Array,
             default: () => ['Save', 'Share', 'Report']

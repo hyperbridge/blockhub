@@ -79,16 +79,34 @@ export default {
             type: String,
             default: '$'
         },
-        minPrice: Number,
-        title: String,
-        description: String,
+        minPrice: {
+            type: String,
+            default: null
+        },
+        title: {
+            type: String,
+            default: null
+        },
+        description: {
+            type: String,
+            default: null
+        },
         includes: {
             type: Array,
             default: () => []
         },
-        deliveryDate: String,
-        shipsTo: String,
-        backers: Number
+        deliveryDate: {
+            type: String,
+            default: null
+        },
+        shipsTo: {
+            type: String,
+            default: null
+        },
+        backers: {
+            type: String,
+            default: null
+        }
     },
     data() {
         return {

@@ -4,7 +4,7 @@
             <c-scrollable-content>
                 <slot name="messages" />
             </c-scrollable-content>
-            <c-chat-answer-field :user="currentUser" @sendMessage="sendMessages($event);"/>
+            <c-chat-answer-field :user="currentUser" :sendMessage="sendMessage" />
         </div>
         <div class="chat__user-list">
             <slot name="users" />
@@ -15,24 +15,15 @@
 <script>
 export default {
     components: {
-        'c-chat-user': () => import('~/components/chat-new/user').then(m => m.default || m),
+        // 'c-chat-user': () => import('~/components/chat-new/user').then(m => m.default || m),
         'c-chat-answer-field': () => import('~/components/chat-new/answer-field/field').then(m => m.default || m),
         'c-scrollable-content': () => import('~/components/chat-new/content/scrollable-content').then(m => m.default || m)
     },
     props: {
         currentUser: Object,
-        channel: Object
+        sendMessage: Function
     },
-    methods: {
-        async sendMessages(data) {
-            let result = await this.$store.dispatch('messages/create', {
-                value: data,
-                discussionId: this.channel.id,
-                ownerId:  this.$store.state.application.activeProfile.id
-            });
-            console.log(result, this.channel.id);
-        }
-    }
+    methods: { }
 }
 </script>
 

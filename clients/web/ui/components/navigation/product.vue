@@ -12,7 +12,7 @@
             status="second-info"
             size="lg"
             class="mb-4"
-            @click="$store.commit('application/activateModal', 'sync-blockchain')">
+            @click="$store.commit('application/activeModal', 'syncBlockchain')">
             Sync Blockchain
         </c-button>
         <c-button
@@ -20,7 +20,7 @@
             status="second-info"
             size="lg"
             class="mb-4"
-            @click="$store.commit('application/activateModal', 'import-product')">
+            @click="$store.commit('application/activeModal', 'import-product')">
             Import
         </c-button>
 
@@ -103,7 +103,7 @@ export default {
     },
     methods: {
         showClaimPopup() {
-            this.$store.commit('application/activateModal', 'claim')
+            this.$store.commit('application/activeModal', 'claim')
         }
     }
 }

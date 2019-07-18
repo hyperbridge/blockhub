@@ -1,15 +1,11 @@
-exports.up = knex => {
-    return knex.schema
-        .table('offers', function (table) {
-            table
-                .integer('ownerId')
-                .unsigned()
-                .references('id')
-                .inTable('profiles')
-                .onDelete('SET NULL')
-        })
-}
+exports.up = knex => knex.schema
+    .table('offers', table => {
+        table
+            .integer('ownerId')
+            .unsigned()
+            .references('id')
+            .inTable('profiles')
+            .onDelete('SET NULL')
+    })
 
-exports.down = knex => {
-    return knex.schema
-}
+exports.down = knex => knex.schema

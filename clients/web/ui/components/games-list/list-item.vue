@@ -141,9 +141,18 @@
 <script>
 export default {
     props: {
-        name: String,
-        subName: String,
-        image: String,
+        name: {
+            type: String,
+            default: null
+        },
+        subName: {
+            type: String,
+            default: null
+        },
+        image: {
+            type: String,
+            default: null
+        },
         friends: {
             type: Array,
             default: () => []

@@ -1,11 +1,7 @@
-exports.up = knex => {
-    return knex.schema
-        .table('products', function (table) {
-            table.enum('type', ['game', 'physical', 'software', 'media', 'other']).defaultTo('game')
-            table.timestamp('releaseDate')
-        })
-}
+exports.up = knex => knex.schema
+    .table('products', table => {
+        table.enum('type', ['game', 'physical', 'software', 'media', 'other']).defaultTo('game')
+        table.timestamp('releaseDate')
+    })
 
-exports.down = knex => {
-    return knex.schema
-}
+exports.down = knex => knex.schema

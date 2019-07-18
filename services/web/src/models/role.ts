@@ -14,9 +14,9 @@ export default class Role extends BaseModel {
             required: ['name'],
 
             properties: {
-                roleId: { type: 'integer' },
+                id: { type: 'integer' },
                 name: { type: 'string' },
-                description: { type: 'string' }
+                meta: { type: 'object' }
             }
         }
     }

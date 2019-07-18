@@ -27,7 +27,7 @@
                     class="results__text">
                     Nothing could be found. Want to <c-button
                         status="plain"
-                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                        @click="$store.commit('application/activeModal', 'comingSoon')">
                         Check for updates
                     </c-button>?
                 </p>
@@ -65,12 +65,18 @@ export default {
                 return ['md', 'lg'].includes(val)
             }
         },
-        resultsCount: Number,
+        resultsCount: {
+            type: Number,
+            default: null
+        },
         delay: {
             type: Number,
             default: 250
         },
-        results: Array
+        results: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {

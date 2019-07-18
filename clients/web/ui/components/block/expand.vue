@@ -80,18 +80,42 @@ export default {
         'c-heading-bar-color': () => import('~/components/heading-bar/simple-colored').then(m => m.default || m)
     },
     props: {
-        image: String,
-        icon: String,
-        title: String,
-        description: String,
-        rating: Number,
-        content: String,
-        actionText: String,
+        image: {
+            type: String,
+            default: null
+        },
+        icon: {
+            type: String,
+            default: null
+        },
+        title: {
+            type: String,
+            default: null
+        },
+        description: {
+            type: String,
+            default: null
+        },
+        rating: {
+            type: Number,
+            default: 0
+        },
+        content: {
+            type: String,
+            default: null
+        },
+        actionText: {
+            type: String,
+            default: null
+        },
         relatedItems: {
             type: Array,
             default: () => []
         },
-        relatedText: String
+        relatedText: {
+            type: String,
+            default: null
+        }
     },
     data() {
         return {

@@ -16,7 +16,10 @@ export default {
             type: String,
             default: '#'
         },
-        icon: String,
+        icon: {
+            type: String,
+            default: null
+        },
         size: {
             type: String,
             default: 'md'

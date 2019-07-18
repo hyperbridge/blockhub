@@ -41,9 +41,18 @@ export default {
         'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m)
     },
     props: {
-        src: String,
-        youtube: String,
-        twitch: String,
+        src: {
+            type: String,
+            default: null
+        },
+        youtube: {
+            type: String,
+            default: null
+        },
+        twitch: {
+            type: String,
+            default: null
+        },
         height: {
             type: String,
             default: '450'
@@ -52,7 +61,10 @@ export default {
             type: String,
             default: '800'
         },
-        poster: String,
+        poster: {
+            type: String,
+            default: null
+        },
         videoType: {
             type: String,
             default: 'video/mp4'

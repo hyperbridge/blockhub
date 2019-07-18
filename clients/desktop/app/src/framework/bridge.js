@@ -91,15 +91,18 @@ export const promptPasswordRequest = async (data = {}) => {
 
                 if (!passphrase) {
                     console.log('Password was incorrect')
+                    data.error = { message: 'Password was incorrect', code: 1 }
                     continue
                 }
+
+                if (data.error) delete data.error
 
                 local.passphrase = passphrase
                 local.password = res.password
             } catch (e) {
                 console.log(e)
 
-                data = { ...data, error: { message: 'Password was incorrect', code: 1 } }
+                data.error = { message: 'Password was incorrect', code: 1 }
             }
         }
 
@@ -110,7 +113,7 @@ export const promptPasswordRequest = async (data = {}) => {
         Windows.main.window.setSize(1440, 800)
         Windows.main.window.center()
 
-        resolve()
+        resolve(data)
     })
 }
 
@@ -1526,7 +1529,7 @@ export const runCommand = async (cmd, meta = {}) => {
 
                     // const mode = config.IS_PRODUCTION ? 'production' : 'local'
 
-                    // sendCommand('setMode', mode)
+                    await sendCommand('setMode', 'desktop')
 
                     // Check for account file and load it
                     try {

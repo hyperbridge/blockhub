@@ -120,14 +120,17 @@
 
 <script>
 import moment from 'moment'
+
 export default {
-    name: 'PurchaseBlock',
     components: {
         'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m),
-        'c-popup-collection-add': () => import('~/components/popups/collection-add').then(m => m.default || m)
+        'c-add-collection-popup': () => import('~/components/popups/add-collection').then(m => m.default || m)
     },
     props: {
-        tags: Array,
+        tags: {
+            type: Array,
+            default: () => []
+        },
         title: {
             type: String,
             default: 'Title'
@@ -168,10 +171,22 @@ export default {
             type: String,
             default: null
         },
-        inWishlist: Boolean,
-        inShortcut: Boolean,
-        purchaseLink: String,
-        fullReviewsLink: String,
+        inWishlist: {
+            type: Boolean,
+            default: false
+        },
+        inShortcut: {
+            type: Boolean,
+            default: false
+        },
+        purchaseLink: {
+            type: String,
+            default: null
+        },
+        fullReviewsLink: {
+            type: String,
+            default: null
+        },
         onClickPurchase: Function
     },
     data() {

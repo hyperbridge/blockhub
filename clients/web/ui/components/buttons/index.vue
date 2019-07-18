@@ -54,15 +54,30 @@ export default {
             type: String,
             default: '_self'
         },
-        icon: String,
-        iconHide: Boolean,
+        icon: {
+            type: String,
+            default: null
+        },
+        iconHide: {
+            type: String,
+            default: false
+        },
         status: {
             type: String,
             default: 'default'
         },
-        swapOrder: Boolean,
-        swapDirection: Boolean,
-        doubled: Boolean,
+        swapOrder: {
+            type: String,
+            default: false
+        },
+        swapDirection: {
+            type: String,
+            default: false
+        },
+        doubled: {
+            type: String,
+            default: false
+        },
         full: {
             type: Boolean,
             default: false
@@ -103,7 +118,7 @@ export default {
                 // TODO: Mutating the prop is a no no.
                 // this.soundEnabled = false
             }
-        }   
+        }
     },
     methods: {
         mouseover() {
@@ -122,7 +137,7 @@ export default {
             }
 
             this.$store.dispatch('application/setEditorMode', 'viewing')
-            // this.$store.commit('application/activateModal', null)
+            // this.$store.commit('application/activeModal', null)
 
             if (this.soundEnabled) {
                 const sound = new Howl({
@@ -351,6 +366,8 @@ export default {
 
         &[disabled], &.disabled {
             background: #bfbfbf !important;
+            cursor: not-allowed;
+            pointer-events: none;
         }
 
         $opacityColor: (

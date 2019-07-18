@@ -2,7 +2,8 @@
     <li class="sidebar-menu__item">
         <nuxt-link
             class="item__link"
-            v-bind="$attrs">
+            v-bind="$attrs"
+            :to="to">
             <slot />
         </nuxt-link>
     </li>
@@ -10,8 +11,8 @@
 
 <script>
 export default {
-    name: 'SidebarMenuLink',
-    inheritAttrs: false
+    inheritAttrs: false,
+    props: ['to']
 }
 </script>
 

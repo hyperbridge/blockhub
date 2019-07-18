@@ -17,7 +17,7 @@
                                 <c-simple-vote
                                     v-if="activeElementIndex === index"
                                     v-darklaunch="'RATINGS'"
-                                    :rating="item.rating" />
+                                    :votes="item.rating" />
                                 <div class="row">
                                     <div
                                         v-if="item.data.images"
@@ -78,7 +78,7 @@
                                 <div v-if="!item.data.products.length">
                                     Nothing could be found. Want to <c-button
                                         status="plain"
-                                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                                        @click="$store.commit('application/activeModal', 'comingSoon')">
                                         Check for updates
                                     </c-button>?
                                 </div>
@@ -107,7 +107,7 @@
                                 <div v-if="!item.data.products.length">
                                     Nothing could be found. Want to <c-button
                                         status="plain"
-                                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                                        @click="$store.commit('application/activeModal', 'comingSoon')">
                                         Check for updates
                                     </c-button>?
                                 </div>
@@ -244,7 +244,7 @@
                                 <div v-if="!item.data.reviews.length">
                                     Nothing could be found. Want to <c-button
                                         status="plain"
-                                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                                        @click="$store.commit('application/activeModal', 'comingSoon')">
                                         Check for updates
                                     </c-button>?
                                 </div>
@@ -294,7 +294,7 @@
                                 <div v-if="!item.data.projects.length">
                                     Nothing could be found. Want to <c-button
                                         status="plain"
-                                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                                        @click="$store.commit('application/activeModal', 'comingSoon')">
                                         Check for updates
                                     </c-button>?
                                 </div>
@@ -339,7 +339,7 @@
                             <p v-if="!item.data.realms.length">
                                 Nothing could be found. Want to <c-button
                                     status="plain"
-                                    @click="$store.commit('application/activateModal', 'coming-soon')">
+                                    @click="$store.commit('application/activeModal', 'comingSoon')">
                                     Check for updates
                                 </c-button>?
                             </p>
@@ -427,7 +427,7 @@
                                 <div v-if="!assets.length">
                                     Nothing could be found. Want to <c-button
                                         status="plain"
-                                        @click="$store.commit('application/activateModal', 'coming-soon')">
+                                        @click="$store.commit('application/activeModal', 'comingSoon')">
                                         Check for updates
                                     </c-button>?
                                 </div>
@@ -467,9 +467,6 @@ import { mapGetters } from 'vuex'
 export default {
     components: {
         'c-button': () => import('~/components/buttons/index').then(m => m.default || m),
-        'c-tags': () => import('~/components/tags').then(m => m.default || m),
-        'c-tab-universal': () => import('~/components/tab/tab-universal').then(m => m.default || m),
-        'c-tabs-universal': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
         'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
         'c-product-card': () => import('~/components/store/product-card').then(m => m.default || m),

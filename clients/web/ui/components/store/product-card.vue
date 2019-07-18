@@ -8,15 +8,15 @@
                     v-if="metaImagesMediumTile"
                     class="card-img-top"
                     :src="metaImagesMediumTile" />
+                <h4>
+                    {{ name }}
+                </h4>
+                <p
+                    class="card-text"
+                    hidden>
+                    {{ metaShortDescription }}
+                </p>
             </c-button>
-            <h4>
-                {{ name }}
-            </h4>
-            <p
-                class="card-text"
-                hidden>
-                {{ metaShortDescription }}
-            </p>
             <c-tags v-if="metaDeveloperTags" :tags="metaDeveloperTags.slice(0,3)" />
         </div>
     </div>

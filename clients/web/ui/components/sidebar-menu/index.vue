@@ -42,11 +42,26 @@ export default {
         'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m)
     },
     props: {
-        icon: String,
-        subIcon: String,
-        title: String,
-        subTitle: String,
-        mClass: String,
+        icon: {
+            type: String,
+            default: null
+        },
+        subIcon: {
+            type: String,
+            default: null
+        },
+        title: {
+            type: String,
+            default: null
+        },
+        subTitle: {
+            type: String,
+            default: null
+        },
+        mClass: {
+            type: String,
+            default: null
+        },
         links: {
             type: Array,
             default: () => []

@@ -56,7 +56,10 @@ export default {
                 return `checkbox-${parseInt(Math.random() * new Date().getUTCMilliseconds() * 5)}`
             }
         },
-        checked: Boolean,
+        checked: {
+            type: String,
+            default: false
+        },
         size: {
             type: String,
             default: 'sm',
@@ -64,8 +67,14 @@ export default {
                 return ['sm', 'lg'].includes(val)
             }
         },
-        customLabel: Boolean,
-        label: String,
+        customLabel: {
+            type: String,
+            default: false
+        },
+        label: {
+            type: String,
+            default: null
+        },
         labelPosition: {
             type: String,
             default: 'right',

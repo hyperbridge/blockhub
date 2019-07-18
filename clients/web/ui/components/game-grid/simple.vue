@@ -20,19 +20,15 @@
                         <c-img
                             class="card-img-top"
                             :src="item.meta.images.mediumTile" />
-                    </c-button>
-                    <h4>
-                        <c-button
-                            status="none"
-                            :to="`/product/${item.id}`">
+                        <h4>
                             {{ item.name }}
-                        </c-button>
-                    </h4>
-                    <p
-                        class="card-text"
-                        hidden>
-                        {{ item.description }}
-                    </p>
+                        </h4>
+                        <p
+                            class="card-text"
+                            hidden>
+                            {{ item.description }}
+                        </p>
+                    </c-button>
                     <c-tags v-if="item.tags" :tags="item.tags.map(t => t.value)" />
                 </div>
             </div>
@@ -40,7 +36,7 @@
         <p v-if="!items.length">
             Nothing could be found. Want to <c-button
                 status="plain"
-                @click="$store.commit('application/activateModal', 'coming-soon')">
+                @click="$store.commit('application/activeModal', 'comingSoon')">
                 Check for updates
             </c-button>?
         </p>

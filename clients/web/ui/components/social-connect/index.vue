@@ -32,10 +32,10 @@ export default {
     props: ['icon', 'name', 'description', 'connected'],
     methods: {
         connect() {
-            this.$store.commit('application/activateModal', 'coming-soon')
+            this.$store.commit('application/activeModal', 'comingSoon')
         },
         disconnect() {
-            this.$store.commit('application/activateModal', 'coming-soon')
+            this.$store.commit('application/activeModal', 'comingSoon')
         }
     }
 }

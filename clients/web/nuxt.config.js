@@ -81,6 +81,7 @@ export default {
         { src: '~/plugins/vue-inputmask', ssr: false },
         { src: '~/plugins/vue2-editor', ssr: false },
         { src: '~/plugins/vue-upload-component', ssr: false },
+        { src: '~/plugins/vue-datepicker', ssr: false },
         { src: '~/plugins/autosize', ssr: false },
         { src: '~/plugins/jquery', ssr: false },
         { src: '~/plugins/summernote', ssr: false },
@@ -100,16 +101,54 @@ export default {
     ],
     router: {
         extendRoutes(routes) {
-            // TODO: check hostname
-            sites.forEach(site => {
-                site.routes.forEach(route => {
-                    routes.push(route)
-                })
-            })
-
             routes.push({
                 path: '*',
                 component: path.resolve(__dirname, 'ui/pages/not-found/index.vue')
+            })
+
+            const mapHostToRouteKey = {
+                'default': 'blockhub',
+                'localhost': 'blockhub',
+                'blockhub.gg': 'blockhub', // rebrand game platform
+                'thor.gg': 'thor', // rebrand game platform
+                'gamedelta.net': 'thor', // rebrand game platform
+                'realmofdiablo.com': 'realmofdiablo', // defaults to realm screen with Diablo realm - game series landing
+                'skyward.gg': 'skyward', // defaults to realm screen with Skyward realm - game studio landing
+                'hackatron.rocks': 'hackatron', // defaults to play screen for Hackatron game - game landing
+                'gamemask.io': 'gamemask', // defaults to token wallet functionality
+                'gethbx.com': 'gethbx', // defaults to airdrop claim screen
+                'hyperbridge.xyz': 'hyperbridge', // defaults to profile screen with profile ID
+                'dataforce.io': 'dataforce', // defaults to data network info
+                'readyblock.one': 'readyblockone', // other
+                'in5mins.com': 'in5mins', // other
+                'crypto.in5mins.com': 'in5mins', // other
+                'gaming.in5mins.com': 'in5mins', // other
+                'health.in5mins.com': 'in5mins', // other
+                'shopping.in5mins.com': 'in5mins', // other
+                'tech.in5mins.com': 'in5mins', // other
+                'bitcoin-btc.review': 'cryptoreviews', // other
+                'ethereum-eth.review': 'cryptoreviews', // other
+                'ripple-xrp.review': 'cryptoreviews', // other
+                'litecoin-ltc.review': 'cryptoreviews', // other
+                'aelf-elf.review': 'cryptoreviews', // other
+                'aion-token.review': 'cryptoreviews', // other
+                'coding.coach': 'codingcoach', // other
+                'tokentaku.com': 'tokentaku', // other
+                'brickbrotherhood.com': 'brickbrotherhood' // other
+                // TODO: if not found, render realm screen and assume its in realm DB with a host
+            }
+
+            // Sanitize the host
+            const uri = process.client ? window.location.hostname : 'blockhub.gg'
+            const host = uri.replace('www.', '').replace('.local', '').split(':')[0]
+            const routeKey = mapHostToRouteKey[host]
+
+            console.log(`Matched site: ${host}`)
+
+            const activeSite = sites[routeKey]
+
+            activeSite.routes.forEach(route => {
+                routes.push(route)
             })
         }
     },

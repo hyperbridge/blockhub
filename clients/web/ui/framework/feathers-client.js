@@ -5,6 +5,7 @@ import socketio from '@feathersjs/socketio-client'
 import auth from '@feathersjs/authentication-client'
 import io from 'socket.io-client'
 import { CookieStorage } from 'cookie-storage'
+import Cookie from 'cookie-universal'
 
 let client = null
 
@@ -26,7 +27,7 @@ if (process.client) {
     }
 
     client = (serviceUrl, storage) => {
-        if (!serviceUrl) serviceUrl = getCookie('WEB_SERVICE_URL') || 'https://api.blockhub.gg'
+        if (!serviceUrl) serviceUrl = cookies.get('WEB_SERVICE_URL') || 'https://api.blockhub.gg'
         if (!storage) storage = new CookieStorage()
 
         const socket = io(serviceUrl, { transports: ['websocket'] })

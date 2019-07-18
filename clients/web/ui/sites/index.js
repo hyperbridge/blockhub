@@ -1,5 +1,5 @@
 import blockhub from './blockhub'
 
-export default [
+export default {
     blockhub
-]
+}

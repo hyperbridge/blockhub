@@ -3,7 +3,8 @@
         <c-chat-user-avatar
             :name="name"
             :status="status"
-            :avatar="avatar" />
+            :avatar="avatar"
+            :number="'NUMBER'" />
         <div class="user-info">
             <strong>
                 {{ name }}

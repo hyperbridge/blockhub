@@ -28,7 +28,7 @@ import ideas from './ideas'
 import tags from './tags'
 import search from './search'
 import application from './application'
-import topGameIdeas from './topGameIdeas'
+import getTopGameIdeas from './getTopGameIdeas'
 
 export default {
     accounts,
@@ -61,5 +61,5 @@ export default {
     votes,
     search,
     application,
-    topGameIdeas
+    getTopGameIdeas
 }

@@ -35,7 +35,10 @@ export default {
             type: String,
             default: '14'
         },
-        width: String
+        width: {
+            type: String,
+            default: null
+        }
     }
 }
 </script>

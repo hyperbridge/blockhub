@@ -16,7 +16,7 @@
                 10 days offline
             </div>
         </div>
-        <img :src="avatar">
+        <img :src="avatarSrc">
         <span
             v-if="status"
             class="user-status"
@@ -35,6 +35,12 @@ export default {
     data() {
         return {
             show: false
+        }
+    },
+
+    computed: {
+        avatarSrc() {
+            return this.avatar ? this.avatar : 'https://i.pravatar.cc/40?img=50'
         }
     }
 }

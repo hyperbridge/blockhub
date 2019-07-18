@@ -82,17 +82,44 @@ export default {
         'c-reply': () => import('~/components/community/reply').then(m => m.default || m)
     },
     props: {
-        id: Number,
-        title: String,
-        actionStatus: String,
-        rate: Number,
-        author: {
-            img: String,
-            name: String
+        id: {
+            type: Number,
+            default: null
         },
-        contentImg: String,
-        contentText: String,
-        commentsCount: Number,
+        title: {
+            type: String,
+            default: null
+        },
+        actionStatus: {
+            type: String,
+            default: null
+        },
+        rate: {
+            type: Number,
+            default: 0
+        },
+        author: {
+            img: {
+                type: String,
+                default: null
+            },
+            name: {
+                type: String,
+                default: null
+            }
+        },
+        contentImg: {
+            type: String,
+            default: null
+        },
+        contentText: {
+            type: String,
+            default: null
+        },
+        commentsCount: {
+            type: Number,
+            default: 0
+        },
         comments: {
             type: Array,
             default: () => []

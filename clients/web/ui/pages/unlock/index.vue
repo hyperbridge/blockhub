@@ -10,7 +10,7 @@
 <script>
 export default {
     created() {
-        this.$store.commit('application/activateModal', 'unlock')
+        this.$store.commit('application/activeModal', 'unlock')
     }
 }
 </script>

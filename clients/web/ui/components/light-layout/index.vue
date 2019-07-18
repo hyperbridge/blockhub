@@ -18,7 +18,10 @@ export default {
             type: Boolean,
             default: false
         },
-        title: String
+        title: {
+            type: String,
+            default: null
+        }
     },
     mounted() {
         document.getElementById('startup-loader').style.display = 'none'

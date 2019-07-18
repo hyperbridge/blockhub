@@ -12,10 +12,10 @@
             <div class="chat-main__header">
                 <div>
                     <div class="chat-title">
-                        General
+                        {{ channelInfo.name }}
                     </div>
                     <div class="chat-status">
-                        Ut elementum sit amet tellus non pulvinar. Integer mi quam, mattis at ultrices quis, aliquet ut risus.
+                        {{ channelInfo.value }}
                     </div>
                 </div>
                 <div />
@@ -30,7 +30,7 @@
 <script>
 export default {
     components: {
-        'c-shortcut-sidebar': () => import('~/components/shortcut-sidebar').then(m => m.default || m)
+        // 'c-shortcut-sidebar': () => import('~/components/shortcut-sidebar').then(m => m.default || m)
     },
     props: {
         shortcuts: {
@@ -40,6 +40,10 @@ export default {
         showShortcuts: {
             type: Boolean,
             default: true
+        },
+        channelInfo: {
+            type: Object,
+            default: () => {}
         }
     }
 }

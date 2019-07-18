@@ -1,8 +1,8 @@
-import { Model, RelationMappings, JsonSchema } from 'objection'
-import Profile from './profile'
+import { Model, RelationMappings } from 'objection'
+import Profile, { ProfileStatus } from './profile'
 import Message from './message'
 import Event from './event'
-import Node from './node'
+import Node, { NodeRelation } from './node'
 import Rating from './rating'
 import BaseModel from './base'
 import Community from './community'
@@ -14,24 +14,35 @@ export enum DiscussionType {
 }
 
 export default class Discussion extends BaseModel {
-    public content!: string
-    public parentId!: number
-    public rootMessageId!: number
-    public type!: DiscussionType
+    content!: string
+    parentId!: number
+    rootMessageId!: number
+    type!: DiscussionType
 
-    public static get tableName (): string {
+    static get tableName () {
         return 'discussions'
     }
 
-    public static get timestamps (): boolean {
+    static get timestamps () {
         return true
     }
 
-    public static get jsonSchema (): JsonSchema {
+    static get jsonSchema () {
         return {
             type: 'object',
-            required: ['name', 'value', 'meta'],
+            required: ['key', 'value', 'meta'],
             properties: {
+            }
+        }
+    }
+
+    static get modifiers () {
+        return {
+            publicCols (builder) {
+                builder.select(['id', 'key', 'value']);
+            },
+            idCol (builder) {
+                builder.select(['id'])
             }
         }
     }
@@ -91,6 +102,29 @@ export default class Discussion extends BaseModel {
                         to: 'nodes.toDiscussionId',
                         extra: ['relationKey']
                     }
+                }
+            },
+            chat: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Profile,
+                filter: {
+                    relationKey: NodeRelation.Chat
+                },
+                beforeInsert (model) {
+                    (model as Node).relationKey = NodeRelation.Chat
+                },
+                modify: query => {
+                    query.select(['profiles.id', 'profiles.name', 'profiles.avatar', 'profiles.role', 'profiles.status'])
+                    query.andWhere('profiles.status', ProfileStatus.Active)
+                },
+                join: {
+                    from: 'discussions.id',
+                    through: {
+                        to: 'nodes.fromProfileId',
+                        extra: ['relationKey'],
+                        from: 'nodes.toDiscussionId'
+                    },
+                    to: 'profiles.id'
                 }
             },
             messages: {

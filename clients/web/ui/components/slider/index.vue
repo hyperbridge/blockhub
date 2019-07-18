@@ -31,8 +31,14 @@ export default {
             type: Array,
             default: () => []
         },
-        title: String,
-        maxPerView: Number,
+        title: {
+            type: String,
+            default: null
+        },
+        maxPerView: {
+            type: String,
+            default: null
+        },
         dynamic: {
             type: Boolean,
             default: true

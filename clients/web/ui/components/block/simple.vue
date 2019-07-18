@@ -17,8 +17,14 @@
 <script>
 export default {
     props: {
-        image: String,
-        imgHeight: String,
+        image: {
+            type: String,
+            default: null
+        },
+        imgHeight: {
+            type: String,
+            default: null
+        },
         hovered: Boolean
     }
 }

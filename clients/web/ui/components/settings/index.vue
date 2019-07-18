@@ -308,8 +308,6 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-
 export default {
     components: {
         'c-benchmark': () => import('~/components/benchmark').then(m => m.default || m),
@@ -905,15 +903,11 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(['updateClientSettings']),
-        updateClientSettings(key) {
-            this.$store.commit('application/updateClientSettings', { key })
-        },
         clearDatabase() {
             window.resetSettings()
         },
         setOpenStartup(value) {
-            this.updateClientSettings('openStartup', value)
+            this.$store.commit('application/updateClientSettings', { key: 'openStartup', value })
 
             this.$desktop.sendCommand('setOpenStartup', value)
         },

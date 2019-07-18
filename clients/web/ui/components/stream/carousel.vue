@@ -44,12 +44,18 @@ export default {
             type: Array,
             default: () => []
         },
-        title: String,
+        title: {
+            type: String,
+            default: null
+        },
         maxPerView: {
             type: Number,
             default: 3
         },
-        showBackground: Boolean
+        showBackground: {
+            type: Boolean,
+            default: null
+        }
     },
     data() {
         return {

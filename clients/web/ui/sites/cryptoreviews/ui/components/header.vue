@@ -5,14 +5,17 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="logo">
-                            <a href="/"><img class="img-fluid" :src="logo" alt="" /></a>
-                            <br />
-                            <div class="header-org">By <a href="https://readyblock.one"><img class="price-main-img" src="/projects/cryptoreviews/img/rbo-logo-with-title.png" alt="" /></a></div>
+                            <a href="/"><img class="img-fluid" :src="logo" alt=""></a>
+                            <br>
+                            <div class="header-org">
+                                By <a href="https://readyblock.one"><img class="price-main-img" src="/projects/cryptoreviews/img/rbo-logo-with-title.png" alt=""></a>
+                            </div>
                         </div>
                         <nav>
-                            <a id="resp-menu" class="responsive-menu" href="/"><i class="fa fa-reorder"></i> Menu</a>
+                            <a id="resp-menu" class="responsive-menu" href="/"><i class="fa fa-reorder" /> Menu</a>
                             <ul class="menu text-right">
-                                <li><a href="javascript:void(0)">Home</a>
+                                <li>
+                                    <a href="javascript:void(0)">Home</a>
                                     <ul class="sub-menu">
                                         <li><a href="/#intro">Intro</a></li>
                                         <li><a href="/#history">History</a></li>
@@ -26,9 +29,11 @@
                                         <li><a href="/#faq">FAQ</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="javascript:void(0)">Network</a>
+                                <li>
+                                    <a href="javascript:void(0)">Network</a>
                                     <ul class="sub-menu">
-                                        <li><a href="javascript:void(0)">Reviews <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                        <li>
+                                            <a href="javascript:void(0)">Reviews <i class="fa fa-angle-right" aria-hidden="true" /></a>
                                             <ul>
                                                 <li><a href="https://readyblock.one/review/btc">Bitcoin (BTC)</a></li>
                                                 <li><a href="https://readyblock.one/review/eth">Ethereum (ETH)</a></li>
@@ -43,7 +48,8 @@
                                         <li><a href="https://readyblock.one/go/in5mins">Crypto In 5 Mins</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="javascript:void(0)">Company</a>
+                                <li>
+                                    <a href="javascript:void(0)">Company</a>
                                     <ul class="sub-menu">
                                         <li><a href="https://readyblock.one/about">About Us</a></li>
                                         <li><a href="https://readyblock.one/contact">Contact Us</a></li>
@@ -51,10 +57,12 @@
                                     </ul>
                                 </li>
                                 <li :style="{ display: 'none' }">
-                                    <div class="search"> <a class="search-btn not_click" href="javascript:void(0);"> <span>Search Button</span></a>
+                                    <div class="search">
+                                        <a class="search-btn not_click" href="javascript:void(0);"> <span>Search Button</span></a>
                                         <div class="search-box not-click">
-                                            <input type="email" class="form-control not-click" id="exampleInputEmail1" placeholder="Search" />
-                                            <i class="ti-search"></i> </div>
+                                            <input id="exampleInputEmail1" type="email" class="form-control not-click" placeholder="Search">
+                                            <i class="ti-search" />
+                                        </div>
                                     </div>
                                 </li>
                             </ul>

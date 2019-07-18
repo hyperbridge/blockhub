@@ -53,8 +53,6 @@
 export default {
     components: {
         'c-block': () => import('~/components/block').then(m => m.default || m),
-        'c-tabs': () => import('~/components/tab/tabs-universal').then(m => m.default || m),
-        'c-tab': () => import('~/components/tab/tab-universal').then(m => m.default || m),
         'c-trade-offer': () => import('~/components/trade-offer').then(m => m.default || m),
         'c-tag-count': () => import('~/components/tags/count').then(m => m.default || m)
     },

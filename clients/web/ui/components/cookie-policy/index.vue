@@ -59,9 +59,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
 export default {
-    name: 'CookiePolicy',
     components: {
         'c-popup': () => import('~/components/popups').then(m => m.default || m)
     },
@@ -71,7 +69,6 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(['updateClientSettings']),
         updateClientSettings() {
             this.$store.commit('application/updateClientSettings', { key: 'cookiePolicyAccepted' })
             this.show = false

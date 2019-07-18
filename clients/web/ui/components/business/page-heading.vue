@@ -3,7 +3,10 @@
 <script>
 export default {
     props: {
-        title: String,
+        title: {
+            type: String,
+            default: null
+        },
         links: {
             type: Array,
             default: [],

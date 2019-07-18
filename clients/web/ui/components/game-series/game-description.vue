@@ -52,19 +52,21 @@
 
 <script>
 import moment from 'moment'
-import 'swiper/dist/css/swiper.css'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 export default {
     components: {
-        'c-tags': () => import('~/components/tags').then(m => m.default || m),
-        'c-swiper': swiper,
-        'c-swiper-slide': swiperSlide
+        'c-tags': () => import('~/components/tags').then(m => m.default || m)
     },
     props: {
         id: Number,
-        title: String,
-        description: String,
+        title: {
+            type: String,
+            default: null
+        },
+        description: {
+            type: String,
+            default: null
+        },
         tags: {
             type: Array,
             default: () => []
@@ -74,7 +76,10 @@ export default {
             default: () => []
         },
         price: Number,
-        expires: String
+        expires: {
+            type: String,
+            default: null
+        }
     },
     data() {
         return {

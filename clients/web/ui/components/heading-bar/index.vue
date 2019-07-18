@@ -57,11 +57,26 @@
 export default {
     name: 'HeadingBar',
     props: {
-        name: String,
-        showBackground: Boolean,
-        showArrows: Boolean,
-        more: Boolean,
-        showActions: Boolean,
+        name: {
+            type: String,
+            default: null
+        },
+        showBackground: {
+            type: Boolean,
+            default: false
+        },
+        showArrows: {
+            type: Boolean,
+            default: false
+        },
+        more: {
+            type: Boolean,
+            default: false
+        },
+        showActions: {
+            type: Boolean,
+            default: false
+        },
         headingTabs: {
             type: Array,
             default: () => []

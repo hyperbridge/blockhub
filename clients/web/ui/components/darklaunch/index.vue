@@ -15,7 +15,7 @@ export default {
             default: null
         },
         data: {
-            type: [Object, String]
+            type: Object
         },
         tag: {
             type: String,
