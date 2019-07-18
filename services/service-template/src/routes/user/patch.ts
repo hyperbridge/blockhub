@@ -9,7 +9,7 @@ export const run = async (options, db, req, res): Promise<any> => {
     const { userId } = req.params
     let { username, roles, meta } = req.body
 
-    if (!req.$can('user.update', userId)) return res.unauthorized()
+    if (!req.$access('user.update', userId)) return res.unauthorized()
 
     const user = await User.query().findById(userId).where('deletedAt', null)
     if (!user) return res.status(422).end()

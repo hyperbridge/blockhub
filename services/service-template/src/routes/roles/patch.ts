@@ -7,7 +7,7 @@ export const run = async (options, db, req, res): Promise<any> => {
     const { roleId } = req.params
     let { name, description, meta } = req.body
 
-    if (!req.$can('user.role.update', roleId)) return res.unauthorized()
+    if (!req.$access('user.role.update', roleId)) return res.unauthorized()
 
     const role = await Role.query().findById(roleId).where('deletedAt', null)
     if (!role) return res.status(422).end()

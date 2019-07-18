@@ -5,7 +5,7 @@ export const operationId = 'applicationCreate'
 export const run = async (options, db, req, res): Promise<any> => {
     const { name, logo } = req.body
 
-    if (!req.$can('application.create')) return res.unauthorized()
+    if (!req.$access('application.create')) return res.unauthorized()
 
     const data = {
         name,

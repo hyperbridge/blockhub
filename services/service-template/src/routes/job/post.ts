@@ -9,7 +9,7 @@ export const run = async (options, db, req, res): Promise<any> => {
 
     const jobId = parseInt(applicationId, 10)
 
-    if (!req.$can('job.read', jobId)) return res.unauthorized()
+    if (!req.$access('job.read', jobId)) return res.unauthorized()
 
     const data = {
         jobId,

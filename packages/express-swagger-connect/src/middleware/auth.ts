@@ -67,7 +67,7 @@ export default async function (options, db, req, res, next): Promise<any> {
 <<<<<<< HEAD
         req.$access = permissionValidator.run
 =======
-        req.$can = permissionValidator.run
+        req.$access = permissionValidator.run
 >>>>>>> mail
         req.user = user
 

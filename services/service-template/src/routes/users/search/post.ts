@@ -4,7 +4,7 @@ export const operationId = 'searchUsers'
 export const run = async (options, db, req, res): Promise<any> => {
     const { applicationId } = req.headers
 
-    if (!req.$can('user.read')) return res.unauthorized()
+    if (!req.$access('user.read')) return res.unauthorized()
 
     const users = await User.query()
         .where({

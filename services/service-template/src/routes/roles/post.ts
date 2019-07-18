@@ -6,7 +6,7 @@ export const run = async (options, db, req, res): Promise<any> => {
     const { name, description, meta } = req.body
     const { applicationId } = req.headers
 
-    if (!req.$can('user.role.create')) return res.unauthorized()
+    if (!req.$access('user.role.create')) return res.unauthorized()
 
     const data = {
         applicationId,

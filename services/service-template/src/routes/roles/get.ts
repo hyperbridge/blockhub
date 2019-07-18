@@ -4,7 +4,7 @@ export const operationId = 'getRole'
 export const run = async (options, db, req, res): Promise<any> => {
     const { roleId } = req.params
 
-    if (!req.$can('user.role.read', roleId)) return res.unauthorized()
+    if (!req.$access('user.role.read', roleId)) return res.unauthorized()
 
     const role = await Role.query().eager('[createdByUser, editedByUser]').findById(roleId)
         .where('deletedAt', null)
