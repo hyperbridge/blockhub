@@ -19,6 +19,28 @@
                         <h2>Sign in to BlockHub</h2>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <c-button
+                            status="second-info"
+                            size="xl"
+                            centered
+                            class="mb-3"
+                            style="display: block"
+                            @click="socialLogin('google')">
+                            Sign in with Google
+                        </c-button>
+                        <c-button
+                            status="second-info"
+                            size="xl"
+                            centered
+                            class="mb-3"
+                            style="display: block"
+                            @click="socialLogin('github')">
+                            Sign in with Github
+                        </c-button>
+                    </div>
+                </div>
                 <div
                     v-darklaunch="`SOCIAL_SIGNIN`"
                     class="row">
@@ -133,7 +155,7 @@ export default {
             errors: [],
             email: null,
             password: null,
-            loading: false
+            loading: false,
         }
     },
     methods: {
@@ -141,7 +163,6 @@ export default {
             const { email, password } = this
             this.errors = []
             this.$store.commit('auth/clearAuthenticateError')
-
             this.loading = true
 
             if (!email ||
@@ -175,9 +196,110 @@ export default {
                 this.$router.push(this.$route.query.redirect)
             }
 
-        }
+            this.errors.push('Missing fields.')
+        },
+        async socialSigin() {
+            const { email, password } = this
+            this.errors = []
+            this.$store.commit('auth/clearAuthenticateError')
+            this.loading = true
+
+            if (!email ||
+                !password) {
+                this.errors.push('Missing fields.')
+                return
+            }
+
+            await this.$store.dispatch('application/login', { email, password })
+                // Just use the returned error instead of mapping it from the store.
+                .catch(error => {
+                    console.warn(error)
+
+                    // Convert the error to a plain object and add a message.
+                    const type = error.className
+                    error = Object.assign({}, error)                     
+                    if(type === 'not-authenticated'){
+                        this.socialSignup()
+                    } else {
+                        error.message = 'An error prevented login.'
+                    }
+                    this.errors = [error.message]
+                    this.loading = false
+                })
+
+            this.$store.commit('application/activeModal', null)
+            this.loading = false
+
+            if (this.$route.query.redirect) {
+                this.$router.push(this.$route.query.redirect)
+            }
+
+            this.errors.push('Missing fields.')
+        },
+        async socialSignup() {
+            console.log('socialSignup')
+            const { email, password } = this
+            this.errors = []
+            this.$store.commit('accounts/clearCreateError')
+            this.loading = true
+            if (email &&
+                password) {
+                // Automatically log the user in after successful signup.
+                this.$store.dispatch('accounts/create', { email, password })
+                    .then(res => {
+                        this.$store.dispatch('auth/authenticate', { strategy: 'local', email, password })
+                        this.$store.commit('application/activateModal', null)
+                        this.loading = false
+                    })
+                // .then(response => this.$store.dispatch('auth/authenticate', { strategy: 'local', email, password }))
+                // Just use the returned error instead of mapping it from the store.
+                    .catch(error => {
+                        // Convert the error to a plain object and add a message.
+                        const type = error.errorType
+                        error = Object.assign({}, error)
+                        error.message = type === 'uniqueViolated'
+                            ? 'That email address is unavailable.'
+                            : 'An error prevented signup.'
+                        this.errors = [error.message]
+                        
+                        this.loading = false
+                    })
+
+                return
+            }
+
+            this.errors.push('Missing fields.')
+        },
+        socialLogin(social) {
+            const hello = this.$hello;
+            const $this = this
+
+            // START setup hellojs
+            hello.init({
+                google: process.env.GOOGLE_CLIENT_ID,
+                github: process.env.GITHUB_CLIENT_ID
+            }, { 
+                redirect_uri: process.env.SOCIAL_LOGIN_REDIRECT_URI
+            }, {
+                oauth_proxy: process.env.OAUTH_PROXY
+            }); 
+            hello(social).login({
+                    scope: ['email']
+                })                         
+            hello.on('auth.login', async function (auth) {
+                const socialToken = auth.authResponse.access_token;
+                const userInfo = await hello(auth.network).api('me');
+                console.log('userInfo', userInfo)
+                const userId = userInfo.id;
+                $this.email = auth.network == 'github' ? `${userInfo.login}.com`:userInfo.email;
+                $this.password = 'socialLogin';                
+                $this.socialSigin()
+            });
+        },
+    },
+    mounted(){        
     }
-}
+}    
 </script>
 
 <style lang="scss" scoped>

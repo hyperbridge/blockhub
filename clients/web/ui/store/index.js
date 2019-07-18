@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import feathersClient from '../framework/feathers-client'
 import feathersVuex, { initAuth } from 'feathers-vuex'
 import Vue from 'vue'

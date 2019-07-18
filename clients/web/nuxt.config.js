@@ -1,9 +1,10 @@
 import path from 'path'
-import dotenv from 'dotenv/config'
 import autoprefixer from 'autoprefixer'
 import sites from './ui/sites'
+const dotenv = require('dotenv').config()
 
 export default {
+    env: dotenv.parsed,
     server: {
         port: process.env.PORT,
         host: '0.0.0.0'
@@ -19,7 +20,7 @@ export default {
         env: {
             version: process.env.npm_package_version,
             baseUrl: process.env.BASE_URL || `http://localhost:${process.env.PORT}`,
-            isDevelopment: process.env.NODE_ENV !== 'production'
+            isDevelopment: process.env.NODE_ENV !== 'production'            
         },
         titleTemplate: '%s',
         meta: [
@@ -91,7 +92,8 @@ export default {
         { src: '~/plugins/jquery', ssr: false },
         { src: '~/plugins/summernote', ssr: false },
         { src: '~/plugins/moment', ssr: false },
-        { src: '~/plugins/blockhub' }
+        { src: '~/plugins/blockhub' },
+        { src: '~/plugins/hello', ssr: false},
     ],
     modules: [
         // Doc: https://axios.nuxtjs.org/usage
@@ -100,7 +102,8 @@ export default {
         '@nuxtjs/moment',
         '@nuxtjs/sitemap',
         'cookie-universal-nuxt',
-        '@nuxtjs/sentry'
+        '@nuxtjs/sentry',
+        '@nuxtjs/dotenv',
         // './modules/init'
     ],
     moment: {
