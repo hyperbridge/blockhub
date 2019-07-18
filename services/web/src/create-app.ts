@@ -24,7 +24,6 @@ import session = require('express-session')
 // Google Login
 import passport = require('passport')
 import oauth2, { Verifier } from '@feathersjs/authentication-oauth2'
-import location = require('location-href')
 import { CLIENT_RENEG_WINDOW } from 'tls'
 
 
@@ -148,10 +147,10 @@ export default async () => {
     // })
 
 
-        // How to use:
-        //
-        // import EmailFirstOAuth2Verifier from './verifiers/verifier';
-        //
+    // How to use:
+    //
+    // import EmailFirstOAuth2Verifier from './verifiers/verifier';
+    //
 
     app.use('/ping', {
         async find (params) {

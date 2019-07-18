@@ -1,5 +1,5 @@
 
-require('dotenv').config()
+import dotenv from 'dotenv/config'
 import hello from 'hellojs/dist/hello.all.js'
 
 const {
