@@ -4,27 +4,11 @@ import feathersClient from '~/framework/feathers-client'
 import feathersVuex, { initAuth } from 'feathers-vuex'
 
 export default async ({ app, store, req }, bbb) => {
-        const { dispatch, commit } = store
-    let origin = null
-    let storage = null
+    const { dispatch, commit } = store
 
     let feathers = null
-    let service = null
-    let auth = null
-console.log('zzz', app.req, bbb)
+
     if (process.server) {
-    console.log(store, store.state)
-        //feathers = feathersClient(origin, storage)
-
-
-        // origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg'
-
-        // storage = {
-        //     getItem() { },
-        //     setItem() { },
-        //     removeItem() { }
-        // }
-
         const origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg' // eslint-disable-line no-negated-condition
 
         const storage = {
@@ -38,7 +22,7 @@ console.log('zzz', app.req, bbb)
                 store.state.auth.accessToken = null
             }
         }
-console.log('44444')
+
         feathers = feathersClient(origin, storage)
 
         /*
@@ -49,19 +33,15 @@ console.log('44444')
         */
 
     } else {
-    console.log('bbbbbbbbbb')
         feathers = feathersClient()
-        
-        //]
-
     }
 
     const FeathersVuex = feathersVuex(feathers, { idField: 'id', enableEvents: true })
 
     Vue.use(FeathersVuex)
 
-    service = FeathersVuex.service
-    auth = FeathersVuex.auth
+    const service = FeathersVuex.service
+    const auth = FeathersVuex.auth
 
     //plugins = [
     service('accounts', { paginate: true })(store)
@@ -98,45 +78,45 @@ console.log('44444')
         userService: 'accounts'
     })(store)
 
-    if (process.server) {
-        const cookieToken = app.$cookies.get('feathers-jwt')
-console.log('ggggg', cookieToken, app.$cookies.get)
-        if (cookieToken) {
-            try {
-                const { accessToken } = await dispatch('auth/authenticate', {
-                    strategy: 'jwt',
-                    accessToken: cookieToken
-                })
+    const cookieToken = app.$cookies.get('feathers-jwt')
 
-                dispatch('login', {
-                    token: accessToken,
-                    user: store.state.auth.user
-                })
-                
-                // const { payload } = jwt.decode(accessToken, { complete: true })
+    if (cookieToken) {
+        try {
+            const { accessToken } = await dispatch('auth/authenticate', {
+                strategy: 'jwt',
+                accessToken: cookieToken
+            })
 
-                // commit('accounts/setCurrent', payload.userId)
-                // commit('auth/setAccessToken', accessToken)
-                // commit('auth/setPayload', payload)
-                // commit('auth/setUser', getters['accounts/current'])
+            dispatch('login', {
+                token: accessToken,
+                user: store.state.auth.user
+            })
+            
+            // const { payload } = jwt.decode(accessToken, { complete: true })
 
-                await dispatch('application/authenticate')
-            } catch (error) {
-                console.log('[BlockHub] Error logging in', error)
-                dispatch('logout')
-                return
-            }
-        } else {
+            // commit('accounts/setCurrent', payload.userId)
+            // commit('auth/setAccessToken', accessToken)
+            // commit('auth/setPayload', payload)
+            // commit('auth/setUser', getters['accounts/current'])
+
+            await dispatch('application/authenticate')
+        } catch (error) {
+            console.log('[BlockHub] Error logging in', error)
             dispatch('logout')
+            return
         }
+    } else {
+        dispatch('logout')
+    }
+
+    if (process.server) {
         await initAuth({
             commit,
             dispatch,
             req: { headers: { cookie: `feathers-jwt=${app.$cookies.get('feathers-jwt')}` }},
             moduleName: 'auth',
             cookieName: 'feathers-jwt'
-        })
-            .catch(e => { console.log('Feathers exception', e) })
+        }).catch(e => { console.log('Feathers exception', e) })
     }
 
     // Set feathers instance on app

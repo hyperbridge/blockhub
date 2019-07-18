@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import feathersClient from '../framework/feathers-client'
-import feathersVuex, { initAuth } from 'feathers-vuex'
 import Vue from 'vue'
 import * as Bridge from '../framework/desktop-bridge'
 
@@ -92,41 +91,8 @@ export const actions = {
 
     async nuxtClientInit({ commit, dispatch }, context) {
         app = context.app
-
-        // const cookieToken = app.$cookies.get('feathers-jwt')
-
-        // if (cookieToken) {
-        //     try {
-        //         const { accessToken } = await dispatch('auth/authenticate', {
-        //             strategy: 'jwt',
-        //             accessToken: cookieToken
-        //         })
-
-        //         dispatch('login', {
-        //             token: accessToken,
-        //             user: state.auth.user
-        //         })
-                
-        //         // const { payload } = jwt.decode(accessToken, { complete: true })
-
-        //         // commit('accounts/setCurrent', payload.userId)
-        //         // commit('auth/setAccessToken', accessToken)
-        //         // commit('auth/setPayload', payload)
-        //         // commit('auth/setUser', getters['accounts/current'])
-
-        //         await dispatch('application/authenticate')
-        //     } catch (error) {
-        //         console.log('[BlockHub] Error logging in', error)
-        //         dispatch('logout')
-        //         return
-        //     }
-        // } else {
-        //     dispatch('logout')
-        // }
         
         if (context.store.state.user) {
-            // await dispatch('application/authenticate')
-            
             const { userId, meta } = context.store.state.user
             this.$access.setUserId(userId)
             this.$access.setUserPermissions(userId, meta.permissions)
