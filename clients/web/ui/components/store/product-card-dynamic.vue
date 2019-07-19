@@ -71,7 +71,7 @@ export default {
     mixins: [debounce],
     props: {
         id: Number,
-        price: String,
+        price: Number,
         name: String,
         mediumTile: String,
         video: String,
