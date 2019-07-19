@@ -41,35 +41,45 @@ The BlockHub project is broken up into related categories:
 * [Web Client](clients/web) - Standard BlockHub experience for web users. Built with Vue and Nuxt.
 * [Desktop Client](clients/desktop) - Standard BlockHub experience for desktop users. Wraps the Web Client. Built with Electron.
 
+| Name | Path |  |
+| --- | --- | --- |
+| **Web Client** | [clients/web](clients/web) | Standard BlockHub experience for web users. Built with *Vue* and *Nuxt*. |
+| **Desktop Client** | [clients/desktop](clients/desktop) | Standard BlockHub experience for desktop users. Wraps the Web Client. Built with Electron. |
 
 ### SDKs
 
-* [C# - sdks/csharp](sdks/csharp) - Supports basic BlockHub interactions. Built with .NET.
-* [JS](sdks/js) - Supports basic BlockHub interactions. Built with TypeScript.
-* C++ - Coming soon
-
+| Name | Path |  |
+| --- | --- | --- |
+| **C#** | [sdks/csharp](sdks/csharp) | Supports basic BlockHub interactions. Built with .NET. |
+| **JS** | [sdks/js](sdks/js) | Supports basic BlockHub interactions. Built with TypeScript.
+* C++ - Coming soon |
 
 ### Services
 
-* [Web](services/web) - `services/web` - Web Service provides API for BlockHub protocols. Built with Node + Express + Feathers + Swagger.
-* [Mail](services/mail) - `services/mail` - Mail Service for other API services.  Built with Express + Swagger Connect.
-* [Gateway](services/gateway) - `services/gateway` - Gateway for other API services. Currently sits in front of the Web Service. Built with Express Gateway + Swagger.
-* [Veriff](services/veriff) - `services/veriff` - Webhook for Veriff verification callbacks. Adds people to the Mailchimp mailing list. Built with Express.
-
+| Name | Path |  |
+| --- | --- | --- |
+| **Web** | [services/web](services/web) | Web Service provides API for BlockHub protocols. Built with Node + Express + Feathers + Swagger. |
+| **Mail** | [services/mail](services/mail) | Mail Service for other API services.  Built with Express + Swagger Connect. |
+| **Gateway** | [services/gateway](services/gateway) | Gateway for other API services. Currently sits in front of the Web Service. Built with Express Gateway + Swagger. |
+| **Veriff** | [services/veriff](services/veriff) | Webhook for Veriff verification callbacks. Adds people to the Mailchimp mailing list. Built with Express. |
 
 ### Packages
 
-* [Chrome Extension](packages/chrome-extension) - Chrome extension for BlockHub.
-* [Chrome Bridge](packages/chrome-bridge) - Native messaging proxy for Google Chrome to communicate with BlockHub.
-* [Web Connector](packages/web-connector) - One-liner integration for websites. Utilizes the BlockHub JS API to provide a standard UI popups.
-* [Node Operator](packages/node-operator) - Connects peers to fuel and facilitate network actions. Built with Node + Express + libp2p + IPFS.
+| Name | Path |  |
+| --- | --- | --- |
+| **Chrome Extension** | [packages/chrome-extension](packages/chrome-extension) | Chrome extension for BlockHub. |
+| **Chrome Bridge** | [packages/chrome-bridge](packages/chrome-bridge) | Native messaging proxy for Google Chrome to communicate with BlockHub. |
+| **Web Connector** | [packages/web-connector](packages/web-connector) | One-liner integration for websites. Utilizes the BlockHub JS API to provide a standard UI popups. |
+| **Node Operator** | [packages/node-operator](packages/node-operator) | Connects peers to fuel and facilitate network actions. Built with Node + Express + libp2p + IPFS. |
 
 
 ### Tools
 
-* [Styleguide](tools/styleguide) - Styleguide for BlockHub. Built with Storybook.
-* [DevTools](tools/devtools) - Developer Tools for BlockHub. Built with Electron.
-* [Test Runner](tools/devtools) - Test Runner for BlockHub. Built with Selenium and Nightwatch.
+| Name | Path |  |
+| --- | --- | --- |
+| **DevTools** | [tools/devtools](tools/devtools) | Developer Tools for BlockHub. Built with *Electron*. |
+| **Styleguide** | [tools/styleguide](tools/styleguide) | Styleguide for BlockHub. Built with *Storybook*. |
+| **Test Runner** | [tools/test-runner](tools/test-runner) | Test Runner for BlockHub. Built with *Selenium* and *Nightwatch*. |
 
 
 ## Contribution
