@@ -1,3 +1,3 @@
-ui/components/*.vue
-ui/pages/*.vue
-!ui/pages/index.vue
+# ui/components/*.vue
+# ui/pages/*.vue
+# !ui/pages/index.vue
