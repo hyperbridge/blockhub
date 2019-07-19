@@ -7067,8 +7067,103 @@ storiesOf('Broken page', module)
                 }
             }
         },
-        template: `<c-broken-page :isError="isError" />`
+        template: `<c-broken-page :isError="isError" class="text-white" />`
     }))
+
+storiesOf('Benchmark', module)
+    .add('default', () => ({
+        components: {
+		        'c-benchmark': () => import('~/components/benchmark').then(m => m.default || m)
+        },
+        data(){
+            return{
+		            settings: {
+				            client: {
+                        autoUpdateSettings: function() {
+                            alert('autoUpdateSettings function')
+						            },
+                    }
+                }
+            }
+        },
+        template: `<div class="p-5"><c-benchmark :settings="settings" class="text-white" /></div>`
+    }))
+
+storiesOf('Trade offer', module)
+    .add('default', () => ({
+        components: {
+		        'c-trade-offer': () => import('~/components/trade-offer').then(m => m.default || m)
+        },
+        data(){
+            return{
+		            offer: {
+				            new: true,
+				            createdAt: Date.now(),
+				            contractor: {
+				                name: 'Josh Doel',
+						            img: ''
+                    },
+				            showDetails: true,
+				            yourOffer: [2,3,4,5],
+				            contractorOffer: [2,3,4,5],
+				            assets: [
+                        {
+		                        name: 'Asset name',
+		                        image: '',
+		                        price: {
+				                        current: 23.33
+		                        }
+                        },
+						            {
+								            name: 'Asset name',
+								            image: '',
+								            price: {
+										            current: 23.33
+								            }
+						            },
+						            {
+								            name: 'Asset name',
+								            image: '',
+								            price: {
+										            current: 23.33
+								            }
+						            },
+						            {
+								            name: 'Asset name',
+								            image: '',
+								            price: {
+										            current: 23.33
+								            }
+						            }
+                    ]
+                }
+            }
+        },
+        template: `<div class="p-5"><c-trade-offer :offer="offer" class="text-white" /></div>`
+    }))
+
+//
+// storiesOf('Item navigator', module)
+//     .add('default', () => ({
+//         components: {
+// 		        'c-navigator-item': () => import('~/components/item-navigator/item').then(m => m.default || m)
+//         },
+//         data(){
+//             return{
+// 		            deletingTree: null
+//             }
+//         },
+//         template: `<div class="p-5">
+//                         <c-navigator-item
+//                             v-for="(item, index) in deletingTree"
+//                             :key="index"
+//                             class="assets-tree--delete"
+//                             :index="index"
+//                             :item="item"
+//                             :listLength="3"
+//                             hideButtons />
+//                     </div>`
+//     }))
 
 
 
