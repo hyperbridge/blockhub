@@ -128,7 +128,7 @@ export const data = [
                 name: 'Alan Walker'
             }
         }
-    },[
+    },
     {
         status: 'active',
         key: 'new-next-week',

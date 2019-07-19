@@ -17,7 +17,7 @@
                     <c-img
                         v-if="!displayPreview"
                         class="card-img-top"
-                        :src="imagesMediumTile" />
+                        :src="mediumTile" />
                     <template v-else>
                         <video
                             v-if="video && autoplay"
@@ -33,10 +33,10 @@
                             tag="div"
                             name="slide-left">
                             <c-img
-                                v-for="(image, index) in imagesPreview"
+                                v-for="(image, index) in previewImages"
                                 v-if="index === currentImage"
                                 :key="image"
-                                :src="imagesPreview[index]"
+                                :src="previewImages[index]"
                                 class="card-img-top" />
                         </transition-group>
                     </template>
@@ -71,10 +71,10 @@ export default {
         id: Number,
         price: String,
         name: String,
-        imagesMediumTile: String,
+        mediumTile: String,
         video: String,
         shortDescription: String,
-        imagesPreview: {
+        previewImages: {
             type: Array,
             default: () => []
         },

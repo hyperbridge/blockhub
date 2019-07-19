@@ -107,6 +107,15 @@ export default {
     data() {
         return {
             breadcrumbLinks: false,
+            frontpageProducts: null,
+            featuredProducts: [],
+            newReleases: [],
+            saleProducts: [],
+            collections: [],
+            curatorReviews: [],
+            productNews: [],
+            trendingProjects: [],
+            gameSeries: [],
             showWelcomeModal: false // ['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode) && !this.$store.state.application.settings.client.hideWelcomeModal,
         }
     },
@@ -114,63 +123,63 @@ export default {
         list() {
             const result = []
 
-            if (this.$store.state.marketplace.frontpageProduct && this.$store.state.marketplace.frontpageProduct.id) {
+            if (this.frontpageProducts.length) {
                 result.push({
                     type: 'frontpageProduct',
-                    data: this.$store.state.marketplace.frontpageProduct
+                    data: this.frontpageProducts[0]
                 })
             }
 
-            if (this.$store.state.marketplace.featuredProducts.length) {
+            if (this.featuredProducts.length) {
                 result.push({
                     type: 'featuredProductGallery',
                     data: {
                         title: 'Featured',
                         ref: 'featuredProductGallerySlider',
                         swiper: this.$refs.featuredProductGallerySlider && this.$refs.featuredProductGallerySlider.swiper,
-                        products: this.$store.state.marketplace.featuredProducts,
+                        products: this.featuredProducts,
                         slides: [
                             {
                                 image: {
-                                    src: this.$store.state.marketplace.featuredProducts[0].images.preview[0],
+                                    src: this.featuredProducts[0].meta.images.preview[0],
                                     position: 'center'
                                 },
                                 logo: {
-                                    src: this.$store.state.marketplace.featuredProducts[0].images.icon,
+                                    src: this.featuredProducts[0].meta.images.icon,
                                     position: 'left bottom',
                                     size: 'lg'
                                 },
-                                title: this.$store.state.marketplace.featuredProducts[0].name,
+                                title: this.featuredProducts[0].name,
                                 buttonText: 'Check it out',
-                                id: this.$store.state.marketplace.featuredProducts[0].id
+                                id: this.featuredProducts[0].id
                             },
                             {
                                 image: {
-                                    src: this.$store.state.marketplace.featuredProducts[1].images.preview[0],
+                                    src: this.featuredProducts[1].meta.images.preview[0],
                                     position: 'center'
                                 },
                                 logo: {
-                                    src: this.$store.state.marketplace.featuredProducts[1].images.icon,
+                                    src: this.featuredProducts[1].meta.images.icon,
                                     position: 'left bottom',
                                     size: 'lg'
                                 },
-                                title: this.$store.state.marketplace.featuredProducts[1].name,
+                                title: this.featuredProducts[1].name,
                                 buttonText: 'Check it out',
-                                id: this.$store.state.marketplace.featuredProducts[1].id
+                                id: this.featuredProducts[1].id
                             },
                             {
                                 image: {
-                                    src: this.$store.state.marketplace.featuredProducts[2].images.preview[0],
+                                    src: this.featuredProducts[2].meta.images.preview[0],
                                     position: 'center'
                                 },
                                 logo: {
-                                    src: this.$store.state.marketplace.featuredProducts[2].images.icon,
+                                    src: this.featuredProducts[2].meta.images.icon,
                                     position: 'left bottom',
                                     size: 'lg'
                                 },
-                                title: this.$store.state.marketplace.featuredProducts[2].name,
+                                title: this.featuredProducts[2].name,
                                 buttonText: 'Check it out',
-                                id: this.$store.state.marketplace.featuredProducts[2].id
+                                id: this.featuredProducts[2].id
                             }
                         ]
                     }
@@ -191,7 +200,7 @@ export default {
                 data: {
                     title: 'New Releases',
                     slidesPerView: 3,
-                    products: this.newReleases || []
+                    products: this.newReleases
                 }
             })
 
@@ -230,7 +239,7 @@ export default {
                 data: {
                     title: 'Summer Sale',
                     slidesPerView: 3,
-                    products: this.$store.state.marketplace.saleProducts
+                    products: this.saleProducts
                 }
             })
 
@@ -260,7 +269,7 @@ export default {
                                 }
                             }
                         },
-                        reviews: this.$store.state.marketplace.curatorReviews
+                        reviews: this.curatorReviews
                     }
                 })
             }
@@ -273,24 +282,26 @@ export default {
                 }, {}) || null
             }
 
-            result.push({
-                type: 'productNews',
-                data: {
-                    headings: Object.values(groupBy(this.$store.state.marketplace.posts, 'targetId')).map(post => {
-                        if (post[0].targetType === 'product') {
-                            const target = this.$store.state.marketplace.products[post[0].targetId]
+            if (this.productNews.length) {
+                result.push({
+                    type: 'productNews',
+                    data: {
+                        headings: Object.values(groupBy(this.productNews, 'targetId')).map(post => {
+                            if (post[0].targetType === 'product') {
+                                const target = this.$store.state.products.keyedById[post[0].targetId]
 
-                            return {
-                                image: target.images.mediumTile,
-                                title: target.name,
-                                developer: target.developer
+                                return {
+                                    image: target.meta.images.mediumTile,
+                                    title: target.meta.name,
+                                    developer: target.meta.developer
+                                }
                             }
-                        }
-                        return undefined
-                    }),
-                    lists: Object.values(groupBy(this.$store.state.marketplace.posts, 'targetId'))
-                }
-            })
+                            return undefined
+                        }),
+                        lists: Object.values(groupBy(this.productNews, 'targetId'))
+                    }
+                })
+            }
 
             result.push({
                 type: 'trendingProjectsRow',
@@ -306,14 +317,14 @@ export default {
                             }
                         }
                     },
-                    projects: this.$store.state.funding.trendingProjects
+                    projects: this.trendingProjects
                 }
             })
 
             result.push({
                 type: 'gameSeries',
                 data: {
-                    list: this.$store.state.marketplace.gameSeries,
+                    list: this.gameSeries,
                     showNumber: 3
                 }
             })
@@ -328,21 +339,73 @@ export default {
         // },
     },
     async asyncData({ store }) {
-        store.state.application.navigationComponent = 'store'
+        const newReleases = (await store.dispatch('products/find', {
+            query: {
+                'type': 'game',
+                'internalTags.name': 'Released',
+                '$joinRelation': 'internalTags',
+                '$eager': 'internalTags',
+                '$sort[releaseDate]': -1,
+                '$limit': 20
+            }
+        })).data
+
+        const featuredProducts = (await store.dispatch('products/find', {
+            query: {
+                'type': 'game',
+                'internalTags.name': 'Featured',
+                '$joinRelation': 'internalTags',
+                '$eager': 'internalTags',
+                '$sort[updatedAt]': -1,
+                '$limit': 20
+            }
+        })).data
+
+        const saleProducts = (await store.dispatch('products/find', {
+            query: {
+                'type': 'game',
+                'internalTags.name': 'Featured',
+                '$joinRelation': 'internalTags',
+                '$eager': 'internalTags',
+                '$sort[updatedAt]': -1,
+                '$limit': 20
+            }
+        })).data
+
+        const frontpageProducts = (await store.dispatch('products/find', {
+            query: {
+                'type': 'game',
+                'internalTags.name': 'Frontpage',
+                '$joinRelation': 'internalTags',
+                '$eager': 'internalTags',
+                '$sort[updatedAt]': -1,
+                '$limit': 3
+            }
+        })).data
+
+        return {
+            newReleases,
+            featuredProducts,
+            saleProducts,
+            frontpageProducts
+        }
+    },
+    mounted() {
+        this.updateLandingImage()
 
         // TODO: collections should be Array not object
-        const collections = await store.dispatch('collections/find', {
+        store.dispatch('collections/find', {
             query: {
                 $sort: {
                     createdAt: -1
                 },
                 $limit: 25
             }
+        }).then(res => {
+            this.collections = res.data
         })
 
-        // this.$store.getters['collections/list']
-
-        const newReleases = (await store.dispatch('products/find', {
+        store.dispatch('products/find', {
             query: {
                 'type': 'game',
                 'tags.name': 'Released',
@@ -350,17 +413,10 @@ export default {
                 '$eager': 'tags',
                 '$sort[releaseDate]': -1,
                 '$limit': 20
-                // filter: 'newReleases',
             }
-        })).data
-
-        return {
-            collections,
-            newReleases // this.$store.state.marketplace.newProducts.slice(0, 12)
-        }
-    },
-    mounted() {
-        this.updateLandingImage()
+        }).then(res => {
+            this.newReleases = data
+        })
     },
     created() {
         this.updateLandingImage()
@@ -373,12 +429,12 @@ export default {
         updateLandingImage() {
             if (!process.client) return
 
-            const { frontpageProduct } = this.$store.state.marketplace
+            const { frontpageProduct } = this.$store.state
 
             if (frontpageProduct && frontpageProduct.images) {
                 const header = window.document.getElementById('header-bg')
-                const randomImage = Math.floor(Math.random() * frontpageProduct.images.preview.length)
-                header.style['background-image'] = `url(${frontpageProduct.images.preview[randomImage]})`
+                const randomImage = Math.floor(Math.random() * frontpageProduct.meta.images.preview.length)
+                header.style['background-image'] = `url(${frontpageProduct.meta.images.preview[randomImage]})`
                 header.style['background-size'] = 'cover'
             }
         },

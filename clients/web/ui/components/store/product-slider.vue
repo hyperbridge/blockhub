@@ -26,19 +26,19 @@
                     class="m-0"
                     :id="product.id"
                     :price="product.meta.price"
-                    :imagesMediumTile="product.meta.images.mediumTile"
+                    :mediumTile="product.meta.images.mediumTile"
                     :video="product.meta.video"
                     :shortDescription="product.meta.shortDescription"
-                    :imagesPreview="product.meta.images.review"
+                    :previewImages="product.meta.images.preview"
                     :developerTags="product.meta.developerTags" />
                 <c-product-card
                     v-else
                     class="m-0"
                     :id="product.id"
                     :name="product.name"
-                    :imagesMediumTile="product.meta.images.mediumTile"
-                    :metaShortDescription="product.meta.shortDescription"
-                    :metaDeveloperTags="product.meta.developerTags" />
+                    :mediumTile="product.meta.images.mediumTile"
+                    :shortDescription="product.meta.shortDescription"
+                    :developerTags="product.meta.developerTags" />
             </c-swiper-slide>
         </c-swiper>
     </c-block>

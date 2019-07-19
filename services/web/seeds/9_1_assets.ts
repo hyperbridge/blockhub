@@ -1,6 +1,5 @@
 const data = [
     {
-        "id": 1,
         "name": "Magic Plate Armor",
         "productName": "Tibia",
         "product": 3,
@@ -56,7 +55,6 @@ const data = [
         "systemTags": ["special", "trending"]
     },
     {
-        "id": 2,
         "name": "Silver Plate Armor",
         "productName": "Tibia",
         "product": 3,
@@ -105,7 +103,6 @@ const data = [
         "systemTags": ["trending"]
     },
     {
-        "id": 3,
         "name": "Blue Spion Leather",
         "productName": "Tibia",
         "product": 3,
@@ -154,7 +151,6 @@ const data = [
         "systemTags": ["epic"]
     },
     {
-        "id": 4,
         "name": "Ausura Plate Armor",
         "productName": "Tibia",
         "product": 1,
@@ -204,7 +200,6 @@ const data = [
         "systemTags": ["mythic", "legendary"]
     },
     {
-        "id": 5,
         "name": "Magic Shirts",
         "productName": "Tree of Savior Fan Base",
         "product": 1,
@@ -254,7 +249,6 @@ const data = [
         "systemTags": ["specials"]
     },
     {
-        "id": 6,
         "name": "Hard Leather Armor",
         "productName": "Tree of Savior Fan Base",
         "product": 1,
@@ -304,7 +298,6 @@ const data = [
         "systemTags": ["extremely_rare"]
     },
     {
-        "id": 7,
         "name": "Magic heand",
         "productName": "Tree of Savior Fan Base",
         "product": 2,
@@ -354,7 +347,6 @@ const data = [
         "systemTags": ["upcoming"]
     },
     {
-        "id": 8,
         "name": "New Rank Booster",
         "productName": "Tree of Savior Fan Base",
         "product": 2,
@@ -399,7 +391,6 @@ const data = [
         "systemTags": ["discount"]
     },
     {
-        "id": 9,
         "name": "Cystallised Skull",
         "productName": "Path of Exile",
         "product": 7,
@@ -428,7 +419,6 @@ const data = [
         "systemTags": ["trending"]
     },
     {
-        "id": 10,
         "name": "Engraved Skull",
         "productName": "Path of Exile",
         "product": 7,
@@ -457,7 +447,6 @@ const data = [
         "systemTags": ["heroic"]
     },
     {
-        "id": 11,
         "name": "Turquoise Mask",
         "productName": "Path of Exile",
         "product": 7,
@@ -486,7 +475,6 @@ const data = [
         "systemTags": ["discount"]
     },
     {
-        "id": 12,
         "name": "Gold AKM",
         "productName": "Playerunknown's Battlegrounds",
         "product": 6,
@@ -514,7 +502,6 @@ const data = [
         "systemTags": ["popular"]
     },
     {
-        "id": 13,
         "name": "Jungle Digital SKS",
         "productName": "Playerunknown's Battlegrounds",
         "product": 6,
@@ -542,7 +529,6 @@ const data = [
         "systemTags": []
     },
     {
-        "id": 14,
         "name": "Leather Hoodie White",
         "productName": "Playerunknown's Battlegrounds",
         "product": 6,
@@ -572,5 +558,3 @@ const data = [
 
 export const seed = async function (knex): Promise<any> {
 }
-
-
