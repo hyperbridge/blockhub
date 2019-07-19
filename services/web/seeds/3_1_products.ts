@@ -630,7 +630,8 @@ export const seed = async function (knex): Promise<any> {
                     "Featured",
                     "Trending",
                     "Top Seller",
-                    "Specials"
+                    "Specials",
+                    "Released"
                 ],
                 type: "game",
                 downloads: 0,
@@ -3736,8 +3737,7 @@ export const seed = async function (knex): Promise<any> {
         }
     ]
 
-    for (const item of data) {console.log(item.meta.developerTags)
-    console.log(item.meta.systemTags)
+    for (const item of data) {
         if (item.meta.developerTags) {
             // @ts-ignore
             item.tags = await Tag.query(knex).whereIn('name', item.meta.developerTags)
@@ -3746,8 +3746,6 @@ export const seed = async function (knex): Promise<any> {
             // @ts-ignore
             item.internalTags = await Tag.query(knex).whereIn('name', item.meta.systemTags)
         }
-        // @ts-ignore
-        console.log(item.tags, item.internalTags)
     }
 
     await Product

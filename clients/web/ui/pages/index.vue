@@ -107,7 +107,7 @@ export default {
     data() {
         return {
             breadcrumbLinks: false,
-            frontpageProducts: null,
+            frontpageProducts: [],
             featuredProducts: [],
             newReleases: [],
             saleProducts: [],
@@ -405,18 +405,18 @@ export default {
             this.collections = res.data
         })
 
-        this.$store.dispatch('products/find', {
-            query: {
-                'type': 'game',
-                'tags.name': 'Released',
-                '$joinRelation': 'tags',
-                '$eager': 'tags',
-                '$sort[releaseDate]': -1,
-                '$limit': 20
-            }
-        }).then(res => {
-            this.newReleases = data
-        })
+        // this.$store.dispatch('products/find', {
+        //     query: {
+        //         'type': 'game',
+        //         'tags.name': 'Released',
+        //         '$joinRelation': 'tags',
+        //         '$eager': 'tags',
+        //         '$sort[releaseDate]': -1,
+        //         '$limit': 20
+        //     }
+        // }).then(res => {
+        //     this.newReleases = res.data
+        // })
     },
     created() {
         this.updateLandingImage()
