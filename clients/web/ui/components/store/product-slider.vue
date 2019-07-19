@@ -13,7 +13,6 @@
             :showBackground="true"
             @prevClick="slider.slidePrev()"
             @nextClick="slider.slideNext()" />
-
         <c-swiper
             v-if="products"
             ref="slider"
@@ -25,6 +24,7 @@
                     v-if="dynamic"
                     class="m-0"
                     :id="product.id"
+                    :name="product.name"
                     :price="product.meta.price"
                     :mediumTile="product.meta.images.mediumTile"
                     :video="product.meta.video"
