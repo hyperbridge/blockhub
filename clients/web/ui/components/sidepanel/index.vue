@@ -19,7 +19,7 @@
                             </c-button>
                             <c-button
                                 v-if="$store.state.application.signedIn"
-                                v-darklaunch="'MESSAGES'"
+                                v-access="'message.read'"
                                 status="plain"
                                 icon-hide
                                 style="box-shadow: none"
@@ -61,7 +61,7 @@
                 </c-swiper-slide>
                 <c-swiper-slide
                     v-if="$store.state.application.signedIn"
-                    v-darklaunch="'MESSAGES'">
+                    v-access="'message.read'">
                     <div class="item">
                         <h3>MESSAGES</h3>
 
@@ -139,7 +139,7 @@
                             </c-button>
                             <c-button
                                 v-if="$store.state.application.signedIn"
-                                v-darklaunch="'MESSAGES'"
+                                v-access="'message.read'"
                                 status="plain"
                                 icon-hide
                                 style="box-shadow: none"
@@ -207,7 +207,7 @@
                             </c-button>
                             <c-button
                                 v-if="$store.state.application.signedIn"
-                                v-darklaunch="'MESSAGES'"
+                                v-access="'message.read'"
                                 status="plain"
                                 icon-hide
                                 style="box-shadow: none"

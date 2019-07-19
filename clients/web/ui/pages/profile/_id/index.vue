@@ -15,12 +15,12 @@
                         Send
                     </c-button>
                     <c-button
-                        v-darklaunch="'SHARING'"
+                        v-access="'sharing'"
                         status="share">
                         Share
                     </c-button>
                     <c-button
-                        v-darklaunch="'REPORTING'"
+                        v-access="'reporting'"
                         status="danger">
                         Report
                     </c-button>

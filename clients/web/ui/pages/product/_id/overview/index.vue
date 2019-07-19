@@ -76,20 +76,20 @@
             </c-button>
 
             <c-rating-block
-                v-darklaunch="'RATINGS'"
+                v-access="'rating.read'"
                 class="margin-bottom-20"
                 :items="product.meta.rating"
                 :parentPath="`/product/${product.id}`"
                 @goto="scrollToReviews" />
 
             <c-frequently-traded-assets
-                v-darklaunch="'ASSETS'"
+                v-access="'assets'"
                 class="margin-bottom-20"
                 :items="product.meta.frequentlyTradedAssets"
                 :assetsPath="`/product/${product.id}/assets`" />
 
             <c-community-spotlight
-                v-darklaunch="'COMMUNITY'"
+                v-access="'community'"
                 class="margin-bottom-20"
                 :discussions="product.meta.community.discussions"
                 :communityPath="`/product/${product.id}/community`" />
@@ -213,7 +213,7 @@
             </c-block>
         </div>
         <div
-            v-darklaunch="'TOURNAMENTS'"
+            v-access="'tournament.read'"
             class="col-12">
             <c-block
                 ref="streamsSlider"

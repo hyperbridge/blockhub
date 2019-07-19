@@ -5,14 +5,14 @@
             class="fixed-panel invert">
             <div class="fixed-panel__content scroll">
                 <template v-if="developerMode">
-                    <h5 v-darklaunch="'REALMS'">
+                    <h5 v-access="'realm.read'">
                         Your Realms
                     </h5>
 
                     <c-button
                         v-for="(realm, index) in realms"
                         :key="`realm${realm.id}`"
-                        v-darklaunch="'REALMS'"
+                        v-access="'realm.read'"
                         status="none"
                         :to="`/realm/${realm.id}`">
                         <span class="icon icon-letter-circle">{{ realm.name.slice(0) }}</span>
@@ -20,13 +20,13 @@
                     </c-button>
 
                     <c-button
-                        v-darklaunch="'REALMS'"
+                        v-access="'realm.read'"
                         status="none"
                         to="/profile/1/realms">
                         See More...
                     </c-button>
 
-                    <hr v-darklaunch="'REALMS'">
+                    <hr v-access="'realm.read'">
 
                     <h5 v-if="developerMode && products.length">
                         Your Products
@@ -59,14 +59,14 @@
                         <span class="text">My Content</span>
                     </c-button>
                     <c-button
-                        v-darklaunch="'PAYMENTS'"
+                        v-access="'payments'"
                         status="none"
                         to="/business/developer/payment">
                         <span class="icon fas fa-info-circle" />
                         <span class="text">Payment Settings</span>
                     </c-button>
                     <c-button
-                        v-darklaunch="'REALMS'"
+                        v-access="'realm.read'"
                         status="none"
                         to="/business/realm/new">
                         <span class="icon fa fa-plus" />
@@ -108,7 +108,7 @@
                         Profiles
                     </c-button>
                     <c-button
-                        v-darklaunch="'WALLETS'"
+                        v-access="'wallet.read'"
                         status="plain"
                         tag="button"
                         to="/account/wallets"
@@ -139,7 +139,7 @@
                         Activity Log
                     </c-button>
                     <c-button
-                        v-darklaunch="'CONTACTS'"
+                        v-access="'contact'"
                         status="plain"
                         tag="button"
                         to="/profile/1/contacts"

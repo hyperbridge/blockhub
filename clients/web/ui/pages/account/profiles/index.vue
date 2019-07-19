@@ -92,7 +92,7 @@
                     </div>
                     <div
                         slot="additional-action"
-                        v-darklaunch="'REPUTATION'"
+                        v-access="'reputation'"
                         class="additional-action margin-left-20">
                         <span class="text">Rating <c-icon name="trophy" /></span>
                         <c-button-arrows />

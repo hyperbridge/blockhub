@@ -269,7 +269,7 @@
                 class="col-12"
                 hidden>
                 <div
-                    v-darklaunch="'GOVERNANCE'"
+                    v-access="'governance'"
                     class="row">
                     <div class="col-12">
                         Choose your governance system

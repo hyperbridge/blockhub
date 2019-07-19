@@ -88,11 +88,11 @@ export const actions = {
 
     async nuxtClientInit({ commit, dispatch }, context) {
         app = context.app
-        
+
         if (context.store.state.user) {
             const { userId, email, meta } = context.store.state.user
-            this.$access.setUserId(userId)
-            this.$access.setUserPermissions(userId, meta.permissions)
+            // this.$access.setUserId(userId)
+            // this.$access.setUserPermissions(userId, meta.permissions)
 
             /*
                 If the user is authenticated, we can actually pass it to Sentry as part
@@ -106,8 +106,8 @@ export const actions = {
         console.log('[BlockHub] Logging in: ', user)
         this.$axios.setToken(token, 'bearer')
         // this.$cookies.set('token', token)
-        this.$access.setUserId(user.userId)
-        this.$access.setUserPermissions(user.userId, user.meta.permissions)
+        this.$accessConfig.setUserId(user.id)
+        this.$accessConfig.setUserPermissions(user.id, user.meta.permissions)
 
         dispatch('application/authenticate')
 

@@ -64,11 +64,7 @@ export default async function (options, db, req, res, next): Promise<any> {
         permissionValidator.setUserId(user.userId)
         permissionValidator.setUserPermissions(user.userId, permissions)
 
-<<<<<<< HEAD
         req.$access = permissionValidator.run
-=======
-        req.$access = permissionValidator.run
->>>>>>> mail
         req.user = user
 
         next()

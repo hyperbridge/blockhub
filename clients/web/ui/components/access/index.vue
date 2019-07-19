@@ -4,7 +4,6 @@ function isVisible(availableFlags, userFlags, code, variant, data) {
 }
 
 export default {
-    name: 'Darklaunch',
     props: {
         code: {
             type: String,
@@ -35,7 +34,7 @@ export default {
     render(createElement) {
         if (this.isVisible) {
             return createElement(this.tag, {
-                'darklaunch': this.code
+                'access': this.code
             }, this.$slots.default)
         }
     }

@@ -118,7 +118,7 @@
                                 </div>
                             </nuxt-link>
                             <div
-                                v-darklaunch="'TICKETS'"
+                                v-access="'tickets'"
                                 class="stat-card">
                                 <div class="icon">
                                     <i class="fas fa-question-circle" />
@@ -149,7 +149,7 @@
                                 </div>
                             </div>
                             <div
-                                v-darklaunch="'PAYMENTS'"
+                                v-access="'payments'"
                                 class="stat-card">
                                 <div class="icon">
                                     <i class="fas fa-dollar-sign" />
@@ -167,7 +167,7 @@
                                 </div>
                             </div>
                             <div
-                                v-darklaunch="'USER_ACTIVITY'"
+                                v-access="'userActivity'"
                                 class="stat-card">
                                 <div class="icon">
                                     <i class="fas fa-users" />

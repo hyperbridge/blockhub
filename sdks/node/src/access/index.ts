@@ -1,12 +1,20 @@
 const keys = require('./keys.json')
 
-let defaultUserId = null
+let defaultUserId = 'anonymous'
 
-const permissions = {
-    'anonymous': {}
+export const setUserPermissions = function (userId, userPermissions) {
+    permissions[userId] = userPermissions || {}
 }
 
-function validator(key, id, options) {
+export const setUserId = function (userId) {
+    defaultUserId = userId
+}
+
+const permissions = {
+    [defaultUserId]: {}
+}
+
+export const validator = function (key, id, options) {
     if (!keys.includes(key)) {
         console.error('Permission key does not exist: ', key)
         return false
@@ -17,11 +25,15 @@ function validator(key, id, options) {
         id = undefined
     }
 
+    if (id) {
+        id = Number(id)
+    }
+
     if (!options) {
         options = {}
     }
 
-    const userId = options.userId || defaultUserId || 'anonymous'
+    const userId = options.userId || defaultUserId
 
     if (permissions[userId]['god']) {
         return true
@@ -38,7 +50,7 @@ function validator(key, id, options) {
 
         console.log(`Checking permission ${key} =`, permissions[userId][key])
 
-        if (id 
+        if (id
             && Array.isArray(permissions[userId][key])
             && permissions[userId][key].includes(id)) {
             return true
@@ -53,13 +65,3 @@ function validator(key, id, options) {
 
     return false
 }
-
-validator.setUserPermissions = function (userId, userPermissions) {
-    permissions[userId] = userPermissions || {}
-}
-
-validator.setUserId = function (userId) {
-    defaultUserId = userId
-}
-
-export default validator

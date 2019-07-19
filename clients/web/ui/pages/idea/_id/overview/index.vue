@@ -56,7 +56,7 @@
             v-if="idea.rating"
             class="col-12 col-lg-4 col-xl-4">
             <c-rating-block
-                v-darklaunch="'RATINGS'"
+                v-access="'rating.read'"
                 class="margin-bottom-20"
                 :items="[{ name: 'General', value: idea.rating.value }]"
                 :parentPath="`/idea/${idea.id}`" />

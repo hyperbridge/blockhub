@@ -14,12 +14,12 @@
                         {{ profile.name }}
                     </h2>
                     <div
-                        v-darklaunch="'REPUTATION'"
+                        v-access="'reputation'"
                         class="user_status">
                         Trusted User
                     </div>
                     <div
-                        v-darklaunch="'REPUTATION'"
+                        v-access="'reputation'"
                         class="user_statistic">
                         <span>
                             12
@@ -35,7 +35,7 @@
         </div>
         <div class="col-7">
             <div
-                v-darklaunch="'BADGES'"
+                v-access="'badge.read'"
                 class="profile__user-medal">
                 <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png" />
                 <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png" />

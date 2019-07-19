@@ -5,12 +5,12 @@
             :links="links.crowdfund" />
 
         <c-sidebar-menu
-            v-darklaunch="'BOUNTIES'"
+            v-access="'bounty.read'"
             title="BOUNTIES"
             :links="links.bounties" />
 
         <c-sidebar-menu
-            v-darklaunch="'COMMUNITY'"
+            v-access="'community'"
             title="DISCUSSIONS"
             :links="links.discussions" />
 
@@ -22,7 +22,7 @@
 
         <c-curator-panel>
             <c-curator-info
-                v-darklaunch="'CURATORS'"
+                v-access="'curator.read'"
                 title="Curator panel">
                 <div v-if="!editing">
                     <p>

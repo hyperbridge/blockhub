@@ -7,39 +7,6 @@ export default ({ store }) => {
         }
     })
 
-    function isVisible(availableFlags, userFlags, code, variant, data) {
-        return availableFlags.map(flag => flag.code).includes(code) && userFlags.map(flag => flag.enabled ? flag.code : null).includes(code)
-    }
-
-    Vue.directive('darklaunch', {
-        bind(el, binding, vnode, oldVnode) {
-            const { value } = binding
-
-            if (!store.state.application.darklaunchFlags.map(flag => flag.code).includes(value)) {
-                store.state.application.darklaunchFlags.push({
-                    code: value,
-                    description: 'Undefined',
-                    type: 'undefined'
-                })
-            }
-
-            el.hidden = true
-
-            if (value &&
-                store.state.application.darklaunchFlags &&
-                store.state.application.account &&
-                store.state.application.account.darklaunchFlags &&
-                isVisible(store.state.application.darklaunchFlags, store.state.application.account.darklaunchFlags, value)) {
-                el.hidden = false
-            }
-
-            if (store.state.application.darklaunchOverride) {
-                el.hidden = false
-            }
-        }
-    })
-
-
     Vue.directive('centralized-mode', {
         bind(el, binding, vnode, oldVnode) {
             const { value } = binding

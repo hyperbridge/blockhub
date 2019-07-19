@@ -8,7 +8,7 @@
                 Home
             </c-sidebar-menu-link>
             <c-sidebar-menu-link
-                v-darklaunch="'COMMUNITY'"
+                v-access="'community'"
                 to="/community">
                 Community
             </c-sidebar-menu-link>
@@ -22,22 +22,22 @@
                 Browse Games
             </c-sidebar-menu-link>
             <c-sidebar-menu-link
-                v-darklaunch="'REALMS'"
+                v-access="'realm.read'"
                 to="/realms">
                 Browse Realms
             </c-sidebar-menu-link>
             <c-sidebar-menu-link
-                v-darklaunch="'CURATORS'"
+                v-access="'curator.read'"
                 to="/curators">
                 Browse Curators
             </c-sidebar-menu-link>
             <c-sidebar-menu-link
-                v-darklaunch="'COLLECTIONS'"
+                v-access="'collection.read'"
                 to="/collections">
                 Browse Collections
             </c-sidebar-menu-link>
             <c-sidebar-menu-link
-                v-darklaunch="'MARKETPLACE'"
+                v-access="'marketplace'"
                 to="/marketplace">
                 Browse Items
             </c-sidebar-menu-link>
