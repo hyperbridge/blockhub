@@ -82,7 +82,6 @@ export default ({ app, store, redirect }) => {
     blockhub.reputationEngine = ReputationEngine
     blockhub.db = DB
     blockhub.store = store
-    blockhub.seed = seed
     // blockhub.router = router // doesnt work?
 
     blockhub.importStarterData = () => {

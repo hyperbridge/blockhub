@@ -394,7 +394,7 @@ export default {
         this.updateLandingImage()
 
         // TODO: collections should be Array not object
-        store.dispatch('collections/find', {
+        this.$store.dispatch('collections/find', {
             query: {
                 $sort: {
                     createdAt: -1
@@ -405,7 +405,7 @@ export default {
             this.collections = res.data
         })
 
-        store.dispatch('products/find', {
+        this.$store.dispatch('products/find', {
             query: {
                 'type': 'game',
                 'tags.name': 'Released',
