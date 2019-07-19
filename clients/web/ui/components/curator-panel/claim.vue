@@ -10,7 +10,6 @@
 
 <script>
 export default {
-    name: 'Claim',
     filters: {
         icon(type) {
             switch (type) {

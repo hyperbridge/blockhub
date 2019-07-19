@@ -48,11 +48,13 @@ export default {
         }
     },
     mounted() {
-        this.$ga.page({
-            page: '/404',
-            title: 'Not Found',
-            location: window.location.href
-        })
+        if (this.$ga){
+            this.$ga.page({
+                page: '/404',
+                title: 'Not Found',
+                location: window.location.href
+            })
+        }
     },
     beforeDestroy() {
         if (process.client) {

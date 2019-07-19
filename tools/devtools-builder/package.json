@@ -28,7 +28,7 @@
     },
     "optionalDependencies": {},
     "build": {
-      "appId": "com.hyperbridge.DevTools",
+      "appId": "org.hyperbridge.DevTools",
       "productName": "DevTools",
       "copyright": "",
       "removePackageScripts": false,

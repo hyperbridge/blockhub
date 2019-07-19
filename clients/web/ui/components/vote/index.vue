@@ -1,5 +1,5 @@
 <template>
-    <div class="simple-vote">
+    <div class="vote">
         <i
             class="fa fa-chevron-up"
             :class="{ disabled: upvoted }"
@@ -56,7 +56,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.simple-vote {
+.vote {
+    position: absolute;
     top: 0px;
     right: -45px;
     z-index: 1;
@@ -77,7 +78,7 @@ export default {
 /* some simple transitions to make the upvote and downvote
 buttons fade in as a visual cue for the user */
 
-.c-simple-vote__value {
+.c-vote__value {
     width: 100%;
 }
 

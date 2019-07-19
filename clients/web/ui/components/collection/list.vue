@@ -46,8 +46,14 @@ export default {
         'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m)
     },
     props: {
-        title: String,
-        description: String,
+        title: {
+            type: String,
+            default: null
+        },
+        description: {
+            type: String,
+            default: null
+        },
         collections: {
             type: Array,
             default: () => []
