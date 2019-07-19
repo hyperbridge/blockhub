@@ -51,10 +51,10 @@ The BlockHub project is broken up into related categories:
 
 ### Services
 
-* `services/web` - [Web](services/web) - Web Service provides API for BlockHub protocols. Built with Node + Express + Feathers + Swagger.
-* `services/mail` - [Mail](services/mail) - Mail Service for other API services.  Built with Express + Swagger Connect.
-* `services/gateway` - [Gateway](services/gateway) - Gateway for other API services. Currently sits in front of the Web Service. Built with Express Gateway + Swagger.
-* `services/veriff` - [Veriff](services/veriff) - Webhook for Veriff verification callbacks. Adds people to the Mailchimp mailing list. Built with Express.
+* [Web](services/web) - `services/web` - Web Service provides API for BlockHub protocols. Built with Node + Express + Feathers + Swagger.
+* [Mail](services/mail) - `services/mail` - Mail Service for other API services.  Built with Express + Swagger Connect.
+* [Gateway](services/gateway) - `services/gateway` - Gateway for other API services. Currently sits in front of the Web Service. Built with Express Gateway + Swagger.
+* [Veriff](services/veriff) - `services/veriff` - Webhook for Veriff verification callbacks. Adds people to the Mailchimp mailing list. Built with Express.
 
 
 ### Packages
