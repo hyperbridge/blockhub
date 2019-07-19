@@ -1645,10 +1645,10 @@ storiesOf('Popups', module)
                     <div class="h4" slot="header">Our Updates</div>
                     <template slot="body">
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus gravida arcu quis tellus imperdiet tincidunt. 
-                            Sed iaculis mauris vitae eros fringilla, id congue libero mattis. 
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus gravida arcu quis tellus imperdiet tincidunt.
+                            Sed iaculis mauris vitae eros fringilla, id congue libero mattis.
                         </p>
-                        
+
                         <c-heading-bar-color colorCode="#5EA72B" textAlign="left" class="margin-bottom-15 margin-top-10">
                             <strong>This is the Title</strong>
                         </c-heading-bar-color>
@@ -1657,7 +1657,7 @@ storiesOf('Popups', module)
                             <li>Nulla ut fermentum turpis, a fermentum enim.</li>
                             <li>Praesent feugiat erat diam, tincidunt cursus ligula pulvinar id.</li>
                         </c-dotted-list>
-                        
+
                         <c-heading-bar-color colorCode="#FADC72" textAlign="left" class="margin-bottom-15 margin-top-20">
                             <strong>Aliquam nulla mi, mattis ut nisl nec</strong>
                         </c-heading-bar-color>
@@ -1666,14 +1666,14 @@ storiesOf('Popups', module)
                             <li>Morbi ut consequat eros</li>
                             <li>Aenean imperdiet lobortis tristique.</li>
                         </c-dotted-list>
-                        
+
                         <c-heading-bar-color colorCode="#F75D5D" textAlign="left" class="margin-bottom-15 margin-top-20">
                             <strong>Sed vitae lobortis quam, non porta est</strong>
                         </c-heading-bar-color>
                         <p>
-                            Donec urna nulla, condimentum vel quam quis, tempus pellentesque nibh. Vivamus gravida purus 
-                            at nisl molestie commodo. Praesent dictum et purus in varius. Aenean imperdiet lobortis tristique. 
-                            Phasellus eleifend dolor non mi tempor, quis sagittis massa vehicula. Pellentesque eget enim quis 
+                            Donec urna nulla, condimentum vel quam quis, tempus pellentesque nibh. Vivamus gravida purus
+                            at nisl molestie commodo. Praesent dictum et purus in varius. Aenean imperdiet lobortis tristique.
+                            Phasellus eleifend dolor non mi tempor, quis sagittis massa vehicula. Pellentesque eget enim quis
                             dui volutpat varius quis eget elit.
                         </p>
                     </template>
@@ -1691,7 +1691,7 @@ storiesOf('Popups', module)
                 </c-basic-popup>
             </div>
         </div>
-        
+
         `
     }))
     .add('terms', () => ({
@@ -1874,7 +1874,7 @@ storiesOf('Popups', module)
                 </c-terms-popup>
             </div>
         </div>
-        
+
         `
     }))
     .add('play', () => ({
@@ -2087,7 +2087,7 @@ storiesOf('Assets Overview Popup', module)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-asset-popup 
+             <c-asset-popup
                 :image="image"
                 :id="id"
                 :name="name"
@@ -2113,7 +2113,7 @@ storiesOf('Switch', module)
          <div class="row m-0 p-3">
              <c-switch :checked=true label="Label text" class="mr-5"/>
              <c-switch :checked=true customLabel>
-                Custom label 
+                Custom label
             </c-switch>
          </div>
         `
@@ -2816,7 +2816,7 @@ storiesOf('News List', module)
         template: `
             <div class="row">
                 <div class="col-6">
-                    <c-news-article 
+                    <c-news-article
                     :heading="article.heading"
                     :date="article.date"
                     :content="article.content"
@@ -2876,12 +2876,12 @@ storiesOf('Product Community', module)
             <div class="row m-0 p-5">
                 <div class="col-10">
                     <c-post :id="post.id"
-                            :title="post.title" 
-                            :rate="post.rate" 
-                            :commentsCount="post.comments_count" 
-                            :author="post.author" 
-                            :contentImg="post.content.img" 
-                            :contentText="post.content.text" 
+                            :title="post.title"
+                            :rate="post.rate"
+                            :commentsCount="post.comments_count"
+                            :author="post.author"
+                            :contentImg="post.content.img"
+                            :contentText="post.content.text"
                             :comments="post.content.comments"/>
                 </div>
             </div>
@@ -2989,7 +2989,7 @@ storiesOf('Project Card', module)
         template: `
             <div class="row m-0 p-5">
                 <div class="col-4" v-for="(project, index) in trendingProjects" :key="index">
-                    <c-project-card 
+                    <c-project-card
                                     :image="project.img"
                                     :description="project.description"
                                     :funds="project.funds"
@@ -3291,11 +3291,11 @@ storiesOf('Collection', module)
         },
         template: `
             <div class="col-3 p-5">
-                <c-collection-item 
-                :id="id" 
-                :name="title" 
-                :author="user" 
-                :assets="assets" 
+                <c-collection-item
+                :id="id"
+                :name="title"
+                :author="user"
+                :assets="assets"
                 :background="background" />
             </div>
         `
@@ -3339,8 +3339,8 @@ storiesOf('Collection', module)
         },
         template: `
             <div class="p-5" style="width: 900px">
-                <c-collection-list 
-                title="Get Started" 
+                <c-collection-list
+                title="Get Started"
                 :collections="items"
                 description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet tellus in neque porttitor consequat.">
                 </c-collection-list>
@@ -3455,12 +3455,12 @@ storiesOf('Game Series', module)
         },
         template: `<div class="p-5" style="width: 900px">
                     <c-game-series>
-                        <c-game-description 
-                        :id="id" 
-                        :title="title" 
-                        :description="description" 
-                        :tags="tags" 
-                        :images="images" 
+                        <c-game-description
+                        :id="id"
+                        :title="title"
+                        :description="description"
+                        :tags="tags"
+                        :images="images"
                         :price="price" />
                         <c-game-includes-list :list="list" :showNumber="5" />
                     </c-game-series>
@@ -3481,12 +3481,12 @@ storiesOf('Game Series', module)
             }
         },
         template: `<div class="p-5" style="width: 900px">
-            <c-game-description 
-            :id="id" 
-            :title="title" 
-            :description="description" 
-            :tags="tags" 
-            :images="images" 
+            <c-game-description
+            :id="id"
+            :title="title"
+            :description="description"
+            :tags="tags"
+            :images="images"
             :price="price" />
         </div>`
     }))
@@ -3503,7 +3503,7 @@ storiesOf('Game Series', module)
             }
         },
         template: `<div class="p-5" style="width: 900px">
-                        <c-game-includes-item 
+                        <c-game-includes-item
                             :id="23"
                             :name="title"
                             :rating="stars"
@@ -3867,7 +3867,7 @@ storiesOf('Banner', module)
                             <!--</select>-->
                         <!--</div>-->
                     </div>
-                    
+
                     <c-banner :slides="slides" />
             </div>`
     }))
@@ -4147,9 +4147,9 @@ storiesOf('Purchase block', module)
             }
         },
         template: `<div class="p-5" style="width: 400px">
-                        <c-purchase-block 
+                        <c-purchase-block
                         :tags="['top', 'new']"
-                        :price="49.99" 
+                        :price="49.99"
                         :eligibleTokens="300"
                         :isReleased="true"
                         :offersPurchases="true"
@@ -4169,7 +4169,7 @@ storiesOf('Purchase block', module)
             }
         },
         template: `<div class="p-5" style="width: 400px">
-                        <c-purchase-block 
+                        <c-purchase-block
                         :tags="['top', 'new']"
                         :price="49.99"
                         releaseDate="8 Jun, 2018"
@@ -4191,9 +4191,9 @@ storiesOf('Purchase block', module)
             }
         },
         template: `<div class="p-5" style="width: 400px">
-                        <c-purchase-block 
+                        <c-purchase-block
                         :tags="['new']"
-                        :price="49.99" 
+                        :price="49.99"
                         :isUnavailable="true"
                         :inWishlist="inWishlist"
                         @addToWishlist="inWishlist = true"
@@ -4212,7 +4212,7 @@ storiesOf('Purchase Option', module)
         },
         template: `
             <div class="p-4" style="width: 600px">
-                <c-purchase-option 
+                <c-purchase-option
                 price="44"
                 oldPrice="55"
                 gameTag="SOME TAG"
@@ -4220,7 +4220,7 @@ storiesOf('Purchase Option', module)
                 :id="4"
                  />
                  <hr />
-                <c-purchase-option 
+                <c-purchase-option
                 price="44"
                 oldPrice="55"
                 img="https://trashbox.ru/ifiles/979051_6c28be_screenshot_00/game-of-warriors-1.1.11-1.png"
@@ -4266,8 +4266,8 @@ storiesOf('Purchase Option', module)
         template: `
         <div class="p-5">
             <c-block title="Purchase Options" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                <c-purchase-option v-for="(option, index) in options" 
-                :key="index" 
+                <c-purchase-option v-for="(option, index) in options"
+                :key="index"
                 :price="option.price"
                 :oldPrice="option.oldPrice"
                 :gameTag="option.tag"
@@ -4342,13 +4342,13 @@ storiesOf('Participation Tiers', module)
         template: `
             <div class="p-5">
                 <c-block title="Participation Tier" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                    <c-participation-tier v-for="(item, index) in items" 
+                    <c-participation-tier v-for="(item, index) in items"
                     :key="index"
-                    :id="item.id" 
-                    :price="item.price" 
-                    :sold="item.sold" 
-                    :left="item.left" 
-                    :title="item.title" 
+                    :id="item.id"
+                    :price="item.price"
+                    :sold="item.sold"
+                    :left="item.left"
+                    :title="item.title"
                     :tag="item.tag"
                     :inList="(index < items.length-1) ? true : false"
                  />
@@ -4401,7 +4401,7 @@ storiesOf('Contribute', module)
             }
         },
         template: `<div class="p-4" style="width: 400px">
-                        <c-contribute-pledge 
+                        <c-contribute-pledge
                                     :minPrice="pledge.minPrice"
                                     :title="pledge.name"
                                     :description="pledge.description"
@@ -4516,7 +4516,7 @@ storiesOf('Stream', module)
         template: `
         <div class="row p-5">
             <div class="col-5">
-                <c-stream-item 
+                <c-stream-item
                 :streamGame="game"
                 :streamName="userName"
                 :streamAvatar="userAvatar"
@@ -4526,7 +4526,7 @@ storiesOf('Stream', module)
                 />
             </div>
         </div>
-        
+
         `
     }))
 
@@ -4584,8 +4584,8 @@ storiesOf('Game Installer Modal', module)
         template: `
         <div class="row p-5">
             <div class="col-5">
-                <c-game-installer 
-                :activated="true" 
+                <c-game-installer
+                :activated="true"
                 :win="win"
                 :mac="mac"
                 :linux="linux"
@@ -4599,7 +4599,7 @@ storiesOf('Game Installer Modal', module)
                 </c-game-installer>
             </div>
         </div>
-        
+
         `
     }))
 
@@ -4977,72 +4977,72 @@ storiesOf('Landing Page', module)
         },
         template: `
             <div>
-                <c-landing-block 
+                <c-landing-block
                 title="Some content block title"
-                horizontal="center" 
-                bgPosition="top center" 
-                minHeight="400px" 
+                horizontal="center"
+                bgPosition="top center"
+                minHeight="400px"
                 bgImage="https://s1.1zoom.ru/b5050/840/Magic_Castles_Mountains_506826_1920x1080.jpg">
                     <div class="col-10 text-center">
                         <c-landing-block-title fontSize="42" color="#f8e6c7" class="text-uppercase">
                             Battle level rewards
                         </c-landing-block-title>
- 
-                         <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
-                        Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
-                        Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
-                        Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+
+                         <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat.
+                        Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio.
+                        Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare.
+                        Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id.
                         Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
                     </div>
                     <div class="col-10 margin-top-30">
                         <c-landing-block-title-gradient align="center" size="md" fontSize="32" class="text-uppercase">
                             The 2018 immortals
                         </c-landing-block-title-gradient>
-                        
+
                         <c-landing-tabs class="margin-top-20">
                             <p class="text-center">
                                  Nunc gravida placerat erat, ac pharetra felis malesuada id.<br>
                                 Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.
                             </p>
                             <c-landing-tab name="TREASURE I">
-                                Maecenas suscipit ante a leo convallis ornare. 
-                                Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+                                Maecenas suscipit ante a leo convallis ornare.
+                                Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id.
                                 Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.
                             </c-landing-tab>
                             <c-landing-tab name="TREASURE II" selected>
                                 <c-landing-slider :items="slides" />
                             </c-landing-tab>
                             <c-landing-tab name="TREASURE III">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at condimentum risus. 
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at condimentum risus.
                                 Integer viverra quam in ipsum posuere lobortis. Integer rhoncus gravida ante a aliquam. In aliquet ex eu nibh pulvinar varius. Suspendisse maximus a arcu at sagittis. Etiam et mauris volutpat diam consequat accumsan vitae non nisi. Sed dignissim odio metus, sit amet ullamcorper ligula blandit et. Donec ac justo a erat lacinia venenatis id eu nisl.
                             </c-landing-tab>
-                                
+
                             <c-landing-block-title tag="div" fontSize="17" color="#5EA72B" class="text-center my-4">
                                 <div class="mb-1">TREASURE I: 1 - 10 - 22 - 34 - 46 - 80 - 220 (repeats every 30 levels)</div>
                                 <div class="mb-1">TREASURE II: 1 - 98 - 112 - 132 - 152 - 230 (repeats every 30 levels)</div>
                                 <div>TREASURE III: 1 - 164 - 178 - 194 - 206 - 240 (repeats every 30 levels)</div>
                             </c-landing-block-title>
-                            
+
                             <c-landing-gradient-block class="mt-4">
                                 <c-landing-block-title tag="div" fontSize="16" color="#fff" class="text-center">
                                     LIMITED MARKETABILITY
                                 </c-landing-block-title>
                                 <p>
-                                    Maecenas suscipit ante a leo convallis ornare. 
-                                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+                                    Maecenas suscipit ante a leo convallis ornare.
+                                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id.
                                     Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.
                                 </p>
                             </c-landing-gradient-block>
                         </c-landing-tabs>
                     </div>
                 </c-landing-block>
-                
+
                 <c-landing-divider />
-                
-                <c-landing-block 
+
+                <c-landing-block
                 horizontal="center"
                 vertical="center"
-                title="Some content block title" 
+                title="Some content block title"
                 minHeight="50vh"
                 bgImage="http://dota2-i.ru/assets/images/resources/1671/1366x768-2042847-shadow-fiend-dota-2-wallpaper-hd.jpg">
                     <div class="col-12">
@@ -5050,7 +5050,7 @@ storiesOf('Landing Page', module)
                             TRUST OF THE BENEFACTOR
                         </c-landing-block-title-gradient>
                         <c-landing-benefactor :items="benefactor_items">
-                        
+
                         </c-landing-benefactor>
                     </div>
                     <div class="col-3 text-right">
@@ -5059,18 +5059,18 @@ storiesOf('Landing Page', module)
                         </c-landing-level>
                     </div>
                     <div class="col-9">
-                         <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
-                        Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
-                        Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
-                        Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+                         <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat.
+                        Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio.
+                        Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare.
+                        Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id.
                         Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
                     </div>
                 </c-landing-block>
-                
+
                 <c-landing-divider />
-                
-                <c-landing-block 
-                title="Some content block title" 
+
+                <c-landing-block
+                title="Some content block title"
                 horizontal="center"
                 vertical="center"
                 bgImage="https://steamcdn-a.akamaihd.net/apps/dota2/images/international2018/battlepass/bg_24.png">
@@ -5122,7 +5122,7 @@ storiesOf('Token Sale Box', module)
         },
         template: `
         <div class="p-5" style="width: 1200px;">
-            <c-token-sale 
+            <c-token-sale
             :hardCap="18000000"
             :softCap="7500000"
             :volume="1000000000"
@@ -5137,7 +5137,7 @@ storiesOf('Token Sale Box', module)
         },
         template: `
         <div class="p-5" style="width: 1200px;">
-            <c-toke-sale-2 
+            <c-toke-sale-2
             :hardCap="18000000"
             :softCap="7500000"
             :volume="1000000000"
@@ -5227,7 +5227,7 @@ storiesOf('Video Popup', module)
                         <c-button @click="showLocalHandler" class="m-3">Show Local Video Modal</c-button>
                         <c-button @click="showYoutubeHandler" class="m-3">Show Youtube Video Modal</c-button>
                         <c-button @click="showTwitchHandler" class="m-3">Show Twitch Video Modal</c-button>
-                        
+
                         <c-video-popup :twitch="twitch" @close="closeModal" :activated="showTwitch">
                             <template v-for="comment in comments">
                                 <div class="mb-3">
@@ -5236,7 +5236,7 @@ storiesOf('Video Popup', module)
                                 </div>
                             </template>
                         </c-video-popup>
-                        
+
                         <c-video-popup :youtube="youtube" @close="closeModal" :activated="showYoutube">
                             <template v-for="comment in comments">
                                 <div class="mb-3">
@@ -5245,7 +5245,7 @@ storiesOf('Video Popup', module)
                                 </div>
                             </template>
                         </c-video-popup>
-                        
+
                         <c-video-popup :video="video" @close="closeModal" :activated="showLocal">
                             <template v-for="comment in comments">
                                 <div class="mb-3">
@@ -5383,8 +5383,8 @@ storiesOf('Video Popup', module)
         template: `<div class="p-5">
                         <div class="row">
                             <div class="col-5 col-lg-4" v-for="video in videos">
-                                <c-video-item 
-                                :poster="video.poster" 
+                                <c-video-item
+                                :poster="video.poster"
                                 :author="video.name"
                                 :avatar="video.avatar"
                                 :video="video.video"
@@ -5902,9 +5902,9 @@ storiesOf('Option Block', module)
             }
         },
         template: `<div class="p-3 m-0 text-white" style="width: 400px">
-                        <c-option-block shadow 
+                        <c-option-block shadow
                         image="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"
-                        title="World of Warcraft®: Battle for Azeroth" 
+                        title="World of Warcraft®: Battle for Azeroth"
                         subtitle="Massively Multiplayer RPG"
                         notification="Pre-Purchase now!"
                         :list="list"
@@ -6328,7 +6328,7 @@ storiesOf('Metro', module)
                             </div>
                         </div>
                       </template>
-                    </c-metro-tile>    
+                    </c-metro-tile>
                 </div>
             </div>`
     }))
@@ -6347,7 +6347,7 @@ storiesOf('Metro', module)
                             Aenean blandit augue non est
                         </div>
                         <div>
-                            Vestibulum mi neque, commodo et blandit id, auctor at metus. Quisque varius ut nisi a tincidunt. 
+                            Vestibulum mi neque, commodo et blandit id, auctor at metus. Quisque varius ut nisi a tincidunt.
                             Maecenas nibh sem, malesuada et cursus nec, sollicitudin accumsan sapien.
                         </div>
                     </c-metro-item>
@@ -6357,7 +6357,7 @@ storiesOf('Metro', module)
                             Aenean blandit augue non est
                         </div>
                         <div>
-                            Vestibulum mi neque, commodo et blandit id, auctor at metus. Quisque varius ut nisi a tincidunt. 
+                            Vestibulum mi neque, commodo et blandit id, auctor at metus. Quisque varius ut nisi a tincidunt.
                             Maecenas nibh sem, malesuada et cursus nec, sollicitudin accumsan sapien.
                         </div>
                     </c-metro-item>
@@ -6367,7 +6367,7 @@ storiesOf('Metro', module)
                             Aenean blandit augue non est
                         </div>
                         <div>
-                            Vestibulum mi neque, commodo et blandit id, auctor at metus. Quisque varius ut nisi a tincidunt. 
+                            Vestibulum mi neque, commodo et blandit id, auctor at metus. Quisque varius ut nisi a tincidunt.
                             Maecenas nibh sem, malesuada et cursus nec, sollicitudin accumsan sapien.
                         </div>
                     </c-metro-item>
@@ -6753,12 +6753,12 @@ storiesOf('Gift box', module)
             }
         },
         template: `<div class="p-5">
-                      <c-gift-box :status="status" 
+                      <c-gift-box :status="status"
                                     :user="user"
                                     :date="date"
                                     :text="text"
-                                    :gift="gift" 
-                                    @accept="" 
+                                    :gift="gift"
+                                    @accept=""
                                     @decline="" />
                   </div>`
     }))
@@ -6809,20 +6809,266 @@ storiesOf('Profile picker', module)
 
 storiesOf('Vote', module)
     .add('default', () => ({
-            components: {
-                    'c-simple-vote': () => import('~/components/vote/simple').then(m => m.default || m),
-            },
-        data(){
-                return{}
-        },
+		    components: {
+				    'c-vote': () => import('~/components/vote').then(m => m.default || m),
+		    },
         template: `<div class="p-5">
                         <div class="position-relative" style="width:300px">
-                            <c-simple-vote :votes="4" />
+                            <c-vote :votes="4" />
                         </div>
                     </div>`
 
     }))
 
+storiesOf('Social connect', module)
+    .add('default', () => ({
+        components: {
+		        'c-social-connect': () => import('~/components/social-connect').then(m => m.default || m)
+        },
+        data(){
+            return{
+		            socials: [
+				            {
+						            name: 'Facebook',
+						            description: 'Shares achievements to your news feed.',
+						            icon: '/img/icons/facebook.svg',
+						            connected: false
+				            },
+				            {
+						            name: 'Twitter',
+						            description: 'Shares achievements to your Twitter feed.',
+						            icon: '/img/icons/twitter.svg',
+						            connected: false
+				            },
+				            {
+						            name: 'Twitch',
+						            description: 'Lets you contribute to streamers.',
+						            icon: '/img/icons/twitch-large.png',
+						            connected: false
+				            },
+				            {
+						            name: 'Discord',
+						            description: 'Lets you connect to your Discord voice/chat channels.',
+						            icon: '/img/icons/discord.png',
+						            connected: false
+				            },
+				            {
+						            name: 'Steam',
+						            description: 'Lets you connect to your Steam account.',
+						            icon: '/img/icons/steam.png',
+						            connected: false
+				            }
+		            ]
+            }
+        },
+        template: `<div class="p-5 text-white" style="width: 550px">
+                        <c-social-connect
+                            v-for="(item, index) in socials"
+                            :key="index"
+                            :class="index + 1 == socials.length ? 'margin-bottom-0' : 'margin-bottom-20'"
+                            :icon="item.icon"
+                            :name="item.name"
+                            :description="item.description"
+                            :connected="item.connected" />
+                            </div>`
+    }))
+
+// storiesOf('Shortcut Grid', module)
+// 		.add('default', () => ({
+// 			components: {
+// 					'c-shortcut-sidebar': () => import('~/components/shortcut-sidebar').then(m => m.default || m),
+// 			},
+// 				data(){
+// 						return{
+// 								shortcuts: []
+// 						}
+// 				},
+// 				template: `<div class="p-5 text-white" style="width: 550px">
+// 												<c-shortcut-sidebar :items="shortcuts" />
+//                     </div>`
+// 		}))
+
+
+storiesOf('QR code', module)
+    .add('default', () => ({
+        components: {
+		        'c-qr-code': () => import('~/components/qr-code').then(m => m.default || m),
+        },
+        template: `<div class="p-5">
+                        <c-qr-code
+                            style="display: inline-block; background: #fff;"
+                            :config="{
+                                value: '23234234k23n4k24j',
+                                imagePath: 'http://localhost:8000/static/img/logo-only.png',
+                                filter: 'threshold',
+                                size: 400,
+                            }" />
+                    </div>`
+    }))
+
+
+storiesOf('Curator panel', module)
+    .add('claim', () => ({
+        components: {
+		        'c-claim': () => import('~/components/curator-panel/claim').then(m => m.default || m),
+        },
+        data(){
+            return{
+                claimTypes: [
+                    {
+                        type: 'warning',
+                        title: 'Warning claim',
+                        text: 'Pellentesque id lectus et sem convallis venenatis dapibus nec est'
+                    },
+		                {
+				                type: 'success',
+				                title: 'Success claim',
+				                text: 'Pellentesque id lectus et sem convallis venenatis dapibus nec est'
+		                },
+		                {
+				                type: 'danger',
+				                title: 'Danger claim',
+				                text: 'Pellentesque id lectus et sem convallis venenatis dapibus nec est'
+		                },
+		                {
+				                type: 'info',
+				                title: 'Info claim',
+				                text: 'Pellentesque id lectus et sem convallis venenatis dapibus nec est'
+		                }
+                ]
+            }
+        },
+		    template: `<div class="p-5">
+                    <c-claim
+                        class="mb-4"
+                        v-for="claim in claimTypes"
+                        :title="claim.title"
+                        :type="claim.type">
+                            {{ claim.text }}
+                    </c-claim>
+                </div>`
+    }))
+    .add('info', () => ({
+        components: {
+		        'c-curator-info': () => import('~/components/curator-panel/info-card').then(m => m.default || m)
+        },
+		    template: `<div class="p-5" style="width: 350px">
+                        <c-curator-info title="Curator panel">
+                            <div v-if="!editing">
+                                <p>
+                                    20 people have
+                                    curated this idea.
+                                </p>
+                                <ul>
+                                    <li>
+                                        <strong>3</strong>
+                                        Approved with 0 changes
+                                    </li>
+                                    <li>
+                                        <strong>7</strong>
+                                        Approved with at least 1 change requested
+                                    </li>
+                                    <li>
+                                        <strong>6</strong>
+                                        Disapproved with requests
+                                    </li>
+                                    <li>
+                                        <strong>4</strong>
+                                        Disapproved with 0 changes
+                                    </li>
+                                </ul>
+                            </div>
+                        </c-curator-info>
+                    </div>`
+    }))
+
+
+storiesOf('Clock', module)
+    .add('default', () => ({
+        components: {
+		        'c-clock': () => import('~/components/clock').then(m => m.default || m),
+        },
+		    template: `<div class="p-5"><c-clock /></div>`
+    }))
+
+storiesOf('Content navigation', module)
+    .add('default', () => ({
+        components: {
+		        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m)
+        },
+        template: `<div class="p-5">
+                        <c-content-navigation
+                            :setLimits="4">
+                            <!--<div-->
+                                <!--slot-scope="props"-->
+                                <!--class="offers__list">-->
+                                <!--<div-->
+                                    <!--v-for="(item, index) in props.items"-->
+                                    <!--:key="index"-->
+                                    <!--class="list-item">-->
+                                    <!--<div class="item-name-img">-->
+                                        <!--<c-img :src="item.image" />-->
+                                        <!--<h4>{{ item.name }}</h4>-->
+                                    <!--</div>-->
+                                    <!--<div class="item-company text-center">-->
+                                        <!--{{ item.company_name }}-->
+                                    <!--</div>-->
+                                    <!--<div class="item-info">-->
+                                        <!--<span class="userName">-->
+                                            <!--{{ item.userName }}-->
+                                        <!--</span>-->
+                                        <!--<span class="price">-->
+                                            <!--$ {{ item.price.current }}-->
+                                        <!--</span>-->
+                                        <!--<a-->
+                                            <!--v-if="item.price.current"-->
+                                            <!--href="#"-->
+                                            <!--class="btn btn-success float-right">-->
+                                            <!--<c-icon name="cart-plus" />-->
+                                            <!--Proceed to Purchase-->
+                                        <!--</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <template
+                                slot="left-content"
+                                class="text-left">
+                                <strong>245345</strong> Available on the market
+                            </template>
+                            <template
+                                slot="right-content"
+                                class="text-right">
+                                <strong>319</strong> On the list
+                                <a
+                                    href="#"
+                                    class="text-white mx-2">
+                                    <i class="fas fa-reply" />
+                                </a>
+                                <a
+                                    href="#"
+                                    class="text-white">
+                                    <i class="fas fa-bookmark" />
+                                </a>
+                            </template>
+                        </c-content-navigation>
+                    </div>`
+    }))
+
+storiesOf('Broken page', module)
+    .add('default', () => ({
+        components: {
+		        'c-broken-page': () => import('~/components/broken-page').then(m => m.default || m)
+        },
+        data(){
+            return{
+		            isError: {
+				            statusCode: 401,
+				            message: 'Unauthorized'
+                }
+            }
+        },
+        template: `<c-broken-page :isError="isError" />`
+    }))
 
 
 

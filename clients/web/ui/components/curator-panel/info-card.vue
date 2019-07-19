@@ -9,7 +9,6 @@
 
 <script>
 export default {
-    name: 'InfoCard',
     props: ['title']
 }
 </script>

@@ -14,7 +14,7 @@
                         class="row justify-content-center">
                         <div class="col-12">
                             <div class="frontpage-product">
-                                <c-simple-vote
+                                <c-vote
                                     v-if="activeElementIndex === index"
                                     v-darklaunch="'RATINGS'"
                                     :votes="item.rating" />
