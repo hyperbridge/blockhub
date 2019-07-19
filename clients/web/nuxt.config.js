@@ -1,7 +1,9 @@
 import path from 'path'
 import autoprefixer from 'autoprefixer'
 import sites from './ui/sites'
+
 const dotenv = require('dotenv').config()
+const sourceMaps = false
 
 export default {
     env: dotenv.parsed,
@@ -20,7 +22,7 @@ export default {
         env: {
             version: process.env.npm_package_version,
             baseUrl: process.env.BASE_URL || `http://localhost:${process.env.PORT}`,
-            isDevelopment: process.env.NODE_ENV !== 'production'            
+            isDevelopment: process.env.NODE_ENV !== 'production'
         },
         titleTemplate: '%s',
         meta: [
@@ -190,7 +192,7 @@ export default {
             }
         },
         extend(config, { isDev, isClient }) {
-            if (isDev) {
+            if (isDev && sourceMaps) {
                 config.output.globalObject = 'this'
                 if (isClient) config.devtool = '#source-map'
             }
