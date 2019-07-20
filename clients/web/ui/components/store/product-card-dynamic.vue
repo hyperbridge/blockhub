@@ -174,7 +174,7 @@ export default {
 
     .slide-left-enter, .slide-left-leave-to {
         opacity: 0;
-        transform: rotate(10deg) scale(.9);
+        // transform: rotate(10deg) scale(.9);
     }
 
     .fade-enter-active, .fade-leave-active {

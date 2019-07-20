@@ -70,6 +70,12 @@ export default {
     components: {
         'c-idea-card': () => import('~/components/idea-card').then(m => m.default || m)
     },
+    data() {
+        return {
+            ideas: [],
+            topGameIdeas: []
+        }
+    },
     computed: {
         list() {
             const result = []
@@ -124,7 +130,7 @@ export default {
                             }
                         }
                     },
-                    projects: topGameIdeas
+                    projects: this.topGameIdeas
                 }
             })
 
@@ -177,7 +183,7 @@ export default {
             }
         })
 
-        const topGameIdeas = (await store.dispatch('getTopGameIdeas/find')).data
+        const topGameIdeas = [] //(await store.dispatch('getTopGameIdeas/find')).data
 
         const ideas = store.getters['ideas/list']
 
