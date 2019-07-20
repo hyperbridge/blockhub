@@ -10,7 +10,7 @@
         "watch": "tsc -w",
         "format": "./node_modules/.bin/tsfmt -r",
         "build-development": "npm run format && tsc --listEmittedFiles",
-        "build-production": "tsc",
+        "build-production": "cp -R src build && node_modules/.bin/tsc",
         "build": "npm run build-development"
     },
     "semistandard": {
@@ -26,7 +26,6 @@
     "dependencies": {
         "bip39": "^2.5.0",
         "bluebird": "^3.5.3",
-        "crypto": "^1.0.1",
         "hyperbridge-funding-protocol": "^1.0.13",
         "hyperbridge-marketplace-protocol": "^1.0.13",
         "hyperbridge-reserve": "^1.0.13",

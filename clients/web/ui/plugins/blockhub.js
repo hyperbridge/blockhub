@@ -14,7 +14,6 @@ export default ({ app, store, redirect }) => {
 
         store.subscribe((mutation, state) => {
             if (mutation.type !== 'application/setInternetConnection') {
-                console.log(mutation.type)
                 console.info(`[BlockHub] Store Mutation: ${mutation.type}`) // , mutation.payload)
             }
 

@@ -1,6 +1,5 @@
 import Web3 from 'web3'
-import HDWalletProvider from 'truffle-hdwallet-provider'
-import contract from 'truffle-contract'
+// import HDWalletProvider from 'truffle-hdwallet-provider'
 import Bluebird from 'bluebird'
 
 export const ethereum = {
@@ -11,6 +10,7 @@ export const ethereum = {
     networks: {
         local: {
             provider: function(passphrase, index) {
+                // @ts-ignore
                 return new HDWalletProvider(
                     passphrase,
                     'http://localhost:8545',
@@ -26,6 +26,7 @@ export const ethereum = {
         },
         kovan: {
             provider: function(passphrase, index) {
+                // @ts-ignore
                 return new HDWalletProvider(
                     passphrase,
                     'https://kovan.infura.io/' + ethereum.infura.accessToken,
@@ -38,6 +39,7 @@ export const ethereum = {
         },
         rinkeby: {
             provider: function(passphrase, index) {
+                // @ts-ignore
                 return new HDWalletProvider(
                     passphrase,
                     'https://rinkeby.infura.io/' + ethereum.infura.accessToken,
@@ -50,6 +52,7 @@ export const ethereum = {
         },
         mainnet: {
             provider: function(passphrase, index) {
+                // @ts-ignore
                 return new HDWalletProvider(
                     passphrase,
                     'https://mainnet.infura.io/' + ethereum.infura.accessToken,
@@ -62,6 +65,7 @@ export const ethereum = {
         },
         ropsten: {
             provider: function(passphrase, index) {
+                // @ts-ignore
                 return new HDWalletProvider(
                     passphrase,
                     'https://ropsten.infura.io/' + ethereum.infura.accessToken,

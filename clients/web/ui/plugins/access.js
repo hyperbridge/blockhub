@@ -1,8 +1,11 @@
 import Vue from 'vue'
-import { access } from 'blockhub-node-sdk'
+import sdk from '../../../../sdks/node/build/src'
 
 export default ({ app, store }) => {
-    const $access = access.validator
+    // access = access.default.access
+    console.log(sdk.access, 'bbbb')
+
+    const $access = sdk.access.validator
 
     if (store.state.auth.user) {
         const { user } = store.state.auth
@@ -24,8 +27,8 @@ export default ({ app, store }) => {
             ...user.meta.permissions
         }
 
-        access.setUserId(user.id)
-        access.setUserPermissions(user.id, permissions)
+        sdk.access.setUserId(user.id)
+        sdk.access.setUserPermissions(user.id, permissions)
     }
 
     const plugin = {
@@ -33,7 +36,7 @@ export default ({ app, store }) => {
             Vue.mixin({
                 created() {
                     this.$access = $access
-                    this.$accessConfig = access
+                    this.$accessConfig = sdk.access
                 }
             })
         }
@@ -58,7 +61,7 @@ export default ({ app, store }) => {
     })
 
     app.$access = $access
-    app.$accessConfig = access
+    app.$accessConfig = sdk.access
     store.$access = $access
-    store.$accessConfig = access
+    store.$accessConfig = sdk.access
 }
