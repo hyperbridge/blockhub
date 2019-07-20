@@ -38,7 +38,7 @@ export const seed = async function (knex): Promise<any> {
                         "https://picsum.photos/200/300/?image=2"
                     ]
                 },
-                tags: [
+                systemTags: [
                     'Released'
                 ],
                 funds: {
@@ -475,8 +475,8 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "upcoming",
-                    "trending"
+                    "Upcoming",
+                    "Trending"
                 ],
                 type: "game",
                 downloads: 0,
@@ -626,11 +626,12 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "sale",
-                    "featured",
-                    "trending",
-                    "topSeller",
-                    "specials"
+                    "Sale",
+                    "Featured",
+                    "Trending",
+                    "Top Seller",
+                    "Specials",
+                    "Released"
                 ],
                 type: "game",
                 downloads: 0,
@@ -742,8 +743,8 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "topSeller",
-                    "specials"
+                    "Top Seller",
+                    "Specials"
                 ],
                 type: "game",
                 downloads: 0,
@@ -954,8 +955,8 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "new",
-                    "trending"
+                    "New",
+                    "Trending"
                 ],
                 type: "game",
                 downloads: 0,
@@ -1106,8 +1107,8 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "trending",
-                    "topSeller"
+                    "Trending",
+                    "Top Seller"
                 ],
                 type: "game",
                 downloads: 0,
@@ -1236,8 +1237,8 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "sale",
-                    "specials"
+                    "Sale",
+                    "Specials"
                 ],
                 type: "game",
                 downloads: 0,
@@ -1349,7 +1350,7 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "upcoming"
+                    "Upcoming"
                 ],
                 type: "game",
                 downloads: 0,
@@ -1491,9 +1492,9 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "sale",
-                    "new",
-                    "specials"
+                    "Sale",
+                    "New",
+                    "Specials"
                 ],
                 type: "game",
                 downloads: 0,
@@ -1641,7 +1642,7 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "sale"
+                    "Sale"
                 ],
                 type: "game",
                 downloads: 0,
@@ -1809,8 +1810,8 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "topSeller",
-                    "specials"
+                    "Top Seller",
+                    "Specials"
                 ],
                 type: "game",
                 downloads: 0,
@@ -1939,8 +1940,8 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "new",
-                    "trending"
+                    "New",
+                    "Trending"
                 ],
                 type: "game",
                 downloads: 0,
@@ -2069,8 +2070,8 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "sale",
-                    "new"
+                    "Sale",
+                    "New"
                 ],
                 type: "game",
                 downloads: 0,
@@ -2180,7 +2181,7 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "specials"
+                    "Specials"
                 ],
                 type: "game",
                 downloads: 0,
@@ -2269,7 +2270,7 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "sale"
+                    "Sale"
                 ],
                 type: "game",
                 downloads: 0,
@@ -2374,7 +2375,7 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "sale"
+                    "Sale"
                 ],
                 type: "game",
                 downloads: 0,
@@ -2482,7 +2483,7 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "sale"
+                    "Sale"
                 ],
                 type: "game",
                 downloads: 0,
@@ -2599,7 +2600,7 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "new"
+                    "New"
                 ],
                 type: "game",
                 downloads: 0,
@@ -2723,8 +2724,8 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "upcoming",
-                    "trending"
+                    "Upcoming",
+                    "Trending"
                 ],
                 type: "game",
                 downloads: 0,
@@ -2870,7 +2871,7 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "featured"
+                    "Featured"
                 ],
                 type: "game",
                 downloads: 0,
@@ -3045,8 +3046,8 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "sale",
-                    "frontpage"
+                    "Sale",
+                    "Frontpage"
                 ],
                 type: "game",
                 downloads: 0,
@@ -3182,7 +3183,7 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "specials"
+                    "Specials"
                 ],
                 type: "game",
                 downloads: 0,
@@ -3300,8 +3301,8 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "specials",
-                    "sale"
+                    "Specials",
+                    "Sale"
                 ],
                 type: "game",
                 downloads: 0,
@@ -3452,7 +3453,7 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "sale"
+                    "Sale"
                 ],
                 type: "game",
                 downloads: 0,
@@ -3597,9 +3598,9 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "new",
-                    "featured",
-                    "upcoming"
+                    "New",
+                    "Featured",
+                    "Upcoming"
                 ],
                 type: "game",
                 downloads: 0,
@@ -3705,9 +3706,9 @@ export const seed = async function (knex): Promise<any> {
                     }
                 ],
                 systemTags: [
-                    "new",
-                    "featured",
-                    "upcoming"
+                    "New",
+                    "Featured",
+                    "Upcoming"
                 ],
                 type: "game",
                 downloads: 0,
@@ -3739,11 +3740,11 @@ export const seed = async function (knex): Promise<any> {
     for (const item of data) {
         if (item.meta.developerTags) {
             // @ts-ignore
-            item.tags = await Tag.query(knex).where('name', item.meta.developerTags)
+            item.tags = await Tag.query(knex).whereIn('name', item.meta.developerTags)
         }
         if (item.meta.systemTags) {
             // @ts-ignore
-            item.internalTags = await Tag.query(knex).where('name', item.meta.systemTags)
+            item.internalTags = await Tag.query(knex).whereIn('name', item.meta.systemTags)
         }
     }
 

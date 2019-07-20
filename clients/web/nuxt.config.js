@@ -111,6 +111,11 @@ export default {
     moment: {
         locales: ['fr', 'ja'] // 'en' is built into Moment and cannot be removed
     },
+    pageTransition: {
+        css: false,
+        // duration: 0,
+        // mode: ''
+    },
     router: {
         extendRoutes(routes) {
             routes.push({

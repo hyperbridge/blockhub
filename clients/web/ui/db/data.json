@@ -45,7 +45,7 @@
         "tokenCount": 0,
         "settings": {
             "client": {
-                "animations": false,
+                "animations": true,
                 "autoplay": false,
                 "pagination": true,
                 "hideWelcomeModal": false,

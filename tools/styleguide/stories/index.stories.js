@@ -3163,10 +3163,10 @@ storiesOf('Product Card', module)
                 <product-card
                     v-for="(product, index) in products"
                     :id="product.id"
-                    :imagesMediumTile="product.meta.images.mediumTile"
+                    :mediumTile="product.meta.images.mediumTile"
                     :name="product.name"
-                    :metaShortDescription="product.meta.shortDescription"
-                    :metaDeveloperTags="product.meta.developerTags"
+                    :shortDescription="product.meta.shortDescription"
+                    :developerTags="product.meta.developerTags"
                     class="col-3"
                 />
             </div>
@@ -3182,10 +3182,10 @@ storiesOf('Product Card', module)
                     :id="product.id"
                     :name="product.name"
                     :price="product.price"
-                    :imagesMediumTile="product.meta.images.mediumTile"
+                    :mediumTile="product.meta.images.mediumTile"
                     :video="product.video"
                     :shortDescription="product.shortDescription"
-                    :imagesPreview="product.meta.images.review"
+                    :previewImages="product.meta.images.review"
                     :developerTags="product.meta.developerTags"
                     :key="index"
                     class="col-3"

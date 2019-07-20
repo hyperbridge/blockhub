@@ -5,10 +5,10 @@
             :key="index"
             :id="product.id"
             :price="product.price"
-            :imagesMediumTile="product.images.mediumTile"
+            :mediumTile="product.images.mediumTile"
             :video="product.video"
             :shortDescription="product.shortDescription"
-            :imagesPreview="product.images.review"
+            :previewImages="product.images.review"
             :developerTags="product.developerTags" />
     </div>
 </template>
