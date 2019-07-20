@@ -206,7 +206,7 @@
                             </nuxt-link>
                         </li>
                         <li
-                            v-darklaunch="'COMMUNITY'"
+                            v-access="'community'"
                             class="nav-item"
                             @click="section='community'">
                             <nuxt-link
@@ -214,7 +214,7 @@
                                 class="nav-link"
                                 :class="{ 'active': section === 'community' }">
                                 Community
-                                <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
+                                <c-updates-count v-access="'updateCounter'">
                                     0
                                 </c-updates-count>
                             </nuxt-link>

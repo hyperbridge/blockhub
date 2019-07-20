@@ -12,14 +12,14 @@ const getHashParam = param => {
 }
 
 // https://github.com/feathersjs/feathers/issues/892
-let isInitialised = false
+let initialized = false
 
 export default async ({ store, redirect, route, req }) => {
-    if (store.state.auth.payload && isInitialised) {
+    if (store.state.auth.payload && initialized) {
         return
     }
 
-    isInitialised = true
+    initialized = true
 
     // Get token from lock login
     if (process.client) {

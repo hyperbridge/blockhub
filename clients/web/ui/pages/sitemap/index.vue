@@ -240,8 +240,8 @@
                         <li>
                             <c-button
                                 status="none"
-                                to="/settings/darklaunch">
-                                Settings > Darklaunch
+                                to="/settings/access">
+                                Settings > Access
                             </c-button>
                         </li>
                         <li>

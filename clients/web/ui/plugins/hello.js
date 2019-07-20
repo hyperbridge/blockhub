@@ -1,6 +1,5 @@
 
 import hello from 'hellojs/dist/hello.all.js'
-
 import Vue from 'vue'
 
 export default () => {

@@ -87,13 +87,13 @@ export default ({ app, store, redirect }) => {
     blockhub.importStarterData = () => {
         console.log('[BlockHub] Import starter data')
 
-        store.state.marketplace.realms = seed.realms
-        store.state.marketplace.assets = seed.assets
-        store.state.marketplace.collections = seed.collections
-        store.state.marketplace.gameSeries = seed.gameSeries
-        store.state.marketplace.products = seed.products
-        store.state.marketplace.ideas = seed.ideas
-        store.state.funding.projects = seed.projects
+        // store.state.marketplace.realms = seed.realms
+        // store.state.marketplace.assets = seed.assets
+        // store.state.marketplace.collections = seed.collections
+        // store.state.marketplace.gameSeries = seed.gameSeries
+        // store.state.marketplace.products = seed.products
+        // store.state.marketplace.ideas = seed.ideas
+        // store.state.funding.projects = seed.projects
 
         store.dispatch('marketplace/updateState')
         store.dispatch('funding/updateState')
@@ -102,29 +102,29 @@ export default ({ app, store, redirect }) => {
 
     blockhub.importSeedData = () => {
         console.log('[BlockHub] Import seed data')
-        // We dont want to mess with the important signed in account data
-        // if (!DB.application.config.data[0].account.address) {
-        //     DB.application.config.data[0].account.wallets = seed.wallets
-        //     DB.application.config.data[0].account.profiles = seed.profiles
-        //     DB.application.config.data[0].activeProfile = {
-        //         id: seed.profiles[0].id
-        //     }
-        // }
+        // // We dont want to mess with the important signed in account data
+        // // if (!DB.application.config.data[0].account.address) {
+        // //     DB.application.config.data[0].account.wallets = seed.wallets
+        // //     DB.application.config.data[0].account.profiles = seed.profiles
+        // //     DB.application.config.data[0].activeProfile = {
+        // //         id: seed.profiles[0].id
+        // //     }
+        // // }
 
-        store.state.application.account.notifications = seed.notifications
-        store.state.application.updates = seed.updates
-        store.state.marketplace.curatorReviews = seed.curatorReviews
-        store.state.marketplace.realms = seed.realms
-        store.state.marketplace.collections = seed.collections
-        store.state.marketplace.gameSeries = seed.gameSeries
-        store.state.marketplace.bounties = seed.bounties
-        store.state.marketplace.ideas = seed.ideas
+        // store.state.application.account.notifications = seed.notifications
+        // store.state.application.updates = seed.updates
+        // store.state.marketplace.curatorReviews = seed.curatorReviews
+        // store.state.marketplace.realms = seed.realms
+        // store.state.marketplace.collections = seed.collections
+        // store.state.marketplace.gameSeries = seed.gameSeries
+        // store.state.marketplace.bounties = seed.bounties
+        // store.state.marketplace.ideas = seed.ideas
 
-        store.state.marketplace.assets = seed.assets
-        store.state.marketplace.products = seed.products
-        store.state.marketplace.posts = seed.posts
+        // store.state.marketplace.assets = seed.assets
+        // store.state.marketplace.products = seed.products
+        // store.state.marketplace.posts = seed.posts
 
-        store.state.funding.projects = seed.projects
+        // store.state.funding.projects = seed.projects
 
         store.dispatch('marketplace/updateState')
         store.dispatch('funding/updateState')
@@ -132,29 +132,29 @@ export default ({ app, store, redirect }) => {
     }
 
     blockhub.resetSeedData = () => {
-        // We dont want to mess with the important signed in account data
-        // if (!store.state.application.account.address) {
-        //     store.state.application.account.wallets = []
-        //     store.state.application.account.profiles = []
-        //     store.state.application.activeProfile = { id: null }
-        // }
+        // // We dont want to mess with the important signed in account data
+        // // if (!store.state.application.account.address) {
+        // //     store.state.application.account.wallets = []
+        // //     store.state.application.account.profiles = []
+        // //     store.state.application.activeProfile = { id: null }
+        // // }
 
-        store.state.application.account.notifications = []
-        store.state.marketplace.updates = []
-        store.state.marketplace.curatorReviews = []
-        store.state.marketplace.productNews = []
-        store.state.marketplace.realms = []
-        store.state.marketplace.collections = []
-        store.state.marketplace.gameSeries = []
-        store.state.marketplace.bounties = []
-        store.state.marketplace.ideas = []
+        // store.state.application.account.notifications = []
+        // store.state.marketplace.updates = []
+        // store.state.marketplace.curatorReviews = []
+        // store.state.marketplace.productNews = []
+        // store.state.marketplace.realms = []
+        // store.state.marketplace.collections = []
+        // store.state.marketplace.gameSeries = []
+        // store.state.marketplace.bounties = []
+        // store.state.marketplace.ideas = []
 
-        store.state.marketplace.products = []
-        store.state.marketplace.assets = []
-        store.state.marketplace.posts = []
+        // store.state.marketplace.products = []
+        // store.state.marketplace.assets = []
+        // store.state.marketplace.posts = []
 
-        store.state.funding.trendingProjects = []
-        store.state.funding.projects = []
+        // store.state.funding.trendingProjects = []
+        // store.state.funding.projects = []
 
         store.dispatch('marketplace/updateState')
         store.dispatch('funding/updateState')
@@ -251,7 +251,7 @@ export default ({ app, store, redirect }) => {
             store.state.application.signedIn = true
 
             // ENABLE ALL DARKLAUNCHES
-            store.state.application.darklaunchOverride = true
+            store.state.application.accessOverride = true
 
             // ENABLE SIMULATOR MODE
             // store.state.application.simulatorMode = true

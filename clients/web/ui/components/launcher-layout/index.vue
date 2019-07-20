@@ -90,7 +90,7 @@
                                             Account Info
                                         </c-button>
                                     </li>
-                                    <li v-darklaunch="'WALLETS'">
+                                    <li v-access="'wallet.read'">
                                         <c-button
                                             status="none"
                                             to="/account/wallets">
@@ -108,7 +108,7 @@
                                     </li>
                                     <li
                                         v-if="signedIn && activeProfile"
-                                        v-darklaunch="'CONTACTS'">
+                                        v-access="'contact'">
                                         <c-button
                                             status="none"
                                             :to="`/profile/${activeProfile.id}/contacts`">
@@ -141,7 +141,7 @@
                                         </c-button>
                                     </li>
                                     <hr>
-                                    <li v-darklaunch="'CHAT'">
+                                    <li v-access="'chat'">
                                         <c-button
                                             status="none"
                                             to="/settings/chat">

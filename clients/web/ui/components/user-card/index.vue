@@ -73,7 +73,7 @@
         </div>
 
         <div
-            v-darklaunch="'BADGES'"
+            v-access="'badge.read'"
             class="user-data__unknown-block">
             <button
                 v-for="index in 4"

@@ -171,7 +171,7 @@
                         </li>
                         <li
                             v-if="signedIn"
-                            v-darklaunch="'CHAT'">
+                            v-access="'chat'">
                             <c-button
                                 status="none"
                                 to="/chat">
@@ -181,7 +181,7 @@
                         </li>
                         <li
                             v-if="signedIn"
-                            v-darklaunch="'CHEST'">
+                            v-access="'chest'">
                             <c-button
                                 status="none"
                                 to="/chest">
@@ -191,7 +191,7 @@
                         </li>
                         <li v-if="signedIn">
                             <c-button
-                                v-darklaunch="'STREAMS'"
+                                v-access="'stream.read'"
                                 status="none"
                                 to="/streams">
                                 <span class="icon fa fa-eye" />
@@ -201,7 +201,7 @@
                         </li>
                         <li
                             v-if="signedIn"
-                            v-darklaunch="'COMMUNITY'">
+                            v-access="'community'">
                             <c-button
                                 status="none"
                                 to="/community">
@@ -310,7 +310,7 @@
                                             Account Info
                                         </c-button>
                                     </li>
-                                    <li v-darklaunch="'WALLETS'">
+                                    <li v-access="'wallet.read'">
                                         <c-button
                                             status="none"
                                             to="/account/wallets">
@@ -328,7 +328,7 @@
                                     </li>
                                     <li
                                         v-if="signedIn && activeProfile"
-                                        v-darklaunch="'CONTACTS'">
+                                        v-access="'contact'">
                                         <c-button
                                             status="none"
                                             :to="`/profile/${activeProfile.id}/contacts`">
@@ -361,7 +361,7 @@
                                         </c-button>
                                     </li>
                                     <hr>
-                                    <li v-darklaunch="'CHAT'">
+                                    <li v-access="'chat'">
                                         <c-button
                                             status="none"
                                             to="/settings/chat">
@@ -390,7 +390,7 @@
                         </li>
                         <li
                             v-if="!isLocked && languages"
-                            v-darklaunch="'LANGUAGES'"
+                            v-access="'languages'"
                             class="ml-3">
                             <c-language-dropdown
                                 :currentLanguage="currentLanguage"
@@ -399,7 +399,7 @@
                         </li>
                         <li
                             v-if="!isLocked && currencies"
-                            v-darklaunch="'CURRENCIES'"
+                            v-access="'currency.read'"
                             class="ml-2">
                             <c-currency-dropdown
                                 :currentCurrency="currentCurrency"

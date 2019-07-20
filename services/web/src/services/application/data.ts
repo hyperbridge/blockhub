@@ -181,32 +181,5 @@ export default {
             name: 'Chinese',
             native: '繁體中文'
         }
-    ],
-    darklaunchFlags: [
-        {
-            code: 'CONTACTS',
-            description: '',
-            type: 'boolean'
-        },
-        {
-            code: 'COLLECTIONS',
-            description: '',
-            type: 'boolean'
-        },
-        {
-            code: 'CURATORS',
-            description: '',
-            type: 'boolean'
-        },
-        {
-            code: 'BATTLE_PASS',
-            description: '',
-            type: 'boolean'
-        },
-        {
-            code: 'REALMS',
-            description: '',
-            type: 'boolean'
-        }
     ]
 }

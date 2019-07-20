@@ -220,7 +220,7 @@
             </div>
 
             <c-community-spotlight
-                v-darklaunch="`COMMUNITY`"
+                v-access="'community'"
                 :discussions="project.community.discussions"
                 :communityPath="`/project/${project.id}`"
                 :editing="editing"

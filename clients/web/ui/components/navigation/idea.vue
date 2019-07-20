@@ -5,7 +5,7 @@
             :links="links.idea" />
 
         <c-sidebar-menu
-            v-darklaunch="'COMMUNITY'"
+            v-access="'community'"
             title="COMMUNITY"
             :links="links.discussions" />
 
@@ -17,7 +17,7 @@
 
         <c-curator-panel>
             <c-curator-info
-                v-darklaunch="'CURATORS'"
+                v-access="'curator.read'"
                 title="Curator panel">
                 <div v-if="!editing">
                     <p>

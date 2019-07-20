@@ -6,7 +6,7 @@
             title="ACCOUNT"
             :links="links.account" />
         <c-sidebar-menu
-            v-darklaunch="'WALLETS'"
+            v-access="'wallet.read'"
             subTitle="Wallets"
             :links="links.wallets" />
         <c-sidebar-menu

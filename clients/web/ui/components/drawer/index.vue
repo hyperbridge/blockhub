@@ -5,14 +5,14 @@
             class="fixed-panel invert">
             <div class="fixed-panel__content scroll">
                 <template v-if="developerMode">
-                    <h5 v-darklaunch="'REALMS'">
+                    <h5 v-access="'realm.read'">
                         Your Realms
                     </h5>
 
                     <c-button
                         v-for="(realm, index) in realms"
                         :key="`realm${realm.id}`"
-                        v-darklaunch="'REALMS'"
+                        v-access="'realm.read'"
                         status="none"
                         :to="`/realm/${realm.id}`">
                         <span class="icon icon-letter-circle">{{ realm.name.slice(0) }}</span>
@@ -20,13 +20,13 @@
                     </c-button>
 
                     <c-button
-                        v-darklaunch="'REALMS'"
+                        v-access="'realm.read'"
                         status="none"
                         to="/profile/1/realms">
                         See More...
                     </c-button>
 
-                    <hr v-darklaunch="'REALMS'">
+                    <hr v-access="'realm.read'">
 
                     <h5 v-if="developerMode && products.length">
                         Your Products
@@ -59,14 +59,14 @@
                         <span class="text">My Content</span>
                     </c-button>
                     <c-button
-                        v-darklaunch="'PAYMENTS'"
+                        v-access="'payments'"
                         status="none"
                         to="/business/developer/payment">
                         <span class="icon fas fa-info-circle" />
                         <span class="text">Payment Settings</span>
                     </c-button>
                     <c-button
-                        v-darklaunch="'REALMS'"
+                        v-access="'realm.read'"
                         status="none"
                         to="/business/realm/new">
                         <span class="icon fa fa-plus" />
@@ -108,7 +108,7 @@
                         Profiles
                     </c-button>
                     <c-button
-                        v-darklaunch="'WALLETS'"
+                        v-access="'wallet.read'"
                         status="plain"
                         tag="button"
                         to="/account/wallets"
@@ -139,7 +139,7 @@
                         Activity Log
                     </c-button>
                     <c-button
-                        v-darklaunch="'CONTACTS'"
+                        v-access="'contact'"
                         status="plain"
                         tag="button"
                         to="/profile/1/contacts"
@@ -260,8 +260,8 @@
                         <c-button @click="rotateEditorMode()">
                             Editor Mode {{ $store.state.application.editorMode.toUpperCase() }}
                         </c-button>
-                        <c-button @click="toggleDarklaunchOverride()">
-                            Darklaunch Override {{ $store.state.application.darklaunchOverride ? 'ON' : 'OFF' }}
+                        <c-button @click="toggleAccessOverride()">
+                            Access Override {{ $store.state.application.accessOverride ? 'ON' : 'OFF' }}
                         </c-button>
                         <c-button @click="toggleSimulator()">
                             Simulator {{ simulatorMode ? 'ON' : 'OFF' }}
@@ -322,7 +322,7 @@
                     <div
                         v-if="developerMode"
                         hidden>
-                        <h4>Darklaunch Manager</h4>
+                        <h4>Access Manager</h4>
                         <select
                             id="darklaunch-editor"
                             class="form-control"
@@ -434,8 +434,8 @@ export default {
         toggleDeveloperMode() {
             this.$store.state.application.developerMode = !this.$store.state.application.developerMode
         },
-        toggleDarklaunchOverride() {
-            this.$store.state.application.darklaunchOverride = !this.$store.state.application.darklaunchOverride
+        toggleAccessOverride() {
+            this.$store.state.application.accessOverride = !this.$store.state.application.accessOverride
         },
         toggleSimulator() {
             this.$store.commit('application/setSimulatorMode', !this.$store.state.application.simulatorMode)

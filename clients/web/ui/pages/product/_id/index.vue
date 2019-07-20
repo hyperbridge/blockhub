@@ -143,7 +143,7 @@
                                     </nuxt-link>
                                 </li>
                                 <li
-                                    v-darklaunch="'COMMUNITY'"
+                                    v-access="'community'"
                                     class="nav-item"
                                     @click="section='community'">
                                     <nuxt-link

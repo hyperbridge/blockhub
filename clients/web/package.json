@@ -50,6 +50,7 @@
         "qartjs": "^1.1.2",
         "socket.io-client": "^2.2.0",
         "stripe": "^7.3.0",
+        "blockhub-node-sdk": "../../sdks/node",
         "vue-3d-model": "^1.0.2",
         "vue-analytics": "^5.17.0",
         "vue-awesome-swiper": "https://github.com/hamburgscleanest/vue-awesome-swiper.git",

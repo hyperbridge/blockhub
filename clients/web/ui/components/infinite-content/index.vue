@@ -16,7 +16,7 @@
                             <div class="frontpage-product">
                                 <c-vote
                                     v-if="activeElementIndex === index"
-                                    v-darklaunch="'RATINGS'"
+                                    v-access="'rating.read'"
                                     :votes="item.rating" />
                                 <div class="row">
                                     <div

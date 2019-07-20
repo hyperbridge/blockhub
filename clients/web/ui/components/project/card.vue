@@ -50,7 +50,7 @@
 
         <c-vote
             v-if="hovering"
-            v-darklaunch="'RATINGS'"
+            v-access="'rating.read'"
             :votes="rating" />
     </div>
 </template>

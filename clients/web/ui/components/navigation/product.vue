@@ -29,7 +29,7 @@
         <c-curator-panel>
             <c-curator-info title="">
                 <c-claim
-                    v-darklaunch="'CURATORS'"
+                    v-access="'curator.read'"
                     title="Content curated"
                     type="success"
                     class="margin-bottom-10 margin-top-10">
@@ -40,7 +40,7 @@
                         Become a curator
                     </c-button>
                 </c-claim>
-                <ul v-darklaunch="'CURATORS'">
+                <ul v-access="'curator.read'">
                     <li>
                         <strong>492</strong>
                         Approved with 0 changes

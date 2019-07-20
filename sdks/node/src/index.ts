@@ -1,7 +1,9 @@
-import * as Wallet from './wallet'
-import CryptoJS from 'crypto-js'
+import * as wallet from './wallet'
+import * as access from './access'
+//import CryptoJS from 'crypto-js'
 
 export default {
-    Wallet,
-    CryptoJS
+    access,
+    wallet,
+    //CryptoJS
 }
