@@ -312,7 +312,7 @@ export const GamesGrid = {
 		        },
             crowdfund: false,
             stateTag: 'pre-release',
-            prerelease_count: 591,
+            prereleaseCount: 591,
             followers: 5991,
             players: 98,
             developerTags: ['RPG', 'ACTION', 'TOP'],

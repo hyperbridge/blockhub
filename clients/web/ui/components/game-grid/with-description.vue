@@ -9,7 +9,7 @@
             v-if="items && items.length"
             :key="item.id"
             class="games-list__item"
-            :class="{ 'hovered' : hovered }"
+            :class="{ 'hovered': hovered }"
             :style="{ width: itemWidth, background: itemBg }">
             <div class="img">
                 <div
@@ -22,10 +22,10 @@
                     status="none"
                     class="w-100"
                     :to="`/product/${item.id}`">
-                    <c-img :src="item.images.mediumTile" />
+                    <c-img :src="item.meta.images.mediumTile" />
                 </c-button>
                 <div
-                    v-if="item.crowdfund"
+                    v-if="item.meta.crowdfund"
                     class="crowdfund-icon">
                     <i class="fas fa-hand-holding-usd" />
                 </div>
@@ -33,15 +33,15 @@
             <div class="info">
                 <div class="text">
                     <div class="state-tag">
-                        <template v-if="item.stateTag == 'trending'">
+                        <template v-if="item.meta.stateTag == 'trending'">
                             <span style="color: #F75D5D">
                                 <i class="fas fa-fire" /> Trending
                             </span>
                         </template>
-                        <template v-else-if="item.stateTag == 'pre-release'">
+                        <template v-else-if="item.meta.stateTag == 'pre-release'">
                             <i
                                 class="fas fa-bolt"
-                                style="color: #FADC72" /> {{ item.prerelease_count }}
+                                style="color: #FADC72" /> {{ item.meta.prereleaseCount }}
                             <span
                                 class="ml-4"
                                 style="color: #499fd3">Pre Release</span>
@@ -54,36 +54,36 @@
                         <h4>{{ item.name }}</h4>
                     </c-button>
                     <div
-                        v-if="item.crowdfund"
+                        v-if="item.meta.crowdfund"
                         class="crowdfund-tag">
                         Crowdfund Campaign
                     </div>
                     <p v-if="item.publisher">
-                        {{ item.publisher }}
+                        {{ item.meta.publisher }}
                     </p>
                     <p v-if="item.description">
-                        {{ item.description }}
+                        {{ item.meta.description }}
                     </p>
                 </div>
                 <div class="footer">
                     <div class="d-flex flex-nowrap">
                         <div
-                            v-if="item.releaseDate && showDate"
+                            v-if="item.meta.releaseDate && showDate"
                             class="time mr-3">
                             <i class="fas fa-calendar-alt" />
                             <c-tooltip
-                                :name="calculateSince(item.releaseDate)"
+                                :name="calculateSince(item.meta.releaseDate)"
                                 position="center">
                                 <div
                                     class="text-center"
                                     style="white-space: nowrap">
                                     <strong>Released</strong><br>
-                                    {{ formatDate(item.releaseDate) }}
+                                    {{ formatDate(item.meta.releaseDate) }}
                                 </div>
                             </c-tooltip>
                         </div>
                         <div
-                            v-if="item.followers"
+                            v-if="item.meta.followers"
                             class="followers mr-3">
                             <i class="fas fa-eye" />
                             <c-tooltip position="center">
@@ -91,12 +91,12 @@
                                     class="text-center"
                                     style="white-space: nowrap">
                                     <strong>Followers</strong><br>
-                                    {{ item.followers }}
+                                    {{ item.meta.followers }}
                                 </div>
                             </c-tooltip>
                         </div>
                         <div
-                            v-if="item.players"
+                            v-if="item.meta.players"
                             class="players">
                             <i class="fas fa-user" />
                             <c-tooltip position="center">
@@ -104,7 +104,7 @@
                                     class="text-center"
                                     style="white-space: nowrap">
                                     <strong>Players</strong><br>
-                                    {{ item.players }}
+                                    {{ item.meta.players }}
                                 </div>
                             </c-tooltip>
                         </div>

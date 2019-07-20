@@ -8,9 +8,9 @@
                 slot="title"
                 class="mb-0"
                 :headingTabs="[
-                    { title: 'Top Games', category: 'topSellingProducts' },
-                    { title: 'New Releases', category: 'newProducts' },
-                    { title: 'Upcoming', category: 'upcomingProducts' }
+                    { title: 'Top Games', category: 'topSelling' },
+                    { title: 'New Releases', category: 'newReleases' },
+                    { title: 'Upcoming', category: 'upcoming' }
                 ]"
                 :showActions="true"
                 @changeTab="category = $event; clearFilters()">
@@ -151,9 +151,7 @@
 
 <script>
 export default {
-    name: 'GamesExplorer',
     components: {
-        'c-block': () => import('~/components/block').then(m => m.default || m),
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
         'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
         'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
@@ -162,9 +160,12 @@ export default {
         'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
         'c-option-tag': () => import('~/components/option-tag').then(m => m.default || m)
     },
+    props: [
+        'products'
+    ],
     data() {
         return {
-            category: 'topSellingProducts',
+            category: 'topSelling',
             phrase: '',
             selectedGenres: [],
             sortBy: {
@@ -178,17 +179,14 @@ export default {
         }
     },
     computed: {
-        products() {
-            return this.$store.state.marketplace[this.category]
-        },
         filteredProducts() {
             const { property, asc } = this.sortBy
             const sortDir = dir => asc ? dir : dir * -1
-            return this.$store.state.marketplace[this.category]
+            return this.products[this.category]
                 .filter(product =>
                     product.name.toLowerCase().includes(this.phrase.toLowerCase()))
                 .filter(product => this.selectedGenres.length
-                    ? product.developerTags.some(genre => this.selectedGenres.includes(genre))
+                    ? product.meta.developerTags.some(genre => this.selectedGenres.includes(genre))
                     : true)
                 .sort((a, b) => property
                     ? a[property] > b[property]
@@ -197,9 +195,9 @@ export default {
                     : 0)
         },
         availableGenres() {
-            return this.products.reduce((tags, product) => [
+            return this.products[this.category].reduce((tags, product) => [
                 ...tags,
-                ...product.developerTags.filter(tag =>
+                ...(product.meta.developerTags || []).filter(tag =>
                     !tags.includes(tag))
             ], []).sort()
         },

@@ -252,7 +252,9 @@
                         </div>
                     </div>
 
-                    <c-games-explorer v-if="item.type === 'gamesExplorer'" />
+                    <c-games-explorer
+                        v-if="item.type === 'gamesExplorer'"
+                        :products="item.data.products" />
 
                     <c-assets-explorer
                         v-if="item.type === 'assetGrid'"

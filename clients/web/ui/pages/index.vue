@@ -231,7 +231,13 @@ export default {
 
             result.push({
                 type: 'gamesExplorer',
-                data: {}
+                data: {
+                    products: {
+                        topSelling: this.topSellingProducts,
+                        newReleases: this.newReleases,
+                        upcoming: this.upcomingProducts
+                    }
+                }
             })
 
             result.push({
@@ -383,11 +389,34 @@ export default {
             }
         })).data
 
+        const topSellingProducts = (await store.dispatch('products/find', {
+            query: {
+                'type': 'game',
+                'internalTags.name': 'Top Seller',
+                '$joinRelation': 'internalTags',
+                '$eager': 'internalTags',
+                '$sort[updatedAt]': -1,
+                '$limit': 3
+            }
+        })).data
+
+        const upcomingProducts = (await store.dispatch('products/find', {
+            query: {
+                'type': 'game',
+                'internalTags.name': 'Upcoming',
+                '$joinRelation': 'internalTags',
+                '$eager': 'internalTags',
+                '$sort[updatedAt]': -1,
+                '$limit': 3
+            }
+        })).data
+
         return {
             newReleases,
             featuredProducts,
             saleProducts,
-            frontpageProducts
+            frontpageProducts,
+            topSellingProducts
         }
     },
     mounted() {
