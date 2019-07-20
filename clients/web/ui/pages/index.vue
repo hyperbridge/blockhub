@@ -241,9 +241,7 @@ export default {
                 }
             })
 
-            if (this.$store.state.application.darklaunchFlags &&
-            this.$store.state.application.account.darklaunchFlags &&
-            isVisible(this.$store.state.application.darklaunchFlags, this.$store.state.application.account.darklaunchFlags, 'CURATORS')) {
+            if (this.$access('curators')) {
                 result.push({
                     type: 'curatorReviews',
                     data: {

@@ -23,8 +23,6 @@ export const data = [
             wallets: [],
             profiles: [],
             idts: [],
-            darklaunchFlags: [
-            ],
             projectWishlist: { 1: true },
             projectFavorites: {},
             savedPaths: [

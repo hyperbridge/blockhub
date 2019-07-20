@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div
-                    v-darklaunch="`SOCIAL_SIGNIN`"
+                    v-access="`socialSignin`"
                     class="row">
                     <div class="col-12">
                         <c-button
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div
-                    v-darklaunch="`SOCIAL_SIGNIN`"
+                    v-access="`socialSignin`"
                     class="row mb-3">
                     <div class="col-12">
                         <c-heading-bar-color
@@ -217,7 +217,7 @@ export default {
 
                     // Convert the error to a plain object and add a message.
                     const type = error.className
-                    error = Object.assign({}, error)                     
+                    error = Object.assign({}, error)
                     if(type === 'not-authenticated'){
                         this.socialSignup()
                     } else {
@@ -261,7 +261,7 @@ export default {
                             ? 'That email address is unavailable.'
                             : 'An error prevented signup.'
                         this.errors = [error.message]
-                        
+
                         this.loading = false
                     })
 
@@ -278,28 +278,28 @@ export default {
             hello.init({
                 google: process.env.GOOGLE_CLIENT_ID,
                 github: process.env.GITHUB_CLIENT_ID
-            }, { 
+            }, {
                 redirect_uri: process.env.SOCIAL_LOGIN_REDIRECT_URI
             }, {
                 oauth_proxy: process.env.OAUTH_PROXY
-            }); 
+            });
             hello(social).login({
                     scope: ['email']
-                })                         
+                })
             hello.on('auth.login', async function (auth) {
                 const socialToken = auth.authResponse.access_token;
                 const userInfo = await hello(auth.network).api('me');
                 console.log('userInfo', userInfo)
                 const userId = userInfo.id;
                 $this.email = auth.network == 'github' ? `${userInfo.login}.com`:userInfo.email;
-                $this.password = 'socialLogin';                
+                $this.password = 'socialLogin';
                 $this.socialSigin()
             });
         },
     },
-    mounted(){        
+    mounted(){
     }
-}    
+}
 </script>
 
 <style lang="scss" scoped>

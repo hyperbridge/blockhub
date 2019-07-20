@@ -251,7 +251,7 @@ export default ({ app, store, redirect }) => {
             store.state.application.signedIn = true
 
             // ENABLE ALL DARKLAUNCHES
-            store.state.application.darklaunchOverride = true
+            store.state.application.accessOverride = true
 
             // ENABLE SIMULATOR MODE
             // store.state.application.simulatorMode = true

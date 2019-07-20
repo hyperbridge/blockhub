@@ -37,7 +37,7 @@
         "desktopMode": null,
         "developerMode": null,
         "profileChooser": false,
-        "darklaunchOverride": false,
+        "accessOverride": false,
         "operatingSystem": null,
         "editorMode": "viewing",
         "activeModal": null,
@@ -684,8 +684,6 @@
             "wallets": [],
             "profiles": [],
             "idts": [],
-            "darklaunchFlags": [
-            ],
             "projectWishlist": { "1": true },
             "projectFavorites": {},
             "savedPaths": [
@@ -697,33 +695,6 @@
             "tradeLinkId": "478",
             "id": 1
         },
-        "darklaunchFlags": [
-            {
-                "code": "CONTACTS",
-                "description": "",
-                "type": "boolean"
-            },
-            {
-                "code": "COLLECTIONS",
-                "description": "",
-                "type": "boolean"
-            },
-            {
-                "code": "CURATORS",
-                "description": "",
-                "type": "boolean"
-            },
-            {
-                "code": "BATTLE_PASS",
-                "description": "",
-                "type": "boolean"
-            },
-            {
-                "code": "REALMS",
-                "description": "",
-                "type": "boolean"
-            }
-        ],
         "video": {
             "src": "",
             "currentTime": 0,

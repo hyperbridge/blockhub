@@ -260,8 +260,8 @@
                         <c-button @click="rotateEditorMode()">
                             Editor Mode {{ $store.state.application.editorMode.toUpperCase() }}
                         </c-button>
-                        <c-button @click="toggleDarklaunchOverride()">
-                            Darklaunch Override {{ $store.state.application.darklaunchOverride ? 'ON' : 'OFF' }}
+                        <c-button @click="toggleAccessOverride()">
+                            Access Override {{ $store.state.application.accessOverride ? 'ON' : 'OFF' }}
                         </c-button>
                         <c-button @click="toggleSimulator()">
                             Simulator {{ simulatorMode ? 'ON' : 'OFF' }}
@@ -322,7 +322,7 @@
                     <div
                         v-if="developerMode"
                         hidden>
-                        <h4>Darklaunch Manager</h4>
+                        <h4>Access Manager</h4>
                         <select
                             id="darklaunch-editor"
                             class="form-control"
@@ -434,8 +434,8 @@ export default {
         toggleDeveloperMode() {
             this.$store.state.application.developerMode = !this.$store.state.application.developerMode
         },
-        toggleDarklaunchOverride() {
-            this.$store.state.application.darklaunchOverride = !this.$store.state.application.darklaunchOverride
+        toggleAccessOverride() {
+            this.$store.state.application.accessOverride = !this.$store.state.application.accessOverride
         },
         toggleSimulator() {
             this.$store.commit('application/setSimulatorMode', !this.$store.state.application.simulatorMode)

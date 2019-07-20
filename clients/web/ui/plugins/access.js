@@ -51,7 +51,7 @@ export default ({ app, store }) => {
                 el.hidden = false
             }
 
-            if (store.state.application.darklaunchOverride) {
+            if (store.state.application.accessOverride) {
                 el.hidden = false
             }
         }
