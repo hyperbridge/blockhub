@@ -414,7 +414,8 @@ export default {
             featuredProducts,
             saleProducts,
             frontpageProducts,
-            topSellingProducts
+            topSellingProducts,
+            upcomingProducts
         }
     },
     mounted() {
