@@ -38,9 +38,6 @@ The BlockHub project is broken up into related categories:
 
 ### Clients
 
-* [Web Client](clients/web) - Standard BlockHub experience for web users. Built with Vue and Nuxt.
-* [Desktop Client](clients/desktop) - Standard BlockHub experience for desktop users. Wraps the Web Client. Built with Electron.
-
 | Name | Path |  |
 | --- | --- | --- |
 | **Web Client** | [clients/web](clients/web) | Standard BlockHub experience for web users. Built with *Vue* and *Nuxt*. |
@@ -52,7 +49,6 @@ The BlockHub project is broken up into related categories:
 | --- | --- | --- |
 | **C#** | [sdks/csharp](sdks/csharp) | Supports basic BlockHub interactions. Built with .NET. |
 | **JS** | [sdks/js](sdks/js) | Supports basic BlockHub interactions. Built with TypeScript.
-* C++ - Coming soon |
 
 ### Services
 
