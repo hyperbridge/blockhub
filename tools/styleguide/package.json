@@ -4,7 +4,7 @@
     "description": "BlockHub Style Guide",
     "license": "SEE LICENSE IN LICENSE.md",
     "scripts": {
-      "start": "start-storybook -s ./static -p 6006 --ci",
+      "start": "start-storybook -s ../../clients/web/ui -p 6006 --ci",
       "dev": "yarn start"
     },
     "devDependencies": {
