@@ -1,6 +1,6 @@
 <template>
     <c-layout navigationKey="help">
-        <c-broken-page :isError="isError" />
+        <c-broken-page :isError="errorData" />
     </c-layout>
 </template>
 
@@ -19,19 +19,13 @@ export default {
     components: {
         'c-broken-page': () => import('~/components/broken-page').then(m => m.default || m)
     },
-    props: {
-        isError: {
-            type: Object,
-            default: () => ({})
-        }
-    },
     asyncData({ res }) {
         if (res) {
             res.statusCode = 404
         }
 
         return {
-            isError: {
+            errorData: {
                 statusCode: 404,
                 message: 'Page not found'
             }

@@ -71,7 +71,7 @@ export default {
         'c-asset-list': () => import('~/components/asset/list').then(m => m.default || m),
         'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
         'c-block': () => import('~/components/block/index').then(m => m.default || m),
-        'c-asset-store-card': () => import('~/components/asset/store-card').then(m => m.default || m),
+        'c-asset-store-card': () => import('~/components/store-card').then(m => m.default || m),
         'c-carousel-3d': () => import('~/components/carousel-3d').then(m => m.default || m),
         'carousel-3d-v2': () => import('~/components/carousel-3d/v2').then(m => m.default || m)
     },

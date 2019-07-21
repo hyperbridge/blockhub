@@ -63,7 +63,6 @@ export default {
     },
     computed: {
         notifsCount() {
-            return {}
             /* WIP */
             return {
                 received: this.offers.received.filter(offer => offer.new).length,
