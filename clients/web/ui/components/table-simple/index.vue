@@ -1,10 +1,10 @@
 <template>
-    <div class="table__wrapper">
+    <div class="table-simple__wrapper">
         <table
-            class="table"
+            class="table-simple"
             :class="[{
-                'c-table--stripped' : stripped,
-                'c-table--bordered' : bordered,
+                'table-simple--stripped' : stripped,
+                'table-simple--bordered' : bordered,
             }, tableSize ]">
             <slot />
         </table>
@@ -31,30 +31,30 @@ export default {
         tableSize() {
             switch (this.size) {
             case 'sm':
-                return 'c-table--size-sm'
+                return 'table-simple--size-sm'
             case 'md':
-                return 'c-table--size-md'
+                return 'table-simple--size-md'
             case 'lg':
-                return 'c-table--size-lg'
+                return 'table-simple--size-lg'
             }
         }
     }
 }
 </script>
 
-<style lang="scss" scoped>
-    .table__wrapper{
+<style lang="scss">
+    .table-simple__wrapper{
         width: 100%;
         display: block;
     }
-    .table{
+    .table-simple{
         color: #fff;
         width: 100%;
         th{
             font-weight: bold;
         }
     }
-    .table--stripped{
+    .table-simple--stripped{
         tbody{
             tr:nth-child(odd){
                 background: rgba(0, 0, 0, .1);
@@ -63,29 +63,34 @@ export default {
             }
         }
     }
-    .table--bordered{
+    .table-simple--bordered{
         td,th{
             border: 1px solid rgba(255, 255, 255, .05);
         }
     }
-    .table--size-sm{
+    .table-simple--size-sm{
         td,
         th{
             padding: 2px 5px;
             font-size: 12px;
         }
     }
-    .table--size-md{
+    .table-simple--size-md{
         td,
         th{
             padding: 5px 10px;
         }
     }
-    .table--size-lg{
+    .table-simple--size-lg{
         td,
         th{
             padding: 8px 15px;
             font-size: 16px;
         }
+    }
+    .table-img{
+        max-width: 30px;
+        max-height: 30px;
+        margin-right: 10px;
     }
 </style>
