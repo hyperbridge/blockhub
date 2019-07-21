@@ -15,7 +15,7 @@
                         v-access="'realm.read'"
                         status="none"
                         :to="`/realm/${realm.id}`">
-                        <span class="icon icon-letter-circle">{{ realm.name.slice(0) }}</span>
+                        <span class="icon icon-letter-circle">{{ realm.name && realm.name.slice(0) }}</span>
                         <span class="text">{{ realm.name }}</span>
                     </c-button>
 
@@ -327,12 +327,12 @@
                             id="darklaunch-editor"
                             class="form-control"
                             multiple="multiple">
-                            <option
+                            <!-- <option
                                 v-for="(flag) in $store.state.application.darklaunchFlags"
                                 :key="flag.code"
                                 :selected="$store.state.application.account.darklaunchFlags.map(flag => flag.enabled ? flag.code : null).includes(flag.code)">
                                 {{ flag.code }} - {{ flag.description }}
-                            </option>
+                            </option> -->
                         </select>
                     </div>
                 </div>

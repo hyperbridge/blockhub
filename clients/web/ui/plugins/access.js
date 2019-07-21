@@ -60,8 +60,6 @@ export default ({ app, store }) => {
         }
     })
 
-    app.$access = $access
-    app.$accessConfig = sdk.access
-    store.$access = $access
-    store.$accessConfig = sdk.access
+    app.$access = store.$access = $access
+    app.$accessConfig = store.$accessConfig = sdk.access
 }

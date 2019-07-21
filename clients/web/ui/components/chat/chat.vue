@@ -66,8 +66,8 @@ export default {
         await this.updateChannels()
         this.updateChannelInfo()
         this.updateChannelMessages()
-        
-        this.$feathers.service('messages').on('created', function(message) {
+
+        this.$api.service('messages').on('created', message => {
             console.log('Someone created a message', message)
         })
         // this.$feathers.service('messages').on('created', function(message) {debugger

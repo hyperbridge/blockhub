@@ -45,6 +45,8 @@ export default async ({ app, store, req }, bbb) => {
     service('battlepasses', { paginate: true })(store)
     service('bounties', { paginate: true })(store)
     service('collections', { paginate: true })(store)
+    service('collections/addResource', { paginate: true })(store)
+    service('collections/removeResource', { paginate: true })(store)
     service('communities', { paginate: true })(store)
     service('discussions', { paginate: true })(store)
     service('events', { paginate: true })(store)
@@ -82,7 +84,7 @@ export default async ({ app, store, req }, bbb) => {
                 token: accessToken,
                 user: store.state.auth.user
             })
-            
+
             // const { payload } = jwt.decode(accessToken, { complete: true })
 
             // commit('accounts/setCurrent', payload.userId)
@@ -104,25 +106,50 @@ export default async ({ app, store, req }, bbb) => {
         await initAuth({
             commit,
             dispatch,
-            req: { headers: { cookie: `feathers-jwt=${app.$cookies.get('feathers-jwt')}` }},
+            req: { headers: { cookie: `feathers-jwt=${app.$cookies.get('feathers-jwt')}` } },
             moduleName: 'auth',
             cookieName: 'feathers-jwt'
         }).catch(e => { console.log('Feathers exception', e) })
     }
 
+    let api = null
+
+    if (store.state.application.decentralizedMode) {
+        api = {
+            on: eventName => {
+                console.log('on', eventName)
+            },
+            service: serviceKey => {
+                // if (blockhub.bridge.isConnected()) { // && blockhub.bridge.canFulfillRequest(endpoint
+                //     console.log('if')
+                //     return {
+                //         find: params => {
+                //             blockhub.bridge.sendCommand('service', {
+                //                 serviceKey,
+                //                 type: 'find',
+                //                 params
+                //             })
+                //         }
+                //     }
+                // }
+                console.log('servicekey', serviceKey)
+                return app.feathers.service(serviceKey)
+            }
+        }
+    } else {
+        api = FeathersVuex
+    }
+
     // Set feathers instance on app
     // This way we can use it in middleware and pages asyncData/fetch
-    app.feathers = feathers
+    app.$api = store.$api = api
 
     const feathersPlugin = {
         install(Vue, options) {
             Vue.mixin({
                 created() {
                     // access to the client anywhere
-                    this.$feathers = feathers
-
-                    // Setting up the services
-                    this.$services = feathers.services
+                    this.$api = api
                 }
             })
         }

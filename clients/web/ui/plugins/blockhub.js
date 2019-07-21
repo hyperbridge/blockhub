@@ -180,25 +180,6 @@ export default ({ app, store, redirect }) => {
         DB.save()
     }
 
-    blockhub.api = {
-        service: serviceKey => {
-            // if (blockhub.bridge.isConnected()) { // && blockhub.bridge.canFulfillRequest(endpoint
-            //     console.log('if')
-            //     return {
-            //         find: params => {
-            //             blockhub.bridge.sendCommand('service', {
-            //                 serviceKey,
-            //                 type: 'find',
-            //                 params
-            //             })
-            //         }
-            //     }
-            // }
-            console.log('servicekey', serviceKey)
-            return app.feathers.service(serviceKey)
-        }
-    }
-
     const plugin = {
         install(Vue, options) {
             Vue.mixin({
@@ -207,17 +188,12 @@ export default ({ app, store, redirect }) => {
                     this.$blockhub = blockhub
                     this.$desktop = blockhub.bridge
                     this.$db = blockhub.db
-                    this.$api = blockhub.api
                 }
             })
         }
     }
 
     Vue.use(plugin)
-
-    app.$blockhub = blockhub
-
-    if (process.client) window.BlockHub = blockhub
 
     DB.setInitCallback(async () => {
         console.log('DB init callback')
@@ -278,6 +254,10 @@ export default ({ app, store, redirect }) => {
             }
         }, 4000)
     })
+
+    app.$blockhub = store.$blockhub = blockhub
+
+    if (process.client) window.BlockHub = blockhub
 
     DB.init()
 }
