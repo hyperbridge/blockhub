@@ -58,6 +58,8 @@
                 :inShortcut="$store.state.application.shortcuts.find(s => s.id == ('product' + product.id))"
                 :releaseDate="product.meta.releaseDate"
                 :playLink="currentRelease && currentRelease.playLink"
+                resourceType="product"
+                :resourceId="product.id"
                 @addToWishlist="$store.dispatch(
                     'community/updateWishlist',
                     ['product', product.id]

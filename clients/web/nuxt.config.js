@@ -1,15 +1,22 @@
 import path from 'path'
-import dotenv from 'dotenv/config'
 import autoprefixer from 'autoprefixer'
 import sites from './ui/sites'
 
+const dotenv = require('dotenv').config()
+const sourceMaps = false
+
 export default {
+    env: dotenv.parsed,
     server: {
         port: process.env.PORT,
         host: '0.0.0.0'
     },
     srcDir: 'ui/',
     dev: process.env.NODE_ENV !== 'production',
+    htmlAttrs: {
+        lang: 'en',
+        class: ''
+    },
     head: {
         title: this.pageTitle || 'BlockHub',
         env: {
@@ -61,13 +68,14 @@ export default {
     },
     css: [],
     plugins: [
+        { src: '~/plugins/axios' },
         { src: '~/plugins/persist' },
         { src: '~/plugins/auth', ssr: false },
         { src: '~/plugins/components' },
         { src: '~/plugins/filters' },
         { src: '~/plugins/directives' },
-        { src: '~/plugins/feathers' },
         { src: '~/plugins/permissions' },
+        { src: '~/plugins/feathers' }, // plugin deps: permissions
         { src: '~/plugins/vue-i18n' },
         { src: '~/plugins/vue-currency' },
         { src: '~/plugins/vue-analytics', ssr: false },
@@ -86,7 +94,8 @@ export default {
         { src: '~/plugins/jquery', ssr: false },
         { src: '~/plugins/summernote', ssr: false },
         { src: '~/plugins/moment', ssr: false },
-        { src: '~/plugins/blockhub' }
+        { src: '~/plugins/blockhub' },
+        { src: '~/plugins/hello', ssr: false},
     ],
     modules: [
         // Doc: https://axios.nuxtjs.org/usage
@@ -95,9 +104,18 @@ export default {
         '@nuxtjs/moment',
         '@nuxtjs/sitemap',
         'cookie-universal-nuxt',
-        '@nuxtjs/sentry'
+        '@nuxtjs/sentry',
+        '@nuxtjs/dotenv',
         // './modules/init'
     ],
+    moment: {
+        locales: ['fr', 'ja'] // 'en' is built into Moment and cannot be removed
+    },
+    pageTransition: {
+        css: false,
+        // duration: 0,
+        // mode: ''
+    },
     router: {
         extendRoutes(routes) {
             routes.push({
@@ -149,6 +167,10 @@ export default {
             activeSite.routes.forEach(route => {
                 routes.push(route)
             })
+
+            // routes.splice(0, routes.length, ...routes.map((route) => {
+            //     return { ...route, component: path.resolve(__dirname, route.component) }
+            // }))
         }
     },
     sitemap: {
@@ -175,7 +197,7 @@ export default {
             }
         },
         extend(config, { isDev, isClient }) {
-            if (isDev) {
+            if (isDev && sourceMaps) {
                 config.output.globalObject = 'this'
                 if (isClient) config.devtool = '#source-map'
             }
@@ -184,6 +206,46 @@ export default {
                 fs: 'empty',
                 child_process: 'empty'
             }
+
+            // config.optimization = {
+            //     splitChunks: {
+            //         chunks: 'all',
+            //         automaticNameDelimiter: '.',
+            //         name: isDev ? true : undefined,
+            //         minSize: 30000,
+            //         maxSize: 0,
+            //         minChunks: 1,
+            //         maxAsyncRequests: 5,
+            //         maxInitialRequests: 3,
+            //         cacheGroups: {
+            //             default: default: {
+            //                 minChunks: 2,
+            //                 priority: -20,
+            //                 reuseExistingChunk: true
+            //             }
+            //             vendors: false,
+            //             // vendor chunk
+            //             vendor: {
+            //                 // name of the chunk
+            //                 name: 'vendor',
+            //                 // async + async chunks
+            //                 chunks: 'all',
+            //                 // import file path containing node_modules
+            //                 test: /node_modules/,
+            //                 // priority
+            //                 priority: 20
+            //             },
+            //             common: {
+            //                 name: 'common',
+            //                 minChunks: 2,
+            //                 chunks: 'async',
+            //                 priority: 10,
+            //                 reuseExistingChunk: true,
+            //                 enforce: true
+            //             }
+            //         }
+            //     }
+            // }
         }
     },
     sentry: {

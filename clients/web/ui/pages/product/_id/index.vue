@@ -791,7 +791,7 @@ export default {
         startSync() {
             this.$store.commit('marketplace/syncProductBlockchain', this.product)
         },
-        startImport() {
+        async startImport() {
             if (!this.$store.state.application.desktopMode) {
                 return this.$blockhub.Notification.error('Desktop app required', 'Error')
             }
@@ -875,31 +875,30 @@ export default {
                 document.body.appendChild(script);
             }`
 
-            this.$desktop.sendCommand('fetchPageDataRequest', {
+            const data = await this.$desktop.sendCommand('fetchPageDataRequest', {
                 url: this.$refs.importUrl.value,
                 script: onWindowLoad
-            }).then(data => {
-                if (data.error) {
-                    return console.log(data.message)
-                }
-
-                console.log('Import response: ', data)
-
-                this.product.name = data.title
-                this.product.value = data.value
-                this.product.tags = [{ key: 'imported', value: 'Imported' }]
-                this.product.meta = {}
-                this.product.meta.type = 'game'
-                // this.product.meta.rating.overall = 0
-                this.product.meta.developerTags = data.tags
-                this.product.meta.releaseDate = data.releaseDate
-                this.product.meta.description = data.description
-                this.product.meta.genre = ''
-                this.product.meta.developer = data.developers && data.developers[0]
-                this.product.meta.publisher = data.publishers && data.publishers[0]
-
-                this.$store.commit('application/activeModal', null)
             })
+            if (data.error) {
+                return console.log(data.message)
+            }
+
+            console.log('Import response: ', data)
+
+            this.product.name = data.title
+            this.product.tags = [{ key: 'imported', value: 'Imported' }]
+            this.product.meta = {}
+            this.product.meta.type = 'game'
+            // this.product.meta.rating.overall = 0
+            this.product.meta.description = data.value
+            this.product.meta.developerTags = data.tags
+            this.product.meta.releaseDate = data.releaseDate
+            this.product.meta.description = data.description
+            this.product.meta.genre = ''
+            this.product.meta.developer = data.developers && data.developers[0]
+            this.product.meta.publisher = data.publishers && data.publishers[0]
+
+            this.$store.commit('application/activeModal', null)
         }
     }
 }

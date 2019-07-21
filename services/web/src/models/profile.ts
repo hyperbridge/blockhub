@@ -54,17 +54,19 @@ export default class Profile extends BaseModel {
     public static get jsonSchema (): JsonSchema {
         return {
             type: 'object',
-            required: ['accountId'],
+            required: [],
+            properties: {}
+            // required: ['accountId'],
 
-            properties: {
-                accountId: { type: 'integer' },
-                address: { type: ['string', 'null'] },
-                role: {
-                    type: 'string',
-                    enum: ['user', 'developer', 'curator'],
-                    default: 'user'
-                }
-            }
+            // properties: {
+            //     accountId: { type: 'integer' },
+            //     address: { type: ['string', 'null'] },
+            //     role: {
+            //         type: 'string',
+            //         enum: ['user', 'developer', 'curator'],
+            //         default: 'user'
+            //     }
+            // }
         }
     }
 

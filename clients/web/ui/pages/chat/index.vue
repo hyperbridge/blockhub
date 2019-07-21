@@ -1,7 +1,10 @@
 <template>
-    <c-layout :showLeftPanel="false" :showRightPanel="false">
-        <c-chat :messages="messages" />
+<div>
+    <c-layout :showLeftPanel="false" :showRightPanel="false" :breadcrumbLinks="false">
+        
     </c-layout>
+    <c-chat :messages="messages" />
+</div>
 </template>
 
 <script>

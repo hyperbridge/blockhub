@@ -29,37 +29,37 @@ export default async ({ store, redirect, route, req }) => {
         }
     }
 
-    let cookieToken
+    // let cookieToken
 
-    if (process.client) {
-        cookieToken = cookieStorage.getItem('feathers-jwt')
-    }
-    if (process.server && req.headers.cookie) {
-        cookieToken = parseCookies(req.headers.cookie)['feathers-jwt']
-    }
+    // if (process.client) {
+    //     cookieToken = cookieStorage.getItem('feathers-jwt')
+    // }
+    // if (process.server && req.headers.cookie) {
+    //     cookieToken = parseCookies(req.headers.cookie)['feathers-jwt']
+    // }
 
-    if (cookieToken) {
-        try {
-            const { accessToken } = await store.dispatch('auth/authenticate', {
-                strategy: 'jwt',
-                accessToken: cookieToken
-            })
+    // if (cookieToken) {
+    //     try {
+    //         const { accessToken } = await store.dispatch('auth/authenticate', {
+    //             strategy: 'jwt',
+    //             accessToken: cookieToken
+    //         })
 
-            const { payload } = jwt.decode(accessToken, { complete: true })
+    //         const { payload } = jwt.decode(accessToken, { complete: true })
 
-            store.commit('accounts/setCurrent', payload.userId)
-            store.commit('auth/setAccessToken', accessToken)
-            store.commit('auth/setPayload', payload)
-            store.commit('auth/setUser', store.getters['accounts/current'])
+    //         store.commit('accounts/setCurrent', payload.userId)
+    //         store.commit('auth/setAccessToken', accessToken)
+    //         store.commit('auth/setPayload', payload)
+    //         store.commit('auth/setUser', store.getters['accounts/current'])
 
-            await store.dispatch('application/authenticate')
-        } catch (error) {
-            if (process.client) {
-                cookieStorage.removeItem('feathers-jwt')
-            }
-            return redirect(`/login?error=${error.name}`)
-        }
-    }
+    //         await store.dispatch('application/authenticate')
+    //     } catch (error) {
+    //         if (process.client) {
+    //             cookieStorage.removeItem('feathers-jwt')
+    //         }
+    //         return redirect(`/login?error=${error.name}`)
+    //     }
+    // }
 
     // If it's a private page and there's no payload, redirect.
     // if (!store.state.auth.publicPages.includes(route.name) && !store.state.auth.payload) {

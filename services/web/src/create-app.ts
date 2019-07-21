@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import bodyParser = require('body-parser')
 import Knex = require('knex')
 import cors = require('cors')
@@ -28,7 +29,7 @@ const knexfile = require('./knexfile')
 const knex = Knex(knexfile)
 
 knex.on('query', (query): any => {
-    console.log(query)
+    // console.log(query)
 })
 
 Model.knex(knex)
@@ -47,8 +48,8 @@ export default async () => {
     app.use(cors())
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
-
     app.configure(authentication(config.authentication))
+
     app.configure(local())
     app.configure(jwt())
 
@@ -87,7 +88,7 @@ export default async () => {
 
     app.service('/authentication').hooks({
         before: {
-            create: [
+            all: [
                 // You can chain multiple strategies
                 authentication.hooks.authenticate(config.authentication.strategies)
             ],
@@ -100,7 +101,6 @@ export default async () => {
                 (context): any => {
                     context.result.accountId = context.params.user.id
                     context.result.profiles = context.params.user.profiles
-
                     return context
                 }
             ]
@@ -110,6 +110,10 @@ export default async () => {
     // add any error handlers
     app.use(errorHandler({ logger: loggerLib }))
 
+    // How to use:
+    //
+    // import EmailFirstOAuth2Verifier from './verifiers/verifier';
+    //
 
     app.use('/ping', {
         async find (params) {
@@ -129,9 +133,16 @@ export default async () => {
             ]
         }
     })
-
+    app.use('/version', {
+        async find (params) {
+            return [
+                '0.8.1'
+            ]
+        }
+    })
     // app hooks last
     app.hooks(appHooks)
 
     return app
 }
+

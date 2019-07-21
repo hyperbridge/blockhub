@@ -5,38 +5,37 @@
                 status="none"
                 :to="`/product/${id}`">
                 <c-img
-                    v-if="metaImagesMediumTile"
+                    v-if="mediumTile"
                     class="card-img-top"
-                    :src="metaImagesMediumTile" />
+                    :src="mediumTile" />
                 <h4>
                     {{ name }}
                 </h4>
                 <p
                     class="card-text"
                     hidden>
-                    {{ metaShortDescription }}
+                    {{ shortDescription }}
                 </p>
             </c-button>
-            <c-tags v-if="metaDeveloperTags" :tags="metaDeveloperTags.slice(0,3)" />
+            <c-tags v-if="developerTags" :tags="developerTags.slice(0,3)" />
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'ProductCard',
     components: {
         'c-tags': () => import('~/components/tags').then(m => m.default || m)
     },
     props: {
         id: Number,
-        metaImagesMediumTile: String,
+        mediumTile: String,
         name: String,
-        metaShortDescription: String,
-        metaDeveloperTags: {
+        shortDescription: String,
+        developerTags: {
             type: Array,
             default: () => []
-        },
+        }
     }
 }
 </script>

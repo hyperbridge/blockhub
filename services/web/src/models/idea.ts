@@ -9,11 +9,8 @@ import Vote from './vote'
 
 export default class Idea extends BaseModel {
     public ownerId!: number
-    public owner!: Profile
     public communityId!: number
-    public community!: Community
     public ratingId!: number
-    public rating!: Rating
 
     public type!: string // [battlepass, app, game, etc.]
     public tags!: Array<Tag>
@@ -46,23 +43,36 @@ export default class Idea extends BaseModel {
 
     public static get relationMappings (): RelationMappings {
         return {
+            // owner: {
+            //     relation: Model.HasOneThroughRelation,
+            //     modelClass: Profile,
+            //     filter: (qb) => {
+            //         // TODO: simplify this when this issue is resolved https://github.com/Vincit/objection.js/issues/1356
+            //         qb.select('profiles.id', 'node_profiles.fromIdeaId')
+            //         qb.join('nodes as node_profiles', 'node_profiles.toProfileId', 'profiles.id')
+            //         qb.where('node_profiles.relationKey', '=', 'owner')
+            //         // @ts-ignore
+            //         qb._parentQuery.whereRaw('"owner"."fromIdeaId" = "ideas"."id"')
+            //     },
+            //     join: {
+            //         from: 'ideas.id',
+            //         to: 'profiles.id',
+            //         through: {
+            //             from: 'nodes.fromIdeaId',
+            //             to: 'nodes.toProfileId',
+            //             extra: ['relationKey'],
+            //             beforeInsert(model) {
+            //                 (model as Node).relationKey = 'owner'
+            //             }
+            //         }
+            //     }
+            // },
             owner: {
-                relation: Model.HasOneThroughRelation,
+                relation: Model.BelongsToOneRelation,
                 modelClass: Profile,
-                filter: {
-                    relationKey: 'owner'
-                },
-                beforeInsert (model) {
-                    (model as Node).relationKey = 'owner'
-                },
                 join: {
-                    from: 'ideas.id',
-                    to: 'profiles.id',
-                    through: {
-                        from: 'nodes.fromIdeaId',
-                        to: 'nodes.toProfileId',
-                        extra: ['relationKey']
-                    }
+                    from: 'ideas.ownerId',
+                    to: 'profiles.id'
                 }
             },
             vote: {
@@ -79,7 +89,7 @@ export default class Idea extends BaseModel {
                 },
             },
             community: {
-                relation: Model.HasOneRelation,
+                relation: Model.BelongsToOneRelation,
                 modelClass: Community,
                 join: {
                     from: 'ideas.communityId',
@@ -124,14 +134,14 @@ export default class Idea extends BaseModel {
                     }
                 }
             },
-            rating: {
-                relation: Model.HasOneRelation,
-                modelClass: Rating,
-                join: {
-                    from: 'ideas.ratingId',
-                    to: 'ratings.id'
-                }
-            },
+            // rating: {
+            //     relation: Model.BelongsToOneRelation,
+            //     modelClass: Rating,
+            //     join: {
+            //         from: 'ideas.ratingId',
+            //         to: 'ratings.id'
+            //     }
+            // },
             tags: {
                 relation: Model.ManyToManyRelation,
                 modelClass: Tag,
@@ -141,16 +151,21 @@ export default class Idea extends BaseModel {
                     through: {
                         from: 'nodes.fromIdeaId',
                         to: 'nodes.toTagId',
-                        extra: ['relationKey']
+                        extra: ['relationKey'],
+                        beforeInsert(model) {
+                            (model as Node).relationKey = 'tags'
+                        }
                     }
                 },
-                filter: {
-                    relationKey: 'tags'
+                filter: (qb) => {
+                    // TODO: simplify this when this issue is resolved https://github.com/Vincit/objection.js/issues/1356
+                    qb.select('tags.id', 'node_tags.fromIdeaId')
+                    qb.join('nodes as node_tags', 'node_tags.toTagId', 'tags.id')
+                    qb.where('node_tags.relationKey', '=', 'tags')
+                    // @ts-ignore
+                    qb._parentQuery.whereRaw('"tags"."fromIdeaId" = "ideas"."id"')
                 },
-                beforeInsert (model) {
-                    (model as Node).relationKey = 'tags'
-                }
-            },
+            }
         }
     }
 }

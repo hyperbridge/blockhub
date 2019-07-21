@@ -1,3 +1,5 @@
+import { appendFile } from 'fs'
+/* eslint-disable no-shadow-restricted-names */
 const { authenticate } = require('@feathersjs/authentication').hooks
 const { hashPassword, protect } = require('@feathersjs/authentication-local').hooks
 const { errorIfReadonly, allowNull, wildcardsInLike } = require('../../hooks')
@@ -26,11 +28,9 @@ const populate = function (options = {}): any {
                         accountId: item.id
                     }
                 })
-
                 item.profiles = profiles.data
             }
         }))
-
         return context
     }
 }

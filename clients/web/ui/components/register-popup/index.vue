@@ -204,7 +204,7 @@ export default {
                             ? 'That email address is unavailable.'
                             : 'An error prevented signup.'
                         this.errors = [error.message]
-
+                        
                         this.loading = false
                     })
 

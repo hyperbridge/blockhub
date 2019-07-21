@@ -31,7 +31,6 @@ export default {
             this.$desktop.sendCommand('deleteAccountRequest')
         },
         signOut() {
-            debugger
             this.$store.dispatch('logout')
             this.$router.push('/')
         }

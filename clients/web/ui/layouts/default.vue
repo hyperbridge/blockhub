@@ -343,7 +343,7 @@ body {
     line-height: 20px;
     color: #323c47;
     background: #30314c;
-    -webkit-font-smoothing: subpixel-antialiased; /* fix for blur? */
+    /* -webkit-font-smoothing: subpixel-antialiased; fix for blur? */
     text-rendering:optimizeSpeed; /* fix for blur? */
 }
 /*Try to fix scrollable div height problems*/

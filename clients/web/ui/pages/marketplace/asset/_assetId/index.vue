@@ -7,7 +7,7 @@
                 class="asset__background-img"
                 :src="asset.image" />
             <h1 class="asset__name">
-                {{ asset.name }}
+                {{ asset.value }}
             </h1>
 
             <div class="asset__details">

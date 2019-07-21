@@ -3,7 +3,6 @@ import * as DB from '../db'
 import * as ChaosMonkey from '../framework/chaos-monkey'
 import * as ReputationEngine from '../framework/reputation-engine'
 import * as Bridge from '../framework/desktop-bridge'
-import seed from '../db/seed'
 
 export default ({ app, store, redirect }) => {
     Vue.config.productionTip = false
@@ -83,7 +82,6 @@ export default ({ app, store, redirect }) => {
     blockhub.reputationEngine = ReputationEngine
     blockhub.db = DB
     blockhub.store = store
-    blockhub.seed = seed
     // blockhub.router = router // doesnt work?
 
     blockhub.importStarterData = () => {

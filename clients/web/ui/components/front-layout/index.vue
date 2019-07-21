@@ -178,6 +178,8 @@
                     :name="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.name"
                     :description="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.description"
                     :collections="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.collections"
+                    :resourceType="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.resourceType"
+                    :resourceId="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.resourceId"
                     @close="$store.state.application.activeModal = null" />
 
                 <c-basic-popup
@@ -391,7 +393,7 @@
                     </div>
                     <template slot="body">
                         <p>
-                            Our goal at BlockHub is to be hyper-focused on the community. That's why we've created this handy way for you to give us feedback or report issues. Simply hold ALT and click somewhere. It will send us the location of what you're looking at. Report a problem or suggest something at the click of a button! So, what's up?
+                            We at BlockHub are hyper-focused on community feedback. That's why we've created this handy way for you to give us feedback or report issues. Simply hold ALT and click somewhere. It will send us the location of what you're looking at. Report a problem or suggest something at the click of a button! So, what's up?
                         </p>
                         <br>
                         <div class="form-group">
@@ -1585,7 +1587,7 @@ export default {
     background-repeat: no-repeat;
     z-index: 1;
     opacity: 0.7;
-    animation: pulse-opacity ease-in-out 2s infinite alternate;
+    animation: pulse-opacity ease-in-out 2s infinite alternate !important;
 }
 
 #right-bg {
@@ -1600,7 +1602,7 @@ export default {
     background-repeat: no-repeat;
     z-index: 1;
     opacity: 0.7;
-    animation: pulse-opacity ease-in-out 2s infinite alternate;
+    animation: pulse-opacity ease-in-out 2s infinite alternate !important;
 }
 
 #header-bg {

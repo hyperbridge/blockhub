@@ -3,7 +3,7 @@
         class="product-grid__item"
         @mouseover="showPreview(true)"
         @mouseout="showPreview(false)">
-        <div class="position-relative">
+        <div class="card-body padding-0 position-relative">
             <div
                 v-if="price"
                 class="product-grid__item-price">
@@ -11,51 +11,53 @@
             </div>
             <c-button
                 status="none"
-                :to="`/product/${id}`"
-                class="card-img-top">
-                <transition name="fade">
-                    <c-img
-                        v-if="!displayPreview"
-                        class="card-img-top"
-                        :src="imagesMediumTile" />
-                    <template v-else>
-                        <video
-                            v-if="video && autoplay"
-                            class="card-img-top"
-                            width="100%"
-                            autoplay>
-                            <source
-                                :src="video"
-                                type="video/mp4">
-                        </video>
-                        <transition-group
-                            v-else
-                            tag="div"
-                            name="slide-left">
-                            <c-img
-                                v-for="(image, index) in imagesPreview"
-                                v-if="index === currentImage"
-                                :key="image"
-                                :src="imagesPreview[index]"
-                                class="card-img-top" />
-                        </transition-group>
-                    </template>
-                </transition>
-            </c-button>
-        </div>
-        <h4>
-            <c-button
-                status="none"
                 :to="`/product/${id}`">
-                {{ name }}
+                <c-img
+                    v-if="!displayPreview"
+                    class="card-img-top"
+                    :src="mediumTile" />
+                <template v-else>
+                    <video
+                        v-if="video && autoplay"
+                        class="card-img-top"
+                        width="100%"
+                        autoplay>
+                        <source
+                            :src="video"
+                            type="video/mp4">
+                    </video>
+                    <video
+                        v-if="video && !autoplay"
+                        class="card-img-top"
+                        width="100%"
+                        autoplay>
+                        <source
+                            :src="video"
+                            type="video/mp4">
+                    </video>
+                    <transition-group
+                        v-else
+                        tag="div"
+                        name="slide-left">
+                        <c-img
+                            v-for="(image, index) in previewImages"
+                            v-if="index === currentImage"
+                            :key="image"
+                            :src="previewImages[index]"
+                            class="card-img-top" />
+                    </transition-group>
+                </template>
+                <h4>
+                    {{ name }}
+                </h4>
+                <div
+                    class="card-text"
+                    hidden>
+                    {{ shortDescription }}
+                </div>
             </c-button>
-        </h4>
-        <div
-            class="card-text"
-            hidden>
-            {{ shortDescription }}
+            <c-tags class="product-tags" v-if="developerTags" :tags="developerTags.slice(0,3)" />
         </div>
-        <c-tags v-if="developerTags" :tags="developerTags.slice(0,3)" />
     </div>
 </template>
 
@@ -69,12 +71,12 @@ export default {
     mixins: [debounce],
     props: {
         id: Number,
-        price: String,
+        price: Number,
         name: String,
-        imagesMediumTile: String,
+        mediumTile: String,
         video: String,
         shortDescription: String,
-        imagesPreview: {
+        previewImages: {
             type: Array,
             default: () => []
         },
@@ -100,14 +102,14 @@ export default {
             clearTimeout(this.timeout)
             this.debounce(() => {
                 if (!status) clearInterval(this.interval)
-                if (status && !this.displayPreview && (!this.productVideo || !this.autoplay)) this.slider()
+                if (status && !this.displayPreview && (!this.video || !this.autoplay)) this.slider()
                 this.displayPreview = status
             }, status ? 250 : 0)
         },
         slider() {
             this.interval = setInterval(() => {
-                const { currentImage, product: { images } } = this
-                this.currentImage = currentImage === images.preview.length - 1 ? 0 : currentImage + 1
+                const { currentImage, previewImages } = this
+                this.currentImage = currentImage === previewImages.length - 1 ? 0 : currentImage + 1
             }, 1600)
         }
     }
@@ -143,8 +145,8 @@ export default {
             padding: 13px 0;
         }
         .product-tags {
-            margin-top: auto;
-            margin-bottom: 10px;
+            // margin-top: auto;
+            // margin-bottom: 10px;
         }
     }
     .product-grid__item-price {
@@ -172,7 +174,7 @@ export default {
 
     .slide-left-enter, .slide-left-leave-to {
         opacity: 0;
-        transform: rotate(10deg) scale(.9);
+        // transform: rotate(10deg) scale(.9);
     }
 
     .fade-enter-active, .fade-leave-active {

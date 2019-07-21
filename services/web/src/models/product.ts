@@ -96,6 +96,14 @@ export default class Product extends BaseModel {
             //     }
             // },
 
+            owner: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Profile,
+                join: {
+                    from: 'products.ownerId',
+                    to: 'profiles.id'
+                }
+            },
             vote: {
                 relation: Model.ManyToManyRelation,
                 modelClass: Vote,
@@ -223,14 +231,45 @@ export default class Product extends BaseModel {
                     through: {
                         from: 'nodes.fromProductId',
                         to: 'nodes.toTagId',
-                        extra: ['relationKey']
+                        extra: ['relationKey'],
+                        beforeInsert(model) {
+                            (model as Node).relationKey = 'tags'
+                        }
                     }
                 },
-                filter (query) {
-                    //query.where('nodes.relationKey', 'tags')
+                filter: qb => {
+                    // TODO: simplify this when this issue is resolved https://github.com/Vincit/objection.js/issues/1356
+                    qb.select('tags.id', 'tags.name', 'node_tags.fromProductId')
+                    qb.join('nodes as node_tags', 'node_tags.toTagId', 'tags.id')
+                    qb.where('node_tags.relationKey', '=', 'tags')
+                    // @ts-ignore
+                    // TODO: figure this out
+                    //qb._parentQuery.whereRaw('"nodes"."fromProductId" = "products"."id"')
+                }
+            },
+            internalTags: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Tag,
+                join: {
+                    from: 'products.id',
+                    to: 'tags.id',
+                    through: {
+                        from: 'nodes.fromProductId',
+                        to: 'nodes.toTagId',
+                        extra: ['relationKey'],
+                        beforeInsert(model) {
+                            (model as Node).relationKey = 'internalTags'
+                        }
+                    }
                 },
-                beforeInsert (model) {
-                    (model as Node).relationKey = 'tags'
+                filter: qb => {
+                    // TODO: simplify this when this issue is resolved https://github.com/Vincit/objection.js/issues/1356
+                    qb.select('tags.id', 'tags.name', 'node_tags.fromProductId')
+                    qb.join('nodes as node_tags', 'node_tags.toTagId', 'tags.id')
+                    qb.where('node_tags.relationKey', '=', 'internalTags')
+                    // @ts-ignore
+                    // TODO: figure this out
+                    //qb._parentQuery.whereRaw('"nodes"."fromProductId" = "products"."id"')
                 }
             }
         }

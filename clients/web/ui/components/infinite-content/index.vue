@@ -92,7 +92,7 @@
                         <div class="col-12">
                             <c-product-slider
                                 v-if="item.data.products.length"
-                                :dynamic="false"
+                                :dynamic="true"
                                 :products="item.data.products"
                                 :title="item.data.title"
                                 :maxPerView="item.data.slidesPerView" />
@@ -389,7 +389,7 @@
                                     :showRating="true"
                                     :showDate="false"
                                     :showLink="true"
-                                    :items="newProducts.slice(0,5)"
+                                    :items="item.products.slice(0,5)"
                                     itemBg="transparent"
                                     pricePosition="right" />
                             </c-block>

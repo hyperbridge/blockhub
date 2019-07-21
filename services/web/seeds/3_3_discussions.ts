@@ -2,7 +2,7 @@ import Discussion from '../src/models/discussion'
 
 export const data = [
     {
-        id: 1,
+        status: 'active',
         key: 'test-slug-1',
         value: `Why am I seeing H12 request timeout?`,
         meta: {
@@ -10,7 +10,7 @@ export const data = [
         }
     },
     {
-        id: 2,
+        status: 'active',
         key: 'test-slug-2',
         value: `I'm still seeing 'Your password has expired'`,
         meta: {
@@ -18,7 +18,7 @@ export const data = [
         }
     },
     {
-        id: 3,
+        status: 'active',
         key: 'developer-program',
         value: `Developer Program`,
         meta: {
@@ -26,7 +26,7 @@ export const data = [
         }
     },
     {
-        id: 4,
+        status: 'active',
         key: 'test-slug-3',
         value: `Performing Load Test on BlockHub`,
         meta: {
@@ -34,7 +34,7 @@ export const data = [
         }
     },
     {
-        id: 5,
+        status: 'active',
         key: 'test-slug-3',
         value: `Performing Load Test on BlockHub`,
         meta: {
@@ -42,7 +42,7 @@ export const data = [
         }
     },
     {
-        id: 6,
+        status: 'active',
         key: 'test-slug-3',
         value: `Performing Load Test on BlockHub`,
         meta: {
@@ -50,7 +50,7 @@ export const data = [
         }
     },
     {
-        id: 7,
+        status: 'active',
         key: 'test-slug-3',
         value: `Performing Load Test on BlockHub`,
         meta: {
@@ -58,7 +58,7 @@ export const data = [
         }
     },
     {
-        id: 8,
+        status: 'active',
         key: 'test-slug-3',
         value: `Performing Load Test on BlockHub`,
         meta: {
@@ -66,7 +66,6 @@ export const data = [
         }
     },
     {
-        id: 9,
         status: 'active',
         key: 'new-to-blockhub-meta',
         value: 'New to BlockHub',
@@ -93,7 +92,7 @@ export const data = [
         }
     },
     {
-        id: 10,
+        status: 'active',
         key: 'new-to-blockhub-locked',
         value: 'New to BlockHub',
         meta: {
@@ -106,7 +105,7 @@ export const data = [
         }
     },
     {
-        id: 11,
+        status: 'active',
         key: 'new-to-blockhub-starred',
         value: 'New to BlockHub',
         meta: {
@@ -119,7 +118,7 @@ export const data = [
         }
     },
     {
-        id: 12,
+        status: 'active',
         key: 'new-to-blockhub-none',
         value: 'New to BlockHub',
         meta: {
@@ -128,6 +127,25 @@ export const data = [
             author: {
                 name: 'Alan Walker'
             }
+        }
+    },
+    {
+        status: 'active',
+        key: 'new-next-week',
+        value: 'New class and event coming next week!',
+        meta: {
+            "targetType": "product",
+            "targetId": 1,
+            "tags": [
+                {
+                    "key": "news",
+                    "value": "News"
+                }
+            ],
+            "heading": "New class and event coming next week!",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
+            "url": "/post/1",
+            "date": "2018-07-24T04:09:00.000Z"
         }
     }
 ]

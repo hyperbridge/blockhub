@@ -524,7 +524,7 @@ export default {
             this.$('.snotify').show()
         },
         signOut() {
-            this.$store.dispatch('ogout')
+            this.$store.dispatch('logout')
 
             this.isLoading = true
         },
@@ -839,7 +839,7 @@ export default {
         background: linear-gradient(to bottom, rgb(29, 30, 47) 0%,rgba(48,49,77,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         z-index: 11;
         opacity: 0.7;
-        animation: pulse-opacity ease-in-out 2s infinite alternate;
+        animation: pulse-opacity ease-in-out 2s infinite alternate !important;
     }
 
     .app-header__options {
@@ -1302,17 +1302,10 @@ export default {
         a {
             position: relative;
             float: left;
-            width: 15px;
-            height: 15px;
+            width: 18px;
+            height: 18px;
             margin: 0 2px;
-            &:before {
-                @extend %extend_1;
-                opacity: 0;
-            }
-            &:after {
-                @extend %extend_1;
-                opacity: 0;
-            }
+            min-height: 15px!important;
             &:hover {
                 &:after {
                     border-color: $color_2;
@@ -1325,6 +1318,8 @@ export default {
                 background: #ff6159;
                 border-radius: 100%;
                 &:before {
+                    @extend %extend_1;
+                    opacity: 0;
                     bottom: 55%;
                     top: 45%;
                     //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
@@ -1333,6 +1328,8 @@ export default {
                     left: 25%;
                 }
                 &:after {
+                    @extend %extend_1;
+                    opacity: 0;
                     bottom: 55%;
                     top: 45%;
                     //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
@@ -1342,21 +1339,58 @@ export default {
                 }
             }
             &.minimize{
-                background: #ffc434;
+                background: #999;
                 border-radius: 100%;
                 &:before {
+                    @extend %extend_1;
+                    opacity: 0;
                     bottom: 40%;
                     border-bottom-width: 2px;
                 }
                 &:after{
+                    @extend %extend_1;
+                    opacity: 0;
                     display: none;
                 }
             }
             &.maximize{
-                background: #2dd04a;
+                background: #999;
                 border-radius: 100%;
+
                 &:before {
-                    border-width: 1px 1px 2px 1px;
+                    content: '';
+                    position: absolute;
+                    border-radius: 1px;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    margin: auto;
+                    opacity: 0;
+                    background-color: #383838;
+                    width: 7px;
+                    height: 7px;
+                }
+                &:after {
+                    content: '';
+                    position: absolute;
+                    border-radius: 1px;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    margin: auto;
+                    opacity: 0;
+                    background-color: #383838;
+                    width: 10px;
+                    height: 2px;
+                    transform: rotate(45deg);
+                }
+                &:active:hover:before {
+                    background-color: #183838;
+                }
+                &:active:hover:after {
+                    background-color: #183838;
                 }
             }
         }
