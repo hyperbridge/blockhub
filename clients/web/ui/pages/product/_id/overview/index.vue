@@ -58,8 +58,7 @@
                 :inShortcut="$store.state.application.shortcuts.find(s => s.id == ('product' + product.id))"
                 :releaseDate="product.meta.releaseDate"
                 :playLink="currentRelease && currentRelease.playLink"
-                resourceType="product"
-                :resourceId="product.id"
+                @addToCollection="addToCollection"
                 @addToWishlist="$store.dispatch(
                     'community/updateWishlist',
                     ['product', product.id]
@@ -446,6 +445,33 @@ export default {
         },
         scrollToReviews() {
             this.$refs.reviews.scrollIntoView()
+        },
+        addToCollection() {
+            this.$store.dispatch('marketplace/addToCollection', {
+                // collections: [
+                //     {
+                //         name: 'My Top 100',
+                //         id: 22
+                //     },
+                //     {
+                //         name: 'Nintendo TOP',
+                //         id: 22
+                //     },
+                //     {
+                //         name: 'Game for PS4',
+                //         id: 22
+                //     },
+                //     {
+                //         name: 'Something other',
+                //         id: 22
+                //     }
+                // ],
+                image: this.product.meta.images.mediumTile,
+                name: this.product.name,
+                description: this.product.meta.shortDescription,
+                resourceType: 'product',
+                resourceId: this.product.id
+            })
         }
     }
 }

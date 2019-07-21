@@ -29,6 +29,7 @@ const populate = function (options = {}): any {
                     }
                 })
                 item.profiles = profiles.data
+                item.roles = []
             }
         }))
         return context

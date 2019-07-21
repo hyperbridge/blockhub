@@ -5,6 +5,7 @@ import Idea from './idea'
 import Project from './project'
 import Product from './product'
 import Community from './community'
+import Collection from './collection'
 import Discussion from './discussion'
 import BaseModel from './base'
 import Vote from './vote';
@@ -67,6 +68,11 @@ export default class Node extends BaseModel {
     public toCommunity!: Community
     public fromCommunityId!: number
     public toCommunityId!: number
+
+    public fromCollection!: Collection
+    public toCollection!: Collection
+    public fromCollectionId!: number
+    public toCollectionId!: number
 
     public fromDiscussion!: Discussion
     public toDiscussion!: Discussion

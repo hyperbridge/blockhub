@@ -22,14 +22,14 @@
                     </p>
                 </div>
             </div>
-            <div v-if="name">
+            <!-- <div v-if="name">
                 <c-button
                     status="plain"
                     icon="star"
                     class="p-0">
                     Highlight this
                 </c-button>
-            </div>
+            </div> -->
             <div class="add-to-collection__filter d-flex align-items-end justify-content-between mt-3 mb-4 pb-4">
                 <div class="h4 font-weight-bold m-0 p-0 mr-4">
                     Choose collection
@@ -190,31 +190,24 @@ export default {
             await this.fetchCollections()
         },
         async updateResource(collection, enabled) {
-            console.log(this.resourceType, this.resourceId)
-            // TODO: finish this
-            /*
-            const resources = collection.meta.resources
-
-            meta: {
-                resources: [
-                    {
-                        type: 'product',
-                        id: 1
-                    }
-                ]
+            const resource = {
+                id: this.resourceId,
+                type: this.resourceType
             }
 
-            if enabled ===false
-            resources.removeResource ( resource)
-            else
-            add
-            */
+            if (enabled) {
+                await this.$store.dispatch('collections/addResource', [collection.id, resource, {
+                    query: {
 
-            await this.$store.dispatch('collections/update', [collection.id, collection, {
-                query: {
-                    
-                }
-            }])
+                    }
+                }])
+            } else {
+                await this.$store.dispatch('collections/removeResource', [collection.id, resource, {
+                    query: {
+
+                    }
+                }])
+            }
         }
     }
 }

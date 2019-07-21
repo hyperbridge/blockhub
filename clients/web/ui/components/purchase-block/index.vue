@@ -113,7 +113,7 @@
                 activeIcon="link"
                 unactiveIcon="unlink"
                 class="mt-3"
-                @click="addToCollection" />
+                @click="$emit('addToCollection')" />
         </div>
     </c-block>
 </template>
@@ -204,33 +204,6 @@ export default {
         return {}
     },
     methods: {
-        addToCollection() {
-            this.$store.dispatch('marketplace/addToCollection', {
-                // collections: [
-                //     {
-                //         name: 'My Top 100',
-                //         id: 22
-                //     },
-                //     {
-                //         name: 'Nintendo TOP',
-                //         id: 22
-                //     },
-                //     {
-                //         name: 'Game for PS4',
-                //         id: 22
-                //     },
-                //     {
-                //         name: 'Something other',
-                //         id: 22
-                //     }
-                // ],
-                image: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                name: 'Magic Plate Armor',
-                description: 'Cras in dui eget nulla vulputate finibus sed id ligula.',
-                resourceType: this.resourceType,
-                resourceId: this.resourceId
-            })
-        }
     }
 }
 </script>
