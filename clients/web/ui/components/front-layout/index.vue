@@ -1192,25 +1192,6 @@ export default {
             this.$store.state.application.tokenCount = res.balance
         }
     },
-    asyncData() {
-        this.$store.dispatch('communities/find', {
-            query: {
-                $sort: {
-                    createdAt: -1
-                },
-                $limit: 25
-            }
-        })
-
-        this.$store.dispatch('collections/find', {
-            query: {
-                $sort: {
-                    createdAt: -1
-                },
-                $limit: 25
-            }
-        })
-    },
     updated() {
         this.userSubmittedConnectionMessage = this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))]
         this.checkScrollButton()
@@ -1245,6 +1226,24 @@ export default {
         })
     },
     mounted() {
+        this.$store.dispatch('communities/find', {
+            query: {
+                $sort: {
+                    createdAt: -1
+                },
+                $limit: 25
+            }
+        })
+
+        this.$store.dispatch('collections/find', {
+            query: {
+                $sort: {
+                    createdAt: -1
+                },
+                $limit: 25
+            }
+        })
+
         this.$nextTick(() => {
             this.loadingState = false
 

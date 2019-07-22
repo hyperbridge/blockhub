@@ -68,7 +68,7 @@ export default {
     },
     computed: {
         disableAnimations() {
-            return this.$store.state.application.settings.client.animations
+            return this.$store.state.application.settings && this.$store.state.application.settings.client.animations
         }
     },
     watch: {
