@@ -11,7 +11,7 @@ export default {
         port: process.env.PORT,
         host: '0.0.0.0'
     },
-    mode: 'spa', // universal
+    mode: 'spa', // 'universal', // 'spa', // universal
     srcDir: 'ui/',
     dev: process.env.NODE_ENV !== 'production',
     htmlAttrs: {
@@ -19,7 +19,7 @@ export default {
         class: ''
     },
     head: {
-        title: this.pageTitle || 'BlockHub',
+        title: 'BlockHub',
         env: {
             version: process.env.npm_package_version,
             baseUrl: process.env.BASE_URL || `http://localhost:${process.env.PORT}`,
