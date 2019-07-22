@@ -2,6 +2,7 @@ import Vue from 'vue'
 import url from 'url'
 import feathersClient from '~/framework/feathers-client'
 import feathersVuex, { initAuth } from 'feathers-vuex'
+import serviceHandlers from '../services'
 
 export default async ({ app, store, req }, bbb) => {
     const { dispatch, commit } = store
@@ -32,36 +33,39 @@ export default async ({ app, store, req }, bbb) => {
 
     Vue.use(FeathersVuex)
 
-    service('accounts', { paginate: true })(store)
-    service('messages', { paginate: true })(store)
-    service('profiles', { paginate: true })(store)
-    service('products', { paginate: true })(store)
-    service('achievements', { paginate: true })(store)
-    service('assets', { paginate: true })(store)
-    service('badges', { paginate: true })(store)
-    service('battlepasses', { paginate: true })(store)
-    service('bounties', { paginate: true })(store)
-    service('collections', { paginate: true })(store)
-    service('collectionResource', { paginate: true })(store)
-    service('communities', { paginate: true })(store)
-    service('discussions', { paginate: true })(store)
-    service('events', { paginate: true })(store)
-    service('files', { paginate: true })(store)
-    service('leaderboards', { paginate: true })(store)
-    service('licenses', { paginate: true })(store)
-    service('logs', { paginate: true })(store)
-    service('offers', { paginate: true })(store)
-    service('ratings', { paginate: true })(store)
-    service('reviews', { paginate: true })(store)
-    service('realms', { paginate: true })(store)
-    service('servers', { paginate: true })(store)
-    service('suggestions', { paginate: true })(store)
-    service('tournaments', { paginate: true })(store)
-    service('projects', { paginate: true })(store)
-    service('ideas', { paginate: true })(store)
-    service('tags', { paginate: true })(store)
-    service('votes', { paginate: true })(store)
-    service('search', { paginate: true })(store)
+    for (const serviceHandler of serviceHandlers) {
+        service(serviceHandler.path, serviceHandler.config(store))(store)
+    }
+    // service('accounts', { paginate: true })(store)
+    // service('messages', { paginate: true })(store)
+    // service('profiles', { paginate: true })(store)
+    // service('products', { paginate: true })(store)
+    // service('achievements', { paginate: true })(store)
+    // service('assets', { paginate: true })(store)
+    // service('badges', { paginate: true })(store)
+    // service('battlepasses', { paginate: true })(store)
+    // service('bounties', { paginate: true })(store)
+    // service('collections', { paginate: true })(store)
+    // service('collectionResource', { paginate: true })(store)
+    // service('communities', { paginate: true })(store)
+    // service('discussions', { paginate: true })(store)
+    // service('events', { paginate: true })(store)
+    // service('files', { paginate: true })(store)
+    // service('leaderboards', { paginate: true })(store)
+    // service('licenses', { paginate: true })(store)
+    // service('logs', { paginate: true })(store)
+    // service('offers', { paginate: true })(store)
+    // service('ratings', { paginate: true })(store)
+    // service('reviews', { paginate: true })(store)
+    // service('realms', { paginate: true })(store)
+    // service('servers', { paginate: true })(store)
+    // service('suggestions', { paginate: true })(store)
+    // service('tournaments', { paginate: true })(store)
+    // service('projects', { paginate: true })(store)
+    // service('ideas', { paginate: true })(store)
+    // service('tags', { paginate: true })(store)
+    // service('votes', { paginate: true })(store)
+    // service('search', { paginate: true })(store)
     // service('application', { paginate: true })
     auth({
         userService: 'accounts'
