@@ -1,7 +1,7 @@
 export const path = '/collections/resource'
 
 export const config = store => ({
-    nameStyle: 'collectionResource',
+    namespace: 'collectionResource',
     paginate: true,
     instanceDefaults: {},
     state: {},

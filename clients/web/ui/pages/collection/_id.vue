@@ -163,10 +163,10 @@ export default {
                     'Idea': 'ideas',
                     'Asset': 'assets'
                 }
-console.log(typeToService[resource.type], resource)
-                return store.dispatch(`${typeToService[resource.type]}/find`, {
+console.log(typeToService[resource.relationType], resource)
+                return store.dispatch(`${typeToService[resource.relationType]}/find`, {
                     query: {
-                        id: resource[`to${resource.type}Id`]
+                        id: resource[`to${resource.relationType}Id`]
                     }
                 })
             }))

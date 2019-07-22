@@ -18,7 +18,7 @@ exports.up = knex => {
 
         table.text('value')
 
-        table.jsonb('meta')
+        table.jsonb('meta').notNullable()
 
         if (options.status) {
             table.enum('status', ['active', 'disabled', 'removed']).defaultTo('active')
@@ -266,6 +266,9 @@ exports.up = knex => {
             table.increments('id').primary()
 
             table.string('relationKey', 100)
+            //table.string('relationId', 100)
+            table.string('relationType', 100)
+            table.jsonb('meta')
 
             table
                 .integer('fromAccountId')

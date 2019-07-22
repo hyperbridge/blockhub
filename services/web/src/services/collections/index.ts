@@ -33,7 +33,8 @@ export default function (app): any {
             const node = await Node.query().insert({
                 fromCollectionId: data.collectionId,
                 [`to${data.resourceType}Id`]: data.resourceId,
-                relationKey: 'resource'
+                relationKey: 'resource',
+                relationType: data.resourceType
             })
 
             return node

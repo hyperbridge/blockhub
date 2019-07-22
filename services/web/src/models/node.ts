@@ -20,6 +20,7 @@ export default class Node extends BaseModel {
     public parentId!: number
 
     public relationKey!: string
+    public relationType!: string
 
     public fromAccount!: Account
     public fromAccountId!: number
