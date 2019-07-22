@@ -4,7 +4,7 @@ import * as ChaosMonkey from '../framework/chaos-monkey'
 import * as ReputationEngine from '../framework/reputation-engine'
 import * as Bridge from '../framework/desktop-bridge'
 
-export default ({ app, store, redirect }) => {
+export default async ({ app, store, redirect }) => {
     Vue.config.productionTip = false
 
     const initSubscribers = () => {
@@ -195,69 +195,66 @@ export default ({ app, store, redirect }) => {
 
     Vue.use(plugin)
 
-    DB.setInitCallback(async () => {
-        console.log('DB init callback')
-        // TODO: is this a race condition?
-        // TODO: PeerService.init()
-
-        blockhub.reputationEngine.init(store, redirect)
-        blockhub.bridge.init(store, redirect)
-
-        store.dispatch('init', DB.store.data[0])
-        store.dispatch('database/init')
-        store.dispatch('application/init')
-        store.dispatch('marketplace/init')
-        store.dispatch('funding/init')
-        store.dispatch('votes')
-        store.dispatch('votes/check')
-
-        console.log(`Environment mode: ${store.state.application.environmentMode}`)
-
-        if (store.state.application.environmentMode === 'preview' ||
-            store.state.application.environmentMode === 'beta' ||
-            store.state.application.environmentMode === 'production') {
-            setTimeout(() => {
-                blockhub.importStarterData()
-            }, 1000)
-        }
-
-        if (store.state.application.environmentMode === 'preview') {
-            store.state.application.desktopMode = true
-            store.state.application.signedIn = true
-
-            // ENABLE ALL DARKLAUNCHES
-            store.state.application.accessOverride = true
-
-            // ENABLE SIMULATOR MODE
-            // store.state.application.simulatorMode = true
-        }
-
-        try { // TODO: we dont need this do we?
-            store.dispatch('application/initEthereum')
-            store.dispatch('funding/initEthereum')
-            store.dispatch('marketplace/initEthereum')
-        } catch (err) {
-            console.log(err)
-        }
-
-        // initSubscribers()
-        // monitorSimulatorMode()
-        // monitorPathState()
-
-        ReputationEngine.monitor()
-
-        console.log('BlockHub initialized.')
-
-        setInterval(() => {
-            if (store.state.application.connection.auto) {
-                store.dispatch('application/checkInternetConnection')
-            }
-        }, 4000)
-    })
-
     app.$blockhub = store.$blockhub = blockhub
 
     if (process.client) window.BlockHub = blockhub
 
-    DB.init()
+    await DB.init()
+
+    // TODO: is this a race condition?
+    // TODO: PeerService.init()
+
+    blockhub.reputationEngine.init(store, redirect)
+    blockhub.bridge.init(store, redirect)
+
+    store.dispatch('init', DB.store.data[0])
+    store.dispatch('database/init')
+    store.dispatch('application/init')
+    store.dispatch('marketplace/init')
+    store.dispatch('funding/init')
+    store.dispatch('votes')
+    store.dispatch('votes/check')
+
+    console.log(`Environment mode: ${store.state.application.environmentMode}`)
+
+    if (store.state.application.environmentMode === 'preview' ||
+        store.state.application.environmentMode === 'beta' ||
+        store.state.application.environmentMode === 'production') {
+        setTimeout(() => {
+            blockhub.importStarterData()
+        }, 1000)
+    }
+
+    if (store.state.application.environmentMode === 'preview') {
+        store.state.application.desktopMode = true
+        store.state.application.signedIn = true
+
+        // ENABLE ALL DARKLAUNCHES
+        store.state.application.accessOverride = true
+
+        // ENABLE SIMULATOR MODE
+        // store.state.application.simulatorMode = true
+    }
+
+    try { // TODO: we dont need this do we?
+        store.dispatch('application/initEthereum')
+        store.dispatch('funding/initEthereum')
+        store.dispatch('marketplace/initEthereum')
+    } catch (err) {
+        console.log(err)
+    }
+
+    // initSubscribers()
+    // monitorSimulatorMode()
+    // monitorPathState()
+
+    ReputationEngine.monitor()
+
+    console.log('BlockHub initialized.')
+
+    setInterval(() => {
+        if (store.state.application.connection.auto) {
+            store.dispatch('application/checkInternetConnection')
+        }
+    }, 4000)
 }

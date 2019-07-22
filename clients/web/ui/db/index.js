@@ -3,14 +3,15 @@ import Loki from 'lokijs'
 const data = require('./data')
 
 let loki = null
-let initCallback = null
 let initialized = false
+let initPromiseResolve = null
+let initPromiseReject = null
+let initPromise = new Promise((resolve, reject) => {
+    initPromiseResolve = resolve
+    initPromiseReject = reject
+})
 
 export let store = {}
-
-export const setInitCallback = cb => {
-    initCallback = cb
-}
 
 export const instance = () => loki
 
@@ -107,11 +108,11 @@ export const init = () => {
             store.ensureAllIndexes(true)
         }
 
+        loki.close()
+
         initialized = true
 
-        initCallback && initCallback()
-
-        loki.close()
+        initPromiseResolve()
     }
 
     if (process.client) {
@@ -119,6 +120,8 @@ export const init = () => {
     } else {
         loadDatabase()
     }
+
+    return initPromise
 }
 
 export const save = () => {
