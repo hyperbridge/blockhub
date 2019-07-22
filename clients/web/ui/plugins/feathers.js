@@ -1,18 +1,28 @@
 import Vue from 'vue'
 import url from 'url'
-import feathersClient from '~/framework/feathers-client'
 import feathersVuex, { initAuth } from 'feathers-vuex'
+import axios from 'axios'
+import feathers from '@feathersjs/feathers'
+import rest from '@feathersjs/rest-client'
+import socketio from '@feathersjs/socketio-client'
+import authicationClient from '@feathersjs/authentication-client'
+import io from 'socket.io-client'
+import { CookieStorage } from 'cookie-storage'
+import Cookie from 'cookie-universal'
 import serviceHandlers from '../services'
+
+const useSockets = false
 
 export default async ({ app, store }) => {
     const { dispatch, commit } = store
 
-    let feathers = null
+    let serviceUrl = null
+    let storage = null
 
     if (process.server) {
-        const origin = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg' // eslint-disable-line no-negated-condition
+        serviceUrl = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg' // eslint-disable-line no-negated-condition
 
-        const storage = {
+        storage = {
             getItem() {
                 return store.state.auth ? store.state.auth.accessToken : ''
             },
@@ -23,13 +33,26 @@ export default async ({ app, store }) => {
                 store.state.auth.accessToken = null
             }
         }
-
-        feathers = feathersClient(origin, storage)
     } else {
-        feathers = feathersClient()
+        if (window.location.hostname === 'localhost' || window.location.hostname === 'blockhub.gg.local') {
+            serviceUrl = 'http://localhost:9001'
+        } else {
+            serviceUrl = 'https://api.blockhub.gg'
+        }
+    
+        storage = new CookieStorage()
     }
 
-    let { service, auth, FeathersVuex } = feathersVuex(feathers, {
+    const feathersClient = feathers().configure(authicationClient({ storage }))
+
+    if (useSockets) {
+        const socket = io(serviceUrl, process.client ? { transports: ['websocket'] } : {})
+        feathersClient.configure(socketio(socket, { timeout: 15000 }))
+    } else {
+        feathersClient.configure(rest(serviceUrl).axios(axios))
+    }
+
+    let { service, auth, FeathersVuex } = feathersVuex(feathersClient, {
         idField: 'id',
         enableEvents: true
     })

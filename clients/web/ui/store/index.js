@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import feathersClient from '../framework/feathers-client'
 import Vue from 'vue'
 import * as Bridge from '../framework/desktop-bridge'
 
@@ -17,15 +16,6 @@ const isDecentralizedMode = () => {
 }
 
 const decentralizedMode = isDecentralizedMode()
-
-// const feathers = feathersVuex(feathersClient, {
-//     idField: 'id',
-//     auth: {
-//         userService: 'accounts' // TODO: can this be removed?
-//     }
-// })
-
-const feathers = null
 
 if (decentralizedMode) {
     service = () => { // eslint-disable-line arrow-body-style
@@ -73,8 +63,7 @@ if (decentralizedMode) {
 export const plugins = []
 
 export const state = () => ({
-    initialized: false,
-    feathers
+    initialized: false
 })
 
 export const actions = {
