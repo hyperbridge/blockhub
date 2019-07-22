@@ -17,13 +17,13 @@
                                 <c-vote
                                     v-if="activeElementIndex === index"
                                     v-access="'rating.read'"
-                                    :votes="item.rating" />
+                                    :votes="item.data.meta.rating" />
                                 <div class="row">
                                     <div
-                                        v-if="item.data.images"
+                                        v-if="item.data.meta.images"
                                         class="col-12 col-lg-6 frontpage-product__slider">
                                         <c-img
-                                            :src="item.data.images.mediumTile"
+                                            :src="item.data.meta.images.mediumTile"
                                             :data-link="`/product/${item.data.id}`" />
                                     </div>
                                     <div class="col-12 col-lg-6 frontpage-product__info">
@@ -32,23 +32,23 @@
                                                 {{ item.data.name }}
                                             </nuxt-link>
                                         </h2>
-                                        <p>{{ item.data.shortDescription }}</p>
-                                        <c-tags v-if="item.developerTags" :tags="item.data.developerTags" />
+                                        <p>{{ item.data.meta.shortDescription }}</p>
+                                        <c-tags v-if="item.data.meta.developerTags" :tags="item.data.meta.developerTags" />
                                         <div class="frontpage-product__footer">
                                             <div
-                                                v-if="item.data.price"
+                                                v-if="item.data.meta.price"
                                                 class="price-list">
                                                 <div
-                                                    v-if="item.data.oldPrice"
+                                                    v-if="item.data.meta.oldPrice"
                                                     class="price oldPrice">
-                                                    {{ item.data.oldPrice | convertCurrency }}
+                                                    {{ item.data.meta.oldPrice | convertCurrency }}
                                                 </div>
                                                 <div class="price">
-                                                    {{ item.data.price | convertCurrency }}
+                                                    {{ item.data.meta.price | convertCurrency }}
                                                 </div>
                                             </div>
                                             <c-button
-                                                v-if="item.data.price"
+                                                v-if="item.data.meta.price"
                                                 status="success">
                                                 Proceed to Purchase
                                             </c-button>

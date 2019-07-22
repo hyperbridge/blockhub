@@ -375,12 +375,12 @@ export default {
         updateLandingImage() {
             if (!process.client) return
 
-            const { frontpageProduct } = this.$store.state
+            const { frontpageProducts } = this.$store.state.products
 
-            if (frontpageProduct && frontpageProduct.images) {
+            if (frontpageProducts.length && frontpageProducts[0].meta.images) {
                 const header = window.document.getElementById('header-bg')
-                const randomImage = Math.floor(Math.random() * frontpageProduct.meta.images.preview.length)
-                header.style['background-image'] = `url(${frontpageProduct.meta.images.preview[randomImage]})`
+                const randomImage = Math.floor(Math.random() * frontpageProducts[0].meta.images.preview.length)
+                header.style['background-image'] = `url(${frontpageProducts[0].meta.images.preview[randomImage]})`
                 header.style['background-size'] = 'cover'
             }
         },

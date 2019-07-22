@@ -68,7 +68,7 @@ export default {
                 ['Mourning and sorrow', 'Page not with us now', 'Lost in 404.'],
                 ['Rather than a beep', 'Or a rude error message,', `These words: 'Page not found.'`],
                 ['These three are certain:', 'Death, taxes, and page not found.', 'You, victim of one.'],
-                ['Click exciting link', 'Silicon hold you back', '404 not found.'],
+                ['Click exciting link', 'Silicon holds you back', '404 not found.'],
             ],
             500: [
                 ['Error reduces', 'Your expensive computer', 'To a simple stone.'],
