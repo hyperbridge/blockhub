@@ -107,8 +107,7 @@
                     <div v-for="resource in collection.resources">
                         {{ resource.id }}
                     </div>
-                    <!-- <c-assets-grid :list="collection.resources" />
-                    <c-pagination :pages="8" /> -->
+                    <c-assets-grid :list="collection.resources" />
                 </c-block>
             </div>
         </div>
@@ -164,7 +163,7 @@ export default {
             if (!collection) return error({ statusCode: 404, message: 'Collection not found' })
 
             if (collection.resources) {
-                collection.resources = await Promise.all(collection.resources.map(resource => {
+                collection.resources = (await Promise.all(collection.resources.map(resource => {
                     const typeToService = {
                         'Product': 'products',
                         'Project': 'projects',
@@ -177,6 +176,12 @@ export default {
                             id: resource[`to${resource.relationType}Id`]
                         }
                     })
+                }))).map(res => res.data[0]).map(item => ({
+                    id: item.id,
+                    name: item.name,
+                    image: 'http://',
+                    //price: ,
+                    count: 1
                 }))
             } else {
                 collection.resources = []

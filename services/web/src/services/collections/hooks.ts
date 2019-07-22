@@ -9,7 +9,6 @@ import Collection from '../../models/collection'
 const fillCollection = async function (collection): Promise<any> {
     collection.resources = await Node.query().where({
         fromCollectionId: collection.id,
-        toProductId: 4,
         relationKey: 'resource'
     })
 
