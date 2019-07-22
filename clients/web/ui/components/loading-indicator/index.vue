@@ -13,7 +13,16 @@
 
 <script>
 export default {
-    props: ['enabled', 'size']
+    props: {
+        enabled: {
+            type: Boolean,
+            default: true
+        },
+        size: {
+            type: String,
+            default: '100'
+        }
+    }
 }
 </script>
 

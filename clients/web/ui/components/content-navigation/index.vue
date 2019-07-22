@@ -41,10 +41,8 @@
 
 <script>
 export default {
-    name: 'ContentNavigation',
     components: {
         'c-pagination': () => import('~/components/pagination').then(m => m.default || m),
-        'c-spinner': () => import('~/components/spinner').then(m => m.default || m),
         'c-load-more': () => import('~/components/buttons/load-more').then(m => m.default || m)
     },
     inheritAttrs: false,

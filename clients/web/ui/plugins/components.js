@@ -18,6 +18,7 @@ import Access from '../components/access'
 import Vote from '../components/vote'
 import JsonView from '../components/json-editor/json-view'
 import ArrayView from '../components/json-editor/array-view'
+import Spinner from '../components/spinner'
 import Tabs from '../components/tab/tabs'
 import Tab from '../components/tab/tab'
 
@@ -39,5 +40,6 @@ Vue.component('c-breadcrumb', Breadcrumb)
 Vue.component('c-vote', Vote)
 Vue.component('c-img', Img)
 Vue.component('c-access', Access)
+Vue.component('c-spinner', Spinner)
 Vue.component('c-tabs', Tabs)
 Vue.component('c-tab', Tab)
