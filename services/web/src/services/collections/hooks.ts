@@ -1,9 +1,10 @@
-import Node from '../../models/node'
+import { hooks } from '@feathersjs/authentication'
+import { validateSchema } from 'feathers-hooks-common'
+import * as Ajv from 'ajv'
 
-const { authenticate } = require('@feathersjs/authentication').hooks
-const Collection = require('../../models/collection').default
-const Ajv = require('ajv')
-const { validateSchema } = require('feathers-hooks-common')
+import Node from '../../models/node'
+import Collection from '../../models/collection'
+
 
 const fillCollection = async function (collection): Promise<any> {
     collection.resources = await Node.query().where({
@@ -48,7 +49,7 @@ const create = function (options = {}): any {
                 id: owner.id
             }
         }
-console.log('bbb', context.data) 
+
         return context
     }
 }
@@ -66,9 +67,7 @@ const validatePermission = function (options = {}): any {
         if (profile.accountId !== account.id) {
             throw new Error('Collection must be owned by a profile of authenticated account')
         }
-console.log('sss', context)
-context.id = Number(context.id)
-context.data.value='sss'
+
         return context
     }
 }
@@ -77,10 +76,11 @@ export const before = {
     all: [],
     find: [],
     get: [],
-    create: [authenticate('jwt'), create(), validateSchema(Collection.jsonSchema, Ajv)],
-    update: [authenticate('jwt'), validatePermission()],
-    patch: [authenticate('jwt'), validatePermission()],
-    remove: [authenticate('jwt'), validatePermission()]
+    // @ts-ignore
+    create: [hooks.authenticate('jwt'), create(), validateSchema(Collection.jsonSchema, Ajv)],
+    update: [hooks.authenticate('jwt'), validatePermission()],
+    patch: [hooks.authenticate('jwt'), validatePermission()],
+    remove: [hooks.authenticate('jwt'), validatePermission()]
 }
 
 export const after = {

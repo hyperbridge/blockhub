@@ -4,10 +4,10 @@ import Loki from 'lokijs'
 import beautify from 'json-beautify'
 
 const getData = () => {
-    if (fs.existsSync('./src/db/data.json')) {
+    if (fs.existsSync(path.resolve(__dirname, './data.json'))) {
         return require('./data.json')
     } else {
-        fs.writeFile('./src/db/data.json', '{}', 'utf8')
+        fs.writeFile(path.resolve(__dirname, './data.json'), '{}', 'utf8')
 
         return {}
     }
@@ -15,7 +15,7 @@ const getData = () => {
 
 let data = getData()
 let initialData = require('./data.initial.json')
-console.log(data.application[0].ethereum.mainnet.packages.token.contracts, initialData.application[0].ethereum.mainnet.packages.token.contracts)
+
 let loki = null
 let initCallback = null
 let initialized = false
@@ -41,7 +41,7 @@ export let setInitCallback = (cb) => {
 
 export const init = () => {
     console.log('[BlockHub] Initializing database...')
-    
+
     const databaseInitialize = () => {
     }
 
@@ -131,7 +131,7 @@ export const clean = () => {
 
 const updateCollection = (collection, data) => {
     if (!data) return
-    
+
     collection.data = data
   // let obj = collection.findObject({
   //   'id': data.id

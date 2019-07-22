@@ -749,6 +749,9 @@ export default {
     .app-header__create-account-btn, .app-header__download-btn {
         position: relative;
         margin: 0 20px;
+        a{
+            margin: 0 15px!important;
+        }
 
         &:before {
             position: absolute;
@@ -773,12 +776,12 @@ export default {
     }
 
     .app-header__create-account-btn:before {
-        width: 185px;
+        width: 100%;
         background: #43C981;
     }
 
     .app-header__download-btn:before {
-        width: 140px;
+        width: 100%;
         background: #4395c9;
     }
 

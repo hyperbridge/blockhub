@@ -7067,8 +7067,528 @@ storiesOf('Broken page', module)
                 }
             }
         },
-        template: `<c-broken-page :isError="isError" />`
+        template: `<c-broken-page :isError="isError" class="text-white" />`
     }))
+
+storiesOf('Benchmark', module)
+    .add('default', () => ({
+        components: {
+		        'c-benchmark': () => import('~/components/benchmark').then(m => m.default || m)
+        },
+        data(){
+            return{
+		            settings: {
+				            client: {
+                        autoUpdateSettings: function() {
+                            alert('autoUpdateSettings function')
+						            },
+                    }
+                }
+            }
+        },
+        template: `<div class="p-5"><c-benchmark :settings="settings" class="text-white" /></div>`
+    }))
+
+storiesOf('Trade offer', module)
+    .add('default', () => ({
+        components: {
+		        'c-trade-offer': () => import('~/components/trade-offer').then(m => m.default || m)
+        },
+        data(){
+            return{
+		            offer: {
+				            new: true,
+				            createdAt: Date.now(),
+				            contractor: {
+				                name: 'Josh Doel',
+						            img: ''
+                    },
+				            showDetails: true,
+				            yourOffer: [2,3,4,5],
+				            contractorOffer: [2,3,4,5],
+				            assets: [
+                        {
+		                        name: 'Asset name',
+		                        image: '',
+		                        price: {
+				                        current: 23.33
+		                        }
+                        },
+						            {
+								            name: 'Asset name',
+								            image: '',
+								            price: {
+										            current: 23.33
+								            }
+						            },
+						            {
+								            name: 'Asset name',
+								            image: '',
+								            price: {
+										            current: 23.33
+								            }
+						            },
+						            {
+								            name: 'Asset name',
+								            image: '',
+								            price: {
+										            current: 23.33
+								            }
+						            }
+                    ]
+                }
+            }
+        },
+        template: `<div class="p-5"><c-trade-offer :offer="offer" class="text-white" /></div>`
+    }))
+
+storiesOf('Receipt', module)
+    .add('default', () => ({
+		    components: {
+				    'c-table-simple': () => import('~/components/table-simple').then(m => m.default || m)
+		    },
+        template: `
+        <div style="width: 80%" class="text-white p-4">
+            <div class="row align-items-center margin-bottom-30 margin-top-20">
+                <div class="col-12 col-md-6 text-left">
+                    <div class="h2">
+                        Purchase receipt
+                    </div>
+                    <div class="h5">
+                        09092rj20902jd02j9j2d0j2
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 text-right">
+                    <strong>DATE</strong><br>
+                    December 23, 2018
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <c-block
+                        title="Purchase List"
+                        :bgColor="false"
+                        noGutter
+                        bgGradient
+                        onlyContentBg
+                        noPadding>
+                        <div class="padding-bottom-30 padding-top-15">
+                            <c-table-simple stripped>
+                                <thead>
+                                    <tr class="text-uppercase">
+                                        <th>
+                                            Content
+                                        </th>
+                                        <th>
+                                            Expiration
+                                        </th>
+                                        <th>
+                                            Authorization
+                                        </th>
+                                        <th />
+                                        <th>
+                                            Purchased from
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img
+                                                    src="img/logo-only.png"
+                                                    class="table-img" >
+                                                <div>
+                                                    <strong>
+                                                        Diablo III
+                                                    </strong>
+                                                    <br>
+                                                    Blizzard Entertainment INC
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                Expires on a Date
+                                            </strong>
+                                            <br>
+                                            July 8th 2019
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                Sell
+                                            </strong>
+                                            <br>
+                                            Yes, publisher earns 5%
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                Trade
+                                            </strong>
+                                            <br>
+                                            No
+                                        </td>
+                                        <td>
+                                            ETH 29.05
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                Diablo III
+                                            </strong>
+                                            <br>
+                                            Blizzard Entertainment INC
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                Expires on a Date
+                                            </strong>
+                                            <br>
+                                            July 8th 2019
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                Sell
+                                            </strong>
+                                            <br>
+                                            Yes, publisher earns 5%
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                Trade
+                                            </strong>
+                                            <br>
+                                            No
+                                        </td>
+                                        <td>
+                                            ETH 29.05
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                Diablo III
+                                            </strong>
+                                            <br>
+                                            Blizzard Entertainment INC
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                Expires on a Date
+                                            </strong>
+                                            <br>
+                                            July 8th 2019
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                Sell
+                                            </strong>
+                                            <br>
+                                            Yes, publisher earns 5%
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                Trade
+                                            </strong>
+                                            <br>
+                                            No
+                                        </td>
+                                        <td>
+                                            ETH 29.05
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </c-table-simple>
+                        </div>
+                    </c-block>
+                </div>
+                <div class="col-12">
+                    <c-block
+                        title="Totals"
+                        :bgColor="false"
+                        noGutter
+                        bgGradient
+                        onlyContentBg
+                        noPadding>
+                        <div class="padding-bottom-30 padding-top-15">
+                            <c-table-simple stripped>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                Subtotal
+                                            </strong>
+                                        </td>
+                                        <td class="text-right">
+                                            ETH 29.05
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                After discount
+                                            </strong>
+                                        </td>
+                                        <td class="text-right">
+                                            ETH 29.05
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                Total
+                                            </strong>
+                                        </td>
+                                        <td class="text-right">
+                                            ETH 29.05
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </c-table-simple>
+                        </div>
+                    </c-block>
+                </div>
+                <div class="col-12">
+                    <c-block
+                        title="Recipients"
+                        :bgColor="false"
+                        noGutter
+                        bgGradient
+                        onlyContentBg
+                        noPadding>
+                        <div class="padding-bottom-30 padding-top-15">
+                            <c-table-simple stripped>
+                                <thead>
+                                    <tr class="text-uppercase">
+                                        <th>
+                                            Amount
+                                        </th>
+                                        <th>
+                                            Paid To
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            ETH 23.66
+                                        </td>
+                                        <td>
+                                            Hyperbridge Technology Inc
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            ETH 193.63
+                                        </td>
+                                        <td>
+                                            Blizzard Technology Inc
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            ETH 3.04
+                                        </td>
+                                        <td>
+                                            TAX(GST)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </c-table-simple>
+                        </div>
+                    </c-block>
+                </div>
+            </div>
+        </div>
+        `
+    }))
+
+
+storiesOf('Order', module)
+    .add('default', () => ({
+		    components: {
+				    'c-table-simple': () => import('~/components/table-simple').then(m => m.default || m),
+		    },
+		    data(){
+				    return{
+						    tableHead:[
+								    {
+										    label: 'Purchased Assets',
+										    key: 'first'
+								    },
+								    {
+										    label: 'Price',
+										    key: 'second'
+								    },
+								    {
+										    label: 'QTy',
+										    key: 'third'
+								    },
+								    {
+										    label: 'Total',
+										    key: 'four'
+								    },
+						    ],
+						    tableRows: [
+								    {
+										    first: 'POLYART - Stylized Sky Dungean',
+										    third: '$9.99',
+										    second: 'x1',
+										    last: '$7.99',
+								    },
+								    {
+										    first: 'Archimatix Pro',
+										    third: '$19.99',
+										    second: 'x1',
+										    last: '$27.99',
+								    },
+						    ]
+				    }
+		    },
+        template: `
+            <div style="width: 80%" class="p-4 text-white">
+                <div class="row">
+                    <div class="col-12 mb-5">
+                        <c-block title="Thanks for your order!">
+                            <div class="order-info">
+                                <div class="order-info__number">
+                                    Order #23543422234234234
+                                </div>
+                                <div class="order-info__date">
+                                    Order date: Dec 8, 2019 3:50 PM
+                                </div>
+                            </div>
+                            <c-table-simple class="mt-5">
+                                <thead>
+                                    <tr>
+                                        <th v-for="(field, idx) in tableHead">
+                                            {{ field.label }}
+                                        </th>
+                                        <th width="60"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(row, idx) in tableRows">
+                                        <td v-for="(field, idx) in row">
+                                            {{ field }}
+                                        </td>
+                                        <td>
+                                            <c-button status="second-info">
+                                                Open
+                                            </c-button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </c-table-simple>
+                        </c-block>
+                    </div>
+                    <div class="col-12 col-lg-3 d-flex flex-column">
+                        <div class="h5">
+                            Payment Details
+                        </div>
+                        <div>
+                            <strong>
+                                Visa
+                            </strong>
+                            ending in 0183
+                        </div>
+                        <div>
+                            1239********0183
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 d-flex flex-column">
+                        <div class="h5">
+                            Billing information
+                        </div>
+                        <div>
+                            Eric Hansen
+                        </div>
+                        <div>
+                            1028 Barclay St. Apt 123
+                        </div>
+                        <div>
+                            Vancouver, British Columbia V6E 0B1 Canada
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4 ml-auto">
+                        <div class="h5 pt-0 mt-0">
+                            Order summary
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>
+                                Items
+                            </span>
+                            <span>
+                                $99.99
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>
+                                Discount
+                            </span>
+                            <span>
+                                $19.99
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>
+                                Subtotal
+                            </span>
+                            <span>
+                                $80.00
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>
+                                Tax
+                            </span>
+                            <span>
+                                $0.00
+                            </span>
+                        </div>
+                        <hr />
+                        <div class="h3 d-flex justify-content-between">
+                            <span>
+                                Order Total
+                            </span>
+                            <span>
+                                $80.00
+                            </span>
+                        </div>
+                        <div class="w-100 mt-5">
+                            <c-button status="second-success" class="w-100">
+                                Submit
+                            </c-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+    }))
+
+//
+// storiesOf('Item navigator', module)
+//     .add('default', () => ({
+//         components: {
+// 		        'c-navigator-item': () => import('~/components/item-navigator/item').then(m => m.default || m)
+//         },
+//         data(){
+//             return{
+// 		            deletingTree: null
+//             }
+//         },
+//         template: `<div class="p-5">
+//                         <c-navigator-item
+//                             v-for="(item, index) in deletingTree"
+//                             :key="index"
+//                             class="assets-tree--delete"
+//                             :index="index"
+//                             :item="item"
+//                             :listLength="3"
+//                             hideButtons />
+//                     </div>`
+//     }))
 
 
 

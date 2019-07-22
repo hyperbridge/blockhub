@@ -143,7 +143,7 @@ export default {
             createCollectionRequest: {
                 name: '',
                 meta: {
-                    author: 'Yvenide Belizaire',
+                    author: 'Anonymous',
                     background: null,
                     assets: [],
                     estimatedValue: 0
@@ -180,6 +180,8 @@ export default {
             this.createForm = false
 
             collection.owner = this.$store.state.application.activeProfile
+            collection.meta.author = this.$store.state.application.activeProfile.name
+            collection.meta.background = this.image
 
             await this.$store.dispatch('collections/create', [collection, {
                 query: {
@@ -187,6 +189,17 @@ export default {
                     '$eager': '[owner]'
                 }
             }])
+
+            // const { Collection } = this.$api
+
+            // const collection = await new Collection(data)
+
+            // collection.save({
+            //     query: {
+            //         '$joinRelation': '[owner]',
+            //         '$eager': '[owner]'
+            //     }
+            // })
 
             await this.fetchCollections()
         },
@@ -198,17 +211,9 @@ export default {
             }
 
             if (enabled) {
-                await this.$store.dispatch('collectionResource/create', [request, {
-                    query: {
-
-                    }
-                }])
+                await this.$store.dispatch('collectionResource/create', [request])
             } else {
-                await this.$store.dispatch('collectionResource/remove', [request, {
-                    query: {
-
-                    }
-                }])
+                await this.$store.dispatch('collectionResource/remove', [request])
             }
         }
     }
