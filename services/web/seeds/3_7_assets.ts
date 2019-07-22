@@ -2,7 +2,8 @@ import Asset from '../src/models/asset'
 
 export const data = [
     {
-        status: 'active'
+        status: 'active',
+        meta: {}
     }
 ]
 

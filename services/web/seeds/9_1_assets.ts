@@ -33,7 +33,7 @@ const data = [
                 "name": "Some short title"
             }
         ],
-        "metadata": {
+        "meta": {
             "type": "Legendary Two Handed Sword",
             "averageDps": 2903.6,
             "damageRangeMin": 0,
@@ -82,7 +82,7 @@ const data = [
                 "name": "Some short title"
             }
         ],
-        "metadata": {
+        "meta": {
             "type": "Legendary Two Handed Sword",
             "averageDps": 1420.6,
             "damageRangeMin": 0,
@@ -130,7 +130,7 @@ const data = [
                 "name": "Some short title"
             }
         ],
-        "metadata": {
+        "meta": {
             "type": "Legendary Two Handed Sword",
             "averageDps": 1142.6,
             "damageRangeMin": 0,
@@ -179,7 +179,7 @@ const data = [
                 "name": "Some short title"
             }
         ],
-        "metadata": {
+        "meta": {
             "type": "Legendary Two Handed Sword",
             "averageDps": 1142.6,
             "damageRangeMin": 0,
@@ -228,7 +228,7 @@ const data = [
                 "name": "Some short title"
             }
         ],
-        "metadata": {
+        "meta": {
             "type": "Legendary Two Handed Sword",
             "averageDps": 1442.6,
             "damageRangeMin": 0,
@@ -277,7 +277,7 @@ const data = [
                 "name": "Some short title"
             }
         ],
-        "metadata": {
+        "meta": {
             "type": "Legendary Two Handed Sword",
             "averageDps": 1230.6,
             "damageRangeMin": 0,
@@ -326,7 +326,7 @@ const data = [
                 "name": "Some short title"
             }
         ],
-        "metadata": {
+        "meta": {
             "type": "Legendary Two Handed Sword",
             "averageDps": 1441.6,
             "damageRangeMin": 0,
@@ -374,7 +374,7 @@ const data = [
                 "name": "Some short title"
             }
         ],
-        "metadata": {
+        "meta": {
             "type": "Legendary Two Handed Sword",
             "averageDps": 2341.6,
             "damageRangeMin": 0,
@@ -402,7 +402,7 @@ const data = [
         },
         "count": "450.00",
         "topPicksList": [],
-        "metadata": {
+        "meta": {
             "type": "Magic weapon",
             "averageDps": 141.6,
             "shield": 242,
@@ -430,7 +430,7 @@ const data = [
         },
         "count": "450.00",
         "topPicksList": [],
-        "metadata": {
+        "meta": {
             "type": "Magic weapon",
             "averageDps": 141.6,
             "shield": 142,
@@ -458,7 +458,7 @@ const data = [
         },
         "count": "450.00",
         "topPicksList": [],
-        "metadata": {
+        "meta": {
             "type": "Armor",
             "shield": 231,
             "magic_shield": 213,
@@ -486,7 +486,7 @@ const data = [
         },
         "count": "450.00",
         "topPicksList": [],
-        "metadata": {
+        "meta": {
             "type": "Weapon",
             "ammo_type": "Light Bullets",
             "fire_rate": 312,
@@ -513,7 +513,7 @@ const data = [
         },
         "count": "450.00",
         "topPicksList": [],
-        "metadata": {
+        "meta": {
             "type": "Weapon",
             "ammo_type": "Light Bullets",
             "fire_rate": 112,
@@ -540,7 +540,7 @@ const data = [
         },
         "count": "450.00",
         "topPicksList": [],
-        "metadata": {
+        "meta": {
             "type": "Armor",
             "shield": 412,
             "physical_shield": 142,

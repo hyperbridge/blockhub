@@ -2,7 +2,8 @@ import License from '../src/models/license'
 
 export const data = [
     {
-        status: 'active'
+        status: 'active',
+        meta: {}
     }
 ]
 

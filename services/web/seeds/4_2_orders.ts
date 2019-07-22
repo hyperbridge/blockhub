@@ -2,7 +2,8 @@ import Order from '../src/models/order'
 
 export const data = [
     {
-        status: 'active'
+        status: 'active',
+        meta: {}
     }
 ]
 

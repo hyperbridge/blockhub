@@ -2,7 +2,8 @@ import Leaderboard from '../src/models/leaderboard'
 
 export const data = [
     {
-        status: 'active'
+        status: 'active',
+        meta: {}
     }
 ]
 

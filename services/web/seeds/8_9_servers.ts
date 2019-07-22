@@ -2,7 +2,8 @@ import Server from '../src/models/server'
 
 export const data = [
     {
-        status: 'active'
+        status: 'active',
+        meta: {}
     }
 ]
 

@@ -4,27 +4,32 @@ export const data = [
     {
         status: 'active',
         value: 'Hello',
-        owner: { id: 1 }
+        owner: { id: 1 },
+        meta: {}
     },
     {
         status: 'active',
         value: 'World',
-        owner: { id: 1 }
+        owner: { id: 1 },
+        meta: {}
     },
     {
         status: 'active',
         value: 'Is it a good offer?',
-        owner: { id: 1 }
+        owner: { id: 1 },
+        meta: {}
     },
     {
         status: 'active',
         value: 'Looks good',
-        owner: { id: 1 }
+        owner: { id: 1 },
+        meta: {}
     },
     {
         status: 'active',
         value: 'Ok good',
-        owner: { id: 1 }
+        owner: { id: 1 },
+        meta: {}
     }
 ]
 

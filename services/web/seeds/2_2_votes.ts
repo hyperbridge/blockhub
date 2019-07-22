@@ -2,7 +2,8 @@ import Vote from '../src/models/vote'
 
 export const data = [
     {
-        status: 'active'
+        status: 'active',
+        meta: {}
     }
 ]
 

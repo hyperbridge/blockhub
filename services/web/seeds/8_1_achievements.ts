@@ -2,7 +2,8 @@ import Achievement from '../src/models/achievement'
 
 export const data = [
     {
-        status: 'active'
+        status: 'active',
+        meta: {}
     }
 ]
 

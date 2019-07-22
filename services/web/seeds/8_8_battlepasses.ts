@@ -2,7 +2,8 @@ import BattlePass from '../src/models/battlepass'
 
 export const data = [
     {
-        status: 'active'
+        status: 'active',
+        meta: {}
     }
 ]
 

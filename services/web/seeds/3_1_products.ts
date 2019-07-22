@@ -18,6 +18,7 @@ export const seed = async function (knex): Promise<any> {
             // TODO: Testing
             name: "My Product Name",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 revision: 0,
@@ -159,6 +160,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Might & Magic: Heroes VI",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -404,6 +406,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Capsized",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -518,6 +521,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "DOOM",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -665,6 +669,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "A Game of Thrones - Genesis",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -784,6 +789,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Teeworlds",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -996,6 +1002,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Wargame: European Escalation",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -1146,6 +1153,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "ArcaniA",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -1276,6 +1284,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Pride of Nations",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -1388,6 +1397,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Car Mechanic Simulator 2015 Demo",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -1532,6 +1542,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Kingdom Come: Deliverance",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -1680,6 +1691,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Fishing Planet",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -1849,6 +1861,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Men of War: Assault Squad",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -1979,6 +1992,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Sniper Elite V2",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -2109,6 +2123,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Chime",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -2219,6 +2234,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Who's That Flying?!",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -2308,6 +2324,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Fallout New Vegas: Dead Money",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -2413,6 +2430,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Fallout New Vegas: Honest Hearts",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -2521,6 +2539,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Call of Duty®: Black Ops",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -2638,6 +2657,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Homefront",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -2763,6 +2783,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "Mafia II",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -2793,7 +2814,7 @@ export const seed = async function (knex): Promise<any> {
                     "Action",
                     "Open World",
                     "Crime",
-                    "Story Rich",
+                    "Rich Story",
                     "Atmospheric",
                     "Singleplayer"
                 ],
@@ -2909,6 +2930,7 @@ export const seed = async function (knex): Promise<any> {
         {
             name: "The Witcher 2: Assassins of Kings Enhanced Edition",
             status: 'active',
+            type: 'game',
             owner,
             meta: {
                 price: 0,
@@ -2940,7 +2962,7 @@ export const seed = async function (knex): Promise<any> {
                     "Fantasy",
                     "Mature",
                     "Choices Matter",
-                    "Story Rich",
+                    "Rich Story",
                     "Third Person"
                 ],
                 languageSupport: [

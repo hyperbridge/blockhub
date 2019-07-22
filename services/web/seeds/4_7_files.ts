@@ -2,7 +2,8 @@ import File from '../src/models/file'
 
 export const data = [
     {
-        status: 'active'
+        status: 'active',
+        meta: {}
     }
 ]
 

@@ -2,7 +2,8 @@ import Rating from '../src/models/rating'
 
 export const data = [
     {
-        status: 'active'
+        status: 'active',
+        meta: {}
     }
 ]
 

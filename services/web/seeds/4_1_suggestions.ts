@@ -2,7 +2,8 @@ import Suggestion from '../src/models/suggestion'
 
 export const data = [
     {
-        status: 'active'
+        status: 'active',
+        meta: {}
     }
 ]
 

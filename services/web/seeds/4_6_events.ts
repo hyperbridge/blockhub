@@ -2,7 +2,8 @@ import Event from '../src/models/event'
 
 export const data = [
     {
-        status: 'active'
+        status: 'active',
+        meta: {}
     }
 ]
 
