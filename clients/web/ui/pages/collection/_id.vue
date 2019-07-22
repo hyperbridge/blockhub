@@ -1,120 +1,115 @@
 <template>
     <c-layout navigationKey="collection" :breadcrumbLinks="breadcrumbLinks">
         <div class="row">
-            <template v-if="!collection">
-                <p>Not found.</p>
-            </template>
-            <template v-else>
-                <div class="col-12 margin-bottom-40">
-                    <div class="collection-header">
-                        <div class="collection-header__name">
-                            <div class="p-0 margin-bottom-5 h1 text-white">
-                                {{ collection.name }}
-                            </div>
-                            <div>
-                                <strong class="mr-3">
-                                    {{ collection.resources.length }} Items
-                                </strong>
-                                <div v-if="collection.updatedAt">
-                                    Updated {{ timeAgo }}
-                                </div>
-                            </div>
+            <div class="col-12 margin-bottom-40">
+                <div class="collection-header">
+                    <div class="collection-header__name">
+                        <div class="p-0 margin-bottom-5 h1 text-white">
+                            {{ collection.name }}
                         </div>
-                        <div class="collection-header__stats">
-                            <div>
-                                <div class="h5 font-weight-bold m-0 p-0 text-white">
-                                    Owner
-                                </div>
-                                {{ collection.meta.author }}
-                            </div>
-                            <div>
-                                <div class="h5 font-weight-bold m-0 p-0 text-white">
-                                    Estimated Value
-                                </div>
-                                {{ collection.meta.estimatedValue | convertCurrency }}
-                            </div>
-                            <div>
-                                <div class="h5 font-weight-bold m-0 p-0 text-white">
-                                    Item Count
-                                </div>
-                                {{ collection.resources.length }}
-                            </div>
+                        <div>
+                            <strong class="mr-3">
+                                {{ collection.resources.length }} Items
+                            </strong>
                             <div v-if="collection.updatedAt">
-                                <div class="h5 font-weight-bold m-0 p-0 text-white">
-                                    Last Update
-                                </div>
-                                {{ timeAgo }}
+                                Updated {{ timeAgo }}
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12">
-                    <c-block>
-                        <c-heading-bar name="Items" />
-                        <div class="d-flex justify-content-between align-items-center margin-bottom-20">
-                            <div class="filter-block form-inline">
-                                <div class="form-group">
-                                    <label>
-                                        Filter by
-                                    </label>
-                                    <select
-                                        id="resourceType"
-                                        class="form-control">
-                                        <option>Type</option>
-                                        <option value="Product">
-                                            Product
-                                        </option>
-                                        <option value="Crowdfund">
-                                            Crowdfund
-                                        </option>
-                                        <option value="Idea">
-                                            Idea
-                                        </option>
-                                        <option value="Asset">
-                                            Digital Asset
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>
-                                        Name
-                                    </label>
-                                    <input
-                                        type="text"
-                                        class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <c-button
-                                        status="danger"
-                                        class="mr-4"
-                                        icon="times">
-                                        Clear
-                                    </c-button>
-                                    <c-button
-                                        hidden
-                                        status="info"
-                                        icon="filter">
-                                        More filters
-                                    </c-button>
-                                </div>
+                    <div class="collection-header__stats">
+                        <div>
+                            <div class="h5 font-weight-bold m-0 p-0 text-white">
+                                Owner
                             </div>
-                            <div class="d-inline-flex">
-                                <c-heading-bar-fields
-                                    name="Rarity"
-                                    icon="fas fa-trophy" />
-                                <c-heading-bar-fields
-                                    name="Value"
-                                    icon="fas fa-dollar" />
+                            {{ collection.meta.author }}
+                        </div>
+                        <div>
+                            <div class="h5 font-weight-bold m-0 p-0 text-white">
+                                Estimated Value
+                            </div>
+                            {{ collection.meta.estimatedValue | convertCurrency }}
+                        </div>
+                        <div>
+                            <div class="h5 font-weight-bold m-0 p-0 text-white">
+                                Item Count
+                            </div>
+                            {{ collection.resources.length }}
+                        </div>
+                        <div v-if="collection.updatedAt">
+                            <div class="h5 font-weight-bold m-0 p-0 text-white">
+                                Last Update
+                            </div>
+                            {{ timeAgo }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <c-block>
+                    <c-heading-bar name="Items" />
+                    <div class="d-flex justify-content-between align-items-center margin-bottom-20">
+                        <div class="filter-block form-inline">
+                            <div class="form-group">
+                                <label>
+                                    Filter by
+                                </label>
+                                <select
+                                    id="resourceType"
+                                    class="form-control">
+                                    <option>Type</option>
+                                    <option value="Product">
+                                        Product
+                                    </option>
+                                    <option value="Crowdfund">
+                                        Crowdfund
+                                    </option>
+                                    <option value="Idea">
+                                        Idea
+                                    </option>
+                                    <option value="Asset">
+                                        Digital Asset
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    Name
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <c-button
+                                    status="danger"
+                                    class="mr-4"
+                                    icon="times">
+                                    Clear
+                                </c-button>
+                                <c-button
+                                    hidden
+                                    status="info"
+                                    icon="filter">
+                                    More filters
+                                </c-button>
                             </div>
                         </div>
-                        <div v-for="resource in collection.resources">
-                            {{ resource.id }}
+                        <div class="d-inline-flex">
+                            <c-heading-bar-fields
+                                name="Rarity"
+                                icon="fas fa-trophy" />
+                            <c-heading-bar-fields
+                                name="Value"
+                                icon="fas fa-dollar" />
                         </div>
-                        <!-- <c-assets-grid :list="collection.resources" />
-                        <c-pagination :pages="8" /> -->
-                    </c-block>
-                </div>
-            </template>
+                    </div>
+                    <div v-for="resource in collection.resources">
+                        {{ resource.id }}
+                    </div>
+                    <!-- <c-assets-grid :list="collection.resources" />
+                    <c-pagination :pages="8" /> -->
+                </c-block>
+            </div>
         </div>
     </c-layout>
 </template>
@@ -146,6 +141,11 @@ export default {
             return moment(this.collection.updatedAt).fromNow()
         }
     },
+    data() {
+        return {
+            collection: []
+        }
+    },
     async asyncData({ params, store, error }) {
         const collection = (await store.dispatch('collections/find', {
             query: {
@@ -163,7 +163,7 @@ export default {
                     'Idea': 'ideas',
                     'Asset': 'assets'
                 }
-console.log(typeToService[resource.relationType], resource)
+
                 return store.dispatch(`${typeToService[resource.relationType]}/find`, {
                     query: {
                         id: resource[`to${resource.relationType}Id`]
