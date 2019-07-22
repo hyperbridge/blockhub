@@ -80,7 +80,7 @@
                     <tbody>
                         <tr>
                             <td>{{ contrName }} items:</td>
-                            <td>- {{ totalVal[contrName] | convertCurrency }}</td>
+                            <td>- {{ totalVal[contrName] | convertCurrency }}</td> <blo></blo>
                         </tr>
                         <tr>
                             <td>Yours items:</td>

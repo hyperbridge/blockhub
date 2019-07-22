@@ -12,10 +12,10 @@
         </c-swiper>
         <p v-if="!reviews.length">
             Nothing could be found. Want to <c-button
-                status="plain"
-                @click="$store.commit('application/activeModal', 'comingSoon')">
-                Check for updates
-            </c-button>?
+            status="plain"
+            @click="$store.commit('application/activeModal', 'comingSoon')">
+            Check for updates
+        </c-button>?
         </p>
     </div>
 </template>
