@@ -103,7 +103,8 @@ export default {
     data() {
         return {
             breadcrumbLinks: false,
-            showWelcomeModal: false // ['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode) && !this.$store.state.application.settings.client.hideWelcomeModal,
+            showWelcomeModal: false, // ['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode) && !this.$store.state.application.settings.client.hideWelcomeModal,
+            collections: []
         }
     },
     computed: {
@@ -351,14 +352,14 @@ export default {
         }
     },
     async mounted() {
-        this.collections = await store.dispatch('collections/find', {
+        this.collections = (await this.$store.dispatch('collections/find', {
             query: {
                 $sort: {
                     createdAt: -1
                 },
                 $limit: 25
             }
-        })
+        })).data
 
         this.updateLandingImage()
     },

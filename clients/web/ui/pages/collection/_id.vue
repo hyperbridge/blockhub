@@ -1,6 +1,7 @@
 <template>
     <c-layout navigationKey="collection" :breadcrumbLinks="breadcrumbLinks">
-        <div class="row">
+        <c-loading size="lg" :enabled="!collection" />
+        <div class="row" v-if="collection">
             <div class="col-12 margin-bottom-40">
                 <div class="collection-header">
                     <div class="collection-header__name">
@@ -119,6 +120,8 @@ import moment from 'moment'
 
 export default {
     head() {
+        if (!this.collection) return {}
+
         return {
             title: `${this.collection.name} | BlockHub`,
             meta: [
@@ -143,43 +146,55 @@ export default {
     },
     data() {
         return {
-            collection: []
+            collection: null,
+            breadcrumbLinks: []
         }
     },
+    async mounted() {
+        Object.assign(this, await new Promise(this.fetchData))
+    },
     async asyncData({ params, store, error }) {
-        const collection = (await store.dispatch('collections/find', {
-            query: {
-                id: Number(params.id)
-            }
-        })).data[0]
-
-        if (!collection) return error({ statusCode: 404, message: 'Collection not found' })
-
-        if (collection.resources) {
-            collection.resources = await Promise.all(collection.resources.map(resource => {
-                const typeToService = {
-                    'Product': 'products',
-                    'Project': 'projects',
-                    'Idea': 'ideas',
-                    'Asset': 'assets'
+        const fetchData = async (resolve, reject) => {
+            const collection = (await store.dispatch('collections/find', {
+                query: {
+                    id: Number(params.id)
                 }
+            })).data[0]
 
-                return store.dispatch(`${typeToService[resource.relationType]}/find`, {
-                    query: {
-                        id: resource[`to${resource.relationType}Id`]
+            if (!collection) return error({ statusCode: 404, message: 'Collection not found' })
+
+            if (collection.resources) {
+                collection.resources = await Promise.all(collection.resources.map(resource => {
+                    const typeToService = {
+                        'Product': 'products',
+                        'Project': 'projects',
+                        'Idea': 'ideas',
+                        'Asset': 'assets'
                     }
-                })
-            }))
-        } else {
-            collection.resources = []
+
+                    return store.dispatch(`${typeToService[resource.relationType]}/find`, {
+                        query: {
+                            id: resource[`to${resource.relationType}Id`]
+                        }
+                    })
+                }))
+            } else {
+                collection.resources = []
+            }
+
+            resolve({
+                collection,
+                breadcrumbLinks: [
+                    { to: { path: '/' }, title: 'Home' },
+                    { to: { path: `/collection/${collection.id}` }, title: collection.name }
+                ]
+            })
         }
 
-        return {
-            collection,
-            breadcrumbLinks: [
-                { to: { path: '/' }, title: 'Home' },
-                { to: { path: `/collection/${collection.id}` }, title: collection.name }
-            ]
+        if (process.server) {
+            return await new Promise(fetchData)
+        } else {
+            return { fetchData }
         }
     }
 }
