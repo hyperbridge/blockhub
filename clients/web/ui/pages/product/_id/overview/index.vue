@@ -469,7 +469,7 @@ export default {
                 image: this.product.meta.images.mediumTile,
                 name: this.product.name,
                 description: this.product.meta.shortDescription,
-                resourceType: 'product',
+                resourceType: 'Product',
                 resourceId: this.product.id
             })
         }

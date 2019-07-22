@@ -80,8 +80,9 @@
                             :key="idx"
                             class="my-3"
                             :class="{ 'mt-0' : idx == 1 }"
+                            :checked="(collection.resources || []).find(r => r.toProductId === resourceId)"
                             @change="updateResource(collection, $event)">
-                            {{ collection.name }} zzz
+                            {{ collection.name }}
                         </c-checkbox>
                     </c-checkbox-group>
                     <div
@@ -190,19 +191,20 @@ export default {
             await this.fetchCollections()
         },
         async updateResource(collection, enabled) {
-            const resource = {
-                id: this.resourceId,
-                type: this.resourceType
+            const request = {
+                collectionId: collection.id,
+                resourceType: this.resourceType,
+                resourceId: this.resourceId
             }
 
             if (enabled) {
-                await this.$store.dispatch('collections/addResource', [collection.id, resource, {
+                await this.$store.dispatch('collectionResource/create', [request, {
                     query: {
 
                     }
                 }])
             } else {
-                await this.$store.dispatch('collections/removeResource', [collection.id, resource, {
+                await this.$store.dispatch('collectionResource/remove', [request, {
                     query: {
 
                     }

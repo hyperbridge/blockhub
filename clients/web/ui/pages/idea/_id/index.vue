@@ -387,7 +387,7 @@ export default {
         this.updateSection()
     },
     beforeDestroy() {
-        if (process.client) {
+        if (process.client && window.document.getElementById('header-bg')) {
             window.document.getElementById('header-bg').style['background-image'] = 'url(/img/backgrounds/1.jpg)'
         }
     },

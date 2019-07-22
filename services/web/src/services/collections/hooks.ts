@@ -1,22 +1,30 @@
+import Node from '../../models/node'
+
 const { authenticate } = require('@feathersjs/authentication').hooks
 const Collection = require('../../models/collection').default
 const Ajv = require('ajv')
 const { validateSchema } = require('feathers-hooks-common')
 
-const fillCollection = function (collection): any {
+const fillCollection = async function (collection): Promise<any> {
+    collection.resources = await Node.query().where({
+        fromCollectionId: collection.id,
+        toProductId: 4,
+        relationKey: 'resource'
+    })
+
     return collection
 }
 
 const fillOne = function (options = {}): any {
     return async context => {
-        context.data = fillCollection(context.data)
+        context.data = await fillCollection(context.data)
         return context
     }
 }
 
 const fillAll = function (options = {}): any {
     return async context => {
-        context.result.data = context.result.data.map(collection => fillCollection(collection))
+        context.result.data = await Promise.all(context.result.data.map(collection => fillCollection(collection)))
 
         return context
     }
