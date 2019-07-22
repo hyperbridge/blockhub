@@ -11,7 +11,7 @@ import { CookieStorage } from 'cookie-storage'
 import Cookie from 'cookie-universal'
 import serviceHandlers from '../services'
 
-const useSockets = false
+const useSockets = process.env.API_WEBSOCKETS_ENABLED === 'true' || false
 
 export default async ({ app, store }) => {
     const { dispatch, commit } = store
@@ -52,7 +52,7 @@ export default async ({ app, store }) => {
         feathersClient.configure(rest(serviceUrl).axios(axios))
     }
 
-    let { service, auth, FeathersVuex } = feathersVuex(feathersClient, {
+    let { auth, service, FeathersVuex } = feathersVuex(feathersClient, {
         idField: 'id',
         enableEvents: true
     })
@@ -108,27 +108,29 @@ export default async ({ app, store }) => {
         }).catch(e => { console.log('Feathers exception', e) })
     }
 
-    if (store.state.application.decentralizedMode) {
-        service = serviceKey => {
-            // if (blockhub.bridge.isConnected()) { // && blockhub.bridge.canFulfillRequest(endpoint
-            //     console.log('if')
-            //     return {
-            //         find: params => {
-            //             blockhub.bridge.sendCommand('service', {
-            //                 serviceKey,
-            //                 type: 'find',
-            //                 params
-            //             })
-            //         }
-            //     }
-            // }
-            console.log('servicekey', serviceKey)
-            return app.feathers.service(serviceKey)
-        }
-    }
+    let api = null
 
-    const api = {
-        service
+    if (store.state.application.decentralizedMode) {
+        api = {
+            service: serviceKey => {
+                // if (blockhub.bridge.isConnected()) { // && blockhub.bridge.canFulfillRequest(endpoint
+                //     console.log('if')
+                //     return {
+                //         find: params => {
+                //             blockhub.bridge.sendCommand('service', {
+                //                 serviceKey,
+                //                 type: 'find',
+                //                 params
+                //             })
+                //         }
+                //     }
+                // }
+                console.log('servicekey', serviceKey)
+                return app.feathers.service(serviceKey)
+            }
+        }
+    } else {
+        api = feathersClient
     }
 
     // Set feathers instance on app
