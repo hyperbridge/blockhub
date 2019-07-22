@@ -85,10 +85,6 @@
 
 
 <script>
-function isVisible(availableFlags, userFlags, code, variant, data) {
-    return availableFlags.map(flag => flag.code).includes(code) && userFlags.map(flag => flag.enabled ? flag.code : null).includes(code)
-}
-
 export default {
     head() {
         return {
@@ -355,33 +351,16 @@ export default {
         }
     },
     async mounted() {
-
-        this.updateLandingImage()
-
-        // TODO: collections should be Array not object
-        this.$store.dispatch('collections/find', {
+        this.collections = await store.dispatch('collections/find', {
             query: {
                 $sort: {
                     createdAt: -1
                 },
                 $limit: 25
             }
-        }).then(res => {
-            this.collections = res.data
         })
 
-        // this.$store.dispatch('products/find', {
-        //     query: {
-        //         'type': 'game',
-        //         'tags.name': 'Released',
-        //         '$joinRelation': 'tags',
-        //         '$eager': 'tags',
-        //         '$sort[releaseDate]': -1,
-        //         '$limit': 20
-        //     }
-        // }).then(res => {
-        //     this.newReleases = res.data
-        // })
+        this.updateLandingImage()
     },
     created() {
         this.updateLandingImage()
