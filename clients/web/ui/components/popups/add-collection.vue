@@ -190,6 +190,17 @@ export default {
                 }
             }])
 
+            // const { Collection } = this.$api
+
+            // const collection = await new Collection(data)
+
+            // collection.save({
+            //     query: {
+            //         '$joinRelation': '[owner]',
+            //         '$eager': '[owner]'
+            //     }
+            // })
+
             await this.fetchCollections()
         },
         async updateResource(collection, enabled) {

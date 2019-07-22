@@ -2,7 +2,6 @@ import Model from '../../models/collection'
 import Node from '../../models/node'
 import createService = require('feathers-objection')
 import hooks = require('./hooks')
-import application from '../application';
 
 export default function (app): any {
     const paginate = app.get('paginate')
@@ -29,8 +28,8 @@ export default function (app): any {
 
     app.use('/collections', createService(options))
 
-    app.use('/collectionResource', {
-        async create(data, params) {
+    app.use('/collections/resource', {
+        async create (data, params) {
             const node = await Node.query().insert({
                 fromCollectionId: data.collectionId,
                 [`to${data.resourceType}Id`]: data.resourceId,
@@ -39,8 +38,12 @@ export default function (app): any {
 
             return node
         },
-        async remove(id, data, params) {
-
+        async remove (id, data, params) {
+            await Node.query().where({
+                fromCollectionId: data.collectionId,
+                [`to${data.resourceType}Id`]: data.resourceId,
+                relationKey: 'resource'
+            }).delete()
         }
     })
 
