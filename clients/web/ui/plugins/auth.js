@@ -15,7 +15,7 @@ const getHashParam = param => {
 let initialized = false
 
 export default async ({ store, redirect, route, req }) => {
-    if (store.state.auth.payload && initialized) {
+    if (initialized) { // store.state.auth.payload &&
         return
     }
 

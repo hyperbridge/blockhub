@@ -135,7 +135,7 @@ export const setAccountRequest = async data => new Promise(async resolve => {
 
 export const sendCommand = async (key, data = {}, peer = null, responseId = null) => {
     if (!isConnected()) {
-        console.log('[Bridge] Cant send command. Reason: not connected to desktop app', key)
+        console.info('[BlockHub] Cant send command. Reason: not connected to desktop app', key)
 
         // Ignore startup commands
         if (key !== 'initProtocol' && key !== 'error' && key !== 'updateState') {
@@ -152,10 +152,10 @@ export const sendCommand = async (key, data = {}, peer = null, responseId = null
         data
     }
 
-    console.log('[Bridge] Sending command', cmd)
+    console.info('[BlockHub] Sending command', cmd)
 
     if (!local.bridge) {
-        console.warn('[Bridge] Not connected to bridge. This shouldnt happen.')
+        console.warn('[BlockHub] Not connected to bridge. This shouldnt happen.')
     }
 
     let _resolve; let _reject
@@ -174,7 +174,7 @@ export const sendCommand = async (key, data = {}, peer = null, responseId = null
 }
 
 export const runCommand = async (cmd, meta = {}) => {
-    console.log('[Bridge] Running command', cmd.key)
+    console.log('[BlockHub] Running command', cmd.key)
 
     return new Promise(async (resolve, reject) => {
         emit(cmd.key, cmd.data ? cmd.data : undefined)
@@ -183,7 +183,7 @@ export const runCommand = async (cmd, meta = {}) => {
 
         if (cmd.responseId) {
             if (local.requests[cmd.responseId]) {
-                console.log('[Bridge] Running response callback', cmd.responseId)
+                console.log('[BlockHub] Running response callback', cmd.responseId)
 
                 local.requests[cmd.responseId].resolve(cmd.data)
 
@@ -194,7 +194,7 @@ export const runCommand = async (cmd, meta = {}) => {
         }
 
         if (cmd.key === 'heartbeat') {
-            console.log('[Bridge] Heartbeat')
+            console.log('[BlockHub] Heartbeat')
 
             setTimeout(() => {
                 sendCommand('heartbeat', 1)
@@ -238,7 +238,7 @@ export const runCommand = async (cmd, meta = {}) => {
         } else if (cmd.key === 'updateState') {
             local.store.commit(`${cmd.data.module}/updateState`, cmd.data.state)
         } else if (cmd.key === 'systemError') {
-            console.warn('[Bridge] Received system error from desktop', cmd.data)
+            console.warn('[BlockHub] Received system error from desktop', cmd.data)
 
             this.$blockhub.Notification.error(cmd.data, 'System Error', {
                 timeout: 0,
@@ -254,7 +254,7 @@ export const runCommand = async (cmd, meta = {}) => {
         } else if (cmd.key === 'navigate') {
             local.redirect(cmd.data)
         } else {
-            console.warn('[Bridge] Unhandled command:', cmd)
+            console.warn('[BlockHub] Unhandled command:', cmd)
         }
 
         sendCommand('response', res, meta.client, cmd.requestId)
@@ -265,7 +265,7 @@ export const runCommand = async (cmd, meta = {}) => {
 
 export const initCommandMonitor = () => {
     local.bridge.on('command', (event, msg) => {
-        console.log('[Bridge] Received command from desktop', msg)
+        console.log('[BlockHub] Received command from desktop', msg)
 
         const cmd = JSON.parse(msg)
 
@@ -315,12 +315,12 @@ export const init = (store, redirect) => {
     local.bridge = process.client ? window.ipcRenderer : { send: () => {} }
 
     if (!isConnected()) {
-        console.log('[Bridge] Not initializing. Reason: not connected to desktop app')
+        console.log('[BlockHub] Bridge not initializing. Reason: not connected to desktop app')
 
         return false
     }
 
-    console.log('[Bridge] Initializing')
+    console.log('[BlockHub] Initializing bridge')
 
     on('promptPasswordRequest', data => {
         local.store.state.application.account.secretQuestion1 = data.secretQuestion1

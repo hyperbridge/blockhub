@@ -256,7 +256,7 @@ export default {
                 }
             })
 
-            if (this.$access('curators')) {
+            if (this.$access('curator.read')) {
                 result.push({
                     type: 'curatorReviews',
                     data: {

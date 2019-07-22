@@ -306,7 +306,6 @@ export const mutations = {
         state.account.tradeLinkId = id
     },
     signedIn(state, payload) {
-        console.log('signedIn', state, payload)
         state.signedIn = payload
     },
     setEditorMode(state, payload) {

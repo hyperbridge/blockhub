@@ -68,7 +68,6 @@ export default {
     },
     computed: {
         disableAnimations() {
-            console.log('disable', this.$store.state.application)
             return this.$store.state.application.settings.client.animations
         }
     },
