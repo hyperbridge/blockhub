@@ -13,9 +13,11 @@
                             </div>
                             <div>
                                 <strong class="mr-3">
-                                    {{ assets.length }} Items
+                                    {{ collection.resources.length }} Items
                                 </strong>
-                                Updated {{ timeAgo }}
+                                <div v-if="collection.updatedAt">
+                                    Updated {{ timeAgo }}
+                                </div>
                             </div>
                         </div>
                         <div class="collection-header__stats">
@@ -23,21 +25,21 @@
                                 <div class="h5 font-weight-bold m-0 p-0 text-white">
                                     Owner
                                 </div>
-                                {{ collection.author }}
+                                {{ collection.meta.author }}
                             </div>
                             <div>
                                 <div class="h5 font-weight-bold m-0 p-0 text-white">
                                     Estimated Value
                                 </div>
-                                {{ collection.estimatedValue | convertCurrency }}
+                                {{ collection.meta.estimatedValue | convertCurrency }}
                             </div>
                             <div>
                                 <div class="h5 font-weight-bold m-0 p-0 text-white">
                                     Item Count
                                 </div>
-                                {{ assets.length }}
+                                {{ collection.resources.length }}
                             </div>
-                            <div>
+                            <div v-if="collection.updatedAt">
                                 <div class="h5 font-weight-bold m-0 p-0 text-white">
                                     Last Update
                                 </div>
@@ -50,28 +52,28 @@
                     <c-block>
                         <c-heading-bar name="Items" />
                         <div class="d-flex justify-content-between align-items-center margin-bottom-20">
-                            <div class="filter_blk form-inline">
+                            <div class="filter-block form-inline">
                                 <div class="form-group">
                                     <label>
                                         Filter by
                                     </label>
                                     <select
-                                        id="exampleFormControlSelect1"
+                                        id="resourceType"
                                         class="form-control">
                                         <option>Type</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                        <option value="Product">
+                                            Product
+                                        </option>
+                                        <option value="Crowdfund">
+                                            Crowdfund
+                                        </option>
+                                        <option value="Idea">
+                                            Idea
+                                        </option>
+                                        <option value="Asset">
+                                            Digital Asset
+                                        </option>
                                     </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>
-                                        Game
-                                    </label>
-                                    <input
-                                        type="text"
-                                        class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>
@@ -89,6 +91,7 @@
                                         Clear
                                     </c-button>
                                     <c-button
+                                        hidden
                                         status="info"
                                         icon="filter">
                                         More filters
@@ -104,8 +107,11 @@
                                     icon="fas fa-dollar" />
                             </div>
                         </div>
-                        <c-assets-grid :list="assets" />
-                        <c-pagination :pages="8" />
+                        <div v-for="resource in collection.resources">
+                            {{ resource.id }}
+                        </div>
+                        <!-- <c-assets-grid :list="collection.resources" />
+                        <c-pagination :pages="8" /> -->
                     </c-block>
                 </div>
             </template>
@@ -117,6 +123,15 @@
 import moment from 'moment'
 
 export default {
+    head() {
+        return {
+            title: `${this.collection.name} | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: 'BlockHub is a next-generation decentralized digital distribution platform' },
+                { hid: 'keywords', name: 'keywords', content: 'blockhub, hyperbridge, blockchain, cryptocurrency, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
         'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
@@ -127,32 +142,36 @@ export default {
         id() {
             return this.$route.params.id
         },
-        assets() {
-            if (!this.collection.meta.assets) return []
-
-            return this.collection.meta.assets.map(id => this.$store.getters['assets/get'](id))
-        },
         timeAgo() {
             return moment(this.collection.updatedAt).fromNow()
         }
     },
     async asyncData({ params, store, error }) {
-        await store.dispatch('collections/find', {
+        const collection = (await store.dispatch('collections/find', {
             query: {
                 id: Number(params.id)
             }
-        })
-
-        const collection = store.getters['collections/get'](params.id)
+        })).data[0]
 
         if (!collection) return error({ statusCode: 404, message: 'Collection not found' })
 
-        if (collection.meta.assets) {
-            await Promise.all(collection.meta.assets.map(id => store.dispatch('assets/find', {
-                query: {
-                    id
+        if (collection.resources) {
+            collection.resources = await Promise.all(collection.resources.map(resource => {
+                const typeToService = {
+                    'Product': 'products',
+                    'Project': 'projects',
+                    'Idea': 'ideas',
+                    'Asset': 'assets'
                 }
-            })))
+console.log(typeToService[resource.type], resource)
+                return store.dispatch(`${typeToService[resource.type]}/find`, {
+                    query: {
+                        id: resource[`to${resource.type}Id`]
+                    }
+                })
+            }))
+        } else {
+            collection.resources = []
         }
 
         return {
@@ -185,7 +204,7 @@ export default {
             }
         }
     }
-    .filter_blk{
+    .filter-block{
         display: inline-flex;
         align-items: center;
         .form-group{
