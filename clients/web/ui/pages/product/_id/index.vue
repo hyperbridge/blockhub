@@ -658,6 +658,8 @@ export default {
         if (this.id === 'new') {
             this.$store.dispatch('application/setEditorMode', 'editing')
         }
+
+        this.updateLandingImage()
     },
     async created() {
         if (process.client) window.onbeforeunload = this.unsaved
@@ -691,6 +693,18 @@ export default {
         })
     },
     methods: {
+        updateLandingImage() {
+            if (!process.client) return
+            if (this.product.meta.images && this.product.meta.images.preview && this.product.meta.images.preview.length) {
+                /*
+                TODO: Make header-bg accesible by $refs
+                */
+                const header = window.document.getElementById('header-bg');
+                const randomImage = Math.floor(Math.random() * this.product.meta.images.preview.length);
+                header.style['background-image'] = 'url(' + this.product.meta.images.preview[randomImage] + ')';
+                header.style['background-size'] = 'cover';
+            }
+        },
         updateSection() {
             return
             if (!this.section) {
