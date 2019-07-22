@@ -76,6 +76,7 @@ export const before = {
     all: [],
     find: [],
     get: [],
+    // @ts-ignore
     create: [hooks.authenticate('jwt'), create(), validateSchema(Collection.jsonSchema, Ajv)],
     update: [hooks.authenticate('jwt'), validatePermission()],
     patch: [hooks.authenticate('jwt'), validatePermission()],
