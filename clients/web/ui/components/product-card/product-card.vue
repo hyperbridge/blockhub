@@ -23,21 +23,21 @@
 </template>
 
 <script>
-    export default {
-        components: {
-            'c-tags': () => import('~/components/tags').then(m => m.default || m)
-        },
-        props: {
-            id: Number,
-            mediumTile: String,
-            name: String,
-            shortDescription: String,
-            developerTags: {
-                type: Array,
-                default: () => []
-            }
+export default {
+    components: {
+        'c-tags': () => import('~/components/tags').then(m => m.default || m)
+    },
+    props: {
+        id: Number,
+        mediumTile: String,
+        name: String,
+        shortDescription: String,
+        developerTags: {
+            type: Array,
+            default: () => []
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

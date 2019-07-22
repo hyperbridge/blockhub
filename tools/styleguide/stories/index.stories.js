@@ -3087,9 +3087,9 @@ storiesOf('Gallery', module)
     }))
 
 
-import ProductCardDynamic from '@/components/store/product-card-dynamic';
-import ProductCard from '@/components/store/product-card';
-import ProductsCards from '@/components/store/product-cards';
+import ProductCardDynamic from '@/components/product-card/product-card-dynamic';
+import ProductCard from '@/components/product-card/product-card';
+import ProductsCards from '@/components/product-card/product-cards';
 
 const productsCardsData = [
     {
@@ -3207,8 +3207,8 @@ storiesOf('Product Card', module)
     }))
 
 
-import CuratorReview from '@/components/store/curator-review';
-import CuratorsReviews from '@/components/store/curator-reviews';
+import CuratorReview from '@/components/curator-review';
+import CuratorsReviews from '@/components/curator-reviews';
 
 const curatorReview = {
     author: {name: 'SatoSan', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'},

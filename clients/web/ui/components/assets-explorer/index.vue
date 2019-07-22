@@ -146,10 +146,10 @@
                 <div v-else-if="filtersActive">
                     <p>
                         No products were found using these filters. Want to <c-button
-                        status="plain"
-                        @click="$store.commit('application/activeModal', 'comingSoon')">
-                        Check for updates
-                    </c-button>?
+                            status="plain"
+                            @click="$store.commit('application/activeModal', 'comingSoon')">
+                            Check for updates
+                        </c-button>?
                     </p>
                     <c-button
                         status="info"
@@ -161,10 +161,10 @@
                 </div>
                 <p v-else>
                     Nothing could be found. Want to <c-button
-                    status="plain"
-                    @click="$store.commit('application/activeModal', 'comingSoon')">
-                    Check for updates
-                </c-button>?
+                        status="plain"
+                        @click="$store.commit('application/activeModal', 'comingSoon')">
+                        Check for updates
+                    </c-button>?
                 </p>
             </c-block>
         </div>
@@ -172,112 +172,112 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
-    export default {
-        name: 'AssetsExplorer',
-        components: {
-            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-            'c-block': () => import('~/components/block').then(m => m.default || m),
-            'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
-            'c-dropdown': () => import('~/components/dropdown-menu/type-2').then(m => m.default || m),
-            'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
-            'c-assets-list': () => import('~/components/assets-list-item').then(m => m.default || m),
-            'c-dropdown-menu': () => import('~/components/dropdown-menu/type-3').then(m => m.default || m),
-            'c-list': () => import('~/components/list').then(m => m.default || m),
-            'c-option-tag': () => import('~/components/option-tag').then(m => m.default || m)
+export default {
+    name: 'AssetsExplorer',
+    components: {
+        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+        'c-block': () => import('~/components/block').then(m => m.default || m),
+        'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
+        'c-dropdown': () => import('~/components/dropdown-menu/type-2').then(m => m.default || m),
+        'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
+        'c-assets-list': () => import('~/components/assets-list-item').then(m => m.default || m),
+        'c-dropdown-menu': () => import('~/components/dropdown-menu/type-3').then(m => m.default || m),
+        'c-list': () => import('~/components/list').then(m => m.default || m),
+        'c-option-tag': () => import('~/components/option-tag').then(m => m.default || m)
+    },
+    props: {
+        assets: {
+            type: Array,
+            required: true
+        }
+    },
+    data() {
+        return {
+            phrase: '',
+            selectableGenres: [],
+            selectableProducts: [],
+            sortBy: {
+                property: '',
+                priceProp: 'current',
+                asc: true
+            },
+            sortOptions: [
+                { title: 'Name', property: 'name', icon: 'language' },
+                { title: 'Price', property: 'price', icon: 'dollar-sign' }
+            ]
+        }
+    },
+    methods: {
+        clearFilters() {
+            this.phrase = ''
+            this.sortBy.property = ''
+            this.sortBy.asc = true
+            this.selectedProducts.forEach(product => product.selected = false)
+            this.selectedGenres.forEach(genre => genre.selected = false)
         },
-        props: {
-            assets: {
-                type: Array,
-                required: true
-            }
+        setSort(prop, direction) {
+            const { property, asc } = this.sortBy
+            this.sortBy.property = property === prop && direction === asc
+                ? null
+                : prop
+            this.sortBy.asc = direction
+        }
+    },
+    computed: {
+        genres(){
+            return []
         },
-        data() {
-            return {
-                phrase: '',
-                selectableGenres: [],
-                selectableProducts: [],
-                sortBy: {
-                    property: '',
-                    priceProp: 'current',
-                    asc: true
-                },
-                sortOptions: [
-                    { title: 'Name', property: 'name', icon: 'language' },
-                    { title: 'Price', property: 'price', icon: 'dollar-sign' }
-                ]
-            }
+        products() {
+            return []
         },
-        methods: {
-            clearFilters() {
-                this.phrase = ''
-                this.sortBy.property = ''
-                this.sortBy.asc = true
-                this.selectedProducts.forEach(product => product.selected = false)
-                this.selectedGenres.forEach(genre => genre.selected = false)
-            },
-            setSort(prop, direction) {
-                const { property, asc } = this.sortBy
-                this.sortBy.property = property === prop && direction === asc
-                    ? null
-                    : prop
-                this.sortBy.asc = direction
-            }
+        selectedProducts() {
+            return this.selectableProducts.filter(product => product.selected)
         },
-        computed: {
-            genres(){
-                return []
-            },
-            products() {
-                return []
-            },
-            selectedProducts() {
-                return this.selectableProducts.filter(product => product.selected)
-            },
-            selectedProductsNames() {
-                return this.selectedProducts.map(product => product.name)
-            },
-            selectedGenres() {
-                return this.selectableGenres.filter(genre => genre.selected)
-            },
-            filtersActive() {
-                return Boolean(this.selectedProducts.length ||
+        selectedProductsNames() {
+            return this.selectedProducts.map(product => product.name)
+        },
+        selectedGenres() {
+            return this.selectableGenres.filter(genre => genre.selected)
+        },
+        filtersActive() {
+            return Boolean(this.selectedProducts.length ||
                     this.phrase ||
                     this.selectedGenres.length ||
                     this.sortBy.property)
-            },
-            filteredAssets() {
-                const { property, asc, priceProp } = this.sortBy
-                const { phrase, selectedProductsNames } = this
-                const sortDir = dir => asc ? dir : dir * -1
-
-                return this.assets
-                    .filter(asset => phrase
-                        ? asset.name.toLowerCase().includes(phrase.toLowerCase())
-                        : true)
-                    .filter(asset => selectedProductsNames.length
-                        ? selectedProductsNames.includes(asset.productName)
-                        : true)
-                    .sort((a, b) => property
-                        ? property === 'price'
-                            ? a.price[priceProp] > b.price[priceProp]
-                                ? sortDir(1)
-                                : a.price[priceProp] < b.price[priceProp] ? sortDir(-1) : 0
-                            : a[property] > b[property]
-                                ? sortDir(1)
-                                : a[property] < b[property] ? sortDir(-1) : 0
-                        : 0)
-            },
-            priceProps() {
-                return Object.keys(this.assets[0].price)
-            }
         },
-        mounted() {
-            this.selectableGenres = this.genres.map(name => ({ name, selected: false }))
-            this.selectableProducts = this.products.map(name => ({ name, selected: false }))
+        filteredAssets() {
+            const { property, asc, priceProp } = this.sortBy
+            const { phrase, selectedProductsNames } = this
+            const sortDir = dir => asc ? dir : dir * -1
+
+            return this.assets
+                .filter(asset => phrase
+                    ? asset.name.toLowerCase().includes(phrase.toLowerCase())
+                    : true)
+                .filter(asset => selectedProductsNames.length
+                    ? selectedProductsNames.includes(asset.productName)
+                    : true)
+                .sort((a, b) => property
+                    ? property === 'price'
+                        ? a.price[priceProp] > b.price[priceProp]
+                            ? sortDir(1)
+                            : a.price[priceProp] < b.price[priceProp] ? sortDir(-1) : 0
+                        : a[property] > b[property]
+                            ? sortDir(1)
+                            : a[property] < b[property] ? sortDir(-1) : 0
+                    : 0)
+        },
+        priceProps() {
+            return Object.keys(this.assets[0].price)
         }
+    },
+    mounted() {
+        this.selectableGenres = this.genres.map(name => ({ name, selected: false }))
+        this.selectableProducts = this.products.map(name => ({ name, selected: false }))
     }
+}
 </script>
 
 <style lang="scss" scoped>
