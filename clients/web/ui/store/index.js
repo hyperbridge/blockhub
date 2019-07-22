@@ -25,7 +25,7 @@ const decentralizedMode = isDecentralizedMode()
 //     }
 // })
 
-let feathers = null
+const feathers = null
 
 if (decentralizedMode) {
     service = () => { // eslint-disable-line arrow-body-style
@@ -70,7 +70,7 @@ if (decentralizedMode) {
     }
 }
 
-export let plugins = []
+export const plugins = []
 
 export const state = () => ({
     initialized: false,
@@ -106,8 +106,26 @@ export const actions = {
         console.log('[BlockHub] Logging in: ', user)
         this.$axios.setToken(token, 'bearer')
         // this.$cookies.set('token', token)
+
+        let permissions = {}
+
+        for (const role of user.roles) {
+            for (const key in role.meta.permissions) {
+                if (permissions[key]) {
+                    permissions[key] = { ...permissions[key], ...role.meta.permissions[key] }
+                } else {
+                    permissions[key] = role.meta.permissions[key]
+                }
+            }
+        }
+
+        permissions = {
+            ...permissions,
+            ...user.meta.permissions
+        }
+
         this.$accessConfig.setUserId(user.id)
-        this.$accessConfig.setUserPermissions(user.id, user.meta.permissions)
+        this.$accessConfig.setUserPermissions(user.id, permissions)
 
         dispatch('application/authenticate')
 

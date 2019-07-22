@@ -74,6 +74,7 @@ export default {
         { src: '~/plugins/components' },
         { src: '~/plugins/filters' },
         { src: '~/plugins/directives' },
+        { src: '~/plugins/access' },
         { src: '~/plugins/feathers' }, // plugin deps: access
         { src: '~/plugins/vue-i18n' },
         { src: '~/plugins/vue-currency' },
@@ -94,7 +95,6 @@ export default {
         { src: '~/plugins/summernote', ssr: false },
         { src: '~/plugins/moment', ssr: false },
         { src: '~/plugins/blockhub' },
-        { src: '~/plugins/access' },
         { src: '~/plugins/hello', ssr: false }
     ],
     modules: [

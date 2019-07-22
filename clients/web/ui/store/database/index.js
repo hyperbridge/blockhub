@@ -19,7 +19,7 @@ export const getters = {}
 
 export const actions = {
     init(store, payload) {
-        console.log('[BlockHub][Database] Initializing...')
+        console.info('[BlockHub] Initializing database...')
 
         store.commit('initialized')
 
@@ -28,14 +28,14 @@ export const actions = {
         store.commit('updateState', localState)
     },
     clean(store, payload) {
-        console.log('[BlockHub] Cleaning database...')
+        console.info('[BlockHub] Cleaning database...')
 
         DB.clean()
 
         store.commit('updateState', localState)
     },
     reload(store, payload) {
-        console.log('[BlockHub] Reloading database...')
+        console.info('[BlockHub] Reloading database...')
 
         DB.reload()
 

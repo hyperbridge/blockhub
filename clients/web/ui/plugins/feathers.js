@@ -28,12 +28,9 @@ export default async ({ app, store, req }, bbb) => {
         feathers = feathersClient()
     }
 
-    const FeathersVuex = feathersVuex(feathers, { idField: 'id', enableEvents: true })
+    let { service, auth, FeathersVuex } = feathersVuex(feathers, { idField: 'id', enableEvents: true })
 
     Vue.use(FeathersVuex)
-
-    const service = FeathersVuex.service
-    const auth = FeathersVuex.auth
 
     service('accounts', { paginate: true })(store)
     service('messages', { paginate: true })(store)
@@ -45,8 +42,7 @@ export default async ({ app, store, req }, bbb) => {
     service('battlepasses', { paginate: true })(store)
     service('bounties', { paginate: true })(store)
     service('collections', { paginate: true })(store)
-    service('collections/addResource', { paginate: true })(store)
-    service('collections/removeResource', { paginate: true })(store)
+    service('collectionResource', { paginate: true })(store)
     service('communities', { paginate: true })(store)
     service('discussions', { paginate: true })(store)
     service('events', { paginate: true })(store)
@@ -112,32 +108,27 @@ export default async ({ app, store, req }, bbb) => {
         }).catch(e => { console.log('Feathers exception', e) })
     }
 
-    let api = null
-
     if (store.state.application.decentralizedMode) {
-        api = {
-            on: eventName => {
-                console.log('on', eventName)
-            },
-            service: serviceKey => {
-                // if (blockhub.bridge.isConnected()) { // && blockhub.bridge.canFulfillRequest(endpoint
-                //     console.log('if')
-                //     return {
-                //         find: params => {
-                //             blockhub.bridge.sendCommand('service', {
-                //                 serviceKey,
-                //                 type: 'find',
-                //                 params
-                //             })
-                //         }
-                //     }
-                // }
-                console.log('servicekey', serviceKey)
-                return app.feathers.service(serviceKey)
-            }
+        service = serviceKey => {
+            // if (blockhub.bridge.isConnected()) { // && blockhub.bridge.canFulfillRequest(endpoint
+            //     console.log('if')
+            //     return {
+            //         find: params => {
+            //             blockhub.bridge.sendCommand('service', {
+            //                 serviceKey,
+            //                 type: 'find',
+            //                 params
+            //             })
+            //         }
+            //     }
+            // }
+            console.log('servicekey', serviceKey)
+            return app.feathers.service(serviceKey)
         }
-    } else {
-        api = FeathersVuex
+    }
+
+    const api = {
+        service
     }
 
     // Set feathers instance on app
@@ -148,7 +139,6 @@ export default async ({ app, store, req }, bbb) => {
         install(Vue, options) {
             Vue.mixin({
                 created() {
-                    // access to the client anywhere
                     this.$api = api
                 }
             })
