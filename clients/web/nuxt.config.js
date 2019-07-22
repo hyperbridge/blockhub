@@ -11,6 +11,7 @@ export default {
         port: process.env.PORT,
         host: '0.0.0.0'
     },
+    mode: 'spa', // universal
     srcDir: 'ui/',
     dev: process.env.NODE_ENV !== 'production',
     htmlAttrs: {
