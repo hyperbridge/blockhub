@@ -27,7 +27,7 @@
         "version": "0.8.1",
         "initialized": false,
         "adminMode": false,
-        "environmentMode": null,
+        "environmentMode": "local",
         "decentralizedMode": false,
         "extensionMode": false,
         "locked": false,
