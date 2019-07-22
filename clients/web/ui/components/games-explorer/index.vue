@@ -8,9 +8,9 @@
                 slot="title"
                 class="mb-0"
                 :headingTabs="[
-                    { title: 'Top Games', category: 'topSellingProducts' },
-                    { title: 'New Releases', category: 'newProducts' },
-                    { title: 'Upcoming', category: 'upcomingProducts' }
+                    { title: 'Top Games', category: 'topSelling' },
+                    { title: 'New Releases', category: 'newReleases' },
+                    { title: 'Upcoming', category: 'upcoming' }
                 ]"
                 :showActions="true"
                 @changeTab="category = $event; clearFilters()">
@@ -125,10 +125,10 @@
             <div v-else-if="filtersActive">
                 <p>
                     No products were found using these filters. Want to <c-button
-                    status="plain"
-                    @click="$store.commit('application/activeModal', 'comingSoon')">
-                    Check for updates
-                </c-button>?
+                        status="plain"
+                        @click="$store.commit('application/activeModal', 'comingSoon')">
+                        Check for updates
+                    </c-button>?
                 </p>
                 <c-button
                     status="info"
@@ -140,96 +140,101 @@
             </div>
             <p v-else>
                 Nothing could be found. Want to <c-button
-                status="plain"
-                @click="$store.commit('application/activeModal', 'comingSoon')">
-                Check for updates
-            </c-button>?
+                    status="plain"
+                    @click="$store.commit('application/activeModal', 'comingSoon')">
+                    Check for updates
+                </c-button>?
             </p>
         </c-block>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'GamesExplorer',
-        components: {
-            'c-block': () => import('~/components/block').then(m => m.default || m),
-            'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-            'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
-            'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
-            'c-dropdown': () => import('~/components/dropdown-menu/type-2').then(m => m.default || m),
-            'c-game-grid': () => import('~/components/game-grid/with-description').then(m => m.default || m),
-            'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-            'c-option-tag': () => import('~/components/option-tag').then(m => m.default || m)
+export default {
+    components: {
+        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
+        'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
+        'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
+        'c-dropdown': () => import('~/components/dropdown-menu/type-2').then(m => m.default || m),
+        'c-game-grid': () => import('~/components/game-grid/with-description').then(m => m.default || m),
+        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
+        'c-option-tag': () => import('~/components/option-tag').then(m => m.default || m)
+    },
+    props: {
+        products: {
+            type: Object,
+            default: () => ({
+                topSelling: [],
+                newReleases: [],
+                upcoming: []
+            })
+        }
+    },
+    data() {
+        return {
+            category: 'topSelling',
+            phrase: '',
+            selectedGenres: [],
+            sortBy: {
+                property: null,
+                asc: true
+            },
+            sortOptions: [
+                { title: 'Name', property: 'name', icon: 'language' },
+                { title: 'Price', property: 'price', icon: 'dollar-sign' }
+            ]
+        }
+    },
+    computed: {
+        filteredProducts() {
+            const { property, asc } = this.sortBy
+            const sortDir = dir => asc ? dir : dir * -1
+            return this.products[this.category]
+                .filter(product =>
+                    product.name.toLowerCase().includes(this.phrase.toLowerCase()))
+                .filter(product => this.selectedGenres.length
+                    ? product.meta.developerTags.some(genre => this.selectedGenres.includes(genre))
+                    : true)
+                .sort((a, b) => property
+                    ? a[property] > b[property]
+                        ? sortDir(1)
+                        : a[property] < b[property] ? sortDir(-1) : 0
+                    : 0)
         },
-        data() {
-            return {
-                category: 'topSellingProducts',
-                phrase: '',
-                selectedGenres: [],
-                sortBy: {
-                    property: null,
-                    asc: true
-                },
-                sortOptions: [
-                    { title: 'Name', property: 'name', icon: 'language' },
-                    { title: 'Price', property: 'price', icon: 'dollar-sign' }
-                ]
-            }
+        availableGenres() {
+            return this.products[this.category].reduce((tags, product) => [
+                ...tags,
+                ...(product.meta.developerTags || []).filter(tag =>
+                    !tags.includes(tag))
+            ], []).sort()
         },
-        computed: {
-            products() {
-                return this.$store.state.marketplace[this.category]
-            },
-            filteredProducts() {
-                const { property, asc } = this.sortBy
-                const sortDir = dir => asc ? dir : dir * -1
-                return this.$store.state.marketplace[this.category]
-                    .filter(product =>
-                        product.name.toLowerCase().includes(this.phrase.toLowerCase()))
-                    .filter(product => this.selectedGenres.length
-                        ? product.developerTags.some(genre => this.selectedGenres.includes(genre))
-                        : true)
-                    .sort((a, b) => property
-                        ? a[property] > b[property]
-                            ? sortDir(1)
-                            : a[property] < b[property] ? sortDir(-1) : 0
-                        : 0)
-            },
-            availableGenres() {
-                return this.products.reduce((tags, product) => [
-                    ...tags,
-                    ...product.developerTags.filter(tag =>
-                        !tags.includes(tag))
-                ], []).sort()
-            },
-            filtersActive() {
-                const { phrase, selectedGenres, sortBy: { property } } = this
-                return Boolean(phrase.length || selectedGenres.length || property)
-            }
+        filtersActive() {
+            const { phrase, selectedGenres, sortBy: { property } } = this
+            return Boolean(phrase.length || selectedGenres.length || property)
+        }
+    },
+    methods: {
+        setGenre(genre) {
+            const genreKey = this.selectedGenres.indexOf(genre)
+            genreKey > -1
+                ? this.selectedGenres.splice(genreKey, 1)
+                : this.selectedGenres.push(genre)
         },
-        methods: {
-            setGenre(genre) {
-                const genreKey = this.selectedGenres.indexOf(genre)
-                genreKey > -1
-                    ? this.selectedGenres.splice(genreKey, 1)
-                    : this.selectedGenres.push(genre)
-            },
-            clearFilters() {
-                this.selectedGenres = []
-                this.phrase = ''
-                this.sortBy.property = null
-                this.sortBy.asc = true
-            },
-            setSort(prop, direction) {
-                const { property, asc } = this.sortBy
-                this.sortBy.property = property === prop && direction === asc
-                    ? null
-                    : prop
-                this.sortBy.asc = direction
-            }
+        clearFilters() {
+            this.selectedGenres = []
+            this.phrase = ''
+            this.sortBy.property = null
+            this.sortBy.asc = true
+        },
+        setSort(prop, direction) {
+            const { property, asc } = this.sortBy
+            this.sortBy.property = property === prop && direction === asc
+                ? null
+                : prop
+            this.sortBy.asc = direction
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

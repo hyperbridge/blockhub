@@ -107,15 +107,6 @@ export default {
     data() {
         return {
             breadcrumbLinks: false,
-            frontpageProducts: [],
-            featuredProducts: [],
-            newReleases: [],
-            saleProducts: [],
-            collections: [],
-            curatorReviews: [],
-            productNews: [],
-            trendingProjects: [],
-            gameSeries: [],
             showWelcomeModal: false // ['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode) && !this.$store.state.application.settings.client.hideWelcomeModal,
         }
     },
@@ -123,63 +114,63 @@ export default {
         list() {
             const result = []
 
-            if (this.frontpageProducts.length) {
+            if (this.$store.state.products.frontpageProducts.length) {
                 result.push({
                     type: 'frontpageProduct',
-                    data: this.frontpageProducts[0]
+                    data: this.$store.state.products.frontpageProducts[0]
                 })
             }
 
-            if (this.featuredProducts.length) {
+            if (this.$store.state.products.featuredProducts.length) {
                 result.push({
                     type: 'featuredProductGallery',
                     data: {
                         title: 'Featured',
                         ref: 'featuredProductGallerySlider',
                         swiper: this.$refs.featuredProductGallerySlider && this.$refs.featuredProductGallerySlider.swiper,
-                        products: this.featuredProducts,
+                        products: this.$store.state.products.featuredProducts,
                         slides: [
                             {
                                 image: {
-                                    src: this.featuredProducts[0].meta.images.preview[0],
+                                    src: this.$store.state.products.featuredProducts[0].meta.images.preview[0],
                                     position: 'center'
                                 },
                                 logo: {
-                                    src: this.featuredProducts[0].meta.images.icon,
+                                    src: this.$store.state.products.featuredProducts[0].meta.images.icon,
                                     position: 'left bottom',
                                     size: 'lg'
                                 },
-                                title: this.featuredProducts[0].name,
+                                title: this.$store.state.products.featuredProducts[0].name,
                                 buttonText: 'Check it out',
-                                id: this.featuredProducts[0].id
+                                id: this.$store.state.products.featuredProducts[0].id
                             },
                             {
                                 image: {
-                                    src: this.featuredProducts[1].meta.images.preview[0],
+                                    src: this.$store.state.products.featuredProducts[1].meta.images.preview[0],
                                     position: 'center'
                                 },
                                 logo: {
-                                    src: this.featuredProducts[1].meta.images.icon,
+                                    src: this.$store.state.products.featuredProducts[1].meta.images.icon,
                                     position: 'left bottom',
                                     size: 'lg'
                                 },
-                                title: this.featuredProducts[1].name,
+                                title: this.$store.state.products.featuredProducts[1].name,
                                 buttonText: 'Check it out',
-                                id: this.featuredProducts[1].id
+                                id: this.$store.state.products.featuredProducts[1].id
                             },
                             {
                                 image: {
-                                    src: this.featuredProducts[2].meta.images.preview[0],
+                                    src: this.$store.state.products.featuredProducts[2].meta.images.preview[0],
                                     position: 'center'
                                 },
                                 logo: {
-                                    src: this.featuredProducts[2].meta.images.icon,
+                                    src: this.$store.state.products.featuredProducts[2].meta.images.icon,
                                     position: 'left bottom',
                                     size: 'lg'
                                 },
-                                title: this.featuredProducts[2].name,
+                                title: this.$store.state.products.featuredProducts[2].name,
                                 buttonText: 'Check it out',
-                                id: this.featuredProducts[2].id
+                                id: this.$store.state.products.featuredProducts[2].id
                             }
                         ]
                     }
@@ -200,7 +191,7 @@ export default {
                 data: {
                     title: 'New Releases',
                     slidesPerView: 3,
-                    products: this.newReleases
+                    products: this.$store.state.products.newReleases
                 }
             })
 
@@ -233,9 +224,9 @@ export default {
                 type: 'gamesExplorer',
                 data: {
                     products: {
-                        topSelling: this.topSellingProducts,
-                        newReleases: this.newReleases,
-                        upcoming: this.upcomingProducts
+                        topSelling: this.$store.state.products.topSellingProducts,
+                        newReleases: this.$store.state.products.newReleases,
+                        upcoming: this.$store.state.products.upcomingProducts
                     }
                 }
             })
@@ -245,14 +236,14 @@ export default {
                 data: {
                     title: 'Summer Sale',
                     slidesPerView: 3,
-                    products: this.saleProducts
+                    products: this.$store.state.products.saleProducts
                 }
             })
 
             result.push({
                 type: 'assetGrid',
                 data: {
-                    assets: this.$store.getters['marketplace/assetsArray']
+                    assets: [] //this.$store.getters['marketplace/assetsArray']
                 }
             })
 
@@ -273,7 +264,7 @@ export default {
                                 }
                             }
                         },
-                        reviews: this.curatorReviews
+                        reviews: [] // this.curatorReviews
                     }
                 })
             }
@@ -286,7 +277,7 @@ export default {
                 }, {}) || null
             }
 
-            if (this.productNews.length) {
+            if (false) { //this.productNews.length) {
                 result.push({
                     type: 'productNews',
                     data: {
@@ -321,14 +312,14 @@ export default {
                             }
                         }
                     },
-                    projects: this.trendingProjects
+                    projects: [] //this.trendingProjects
                 }
             })
 
             result.push({
                 type: 'gameSeries',
                 data: {
-                    list: this.gameSeries,
+                    list: [], //this.gameSeries,
                     showNumber: 3
                 }
             })
@@ -343,82 +334,28 @@ export default {
         // },
     },
     async asyncData({ store }) {
-        const newReleases = (await store.dispatch('products/find', {
-            query: {
-                'type': 'game',
-                'internalTags.name': 'Released',
-                '$joinRelation': 'internalTags',
-                '$eager': 'internalTags',
-                '$sort[releaseDate]': -1,
-                '$limit': 20
-            }
-        })).data
+        if (process.client) {
+            store.dispatch('products/newReleases')
+            store.dispatch('products/featuredProducts')
+            store.dispatch('products/saleProducts')
+            store.dispatch('products/frontpageProducts')
+            store.dispatch('products/topSellingProducts')
+            store.dispatch('products/upcomingProducts')
 
-        const featuredProducts = (await store.dispatch('products/find', {
-            query: {
-                'type': 'game',
-                'internalTags.name': 'Featured',
-                '$joinRelation': 'internalTags',
-                '$eager': 'internalTags',
-                '$sort[updatedAt]': -1,
-                '$limit': 20
+            return {}
+        } else {
+            return {
+                newReleases: await store.dispatch('products/newReleases'),
+                featuredProducts: await store.dispatch('products/featuredProducts'),
+                saleProducts: await store.dispatch('products/saleProducts'),
+                frontpageProducts: await store.dispatch('products/frontpageProducts'),
+                topSellingProducts: await store.dispatch('products/topSellingProducts'),
+                upcomingProducts: await store.dispatch('products/upcomingProducts')
             }
-        })).data
-
-        const saleProducts = (await store.dispatch('products/find', {
-            query: {
-                'type': 'game',
-                'internalTags.name': 'Featured',
-                '$joinRelation': 'internalTags',
-                '$eager': 'internalTags',
-                '$sort[updatedAt]': -1,
-                '$limit': 20
-            }
-        })).data
-
-        const frontpageProducts = (await store.dispatch('products/find', {
-            query: {
-                'type': 'game',
-                'internalTags.name': 'Frontpage',
-                '$joinRelation': 'internalTags',
-                '$eager': 'internalTags',
-                '$sort[updatedAt]': -1,
-                '$limit': 3
-            }
-        })).data
-
-        const topSellingProducts = (await store.dispatch('products/find', {
-            query: {
-                'type': 'game',
-                'internalTags.name': 'Top Seller',
-                '$joinRelation': 'internalTags',
-                '$eager': 'internalTags',
-                '$sort[updatedAt]': -1,
-                '$limit': 3
-            }
-        })).data
-
-        const upcomingProducts = (await store.dispatch('products/find', {
-            query: {
-                'type': 'game',
-                'internalTags.name': 'Upcoming',
-                '$joinRelation': 'internalTags',
-                '$eager': 'internalTags',
-                '$sort[updatedAt]': -1,
-                '$limit': 3
-            }
-        })).data
-
-        return {
-            newReleases,
-            featuredProducts,
-            saleProducts,
-            frontpageProducts,
-            topSellingProducts,
-            upcomingProducts
         }
     },
-    mounted() {
+    async mounted() {
+
         this.updateLandingImage()
 
         // TODO: collections should be Array not object

@@ -160,9 +160,16 @@ export default {
         'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
         'c-option-tag': () => import('~/components/option-tag').then(m => m.default || m)
     },
-    props: [
-        'products'
-    ],
+    props: {
+        products: {
+            type: 'String',
+            default: () => ({
+                topSelling: [],
+                newReleases: [],
+                upcoming: []
+            })
+        }
+    },
     data() {
         return {
             category: 'topSelling',

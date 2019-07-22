@@ -3,7 +3,6 @@ import sdk from '../../../../sdks/node/build/src'
 
 export default ({ app, store }) => {
     // access = access.default.access
-    console.log(sdk.access, 'bbbb')
 
     const $access = sdk.access.validator
 
@@ -38,5 +37,4 @@ export default ({ app, store }) => {
 
     app.$access = store.$access = $access
     app.$accessConfig = store.$accessConfig = sdk.access
-    console.log('sssss', sdk.access)
 }
