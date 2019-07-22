@@ -108,6 +108,7 @@
                         {{ resource.id }}
                     </div>
                     <c-assets-grid :list="collection.resources" />
+                    <c-pagination :pages="8" />
                 </c-block>
             </div>
         </div>
