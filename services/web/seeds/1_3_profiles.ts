@@ -31,47 +31,47 @@ export const seed = async function (knex): Promise<any> {
                     {
                         id: 1,
                         author: {
-                            name: "Nakatochi",
-                            img: "https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png"
+                            name: 'Nakatochi',
+                            img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.pn'"
                         },
-                        time: "2014-11-05 16:02:21 -02:00",
-                        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non maximus tellus"
+                        time: '2014-11-05 16:02:21 -02:00',
+                        text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non maximus tellus`
                     },
                     {
                         id: 2,
                         author: {
-                            name: "Watanabe",
-                            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL"
+                            name: 'Watanabe',
+                            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7n'"
                         },
-                        time: "2014-11-05 4:35:21 -02:00",
-                        text: "Pellentesque in massa nec dui eleifend rhoncus. Etiam vitae est sit amet magna ornare ultrices"
+                        time: '2014-11-05 4:35:21 -02:00',
+                        text: `Pellentesque in massa nec dui eleifend rhoncus. Etiam vitae est sit amet magna ornare ultrices`
                     },
                     {
                         id: 3,
                         author: {
-                            name: "SatoshiSan",
-                            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL"
+                            name: 'SatoshiSan',
+                            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7n'"
                         },
-                        time: "2014-11-05 19:12:21 -02:00",
-                        text: "Donec aliquet eros eu sapien pulvinar vulputate."
+                        time: '2014-11-05 19:12:21 -02:00',
+                        text: `Donec aliquet eros eu sapien pulvinar vulputate.`
                     },
                     {
                         id: 4,
                         author: {
-                            name: "Nakatochi",
-                            img: "https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png"
+                            name: 'Nakatochi',
+                            img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.pn'"
                         },
-                        time: "2014-11-05 6:09:21 -02:00",
-                        text: "Duis orci enim, blandit et libero a, luctus accumsan elit."
+                        time: '2014-11-05 6:09:21 -02:00',
+                        text: `Duis orci enim, blandit et libero a, luctus accumsan elit.`
                     },
                     {
                         id: 5,
                         author: {
-                            name: "Watanabe",
-                            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL"
+                            name: 'Watanabe',
+                            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7n'"
                         },
-                        time: "2014-11-05 11:58:21 -02:00",
-                        text: "Praesent porta vulputate velit, sit amet scelerisque mauris suscipit eget. Aenean vel mi non metus consequat commodo quis vitae nibh."
+                        time: '2014-11-05 11:58:21 -02:00',
+                        text: `Praesent porta vulputate velit, sit amet scelerisque mauris suscipit eget. Aenean vel mi non metus consequat commodo quis vitae nibh.`
                     }
                 ],
                 friends: [3, 4],
@@ -79,8 +79,8 @@ export const seed = async function (knex): Promise<any> {
                 owner: 1,
                 inventory: [1, 2, 3, 4],
                 transactions: [
-                    "507f191e810c19729de860ea",
-                    "31317f1we110c19729de8660"
+                    '507f191e810c19729de860ea',
+                    '31317f1we110c19729de8660'
                 ],
                 productWishlist: { 3: true },
                 projectWishlist: {},
@@ -151,67 +151,67 @@ export const seed = async function (knex): Promise<any> {
             role: 'developer', // [developer, user]
             value: 'i dont even get why i need to set this',
             meta: {
-                "address": "0xf4636099c7Cd3656436F9f087070a429e4BfD91d",
-                "img": "https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1",
-                "default": false,
-                "edit": false,
-                "messages": [
+                address: '0xf4636099c7Cd3656436F9f087070a429e4BfD91d',
+                img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                default: false,
+                edit: false,
+                messages: [
                     {
-                        "id": 1,
-                        "author": {
-                            "name": "Nakatochi",
-                            "img": "https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png"
+                        id: 1,
+                        author: {
+                            name: 'Nakatochi',
+                            img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'
                         },
-                        "time": "2014-11-05 16:02:21 -02:00",
-                        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non maximus tellus"
+                        time: '2014-11-05 16:02:21 -02:00',
+                        text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non maximus tellus`
                     },
                     {
-                        "id": 2,
-                        "author": {
-                            "name": "Watanabe",
-                            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL"
+                        id: 2,
+                        author: {
+                            name: 'Watanabe',
+                            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL'
                         },
-                        "time": "2014-11-05 4:35:21 -02:00",
-                        "text": "Pellentesque in massa nec dui eleifend rhoncus. Etiam vitae est sit amet magna ornare ultrices"
+                        time: '2014-11-05 4:35:21 -02:00',
+                        text: `Pellentesque in massa nec dui eleifend rhoncus. Etiam vitae est sit amet magna ornare ultrices`
                     },
                     {
-                        "id": 3,
-                        "author": {
-                            "name": "SatoshiSan",
-                            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL"
+                        id: 3,
+                        author: {
+                            name: 'SatoshiSan',
+                            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL'
                         },
-                        "time": "2014-11-05 19:12:21 -02:00",
-                        "text": "Donec aliquet eros eu sapien pulvinar vulputate."
+                        time: '2014-11-05 19:12:21 -02:00',
+                        text: `Donec aliquet eros eu sapien pulvinar vulputate.`
                     },
                     {
-                        "id": 4,
-                        "author": {
-                            "name": "Nakatochi",
-                            "img": "https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png"
+                        id: 4,
+                        author: {
+                            name: 'Nakatochi',
+                            img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'
                         },
-                        "time": "2014-11-05 6:09:21 -02:00",
-                        "text": "Duis orci enim, blandit et libero a, luctus accumsan elit."
+                        time: '2014-11-05 6:09:21 -02:00',
+                        text: `Duis orci enim, blandit et libero a, luctus accumsan elit.`
                     },
                     {
-                        "id": 5,
-                        "author": {
-                            "name": "Watanabe",
-                            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL"
+                        id: 5,
+                        author: {
+                            name: 'Watanabe',
+                            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL'
                         },
-                        "time": "2014-11-05 11:58:21 -02:00",
-                        "text": "Praesent porta vulputate velit, sit amet scelerisque mauris suscipit eget. Aenean vel mi non metus consequat commodo quis vitae nibh."
+                        time: '2014-11-05 11:58:21 -02:00',
+                        text: `Praesent porta vulputate velit, sit amet scelerisque mauris suscipit eget. Aenean vel mi non metus consequat commodo quis vitae nibh.`
                     }
                 ],
-                "friends": [3, 4],
-                "hideFriends": false,
-                "owner": 1,
-                "inventory": [1, 2, 3, 4],
-                "transactions": [
-                    "507f191e810c19729de860ea",
-                    "31317f1we110c19729de8660"
+                friends: [3, 4],
+                hideFriends: false,
+                owner: 1,
+                inventory: [1, 2, 3, 4],
+                transactions: [
+                    '507f191e810c19729de860ea',
+                    '31317f1we110c19729de8660'
                 ],
-                "productWishlist": { "3": true },
-                "projectWishlist": {}
+                productWishlist: { 3: true },
+                projectWishlist: {}
             }
         },
         {
@@ -223,20 +223,20 @@ export const seed = async function (knex): Promise<any> {
             role: 'developer', // [developer, user]
             value: 'i dont even get why i need to set this',
             meta: {
-                "wallet": "0xfe236119c7Cd3656436F9f087070a429e4BfD91d",
-                "img": "https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1",
-                "default": true,
-                "edit": false,
-                "messages": [],
-                "friends": [5],
-                "hideFriends": false,
-                "owner": 1,
-                "inventory": [2, 6, 9],
-                "transactions": [
-                    "651f1ew1312729de860e228a"
+                wallet: '0xfe236119c7Cd3656436F9f087070a429e4BfD91d',
+                img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                default: true,
+                edit: false,
+                messages: [],
+                friends: [5],
+                hideFriends: false,
+                owner: 1,
+                inventory: [2, 6, 9],
+                transactions: [
+                    '651f1ew1312729de860e228a'
                 ],
-                "productWishlist": {},
-                "projectWishlist": {}
+                productWishlist: {},
+                projectWishlist: {}
             }
         },
         {
@@ -248,20 +248,20 @@ export const seed = async function (knex): Promise<any> {
             role: 'developer', // [developer, user]
             value: 'i dont even get why i need to set this',
             meta: {
-                "wallet": "0xfe236119c7Cd3656436F9f087070a429e4BfD91d",
-                "img": "https://pbs.twimg.com/media/CRsLt5HVAAEoI3N.png",
-                "default": true,
-                "edit": false,
-                "messages": [],
-                "friends": [],
-                "hideFriends": false,
-                "owner": 1,
-                "inventory": [7, 8, 9],
-                "transactions": [
-                    "312f191e810c19729de860ea"
+                wallet: '0xfe236119c7Cd3656436F9f087070a429e4BfD91d',
+                img: 'https://pbs.twimg.com/media/CRsLt5HVAAEoI3N.png',
+                default: true,
+                edit: false,
+                messages: [],
+                friends: [],
+                hideFriends: false,
+                owner: 1,
+                inventory: [7, 8, 9],
+                transactions: [
+                    '312f191e810c19729de860ea'
                 ],
-                "productWishlist": {},
-                "projectWishlist": {}
+                productWishlist: {},
+                projectWishlist: {}
             }
         },
         {
@@ -273,17 +273,17 @@ export const seed = async function (knex): Promise<any> {
             role: 'developer', // [developer, user]
             value: 'i dont even get why i need to set this',
             meta: {
-                "wallet": "0xfe236119c7Cd3656436F9f087070a429e4BfD91d",
-                "img": "https://d.facdn.net/art/echofireant/1420800644/1420800644.echofireant_sniper_avatar.jpg",
-                "default": true,
-                "edit": false,
-                "messages": [],
-                "friends": [],
-                "hideFriends": true,
-                "owner": 2,
-                "inventory": [1, 2, 3, 4, 5, 6, 7],
-                "productWishlist": {},
-                "projectWishlist": {}
+                wallet: '0xfe236119c7Cd3656436F9f087070a429e4BfD91d',
+                img: 'https://d.facdn.net/art/echofireant/1420800644/1420800644.echofireant_sniper_avatar.jpg',
+                default: true,
+                edit: false,
+                messages: [],
+                friends: [],
+                hideFriends: true,
+                owner: 2,
+                inventory: [1, 2, 3, 4, 5, 6, 7],
+                productWishlist: {},
+                projectWishlist: {}
             }
         },
         {
@@ -295,17 +295,17 @@ export const seed = async function (knex): Promise<any> {
             role: 'developer', // [developer, user]
             value: 'i dont even get why i need to set this',
             meta: {
-                "wallet": "0xfe236119c7Cd3656436F9f087070a429e4BfD91d",
-                "img": "https://pbs.twimg.com/profile_images/794107415876747264/g5fWe6Oh.jpg",
-                "default": true,
-                "edit": false,
-                "messages": [],
-                "friends": [],
-                "hideFriends": true,
-                "owner": 2,
-                "inventory": [8, 7, 4, 3, 3, 3, 1, 8],
-                "productWishlist": {},
-                "projectWishlist": {}
+                wallet: '0xfe236119c7Cd3656436F9f087070a429e4BfD91d',
+                img: 'https://pbs.twimg.com/profile_images/794107415876747264/g5fWe6Oh.jpg',
+                default: true,
+                edit: false,
+                messages: [],
+                friends: [],
+                hideFriends: true,
+                owner: 2,
+                inventory: [8, 7, 4, 3, 3, 3, 1, 8],
+                productWishlist: {},
+                projectWishlist: {}
             }
         }
     ]

@@ -11,7 +11,7 @@ export const data = [
             version: 0,
             description: `Realm description`,
             tags: [
-                'studio'
+                'Studio'
             ],
             theme: {
                 backgroundColor: '#3F2797',
@@ -58,47 +58,47 @@ export const data = [
         key: 'blockhub',
         name: `BlockHub`,
         meta: {
-            "revision": 0,
-            "created": 1531430916082,
-            "version": 0,
-            "description": "Realm description",
-            "tags": [
-                "studio"
+            revision: 0,
+            created: 1531430916082,
+            version: 0,
+            description: 'Realm description',
+            tags: [
+                'Studio'
             ],
-            "theme": {
-                "backgroundColor": "#3F2797",
-                "header": {
-                    "backgroundSize": "cover"
+            theme: {
+                backgroundColor: '#3F2797',
+                header: {
+                    backgroundSize: 'cover'
                 }
             },
-            "images": {
-                "background": "/img/realms/1/bg.png",
-                "logo": "/img/realms/1/logo.png",
-                "news": "/img/realms/1/news.png",
-                "follow": "/img/realms/1/follow.png"
+            images: {
+                background: '/img/realms/1/bg.png',
+                logo: '/img/realms/1/logo.png',
+                news: '/img/realms/1/news.png',
+                follow: '/img/realms/1/follow.png'
             },
-            "nav": {
-                "items": [
+            nav: {
+                items: [
                     {
-                        "title": "Home"
+                        title: 'Home'
                     },
                     {
-                        "title": "News"
+                        title: 'News'
                     },
                     {
-                        "title": "Community"
+                        title: 'Community'
                     },
                     {
-                        "title": "Crowdfunds"
+                        title: 'Crowdfunds'
                     }
                 ]
             },
-            "widgets": [
+            widgets: [
                 {
-                    "code": "news",
-                    "data": [
+                    code: 'news',
+                    data: [
                         {
-                            "title": "something"
+                            title: 'something'
                         }
                     ]
                 }
@@ -110,40 +110,40 @@ export const data = [
         key: 'hyperbridge',
         name: `Hyperbridge`,
         meta: {
-            "theme": {
-                "backgroundColor": "#0086FF",
-                "header": {
-                    "backgroundSize": "contain"
+            theme: {
+                backgroundColor: '#0086FF',
+                header: {
+                    backgroundSize: 'contain'
                 }
             },
-            "images": {
-                "background": "/img/realms/2/bg.png",
-                "logo": "/img/realms/2/logo.png",
-                "news": "/img/realms/2/news.png",
-                "follow": "/img/realms/2/follow.png"
+            images: {
+                background: '/img/realms/2/bg.png',
+                logo: '/img/realms/2/logo.png',
+                news: '/img/realms/2/news.png',
+                follow: '/img/realms/2/follow.png'
             },
-            "nav": {
-                "items": [
+            nav: {
+                items: [
                     {
-                        "title": "Home"
+                        title: 'Home'
                     },
                     {
-                        "title": "News"
+                        title: 'News'
                     },
                     {
-                        "title": "Community"
+                        title: 'Community'
                     },
                     {
-                        "title": "Crowdfunds"
+                        title: 'Crowdfunds'
                     }
                 ]
             },
-            "widgets": [
+            widgets: [
                 {
-                    "code": "news",
-                    "data": [
+                    code: 'news',
+                    data: [
                         {
-                            "title": "something"
+                            title: 'something'
                         }
                     ]
                 }
@@ -155,40 +155,40 @@ export const data = [
         key: 'blizzard',
         value: `Blizzard`,
         meta: {
-            "theme": {
-                "backgroundColor": "#2878C0",
-                "header": {
-                    "backgroundSize": "contain"
+            theme: {
+                backgroundColor: '#2878C0',
+                header: {
+                    backgroundSize: 'contain'
                 }
             },
-            "images": {
-                "background": "/img/realms/3/bg.png",
-                "logo": "/img/realms/3/logo.png",
-                "news": "/img/realms/3/news.png",
-                "follow": "/img/realms/3/follow.png"
+            images: {
+                background: '/img/realms/3/bg.png',
+                logo: '/img/realms/3/logo.png',
+                news: '/img/realms/3/news.png',
+                follow: '/img/realms/3/follow.png'
             },
-            "nav": {
-                "items": [
+            nav: {
+                items: [
                     {
-                        "title": "Home"
+                        title: 'Home'
                     },
                     {
-                        "title": "News"
+                        title: 'News'
                     },
                     {
-                        "title": "Community"
+                        title: 'Community'
                     },
                     {
-                        "title": "Crowdfunds"
+                        title: 'Crowdfunds'
                     }
                 ]
             },
-            "widgets": [
+            widgets: [
                 {
-                    "code": "news",
-                    "data": [
+                    code: 'news',
+                    data: [
                         {
-                            "title": "something"
+                            title: 'something'
                         }
                     ]
                 }
