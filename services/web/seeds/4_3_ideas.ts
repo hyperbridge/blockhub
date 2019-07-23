@@ -26,11 +26,11 @@ export const seed = async function (knex): Promise<any> {
                 version: 0,
                 images: {},
                 tags: [
-                    "game"
+                    'Game'
                 ],
-                supportEmail: "",
-                twitterUsername: "",
-                shareText: "",
+                supportEmail: '',
+                twitterUsername: '',
+                shareText: '',
                 comments: [],
                 contributors: [],
                 moderators: [],
@@ -52,11 +52,11 @@ export const seed = async function (knex): Promise<any> {
                 version: 0,
                 images: {},
                 tags: [
-                    "game"
+                    'Game'
                 ],
-                supportEmail: "",
-                twitterUsername: "",
-                shareText: "",
+                supportEmail: '',
+                twitterUsername: '',
+                shareText: '',
                 comments: [],
                 contributors: [],
                 moderators: [],
@@ -78,11 +78,11 @@ export const seed = async function (knex): Promise<any> {
                 version: 0,
                 images: {},
                 tags: [
-                    "game"
+                    'Game'
                 ],
-                supportEmail: "",
-                twitterUsername: "",
-                shareText: "",
+                supportEmail: '',
+                twitterUsername: '',
+                shareText: '',
                 comments: [],
                 contributors: [],
                 moderators: [],

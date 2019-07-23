@@ -1,7 +1,118 @@
 import Vue from 'vue'
 import * as DB from '../../db'
 
-let localState = {}
+let localState = {
+    currentEthereumNetwork: 'local',
+    selectedProduct: null,
+    firstProduct: true,
+    frontpageProduct: {},
+    productNews: [],
+    newProducts: [],
+    saleProducts: [],
+    upcomingProducts: [],
+    topSellingProducts: [],
+    specialProducts: [],
+    assets: [],
+    products: [],
+    posts: [],
+    gameSeries: [],
+    collections: [],
+    curatorReviews: [],
+    featuredProducts: [],
+    trendingProducts: [],
+    topFree: [],
+    top5: [],
+    defaultRealm: {},
+    defaultIdea: {},
+    defaultProduct: {},
+    help: {
+        topics: [
+            {
+                id: 0,
+                slug: 'general',
+                label: 'General Platform Features',
+                icon: 'cogs',
+                subTopics: [
+                    {
+                        id: 0,
+                        slug: 'common-runtime',
+                        label: 'Common runtime',
+                        icon: 'lock'
+                    },
+                    {
+                        id: 1,
+                        slug: 'add-ons',
+                        label: 'Add-ons',
+                        icon: 'desktop'
+                    },
+                    {
+                        id: 2,
+                        slug: 'builds',
+                        label: 'Builds',
+                        icon: 'cubes'
+                    },
+                    {
+                        id: 3,
+                        slug: 'limits',
+                        label: 'Limits',
+                        icon: 'sliders-h'
+                    }
+                ],
+                articles: [
+                ]
+            },
+            {
+                id: 1,
+                slug: 'running-applications',
+                label: 'Running applications',
+                icon: 'play',
+                articles: [
+                    '1',
+                    '6'
+                ]
+            },
+            {
+                id: 2,
+                slug: 'account-management',
+                label: 'Account Management',
+                icon: 'user',
+                articles: [
+                    '1',
+                    '2',
+                    '6',
+                    '5'
+                ]
+            },
+            {
+                id: 3,
+                slug: 'security',
+                label: 'Security',
+                icon: 'lock'
+            },
+            {
+                id: 4,
+                slug: 'billing-and-payments',
+                label: 'Billing & Payments',
+                icon: 'credit-card'
+            },
+            {
+                id: 5,
+                slug: 'connect',
+                label: 'Connect',
+                icon: 'globe'
+            },
+            {
+                id: 6,
+                slug: 'tools',
+                label: 'Tools',
+                icon: 'window-restore'
+            }
+        ],
+        articles: [
+        ]
+    },
+    community: []
+}
 
 export const state = () => localState
 

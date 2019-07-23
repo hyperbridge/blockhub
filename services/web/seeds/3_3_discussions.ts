@@ -134,18 +134,18 @@ export const data = [
         key: 'new-next-week',
         value: 'New class and event coming next week!',
         meta: {
-            "targetType": "product",
-            "targetId": 1,
-            "tags": [
+            targetType: 'product',
+            targetId: 1,
+            tags: [
                 {
-                    "key": "news",
-                    "value": "News"
+                    key: 'news',
+                    value: 'News'
                 }
             ],
-            "heading": "New class and event coming next week!",
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-            "url": "/post/1",
-            "date": "2018-07-24T04:09:00.000Z"
+            heading: 'New class and event coming next week!',
+            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
+            url: '/post/1',
+            date: '2018-07-24T04:09:00.000Z'
         }
     }
 ]
