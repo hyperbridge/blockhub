@@ -2,7 +2,21 @@ import Vue from 'vue'
 import * as DB from '../../db'
 
 
-let localState = {}
+let localState = {
+    currentEthereumNetwork: 'local',
+    ethereum: {
+        local: {
+            contracts: {}
+        }
+    },
+    defaultProject: {},
+    projects: [],
+    trendingProjects: [],
+    topGameIdeas: [],
+    topContentIdeas: [],
+    topItemIdeas: [],
+    mostPopularGames: []
+}
 
 export const state = () => localState
 
@@ -50,4 +64,3 @@ export const mutations = {
         }
     }
 }
-

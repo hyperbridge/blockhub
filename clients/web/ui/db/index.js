@@ -6,7 +6,7 @@ let loki = null
 let initialized = false
 let initPromiseResolve = null
 let initPromiseReject = null
-let initPromise = new Promise((resolve, reject) => {
+const initPromise = new Promise((resolve, reject) => {
     initPromiseResolve = resolve
     initPromiseReject = reject
 })
@@ -37,9 +37,6 @@ export const loadDefault = () => {
 }
 
 export const init = () => {
-    const databaseInitialize = () => {
-    }
-
     if (typeof indexedDB === 'undefined') {
         loki = new Loki(null, {
             autoload: false,
@@ -52,15 +49,10 @@ export const init = () => {
         loki = new Loki('main.db', {
             adapter: new idbAdapter('main.db'),
             autoload: false,
-            // autoloadCallback: databaseInitialize,
             autosave: true,
             autosaveInterval: 4000
         })
     }
-
-    // window.closeLokiDatabase = function() {
-    //     loki.close()
-    // }
 
     loadDefault()
 
@@ -72,10 +64,6 @@ export const init = () => {
         // If not desktop mode, then wipe and reload (fresh data)
         if (process.client && !window.isElectron && window.BlockHub.getMode() !== 'local' && configFound) {
             console.log('[BlockHub] Production config detected. Clearing database.')
-
-            // if (window.closeLokiDatabase) {
-            //     window.closeLokiDatabase()
-            // }
 
             const req = indexedDB.deleteDatabase('LokiCatalog')
 
