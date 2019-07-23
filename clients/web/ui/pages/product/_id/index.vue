@@ -488,6 +488,7 @@ const groupBy = function(xs, key) {
 }
 
 export default {
+    scrollToTop: true,
     components: {
         'c-product-overview': () => import('~/pages/product/_id/overview').then(m => m.default || m),
         'c-product-projects': () => import('~/pages/product/_id/projects').then(m => m.default || m),
