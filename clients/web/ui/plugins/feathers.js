@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import url from 'url'
 import feathersVuex, { initAuth } from 'feathers-vuex'
 import axios from 'axios'
 import feathers from '@feathersjs/feathers'
@@ -8,7 +7,6 @@ import socketio from '@feathersjs/socketio-client'
 import authicationClient from '@feathersjs/authentication-client'
 import io from 'socket.io-client'
 import { CookieStorage } from 'cookie-storage'
-import Cookie from 'cookie-universal'
 import serviceHandlers from '../services'
 
 const useSockets = process.env.API_WEBSOCKETS_ENABLED === 'true' || false
@@ -20,7 +18,7 @@ export default async ({ app, store }) => {
     let storage = null
 
     if (process.server) {
-        serviceUrl = process.env.NODE_ENV !== 'production' ? `http://localhost:9001` : 'https://api.blockhub.gg' // eslint-disable-line no-negated-condition
+        serviceUrl = process.env.NODE_ENV !== 'production' ? process.env.LOCAL_SERVICE_URL : process.env.PRODUCTION_SERVICE_URL // eslint-disable-line no-negated-condition
 
         storage = {
             getItem() {
@@ -34,12 +32,12 @@ export default async ({ app, store }) => {
             }
         }
     } else {
-        if (window.location.hostname === 'localhost' || window.location.hostname === 'blockhub.gg.local') {
-            serviceUrl = 'http://localhost:9001'
+        if (window.location.hostname === 'localhost' || window.location.hostname === process.env.LOCAL_HOSTNAME) {
+            serviceUrl = process.env.LOCAL_SERVICE_URL
         } else {
-            serviceUrl = 'https://api.blockhub.gg'
+            serviceUrl = process.env.PRODUCTION_SERVICE_URL
         }
-    
+
         storage = new CookieStorage()
     }
 
@@ -52,7 +50,7 @@ export default async ({ app, store }) => {
         feathersClient.configure(rest(serviceUrl).axios(axios))
     }
 
-    let { auth, service, FeathersVuex } = feathersVuex(feathersClient, {
+    const { auth, service, FeathersVuex } = feathersVuex(feathersClient, {
         idField: 'id',
         enableEvents: true
     })
