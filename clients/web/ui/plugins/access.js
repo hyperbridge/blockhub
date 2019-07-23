@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import sdk from '../../../../sdks/node/build/src'
+import sdk from '../../../../sdks/node/src'
 
 export default ({ app, store }) => {
     // access = access.default.access

@@ -197,7 +197,6 @@ export const ActivityChart = {
         }
     ],
 }
-
 export const GameSeries = {
     game: {
         "id": 1,
@@ -219,7 +218,6 @@ export const GameSeries = {
         "products": [1, 2, 3, 4, 5, 6]
     }
 }
-
 export const MilestonesLine = {
     milestones: [
         {
@@ -248,7 +246,6 @@ export const MilestonesLine = {
         }
     ]
 }
-
 export const TradedAssets = {
     frequentlyTradedAssets: [
         {
@@ -277,7 +274,6 @@ export const TradedAssets = {
         }
     ]
 }
-
 export const GamesGrid = {
     itemInRow: 2,
     games: [
@@ -358,7 +354,6 @@ export const GamesGrid = {
         }
     ]
 }
-
 export const SendingFunds = {
     template: `
         <div class="row p-5">
@@ -535,7 +530,6 @@ export const SendingFunds = {
         </div>
     `
 }
-
 export const ImagesExplorer = {
     images: [
         "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_f7861bd71e6c0c218d8ff69fb1c626aec0d187cf.1920x1080.jpg?t=1533676954",
@@ -544,7 +538,6 @@ export const ImagesExplorer = {
         "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_c310f858e6a7b02ffa21db984afb0dd1b24c1423.1920x1080.jpg?t=1533676954"
     ]
 }
-
 const authors = [
     {
         name: 'Nakatochi',
@@ -559,7 +552,6 @@ const authors = [
     },
 ];
 const placeholderText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non maximus tellus, eu lacinia justo. Cras semper vestibulum est. Donec a massa vitae nibh consectetur efficitur non in erat. Morbi id dapibus tortor. Praesent sit amet vulputate leo, eu posuere neque. In id ante scelerisque, commodo nisi non, eleifend mauris. Pellentesque massa elit, semper non libero nec, interdum aliquet dolor.';
-
 export const ProductCommunity = {
     post: {
         title: `The previous title doesn't have it's single line aligned vertically because XD does not have this functionality.`,
@@ -585,4 +577,377 @@ export const ProductCommunity = {
             ]
         }
     }
+}
+export const OrderData = {
+		tableHead:[
+				{
+						label: 'Purchased Assets',
+						key: 'first'
+				},
+				{
+						label: 'Price',
+						key: 'second'
+				},
+				{
+						label: 'QTy',
+						key: 'third'
+				},
+				{
+						label: 'Total',
+						key: 'four'
+				},
+		],
+		tableRows: [
+				{
+						first: 'POLYART - Stylized Sky Dungean',
+						third: '$9.99',
+						second: 'x1',
+						last: '$7.99',
+				},
+				{
+						first: 'Archimatix Pro',
+						third: '$19.99',
+						second: 'x1',
+						last: '$27.99',
+				},
+		]
+}
+export const WalletData = {
+		users:[
+				{
+						id: 1,
+						avatar: 'http://sharethingz.com/wp-content/uploads/2014/08/avatar.png',
+						name: 'Gregory Smith',
+						game: 'Dota II',
+						status: 'offline',
+						admin: false
+				},
+				{
+						id: 2,
+						avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE0I_Z85x-UDnEncEgx0myKWxgAirSMenb4VN2TepCnropn4Hl',
+						name: 'Louis Burns',
+						game: 'WarCraft',
+						status: 'busy',
+						admin: false
+				},
+				{
+						id: 3,
+						avatar: 'http://geedmo.com/codecanyon/bskins/plan/assets/img/avatar.png',
+						name: 'Thomas Harris',
+						game: 'Heroes',
+						status: 'online',
+						admin: true
+				},
+				{
+						id: 4,
+						avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6yM6JujrHFOvFH9NvuV2lWnyXECBr1SWeF-I0tMdYmK942MXr',
+						name: 'Terri Kopp',
+						game: 'Dota II',
+						status: 'online',
+						admin: false
+				},
+				{
+						id: 5,
+						avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPk-mHx8SMUl0FBrnGMm49fksyHtj9yPPodc6JbrdubpbSqKxU',
+						name: 'Mildred Floyd',
+						game: 'CS GO',
+						status: 'online',
+						admin: false
+				}
+		],
+		messages:[
+				{
+						user: 2,
+						text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit ullamcorper enim varius sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,',
+						time: '28 July, 2018'
+				},
+				{
+						user: 3,
+						text: 'Duis sit amet nisl efficitur, rutrum arcu ac, bibendum ligula. Mauris viverra pellentesque massa sed congue. Nunc dictum gravida lobortis.',
+						time: '28 July, 2018'
+				},
+				{
+						user: 1,
+						text: 'Aliquam maximus convallis dui ut facilisis.',
+						time: '28 July, 2018'
+				},
+				{
+						user: 2,
+						text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit ullamcorper enim varius sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,',
+						time: '28 July, 2018'
+				},
+				{
+						user: 3,
+						text: 'Duis sit amet nisl efficitur, rutrum arcu ac, bibendum ligula. Mauris viverra pellentesque massa sed congue. Nunc dictum gravida lobortis.',
+						time: '28 July, 2018'
+				},
+				{
+						user: 1,
+						text: 'Aliquam maximus convallis dui ut facilisis.',
+						time: '28 July, 2018'
+				},
+				{
+						user: 2,
+						text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit ullamcorper enim varius sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,',
+						time: '28 July, 2018'
+				},
+				{
+						user: 3,
+						text: 'Duis sit amet nisl efficitur, rutrum arcu ac, bibendum ligula. Mauris viverra pellentesque massa sed congue. Nunc dictum gravida lobortis.',
+						time: '28 July, 2018'
+				},
+				{
+						user: 1,
+						text: 'Aliquam maximus convallis dui ut facilisis.',
+						time: '28 July, 2018'
+				}
+		],
+		shortcuts:[
+				{
+						"r": null,
+						"g": null,
+						"b": null,
+						"image": "/static/img/icons/store.png",
+						"to": "/",
+						"text": "Go to store",
+						"sort": 2,
+						"removable": false
+				},
+				{
+						"icon": "fa fa-plus",
+						"eventKey": "application/activeModal",
+						"eventValue": "createShortcut",
+						"text": "Create",
+						"sort": -1,
+						"removable": false
+				}
+		]
+}
+export const PromotionBoxData = {
+		promotions: [
+				{
+						title: 'Game + Standard Founder Pack',
+						price: '10.00',
+						basic: true
+				},
+				{
+						title: 'Game + Deluxe Founder Pack',
+						price: '10.00',
+						basic: false
+				},
+				{
+						title: 'Game + Collectors Founder Pack',
+						price: '10.00',
+						basic: false
+				}
+		]
+}
+export const NotifsData = {
+		notif: {
+				type: 'info',
+				title: 'Info message',
+				text: 'This is a test',
+				actionOnClose: false,
+				actionOnTextClick: true
+		},
+		notifs: [
+				{
+						type: 'info',
+						title: 'Info message',
+						text: 'This is a test',
+						showCloseBtn: true,
+						actionOnClose: false,
+						actionOnTextClick: true
+				},
+				{
+						type: 'warning',
+						title: 'Warning message',
+						text: 'This is a test',
+						showCloseBtn: false,
+						actionOnClose: '',
+						actionOnTextClick: ''
+				},
+				{
+						type: 'danger',
+						title: 'Danger message',
+						text: 'This is a test',
+						showCloseBtn: true,
+						actionOnClose: '',
+						actionOnTextClick: ''
+				},
+				{
+						type: 'success',
+						title: 'Success message',
+						text: 'This is a test',
+						showCloseBtn: true,
+						actionOnClose: '',
+						actionOnTextClick: ''
+				},
+				{
+						type: '',
+						title: 'Other message',
+						text: 'This is a test',
+						showCloseBtn: true,
+						actionOnClose: '',
+						actionOnTextClick: ''
+				}
+		]
+}
+export const SearchData = {
+		results:[],
+		phrase: [],
+		items:[
+				{name :'Saints Row: The Third'},
+				{name :'Worms Ultimate Mayhem'},
+				{name :'Dungeon Defenders'},
+				{name :'The Witcher 2: Assassins of Kings Enhanced Edition'},
+				{name :'Mafia II'},
+				{name :'Homefront'},
+				{name :'Call of Duty®: Black Ops'},
+				{name :'Fallout New Vegas: Dead Money'},
+		]
+}
+export const RatingData = {
+		items: [
+				{
+						name: 'Some title',
+						number: 4
+				},
+				{
+						name: 'Some second title',
+						number: 3.6
+				},
+				{
+						name: 'Some third a little bit bigger title',
+						number: 5
+				}
+		]
+}
+export const ProjectsData = {
+		projects: [
+				{
+				    id: 1,
+						game: {
+								title: 'Diablo III',
+								developer: 'Blizzard Entertainment',
+								img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+						},
+						description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+						img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+						funds: {
+								currency: 'USD',
+								obtained: 2834,
+								goal: 5000
+						}
+				},
+				{
+						id: 2,
+						game: {
+								title: 'World of Warcraft',
+								developer: 'Blizzard Entertainment',
+								img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+						},
+						description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+						img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+						funds: {
+								currency: 'GBP',
+								obtained: 7613,
+								goal: 8500
+						}
+				},
+				{
+						id: 3,
+						game: {
+								title: 'Diablo III',
+								developer: 'Blizzard Entertainment',
+								img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+						},
+						description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+						img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+						funds: {
+								currency: 'USD',
+								obtained: 2834,
+								goal: 5000
+						}
+				},
+				{
+						id: 4,
+						game: {
+								title: 'Diablo III',
+								developer: 'Blizzard Entertainment',
+								img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+						},
+						description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+						img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+						funds: {
+								currency: 'USD',
+								obtained: 2834,
+								goal: 5000
+						}
+				},
+		]
+}
+export const MilestoneData = {
+		milestones: [
+				{
+						"id": 1,
+						"title": "Create the base game with 2 dungeons",
+						"shortDescription": "Maecenas faucibus tincidunt consectetur. Phasellus ac malesuada quam, vitae vulputate quam. Nulla dui ipsum, suscipit sed laoreet auctor, sagittis et mauris.",
+						"text": "Aenean eu tellus vel tortor tincidunt pharetra. Aenean mattis, sapien vel lacinia accumsan, justo mi venenatis justo, ut accumsan diam mauris sit amet ipsum. Vivamus iaculis lectus vel egestas vehicula. Phasellus in lacus nunc. Curabitur lobortis arcu neque, non rutrum elit placerat eget.",
+						"img": "http://via.placeholder.com/350x250",
+						"status": "done",
+						"stepNumber": 1,
+						"progress": {
+								"percentDays": 45,
+								"daysLeft": 97,
+								"percentDone": 17,
+								"percentSpent": 83
+						}
+				},
+				{
+						"id": 3,
+						"title": "Lorem ipsum dolor sit amet",
+						"shortDescription": "Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
+						"text": "Proin sollicitudin faucibus mauris non pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce efficitur imperdiet urna, mollis vulputate risus feugiat sit amet. Ut turpis nulla, ultricies a ultricies eget, bibendum eu orci. In in suscipit nisl. Sed bibendum, mauris a convallis rhoncus, enim libero condimentum enim, in ultrices ligula orci ac nisl. Nunc vestibulum purus vitae lorem porta, eget aliquam nibh rhoncus.",
+						"img": "http://via.placeholder.com/350x250",
+						"status": "done",
+						"stepNumber": 3,
+						"progress": {
+								"percentDays": 34,
+								"daysLeft": 125,
+								"percentDone": 3,
+								"percentSpent": 80
+						}
+				},
+				{
+						"id": 2,
+						"title": "Praesent eu fringilla nisl",
+						"shortDescription": "Aenean aliquam erat quis tortor varius convallis. Suspendisse finibus orci at nibh pharetra, vel ullamcorper tellus mattis.",
+						"text": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac, sollicitudin lacinia arcu. Phasellus vehicula arcu tristique nunc lacinia facilisis. Nunc egestas congue massa a euismod. Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
+						"img": "http://via.placeholder.com/350x250",
+						"status": "InProgress",
+						"stepNumber": 2,
+						"progress": {
+								"percentDays": 91,
+								"daysLeft": 4,
+								"percentDone": 97,
+								"percentSpent": 99
+						}
+				},
+				{
+						"id": 4,
+						"title": "In hac habitasse platea dictumst",
+						"shortDescription": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac",
+						"text": "Praesent eu fringilla nisl. Nullam iaculis odio non est ornare sodales non a massa. Sed sollicitudin nibh et ipsum sollicitudin blandit. Quisque vel enim congue, semper leo vitae, luctus nibh.",
+						"img": "http://via.placeholder.com/350x250",
+						"status": "InProgress",
+						"stepNumber": 4,
+						"progress": {
+								"percentDays": 85,
+								"daysLeft": 45,
+								"percentDone": 37,
+								"percentSpent": 84
+						}
+				}
+		]
 }
