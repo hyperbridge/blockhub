@@ -1,6 +1,6 @@
 import Discussion, { DiscussionType } from '../../models/discussion'
-import Node from '../../models/node'
-import Message from '../../models/message'
+import Node, { NodeRelation } from '../../models/node'
+import Message, { MessageStatus } from '../../models/message'
 
 const { authenticate } = require('@feathersjs/authentication').hooks
 
@@ -38,9 +38,11 @@ const customFindMessages = function (options = {}) {
         const { app, data, service } = context
 
         const query = service.createQuery(context.params)
+
         const page = (Number(context.params.$page) > 0) ? Number(context.params.$page) : 0
 
         const result = await query
+            .where('messages.status', MessageStatus.Active)
             .eagerAlgorithm(Message.JoinEagerAlgorithm)
             .eager('[discussion(idCol), owner(publicCols)]')
             .page(page, 25)
@@ -66,7 +68,7 @@ const validageChatMessage = function (options = {}) {
             throw new Error('You can only submit data to chat discussions')
         }
 
-        if (data.value.length == 0) throw new Error('Message should contain somthing')
+        if (data.value.length == 0) throw new Error('Message should contain something')
 
         return {
             ...context,
@@ -113,7 +115,8 @@ const create = function (options = {}) {
 const addChatNode = function (options = {}) {
     return async context => {
         const { app, discussionId, result } = context
-        console.log('After message creation request: ', result)
+
+        console.log('After message creation request: ', result, context)
 
         const discussion = await app.service('discussions').get(discussionId)
 
@@ -145,29 +148,97 @@ const addMessageOwner = function (options = {}) {
 
 const validatePermission = function (options = {}) {
     return async context => {
-        const { app, data } = context
+        const { app, id } = context
 
         const account = context.params.user
 
-        const message = await app.service('messages').get(data.id)
+        const message = await app.service('messages').get(id)
         const profile = await app.service('profiles').get(message.ownerId)
 
         if (profile.accountId !== account.id) {
             throw new Error('Message must be owned by a profile of authenticated account')
         }
 
-        return context
+        return {
+            message,
+            ...context
+        }
+    }
+}
+
+const updateMessage = function (options = {}) {
+    return async context => {
+        const { message, data } = context
+
+        if (message.status === MessageStatus.Removed) {
+            throw new Error('Message is removed, you cant change it.')
+        }
+
+        const newMsg = await message.toJSON({ shallow: true, virtuals: false })
+        newMsg.value = data.value
+        newMsg.parentId = newMsg.id
+        delete newMsg.id
+
+        Object.keys(newMsg).map(key => {
+            if (!newMsg[key]) delete newMsg[key]
+        })
+
+        const relNode = await Node.query()
+            .where({
+                fromMessageId: message.id,
+                relationKey: NodeRelation.Chat
+            })
+
+        return {
+            newMessage: newMsg,
+            relationNode: relNode[0],
+            ...context,
+            data: {
+                status: MessageStatus.Removed
+            }
+        }
+    }
+}
+
+const createUpdatedMessage = function (options = {}) {
+    return async context => {
+        const { newMessage, relationNode } = context
+
+        const newMsg = await Message.query().insertAndFetch(newMessage)
+
+        return {
+            ...context,
+            discussionId: relationNode.toDiscussionId,
+            result: newMsg
+        }
+    }
+}
+
+const markMessageRemoved = function (options = {}) {
+    return async context => {
+        const { message, app } = context
+
+        await message.$query().update({
+            status: MessageStatus.Removed
+        })
+
+        return {
+            ...context,
+            result: {
+                status: 'Message removed'
+            }
+        }
     }
 }
 
 export const before = {
     all: [],
-    find: [customFindMessages()],
+    find: [authenticate('jwt'), customFindMessages()],
     get: [],
     create: [authenticate('jwt'), validageChatMessage(), create()],
-    update: [authenticate('jwt'), validatePermission(), validageChatMessage()],
-    patch: [authenticate('jwt'), validatePermission(), validageChatMessage()],
-    remove: [authenticate('jwt'), validatePermission(), validageChatMessage()]
+    update: [authenticate('jwt'), validatePermission()],
+    patch: [authenticate('jwt'), validatePermission(), updateMessage()],
+    remove: [authenticate('jwt'), validatePermission(), markMessageRemoved()]
 }
 
 export const after = {
@@ -176,7 +247,7 @@ export const after = {
     get: [addMessageOwner()],
     create: [addChatNode(), addMessageOwner()],
     update: [],
-    patch: [],
+    patch: [createUpdatedMessage(), addChatNode(), addMessageOwner()],
     remove: []
 }
 

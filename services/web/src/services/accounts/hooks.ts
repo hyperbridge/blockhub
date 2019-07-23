@@ -1,4 +1,6 @@
 import { appendFile } from 'fs'
+import Node, { NodeRelation } from '../../models/node'
+import Discussions, { DiscussionType } from '../../models/discussion'
 /* eslint-disable no-shadow-restricted-names */
 const { authenticate } = require('@feathersjs/authentication').hooks
 const { hashPassword, protect } = require('@feathersjs/authentication-local').hooks
@@ -35,6 +37,25 @@ const populate = function (options = {}): any {
     }
 }
 
+const subscribeToChatChannels = function (options = {}): any {
+    return async context => {
+        const { result: { id } } = context
+
+        const commonChannels = await Discussions.query()
+            .whereIn('type', [DiscussionType.Chat, DiscussionType.Both])
+
+        commonChannels.forEach(async item => {
+            await Node.query().insert({
+                fromProfileId: id,
+                toDiscussionId: item.id,
+                relationKey: NodeRelation.Chat
+            })
+        })
+
+        return context
+    }
+}
+
 // TODO lower case in before
 export const before = {
     all: [],
@@ -55,7 +76,7 @@ export const after = {
     ],
     find: [],
     get: [],
-    create: [],
+    create: [subscribeToChatChannels()],
     update: [],
     patch: [],
     remove: []
