@@ -15,7 +15,7 @@
                         v-access="'realm.read'"
                         status="none"
                         :to="`/realm/${realm.id}`">
-                        <span class="icon icon-letter-circle">{{ realm.name && realm.name.slice(0) }}</span>
+                        <span class="icon icon-letter-circle">{{ realm.name && realm.name.slice(0, 1) }}</span>
                         <span class="text">{{ realm.name }}</span>
                     </c-button>
 

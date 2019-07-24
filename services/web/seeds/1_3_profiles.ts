@@ -32,7 +32,7 @@ export const seed = async function (knex): Promise<any> {
                         id: 1,
                         author: {
                             name: 'Nakatochi',
-                            img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.pn'"
+                            img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.pn'
                         },
                         time: '2014-11-05 16:02:21 -02:00',
                         text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non maximus tellus`
@@ -41,7 +41,7 @@ export const seed = async function (knex): Promise<any> {
                         id: 2,
                         author: {
                             name: 'Watanabe',
-                            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7n'"
+                            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7n'
                         },
                         time: '2014-11-05 4:35:21 -02:00',
                         text: `Pellentesque in massa nec dui eleifend rhoncus. Etiam vitae est sit amet magna ornare ultrices`
@@ -50,7 +50,7 @@ export const seed = async function (knex): Promise<any> {
                         id: 3,
                         author: {
                             name: 'SatoshiSan',
-                            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7n'"
+                            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7n'
                         },
                         time: '2014-11-05 19:12:21 -02:00',
                         text: `Donec aliquet eros eu sapien pulvinar vulputate.`
@@ -59,7 +59,7 @@ export const seed = async function (knex): Promise<any> {
                         id: 4,
                         author: {
                             name: 'Nakatochi',
-                            img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.pn'"
+                            img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.pn'
                         },
                         time: '2014-11-05 6:09:21 -02:00',
                         text: `Duis orci enim, blandit et libero a, luctus accumsan elit.`
@@ -68,7 +68,7 @@ export const seed = async function (knex): Promise<any> {
                         id: 5,
                         author: {
                             name: 'Watanabe',
-                            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7n'"
+                            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7n'
                         },
                         time: '2014-11-05 11:58:21 -02:00',
                         text: `Praesent porta vulputate velit, sit amet scelerisque mauris suscipit eget. Aenean vel mi non metus consequat commodo quis vitae nibh.`
