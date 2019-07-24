@@ -4,6 +4,12 @@ import Profile from './profile'
 import BaseModel from './base'
 import Discussion from './discussion'
 
+export enum MessageStatus {
+    Active = 'active',
+    Disabled = 'disabled',
+    Removed = 'removed'
+}
+
 export default class Message extends BaseModel {
     public parentId!: number
     public ownerId!: number

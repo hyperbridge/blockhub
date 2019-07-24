@@ -7,9 +7,16 @@
                 <template slot="sidebar">
                     <c-chat-group-sidebar :channels="channels" @onChannelChange="onChannelChange($event)" />
                 </template>
-                <c-chat-group :currentUser="user" :sendMessage="createMessage">
+                <c-chat-group :currentUser="user" :sendMessage="createMessage" :editMessage="messageToEdit" v-if="signedIn">
                     <template slot="messages">
-                        <c-chat-message v-for="msg in messages" :key="msg.id" :text="msg.value" :time="msg.createdAt" :user="msg.owner" />
+                        <c-chat-message
+                                v-for="msg in messages" :key="msg.id"
+                                :message="msg"
+                                :owner="msg.owner"
+                                :user="user"
+                                @deleteMsg="deleteMessage($event)"
+                                @editMsg="editMessage($event)"
+                        />
                     </template>
                     <template slot="users">
                         <c-chat-user
@@ -48,7 +55,8 @@ export default {
         activeChannel: null,
         messagesData: [],
         channelUsers: [],
-        channelIfo: {}
+        channelIfo: {},
+        messageToEditData: null
     }),
 
     computed: {
@@ -56,32 +64,32 @@ export default {
             return this.$store.state.auth.user
         },
 
+        signedIn() {
+            return this.$store.state.application.signedIn ? true : false
+            //return this.$store.state.application.signedIn
+        },
+
         messages() {
+            //console.log('message', this.signedIn)
+            if (!this.$store.getters['messages/list']) return []
             return this.$store.getters['messages/list']
+        },
+
+        messageToEdit() {
+            return this.messageToEditData;
         }
     },
 
+    beforeMount() {
+        //if (!this.signedIn) this.$store.commit('application/activeModal', 'login')
+    },
 
-    async created() {
-        await this.updateChannels()
-        this.updateChannelInfo()
-        this.updateChannelMessages()
-
-        this.$api.service('messages').on('created', message => {
-            console.log('Someone created a message', message)
-        })
-        // this.$feathers.service('messages').on('created', function(message) {debugger
-        //     console.log('Someone created a message', message)
-        // })
-        // console.log(this.$feathers.service, this.$feathers.service('messages'), this.$feathers.io.io)
-        // console.log(2)
-        // this.$feathers.io.io.on('messages created', function(message) {debugger
-        //     console.log('Someone created a message', message)
-        // })
-        // console.log(3)
-        // this.$feathers.on('messages created', function(message) {debugger
-        //     console.log('Someone created a message', message)
-        // })
+    async mounted() {
+        if (this.signedIn && this.channels.length == 0) {
+            await this.updateChannels()
+            await this.updateChannelMessages()
+            this.updateChannelInfo()
+        }
     },
 
     methods: {
@@ -93,15 +101,30 @@ export default {
             this.updateChannelMessages()
         },
 
-        async createMessage(data) {
-            const result = await this.$store.dispatch('messages/create', {
-                value: data,
-                discussionId: this.activeChannel.id,
-                ownerId: this.$store.state.application.activeProfile.id
-            })
+        async createMessage(messageData) {
+            if (!this.messageToEditData) {
+                return await this.$store.dispatch(
+                    'messages/create',
+                    {
+                        value: messageData,
+                        discussionId: this.activeChannel.id,
+                        ownerId: this.$store.state.application.activeProfile.id,
+                    }
+                )
+            } else {
+                const result = await this.$store.dispatch(
+                    'messages/patch',
+                    [
+                        this.messageToEditData.id,
+                        {
+                            value: messageData
+                        }
+                    ]
+                )
+                this.messageToEditData = null
 
-            // this.messages.push(result)
-            return result
+                return result
+            }
         },
 
         async updateChannelMessages() {
@@ -109,11 +132,13 @@ export default {
                 return
             }
 
+            this.$store.commit('messages/clearList')
             this.messagesData = (await this.$store.dispatch('messages/find', {
                 query: {
                     'discussion.id': this.activeChannel.id,
+                    'messages.status': 'active',
                     $sort: {
-                        createdAt: -1
+                        createdAt: 1
                     },
                     $limit: 25
                 }
@@ -125,6 +150,7 @@ export default {
                 return
             }
 
+
             const { chat, ...channel } = await this.$store.dispatch('discussions/get', [
                 this.activeChannel.id,
                 {
@@ -133,6 +159,7 @@ export default {
                     }
                 }
             ])
+
             this.channelUsers = chat
             this.channelIfo = channel
         },
@@ -145,6 +172,16 @@ export default {
             })).data
 
             this.activeChannel = this.channels[this.channelIndex]
+        },
+
+        deleteMessage(id) {
+            // @todo implement message deletion handling
+            console.log('deleting message', id)
+        },
+
+        editMessage(message) {
+            console.log('editing message', message)
+            this.messageToEditData = message
         }
     }
 }

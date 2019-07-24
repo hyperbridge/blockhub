@@ -1,8 +1,7 @@
-import Model, {DiscussionType} from '../../models/discussion'
+import Model, { DiscussionType } from '../../models/discussion'
 import createService = require('feathers-objection')
 import hooks = require('./hooks')
-import Profile from "../../models/profile";
-import Node, {NodeRelation} from "../../models/node";
+import Node, { NodeRelation } from '../../models/node'
 
 export default function (app): any {
     const paginate = app.get('paginate')
@@ -21,8 +20,7 @@ export default function (app): any {
     }
 
     app.use('/discussions/:id/:channelId/joinChannel', {
-        async create(data, {route: {id, channelId}}) {
-
+        async create (data, { route: { id, channelId } }) {
             return await Node.query().insert({
                 fromProfileId: id,
                 toDiscussionId: channelId,
@@ -32,8 +30,7 @@ export default function (app): any {
     })
 
     app.use('/discussions/:id/joinChannel', {
-        async create(data, {route: {id, channelId}}) {
-
+        async create (data, { route: { id, channelId } }) {
             return await Node.query().insert({
                 fromProfileId: id,
                 toDiscussionId: channelId,

@@ -4,7 +4,7 @@
             <c-scrollable-content>
                 <slot name="messages" />
             </c-scrollable-content>
-            <c-chat-answer-field :user="currentUser" :sendMessage="sendMessage" />
+            <c-chat-answer-field :user="currentUser" :sendMessage="sendMessage" :editMessage="editMessage" />
         </div>
         <div class="chat__user-list">
             <slot name="users" />
@@ -21,6 +21,7 @@ export default {
     },
     props: {
         currentUser: Object,
+        editMessage: Object,
         sendMessage: Function
     },
     methods: { }

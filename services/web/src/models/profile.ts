@@ -73,7 +73,7 @@ export default class Profile extends BaseModel {
     static get modifiers () {
         return {
             publicCols (builder) {
-                builder.select(['name', 'avatar', 'id'])
+                builder.select(['name', 'avatar', 'id', 'accountId'])
             }
         }
     }

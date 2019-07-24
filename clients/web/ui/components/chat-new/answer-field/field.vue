@@ -16,7 +16,7 @@
                 ref="messageDOM"
                 @focus="setInputActive(true)"
                 @blur="setInputActive(false)"
-                @keydown="handleKey"></div>
+                @keydown="handleKey">{{ editMessage ? editMessage.value : '' }}</div>
             <div class="user-input--buttons">
                 <c-button v-if="showAttachment" status="plain" @click="$emit('attachment')">
                     <i class="fas fa-paperclip" />
@@ -64,7 +64,8 @@ export default {
             default: true
         },
         user: Object,
-        sendMessage: Function
+        sendMessage: Function,
+        editMessage: Object
     },
 
     data() {

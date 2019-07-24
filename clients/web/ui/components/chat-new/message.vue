@@ -6,7 +6,7 @@
         <div class="chat-message__body">
             <div class="chat-message__info">
                 <strong>
-                    {{ user.name }}
+                    {{ message.owner.name }}
                 </strong>
                 <span>
                     {{ when }}
@@ -14,7 +14,9 @@
             </div>
             <div
                 class="chat-message__content"
-                v-html="text" />
+                v-html="message.value" />
+            <div v-if="user.id == message.owner.accountId" @click="$emit('deleteMsg', message.id)"><small>Delete</small></div>
+            <div v-if="user.id == message.owner.accountId" @click="$emit('editMsg', message)"><small>Edit</small></div>
             <!--<c-emoji />-->
         </div>
     </div>
@@ -27,20 +29,23 @@ export default {
     components: {
         // 'c-emoji': () => import('~/components/emoji').then(m => m.default || m)
     },
+
     props: {
         user: Object,
-        time: String,
-        text: String
+        message: Object
     },
+
     computed: {
         timeAgo() {
-            // return this.time.fromNow();
+             return moment(this.time).fromNow();
         },
         when() {
-            return moment(this.time).format('DD MMMM, YYYY h:mm')
+            if (moment(this.message.createdAt).format('YYYYMMMMDD') == moment().format('YYYYMMMMDD'))
+                return this.timeAgo
+            return moment(this.message.createdAt).format('DD MMMM, YYYY h:mm')
         },
         avatar() {
-            return this.user.avatar ? this.user.avatar : 'https://i.pravatar.cc/40?img=50'
+            return this.message.owner.avatar ? this.message.owner.avatar : 'https://i.pravatar.cc/40?img=50'
         }
     }
 }
