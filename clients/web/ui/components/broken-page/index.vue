@@ -19,22 +19,22 @@
                 </p>
             </div>
             <div v-else class="haiku">
-                <h1>{{ haiku[0] }}</h1>
-                <h3>{{ haiku[1] }}</h3>
-                <h3>{{ haiku[2] }}</h3>
-                <p class="error">
-                    Error status: {{ isError.statusCode }}<br>
-                    Error message: {{ isError.message }}
-                </p>
+                <h2>{{ haiku[0] }}</h2>
+                <h2>{{ haiku[1] }}</h2>
+                <h2>{{ haiku[2] }}</h2>
             </div>
-            <br>
-            <br><br>
+            <br />
             <c-button
-                class="c-button--xl"
+                class="c-button--xl go-home"
                 status="gradient-info"
                 @click="goHome">
                 Go Home
             </c-button>
+            <br />
+            <p class="error">
+                Error status: {{ isError.statusCode }}<br>
+                Error message: {{ isError.message }}
+            </p>
         </div>
     </div>
 </template>
@@ -154,13 +154,23 @@ export default {
         .haiku {
             display: inline-block;
             text-align: left;
-            h3 {
-                margin-left: 30px;
+            margin: 80px 0 50px;
+            h2 {
+                margin-left: 25px;
+                margin-bottom: 10px;
+
+                &:first-child {
+                    margin-left: 0;
+                }
             }
         }
         .error {
+            margin-top: 80px;
+            display: inline-block;
+            text-align: left;
             margin-left: 30px;
             font-style: italic;
+            max-width: 500px;
         }
     }
 </style>
