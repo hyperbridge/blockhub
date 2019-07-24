@@ -84,9 +84,9 @@ export default async ({ app, store }) => {
             // commit('accounts/setCurrent', payload.userId)
             // commit('auth/setAccessToken', accessToken)
             // commit('auth/setPayload', payload)
-            // commit('auth/setUser', getters['accounts/current'])
+            // commit('auth/setUser', store.getters['accounts/current'])
 
-            await dispatch('application/authenticate')
+            //await dispatch('application/authenticate')
         } catch (error) {
             console.log('[BlockHub] Error logging in', error)
             dispatch('logout')
