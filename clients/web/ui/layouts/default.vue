@@ -5,7 +5,7 @@
                 <c-error-page :isError="nuxtError" />
             </div>
             <div v-else>
-                <nuxt />
+                <router-view />
             </div>
         </c-render-condition>
 
