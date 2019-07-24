@@ -1,1 +1,6 @@
-{ /* editor requires this file */ }
+{
+	/* we need this for visual studio code linting */
+    "compilerOptions": {
+        "target": "es2018"
+    }
+}

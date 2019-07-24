@@ -8,7 +8,7 @@ import Community from './community'
 import Collection from './collection'
 import Discussion from './discussion'
 import BaseModel from './base'
-import Vote from './vote';
+import Vote from './vote'
 
 export enum NodeRelation {
     Chat = 'chat'

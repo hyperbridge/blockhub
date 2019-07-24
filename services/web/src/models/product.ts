@@ -17,7 +17,7 @@ type Language = any
 type SystemRequirement = any
 type ProductPlan = any
 
-type ProductMeta = {
+interface ProductMeta {
     name: string;
     members: Array<Profile>;
     isProposal: boolean;
@@ -60,6 +60,8 @@ export default class Product extends BaseModel {
 
     public project!: Project
     public projectId!: number
+
+    public meta!: ProductMeta
 
     public static get tableName (): string {
         return 'products'
@@ -115,7 +117,7 @@ export default class Product extends BaseModel {
                         to: 'nodes.fromVoteId',
                         extra: ['relationKey']
                     }
-                },
+                }
             },
             rating: {
                 relation: Model.HasOneRelation,
@@ -232,7 +234,7 @@ export default class Product extends BaseModel {
                         from: 'nodes.fromProductId',
                         to: 'nodes.toTagId',
                         extra: ['relationKey'],
-                        beforeInsert(model) {
+                        beforeInsert (model) {
                             (model as Node).relationKey = 'tags'
                         }
                     }
@@ -244,7 +246,7 @@ export default class Product extends BaseModel {
                     qb.where('node_tags.relationKey', '=', 'tags')
                     // @ts-ignore
                     // TODO: figure this out
-                    //qb._parentQuery.whereRaw('"nodes"."fromProductId" = "products"."id"')
+                    // qb._parentQuery.whereRaw('"nodes"."fromProductId" = "products"."id"')
                 }
             },
             internalTags: {
@@ -257,7 +259,7 @@ export default class Product extends BaseModel {
                         from: 'nodes.fromProductId',
                         to: 'nodes.toTagId',
                         extra: ['relationKey'],
-                        beforeInsert(model) {
+                        beforeInsert (model) {
                             (model as Node).relationKey = 'internalTags'
                         }
                     }
@@ -269,7 +271,7 @@ export default class Product extends BaseModel {
                     qb.where('node_tags.relationKey', '=', 'internalTags')
                     // @ts-ignore
                     // TODO: figure this out
-                    //qb._parentQuery.whereRaw('"nodes"."fromProductId" = "products"."id"')
+                    // qb._parentQuery.whereRaw('"nodes"."fromProductId" = "products"."id"')
                 }
             }
         }

@@ -39,7 +39,7 @@ export default class Discussion extends BaseModel {
     static get modifiers () {
         return {
             publicCols (builder) {
-                builder.select(['id', 'key', 'value']);
+                builder.select(['id', 'key', 'value'])
             },
             idCol (builder) {
                 builder.select(['id'])

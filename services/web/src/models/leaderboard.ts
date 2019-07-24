@@ -78,7 +78,7 @@ export default class Leaderboard extends BaseModel {
                 beforeInsert (model) {
                     (model as Node).relationKey = 'players'
                 }
-            },
+            }
         }
     }
 }
