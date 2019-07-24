@@ -1,9 +1,12 @@
 {
-    "name": "blockhub-web-service",
+    "name": "@hyperbridge/blockhub-web-service",
     "description": "BlockHub Web Service",
     "repository": {},
     "license": "SEE LICENSE IN LICENSE.md",
-    "version": "0.1.0",
+    "publishConfig": {
+        "access": "private"
+    },
+    "version": "1.0.0",
     "scripts": {
         "tsc": "./node_modules/tsc",
         "watch": "tsc -w",
@@ -12,13 +15,13 @@
         "build": "tsc",
         "start": "npm run build-production && node ./build/src/index.js",
         "dev": "cross-env NODE_ENV=development yarn run nodemon",
-        "migrate": "ts-node -P ./tsconfig.json ./node_modules/.bin/knex migrate:latest --knexfile knexfile.js",
+        "migrate-all": "ts-node -P ./tsconfig.json ./node_modules/.bin/knex migrate:latest --knexfile knexfile.js",
         "migrate-heroku": "heroku run 'knex migrate:latest'",
         "seed-all": "ts-node -P ./tsconfig.json ~/.nvm/versions/node/v10.8.0/bin/knex seed:run --knexfile knexfile.js",
         "seed": "ts-node -P ./tsconfig.json ~/.nvm/versions/node/v10.8.0/bin/knex seed:run --knexfile knexfile.js --specific=",
         "test-api-call": "curl http://localhost:9001/api/v1/ping",
         "knex": "ts-node -P ./tsconfig.json ./node_modules/.bin/knex",
-        "refresh-db": "yarn db:migrate && yarn db:seed",
+        "refresh-db": "yarn migrate-all && yarn seed-all",
         "deploy-beta": "cp -R dist/ ../../../beta-api.blockhub.gg && cd ../../../beta-api.blockhub.gg && rm CNAME && git add -A && git commit -m \"Rebuild\" && git push && cd ../../../blockhub/services/web",
         "deploy-preview": "cp -R dist/ ../../../preview-api.blockhub.gg && cd ../../../preview-api.blockhub.gg && rm CNAME && git add -A && git commit -m \"Rebuild\" && git push && cd ../../../blockhub/services/web",
         "deploy-staging": "cp -R dist/ ../../../staging-api.blockhub.gg && cd ../../../staging-api.blockhub.gg && rm CNAME && git add -A && git commit -m \"Rebuild\" && git push && cd ../../../blockhub/services/web",

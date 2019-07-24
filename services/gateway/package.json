@@ -1,8 +1,11 @@
 {
-  "name": "web",
+  "name": "@hyperbridge/blockhub-gateway",
   "description": "Express Gateway Instance Bootstraped from Command Line",
   "repository": {},
   "license": "UNLICENSED",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "1.0.0",
   "main": "server.js",
   "dependencies": {

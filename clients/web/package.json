@@ -1,8 +1,11 @@
 {
-    "name": "blockhub-web-client",
+    "name": "@hyperbridge/blockhub-web-client",
     "version": "2.0.0rc1",
     "description": "BlockHub Web Client",
     "license": "SEE LICENSE IN LICENSE.md",
+    "publishConfig": {
+        "access": "private"
+    },
     "scripts": {
         "start": "cross-env NODE_ENV=production nuxt start",
         "generate-sitemap": "node src/generate-sitemap.js",

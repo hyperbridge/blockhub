@@ -1,5 +1,5 @@
 {
-    "name": "hyperbridge-test-runner",
+    "name": "@hyperbridge/test-runner",
     "version": "0.7.1",
     "description": "Hyperbridge Test Runner",
     "homepage": "https://hyperbridge.com",

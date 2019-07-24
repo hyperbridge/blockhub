@@ -1,6 +1,9 @@
 {
-  "name": "verification-service",
+  "name": "@hyperbridge/blockhub-verification-service",
   "description": "",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "1.0.0",
   "license": "UNLICENSED",
   "private": true,
