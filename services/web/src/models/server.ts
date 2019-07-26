@@ -60,7 +60,7 @@ export default class Server extends BaseModel {
                 beforeInsert (model) {
                     (model as Node).relationKey = 'tags'
                 }
-            },
+            }
         }
     }
 }

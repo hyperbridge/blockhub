@@ -21,7 +21,7 @@ export default class BaseModel extends Model {
         // @ts-ignore
         if (this.constructor.timestamps) {
             jsonSchema.properties.createdAt = { type: ['string', 'object'], format: 'date-time' }
-            //jsonSchema.properties.updatedAt = { type: ['string', 'object'], format: 'date-time' }
+            // jsonSchema.properties.updatedAt = { type: ['string', 'object'], format: 'date-time' }
         }
 
         jsonSchema.properties.id = { type: 'integer' }
@@ -46,8 +46,8 @@ export default class BaseModel extends Model {
     public $beforeUpdate (): any {
         // @ts-ignore
         if (!this.constructor.timestamps) return
-        //// @ts-ignore
-        //if (typeof this.createdAt === 'function') this.createdAt = this.createdAt.toISOString()
+        // // @ts-ignore
+        // if (typeof this.createdAt === 'function') this.createdAt = this.createdAt.toISOString()
         this.updatedAt = new Date().toISOString()
     }
 

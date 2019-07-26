@@ -10,13 +10,13 @@
                 <c-chat-group :currentUser="user" :sendMessage="createMessage" :editMessage="messageToEdit" v-if="signedIn">
                     <template slot="messages">
                         <c-chat-message
-                                v-for="msg in messages" :key="msg.id"
-                                :message="msg"
-                                :owner="msg.owner"
-                                :user="user"
-                                @deleteMsg="deleteMessage($event)"
-                                @editMsg="editMessage($event)"
-                        />
+                            v-for="msg in messages"
+                            :key="msg.id"
+                            :message="msg"
+                            :owner="msg.owner"
+                            :user="user"
+                            @deleteMsg="deleteMessage($event)"
+                            @editMsg="editMessage($event)" />
                     </template>
                     <template slot="users">
                         <c-chat-user
