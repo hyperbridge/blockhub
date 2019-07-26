@@ -1,1 +1,0 @@
-web: cd services/web && npm start
