@@ -81,7 +81,7 @@ export default {
     props: ['product'],
     computed: {
         projects() {
-            return this.$db.funding.projects.find({ 'targetId': { '$eq': this.product.id } }) || []
+            return [] //this.$db.funding.projects.find({ 'targetId': { '$eq': this.product.id } }) || []
         }
     }
 }

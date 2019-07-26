@@ -12,14 +12,14 @@
         <div
             v-if="posts.length"
             class="col-12">
-            <div v-if="community_1">
+            <div v-if="community1">
                 <c-item
                     v-for="(post, index) in posts"
                     :key="index"
                     :post="post" />
             </div>
 
-            <div v-else-if="community_2">
+            <div v-else-if="community2">
                 <c-item :post="post" />
             </div>
         </div>
@@ -37,8 +37,8 @@ export default {
     data() {
         let data = {
             errors: [],
-            community_1: false,
-            community_2: true,
+            community1: false,
+            community2: true,
             posts: [],
             post: null
         }

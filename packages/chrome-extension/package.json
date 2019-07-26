@@ -1,0 +1,8 @@
+{
+  "name": "@hyperbridge/blockhub-chrome-extension",
+  "version": "1.3.0",
+  "description": "",
+  "publishConfig": {
+    "access": "public"
+  }
+}

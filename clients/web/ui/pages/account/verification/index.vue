@@ -277,9 +277,8 @@ export default {
                     }
                 })
                     .then(res => {
-                        this.$db.application.config.data[0].account.isVerifying = true
-                        this.$db.application.config.data[0].account.verificationTimestamp = new Date()
-                        this.$db.save()
+                        this.$store.state.application.account.isVerifying = true
+                        this.$store.state.application.account.verificationTimestamp = new Date()
 
                         this.verificationLink = res.data.verification.url
                     })

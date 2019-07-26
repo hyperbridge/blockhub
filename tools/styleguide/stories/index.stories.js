@@ -103,27 +103,7 @@ storiesOf('Promotion Box', module)
             'c-promotion-list': PromotionList,
             'c-promotion-item': PromotionItem
         },
-        data() {
-            return {
-                promotions: [
-                    {
-                        title: 'Game + Standard Founder Pack',
-                        price: '10.00',
-                        basic: true
-                    },
-                    {
-                        title: 'Game + Deluxe Founder Pack',
-                        price: '10.00',
-                        basic: false
-                    },
-                    {
-                        title: 'Game + Collectors Founder Pack',
-                        price: '10.00',
-                        basic: false
-                    }
-                ]
-            }
-        },
+        data: () => data.PromotionBoxData ,
         template: `<div class="row"><div class="col-6 p-5">
                         <c-promotion-list title="Packages" >
                             <template v-for="(promotion, index) in promotions">
@@ -156,59 +136,7 @@ storiesOf('Notifications', module)
         components: {
             'c-notification': Notification
         },
-        data() {
-            return {
-                notif: {
-                    type: 'info',
-                    title: 'Info message',
-                    text: 'This is a test',
-                    actionOnClose: false,
-                    actionOnTextClick: true
-                },
-                notifs: [
-                    {
-                        type: 'info',
-                        title: 'Info message',
-                        text: 'This is a test',
-                        showCloseBtn: true,
-                        actionOnClose: false,
-                        actionOnTextClick: true
-                    },
-                    {
-                        type: 'warning',
-                        title: 'Warning message',
-                        text: 'This is a test',
-                        showCloseBtn: false,
-                        actionOnClose: '',
-                        actionOnTextClick: ''
-                    },
-                    {
-                        type: 'danger',
-                        title: 'Danger message',
-                        text: 'This is a test',
-                        showCloseBtn: true,
-                        actionOnClose: '',
-                        actionOnTextClick: ''
-                    },
-                    {
-                        type: 'success',
-                        title: 'Success message',
-                        text: 'This is a test',
-                        showCloseBtn: true,
-                        actionOnClose: '',
-                        actionOnTextClick: ''
-                    },
-                    {
-                        type: '',
-                        title: 'Other message',
-                        text: 'This is a test',
-                        showCloseBtn: true,
-                        actionOnClose: '',
-                        actionOnTextClick: ''
-                    }
-                ]
-            }
-        },
+		    data: () => data.NotifsData ,
         template: `
             <div class="row m-0">
                 <div class="col-4 pt-3 text-white d-flex flex-column">
@@ -226,58 +154,7 @@ storiesOf('Notifications', module)
         components: {
             'c-notification-inline': NotificationInline
         },
-        data() {
-            return {
-                notif: {
-                    type: 'info',
-                    title: 'Info message',
-                    text: 'This is a test',
-                    actionOnClose: false,
-                    actionOnTextClick: true
-                },
-                notifs: [
-                    {
-                        type: 'info',
-                        title: 'Info message',
-                        text: 'This is a test',
-                        showCloseBtn: true,
-                        actionOnClose: false,
-                        actionOnTextClick: true
-                    },
-                    {
-                        type: 'warning',
-                        title: 'Warning message',
-                        text: 'This is a test',
-                        showCloseBtn: false,
-                        actionOnClose: '',
-                        actionOnTextClick: ''
-                    },
-                    {
-                        type: 'danger',
-                        title: 'Danger message',
-                        text: 'This is a test',
-                        showCloseBtn: true,
-                        actionOnClose: '',
-                        actionOnTextClick: ''
-                    },
-                    {
-                        type: 'success',
-                        title: 'Success message',
-                        text: 'This is a test',
-                        showCloseBtn: true,
-                        actionOnClose: '',
-                        actionOnTextClick: ''
-                    },
-                    {
-                        title: 'Other message',
-                        text: 'This is a test',
-                        showCloseBtn: true,
-                        actionOnClose: '',
-                        actionOnTextClick: ''
-                    }
-                ]
-            }
-        },
+		    data: () => data.NotifsData ,
         template: `
             <div class="row m-0">
                 <div class="col-4 pt-3 text-white">
@@ -307,22 +184,7 @@ storiesOf('Searcher', module)
         components: {
             'c-searcher': Searcher
         },
-        data() {
-            return {
-                results:[],
-                phrase: [],
-                items:[
-                    {name :'Saints Row: The Third'},
-                    {name :'Worms Ultimate Mayhem'},
-                    {name :'Dungeon Defenders'},
-                    {name :'The Witcher 2: Assassins of Kings Enhanced Edition'},
-                    {name :'Mafia II'},
-                    {name :'Homefront'},
-                    {name :'Call of Duty®: Black Ops'},
-                    {name :'Fallout New Vegas: Dead Money'},
-                ]
-            }
-        },
+		    data: () => data.SearchData ,
         methods: {
             search() {
                 this.results = this.phrase.length ? this.getByVal(this.phrase) : []
@@ -371,24 +233,7 @@ storiesOf('Rating', module)
         components: {
             'c-rating-block': RatingBlock
         },
-        data() {
-            return {
-                items: [
-                    {
-                        name: 'Some title',
-                        number: 4
-                    },
-                    {
-                        name: 'Some second title',
-                        number: 3.6
-                    },
-                    {
-                        name: 'Some third a little bit bigger title',
-                        number: 5
-                    }
-                ]
-            }
-        },
+		    data: () => data.RatingData ,
         template: `
         <div class="row p-5">
             <div class="col-8">
@@ -484,68 +329,7 @@ storiesOf('Projects', module)
         components: {
             'c-project-card': Card
         },
-        data() {
-            return {
-                projects: [
-                    {
-                        game: {
-                            title: 'Diablo III',
-                            developer: 'Blizzard Entertainment',
-                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                        },
-                        description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
-                        img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
-                        funds: {
-                            currency: 'USD',
-                            obtained: 2834,
-                            goal: 5000
-                        }
-                    },
-                    {
-                        game: {
-                            title: 'World of Warcraft',
-                            developer: 'Blizzard Entertainment',
-                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                        },
-                        description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
-                        img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
-                        funds: {
-                            currency: 'GBP',
-                            obtained: 7613,
-                            goal: 8500
-                        }
-                    },
-                    {
-                        game: {
-                            title: 'Diablo III',
-                            developer: 'Blizzard Entertainment',
-                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                        },
-                        description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
-                        img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
-                        funds: {
-                            currency: 'USD',
-                            obtained: 2834,
-                            goal: 5000
-                        }
-                    },
-                    {
-                        game: {
-                            title: 'Diablo III',
-                            developer: 'Blizzard Entertainment',
-                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                        },
-                        description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
-                        img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
-                        funds: {
-                            currency: 'USD',
-                            obtained: 2834,
-                            goal: 5000
-                        }
-                    },
-                ]
-            }
-        },
+		    data: () => data.ProjectsData,
         template: `
                 <div class="row">
                     <div class="col-4" v-for="(project, index) in projects" :key="index">
@@ -556,7 +340,7 @@ storiesOf('Projects', module)
                             :parentImage="project.game.img"
                             :parentName="project.game.title"
                             :parentDeveloper="project.game.developer"
-                            :id="project"
+                            :id="project.id"
                             customClass="project"
                         />
                     </div>
@@ -573,72 +357,7 @@ storiesOf('Projects', module)
         components: {
             'c-milestone': Milestone
         },
-        data() {
-            return {
-                milestones: [
-                    {
-                        "id": 1,
-                        "title": "Create the base game with 2 dungeons",
-                        "shortDescription": "Maecenas faucibus tincidunt consectetur. Phasellus ac malesuada quam, vitae vulputate quam. Nulla dui ipsum, suscipit sed laoreet auctor, sagittis et mauris.",
-                        "text": "Aenean eu tellus vel tortor tincidunt pharetra. Aenean mattis, sapien vel lacinia accumsan, justo mi venenatis justo, ut accumsan diam mauris sit amet ipsum. Vivamus iaculis lectus vel egestas vehicula. Phasellus in lacus nunc. Curabitur lobortis arcu neque, non rutrum elit placerat eget.",
-                        "img": "http://via.placeholder.com/350x250",
-                        "status": "done",
-                        "stepNumber": 1,
-                        "progress": {
-                            "percentDays": 45,
-                            "daysLeft": 97,
-                            "percentDone": 17,
-                            "percentSpent": 83
-                        }
-                    },
-                    {
-                        "id": 3,
-                        "title": "Lorem ipsum dolor sit amet",
-                        "shortDescription": "Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
-                        "text": "Proin sollicitudin faucibus mauris non pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce efficitur imperdiet urna, mollis vulputate risus feugiat sit amet. Ut turpis nulla, ultricies a ultricies eget, bibendum eu orci. In in suscipit nisl. Sed bibendum, mauris a convallis rhoncus, enim libero condimentum enim, in ultrices ligula orci ac nisl. Nunc vestibulum purus vitae lorem porta, eget aliquam nibh rhoncus.",
-                        "img": "http://via.placeholder.com/350x250",
-                        "status": "done",
-                        "stepNumber": 3,
-                        "progress": {
-                            "percentDays": 34,
-                            "daysLeft": 125,
-                            "percentDone": 3,
-                            "percentSpent": 80
-                        }
-                    },
-                    {
-                        "id": 2,
-                        "title": "Praesent eu fringilla nisl",
-                        "shortDescription": "Aenean aliquam erat quis tortor varius convallis. Suspendisse finibus orci at nibh pharetra, vel ullamcorper tellus mattis.",
-                        "text": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac, sollicitudin lacinia arcu. Phasellus vehicula arcu tristique nunc lacinia facilisis. Nunc egestas congue massa a euismod. Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
-                        "img": "http://via.placeholder.com/350x250",
-                        "status": "InProgress",
-                        "stepNumber": 2,
-                        "progress": {
-                            "percentDays": 91,
-                            "daysLeft": 4,
-                            "percentDone": 97,
-                            "percentSpent": 99
-                        }
-                    },
-                    {
-                        "id": 4,
-                        "title": "In hac habitasse platea dictumst",
-                        "shortDescription": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac",
-                        "text": "Praesent eu fringilla nisl. Nullam iaculis odio non est ornare sodales non a massa. Sed sollicitudin nibh et ipsum sollicitudin blandit. Quisque vel enim congue, semper leo vitae, luctus nibh.",
-                        "img": "http://via.placeholder.com/350x250",
-                        "status": "InProgress",
-                        "stepNumber": 4,
-                        "progress": {
-                            "percentDays": 85,
-                            "daysLeft": 45,
-                            "percentDone": 37,
-                            "percentSpent": 84
-                        }
-                    }
-                ]
-            }
-        },
+		    data: () => data.MilestoneData,
         template: `<div class="row">
                 <c-milestone
                                     v-for="(milestone, index) in milestones"
@@ -5398,7 +5117,7 @@ storiesOf('Video Popup', module)
 `
     }))
 
-storiesOf('Wallet Popup', module)
+storiesOf('Wallet', module)
     .add('default', () => ({
         components: {
             'c-wallet-base': () => import('~/components/wallet/base').then(m => m.default || m),
@@ -5408,6 +5127,7 @@ storiesOf('Wallet Popup', module)
             'c-wallet-edit': () => import('~/components/wallet/account-edit').then(m => m.default || m),
             'c-wallet-token': () => import('~/components/wallet/token').then(m => m.default || m),
         },
+		    data: () => data.WalletData,
         template: `<div class="row p-3 m-0 flex-wrap" style="width: 1125px">
                         <div class="mx-2 mb-4">
                             <h4 class="text-white">Main screen</h4>
@@ -5458,119 +5178,6 @@ storiesOf('Chat', module)
         },
         data() {
             return {
-                users:[
-                    {
-                        id: 1,
-                        avatar: 'http://sharethingz.com/wp-content/uploads/2014/08/avatar.png',
-                        name: 'Gregory Smith',
-                        game: 'Dota II',
-                        status: 'offline',
-                        admin: false
-                    },
-                    {
-                        id: 2,
-                        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE0I_Z85x-UDnEncEgx0myKWxgAirSMenb4VN2TepCnropn4Hl',
-                        name: 'Louis Burns',
-                        game: 'WarCraft',
-                        status: 'busy',
-                        admin: false
-                    },
-                    {
-                        id: 3,
-                        avatar: 'http://geedmo.com/codecanyon/bskins/plan/assets/img/avatar.png',
-                        name: 'Thomas Harris',
-                        game: 'Heroes',
-                        status: 'online',
-                        admin: true
-                    },
-                    {
-                        id: 4,
-                        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6yM6JujrHFOvFH9NvuV2lWnyXECBr1SWeF-I0tMdYmK942MXr',
-                        name: 'Terri Kopp',
-                        game: 'Dota II',
-                        status: 'online',
-                        admin: false
-                    },
-                    {
-                        id: 5,
-                        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPk-mHx8SMUl0FBrnGMm49fksyHtj9yPPodc6JbrdubpbSqKxU',
-                        name: 'Mildred Floyd',
-                        game: 'CS GO',
-                        status: 'online',
-                        admin: false
-                    }
-                ],
-                messages:[
-                    {
-                        user: 2,
-                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit ullamcorper enim varius sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,',
-                        time: '28 July, 2018'
-                    },
-                    {
-                        user: 3,
-                        text: 'Duis sit amet nisl efficitur, rutrum arcu ac, bibendum ligula. Mauris viverra pellentesque massa sed congue. Nunc dictum gravida lobortis.',
-                        time: '28 July, 2018'
-                    },
-                    {
-                        user: 1,
-                        text: 'Aliquam maximus convallis dui ut facilisis.',
-                        time: '28 July, 2018'
-                    },
-                    {
-                        user: 2,
-                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit ullamcorper enim varius sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,',
-                        time: '28 July, 2018'
-                    },
-                    {
-                        user: 3,
-                        text: 'Duis sit amet nisl efficitur, rutrum arcu ac, bibendum ligula. Mauris viverra pellentesque massa sed congue. Nunc dictum gravida lobortis.',
-                        time: '28 July, 2018'
-                    },
-                    {
-                        user: 1,
-                        text: 'Aliquam maximus convallis dui ut facilisis.',
-                        time: '28 July, 2018'
-                    },
-                    {
-                        user: 2,
-                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit ullamcorper enim varius sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,',
-                        time: '28 July, 2018'
-                    },
-                    {
-                        user: 3,
-                        text: 'Duis sit amet nisl efficitur, rutrum arcu ac, bibendum ligula. Mauris viverra pellentesque massa sed congue. Nunc dictum gravida lobortis.',
-                        time: '28 July, 2018'
-                    },
-                    {
-                        user: 1,
-                        text: 'Aliquam maximus convallis dui ut facilisis.',
-                        time: '28 July, 2018'
-                    }
-                ],
-                shortcuts:[
-                    {
-                        "r": null,
-                        "g": null,
-                        "b": null,
-                        "image": "/static/img/icons/store.png",
-                        "to": "/",
-                        "text": "Go to store",
-                        "sort": 2,
-                        "removable": false
-                    },
-                    {
-                        "icon": "fa fa-plus",
-                        "eventKey": "application/activeModal",
-                        "eventValue": "createShortcut",
-                        "text": "Create",
-                        "sort": -1,
-                        "removable": false
-                    }
-                ]
-            }
-        },
-        computed: {
-            userList() {
             }
         },
         template: `<div class="row p-3 m-0 flex-wrap" style="width: 1100px;">
@@ -7410,42 +7017,7 @@ storiesOf('Order', module)
 		    components: {
 				    'c-table-simple': () => import('~/components/table-simple').then(m => m.default || m),
 		    },
-		    data(){
-				    return{
-						    tableHead:[
-								    {
-										    label: 'Purchased Assets',
-										    key: 'first'
-								    },
-								    {
-										    label: 'Price',
-										    key: 'second'
-								    },
-								    {
-										    label: 'QTy',
-										    key: 'third'
-								    },
-								    {
-										    label: 'Total',
-										    key: 'four'
-								    },
-						    ],
-						    tableRows: [
-								    {
-										    first: 'POLYART - Stylized Sky Dungean',
-										    third: '$9.99',
-										    second: 'x1',
-										    last: '$7.99',
-								    },
-								    {
-										    first: 'Archimatix Pro',
-										    third: '$19.99',
-										    second: 'x1',
-										    last: '$27.99',
-								    },
-						    ]
-				    }
-		    },
+		    data: () => data.OrderData,
         template: `
             <div style="width: 80%" class="p-4 text-white">
                 <div class="row">
@@ -7563,6 +7135,20 @@ storiesOf('Order', module)
                         </div>
                     </div>
                 </div>
+            </div>
+        `
+    }))
+
+
+storiesOf('Decentralization-meter', module)
+    .add('default', () => ({
+		    components: {
+				    'c-decentralization-meter': () => import('~/components/decentralization-meter').then(m => m.default || m),
+		    },
+		    data: () => data.OrderData,
+        template: `
+            <div style="width: 80%" class="p-4 text-white">
+                <c-decentralization-meter />
             </div>
         `
     }))

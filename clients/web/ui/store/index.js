@@ -94,7 +94,6 @@ export const actions = {
     login({ dispatch, commit }, { token, user }) {
         console.log('[BlockHub] Logging in: ', user)
         this.$axios.setToken(token, 'bearer')
-        // this.$cookies.set('token', token)
 
         let permissions = {}
 
@@ -117,23 +116,16 @@ export const actions = {
         this.$accessConfig.setUserPermissions(user.id, permissions)
 
         dispatch('application/authenticate')
-
-        commit('token', token)
-        commit('user', user)
-        commit('loggedIn', true)
     },
 
     logout({ dispatch, commit }) {
         console.log('[BlockHub] Logging out')
+
         dispatch('auth/logout')
         dispatch('application/logout')
+
         this.$axios.setToken(false)
-        // this.$cookies.remove('token')
-        commit('loggedIn', false)
-        commit('user', null)
-        commit('token', null)
         this.$cookies.remove('feathers-jwt')
-        // this.$router.push('/login')
     },
 
     init({ commit }, payload) {
@@ -165,15 +157,15 @@ export const mutations = {
 
         state.initialized = true
     },
-    user(state, payload) {
-        state.user = payload
-    },
-    token(state, payload) {
-        state.token = payload
-    },
-    loggedIn(state, payload) {
-        state.loggedIn = payload
-    }
+    // user(state, payload) {
+    //     state.user = payload
+    // },
+    // token(state, payload) {
+    //     state.token = payload
+    // },
+    // loggedIn(state, payload) {
+    //     state.loggedIn = payload
+    // }
 }
 
 // export const getters = {}

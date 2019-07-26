@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div v-if="community_1">
+        <div v-if="community1">sssss
             <c-item
                 v-for="(post, index) in posts"
                 :key="index"
                 :post="post" />
         </div>
 
-        <div v-if="community_2">
+        <div v-if="community2">
             <div class="community-wrapper">
                 <c-item :post="post" />
 
@@ -48,8 +48,8 @@ export default {
         ]
         const placeholderText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non maximus tellus, eu lacinia justo. Cras semper vestibulum est. Donec a massa vitae nibh consectetur efficitur non in erat. Morbi id dapibus tortor. Praesent sit amet vulputate leo, eu posuere neque. In id ante scelerisque, commodo nisi non, eleifend mauris. Pellentesque massa elit, semper non libero nec, interdum aliquet dolor.'
         return {
-            community_1: false,
-            community_2: true,
+            community1: true,
+            community2: false,
             posts: [
                 {
                     title: 'This post has been pinned and the title is a single line of text',

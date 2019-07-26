@@ -2092,8 +2092,16 @@ export default {
     }
 
     @media (max-width: 768px) {
-        .clock, .version {
+        .page .page__content.with-shortcuts {
+            padding-left: 0;
+        }
+        .clock, .version, .page-shortcuts {
             display: none;
+        }
+        .content {
+            .container-fluid{
+                padding: 10px !important;
+            }
         }
     }
 

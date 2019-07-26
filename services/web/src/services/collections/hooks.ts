@@ -76,10 +76,10 @@ export const before = {
     find: [],
     get: [],
     // @ts-ignore
-    create: [hooks.authenticate('jwt'), create(), validateSchema(Collection.jsonSchema, Ajv)],
-    update: [hooks.authenticate('jwt'), validatePermission()],
-    patch: [hooks.authenticate('jwt'), validatePermission()],
-    remove: [hooks.authenticate('jwt'), validatePermission()]
+    create: [create(), validateSchema(Collection.jsonSchema, Ajv)],
+    update: [validatePermission()],
+    patch: [validatePermission()],
+    remove: [validatePermission()]
 }
 
 export const after = {

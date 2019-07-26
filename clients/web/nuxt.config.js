@@ -11,7 +11,7 @@ export default {
         port: process.env.PORT,
         host: '0.0.0.0'
     },
-    mode: 'spa', // 'universal', // 'spa', // universal
+    mode: process.env.NUXT_MODE, // 'universal', // 'spa', // universal
     srcDir: 'ui/',
     dev: process.env.NODE_ENV !== 'production',
     htmlAttrs: {

@@ -793,7 +793,7 @@ export const actions = {
     init(store, payload) {
         console.log('[BlockHub][Application] Initializing...')
 
-        updateState(DB.store.data[0].application, store.state)
+        //updateState(DB.store.data[0].application, store.state)
 
         localState.connection.status.code = null
         localState.connection.status.message = 'Establishing connection...'
@@ -857,6 +857,7 @@ export const actions = {
         store.state.activeProfile = store.rootState.profiles.keyedById[(store.state.activeProfile && store.state.activeProfile.id) || store.rootState.profiles.ids[0]]
         store.state.developerMode = store.state.activeProfile && store.state.activeProfile.role === 'developer'
         store.state.editorMode = 'viewing'
+
         store.commit('signedIn', true)
     },
     setEditorMode(store, payload) {
@@ -905,36 +906,39 @@ export const actions = {
         // Ethereum.init().then(success, failure).catch(failure)
     },
     checkInternetConnection(store, payload) {
-        return // stop DDOSing
+        //return // stop DDOSing
         // console.log('[BlockHub] Connection status: ' + JSON.stringify(store.state.connection))
 
-        if (!navigator.onLine) {
-            store.commit('setInternetConnection', { connected: false, message: `Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection.` })
-        }
+        if (process.server) {
+            store.commit('setInternetConnection', { connected: true, message: `Connected.` })
+        } else {
+            if (!navigator.onLine) {
+                store.commit('setInternetConnection', { connected: false, message: `Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection.` })
+            }
 
-        const xhr = new XMLHttpRequest()
-        const file = 'https://blockhub.gg/static/img/blank.png'
-        const randomNum = Math.round(Math.random() * 10000)
+            const xhr = new XMLHttpRequest()
+            const file = process.env.UPTIME_SERVICE_URL
+            const randomNum = Math.round(Math.random() * 10000)
 
-        xhr.open('HEAD', `${file}?rand=${randomNum}`, true)
-        xhr.send()
+            xhr.open('HEAD', `${file}?rand=${randomNum}`, true)
+            xhr.send()
 
-        function processRequest(e) {
-            if (xhr.readyState === 4) {
-                try {
-                    if (xhr.status >= 200 && xhr.status < 304) {
-                        store.commit('setInternetConnection', { connected: true, message: `Connected.` })
-                        store.state.connection.datasource = true // TEMP
-                    } else {
-                        store.commit('setInternetConnection', { connected: false, message: `Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection.` })
+            function processRequest(e) {
+                if (xhr.readyState === 4) {
+                    try {
+                        if (xhr.status >= 200 && xhr.status < 304) {
+                            store.commit('setInternetConnection', { connected: true, message: `Connected.` })
+                        } else {
+                            store.commit('setInternetConnection', { connected: false, message: `Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection.` })
+                        }
+                    } catch (err) {
+                        console.log(err)
                     }
-                } catch (err) {
-                    console.log(err)
                 }
             }
-        }
 
-        xhr.addEventListener('readystatechange', processRequest, false)
+            xhr.addEventListener('readystatechange', processRequest, false)
+        }
     },
     deployContract(store, { protocolName, contractName, oldContractAddress }) {
         return new Promise((resolve, reject) => {
@@ -1015,6 +1019,7 @@ export const mutations = {
     setInternetConnection(state, payload) {
         state.connection.internet = payload.connected
         state.connection.status.message = payload.message
+        state.connection.datasource = true // TEMP
     },
     setSimulatorMode(state, payload) {
         state.simulatorMode = payload

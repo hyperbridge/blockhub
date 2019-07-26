@@ -1,7 +1,7 @@
 {
     "name": "blockhub-devtools-builder",
     "description": "BlockHub DevTools Builder",
-    "version": "1.0.0rc1",
+    "version": "1.0.0-alpha.0",
     "homepage": "https://hyperbridge.org",
     "license": "SEE LICENSE IN LICENSE.md",
     "author": {

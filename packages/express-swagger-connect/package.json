@@ -1,7 +1,10 @@
 {
-	"name": "express-swagger-connect",
-	"version": "1.0.0rc1",
+	"name": "@hyperbridge/express-swagger-connect",
+	"version": "1.0.0-alpha.0",
 	"description": "",
+	"publishConfig": {
+		"access": "public"
+	},
 	"main": "src",
 	"scripts": {
 		"dev": "cross-env NODE_ENV=development yarn run nodemon",

@@ -17,7 +17,7 @@
                                 <c-vote
                                     v-if="activeElementIndex === index"
                                     v-access="'rating.read'"
-                                    :votes="item.data.meta.rating" />
+                                    :votes="item.data.meta.rating.overall" />
                                 <div class="row">
                                     <div
                                         v-if="item.data.meta.images"
