@@ -1,5 +1,5 @@
 {
-  "name": "@hyperbridge/blockhub-chrome-bridge",
+  "name": "@blockhub/chrome-bridge",
   "version": "1.3.0",
   "description": "",
   "publishConfig": {

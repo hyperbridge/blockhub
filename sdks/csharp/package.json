@@ -1,5 +1,5 @@
 {
-    "name": "@hyperbridge/blockhub-csharp-sdk",
+    "name": "@blockhub/csharp-sdk",
     "description": "BlockHub C# SDK",
     "repository": {},
     "license": "SEE LICENSE IN LICENSE.md",

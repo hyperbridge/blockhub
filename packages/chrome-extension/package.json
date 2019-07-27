@@ -1,5 +1,5 @@
 {
-  "name": "@hyperbridge/blockhub-chrome-extension",
+  "name": "@blockhub/chrome-extension",
   "version": "1.3.0",
   "description": "",
   "publishConfig": {
