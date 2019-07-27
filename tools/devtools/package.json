@@ -2,7 +2,7 @@
     "name": "@hyperbridge/devtools",
     "description": "Hyperbridge DevTools",
     "repository": {},
-    "license": "SEE LICENSE IN LICENSE.md",
+    "license": "Apache-2.0",
     "publishConfig": {
         "access": "public"
     },
@@ -37,5 +37,6 @@
                 "always"
             ]
         }
-    }
+    },
+    "gitHead": "dd703ec3ede68084d574d48b59c66aaeaed96ff0"
 }

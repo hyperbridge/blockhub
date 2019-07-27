@@ -2,9 +2,10 @@
     "name": "@blockhub/csharp-sdk",
     "description": "BlockHub C# SDK",
     "repository": {},
-    "license": "SEE LICENSE IN LICENSE.md",
+    "license": "Apache-2.0",
     "version": "1.4.0-alpha.0",
     "publishConfig": {
         "access": "public"
-    }
+    },
+    "gitHead": "dd703ec3ede68084d574d48b59c66aaeaed96ff0"
 }

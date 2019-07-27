@@ -2,9 +2,9 @@
     "name": "@blockhub/web-client",
     "version": "1.4.0-alpha.0",
     "description": "BlockHub Web Client",
-    "license": "SEE LICENSE IN LICENSE.md",
+    "license": "Apache-2.0",
     "publishConfig": {
-        "access": "private"
+        "access": "public"
     },
     "scripts": {
         "start": "cross-env NODE_ENV=production nuxt start",
@@ -140,5 +140,6 @@
                 "never"
             ]
         }
-    }
+    },
+    "gitHead": "dd703ec3ede68084d574d48b59c66aaeaed96ff0"
 }

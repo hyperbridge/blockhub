@@ -3,7 +3,7 @@
   "description": "BlockHub DevTools Builder",
   "version": "1.4.0-alpha.0",
   "homepage": "https://hyperbridge.org",
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "Apache-2.0",
   "author": {
     "name": "Hyperbridge",
     "email": "hello@hyperbridge.org",
@@ -126,5 +126,6 @@
         "afterPrune": []
       }
     }
-  }
+  },
+  "gitHead": "dd703ec3ede68084d574d48b59c66aaeaed96ff0"
 }

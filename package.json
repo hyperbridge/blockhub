@@ -1,6 +1,6 @@
 {
     "name": "blockhub",
-    "license": "SEE LICENSE IN LICENSE.md",
+    "license": "Apache-2.0",
     "private": true,
     "scripts": {
         "web-client": "cd clients && cd web && yarn dev",

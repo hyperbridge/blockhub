@@ -37,5 +37,6 @@
     "test": "mocha test",
     "start": "bin/blockhub-node-operator --port ${PORT:=9000}",
     "dev": "nodemon ./api/index.js localhost 9000"
-  }
+  },
+  "gitHead": "dd703ec3ede68084d574d48b59c66aaeaed96ff0"
 }

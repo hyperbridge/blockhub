@@ -4,5 +4,6 @@
   "description": "",
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "gitHead": "dd703ec3ede68084d574d48b59c66aaeaed96ff0"
 }

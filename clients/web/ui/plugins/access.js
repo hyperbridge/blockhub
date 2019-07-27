@@ -24,7 +24,7 @@ export default ({ app, store }) => {
 
             el.hidden = true
 
-            if ($access(value)) {
+            if (access(value)) {
                 el.hidden = false
             }
 

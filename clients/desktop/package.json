@@ -9,7 +9,7 @@
     "email": "hello@hyperbridge.org",
     "url": "https://github.com/hyperbridge"
   },
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "Apache-2.0",
   "publishConfig": {
     "access": "public"
   },
@@ -129,5 +129,6 @@
         "afterPrune": []
       }
     }
-  }
+  },
+  "gitHead": "dd703ec3ede68084d574d48b59c66aaeaed96ff0"
 }

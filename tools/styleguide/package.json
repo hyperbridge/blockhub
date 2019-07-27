@@ -2,7 +2,7 @@
   "name": "@blockhub/styleguide",
   "version": "1.4.0-alpha.0",
   "description": "BlockHub Style Guide",
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "Apache-2.0",
   "publishConfig": {
     "access": "public"
   },
@@ -39,5 +39,6 @@
   },
   "engines": {
     "node": ">= 8.0.0"
-  }
+  },
+  "gitHead": "dd703ec3ede68084d574d48b59c66aaeaed96ff0"
 }

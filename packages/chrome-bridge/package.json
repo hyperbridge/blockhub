@@ -13,5 +13,6 @@
   "license": "ISC",
   "dependencies": {
     "chrome-native-messaging": "^0.2.0"
-  }
+  },
+  "gitHead": "dd703ec3ede68084d574d48b59c66aaeaed96ff0"
 }

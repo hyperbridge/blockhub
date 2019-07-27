@@ -3,7 +3,7 @@
   "version": "1.4.0-alpha.0",
   "description": "Hyperbridge Test Runner",
   "homepage": "https://hyperbridge.com",
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "Apache-2.0",
   "author": {
     "name": "Hyperbridge",
     "email": "hello@hyperbridge.com",
@@ -18,5 +18,6 @@
     "nightwatch-html-reporter": "^2.0.0",
     "q": "^1.5.1",
     "webdriverio": "^4.6.2"
-  }
+  },
+  "gitHead": "dd703ec3ede68084d574d48b59c66aaeaed96ff0"
 }

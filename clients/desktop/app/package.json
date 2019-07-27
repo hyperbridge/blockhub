@@ -3,7 +3,7 @@
     "version": "0.8.1",
     "description": "BlockHub Desktop Client",
     "homepage": "https://blockhub.gg",
-    "license": "SEE LICENSE IN LICENSE.md",
+    "license": "Apache-2.0",
     "author": {
         "name": "Hyperbridge",
         "email": "hello@hyperbridge.org",
