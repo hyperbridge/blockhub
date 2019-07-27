@@ -6,7 +6,7 @@
   <br>
   <br>
 
-  [![Discord][discord-shield]][discord] ![build](https://travis-ci.org/hyperbridge/blockhub.svg?branch=master) [![license](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/hyperbridge/blockhub/blob/master/LICENSE.md) [![](https://img.shields.io/badge/whitepaper-v2.0.0-lightgrey.svg)](https://hyperbridge.org/whitepaper) [![Gitter chat](https://img.shields.io/gitter/room/Hyperbridge/Lobby.svg)](https://gitter.im/Hyperbridge/Lobby) [![](https://img.shields.io/badge/telegram-group-blue.svg)](https://t.me/hyperbridgechat) [![](https://img.shields.io/badge/discord-server-brightgreen.svg)](https://discord.gg/w6Awrxq) [![](https://img.shields.io/badge/twitter-%40hyperbridge-blue.svg)](https://twitter.com/@hyperbridge) [![](https://img.shields.io/badge/e--mail-hello%40hyperbridge.org-brightgreen.svg)](mailto:hello@hyperbridge.org) [![Greenkeeper badge](https://badges.greenkeeper.io/hyperbridge/blockhub.svg)](https://greenkeeper.io/)
+  [![Discord](https://discordapp.com/api/guilds/458332417909063682/widget.png)](https://discord.gg/w6Awrxq) [![license](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/hyperbridge/blockhub/blob/master/LICENSE.md) [![](https://img.shields.io/badge/whitepaper-v2.0.0-lightgrey.svg)](https://hyperbridge.org/whitepaper) [![Gitter chat](https://img.shields.io/gitter/room/Hyperbridge/Lobby.svg)](https://gitter.im/Hyperbridge/Lobby) [![](https://img.shields.io/badge/telegram-group-blue.svg)](https://t.me/hyperbridgechat) [![](https://img.shields.io/badge/discord-server-brightgreen.svg)](https://discord.gg/w6Awrxq) [![](https://img.shields.io/badge/twitter-%40hyperbridge-blue.svg)](https://twitter.com/@hyperbridge) [![](https://img.shields.io/badge/e--mail-hello%40hyperbridge.org-brightgreen.svg)](mailto:hello@hyperbridge.org) [![Greenkeeper badge](https://badges.greenkeeper.io/hyperbridge/blockhub.svg)](https://greenkeeper.io/)
 
 </div>
 
@@ -80,10 +80,7 @@ See [CONTRIBUTING](CONTRIBUTING.md)
 
 ## Problems?
 
-Discuss Funding Protocol on our Gitter:
-https://gitter.im/Hyperbridge/Lobby
+Join BlockHub on Discord:
+https://discord.gg/w6Awrxq
 
 Please post any bugs as Github issues.
-
-[discord-shield]: https://discordapp.com/api/guilds/458332417909063682/widget.png
-[discord]: https://discord.gg/w6Awrxq
