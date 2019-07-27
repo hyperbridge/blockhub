@@ -33,7 +33,7 @@
                     <c-img
                         v-else
                         class="user-data__avatar user-avatar"
-                        src="../../static/img/user.png" />
+                        src="/img/user.png" />
                 </c-button>
             </div>
             <div
@@ -47,7 +47,7 @@
                 </a>
                 <c-img
                     v-else
-                    src="../../static/img/user.png" />
+                    src="/img/user.png" />
             </div>
 
             <div style="text-align: left;">
@@ -204,14 +204,6 @@ export default {
                     meta: chosenProfile.meta
                 }
             ])
-
-            // Update desktop
-            await this.$desktop.updateState({
-                module: 'application',
-                state: {
-                    profiles: Object.values(this.$store.state.profiles.keyedById)
-                }
-            })
         },
         copyToClipboard(value) {
             this.$desktop.sendCommand('writeToClipboard', value)
@@ -339,8 +331,8 @@ export default {
         height: 25px;
     }
     .user-data__avatar {
-        min-width: 64px;
-        width: 64px;
+        min-width: 42px;
+        width: 42px;
         height: 64px;
         box-sizing: border-box;
         font-size: 60px;

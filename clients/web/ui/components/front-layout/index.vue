@@ -418,7 +418,7 @@
                     <div
                         slot="header"
                         class="h4">
-                        Propose Idea
+                        Submit Idea
                     </div>
                     <template slot="body">
                         <div v-if="activeProfile && activeProfile.role === 'curator'">
@@ -432,7 +432,7 @@
                         </div>
                         <div v-else>
                             <p>
-                                To propose ideas you must sign up for a Curator Profile. Don't worry, the process is simple!
+                                To submit ideas you must sign up for a Curator Profile. Don't worry, it's simple!
                             </p>
                             <p hidden>
                                 Tell people about yourself<br>
@@ -455,7 +455,7 @@
                             <c-button
                                 class="button--lg outline-white margin-top-20"
                                 @click="$store.commit('application/convertCurator', { profile: activeProfile })">
-                                Convert to Curator
+                                Sign up as a Curator
                             </c-button>
                         </div>
                     </template>
@@ -1294,7 +1294,7 @@ export default {
     },
     methods: {
         sendDesktopMessage() {
-            if (!window.isElectron) {
+            if (!this.$store.state.application.mode === 'desktop') {
                 return window.alert('Not on desktop')
             }
 

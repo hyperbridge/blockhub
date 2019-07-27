@@ -18,18 +18,10 @@
                 </div>
                 <div>
                     <c-button
-                        v-if="$store.state.application.developerMode"
-                        status="info"
-                        iconHide
-                        to="/project/new">
-                        Propose Idea
-                    </c-button>
-                    <c-button
-                        v-if="!$store.state.application.developerMode"
                         status="info"
                         iconHide
                         @click="$store.commit('application/activeModal', 'proposeIdea')">
-                        Propose Idea
+                        Submit Idea
                     </c-button>
                 </div>
             </div>

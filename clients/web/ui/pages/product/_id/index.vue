@@ -82,13 +82,13 @@
                 @goto="scrollToReviews" />
 
             <c-frequently-traded-assets
-                v-access="'assets'"
+                v-access="'asset.read'"
                 class="margin-bottom-20"
                 :items="product.meta.frequentlyTradedAssets"
                 :assetsPath="`/product/${product.id}/assets`" />
 
             <c-community-spotlight
-                v-access="'community'"
+                v-access="'community.read'"
                 class="margin-bottom-20"
                 :discussions="product.meta.community.discussions"
                 :communityPath="`/product/${product.id}/community`" />
@@ -390,7 +390,7 @@ export default {
             streamersList: 8,
             showInstaller: false,
             reviewForm: false,
-            showVote: true
+            showVote: false
         }
     },
     computed: {

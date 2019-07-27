@@ -21,7 +21,7 @@ export default {
         background: rgba(0, 0, 0, .13);
         border-radius: 5px;
         border: 1px solid rgba(0, 0, 0, .5);
-        padding: 15px 15px 15px 30px;
+        padding: 15px 15px 15px 15px;
         overflow: hidden;
         color: #fff;
         h3{

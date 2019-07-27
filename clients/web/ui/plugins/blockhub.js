@@ -5,6 +5,10 @@ import * as ReputationEngine from '../framework/reputation-engine'
 import * as Bridge from '../framework/desktop-bridge'
 
 export default async ({ app, store, redirect }) => {
+    // Set blockhub instance on app
+    // This way we can use it in middleware and pages asyncData/fetch
+    const blockhub = {}
+
     Vue.config.productionTip = false
 
     const initSubscribers = () => {
@@ -15,6 +19,17 @@ export default async ({ app, store, redirect }) => {
         store.subscribe((mutation, state) => {
             if (mutation.type !== 'application/setInternetConnection') {
                 console.info(`[BlockHub] Store Mutation: ${mutation.type}`) // , mutation.payload)
+            }
+
+            // TODO: whats correct name?
+            if (mutation.type === 'profiles/update') {
+                // Update desktop
+                blockhub.bridge.updateState({
+                    module: 'application',
+                    state: {
+                        profiles: Object.values(this.$store.state.profiles.keyedById)
+                    }
+                })
             }
 
             if (mutation.type === 'database/updateState') {
@@ -49,11 +64,6 @@ export default async ({ app, store, redirect }) => {
     }
 
     initSubscribers()
-
-
-    // Set blockhub instance on app
-    // This way we can use it in middleware and pages asyncData/fetch
-    const blockhub = {}
 
     blockhub.getMode = () => {
         const { hostname } = window.location

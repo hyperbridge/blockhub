@@ -959,6 +959,13 @@ export const actions = {
         // async call => delete previous trade url
         // state.account.tradeLinkId
         commit('createTradeUrl', getId())
+    },
+    async generateProfileAddress(store, payload) {
+        if (this.store.state.application.mode) {
+            const res = await this.$desktop.sendCommand('generateAddress', { index })
+        } else {
+
+        }
     }
 }
 
@@ -1060,6 +1067,9 @@ export const mutations = {
     submitTransaction(state, payload) {
         const success = id => {
         }
+    },
+    activeProfile(state, payload) {
+        this.activeProfile = payload
     },
     entry(state, payload) {
         // send .key and .value to sheet
