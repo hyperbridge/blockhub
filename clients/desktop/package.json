@@ -1,7 +1,7 @@
 {
   "name": "@blockhub/desktop-client",
   "productName": "BlockHub",
-  "version": "0.8.1",
+  "version": "1.4.0-alpha.0",
   "description": "BlockHub",
   "homepage": "https://blockhub.gg",
   "author": {
@@ -24,12 +24,10 @@
     "build-windows": "npm run copy-web && cd app && npm run build && cd .. && rm -rf dist/packages && rm -rf build && cp -R app/ build && electron-builder --win"
   },
   "postinstall": "electron-builder install-app-deps",
-  "dependencies": {},
   "devDependencies": {
     "electron": "^2.0.8",
     "electron-builder": "^20.28.4"
   },
-  "optionalDependencies": {},
   "build": {
     "appId": "gg.blockhub.BlockHub",
     "productName": "BlockHub",

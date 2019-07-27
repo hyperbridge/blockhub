@@ -1,25 +1,22 @@
 {
-    "name": "@hyperbridge/test-runner",
-    "version": "0.7.1",
-    "description": "Hyperbridge Test Runner",
-    "homepage": "https://hyperbridge.com",
-    "license": "SEE LICENSE IN LICENSE.md",
-    "author": {
-      "name": "Hyperbridge",
-      "email": "hello@hyperbridge.com",
-      "url": "https://hyperbridge.com"
-    },
-    "scripts": {
-      "test": "cd ../app-builder && npm run build-quick && cd ../test-runner && node ./lib/nightwatch/bin/runner.js"
-    },
-    "dependencies": {},
-    "devDependencies": {
-      "q": "^1.5.1",
-      "ejs": "^2.6.1",
-      "nightwatch": "^1.0.19",
-      "nightwatch-html-reporter": "^2.0.0",
-      "webdriverio": "^4.6.2"
-    },
-    "optionalDependencies": {}
+  "name": "@hyperbridge/test-runner",
+  "version": "1.4.0-alpha.0",
+  "description": "Hyperbridge Test Runner",
+  "homepage": "https://hyperbridge.com",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "author": {
+    "name": "Hyperbridge",
+    "email": "hello@hyperbridge.com",
+    "url": "https://hyperbridge.com"
+  },
+  "scripts": {
+    "test": "cd ../app-builder && npm run build-quick && cd ../test-runner && node ./lib/nightwatch/bin/runner.js"
+  },
+  "devDependencies": {
+    "ejs": "^2.6.1",
+    "nightwatch": "^1.0.19",
+    "nightwatch-html-reporter": "^2.0.0",
+    "q": "^1.5.1",
+    "webdriverio": "^4.6.2"
   }
-  
+}

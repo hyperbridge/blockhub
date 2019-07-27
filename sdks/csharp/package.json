@@ -3,7 +3,7 @@
     "description": "BlockHub C# SDK",
     "repository": {},
     "license": "SEE LICENSE IN LICENSE.md",
-    "version": "1.0.0",
+    "version": "1.4.0-alpha.0",
     "publishConfig": {
         "access": "public"
     }

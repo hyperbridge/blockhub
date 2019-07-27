@@ -1,6 +1,6 @@
 {
     "name": "@blockhub/web-client",
-    "version": "2.0.0rc1",
+    "version": "1.4.0-alpha.0",
     "description": "BlockHub Web Client",
     "license": "SEE LICENSE IN LICENSE.md",
     "publishConfig": {
@@ -33,6 +33,7 @@
         "@nuxtjs/sentry": "^3.0.0",
         "@nuxtjs/sitemap": "^1.2.0",
         "@veriff/js-sdk": "^0.3.4",
+        "blockhub-node-sdk": "../../sdks/node",
         "bootstrap": "^4.3.1",
         "bs4-summernote": "^0.8.10",
         "chart.js": "^2.7.3",
@@ -53,7 +54,6 @@
         "qartjs": "^1.1.2",
         "socket.io-client": "^2.2.0",
         "stripe": "^7.3.0",
-        "blockhub-node-sdk": "../../sdks/node",
         "vue-3d-model": "^1.0.2",
         "vue-analytics": "^5.17.0",
         "vue-awesome-swiper": "https://github.com/hamburgscleanest/vue-awesome-swiper.git",
