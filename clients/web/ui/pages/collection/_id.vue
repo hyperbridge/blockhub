@@ -1,10 +1,10 @@
 <template>
     <c-layout navigationKey="collection" :breadcrumbLinks="breadcrumbLinks">
-        <c-loading size="lg" :enabled="!collection" />
-        <div class="row" v-if="collection">
+        <div class="row">
             <div class="col-12 margin-bottom-40">
                 <div class="collection-header">
-                    <div class="collection-header__name">
+                    <c-loading size="lg" :enabled="!collection" />
+                    <div class="collection-header__name" v-if="collection">
                         <div class="p-0 margin-bottom-5 h1 text-white">
                             {{ collection.name }}
                         </div>
@@ -17,7 +17,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="collection-header__stats">
+                    <div class="collection-header__stats" v-if="collection">
                         <div>
                             <div class="h5 font-weight-bold m-0 p-0 text-white">
                                 Owner
@@ -104,10 +104,11 @@
                                 icon="fas fa-dollar" />
                         </div>
                     </div>
-                    <div v-for="resource in collection.resources">
+                    <c-loading size="lg" :enabled="!collection" />
+                    <div v-for="resource in collection.resources" v-if="collection">
                         {{ resource.id }}
                     </div>
-                    <c-assets-grid :list="collection.resources" />
+                    <c-assets-grid :list="collection.resources" v-if="collection" />
                     <c-pagination :pages="8" />
                 </c-block>
             </div>
