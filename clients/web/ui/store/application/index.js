@@ -794,7 +794,8 @@ export const actions = {
                 $sort: {
                     createdAt: -1
                 },
-                $limit: 25
+                $limit: 25,
+                $eager: '[ownedProducts]'
             }
         }, { root: true })
 
@@ -961,7 +962,7 @@ export const mutations = {
         }
     },
     activeProfile(state, payload) {
-        this.activeProfile = payload
+        state.activeProfile = payload
     },
     entry(state, payload) {
         // send .key and .value to sheet

@@ -40,7 +40,7 @@
                     hidden
                     style="height: 20px; width: 20px;margin-right: -5px">
                     <c-dropdown
-                        :class="{'no-right-border' : shareList}"
+                        :class="{'no-right-border': shareList}"
                         @click="activeMenu()">
                         <ul class="item-dropdown">
                             <li>
@@ -110,7 +110,6 @@
 
 <script>
 export default {
-    name: 'GameLibraryItem',
     components: {
         'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m),
         'c-share-list': () => import('~/components/share/type-1').then(m => m.default || m),

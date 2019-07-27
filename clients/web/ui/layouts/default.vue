@@ -55,6 +55,8 @@
 import Vue from 'vue'
 import '@/css/styles.scss'
 import 'swiper/dist/css/swiper.css'
+import * as Mousetrap from 'mousetrap'
+
 export default {
     components: {
         'c-error-page': () => import('~/pages/error').then(m => m.default || m),
@@ -116,12 +118,6 @@ export default {
         this.startupLoader()
         this.getExternalState()
         this.ensureDesktopWelcome()
-        // if (this.$store.state.auth.user) {
-        //     this.$store.state.application.signedIn = true
-        // } else {
-        //     this.$store.state.application.signedIn = false
-        // }
-
 
         this.$store.dispatch('products/find', {
             query: {
@@ -147,6 +143,10 @@ export default {
             }
         }).then(res => {
             this.$store.state.marketplace.top5 = res.data
+        })
+
+        Mousetrap.bind(['command+k', 'ctrl+k'], function() {
+            alert(1)
         })
     },
     created() {

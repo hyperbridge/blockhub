@@ -280,6 +280,12 @@
                         </div>
                     </div>
                 </c-swiper-slide>
+                <c-swiper-slide v-if="navigationKey === 'store' && $access('friendActivity')">
+                    <div class="item">
+                        <h3>FRIEND ACTIVITY</h3>
+                        <p>Not available offline</p>
+                    </div>
+                </c-swiper-slide>
             </c-swiper>
         </div>
 

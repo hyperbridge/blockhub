@@ -3,17 +3,17 @@
         <div class="col-3 p-0">
             <c-games-navigation
                 :list="games"
-                :activeId="currentID"
+                :activeId="currentId"
                 @choose="getGame" />
         </div>
         <div class="col-9 p-0">
             <c-game-tab :name="game.name"
-                        :subName="game.sub_name"
-                        :image="game.image"
-                        :friends="game.friends"
-                        :achievements="game.achievements"
-                        :downloadContent="game.download_content"
-                        :news="game.news" />
+                        :subTitle="game.meta.subTitle"
+                        :image="game.meta.images.mediumTile"
+                        :friends="game.meta.friends"
+                        :achievements="game.meta.achievements"
+                        :downloadContent="game.meta.downloadContent"
+                        :news="game.meta.news" />
         </div>
     </div>
 </template>
@@ -33,12 +33,12 @@ export default {
     data() {
         return {
             game: {},
-            currentID: ''
+            currentId: ''
         }
     },
     watch: {
         game() {
-            this.currentID = this.game.id
+            this.currentId = this.game.id
         }
     },
     mounted() {
@@ -48,7 +48,6 @@ export default {
         getGame(id) {
             this.games.forEach(el => {
                 if (el.id == id) {
-                    console.log(el)
                     this.game = el
                 }
             })

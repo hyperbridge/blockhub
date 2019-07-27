@@ -32,6 +32,17 @@ export default async ({ app, store, redirect }) => {
                 })
             }
 
+            if (mutation.type === 'profiles/update') {
+                bridge.sendCommand('saveProfileRequest', profile).then((profile) => {
+                    this.saveProfiles()
+                })
+            }
+
+            if (mutation.type === 'profiles/remove') {
+                bridge.sendCommand('removeProfileRequest', this.removeProfile).then(() => {
+                })
+            }
+
             if (mutation.type === 'database/updateState') {
                 // TODO: hook up to desktop
                 // PeerService.setResolver((cmd) => {
