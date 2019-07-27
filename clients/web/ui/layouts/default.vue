@@ -121,6 +121,33 @@ export default {
         // } else {
         //     this.$store.state.application.signedIn = false
         // }
+
+
+        this.$store.dispatch('products/find', {
+            query: {
+                'type': 'game',
+                'internalTags.name': 'Free',
+                '$joinRelation': 'internalTags',
+                '$eager': 'internalTags',
+                '$sort[releaseDate]': -1,
+                '$limit': 5
+            }
+        }).then(res => {
+            this.$store.state.marketplace.topFree = res.data
+        })
+
+        this.$store.dispatch('products/find', {
+            query: {
+                'type': 'game',
+                'internalTags.name': 'Top Seller',
+                '$joinRelation': 'internalTags',
+                '$eager': 'internalTags',
+                '$sort[releaseDate]': -1,
+                '$limit': 5
+            }
+        }).then(res => {
+            this.$store.state.marketplace.top5 = res.data
+        })
     },
     created() {
         if (this.$route.meta.renderCondition) {
