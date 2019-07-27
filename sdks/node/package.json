@@ -27,10 +27,8 @@
         ]
     },
     "dependencies": {
-        "@hyperbridge/funding-protocol": "^1.0.13",
-        "@hyperbridge/marketplace-protocol": "^1.0.13",
-        "@hyperbridge/reserve": "^1.0.13",
-        "@hyperbridge/token": "^1.0.12",
+        "@hyperbridge/funding-protocol": "*",
+        "@hyperbridge/token": "*",
         "bip39": "^2.5.0",
         "bluebird": "^3.5.3",
         "truffle-contract": "^3.0.5",

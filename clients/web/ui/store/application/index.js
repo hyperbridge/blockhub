@@ -4,7 +4,7 @@ import FormData from 'form-data'
 import * as DB from '@/db'
 import * as Bridge from '@/framework/desktop-bridge'
 
-let localState = {
+export const state = () => ({
     externalState: {},
     brands: {
         blockhub: {
@@ -28,7 +28,7 @@ let localState = {
             homeLink: 'https://netero.com'
         }
     },
-    activeBrand: 'thor',
+    activeBrand: 'blockhub',
     version: '0.8.1',
     initialized: false,
     adminMode: false,
@@ -39,15 +39,19 @@ let localState = {
     signedIn: false,
     loading: false,
     simulatorMode: false,
-    desktopMode: null,
+    desktopMode: process.client && window.isElectron,
     developerMode: null,
     profileChooser: false,
     accessOverride: false,
-    operatingSystem: null,
+    operatingSystem: getOS(),
     editorMode: 'viewing',
     activeModal: null,
     activeNotification: null,
     tokenCount: 0,
+    status: {
+        code: null,
+        message: null
+    },
     settings: {
         client: {
             animations: true,
@@ -495,8 +499,8 @@ let localState = {
     },
     connection: {
         auto: false,
-        internet: false,
-        datasource: false,
+        internet: true,
+        datasource: true,
         operator: false,
         ethereum: false,
         status: {
@@ -688,26 +692,18 @@ let localState = {
         notifications: [],
         wallets: [],
         profiles: [],
-        idts: [],
-        projectWishlist: { 1: true },
-        projectFavorites: {},
         savedPaths: [
             '/home/leafo/.config/itch/apps',
             'C:/Users/Tom/Program Files/apps',
             '/home/games'
-        ],
-        friendsList: [4, 5],
-        tradeLinkId: '478',
-        id: 1
+        ]
     },
     video: {
         src: '',
         currentTime: 0,
         showPopup: false
     }
-}
-
-export const state = () => localState
+})
 
 const getOS = () => {
     if (!process.client) {
@@ -735,74 +731,24 @@ const getOS = () => {
     return 'unknown'
 }
 
-const updateState = (savedData, updatedState = {}) => {
-    localState = {
-        ...localState,
-        ...savedData,
-        status: {
-            code: null,
-            message: null
-        },
-        settings: {},
-        shortcuts: savedData.shortcuts != null ? savedData.shortcuts : [],
-        operatingSystem: savedData.operatingSystem != null ? savedData.operatingSystem : getOS(),
-        ...updatedState
-    }
-
-    localState.connection.internet = true
-    localState.connection.datasource = true
-
-    if (updatedState.locked !== undefined) {
-        localState.locked = updatedState.locked
-    }
-
-    if (localState.desktopMode === null) {
-        localState.desktopMode = process.client && window.isElectron
-    }
-}
-
 export const getters = {
-    privileges(state) {
-        const result = []
-
-        if (state.desktopMode) {
-            result.push('desktopMode')
-        }
-
-        if (state.signedIn) {
-            result.push('signedIn')
-        }
-
-        if (state.developerMode) {
-            result.push('developerMode')
-        }
-
-        if (state.verifiedAccount) {
-            result.push('verifiedAccount')
-        }
-
-        if (state.hyperbridgeAccount) {
-            result.push('hyperbridgeAccount')
-        }
-
-        return result
-    }
 }
 
 export const actions = {
     init(store, payload) {
         console.log('[BlockHub][Application] Initializing...')
 
-        //updateState(DB.store.data[0].application, store.state)
-
-        localState.connection.status.code = null
-        localState.connection.status.message = 'Establishing connection...'
-
-        store.commit('updateState', localState)
+        store.state.connection.status.code = null
+        store.state.connection.status.message = 'Establishing connection...'
 
         store.dispatch('checkInternetConnection')
         store.dispatch('checkEthereumConnection')
 
+        // Bridge.initProtocol({ protocolName: 'application' }).then((config) => {
+        //     store.state.ethereum[store.state.currentEthereumNetwork] = config
+        //     store.dispatch('updateState')
+        // })
+        
         setInterval(() => {
             if (store.state.connection.auto) {
                 store.dispatch('checkEthereumConnection')
@@ -812,9 +758,7 @@ export const actions = {
     updateState(store, payload) {
         console.log('[BlockHub][Application] Updating store...')
 
-        updateState(store.state, payload)
-
-        store.commit('updateState', localState)
+        store.commit('updateState', payload)
     },
     activeModal(store, payload) {
         if (payload) {
@@ -877,12 +821,6 @@ export const actions = {
     //     //     //store.state.signedIn = true
     //     // })
     // },
-    initEthereum(store, payload) {
-        // Bridge.initProtocol({ protocolName: 'application' }).then((config) => {
-        //     store.state.ethereum[store.state.currentEthereumNetwork] = config
-        //     store.dispatch('updateState')
-        // })
-    },
     checkEthereumConnection(store, payload) {
         const success = () => {
             store.state.connection.ethereum = true
@@ -955,11 +893,6 @@ export const actions = {
     async sendCommand(store, { key, data }) {
         await Bridge.sendCommand(key, data)
     },
-    createTradeUrl({ commit, state }) {
-        // async call => delete previous trade url
-        // state.account.tradeLinkId
-        commit('createTradeUrl', getId())
-    },
     async generateProfileAddress(store, payload) {
         if (this.store.state.application.mode) {
             const res = await this.$desktop.sendCommand('generateAddress', { index })
@@ -992,23 +925,6 @@ export const mutations = {
         state.activeNotification = notification
         state.activeModal = 'notification'
     },
-    updateFavorites2({ account }, { prop = 'productWishlist', id }) {
-        const foundKey = account[prop].findIndex(savedId => savedId === id)
-        foundKey
-            ? account[prop].push(id)
-            : account[prop].splice(foundKey, 0)
-        return Boolean(foundKey)
-    },
-    updateFavorites({ account }, { prop = 'productWishlist', id }) {
-        // Optional -> object
-        if (account[prop][id]) {
-            const { [id]: deleted, ...rest } = account[prop]
-            delete rest[id]
-            account[prop] = rest
-        } else {
-            account[prop] = { ...account[prop], [id]: true }
-        }
-    },
     async updateEnvironmentMode(state, payload) {
         state.environmentMode = payload
 
@@ -1033,30 +949,6 @@ export const mutations = {
     },
     showProfileChooser(state, payload) {
         state.profileChooser = payload
-    },
-    enableDarklaunch(state, payload) {
-        const darklaunch = state.account.darklaunchFlags.find(darklaunch => darklaunch.code === payload)
-
-        if (darklaunch) {
-            darklaunch.enabled = true
-        } else {
-            state.account.darklaunchFlags.push({
-                code: payload,
-                enabled: true
-            })
-        }
-    },
-    disableDarklaunch(state, payload) {
-        const darklaunch = state.account.darklaunchFlags.find(darklaunch => darklaunch.code === payload)
-
-        if (darklaunch) {
-            darklaunch.enabled = false
-        } else {
-            state.account.darklaunchFlags.push({
-                code: payload,
-                enabled: false
-            })
-        }
     },
     beforeLoadRoute(state, payload) {
         state.loading = true
