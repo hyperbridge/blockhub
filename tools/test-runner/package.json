@@ -1,6 +1,6 @@
 {
   "name": "@hyperbridge/test-runner",
-  "version": "1.4.0-alpha.0",
+  "version": "1.4.0",
   "description": "Hyperbridge Test Runner",
   "homepage": "https://hyperbridge.com",
   "license": "Apache-2.0",

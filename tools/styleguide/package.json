@@ -1,6 +1,6 @@
 {
   "name": "@blockhub/styleguide",
-  "version": "1.4.0-alpha.0",
+  "version": "1.4.0",
   "description": "BlockHub Style Guide",
   "license": "Apache-2.0",
   "publishConfig": {

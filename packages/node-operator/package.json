@@ -1,6 +1,6 @@
 {
   "name": "blockhub-node-operator",
-  "version": "1.4.0-alpha.0",
+  "version": "1.4.0",
   "description": "BlockHub Node Operator",
   "main": "lib/index.js",
   "license": "SEE LICENSE IN LICENSE",

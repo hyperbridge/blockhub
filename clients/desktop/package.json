@@ -1,7 +1,7 @@
 {
   "name": "@blockhub/desktop-client",
   "productName": "BlockHub",
-  "version": "1.4.0-alpha.0",
+  "version": "1.4.0",
   "description": "BlockHub",
   "homepage": "https://blockhub.gg",
   "author": {
