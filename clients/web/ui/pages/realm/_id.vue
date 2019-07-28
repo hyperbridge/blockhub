@@ -1,5 +1,5 @@
 <template>
-    <c-layout :breadcrumbLinks="breadcrumbLinks">
+    <c-layout :breadcrumbLinks="false">
         <div class="row page-header margin-bottom-30">
             <div class="col-10 col-md-3">
                 <div class="logo">
@@ -115,11 +115,7 @@ export default {
         if (!realm) return error({ statusCode: 404, message: 'Realm not found' })
 
         return {
-            realm,
-            breadcrumbLinks: [
-                { to: { path: '/' }, title: 'Home' },
-                { to: { path: `/realms/${realm.id}` }, title: realm.name }
-            ]
+            realm
         }
     },
     mounted() {
