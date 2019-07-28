@@ -40,14 +40,14 @@ The BlockHub project is broken up into related categories:
 | Name | Path |  |
 | --- | --- | --- |
 | **Web Client** | [clients/web](clients/web) | Standard BlockHub experience for web users. Built with *Vue* and *Nuxt*. |
-| **Desktop Client** | [clients/desktop](clients/desktop) | Standard BlockHub experience for desktop users. Wraps the Web Client. Built with Electron. |
+| **Desktop Client** | [clients/desktop](clients/desktop) | Standard BlockHub experience for desktop users. Wraps the Web Client. Built with *Electron*. |
 
 ### SDKs
 
 | Name | Path |  |
 | --- | --- | --- |
-| **C#** | [sdks/csharp](sdks/csharp) | Supports basic BlockHub interactions. Built with .NET. |
-| **JS** | [sdks/js](sdks/js) | Supports basic BlockHub interactions. Built with TypeScript.
+| **C#.NET** | [sdks/dotnet](sdks/dotnet) | Supports basic BlockHub interactions. Built with *C# .NET*. |
+| **Node.js** | [sdks/js](sdks/node) | Supports basic BlockHub interactions. Built with *TypeScript*. |
 
 ### Packages
 
@@ -56,7 +56,7 @@ The BlockHub project is broken up into related categories:
 | **Chrome Extension** | [packages/chrome-extension](packages/chrome-extension) | Chrome extension for BlockHub. |
 | **Chrome Bridge** | [packages/chrome-bridge](packages/chrome-bridge) | Native messaging proxy for Google Chrome to communicate with BlockHub. |
 | **Web Connector** | [packages/web-connector](packages/web-connector) | One-liner integration for websites. Utilizes the BlockHub JS API to provide a standard UI popups. |
-| **Node Operator** | [packages/node-operator](packages/node-operator) | Connects peers to fuel and facilitate network actions. Built with Node + Express + libp2p + IPFS. |
+| **Node Operator** | [packages/node-operator](packages/node-operator) | Connects peers to fuel and facilitate network actions. Built with *Node + Express + libp2p + IPFS*. |
 
 
 ### Tools
