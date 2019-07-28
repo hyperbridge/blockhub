@@ -1,8 +1,11 @@
 {
-  "name": "blockhub-devtools-builder",
-  "description": "BlockHub DevTools Builder",
+  "name": "@hyperbridge/devtools-builder",
+  "description": "Hyperbridge DevTools Builder",
   "version": "1.4.0",
   "homepage": "https://hyperbridge.org",
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "Apache-2.0",
   "author": {
     "name": "Hyperbridge",
