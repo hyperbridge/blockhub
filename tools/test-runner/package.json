@@ -4,6 +4,9 @@
   "description": "Hyperbridge Test Runner",
   "homepage": "https://hyperbridge.com",
   "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "author": {
     "name": "Hyperbridge",
     "email": "hello@hyperbridge.com",
@@ -19,5 +22,5 @@
     "q": "^1.5.1",
     "webdriverio": "^4.6.2"
   },
-  "gitHead": "dd703ec3ede68084d574d48b59c66aaeaed96ff0"
+  "gitHead": "8b0cc820fab428ce26626f6720dbd6450114a734"
 }

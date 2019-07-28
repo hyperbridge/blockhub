@@ -1,7 +1,10 @@
 {
-  "name": "blockhub-node-operator",
+  "name": "@blockhub/node-operator",
   "version": "1.4.0",
   "description": "BlockHub Node Operator",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/index.js",
   "license": "SEE LICENSE IN LICENSE",
   "bin": {
@@ -38,5 +41,5 @@
     "start": "bin/blockhub-node-operator --port ${PORT:=9000}",
     "dev": "nodemon ./api/index.js localhost 9000"
   },
-  "gitHead": "dd703ec3ede68084d574d48b59c66aaeaed96ff0"
+  "gitHead": "8b0cc820fab428ce26626f6720dbd6450114a734"
 }
