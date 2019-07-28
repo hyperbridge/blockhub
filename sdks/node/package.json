@@ -1,13 +1,13 @@
 {
-    "name": "@hyperbridge/blockhub-node-sdk",
+    "name": "@blockhub/node-sdk",
     "description": "BlockHub Node.js SDK",
     "repository": {},
-    "license": "SEE LICENSE IN LICENSE.md",
-    "version": "1.3.0",
+    "license": "Apache-2.0",
+    "version": "1.4.0",
     "publishConfig": {
         "access": "public"
     },
-    "main": "src/index.ts",
+    "main": "build/src/index.js",
     "scripts": {
         "tsc": "./node_modules/tsc",
         "watch": "tsc -w",
@@ -27,12 +27,11 @@
         ]
     },
     "dependencies": {
+        "@hyperbridge/funding-protocol": "1.0.16",
+        "@hyperbridge/marketplace-protocol": "1.0.16",
+        "@hyperbridge/token": "1.0.16",
         "bip39": "^2.5.0",
         "bluebird": "^3.5.3",
-        "hyperbridge-funding-protocol": "^1.0.13",
-        "hyperbridge-marketplace-protocol": "^1.0.13",
-        "hyperbridge-reserve": "^1.0.13",
-        "hyperbridge-token": "^1.0.12",
         "truffle-contract": "^3.0.5",
         "truffle-hdwallet-provider": "^0.0.6",
         "typescript": "^3.2.2",
@@ -54,5 +53,6 @@
                 "presets": []
             }
         }
-    }
+    },
+    "gitHead": "8b0cc820fab428ce26626f6720dbd6450114a734"
 }

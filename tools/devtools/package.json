@@ -2,17 +2,12 @@
     "name": "@hyperbridge/devtools",
     "description": "Hyperbridge DevTools",
     "repository": {},
-    "license": "SEE LICENSE IN LICENSE.md",
+    "license": "Apache-2.0",
     "publishConfig": {
         "access": "public"
     },
-    "version": "1.0.0-alpha.0",
-    "scripts": {
-    },
-    "dependencies": {
-    },
-    "devDependencies": {
-    },
+    "version": "1.4.0",
+    "scripts": {},
     "eslintConfig": {
         "parser": "@typescript-eslint/parser",
         "plugins": [
@@ -42,5 +37,6 @@
                 "always"
             ]
         }
-    }
+    },
+    "gitHead": "8b0cc820fab428ce26626f6720dbd6450114a734"
 }

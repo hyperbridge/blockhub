@@ -2,7 +2,7 @@
     <c-layout navigationKey="store">
         <div class="row">
             <div
-                v-if="!curatorMode"
+                v-if="!$store.state.application.curatorMode"
                 class="col-12">
                 <c-block
                     title="Curator Application"
@@ -10,18 +10,9 @@
                     :noGutter="true"
                     :bgGradient="true"
                     :onlyContentBg="true">
-                    <p>Welcome</p>
-                </c-block>
+                    <p>Welcome to the curator portal. If you'd like to submit curations and proposals, please choose your profile and fill out this quick form.</p>
+                    <p>Current profile: {{ activeProfile.name }}</p>
 
-                <div
-                    v-if="!curatorMode"
-                    style="text-align: center">
-                    <c-user-card
-                        class="col-3 margin-auto"
-                        :user="activeProfile"
-                        :previewMode="true"
-                        :class="{ 'default': true }" />
-                    <br>
                     <c-button
                         class="underline"
                         @click="$store.commit('application/showProfileChooser', true)">
@@ -33,12 +24,12 @@
                     <c-button
                         class="c-button--lg outline-white margin-top-20"
                         @click="convertProfile">
-                        Convert to Curator
+                        Submit application
                     </c-button>
-                </div>
+                </c-block>
             </div>
             <div
-                v-if="curatorMode"
+                v-if="$store.state.application.curatorMode"
                 class="col-12">
                 <c-block
                     title="Congratulations"
@@ -46,7 +37,7 @@
                     :noGutter="true"
                     :bgGradient="true"
                     :onlyContentBg="true">
-                    Your profile is all setup.
+                    This profile is already setup as a curator.
 
                     <br><br>
 
@@ -61,6 +52,15 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Curator Application | BlockHub`,
+            meta: [
+                { hid: 'description', name: 'description', content: `BlockHub curator application process` },
+                { hid: 'keywords', name: 'keywords', content: 'blockhub, curators, blockchain, game, indie, developer' }
+            ]
+        }
+    },
     components: {
         'c-user-card': () => import('~/components/user-card').then(m => m.default || m)
     },

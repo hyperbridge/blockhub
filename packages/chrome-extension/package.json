@@ -1,8 +1,9 @@
 {
-  "name": "@hyperbridge/blockhub-chrome-extension",
-  "version": "1.3.0",
+  "name": "@blockhub/chrome-extension",
+  "version": "1.4.0",
   "description": "",
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "gitHead": "8b0cc820fab428ce26626f6720dbd6450114a734"
 }

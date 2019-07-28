@@ -3,7 +3,7 @@
         class="game-library__item loading--w-spinner"
         :class="{'is-active': active}">
         <div class="item-img">
-            <c-img :src="game.images.mediumTile" />
+            <c-img :src="game.meta.images.mediumTile" />
         </div>
         <div class="item-info">
             <div>

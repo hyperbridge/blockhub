@@ -252,21 +252,9 @@ export default {
             if (newVal === false) {
                 this.editProfile(this.profiles.find(p => p.id === this.$store.state.profiles.currentId))
             }
-        },
-        '$store.state.profiles.list'(newVal, oldVal) {
-            // Object.values(this.$store.state.profiles.keyedById) = this.$store.state.profiles.list
         }
     },
     created() {
-        // this.$store.dispatch('profiles/find', {
-        //     query: {
-        //         accountId: this.$store.state.auth.user.id,
-        //         $sort: {
-        //             createdAt: -1
-        //         },
-        //         $limit: 25
-        //     }
-        // })
     },
     methods: {
         setDefault(profile) {
@@ -313,10 +301,6 @@ export default {
                     address: profile.wallet
                 }
             ])
-
-            // this.$desktop.sendCommand('saveProfileRequest', profile).then((profile) => {
-            //     this.saveProfiles()
-            // })
         },
         deleteProfile(profile) {
             if (this.removeProfile) {
@@ -324,23 +308,11 @@ export default {
                 this.removeProfile.edit = false
                 this.removeProfile.removing = true
                 this.removeProfile = null
-
-                // this.saveProfiles()
-                // this.$desktop.sendCommand('removeProfileRequest', this.removeProfile).then(() => {
-                //     const index = this.profiles.indexOf(this.removeProfile)
-                //     this.profiles.splice(index, 1)
-                //     this.removeProfile.edit = false
-                //     this.removeProfile = null
-
-                //     this.saveProfiles()
-                // })
             } else {
                 this.removeProfile = profile
             }
 
             this.editedProfile = null
-
-            // this.saveProfiles()
         },
         createProfile() {
             const { newProfile } = this
@@ -350,10 +322,6 @@ export default {
                 avatar: newProfile.img,
                 address: newProfile.wallet
             })
-        },
-        saveProfiles() {
-            // Object.values(this.$store.state.profiles.keyedById) = this.profiles
-            this.$store.dispatch('application/updateState')
         }
     }
 }

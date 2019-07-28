@@ -146,8 +146,7 @@
                             class="app-header__create-account-btn">
                             <c-button
                                 status="none"
-                                to="/account/signup"
-                                class="">
+                                @click="$store.commit('application/activeModal', 'register')">
                                 <span class="text">CREATE ACCOUNT</span> <span class="fa fa-user-plus" />
                             </c-button>
                         </li>

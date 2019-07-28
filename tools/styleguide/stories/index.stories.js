@@ -5249,9 +5249,9 @@ storiesOf('Games list', module)
                     {
                         id: 1,
                         name: 'Game Of Thor 1',
-                        sub_name: 'Legendary Edition',
+                        subTitle: 'Legendary Edition',
                         image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
-                        download_content:[
+                        downloadContent:[
                             {
                                 name: 'DragonBore',
                                 price: '3.99'
@@ -5317,9 +5317,9 @@ storiesOf('Games list', module)
                     {
                             id: 2,
                             name: 'Game Of Thor 2',
-                            sub_name: 'Legendary Edition',
+                            subTitle: 'Legendary Edition',
                             image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
-                            download_content:[
+                            downloadContent:[
                                     {
                                             name: 'DragonBore',
                                             price: '3.99'
@@ -5385,9 +5385,9 @@ storiesOf('Games list', module)
                         {
                                 id: 3,
                                 name: 'Game Of Thor 3',
-                                sub_name: 'Legendary Edition',
+                                subTitle: 'Legendary Edition',
                                 image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
-                                download_content:[
+                                downloadContent:[
                                         {
                                                 name: 'DragonBore',
                                                 price: '3.99'
@@ -5542,7 +5542,7 @@ storiesOf('Games Library', module)
         template: `
                 <div class="row p-5" style="width: 1000px">
                     <div class="col-4">
-                        <c-game-library-card :name="game.name" :image="game.images.mediumTile" />
+                        <c-game-library-card :name="game.name" :image="game.meta.images.mediumTile" />
                     </div>
                 </div>
         `

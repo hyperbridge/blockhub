@@ -1,16 +1,14 @@
 <template>
     <c-layout>
         <div class="row">
-            <h2>Your Chest</h2>
-            <p>Here you'll find all your games, items, etc.</p>
             <div class="row margin-top-50">
                 <div class="col-12 col-xl-4">
                     <div class="h2 p-0 m-0">
-                        Game Drawer
+                        Chest
                     </div>
                     <div>
-                        <strong>482</strong>
-                        games in your drawer
+                        <strong>{{ games.length }}</strong>
+                        games in your chest
                     </div>
                 </div>
                 <div class="col-12 col-lg-8">
@@ -35,19 +33,20 @@
                     </div>
                 </div>
             </div>
-            <div class="row align-items-stretch margin-top-30">
+            <div class="row align-items-stretch margin-top-30" style="width: 100%">
                 <div
                     v-for="(game, index) in games"
                     :key="index"
                     class="col-12 col-md-6 col-lg-4 col-xl-3 py-3">
                     <c-game-card
-                        :game="game"
+                        :name="game.name"
+                        :image="game.meta.images.mediumTile"
                         :online="online"
                         :favorites="favorites"
                         :isLoading="(index == 2 ) ? true : false" />
                 </div>
             </div>
-            <div class="row align-items-stretch margin-top-30">
+            <div class="row align-items-stretch margin-top-30" style="width: 100%">
                 <div class="col-12 games-list">
                     <c-game-list
                         v-for="(game, index) in games"
@@ -128,7 +127,7 @@ export default {
         selectableRating() {
         },
         games() {
-            return this.$store.state.marketplace.products
+            return this.$store.state.application.activeProfile.ownedProducts
         }
     }
 }

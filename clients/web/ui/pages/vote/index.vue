@@ -70,7 +70,6 @@ export default {
         }
     },
     computed: {
-
         objects() {
             if (this.selectedObject !== 'Object') {
                 const object = this.selectedObject.toLowerCase()

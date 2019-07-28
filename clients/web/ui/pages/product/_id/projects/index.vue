@@ -18,18 +18,10 @@
                 </div>
                 <div>
                     <c-button
-                        v-if="$store.state.application.developerMode"
-                        status="info"
-                        iconHide
-                        to="/project/new">
-                        Propose Idea
-                    </c-button>
-                    <c-button
-                        v-if="!$store.state.application.developerMode"
                         status="info"
                         iconHide
                         @click="$store.commit('application/activeModal', 'proposeIdea')">
-                        Propose Idea
+                        Submit Idea
                     </c-button>
                 </div>
             </div>
@@ -47,13 +39,13 @@
                         class="col-12 col-md-6 col-lg-3">
                         <c-project-card
                             v-for="(project, index) in projects"
-                            :id="project.id"
                             :key="index"
-                            :image="project.images.mediumTile"
-                            :description="project.description"
-                            :funds="project.funds"
+                            :id="project.id"
                             :name="project.name"
-                            :developer="product.developer"
+                            :image="project.meta.images.mediumTile"
+                            :description="project.meta.description"
+                            :funds="project.meta.funds"
+                            :developer="product.meta.developer"
                             :showGame="false"
                             class="margin-0 w-100" />
                     </div>

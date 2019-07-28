@@ -1,132 +1,131 @@
 {
-    "name": "blockhub-devtools-builder",
-    "description": "BlockHub DevTools Builder",
-    "version": "1.0.0-alpha.0",
-    "homepage": "https://hyperbridge.org",
-    "license": "SEE LICENSE IN LICENSE.md",
-    "author": {
-      "name": "Hyperbridge",
-      "email": "hello@hyperbridge.org",
-      "url": "https://hyperbridge.org"
+  "name": "blockhub-devtools-builder",
+  "description": "BlockHub DevTools Builder",
+  "version": "1.4.0",
+  "homepage": "https://hyperbridge.org",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Hyperbridge",
+    "email": "hello@hyperbridge.org",
+    "url": "https://hyperbridge.org"
+  },
+  "scripts": {
+    "build-quick": "cd ../app-builder && rm -rf dist/packages/win-unpacked/resources/app/src && cp -r ../app/src dist/packages/win-unpacked/resources/app && rm dist/packages/win-unpacked/resources/app/src/db/data.json",
+    "build-all": "cd ../app && cd ../app-builder && rm -rf dist/packages && electron-builder --mac --win --linux",
+    "build-linux": "cd ../app && cd ../app-builder && rm -rf dist/packages && electron-builder --linux",
+    "build-mac": "cd ../app && cd ../app-builder && rm -rf dist/packages && electron-builder --mac",
+    "build-windows": "cd ../app && cd ../app-builder && rm -rf dist/packages && electron-builder --win"
+  },
+  "postinstall": "electron-builder install-app-deps",
+  "devDependencies": {
+    "electron": "^2.0.8",
+    "electron-builder": "^20.28.4",
+    "electron-chromedriver": "^1.6.0",
+    "nightwatch": "^0.9.12",
+    "nightwatch-html-reporter": "^2.0.0",
+    "webdriverio": "^4.6.2"
+  },
+  "build": {
+    "appId": "org.hyperbridge.DevTools",
+    "productName": "DevTools",
+    "copyright": "",
+    "removePackageScripts": false,
+    "generateUpdatesFilesForAllChannels": true,
+    "buildDependenciesFromSource": false,
+    "nodeGypRebuild": false,
+    "detectUpdateChannel": true,
+    "compression": "normal",
+    "directories": {
+      "app": "../app",
+      "buildResources": "build-resources",
+      "output": "dist/packages"
     },
-    "scripts": {
-      "build-quick": "cd ../app-builder && rm -rf dist/packages/win-unpacked/resources/app/src && cp -r ../app/src dist/packages/win-unpacked/resources/app && rm dist/packages/win-unpacked/resources/app/src/db/data.json",
-      "build-all": "cd ../app && cd ../app-builder && rm -rf dist/packages && electron-builder --mac --win --linux",
-      "build-linux": "cd ../app && cd ../app-builder && rm -rf dist/packages && electron-builder --linux",
-      "build-mac": "cd ../app && cd ../app-builder && rm -rf dist/packages && electron-builder --mac",
-      "build-windows": "cd ../app && cd ../app-builder && rm -rf dist/packages && electron-builder --win"
+    "npmRebuild": true,
+    "mac": {
+      "category": "public.app-category.entertainment",
+      "icon": "build-resources/static/Icon-512.png",
+      "target": [
+        "zip",
+        "dmg"
+      ]
     },
-    "postinstall": "electron-builder install-app-deps",
-    "dependencies": {},
-    "devDependencies": {
-      "electron": "^2.0.8",
-      "electron-builder": "^20.28.4",
-      "electron-chromedriver": "^1.6.0",
-      "nightwatch": "^0.9.12",
-      "nightwatch-html-reporter": "^2.0.0",
-      "webdriverio": "^4.6.2"
-    },
-    "optionalDependencies": {},
-    "build": {
-      "appId": "org.hyperbridge.DevTools",
-      "productName": "DevTools",
-      "copyright": "",
-      "removePackageScripts": false,
-      "generateUpdatesFilesForAllChannels": true,
-      "buildDependenciesFromSource": false,
-      "nodeGypRebuild": false,
-      "detectUpdateChannel": true,
-      "compression": "normal",
-      "directories": {
-        "app": "../app",
-        "buildResources": "build-resources",
-        "output": "dist/packages"
-      },
-      "npmRebuild": true,
-      "mac": {
-        "category": "public.app-category.entertainment",
-        "icon": "build-resources/static/Icon-512.png",
-        "target": [
-          "zip",
-          "dmg"
-        ]
-      },
-      "win": {
-        "asar": false,
-        "asarUnpack": "**\\*.node2",
-        "icon": "build-resources/static/Icon-512.ico",
-        "target": [
-          {
-            "target": "nsis",
-            "arch": [
-              "x64"
-            ]
-          }
-        ]
-      },
-      "linux": {
-        "icon": "build-resources/static/Icon-512.png",
-        "target": [
-          {
-            "target": "AppImage",
-            "arch": [
-              "x64"
-            ]
-          },
-          {
-            "target": "deb",
-            "arch": [
-              "x64",
-              "ia32"
-            ]
-          },
-          {
-            "target": "tar.gz",
-            "arch": [
-              "x64",
-              "ia32"
-            ]
-          }
-        ],
-        "synopsis": "FrontendDevTools",
-        "category": "Entertainment"
-      },
-      "appx": {
-        "identityName": "Hyperbridge Frontend DevTools",
-        "publisher": "CN=Hyperbridge Inc, O=Hyperbridge Inc, L=Japan, S=Japan, C=EE",
-        "publisherDisplayName": "Hyperbridge Inc",
-        "backgroundColor": "#34262A"
-      },
-      "nsis": {
-        "oneClick": false,
-        "allowToChangeInstallationDirectory": "true",
-        "deleteAppDataOnUninstall": "true",
-        "createDesktopShortcut": "always",
-        "installerIcon": "build-resources/static/Icon-512.ico",
-        "perMachine": true,
-        "artifactName": "FrontendDevTools-Setup-${version}.${ext}"
-      },
-      "afterPack": "./build-resources/hooks/after-pack.js",
-      "publish": [
+    "win": {
+      "asar": false,
+      "asarUnpack": "**\\*.node2",
+      "icon": "build-resources/static/Icon-512.ico",
+      "target": [
         {
-          "provider": "github",
-          "owner": "hyperbridge",
-          "repo": "hyperbridge-app-builder"
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
         }
       ]
     },
-    "config": {
-      "forge": {
-        "electronPackagerConfig": {
-          "icon": "build-resources/static/Icon-512.ico",
-          "prune": true,
-          "ignore": [
-            ".*node_modules/fsevents/build.*",
-            "build-resources/scripts",
-            ".vscode"
-          ],
-          "afterPrune": []
+    "linux": {
+      "icon": "build-resources/static/Icon-512.png",
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        },
+        {
+          "target": "tar.gz",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
         }
+      ],
+      "synopsis": "FrontendDevTools",
+      "category": "Entertainment"
+    },
+    "appx": {
+      "identityName": "Hyperbridge Frontend DevTools",
+      "publisher": "CN=Hyperbridge Inc, O=Hyperbridge Inc, L=Japan, S=Japan, C=EE",
+      "publisherDisplayName": "Hyperbridge Inc",
+      "backgroundColor": "#34262A"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": "true",
+      "deleteAppDataOnUninstall": "true",
+      "createDesktopShortcut": "always",
+      "installerIcon": "build-resources/static/Icon-512.ico",
+      "perMachine": true,
+      "artifactName": "FrontendDevTools-Setup-${version}.${ext}"
+    },
+    "afterPack": "./build-resources/hooks/after-pack.js",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "hyperbridge",
+        "repo": "hyperbridge-app-builder"
+      }
+    ]
+  },
+  "config": {
+    "forge": {
+      "electronPackagerConfig": {
+        "icon": "build-resources/static/Icon-512.ico",
+        "prune": true,
+        "ignore": [
+          ".*node_modules/fsevents/build.*",
+          "build-resources/scripts",
+          ".vscode"
+        ],
+        "afterPrune": []
       }
     }
-  }
+  },
+  "gitHead": "8b0cc820fab428ce26626f6720dbd6450114a734"
+}

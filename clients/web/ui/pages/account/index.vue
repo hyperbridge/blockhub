@@ -227,10 +227,10 @@
                                     class="wishlist-box__item">
                                     <c-game-includes-item
                                         :id="product.id"
-                                        :image="product.images.mediumTile"
                                         :name="product.name"
-                                        :rating="product.rating.overall"
-                                        :developer="product.developer" />
+                                        :image="product.meta.images.mediumTile"
+                                        :rating="product.meta.rating.overall"
+                                        :developer="product.meta.developer" />
                                     <c-button-fav
                                         target="wishlist"
                                         :active="true"

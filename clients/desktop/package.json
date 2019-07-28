@@ -1,7 +1,7 @@
 {
-  "name": "@hyperbridge/blockhub-desktop-client",
+  "name": "@blockhub/desktop-client",
   "productName": "BlockHub",
-  "version": "0.8.1",
+  "version": "1.4.0",
   "description": "BlockHub",
   "homepage": "https://blockhub.gg",
   "author": {
@@ -9,7 +9,7 @@
     "email": "hello@hyperbridge.org",
     "url": "https://github.com/hyperbridge"
   },
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "Apache-2.0",
   "publishConfig": {
     "access": "public"
   },
@@ -24,12 +24,10 @@
     "build-windows": "npm run copy-web && cd app && npm run build && cd .. && rm -rf dist/packages && rm -rf build && cp -R app/ build && electron-builder --win"
   },
   "postinstall": "electron-builder install-app-deps",
-  "dependencies": {},
   "devDependencies": {
     "electron": "^2.0.8",
     "electron-builder": "^20.28.4"
   },
-  "optionalDependencies": {},
   "build": {
     "appId": "gg.blockhub.BlockHub",
     "productName": "BlockHub",
@@ -131,5 +129,6 @@
         "afterPrune": []
       }
     }
-  }
+  },
+  "gitHead": "8b0cc820fab428ce26626f6720dbd6450114a734"
 }

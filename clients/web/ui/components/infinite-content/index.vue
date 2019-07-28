@@ -285,12 +285,12 @@
                                         <c-project-card
                                             :id="project.id"
                                             class="p-2"
-                                            :image="project.images.mediumTile"
-                                            :description="project.description"
-                                            :funds="project.funds"
+                                            :image="project.meta.images.mediumTile"
+                                            :description="project.meta.description"
+                                            :funds="project.meta.funds"
                                             :parentName="project.product && project.product.name"
-                                            :parentDeveloper="project.product && project.product.developer"
-                                            :parentImage="project.product && project.product.images.mediumTile" />
+                                            :parentDeveloper="project.product && project.product.meta.developer"
+                                            :parentImage="project.product && project.product.meta.images.mediumTile" />
                                     </c-swiper-slide>
                                 </c-swiper>
                                 <div v-if="!item.data.projects.length">

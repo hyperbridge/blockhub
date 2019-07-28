@@ -489,7 +489,7 @@ export default {
             window.resetSettings()
         },
         sendDesktopMessage() {
-            if (!window.isElectron) {
+            if (!this.$store.state.application.mode === 'desktop') {
                 return alert('Not on desktop')
             }
 

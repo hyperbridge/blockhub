@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="store">
+    <c-layout navigationKey="store" :breadcrumbLinks="breadcrumbLinks">
         <c-block
             :noGutter="true"
             :bgGradient="true"

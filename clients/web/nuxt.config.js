@@ -11,7 +11,7 @@ export default {
         port: process.env.PORT,
         host: '0.0.0.0'
     },
-    mode: process.env.NUXT_MODE, // 'universal', // 'spa', // universal
+    mode: process.env.NUXT_MODE,
     srcDir: 'ui/',
     dev: process.env.NODE_ENV !== 'production',
     htmlAttrs: {
@@ -44,8 +44,8 @@ export default {
             { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
             { hid: 'twitter:site', name: 'twitter:site', content: '@' },
             { hid: 'twitter:creator', name: 'twitter:creator', content: '@' },
-            { hid: 'twitter:title', name: 'twitter:title', content: `Page title` },
-            { hid: 'twitter:description', name: 'twitter:description', content: 'Page description' },
+            // { hid: 'twitter:title', name: 'twitter:title', content: `Page title` },
+            // { hid: 'twitter:description', name: 'twitter:description', content: 'Page description' },
             { hid: 'twitter:image', name: 'twitter:image', content: 'https://full-public-path-to-image.jpg' },
 
             { hid: 'og:url', property: 'og:url', content: 'https://blockhub.gg' },
@@ -61,7 +61,7 @@ export default {
         link: [
             // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Nunito:300,400,600,700' },
             { type: 'application/json+oembed', href: 'https://full-url/oembed.json' },
-            { rel: 'icon', type: 'image/png', href: '/static/img/icons/favicon-32x32.png' }
+            { rel: 'icon', type: 'image/png', href: '/img/icons/favicon-32x32.png' }
         ],
         script: [
             { src: 'https://js.stripe.com/v3/', defer: true }

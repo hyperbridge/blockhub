@@ -1,9 +1,9 @@
 {
     "name": "playback-server",
-    "version": "0.7.1",
+    "version": "1.4.0",
     "description": "Playback Server",
     "homepage": "https://blockhub.gg",
-    "license": "SEE LICENSE IN LICENSE.md",
+    "license": "Apache-2.0",
     "author": {
         "name": "Hyperbridge",
         "email": "hello@blockhub.gg",
@@ -22,5 +22,5 @@
         "json-beautify": "^1.0.1",
         "lokijs": "^1.5.5"
     },
-    "optionalDependencies": {}
+    "gitHead": "8b0cc820fab428ce26626f6720dbd6450114a734"
 }

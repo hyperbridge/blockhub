@@ -1,43 +1,44 @@
 {
-    "name": "@hyperbridge/blockhub-styleguide",
-    "version": "1.0.0",
-    "description": "BlockHub Style Guide",
-    "license": "SEE LICENSE IN LICENSE.md",
-    "publishConfig": {
-        "access": "public"
-    },
-    "scripts": {
-      "start": "start-storybook -s ../../clients/web/ui -p 6006 --ci",
-      "dev": "yarn start"
-    },
-    "devDependencies": {
-      "@storybook/addon-actions": "^4.0.0-alpha.16",
-      "@storybook/addon-knobs": "^4.0.0-alpha.16",
-      "@storybook/addon-links": "^4.0.0-alpha.16",
-      "@storybook/addon-notes": "^4.0.0-alpha.16",
-      "@storybook/addon-storyshots": "^4.0.0-alpha.16",
-      "@storybook/addon-viewport": "^4.0.0-alpha.16",
-      "@storybook/addons": "^4.0.0-alpha.16",
-      "@storybook/vue": "^4.0.0-alpha.16",
-      "vue": "^2.5.2",
-      "babel-core": "^6.26.0",
-      "babel-plugin-istanbul": "^4.1.5",
-      "babel-plugin-require-context-hook": "^1.0.0",
-      "babel-plugin-transform-es2015-template-literals": "^6.22.0",
-      "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
-      "babel-plugin-transform-runtime": "^6.23.0",
-      "babel-preset-env": "^1.6.0",
-      "babel-preset-stage-2": "^6.24.1",
-      "babel-preset-vue": "^2.0.2",
-      "babel-loader": "^7.1.2",
-      "sass-loader": "6.0.7",
-      "vue-loader": "15.7.0",
-      "vue-plugin-load-script": "^1.2.0",
-      "node-sass": "^4.9.3",
-      "storybook-vue-router": "^1.0.1",
-      "web-client": "../../clients/web"
-    },
-    "engines": {
-      "node": ">= 8.0.0"
-    }
-  }
+  "name": "@blockhub/styleguide",
+  "version": "1.4.0",
+  "description": "BlockHub Style Guide",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "start": "start-storybook -s ../../clients/web/ui -p 6006 --ci",
+    "dev": "yarn start"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^4.0.0-alpha.16",
+    "@storybook/addon-knobs": "^4.0.0-alpha.16",
+    "@storybook/addon-links": "^4.0.0-alpha.16",
+    "@storybook/addon-notes": "^4.0.0-alpha.16",
+    "@storybook/addon-storyshots": "^4.0.0-alpha.16",
+    "@storybook/addon-viewport": "^4.0.0-alpha.16",
+    "@storybook/addons": "^4.0.0-alpha.16",
+    "@storybook/vue": "^4.0.0-alpha.16",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-istanbul": "^4.1.5",
+    "babel-plugin-require-context-hook": "^1.0.0",
+    "babel-plugin-transform-es2015-template-literals": "^6.22.0",
+    "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-preset-vue": "^2.0.2",
+    "node-sass": "^4.9.3",
+    "sass-loader": "6.0.7",
+    "storybook-vue-router": "^1.0.1",
+    "vue": "^2.5.2",
+    "vue-loader": "15.7.0",
+    "vue-plugin-load-script": "^1.2.0",
+    "web-client": "../../clients/web"
+  },
+  "engines": {
+    "node": ">= 8.0.0"
+  },
+  "gitHead": "8b0cc820fab428ce26626f6720dbd6450114a734"
+}

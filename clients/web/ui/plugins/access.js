@@ -2,15 +2,14 @@ import Vue from 'vue'
 import sdk from '../../../../sdks/node/build/src'
 
 export default ({ app, store }) => {
-    // access = access.default.access
-
-    const $access = sdk.access.validator
+    const accessConfig = sdk.access
+    const access = sdk.access.validator
 
     const plugin = {
         install() {
             Vue.mixin({
                 created() {
-                    this.$access = $access
+                    this.$access = access
                     this.$accessConfig = sdk.access
                 }
             })
@@ -25,7 +24,7 @@ export default ({ app, store }) => {
 
             el.hidden = true
 
-            if ($access(value)) {
+            if (access(value)) {
                 el.hidden = false
             }
 
@@ -35,6 +34,6 @@ export default ({ app, store }) => {
         }
     })
 
-    app.$access = store.$access = $access
-    app.$accessConfig = store.$accessConfig = sdk.access
+    app.$access = store.$access = access
+    app.$accessConfig = store.$accessConfig = accessConfig
 }

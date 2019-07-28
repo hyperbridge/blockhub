@@ -4,12 +4,12 @@
             v-for="(product, index) in products"
             :key="index"
             :id="product.id"
-            :price="product.price"
-            :mediumTile="product.images.mediumTile"
-            :video="product.video"
-            :shortDescription="product.shortDescription"
-            :previewImages="product.images.review"
-            :developerTags="product.developerTags" />
+            :price="product.meta.price"
+            :mediumTile="product.meta.images.mediumTile"
+            :video="product.meta.video"
+            :shortDescription="product.meta.shortDescription"
+            :previewImages="product.meta.images.review"
+            :developerTags="product.meta.developerTags" />
     </div>
 </template>
 

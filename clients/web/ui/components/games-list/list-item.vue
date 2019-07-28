@@ -13,7 +13,7 @@
                             {{ name }}
                         </div>
                         <div class="h5 games-list__sub-title">
-                            {{ subName }}
+                            {{ subTitle }}
                         </div>
                     </div>
                     <c-button
@@ -145,7 +145,7 @@ export default {
             type: String,
             default: null
         },
-        subName: {
+        subTitle: {
             type: String,
             default: null
         },

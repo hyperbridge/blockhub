@@ -1,17 +1,12 @@
 {
-    "name": "docs",
-    "version": "1.0.0",
-    "description": "BlockHub Docs",
-    "private": true,
-    "scripts": {
-      "generate": "node ./generate.js"
-    },
-    "dependencies": {
-    },
-    "devDependencies": {
-    },
-    "engines": {
-      "node": ">= 8.0.0"
-    }
+  "name": "docs",
+  "version": "1.4.0-alpha.0",
+  "description": "BlockHub Docs",
+  "private": true,
+  "scripts": {
+    "generate": "node ./generate.js"
+  },
+  "engines": {
+    "node": ">= 8.0.0"
   }
-  
+}

@@ -1,253 +1,93 @@
 <template>
-    <c-layout>
-        <div class="row realm_page_header margin-bottom-30">
-            <div class="col-10 col-md-3">
-                <div class="logo">
-                    <c-img
-                        class="img-fluid"
-                        :src="realm.meta.images.logo" />
-                </div>
-            </div>
-            <div class="col-12 col-md-3 mb-4 mb-md-0">
-                <div class="widget--box">
-                    <h3>Widget Title</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer gravida in dui tempus mattis. Class aptent taciti sociosqu ad
-                        litora torquent per conubia nostra, per inceptos himenaeos.
-                    </p>
-                </div>
-            </div>
-            <div class="col--12 col-md-3 mb-4 mb-md-0">
-                <div class="widget--box">
-                    <h3>Widget Title</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer gravida in dui tempus mattis. Class aptent taciti sociosqu ad
-                        litora torquent per conubia nostra, per inceptos himenaeos.
-                    </p>
-                </div>
-            </div>
-            <div class="col--12 col-md-3 mb-4 mb-md-0">
-                <div class="widget--box">
-                    <h3>Widget Title</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer gravida in dui tempus mattis. Class aptent taciti sociosqu ad
-                        litora torquent per conubia nostra, per inceptos himenaeos.
-                    </p>
-                </div>
-            </div>
-            <div class="col-12">
-                <ul class="nav">
-                    <li class="nav-item active">
-                        <a
-                            href="#"
-                            class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            href="#"
-                            class="nav-link">News</a>
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            href="#"
-                            class="nav-link">Community</a>
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            href="#"
-                            class="nav-link">Games</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="banner-line margin-bottom-30">
-                    <div class="banner-md">
-                        <div class="img">
-                            <c-img :src="realm.meta.images.news" />
-                        </div>
-                        <div class="text">
-                            <h4>Announcing: The Boomsday Project</h4>
-                            <p>
-                                Sed pulvinar nibh id interdum tempus. Nam id massa sit amet dolor tincidunt bibendum.
-                                Nullam ante nunc, dapibus et mauris ut, sodales accumsan lorem.
-                            </p>
-                            <c-button to="/project/1">
-                                Read More
-                            </c-button>
-                        </div>
+    <div class="row">
+        <div class="col-12">
+            
+            <div class="banner-line margin-bottom-30">
+                <div class="banner-md">
+                    <div class="img">
+                        <c-img :src="realm.meta.images.news" />
                     </div>
-                    <div class="banner-sm">
-                        <div class="img">
-                            <c-img :src="realm.meta.images.follow" />
-                        </div>
-                        <div class="text">
-                            <a
-                                href="#"
-                                class="btn btn-sm btn-info">Follow Us</a>
-                            <h4>Get the news first!</h4>
-                        </div>
+                    <div class="text">
+                        <h4>Announcing: The Boomsday Project</h4>
+                        <p>
+                            Sed pulvinar nibh id interdum tempus. Nam id massa sit amet dolor tincidunt bibendum.
+                            Nullam ante nunc, dapibus et mauris ut, sodales accumsan lorem.
+                        </p>
+                        <c-button to="/project/1">
+                            Read More
+                        </c-button>
                     </div>
                 </div>
+                <div class="banner-sm">
+                    <div class="img">
+                        <c-img :src="realm.meta.images.follow" />
+                    </div>
+                    <div class="text">
+                        <a
+                            href="#"
+                            class="btn btn-sm btn-info">Follow Us</a>
+                        <h4>Get the news first!</h4>
+                    </div>
+                </div>
+            </div>
 
-                <div class="product-grid">
-                    <c-heading-bar
-                        name="Featured Games"
-                        :showArrows="false"
-                        :showBackground="false" />
-                </div>
-                <div class="featured-assets">
-                    <c-heading-bar
-                        name="Featured Assets"
-                        :showArrows="false"
-                        :showBackground="false" />
-                    <c-featured-assets />
-                </div>
-                <div class="games-container">
-                    <c-heading-bar
-                        name="Games"
-                        :showArrows="false"
-                        :showBackground="false"
-                        showActions>
-                        <div
-                            slot="additional-action"
-                            class="additional-action margin-left-20">
-                            <div class="text">
-                                Price
-                                <i class="fas fa-dollar-sign" />
-                            </div>
-                            <div class="arrow-container">
-                                <i class="fas fa-sort-up" />
-                                <i class="fas fa-sort-down" />
-                            </div>
+            <div class="product-grid">
+                <c-heading-bar
+                    name="Featured Games"
+                    :showArrows="false"
+                    :showBackground="false" />
+            </div>
+            <div class="featured-assets">
+                <c-heading-bar
+                    name="Featured Assets"
+                    :showArrows="false"
+                    :showBackground="false" />
+                <c-featured-assets />
+            </div>
+            <div class="games-container">
+                <c-heading-bar
+                    name="Games"
+                    :showArrows="false"
+                    :showBackground="false"
+                    showActions>
+                    <div
+                        slot="additional-action"
+                        class="additional-action margin-left-20">
+                        <div class="text">
+                            Price
+                            <i class="fas fa-dollar-sign" />
                         </div>
-                        <div
-                            slot="additional-action"
-                            class="additional-action">
-                            <div class="text">
-                                Rating
-                                <i class="fas fa-star" />
-                            </div>
-                            <div class="arrow-container">
-                                <i class="fas fa-sort-up" />
-                                <i class="fas fa-sort-down" />
-                            </div>
+                        <div class="arrow-container">
+                            <i class="fas fa-sort-up" />
+                            <i class="fas fa-sort-down" />
                         </div>
-                    </c-heading-bar>
-                    <c-game-grid />
-                </div>
+                    </div>
+                    <div
+                        slot="additional-action"
+                        class="additional-action">
+                        <div class="text">
+                            Rating
+                            <i class="fas fa-star" />
+                        </div>
+                        <div class="arrow-container">
+                            <i class="fas fa-sort-up" />
+                            <i class="fas fa-sort-down" />
+                        </div>
+                    </div>
+                </c-heading-bar>
+                <c-game-grid />
             </div>
         </div>
-    </c-layout>
+    </div>
 </template>
 
 <script>
-function hexToRgb(hex) {
-    const bigint = parseInt(hex, 16)
-    const r = (bigint >> 16) & 255
-    const g = (bigint >> 8) & 255
-    const b = bigint & 255
-
-    return `${r},${g},${b}`
-}
-
 export default {
-    head() {
-        return {
-            title: `${this.realm.name}`,
-            meta: [
-                { hid: 'description', name: 'description', content: 'BlockHub realms are where you keep up with game studios' },
-                { hid: 'keywords', name: 'keywords', content: 'realms, game studios, gaming, game, indie, developer' }
-            ]
-        }
-    },
-    components: {
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-        'c-simple-game-grid': () => import('~/components/game-grid/simple').then(m => m.default || m),
-        'c-game-grid': () => import('~/components/game-grid/with-description').then(m => m.default || m),
-        'c-featured-assets': () => import('~/components/assets-list-item/featured-list').then(m => m.default || m)
-    },
-    data() {
-        return {
-            css: {
-                bodyBgColor: null,
-                headerBg: {},
-                headerBgLayer1: {},
-                headerBgLayer2: {}
-            }
-        }
-    },
-    computed: {
-    },
-    async asyncData({ params, store, error }) {
-        await store.dispatch('realms/find', {
-            query: {
-                id: Number(params.id)
-            }
-        })
-
-        const realm = store.getters['realms/get'](params.id)
-
-        if (!realm) return error({ statusCode: 404, message: 'Realm not found' })
-
-        return {
-            realm,
-            breadcrumbLinks: [
-                { to: { path: '/' }, title: 'Home' },
-                { to: { path: `/realms/${realm.id}` }, title: realm.name }
-            ]
-        }
-    },
-    mounted() {
-        this.$nextTick(() => {
-            if (process.client) return
-
-            this.css.bodyBgColor = document.body.style.backgroundColor
-            this.css.headerBg = this.$('#header-bg')[0].style
-            this.css.headerBgLayer1 = this.$('.header-bg__layer-1')[0].style
-            this.css.headerBgLayer2 = this.$('.header-bg__layer-2')[0].style
-
-            document.body.style.backgroundColor = this.realm.meta.theme.backgroundColor
-            this.$('#header-bg').css({ 'background-image': `url(${this.realm.meta.images.background})`, 'background-size': this.realm.meta.theme.header.backgroundSize || 'cover' })
-            this.$('.header-bg__layer-1').css({ 'background': `linear-gradient(to bottom, rgba(${hexToRgb(this.realm.meta.theme.backgroundColor.slice(1))}, 0.34) 0%, rgba(${hexToRgb(this.realm.meta.theme.backgroundColor.slice(1))}, 1) 100%)` })
-            this.$('.header-bg__layer-2').css({ 'position': 'fixed', 'background': 'rgba(255, 255, 255, 0.2)', 'height': '48px' })
-            this.$('.app-header__shadow').hide()
-            this.$('#page-aside').hide()
-        })
-    },
-    beforeDestroy() {
-        if (process.client) return
-
-        document.body.style.backgroundColor = this.css.bodyBgColor
-
-        this.$('#header-bg')[0].style = this.css.headerBg
-        this.$('.header-bg__layer-1')[0].style = this.css.headerBgLayer1
-        this.$('.header-bg__layer-2')[0].style = this.css.headerBgLayer2
-        this.$('.app-header__shadow').show()
-        this.$('#page-aside').show()
-    },
-    created() {
-        // this.$store.commit('application/activeModal', 'comingSoon')
-    }
+    props: ['realm']
 }
 </script>
 
 <style lang="scss" scoped>
-    .realm_page_header {
-        .logo {
-            img {
-                max-width: 150px;
-                @media (max-width: 767px) {
-                    max-width: 300px;
-                    margin-bottom: 30px;
-                }
-            }
-        }
-    }
 
     .banner-line{
         display: flex;
@@ -356,25 +196,6 @@ export default {
         }
     }
 
-    .nav {
-        margin: 40px 0 20px;
-        li {
-            margin-right: 60px;
-            a {
-                font-size: 21px;
-                color: #fff;
-                opacity: .65;
-                padding: 5px 0 5px 0;
-            }
-            &.active,
-            &:hover {
-                a {
-                    opacity: 1;
-                }
-            }
-        }
-    }
-
     .additional-action{
         float: right;
         display: flex;
@@ -450,5 +271,3 @@ export default {
         flex-wrap: wrap;
     }
 </style>
-
-

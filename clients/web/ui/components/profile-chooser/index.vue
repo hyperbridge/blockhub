@@ -105,10 +105,7 @@ export default {
             this.$store.commit('application/showProfileChooser', false)
         },
         setDefault(profile) {
-            this.$store.commit(
-                'update',
-                ['application/activeProfile', profile]
-            )
+            this.$store.commit('application/activeProfile', profile)
 
             this.$store.state.application.developerMode = profile.role === 'developer'
         }

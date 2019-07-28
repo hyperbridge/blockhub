@@ -126,6 +126,7 @@ export default {
     body.screen--not-found {
         .app-header {
             transform: rotate(-20deg) translateX(-5%) translateY(-70%) !important;
+            animation: none !important;
             width: 140%;
             overflow: hidden;
 

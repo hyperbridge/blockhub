@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import * as DB from '../../db'
 
-let localState = {
+export const state = () => ({
     currentEthereumNetwork: 'local',
     selectedProduct: null,
     firstProduct: true,
@@ -112,17 +112,7 @@ let localState = {
         ]
     },
     community: []
-}
-
-export const state = () => localState
-
-const updateState = (savedData, updatedState = {}) => {
-    localState = {
-        ...localState,
-        ...savedData,
-        ...updatedState
-    }
-}
+})
 
 const sortDir = (dir, asc) => asc ? dir : dir * -1
 
@@ -132,23 +122,11 @@ export const getters = {
 export const actions = {
     init(store, payload) {
         console.log('[BlockHub][Marketplace] Initializing...')
-
-        updateState(DB.store.data[0].marketplace, store.state)
-
-        store.commit('updateState', localState)
     },
     updateState(store, payload) {
         // console.log("[BlockHub][Marketplace] Updating store...")
 
-        updateState(store.state, payload)
-
-        store.commit('updateState', localState)
-    },
-    initEthereum(store, payload) {
-        // Bridge.initProtocol({ protocolName: 'marketplace' }).then((config) => {
-        //     store.state.ethereum[store.state.currentEthereumNetwork] = config
-        //     store.dispatch('updateState')
-        // })
+        store.commit('updateState', payload)
     },
     submitProductForReviewRequest(store, payload) {
         // payload = name, version, category, files, checksum, permissions
@@ -257,30 +235,6 @@ export const mutations = {
 
                             return reject(err)
                         }
-
-                        // TODO: feathers stuff
-                        // product.$loki = undefined
-                        // product.id = res.args.productId.toNumber()
-
-                        // try {
-                        //     DB.marketplace.products.insert(product)
-                        //     console.log('after', product.id)
-                        // } catch (e) {
-                        //     try {
-                        //         DB.marketplace.products.update(product)
-                        //     } catch (e) {
-                        //         reject(e)
-                        //     }
-                        // }
-
-                        // DB.save()
-
-                        // Bridge.sendCommand('updateState', {
-                        //     module: 'marketplace',
-                        //     state: {
-                        //         products: DB.marketplace.products.data
-                        //     }
-                        // })
 
                         console.log('Product created')
 
