@@ -26,7 +26,7 @@
                 class="page__content page__content-invert invert"
                 :class="{'make-it-blur': bluredBg, 'with-shortcuts': showShortcuts}"
                 :style="bgImage ? `background: url(${bgImage}) top center no-repeat;background-size: cover;` : ''">
-                <div v-if="!isConnected" class="loader-block">
+                <div v-if="!isConnected && $store.state.application.connectionOverlayAllowed" class="loader-block">
                     <div class="loader-block__container">
                         <div class="loader-block__spinner" />
 
@@ -122,7 +122,7 @@
                     <div
                         class="container-fluid"
                         style="padding-top: 0!important;">
-                        <div v-if="isConnected" class="content-body">
+                        <div class="content-body">
                             <slot />
                         </div>
                     </div>
@@ -1795,7 +1795,7 @@ export default {
     }
 
     .loader-block {
-        position: absolute;
+        position: fixed;
         width: 100%;
         height: 100%;
         left: 0px;
