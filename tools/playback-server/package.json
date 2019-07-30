@@ -2,15 +2,15 @@
     "name": "@hyperbridge/playback-server",
     "version": "1.4.0",
     "description": "Playback Server",
-    "homepage": "https://blockhub.gg",
+    "homepage": "https://hyperbridge.org",
     "license": "Apache-2.0",
     "publishConfig": {
         "access": "public"
     },
     "author": {
         "name": "Hyperbridge",
-        "email": "hello@blockhub.gg",
-        "url": "https://blockhub.gg"
+        "email": "hello@hyperbridge.org",
+        "url": "https://hyperbridge.org"
     },
     "main": "./src/server.js",
     "scripts": {
