@@ -11,14 +11,14 @@
     "dev": "yarn start"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^4.0.0-alpha.16",
-    "@storybook/addon-knobs": "^4.0.0-alpha.16",
-    "@storybook/addon-links": "^4.0.0-alpha.16",
-    "@storybook/addon-notes": "^4.0.0-alpha.16",
-    "@storybook/addon-storyshots": "^4.0.0-alpha.16",
-    "@storybook/addon-viewport": "^4.0.0-alpha.16",
-    "@storybook/addons": "^4.0.0-alpha.16",
-    "@storybook/vue": "^4.0.0-alpha.16",
+    "@storybook/addon-actions": "^5.2.0-beta.18",
+    "@storybook/addon-knobs": "^5.2.0-beta.18",
+    "@storybook/addon-links": "^5.2.0-beta.18",
+    "@storybook/addon-notes": "^5.2.0-beta.18",
+    "@storybook/addon-storyshots": "^5.2.0-beta.18",
+    "@storybook/addon-viewport": "^5.2.0-beta.18",
+    "@storybook/addons": "^5.2.0-beta.18",
+    "@storybook/vue": "^5.2.0-beta.18",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-istanbul": "^4.1.5",
@@ -29,16 +29,23 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-2": "^6.24.1",
     "babel-preset-vue": "^2.0.2",
-    "node-sass": "^4.9.3",
-    "sass-loader": "6.0.7",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
     "storybook-vue-router": "^1.0.1",
     "vue": "^2.5.2",
     "vue-loader": "15.7.0",
     "vue-plugin-load-script": "^1.2.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "css-loader": "^3.1.0",
+    "moment": "^2.24.0",
+    "react-docgen-typescript-loader": "^3.1.0",
+    "vue-style-loader": "^4.1.2",
     "web-client": "../../clients/web"
   },
   "engines": {
-    "node": ">= 8.0.0"
+    "node": ">= 10.0.0"
   },
-  "gitHead": "8b0cc820fab428ce26626f6720dbd6450114a734"
+  "gitHead": "8b0cc820fab428ce26626f6720dbd6450114a734",
+  "dependencies": {
+  }
 }
