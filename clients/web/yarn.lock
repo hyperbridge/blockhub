@@ -713,10 +713,31 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
+"@blockhub/node-sdk@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@blockhub/node-sdk/-/node-sdk-1.4.0.tgz#b768d139954e210a043afa47afaa1a65c91d5522"
+  integrity sha512-4yXfQopMZSEZI9CNThCSId+Cvsk+RWRiBqUmoxbIMbAJe9emDb3LhQGm3Bxu+nLAJiGZyHBUJkXe9MozA4BcNA==
+  dependencies:
+    "@hyperbridge/funding-protocol" "1.0.16"
+    "@hyperbridge/marketplace-protocol" "1.0.16"
+    "@hyperbridge/token" "1.0.16"
+    bip39 "^2.5.0"
+    bluebird "^3.5.3"
+    truffle-contract "^3.0.5"
+    truffle-hdwallet-provider "^0.0.6"
+    typescript "^3.2.2"
+    typescript-formatter "^7.2.2"
+    web3 "^0.20.1"
+
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
+
+"@ericmuyser/hyper-ui@^1.0.0-alpha.7":
+  version "1.0.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/@ericmuyser/hyper-ui/-/hyper-ui-1.0.0-alpha.7.tgz#f433d9e0914116f9abcf9b312468b0450b849eed"
+  integrity sha512-v0qCDE5xl95a/iFWiimLyms9U+ugHxDE44O/ZKAAGVLpDGC09rztjv04ZvDwz9X+BhRR0vSQjWVLEUp8ZSmSeg==
 
 "@feathersjs/adapter-commons@^2.0.0":
   version "2.0.0"
@@ -803,10 +824,10 @@
     lodash "^4.17.10"
     radix-router "^3.0.1"
 
-"@hyperbridge/funding-protocol@*":
-  version "1.0.16-alpha.0"
-  resolved "https://registry.yarnpkg.com/@hyperbridge/funding-protocol/-/funding-protocol-1.0.16-alpha.0.tgz#6529a99685c6091164f8407d004afb571b5d46f7"
-  integrity sha512-x9cu/CemVpH16oM550ANRTe8JpHUC4q1/8+nytKGHlS8vo1fnK2knFW20vYd2qnUHmcQjWAl3BQVGOBrbs21Zw==
+"@hyperbridge/funding-protocol@1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@hyperbridge/funding-protocol/-/funding-protocol-1.0.16.tgz#975622cbcaefee7dc4788c1228ba8c56179f64fd"
+  integrity sha512-0SNBkRLQDZjrtJMdcEHlDu4pOw5K3COnZUT+XpwK/EDlxbk4Wiw8UcEUPkQdnBaM5A+cjLm6j2ZXBAwobutyDw==
   dependencies:
     fs-extra "^7.0.0"
     solc "^0.4.23"
@@ -814,10 +835,21 @@
     truffle-hdwallet-provider "0.0.6"
     web3 "^1.0.0-beta.26"
 
-"@hyperbridge/token@*":
-  version "1.0.16-alpha.0"
-  resolved "https://registry.yarnpkg.com/@hyperbridge/token/-/token-1.0.16-alpha.0.tgz#7244c8e040c94be74e7aa9ee7ffa8c330aed3916"
-  integrity sha512-vw0Pg+4Bdqp2z5XxE4DyGivIRkw5ZmLSjtkRjkFkcwa7HILJJHrC5i0p3v1/uzL3qLRE9+2rvi5qd0tfVB6p6Q==
+"@hyperbridge/marketplace-protocol@1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@hyperbridge/marketplace-protocol/-/marketplace-protocol-1.0.16.tgz#8c139fff24d73b97f680649e4624c2bdf5960ea6"
+  integrity sha512-kYfYjyeo0lnAIQjteCIxTxmzSR82OST4MR6C7HI/Rzxt3sA/HPSL0yrkBLmBn0vpYvwBWTXTYVQbvFoWbX784g==
+  dependencies:
+    fs-extra "^7.0.0"
+    solc "^0.4.23"
+    truffle-contract "^3.0.5"
+    truffle-hdwallet-provider "0.0.6"
+    web3 "^1.0.0-beta.26"
+
+"@hyperbridge/token@1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@hyperbridge/token/-/token-1.0.16.tgz#bdc8c99c407512ff09a970e730f2f710dc9a86f6"
+  integrity sha512-VeT5v1THqtiJKrGLncP76x5NeqNv4EYmdb9nzV2NSnpkc8WRL41U/Y+kCNne+BGbj8sBzvAGLEM3TwjFf7Xd1w==
   dependencies:
     truffle-contract "^3.0.5"
 
@@ -3107,19 +3139,6 @@ block-stream@*:
   integrity sha1-E+v+d4oDIFz+A3UUgeu0szAMEmo=
   dependencies:
     inherits "~2.0.0"
-
-blockhub-node-sdk@../../sdks/node:
-  version "1.4.0-alpha.0"
-  dependencies:
-    "@hyperbridge/funding-protocol" "*"
-    "@hyperbridge/token" "*"
-    bip39 "^2.5.0"
-    bluebird "^3.5.3"
-    truffle-contract "^3.0.5"
-    truffle-hdwallet-provider "^0.0.6"
-    typescript "^3.2.2"
-    typescript-formatter "^7.2.2"
-    web3 "^0.20.1"
 
 bluebird@^3.1.1, bluebird@^3.5.3, bluebird@^3.5.5:
   version "3.5.5"

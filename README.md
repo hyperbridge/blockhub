@@ -22,7 +22,13 @@ This is the monorepo for BlockHub.
 - 🌐 [Site - Staging](https://staging.blockhub.gg/)
 - 📖 [Docs](http://docs.hyperbridge.org/blockhub)
 - 📓 [EIPs](https://github.com/hyperbridge/EIPs)
-- 🔗 [Protocol](https://github.com/hyperbridge/protocol)
+- 💻 [Web Client](https://github.com/hyperbridge/blockhub/tree/master/clients/web)
+- 💻 [Desktop Client](https://github.com/hyperbridge/blockhub/tree/master/clients/desktop)
+- 🛡 [Node Operator](https://github.com/hyperbridge/blockhub/tree/master/packages/node-operator)
+- 💎 [Token](https://github.com/hyperbridge/protocol/tree/master/packages/token)
+- 🔗 [Protocols](https://github.com/hyperbridge/protocol)
+- 🔗 [Funding Protocol](https://github.com/hyperbridge/protocol/tree/master/packages/funding)
+- 🔗 [Marketplace Protocol](https://github.com/hyperbridge/protocol/tree/master/packages/marketplace)
 
 
 ## Intro

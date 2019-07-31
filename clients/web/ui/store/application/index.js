@@ -48,6 +48,7 @@ export const state = () => ({
     activeModal: null,
     activeNotification: null,
     tokenCount: 0,
+    connectionOverlayAllowed: false,
     status: {
         code: null,
         message: null
@@ -748,7 +749,7 @@ export const actions = {
         //     store.state.ethereum[store.state.currentEthereumNetwork] = config
         //     store.dispatch('updateState')
         // })
-        
+
         setInterval(() => {
             if (store.state.connection.auto) {
                 store.dispatch('checkEthereumConnection')
@@ -845,7 +846,7 @@ export const actions = {
         // Ethereum.init().then(success, failure).catch(failure)
     },
     checkInternetConnection(store, payload) {
-        //return // stop DDOSing
+        // return // stop DDOSing
         // console.log('[BlockHub] Connection status: ' + JSON.stringify(store.state.connection))
 
         if (process.server) {

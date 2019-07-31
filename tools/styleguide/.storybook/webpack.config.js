@@ -1,19 +1,49 @@
 const path = require('path')
 
-module.exports = (storybookBaseConfig, configType, defaultConfig) => {
-    defaultConfig.module.rules.push({
+const linkMode = true
+
+module.exports = ({ config }) => {
+    config.module.rules.push({
         test: /\.scss$/,
         loaders: ['vue-style-loader', 'css-loader', 'sass-loader'],
         include: path.resolve(__dirname, '../../../clients/web')
     })
 
-    defaultConfig.resolve.alias['@'] = path.resolve(__dirname, '../../../clients/web/ui')
+    config.module.rules.push({
+        test: /\.scss$/,
+        loaders: ['vue-style-loader', 'css-loader', 'sass-loader'],
+        include: path.resolve(__dirname, '../node_modules/@ericmuyser/hyper-ui/src')
+    })
 
-    defaultConfig.resolve.alias['~'] = path.resolve(__dirname, '../../../clients/web/ui')
+    if (linkMode) {
+        config.module.rules.push({
+            test: /\.scss$/,
+            loaders: ['vue-style-loader', 'css-loader', 'sass-loader'],
+            include: path.resolve(__dirname, '../../../../ui/packages/hyper-ui')
+        })
+    }
 
-    defaultConfig.node = {
+    config.module.rules.push({
+        test: /\.(ts|tsx)$/,
+        use: [
+        {
+            loader: require.resolve('awesome-typescript-loader')
+        },
+        {
+            loader: require.resolve('react-docgen-typescript-loader')
+        }
+        ]
+    })
+
+    config.resolve.extensions.push('.ts', '.tsx')
+
+    config.resolve.alias['@'] = path.resolve(__dirname, '../../../clients/web/ui')
+
+    config.resolve.alias['~'] = path.resolve(__dirname, '../../../clients/web/ui')
+
+    config.node = {
         fs: 'empty'
     }
 
-    return defaultConfig
+    return config
 }

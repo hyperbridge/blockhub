@@ -97,7 +97,7 @@ export default {
         }
     },
     components: {
-        'c-banner': () => import('~/components/banner/simple').then(m => m.default || m),
+        'c-banner': () => import('@ericmuyser/hyper-ui').then(m => m.SimpleBanner || m),
         'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
         'c-welcome-box': () => import('~/components/welcome-box').then(m => m.default || m)
     },
@@ -241,7 +241,7 @@ export default {
             result.push({
                 type: 'assetGrid',
                 data: {
-                    assets: [] //this.$store.getters['marketplace/assetsArray']
+                    assets: [] // this.$store.getters['marketplace/assetsArray']
                 }
             })
 
@@ -275,7 +275,7 @@ export default {
                 }, {}) || null
             }
 
-            if (false) { //this.productNews.length) {
+            if (false) { // this.productNews.length) {
                 result.push({
                     type: 'productNews',
                     data: {
@@ -310,14 +310,14 @@ export default {
                             }
                         }
                     },
-                    projects: [] //this.trendingProjects
+                    projects: [] // this.trendingProjects
                 }
             })
 
             result.push({
                 type: 'gameSeries',
                 data: {
-                    list: [], //this.gameSeries,
+                    list: [], // this.gameSeries,
                     showNumber: 3
                 }
             })
@@ -341,7 +341,7 @@ export default {
             store.dispatch('products/upcomingProducts')
 
             return {}
-        } else {
+        } 
             return {
                 newReleases: await store.dispatch('products/newReleases'),
                 featuredProducts: await store.dispatch('products/featuredProducts'),
@@ -350,7 +350,7 @@ export default {
                 topSellingProducts: await store.dispatch('products/topSellingProducts'),
                 upcomingProducts: await store.dispatch('products/upcomingProducts')
             }
-        }
+        
     },
     async mounted() {
         this.collections = (await this.$store.dispatch('collections/find', {

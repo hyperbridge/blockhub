@@ -82,13 +82,15 @@ Vue.component('nuxt-link', {
 //addDecorator(StoryRouter())
 
 
-import PromotionItem from '@/components/promotion-box/item'
-import PromotionList from '@/components/promotion-box/list'
-
+import {
+    PromotionBoxItem,
+    PromotionBoxList
+} from '@ericmuyser/hyper-ui'
+console.log(PromotionBoxItem)
 storiesOf('Promotion Box', module)
     .add('item', () => ({
         components: {
-            'c-promotion-item': PromotionItem
+            'c-promotion-item': PromotionBoxItem
         },
         data() {
             return {
@@ -100,8 +102,8 @@ storiesOf('Promotion Box', module)
     }))
     .add('list', () => ({
         components: {
-            'c-promotion-list': PromotionList,
-            'c-promotion-item': PromotionItem
+            'c-promotion-list': PromotionBoxList,
+            'c-promotion-item': PromotionBoxItem
         },
         data: () => data.PromotionBoxData ,
         template: `<div class="row"><div class="col-6 p-5">
@@ -113,7 +115,9 @@ storiesOf('Promotion Box', module)
                     </div></div>`
     }))
 
-import AssetsImporter from '@/components/asset-importer'
+import {
+    AssetsImporter
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Assets Importer', module)
     .add('default', () => ({
@@ -128,8 +132,10 @@ storiesOf('Assets Importer', module)
         template: '<div class="row"><div class="col-8"><c-assets-importer show_skipped="show_skipped" /></div></div>'
     }))
 
-import Notification from '@/components/notification'
-import NotificationInline from '@/components/notification/inline'
+import {
+    Notification,
+    NotificationInline
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Notifications', module)
     .add('default', () => ({
@@ -177,7 +183,9 @@ storiesOf('Notifications', module)
         `
     }))
 
-import Searcher from '@/components/searcher';
+import {
+    Searcher
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Searcher', module)
     .add('default', () => ({
@@ -219,8 +227,10 @@ storiesOf('Searcher', module)
             </div>`
     }))
 
-import RatingStars from '@/components/rating-stars';
-import RatingBlock from '@/components/rating-block';
+import {
+    RatingStars,
+    RatingBlock
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Rating', module)
     .add('Stars', () => ({
@@ -243,7 +253,9 @@ storiesOf('Rating', module)
         `
     }))
 
-import Author from '@/components/author';
+import {
+    Author
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Author', module)
     .add('Author', () => ({
@@ -257,7 +269,9 @@ storiesOf('Author', module)
         template: `<div class="text-white p-5"><author :name="name" :img="img"/></div>`
     }))
 
-import Tags from '@/components/tags';
+import {
+    Tags
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Tags', module)
     .add('Tags', () => ({
@@ -265,8 +279,10 @@ storiesOf('Tags', module)
         template: `<div class="text-white p-5"><tags :tags="['RPG', 'Open-World']"/></div>`
     }))
 
-import LoadingLine from '@/components/loading-bar';
-import LoadingCircle from '@/components/loading-bar/circle';
+import {
+    LoadingLine,
+    LoadingCircle
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('LoadingBar', module)
     .add('line', () => ({
@@ -282,15 +298,14 @@ storiesOf('LoadingBar', module)
         template: `<div class="position-relative" style="width: 300px; height: 300px"><c-loading-bar-circle /></div>`
     }))
 
-
-import NavigationAccount from '@/components/navigation/account';
-import NavigationAsset from '@/components/navigation/asset';
-import NavigationFunding from '@/components/navigation/funding';
-import NavigationHelp from '@/components/navigation/help';
-import NavigationProduct from '@/components/navigation/product';
-import NavigationProject from '@/components/navigation/project';
-import NavigationSettings from '@/components/navigation/settings';
-import NavigationWallet from '@/components/navigation/wallet';
+import NavigationAccount from '@/components/navigation/account'
+import NavigationAsset from '@/components/navigation/asset'
+import NavigationFunding from '@/components/navigation/funding'
+import NavigationHelp from '@/components/navigation/help'
+import NavigationProduct from '@/components/navigation/product'
+import NavigationProject from '@/components/navigation/project'
+import NavigationSettings from '@/components/navigation/settings'
+import NavigationWallet from '@/components/navigation/wallet'
 
 storiesOf('Navigation', module)
     .add('account', () => ({
@@ -319,10 +334,12 @@ storiesOf('Navigation', module)
     }))
 
 
-import Card from '@/components/project/card';
-import Badges from '@/components/project/badges';
-import Milestone from '@/components/project/milestone';
-import UpdatesCount from '@/components/project/updates-count';
+import {
+    Card,
+    Badges,
+    Milestone,
+    UpdatesCount
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Projects', module)
     .add('card', () => ({
@@ -378,8 +395,10 @@ storiesOf('Projects', module)
     }))
 
 
-import Tabs from '@/components/tab/tabs.vue'
-import Tab from '@/components/tab/tab.vue'
+import {
+    Tabs,
+    Tab
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Tabs', module)
     .add('default', () => ({
@@ -543,9 +562,10 @@ storiesOf('Tabs', module)
             </div>`
     }))
 
-import SystemRequirements from '@/components/product-overview/system-requirements';
-
-import MilestonesLine from '@/components/milestones-line'
+import {
+    SystemRequirements,
+    MilestonesLine
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Milestones Line', module)
     .addDecorator(withKnobs)
@@ -562,8 +582,10 @@ storiesOf('Milestones Line', module)
     }))
 
 
-import SidebarMenu from '@/components/sidebar-menu'
-import SidebarMenuLink from '@/components/sidebar-menu/menu-item'
+import {
+    SidebarMenu,
+    SidebarMenuLink
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Sidebar Menu', module)
     .add('Main title', () => ({
@@ -617,8 +639,8 @@ storiesOf('Sidebar Menu', module)
                     </c-sidebar-menu-link>
                 </div>
             </div>`
-    }));
-;
+    }))
+
 
 const injectButtonTemplate = code => `
     <div class="row m-0 p-3">
@@ -626,11 +648,13 @@ const injectButtonTemplate = code => `
             ${code}
         </div>
     </div>
-`;
+`
 
-import Buttons from '@/components/buttons'
-import LoadMore from '@/components/buttons/load-more'
-import ButtonArrows from '@/components/buttons/arrows'
+import {
+    Buttons,
+    LoadMore,
+    ButtonArrows
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Buttons', module)
     .add('default', () => ({
@@ -846,7 +870,9 @@ storiesOf('Buttons', module)
     }))
 
 
-import MoneyInfo from '@/components/money-info'
+import {
+    MoneyInfo
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Money Info', module)
     .add('default', () => ({
@@ -858,10 +884,12 @@ storiesOf('Money Info', module)
             <c-money-info label="Spent" percent="63" amount="555.999" goal="1555.999" />
         </div>
         `
-    }));
+    }))
 
-import Checkbox from '@/components/checkbox';
-import CheckboxGroup from '@/components/checkbox/group.vue';
+import {
+    Checkbox,
+    CheckboxGroup
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Checkbox', module)
     .add('Single checkbox', () => ({
@@ -894,9 +922,11 @@ storiesOf('Checkbox', module)
             </c-checkbox-group>
         </div>
         `
-    }));
+    }))
 
-import Tooltips from '@/components/tooltips';
+import {
+    Tooltips
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Tooltips', module)
     .add('dark', () => ({
@@ -970,7 +1000,9 @@ storiesOf('Tooltips', module)
         `
     }))
 
-import TooltipUniversal from '@/components/tooltips/universal';
+import {
+    TooltipUniversal
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Tooltip Universal', module)
     .add('default', () => ({
@@ -1115,7 +1147,9 @@ storiesOf('Tooltip Universal', module)
     }))
 
 
-import ActivityChart from '@/components/activity-chart'
+import {
+    ActivityChart
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Activity Chart', module)
     .add('default', () => ({
@@ -1163,9 +1197,11 @@ storiesOf('Activity Chart', module)
         `
     }))
 
-import PopUps from '@/components/popups'
-import BasicPopup from '@/components/popups/basic'
-import TermsPopup from '@/components/popups/terms'
+import {
+    PopUps,
+    BasicPopup,
+    TermsPopup
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Popups', module)
     .add('default', () => ({
@@ -1640,7 +1676,9 @@ storiesOf('Popups', module)
     }))
 
 
-import RangeSlider from '@/components/range-slider/pure'
+import {
+    RangeSlider
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Range Slider', module)
     .add('default', () => ({
@@ -1668,7 +1706,10 @@ storiesOf('Range Slider', module)
     }))
 
 
-import AssetsGrid from '@/components/assets-grid'
+
+import {
+    AssetsGrid
+} from '@ericmuyser/hyper-ui'
 
 const assets_list = [
     {
@@ -1818,9 +1859,11 @@ storiesOf('Assets Overview Popup', module)
                 :metadata="metadata" />
          </div>
         `
-    }));
+    }))
 
-import Switch from '@/components/switch'
+import {
+    Switch
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Switch', module)
     .addDecorator(withKnobs)
@@ -1856,11 +1899,13 @@ storiesOf('Switch', module)
              <c-switch size="lg" :checked=true />
          </div>
         `
-    }));
+    }))
 
 
-import AssetsList from '@/components/assets-list-item/featured-list.vue'
-import AssetsListDetail from '@/components/assets-list-item'
+import {
+    AssetsList,
+    AssetsListDetail
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Assets List', module)
     .addDecorator(withKnobs)
@@ -1930,8 +1975,10 @@ storiesOf('Assets List', module)
     }))
 
 
-import Block from '@/components/block'
-import simpleBlock from '@/components/block/simple'
+import {
+    Block,
+    SimpleBlock
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Block', module)
     .add('default', () => ({
@@ -2003,8 +2050,10 @@ storiesOf('Block', module)
     }))
 
 
-import CustomModal from '@/components/modal/custom'
-import Modal from '@/components/modal/';
+import {
+    CustomModal,
+    Modal
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Modal', module)
     .add('image', () => ({
@@ -2049,11 +2098,14 @@ storiesOf('Modal', module)
         `
     }))
 
-import Dropdown from '@/components/dropdown-menu/type-2'
-import DropdownCustom from '@/components/dropdown-menu/type-3'
-import DropdownPost from '@/components/dropdown-menu/index'
-import DropdownCurrency from '@/components/dropdown-menu/currency'
-import DropdownLang from '@/components/dropdown-menu/language'
+
+import {
+    Dropdown,
+    DropdownCustom,
+    DropdownPost,
+    DropdownCurrency,
+    DropdownLang
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Dropdown', module)
     .add('default', () => ({
@@ -2209,8 +2261,10 @@ storiesOf('Dropdown', module)
         `
     }))
 
-import DropdownMenu from '@/components/dropdown-menu/type-2.vue'
-import FTradedAssets from '@/components/frequently-traded-assets/index'
+import {
+    DropdownMenu,
+    FTradedAssets
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Frequently traded assets', module)
     .add('default', () => ({
@@ -2236,7 +2290,9 @@ storiesOf('Frequently traded assets', module)
         `
     }))
 
-import GamePlan from '@/components/game-plans/plan'
+import {
+    GamePlan
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Game Plans', module)
     .add('default', () => ({
@@ -2276,8 +2332,10 @@ storiesOf('Game Plans', module)
          `
     }))
 
-import GamesGrid from '@/components/game-grid/with-description'
-import GamesGridSimple from '@/components/game-grid/simple'
+import {
+    GamesGrid,
+    GamesGridSimple
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Games Grid', module)
     .addDecorator(withKnobs)
@@ -2330,9 +2388,11 @@ storiesOf('Games Grid', module)
 // `
 // }))
 
-import BlockHeaders from '@/components/heading-bar/index'
-import BlockHeadersColor from '@/components/heading-bar/simple-colored.vue'
-import BlockHeadersAddFields from '@/components/heading-bar/additional-action'
+import {
+    BlockHeaders,
+    BlockHeadersColor,
+    BlockHeadersAddFields
+} from '@ericmuyser/hyper-ui'
 
 const injectHBarTemp = code => `
     <div class="row">
@@ -2340,7 +2400,8 @@ const injectHBarTemp = code => `
             ${code}
         </div>
     </div>
-`;
+`
+
 storiesOf('Block Title', module)
     .add('default', () => ({
         components: {
@@ -2422,9 +2483,11 @@ storiesOf('Block Title', module)
     }))
 
 
-import NewsListNav from '@/components/news-list/navigation'
-import NewsList from '@/components/news-list/articles'
-import NewsArticle from '@/components/news-list/article'
+import {
+    NewsListNav,
+    NewsList,
+    NewsArticle
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('News List', module)
     .add('default', () => ({
@@ -2546,7 +2609,10 @@ storiesOf('News List', module)
         `
     }))
 
-import Pagination from '@/components/pagination/index';
+
+import {
+    Pagination
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Pagination', module)
     .add('default', () => ({
@@ -2581,9 +2647,12 @@ storiesOf('Pagination', module)
     }))
 
 
-import ProductCommunity from '@/components/community/post-item';
-import ProductCommunityComment from '@/components/community/comment';
-import ProductCommunityReply from '@/components/community/reply';
+
+import {
+    ProductCommunity,
+    ProductCommunityComment,
+    ProductCommunityReply
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Product Community', module)
     .add('post', () => ({
@@ -2632,7 +2701,9 @@ storiesOf('Product Community', module)
     }))
 
 
-import ProjectCard from '@/components/project/card'
+import {
+    ProjectCard
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Project Card', module)
     .add('default', () => ({
@@ -2745,7 +2816,9 @@ storiesOf('Sending Funds(not finished)', module)
     }))
 
 
-import UserCard from '@/components/user-card';
+import {
+    UserCard
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('User Card', module)
     .add('default', () => ({
@@ -2780,7 +2853,9 @@ storiesOf('User Card', module)
     }))
 
 
-import ScreenGallery from '@/components/screen-gallery/gallery';
+import {
+    ScreenGallery
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Gallery', module)
     .add('screen-gallery', () => ({
@@ -2806,9 +2881,12 @@ storiesOf('Gallery', module)
     }))
 
 
-import ProductCardDynamic from '@/components/product-card/product-card-dynamic';
-import ProductCard from '@/components/product-card/product-card';
-import ProductsCards from '@/components/product-card/product-cards';
+
+import {
+    ProductCardDynamic,
+    ProductCard,
+    ProductsCards
+} from '@ericmuyser/hyper-ui'
 
 const productsCardsData = [
     {
@@ -2871,7 +2949,7 @@ const productsCardsData = [
         author: "Bethesda",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256657338/movie480.webm?t=1447378505"],
     }
-];
+]
 
 storiesOf('Product Card', module)
     .add('basic', () => ({
@@ -2926,8 +3004,10 @@ storiesOf('Product Card', module)
     }))
 
 
-import CuratorReview from '@/components/curator-review';
-import CuratorsReviews from '@/components/curator-reviews';
+import {
+    CuratorReview,
+    CuratorsReviews
+} from '@ericmuyser/hyper-ui'
 
 const curatorReview = {
     author: {name: 'SatoSan', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'},
@@ -2950,7 +3030,8 @@ const curatorReview = {
             }
         }
     ]
-};
+}
+
 storiesOf('Curators Reviews', module)
     .add('review', () => ({
         components: {CuratorReview},
@@ -2966,7 +3047,9 @@ storiesOf('Curators Reviews', module)
     }))
 
 
-import ImagesExplorer from '@/components/images-explorer';
+import {
+    ImagesExplorer
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Images Explorer', module)
     .add('default', () => ({
@@ -2988,8 +3071,11 @@ storiesOf('Images Explorer', module)
     }))
 
 
-import CollectionItem from '@/components/collection/item';
-import CollectionList from '@/components/collection/list';
+import {
+    CollectionItem,
+    CollectionList
+} from '@ericmuyser/hyper-ui'
+
 import 'swiper/dist/css/swiper.css'
 import {swiper, swiperSlide} from 'vue-awesome-swiper'
 
@@ -3068,10 +3154,12 @@ storiesOf('Collection', module)
     }))
 
 
-import GameSeries from '@/components/game-series'
-import GameDescription from '@/components/game-series/game-description'
-import GameIncludesList from '@/components/game-series/game-includes-list'
-import GameIncludesItem from '@/components/game-series/game-includes-item'
+import {
+    GameSeries,
+    GameDescription,
+    GameIncludesList,
+    GameIncludesItem
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Game Series', module)
     .add('default', () => ({
@@ -3326,8 +3414,10 @@ storiesOf('Game Series', module)
     }))
 
 
-import ProgressBar from '@/components/progress-bar';
-import ProgressBarFancy from '@/components/progress-bar/fancy';
+import {
+    ProgressBar,
+    ProgressBarFancy
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Progress Bar', module)
     .add('default', () => ({
@@ -3393,7 +3483,9 @@ storiesOf('Progress Bar', module)
                     </div>`
     }))
 
-import ProjectMilestone from '@/components/project/milestone';
+import {
+    ProjectMilestone
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Project Milestone', module)
     .add('default', () => ({
@@ -3426,7 +3518,9 @@ storiesOf('Project Milestone', module)
         `
     }))
 
-import CommunitySpotlight from '@/components/community-spotlight';
+import {
+    CommunitySpotlight
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Community Spotlight', module)
     .add('default', () => ({
@@ -3451,8 +3545,10 @@ storiesOf('Community Spotlight', module)
         `
     }))
 
-import ProductReview from '@/components/review';
-import ProductReviewForm from '@/components/review/create';
+import {
+    ProductReview,
+    ProductReviewForm
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Product Review', module)
     .add('default', () => ({
@@ -3500,8 +3596,9 @@ storiesOf('Product Review', module)
         template: `<div class='p-5' style="width: 1000px"><c-view-review /></div>`
     }))
 
-
-import Banner from '@/components/banner'
+import {
+    Banner
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Banner', module)
     .add('image', () => ({
@@ -3591,7 +3688,9 @@ storiesOf('Banner', module)
             </div>`
     }))
 
-import LanguageSupport from '@/components/product-overview/language-support';
+import {
+    LanguageSupport
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Product Overview', module)
     .add('Language Support', () => ({
@@ -3696,8 +3795,10 @@ storiesOf('Product Overview', module)
     }))
 
 
-import Input from '@/components/inputs';
-import InputSearcher from '@/components/inputs/searcher';
+import {
+    Input,
+    InputSearcher
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Inputs', module)
     .add('default', () => ({
@@ -3730,8 +3831,10 @@ storiesOf('Inputs', module)
     }))
 
 
-import TimelineList from '@/components/timeline/list.vue';
-import TimelineItem from '@/components/timeline/item.vue';
+import {
+    TimelineList,
+    TimelineItem
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Timeline', module)
     .add('item', () => ({
@@ -3853,7 +3956,9 @@ storiesOf('Timeline', module)
                         </div>`
     }))
 
-import PurchaseBlock from '@/components/purchase-block';
+import {
+    PurchaseBlock
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Purchase block', module)
     .add('default', () => ({
@@ -3922,7 +4027,9 @@ storiesOf('Purchase block', module)
     }))
 
 
-import PurchaseOption from '@/components/purchase-option';
+import {
+    PurchaseOption
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Purchase Option', module)
     .add('single', () => ({
@@ -3999,7 +4106,9 @@ storiesOf('Purchase Option', module)
         `
     }))
 
-import ParticipationTier from '@/components/participation-tier'
+import {
+    ParticipationTier
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Participation Tiers', module)
     .add('default', () => ({
@@ -4076,8 +4185,10 @@ storiesOf('Participation Tiers', module)
         `
     }))
 
-import ContributeForm from '@/components/contribute/form.vue'
-import ContributePledge from '@/components/contribute/pledge.vue'
+import {
+    ContributeForm,
+    ContributePledge
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Contribute', module)
     .add('form', () => ({
@@ -4131,7 +4242,9 @@ storiesOf('Contribute', module)
                     </div>`
     }))
 
-import CookiePolicy from '@/components/cookie-policy'
+import {
+    CookiePolicy
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Cookie policy', module)
     .add('default', () => ({
@@ -4143,7 +4256,9 @@ storiesOf('Cookie policy', module)
                     </div> `
     }))
 
-import WelcomeBox from '@/components/welcome-box'
+import {
+    WelcomeBox
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Welcome Box', module)
     .add('default', () => ({
@@ -4155,7 +4270,9 @@ storiesOf('Welcome Box', module)
                     </div> `
     }))
 
-import Share from '@/components/share/type-1'
+import {
+    Share
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Share', module)
     .add('type 1', () => ({
@@ -4215,7 +4332,9 @@ storiesOf('Share', module)
                     </div> `
     }))
 
-import StreamItem from '@/components/stream'
+import {
+    StreamItem
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Stream', module)
     .add('default', () => ({
@@ -4250,7 +4369,9 @@ storiesOf('Stream', module)
     }))
 
 
-import List from '@/components/list/dots'
+import {
+    List
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('List', module)
     .add('doted', () => ({
@@ -4267,7 +4388,9 @@ storiesOf('List', module)
         </div>`
     }))
 
-import GameInstallerModal from '@/components/game-installer'
+import {
+    GameInstallerModal
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Game Installer Modal', module)
     .add('default', () => ({
@@ -4323,8 +4446,10 @@ storiesOf('Game Installer Modal', module)
     }))
 
 
-import Emoji from '@/components/emoji'
-import EmojiSingle from '@/components/emoji/single'
+import {
+    Emoji,
+    EmojiSingle
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Emoji', module)
     .add('picker', () => ({
@@ -4347,11 +4472,13 @@ storiesOf('Emoji', module)
     }))
 
 
-import Landing from '@/components/landing'
-import LandingTitle from '@/components/landing/block-title/simple'
-import LandingTitleShadow from '@/components/landing/block-title/shadow'
-import LandingTitleGradient from '@/components/landing/block-title/gradient'
-import LandingContent from '@/components/landing/block-content/simple'
+import {
+    Landing,
+    LandingTitle,
+    LandingTitleShadow,
+    LandingTitleGradient,
+    LandingContent
+} from '@ericmuyser/hyper-ui'
 
 storiesOf('Landing Page', module)
     .add('block title', () => ({
