@@ -1,45 +1,49 @@
 import Vue from 'vue'
 
-import Layout from '../components/front-layout'
-import HeadingBar from '../components/heading-bar'
-import HeadingBarColor from '../components/heading-bar/simple-colored'
-import Button from '../components/buttons'
-import Block from '../components/block'
-import Switch from '../components/switch'
-import Checkbox from '../components/checkbox'
-import InfiniteContent from '../components/infinite-content'
-import Icon from '../components/icon'
-import Input from '../components/inputs'
-import InputSearcher from '../components/inputs/searcher'
-import LoadingIndicator from '../components/loading-indicator'
-import Breadcrumb from '../components/breadcrumb'
-import Img from '../components/img'
-import Access from '../components/access'
-import Vote from '../components/vote'
-import JsonView from '../components/json-editor/json-view'
-import ArrayView from '../components/json-editor/array-view'
-import Spinner from '../components/spinner'
-import Tabs from '../components/tab/tabs'
-import Tab from '../components/tab/tab'
+import {
+    HeadingBar,
+    HeadingBarWithSimpleColor,
+    Button,
+    Block,
+    Toggle,
+    Checkbox,
+    InfiniteContent,
+    Icon,
+    Input,
+    InputSearcher,
+    LoadingIndicator,
+    Breadcrumb,
+    Img,
+    Vote,
+    JsonView,
+    ArrayView,
+    Spinner,
+    Tabs,
+    Tab
+} from '@ericmuyser/hyper-ui'
 
-Vue.component('c-layout', Layout)
-Vue.component('c-heading-bar', HeadingBar)
-Vue.component('c-heading-bar-color', HeadingBarColor)
-Vue.component('c-button', Button)
-Vue.component('c-block', Block)
-Vue.component('c-switch', Switch)
-Vue.component('c-checkbox', Checkbox)
-Vue.component('c-json-view', JsonView)
-Vue.component('c-array-view', ArrayView)
-Vue.component('c-infinite-content', InfiniteContent)
-Vue.component('c-icon', Icon)
-Vue.component('c-input', Input)
-Vue.component('c-input-searcher', InputSearcher)
-Vue.component('c-loading', LoadingIndicator)
-Vue.component('c-breadcrumb', Breadcrumb)
-Vue.component('c-vote', Vote)
-Vue.component('c-img', Img)
-Vue.component('c-access', Access)
-Vue.component('c-spinner', Spinner)
-Vue.component('c-tabs', Tabs)
-Vue.component('c-tab', Tab)
+Vue.component('HeadingBar', HeadingBar)
+Vue.component('HeadingBarWithSimpleColor', HeadingBarWithSimpleColor)
+Vue.component('Button', Button)
+Vue.component('Block', Block)
+Vue.component('Toggle', Toggle)
+Vue.component('Checkbox', Checkbox)
+Vue.component('JsonView', JsonView)
+Vue.component('ArrayView', ArrayView)
+Vue.component('InfiniteContent', InfiniteContent)
+Vue.component('Icon', Icon)
+Vue.component('Input', Input)
+Vue.component('InputSearcher', InputSearcher)
+Vue.component('Loading', LoadingIndicator)
+Vue.component('Breadcrumb', Breadcrumb)
+Vue.component('Vote', Vote)
+Vue.component('Img', Img)
+Vue.component('Spinner', Spinner)
+Vue.component('Tabs', Tabs)
+Vue.component('Tab', Tab)
+
+import Access from '../components/access'
+import Layout from '../components/front-layout'
+
+Vue.component('Access', Access)
+Vue.component('Layout', Layout)

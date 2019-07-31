@@ -1,11 +1,11 @@
 <template>
-    <c-layout>
+    <Layout>
         <div class="row">
             <div class="col-12">
-                <c-block title="Payment method">
-                    <c-tabs :tabNames="['Payment information', 'Billing information']"
+                <Block title="Payment method">
+                    <Tabs :tabNames="['Payment information', 'Billing information']"
                             styled>
-                        <c-tab name="Payment information" :tabId="1">
+                        <Tab name="Payment information" :tabId="1">
                             <div class="row align-items-stretch">
                                 <div class="col-12 h5 margin-top-10 margin-bottom-20">
                                     Payment Information
@@ -15,7 +15,7 @@
                                         <label>
                                             Choose payment system
                                         </label>
-                                        <c-multiselect
+                                        <Multiselect
                                             v-model="paymentSystem"
                                             class="dark-mode"
                                             label="label"
@@ -152,12 +152,12 @@
                                     <div class="field-container margin-bottom-10">
                                         <label>Name</label>
                                         <!--<input id="name" maxlength="20" type="text">-->
-                                        <c-input v-model="card.cardHolder" maxlength="20" @focus="flippCard('show-front')" />
+                                        <Input v-model="card.cardHolder" maxlength="20" @focus="flippCard('show-front')" />
                                     </div>
                                     <div class="field-container margin-bottom-10">
                                         <label>Card Number</label>
                                         <!--<input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric">-->
-                                        <c-input
+                                        <Input
                                             v-model="card.cardNumber"
                                             v-mask="'9999 9999 9999 9999'"
                                             pattern="[0-9]*"
@@ -168,22 +168,22 @@
                                     <div class="field-container half-width">
                                         <label>Expiration (mm/yy)</label>
                                         <!--<input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">-->
-                                        <c-input v-model="card.expiration" v-mask="'99/99'" pattern="[0-9]*" inputmode="numeric" @focus="flippCard('show-front')" />
+                                        <Input v-model="card.expiration" v-mask="'99/99'" pattern="[0-9]*" inputmode="numeric" @focus="flippCard('show-front')" />
                                     </div>
                                     <div class="field-container half-width">
                                         <label>Security Code</label>
                                         <!--<input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">-->
-                                        <c-input v-model="card.securityCode" v-mask="'999'" pattern="[0-9]*" inputmode="numeric" @focus="flippCard" />
+                                        <Input v-model="card.securityCode" v-mask="'999'" pattern="[0-9]*" inputmode="numeric" @focus="flippCard" />
                                     </div>
                                     <div class="w-100 margin-top-10 text-right">
-                                        <c-button status="second-success">
+                                        <Button status="second-success">
                                             Save
-                                        </c-button>
+                                        </Button>
                                     </div>
                                 </div>
                             </div>
-                        </c-tab>
-                        <c-tab name="Billing information" :tabId="2">
+                        </Tab>
+                        <Tab name="Billing information" :tabId="2">
                             <div class="row align-items-stretch">
                                 <div class="col-12 h5 margin-top-15 margin-bottom-20">
                                     Billing Information
@@ -193,7 +193,7 @@
                                         <label>
                                             First name
                                         </label>
-                                        <c-input v-model="billingInfo.first_name" placeholder="First name" />
+                                        <Input v-model="billingInfo.first_name" placeholder="First name" />
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-3">
@@ -201,7 +201,7 @@
                                         <label>
                                             Last name
                                         </label>
-                                        <c-input v-model="billingInfo.last_name" placeholder="Last name" />
+                                        <Input v-model="billingInfo.last_name" placeholder="Last name" />
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-6">
@@ -209,7 +209,7 @@
                                         <label>
                                             City
                                         </label>
-                                        <c-input v-model="billingInfo.city" placeholder="City" />
+                                        <Input v-model="billingInfo.city" placeholder="City" />
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-6">
@@ -217,7 +217,7 @@
                                         <label>
                                             Billing address
                                         </label>
-                                        <c-input v-model="billingInfo.billing_address" placeholder="Billing address" />
+                                        <Input v-model="billingInfo.billing_address" placeholder="Billing address" />
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-6">
@@ -225,7 +225,7 @@
                                         <label>
                                             ZIP or postal code
                                         </label>
-                                        <c-input v-model="billingInfo.postal_code" placeholder="ZIP or postal code" />
+                                        <Input v-model="billingInfo.postal_code" placeholder="ZIP or postal code" />
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-6">
@@ -233,7 +233,7 @@
                                         <label>
                                             Billing address, line 2
                                         </label>
-                                        <c-input v-model="billingInfo.billing_address_line_2" placeholder="Billing address, line 2" />
+                                        <Input v-model="billingInfo.billing_address_line_2" placeholder="Billing address, line 2" />
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-6" />
@@ -242,7 +242,7 @@
                                         <label>
                                             Country
                                         </label>
-                                        <c-multiselect
+                                        <Multiselect
                                             v-model="billingInfo.country"
                                             class="dark-mode"
                                             label="label"
@@ -254,21 +254,21 @@
                                         <label>
                                             Phone number
                                         </label>
-                                        <c-input v-model="billingInfo.phone_number" placeholder="Phone number" />
+                                        <Input v-model="billingInfo.phone_number" placeholder="Phone number" />
                                     </div>
                                 </div>
                                 <div class="col-12 text-right">
-                                    <c-button status="second-success">
+                                    <Button status="second-success">
                                         Save
-                                    </c-button>
+                                    </Button>
                                 </div>
                             </div>
-                        </c-tab>
-                    </c-tabs>
-                </c-block>
+                        </Tab>
+                    </Tabs>
+                </Block>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -276,8 +276,8 @@ import 'vue-multiselect/dist/vue-multiselect.min.css'
 
 export default {
     components: {
-        'c-multiselect': () => import('vue-multiselect').then(m => m.default || m),
-        'c-input': () => import('~/components/inputs').then(m => m.default || m),
+        'Multiselect': () => import('vue-multiselect').then(m => m.default),
+        'Input': () => import('@ericmuyser/hyper-ui').then(m => m.Input),
     },
     data() {
         return {

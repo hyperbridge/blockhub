@@ -1,8 +1,8 @@
 <template>
-    <c-layout navigationKey="account">
+    <Layout navigationKey="account">
         <div class="row">
             <div class="col-12">
-                <c-block
+                <Block
                     title="Account Information"
                     :noGutter="true"
                     :bgGradient="true"
@@ -71,27 +71,27 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <c-button
+                                <Button
                                     hidden
                                     @click="importAccountFile">
                                     Import Account
-                                </c-button>
-                                <c-button
+                                </Button>
+                                <Button
                                     hidden
                                     @click="exportAccountFile">
                                     Export Saved Account
-                                </c-button>
-                                <c-button
+                                </Button>
+                                <Button
                                     class="outline-danger"
                                     @click="deleteAccount">
                                     Clear Saved Account
-                                </c-button>
+                                </Button>
                             </div>
                         </div>
                     </form>
-                </c-block>
+                </Block>
 
-                <c-block
+                <Block
                     title="Overview"
                     :noGutter="true"
                     :bgGradient="true"
@@ -207,17 +207,17 @@
                             </div>
                         </div>
                     </div>
-                </c-block>
+                </Block>
 
-                <c-block
+                <Block
                     title="Wishlists"
                     noGutter
                     bgGradient
                     onlyContentBg>
-                    <c-tabs
+                    <Tabs
                         :tabNames="['Products', 'Projects']"
                         styled>
-                        <c-tab :tabId="1">
+                        <Tab :tabId="1">
                             <div
                                 v-if="profile.productWishlist.length"
                                 class="wishlist-box">
@@ -225,13 +225,13 @@
                                     v-for="product in profile.productWishlist"
                                     :key="product.id"
                                     class="wishlist-box__item">
-                                    <c-game-includes-item
+                                    <GameIncludesItem
                                         :id="product.id"
                                         :name="product.name"
                                         :image="product.meta.images.mediumTile"
                                         :rating="product.meta.rating.overall"
                                         :developer="product.meta.developer" />
-                                    <c-button-fav
+                                    <ButtonFav
                                         target="wishlist"
                                         :active="true"
                                         @click="$store.dispatch(
@@ -243,8 +243,8 @@
                             <p v-else>
                                 You have not added any products to your wishlist
                             </p>
-                        </c-tab>
-                        <c-tab :tabId="2">
+                        </Tab>
+                        <Tab :tabId="2">
                             <div
                                 v-if="profile.projectWishlist.length"
                                 class="wishlist-box">
@@ -252,11 +252,11 @@
                                     v-for="project in profile.projectWishlist"
                                     :key="project.id"
                                     class="wishlist-box__item">
-                                    <c-project-card
+                                    <ProjectCard
                                         class="p-0 mb-2"
                                         :image="project.images[0]"
                                         :funds="project.funds" />
-                                    <c-button-fav
+                                    <ButtonFav
                                         target="wishlist"
                                         :active="true"
                                         @click="$store.dispatch(
@@ -268,12 +268,12 @@
                             <p v-else>
                                 You have not added any projects to your wishlist
                             </p>
-                        </c-tab>
-                    </c-tabs>
-                </c-block>
+                        </Tab>
+                    </Tabs>
+                </Block>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -288,9 +288,9 @@ export default {
         }
     },
     components: {
-        'c-game-includes-item': () => import('~/components/game-series/game-includes-item').then(m => m.default || m),
-        'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m),
-        'c-project-card': () => import('~/components/project/card').then(m => m.default || m)
+        'GameIncludesItem': () => import('@ericmuyser/hyper-ui').then(m => m.GameIncludesItem),
+        'ButtonFav': () => import('@ericmuyser/hyper-ui').then(m => m.ButtonFav),
+        'ProjectCard': () => import('@ericmuyser/hyper-ui').then(m => m.ProjectCard)
     },
     data() {
         return {

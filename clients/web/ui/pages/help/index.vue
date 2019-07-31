@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="help">
+    <Layout navigationKey="help">
         <div class="row justify-content-center">
             <div class="col-12 text-center">
                 <h2 class="m-0 p-o">
@@ -15,110 +15,110 @@
                         aria-label="Search query"
                         aria-describedby="button-addon">
                     <div class="input-group-append">
-                        <c-button
+                        <Button
                             status="info"
                             class="px-4"
                             iconHide
                             style="border-radius: 0 5px 5px 0">
                             Search
-                        </c-button>
+                        </Button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <c-block
+                <Block
                     v-if="articles"
                     title="Trending articles"
                     class="margin-bottom-30">
                     <div class="article-list">
-                        <c-article-item
+                        <ArticleItem
                             v-for="(article, index) in showByTopic(0)"
                             :key="index"
                             :to="`/help/${0}/article/${article.slug}`"
                             :class="{'mb-0': articles.length === index+1 }">
                             {{ article.title }}
-                        </c-article-item>
+                        </ArticleItem>
                     </div>
-                </c-block>
+                </Block>
 
-                <c-block
+                <Block
                     title="Topics"
                     class="margin-bottom-30">
                     <div class="topics-list">
-                        <c-topic-item
+                        <TopicItem
                             v-for="(topic, index) in topics"
                             :key="index"
                             :to="`/help/topic/${topic.id}`"
                             :icon="topic.icon"
                             class="padding-10">
                             {{ topic.label }}
-                        </c-topic-item>
+                        </TopicItem>
                     </div>
-                </c-block>
+                </Block>
             </div>
             <div class="col-12 col-lg-6 margin-bottom-30">
-                <c-block title="Changelog">
+                <Block title="Changelog">
                     <div class="simple-list">
-                        <c-list-item
+                        <ListItem
                             v-for="(article, index) in showByTopic(5)"
                             :key="index"
                             :to="`/help/${5}/article/${article.slug}`"
                             :class="{'mb-0': articles.length === index+1 }">
                             {{ article.title }}
-                        </c-list-item>
+                        </ListItem>
                     </div>
-                </c-block>
+                </Block>
             </div>
             <div class="col-12 col-lg-6 margin-bottom-30">
-                <c-block title="Common issues">
+                <Block title="Common issues">
                     <div class="simple-list">
-                        <c-list-item
+                        <ListItem
                             v-for="(article, index) in showByTopic(6)"
                             :key="index"
                             :to="`/help/${6}/article/${article.slug}`"
                             :class="{'mb-0': articles.length === index+1 }">
                             {{ article.title }}
-                        </c-list-item>
+                        </ListItem>
                     </div>
-                </c-block>
+                </Block>
             </div>
             <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-                <c-card class="text-center">
+                <Card class="text-center">
                     <h4 class="h2">
                         Community
                     </h4>
                     <p><strong>Want to get help and maybe meet a new dungeon buddy?</strong></p>
                     <p>Engage with a community of passionate gamers to get the answers you need.</p>
-                    <c-button
+                    <Button
                         iconHide
                         class="width-auto margin-top-10"
                         href="https://github.com/hyperbridge/blockhub-desktop-client"
                         target="_blank">
                         Ask Our Community
-                    </c-button>
-                </c-card>
+                    </Button>
+                </Card>
             </div>
             <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-                <c-card class="text-center">
+                <Card class="text-center">
                     <h4 class="h2">
                         BlockHub Support
                     </h4>
                     <p><strong>Didn't find the answer you were looking for?</strong></p>
                     <p>Create a support ticket and our support experts will get back to you.</p>
-                    <c-button
+                    <Button
                         href="https://hyperbridge.zendesk.com/"
                         status="info"
                         iconHide
                         class="width-auto margin-top-10"
                         target="_blank">
                         Contact Us
-                    </c-button>
-                </c-card>
+                    </Button>
+                </Card>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -133,10 +133,10 @@ export default {
         }
     },
     components: {
-        'c-article-item': () => import('~/components/help/article-item').then(m => m.default || m),
-        'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m),
-        'c-list-item': () => import('~/components/help/simple-item').then(m => m.default || m),
-        'c-card': () => import('~/components/help/help-card').then(m => m.default || m)
+        'ArticleItem': () => import('@ericmuyser/hyper-ui').then(m => m.ArticleItem),
+        'TopicItem': () => import('@ericmuyser/hyper-ui').then(m => m.TopicItem),
+        'ListItem': () => import('@ericmuyser/hyper-ui').then(m => m.ListItem),
+        'Card': () => import('@ericmuyser/hyper-ui').then(m => m.Card)
     },
     computed: {
         topics() {

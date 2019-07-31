@@ -1,5 +1,5 @@
 <template>
-    <c-layout
+    <Layout
         :showLeftPanel="false"
         :showRightPanel="false">
         <div class="container-fluid">
@@ -13,16 +13,16 @@
                     <p>We're working to verify your address and will email you when completed. You can now close this browser tab.</p>
                     <br>
                     <p>
-                        <c-button
-                            class="c-button--lg"
+                        <Button
+                            class="Button--lg"
                             to="/token">
                             Back to Token Sale
-                        </c-button>
+                        </Button>
                     </p>
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

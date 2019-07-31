@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="project">
+    <Layout navigationKey="project">
         <div
             v-if="update"
             class="row">
@@ -19,7 +19,7 @@
                 </h4>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

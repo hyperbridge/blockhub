@@ -1,5 +1,5 @@
 <template>
-    <c-popup
+    <Popup
         ref="modal"
         :activated="activated"
         type="custom"
@@ -11,12 +11,12 @@
         <div
             slot="customContent"
             class="popup__content">
-            <c-tabs
+            <Tabs
                 :setActiveTab="currentStep"
                 :tabNames="['Product Verification', 'Contact', 'Done']"
                 styled
                 @click="changeTab($event)">
-                <c-tab
+                <Tab
                     :tabId="3"
                     :selected="true"
                     :showFooter="true">
@@ -27,16 +27,16 @@
                         slot="footer"
                         class="d-flex align-items-center justify-content-end margin-top-10">
                         <div class="text-right w-100">
-                            <c-button
+                            <Button
                                 status="info"
                                 iconHide
                                 @click="$emit('close')">
                                 OK
-                            </c-button>
+                            </Button>
                         </div>
                     </div>
-                </c-tab>
-                <c-tab
+                </Tab>
+                <Tab
                     :tabId="1"
                     :selected="true"
                     :showFooter="true">
@@ -94,11 +94,11 @@
                                         placeholder="Developer Profile Address"
                                         name="developerProfileAddress">
                                 </div>
-                                <c-button
+                                <Button
                                     class="underline"
                                     @click="$store.commit('application/showProfileChooser', true)">
                                     Choose Different Profile
-                                </c-button>
+                                </Button>
                             </div>
                         </div>
                         <div
@@ -128,19 +128,19 @@
                         slot="footer"
                         class="d-flex align-items-center justify-content-end margin-top-10">
                         <div class="text-right w-100">
-                            <c-button @click="$emit('close')">
+                            <Button @click="$emit('close')">
                                 Cancel
-                            </c-button>
-                            <c-button
+                            </Button>
+                            <Button
                                 status="info"
                                 iconHide
                                 @click="nextStep()">
                                 Continue
-                            </c-button>
+                            </Button>
                         </div>
                     </div>
-                </c-tab>
-                <c-tab
+                </Tab>
+                <Tab
                     :tabId="2"
                     :showFooter="true">
                     <div>
@@ -214,21 +214,21 @@
                         slot="footer"
                         class="d-flex align-items-center justify-content-end margin-top-10">
                         <div class="text-right w-100">
-                            <c-button @click="$emit('close')">
+                            <Button @click="$emit('close')">
                                 Cancel
-                            </c-button>
-                            <c-button
+                            </Button>
+                            <Button
                                 status="info"
                                 iconHide
                                 @click="nextStep()">
                                 Continue
-                            </c-button>
+                            </Button>
                         </div>
                     </div>
-                </c-tab>
-            </c-tabs>
+                </Tab>
+            </Tabs>
         </div>
-    </c-popup>
+    </Popup>
 </template>
 
 <script>
@@ -236,7 +236,7 @@ import FormData from 'form-data'
 
 export default {
     components: {
-        'c-popup': () => import('~/components/popups').then(m => m.default || m),
+        'Popup': () => import('@ericmuyser/hyper-ui').then(m => m.Popup)
     },
     props: ['activated'],
     data() {

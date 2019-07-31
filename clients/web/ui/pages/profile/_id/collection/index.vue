@@ -1,32 +1,32 @@
 <template>
-    <c-layout navigationKey="product">
+    <Layout navigationKey="product">
         <div class="row">
             <div class="col-12">
-                <c-block title="Collections">
+                <Block title="Collections">
                     <div class="collections-container">
                         <div
                             v-for="(item, index) in collections"
                             v-if="index < 6"
                             :key="index"
                             class="collections-container__item">
-                            <c-collection-item :item="item" />
+                            <CollectionItem :item="item" />
                         </div>
                     </div>
-                    <c-pagination
+                    <Pagination
                         v-if="collections.length > 6"
                         :pages="8" />
-                </c-block>
+                </Block>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-        'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m),
-        'c-pagination': () => import('~/components/pagination').then(m => m.default || m)
+        'ContentNavigation': () => import('@ericmuyser/hyper-ui').then(m => m.ContentNavigation),
+        'CollectionItem': () => import('@ericmuyser/hyper-ui').then(m => m.CollectionItem),
+        'Pagination': () => import('@ericmuyser/hyper-ui').then(m => m.Pagination)
     },
     computed: {
         collections() {

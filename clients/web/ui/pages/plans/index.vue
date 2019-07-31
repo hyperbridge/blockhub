@@ -1,5 +1,5 @@
 <template>
-    <c-layout
+    <Layout
         navigationKey="store"
         :showLeftPanel="false"
         :showRightPanel="false">
@@ -8,7 +8,7 @@
             <div
                 class="col-3 text-white"
                 style="margin: 0; padding: 0;">
-                <c-option-block
+                <OptionBlock
                     shadow
                     image="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"
                     title="Gamer"
@@ -19,7 +19,7 @@
             <div
                 class="col-3 text-white"
                 style="margin: 0; padding: 0;">
-                <c-option-block
+                <OptionBlock
                     shadow
                     image="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"
                     title="Indie"
@@ -30,7 +30,7 @@
             <div
                 class="col-3 text-white"
                 style="margin: 0; padding: 0;">
-                <c-option-block
+                <OptionBlock
                     shadow
                     image="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"
                     title="Studio"
@@ -39,13 +39,13 @@
                     :list="list" />
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-option-block': () => import('~/components/option-block').then(m => m.default || m)
+        'OptionBlock': () => import('@ericmuyser/hyper-ui').then(m => m.OptionBlock)
     },
     data() {
         return {

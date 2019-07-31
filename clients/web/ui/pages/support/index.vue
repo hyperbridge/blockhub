@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="help">
+    <Layout navigationKey="help">
         <div class="row page-heading">
             <div class="page-heading__container">
                 <h1 class="title">
@@ -9,7 +9,7 @@
                     Let us know if you need further help.
                 </p>
             </div>
-            <c-heading />
+            <Heading />
         </div>
         <div class="row">
             <ul>
@@ -17,7 +17,7 @@
                 <li>Support Desk: <a href="https://hyperbridge.zendesk.com/">https://hyperbridge.zendesk.com/</a></li>
             </ul>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

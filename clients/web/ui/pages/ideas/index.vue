@@ -1,15 +1,15 @@
 <template>
-    <c-layout navigationKey="idea">
+    <Layout navigationKey="idea">
         <div class="row">
             <div
                 v-if="!$store.state.application.settings.client.hideCrowdfundGameNotice"
                 class="crowdfund-notice col-12 col-md-6 offset-md-3"
                 style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
-                <c-button
+                <Button
                     class="btn-close"
                     @click="$store.commit('application/updateClientSettings', { key: 'hideCrowdfundGameNotice', value: true })">
                     <i class="fas fa-times" />
-                </c-button>
+                </Button>
 
                 <h2>Create Idea</h2>
                 <div style="text-align: left">
@@ -19,28 +19,28 @@
                 </div>
                 <br>
                 <p>
-                    <c-button
-                        class="c-button--lg outline-white"
+                    <Button
+                        class="Button--lg outline-white"
                         to="/idea/new">
                         Get Started
-                    </c-button>
+                    </Button>
                 </p>
             </div>
         </div>
 
-        <c-block
+        <Block
             :noGutter="true"
             :bgGradient="true"
             :onlyContentBg="true">
-            <c-heading-bar
+            <HeadingBar
                 slot="title"
                 class="mb-0"
                 name="Browse All Ideas" />
             <div class="row">
-                <c-loading
+                <Loading
                     :enabled="!ideas.length"
                     size="lg" />
-                <c-idea-card
+                <IdeaCard
                     v-for="(idea, index) in ideas"
                     :id="idea.id"
                     :key="index"
@@ -50,10 +50,10 @@
                     :parentDeveloperId="idea.meta && idea.meta.owner && idea.meta.owner.id"
                     :parentDeveloperName="idea.meta && idea.meta.owner && idea.meta.owner.name" />
             </div>
-        </c-block>
+        </Block>
 
-        <c-infinite-content :list="list" />
-    </c-layout>
+        <InfiniteContent :list="list" />
+    </Layout>
 </template>
 
 <script>
@@ -68,7 +68,7 @@ export default {
         }
     },
     components: {
-        'c-idea-card': () => import('~/components/idea-card').then(m => m.default || m)
+        'IdeaCard': () => import('@ericmuyser/hyper-ui').then(m => m.IdeaCard)
     },
     data() {
         return {

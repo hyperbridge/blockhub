@@ -14,8 +14,8 @@
                     <img src="https://via.placeholder.com/240x60" class="img-fluid">
                 </div>
                 <div class="col-12 col-lg-9">
-                    <c-swiper :options="sliderOptions">
-                        <c-swiper-slide v-for="(item, index) in items" :key="index" class="text-center">
+                    <Swiper :options="sliderOptions">
+                        <SwiperSlide v-for="(item, index) in items" :key="index" class="text-center">
                             <a class="network-slider__item" :href="'https://readyblock.one/review/' + item.symbol">
                                 <img class="mr-2" :src="'/projects/cryptoreviews/img/tokens/' + item.symbol + '.png'" style="width: 40px">
                                 <div class="network-slider__item-body">
@@ -24,8 +24,8 @@
                                     </span>
                                 </div>
                             </a>
-                        </c-swiper-slide>
-                    </c-swiper>
+                        </SwiperSlide>
+                    </Swiper>
                 </div>
             </div>
             <!-- <div class="row">

@@ -1,12 +1,12 @@
 <template>
-    <c-layout
+    <Layout
         navigationKey="product"
         :showRightPanel="false"
         navigationTitle="GAME OVERVIEW"
         :breadcrumbLinks="breadcrumbLinks"
         :showBreadcrumbs="!editing"
         class="product-single-page">
-        <c-loading
+        <Loading
             v-if="!product && loading"
             :enabled="loading"
             size="lg" />
@@ -64,7 +64,7 @@
                                 v-if="editing"
                                 class="">
                                 <div class="form-group tag-editor">
-                                    <c-multiselect
+                                    <Multiselect
                                         v-model="product.developerTags"
                                         class="dark-mode"
                                         :multiple="true"
@@ -77,7 +77,7 @@
                                     <!--</select>-->
                                 </div>
                             </div>
-                            <c-tags
+                            <Tags
                                 v-if="!editing && product.developerTags"
                                 :tags="product.developerTags" />
                         </div>
@@ -118,7 +118,7 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <c-button
+                        <Button
                             status="dark"
                             class="w-100 d-flex d-md-none justify-content-center my-4"
                             size="lg"
@@ -127,7 +127,7 @@
                             aria-expanded="false"
                             aria-controls="product_nav">
                             Menu
-                        </c-button>
+                        </Button>
                         <div
                             id="product_nav"
                             class="collapse show product_nav">
@@ -189,7 +189,7 @@
                         v-if="section === 'configure'"
                         class="col-12"
                         :editing="editing">
-                        <c-block title="Product">
+                        <Block title="Product">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group row">
@@ -274,37 +274,17 @@
                                 </div>
                                 <div class="col-md-6" />
                             </div>
-                        </c-block>
+                        </Block>
                     </div>
 
                     <div class="col-12">
                         <nuxt-child :product="product" :editing="editing" />
-                        <!-- <transition
-                            name="page"
-                            mode="out-in">
-                            <c-product-overview
-                                v-if="section === 'overview'"
-                                :product="product"
-                                :editing="editing" />
-                            <c-product-assets
-                                v-if="section === 'assets'"
-                                :product="product"
-                                :editing="editing" />
-                            <c-product-community
-                                v-if="section === 'community'"
-                                :product="product"
-                                :editing="editing" />
-                            <c-product-projects
-                                v-if="section === 'projects'"
-                                :product="product"
-                                :editing="editing" />
-                        </transition> -->
                     </div>
                 </div>
             </div>
         </div>
 
-        <c-custom-modal
+        <CustomModal
             v-if="firstProduct && editing && !$store.state.application.settings.client.hideProductIntroModal && false"
             title="Help Center"
             @close="closeModal">
@@ -324,25 +304,25 @@
                     Mauris ac facilisis metus. Proin venenatis neque posuere urna sagittis ultricies.
                 </p>
                 <p>
-                    <c-button
+                    <Button
                         to="/help"
                         target="_blank">
                         Learn more about creating products
-                    </c-button>
+                    </Button>
                 </p>
             </div>
             <div
                 slot="footer"
                 class="text-right w-100">
-                <c-button
+                <Button
                     size="md"
                     @click="closeModal">
                     Got it
-                </c-button>
+                </Button>
             </div>
-        </c-custom-modal>
+        </CustomModal>
 
-        <c-basic-popup
+        <BasicPopup
             :activated="$store.state.application.activeModal === 'syncBlockchain'"
             @close="$store.commit('application/activeModal', null)">
             <div
@@ -358,11 +338,11 @@
                     </h3>
                     Contract Address: 0xasdadas<br>
 
-                    <c-button
-                        class="c-button--lg outline-white margin-top-20 margin-auto"
+                    <Button
+                        class="Button--lg outline-white margin-top-20 margin-auto"
                         @click="startSync">
                         Start
-                    </c-button>
+                    </Button>
                 </div>
                 <div v-if="syncStep === 2" />
                 <br>
@@ -378,15 +358,15 @@
             <p
                 slot="footer"
                 class="margin-top-20">
-                <c-button
+                <Button
                     status="dark"
                     to="/help">
                     Need help? Check the Help Center
-                </c-button>
+                </Button>
             </p>
-        </c-basic-popup>
+        </BasicPopup>
 
-        <c-basic-popup
+        <BasicPopup
             :activated="$store.state.application.activeModal === 'import-product'"
             @close="$store.commit('application/activeModal', null)">
             <div
@@ -403,31 +383,31 @@
                     <br>
                     <div class="row justify-content-center margin-bottom-50">
                         <div class="col-12 col-md-4 col-lg-3">
-                            <c-topic-item
+                            <TopicItem
                                 size="lg"
                                 icon="users"
                                 class="padding-10"
                                 @click="nextImportStep">
                                 BlockHub
-                            </c-topic-item>
+                            </TopicItem>
                         </div>
                         <div class="col-12 col-md-4 col-lg-3">
-                            <c-topic-item
+                            <TopicItem
                                 icon="users"
                                 size="lg"
                                 class="padding-10"
                                 @click="nextImportStep">
                                 GOG
-                            </c-topic-item>
+                            </TopicItem>
                         </div>
                         <div class="col-12 col-md-4 col-lg-3">
-                            <c-topic-item
+                            <TopicItem
                                 icon="users"
                                 size="lg"
                                 class="padding-10"
                                 @click="nextImportStep">
                                 Itch
-                            </c-topic-item>
+                            </TopicItem>
                         </div>
                     </div>
                     <br>
@@ -448,11 +428,11 @@
                         </div>
                     </div>
 
-                    <c-button
-                        class="c-button--lg outline-white margin-top-20 margin-auto"
+                    <Button
+                        class="Button--lg outline-white margin-top-20 margin-auto"
                         @click="startImport">
                         GO
-                    </c-button>
+                    </Button>
                 </div>
                 <br>
                 <div
@@ -467,14 +447,14 @@
             <p
                 slot="footer"
                 class="margin-top-20">
-                <c-button
+                <Button
                     status="dark"
                     to="/help">
                     Need help? Check the Help Center
-                </c-button>
+                </Button>
             </p>
-        </c-basic-popup>
-    </c-layout>
+        </BasicPopup>
+    </Layout>
 </template>
 
 <script>
@@ -491,13 +471,13 @@ const groupBy = function(xs, key) {
 export default {
     scrollToTop: true,
     components: {
-        'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
-        'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m),
-        'c-tags': () => import('~/components/tags').then(m => m.default || m),
-        'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
-        'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-multiselect': () => import('vue-multiselect').then(m => m.default || m),
-        'c-add-collection-popup': () => import('~/components/popups/add-collection').then(m => m.default || m)
+        'BasicPopup': () => import('@ericmuyser/hyper-ui').then(m => m.BasicPopup),
+        'TopicItem': () => import('@ericmuyser/hyper-ui').then(m => m.TopicItem),
+        'Tags': () => import('@ericmuyser/hyper-ui').then(m => m.Tags),
+        'CustomModal': () => import('@ericmuyser/hyper-ui').then(m => m.CustomModal),
+        'Popup': () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
+        'Multiselect': () => import('vue-multiselect').then(m => m.default),
+        'AddCollectionPopup': () => import('@ericmuyser/hyper-ui').then(m => m.AddCollectionPopup)
     },
     data() {
         return {
@@ -697,10 +677,10 @@ export default {
                 /*
                 TODO: Make header-bg accesible by $refs
                 */
-                const header = window.document.getElementById('header-bg');
-                const randomImage = Math.floor(Math.random() * this.product.meta.images.preview.length);
-                header.style['background-image'] = 'url(' + this.product.meta.images.preview[randomImage] + ')';
-                header.style['background-size'] = 'cover';
+                const header = window.document.getElementById('header-bg')
+                const randomImage = Math.floor(Math.random() * this.product.meta.images.preview.length)
+                header.style['background-image'] = `url(${  this.product.meta.images.preview[randomImage]  })`;
+                header.style['background-size'] = 'cover'
             }
         },
         updateSection() {

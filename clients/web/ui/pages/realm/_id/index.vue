@@ -5,7 +5,7 @@
             <div class="banner-line margin-bottom-30">
                 <div class="banner-md">
                     <div class="img">
-                        <c-img :src="realm.meta.images.news" />
+                        <Img :src="realm.meta.images.news" />
                     </div>
                     <div class="text">
                         <h4>Announcing: The Boomsday Project</h4>
@@ -13,14 +13,14 @@
                             Sed pulvinar nibh id interdum tempus. Nam id massa sit amet dolor tincidunt bibendum.
                             Nullam ante nunc, dapibus et mauris ut, sodales accumsan lorem.
                         </p>
-                        <c-button to="/project/1">
+                        <Button to="/project/1">
                             Read More
-                        </c-button>
+                        </Button>
                     </div>
                 </div>
                 <div class="banner-sm">
                     <div class="img">
-                        <c-img :src="realm.meta.images.follow" />
+                        <Img :src="realm.meta.images.follow" />
                     </div>
                     <div class="text">
                         <a
@@ -32,20 +32,20 @@
             </div>
 
             <div class="product-grid">
-                <c-heading-bar
+                <HeadingBar
                     name="Featured Games"
                     :showArrows="false"
                     :showBackground="false" />
             </div>
             <div class="featured-assets">
-                <c-heading-bar
+                <HeadingBar
                     name="Featured Assets"
                     :showArrows="false"
                     :showBackground="false" />
-                <c-featured-assets />
+                <FeaturedAssets />
             </div>
             <div class="games-container">
-                <c-heading-bar
+                <HeadingBar
                     name="Games"
                     :showArrows="false"
                     :showBackground="false"
@@ -74,8 +74,8 @@
                             <i class="fas fa-sort-down" />
                         </div>
                     </div>
-                </c-heading-bar>
-                <c-game-grid />
+                </HeadingBar>
+                <GameGrid />
             </div>
         </div>
     </div>

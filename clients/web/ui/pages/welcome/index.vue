@@ -1,5 +1,5 @@
 <template>
-    <c-layout
+    <Layout
         navigationKey="account"
         :showLeftPanel="false"
         :showRightPanel="false"

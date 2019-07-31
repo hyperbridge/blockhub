@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="account">
+    <Layout navigationKey="account">
         <div class="container">
             <div
                 class="row"
@@ -10,18 +10,18 @@
                     </p>
                     <p>Are you sure?</p>
 
-                    <c-button
+                    <Button
                         hidden
                         @click="deleteAccount()">
                         Delete Account
-                    </c-button>
-                    <c-button @click="signOut()">
+                    </Button>
+                    <Button @click="signOut()">
                         Sign Out
-                    </c-button>
+                    </Button>
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

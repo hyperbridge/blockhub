@@ -39,7 +39,7 @@
                     <span>{{ offer.buyout }}</span>
                     <span>{{ offer.marketValue }}</span>
                     <div class="flex-center">
-                        <c-user
+                        <User
                             :user="offer.seller"
                             class="margin-left-5" />
                     </div>
@@ -52,23 +52,23 @@
                 <tbody>
                     <tr>
                         <td>Buyout value</td>
-                        <td><c-input v-model="newOffer.buyout" /></td>
+                        <td><Input v-model="newOffer.buyout" /></td>
                     </tr>
                     <tr>
                         <td>Minimum bid difference</td>
-                        <td><c-input v-model="newOffer.bidDiff" /></td>
+                        <td><Input v-model="newOffer.bidDiff" /></td>
                     </tr>
                     <tr>
                         <td>Market value</td>
-                        <td><c-input v-model="newOffer.marketValue" /></td>
+                        <td><Input v-model="newOffer.marketValue" /></td>
                     </tr>
                 </tbody>
             </table>
-            <c-button
+            <Button
                 size="md"
                 @click="createOffer()">
                 Create offer
-            </c-button>
+            </Button>
         </div>
     </div>
 </template>
@@ -84,8 +84,8 @@ const newOffer = {
 
 export default {
     components: {
-        'c-user': () => import('~/components/user/simple').then(m => m.default || m),
-        'c-tooltip': () => import('~/components/tooltips/universal').then(m => m.default || m)
+        'User': () => import('@ericmuyser/hyper-ui').then(m => m.User),
+        'Tooltip': () => import('@ericmuyser/hyper-ui').then(m => m.Tooltip)
     },
     props: ['offersMap', 'asset', 'profile'],
     data() {
@@ -175,7 +175,7 @@ export default {
         label {
             display: block;
             margin: 10px;
-            .c-input {
+            .Input {
                 margin-left: 5px;
             }
         }

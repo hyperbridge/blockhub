@@ -1,12 +1,12 @@
 <template>
-    <c-layout
+    <Layout
         :breadcrumbLinks="breadcrumbLinks"
         navigationKey="store">
         <div
             class="row"
             hidden>
             <div class="col-12 mb-4">
-                <c-banner
+                <SimpleBanner
                     :imgSrc="'/img/banners/banner-3.png'"
                     to="/token">
                     <div class="d-flex justify-content-between align-items-center">
@@ -17,17 +17,17 @@
                             <p>BlockHub has launched and the token sale is now live!</p>
                         </div>
                         <div class="banner-action">
-                            <c-button
+                            <Button
                                 tag="div"
                                 tatus="info"
                                 iconHide
                                 size="lg"
                                 to="/token">
                                 JOIN NOW
-                            </c-button>
+                            </Button>
                         </div>
                     </div>
-                </c-banner>
+                </SimpleBanner>
             </div>
         </div>
         <!--
@@ -37,15 +37,15 @@
             <div
                 v-if="!$store.state.application.desktopMode"
                 class="col-12 mb-4">
-                <c-welcome-box />
+                <WelcomeBox />
             </div>
         </div> -->
 
-        <c-infinite-content
+        <InfiniteContent
             :list="list"
             :showSignIn="true" />
 
-        <c-custom-modal
+        <CustomModal
             v-if="showWelcomeModal"
             title="BlockHub Preview"
             @close="closeModal">
@@ -63,24 +63,24 @@
                     We're a platform built by the community, for the community.
                 </p>
                 <p hidden>
-                    <c-button
+                    <Button
                         to="/help"
                         target="_blank">
                         Check out the BlockHub crowdfund
-                    </c-button>
+                    </Button>
                 </p>
             </div>
             <div
                 slot="footer"
                 class="text-right w-100">
-                <c-button
+                <Button
                     size="md"
                     @click="closeModal">
                     Got it
-                </c-button>
+                </Button>
             </div>
-        </c-custom-modal>
-    </c-layout>
+        </CustomModal>
+    </Layout>
 </template>
 
 
@@ -97,9 +97,8 @@ export default {
         }
     },
     components: {
-        'c-banner': () => import('@ericmuyser/hyper-ui').then(m => m.SimpleBanner || m),
-        'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
-        'c-welcome-box': () => import('~/components/welcome-box').then(m => m.default || m)
+        'SimpleBanner': () => import('@ericmuyser/hyper-ui').then(m => m.SimpleBanner),
+        'CustomModal': () => import('@ericmuyser/hyper-ui').then(m => m.CustomModal)
     },
     data() {
         return {

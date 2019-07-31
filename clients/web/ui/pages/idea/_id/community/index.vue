@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12">
             <div>
-                <c-item
+                <DiscussionItem
                     v-for="(post, index) in posts"
                     :key="index"
                     :post="post" />
@@ -14,7 +14,7 @@
 <script>
 export default {
     components: {
-        'c-item': () => import('~/components/community/post-item').then(m => m.default || m)
+        'DiscussionItem': () => import('@ericmuyser/hyper-ui').then(m => m.DiscussionItem)
     },
     props: ['project', 'editing'],
     data() {

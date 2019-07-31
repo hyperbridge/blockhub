@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <Layout>
         <main class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -15,7 +15,7 @@
                     </p>
                     <div class="marketplace-profile">
                         <div class="marketplace-profile">
-                            <c-img
+                            <Img
                                 class="marketplace-profile__image"
                                 :src="profile.img" />
                             <div>
@@ -55,7 +55,7 @@
                 </div>
             </div>
         </main>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -65,7 +65,7 @@
 
 export default {
     components: {
-        'c-user': () => import('~/components/user/simple').then(m => m.default || m)
+        'User': () => import('@ericmuyser/hyper-ui').then(m => m.User)
     },
     filters: {
         cut: val => val.replace('Marketplace ', '')

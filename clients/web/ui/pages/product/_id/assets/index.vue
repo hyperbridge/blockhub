@@ -3,11 +3,11 @@
         <!--I don't know if we need this-->
         <!--<div class="col-12 d-flex justify-content-between flex-wrap assets-list margin-bottom-30">-->
         <!--<div class="assets-list__item-container">-->
-        <!--<c-assets-list-item></c-assets-list-item>-->
+        <!--<AssetsListItem></AssetsListItem>-->
         <!--</div>-->
         <!--</div>-->
         <div class="col-12">
-            <c-assets-grid :list="product.meta.assets" />
+            <AsssetsGrid :list="product.meta.assets" />
         </div>
     </div>
 </template>
@@ -15,8 +15,8 @@
 <script>
 export default {
     components: {
-        'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m),
-        'c-assets-list-item': () => import('~/components/assets-list-item').then(m => m.default || m)
+        'AsssetsGrid': () => import('@ericmuyser/hyper-ui').then(m => m.AsssetsGrid),
+        'AssetsListItem': () => import('@ericmuyser/hyper-ui').then(m => m.AssetsListItem)
     },
     props: ['product']
 }

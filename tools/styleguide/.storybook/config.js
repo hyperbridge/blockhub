@@ -1,22 +1,6 @@
 import { configure, addDecorator } from '@storybook/vue'
 import { withKnobs } from '@storybook/addon-knobs'
 import { configureViewport, INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
-import { requireModules, getFullPath } from './require-context'
-
-require.context = (directory, useSubdirectories = false, regExp = /^\.\//) => {
-  const fullPath = getFullPath(__dirname, directory)
-
-  const keys = {}
-  requireModules(keys, fullPath, '.', regExp, useSubdirectories)
-
-  const req = f => keys[f]
-  req.keys = () => Object.keys(keys)
-  return req
-}
-
-
-// automatically import all files ending in *.stories.js
-const req = require.context('../stories', true, /.stories.js$/)
 
 addDecorator(withKnobs)
 
@@ -38,7 +22,7 @@ configureViewport({
 })
 
 function loadStories() {
-  req.keys().forEach(filename => req(filename))
+  require('../stories/index.stories.js')
 }
 
 configure(loadStories, module)

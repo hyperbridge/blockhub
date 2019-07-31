@@ -1,15 +1,15 @@
 <template>
-    <c-layout navigationKey="funding">
+    <Layout navigationKey="funding">
         <div class="row">
             <div
                 v-if="!$store.state.application.settings.client.hideCrowdfundGameNotice"
                 class="crowdfund-notice col-12 col-md-6 offset-md-3"
                 style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
-                <c-button
+                <Button
                     class="btn-close"
                     @click="$store.commit('application/updateClientSettings', { key: 'hideCrowdfundGameNotice', value: true })">
                     <i class="fas fa-times" />
-                </c-button>
+                </Button>
 
                 <h2>Crowdfund Games</h2>
                 <div style="text-align: left">
@@ -18,43 +18,43 @@
                 </div>
                 <br>
                 <p v-if="$store.state.application.developerMode">
-                    <c-button
-                        class="c-button--lg outline-white"
+                    <Button
+                        class="Button--lg outline-white"
                         to="/business/project/new">
                         Get Started
-                    </c-button>
+                    </Button>
                 </p>
                 <p v-if="!$store.state.application.developerMode">
-                    <c-button
-                        class="c-button--lg outline-white"
+                    <Button
+                        class="Button--lg outline-white"
                         to="/developer/apply">
                         Get Started
-                    </c-button>
+                    </Button>
                 </p>
-                <!-- <p v-if="!$store.state.application.desktopMode"><c-button class="c-button--lg outline-white" @click="$store.commit('application/activeModal', 'welcome')">Get Started</c-button></p> -->
+                <!-- <p v-if="!$store.state.application.desktopMode"><Button class="Button--lg outline-white" @click="$store.commit('application/activeModal', 'welcome')">Get Started</Button></p> -->
             </div>
         </div>
 
-        <c-block
+        <Block
             :noGutter="true"
             :bgGradient="true"
             :onlyContentBg="true">
-            <c-heading-bar
+            <HeadingBar
                 slot="title"
                 class="mb-0"
                 name="Browse All Projects" />
             <div class="row">
-                <c-loading
+                <Loading
                     :enabled="loading"
                     size="lg" />
                 <p v-if="!loading && !projects.length">
-                    Nothing could be found. Want to <c-button
+                    Nothing could be found. Want to <Button
                         status="plain"
                         @click="$store.commit('application/activeModal', 'comingSoon')">
                         Check for updates
-                    </c-button>?
+                    </Button>?
                 </p>
-                <c-project-card
+                <ProjectCard
                     v-for="(project, index) in projects"
                     v-if="projects.length"
                     :id="project.id"
@@ -67,10 +67,10 @@
                     :parentDeveloper="project.product && project.product.owner"
                     :parentImage="project.product && project.product.meta && project.product.meta.images.mediumTile" />
             </div>
-        </c-block>
+        </Block>
 
-        <c-infinite-content :list="list" />
-    </c-layout>
+        <InfiniteContent :list="list" />
+    </Layout>
 </template>
 
 <script>
@@ -85,7 +85,7 @@ export default {
         }
     },
     components: {
-        'c-project-card': () => import('~/components/project/card').then(m => m.default || m)
+        'ProjectCard': () => import('@ericmuyser/hyper-ui').then(m => m.ProjectCard)
     },
     data() {
         return {

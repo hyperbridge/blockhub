@@ -4,7 +4,7 @@
             Loading ...
         </p>
         <div v-else>
-            <c-block
+            <Block
                 title="Created auction prospectors"
                 noGutter
                 onlyContentBg
@@ -25,7 +25,7 @@
                             <template v-if="edited.id != prosp.id">
                                 <td>{{ id }}</td>
                                 <td>
-                                    <c-asset-preview
+                                    <AssetPreview
                                         :asset="prosp.asset"
                                         size="sm" />
                                 </td>
@@ -33,68 +33,68 @@
                                 <td>{{ prosp.priceMax }} $</td>
                                 <td>{{ prosp.expDate | timeAgo }}</td>
                                 <td>
-                                    <c-button
+                                    <Button
                                         status="info"
                                         icon="edit"
                                         @click="setEdited(prosp)">
                                         Edit
-                                    </c-button>
+                                    </Button>
                                 </td>
                             </template>
                             <template v-else>
                                 <td>{{ id }}</td>
                                 <td>
-                                    <c-asset-preview
+                                    <AssetPreview
                                         :asset="prosp.asset"
                                         size="sm" />
                                 </td>
                                 <td>
-                                    <c-input
+                                    <Input
                                         v-model="edited.priceMin"
                                         class="edit-input" />
                                 </td>
                                 <td>
-                                    <c-input
+                                    <Input
                                         v-model="edited.priceMax"
                                         class="edit-input" />
                                 </td>
                                 <td>
-                                    <c-datepicker
+                                    <Datepicker
                                         v-model="edited.expDate"
                                         input-class="form-control form-calendar__text edit-input"
                                         calendar-class="form-calendar" />
                                 </td>
                                 <td>
-                                    <c-button
+                                    <Button
                                         status="warning"
                                         iconHide
                                         @click="edited = {}">
                                         Cancel
-                                    </c-button>
-                                    <c-button
+                                    </Button>
+                                    <Button
                                         status="danger"
                                         @click="$store.dispatch(
                                             'delete',
                                             ['assets/prospectors', id]
                                         )">
                                         Delete
-                                    </c-button>
-                                    <c-button
+                                    </Button>
+                                    <Button
                                         status="success"
                                         @click="$store.dispatch(
                                             'update',
                                             ['assets/prospectors', id, edited]
                                         ); edited = {}">
                                         Save
-                                    </c-button>
+                                    </Button>
                                 </td>
                             </template>
                         </tr>
                     </tbody>
                 </table>
-            </c-block>
+            </Block>
 
-            <c-block
+            <Block
                 title="Create new auction prospector"
                 noGutter
                 onlyContentBg
@@ -110,76 +110,76 @@
                     </ul>
                 </template>
 
-                <c-tabs
+                <Tabs
                     tabText="Step"
                     class="margin-bottom-100"
                     :setActiveTab="activeStep"
                     @click="createProspector">
-                    <c-tab :tabId="1">
+                    <Tab :tabId="1">
                         <p>Select asset that you are going to buy</p>
-                        <c-content-navigation
+                        <ContentNavigation
                             :items="assetsArray"
                             :setLimits="10">
-                            <c-asset-grid
+                            <AssetGrid
                                 slot-scope="props"
                                 :assets="props.items"
                                 @click="newProspector.asset = $event; activeStep = 2" />
-                        </c-content-navigation>
-                    </c-tab>
+                        </ContentNavigation>
+                    </Tab>
 
-                    <c-tab :tabId="2">
+                    <Tab :tabId="2">
                         <h4 class="text-align-center">
                             Selected asset:
                         </h4>
-                        <c-asset-preview-price
+                        <AssetPreview-price
                             :asset="newProspector.asset"
                             class="margin-auto margin-bottom-30 half-width" />
                         <p>Select minimum price</p>
                         <div class="flex-center-between margin-bottom-20">
-                            <c-range-slider
+                            <RangeSlider
                                 v-model="newProspector.priceMin"
                                 class="half-width margin-right-20"
                                 :max="getPrice(newProspector.asset, 'min')" />
-                            <c-input
+                            <Input
                                 v-model="newProspector.priceMin"
                                 class="half-width" />
                         </div>
                         <p>Select maximum price</p>
                         <div class="flex-center-between margin-bottom-20">
-                            <c-range-slider
+                            <RangeSlider
                                 v-model="newProspector.priceMax"
                                 class="half-width margin-right-20"
                                 :max="getPrice(newProspector.asset, 'max')" />
-                            <c-input
+                            <Input
                                 v-model="newProspector.priceMax"
                                 class="half-width" />
                         </div>
                         <p>Select expiration date</p>
                         <div class="flex-center margin-bottom-40">
-                            <c-datepicker
+                            <Datepicker
                                 v-model="newProspector.expDate"
                                 placeholder="Expiration date"
                                 input-class="form-control form-calendar__text"
                                 calendar-class="form-calendar" />
                         </div>
                         <div class="flex-center-between">
-                            <c-button
+                            <Button
                                 status="warning"
                                 icon="trash-alt"
                                 size="lg"
                                 @click="resetCreation()">
                                 Cancel
-                            </c-button>
-                            <c-button
+                            </Button>
+                            <Button
                                 status="success"
                                 size="lg"
                                 @click="createProspector()">
                                 Create
-                            </c-button>
+                            </Button>
                         </div>
-                    </c-tab>
-                </c-tabs>
-            </c-block>
+                    </Tab>
+                </Tabs>
+            </Block>
         </div>
     </div>
 </template>
@@ -187,12 +187,12 @@
 <script>
 export default {
     components: {
-        'c-block': () => import('~/components/block/index').then(m => m.default || m),
-        'c-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m),
-        'c-asset-preview': () => import('~/components/asset/preview-basic').then(m => m.default || m),
-        'c-asset-preview-price': () => import('~/components/asset-preview').then(m => m.default || m),
-        'c-asset-grid': () => import('~/components/assets-grid-inventory').then(m => m.default || m),
-        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m)
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
+        'RangeSlider': () => import('@ericmuyser/hyper-ui').then(m => m.RangeSlider),
+        'AssetPreview': () => import('@ericmuyser/hyper-ui').then(m => m.AssetPreview),
+        'AssetPreview-price': () => import('@ericmuyser/hyper-ui').then(m => m.AssetPreview-price),
+        'AssetGrid': () => import('@ericmuyser/hyper-ui').then(m => m.AssetGrid),
+        'ContentNavigation': () => import('@ericmuyser/hyper-ui').then(m => m.ContentNavigation)
     },
     data() {
         return {

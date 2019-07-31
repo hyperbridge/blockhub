@@ -1,8 +1,8 @@
 <template>
-    <c-layout navigationKey="help">
+    <Layout navigationKey="help">
         <div class="row">
             <div class="col-12 mb-4">
-                <c-block
+                <Block
                     title="Updates"
                     :noGutter="true"
                     :bgGradient="true"
@@ -20,34 +20,32 @@
                         </ul>
                     </p>
                     <div class="row">
-                        <c-loading
+                        <Loading
                             :enabled="!this.$store.state.application.updates.length"
                             size="lg" />
                         <div
                             v-for="(update, index) in this.$store.state.application.updates"
                             :key="index"
                             class="col-md-6 col-sm-12">
-                            <c-expand-block
+                            <ExpandBlock
                                 :title="update.title"
                                 :description="update.description"
                                 :content="update.content" />
                         </div>
                     </div>
-                </c-block>
+                </Block>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 import Vue from 'vue'
-import HeadingBar from '@/components/heading-bar/simple-colored'
-import DottedList from '@/components/list/dots'
+import { HeadingBarWithSimpleColor, DottedList } from '@ericmuyser/hyper-ui'
 
 export default {
     components: {
-        'c-expand-block': () => import('~/components/block/expand').then(m => m.default || m),
-        'c-heading-bar-color': () => import('~/components/heading-bar/simple-colored').then(m => m.default || m)
+        'ExpandBlock': () => import('@ericmuyser/hyper-ui').then(m => m.ExpandBlock)
     },
     data() {
         return {
@@ -75,8 +73,8 @@ export default {
                         let el = Vue.compile(`<div>${entry.gsx$content.$t}</div>`)
                         el = new Vue({
                             components: {
-                                'c-heading-bar-color': HeadingBar,
-                                'c-dotted-list': DottedList
+                                HeadingBarWithSimpleColor,
+                                DottedList
                             },
                             render: el.render,
                             staticRenderFns: el.staticRenderFns

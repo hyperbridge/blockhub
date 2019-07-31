@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "@blockhub/node-sdk": "^1.4.0",
-        "@ericmuyser/hyper-ui": "^1.0.0-alpha.7",
+        "@ericmuyser/hyper-ui": "^1.0.1",
         "@feathersjs/authentication-client": "^1.0.8",
         "@feathersjs/configuration": "^2.0.6",
         "@feathersjs/express": "^1.3.1",

@@ -1,7 +1,7 @@
 <template>
-    <c-layout navigationKey="help">
-        <c-broken-page :isError="isError" />
-    </c-layout>
+    <Layout navigationKey="help">
+        <BrokenPage :isError="isError" />
+    </Layout>
 </template>
 
 
@@ -17,7 +17,7 @@ export default {
         }
     },
     components: {
-        'c-broken-page': () => import('~/components/broken-page').then(m => m.default || m)
+        'BrokenPage': () => import('~/components/broken-page')
     },
     props: {
         isError: {

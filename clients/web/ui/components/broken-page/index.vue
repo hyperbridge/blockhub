@@ -23,14 +23,14 @@
                 <h2>{{ haiku[1] }}</h2>
                 <h2>{{ haiku[2] }}</h2>
             </div>
-            <br />
-            <c-button
-                class="c-button--xl go-home"
+            <br>
+            <Button
+                class="Button--xl go-home"
                 status="gradient-info"
                 @click="goHome">
                 Go Home
-            </c-button>
-            <br />
+            </Button>
+            <br>
             <p class="error">
                 Error status: {{ isError.statusCode }}<br>
                 Error message: {{ isError.message }}
@@ -42,17 +42,12 @@
 
 <script>
 export default {
+    components: {
+    },
     props: {
         isError: {
             type: Object,
             default: () => ({})
-        }
-    },
-    watch: {
-        '$route'() {
-            if (process.client) {
-                this.$('body').removeClass('screen--not-found')
-            }
         }
     },
     data() {
@@ -60,7 +55,7 @@ export default {
             general: [
                 ['Page you are seeking', 'From your path it is fleeing', 'Its winter has come.'],
                 ['The web page you seek', 'Lies beyond our perception', 'But others await.'],
-                ['Cables have been cut', 'Southwest of Northeast somewhere', 'We are not amused.'],
+                ['Cables have been cut', 'Southwest of Northeast somewhere', 'We are not amused.']
             ],
             404: [
                 ['Not a pretty sight', 'When the web dies screaming loud', 'The page is not found.'],
@@ -68,7 +63,7 @@ export default {
                 ['Mourning and sorrow', 'Page not with us now', 'Lost in 404.'],
                 ['Rather than a beep', 'Or a rude error message,', `These words: 'Page not found.'`],
                 ['These three are certain:', 'Death, taxes, and page not found.', 'You, victim of one.'],
-                ['Click exciting link', 'Silicon holds you back', '404 not found.'],
+                ['Click exciting link', 'Silicon holds you back', '404 not found.']
             ],
             500: [
                 ['Error reduces', 'Your expensive computer', 'To a simple stone.'],
@@ -87,10 +82,17 @@ export default {
             ]
         }
 
-        haikus = [...haikus['general'], ...(haikus[this.isError.statusCode] || [])]
+        haikus = [...haikus.general, ...haikus[this.isError.statusCode] || []]
 
         return {
             haiku: haikus[Math.floor(Math.random() * haikus.length)]
+        }
+    },
+    watch: {
+        '$route'() {
+            if (process.client) {
+                this.$('body').removeClass('screen--not-found')
+            }
         }
     },
     created() {
@@ -99,7 +101,7 @@ export default {
         }
     },
     mounted() {
-        if (this.$ga){
+        if (this.$ga) {
             this.$ga.page({
                 page: '/404',
                 title: 'Not Found',

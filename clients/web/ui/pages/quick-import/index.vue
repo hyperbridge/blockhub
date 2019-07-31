@@ -1,57 +1,57 @@
 <template>
-    <c-layout navigationKey="store">
+    <Layout navigationKey="store">
         <div class="row">
             <div
                 v-if="!quickImport && !integrateLocally"
                 class="col-12 col-lg-6">
-                <c-block
+                <Block
                     title="Quick import"
                     bgGradient
                     noGutter
                     onlyContentBg>
                     <div class="text-center pb-4">
                         <p>Sed posuere varius ex id ullamcorper. Donec et aliquet mi, in tincidunt massa. Maecenas ornare, elit nec condimentum semper</p>
-                        <c-button
+                        <Button
                             status="second-info"
                             size="md"
                             class="mt-3 px-5"
                             @click=" quickImport = true">
                             Continue
-                        </c-button>
+                        </Button>
                         <small class="text-muted d-block text-center mt-2">
                             <i class="fas fa-lock mr-2" />Authentication required
                         </small>
                     </div>
-                </c-block>
+                </Block>
             </div>
             <div
                 v-if="!quickImport && !integrateLocally"
                 class="col-12 col-lg-6">
-                <c-block
+                <Block
                     title="Integrate locally"
                     bgGradient
                     noGutter
                     onlyContentBg>
                     <div class="text-center pb-4">
                         <p>Sed posuere varius ex id ullamcorper. Donec et aliquet mi, in tincidunt massa. Maecenas ornare, elit nec condimentum semper</p>
-                        <c-button
+                        <Button
                             status="second-info"
                             size="md"
                             class="mt-3 px-5"
                             @click=" integrateLocally = true">
                             View Guide
-                        </c-button>
+                        </Button>
                         <small class="text-success d-block text-center mt-2">
                             <i class="fas fa-eye-slash mr-2" /> No Auth / Code Access
                         </small>
                     </div>
-                </c-block>
+                </Block>
             </div>
 
             <div
                 v-if="signedIn && quickImport"
                 class="col-12">
-                <c-block
+                <Block
                     title="Quick import"
                     bgGradient
                     noGutter
@@ -59,19 +59,19 @@
                     <p class="mb-2">
                         Automatically analyze from code host for easy initial result.
                     </p>
-                    <c-button
+                    <Button
                         status="plain"
                         icon="arrow-left"
                         class="mb-3"
                         @click=" quickImport=false ">
                         Go Back
-                    </c-button>
+                    </Button>
                     <div class="row">
                         <div
                             v-for="service in services"
                             :key="service.name"
                             class="col-12 col-md-6 col-lg-4 mb-4">
-                            <c-icon-block
+                            <Icon-block
                                 :icon="service.icon"
                                 iconType="fab"
                                 size="md"
@@ -79,7 +79,7 @@
                                 <div class="h4 p-0">
                                     {{ service.name }}
                                 </div>
-                            </c-icon-block>
+                            </Icon-block>
                         </div>
                         <div
                             class="col-12 mb-4"
@@ -93,29 +93,29 @@
                             </div>
                         </div>
                     </div>
-                </c-block>
+                </Block>
             </div>
             <div
                 v-if="!signedIn && quickImport"
                 class="col-12">
                 <div class="h6">
                     You are not signed in. Please
-                    <c-button
+                    <Button
                         status="plain"
                         @click="$store.commit('application/activeModal', 'login')">
                         Sign In
-                    </c-button>
+                    </Button>
                     to continue.
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-icon-block': () => import('~/components/block/with-icon').then(m => m.default || m)
+        'Icon-block': () => import('@ericmuyser/hyper-ui').then(m => m.Icon-block)
     },
     data() {
         return {

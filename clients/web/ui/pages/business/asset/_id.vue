@@ -1,13 +1,13 @@
 <template>
-    <c-layout>
+    <Layout>
         WIP
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-layout': () => import('~/components/business-layout').then(m => m.default || m)
+        'Layout': () => import('@ericmuyser/hyper-ui').then(m => m.Layout)
     },
     props: {
         id: [String, Number]

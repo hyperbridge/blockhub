@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <Layout>
         <div
             v-if="project"
             class="row margin-bottom-40">
@@ -45,7 +45,7 @@
                         <label>Tags</label>
                     </label>
                     <div class="col-sm-8">
-                        <c-multiselect
+                        <Multiselect
                             v-model="project.tags"
                             tag-placeholder="Add this as new tag"
                             placeholder="Search or add a tag"
@@ -87,7 +87,7 @@
             </div>
 
             <div class="col-12">
-                <c-html-editor
+                <HtmlEditor
                     height="200"
                     :model.sync="project.value" />
 
@@ -95,13 +95,13 @@
             </div>
 
             <div class="col-12 margin-top-10">
-                <c-heading-bar-color
+                <HeadingBarWithSimpleColor
                     class="mt-4 mb-4"
                     colorCode="#444"
                     textAlign="center"
                     hidden>
                     Advanced Options
-                </c-heading-bar-color>
+                </HeadingBarWithSimpleColor>
 
                 <div @click="toggleAdvanced">
                     <i
@@ -170,7 +170,7 @@
                 class="col-md-6">
                 <div class="form-group row">
                     <div class="col-sm-1">
-                        <c-switch
+                        <Toggle
                             class="switch-sm"
                             :checked="project.meta.overflowEnabled"
                             @change="val => project.meta.overflowEnabled = val" />
@@ -182,7 +182,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-1">
-                        <c-switch
+                        <Toggle
                             class="switch-sm"
                             :checked="project.meta.timelineEnabled"
                             @change="val => project.meta.timelineEnabled = val" />
@@ -194,7 +194,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-1">
-                        <c-switch
+                        <Toggle
                             class="switch-sm"
                             :checked="project.meta.refundsEnabled"
                             @change="val => project.meta.refundsEnabled = val" />
@@ -206,7 +206,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-1">
-                        <c-switch
+                        <Toggle
                             class="switch-sm"
                             :checked="project.meta.curationEnabled"
                             @change="val => project.meta.curationEnabled = val" />
@@ -230,7 +230,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-1">
-                        <c-switch
+                        <Toggle
                             class="switch-sm"
                             :checked="project.meta.contributionPeriodEnabled"
                             @change="val => project.meta.contributionPeriodEnabled = val" />
@@ -260,7 +260,7 @@
                         @input="updateProjectRaw($event.target.value)" />
                     <br><br>
                     <span class="form-text" />
-                    <c-json-editor
+                    <JsonEditor
                         v-model="project"
                         :objData="project"
                         style="margin: 0 auto" />
@@ -283,37 +283,37 @@
             </div>
 
             <div class="col-12">
-                <c-heading-bar-color
+                <HeadingBarWithSimpleColor
                     class="mt-4 mb-4"
                     colorCode="#444"
                     textAlign="center">
                     Blockchain Options
-                </c-heading-bar-color>
+                </HeadingBarWithSimpleColor>
 
                 <div v-if="blockchain">
                     <p>Project found. ID: {{ blockchain.id }}</p>
 
-                    <c-button
+                    <Button
                         status="outline-info"
                         @click="updateBlockchain">
                         Update
-                    </c-button>
+                    </Button>
                 </div>
 
                 <div v-if="!blockchain">
                     <strong>Project not found within Funding Protocol.</strong>
-                    <c-button
+                    <Button
                         status="outline-info"
                         size="sm"
                         @click="syncBlockchain">
                         Sync
-                    </c-button>
-                    <c-button
+                    </Button>
+                    <Button
                         status="outline-info"
                         size="sm"
                         @click="createBlockchain">
                         Deploy
-                    </c-button>
+                    </Button>
                 </div>
             </div>
         </div>
@@ -323,36 +323,36 @@
                 <div
                     v-if="project.id"
                     class="col-12 text-right">
-                    <c-button
+                    <Button
                         status="info"
                         size="lg"
                         :href="`/project/${project.id}`"
                         target="_blank"
                         icon="eye">
                         View Page
-                    </c-button>
-                    <c-button
+                    </Button>
+                    <Button
                         status="success"
                         size="lg"
                         icon="save"
                         @click="save">
                         Save
-                    </c-button>
+                    </Button>
                 </div>
                 <div
                     v-if="!project.id"
                     class="col-12 text-right">
-                    <c-button
+                    <Button
                         status="success"
                         size="lg"
                         icon="plus"
                         @click="create">
                         Create
-                    </c-button>
+                    </Button>
                 </div>
             </div>
         </template>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -360,10 +360,10 @@ import beautify from 'json-beautify'
 
 export default {
     components: {
-        'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
-        'c-html-editor': () => import('~/components/html-editor').then(m => m.default || m),
-        'c-json-editor': () => import('~/components/json-editor').then(m => m.default || m),
-        'c-multiselect': () => import('vue-multiselect').then(m => m.default || m)
+        'Layout': () => import('@ericmuyser/hyper-ui').then(m => m.Layout),
+        'HtmlEditor': () => import('@ericmuyser/hyper-ui').then(m => m.HtmlEditor),
+        'JsonEditor': () => import('@ericmuyser/hyper-ui').then(m => m.JsonEditor),
+        'Multiselect': () => import('vue-multiselect').then(m => m.default)
     },
     props: {
     },

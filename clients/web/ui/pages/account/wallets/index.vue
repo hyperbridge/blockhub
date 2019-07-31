@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="account" :breadcrumbLinks="breadcrumbLinks">
+    <Layout navigationKey="account" :breadcrumbLinks="breadcrumbLinks">
         <div class="row">
             <div class="col-12">
                 <ul class="nav nav-tabs justify-content-between">
@@ -94,7 +94,7 @@
                         v-for="(wallet, index) in wallets"
                         :key="index"
                         class="wallet-item">
-                        <c-button
+                        <Button
                             status="none"
                             class="wallet-item__info"
                             :to="`/wallet/${wallet.id}`">
@@ -146,7 +146,7 @@
                                     <i class="fas fa-copy" />
                                 </div>
                             </div>
-                        </c-button>
+                        </Button>
                         <div class="wallet-item__footer">
                             <div class="wallet-item__preferredSwitcher">
                                 <label class="switch switch-sm">
@@ -334,7 +334,7 @@
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 

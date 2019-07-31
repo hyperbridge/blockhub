@@ -1,45 +1,45 @@
 <template>
     <div class="navigation">
-        <c-sidebar-menu
+        <SidebarMenu
             :title="title"
             subTitle="Help"
             subIcon="fas fa-question-circle"
             mClass="margin-bottom-20"
             :links="links.gameOverview" />
 
-        <c-button
+        <Button
             v-if="$store.state.application.editorMode === 'editing'"
             status="second-info"
             size="lg"
             class="mb-4"
             @click="$store.commit('application/activeModal', 'syncBlockchain')">
             Sync Blockchain
-        </c-button>
-        <c-button
+        </Button>
+        <Button
             v-if="$store.state.application.editorMode === 'editing'"
             status="second-info"
             size="lg"
             class="mb-4"
             @click="$store.commit('application/activeModal', 'import-product')">
             Import
-        </c-button>
+        </Button>
 
-        <c-join-community v-if="!$store.state.application.desktopMode" />
+        <JoinCommunity v-if="!$store.state.application.desktopMode" />
 
-        <c-curator-panel>
-            <c-curator-info title="">
-                <c-claim
+        <CuratorPanel>
+            <CuratorInfo title="">
+                <Claim
                     v-access="'curator.read'"
                     title="Content curated"
                     type="success"
                     class="margin-bottom-10 margin-top-10">
                     <p>This product has been curated by 2041 people.</p>
-                    <c-button
+                    <Button
                         to="/curator/application"
                         class="outline-white">
                         Become a curator
-                    </c-button>
-                </c-claim>
+                    </Button>
+                </Claim>
                 <ul v-access="'curator.read'">
                     <li>
                         <strong>492</strong>
@@ -58,25 +58,24 @@
                         Disapproved with 0 changes
                     </li>
                 </ul>
-                <c-button
+                <Button
                     status="underline"
                     @click="showClaimPopup">
                     Created this game?
-                </c-button>
-            </c-curator-info>
-        </c-curator-panel>
+                </Button>
+            </CuratorInfo>
+        </CuratorPanel>
     </div>
 </template>
 
 <script>
 export default {
     components: {
-        'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m),
-        'c-searcher': () => import('~/components/searcher').then(m => m.default || m),
-        'c-claim': () => import('~/components/curator-panel/claim').then(m => m.default || m),
-        'c-curator-panel': () => import('~/components/curator-panel').then(m => m.default || m),
-        'c-curator-info': () => import('~/components/curator-panel/info-card').then(m => m.default || m),
-        'c-join-community': () => import('~/components/join-community').then(m => m.default || m)
+        'SidebarMenu': () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenu),
+        'Claim': () => import('@ericmuyser/hyper-ui').then(m => m.Claim),
+        'CuratorPanel': () => import('@ericmuyser/hyper-ui').then(m => m.CuratorPanel),
+        'CuratorInfo': () => import('@ericmuyser/hyper-ui').then(m => m.CuratorInfo),
+        'JoinCommunity': () => import('@ericmuyser/hyper-ui').then(m => m.JoinCommunity)
     },
     props: {
         title: {

@@ -3,7 +3,7 @@
         <ul
             ref="chatList"
             class="reset-list chat">
-            <c-chat-message
+            <ChatMessage
                 v-for="(msg, index) in trx.messages"
                 :key="index"
                 :message="msg"
@@ -26,7 +26,7 @@
             <button
                 class="chat-form__btn"
                 @click="sendMessage()">
-                <c-icon name="paper-plane" />
+                <Icon name="paper-plane" />
             </button>
         </div>
         <!-- <button @click="$store.dispatch(
@@ -61,7 +61,7 @@
 <script>
 export default {
     components: {
-        'c-chat-message': () => import('~/components/chat-message').then(m => m.default || m)
+        'ChatMessage': () => import('@ericmuyser/hyper-ui').then(m => m.ChatMessage)
     },
     data() {
         return {

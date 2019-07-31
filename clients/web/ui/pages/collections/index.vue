@@ -1,7 +1,7 @@
 <template>
-    <c-layout navigationKey="store">
-        <c-infinite-content :list="list" />
-    </c-layout>
+    <Layout navigationKey="store">
+        <InfiniteContent :list="list" />
+    </Layout>
 </template>
 
 <script>

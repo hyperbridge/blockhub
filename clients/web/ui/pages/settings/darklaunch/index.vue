@@ -1,6 +1,6 @@
 <template>
-    <c-layout navigationKey="settings">
-        <c-block
+    <Layout navigationKey="settings">
+        <Block
             class="margin-bottom-30"
             title="Darklaunch Settings"
             :noGutter="true"
@@ -108,8 +108,8 @@
                     </div>
                 </div>
             </div>
-        </c-block>
-    </c-layout>
+        </Block>
+    </Layout>
 </template>
 
 <script>

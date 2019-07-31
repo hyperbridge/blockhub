@@ -1,9 +1,9 @@
 <template>
-    <c-layout navigationKey="store" :breadcrumbLinks="breadcrumbLinks">
+    <Layout navigationKey="store" :breadcrumbLinks="breadcrumbLinks">
         <div class="row">
             <div class="col-12">
                 <div class="community-wrapper">
-                    <c-item
+                    <DiscussionItem
                         :id="discussion.id"
                         :title="discussion.name"
                         :content="discussion.value"
@@ -13,25 +13,25 @@
                         :commentsCount="discussion.meta.commentsCount"
                         :author="discussion.meta.author" />
 
-                    <c-post-comment
+                    <PostComment
                         v-for="(comment, index) in discussion.messages"
                         :key="index"
                         :date="comment.createdAt"
                         :text="comment.value"
                         :author="comment.meta.author"
                         :rate="comment.meta.rate">
-                        <c-post-comment
+                        <PostComment
                             v-for="(subcomment, index) in comment.replies"
                             :key="index"
                             :date="subcomment.createdAt"
                             :text="subcomment.value"
                             :author="comment.meta.author"
                             :rate="subcomment.meta.rate" />
-                    </c-post-comment>
+                    </PostComment>
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -39,8 +39,8 @@ import moment from 'moment'
 
 export default {
     components: {
-        'c-item': () => import('~/components/community/post-item').then(m => m.default || m),
-        'c-post-comment': () => import('~/components/community/comment').then(m => m.default || m)
+        'DiscussionItem': () => import('@ericmuyser/hyper-ui').then(m => m.DiscussionItem),
+        'PostComment': () => import('@ericmuyser/hyper-ui').then(m => m.PostComment)
     },
     data() {
         const authors = [
@@ -117,7 +117,7 @@ export default {
 <style lang="scss" scoped>
     .community-list {
         border-radius: 5px;
-        .c-input {
+        .Input {
             padding: 8px;
         }
         .community-item {

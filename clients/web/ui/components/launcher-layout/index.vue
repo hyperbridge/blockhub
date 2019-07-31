@@ -10,7 +10,7 @@
             <nuxt-link
                 class="app-header__bar-center margin-right-50"
                 :to="isLocked ? '#' : '/'">
-                <c-loading-logo :isLoading="isLoader" />
+                <LoadingLogo :isLoading="isLoader" />
             </nuxt-link>
             <nav class="launcher__top-bar-left">
                 <ul>
@@ -46,7 +46,7 @@
                         <li
                             v-if="!isLocked"
                             hidden>
-                            <c-quick-launch
+                            <QuickLaunch
                                 class="quick-launch"
                                 style="margin-top: -7px;" />
                         </li>
@@ -59,7 +59,7 @@
                                 <span
                                     v-if="tokenCount === null"
                                     class="token__count token__count--loading">
-                                    <c-loading :enabled="true" />
+                                    <Loading :enabled="true" />
                                 </span>
                                 <span
                                     v-if="tokenCount !== null"
@@ -70,7 +70,7 @@
                             </nuxt-link>
                         </li>
                         <li v-if="signedIn">
-                            <c-dropdown
+                            <Dropdown
                                 class="ml-4 account-menu mt-1"
                                 style="z-index: 12"
                                 @show="onShowMenu"
@@ -83,82 +83,82 @@
                                 </template>
                                 <ul class="item-dropdown">
                                     <li>
-                                        <c-button
+                                        <Button
                                             status="none"
                                             to="/account">
                                             <i class="fas fa-user" />
                                             Account Info
-                                        </c-button>
+                                        </Button>
                                     </li>
                                     <li v-access="'wallet.read'">
-                                        <c-button
+                                        <Button
                                             status="none"
                                             to="/account/wallets">
                                             <i class="fas fa-credit-card" />
                                             My Wallets
-                                        </c-button>
+                                        </Button>
                                     </li>
                                     <li v-if="activeProfile">
-                                        <c-button
+                                        <Button
                                             status="none"
                                             :to="`/profile/${activeProfile.id}`">
                                             <i class="fas fa-user" />
                                             View Public Profile
-                                        </c-button>
+                                        </Button>
                                     </li>
                                     <li
                                         v-if="signedIn && activeProfile"
                                         v-access="'contact'">
-                                        <c-button
+                                        <Button
                                             status="none"
                                             :to="`/profile/${activeProfile.id}/contacts`">
                                             <i class="fas fa-users" />
                                             Contacts
-                                        </c-button>
+                                        </Button>
                                     </li>
                                     <li>
-                                        <c-button
+                                        <Button
                                             status="none"
                                             to="/account/profiles">
                                             <i class="fas fa-users-cog" />
                                             Profile Manager
-                                        </c-button>
+                                        </Button>
                                     </li>
                                     <li>
-                                        <c-button
+                                        <Button
                                             status="none"
                                             @click="$store.commit('application/showProfileChooser', true)">
                                             <i class="fas fa-user-edit" />
                                             Switch Profile
-                                        </c-button>
+                                        </Button>
                                     </li>
                                     <li>
-                                        <c-button
+                                        <Button
                                             status="none"
                                             to="/account/signout">
                                             <i class="fa fa-sign-out-alt" />
                                             Sign Out
-                                        </c-button>
+                                        </Button>
                                     </li>
                                     <hr>
                                     <li v-access="'chat'">
-                                        <c-button
+                                        <Button
                                             status="none"
                                             to="/settings/chat">
                                             <i class="fas fa-comments" />
                                             Chat Settings
-                                        </c-button>
+                                        </Button>
                                     </li>
                                     <li>
-                                        <c-button
+                                        <Button
                                             status="none"
                                             to="/help">
                                             <i class="fas fa-info-circle" />
                                             FAQ
-                                        </c-button>
+                                        </Button>
                                     </li>
                                 </ul>
-                            </c-dropdown>
+                            </Dropdown>
                         </li>
                         <li v-if="!signedIn && !isLocked">
                             <nuxt-link @click="$store.commit('application/activeModal', 'login')">
@@ -193,9 +193,9 @@
 
 export default {
     components: {
-        'c-loading-logo': () => import('~/components/loading-bar/logo-loader').then(m => m.default || m),
-        'c-quick-launch': () => import('~/components/quick-launch').then(m => m.default || m),
-        'c-dropdown': () => import('~/components/dropdown-menu/type-4').then(m => m.default || m)
+        'LoadingLogo': () => import('@ericmuyser/hyper-ui').then(m => m.LoadingLogo),
+        'QuickLaunch': () => import('@ericmuyser/hyper-ui').then(m => m.QuickLaunch),
+        'Dropdown': () => import('@ericmuyser/hyper-ui').then(m => m.Dropdown)
     },
     props: {
         bgImage: {

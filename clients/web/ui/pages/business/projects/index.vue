@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <Layout>
         <div class="row margin-bottom-20">
             <div class="col-12">
                 <div class="margin-bottom-0">
@@ -90,12 +90,12 @@
                                         </td>
                                         <td>{{ project.id }}</td>
                                         <td>
-                                            <c-button
+                                            <Button
                                                 status="none"
                                                 :to="`/business/project/${project.id}`"
                                                 class="text-secondary text-bold">
                                                 {{ project.name }}
-                                            </c-button>
+                                            </Button>
                                         </td>
                                         <td>{{ project.meta.created }}</td>
                                         <td>
@@ -131,14 +131,14 @@
                                             </button>
                                         </td>
                                         <td>
-                                            <c-button
+                                            <Button
                                                 status="dark"
                                                 class="btn btn-secondary btn-icon"
                                                 size="sm"
                                                 :to="`/business/project/${project.id}`"
                                                 style="color: #fff">
                                                 <i class="fas fa-pencil-alt" />
-                                            </c-button>
+                                            </Button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -152,23 +152,23 @@
         <template slot="menu">
             <div class="row">
                 <div class="col-12 text-right">
-                    <c-button
+                    <Button
                         to="/business/project/new"
                         status="dark"
                         icon="plus"
                         size="lg">
                         New Crowdfund
-                    </c-button>
+                    </Button>
                 </div>
             </div>
         </template>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-layout': () => import('~/components/business-layout').then(m => m.default || m)
+        'Layout': () => import('@ericmuyser/hyper-ui').then(m => m.Layout)
     },
     data() {
         return {

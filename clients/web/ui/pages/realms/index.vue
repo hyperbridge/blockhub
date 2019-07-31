@@ -1,39 +1,39 @@
 <template>
-    <c-layout navigationKey="store" :breadcrumbLinks="breadcrumbLinks">
-        <c-block
+    <Layout navigationKey="store" :breadcrumbLinks="breadcrumbLinks">
+        <Block
             :noGutter="true"
             :bgGradient="true"
             :onlyContentBg="true">
-            <c-heading-bar
+            <HeadingBar
                 slot="title"
                 class="mb-0"
                 name="Browse All Realms" />
             <div class="row">
-                <c-loading
+                <Loading
                     :enabled="!realms.length"
                     size="lg" />
-                <c-metro-grid
+                <MetroGrid
                     v-if="realms.length"
                     class="w-100">
-                    <c-metro-item
+                    <MetroItem
                         v-for="(realm, index) in realms"
                         :key="realm.id"
                         :image="realm.meta.images.logo"
                         width="25%"
                         :fullImage=" index == 1 ? true : false">
-                        <c-button
+                        <Button
                             class="h4 font-weight-bold"
                             :to="`/realm/${realm.id}`">
                             {{ realm.name }}
-                        </c-button>
+                        </Button>
                         <div>
                             {{ realm.name }}
                         </div>
-                    </c-metro-item>
-                </c-metro-grid>
+                    </MetroItem>
+                </MetroGrid>
             </div>
-        </c-block>
-    </c-layout>
+        </Block>
+    </Layout>
 </template>
 
 <script>
@@ -48,8 +48,8 @@ export default {
         }
     },
     components: {
-        'c-metro-grid': () => import('~/components/metro/grid').then(m => m.default || m),
-        'c-metro-item': () => import('~/components/metro/metro-item').then(m => m.default || m)
+        'MetroGrid': () => import('@ericmuyser/hyper-ui').then(m => m.MetroGrid),
+        'MetroItem': () => import('@ericmuyser/hyper-ui').then(m => m.MetroItem)
     },
     data() {
         return {

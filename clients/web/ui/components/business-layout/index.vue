@@ -7,20 +7,20 @@
             <div
                 class="page-top-bar draggable"
                 :class="{ 'invert' : darkMode }">
-                <c-button
+                <Button
                     status="none"
                     class="logo-holder undraggable"
                     to="/">
-                    <c-img
+                    <Img
                         v-if="darkMode"
                         src="/img/logo-white.svg"
                         alt="Logo" />
-                    <c-img
+                    <Img
                         v-else
                         src="/img/logo.svg"
                         alt="Logo"
                         style="height: 90%; margin-top: 2%" />
-                </c-button>
+                </Button>
                 <nuxt-link
                     to="/business"
                     class="h2 ml-4 mb-0 pl-4 text-uppercase border-left">
@@ -31,7 +31,7 @@
                     style="margin-left: auto"
                     @click="$store.commit('application/showProfileChooser', true)">
                     <div class="page-top-bar__profile-avatar">
-                        <c-img src="https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png" />
+                        <Img src="https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png" />
                     </div>
                     <div class="page-top-bar__profile-name">
                         {{ activeProfile.name }}
@@ -120,7 +120,7 @@
             </div>
         </transition>
 
-        <c-profile-chooser
+        <ProfileChooser
             v-if="$store.state.application.profileChooser && $store.state.application.signedIn"
             :darkMode="false" />
     </div>
@@ -136,8 +136,7 @@ export default {
     name: 'Business',
     components: {
         SidebarMenu,
-        'c-profile-chooser': () => import('~/components/profile-chooser').then(m => m.default || m),
-        'c-page-heading': () => import('~/components/business/page-heading').then(m => m.default || m)
+        'ProfileChooser': () => import('@ericmuyser/hyper-ui').then(m => m.ProfileChooser)
     },
     props: {
         showLeftPanel: {
@@ -386,7 +385,7 @@ export default {
                     height: 4px;
                 }
             }
-            .c-basic-popup__content {
+            .BasicPopup__content {
                 background: #fff;
                 color: #000 !important;
             }

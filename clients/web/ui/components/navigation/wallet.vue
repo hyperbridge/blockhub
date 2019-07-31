@@ -1,15 +1,15 @@
 <template>
     <div class="navigation">
-        <c-sidebar-menu
+        <SidebarMenu
             title="MY WALLETS"
             subTitle="Wallet"
             mClass="margin-bottom-20"
             :links="links.myWallets" />
-        <c-sidebar-menu
+        <SidebarMenu
             subTitle="Transactions"
             mClass="margin-bottom-20"
             :links="links.transactions" />
-        <c-sidebar-menu
+        <SidebarMenu
             subTitle="Help"
             :links="links.help" />
     </div>
@@ -18,8 +18,7 @@
 <script>
 export default {
     components: {
-        'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m),
-        'c-searcher': () => import('~/components/searcher').then(m => m.default || m)
+        'SidebarMenu': () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenu)
     },
     data() {
         return {

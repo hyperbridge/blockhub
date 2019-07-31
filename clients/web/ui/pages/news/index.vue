@@ -1,7 +1,7 @@
 <template>
-    <c-layout>
+    <Layout>
         Coming soon
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

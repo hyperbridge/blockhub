@@ -1,5 +1,5 @@
 <template>
-    <c-layout
+    <Layout
         navigationKey="idea"
         :showRightPanel="false"
         :breadcrumbLinks="breadcrumbLinks">
@@ -9,7 +9,7 @@
             <!-- <div class="col-12">
                 Idea not found
             </div> -->
-            <c-loading
+            <Loading
                 :enabled="true"
                 size="lg" />
         </div>
@@ -87,7 +87,7 @@
                                     <!--</option>-->
                                     <!--</select>-->
 
-                                    <c-multiselect
+                                    <Multiselect
                                         v-model="idea.tags"
                                         class="dark-mode"
                                         label="value"
@@ -105,13 +105,13 @@
                                 </div>
                             </div>
 
-                            <c-tags
+                            <Tags
                                 v-if="!editing || !activeElement['tags']"
                                 :tags="idea.tags ? idea.tags.map(t => t.value) : []" />
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
-                        <c-badges :icons="idea.meta.badges || []" />
+                        <Badges :icons="idea.meta.badges || []" />
                     </div>
                     <div class="col-12 col-md-4">
                         <div
@@ -181,19 +181,19 @@
                         </div>
                     </div>
                 </div>
-                <c-button
+                <Button
                     status="dark"
                     class="w-100 d-flex d-md-none justify-content-center my-4"
                     size="lg"
                     data-toggle="collapse"
-                    data-target="#c-nav"
+                    data-target="#nav"
                     aria-expanded="false"
-                    aria-controls="c-nav">
+                    aria-controls="nav">
                     Menu
-                </c-button>
+                </Button>
                 <div
-                    id="c-nav"
-                    class="collapse show c-nav">
+                    id="nav"
+                    class="collapse show nav">
                     <ul class="nav nav-tabs justify-content-between">
                         <li
                             class="nav-item"
@@ -214,9 +214,9 @@
                                 class="nav-link"
                                 :class="{ 'active': section === 'community' }">
                                 Community
-                                <c-updates-count v-access="'updateCounter'">
+                                <UpdatesCount v-access="'updateCounter'">
                                     0
-                                </c-updates-count>
+                                </UpdatesCount>
                             </nuxt-link>
                         </li>
                         <li
@@ -236,9 +236,9 @@
                     class="row"
                     :editing="editing">
                     <div class="col-12">
-                        <c-block title="Settings">
+                        <Block title="Settings">
                             No settings yet
-                        </c-block>
+                        </Block>
                     </div>
                 </div>
             </div>
@@ -249,14 +249,14 @@
                 <transition
                     name="page"
                     mode="out-in">
-                    <c-idea-overview
+                    <IdeaOverview
                         v-if="section === 'overview'"
                         :idea="idea"
                         :editing="editing"
                         :activeElement="activeElement"
                         @activateElement="activateElement"
                         @deactivateElement="deactivateElement" />
-                    <c-idea-community
+                    <IdeaCommunity
                         v-if="section === 'community'"
                         :idea="idea"
                         :editing="editing"
@@ -264,7 +264,7 @@
                 </transition>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -272,13 +272,13 @@ import Vue from 'vue'
 
 export default {
     components: {
-        'c-tags': () => import('~/components/tags').then(m => m.default || m),
-        'c-badges': () => import('~/components/project/badges').then(m => m.default || m),
-        'c-rating-block': () => import('~/components/rating-block').then(m => m.default || m),
-        'c-idea-overview': () => import('~/pages/idea/_id/overview').then(m => m.default || m),
-        'c-idea-community': () => import('~/pages/idea/_id/community').then(m => m.default || m),
-        'c-updates-count': () => import('~/components/project/updates-count').then(m => m.default || m),
-        'c-multiselect': () => import('vue-multiselect').then(m => m.default || m)
+        'Tags': () => import('@ericmuyser/hyper-ui').then(m => m.Tags),
+        'Badges': () => import('@ericmuyser/hyper-ui').then(m => m.Badges),
+        'RatingBlock': () => import('@ericmuyser/hyper-ui').then(m => m.RatingBlock),
+        'IdeaOverview': () => import('~/pages/idea/_id/overview').then(m => m.default),
+        'IdeaCommunity': () => import('~/pages/idea/_id/community').then(m => m.default),
+        'UpdatesCount': () => import('@ericmuyser/hyper-ui').then(m => m.UpdatesCount),
+        'Multiselect': () => import('vue-multiselect').then(m => m.default)
     },
     data() {
         return {
@@ -616,7 +616,7 @@ export default {
         opacity: 0.3;
     }
     @media (min-width: 768px){
-        .c-nav{
+        .nav{
             display: block!important;
         }
     }
@@ -625,7 +625,7 @@ export default {
             justify-content: center;
             margin-bottom: 5px;
         }
-        .c-nav{
+        .nav{
             ul{
                 flex-direction: column;
                 li{

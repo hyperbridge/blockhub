@@ -1,11 +1,11 @@
 <template>
-    <c-layout>
+    <Layout>
         <div>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 col-lg-3">
                         <div class="widget">
-                            <c-button
+                            <Button
                                 to="/business/products"
                                 status="none"
                                 style="display: block">
@@ -28,12 +28,12 @@
                                         </div>
                                     </div>
                                 </div>
-                            </c-button>
+                            </Button>
                         </div>
                     </div>
                     <div class="col-12 col-lg-3">
                         <div class="widget">
-                            <c-button
+                            <Button
                                 to="/business/projects"
                                 status="none"
                                 style="display: block">
@@ -56,7 +56,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </c-button>
+                            </Button>
                         </div>
                     </div>
                     <div
@@ -200,13 +200,13 @@
                                 </select>
                             </div>
                             <div class="col-6 col-lg-2 d-none d-md-block">
-                                <c-button
+                                <Button
                                     status="dark"
                                     icon="plus"
                                     size="mg"
                                     class="w-100 justify-content-center h-100">
                                     New project
-                                </c-button>
+                                </Button>
                             </div>
                         </div>
 
@@ -636,13 +636,13 @@
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-layout': () => import('~/components/business-layout').then(m => m.default || m)
+        'Layout': () => import('@ericmuyser/hyper-ui').then(m => m.Layout)
     },
     data() {
         return {

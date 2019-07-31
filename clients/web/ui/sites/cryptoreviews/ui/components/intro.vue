@@ -8,24 +8,24 @@
                         <span class="text-orange" style="font-weight: inherit;">{{ name }}?</span>
                     </h1>
                     <div class="d-flex flex-column align-items-start">
-                        <c-button href="#history" size="lg" class="mb-4 mr-auto">
+                        <Button href="#history" size="lg" class="mb-4 mr-auto">
                             <strong>History:</strong> how it all began
-                        </c-button>
-                        <c-button href="#quick" size="lg" class="mb-4 mr-auto">
+                        </Button>
+                        <Button href="#quick" size="lg" class="mb-4 mr-auto">
                             <strong>Quick Links:</strong> find things quickly
-                        </c-button>
-                        <c-button href="#exchanges" size="lg" class="mb-4 mr-auto">
+                        </Button>
+                        <Button href="#exchanges" size="lg" class="mb-4 mr-auto">
                             <strong>Exchanges:</strong> where to buy and sell
-                        </c-button>
-                        <c-button href="#wallets" size="lg" class="mb-4 mr-auto">
+                        </Button>
+                        <Button href="#wallets" size="lg" class="mb-4 mr-auto">
                             <strong>Wallets:</strong> how to hold it
-                        </c-button>
-                        <c-button href="#media" size="lg" class="mb-4 mr-auto">
+                        </Button>
+                        <Button href="#media" size="lg" class="mb-4 mr-auto">
                             <strong>Media &amp; Education Centre:</strong> learn more through videos, books, etc.
-                        </c-button>
-                        <c-button href="#faq" size="lg" class="mb-4 mr-auto">
+                        </Button>
+                        <Button href="#faq" size="lg" class="mb-4 mr-auto">
                             <strong>FAQ:</strong> frequently asked questions
-                        </c-button>
+                        </Button>
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-12">
@@ -87,7 +87,7 @@ export default {
         margin: 13% 0;
         padding: 0 20px;
 
-        .c-button {
+        .Button {
             font-weight: normal;
 
             strong {

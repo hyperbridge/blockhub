@@ -1,59 +1,59 @@
 <template>
     <div class="navigation">
-        <c-sidebar-menu
+        <SidebarMenu
             title="STORE"
             subTitle="General"
             mClass="margin-bottom-20">
-            <c-sidebar-menu-link to="/">
+            <SidebarMenuItem to="/">
                 Home
-            </c-sidebar-menu-link>
-            <c-sidebar-menu-link
+            </SidebarMenuItem>
+            <SidebarMenuItem
                 v-access="'community'"
                 to="/community">
                 Community
-            </c-sidebar-menu-link>
-            <c-sidebar-menu-link to="/ideas">
+            </SidebarMenuItem>
+            <SidebarMenuItem to="/ideas">
                 Browse Ideas
-            </c-sidebar-menu-link>
-            <c-sidebar-menu-link to="/projects">
+            </SidebarMenuItem>
+            <SidebarMenuItem to="/projects">
                 Browse Crowdfunds
-            </c-sidebar-menu-link>
-            <c-sidebar-menu-link to="/games">
+            </SidebarMenuItem>
+            <SidebarMenuItem to="/games">
                 Browse Games
-            </c-sidebar-menu-link>
-            <c-sidebar-menu-link
+            </SidebarMenuItem>
+            <SidebarMenuItem
                 v-access="'realm.read'"
                 to="/realms">
                 Browse Realms
-            </c-sidebar-menu-link>
-            <c-sidebar-menu-link
+            </SidebarMenuItem>
+            <SidebarMenuItem
                 v-access="'curator.read'"
                 to="/curators">
                 Browse Curators
-            </c-sidebar-menu-link>
-            <c-sidebar-menu-link
+            </SidebarMenuItem>
+            <SidebarMenuItem
                 v-access="'collection.read'"
                 to="/collections">
                 Browse Collections
-            </c-sidebar-menu-link>
-            <c-sidebar-menu-link
+            </SidebarMenuItem>
+            <SidebarMenuItem
                 v-access="'marketplace'"
                 to="/marketplace">
                 Browse Items
-            </c-sidebar-menu-link>
-        </c-sidebar-menu>
+            </SidebarMenuItem>
+        </SidebarMenu>
 
-        <c-sidebar-menu
+        <SidebarMenu
             subTitle="Browse By Genre"
             subIcon="fas fa-gamepad"
             mClass="margin-bottom-20">
-            <c-sidebar-menu-link
+            <SidebarMenuItem
                 v-for="param in ['Action', 'Adventure', 'RPG', 'Co-op', 'Multiplayer', 'Sports']"
                 :key="param"
                 :to="{ path: '/search', query: { tags: param } }">
                 {{ param }}
-            </c-sidebar-menu-link>
-        </c-sidebar-menu>
+            </SidebarMenuItem>
+        </SidebarMenu>
 
 
         <no-ssr>
@@ -61,7 +61,7 @@
                 Search
             </h3>
             <div class="filter-block">
-                <c-searcher
+                <Searcher
                     v-model="phrase"
                     class="margin-bottom-20"
                     :results="filteredResults"
@@ -76,17 +76,17 @@
                         v-html="$options.filters.highlightPhrase(
                             props.result.name, phrase, 'u'
                         )" />
-                </c-searcher>
+                </Searcher>
                 <h4 class="margin-vertical-20">
                     Community Size
                 </h4>
-                <c-range-slider
+                <RangeSlider
                     v-model.number="communitySize"
                     :max="1000" />
                 <h4 class="margin-vertical-20">
                     Active Users
                 </h4>
-                <c-range-slider
+                <RangeSlider
                     v-model.number="activeUsers"
                     :max="5000" />
                 <div class="form-group platform-chose margin-vertical-20">
@@ -96,7 +96,7 @@
                         :key="os.prop"
                         href="#"
                         @click.prevent="handleArray(os.prop, 'choosenPlatforms')">
-                        <c-icon
+                        <Icon
                             cat="fab"
                             class="platform-icon"
                             :name="os.icon"
@@ -133,45 +133,43 @@
                 Help
             </li>
             <li>
-                <c-button status="none" to="purchasing-with-cryptocurrency">
+                <Button status="none" to="purchasing-with-cryptocurrency">
                     Purchasing with Cryptocurrency
-                </c-button>
-                <c-button status="none" to="content-availability-by-country">
+                </Button>
+                <Button status="none" to="content-availability-by-country">
                     Content Availability by Country
-                </c-button>
-                <c-button status="none" to="becoming-a-community-curator">
+                </Button>
+                <Button status="none" to="becoming-a-community-curator">
                     Becoming a Community Curator
-                </c-button>
-                <c-button status="none" to="18-plus-games-and-verification">
+                </Button>
+                <Button status="none" to="18-plus-games-and-verification">
                     18+ Games and Verification
-                </c-button>
-                <c-button status="none" to="recporting-misleading-content">
+                </Button>
+                <Button status="none" to="recporting-misleading-content">
                     Reporting Misleading Content
-                </c-button>
+                </Button>
             </li>
             <li>
-                <c-button
+                <Button
                     status="none"
                     to="/help/topic/1"
                     class="btn btn-link">
                     More...
-                </c-button>
+                </Button>
             </li>
         </ul>
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import { handleArray } from '@/mixins'
 
 export default {
     components: {
-        'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m),
-        'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m),
-        'c-searcher': () => import('~/components/searcher').then(m => m.default || m),
-        'c-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m),
-        'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m)
+        'SidebarMenuItem': () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenuItem),
+        'SidebarMenu': () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenu),
+        'Searcher': () => import('@ericmuyser/hyper-ui').then(m => m.Searcher),
+        'RangeSlider': () => import('@ericmuyser/hyper-ui').then(m => m.RangeSlider)
     },
     mixins: [handleArray],
     data() {
@@ -188,29 +186,10 @@ export default {
             activeUsers: 0
         }
     },
-    methods: {
-        search() {
-            this.results = this.phrase.length
-                ? this.getProductsByName(this.phrase)
-                : []
-        },
-        goToSearchPage() {
-            this.$router.push({
-                path: '/search',
-                query: this.query
-            })
-        }
-    },
-    goToSearchPage() {
-        this.$router.push({
-            path: '/search',
-            query: this.query
-        })
-    },
     computed: {
-        ...mapGetters({
-            getProductsByName: 'marketplace/getProductsByName'
-        }),
+        getProductsByName() {
+            return []
+        },
         filteredResults() {
             const { choosenPlatforms } = this
 
@@ -231,6 +210,25 @@ export default {
 
             return query
         }
+    },
+    methods: {
+        search() {
+            this.results = this.phrase.length
+                ? this.getProductsByName(this.phrase)
+                : []
+        },
+        goToSearchPage() {
+            this.$router.push({
+                path: '/search',
+                query: this.query
+            })
+        }
+    },
+    goToSearchPage() {
+        this.$router.push({
+            path: '/search',
+            query: this.query
+        })
     }
 }
 </script>

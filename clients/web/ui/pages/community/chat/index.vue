@@ -1,13 +1,13 @@
 <template>
     <div style="background: #fff">
-        <c-chat :messages="messages" />
+        <Chat :messages="messages" />
     </div>
 </template>
 
 <script>
 export default {
     components: {
-        'c-chat': () => import('~/components/chat/chat').then(m => m.default || m)
+        'Chat': () => import('@ericmuyser/hyper-ui').then(m => m.Chat)
     },
     computed: {
         messages() {

@@ -1,11 +1,11 @@
 <template>
-    <c-layout navigationKey="meta">
+    <Layout navigationKey="meta">
         <div class="row">
             <div class="col-12">
                 Extensions coming soon
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

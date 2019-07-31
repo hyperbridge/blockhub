@@ -1,7 +1,7 @@
 <template>
-    <c-layout navigationKey="help">
+    <Layout navigationKey="help">
         <div>Login</div>
-    </c-layout>
+    </Layout>
 </template>
 
 

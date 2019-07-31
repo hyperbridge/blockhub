@@ -1,12 +1,12 @@
 <template>
-    <c-layout navigationKey="meta">
+    <Layout navigationKey="meta">
         <div class="row">
             <div class="col-12">
                 Vote for presets
                 Global or specific keys
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

@@ -1,12 +1,12 @@
 <template>
     <div>
         <!-- <button class="create-offer-btn">Create new offer</button> -->
-        <c-block-menu :links="links">
-            <c-spinner v-if="isLoading" />
+        <Block-menu :links="links">
+            <Spinner v-if="isLoading" />
             <router-view
                 v-else
                 :transactions="transactions" />
-        </c-block-menu>
+        </Block-menu>
     </div>
 </template>
 
@@ -16,8 +16,8 @@ import moment from 'moment'
 
 export default {
     components: {
-        'c-block-menu': () => import('~/components/block/menu').then(m => m.default || m),
-        'c-spinner': () => import('~/components/spinner').then(m => m.default || m)
+        'Block-menu': () => import('@ericmuyser/hyper-ui').then(m => m.Block-menu),
+        'Spinner': () => import('@ericmuyser/hyper-ui').then(m => m.Spinner)
     },
     data() {
         return {

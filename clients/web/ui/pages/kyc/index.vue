@@ -1,5 +1,5 @@
 <template>
-    <c-layout
+    <Layout
         :showLeftPanel="false"
         :showRightPanel="false">
         <div class="container-fluid">
@@ -7,7 +7,7 @@
                 class="row"
                 style="">
                 <div class="col-md-6 offset-md-3 col-sm-12 offset-sm-0 mb-4">
-                    <c-block
+                    <Block
                         title="KYC"
                         class="margin-bottom-30"
                         :noGutter="true"
@@ -20,17 +20,17 @@
                                 class="text-center alert alert-info"
                                 style="font-weight: bold; font-size: 11px;">
                                 <p>
-                                    BlockHub, the first platform powered by Hyperbridge protocols has been released. <c-button
+                                    BlockHub, the first platform powered by Hyperbridge protocols has been released. <Button
                                         to="/download"
                                         class="outline-white">
                                         Download it now
-                                    </c-button>
+                                    </Button>
                                 </p>
                             </div>
                         </div>
-                    </c-block>
+                    </Block>
                     <br><br>
-                    <c-block
+                    <Block
                         title="Your Address"
                         class="margin-bottom-30"
                         :noGutter="true"
@@ -54,14 +54,14 @@
 
                         <p><em>Tip: it looks something like this - 0x04AE72Cd525b66bc3D1241a311EE6990AD1F64a9</em></p>
 
-                        <c-checkbox
+                        <Checkbox
                             v-if="!desktopMode"
                             id="useMetamask"
                             v-model="useMetamask"
                             :checked="false"
                             type="square">
                             Use MetaMask
-                        </c-checkbox>
+                        </Checkbox>
 
                         <div
                             v-if="useMetamask && !ethereumConnected"
@@ -92,11 +92,11 @@
 
                             <br><br>
 
-                            <c-button
-                                class="c-button--lg "
+                            <Button
+                                class="Button--lg "
                                 @click="unlockWallet">
                                 Unlock Wallet
-                            </c-button>
+                            </Button>
                         </div>
 
                         <div
@@ -127,21 +127,21 @@
                         <div
                             class="margin-top-30"
                             style="text-align: center">
-                            <c-button
+                            <Button
                                 status="success"
-                                class="c-button--lg justify-content-center"
+                                class="Button--lg justify-content-center"
                                 iconHide
                                 size="xl"
                                 :class="{'disabled': !canContinue }"
                                 @click="proceed">
                                 Continue
-                            </c-button>
+                            </Button>
                         </div>
-                    </c-block>
+                    </Block>
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -149,9 +149,9 @@ import { setInterval } from 'core-js'
 
 export default {
     components: {
-        'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
-        'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-welcome-box': () => import('~/components/welcome-box').then(m => m.default || m)
+        'UserCard': () => import('@ericmuyser/hyper-ui').then(m => m.UserCard),
+        'Popup': () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
+        'WelcomeBox': () => import('@ericmuyser/hyper-ui').then(m => m.WelcomeBox)
     },
     data() {
         const checkEthereumConnection = () => {
@@ -247,12 +247,12 @@ export default {
         }
     }
 
-    .c-popup__content {
+    .Popup__content {
         background: transparent;
         color: #fff;
     }
 
-    .c-checkbox {
+    .Checkbox {
         width: 100%;
         margin: 3px;
     }

@@ -1,11 +1,11 @@
 <template>
-    <c-layout navigationKey="store" :showBreadcrumbs="false" :showRightPanel="false">
+    <Layout navigationKey="store" :showBreadcrumbs="false" :showRightPanel="false">
         <div class="single-stream">
             <div class="single-stream__wrapper">
                 <div class="row align-items-stretch">
                     <div class="col-12 col-lg-9 position-relative">
                         <div class="single-stream__nav">
-                            <c-button
+                            <Button
                                 status="dark"
                                 class="w-100 d-flex d-md-none justify-content-center my-4"
                                 size="lg"
@@ -14,7 +14,7 @@
                                 aria-expanded="false"
                                 aria-controls="product_nav">
                                 Menu
-                            </c-button>
+                            </Button>
                             <div id="product_nav" class="collapse show product_nav">
                                 <ul class="nav nav-tabs margin-bottom-30 justify-content-between">
                                     <li class="nav-item active">
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <template v-if="section == 'online'">
-                            <c-video src="https://www.w3schools.com/tags/mov_bbb.mp4" width="100%" :controls="true" />
+                            <Video src="https://www.w3schools.com/tags/mov_bbb.mp4" width="100%" :controls="true" />
                         </template>
                     </div>
                     <div class="col-12 col-lg-3 pl-0 flex-column align-items-end">
@@ -52,21 +52,21 @@
                             </div>
                         </div>
                         <div class="messages-list">
-                            <c-scrollable-content>
-                                <c-message-small
+                            <ScrollableContent>
+                                <Message-small
                                     v-for="msg in messages"
                                     :key="msg.id"
                                     :author="msg.author"
                                     :color="msg.color"
                                     :content="msg.content" />
-                            </c-scrollable-content>
+                            </ScrollableContent>
                         </div>
-                        <c-chat-answer class="mt-auto" :showAttachment="false" />
+                        <Chat-answer class="mt-auto" :showAttachment="false" />
                     </div>
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -81,11 +81,11 @@ export default {
         }
     },
     components: {
-        'c-video': () => import('~/components/video').then(m => m.default || m),
-        'c-chat': () => import('~/components/chat/chat').then(m => m.default || m),
-        'c-chat-answer': () => import('~/components/chat-new/answer-field/field').then(m => m.default || m),
-        'c-message-small': () => import('~/components/chat-new/message-small').then(m => m.default || m),
-        'c-scrollable-content': () => import('~/components/chat-new/content/scrollable-content').then(m => m.default || m)
+        'Video': () => import('@ericmuyser/hyper-ui').then(m => m.Video),
+        'Chat': () => import('@ericmuyser/hyper-ui').then(m => m.Chat),
+        'ChatAnswer': () => import('@ericmuyser/hyper-ui').then(m => m.ChatAnswer),
+        'ChatMessageSmall': () => import('@ericmuyser/hyper-ui').then(m => m.ChatMessageSmall),
+        'ScrollableContent': () => import('@ericmuyser/hyper-ui').then(m => m.ScrollableContent)
     },
     data() {
         return {

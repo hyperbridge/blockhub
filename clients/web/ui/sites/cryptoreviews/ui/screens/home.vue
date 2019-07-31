@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <Layout>
         <c-header :logo="data.header" />
 
         <div class="section section--main">
@@ -11,11 +11,11 @@
                         <img src="https://via.placeholder.com/240x60" class="img-fluid"/>
                     </div>
                     <div class="col-12 col-lg-9">
-                        <c-swiper :options="sliderOptions">
-                            <c-swiper-slide v-for="i in 12" class="text-center">
+                        <Swiper :options="sliderOptions">
+                            <SwiperSlide v-for="i in 12" class="text-center">
                                 <img src="https://via.placeholder.com/100x60" class="img-fluid"/>
-                            </c-swiper-slide>
-                        </c-swiper>
+                            </SwiperSlide>
+                        </Swiper>
                     </div>
                 </div>
             </div> -->
@@ -26,7 +26,7 @@
         <img border="0" src="http://partners.etoro.com/B10521_A73660_TGet.aspx">
 
         <c-quick-links :social="data.quickLinks.social" :forums="data.quickLinks.forums" :other="data.quickLinks.other" />
-        <c-notifications :content="data.notifications.content" :alerts="data.notifications.alerts" :warnings="data.notifications.warnings" />
+        <Notifications :content="data.notifications.content" :alerts="data.notifications.alerts" :warnings="data.notifications.warnings" />
         <c-compare :content="data.compare.content" :items="data.compare.items" />
         <c-media :content="data.media.content" :items="data.media.items" />
         <c-education :content="data.education.content" :books="data.education.books" />
@@ -38,12 +38,11 @@
         <c-faq :content="data.faq.content" :items="data.faq.items" />
 
         <c-footer />
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 import bitcoinData from '../../data/token/bitcoin'
-import * as DB from '@/db'
 import allData from '../../data'
 
 const tokenName = 'bitcoin'
@@ -74,23 +73,23 @@ const clean = () => {
 
 export default {
     components: {
-        'c-layout': () => import('~/sites/cryptoreviews/ui/layouts/token/bitcoin').then(m => m.default || m),
-        'c-header': () => import('~/sites/cryptoreviews/ui/components/header').then(m => m.default || m),
-        'c-footer': () => import('~/sites/cryptoreviews/ui/components/footer').then(m => m.default || m),
-        'c-intro': () => import('~/sites/cryptoreviews/ui/components/intro').then(m => m.default || m),
-        'c-network-slider': () => import('~/sites/cryptoreviews/ui/components/network-slider').then(m => m.default || m),
-        'c-history': () => import('~/sites/cryptoreviews/ui/components/history').then(m => m.default || m),
-        'c-quick-links': () => import('~/sites/cryptoreviews/ui/components/quick-links').then(m => m.default || m),
-        'c-notifications': () => import('~/sites/cryptoreviews/ui/components/notifications').then(m => m.default || m),
-        'c-compare': () => import('~/sites/cryptoreviews/ui/components/compare').then(m => m.default || m),
-        'c-media': () => import('~/sites/cryptoreviews/ui/components/media').then(m => m.default || m),
-        'c-education': () => import('~/sites/cryptoreviews/ui/components/education').then(m => m.default || m),
-        'c-exchanges': () => import('~/sites/cryptoreviews/ui/components/exchanges').then(m => m.default || m),
-        'c-etoro-block': () => import('~/sites/cryptoreviews/ui/components/etoro-block').then(m => m.default || m),
-        'c-market': () => import('~/sites/cryptoreviews/ui/components/market').then(m => m.default || m),
-        'c-software-wallets': () => import('~/sites/cryptoreviews/ui/components/software-wallets').then(m => m.default || m),
-        'c-hardware-wallets': () => import('~/sites/cryptoreviews/ui/components/hardware-wallets').then(m => m.default || m),
-        'c-faq': () => import('~/sites/cryptoreviews/ui/components/faq').then(m => m.default || m)
+        'Layout': () => import('~/sites/cryptoreviews/ui/layouts/token/bitcoin').then(m => m.default),
+        'c-header': () => import('~/sites/cryptoreviews/ui/components/header').then(m => m.default),
+        'c-footer': () => import('~/sites/cryptoreviews/ui/components/footer').then(m => m.default),
+        'c-intro': () => import('~/sites/cryptoreviews/ui/components/intro').then(m => m.default),
+        'c-network-slider': () => import('~/sites/cryptoreviews/ui/components/network-slider').then(m => m.default),
+        'c-history': () => import('~/sites/cryptoreviews/ui/components/history').then(m => m.default),
+        'c-quick-links': () => import('~/sites/cryptoreviews/ui/components/quick-links').then(m => m.default),
+        'Notifications': () => import('~/sites/cryptoreviews/ui/components/notifications').then(m => m.default),
+        'c-compare': () => import('~/sites/cryptoreviews/ui/components/compare').then(m => m.default),
+        'c-media': () => import('~/sites/cryptoreviews/ui/components/media').then(m => m.default),
+        'c-education': () => import('~/sites/cryptoreviews/ui/components/education').then(m => m.default),
+        'c-exchanges': () => import('~/sites/cryptoreviews/ui/components/exchanges').then(m => m.default),
+        'c-etoro-block': () => import('~/sites/cryptoreviews/ui/components/etoro-block').then(m => m.default),
+        'c-market': () => import('~/sites/cryptoreviews/ui/components/market').then(m => m.default),
+        'c-software-wallets': () => import('~/sites/cryptoreviews/ui/components/software-wallets').then(m => m.default),
+        'c-hardware-wallets': () => import('~/sites/cryptoreviews/ui/components/hardware-wallets').then(m => m.default),
+        'c-faq': () => import('~/sites/cryptoreviews/ui/components/faq').then(m => m.default)
     },
     data() {
         const data = allData(DB)

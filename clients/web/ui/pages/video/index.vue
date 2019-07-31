@@ -1,18 +1,18 @@
 <template>
-    <c-layout>
+    <Layout>
         <div class="col-12">
-            <c-video
+            <Video
                 src="https://www.w3schools.com/tags/mov_bbb.mp4"
                 width="100%"
                 :controls="true" />
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-video': () => import('~/components/video').then(m => m.default || m)
+        'Video': () => import('@ericmuyser/hyper-ui').then(m => m.Video)
     }
 }
 </script>

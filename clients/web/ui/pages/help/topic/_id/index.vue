@@ -1,12 +1,12 @@
 <template>
-    <c-layout navigationKey="help">
+    <Layout navigationKey="help">
         <div
             v-if="!topic"
             class="row margin-bottom-30">
             <div class="col-12">
-                <c-card class="text-center">
+                <Card class="text-center">
                     <p>Oh no! That topic was not found!</p>
-                </c-card>
+                </Card>
             </div>
         </div>
         <div
@@ -18,78 +18,78 @@
                     {{ topic.label }}
                 </h3>
 
-                <c-block
+                <Block
                     v-if="topic.subTopics"
                     class="margin-bottom-30 padding-top-5 padding-bottom-5">
                     <div class="topics-list">
-                        <c-topic-item
+                        <TopicItem
                             v-for="(topic, index) in topic.subTopics"
                             :key="index"
                             :to="`/help/topic/${topic.id}`"
                             :icon="topic.icon"
                             class="padding-10">
                             {{ topic.label }}
-                        </c-topic-item>
+                        </TopicItem>
                     </div>
-                </c-block>
+                </Block>
 
-                <c-block class="margin-bottom-30 padding-bottom-5">
+                <Block class="margin-bottom-30 padding-bottom-5">
                     <div
                         v-if="showByTopic(topic.id).length"
                         class="article-list">
-                        <c-article-item
+                        <ArticleItem
                             v-for="(article, index) in showByTopic(topic.id)"
                             :key="index"
                             :to="`/help/${topic.id}/article/${article.slug}`">
                             {{ article.title }}
-                        </c-article-item>
+                        </ArticleItem>
                     </div>
                     <h3 v-else>
                         No articles yet
                     </h3>
-                </c-block>
+                </Block>
             </div>
             <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-                <c-card class="text-center">
+                <Card class="text-center">
                     <h4 class="h2">
                         Community
                     </h4>
                     <p>Engage with a community of passionate experts to get the answers you need</p>
-                    <c-button
+                    <Button
                         iconHide
                         class="width-auto margin-top-10"
                         href="https://github.com/hyperbridge/blockhub-desktop-client"
                         target="_blank">
                         Visit GitHub
-                    </c-button>
-                </c-card>
+                    </Button>
+                </Card>
             </div>
             <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-                <c-card class="text-center">
+                <Card class="text-center">
                     <h4 class="h2">
                         BlockHub Support
                     </h4>
                     <p>Create a support ticket and our support experts will get back to you</p>
-                    <c-button
+                    <Button
                         href="https://hyperbridge.zendesk.com/"
                         status="info"
                         iconHide
                         class="width-auto margin-top-10">
                         Create a ticket
-                    </c-button>
-                </c-card>
+                    </Button>
+                </Card>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-article-item': () => import('~/components/help/article-item').then(m => m.default || m),
-        'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m),
-        'c-list-item': () => import('~/components/help/simple-item').then(m => m.default || m),
-        'c-card': () => import('~/components/help/help-card').then(m => m.default || m)
+        'ArticleItem': () => import('@ericmuyser/hyper-ui').then(m => m.ArticleItem),
+        'TopicItem': () => import('@ericmuyser/hyper-ui').then(m => m.TopicItem),
+        'ListItem': () => import('@ericmuyser/hyper-ui').then(m => m.ListItem),
+        'Card': () => import('@ericmuyser/hyper-ui').then(m => m.Card)
     },
     data() {
         return {

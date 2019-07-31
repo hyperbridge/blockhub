@@ -1,11 +1,11 @@
 <template>
-    <c-layout>
+    <Layout>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     Marketplace
                     <h2>Trade transaction</h2>
-                    <c-block
+                    <Block
                         v-if="transaction"
                         :title="'Transaction: ' + tradeId"
                         class="transaction">
@@ -22,25 +22,25 @@
                                             :key="index"
                                             class="assets-grid__asset"
                                             @click="yoursOffer.splice(index, 1)">
-                                            <c-tooltip
+                                            <Tooltip
                                                 :delay="30"
                                                 iconHide>
-                                                <c-asset-preview
+                                                <AssetPreview
                                                     slot="tooltip"
                                                     :asset="asset" />
-                                                <c-img
+                                                <Img
                                                     :src="asset.image"
                                                     class="asset__image" />
                                                 <span class="asset__price">{{ asset.price.current }}$</span>
-                                            </c-tooltip>
+                                            </Tooltip>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="management__inventory-explorer">
-                                    <c-list-submenu
+                                    <List-submenu
                                         :items="inventory.yours"
                                         isParent>
-                                        <c-list-submenu
+                                        <List-submenu
                                             slot="sublist"
                                             slot-scope="{ sublist }"
                                             :items="sublist"
@@ -48,24 +48,24 @@
                                             <div
                                                 slot-scope="{ list }"
                                                 class="sublist-menu__assets">
-                                                <c-asset-preview-small
+                                                <AssetPreview-small
                                                     slot="item-content"
                                                     :asset="list[0]" />
                                                 {{ list.length > 1 ? list.length : '' }}
                                             </div>
-                                        </c-list-submenu>
-                                    </c-list-submenu>
+                                        </List-submenu>
+                                    </List-submenu>
                                 </div>
                             </div>
                         </div>
-                        <c-exchange-bar
+                        <ExchangeBar
                             :price="price"
                             :yours="yoursOffer.length"
                             :their="theirOffer.length" />
                         <div class="transaction__block">
                             <div class="transaction__headings">
                                 <h4>{{ transaction.contractor.user.name }}'s selling offer</h4>
-                                <c-author
+                                <Author
                                     :name="transaction.contractor.user.name"
                                     :img="transaction.contractor.user.img" />
                                 <h4>{{ transaction.contractor.user.name }}'s inventory</h4>
@@ -78,26 +78,26 @@
                                             :key="asset"
                                             class="assets-grid__asset"
                                             @click="theirOffer.splice(index, 1)">
-                                            <c-tooltip
+                                            <Tooltip
                                                 v-show="asset.id"
                                                 :delay="30"
                                                 iconHide>
-                                                <c-asset-preview
+                                                <AssetPreview
                                                     slot="tooltip"
                                                     :asset="asset" />
-                                                <c-img
+                                                <Img
                                                     :src="asset.image"
                                                     class="asset__image" />
                                                 <span class="asset__price">{{ asset.price.current }}$</span>
-                                            </c-tooltip>
+                                            </Tooltip>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="management__inventory-explorer">
-                                    <c-list-submenu
+                                    <List-submenu
                                         :items="inventory.their"
                                         isParent>
-                                        <c-list-submenu
+                                        <List-submenu
                                             slot="sublist"
                                             slot-scope="{ sublist }"
                                             :items="sublist"
@@ -105,47 +105,47 @@
                                             <div
                                                 slot-scope="{ list }"
                                                 class="sublist-menu__assets">
-                                                <c-asset-preview-small
+                                                <AssetPreview-small
                                                     slot="item-content"
                                                     :asset="list[0]" />
                                                 {{ list.length > 1 ? list.length : '' }}
                                             </div>
-                                        </c-list-submenu>
-                                    </c-list-submenu>
+                                        </List-submenu>
+                                    </List-submenu>
                                 </div>
                             </div>
                         </div>
                         <div class="transaction__actions">
-                            <c-button
+                            <Button
                                 status="info"
                                 iconHide>
                                 Update transaction
-                            </c-button>
+                            </Button>
                         </div>
-                    </c-block>
-                    <c-block
+                    </Block>
+                    <Block
                         v-else
                         :title="'Transaction: ' + tradeId"
                         class="transaction">
                         <p>Transaction with id <i>{{ tradeId }}</i> doesn't exist</p>
-                    </c-block>
+                    </Block>
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-block': () => import('~/components/block').then(m => m.default || m),
-        'c-list': () => import('~/components/list').then(m => m.default || m),
-        'c-list-submenu': () => import('~/components/list-submenu').then(m => m.default || m),
-        'c-tooltip': () => import('~/components/tooltips/universal').then(m => m.default || m),
-        'c-asset-preview': () => import('~/components/asset-preview').then(m => m.default || m),
-        'c-asset-preview-small': () => import('~/components/asset-preview/small').then(m => m.default || m),
-        'c-exchange-bar': () => import('~/components/exchange-bar').then(m => m.default || m),
-        'c-author': () => import('~/components/author').then(m => m.default || m)
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
+        'List': () => import('@ericmuyser/hyper-ui').then(m => m.List),
+        'List-submenu': () => import('@ericmuyser/hyper-ui').then(m => m.List-submenu),
+        'Tooltip': () => import('@ericmuyser/hyper-ui').then(m => m.Tooltip),
+        'AssetPreview': () => import('@ericmuyser/hyper-ui').then(m => m.AssetPreview),
+        'AssetPreview-small': () => import('@ericmuyser/hyper-ui').then(m => m.AssetPreview-small),
+        'ExchangeBar': () => import('@ericmuyser/hyper-ui').then(m => m.ExchangeBar),
+        'Author': () => import('@ericmuyser/hyper-ui').then(m => m.Author)
     },
     data() {
         return {

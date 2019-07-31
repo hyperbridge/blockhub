@@ -1,14 +1,14 @@
 <template>
-    <c-layout
+    <Layout
         navigationKey="help"
         :showLeftPanel="false"
         :showRightPanel="false">
         <div class="row">
             <div class="col-12 mb-4">
-                <c-privacy-block />
+                <PrivacyBlock />
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -23,7 +23,7 @@ export default {
         }
     },
     components: {
-        'c-privacy-block': () => import('~/components/privacy-block').then(m => m.default || m)
+        'PrivacyBlock': () => import('@ericmuyser/hyper-ui').then(m => m.PrivacyBlock)
     }
 }
 </script>

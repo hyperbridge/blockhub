@@ -12,7 +12,7 @@
                 <nuxt-link
                     :to="`/profile/${trx.contractor.id}`"
                     class="trade-history__user-link">
-                    <c-user :user="trx.contractor" />
+                    <User :user="trx.contractor" />
                 </nuxt-link>
             </div>
             <ul
@@ -30,7 +30,7 @@
                     <nuxt-link
                         class="trade-history__item-link"
                         :to="`/asset/${asset.id}`">
-                        <c-img
+                        <Img
                             :src="asset.image"
                             class="trade-history__item-image" />
                         {{ asset.name }}
@@ -44,7 +44,7 @@
 <script>
 export default {
     components: {
-        'c-user': () => import('~/components/author').then(m => m.default || m)
+        'User': () => import('@ericmuyser/hyper-ui').then(m => m.User)
     },
     computed: {
         transactions() {

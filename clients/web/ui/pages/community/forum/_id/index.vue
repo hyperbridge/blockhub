@@ -1,14 +1,14 @@
 <template>
-    <c-layout navigationKey="store" :breadcrumbLinks="breadcrumbLinks">
+    <Layout navigationKey="store" :breadcrumbLinks="breadcrumbLinks">
         <div class="container-fluid">
             <div class="row margin-bottom-50">
                 <div class="col-12 col-lg-8 col-xl-9">
-                    <c-block
+                    <Block
                         title="General"
                         :noGutter="true"
                         :onlyContentBg="true">
                         <div class="community-list">
-                            <c-community-item
+                            <CommunityItem
                                 v-if="forum.discussions"
                                 v-for="(discussion, index) in forum.discussions"
                                 :id="discussion.id"
@@ -23,51 +23,51 @@
                                 Oops! Something went wrong :(
                             </div>
                         </div>
-                    </c-block>
+                    </Block>
                 </div>
                 <div class="col-12 col-lg-4 col-xl-3">
-                    <c-block
+                    <Block
                         title="Links &amp; Resources"
                         :noGutter="true"
                         :onlyContentBg="true">
                         <div class="d-flex flex-column">
-                            <c-search class="mb-2" />
-                            <c-button
+                            <Search class="mb-2" />
+                            <Button
                                 status="plain"
                                 class="my-1">
                                 <i class="fas fa-info-circle" /> View Discussion Guidelines
-                            </c-button>
-                            <c-button
+                            </Button>
+                            <Button
                                 status="plain"
                                 class="my-1">
                                 <i class="fas fa-info-circle" /> Discussion Rules
-                            </c-button>
-                            <c-button
+                            </Button>
+                            <Button
                                 status="plain"
                                 class="my-1">
                                 <i class="fas fa-question-circle" /> FAQ
-                            </c-button>
-                            <c-button
+                            </Button>
+                            <Button
                                 status="success"
                                 icon="plus"
                                 class="margin-top-20"
                                 style="margin-right: auto"
                                 @click="activeModal()">
                                 New discussion
-                            </c-button>
+                            </Button>
                         </div>
-                    </c-block>
+                    </Block>
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-community-item': () => import('~/components/community/post-item').then(m => m.default || m),
-        'c-search': () => import('~/components/searcher').then(m => m.default || m)
+        'CommunityItem': () => import('@ericmuyser/hyper-ui').then(m => m.CommunityItem),
+        'Search': () => import('@ericmuyser/hyper-ui').then(m => m.Search)
     },
     async asyncData({ params, store, error }) {
         await store.dispatch('communities/find', {
@@ -107,7 +107,7 @@ export default {
 <style lang="scss" scoped>
     .community-list {
         border-radius: 5px;
-        .c-input{
+        .Input{
             padding: 8px;
         }
         .community-item{

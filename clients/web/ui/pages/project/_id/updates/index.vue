@@ -1,6 +1,6 @@
 <template>
     <div class="col-12">
-        <c-timeline
+        <Timeline
             :items="project.updates"
             :project_id="project.id" />
     </div>
@@ -9,7 +9,7 @@
 <script>
 export default {
     components: {
-        'c-timeline': () => import('~/components/timeline/list').then(m => m.default || m)
+        'Timeline': () => import('@ericmuyser/hyper-ui').then(m => m.Timeline)
     },
     props: ['project', 'editing']
 }

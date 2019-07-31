@@ -1,6 +1,6 @@
 <template>
-    <c-layout navigationKey="settings">
-        <c-block
+    <Layout navigationKey="settings">
+        <Block
             title="Activity Log"
             :noGutter="true"
             :onlyContentBg="true"
@@ -11,8 +11,8 @@
                 v-html="consoleLogMessages">
                 {{ consoleLogMessages }}
             </div>
-        </c-block>
-    </c-layout>
+        </Block>
+    </Layout>
 </template>
 
 <script>

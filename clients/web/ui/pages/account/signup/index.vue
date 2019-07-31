@@ -1,5 +1,5 @@
 <template>
-    <c-layout
+    <Layout
         navigationKey="account"
         :breadcrumbLinks="breadcrumbLinks"
         :showLeftPanel="false"
@@ -25,13 +25,14 @@
                     <form
                         action="/"
                         method="post">
-                        <c-tabs
+                        <Tabs
                             :activeTabProp="currentStep"
                             :lockedStep="finishedStep"
                             :tabNames="['Step 1', 'Step 2', 'Step 3']"
                             styled
                             @click="changeTab($event)">
-                            <c-tab :tabId="1"
+                            <Tab
+                                :tabId="1"
                                 :selected="true"
                                 :showFooter="true">
                                 <div class="tab-container">
@@ -74,7 +75,7 @@
                                             <div class="col">
                                                 <div class="input-group">
                                                     <label class="sr-only">Birthday</label>
-                                                    <c-datepicker
+                                                    <Datepicker
                                                         v-model="account.birthday"
                                                         placeholder="Birthday"
                                                         input-class="form-control form-calendar__text"
@@ -96,45 +97,46 @@
                                     <div class="tab-card">
                                         <h4>Agreement</h4>
                                         <div class="termsBlock">
-                                            <c-terms-block />
+                                            <TermsBlock />
                                         </div>
                                     </div>
                                 </div>
                                 <div
                                     slot="footer"
                                     class="d-flex justify-content-between align-items-center margin-top-20">
-                                    <c-switch
+                                    <Toggle
                                         v-model="account.agreement"
                                         labelPosition="right"
                                         :customLabel="true">
                                         <template>
                                             I agree to the
-                                            <c-button
+                                            <Button
                                                 status="plain"
                                                 @click="terms = true">
                                                 terms
-                                            </c-button> and
-                                            <c-button
+                                            </Button> and
+                                            <Button
                                                 status="plain"
                                                 @click="privacyPolicy = true">
                                                 privacy policy
-                                            </c-button>
+                                            </Button>
                                         </template>
-                                    </c-switch>
-                                    <c-switch
+                                    </Toggle>
+                                    <Toggle
                                         v-model="account.newsletter"
                                         label="Sign up for our newsletter, get 100 HBX Bonus!"
                                         labelPosition="right" />
                                     <div>
-                                        <c-button
+                                        <Button
                                             :class="{'disabled': !account.agreement}"
                                             @click="checkForm()">
                                             CONTINUE
-                                        </c-button>
+                                        </Button>
                                     </div>
                                 </div>
-                            </c-tab>
-                            <c-tab :tabId="2"
+                            </Tab>
+                            <Tab
+                                :tabId="2"
                                 :showFooter="true">
                                 <div class="tab-container">
                                     <div
@@ -286,17 +288,17 @@
                                             @keyup="passphrase[index] = $event.target.value">
                                     </div>
 
-                                    <c-button
+                                    <Button
                                         v-if="verifyingPassphrase"
                                         class="plain"
                                         @click="showPassphrase()" />
                                     <br><br>
 
-                                    <c-button
-                                        class="c-button--lg"
+                                    <Button
+                                        class="Button--lg"
                                         @click="startVerification()">
                                         Got it
-                                    </c-button>
+                                    </Button>
                                 </div>
                                 <div
                                     v-if="verifyingPassphrase"
@@ -318,45 +320,45 @@
                                             @keyup="repeatPassphrase[index] = $event.target.value">
                                     </div>
 
-                                    <c-button
+                                    <Button
                                         v-if="verifyingPassphrase"
                                         class="plain"
                                         @click="showPassphrase()">
                                         Show Passphrase Again
-                                    </c-button>
+                                    </Button>
                                     <br><br>
 
-                                    <c-button
+                                    <Button
                                         v-if="verifyingPassphrase"
-                                        class="c-button--lg"
+                                        class="Button--lg"
                                         @click="confirmVerification()">
                                         Verify Now
-                                    </c-button>
+                                    </Button>
                                 </div>
                                 <div
                                     v-if="verifiedPassphrase"
                                     slot="footer"
                                     class="d-flex justify-content-between align-items-center margin-top-20">
-                                    <c-switch
+                                    <Toggle
                                         v-if="false && verifiedPassphrase"
                                         v-model="agreeStoredPassphrase"
                                         label="I have safely stored my passphrase"
                                         labelPosition="right" />
-                                    <c-switch
+                                    <Toggle
                                         v-if="false && verifiedPassphrase"
                                         v-model="account.encryptPassphrase"
                                         label="I want to encrypt my passphrase with my password"
                                         labelPosition="right" />
                                     <div>
-                                        <c-button
+                                        <Button
                                             v-if="verifiedPassphrase"
                                             @click="checkForm()">
                                             CONTINUE
-                                        </c-button>
+                                        </Button>
                                     </div>
                                 </div>
-                            </c-tab>
-                            <c-tab :tabId="3">
+                            </Tab>
+                            <Tab :tabId="3">
                                 <div class="tab-container">
                                     <div class="tab-card">
                                         <h3>Congratulations!</h3>
@@ -366,40 +368,40 @@
                                         </p>
 
                                         <br>
-                                        <c-button
-                                            class="c-button--lg outline-green"
+                                        <Button
+                                            class="Button--lg outline-green"
                                             @click="checkForm()">
                                             Continue to BlockHub
-                                        </c-button>
+                                        </Button>
                                     </div>
                                 </div>
-                            </c-tab>
-                        </c-tabs>
+                            </Tab>
+                        </Tabs>
                     </form>
                 </div>
             </div>
         </div>
 
-        <c-popup
+        <Popup
             title="Terms"
             :activated="terms"
             width="800"
             @close="terms = false">
             <div class="scroll-block">
-                <c-terms-block />
+                <TermsBlock />
             </div>
-        </c-popup>
+        </Popup>
 
-        <c-popup
+        <Popup
             title="Privacy policy"
             :activated="privacyPolicy"
             width="800"
             @close="privacyPolicy = false">
             <div class="scroll-block">
-                <c-privacy-block />
+                <PrivacyBlock />
             </div>
-        </c-popup>
-    </c-layout>
+        </Popup>
+    </Layout>
 </template>
 
 
@@ -408,10 +410,10 @@ import moment from 'moment'
 
 export default {
     components: {
-        'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
-        'c-privacy-block': () => import('~/components/privacy-block').then(m => m.default || m),
-        'c-terms-block': () => import('~/components/terms-block').then(m => m.default || m),
-        'c-popup': () => import('~/components/popups').then(m => m.default || m),
+        'UserCard': () => import('@ericmuyser/hyper-ui').then(m => m.UserCard),
+        'PrivacyBlock': () => import('@ericmuyser/hyper-ui').then(m => m.PrivacyBlock),
+        'TermsBlock': () => import('@ericmuyser/hyper-ui').then(m => m.TermsBlock),
+        'Popup': () => import('@ericmuyser/hyper-ui').then(m => m.Popup)
     },
     data() {
         return {
@@ -881,7 +883,7 @@ export default {
         flex-wrap: nowrap;
     }
 
-    .c-popup{
+    .Popup{
         .scroll-block{
             max-height: 500px;
             overflow-y: auto;

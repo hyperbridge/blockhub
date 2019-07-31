@@ -1,11 +1,11 @@
 <template>
-    <c-layout>
+    <Layout>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     Marketplace
                     <h2>Trade</h2>
-                    <c-block>
+                    <Block>
                         <div class="trade-block">
                             <nav class="trade-block__nav">
                                 <h3>Offers</h3>
@@ -18,20 +18,20 @@
                                             :class="{ 'menu-list__item--active': activeTab === index + 1}"
                                             @click="activeTab = index + 1">
                                             {{ title | upperFirstChar }}
-                                            <c-tag-count :number="offers[title].length" />
+                                            <TagCount :number="offers[title].length" />
                                         </a>
                                     </li>
                                 </ul>
                             </nav>
-                            <c-tabs
+                            <Tabs
                                 :activeTabProp="activeTab"
                                 disableMenu>
-                                <c-tab
+                                <Tab
                                     v-for="(offers, offersKey, index) in offers"
                                     :key="offersKey"
                                     :tabId="index + 1"
                                     class="trade-block__offers-tab">
-                                    <c-trade-offer
+                                    <TradeOffer
                                         v-for="offer in offers"
                                         :key="offer.id"
                                         :offer="offer"
@@ -39,22 +39,22 @@
                                     <p v-if="!offers.length">
                                         No offers were found
                                     </p>
-                                </c-tab>
-                            </c-tabs>
+                                </Tab>
+                            </Tabs>
                         </div>
-                    </c-block>
+                    </Block>
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-block': () => import('~/components/block').then(m => m.default || m),
-        'c-trade-offer': () => import('~/components/trade-offer').then(m => m.default || m),
-        'c-tag-count': () => import('~/components/tags/count').then(m => m.default || m)
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
+        'TradeOffer': () => import('@ericmuyser/hyper-ui').then(m => m.TradeOffer),
+        'TagCount': () => import('@ericmuyser/hyper-ui').then(m => m.TagCount)
     },
     data() {
         return {

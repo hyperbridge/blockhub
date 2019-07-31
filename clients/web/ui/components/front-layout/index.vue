@@ -12,10 +12,10 @@
             class="page page--w-header page--w-container"
             :class="{'page__with-left-sidebar': showLeftPanel, 'page__with-right-sidebar': showRightPanel }">
             <transition name="slideDown">
-                <c-header
+                <Header
                     v-if="!slimMode"
                     :isLoader="loadingState" />
-                <c-slim-header
+                <SlimHeader
                     v-if="slimMode"
                     :isLoader="loadingState"
                     :title="headerText" />
@@ -70,7 +70,7 @@
                 <div
                     v-if="showShortcuts"
                     class="page-shortcuts invert">
-                    <c-shortcut-sidebar :items="customShortcuts.length ? customShortcuts : shortcuts" />
+                    <ShortcutSidebar :items="customShortcuts.length ? customShortcuts : shortcuts" />
                 </div>
 
                 <div
@@ -84,30 +84,30 @@
                         class="left-sidebar__content">
                         <slot name="left-sidebar" />
                         <component
-                            :is="`c-${navigationKey}-navigation`"
+                            :is="`${navigationKey.charAt(0).toUpperCase() + navigationKey.slice(1)}Navigation`"
                             v-if="navigationKey"
                             ref="scroll_sidebar_content"
                             :title="navigationTitle" />
                     </div>
                     <div v-if="scrollMoreDirection == 'down'">
-                        <c-load-more
+                        <LoadMore
                             :fixed="true"
                             @click="scrollSidebarDown">
                             <div class="load-more-slot">
                                 More
                                 <i class="fas fa-sort-down" />
                             </div>
-                        </c-load-more>
+                        </LoadMore>
                     </div>
                     <div v-if="scrollMoreDirection == 'up'">
-                        <c-load-more
+                        <LoadMore
                             :fixed="true"
                             @click="scrollSidebarUp">
                             <div class="load-more-slot">
                                 <i class="fas fa-sort-up" />
                                 Up
                             </div>
-                        </c-load-more>
+                        </LoadMore>
                     </div>
                 </div>
 
@@ -115,7 +115,7 @@
                     id="content"
                     class="content"
                     :class="{'w-100': !showRightPanel && !showLeftPanel}">
-                    <c-breadcrumb
+                    <Breadcrumb
                         v-if="showBreadcrumbs"
                         ref="breadcrumb"
                         :links="breadcrumbLinksData" />
@@ -132,46 +132,46 @@
                     v-if="showRightPanel"
                     name="slideRight"
                     style="max-width: 250px">
-                    <c-sidepanel
+                    <Sidepanel
                         class="right-sidebar"
                         style="max-width: 250px"
                         :navigationKey="navigationKey" />
                 </transition>
 
-                <c-welcome-popup
+                <WelcomePopup
                     :activated="$store.state.application.activeModal === 'welcome'"
                     @close="$store.state.application.activeModal = null" />
-                <c-download-popup
+                <DownloadPopup
                     :activated="$store.state.application.activeModal === 'download'"
                     @close="$store.state.application.activeModal = null" />
-                <c-unlock-popup
+                <UnlockPopup
                     :activated="$store.state.application.activeModal === 'unlock'"
                     @close="$store.state.application.activeModal = null" />
-                <c-send-funds-popup
+                <SendFundsPopup
                     :activated="$store.state.application.activeModal === 'sendFunds'"
                     @close="$store.state.application.activeModal = null" />
-                <c-purchase-popup
+                <PurchasePopup
                     :activated="$store.state.application.activeModal === 'purchase'"
                     @close="$store.state.application.activeModal = null" />
-                <c-claim-popup
+                <ClaimPopup
                     :activated="$store.state.application.activeModal === 'claim'"
                     @close="$store.state.application.activeModal = null" />
-                <c-login-popup
+                <LoginPopup
                     :activated="$store.state.application.activeModal === 'login'"
                     @close="$store.state.application.activeModal = null" />
-                <c-register-popup
+                <RegisterPopup
                     :activated="$store.state.application.activeModal === 'register'"
                     @close="$store.state.application.activeModal = null" />
-                <c-privacy-popup
+                <PrivacyPopup
                     :activated="$store.state.application.activeModal === 'privacy'"
                     @close="$store.state.application.activeModal = null" />
-                <c-terms-popup
+                <TermsPopup
                     :activated="$store.state.application.activeModal === 'terms'"
                     @close="$store.state.application.activeModal = null" />
-                <c-mission-control-popup
+                <MissionControlPopup
                     :activated="$store.state.application.activeModal === 'missionControl'"
                     @close="$store.state.application.activeModal = null" />
-                <c-add-collection-popup
+                <AddCollectionPopup
                     v-if="$store.state.application.activeModal === 'addCollection'"
                     :activated="$store.state.application.activeModal === 'addCollection'"
                     :image="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.image"
@@ -182,7 +182,7 @@
                     :resourceId="$store.state.marketplace.activeCollectionModal && $store.state.marketplace.activeCollectionModal.resourceId"
                     @close="$store.state.application.activeModal = null" />
 
-                <c-basic-popup
+                <BasicPopup
                     :activated="$store.state.application.activeModal === 'connectNetwork'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
@@ -192,7 +192,7 @@
                         Connect
                     </div>
                     <template slot="body">
-                        <c-social-connect
+                        <SocialConnect
                             v-for="(item, index) in socials"
                             :key="index"
                             :class="index + 1 == socials.length ? 'margin-bottom-0' : 'margin-bottom-20'"
@@ -202,15 +202,15 @@
                             :connected="item.connected" />
                     </template>
                     <p slot="footer">
-                        <c-button
+                        <Button
                             status="dark"
                             to="/help">
                             Need help? Check the Help Center
-                        </c-button>
+                        </Button>
                     </p>
-                </c-basic-popup>
+                </BasicPopup>
 
-                <c-basic-popup
+                <BasicPopup
                     :activated="$store.state.application.editorMode === 'editing' && !$store.state.application.settings.client['hideEditorWelcomeModal']"
                     style="text-align: left;"
                     @close="$store.commit('application/updateClientSettings', { key: 'hideEditorWelcomeModal', value: true })">
@@ -226,27 +226,27 @@
                         <p v-if="!voteCasted">
                             Want this to be the next section we make editable?
                             <br>
-                            <c-button
+                            <Button
                                 class="underline"
                                 @click="vote">
                                 Cast your vote by clicking here!
-                            </c-button>
+                            </Button>
                         </p>
                         <p v-if="voteCasted">
                             Your vote has been cast. Thank you!
                         </p>
                     </template>
                     <p slot="footer">
-                        <c-button
+                        <Button
                             status="dark"
                             to="/help">
                             Need help? Check the Help Center
-                        </c-button>
+                        </Button>
                     </p>
-                </c-basic-popup>
+                </BasicPopup>
 
                 <!--create-shortcut popup-->
-                <c-basic-popup
+                <BasicPopup
                     :activated="$store.state.application.activeModal === 'createShortcut'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
@@ -258,11 +258,11 @@
                     <template slot="body">
                         <div class="row padding-bottom-30">
                             <div class="col-3 text-center">
-                                <c-button
+                                <Button
                                     status="none"
                                     class="create-shortcut__block w-100"
                                     to="/business/idea/new">
-                                    <c-icon
+                                    <Icon
                                         name="plus-circle"
                                         class="padding-bottom-10 padding-top-10"
                                         style="font-size: 50px;" />
@@ -270,14 +270,14 @@
                                         Create<br>
                                         Idea
                                     </div>
-                                </c-button>
+                                </Button>
                             </div>
                             <div class="col-3 text-center">
-                                <c-button
+                                <Button
                                     status="none"
                                     class="create-shortcut__block w-100"
                                     to="/business/project/new">
-                                    <c-icon
+                                    <Icon
                                         name="plus-circle"
                                         class="padding-bottom-10 padding-top-10"
                                         style="font-size: 50px;" />
@@ -285,14 +285,14 @@
                                         Create<br>
                                         Crowdfund
                                     </div>
-                                </c-button>
+                                </Button>
                             </div>
                             <div class="col-3 text-center">
-                                <c-button
+                                <Button
                                     status="none"
                                     class="create-shortcut__block w-100"
                                     to="/business/product/new">
-                                    <c-icon
+                                    <Icon
                                         name="plus-circle"
                                         class="padding-bottom-10 padding-top-10"
                                         style="font-size: 50px;" />
@@ -300,14 +300,14 @@
                                         Create<br>
                                         Game
                                     </div>
-                                </c-button>
+                                </Button>
                             </div>
                             <div class="col-3 text-center">
-                                <c-button
+                                <Button
                                     status="none"
                                     class="create-shortcut__block w-100"
                                     to="/business/realm/new">
-                                    <c-icon
+                                    <Icon
                                         name="plus-circle"
                                         class="padding-bottom-10 padding-top-10"
                                         style="font-size: 50px;" />
@@ -315,15 +315,15 @@
                                         Create<br>
                                         Realm
                                     </div>
-                                </c-button>
+                                </Button>
                             </div>
                         </div>
                     </template>
                     <p slot="footer" />
-                </c-basic-popup>
+                </BasicPopup>
 
                 <!--comingSoon popup-->
-                <c-basic-popup
+                <BasicPopup
                     :activated="$store.state.application.activeModal === 'comingSoon'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
@@ -353,9 +353,9 @@
                         </div>
                     </template>
                     <p slot="footer" />
-                </c-basic-popup>
+                </BasicPopup>
                 <!--tokenContract popup-->
-                <c-basic-popup
+                <BasicPopup
                     :activated="$store.state.application.activeModal === 'tokenContract'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
@@ -379,10 +379,10 @@
                         </p>
                     </template>
                     <p slot="footer" />
-                </c-basic-popup>
+                </BasicPopup>
 
                 <!--report popup-->
-                <c-basic-popup
+                <BasicPopup
                     :activated="$store.state.application.activeModal === 'report'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
@@ -409,10 +409,10 @@
                         <p><em>Hit ENTER when done</em></p>
                     </template>
                     <p slot="footer" />
-                </c-basic-popup>
+                </BasicPopup>
 
                 <!--proposeIdea popup-->
-                <c-basic-popup
+                <BasicPopup
                     :activated="$store.state.application.activeModal === 'proposeIdea'"
                     @close="$store.commit('application/activeModal', null)">
                     <div
@@ -423,11 +423,11 @@
                     <template slot="body">
                         <div v-if="activeProfile && activeProfile.role === 'curator'">
                             <p>
-                                Great, you're a curator. <c-button
+                                Great, you're a curator. <Button
                                     class="underline"
                                     href="/project/new">
                                     Click here to continue
-                                </c-button>.
+                                </Button>.
                             </p>
                         </div>
                         <div v-else>
@@ -438,38 +438,38 @@
                                 Tell people about yourself<br>
                                 <textarea />
                             </p>
-                            <c-user-card
+                            <UserCard
                                 class="col-8 margin-auto"
                                 :user="activeProfile"
                                 :previewMode="true"
                                 :class="{ 'default': true }" />
                             <br>
-                            <c-button
+                            <Button
                                 class="underline"
                                 @click="$store.commit('application/showProfileChooser', true)">
                                 Choose Different Profile
-                            </c-button>
+                            </Button>
 
                             <br><br>
 
-                            <c-button
+                            <Button
                                 class="button--lg outline-white margin-top-20"
                                 @click="$store.commit('application/convertCurator', { profile: activeProfile })">
                                 Sign up as a Curator
-                            </c-button>
+                            </Button>
                         </div>
                     </template>
                     <p slot="footer">
-                        <c-button
+                        <Button
                             status="dark"
                             to="/help">
                             Need help? Check the Help Center
-                        </c-button>
+                        </Button>
                     </p>
-                </c-basic-popup>
+                </BasicPopup>
 
                 <!--notification popup-->
-                <c-basic-popup
+                <BasicPopup
                     :activated="$store.state.application.activeModal === 'notification'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
@@ -482,10 +482,10 @@
                         <p>{{ activeNotification.text }}</p>
                     </template>
                     <p slot="footer" />
-                </c-basic-popup>
+                </BasicPopup>
 
                 <!--additionDetails popup-->
-                <c-basic-popup
+                <BasicPopup
                     :activated="$store.state.application.activeModal === 'additionDetails'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
@@ -502,10 +502,10 @@
                         </p>
                     </template>
                     <p slot="footer" />
-                </c-basic-popup>
+                </BasicPopup>
 
                 <!--connection-status popup-->
-                <c-basic-popup
+                <BasicPopup
                     :activated="$store.state.application.activeModal === 'connectionStatus'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
@@ -551,10 +551,10 @@
                         </p>
                     </template>
                     <p slot="footer" />
-                </c-basic-popup>
+                </BasicPopup>
 
                 <!--withdraw popup-->
-                <c-basic-popup
+                <BasicPopup
                     :activated="$store.state.application.activeModal === 'withdraw'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
@@ -566,7 +566,7 @@
                     <template
                         v-if="activeProfile"
                         slot="body">
-                        <c-loading
+                        <Loading
                             :enabled="withdrawRequest.processing"
                             size="lg" />
                         <div v-if="!withdrawRequest.processing && !activeProfile.address">
@@ -629,31 +629,31 @@
                     <p
                         v-if="!withdrawRequest.processing"
                         slot="footer">
-                        <c-button
+                        <Button
                             status="plain"
                             class="color-red"
                             @click="$store.state.application.activeModal = null">
                             Cancel
-                        </c-button>
-                        <c-button
+                        </Button>
+                        <Button
                             v-if="!activeProfile.address"
                             status="second-info"
                             class="ml-3"
                             @click="$store.state.application.activeModal = null">
                             OK
-                        </c-button>
-                        <c-button
+                        </Button>
+                        <Button
                             v-if="activeProfile.address"
                             status="second-info"
                             class="ml-3"
                             @click="withdraw">
                             Send
-                        </c-button>
+                        </Button>
                     </p>
-                </c-basic-popup>
+                </BasicPopup>
 
                 <!--deposit popup-->
-                <c-basic-popup
+                <BasicPopup
                     :activated="$store.state.application.activeModal === 'deposit'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
@@ -670,7 +670,7 @@
                             <h3>Deposit Address: {{ activeProfile.address }}</h3>
                             <br>
                             <div style="text-align: center;">
-                                <c-qr-code
+                                <QrCode
                                     style="display: inline-block; background: #fff;"
                                     :config="{
                                         value: activeProfile.address,
@@ -686,23 +686,23 @@
                         </div>
                     </template>
                     <p slot="footer">
-                        <c-button
+                        <Button
                             status="plain"
                             class="color-red"
                             @click="$store.state.application.activeModal = null">
                             Cancel
-                        </c-button>
-                        <c-button
+                        </Button>
+                        <Button
                             status="second-info"
                             class="ml-3"
                             @click="$store.state.application.activeModal = null">
                             OK
-                        </c-button>
+                        </Button>
                     </p>
-                </c-basic-popup>
+                </BasicPopup>
 
                 <!--create article popup-->
-                <c-basic-popup
+                <BasicPopup
                     :activated="$store.state.application.activeModal === 'createArticle'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
@@ -750,23 +750,23 @@
                         </div>
                     </template>
                     <p slot="footer">
-                        <c-button
+                        <Button
                             status="plain"
                             class="color-red"
                             @click="$store.state.application.activeModal = null">
                             Cancel
-                        </c-button>
-                        <c-button
+                        </Button>
+                        <Button
                             status="second-info"
                             class="ml-3"
                             @click="createArticle(createArticleRequest)">
                             OK
-                        </c-button>
+                        </Button>
                     </p>
-                </c-basic-popup>
+                </BasicPopup>
 
                 <!--new discussion popup-->
-                <c-basic-popup
+                <BasicPopup
                     :activated="$store.state.application.activeModal === 'newDiscussion'"
                     style="text-align: left;"
                     @close="$store.state.application.activeModal = null">
@@ -825,39 +825,39 @@
                         </div>
                     </template>
                     <p slot="footer">
-                        <c-button
+                        <Button
                             status="plain"
                             class="color-red"
                             @click="$store.state.application.activeModal = null">
                             Cancel
-                        </c-button>
-                        <c-button
+                        </Button>
+                        <Button
                             status="second-info"
                             class="ml-3"
                             @click="submitNewDiscussion(newDiscussionRequest)">
                             OK
-                        </c-button>
+                        </Button>
                     </p>
-                </c-basic-popup>
+                </BasicPopup>
 
                 <!--settings popup-->
-                <c-basic-popup
+                <BasicPopup
                     width="1000"
                     :activated="$store.state.application.activeModal === 'settings'"
                     @close="$store.state.application.activeModal = null">
                     <template slot="body">
-                        <c-settings />
+                        <Settings />
                     </template>
-                </c-basic-popup>
+                </BasicPopup>
 
-                <c-cookie-policy v-if="!desktopMode" />
+                <CookiePolicy v-if="!desktopMode" />
 
-                <c-clock v-if="desktopMode" />
+                <Clock v-if="desktopMode" />
 
                 <div
                     class="status-bar"
                     @click="$store.commit('application/activeModal', 'connectionStatus')">
-                    <c-status-dot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" />
+                    <StatusDot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" />
                     OK
                 </div>
 
@@ -868,9 +868,9 @@
                 </div>
             </div>
 
-            <c-profile-chooser v-if="profileChooser && signedIn" />
+            <ProfileChooser v-if="profileChooser && signedIn" />
 
-            <c-draggable-video
+            <DraggableVideo
                 v-if="video"
                 :active="video.showPopup"
                 :videoUrl="video.url"
@@ -888,50 +888,50 @@ import 'vue-multiselect/dist/vue-multiselect.min.css'
 
 export default {
     components: {
-        'c-header': () => import('~/components/headers/basic').then(m => m.default || m),
-        'c-slim-header': () => import('~/components/headers/slim').then(m => m.default || m),
-        'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
-        'c-custom-modal': () => import('~/components/modal/custom').then(m => m.default || m),
-        'c-terms-popup': () => import('~/components/terms-popup').then(m => m.default || m),
-        'c-privacy-popup': () => import('~/components/privacy-popup').then(m => m.default || m),
-        'c-collection-navigation': () => import('~/components/navigation/collection').then(m => m.default || m),
-        'c-wallet-navigation': () => import('~/components/navigation/wallet').then(m => m.default || m),
-        'c-account-navigation': () => import('~/components/navigation/account').then(m => m.default || m),
-        'c-settings-navigation': () => import('~/components/navigation/settings').then(m => m.default || m),
-        'c-help-navigation': () => import('~/components/navigation/help').then(m => m.default || m),
-        'c-funding-navigation': () => import('~/components/navigation/funding').then(m => m.default || m),
-        'c-store-navigation': () => import('~/components/navigation/store').then(m => m.default || m),
-        'c-asset-navigation': () => import('~/components/navigation/asset').then(m => m.default || m),
-        'c-product-navigation': () => import('~/components/navigation/product').then(m => m.default || m),
-        'c-project-navigation': () => import('~/components/navigation/project').then(m => m.default || m),
-        'c-chat-navigation': () => import('~/components/navigation/chat').then(m => m.default || m),
-        'c-idea-navigation': () => import('~/components/navigation/idea').then(m => m.default || m),
-        'c-community-navigation': () => import('~/components/navigation/community').then(m => m.default || m),
-        'c-welcome-popup': () => import('~/components/welcome-popup').then(m => m.default || m),
-        'c-download-popup': () => import('~/components/download-popup').then(m => m.default || m),
-        'c-unlock-popup': () => import('~/components/unlock-popup').then(m => m.default || m),
-        'c-claim-popup': () => import('~/components/claim-popup').then(m => m.default || m),
-        'c-login-popup': () => import('~/components/login-popup').then(m => m.default || m),
-        'c-register-popup': () => import('~/components/register-popup').then(m => m.default || m),
-        'c-send-funds-popup': () => import('~/components/send-funds-popup').then(m => m.default || m),
-        'c-purchase-popup': () => import('~/components/purchase-popup').then(m => m.default || m),
-        'c-mission-control-popup': () => import('~/components/mission-control-popup').then(m => m.default || m),
-        'c-add-collection-popup': () => import('~/components/popups/add-collection').then(m => m.default || m),
-        'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
-        'c-clock': () => import('~/components/clock').then(m => m.default || m),
-        'c-status-dot': () => import('~/components/status-dot').then(m => m.default || m),
-        'c-sidepanel': () => import('~/components/sidepanel').then(m => m.default || m),
-        'c-cookie-policy': () => import('~/components/cookie-policy').then(m => m.default || m),
-        'c-qr-code': () => import('~/components/qr-code').then(m => m.default || m),
-        'c-shortcut-sidebar': () => import('~/components/shortcut-sidebar').then(m => m.default || m),
-        'c-load-more': () => import('~/components/buttons/load-more').then(m => m.default || m),
-        'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m),
-        'c-profile-chooser': () => import('~/components/profile-chooser').then(m => m.default || m),
-        'c-settings': () => import('~/components/settings').then(m => m.default || m),
-        'c-social-connect': () => import('~/components/social-connect').then(m => m.default || m),
-        'c-draggable-video': () => import('~/components/draggable-video').then(m => m.default || m),
-        'c-video': () => import('~/components/draggable-video').then(m => m.default || m)
+        'CollectionNavigation': () => import('~/components/navigation/collection'),
+        'WalletNavigation': () => import('~/components/navigation/wallet'),
+        'AccountNavigation': () => import('~/components/navigation/account'),
+        'SettingsNavigation': () => import('~/components/navigation/settings'),
+        'HelpNavigation': () => import('~/components/navigation/help'),
+        'FundingNavigation': () => import('~/components/navigation/funding'),
+        'StoreNavigation': () => import('~/components/navigation/store'),
+        'AssetNavigation': () => import('~/components/navigation/asset'),
+        'ProductNavigation': () => import('~/components/navigation/product'),
+        'ProjectNavigation': () => import('~/components/navigation/project'),
+        'ChatNavigation': () => import('~/components/navigation/chat'),
+        'IdeaNavigation': () => import('~/components/navigation/idea'),
+        'CommunityNavigation': () => import('~/components/navigation/community'),
+        'Header': () => import('@ericmuyser/hyper-ui').then(m => m.Header),
+        'SlimHeader': () => import('@ericmuyser/hyper-ui').then(m => m.SlimHeader),
+        'Popup': () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
+        'BasicPopup': () => import('@ericmuyser/hyper-ui').then(m => m.BasicPopup),
+        'CustomModal': () => import('@ericmuyser/hyper-ui').then(m => m.CustomModal),
+        'TermsPopup': () => import('@ericmuyser/hyper-ui').then(m => m.TermsPopup),
+        'PrivacyPopup': () => import('@ericmuyser/hyper-ui').then(m => m.PrivacyPopup),
+        'WelcomePopup': () => import('@ericmuyser/hyper-ui').then(m => m.WelcomePopup),
+        'DownloadPopup': () => import('@ericmuyser/hyper-ui').then(m => m.DownloadPopup),
+        'UnlockPopup': () => import('@ericmuyser/hyper-ui').then(m => m.UnlockPopup),
+        'ClaimPopup': () => import('@ericmuyser/hyper-ui').then(m => m.ClaimPopup),
+        'LoginPopup': () => import('@ericmuyser/hyper-ui').then(m => m.LoginPopup),
+        'RegisterPopup': () => import('@ericmuyser/hyper-ui').then(m => m.RegisterPopup),
+        'SendFundsPopup': () => import('@ericmuyser/hyper-ui').then(m => m.SendFundsPopup),
+        'PurchasePopup': () => import('@ericmuyser/hyper-ui').then(m => m.PurchasePopup),
+        'MissionControlPopup': () => import('@ericmuyser/hyper-ui').then(m => m.MissionControlPopup),
+        'AddCollectionPopup': () => import('@ericmuyser/hyper-ui').then(m => m.AddCollectionPopup),
+        'UserCard': () => import('@ericmuyser/hyper-ui').then(m => m.UserCard),
+        'Clock': () => import('@ericmuyser/hyper-ui').then(m => m.Clock),
+        'StatusDot': () => import('@ericmuyser/hyper-ui').then(m => m.StatusDot),
+        'Sidepanel': () => import('@ericmuyser/hyper-ui').then(m => m.Sidepanel),
+        'CookiePolicy': () => import('@ericmuyser/hyper-ui').then(m => m.CookiePolicy),
+        'QrCode': () => import('@ericmuyser/hyper-ui').then(m => m.QrCode),
+        'ShortcutSidebar': () => import('@ericmuyser/hyper-ui').then(m => m.ShortcutSidebar),
+        'LoadMore': () => import('@ericmuyser/hyper-ui').then(m => m.LoadMore),
+        'SidebarMenuItem': () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenuItem),
+        'ProfileChooser': () => import('@ericmuyser/hyper-ui').then(m => m.ProfileChooser),
+        'Settings': () => import('@ericmuyser/hyper-ui').then(m => m.Settings),
+        'SocialConnect': () => import('@ericmuyser/hyper-ui').then(m => m.SocialConnect),
+        'DraggableVideo': () => import('@ericmuyser/hyper-ui').then(m => m.DraggableVideo),
+        'Video': () => import('@ericmuyser/hyper-ui').then(m => m.Video)
     },
     mixins: [debounce],
     props: {
@@ -1732,7 +1732,7 @@ export default {
     .slide-chooser {
         margin-bottom: 50px;
 
-        .c-button {
+        .button {
             background: transparent;
             opacity: 0.5;
             color: #fff;

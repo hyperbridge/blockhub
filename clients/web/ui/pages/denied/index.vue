@@ -1,7 +1,7 @@
 <template>
-    <c-layout navigationKey="store">
+    <Layout navigationKey="store">
         <div>Access denied</div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

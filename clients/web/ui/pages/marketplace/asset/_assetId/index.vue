@@ -3,7 +3,7 @@
         <div
             v-if="asset"
             class="asset__wrapper">
-            <c-img
+            <Img
                 class="asset__background-img"
                 :src="asset.image" />
             <h1 class="asset__name">
@@ -11,7 +11,7 @@
             </h1>
 
             <div class="asset__details">
-                <c-img
+                <Img
                     class="asset__img"
                     :src="asset.image" />
                 <ul class="details__list">
@@ -41,7 +41,7 @@
                     </li>
                 </ul>
             </div>
-            <c-line-chart
+            <LineChart
                 :data="chartData"
                 :options="chartOptions"
                 :height="400" />
@@ -59,7 +59,7 @@
                 <nuxt-link
                     v-show="$route.name === 'Marketplace Asset Offer'"
                     :to="{ name: 'Marketplace Asset Offers' }">
-                    <c-icon name="arrow-left" />
+                    <Icon name="arrow-left" />
                     Go back
                 </nuxt-link>
             </nav>
@@ -84,8 +84,8 @@ import moment from 'moment'
 
 export default {
     components: {
-        'c-line-chart': () => import('~/components/charts/line').then(m => m.default || m),
-        'c-user': () => import('~/components/user/simple').then(m => m.default || m)
+        'LineChart': () => import('@ericmuyser/hyper-ui').then(m => m.LineChart),
+        'User': () => import('@ericmuyser/hyper-ui').then(m => m.User)
     },
     props: ['assetId', 'profileId'],
     data() {

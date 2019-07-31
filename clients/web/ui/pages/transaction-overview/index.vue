@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="account">
+    <Layout navigationKey="account">
         <div class="row">
             <div
                 v-if="!transaction"
@@ -12,14 +12,14 @@
                 {{ transaction.name }}
                 {{ transaction.id }}
                 <br>
-                <c-button
+                <Button
                     status="none"
                     :to="`/transaction/${transaction.id}/transactions`">
                     Transactions
-                </c-button>
+                </Button>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 

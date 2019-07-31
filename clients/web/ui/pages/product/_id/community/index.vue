@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="community1">sssss
-            <c-item
+            <DiscussionItem
                 v-for="(post, index) in posts"
                 :key="index"
                 :post="post" />
@@ -9,17 +9,17 @@
 
         <div v-if="community2">
             <div class="community-wrapper">
-                <c-item :post="post" />
+                <DiscussionItem :post="post" />
 
-                <c-post-comment
+                <PostComment
                     v-for="(comment, index) in post.content.comments"
                     :key="index"
                     :comment="comment">
-                    <c-post-comment
+                    <PostComment
                         v-for="(subcomment, index) in comment.replies"
                         :key="index"
                         :comment="subcomment" />
-                </c-post-comment>
+                </PostComment>
             </div>
         </div>
     </div>
@@ -28,8 +28,8 @@
 <script>
 export default {
     components: {
-        'c-item': () => import('~/components/community/post-item').then(m => m.default || m),
-        'c-post-comment': () => import('~/components/community/comment').then(m => m.default || m)
+        'DiscussionItem': () => import('@ericmuyser/hyper-ui').then(m => m.DiscussionItem),
+        'PostComment': () => import('@ericmuyser/hyper-ui').then(m => m.PostComment)
     },
     props: ['product'],
     data() {

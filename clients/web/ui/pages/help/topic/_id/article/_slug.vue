@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="help">
+    <Layout navigationKey="help">
         <div v-if="article">
             <h2>{{ article.title }}</h2>
             <div class="article-content">
@@ -7,22 +7,22 @@
             </div>
         </div>
         <div v-if="!article">
-            Oh no, that article wasn't found! Would you <c-button
+            Oh no, that article wasn't found! Would you <Button
                 status="underline"
                 @click="$store.commit('application/activeModal', 'createArticle')">
                 like to create it
-            </c-button>?
+            </Button>?
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-article-item': () => import('~/components/help/article-item').then(m => m.default || m),
-        'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m),
-        'c-list-item': () => import('~/components/help/simple-item').then(m => m.default || m),
-        'c-card': () => import('~/components/help/help-card').then(m => m.default || m)
+        'ArticleItem': () => import('@ericmuyser/hyper-ui').then(m => m.ArticleItem),
+        'TopicItem': () => import('@ericmuyser/hyper-ui').then(m => m.TopicItem),
+        'ListItem': () => import('@ericmuyser/hyper-ui').then(m => m.ListItem),
+        'Card': () => import('@ericmuyser/hyper-ui').then(m => m.Card)
     },
     computed: {
         article() {

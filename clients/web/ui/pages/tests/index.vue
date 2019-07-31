@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <Layout>
         <!-- <span v-translate>{{ msg }}</span> -->
         <div
             v-if="showDiv"
@@ -17,14 +17,14 @@
             )">
             Add to wishlist
         </button>
-        <c-installer-progress :progress="88" />
-    </c-layout>
+        <InstallerProgress :progress="88" />
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-installer-progress': () => import('~/components/progress-bar/installer').then(m => m.default || m)
+        'InstallerProgress': () => import('@ericmuyser/hyper-ui').then(m => m.InstallerProgress)
     },
     data() {
         return {

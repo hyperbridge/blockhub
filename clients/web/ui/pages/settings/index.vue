@@ -1,7 +1,7 @@
 <template>
-    <c-layout navigationKey="settings">
-        <c-settings />
-    </c-layout>
+    <Layout navigationKey="settings">
+        <Settings />
+    </Layout>
 </template>
 
 <script>
@@ -16,7 +16,7 @@ export default {
         }
     },
     components: {
-        'c-settings': () => import('~/components/settings').then(m => m.default || m)
+        'Settings': () => import('@ericmuyser/hyper-ui').then(m => m.Settings)
     }
 }
 </script>

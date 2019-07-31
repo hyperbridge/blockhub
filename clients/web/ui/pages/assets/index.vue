@@ -1,16 +1,16 @@
 <template>
-    <c-layout>
+    <Layout>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 margin-bottom-30">
-                    <c-main-banner
+                    <MainBanner
                         v-if="mainBanner"
                         class="margin-bottom-30"
                         :image="mainBanner.img"
                         :logo="mainBanner.logo" />
 
-                    <c-block>
-                        <c-heading-bar
+                    <Block>
+                        <HeadingBar
                             name="Item LookUp"
                             :showArrows="false"
                             :showBackground="false"
@@ -20,43 +20,43 @@
                                     slot="pagination"
                                     class="assets-swiper-pagination swiper-pagination" />
                             </template>
-                        </c-heading-bar>
-                        <c-swiper :options="assetsSlider">
-                            <c-swiper-slide
+                        </HeadingBar>
+                        <Swiper :options="assetsSlider">
+                            <SwiperSlide
                                 v-for="(item, index) in assets"
                                 :key="index">
-                                <c-assets-item :item="item" />
-                            </c-swiper-slide>
-                        </c-swiper>
-                    </c-block>
+                                <AssetsItem :item="item" />
+                            </SwiperSlide>
+                        </Swiper>
+                    </Block>
                 </div>
                 <div class="col-12 col-lg-6 margin-bottom-30">
-                    <c-block>
+                    <Block>
                         <div class="img-slider position-relative">
-                            <c-swiper
+                            <Swiper
                                 :options="imgSlider"
                                 style="border-radius: 5px">
-                                <c-swiper-slide>
-                                    <c-img
+                                <SwiperSlide>
+                                    <Img
                                         src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg"
                                         class="img-fluid" />
-                                </c-swiper-slide>
-                                <c-swiper-slide>
-                                    <c-img
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <Img
                                         src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg"
                                         class="img-fluid" />
-                                </c-swiper-slide>
-                                <c-swiper-slide>
-                                    <c-img
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <Img
                                         src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg"
                                         class="img-fluid" />
-                                </c-swiper-slide>
-                                <c-swiper-slide>
-                                    <c-img
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <Img
                                         src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg"
                                         class="img-fluid" />
-                                </c-swiper-slide>
-                            </c-swiper>
+                                </SwiperSlide>
+                            </Swiper>
                             <div class="slider-dots">
                                 <div
                                     slot="pagination"
@@ -80,25 +80,25 @@
                                 v-if="index < 7"
                                 :key="index"
                                 class="assets-item__container padding-5">
-                                <c-assets-item :item="item" />
+                                <AssetsItem :item="item" />
                             </div>
                         </div>
-                    </c-block>
+                    </Block>
                 </div>
                 <div class="col-12 col-lg-6 margin-bottom-30 d-flex flex-column">
-                    <c-block class="margin-bottom-30">
-                        <c-heading-bar
+                    <Block class="margin-bottom-30">
+                        <HeadingBar
                             name="Featured"
                             :showActions="true">
                             <template slot="additional-action">
-                                <c-heading-bar-fields
+                                <HeadingBarFields
                                     name="Rarity"
                                     icon="fas fa-trophy" />
-                                <c-heading-bar-fields
+                                <HeadingBarFields
                                     name="Price"
                                     icon="fas fa-dollar-sign" />
                             </template>
-                        </c-heading-bar>
+                        </HeadingBar>
                         <div class="collection-list">
                             <div
                                 v-for="(item, index) in collectionItems"
@@ -106,7 +106,7 @@
                                 :key="index"
                                 class="collection-list__item-container"
                                 style="width: 50%">
-                                <c-collection-item
+                                <CollectionItem
                                     :id="item.id"
                                     :name="item.name"
                                     :author="item.author"
@@ -114,9 +114,9 @@
                                     :background="item.background" />
                             </div>
                         </div>
-                    </c-block>
+                    </Block>
 
-                    <c-banner
+                    <Banner
                         :imgSrc="'/img/banners/banner-1.png'"
                         to="/">
                         <div
@@ -128,19 +128,19 @@
                             <p class="text-capitalize h3 my-3">
                                 What are they playing?
                             </p>
-                            <c-button
+                            <Button
                                 status="info"
                                 size="lg"
                                 class="mt-4"
                                 iconHide>
                                 Call To action
-                            </c-button>
+                            </Button>
                         </div>
-                    </c-banner>
+                    </Banner>
                 </div>
                 <div class="col-12">
-                    <c-block class="margin-bottom-30">
-                        <c-heading-bar
+                    <Block class="margin-bottom-30">
+                        <HeadingBar
                             name="Get Started"
                             :showArrows="false"
                             :showBackground="false"
@@ -150,31 +150,31 @@
                                     slot="pagination"
                                     class="assets-swiper-pagination swiper-pagination" />
                             </template>
-                        </c-heading-bar>
-                        <c-swiper :options="assetsSlider">
-                            <c-swiper-slide
+                        </HeadingBar>
+                        <Swiper :options="assetsSlider">
+                            <SwiperSlide
                                 v-for="(item, index) in assets"
                                 :key="index">
-                                <c-assets-item :item="item" />
-                            </c-swiper-slide>
-                        </c-swiper>
-                    </c-block>
+                                <AssetsItem :item="item" />
+                            </SwiperSlide>
+                        </Swiper>
+                    </Block>
 
-                    <c-block class="margin-bottom-30">
-                        <c-heading-bar
+                    <Block class="margin-bottom-30">
+                        <HeadingBar
                             name="Yours"
                             :showArrows="false"
                             :showBackground="false"
                             :showActions="true">
                             <template slot="additional-action">
-                                <c-heading-bar-fields
+                                <HeadingBarFields
                                     name="Rarity"
                                     icon="fas fa-trophy" />
-                                <c-heading-bar-fields
+                                <HeadingBarFields
                                     name="Price"
                                     icon="fas fa-dollar-sign" />
                             </template>
-                        </c-heading-bar>
+                        </HeadingBar>
                         <div class="filter_blk form-inline">
                             <div class="form-group">
                                 <label>
@@ -215,11 +215,11 @@
                                     class="btn btn-sm btn-link">More Filters</a>
                             </div>
                         </div>
-                        <c-assets-grid :list="28" />
-                        <c-pagination :pages="5" />
-                    </c-block>
+                        <AsssetsGrid :list="28" />
+                        <Pagination :pages="5" />
+                    </Block>
 
-                    <c-block
+                    <Block
                         class="margin-bottom-30"
                         title="Collections">
                         <div class="collection-list">
@@ -228,7 +228,7 @@
                                 :key="index"
                                 class="collection-list__item-container"
                                 style="width: 33.3%">
-                                <c-collection-item
+                                <CollectionItem
                                     :id="item.id"
                                     :name="item.name"
                                     :author="item.author"
@@ -236,12 +236,12 @@
                                     :background="item.background" />
                             </div>
                         </div>
-                        <c-pagination :pages="5" />
-                    </c-block>
+                        <Pagination :pages="5" />
+                    </Block>
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -256,15 +256,15 @@ export default {
         }
     },
     components: {
-        'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m),
-        'c-assets-list': () => import('~/components/assets-list-item').then(m => m.default || m),
-        'c-assets-item': () => import('~/components/assets-list-item/item').then(m => m.default || m),
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-        'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
-        'c-pagination': () => import('~/components/pagination').then(m => m.default || m),
-        'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m),
-        'c-banner': () => import('~/components/banner/simple').then(m => m.default || m),
-        'c-main-banner': () => import('~/components/banner/index').then(m => m.default || m)
+        'AsssetsGrid': () => import('@ericmuyser/hyper-ui').then(m => m.AsssetsGrid),
+        'AssetsList': () => import('@ericmuyser/hyper-ui').then(m => m.AssetsList),
+        'AssetsItem': () => import('@ericmuyser/hyper-ui').then(m => m.AssetsItem),
+        'HeadingBar': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar),
+        'HeadingBarFields': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBarFields),
+        'Pagination': () => import('@ericmuyser/hyper-ui').then(m => m.Pagination),
+        'CollectionItem': () => import('@ericmuyser/hyper-ui').then(m => m.CollectionItem),
+        'Banner': () => import('@ericmuyser/hyper-ui').then(m => m.Banner),
+        'MainBanner': () => import('@ericmuyser/hyper-ui').then(m => m.MainBanner)
     },
     data: () => ({
         collectionItems: [

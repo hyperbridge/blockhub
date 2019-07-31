@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="product">
+    <Layout navigationKey="product">
         <div class="row">
             <div class="col-12">
                 <h2 class="page_ttl">
@@ -8,7 +8,7 @@
             </div>
             <div class="col-12">
                 <div class="licenses-list">
-                    <c-heading-bar
+                    <HeadingBar
                         name="Owned Licenses"
                         :showArrows="false"
                         :showBackground="false" />
@@ -18,7 +18,7 @@
                             :key="index"
                             class="licenses-list__item">
                             <div class="icon">
-                                <c-img :src="license.game.img" />
+                                <Img :src="license.game.img" />
                             </div>
                             <div class="name">
                                 <strong>{{ license.game.name }}</strong>
@@ -42,18 +42,18 @@
                             </div>
                         </div>
                     </div>
-                    <c-content-navigation />
+                    <ContentNavigation />
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m)
+        'ContentNavigation': () => import('@ericmuyser/hyper-ui').then(m => m.ContentNavigation),
+        'HeadingBar': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
     },
     data() {
         return {

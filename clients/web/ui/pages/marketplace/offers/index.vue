@@ -1,14 +1,14 @@
 <template>
     <div>
         <span v-if="isLoading">Loading ...</span>
-        <c-content-navigation
+        <ContentNavigation
             v-else
             :items="assets"
             :setLimits="7">
             <ul
                 slot-scope="props"
                 class="assets-list">
-                <c-asset-list-item
+                <AssetList-item
                     v-for="asset in props.items"
                     :key="asset.id"
                     :asset="asset">
@@ -26,7 +26,7 @@
                     <!-- <nuxt-link slot="link" slot-scope="props" :to="`/`">
                         {{ props.asset }} 123
                     </nuxt-link> -->
-                </c-asset-list-item>
+                </AssetList-item>
             </ul>
             <!-- <table class="offers-table" slot-scope="props">
                 <thead>
@@ -43,7 +43,7 @@
                     <tr v-for="[id, offer] in props.items" :key="id">
                         <template v-if="openedOffer != offer.id">
                             <td>
-                                <c-asset-preview-basic
+                                <AssetPreviewBasic
                                     :asset="offer.asset"
                                     size="sm"
                                     horizontal
@@ -57,9 +57,9 @@
                             <td>{{ offer.buyout }} $</td>
                             <td>{{ offer.marketValue }} %</td>
                             <td>
-                                <c-button iconHide status="info" @click="openOffer(id)">
-                                    <c-icon name="arrow-circle-down"/>
-                                </c-button>
+                                <Button iconHide status="info" @click="openOffer(id)">
+                                    <Icon name="arrow-circle-down"/>
+                                </Button>
                             </td>
                         </template>
                         <template v-else>
@@ -88,10 +88,10 @@
                                         <tr>
                                             <td colspan="3">
                                                 <div class="auctions-table__bid-asset">
-                                                    <c-input v-model="bidValue"/>
-                                                    <c-button status="success" icon="gavel" @click="createAuction(offer.id)">
+                                                    <Input v-model="bidValue"/>
+                                                    <Button status="success" icon="gavel" @click="createAuction(offer.id)">
                                                         Bid the asset for {{ bidValue }}$
-                                                    </c-button>
+                                                    </Button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -99,15 +99,15 @@
                                 </table>
                             </td>
                             <td>
-                                <c-button iconHide status="info" @click="openOffer(id)">
-                                    <c-icon name="arrow-circle-up"/>
-                                </c-button>
+                                <Button iconHide status="info" @click="openOffer(id)">
+                                    <Icon name="arrow-circle-up"/>
+                                </Button>
                             </td>
                         </template>
                     </tr>
                 </tbody>
             </table> -->
-        </c-content-navigation>
+        </ContentNavigation>
     </div>
 </template>
 
@@ -117,10 +117,10 @@
 
 export default {
     components: {
-        'c-block': () => import('~/components/block/index').then(m => m.default || m),
-        'c-asset-list-item': () => import('~/components/asset/list/list-item').then(m => m.default || m),
-        'c-asset-preview-basic': () => import('~/components/asset/preview-basic').then(m => m.default || m),
-        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m)
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
+        'AssetList-item': () => import('@ericmuyser/hyper-ui').then(m => m.AssetList-item),
+        'AssetPreviewBasic': () => import('@ericmuyser/hyper-ui').then(m => m.AssetPreviewBasic),
+        'ContentNavigation': () => import('@ericmuyser/hyper-ui').then(m => m.ContentNavigation)
     },
     data() {
         return {
@@ -223,7 +223,7 @@ export default {
 
         &__bid-asset {
             padding: 10px 0;
-            .c-input {
+            .Input {
                 margin-right: 15px;
             }
         }

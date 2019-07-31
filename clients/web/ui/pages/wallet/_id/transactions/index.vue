@@ -1,23 +1,23 @@
 <template>
-    <c-layout navigationKey="account">
+    <Layout navigationKey="account">
         <div class="row">
             <div class="col-12">
                 <ul class="nav nav-tabs margin-bottom-10">
                     <li class="nav-item">
-                        <c-button
+                        <Button
                             status="none"
                             class="nav-link"
                             to="/account/wallets">
                             Overview
-                        </c-button>
+                        </Button>
                     </li>
                     <li class="nav-item">
-                        <c-button
+                        <Button
                             status="none"
                             class="nav-link active"
                             to="/account/transactions">
                             Transactions
-                        </c-button>
+                        </Button>
                     </li>
                 </ul>
                 <div class="filter-line margin-bottom-50">
@@ -110,7 +110,7 @@
                             <i class="fas fa-angle-double-up" />
                         </div>
                         <div class="company">
-                            <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                            <Img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
                             Wallmart
                         </div>
                         <div class="purpose">
@@ -131,7 +131,7 @@
                             <i class="fas fa-angle-double-down" />
                         </div>
                         <div class="company">
-                            <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                            <Img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
                             Wallmart
                         </div>
                         <div class="purpose">
@@ -152,7 +152,7 @@
                             <i class="fas fa-angle-double-up" />
                         </div>
                         <div class="company">
-                            <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                            <Img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
                             Wallmart
                         </div>
                         <div class="purpose">
@@ -173,7 +173,7 @@
                             <i class="fas fa-angle-double-up" />
                         </div>
                         <div class="company">
-                            <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                            <Img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
                             Wallmart
                         </div>
                         <div class="purpose">
@@ -194,7 +194,7 @@
                             <i class="fas fa-angle-double-up" />
                         </div>
                         <div class="company">
-                            <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                            <Img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
                             Wallmart
                         </div>
                         <div class="purpose">
@@ -215,7 +215,7 @@
                             <i class="fas fa-angle-double-up" />
                         </div>
                         <div class="company">
-                            <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                            <Img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
                             Wallmart
                         </div>
                         <div class="purpose">
@@ -231,7 +231,7 @@
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

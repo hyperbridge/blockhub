@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <Layout>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -22,14 +22,14 @@
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-asset-comparison': () => import('~/components/asset-comparison').then(m => m.default || m),
-        'c-assets-grid-inventory': () => import('~/components/assets-grid-inventory').then(m => m.default || m)
+        'AssetComparison': () => import('@ericmuyser/hyper-ui').then(m => m.AssetComparison),
+        'AsssetsGridInventory': () => import('@ericmuyser/hyper-ui').then(m => m.AsssetsGridInventory)
     },
     data() {
         return {

@@ -1,10 +1,10 @@
 <template>
-    <c-layout navigationKey="store">
+    <Layout navigationKey="store">
         <div class="row">
             <div
                 v-if="!$store.state.application.curatorMode"
                 class="col-12">
-                <c-block
+                <Block
                     title="Curator Application"
                     class="margin-bottom-30"
                     :noGutter="true"
@@ -13,25 +13,25 @@
                     <p>Welcome to the curator portal. If you'd like to submit curations and proposals, please choose your profile and fill out this quick form.</p>
                     <p>Current profile: {{ activeProfile.name }}</p>
 
-                    <c-button
+                    <Button
                         class="underline"
                         @click="$store.commit('application/showProfileChooser', true)">
                         Choose Different Profile
-                    </c-button>
+                    </Button>
 
                     <br><br>
 
-                    <c-button
-                        class="c-button--lg outline-white margin-top-20"
+                    <Button
+                        class="Button--lg outline-white margin-top-20"
                         @click="convertProfile">
                         Submit application
-                    </c-button>
-                </c-block>
+                    </Button>
+                </Block>
             </div>
             <div
                 v-if="$store.state.application.curatorMode"
                 class="col-12">
-                <c-block
+                <Block
                     title="Congratulations"
                     class="margin-bottom-30"
                     :noGutter="true"
@@ -41,13 +41,13 @@
 
                     <br><br>
 
-                    <c-button to="/meta">
+                    <Button to="/meta">
                         Go to dashboard
-                    </c-button>
-                </c-block>
+                    </Button>
+                </Block>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -62,7 +62,7 @@ export default {
         }
     },
     components: {
-        'c-user-card': () => import('~/components/user-card').then(m => m.default || m)
+        'UserCard': () => import('@ericmuyser/hyper-ui').then(m => m.UserCard)
     },
     data() {
         const curatorProfile = Object.values(this.$store.state.profiles.keyedById).find(profile => profile.role !== 'curator')

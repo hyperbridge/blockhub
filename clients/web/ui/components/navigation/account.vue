@@ -2,23 +2,23 @@
     <div
         v-if="signedIn"
         class="navigation">
-        <c-sidebar-menu
+        <SidebarMenu
             title="ACCOUNT"
             :links="links.account" />
-        <c-sidebar-menu
+        <SidebarMenu
             v-access="'wallet.read'"
             subTitle="Wallets"
             :links="links.wallets" />
-        <c-sidebar-menu
+        <SidebarMenu
             subTitle="Profiles"
             :links="links.profiles" />
-        <c-sidebar-menu
+        <SidebarMenu
             subTitle="Developer"
             :links="links.developer" />
-        <c-sidebar-menu
+        <SidebarMenu
             subTitle="Help"
             :links="links.help" />
-        <c-sidebar-menu
+        <SidebarMenu
             subTitle="Legal"
             :links="links.legal" />
     </div>
@@ -27,7 +27,7 @@
 <script>
 export default {
     components: {
-        'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m)
+        'SidebarMenu': () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenu)
     },
     computed: {
         signedIn() { return this.$store.state.application.signedIn },
