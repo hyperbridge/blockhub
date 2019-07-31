@@ -126,7 +126,7 @@ storiesOf('Assets Importer', module)
 storiesOf('Notifications', module)
     .add('default', () => ({
         components: {
-            'Notification': Notification
+            Notification: () => import('@ericmuyser/hyper-ui').then(m => m.Notification)
         },
         data: () => data.NotifsData,
         template: `
@@ -3618,7 +3618,7 @@ storiesOf('Product Overview', module)
 storiesOf('Inputs', module)
     .add('default', () => ({
         components: {
-            'Input': () => import('@ericmuyser/hyper-ui').then(m => m.Input)
+            Input: () => import('@ericmuyser/hyper-ui').then(m => m.Input)
         },
         data() {
             return {
@@ -6365,7 +6365,7 @@ storiesOf('Social connect', module)
 // storiesOf('Shortcut Grid', module)
 //         .add('default', () => ({
 //             components: {
-//                     'c-shortcutsidebar: () => import('~/components/shortcut-sidebar').then(m => m.default),
+//                     'c-shortcutsidebar: () => import('~/components/shortcut-sidebar')
 //             },
 //                 data(){
 //                         return{
@@ -6546,7 +6546,7 @@ storiesOf('Content navigation', module)
 storiesOf('Broken page', module)
     .add('default', () => ({
         components: {
-            BrokenPage: () => import('~/components/broken-page').then(m => m.default)
+            BrokenPage: () => import('~/components/broken-page')
         },
         data() {
             return {
@@ -7041,7 +7041,7 @@ storiesOf('Decentralization-meter', module)
 // storiesOf('Item navigator', module)
 //     .add('default', () => ({
 //         components: {
-//                 'c-navigatoritem: () => import('~/components/item-navigator/item').then(m => m.default)
+//                 'c-navigatoritem: () => import('~/components/item-navigator/item')
 //         },
 //         data(){
 //             return{
