@@ -77,11 +77,10 @@ Vue.component('nuxt-link', {
     },
     template: '<div @click="log()"><slot /></div>',
 })
-
-// addDecorator(withViewport('desktop'))
-//addDecorator(StoryRouter())
-
-
+//
+// // addDecorator(withViewport('desktop'))
+// //addDecorator(StoryRouter())
+//
 storiesOf('Promotion Box', module)
     .add('item', () => ({
         components: {
@@ -1609,7 +1608,10 @@ storiesOf('Popup', module)
                 activated: false
             }
         },
-        template: `<div class="p-4"><Button @click=" activated = true ">Play Now</Button> <PlayPopup :activated="activated" @close=" activated = !activated " /></div>`
+        template: `<div class="p-4">
+                        <Button @click=" activated = true ">Play Now</Button> 
+                        <PlayPopup :activated="true" @close=" activated = !activated " />
+                    </div>`
     }))
     .add('Add to Collection', () =>({
         components: {
@@ -1635,12 +1637,12 @@ storiesOf('Popup', module)
                         id: 22
                     }
                 ],
-                image: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
+                image: 'https://via.placeholder.com/250',
                 name: 'Magic Plate Armor',
                 description: 'Cras in dui eget nulla vulputate finibus sed id ligula.',
             }
         },
-        template: `<div class="m-4"><AddCollectionPopup :collections="collections" :image="image" :name="name" :description="description" /></div>`
+        template: `<div class="m-4"><AddCollectionPopup :activated="true" :collections="collections" :image="image" :name="name" :description="description" /></div>`
     }))
 
 storiesOf('Range Slider', module)
@@ -7037,11 +7039,11 @@ storiesOf('Decentralization-meter', module)
         `
     }))
 
-//
+
 // storiesOf('Item navigator', module)
 //     .add('default', () => ({
 //         components: {
-//                 'c-navigatoritem: () => import('~/components/item-navigator/item')
+//             'c-navigatoritem: () => import('~/components/item-navigator/item')
 //         },
 //         data(){
 //             return{
