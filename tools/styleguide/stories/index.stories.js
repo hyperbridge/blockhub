@@ -1644,6 +1644,14 @@ storiesOf('Popup', module)
         },
         template: `<div class="m-4"><AddCollectionPopup :activated="true" :collections="collections" :image="image" :name="name" :description="description" /></div>`
     }))
+    .add('Mature content', () =>({
+        components: {
+            MatureContentPopup: () => import('@ericmuyser/hyper-ui').then(m => m.MatureContentPopup),
+        },
+        template: `<div class="m-4">
+                        <MatureContentPopup :activated="true" />
+                    </div>`
+    }))
 
 storiesOf('Range Slider', module)
     .add('default', () => ({
