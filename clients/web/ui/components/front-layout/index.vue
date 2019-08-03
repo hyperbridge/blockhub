@@ -931,7 +931,8 @@ export default {
         'Settings': () => import('@ericmuyser/hyper-ui').then(m => m.Settings),
         'SocialConnect': () => import('@ericmuyser/hyper-ui').then(m => m.SocialConnect),
         'DraggableVideo': () => import('@ericmuyser/hyper-ui').then(m => m.DraggableVideo),
-        'Video': () => import('@ericmuyser/hyper-ui').then(m => m.Video)
+        'Video': () => import('@ericmuyser/hyper-ui').then(m => m.Video),
+        'Breadcrumb': () => import('@ericmuyser/hyper-ui').then(m => m.Breadcrumb)
     },
     mixins: [debounce],
     props: {

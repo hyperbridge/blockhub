@@ -169,7 +169,9 @@ export default {
         'SidebarMenuItem': () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenuItem),
         'SidebarMenu': () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenu),
         'Searcher': () => import('@ericmuyser/hyper-ui').then(m => m.Searcher),
-        'RangeSlider': () => import('@ericmuyser/hyper-ui').then(m => m.RangeSlider)
+        'RangeSlider': () => import('@ericmuyser/hyper-ui').then(m => m.RangeSlider),
+        'Icon': () => import('@ericmuyser/hyper-ui').then(m => m.Icon),
+        'Button': () => import('@ericmuyser/hyper-ui').then(m => m.Button),
     },
     mixins: [handleArray],
     data() {
