@@ -6,28 +6,28 @@
             class="row"
             hidden>
             <div class="col-12 mb-4">
-                <SimpleBanner
-                    :imgSrc="'/img/banners/banner-3.png'"
-                    to="/token">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h3 class="text-yellow">
-                                Launch Sale
-                            </h3>
-                            <p>BlockHub has launched and the token sale is now live!</p>
-                        </div>
-                        <div class="banner-action">
-                            <Button
-                                tag="div"
-                                tatus="info"
-                                iconHide
-                                size="lg"
-                                to="/token">
-                                JOIN NOW
-                            </Button>
-                        </div>
-                    </div>
-                </SimpleBanner>
+<!--                <SimpleBanner-->
+<!--                    :imgSrc="'/img/banners/banner-3.png'"-->
+<!--                    to="/token">-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                        <div>-->
+<!--                            <h3 class="text-yellow">-->
+<!--                                Launch Sale-->
+<!--                            </h3>-->
+<!--                            <p>BlockHub has launched and the token sale is now live!</p>-->
+<!--                        </div>-->
+<!--                        <div class="banner-action">-->
+<!--                            <Button-->
+<!--                                tag="div"-->
+<!--                                tatus="info"-->
+<!--                                iconHide-->
+<!--                                size="lg"-->
+<!--                                to="/token">-->
+<!--                                JOIN NOW-->
+<!--                            </Button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </SimpleBanner>-->
             </div>
         </div>
         <!--
@@ -340,7 +340,7 @@ export default {
             store.dispatch('products/upcomingProducts')
 
             return {}
-        } 
+        }
             return {
                 newReleases: await store.dispatch('products/newReleases'),
                 featuredProducts: await store.dispatch('products/featuredProducts'),
@@ -349,7 +349,7 @@ export default {
                 topSellingProducts: await store.dispatch('products/topSellingProducts'),
                 upcomingProducts: await store.dispatch('products/upcomingProducts')
             }
-        
+
     },
     async mounted() {
         this.collections = (await this.$store.dispatch('collections/find', {
