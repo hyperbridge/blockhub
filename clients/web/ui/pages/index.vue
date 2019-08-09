@@ -2,32 +2,33 @@
     <Layout
         :breadcrumbLinks="breadcrumbLinks"
         navigationKey="store">
+
         <div
             class="row"
             hidden>
             <div class="col-12 mb-4">
-<!--                <SimpleBanner-->
-<!--                    :imgSrc="'/img/banners/banner-3.png'"-->
-<!--                    to="/token">-->
-<!--                    <div class="d-flex justify-content-between align-items-center">-->
-<!--                        <div>-->
-<!--                            <h3 class="text-yellow">-->
-<!--                                Launch Sale-->
-<!--                            </h3>-->
-<!--                            <p>BlockHub has launched and the token sale is now live!</p>-->
-<!--                        </div>-->
-<!--                        <div class="banner-action">-->
-<!--                            <Button-->
-<!--                                tag="div"-->
-<!--                                tatus="info"-->
-<!--                                iconHide-->
-<!--                                size="lg"-->
-<!--                                to="/token">-->
-<!--                                JOIN NOW-->
-<!--                            </Button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </SimpleBanner>-->
+                <SimpleBanner
+                    :imgSrc="'/img/banners/banner-3.png'"
+                    to="/token">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="text-yellow">
+                                Launch Sale
+                            </h3>
+                            <p>BlockHub has launched and the token sale is now live!</p>
+                        </div>
+                        <div class="banner-action">
+                            <Button
+                                tag="div"
+                                tatus="info"
+                                iconHide
+                                size="lg"
+                                to="/token">
+                                JOIN NOW
+                            </Button>
+                        </div>
+                    </div>
+                </SimpleBanner>
             </div>
         </div>
         <!--
@@ -56,19 +57,21 @@
                 <h4 class="h2 mb-3">
                     Welcome
                 </h4>
-                <p>Welcome to the the BlockHub Preview Build. All features are enabled, with or without bugs. Gotta catch 'em all! 🐛</p>
-                <p>These features are still in active development, and may not functional properly and may not make it into production.</p>
-                <p>We believe in transparency and community-driven development, so why don't you let us know what you think!</p><p /></p><p>To make things simple, hold ALT and click anywhere to send us feedback/bug reports!</p><p /></p><p>Thanks for visiting and joining us on the journey to a decentralized future.</p>
+                <div>Welcome to the the BlockHub Preview Build. All features are enabled, with or without bugs. Gotta catch 'em all! 🐛</div>
+                <div>These features are still in active development, and may not functional properly and may not make it into production.</div>
+                <div>We believe in transparency and community-driven development, so why don't you let us know what you think!</div>
+                <div>To make things simple, hold ALT and click anywhere to send us feedback/bug reports!</div>
+                <div>Thanks for visiting and joining us on the journey to a decentralized future.</div>
                 <p hidden>
                     We're a platform built by the community, for the community.
                 </p>
-                <p hidden>
+                <div hidden>
                     <Button
                         to="/help"
                         target="_blank">
                         Check out the BlockHub crowdfund
                     </Button>
-                </p>
+                </div>
             </div>
             <div
                 slot="footer"
