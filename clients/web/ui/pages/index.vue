@@ -3,9 +3,7 @@
         :breadcrumbLinks="breadcrumbLinks"
         navigationKey="store">
 
-        <div
-            class="row"
-            hidden>
+        <div class="row">
             <div class="col-12 mb-4">
                 <SimpleBanner
                     :imgSrc="'/img/banners/banner-3.png'"
@@ -17,30 +15,20 @@
                             </h3>
                             <p>BlockHub has launched and the token sale is now live!</p>
                         </div>
-                        <div class="banner-action">
-                            <Button
-                                tag="div"
-                                tatus="info"
-                                iconHide
-                                size="lg"
-                                to="/token">
-                                JOIN NOW
-                            </Button>
-                        </div>
                     </div>
                 </SimpleBanner>
             </div>
         </div>
-        <!--
-        <div
-            class="row"
-            hidden>
+
+        <div class="row">
             <div
                 v-if="!$store.state.application.desktopMode"
                 class="col-12 mb-4">
                 <WelcomeBox />
             </div>
-        </div> -->
+        </div>
+
+<!--        {{ list }}-->
 
         <InfiniteContent
             :list="list"
@@ -100,8 +88,10 @@ export default {
         }
     },
     components: {
+        'InfiniteContent': () => import('@ericmuyser/hyper-ui').then(m => m.InfiniteContent),
         'SimpleBanner': () => import('@ericmuyser/hyper-ui').then(m => m.SimpleBanner),
-        'CustomModal': () => import('@ericmuyser/hyper-ui').then(m => m.CustomModal)
+        'CustomModal': () => import('@ericmuyser/hyper-ui').then(m => m.CustomModal),
+        'WelcomeBox': () => import('@ericmuyser/hyper-ui').then(m => m.WelcomeBox)
     },
     data() {
         return {
@@ -326,12 +316,6 @@ export default {
 
             return result
         }
-        // products() {
-        //     if (this.$store.state.cache.screens['/store'] && this.$store.state.cache.screens['/store'].products)
-        //         return this.$store.state.cache.screens['/store'].products
-
-        //     return this.$store.state.marketplace.products
-        // },
     },
     async asyncData({ store }) {
         if (process.client) {
@@ -396,14 +380,9 @@ export default {
 
 
 <style lang="scss">
-    /*Crutch to work OWL fine*/
-    /*Fixing content and OWL width*/
     .page__content > .content {
         width: calc(100% - 500px);
     }
-
-    /**/
-    /**/
     .main-banner {
         padding: 10px;
         border-radius: 5px;
