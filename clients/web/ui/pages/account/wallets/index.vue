@@ -18,31 +18,10 @@
                     </div>
                     <div class="filter-line__filter">
                         Filter by:
-                        <div class="dropdown">
-                            <a
-                                id="filtering_type"
-                                class="btn dropdown-toggle"
-                                href="#"
-                                role="button"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                Type
-                            </a>
-                            <div
-                                class="dropdown-menu"
-                                aria-labelledby="dropdownMenuLink">
-                                <a
-                                    class="dropdown-item"
-                                    href="#">Action</a>
-                                <a
-                                    class="dropdown-item"
-                                    href="#">Another action</a>
-                                <a
-                                    class="dropdown-item"
-                                    href="#">Something else here</a>
-                            </div>
-                        </div>
+                        <Dropdown :options="sortOptions"
+                                  :selected="sortOptions[0]"
+                                  :withBg="true">
+                        </Dropdown>
                         <a
                             href="#"
                             class="btn btn-sm btn-danger text-uppercase font-weight-bold">clear <i class="fas fa-times" /></a>
@@ -52,31 +31,10 @@
                     </div>
                     <div class="filter-line__sorting">
                         Sort by:
-                        <div class="dropdown">
-                            <a
-                                id="sorting_value"
-                                class="btn dropdown-toggle"
-                                href="#"
-                                role="button"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                Value
-                            </a>
-                            <div
-                                class="dropdown-menu"
-                                aria-labelledby="dropdownMenuLink">
-                                <a
-                                    class="dropdown-item"
-                                    href="#">Action</a>
-                                <a
-                                    class="dropdown-item"
-                                    href="#">Another action</a>
-                                <a
-                                    class="dropdown-item"
-                                    href="#">Something else here</a>
-                            </div>
-                        </div>
+                        <Dropdown :options="sortOptions"
+                                  :selected="sortOptions[0]"
+                                  :withBg="true">
+                        </Dropdown>
                         <a
                             href="#"
                             class="btn btn-link">
@@ -340,6 +298,9 @@
 
 <script>
 export default {
+	components: {
+		'Dropdown': () => import('@ericmuyser/hyper-ui').then(m => m.Dropdown),
+    },
     data() {
         return {
             newWallets: {
@@ -397,6 +358,17 @@ export default {
                     name: 'Bitcoin Cash',
                     shortName: 'BCH'
                 }
+            ],
+	        breadcrumbLinks: [],
+	        sortOptions:[
+                {
+                	name: 'Name',
+                    value: 'name'
+                },
+		        {
+			        name: 'Date',
+			        value: 'date'
+		        },
             ]
         }
     },
@@ -405,17 +377,17 @@ export default {
             return this.$store.state.application.wallets
         }
     },
-    async asyncData({ params, store, error }) {
-        if (!store.state.auth.user) return error({ statusCode: 500, message: 'Not signed in' })
-
-        return {
-            breadcrumbLinks: [
-                { to: { path: '/' }, title: 'Home' },
-                { to: { path: `/account` }, title: 'Account' },
-                { to: { path: `/account/wallets` }, title: 'Wallets' }
-            ]
-        }
-    },
+    // async asyncData({ params, store, error }) {
+    //     if (!store.state.auth.user) return error({ statusCode: 500, message: 'Not signed in' });
+    //
+    //     return {
+    //         breadcrumbLinks: [
+    //             { to: { path: '/' }, title: 'Home' },
+    //             { to: { path: `/account` }, title: 'Account' },
+    //             { to: { path: `/account/wallets` }, title: 'Wallets' }
+    //         ]
+    //     }
+    // },
     methods: {
         copyWalletNumber(number) {
             alert(`You have copy wallet number - ${number}`)

@@ -121,7 +121,8 @@
 <script>
 export default {
     components: {
-        'SimpleTable': () => import('@ericmuyser/hyper-ui').then(m => m.SimpleTable)
+        'SimpleTable': () => import('@ericmuyser/hyper-ui').then(m => m.SimpleTable),
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
     },
     props: {
         id: String
