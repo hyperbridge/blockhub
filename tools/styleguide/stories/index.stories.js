@@ -5598,6 +5598,11 @@ storiesOf('Table', module)
             </div>
         `
     }))
+    .add('default', () => ({
+        components: {
+            ScrollTable: () => import('@ericmuyser/hyper-ui').then(m => m.ScrollTable),
+        },
+    }))
 
 
 storiesOf('Text Formatting', module)

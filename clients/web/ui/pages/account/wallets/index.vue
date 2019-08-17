@@ -476,7 +476,7 @@ export default {
     .filter-line__search {
         input {
             color: rgba(255, 255, 255, .7);
-            border: 1px solid rgba(255, 255, 255, .5);
+            border: 1px solid #363742;
             width: 70%;
             line-height: 30px;
             padding: 0 10px;
