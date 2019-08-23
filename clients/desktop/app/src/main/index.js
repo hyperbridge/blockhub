@@ -8,7 +8,7 @@ import * as PeerService from '../framework/peer-service'
 import * as Wallet from '../framework/wallet'
 import * as Windows from './windows'
 import * as Updater from './updater'
-
+import electronPrompt from './windows/prompt/main.js'
 
 const config = require('../config')
 
@@ -173,6 +173,21 @@ export const initApp = () => {
             callback(true)
         }
     })
+    
+    // Test for the electron prompt
+    electronPrompt({
+      title: 'TEST PROMPT',
+      label: 'TEST INPUT',
+      value: 'TEST',
+      inputAttr: {
+        type: 'text'
+      },
+      type: 'input'
+    }, Windows.main).then(r => {
+      console.log('Input is ', r);
+    }).catch(console.error);
+
+
 
     app.on('ready', () => {
         session.defaultSession.webRequest.onBeforeRequest({}, (details, callback) => {
