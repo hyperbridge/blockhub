@@ -19,7 +19,7 @@
                     <tr
                         v-for="bid in offer.bids"
                         :key="bid.id">
-                        <td><c-user :user="bid.user" /></td>
+                        <td><User :user="bid.user" /></td>
                         <td>
                             <span class="bid-price">
                                 {{ bid.value }}
@@ -40,13 +40,13 @@
             </ul>
             <label>
                 Bid value
-                <c-input v-model="value" />
+                <Input v-model="value" />
             </label>
-            <c-button
+            <Button
                 size="md"
                 @click="createBid()">
                 Create bid
-            </c-button>
+            </Button>
         </div>
     </div>
 </template>
@@ -56,7 +56,7 @@ import moment from 'moment'
 
 export default {
     components: {
-        'c-user': () => import('~/components/user/simple').then(m => m.default || m)
+        'User': () => import('@ericmuyser/hyper-ui').then(m => m.User)
     },
     props: ['offersMap', 'asset', 'profile', 'offerId'],
     data: () => ({
@@ -131,7 +131,7 @@ export default {
         background: rgba(255,255,255,.05);
         label {
             margin: 0;
-            .c-input {
+            .Input {
                 margin-left: 5px;
             }
         }

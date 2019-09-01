@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="project">
+    <Layout navigationKey="project">
         <div
             v-if="post"
             class="row">
@@ -19,7 +19,7 @@
                 </h4>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -52,8 +52,8 @@ export default {
         }
     },
     components: {
-        'c-tags': () => import('~/components/tags').then(m => m.default || m),
-        'c-badges': () => import('~/components/project/badges').then(m => m.default || m)
+        'Tags': () => import('@ericmuyser/hyper-ui').then(m => m.Tags),
+        'Badges': () => import('@ericmuyser/hyper-ui').then(m => m.Badges)
     },
     props: ['projectId', 'postId'],
     data() {

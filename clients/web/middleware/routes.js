@@ -8,7 +8,7 @@ export default function (req, res, next) {
         routes.push({
             path: '/',
             name: 'index',
-            component: () => import('~/sites/cryptoreviews/ui/screens/home').then(m => m.default || m)
+            component: () => import('~/sites/cryptoreviews/ui/screens/home').then(m => m.default)
         })
         console.log('dddd', routes)
     }

@@ -1,10 +1,10 @@
 <template>
-    <c-layout navigationKey="store">
+    <Layout navigationKey="store">
         <div class="container-fluid">
-            <c-block
+            <Block
                 :noGutter="true"
                 :onlyContentBg="true">
-                <c-heading-bar
+                <HeadingBar
                     slot="title"
                     class="mb-0"
                     :headingTabs="[
@@ -15,9 +15,9 @@
                     @changeTab="category = $event" />
 
                 <div class="discussions-list" />
-            </c-block>
+            </Block>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -34,8 +34,7 @@ export default {
         }
     },
     components: {
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-        'c-community-item': () => import('~/components/pagination').then(m => m.default || m)
+        'HeadingBar': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
     },
     data() {
         return {

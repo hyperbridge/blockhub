@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="store">
+    <Layout navigationKey="store">
         <div class="row">
             <div class="col-12">
                 <div class="license-content text-dark">
@@ -8,15 +8,15 @@
                             License passed
                         </div>
                         <div>
-                            <c-button status="second-success" size="sm">
+                            <Button status="second-success" size="sm">
                                 45 dependencies
-                            </c-button>
-                            <c-button status="second-info" size="sm" class="margin-left-10 margin-right-10">
+                            </Button>
+                            <Button status="second-info" size="sm" class="margin-left-10 margin-right-10">
                                 7 licenses
-                            </c-button>
-                            <c-button status="second-danger" size="sm">
+                            </Button>
+                            <Button status="second-danger" size="sm">
                                 11 obligations
-                            </c-button>
+                            </Button>
                         </div>
                     </div>
                     <div class="license-content__body margin-top-30">
@@ -77,9 +77,9 @@
                                     ullamcorper, est vitae volutpat viverra, orci dolor eleifend dolor, a facilisis
                                     mauris odio vitae neque.
                                 </p>
-                                <c-button status="outline-info" size="sm" class="margin-top-5 margin-bottom-20">
+                                <Button status="outline-info" size="sm" class="margin-top-5 margin-bottom-20">
                                     View details
-                                </c-button>
+                                </Button>
                                 <div class="h4">
                                     Curabitur aliquam viverra nulla
                                 </div>
@@ -93,7 +93,7 @@
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

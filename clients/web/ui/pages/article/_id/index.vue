@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <Layout>
         <div class="article-page">
             <!--Page header-->
             <div class="row article-page__nav">
@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-auto">
                     <div class="datepicker-icon">
-                        <c-datepicker
+                        <Datepicker
                             v-model="date"
                             :full-month-name="true"
                             format="MMMM d"
@@ -108,19 +108,19 @@
                 <div class="col-12">
                     <ul class="tags-line">
                         <li>
-                            <c-button status="plain">
+                            <Button status="plain">
                                 ART
-                            </c-button>
+                            </Button>
                         </li>
                         <li>
-                            <c-button status="plain">
+                            <Button status="plain">
                                 Literature
-                            </c-button>
+                            </Button>
                         </li>
                         <li>
-                            <c-button status="plain">
+                            <Button status="plain">
                                 History
-                            </c-button>
+                            </Button>
                         </li>
                     </ul>
                 </div>
@@ -143,11 +143,11 @@
                             erat.
                         </p>
                         <div class="w-100 text-right">
-                            <c-button
+                            <Button
                                 status="second-info"
                                 size="sm">
                                 Read more
-                            </c-button>
+                            </Button>
                         </div>
                     </div>
                 </div>
@@ -155,19 +155,19 @@
                 <div class="col-12">
                     <ul class="tags-line">
                         <li>
-                            <c-button status="plain">
+                            <Button status="plain">
                                 ART
-                            </c-button>
+                            </Button>
                         </li>
                         <li>
-                            <c-button status="plain">
+                            <Button status="plain">
                                 Literature
-                            </c-button>
+                            </Button>
                         </li>
                         <li>
-                            <c-button status="plain">
+                            <Button status="plain">
                                 History
-                            </c-button>
+                            </Button>
                         </li>
                     </ul>
                 </div>
@@ -186,11 +186,11 @@
                             nascetur ridiculus mus.
                         </p>
                         <div class="w-100 text-right">
-                            <c-button
+                            <Button
                                 status="second-info"
                                 size="sm">
                                 Read more
-                            </c-button>
+                            </Button>
                         </div>
                     </div>
                 </div>
@@ -215,7 +215,7 @@
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

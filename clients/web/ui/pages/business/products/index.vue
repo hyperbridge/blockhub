@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <Layout>
         <div class="row margin-bottom-20">
             <div class="col-12">
                 <div class="form-row">
@@ -93,12 +93,12 @@
                                 </td>
                                 <td>{{ product.id }}</td>
                                 <td>
-                                    <c-button
+                                    <Button
                                         status="none"
                                         :to="`/business/product/${product.id}`"
                                         class="text-secondary text-bold">
                                         {{ product.name }}
-                                    </c-button>
+                                    </Button>
                                 </td>
                                 <td>{{ product.meta.created }}</td>
                                 <td>
@@ -154,23 +154,23 @@
         <template slot="menu">
             <div class="row">
                 <div class="col-12 text-right">
-                    <c-button
+                    <Button
                         to="/business/product/new"
                         status="dark"
                         icon="plus"
                         size="lg">
                         New Product
-                    </c-button>
+                    </Button>
                 </div>
             </div>
         </template>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-layout': () => import('~/components/business-layout').then(m => m.default || m)
+        'Layout': () => import('@ericmuyser/hyper-ui').then(m => m.Layout)
     },
     data() {
         return {

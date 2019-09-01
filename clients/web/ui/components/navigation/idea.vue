@@ -1,22 +1,22 @@
 <template>
     <div class="navigation">
-        <c-sidebar-menu
+        <SidebarMenu
             title="IDEA"
             :links="links.idea" />
 
-        <c-sidebar-menu
+        <SidebarMenu
             v-access="'community'"
             title="COMMUNITY"
             :links="links.discussions" />
 
-        <c-sidebar-menu
+        <SidebarMenu
             title="HELP"
             :links="links.help" />
 
-        <c-join-community />
+        <JoinCommunity />
 
-        <c-curator-panel>
-            <c-curator-info
+        <CuratorPanel>
+            <CuratorInfo
                 v-access="'curator.read'"
                 title="Curator panel">
                 <div v-if="!editing">
@@ -44,23 +44,21 @@
                     </ul>
                 </div>
                 <div v-if="editing">
-                    <c-switch />
+                    <Toggle />
                     Enable Curator Mode
                 </div>
-            </c-curator-info>
-        </c-curator-panel>
+            </CuratorInfo>
+        </CuratorPanel>
     </div>
 </template>
 
 <script>
 export default {
     components: {
-        'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m),
-        'c-searcher': () => import('~/components/searcher').then(m => m.default || m),
-        'c-claim': () => import('~/components/curator-panel/claim').then(m => m.default || m),
-        'c-curator-panel': () => import('~/components/curator-panel').then(m => m.default || m),
-        'c-curator-info': () => import('~/components/curator-panel/info-card').then(m => m.default || m),
-        'c-join-community': () => import('~/components/join-community').then(m => m.default || m)
+        'SidebarMenu': () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenu),
+        'CuratorPanel': () => import('@ericmuyser/hyper-ui').then(m => m.CuratorPanel),
+        'CuratorInfo': () => import('@ericmuyser/hyper-ui').then(m => m.CuratorInfo),
+        'JoinCommunity': () => import('@ericmuyser/hyper-ui').then(m => m.JoinCommunity)
     },
     props: ['id'],
     data() {

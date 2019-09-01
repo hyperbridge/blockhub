@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="store">
+    <Layout navigationKey="store">
         <div class="row">
             <div class="col-12 text-center mb-5">
                 <h2 class="mb-4">
@@ -15,7 +15,7 @@
                 v-for="stream in streams"
                 :key="stream.id"
                 class="col-12 col-md-6 col-lg-4">
-                <c-stream-item
+                <StreamItem
                     :streamName="stream.userName"
                     :streamAvatar="stream.userAvatar"
                     :streamImg="stream.previews"
@@ -24,13 +24,13 @@
                     :streamViews="stream.views" />
             </div>
             <div class="col-12 mt-5">
-                <c-stream-carousel
+                <StreamCarousel
                     title="HOT streams"
                     :showBackground="false"
                     :streams="streams" />
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -45,8 +45,8 @@ export default {
         }
     },
     components: {
-        'c-stream-item': () => import('~/components/stream').then(m => m.default || m),
-        'c-stream-carousel': () => import('~/components/stream/carousel').then(m => m.default || m)
+        'StreamItem': () => import('@ericmuyser/hyper-ui').then(m => m.StreamItem),
+        'StreamCarousel': () => import('@ericmuyser/hyper-ui').then(m => m.StreamCarousel)
     },
     data() {
         return {

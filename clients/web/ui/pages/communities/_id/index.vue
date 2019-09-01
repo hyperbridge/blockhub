@@ -1,5 +1,5 @@
 <template>
-    <c-layout
+    <Layout
         navigationKey="community"
         :breadcrumbLinks="breadcrumbLinks">
         <div class="row">
@@ -32,7 +32,7 @@
                 </div>
             </template>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

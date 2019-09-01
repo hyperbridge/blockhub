@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="settings">
+    <Layout navigationKey="settings">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -7,7 +7,7 @@
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

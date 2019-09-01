@@ -1,10 +1,10 @@
 <template>
-    <c-layout navigationKey="store">
+    <Layout navigationKey="store">
         <div class="container-fluid">
-            <c-infinite-content :list="list" />
+            <InfiniteContent :list="list" />
             <p>No curators yet. Stay tuned!</p>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

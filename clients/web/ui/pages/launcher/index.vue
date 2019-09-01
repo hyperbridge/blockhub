@@ -1,10 +1,10 @@
 <template>
-    <c-layout
+    <Layout
         bgImage="https://www.numerama.com/content/uploads/2016/08/skyrim.jpeg"
         :overlay="true"
         overlayOpacity="0.3">
-        <c-metro-grid class="w-100">
-            <c-metro-item
+        <MetroGrid class="w-100">
+            <MetroItem
                 v-for="(item, index) in items"
                 :key="item.title"
                 :image="item.image"
@@ -16,17 +16,17 @@
                 <div>
                     {{ item.text }}
                 </div>
-            </c-metro-item>
-        </c-metro-grid>
-    </c-layout>
+            </MetroItem>
+        </MetroGrid>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-layout': () => import('~/components/launcher-layout').then(m => m.default || m),
-        'c-metro-grid': () => import('~/components/metro/grid').then(m => m.default || m),
-        'c-metro-item': () => import('~/components/metro/metro-item').then(m => m.default || m)
+        'Layout': () => import('@ericmuyser/hyper-ui').then(m => m.Layout),
+        'MetroGrid': () => import('@ericmuyser/hyper-ui').then(m => m.MetroGrid),
+        'MetroItem': () => import('@ericmuyser/hyper-ui').then(m => m.MetroItem)
     },
     data() {
         return {

@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <Layout>
         <div class="row">
             <div
                 v-if="successfulCreationMessage"
@@ -148,21 +148,21 @@
                             </div>
                         </div>
 
-                        <c-button @click="transferOwnership">
+                        <Button @click="transferOwnership">
                             Transfer
-                        </c-button>
+                        </Button>
                     </div>
                 </div>
             </div>
 
             <div class="col-12">
-                <c-heading-bar-color
+                <HeadingBarWithSimpleColor
                     class="mt-4 mb-4"
                     colorCode="#444"
                     textAlign="center"
                     hidden>
                     Advanced Options
-                </c-heading-bar-color>
+                </HeadingBarWithSimpleColor>
 
                 <div @click="toggleAdvanced">
                     <i
@@ -190,7 +190,7 @@
                         @input="updateProductRaw($event.target.value)" />
                     <br><br>
                     <span class="form-text" />
-                    <c-json-editor
+                    <JsonEditor
                         v-model="product"
                         :objData="product"
                         style="margin: 0 auto" />
@@ -198,13 +198,13 @@
             </div>
 
             <div class="col-md-12 margin-top-20">
-                <c-button
+                <Button
                     status="second-info"
                     size="lg"
                     class="mb-4"
                     @click="$store.commit('application/activeModal', 'import-product')">
                     Import
-                </c-button>
+                </Button>
             </div>
         </div>
 
@@ -213,29 +213,29 @@
                 <div
                     v-if="product.id && $access('editProducts')"
                     class="col-12 text-right">
-                    <c-button
+                    <Button
                         status="success"
                         size="lg"
                         icon="save"
                         @click="save">
                         Save
-                    </c-button>
+                    </Button>
                 </div>
                 <div
                     v-if="!product.id"
                     class="col-12 text-right">
-                    <c-button
+                    <Button
                         status="success"
                         size="lg"
                         icon="plus"
                         @click="create">
                         Create
-                    </c-button>
+                    </Button>
                 </div>
             </div>
         </template>
 
-        <c-basic-popup
+        <BasicPopup
             :activated="$store.state.application.activeModal === 'import-product'"
             @close="$store.commit('application/activeModal', null)">
             <div
@@ -252,31 +252,31 @@
                     <br>
                     <div class="row justify-content-center margin-bottom-50">
                         <div class="col-12 col-md-4 col-lg-3">
-                            <c-topic-item
+                            <TopicItem
                                 size="lg"
                                 icon="users"
                                 class="padding-10"
                                 @click="nextImportStep">
                                 BlockHub
-                            </c-topic-item>
+                            </TopicItem>
                         </div>
                         <div class="col-12 col-md-4 col-lg-3">
-                            <c-topic-item
+                            <TopicItem
                                 icon="users"
                                 size="lg"
                                 class="padding-10"
                                 @click="nextImportStep">
                                 GOG
-                            </c-topic-item>
+                            </TopicItem>
                         </div>
                         <div class="col-12 col-md-4 col-lg-3">
-                            <c-topic-item
+                            <TopicItem
                                 icon="users"
                                 size="lg"
                                 class="padding-10"
                                 @click="nextImportStep">
                                 Itch
-                            </c-topic-item>
+                            </TopicItem>
                         </div>
                     </div>
                     <br>
@@ -297,11 +297,11 @@
                         </div>
                     </div>
 
-                    <c-button
-                        class="c-button--lg outline-white margin-top-20 margin-auto"
+                    <Button
+                        class="Button--lg outline-white margin-top-20 margin-auto"
                         @click="startImport">
                         GO
-                    </c-button>
+                    </Button>
                 </div>
                 <br>
                 <div
@@ -316,24 +316,24 @@
             <p
                 slot="footer"
                 class="margin-top-20">
-                <c-button
+                <Button
                     status="dark"
                     to="/help">
                     Need help? Check the Help Center
-                </c-button>
+                </Button>
             </p>
-        </c-basic-popup>
-    </c-layout>
+        </BasicPopup>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
-        'c-html-editor': () => import('~/components/html-editor').then(m => m.default || m),
-        'c-json-editor': () => import('~/components/json-editor').then(m => m.default || m),
-        'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
-        'c-multiselect': () => import('vue-multiselect').then(m => m.default || m)
+        'Layout': () => import('@ericmuyser/hyper-ui').then(m => m.Layout),
+        'HtmlEditor': () => import('@ericmuyser/hyper-ui').then(m => m.HtmlEditor),
+        'JsonEditor': () => import('@ericmuyser/hyper-ui').then(m => m.JsonEditor),
+        'BasicPopup': () => import('@ericmuyser/hyper-ui').then(m => m.BasicPopup),
+        'Multiselect': () => import('vue-multiselect').then(m => m.default)
     },
     props: {
         id: [String, Number]

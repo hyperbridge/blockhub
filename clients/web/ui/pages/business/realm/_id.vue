@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <Layout>
         <div class="row">
             <div
                 v-if="notice"
@@ -43,7 +43,7 @@
                         <label>Tags</label>
                     </label>
                     <div class="col-sm-8">
-                        <c-multiselect
+                        <Multiselect
                             v-model="realm.tags"
                             tag-placeholder="Add this as new tag"
                             placeholder="Search or add a tag"
@@ -59,7 +59,7 @@
             </div>
 
             <div class="col-12">
-                <c-html-editor
+                <HtmlEditor
                     height="200"
                     :model.sync="realm.value" />
 
@@ -67,13 +67,13 @@
             </div>
 
             <div class="col-12">
-                <c-heading-bar-color
+                <HeadingBarWithSimpleColor
                     class="mt-4 mb-4"
                     colorCode="#444"
                     textAlign="center"
                     hidden>
                     Advanced Options
-                </c-heading-bar-color>
+                </HeadingBarWithSimpleColor>
 
                 <div @click="toggleAdvanced">
                     <i
@@ -115,7 +115,7 @@
                         @input="updateRealmRaw($event.target.value)" />
                     <br><br>
                     <span class="form-text" />
-                    <c-json-editor
+                    <JsonEditor
                         v-model="realm"
                         :objData="realm"
                         style="margin: 0 auto" />
@@ -128,43 +128,43 @@
                 <div
                     v-if="realm.id"
                     class="col-12 text-right">
-                    <c-button
+                    <Button
                         status="info"
                         :href="`/realm/${realm.id}`"
                         target="_blank"
                         icon="open">
                         View Page
-                    </c-button>
-                    <c-button
+                    </Button>
+                    <Button
                         status="success"
                         icon="save"
                         @click="save">
                         Save
-                    </c-button>
+                    </Button>
                 </div>
                 <div
                     v-if="!realm.id"
                     class="col-12 text-right">
-                    <c-button
+                    <Button
                         status="success"
                         size="md"
                         icon="plus"
                         @click="create">
                         Create
-                    </c-button>
+                    </Button>
                 </div>
             </div>
         </template>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
-        'c-html-editor': () => import('~/components/html-editor').then(m => m.default || m),
-        'c-json-editor': () => import('~/components/json-editor').then(m => m.default || m),
-        'c-multiselect': () => import('vue-multiselect').then(m => m.default || m)
+        'Layout': () => import('@ericmuyser/hyper-ui').then(m => m.Layout),
+        'HtmlEditor': () => import('@ericmuyser/hyper-ui').then(m => m.HtmlEditor),
+        'JsonEditor': () => import('@ericmuyser/hyper-ui').then(m => m.JsonEditor),
+        'Multiselect': () => import('vue-multiselect').then(m => m.default)
     },
     props: {
     },

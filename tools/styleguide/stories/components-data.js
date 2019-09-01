@@ -358,9 +358,9 @@ export const SendingFunds = {
     template: `
         <div class="row p-5">
             <div class="col-8">
-                <c-button @click="showModalHandler" status="warning" c_class="ml-1">Show Sending Funds Modal</c-button>
+                <Button @click="showModalHandler" status="warning" c_class="ml-1">Show Sending Funds Modal</Button>
 
-                <c-send-funds :activated="modalActive" @close="showModalHandler">
+                <SendFundsPopup :activated="modalActive" @close="showModalHandler">
                     <template slot="agreementText">
                         <h1>Terms and Conditions for <span class="highlight preview_company_name">BlockHub</span>
                             </h1>
@@ -525,7 +525,7 @@ export const SendingFunds = {
                                 of
                                 any disputes.</p>
                     </template>
-                </c-send-funds>
+                </SendFunds>
             </div>
         </div>
     `

@@ -1,6 +1,6 @@
 <template>
-    <c-layout navigationKey="settings">
-        <c-block
+    <Layout navigationKey="settings">
+        <Block
             class="margin-bottom-30"
             title="Protocol Settings"
             :noGutter="true"
@@ -68,25 +68,25 @@
                                                 <textarea
                                                     v-model="protocolData[protocol.id].data"
                                                     style="width: 100%; height: 300px;" />
-                                                <c-button
+                                                <Button
                                                     v-if="protocolData[protocol.id].visible"
                                                     @click="saveRawData(protocol.id)">
                                                     Save
-                                                </c-button>
-                                                <c-button
+                                                </Button>
+                                                <Button
                                                     v-if="protocolData[protocol.id].visible"
                                                     @click="toggleRawData(protocol.id)">
                                                     Hide
-                                                </c-button>
+                                                </Button>
                                             </div>
                                         </div>
                                     </td>
                                     <td style="background: rgba(255, 255, 255, 0.01);">
-                                        <c-button
+                                        <Button
                                             v-if="!protocolData[protocol.id].visible"
                                             @click="toggleRawData(protocol.id)">
                                             Raw
-                                        </c-button>
+                                        </Button>
                                     </td>
                                 </tr>
                                 <tr
@@ -156,8 +156,8 @@
                     </table>
                 </div>
             </div>
-        </c-block>
-    </c-layout>
+        </Block>
+    </Layout>
 </template>
 
 <script>

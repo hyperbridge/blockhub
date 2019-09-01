@@ -1,8 +1,8 @@
 <template>
-    <c-layout navigationKey="store">
+    <Layout navigationKey="store">
         <div class="row">
             <div class="col-12 mb-4">
-                <c-download-block />
+                <DownloadBlock />
             </div>
             <div class="col-12 col-md-4 margin-bottom-10">
                 <div class="card invert py-3">
@@ -47,8 +47,8 @@
                 </div>
             </div>
         </div>
-    </c-layout>
-    <!-- <c-layout navigationKey="store" :showLeftPanel="false" :showRightPanel="false">
+    </Layout>
+    <!-- <Layout navigationKey="store" :showLeftPanel="false" :showRightPanel="false">
 
         <div class="row download-pane block-1 align-items-center pb-5 justify-content-between">
             <div class="col-12 col-lg-5">
@@ -75,12 +75,12 @@
                         </ul>
                     </div>
                     <div class="Client-ctaWrapper mt-5">
-                        <c-button status="second-info" size="xl" class="w-100 mb-4">
+                        <Button status="second-info" size="xl" class="w-100 mb-4">
                             DOWNLOAD FOR MAC
-                        </c-button>
+                        </Button>
                         <center>
                             Also available for
-                            <c-button status="plain" class="p-0">Windows</c-button>
+                            <Button status="plain" class="p-0">Windows</Button>
                         </center>
                     </div>
                 </div>
@@ -88,14 +88,14 @@
             <div class="col-12 col-lg-7 pr-0">
                 <div class="download-pane__content Client-headerContent right">
                     <div class="download-pane__slider-wrapper">
-                        <c-swiper>
-                            <c-swiper-slide class="sl-item">
+                        <Swiper>
+                            <SwiperSlide class="sl-item">
                                 <img src="https://d9me64que7cqs.cloudfront.net/images/desktop/en-us/column01-phoenix-w2500-1e1f5af92ef1c70347bb35048f4481064f484cd25da063754b42a23c5457dba6a27781d6dcd419070ee68c655ff3f90b55fd737951647c118a01afeed8734d9a.png">
-                            </c-swiper-slide>
-                            <c-swiper-slide class="sl-item">
+                            </SwiperSlide>
+                            <SwiperSlide class="sl-item">
                                 <img src="https://d9me64que7cqs.cloudfront.net/images/desktop/en-us/column01-phoenix-w375-53a61c85c376f3cf9ecc26e7cf82de20a53e4b628b66fada9c4a3ddffef47ef0e868cc976e2ef7b70abeb0fb85511b197ada16bc72c5d080338ad712aa9c19b3.png" class="Client-poster hide-xs">
-                            </c-swiper-slide>
-                        </c-swiper>
+                            </SwiperSlide>
+                        </Swiper>
                     </div>
                 </div>
             </div>
@@ -202,16 +202,16 @@
                 </div>
             </div>
             <div class="col-12 col-lg-6 pr-0">
-                <c-swiper>
-                    <c-swiper-slide class="sl-item">
+                <Swiper>
+                    <SwiperSlide class="sl-item">
                         <img
                             src="https://d9me64que7cqs.cloudfront.net/images/desktop/en-us/column03-social-group-w1600-a90eabbe50d0f74cc1eddef10f46fcdc46b5f1b7bf2e876725b4bdbc6960f4ecbd2a1f91ca4c06d77edb067fee2897e7b84b48cd40bd28ee2e8b1467c9f84ff4.png"/>
-                    </c-swiper-slide>
-                    <c-swiper-slide class="sl-item">
+                    </SwiperSlide>
+                    <SwiperSlide class="sl-item">
                         <img
                             src="https://d9me64que7cqs.cloudfront.net/images/desktop/en-us/column03-social-friends-w1600-0526d990420bfc96c8027ba565ecec7aa2694a2ef67f55686e01792468d2ab53cfe33d55a2437b85f5ff43c7d32b3c0b909e809b861bc6c491f3159ad32a7911.png"/>
-                    </c-swiper-slide>
-                </c-swiper>
+                    </SwiperSlide>
+                </Swiper>
             </div>
         </div>
 
@@ -261,12 +261,12 @@
                 <div class="h4">
                     Download the BlockHub Desktop App. It’s your gateway to all things gaming.
                 </div>
-                <c-button status="second-info mt-5 mb-4" size="xl">
+                <Button status="second-info mt-5 mb-4" size="xl">
                     DOWNLOAD FOR PC
-                </c-button>
+                </Button>
                 <center>
                     Also available for
-                    <c-button status="plain" class="text-dark p-0">Windows</c-button>
+                    <Button status="plain" class="text-dark p-0">Windows</Button>
                 </center>
             </div>
         </div>
@@ -274,7 +274,7 @@
 
         <div class="row" hidden>
             <div class="col-12 mb-4">
-                <c-download-block/>
+                <DownloadBlock/>
             </div>
             <div class="col-12 col-md-4 margin-bottom-10">
                 <div class="card invert py-3">
@@ -319,7 +319,7 @@
                 </div>
             </div>
         </div>
-    </c-layout> -->
+    </Layout> -->
 </template>
 
 <script>
@@ -334,8 +334,7 @@ export default {
         }
     },
     components: {
-        'c-download-block': () => import('~/components/download-block').then(m => m.default || m),
-        'c-block-with-icon': () => import('~/components/block/with-icon').then(m => m.default || m)
+        'DownloadBlock': () => import('@ericmuyser/hyper-ui').then(m => m.DownloadBlock)
     },
     mounted() {
         if (process.client) {

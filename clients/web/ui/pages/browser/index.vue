@@ -1,7 +1,7 @@
 <template>
-    <c-layout navigationKey="store">
+    <Layout navigationKey="store">
         <p>Browser</p>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

@@ -17,18 +17,18 @@
                     </div>
                 </div>
                 <div>
-                    <c-button
+                    <Button
                         status="info"
                         iconHide
                         @click="$store.commit('application/activeModal', 'proposeIdea')">
                         Submit Idea
-                    </c-button>
+                    </Button>
                 </div>
             </div>
         </div>
 
         <div class="col-12">
-            <c-block
+            <Block
                 title="Top 3 Ideas"
                 :noGutter="true"
                 :bgGradient="true"
@@ -37,7 +37,7 @@
                     <div
                         v-if="projects.length"
                         class="col-12 col-md-6 col-lg-3">
-                        <c-project-card
+                        <ProjectCard
                             v-for="(project, index) in projects"
                             :key="index"
                             :id="project.id"
@@ -52,14 +52,14 @@
                     <div
                         v-else
                         class="col-12">
-                        Nothing could be found. Want to <c-button
+                        Nothing could be found. Want to <Button
                             status="plain"
                             @click="$store.commit('application/activeModal', 'comingSoon')">
                             Check for updates
-                        </c-button>?
+                        </Button>?
                     </div>
                 </div>
-            </c-block>
+            </Block>
         </div>
     </div>
 </template>
@@ -67,8 +67,8 @@
 <script>
 export default {
     components: {
-        'c-tags': () => import('~/components/tags').then(m => m.default || m),
-        'c-project-card': () => import('~/components/project/card').then(m => m.default || m)
+        'Tags': () => import('@ericmuyser/hyper-ui').then(m => m.Tags),
+        'ProjectCard': () => import('@ericmuyser/hyper-ui').then(m => m.ProjectCard)
     },
     props: ['product'],
     computed: {

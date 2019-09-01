@@ -1,10 +1,10 @@
 <template>
-    <c-layout navigationKey="meta">
+    <Layout navigationKey="meta">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="item-navigator">
-                        <c-navigator-item
+                        <NavigatorItem
                             v-for="(item, index) in deeplyNestedNav"
                             :key="index"
                             :index="index"
@@ -12,24 +12,24 @@
                             :listLength="item.evolvesTo.length" />
                     </div>
 
-                    <c-modal
+                    <Modal
                         v-if="activeId"
                         title="Select next asset to expand the tree"
                         @close="activeId = null">
-                        <c-assets
+                        <Assets
                             slot="body"
                             :assets="assetsArray"
                             @click="evolveNavigator($event.id)" />
-                    </c-modal>
+                    </Modal>
 
-                    <c-modal
+                    <Modal
                         v-if="deletingTree"
                         title="Delete asset from the tree"
                         @close="deletingTree = null">
                         <p class="text-align-center">
                             Are you sure to delete this assets tree?
                         </p>
-                        <c-navigator-item
+                        <NavigatorItem
                             v-for="(item, index) in deletingTree"
                             :key="index"
                             class="assets-tree--delete"
@@ -38,23 +38,23 @@
                             :listLength="item.evolvesTo.length"
                             hideButtons />
                         <div class="flex-center-between margin-top-50">
-                            <c-button
+                            <Button
                                 status="info"
                                 iconHide
                                 @click="deletingTree = null">
                                 Cancel
-                            </c-button>
-                            <c-button
+                            </Button>
+                            <Button
                                 status="success"
                                 @click="deleteTree(deletingTree[0].id)">
                                 Confirm
-                            </c-button>
+                            </Button>
                         </div>
-                    </c-modal>
+                    </Modal>
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -62,9 +62,9 @@
 
 export default {
     components: {
-        'c-navigator-item': () => import('~/components/item-navigator/item').then(m => m.default || m),
-        'c-modal': () => import('~/components/modal').then(m => m.default || m),
-        'c-assets': () => import('~/components/assets-grid-inventory').then(m => m.default || m)
+        'NavigatorItem': () => import('@ericmuyser/hyper-ui').then(m => m.NavigatorItem),
+        'Modal': () => import('@ericmuyser/hyper-ui').then(m => m.Modal),
+        'Assets': () => import('@ericmuyser/hyper-ui').then(m => m.Assets)
     },
     data() {
         return {

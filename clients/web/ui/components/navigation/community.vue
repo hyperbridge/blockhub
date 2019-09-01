@@ -1,6 +1,6 @@
 <template>
     <div class="navigation">
-        <c-sidebar-menu
+        <SidebarMenu
             title="COMMUNITY"
             :links="links.community" />
     </div>
@@ -9,7 +9,7 @@
 <script>
 export default {
     components: {
-        'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m)
+        'SidebarMenu': () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenu)
     },
     data() {
         return {

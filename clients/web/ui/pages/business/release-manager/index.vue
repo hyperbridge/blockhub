@@ -1,13 +1,13 @@
 <template>
-    <c-layout title="Release manager">
+    <Layout title="Release manager">
         Release manager
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-layout': () => import('~/components/business-layout').then(m => m.default || m)
+        'Layout': () => import('@ericmuyser/hyper-ui').then(m => m.Layout)
     },
     data() {
         return {

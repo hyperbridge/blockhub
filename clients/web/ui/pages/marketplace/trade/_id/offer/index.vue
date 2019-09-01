@@ -1,6 +1,6 @@
 <template>
     <article>
-        <c-block
+        <Block
             :title="`Trading with ${trx.contractor.name}`"
             class="transaction">
             <div class="transaction__block">
@@ -10,16 +10,16 @@
                 </div>
                 <div class="transaction__management">
                     <div class="management__selected-assets">
-                        <c-assets-grid
+                        <AsssetsGrid
                             class="management__assets-grid"
                             :assets="yoursOffer"
                             @click="handleArray($event, 'yoursOffer')" />
                     </div>
                     <div class="management__inventory-explorer">
-                        <c-list-submenu
+                        <List-submenu
                             :items="trx.you.inventoryGrouped"
                             isParent>
-                            <c-list-submenu
+                            <List-submenu
                                 slot="sublist"
                                 slot-scope="{ sublist }"
                                 :items="sublist">
@@ -27,7 +27,7 @@
                                     slot-scope="props"
                                     class="sublist-menu__assets">
                                     <!-- {{ Array.isArray(props.list) }} -->
-                                    <c-asset-preview-small
+                                    <AssetPreview-small
                                         slot="item-content"
                                         :asset="props.list"
                                         @click.native="yoursOffer.push(props.list)" />
@@ -35,60 +35,60 @@
                                     <!-- @click.native="yoursOffer.push(props.list)" -->
                                     <!-- {{ list.length > 1 ? list.length : '' }} -->
                                 </div>
-                            </c-list-submenu>
-                        </c-list-submenu>
+                            </List-submenu>
+                        </List-submenu>
                     </div>
                 </div>
             </div>
-            <c-exchange-bar
+            <ExchangeBar
                 :price="price"
                 :yours="yoursOffer.length"
                 :their="theirOffer.length" />
             <div class="transaction__block">
                 <div class="transaction__headings">
                     <h4>For {{ trx.contractor.name }}'s</h4>
-                    <c-author
+                    <Author
                         :name="trx.contractor.name"
                         :img="trx.contractor.img" />
                     <h4>{{ trx.contractor.name }}'s inventory</h4>
                 </div>
                 <div class="transaction__management">
                     <div class="management__selected-assets">
-                        <c-assets-grid
+                        <AsssetsGrid
                             class="management__assets-grid"
                             :assets="theirOffer"
                             @click="handleArray($event, 'theirOffer')" />
                     </div>
                     <div class="management__inventory-explorer">
-                        <c-list-submenu
+                        <List-submenu
                             :items="trx.contractor.inventoryGrouped"
                             isParent>
-                            <c-list-submenu
+                            <List-submenu
                                 slot="sublist"
                                 slot-scope="{ sublist }"
                                 :items="sublist">
                                 <div
                                     slot-scope="props"
                                     class="sublist-menu__assets">
-                                    <c-asset-preview-small
+                                    <AssetPreview-small
                                         slot="item-content"
                                         :asset="props.list"
                                         @click.native="theirOffer.push(props.list)" />
                                 </div>
-                            </c-list-submenu>
-                        </c-list-submenu>
+                            </List-submenu>
+                        </List-submenu>
                     </div>
                 </div>
             </div>
             <div class="transaction__actions">
-                <c-button
+                <Button
                     status="info"
                     iconHide
                     @click="updateTrx()">
                     Update transaction
-                </c-button>
+                </Button>
             </div>
-        </c-block>
+        </Block>
     </article>
 </template>
 
@@ -98,17 +98,17 @@ import { handleArray } from '@/mixins'
 
 export default {
     components: {
-        'c-block': () => import('~/components/block').then(m => m.default || m),
-        'c-block-menu': () => import('~/components/block/menu').then(m => m.default || m),
-        'c-list': () => import('~/components/list').then(m => m.default || m),
-        'c-list-submenu': () => import('~/components/list-submenu').then(m => m.default || m),
-        'c-list-submenu-2': () => import('~/components/list-submenu/v2').then(m => m.default || m),
-        'c-tooltip': () => import('~/components/tooltips/universal').then(m => m.default || m),
-        'c-asset-preview': () => import('~/components/asset-preview').then(m => m.default || m),
-        'c-asset-preview-small': () => import('~/components/asset-preview/small').then(m => m.default || m),
-        'c-exchange-bar': () => import('~/components/exchange-bar').then(m => m.default || m),
-        'c-author': () => import('~/components/author').then(m => m.default || m),
-        'c-assets-grid': () => import('~/components/assets-grid-inventory').then(m => m.default || m)
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
+        'Block-menu': () => import('@ericmuyser/hyper-ui').then(m => m.Block-menu),
+        'List': () => import('@ericmuyser/hyper-ui').then(m => m.List),
+        'List-submenu': () => import('@ericmuyser/hyper-ui').then(m => m.List-submenu),
+        'List-submenu-2': () => import('@ericmuyser/hyper-ui').then(m => m.List-submenu-2),
+        'Tooltip': () => import('@ericmuyser/hyper-ui').then(m => m.Tooltip),
+        'AssetPreview': () => import('@ericmuyser/hyper-ui').then(m => m.AssetPreview),
+        'AssetPreview-small': () => import('@ericmuyser/hyper-ui').then(m => m.AssetPreview-small),
+        'ExchangeBar': () => import('@ericmuyser/hyper-ui').then(m => m.ExchangeBar),
+        'Author': () => import('@ericmuyser/hyper-ui').then(m => m.Author),
+        'AsssetsGrid': () => import('@ericmuyser/hyper-ui').then(m => m.AsssetsGrid)
     },
     mixins: [handleArray],
     data() {

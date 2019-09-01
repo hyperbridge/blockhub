@@ -1,8 +1,8 @@
 <template>
-    <c-layout navigationKey="account">
+    <Layout navigationKey="account">
         <div class="row">
             <div class="col-12 mb-5">
-                <c-block title="Thanks for your order!">
+                <Block title="Thanks for your order!">
                     <div class="order-info">
                         <div class="order-info__number">
                             Order #23543422234234234
@@ -11,13 +11,13 @@
                             Order date: Dec 8, 2019 3:50 PM
                         </div>
                     </div>
-                    <c-table-simple class="mt-5">
+                    <SimpleTable class="mt-5">
                         <thead>
                             <tr>
                                 <th v-for="(field, idx) in tableHead" :key="`thead-${idx}`">
                                     {{ field.label }}
                                 </th>
-                                <th width="60"></th>
+                                <th width="60"/>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,14 +26,14 @@
                                     {{ field }}
                                 </td>
                                 <td>
-                                    <c-button status="second-info">
+                                    <Button status="second-info">
                                         Open
-                                    </c-button>
+                                    </Button>
                                 </td>
                             </tr>
                         </tbody>
-                    </c-table-simple>
-                </c-block>
+                    </SimpleTable>
+                </Block>
             </div>
             <div class="col-12 col-lg-3 d-flex flex-column">
                 <div class="h5">
@@ -99,7 +99,7 @@
                         $0.00
                     </span>
                 </div>
-                <hr />
+                <hr >
                 <div class="h3 d-flex justify-content-between">
                     <span>
                         Order Total
@@ -109,60 +109,60 @@
                     </span>
                 </div>
                 <div class="w-100 mt-5">
-                    <c-button status="second-success" class="w-100">
+                    <Button status="second-success" class="w-100">
                         Submit
-                    </c-button>
+                    </Button>
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
-    export default {
-        components: {
-            'c-table-simple': () => import('~/components/table-simple').then(m => m.default || m),
-        },
-        props: {
-            id: String
-        },
-        data(){
-            return{
-                tableHead:[
-                    {
-                        label: 'Purchased Assets',
-                        key: 'first'
-                    },
-                    {
-                        label: 'Price',
-                        key: 'second'
-                    },
-                    {
-                        label: 'QTy',
-                        key: 'third'
-                    },
-                    {
-                        label: 'Total',
-                        key: 'four'
-                    },
-                ],
-                tableRows: [
-                    {
-                        first: 'POLYART - Stylized Sky Dungean',
-                        third: '$9.99',
-                        second: 'x1',
-                        last: '$7.99',
-                    },
-                    {
-                        first: 'Archimatix Pro',
-                        third: '$19.99',
-                        second: 'x1',
-                        last: '$27.99',
-                    },
-                ]
-            }
+export default {
+    components: {
+        'SimpleTable': () => import('@ericmuyser/hyper-ui').then(m => m.SimpleTable)
+    },
+    props: {
+        id: String
+    },
+    data() {
+        return {
+            tableHead: [
+                {
+                    label: 'Purchased Assets',
+                    key: 'first'
+                },
+                {
+                    label: 'Price',
+                    key: 'second'
+                },
+                {
+                    label: 'QTy',
+                    key: 'third'
+                },
+                {
+                    label: 'Total',
+                    key: 'four'
+                }
+            ],
+            tableRows: [
+                {
+                    first: 'POLYART - Stylized Sky Dungean',
+                    third: '$9.99',
+                    second: 'x1',
+                    last: '$7.99'
+                },
+                {
+                    first: 'Archimatix Pro',
+                    third: '$19.99',
+                    second: 'x1',
+                    last: '$27.99'
+                }
+            ]
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

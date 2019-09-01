@@ -1,6 +1,6 @@
 <template>
-    <c-layout>
-        <c-block
+    <Layout>
+        <Block
             title="Vote Form"
             noGutter
             :bgColor="false">
@@ -43,12 +43,12 @@
                 </div>
                 <div v-if="selectObject && selectObjectId" class="invert">
                     <div class="form-group">
-                        <c-vote ref="myVote" :votes="0" @getVote="getVote" />
+                        <Vote ref="myVote" :votes="0" @getVote="getVote" />
                     </div>
                 </div>
             </div>
-        </c-block>
-    </c-layout>
+        </Block>
+    </Layout>
 </template>
 <script>
 export default {
@@ -58,7 +58,7 @@ export default {
         }
     },
     components: {
-        'c-vote': () => import('~/components/vote').then(m => m.default || m)
+        'Vote': () => import('@ericmuyser/hyper-ui').then(m => m.Vote)
     },
     data() {
         return {

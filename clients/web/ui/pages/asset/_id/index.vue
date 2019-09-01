@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="asset">
+    <Layout navigationKey="asset">
         <div class="container-fluid">
             <div
                 v-if="!asset"
@@ -15,7 +15,7 @@
                     <div class="asset-head">
                         <div class="asset-head__asset-title">
                             <div class="title-thumb">
-                                <c-img
+                                <Img
                                     :src="asset.image" />
                             </div>
                             <div class="title-text">
@@ -69,19 +69,19 @@
                 </div>
                 <div class="col-12 d-none d-lg-block col-lg-4 col-xl-3 margin-bottom-15">
                     <div class="asset-head__company-logo">
-                        <c-img
+                        <Img
                             src="https://i.imgur.com/BngHC98.png"
                             class="img-fluid" />
                     </div>
                 </div>
 
-                <c-model-obj
+                <ModelObj
                     src="../../static/assets-3d/sylvanas/Sylvanas.obj"
                     mtl="../../static/assets-3d/sylvanas/Sylvanas.mtl"
                     :backgroundAlpha="0" />
 
                 <div class="col-12 col-lg-6 margin-top-15 margin-bottom-15">
-                    <c-block
+                    <Block
                         title="Attributes"
                         class="h-100"
                         :noGutter="true"
@@ -125,11 +125,11 @@
                                 </div>
                             </div>
                         </div>
-                    </c-block>
+                    </Block>
                 </div>
 
                 <div class="col-12 col-lg-6 margin-top-15 margin-bottom-15">
-                    <c-block
+                    <Block
                         title="Sales"
                         class="h-100"
                         noGutter
@@ -152,11 +152,11 @@
                         <p v-else>
                             Nothing to show for now
                         </p>
-                    </c-block>
+                    </Block>
                 </div>
 
                 <div class="col-12 margin-top-15 margin-bottom-15">
-                    <c-block
+                    <Block
                         title="Offers"
                         class="padding-bottom-0"
                         noGutter
@@ -164,14 +164,14 @@
                         bgGradient
                         showActions>
                         <template slot="additional-action">
-                            <c-heading-bar-fields
+                            <HeadingBarFields
                                 name="Rarity"
                                 icon="trophy" />
-                            <c-heading-bar-fields
+                            <HeadingBarFields
                                 name="Value"
                                 icon="dollar" />
                         </template>
-                        <c-content-navigation
+                        <ContentNavigation
                             :items="asset.offersList"
                             :setLimits="4">
                             <div
@@ -182,7 +182,7 @@
                                     :key="index"
                                     class="list-item">
                                     <div class="item-name-img">
-                                        <c-img :src="item.image" />
+                                        <Img :src="item.image" />
                                         <h4>{{ item.name }}</h4>
                                     </div>
                                     <div class="item-company text-center">
@@ -199,7 +199,7 @@
                                             v-if="item.price.current"
                                             href="#"
                                             class="btn btn-success float-right">
-                                            <c-icon name="cart-plus" />
+                                            <Icon name="cart-plus" />
                                             Proceed to Purchase
                                         </a>
                                     </div>
@@ -225,18 +225,18 @@
                                     <i class="fas fa-bookmark" />
                                 </a>
                             </template>
-                        </c-content-navigation>
-                    </c-block>
+                        </ContentNavigation>
+                    </Block>
                 </div>
 
                 <div class="col-12 margin-top-15 margin-bottom-15">
-                    <c-block
+                    <Block
                         class="padding-bottom-0"
                         title="Yours Inventory"
                         noGutter
                         onlyContentBg
                         bgGradient>
-                        <c-content-navigation
+                        <ContentNavigation
                             :items="asset.inventoryList"
                             :setLimits="4">
                             <div
@@ -246,13 +246,13 @@
                                     v-for="(item, index) in props.items"
                                     :key="index"
                                     class="item">
-                                    <c-button
+                                    <Button
                                         status="plain"
                                         @click="openPopup(item)">
                                         <i class="fas fa-external-link-alt" />
-                                    </c-button>
+                                    </Button>
                                     <div class="item_thumb">
-                                        <c-img :src="item.image" />
+                                        <Img :src="item.image" />
                                     </div>
                                     <div class="item_info">
                                         <h5>{{ item.name }}</h5>
@@ -260,7 +260,7 @@
                                             $ {{ item.price.current }}
                                         </span>
                                         <div class="switcher">
-                                            <c-switch
+                                            <Toggle
                                                 label="Accept offers"
                                                 :checked="item.acceptOffers"
                                                 size="sm"
@@ -276,18 +276,18 @@
                                     </div>
                                 </div>
                             </div>
-                        </c-content-navigation>
-                    </c-block>
+                        </ContentNavigation>
+                    </Block>
                 </div>
 
                 <div class="col-12 margin-top-15 margin-bottom-15">
-                    <c-block
+                    <Block
                         title="Collections Containing this Item"
                         class="pb-0"
                         noGutter
                         onlyContentBg
                         bgGradient>
-                        <c-content-navigation
+                        <ContentNavigation
                             v-if="asset.collections.length"
                             :items="asset.collections"
                             :setLimits="3">
@@ -298,26 +298,26 @@
                                     v-for="(item, index) in props.items"
                                     :key="index"
                                     class="item">
-                                    <c-collection-item :item="item" />
+                                    <CollectionItem :item="item" />
                                 </div>
                             </div>
-                        </c-content-navigation>
+                        </ContentNavigation>
                         <p v-else>
                             Nothing to show for now
                         </p>
-                    </c-block>
+                    </Block>
                 </div>
             </div>
         </div>
-        <c-popup
+        <Popup
             :activated="show_popup"
             :width="550"
             @close="closePopup">
-            <c-asset-popup
+            <AssetPopup
                 slot="customContent"
                 :asset="tmpItem" />
-        </c-popup>
-    </c-layout>
+        </Popup>
+    </Layout>
 </template>
 
 <script>
@@ -334,14 +334,12 @@ export default {
         }
     },
     components: {
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-        'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
-        'c-pagination': () => import('~/components/pagination/index').then(m => m.default || m),
-        'c-collection-item': () => import('~/components/collection/item').then(m => m.default || m),
-        'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-asset-popup': () => import('~/components/asset-overview-popup').then(m => m.default || m),
-        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-        'c-model-obj': ModelObj
+        'HeadingBarFields': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBarFields),
+        'CollectionItem': () => import('@ericmuyser/hyper-ui').then(m => m.CollectionItem),
+        'Popup': () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
+        'AssetPopup': () => import('@ericmuyser/hyper-ui').then(m => m.AssetPopup),
+        'ContentNavigation': () => import('@ericmuyser/hyper-ui').then(m => m.ContentNavigation),
+        ModelObj
     },
     data() {
         return {

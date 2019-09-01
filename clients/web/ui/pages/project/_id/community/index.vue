@@ -13,14 +13,14 @@
             v-if="posts.length"
             class="col-12">
             <div v-if="community1">
-                <c-item
+                <DiscussionItem
                     v-for="(post, index) in posts"
                     :key="index"
                     :post="post" />
             </div>
 
             <div v-else-if="community2">
-                <c-item :post="post" />
+                <DiscussionItem :post="post" />
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
 
 export default {
     components: {
-        'c-item': () => import('~/components/community/post-item').then(m => m.default || m)
+        'DiscussionItem': () => import('@ericmuyser/hyper-ui').then(m => m.DiscussionItem)
     },
 
     props: ['project', 'editing'],

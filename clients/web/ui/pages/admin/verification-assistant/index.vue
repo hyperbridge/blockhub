@@ -1,5 +1,5 @@
 <template>
-    <c-layout
+    <Layout
         :showLeftPanel="false"
         :showRightPanel="false">
         <div class="row">
@@ -20,9 +20,9 @@
                         type="text"
                         class="form-control"
                         placeholder="Enter Google Sheet URL...">
-                    <c-button @click="fetchData">
+                    <Button @click="fetchData">
                         Update
-                    </c-button>
+                    </Button>
                 </div>
                 <div>
                     <div
@@ -32,15 +32,15 @@
                         class="col-md-4 entry">
                         <div class="content">
                             <p>{{ entry.gsx$address.$t }} : {{ entry.gsx$amount.$t }}</p>
-                            <c-button @click="whitelist(entry.gsx$address.$t)">
+                            <Button @click="whitelist(entry.gsx$address.$t)">
                                 Whitelist
-                            </c-button>
+                            </Button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <style>

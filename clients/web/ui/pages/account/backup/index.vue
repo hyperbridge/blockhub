@@ -1,8 +1,8 @@
 <template>
-    <c-layout navigationKey="account">
+    <Layout navigationKey="account">
         <div class="row">
             <div class="col-12">
-                <c-block
+                <Block
                     title="Account Backup"
                     class="margin-bottom-30"
                     :noGutter="true"
@@ -12,23 +12,23 @@
                         <div
                             class="topics-list col-3"
                             @click="exportAccountFile">
-                            <c-topic-item
+                            <TopicItem
                                 icon="fas fa-save"
                                 class="padding-10">
                                 Download File
-                            </c-topic-item>
+                            </TopicItem>
                         </div>
                     </div>
-                </c-block>
+                </Block>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m)
+        'TopicItem': () => import('@ericmuyser/hyper-ui').then(m => m.TopicItem)
     },
     methods: {
         exportAccountFile() {

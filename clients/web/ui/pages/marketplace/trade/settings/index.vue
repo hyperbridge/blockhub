@@ -4,19 +4,19 @@
             <h3>Your trade URL</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             <div class="trade-settings__url-form">
-                <c-icon name="copy" />
-                <c-input
+                <Icon name="copy" />
+                <Input
                     class="trade-settings__url-input"
                     :value="tradeURL"
                     readonly
                     @click="copyTradeURL()" />
             </div>
-            <c-button
+            <Button
                 status="info"
                 iconHide
                 @click="$store.dispatch('application/createTradeUrl')">
                 Generate new trade URL
-            </c-button>
+            </Button>
         </section>
         <!-- <button @click="storeTest()">
             Commit/Dispatch create
@@ -26,8 +26,8 @@
             :value="val"
             @input="updateVal"
         />
-        <c-test v-debounce:customClick="method"/>
-        <c-test @customClick="debounce(() => add++)"/>
+        <Test v-debounce:customClick="method"/>
+        <Test @customClick="debounce(() => add++)"/>
         {{ add }}
         <button
             @click="$emit('testEvent')"
@@ -42,7 +42,7 @@ import { debounce } from '@/mixins'
 
 export default {
     components: {
-        'c-test': () => import('~/components/test').then(m => m.default || m)
+        'Test': () => import('@ericmuyser/hyper-ui').then(m => m.Test)
     },
     mixins: [debounce],
     data: () => ({ val: 'm', timeout: null, add: 0 }),

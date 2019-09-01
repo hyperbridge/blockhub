@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <Layout>
         <div class="row align-items-center margin-bottom-30 margin-top-20">
             <div class="col-12 col-md-6 text-left">
                 <div class="h2">
@@ -16,7 +16,7 @@
         </div>
         <div class="row align-items-center">
             <div class="col-12">
-                <c-block
+                <Block
                     title="Purchase List"
                     :bgColor="false"
                     noGutter
@@ -24,7 +24,7 @@
                     onlyContentBg
                     noPadding>
                     <div class="padding-bottom-30 padding-top-15">
-                        <c-table-simple stripped>
+                        <SimpleTable stripped>
                             <thead>
                                 <tr class="text-uppercase">
                                     <th>
@@ -150,12 +150,12 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </c-table-simple>
+                        </SimpleTable>
                     </div>
-                </c-block>
+                </Block>
             </div>
             <div class="col-12">
-                <c-block
+                <Block
                     title="Totals"
                     :bgColor="false"
                     noGutter
@@ -163,7 +163,7 @@
                     onlyContentBg
                     noPadding>
                     <div class="padding-bottom-30 padding-top-15">
-                        <c-table-simple stripped>
+                        <SimpleTable stripped>
                             <tbody>
                                 <tr>
                                     <td>
@@ -196,12 +196,12 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </c-table-simple>
+                        </SimpleTable>
                     </div>
-                </c-block>
+                </Block>
             </div>
             <div class="col-12">
-                <c-block
+                <Block
                     title="Recipients"
                     :bgColor="false"
                     noGutter
@@ -209,7 +209,7 @@
                     onlyContentBg
                     noPadding>
                     <div class="padding-bottom-30 padding-top-15">
-                        <c-table-simple stripped>
+                        <SimpleTable stripped>
                             <thead>
                                 <tr class="text-uppercase">
                                     <th>
@@ -246,18 +246,18 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </c-table-simple>
+                        </SimpleTable>
                     </div>
-                </c-block>
+                </Block>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-table-simple': () => import('~/components/table-simple').then(m => m.default || m)
+        'SimpleTable': () => import('@ericmuyser/hyper-ui').then(m => m.SimpleTable)
     },
     props: []
 }

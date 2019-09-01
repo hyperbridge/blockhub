@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="wallet">
+    <Layout navigationKey="wallet">
         <div class="row">
             <div
                 v-if="!wallet"
@@ -12,14 +12,14 @@
                 {{ wallet.name }}
                 {{ wallet.id }}
                 <br>
-                <c-button
+                <Button
                     status="none"
                     :to="`/wallet/${wallet.id}/transactions`">
                     Transactions
-                </c-button>
+                </Button>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 
@@ -32,11 +32,11 @@ export default {
             return this.$route.params.id
         },
         wallet() {
-            if (!this.$store.state.application.wallets) { return }
+            if (!this.$store.state.application.wallets) return
 
             const wallet = this.$store.state.application.wallets[this.id]
 
-            if (!wallet) { return }
+            if (!wallet) return
 
             return wallet
         }

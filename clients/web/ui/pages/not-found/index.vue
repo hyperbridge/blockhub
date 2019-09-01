@@ -1,7 +1,7 @@
 <template>
-    <c-layout navigationKey="help">
-        <c-broken-page :isError="errorData" />
-    </c-layout>
+    <Layout navigationKey="help">
+        <BrokenPage :isError="errorData" />
+    </Layout>
 </template>
 
 
@@ -17,7 +17,7 @@ export default {
         }
     },
     components: {
-        'c-broken-page': () => import('~/components/broken-page').then(m => m.default || m)
+        'BrokenPage': () => import('@ericmuyser/hyper-ui').then(m => m.BrokenPage)
     },
     asyncData({ res }) {
         if (res) {

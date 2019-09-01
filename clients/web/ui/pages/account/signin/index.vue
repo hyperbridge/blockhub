@@ -1,5 +1,5 @@
 <template>
-    <c-layout
+    <Layout
         navigationKey="account"
         :showLeftPanel="false"
         :showRightPanel="false"
@@ -28,12 +28,12 @@
                                 Sign In
                             </div>
 
-                            <c-button
+                            <Button
                                 status="outline-success"
                                 size="lg"
                                 @click="importAccountFile">
                                 Import Account
-                            </c-button>
+                            </Button>
                         </div>
                     </div>
                 </div>
@@ -78,14 +78,14 @@
                                     <a href="#" class="btn btn-success" @click="signIn()">Go</a>
                                 </div>
                             </div>
-                                        <c-button @click="exportAccountFile">Download Account File</c-button>
-                                        <c-button @click="importAccountFile">Import Account File</c-button>
+                                        <Button @click="exportAccountFile">Download Account File</Button>
+                                        <Button @click="importAccountFile">Import Account File</Button>
                         </div>
                     </div>
                 </div>
             </div>
         </div> -->
-    </c-layout>
+    </Layout>
 </template>
 
 

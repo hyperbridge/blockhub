@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <Layout>
         <div class="row">
             <div class="col-12">
                 <div class="search-block">
@@ -323,7 +323,7 @@
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

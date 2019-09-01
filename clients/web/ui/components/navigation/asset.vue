@@ -1,10 +1,10 @@
 <template>
     <div class="navigation">
-        <c-sidebar-menu
+        <SidebarMenu
             title="ASSET MANAGER"
             mClass="margin-bottom-20"
             :links="links.assetManager" />
-        <c-sidebar-menu
+        <SidebarMenu
             subTitle="Help"
             mClass="margin-bottom-20"
             subIcon="fas fa-question-circle"
@@ -15,9 +15,7 @@
 <script>
 export default {
     components: {
-        'c-sidebar-menu-link': () => import('~/components/sidebar-menu/menu-item').then(m => m.default || m),
-        'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m),
-        'c-searcher': () => import('~/components/searcher').then(m => m.default || m)
+        'SidebarMenu': () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenu)
     },
     data() {
         return {

@@ -1,5 +1,5 @@
 <template>
-    <c-layout
+    <Layout
         navigationKey="project"
         :showLeftPanel="false"
         :showRightPanel="false"
@@ -11,7 +11,7 @@
             <!-- <div class="col-12">
                 Project not found
             </div> -->
-            <c-loading
+            <Loading
                 :enabled="!project"
                 size="lg" />
         </div>
@@ -89,7 +89,7 @@
                                     <!--</option>-->
                                     <!--</select>-->
 
-                                    <c-multiselect
+                                    <Multiselect
                                         v-model="project.tags"
                                         class="dark-mode"
                                         :multiple="true"
@@ -105,13 +105,13 @@
                                 </div>
                             </div>
 
-                            <c-tags
+                            <Tags
                                 v-if="project.tags && (!editing || !activeElement['tags'])"
                                 :tags="project.tags.map(t => t.value)" />
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
-                        <c-badges :icons="project.meta.badges || []" />
+                        <Badges :icons="project.meta.badges || []" />
                     </div>
                     <div class="col-12 col-md-4">
                         <div
@@ -181,7 +181,7 @@
                         </div>
                     </div>
                 </div>
-                <c-button
+                <Button
                     status="dark"
                     class="w-100 d-flex d-md-none justify-content-center my-4"
                     size="lg"
@@ -190,7 +190,7 @@
                     aria-expanded="false"
                     aria-controls="project_nav">
                     Menu
-                </c-button>
+                </Button>
                 <div
                     id="project_nav"
                     class="collapse show project_nav">
@@ -214,9 +214,9 @@
                                 class="nav-link"
                                 :class="{ 'active': section === 'community' }">
                                 Community
-                                <c-updates-count v-access="'updateCounter'">
+                                <UpdatesCount v-access="'updateCounter'">
                                     0
-                                </c-updates-count>
+                                </UpdatesCount>
                             </nuxt-link>
                         </li>
                         <li
@@ -238,9 +238,9 @@
                                 class="nav-link"
                                 :class="{ 'active': section === 'updates' }">
                                 Updates
-                                <c-updates-count v-access="'updateCounter'">
+                                <UpdatesCount v-access="'updateCounter'">
                                     0
-                                </c-updates-count>
+                                </UpdatesCount>
                             </nuxt-link>
                         </li>
                         <li
@@ -269,7 +269,7 @@
                     id="configure"
                     class="row"
                     :editing="editing">
-                    <c-block title="Campaign">
+                    <Block title="Campaign">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
@@ -434,7 +434,7 @@
                                 <i class="fas first-order" />
                             </div>
                         </div>
-                    </c-block>
+                    </Block>
                 </div>
             </div>
 
@@ -473,26 +473,24 @@
                 </transition>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
-import * as DB from '@/db'
-
 export default {
     components: {
-        'c-tags': () => import('~/components/tags').then(m => m.default || m),
-        'c-badges': () => import('~/components/project/badges').then(m => m.default || m),
-        'c-rating-block': () => import('~/components/rating-block').then(m => m.default || m),
-        'c-project-overview': () => import('~/pages/project/_id/overview').then(m => m.default || m),
-        'c-project-milestones': () => import('~/pages/project/_id/milestones').then(m => m.default || m),
-        'c-project-discussion': () => import('~/pages/project/_id/discussion').then(m => m.default || m),
-        'c-project-contributors': () => import('~/pages/project/_id/contributors').then(m => m.default || m),
-        'c-project-community': () => import('~/pages/project/_id/community').then(m => m.default || m),
-        'c-project-bounties': () => import('~/pages/project/_id/bounties').then(m => m.default || m),
-        'c-project-updates': () => import('~/pages/project/_id/updates').then(m => m.default || m),
-        'c-updates-count': () => import('~/components/project/updates-count').then(m => m.default || m),
-        'c-multiselect': () => import('vue-multiselect').then(m => m.default || m)
+        'Tags': () => import('@ericmuyser/hyper-ui').then(m => m.Tags),
+        'Badges': () => import('@ericmuyser/hyper-ui').then(m => m.Badges),
+        'RatingBlock': () => import('@ericmuyser/hyper-ui').then(m => m.RatingBlock),
+        'c-project-overview': () => import('~/pages/project/_id/overview').then(m => m.default),
+        'c-project-milestones': () => import('~/pages/project/_id/milestones').then(m => m.default),
+        'c-project-discussion': () => import('~/pages/project/_id/discussion').then(m => m.default),
+        'c-project-contributors': () => import('~/pages/project/_id/contributors').then(m => m.default),
+        'c-project-community': () => import('~/pages/project/_id/community').then(m => m.default),
+        'c-project-bounties': () => import('~/pages/project/_id/bounties').then(m => m.default),
+        'c-project-updates': () => import('~/pages/project/_id/updates').then(m => m.default),
+        'UpdatesCount': () => import('@ericmuyser/hyper-ui').then(m => m.UpdatesCount),
+        'Multiselect': () => import('vue-multiselect').then(m => m.default)
     },
     data() {
         return {

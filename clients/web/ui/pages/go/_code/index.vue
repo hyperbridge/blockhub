@@ -1,5 +1,5 @@
 <template>
-    <c-layout
+    <Layout
         :showLeftPanel="false"
         :showRightPanel="false">
         <div class="container-fluid">
@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

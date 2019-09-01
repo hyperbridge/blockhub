@@ -55,7 +55,7 @@
         <div
             v-if="idea.rating"
             class="col-12 col-lg-4 col-xl-4">
-            <c-rating-block
+            <RatingBlock
                 v-access="'rating.read'"
                 class="margin-bottom-20"
                 :items="[{ name: 'General', value: idea.rating.value }]"
@@ -67,8 +67,8 @@
 <script>
 export default {
     components: {
-        'c-rating-block': () => import('~/components/rating-block').then(m => m.default || m),
-        'c-item': () => import('~/components/community/post-item').then(m => m.default || m)
+        'RatingBlock': () => import('@ericmuyser/hyper-ui').then(m => m.RatingBlock),
+        'DiscussionItem': () => import('@ericmuyser/hyper-ui').then(m => m.DiscussionItem)
     },
     props: ['idea', 'editing', 'activeElement'],
     data() {

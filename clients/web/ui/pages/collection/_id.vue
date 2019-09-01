@@ -1,9 +1,9 @@
 <template>
-    <c-layout navigationKey="collection" :breadcrumbLinks="breadcrumbLinks">
+    <Layout navigationKey="collection" :breadcrumbLinks="breadcrumbLinks">
         <div class="row">
             <div class="col-12 margin-bottom-40">
                 <div class="collection-header">
-                    <c-loading size="lg" :enabled="!collection" />
+                    <Loading size="lg" :enabled="!collection" />
                     <div class="collection-header__name" v-if="collection">
                         <div class="p-0 margin-bottom-5 h1 text-white">
                             {{ collection.name }}
@@ -46,8 +46,8 @@
                 </div>
             </div>
             <div class="col-12">
-                <c-block>
-                    <c-heading-bar name="Items" />
+                <Block>
+                    <HeadingBar name="Items" />
                     <div class="d-flex justify-content-between align-items-center margin-bottom-20">
                         <div class="filter-block form-inline">
                             <div class="form-group">
@@ -81,39 +81,39 @@
                                     class="form-control">
                             </div>
                             <div class="form-group">
-                                <c-button
+                                <Button
                                     status="danger"
                                     class="mr-4"
                                     icon="times">
                                     Clear
-                                </c-button>
-                                <c-button
+                                </Button>
+                                <Button
                                     hidden
                                     status="info"
                                     icon="filter">
                                     More filters
-                                </c-button>
+                                </Button>
                             </div>
                         </div>
                         <div class="d-inline-flex">
-                            <c-heading-bar-fields
+                            <HeadingBarFields
                                 name="Rarity"
                                 icon="fas fa-trophy" />
-                            <c-heading-bar-fields
+                            <HeadingBarFields
                                 name="Value"
                                 icon="fas fa-dollar" />
                         </div>
                     </div>
-                    <c-loading size="lg" :enabled="!collection" />
+                    <Loading size="lg" :enabled="!collection" />
                     <div v-for="resource in collection.resources" v-if="collection">
                         {{ resource.id }}
                     </div>
-                    <c-assets-grid :list="collection.resources" v-if="collection" />
-                    <c-pagination :pages="8" />
-                </c-block>
+                    <AsssetsGrid :list="collection.resources" v-if="collection" />
+                    <Pagination :pages="8" />
+                </Block>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -132,10 +132,10 @@ export default {
         }
     },
     components: {
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-        'c-heading-bar-fields': () => import('~/components/heading-bar/additional-action').then(m => m.default || m),
-        'c-pagination': () => import('~/components/pagination').then(m => m.default || m),
-        'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m)
+        'HeadingBar': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar),
+        'HeadingBarFields': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBarFields),
+        'Pagination': () => import('@ericmuyser/hyper-ui').then(m => m.Pagination),
+        'AsssetsGrid': () => import('@ericmuyser/hyper-ui').then(m => m.AsssetsGrid)
     },
     computed: {
         id() {

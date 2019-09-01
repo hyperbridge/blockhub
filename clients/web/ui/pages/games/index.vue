@@ -1,26 +1,26 @@
 <template>
-    <c-layout navigationKey="store">
-        <c-block
+    <Layout navigationKey="store">
+        <Block
             :noGutter="true"
             :bgGradient="true"
             :onlyContentBg="true">
-            <c-heading-bar
+            <HeadingBar
                 slot="title"
                 class="mb-0"
                 name="Browse All Games"
                 :showArrows="games.length > 4" />
             <div class="row">
-                <c-loading
+                <Loading
                     :enabled="loading"
                     size="lg" />
                 <p v-if="!loading && !games.length">
-                    Nothing could be found. Want to <c-button
+                    Nothing could be found. Want to <Button
                         status="plain"
                         @click="$store.commit('application/activeModal', 'comingSoon')">
                         Check for updates
-                    </c-button>?
+                    </Button>?
                 </p>
-                <c-game-card
+                <GameCard
                     v-for="(game, index) in games"
                     :id="game.id"
                     :key="index"
@@ -32,16 +32,15 @@
                     :parentDeveloper="game.product && game.product.developer"
                     :parentImage="game.product && game.product.meta && game.product.meta.images && game.product.meta.images.mediumTile" />
             </div>
-        </c-block>
+        </Block>
 
-        <c-infinite-content :list="list" />
-    </c-layout>
+        <InfiniteContent :list="list" />
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-game-card': () => import('~/components/game-card').then(m => m.default || m)
     },
     data() {
         return {

@@ -13,7 +13,7 @@
                     You offered
                 </div>
                 <div class="trade-offer__assets">
-                    <c-asset
+                    <Asset
                         v-for="(asset, index) in trx.yourOffer"
                         :key="index"
                         :asset="asset"
@@ -37,7 +37,7 @@
                     For {{ trx.contractor.name }}'s
                 </div>
                 <div class="trade-offer__assets">
-                    <c-asset
+                    <Asset
                         v-for="(asset, index) in trx.contractorOffer"
                         :key="index"
                         :asset="asset"
@@ -52,7 +52,7 @@
 
 export default {
     components: {
-        'c-asset': () => import('~/components/assets-grid-inventory/asset').then(m => m.default || m)
+        'Asset': () => import('@ericmuyser/hyper-ui').then(m => m.Asset)
     },
     computed: {
         transactions() {

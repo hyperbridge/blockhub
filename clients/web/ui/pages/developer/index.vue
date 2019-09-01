@@ -1,44 +1,44 @@
 <template>
-    <c-layout navigationKey="store">
+    <Layout navigationKey="store">
         <div class="row">
             <div class="col-12">
-                <c-block
+                <Block
                     title="Learn more"
                     class="margin-bottom-30"
                     :noGutter="true"
                     :bgGradient="true"
                     :onlyContentBg="true">
                     Learn
-                </c-block>
+                </Block>
             </div>
             <div class="col-12">
-                <c-block
+                <Block
                     title="FAQ"
                     class="margin-bottom-30"
                     :noGutter="true"
                     :bgGradient="true"
                     :onlyContentBg="true">
                     FAQ
-                </c-block>
+                </Block>
             </div>
             <div class="col-12">
-                <c-block
+                <Block
                     title="Apply"
                     class="margin-bottom-30"
                     :noGutter="true"
                     :bgGradient="true"
                     :onlyContentBg="true">
                     Apply
-                </c-block>
+                </Block>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-topic-item': () => import('~/components/help/topic-item').then(m => m.default || m)
+        'TopicItem': () => import('@ericmuyser/hyper-ui').then(m => m.TopicItem)
     }
 }
 </script>

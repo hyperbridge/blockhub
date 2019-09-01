@@ -3,21 +3,21 @@
         <p v-if="!trx">
             Transaction with id <i>{{ id }}</i> doesn't exist
         </p>
-        <c-block-menu
+        <Block-menu
             v-else
             :links="links">
             <router-view
                 :id="id"
                 :trxa="trx"
                 :trx="trx" />
-        </c-block-menu>
+        </Block-menu>
     </div>
 </template>
 
 <script>
 export default {
     components: {
-        'c-block-menu': () => import('~/components/block/menu').then(m => m.default || m)
+        'Block-menu': () => import('@ericmuyser/hyper-ui').then(m => m.Block-menu)
     },
     data() {
         return {

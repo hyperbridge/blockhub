@@ -2,12 +2,12 @@ export default [
     {
         path: '/',
         name: 'Home',
-        component: () => import('~/pages/home').then(m => m.default || m)
+        component: () => import('~/pages/home').then(m => m.default)
     },
     {
         path: "*",
         name: 'Not Found',
-        component: () => import('~/pages/not-found').then(m => m.default || m)
+        component: () => import('~/pages/not-found').then(m => m.default)
     },
     // Internal
     { path: '/go/faucet', beforeEnter(to, from, next) { window.location = 'https://crypto.in5mins.com/faucet' } },

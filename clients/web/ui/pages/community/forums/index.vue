@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="store">
+    <Layout navigationKey="store">
         <div class="container-fluid">
             <div class="row margin-bottom-50">
                 <div
@@ -20,43 +20,43 @@
                     <p><strong>BlockHub Community</strong> allows you to engage with other gamers and the game developers for an enhanced community-driven gaming experience. You can ask questions on technical issues, post your feedback on the gameplay, and suggest improvements to the game. </p>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <c-block
+                    <Block
                         title="Links &amp; Resources"
                         :noGutter="true"
                         :onlyContentBg="true">
                         <div class="d-flex flex-column">
-                            <c-search class="mb-2" />
-                            <c-button
+                            <Search class="mb-2" />
+                            <Button
                                 status="plain"
                                 class="my-1">
                                 <i class="fas fa-info-circle" /> View Discussion Guidelines
-                            </c-button>
-                            <c-button
+                            </Button>
+                            <Button
                                 status="plain"
                                 class="my-1">
                                 <i class="fas fa-info-circle" /> Discussion Rules
-                            </c-button>
-                            <c-button
+                            </Button>
+                            <Button
                                 status="plain"
                                 class="my-1">
                                 <i class="fas fa-question-circle" /> FAQ
-                            </c-button>
-                            <c-button
+                            </Button>
+                            <Button
                                 status="success"
                                 icon="plus"
                                 class="margin-top-20"
                                 style="margin-right: auto"
                                 @click="$store.commit('application/activeModal', 'newDiscussion')">
                                 New discussion
-                            </c-button>
+                            </Button>
                         </div>
-                    </c-block>
+                    </Block>
                 </div>
             </div>
-            <c-block
+            <Block
                 :noGutter="true"
                 :onlyContentBg="true">
-                <c-heading-bar
+                <HeadingBar
                     slot="title"
                     class="mb-0"
                     :headingTabs="[
@@ -78,7 +78,7 @@
                             Discussions
                         </div>
                     </div>
-                    <c-community-forum
+                    <CommunityForum
                         v-for="(forum, index) in forums"
                         :id="forum.id"
                         :key="index"
@@ -87,17 +87,17 @@
                         :lastPostTime="forum.meta.lastPostTime"
                         :discussionsCount="Number(forum.meta.discussionsCount)" />
                 </div>
-            </c-block>
+            </Block>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-        'c-community-forum': () => import('~/components/community/forum-item').then(m => m.default || m),
-        'c-search': () => import('~/components/searcher').then(m => m.default || m)
+        'HeadingBar': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar),
+        'CommunityForum': () => import('@ericmuyser/hyper-ui').then(m => m.CommunityForum),
+        'Search': () => import('@ericmuyser/hyper-ui').then(m => m.Search)
     },
     data() {
         return {

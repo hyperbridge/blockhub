@@ -1,6 +1,6 @@
 <template>
-    <c-layout :breadcrumbLinks="breadcrumbLinks">
-        <c-user-head />
+    <Layout :breadcrumbLinks="breadcrumbLinks">
+        <UserHead />
         <div class="row justify-content-between align-items-center">
             <div class="col-12 d-flex margin-top-30 justify-content-end">
                 <div class="profile__wallet">
@@ -8,51 +8,51 @@
                     <span id="walletNumber">{{ profile && profile.address }}</span>
                 </div>
                 <div class="profile__action-group">
-                    <c-button
+                    <Button
                         status="info"
                         icon="arrow-up"
                         @click="showSendPopup">
                         Send
-                    </c-button>
-                    <c-button
+                    </Button>
+                    <Button
                         v-access="'sharing'"
                         status="share">
                         Share
-                    </c-button>
-                    <c-button
+                    </Button>
+                    <Button
                         v-access="'reporting'"
                         status="danger">
                         Report
-                    </c-button>
+                    </Button>
                 </div>
             </div>
             <div
                 v-if="!signedIn && !$store.state.application.settings.client.hideProfileSignup"
                 class="col-12">
-                <c-block class="profile__user-notify">
-                    <c-button
+                <Block class="profile__user-notify">
+                    <Button
                         class="btn-close"
                         @click="$store.commit('application/updateClientSettings', { key: 'hideProfileSignup', value: true })">
                         <i class="fas fa-times" />
-                    </c-button>
+                    </Button>
                     <h3>Create your BlockHub Profile</h3>
                     <p>
                         BlockHub is the best place for curated community-driven game development,
                         digital assets and micro-licensing. Sugn up for your own account and build
                         the future of gaming.
                     </p>
-                    <c-button
+                    <Button
                         status="success"
                         size="lg"
                         iconHide
                         to="/download">
                         Sign Up
-                    </c-button>
-                </c-block>
+                    </Button>
+                </Block>
             </div>
             <div class="col-12 margin-top-40">
-                <c-block class="badges2">
-                    <c-heading-bar
+                <Block class="badges2">
+                    <HeadingBar
                         name="Badges"
                         :showArrows="false"
                         :showBackground="false">
@@ -63,7 +63,7 @@
                                 Trust
                                 <i class="fas fa-hand-holding-heart" />
                             </div>
-                            <c-button-arrows />
+                            <ButtonArrows />
                         </div>
                         <div
                             slot="additional-action"
@@ -72,38 +72,38 @@
                                 Rating
                                 <i class="fas fa-trophy" />
                             </div>
-                            <c-button-arrows />
+                            <ButtonArrows />
                         </div>
-                    </c-heading-bar>
+                    </HeadingBar>
                     <div class="badges2__list">
                         <div
                             v-for="(badge, index) in badges"
                             :key="index"
                             class="badges2__item">
                             <div class="img">
-                                <c-img :src="badge.img" />
+                                <Img :src="badge.img" />
                             </div>
                             <h3>{{ badge.title }}</h3>
                             <p>{{ badge.product }}</p>
                         </div>
                     </div>
-                    <c-content-navigation />
-                </c-block>
+                    <ContentNavigation />
+                </Block>
             </div>
             <div class="col-12 margin-top-40">
-                <c-block class="featured-assets">
-                    <c-heading-bar
+                <Block class="featured-assets">
+                    <HeadingBar
                         name="Featured Assets"
                         :showArrows="false"
                         :showBackground="false" />
 
-                    <c-featured-assets />
+                    <FeaturedAssets />
 
-                    <c-content-navigation />
-                </c-block>
+                    <ContentNavigation />
+                </Block>
             </div>
             <div class="col-12 margin-top-40">
-                <c-block title="Badges">
+                <Block title="Badges">
                     <div class="identity-page__description margin-bottom-30">
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed laoreet arcu nec tortor consectetur
@@ -133,11 +133,11 @@
                             </li>
                         </ul>
                     </div>
-                </c-block>
+                </Block>
             </div>
             <div class="col-12 margin-top-40">
-                <c-block class="assets">
-                    <c-heading-bar
+                <Block class="assets">
+                    <HeadingBar
                         name="Assets"
                         :showArrows="false"
                         :showBackground="false">
@@ -148,7 +148,7 @@
                                 Value
                                 <i class="fas fa-dollar-sign" />
                             </div>
-                            <c-button-arrows />
+                            <ButtonArrows />
                         </div>
                         <div
                             slot="additional-action"
@@ -157,19 +157,19 @@
                                 Rating
                                 <i class="fas fa-trophy" />
                             </div>
-                            <c-button-arrows />
+                            <ButtonArrows />
                         </div>
-                    </c-heading-bar>
+                    </HeadingBar>
 
-                    <c-assets-grid />
+                    <AsssetsGrid />
 
-                    <c-content-navigation />
-                </c-block>
+                    <ContentNavigation />
+                </Block>
             </div>
 
             <div class="col-12 margin-top-40">
-                <c-block class="games-list">
-                    <c-heading-bar
+                <Block class="games-list">
+                    <HeadingBar
                         name="Games"
                         :showArrows="false"
                         :showBackground="false">
@@ -180,7 +180,7 @@
                                 Price
                                 <i class="fas fa-dollar-sign" />
                             </div>
-                            <c-button-arrows />
+                            <ButtonArrows />
                         </div>
                         <div
                             slot="additional-action"
@@ -189,7 +189,7 @@
                                 Play Time
                                 <i class="fas fa-clock" />
                             </div>
-                            <c-button-arrows />
+                            <ButtonArrows />
                         </div>
                         <div
                             slot="additional-action"
@@ -198,16 +198,16 @@
                                 Purchase Date
                                 <i class="fas fa-calendar" />
                             </div>
-                            <c-button-arrows />
+                            <ButtonArrows />
                         </div>
-                    </c-heading-bar>
+                    </HeadingBar>
                     <div class="games-list__grid">
                         <div
                             v-for="(game, index) in games"
                             :key="index"
                             class="games-list__grid-item">
                             <div class="img">
-                                <c-img :src="game.img" />
+                                <Img :src="game.img" />
                             </div>
                             <div class="info">
                                 <h4>{{ game.title }}</h4>
@@ -219,14 +219,14 @@
                             </div>
                         </div>
                     </div>
-                    <c-content-navigation />
-                </c-block>
+                    <ContentNavigation />
+                </Block>
             </div>
 
             <div class="col-12 margin-top-40 margin-bottom-40">
-                <c-block class="profile__user-notify-card">
+                <Block class="profile__user-notify-card">
                     <div>
-                        <c-user-card />
+                        <UserCard />
                     </div>
                     <div
                         v-if="!signedIn"
@@ -237,40 +237,40 @@
                             digital assets and micro-licensing. Sign up for your own account and build
                             the future of gaming.
                         </p>
-                        <c-button
+                        <Button
                             to="/download"
                             status="success"
                             size="lg"
                             iconHide>
                             Sign Up
-                        </c-button>
+                        </Button>
                     </div>
-                </c-block>
+                </Block>
             </div>
         </div>
         <div class="row align-items-stretch">
             <div class="col-12 col-md-4">
-                <c-block class="basic-info">
-                    <c-heading-bar
+                <Block class="basic-info">
+                    <HeadingBar
                         name="Basic Information"
                         :showArrows="false"
                         :showBackground="false" />
-                </c-block>
+                </Block>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-        'c-assets-grid': () => import('~/components/assets-grid').then(m => m.default || m),
-        'c-featured-assets': () => import('~/components/assets-list-item/featured-list').then(m => m.default || m),
-        'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
-        'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m),
-        'c-user-head': () => import('~/components/user/header').then(m => m.default || m)
+        'HeadingBar': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar),
+        'ContentNavigation': () => import('@ericmuyser/hyper-ui').then(m => m.ContentNavigation),
+        'AsssetsGrid': () => import('@ericmuyser/hyper-ui').then(m => m.AsssetsGrid),
+        'FeaturedAssets': () => import('@ericmuyser/hyper-ui').then(m => m.FeaturedAssets),
+        'UserCard': () => import('@ericmuyser/hyper-ui').then(m => m.UserCard),
+        'ButtonArrows': () => import('@ericmuyser/hyper-ui').then(m => m.ButtonArrows),
+        'UserHead': () => import('@ericmuyser/hyper-ui').then(m => m.UserHead)
     },
     data() {
         return {

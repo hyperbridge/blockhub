@@ -1,16 +1,16 @@
 <template>
     <div id="app" :class="{ 'disable-animations': !disableAnimations }">
-        <c-render-condition :type="renderCondition">
+        <RenderCondition :type="renderCondition">
             <div v-if="nuxtError">
-                <c-error-page :isError="nuxtError" />
+                <ErrorPage :isError="nuxtError" />
             </div>
             <div v-else>
                 <router-view />
             </div>
-        </c-render-condition>
+        </RenderCondition>
 
         <no-ssr>
-            <c-drawer />
+            <Drawer />
             <vue-snotify />
         </no-ssr>
 
@@ -59,9 +59,9 @@ import * as Mousetrap from 'mousetrap'
 
 export default {
     components: {
-        'c-error-page': () => import('~/pages/error').then(m => m.default || m),
-        'c-render-condition': () => import('~/components/render-condition').then(m => m.default || m),
-        'c-drawer': () => import('~/components/drawer').then(m => m.default || m)
+        'ErrorPage': () => import('~/pages/error').then(m => m.default),
+        'RenderCondition': () => import('@ericmuyser/hyper-ui').then(m => m.RenderCondition),
+        'Drawer': () => import('@ericmuyser/hyper-ui').then(m => m.Drawer)
     },
     data() {
         const nuxtError = this.$nuxt.nuxt.err

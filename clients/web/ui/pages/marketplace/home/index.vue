@@ -3,20 +3,20 @@
         <h2 class="text-align-center margin-bottom-10">
             Picks of the week
         </h2>
-        <!-- <carousel-3d-v2 :items="assets">
+        <!-- <Carousel3dv2 :items="assets">
             <template slot-scope="props">
-                <c-asset-store-card
+                <AssetStoreCard
                     v-for="item in props.items" :key="item.id"
                     :asset="item"
                 />
             </template>
-        </carousel-3d-v2> -->
+        </Carousel3dv2> -->
         <div class="carousel-wrapper">
-            <c-carousel-3d
+            <Carousel3d
                 :items="assets"
                 :limitTo="3">
                 <!-- <transition-group name="simple" class="carousel-3d__content" tag="div" slot-scope="props">
-                    <c-asset-store-card
+                    <AssetStoreCard
                         v-for="(item, index) in props.items"
                         :class="props.css[index]"
                         :key="item.id"
@@ -29,7 +29,7 @@
                         :key="item.id"
                         :class="props.css[index]"
                         :to="`/marketplace/asset/${item.id}`">
-                        <c-asset-store-card
+                        <AssetStoreCard
                             v-for="(item) in props.items"
                             :key="item.id"
                             :class="item.css"
@@ -39,41 +39,41 @@
                             :assetImage="item.image" />
                     </nuxt-link>
                 </template>
-            </c-carousel-3d>
+            </Carousel3d>
         </div>
-        <c-block
+        <Block
             title="Recently sold"
             class="margin-bottom-40">
-            <c-asset-list
+            <AssetList
                 :assets="recentlySold"
                 :transition="true" />
-        </c-block>
-        <c-block
+        </Block>
+        <Block
             title="Explore available assets"
             noGutter
             onlyContentBg
             bgGradient>
-            <c-content-navigation
+            <ContentNavigation
                 :items="assets"
                 class="assets-block">
-                <c-asset-list
+                <AssetList
                     slot-scope="props"
                     :assets="props.items" />
-            </c-content-navigation>
-        </c-block>
+            </ContentNavigation>
+        </Block>
     </div>
 </template>
 
 <script>
 export default {
     components: {
-        'c-asset-preview': () => import('~/components/asset/preview-basic').then(m => m.default || m),
-        'c-asset-list': () => import('~/components/asset/list').then(m => m.default || m),
-        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-        'c-block': () => import('~/components/block/index').then(m => m.default || m),
-        'c-asset-store-card': () => import('~/components/asset/store-card').then(m => m.default || m),
-        'c-carousel-3d': () => import('~/components/carousel-3d').then(m => m.default || m),
-        'carousel-3d-v2': () => import('~/components/carousel-3d/v2').then(m => m.default || m)
+        'AssetPreview': () => import('@ericmuyser/hyper-ui').then(m => m.AssetPreview),
+        'AssetList': () => import('@ericmuyser/hyper-ui').then(m => m.AssetList),
+        'ContentNavigation': () => import('@ericmuyser/hyper-ui').then(m => m.ContentNavigation),
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
+        'AssetStoreCard': () => import('@ericmuyser/hyper-ui').then(m => m.AssetStoreCard),
+        'Carousel3d': () => import('@ericmuyser/hyper-ui').then(m => m.Carousel3d),
+        'Carousel3dv2': () => import('@ericmuyser/hyper-ui').then(m => m.Carousel3dv2)
     },
     data() {
         return {

@@ -1,22 +1,22 @@
 <template>
-    <c-layout>
+    <Layout>
         <div class="row">
             <div
                 class="col-12"
                 style="text-align: center">
                 <br>
                 <br>
-                <c-button
+                <Button
                     status="second-info"
                     size="lg"
                     href="https://goo.gl/forms/B298WnvTy7TdYAd53">
                     Redeem Code (200 HBX)
-                </c-button>
+                </Button>
                 <br><br>
                 <p>We will contact you when the platform has officially launched.</p>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

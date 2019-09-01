@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <Layout>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-8">
@@ -19,7 +19,7 @@
                             <label>Your text</label>
                         </div>
                         <div class="col-sm-9 col-lg-10">
-                            <c-text-editor
+                            <TextEditor
                                 v-model="text"
                                 :editorToolbar="customToolbar" />
                         </div>
@@ -33,7 +33,7 @@
                                     class="drop-active">
                                     <h3>Drop files to upload</h3>
                                 </div>
-                                <c-file-upload
+                                <FileUpload
                                     ref="upload"
                                     v-model="files"
                                     :multiple="true"
@@ -45,14 +45,14 @@
                                     <div class="file-upload__select-file">
                                         Attach files by dragging & dropping or click here.
                                     </div>
-                                </c-file-upload>
-                                <c-notification-inline
+                                </FileUpload>
+                                <Notification-inline
                                     v-if="wrongFormat"
                                     type="danger"
                                     class="my-3"
                                     size="sm">
                                     Wrong file format
-                                </c-notification-inline>
+                                </Notification-inline>
                                 <ul
                                     v-if="files.length"
                                     class="file-upload__files-list">
@@ -72,7 +72,7 @@
                                         <span
                                             v-else-if="file.active"
                                             class="upload-status">
-                                            <c-loading-bar-circle />
+                                            <LoadingBarCircle />
                                         </span>
                                         <span class="file-name">{{ file.name }}</span>
                                         <span class="file-size">
@@ -103,32 +103,32 @@
                     <div class="form-group row align-items-center">
                         <div class="col-sm-3 col-lg-2" />
                         <div class="col-sm-9 col-lg-10">
-                            <c-button
+                            <Button
                                 status="success"
                                 iconHide>
                                 Publish release
-                            </c-button>
-                            <c-button
+                            </Button>
+                            <Button
                                 status="danger"
                                 iconHide
                                 class="mx-3">
                                 Save draft
-                            </c-button>
+                            </Button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 
 export default {
     components: {
-        'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
-        'c-loading-bar-circle': () => import('~/components/loading-bar/circle').then(m => m.default || m),
-        'c-notification-inline': () => import('~/components/notification/inline').then(m => m.default || m)
+        'Layout': () => import('@ericmuyser/hyper-ui').then(m => m.Layout),
+        'LoadingBarCircle': () => import('@ericmuyser/hyper-ui').then(m => m.LoadingBarCircle),
+        'Notification-inline': () => import('@ericmuyser/hyper-ui').then(m => m.Notification-inline)
     },
     data() {
         return {

@@ -1,11 +1,11 @@
 <template>
-    <c-layout navigationKey="store">
+    <Layout navigationKey="store">
         <div class="row">
             <div class="col-12">
                 About Company
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

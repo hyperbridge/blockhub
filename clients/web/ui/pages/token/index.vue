@@ -1,8 +1,8 @@
 <template>
-    <c-layout navigationKey="store">
+    <Layout navigationKey="store">
         <div class="row">
             <div class="col-12 margin-bottom-30">
-                <!-- <c-token-sale
+                <!-- <TokenSale
                     class="margin-bottom-30"
                     :hardCap="18500000"
                     :softCap="400000"
@@ -11,7 +11,7 @@
                     :soldTokens="soldTokens"
                     @purchase="scrollMeTo('purchase')"
                 /> -->
-                <c-block
+                <Block
                     class="margin-bottom-30"
                     hidden>
                     <div class="d-flex justify-content-between align-items-center padding-10">
@@ -23,19 +23,19 @@
                                 Don't miss exclusive splash sale on nov 15, 16, 17! Only for 20k+ HBX holders!
                             </div>
                         </div>
-                        <c-button
+                        <Button
                             size="lg"
                             status="success"
                             iconHide>
                             Purchase 20k+ HBX
-                        </c-button>
+                        </Button>
                     </div>
-                </c-block>
+                </Block>
 
-                <c-block>
+                <Block>
                     <div class="d-flex justify-content-between align-items-center padding-10">
                         <div>
-                            <c-img
+                            <Img
                                 src="/img/hyperbridge-logo_brand-color-h.png"
                                 style="height: 50px"
                                 alt="Hyperbridge" />
@@ -43,7 +43,7 @@
                         <div class="h4 px-4 m-0 w-auto font-weight-light">
                             BlockHub and HBX are brought to you by Hyperbridge. We build technology for a crowdfunded world.
                         </div>
-                        <c-button
+                        <Button
                             href="https://hyperbridge.org/"
                             size="lg"
                             status="info"
@@ -51,20 +51,20 @@
                             target="_blank"
                             hidden>
                             Learn more
-                        </c-button>
+                        </Button>
                     </div>
-                </c-block>
+                </Block>
             </div>
             <div class="col-12 col-md-6 mb-4">
-                <c-block>
+                <Block>
                     <h2>What is HBX?</h2>
                     <div>
-                        Built by <c-button
+                        Built by <Button
                             status="underline"
                             size="md"
                             href="https://hyperbridge.org">
                             Hyperbridge
-                        </c-button>, HBX tokens are used to fuel the decentralized protocols underlying window.BlockHub.
+                        </Button>, HBX tokens are used to fuel the decentralized protocols underlying window.BlockHub.
                         BlockHub is the first economy built on these protocols, designed to let players and game developers productively interact in mutually beneficial ways.
                         HBX tokens can be purchased or received by:
                         <br><br>
@@ -80,11 +80,11 @@
                     <div
                         class="carousel-wrapper margin-auto margin-top-20 margin-bottom-20"
                         style="zoom: 0.7">
-                        <c-carousel-3d
+                        <Carousel3d
                             :items="[assets[0]]"
                             :limitTo="1">
                             <template v-slot="props">
-                                <c-asset-store-card
+                                <AssetStoreCard
                                     v-for="(item) in props.items"
                                     :key="item.id"
                                     :class="item.css"
@@ -93,13 +93,13 @@
                                     :assetTags="item.tags"
                                     :assetImage="item.image" />
                             </template>
-                        </c-carousel-3d>
+                        </Carousel3d>
                     </div>
                     <p>HBX is available for purachse at $0.055 USD each.</p>
-                </c-block>
+                </Block>
             </div>
             <div class="col-12 col-md-6">
-                <c-block>
+                <Block>
                     <h2>What can HBX be used for?</h2>
                     <div>
                         <ul>
@@ -110,23 +110,23 @@
                             <li>Running promotions within BlockHub</li>
                         </ul>
                         <br>
-                        For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees by 50%. To learn more, please see the <c-button
+                        For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees by 50%. To learn more, please see the <Button
                             status="underline"
                             size="md"
                             href="https://hyperbridge.org/whitepaper"
                             target="_blank">
                             White Paper
-                        </c-button>.
+                        </Button>.
                         <br><br>
                     </div>
                     <div
                         class="carousel-wrapper margin-auto margin-top-20 margin-bottom-20"
                         style="zoom: 0.7">
-                        <c-carousel-3d
+                        <Carousel3d
                             :items="[assets[1], assets[2]]"
                             :limitTo="2">
                             <template v-slot="props">
-                                <c-asset-store-card
+                                <AssetStoreCard
                                     v-for="(item) in props.items"
                                     v-if="props.items"
                                     :key="item.id"
@@ -136,14 +136,14 @@
                                     :assetTags="item.tags"
                                     :assetImage="item.image" />
                             </template>
-                        </c-carousel-3d>
+                        </Carousel3d>
                     </div>
                     <p>
                         Purchasers will be rewarded the exclusive Voyager Badge and Master Sword (<a
                             href="http://erc721.org/"
                             target="_blank">ERC-721 NFTs</a>). These unique items will be some of the first items tradeable within our upcoming games &amp; marketplace.
                     </p>
-                </c-block>
+                </Block>
             </div>
         </div>
 
@@ -162,7 +162,7 @@
             class=""
             style="text-align: center; width: 100%"
             hidden>
-            <c-welcome-box />
+            <WelcomeBox />
             <br><br>
         </div>
 
@@ -204,19 +204,19 @@
                 </p>
 
                 <br><br>
-                <c-button
-                    class="c-button--lg "
+                <Button
+                    class="Button--lg "
                     href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
                     @click="gaStep(1)">
                     Install MetaMask to Purchase Tokens
-                </c-button>
+                </Button>
                 <br><br>
-                <c-button
+                <Button
                     status="underline"
                     size="sm"
                     @click="showContractAddress">
                     Click here if you just want the contract address
-                </c-button>
+                </Button>
                 <br><br>
             </div>
 
@@ -224,7 +224,7 @@
                 v-if="ethereumConnected && !ethereumUnlocked"
                 class="col-12"
                 hidden>
-                <c-welcome-box />
+                <WelcomeBox />
             </div>
 
             <div
@@ -245,18 +245,18 @@
 
                 <br>
                 <br>
-                <c-button
-                    class="c-button--lg "
+                <Button
+                    class="Button--lg "
                     @click="unlockWallet">
                     Unlock Wallet
-                </c-button>
+                </Button>
                 <br><br>
-                <c-button
+                <Button
                     status="underline"
                     size="sm"
                     @click="showContractAddress">
                     Click here if you just want the contract address
-                </c-button>
+                </Button>
                 <br><br>
             </div>
 
@@ -280,7 +280,7 @@
                 <div
                     v-if="ethereumConnected && ethereumUnlocked"
                     class="col-12 col-md-6">
-                    <c-block
+                    <Block
                         title="Purchase"
                         class="margin-bottom-30">
                         <p>Each HBX token is <strong>${{ tokenPriceUSD }}</strong>, and can be purchased with ETH at the current price of <strong>{{ (1/ETH2USD).toString().slice(0, 6) }} ETH</strong> per HBX <em>(Based on a locked conversion of ${{ ETH2USD }} USD per 1 ETH)</em>.</p>
@@ -314,47 +314,47 @@
                                 readonly>
                         </div>
                         <strong>Note:</strong> Maximum purchase amount is {{ (maxPurchaseUSD / ETH2USD).toString().slice(0, 3) }} ETH (${{ maxPurchaseUSD }} USD equivalent).
-                    </c-block>
+                    </Block>
                 </div>
 
                 <div
                     v-if="ethereumConnected && ethereumUnlocked && desktopMode"
                     class="col-12 col-md-6">
-                    <c-block
+                    <Block
                         title="Payment"
                         class="margin-bottom-30">
                         <div class="profile-picker">
-                            <c-swiper :options="profileOptions">
-                                <c-swiper-slide
+                            <Swiper :options="profileOptions">
+                                <SwiperSlide
                                     v-for="profile in profiles"
                                     :key="profile.id">
                                     <div
                                         v-if="profiles && profiles.length"
                                         class="profile-picker__profile w-100 m-0 padding-15 pb-0">
-                                        <c-user-card
+                                        <UserCard
                                             :user="profile"
                                             :previewMode="true"
                                             :class="{ 'default': activeProfile && profile.id == activeProfile.id }" />
                                         <div class="profile__action">
-                                            <c-button
+                                            <Button
                                                 v-if="!activeProfile || profile.id != activeProfile.id"
                                                 status="info"
                                                 icon="check"
                                                 @click="chooseProfile(profile)">
                                                 Choose
-                                            </c-button>
+                                            </Button>
                                         </div>
                                     </div>
-                                </c-swiper-slide>
-                            </c-swiper>
+                                </SwiperSlide>
+                            </Swiper>
                         </div>
-                    </c-block>
+                    </Block>
                 </div>
 
                 <div
                     v-if="ethereumConnected && ethereumUnlocked && !desktopMode"
                     class="col-12 col-md-6">
-                    <c-block
+                    <Block
                         title="Payment Profile"
                         class="margin-bottom-30">
                         <p>Your Ethereum address:</p>
@@ -372,15 +372,15 @@
                                 placeholder="Public Ethereum address....">
                         </div>
                         <p hidden>
-                            Haven't verified yet? You'll need to do that! <c-button
+                            Haven't verified yet? You'll need to do that! <Button
                                 class=""
                                 to="/account/verification"
                                 style="margin: 0 auto"
                                 @click="gaStep(5)">
                                 Verify Account
-                            </c-button>
+                            </Button>
                         </p>
-                    </c-block>
+                    </Block>
                 </div>
 
                 <!-- <div class="col-12 text-center alert alert-info" v-if="!desktopMode">
@@ -397,20 +397,20 @@
                         Oops, you haven't verified your account yet. <br>You'll need to do this to purchase.
                     </h2>
                     <br>
-                    <c-button
-                        class="c-button--lg"
+                    <Button
+                        class="Button--lg"
                         to="/account/verification"
                         style="margin: 0 auto"
                         @click="gaStep(6)">
                         Verify Account
-                    </c-button>
+                    </Button>
                     <br><br>
-                    <c-button
+                    <Button
                         status="underline"
                         size="sm"
                         @click="manualOverride">
                         Click here if you're pretty sure you've verified
-                    </c-button>
+                    </Button>
                     <br><br>
                 </div>
 
@@ -861,29 +861,29 @@
                             </div>
                         </div>
 
-                        <c-checkbox
+                        <Checkbox
                             id="tokenSaleAgreement"
                             v-model="tokenSaleAgreement"
                             :checked="false"
                             type="square">
                             I confirm that I understand and agree with the terms of the Purchase Agreement.
-                        </c-checkbox>
+                        </Checkbox>
 
-                        <c-checkbox
+                        <Checkbox
                             id="jurisdictionAgreement"
                             v-model="jurisdictionAgreement"
                             :checked="false"
                             type="square">
                             I confirm that I am not a resident of any jurisdiction that forbids token purchases.
-                        </c-checkbox>
+                        </Checkbox>
 
-                        <c-checkbox
+                        <Checkbox
                             id="residentAgreement"
                             v-model="residentAgreement"
                             :checked="false"
                             type="square">
                             I confirm that I am not a resident of China, United States, or Canada.
-                        </c-checkbox>
+                        </Checkbox>
                     </div>
 
                     <div class="col-8 offset-2">
@@ -901,7 +901,7 @@
                         </div>
 
                         <br><br>
-                        <c-button
+                        <Button
                             status="success"
                             class="justify-content-center"
                             iconHide
@@ -909,14 +909,14 @@
                             :class="{'disabled': !canContinue }"
                             @click="proceed">
                             Proceed to Purchase
-                        </c-button>
+                        </Button>
                     </div>
                     <br><br><br><br>
                 </div>
             </div>
         </div>
 
-        <c-popup
+        <Popup
             v-if="purchasePopup && purchasePopup.show"
             ref="purchasePopup"
             :activated="purchasePopup.show"
@@ -930,8 +930,8 @@
             <div
                 slot="customContent"
                 class="purchase-modal">
-                <c-tabs :tabNames="['Confirm Purchase']">
-                    <c-tab :tabId="1">
+                <Tabs :tabNames="['Confirm Purchase']">
+                    <Tab :tabId="1">
                         <div>
                             <div
                                 v-if="!purchaseSuccessful"
@@ -941,7 +941,7 @@
                                         <div class="grid">
                                             <div class="grid-item">
                                                 <div>
-                                                    <c-img src="../../static/img/icons/ethereum-icon.jpg" />
+                                                    <Img src="../../static/img/icons/ethereum-icon.jpg" />
                                                     <span class="grid-item__amount">{{ purchaseETH }} ETH</span>
                                                 </div>
                                             </div>
@@ -1003,7 +1003,7 @@
                                         <div class="grid">
                                             <div class="grid-item">
                                                 <div style="background-color: #eee">
-                                                    <c-img
+                                                    <Img
                                                         src="../../static/img/icons/token-icon.png"
                                                         style="padding: 5px;" />
                                                     <span class="grid-item__amount">{{ purchaseHBX }} HBX</span>
@@ -1078,23 +1078,23 @@
                                         <template
                                             v-if="!tokenContractAddress"
                                             class="alert alert-warning">
-                                            No contract address. Check your <c-button href="/settings/protocol">
+                                            No contract address. Check your <Button href="/settings/protocol">
                                                 Protocol Settings
-                                            </c-button>
+                                            </Button>
                                         </template>
                                     </p>
                                 </div>
 
                                 <br><br>
                                 <div style="text-align: center">
-                                    <c-button
+                                    <Button
                                         status="info"
                                         class="justify-content-center"
                                         iconHide
                                         size="xl"
                                         @click="confirmPurchase">
                                         Confirm Purchase
-                                    </c-button>
+                                    </Button>
                                 </div>
                                 <br>
                             </div>
@@ -1124,16 +1124,16 @@
                         <div
                             class="d-flex align-items-center justify-content-end">
                             <div>
-                                <c-button @click="closePurchasePopup">
+                                <Button @click="closePurchasePopup">
                                     Cancel
-                                </c-button>
+                                </Button>
                             </div>
                         </div>
-                    </c-tab>
-                </c-tabs>
+                    </Tab>
+                </Tabs>
             </div>
-        </c-popup>
-    </c-layout>
+        </Popup>
+    </Layout>
 </template>
 
 <script>
@@ -1151,13 +1151,13 @@ export default {
         }
     },
     components: {
-        'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
-        'c-block': () => import('~/components/block').then(m => m.default || m),
-        'c-popup': () => import('~/components/popups').then(m => m.default || m),
-        'c-carousel-3d': () => import('~/components/carousel-3d').then(m => m.default || m),
-        'c-asset-store-card': () => import('~/components/asset/store-card').then(m => m.default || m),
-        'c-welcome-box': () => import('~/components/welcome-box').then(m => m.default || m),
-        'c-token-sale': () => import('~/components/token-sale-box').then(m => m.default || m)
+        'UserCard': () => import('@ericmuyser/hyper-ui').then(m => m.UserCard),
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
+        'Popup': () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
+        'Carousel3d': () => import('@ericmuyser/hyper-ui').then(m => m.Carousel3d),
+        'AssetStoreCard': () => import('@ericmuyser/hyper-ui').then(m => m.AssetStoreCard),
+        'WelcomeBox': () => import('@ericmuyser/hyper-ui').then(m => m.WelcomeBox),
+        'TokenSale': () => import('@ericmuyser/hyper-ui').then(m => m.TokenSale)
     },
     data() {
         const checkEthereumConnection = () => {
@@ -1453,12 +1453,12 @@ export default {
         }
     }
 
-    .c-popup__content {
+    .Popup__content {
         background: transparent;
         color: #fff;
     }
 
-    .c-checkbox {
+    .Checkbox {
         width: 100%;
         margin: 3px;
     }
@@ -1492,7 +1492,7 @@ export default {
         left: 0;
         right: 0;
         height: 26px;
-        .c-button {
+        .Button {
             margin: 0 5px;
         }
     }

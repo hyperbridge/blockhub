@@ -1,9 +1,9 @@
 <template>
-    <c-layout navigationKey="project">
+    <Layout navigationKey="project">
         <div class="row">
             <div class="col-12" />
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

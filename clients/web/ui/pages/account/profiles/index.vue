@@ -1,10 +1,10 @@
 <template>
-    <c-layout navigationKey="account">
+    <Layout navigationKey="account">
         <div
             v-if="profiles"
             class="row align-items-stretch justify-content-center margin-bottom-40">
             <div class="col-12">
-                <c-heading-bar
+                <HeadingBar
                     name="My Profile"
                     :showArrows="false"
                     :showBackground="false" />
@@ -12,23 +12,23 @@
             <div class="col-12 col-md-6 col-lg-4 my_profile">
                 <div
                     v-if="activeProfile">
-                    <c-user-card
+                    <UserCard
                         :user="activeProfile"
                         :previewMode="true"
                         @updateProfile="(prop, val) => activeProfile[prop] = val" />
                     <br>
-                    <c-button
+                    <Button
                         status="info"
                         icon="download"
                         @click="$store.commit('application/activeModal', 'deposit')">
                         Deposit
-                    </c-button>
-                    <c-button
+                    </Button>
+                    <Button
                         status="info"
                         icon="upload"
                         @click="$store.commit('application/activeModal', 'withdraw')">
                         Withdraw
-                    </c-button>
+                    </Button>
                 </div>
                 <p v-else-if="!profiles.length">
                     You don't have any profiles yet.
@@ -57,13 +57,13 @@
                         <i class="fas fa-hourglass" />
                         Verifying
                     </div>
-                    <c-button
+                    <Button
                         v-else
                         status="outline-success"
                         class="mt-3"
                         to="/account/verification">
                         Click here to verify
-                    </c-button>
+                    </Button>
                     <div
                         v-if="activeProfile.isVerified"
                         class="date">
@@ -76,7 +76,7 @@
             <div class="col-12 mb-4" />
 
             <div class="col-12">
-                <c-heading-bar
+                <HeadingBar
                     name="All Profiles"
                     :showArrows="false"
                     :showBackground="false"
@@ -84,8 +84,8 @@
                     <div
                         slot="additional-action"
                         class="additional-action margin-left-20">
-                        <span class="text">Name <c-icon name="user" /></span>
-                        <c-button-arrows
+                        <span class="text">Name <Icon name="user" /></span>
+                        <ButtonArrows
                             :activeUp="sortAsc"
                             @clickUp="sortAsc = true"
                             @clickDown="sortAsc = false" />
@@ -94,30 +94,30 @@
                         slot="additional-action"
                         v-access="'reputation'"
                         class="additional-action margin-left-20">
-                        <span class="text">Rating <c-icon name="trophy" /></span>
-                        <c-button-arrows />
+                        <span class="text">Rating <Icon name="trophy" /></span>
+                        <ButtonArrows />
                     </div>
                     <div
                         slot="additional-action"
                         class="additional-action margin-left-20 padding-5">
-                        <c-input-searcher
+                        <InputSearcher
                             v-model="filterPhrase"
                             placeholder="Search" />
                     </div>
                     <div
                         slot="additional-action"
                         class="additional-action margin-left-10">
-                        <c-button
+                        <Button
                             status="outline-white"
                             icon="user-plus"
                             @click="createProfile">
                             New Profile
-                        </c-button>
+                        </Button>
                     </div>
-                </c-heading-bar>
+                </HeadingBar>
             </div>
 
-            <c-loading
+            <Loading
                 key="loading"
                 :enabled="!filteredProfiles.length"
                 size="lg" />
@@ -130,7 +130,7 @@
                     :key="profile.id"
                     class="profile-picker__profile"
                     :class="{ 'edit': profile.edit, 'default-type': profile.id == (activeProfile && activeProfile.id) }">
-                    <c-user-card
+                    <UserCard
                         :user="profile"
                         :previewMode="!profile.edit"
                         :removing="profile.removing"
@@ -138,79 +138,79 @@
                         :class="{ 'default': profile.id == (activeProfile && activeProfile.id) }"
                         v-bind.sync="profileClone" />
                     <div class="profile__action">
-                        <c-button
+                        <Button
                             v-if="!profile.edit && profile.id != (activeProfile && activeProfile.id)"
                             status="info"
                             icon="check"
                             @click="setDefault(profile)">
                             Set default
-                        </c-button>
-                        <c-button
+                        </Button>
+                        <Button
                             v-if="!profile.edit"
                             status="share"
                             icon="pen"
                             @click="editProfile(profile)">
                             Edit
-                        </c-button>
-                        <c-button
+                        </Button>
+                        <Button
                             v-if="profile.edit"
                             status="share"
                             icon="pen"
                             @click="saveProfile(profile)">
                             Save
-                        </c-button>
-                        <c-button
+                        </Button>
+                        <Button
                             v-if="profile.edit"
                             status="danger"
                             icon="trash"
                             @click="deleteProfile(profile)">
                             Delete
-                        </c-button>
-                        <c-button
+                        </Button>
+                        <Button
                             v-if="profile.edit"
                             icon="times"
                             @click="cancelEditProfile(profile)">
                             Cancel
-                        </c-button>
+                        </Button>
                     </div>
                 </div>
             </div>
 
-            <c-modal-light
+            <Modal-light
                 v-if="removeProfile"
                 @close="removeProfile = null">
                 <h4>Are you sure that you want to delete this profile?</h4>
                 <p>This operation can not be reversed</p>
-                <c-user-card
+                <UserCard
                     :user="removeProfile"
                     previewMode />
                 <div>
                     <div class="profile-remove__buttons">
-                        <c-button
+                        <Button
                             size="md"
                             @click="removeProfile = null">
                             Cancel
-                        </c-button>
-                        <c-button
+                        </Button>
+                        <Button
                             size="md"
                             @click="deleteProfile()">
                             Confirm
-                        </c-button>
+                        </Button>
                     </div>
                 </div>
-            </c-modal-light>
+            </Modal-light>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-        'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
-        'c-button-arrows': () => import('~/components/buttons/arrows').then(m => m.default || m),
-        'c-modal-light': () => import('~/components/modal-light').then(m => m.default || m),
-        'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m)
+        'HeadingBar': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar),
+        'UserCard': () => import('@ericmuyser/hyper-ui').then(m => m.UserCard),
+        'ButtonArrows': () => import('@ericmuyser/hyper-ui').then(m => m.ButtonArrows),
+        'Modal-light': () => import('@ericmuyser/hyper-ui').then(m => m.Modal - light),
+        'InputSearcher': () => import('@ericmuyser/hyper-ui').then(m => m.InputSearcher)
     },
     data() {
         return {
@@ -490,7 +490,7 @@ export default {
         bottom: 18px;
         width: 100%;
         height: 26px;
-        .c-button {
+        .Button {
             margin: 0 5px;
         }
     }

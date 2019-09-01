@@ -1,18 +1,18 @@
 <template>
-    <c-layout>
-        <c-model-editor serviceKey="communities" />
+    <Layout>
+        <ModelEditor serviceKey="communities" />
 
         <template slot="menu">
             ...
         </template>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
-        'c-model-editor': () => import('~/components/model-editor').then(m => m.default || m)
+        'Layout': () => import('@ericmuyser/hyper-ui').then(m => m.Layout),
+        'ModelEditor': () => import('@ericmuyser/hyper-ui').then(m => m.ModelEditor)
     },
     props: {
     },

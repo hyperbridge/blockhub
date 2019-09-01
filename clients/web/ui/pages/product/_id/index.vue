@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-12 col-lg-8 col-xl-8">
-            <c-screen-gallery
+            <ScreenGallery
                 v-if="product.meta.images"
                 :items="[product.meta.images.mediumTile, ...product.meta.images.preview]"
                 :videoUrl="product.meta.video" />
@@ -15,7 +15,7 @@
                     style="margin-top: 20px;">
                     {{ section }}
                 </h3>
-                <c-promotion-box
+                <PromotionBox
                     v-for="(promotion, index) in promotions"
                     v-if="product.meta.promotions"
                     :key="index"
@@ -24,7 +24,7 @@
             </div>
 
             <div class="overflow-hidden">
-                <c-game-plan
+                <GamePlan
                     v-for="(plan, index) in product.meta.plans"
                     :key="index"
                     :plan="plan" />
@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="col-12 col-lg-4 col-xl-4">
-            <c-purchase-block
+            <PurchaseBlock
                 class="margin-bottom-15"
                 :isUnavailable="!currentRelease"
                 :price="product.meta.price"
@@ -67,33 +67,33 @@
                     'application/updateShortcut',
                     { id: 'product' + product.id, type: 'product', text: product.name, to: '/product/' + product.id, image: product.meta.images.mediumTile }
                 )" />
-            <c-button
+            <Button
                 iconHide
                 hidden
                 @click="showInstaller = !showInstaller">
                 Open installer
-            </c-button>
+            </Button>
 
-            <c-rating-block
+            <RatingBlock
                 v-access="'rating.read'"
                 class="margin-bottom-20"
                 :items="product.meta.rating"
                 :parentPath="`/product/${product.id}`"
                 @goto="scrollToReviews" />
 
-            <c-frequently-traded-assets
+            <FrequentlyTradedAssets
                 v-access="'asset.read'"
                 class="margin-bottom-20"
                 :items="product.meta.frequentlyTradedAssets"
                 :assetsPath="`/product/${product.id}/assets`" />
 
-            <c-community-spotlight
+            <CommunitySpotlight
                 v-access="'community.read'"
                 class="margin-bottom-20"
                 :discussions="product.meta.community.discussions"
                 :communityPath="`/product/${product.id}/community`" />
 
-            <c-block
+            <Block
                 :title="`Official`"
                 :noGutter="true"
                 :bgGradient="true"
@@ -101,49 +101,49 @@
                 :showBackground="true"
                 class="margin-top-30 margin-bottom-20">
                 <div>
-                    <c-button
+                    <Button
                         class="mb-1 text-align-center"
                         status="dark"
                         size="md"
                         full
                         @click="$store.commit('application/activeModal', 'comingSoon')">
                         Open in Discord
-                    </c-button>
-                    <c-button
+                    </Button>
+                    <Button
                         class="mb-1 text-align-center"
                         status="dark"
                         size="md"
                         full
                         @click="$store.commit('application/activeModal', 'comingSoon')">
                         Open in Twitch
-                    </c-button>
-                    <c-button
+                    </Button>
+                    <Button
                         class="mb-1 text-align-center"
                         status="dark"
                         size="md"
                         full
                         @click="$store.commit('application/activeModal', 'comingSoon')">
                         Open in YouTube
-                    </c-button>
-                    <c-button
+                    </Button>
+                    <Button
                         class="mb-1 text-align-center"
                         status="dark"
                         size="md"
                         full
                         @click="$store.commit('application/activeModal', 'comingSoon')">
                         Open in BlockHub
-                    </c-button>
+                    </Button>
                 </div>
-            </c-block>
+            </Block>
 
-            <c-system-requirements
+            <SystemRequirements
                 class="margin-bottom-20"
                 :requirements="product.meta.systemRequirements" />
 
-            <c-language-support :languages="product.meta.languageSupport" />
+            <LanguageSupport :languages="product.meta.languageSupport" />
         </div>
         <div class="col-12">
-            <c-block
+            <Block
                 ref="streamsSlider"
                 :title="`Updates`"
                 :noGutter="true"
@@ -157,10 +157,10 @@
                 <div class="h5">
                     Updates were not found.
                 </div>
-            </c-block>
+            </Block>
         </div>
         <div class="col-12">
-            <c-block
+            <Block
                 ref="streamsSlider"
                 :title="`Streams`"
                 :noGutter="true"
@@ -171,31 +171,31 @@
                 class="margin-top-30 margin-bottom-20"
                 @prevClick="streamsSlider.slidePrev()"
                 @nextClick="streamsSlider.slideNext()">
-                <c-swiper
+                <Swiper
                     v-if="streams"
                     :options="sliderOptions">
-                    <c-swiper-slide
+                    <SwiperSlide
                         v-for="(stream, index) in streams"
                         :key="index">
-                        <!--<c-stream-item />-->
-                        <c-stream-item
+                        <!--<StreamItem />-->
+                        <StreamItem
                             :streamGame="product.name"
                             :streamName="stream.userName"
                             :streamAvatar="stream.userAvatar"
                             :streamImg="stream.previews"
                             :streamLink="stream.src"
                             :streamViews="stream.views" />
-                    </c-swiper-slide>
-                </c-swiper>
+                    </SwiperSlide>
+                </Swiper>
                 <div
                     v-else
                     class="h5">
                     Twitch streams were not found.
                 </div>
-            </c-block>
+            </Block>
         </div>
         <div class="col-12">
-            <c-block
+            <Block
                 ref="streamsSlider"
                 :title="`World Records`"
                 :noGutter="true"
@@ -209,12 +209,12 @@
                 <div class="h5">
                     World records were not found.
                 </div>
-            </c-block>
+            </Block>
         </div>
         <div
             v-access="'tournament.read'"
             class="col-12">
-            <c-block
+            <Block
                 ref="streamsSlider"
                 :title="`Upcoming tournaments`"
                 :noGutter="true"
@@ -228,12 +228,12 @@
                 <div class="h5">
                     Tournaments not found.
                 </div>
-            </c-block>
+            </Block>
         </div>
         <div
             ref="reviews"
             class="col-12">
-            <c-block
+            <Block
                 ref="streamsSlider"
                 :title="`Reviews`"
                 :noGutter="true"
@@ -250,7 +250,7 @@
                     <h3 class="margin-vertical-20">
                         Most helpful
                     </h3>
-                    <c-review
+                    <Review
                         v-for="(review, index) in helpfulReviews"
                         :key="index"
                         :review="review" />
@@ -261,7 +261,7 @@
                     <h3 class="margin-vertical-20">
                         Most recent
                     </h3>
-                    <c-review
+                    <Review
                         v-for="(review, index) in recentReviews"
                         :key="index"
                         :review="review" />
@@ -270,40 +270,40 @@
                     v-else
                     class="h5">
                     <template v-if="!reviewForm">
-                        No reviews yet. <c-button
+                        No reviews yet. <Button
                             status="plain"
                             size="md"
                             class="p-0"
                             @click="reviewForm=true">
                             Be the first?
-                        </c-button>
+                        </Button>
                     </template>
                     <template v-if="reviewForm">
-                        <c-review-form @cancel="reviewForm=!reviewForm" />
+                        <ReviewForm @cancel="reviewForm=!reviewForm" />
                     </template>
                 </div>
-            </c-block>
+            </Block>
         </div>
-        <c-modal
+        <Modal
             v-if="showInstaller"
             :title="product.name"
             @close="showInstaller = false">
-            <c-game-installer
+            <GameInstaller
                 slot="body"
                 :productImagesMediumTile="product.images.mediumTile"
                 :productName="product.name"
                 :productSystemRequirements="product.systemRequirements"
                 @cancel="showInstaller = false" />
-        </c-modal>
+        </Modal>
         <div v-if="showVote" class="row m-0 p-3">
-            <c-vote-modal id="voteModal" title="Please vote our product" @close="showVote = false">
+            <Vote-modal id="voteModal" title="Please vote our product" @close="showVote = false">
                 <template slot="body">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
                                 <label> Product quality:</label>
                                 <div>
-                                    <c-pure-range-slider v-model.number="quality" :min="0" :max="10" />
+                                    <PureRangeSlider v-model.number="quality" :min="0" :max="10" />
                                 </div>
                             </div>
                         </div>
@@ -312,7 +312,7 @@
                                 <label> Pick your emotion :</label>
                                 <div>
                                     <no-ssr placeholder="loading...">
-                                        <c-vote-emoji />
+                                        <Vote-emoji />
                                     </no-ssr>
                                 </div>
                             </div>
@@ -321,19 +321,19 @@
                             <div class="form-group">
                                 <label> Like or Dislike:</label>
                                 <div>
-                                    <c-vote :votes="0" />
+                                    <Vote :votes="0" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </template>
                 <template slot="footer">
-                    <c-checkbox
+                    <Checkbox
                         id="vote">
                         Don't show it again.
-                    </c-checkbox>
+                    </Checkbox>
                 </template>
-            </c-vote-modal>
+            </Vote-modal>
         </div>
     </div>
 </template>
@@ -341,24 +341,24 @@
 <script>
 export default {
     components: {
-        'c-pure-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m),
-        'c-vote-emoji': () => import('~/components/emoji/vote').then(m => m.default || m),
-        'c-vote': () => import('~/components/vote').then(m => m.default || m),
-        'c-game-plan': () => import('~/components/game-plans/plan').then(m => m.default || m),
-        'c-screen-gallery': () => import('~/components/screen-gallery/gallery').then(m => m.default || m),
-        'c-promotion-box': () => import('~/components/promotion-box/item').then(m => m.default || m),
-        'c-rating-block': () => import('~/components/rating-block').then(m => m.default || m),
-        'c-purchase-block': () => import('~/components/purchase-block').then(m => m.default || m),
-        'c-frequently-traded-assets': () => import('~/components/frequently-traded-assets').then(m => m.default || m),
-        'c-community-spotlight': () => import('~/components/community-spotlight').then(m => m.default || m),
-        'c-review': () => import('~/components/review').then(m => m.default || m),
-        'c-system-requirements': () => import('~/components/product-overview/system-requirements').then(m => m.default || m),
-        'c-language-support': () => import('~/components/product-overview/language-support').then(m => m.default || m),
-        'c-stream-item': () => import('~/components/stream').then(m => m.default || m),
-        'c-modal': () => import('~/components/modal').then(m => m.default || m),
-        'c-vote-modal': () => import('~/components/modal/vote').then(m => m.default || m),
-        'c-game-installer': () => import('~/components/game-installer').then(m => m.default || m),
-        'c-review-form': () => import('~/components/review/create').then(m => m.default || m)
+        'PureRangeSlider': () => import('@ericmuyser/hyper-ui').then(m => m.PureRangeSlider),
+        'Vote-emoji': () => import('@ericmuyser/hyper-ui').then(m => m.Vote-emoji),
+        'Vote': () => import('@ericmuyser/hyper-ui').then(m => m.Vote),
+        'GamePlan': () => import('@ericmuyser/hyper-ui').then(m => m.GamePlan),
+        'ScreenGallery': () => import('@ericmuyser/hyper-ui').then(m => m.ScreenGallery),
+        'PromotionBox': () => import('@ericmuyser/hyper-ui').then(m => m.PromotionBox),
+        'RatingBlock': () => import('@ericmuyser/hyper-ui').then(m => m.RatingBlock),
+        'PurchaseBlock': () => import('@ericmuyser/hyper-ui').then(m => m.PurchaseBlock),
+        'FrequentlyTradedAssets': () => import('@ericmuyser/hyper-ui').then(m => m.FrequentlyTradedAssets),
+        'CommunitySpotlight': () => import('@ericmuyser/hyper-ui').then(m => m.CommunitySpotlight),
+        'Review': () => import('@ericmuyser/hyper-ui').then(m => m.Review),
+        'SystemRequirements': () => import('@ericmuyser/hyper-ui').then(m => m.SystemRequirements),
+        'LanguageSupport': () => import('@ericmuyser/hyper-ui').then(m => m.LanguageSupport),
+        'StreamItem': () => import('@ericmuyser/hyper-ui').then(m => m.StreamItem),
+        'Modal': () => import('@ericmuyser/hyper-ui').then(m => m.Modal),
+        'Vote-modal': () => import('@ericmuyser/hyper-ui').then(m => m.Vote-modal),
+        'GameInstaller': () => import('@ericmuyser/hyper-ui').then(m => m.GameInstaller),
+        'ReviewForm': () => import('@ericmuyser/hyper-ui').then(m => m.ReviewForm)
     },
     props: {
         product: {

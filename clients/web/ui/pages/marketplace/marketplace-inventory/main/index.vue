@@ -2,45 +2,45 @@
     <div>
         <h2>Explore</h2>
         <div class="inventory-navigation">
-            <c-switch
+            <Toggle
                 v-model="allowSelect"
                 :label="labelText" />
             <div>
-                <c-button
+                <Button
                     status="info"
                     icon="hand-pointer"
                     @click="selectAll()">
                     {{ everySelected ? 'Unselect all' : 'Select all' }}
-                </c-button>
-                <c-button
+                </Button>
+                <Button
                     status="info"
                     icon="dollar-sign"
                     @click="openModal = true">
                     Sell selected in market
-                </c-button>
+                </Button>
             </div>
         </div>
         <div class="inventory-explorer">
-            <c-content-navigation
+            <ContentNavigation
                 :items="assets"
                 :setItemsPerPage="12"
                 :setItemsLimit="12">
                 <div
                     slot-scope="props"
                     class="assets-grid">
-                    <c-asset
+                    <Asset
                         v-for="(asset, index) in props.items"
                         :key="index"
                         :asset="asset"
                         :showSold="showSold && asset.selected"
                         @click="selectAsset($event)" />
                 </div>
-            </c-content-navigation>
-            <c-asset-preview
+            </ContentNavigation>
+            <AssetPreview
                 v-if="previewAsset"
                 :asset="previewAsset" />
         </div>
-        <c-modal
+        <Modal
             v-if="openModal"
             title="Sell assets"
             @close="openModal = false">
@@ -50,17 +50,17 @@
                         v-for="(asset, index) in selectedAssets"
                         :key="index"
                         class="sell-assets__asset">
-                        <c-asset-preview-basic
+                        <AssetPreviewBasic
                             :asset="asset"
                             size="sm" />
                         <div class="sell-assets__market-price">
-                            <c-input
+                            <Input
                                 :value="asset.market_price"
                                 @input="updateAsset(asset.id, { market_price: parseFloat($event) || 0 })" />
                             <span>
                                 Sell asset for <strong>{{ asset.market_price }}</strong> $
                             </span>
-                            <c-range-slider
+                            <RangeSlider
                                 :value="asset.market_price"
                                 :max="Math.round(asset.price.max * 2)"
                                 @input="updateAsset(asset.id, { market_price: parseFloat($event) })" />
@@ -77,33 +77,32 @@
                     for <strong> {{ sellSummary.price | roundNum }} </strong> $
                 </span>
                 <div class="flex-center-between">
-                    <c-button
+                    <Button
                         status="danger"
                         @click="openModal = false">
                         Cancel
-                    </c-button>
-                    <c-button
+                    </Button>
+                    <Button
                         status="success"
                         @click="sellAssets()">
                         Confirm sell
-                    </c-button>
+                    </Button>
                 </div>
             </form>
-        </c-modal>
+        </Modal>
     </div>
 </template>
 
 <script>
 export default {
     components: {
-        'c-assets-grid-inventory': () => import('~/components/assets-grid-inventory').then(m => m.default || m),
-        'c-asset-preview-basic': () => import('~/components/asset/preview-basic').then(m => m.default || m),
-        'c-asset-preview': () => import('~/components/asset/preview').then(m => m.default || m),
-        'c-asset': () => import('~/components/assets-grid-inventory/asset').then(m => m.default || m),
-        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m),
-        'c-switch': () => import('~/components/switch').then(m => m.default || m),
-        'c-modal': () => import('~/components/modal/custom').then(m => m.default || m),
-        'c-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m)
+        'AsssetsGridInventory': () => import('@ericmuyser/hyper-ui').then(m => m.AsssetsGridInventory),
+        'AssetPreviewBasic': () => import('@ericmuyser/hyper-ui').then(m => m.AssetPreviewBasic),
+        'AssetPreview': () => import('@ericmuyser/hyper-ui').then(m => m.AssetPreview),
+        'Asset': () => import('@ericmuyser/hyper-ui').then(m => m.Asset),
+        'ContentNavigation': () => import('@ericmuyser/hyper-ui').then(m => m.ContentNavigation),
+        'Modal': () => import('@ericmuyser/hyper-ui').then(m => m.Modal),
+        'RangeSlider': () => import('@ericmuyser/hyper-ui').then(m => m.RangeSlider)
     },
     data() {
         return {

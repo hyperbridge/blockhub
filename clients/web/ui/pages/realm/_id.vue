@@ -1,9 +1,9 @@
 <template>
-    <c-layout :breadcrumbLinks="false">
+    <Layout :breadcrumbLinks="false">
         <div class="row page-header margin-bottom-30">
             <div class="col-10 col-md-3">
                 <div class="logo">
-                    <c-img
+                    <Img
                         class="img-fluid"
                         :src="realm.meta.images.logo" />
                 </div>
@@ -64,7 +64,7 @@
             </div>
         </div>
         <nuxt-child :realm="realm" />
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
@@ -88,10 +88,10 @@ export default {
         }
     },
     components: {
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-        'c-simple-game-grid': () => import('~/components/game-grid/simple').then(m => m.default || m),
-        'c-game-grid': () => import('~/components/game-grid/with-description').then(m => m.default || m),
-        'c-featured-assets': () => import('~/components/assets-list-item/featured-list').then(m => m.default || m)
+        'HeadingBar': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar),
+        'SimpleGameGrid': () => import('@ericmuyser/hyper-ui').then(m => m.SimpleGameGrid),
+        'GameGrid': () => import('@ericmuyser/hyper-ui').then(m => m.GameGrid),
+        'FeaturedAssets': () => import('@ericmuyser/hyper-ui').then(m => m.FeaturedAssets)
     },
     data() {
         return {

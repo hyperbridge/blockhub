@@ -1,5 +1,5 @@
 <template>
-    <c-layout
+    <Layout
         :showLeftPanel="false"
         :showRightPanel="false">
         <section class="section_1 px-3">
@@ -203,7 +203,7 @@
                 </div>
             </div>
         </section>
-    </c-layout>
+    </Layout>
 </template>
 
 <style lang="scss" scoped>

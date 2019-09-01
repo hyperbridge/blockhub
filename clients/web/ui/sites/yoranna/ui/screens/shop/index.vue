@@ -1,21 +1,19 @@
 <template>
-    <c-layout>
+    <Layout>
         Testttt
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
-    import * as DB from '@/db'
-
-    export default {
-        components: {
-            'c-layout': () => import('~/sites/yoranna/ui/layouts/default').then(m => m.default || m),
-        },
-        data() {
-            return {
-            }
+export default {
+    components: {
+        'Layout': () => import('~/sites/yoranna/ui/layouts/default').then(m => m.default),
+    },
+    data() {
+        return {
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

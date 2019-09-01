@@ -82,15 +82,10 @@ Vue.component('nuxt-link', {
 //addDecorator(StoryRouter())
 
 
-import {
-    PromotionBoxItem,
-    PromotionBoxList
-} from '@ericmuyser/hyper-ui'
-console.log(PromotionBoxItem)
 storiesOf('Promotion Box', module)
     .add('item', () => ({
         components: {
-            'c-promotion-item': PromotionBoxItem
+            PromotionBoxItem: () => import('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
         },
         data() {
             return {
@@ -98,106 +93,93 @@ storiesOf('Promotion Box', module)
                 price: '10.00'
             }
         },
-        template: '<div class="row"><div class="col-6 p-5"><c-promotion-item :title="title" :price="price"></c-promotion-item></div></div>'
+        template: '<div class="row"><div class="col-6 p-5"><PromotionBoxItem :title="title" :price="price"></PromotionBoxItem></div></div>'
     }))
     .add('list', () => ({
         components: {
-            'c-promotion-list': PromotionBoxList,
-            'c-promotion-item': PromotionBoxItem
+            PromotionBoxList: () => import('@ericmuyser/hyper-ui').then(m => m.PromotionBoxList),
+            PromotionBoxItem: () => import('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
         },
         data: () => data.PromotionBoxData ,
         template: `<div class="row"><div class="col-6 p-5">
-                        <c-promotion-list title="Packages" >
+                        <PromotionBoxList title="Packages" >
                             <template v-for="(promotion, index) in promotions">
-                                <c-promotion-item :title="promotion.title" :price="promotion.price" :basic="promotion.basic" :border="true"></c-promotion-item>
+                                <PromotionBoxItem :title="promotion.title" :price="promotion.price" :basic="promotion.basic" :border="true"></PromotionBoxItem>
                             </template>
-                        </c-promotion-list>
+                        </PromotionBoxList>
                     </div></div>`
     }))
-
-import {
-    AssetsImporter
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Assets Importer', module)
     .add('default', () => ({
         components: {
-            'c-assets-importer': AssetsImporter
+            AssetsImporter: () => import('@ericmuyser/hyper-ui').then(m => m.AssetsImporter)
         },
         data() {
             return {
                 show_skipped: true
             }
         },
-        template: '<div class="row"><div class="col-8"><c-assets-importer show_skipped="show_skipped" /></div></div>'
+        template: '<div class="row"><div class="col-8"><AssetsImporter show_skipped="show_skipped" /></div></div>'
     }))
-
-import {
-    Notification,
-    NotificationInline
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Notifications', module)
     .add('default', () => ({
         components: {
-            'c-notification': Notification
+            Notification: () => import('@ericmuyser/hyper-ui').then(m => m.Notification)
         },
-		    data: () => data.NotifsData ,
+        data: () => data.NotifsData,
         template: `
             <div class="row m-0">
                 <div class="col-4 pt-3 text-white d-flex flex-column">
                     Single:
-                    <c-notification :notification="notif"/>
+                    <Notification :notification="notif" />
                 </div>
                 <div class="col-4 pt-3 text-white d-flex flex-column">
                     Multiple:
-                    <c-notification v-for="(notif, index) in notifs" :key="index" :notification="notif"/>
+                    <Notification v-for="(notif, index) in notifs" :key="index" :notification="notif"/>
                 </div>
             </div>
         `
     }))
     .add('inline', () => ({
         components: {
-            'c-notification-inline': NotificationInline
+            NotificationInline: () => import('@ericmuyser/hyper-ui').then(m => m.NotificationInline)
         },
-		    data: () => data.NotifsData ,
+        data: () => data.NotifsData,
         template: `
             <div class="row m-0">
                 <div class="col-4 pt-3 text-white">
                     Single:
-                    <c-notification-inline :notification="notif">
+                    <NotificationInline :notification="notif">
                         {{ notif.text }}
-                    </c-notification-inline>
+                    </NotificationInline>
                     <hr />
                     Single medium:
-                    <c-notification-inline :notification="notif" size="md">
+                    <NotificationInline :notification="notif" size="md">
                         {{ notif.text }}
-                    </c-notification-inline>
+                    </NotificationInline>
                     <hr />
                     Multiple:
-                    <c-notification-inline v-for="(notif, index) in notifs" :key="index" class="my-3" :notification="notif" :type="notif.type">
+                    <NotificationInline v-for="(notif, index) in notifs" :key="index" class="my-3" :notification="notif" :type="notif.type">
                         {{ notif.text }}
-                    </c-notification-inline>
+                    </NotificationInline>
                 </div>
             </div>
         `
     }))
 
-import {
-    Searcher
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Searcher', module)
     .add('default', () => ({
         components: {
-            'c-searcher': Searcher
+            Searcher: () => import('@ericmuyser/hyper-ui').then(m => m.Searcher)
         },
-		    data: () => data.SearchData ,
+        data: () => data.SearchData,
         methods: {
             search() {
                 this.results = this.phrase.length ? this.getByVal(this.phrase) : []
             },
-            getByVal(val){
+            getByVal(val) {
                 let arr = [];
                 this.items.forEach( (el) => {
                     console.log('first', el)
@@ -217,85 +199,71 @@ storiesOf('Searcher', module)
             }
         },
         template: `<div class="p-5 col-4">
-                <c-searcher  @input="search" :results="results" v-model="phrase">
+                <Searcher  @input="search" :results="results" v-model="phrase">
                     <template slot-scope="props">
                         <span class="text-white">
                             {{ props.result.name }}
                         </span>
                     </template>
-                </c-searcher>
+                </Searcher>
             </div>`
     }))
-
-import {
-    RatingStars,
-    RatingBlock
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Rating', module)
     .add('Stars', () => ({
         components: {
-            'c-rating-stars': RatingStars
+            RatingStars: () => import('@ericmuyser/hyper-ui').then(m => m.RatingStars)
         },
-        template: '<div class="text-white p-5"><c-rating-stars :number="3.5"/></div>'
+        template: '<div class="text-white p-5"><RatingStars :number="3.5"/></div>'
     }))
     .add('Rating Block', () => ({
         components: {
-            'c-rating-block': RatingBlock
+            RatingBlock: () => import('@ericmuyser/hyper-ui').then(m => m.RatingBlock)
         },
-		    data: () => data.RatingData ,
+        data: () => data.RatingData,
         template: `
         <div class="row p-5">
             <div class="col-8">
-                <c-rating-block :items="items" fullReviewsPath="/" rateGamePath="/" />
+                <RatingBlock :items="items" fullReviewsPath="/" rateGamePath="/" />
             </div>
         </div>
         `
     }))
 
-import {
-    Author
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Author', module)
     .add('Author', () => ({
-        components: {Author},
+        components: {
+            Author: () => import('@ericmuyser/hyper-ui').then(m => m.Author)
+        },
         data() {
             return {
-                    name: 'SatoSan',
-                    img: 'https://via.placeholder.com/150'
+                name: 'SatoSan',
+                img: 'https://via.placeholder.com/150'
             }
         },
         template: `<div class="text-white p-5"><author :name="name" :img="img"/></div>`
     }))
 
-import {
-    Tags
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Tags', module)
     .add('Tags', () => ({
-        components: {Tags},
-        template: `<div class="text-white p-5"><tags :tags="['RPG', 'Open-World']"/></div>`
+        components: {
+            Tags: () => import('@ericmuyser/hyper-ui').then(m => m.Tags)
+        },
+        template: `<div class="text-white p-5"><Tags :tags="['RPG', 'Open-World']"/></div>`
     }))
-
-import {
-    LoadingLine,
-    LoadingCircle
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('LoadingBar', module)
     .add('line', () => ({
         components: {
-            'c-loading-bar': LoadingLine
+            LoadingLine: () => import('@ericmuyser/hyper-ui').then(m => m.LoadingLine)
         },
-        template: `<c-loading-bar/>`
+        template: `<LoadingLine />`
     }))
     .add('circle', () => ({
         components: {
-            'c-loading-bar-circle': LoadingCircle
+            LoadingCircle: () => import('@ericmuyser/hyper-ui').then(m => m.LoadingCircle)
         },
-        template: `<div class="position-relative" style="width: 300px; height: 300px"><c-loading-bar-circle /></div>`
+        template: `<div class="position-relative" style="width: 300px; height: 300px"><LoadingCircle /></div>`
     }))
 
 import NavigationAccount from '@/components/navigation/account'
@@ -309,48 +277,64 @@ import NavigationWallet from '@/components/navigation/wallet'
 
 storiesOf('Navigation', module)
     .add('account', () => ({
-        components: {NavigationAccount}, template: `<div class="col-2 py-3"><NavigationAccount /></div>`
+        components: {
+            NavigationAccount
+        },
+        template: `<div class="col-2 py-3"><NavigationAccount /></div>`
     }))
     .add('asset', () => ({
-        components: {NavigationAsset}, template: `<div class="col-2 py-3"><NavigationAsset /></div>`
+        components: {
+            NavigationAsset
+        },
+        template: `<div class="col-2 py-3"><NavigationAsset /></div>`
     }))
     .add('funding', () => ({
-        components: {NavigationFunding}, template: `<div class="col-2 py-3"><NavigationFunding /></div>`
+        components: {
+            NavigationFunding
+        },
+        template: `<div class="col-2 py-3"><NavigationFunding /></div>`
     }))
     .add('help', () => ({
-        components: {NavigationHelp}, template: `<div class="col-2 py-3"><NavigationHelp /></div>`
+        components: {
+            NavigationHelp
+        },
+        template: `<div class="col-2 py-3"><NavigationHelp /></div>`
     }))
     .add('product', () => ({
-        components: {NavigationProduct}, template: `<div class="col-2 py-3"><NavigationProduct /></div>`
+        components: {
+            NavigationProduct
+        },
+        template: `<div class="col-2 py-3"><NavigationProduct /></div>`
     }))
     .add('project', () => ({
-        components: {NavigationProject}, template: `<div class="col-2 py-3"><NavigationProject /></div>`
+        components: {
+            NavigationProject
+        },
+        template: `<div class="col-2 py-3"><NavigationProject /></div>`
     }))
     .add('settings', () => ({
-        components: {NavigationSettings}, template: `<div class="col-2 py-3"><NavigationSettings /></div>`
+        components: {
+            NavigationSettings
+        },
+        template: `<div class="col-2 py-3"><NavigationSettings /></div>`
     }))
     .add('wallet', () => ({
-        components: {NavigationWallet}, template: `<div class="col-2 py-3"><NavigationWallet /></div>`
+        components: {
+            NavigationWallet
+        },
+        template: `<div class="col-2 py-3"><NavigationWallet /></div>`
     }))
-
-
-import {
-    Card,
-    Badges,
-    Milestone,
-    UpdatesCount
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Projects', module)
     .add('card', () => ({
         components: {
-            'c-project-card': Card
+            ProjectCard: () => import('@ericmuyser/hyper-ui').then(m => m.ProjectCard)
         },
-		    data: () => data.ProjectsData,
+        data: () => data.ProjectsData,
         template: `
                 <div class="row">
                     <div class="col-4" v-for="(project, index) in projects" :key="index">
-                        <c-project-card
+                        <ProjectCard
                             :image="project.img"
                             :description="project.description"
                             :funds="project.funds"
@@ -366,88 +350,82 @@ storiesOf('Projects', module)
     }))
     .add('badges', () => ({
         components: {
-            'c-badges': Badges
+            Badges: () => import('@ericmuyser/hyper-ui').then(m => m.Badges)
         },
-        template: `<c-badges :icons="['trophy','gem']" />`
+        template: `<Badges :icons="['trophy','gem']" />`
     }))
     .add('milestone', () => ({
         components: {
-            'c-milestone': Milestone
+            Milestone: () => import('@ericmuyser/hyper-ui').then(m => m.Milestone)
         },
-		    data: () => data.MilestoneData,
+        data: () => data.MilestoneData,
         template: `<div class="row">
-                <c-milestone
-                                    v-for="(milestone, index) in milestones"
-                                    :key="index"
-                                    :milestone="milestone"
-                                />
+                <Milestone
+                    v-for="(milestone, index) in milestones"
+                    :key="index"
+                    :milestone="milestone"
+                />
             </div>`
     }))
     .add('updates-count', () => ({
         components: {
-            'c-updates-count': UpdatesCount
+            UpdatesCount: () => import('@ericmuyser/hyper-ui').then(m => m.UpdatesCount)
         },
         template: `<div class="p-5">
-                    <c-updates-count>
+                    <UpdatesCount>
                         5
-                    </c-updates-count>
+                    </UpdatesCount>
                 </div>`
     }))
-
-
-import {
-    Tabs,
-    Tab
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Tabs', module)
     .add('default', () => ({
         components: {
-            'c-tabs': Tabs,
-            'c-tab': Tab
+            Tabs: () => import('@ericmuyser/hyper-ui').then(m => m.Tabs),
+            Tab: () => import('@ericmuyser/hyper-ui').then(m => m.Tab)
         },
         template: `
             <div class="padding-50">
-                <c-tabs style="color: #fff;">
-                    <c-tab :tab_id="0">
+                <Tabs style="color: #fff;">
+                    <Tab :tab_id="0">
                         First tab
-                    </c-tab>
-                    <c-tab :tab_id="1">
+                    </Tab>
+                    <Tab :tab_id="1">
                         Wwww
-                    </c-tab>
-                    <c-tab :tab_id="2">
+                    </Tab>
+                    <Tab :tab_id="2">
                         12345
-                    </c-tab>
-                </c-tabs>
+                    </Tab>
+                </Tabs>
             </div>`
     }))
     .add('Tabs Names', () => ({
         components: {
-            'c-tabs': Tabs,
-            'c-tab': Tab
+            Tabs: () => import('@ericmuyser/hyper-ui').then(m => m.Tabs),
+            Tab: () => import('@ericmuyser/hyper-ui').then(m => m.Tab)
         },
         template: `
             <div class="padding-50">
-                <c-tabs
+                <Tabs
                     style="color: #fff;"
                     :tab_names="['Custom tab One', 'Second', 'Im third tab']"
                 >
-                    <c-tab :tab_id="0">
+                    <Tab :tab_id="0">
                         First tab
-                    </c-tab>
-                    <c-tab :tab_id="1">
+                    </Tab>
+                    <Tab :tab_id="1">
                         Wwww
-                    </c-tab>
-                    <c-tab :tab_id="2">
+                    </Tab>
+                    <Tab :tab_id="2">
                         12345
-                    </c-tab>
-                </c-tabs>
+                    </Tab>
+                </Tabs>
             </div>`
     }))
     .add('Custom Navigation', () => ({
         components: {
-            'c-tabs': Tabs,
-            'c-tab': Tab
+            Tabs: () => import('@ericmuyser/hyper-ui').then(m => m.Tabs),
+            Tab: () => import('@ericmuyser/hyper-ui').then(m => m.Tab)
         },
         data() {
             return {
@@ -456,7 +434,7 @@ storiesOf('Tabs', module)
         },
         template: `
             <div class="padding-50">
-                <c-tabs
+                <Tabs
                     style="color: #fff;"
                     :activeTabProp="activeTab"
                 >
@@ -466,29 +444,29 @@ storiesOf('Tabs', module)
                         <button @click="activeTab = 3">Tab 3</button>
                         <button @click="activeTab = 4">Tab 4</button>
                     </template>
-                    <c-tab :tab_id="1">
+                    <Tab :tab_id="1">
                         First tab
-                    </c-tab>
-                    <c-tab :tab_id="2">
+                    </Tab>
+                    <Tab :tab_id="2">
                         Wwww
-                    </c-tab>
-                    <c-tab :tab_id="3">
+                    </Tab>
+                    <Tab :tab_id="3">
                         12345
-                    </c-tab>
-                    <c-tab :tab_id="4">
+                    </Tab>
+                    <Tab :tab_id="4">
                         Fourth tab
-                    </c-tab>
-                </c-tabs>
+                    </Tab>
+                </Tabs>
             </div>`
     }))
     .add('Locked Tab', () => ({
         components: {
-            'c-tabs': Tabs,
-            'c-tab': Tab
+            Tabs: () => import('@ericmuyser/hyper-ui').then(m => m.Tabs),
+            Tab: () => import('@ericmuyser/hyper-ui').then(m => m.Tab)
         },
         data() {
             return {
-                locked_step: 1,
+                lockedStep: 1,
                 lockedTab: 1
             }
         },
@@ -499,23 +477,23 @@ storiesOf('Tabs', module)
         },
         template: `
             <div class="padding-50">
-                <c-tabs
+                <Tabs
                     style="color: #fff;"
                     :lockedTab="lockedTab"
                 >
-                    <c-tab :tab_id="0">
+                    <Tab :tab_id="0">
                         First tab
-                    </c-tab>
-                    <c-tab :tab_id="1">
+                    </Tab>
+                    <Tab :tab_id="1">
                         Second tab
-                    </c-tab>
-                    <c-tab :tab_id="2">
+                    </Tab>
+                    <Tab :tab_id="2">
                         Third tab
-                    </c-tab>
-                    <c-tab :tab_id="3">
+                    </Tab>
+                    <Tab :tab_id="3">
                         Fourth tab
-                    </c-tab>
-                </c-tabs>
+                    </Tab>
+                </Tabs>
                 <button
                     @click="changeLockedTab"
                     class="margin-top-50"
@@ -526,35 +504,35 @@ storiesOf('Tabs', module)
     }))
     .add('Locked Step', () => ({
         components: {
-            'c-tabs': Tabs,
-            'c-tab': Tab
+            Tabs: () => import('@ericmuyser/hyper-ui').then(m => m.Tabs),
+            Tab: () => import('@ericmuyser/hyper-ui').then(m => m.Tab)
         },
         data() {
             return {
-                locked_step: 1
+                lockedStep: 1
             }
         },
         template: `
             <div class="padding-50">
-                <c-tabs
+                <Tabs
                     style="color: #fff;"
-                    :locked_step="locked_step"
+                    :lockedStep="lockedStep"
                 >
-                    <c-tab :tab_id="0">
+                    <Tab :tab_id="0">
                         First tab
-                    </c-tab>
-                    <c-tab :tab_id="1">
+                    </Tab>
+                    <Tab :tab_id="1">
                         Second tab
-                    </c-tab>
-                    <c-tab :tab_id="2">
+                    </Tab>
+                    <Tab :tab_id="2">
                         Third tab
-                    </c-tab>
-                    <c-tab :tab_id="3">
+                    </Tab>
+                    <Tab :tab_id="3">
                         Fourth tab
-                    </c-tab>
-                </c-tabs>
+                    </Tab>
+                </Tabs>
                 <button
-                    @click="locked_step++"
+                    @click="lockedStep++"
                     class="margin-top-50"
                 >
                     Unlock next step
@@ -562,35 +540,24 @@ storiesOf('Tabs', module)
             </div>`
     }))
 
-import {
-    SystemRequirements,
-    MilestonesLine
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Milestones Line', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
         components: {
-            'c-milestones-line': MilestonesLine
+            MilestonesLine: () => import('@ericmuyser/hyper-ui').then(m => m.MilestonesLine)
         },
         data: () => object('Data', data.MilestonesLine),
         template: `<div class="row m-0">
                 <div class="col-8 p-4">
-                    <c-milestones-line :milestones="milestones" />
+                    <MilestonesLine :milestones="milestones" />
                 </div>
             </div>`
     }))
 
-
-import {
-    SidebarMenu,
-    SidebarMenuLink
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Sidebar Menu', module)
     .add('Main title', () => ({
         components: {
-            'c-sidebar-menu': SidebarMenu
+            SidebarMenu: () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenu)
         },
         data() {
             return {
@@ -601,15 +568,17 @@ storiesOf('Sidebar Menu', module)
                 ],
             }
         },
-        template: '<div class="row m-0">' +
-            '<div class="col-3 p-4">' +
-            '<c-sidebar-menu title="Menu Big Title" icon="fab fa-angellist" :links="links" />' +
-            '</div>' +
-            '</div>'
+        template: `
+            <div class="row m-0">
+                <div class="col-3 p-4">
+                    <SidebarMenu title="Menu Big Title" icon="fab fa-angellist" :links="links" />
+                </div>
+            </div>
+        `
     }))
     .add('Sub title', () => ({
         components: {
-            'c-sidebar-menu': SidebarMenu
+            SidebarMenu: () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenu)
         },
         data() {
             return {
@@ -622,21 +591,21 @@ storiesOf('Sidebar Menu', module)
         },
         template: `<div class="row m-0">
                 <div class="col-3 p-4">
-                    <c-sidebar-menu subTitle="This sub title" subIcon="fas fa-info-circle" :links="links" />
+                    <SidebarMenu subTitle="This sub title" subIcon="fas fa-info-circle" :links="links" />
                 </div>
             </div>`
     }))
     .add('Single element', () => ({
         components: {
-            'c-sidebar-menu-link': SidebarMenuLink
+            SidebarMenuItem: () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenuItem)
         },
         template: `<div class="row m-0">
                 <div class="col-3 p-4">
-                    <c-sidebar-menu-link
-                                 :to="{ path: '/' }"
-                                 title="Suggesting Features">
-                                 Suggesting Features
-                    </c-sidebar-menu-link>
+                    <SidebarMenuItem
+                        :to="{ path: '/' }"
+                        title="Suggesting Features">
+                        Suggesting Features
+                    </SidebarMenuItem>
                 </div>
             </div>`
     }))
@@ -650,251 +619,257 @@ const injectButtonTemplate = code => `
     </div>
 `
 
-import {
-    Buttons,
-    LoadMore,
-    ButtonArrows
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Buttons', module)
     .add('default', () => ({
-        components: {'c-button': Buttons},
+        components: {
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+        },
         methods: {
             testFunction: function () {
                 console.log('BOOOOOOOOOOOM!')
             }
         },
         template: injectButtonTemplate(`
-            <c-button @click="testFunction">default</c-button>
-            <c-button size="md" @click="testFunction">default</c-button>
-            <c-button size="lg" @click="testFunction">default</c-button>
+            <Button @click="testFunction">default</Button>
+            <Button size="md" @click="testFunction">default</Button>
+            <Button size="lg" @click="testFunction">default</Button>
             <hr />
-            <c-button status="info">info</c-button>
-            <c-button status="info" size="md">info</c-button>
-            <c-button status="info" size="lg">info</c-button>
+            <Button status="info">info</Button>
+            <Button status="info" size="md">info</Button>
+            <Button status="info" size="lg">info</Button>
             <hr />
-            <c-button status="success">success</c-button>
-            <c-button status="success" size="md">success</c-button>
-            <c-button status="success" size="lg">success</c-button>
+            <Button status="success">success</Button>
+            <Button status="success" size="md">success</Button>
+            <Button status="success" size="lg">success</Button>
             <hr />
-            <c-button status="warning">danger</c-button>
-            <c-button status="warning" size="md">danger</c-button>
-            <c-button status="warning" size="lg">danger</c-button>
+            <Button status="warning">danger</Button>
+            <Button status="warning" size="md">danger</Button>
+            <Button status="warning" size="lg">danger</Button>
             <hr />
-            <c-button status="danger">danger</c-button>
-            <c-button status="danger" size="md">danger</c-button>
-            <c-button status="danger" size="lg">danger</c-button>
+            <Button status="danger">danger</Button>
+            <Button status="danger" size="md">danger</Button>
+            <Button status="danger" size="lg">danger</Button>
             <hr />
-            <c-button status="share">share</c-button>
-            <c-button status="share" size="md">share</c-button>
-            <c-button status="share" size="lg">share</c-button>
+            <Button status="share">share</Button>
+            <Button status="share" size="md">share</Button>
+            <Button status="share" size="lg">share</Button>
             <hr />
-            <c-button status="support">support</c-button>
-            <c-button status="support" size="md">support</c-button>
-            <c-button status="support" size="lg">support</c-button>
+            <Button status="support">support</Button>
+            <Button status="support" size="md">support</Button>
+            <Button status="support" size="lg">support</Button>
         `)
     }))
     .add('second type', () => ({
-        components: {'c-button': Buttons},
+        components: {
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+        },
         methods: {
             testFunction: function () {
                 console.log('BOOOOOOOOOOOM!')
             }
         },
         template: injectButtonTemplate(`
-            <c-button status="second-info">info</c-button>
-            <c-button status="second-info" size="md">info</c-button>
-            <c-button status="second-info" size="lg">info</c-button>
+            <Button status="second-info">info</Button>
+            <Button status="second-info" size="md">info</Button>
+            <Button status="second-info" size="lg">info</Button>
             <hr />
-            <c-button status="second-success">success</c-button>
-            <c-button status="second-success" size="md">success</c-button>
-            <c-button status="second-success" size="lg">success</c-button>
+            <Button status="second-success">success</Button>
+            <Button status="second-success" size="md">success</Button>
+            <Button status="second-success" size="lg">success</Button>
             <hr />
-            <c-button status="second-warning">danger</c-button>
-            <c-button status="second-warning" size="md">danger</c-button>
-            <c-button status="second-warning" size="lg">danger</c-button>
+            <Button status="second-warning">danger</Button>
+            <Button status="second-warning" size="md">danger</Button>
+            <Button status="second-warning" size="lg">danger</Button>
             <hr />
-            <c-button status="second-danger">danger</c-button>
-            <c-button status="second-danger" size="md">danger</c-button>
-            <c-button status="second-danger" size="lg">danger</c-button>
+            <Button status="second-danger">danger</Button>
+            <Button status="second-danger" size="md">danger</Button>
+            <Button status="second-danger" size="lg">danger</Button>
         `)
     }))
     .add('outline', () => ({
-        components: {'c-button': Buttons},
+        components: {
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+        },
         methods: {
             testFunction: function () {
                 console.log('BOOOOOOOOOOOM!')
             }
         },
         template: injectButtonTemplate(`
-            <c-button status="outline-white">white</c-button>
-            <c-button status="outline-white" size="md">white</c-button>
-            <c-button status="outline-white" size="lg">white</c-button>
+            <Button status="outline-white">white</Button>
+            <Button status="outline-white" size="md">white</Button>
+            <Button status="outline-white" size="lg">white</Button>
             <hr />
-            <c-button status="outline-info">info</c-button>
-            <c-button status="outline-info" size="md">info</c-button>
-            <c-button status="outline-info" size="lg">info</c-button>
+            <Button status="outline-info">info</Button>
+            <Button status="outline-info" size="md">info</Button>
+            <Button status="outline-info" size="lg">info</Button>
             <hr />
-            <c-button status="outline-success">success</c-button>
-            <c-button status="outline-success" size="md">success</c-button>
-            <c-button status="outline-success" size="lg">success</c-button>
+            <Button status="outline-success">success</Button>
+            <Button status="outline-success" size="md">success</Button>
+            <Button status="outline-success" size="lg">success</Button>
             <hr />
-            <c-button status="outline-warning">danger</c-button>
-            <c-button status="outline-warning" size="md">danger</c-button>
-            <c-button status="outline-warning" size="lg">danger</c-button>
+            <Button status="outline-warning">danger</Button>
+            <Button status="outline-warning" size="md">danger</Button>
+            <Button status="outline-warning" size="lg">danger</Button>
             <hr />
-            <c-button status="outline-danger">danger</c-button>
-            <c-button status="outline-danger" size="md">danger</c-button>
-            <c-button status="outline-danger" size="lg">danger</c-button>
+            <Button status="outline-danger">danger</Button>
+            <Button status="outline-danger" size="md">danger</Button>
+            <Button status="outline-danger" size="lg">danger</Button>
             <hr />
-            <c-button status="outline-share">share</c-button>
-            <c-button status="outline-share" size="md">share</c-button>
-            <c-button status="outline-share" size="lg">share</c-button>
+            <Button status="outline-share">share</Button>
+            <Button status="outline-share" size="md">share</Button>
+            <Button status="outline-share" size="lg">share</Button>
             <hr />
-            <c-button status="outline-support">support</c-button>
-            <c-button status="outline-support" size="md">support</c-button>
-            <c-button status="outline-support" size="lg">support</c-button>
+            <Button status="outline-support">support</Button>
+            <Button status="outline-support" size="md">support</Button>
+            <Button status="outline-support" size="lg">support</Button>
         `)
     }))
     .add('gradient', () => ({
-        components: {'c-button': Buttons},
+        components: {
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+        },
         methods: {
             testFunction: function () {
                 console.log('BOOOOOOOOOOOM!')
             }
         },
         template: injectButtonTemplate(`
-            <c-button status="gradient-info">info</c-button>
-            <c-button status="gradient-info" size="md">info</c-button>
-            <c-button status="gradient-info" size="lg">info</c-button>
+            <Button status="gradient-info">info</Button>
+            <Button status="gradient-info" size="md">info</Button>
+            <Button status="gradient-info" size="lg">info</Button>
             <hr />
-            <c-button status="gradient-success">success</c-button>
-            <c-button status="gradient-success" size="md">success</c-button>
-            <c-button status="gradient-success" size="lg">success</c-button>
+            <Button status="gradient-success">success</Button>
+            <Button status="gradient-success" size="md">success</Button>
+            <Button status="gradient-success" size="lg">success</Button>
             <hr />
-            <c-button status="gradient-warning">danger</c-button>
-            <c-button status="gradient-warning" size="md">danger</c-button>
-            <c-button status="gradient-warning" size="lg">danger</c-button>
+            <Button status="gradient-warning">danger</Button>
+            <Button status="gradient-warning" size="md">danger</Button>
+            <Button status="gradient-warning" size="lg">danger</Button>
             <hr />
-            <c-button status="gradient-danger">danger</c-button>
-            <c-button status="gradient-danger" size="md">danger</c-button>
-            <c-button status="gradient-danger" size="lg">danger</c-button>
+            <Button status="gradient-danger">danger</Button>
+            <Button status="gradient-danger" size="md">danger</Button>
+            <Button status="gradient-danger" size="lg">danger</Button>
         `)
     }))
     .add('[options] - swap direction', () => ({
-        components: {'c-button': Buttons},
+        components: {
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+        },
         template: injectButtonTemplate(`
-            <c-button status="info" swapDirection>direction swapped</c-button>
-            <c-button status="info" size="md" swapDirection>direction swapped</c-button>
-            <c-button status="info" size="lg" swapDirection>direction swapped</c-button>
+            <Button status="info" swapDirection>direction swapped</Button>
+            <Button status="info" size="md" swapDirection>direction swapped</Button>
+            <Button status="info" size="lg" swapDirection>direction swapped</Button>
         `)
     }))
     .add('[options] - swap order', () => ({
-        components: {'c-button': Buttons},
+        components: {
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+        },
         template: injectButtonTemplate(`
-            <c-button status="success" swapOrder>success</c-button>
+            <Button status="success" swapOrder>success</Button>
         `)
     }))
     .add('[options] - swap order & direction', () => ({
-        components: {'c-button': Buttons},
+        components: {
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+        },
         template: injectButtonTemplate(`
-            <c-button status="info" size="lg" swapDirection swapOrder>order & direction swapped</c-button>
+            <Button status="info" size="lg" swapDirection swapOrder>order & direction swapped</Button>
         `)
     }))
     .add('[options] - hide icon', () => ({
-        components: {'c-button': Buttons},
+        components: {
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+        },
         template: injectButtonTemplate(`
-            <c-button status="success" iconHide>success</c-button>
+            <Button status="success" iconHide>success</Button>
         `)
     }))
     .add('[options] - emoji', () => ({
-        components: {'c-button': Buttons},
+        components: {
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+        },
         template: injectButtonTemplate(`
-            <c-button status="success">Message 👺👻👽</c-button>
+            <Button status="success">Message 👺👻👽</Button>
         `)
     }))
     .add('[options] - custom icon', () => ({
-        components: {'c-button': Buttons},
+        components: {
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+        },
         template: injectButtonTemplate(`
-            <c-button status="success" icon="anchor">success!</c-button>
+            <Button status="success" icon="anchor">success!</Button>
         `)
     }))
     .add('[options] - button tag', () => ({
-        components: {'c-button': Buttons},
+        components: {
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+        },
         template: injectButtonTemplate(`
-            <c-button status="danger" tag="button">Im button</c-button>
+            <Button status="danger" tag="button">Im button</Button>
         `)
     }))
     .add('read more', () => ({
         components: {
-            'c-load-more': LoadMore
+            LoadMore: () => import('@ericmuyser/hyper-ui').then(m => m.LoadMore)
         },
         template: `
-            <div class="p-5" style="width: 400px"><c-load-more></c-load-more></div>
+            <div class="p-5" style="width: 400px"><LoadMore /></div>
         `
     }))
     .add('arrows', () => ({
         components: {
-            'c-button-arrows': ButtonArrows
+            ButtonArrows: () => import('@ericmuyser/hyper-ui').then(m => m.ButtonArrows)
         },
         template: `
             <div class="padding-50">
-                <c-button-arrows size="sm"/>
-                <c-button-arrows/>
-                <c-button-arrows size="lg"/>
-                <c-button-arrows size="xl"/>
+                <ButtonArrows size="sm"/>
+                <ButtonArrows />
+                <ButtonArrows size="lg"/>
+                <ButtonArrows size="xl"/>
             </div>
         `
     }))
     .add('arrows - colorized', () => ({
         components: {
-            'c-button-arrows': ButtonArrows
+            ButtonArrows: () => import('@ericmuyser/hyper-ui').then(m => m.ButtonArrows)
         },
         template: `
             <div class="padding-50">
-                <c-button-arrows colorized/>
+                <ButtonArrows colorized/>
             </div>
         `
     }))
     .add('arrows - content', () => ({
         components: {
-            'c-button-arrows': ButtonArrows
+            ButtonArrows: () => import('@ericmuyser/hyper-ui').then(m => m.ButtonArrows)
         },
         template: `
             <div class="padding-50">
-                <c-button-arrows colorized>
+                <ButtonArrows colorized>
                     +319
-                </c-button-arrows>
+                </ButtonArrows>
             </div>
         `
     }))
 
-
-import {
-    MoneyInfo
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Money Info', module)
     .add('default', () => ({
         components: {
-            'c-money-info': MoneyInfo
+            MoneyInfo: () => import('@ericmuyser/hyper-ui').then(m => m.MoneyInfo)
         },
         template: `
         <div class="row m-0 p-3">
-            <c-money-info label="Spent" percent="63" amount="555.999" goal="1555.999" />
+            <MoneyInfo label="Spent" percent="63" amount="555.999" goal="1555.999" />
         </div>
         `
     }))
 
-import {
-    Checkbox,
-    CheckboxGroup
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Checkbox', module)
     .add('Single checkbox', () => ({
         components: {
-            'c-checkbox': Checkbox
+            Checkbox: () => import('@ericmuyser/hyper-ui').then(m => m.Checkbox)
         },
         data() {
             return {
@@ -903,212 +878,214 @@ storiesOf('Checkbox', module)
         },
         template: `
         <div class="row m-0 p-3">
-            <c-checkbox id="test_check" v-model="value">This is the test checkbox</c-checkbox>
+            <Checkbox id="test_check" v-model="value">This is the test checkbox</Checkbox>
         </div>
         `
     }))
     .add('Checkbox Group', () => ({
         components: {
-            'c-checkbox': Checkbox,
-            'c-checkbox-group': CheckboxGroup,
+            Checkbox: () => import('@ericmuyser/hyper-ui').then(m => m.Checkbox),
+            CheckboxGroup: () => import('@ericmuyser/hyper-ui').then(m => m.CheckboxGroup),
         },
         template: `
         <div class="row m-0 p-3">
-            <c-checkbox-group title="Group Title">
-            <c-checkbox id="test_check_1">This is the test checkbox</c-checkbox>
-            <c-checkbox id="test_check_2">This is the test checkbox</c-checkbox>
-            <c-checkbox id="test_check_3">This is the test checkbox</c-checkbox>
-            <c-checkbox id="test_check_4">This is the test checkbox</c-checkbox>
-            </c-checkbox-group>
+            <CheckboxGroup title="Group Title">
+                <Checkbox id="test_check_1">This is the test checkbox</Checkbox>
+                <Checkbox id="test_check_2">This is the test checkbox</Checkbox>
+                <Checkbox id="test_check_3">This is the test checkbox</Checkbox>
+                <Checkbox id="test_check_4">This is the test checkbox</Checkbox>
+            </CheckboxGroup>
         </div>
         `
     }))
 
-import {
-    Tooltips
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Tooltips', module)
     .add('dark', () => ({
         components: {
-            'c-tooltips': Tooltips
+            Tooltip: () => import('@ericmuyser/hyper-ui').then(m => m.Tooltip)
         },
         template: `
             <div class="row p-5">
                 <div class="col-4 text-center">
-                    <c-tooltips name="Hover Me(left Position)!" position="left" :lightStyle='false'>
+                    <Tooltip name="Hover Me(left Position)!" position="left" :lightStyle='false'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </c-tooltips>
+                    </Tooltip>
                 </div>
                 <div class="col-4 text-center">
-                    <c-tooltips name="Hover Me(Center Position)!" position="center" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='false'>
+                    <Tooltip name="Hover Me(Center Position)!" position="center" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='false'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </c-tooltips>
+                    </Tooltip>
                 </div>
                 <div class="col-4 text-center">
-                    <c-tooltips name="Hover Me(Right Position)!" position="right" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='false'>
+                    <Tooltip name="Hover Me(Right Position)!" position="right" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='false'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </c-tooltips>
+                    </Tooltip>
                 </div>
             </div>
         `
     }))
     .add('light', () => ({
         components: {
-            'c-tooltips': Tooltips
+            Tooltip: () => import('@ericmuyser/hyper-ui').then(m => m.Tooltip)
         },
         template: `
             <div class="row p-5">
                 <div class="col-4 text-center">
-                    <c-tooltips name="Hover Me(left Position)!" position="left" :lightStyle='true' >
+                    <Tooltip name="Hover Me(left Position)!" position="left" :lightStyle='true' >
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </c-tooltips>
+                    </Tooltip>
                 </div>
                 <div class="col-4 text-center">
-                    <c-tooltips name="Hover Me(Center Position)!" position="center" :lightStyle='true' >
+                    <Tooltip name="Hover Me(Center Position)!" position="center" :lightStyle='true' >
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </c-tooltips>
+                    </Tooltip>
                 </div>
                 <div class="col-4 text-center">
-                    <c-tooltips name="Hover Me(Right Position)!" position="right" :lightStyle='true' >
+                    <Tooltip name="Hover Me(Right Position)!" position="right" :lightStyle='true' >
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </c-tooltips>
+                    </Tooltip>
                 </div>
             </div>
         `
     }))
     .add('custom content', () => ({
         components: {
-            'c-tooltips': Tooltips
+            Tooltip: () => import('@ericmuyser/hyper-ui').then(m => m.Tooltip)
         },
         template: `
             <div class="row p-5">
                 <div class="col-6 text-center">
-                    <c-tooltips name="Click Me(Custom content)!" type="click" position="left" :lightStyle='true'>
+                    <Tooltip name="Click Me(Custom content)!" type="click" position="left" :lightStyle='true'>
                         <p class="p-0">Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.</p>
                         <p class="p-0 m-0">Lipsum generator.</p>
                         <a href="#" class="btn btn-sm btn-danger mt-2">Some link</a>
-                    <c-tooltips/>
+                    <Tooltip/>
                 </div>
                 <div class="col-6 text-center">
-                    <c-tooltips name="Hover Me(Custom content)!" position="center" :lightStyle='true'>
+                    <Tooltip name="Hover Me(Custom content)!" position="center" :lightStyle='true'>
                         <p class="p-0">Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.</p>
                         <p class="p-0 m-0">Lipsum generator.</p>
-                    <c-tooltips/>
+                    <Tooltip/>
                 </div>
             </div>
         `
     }))
 
-import {
-    TooltipUniversal
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Tooltip Universal', module)
     .add('default', () => ({
-        components: {'c-tooltip-universal': TooltipUniversal},
+        components: {
+            TooltipUniversal: () => import('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
+        },
         template: `
             <div class="padding-50">
-                <c-tooltip-universal
+                <TooltipUniversal
                     title="Some epic title!"
                     text="Tooltip description goes here :) 👻👽"
                     class="margin-top-50"
                 >
                     This content was wrapped around 'tooltip-universal' component tags
-                </c-tooltip-universal>
+                </TooltipUniversal>
             </div>
         `
     }))
     .add('themes', () => ({
-        components: {'c-tooltip-universal': TooltipUniversal},
+        components: {
+            TooltipUniversal: () => import('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
+        },
         template: `
             <div class="padding-50">
                 <div>
-                    <c-tooltip-universal
+                    <TooltipUniversal
                         title="Some epic title!"
                         text="Tooltip description goes here :) 👻👽"
                         position="bottom"
                     >
                         <h2>Light (by default)</h2>
-                    </c-tooltip-universal>
+                    </TooltipUniversal>
                 </div>
                 <div>
-                    <c-tooltip-universal
+                    <TooltipUniversal
                         title="Some epic title!"
                         text="Tooltip description goes here :) 👻👽"
                         theme="dark"
                         position="bottom"
                     >
                         <h2>Dark</h2>
-                    </c-tooltip-universal>
+                    </TooltipUniversal>
                 </div>
             </div>
         `
     }))
     .add('positions', () => ({
-        components: {'c-tooltip-universal': TooltipUniversal},
+        components: {
+            TooltipUniversal: () => import('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
+        },
         template: `
             <div class="padding-50">
                 <div>
-                    <c-tooltip-universal
+                    <TooltipUniversal
                         title="Some epic title!"
                         text="Tooltip description goes here :) 👻👽"
                         class="margin-top-50"
                     >
                         <h2>Top (by default)</h2>
-                    </c-tooltip-universal>
+                    </TooltipUniversal>
                 </div>
                 <div>
-                    <c-tooltip-universal
+                    <TooltipUniversal
                         title="Some epic title!"
                         text="Tooltip description goes here :) 👻👽"
                         position="right"
                     >
                         <h2>Right</h2>
-                    </c-tooltip-universal>
+                    </TooltipUniversal>
                 </div>
                 <div>
-                    <c-tooltip-universal
+                    <TooltipUniversal
                         title="Some epic title!"
                         text="Tooltip description goes here :) 👻👽"
                         position="bottom"
                     >
                         <h2>Bottom</h2>
-                    </c-tooltip-universal>
+                    </TooltipUniversal>
                 </div>
                 <div>
-                    <c-tooltip-universal
+                    <TooltipUniversal
                         title="Some epic title!"
                         text="Tooltip description goes here :) 👻👽"
                         position="left"
                     >
                         <h2>Left</h2>
-                    </c-tooltip-universal>
+                    </TooltipUniversal>
                 </div>
             </div>
         `
     }))
     .add('without icon', () => ({
-        components: {'c-tooltip-universal': TooltipUniversal},
+        components: {
+            TooltipUniversal: () => import('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
+        },
         template: `
             <div class="padding-50">
-                <c-tooltip-universal
+                <TooltipUniversal
                     title="Some epic title!"
                     text="Tooltip description goes here :) 👻👽"
                     position="bottom"
                     iconHide
                 >
                     <h2>I have no questionmark icon</h2>
-                </c-tooltip-universal>
+                </TooltipUniversal>
             </div>
         `
     }))
     .add('any content', () => ({
-        components: {'c-tooltip-universal': TooltipUniversal},
+        components: {
+            TooltipUniversal: () => import('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
+        },
         template: `
             <div class="padding-50">
                 <h2>Tooltip can take any content between its tags, like the image below or other components</h2>
-                <c-tooltip-universal
+                <TooltipUniversal
                     title="Some epic title!"
                     text="Tooltip description goes here :) 👻👽"
                     position="bottom"
@@ -1117,16 +1094,18 @@ storiesOf('Tooltip Universal', module)
                         width="150px"
                         src="https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_eda99e7f705a113d04ab2a7a36068f3e7b343d17.1920x1080.jpg?t=1529405012"
                     />
-                </c-tooltip-universal>
+                </TooltipUniversal>
             </div>
         `
     }))
     .add('custom tooltip', () => ({
-        components: {'c-tooltip-universal': TooltipUniversal},
+        components: {
+            TooltipUniversal: () => import('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
+        },
         template: `
             <div class="padding-50">
                 <h2>You create custom tooltip with template slot</h2>
-                <c-tooltip-universal position="right">
+                <TooltipUniversal position="right">
                     <img
                         width="150px"
                         src="https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_eda99e7f705a113d04ab2a7a36068f3e7b343d17.1920x1080.jpg?t=1529405012"
@@ -1141,73 +1120,62 @@ storiesOf('Tooltip Universal', module)
                             1234
                         </div>
                     </template>
-                </c-tooltip-universal>
+                </TooltipUniversal>
             </div>
         `
     }))
 
-
-import {
-    ActivityChart
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Activity Chart', module)
     .add('default', () => ({
         components: {
-            'c-activity-chart': ActivityChart
+            ActivityChart: () => import('@ericmuyser/hyper-ui').then(m => m.ActivityChart)
         },
         data: () => data.ActivityChart,
         template: `
             <div class="col-6 py-4">
-                <c-activity-chart title="Activity Chart" :years="years" />
+                <ActivityChart title="Activity Chart" :years="years" />
             </div>
         `
     }))
     .add('medium size', () => ({
         components: {
-            'c-activity-chart': ActivityChart
+            ActivityChart: () => import('@ericmuyser/hyper-ui').then(m => m.ActivityChart)
         },
         data: () => data.ActivityChart,
         template: `
             <div class="col-6 py-4">
-                <c-activity-chart title="Activity Chart" :years="years" size="md" />
+                <ActivityChart title="Activity Chart" :years="years" size="md" />
             </div>
         `
     }))
     .add('small size', () => ({
         components: {
-            'c-activity-chart': ActivityChart
+            ActivityChart: () => import('@ericmuyser/hyper-ui').then(m => m.ActivityChart)
         },
         data: () => data.ActivityChart,
         template: `
             <div class="col-6 py-4">
-                <c-activity-chart title="Activity Chart" :years="years" size="sm" />
+                <ActivityChart title="Activity Chart" :years="years" size="sm" />
             </div>
         `
     }))
     .add('extra small size', () => ({
         components: {
-            'c-activity-chart': ActivityChart
+            ActivityChart: () => import('@ericmuyser/hyper-ui').then(m => m.ActivityChart)
         },
         data: () => data.ActivityChart,
         template: `
             <div class="col-6 py-4">
-                <c-activity-chart title="Activity Chart" :years="years" size="xs" />
+                <ActivityChart title="Activity Chart" :years="years" size="xs" />
             </div>
         `
     }))
 
-import {
-    PopUps,
-    BasicPopup,
-    TermsPopup
-} from '@ericmuyser/hyper-ui'
-
-storiesOf('Popups', module)
+storiesOf('Popup', module)
     .add('default', () => ({
         components: {
-            'c-popup': PopUps,
-            'c-button': Buttons
+            Popup: () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         data() {
             return {
@@ -1226,23 +1194,23 @@ storiesOf('Popups', module)
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is dafault popup</h3>
-                <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" @close="close" ref="modal" title="Default" subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                <Button @click="showModalHandler">Show modal</Button>
+                <Popup :activated="modalActive" @close="close" ref="modal" title="Default" subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
                 Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
-                            <c-button status="danger">Cancel</c-button>
-                            <c-button status="success">Confirm</c-button>
+                            <Button status="danger">Cancel</Button>
+                            <Button status="success">Confirm</Button>
                         </div>
                     </template>
-                </c-popup>
+                </Popup>
             </div>
         `
     }))
     .add('warning', () => ({
         components: {
-            'c-popup': PopUps,
-            'c-button': Buttons
+            Popup: () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         data() {
             return {
@@ -1251,33 +1219,33 @@ storiesOf('Popups', module)
         },
         methods: {
             showModalHandler() {
-                this.modalActive = !this.modalActive;
+                this.modalActive = !this.modalActive
             },
             close() {
-                console.log('PopUp was closed!!!!!!!!!');
+                console.log('PopUp was closed!!!!!!!!!')
                 this.showModalHandler()
             }
         },
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is warning popup</h3>
-                <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" @close="close" ref="modal" title="Warning" type="warning" subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                <Button @click="showModalHandler">Show modal</Button>
+                <Popup :activated="modalActive" @close="close" ref="modal" title="Warning" type="warning" subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
                 Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
-                            <c-button status="danger">Cancel</c-button>
-                            <c-button status="success">Confirm</c-button>
+                            <Button status="danger">Cancel</Button>
+                            <Button status="success">Confirm</Button>
                         </div>
                     </template>
-                </c-popup>
+                </Popup>
             </div>
         `
     }))
     .add('danger', () => ({
         components: {
-            'c-popup': PopUps,
-            'c-button': Buttons
+            Popup: () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         data() {
             return {
@@ -1286,33 +1254,33 @@ storiesOf('Popups', module)
         },
         methods: {
             showModalHandler: function () {
-                this.modalActive = !this.modalActive;
+                this.modalActive = !this.modalActive
             },
             close() {
-                console.log('PopUp was closed!!!!!!!!!');
+                console.log('PopUp was closed!!!!!!!!!')
                 this.showModalHandler()
             }
         },
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is danger popup</h3>
-                <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" @close="close" ref="modal" title="Danger" type="danger" subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                <Button @click="showModalHandler">Show modal</Button>
+                <Popup :activated="modalActive" @close="close" ref="modal" title="Danger" type="danger" subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
                 Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
-                            <c-button status="danger">Cancel</c-button>
-                            <c-button status="success">Confirm</c-button>
+                            <Button status="danger">Cancel</Button>
+                            <Button status="success">Confirm</Button>
                         </div>
                     </template>
-                </c-popup>
+                </Popup>
             </div>
         `
     }))
     .add('info', () => ({
         components: {
-            'c-popup': PopUps,
-            'c-button': Buttons
+            Popup: () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         data() {
             return {
@@ -1321,33 +1289,33 @@ storiesOf('Popups', module)
         },
         methods: {
             showModalHandler: function () {
-                this.modalActive = !this.modalActive;
+                this.modalActive = !this.modalActive
             },
             close() {
-                console.log('PopUp was closed!!!!!!!!!');
+                console.log('PopUp was closed!!!!!!!!!')
                 this.showModalHandler()
             }
         },
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is info popup</h3>
-                <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" @close="close" ref="modal" title="Info" type="info" subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                <Button @click="showModalHandler">Show modal</Button>
+                <Popup :activated="modalActive" @close="close" ref="modal" title="Info" type="info" subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
                 Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
-                            <c-button status="danger">Cancel</c-button>
-                            <c-button status="success">Confirm</c-button>
+                            <Button status="danger">Cancel</Button>
+                            <Button status="success">Confirm</Button>
                         </div>
                     </template>
-                </c-popup>
+                </Popup>
             </div>
         `
     }))
     .add('success', () => ({
         components: {
-            'c-popup': PopUps,
-            'c-button': Buttons
+            Popup: () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         data() {
             return {
@@ -1356,47 +1324,47 @@ storiesOf('Popups', module)
         },
         methods: {
             showModalHandler: function () {
-                this.modalActive = !this.modalActive;
+                this.modalActive = !this.modalActive
             },
             close() {
-                console.log('PopUp was closed!!!!!!!!!');
+                console.log('PopUp was closed!!!!!!!!!')
                 this.showModalHandler()
             }
         },
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is success popup</h3>
-                <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" @close="close" ref="modal" type="success" title="Success" subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                <Button @click="showModalHandler">Show modal</Button>
+                <Popup :activated="modalActive" @close="close" ref="modal" type="success" title="Success" subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
                         text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
                     <template slot="footer">
                         <div class="text-right w-100">
-                            <c-button status="danger">Cancel</c-button>
-                            <c-button status="success">Confirm</c-button>
+                            <Button status="danger">Cancel</Button>
+                            <Button status="success">Confirm</Button>
                         </div>
                     </template>
-                </c-popup>
+                </Popup>
             </div>
         `
     }))
     .add('changelog', () => ({
         components: {
-            'c-basic-popup': BasicPopup,
-            'c-dotted-list': List,
-            'c-heading-bar-color': BlockHeadersColor,
-            'c-emoji-single': EmojiSingle
+            BasicPopup: () => import('@ericmuyser/hyper-ui').then(m => m.BasicPopup),
+            DottedList: () => import('@ericmuyser/hyper-ui').then(m => m.DottedList),
+            HeadingBarWithSimpleColor: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBarWithSimpleColor),
+            EmojiSingle: () => import('@ericmuyser/hyper-ui').then(m => m.EmojiSingle)
         },
         data() {
             return {
                 pensive: 0,
                 smile: 0,
-                neutral_face: 0
+                neutralFace: 0
             }
         },
         template: `
         <div class="row p-5">
             <div class="col-4">
-                <c-basic-popup :activated="true">
+                <BasicPopup :activated="true">
                     <div class="h4" slot="header">Our Updates</div>
                     <template slot="body">
                         <p>
@@ -1404,27 +1372,27 @@ storiesOf('Popups', module)
                             Sed iaculis mauris vitae eros fringilla, id congue libero mattis.
                         </p>
 
-                        <c-heading-bar-color colorCode="#5EA72B" textAlign="left" class="margin-bottom-15 margin-top-10">
+                        <HeadingBarWithSimpleColor colorCode="#5EA72B" textAlign="left" class="margin-bottom-15 margin-top-10">
                             <strong>This is the Title</strong>
-                        </c-heading-bar-color>
-                        <c-dotted-list>
+                        </HeadingBarWithSimpleColor>
+                        <DottedList>
                             <li>Donec sapien velit, vulputate</li>
                             <li>Nulla ut fermentum turpis, a fermentum enim.</li>
                             <li>Praesent feugiat erat diam, tincidunt cursus ligula pulvinar id.</li>
-                        </c-dotted-list>
+                        </DottedList>
 
-                        <c-heading-bar-color colorCode="#FADC72" textAlign="left" class="margin-bottom-15 margin-top-20">
+                        <HeadingBarWithSimpleColor colorCode="#FADC72" textAlign="left" class="margin-bottom-15 margin-top-20">
                             <strong>Aliquam nulla mi, mattis ut nisl nec</strong>
-                        </c-heading-bar-color>
-                        <c-dotted-list>
+                        </HeadingBarWithSimpleColor>
+                        <DottedList>
                             <li>Praesent in mauris nec felis dignissim viverra in at diam. Mauris congue aliquet tempus.</li>
                             <li>Morbi ut consequat eros</li>
                             <li>Aenean imperdiet lobortis tristique.</li>
-                        </c-dotted-list>
+                        </DottedList>
 
-                        <c-heading-bar-color colorCode="#F75D5D" textAlign="left" class="margin-bottom-15 margin-top-20">
+                        <HeadingBarWithSimpleColor colorCode="#F75D5D" textAlign="left" class="margin-bottom-15 margin-top-20">
                             <strong>Sed vitae lobortis quam, non porta est</strong>
-                        </c-heading-bar-color>
+                        </HeadingBarWithSimpleColor>
                         <p>
                             Donec urna nulla, condimentum vel quam quis, tempus pellentesque nibh. Vivamus gravida purus
                             at nisl molestie commodo. Praesent dictum et purus in varius. Aenean imperdiet lobortis tristique.
@@ -1434,16 +1402,16 @@ storiesOf('Popups', module)
                     </template>
                     <template slot="footer">
                         <div class="d-flex align-items-center justify-content-center pt-2 pb-4 w-100">
-                            <c-emoji-single emoji="pensive" class="mx-1" :count="pensive" @click="pensive += 1" />
-                            <c-emoji-single emoji="neutral_face" class="mx-2" :count="neutral_face" @click="neutral_face += 1" />
-                            <c-emoji-single emoji="smile" class="mx-1" :count="smile" @click="smile += 1" />
+                            <EmojiSingle emoji="pensive" class="mx-1" :count="pensive" @click="pensive += 1" />
+                            <EmojiSingle emoji="neutral_face" class="mx-2" :count="neutralFace" @click="neutralFace += 1" />
+                            <EmojiSingle emoji="smile" class="mx-1" :count="smile" @click="smile += 1" />
                         </div>
-                        <c-input placeholder="Send us your feadback" bgColor="rgba( 255, 255, 255, .1)" />
+                        <Input placeholder="Send us your feadback" bgColor="rgba( 255, 255, 255, .1)" />
                         <small class="w-100 text-center" hidden>
-                            Missed an Updates? <c-button status="plain">Check out our previous change log.</c-button>
+                            Missed an Updates? <Button status="plain">Check out our previous change log.</Button>
                         </small>
                     </template>
-                </c-basic-popup>
+                </BasicPopup>
             </div>
         </div>
 
@@ -1451,12 +1419,12 @@ storiesOf('Popups', module)
     }))
     .add('terms', () => ({
         components: {
-            'c-terms-popup': TermsPopup
+            TermsPopup: () => import('@ericmuyser/hyper-ui').then(m => m.TermsPopup)
         },
         template: `
         <div class="row p-5">
             <div class="col-4">
-                <c-terms-popup :activated="true" width="600">
+                <TermsPopup :activated="true" width="600">
                     <div class="h4" slot="header">BlockHub Developer License Agreement</div>
                     <div slot="body">
                         <div class="termsBlock">
@@ -1626,7 +1594,7 @@ storiesOf('Popups', module)
 
                         </div>
                     </div>
-                </c-terms-popup>
+                </TermsPopup>
             </div>
         </div>
 
@@ -1634,18 +1602,18 @@ storiesOf('Popups', module)
     }))
     .add('play', () => ({
         components: {
-            'c-play-popup': () => import('~/components/popups/play').then(m => m.default || m)
+            PlayPopup: () => import('@ericmuyser/hyper-ui').then(m => m.PlayPopup)
         },
         data() {
             return {
                 activated: false
             }
         },
-        template: `<div class="p-4"><c-button @click=" activated = true ">Play Now</c-button> <c-play-popup :activated="activated" @close=" activated = !activated " /></div>`
+        template: `<div class="p-4"><Button @click=" activated = true ">Play Now</Button> <PlayPopup :activated="activated" @close=" activated = !activated " /></div>`
     }))
     .add('Add to Collection', () =>({
         components: {
-            'c-add-collection-popup': () => import('~/components/popups/add-collection').then(m => m.default || m),
+            AddCollectionPopup: () => import('@ericmuyser/hyper-ui').then(m => m.AddCollectionPopup),
         },
         data() {
             return {
@@ -1672,18 +1640,13 @@ storiesOf('Popups', module)
                 description: 'Cras in dui eget nulla vulputate finibus sed id ligula.',
             }
         },
-        template: `<div class="m-4"><c-add-collection-popup :collections="collections" :image="image" :name="name" :description="description" /></div>`
+        template: `<div class="m-4"><AddCollectionPopup :collections="collections" :image="image" :name="name" :description="description" /></div>`
     }))
-
-
-import {
-    RangeSlider
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Range Slider', module)
     .add('default', () => ({
         components: {
-            'c-range-slider': RangeSlider
+            RangeSlider: () => import('@ericmuyser/hyper-ui').then(m => m.RangeSlider)
         },
         data() {
             return {
@@ -1695,7 +1658,7 @@ storiesOf('Range Slider', module)
         template: `
          <div class="row m-0 p-3">
             <div class="col-8 text-white">
-                <c-range-slider :min="min" :max="max" v-model.value="value" />
+                <RangeSlider :min="min" :max="max" v-model.value="value" />
                 <hr />
                 min - {{ min }}<br/>
                 max - {{ max }}<br />
@@ -1705,19 +1668,13 @@ storiesOf('Range Slider', module)
         `
     }))
 
-
-
-import {
-    AssetsGrid
-} from '@ericmuyser/hyper-ui'
-
-const assets_list = [
+const assetsList = [
     {
         name: 'some item name',
         price: {
-            "min": 0.99,
-            "max": 9.99,
-            "current": 2.99
+            min: 0.99,
+            max: 9.99,
+            current: 2.99
         },
         count: '240.000',
             image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
@@ -1725,9 +1682,9 @@ const assets_list = [
     {
         name: 'some another item name',
         price: {
-            "min": 0.99,
-            "max": 9.99,
-            "current": 2.99
+            min: 0.99,
+            max: 9.99,
+            current: 2.99
         },
         count: '824.000',
         image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
@@ -1735,9 +1692,9 @@ const assets_list = [
     {
         name: 'some another item name',
         price: {
-            "min": 0.99,
-            "max": 9.99,
-            "current": 2.99
+            min: 0.99,
+            max: 9.99,
+            current: 2.99
         },
         count: '824.000',
         image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
@@ -1745,9 +1702,9 @@ const assets_list = [
     {
         name: 'some another item name',
         price: {
-            "min": 0.99,
-            "max": 9.99,
-            "current": 2.99
+            min: 0.99,
+            max: 9.99,
+            current: 2.99
         },
         count: '824.000',
         image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
@@ -1755,9 +1712,9 @@ const assets_list = [
     {
         name: 'some another item name',
         price: {
-            "min": 0.99,
-            "max": 9.99,
-            "current": 2.99
+            min: 0.99,
+            max: 9.99,
+            current: 2.99
         },
         count: '824.000',
         image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
@@ -1765,37 +1722,36 @@ const assets_list = [
     {
         name: 'some another item name',
         price: {
-            "min": 0.99,
-            "max": 9.99,
-            "current": 2.99
+            min: 0.99,
+            max: 9.99,
+            current: 2.99
         },
         count: '824.000',
         image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
     }
 ]
+
 storiesOf('Assets Grid', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
         components: {
-            'c-assets-grid': AssetsGrid
+            AssetsGrid: () => import('@ericmuyser/hyper-ui').then(m => m.AssetsGrid)
         },
         data() {
             return object('Data', {
-                assets_list: assets_list
+                assetsList: assetsList
             })
         },
         template: `
-        <c-assets-grid :list="assets_list" />
+            <AssetsGrid :list="assetsList" />
         `
     }), {viewport: 'desktop'})
-
-import AssetsPopup from '@/components/asset-overview-popup'
 
 storiesOf('Assets Overview Popup', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
         components: {
-            'c-asset-popup': AssetsPopup
+            AssetPopup: () => import('@ericmuyser/hyper-ui').then(m => m.AssetPopup)
         },
         data() {
             return object('Data', {
@@ -1806,112 +1762,102 @@ storiesOf('Assets Overview Popup', module)
                     acceptOffers: true,
                     metadata: [
                             {
-                                    "label": "type",
-                                    "text": "Legendary Two Handed Sword"
+                                    label: "type",
+                                    text: "Legendary Two Handed Sword"
                             },
                             {
-                                    "label": "average dps",
-                                    "text": "2,903.6"
+                                    label: "average dps",
+                                    text: "2,903.6"
                             },
                             {
-                                    "label": "Damage Range",
-                                    "text": "2193-2880"
+                                    label: "Damage Range",
+                                    text: "2193-2880"
                             },
                             {
-                                    "label": "Attack speed",
-                                    "text": "1.15"
+                                    label: "Attack speed",
+                                    text: "1.15"
                             },
                             {
-                                    "label": "Bonus 1",
-                                    "text": "+1379-1679 Damage, +9% Damage, +1121 strenght"
+                                    label: "Bonus 1",
+                                    text: "+1379-1679 Damage, +9% Damage, +1121 strenght"
                             },
                             {
-                                    "label": "Bonus 2",
-                                    "text": "Monster kills grant +151 experiance"
+                                    label: "Bonus 2",
+                                    text: "Monster kills grant +151 experiance"
                             },
                             {
-                                    "label": "Level Requirement",
-                                    "text": "70"
+                                    label: "Level Requirement",
+                                    text: "70"
                             },
                             {
-                                    "label": "Item Durability",
-                                    "text": "40/41"
+                                    label: "Item Durability",
+                                    text: "40/41"
                             }
                     ],
                     price: {
-                            "min": 0.99,
-                            "max": 9.99,
-                            "current": 2.99
+                            min: 0.99,
+                            max: 9.99,
+                            current: 2.99
                     }
             })
         },
         template: `
-         <div class="row m-0 p-3">
-             <c-asset-popup
-                :image="image"
-                :id="id"
-                :name="name"
-                :productName="productName"
-                :priceMin="price.min"
-                :priceMax="price.max"
-                :priceCurrent="price.current"
-                :acceptOffers="acceptOffers"
-                :metadata="metadata" />
-         </div>
+            <div class="row m-0 p-3">
+                <AssetPopup
+                    :image="image"
+                    :id="id"
+                    :name="name"
+                    :productName="productName"
+                    :priceMin="price.min"
+                    :priceMax="price.max"
+                    :priceCurrent="price.current"
+                    :acceptOffers="acceptOffers"
+                    :metadata="metadata" />
+            </div>
         `
     }))
-
-import {
-    Switch
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Switch', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
         components: {
-            'c-switch': Switch
+            Switch: () => import('@ericmuyser/hyper-ui').then(m => m.Switch)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-switch :checked=true label="Label text" class="mr-5"/>
-             <c-switch :checked=true customLabel>
+             <Switch :checked=true label="Label text" class="mr-5"/>
+             <Switch :checked=true customLabel>
                 Custom label
-            </c-switch>
+            </Switch>
          </div>
         `
     }))
     .add('changed label size', () => ({
         components: {
-            'c-switch': Switch
+            Switch: () => import('@ericmuyser/hyper-ui').then(m => m.Switch)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-switch label="Some text" labelPosition="right" labelSize="22px" />
+             <Switch label="Some text" labelPosition="right" labelSize="22px" />
          </div>
         `
     }))
     .add('large', () => ({
         components: {
-            'c-switch': Switch
+            Switch: () => import('@ericmuyser/hyper-ui').then(m => m.Switch)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-switch size="lg" :checked=true />
+             <Switch size="lg" :checked=true />
          </div>
         `
     }))
-
-
-import {
-    AssetsList,
-    AssetsListDetail
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Assets List', module)
     .addDecorator(withKnobs)
     .add('type 1', () => ({
         components: {
-            'c-asset-list': AssetsList
+            AssetsList: () => import('@ericmuyser/hyper-ui').then(m => m.AssetsList)
         },
         data() {
             return object('Data', {
@@ -1931,13 +1877,13 @@ storiesOf('Assets List', module)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-asset-list :items="items" itemInRow="5" />
+             <AssetsList :items="items" itemInRow="5" />
          </div>
         `
     }))
     .add('type 2', () => ({
         components: {
-            'c-asset-list-detail': AssetsListDetail
+            AssetsListDetail: () => import('@ericmuyser/hyper-ui').then(m => m.AssetsListDetail)
         },
         data() {
             return object('Data', {
@@ -1969,114 +1915,106 @@ storiesOf('Assets List', module)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-asset-list-detail :items="items" itemInRow="4" />
+             <AssetsListDetail :items="items" itemInRow="4" />
          </div>
         `
     }))
 
-
-import {
-    Block,
-    SimpleBlock
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Block', module)
     .add('default', () => ({
         components: {
-            'c-block': Block
+            Block: () => import('@ericmuyser/hyper-ui').then(m => m.Block)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-block title="This is block title" class="col-8">
+             <Block title="This is block title" class="col-8">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Suspendisse vel arcu sit amet erat vestibulum volutpat.
                 Ut volutpat enim vel augue luctus luctus</p>
                 <p>Curabitur et molestie eros. Duis sodales ante velit,
                 ut fringilla turpis dictum sit amet. Praesent quis lacus
                 ac tellus vehicula commodo sit amet sit amet ex.</p>
-            </c-block>
+            </Block>
          </div>
         `
     }))
     .add('simple', () => ({
         components: {
-            'c-simple-block': simpleBlock
+            SimpleBlock: () => import('@ericmuyser/hyper-ui').then(m => m.SimpleBlock)
         },
         template: `
          <div class="row m-0 p-3">
             <div class="col-4">
-                 <c-simple-block image="https://bnetcmsus-a.akamaihd.net/cms/blog_thumbnail/od/ODPQGI4NN71N1544053040567.jpg" imgHeight="200px" hovered>
+                 <SimpleBlock image="https://bnetcmsus-a.akamaihd.net/cms/blog_thumbnail/od/ODPQGI4NN71N1544053040567.jpg" imgHeight="200px" hovered>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Suspendisse vel arcu sit amet erat vestibulum volutpat.
                     Ut volutpat enim vel augue luctus luctus</p>
-                </c-simple-block>
+                </SimpleBlock>
             </div>
          </div>
         `
     }))
     .add('gradient', () => ({
         components: {
-            'c-block': Block
+            Block: () => import('@ericmuyser/hyper-ui').then(m => m.Block)
         },
         template: `
              <div class="row m-0 p-3">
-                 <c-block title="This is block title" class="col-8" :bgGradient="true">
+                 <Block title="This is block title" class="col-8" :bgGradient="true">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Suspendisse vel arcu sit amet erat vestibulum volutpat.
                     Ut volutpat enim vel augue luctus luctus</p>
                     <p>Curabitur et molestie eros. Duis sodales ante velit,
                     ut fringilla turpis dictum sit amet. Praesent quis lacus
                     ac tellus vehicula commodo sit amet sit amet ex.</p>
-                </c-block>
+                </Block>
              </div>
             `
     }))
     .add('only content bg', () => ({
         components: {
-            'c-block': Block
+            Block: () => import('@ericmuyser/hyper-ui').then(m => m.Block)
         },
         template: `
              <div class="row m-0 p-3">
-                 <c-block title="This is block title" class="col-8" :bgGradient="true" :onlyContentBg="true">
+                 <Block title="This is block title" class="col-8" :bgGradient="true" :onlyContentBg="true">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Suspendisse vel arcu sit amet erat vestibulum volutpat.
                     Ut volutpat enim vel augue luctus luctus</p>
                     <p>Curabitur et molestie eros. Duis sodales ante velit,
                     ut fringilla turpis dictum sit amet. Praesent quis lacus
                     ac tellus vehicula commodo sit amet sit amet ex.</p>
-                </c-block>
+                </Block>
              </div>
             `
     }))
 
-
-import {
-    CustomModal,
-    Modal
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Modal', module)
     .add('image', () => ({
-        components: {'c-modal': Modal},
+        components: {
+            Modal: () => import('@ericmuyser/hyper-ui').then(m => m.Modal)
+        },
         template: `
-            <c-modal>
+            <Modal>
                 <img
                     src="http://gamechanger.co.ke/wp-content/uploads/2016/09/The-Witcher-3-Wild-Hunt-Game-of-the-Year-Edition3.jpg"
                 />
-            </c-modal>
+            </Modal>
         `
     }))
     .add('text', () => ({
-        components: {'c-modal': Modal},
+        components: {
+            Modal: () => import('@ericmuyser/hyper-ui').then(m => m.Modal)
+        },
         template: `
-            <c-modal>
+            <Modal>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn</p>
-            </c-modal>
+            </Modal>
         `
     }))
     .add('custom', () => ({
         components: {
-            'c-custom-modal': CustomModal
+            CustomModal: () => import('@ericmuyser/hyper-ui').then(m => m.CustomModal)
         },
         template: `
          <div class="row m-0 p-3">
@@ -2085,7 +2023,7 @@ storiesOf('Modal', module)
                   Launch modal
                 </button>
             </div>
-            <c-custom-modal id="exampleModal" title="Some modal title">
+            <CustomModal id="exampleModal" title="Some modal title">
                 <template slot="body">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id rhoncus turpis.</p>
                     <p>Aliquam nec blandit mi. Integer sed neque urna.</p>
@@ -2093,136 +2031,126 @@ storiesOf('Modal', module)
                 <template slot="footer">
                     <a href="#" class="btn btn-sm btn-success">Some Link</a>
                 </template>
-            </c-custom-modal>
+            </CustomModal>
          </div>
         `
     }))
 
-
-import {
-    Dropdown,
-    DropdownCustom,
-    DropdownPost,
-    DropdownCurrency,
-    DropdownLang
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Dropdown', module)
     .add('default', () => ({
         components: {
-            'c-dropdown': Dropdown
+            DropdownMenu: () => import('@ericmuyser/hyper-ui').then(m => m.DropdownMenu)
         },
         template: `
          <div class="row m-0 p-3">
-            <c-dropdown id="test" name="Filter by Genre" :showBg="true">
+            <DropdownMenu id="test" name="Filter by Genre" :showBg="true">
                 <a href="#">RPG</a>
                 <a href="#">ACTION</a>
                 <a href="#">Cars</a>
-            </c-dropdown>
+            </DropdownMenu>
          </div>
         `
     }))
     .add('post dropdown', () => ({
         components: {
-            'c-dropdown': DropdownPost
+            DropdownMenu: () => import('@ericmuyser/hyper-ui').then(m => m.DropdownMenu)
         },
         template: `
-         <div class="row m-0 p-3">
-             <c-dropdown />
-         </div>
+        <div class="row m-0 p-3">
+            <DropdownMenu />
+        </div>
         `
     }))
     .add('custom content', () => ({
         components: {
-            'c-dropdown': DropdownCustom
+            DropdownMenu: () => import('@ericmuyser/hyper-ui').then(m => m.DropdownMenu)
         },
         template: `
-         <div class="row m-0 p-3">
-             <c-dropdown title="Dropdown">
-                <ul class="list-unstyled">
-                <li>
-                    <a href="#">
-                        This is link
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        This is link
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        This is link
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        This is link
-                    </a>
-                </li>
-            </ul>
-            </c-dropdown>
-         </div>
+            <div class="row m-0 p-3">
+                <DropdownMenu title="Dropdown">
+                    <ul class="list-unstyled">
+                    <li>
+                        <a href="#">
+                            This is link
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            This is link
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            This is link
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            This is link
+                        </a>
+                    </li>
+                </ul>
+                </DropdownMenu>
+            </div>
         `
     }))
     .add('currency', () => ({
         components: {
-            'c-currency-dropdown': DropdownCurrency
+            CurrencyDropdown: () => import('@ericmuyser/hyper-ui').then(m => m.CurrencyDropdown)
         },
         data() {
             return {
-                "currencies": [
+                currencies: [
                     {
-                        "code": "USD",
-                        "symbol": "$",
-                        "name": "United States Dollar",
-                        "country": "us"
+                        code: "USD",
+                        symbol: "$",
+                        name: "United States Dollar",
+                        country: "us"
 
                     },
                     {
-                        "code": "RUB",
-                        "symbol": "$",
-                        "name": "United States Dollar",
-                        "country": "ru"
+                        code: "RUB",
+                        symbol: "$",
+                        name: "United States Dollar",
+                        country: "ru"
 
                     },
                     {
-                        "code": "BTC",
-                        "symbol": "B",
-                        "name": "Bitcoin",
-                        "country": ""
+                        code: "BTC",
+                        symbol: "B",
+                        name: "Bitcoin",
+                        country: ""
 
                     },
                     {
-                        "code": "ETH",
-                        "symbol": "E",
-                        "name": "Ethereum"
+                        code: "ETH",
+                        symbol: "E",
+                        name: "Ethereum"
 
                     },
                     {
-                        "code": "DAI",
-                        "symbol": "D",
-                        "name": "Dau"
+                        code: "DAI",
+                        symbol: "D",
+                        name: "Dau"
                     }
                 ],
-                "currency": {
-                    "code": "USD",
-                    "symbol": "$",
-                    "name": "United States Dollar",
-                    "country": "us"
-
+                currency: {
+                    code: "USD",
+                    symbol: "$",
+                    name: "United States Dollar",
+                    country: "us"
                 },
             }
         },
         template: `
-         <div class="row m-0 p-3">
-             <c-currency-dropdown :currentCurrency="currency" :currencies="currencies" />
-         </div>
+            <div class="row m-0 p-3">
+                <CurrencyDropdown :currentCurrency="currency" :currencies="currencies" />
+            </div>
         `
     }))
     .add('languages', () => ({
         components: {
-            'c-languages-dropdown': DropdownLang
+            LanguagesDropdown: () => import('@ericmuyser/hyper-ui').then(m => m.LanguagesDropdown)
         },
         data() {
             return {
@@ -2255,66 +2183,57 @@ storiesOf('Dropdown', module)
             }
         },
         template: `
-         <div class="row m-0 p-3">
-             <c-languages-dropdown :currentLanguage="currentLanguage" :languages="languages" />
-         </div>
+            <div class="row m-0 p-3">
+                <LanguagesDropdown :currentLanguage="currentLanguage" :languages="languages" />
+            </div>
         `
     }))
-
-import {
-    DropdownMenu,
-    FTradedAssets
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Frequently traded assets', module)
     .add('default', () => ({
         components: {
-            'c-traded-assets': FTradedAssets,
-            'c-dropdown': DropdownMenu
+            TradedAssets: () => import('@ericmuyser/hyper-ui').then(m => m.TradedAssets),
+            DropdownMenu: () => import('@ericmuyser/hyper-ui').then(m => m.DropdownMenu)
         },
         data: () => object('Data', data.TradedAssets),
         template: `
          <div class="row m-0 p-3">
              <div class="col-4">
-                <c-traded-assets :items="frequentlyTradedAssets" assets_url="#some_url_here">
+                <TradedAssets :items="frequentlyTradedAssets" assets_url="#some_url_here">
                     <template slot="filter">
-                    <c-dropdown name="Most valuable" id="most_valuable">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </c-dropdown>
+                        <DropdownMenu name="Most valuable" id="most_valuable">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </DropdownMenu>
                     </template>
-                </c-traded-assets>
+                </TradedAssets>
             </div>
          </div>
         `
     }))
 
-import {
-    GamePlan
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Game Plans', module)
     .add('default', () => ({
         components: {
-            'c-game-plan': GamePlan
+            GamePlan: () => import('@ericmuyser/hyper-ui').then(m => m.GamePlan)
         },
         data() {
             return object('Data', {
                 plans: [
                     {
-                        "title": "Play Now",
-                        "link": "#"
+                        title: "Play Now",
+                        link: "#"
                     },
                     {
-                        "title": "3 Month Subscription",
-                        "price": "12.95",
-                        "link": ""
+                        title: "3 Month Subscription",
+                        price: "12.95",
+                        link: ""
                     },
                     {
-                        "title": "1 Year Subscription",
-                        "price": "120.95",
-                        "link": ""
+                        title: "1 Year Subscription",
+                        price: "120.95",
+                        link: ""
                     }
                 ]
             })
@@ -2322,7 +2241,7 @@ storiesOf('Game Plans', module)
         template: `
          <div class="row m-0 p-3">
             <div class="col-5">
-                <c-game-plan
+                <GamePlan
                     v-for="(plan, index) in plans"
                     :key="index"
                     :plan="plan"
@@ -2332,22 +2251,17 @@ storiesOf('Game Plans', module)
          `
     }))
 
-import {
-    GamesGrid,
-    GamesGridSimple
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Games Grid', module)
     .addDecorator(withKnobs)
     .add('with description', () => ({
         components: {
-            'c-game-grid': GamesGrid
+            GamesGrid: () => import('@ericmuyser/hyper-ui').then(m => m.GamesGrid)
         },
         data: () => object('Data', data.GamesGrid),
         template: `
          <div class="row m-0 p-3">
             <div class="col-12">
-                <c-game-grid
+                <GamesGrid
                     :showRating=false
                     :showTime=true
                     :showPrice=true
@@ -2362,13 +2276,13 @@ storiesOf('Games Grid', module)
     }))
     .add('simple', () => ({
         components: {
-            'c-game-grid-simple': GamesGridSimple
+            GamesGridSimple: () => import('@ericmuyser/hyper-ui').then(m => m.GamesGridSimple)
         },
         data: () => object('Data', data.GamesGrid),
         template: `
          <div class="row m-0 p-3">
             <div class="col-12">
-                <c-game-grid-simple
+                <GamesGridSimple
                     :itemInRow="itemInRow"
                     :items="games"
                 />
@@ -2388,12 +2302,6 @@ storiesOf('Games Grid', module)
 // `
 // }))
 
-import {
-    BlockHeaders,
-    BlockHeadersColor,
-    BlockHeadersAddFields
-} from '@ericmuyser/hyper-ui'
-
 const injectHBarTemp = code => `
     <div class="row">
         <div class="col-8 p-5">
@@ -2405,40 +2313,40 @@ const injectHBarTemp = code => `
 storiesOf('Block Title', module)
     .add('default', () => ({
         components: {
-            'c-heading-bar': BlockHeaders
+            HeadingBar: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
         },
         template: injectHBarTemp(`
-            <c-heading-bar name="This is the Title" />
+            <HeadingBar name="This is the Title" />
         `)
     }))
     .add('with background', () => ({
         components: {
-            'c-heading-bar': BlockHeaders
+            HeadingBar: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
         },
         template: injectHBarTemp(`
-            <c-heading-bar name="This is the Title" :showBackground="true" />
+            <HeadingBar name="This is the Title" :showBackground="true" />
         `)
     }))
     .add('with arrows', () => ({
         components: {
-            'c-heading-bar': BlockHeaders
+            HeadingBar: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
         },
         template: injectHBarTemp(`
-            <c-heading-bar name="This is the Title" :showActions="true" :showArrows="true" />
+            <HeadingBar name="This is the Title" :showActions="true" :showArrows="true" />
         `)
     }))
     .add('with more button', () => ({
         components: {
-            'c-heading-bar': BlockHeaders
+            HeadingBar: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
         },
         template: injectHBarTemp(`
-            <c-heading-bar name="This is the Title" :showActions="true" more="#some_link"  />
+            <HeadingBar name="This is the Title" :showActions="true" more="#some_link"  />
         `)
     }))
     .add('with filters', () => ({
         components: {
-            'c-heading-bar': BlockHeaders,
-            'c-heading-bar-fields': BlockHeadersAddFields
+            HeadingBar: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar),
+            HeadingBarWithAdditionalAction: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBarWithAdditionalAction)
         },
         methods: {
             upClick: function () {
@@ -2449,266 +2357,239 @@ storiesOf('Block Title', module)
             }
         },
         template: injectHBarTemp(`
-            <c-heading-bar name="This is the Title" :showActions="true">
+            <HeadingBar name="This is the Title" :showActions="true">
                 <template slot="additional-action">
-                    <c-heading-bar-fields name="Reviews" icon="fas fa-trophy" @click_up="upClick"  @click_down="downClick" />
-                    <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" />
+                    <HeadingBarWithAdditionalAction name="Reviews" icon="fas fa-trophy" @click_up="upClick"  @click_down="downClick" />
+                    <HeadingBarWithAdditionalAction name="Price" icon="fas fa-dollar-sign" />
                 </template>
-            </c-heading-bar>
+            </HeadingBar>
         `)
     }))
     .add('with tabs', () => ({
         components: {
-            'c-heading-bar': BlockHeaders
+            HeadingBar: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
         },
         template: injectHBarTemp(`
-            <c-heading-bar>
+            <HeadingBar>
                 <template slot="heading-tabs">
                     <a href="#">First tab</a>
                     <a href="#" class="active">Second tab</a>
                     <a href="#">Third tab</a>
                 </template>
-            </c-heading-bar>
+            </HeadingBar>
         `)
     }))
     .add('colored', () => ({
         components: {
-            'c-heading-bar-color': BlockHeadersColor
+            HeadingBarWithSimpleColor: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBarWithSimpleColor)
         },
         template: injectHBarTemp(`
-            <c-heading-bar-color colorCode="#f60" textAlign="center">
+            <HeadingBarWithSimpleColor colorCode="#f60" textAlign="center">
                 <strong>This is the Title</strong>
-            </c-heading-bar-color>
+            </HeadingBarWithSimpleColor>
         `)
     }))
-
-
-import {
-    NewsListNav,
-    NewsList,
-    NewsArticle
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('News List', module)
     .add('default', () => ({
         components: {
-            'c-news-list-navigation': NewsListNav,
-            'c-news-list-articles': NewsList,
+            NewsListNavigation: () => import('@ericmuyser/hyper-ui').then(m => m.NewsListNavigation),
+            NewsList: () => import('@ericmuyser/hyper-ui').then(m => m.NewsList),
         },
         data() {
             return {
                 posts: [
                     {
-                        "id": 1,
-                        "targetType": "product",
-                        "targetId": 1,
-                        "tags": [
+                        id: 1,
+                        targetType: "product",
+                        targetId: 1,
+                        tags: [
                             {
-                                "key": "news",
-                                "value": "News"
+                                key: "news",
+                                value: "News"
                             }
                         ],
-                        "heading": "New class and event coming next week!",
-                        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                        "url": "/post/1",
-                        "date": "2018-07-24T04:09:00.000Z"
+                        heading: "New class and event coming next week!",
+                        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
+                        url: "/post/1",
+                        date: "2018-07-24T04:09:00.000Z"
                     },
                     {
-                        "id": 2,
-                        "targetType": "product",
-                        "targetId": 1,
-                        "tags": [
+                        id: 2,
+                        targetType: "product",
+                        targetId: 1,
+                        tags: [
                             {
-                                "key": "news",
-                                "value": "News"
+                                key: "news",
+                                value: "News"
                             }
                         ],
-                        "heading": "New class and event coming next week!",
-                        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                        "url": "/post/1",
-                        "date": "2016-09-24T04:09:00.000Z"
+                        heading: "New class and event coming next week!",
+                        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
+                        url: "/post/1",
+                        date: "2016-09-24T04:09:00.000Z"
                     },
                     {
-                        "id": 3,
-                        "targetType": "product",
-                        "targetId": 2,
-                        "tags": [
+                        id: 3,
+                        targetType: "product",
+                        targetId: 2,
+                        tags: [
                             {
-                                "key": "news",
-                                "value": "News"
+                                key: "news",
+                                value: "News"
                             }
                         ],
-                        "heading": "New class and event coming next week!",
-                        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                        "url": "/post/1",
-                        "date": "2014-03-24T04:09:00.000Z"
+                        heading: "New class and event coming next week!",
+                        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
+                        url: "/post/1",
+                        date: "2014-03-24T04:09:00.000Z"
                     },
                     {
-                        "id": 4,
-                        "targetType": "product",
-                        "targetId": 3,
-                        "tags": [
+                        id: 4,
+                        targetType: "product",
+                        targetId: 3,
+                        tags: [
                             {
-                                "key": "news",
-                                "value": "News"
+                                key: "news",
+                                value: "News"
                             }
                         ],
-                        "heading": "New class and event coming next week!",
-                        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                        "url": "/post/1",
-                        "date": "2017-12-24T04:09:00.000Z"
+                        heading: "New class and event coming next week!",
+                        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
+                        url: "/post/1",
+                        date: "2017-12-24T04:09:00.000Z"
                     }
                 ]
             }
         },
         template: `
         <div class="row m-0 p-5">
-            <c-news-list-navigation
-                :list="posts"
-            />
-            <c-news-list-articles
-                :articles="posts"
-            />
+            <NewsListNavigation :list="posts" />
+            <NewsList :articles="posts" />
         </div>
         `
     }))
     .add('single article', () => ({
         components: {
-            'c-news-article': NewsArticle
+            NewsArticle: () => import('@ericmuyser/hyper-ui').then(m => m.NewsArticle)
         },
         data() {
             return {
                 article: {
-                    "id": 1,
-                    "targetType": "product",
-                    "targetId": 1,
-                    "tags": [
+                    id: 1,
+                    targetType: "product",
+                    targetId: 1,
+                    tags: [
                         {
-                            "key": "news",
-                            "value": "News"
+                            key: "news",
+                            value: "News"
                         }
                     ],
-                    "heading": "New class and event coming next week!",
-                    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                    "url": "/post/1",
-                    "date": "2018-07-24T04:09:00.000Z"
+                    heading: "New class and event coming next week!",
+                    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
+                    url: "/post/1",
+                    date: "2018-07-24T04:09:00.000Z"
                 },
             }
         },
         template: `
             <div class="row">
                 <div class="col-6">
-                    <c-news-article
-                    :heading="article.heading"
-                    :date="article.date"
-                    :content="article.content"
-                    :url="article.url"
-                    itemInRow="1" />
+                    <NewsArticle
+                        :heading="article.heading"
+                        :date="article.date"
+                        :content="article.content"
+                        :url="article.url"
+                        itemInRow="1" />
                 </div>
             </div>
         `
     }))
 
-
-import {
-    Pagination
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Pagination', module)
     .add('default', () => ({
         components: {
-            'c-pagination': Pagination
+            Pagination: () => import('@ericmuyser/hyper-ui').then(m => m.Pagination)
         },
         template: `
             <div class="row m-0 p-5">
-                <c-pagination :pages="15" />
+                <Pagination :pages="15" />
             </div>
         `
     }))
     .add('Limited to 5 pages', () => ({
         components: {
-            'c-pagination': Pagination
+            Pagination: () => import('@ericmuyser/hyper-ui').then(m => m.Pagination)
         },
         template: `
             <div class="row m-0 p-5">
-                <c-pagination :pages="15" :pagesShow="5"/>
+                <Pagination :pages="15" :pagesShow="5"/>
             </div>
         `
     }))
     .add('Debouncer', () => ({
         components: {
-            'c-pagination': Pagination
+            Pagination: () => import('@ericmuyser/hyper-ui').then(m => m.Pagination)
         },
         template: `
             <div class="row m-0 p-5">
-                <c-pagination :pages="15" :debounce="1000"/>
+                <Pagination :pages="15" :debounce="1000"/>
             </div>
         `
     }))
 
-
-
-import {
-    ProductCommunity,
-    ProductCommunityComment,
-    ProductCommunityReply
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Product Community', module)
     .add('post', () => ({
         components: {
-            'c-post': ProductCommunity
+            ProductCommunityPost: () => import('@ericmuyser/hyper-ui').then(m => m.ProductCommunityPost)
         },
         data: () => data.ProductCommunity,
         template: `
             <div class="row m-0 p-5">
                 <div class="col-10">
-                    <c-post :id="post.id"
-                            :title="post.title"
-                            :rate="post.rate"
-                            :commentsCount="post.comments_count"
-                            :author="post.author"
-                            :contentImg="post.content.img"
-                            :contentText="post.content.text"
-                            :comments="post.content.comments"/>
+                    <ProductCommunityPost
+                        :id="post.id"
+                        :title="post.title"
+                        :rate="post.rate"
+                        :commentsCount="post.commentsCount"
+                        :author="post.author"
+                        :contentImg="post.content.img"
+                        :contentText="post.content.text"
+                        :comments="post.content.comments" />
                 </div>
             </div>
         `
     }))
     .add('comment', () => ({
         components: {
-            'c-comment': ProductCommunityComment
+            ProductCommunityComment: () => import('@ericmuyser/hyper-ui').then(m => m.ProductCommunityComment)
         },
         data: () => data.ProductCommunity,
         template: `
             <div class="padding-30">
-                <c-comment  :rate="post.content.comments[0].rate"
-                            :author="post.content.comments[0].author"
-                            :date="post.content.comments[0].date"
-                            :text="post.content.comments[0].text"/>
+                <ProductCommunityComment
+                    :rate="post.content.comments[0].rate"
+                    :author="post.content.comments[0].author"
+                    :date="post.content.comments[0].date"
+                    :text="post.content.comments[0].text" />
             </div>
         `
     }))
     .add('reply', () => ({
         components: {
-            'c-reply': ProductCommunityReply
+            ProductCommunityReply: () => import('@ericmuyser/hyper-ui').then(m => m.ProductCommunityReply)
         },
         template: `
             <div class="padding-30">
-                <c-reply/>
+                <ProductCommunityReply />
             </div>
         `
     }))
 
-
-import {
-    ProjectCard
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Project Card', module)
     .add('default', () => ({
         components: {
-            'c-project-card': ProjectCard
+            ProjectCard: () => import('@ericmuyser/hyper-ui').then(m => m.ProjectCard)
         },
         data() {
             return {
@@ -2779,28 +2660,25 @@ storiesOf('Project Card', module)
         template: `
             <div class="row m-0 p-5">
                 <div class="col-4" v-for="(project, index) in trendingProjects" :key="index">
-                    <c-project-card
-                                    :image="project.img"
-                                    :description="project.description"
-                                    :funds="project.funds"
-                                    :parentImage="project.game.img"
-                                    :parentName="project.game.title"
-                                    :parentDeveloper="project.game.developer"
-                                    :id="project.id"
-                                    customClass="margin-bottom-20"/>
+                    <ProjectCard
+                        :image="project.img"
+                        :description="project.description"
+                        :funds="project.funds"
+                        :parentImage="project.game.img"
+                        :parentName="project.game.title"
+                        :parentDeveloper="project.game.developer"
+                        :id="project.id"
+                        customClass="margin-bottom-20" />
                 </div>
             </div>
         `
     }))
 
-
-import SendingFundsPopup from '@/components/send-funds-popup/index'
-
 storiesOf('Sending Funds(not finished)', module)
     .add('default', () => ({
         components: {
-            'c-send-funds': SendingFundsPopup,
-            'c-button': Buttons
+            SendingFundsPopup: () => import('@ericmuyser/hyper-ui').then(m => m.SendingFundsPopup),
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         data() {
             return {
@@ -2809,21 +2687,16 @@ storiesOf('Sending Funds(not finished)', module)
         },
         methods: {
             showModalHandler: function () {
-                this.modalActive = !this.modalActive;
+                this.modalActive = !this.modalActive
             }
         },
         template: data.SendingFunds.template
     }))
 
-
-import {
-    UserCard
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('User Card', module)
     .add('default', () => ({
         components: {
-            'c-user-card': UserCard
+            UserCard: () => import('@ericmuyser/hyper-ui').then(m => m.UserCard)
         },
         data() {
             return {
@@ -2840,26 +2713,23 @@ storiesOf('User Card', module)
         template: `
         <div class="row p-5">
             <div class="col-4">
-                <c-user-card
+                <UserCard
                     :user="user"
                     @updateProfile="(prop, val) => user[prop] = val"
                 />
             </div>
             <div class="col-4">
-                <c-user-card :user="user" previewMode/>
+                <UserCard :user="user" previewMode />
             </div>
         </div>
         `
     }))
 
-
-import {
-    ScreenGallery
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Gallery', module)
     .add('screen-gallery', () => ({
-        components: {ScreenGallery},
+        components: {
+            ScreenGallery: () => import('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
+        },
         data() {
             return {
                 items: [
@@ -2877,16 +2747,8 @@ storiesOf('Gallery', module)
                 ]
             }
         },
-        template: `<screen-gallery :items="items" class="col-9"/>`
+        template: `<ScreenGallery :items="items" class="col-9"/>`
     }))
-
-
-
-import {
-    ProductCardDynamic,
-    ProductCard,
-    ProductsCards
-} from '@ericmuyser/hyper-ui'
 
 const productsCardsData = [
     {
@@ -2953,7 +2815,9 @@ const productsCardsData = [
 
 storiesOf('Product Card', module)
     .add('basic', () => ({
-        components: {ProductCard},
+        components: {
+            ProductCard: () => import('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
+        },
         data: () => ({ products: productsCardsData }),
         template: `
             <div class="row">
@@ -2970,7 +2834,9 @@ storiesOf('Product Card', module)
         `
     }))
     .add('dynamic', () => ({
-        components: {ProductCardDynamic},
+        components: {
+            ProductCardDynamic: () => import('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
+        },
         data: () => ({products: productsCardsData}),
         template: `
             <div class="row">
@@ -2992,22 +2858,16 @@ storiesOf('Product Card', module)
     }))
     .add('wrapper', () => ({
         components: {
-            'product-cards': ProductsCards
+            ProductsCards: () => import('@ericmuyser/hyper-ui').then(m => m.ProductsCards)
         },
-        data: () => ({products: productsCardsData}),
+        data: () => ({ products: productsCardsData }),
         template: `
             <div class="p-5">
                 <h1 class="text-center text-white">Hover transitions are enabled only on bigger screens</h1>
-                <product-cards :products="products"/>
+                <ProductsCards :products="products" />
             </div>
         `
     }))
-
-
-import {
-    CuratorReview,
-    CuratorsReviews
-} from '@ericmuyser/hyper-ui'
 
 const curatorReview = {
     author: {name: 'SatoSan', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'},
@@ -3034,100 +2894,93 @@ const curatorReview = {
 
 storiesOf('Curators Reviews', module)
     .add('review', () => ({
-        components: {CuratorReview},
+        components: {
+            CuratorReview: () => import('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
+        },
         data: () => ({review: curatorReview}),
-        template: `<curator-review :review="review" class="col-3"/>`
+        template: `<CuratorReview :review="review" class="col-3"/>`
     }))
     .add('reviews wrapper', () => ({
         components: {
-            'curator-reviews': CuratorsReviews
+            CuratorReviews: () => import('@ericmuyser/hyper-ui').then(m => m.CuratorReviews)
         },
         data: () => ({reviews: [curatorReview, curatorReview, curatorReview]}),
-        template: `<curator-reviews :reviews="reviews" class="col-12"/>`
+        template: `<CuratorReviews :reviews="reviews" class="col-12"/>`
     }))
-
-
-import {
-    ImagesExplorer
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Images Explorer', module)
     .add('default', () => ({
-        components: {'c-images-explorer': ImagesExplorer},
+        components: {
+            ImagesExplorer: () => import('@ericmuyser/hyper-ui').then(m => m.ImagesExplorer)
+        },
         data: () => object('Data', data.ImagesExplorer),
-        template: `<c-images-explorer :images="images"/>`
+        template: `<ImagesExplorer :images="images" />`
     }))
     .add('in modal', () => ({
         components: {
-            'c-images-explorer': ImagesExplorer,
-            'c-modal-light': Modal
+            ImagesExplorer: () => import('@ericmuyser/hyper-ui').then(m => m.ImagesExplorer),
+            ModalList: () => import('@ericmuyser/hyper-ui').then(m => m.ModalList)
         },
         data: () => object('Data', data.ImagesExplorer),
         template: `
-            <c-modal-light>
-                <c-images-explorer :images="images"/>
-            </c-modal-light>
+            <ModalList>
+                <ImagesExplorer :images="images" />
+            </ModalList>
         `
     }))
 
-
-import {
-    CollectionItem,
-    CollectionList
-} from '@ericmuyser/hyper-ui'
-
-import 'swiper/dist/css/swiper.css'
-import {swiper, swiperSlide} from 'vue-awesome-swiper'
+// import 'swiper/dist/css/swiper.css'
+// import {swiper, swiperSlide} from 'vue-awesome-swiper'
 
 storiesOf('Collection', module)
     .add('single item', () => ({
         components: {
-            'c-collection-item': CollectionItem
+            CollectionItem: () => import('@ericmuyser/hyper-ui').then(m => m.CollectionItem)
         },
         data() {
             return {
                 id: 44,
-                    title: 'Collection name',
-                    user: 'John Doel',
-                    countNumber: 2741,
-                    background: 'https://via.placeholder.com/100x100',
-                    assets: []
+                title: 'Collection name',
+                user: 'John Doel',
+                countNumber: 2741,
+                background: 'https://via.placeholder.com/100x100',
+                assets: []
             }
         },
         template: `
             <div class="col-3 p-5">
-                <c-collection-item
-                :id="id"
-                :name="title"
-                :author="user"
-                :assets="assets"
-                :background="background" />
+                <CollectionItem
+                    :id="id"
+                    :name="title"
+                    :author="user"
+                    :assets="assets"
+                    :background="background" />
             </div>
         `
     }))
     .add('list', () => ({
         components: {
-            'c-collection-list': CollectionList,
-            'c-collection-item': CollectionItem,
-            'c-swiper': swiper,
-            'c-slide': swiperSlide
+            CollectionList: () => import('@ericmuyser/hyper-ui').then(m => m.CollectionList),
+            CollectionItem: () => import('@ericmuyser/hyper-ui').then(m => m.CollectionItem),
+            Swiper: () => import('@ericmuyser/hyper-ui').then(m => m.Swiper),
+            Slide: () => import('@ericmuyser/hyper-ui').then(m => m.Slide)
         },
         data() {
             return {
                 items: [
                     {
-                            name: 'Collection name',
+                        name: 'Collection name',
                         meta: {
-                                author: 'John Doel',
-                                background: 'https://via.placeholder.com/100x100',
+                            author: 'John Doel',
+                            background: 'https://via.placeholder.com/100x100',
                             assets: []
                         },
                     },
                     {
-                            name: 'Collection name',
+                        name: 'Collection name',
                         meta: {
-                                author: 'John Doel',
-                                background: 'https://via.placeholder.com/100x100',
+                            author: 'John Doel',
+                            background: 'https://via.placeholder.com/100x100',
                             assets: []
                         },
                     },
@@ -3144,29 +2997,20 @@ storiesOf('Collection', module)
         },
         template: `
             <div class="p-5" style="width: 900px">
-                <c-collection-list
-                title="Get Started"
-                :collections="items"
-                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet tellus in neque porttitor consequat.">
-                </c-collection-list>
+                <CollectionList
+                    title="Get Started"
+                    :collections="items"
+                    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet tellus in neque porttitor consequat." />
             </div>
         `
     }))
 
-
-import {
-    GameSeries,
-    GameDescription,
-    GameIncludesList,
-    GameIncludesItem
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Game Series', module)
     .add('default', () => ({
         components: {
-            'c-game-series': GameSeries,
-            'c-game-description': GameDescription,
-            'c-game-includes-list': GameIncludesList
+            GameSeries: () => import('@ericmuyser/hyper-ui').then(m => m.GameSeries),
+            GameDescription: () => import('@ericmuyser/hyper-ui').then(m => m.GameDescription),
+            GameIncludesList: () => import('@ericmuyser/hyper-ui').then(m => m.GameIncludesList)
         },
         data() {
             return {
@@ -3174,132 +3018,132 @@ storiesOf('Game Series', module)
                 title: 'Product title',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
                 tags: ['Nunc', 'Praesent', 'Vestibulum'],
-                    images: ['https://via.placeholder.com/400x250', 'https://via.placeholder.com/400x250'],
+                images: ['https://via.placeholder.com/400x250', 'https://via.placeholder.com/400x250'],
                 price: 33.49,
                 list: [
                     {
-                            title: 'Dragon Age: Inquisition',
-                            company: 'BioWare',
-                            stars: 5,
-                            meta: {
-                                    images: {
-                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-                                    }
-                            },
+                        title: 'Dragon Age: Inquisition',
+                        company: 'BioWare',
+                        stars: 5,
+                        meta: {
+                            images: {
+                                mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                            }
+                        },
                     },
                     {
-                            title: 'Dragon Age II',
-                            company: 'BioWare',
-                            stars: 4,
-                            meta: {
-                                    images: {
-                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-                                    }
-                            },
+                        title: 'Dragon Age II',
+                        company: 'BioWare',
+                        stars: 4,
+                        meta: {
+                            images: {
+                                mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                            }
+                        },
                     },
                     {
-                            title: 'Dragon Age Down Of the Seeker',
-                            company: 'BioWare',
-                            stars: 5,
-                            meta: {
-                                    images: {
-                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-                                    }
-                            },
+                        title: 'Dragon Age Down Of the Seeker',
+                        company: 'BioWare',
+                        stars: 5,
+                        meta: {
+                            images: {
+                                mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                            }
+                        },
                     },
                     {
-                            title: 'Dragon Age Origins',
-                            company: 'BioWare',
-                            stars: 5,
-                            meta: {
-                                    images: {
-                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-                                    }
-                            },
+                        title: 'Dragon Age Origins',
+                        company: 'BioWare',
+                        stars: 5,
+                        meta: {
+                            images: {
+                                mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                            }
+                        },
                     },
                     {
-                            title: 'Dragon Age: Inquisition',
-                            company: 'BioWare',
-                            stars: 5,
-                            meta: {
-                                    images: {
-                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-                                    }
-                            },
+                        title: 'Dragon Age: Inquisition',
+                        company: 'BioWare',
+                        stars: 5,
+                        meta: {
+                            images: {
+                                mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                            }
+                        },
                     },
                     {
-                            title: 'Dragon Age II',
-                            company: 'BioWare',
-                            stars: 4,
-                            meta: {
-                                    images: {
-                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-                                    }
-                            },
+                        title: 'Dragon Age II',
+                        company: 'BioWare',
+                        stars: 4,
+                        meta: {
+                            images: {
+                                mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                            }
+                        },
                     },
                     {
-                            title: 'Dragon Age Down Of the Seeker',
-                            company: 'BioWare',
-                            stars: 5,
-                            meta: {
-                                    images: {
-                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-                                    }
-                            },
+                        title: 'Dragon Age Down Of the Seeker',
+                        company: 'BioWare',
+                        stars: 5,
+                        meta: {
+                            images: {
+                                mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                            }
+                        },
                     },
                     {
-                            title: 'Dragon Age Origins',
-                            company: 'BioWare',
-                            stars: 5,
-                            meta: {
-                                    images: {
-                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-                                    }
-                            },
+                        title: 'Dragon Age Origins',
+                        company: 'BioWare',
+                        stars: 5,
+                        meta: {
+                            images: {
+                                mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
+                            }
+                        },
                     }
                 ]
             }
         },
         template: `<div class="p-5" style="width: 900px">
-                    <c-game-series>
-                        <c-game-description
+                    <GameSeries>
+                        <GameDescription
                         :id="id"
                         :title="title"
                         :description="description"
                         :tags="tags"
                         :images="images"
                         :price="price" />
-                        <c-game-includes-list :list="list" :showNumber="5" />
-                    </c-game-series>
-                    </div>`
+                        <GameIncludesList :list="list" :showNumber="5" />
+                    </GameSeries>
+                </div>`
     }))
     .add('description', () => ({
         components: {
-            'c-game-description': GameDescription
+            GameDescription: () => import('@ericmuyser/hyper-ui').then(m => m.GameDescription)
         },
-            data() {
-                    return {
-                            id: 34,
-                            title: 'Product title',
-                            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                            tags: ['Nunc', 'Praesent', 'Vestibulum'],
-                            images: ['https://via.placeholder.com/400x250', 'https://via.placeholder.com/400x250'],
-                            price: 33.49,
+        data() {
+            return {
+                id: 34,
+                title: 'Product title',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                tags: ['Nunc', 'Praesent', 'Vestibulum'],
+                images: ['https://via.placeholder.com/400x250', 'https://via.placeholder.com/400x250'],
+                price: 33.49,
             }
         },
         template: `<div class="p-5" style="width: 900px">
-            <c-game-description
-            :id="id"
-            :title="title"
-            :description="description"
-            :tags="tags"
-            :images="images"
-            :price="price" />
+            <GameDescription
+                :id="id"
+                :title="title"
+                :description="description"
+                :tags="tags"
+                :images="images"
+                :price="price" />
         </div>`
     }))
     .add('includes item', () => ({
         components: {
-            'c-game-includes-item': GameIncludesItem
+            GameIncludesItem: () => import('@ericmuyser/hyper-ui').then(m => m.GameIncludesItem)
         },
         data() {
             return {
@@ -3310,7 +3154,7 @@ storiesOf('Game Series', module)
             }
         },
         template: `<div class="p-5" style="width: 900px">
-                        <c-game-includes-item
+                        <GameIncludesItem
                             :id="23"
                             :name="title"
                             :rating="stars"
@@ -3321,8 +3165,8 @@ storiesOf('Game Series', module)
     }))
     .add('includes list', () => ({
         components: {
-            'c-game-includes-item': GameIncludesItem,
-            'c-game-includes-list': GameIncludesList
+            GameIncludesItem: () => import('@ericmuyser/hyper-ui').then(m => m.GameIncludesItem),
+            GameIncludesList: () => import('@ericmuyser/hyper-ui').then(m => m.GameIncludesList)
         },
         data() {
             return {
@@ -3333,7 +3177,7 @@ storiesOf('Game Series', module)
                         stars: 5,
                             meta: {
                             images: {
-                                    mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg'
+                                mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg'
                             }
                         }
                     },
@@ -3341,135 +3185,129 @@ storiesOf('Game Series', module)
                         title: 'Dragon Age II',
                         company: 'BioWare',
                         stars: 4,
-                            meta: {
-                                    images: {
-                                            mediumTile: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
-                                    }
+                        meta: {
+                            images: {
+                                mediumTile: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
                             }
+                        }
                     },
                     {
                         title: 'Dragon Age Down Of the Seeker',
                         company: 'BioWare',
                         stars: 5,
-                            meta: {
-                                    images: {
-                                            mediumTile: 'https://via.placeholder.com/300x430',
-                                    }
+                        meta: {
+                            images: {
+                                mediumTile: 'https://via.placeholder.com/300x430',
                             }
+                        }
                     },
                     {
                         title: 'Dragon Age Origins',
                         company: 'BioWare',
                         stars: 5,
-                            meta: {
-                                    images: {
-                                            mediumTile: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg',
-                                    }
+                        meta: {
+                            images: {
+                                mediumTile: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg',
                             }
+                        }
                     },
                     {
                         title: 'Dragon Age: Inquisition',
                         company: 'BioWare',
                         stars: 5,
-                            meta: {
-                                    images: {
-                                            mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
-                                    }
+                        meta: {
+                            images: {
+                                mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
                             }
+                        }
                     },
                     {
                         title: 'Dragon Age II',
                         company: 'BioWare',
                         stars: 4,
-                            meta: {
-                                    images: {
-                                            mediumTile: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
-                                    }
+                        meta: {
+                            images: {
+                                mediumTile: 'https://www.licente-jocuri.ro/image/data/440-dragon-age-2-pc-cover.jpeg',
                             }
+                        }
                     },
                     {
                         title: 'Dragon Age Down Of the Seeker',
                         company: 'BioWare',
                         stars: 5,
-                            meta: {
-                                    images: {
-                                            mediumTile: 'https://via.placeholder.com/300x430',
-                                    }
+                        meta: {
+                            images: {
+                                mediumTile: 'https://via.placeholder.com/300x430',
                             }
+                        }
                     },
                     {
                         title: 'Dragon Age Origins',
                         company: 'BioWare',
                         stars: 5,
-                            meta: {
-                                    images: {
-                                            mediumTile: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg'
-                                    }
+                        meta: {
+                            images: {
+                                mediumTile: 'https://upload.wikimedia.org/wikipedia/ru/2/23/DAO-Awakening_cover.jpg'
                             }
+                        }
                     }
                 ]
             }
         },
-        template: `<div class="p-5" style="width: 900px"><c-game-includes-list :list="list" :showNumber="5" /></div>`
+        template: `<div class="p-5" style="width: 900px"><GameIncludesList :list="list" :showNumber="5" /></div>`
     }))
-
-
-import {
-    ProgressBar,
-    ProgressBarFancy
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Progress Bar', module)
     .add('default', () => ({
         components: {
-            'c-progress-bar': ProgressBar
+            ProgressBar: () => import('@ericmuyser/hyper-ui').then(m => m.ProgressBar)
         },
         template: `
             <div class="padding-50">
-                <c-progress-bar :percentages="74"/>
+                <ProgressBar :percentages="74" />
             </div>
         `
     }))
     .add('vertical', () => ({
         components: {
-            'c-progress-bar': ProgressBar
+            ProgressBar: () => import('@ericmuyser/hyper-ui').then(m => m.ProgressBar)
         },
         template: `
             <div style="height: 100px; width: 100px" class="m-4">
-                <c-progress-bar direction="vertical" :percentages="40" style="height: 100px"/>
+                <ProgressBar direction="vertical" :percentages="40" style="height: 100px" />
             </div>
         `
     }))
     .add('calculate percentages', () => ({
         components: {
-            'c-progress-bar': ProgressBar
+            ProgressBar: () => import('@ericmuyser/hyper-ui').then(m => m.ProgressBar)
         },
         data() {
             return {
-                values: {reached: 391, goal: 2490}
+                values: { reached: 391, goal: 2490 }
             }
         },
         template: `
             <div class="padding-50">
                 <h2 :style="{ color: '#fff' }">Progress bar can accept object prop and calculate percentages</h2>
                 <pre :style="{ color: '#fff' }">:values="{{ values }}"</pre>
-                <c-progress-bar :values="values"/>
+                <ProgressBar :values="values" />
             </div>
         `
     }))
     .add('show percentages', () => ({
         components: {
-            'c-progress-bar': ProgressBar
+            ProgressBar: () => import('@ericmuyser/hyper-ui').then(m => m.ProgressBar)
         },
         template: `
             <div class="padding-50">
-                <c-progress-bar :percentages="41" show_text/>
+                <ProgressBar :percentages="41" showText />
             </div>
         `
     }))
     .add('fancy', () => ({
         components: {
-            'c-progress-bar-fancy': ProgressBarFancy
+            ProgressBarFancy: () => import('@ericmuyser/hyper-ui').then(m => m.ProgressBarFancy)
         },
         data() {
             return {
@@ -3477,20 +3315,16 @@ storiesOf('Progress Bar', module)
             }
         },
         template: `<div class="position-relative p-4" style="width: 500px; height: 100px">
-                        <c-input v-model="percent" type="number" />
+                        <Input v-model="percent" type="number" />
                             <hr />
-                        <c-progress-bar-fancy :percent="percent" />
+                        <ProgressBarFancy :percent="percent" />
                     </div>`
     }))
-
-import {
-    ProjectMilestone
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Project Milestone', module)
     .add('default', () => ({
         components: {
-            'c-project-milestone': ProjectMilestone
+            ProjectMilestone: () => import('@ericmuyser/hyper-ui').then(m => m.ProjectMilestone)
         },
         data() {
             return {
@@ -3513,47 +3347,38 @@ storiesOf('Project Milestone', module)
         },
         template: `
             <div class="padding-50">
-                <c-project-milestone :milestone="milestone"/>
+                <ProjectMilestone :milestone="milestone"/>
             </div>
         `
     }))
 
-import {
-    CommunitySpotlight
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Community Spotlight', module)
     .add('default', () => ({
         components: {
-            'c-community-spotlight': CommunitySpotlight
+            CommunitySpotlight: () => import('@ericmuyser/hyper-ui').then(m => m.CommunitySpotlight)
         },
         data() {
             return {
                 discussions: [
-                    {link: '', name: 'Title', count: 98},
-                    {link: '', name: 'Post name', count: 98},
-                    {link: '', name: 'Discussion', count: 98}
+                    { link: '', name: 'Title', count: 98 },
+                    { link: '', name: 'Post name', count: 98 },
+                    { link: '', name: 'Discussion', count: 98 }
                 ]
             }
         },
         template: `
             <div class="padding-50">
-                <c-community-spotlight
+                <CommunitySpotlight
                     :discussions="discussions"
                 />
             </div>
         `
     }))
 
-import {
-    ProductReview,
-    ProductReviewForm
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Product Review', module)
     .add('default', () => ({
         components: {
-            'c-review': ProductReview
+            Review: () => import('@ericmuyser/hyper-ui').then(m => m.Review)
         },
         data() {
             return {
@@ -3566,7 +3391,7 @@ storiesOf('Product Review', module)
                     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.',
                     date: '2018-08-19T04:09:00.000Z',
                     rating: 4.5,
-                    minutes_played: 1938,
+                    minutesPlayed: 1938,
                     setup: {
                         system: 'Windows 10',
                         gpu: 'GTX 1080',
@@ -3579,31 +3404,27 @@ storiesOf('Product Review', module)
         },
         template: `
             <div class="padding-50">
-                <c-review :review="review"/>
+                <Review :review="review" />
             </div>
         `
     }))
     .add('form', () => ({
         components: {
-            'c-review-form' : ProductReviewForm
+            ReviewForm: () => import('@ericmuyser/hyper-ui').then(m => m.ReviewForm)
         },
-        template: `<div class="p-4" style="width: 1000px;"><c-review-form /></div>`
+        template: `<div class="p-4" style="width: 1000px;"><ReviewForm /></div>`
     }))
     .add('view review', () => ({
         components: {
-            'c-view-review': () => import('~/components/review/view').then(m => m.default || m),
+            ViewReview: () => import('@ericmuyser/hyper-ui').then(m => m.ViewReview),
         },
-        template: `<div class='p-5' style="width: 1000px"><c-view-review /></div>`
+        template: `<div class='p-5' style="width: 1000px"><ViewReview /></div>`
     }))
-
-import {
-    Banner
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Banner', module)
     .add('image', () => ({
         components: {
-            'c-banner': Banner
+            Banner: () => import('@ericmuyser/hyper-ui').then(m => m.Banner)
         },
         data() {
             return {
@@ -3684,125 +3505,121 @@ storiesOf('Banner', module)
                         <!--</div>-->
                     </div>
 
-                    <c-banner :slides="slides" />
+                    <Banner :slides="slides" />
             </div>`
     }))
 
-import {
-    LanguageSupport
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Product Overview', module)
     .add('Language Support', () => ({
-        components: {'c-language-support': LanguageSupport},
+        components: {
+            LanguageSupport: () => import('@ericmuyser/hyper-ui').then(m => m.LanguageSupport)
+        },
         data() {
             return {
                 languages: [
                     {
-                        "name": "English",
-                        "interface": true,
-                        "fullAudio": false,
-                        "subtitles": false,
-                        "code": "en-us"
+                        name: "English",
+                        interface: true,
+                        fullAudio: false,
+                        subtitles: false,
+                        code: "en-us"
                     },
                     {
-                        "name": "Czech",
-                        "interface": true,
-                        "fullAudio": true,
-                        "subtitles": false,
-                        "code": "cz"
+                        name: "Czech",
+                        interface: true,
+                        fullAudio: true,
+                        subtitles: false,
+                        code: "cz"
                     },
                     {
-                        "name": "French",
-                        "interface": true,
-                        "fullAudio": true,
-                        "subtitles": true,
-                        "code": "fr"
+                        name: "French",
+                        interface: true,
+                        fullAudio: true,
+                        subtitles: true,
+                        code: "fr"
                     },
                     {
-                        "name": "German",
-                        "interface": true,
-                        "fullAudio": false,
-                        "subtitles": false,
-                        "code": "de"
+                        name: "German",
+                        interface: true,
+                        fullAudio: false,
+                        subtitles: false,
+                        code: "de"
                     },
                     {
-                        "name": "Hungarian",
-                        "interface": true,
-                        "fullAudio": false,
-                        "subtitles": true,
-                        "code": "hu"
+                        name: "Hungarian",
+                        interface: true,
+                        fullAudio: false,
+                        subtitles: true,
+                        code: "hu"
                     },
                     {
-                        "name": "Russian",
-                        "interface": true,
-                        "fullAudio": false,
-                        "subtitles": true,
-                        "code": "ru"
+                        name: "Russian",
+                        interface: true,
+                        fullAudio: false,
+                        subtitles: true,
+                        code: "ru"
                     }
                 ]
             }
         },
         template: `
             <div class="padding-50">
-                <c-language-support
+                <LanguageSupport
                     style="color: white"
                     :languages="languages"
                 />
             </div>`
     }))
     .add('System Requirements', () => ({
-        components: {'c-system-requirements': SystemRequirements},
+        components: {
+            SystemRequirements: () => import('@ericmuyser/hyper-ui').then(m => m.SystemRequirements)
+        },
         data() {
             return {
                 systemRequirements: [
                     {
-                        "os": "win",
-                        "system": "Windows XP/Vista/7",
-                        "processor": "Intel or AMD Quad-Core",
-                        "memory": "3 GB (Win XP), 4GB (Win Vista/Win 7)",
-                        "graphics": "GeForce 260 (1 GB) or Radeon HD 4850 (1 GB). Resolution 1440x900.",
-                        "directx": "DirectX 9.29 has to be installed.",
-                        "hardDrive": "25GB",
-                        "sound": ""
+                        os: "win",
+                        system: "Windows XP/Vista/7",
+                        processor: "Intel or AMD Quad-Core",
+                        memory: "3 GB (Win XP), 4GB (Win Vista/Win 7)",
+                        graphics: "GeForce 260 (1 GB) or Radeon HD 4850 (1 GB). Resolution 1440x900.",
+                        directx: "DirectX 9.29 has to be installed.",
+                        hardDrive: "25GB",
+                        sound: ""
                     },
                     {
-                        "os": "mac",
-                        "system": "OS X 10.8.5 or higher",
-                        "processor": "Quad Core Intel",
-                        "memory": "8 GB RAM",
-                        "graphics": "GeForce GTX 675MX 1GB (on 1920x1080, medium), Radeon HD 6970M 1 GB (on 1920x1080, medium), Intel integrated graphics chipsets are not supported",
-                        "hardDrive": "25 GB HD space"
+                        os: "mac",
+                        system: "OS X 10.8.5 or higher",
+                        processor: "Quad Core Intel",
+                        memory: "8 GB RAM",
+                        graphics: "GeForce GTX 675MX 1GB (on 1920x1080, medium), Radeon HD 6970M 1 GB (on 1920x1080, medium), Intel integrated graphics chipsets are not supported",
+                        hardDrive: "25 GB HD space"
                     },
                     {
-                        "os": "linux",
-                        "system": "Ubuntu 14.04, Linux Mint 17, BlockHub OS",
-                        "processor": "Quad Core Intel",
-                        "memory": "4 GB RAM",
-                        "graphics": "GeForce GT 640 1GB (1440x900, medium)",
-                        "hardDrive": "25 GB HD space"
+                        os: "linux",
+                        system: "Ubuntu 14.04, Linux Mint 17, BlockHub OS",
+                        processor: "Quad Core Intel",
+                        memory: "4 GB RAM",
+                        graphics: "GeForce GT 640 1GB (1440x900, medium)",
+                        hardDrive: "25 GB HD space"
                     }
                 ]
             }
         },
         template: `
             <div class="padding-50">
-                <c-system-requirements
+                <SystemRequirements
                     style="color: white"
                     :requirements="systemRequirements"
                 />
             </div>`
     }))
 
-
-import {
-    Input,
-    InputSearcher
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Inputs', module)
     .add('default', () => ({
-        components: {'c-input': Input},
+        components: {
+            Input: () => import('@ericmuyser/hyper-ui').then(m => m.Input)
+        },
         data() {
             return {
                 text: ''
@@ -3810,13 +3627,15 @@ storiesOf('Inputs', module)
         },
         template: `
             <div class="padding-50">
-                <c-input v-model="text" placeholder="Start typing"/>
+                <Input v-model="text" placeholder="Start typing"/>
                 <span style="color: #fff">{{ text }}</span>
             </div>
         `
     }))
     .add('Searcher', () => ({
-        components: {'c-input-searcher': InputSearcher},
+        components: {
+            InputSearcher: () => import('@ericmuyser/hyper-ui').then(m => m.InputSearcher)
+        },
         data() {
             return {
                 text: ''
@@ -3824,23 +3643,17 @@ storiesOf('Inputs', module)
         },
         template: `
             <div class="padding-50">
-                <c-input-searcher v-model="text"/>
+                <InputSearcher v-model="text"/>
                 <span style="color: #fff">{{ text }}</span>
             </div>
         `
     }))
 
-
-import {
-    TimelineList,
-    TimelineItem
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Timeline', module)
     .add('item', () => ({
         components: {
-            'c-timeline': TimelineList,
-            'c-timeline-item': TimelineItem
+            TimelineList: () => import('@ericmuyser/hyper-ui').then(m => m.TimelineList),
+            TimelineItem: () => import('@ericmuyser/hyper-ui').then(m => m.TimelineItem)
         },
         data() {
             return {
@@ -3856,15 +3669,15 @@ storiesOf('Timeline', module)
         template:
             `<div class="row">
                 <div class="col">
-                    <c-timeline-item :item="item" />
+                    <TimelineItem :item="item" />
                 </div>
             </div>
         `
     }))
     .add('list', () => ({
         components: {
-            'c-timeline': TimelineList,
-            'c-timeline-item': TimelineItem
+            TimelineList: () => import('@ericmuyser/hyper-ui').then(m => m.TimelineList),
+            TimelineItem: () => import('@ericmuyser/hyper-ui').then(m => m.TimelineItem)
         },
         data() {
             return {
@@ -3950,20 +3763,16 @@ storiesOf('Timeline', module)
             }
         },
         template: `<div class="row">
-                            <div class="col p-5">
-                                <c-timeline :items="items" />
-                            </div>
-                        </div>`
+                        <div class="col p-5">
+                            <TimelineList :items="items" />
+                        </div>
+                    </div>`
     }))
-
-import {
-    PurchaseBlock
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Purchase block', module)
     .add('default', () => ({
         components: {
-            'c-purchase-block': PurchaseBlock
+            PurchaseBlock: () => import('@ericmuyser/hyper-ui').then(m => m.PurchaseBlock)
         },
         data() {
             return {
@@ -3971,21 +3780,20 @@ storiesOf('Purchase block', module)
             }
         },
         template: `<div class="p-5" style="width: 400px">
-                        <c-purchase-block
-                        :tags="['top', 'new']"
-                        :price="49.99"
-                        :eligibleTokens="300"
-                        :isReleased="true"
-                        :offersPurchases="true"
-                        :inWishlist="inWishlist"
-                        @addToWishlist="inWishlist = true"
-                        @removeFromWishlist="inWishlist = false"
-                        />
-                        </div>`
+                        <PurchaseBlock
+                            :tags="['top', 'new']"
+                            :price="49.99"
+                            :eligibleTokens="300"
+                            :isReleased="true"
+                            :offersPurchases="true"
+                            :inWishlist="inWishlist"
+                            @addToWishlist="inWishlist = true"
+                            @removeFromWishlist="inWishlist = false" />
+                    </div>`
     }))
     .add('demo', () => ({
         components: {
-            'c-purchase-block': PurchaseBlock
+            PurchaseBlock: () => import('@ericmuyser/hyper-ui').then(m => m.PurchaseBlock)
         },
         data() {
             return {
@@ -3993,7 +3801,7 @@ storiesOf('Purchase block', module)
             }
         },
         template: `<div class="p-5" style="width: 400px">
-                        <c-purchase-block
+                        <PurchaseBlock
                         :tags="['top', 'new']"
                         :price="49.99"
                         releaseDate="8 Jun, 2018"
@@ -4003,11 +3811,11 @@ storiesOf('Purchase block', module)
                         @addToWishlist="inWishlist = true"
                         @removeFromWishlist="inWishlist = false"
                         />
-                        </div>`
+                    </div>`
     }))
     .add('unavailable', () => ({
         components: {
-            'c-purchase-block': PurchaseBlock
+            PurchaseBlock: () => import('@ericmuyser/hyper-ui').then(m => m.PurchaseBlock)
         },
         data() {
             return {
@@ -4015,7 +3823,7 @@ storiesOf('Purchase block', module)
             }
         },
         template: `<div class="p-5" style="width: 400px">
-                        <c-purchase-block
+                        <PurchaseBlock
                         :tags="['new']"
                         :price="49.99"
                         :isUnavailable="true"
@@ -4026,34 +3834,28 @@ storiesOf('Purchase block', module)
                         </div>`
     }))
 
-
-import {
-    PurchaseOption
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Purchase Option', module)
     .add('single', () => ({
         components: {
-            'c-purchase-option': PurchaseOption
+            PurchaseOption: () => import('@ericmuyser/hyper-ui').then(m => m.PurchaseOption)
         },
         template: `
             <div class="p-4" style="width: 600px">
-                <c-purchase-option
-                price="44"
-                oldPrice="55"
-                gameTag="SOME TAG"
-                title="SOME TITLE"
-                :id="4"
-                 />
-                 <hr />
-                <c-purchase-option
-                price="44"
-                oldPrice="55"
-                img="https://trashbox.ru/ifiles/979051_6c28be_screenshot_00/game-of-warriors-1.1.11-1.png"
-                gameTag="SOME TAG"
-                title="SOME TITLE"
-                :id="4"
-                 />
+                <PurchaseOption
+                    price="44"
+                    oldPrice="55"
+                    gameTag="SOME TAG"
+                    title="SOME TITLE"
+                    :id="4"
+                    />
+                    <hr />
+                    <PurchaseOption
+                    price="44"
+                    oldPrice="55"
+                    img="https://trashbox.ru/ifiles/979051_6c28be_screenshot_00/game-of-warriors-1.1.11-1.png"
+                    gameTag="SOME TAG"
+                    title="SOME TITLE"
+                    :id="4" />
             </div>
         `
     }))
@@ -4086,29 +3888,24 @@ storiesOf('Purchase Option', module)
             }
         },
         components: {
-            'c-purchase-option': PurchaseOption,
-            'c-block': Block
+            PurchaseOption: () => import('@ericmuyser/hyper-ui').then(m => m.PurchaseOption),
+            Block: () => import('@ericmuyser/hyper-ui').then(m => m.Block)
         },
         template: `
         <div class="p-5">
-            <c-block title="Purchase Options" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                <c-purchase-option v-for="(option, index) in options"
-                :key="index"
-                :price="option.price"
-                :oldPrice="option.oldPrice"
-                :gameTag="option.tag"
-                :title="option.title"
-                :id="option.id"
-                :inList="(index < options.length-1) ? true : false"
-                />
-            </c-block>
+            <Block title="Purchase Options" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+                <PurchaseOption v-for="(option, index) in options"
+                    :key="index"
+                    :price="option.price"
+                    :oldPrice="option.oldPrice"
+                    :gameTag="option.tag"
+                    :title="option.title"
+                    :id="option.id"
+                    :inList="(index < options.length-1) ? true : false" />
+            </Block>
         </div>
         `
     }))
-
-import {
-    ParticipationTier
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Participation Tiers', module)
     .add('default', () => ({
@@ -4123,11 +3920,11 @@ storiesOf('Participation Tiers', module)
             }
         },
         components: {
-            'c-participation-tier': ParticipationTier,
+            ParticipationTier: () => import('@ericmuyser/hyper-ui').then(m => m.ParticipationTier),
         },
         template: `
             <div class="p-5">
-                <c-participation-tier :id="id" :price="price" :sold="sold" :left="left" :title="title" :tag="tag" />
+                <ParticipationTier :id="id" :price="price" :sold="sold" :left="left" :title="title" :tag="tag" />
             </div>
         `
     }))
@@ -4163,56 +3960,53 @@ storiesOf('Participation Tiers', module)
             }
         },
         components: {
-            'c-participation-tier': ParticipationTier,
-            'c-block': Block
+            ParticipationTier: () => import('@ericmuyser/hyper-ui').then(m => m.ParticipationTier),
+            Block: () => import('@ericmuyser/hyper-ui').then(m => m.Block)
 
         },
         template: `
             <div class="p-5">
-                <c-block title="Participation Tier" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                    <c-participation-tier v-for="(item, index) in items"
-                    :key="index"
-                    :id="item.id"
-                    :price="item.price"
-                    :sold="item.sold"
-                    :left="item.left"
-                    :title="item.title"
-                    :tag="item.tag"
-                    :inList="(index < items.length-1) ? true : false"
-                 />
-                </c-block>
+                <Block title="Participation Tier" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+                    <ParticipationTier v-for="(item, index) in items"
+                        :key="index"
+                        :id="item.id"
+                        :price="item.price"
+                        :sold="item.sold"
+                        :left="item.left"
+                        :title="item.title"
+                        :tag="item.tag"
+                        :inList="(index < items.length-1) ? true : false" />
+                </Block>
             </div>
         `
     }))
 
-import {
-    ContributeForm,
-    ContributePledge
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('Contribute', module)
     .add('form', () => ({
         components: {
-            'c-contribute-form': ContributeForm
+            ContributeForm: () => import('@ericmuyser/hyper-ui').then(m => m.ContributeForm)
         },
         data() {
             return {
                 value: 0
             }
         },
-        template: `<div class="p-4" style="width: 400px">
-                <c-contribute-form v-model="value" :defaultValue="15" /> <div class="mt-4 text-white">Value - {{ value }}</div></div>`
+        template: `
+            <div class="p-4" style="width: 400px">
+                <ContributeForm v-model="value" :defaultValue="15" /> <div class="mt-4 text-white">Value - {{ value }}</div>
+            </div>
+        `
     }))
     .add('pledge', () => ({
         components: {
-            'c-contribute-pledge': ContributePledge
+            ContributePledge: () => import('@ericmuyser/hyper-ui').then(m => m.ContributePledge)
         },
         data() {
             return {
                 pledge: {
                     minPrice: 10.99,
                     name: 'BLUE-HAIRED CATS',
-                    estimated_delivery: '12/01/2018',
+                    estimatedDelivery: '12/01/2018',
                     shipsTo: 'Anywhere in the world',
                     description: 'Maecenas a sapien luctus, placerat massa pellentesque, consectetur ante. Nam dui est, cursus at consequat quis, malesuada eget eros. ',
                     backers: 43,
@@ -4231,171 +4025,150 @@ storiesOf('Contribute', module)
             }
         },
         template: `<div class="p-4" style="width: 400px">
-                        <c-contribute-pledge
-                                    :minPrice="pledge.minPrice"
-                                    :title="pledge.name"
-                                    :description="pledge.description"
-                                    :includes="pledge.includes"
-                                    :deliveryDate="pledge.estimated_delivery"
-                                    :shipsTo="pledge.shipsTo"
-                                    :backers="pledge.backers" />
+                        <ContributePledge
+                            :minPrice="pledge.minPrice"
+                            :title="pledge.name"
+                            :description="pledge.description"
+                            :includes="pledge.includes"
+                            :deliveryDate="pledge.estimatedDelivery"
+                            :shipsTo="pledge.shipsTo"
+                            :backers="pledge.backers" />
                     </div>`
     }))
-
-import {
-    CookiePolicy
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Cookie policy', module)
     .add('default', () => ({
         components: {
-            'c-cookie-policy': CookiePolicy
+            CookiePolicy: () => import('@ericmuyser/hyper-ui').then(m => m.CookiePolicy)
         },
-        template: `<div class="p-5 position-relative" style="height: 500px;width: 700px">
-                        <c-cookie-policy />
-                    </div> `
+        template: `
+            <div class="p-5 position-relative" style="height: 500px;width: 700px">
+                <CookiePolicy />
+            </div>
+        `
     }))
-
-import {
-    WelcomeBox
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Welcome Box', module)
     .add('default', () => ({
         components: {
-            'c-welcome-box': WelcomeBox
+            WelcomeBox: () => import('@ericmuyser/hyper-ui').then(m => m.WelcomeBox)
         },
-        template: `<div class="p-5 position-relative" style="height: 900px;width: 700px">
-                        <c-welcome-box />
-                    </div> `
+        template: `
+            <div class="p-5 position-relative" style="height: 900px;width: 700px">
+                <WelcomeBox />
+            </div>
+        `
     }))
-
-import {
-    Share
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Share', module)
     .add('type 1', () => ({
         components: {
-            'c-share': Share
+            Share: () => import('@ericmuyser/hyper-ui').then(m => m.Share)
         },
         data() {
             return {
                 online: [
                     {
-                        "name": "Sally Hamilton",
-                        "img": "http://placehold.it/32x32"
+                        name: "Sally Hamilton",
+                        img: "http://placehold.it/32x32"
                     },
                     {
-                        "name": "Poole Wise",
-                        "img": "http://placehold.it/32x32"
+                        name: "Poole Wise",
+                        img: "http://placehold.it/32x32"
                     },
                     {
-                        "name": "Frye Nash",
-                        "img": "http://placehold.it/32x32"
+                        name: "Frye Nash",
+                        img: "http://placehold.it/32x32"
                     }
                 ],
                 favorites: [
                     {
-                        "name": "Nixon Love",
-                        "img": "http://placehold.it/32x32"
+                        name: "Nixon Love",
+                        img: "http://placehold.it/32x32"
                     },
                     {
-                        "name": "Richards Langley",
-                        "img": "http://placehold.it/32x32"
+                        name: "Richards Langley",
+                        img: "http://placehold.it/32x32"
                     },
                     {
-                        "name": "Jill Medina",
-                        "img": "http://placehold.it/32x32"
+                        name: "Jill Medina",
+                        img: "http://placehold.it/32x32"
                     },
                     {
-                        "name": "Callahan Ballard",
-                        "img": "http://placehold.it/32x32"
+                        name: "Callahan Ballard",
+                        img: "http://placehold.it/32x32"
                     },
                     {
-                        "name": "Zamora Simmons",
-                        "img": "http://placehold.it/32x32"
+                        name: "Zamora Simmons",
+                        img: "http://placehold.it/32x32"
                     },
                     {
-                        "name": "Jenkins Ruiz",
-                        "img": "http://placehold.it/32x32"
+                        name: "Jenkins Ruiz",
+                        img: "http://placehold.it/32x32"
                     },
                     {
-                        "name": "Kemp Christian",
-                        "img": "http://placehold.it/32x32"
+                        name: "Kemp Christian",
+                        img: "http://placehold.it/32x32"
                     }
                 ]
             }
         },
         template: `<div class="p-5 position-relative" style="height: 300px;width: 300px; margin-top: 300px">
-                        <c-share :onlineList="online" :favoritesList="favorites" :show="true" />
-                    </div> `
+                        <Share :onlineList="online" :favoritesList="favorites" :show="true" />
+                    </div>
+        `
     }))
-
-import {
-    StreamItem
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Stream', module)
     .add('default', () => ({
         components: {
-            'c-stream-item': StreamItem
+            StreamItem: () => import('@ericmuyser/hyper-ui').then(m => m.StreamItem)
         },
         data() {
             return {
-                "game": "Dota II",
-                "userName": "GodOfDota",
-                "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVIOE5IdK4MWeI-iEphf-BhZh2XsXBrBn_fcsGXbFGSF-xwH8h",
-                "previews": "http://placehold.it/600x350",
-                "src": "#",
-                "views": 10
+                game: "Dota II",
+                userName: "GodOfDota",
+                userAvatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVIOE5IdK4MWeI-iEphf-BhZh2XsXBrBn_fcsGXbFGSF-xwH8h",
+                previews: "http://placehold.it/600x350",
+                src: "#",
+                views: 10
             }
         },
         template: `
         <div class="row p-5">
             <div class="col-5">
-                <c-stream-item
-                :streamGame="game"
-                :streamName="userName"
-                :streamAvatar="userAvatar"
-                :streamImg="previews"
-                :streamSrc="src"
-                :streamViews="views"
-                />
+                <StreamItem
+                    :streamGame="game"
+                    :streamName="userName"
+                    :streamAvatar="userAvatar"
+                    :streamImg="previews"
+                    :streamSrc="src"
+                    :streamViews="views" />
             </div>
         </div>
 
         `
     }))
 
-
-import {
-    List
-} from '@ericmuyser/hyper-ui'
-
 storiesOf('List', module)
-    .add('doted', () => ({
+    .add('dotted', () => ({
         components: {
-            'c-dotted-list': List
+            DottedList: () => import('@ericmuyser/hyper-ui').then(m => m.DottedList)
         },
         template: `
         <div class="p-5">
-            <c-dotted-list>
+            <DottedList>
                 <li>Some text</li>
                 <li>Some text</li>
                 <li>Some text</li>
-            </c-dotted-list>
+            </DottedList>
         </div>`
     }))
-
-import {
-    GameInstallerModal
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Game Installer Modal', module)
     .add('default', () => ({
         components: {
-            'c-game-installer': GameInstallerModal
+            GameInstaller: () => import('@ericmuyser/hyper-ui').then(m => m.GameInstaller)
         },
         data() {
             return {
@@ -4426,147 +4199,130 @@ storiesOf('Game Installer Modal', module)
         template: `
         <div class="row p-5">
             <div class="col-5">
-                <c-game-installer
-                :activated="true"
-                :win="win"
-                :mac="mac"
-                :linux="linux"
-                :name="name"
-                :img="img"
-                :filesList="filesList"
-                >
+                <GameInstaller
+                    :activated="true"
+                    :win="win"
+                    :mac="mac"
+                    :linux="linux"
+                    :name="name"
+                    :img="img"
+                    :filesList="filesList" >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vulputate
                     et tellus ac scelerisque. Duis vel suscipit orci, vel tristique elit.
                     Praesent sollicitudin volutpat finibus.
-                </c-game-installer>
+                </GameInstaller>
             </div>
         </div>
-
         `
     }))
-
-
-import {
-    Emoji,
-    EmojiSingle
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Emoji', module)
     .add('picker', () => ({
         components: {
-            'c-emoji': Emoji
+            Emoji: () => import('@ericmuyser/hyper-ui').then(m => m.Emoji)
         },
         template: `
         <div class="p-5">
-            <c-emoji />
+            <Emoji />
         </div>`
     }))
     .add('single', () => ({
         components: {
-            'c-emoji-single': EmojiSingle
+            EmojiSingle: () => import('@ericmuyser/hyper-ui').then(m => m.EmojiSingle)
         },
         template: `
         <div class="p-5">
-            <c-emoji-single count="99" />
+            <EmojiSingle count="99" />
         </div>`
     }))
-
-
-import {
-    Landing,
-    LandingTitle,
-    LandingTitleShadow,
-    LandingTitleGradient,
-    LandingContent
-} from '@ericmuyser/hyper-ui'
 
 storiesOf('Landing Page', module)
     .add('block title', () => ({
         components: {
-            'c-landing-block-title': LandingTitle
+            LandingBlockTitle: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitle)
         },
         template: `
         <div class="p-5">
-            <c-landing-block-title>
+            <LandingBlockTitle>
                 Mutation Mode
-            </c-landing-block-title>
+            </LandingBlockTitle>
         </div>
             `
     }))
     .add('block title with shadow', () => ({
         components: {
-            'c-landing-block-title-shadow': LandingTitleShadow
+            LandingBlockTitleShadow: () => import('@ericmuyser/hyper-ui').then(m => m.shadow)
         },
         template: `
         <div class="p-5">
-            <c-landing-block-title-shadow colorShadow="#f60">
+            <LandingBlockTitleShadow colorShadow="#f60">
                 Mutation Mode
-            </c-landing-block-title-shadow>
+            </LandingBlockTitleShadow>
         </div>
             `
     }))
     .add('block title with gradient', () => ({
         components: {
-            'c-landing-block-title-gradient': LandingTitleGradient,
-            'c-landing-block-title': LandingTitle,
-            'c-landing-block-title-shadow': LandingTitleShadow
+            LandingBlockTitleGradient: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitleGradient),
+            LandingBlockTitle: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitle),
+            LandingBlockTitleShadow: () => import('@ericmuyser/hyper-ui').then(m => m.shadow)
         },
         template: `
         <div class="p-5">
-            <c-landing-block-title-gradient>
-                <c-landing-block-title slot="before" class="mb-1" fontSize="16" fontWeight="bold">
+            <LandingBlockTitleGradient>
+                <LandingBlockTitle slot="before" class="mb-1" fontSize="16" fontWeight="bold">
                     NEW
-                </c-landing-block-title>
+                </LandingBlockTitle>
                 Mutation Mode
-            </c-landing-block-title-gradient>
+            </LandingBlockTitleGradient>
             <hr />
-            <c-landing-block-title-gradient align="right">
+            <LandingBlockTitleGradient align="right">
                 Mutation Mode
-                <c-landing-block-title-shadow slot="after" class="mt-1" fontSize="16" fontWeight="bold">
+                <LandingBlockTitleShadow slot="after" class="mt-1" fontSize="16" fontWeight="bold">
                     Before title text
-                </c-landing-block-title-shadow>
-            </c-landing-block-title-gradient>
+                </LandingBlockTitleShadow>
+            </LandingBlockTitleGradient>
             <hr />
-            <c-landing-block-title-gradient align="center">
+            <LandingBlockTitleGradient align="center">
                 Mutation Mode
-            </c-landing-block-title-gradient>
+            </LandingBlockTitleGradient>
         </div>
-            `
+        `
     }))
     .add('divider', () => ({
         components: {
-            'c-landing-divider': () => import('~/components/landing/block-content/divider').then(m => m.default || m),
+            LandingDivider: () => import('@ericmuyser/hyper-ui').then(m => m.LandingDivider),
         },
         template: `
         <div class="p-5">
-            <c-landing-divider />
+            <LandingDivider />
         </div>
-            `
+        `
     }))
     .add('level', () => ({
         components: {
-            'c-landing-level': () => import('~/components/landing/block-content/level').then(m => m.default || m),
+            BlockContentLevel: () => import('@ericmuyser/hyper-ui').then(m => m.BlockContentLevel),
         },
         template: `
         <div class="p-5">
-            <c-landing-level :number="92" textPosition="left">
+            <BlockContentLevel :number="92" textPosition="left">
                 Caster Pack 5 (2017)
-            </c-landing-level>
+            </BlockContentLevel>
             <hr />
-            <c-landing-level size="md" :number="7" textPosition="right">
+            <BlockContentLevel size="md" :number="7" textPosition="right">
                 Caster Pack 5 (2017)
-            </c-landing-level>
+            </BlockContentLevel>
             <hr />
-            <c-landing-level size="lg" :number="1982" textPosition="right">
+            <BlockContentLevel size="lg" :number="1982" textPosition="right">
                 Caster Pack 5 (2017)
-            </c-landing-level>
+            </BlockContentLevel>
             <hr />
         </div>
             `
     }))
     .add('feature item', () => ({
         components: {
-            'c-landing-feature-item': () => import('~/components/landing/block-content/feature-item').then(m => m.default || m),
+            BlockContentWithFeatureItem: () => import('@ericmuyser/hyper-ui').then(m => m.BlockContentWithFeatureItem),
         },
         data() {
             return {
@@ -4592,16 +4348,16 @@ storiesOf('Landing Page', module)
         template: `
         <div class="p-5 d-flex" style="width: 1200px;">
             <div v-for="item in items" class="px-3" style="width: 33.3%;">
-                <c-landing-feature-item :title="item.title" :img="item.img">
+                <BlockContentWithFeatureItem :title="item.title" :img="item.img">
                     {{ item.text }}
-                </c-landing-feature-item>
+                </BlockContentWithFeatureItem>
             </div>
         </div>
         `
     }))
     .add('benefactor', () => ({
         components: {
-            'c-landing-benefactor': () => import('~/components/landing/block-content/benefactor').then(m => m.default || m),
+            LandingBenefactor: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBenefactor),
         },
         data() {
             return {
@@ -4618,7 +4374,7 @@ storiesOf('Landing Page', module)
                     {
                         src: 'https://i.pinimg.com/originals/44/61/88/44618879e898abbbec878eda26551d52.png',
                         name: 'Immortal III',
-                        includes_list: ['200 x Fire Lotus Belt', '200 x Golden Ornithomancer Mantle', '200 x Dragonclaw Hook', '200 x Rainmaker', '200 x Pipe of Dezun', '200 x Perceptions of the Eternal Mind',
+                        includesList: ['200 x Fire Lotus Belt', '200 x Golden Ornithomancer Mantle', '200 x Dragonclaw Hook', '200 x Rainmaker', '200 x Pipe of Dezun', '200 x Perceptions of the Eternal Mind',
                         '200 x Kantusa the Script Sword', '200 x Shattered Greatsword', '200 x Golden Gravelmaw', '100 x Golden Grasping Bludgeon', '100 x Golden Shards of Exile', '100 x Golden Staff of Perplex',
                         '100 x Golden Huntling', '100 x Golden Severing Crest', '100 x Golden Sullen Hollow', '100 x Golden Lamb to the Slaughter', '100 x Lockjaw the Boxhound']
                     },
@@ -4630,51 +4386,48 @@ storiesOf('Landing Page', module)
                 ]
             }
         },
-        template:
-            `
-        <div class="p-5" style="width: 1000px;">
-            <c-landing-benefactor :items="items">
-            </c-landing-benefactor>
-        </div>
-            `
+        template: `
+            <div class="p-5" style="width: 1000px;">
+                <LandingBenefactor :items="items" />
+            </div>
+        `
     }))
     .add('reward list', () =>({
         components: {
-            'c-landing-reward-list': () => import('~/components/landing/block-content/reward-list').then(m => m.default || m),
+            LandingRewardList: () => import('@ericmuyser/hyper-ui').then(m => m.LandingRewardList),
         },
         data() {
             return {
             }
         },
-        template:
-            `
+        template: `
             <div class="p-5" style="width: 1000px;">
-                <c-landing-reward-list>
+                <LandingRewardList>
                     <template slot="list">
                         <div v-for="(item, index) in list" :key="index" class="my-1" style="font-size: 15px; opacity: .8">
                             {{ item }}
                         </div>
                     </template>
-                </c-landing-reward-list>
+                </LandingRewardList>
             </div>
-            `
+        `
     }))
     .add('page', () => ({
         components: {
-            'c-landing-block': LandingContent,
-            'c-landing-block-title': () => import('~/components/landing/block-title/simple').then(m => m.default || m),
-            'c-landing-block-title-shadow': () => import('~/components/landing/block-title/shadow').then(m => m.default || m),
-            'c-landing-block-title-gradient': () => import('~/components/landing/block-title/gradient').then(m => m.default || m),
-            'c-landing-feature-item': () => import('~/components/landing/block-content/feature-item').then(m => m.default || m),
-            'c-landing-tabs': () => import('~/components/landing/block-content/tabs').then(m => m.default || m),
-            'c-landing-tab': () => import('~/components/landing/block-content/tab').then(m => m.default || m),
-            'c-landing-slider': () => import('~/components/landing/block-content/slider').then(m => m.default || m),
-            'c-landing-gradient-block': () => import('~/components/landing/block-content/gradient').then(m => m.default || m),
-            'c-landing-benefactor': () => import('~/components/landing/block-content/benefactor').then(m => m.default || m),
-            'c-landing-level': () => import('~/components/landing/block-content/level').then(m => m.default || m),
-            'c-landing-reward-list': () => import('~/components/landing/block-content/reward-list').then(m => m.default || m),
-            'c-landing-divider': () => import('~/components/landing/block-content/divider').then(m => m.default || m),
-            'c-landing-button': () => import('~/components/landing/button').then(m => m.default || m),
+            LandingBlock: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBlock),
+            LandingBlockTitle: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitle),
+            LandingBlockTitleShadow: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitleShadow),
+            LandingBlockTitleGradient: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitleGradient),
+            LandingFeatureItem: () => import('@ericmuyser/hyper-ui').then(m => m.LandingFeatureItem),
+            LandingTabs: () => import('@ericmuyser/hyper-ui').then(m => m.LandingTabs),
+            LandingTab: () => import('@ericmuyser/hyper-ui').then(m => m.LandingTab),
+            LandingSlider: () => import('@ericmuyser/hyper-ui').then(m => m.LandingSlider),
+            LandingGradientBlock: () => import('@ericmuyser/hyper-ui').then(m => m.LandingGradientBlock),
+            LandingBenefactor: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBenefactor),
+            LandingLevel: () => import('@ericmuyser/hyper-ui').then(m => m.LandingLevel),
+            LandingRewardList: () => import('@ericmuyser/hyper-ui').then(m => m.LandingRewardList),
+            LandingDivider: () => import('@ericmuyser/hyper-ui').then(m => m.LandingDivider),
+            LandingButton: () => import('@ericmuyser/hyper-ui').then(m => m.LandingButton),
         },
         data() {
             return {
@@ -4778,30 +4531,30 @@ storiesOf('Landing Page', module)
                         title: 'Maecenas suscipit ante'
                     }
                 ],
-                benefactor_items:[
-                {
-                    src: 'http://dotafun.su/images/aeee/b_keeperofthelight.png',
-                    name: 'Immortal I'
-                },
+                benefactorItems:[
+                    {
+                        src: 'http://dotafun.su/images/aeee/b_keeperofthelight.png',
+                        name: 'Immortal I'
+                    },
 
-                {
-                    src: 'https://u.kanobu.ru/editor/images/82/c2a25ffa-c77c-44e2-a616-c6d5e0e6d4a3.png',
-                    name: 'Immortal II'
-                },
-                {
-                    src: 'https://i.pinimg.com/originals/44/61/88/44618879e898abbbec878eda26551d52.png',
-                    name: 'Immortal III',
-                    includes_list: ['200 x Fire Lotus Belt', '200 x Golden Ornithomancer Mantle', '200 x Dragonclaw Hook', '200 x Rainmaker', '200 x Pipe of Dezun', '200 x Perceptions of the Eternal Mind',
-                        '200 x Kantusa the Script Sword', '200 x Shattered Greatsword', '200 x Golden Gravelmaw', '100 x Golden Grasping Bludgeon', '100 x Golden Shards of Exile', '100 x Golden Staff of Perplex',
-                        '100 x Golden Huntling', '100 x Golden Severing Crest', '100 x Golden Sullen Hollow', '100 x Golden Lamb to the Slaughter', '100 x Lockjaw the Boxhound']
-                },
+                    {
+                        src: 'https://u.kanobu.ru/editor/images/82/c2a25ffa-c77c-44e2-a616-c6d5e0e6d4a3.png',
+                        name: 'Immortal II'
+                    },
+                    {
+                        src: 'https://i.pinimg.com/originals/44/61/88/44618879e898abbbec878eda26551d52.png',
+                        name: 'Immortal III',
+                        includesList: ['200 x Fire Lotus Belt', '200 x Golden Ornithomancer Mantle', '200 x Dragonclaw Hook', '200 x Rainmaker', '200 x Pipe of Dezun', '200 x Perceptions of the Eternal Mind',
+                            '200 x Kantusa the Script Sword', '200 x Shattered Greatsword', '200 x Golden Gravelmaw', '100 x Golden Grasping Bludgeon', '100 x Golden Shards of Exile', '100 x Golden Staff of Perplex',
+                            '100 x Golden Huntling', '100 x Golden Severing Crest', '100 x Golden Sullen Hollow', '100 x Golden Lamb to the Slaughter', '100 x Lockjaw the Boxhound']
+                    },
 
-                {
-                    src: 'http://cdn.dota2.com/apps/dota2/images/international2017/battlepass/immortals/c_legioncommander.png?v=4054578',
-                    name: 'Immortal IV'
-                }
-            ],
-                reward_list:[
+                    {
+                        src: 'http://cdn.dota2.com/apps/dota2/images/international2017/battlepass/immortals/c_legioncommander.png?v=4054578',
+                        name: 'Immortal IV'
+                    }
+                ],
+                rewardList: [
                     '1 - Immortal Treasure I 2018',
                     '1 - Immortal Treasure II 2018',
                     '1 - Immortal Treasure III 2018',
@@ -4823,16 +4576,16 @@ storiesOf('Landing Page', module)
         },
         template: `
             <div>
-                <c-landing-block
-                title="Some content block title"
-                horizontal="center"
-                bgPosition="top center"
-                minHeight="400px"
-                bgImage="https://s1.1zoom.ru/b5050/840/Magic_Castles_Mountains_506826_1920x1080.jpg">
+                <LandingBlock
+                    title="Some content block title"
+                    horizontal="center"
+                    bgPosition="top center"
+                    minHeight="400px"
+                    bgImage="https://s1.1zoom.ru/b5050/840/Magic_Castles_Mountains_506826_1920x1080.jpg">
                     <div class="col-10 text-center">
-                        <c-landing-block-title fontSize="42" color="#f8e6c7" class="text-uppercase">
+                        <LandingBlockTitle fontSize="42" color="#f8e6c7" class="text-uppercase">
                             Battle level rewards
-                        </c-landing-block-title>
+                        </LandingBlockTitle>
 
                          <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat.
                         Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio.
@@ -4841,68 +4594,68 @@ storiesOf('Landing Page', module)
                         Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
                     </div>
                     <div class="col-10 margin-top-30">
-                        <c-landing-block-title-gradient align="center" size="md" fontSize="32" class="text-uppercase">
+                        <LandingBlockTitleGradient align="center" size="md" fontSize="32" class="text-uppercase">
                             The 2018 immortals
-                        </c-landing-block-title-gradient>
+                        </LandingBlockTitleGradient>
 
-                        <c-landing-tabs class="margin-top-20">
+                        <LandingTabs class="margin-top-20">
                             <p class="text-center">
                                  Nunc gravida placerat erat, ac pharetra felis malesuada id.<br>
                                 Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.
                             </p>
-                            <c-landing-tab name="TREASURE I">
+                            <LandingTab name="TREASURE I">
                                 Maecenas suscipit ante a leo convallis ornare.
                                 Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id.
                                 Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.
-                            </c-landing-tab>
-                            <c-landing-tab name="TREASURE II" selected>
+                            </LandingTab>
+                            <LandingTab name="TREASURE II" selected>
                                 <c-landing-slider :items="slides" />
-                            </c-landing-tab>
-                            <c-landing-tab name="TREASURE III">
+                            </LandingTab>
+                            <LandingTab name="TREASURE III">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at condimentum risus.
                                 Integer viverra quam in ipsum posuere lobortis. Integer rhoncus gravida ante a aliquam. In aliquet ex eu nibh pulvinar varius. Suspendisse maximus a arcu at sagittis. Etiam et mauris volutpat diam consequat accumsan vitae non nisi. Sed dignissim odio metus, sit amet ullamcorper ligula blandit et. Donec ac justo a erat lacinia venenatis id eu nisl.
-                            </c-landing-tab>
+                            </LandingTab>
 
-                            <c-landing-block-title tag="div" fontSize="17" color="#5EA72B" class="text-center my-4">
+                            <LandingBlockTitle tag="div" fontSize="17" color="#5EA72B" class="text-center my-4">
                                 <div class="mb-1">TREASURE I: 1 - 10 - 22 - 34 - 46 - 80 - 220 (repeats every 30 levels)</div>
                                 <div class="mb-1">TREASURE II: 1 - 98 - 112 - 132 - 152 - 230 (repeats every 30 levels)</div>
                                 <div>TREASURE III: 1 - 164 - 178 - 194 - 206 - 240 (repeats every 30 levels)</div>
-                            </c-landing-block-title>
+                            </LandingBlockTitle>
 
-                            <c-landing-gradient-block class="mt-4">
-                                <c-landing-block-title tag="div" fontSize="16" color="#fff" class="text-center">
+                            <LandingGradientBlock class="mt-4">
+                                <LandingBlockTitle tag="div" fontSize="16" color="#fff" class="text-center">
                                     LIMITED MARKETABILITY
-                                </c-landing-block-title>
+                                </LandingBlockTitle>
                                 <p>
                                     Maecenas suscipit ante a leo convallis ornare.
                                     Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id.
                                     Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.
                                 </p>
-                            </c-landing-gradient-block>
-                        </c-landing-tabs>
+                            </LandingGradientBlock>
+                        </LandingTabs>
                     </div>
-                </c-landing-block>
+                </LandingBlock>
 
-                <c-landing-divider />
+                <LandingDivider />
 
-                <c-landing-block
-                horizontal="center"
-                vertical="center"
-                title="Some content block title"
-                minHeight="50vh"
-                bgImage="http://dota2-i.ru/assets/images/resources/1671/1366x768-2042847-shadow-fiend-dota-2-wallpaper-hd.jpg">
+                <LandingBlock
+                    horizontal="center"
+                    vertical="center"
+                    title="Some content block title"
+                    minHeight="50vh"
+                    bgImage="http://dota2-i.ru/assets/images/resources/1671/1366x768-2042847-shadow-fiend-dota-2-wallpaper-hd.jpg">
                     <div class="col-12">
-                        <c-landing-block-title-gradient align="center" size="md" fontSize="32" class="text-uppercase">
+                        <LandingBlockTitleGradient align="center" size="md" fontSize="32" class="text-uppercase">
                             TRUST OF THE BENEFACTOR
-                        </c-landing-block-title-gradient>
-                        <c-landing-benefactor :items="benefactor_items">
+                        </LandingBlockTitleGradient>
+                        <LandingBenefactor :items="benefactorItems">
 
-                        </c-landing-benefactor>
+                        </LandingBenefactor>
                     </div>
                     <div class="col-3 text-right">
-                        <c-landing-level :number="92" size="md" textPosition="left" textColor="#00662e">
+                        <BlockContentLevel :number="92" size="md" textPosition="left" textColor="#00662e">
                             LEVEL
-                        </c-landing-level>
+                        </BlockContentLevel>
                     </div>
                     <div class="col-9">
                          <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat.
@@ -4911,101 +4664,99 @@ storiesOf('Landing Page', module)
                         Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id.
                         Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
                     </div>
-                </c-landing-block>
+                </LandingBlock>
 
-                <c-landing-divider />
+                <LandingDivider />
 
-                <c-landing-block
-                title="Some content block title"
-                horizontal="center"
-                vertical="center"
-                bgImage="https://steamcdn-a.akamaihd.net/apps/dota2/images/international2018/battlepass/bg_24.png">
-                        <div class="col-10">
-                            <c-landing-reward-list>
-                                <div class="d-flex justify-content-center w-100">
-                                    <div class="text-center mx-3">
-                                        <c-landing-button class="margin-bottom-20" width="280">
-                                            Buy Battle Pass
-                                        </c-landing-button>
-                                        <c-landing-block-title fontSize="13" color="#f8e6c7" class="text-uppercase">
-                                            LEVEL 1  $9.99 USD
-                                        </c-landing-block-title>
-                                        <c-landing-block-title fontSize="13" color="#f8e6c7" class="text-uppercase">
-                                            LEVEL 75  $36.99 USD
-                                        </c-landing-block-title>
-                                    </div>
-                                    <div class="text-center mx-3">
-                                        <c-landing-button class="margin-bottom-20" width="280">
-                                            Buy Levels
-                                        </c-landing-button>
-                                        <c-landing-block-title fontSize="13" color="#f8e6c7" class="text-uppercase">
-                                            5 LEVELS  $2.49 USD
-                                        </c-landing-block-title>
-                                        <c-landing-block-title fontSize="13" color="#f8e6c7" class="text-uppercase">
-                                            11 LEVELS  $4.99 USD
-                                        </c-landing-block-title>
-                                        <c-landing-block-title fontSize="13" color="#f8e6c7" class="text-uppercase">
-                                            24 LEVELS  $9.99 USD
-                                        </c-landing-block-title>
-                                    </div>
+                <LandingBlock
+                    title="Some content block title"
+                    horizontal="center"
+                    vertical="center"
+                    bgImage="https://steamcdn-a.akamaihd.net/apps/dota2/images/international2018/battlepass/bg_24.png">
+                    <div class="col-10">
+                        <LandingRewardList>
+                            <div class="d-flex justify-content-center w-100">
+                                <div class="text-center mx-3">
+                                    <c-landing-button class="margin-bottom-20" width="280">
+                                        Buy Battle Pass
+                                    </c-landing-button>
+                                    <LandingBlockTitle fontSize="13" color="#f8e6c7" class="text-uppercase">
+                                        LEVEL 1  $9.99 USD
+                                    </LandingBlockTitle>
+                                    <LandingBlockTitle fontSize="13" color="#f8e6c7" class="text-uppercase">
+                                        LEVEL 75  $36.99 USD
+                                    </LandingBlockTitle>
                                 </div>
-                                <template slot="list">
-                                    <div v-for="(item, index) in reward_list" :key="index" class="my-1" style="font-size: 15px; opacity: .8">
-                                        {{ item }}
-                                    </div>
-                                </template>
-                            </c-landing-reward-list>
-                        </div>
-                </c-landing-block>
+                                <div class="text-center mx-3">
+                                    <c-landing-button class="margin-bottom-20" width="280">
+                                        Buy Levels
+                                    </c-landing-button>
+                                    <LandingBlockTitle fontSize="13" color="#f8e6c7" class="text-uppercase">
+                                        5 LEVELS  $2.49 USD
+                                    </LandingBlockTitle>
+                                    <LandingBlockTitle fontSize="13" color="#f8e6c7" class="text-uppercase">
+                                        11 LEVELS  $4.99 USD
+                                    </LandingBlockTitle>
+                                    <LandingBlockTitle fontSize="13" color="#f8e6c7" class="text-uppercase">
+                                        24 LEVELS  $9.99 USD
+                                    </LandingBlockTitle>
+                                </div>
+                            </div>
+                            <template slot="list">
+                                <div v-for="(item, index) in rewardList" :key="index" class="my-1" style="font-size: 15px; opacity: .8">
+                                    {{ item }}
+                                </div>
+                            </template>
+                        </LandingRewardList>
+                    </div>
+                </LandingBlock>
             </div>
-            `
+        `
     }))
 
 storiesOf('Token Sale Box', module)
     .add('default', () => ({
         components: {
-            'c-token-sale': () => import('~/components/token-sale-box').then(m => m.default || m),
+            TokenSale: () => import('@ericmuyser/hyper-ui').then(m => m.TokenSale),
         },
         template: `
         <div class="p-5" style="width: 1200px;">
-            <c-token-sale
-            :hardCap="18000000"
-            :softCap="7500000"
-            :volume="1000000000"
-            :soldDollars="23455424"
-            :soldTokens="243424234"
-            />
+            <TokenSale
+                :hardCap="18000000"
+                :softCap="7500000"
+                :volume="1000000000"
+                :soldDollars="23455424"
+                :soldTokens="243424234" />
         </div>`
     }))
     .add('type 2', () => ({
         components: {
-            'c-toke-sale-2': () => import('~/components/token-sale-box/type-2').then(m => m.default || m),
+            TokenSale2: () => import('@ericmuyser/hyper-ui').then(m => m.TokenSale2),
         },
         template: `
         <div class="p-5" style="width: 1200px;">
-            <c-toke-sale-2
-            :hardCap="18000000"
-            :softCap="7500000"
-            :volume="1000000000"
-            :soldDollar="23455424"
-            :soldTokens="243424234"
-            />
+            <TokenSale2
+                :hardCap="18000000"
+                :softCap="7500000"
+                :volume="1000000000"
+                :soldDollar="23455424"
+                :soldTokens="243424234" />
         </div>`
     }))
 
 storiesOf('Guide', module)
     .add('default', () =>({
         components: {
-            'c-guide': () => import('~/components/guide').then(m => m.default || m),
+            Guide: () => import('@ericmuyser/hyper-ui').then(m => m.Guide),
         },
-        template: `<c-guide />`
+        template: `<Guide />`
     }))
 
 storiesOf('Video Popup', module)
     .add('default', () =>({
         components: {
-            'c-video-popup': () => import('~/components/video-popup').then(m => m.default || m),
-            Author
+            VideoPopup: () => import('@ericmuyser/hyper-ui').then(m => m.VideoPopup),
+            Author: () => import('@ericmuyser/hyper-ui').then(m => m.Author)
         },
         data() {
             return {
@@ -5070,44 +4821,44 @@ storiesOf('Video Popup', module)
             }
         },
         template: `<div class="p-5">
-                        <c-button @click="showLocalHandler" class="m-3">Show Local Video Modal</c-button>
-                        <c-button @click="showYoutubeHandler" class="m-3">Show Youtube Video Modal</c-button>
-                        <c-button @click="showTwitchHandler" class="m-3">Show Twitch Video Modal</c-button>
+                        <Button @click="showLocalHandler" class="m-3">Show Local Video Modal</Button>
+                        <Button @click="showYoutubeHandler" class="m-3">Show Youtube Video Modal</Button>
+                        <Button @click="showTwitchHandler" class="m-3">Show Twitch Video Modal</Button>
 
-                        <c-video-popup :twitch="twitch" @close="closeModal" :activated="showTwitch">
+                        <VideoPopup :twitch="twitch" @close="closeModal" :activated="showTwitch">
                             <template v-for="comment in comments">
                                 <div class="mb-3">
                                 <author :author="comment.author" class="mb-1"/>
                                 {{ comment.text }}
                                 </div>
                             </template>
-                        </c-video-popup>
+                        </VideoPopup>
 
-                        <c-video-popup :youtube="youtube" @close="closeModal" :activated="showYoutube">
+                        <VideoPopup :youtube="youtube" @close="closeModal" :activated="showYoutube">
                             <template v-for="comment in comments">
                                 <div class="mb-3">
                                 <author :author="comment.author" class="mb-1"/>
                                 {{ comment.text }}
                                 </div>
                             </template>
-                        </c-video-popup>
+                        </VideoPopup>
 
-                        <c-video-popup :video="video" @close="closeModal" :activated="showLocal">
+                        <VideoPopup :video="video" @close="closeModal" :activated="showLocal">
                             <template v-for="comment in comments">
                                 <div class="mb-3">
                                 <author :author="comment.author" class="mb-1"/>
                                 {{ comment.text }}
                                 </div>
                             </template>
-                        </c-video-popup>
+                        </VideoPopup>
                     </div>
-`
+        `
     }))
     .add('video list', () => ({
         components: {
-            'c-video-popup': () => import('~/components/video-popup').then(m => m.default || m),
-            'c-video-item': () => import('~/components/video-list').then(m => m.default || m),
-            Author
+            VideoPopup: () => import('@ericmuyser/hyper-ui').then(m => m.VideoPopup),
+            VideoItem: () => import('@ericmuyser/hyper-ui').then(m => m.VideoItem),
+            Author: () => import('@ericmuyser/hyper-ui').then(m => m.Author)
         },
         data() {
             return {
@@ -5229,7 +4980,7 @@ storiesOf('Video Popup', module)
         template: `<div class="p-5">
                         <div class="row">
                             <div class="col-5 col-lg-4" v-for="video in videos">
-                                <c-video-item
+                                <VideoItem
                                 :poster="video.poster"
                                 :author="video.name"
                                 :avatar="video.avatar"
@@ -5247,61 +4998,63 @@ storiesOf('Video Popup', module)
 storiesOf('Wallet', module)
     .add('default', () => ({
         components: {
-            'c-wallet-base': () => import('~/components/wallet/base').then(m => m.default || m),
-            'c-wallet-main': () => import('~/components/wallet').then(m => m.default || m),
-            'c-wallet-transfer': () => import('~/components/wallet/transfer').then(m => m.default || m),
-            'c-wallet-deposit': () => import('~/components/wallet/deposit').then(m => m.default || m),
-            'c-wallet-edit': () => import('~/components/wallet/account-edit').then(m => m.default || m),
-            'c-wallet-token': () => import('~/components/wallet/token').then(m => m.default || m),
+            WalletBase: () => import('@ericmuyser/hyper-ui').then(m => m.WalletBase),
+            WalletMain: () => import('@ericmuyser/hyper-ui').then(m => m.WalletMain),
+            WalletTransfer: () => import('@ericmuyser/hyper-ui').then(m => m.WalletTransfer),
+            WalletDeposit: () => import('@ericmuyser/hyper-ui').then(m => m.WalletDeposit),
+            WalletEdit: () => import('@ericmuyser/hyper-ui').then(m => m.WalletEdit),
+            WalletToken: () => import('@ericmuyser/hyper-ui').then(m => m.WalletToken),
         },
-		    data: () => data.WalletData,
-        template: `<div class="row p-3 m-0 flex-wrap" style="width: 1125px">
-                        <div class="mx-2 mb-4">
-                            <h4 class="text-white">Main screen</h4>
-                            <c-wallet-base>
-                                <c-wallet-main />
-                            </c-wallet-base>
-                        </div>
-                        <div class="mx-2 mb-4">
-                            <h4 class="text-white">Transfer screen</h4>
-                            <c-wallet-base>
-                                <c-wallet-transfer />
-                            </c-wallet-base>
-                        </div>
-                        <div class="mx-2 mb-4">
-                            <h4 class="text-white">Deposit screen</h4>
-                            <c-wallet-base>
-                                <c-wallet-deposit />
-                            </c-wallet-base>
-                        </div>
-                        <div class="mx-2 mb-4">
-                            <h4 class="text-white">Account Edit screen</h4>
-                            <c-wallet-base>
-                                <c-wallet-edit />
-                            </c-wallet-base>
-                        </div>
-                        <div class="mx-2 mb-4">
-                            <h4 class="text-white">Wallet token</h4>
-                            <c-wallet-base>
-                                <c-wallet-token />
-                            </c-wallet-base>
-                        </div>
-                    </div>`
+        data: () => data.WalletData,
+        template: `
+            <div class="row p-3 m-0 flex-wrap" style="width: 1125px">
+                <div class="mx-2 mb-4">
+                    <h4 class="text-white">Main screen</h4>
+                    <WalletBase>
+                        <WalletMain />
+                    </WalletBase>
+                </div>
+                <div class="mx-2 mb-4">
+                    <h4 class="text-white">Transfer screen</h4>
+                    <WalletBase>
+                        <WalletTransfer />
+                    </WalletBase>
+                </div>
+                <div class="mx-2 mb-4">
+                    <h4 class="text-white">Deposit screen</h4>
+                    <WalletBase>
+                        <WalletDeposit />
+                    </WalletBase>
+                </div>
+                <div class="mx-2 mb-4">
+                    <h4 class="text-white">Account Edit screen</h4>
+                    <WalletBase>
+                        <WalletEdit />
+                    </WalletBase>
+                </div>
+                <div class="mx-2 mb-4">
+                    <h4 class="text-white">Wallet token</h4>
+                    <WalletBase>
+                        <WalletToken />
+                    </WalletBase>
+                </div>
+            </div>
+        `
     }))
 
 
 storiesOf('Chat', module)
     .add('base', () => ({
         components: {
-            'c-chat-base': () => import('~/components/chat-new/base').then(m => m.default || m),
-            'c-chat-group': () => import('~/components/chat-new/content/group').then(m => m.default || m),
-            'c-chat-private': () => import('~/components/chat-new/content/private').then(m => m.default || m),
-            'c-chat-message': () => import('~/components/chat-new/message').then(m => m.default || m),
-            'c-chat-user': () => import('~/components/chat-new/user').then(m => m.default || m),
-            'c-chat-group-welcome': () => import('~/components/chat-new/content/welcome').then(m => m.default || m),
-            'c-chat-group-sidebar': () => import('~/components/chat-new/content/group-list').then(m => m.default || m),
-            'c-chat-group-new': () => import('~/components/chat-new/content/new-group').then(m => m.default || m),
-            'c-chat-friends-list': () => import('~/components/chat-new/friends-list/index').then(m => m.default || m),
+            ChatBase: () => import('@ericmuyser/hyper-ui').then(m => m.ChatBase),
+            ChatGroup: () => import('@ericmuyser/hyper-ui').then(m => m.ChatGroup),
+            ChatPrivate: () => import('@ericmuyser/hyper-ui').then(m => m.ChatPrivate),
+            ChatMessage: () => import('@ericmuyser/hyper-ui').then(m => m.ChatMessage),
+            ChatUser: () => import('@ericmuyser/hyper-ui').then(m => m.ChatUser),
+            ChatGroupWelcome: () => import('@ericmuyser/hyper-ui').then(m => m.ChatGroupWelcome),
+            ChatGroupSidebar: () => import('@ericmuyser/hyper-ui').then(m => m.ChatGroupSidebar),
+            ChatGroupNew: () => import('@ericmuyser/hyper-ui').then(m => m.ChatGroupNew),
+            ChatFriendsList: () => import('@ericmuyser/hyper-ui').then(m => m.ChatFriendsList),
         },
         data() {
             return {
@@ -5310,56 +5063,56 @@ storiesOf('Chat', module)
         template: `<div class="row p-3 m-0 flex-wrap" style="width: 1100px;">
                     <div class="col-12" >
                         <h3 class="text-white">Group chat "Welcome block"</h3>
-                        <c-chat-base style="height: 700px" :shortcuts="shortcuts">
+                        <ChatBase style="height: 700px" :shortcuts="shortcuts">
                             <template slot="sidebar">
-                                <c-chat-group-sidebar />
+                                <ChatGroupSidebar />
                             </template>
-                            <c-chat-group>
+                            <ChatGroup>
                                 <template slot="messages">
-                                    <c-chat-group-welcome />
+                                    <ChatGroupWelcome />
                                 </template>
                                 <template slot="users">
-                                    <c-chat-user v-for="user in userList" :isAdmin="user.admin" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>
+                                    <ChatUser v-for="user in userList" :isAdmin="user.admin" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>
                                 </template>
-                            </c-chat-group>
-                        </c-chat-base>
+                            </ChatGroup>
+                        </ChatBase>
                         <hr />
                     </div>
                     <div class="col-12" >
                         <h3 class="text-white">Group chat with messages</h3>
-                        <c-chat-base style="height: 700px" :shortcuts="shortcuts">
+                        <ChatBase style="height: 700px" :shortcuts="shortcuts">
                             <template slot="sidebar">
-                                <c-chat-group-sidebar />
+                                <ChatGroupSidebar />
                             </template>
-                            <c-chat-group :currentUser="users[2]">
+                            <ChatGroup :currentUser="users[2]">
                                 <template slot="messages">
-                                    <c-chat-message v-for="msg in messages" :text="msg.text" :time="msg.time" :user="users[msg.user]" />
+                                    <ChatMessage v-for="msg in messages" :text="msg.text" :time="msg.time" :user="users[msg.user]" />
                                 </template>
                                 <template slot="users">
-                                    <c-chat-user v-for="user in users" :isAdmin="user.admin" :action="true" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>
+                                    <ChatUser v-for="user in users" :isAdmin="user.admin" :action="true" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>
                                 </template>
-                            </c-chat-group>
-                        </c-chat-base>
+                            </ChatGroup>
+                        </ChatBase>
                         <hr />
                     </div>
                     <div class="col-12" >
                         <h3 class="text-white">Private messages</h3>
-                        <c-chat-base style="height: 700px" :shortcuts="shortcuts">
-                            <c-chat-private>
-                                <c-chat-message v-for="msg in messages" :text="msg.text" :time="msg.time" :user="users[msg.user]" />
-                            </c-chat-private>
-                        </c-chat-base>
+                        <ChatBase style="height: 700px" :shortcuts="shortcuts">
+                            <ChatPrivate>
+                                <ChatMessage v-for="msg in messages" :text="msg.text" :time="msg.time" :user="users[msg.user]" />
+                            </ChatPrivate>
+                        </ChatBase>
                         <hr />
                     </div>
                     <div class="col-12" >
-                        <h3 class="text-white">New group(create/join)</h3>
-                        <c-chat-base style="height: 700px" :shortcuts="shortcuts">
-                            <c-chat-group-new />
-                        </c-chat-base>
+                        <h3 class="text-white">New group (create/join)</h3>
+                        <ChatBase style="height: 700px" :shortcuts="shortcuts">
+                            <ChatGroupNew />
+                        </ChatBase>
                     </div>
                     <div class="col-12">
                         <h3 class="text-white">Friends list</h3>
-                        <c-chat-friends-list />
+                        <ChatFriendsList />
                         <hr />
                     </div>
                 </div>`
@@ -5368,7 +5121,7 @@ storiesOf('Chat', module)
 storiesOf('Games list', module)
     .add('base', () => ({
         components: {
-            'c-game-list': () => import('~/components/games-list').then(m => m.default || m)
+            GamesList: () => import('@ericmuyser/hyper-ui').then(m => m.GamesList)
         },
         data() {
             return {
@@ -5396,7 +5149,7 @@ storiesOf('Games list', module)
                                 price: '13.99'
                             }
                         ],
-                            achievements: [
+                        achievements: [
                             {
                                 icon: '',
                                 href: ''
@@ -5442,167 +5195,167 @@ storiesOf('Games list', module)
                         ]
                     },
                     {
-                            id: 2,
-                            name: 'Game Of Thor 2',
-                            subTitle: 'Legendary Edition',
-                            image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
-                            downloadContent:[
-                                    {
-                                            name: 'DragonBore',
-                                            price: '3.99'
-                                    },
-                                    {
-                                            name: 'Hearthfire',
-                                            price: '6.99'
-                                    },
-                                    {
-                                            name: 'Hight Resultation Texture Pack',
-                                            price: '13.99'
-                                    },
-                                    {
-                                            name: 'Dawnguard',
-                                            price: '13.99'
-                                    }
-                            ],
-                            achievements: [
-                                    {
-                                            icon: '',
-                                            href: ''
-                                    },
-                                    {
-                                            icon: '',
-                                            href: ''
-                                    },
-                                    {
-                                            icon: '',
-                                            href: ''
-                                    },
-                                    {
-                                            icon: '',
-                                            href: ''
-                                    }
-                            ],
-                            friends:[
-                                    {
-                                            link: '#',
-                                            avatar: 'http://kharkov.city/wp-content/uploads/2015/09/cubegirl-avatar_400x4001.jpg'
-                                    },
-                                    {
-                                            link: '#',
-                                            avatar: 'http://www.auto-sib.com/upload/main/2e6/2e667dbfe5de0eda8c1f98777b2a2db8.png'
-                                    },
-                                    {
-                                            link: '#',
-                                            avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUCwHqPE2M4z3HsyeQsaOoWtuxjX92a2vVi5p7N9Qm72IM8Dh'
-                                    }
-                            ],
-                            news:[
-                                    {
-                                            title: 'Morbi at ligula placerat',
-                                            text: 'Morbi at ligula placerat, vestibulum tortor ac, sollicitudin massa. In in risus vulputate, posuere libero ac, egestas justo. Ut non mattis nulla. Suspendisse acmaximus metus. Nulla auctor laoreet quam, in congue nulla.',
-                                            link: '#'
-                                    },
-                                    {
-                                            title: 'Sed lobortis lacinia ante a bibendum.',
-                                            text: 'Ut gravida vestibulum nunc, sit amet malesuada nisi egestas eu. Integer felis eros, venenatis vel augue sit amet, cursus laoreet eros. Nam fringilla euismod feugiat.',
-                                            link: '#'
-                                    }
-                            ]
+                        id: 2,
+                        name: 'Game Of Thor 2',
+                        subTitle: 'Legendary Edition',
+                        image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
+                        downloadContent:[
+                            {
+                                name: 'DragonBore',
+                                price: '3.99'
+                            },
+                            {
+                                name: 'Hearthfire',
+                                price: '6.99'
+                            },
+                            {
+                                name: 'Hight Resultation Texture Pack',
+                                price: '13.99'
+                            },
+                            {
+                                name: 'Dawnguard',
+                                price: '13.99'
+                            }
+                        ],
+                        achievements: [
+                            {
+                                icon: '',
+                                href: ''
+                            },
+                            {
+                                icon: '',
+                                href: ''
+                            },
+                            {
+                                icon: '',
+                                href: ''
+                            },
+                            {
+                                icon: '',
+                                href: ''
+                            }
+                        ],
+                        friends:[
+                            {
+                                link: '#',
+                                avatar: 'http://kharkov.city/wp-content/uploads/2015/09/cubegirl-avatar_400x4001.jpg'
+                            },
+                            {
+                                link: '#',
+                                avatar: 'http://www.auto-sib.com/upload/main/2e6/2e667dbfe5de0eda8c1f98777b2a2db8.png'
+                            },
+                            {
+                                link: '#',
+                                avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUCwHqPE2M4z3HsyeQsaOoWtuxjX92a2vVi5p7N9Qm72IM8Dh'
+                            }
+                        ],
+                        news:[
+                            {
+                                title: 'Morbi at ligula placerat',
+                                text: 'Morbi at ligula placerat, vestibulum tortor ac, sollicitudin massa. In in risus vulputate, posuere libero ac, egestas justo. Ut non mattis nulla. Suspendisse acmaximus metus. Nulla auctor laoreet quam, in congue nulla.',
+                                link: '#'
+                            },
+                            {
+                                title: 'Sed lobortis lacinia ante a bibendum.',
+                                text: 'Ut gravida vestibulum nunc, sit amet malesuada nisi egestas eu. Integer felis eros, venenatis vel augue sit amet, cursus laoreet eros. Nam fringilla euismod feugiat.',
+                                link: '#'
+                            }
+                        ]
                     },
-                        {
-                                id: 3,
-                                name: 'Game Of Thor 3',
-                                subTitle: 'Legendary Edition',
-                                image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
-                                downloadContent:[
-                                        {
-                                                name: 'DragonBore',
-                                                price: '3.99'
-                                        },
-                                        {
-                                                name: 'Hearthfire',
-                                                price: '6.99'
-                                        },
-                                        {
-                                                name: 'Hight Resultation Texture Pack',
-                                                price: '13.99'
-                                        },
-                                        {
-                                                name: 'Dawnguard',
-                                                price: '13.99'
-                                        }
-                                ],
-                                achievements: [
-                                        {
-                                                icon: '',
-                                                href: ''
-                                        },
-                                        {
-                                                icon: '',
-                                                href: ''
-                                        },
-                                        {
-                                                icon: '',
-                                                href: ''
-                                        },
-                                        {
-                                                icon: '',
-                                                href: ''
-                                        }
-                                ],
-                                friends:[
-                                        {
-                                                link: '#',
-                                                avatar: 'http://kharkov.city/wp-content/uploads/2015/09/cubegirl-avatar_400x4001.jpg'
-                                        },
-                                        {
-                                                link: '#',
-                                                avatar: 'http://www.auto-sib.com/upload/main/2e6/2e667dbfe5de0eda8c1f98777b2a2db8.png'
-                                        },
-                                        {
-                                                link: '#',
-                                                avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUCwHqPE2M4z3HsyeQsaOoWtuxjX92a2vVi5p7N9Qm72IM8Dh'
-                                        }
-                                ],
-                                news:[
-                                        {
-                                                title: 'Morbi at ligula placerat',
-                                                text: 'Morbi at ligula placerat, vestibulum tortor ac, sollicitudin massa. In in risus vulputate, posuere libero ac, egestas justo. Ut non mattis nulla. Suspendisse acmaximus metus. Nulla auctor laoreet quam, in congue nulla.',
-                                                link: '#'
-                                        },
-                                        {
-                                                title: 'Sed lobortis lacinia ante a bibendum.',
-                                                text: 'Ut gravida vestibulum nunc, sit amet malesuada nisi egestas eu. Integer felis eros, venenatis vel augue sit amet, cursus laoreet eros. Nam fringilla euismod feugiat.',
-                                                link: '#'
-                                        }
-                                ]
-                        },
+                    {
+                        id: 3,
+                        name: 'Game Of Thor 3',
+                        subTitle: 'Legendary Edition',
+                        image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
+                        downloadContent:[
+                            {
+                                name: 'DragonBore',
+                                price: '3.99'
+                            },
+                            {
+                                name: 'Hearthfire',
+                                price: '6.99'
+                            },
+                            {
+                                name: 'Hight Resultation Texture Pack',
+                                price: '13.99'
+                            },
+                            {
+                                name: 'Dawnguard',
+                                price: '13.99'
+                            }
+                        ],
+                        achievements: [
+                            {
+                                icon: '',
+                                href: ''
+                            },
+                            {
+                                icon: '',
+                                href: ''
+                            },
+                            {
+                                icon: '',
+                                href: ''
+                            },
+                            {
+                                icon: '',
+                                href: ''
+                            }
+                        ],
+                        friends:[
+                            {
+                                link: '#',
+                                avatar: 'http://kharkov.city/wp-content/uploads/2015/09/cubegirl-avatar_400x4001.jpg'
+                            },
+                            {
+                                link: '#',
+                                avatar: 'http://www.auto-sib.com/upload/main/2e6/2e667dbfe5de0eda8c1f98777b2a2db8.png'
+                            },
+                            {
+                                link: '#',
+                                avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUCwHqPE2M4z3HsyeQsaOoWtuxjX92a2vVi5p7N9Qm72IM8Dh'
+                            }
+                        ],
+                        news:[
+                            {
+                                title: 'Morbi at ligula placerat',
+                                text: 'Morbi at ligula placerat, vestibulum tortor ac, sollicitudin massa. In in risus vulputate, posuere libero ac, egestas justo. Ut non mattis nulla. Suspendisse acmaximus metus. Nulla auctor laoreet quam, in congue nulla.',
+                                link: '#'
+                            },
+                            {
+                                title: 'Sed lobortis lacinia ante a bibendum.',
+                                text: 'Ut gravida vestibulum nunc, sit amet malesuada nisi egestas eu. Integer felis eros, venenatis vel augue sit amet, cursus laoreet eros. Nam fringilla euismod feugiat.',
+                                link: '#'
+                            }
+                        ]
+                    },
                 ]
             }
         },
         template: `<div class="row p-3 m-0 flex-wrap" style="width: 1000px">
-                    <c-game-list :games="games" />
+                    <GamesList :games="games" />
                 </div>`
     }))
 
 storiesOf('Text label', module)
     .add('default', () => ({
         components: {
-            'c-text-label': () => import('~/components/text-label').then(m => m.default || m),
+            TextLabel: () => import('@ericmuyser/hyper-ui').then(m => m.TextLabel),
         },
         template: `<div class="p-3 m-0 text-white" style="width: 900px">
-                    <c-text-label>Default</c-text-label>
-                    <c-text-label type="white">White</c-text-label>
-                    <c-text-label type="info">Info</c-text-label>
-                    <c-text-label type="success">Success</c-text-label>
-                    <c-text-label type="danger">Danger</c-text-label>
-                    <c-text-label type="warning">Warning</c-text-label>
-                    <c-text-label bgColor="#684BA5">Custom</c-text-label>
+                    <TextLabel>Default</TextLabel>
+                    <TextLabel type="white">White</TextLabel>
+                    <TextLabel type="info">Info</TextLabel>
+                    <TextLabel type="success">Success</TextLabel>
+                    <TextLabel type="danger">Danger</TextLabel>
+                    <TextLabel type="warning">Warning</TextLabel>
+                    <TextLabel bgColor="#684BA5">Custom</TextLabel>
                     <hr />
                     <div class="h3 mb-3">Example</div>
-                    <p><c-text-label>Lorem</c-text-label> ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <p>Lorem ipsum <c-text-label type="success">dolor sit</c-text-label>, consectetur adipiscing elit.</p>
-                    <p>Nulla euismod lorem a vehicula <c-text-label type="info">condimentum</c-text-label>.</p>
+                    <p><TextLabel>Lorem</TextLabel> ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p>Lorem ipsum <TextLabel type="success">dolor sit</TextLabel>, consectetur adipiscing elit.</p>
+                    <p>Nulla euismod lorem a vehicula <TextLabel type="info">condimentum</TextLabel>.</p>
                 </div>`
     }))
 
@@ -5610,7 +5363,7 @@ storiesOf('Text label', module)
 storiesOf('Option Block', module)
     .add('default', () => ({
         components: {
-            'c-option-block': () => import('~/components/option-block').then(m => m.default || m),
+            OptionBlock: () => import('@ericmuyser/hyper-ui').then(m => m.OptionBlock),
         },
         data() {
             return {
@@ -5636,7 +5389,7 @@ storiesOf('Option Block', module)
             }
         },
         template: `<div class="p-3 m-0 text-white" style="width: 400px">
-                        <c-option-block shadow
+                        <OptionBlock shadow
                         image="https://eu.shop.battle.net/static/4.6.2/images/family-icons/world-of-warcraft.svg"
                         title="World of Warcraft®: Battle for Azeroth"
                         subtitle="Massively Multiplayer RPG"
@@ -5653,7 +5406,7 @@ storiesOf('Option Block', module)
 storiesOf('Games Library', module)
     .add('default', () => ({
         components: {
-            'c-game-library-card': () => import('~/components/game-library/card-item.vue').then(m => m.default || m),
+            GameLibraryCard: () => import('@ericmuyser/hyper-ui').then(m => m.GameLibraryCard),
         },
         data() {
             return {
@@ -5667,11 +5420,11 @@ storiesOf('Games Library', module)
             }
         },
         template: `
-                <div class="row p-5" style="width: 1000px">
-                    <div class="col-4">
-                        <c-game-library-card :name="game.name" :image="game.meta.images.mediumTile" />
-                    </div>
+            <div class="row p-5" style="width: 1000px">
+                <div class="col-4">
+                    <GameLibraryCard :name="game.name" :image="game.meta.images.mediumTile" />
                 </div>
+            </div>
         `
     }))
 
@@ -5679,7 +5432,7 @@ storiesOf('Games Library', module)
 storiesOf('Quick Launch', module)
     .add('default', () => ({
         components: {
-            'c-quick-launch': () => import('~/components/quick-launch').then(m => m.default || m),
+            QuickLaunch: () => import('@ericmuyser/hyper-ui').then(m => m.QuickLaunch),
         },
         data() {
             return {
@@ -5693,11 +5446,11 @@ storiesOf('Quick Launch', module)
             }
         },
         template: `
-                <div class="row p-5" style="width: 1000px">
-                    <div class="col-4">
-                        <c-quick-launch />
-                    </div>
+            <div class="row p-5" style="width: 1000px">
+                <div class="col-4">
+                    <QuickLaunch />
                 </div>
+            </div>
         `
     }))
 
@@ -5705,23 +5458,23 @@ storiesOf('Quick Launch', module)
 storiesOf('Global Search', module)
     .add('default', () => ({
         components: {
-            'c-global-search': () => import('~/components/global-search').then(m => m.default || m),
+            GlobalSearch: () => import('@ericmuyser/hyper-ui').then(m => m.GlobalSearch),
         },
         data() {
             return {
             }
         },
         template: `
-                <div class="row p-5" style="width: 1000px">
-                    <div class="col-7">
-                        <c-global-search />
-                    </div>
+            <div class="row p-5" style="width: 1000px">
+                <div class="col-7">
+                    <GlobalSearch />
                 </div>
+            </div>
         `
     }))
     .add('header bar', () => ({
         components: {
-            'c-bar-search': () => import('~/components/global-search/second').then(m => m.default || m),
+            SearchBar: () => import('@ericmuyser/hyper-ui').then(m => m.SearchBar),
         },
         data() {
             return {
@@ -5729,11 +5482,11 @@ storiesOf('Global Search', module)
             }
         },
         template: `
-                <div class="row m-4" style="width: 350px">
-                    <div class="col-12">
-                        <c-bar-search />
-                    </div>
+            <div class="row m-4" style="width: 350px">
+                <div class="col-12">
+                    <SearchBar />
                 </div>
+            </div>
         `
     }))
 
@@ -5741,7 +5494,7 @@ storiesOf('Global Search', module)
 storiesOf('Giphy', module)
     .add('default', () => ({
         components: {
-            'c-giphy': () => import('~/components/giphy').then(m => m.default || m),
+            Giphy: () => import('@ericmuyser/hyper-ui').then(m => m.Giphy),
         },
         data() {
             return {
@@ -5754,15 +5507,15 @@ storiesOf('Giphy', module)
             }
         },
         template: `
-                <div class="row p-5" style="width: 400px">
-                    <div class="col-12">
-                        <img :src="gif" />
-                        <hr />
-                    </div>
-                    <div class="col-12">
-                        <c-giphy class="w-100" @choose="setGif" />
-                    </div>
+            <div class="row p-5" style="width: 400px">
+                <div class="col-12">
+                    <img :src="gif" />
+                    <hr />
                 </div>
+                <div class="col-12">
+                    <Giphy class="w-100" @choose="setGif" />
+                </div>
+            </div>
         `
     }))
 
@@ -5770,7 +5523,7 @@ storiesOf('Giphy', module)
 storiesOf('Table', module)
     .add('default', () => ({
         components: {
-            'c-table-simple': () => import('~/components/table-simple').then(m => m.default || m),
+            SimpleTable: () => import('@ericmuyser/hyper-ui').then(m => m.SimpleTable),
         },
         data() {
             return {
@@ -5815,24 +5568,24 @@ storiesOf('Table', module)
             }
         },
         template: `
-                <div class="row p-5" style="width: 800px">
-                    <c-table-simple>
-                        <thead>
-                            <tr>
-                                <th v-for="field in fields">
-                                    {{ field.label }}
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="row in rows">
-                                <td v-for="field in row">
-                                    {{ field }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </c-table-simple>
-                </div>
+            <div class="row p-5" style="width: 800px">
+                <SimpleTable>
+                    <thead>
+                        <tr>
+                            <th v-for="field in fields">
+                                {{ field.label }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="row in rows">
+                            <td v-for="field in row">
+                                {{ field }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </SimpleTable>
+            </div>
         `
     }))
 
@@ -5840,26 +5593,28 @@ storiesOf('Table', module)
 storiesOf('Text Formatting', module)
     .add('default', () => ({
         components: {
-            'c-text-formatting': () => import('~/components/text-formatting').then(m => m.default || m),
-            'c-basic-popup': () => import('~/components/popups/basic.vue').then(m => m.default || m),
+            TextFormatting: () => import('@ericmuyser/hyper-ui').then(m => m.TextFormatting),
+            BasicPopup: () => import('@ericmuyser/hyper-ui').then(m => m.BasicPopup),
         },
-        template: `<div class="p-4" style="width: 600px">
-                    <c-basic-popup :activated="true">
-                        <template slot="body">
-                            <c-text-formatting />
-                        </template>
-                    </c-basic-popup>
-                </div>`
+        template: `
+            <div class="p-4" style="width: 600px">
+                <BasicPopup :activated="true">
+                    <template slot="body">
+                        <TextFormatting />
+                    </template>
+                </BasicPopup>
+            </div>
+        `
     }))
 
 
 storiesOf('Activity block', module)
     .add('default', () => ({
         components: {
-            'c-activity-block': () => import('~/components/activity-block').then(m => m.default || m),
+            ActivityBlock: () => import('@ericmuyser/hyper-ui').then(m => m.ActivityBlock),
         },
         template: `<div style="width: 1000px;" class="p-5">
-                    <c-activity-block @play="" @install="" @help="" labelIcon="list" :percent="37" earnedAchievements="31" totalAchievements="193">
+                    <ActivityBlock @play="" @install="" @help="" labelIcon="list" :percent="37" earnedAchievements="31" totalAchievements="193">
                         <template slot="label">
                             In Library
                         </template>
@@ -5869,7 +5624,7 @@ storiesOf('Activity block', module)
                         <template slot="description">
                             0.1 hrs last two weeks / 0.1 hrs on record
                         </template>
-                    </c-activity-block>
+                    </ActivityBlock>
                 </div>`
     }))
 
@@ -5877,7 +5632,7 @@ storiesOf('Activity block', module)
 storiesOf('Metro', module)
     .add('metro-tile', () => ({
         components: {
-            'c-metro-tile': () => import('~/components/metro/metro-tile').then(m => m.default || m),
+            MetroTile: () => import('@ericmuyser/hyper-ui').then(m => m.MetroTile),
         },
         data() {
             return {
@@ -5963,7 +5718,7 @@ storiesOf('Metro', module)
             <div class="m-4 d-flex flex-wrap" style="width: 1000px">
                 <div v-for="item in items"
                     class="p-1">
-                    <c-metro-tile
+                    <MetroTile
                     :width="item.width"
                     :height="item.height"
                     :length="item.length"
@@ -6062,13 +5817,13 @@ storiesOf('Metro', module)
                             </div>
                         </div>
                       </template>
-                    </c-metro-tile>
+                    </MetroTile>
                 </div>
             </div>`
     }))
     .add('metro-item', () => ({
         components: {
-            'c-metro-item': () => import('~/components/metro/metro-item').then(m => m.default || m),
+            MetroItem: () => import('@ericmuyser/hyper-ui').then(m => m.MetroItem),
         },
         data() {
             return {
@@ -6076,7 +5831,7 @@ storiesOf('Metro', module)
             }
         },
         template: `<div class="m-4">
-                    <c-metro-item :image="image">
+                    <MetroItem :image="image">
                         <div class="h4 font-weight-bold">
                             Aenean blandit augue non est
                         </div>
@@ -6084,9 +5839,9 @@ storiesOf('Metro', module)
                             Vestibulum mi neque, commodo et blandit id, auctor at metus. Quisque varius ut nisi a tincidunt.
                             Maecenas nibh sem, malesuada et cursus nec, sollicitudin accumsan sapien.
                         </div>
-                    </c-metro-item>
+                    </MetroItem>
                     <hr />
-                    <c-metro-item :image="image" :fullImage="true">
+                    <MetroItem :image="image" :fullImage="true">
                         <div class="h4 font-weight-bold">
                             Aenean blandit augue non est
                         </div>
@@ -6094,9 +5849,9 @@ storiesOf('Metro', module)
                             Vestibulum mi neque, commodo et blandit id, auctor at metus. Quisque varius ut nisi a tincidunt.
                             Maecenas nibh sem, malesuada et cursus nec, sollicitudin accumsan sapien.
                         </div>
-                    </c-metro-item>
+                    </MetroItem>
                     <hr />
-                    <c-metro-item :image="image" :fullImage="true" :shadow="true">
+                    <MetroItem :image="image" :fullImage="true" :shadow="true">
                         <div class="h4 font-weight-bold">
                             Aenean blandit augue non est
                         </div>
@@ -6104,13 +5859,13 @@ storiesOf('Metro', module)
                             Vestibulum mi neque, commodo et blandit id, auctor at metus. Quisque varius ut nisi a tincidunt.
                             Maecenas nibh sem, malesuada et cursus nec, sollicitudin accumsan sapien.
                         </div>
-                    </c-metro-item>
+                    </MetroItem>
                 </div>`
     }))
     .add('metro grid', () => ({
         components: {
-            'c-metro-grid': () => import('~/components/metro/grid').then(m => m.default || m),
-            'c-metro-item': () => import('~/components/metro/metro-item').then(m => m.default || m),
+            MetroGrid: () => import('@ericmuyser/hyper-ui').then(m => m.MetroGrid),
+            MetroItem: () => import('@ericmuyser/hyper-ui').then(m => m.MetroItem),
         },
         data() {
             return {
@@ -6144,16 +5899,16 @@ storiesOf('Metro', module)
             }
         },
         template: `<div class="m-4" style="width: 1200px;">
-                    <c-metro-grid>
-                        <c-metro-item v-for="item in items" :image="item.image" width="300px ">
+                    <MetroGrid>
+                        <MetroItem v-for="item in items" :image="item.image" width="300px ">
                             <div class="h4 font-weight-bold">
                                 {{ item.title }}
                             </div>
                             <div>
                                 {{ item.text }}
                             </div>
-                        </c-metro-item>
-                    </c-metro-grid>
+                        </MetroItem>
+                    </MetroGrid>
                 </div>`
     }))
 
@@ -6161,7 +5916,7 @@ storiesOf('Metro', module)
 storiesOf('Security check', module)
     .add('default', () => ({
         components: {
-            'c-security-check': () => import('~/components/security-check').then(m => m.default || m),
+            SecurityCheck: () => import('@ericmuyser/hyper-ui').then(m => m.SecurityCheck),
         },
         data() {
             return {
@@ -6186,7 +5941,7 @@ storiesOf('Security check', module)
         template: `<div style="width: 300px" class="m-4">
                         <strong class="text-white">Correct code - 123456</strong>
                         <hr />
-                        <c-security-check @sendCode="sendCode" @codeSubmit="checkCode" :codeIsSend="code" :wrongCode="err" />
+                        <SecurityCheck @sendCode="sendCode" @codeSubmit="checkCode" :codeIsSend="code" :wrongCode="err" />
                     </div>`
 
 
@@ -6196,25 +5951,25 @@ storiesOf('Security check', module)
 storiesOf('Browser UI', module)
     .add('default', () => ({
         components: {
-            'c-browser-ui': () => import('~/components/browser-ui').then(m => m.default || m),
+            BrowserUI: () => import('@ericmuyser/hyper-ui').then(m => m.BrowserUI),
         },
-        template: `<div style="width: 600px" class="m-4"><c-browser-ui /></div>`
+        template: `<div style="width: 600px" class="m-4"><BrowserUI /></div>`
     }))
 
 storiesOf('Settings', module)
     .add('default', () => ({
         components: {
-            'c-settings': () => import('~/components/settings').then(m => m.default || m),
+            Settings: () => import('@ericmuyser/hyper-ui').then(m => m.Settings),
         },
         template: `<div class="m-4" style="width: 1000px;">
-                        <c-settings />
+                        <Settings />
                     </div>`
     }))
 
 storiesOf('Add friends', module)
     .add('default', () => ({
         components: {
-            'c-add-friends': () => import('~/components/add-friends').then(m => m.default || m),
+            AddFriends: () => import('@ericmuyser/hyper-ui').then(m => m.AddFriends),
         },
         data() {
             return {
@@ -6245,31 +6000,31 @@ storiesOf('Add friends', module)
             }
         },
         template: `<div class="m-4" style="width: 400px;">
-                        <c-button class="mx-3" @click=" permission = !permission ">
+                        <Button class="mx-3" @click=" permission = !permission ">
                             Toggle permission
-                        </c-button>
-                        <c-button class="mx-3" @click=" connected = !connected ">
+                        </Button>
+                        <Button class="mx-3" @click=" connected = !connected ">
                             Toggle connected
-                        </c-button>
+                        </Button>
                         <hr />
-                        <c-add-friends :permission="permission" :connected="connected" :userFriends="userFriends" />
+                        <AddFriends :permission="permission" :connected="connected" :userFriends="userFriends" />
                     </div>`
     }))
 
 
-storiesOf('Draggble video', module)
+storiesOf('Draggable video', module)
     .add('default', () => ({
         components: {
-            'c-draggable-video': () => import('~/components/draggable-video').then(m => m.default || m),
+            DraggableVideo: () => import('@ericmuyser/hyper-ui').then(m => m.DraggableVideo),
         },
-        template: `<div><c-draggable-video /></div>`
+        template: `<div><DraggableVideo /></div>`
     }))
 
 
 storiesOf('Video', module)
     .add('default', () => ({
         components: {
-            'c-video': () => import('~/components/video').then(m => m.default || m)
+            Video: () => import('@ericmuyser/hyper-ui').then(m => m.Video)
         },
         data() {
             return {
@@ -6284,19 +6039,19 @@ storiesOf('Video', module)
                             <div class="h3 text-white">
                                 Youtube video
                             </div>
-                            <c-video :youtube="youtube" height="300" />
+                            <Video :youtube="youtube" height="300" />
                         </div>
                         <div class="col-4">
                             <div class="h3 text-white">
                                 Twitch video
                             </div>
-                            <c-video :twitch="twitch" height="300" />
+                            <Video :twitch="twitch" height="300" />
                         </div>
                         <div class="col-4">
                             <div class="h3 text-white">
                                 Local video
                             </div>
-                            <c-video :src="src" height="300" />
+                            <Video :src="src" height="300" />
                         </div>
                     </div>
             </div>`
@@ -6306,7 +6061,7 @@ storiesOf('Video', module)
 storiesOf('Pricing table', module)
     .add('v1', () => ({
         components: {
-            'c-pricing-table': () => import('~/components/pricing-table/v1').then(m => m.default || m),
+            PricingTable: () => import('@ericmuyser/hyper-ui').then(m => m.PricingTableV1),
         },
         data() {
             return {
@@ -6347,11 +6102,11 @@ storiesOf('Pricing table', module)
                 ]
             }
         },
-        template: `<div><c-pricing-table :items="items" /></div>`
+        template: `<div><PricingTable :items="items" /></div>`
     }))
     .add('v2', () => ({
         components: {
-            'c-pricing-table': () => import('~/components/pricing-table/v2').then(m => m.default || m),
+            PricingTable: () => import('@ericmuyser/hyper-ui').then(m => m.PricingTableV2),
         },
         data() {
             return {
@@ -6392,38 +6147,38 @@ storiesOf('Pricing table', module)
                 ]
             }
         },
-        template: `<div><c-pricing-table :items="items" /></div>`
+        template: `<div><PricingTable :items="items" /></div>`
     }))
 
 storiesOf('Pro mode', module)
     .add('button', () => ({
         components: {
-            'c-pro-mode-button': () => import('~/components/pro-mode/button.vue').then(m => m.default || m),
+            ProModeButton: () => import('@ericmuyser/hyper-ui').then(m => m.ProModeButton),
         },
         template: `<div class="p-4">
-                        <c-pro-mode-button icon="gem">
+                        <ProModeButton icon="gem">
                             Go Pro
-                        </c-pro-mode-button>
+                        </ProModeButton>
                     </div>`
     }))
     .add('notice 1', () => ({
         components: {
-            'c-pro-mode-n1': () => import('~/components/pro-mode/notice1.vue').then(m => m.default || m),
+            ProModeN1: () => import('@ericmuyser/hyper-ui').then(m => m.ProModeN1),
         },
         template: `<div class="p-4">
-                        <c-pro-mode-n1>
+                        <ProModeN1>
                             Hey Eron, you're on a Basic account. Unlock more space and sharing controls!
-                        </c-pro-mode-n1>
+                        </ProModeN1>
                     </div>`
     }))
     .add('notice 2', () => ({
         components: {
-            'c-pro-mode-n2': () => import('~/components/pro-mode/notice2.vue').then(m => m.default || m),
+            ProModeN2: () => import('@ericmuyser/hyper-ui').then(m => m.ProModeN2),
         },
         template: `<div class="p-4">
-                        <c-pro-mode-n2>
+                        <ProModeN2>
                             Hey Eron, you're on a Basic account. Unlock more space and sharing controls!
-                        </c-pro-mode-n2>
+                        </ProModeN2>
                     </div>`
     }))
 
@@ -6431,7 +6186,7 @@ storiesOf('Pro mode', module)
 storiesOf('Contributor Box', module)
     .add('default', () => ({
         components: {
-            'c-contributor-box': () => import('~/components/contributor-box').then(m => m.default || m),
+            ContributorBox: () => import('@ericmuyser/hyper-ui').then(m => m.ContributorBox),
         },
         data() {
             return {
@@ -6460,14 +6215,14 @@ storiesOf('Contributor Box', module)
             }
         },
         template: `<div class="p-5">
-                      <c-contributor-box :steps="steps" />
+                      <ContributorBox :steps="steps" />
                   </div>`
     }))
 
 storiesOf('Gift box', module)
     .add('default', () => ({
         components: {
-            'c-gift-box': () => import('~/components/gift').then(m => m.default || m),
+            GiftBox: () => import('@ericmuyser/hyper-ui').then(m => m.GiftBox),
         },
         data() {
             return {
@@ -6487,21 +6242,21 @@ storiesOf('Gift box', module)
             }
         },
         template: `<div class="p-5">
-                      <c-gift-box :status="status"
-                                    :user="user"
-                                    :date="date"
-                                    :text="text"
-                                    :gift="gift"
-                                    @accept=""
-                                    @decline="" />
+                      <GiftBox :status="status"
+                            :user="user"
+                            :date="date"
+                            :text="text"
+                            :gift="gift"
+                            @accept=""
+                            @decline="" />
                   </div>`
     }))
 
 storiesOf('Profile picker', module)
     .add('default', () => ({
-            components: {
-                    'c-profile-picker': () => import('~/components/profile-picker').then(m => m.default || m),
-            },
+        components: {
+            ProfilePicker: () => import('@ericmuyser/hyper-ui').then(m => m.ProfilePicker),
+        },
         data(){
                 return{
                     profiles: [
@@ -6536,19 +6291,19 @@ storiesOf('Profile picker', module)
             }
         },
         template: `<div class="p-5">
-                      <c-profile-picker :profiles="profiles" />
+                      <ProfilePicker :profiles="profiles" />
                   </div>`
     }))
 
 
 storiesOf('Vote', module)
     .add('default', () => ({
-		    components: {
-				    'c-vote': () => import('~/components/vote').then(m => m.default || m),
-		    },
+        components: {
+            Vote: () => import('@ericmuyser/hyper-ui').then(m => m.Vote),
+        },
         template: `<div class="p-5">
                         <div class="position-relative" style="width:300px">
-                            <c-vote :votes="4" />
+                            <Vote :votes="4" />
                         </div>
                     </div>`
 
@@ -6557,46 +6312,46 @@ storiesOf('Vote', module)
 storiesOf('Social connect', module)
     .add('default', () => ({
         components: {
-		        'c-social-connect': () => import('~/components/social-connect').then(m => m.default || m)
+            SocialConnect: () => import('@ericmuyser/hyper-ui').then(m => m.SocialConnect)
         },
-        data(){
-            return{
-		            socials: [
-				            {
-						            name: 'Facebook',
-						            description: 'Shares achievements to your news feed.',
-						            icon: '/img/icons/facebook.svg',
-						            connected: false
-				            },
-				            {
-						            name: 'Twitter',
-						            description: 'Shares achievements to your Twitter feed.',
-						            icon: '/img/icons/twitter.svg',
-						            connected: false
-				            },
-				            {
-						            name: 'Twitch',
-						            description: 'Lets you contribute to streamers.',
-						            icon: '/img/icons/twitch-large.png',
-						            connected: false
-				            },
-				            {
-						            name: 'Discord',
-						            description: 'Lets you connect to your Discord voice/chat channels.',
-						            icon: '/img/icons/discord.png',
-						            connected: false
-				            },
-				            {
-						            name: 'Steam',
-						            description: 'Lets you connect to your Steam account.',
-						            icon: '/img/icons/steam.png',
-						            connected: false
-				            }
-		            ]
+        data() {
+            return {
+                    socials: [
+                            {
+                                    name: 'Facebook',
+                                    description: 'Shares achievements to your news feed.',
+                                    icon: '/img/icons/facebook.svg',
+                                    connected: false
+                            },
+                            {
+                                    name: 'Twitter',
+                                    description: 'Shares achievements to your Twitter feed.',
+                                    icon: '/img/icons/twitter.svg',
+                                    connected: false
+                            },
+                            {
+                                    name: 'Twitch',
+                                    description: 'Lets you contribute to streamers.',
+                                    icon: '/img/icons/twitch-large.png',
+                                    connected: false
+                            },
+                            {
+                                    name: 'Discord',
+                                    description: 'Lets you connect to your Discord voice/chat channels.',
+                                    icon: '/img/icons/discord.png',
+                                    connected: false
+                            },
+                            {
+                                    name: 'Steam',
+                                    description: 'Lets you connect to your Steam account.',
+                                    icon: '/img/icons/steam.png',
+                                    connected: false
+                            }
+                    ]
             }
         },
         template: `<div class="p-5 text-white" style="width: 550px">
-                        <c-social-connect
+                        <SocialConnect
                             v-for="(item, index) in socials"
                             :key="index"
                             :class="index + 1 == socials.length ? 'margin-bottom-0' : 'margin-bottom-20'"
@@ -6608,28 +6363,28 @@ storiesOf('Social connect', module)
     }))
 
 // storiesOf('Shortcut Grid', module)
-// 		.add('default', () => ({
-// 			components: {
-// 					'c-shortcut-sidebar': () => import('~/components/shortcut-sidebar').then(m => m.default || m),
-// 			},
-// 				data(){
-// 						return{
-// 								shortcuts: []
-// 						}
-// 				},
-// 				template: `<div class="p-5 text-white" style="width: 550px">
-// 												<c-shortcut-sidebar :items="shortcuts" />
+//         .add('default', () => ({
+//             components: {
+//                     'c-shortcutsidebar: () => import('~/components/shortcut-sidebar')
+//             },
+//                 data(){
+//                         return{
+//                                 shortcuts: []
+//                         }
+//                 },
+//                 template: `<div class="p-5 text-white" style="width: 550px">
+//                                                 <c-shortcut-sidebar :items="shortcuts" />
 //                     </div>`
-// 		}))
+//         }))
 
 
 storiesOf('QR code', module)
     .add('default', () => ({
         components: {
-		        'c-qr-code': () => import('~/components/qr-code').then(m => m.default || m),
+            QrCode: () => import('@ericmuyser/hyper-ui').then(m => m.QrCode),
         },
         template: `<div class="p-5">
-                        <c-qr-code
+                        <QrCode
                             style="display: inline-block; background: #fff;"
                             :config="{
                                 value: '23234234k23n4k24j',
@@ -6644,7 +6399,7 @@ storiesOf('QR code', module)
 storiesOf('Curator panel', module)
     .add('claim', () => ({
         components: {
-		        'c-claim': () => import('~/components/curator-panel/claim').then(m => m.default || m),
+            Claim: () => import('@ericmuyser/hyper-ui').then(m => m.Claim),
         },
         data(){
             return{
@@ -6654,40 +6409,40 @@ storiesOf('Curator panel', module)
                         title: 'Warning claim',
                         text: 'Pellentesque id lectus et sem convallis venenatis dapibus nec est'
                     },
-		                {
-				                type: 'success',
-				                title: 'Success claim',
-				                text: 'Pellentesque id lectus et sem convallis venenatis dapibus nec est'
-		                },
-		                {
-				                type: 'danger',
-				                title: 'Danger claim',
-				                text: 'Pellentesque id lectus et sem convallis venenatis dapibus nec est'
-		                },
-		                {
-				                type: 'info',
-				                title: 'Info claim',
-				                text: 'Pellentesque id lectus et sem convallis venenatis dapibus nec est'
-		                }
+                    {
+                        type: 'success',
+                        title: 'Success claim',
+                        text: 'Pellentesque id lectus et sem convallis venenatis dapibus nec est'
+                    },
+                    {
+                        type: 'danger',
+                        title: 'Danger claim',
+                        text: 'Pellentesque id lectus et sem convallis venenatis dapibus nec est'
+                    },
+                    {
+                        type: 'info',
+                        title: 'Info claim',
+                        text: 'Pellentesque id lectus et sem convallis venenatis dapibus nec est'
+                    }
                 ]
             }
         },
-		    template: `<div class="p-5">
-                    <c-claim
+            template: `<div class="p-5">
+                    <Claim
                         class="mb-4"
                         v-for="claim in claimTypes"
                         :title="claim.title"
                         :type="claim.type">
                             {{ claim.text }}
-                    </c-claim>
+                    </Claim>
                 </div>`
     }))
     .add('info', () => ({
         components: {
-		        'c-curator-info': () => import('~/components/curator-panel/info-card').then(m => m.default || m)
+            CuratorInfo: () => import('@ericmuyser/hyper-ui').then(m => m.CuratorInfo)
         },
-		    template: `<div class="p-5" style="width: 350px">
-                        <c-curator-info title="Curator panel">
+            template: `<div class="p-5" style="width: 350px">
+                        <CuratorInfo title="Curator panel">
                             <div v-if="!editing">
                                 <p>
                                     20 people have
@@ -6712,7 +6467,7 @@ storiesOf('Curator panel', module)
                                     </li>
                                 </ul>
                             </div>
-                        </c-curator-info>
+                        </CuratorInfo>
                     </div>`
     }))
 
@@ -6720,18 +6475,18 @@ storiesOf('Curator panel', module)
 storiesOf('Clock', module)
     .add('default', () => ({
         components: {
-		        'c-clock': () => import('~/components/clock').then(m => m.default || m),
+            Clock: () => import('@ericmuyser/hyper-ui').then(m => m.Clock),
         },
-		    template: `<div class="p-5"><c-clock /></div>`
+        template: `<div class="p-5"><Clock /></div>`
     }))
 
 storiesOf('Content navigation', module)
     .add('default', () => ({
         components: {
-		        'c-content-navigation': () => import('~/components/content-navigation').then(m => m.default || m)
+            ContentNavigation: () => import('@ericmuyser/hyper-ui').then(m => m.ContentNavigation)
         },
         template: `<div class="p-5">
-                        <c-content-navigation
+                        <ContentNavigation
                             :setLimits="4">
                             <!--<div-->
                                 <!--slot-scope="props"-->
@@ -6784,103 +6539,103 @@ storiesOf('Content navigation', module)
                                     <i class="fas fa-bookmark" />
                                 </a>
                             </template>
-                        </c-content-navigation>
+                        </ContentNavigation>
                     </div>`
     }))
 
 storiesOf('Broken page', module)
     .add('default', () => ({
         components: {
-		        'c-broken-page': () => import('~/components/broken-page').then(m => m.default || m)
+            BrokenPage: () => import('~/components/broken-page')
         },
-        data(){
-            return{
-		            isError: {
-				            statusCode: 401,
-				            message: 'Unauthorized'
+        data() {
+            return {
+                isError: {
+                    statusCode: 401,
+                    message: 'Unauthorized'
                 }
             }
         },
-        template: `<c-broken-page :isError="isError" class="text-white" />`
+        template: `<BrokenPage :isError="isError" class="text-white" />`
     }))
 
 storiesOf('Benchmark', module)
     .add('default', () => ({
         components: {
-		        'c-benchmark': () => import('~/components/benchmark').then(m => m.default || m)
+            Benchmark: () => import('@ericmuyser/hyper-ui').then(m => m.Benchmark)
         },
-        data(){
-            return{
-		            settings: {
-				            client: {
+        data() {
+            return {
+                settings: {
+                    client: {
                         autoUpdateSettings: function() {
                             alert('autoUpdateSettings function')
-						            },
+                        },
                     }
                 }
             }
         },
-        template: `<div class="p-5"><c-benchmark :settings="settings" class="text-white" /></div>`
+        template: `<div class="p-5"><Benchmark :settings="settings" class="text-white" /></div>`
     }))
 
 storiesOf('Trade offer', module)
     .add('default', () => ({
         components: {
-		        'c-trade-offer': () => import('~/components/trade-offer').then(m => m.default || m)
+            TradeOffer: () => import('@ericmuyser/hyper-ui').then(m => m.TradeOffer)
         },
         data(){
-            return{
-		            offer: {
-				            new: true,
-				            createdAt: Date.now(),
-				            contractor: {
-				                name: 'Josh Doel',
-						            img: ''
+            return {
+                offer: {
+                    new: true,
+                    createdAt: Date.now(),
+                    contractor: {
+                        name: 'Josh Doel',
+                        img: ''
                     },
-				            showDetails: true,
-				            yourOffer: [2,3,4,5],
-				            contractorOffer: [2,3,4,5],
-				            assets: [
+                    showDetails: true,
+                    yourOffer: [2,3,4,5],
+                    contractorOffer: [2,3,4,5],
+                    assets: [
                         {
-		                        name: 'Asset name',
-		                        image: '',
-		                        price: {
-				                        current: 23.33
-		                        }
+                            name: 'Asset name',
+                            image: '',
+                            price: {
+                                current: 23.33
+                            }
                         },
-						            {
-								            name: 'Asset name',
-								            image: '',
-								            price: {
-										            current: 23.33
-								            }
-						            },
-						            {
-								            name: 'Asset name',
-								            image: '',
-								            price: {
-										            current: 23.33
-								            }
-						            },
-						            {
-								            name: 'Asset name',
-								            image: '',
-								            price: {
-										            current: 23.33
-								            }
-						            }
+                        {
+                            name: 'Asset name',
+                            image: '',
+                            price: {
+                                current: 23.33
+                            }
+                        },
+                        {
+                            name: 'Asset name',
+                            image: '',
+                            price: {
+                                current: 23.33
+                            }
+                        },
+                        {
+                            name: 'Asset name',
+                            image: '',
+                            price: {
+                                current: 23.33
+                            }
+                        }
                     ]
                 }
             }
         },
-        template: `<div class="p-5"><c-trade-offer :offer="offer" class="text-white" /></div>`
+        template: `<div class="p-5"><TradeOffer :offer="offer" class="text-white" /></div>`
     }))
 
 storiesOf('Receipt', module)
     .add('default', () => ({
-		    components: {
-				    'c-table-simple': () => import('~/components/table-simple').then(m => m.default || m)
-		    },
+        components: {
+            SimpleTable: () => import('@ericmuyser/hyper-ui').then(m => m.SimpleTable)
+        },
         template: `
         <div style="width: 80%" class="text-white p-4">
             <div class="row align-items-center margin-bottom-30 margin-top-20">
@@ -6899,7 +6654,7 @@ storiesOf('Receipt', module)
             </div>
             <div class="row align-items-center">
                 <div class="col-12">
-                    <c-block
+                    <Block
                         title="Purchase List"
                         :bgColor="false"
                         noGutter
@@ -6907,7 +6662,7 @@ storiesOf('Receipt', module)
                         onlyContentBg
                         noPadding>
                         <div class="padding-bottom-30 padding-top-15">
-                            <c-table-simple stripped>
+                            <SimpleTable stripped>
                                 <thead>
                                     <tr class="text-uppercase">
                                         <th>
@@ -7033,12 +6788,12 @@ storiesOf('Receipt', module)
                                         </td>
                                     </tr>
                                 </tbody>
-                            </c-table-simple>
+                            </SimpleTable>
                         </div>
-                    </c-block>
+                    </Block>
                 </div>
                 <div class="col-12">
-                    <c-block
+                    <Block
                         title="Totals"
                         :bgColor="false"
                         noGutter
@@ -7046,7 +6801,7 @@ storiesOf('Receipt', module)
                         onlyContentBg
                         noPadding>
                         <div class="padding-bottom-30 padding-top-15">
-                            <c-table-simple stripped>
+                            <SimpleTable stripped>
                                 <tbody>
                                     <tr>
                                         <td>
@@ -7079,12 +6834,12 @@ storiesOf('Receipt', module)
                                         </td>
                                     </tr>
                                 </tbody>
-                            </c-table-simple>
+                            </SimpleTable>
                         </div>
-                    </c-block>
+                    </Block>
                 </div>
                 <div class="col-12">
-                    <c-block
+                    <Block
                         title="Recipients"
                         :bgColor="false"
                         noGutter
@@ -7092,7 +6847,7 @@ storiesOf('Receipt', module)
                         onlyContentBg
                         noPadding>
                         <div class="padding-bottom-30 padding-top-15">
-                            <c-table-simple stripped>
+                            <SimpleTable stripped>
                                 <thead>
                                     <tr class="text-uppercase">
                                         <th>
@@ -7129,9 +6884,9 @@ storiesOf('Receipt', module)
                                         </td>
                                     </tr>
                                 </tbody>
-                            </c-table-simple>
+                            </SimpleTable>
                         </div>
-                    </c-block>
+                    </Block>
                 </div>
             </div>
         </div>
@@ -7141,15 +6896,17 @@ storiesOf('Receipt', module)
 
 storiesOf('Order', module)
     .add('default', () => ({
-		    components: {
-				    'c-table-simple': () => import('~/components/table-simple').then(m => m.default || m),
-		    },
-		    data: () => data.OrderData,
+        components: {
+            SimpleTable: () => import('@ericmuyser/hyper-ui').then(m => m.SimpleTable),
+            Block: () => import('@ericmuyser/hyper-ui').then(m => m.Block),
+            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button),
+        },
+        data: () => data.OrderData,
         template: `
             <div style="width: 80%" class="p-4 text-white">
                 <div class="row">
                     <div class="col-12 mb-5">
-                        <c-block title="Thanks for your order!">
+                        <Block title="Thanks for your order!">
                             <div class="order-info">
                                 <div class="order-info__number">
                                     Order #23543422234234234
@@ -7158,7 +6915,7 @@ storiesOf('Order', module)
                                     Order date: Dec 8, 2019 3:50 PM
                                 </div>
                             </div>
-                            <c-table-simple class="mt-5">
+                            <SimpleTable class="mt-5">
                                 <thead>
                                     <tr>
                                         <th v-for="(field, idx) in tableHead">
@@ -7173,14 +6930,14 @@ storiesOf('Order', module)
                                             {{ field }}
                                         </td>
                                         <td>
-                                            <c-button status="second-info">
+                                            <Button status="second-info">
                                                 Open
-                                            </c-button>
+                                            </Button>
                                         </td>
                                     </tr>
                                 </tbody>
-                            </c-table-simple>
-                        </c-block>
+                            </SimpleTable>
+                        </Block>
                     </div>
                     <div class="col-12 col-lg-3 d-flex flex-column">
                         <div class="h5">
@@ -7256,9 +7013,9 @@ storiesOf('Order', module)
                             </span>
                         </div>
                         <div class="w-100 mt-5">
-                            <c-button status="second-success" class="w-100">
+                            <Button status="second-success" class="w-100">
                                 Submit
-                            </c-button>
+                            </Button>
                         </div>
                     </div>
                 </div>
@@ -7269,13 +7026,13 @@ storiesOf('Order', module)
 
 storiesOf('Decentralization-meter', module)
     .add('default', () => ({
-		    components: {
-				    'c-decentralization-meter': () => import('~/components/decentralization-meter').then(m => m.default || m),
-		    },
-		    data: () => data.OrderData,
+        components: {
+            DecentralizationMeter: () => import('@ericmuyser/hyper-ui').then(m => m.DecentralizationMeter),
+        },
+        data: () => data.OrderData,
         template: `
             <div style="width: 80%" class="p-4 text-white">
-                <c-decentralization-meter />
+                <DecentralizationMeter />
             </div>
         `
     }))
@@ -7284,11 +7041,11 @@ storiesOf('Decentralization-meter', module)
 // storiesOf('Item navigator', module)
 //     .add('default', () => ({
 //         components: {
-// 		        'c-navigator-item': () => import('~/components/item-navigator/item').then(m => m.default || m)
+//                 'c-navigatoritem: () => import('~/components/item-navigator/item')
 //         },
 //         data(){
 //             return{
-// 		            deletingTree: null
+//                     deletingTree: null
 //             }
 //         },
 //         template: `<div class="p-5">

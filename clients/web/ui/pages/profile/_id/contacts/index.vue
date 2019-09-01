@@ -1,5 +1,5 @@
 <template>
-    <c-layout />
+    <Layout />
 </template>
 
 <script>

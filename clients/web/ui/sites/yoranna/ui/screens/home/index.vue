@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <Layout>
         
         About
         
@@ -10,15 +10,13 @@
         FAQ
 
 
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
-    import * as DB from '@/db'
-
     export default {
         components: {
-            'c-layout': () => import('~/sites/yoranna/ui/layouts/default').then(m => m.default || m),
+            'Layout': () => import('~/sites/yoranna/ui/layouts/default').then(m => m.default),
         },
         data() {
             return {

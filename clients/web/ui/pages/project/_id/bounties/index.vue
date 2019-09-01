@@ -8,25 +8,25 @@
                     </div>
                 </div>
                 <div class="bounties-header__stat">
-                    <c-icon-block
+                    <Icon-block
                         icon="users"
                         class="ml-5">
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             {{ contributors }}
                         </div>
                         Contributors
-                    </c-icon-block>
-                    <c-icon-block
+                    </Icon-block>
+                    <Icon-block
                         icon="arrow-right"
                         class="ml-5">
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             {{ submissions }}
                         </div>
                         Submissions
-                    </c-icon-block>
+                    </Icon-block>
                 </div>
                 <div class="bounties-header__action">
-                    <c-button
+                    <Button
                         :to="`/business/projects/${project.id}`"
                         status="dark"
                         iconHide
@@ -37,8 +37,8 @@
                             <i class="fas fa-lock" />
                         </span>
                         Management
-                    </c-button>
-                    <c-button
+                    </Button>
+                    <Button
                         :to="`/profile/${$store.state.application.activeProfile.id}/bounties`"
                         status="info"
                         iconHide
@@ -46,7 +46,7 @@
                         fontSize="14"
                         class="text-uppercase ml-3">
                         My bounties
-                    </c-button>
+                    </Button>
                 </div>
             </div>
 
@@ -75,7 +75,7 @@
                             <span>{{ item.approved }}</span>
                         </div>
                     </div>
-                    <c-button
+                    <Button
                         status="success"
                         fontSize="14"
                         iconHide
@@ -83,7 +83,7 @@
                         class="text-uppercase"
                         @click=" showDownload = !showDownload ">
                         Claim Bounty
-                    </c-button>
+                    </Button>
                 </div>
                 <div class="bountie__text padding-left-15 padding-right-15">
                     <h4>{{ item.title }}</h4>
@@ -103,12 +103,12 @@
                             class="explain_input"
                             type="text"
                             placeholder="Explain your findings">
-                        <c-button
+                        <Button
                             status="success"
                             icon="arrow-right"
                             size="md">
                             Submit
-                        </c-button>
+                        </Button>
                     </div>
                 </transition>
             </div>
@@ -119,7 +119,7 @@
 <script>
 export default {
     components: {
-        'c-icon-block': () => import('~/components/block/with-icon').then(m => m.default || m)
+        'Icon-block': () => import('@ericmuyser/hyper-ui').then(m => m.Icon-block)
     },
     props: ['project', 'editing'],
     data() {
@@ -261,7 +261,7 @@ export default {
             text-align: center;
             display: inline-block;
         }
-        .c-button{
+        .Button{
             float: right;
             width: 90px;
         }

@@ -32,9 +32,9 @@
                 placeholder="Amount to send">
             <br>
 
-            <c-button @click="submit()">
+            <Button @click="submit()">
                 Go
-            </c-button>
+            </Button>
             <br>
         </div>
     </div>

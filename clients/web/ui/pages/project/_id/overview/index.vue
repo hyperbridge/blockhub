@@ -1,7 +1,7 @@
 <template>
     <div class="row mx-0">
         <div class="col-12 col-lg-7 col-xl-8">
-            <c-screen-gallery
+            <ScreenGallery
                 v-if="project.images && project.images.preview"
                 :items="project.images.preview" />
 
@@ -11,12 +11,12 @@
                 Currently crowdfunding
             </div>
 
-            <c-block
+            <Block
                 title="Participation Tiers"
                 :noGutter="true"
                 :onlyContentBg="true"
                 :bgGradient="true">
-                <c-participation-tier
+                <ParticipationTier
                     v-for="(item, index) in participationTiers"
                     :id="item.id"
                     :key="index"
@@ -26,7 +26,7 @@
                     :title="item.title"
                     :tag="item.tag"
                     :inList="(index < participationTiers.length-1) ? true : false" />
-            </c-block>
+            </Block>
 
             <div class="editor-container">
                 <div
@@ -62,7 +62,7 @@
                 </p>
             </div>
 
-            <c-block
+            <Block
                 v-if="!editing"
                 title="About Game"
                 class="margin-bottom-30"
@@ -75,7 +75,7 @@
                     v-html="project.value">
                     {{ project.value }}
                 </div>
-            </c-block>
+            </Block>
 
             <div
                 v-if="editing"
@@ -103,7 +103,7 @@
                     <h2 class="title">
                         Crowdfunding campaign
                     </h2>
-                    <c-button-fav
+                    <ButtonFav
                         target="wishlist"
                         :active="!!wishlist[project.id]"
                         @click="$store.dispatch(
@@ -145,7 +145,7 @@
                                 :key="index"
                                 :class="prop">
                                 <div class="progress-bar-vertical">
-                                    <c-progress-bar
+                                    <ProgressBar
                                         :values="{
                                             reached: project.funding[prop + '_amount'],
                                             goal: project.funding.goalAmount
@@ -161,22 +161,22 @@
                             </div>
                         </div>
                         <div class="project__action">
-                            <c-button
+                            <Button
                                 status="share"
                                 swapDirection>
                                 Share
-                            </c-button>
-                            <c-button
+                            </Button>
+                            <Button
                                 status="info"
                                 icon="check"
                                 swapDirection>
                                 Follow
-                            </c-button>
-                            <c-button
+                            </Button>
+                            <Button
                                 status="support"
                                 swapDirection>
                                 Support
-                            </c-button>
+                            </Button>
                         </div>
                     </div>
                 </div>
@@ -219,7 +219,7 @@
                 </div>
             </div>
 
-            <c-community-spotlight
+            <CommunitySpotlight
                 v-access="'community'"
                 :discussions="project.community.discussions"
                 :communityPath="`/project/${project.id}`"
@@ -227,25 +227,25 @@
                 :activeElement="activeElement['milestones']"
                 class="margin-bottom-30" />
 
-            <c-block
+            <Block
                 title="Contribute"
                 class="margin-bottom-30"
                 :noGutter="true"
                 :bgGradient="true"
                 :onlyContentBg="true">
-                <c-contribute-form @click="showContributeModal" />
-            </c-block>
+                <ContributeForm @click="showContributeModal" />
+            </Block>
 
-            <c-contribute-pledge
+            <ContributePledge
                 v-for="(pledge, index) in project.pledges"
                 :key="index"
                 :pledge="pledge"
                 :currency="project.meta.currency"
                 @click="showContributeModal" />
 
-            <c-decentralization-meter v-decentralized-mode />
+            <DecentralizationMeter v-decentralized-mode />
 
-            <c-basic-popup
+            <BasicPopup
                 :activated="$store.state.application.activeModal === 'contribute'"
                 @close="$store.commit('application/activeModal', null)">
                 <div
@@ -261,11 +261,11 @@
                         </h3>
                         Contract Address: 0xasdadas<br>
 
-                        <c-button
-                            class="c-button--lg outline-white margin-top-20 margin-auto"
+                        <Button
+                            class="Button--lg outline-white margin-top-20 margin-auto"
                             @click="startContribution">
                             Start
-                        </c-button>
+                        </Button>
                     </div>
                     <div v-if="syncStep === 2" />
                     <br>
@@ -281,13 +281,13 @@
                 <p
                     slot="footer"
                     class="margin-top-20">
-                    <c-button
+                    <Button
                         status="dark"
                         to="/help">
                         Need help? Check the Help Center
-                    </c-button>
+                    </Button>
                 </p>
-            </c-basic-popup>
+            </BasicPopup>
         </div>
     </div>
 </template>
@@ -297,21 +297,21 @@ import Vue from 'vue'
 
 export default {
     components: {
-        'c-game-plan': () => import('~/components/game-plans/plan').then(m => m.default || m),
-        'c-screen-gallery': () => import('~/components/screen-gallery/gallery').then(m => m.default || m),
-        'c-tags': () => import('~/components/tags').then(m => m.default || m),
-        'c-rating-block': () => import('~/components/rating-block').then(m => m.default || m),
-        'c-frequently-traded-assets': () => import('~/components/frequently-traded-assets').then(m => m.default || m),
-        'c-community-spotlight': () => import('~/components/community-spotlight').then(m => m.default || m),
-        'c-basic-popup': () => import('~/components/popups/basic').then(m => m.default || m),
-        'c-participation-tier': () => import('~/components/participation-tier').then(m => m.default || m),
-        'c-heading-bar': () => import('~/components/heading-bar').then(m => m.default || m),
-        'c-progress-bar': () => import('~/components/progress-bar').then(m => m.default || m),
-        'c-contribute-form': () => import('~/components/contribute/form').then(m => m.default || m),
-        'c-contribute-pledge': () => import('~/components/contribute/pledge').then(m => m.default || m),
-        'c-badges': () => import('~/components/project/badges').then(m => m.default || m),
-        'c-decentralization-meter': () => import('~/components/decentralization-meter').then(m => m.default || m),
-        'c-button-fav': () => import('~/components/buttons/favorite').then(m => m.default || m)
+        'GamePlan': () => import('@ericmuyser/hyper-ui').then(m => m.GamePlan),
+        'ScreenGallery': () => import('@ericmuyser/hyper-ui').then(m => m.ScreenGallery),
+        'Tags': () => import('@ericmuyser/hyper-ui').then(m => m.Tags),
+        'RatingBlock': () => import('@ericmuyser/hyper-ui').then(m => m.RatingBlock),
+        'FrequentlyTradedAssets': () => import('@ericmuyser/hyper-ui').then(m => m.FrequentlyTradedAssets),
+        'CommunitySpotlight': () => import('@ericmuyser/hyper-ui').then(m => m.CommunitySpotlight),
+        'BasicPopup': () => import('@ericmuyser/hyper-ui').then(m => m.BasicPopup),
+        'ParticipationTier': () => import('@ericmuyser/hyper-ui').then(m => m.ParticipationTier),
+        'HeadingBar': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar),
+        'ProgressBar': () => import('@ericmuyser/hyper-ui').then(m => m.ProgressBar),
+        'ContributeForm': () => import('@ericmuyser/hyper-ui').then(m => m.ContributeForm),
+        'ContributePledge': () => import('@ericmuyser/hyper-ui').then(m => m.ContributePledge),
+        'Badges': () => import('@ericmuyser/hyper-ui').then(m => m.Badges),
+        'DecentralizationMeter': () => import('@ericmuyser/hyper-ui').then(m => m.DecentralizationMeter),
+        'ButtonFav': () => import('@ericmuyser/hyper-ui').then(m => m.ButtonFav)
     },
     props: ['project', 'editing'],
     data() {

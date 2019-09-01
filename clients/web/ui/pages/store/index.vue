@@ -1,9 +1,9 @@
 <template>
-    <c-layout navigationKey="store">
+    <Layout navigationKey="store">
         <div class="row">
             Nothing to see here
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

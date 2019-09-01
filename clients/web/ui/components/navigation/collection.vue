@@ -1,6 +1,6 @@
 <template>
     <div class="navigation">
-        <c-sidebar-menu
+        <SidebarMenu
             title="COLLECTION"
             subTitle="General"
             mClass="margin-bottom-20"
@@ -11,8 +11,7 @@
 <script>
 export default {
     components: {
-        'c-sidebar-menu': () => import('~/components/sidebar-menu').then(m => m.default || m),
-        'c-searcher': () => import('~/components/searcher').then(m => m.default || m)
+        'SidebarMenu': () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenu)
     },
     data() {
         return {

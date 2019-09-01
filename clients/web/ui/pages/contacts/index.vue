@@ -1,7 +1,7 @@
 <template>
-    <c-layout navigationKey="store">
+    <Layout navigationKey="store">
         <div>Contacts coming soon</div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>

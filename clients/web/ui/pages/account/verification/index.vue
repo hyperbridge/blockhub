@@ -1,5 +1,5 @@
 <template>
-    <c-layout
+    <Layout
         navigationKey="account"
         :showLeftPanel="false"
         :showRightPanel="false">
@@ -8,10 +8,10 @@
             class="content login-container">
             <div class="container">
                 <div class="col-12">
-                    <c-tabs
+                    <Tabs
 :tabNames="['Account Verification']"
                             styled>
-                        <c-tab
+                        <Tab
                             :tabId="1">
                             <div class="tab-container">
                                 <div
@@ -19,12 +19,12 @@
                                     class="tab-card padding-20">
                                     <p>Your account has been verified. You can request approval for additional profiles below.</p>
 
-                                    <c-profile-picker :profiles="profiles" @chooseProfile="chooseProfile()" />
+                                    <ProfilePicker :profiles="profiles" @chooseProfile="chooseProfile()" />
                                     <br>
 
-                                    <c-button @click="verifyProfile">
+                                    <Button @click="verifyProfile">
                                         Send Again
-                                    </c-button>
+                                    </Button>
                                 </div>
                                 <div
                                     v-if="isVerifying"
@@ -41,9 +41,9 @@
                                             Something wrong? You can submit again in 1 hour
                                         </p>
                                         <p v-if="been1hour">
-                                            Something wrong? <c-button @click="overrideForm">
+                                            Something wrong? <Button @click="overrideForm">
                                                 Show Form
-                                            </c-button>
+                                            </Button>
                                         </p>
                                     </div>
                                 </div>
@@ -161,30 +161,30 @@
                                         </div>
                                         <br>
 
-                                        <c-button
-                                            class="c-button--lg"
+                                        <Button
+                                            class="Button--lg"
                                             @click="verifyAccount()">
                                             Start Verification
-                                        </c-button>
+                                        </Button>
                                     </div>
                                     <div v-if="verificationLink">
                                         <p>Great. We've told Veriff you're coming!</p>
 
-                                        <c-button
+                                        <Button
                                             v-if="verificationLink"
-                                            class="c-button--lg"
+                                            class="Button--lg"
                                             :href="verificationLink">
                                             Continue to Veriff
-                                        </c-button>
+                                        </Button>
                                     </div>
                                 </div>
                             </div>
-                        </c-tab>
-                    </c-tabs>
+                        </Tab>
+                    </Tabs>
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 
@@ -193,8 +193,8 @@
 
 export default {
     components: {
-        'c-user-card': () => import('~/components/user-card').then(m => m.default || m),
-        'c-profile-picker': () => import('~/components/profile-picker').then(m => m.default || m)
+        'UserCard': () => import('@ericmuyser/hyper-ui').then(m => m.UserCard),
+        'ProfilePicker': () => import('@ericmuyser/hyper-ui').then(m => m.ProfilePicker)
     },
     data() {
         const { account } = this.$store.state.application

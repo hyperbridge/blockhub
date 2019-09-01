@@ -1,39 +1,39 @@
 <template>
-    <c-layout title="Release history">
+    <Layout title="Release history">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <c-buttons-group>
-                        <c-button
+                    <ButtonsGroup>
+                        <Button
                             :status="ifList"
                             size="md"
                             :shadow="false"
                             iconHide
                             @click="listType = 'list'">
                             Releases
-                        </c-button>
-                        <c-button
+                        </Button>
+                        <Button
                             :status="ifTags"
                             size="md"
                             :shadow="false"
                             iconHide
                             @click="listType = 'tags'">
                             Tags
-                        </c-button>
-                    </c-buttons-group>
-                    <c-button
+                        </Button>
+                    </ButtonsGroup>
+                    <Button
                         status="success"
                         icon="plus"
                         class="float-right"
                         size="md"
                         @click="$router.push({ path: '/business/new-release' })">
                         Draft a new release
-                    </c-button>
+                    </Button>
                 </div>
                 <div class="col-12">
                     <div class="history-list">
                         <div v-if="listType == 'list'">
-                            <c-release-list-item
+                            <ReleaseListItem
                                 v-for="(release) in sortedList"
                                 :id="release.id"
                                 :key="release.id"
@@ -51,7 +51,7 @@
                             <i class="fas fa-tag mr-2" /> Tags
                         </div>
                         <div v-if="listType == 'tags'">
-                            <c-release-tag-item
+                            <ReleaseTagItem
                                 v-for="release in sortedList"
                                 :id="release.id"
                                 :key="release.id"
@@ -63,16 +63,16 @@
                 </div>
             </div>
         </div>
-    </c-layout>
+    </Layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-layout': () => import('~/components/business-layout').then(m => m.default || m),
-        'c-buttons-group': () => import('~/components/buttons/group').then(m => m.default || m),
-        'c-release-tag-item': () => import('~/components/business/release-history/tag-item').then(m => m.default || m),
-        'c-release-list-item': () => import('~/components/business/release-history/list-item').then(m => m.default || m)
+        'Layout': () => import('@ericmuyser/hyper-ui').then(m => m.Layout),
+        'ButtonsGroup': () => import('@ericmuyser/hyper-ui').then(m => m.ButtonsGroup),
+        'ReleaseTagItem': () => import('@ericmuyser/hyper-ui').then(m => m.ReleaseTagItem),
+        'ReleaseListItem': () => import('@ericmuyser/hyper-ui').then(m => m.ReleaseListItem)
     },
     data() {
         return {

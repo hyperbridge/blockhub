@@ -33,7 +33,7 @@ export default async ({ app, store, redirect }) => {
             }
 
             if (mutation.type === 'profiles/update') {
-                bridge.sendCommand('saveProfileRequest', profile).then((profile) => {
+                bridge.sendCommand('saveProfileRequest', profile).then(profile => {
                     this.saveProfiles()
                 })
             }
@@ -255,14 +255,6 @@ export default async ({ app, store, redirect }) => {
 
         // ENABLE SIMULATOR MODE
         // store.state.application.simulatorMode = true
-    }
-
-    try { // TODO: we dont need this do we?
-        store.dispatch('application/initEthereum')
-        store.dispatch('funding/initEthereum')
-        store.dispatch('marketplace/initEthereum')
-    } catch (err) {
-        console.log(err)
     }
 
     // initSubscribers()

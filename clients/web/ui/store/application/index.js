@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import Vue from 'vue'
 import FormData from 'form-data'
-import * as DB from '@/db'
 import * as Bridge from '@/framework/desktop-bridge'
 
 export const state = () => ({

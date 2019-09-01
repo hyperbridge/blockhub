@@ -10,20 +10,20 @@
                         :class="{ 'menu-list__item--active': activeTab === index + 1}"
                         @click="activeTab = index + 1">
                         {{ title | upperFirstChar }}
-                        <c-tag-count :number="offersCount[title]" />
+                        <TagCount :number="offersCount[title]" />
                     </a>
                 </li>
             </ul>
         </nav>
-        <c-tabs
+        <Tabs
             :activeTabProp="activeTab"
             disableMenu>
-            <c-tab
+            <Tab
                 v-for="(offers, offersKey, index) in offers"
                 :key="offersKey"
                 :tabId="index + 1"
                 class="trade-block__offers-tab">
-                <c-trade-offer
+                <TradeOffer
                     v-for="offer in offers"
                     :key="offer.id"
                     :offer="offer"
@@ -31,16 +31,16 @@
                 <p v-if="!offers.length">
                     No offers were found
                 </p>
-            </c-tab>
-        </c-tabs>
+            </Tab>
+        </Tabs>
     </article>
 </template>
 
 <script>
 export default {
     components: {
-        'c-trade-offer': () => import('~/components/trade-offer').then(m => m.default || m),
-        'c-tag-count': () => import('~/components/tags/count').then(m => m.default || m)
+        'TradeOffer': () => import('@ericmuyser/hyper-ui').then(m => m.TradeOffer),
+        'TagCount': () => import('@ericmuyser/hyper-ui').then(m => m.TagCount)
     },
     data() {
         return {

@@ -1,15 +1,11 @@
 <template>
-<div>
-    <c-layout :showLeftPanel="false" :showRightPanel="false" :breadcrumbLinks="false">
-        
-    </c-layout>
-    <c-chat :messages="messages" />
-</div>
+    <div>
+        <Layout :showLeftPanel="false" :showRightPanel="false" :breadcrumbLinks="false"/>
+        <Chat :messages="messages" />
+    </div>
 </template>
 
 <script>
-import Chat from '@/components/chat/chat'
-
 export default {
     head() {
         return {
@@ -21,7 +17,7 @@ export default {
         }
     },
     components: {
-        'c-chat': Chat
+        Chat: () => import('@ericmuyser/hyper-ui').then(m => m.Chat)
     },
     data: () => ({
     }),

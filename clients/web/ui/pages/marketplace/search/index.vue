@@ -1,22 +1,22 @@
 <template>
     <div>
-        <c-messages-bar :messages="errors" />
+        <Messages-bar :messages="errors" />
         <h4>Saved filters</h4>
-        <c-searcher
+        <Searcher
             :results="assetsFiltered"
             :delay="400"
             @input="phrase = $event">
             <div slot-scope="props">
-                <c-asset-preview
+                <AssetPreview
                     :asset="props.result"
                     horizontal
                     size="sm"
                     @click.native="newFilter.asset = props.result; phrase = ''" />
             </div>
-        </c-searcher>
+        </Searcher>
         <h4 />
 
-        <c-asset-preview
+        <AssetPreview
             v-if="newFilter.asset"
             :asset="newFilter.asset"
             horizontal
@@ -30,25 +30,25 @@
                     ({{ newFilter.phrase }})
                 </span>
             </p>
-            <c-input v-model="newFilter.phrase" />
+            <Input v-model="newFilter.phrase" />
         </div>
         <div class="filter-box">
             <p>Minimum price: ({{ newFilter.priceMin }})</p>
-            <c-range-slider
+            <RangeSlider
                 v-model="newFilter.priceMin"
                 :max="25" />
         </div>
         <div class="filter-box">
             <p>Maximum price: ({{ newFilter.priceMax }})</p>
-            <c-range-slider v-model="newFilter.priceMax" />
+            <RangeSlider v-model="newFilter.priceMax" />
         </div>
-        <c-button
+        <Button
             status="info"
             icon_hid
             size="md"
             @click="createFilter()">
             Create filter
-        </c-button>
+        </Button>
 
         <select
             v-model="selectedFilterId"
@@ -69,42 +69,42 @@
 
         {{ selectedFilterId }}
         <div v-if="choosenFilter">
-            <c-option-tag
+            <OptionTag
                 v-if="activeFilter.phrase"
                 title="PHRASE:"
                 :text="activeFilter.phrase"
                 @delete="updateFilter({ phrase: '' })" />
-            <c-option-tag
+            <OptionTag
                 v-if="activeFilter.priceMin || activeFilter.priceMax"
                 title="PRICE:">
-                <c-option-tag
+                <OptionTag
                     v-if="activeFilter.priceMin"
                     title="MIN:"
                     :text="activeFilter.priceMin"
                     isChildren
                     @delete="updateFilter({ priceMin: 0 })" />
-                <c-option-tag
+                <OptionTag
                     v-if="activeFilter.priceMax"
                     title="MAX:"
                     :text="activeFilter.priceMax"
                     isChildren
                     @delete="updateFilter({ priceMax: 0 })" />
-            </c-option-tag>
+            </OptionTag>
         </div>
 
-        <c-button @click="autofilter = { name: 'SilverBird' }">
+        <Button @click="autofilter = { name: 'SilverBird' }">
             Map element
-        </c-button>
+        </Button>
 
-        <c-button
+        <Button
             v-show="selectedFilterId"
             status="info"
             icon="edit"
             @click="editedFilter = selectedFilterId">
             Edit selected filter
-        </c-button>
+        </Button>
 
-        <c-modal
+        <Modal
             v-if="editedFilter"
             @close="editedFilter = null">
             <div slot="body">
@@ -115,27 +115,27 @@
                             ({{ selectedFilter.phrase }})
                         </span>
                     </p>
-                    <c-input
+                    <Input
                         :value="selectedFilter.phrase"
                         @change="selectedFilter = { phrase: $event.target.value }" />
                 </div>
                 <div class="filter-box">
                     <p>Minimum price: ({{ selectedFilter.priceMin }})</p>
-                    <c-range-slider
+                    <RangeSlider
                         v-xmodel.number.debounce-10="selectedFilter.priceMin"
                         :max="25" />
                 </div>
             </div>
-        </c-modal>
+        </Modal>
 
 
-        <c-block
+        <Block
             title="Filtered assets"
             class="assets-wrapper">
-            <c-asset-list
+            <AssetList
                 :assets="filteredAssets"
                 :transition="true" />
-        </c-block>
+        </Block>
     </div>
 </template>
 
@@ -145,14 +145,14 @@ import { debounce } from '@/mixins'
 // TODO: simplify this shit
 export default {
     components: {
-        'c-block': () => import('~/components/block/index').then(m => m.default || m),
-        'c-asset-list': () => import('~/components/asset/list').then(m => m.default || m),
-        'c-searcher': () => import('~/components/searcher').then(m => m.default || m),
-        'c-asset-preview': () => import('~/components/asset/preview-basic').then(m => m.default || m),
-        'c-range-slider': () => import('~/components/range-slider/pure').then(m => m.default || m),
-        'c-option-tag': () => import('~/components/option-tag').then(m => m.default || m),
-        'c-modal': () => import('~/components/modal').then(m => m.default || m),
-        'c-messages-bar': () => import('~/components/message-bar/wrapper').then(m => m.default || m)
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
+        'AssetList': () => import('@ericmuyser/hyper-ui').then(m => m.AssetList),
+        'Searcher': () => import('@ericmuyser/hyper-ui').then(m => m.Searcher),
+        'AssetPreview': () => import('@ericmuyser/hyper-ui').then(m => m.AssetPreview),
+        'RangeSlider': () => import('@ericmuyser/hyper-ui').then(m => m.RangeSlider),
+        'OptionTag': () => import('@ericmuyser/hyper-ui').then(m => m.OptionTag),
+        'Modal': () => import('@ericmuyser/hyper-ui').then(m => m.Modal),
+        'Messages-bar': () => import('@ericmuyser/hyper-ui').then(m => m.Messages-bar)
     },
     mixins: [debounce],
     data() {
