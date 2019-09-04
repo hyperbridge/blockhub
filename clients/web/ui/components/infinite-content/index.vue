@@ -17,7 +17,7 @@
                                 <Vote
                                     v-if="activeElementIndex === index"
                                     v-access="'rating.read'"
-                                    :votes="item.data.meta.rating" />
+                                    :votes="item.data.meta.rating || 0" />
                                 <div class="row">
                                     <div
                                         v-if="item.data.meta.images"
@@ -466,6 +466,11 @@
 <script>
 export default {
     components: {
+        'Img': () => import('@ericmuyser/hyper-ui').then(m => m.Img),
+        'Tags': () => import('@ericmuyser/hyper-ui').then(m => m.Tags),
+        'Swiper': () => import('@ericmuyser/hyper-ui').then(m => m.Swiper),
+        'SwiperSlide': () => import('@ericmuyser/hyper-ui').then(m => m.SwiperSlide),
+        'Vote': () => import('@ericmuyser/hyper-ui').then(m => m.Vote),
         'Button': () => import('@ericmuyser/hyper-ui').then(m => m.Button),
         'HeadingBar': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar),
         'HeadingBarFields': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBarFields),

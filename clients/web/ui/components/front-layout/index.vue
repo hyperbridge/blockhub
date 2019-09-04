@@ -901,6 +901,13 @@ export default {
         'ChatNavigation': () => import('~/components/navigation/chat'),
         'IdeaNavigation': () => import('~/components/navigation/idea'),
         'CommunityNavigation': () => import('~/components/navigation/community'),
+        'ClaimPopup': () => import('~/components/claim-popup'),
+        'Button': () => import('@ericmuyser/hyper-ui').then(m => m.Button),
+        'Loading': () => import('@ericmuyser/hyper-ui').then(m => m.Loading),
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
+        'Icon': () => import('@ericmuyser/hyper-ui').then(m => m.Icon),
+        'Breadcrumb': () => import('@ericmuyser/hyper-ui').then(m => m.Breadcrumb),
+        'Img': () => import('@ericmuyser/hyper-ui').then(m => m.Img),
         'Header': () => import('@ericmuyser/hyper-ui').then(m => m.Header),
         'SlimHeader': () => import('@ericmuyser/hyper-ui').then(m => m.SlimHeader),
         'Popup': () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
@@ -911,7 +918,6 @@ export default {
         'WelcomePopup': () => import('@ericmuyser/hyper-ui').then(m => m.WelcomePopup),
         'DownloadPopup': () => import('@ericmuyser/hyper-ui').then(m => m.DownloadPopup),
         'UnlockPopup': () => import('@ericmuyser/hyper-ui').then(m => m.UnlockPopup),
-        'ClaimPopup': () => import('@ericmuyser/hyper-ui').then(m => m.ClaimPopup),
         'LoginPopup': () => import('@ericmuyser/hyper-ui').then(m => m.LoginPopup),
         'RegisterPopup': () => import('@ericmuyser/hyper-ui').then(m => m.RegisterPopup),
         'SendFundsPopup': () => import('@ericmuyser/hyper-ui').then(m => m.SendFundsPopup),
@@ -931,8 +937,7 @@ export default {
         'Settings': () => import('@ericmuyser/hyper-ui').then(m => m.Settings),
         'SocialConnect': () => import('@ericmuyser/hyper-ui').then(m => m.SocialConnect),
         'DraggableVideo': () => import('@ericmuyser/hyper-ui').then(m => m.DraggableVideo),
-        'Video': () => import('@ericmuyser/hyper-ui').then(m => m.Video),
-        'Breadcrumb': () => import('@ericmuyser/hyper-ui').then(m => m.Breadcrumb)
+        'Video': () => import('@ericmuyser/hyper-ui').then(m => m.Video)
     },
     mixins: [debounce],
     props: {

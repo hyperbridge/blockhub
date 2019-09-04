@@ -68,6 +68,10 @@ export default {
         }
     },
     components: {
+        'Button': () => import('@ericmuyser/hyper-ui').then(m => m.Button),
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
+        'Loading': () => import('@ericmuyser/hyper-ui').then(m => m.Loading),
+        'HeadingBar': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar),
         'IdeaCard': () => import('@ericmuyser/hyper-ui').then(m => m.IdeaCard)
     },
     data() {
@@ -183,7 +187,7 @@ export default {
             }
         })
 
-        const topGameIdeas = [] //(await store.dispatch('getTopGameIdeas/find')).data
+        const topGameIdeas = [] // (await store.dispatch('getTopGameIdeas/find')).data
 
         const ideas = store.getters['ideas/list']
 
