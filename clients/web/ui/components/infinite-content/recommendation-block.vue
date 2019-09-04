@@ -23,6 +23,14 @@
     </div>
 </template>
 
+<script>
+export default {
+    components: {
+        'Button': () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+    }
+}
+</script>
+
 <style lang="scss" scoped>
     .recommendation-block{
         display: flex;

@@ -257,7 +257,6 @@ export default {
     },
     components: {
         'AsssetsGrid': () => import('@ericmuyser/hyper-ui').then(m => m.AsssetsGrid),
-        'AssetsList': () => import('@ericmuyser/hyper-ui').then(m => m.AssetsList),
         'AssetsItem': () => import('@ericmuyser/hyper-ui').then(m => m.AssetsItem),
         'HeadingBar': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar),
         'HeadingBarFields': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBarFields),
@@ -344,7 +343,7 @@ export default {
                     'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
                     'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 ]
-            },
+            }
         ],
         imgSlider: {
             slidesPerView: 1,

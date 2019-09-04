@@ -17,7 +17,7 @@
                                 <Vote
                                     v-if="activeElementIndex === index"
                                     v-access="'rating.read'"
-                                    :votes="item.data.meta.rating || 0" />
+                                    :votes="item.data.meta.rating.overall || 0" />
                                 <div class="row">
                                     <div
                                         v-if="item.data.meta.images"
@@ -441,7 +441,7 @@
                 </div>
             </transition-group>
         </template>
-
+        hello {{ showSignIn }} {{ end }}
         <transition
             v-if="showSignIn"
             name="fade-slow">
@@ -466,6 +466,7 @@
 <script>
 export default {
     components: {
+        'RecommendationBlock': () => import('~/components/infinite-content/recommendation-block'),
         'Img': () => import('@ericmuyser/hyper-ui').then(m => m.Img),
         'Tags': () => import('@ericmuyser/hyper-ui').then(m => m.Tags),
         'Swiper': () => import('@ericmuyser/hyper-ui').then(m => m.Swiper),
@@ -491,15 +492,17 @@ export default {
         'GameDescription': () => import('@ericmuyser/hyper-ui').then(m => m.GameDescription),
         'GameIncludesList': () => import('@ericmuyser/hyper-ui').then(m => m.GameIncludesList),
         'CollectionList': () => import('@ericmuyser/hyper-ui').then(m => m.CollectionList),
-        'CollectionItem': () => import('@ericmuyser/hyper-ui').then(m => m.CollectionItem),
-        'RecommendationBlock': () => import('@ericmuyser/hyper-ui').then(m => m.RecommendationBlock)
+        'CollectionItem': () => import('@ericmuyser/hyper-ui').then(m => m.CollectionItem)
     },
     props: {
         list: {
             type: Array,
             required: true
         },
-        showSignIn: Boolean
+        showSignIn: {
+            type: Boolean,
+            default: false
+        }
     },
     data() {
         return {
@@ -532,7 +535,7 @@ export default {
     mounted() {
         // $(this.$refs.trendingSlider).ionRangeSlider();
 
-        // this.scroll()
+        this.scroll()
     },
     methods: {
         showArrowsState(el, count) {
@@ -552,6 +555,8 @@ export default {
             window.swiper = sl
         },
         scroll() {
+            if (!process.client) return
+
             window.onscroll = ev => {
                 if (
                     window.innerHeight + window.scrollY >=

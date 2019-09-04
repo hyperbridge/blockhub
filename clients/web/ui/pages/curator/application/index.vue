@@ -62,7 +62,6 @@ export default {
         }
     },
     components: {
-        'UserCard': () => import('@ericmuyser/hyper-ui').then(m => m.UserCard)
     },
     data() {
         const curatorProfile = Object.values(this.$store.state.profiles.keyedById).find(profile => profile.role !== 'curator')
