@@ -1,12 +1,27 @@
 /* eslint-disable react/react-in-jsx-scope, react/no-this-in-sfc */
 
 import Vue from 'vue'
-import {storiesOf, addDecorator} from '@storybook/vue'
-import {action} from '@storybook/addon-actions'
-import {linkTo} from '@storybook/addon-links'
+import {
+    storiesOf,
+    addDecorator
+} from '@storybook/vue'
+import {
+    action
+} from '@storybook/addon-actions'
+import {
+    linkTo
+} from '@storybook/addon-links'
 import StoryRouter from 'storybook-vue-router'
-import {withViewport} from '@storybook/addon-viewport'
-import {withKnobs, text, boolean, number, object} from '@storybook/addon-knobs/vue'
+import {
+    withViewport
+} from '@storybook/addon-viewport'
+import {
+    withKnobs,
+    text,
+    boolean,
+    number,
+    object
+} from '@storybook/addon-knobs/vue'
 
 import '@/css/styles.scss'
 import filters from '@/plugins/filters'
@@ -69,22 +84,23 @@ Vue.component('router-link', {
 })
 
 Vue.component('nuxt-link', {
-    props: ['to'],
-    methods: {
-        log() {
-            action('link target')(this.to)
+        props: ['to'],
+        methods: {
+            log() {
+                action('link target')(this.to)
+            },
         },
-    },
-    template: '<div @click="log()"><slot /></div>',
-})
-//
-// // addDecorator(withViewport('desktop'))
-// //addDecorator(StoryRouter())
-//
+        template: '<div @click="log()"><slot /></div>',
+    })
+    //
+    // // addDecorator(withViewport('desktop'))
+    // //addDecorator(StoryRouter())
+    //
 storiesOf('Promotion Box', module)
     .add('item', () => ({
         components: {
-            PromotionBoxItem: () => import('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
+            PromotionBoxItem: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
         },
         data() {
             return {
@@ -96,10 +112,12 @@ storiesOf('Promotion Box', module)
     }))
     .add('list', () => ({
         components: {
-            PromotionBoxList: () => import('@ericmuyser/hyper-ui').then(m => m.PromotionBoxList),
-            PromotionBoxItem: () => import('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
+            PromotionBoxList: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.PromotionBoxList),
+            PromotionBoxItem: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
         },
-        data: () => data.PromotionBoxData ,
+        data: () => data.PromotionBoxData,
         template: `<div class="row"><div class="col-6 p-5">
                         <PromotionBoxList title="Packages" >
                             <template v-for="(promotion, index) in promotions">
@@ -112,7 +130,8 @@ storiesOf('Promotion Box', module)
 storiesOf('Assets Importer', module)
     .add('default', () => ({
         components: {
-            AssetsImporter: () => import('@ericmuyser/hyper-ui').then(m => m.AssetsImporter)
+            AssetsImporter: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.AssetsImporter)
         },
         data() {
             return {
@@ -125,7 +144,8 @@ storiesOf('Assets Importer', module)
 storiesOf('Notifications', module)
     .add('default', () => ({
         components: {
-            Notification: () => import('@ericmuyser/hyper-ui').then(m => m.Notification)
+            Notification: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Notification)
         },
         data: () => data.NotifsData,
         template: `
@@ -143,7 +163,8 @@ storiesOf('Notifications', module)
     }))
     .add('inline', () => ({
         components: {
-            NotificationInline: () => import('@ericmuyser/hyper-ui').then(m => m.NotificationInline)
+            NotificationInline: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.NotificationInline)
         },
         data: () => data.NotifsData,
         template: `
@@ -171,7 +192,8 @@ storiesOf('Notifications', module)
 storiesOf('Searcher', module)
     .add('default', () => ({
         components: {
-            Searcher: () => import('@ericmuyser/hyper-ui').then(m => m.Searcher)
+            Searcher: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Searcher)
         },
         data: () => data.SearchData,
         methods: {
@@ -180,9 +202,9 @@ storiesOf('Searcher', module)
             },
             getByVal(val) {
                 let arr = [];
-                this.items.forEach( (el) => {
+                this.items.forEach((el) => {
                     console.log('first', el)
-                    if( el.name.includes(val) ){
+                    if (el.name.includes(val)) {
                         arr.push(el);
                         console.log('second', arr)
                     }
@@ -190,8 +212,7 @@ storiesOf('Searcher', module)
                 return arr;
             }
         },
-        computed: {
-        },
+        computed: {},
         watch: {
             results() {
                 console.log(this.results)
@@ -211,13 +232,15 @@ storiesOf('Searcher', module)
 storiesOf('Rating', module)
     .add('Stars', () => ({
         components: {
-            RatingStars: () => import('@ericmuyser/hyper-ui').then(m => m.RatingStars)
+            RatingStars: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.RatingStars)
         },
         template: '<div class="text-white p-5"><RatingStars :number="3.5"/></div>'
     }))
     .add('Rating Block', () => ({
         components: {
-            RatingBlock: () => import('@ericmuyser/hyper-ui').then(m => m.RatingBlock)
+            RatingBlock: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.RatingBlock)
         },
         data: () => data.RatingData,
         template: `
@@ -232,7 +255,8 @@ storiesOf('Rating', module)
 storiesOf('Author', module)
     .add('Author', () => ({
         components: {
-            Author: () => import('@ericmuyser/hyper-ui').then(m => m.Author)
+            Author: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Author)
         },
         data() {
             return {
@@ -246,7 +270,8 @@ storiesOf('Author', module)
 storiesOf('Tags', module)
     .add('Tags', () => ({
         components: {
-            Tags: () => import('@ericmuyser/hyper-ui').then(m => m.Tags)
+            Tags: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Tags)
         },
         template: `<div class="text-white p-5"><Tags :tags="['RPG', 'Open-World']"/></div>`
     }))
@@ -254,13 +279,15 @@ storiesOf('Tags', module)
 storiesOf('LoadingBar', module)
     .add('line', () => ({
         components: {
-            LoadingLine: () => import('@ericmuyser/hyper-ui').then(m => m.LoadingLine)
+            LoadingLine: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LoadingLine)
         },
         template: `<LoadingLine />`
     }))
     .add('circle', () => ({
         components: {
-            LoadingCircle: () => import('@ericmuyser/hyper-ui').then(m => m.LoadingCircle)
+            LoadingCircle: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LoadingCircle)
         },
         template: `<div class="position-relative" style="width: 300px; height: 300px"><LoadingCircle /></div>`
     }))
@@ -327,7 +354,8 @@ storiesOf('Navigation', module)
 storiesOf('Projects', module)
     .add('card', () => ({
         components: {
-            ProjectCard: () => import('@ericmuyser/hyper-ui').then(m => m.ProjectCard)
+            ProjectCard: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProjectCard)
         },
         data: () => data.ProjectsData,
         template: `
@@ -349,13 +377,15 @@ storiesOf('Projects', module)
     }))
     .add('badges', () => ({
         components: {
-            Badges: () => import('@ericmuyser/hyper-ui').then(m => m.Badges)
+            Badges: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Badges)
         },
         template: `<Badges :icons="['trophy','gem']" />`
     }))
     .add('milestone', () => ({
         components: {
-            Milestone: () => import('@ericmuyser/hyper-ui').then(m => m.Milestone)
+            Milestone: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Milestone)
         },
         data: () => data.MilestoneData,
         template: `<div class="row">
@@ -368,7 +398,8 @@ storiesOf('Projects', module)
     }))
     .add('updates-count', () => ({
         components: {
-            UpdatesCount: () => import('@ericmuyser/hyper-ui').then(m => m.UpdatesCount)
+            UpdatesCount: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.UpdatesCount)
         },
         template: `<div class="p-5">
                     <UpdatesCount>
@@ -380,19 +411,21 @@ storiesOf('Projects', module)
 storiesOf('Tabs', module)
     .add('default', () => ({
         components: {
-            Tabs: () => import('@ericmuyser/hyper-ui').then(m => m.Tabs),
-            Tab: () => import('@ericmuyser/hyper-ui').then(m => m.Tab)
+            Tabs: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Tabs),
+            Tab: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Tab)
         },
         template: `
             <div class="padding-50">
-                <Tabs style="color: #fff;">
-                    <Tab :tab_id="0">
+                <Tabs style="color: #fff;" :tabNames=['First', 'Second', 'Third']>
+                    <Tab :tabId="0">
                         First tab
                     </Tab>
-                    <Tab :tab_id="1">
+                    <Tab :tabId="1">
                         Wwww
                     </Tab>
-                    <Tab :tab_id="2">
+                    <Tab :tabId="2">
                         12345
                     </Tab>
                 </Tabs>
@@ -400,8 +433,10 @@ storiesOf('Tabs', module)
     }))
     .add('Tabs Names', () => ({
         components: {
-            Tabs: () => import('@ericmuyser/hyper-ui').then(m => m.Tabs),
-            Tab: () => import('@ericmuyser/hyper-ui').then(m => m.Tab)
+            Tabs: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Tabs),
+            Tab: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Tab)
         },
         template: `
             <div class="padding-50">
@@ -409,13 +444,13 @@ storiesOf('Tabs', module)
                     style="color: #fff;"
                     :tab_names="['Custom tab One', 'Second', 'Im third tab']"
                 >
-                    <Tab :tab_id="0">
+                    <Tab :tabId="0">
                         First tab
                     </Tab>
-                    <Tab :tab_id="1">
+                    <Tab :tabId="1">
                         Wwww
                     </Tab>
-                    <Tab :tab_id="2">
+                    <Tab :tabId="2">
                         12345
                     </Tab>
                 </Tabs>
@@ -423,8 +458,10 @@ storiesOf('Tabs', module)
     }))
     .add('Custom Navigation', () => ({
         components: {
-            Tabs: () => import('@ericmuyser/hyper-ui').then(m => m.Tabs),
-            Tab: () => import('@ericmuyser/hyper-ui').then(m => m.Tab)
+            Tabs: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Tabs),
+            Tab: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Tab)
         },
         data() {
             return {
@@ -443,16 +480,16 @@ storiesOf('Tabs', module)
                         <button @click="activeTab = 3">Tab 3</button>
                         <button @click="activeTab = 4">Tab 4</button>
                     </template>
-                    <Tab :tab_id="1">
+                    <Tab :tabId="1">
                         First tab
                     </Tab>
-                    <Tab :tab_id="2">
+                    <Tab :tabId="2">
                         Wwww
                     </Tab>
-                    <Tab :tab_id="3">
+                    <Tab :tabId="3">
                         12345
                     </Tab>
-                    <Tab :tab_id="4">
+                    <Tab :tabId="4">
                         Fourth tab
                     </Tab>
                 </Tabs>
@@ -460,8 +497,10 @@ storiesOf('Tabs', module)
     }))
     .add('Locked Tab', () => ({
         components: {
-            Tabs: () => import('@ericmuyser/hyper-ui').then(m => m.Tabs),
-            Tab: () => import('@ericmuyser/hyper-ui').then(m => m.Tab)
+            Tabs: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Tabs),
+            Tab: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Tab)
         },
         data() {
             return {
@@ -480,16 +519,16 @@ storiesOf('Tabs', module)
                     style="color: #fff;"
                     :lockedTab="lockedTab"
                 >
-                    <Tab :tab_id="0">
+                    <Tab :tabId="0">
                         First tab
                     </Tab>
-                    <Tab :tab_id="1">
+                    <Tab :tabId="1">
                         Second tab
                     </Tab>
-                    <Tab :tab_id="2">
+                    <Tab :tabId="2">
                         Third tab
                     </Tab>
-                    <Tab :tab_id="3">
+                    <Tab :tabId="3">
                         Fourth tab
                     </Tab>
                 </Tabs>
@@ -503,8 +542,10 @@ storiesOf('Tabs', module)
     }))
     .add('Locked Step', () => ({
         components: {
-            Tabs: () => import('@ericmuyser/hyper-ui').then(m => m.Tabs),
-            Tab: () => import('@ericmuyser/hyper-ui').then(m => m.Tab)
+            Tabs: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Tabs),
+            Tab: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Tab)
         },
         data() {
             return {
@@ -517,16 +558,16 @@ storiesOf('Tabs', module)
                     style="color: #fff;"
                     :lockedStep="lockedStep"
                 >
-                    <Tab :tab_id="0">
+                    <Tab :tabId="0">
                         First tab
                     </Tab>
-                    <Tab :tab_id="1">
+                    <Tab :tabId="1">
                         Second tab
                     </Tab>
-                    <Tab :tab_id="2">
+                    <Tab :tabId="2">
                         Third tab
                     </Tab>
-                    <Tab :tab_id="3">
+                    <Tab :tabId="3">
                         Fourth tab
                     </Tab>
                 </Tabs>
@@ -543,7 +584,8 @@ storiesOf('Milestones Line', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
         components: {
-            MilestonesLine: () => import('@ericmuyser/hyper-ui').then(m => m.MilestonesLine)
+            MilestonesLine: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.MilestonesLine)
         },
         data: () => object('Data', data.MilestonesLine),
         template: `<div class="row m-0">
@@ -556,14 +598,29 @@ storiesOf('Milestones Line', module)
 storiesOf('Sidebar Menu', module)
     .add('Main title', () => ({
         components: {
-            SidebarMenu: () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenu)
+            SidebarMenu: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.SidebarMenu)
         },
         data() {
             return {
-                links: [
-                    {to: {path: '/'}, title: 'Suggesting Features'},
-                    {to: {path: '/'}, title: 'Voting and Curating Updates'},
-                    {to: {path: '/'}, title: 'MORE ...'}
+                links: [{
+                        to: {
+                            path: '/'
+                        },
+                        title: 'Suggesting Features'
+                    },
+                    {
+                        to: {
+                            path: '/'
+                        },
+                        title: 'Voting and Curating Updates'
+                    },
+                    {
+                        to: {
+                            path: '/'
+                        },
+                        title: 'MORE ...'
+                    }
                 ],
             }
         },
@@ -577,14 +634,29 @@ storiesOf('Sidebar Menu', module)
     }))
     .add('Sub title', () => ({
         components: {
-            SidebarMenu: () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenu)
+            SidebarMenu: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.SidebarMenu)
         },
         data() {
             return {
-                links: [
-                    {to: {path: '/'}, title: 'Suggesting Features'},
-                    {to: {path: '/'}, title: 'Voting and Curating Updates'},
-                    {to: {path: '/'}, title: 'MORE ...'}
+                links: [{
+                        to: {
+                            path: '/'
+                        },
+                        title: 'Suggesting Features'
+                    },
+                    {
+                        to: {
+                            path: '/'
+                        },
+                        title: 'Voting and Curating Updates'
+                    },
+                    {
+                        to: {
+                            path: '/'
+                        },
+                        title: 'MORE ...'
+                    }
                 ],
             }
         },
@@ -596,7 +668,8 @@ storiesOf('Sidebar Menu', module)
     }))
     .add('Single element', () => ({
         components: {
-            SidebarMenuItem: () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenuItem)
+            SidebarMenuItem: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.SidebarMenuItem)
         },
         template: `<div class="row m-0">
                 <div class="col-3 p-4">
@@ -621,10 +694,11 @@ const injectButtonTemplate = code => `
 storiesOf('Buttons', module)
     .add('default', () => ({
         components: {
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         methods: {
-            testFunction: function () {
+            testFunction: function() {
                 console.log('BOOOOOOOOOOOM!')
             }
         },
@@ -660,10 +734,11 @@ storiesOf('Buttons', module)
     }))
     .add('second type', () => ({
         components: {
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         methods: {
-            testFunction: function () {
+            testFunction: function() {
                 console.log('BOOOOOOOOOOOM!')
             }
         },
@@ -687,10 +762,11 @@ storiesOf('Buttons', module)
     }))
     .add('outline', () => ({
         components: {
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         methods: {
-            testFunction: function () {
+            testFunction: function() {
                 console.log('BOOOOOOOOOOOM!')
             }
         },
@@ -726,10 +802,11 @@ storiesOf('Buttons', module)
     }))
     .add('gradient', () => ({
         components: {
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         methods: {
-            testFunction: function () {
+            testFunction: function() {
                 console.log('BOOOOOOOOOOOM!')
             }
         },
@@ -753,7 +830,8 @@ storiesOf('Buttons', module)
     }))
     .add('[options] - swap direction', () => ({
         components: {
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         template: injectButtonTemplate(`
             <Button status="info" swapDirection>direction swapped</Button>
@@ -763,7 +841,8 @@ storiesOf('Buttons', module)
     }))
     .add('[options] - swap order', () => ({
         components: {
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         template: injectButtonTemplate(`
             <Button status="success" swapOrder>success</Button>
@@ -771,7 +850,8 @@ storiesOf('Buttons', module)
     }))
     .add('[options] - swap order & direction', () => ({
         components: {
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         template: injectButtonTemplate(`
             <Button status="info" size="lg" swapDirection swapOrder>order & direction swapped</Button>
@@ -779,7 +859,8 @@ storiesOf('Buttons', module)
     }))
     .add('[options] - hide icon', () => ({
         components: {
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         template: injectButtonTemplate(`
             <Button status="success" iconHide>success</Button>
@@ -787,7 +868,8 @@ storiesOf('Buttons', module)
     }))
     .add('[options] - emoji', () => ({
         components: {
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         template: injectButtonTemplate(`
             <Button status="success">Message 👺👻👽</Button>
@@ -795,7 +877,8 @@ storiesOf('Buttons', module)
     }))
     .add('[options] - custom icon', () => ({
         components: {
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         template: injectButtonTemplate(`
             <Button status="success" icon="anchor">success!</Button>
@@ -803,7 +886,8 @@ storiesOf('Buttons', module)
     }))
     .add('[options] - button tag', () => ({
         components: {
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         template: injectButtonTemplate(`
             <Button status="danger" tag="button">Im button</Button>
@@ -811,7 +895,8 @@ storiesOf('Buttons', module)
     }))
     .add('read more', () => ({
         components: {
-            LoadMore: () => import('@ericmuyser/hyper-ui').then(m => m.LoadMore)
+            LoadMore: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LoadMore)
         },
         template: `
             <div class="p-5" style="width: 400px"><LoadMore /></div>
@@ -819,7 +904,8 @@ storiesOf('Buttons', module)
     }))
     .add('arrows', () => ({
         components: {
-            ButtonArrows: () => import('@ericmuyser/hyper-ui').then(m => m.ButtonArrows)
+            ButtonArrows: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ButtonArrows)
         },
         template: `
             <div class="padding-50">
@@ -832,7 +918,8 @@ storiesOf('Buttons', module)
     }))
     .add('arrows - colorized', () => ({
         components: {
-            ButtonArrows: () => import('@ericmuyser/hyper-ui').then(m => m.ButtonArrows)
+            ButtonArrows: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ButtonArrows)
         },
         template: `
             <div class="padding-50">
@@ -842,7 +929,8 @@ storiesOf('Buttons', module)
     }))
     .add('arrows - content', () => ({
         components: {
-            ButtonArrows: () => import('@ericmuyser/hyper-ui').then(m => m.ButtonArrows)
+            ButtonArrows: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ButtonArrows)
         },
         template: `
             <div class="padding-50">
@@ -856,7 +944,8 @@ storiesOf('Buttons', module)
 storiesOf('Money Info', module)
     .add('default', () => ({
         components: {
-            MoneyInfo: () => import('@ericmuyser/hyper-ui').then(m => m.MoneyInfo)
+            MoneyInfo: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.MoneyInfo)
         },
         template: `
         <div class="row m-0 p-3">
@@ -868,7 +957,8 @@ storiesOf('Money Info', module)
 storiesOf('Checkbox', module)
     .add('Single checkbox', () => ({
         components: {
-            Checkbox: () => import('@ericmuyser/hyper-ui').then(m => m.Checkbox)
+            Checkbox: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Checkbox)
         },
         data() {
             return {
@@ -883,8 +973,10 @@ storiesOf('Checkbox', module)
     }))
     .add('Checkbox Group', () => ({
         components: {
-            Checkbox: () => import('@ericmuyser/hyper-ui').then(m => m.Checkbox),
-            CheckboxGroup: () => import('@ericmuyser/hyper-ui').then(m => m.CheckboxGroup),
+            Checkbox: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Checkbox),
+            CheckboxGroup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.CheckboxGroup),
         },
         template: `
         <div class="row m-0 p-3">
@@ -901,7 +993,8 @@ storiesOf('Checkbox', module)
 storiesOf('Tooltips', module)
     .add('dark', () => ({
         components: {
-            Tooltip: () => import('@ericmuyser/hyper-ui').then(m => m.Tooltip)
+            Tooltip: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Tooltip)
         },
         template: `
             <div class="row p-5">
@@ -925,7 +1018,8 @@ storiesOf('Tooltips', module)
     }))
     .add('light', () => ({
         components: {
-            Tooltip: () => import('@ericmuyser/hyper-ui').then(m => m.Tooltip)
+            Tooltip: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Tooltip)
         },
         template: `
             <div class="row p-5">
@@ -949,7 +1043,8 @@ storiesOf('Tooltips', module)
     }))
     .add('custom content', () => ({
         components: {
-            Tooltip: () => import('@ericmuyser/hyper-ui').then(m => m.Tooltip)
+            Tooltip: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Tooltip)
         },
         template: `
             <div class="row p-5">
@@ -973,7 +1068,8 @@ storiesOf('Tooltips', module)
 storiesOf('Tooltip Universal', module)
     .add('default', () => ({
         components: {
-            TooltipUniversal: () => import('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
+            TooltipUniversal: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
         },
         template: `
             <div class="padding-50">
@@ -989,7 +1085,8 @@ storiesOf('Tooltip Universal', module)
     }))
     .add('themes', () => ({
         components: {
-            TooltipUniversal: () => import('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
+            TooltipUniversal: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
         },
         template: `
             <div class="padding-50">
@@ -1017,7 +1114,8 @@ storiesOf('Tooltip Universal', module)
     }))
     .add('positions', () => ({
         components: {
-            TooltipUniversal: () => import('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
+            TooltipUniversal: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
         },
         template: `
             <div class="padding-50">
@@ -1062,7 +1160,8 @@ storiesOf('Tooltip Universal', module)
     }))
     .add('without icon', () => ({
         components: {
-            TooltipUniversal: () => import('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
+            TooltipUniversal: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
         },
         template: `
             <div class="padding-50">
@@ -1079,7 +1178,8 @@ storiesOf('Tooltip Universal', module)
     }))
     .add('any content', () => ({
         components: {
-            TooltipUniversal: () => import('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
+            TooltipUniversal: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
         },
         template: `
             <div class="padding-50">
@@ -1099,7 +1199,8 @@ storiesOf('Tooltip Universal', module)
     }))
     .add('custom tooltip', () => ({
         components: {
-            TooltipUniversal: () => import('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
+            TooltipUniversal: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TooltipUniversal)
         },
         template: `
             <div class="padding-50">
@@ -1127,7 +1228,8 @@ storiesOf('Tooltip Universal', module)
 storiesOf('Activity Chart', module)
     .add('default', () => ({
         components: {
-            ActivityChart: () => import('@ericmuyser/hyper-ui').then(m => m.ActivityChart)
+            ActivityChart: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ActivityChart)
         },
         data: () => data.ActivityChart,
         template: `
@@ -1138,7 +1240,8 @@ storiesOf('Activity Chart', module)
     }))
     .add('medium size', () => ({
         components: {
-            ActivityChart: () => import('@ericmuyser/hyper-ui').then(m => m.ActivityChart)
+            ActivityChart: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ActivityChart)
         },
         data: () => data.ActivityChart,
         template: `
@@ -1149,7 +1252,8 @@ storiesOf('Activity Chart', module)
     }))
     .add('small size', () => ({
         components: {
-            ActivityChart: () => import('@ericmuyser/hyper-ui').then(m => m.ActivityChart)
+            ActivityChart: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ActivityChart)
         },
         data: () => data.ActivityChart,
         template: `
@@ -1160,7 +1264,8 @@ storiesOf('Activity Chart', module)
     }))
     .add('extra small size', () => ({
         components: {
-            ActivityChart: () => import('@ericmuyser/hyper-ui').then(m => m.ActivityChart)
+            ActivityChart: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ActivityChart)
         },
         data: () => data.ActivityChart,
         template: `
@@ -1173,8 +1278,10 @@ storiesOf('Activity Chart', module)
 storiesOf('Popup', module)
     .add('default', () => ({
         components: {
-            Popup: () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            Popup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Popup),
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         data() {
             return {
@@ -1182,7 +1289,7 @@ storiesOf('Popup', module)
             }
         },
         methods: {
-            showModalHandler: function () {
+            showModalHandler: function() {
                 this.modalActive = !this.modalActive;
             },
             close() {
@@ -1208,8 +1315,10 @@ storiesOf('Popup', module)
     }))
     .add('warning', () => ({
         components: {
-            Popup: () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            Popup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Popup),
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         data() {
             return {
@@ -1243,8 +1352,10 @@ storiesOf('Popup', module)
     }))
     .add('danger', () => ({
         components: {
-            Popup: () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            Popup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Popup),
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         data() {
             return {
@@ -1252,7 +1363,7 @@ storiesOf('Popup', module)
             }
         },
         methods: {
-            showModalHandler: function () {
+            showModalHandler: function() {
                 this.modalActive = !this.modalActive
             },
             close() {
@@ -1278,8 +1389,10 @@ storiesOf('Popup', module)
     }))
     .add('info', () => ({
         components: {
-            Popup: () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            Popup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Popup),
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         data() {
             return {
@@ -1287,7 +1400,7 @@ storiesOf('Popup', module)
             }
         },
         methods: {
-            showModalHandler: function () {
+            showModalHandler: function() {
                 this.modalActive = !this.modalActive
             },
             close() {
@@ -1313,8 +1426,10 @@ storiesOf('Popup', module)
     }))
     .add('success', () => ({
         components: {
-            Popup: () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            Popup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Popup),
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         data() {
             return {
@@ -1322,7 +1437,7 @@ storiesOf('Popup', module)
             }
         },
         methods: {
-            showModalHandler: function () {
+            showModalHandler: function() {
                 this.modalActive = !this.modalActive
             },
             close() {
@@ -1348,10 +1463,18 @@ storiesOf('Popup', module)
     }))
     .add('changelog', () => ({
         components: {
-            BasicPopup: () => import('@ericmuyser/hyper-ui').then(m => m.BasicPopup),
-            DottedList: () => import('@ericmuyser/hyper-ui').then(m => m.DottedList),
-            HeadingBarWithSimpleColor: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBarWithSimpleColor),
-            EmojiSingle: () => import('@ericmuyser/hyper-ui').then(m => m.EmojiSingle)
+            BasicPopup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.BasicPopup),
+            DottedList: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.DottedList),
+            HeadingBarWithSimpleColor: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.HeadingBarWithSimpleColor),
+            EmojiSingle: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.EmojiSingle),
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button),
+            Input: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Input)
         },
         data() {
             return {
@@ -1418,11 +1541,14 @@ storiesOf('Popup', module)
     }))
     .add('terms', () => ({
         components: {
-            TermsPopup: () => import('@ericmuyser/hyper-ui').then(m => m.TermsPopup)
+            TermsPopup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TermsPopup),
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         template: `
         <div class="row p-5">
-            <div class="col-4">
+            <div class="col-4" style="color: #fff">
                 <TermsPopup :activated="true" width="600">
                     <div class="h4" slot="header">BlockHub Developer License Agreement</div>
                     <div slot="body">
@@ -1601,7 +1727,8 @@ storiesOf('Popup', module)
     }))
     .add('play', () => ({
         components: {
-            PlayPopup: () => import('@ericmuyser/hyper-ui').then(m => m.PlayPopup)
+            PlayPopup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.PlayPopup)
         },
         data() {
             return {
@@ -1609,18 +1736,18 @@ storiesOf('Popup', module)
             }
         },
         template: `<div class="p-4">
-                        <Button @click=" activated = true ">Play Now</Button> 
+                        <Button @click=" activated = true ">Play Now</Button>
                         <PlayPopup :activated="true" @close=" activated = !activated " />
                     </div>`
     }))
-    .add('Add to Collection', () =>({
+    .add('Add to Collection', () => ({
         components: {
-            AddCollectionPopup: () => import('@ericmuyser/hyper-ui').then(m => m.AddCollectionPopup),
+            AddCollectionPopup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.AddCollectionPopup),
         },
         data() {
             return {
-                collections: [
-                    {
+                collections: [{
                         name: 'My Top 100',
                         id: 22
                     },
@@ -1644,9 +1771,10 @@ storiesOf('Popup', module)
         },
         template: `<div class="m-4"><AddCollectionPopup :activated="true" :collections="collections" :image="image" :name="name" :description="description" /></div>`
     }))
-    .add('Mature content', () =>({
+    .add('Mature content', () => ({
         components: {
-            MatureContentPopup: () => import('@ericmuyser/hyper-ui').then(m => m.MatureContentPopup),
+            MatureContentPopup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.MatureContentPopup),
         },
         template: `<div class="m-4">
                         <MatureContentPopup :activated="true" />
@@ -1656,7 +1784,8 @@ storiesOf('Popup', module)
 storiesOf('Range Slider', module)
     .add('default', () => ({
         components: {
-            RangeSlider: () => import('@ericmuyser/hyper-ui').then(m => m.RangeSlider)
+            RangeSlider: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.RangeSlider)
         },
         data() {
             return {
@@ -1678,8 +1807,7 @@ storiesOf('Range Slider', module)
         `
     }))
 
-const assetsList = [
-    {
+const assetsList = [{
         name: 'some item name',
         price: {
             min: 0.99,
@@ -1687,7 +1815,7 @@ const assetsList = [
             current: 2.99
         },
         count: '240.000',
-            image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
     },
     {
         name: 'some another item name',
@@ -1745,7 +1873,8 @@ storiesOf('Assets Grid', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
         components: {
-            AssetsGrid: () => import('@ericmuyser/hyper-ui').then(m => m.AssetsGrid)
+            AssetsGrid: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.AssetsGrid)
         },
         data() {
             return object('Data', {
@@ -1755,60 +1884,60 @@ storiesOf('Assets Grid', module)
         template: `
             <AssetsGrid :list="assetsList" />
         `
-    }), {viewport: 'desktop'})
+    }))
 
 storiesOf('Assets Overview Popup', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
         components: {
-            AssetPopup: () => import('@ericmuyser/hyper-ui').then(m => m.AssetPopup)
+            AssetPopup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.AssetPopup)
         },
         data() {
             return object('Data', {
-                    image: 'https://via.placeholder.com/300',
-                    id: '123',
-                    name: 'Asset title',
-                    productName: 'Asset product name',
-                    acceptOffers: true,
-                    metadata: [
-                            {
-                                    label: "type",
-                                    text: "Legendary Two Handed Sword"
-                            },
-                            {
-                                    label: "average dps",
-                                    text: "2,903.6"
-                            },
-                            {
-                                    label: "Damage Range",
-                                    text: "2193-2880"
-                            },
-                            {
-                                    label: "Attack speed",
-                                    text: "1.15"
-                            },
-                            {
-                                    label: "Bonus 1",
-                                    text: "+1379-1679 Damage, +9% Damage, +1121 strenght"
-                            },
-                            {
-                                    label: "Bonus 2",
-                                    text: "Monster kills grant +151 experiance"
-                            },
-                            {
-                                    label: "Level Requirement",
-                                    text: "70"
-                            },
-                            {
-                                    label: "Item Durability",
-                                    text: "40/41"
-                            }
-                    ],
-                    price: {
-                            min: 0.99,
-                            max: 9.99,
-                            current: 2.99
+                image: 'https://via.placeholder.com/300',
+                id: '123',
+                name: 'Asset title',
+                productName: 'Asset product name',
+                acceptOffers: true,
+                metadata: [{
+                        label: "type",
+                        text: "Legendary Two Handed Sword"
+                    },
+                    {
+                        label: "average dps",
+                        text: "2,903.6"
+                    },
+                    {
+                        label: "Damage Range",
+                        text: "2193-2880"
+                    },
+                    {
+                        label: "Attack speed",
+                        text: "1.15"
+                    },
+                    {
+                        label: "Bonus 1",
+                        text: "+1379-1679 Damage, +9% Damage, +1121 strenght"
+                    },
+                    {
+                        label: "Bonus 2",
+                        text: "Monster kills grant +151 experiance"
+                    },
+                    {
+                        label: "Level Requirement",
+                        text: "70"
+                    },
+                    {
+                        label: "Item Durability",
+                        text: "40/41"
                     }
+                ],
+                price: {
+                    min: 0.99,
+                    max: 9.99,
+                    current: 2.99
+                }
             })
         },
         template: `
@@ -1831,11 +1960,12 @@ storiesOf('Switch', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
         components: {
-            Switch: () => import('@ericmuyser/hyper-ui').then(m => m.Switch)
+            'cSwitch': () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Switch)
         },
         template: `
          <div class="row m-0 p-3">
-             <Switch :checked=true label="Label text" class="mr-5"/>
+             <cSwitch :checked=true label="Label text" class="mr-5"/>
              <Switch :checked=true customLabel>
                 Custom label
             </Switch>
@@ -1844,7 +1974,8 @@ storiesOf('Switch', module)
     }))
     .add('changed label size', () => ({
         components: {
-            Switch: () => import('@ericmuyser/hyper-ui').then(m => m.Switch)
+            Switch: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Switch)
         },
         template: `
          <div class="row m-0 p-3">
@@ -1854,7 +1985,8 @@ storiesOf('Switch', module)
     }))
     .add('large', () => ({
         components: {
-            Switch: () => import('@ericmuyser/hyper-ui').then(m => m.Switch)
+            Switch: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Switch)
         },
         template: `
          <div class="row m-0 p-3">
@@ -1867,12 +1999,12 @@ storiesOf('Assets List', module)
     .addDecorator(withKnobs)
     .add('type 1', () => ({
         components: {
-            AssetsList: () => import('@ericmuyser/hyper-ui').then(m => m.AssetsList)
+            AssetsList: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.AssetsList)
         },
         data() {
             return object('Data', {
-                items: [
-                    {
+                items: [{
                         img: 'https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de',
                         title: 'Magic Plate Armor',
                         subTitle: 'Tibia MMORPG'
@@ -1893,12 +2025,12 @@ storiesOf('Assets List', module)
     }))
     .add('type 2', () => ({
         components: {
-            AssetsListDetail: () => import('@ericmuyser/hyper-ui').then(m => m.AssetsListDetail)
+            AssetsListDetail: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.AssetsListDetail)
         },
         data() {
             return object('Data', {
-                items: [
-                    {
+                items: [{
                         image: 'https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de',
                         name: 'Magic Plate Armor',
                         price: {
@@ -1911,7 +2043,7 @@ storiesOf('Assets List', module)
                     },
                     {
                         image: 'https://vignette.wikia.nocookie.net/angrybirds-fiction/images/8/8b/Toons_assets_chuck_01.png/revision/latest?cb=20150120103056&path-prefix=ru',
-                            name: 'Magic Chuck',
+                        name: 'Magic Chuck',
                         price: {
                             "min": 0.99,
                             "max": 9.99,
@@ -1933,7 +2065,8 @@ storiesOf('Assets List', module)
 storiesOf('Block', module)
     .add('default', () => ({
         components: {
-            Block: () => import('@ericmuyser/hyper-ui').then(m => m.Block)
+            Block: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Block)
         },
         template: `
          <div class="row m-0 p-3">
@@ -1950,7 +2083,8 @@ storiesOf('Block', module)
     }))
     .add('simple', () => ({
         components: {
-            SimpleBlock: () => import('@ericmuyser/hyper-ui').then(m => m.SimpleBlock)
+            SimpleBlock: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.SimpleBlock)
         },
         template: `
          <div class="row m-0 p-3">
@@ -1966,7 +2100,8 @@ storiesOf('Block', module)
     }))
     .add('gradient', () => ({
         components: {
-            Block: () => import('@ericmuyser/hyper-ui').then(m => m.Block)
+            Block: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Block)
         },
         template: `
              <div class="row m-0 p-3">
@@ -1983,7 +2118,8 @@ storiesOf('Block', module)
     }))
     .add('only content bg', () => ({
         components: {
-            Block: () => import('@ericmuyser/hyper-ui').then(m => m.Block)
+            Block: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Block)
         },
         template: `
              <div class="row m-0 p-3">
@@ -2002,7 +2138,8 @@ storiesOf('Block', module)
 storiesOf('Modal', module)
     .add('image', () => ({
         components: {
-            Modal: () => import('@ericmuyser/hyper-ui').then(m => m.Modal)
+            Modal: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Modal)
         },
         template: `
             <Modal>
@@ -2014,7 +2151,8 @@ storiesOf('Modal', module)
     }))
     .add('text', () => ({
         components: {
-            Modal: () => import('@ericmuyser/hyper-ui').then(m => m.Modal)
+            Modal: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Modal)
         },
         template: `
             <Modal>
@@ -2024,7 +2162,8 @@ storiesOf('Modal', module)
     }))
     .add('custom', () => ({
         components: {
-            CustomModal: () => import('@ericmuyser/hyper-ui').then(m => m.CustomModal)
+            CustomModal: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.CustomModal)
         },
         template: `
          <div class="row m-0 p-3">
@@ -2049,7 +2188,8 @@ storiesOf('Modal', module)
 storiesOf('Dropdown', module)
     .add('default', () => ({
         components: {
-            DropdownMenu: () => import('@ericmuyser/hyper-ui').then(m => m.DropdownMenu)
+            DropdownMenu: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.DropdownMenu)
         },
         template: `
          <div class="row m-0 p-3">
@@ -2063,7 +2203,8 @@ storiesOf('Dropdown', module)
     }))
     .add('post dropdown', () => ({
         components: {
-            DropdownMenu: () => import('@ericmuyser/hyper-ui').then(m => m.DropdownMenu)
+            DropdownMenu: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.DropdownMenu)
         },
         template: `
         <div class="row m-0 p-3">
@@ -2073,7 +2214,8 @@ storiesOf('Dropdown', module)
     }))
     .add('custom content', () => ({
         components: {
-            DropdownMenu: () => import('@ericmuyser/hyper-ui').then(m => m.DropdownMenu)
+            DropdownMenu: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.DropdownMenu)
         },
         template: `
             <div class="row m-0 p-3">
@@ -2106,12 +2248,12 @@ storiesOf('Dropdown', module)
     }))
     .add('currency', () => ({
         components: {
-            CurrencyDropdown: () => import('@ericmuyser/hyper-ui').then(m => m.CurrencyDropdown)
+            CurrencyDropdown: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.CurrencyDropdown)
         },
         data() {
             return {
-                currencies: [
-                    {
+                currencies: [{
                         code: "USD",
                         symbol: "$",
                         name: "United States Dollar",
@@ -2160,7 +2302,8 @@ storiesOf('Dropdown', module)
     }))
     .add('languages', () => ({
         components: {
-            LanguagesDropdown: () => import('@ericmuyser/hyper-ui').then(m => m.LanguagesDropdown)
+            LanguagesDropdown: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LanguagesDropdown)
         },
         data() {
             return {
@@ -2168,8 +2311,7 @@ storiesOf('Dropdown', module)
                     code: 'us',
                     name: 'English',
                 },
-                languages: [
-                    {
+                languages: [{
                         code: 'us',
                         name: 'English',
                         native: 'English'
@@ -2202,8 +2344,10 @@ storiesOf('Dropdown', module)
 storiesOf('Frequently traded assets', module)
     .add('default', () => ({
         components: {
-            TradedAssets: () => import('@ericmuyser/hyper-ui').then(m => m.TradedAssets),
-            DropdownMenu: () => import('@ericmuyser/hyper-ui').then(m => m.DropdownMenu)
+            TradedAssets: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TradedAssets),
+            DropdownMenu: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.DropdownMenu)
         },
         data: () => object('Data', data.TradedAssets),
         template: `
@@ -2226,12 +2370,12 @@ storiesOf('Frequently traded assets', module)
 storiesOf('Game Plans', module)
     .add('default', () => ({
         components: {
-            GamePlan: () => import('@ericmuyser/hyper-ui').then(m => m.GamePlan)
+            GamePlan: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.GamePlan)
         },
         data() {
             return object('Data', {
-                plans: [
-                    {
+                plans: [{
                         title: "Play Now",
                         link: "#"
                     },
@@ -2265,7 +2409,8 @@ storiesOf('Games Grid', module)
     .addDecorator(withKnobs)
     .add('with description', () => ({
         components: {
-            GamesGrid: () => import('@ericmuyser/hyper-ui').then(m => m.GamesGrid)
+            GamesGrid: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.GamesGrid)
         },
         data: () => object('Data', data.GamesGrid),
         template: `
@@ -2286,7 +2431,8 @@ storiesOf('Games Grid', module)
     }))
     .add('simple', () => ({
         components: {
-            GamesGridSimple: () => import('@ericmuyser/hyper-ui').then(m => m.GamesGridSimple)
+            GamesGridSimple: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.GamesGridSimple)
         },
         data: () => object('Data', data.GamesGrid),
         template: `
@@ -2323,7 +2469,8 @@ const injectHBarTemp = code => `
 storiesOf('Block Title', module)
     .add('default', () => ({
         components: {
-            HeadingBar: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
+            HeadingBar: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
         },
         template: injectHBarTemp(`
             <HeadingBar name="This is the Title" />
@@ -2331,7 +2478,8 @@ storiesOf('Block Title', module)
     }))
     .add('with background', () => ({
         components: {
-            HeadingBar: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
+            HeadingBar: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
         },
         template: injectHBarTemp(`
             <HeadingBar name="This is the Title" :showBackground="true" />
@@ -2339,7 +2487,8 @@ storiesOf('Block Title', module)
     }))
     .add('with arrows', () => ({
         components: {
-            HeadingBar: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
+            HeadingBar: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
         },
         template: injectHBarTemp(`
             <HeadingBar name="This is the Title" :showActions="true" :showArrows="true" />
@@ -2347,7 +2496,8 @@ storiesOf('Block Title', module)
     }))
     .add('with more button', () => ({
         components: {
-            HeadingBar: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
+            HeadingBar: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
         },
         template: injectHBarTemp(`
             <HeadingBar name="This is the Title" :showActions="true" more="#some_link"  />
@@ -2355,14 +2505,16 @@ storiesOf('Block Title', module)
     }))
     .add('with filters', () => ({
         components: {
-            HeadingBar: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar),
-            HeadingBarWithAdditionalAction: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBarWithAdditionalAction)
+            HeadingBar: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.HeadingBar),
+            HeadingBarWithAdditionalAction: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.HeadingBarWithAdditionalAction)
         },
         methods: {
-            upClick: function () {
+            upClick: function() {
                 alert('It was Up click')
             },
-            downClick: function () {
+            downClick: function() {
                 alert('It was Down click')
             }
         },
@@ -2377,7 +2529,8 @@ storiesOf('Block Title', module)
     }))
     .add('with tabs', () => ({
         components: {
-            HeadingBar: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
+            HeadingBar: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.HeadingBar)
         },
         template: injectHBarTemp(`
             <HeadingBar>
@@ -2391,7 +2544,8 @@ storiesOf('Block Title', module)
     }))
     .add('colored', () => ({
         components: {
-            HeadingBarWithSimpleColor: () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBarWithSimpleColor)
+            HeadingBarWithSimpleColor: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.HeadingBarWithSimpleColor)
         },
         template: injectHBarTemp(`
             <HeadingBarWithSimpleColor colorCode="#f60" textAlign="center">
@@ -2403,22 +2557,21 @@ storiesOf('Block Title', module)
 storiesOf('News List', module)
     .add('default', () => ({
         components: {
-            NewsListNavigation: () => import('@ericmuyser/hyper-ui').then(m => m.NewsListNavigation),
-            NewsList: () => import('@ericmuyser/hyper-ui').then(m => m.NewsList),
+            NewsListNavigation: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.NewsListNavigation),
+            NewsList: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.NewsList),
         },
         data() {
             return {
-                posts: [
-                    {
+                posts: [{
                         id: 1,
                         targetType: "product",
                         targetId: 1,
-                        tags: [
-                            {
-                                key: "news",
-                                value: "News"
-                            }
-                        ],
+                        tags: [{
+                            key: "news",
+                            value: "News"
+                        }],
                         heading: "New class and event coming next week!",
                         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
                         url: "/post/1",
@@ -2428,12 +2581,10 @@ storiesOf('News List', module)
                         id: 2,
                         targetType: "product",
                         targetId: 1,
-                        tags: [
-                            {
-                                key: "news",
-                                value: "News"
-                            }
-                        ],
+                        tags: [{
+                            key: "news",
+                            value: "News"
+                        }],
                         heading: "New class and event coming next week!",
                         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
                         url: "/post/1",
@@ -2443,12 +2594,10 @@ storiesOf('News List', module)
                         id: 3,
                         targetType: "product",
                         targetId: 2,
-                        tags: [
-                            {
-                                key: "news",
-                                value: "News"
-                            }
-                        ],
+                        tags: [{
+                            key: "news",
+                            value: "News"
+                        }],
                         heading: "New class and event coming next week!",
                         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
                         url: "/post/1",
@@ -2458,12 +2607,10 @@ storiesOf('News List', module)
                         id: 4,
                         targetType: "product",
                         targetId: 3,
-                        tags: [
-                            {
-                                key: "news",
-                                value: "News"
-                            }
-                        ],
+                        tags: [{
+                            key: "news",
+                            value: "News"
+                        }],
                         heading: "New class and event coming next week!",
                         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
                         url: "/post/1",
@@ -2481,7 +2628,8 @@ storiesOf('News List', module)
     }))
     .add('single article', () => ({
         components: {
-            NewsArticle: () => import('@ericmuyser/hyper-ui').then(m => m.NewsArticle)
+            NewsArticle: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.NewsArticle)
         },
         data() {
             return {
@@ -2489,12 +2637,10 @@ storiesOf('News List', module)
                     id: 1,
                     targetType: "product",
                     targetId: 1,
-                    tags: [
-                        {
-                            key: "news",
-                            value: "News"
-                        }
-                    ],
+                    tags: [{
+                        key: "news",
+                        value: "News"
+                    }],
                     heading: "New class and event coming next week!",
                     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
                     url: "/post/1",
@@ -2519,7 +2665,8 @@ storiesOf('News List', module)
 storiesOf('Pagination', module)
     .add('default', () => ({
         components: {
-            Pagination: () => import('@ericmuyser/hyper-ui').then(m => m.Pagination)
+            Pagination: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Pagination)
         },
         template: `
             <div class="row m-0 p-5">
@@ -2529,7 +2676,8 @@ storiesOf('Pagination', module)
     }))
     .add('Limited to 5 pages', () => ({
         components: {
-            Pagination: () => import('@ericmuyser/hyper-ui').then(m => m.Pagination)
+            Pagination: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Pagination)
         },
         template: `
             <div class="row m-0 p-5">
@@ -2539,7 +2687,8 @@ storiesOf('Pagination', module)
     }))
     .add('Debouncer', () => ({
         components: {
-            Pagination: () => import('@ericmuyser/hyper-ui').then(m => m.Pagination)
+            Pagination: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Pagination)
         },
         template: `
             <div class="row m-0 p-5">
@@ -2551,7 +2700,8 @@ storiesOf('Pagination', module)
 storiesOf('Product Community', module)
     .add('post', () => ({
         components: {
-            ProductCommunityPost: () => import('@ericmuyser/hyper-ui').then(m => m.ProductCommunityPost)
+            ProductCommunityPost: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProductCommunityPost)
         },
         data: () => data.ProductCommunity,
         template: `
@@ -2572,7 +2722,8 @@ storiesOf('Product Community', module)
     }))
     .add('comment', () => ({
         components: {
-            ProductCommunityComment: () => import('@ericmuyser/hyper-ui').then(m => m.ProductCommunityComment)
+            ProductCommunityComment: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProductCommunityComment)
         },
         data: () => data.ProductCommunity,
         template: `
@@ -2587,7 +2738,8 @@ storiesOf('Product Community', module)
     }))
     .add('reply', () => ({
         components: {
-            ProductCommunityReply: () => import('@ericmuyser/hyper-ui').then(m => m.ProductCommunityReply)
+            ProductCommunityReply: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProductCommunityReply)
         },
         template: `
             <div class="padding-30">
@@ -2599,12 +2751,12 @@ storiesOf('Product Community', module)
 storiesOf('Project Card', module)
     .add('default', () => ({
         components: {
-            ProjectCard: () => import('@ericmuyser/hyper-ui').then(m => m.ProjectCard)
+            ProjectCard: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProjectCard)
         },
         data() {
             return {
-                trendingProjects: [
-                    {
+                trendingProjects: [{
                         game: {
                             title: 'Diablo III',
                             developer: 'Blizzard Entertainment',
@@ -2687,8 +2839,10 @@ storiesOf('Project Card', module)
 storiesOf('Sending Funds(not finished)', module)
     .add('default', () => ({
         components: {
-            SendingFundsPopup: () => import('@ericmuyser/hyper-ui').then(m => m.SendingFundsPopup),
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button)
+            SendingFundsPopup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.SendingFundsPopup),
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button)
         },
         data() {
             return {
@@ -2696,7 +2850,7 @@ storiesOf('Sending Funds(not finished)', module)
             }
         },
         methods: {
-            showModalHandler: function () {
+            showModalHandler: function() {
                 this.modalActive = !this.modalActive
             }
         },
@@ -2706,7 +2860,8 @@ storiesOf('Sending Funds(not finished)', module)
 storiesOf('User Card', module)
     .add('default', () => ({
         components: {
-            UserCard: () => import('@ericmuyser/hyper-ui').then(m => m.UserCard)
+            UserCard: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.UserCard)
         },
         data() {
             return {
@@ -2738,12 +2893,12 @@ storiesOf('User Card', module)
 storiesOf('Gallery', module)
     .add('screen-gallery', () => ({
         components: {
-            ScreenGallery: () => import('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
+            ScreenGallery: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
         },
         data() {
             return {
-                items: [
-                    {
+                items: [{
                         src: 'https://cdn.vox-cdn.com/thumbor/-9ezNi6jWxByZiYsLDfoAILAJC4=/0x38:1920x1043/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/12648875/HowFortniteWonSite.png',
                         overlay: {
                             title: 'How Fortnite became the biggest game of 2018',
@@ -2760,8 +2915,7 @@ storiesOf('Gallery', module)
         template: `<ScreenGallery :items="items" class="col-9"/>`
     }))
 
-const productsCardsData = [
-    {
+const productsCardsData = [{
         id: 8,
         value: "Gothic® 3",
         meta: {
@@ -2826,9 +2980,12 @@ const productsCardsData = [
 storiesOf('Product Card', module)
     .add('basic', () => ({
         components: {
-            ProductCard: () => import('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
+            ProductCard: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
         },
-        data: () => ({ products: productsCardsData }),
+        data: () => ({
+            products: productsCardsData
+        }),
         template: `
             <div class="row">
                 <product-card
@@ -2845,9 +3002,12 @@ storiesOf('Product Card', module)
     }))
     .add('dynamic', () => ({
         components: {
-            ProductCardDynamic: () => import('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
+            ProductCardDynamic: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
         },
-        data: () => ({products: productsCardsData}),
+        data: () => ({
+            products: productsCardsData
+        }),
         template: `
             <div class="row">
                 <product-card-dynamic
@@ -2868,9 +3028,12 @@ storiesOf('Product Card', module)
     }))
     .add('wrapper', () => ({
         components: {
-            ProductsCards: () => import('@ericmuyser/hyper-ui').then(m => m.ProductsCards)
+            ProductsCards: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProductsCards)
         },
-        data: () => ({ products: productsCardsData }),
+        data: () => ({
+            products: productsCardsData
+        }),
         template: `
             <div class="p-5">
                 <h1 class="text-center text-white">Hover transitions are enabled only on bigger screens</h1>
@@ -2880,12 +3043,16 @@ storiesOf('Product Card', module)
     }))
 
 const curatorReview = {
-    author: {name: 'SatoSan', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'},
+    author: {
+        name: 'SatoSan',
+        img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'
+    },
     rate: 4.5,
-    game: {img: 'http://www.pixels-association.ch/wp-content/uploads/2017/11/no1.jpg'},
+    game: {
+        img: 'http://www.pixels-association.ch/wp-content/uploads/2017/11/no1.jpg'
+    },
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mi arcu, viverra et efficitur luctus, tincidunt vel lacus. Morbi erat augue, posuere et sodales venenatis, tincidunt eu arcu. In sollicitudin purus quis sodales ornare. Cras tempus vestibulum elementum. Sed placerat, turpis id cursus cursus, augue enim molestie dui, elementum luctus lectus est vitae dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris vehicula mi a nunc cursus, id volutpat purus commodo. Duis consequat elementum varius. Suspendisse dui enim, rhoncus a molestie at, tristique ut urna. Praesent et consectetur dui. Pellentesque ut volutpat nunc, ut viverra nulla. Duis ultricies, sem sit amet laoreet lobortis, mauris est mollis orci, non eleifend urna leo quis lectus. Vestibulum sit amet volutpat est.',
-    moreReviews: [
-        {
+    moreReviews: [{
             rate: 3.5,
             game: {
                 title: 'Volgar the Viking',
@@ -2905,31 +3072,40 @@ const curatorReview = {
 storiesOf('Curators Reviews', module)
     .add('review', () => ({
         components: {
-            CuratorReview: () => import('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
+            CuratorReview: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
         },
-        data: () => ({review: curatorReview}),
+        data: () => ({
+            review: curatorReview
+        }),
         template: `<CuratorReview :review="review" class="col-3"/>`
     }))
     .add('reviews wrapper', () => ({
         components: {
-            CuratorReviews: () => import('@ericmuyser/hyper-ui').then(m => m.CuratorReviews)
+            CuratorReviews: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.CuratorReviews)
         },
-        data: () => ({reviews: [curatorReview, curatorReview, curatorReview]}),
+        data: () => ({
+            reviews: [curatorReview, curatorReview, curatorReview]
+        }),
         template: `<CuratorReviews :reviews="reviews" class="col-12"/>`
     }))
 
 storiesOf('Images Explorer', module)
     .add('default', () => ({
         components: {
-            ImagesExplorer: () => import('@ericmuyser/hyper-ui').then(m => m.ImagesExplorer)
+            ImagesExplorer: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ImagesExplorer)
         },
         data: () => object('Data', data.ImagesExplorer),
         template: `<ImagesExplorer :images="images" />`
     }))
     .add('in modal', () => ({
         components: {
-            ImagesExplorer: () => import('@ericmuyser/hyper-ui').then(m => m.ImagesExplorer),
-            ModalList: () => import('@ericmuyser/hyper-ui').then(m => m.ModalList)
+            ImagesExplorer: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ImagesExplorer),
+            ModalList: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ModalList)
         },
         data: () => object('Data', data.ImagesExplorer),
         template: `
@@ -2945,7 +3121,8 @@ storiesOf('Images Explorer', module)
 storiesOf('Collection', module)
     .add('single item', () => ({
         components: {
-            CollectionItem: () => import('@ericmuyser/hyper-ui').then(m => m.CollectionItem)
+            CollectionItem: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.CollectionItem)
         },
         data() {
             return {
@@ -2970,15 +3147,18 @@ storiesOf('Collection', module)
     }))
     .add('list', () => ({
         components: {
-            CollectionList: () => import('@ericmuyser/hyper-ui').then(m => m.CollectionList),
-            CollectionItem: () => import('@ericmuyser/hyper-ui').then(m => m.CollectionItem),
-            Swiper: () => import('@ericmuyser/hyper-ui').then(m => m.Swiper),
-            Slide: () => import('@ericmuyser/hyper-ui').then(m => m.Slide)
+            CollectionList: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.CollectionList),
+            CollectionItem: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.CollectionItem),
+            Swiper: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Swiper),
+            Slide: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Slide)
         },
         data() {
             return {
-                items: [
-                    {
+                items: [{
                         name: 'Collection name',
                         meta: {
                             author: 'John Doel',
@@ -3018,9 +3198,12 @@ storiesOf('Collection', module)
 storiesOf('Game Series', module)
     .add('default', () => ({
         components: {
-            GameSeries: () => import('@ericmuyser/hyper-ui').then(m => m.GameSeries),
-            GameDescription: () => import('@ericmuyser/hyper-ui').then(m => m.GameDescription),
-            GameIncludesList: () => import('@ericmuyser/hyper-ui').then(m => m.GameIncludesList)
+            GameSeries: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.GameSeries),
+            GameDescription: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.GameDescription),
+            GameIncludesList: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.GameIncludesList)
         },
         data() {
             return {
@@ -3030,8 +3213,7 @@ storiesOf('Game Series', module)
                 tags: ['Nunc', 'Praesent', 'Vestibulum'],
                 images: ['https://via.placeholder.com/400x250', 'https://via.placeholder.com/400x250'],
                 price: 33.49,
-                list: [
-                    {
+                list: [{
                         title: 'Dragon Age: Inquisition',
                         company: 'BioWare',
                         stars: 5,
@@ -3129,7 +3311,8 @@ storiesOf('Game Series', module)
     }))
     .add('description', () => ({
         components: {
-            GameDescription: () => import('@ericmuyser/hyper-ui').then(m => m.GameDescription)
+            GameDescription: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.GameDescription)
         },
         data() {
             return {
@@ -3153,7 +3336,8 @@ storiesOf('Game Series', module)
     }))
     .add('includes item', () => ({
         components: {
-            GameIncludesItem: () => import('@ericmuyser/hyper-ui').then(m => m.GameIncludesItem)
+            GameIncludesItem: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.GameIncludesItem)
         },
         data() {
             return {
@@ -3175,17 +3359,18 @@ storiesOf('Game Series', module)
     }))
     .add('includes list', () => ({
         components: {
-            GameIncludesItem: () => import('@ericmuyser/hyper-ui').then(m => m.GameIncludesItem),
-            GameIncludesList: () => import('@ericmuyser/hyper-ui').then(m => m.GameIncludesList)
+            GameIncludesItem: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.GameIncludesItem),
+            GameIncludesList: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.GameIncludesList)
         },
         data() {
             return {
-                list: [
-                    {
+                list: [{
                         title: 'Dragon Age: Inquisition',
                         company: 'BioWare',
                         stars: 5,
-                            meta: {
+                        meta: {
                             images: {
                                 mediumTile: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg'
                             }
@@ -3270,7 +3455,8 @@ storiesOf('Game Series', module)
 storiesOf('Progress Bar', module)
     .add('default', () => ({
         components: {
-            ProgressBar: () => import('@ericmuyser/hyper-ui').then(m => m.ProgressBar)
+            ProgressBar: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProgressBar)
         },
         template: `
             <div class="padding-50">
@@ -3280,7 +3466,8 @@ storiesOf('Progress Bar', module)
     }))
     .add('vertical', () => ({
         components: {
-            ProgressBar: () => import('@ericmuyser/hyper-ui').then(m => m.ProgressBar)
+            ProgressBar: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProgressBar)
         },
         template: `
             <div style="height: 100px; width: 100px" class="m-4">
@@ -3290,11 +3477,15 @@ storiesOf('Progress Bar', module)
     }))
     .add('calculate percentages', () => ({
         components: {
-            ProgressBar: () => import('@ericmuyser/hyper-ui').then(m => m.ProgressBar)
+            ProgressBar: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProgressBar)
         },
         data() {
             return {
-                values: { reached: 391, goal: 2490 }
+                values: {
+                    reached: 391,
+                    goal: 2490
+                }
             }
         },
         template: `
@@ -3307,7 +3498,8 @@ storiesOf('Progress Bar', module)
     }))
     .add('show percentages', () => ({
         components: {
-            ProgressBar: () => import('@ericmuyser/hyper-ui').then(m => m.ProgressBar)
+            ProgressBar: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProgressBar)
         },
         template: `
             <div class="padding-50">
@@ -3317,7 +3509,8 @@ storiesOf('Progress Bar', module)
     }))
     .add('fancy', () => ({
         components: {
-            ProgressBarFancy: () => import('@ericmuyser/hyper-ui').then(m => m.ProgressBarFancy)
+            ProgressBarFancy: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProgressBarFancy)
         },
         data() {
             return {
@@ -3334,7 +3527,8 @@ storiesOf('Progress Bar', module)
 storiesOf('Project Milestone', module)
     .add('default', () => ({
         components: {
-            ProjectMilestone: () => import('@ericmuyser/hyper-ui').then(m => m.ProjectMilestone)
+            ProjectMilestone: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProjectMilestone)
         },
         data() {
             return {
@@ -3365,14 +3559,26 @@ storiesOf('Project Milestone', module)
 storiesOf('Community Spotlight', module)
     .add('default', () => ({
         components: {
-            CommunitySpotlight: () => import('@ericmuyser/hyper-ui').then(m => m.CommunitySpotlight)
+            CommunitySpotlight: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.CommunitySpotlight)
         },
         data() {
             return {
-                discussions: [
-                    { link: '', name: 'Title', count: 98 },
-                    { link: '', name: 'Post name', count: 98 },
-                    { link: '', name: 'Discussion', count: 98 }
+                discussions: [{
+                        link: '',
+                        name: 'Title',
+                        count: 98
+                    },
+                    {
+                        link: '',
+                        name: 'Post name',
+                        count: 98
+                    },
+                    {
+                        link: '',
+                        name: 'Discussion',
+                        count: 98
+                    }
                 ]
             }
         },
@@ -3388,7 +3594,8 @@ storiesOf('Community Spotlight', module)
 storiesOf('Product Review', module)
     .add('default', () => ({
         components: {
-            Review: () => import('@ericmuyser/hyper-ui').then(m => m.Review)
+            Review: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Review)
         },
         data() {
             return {
@@ -3420,13 +3627,15 @@ storiesOf('Product Review', module)
     }))
     .add('form', () => ({
         components: {
-            ReviewForm: () => import('@ericmuyser/hyper-ui').then(m => m.ReviewForm)
+            ReviewForm: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ReviewForm)
         },
         template: `<div class="p-4" style="width: 1000px;"><ReviewForm /></div>`
     }))
     .add('view review', () => ({
         components: {
-            ViewReview: () => import('@ericmuyser/hyper-ui').then(m => m.ViewReview),
+            ViewReview: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ViewReview),
         },
         template: `<div class='p-5' style="width: 1000px"><ViewReview /></div>`
     }))
@@ -3434,30 +3643,29 @@ storiesOf('Product Review', module)
 storiesOf('Banner', module)
     .add('image', () => ({
         components: {
-            Banner: () => import('@ericmuyser/hyper-ui').then(m => m.Banner)
+            Banner: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Banner)
         },
         data() {
             return {
-                slides: [
-                    {
-                        image: {
-                            src: 'https://d2q63o9r0h0ohi.cloudfront.net/images/kobolds-and-catacombs/header-bg-backup-337031b146d6540bc3d2513f0fb11daa966398f512db7163c7e819120a62b2b17c2abaa893cfcef5c14e1f4a696ce45fa8d2e4d36a987029e563b449b402a115.jpg',
-                            position: 'center'
-                        },
-                        logo: {
-                            src: 'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png',
-                            position: '',
-                            size: ''
-                        },
-                        title: 'Some title',
-                        buttonText: 'Details',
-                        overlay: {
-                            title: 'Cras suscipit dapibus metus quis egestas.',
-                            subtitle: 'Morbi non cursus magna. Integer magna urna, facilisis sed tincidunt eu',
-                            text: 'Sed accumsan vel lacus eu cursus. Nunc suscipit, tellus sit amet laoreet ornare, ligula purus consectetur nisi, sed sagittis velit lectus in turpis. Vestibulum sollicitudin faucibus mollis. Aliquam tempus fermentum nulla, at congue magna tristique ut. Proin non turpis erat.'
-                        }
+                slides: [{
+                    image: {
+                        src: 'https://d2q63o9r0h0ohi.cloudfront.net/images/kobolds-and-catacombs/header-bg-backup-337031b146d6540bc3d2513f0fb11daa966398f512db7163c7e819120a62b2b17c2abaa893cfcef5c14e1f4a696ce45fa8d2e4d36a987029e563b449b402a115.jpg',
+                        position: 'center'
+                    },
+                    logo: {
+                        src: 'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png',
+                        position: '',
+                        size: ''
+                    },
+                    title: 'Some title',
+                    buttonText: 'Details',
+                    overlay: {
+                        title: 'Cras suscipit dapibus metus quis egestas.',
+                        subtitle: 'Morbi non cursus magna. Integer magna urna, facilisis sed tincidunt eu',
+                        text: 'Sed accumsan vel lacus eu cursus. Nunc suscipit, tellus sit amet laoreet ornare, ligula purus consectetur nisi, sed sagittis velit lectus in turpis. Vestibulum sollicitudin faucibus mollis. Aliquam tempus fermentum nulla, at congue magna tristique ut. Proin non turpis erat.'
                     }
-                ],
+                }],
             }
         },
         template: `<div class="padding-50" style="width: 900px">
@@ -3522,12 +3730,12 @@ storiesOf('Banner', module)
 storiesOf('Product Overview', module)
     .add('Language Support', () => ({
         components: {
-            LanguageSupport: () => import('@ericmuyser/hyper-ui').then(m => m.LanguageSupport)
+            LanguageSupport: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LanguageSupport)
         },
         data() {
             return {
-                languages: [
-                    {
+                languages: [{
                         name: "English",
                         interface: true,
                         fullAudio: false,
@@ -3582,12 +3790,12 @@ storiesOf('Product Overview', module)
     }))
     .add('System Requirements', () => ({
         components: {
-            SystemRequirements: () => import('@ericmuyser/hyper-ui').then(m => m.SystemRequirements)
+            SystemRequirements: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.SystemRequirements)
         },
         data() {
             return {
-                systemRequirements: [
-                    {
+                systemRequirements: [{
                         os: "win",
                         system: "Windows XP/Vista/7",
                         processor: "Intel or AMD Quad-Core",
@@ -3628,7 +3836,8 @@ storiesOf('Product Overview', module)
 storiesOf('Inputs', module)
     .add('default', () => ({
         components: {
-            Input: () => import('@ericmuyser/hyper-ui').then(m => m.Input)
+            Input: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Input)
         },
         data() {
             return {
@@ -3644,7 +3853,8 @@ storiesOf('Inputs', module)
     }))
     .add('Searcher', () => ({
         components: {
-            InputSearcher: () => import('@ericmuyser/hyper-ui').then(m => m.InputSearcher)
+            InputSearcher: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.InputSearcher)
         },
         data() {
             return {
@@ -3662,8 +3872,10 @@ storiesOf('Inputs', module)
 storiesOf('Timeline', module)
     .add('item', () => ({
         components: {
-            TimelineList: () => import('@ericmuyser/hyper-ui').then(m => m.TimelineList),
-            TimelineItem: () => import('@ericmuyser/hyper-ui').then(m => m.TimelineItem)
+            TimelineList: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TimelineList),
+            TimelineItem: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TimelineItem)
         },
         data() {
             return {
@@ -3676,8 +3888,7 @@ storiesOf('Timeline', module)
                 }
             }
         },
-        template:
-            `<div class="row">
+        template: `<div class="row">
                 <div class="col">
                     <TimelineItem :item="item" />
                 </div>
@@ -3686,13 +3897,14 @@ storiesOf('Timeline', module)
     }))
     .add('list', () => ({
         components: {
-            TimelineList: () => import('@ericmuyser/hyper-ui').then(m => m.TimelineList),
-            TimelineItem: () => import('@ericmuyser/hyper-ui').then(m => m.TimelineItem)
+            TimelineList: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TimelineList),
+            TimelineItem: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TimelineItem)
         },
         data() {
             return {
-                items: [
-                    {
+                items: [{
                         id: 1,
                         type: 'post',
                         title: 'Thank you, friends!',
@@ -3782,7 +3994,8 @@ storiesOf('Timeline', module)
 storiesOf('Purchase block', module)
     .add('default', () => ({
         components: {
-            PurchaseBlock: () => import('@ericmuyser/hyper-ui').then(m => m.PurchaseBlock)
+            PurchaseBlock: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.PurchaseBlock)
         },
         data() {
             return {
@@ -3803,7 +4016,8 @@ storiesOf('Purchase block', module)
     }))
     .add('demo', () => ({
         components: {
-            PurchaseBlock: () => import('@ericmuyser/hyper-ui').then(m => m.PurchaseBlock)
+            PurchaseBlock: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.PurchaseBlock)
         },
         data() {
             return {
@@ -3825,7 +4039,8 @@ storiesOf('Purchase block', module)
     }))
     .add('unavailable', () => ({
         components: {
-            PurchaseBlock: () => import('@ericmuyser/hyper-ui').then(m => m.PurchaseBlock)
+            PurchaseBlock: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.PurchaseBlock)
         },
         data() {
             return {
@@ -3847,7 +4062,8 @@ storiesOf('Purchase block', module)
 storiesOf('Purchase Option', module)
     .add('single', () => ({
         components: {
-            PurchaseOption: () => import('@ericmuyser/hyper-ui').then(m => m.PurchaseOption)
+            PurchaseOption: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.PurchaseOption)
         },
         template: `
             <div class="p-4" style="width: 600px">
@@ -3872,8 +4088,7 @@ storiesOf('Purchase Option', module)
     .add('list', () => ({
         data() {
             return {
-                options: [
-                    {
+                options: [{
                         id: 1,
                         oldPrice: '22.99',
                         price: '16.99',
@@ -3898,8 +4113,10 @@ storiesOf('Purchase Option', module)
             }
         },
         components: {
-            PurchaseOption: () => import('@ericmuyser/hyper-ui').then(m => m.PurchaseOption),
-            Block: () => import('@ericmuyser/hyper-ui').then(m => m.Block)
+            PurchaseOption: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.PurchaseOption),
+            Block: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Block)
         },
         template: `
         <div class="p-5">
@@ -3930,7 +4147,8 @@ storiesOf('Participation Tiers', module)
             }
         },
         components: {
-            ParticipationTier: () => import('@ericmuyser/hyper-ui').then(m => m.ParticipationTier),
+            ParticipationTier: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ParticipationTier),
         },
         template: `
             <div class="p-5">
@@ -3941,8 +4159,7 @@ storiesOf('Participation Tiers', module)
     .add('list', () => ({
         data() {
             return {
-                items: [
-                    {
+                items: [{
                         id: 1,
                         price: '29',
                         sold: '222',
@@ -3970,8 +4187,10 @@ storiesOf('Participation Tiers', module)
             }
         },
         components: {
-            ParticipationTier: () => import('@ericmuyser/hyper-ui').then(m => m.ParticipationTier),
-            Block: () => import('@ericmuyser/hyper-ui').then(m => m.Block)
+            ParticipationTier: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ParticipationTier),
+            Block: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Block)
 
         },
         template: `
@@ -3994,7 +4213,8 @@ storiesOf('Participation Tiers', module)
 storiesOf('Contribute', module)
     .add('form', () => ({
         components: {
-            ContributeForm: () => import('@ericmuyser/hyper-ui').then(m => m.ContributeForm)
+            ContributeForm: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ContributeForm)
         },
         data() {
             return {
@@ -4009,7 +4229,8 @@ storiesOf('Contribute', module)
     }))
     .add('pledge', () => ({
         components: {
-            ContributePledge: () => import('@ericmuyser/hyper-ui').then(m => m.ContributePledge)
+            ContributePledge: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ContributePledge)
         },
         data() {
             return {
@@ -4020,8 +4241,7 @@ storiesOf('Contribute', module)
                     shipsTo: 'Anywhere in the world',
                     description: 'Maecenas a sapien luctus, placerat massa pellentesque, consectetur ante. Nam dui est, cursus at consequat quis, malesuada eget eros. ',
                     backers: 43,
-                    includes: [
-                        {
+                    includes: [{
                             "text": "Morbi vitae orci lacus"
                         },
                         {
@@ -4049,7 +4269,8 @@ storiesOf('Contribute', module)
 storiesOf('Cookie policy', module)
     .add('default', () => ({
         components: {
-            CookiePolicy: () => import('@ericmuyser/hyper-ui').then(m => m.CookiePolicy)
+            CookiePolicy: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.CookiePolicy)
         },
         template: `
             <div class="p-5 position-relative" style="height: 500px;width: 700px">
@@ -4061,7 +4282,8 @@ storiesOf('Cookie policy', module)
 storiesOf('Welcome Box', module)
     .add('default', () => ({
         components: {
-            WelcomeBox: () => import('@ericmuyser/hyper-ui').then(m => m.WelcomeBox)
+            WelcomeBox: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.WelcomeBox)
         },
         template: `
             <div class="p-5 position-relative" style="height: 900px;width: 700px">
@@ -4073,12 +4295,12 @@ storiesOf('Welcome Box', module)
 storiesOf('Share', module)
     .add('type 1', () => ({
         components: {
-            Share: () => import('@ericmuyser/hyper-ui').then(m => m.Share)
+            Share: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Share)
         },
         data() {
             return {
-                online: [
-                    {
+                online: [{
                         name: "Sally Hamilton",
                         img: "http://placehold.it/32x32"
                     },
@@ -4091,8 +4313,7 @@ storiesOf('Share', module)
                         img: "http://placehold.it/32x32"
                     }
                 ],
-                favorites: [
-                    {
+                favorites: [{
                         name: "Nixon Love",
                         img: "http://placehold.it/32x32"
                     },
@@ -4132,7 +4353,8 @@ storiesOf('Share', module)
 storiesOf('Stream', module)
     .add('default', () => ({
         components: {
-            StreamItem: () => import('@ericmuyser/hyper-ui').then(m => m.StreamItem)
+            StreamItem: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.StreamItem)
         },
         data() {
             return {
@@ -4163,7 +4385,8 @@ storiesOf('Stream', module)
 storiesOf('List', module)
     .add('dotted', () => ({
         components: {
-            DottedList: () => import('@ericmuyser/hyper-ui').then(m => m.DottedList)
+            DottedList: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.DottedList)
         },
         template: `
         <div class="p-5">
@@ -4178,7 +4401,8 @@ storiesOf('List', module)
 storiesOf('Game Installer Modal', module)
     .add('default', () => ({
         components: {
-            GameInstaller: () => import('@ericmuyser/hyper-ui').then(m => m.GameInstaller)
+            GameInstaller: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.GameInstaller)
         },
         data() {
             return {
@@ -4187,8 +4411,7 @@ storiesOf('Game Installer Modal', module)
                 win: true,
                 linux: true,
                 name: 'Shuttered',
-                filesList: [
-                    {
+                filesList: [{
                         platform: 'mac',
                         size: 1034532,
                         src: '#'
@@ -4229,7 +4452,8 @@ storiesOf('Game Installer Modal', module)
 storiesOf('Emoji', module)
     .add('picker', () => ({
         components: {
-            Emoji: () => import('@ericmuyser/hyper-ui').then(m => m.Emoji)
+            Emoji: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Emoji)
         },
         template: `
         <div class="p-5">
@@ -4238,7 +4462,8 @@ storiesOf('Emoji', module)
     }))
     .add('single', () => ({
         components: {
-            EmojiSingle: () => import('@ericmuyser/hyper-ui').then(m => m.EmojiSingle)
+            EmojiSingle: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.EmojiSingle)
         },
         template: `
         <div class="p-5">
@@ -4249,7 +4474,8 @@ storiesOf('Emoji', module)
 storiesOf('Landing Page', module)
     .add('block title', () => ({
         components: {
-            LandingBlockTitle: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitle)
+            LandingBlockTitle: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitle)
         },
         template: `
         <div class="p-5">
@@ -4261,7 +4487,8 @@ storiesOf('Landing Page', module)
     }))
     .add('block title with shadow', () => ({
         components: {
-            LandingBlockTitleShadow: () => import('@ericmuyser/hyper-ui').then(m => m.shadow)
+            LandingBlockTitleShadow: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.shadow)
         },
         template: `
         <div class="p-5">
@@ -4273,9 +4500,12 @@ storiesOf('Landing Page', module)
     }))
     .add('block title with gradient', () => ({
         components: {
-            LandingBlockTitleGradient: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitleGradient),
-            LandingBlockTitle: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitle),
-            LandingBlockTitleShadow: () => import('@ericmuyser/hyper-ui').then(m => m.shadow)
+            LandingBlockTitleGradient: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitleGradient),
+            LandingBlockTitle: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitle),
+            LandingBlockTitleShadow: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.shadow)
         },
         template: `
         <div class="p-5">
@@ -4301,7 +4531,8 @@ storiesOf('Landing Page', module)
     }))
     .add('divider', () => ({
         components: {
-            LandingDivider: () => import('@ericmuyser/hyper-ui').then(m => m.LandingDivider),
+            LandingDivider: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingDivider),
         },
         template: `
         <div class="p-5">
@@ -4311,7 +4542,8 @@ storiesOf('Landing Page', module)
     }))
     .add('level', () => ({
         components: {
-            BlockContentLevel: () => import('@ericmuyser/hyper-ui').then(m => m.BlockContentLevel),
+            BlockContentLevel: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.BlockContentLevel),
         },
         template: `
         <div class="p-5">
@@ -4332,12 +4564,12 @@ storiesOf('Landing Page', module)
     }))
     .add('feature item', () => ({
         components: {
-            BlockContentWithFeatureItem: () => import('@ericmuyser/hyper-ui').then(m => m.BlockContentWithFeatureItem),
+            BlockContentWithFeatureItem: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.BlockContentWithFeatureItem),
         },
         data() {
             return {
-                items:[
-                    {
+                items: [{
                         img: 'https://i.ytimg.com/vi/6ki31hkQk8c/maxresdefault.jpg',
                         title: 'Donec placerat turpis est',
                         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in nulla sed ante maximus fringilla id at mi. Aenean nec elit ac ex porta volutpat. In porta porttitor purus a congue. Aenean sit amet lectus ac purus fringilla rutrum lobortis eu lorem. Quisque accumsan et odio vel ullamcorper.'
@@ -4367,12 +4599,12 @@ storiesOf('Landing Page', module)
     }))
     .add('benefactor', () => ({
         components: {
-            LandingBenefactor: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBenefactor),
+            LandingBenefactor: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingBenefactor),
         },
         data() {
             return {
-                items:[
-                    {
+                items: [{
                         src: 'http://dotafun.su/images/aeee/b_keeperofthelight.png',
                         name: 'Immortal I'
                     },
@@ -4385,8 +4617,9 @@ storiesOf('Landing Page', module)
                         src: 'https://i.pinimg.com/originals/44/61/88/44618879e898abbbec878eda26551d52.png',
                         name: 'Immortal III',
                         includesList: ['200 x Fire Lotus Belt', '200 x Golden Ornithomancer Mantle', '200 x Dragonclaw Hook', '200 x Rainmaker', '200 x Pipe of Dezun', '200 x Perceptions of the Eternal Mind',
-                        '200 x Kantusa the Script Sword', '200 x Shattered Greatsword', '200 x Golden Gravelmaw', '100 x Golden Grasping Bludgeon', '100 x Golden Shards of Exile', '100 x Golden Staff of Perplex',
-                        '100 x Golden Huntling', '100 x Golden Severing Crest', '100 x Golden Sullen Hollow', '100 x Golden Lamb to the Slaughter', '100 x Lockjaw the Boxhound']
+                            '200 x Kantusa the Script Sword', '200 x Shattered Greatsword', '200 x Golden Gravelmaw', '100 x Golden Grasping Bludgeon', '100 x Golden Shards of Exile', '100 x Golden Staff of Perplex',
+                            '100 x Golden Huntling', '100 x Golden Severing Crest', '100 x Golden Sullen Hollow', '100 x Golden Lamb to the Slaughter', '100 x Lockjaw the Boxhound'
+                        ]
                     },
 
                     {
@@ -4402,13 +4635,13 @@ storiesOf('Landing Page', module)
             </div>
         `
     }))
-    .add('reward list', () =>({
+    .add('reward list', () => ({
         components: {
-            LandingRewardList: () => import('@ericmuyser/hyper-ui').then(m => m.LandingRewardList),
+            LandingRewardList: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingRewardList),
         },
         data() {
-            return {
-            }
+            return {}
         },
         template: `
             <div class="p-5" style="width: 1000px;">
@@ -4424,25 +4657,38 @@ storiesOf('Landing Page', module)
     }))
     .add('page', () => ({
         components: {
-            LandingBlock: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBlock),
-            LandingBlockTitle: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitle),
-            LandingBlockTitleShadow: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitleShadow),
-            LandingBlockTitleGradient: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitleGradient),
-            LandingFeatureItem: () => import('@ericmuyser/hyper-ui').then(m => m.LandingFeatureItem),
-            LandingTabs: () => import('@ericmuyser/hyper-ui').then(m => m.LandingTabs),
-            LandingTab: () => import('@ericmuyser/hyper-ui').then(m => m.LandingTab),
-            LandingSlider: () => import('@ericmuyser/hyper-ui').then(m => m.LandingSlider),
-            LandingGradientBlock: () => import('@ericmuyser/hyper-ui').then(m => m.LandingGradientBlock),
-            LandingBenefactor: () => import('@ericmuyser/hyper-ui').then(m => m.LandingBenefactor),
-            LandingLevel: () => import('@ericmuyser/hyper-ui').then(m => m.LandingLevel),
-            LandingRewardList: () => import('@ericmuyser/hyper-ui').then(m => m.LandingRewardList),
-            LandingDivider: () => import('@ericmuyser/hyper-ui').then(m => m.LandingDivider),
-            LandingButton: () => import('@ericmuyser/hyper-ui').then(m => m.LandingButton),
+            LandingBlock: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingBlock),
+            LandingBlockTitle: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitle),
+            LandingBlockTitleShadow: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitleShadow),
+            LandingBlockTitleGradient: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitleGradient),
+            LandingFeatureItem: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingFeatureItem),
+            LandingTabs: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingTabs),
+            LandingTab: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingTab),
+            LandingSlider: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingSlider),
+            LandingGradientBlock: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingGradientBlock),
+            LandingBenefactor: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingBenefactor),
+            LandingLevel: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingLevel),
+            LandingRewardList: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingRewardList),
+            LandingDivider: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingDivider),
+            LandingButton: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.LandingButton),
         },
         data() {
             return {
-                items:[
-                    {
+                items: [{
                         img: 'https://i.ytimg.com/vi/6ki31hkQk8c/maxresdefault.jpg',
                         title: 'Donec placerat turpis est',
                         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in nulla sed ante maximus fringilla id at mi. Aenean nec elit ac ex porta volutpat. In porta porttitor purus a congue. Aenean sit amet lectus ac purus fringilla rutrum lobortis eu lorem. Quisque accumsan et odio vel ullamcorper.'
@@ -4458,8 +4704,7 @@ storiesOf('Landing Page', module)
                         text: 'Nulla ultrices fermentum tristique. Integer a venenatis lacus, eget pretium lectus. Suspendisse potenti. Vestibulum sodales ultricies mattis. Donec sodales in dui nec vestibulum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.'
                     }
                 ],
-                slides:[
-                    {
+                slides: [{
                         id: 1,
                         type: 'video',
                         poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
@@ -4541,8 +4786,7 @@ storiesOf('Landing Page', module)
                         title: 'Maecenas suscipit ante'
                     }
                 ],
-                benefactorItems:[
-                    {
+                benefactorItems: [{
                         src: 'http://dotafun.su/images/aeee/b_keeperofthelight.png',
                         name: 'Immortal I'
                     },
@@ -4556,7 +4800,8 @@ storiesOf('Landing Page', module)
                         name: 'Immortal III',
                         includesList: ['200 x Fire Lotus Belt', '200 x Golden Ornithomancer Mantle', '200 x Dragonclaw Hook', '200 x Rainmaker', '200 x Pipe of Dezun', '200 x Perceptions of the Eternal Mind',
                             '200 x Kantusa the Script Sword', '200 x Shattered Greatsword', '200 x Golden Gravelmaw', '100 x Golden Grasping Bludgeon', '100 x Golden Shards of Exile', '100 x Golden Staff of Perplex',
-                            '100 x Golden Huntling', '100 x Golden Severing Crest', '100 x Golden Sullen Hollow', '100 x Golden Lamb to the Slaughter', '100 x Lockjaw the Boxhound']
+                            '100 x Golden Huntling', '100 x Golden Severing Crest', '100 x Golden Sullen Hollow', '100 x Golden Lamb to the Slaughter', '100 x Lockjaw the Boxhound'
+                        ]
                     },
 
                     {
@@ -4727,7 +4972,8 @@ storiesOf('Landing Page', module)
 storiesOf('Token Sale Box', module)
     .add('default', () => ({
         components: {
-            TokenSale: () => import('@ericmuyser/hyper-ui').then(m => m.TokenSale),
+            TokenSale: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TokenSale),
         },
         template: `
         <div class="p-5" style="width: 1200px;">
@@ -4741,7 +4987,8 @@ storiesOf('Token Sale Box', module)
     }))
     .add('type 2', () => ({
         components: {
-            TokenSale2: () => import('@ericmuyser/hyper-ui').then(m => m.TokenSale2),
+            TokenSale2: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TokenSale2),
         },
         template: `
         <div class="p-5" style="width: 1200px;">
@@ -4755,29 +5002,29 @@ storiesOf('Token Sale Box', module)
     }))
 
 storiesOf('Guide', module)
-    .add('default', () =>({
+    .add('default', () => ({
         components: {
-            Guide: () => import('@ericmuyser/hyper-ui').then(m => m.Guide),
+            Guide: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Guide),
         },
         template: `<Guide />`
     }))
 
 storiesOf('Video Popup', module)
-    .add('default', () =>({
+    .add('default', () => ({
         components: {
-            VideoPopup: () => import('@ericmuyser/hyper-ui').then(m => m.VideoPopup),
-            Author: () => import('@ericmuyser/hyper-ui').then(m => m.Author)
+            VideoPopup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.VideoPopup),
+            Author: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Author)
         },
         data() {
             return {
-                video:[
-                    {
-                        src: 'https://static.videezy.com/system/resources/previews/000/004/944/original/Magical_Tree_4K_Living_Background.mp4',
-                        format: 'mp4'
-                    }
-                ],
-                comments:[
-                    {
+                video: [{
+                    src: 'https://static.videezy.com/system/resources/previews/000/004/944/original/Magical_Tree_4K_Living_Background.mp4',
+                    format: 'mp4'
+                }],
+                comments: [{
                         text: 'Lorem ipsum dolor si',
                         author: {
                             name: 'Satoshi',
@@ -4866,14 +5113,16 @@ storiesOf('Video Popup', module)
     }))
     .add('video list', () => ({
         components: {
-            VideoPopup: () => import('@ericmuyser/hyper-ui').then(m => m.VideoPopup),
-            VideoItem: () => import('@ericmuyser/hyper-ui').then(m => m.VideoItem),
-            Author: () => import('@ericmuyser/hyper-ui').then(m => m.Author)
+            VideoPopup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.VideoPopup),
+            VideoItem: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.VideoItem),
+            Author: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Author)
         },
         data() {
             return {
-                videos:[
-                    {
+                videos: [{
                         poster: 'https://i.ytimg.com/vi/4B2TgQG48Sg/maxresdefault.jpg',
                         name: 'Satoshi',
                         avatar: 'https://banner2.kisspng.com/20180403/qtw/kisspng-computer-icons-avatar-woman-user-avatar-5ac3a1dfb11ca9.9792609515227703997255.jpg',
@@ -4881,8 +5130,7 @@ storiesOf('Video Popup', module)
                             src: 'https://static.videezy.com/system/resources/previews/000/004/944/original/Magical_Tree_4K_Living_Background.mp4',
                             format: 'mp4'
                         },
-                        comments:[
-                            {
+                        comments: [{
                                 text: 'Lorem ipsum dolor si',
                                 author: {
                                     name: 'Satoshi',
@@ -4917,8 +5165,7 @@ storiesOf('Video Popup', module)
                         name: 'Den',
                         avatar: 'http://paquitosoftware.com/content/images/2015/07/gravatar.jpeg',
                         twitch: 'inflameswemust',
-                        comments:[
-                            {
+                        comments: [{
                                 text: 'Lorem ipsum dolor si',
                                 author: {
                                     name: 'Satoshi',
@@ -4953,8 +5200,7 @@ storiesOf('Video Popup', module)
                         name: 'Hakatoshi',
                         avatar: 'https://relayfm.s3.amazonaws.com/uploads/user/avatar/103/user_avatar_tiffanyarment_artwork.png',
                         youtube: 'A747o4LwQfM',
-                        comments:[
-                            {
+                        comments: [{
                                 text: 'Lorem ipsum dolor si',
                                 author: {
                                     name: 'Satoshi',
@@ -5008,12 +5254,18 @@ storiesOf('Video Popup', module)
 storiesOf('Wallet', module)
     .add('default', () => ({
         components: {
-            WalletBase: () => import('@ericmuyser/hyper-ui').then(m => m.WalletBase),
-            WalletMain: () => import('@ericmuyser/hyper-ui').then(m => m.WalletMain),
-            WalletTransfer: () => import('@ericmuyser/hyper-ui').then(m => m.WalletTransfer),
-            WalletDeposit: () => import('@ericmuyser/hyper-ui').then(m => m.WalletDeposit),
-            WalletEdit: () => import('@ericmuyser/hyper-ui').then(m => m.WalletEdit),
-            WalletToken: () => import('@ericmuyser/hyper-ui').then(m => m.WalletToken),
+            WalletBase: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.WalletBase),
+            WalletMain: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.WalletMain),
+            WalletTransfer: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.WalletTransfer),
+            WalletDeposit: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.WalletDeposit),
+            WalletEdit: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.WalletEdit),
+            WalletToken: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.WalletToken),
         },
         data: () => data.WalletData,
         template: `
@@ -5056,19 +5308,27 @@ storiesOf('Wallet', module)
 storiesOf('Chat', module)
     .add('base', () => ({
         components: {
-            ChatBase: () => import('@ericmuyser/hyper-ui').then(m => m.ChatBase),
-            ChatGroup: () => import('@ericmuyser/hyper-ui').then(m => m.ChatGroup),
-            ChatPrivate: () => import('@ericmuyser/hyper-ui').then(m => m.ChatPrivate),
-            ChatMessage: () => import('@ericmuyser/hyper-ui').then(m => m.ChatMessage),
-            ChatUser: () => import('@ericmuyser/hyper-ui').then(m => m.ChatUser),
-            ChatGroupWelcome: () => import('@ericmuyser/hyper-ui').then(m => m.ChatGroupWelcome),
-            ChatGroupSidebar: () => import('@ericmuyser/hyper-ui').then(m => m.ChatGroupSidebar),
-            ChatGroupNew: () => import('@ericmuyser/hyper-ui').then(m => m.ChatGroupNew),
-            ChatFriendsList: () => import('@ericmuyser/hyper-ui').then(m => m.ChatFriendsList),
+            ChatBase: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ChatBase),
+            ChatGroup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ChatGroup),
+            ChatPrivate: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ChatPrivate),
+            ChatMessage: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ChatMessage),
+            ChatUser: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ChatUser),
+            ChatGroupWelcome: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ChatGroupWelcome),
+            ChatGroupSidebar: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ChatGroupSidebar),
+            ChatGroupNew: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ChatGroupNew),
+            ChatFriendsList: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ChatFriendsList),
         },
         data() {
-            return {
-            }
+            return {}
         },
         template: `<div class="row p-3 m-0 flex-wrap" style="width: 1100px;">
                     <div class="col-12" >
@@ -5131,18 +5391,17 @@ storiesOf('Chat', module)
 storiesOf('Games list', module)
     .add('base', () => ({
         components: {
-            GamesList: () => import('@ericmuyser/hyper-ui').then(m => m.GamesList)
+            GamesList: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.GamesList)
         },
         data() {
             return {
-                games:[
-                    {
+                games: [{
                         id: 1,
                         name: 'Game Of Thor 1',
                         subTitle: 'Legendary Edition',
                         image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
-                        downloadContent:[
-                            {
+                        downloadContent: [{
                                 name: 'DragonBore',
                                 price: '3.99'
                             },
@@ -5159,8 +5418,7 @@ storiesOf('Games list', module)
                                 price: '13.99'
                             }
                         ],
-                        achievements: [
-                            {
+                        achievements: [{
                                 icon: '',
                                 href: ''
                             },
@@ -5177,8 +5435,7 @@ storiesOf('Games list', module)
                                 href: ''
                             }
                         ],
-                        friends:[
-                            {
+                        friends: [{
                                 link: '#',
                                 avatar: 'http://kharkov.city/wp-content/uploads/2015/09/cubegirl-avatar_400x4001.jpg'
                             },
@@ -5191,8 +5448,7 @@ storiesOf('Games list', module)
                                 avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUCwHqPE2M4z3HsyeQsaOoWtuxjX92a2vVi5p7N9Qm72IM8Dh'
                             }
                         ],
-                        news:[
-                            {
+                        news: [{
                                 title: 'Morbi at ligula placerat',
                                 text: 'Morbi at ligula placerat, vestibulum tortor ac, sollicitudin massa. In in risus vulputate, posuere libero ac, egestas justo. Ut non mattis nulla. Suspendisse acmaximus metus. Nulla auctor laoreet quam, in congue nulla.',
                                 link: '#'
@@ -5209,8 +5465,7 @@ storiesOf('Games list', module)
                         name: 'Game Of Thor 2',
                         subTitle: 'Legendary Edition',
                         image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
-                        downloadContent:[
-                            {
+                        downloadContent: [{
                                 name: 'DragonBore',
                                 price: '3.99'
                             },
@@ -5227,8 +5482,7 @@ storiesOf('Games list', module)
                                 price: '13.99'
                             }
                         ],
-                        achievements: [
-                            {
+                        achievements: [{
                                 icon: '',
                                 href: ''
                             },
@@ -5245,8 +5499,7 @@ storiesOf('Games list', module)
                                 href: ''
                             }
                         ],
-                        friends:[
-                            {
+                        friends: [{
                                 link: '#',
                                 avatar: 'http://kharkov.city/wp-content/uploads/2015/09/cubegirl-avatar_400x4001.jpg'
                             },
@@ -5259,8 +5512,7 @@ storiesOf('Games list', module)
                                 avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUCwHqPE2M4z3HsyeQsaOoWtuxjX92a2vVi5p7N9Qm72IM8Dh'
                             }
                         ],
-                        news:[
-                            {
+                        news: [{
                                 title: 'Morbi at ligula placerat',
                                 text: 'Morbi at ligula placerat, vestibulum tortor ac, sollicitudin massa. In in risus vulputate, posuere libero ac, egestas justo. Ut non mattis nulla. Suspendisse acmaximus metus. Nulla auctor laoreet quam, in congue nulla.',
                                 link: '#'
@@ -5277,8 +5529,7 @@ storiesOf('Games list', module)
                         name: 'Game Of Thor 3',
                         subTitle: 'Legendary Edition',
                         image: 'http://hdqwalls.com/wallpapers/dark-siders-game-hd.jpg',
-                        downloadContent:[
-                            {
+                        downloadContent: [{
                                 name: 'DragonBore',
                                 price: '3.99'
                             },
@@ -5295,8 +5546,7 @@ storiesOf('Games list', module)
                                 price: '13.99'
                             }
                         ],
-                        achievements: [
-                            {
+                        achievements: [{
                                 icon: '',
                                 href: ''
                             },
@@ -5313,8 +5563,7 @@ storiesOf('Games list', module)
                                 href: ''
                             }
                         ],
-                        friends:[
-                            {
+                        friends: [{
                                 link: '#',
                                 avatar: 'http://kharkov.city/wp-content/uploads/2015/09/cubegirl-avatar_400x4001.jpg'
                             },
@@ -5327,8 +5576,7 @@ storiesOf('Games list', module)
                                 avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmUCwHqPE2M4z3HsyeQsaOoWtuxjX92a2vVi5p7N9Qm72IM8Dh'
                             }
                         ],
-                        news:[
-                            {
+                        news: [{
                                 title: 'Morbi at ligula placerat',
                                 text: 'Morbi at ligula placerat, vestibulum tortor ac, sollicitudin massa. In in risus vulputate, posuere libero ac, egestas justo. Ut non mattis nulla. Suspendisse acmaximus metus. Nulla auctor laoreet quam, in congue nulla.',
                                 link: '#'
@@ -5351,7 +5599,8 @@ storiesOf('Games list', module)
 storiesOf('Text label', module)
     .add('default', () => ({
         components: {
-            TextLabel: () => import('@ericmuyser/hyper-ui').then(m => m.TextLabel),
+            TextLabel: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TextLabel),
         },
         template: `<div class="p-3 m-0 text-white" style="width: 900px">
                     <TextLabel>Default</TextLabel>
@@ -5373,12 +5622,12 @@ storiesOf('Text label', module)
 storiesOf('Option Block', module)
     .add('default', () => ({
         components: {
-            OptionBlock: () => import('@ericmuyser/hyper-ui').then(m => m.OptionBlock),
+            OptionBlock: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.OptionBlock),
         },
         data() {
             return {
-                list: [
-                    {
+                list: [{
                         id: '23423',
                         name: 'Digital Deluxe Edition',
                         price: '99.99',
@@ -5416,7 +5665,8 @@ storiesOf('Option Block', module)
 storiesOf('Games Library', module)
     .add('default', () => ({
         components: {
-            GameLibraryCard: () => import('@ericmuyser/hyper-ui').then(m => m.GameLibraryCard),
+            GameLibraryCard: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.GameLibraryCard),
         },
         data() {
             return {
@@ -5442,7 +5692,8 @@ storiesOf('Games Library', module)
 storiesOf('Quick Launch', module)
     .add('default', () => ({
         components: {
-            QuickLaunch: () => import('@ericmuyser/hyper-ui').then(m => m.QuickLaunch),
+            QuickLaunch: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.QuickLaunch),
         },
         data() {
             return {
@@ -5468,11 +5719,11 @@ storiesOf('Quick Launch', module)
 storiesOf('Global Search', module)
     .add('default', () => ({
         components: {
-            GlobalSearch: () => import('@ericmuyser/hyper-ui').then(m => m.GlobalSearch),
+            GlobalSearch: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.GlobalSearch),
         },
         data() {
-            return {
-            }
+            return {}
         },
         template: `
             <div class="row p-5" style="width: 1000px">
@@ -5484,7 +5735,8 @@ storiesOf('Global Search', module)
     }))
     .add('header bar', () => ({
         components: {
-            SearchBar: () => import('@ericmuyser/hyper-ui').then(m => m.SearchBar),
+            SearchBar: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.SearchBar),
         },
         data() {
             return {
@@ -5504,7 +5756,8 @@ storiesOf('Global Search', module)
 storiesOf('Giphy', module)
     .add('default', () => ({
         components: {
-            Giphy: () => import('@ericmuyser/hyper-ui').then(m => m.Giphy),
+            Giphy: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Giphy),
         },
         data() {
             return {
@@ -5512,7 +5765,7 @@ storiesOf('Giphy', module)
             }
         },
         methods: {
-            setGif(value){
+            setGif(value) {
                 this.gif = value
             }
         },
@@ -5533,12 +5786,12 @@ storiesOf('Giphy', module)
 storiesOf('Table', module)
     .add('default', () => ({
         components: {
-            SimpleTable: () => import('@ericmuyser/hyper-ui').then(m => m.SimpleTable),
+            SimpleTable: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.SimpleTable),
         },
         data() {
             return {
-                fields:[
-                    {
+                fields: [{
                         label: 'First TH',
                         key: 'first'
                     },
@@ -5555,8 +5808,7 @@ storiesOf('Table', module)
                         key: 'last'
                     }
                 ],
-                rows: [
-                    {
+                rows: [{
                         first: '1',
                         second: '2',
                         third: '3',
@@ -5600,7 +5852,8 @@ storiesOf('Table', module)
     }))
     .add('Scroll table', () => ({
         components: {
-            ScrollTable: () => import('@ericmuyser/hyper-ui').then(m => m.ScrollTable),
+            ScrollTable: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ScrollTable),
         },
         template: `
             <div class="row p-5" style="width: 800px; color: white">
@@ -5612,8 +5865,10 @@ storiesOf('Table', module)
 storiesOf('Text Formatting', module)
     .add('default', () => ({
         components: {
-            TextFormatting: () => import('@ericmuyser/hyper-ui').then(m => m.TextFormatting),
-            BasicPopup: () => import('@ericmuyser/hyper-ui').then(m => m.BasicPopup),
+            TextFormatting: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TextFormatting),
+            BasicPopup: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.BasicPopup),
         },
         template: `
             <div class="p-4" style="width: 600px">
@@ -5630,7 +5885,8 @@ storiesOf('Text Formatting', module)
 storiesOf('Activity block', module)
     .add('default', () => ({
         components: {
-            ActivityBlock: () => import('@ericmuyser/hyper-ui').then(m => m.ActivityBlock),
+            ActivityBlock: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ActivityBlock),
         },
         template: `<div style="width: 1000px;" class="p-5">
                     <ActivityBlock @play="" @install="" @help="" labelIcon="list" :percent="37" earnedAchievements="31" totalAchievements="193">
@@ -5651,14 +5907,14 @@ storiesOf('Activity block', module)
 storiesOf('Metro', module)
     .add('metro-tile', () => ({
         components: {
-            MetroTile: () => import('@ericmuyser/hyper-ui').then(m => m.MetroTile),
+            MetroTile: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.MetroTile),
         },
         data() {
             return {
-                BASE_LEN : 65,
-                MARGIN : 3,
-                items: [
-                    {
+                BASE_LEN: 65,
+                MARGIN: 3,
+                items: [{
                         i: "0",
                         width: 250,
                         height: 80,
@@ -5842,7 +6098,8 @@ storiesOf('Metro', module)
     }))
     .add('metro-item', () => ({
         components: {
-            MetroItem: () => import('@ericmuyser/hyper-ui').then(m => m.MetroItem),
+            MetroItem: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.MetroItem),
         },
         data() {
             return {
@@ -5883,13 +6140,14 @@ storiesOf('Metro', module)
     }))
     .add('metro grid', () => ({
         components: {
-            MetroGrid: () => import('@ericmuyser/hyper-ui').then(m => m.MetroGrid),
-            MetroItem: () => import('@ericmuyser/hyper-ui').then(m => m.MetroItem),
+            MetroGrid: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.MetroGrid),
+            MetroItem: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.MetroItem),
         },
         data() {
             return {
-                items: [
-                    {
+                items: [{
                         image: 'https://cdn.images.dailystar.co.uk/dynamic/184/photos/532000/620x/Days-Gone-PS4-Release-Date-gameplay-trailers-E3-2018-news-updates-for-new-zombie-games-677269.jpg',
                         title: 'Nam euismod tincidunt sapien',
                         text: 'Sed id accumsan diam, ac elementum nulla. Nullam dictum, diam at interdum ullamcorper, nisl arcu ornare felis, bibendum porttitor urna elit at ligula. Nulla eget orci fringilla, eleifend nisi id, consectetur urna.'
@@ -5935,7 +6193,8 @@ storiesOf('Metro', module)
 storiesOf('Security check', module)
     .add('default', () => ({
         components: {
-            SecurityCheck: () => import('@ericmuyser/hyper-ui').then(m => m.SecurityCheck),
+            SecurityCheck: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.SecurityCheck),
         },
         data() {
             return {
@@ -5944,13 +6203,13 @@ storiesOf('Security check', module)
             }
         },
         methods: {
-            sendCode(val){
+            sendCode(val) {
                 console.log(val)
                 this.code = true
 
             },
-            checkCode(code){
-                if ( code != 123456 ) {
+            checkCode(code) {
+                if (code != 123456) {
                     this.err = true
                 } else {
                     this.err = false
@@ -5970,7 +6229,8 @@ storiesOf('Security check', module)
 storiesOf('Browser UI', module)
     .add('default', () => ({
         components: {
-            BrowserUI: () => import('@ericmuyser/hyper-ui').then(m => m.BrowserUI),
+            BrowserUI: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.BrowserUI),
         },
         template: `<div style="width: 600px" class="m-4"><BrowserUI /></div>`
     }))
@@ -5978,7 +6238,8 @@ storiesOf('Browser UI', module)
 storiesOf('Settings', module)
     .add('default', () => ({
         components: {
-            Settings: () => import('@ericmuyser/hyper-ui').then(m => m.Settings),
+            Settings: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Settings),
         },
         template: `<div class="m-4" style="width: 1000px;">
                         <Settings />
@@ -5988,12 +6249,12 @@ storiesOf('Settings', module)
 storiesOf('Add friends', module)
     .add('default', () => ({
         components: {
-            AddFriends: () => import('@ericmuyser/hyper-ui').then(m => m.AddFriends),
+            AddFriends: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.AddFriends),
         },
         data() {
             return {
-                userFriends: [
-                    {
+                userFriends: [{
                         avatar: 'https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg',
                         firstname: 'Brandan',
                         lastname: 'Hayes'
@@ -6034,7 +6295,8 @@ storiesOf('Add friends', module)
 storiesOf('Draggable video', module)
     .add('default', () => ({
         components: {
-            DraggableVideo: () => import('@ericmuyser/hyper-ui').then(m => m.DraggableVideo),
+            DraggableVideo: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.DraggableVideo),
         },
         template: `<div><DraggableVideo /></div>`
     }))
@@ -6043,7 +6305,8 @@ storiesOf('Draggable video', module)
 storiesOf('Video', module)
     .add('default', () => ({
         components: {
-            Video: () => import('@ericmuyser/hyper-ui').then(m => m.Video)
+            Video: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Video)
         },
         data() {
             return {
@@ -6080,12 +6343,12 @@ storiesOf('Video', module)
 storiesOf('Pricing table', module)
     .add('v1', () => ({
         components: {
-            PricingTable: () => import('@ericmuyser/hyper-ui').then(m => m.PricingTableV1),
+            PricingTable: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.PricingTableV1),
         },
         data() {
             return {
-                items: [
-                    {
+                items: [{
                         title: 'Premium',
                         description: 'This is really a good deal!',
                         price: '29',
@@ -6125,12 +6388,12 @@ storiesOf('Pricing table', module)
     }))
     .add('v2', () => ({
         components: {
-            PricingTable: () => import('@ericmuyser/hyper-ui').then(m => m.PricingTableV2),
+            PricingTable: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.PricingTableV2),
         },
         data() {
             return {
-                items: [
-                    {
+                items: [{
                         title: 'Premium',
                         description: 'This is really a good deal!',
                         price: '29',
@@ -6172,7 +6435,8 @@ storiesOf('Pricing table', module)
 storiesOf('Pro mode', module)
     .add('button', () => ({
         components: {
-            ProModeButton: () => import('@ericmuyser/hyper-ui').then(m => m.ProModeButton),
+            ProModeButton: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProModeButton),
         },
         template: `<div class="p-4">
                         <ProModeButton icon="gem">
@@ -6182,7 +6446,8 @@ storiesOf('Pro mode', module)
     }))
     .add('notice 1', () => ({
         components: {
-            ProModeN1: () => import('@ericmuyser/hyper-ui').then(m => m.ProModeN1),
+            ProModeN1: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProModeN1),
         },
         template: `<div class="p-4">
                         <ProModeN1>
@@ -6192,7 +6457,8 @@ storiesOf('Pro mode', module)
     }))
     .add('notice 2', () => ({
         components: {
-            ProModeN2: () => import('@ericmuyser/hyper-ui').then(m => m.ProModeN2),
+            ProModeN2: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProModeN2),
         },
         template: `<div class="p-4">
                         <ProModeN2>
@@ -6205,12 +6471,12 @@ storiesOf('Pro mode', module)
 storiesOf('Contributor Box', module)
     .add('default', () => ({
         components: {
-            ContributorBox: () => import('@ericmuyser/hyper-ui').then(m => m.ContributorBox),
+            ContributorBox: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ContributorBox),
         },
         data() {
             return {
-                steps: [
-                    {
+                steps: [{
                         value: true,
                         label: 'Add a headline to your profile',
                         description: 'Tell the community a bit about your self'
@@ -6241,7 +6507,8 @@ storiesOf('Contributor Box', module)
 storiesOf('Gift box', module)
     .add('default', () => ({
         components: {
-            GiftBox: () => import('@ericmuyser/hyper-ui').then(m => m.GiftBox),
+            GiftBox: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.GiftBox),
         },
         data() {
             return {
@@ -6274,38 +6541,38 @@ storiesOf('Gift box', module)
 storiesOf('Profile picker', module)
     .add('default', () => ({
         components: {
-            ProfilePicker: () => import('@ericmuyser/hyper-ui').then(m => m.ProfilePicker),
+            ProfilePicker: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProfilePicker),
         },
-        data(){
-                return{
-                    profiles: [
-                    {
-                            id: 1,
-                            name: 'Mr. Satoshi',
-                            wallet: '0x6cc5f688a315f3dc28a7781717a',
-                            img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
-                            default: false,
-                            edit: false,
-                            status: 'warning'
+        data() {
+            return {
+                profiles: [{
+                        id: 1,
+                        name: 'Mr. Satoshi',
+                        wallet: '0x6cc5f688a315f3dc28a7781717a',
+                        img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                        default: false,
+                        edit: false,
+                        status: 'warning'
                     },
-                            {
-                                    id: 2,
-                                    name: 'Mr. Satoshi',
-                                    wallet: '0x6cc5f688a315f3dc28a7781717a',
-                                    img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
-                                    default: false,
-                                    edit: false,
-                                    status: 'danger'
-                            },
-                            {
-                                    id: 3,
-                                    name: 'Mr. Satoshi',
-                                    wallet: '0x6cc5f688a315f3dc28a7781717a',
-                                    img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
-                                    default: false,
-                                    edit: false,
+                    {
+                        id: 2,
+                        name: 'Mr. Satoshi',
+                        wallet: '0x6cc5f688a315f3dc28a7781717a',
+                        img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                        default: false,
+                        edit: false,
+                        status: 'danger'
+                    },
+                    {
+                        id: 3,
+                        name: 'Mr. Satoshi',
+                        wallet: '0x6cc5f688a315f3dc28a7781717a',
+                        img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                        default: false,
+                        edit: false,
                         status: 'success'
-                            },
+                    },
                 ]
             }
         },
@@ -6318,7 +6585,8 @@ storiesOf('Profile picker', module)
 storiesOf('Vote', module)
     .add('default', () => ({
         components: {
-            Vote: () => import('@ericmuyser/hyper-ui').then(m => m.Vote),
+            Vote: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Vote),
         },
         template: `<div class="p-5">
                         <div class="position-relative" style="width:300px">
@@ -6331,42 +6599,42 @@ storiesOf('Vote', module)
 storiesOf('Social connect', module)
     .add('default', () => ({
         components: {
-            SocialConnect: () => import('@ericmuyser/hyper-ui').then(m => m.SocialConnect)
+            SocialConnect: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.SocialConnect)
         },
         data() {
             return {
-                    socials: [
-                            {
-                                    name: 'Facebook',
-                                    description: 'Shares achievements to your news feed.',
-                                    icon: '/img/icons/facebook.svg',
-                                    connected: false
-                            },
-                            {
-                                    name: 'Twitter',
-                                    description: 'Shares achievements to your Twitter feed.',
-                                    icon: '/img/icons/twitter.svg',
-                                    connected: false
-                            },
-                            {
-                                    name: 'Twitch',
-                                    description: 'Lets you contribute to streamers.',
-                                    icon: '/img/icons/twitch-large.png',
-                                    connected: false
-                            },
-                            {
-                                    name: 'Discord',
-                                    description: 'Lets you connect to your Discord voice/chat channels.',
-                                    icon: '/img/icons/discord.png',
-                                    connected: false
-                            },
-                            {
-                                    name: 'Steam',
-                                    description: 'Lets you connect to your Steam account.',
-                                    icon: '/img/icons/steam.png',
-                                    connected: false
-                            }
-                    ]
+                socials: [{
+                        name: 'Facebook',
+                        description: 'Shares achievements to your news feed.',
+                        icon: '/img/icons/facebook.svg',
+                        connected: false
+                    },
+                    {
+                        name: 'Twitter',
+                        description: 'Shares achievements to your Twitter feed.',
+                        icon: '/img/icons/twitter.svg',
+                        connected: false
+                    },
+                    {
+                        name: 'Twitch',
+                        description: 'Lets you contribute to streamers.',
+                        icon: '/img/icons/twitch-large.png',
+                        connected: false
+                    },
+                    {
+                        name: 'Discord',
+                        description: 'Lets you connect to your Discord voice/chat channels.',
+                        icon: '/img/icons/discord.png',
+                        connected: false
+                    },
+                    {
+                        name: 'Steam',
+                        description: 'Lets you connect to your Steam account.',
+                        icon: '/img/icons/steam.png',
+                        connected: false
+                    }
+                ]
             }
         },
         template: `<div class="p-5 text-white" style="width: 550px">
@@ -6400,7 +6668,8 @@ storiesOf('Social connect', module)
 storiesOf('QR code', module)
     .add('default', () => ({
         components: {
-            QrCode: () => import('@ericmuyser/hyper-ui').then(m => m.QrCode),
+            QrCode: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.QrCode),
         },
         template: `<div class="p-5">
                         <QrCode
@@ -6418,12 +6687,12 @@ storiesOf('QR code', module)
 storiesOf('Curator panel', module)
     .add('claim', () => ({
         components: {
-            Claim: () => import('@ericmuyser/hyper-ui').then(m => m.Claim),
+            Claim: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Claim),
         },
-        data(){
-            return{
-                claimTypes: [
-                    {
+        data() {
+            return {
+                claimTypes: [{
                         type: 'warning',
                         title: 'Warning claim',
                         text: 'Pellentesque id lectus et sem convallis venenatis dapibus nec est'
@@ -6446,7 +6715,7 @@ storiesOf('Curator panel', module)
                 ]
             }
         },
-            template: `<div class="p-5">
+        template: `<div class="p-5">
                     <Claim
                         class="mb-4"
                         v-for="claim in claimTypes"
@@ -6458,9 +6727,10 @@ storiesOf('Curator panel', module)
     }))
     .add('info', () => ({
         components: {
-            CuratorInfo: () => import('@ericmuyser/hyper-ui').then(m => m.CuratorInfo)
+            CuratorInfo: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.CuratorInfo)
         },
-            template: `<div class="p-5" style="width: 350px">
+        template: `<div class="p-5" style="width: 350px">
                         <CuratorInfo title="Curator panel">
                             <div v-if="!editing">
                                 <p>
@@ -6494,7 +6764,8 @@ storiesOf('Curator panel', module)
 storiesOf('Clock', module)
     .add('default', () => ({
         components: {
-            Clock: () => import('@ericmuyser/hyper-ui').then(m => m.Clock),
+            Clock: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Clock),
         },
         template: `<div class="p-5"><Clock /></div>`
     }))
@@ -6502,7 +6773,8 @@ storiesOf('Clock', module)
 storiesOf('Content navigation', module)
     .add('default', () => ({
         components: {
-            ContentNavigation: () => import('@ericmuyser/hyper-ui').then(m => m.ContentNavigation)
+            ContentNavigation: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ContentNavigation)
         },
         template: `<div class="p-5">
                         <ContentNavigation
@@ -6565,7 +6837,8 @@ storiesOf('Content navigation', module)
 storiesOf('Broken page', module)
     .add('default', () => ({
         components: {
-            BrokenPage: () => import('~/components/broken-page')
+            BrokenPage: () =>
+                import ('~/components/broken-page')
         },
         data() {
             return {
@@ -6581,7 +6854,8 @@ storiesOf('Broken page', module)
 storiesOf('Benchmark', module)
     .add('default', () => ({
         components: {
-            Benchmark: () => import('@ericmuyser/hyper-ui').then(m => m.Benchmark)
+            Benchmark: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Benchmark)
         },
         data() {
             return {
@@ -6600,9 +6874,10 @@ storiesOf('Benchmark', module)
 storiesOf('Trade offer', module)
     .add('default', () => ({
         components: {
-            TradeOffer: () => import('@ericmuyser/hyper-ui').then(m => m.TradeOffer)
+            TradeOffer: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.TradeOffer)
         },
-        data(){
+        data() {
             return {
                 offer: {
                     new: true,
@@ -6612,10 +6887,9 @@ storiesOf('Trade offer', module)
                         img: ''
                     },
                     showDetails: true,
-                    yourOffer: [2,3,4,5],
-                    contractorOffer: [2,3,4,5],
-                    assets: [
-                        {
+                    yourOffer: [2, 3, 4, 5],
+                    contractorOffer: [2, 3, 4, 5],
+                    assets: [{
                             name: 'Asset name',
                             image: '',
                             price: {
@@ -6653,7 +6927,8 @@ storiesOf('Trade offer', module)
 storiesOf('Receipt', module)
     .add('default', () => ({
         components: {
-            SimpleTable: () => import('@ericmuyser/hyper-ui').then(m => m.SimpleTable)
+            SimpleTable: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.SimpleTable)
         },
         template: `
         <div style="width: 80%" class="text-white p-4">
@@ -6916,9 +7191,12 @@ storiesOf('Receipt', module)
 storiesOf('Order', module)
     .add('default', () => ({
         components: {
-            SimpleTable: () => import('@ericmuyser/hyper-ui').then(m => m.SimpleTable),
-            Block: () => import('@ericmuyser/hyper-ui').then(m => m.Block),
-            Button: () => import('@ericmuyser/hyper-ui').then(m => m.Button),
+            SimpleTable: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.SimpleTable),
+            Block: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Block),
+            Button: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Button),
         },
         data: () => data.OrderData,
         template: `
@@ -7046,7 +7324,8 @@ storiesOf('Order', module)
 storiesOf('Decentralization-meter', module)
     .add('default', () => ({
         components: {
-            DecentralizationMeter: () => import('@ericmuyser/hyper-ui').then(m => m.DecentralizationMeter),
+            DecentralizationMeter: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.DecentralizationMeter),
         },
         data: () => data.OrderData,
         template: `
