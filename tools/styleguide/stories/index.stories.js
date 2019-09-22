@@ -994,7 +994,7 @@ storiesOf('Tooltips', module)
     .add('dark', () => ({
         components: {
             Tooltip: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.Tooltip)
+                import ('@ericmuyser/hyper-ui').then(m => m.Tooltips)
         },
         template: `
             <div class="row p-5">
@@ -1019,7 +1019,7 @@ storiesOf('Tooltips', module)
     .add('light', () => ({
         components: {
             Tooltip: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.Tooltip)
+                import ('@ericmuyser/hyper-ui').then(m => m.Tooltips)
         },
         template: `
             <div class="row p-5">
@@ -1044,23 +1044,15 @@ storiesOf('Tooltips', module)
     .add('custom content', () => ({
         components: {
             Tooltip: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.Tooltip)
+                import ('@ericmuyser/hyper-ui').then(m => m.Tooltips)
         },
         template: `
-            <div class="row p-5">
-                <div class="col-6 text-center">
-                    <Tooltip name="Click Me(Custom content)!" type="click" position="left" :lightStyle='true'>
+            <div class="row p-5 mt-5">
+                    <Tooltip name="Hover Me(Right Position)!" position="right" :lightStyle='true' >
                         <p class="p-0">Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.</p>
                         <p class="p-0 m-0">Lipsum generator.</p>
                         <a href="#" class="btn btn-sm btn-danger mt-2">Some link</a>
-                    <Tooltip/>
-                </div>
-                <div class="col-6 text-center">
-                    <Tooltip name="Hover Me(Custom content)!" position="center" :lightStyle='true'>
-                        <p class="p-0">Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.</p>
-                        <p class="p-0 m-0">Lipsum generator.</p>
-                    <Tooltip/>
-                </div>
+                    </Tooltip>
             </div>
         `
     }))
@@ -1728,16 +1720,10 @@ storiesOf('Popup', module)
     .add('play', () => ({
         components: {
             PlayPopup: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.PlayPopup)
-        },
-        data() {
-            return {
-                activated: false
-            }
+                import ('@ericmuyser/hyper-ui').then(m => m.PlayPopup),
         },
         template: `<div class="p-4">
-                        <Button @click=" activated = true ">Play Now</Button>
-                        <PlayPopup :activated="true" @close=" activated = !activated " />
+                        <PlayPopup :activated="true" />
                     </div>`
     }))
     .add('Add to Collection', () => ({
@@ -1956,44 +1942,44 @@ storiesOf('Assets Overview Popup', module)
         `
     }))
 
-storiesOf('Switch', module)
-    .addDecorator(withKnobs)
-    .add('default', () => ({
-        components: {
-            'cSwitch': () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.Switch)
-        },
-        template: `
-         <div class="row m-0 p-3">
-             <cSwitch :checked=true label="Label text" class="mr-5"/>
-             <Switch :checked=true customLabel>
-                Custom label
-            </Switch>
-         </div>
-        `
-    }))
-    .add('changed label size', () => ({
-        components: {
-            Switch: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.Switch)
-        },
-        template: `
-         <div class="row m-0 p-3">
-             <Switch label="Some text" labelPosition="right" labelSize="22px" />
-         </div>
-        `
-    }))
-    .add('large', () => ({
-        components: {
-            Switch: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.Switch)
-        },
-        template: `
-         <div class="row m-0 p-3">
-             <Switch size="lg" :checked=true />
-         </div>
-        `
-    }))
+// storiesOf('Switch', module)
+//     .addDecorator(withKnobs)
+//     .add('default', () => ({
+//         components: {
+//             'cSwitch': () =>
+//                 import ('@ericmuyser/hyper-ui').then(m => m.Switch)
+//         },
+//         template: `
+//          <div class="row m-0 p-3">
+//              <cSwitch :checked=true label="Label text" class="mr-5"/>
+//              <Switch :checked=true customLabel>
+//                 Custom label
+//             </Switch>
+//          </div>
+//         `
+//     }))
+//     .add('changed label size', () => ({
+//         components: {
+//             Switch: () =>
+//                 import ('@ericmuyser/hyper-ui').then(m => m.Switch)
+//         },
+//         template: `
+//          <div class="row m-0 p-3">
+//              <Switch label="Some text" labelPosition="right" labelSize="22px" />
+//          </div>
+//         `
+//     }))
+//     .add('large', () => ({
+//         components: {
+//             Switch: () =>
+//                 import ('@ericmuyser/hyper-ui').then(m => m.Switch)
+//         },
+//         template: `
+//          <div class="row m-0 p-3">
+//              <Switch size="lg" :checked=true />
+//          </div>
+//         `
+//     }))
 
 storiesOf('Assets List', module)
     .addDecorator(withKnobs)
@@ -2031,7 +2017,7 @@ storiesOf('Assets List', module)
         data() {
             return object('Data', {
                 items: [{
-                        image: 'https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de',
+                        image: 'https://via.placeholder.com/150x100',
                         name: 'Magic Plate Armor',
                         price: {
                             "min": 0.99,
@@ -2042,7 +2028,7 @@ storiesOf('Assets List', module)
                         id: 1
                     },
                     {
-                        image: 'https://vignette.wikia.nocookie.net/angrybirds-fiction/images/8/8b/Toons_assets_chuck_01.png/revision/latest?cb=20150120103056&path-prefix=ru',
+                        image: 'https://via.placeholder.com/150x100',
                         name: 'Magic Chuck',
                         price: {
                             "min": 0.99,
@@ -2303,7 +2289,7 @@ storiesOf('Dropdown', module)
     .add('languages', () => ({
         components: {
             LanguagesDropdown: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LanguagesDropdown)
+                import ('@ericmuyser/hyper-ui').then(m => m.LanguageDropdown)
         },
         data() {
             return {
@@ -6779,37 +6765,6 @@ storiesOf('Content navigation', module)
         template: `<div class="p-5">
                         <ContentNavigation
                             :setLimits="4">
-                            <!--<div-->
-                                <!--slot-scope="props"-->
-                                <!--class="offers__list">-->
-                                <!--<div-->
-                                    <!--v-for="(item, index) in props.items"-->
-                                    <!--:key="index"-->
-                                    <!--class="list-item">-->
-                                    <!--<div class="item-name-img">-->
-                                        <!--<c-img :src="item.image" />-->
-                                        <!--<h4>{{ item.name }}</h4>-->
-                                    <!--</div>-->
-                                    <!--<div class="item-company text-center">-->
-                                        <!--{{ item.company_name }}-->
-                                    <!--</div>-->
-                                    <!--<div class="item-info">-->
-                                        <!--<span class="userName">-->
-                                            <!--{{ item.userName }}-->
-                                        <!--</span>-->
-                                        <!--<span class="price">-->
-                                            <!--$ {{ item.price.current }}-->
-                                        <!--</span>-->
-                                        <!--<a-->
-                                            <!--v-if="item.price.current"-->
-                                            <!--href="#"-->
-                                            <!--class="btn btn-success float-right">-->
-                                            <!--<c-icon name="cart-plus" />-->
-                                            <!--Proceed to Purchase-->
-                                        <!--</a>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
                             <template
                                 slot="left-content"
                                 class="text-left">
