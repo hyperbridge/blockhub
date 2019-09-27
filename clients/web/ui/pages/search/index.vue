@@ -413,7 +413,7 @@ export default {
             // productsTags: 'marketplace/productsTags',
             languages: 'marketplace/productsLanguages'
         }),
-        genres(){
+        genres() {
             return []
         },
         query() {

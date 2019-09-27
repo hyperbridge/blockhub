@@ -7,7 +7,6 @@ import {
     Block,
     Toggle,
     Checkbox,
-    InfiniteContent,
     Icon,
     Input,
     InputSearcher,
@@ -21,6 +20,8 @@ import {
     Tabs,
     Tab
 } from '@ericmuyser/hyper-ui'
+
+import InfiniteContent from '@/components/infinite-content'
 
 Vue.component('HeadingBar', HeadingBar)
 Vue.component('HeadingBarWithSimpleColor', HeadingBarWithSimpleColor)

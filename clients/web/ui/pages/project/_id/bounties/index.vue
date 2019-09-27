@@ -119,7 +119,7 @@
 <script>
 export default {
     components: {
-        'Icon-block': () => import('@ericmuyser/hyper-ui').then(m => m.Icon-block)
+        'Icon-block': () => import('@ericmuyser/hyper-ui').then(m => m.Icon - block)
     },
     props: ['project', 'editing'],
     data() {
@@ -261,7 +261,7 @@ export default {
             text-align: center;
             display: inline-block;
         }
-        .Button{
+        .button{
             float: right;
             width: 90px;
         }

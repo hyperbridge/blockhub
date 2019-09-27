@@ -490,7 +490,7 @@ export default {
         bottom: 18px;
         width: 100%;
         height: 26px;
-        .Button {
+        .button {
             margin: 0 5px;
         }
     }

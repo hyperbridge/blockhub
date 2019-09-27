@@ -13,20 +13,20 @@
                 </div>
                 <div class="col-12 col-lg-8">
                     <div class="filter-block d-flex align-items-center">
-                        <Dropdown-menu
+                        <DropdownMenu
                             class="margin-right-10 dark-bg"
                             title="FILTER BY CATEGORY">
                             <List
                                 :items="selectableCategory"
                                 @click="item => item.selected = !item.selected" />
-                        </Dropdown-menu>
-                        <Dropdown-menu
+                        </DropdownMenu>
+                        <DropdownMenu
                             class="margin-right-10 dark-bg"
                             title="FILTER BY RATING">
                             <List
                                 :items="selectableRating"
                                 @click="item => item.selected = !item.selected" />
-                        </Dropdown-menu>
+                        </DropdownMenu>
                         <InputSearcher
                             v-model="phrase"
                             class="assets-explorer__input-searcher" />
@@ -64,11 +64,9 @@
 <script>
 export default {
     components: {
-        'Dropdown': () => import('@ericmuyser/hyper-ui').then(m => m.Dropdown),
         'InputSearcher': () => import('@ericmuyser/hyper-ui').then(m => m.InputSearcher),
-        'Dropdown-menu': () => import('@ericmuyser/hyper-ui').then(m => m.Dropdown-menu),
+        'DropdownMenu': () => import('@ericmuyser/hyper-ui').then(m => m.DropdownMenu),
         'List': () => import('@ericmuyser/hyper-ui').then(m => m.List),
-        'UserHead': () => import('@ericmuyser/hyper-ui').then(m => m.UserHead),
         'GameCard': () => import('@ericmuyser/hyper-ui').then(m => m.GameCard),
         'GameList': () => import('@ericmuyser/hyper-ui').then(m => m.GameList)
     },

@@ -3,20 +3,20 @@
         "name": "DOOM",
         "images": {
             "header": null,
-            "mediumTile": "/static/img/products/doom-20087/med-tile.jpg",
+            "mediumTile": "/img/products/doom-20087/med-tile.jpg",
             "main": null,
-            "icon": "/static/img/doom-20087/icon.jpg",
+            "icon": "/img/doom-20087/icon.jpg",
             "preview": [
-                "/static/img/products/doom-20087/preview-01.jpg",
-                "/static/img/products/doom-20087/preview-02.jpg",
-                "/static/img/products/doom-20087/preview-03.jpg",
-                "/static/img/products/doom-20087/preview-04.jpg",
-                "/static/img/products/doom-20087/preview-05.jpg",
-                "/static/img/products/doom-20087/preview-06.jpg"
+                "/img/products/doom-20087/preview-01.jpg",
+                "/img/products/doom-20087/preview-02.jpg",
+                "/img/products/doom-20087/preview-03.jpg",
+                "/img/products/doom-20087/preview-04.jpg",
+                "/img/products/doom-20087/preview-05.jpg",
+                "/img/products/doom-20087/preview-06.jpg"
             ]
         },
         "price": 0,
-        "video": "/static/videos/products/doom-20087/trailer.mp4",
+        "video": "/videos/products/doom-20087/trailer.mp4",
         "genre": "Action",
         "releaseDate": "12 May, 2016",
         "developer": "id Software",

@@ -707,7 +707,7 @@ export const WalletData = {
 						"r": null,
 						"g": null,
 						"b": null,
-						"image": "/static/img/icons/store.png",
+						"image": "/img/icons/store.png",
 						"to": "/",
 						"text": "Go to store",
 						"sort": 2,

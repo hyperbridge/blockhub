@@ -296,7 +296,7 @@
                 @cancel="showInstaller = false" />
         </Modal>
         <div v-if="showVote" class="row m-0 p-3">
-            <Vote-modal id="voteModal" title="Please vote our product" @close="showVote = false">
+            <VoteModal id="voteModal" title="Please vote our product" @close="showVote = false">
                 <template slot="body">
                     <div class="row">
                         <div class="col-12">
@@ -312,7 +312,7 @@
                                 <label> Pick your emotion :</label>
                                 <div>
                                     <no-ssr placeholder="loading...">
-                                        <Vote-emoji />
+                                        <VoteEmoji />
                                     </no-ssr>
                                 </div>
                             </div>
@@ -333,7 +333,7 @@
                         Don't show it again.
                     </Checkbox>
                 </template>
-            </Vote-modal>
+            </VoteModal>
         </div>
     </div>
 </template>
@@ -342,8 +342,10 @@
 export default {
     components: {
         'PureRangeSlider': () => import('@ericmuyser/hyper-ui').then(m => m.PureRangeSlider),
-        'Vote-emoji': () => import('@ericmuyser/hyper-ui').then(m => m.Vote-emoji),
+        'VoteEmoji': () => import('@ericmuyser/hyper-ui').then(m => m.VoteEmoji),
         'Vote': () => import('@ericmuyser/hyper-ui').then(m => m.Vote),
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
+        'Button': () => import('@ericmuyser/hyper-ui').then(m => m.Button),
         'GamePlan': () => import('@ericmuyser/hyper-ui').then(m => m.GamePlan),
         'ScreenGallery': () => import('@ericmuyser/hyper-ui').then(m => m.ScreenGallery),
         'PromotionBox': () => import('@ericmuyser/hyper-ui').then(m => m.PromotionBox),
@@ -356,7 +358,7 @@ export default {
         'LanguageSupport': () => import('@ericmuyser/hyper-ui').then(m => m.LanguageSupport),
         'StreamItem': () => import('@ericmuyser/hyper-ui').then(m => m.StreamItem),
         'Modal': () => import('@ericmuyser/hyper-ui').then(m => m.Modal),
-        'Vote-modal': () => import('@ericmuyser/hyper-ui').then(m => m.Vote-modal),
+        'VoteModal': () => import('@ericmuyser/hyper-ui').then(m => m.VoteModal),
         'GameInstaller': () => import('@ericmuyser/hyper-ui').then(m => m.GameInstaller),
         'ReviewForm': () => import('@ericmuyser/hyper-ui').then(m => m.ReviewForm)
     },

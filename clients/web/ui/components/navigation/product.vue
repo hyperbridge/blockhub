@@ -27,16 +27,14 @@
         <JoinCommunity v-if="!$store.state.application.desktopMode" />
 
         <CuratorPanel>
-            <CuratorInfo title="">
+            <CuratorInfo title>
                 <Claim
                     v-access="'curator.read'"
                     title="Content curated"
                     type="success"
                     class="margin-bottom-10 margin-top-10">
                     <p>This product has been curated by 2041 people.</p>
-                    <Button
-                        to="/curator/application"
-                        class="outline-white">
+                    <Button to="/curator/application" class="outline-white">
                         Become a curator
                     </Button>
                 </Claim>
@@ -58,9 +56,7 @@
                         Disapproved with 0 changes
                     </li>
                 </ul>
-                <Button
-                    status="underline"
-                    @click="showClaimPopup">
+                <Button status="underline" @click="showClaimPopup">
                     Created this game?
                 </Button>
             </CuratorInfo>
@@ -73,6 +69,7 @@ export default {
     components: {
         'SidebarMenu': () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenu),
         'Claim': () => import('@ericmuyser/hyper-ui').then(m => m.Claim),
+        'Button': () => import('@ericmuyser/hyper-ui').then(m => m.Button),
         'CuratorPanel': () => import('@ericmuyser/hyper-ui').then(m => m.CuratorPanel),
         'CuratorInfo': () => import('@ericmuyser/hyper-ui').then(m => m.CuratorInfo),
         'JoinCommunity': () => import('@ericmuyser/hyper-ui').then(m => m.JoinCommunity)

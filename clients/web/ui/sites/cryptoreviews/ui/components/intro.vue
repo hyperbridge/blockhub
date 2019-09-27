@@ -87,7 +87,7 @@ export default {
         margin: 13% 0;
         padding: 0 20px;
 
-        .Button {
+        .button {
             font-weight: normal;
 
             strong {

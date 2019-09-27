@@ -734,10 +734,14 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@ericmuyser/hyper-ui@^1.0.0-alpha.7":
-  version "1.0.0-alpha.7"
-  resolved "https://registry.yarnpkg.com/@ericmuyser/hyper-ui/-/hyper-ui-1.0.0-alpha.7.tgz#f433d9e0914116f9abcf9b312468b0450b849eed"
-  integrity sha512-v0qCDE5xl95a/iFWiimLyms9U+ugHxDE44O/ZKAAGVLpDGC09rztjv04ZvDwz9X+BhRR0vSQjWVLEUp8ZSmSeg==
+"@ericmuyser/hyper-ui@^1.0.1":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@ericmuyser/hyper-ui/-/hyper-ui-1.0.2.tgz#636a6633ce7143431d47c05add989c901495a784"
+  integrity sha512-TwKz8hXMuBpsmKPjfvBQ0zGEsu9sc/VoNlu774gFmwc8o35kr8AD7zpkniNxNLG8NYwhS32mFCOrIbXJi2XCzQ==
+  dependencies:
+    emoji-mart-vue "^2.6.6"
+    howler "^2.1.2"
+    moment "^2.24.0"
 
 "@feathersjs/adapter-commons@^2.0.0":
   version "2.0.0"
@@ -4954,7 +4958,7 @@ emits@3.0.x:
   resolved "https://registry.yarnpkg.com/emits/-/emits-3.0.0.tgz#32752bba95e1707b219562384ab9bb8b1fd62f70"
   integrity sha1-MnUrupXhcHshlWI4Srm7ix/WL3A=
 
-emoji-mart-vue@^2.5.3:
+emoji-mart-vue@^2.5.3, emoji-mart-vue@^2.6.6:
   version "2.6.6"
   resolved "https://registry.yarnpkg.com/emoji-mart-vue/-/emoji-mart-vue-2.6.6.tgz#afd60da47ff0b59938b3d3cd90dacab6ab0f531e"
   integrity sha512-844CI/Sa99G6goiZN6u+zT5XxB4wUhpYYTK8s3FrU2fl9y0ckbqe0uw7EuY0R53hb4bo9uJHVOPywE+C4vu4fg==
@@ -6702,7 +6706,7 @@ hosted-git-info@^2.1.4, hosted-git-info@^2.7.1:
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.7.1.tgz#97f236977bd6e125408930ff6de3eec6281ec047"
   integrity sha512-7T/BxH19zbcCTa8XkMlbK5lTo1WtgkFi3GvdWEyNuc4Vex7/9Dqbnpsf4JMydcfj9HCg4zUWFTL3Za6lapg5/w==
 
-howler@^2.0.5:
+howler@^2.0.5, howler@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/howler/-/howler-2.1.2.tgz#8433a09d8fe84132a3e726e05cb2bd352ef8bd49"
   integrity sha512-oKrTFaVXsDRoB/jik7cEpWKTj7VieoiuzMYJ7E/EU5ayvmpRhumCv3YQ3823zi9VTJkSWAhbryHnlZAionGAJg==
