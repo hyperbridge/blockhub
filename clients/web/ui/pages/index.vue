@@ -2,9 +2,7 @@
     <Layout
         :breadcrumbLinks="breadcrumbLinks"
         navigationKey="store">
-        <div
-            class="row"
-            hidden>
+        <div class="row" hidden>
             <div class="col-12 mb-4">
                 <!--                <SimpleBanner-->
                 <!--                    :imgSrc="'/img/banners/banner-3.png'"-->
@@ -30,16 +28,16 @@
                 <!--                </SimpleBanner>-->
             </div>
         </div>
-        <!--
-        <div
-            class="row"
-            hidden>
+
+        <div class="row" hidden>
             <div
                 v-if="!$store.state.application.desktopMode"
                 class="col-12 mb-4">
                 <WelcomeBox />
             </div>
-        </div> -->
+        </div>
+
+        <!-- {{ list }} -->
 
         <InfiniteContent
             :list="list"
@@ -56,19 +54,21 @@
                 <h4 class="h2 mb-3">
                     Welcome
                 </h4>
-                <p>Welcome to the the BlockHub Preview Build. All features are enabled, with or without bugs. Gotta catch 'em all! 🐛</p>
-                <p>These features are still in active development, and may not functional properly and may not make it into production.</p>
-                <p>We believe in transparency and community-driven development, so why don't you let us know what you think!</p><p /></p><p>To make things simple, hold ALT and click anywhere to send us feedback/bug reports!</p><p /></p><p>Thanks for visiting and joining us on the journey to a decentralized future.</p>
+                <div>Welcome to the the BlockHub Preview Build. All features are enabled, with or without bugs. Gotta catch 'em all! 🐛</div>
+                <div>These features are still in active development, and may not functional properly and may not make it into production.</div>
+                <div>We believe in transparency and community-driven development, so why don't you let us know what you think!</div>
+                <div>To make things simple, hold ALT and click anywhere to send us feedback/bug reports!</div>
+                <div>Thanks for visiting and joining us on the journey to a decentralized future.</div>
                 <p hidden>
                     We're a platform built by the community, for the community.
                 </p>
-                <p hidden>
+                <div hidden>
                     <Button
                         to="/help"
                         target="_blank">
                         Check out the BlockHub crowdfund
                     </Button>
-                </p>
+                </div>
             </div>
             <div
                 slot="footer"
@@ -97,8 +97,10 @@ export default {
         }
     },
     components: {
-        'SimpleBanner': () => import('@ericmuyser/hyper-ui').then(m => m.SimpleBanner),
-        'CustomModal': () => import('@ericmuyser/hyper-ui').then(m => m.CustomModal)
+        'InfiniteContent': () => import('~/components/infinite-content'),
+        // 'SimpleBanner': () => import('@ericmuyser/hyper-ui').then(m => m.SimpleBanner),
+        'CustomModal': () => import('@ericmuyser/hyper-ui').then(m => m.CustomModal),
+        'WelcomeBox': () => import('@ericmuyser/hyper-ui').then(m => m.WelcomeBox)
     },
     data() {
         return {
@@ -323,12 +325,6 @@ export default {
 
             return result
         }
-        // products() {
-        //     if (this.$store.state.cache.screens['/store'] && this.$store.state.cache.screens['/store'].products)
-        //         return this.$store.state.cache.screens['/store'].products
-
-        //     return this.$store.state.marketplace.products
-        // },
     },
     async asyncData({ store }) {
         if (process.client) {
@@ -392,14 +388,9 @@ export default {
 
 
 <style lang="scss">
-    /*Crutch to work OWL fine*/
-    /*Fixing content and OWL width*/
     .page__content > .content {
         width: calc(100% - 500px);
     }
-
-    /**/
-    /**/
     .main-banner {
         padding: 10px;
         border-radius: 5px;
