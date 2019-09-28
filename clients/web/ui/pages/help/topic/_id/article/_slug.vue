@@ -19,10 +19,7 @@
 <script>
 export default {
     components: {
-        'ArticleItem': () => import('@ericmuyser/hyper-ui').then(m => m.ArticleItem),
-        'TopicItem': () => import('@ericmuyser/hyper-ui').then(m => m.TopicItem),
-        'ListItem': () => import('@ericmuyser/hyper-ui').then(m => m.ListItem),
-        'Card': () => import('@ericmuyser/hyper-ui').then(m => m.Card)
+        'Button': () => import('@ericmuyser/hyper-ui').then(m => m.Button)
     },
     computed: {
         article() {

@@ -38,7 +38,7 @@
 <script>
 export default {
     components: {
-        'TopicItem': () => import('@ericmuyser/hyper-ui').then(m => m.TopicItem)
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block)
     }
 }
 </script>

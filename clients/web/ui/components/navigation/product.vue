@@ -73,6 +73,7 @@ export default {
     components: {
         'SidebarMenu': () => import('@ericmuyser/hyper-ui').then(m => m.SidebarMenu),
         'Claim': () => import('@ericmuyser/hyper-ui').then(m => m.Claim),
+        'Button': () => import('@ericmuyser/hyper-ui').then(m => m.Button),
         'CuratorPanel': () => import('@ericmuyser/hyper-ui').then(m => m.CuratorPanel),
         'CuratorInfo': () => import('@ericmuyser/hyper-ui').then(m => m.CuratorInfo),
         'JoinCommunity': () => import('@ericmuyser/hyper-ui').then(m => m.JoinCommunity)

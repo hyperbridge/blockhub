@@ -330,10 +330,9 @@
 export default {
     components: {
         'Layout': () => import('@ericmuyser/hyper-ui').then(m => m.Layout),
-        'HtmlEditor': () => import('@ericmuyser/hyper-ui').then(m => m.HtmlEditor),
+        'TopicItem': () => import('@ericmuyser/hyper-ui').then(m => m.TopicItem),
         'JsonEditor': () => import('@ericmuyser/hyper-ui').then(m => m.JsonEditor),
-        'BasicPopup': () => import('@ericmuyser/hyper-ui').then(m => m.BasicPopup),
-        'Multiselect': () => import('vue-multiselect').then(m => m.default)
+        'BasicPopup': () => import('@ericmuyser/hyper-ui').then(m => m.BasicPopup)
     },
     props: {
         id: [String, Number]

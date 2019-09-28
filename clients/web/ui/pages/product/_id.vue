@@ -475,9 +475,7 @@ export default {
         'TopicItem': () => import('@ericmuyser/hyper-ui').then(m => m.TopicItem),
         'Tags': () => import('@ericmuyser/hyper-ui').then(m => m.Tags),
         'CustomModal': () => import('@ericmuyser/hyper-ui').then(m => m.CustomModal),
-        'Popup': () => import('@ericmuyser/hyper-ui').then(m => m.Popup),
-        'Multiselect': () => import('vue-multiselect').then(m => m.default),
-        'AddCollectionPopup': () => import('@ericmuyser/hyper-ui').then(m => m.AddCollectionPopup)
+        'Multiselect': () => import('vue-multiselect').then(m => m.default)
     },
     data() {
         return {
@@ -655,6 +653,7 @@ export default {
         }
     },
     beforeDestroy() {
+        if (!process.client) return
         window.document.getElementById('header-bg').style['background-image'] = 'url(/img/backgrounds/1.jpg)'
     },
     updated() {
@@ -665,7 +664,7 @@ export default {
             height: 300,
             callbacks: {
                 onBlur: () => {
-                    Vue.set(this.product, 'content', $('#summernote').summernote('code'))
+                    Vue.set(this.product, 'content', this.$('#summernote').summernote('code'))
                 }
             }
         })
@@ -679,7 +678,7 @@ export default {
                 */
                 const header = window.document.getElementById('header-bg')
                 const randomImage = Math.floor(Math.random() * this.product.meta.images.preview.length)
-                header.style['background-image'] = `url(${  this.product.meta.images.preview[randomImage]  })`;
+                header.style['background-image'] = `url(${this.product.meta.images.preview[randomImage]})`
                 header.style['background-size'] = 'cover'
             }
         },

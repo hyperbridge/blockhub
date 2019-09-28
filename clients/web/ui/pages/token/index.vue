@@ -1492,7 +1492,7 @@ export default {
         left: 0;
         right: 0;
         height: 26px;
-        .Button {
+        .button {
             margin: 0 5px;
         }
     }
