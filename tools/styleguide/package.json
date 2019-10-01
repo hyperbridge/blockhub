@@ -47,5 +47,6 @@
   },
   "gitHead": "8b0cc820fab428ce26626f6720dbd6450114a734",
   "dependencies": {
+    "vue-awesome-swiper": "^3.1.3"
   }
 }

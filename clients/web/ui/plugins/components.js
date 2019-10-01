@@ -7,7 +7,7 @@ import {
     Block,
     Toggle,
     Checkbox,
-    InfiniteContent,
+    // InfiniteContent,
     Icon,
     Input,
     InputSearcher,
@@ -30,7 +30,7 @@ Vue.component('Toggle', Toggle)
 Vue.component('Checkbox', Checkbox)
 Vue.component('JsonView', JsonView)
 Vue.component('ArrayView', ArrayView)
-Vue.component('InfiniteContent', InfiniteContent)
+// Vue.component('InfiniteContent', InfiniteContent)
 Vue.component('Icon', Icon)
 Vue.component('Input', Input)
 Vue.component('InputSearcher', InputSearcher)
