@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-12 margin-bottom-40">
                 <div class="collection-header">
-                    <Loading size="lg" :enabled="!collection" />
-                    <div class="collection-header__name" v-if="collection">
+                    <LoadingIndicator size="lg" :enabled="!collection" />
+                    <div v-if="collection" class="collection-header__name">
                         <div class="p-0 margin-bottom-5 h1 text-white">
                             {{ collection.name }}
                         </div>
@@ -17,7 +17,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="collection-header__stats" v-if="collection">
+                    <div v-if="collection" class="collection-header__stats">
                         <div>
                             <div class="h5 font-weight-bold m-0 p-0 text-white">
                                 Owner
@@ -104,11 +104,11 @@
                                 icon="fas fa-dollar" />
                         </div>
                     </div>
-                    <Loading size="lg" :enabled="!collection" />
+                    <LoadingIndicator size="lg" :enabled="!collection" />
                     <div v-for="resource in collection.resources" v-if="collection">
                         {{ resource.id }}
                     </div>
-                    <AsssetsGrid :list="collection.resources" v-if="collection" />
+                    <AsssetsGrid v-if="collection" :list="collection.resources" />
                     <Pagination :pages="8" />
                 </Block>
             </div>
@@ -132,10 +132,17 @@ export default {
         }
     },
     components: {
+        'LoadingIndicator': () => import('@ericmuyser/hyper-ui').then(m => m.LoadingIndicator),
         'HeadingBar': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar),
         'HeadingBarFields': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBarFields),
         'Pagination': () => import('@ericmuyser/hyper-ui').then(m => m.Pagination),
         'AsssetsGrid': () => import('@ericmuyser/hyper-ui').then(m => m.AsssetsGrid)
+    },
+    data() {
+        return {
+            collection: null,
+            breadcrumbLinks: []
+        }
     },
     computed: {
         id() {
@@ -144,15 +151,6 @@ export default {
         timeAgo() {
             return moment(this.collection.updatedAt).fromNow()
         }
-    },
-    data() {
-        return {
-            collection: null,
-            breadcrumbLinks: []
-        }
-    },
-    async mounted() {
-        Object.assign(this, await new Promise(this.fetchData))
     },
     async asyncData({ params, store, error }) {
         const fetchData = async (resolve, reject) => {
@@ -203,6 +201,9 @@ export default {
         } else {
             return { fetchData }
         }
+    },
+    async mounted() {
+        Object.assign(this, await new Promise(this.fetchData))
     }
 }
 </script>

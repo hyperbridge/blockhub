@@ -8,22 +8,22 @@
                     </div>
                 </div>
                 <div class="bounties-header__stat">
-                    <Icon-block
+                    <IconBlock
                         icon="users"
                         class="ml-5">
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             {{ contributors }}
                         </div>
                         Contributors
-                    </Icon-block>
-                    <Icon-block
+                    </IconBlock>
+                    <IconBlock
                         icon="arrow-right"
                         class="ml-5">
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             {{ submissions }}
                         </div>
                         Submissions
-                    </Icon-block>
+                    </IconBlock>
                 </div>
                 <div class="bounties-header__action">
                     <Button
@@ -119,7 +119,7 @@
 <script>
 export default {
     components: {
-        'Icon-block': () => import('@ericmuyser/hyper-ui').then(m => m.Icon - block)
+        'IconBlock': () => import('@ericmuyser/hyper-ui').then(m => m.Icon - block)
     },
     props: ['project', 'editing'],
     data() {

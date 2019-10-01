@@ -20,7 +20,7 @@
                         </ul>
                     </p>
                     <div class="row">
-                        <Loading
+                        <LoadingIndicator
                             :enabled="!this.$store.state.application.updates.length"
                             size="lg" />
                         <div
@@ -47,7 +47,7 @@ export default {
     components: {
         'ExpandBlock': () => import('@ericmuyser/hyper-ui').then(m => m.ExpandBlock),
         'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
-        'Loading': () => import('@ericmuyser/hyper-ui').then(m => m.Loading)
+        'LoadingIndicator': () => import('@ericmuyser/hyper-ui').then(m => m.LoadingIndicator)
     },
     data() {
         return {

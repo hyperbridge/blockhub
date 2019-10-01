@@ -59,7 +59,7 @@
                                 <span
                                     v-if="tokenCount === null"
                                     class="token__count token__count--loading">
-                                    <Loading :enabled="true" />
+                                    <LoadingIndicator :enabled="true" />
                                 </span>
                                 <span
                                     v-if="tokenCount !== null"
@@ -193,6 +193,7 @@
 
 export default {
     components: {
+        'LoadingIndicator': () => import('@ericmuyser/hyper-ui').then(m => m.LoadingIndicator),
         'LoadingLogo': () => import('@ericmuyser/hyper-ui').then(m => m.LoadingLogo),
         'QuickLaunch': () => import('@ericmuyser/hyper-ui').then(m => m.QuickLaunch),
         'Dropdown': () => import('@ericmuyser/hyper-ui').then(m => m.Dropdown)

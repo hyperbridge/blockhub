@@ -17,7 +17,7 @@ export default {
         }
     },
     components: {
-        'BrokenPage': () => import('~/components/broken-page')
+        'BrokenPage': () => import('@ericmuyser/hyper-ui').then(m => m.BrokenPage)
     },
     props: {
         isError: {

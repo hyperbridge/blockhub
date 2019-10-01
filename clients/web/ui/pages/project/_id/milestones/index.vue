@@ -20,30 +20,30 @@
                     {{ doneMilestones }} of {{ project.milestones.items.length }} Milestones Completed
                 </div>
                 <div class="milestones-header__stat">
-                    <Icon icon="check">
+                    <BlockWithIcon icon="check">
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             Completed
                         </div>
                         {{ doneMilestones }} Milestones
-                    </Icon>
-                    <Icon icon="th">
+                    </BlockWithIcon>
+                    <BlockWithIcon icon="th">
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             Total
                         </div>
                         {{ project.milestones.items.length }} Milestones
-                    </Icon>
-                    <Icon icon="file-alt">
+                    </BlockWithIcon>
+                    <BlockWithIcon icon="file-alt">
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             Total Spent
                         </div>
                         {{ project.funding.spentAmount | convertCurrency }}
-                    </Icon>
-                    <Icon icon="hand-holding-usd">
+                    </BlockWithIcon>
+                    <BlockWithIcon icon="hand-holding-usd">
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             Project Budget
                         </div>
                         {{ project.funding.fundedAmount | convertCurrency }}
-                    </Icon>
+                    </BlockWithIcon>
                 </div>
             </div>
             <div class="timeline-block position-relative">
@@ -100,7 +100,7 @@ export default {
     components: {
         'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
         'Milestone': () => import('@ericmuyser/hyper-ui').then(m => m.Milestone),
-        'Icon': () => import('@ericmuyser/hyper-ui').then(m => m.Icon),
+        'BlockWithIcon': () => import('@ericmuyser/hyper-ui').then(m => m.BlockWithIcon),
         'ProgressBar': () => import('@ericmuyser/hyper-ui').then(m => m.ProgressBar)
     },
     props: ['project', 'editing'],
@@ -113,8 +113,8 @@ export default {
             const arr = this.project.milestones.items
             let count = 0
 
-            arr.forEach((obj, i) => {
-                if (obj.status === 'Done') { count += 1 }
+            arr.forEach(obj => {
+                if (obj.status === 'Done') count += 1
             })
 
             return count

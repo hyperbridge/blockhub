@@ -16,7 +16,7 @@ const permissions = {
 
 export const validator = function (key, id, options) {
     if (!keys.includes(key)) {
-        console.error('Permission key does not exist: ', key)
+        console.error('Access key does not exist: ', key)
         return false
     }
 

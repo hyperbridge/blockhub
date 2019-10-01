@@ -71,7 +71,7 @@
                             v-for="service in services"
                             :key="service.name"
                             class="col-12 col-md-6 col-lg-4 mb-4">
-                            <Icon-block
+                            <BlockWithIcon
                                 :icon="service.icon"
                                 iconType="fab"
                                 size="md"
@@ -79,7 +79,7 @@
                                 <div class="h4 p-0">
                                     {{ service.name }}
                                 </div>
-                            </Icon-block>
+                            </BlockWithIcon>
                         </div>
                         <div
                             class="col-12 mb-4"
@@ -115,7 +115,7 @@
 <script>
 export default {
     components: {
-        'Icon-block': () => import('@ericmuyser/hyper-ui').then(m => m.Icon-block)
+        'BlockWithIcon': () => import('@ericmuyser/hyper-ui').then(m => m.BlockWithIcon)
     },
     data() {
         return {
