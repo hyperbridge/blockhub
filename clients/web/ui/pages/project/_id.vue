@@ -42,8 +42,7 @@
                                     v-if="!activeElement['name']"
                                     class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
                                     @click="activateElement('name')">
-                                    Change
-                                    Project Name <span class="fa fa-edit" />
+                                    Change Project Name <span class="fa fa-edit" />
                                 </button>
 
                                 <div
@@ -77,8 +76,7 @@
                                     class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
                                     style="margin-bottom: 20px"
                                     @click="activateElement('tags')">
-                                    Change
-                                    Tags <span class="fa fa-edit" />
+                                    Change Tags <span class="fa fa-edit" />
                                 </button>
                                 <div
                                     v-if="activeElement['tags']"
@@ -457,7 +455,6 @@ export default {
         'Multiselect': () => import('vue-multiselect').then(m => m.default),
         'Tags': () => import('@ericmuyser/hyper-ui').then(m => m.Tags),
         'Badges': () => import('@ericmuyser/hyper-ui').then(m => m.Badges),
-        'RatingBlock': () => import('@ericmuyser/hyper-ui').then(m => m.RatingBlock),
         'UpdatesCount': () => import('@ericmuyser/hyper-ui').then(m => m.UpdatesCount),
         'LoadingIndicator': () => import('@ericmuyser/hyper-ui').then(m => m.LoadingIndicator)
     },

@@ -531,7 +531,7 @@ export default {
         margin-bottom: 30px;
     }
 
-    .Checkbox {
+    .checkbox {
         display: block !important;
         margin: 5px 0;
     }

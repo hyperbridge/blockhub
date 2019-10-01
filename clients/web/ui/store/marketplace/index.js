@@ -128,6 +128,9 @@ export const actions = {
 
         store.commit('updateState', payload)
     },
+    contributeProjectBlockchain(store, payload) {
+
+    },
     submitProductForReviewRequest(store, payload) {
         // payload = name, version, category, files, checksum, permissions
 

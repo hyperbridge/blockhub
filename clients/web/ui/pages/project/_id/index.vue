@@ -378,7 +378,7 @@ export default {
             // this.$store.dispatch('application/activeModal', 'sendFunds')
         },
         startContribution() {
-            this.$store.commit('marketplace/contributeProjectBlockchain', this.product)
+            this.$store.commit('marketplace/contributeProjectBlockchain', this.project)
         }
     }
 }

@@ -359,13 +359,13 @@ export default {
 
 <style lang="scss">
     body{
-        &.light{
+        &.light {
             background: #fff!important;
             font-size: 16px;
             line-height: 26px;
             #header-bg,
             #right-bg,
-            #left-bg{
+            #left-bg {
                 display: none!important;
             }
             #business-app {
@@ -385,14 +385,14 @@ export default {
                     height: 4px;
                 }
             }
-            .BasicPopup__content {
+            .basic-popup__content {
                 background: #fff;
                 color: #000 !important;
             }
         }
     }
 
-    .v-sidebar-menu.light-v{
+    .v-sidebar-menu.light-v {
         padding-top: 70px;
         padding-left: 10px;
         padding-right: 10px;

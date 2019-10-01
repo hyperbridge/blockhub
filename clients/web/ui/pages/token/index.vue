@@ -1453,12 +1453,12 @@ export default {
         }
     }
 
-    .Popup__content {
+    .popup__content {
         background: transparent;
         color: #fff;
     }
 
-    .Checkbox {
+    .checkbox {
         width: 100%;
         margin: 3px;
     }
