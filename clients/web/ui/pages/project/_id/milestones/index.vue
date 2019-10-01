@@ -20,30 +20,30 @@
                     {{ doneMilestones }} of {{ project.milestones.items.length }} Milestones Completed
                 </div>
                 <div class="milestones-header__stat">
-                    <Icon-block icon="check">
+                    <Icon icon="check">
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             Completed
                         </div>
                         {{ doneMilestones }} Milestones
-                    </Icon-block>
-                    <Icon-block icon="th">
+                    </Icon>
+                    <Icon icon="th">
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             Total
                         </div>
                         {{ project.milestones.items.length }} Milestones
-                    </Icon-block>
-                    <Icon-block icon="file-alt">
+                    </Icon>
+                    <Icon icon="file-alt">
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             Total Spent
                         </div>
                         {{ project.funding.spentAmount | convertCurrency }}
-                    </Icon-block>
-                    <Icon-block icon="hand-holding-usd">
+                    </Icon>
+                    <Icon icon="hand-holding-usd">
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             Project Budget
                         </div>
                         {{ project.funding.fundedAmount | convertCurrency }}
-                    </Icon-block>
+                    </Icon>
                 </div>
             </div>
             <div class="timeline-block position-relative">
@@ -98,8 +98,9 @@
 <script>
 export default {
     components: {
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
         'Milestone': () => import('@ericmuyser/hyper-ui').then(m => m.Milestone),
-        'Icon-block': () => import('@ericmuyser/hyper-ui').then(m => m.Icon-block),
+        'Icon': () => import('@ericmuyser/hyper-ui').then(m => m.Icon),
         'ProgressBar': () => import('@ericmuyser/hyper-ui').then(m => m.ProgressBar)
     },
     props: ['project', 'editing'],

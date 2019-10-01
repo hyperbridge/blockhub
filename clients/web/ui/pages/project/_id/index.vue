@@ -1,506 +1,325 @@
 <template>
-    <Layout
-        navigationKey="project"
-        :showLeftPanel="false"
-        :showRightPanel="false"
-        :breadcrumbLinks="breadcrumbLinks"
-        class="project-single-page">
-        <div
-            v-if="!project"
-            class="row">
-            <!-- <div class="col-12">
-                Project not found
-            </div> -->
-            <Loading
-                :enabled="!project"
-                size="lg" />
+    <div class="row mx-0">
+        <div class="col-12 col-lg-7 col-xl-8">
+            <ScreenGallery
+                v-if="project.images && project.images.preview"
+                :items="project.images.preview" />
+
+            <div
+                class="action"
+                hidden>
+                Currently crowdfunding
+            </div>
+
+            <Block
+                title="Participation Tiers"
+                :noGutter="true"
+                :onlyContentBg="true"
+                :bgGradient="true">
+                <ParticipationTier
+                    v-for="(item, index) in participationTiers"
+                    :id="item.id"
+                    :key="index"
+                    :price="item.price"
+                    :sold="item.sold"
+                    :left="item.left"
+                    :title="item.title"
+                    :tag="item.tag"
+                    :inList="(index < participationTiers.length-1) ? true : false" />
+            </Block>
+
+            <div class="editor-container">
+                <div
+                    v-if="editing"
+                    class="editor">
+                    <button
+                        v-if="!activeElement['description']"
+                        class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                        @click="activateElement('description')">
+                        Change Description <span
+                            class="fa fa-edit" />
+                    </button>
+
+                    <div
+                        v-if="activeElement['description']"
+                        class="form-control-element form-control-element--right">
+                        <input
+                            ref="description"
+                            v-model="project.description"
+                            name="name"
+                            type="text"
+                            class="form-control"
+                            placeholder="Project description...">
+                        <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                            <span
+                                class="fa fa-check"
+                                @click="deactivateElement('description')" />
+                        </div>
+                    </div>
+                </div>
+                <p class="project__description">
+                    {{ project.description }}
+                </p>
+            </div>
+
+            <Block
+                v-if="!editing"
+                title="About Game"
+                class="margin-bottom-30"
+                :noPadding="true"
+                :noGutter="true"
+                :bgGradient="true"
+                :onlyContentBg="true">
+                <div
+                    class="main-content"
+                    v-html="project.value">
+                    {{ project.value }}
+                </div>
+            </Block>
+
+            <div
+                v-if="editing"
+                class="content-editor">
+                <div
+                    id="summernote"
+                    v-html="project.value">
+                    {{ project.value }}
+                </div>
+            </div>
         </div>
-        <div
-            v-if="project"
-            class="row">
-            <div class="col-12">
-                <div
-                    v-if="errors.length"
-                    class="errors">
-                    <strong>Please correct the following error(s):</strong>
-                    <ul>
-                        <li
-                            v-for="error in errors"
-                            :key="error">
-                            {{ error }}
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="row justify-content-between">
-                    <div class="col-12 col-md-4 text-center text-md-left">
-                        <div class="editor-container">
+        <div class="col-12 col-lg-5 col-xl-4">
+            <div
+                v-if="project.funding"
+                class="card invert">
+                <div class="card-body">
+                    <a
+                        v-if="editing && !activeElement['campaign']"
+                        class="nav-link editor-container editor-container--style-2"
+                        href="javascript:;"
+                        @click="showTab('configure')">
+                        <i class="fas fa-cog" />
+                        <span>Configure Campaign</span>
+                    </a>
+                    <h2 class="title">
+                        Crowdfunding campaign
+                    </h2>
+                    <ButtonFav
+                        target="wishlist"
+                        :active="!!wishlist[project.id]"
+                        @click="$store.dispatch(
+                            'community/updateWishlist',
+                            ['project', project.id]
+                        )" />
+                    <div class="project">
+                        <div class="project__progress">
                             <div
-                                v-if="editing"
-                                class="editor">
-                                <button
-                                    v-if="!activeElement['name']"
-                                    class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                    @click="activateElement('name')">
-                                    Change
-                                    Project Name <span class="fa fa-edit" />
-                                </button>
-
-                                <div
-                                    v-if="activeElement['name']"
-                                    class="form-control-element form-control-element--right">
-                                    <input
-                                        ref="name"
-                                        v-model="project.name"
-                                        name="name"
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Project name...">
-                                    <div
-                                        class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                        <span
-                                            class="fa fa-check"
-                                            @click="deactivateElement('name')" />
-                                    </div>
-                                </div>
+                                v-for="(stage, index) in project.funding.stages"
+                                :key="index"
+                                :class="stage.status"
+                                class="project__progress-stage">
+                                <i
+                                    v-if="stage.status === 'Done'"
+                                    class="fas fa-check" />
+                                <i
+                                    v-if="stage.status === 'InProgress'"
+                                    class="fas fa-clock" />
+                                <span class="stage_line" />
+                                <span class="name">{{ stage.text }}</span>
                             </div>
-                            <h1 class="title margin-top-10 margin-bottom-15">
-                                {{ project.name }}
-                            </h1>
                         </div>
-                        <div class="editor-container">
+                        <div class="project__info">
+                            <div class="funded">
+                                <div class="text">
+                                    114% Funded
+                                </div>
+                                {{ project.funding.fundedAmount | convertCurrency }}
+                            </div>
+                            <div class="goal">
+                                <div class="text">
+                                    Goal
+                                </div>
+                                {{ project.funding.goalAmount | convertCurrency }}
+                            </div>
                             <div
-                                v-if="editing"
-                                class="editor">
-                                <button
-                                    v-if="!activeElement['tags']"
-                                    class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                    style="margin-bottom: 20px"
-                                    @click="activateElement('tags')">
-                                    Change
-                                    Tags <span class="fa fa-edit" />
-                                </button>
-                                <div
-                                    v-if="activeElement['tags']"
-                                    class="form-control-element tag-editor form-control-element--right">
-                                    <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
-                                    <!--<option v-for="(tag, index) in authorTagOptions" :key="index"-->
-                                    <!--:selected="project.tags.includes(tag)">{{ tag }}-->
-                                    <!--</option>-->
-                                    <!--</select>-->
-
-                                    <Multiselect
-                                        v-model="project.tags"
-                                        class="dark-mode"
-                                        :multiple="true"
-                                        :taggable="true"
-                                        :options="authorTagOptions" />
-                                    <div
-                                        class="form-control-element__box form-control-element__box--pretify bg-secondary"
-                                        style="">
-                                        <span
-                                            class="fa fa-check"
-                                            @click="deactivateElement('tags')" />
-                                    </div>
+                                v-for="(prop, index) in crowdfundingProps"
+                                :key="index"
+                                :class="prop">
+                                <div class="progress-bar-vertical">
+                                    <ProgressBar
+                                        :values="{
+                                            reached: project.funding[prop + '_amount'],
+                                            goal: project.funding.goalAmount
+                                        }"
+                                        direction="vertical" />
+                                </div>
+                                <div>
+                                    <p class="text">
+                                        <strong>{{ prop | upperFirstChar }}</strong>
+                                    </p>
+                                    {{ project.funding[prop + '_amount'] | convertCurrency }}
                                 </div>
                             </div>
-
-                            <Tags
-                                v-if="project.tags && (!editing || !activeElement['tags'])"
-                                :tags="project.tags.map(t => t.value)" />
+                        </div>
+                        <div class="project__action">
+                            <Button
+                                status="share"
+                                swapDirection>
+                                Share
+                            </Button>
+                            <Button
+                                status="info"
+                                icon="check"
+                                swapDirection>
+                                Follow
+                            </Button>
+                            <Button
+                                status="support"
+                                swapDirection>
+                                Support
+                            </Button>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4">
-                        <Badges :icons="project.meta.badges || []" />
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <div
-                            v-if="editing"
-                            class="editor text-right"
-                            style="margin-bottom: 30px">
-                            <button
-                                v-if="!activeElement['backgroundImage']"
-                                class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                @click="activateElement('backgroundImage')">
-                                Change Background Image <span
-                                    class="fa fa-edit" />
-                            </button>
-
-                            <div
-                                v-if="activeElement['backgroundImage']"
-                                class="">
-                                <div class="form-control-element form-control-element--right">
-                                    <input
-                                        ref="backgroundImage"
-                                        v-model="project.images.header"
-                                        name="backgroundImage"
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Background image URL...">
-                                    <div
-                                        class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                        <span
-                                            class="fa fa-check"
-                                            @click="deactivateElement('backgroundImage')" />
-                                    </div>
-                                </div>
-                            </div>
-                            <label style="display: block">RECOMMENDED SIZE: 1120 x 524px</label>
-                        </div>
-                        <div
-                            v-if="editing"
-                            class="editor text-right">
-                            <button
-                                v-if="!activeElement['storeImage']"
-                                class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                @click="activateElement('storeImage')">
-                                Change Project Image <span
-                                    class="fa fa-edit" />
-                            </button>
-
-                            <div
-                                v-if="activeElement['storeImage']"
-                                class="">
-                                <div class="form-control-element form-control-element--right">
-                                    <input
-                                        ref="storeImage"
-                                        v-model="project.images.header"
-                                        name="storeImage"
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Background image URL...">
-                                    <div
-                                        class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                        <span
-                                            class="fa fa-check"
-                                            @click="deactivateElement('storeImage')" />
-                                    </div>
-                                </div>
-                            </div>
-                            <label style="display: block">RECOMMENDED SIZE: 2140 x 680px</label>
-                        </div>
-                    </div>
-                </div>
-                <Button
-                    status="dark"
-                    class="w-100 d-flex d-md-none justify-content-center my-4"
-                    size="lg"
-                    data-toggle="collapse"
-                    data-target="#project_nav"
-                    aria-expanded="false"
-                    aria-controls="project_nav">
-                    Menu
-                </Button>
-                <div
-                    id="project_nav"
-                    class="collapse show project_nav">
-                    <ul class="nav nav-tabs margin-bottom-40">
-                        <li
-                            class="nav-item"
-                            @click="section='overview'">
-                            <nuxt-link
-                                :to="`/project/${project.id}`"
-                                class="nav-link"
-                                :class="{ 'active': section === 'overview' }">
-                                Overview
-                            </nuxt-link>
-                        </li>
-                        <li
-                            v-access="'community'"
-                            class="nav-item"
-                            @click="section='community'">
-                            <nuxt-link
-                                :to="`/project/${project.id}/community`"
-                                class="nav-link"
-                                :class="{ 'active': section === 'community' }">
-                                Community
-                                <UpdatesCount v-access="'updateCounter'">
-                                    0
-                                </UpdatesCount>
-                            </nuxt-link>
-                        </li>
-                        <li
-                            v-if="project.bounties"
-                            class="nav-item"
-                            @click="section='bounties'">
-                            <nuxt-link
-                                :to="`/project/${project.id}/bounties`"
-                                class="nav-link"
-                                :class="{ 'active': section === 'bounties' }">
-                                Bounties
-                            </nuxt-link>
-                        </li>
-                        <li
-                            class="nav-item"
-                            @click="section='updates'">
-                            <nuxt-link
-                                :to="`/project/${project.id}/updates`"
-                                class="nav-link"
-                                :class="{ 'active': section === 'updates' }">
-                                Updates
-                                <UpdatesCount v-access="'updateCounter'">
-                                    0
-                                </UpdatesCount>
-                            </nuxt-link>
-                        </li>
-                        <li
-                            class="nav-item"
-                            @click="section='milestones'">
-                            <nuxt-link
-                                :to="`/project/${project.id}/milestones`"
-                                class="nav-link"
-                                :class="{ 'active': section === 'milestones' }">
-                                Milestones
-                            </nuxt-link>
-                        </li>
-                        <li
-                            v-if="editing"
-                            class="nav-item">
-                            <a
-                                class="nav-link"
-                                :class="{ 'active': section === 'configure' }"
-                                @click="section='configure'">Configure</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div
-                    v-if="section === 'configure'"
-                    id="configure"
-                    class="row"
-                    :editing="editing">
-                    <Block title="Campaign">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="switch switch-sm col-sm-3">
-                                        <label>Minimum Contribution Goal</label>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Example: 0">
-                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="switch switch-sm col-sm-3">
-                                        <label>Maximum Contribution Goal</label>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Example: 1000">
-                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label>Support Email</label>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <input
-                                            type="email"
-                                            class="form-control"
-                                            placeholder="Example: example@domain.com">
-                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label>Twitter Username</label>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">@</span>
-                                            </div>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                placeholder="Example: @example">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label>Share Text</label>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Example: Join our crowdfund on BlockHub today!">
-                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="switch switch-sm col-sm-1">
-                                        <input
-                                            type="checkbox"
-                                            name="switch_8"
-                                            checked=""
-                                            value="0">
-                                        <span />
-                                    </label>
-                                    <div class="col-sm-11">
-                                        <label>Overflow</label>
-                                        <span class="form-text">Projects with Overflow enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="switch switch-sm col-sm-1">
-                                        <input
-                                            type="checkbox"
-                                            name="switch_8"
-                                            checked=""
-                                            value="0">
-                                        <span />
-                                    </label>
-                                    <div class="col-sm-11">
-                                        <label>Timeline</label>
-                                        <span class="form-text">Projects with Timeline enabled will have a current timeline with associated milestones.</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="switch switch-sm col-sm-1">
-                                        <input
-                                            type="checkbox"
-                                            name="switch_8"
-                                            checked=""
-                                            value="0">
-                                        <span />
-                                    </label>
-                                    <div class="col-sm-11">
-                                        <label>Refunds</label>
-                                        <span class="form-text">Projects with Refunds enabled will allow contributors to get partial or full refund if the project is deemed not successful (by community vote).</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="switch switch-sm col-sm-1">
-                                        <input
-                                            type="checkbox"
-                                            name="switch_8"
-                                            checked=""
-                                            value="0">
-                                        <span />
-                                    </label>
-                                    <div class="col-sm-11">
-                                        <label>Curation</label>
-                                        <span class="form-text">Projects with Curation enabled will allow the community to curate the project and earn reputation for their actions.</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="switch switch-sm col-sm-1" />
-                                    <div class="col-sm-11">
-                                        <input
-                                            id="ise_default"
-                                            type="text"
-                                            name="ise_default"
-                                            value="">
-                                        <label>Contribution Period</label>
-                                        <span class="form-text">Projects with Curation Enabled will allow the community to curate the project and earn reputation for their actions.</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="switch switch-sm col-sm-1">
-                                        <input
-                                            type="checkbox"
-                                            name="switch_8"
-                                            checked=""
-                                            value="0">
-                                        <span />
-                                    </label>
-                                    <div class="col-sm-11">
-                                        <label>No Contribution Period</label>
-                                        <span class="form-text">Projects with No Contribution Period will be open for contribution until the project is completed, allowing for contributions during the project.</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div
-                            v-access="'governance'"
-                            class="row">
-                            <div class="col-12">
-                                Choose your governance system
-                            </div>
-                            <div class="col-4">
-                                <i class="fas first-order" />
-                            </div>
-                        </div>
-                    </Block>
                 </div>
             </div>
 
-            <div id="overview">
-                <transition
-                    name="page"
-                    mode="out-in">
-                    <c-project-overview
-                        v-if="section === 'overview'"
-                        :project="project"
-                        :editing="editing" />
-                    <c-project-community
-                        v-if="section === 'community'"
-                        :project="project"
-                        :editing="editing" />
-                    <c-project-bounties
-                        v-if="section === 'bounties'"
-                        :project="project"
-                        :editing="editing" />
-                    <c-project-contributors
-                        v-if="section === 'contributors'"
-                        :project="project"
-                        :editing="editing" />
-                    <c-project-discussion
-                        v-if="section === 'discussion'"
-                        :project="project"
-                        :editing="editing" />
-                    <c-project-milestones
-                        v-if="section === 'milestones'"
-                        :project="project"
-                        :editing="editing" />
-                    <c-project-updates
-                        v-if="section === 'updates'"
-                        :project="project"
-                        :editing="editing" />
-                </transition>
+            <div
+                v-if="project.milestones"
+                class="card invert milestones">
+                <div class="card-body">
+                    <a
+                        v-if="editing && !activeElement['milestones']"
+                        href="#"
+                        class="editor-container editor-container--style-2">
+                        <i class="fas fa-cog" />
+                        <span>Set Up Milestones</span>
+                    </a>
+                    <h2 class="title">
+                        Milestones
+                    </h2>
+                    <ul class="milestones__list">
+                        <li
+                            v-for="(item, index) in project.milestones.items"
+                            :key="index"
+                            :class="{ done: item.status === 'Done' }">
+                            <div
+                                v-if="item.status === 'Done'"
+                                class="stepNumber">
+                                <i class="fas fa-check" />
+                            </div>
+                            <div
+                                v-else
+                                class="stepNumber">
+                                {{ item.stepNumber }}
+                            </div>
+                            <div class="text">
+                                {{ item.title }}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
+
+            <CommunitySpotlight
+                v-if="project.community"
+                v-access="'community'"
+                :discussions="project.community.discussions"
+                :communityPath="`/project/${project.id}`"
+                :editing="editing"
+                :activeElement="activeElement['milestones']"
+                class="margin-bottom-30" />
+
+            <Block
+                title="Contribute"
+                class="margin-bottom-30"
+                :noGutter="true"
+                :bgGradient="true"
+                :onlyContentBg="true">
+                <ContributeForm @click="showContributeModal" />
+            </Block>
+
+            <ContributePledge
+                v-for="(pledge, index) in project.pledges"
+                :key="index"
+                :pledge="pledge"
+                :currency="project.meta.currency"
+                @click="showContributeModal" />
+
+            <DecentralizationMeter v-decentralized-mode />
+
+            <BasicPopup
+                :activated="$store.state.application.activeModal === 'contribute'"
+                @close="$store.commit('application/activeModal', null)">
+                <div
+                    slot="header"
+                    class="h4"
+                    style="text-align: left">
+                    Contribute
+                </div>
+                <template slot="body">
+                    <div v-if="syncStep === 1">
+                        <h3 class="margin-auto">
+                            <strong>Status:</strong> unsynced
+                        </h3>
+                        Contract Address: 0xasdadas<br>
+
+                        <Button
+                            class="Button--lg outline-white margin-top-20 margin-auto"
+                            @click="startContribution">
+                            Start
+                        </Button>
+                    </div>
+                    <div v-if="syncStep === 2" />
+                    <br>
+                    <div
+                        v-if="syncing"
+                        class="padding-40 loading-process"
+                        style="position: relative">
+                        <div class="loading loading--w-spinner">
+                            <div><div class="loading-spinner" /></div>
+                        </div>
+                    </div>
+                </template>
+                <p
+                    slot="footer"
+                    class="margin-top-20">
+                    <Button
+                        status="dark"
+                        to="/help">
+                        Need help? Check the Help Center
+                    </Button>
+                </p>
+            </BasicPopup>
         </div>
-    </Layout>
+    </div>
 </template>
 
 <script>
 export default {
     components: {
-        'Tags': () => import('@ericmuyser/hyper-ui').then(m => m.Tags),
-        'Badges': () => import('@ericmuyser/hyper-ui').then(m => m.Badges),
-        'RatingBlock': () => import('@ericmuyser/hyper-ui').then(m => m.RatingBlock),
-        'c-project-overview': () => import('~/pages/project/_id/overview').then(m => m.default),
-        'c-project-milestones': () => import('~/pages/project/_id/milestones').then(m => m.default),
-        'c-project-discussion': () => import('~/pages/project/_id/discussion').then(m => m.default),
-        'c-project-contributors': () => import('~/pages/project/_id/contributors').then(m => m.default),
-        'c-project-community': () => import('~/pages/project/_id/community').then(m => m.default),
-        'c-project-bounties': () => import('~/pages/project/_id/bounties').then(m => m.default),
-        'c-project-updates': () => import('~/pages/project/_id/updates').then(m => m.default),
-        'UpdatesCount': () => import('@ericmuyser/hyper-ui').then(m => m.UpdatesCount),
-        'Multiselect': () => import('vue-multiselect').then(m => m.default)
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
+        'Button': () => import('@ericmuyser/hyper-ui').then(m => m.Button),
+        'ScreenGallery': () => import('@ericmuyser/hyper-ui').then(m => m.ScreenGallery),
+        'CommunitySpotlight': () => import('@ericmuyser/hyper-ui').then(m => m.CommunitySpotlight),
+        'BasicPopup': () => import('@ericmuyser/hyper-ui').then(m => m.BasicPopup),
+        'ParticipationTier': () => import('@ericmuyser/hyper-ui').then(m => m.ParticipationTier),
+        'ProgressBar': () => import('@ericmuyser/hyper-ui').then(m => m.ProgressBar),
+        'ContributeForm': () => import('@ericmuyser/hyper-ui').then(m => m.ContributeForm),
+        'ContributePledge': () => import('@ericmuyser/hyper-ui').then(m => m.ContributePledge),
+        'DecentralizationMeter': () => import('@ericmuyser/hyper-ui').then(m => m.DecentralizationMeter),
+        'ButtonFav': () => import('@ericmuyser/hyper-ui').then(m => m.ButtonFav)
     },
+    props: ['project', 'editing'],
     data() {
-        return {
+        let data = {
             errors: [],
-            section: 'overview',
+            syncing: false,
+            syncStep: 1,
+            participationTiers: this.project.meta.participationTiers,
             activeElement: {
                 name: false,
                 backgroundImage: false,
                 storeImage: false,
-                tags: false,
+                developerTags: false,
                 description: false,
                 content: false
             },
@@ -511,191 +330,55 @@ export default {
             ],
             crowdfundingProps: ['spent', 'locked', 'overflow']
         }
+
+        if (this.$store.state.application.environmentMode !== 'production' && !data.participationTiers) {
+            data = {
+                ...data, ...{
+                    participationTiers: [
+                        {
+                            id: 1,
+                            price: 29,
+                            sold: 222,
+                            left: 9,
+                            tag: 'Combo',
+                            title: 'Game Standard Edition'
+                        },
+                        {
+                            id: 2,
+                            price: 219,
+                            sold: 32,
+                            left: 1,
+                            tag: 'Combo',
+                            title: 'Game Standard Edition'
+                        },
+                        {
+                            id: 3,
+                            price: 9,
+                            sold: 981,
+                            left: 1,
+                            tag: 'Combo',
+                            title: 'Game Standard Edition'
+                        }
+                    ]
+                }
+            }
+        }
+
+        return data
     },
     computed: {
-        // project() {
-        //     let project = null
-
-        //     if (this.id === 'new') {
-        //         project = { ...this.$store.state.funding.defaultProject }
-
-        //         this.$store.state.application.developerMode = true
-        //         this.$store.dispatch('application/setEditorMode', 'editing')
-        //     }
-
-        //     if (!project) {
-        //         project = this.$store.getters['projects/get'](this.id)
-        //     }
-
-        //     if (!project) {
-        //         project = DB.funding.projects.findOne({ 'id': Number(this.id) })
-        //     }
-
-        //     if (!project) {
-        //         return
-        //     }
-
-        //     if (project.images && project.images.header) {
-        //         window.document.getElementById('header-bg').style['background-image'] = `url(${project.images.header})`
-        //     }
-
-        //     if (!project.community) {
-        //         project.community = {
-        //             discussions: []
-        //         }
-        //     }
-
-        //     return project
-        // },
-        editing() {
-            if (!this.$store.state.application.editorMode) {
-                for (const key in this.activeElement) {
-                    this.activeElement[key] = false
-                }
-            }
-
-            return this.$store.state.application.editorMode === 'editing'
-        },
-        breadcrumbLinks() {
-            if (!this.project) {
-                return []
-            }
-
-            const links = [
-                { to: { path: '/' }, title: 'Store' },
-                { to: { path: `/project/${this.project ? this.project.id : 0}` }, title: this.project ? this.project.name : 'Loading' }
-            ]
-
-            if (this.section === 'community') {
-                links.push({ to: { path: '' }, title: 'Community' })
-            } else if (this.section === 'bounties') {
-                links.push({ to: { path: '' }, title: 'Bounties' })
-            } else if (this.section === 'updates') {
-                links.push({ to: { path: '' }, title: 'Updates' })
-            } else if (this.section === 'milestones') {
-                links.push({ to: { path: '' }, title: 'Milestones' })
-            }
-
-            return links
-        }
-    },
-    watch: {
-        '$route'() {
-            this.updateSection()
-        },
-        editing() {
-            if (this.$store.state.application.editorMode === 'publishing') {
-                this.save()
-            }
-        }
-    },
-    async asyncData({ params, store, error }) {
-        await store.dispatch('projects/find', {
-            query: {
-                id: Number(params.id)
-            }
-        })
-
-        const project = store.getters['projects/get'](params.id)
-
-        if (!project) return error({ statusCode: 404, message: 'Project not found' })
-
-        return {
-            project,
-            breadcrumbLinks: [
-                { to: { path: '/' }, title: 'Home' },
-                { to: { path: `/projects/${project.id}` }, title: project.name }
-            ]
-        }
-    },
-    created() {
-        this.updateSection()
-    },
-    mounted() {
-        if (this.id !== 'new') {
-            this.$store.dispatch('projects/find', {
-                query: {
-                    id: Number(this.id),
-                    $eager: 'tags'
-                }
-            })
-        }
-    },
-    beforeDestroy() {
-        if (process.client) {
-            window.document.getElementById('header-bg').style['background-image'] = 'url(/img/backgrounds/1.jpg)'
-        }
-    },
-    updated() {
-        if (process.client) {
-            this.$('#summernote').summernote({
-                placeholder: 'Type in your text',
-                tabsize: 2,
-                height: 300,
-                callbacks: {
-                    onBlur: () => {
-                        Vue.set(this.project, 'content', $('#summernote').summernote('code'))
-                    }
-                }
-            })
-
-            // $('#ise_default').ionRangeSlider({
-            //     from: 15
-            // })
+        wishlist() {
+            return (this.$store.state.application.activeProfile && this.$store.state.application.activeProfile.productWishlist) || {}
         }
     },
     methods: {
-        showTab(name) {
-            this.$(`.nav-tabs a[href="#${name}"]`).tab('show')
+        showContributeModal() {
+            this.$store.commit('application/activeModal', 'contribute')
+            // this.$store.commit('application/showProfileChooser', true)
+            // this.$store.dispatch('application/activeModal', 'sendFunds')
         },
-        deactivateElement(key) {
-            this.activeElement[key] = false
-        },
-        activateElement(key) {
-            for (const key in this.activeElement) {
-                this.activeElement[key] = false
-            }
-
-            this.activeElement[key] = true
-
-            setTimeout(() => {
-                if (this.$refs[key]) { this.$refs[key].focus() }
-            }, 10)
-        },
-        save() {
-            if (!this.checkForm()) {
-                this.$store.dispatch('application/setEditorMode', 'editing')
-
-                return
-            }
-
-            if (this.id === 'new') {
-                this.$store.dispatch('application/setEditorMode', 'publishing')
-
-                // API: CREATE PROJECT
-            } else {
-                this.$store.dispatch('funding/updateProject', this.project)
-                this.$store.dispatch('application/setEditorMode', 'publishing')
-            }
-        },
-        checkForm() {
-            this.errors = []
-
-            if (this.project.name && this.project.description) {
-                return true
-            }
-
-            if (!this.project.name) {
-                this.errors.push('Project name required.')
-            }
-            if (!this.project.description) {
-                this.errors.push('Project description required.')
-            }
-        },
-        updateSection() {
-            if (!this.section) {
-                this.section = this.$route.meta.section
-            }
+        startContribution() {
+            this.$store.commit('marketplace/contributeProjectBlockchain', this.product)
         }
     }
 }
@@ -817,33 +500,276 @@ export default {
     .editor-container--style-2 ~ * {
         opacity: 0.3;
     }
-    @media (min-width: 768px){
-        .project_nav{
-            display: block!important;
+
+    .main-content {
+        padding: 15px;
+        border-radius: 5px;
+        overflow: hidden;
+        color: #C6C6D6;
+        font-size: 14px;
+        h2 {
+            font-size: 21px;
+            margin-bottom: 30px;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        &.with_bg {
+            color: #1C2032;
+            background: #FEEBCE;
         }
     }
-    @media (max-width: 767px) {
-        .tags{
-            justify-content: center;
-            margin-bottom: 5px;
+
+    .project__description {
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .project__progress {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: nowrap;
+        overflow: hidden;
+        margin: 10px -6%;
+    }
+
+    .project__progress-stage {
+        width: 50%;
+        text-align: center;
+        span {
+            display: inline-block;
+            width: 100%;
+            position: relative;
+            text-transform: uppercase;
+            font-weight: bold;
+            overflow: hidden;
+            &.stage_line {
+                background: #3D691F;
+                height: 15px;
+                float: left;
+            }
+            &.name {
+                padding-top: 15px;
+                &:after {
+                    position: absolute;
+                    top: 5px;
+                    width: 2px;
+                    content: "";
+                    height: 8px;
+                    left: calc(50% - 1px);
+                    display: inline-block;
+                    background: #fff;
+                }
+            }
         }
-        .project_nav{
-            ul{
-                flex-direction: column;
-                li{
-                    margin-right: auto;
+        i {
+            margin-bottom: 7px;
+            font-size: 10px;
+            display: block;
+            width: 100%;
+        }
+        &:first-child {
+            .stage_line {
+                border-radius: 5px 0 0 5px;
+                width: 65%;
+                float: right;
+            }
+            &.InProgress {
+                .stage_line {
+                    &:after {
+                        left: 25%;
+                    }
+                }
+            }
+        }
+        &:last-child {
+            .stage_line {
+                border-radius: 0 5px 5px 0;
+                width: 65%;
+                float: left;
+            }
+            &.InProgress {
+                .stage_line {
+                    &:after {
+                        left: 75%;
+                    }
+                }
+            }
+        }
+        &.done {
+            span {
+                &:before {
+                    background: #3D691F;
+                }
+            }
+            i {
+                color: #3D691F;
+            }
+        }
+        &.InProgress {
+            .stage_line {
+                &:after {
+                    position: absolute;
+                    background: #5EA72B;
+                    height: 100%;
+                    left: 0%;
+                    right: 0;
+                    content: "";
+                    display: inline-block;
+                }
+            }
+            i {
+                color: #FADC72;
+            }
+        }
+        &.awaiting {
+            .stage_line {
+                background: #5EA72B;
+            }
+        }
+    }
+
+    .project__info {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin: 10px 0;
+        .funded,
+        .goal {
+            background: rgba(0, 0, 0, 0.16);
+            border-radius: 5px;
+            width: calc(50% - 5px);
+            padding: 10px;
+            color: #fff;
+            font-size: 18px;
+            .text {
+                font-size: 14px;
+                font-weight: bold;
+                margin-bottom: 5px;
+                text-transform: uppercase;
+            }
+        }
+        .spent,
+        .locked,
+        .overflow {
+            width: 32%;
+            margin-top: 10px;
+            font-size: 15px;
+            position: relative;
+            display: flex;
+            .text {
+                margin-bottom: 4px;
+            }
+            .progress-bar-vertical {
+                width: 7px;
+                min-height: calc(100% - 7px);
+                display: flex;
+                border-radius: 4px;
+                align-items: flex-end;
+                margin-right: 8px;
+                border-radius: 4px;
+                background-color: rgba(255,255,255,.3);
+                overflow: hidden;
+                .progress-bar {
+                    width: 100%;
+                    height: 0;
+                    transition: height 0.6s ease;
                 }
             }
         }
     }
-    .nav-tabs {
-        justify-content: flex-start;
 
+    .project__action {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        margin-top: 15px;
         a {
-            min-height: 45px;
+            width: 31%;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 13px;
+            text-transform: uppercase;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .16);
+            line-height: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            i {
+                margin-right: 5px;
+                font-size: 16px;
+            }
+            &.follow_link {
+                background: #436CC9;
+                &:hover {
+                    background: #314e92;
+                }
+            }
+            &.share_link {
+                background: #43B4C9;
+                &:hover {
+                    background: #348b9b;
+                }
+            }
+            &.support_link {
+                background: #43C981;
+                &:hover {
+                    background: #2e8b59;
+                }
+            }
         }
     }
-    .nav-tabs .nav-item {
-        margin-right: 40px;
+
+    .card {
+        background: transparent;
+        border: 0 none;
     }
+
+    .milestones__list {
+        padding: 0;
+        margin: 0;
+        li {
+            list-style: none;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 5px 5px 0;
+            border-radius: 5px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
+            background: #27283E;
+            margin-bottom: 10px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+            &.done {
+                border: 2px solid #5EA72B;
+                i{
+                    color: #5EA72B;
+                }
+            }
+            .text {
+                flex-basis: calc(100% - 40px);
+                text-align: left;
+            }
+            .stepNumber {
+                flex-basis: 40px;
+                text-align: center;
+                font-size: 22px;
+            }
+            .status_done {
+                flex-basis: 40px;
+                text-align: center;
+                font-size: 22px;
+                color: #5EA72B;
+            }
+        }
+    }
+
 </style>

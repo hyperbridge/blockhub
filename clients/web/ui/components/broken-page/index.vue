@@ -43,6 +43,7 @@
 <script>
 export default {
     components: {
+        'Button': () => import('@ericmuyser/hyper-ui').then(m => m.Button)
     },
     props: {
         isError: {

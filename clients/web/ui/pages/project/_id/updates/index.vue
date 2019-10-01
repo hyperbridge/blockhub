@@ -1,15 +1,15 @@
 <template>
     <div class="col-12">
-        <Timeline
+        <TimelineList
             :items="project.updates"
-            :project_id="project.id" />
+            :projectId="project.id" />
     </div>
 </template>
 
 <script>
 export default {
     components: {
-        'Timeline': () => import('@ericmuyser/hyper-ui').then(m => m.Timeline)
+        'TimelineList': () => import('@ericmuyser/hyper-ui').then(m => m.TimelineList)
     },
     props: ['project', 'editing']
 }

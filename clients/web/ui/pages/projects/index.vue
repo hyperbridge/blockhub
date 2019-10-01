@@ -44,7 +44,7 @@
                 class="mb-0"
                 name="Browse All Projects" />
             <div class="row">
-                <Loading
+                <LoadingIndicator
                     :enabled="loading"
                     size="lg" />
                 <p v-if="!loading && !projects.length">
@@ -85,10 +85,16 @@ export default {
         }
     },
     components: {
+        'InfiniteContent': () => import('~/components/infinite-content'),
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
+        'HeadingBar': () => import('@ericmuyser/hyper-ui').then(m => m.HeadingBar),
+        'LoadingIndicator': () => import('@ericmuyser/hyper-ui').then(m => m.LoadingIndicator),
+        'Button': () => import('@ericmuyser/hyper-ui').then(m => m.Button),
         'ProjectCard': () => import('@ericmuyser/hyper-ui').then(m => m.ProjectCard)
     },
     data() {
         return {
+            projects: [],
             loading: false
         }
     },
@@ -128,7 +134,7 @@ export default {
                             }
                         }
                     },
-                    projects: this.$store.state.funding.most_popular_games || []
+                    projects: this.$store.state.funding.mostPopularGames || []
                 }
             })
 

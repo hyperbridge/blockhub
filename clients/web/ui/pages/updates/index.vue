@@ -45,7 +45,9 @@ import { HeadingBarWithSimpleColor, DottedList } from '@ericmuyser/hyper-ui'
 
 export default {
     components: {
-        'ExpandBlock': () => import('@ericmuyser/hyper-ui').then(m => m.ExpandBlock)
+        'ExpandBlock': () => import('@ericmuyser/hyper-ui').then(m => m.ExpandBlock),
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block),
+        'Loading': () => import('@ericmuyser/hyper-ui').then(m => m.Loading)
     },
     data() {
         return {

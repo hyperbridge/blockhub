@@ -846,6 +846,8 @@ export default {
         }
     },
     components: {
+        'Button': () => import('@ericmuyser/hyper-ui').then(m => m.Button),
+        'Block': () => import('@ericmuyser/hyper-ui').then(m => m.Block)
     }
 }
 </script>
