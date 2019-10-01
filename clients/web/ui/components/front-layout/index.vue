@@ -1005,7 +1005,6 @@ export default {
             bluredBg: false,
             voteCasted: false,
             reportCoords: null,
-            breadcrumbLinksData: this.breadcrumbLinks,
             shortcutItems: [],
             withdrawRequest: {
                 type: 'ETH',
@@ -1160,6 +1159,24 @@ export default {
         activeNotification() {
             return this.$store.state.application.activeNotification || {}
         },
+        breadcrumbLinksData() {
+            if (this.breadcrumbLinks) {
+                return this.breadcrumbLinks
+            }
+
+            if (this.$route.meta.breadcrumb) {
+                return this.$route.meta.breadcrumb
+            } else if (this.$route.meta.breadcrumb === false) {
+                return []
+            } else if (this.$route.name !== 'Home') {
+                return [
+                    { to: { path: '/' }, title: 'Home' },
+                    { to: { path: this.$route.path }, title: this.$route.name }
+                ]
+            }
+
+            return []
+        },
         dynamicLinks() {
             const [empty, ...links] = this.$route.path.split('/')
             // const names = links.filter()
@@ -1209,8 +1226,6 @@ export default {
         if (process.client) {
             window.addEventListener('resize', this.handleResize())
         }
-
-        this.updateBreadcrumbLinks()
 
         // setTimeout(() => {
         //     $(this.$refs.poweredBy).fadeOut(400)
@@ -1414,20 +1429,6 @@ export default {
                 }
             } catch (e) {
 
-            }
-        },
-        updateBreadcrumbLinks() {
-            if (this.breadcrumbLinksData.length === 0) {
-                if (this.$route.meta.breadcrumb) {
-                    this.breadcrumbLinksData = this.$route.meta.breadcrumb
-                } else if (this.$route.meta.breadcrumb === false) {
-                    this.breadcrumbLinksData = []
-                } else if (this.$route.name !== 'Home') {
-                    this.breadcrumbLinksData = [
-                        { to: { path: '/' }, title: 'Home' },
-                        { to: { path: this.$route.path }, title: this.$route.name }
-                    ]
-                }
             }
         },
         handleResize(event) {
