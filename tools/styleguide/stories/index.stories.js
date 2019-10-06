@@ -2822,26 +2822,26 @@ storiesOf('Project Card', module)
         `
     }))
 
-storiesOf('Sending Funds(not finished)', module)
-    .add('default', () => ({
-        components: {
-            SendingFundsPopup: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.SendingFundsPopup),
-            Button: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.Button)
-        },
-        data() {
-            return {
-                modalActive: false
-            }
-        },
-        methods: {
-            showModalHandler: function() {
-                this.modalActive = !this.modalActive
-            }
-        },
-        template: data.SendingFunds.template
-    }))
+// storiesOf('Sending Funds(not finished)', module)
+//     .add('default', () => ({
+//         components: {
+//             SendingFundsPopup: () =>
+//                 import ('@ericmuyser/hyper-ui').then(m => m.SendingFundsPopup),
+//             Button: () =>
+//                 import ('@ericmuyser/hyper-ui').then(m => m.Button)
+//         },
+//         data() {
+//             return {
+//                 modalActive: false
+//             }
+//         },
+//         methods: {
+//             showModalHandler: function() {
+//                 this.modalActive = !this.modalActive
+//             }
+//         },
+//         template: data.SendingFunds.template
+//     }))
 
 storiesOf('User Card', module)
     .add('default', () => ({
@@ -2967,7 +2967,7 @@ storiesOf('Product Card', module)
     .add('basic', () => ({
         components: {
             ProductCard: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
+                import ('@ericmuyser/hyper-ui').then(m => m.ProductCard)
         },
         data: () => ({
             products: productsCardsData
@@ -2989,7 +2989,7 @@ storiesOf('Product Card', module)
     .add('dynamic', () => ({
         components: {
             ProductCardDynamic: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
+                import ('@ericmuyser/hyper-ui').then(m => m.ProductCardDynamic)
         },
         data: () => ({
             products: productsCardsData

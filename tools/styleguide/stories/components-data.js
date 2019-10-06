@@ -360,7 +360,7 @@ export const SendingFunds = {
             <div class="col-8">
                 <Button @click="showModalHandler" status="warning" c_class="ml-1">Show Sending Funds Modal</Button>
 
-                <SendFundsPopup :activated="modalActive" @close="showModalHandler">
+                <SendingFundsPopup :activated="modalActive" @close="showModalHandler">
                     <template slot="agreementText">
                         <h1>Terms and Conditions for <span class="highlight preview_company_name">BlockHub</span>
                             </h1>
@@ -525,11 +525,13 @@ export const SendingFunds = {
                                 of
                                 any disputes.</p>
                     </template>
-                </SendFunds>
+                </SendingFundsPopup>
             </div>
         </div>
     `
 }
+
+
 export const ImagesExplorer = {
     images: [
         "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_f7861bd71e6c0c218d8ff69fb1c626aec0d187cf.1920x1080.jpg?t=1533676954",
