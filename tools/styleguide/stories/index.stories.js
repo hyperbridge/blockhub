@@ -2687,7 +2687,9 @@ storiesOf('Product Community', module)
     .add('post', () => ({
         components: {
             ProductCommunityPost: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.ProductCommunityPost)
+                import ('@ericmuyser/hyper-ui').then(m => m.ProductCommunityPost),
+            Img: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Img)
         },
         data: () => data.ProductCommunity,
         template: `
@@ -2880,7 +2882,7 @@ storiesOf('Gallery', module)
     .add('screen-gallery', () => ({
         components: {
             ScreenGallery: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
+                import ('@ericmuyser/hyper-ui').then(m => m.ScreenGallery)
         },
         data() {
             return {
