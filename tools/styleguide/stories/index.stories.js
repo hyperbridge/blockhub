@@ -3061,7 +3061,7 @@ storiesOf('Curators Reviews', module)
     .add('review', () => ({
         components: {
             CuratorReview: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.PromotionBoxItem)
+                import ('@ericmuyser/hyper-ui').then(m => m.CuratorReview)
         },
         data: () => ({
             review: curatorReview
@@ -3092,14 +3092,14 @@ storiesOf('Images Explorer', module)
         components: {
             ImagesExplorer: () =>
                 import ('@ericmuyser/hyper-ui').then(m => m.ImagesExplorer),
-            ModalList: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.ModalList)
+            Modal: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Modal)
         },
         data: () => object('Data', data.ImagesExplorer),
         template: `
-            <ModalList>
+            <Modal>
                 <ImagesExplorer :images="images" />
-            </ModalList>
+            </Modal>
         `
     }))
 
@@ -3201,7 +3201,8 @@ storiesOf('Game Series', module)
                 tags: ['Nunc', 'Praesent', 'Vestibulum'],
                 images: ['https://via.placeholder.com/400x250', 'https://via.placeholder.com/400x250'],
                 price: 33.49,
-                list: [{
+                list: [
+                    {
                         title: 'Dragon Age: Inquisition',
                         company: 'BioWare',
                         stars: 5,
@@ -3498,7 +3499,9 @@ storiesOf('Progress Bar', module)
     .add('fancy', () => ({
         components: {
             ProgressBarFancy: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.ProgressBarFancy)
+                import ('@ericmuyser/hyper-ui').then(m => m.ProgressBarFancy),
+            Input: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.Input),
         },
         data() {
             return {
@@ -3582,8 +3585,8 @@ storiesOf('Community Spotlight', module)
 storiesOf('Product Review', module)
     .add('default', () => ({
         components: {
-            Review: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.Review)
+            ProductReview: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProductReview)
         },
         data() {
             return {
@@ -3609,23 +3612,23 @@ storiesOf('Product Review', module)
         },
         template: `
             <div class="padding-50">
-                <Review :review="review" />
+                <ProductReview :review="review" />
             </div>
         `
     }))
     .add('form', () => ({
         components: {
-            ReviewForm: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.ReviewForm)
+            ProductReviewForm: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProductReviewForm)
         },
-        template: `<div class="p-4" style="width: 1000px;"><ReviewForm /></div>`
+        template: `<div class="p-4" style="width: 1000px;"><ProductReviewForm /></div>`
     }))
     .add('view review', () => ({
         components: {
-            ViewReview: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.ViewReview),
+            ProductViewReview: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.ProductViewReview),
         },
-        template: `<div class='p-5' style="width: 1000px"><ViewReview /></div>`
+        template: `<div class='p-5' style="width: 1000px"><ProductViewReview /></div>`
     }))
 
 storiesOf('Banner', module)
