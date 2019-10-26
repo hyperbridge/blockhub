@@ -3660,60 +3660,6 @@ storiesOf('Banner', module)
             }
         },
         template: `<div class="padding-50" style="width: 900px">
-                    <div class="row mb-2">
-                        <!--<div class="col-4">-->
-                            <!--<div class="form-group">-->
-                                <!--<label class="text-white">Logo Position</label>-->
-                                <!--<select class="form-control" id="logo_position" v-model="logoPosition">-->
-                                    <!--<optgroup label="top">-->
-                                        <!--<option value="left top">left top</option>-->
-                                        <!--<option value="center top">center top</option>-->
-                                        <!--<option value="right top">right top</option>-->
-                                    <!--</optgroup>-->
-                                    <!--<optgroup label="center">-->
-                                        <!--<option value="left center">left center</option>-->
-                                        <!--<option value="center center">center center</option>-->
-                                        <!--<option value="right center">right center</option>-->
-                                    <!--</optgroup>-->
-                                    <!--<optgroup label="bottom">-->
-                                        <!--<option value="left bottom">left bottom</option>-->
-                                        <!--<option value="center bottom">center bottom</option>-->
-                                        <!--<option value="right bottom">right bottom</option>-->
-                                    <!--</optgroup>-->
-                                <!--</select>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="col-4">-->
-                        <!--<label class="text-white">Logo Size</label>-->
-                            <!--<select class="form-control" id="logo_size" v-model="logoSize">-->
-                                    <!--<option value="sm">sm</option>-->
-                                    <!--<option value="md">md</option>-->
-                                    <!--<option value="lg">lg</option>-->
-                                    <!--<option value="xl">xl</option>-->
-                            <!--</select>-->
-                        <!--</div>-->
-                        <!--<div class="col-4">-->
-                        <!--<label class="text-white">Background Position</label>-->
-                            <!--<select class="form-control" id="background_position" v-model="bgPosition">-->
-                                <!--<optgroup label="top">-->
-                                    <!--<option value="left top">left top</option>-->
-                                    <!--<option value="center top">center top</option>-->
-                                    <!--<option value="right top">right top</option>-->
-                                <!--</optgroup>-->
-                                <!--<optgroup label="center">-->
-                                    <!--<option value="left center">left center</option>-->
-                                    <!--<option value="center center">center center</option>-->
-                                    <!--<option value="right center">right center</option>-->
-                                <!--</optgroup>-->
-                                <!--<optgroup label="bottom">-->
-                                    <!--<option value="left bottom">left bottom</option>-->
-                                    <!--<option value="center bottom">center bottom</option>-->
-                                    <!--<option value="right bottom">right bottom</option>-->
-                                <!--</optgroup>-->
-                            <!--</select>-->
-                        <!--</div>-->
-                    </div>
-
                     <Banner :slides="slides" />
             </div>`
     }))
@@ -3881,7 +3827,7 @@ storiesOf('Timeline', module)
         },
         template: `<div class="row">
                 <div class="col">
-                    <TimelineItem :item="item" />
+                    <TimelineItem :item="item" :project_id="3452" />
                 </div>
             </div>
         `
