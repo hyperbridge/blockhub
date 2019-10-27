@@ -3827,7 +3827,7 @@ storiesOf('Timeline', module)
         },
         template: `<div class="row">
                 <div class="col">
-                    <TimelineItem :item="item" :project_id="3452" />
+                    <TimelineItem :item="item" :projectId="3452" />
                 </div>
             </div>
         `
@@ -4338,8 +4338,8 @@ storiesOf('List', module)
 storiesOf('Game Installer Modal', module)
     .add('default', () => ({
         components: {
-            GameInstaller: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.GameInstaller)
+            GameInstallerModal: () =>
+                import ('@ericmuyser/hyper-ui').then(m => m.GameInstallerModal)
         },
         data() {
             return {
@@ -4369,7 +4369,7 @@ storiesOf('Game Installer Modal', module)
         template: `
         <div class="row p-5">
             <div class="col-5">
-                <GameInstaller
+                <GameInstallerModal
                     :activated="true"
                     :win="win"
                     :mac="mac"
@@ -4380,7 +4380,7 @@ storiesOf('Game Installer Modal', module)
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vulputate
                     et tellus ac scelerisque. Duis vel suscipit orci, vel tristique elit.
                     Praesent sollicitudin volutpat finibus.
-                </GameInstaller>
+                </GameInstallerModal>
             </div>
         </div>
         `
@@ -4402,509 +4402,17 @@ storiesOf('Emoji', module)
             EmojiSingle: () =>
                 import ('@ericmuyser/hyper-ui').then(m => m.EmojiSingle)
         },
+        data(){
+            return{
+                count: 87
+            }
+        },
         template: `
         <div class="p-5">
-            <EmojiSingle count="99" />
+            <EmojiSingle :count="count" @click="count++" />
         </div>`
     }))
 
-storiesOf('Landing Page', module)
-    .add('block title', () => ({
-        components: {
-            LandingBlockTitle: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitle)
-        },
-        template: `
-        <div class="p-5">
-            <LandingBlockTitle>
-                Mutation Mode
-            </LandingBlockTitle>
-        </div>
-            `
-    }))
-    .add('block title with shadow', () => ({
-        components: {
-            LandingBlockTitleShadow: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.shadow)
-        },
-        template: `
-        <div class="p-5">
-            <LandingBlockTitleShadow colorShadow="#f60">
-                Mutation Mode
-            </LandingBlockTitleShadow>
-        </div>
-            `
-    }))
-    .add('block title with gradient', () => ({
-        components: {
-            LandingBlockTitleGradient: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitleGradient),
-            LandingBlockTitle: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitle),
-            LandingBlockTitleShadow: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.shadow)
-        },
-        template: `
-        <div class="p-5">
-            <LandingBlockTitleGradient>
-                <LandingBlockTitle slot="before" class="mb-1" fontSize="16" fontWeight="bold">
-                    NEW
-                </LandingBlockTitle>
-                Mutation Mode
-            </LandingBlockTitleGradient>
-            <hr />
-            <LandingBlockTitleGradient align="right">
-                Mutation Mode
-                <LandingBlockTitleShadow slot="after" class="mt-1" fontSize="16" fontWeight="bold">
-                    Before title text
-                </LandingBlockTitleShadow>
-            </LandingBlockTitleGradient>
-            <hr />
-            <LandingBlockTitleGradient align="center">
-                Mutation Mode
-            </LandingBlockTitleGradient>
-        </div>
-        `
-    }))
-    .add('divider', () => ({
-        components: {
-            LandingDivider: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingDivider),
-        },
-        template: `
-        <div class="p-5">
-            <LandingDivider />
-        </div>
-        `
-    }))
-    .add('level', () => ({
-        components: {
-            BlockContentLevel: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.BlockContentLevel),
-        },
-        template: `
-        <div class="p-5">
-            <BlockContentLevel :number="92" textPosition="left">
-                Caster Pack 5 (2017)
-            </BlockContentLevel>
-            <hr />
-            <BlockContentLevel size="md" :number="7" textPosition="right">
-                Caster Pack 5 (2017)
-            </BlockContentLevel>
-            <hr />
-            <BlockContentLevel size="lg" :number="1982" textPosition="right">
-                Caster Pack 5 (2017)
-            </BlockContentLevel>
-            <hr />
-        </div>
-            `
-    }))
-    .add('feature item', () => ({
-        components: {
-            BlockContentWithFeatureItem: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.BlockContentWithFeatureItem),
-        },
-        data() {
-            return {
-                items: [{
-                        img: 'https://i.ytimg.com/vi/6ki31hkQk8c/maxresdefault.jpg',
-                        title: 'Donec placerat turpis est',
-                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in nulla sed ante maximus fringilla id at mi. Aenean nec elit ac ex porta volutpat. In porta porttitor purus a congue. Aenean sit amet lectus ac purus fringilla rutrum lobortis eu lorem. Quisque accumsan et odio vel ullamcorper.'
-                    },
-                    {
-                        img: 'http://cdn.dota2.com/apps/dota2/images/blog/play/dota_heroes.png',
-                        title: 'Aenean suscipit',
-                        text: 'Nulla facilisi. Donec eu ligula a massa accumsan dignissim a quis orci. Aenean suscipit, turpis eget tempor mattis, turpis tellus tristique nibh, eu lobortis eros libero quis nisl. Donec in maximus tellus.'
-                    },
-                    {
-                        img: 'https://dota2.pl/wp-content/uploads/2017/09/dota_2_clash_of_heroes_by_agussw-d8yukg0.jpg',
-                        title: 'Donec sodales in dui nec vestibulum',
-                        text: 'Nulla ultrices fermentum tristique. Integer a venenatis lacus, eget pretium lectus. Suspendisse potenti. Vestibulum sodales ultricies mattis. Donec sodales in dui nec vestibulum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.'
-                    }
-                ]
-            }
-        },
-        template: `
-        <div class="p-5 d-flex" style="width: 1200px;">
-            <div v-for="item in items" class="px-3" style="width: 33.3%;">
-                <BlockContentWithFeatureItem :title="item.title" :img="item.img">
-                    {{ item.text }}
-                </BlockContentWithFeatureItem>
-            </div>
-        </div>
-        `
-    }))
-    .add('benefactor', () => ({
-        components: {
-            LandingBenefactor: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingBenefactor),
-        },
-        data() {
-            return {
-                items: [{
-                        src: 'http://dotafun.su/images/aeee/b_keeperofthelight.png',
-                        name: 'Immortal I'
-                    },
-
-                    {
-                        src: 'https://u.kanobu.ru/editor/images/82/c2a25ffa-c77c-44e2-a616-c6d5e0e6d4a3.png',
-                        name: 'Immortal II'
-                    },
-                    {
-                        src: 'https://i.pinimg.com/originals/44/61/88/44618879e898abbbec878eda26551d52.png',
-                        name: 'Immortal III',
-                        includesList: ['200 x Fire Lotus Belt', '200 x Golden Ornithomancer Mantle', '200 x Dragonclaw Hook', '200 x Rainmaker', '200 x Pipe of Dezun', '200 x Perceptions of the Eternal Mind',
-                            '200 x Kantusa the Script Sword', '200 x Shattered Greatsword', '200 x Golden Gravelmaw', '100 x Golden Grasping Bludgeon', '100 x Golden Shards of Exile', '100 x Golden Staff of Perplex',
-                            '100 x Golden Huntling', '100 x Golden Severing Crest', '100 x Golden Sullen Hollow', '100 x Golden Lamb to the Slaughter', '100 x Lockjaw the Boxhound'
-                        ]
-                    },
-
-                    {
-                        src: 'http://cdn.dota2.com/apps/dota2/images/international2017/battlepass/immortals/c_legioncommander.png?v=4054578',
-                        name: 'Immortal IV'
-                    }
-                ]
-            }
-        },
-        template: `
-            <div class="p-5" style="width: 1000px;">
-                <LandingBenefactor :items="items" />
-            </div>
-        `
-    }))
-    .add('reward list', () => ({
-        components: {
-            LandingRewardList: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingRewardList),
-        },
-        data() {
-            return {}
-        },
-        template: `
-            <div class="p-5" style="width: 1000px;">
-                <LandingRewardList>
-                    <template slot="list">
-                        <div v-for="(item, index) in list" :key="index" class="my-1" style="font-size: 15px; opacity: .8">
-                            {{ item }}
-                        </div>
-                    </template>
-                </LandingRewardList>
-            </div>
-        `
-    }))
-    .add('page', () => ({
-        components: {
-            LandingBlock: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingBlock),
-            LandingBlockTitle: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitle),
-            LandingBlockTitleShadow: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitleShadow),
-            LandingBlockTitleGradient: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingBlockTitleGradient),
-            LandingFeatureItem: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingFeatureItem),
-            LandingTabs: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingTabs),
-            LandingTab: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingTab),
-            LandingSlider: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingSlider),
-            LandingGradientBlock: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingGradientBlock),
-            LandingBenefactor: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingBenefactor),
-            LandingLevel: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingLevel),
-            LandingRewardList: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingRewardList),
-            LandingDivider: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingDivider),
-            LandingButton: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.LandingButton),
-        },
-        data() {
-            return {
-                items: [{
-                        img: 'https://i.ytimg.com/vi/6ki31hkQk8c/maxresdefault.jpg',
-                        title: 'Donec placerat turpis est',
-                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in nulla sed ante maximus fringilla id at mi. Aenean nec elit ac ex porta volutpat. In porta porttitor purus a congue. Aenean sit amet lectus ac purus fringilla rutrum lobortis eu lorem. Quisque accumsan et odio vel ullamcorper.'
-                    },
-                    {
-                        img: 'http://cdn.dota2.com/apps/dota2/images/blog/play/dota_heroes.png',
-                        title: 'Aenean suscipit',
-                        text: 'Nulla facilisi. Donec eu ligula a massa accumsan dignissim a quis orci. Aenean suscipit, turpis eget tempor mattis, turpis tellus tristique nibh, eu lobortis eros libero quis nisl. Donec in maximus tellus.'
-                    },
-                    {
-                        img: 'https://dota2.pl/wp-content/uploads/2017/09/dota_2_clash_of_heroes_by_agussw-d8yukg0.jpg',
-                        title: 'Donec sodales in dui nec vestibulum',
-                        text: 'Nulla ultrices fermentum tristique. Integer a venenatis lacus, eget pretium lectus. Suspendisse potenti. Vestibulum sodales ultricies mattis. Donec sodales in dui nec vestibulum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.'
-                    }
-                ],
-                slides: [{
-                        id: 1,
-                        type: 'video',
-                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
-                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.webm?v=4806847',
-                        title: 'Span of sorrow',
-                        subtitle: 'Back item with custom Sunder effect'
-                    },
-                    {
-                        id: 2,
-                        type: 'video',
-                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
-                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.webm?v=4806847',
-                        subtitle: 'Emereld Conquest',
-                        title: 'Nulla ultrices fermentum tristique'
-                    },
-                    {
-                        id: 3,
-                        type: 'video',
-                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
-                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.webm?v=4806847',
-                        subtitle: 'Emereld Conquest',
-                        title: 'Morbi in nulla sed'
-                    },
-                    {
-                        id: 4,
-                        type: 'video',
-                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
-                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.webm?v=4806847',
-                        subtitle: 'Emereld Conquest',
-                        title: 'Donec eu ligula a massa accumsan dignissim'
-                    },
-                    {
-                        id: 5,
-                        type: 'video',
-                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
-                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.webm?v=4806847',
-                        subtitle: 'Emereld Conquest',
-                        title: 'Aenean suscipit'
-                    },
-                    {
-                        id: 6,
-                        type: 'video',
-                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
-                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.webm?v=4806847',
-                        subtitle: 'Emereld Conquest',
-                        title: 'Vestibulum dignissim tincidunt'
-                    },
-                    {
-                        id: 7,
-                        type: 'video',
-                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
-                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.webm?v=4806847',
-                        subtitle: 'Emereld Conquest',
-                        title: 'Proin efficitur ut ipsum'
-                    },
-                    {
-                        id: 8,
-                        type: 'video',
-                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
-                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.webm?v=4806847',
-                        subtitle: 'Emereld Conquest',
-                        title: 'Mauris ex massa'
-                    },
-                    {
-                        id: 9,
-                        type: 'video',
-                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
-                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.webm?v=4806847',
-                        subtitle: 'Emereld Conquest',
-                        title: 'Maecenas suscipit ante'
-                    }
-                ],
-                benefactorItems: [{
-                        src: 'http://dotafun.su/images/aeee/b_keeperofthelight.png',
-                        name: 'Immortal I'
-                    },
-
-                    {
-                        src: 'https://u.kanobu.ru/editor/images/82/c2a25ffa-c77c-44e2-a616-c6d5e0e6d4a3.png',
-                        name: 'Immortal II'
-                    },
-                    {
-                        src: 'https://i.pinimg.com/originals/44/61/88/44618879e898abbbec878eda26551d52.png',
-                        name: 'Immortal III',
-                        includesList: ['200 x Fire Lotus Belt', '200 x Golden Ornithomancer Mantle', '200 x Dragonclaw Hook', '200 x Rainmaker', '200 x Pipe of Dezun', '200 x Perceptions of the Eternal Mind',
-                            '200 x Kantusa the Script Sword', '200 x Shattered Greatsword', '200 x Golden Gravelmaw', '100 x Golden Grasping Bludgeon', '100 x Golden Shards of Exile', '100 x Golden Staff of Perplex',
-                            '100 x Golden Huntling', '100 x Golden Severing Crest', '100 x Golden Sullen Hollow', '100 x Golden Lamb to the Slaughter', '100 x Lockjaw the Boxhound'
-                        ]
-                    },
-
-                    {
-                        src: 'http://cdn.dota2.com/apps/dota2/images/international2017/battlepass/immortals/c_legioncommander.png?v=4054578',
-                        name: 'Immortal IV'
-                    }
-                ],
-                rewardList: [
-                    '1 - Immortal Treasure I 2018',
-                    '1 - Immortal Treasure II 2018',
-                    '1 - Immortal Treasure III 2018',
-                    '1 - The International 2018 Music Pack',
-                    '1 - The International 2018 Cursor Pack',
-                    '1 - Eimer Hillburrow Courier',
-                    '1 - Trailgazer Ward Set',
-                    '1 - Taunt: Cold Breakfast',
-                    '1 - International 2018 Player Card Pack x5',
-                    '1 - Pro Circuit Predictions Unlocked',
-                    '1 - Ranked Match Team Challenge Token',
-                    '5 - Ranked Match Team Challenge Token',
-                    '8 - International 2018 Battle Point Tribute - 250 Tokens x2',
-                    '12 - International 2018 Player Card Pack x5',
-                    '24 - Chat Wheel: Crash and burn',
-                    '36 - Ranked Match Team Challenge Token'
-                ]
-            }
-        },
-        template: `
-            <div>
-                <LandingBlock
-                    title="Some content block title"
-                    horizontal="center"
-                    bgPosition="top center"
-                    minHeight="400px"
-                    bgImage="https://s1.1zoom.ru/b5050/840/Magic_Castles_Mountains_506826_1920x1080.jpg">
-                    <div class="col-10 text-center">
-                        <LandingBlockTitle fontSize="42" color="#f8e6c7" class="text-uppercase">
-                            Battle level rewards
-                        </LandingBlockTitle>
-
-                         <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat.
-                        Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio.
-                        Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare.
-                        Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id.
-                        Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
-                    </div>
-                    <div class="col-10 margin-top-30">
-                        <LandingBlockTitleGradient align="center" size="md" fontSize="32" class="text-uppercase">
-                            The 2018 immortals
-                        </LandingBlockTitleGradient>
-
-                        <LandingTabs class="margin-top-20">
-                            <p class="text-center">
-                                 Nunc gravida placerat erat, ac pharetra felis malesuada id.<br>
-                                Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.
-                            </p>
-                            <LandingTab name="TREASURE I">
-                                Maecenas suscipit ante a leo convallis ornare.
-                                Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id.
-                                Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.
-                            </LandingTab>
-                            <LandingTab name="TREASURE II" selected>
-                                <c-landing-slider :items="slides" />
-                            </LandingTab>
-                            <LandingTab name="TREASURE III">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at condimentum risus.
-                                Integer viverra quam in ipsum posuere lobortis. Integer rhoncus gravida ante a aliquam. In aliquet ex eu nibh pulvinar varius. Suspendisse maximus a arcu at sagittis. Etiam et mauris volutpat diam consequat accumsan vitae non nisi. Sed dignissim odio metus, sit amet ullamcorper ligula blandit et. Donec ac justo a erat lacinia venenatis id eu nisl.
-                            </LandingTab>
-
-                            <LandingBlockTitle tag="div" fontSize="17" color="#5EA72B" class="text-center my-4">
-                                <div class="mb-1">TREASURE I: 1 - 10 - 22 - 34 - 46 - 80 - 220 (repeats every 30 levels)</div>
-                                <div class="mb-1">TREASURE II: 1 - 98 - 112 - 132 - 152 - 230 (repeats every 30 levels)</div>
-                                <div>TREASURE III: 1 - 164 - 178 - 194 - 206 - 240 (repeats every 30 levels)</div>
-                            </LandingBlockTitle>
-
-                            <LandingGradientBlock class="mt-4">
-                                <LandingBlockTitle tag="div" fontSize="16" color="#fff" class="text-center">
-                                    LIMITED MARKETABILITY
-                                </LandingBlockTitle>
-                                <p>
-                                    Maecenas suscipit ante a leo convallis ornare.
-                                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id.
-                                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.
-                                </p>
-                            </LandingGradientBlock>
-                        </LandingTabs>
-                    </div>
-                </LandingBlock>
-
-                <LandingDivider />
-
-                <LandingBlock
-                    horizontal="center"
-                    vertical="center"
-                    title="Some content block title"
-                    minHeight="50vh"
-                    bgImage="http://dota2-i.ru/assets/images/resources/1671/1366x768-2042847-shadow-fiend-dota-2-wallpaper-hd.jpg">
-                    <div class="col-12">
-                        <LandingBlockTitleGradient align="center" size="md" fontSize="32" class="text-uppercase">
-                            TRUST OF THE BENEFACTOR
-                        </LandingBlockTitleGradient>
-                        <LandingBenefactor :items="benefactorItems">
-
-                        </LandingBenefactor>
-                    </div>
-                    <div class="col-3 text-right">
-                        <BlockContentLevel :number="92" size="md" textPosition="left" textColor="#00662e">
-                            LEVEL
-                        </BlockContentLevel>
-                    </div>
-                    <div class="col-9">
-                         <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat.
-                        Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio.
-                        Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare.
-                        Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id.
-                        Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
-                    </div>
-                </LandingBlock>
-
-                <LandingDivider />
-
-                <LandingBlock
-                    title="Some content block title"
-                    horizontal="center"
-                    vertical="center"
-                    bgImage="https://steamcdn-a.akamaihd.net/apps/dota2/images/international2018/battlepass/bg_24.png">
-                    <div class="col-10">
-                        <LandingRewardList>
-                            <div class="d-flex justify-content-center w-100">
-                                <div class="text-center mx-3">
-                                    <c-landing-button class="margin-bottom-20" width="280">
-                                        Buy Battle Pass
-                                    </c-landing-button>
-                                    <LandingBlockTitle fontSize="13" color="#f8e6c7" class="text-uppercase">
-                                        LEVEL 1  $9.99 USD
-                                    </LandingBlockTitle>
-                                    <LandingBlockTitle fontSize="13" color="#f8e6c7" class="text-uppercase">
-                                        LEVEL 75  $36.99 USD
-                                    </LandingBlockTitle>
-                                </div>
-                                <div class="text-center mx-3">
-                                    <c-landing-button class="margin-bottom-20" width="280">
-                                        Buy Levels
-                                    </c-landing-button>
-                                    <LandingBlockTitle fontSize="13" color="#f8e6c7" class="text-uppercase">
-                                        5 LEVELS  $2.49 USD
-                                    </LandingBlockTitle>
-                                    <LandingBlockTitle fontSize="13" color="#f8e6c7" class="text-uppercase">
-                                        11 LEVELS  $4.99 USD
-                                    </LandingBlockTitle>
-                                    <LandingBlockTitle fontSize="13" color="#f8e6c7" class="text-uppercase">
-                                        24 LEVELS  $9.99 USD
-                                    </LandingBlockTitle>
-                                </div>
-                            </div>
-                            <template slot="list">
-                                <div v-for="(item, index) in rewardList" :key="index" class="my-1" style="font-size: 15px; opacity: .8">
-                                    {{ item }}
-                                </div>
-                            </template>
-                        </LandingRewardList>
-                    </div>
-                </LandingBlock>
-            </div>
-        `
-    }))
 
 storiesOf('Token Sale Box', module)
     .add('default', () => ({
@@ -4921,22 +4429,7 @@ storiesOf('Token Sale Box', module)
                 :soldDollars="23455424"
                 :soldTokens="243424234" />
         </div>`
-    }))
-    .add('type 2', () => ({
-        components: {
-            TokenSale2: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.TokenSale2),
-        },
-        template: `
-        <div class="p-5" style="width: 1200px;">
-            <TokenSale2
-                :hardCap="18000000"
-                :softCap="7500000"
-                :volume="1000000000"
-                :soldDollar="23455424"
-                :soldTokens="243424234" />
-        </div>`
-    }))
+    }));
 
 storiesOf('Guide', module)
     .add('default', () => ({
