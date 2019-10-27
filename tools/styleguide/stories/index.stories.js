@@ -4446,15 +4446,17 @@ storiesOf('Video Popup', module)
             VideoPopup: () =>
                 import ('@ericmuyser/hyper-ui').then(m => m.VideoPopup),
             Author: () =>
-                import ('@ericmuyser/hyper-ui').then(m => m.Author)
+                import ('@ericmuyser/hyper-ui').then(m => m.Author),
+            'Button': () => import('@ericmuyser/hyper-ui').then(m => m.Button),
         },
         data() {
             return {
-                video: [{
+                video: {
                     src: 'https://static.videezy.com/system/resources/previews/000/004/944/original/Magical_Tree_4K_Living_Background.mp4',
                     format: 'mp4'
-                }],
-                comments: [{
+                },
+                comments: [
+                    {
                         text: 'Lorem ipsum dolor si',
                         author: {
                             name: 'Satoshi',
@@ -4696,6 +4698,7 @@ storiesOf('Wallet', module)
                 import ('@ericmuyser/hyper-ui').then(m => m.WalletEdit),
             WalletToken: () =>
                 import ('@ericmuyser/hyper-ui').then(m => m.WalletToken),
+            'Button': () => import('@ericmuyser/hyper-ui').then(m => m.Button),
         },
         data: () => data.WalletData,
         template: `
