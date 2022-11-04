@@ -3324,8 +3324,8 @@ browserslist@^4.0.0, browserslist@^4.6.0, browserslist@^4.6.2, browserslist@^4.6
 
 bs4-summernote@^0.8.10:
   version "0.8.10"
-  resolved "https://registry.yarnpkg.com/bs4-summernote/-/bs4-summernote-0.8.10.tgz#e8bacd3a05d02e4c55642c747e83ca663cd280a2"
-  integrity sha512-5uB0ga5DHWMdDPfT3WDRqQKcvZr8uZ8QHI6X9XzX+pShejadL0VdcJPhJY5E7ugNnXJ+3qXIVlYT7DI+Pecy9A==
+  resolved "https://registry.yarnpkg.com/summernote/-/summernote-0.8.10.tgz#21a5d7f18a3b07500b58b60d5907417a54897520"
+  integrity sha512-1b4ESCiY9HW+12HYXCntjbThVgeYNaYKfKL7pC4Jqjo/WDS4G4mMtd2kPuCw56HxeRT67d+zlehopaE+M4o6aQ==
 
 bs58@^2.0.1:
   version "2.0.1"
