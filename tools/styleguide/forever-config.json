@@ -1,0 +1,14 @@
+{
+    "uid": "app",
+    "max": 999999999999,
+    "minUptime": 0,
+    "spinSleepTime": 30000,
+    "append": true,
+    "watch": false,
+    "command": "start-storybook -s ../../clients/web/ui -p 6006 --ci",
+    "script": "",
+    "logFile": "./forever-script-log.log",
+    "outFile": "./forever-script-out.log",
+    "errFile": "./forever-script-err.log",
+    "args": []
+  }
