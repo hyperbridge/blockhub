@@ -9,7 +9,7 @@
                         Game Drawer
                     </div>
                     <div>
-                        <strong>482</strong>
+                        <strong>{{ games.length }}</strong>
                         games in your drawer
                     </div>
                 </div>
@@ -41,10 +41,14 @@
                     :key="index"
                     class="col-12 col-md-6 col-lg-4 col-xl-3 py-3">
                     <c-game-card
-                        :game="game"
+                        :name="game.name"
+                        :image="game.images.mediumTile"
+                        :data-demo-chest-game="game.id"
                         :online="online"
                         :favorites="favorites"
-                        :isLoading="(index == 2 ) ? true : false" />
+                        :isLoading="!$demo && index === 2"
+                        @continue="$router.push(`/product/${game.id}`)"
+                        @load="$router.push(`/product/${game.id}`)" />
                 </div>
             </div>
             <div class="row align-items-stretch margin-top-30">
@@ -55,7 +59,7 @@
                         :online="online"
                         :favorites="favorites"
                         :game="game"
-                        :isLoading="(index == 2 ) ? true : false" />
+                        :isLoading="!$demo && index === 2" />
                 </div>
             </div>
         </div>
@@ -128,7 +132,7 @@ export default {
         selectableRating() {
         },
         games() {
-            return this.$store.state.marketplace.products
+            return Object.values(this.$store.state.marketplace.products).filter(game => game.name.toLowerCase().includes(this.phrase.toLowerCase()))
         }
     }
 }

@@ -39,7 +39,10 @@ try {
             }
             page.on('pageerror', error => errors.push(error.message))
             page.on('console', message => { if (message.type() === 'error') errors.push(message.text()) })
-            page.on('response', response => { if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`) })
+            page.on('response', response => {
+                if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`)
+                else if (response.status() >= 200 && response.status() < 300 && response.request().resourceType() === 'image' && !response.headers()['content-type']?.startsWith('image/')) errors.push(`Non-image response (${response.status()}, ${response.headers()['content-type']}) for ${response.url()}`)
+            })
             await page.route('**/*', request => {
                 const target = request.request().url()
                 if (/^https?:/.test(target) && new URL(target).origin !== new URL(url).origin) {
@@ -102,7 +105,7 @@ try {
                 errors.push(error.message)
                 result.passed = false
             }
-            if (!result.passed || ['/account/signup', '/download', '/assets', '/curators', '/marketplace/home', '/realms', '/community/forums', '/projects', '/profile/1', '/sitemap'].includes(route)) {
+            if (!result.passed || ['/account/signup', '/download', '/assets', '/chest', '/curators', '/marketplace/home', '/realms', '/community/forums', '/projects', '/profile/1', '/sitemap'].includes(route)) {
                 await page.screenshot({ path: path.join(output, `${route.replace(/[^a-z0-9]+/gi, '-') || 'home'}.png`) })
             }
             results.push(result)
