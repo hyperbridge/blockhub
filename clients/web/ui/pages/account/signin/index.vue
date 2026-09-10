@@ -7,7 +7,7 @@
         <div
             id="content"
             class="content login-container"
-            hidden>
+            :hidden="!$demo">
             <div class="container">
                 <div class="col-12">
                     <p
@@ -27,12 +27,14 @@
                             <div class="h1 mb-4">
                                 Sign In
                             </div>
+                            <p v-if="$demo">Continue as Satoshi to explore a sample account. No password is needed or saved.</p>
 
                             <c-button
                                 status="outline-success"
                                 size="lg"
-                                @click="importAccountFile">
-                                Import Account
+                                data-demo-signin
+                                @click="$demo ? signIn() : importAccountFile()">
+                                {{ $demo ? 'Use Demo Account' : 'Import Account' }}
                             </c-button>
                         </div>
                     </div>
@@ -99,11 +101,12 @@ export default {
         }
     },
     mounted() {
-        this.$store.commit('application/activeModal', 'login')
+        if (!this.$demo) this.$store.commit('application/activeModal', 'login')
     },
     methods: {
         signIn() {
-            this.$store.dispatch('login')
+            if (this.$demo) this.$demo.signIn()
+            else this.$store.dispatch('login')
 
             this.$router.push({ path: '/' })
         },

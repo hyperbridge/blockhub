@@ -60,6 +60,7 @@ if (args[0] === '--serve') {
 const output = path.resolve(args[1] || '../../../.tmp/pages-proof')
 await fs.mkdir(output, { recursive: true })
 let browser
+let page
 const errors = []
 const requests = []
 const results = []
@@ -68,14 +69,18 @@ try {
         executablePath: process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
         headless: true
     })
-    const page = await browser.newPage({ viewport: { width: 2500, height: 1400 }, deviceScaleFactor: 1 })
+    page = await browser.newPage({ viewport: { width: 2500, height: 1400 }, deviceScaleFactor: 1 })
+    page.setDefaultTimeout(15000)
+    page.setDefaultNavigationTimeout(30000)
     page.on('pageerror', error => errors.push(error.stack))
     page.on('console', message => { if (message.type() === 'error') errors.push(message.text()) })
     page.on('response', response => { if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`) })
     page.on('request', request => requests.push(request.url()))
     await page.goto(url, { waitUntil: 'networkidle' })
     await page.waitForSelector('[data-demo-notice]', { timeout: 15000 })
+    if (!process.env.DEMO_INTERACTIONS_ONLY) {
     for (const [name, route] of [['store', '/'], ['game', '/product/1'], ['games', '/games'], ['collections', '/collections'], ['collection', '/collection/1']]) {
+        console.log(JSON.stringify({ checking: name, route }))
         if (route !== '/') {
             const link = page.locator(`a[href$="#${route}"]`).first()
             await link.click()
@@ -111,6 +116,7 @@ try {
     assert.equal(await page.evaluate(() => window.$nuxt.$route.path), '/product/3')
     assert.match(await page.locator('#page-content').innerText(), /DOOM/)
     for (const id of [2, 5, 10, 22]) {
+        console.log(JSON.stringify({ checking: 'product', id }))
         await page.goto(`${url}#/product/${id}`, { waitUntil: 'networkidle' })
         await page.waitForFunction(expected => {
             const image = document.querySelector('.screen-gallery__main-img img')
@@ -122,6 +128,7 @@ try {
         if (brokenImages.length) await page.screenshot({ path: path.join(output, `product-${id}-failure.png`) })
         assert.deepEqual(brokenImages, [])
     }
+    }
     const readOnly = await page.evaluate(async () => {
         try {
             await window.$nuxt.$api.service('products').create({ id: 999, name: 'Unexpected mutation' })
@@ -131,11 +138,76 @@ try {
         }
     })
     assert.equal(readOnly, true, 'The demo must reject backend writes')
+    console.log(JSON.stringify({ checking: 'signup' }))
+    await page.goto(`${url}#/`, { waitUntil: 'networkidle' })
+    assert.match(await page.locator('[data-demo-header-signup]').getAttribute('href'), /#\/account\/signup$/)
+    await page.locator('[data-demo-header-signup]').click()
+    await page.waitForSelector('[data-demo-signup-notice]')
+    assert.equal(await page.locator('input[name="email"]').inputValue(), 'player@example.com')
+    await page.screenshot({ path: path.join(output, 'signup.png') })
+    await page.locator('[data-demo-signup-next]').click()
+    await page.waitForSelector('[data-demo-signup-finish]')
+    await page.waitForFunction(() => {
+        let element = document.querySelector('[data-demo-signup-finish]')
+        if (!element) return false
+        for (; element; element = element.parentElement) {
+            if (Number(getComputedStyle(element).opacity) < 0.99) return false
+        }
+        return true
+    })
+    assert.equal(await page.evaluate(() => window.$nuxt.$store.state.application.signedIn), true)
+    await page.screenshot({ path: path.join(output, 'signup-success.png') })
+    await page.locator('[data-demo-signup-finish]').click()
+    await page.waitForFunction(() => window.$nuxt.$route.path === '/profile/1')
+    console.log(JSON.stringify({ checking: 'download' }))
+    assert.match(await page.locator('[data-demo-header-download]').getAttribute('href'), /#\/download$/)
+    await page.locator('[data-demo-header-download]').click()
+    await page.waitForSelector('[data-demo-download]')
+    await page.locator('[data-demo-download]').click()
+    await page.waitForSelector('[data-demo-download-result]')
+    assert.equal(await page.evaluate(() => window.$nuxt.$route.path), '/download')
+    await page.screenshot({ path: path.join(output, 'download.png') })
+    console.log(JSON.stringify({ checking: 'collection item' }))
+    await page.goto(`${url}#/collection/1`, { waitUntil: 'networkidle' })
+    await page.locator('[data-demo-asset="1"]').first().click()
+    await page.waitForFunction(() => window.$nuxt.$route.path === '/asset/1')
+    await page.waitForLoadState('networkidle')
+    console.log(JSON.stringify({ checking: 'search' }))
+    await page.goto(`${url}#/search`, { waitUntil: 'networkidle' })
+    await page.locator('[data-demo-search]').fill('DOOM')
+    await page.waitForFunction(() => document.querySelectorAll('[data-demo-search-result]').length === 1 && document.querySelector('[data-demo-search-result="3"]'))
+    await page.locator('[data-demo-search-result="3"] [data-game-card-open="3"]').click()
+    await page.waitForFunction(() => window.$nuxt.$route.path === '/product/3')
+    console.log(JSON.stringify({ checking: 'sign out and sign in' }))
+    await page.goto(`${url}#/account/signout`, { waitUntil: 'networkidle' })
+    await page.locator('[data-demo-signout]').click()
+    await page.waitForFunction(() => window.$nuxt.$route.path === '/' && !window.$nuxt.$store.state.application.signedIn)
+    await page.locator('[data-demo-header-signin]').click()
+    await page.waitForFunction(() => window.$nuxt.$route.path === '/account/signin')
+    await page.locator('[data-demo-signin]').click()
+    await page.waitForFunction(() => window.$nuxt.$route.path === '/' && window.$nuxt.$store.state.application.signedIn)
+    await page.waitForLoadState('networkidle')
     assert.deepEqual(errors, [])
     assert.deepEqual(requests.filter(request => /^https?:/.test(request) && new URL(request).origin !== new URL(url).origin), [])
     console.log(JSON.stringify({ passed: true, routes: results.map(result => result.route), errors, requestCount: requests.length }))
+    await page.close()
+    await browser.close()
+    browser = null
+    await new Promise((resolve, reject) => {
+        const sweep = spawn(process.execPath, [path.join(path.dirname(fileURLToPath(import.meta.url)), 'routes-proof.mjs'), url, path.join(output, 'routes')], { stdio: 'inherit' })
+        sweep.once('error', reject)
+        sweep.once('exit', code => code === 0 ? resolve() : reject(new Error(`Route sweep exited ${code}`)))
+    })
+} catch (error) {
+    console.error(error.stack)
+    if (page && !page.isClosed()) {
+        try { await page.screenshot({ path: path.join(output, 'interaction-failure.png'), timeout: 5000 }) }
+        catch (captureError) { console.error(`Failure capture: ${captureError.message}`) }
+    }
+    throw error
 } finally {
     await fs.writeFile(path.join(output, 'results.json'), JSON.stringify({ results, errors, requests }, null, 2))
+    if (page && !page.isClosed()) await page.close()
     await browser?.close()
     if (server) server.kill('SIGTERM')
 }

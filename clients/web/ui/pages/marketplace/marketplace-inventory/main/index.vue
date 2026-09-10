@@ -117,7 +117,7 @@ export default {
     },
     computed: {
         assets() {
-            return this.$route.params.assets
+            return this.$store.getters['assets/inventoryAssets']
         },
         labelText() {
             return `${this.allowSelect ? 'Disable' : 'Enable'} on click selection`

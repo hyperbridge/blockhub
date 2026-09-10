@@ -104,9 +104,6 @@
                                 icon="fas fa-dollar" />
                         </div>
                     </div>
-                    <div v-for="resource in collection.resources">
-                        {{ resource.id }}
-                    </div>
                     <c-assets-grid :list="collection.resources" />
                     <c-pagination :pages="8" />
                 </c-block>
@@ -180,7 +177,8 @@ export default {
                 }))).map(res => res.data[0]).map(item => ({
                     id: item.id,
                     name: item.name,
-                    image: 'http://',
+                    image: item.image || item.meta.images.main,
+                    price: typeof item.price === 'object' ? item.price : { current: item.price },
                     //price: ,
                     count: 1
                 }))

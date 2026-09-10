@@ -1,6 +1,8 @@
 <template>
     <c-layout>
-        Coming soon
+        <c-block title="BlockHub News">
+            <c-news-articles :articles="articles" :index="0" />
+        </c-block>
     </c-layout>
 </template>
 
@@ -16,6 +18,10 @@ export default {
         }
     },
     components: {
+        'c-news-articles': () => import('~/components/news-list/articles').then(m => m.default || m)
+    },
+    computed: {
+        articles() { return this.$demo ? this.$demo.world.posts.map(post => ({ ...post, url: `/post/${post.id}` })) : [] }
     },
     data: () => ({
         wallets: []

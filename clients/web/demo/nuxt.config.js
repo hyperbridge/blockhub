@@ -29,17 +29,12 @@ module.exports = {
     router: {
         base,
         mode: 'hash',
-        extendRoutes(routes) {
-            // Browse the original storefront, catalog, collections and detail screens.
-            const included = ['/', '/games', '/product/:id', '/collections', '/collection/:id', '/search', '/marketplace', '/help', '/about']
-            routes.splice(0, routes.length, ...routes.filter(route => included.includes(route.path.replace(/\?$/, ''))))
-            routes.push({ path: '*', redirect: '/' })
-        }
+        extendRoutes: require('./routes.cjs')
     },
     generate: { dir: 'dist-pages', crawler: false, routes: ['/'], fallback: '404.html' },
     hooks: {
         'generate:done'(generator) {
-            fs.cpSync(path.resolve(__dirname, '../ui/assets/fonts/barlow'), path.join(generator.distPath, 'fonts/barlow'), { recursive: true })
+            fs.cpSync(path.resolve(__dirname, '../ui/assets/fonts'), path.join(generator.distPath, 'fonts'), { recursive: true })
             fs.writeFileSync(path.join(generator.distPath, '.nojekyll'), '')
         }
     },

@@ -100,7 +100,7 @@
 export default {
     head() {
         return {
-            title: `License ${license.name} | BlockHub`,
+            title: 'License | BlockHub',
             meta: [
                 { hid: 'description', name: 'description', content: `BlockHub license` },
                 { hid: 'keywords', name: 'keywords', content: 'license, blockchain, game, indie, developer' }

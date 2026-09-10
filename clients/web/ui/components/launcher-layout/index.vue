@@ -161,7 +161,7 @@
                             </c-dropdown>
                         </li>
                         <li v-if="!signedIn && !isLocked">
-                            <nuxt-link @click="$store.commit('application/activeModal', 'login')">
+                            <nuxt-link to="/account/signin">
                                 Sign In
                             </nuxt-link>
                         </li>

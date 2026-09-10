@@ -111,6 +111,7 @@ export default {
         'c-assets-grid': () => import('~/components/assets-grid-inventory').then(m => m.default || m)
     },
     mixins: [handleArray],
+    props: ['trx'],
     data() {
         return {
             yoursOffer: [...this.trx.yourOffer],
@@ -120,12 +121,6 @@ export default {
     computed: {
         id() {
             return this.$route.params.id
-        },
-        trxa() {
-            return this.$route.params.trxa
-        },
-        trx() {
-            return this.$route.params.trx
         },
         price() {
             const { yoursOffer, theirOffer } = this

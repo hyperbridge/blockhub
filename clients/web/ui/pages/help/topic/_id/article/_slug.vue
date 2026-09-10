@@ -26,6 +26,7 @@ export default {
     },
     computed: {
         article() {
+            if (this.$demo) return this.$demo.world.discussions.find(article => article.slug === this.$route.params.slug)
             return this.$store.getters['discussions/get'](this.$route.params.id)
         }
     },

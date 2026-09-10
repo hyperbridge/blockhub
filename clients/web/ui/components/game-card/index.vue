@@ -30,6 +30,7 @@
             <c-button
                 status="info"
                 :to="`/product/${id}`"
+                :data-game-card-open="id"
                 iconHide>
                 Check it out
             </c-button>

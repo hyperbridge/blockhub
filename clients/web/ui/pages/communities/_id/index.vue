@@ -15,9 +15,8 @@
                             </div>
                             <div>
                                 <strong class="mr-3">
-                                    {{ assets.length }} Items
+                                    {{ community.discussions.length }} Discussions
                                 </strong>
-                                Updated {{ timeAgo }}
                             </div>
                         </div>
                         <div class="community-header__stats">

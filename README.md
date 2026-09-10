@@ -18,8 +18,11 @@ This is the monorepo for BlockHub.
 
 The `github-pages-demo` branch restores the Vue 2 storefront from `master` for a
 static demo at `https://contextlimit.github.io/blockhub/`. The dedicated build
-uses six original game seed records, bundled artwork, and an in-memory Feathers
-adapter. Accounts, payments, downloads, and backend writes are disabled.
+uses six original games, 14 items, five collections, five profiles, three realms,
+crowdfunding, messages, offers, and bundled artwork through an in-memory Feathers
+adapter. The route directory at `#/sitemap` exposes the original screens. Signup
+creates a tab-local demo session and Download previews the platform chooser;
+payments, actual installers, publishing, and backend writes remain unavailable.
 
 With Node 24.14.1 and Google Chrome installed:
 
@@ -34,14 +37,19 @@ npm run preview
 The preview opens at `http://127.0.0.1:43117/blockhub/`. Set `CHROME_PATH` for a
 Chrome executable outside the default macOS location. `npm test` starts and
 stops its own Nuxt preview and headless Chrome, checks the storefront, game
-details, catalog, collections, refresh behavior, image loading and absence of
-external requests, and saves screenshots under `.tmp/pages-proof`.
+details, catalog, collections, signup, downloads, search, refresh behavior, image
+loading and absence of external requests, then sweeps every included demo route.
+It saves screenshots and structured results under `.tmp/pages-proof`.
 
 GitHub Pages must use **GitHub Actions** as its publishing source. The workflow
 builds and verifies pushes to `github-pages-demo`, then deploys `dist-pages`.
 Hash routes preserve navigation and refreshes under the repository subpath.
 The seed source and artwork identities are recorded in
-`clients/web/demo/artwork-manifest.json`.
+`clients/web/demo/artwork-manifest.json` and `clients/web/demo/recovery-manifest.json`.
+The latter records the original Git seed revision and the additional artwork
+from the recovered Portal UI. `node recover-fixtures.mjs /path/to/portal` in the
+demo directory rebuilds those sanitized seed fixtures and copies the pinned
+Portal Git objects. Runtime demo data contains no private keys or login secrets.
 
 ## Quick Links
 

@@ -123,7 +123,7 @@ export default {
     );
     @each $status, $hex in $statuses {
         $darker: darken($hex, 30%);
-        &.#{"trade-offer--status-" + $status} {
+        .#{"trade-offer--status-" + $status} {
             .trade-offer__bar {
                 background: $hex;
                 box-shadow: 0 0 5px 0 rgba($darker, .8);

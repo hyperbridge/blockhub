@@ -8,6 +8,7 @@
                 <div class="search__main">
                     <c-input-searcher
                         v-model="phrase"
+                        data-demo-search
                         class="w-100"
                         placeholder="Search for games"
                         aria-placeholder="Search for games" />
@@ -234,8 +235,11 @@
                     <div
                         v-for="(project, index) in resultsFiltered"
                         :key="index"
-                        class="p-2 col-12 col-md-6 col-lg-4 col-xl-3">
+                        class="p-2 col-12 col-md-6 col-lg-4 col-xl-3"
+                        :data-demo-search-result="project.id">
+                        <c-game-card v-if="$demo" :id="project.id" :image="project.meta.images.mediumTile" :description="project.description" :parentName="project.name" :parentDeveloper="project.meta.developer" />
                         <c-project-card
+                            v-else
                             :id="project.id"
                             :image="project.meta.images && project.meta.images.mediumTile"
                             :description="project.description"
@@ -268,6 +272,7 @@ import { debounce } from '@/mixins'
 
 export default {
     components: {
+        'c-game-card': () => import('~/components/game-card').then(m => m.default || m),
         'c-input-searcher': () => import('~/components/inputs/searcher').then(m => m.default || m),
         'c-project-card': () => import('~/components/project/card').then(m => m.default || m),
         'c-option-tag': () => import('~/components/option-tag').then(m => m.default || m),
@@ -370,7 +375,7 @@ export default {
                         query: this.query
                     }
                 ).then(res => {
-                    this.results = res.projects.data // [...this.getProductsQuery(this.query)]
+                    this.results = this.$demo ? res.data : res.projects.data
                     this.loading = false
                 })
                     .catch(e => {
@@ -409,10 +414,11 @@ export default {
     computed: {
         ...mapGetters({
             getProductsQuery: 'marketplace/getProductsQuery',
-            products: 'marketplace/productsArray',
             // productsTags: 'marketplace/productsTags',
-            languages: 'marketplace/productsLanguages'
         }),
+        products() { return this.$store.getters['products/list'] },
+        productsTags() { return this.$store.getters['tags/list'].map(tag => tag.name) },
+        languages() { return ['English', 'French', 'German', 'Spanish'] },
         genres(){
             return []
         },

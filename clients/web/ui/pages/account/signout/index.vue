@@ -15,7 +15,7 @@
                         @click="deleteAccount()">
                         Delete Account
                     </c-button>
-                    <c-button @click="signOut()">
+                    <c-button data-demo-signout @click="signOut()">
                         Sign Out
                     </c-button>
                 </div>
@@ -31,7 +31,8 @@ export default {
             this.$desktop.sendCommand('deleteAccountRequest')
         },
         signOut() {
-            this.$store.dispatch('logout')
+            if (this.$demo) this.$demo.signOut()
+            else this.$store.dispatch('logout')
             this.$router.push('/')
         }
     }

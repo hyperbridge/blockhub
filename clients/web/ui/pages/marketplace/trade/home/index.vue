@@ -49,7 +49,7 @@ export default {
     },
     computed: {
         transactions() {
-            return this.$route.params.transactions
+            return this.$store.getters['assets/transactionsArray']
         },
         transactionsX() {
             return
@@ -107,4 +107,3 @@ export default {
         padding: 20px;
     }
 </style>
-

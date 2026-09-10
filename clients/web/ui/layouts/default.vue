@@ -1,8 +1,9 @@
 <template>
     <div id="app" :class="{ 'disable-animations': !disableAnimations }">
         <aside v-if="isPagesDemo" class="pages-demo-notice" data-demo-notice>
-            <strong>BlockHub UI Demo · r1</strong>
-            <span>Sample data · accounts and purchases disabled</span>
+            <strong>BlockHub UI Demo · {{ $demo.version }}</strong>
+            <span>Sample data · demo accounts · no real purchases</span>
+            <nuxt-link to="/sitemap">Explore routes</nuxt-link>
             <nuxt-link to="/">Store</nuxt-link>
             <nuxt-link to="/games">Games</nuxt-link>
             <nuxt-link to="/collections">Collections</nuxt-link>
@@ -103,6 +104,7 @@ export default {
             this.ensureDesktopWelcome(to)
         },
         async '$store.state.auth.user'(newVal) {
+            if (this.isPagesDemo) return
             // TODO: this is a little janky
             if (this.$store.state.application.signedIn && newVal === undefined) {
                 this.$store.state.application.signedIn = false

@@ -76,8 +76,8 @@
                 </div>
 
                 <c-model-obj
-                    src="../../static/assets-3d/sylvanas/Sylvanas.obj"
-                    mtl="../../static/assets-3d/sylvanas/Sylvanas.mtl"
+                    src="/assets-3d/sylvanas/Sylvanas.obj"
+                    mtl="/assets-3d/sylvanas/Sylvanas.mtl"
                     :backgroundAlpha="0" />
 
                 <div class="col-12 col-lg-6 margin-top-15 margin-bottom-15">

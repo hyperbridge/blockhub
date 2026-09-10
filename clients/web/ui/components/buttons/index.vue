@@ -1,8 +1,7 @@
 <template>
     <component
         :is="to ? 'nuxt-link' : tag"
-        :to="to || undefined"
-        :href="to ? undefined : href"
+        v-bind="to ? { to } : { href }"
         :target="target"
         :class="[
             'c-button', 'c-button--' + size, status,

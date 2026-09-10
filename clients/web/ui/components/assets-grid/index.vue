@@ -9,7 +9,9 @@
             :key="index"
             class="assets-grid__item-container">
             <div class="assets-grid__item">
-                <c-img :src="item.image" />
+                <nuxt-link :to="item.to || `/asset/${item.id}`" :data-demo-asset="item.id">
+                    <c-img :src="item.image" class="assets-grid__image" />
+                </nuxt-link>
                 <div class="assets-grid__item-info">
                     <div class="assets-grid__item-thumb">
                         <c-img :src="item.image" />
@@ -71,11 +73,13 @@ export default {
         &:hover .assets-grid__item-info{
             display: flex;
         }
-        > img {
+        .assets-grid__image {
             width: 100%;
         }
+        > a { display: block; }
     }
     .assets-grid__item-info{
+        pointer-events: none;
         border-radius: 5px;
         background: #3D3E5D;
         padding: 5px 10px 5px 5px;

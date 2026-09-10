@@ -497,7 +497,7 @@ export default {
     data() {
         return {
             errors: [],
-            section: 'overview',
+            section: this.$route.meta.demoSection || 'overview',
             activeElement: {
                 name: false,
                 backgroundImage: false,
@@ -582,6 +582,7 @@ export default {
         }
     },
     watch: {
+        '$route'() { if (this.$demo) this.section = this.$route.meta.demoSection || 'overview' },
         '$route'() {
             this.updateSection()
         },
@@ -629,6 +630,7 @@ export default {
         }
     },
     updated() {
+        if (this.$demo) return
         if (process.client) {
             this.$('#summernote').summernote({
                 placeholder: 'Type in your text',

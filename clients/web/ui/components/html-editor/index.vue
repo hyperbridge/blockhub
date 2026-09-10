@@ -1,5 +1,5 @@
 <template>
-    <textarea class="form-control" />
+    <textarea class="form-control" :value="model" @input="$demo && $emit('update:model', $event.target.value)" />
 </template>
 <script>
 export default {
@@ -15,6 +15,7 @@ export default {
     },
 
     mounted() {
+        if (this.$demo) return
         const config = {
             height: this.height
         }

@@ -12,6 +12,7 @@
                     @click="copyTradeURL()" />
             </div>
             <c-button
+                v-if="!$demo"
                 status="info"
                 iconHide
                 @click="$store.dispatch('application/createTradeUrl')">
@@ -48,12 +49,13 @@ export default {
     data: () => ({ val: 'm', timeout: null, add: 0 }),
     computed: {
         account() {
-            return this.$store.getters['application/account']
+            return this.$store.state.application.account
         },
         profile() {
-            return this.activeProfile
+            return this.$store.state.application.activeProfile
         },
         tradeURL() {
+            if (this.$demo) return `${window.location.origin}${this.$router.resolve('/marketplace/trade/new').href}`
             const { tradeLinkId } = this.account
             const { id } = this.profile
             return `${window.location.origin}/tradeoffer/new/?partner=${id}&id=${tradeLinkId}`
@@ -119,4 +121,3 @@ export default {
         }
     }
 </style>
-

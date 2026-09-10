@@ -60,6 +60,7 @@ export default {
     computed: {
     },
     created() {
+        if (this.$demo) return
         const sheetUrl = 'https://spreadsheets.google.com/feeds/list/1Ndg4etkvLQZKeTcPfP1L1nJiMWn6UkwFd9RVSMcltp4/1/public/values?alt=json'
 
         this.$axios({

@@ -42,7 +42,8 @@
                             </div>
                         </div>
                         <template v-if="section == 'online'">
-                            <c-video src="https://www.w3schools.com/tags/mov_bbb.mp4" width="100%" :controls="true" />
+                            <c-video v-if="!$demo" src="https://www.w3schools.com/tags/mov_bbb.mp4" width="100%" :controls="true" />
+                            <div v-else><c-img src="/img/realm_bg.jpg" class="img-fluid" /><p class="mt-3">Sample stream channel · live broadcasting is unavailable in this demo.</p></div>
                         </template>
                     </div>
                     <div class="col-12 col-lg-3 pl-0 flex-column align-items-end">
@@ -73,7 +74,7 @@
 export default {
     head() {
         return {
-            title: `${this.stream.name} | BlockHub`,
+            title: 'Stream | BlockHub',
             meta: [
                 { hid: 'description', name: 'description', content: `BlockHub stream` },
                 { hid: 'keywords', name: 'keywords', content: 'streams, twitch, youtube, blockchain, game, indie, developer' }

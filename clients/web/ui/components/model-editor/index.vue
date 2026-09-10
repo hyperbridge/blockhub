@@ -142,7 +142,7 @@ export default {
         return {
             loadingState: true,
             notice: '',
-            model: this.$route.params.id === 'new' ? this.$store.state.funding.defaultModel : this.$store.getters['models/get'](this.$route.params.id),
+            model: this.$route.params.id === 'new' ? this.$store.state.funding.defaultModel : this.$store.getters[`${this.serviceKey}/get`](this.$route.params.id),
             advanced: false,
             tagOptions: []
         }

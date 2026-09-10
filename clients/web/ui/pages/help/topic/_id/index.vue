@@ -40,7 +40,7 @@
                         <c-article-item
                             v-for="(article, index) in showByTopic(topic.id)"
                             :key="index"
-                            :to="`/help/${topic.id}/article/${article.slug}`">
+                            :to="`/help/topic/${topic.id}/article/${article.slug}`">
                             {{ article.title }}
                         </c-article-item>
                     </div>

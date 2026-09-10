@@ -9,7 +9,7 @@
                     alt="Logo" />
                 <c-img
                     v-if="showPreview"
-                    src="static/img/download-block-bg.png"
+                    src="/img/download-block-bg.png"
                     class="absolute_img"
                     alt="Logo" />
             </div>
@@ -26,13 +26,17 @@
                     <c-button
                         v-if="!downloading"
                         status="none"
-                        :to="defaultDownload.to"
+                        :to="$demo ? null : defaultDownload.to"
+                        data-demo-download
                         class="btn btn-outline-success"
                         @click="startDownload(defaultDownload)">
                         <strong>Download Now</strong>
                         <small>for {{ defaultDownload.text }}</small>
                     </c-button>
-                    <div v-if="downloading">
+                    <div v-if="downloading && $demo" data-demo-download-result>
+                        {{ downloading.text }} download preview selected. The desktop installer is unavailable in this browser demo.
+                    </div>
+                    <div v-if="downloading && !$demo">
                         Downloading now. <c-button
                             status="none"
                             :href="downloading.to">
@@ -60,7 +64,8 @@
                         v-for="(item, index) in item"
                         :key="index"
                         status="none"
-                        :to="item.to"
+                        :to="$demo ? null : item.to"
+                        @click="$demo && startDownload(item)"
                         class="btn">
                         <strong>{{ item.text }}</strong>
                         <small>{{ item.subtext }}</small>
@@ -150,7 +155,7 @@ export default {
     created() {
         this.getOS()
 
-        this.defaultDownload = this.downloads[this.userAgent].default
+        this.defaultDownload = (this.downloads[this.userAgent] || this.downloads.node).default
     },
     methods: {
         getOS() {

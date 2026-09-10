@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'linearicons';
-    src:    url('/assets/fonts/linearicons.eot?8ny2i2');
-    src:    url('/assets/fonts/linearicons.eot?8ny2i2#iefix') format('embedded-opentype'),
-            url('/assets/fonts/linearicons.ttf?8ny2i2') format('truetype'),
-            url('/assets/fonts/linearicons.woff?8ny2i2') format('woff'),
-            url('/assets/fonts/linearicons.svg?8ny2i2#icomoon') format('svg');
+    src:    url('~assets/fonts/linearicons.eot?8ny2i2');
+    src:    url('~assets/fonts/linearicons.eot?8ny2i2#iefix') format('embedded-opentype'),
+            url('~assets/fonts/linearicons.ttf?8ny2i2') format('truetype'),
+            url('~assets/fonts/linearicons.woff?8ny2i2') format('woff'),
+            url('~assets/fonts/linearicons.svg?8ny2i2#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -3030,4 +3030,3 @@
 .li-ellipsis:before {
     content: "\e9e9";
 }
-

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <p v-if="$demo">Trade conversation preview. Messages are not sent from this demo.</p>
         <ul
             ref="chatList"
             class="reset-list chat">
@@ -20,10 +21,12 @@
         <div class="chat-form">
             <input
                 v-model="newMessage"
+                :disabled="$demo"
                 class="chat-form__input"
                 type="text"
                 @keyup.enter="sendMessageV2()">
             <button
+                :disabled="$demo"
                 class="chat-form__btn"
                 @click="sendMessage()">
                 <c-icon name="paper-plane" />
@@ -42,6 +45,7 @@
             deleteSub
         </button> -->
         <button
+            v-if="!$demo"
             @click="$store.dispatch(
                 'createRelation',
                 ['assets/trxs/messages', trx.id, { content: 'New message!', author: 1 }]
@@ -49,6 +53,7 @@
             Dispatch root createRelation
         </button>
         <button
+            v-if="!$demo"
             @click="$store.dispatch(
                 'deleteRelation',
                 ['assets/trxs/messages', trx.id, 8]
@@ -60,6 +65,7 @@
 
 <script>
 export default {
+    props: ['trx'],
     components: {
         'c-chat-message': () => import('~/components/chat-message').then(m => m.default || m)
     },
@@ -71,9 +77,6 @@ export default {
         }
     },
     computed: {
-        trx() {
-            return this.$route.params.trx
-        },
         trxRaw() {
             return this.$store.state.assets.trxs[this.trx.id]
         },
@@ -171,4 +174,3 @@ export default {
         color: #fff;
     }
 </style>
-

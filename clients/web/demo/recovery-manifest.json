@@ -1,0 +1,154 @@
+{
+  "blockhubRevision": "f2479a43b6519f831224e4c9a7c4fa29e1e88aae",
+  "sources": [
+    {
+      "path": "clients/web/ui/db/seed/assets.json",
+      "bytes": 17530,
+      "sha256": "c867ad10b1f9b1aa827955004a9b46415126d633077f6a6d831d8913e7fabd67",
+      "count": 14
+    },
+    {
+      "path": "clients/web/ui/db/seed/collections.json",
+      "bytes": 1223,
+      "sha256": "684c16af3791baad6667620a0c0d63b02147ac28f1285cf5bb59372c629d33c8",
+      "count": 5
+    },
+    {
+      "path": "clients/web/ui/db/seed/ideas.json",
+      "bytes": 83,
+      "sha256": "8c58fe091bf4dc782fec96e0846fa06b88b4fc01c86b588c53c56252ee00ce5f",
+      "count": 1
+    },
+    {
+      "path": "clients/web/ui/db/seed/projects.json",
+      "bytes": 26454,
+      "sha256": "a18003f70053d6854a1d2d7a3fca4b47c2772628dffd2f84c8e4da6b930a5393",
+      "count": 1
+    },
+    {
+      "path": "clients/web/ui/db/seed/realms.json",
+      "bytes": 3819,
+      "sha256": "b2ad5cd70eeedc8d1c89e0ea054bab16461c9a2728a46d2506689373d43cfdcc",
+      "count": 3
+    },
+    {
+      "path": "clients/web/ui/db/seed/profiles.json",
+      "bytes": 4775,
+      "sha256": "5170e5911ad035fcf6583523b74fc8586f9eb7b5a57638337c4795e5b7b4bc74",
+      "count": 5
+    },
+    {
+      "path": "clients/web/ui/db/seed/posts.json",
+      "bytes": 2314,
+      "sha256": "0f2ba94892f1232c7a243cac07cdb33104ceb5bcc3dc6b1f350fbde0696288d9",
+      "count": 4
+    },
+    {
+      "path": "clients/web/ui/db/seed/messages.json",
+      "bytes": 1134,
+      "sha256": "fde843ee68642e0c4cfea8ac76bda04c9dd469c9b03db08d6a94e24a31a7b535",
+      "count": 10
+    },
+    {
+      "path": "clients/web/ui/db/seed/bounties.json",
+      "bytes": 1496,
+      "sha256": "6611718abe98acf55e7ec4074fdaede1ee3be219b8f1479e320021a79df07005",
+      "count": 2
+    },
+    {
+      "path": "clients/web/ui/db/seed/offers.json",
+      "bytes": 513,
+      "sha256": "b00fae8e23a1b3bf78a6971b7f3ac3ae2847c87a8903ae9bc3d1272f9b4798ed",
+      "count": 3
+    },
+    {
+      "path": "clients/web/ui/db/seed/updates.json",
+      "bytes": 188,
+      "sha256": "437123bd0299c6775fbe528ad227b589860ee76fec2d5bbb908841aee8742642",
+      "count": 1
+    },
+    {
+      "path": "clients/web/ui/db/seed/asset-transactions.json",
+      "bytes": 1298,
+      "sha256": "08cdb55d22cc7565ed2c48e2c1d46b4278e3ee79024d7cce3478ee336c42f2b0",
+      "count": 4
+    },
+    {
+      "path": "clients/web/ui/db/seed/prospectors.json",
+      "bytes": 661,
+      "sha256": "49823352e22a91878f8951ab00888e8660864c74b7f1f40c4b8726dc0b8cd3d2",
+      "count": 4
+    }
+  ],
+  "portal": {
+    "uiRevision": "9e5f49a76d27122f896ad6d8e636aebd75229f2d",
+    "assets": [
+      {
+        "path": "src/assets/img/blur_light_bg.png",
+        "destination": "img/blur_light_bg.png",
+        "bytes": 434,
+        "sha256": "670ba35a06d347c79e4f39a0d545a4b188bb2b78677f6d428444fbbc84363579"
+      },
+      {
+        "path": "src/assets/img/left-fade.png",
+        "destination": "img/left-fade.png",
+        "bytes": 34390,
+        "sha256": "54ef7c6cb0872913c000e59e49e20d1e201053ffd78203c0034d089d3cceae54"
+      },
+      {
+        "path": "src/assets/img/monitor_temp.png",
+        "destination": "img/monitor_temp.png",
+        "bytes": 109005,
+        "sha256": "419ee637401383a05f197e91f97bff0b8968ffb036ea1dc7e7f4d246f66e0f09"
+      },
+      {
+        "path": "src/assets/img/realm_bg.jpg",
+        "destination": "img/realm_bg.jpg",
+        "bytes": 406967,
+        "sha256": "f0bfdacb98fd5e9f8cfb5f5f17ef14e70b484a20da7c2c531e00524a2122adc2"
+      },
+      {
+        "path": "src/assets/img/realm_bg_1.png",
+        "destination": "img/realm_bg_1.png",
+        "bytes": 2465,
+        "sha256": "64af9163e1b8d68b1e7b4e31fbf1e38b7190ec84cbf95a1b99a05ba98a9f1f33"
+      },
+      {
+        "path": "src/assets/img/scroll-icon-1.png",
+        "destination": "img/scroll-icon-1.png",
+        "bytes": 157,
+        "sha256": "b2ef014ad10a199431e0d3604ccc4617c7560cf1528b9cbc650847bfad901952"
+      },
+      {
+        "path": "src/assets/img/scroll-icon-2.png",
+        "destination": "img/scroll-icon-2.png",
+        "bytes": 157,
+        "sha256": "4f6534d235c7b77e433e92ca1df9ff4dd0acdad9822895e2422a35d2fc4441cb"
+      },
+      {
+        "path": "src/assets/img/scroll-icon-3.png",
+        "destination": "img/scroll-icon-3.png",
+        "bytes": 161,
+        "sha256": "f22d60d8458bd8d4a0f93c1a0313d39f973b2062cca186ce149fc5be4416efdf"
+      },
+      {
+        "path": "src/assets/img/scroll-icon-4.png",
+        "destination": "img/scroll-icon-4.png",
+        "bytes": 164,
+        "sha256": "a308c074d71209e8ded7f4697f4d095526dc3f90a1a0c85cadb44a32b03b64a8"
+      },
+      {
+        "path": "src/assets/img/scroll-icon-5.png",
+        "destination": "img/scroll-icon-5.png",
+        "bytes": 161,
+        "sha256": "a085395dcca0ba2a5c6447d6a12abba27e3d905608ebc74cc21fbe1ec731c1f7"
+      },
+      {
+        "path": "src/assets/img/slim-logo.png",
+        "destination": "img/slim-logo.png",
+        "bytes": 5442,
+        "sha256": "c80d91a52a9a88e4fb788dd637b52ded029ed4f16137227c484a1768042ab009"
+      }
+    ]
+  }
+}

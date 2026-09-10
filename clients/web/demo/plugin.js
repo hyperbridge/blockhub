@@ -3,6 +3,8 @@ import feathers from '@feathersjs/feathers'
 import feathersVuex from 'feathers-vuex'
 import handlers from '../ui/services'
 import seed from './seed-products.json'
+import { createWorld } from './world'
+import { serviceModels } from './service-models'
 
 const copy = value => JSON.parse(JSON.stringify(value))
 const asset = path => `${process.env.PAGES_BASE}${path}`
@@ -22,6 +24,10 @@ const products = seed.map(product => {
         preview: [asset(`demo/games/${result.id}/preview.jpg`)]
     }
     result.meta.description = result.meta.description || result.meta.content.replace(/<[^>]+>/g, ' ').slice(0, 220)
+    result.images = result.meta.images
+    result.languageSupport = result.meta.languageSupport || []
+    result.systemRequirements = result.meta.systemRequirements || []
+    result.rating = { overall: 4.5 }
     result.meta.content = result.meta.content.replace(/src="\//g, `src="${process.env.PAGES_BASE}`)
     result.meta.ratings = result.meta.ratings || []
     result.meta.video = null
@@ -35,11 +41,7 @@ const products = seed.map(product => {
     return result
 })
 
-const collections = [
-    { id: 1, name: 'Adventure Awaits', meta: { author: 'BlockHub', assets: [], background: products[0].meta.images.preview[0] } },
-    { id: 2, name: 'Indie Discoveries', meta: { author: 'BlockHub', assets: [], background: products[1].meta.images.preview[0] } },
-    { id: 3, name: 'Action Essentials', meta: { author: 'BlockHub', assets: [], background: products[2].meta.images.preview[0] } }
-]
+const world = createWorld(products)
 
 function service(records) {
     return {
@@ -47,8 +49,8 @@ function service(records) {
             let data = records.filter(item => {
                 if (query.id != null && String(item.id) !== String(query.id)) return false
                 if (query.type && item.type !== query.type) return false
-                if (query['internalTags.name'] && !item.internalTags.some(tag => tag.name === query['internalTags.name'])) return false
-                const search = query.$search || query.search || (query.name && query.name.$like)
+                if (query['internalTags.name'] && !(item.internalTags || []).some(tag => tag.name === query['internalTags.name'])) return false
+                const search = query.$search || query.search || (query.name && (query.name.$like || query.name.$eq))
                 return !search || item.name.toLowerCase().includes(String(search).replace(/%/g, '').toLowerCase())
             })
             const total = data.length
@@ -74,12 +76,12 @@ export default ({ app, store }, inject) => {
     const { service: register, FeathersVuex } = feathersVuex(api, { idField: 'id', enableEvents: false })
     Vue.use(FeathersVuex)
     for (const handler of handlers) {
-        api.use(handler.path, service(handler.path === '/products' ? products : handler.path === '/collections' ? collections : []))
-        register(handler.path, handler.config(store))(store)
+        api.use(handler.path, service(world[handler.path.slice(1)] || []))
+        register(handler.path, serviceModels(handler.path.slice(1), handler.config(store), world))(store)
     }
-    store.registerModule('auth', { namespaced: true, state: { user: null, accessToken: null }, getters: { isAuthenticated: () => false } })
+    store.registerModule('auth', { namespaced: true, state: { user: copy(world.profiles[0]), accessToken: null }, getters: { isAuthenticated: () => false } })
     inject('api', api)
-    const access = permission => /(?:read|view|browse|list)$/.test(permission)
+    const access = permission => !String(permission).startsWith('admin')
     inject('access', access)
     Vue.directive('access', { bind(el, binding) { el.hidden = !access(binding.value) } })
     inject('desktop', {
@@ -87,10 +89,21 @@ export default ({ app, store }, inject) => {
         async updateState() { return { demo: true } },
         async sendCommand() { throw new Error('Desktop actions are unavailable in the browser demo.') }
     })
-    inject('demo', { version: 'r1', productCount: products.length })
+    inject('demo', {
+        version: 'r3', productCount: products.length,
+        world,
+        signIn() {
+            store.state.application.signedIn = true
+            store.state.auth.user = copy(world.profiles[0])
+        },
+        signOut() {
+            store.state.application.signedIn = false
+            store.state.auth.user = copy(world.profiles[0])
+        }
+    })
     const application = store.state.application
     application.activeBrand = 'blockhub'
-    application.version = 'Demo r1'
+    application.version = 'Demo r3'
     application.initialized = true
     application.desktopMode = false
     application.developerMode = false
@@ -99,17 +112,24 @@ export default ({ app, store }, inject) => {
     application.settings.client.cookiePolicyAccepted = true
     application.settings.client.autoplay = false
     application.connection = { auto: false, internet: true, datasource: true, operator: false, ethereum: false, status: { code: null, message: 'Local demo data' } }
+    application.activeProfile = copy(world.profiles[0])
+    application.account = { ...application.account, firstName: 'Sample', lastName: 'Player', email: 'player@example.com', birthday: '1990-01-01', profiles: copy(world.profiles), wallets: [], notifications: [] }
+    application.account.darklaunchFlags = []
+    application.darklaunchFlags = [{ code: 'community', description: 'Community screens' }, { code: 'marketplace', description: 'Marketplace screens' }]
+    application.updates = world.updates.map(update => ({ title: update.title, description: 'From the original BlockHub preview.', content: '<p>Game catalog, collection, and community interface improvements.</p>' }))
+    store.state.marketplace.products = Object.fromEntries(products.map(product => [product.id, product]))
+    store.state.funding.projects = Object.fromEntries(world.projects.map(project => [project.id, project]))
+    store.state.funding.defaultProject = copy(world.projects[0])
+    store.state.funding.defaultModel = { id: null, name: 'New Community', tags: [], meta: { description: '', images: {} } }
+    store.state.marketplace.help.articles = Object.fromEntries(world.discussions.map(discussion => [discussion.id, { id: discussion.id, title: discussion.name, slug: discussion.slug, content: discussion.value }]))
+    Object.values(store.state.marketplace.help.topics).forEach(topic => { topic.articles = [1, 2, 3] })
     store.state.initialized = true
-    store.commit('products/addItems', copy(products))
-    store.commit('collections/addItems', copy(collections))
+    for (const handler of handlers) {
+        const name = handler.path.slice(1)
+        if (world[name]) store.commit(`${name}/addItems`, copy(world[name]))
+    }
     for (const key of ['newReleases', 'featuredProducts', 'saleProducts', 'frontpageProducts', 'topSellingProducts', 'upcomingProducts']) {
         store.commit(`products/${key}`, copy(products))
     }
-    app.router.beforeEach((to, from, next) => {
-        // Account, payment and desktop controls have no service on GitHub Pages.
-        if (/^\/(account|checkout|pay|wallet|business|token)(\/|$)/.test(to.path)) {
-            window.alert('BlockHub UI demo: accounts, payments and desktop actions are disabled.')
-            next(false)
-        } else next()
-    })
+    app.router.afterEach(() => { application.activeModal = null })
 }

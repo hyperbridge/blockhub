@@ -147,6 +147,7 @@
                             <c-button
                                 status="none"
                                 to="/account/signup"
+                                data-demo-header-signup
                                 class="">
                                 <span class="text">CREATE ACCOUNT</span> <span class="fa fa-user-plus" />
                             </c-button>
@@ -157,6 +158,7 @@
                             <c-button
                                 status="none"
                                 to="/download"
+                                data-demo-header-download
                                 class="">
                                 <span class="text">DOWNLOAD</span> <span class="fa fa-download" />
                             </c-button>
@@ -383,7 +385,9 @@
                         <li v-if="!signedIn && !isLocked">
                             <c-button
                                 status="none"
-                                @click="$store.commit('application/activeModal', 'login')">
+                                :to="$demo ? '/account/signin' : ''"
+                                data-demo-header-signin
+                                @click="!$demo && $store.commit('application/activeModal', 'login')">
                                 <span class="icon fa fa-sign-out-alt" />
                                 <span class="text">Sign In</span>
                             </c-button>

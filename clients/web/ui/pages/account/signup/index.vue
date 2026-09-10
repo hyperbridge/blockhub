@@ -10,6 +10,7 @@
             class="content login-container">
             <div class="container">
                 <div class="col-12">
+                    <p v-if="$demo" data-demo-signup-notice class="alert alert-info">Try the original signup with sample details. This creates a demo session in this tab; no account, password, or wallet is stored.</p>
                     <div
                         v-if="errors.length"
                         class="errors">
@@ -24,7 +25,8 @@
                     </div>
                     <form
                         action="/"
-                        method="post">
+                        method="post"
+                        @submit.prevent="checkForm">
                         <c-tabs
                             :activeTabProp="currentStep"
                             :lockedStep="finishedStep"
@@ -128,6 +130,7 @@
                                     <div>
                                         <c-button
                                             :class="{'disabled': !account.agreement}"
+                                            data-demo-signup-next
                                             @click="checkForm()">
                                             CONTINUE
                                         </c-button>
@@ -368,6 +371,7 @@
                                         <br>
                                         <c-button
                                             class="c-button--lg outline-green"
+                                            data-demo-signup-finish
                                             @click="checkForm()">
                                             Continue to BlockHub
                                         </c-button>
@@ -483,11 +487,25 @@ export default {
         }
     },
     created() {
-        this.$store.commit('application/activeModal', 'register')
+        if (this.$demo) {
+            Object.assign(this.account, { firstName: 'Sample', lastName: 'Player', email: 'player@example.com', birthday: new Date(1990, 0, 1), agreement: true })
+        } else this.$store.commit('application/activeModal', 'register')
     },
     methods: {
         async checkForm() {
             this.errors = []
+
+            if (this.$demo) {
+                if (this.currentStep === 3) return this.$router.push('/profile/1')
+                if (!this.account.firstName || !this.account.lastName || !this.account.email || !this.account.agreement) {
+                    this.errors.push('Complete the sample details and accept the agreement to continue.')
+                    return
+                }
+                this.$demo.signIn()
+                this.finishedStep = 3
+                this.currentStep = 3
+                return
+            }
 
             if (this.currentStep === 1) {
                 if (

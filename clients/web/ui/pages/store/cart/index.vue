@@ -1,4 +1,6 @@
-
+<template>
+    <c-layout navigationKey="store">
+        <c-block title="Shopping Cart">
                                         <div class="table-responsive">
                                             <table class="table table-striped table-bordered margin-bottom-0">
                                                 <thead>
@@ -69,3 +71,6 @@
                                                 </tbody>
                                             </table>
                                         </div>
+        </c-block>
+    </c-layout>
+</template>
