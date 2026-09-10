@@ -23,6 +23,8 @@ crowdfunding, messages, offers, and bundled artwork through an in-memory Feather
 adapter. The route directory at `#/sitemap` exposes the original screens. Signup
 creates a tab-local demo session and Download previews the platform chooser;
 payments, actual installers, publishing, and backend writes remain unavailable.
+Empty profile and curator prototypes reuse the original account/profile screens;
+the empty Republic pages lead to the populated profiles and communities.
 
 With Node 24.14.1 and Google Chrome installed:
 

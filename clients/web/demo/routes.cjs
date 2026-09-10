@@ -37,6 +37,13 @@ module.exports = function configureRoutes(routes) {
     }
 
     for (const route of routes) {
+        if (route.path === '/login') route.component = path.resolve(__dirname, '../ui/pages/account/signin/index.vue')
+        if (route.path === '/profiles') route.component = path.resolve(__dirname, '../ui/pages/account/profiles/index.vue')
+        if (route.path === '/curator/:id') route.component = path.resolve(__dirname, '../ui/pages/profile/_id/index.vue')
+        if (route.path === '/settings/debug') route.component = path.resolve(__dirname, '../ui/pages/settings/activity/index.vue')
+        if (route.path === '/store/checkout') route.component = path.resolve(__dirname, 'pages/checkout-preview.vue')
+        if (route.path === '/republic/citizenship') route.redirect = '/profiles'
+        if (route.path === '/republic/district') route.redirect = '/communities'
         if (route.path === '/sitemap') route.component = path.resolve(__dirname, 'pages/route-directory.vue')
         if (route.path === '/post/:id') route.component = path.resolve(__dirname, 'pages/news-article.vue')
         if (/^\/profile\/:id\/(assets|contacts|bounties|projects)$/.test(route.path)) route.component = path.resolve(__dirname, 'pages/profile-items.vue')

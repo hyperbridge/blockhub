@@ -25,7 +25,7 @@
                             <c-swiper-slide
                                 v-for="(item, index) in assets"
                                 :key="index">
-                                <c-assets-item :item="item" />
+                                <c-assets-item v-bind="assetProps(item)" :data-demo-catalog-asset="item.id" />
                             </c-swiper-slide>
                         </c-swiper>
                     </c-block>
@@ -80,7 +80,7 @@
                                 v-if="index < 7"
                                 :key="index"
                                 class="assets-item__container padding-5">
-                                <c-assets-item :item="item" />
+                                <c-assets-item v-bind="assetProps(item)" />
                             </div>
                         </div>
                     </c-block>
@@ -155,7 +155,7 @@
                             <c-swiper-slide
                                 v-for="(item, index) in assets"
                                 :key="index">
-                                <c-assets-item :item="item" />
+                                <c-assets-item v-bind="assetProps(item)" />
                             </c-swiper-slide>
                         </c-swiper>
                     </c-block>
@@ -215,7 +215,7 @@
                                     class="btn btn-sm btn-link">More Filters</a>
                             </div>
                         </div>
-                        <c-assets-grid :list="28" />
+                        <c-assets-grid :list="assets" />
                         <c-pagination :pages="5" />
                     </c-block>
 
@@ -380,10 +380,19 @@ export default {
             }
         }
     }),
+    created() {
+        if (this.$demo) this.collectionItems = this.$demo.world.collections.map(item => ({
+            id: item.id, name: item.name, author: item.meta.author, background: item.meta.background,
+            assets: item.meta.assets.map(id => this.$demo.world.assets.find(asset => asset.id === id)).filter(Boolean).map(asset => asset.image)
+        }))
+    },
     computed: {
         assets() {
-            return this.$store.getters['assets/assets']
+            return this.$store.getters['assets/assetsArray']
         }
+    },
+    methods: {
+        assetProps(item) { return { id: item.id, name: item.name, image: item.image, currentPrice: item.price.current, count: String(item.count) } }
     },
     updated() {
 

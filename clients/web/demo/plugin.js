@@ -90,7 +90,7 @@ export default ({ app, store }, inject) => {
         async sendCommand() { throw new Error('Desktop actions are unavailable in the browser demo.') }
     })
     inject('demo', {
-        version: 'r4', productCount: products.length,
+        version: 'r5', productCount: products.length,
         world,
         signIn() {
             store.state.application.signedIn = true
@@ -103,7 +103,7 @@ export default ({ app, store }, inject) => {
     })
     const application = store.state.application
     application.activeBrand = 'blockhub'
-    application.version = 'Demo r4'
+    application.version = 'Demo r5'
     application.initialized = true
     application.desktopMode = false
     application.developerMode = false

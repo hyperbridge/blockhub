@@ -51,33 +51,50 @@ try {
             const result = { route, errors, external }
             try {
                 await page.goto(`${url}#${route}`, { waitUntil: 'networkidle', timeout: 15000 })
-                // Nuxt can reveal async children after network idle. Require the painted
-                // content and visible image set to settle together, without changing the page.
-                await page.evaluate(async expected => {
+                // Read Vue's pending async VNodes without modifying any application state.
+                // Return the accepted DOM snapshot from the same observation that admits it.
+                Object.assign(result, await page.evaluate(async expected => {
                     const deadline = performance.now() + 10000
                     let signature = ''
                     let stableSince = performance.now()
+                    let stableSamples = 0
+                    const pendingComponents = () => {
+                        const stack = [window.$nuxt?._vnode]
+                        const seen = new Set()
+                        let count = 0
+                        while (stack.length) {
+                            const node = stack.pop()
+                            if (!node || seen.has(node)) continue
+                            seen.add(node)
+                            if (node.asyncFactory && !node.asyncFactory.resolved) count++
+                            if (node.componentInstance && !node.componentInstance._isDestroyed) stack.push(node.componentInstance._vnode)
+                            if (node.children) stack.push(...node.children)
+                        }
+                        return count
+                    }
                     while (performance.now() < deadline) {
                         await new Promise(resolve => requestAnimationFrame(resolve))
-                        const text = (document.querySelector('#page-content') || document.body).innerText
+                        if (!window.$nuxt) continue
+                        await new Promise(resolve => window.$nuxt.$nextTick(resolve))
+                        const instance = window.$nuxt.$route.matched.slice(-1)[0]?.instances.default
+                        const content = document.querySelector('#page-content') || instance?.$el
+                        const text = content?.innerText || ''
                         const images = [...document.images].filter(image => image.offsetWidth)
                         const transitioning = document.getAnimations().some(animation => animation.playState === 'running' && animation.effect?.getTiming().iterations !== Infinity)
-                        const ready = window.$nuxt?.$route.path === expected && document.querySelector('[data-demo-notice]') && text.length > 30 && !transitioning && images.every(image => image.complete && image.naturalWidth)
+                        const pending = pendingComponents()
+                        const notice = !!document.querySelector('[data-demo-notice]')
+                        const ready = instance?._isMounted && content?.isConnected && window.$nuxt.$route.path === expected && notice && text.length > 30 && !pending && !transitioning && images.every(image => image.complete && image.naturalWidth)
                         const next = JSON.stringify([text, images.map(image => image.currentSrc)])
                         if (!ready || next !== signature) {
                             signature = next
                             stableSince = performance.now()
-                        } else if (performance.now() - stableSince >= 300) return
+                            stableSamples = 0
+                        } else if (++stableSamples >= 3 && performance.now() - stableSince >= 300) {
+                            return { actualRoute: window.$nuxt.$route.path, nuxtError: window.$nuxt.nuxt.err, text: text.slice(0, 350), brokenImages: images.filter(image => !image.naturalWidth).map(image => image.src), notice, pendingComponents: pending, stableSamples }
+                        }
                     }
                     throw new Error('Route content, transitions, and images did not become ready within 10 seconds')
-                }, route)
-                Object.assign(result, await page.evaluate(() => ({
-                    actualRoute: window.$nuxt.$route.path,
-                    nuxtError: window.$nuxt.nuxt.err,
-                    text: (document.querySelector('#page-content') || document.body).innerText.slice(0, 350),
-                    brokenImages: [...document.images].filter(image => image.offsetWidth && !image.naturalWidth).map(image => image.src),
-                    notice: !!document.querySelector('[data-demo-notice]')
-                })))
+                }, route))
                 result.passed = !errors.length && !external.length && !result.nuxtError && !result.brokenImages.length && result.notice && result.text.length > 30
             } catch (error) {
                 errors.push(error.message)
