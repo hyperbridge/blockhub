@@ -1,0 +1,119 @@
+{
+  "seedRevision": "f2479a43b6519f831224e4c9a7c4fa29e1e88aae",
+  "seedPath": "clients/web/ui/db/seed/products.json",
+  "entries": [
+    {
+      "productId": 1,
+      "title": "Might & Magic: Heroes VI",
+      "steamAppId": 48220,
+      "source": "https://store.steampowered.com/app/48220/",
+      "assets": [
+        {
+          "file": "ui/static/demo/games/1/header.jpg",
+          "bytes": 58809,
+          "sha256": "fff95bccfab39a462413c7357888143cdfeb646234ec08ea4a38006c52c589f5"
+        },
+        {
+          "file": "ui/static/demo/games/1/preview.jpg",
+          "bytes": 538294,
+          "sha256": "f94ca5c192c16fdb4c2493aaf186db75b6913b28a8f1b79af18c8ed50e6f08ec"
+        }
+      ]
+    },
+    {
+      "productId": 2,
+      "title": "Capsized",
+      "steamAppId": 95300,
+      "source": "https://store.steampowered.com/app/95300/",
+      "assets": [
+        {
+          "file": "ui/static/demo/games/2/header.jpg",
+          "bytes": 55483,
+          "sha256": "cad2714ceadd72209ff0b1922810ac63e1d0331163d6bb985c79752af8f30804"
+        },
+        {
+          "file": "ui/static/demo/games/2/preview.jpg",
+          "bytes": 355255,
+          "sha256": "3e6aab3ec8551aa6c4ad4486ddde857566f6c5fc7d6d1bf05403e0ac2216beaf"
+        }
+      ]
+    },
+    {
+      "productId": 3,
+      "title": "DOOM",
+      "steamAppId": 379720,
+      "source": "https://store.steampowered.com/app/379720/",
+      "assets": [
+        {
+          "file": "ui/static/demo/games/3/about.jpg",
+          "bytes": 10027086,
+          "sha256": "f00620f6e19925cea05c08de8ab27602914a1a450ed197a6583a845c4ed8d436"
+        },
+        {
+          "file": "ui/static/demo/games/3/header.jpg",
+          "bytes": 46694,
+          "sha256": "111921bc88b8d40bb8867d987f6a24144a41f32c495e908c93ced5443a85e355"
+        },
+        {
+          "file": "ui/static/demo/games/3/preview.jpg",
+          "bytes": 628225,
+          "sha256": "d39ee52e52e7aacef73238f8525998eb261dd6aef5c2bfe2b6b98aa641ed6a56"
+        }
+      ]
+    },
+    {
+      "productId": 5,
+      "title": "Teeworlds",
+      "steamAppId": 380840,
+      "source": "https://store.steampowered.com/app/380840/",
+      "assets": [
+        {
+          "file": "ui/static/demo/games/5/header.jpg",
+          "bytes": 43654,
+          "sha256": "a6dbc3931d2710fecfd2ce3bedd80e1d5deb68b6b2e3746b18b2c8bbc8743087"
+        },
+        {
+          "file": "ui/static/demo/games/5/preview.jpg",
+          "bytes": 200132,
+          "sha256": "8dcb291ba6cfb245381496e001684548b7dec8da70b313f679e120c6e93a4a93"
+        }
+      ]
+    },
+    {
+      "productId": 10,
+      "title": "Kingdom Come: Deliverance",
+      "steamAppId": 379430,
+      "source": "https://store.steampowered.com/app/379430/",
+      "assets": [
+        {
+          "file": "ui/static/demo/games/10/header.jpg",
+          "bytes": 59525,
+          "sha256": "c76042f1635e6ff229d096d4d0078c629af7d6f13f14e82cad9a93732b9e1f26"
+        },
+        {
+          "file": "ui/static/demo/games/10/preview.jpg",
+          "bytes": 414559,
+          "sha256": "5f364865ee8d3be825e7f9dce88865c2f0316cd954b9d09a31e2c7f2aefcfbe0"
+        }
+      ]
+    },
+    {
+      "productId": 22,
+      "title": "The Witcher 2: Assassins of Kings Enhanced Edition",
+      "steamAppId": 20920,
+      "source": "https://store.steampowered.com/app/20920/",
+      "assets": [
+        {
+          "file": "ui/static/demo/games/22/header.jpg",
+          "bytes": 42848,
+          "sha256": "c1093c5ad6a44937fee5b704ec7e2b7f60fa595fb3c05946300b025108de178c"
+        },
+        {
+          "file": "ui/static/demo/games/22/preview.jpg",
+          "bytes": 157356,
+          "sha256": "a8902ba1042a247c32462f27d5c5e8c3dced7618dfbe19038e2723af2b591303"
+        }
+      ]
+    }
+  ]
+}

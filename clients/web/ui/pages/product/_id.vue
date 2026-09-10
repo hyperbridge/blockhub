@@ -678,7 +678,7 @@ export default {
         window.document.getElementById('header-bg').style['background-image'] = 'url(/img/backgrounds/1.jpg)'
     },
     updated() {
-        if (!process.client) return
+        if (!process.client || process.env.PAGES_DEMO || !this.editing) return
         this.$('#summernote').summernote({
             placeholder: 'Type in your text',
             tabsize: 2,

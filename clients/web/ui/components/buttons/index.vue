@@ -1,7 +1,8 @@
 <template>
     <component
-        :is="tag"
-        :href="to || href"
+        :is="to ? 'nuxt-link' : tag"
+        :to="to || undefined"
+        :href="to ? undefined : href"
         :target="target"
         :class="[
             'c-button', 'c-button--' + size, status,
@@ -22,13 +23,11 @@
                 icon ? 'fa-' + icon : injectFilter,
                 swapOrder ? 'swap-order' : ''
             ]" />
-        <nuxt-link
+        <span
             v-if="to"
-            class="w-100"
-            tag="span"
-            :to="to">
+            class="w-100">
             <slot />
-        </nuxt-link>
+        </span>
         <slot v-if="!to" />
     </component>
 </template>

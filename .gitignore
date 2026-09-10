@@ -3,3 +3,6 @@ node_modules/
 .DS_Store
 .env
 releases
+.tmp/
+clients/web/.nuxt-pages/
+clients/web/dist-pages/

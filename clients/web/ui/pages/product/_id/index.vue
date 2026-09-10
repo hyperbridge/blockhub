@@ -49,6 +49,7 @@
         </div>
         <div class="col-12 col-lg-4 col-xl-4">
             <c-purchase-block
+                :title="product.name"
                 class="margin-bottom-15"
                 :isUnavailable="!currentRelease"
                 :price="product.meta.price"
@@ -390,7 +391,7 @@ export default {
             streamersList: 8,
             showInstaller: false,
             reviewForm: false,
-            showVote: true
+            showVote: !process.env.PAGES_DEMO
         }
     },
     computed: {

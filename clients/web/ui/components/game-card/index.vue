@@ -18,6 +18,7 @@
             </div>
         </div>
         <c-button
+            full
             status="none"
             :to="`/product/${id}`">
             <c-img :src="image" />
@@ -121,6 +122,7 @@ export default {
             border-radius: 5px;
         }
         .description {
+            white-space: normal;
             margin: 15px 0;
             font-weight: bold;
             font-size: 16px;

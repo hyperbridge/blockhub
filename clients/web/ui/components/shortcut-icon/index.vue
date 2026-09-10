@@ -36,7 +36,7 @@ export default {
         },
         image: {
             type: String,
-            default: 'https://via.placeholder.com/400x300'
+            default: null
         },
         href: {
             type: String,

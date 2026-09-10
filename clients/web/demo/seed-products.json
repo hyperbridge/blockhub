@@ -1,0 +1,1044 @@
+[
+  {
+    "id": 1,
+    "name": "Might & Magic: Heroes VI",
+    "meta": {
+      "price": 0,
+      "oldPrice": 0,
+      "communitySize": 10000,
+      "activeUsers": 1000,
+      "images": {
+        "header": null,
+        "mediumTile": "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/med-tile.jpg",
+        "main": null,
+        "icon": "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/icon.jpg",
+        "preview": [
+          "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/preview-01.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/preview-02.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/preview-03.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/preview-04.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/preview-05.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/preview-06.jpg"
+        ]
+      },
+      "video": null,
+      "genre": "RPG",
+      "releaseDate": "13 Oct, 2011",
+      "developer": "Blackhole",
+      "publisher": "Ubisoft",
+      "content": "The adventure in Heroes VI, starting 400 years before events in Heroes V, catapults a family of heroes into a fast-paced epic story where Angels plot to end -- once and for all -- an unfinished war with their ancient rivals, the Faceless. <br><br>\t\t\t\t\t\tA legendary Archangel General is resurrected, but with his powers crippled. Plagued by horrible memories of the Elder Wars, he plots to recover his powers and take control of Ashan while destroying both Faceless and Demons in a series of carefully orchestrated attacks and betrayals. He underestimates, however, the power of the all-too-human Griffin dynasty. <br><br>\t\t\t\t\t\tThe destiny of these Griffin heroes will be determined by our players.<br><br>\t\t\t\t\t\t<ul><li>Soundtrack.<br>\t\t\t\t\t\t</li><li>Artbook/Poster.<br>\t\t\t\t\t\t</li><li>One month subscription on Heroes Kingdom.<br>\t\t\t\t\t\t</li><li>1 Bonus Single Player Skirmish Map.<br>\t\t\t\t\t\t</li><li>4 Dynasty Heroes : Aguirre, Sveltana, Yume and Kraal.<br>\t\t\t\t\t\t</li><li>2 Dynasty Weapon : Staff of Cleansing and Staff of Asha&#x2019;s Eightfold.</li></ul> Content is delivered via download only.<br><br>\t\t\t\t\t\t<ul><li>Enjoy the critically acclaimed Heroes gameplay, remasterized with the well-known developer, Black Hole, and in close partnership with the game&#x2019;s numerous fans.<br>\t\t\t\t\t\t</li><li><strong>Experience the unique mix of Turn-Based Strategy &amp; RPG:</strong> Explore extra-large adventure maps, collect tons of resources and build extraordinary cities. Perfect your tactics to level-up your heroes, recruit troops &amp; ready them for combat on exclusive battle maps.<br>\t\t\t\t\t\t</li><li><strong>Shape your destiny:</strong> Lead the Heroes of the Griffin dynasty through an intriguing scenario. Choose your path, assume your choices and customize your gaming experience thanks to a brand new Reputation system.<br>\t\t\t\t\t\t</li><li><strong>Rediscover the richness of the M&amp;M Universe:</strong> Discover fantastic landscapes and creatures from the world of Ashan.  Enjoy improved 3D designs and an exclusive new bestiary.<br>\t\t\t\t\t\t</li><li><strong>Share with the community:</strong> Post content &amp; compete with your friends using a new and intelligent, online community interface.</li></ul>",
+      "developerTags": [
+        "Strategy",
+        "RPG",
+        "Turn-Based Strategy",
+        "Turn-Based",
+        "Fantasy",
+        "Multiplayer"
+      ],
+      "languageSupport": [
+        {
+          "name": "English",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false,
+          "code": "en"
+        },
+        {
+          "name": "Czech",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false,
+          "code": "cz"
+        },
+        {
+          "name": "French",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false,
+          "code": "fr"
+        },
+        {
+          "name": "German",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false,
+          "code": "gr"
+        },
+        {
+          "name": "Hungarian",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false,
+          "code": "hr"
+        },
+        {
+          "name": "Italian",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false,
+          "code": "it"
+        },
+        {
+          "name": "Korean",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false,
+          "code": "en"
+        },
+        {
+          "name": "Polish",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false,
+          "code": "pl"
+        },
+        {
+          "name": "Russian",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false,
+          "code": "ru"
+        },
+        {
+          "name": "Spanish",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false,
+          "code": "en"
+        }
+      ],
+      "systemRequirements": [
+        {
+          "os": "win",
+          "system": "Windows XP, Windows Vista, Windows 7 (all 32/64 bit)",
+          "processor": "Intel Pentium Core 2 @ Duo E6400 @ 2.00 Ghz, AMD Athlon II X2 240 @ 2.8 Ghz",
+          "memory": "2 GB for Windows XP and 2GB for Vista / Windows 7",
+          "graphics": "1 GB, DirectX 9.0c",
+          "directx": "9.0c",
+          "hardDrive": "8 GB",
+          "sound": "DirectX 9.0c compatible",
+          "specialInfo": "ATI® RADEON® HD 6000 Series"
+        }
+      ],
+      "systemTags": [
+        "new",
+        "featured",
+        "upcoming"
+      ],
+      "type": "game",
+      "downloads": 0,
+      "plans": [],
+      "frequentlyTradedAssets": [],
+      "rating": {
+        "overall": 4,
+        "items": [
+          {
+            "name": "Joe Murray",
+            "number": 5
+          },
+          {
+            "name": "Jake Marshall",
+            "number": 3.5
+          },
+          {
+            "name": "Dylan Greene",
+            "number": 4.5
+          },
+          {
+            "name": "Emma Wilkins",
+            "number": 2.5
+          }
+        ],
+        "fullReviewsPath": "/",
+        "rateGamePath": "/"
+      },
+      "assets": [],
+      "community": {
+        "discussions": []
+      },
+      "crowdfund": true,
+      "stateTag": "trending",
+      "followers": 591,
+      "players": 12,
+      "streams": [
+        {
+          "userName": "GodOfDota",
+          "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVIOE5IdK4MWeI-iEphf-BhZh2XsXBrBn_fcsGXbFGSF-xwH8h",
+          "previews": "http://dota2-videos.com/wp-content/uploads/2018/07/jx3Oj0O-G8Ihqdefault.jpg",
+          "src": "#",
+          "views": 3768
+        },
+        {
+          "userName": "SomeBoy",
+          "userAvatar": "https://pbs.twimg.com/media/BQUlcXwCIAAtLmY.jpg",
+          "previews": "https://clips-media-assets2.twitch.tv/26827260992-offset-21596-preview-480x272.jpg",
+          "src": "#",
+          "views": 87658
+        }
+      ],
+      "reviews": [
+        {
+          "id": 1,
+          "author": {
+            "name": "Nakatochi",
+            "img": "https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png"
+          },
+          "setup": {
+            "system": "Windows 10",
+            "gpu": "GTX 1080",
+            "cpu": "Core i7 7980x",
+            "ram": "8 GB",
+            "storage": "HyperX 1TB SSD"
+          },
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.",
+          "date": "2018-08-19T04:09:00.000Z",
+          "rating": 1.5,
+          "minutes_played": 56543,
+          "title": "Good game with very nice graphics made by very smart people.",
+          "helpful": true,
+          "recent": true
+        },
+        {
+          "id": 2,
+          "author": {
+            "name": "Nakatochi",
+            "img": "https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png"
+          },
+          "setup": {
+            "system": "Windows 10",
+            "gpu": "GTX 1080",
+            "cpu": "Core i7 7980x",
+            "ram": "8 GB",
+            "storage": "HyperX 1TB SSD"
+          },
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.",
+          "date": "2018-08-19T04:09:00.000Z",
+          "rating": 2.5,
+          "minutes_played": 3453,
+          "title": "Good game with very nice graphics made by very smart people.",
+          "helpful": false,
+          "recent": true
+        },
+        {
+          "id": 3,
+          "author": {
+            "name": "Nakatochi",
+            "img": "https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png"
+          },
+          "setup": {
+            "system": "Windows 10",
+            "gpu": "GTX 1080",
+            "cpu": "Core i7 7980x",
+            "ram": "8 GB",
+            "storage": "HyperX 1TB SSD"
+          },
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.",
+          "date": "2018-08-19T04:09:00.000Z",
+          "rating": 3.5,
+          "minutes_played": 1239,
+          "title": "Good game with very nice graphics made by very smart people.",
+          "helpful": true,
+          "recent": false
+        }
+      ],
+      "description": "Heroes VI is a fast-paced epic story where Angels plot to end -- once and for all -- an unfinished war with their ancient rivals, the Faceless."
+    }
+  },
+  {
+    "id": 2,
+    "name": "Capsized",
+    "meta": {
+      "price": 0,
+      "oldPrice": 0,
+      "communitySize": 0,
+      "activeUsers": 0,
+      "images": {
+        "header": null,
+        "mediumTile": "https://cdn.hyperbridge.org/blockhub/images/products/capsized-5004/med-tile.jpg",
+        "main": null,
+        "icon": "https://cdn.hyperbridge.org/blockhub/images/products/capsized-5004/icon.jpg",
+        "preview": [
+          "https://cdn.hyperbridge.org/blockhub/images/products/capsized-5004/preview-01.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/capsized-5004/preview-02.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/capsized-5004/preview-03.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/capsized-5004/preview-04.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/capsized-5004/preview-05.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/capsized-5004/preview-06.jpg"
+        ]
+      },
+      "video": null,
+      "genre": "Action",
+      "releaseDate": "29 Apr, 2011",
+      "developer": "Alientrap",
+      "publisher": "Alientrap",
+      "content": "<strong>Capsized</strong> is a fast paced 2D platformer focused on intense action and exploration. As a intrepid space traveler, your ship has crash landed on a mysterious alien planet. You must navigate through the perilous environment and fight off blood-thirsty creatures to save your crewmates and escape with your lives!<br>\t\t\t\t\t\tArtist Jesse McGibney and programmer Lee Vermeulen create an immersive alien world teeming with bizarre life-forms and strange landscapes presented in a unique hand-drawn art style. Combining control elements of first person shooters and innovative physics based combat, Capsized emphasizes action without giving up the smart problem solving of classic platform games.<br>\t\t\t\t\t\tUse your jetpack to fly through the alien jungle, and tools such as the Gravity Hook to manipulate your environment to skilfully dodge and defeat attacking enemies. You will be challenged - with platforming, puzzle solving, and deadly skirmishing, often all at the same time!<br>\t\t\t\t\t\t\t\t\t\t\t\t<ul><li>Highly detailed alien environments and creatures, lovingly rendered with high resolution hand-drawn artwork.<br>\t\t\t\t\t\t</li><li>12 mission Campaign featuring: massive non-linear environments, diverse objectives and enemies, and exciting comic-style cutscenes.<br>\t\t\t\t\t\t</li><li>4 extra Arcade Modes to unlock, including: local Deathmatch and Coop, Survival mode, Time Trials, and Armless fighting.<br>\t\t\t\t\t\t</li><li>Lethal arsenal of futuristic weapons and gadgets such as: the Gravity Ram, Jetpack, Energy Shield, and Quasar Array<br>\t\t\t\t\t\t</li><li>Classic First Person Shooter inspired controls, with a focus on skilled movement, creative tactics, and insane action.<br>\t\t\t\t\t\t</li></ul>",
+      "developerTags": [
+        "Action",
+        "Platformer",
+        "Indie",
+        "Sci-fi",
+        "Local Co-Op",
+        "2D"
+      ],
+      "languageSupport": [
+        {
+          "name": "English",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false,
+          "code": "en"
+        }
+      ],
+      "systemRequirements": [
+        {
+          "os": "win",
+          "system": "XP/Vista/Windows 7",
+          "processor": "Dual-core processor (Intel Dual Core 2.0 GHz or AMD Athlon X2 5200+ 2.6 GHz)",
+          "memory": "1.5 GB RAM",
+          "hardDiskSpace": "1.0 GB free space",
+          "videoCard": "DirectX 9.0c compatible",
+          "sound": "DirectX 9.0c compatible sound cards"
+        },
+        {
+          "os": "mac",
+          "system": "Lion 10.7.5, Yosemite strongly recommended",
+          "processor": "Dual Core CPU",
+          "memory": "1.5 GB RAM",
+          "hardDiskSpace": "1.0 GB free space",
+          "videoCard": "OpenGL 3.0+ support (2.1 with ARB extensions acceptable)"
+        },
+        {
+          "os": "linux",
+          "system": "glibc 2.15+, 32/64-bit. S3TC is NOT required.",
+          "processor": "Dual Core CPU",
+          "memory": "1.5 GB RAM",
+          "hardDiskSpace": "1.0 GB free space",
+          "videoCard": "OpenGL 3.0+ support (2.1 with ARB extensions acceptable)"
+        }
+      ],
+      "systemTags": [
+        "upcoming",
+        "trending"
+      ],
+      "type": "game",
+      "downloads": 0,
+      "plans": [],
+      "frequentlyTradedAssets": [],
+      "rating": {
+        "overall": 3.5,
+        "items": [
+          {
+            "name": "Dan Dyer",
+            "number": 3
+          },
+          {
+            "name": "Jake Clark",
+            "number": 4.5
+          },
+          {
+            "name": "Victoria Jones",
+            "number": 1.5
+          },
+          {
+            "name": "Anne Bower",
+            "number": 1
+          }
+        ],
+        "fullReviewsPath": "/",
+        "rateGamePath": "/"
+      },
+      "assets": [],
+      "community": {
+        "discussions": []
+      },
+      "crowdfund": false,
+      "stateTag": "trending",
+      "followers": 163,
+      "players": 43,
+      "description": "Capsized is a fast paced 2D platformer focused on intense action and exploration. As a intrepid space traveler, your ship has crash landed on a mysterious alien planet. You must navigate through the perilous environment and fight off blood-thirsty creatures to save your crewmates and escape with your lives!"
+    }
+  },
+  {
+    "id": 3,
+    "name": "DOOM",
+    "meta": {
+      "price": 0,
+      "oldPrice": 0,
+      "communitySize": 0,
+      "activeUsers": 0,
+      "images": {
+        "header": null,
+        "mediumTile": "https://cdn.hyperbridge.org/blockhub/images/products/doom-20087/med-tile.jpg",
+        "main": null,
+        "icon": "/img/doom-20087/icon.jpg",
+        "preview": [
+          "https://cdn.hyperbridge.org/blockhub/images/products/doom-20087/preview-01.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/doom-20087/preview-02.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/doom-20087/preview-03.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/doom-20087/preview-04.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/doom-20087/preview-05.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/doom-20087/preview-06.jpg"
+        ]
+      },
+      "video": "https://cdn.hyperbridge.org/blockhub/videos/products/doom-20087/trailer.mp4",
+      "genre": "Action",
+      "releaseDate": "12 May, 2016",
+      "developer": "id Software",
+      "publisher": "Bethesda Softworks",
+      "content": "Developed by id software, the studio that pioneered the first-person shooter genre and created multiplayer Deathmatch, DOOM returns as a brutally fun and challenging modern-day shooter experience. Relentless demons, impossibly destructive guns, and fast, fluid movement provide the foundation for intense, first-person combat &#x2013; whether you&#x2019;re obliterating demon hordes through the depths of Hell in the single-player campaign, or competing against your friends in numerous multiplayer modes. Expand your gameplay experience using DOOM SnapMap game editor to easily create, play, and share your content with the world. <br><br><img src=\"/demo/games/3/about.jpg\"><br><br><strong>STORY:</strong><br>You&#x2019;ve come here for a reason. The Union Aerospace Corporation&#x2019;s massive research facility on Mars is overwhelmed by fierce and powerful demons, and only one person stands between their world and ours.  As the lone DOOM Marine, you&#x2019;ve been activated to do one thing &#x2013; kill them all.<ul><li><strong>A Relentless Campaign</strong><br>There is no taking cover or stopping to regenerate health as you beat back Hell&#x2019;s raging demon hordes.  Combine your arsenal of futuristic and iconic guns, upgrades, movement and an advanced melee system to knock-down, slash, stomp, crush, and blow apart demons in creative and violent ways. <br><br></li><li><strong>Return of id Multiplayer</strong><br>Dominate your opponents in DOOM&#x2019;s signature, fast-paced arena-style combat. In both classic and all-new game modes, annihilate your enemies utilizing your personal blend of skill, powerful weapons, vertical movement, and unique power-ups that allow you to play as a demon.<br><br></li><li><strong>Endless Possibilities</strong><br>DOOM SnapMap &#x2013; a powerful, but easy-to-use game and level editor &#x2013; allows for limitless gameplay experiences on every platform.  Without any previous experience or special expertise, any player can quickly and easily snap together and visually customize maps, add pre-defined or completely custom gameplay, and even edit game logic to create new modes.  Instantly play your creation, share it with a friend, or make it available to players around the world &#x2013; all in-game with the push of a button.</li></ul>",
+      "developerTags": [
+        "FPS",
+        "Action",
+        "Gore",
+        "Demons",
+        "Shooter",
+        "First-Person"
+      ],
+      "languageSupport": [
+        {
+          "name": "English",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "French",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "Italian",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "German",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "Spanish",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "Japanese",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "Polish",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "Portuguese-Brazil",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "Russian",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "Traditional Chinese",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": true
+        }
+      ],
+      "systemRequirements": [
+        {
+          "os": "win",
+          "system": "Windows 7/8.1/10 (64-bit versions)",
+          "processor": "Intel Core i7-3770/AMD FX-8350 or better",
+          "memory": "8 GB RAM",
+          "graphics": "NVIDIA GTX 970 4GB/AMD Radeon R9 290 4GB or better",
+          "storage": "55 GB available space",
+          "additional_notes": "Requires BlockHub activation and broadband internet connection for Multiplayer and SnapMap"
+        }
+      ],
+      "systemTags": [
+        "sale",
+        "featured",
+        "trending",
+        "topSeller",
+        "specials"
+      ],
+      "type": "game",
+      "downloads": 0,
+      "plans": [],
+      "frequentlyTradedAssets": [],
+      "rating": {
+        "overall": 5,
+        "items": [
+          {
+            "name": "Keith Reid",
+            "number": 5
+          },
+          {
+            "name": "Neil Buckland",
+            "number": 5
+          }
+        ],
+        "fullReviewsPath": "/",
+        "rateGamePath": "/"
+      },
+      "assets": [],
+      "community": {
+        "discussions": []
+      },
+      "crowdfund": false,
+      "stateTag": "trending",
+      "followers": 91,
+      "players": 34,
+      "description": "Now includes all three premium DLC packs (Unto the Evil, Hell Followed, and Bloodfall), maps, modes, and weapons, as well as all feature updates including Arcade Mode, Photo Mode, and the latest Update 6.66, which brings further multiplayer improvements as well as revamps multiplayer progression."
+    }
+  },
+  {
+    "id": 5,
+    "name": "Teeworlds",
+    "meta": {
+      "price": 0,
+      "oldPrice": 0,
+      "communitySize": 0,
+      "activeUsers": 0,
+      "images": {
+        "header": null,
+        "mediumTile": "https://cdn.hyperbridge.org/blockhub/images/products/teeworlds-20137/med-tile.jpg",
+        "main": null,
+        "icon": "https://cdn.hyperbridge.org/blockhub/images/products/teeworlds-20137/icon.jpg",
+        "preview": [
+          "https://cdn.hyperbridge.org/blockhub/images/products/teeworlds-20137/preview-01.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/teeworlds-20137/preview-02.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/teeworlds-20137/preview-03.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/teeworlds-20137/preview-04.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/teeworlds-20137/preview-05.jpg"
+        ]
+      },
+      "video": "https://cdn.hyperbridge.org/blockhub/videos/products/teeworlds-20137/trailer.mp4",
+      "genre": "Action",
+      "releaseDate": "27 May, 2007",
+      "developer": "Teeworlds Team",
+      "publisher": "Teeworlds Team",
+      "content": "Play together with your friends and have a fun time! In Teeworlds you can play in three gamemodes (Deathmatch, Team-Deathmatch and Capture The Flag) and tons more of community-made modifications with up to 16 players!<br><br>Customize your own player character, your personal tee, to your liking. With hundreds of possible combinations, you will always look unique!<br><br>Teeworlds is a game that gives you a lot of freedom and plenty of gameplay mechanics to use or abuse. With a full focus on multiplayer games you will never be bored.<br><br>And the best thing: It&apos;s open-source! Anyone can help to develop this game, create new game types, skins or brand new maps via the built-in map editor!<br><br>Key Features:<br><ul><li>Easy to learn, hard to master. You will never stop learning new tricks while playing Teeworlds, no matter how long you play. At the same time it&apos;s easy for new players to just pick it up and have a blast.<br><br></li><li>Engaging and motivated community. Teeworlds&apos; one-of-a-kind community is the thing keeping the game alive. Be it the community servers or maps or all the other innovative content.<br><br></li><li>Play with your friends for free. Teeworlds has been free since the very start and will stay that way forever. With up to 16 players in a match, challenge your friends - the fun is only a mouseclick away!</li></ul>",
+      "developerTags": [
+        "Free to Play",
+        "Multiplayer",
+        "2D",
+        "Action",
+        "Platformer",
+        "Shooter"
+      ],
+      "languageSupport": [
+        {
+          "name": "English",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "French",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "Italian",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "German",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "Spanish",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "Bulgarian",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "Czech",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "Danish",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "Dutch",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "Finnish",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "Hungarian",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "Norwegian",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "Polish",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "Portuguese",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "Portuguese-Brazil",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "Romanian",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "Russian",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "Swedish",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        },
+        {
+          "name": "Turkish",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": false
+        }
+      ],
+      "systemRequirements": [
+        {
+          "os": "win",
+          "system": "Microsoft® Windows® XP or newer",
+          "processor": "1.4GHz or faster",
+          "memory": "512 MB RAM",
+          "storage": "10 MB available space"
+        },
+        {
+          "os": "mac",
+          "processor": "1.4GHz or faster",
+          "memory": "512 MB RAM",
+          "storage": "10 MB available space"
+        },
+        {
+          "os": "linux",
+          "processor": "1.4GHz or faster",
+          "memory": "512 MB RAM",
+          "storage": "10 MB available space"
+        }
+      ],
+      "systemTags": [
+        "new",
+        "trending"
+      ],
+      "type": "game",
+      "downloads": 0,
+      "plans": [],
+      "frequentlyTradedAssets": [],
+      "rating": {
+        "overall": 3.5,
+        "items": [
+          {
+            "name": "Dan Dyer",
+            "number": 3
+          },
+          {
+            "name": "Jake Clark",
+            "number": 4.5
+          },
+          {
+            "name": "Victoria Jones",
+            "number": 1.5
+          },
+          {
+            "name": "Anne Bower",
+            "number": 1
+          }
+        ],
+        "fullReviewsPath": "/",
+        "rateGamePath": "/"
+      },
+      "assets": [],
+      "community": {
+        "discussions": []
+      },
+      "followers": 9037,
+      "players": 101,
+      "description": "Teeworlds is a free online multiplayer game, available for all major operating systems. Battle with up to 16 players in a variety of game modes, including Team Deathmatch and Capture The Flag. You can even design your own maps!"
+    }
+  },
+  {
+    "id": 10,
+    "name": "Kingdom Come: Deliverance",
+    "meta": {
+      "price": 0,
+      "oldPrice": 0,
+      "communitySize": 0,
+      "activeUsers": 0,
+      "images": {
+        "header": null,
+        "mediumTile": "https://cdn.hyperbridge.org/blockhub/images/products/kingdom-come-deliverance-20030/med-tile.jpg",
+        "main": null,
+        "icon": "https://cdn.hyperbridge.org/blockhub/images/products/kingdom-come-deliverance-20030/icon.jpg",
+        "preview": [
+          "https://cdn.hyperbridge.org/blockhub/images/products/kingdom-come-deliverance-20030/preview-01.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/kingdom-come-deliverance-20030/preview-02.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/kingdom-come-deliverance-20030/preview-03.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/kingdom-come-deliverance-20030/preview-04.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/kingdom-come-deliverance-20030/preview-05.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/kingdom-come-deliverance-20030/preview-06.jpg"
+        ]
+      },
+      "video": "https://cdn.hyperbridge.org/blockhub/videos/products/kingdom-come-deliverance-20030/trailer.mp4",
+      "genre": "Action",
+      "releaseDate": "13 Feb, 2018",
+      "developer": "Warhorse Studios",
+      "publisher": "Warhorse Studios",
+      "content": "You&apos;re Henry, the son of a blacksmith. Thrust into a raging civil war, you watch helplessly as invaders storm your village and slaughter your friends and family.  Narrowly escaping the brutal attack, you grab your sword to fight back. Avenge the death of your parents and help repel the invading forces! Bohemia &#x2013; located in the heart of Europe, the region is rich in culture, silver, and sprawling castles. The death of its beloved ruler, Emperor Charles IV, has plunged the kingdom into dark times: war, corruption, and discord are tearing this jewel of the Holy Roman Empire apart.<br><br>One of Charles&apos; sons, Wenceslas, has inherited the crown. Unlike his father, Wenceslas is a naive, self-indulgent, unambitious monarch. His half-brother and King of Hungary, Sigismund the Red Fox, senses weakness in Wenceslas. Feigning good will, Sigismund travels to Bohemia and kidnaps his half-brother. With no king on the throne, Sigismund is now free to plunder Bohemia and seize its riches.<br><br>In the midst of this chaos, you&apos;re Henry, the son of a blacksmith. Your peaceful life is shattered when a mercenary raid, ordered by King Sigismund himself, burns your village to the ground. By bittersweet fortune, you are one of the few survivors of this massacre. <br><br>Without a home, family, or future you end up in the service of Lord Radzig Kobyla, who is forming a resistance against the invasion. Fate drags you into this bloody conflict and shoves you into a raging civil war, where you help fight for the future of Bohemia.<ul><li><strong>Massive realistic open world:</strong> Majestic castles, vast fields, all rendered in stunning high-end graphics.<br></li><li><strong>Non-linear story:</strong> Solve quests in multiple ways, then face the consequences of your decisions.<br></li><li><strong>Challenging combat:</strong> Distance, stealth, or melee. Choose your weapons and execute dozens of unique combos in battles that are as thrilling as they are merciless.<br></li><li><strong>Character development:</strong> Improve your skills, earn new perks, and forge and upgrade your equipment.<br></li><li><strong>Dynamic world:</strong> Your actions influence the reactions of the people around you. Fight, steal, seduce, threaten, persuade, or bribe. It&#x2019;s all up to you.<br></li><li><strong>Historical accuracy:</strong> Meet real historical characters and experience the genuine look and feel of medieval Bohemia.</li></ul>",
+      "developerTags": [
+        "Medieval",
+        "Open World",
+        "RPG",
+        "Realistic",
+        "Historical",
+        "First-Person"
+      ],
+      "languageSupport": [
+        {
+          "name": "English",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "French",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "German",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "Spanish",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": true
+        },
+        {
+          "name": "Czech",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": true
+        },
+        {
+          "name": "Polish",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": true
+        },
+        {
+          "name": "Russian",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": true
+        },
+        {
+          "name": "Italian",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": true
+        },
+        {
+          "name": "Simplified Chinese",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": true
+        },
+        {
+          "name": "Turkish",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": true
+        }
+      ],
+      "systemRequirements": [
+        {
+          "os": "win",
+          "specialInfo": "Requires a 64-bit processor and operating system",
+          "system": "OS 64-bit Windows 7 or 64-bit Windows 8 (8.1) or Windows 10",
+          "processor": "Intel CPU Core i7 3770 3,4 GHz, AMD CPU AMD FX-8350 4 GHz",
+          "memory": "16 GB RAM",
+          "graphics": "Nvidia GPU GeForce GTX 1060, AMD GPU Radeon RX 580",
+          "directx": "Version 11",
+          "storage": "40 GB available space",
+          "sound_card": "Creative SOUND BLASTER Zx"
+        }
+      ],
+      "systemTags": [
+        "sale"
+      ],
+      "type": "game",
+      "downloads": 0,
+      "plans": [],
+      "frequentlyTradedAssets": [],
+      "rating": {
+        "overall": 3.5,
+        "items": [
+          {
+            "name": "Dan Dyer",
+            "number": 3
+          },
+          {
+            "name": "Jake Clark",
+            "number": 4.5
+          },
+          {
+            "name": "Victoria Jones",
+            "number": 1.5
+          },
+          {
+            "name": "Anne Bower",
+            "number": 1
+          }
+        ],
+        "fullReviewsPath": "/",
+        "rateGamePath": "/"
+      },
+      "assets": [],
+      "community": {
+        "discussions": []
+      },
+      "description": "Story-driven open-world RPG that immerses you in an epic adventure in the Holy Roman Empire. Avenge your parents' death as you battle invading forces, go on game-changing quests, and make influential choices. Explore castles, forests, villages and other realistic settings in medieval Bohemia!"
+    }
+  },
+  {
+    "id": 22,
+    "name": "The Witcher 2: Assassins of Kings Enhanced Edition",
+    "meta": {
+      "price": 0,
+      "oldPrice": 0,
+      "communitySize": 0,
+      "activeUsers": 0,
+      "images": {
+        "header": null,
+        "mediumTile": "https://cdn.hyperbridge.org/blockhub/images/products/the-witcher-2-assassins-of-kings-enhanced-edition-4664/med-tile.jpg",
+        "main": null,
+        "icon": "https://cdn.hyperbridge.org/blockhub/images/products/the-witcher-2-assassins-of-kings-enhanced-edition-4664/icon.jpg",
+        "preview": [
+          "https://cdn.hyperbridge.org/blockhub/images/products/the-witcher-2-assassins-of-kings-enhanced-edition-4664/preview-01.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/the-witcher-2-assassins-of-kings-enhanced-edition-4664/preview-02.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/the-witcher-2-assassins-of-kings-enhanced-edition-4664/preview-03.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/the-witcher-2-assassins-of-kings-enhanced-edition-4664/preview-04.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/the-witcher-2-assassins-of-kings-enhanced-edition-4664/preview-05.jpg",
+          "https://cdn.hyperbridge.org/blockhub/images/products/the-witcher-2-assassins-of-kings-enhanced-edition-4664/preview-06.jpg"
+        ]
+      },
+      "video": null,
+      "genre": "RPG",
+      "releaseDate": "17 May, 2011",
+      "developer": "CD PROJEKT RED",
+      "publisher": "CD PROJEKT RED",
+      "content": "The player is Geralt of Rivia, a professional monster slayer, a witcher. Entangled in the political turmoil that engulfed Temeria, Geralt helped quell the rebellion of the Order of the Flaming Rose. Soon after, he saved King Foltest&#x2019;s life when the monarch was attacked by a witcher-like assassin. He continues to protect the king, serving as his bodyguard as Foltest strives to bring peace to his kingdom. The Order&#x2019;s last bastions have yielded to the royal army, yet one more task remains - the Baroness La Valette announced her secession from the realm, and her fortress must be taken. A month after the attempted assassination, Foltest&#x2019;s armies stand at the gates of La Valette Castle, preparing for a final assault. Still at Foltest&#x2019;s side, Geralt is among them, unable to begin his personal quest to discover the mysterious assassin&#x2019;s origin and profile&#x2026;<br>Thanks to the new, ultra-modern REDengine, The Witcher 2: Assassins of Kings features both beautiful graphics and sophisticated in-game mechanics, drawing players into the most lively and believable world ever created in a video game.<br>Defining new standards for realistic, non-linear game narration, The Witcher 2 spins a mature, thought-provoking tale to produce one of the most complex and unique RPGs ever released on PC. In addition to its epic story, the game features a complex combat system that uniquely combines dynamic action and tactical depth.Compared to the initial award winning PC release, the Enhanced Edition features lots of new and exciting content:<br><ul><li>Additional hours of gameplay: New major adventures set in previously unseen locations, expanding the story and introducing new characters, mysteries and monsters.<br></li><li>New Game Introduction and cinematics: All new animations and cut scenes, including a new, three and a half minute pre-rendered cinematic depicting the assassination of King Demavend of Aedirn. </li><li>BAFTA Award winner and Academy Award nominee Tomasz Baginski brings this key historical event to life, setting the stage for the story told in The Witcher 2. <br></li><li>All of the up-to-date DLC and improvements introduced in the 2.0 version of the PC game, including:<br><ul class=\"bb_ul\"><li>Arena Mode &#x2013; an arcade mode that allows players to fight against endless waves of enemies and test their combat skills.<br>Players can share their results with their friends by uploading high scores to the forums or to Facebook .<br></li><li>A new, extensive tutorial system - allows gamers to be gradually and smoothly immersed in the game world and Geralt&#x2019;s<br>adventures.<br></li><li>Dark Mode &#x2013; a difficulty level designed for hardcore players, with unique dark-themed items. At this difficulty level, even<br>greater emphasis is placed on battle preparation, defensive maneuvers and opportunistic attacking.</li></ul></li><li>Official soundtrack in MP3 format.<br></li><li>World Map - A map of the game&apos;s world.<br></li><li>Quest Handbook - The Witcher 2 quest handbook for both novice and experienced role-playing fans.<br></li><li>Game Manual - A rulebook and interface explanation to help you get started.<br></li><li>Digital Comic Book - <i>Reasons of state</i> comic book</li></ul>",
+      "developerTags": [
+        "RPG",
+        "Fantasy",
+        "Mature",
+        "Choices Matter",
+        "Story Rich",
+        "Third Person"
+      ],
+      "languageSupport": [
+        {
+          "name": "English",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "German",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "French",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "Spanish",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": true
+        },
+        {
+          "name": "Russian",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "Czech",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": true
+        },
+        {
+          "name": "Hungarian",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": true
+        },
+        {
+          "name": "Japanese",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": true
+        },
+        {
+          "name": "Polish",
+          "interface": true,
+          "fullAudio": true,
+          "subtitles": true
+        },
+        {
+          "name": "Turkish",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": true
+        },
+        {
+          "name": "Traditional Chinese",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": true
+        },
+        {
+          "name": "Italian",
+          "interface": true,
+          "fullAudio": false,
+          "subtitles": true
+        }
+      ],
+      "systemRequirements": [
+        {
+          "os": "win",
+          "system": "Windows XP/Vista/7",
+          "processor": "Intel or AMD Quad-Core",
+          "memory": "3 GB (Win XP), 4GB (Win Vista/Win 7)",
+          "graphics": "GeForce 260 (1 GB) or Radeon HD 4850 (1 GB). Resolution 1440x900.",
+          "directx": "DirectX 9.29 has to be installed.",
+          "hardDrive": "25GB",
+          "sound": ""
+        },
+        {
+          "os": "mac",
+          "system": "OS X 10.8.5 or higher",
+          "processor": "Quad Core Intel",
+          "memory": "8 GB RAM",
+          "graphics": "GeForce GTX 675MX 1GB (on 1920x1080, medium), Radeon HD 6970M 1 GB (on 1920x1080, medium), Intel integrated graphics chipsets are not supported",
+          "hardDrive": "25 GB HD space"
+        },
+        {
+          "os": "linux",
+          "system": "Ubuntu 14.04, Linux Mint 17, BlockHub OS",
+          "processor": "Quad Core Intel",
+          "memory": "4 GB RAM",
+          "graphics": "GeForce GT 640 1GB (1440x900, medium)",
+          "hardDrive": "25 GB HD space"
+        }
+      ],
+      "systemTags": [
+        "sale",
+        "frontpage"
+      ],
+      "type": "game",
+      "downloads": 0,
+      "plans": [],
+      "frequentlyTradedAssets": [],
+      "rating": {
+        "overall": 3.5,
+        "items": [
+          {
+            "name": "Dan Dyer",
+            "number": 3
+          },
+          {
+            "name": "Jake Clark",
+            "number": 4.5
+          },
+          {
+            "name": "Victoria Jones",
+            "number": 1.5
+          },
+          {
+            "name": "Anne Bower",
+            "number": 1
+          }
+        ],
+        "fullReviewsPath": "/",
+        "rateGamePath": "/"
+      },
+      "assets": [],
+      "community": {
+        "discussions": []
+      },
+      "steam_id": 20920,
+      "description": "A time of untold chaos has come. Mighty forces clash behind the scenes in a struggle for power and influence. The Northern Kingdoms mobilize for war. But armies on the march are not enough to stop a bloody conspiracy..."
+    }
+  }
+]

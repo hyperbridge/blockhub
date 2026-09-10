@@ -152,7 +152,7 @@ export default {
     @each $status in $statusList {
         $name: nth($status, 1);
         $color: nth($status, 2);
-        &.#{$name} {
+        .notif.#{$name} {
             .title{
                 border-color: $color;
                 i {

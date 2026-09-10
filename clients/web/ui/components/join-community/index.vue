@@ -3,7 +3,7 @@
         v-if="!signedIn"
         class="join-community">
         <div class="join-community__wrapper">
-            <c-img src="../../static/img/logo.fw.png" />
+        <c-img src="/img/blockhub-logotype-color.png" />
             <div class="h5 font-weight-bold">
                 Join the BlockHub community!
             </div>
@@ -48,4 +48,3 @@ export default {
         }
     }
 </style>
-

@@ -379,6 +379,7 @@ export default {
 
             if (frontpageProducts.length && frontpageProducts[0].meta.images) {
                 const header = window.document.getElementById('header-bg')
+                if (!header) return
                 const randomImage = Math.floor(Math.random() * frontpageProducts[0].meta.images.preview.length)
                 header.style['background-image'] = `url(${frontpageProducts[0].meta.images.preview[randomImage]})`
                 header.style['background-size'] = 'cover'

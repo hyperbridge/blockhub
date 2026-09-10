@@ -1,5 +1,12 @@
 <template>
     <div id="app" :class="{ 'disable-animations': !disableAnimations }">
+        <aside v-if="isPagesDemo" class="pages-demo-notice" data-demo-notice>
+            <strong>BlockHub UI Demo · r1</strong>
+            <span>Sample data · accounts and purchases disabled</span>
+            <nuxt-link to="/">Store</nuxt-link>
+            <nuxt-link to="/games">Games</nuxt-link>
+            <nuxt-link to="/collections">Collections</nuxt-link>
+        </aside>
         <c-render-condition :type="renderCondition">
             <div v-if="nuxtError">
                 <c-error-page :isError="nuxtError" />
@@ -69,6 +76,9 @@ export default {
         }
     },
     computed: {
+        isPagesDemo() {
+            return Boolean(process.env.PAGES_DEMO)
+        },
         disableAnimations() {
             return this.$store.state.application.settings && this.$store.state.application.settings.client.animations
         }
@@ -113,8 +123,10 @@ export default {
         }
     },
     mounted() {
-        this.startupLoader()
-        this.getExternalState()
+        if (!process.env.PAGES_DEMO) {
+            this.startupLoader()
+            this.getExternalState()
+        }
         this.ensureDesktopWelcome()
         // if (this.$store.state.auth.user) {
         //     this.$store.state.application.signedIn = true
@@ -332,6 +344,10 @@ export default {
 </script>
 
 <style>
+.pages-demo-notice{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:16px;padding:10px 18px;border:1px solid #657495;border-radius:8px;background:#20253bed;color:#fff;box-shadow:0 4px 18px #0005;font-size:13px;max-width:calc(100vw - 24px);}
+.pages-demo-notice a{color:#9fd9ff;white-space:nowrap;}
+.pages-demo-notice span{white-space:nowrap;}
+@media(max-width:700px){.pages-demo-notice{flex-wrap:wrap;justify-content:center;width:calc(100vw - 24px);gap:6px 12px;}.pages-demo-notice span{display:none;}}
 body {
     overflow-x: hidden;
     margin: 0px;

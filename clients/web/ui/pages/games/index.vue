@@ -28,8 +28,8 @@
                     :image="game.meta && game.meta.images && game.meta.images.mediumTile"
                     :description="game.description"
                     :funds="game.meta && game.meta.funds"
-                    :parentName="game.product && game.product.name"
-                    :parentDeveloper="game.product && game.product.developer"
+                    :parentName="game.name"
+                    :parentDeveloper="game.meta && game.meta.developer"
                     :parentImage="game.product && game.product.meta && game.product.meta.images && game.product.meta.images.mediumTile" />
             </div>
         </c-block>
