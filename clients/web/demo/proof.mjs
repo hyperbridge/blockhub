@@ -2,6 +2,8 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { spawn } from 'node:child_process'
+import { createServer } from 'node:net'
+import { setTimeout as delay } from 'node:timers/promises'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
 
@@ -9,23 +11,47 @@ const args = process.argv.slice(2)
 let server
 let url = args[0] || 'http://127.0.0.1:43117/blockhub/'
 if (args[0] === '--serve') {
-    server = spawn(process.execPath, ['node_modules/nuxt/bin/nuxt.js', 'start', '..', '--config-file', 'demo/nuxt.config.js', '--hostname', '127.0.0.1', '--port', '43117'], {
-        cwd: path.dirname(fileURLToPath(import.meta.url)), stdio: ['ignore', 'pipe', 'pipe']
+    url = 'http://127.0.0.1:43117/blockhub/'
+    const demoDirectory = path.dirname(fileURLToPath(import.meta.url))
+    const expectedHtml = await fs.readFile(path.resolve(demoDirectory, '../dist-pages/index.html'), 'utf8')
+    // Refuse an existing preview instead of accidentally proving another process's output.
+    const portCheck = createServer()
+    await new Promise((resolve, reject) => {
+        portCheck.once('error', reject)
+        portCheck.listen(43117, '127.0.0.1', resolve)
     })
+    await new Promise((resolve, reject) => portCheck.close(error => error ? reject(error) : resolve()))
+    server = spawn(process.execPath, ['node_modules/nuxt/bin/nuxt.js', 'start', '..', '--config-file', 'demo/nuxt.config.js', '--hostname', '127.0.0.1', '--port', '43117'], {
+        cwd: demoDirectory, stdio: ['ignore', 'pipe', 'pipe']
+    })
+    let log = ''
+    let startupError
+    server.once('error', error => { startupError = error })
+    const read = chunk => { log = (log + chunk.toString()).slice(-10000) }
+    server.stdout.on('data', read)
+    server.stderr.on('data', read)
     try {
-        url = await new Promise((resolve, reject) => {
-            let log = ''
-            const timer = setTimeout(() => reject(new Error(`Preview startup timed out: ${log}`)), 15000)
-            server.once('error', reject)
-            server.once('exit', code => { clearTimeout(timer); reject(new Error(`Preview exited ${code}: ${log}`)) })
-            const read = chunk => {
-                log += chunk.toString()
-                const match = log.match(/http:\/\/(?:localhost|127\.0\.0\.1):\d+\/blockhub\//)
-                if (match && log.includes('Serving static application')) { clearTimeout(timer); resolve(match[0]) }
+        const deadline = Date.now() + 15000
+        let lastFailure = 'No response'
+        while (true) {
+            if (startupError) throw startupError
+            if (server.exitCode !== null || server.signalCode !== null) {
+                throw new Error(`Preview exited ${server.exitCode ?? server.signalCode}: ${log}`)
             }
-            server.stdout.on('data', read)
-            server.stderr.on('data', read)
-        })
+            let response
+            try {
+                response = await fetch(url, { signal: AbortSignal.timeout(1000) })
+            } catch (error) {
+                lastFailure = error.message
+            }
+            if (response?.ok) {
+                assert.equal(await response.text(), expectedHtml, 'Preview must serve the exact generated page')
+                break
+            }
+            if (response) lastFailure = `HTTP ${response.status}`
+            if (Date.now() >= deadline) throw new Error(`Preview startup timed out: ${lastFailure}\n${log}`)
+            await delay(100)
+        }
     } catch (error) {
         server.kill('SIGTERM')
         throw error
