@@ -188,6 +188,7 @@ try {
     console.log(JSON.stringify({ checking: 'marketplace navigation' }))
     await page.goto(`${url}#/marketplace/home`, { waitUntil: 'networkidle' })
     await page.waitForFunction(() => document.querySelectorAll('[data-demo-marketplace-pick]').length === 3)
+    await page.waitForFunction(() => document.querySelector('[data-demo-marketplace-pick="1"]')?.innerText.includes('Magic Plate Armor'))
     assert.notEqual(await page.evaluate(() => window.$nuxt.$store.state.application.activeModal), 'comingSoon')
     assert.deepEqual(await page.locator('[data-demo-marketplace-pick]').evaluateAll(items => items.map(item => item.dataset.demoMarketplacePick)), ['1', '2', '3'])
     assert.match(await page.locator('[data-demo-marketplace-pick="1"]').innerText(), /Magic Plate Armor/)
