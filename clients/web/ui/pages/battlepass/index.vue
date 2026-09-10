@@ -28,7 +28,7 @@ export default {
         }
     },
     created() {
-        this.$store.commit('application/activeModal', 'comingSoon')
+        if (!this.$demo) this.$store.commit('application/activeModal', 'comingSoon')
     }
 }
 </script>

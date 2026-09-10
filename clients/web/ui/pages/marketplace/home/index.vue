@@ -28,15 +28,13 @@
                         v-for="(item, index) in props.items"
                         :key="item.id"
                         :class="props.css[index]"
+                        :data-demo-marketplace-pick="item.id"
                         :to="`/marketplace/asset/${item.id}`">
                         <c-asset-store-card
-                            v-for="(item) in props.items"
-                            :key="item.id"
-                            :class="item.css"
-                            :assetName="item.name"
-                            :assetPriceCurrent="item.price.current"
-                            :assetTags="item.tags"
-                            :assetImage="item.image" />
+                            :name="item.name"
+                            :priceCurrent="String(item.price.current)"
+                            :tags="item.tags"
+                            :image="item.image" />
                     </nuxt-link>
                 </template>
             </c-carousel-3d>
@@ -90,7 +88,8 @@ export default {
     mounted() {
         const { assets, counter } = this
         this.recentlySold = assets.slice(0, counter)
-        const rand = num => Math.floor(Math.random() * num)
+        // A static browsing demo has no live sales feed to rotate.
+        if (this.$demo) return
 
         this.interval = setInterval(() => {
             this.recentlySold.splice(0, 1)
@@ -102,6 +101,9 @@ export default {
             this.recentlySold.push(assets[this.counter])
             this.counter++
         }, 2000)
+    },
+    beforeDestroy() {
+        if (this.interval) clearInterval(this.interval)
     }
 }
 </script>

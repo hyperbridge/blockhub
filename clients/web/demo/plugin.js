@@ -90,7 +90,7 @@ export default ({ app, store }, inject) => {
         async sendCommand() { throw new Error('Desktop actions are unavailable in the browser demo.') }
     })
     inject('demo', {
-        version: 'r5', productCount: products.length,
+        version: 'r6', productCount: products.length,
         world,
         signIn() {
             store.state.application.signedIn = true
@@ -103,7 +103,7 @@ export default ({ app, store }, inject) => {
     })
     const application = store.state.application
     application.activeBrand = 'blockhub'
-    application.version = 'Demo r5'
+    application.version = 'Demo r6'
     application.initialized = true
     application.desktopMode = false
     application.developerMode = false
@@ -113,6 +113,7 @@ export default ({ app, store }, inject) => {
     application.settings.client.autoplay = false
     application.connection = { auto: false, internet: true, datasource: true, operator: false, ethereum: false, status: { code: null, message: 'Local demo data' } }
     application.activeProfile = copy(world.profiles[0])
+    application.wallets = { 1: { id: 1, name: 'Sample Bitcoin Wallet', shortName: 'BTC', count: '0.00', walletNumber: 'Demo wallet — no funds or transfers', preferredSwitcher: true, history: [] } }
     application.account = { ...application.account, firstName: 'Sample', lastName: 'Player', email: 'player@example.com', birthday: '1990-01-01', profiles: copy(world.profiles), wallets: [], notifications: [] }
     application.account.darklaunchFlags = []
     application.darklaunchFlags = [{ code: 'community', description: 'Community screens' }, { code: 'marketplace', description: 'Marketplace screens' }]

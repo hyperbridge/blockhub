@@ -58,6 +58,7 @@ try {
                     let signature = ''
                     let stableSince = performance.now()
                     let stableSamples = 0
+                    let lastObservation
                     const pendingComponents = () => {
                         const stack = [window.$nuxt?._vnode]
                         const seen = new Set()
@@ -83,7 +84,8 @@ try {
                         const transitioning = document.getAnimations().some(animation => animation.playState === 'running' && animation.effect?.getTiming().iterations !== Infinity)
                         const pending = pendingComponents()
                         const notice = !!document.querySelector('[data-demo-notice]')
-                        const ready = instance?._isMounted && content?.isConnected && window.$nuxt.$route.path === expected && notice && text.length > 30 && !pending && !transitioning && images.every(image => image.complete && image.naturalWidth)
+                        lastObservation = { route: window.$nuxt.$route.path, mounted: !!instance?._isMounted, connected: !!content?.isConnected, notice, textLength: text.length, pending, transitioning, unfinishedImages: images.filter(image => !image.complete || !image.naturalWidth).map(image => image.currentSrc), activeModal: window.$nuxt.$store.state.application.activeModal }
+                        const ready = instance?._isMounted && content?.isConnected && window.$nuxt.$route.path === expected && notice && text.length > 30 && !pending && !transitioning && lastObservation.activeModal !== 'comingSoon' && images.every(image => image.complete && image.naturalWidth)
                         const next = JSON.stringify([text, images.map(image => image.currentSrc)])
                         if (!ready || next !== signature) {
                             signature = next
@@ -93,14 +95,14 @@ try {
                             return { actualRoute: window.$nuxt.$route.path, nuxtError: window.$nuxt.nuxt.err, text: text.slice(0, 350), brokenImages: images.filter(image => !image.naturalWidth).map(image => image.src), notice, pendingComponents: pending, stableSamples }
                         }
                     }
-                    throw new Error('Route content, transitions, and images did not become ready within 10 seconds')
+                    throw new Error(`Route did not become ready within 10 seconds: ${JSON.stringify(lastObservation)}`)
                 }, route))
                 result.passed = !errors.length && !external.length && !result.nuxtError && !result.brokenImages.length && result.notice && result.text.length > 30
             } catch (error) {
                 errors.push(error.message)
                 result.passed = false
             }
-            if (!result.passed || ['/account/signup', '/download', '/assets', '/realms', '/community/forums', '/projects', '/profile/1', '/sitemap'].includes(route)) {
+            if (!result.passed || ['/account/signup', '/download', '/assets', '/curators', '/marketplace/home', '/realms', '/community/forums', '/projects', '/profile/1', '/sitemap'].includes(route)) {
                 await page.screenshot({ path: path.join(output, `${route.replace(/[^a-z0-9]+/gi, '-') || 'home'}.png`) })
             }
             results.push(result)

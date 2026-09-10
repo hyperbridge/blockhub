@@ -7,6 +7,11 @@
                         The Republic
                     </h4>
                     <i class="fas fa-wolf-pack-battalion" />
+                    <template v-if="$demo">
+                        <p>Explore the people and communities of BlockHub.</p>
+                        <c-button to="/profiles" status="info" data-demo-republic-profiles>Browse Profiles</c-button>
+                        <c-button to="/communities" status="plain">Browse Communities</c-button>
+                    </template>
                 </c-card>
             </div>
         </div>
@@ -27,7 +32,7 @@ export default {
         }
     },
     created() {
-        this.$store.commit('application/activeModal', 'comingSoon')
+        if (!this.$demo) this.$store.commit('application/activeModal', 'comingSoon')
     },
     methods: {
     }

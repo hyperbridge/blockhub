@@ -37,6 +37,8 @@ module.exports = function configureRoutes(routes) {
     }
 
     for (const route of routes) {
+        if (['/curators', '/contacts'].includes(route.path)) route.component = path.resolve(__dirname, 'pages/people-preview.vue')
+        if (route.path === '/transaction-overview') route.redirect = '/marketplace/trade/history'
         if (route.path === '/login') route.component = path.resolve(__dirname, '../ui/pages/account/signin/index.vue')
         if (route.path === '/profiles') route.component = path.resolve(__dirname, '../ui/pages/account/profiles/index.vue')
         if (route.path === '/curator/:id') route.component = path.resolve(__dirname, '../ui/pages/profile/_id/index.vue')

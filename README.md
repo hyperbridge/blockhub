@@ -25,6 +25,9 @@ creates a tab-local demo session and Download previews the platform chooser;
 payments, actual installers, publishing, and backend writes remain unavailable.
 Empty profile and curator prototypes reuse the original account/profile screens;
 the empty Republic pages lead to the populated profiles and communities.
+Contacts and curators show sample profile cards, the wallet screen includes a
+zero-balance sample wallet, and marketplace navigation opens the original trade
+and inventory views without the old startup blocker dialog.
 
 With Node 24.14.1 and Google Chrome installed:
 
@@ -39,7 +42,8 @@ npm run preview
 The preview opens at `http://127.0.0.1:43117/blockhub/`. Set `CHROME_PATH` for a
 Chrome executable outside the default macOS location. `npm test` starts and
 stops its own Nuxt preview and headless Chrome, checks the storefront, game
-details, catalog, collections, signup, downloads, search, refresh behavior, image
+details, catalog, collections, signup, downloads, search, marketplace navigation,
+profile links, the sample wallet, redirects, refresh behavior, image
 loading and absence of external requests, then sweeps every included demo route.
 It saves screenshots and structured results under `.tmp/pages-proof`.
 

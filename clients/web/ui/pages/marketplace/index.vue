@@ -35,11 +35,12 @@
                         <ul class="marketplace-menu reset-list">
                             <li
                                 v-for="(link, index) in links"
-                                :key="index">
+                                :key="link.path">
                                 <nuxt-link
                                     class="marketplace-menu__link"
-                                    :to="{ name: link }">
-                                    {{ link | cut }}
+                                    :data-demo-marketplace-nav="link.id"
+                                    :to="link.path">
+                                    {{ link.label }}
                                 </nuxt-link>
                             </li>
                         </ul>
@@ -73,11 +74,11 @@ export default {
     data() {
         return {
             links: [
-                'Marketplace',
-                'Marketplace Trade Manager',
-                'Marketplace Prospectors',
-                'Marketplace Search',
-                'Marketplace Assets'
+                { id: 'home', label: 'Marketplace', path: '/marketplace/home' },
+                { id: 'trade', label: 'Trade Manager', path: '/marketplace/trade/home' },
+                { id: 'prospectors', label: 'Prospectors', path: '/marketplace/prospectors' },
+                { id: 'search', label: 'Search', path: '/marketplace/search' },
+                { id: 'inventory', label: 'Assets', path: '/marketplace/marketplace-inventory/main' }
             ]
         }
     },
@@ -95,7 +96,7 @@ export default {
         // this.$store.dispatch('loadData', ['assets/transactions', transactions])
     },
     created() {
-        this.$store.commit('application/activeModal', 'comingSoon')
+        if (!this.$demo) this.$store.commit('application/activeModal', 'comingSoon')
     }
 }
 </script>
@@ -178,5 +179,4 @@ export default {
         text-align: right;
     }
 </style>
-
 
