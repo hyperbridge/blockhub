@@ -32,6 +32,11 @@ try {
             const errors = []
             const external = []
             const page = await browser.newPage({ viewport: { width: 2500, height: 1400 }, deviceScaleFactor: 1 })
+            const cpuRate = Number(process.env.DEMO_CPU_RATE || 1)
+            if (cpuRate > 1) {
+                const session = await page.context().newCDPSession(page)
+                await session.send('Emulation.setCPUThrottlingRate', { rate: cpuRate })
+            }
             page.on('pageerror', error => errors.push(error.message))
             page.on('console', message => { if (message.type() === 'error') errors.push(message.text()) })
             page.on('response', response => { if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`) })
@@ -46,8 +51,26 @@ try {
             const result = { route, errors, external }
             try {
                 await page.goto(`${url}#${route}`, { waitUntil: 'networkidle', timeout: 15000 })
-                await page.waitForFunction(expected => window.$nuxt?.$route.path === expected, route, { timeout: 5000 })
-                await page.waitForFunction(() => [...document.images].filter(image => image.offsetWidth).every(image => image.complete), null, { timeout: 5000 })
+                // Nuxt can reveal async children after network idle. Require the painted
+                // content and visible image set to settle together, without changing the page.
+                await page.evaluate(async expected => {
+                    const deadline = performance.now() + 10000
+                    let signature = ''
+                    let stableSince = performance.now()
+                    while (performance.now() < deadline) {
+                        await new Promise(resolve => requestAnimationFrame(resolve))
+                        const text = (document.querySelector('#page-content') || document.body).innerText
+                        const images = [...document.images].filter(image => image.offsetWidth)
+                        const transitioning = document.getAnimations().some(animation => animation.playState === 'running' && animation.effect?.getTiming().iterations !== Infinity)
+                        const ready = window.$nuxt?.$route.path === expected && document.querySelector('[data-demo-notice]') && text.length > 30 && !transitioning && images.every(image => image.complete && image.naturalWidth)
+                        const next = JSON.stringify([text, images.map(image => image.currentSrc)])
+                        if (!ready || next !== signature) {
+                            signature = next
+                            stableSince = performance.now()
+                        } else if (performance.now() - stableSince >= 300) return
+                    }
+                    throw new Error('Route content, transitions, and images did not become ready within 10 seconds')
+                }, route)
                 Object.assign(result, await page.evaluate(() => ({
                     actualRoute: window.$nuxt.$route.path,
                     nuxtError: window.$nuxt.nuxt.err,
@@ -64,7 +87,7 @@ try {
                 await page.screenshot({ path: path.join(output, `${route.replace(/[^a-z0-9]+/gi, '-') || 'home'}.png`) })
             }
             results.push(result)
-            console.log(JSON.stringify({ route, passed: result.passed, errors: errors.slice(0, 2), external: external.length, brokenImages: result.brokenImages?.length }))
+            console.log(JSON.stringify(result.passed ? { route, passed: true, errors, external: external.length, brokenImages: 0 } : result))
             await page.close()
         }
     }

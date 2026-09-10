@@ -24,6 +24,10 @@ export default {
         }
     },
     created() {
+        if (this.$demo) {
+            this.consoleLogMessages = `Demo session started.<br />${this.$demo.productCount} games loaded.<br />Sample collections, profiles, and marketplace data ready.<br />Changes are not saved after this tab closes.`
+            return
+        }
         this.consoleLogInterval = setInterval(() => {
             this.consoleLogMessages = window.consoleLogMessages.join('<br />')
             this.$forceUpdate()
